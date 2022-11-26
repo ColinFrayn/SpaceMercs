@@ -33,7 +33,7 @@ namespace SpaceMercs.Graphics {
         throw new ArgumentNullException(nameof(data));
       }
 
-      if (data.Length <= 0) {
+      if (data.Length != VertexCount) {
         throw new ArgumentOutOfRangeException(nameof(data));
       }
 
@@ -41,6 +41,8 @@ namespace SpaceMercs.Graphics {
       GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, data.Length * VertexInfo.SizeInBytes, data);
       GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
     }
+
+    public void SetupVertexAttribs() => VertexInfo.SetupVertexAttribs();
 
     ~VertexBuffer() {
       Dispose();

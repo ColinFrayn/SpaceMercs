@@ -41,9 +41,10 @@ namespace SpaceMercs.MainWindow
 
     // DEBUGGING
     private VertexBuffer vertexBuffer;
-    private int shaderProgramHandle;
-    private int vertexArrayHandle;
-    private int indexBufferHandle;
+    private IndexBuffer indexBuffer;
+    private VertexArray vertexArray;
+    private ShaderProgram shaderProgram;
+    private int frameCount = 0;
 
     // Initialise the game
     public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -84,65 +85,47 @@ namespace SpaceMercs.MainWindow
       msgBox = new GUIMessageBox(this);
 
       // --- BEGIN DEBUGGING
-      float x = 200;
-      float y = 100;
-      float w = 300;
-      float h = 300;
+      frameCount = 0;
+      Random rnd = new Random();
+      int boxCount = 1000;
+      int vxCount = 0, ixCount = 0;
+      VertexPosCol[] vertices = new VertexPosCol[boxCount * 4];
+      int[] indices = new int[boxCount * 6];
+      for (int i=0; i<boxCount; i++) {
+        int w = rnd.Next(32, 128);
+        int h = rnd.Next(32, 128);
+        int x = rnd.Next(0, Size.X - 128);
+        int y = rnd.Next(0, Size.Y - 128);
+        float r = (float)rnd.NextDouble();
+        float g = (float)rnd.NextDouble();
+        float b = (float)rnd.NextDouble();
+        vertices[vxCount++] = new VertexPosCol(new Vector2(x, y + h), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y + h), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPosCol(new Vector2(x, y), new Color4(r, g, b, 1f));
+        indices[ixCount++] = 0 + (i*4);
+        indices[ixCount++] = 1 + (i * 4);
+        indices[ixCount++] = 2 + (i * 4);
+        indices[ixCount++] = 0 + (i * 4);
+        indices[ixCount++] = 2 + (i * 4);
+        indices[ixCount++] = 3 + (i * 4);
+      }
 
-      VertexPosCol[] vertices = new VertexPosCol[] {
-        new VertexPosCol(new Vector2(x,  y+h), new Color4(1f,0f,0f,1f)),
-        new VertexPosCol(new Vector2(x+w,y+h), new Color4(0f,1f,0f,1f)),
-        new VertexPosCol(new Vector2(x+w,y),   new Color4(0f,0f,1f,1f)),
-        new VertexPosCol(new Vector2(x,  y),   new Color4(1f,1f,0f,1f))
-      };
       vertexBuffer = new VertexBuffer(VertexPosCol.VertexInfo, vertices.Length);
       vertexBuffer.SetData(vertices);
 
-      int[] indices = new int[] { 0, 1, 2, 0, 2, 3 };
-      indexBufferHandle = GL.GenBuffer();
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBufferHandle);
-      GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0); // Unbind
+      indexBuffer = new IndexBuffer(indices.Length);
+      indexBuffer.SetData(indices);
 
-      vertexArrayHandle = GL.GenVertexArray();
-      GL.BindVertexArray(vertexArrayHandle);
-      GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBuffer.VertexBufferHandle);
-      VertexPosCol.SetupVertexAttribs();
-      GL.BindVertexArray(0);
+      vertexArray = new VertexArray(vertexBuffer);
 
-      // Setup shaders, compile & verify
-      int vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
-      GL.ShaderSource(vertexShaderHandle, Shaders.VertexShaderCode);
-      GL.CompileShader(vertexShaderHandle);
-      string vsInfo = GL.GetShaderInfoLog(vertexShaderHandle);
-      if (!string.IsNullOrEmpty(vsInfo)) {
-        MessageBox.Show(vsInfo);
-      }
-      int pixelShaderHandle = GL.CreateShader(ShaderType.FragmentShader);
-      GL.ShaderSource(pixelShaderHandle, Shaders.PixelShaderCode);
-      GL.CompileShader(pixelShaderHandle);
-      string psInfo = GL.GetShaderInfoLog(pixelShaderHandle);
-      if (!string.IsNullOrEmpty(psInfo)) {
-        MessageBox.Show(psInfo);
-      }
-
-      // Build shader program
-      shaderProgramHandle = GL.CreateProgram();
-      GL.AttachShader(shaderProgramHandle, vertexShaderHandle);
-      GL.AttachShader(shaderProgramHandle, pixelShaderHandle);
-      GL.LinkProgram(shaderProgramHandle);
-      GL.DetachShader(shaderProgramHandle, vertexShaderHandle);
-      GL.DetachShader(shaderProgramHandle, pixelShaderHandle);
-      GL.DeleteShader(vertexShaderHandle);
-      GL.DeleteShader(pixelShaderHandle);
+      shaderProgram = new ShaderProgram(ShaderProgram.VertexShaderCode, ShaderProgram.PixelShaderCode);
 
       // Set uniform for screen dimensions in vertex shader
       int[] viewport = new int[4];
       GL.GetInteger(GetPName.Viewport, viewport);
-      GL.UseProgram(shaderProgramHandle);
-      int viewportSizeUniformLocation = GL.GetUniformLocation(shaderProgramHandle, "viewportSize");
-      GL.Uniform2(viewportSizeUniformLocation, (float)viewport[2], (float)viewport[3]);
-      GL.UseProgram(0);
+      shaderProgram.SetUniform("viewportSize", (float)viewport[2], (float)viewport[3]);
+
       // --- END DEBUGGING
 
       base.OnLoad();
@@ -151,22 +134,17 @@ namespace SpaceMercs.MainWindow
     // Free stuff when the window is being closed
     protected override void OnUnload() {
       vertexBuffer?.Dispose();
-
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-      GL.DeleteBuffer(indexBufferHandle);
-
-      GL.UseProgram(0);
-      GL.DeleteProgram(shaderProgramHandle);
-
-      GL.BindVertexArray(0);
-      GL.DeleteVertexArray(vertexArrayHandle);
-
+      indexBuffer?.Dispose();
+      vertexArray?.Dispose();
+      shaderProgram?.Dispose();
       base.OnUnload();
     }
 
     // This gets called every 1/60 of a second. AI updates etc.
     protected override void OnUpdateFrame(FrameEventArgs e) {
       base.OnUpdateFrame(e);
+
+      frameCount++; // DEBUG
 
       // Check keypresses
       GetKeyboardInput();
@@ -234,10 +212,12 @@ namespace SpaceMercs.MainWindow
       // Set up default OpenGL rendering parameters
       PrepareScene();
 
-      GL.UseProgram(shaderProgramHandle);
-      GL.BindVertexArray(vertexArrayHandle);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBufferHandle);
-      GL.DrawElements(PrimitiveType.Triangles, 6, DrawElementsType.UnsignedInt, 0);
+      float fact = (float)(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5);
+      shaderProgram.SetUniform("colourFactor", fact);
+      GL.UseProgram(shaderProgram.ShaderProgramHandle);
+      GL.BindVertexArray(vertexArray.VertexArrayHandle);
+      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
+      GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
       Context.SwapBuffers();
       return;
 

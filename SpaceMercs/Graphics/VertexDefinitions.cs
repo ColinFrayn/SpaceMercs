@@ -53,7 +53,6 @@ namespace SpaceMercs.Graphics
 
         public static readonly VertexInfo VertexInfo = new VertexInfo(typeof(VertexPosCol), new VertexAttribute(nameof(Position), 0, 2, 0), new VertexAttribute(nameof(Colour), 1, 4, 2));
         public static int SizeInBytes { get { return VertexInfo.SizeInBytes; } }
-        public static void SetupVertexAttribs() => VertexInfo.SetupVertexAttribs();
 
         public VertexPosCol(Vector2 position, Color4 colour)
         {

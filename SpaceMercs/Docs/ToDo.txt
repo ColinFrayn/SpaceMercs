@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Learn modern OpenGL : https://www.youtube.com/watch?v=HY093mB44zU
+Learn modern OpenGL : https://www.youtube.com/watch?v=n3I9lfY42TQ
 
 Write Menu control & add menu back to MapView
 
