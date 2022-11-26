@@ -30,7 +30,7 @@ namespace SpaceMercs {
     static StaticData() {
       string strRootDir = Path.GetDirectoryName(Application.ExecutablePath);
       strDataDir = strRootDir + @"\Data\";
-      strGraphicsDir = strRootDir + @"\Graphics\";
+      strGraphicsDir = strRootDir + @"\Graphics\Bitmaps\";
     }
 
     // Load up all static data types via reflection

@@ -32,7 +32,8 @@
 
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.7.5" />
-    <PackageReference Include="SharpFont" Version="4.0.1" />
+    <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" />
+    <PackageReference Include="SpaceWizards.SharpFont" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -111,13 +112,13 @@
     <None Update="Data\WeaponType.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Graphics\Building.bmp">
+    <None Update="Graphics\Bitmaps\Building.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Graphics\ItemTextures.bmp">
+    <None Update="Graphics\Bitmaps\ItemTextures.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Graphics\MiscTextures.bmp">
+    <None Update="Graphics\Bitmaps\MiscTextures.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\Bite.wav">
