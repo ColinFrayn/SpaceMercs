@@ -4,14 +4,16 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
-namespace SpaceMercs.MainWindow {
-  // Partial class including core functions and definitions
-  partial class MapView : GameWindow {
+namespace SpaceMercs.MainWindow
+{
+    // Partial class including core functions and definitions
+    partial class MapView : GameWindow {
     public enum ViewMode { ViewMap, ViewSystem, ViewMission, ViewShip };
 
     private const int DoubleClickTime = 250; // Milliseconds
@@ -38,7 +40,7 @@ namespace SpaceMercs.MainWindow {
     private Star? CurrentSystem { get { return PlayerTeam?.CurrentPosition?.GetSystem(); } }
 
     // DEBUGGING
-    private int vertexBufferHandle;
+    private VertexBuffer vertexBuffer;
     private int shaderProgramHandle;
     private int vertexArrayHandle;
     private int indexBufferHandle;
@@ -91,12 +93,10 @@ namespace SpaceMercs.MainWindow {
         new VertexPosCol(new Vector2(x,  y+h), new Color4(1f,0f,0f,1f)),
         new VertexPosCol(new Vector2(x+w,y+h), new Color4(0f,1f,0f,1f)),
         new VertexPosCol(new Vector2(x+w,y),   new Color4(0f,0f,1f,1f)),
-        new VertexPosCol(new Vector2(x,  y+h), new Color4(1f,1f,0f,1f))
+        new VertexPosCol(new Vector2(x,  y),   new Color4(1f,1f,0f,1f))
       };
-      vertexBufferHandle = GL.GenBuffer();
-      GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferHandle);
-      GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * VertexPosCol.SizeInBytes, vertices, BufferUsageHint.StaticDraw);
-      GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
+      vertexBuffer = new VertexBuffer(VertexPosCol.VertexInfo, vertices.Length);
+      vertexBuffer.SetData(vertices);
 
       int[] indices = new int[] { 0, 1, 2, 0, 2, 3 };
       indexBufferHandle = GL.GenBuffer();
@@ -106,7 +106,7 @@ namespace SpaceMercs.MainWindow {
 
       vertexArrayHandle = GL.GenVertexArray();
       GL.BindVertexArray(vertexArrayHandle);
-      GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferHandle);
+      GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBuffer.VertexBufferHandle);
       VertexPosCol.SetupVertexAttribs();
       GL.BindVertexArray(0);
 
@@ -150,8 +150,7 @@ namespace SpaceMercs.MainWindow {
 
     // Free stuff when the window is being closed
     protected override void OnUnload() {
-      GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-      GL.DeleteBuffer(vertexBufferHandle);
+      vertexBuffer?.Dispose();
 
       GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
       GL.DeleteBuffer(indexBufferHandle);
@@ -160,7 +159,7 @@ namespace SpaceMercs.MainWindow {
       GL.DeleteProgram(shaderProgramHandle);
 
       GL.BindVertexArray(0);
-      GL.DeleteVertexArray(vertexBufferHandle);
+      GL.DeleteVertexArray(vertexArrayHandle);
 
       base.OnUnload();
     }

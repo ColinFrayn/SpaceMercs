@@ -121,7 +121,7 @@ namespace SpaceMercs {
       GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Width, Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, IntPtr.Zero); // Mem allocated but not freed?
 
       // Draw the texture
-      using (Graphics gfx = Graphics.FromImage(TextBitmap)) {
+      using (System.Drawing.Graphics gfx = System.Drawing.Graphics.FromImage(TextBitmap)) {
         StringFormat sFormat = new StringFormat(StringFormat.GenericTypographic);
         // Clear to the background color
         gfx.Clear(cBackgroundColor);
