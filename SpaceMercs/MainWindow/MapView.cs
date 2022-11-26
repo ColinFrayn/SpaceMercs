@@ -84,14 +84,19 @@ namespace SpaceMercs.MainWindow
       ThisDispatcher = Dispatcher.CurrentDispatcher;
       msgBox = new GUIMessageBox(this);
 
-      // --- BEGIN DEBUGGING
+      //SetupDemo(); // DEBUG
+
+      base.OnLoad();
+    }
+
+    private void SetupDemo() {
       frameCount = 0;
       Random rnd = new Random();
       int boxCount = 1000;
       int vxCount = 0, ixCount = 0;
       VertexPosCol[] vertices = new VertexPosCol[boxCount * 4];
       int[] indices = new int[boxCount * 6];
-      for (int i=0; i<boxCount; i++) {
+      for (int i = 0; i < boxCount; i++) {
         int w = rnd.Next(32, 128);
         int h = rnd.Next(32, 128);
         int x = rnd.Next(0, Size.X - 128);
@@ -103,7 +108,7 @@ namespace SpaceMercs.MainWindow
         vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y + h), new Color4(r, g, b, 1f));
         vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y), new Color4(r, g, b, 1f));
         vertices[vxCount++] = new VertexPosCol(new Vector2(x, y), new Color4(r, g, b, 1f));
-        indices[ixCount++] = 0 + (i*4);
+        indices[ixCount++] = 0 + (i * 4);
         indices[ixCount++] = 1 + (i * 4);
         indices[ixCount++] = 2 + (i * 4);
         indices[ixCount++] = 0 + (i * 4);
@@ -119,16 +124,12 @@ namespace SpaceMercs.MainWindow
 
       vertexArray = new VertexArray(vertexBuffer);
 
-      shaderProgram = new ShaderProgram(ShaderProgram.VertexShaderCode, ShaderProgram.PixelShaderCode);
+      shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderCode);
 
       // Set uniform for screen dimensions in vertex shader
       int[] viewport = new int[4];
       GL.GetInteger(GetPName.Viewport, viewport);
       shaderProgram.SetUniform("viewportSize", (float)viewport[2], (float)viewport[3]);
-
-      // --- END DEBUGGING
-
-      base.OnLoad();
     }
 
     // Free stuff when the window is being closed
@@ -205,13 +206,7 @@ namespace SpaceMercs.MainWindow
       base.OnResize(e);
     }
 
-    // Draw the main view, whatever state it's in
-    protected override void OnRenderFrame(FrameEventArgs e) {
-      if (!bLoaded) return;
-
-      // Set up default OpenGL rendering parameters
-      PrepareScene();
-
+    private void RunDemo() {
       float fact = (float)(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5);
       shaderProgram.SetUniform("colourFactor", fact);
       GL.UseProgram(shaderProgram.ShaderProgramHandle);
@@ -219,12 +214,23 @@ namespace SpaceMercs.MainWindow
       GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
       GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
       Context.SwapBuffers();
-      return;
+    }
+
+    // Draw the main view, whatever state it's in
+    protected override void OnRenderFrame(FrameEventArgs e) {
+      if (!bLoaded) return;
+
+      // Set up default OpenGL rendering parameters
+      PrepareScene();
 
       if (!GalaxyMap.bMapSetup) {
+        //RunDemo(); // DEBUG
         DisplayWelcomeScreen();
+        SwapBuffers();
+        return;
       }
-      else if (view == ViewMode.ViewMap) {
+
+      if (view == ViewMode.ViewMap) {
         DrawMap();
       }
       else if (view == ViewMode.ViewSystem) {
@@ -313,14 +319,6 @@ namespace SpaceMercs.MainWindow
       GL.Clear(ClearBufferMask.DepthBufferBit);
       GL.ClearColor(Color.Black);
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-      // DEBUGGING
-      GL.Color3(1.0, 0.0, 0.0);
-      GL.Begin(BeginMode.Triangles);
-      GL.Vertex3(0.0, 0.0, 0.0);
-      GL.Vertex3(1.0, 0.0, 0.0);
-      GL.Vertex3(0.0, 1.0, 0.0);
-      GL.End();
 
       // Display welcome message
       GL.PushMatrix();
