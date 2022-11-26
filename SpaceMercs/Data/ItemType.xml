@@ -1,0 +1,293 @@
+﻿<Data>
+  <!-- Equipment for Soldiers -->
+  <ItemType Name="Medikit">
+    <Mass>0.5</Mass>
+    <Cost>6</Cost>
+    <Rarity>4</Rarity>
+    <Desc>A medikit, combining bandages and medication required to patch up serious wounds.</Desc>
+    <ItemEffect Name="Heal">
+      <SingleUse/>
+      <Skill Required="false">Medic</Skill>
+      <Effect>
+        <Damage Type="Physical">-10</Damage> <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>1,1</Tex>
+  </ItemType>
+  <ItemType Name="Medsystem">
+    <Mass>2.5</Mass>
+    <Cost>40</Cost>
+    <Rarity>8</Rarity>
+    <Desc>A medical device that heals wounds almost as well as a medikit, but continually generates fresh wound sealant allowing it to be reused.</Desc>
+    <ItemEffect Name="Heal">
+      <Skill Required="false">Medic</Skill>
+      <Effect>
+        <Damage Type="Physical">-8</Damage>
+        <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>1,1</Tex>
+  </ItemType>
+  <ItemType Name="Nannite Medikit">
+    <Mass>0.7</Mass>
+    <Cost>20</Cost>
+    <Rarity>8</Rarity>
+    <Desc>A medikit, combining bandages and medication required to patch up serious wounds. Based on nannite technology.</Desc>
+    <ItemEffect Name="Heal">
+      <SingleUse/>
+      <Skill Required="false">Medic</Skill>
+      <Effect>
+        <Damage Type="Physical">-20</Damage>
+        <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Gold" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>2,1</Tex>
+  </ItemType>
+  <ItemType Name="Nannite Medsystem">
+    <Mass>3.0</Mass>
+    <Cost>180</Cost>
+    <Rarity>12</Rarity>
+    <Desc>A medical device that heals wounds almost as well as a nannite medikit, but continually generates fresh nannites allowing it to be reused.</Desc>
+    <ItemEffect Name="Heal">
+      <Skill Required="false">Medic</Skill>
+      <Effect>
+        <Damage Type="Physical">-16</Damage>
+        <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>2,1</Tex>
+  </ItemType>
+  <ItemType Name="Adrenaline">
+    <Mass>0.2</Mass>
+    <Cost>5</Cost>
+    <Rarity>5</Rarity>
+    <Desc>A single-use hyposyringe full of adrenaline</Desc>
+    <ItemEffect Name="Adrenaline">
+      <SingleUse/>
+      <Effect Name="Adrenaline">
+        <Duration>5</Duration>
+        <StatMods>
+          <Mod Stat="Attack">2</Mod>
+          <Mod Stat="Defence">2</Mod>
+        </StatMods>
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>3,1</Tex>
+  </ItemType>
+  <ItemType Name="Stimulant">
+    <Mass>0.2</Mass>
+    <Cost>5</Cost>
+    <Rarity>5</Rarity>
+    <Desc>A single-use stimulant hyposyringe to increase physical capability</Desc>
+    <ItemEffect Name="Stim">
+      <SingleUse/>
+      <Effect Name="Stimulated">
+        <Duration>5</Duration>
+        <StatMods>
+          <Mod Stat="Stamina">5</Mod>
+        </StatMods>
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>4,1</Tex>
+  </ItemType>
+  <ItemType Name="Frag Grenade">
+    <Mass>0.3</Mass>
+    <Cost>5</Cost>
+    <Rarity>3</Rarity>
+    <Desc>A simple grenade</Desc>
+    <ItemEffect Name="Grenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">10</Damage>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>1,2</Tex>
+  </ItemType>
+  <ItemType Name="Incendiary Grenade">
+    <Mass>0.4</Mass>
+    <Cost>12</Cost>
+    <Rarity>5</Rarity>
+    <Desc>A grenade which distributes a highly flammable substance</Desc>
+    <ItemEffect Name="Grenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">4</Damage>
+      </Effect>
+      <Effect Name="Burning">
+        <Duration>4</Duration>        
+        <Damage Type="Fire">4</Damage>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>2,2</Tex>
+  </ItemType>
+  <ItemType Name="Poison Grenade">
+    <Mass>0.4</Mass>
+    <Cost>12</Cost>
+    <Rarity>6</Rarity>
+    <Desc>A grenade which distributes a highly poisonous gas</Desc>
+    <ItemEffect Name="Grenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">4</Damage>
+      </Effect>
+      <Effect Name="Poisoned">
+        <Duration>4</Duration>
+        <Damage Type="Poison">4</Damage>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>3,2</Tex>
+  </ItemType>
+  <ItemType Name="Tar Grenade">
+    <Mass>0.6</Mass>
+    <Cost>10</Cost>
+    <Rarity>6</Rarity>
+    <Desc>A grenade which distributes a sticky substance, slowing down all it touches</Desc>
+    <ItemEffect Name="TarGrenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">5</Damage>
+      </Effect>
+      <Effect Name="Tarred">
+        <Duration>4</Duration>
+        <StatMods>
+          <Mod Stat="Agility">-4</Mod>
+        </StatMods>
+        <SpeedMod>0.5</SpeedMod>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="3"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>4,2</Tex>
+  </ItemType>
+  <ItemType Name="Acid Grenade">
+    <Mass>0.4</Mass>
+    <Cost>12</Cost>
+    <Rarity>6</Rarity>
+    <Desc>A grenade which distributes a highly corrosive substance</Desc>
+    <ItemEffect Name="Grenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">4</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>4</Duration>
+        <Damage Type="Acid">4</Damage>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>1,3</Tex>
+  </ItemType>
+  <ItemType Name="Plasma Grenade">
+    <Mass>0.4</Mass>
+    <Cost>20</Cost>
+    <Rarity>8</Rarity>
+    <Desc>A highly deadly grenade which fires charged plasma in a small radius</Desc>
+    <ItemEffect Name="Grenade">
+      <SingleUse/>
+      <Radius>2.0</Radius>
+      <Range>8</Range>
+      <Effect>
+        <Damage Type="Physical">8</Damage>
+      </Effect>
+      <Effect>
+        <Damage Type="Fire">12</Damage>
+      </Effect>
+      <Sound>Blast</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Composite" Amount="1"/>
+      <Material Name="Rubber" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="4"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>1,3</Tex>
+  </ItemType>
+</Data>

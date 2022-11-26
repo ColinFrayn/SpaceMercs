@@ -1,0 +1,110 @@
+﻿<Data>
+  <CreatureType Name="Rock Hopper">
+    <LevelRange>1,10</LevelRange>
+    <Attack>10</Attack>
+    <Defence>11</Defence>
+    <Health>13</Health>
+    <Stamina>17</Stamina>
+    <Armour>10</Armour>
+    <Col1>100, 80, 60</Col1>
+    <Col2>140, 115, 90</Col2>
+    <Col3>110, 80, 60</Col3>
+    <Desc>A strange, hairy, ape-like beast</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Rock Python">
+    <LevelRange>1,10</LevelRange>
+    <Attack>11</Attack>
+    <Defence>10</Defence>
+    <Health>9</Health>
+    <Stamina>16</Stamina>
+    <Armour>10</Armour>
+    <BodyType>Snake</BodyType>
+    <Col1>70, 70, 70</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>110, 110, 110</Col3>
+    <Desc>A large snake with powerful constricting attacks</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Cliff Dweller">
+    <LevelRange>1,10</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Health>11</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <BodyType>Lizard</BodyType>
+    <Col1>80, 60, 40</Col1>
+    <Col2>120, 95, 70</Col2>
+    <Col3>130, 85, 60</Col3>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Desc>A muscular lizard that lives in crevices between rocks</Desc>
+  </CreatureType>
+  <CreatureType Name="Giant Scorpion">
+    <Size>2</Size>
+    <LevelRange>2,12</LevelRange>
+    <Attack>13</Attack>
+    <Defence>12</Defence>
+    <Health>14</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <BodyType>Scorpion</BodyType>
+    <Col1>40, 30, 30</Col1>
+    <Col2>60, 60, 60</Col2>
+    <Col3>70, 70, 70</Col3>
+    <Desc>A large scorpion with a vicious stinger</Desc>
+    <Weapons>
+      <Weapon Weight="1">Sting</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Boulder Beast">
+    <Size>2</Size>
+    <LevelRange>2,12</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Health>15</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Armour>36</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large armoured bipedal creature with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Rock Giant">
+    <Size>2</Size>
+    <LevelRange>5,15</LevelRange>
+    <Attack>19</Attack>
+    <Defence>10</Defence>
+    <Health>30</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Armour>30</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A huge, aggressive giant humanoid</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Club</Weapon>
+    </Weapons>
+  </CreatureType>
+</Data>

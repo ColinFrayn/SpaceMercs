@@ -1,0 +1,1613 @@
+﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using SpaceMercs.Dialogs;
+using System.Diagnostics;
+using System.Text;
+using System.Windows.Threading;
+using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
+
+namespace SpaceMercs.MainWindow {
+  // Partial class including functions for handling missions
+  partial class MapView {
+    public enum MissionResult { Victory, Defeat, Evacuated, Aborted };
+    public enum SoldierAction { None, Attack, Item };
+    public MissionResult MissionOutcome { get; private set; } // Did we win?
+    private int hoverx, hovery;
+    private float fMissionViewX, fMissionViewY, fMissionViewZ;
+    private int iStarfieldDL = -1;
+    private int iSelectionTexID = -1;
+    private TextLabel tlSelect1, tlSelect2, tlSelect3, tlAIRunning;
+    private GUIPanel gpSelect;
+    private GUIIconButton gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4, gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
+    private GUIButton gbEndTurn, gbTransition, gbEndMission;
+    private readonly List<GUIIconButton> lButtons = new List<GUIIconButton>();
+    private bool bGUIButtonsInitialised = false;
+    private Mission? ThisMission;
+    private MissionLevel CurrentLevel;
+    private IEntity SelectedEntity = null;
+    private Soldier panelHover = null;
+    private bool bDragging = false;
+    private int iItemTexture = -1;
+    private int[,] DistMap;
+    private bool[,] TargetMap;
+    private bool[,] AoEMap;
+    private bool[,] DetectionMap;
+    private int AoERadius = -1;
+    private List<Point> lCurrentPath;
+    private SoldierAction CurrentAction = SoldierAction.None;
+    private bool bShowEntityLabels = false, bShowStatBars = false, bShowTravel = false, bShowPath = false, bShowEffects = false, bViewDetection = false;
+    private readonly List<VisualEffect> Effects = new List<VisualEffect>();
+    private readonly Stopwatch sw = Stopwatch.StartNew();
+    private ItemType ActionItem = null;
+    private Dispatcher ThisDispatcher = null;
+    private bool bAIRunning = false;
+
+    // GUIPanel actions
+    public const uint I_OpenDoor = 10001;
+    public const uint I_CloseDoor = 10002;
+    public const uint I_LockDoor = 10003;
+    public const uint I_UnlockDoor = 10004;
+    public const uint I_Attack = 10005;
+    public const uint I_GoTo = 10006;
+    public const uint I_UseItem = 10007;
+
+    // Display parameters
+    const float FrameBorder = 0.002f;
+    const float ButtonSize = 0.022f;
+    const float ButtonGap = 0.004f;
+
+    // Run a mission
+    public bool RunMission(Mission m) {
+      if (m == null) throw new Exception("Starting MissionView with empty mission!");
+      bool bCanAbort = (m.Type != Mission.MissionType.RepelBoarders);
+      bool bInProgress = m.Soldiers.Any();
+      ThisMission = m;
+      if (!bInProgress) ThisMission.Initialise();
+      CurrentLevel = ThisMission.GetOrCreateCurrentLevel();
+
+      // Choose the soldiers to deploy
+      if (!bInProgress) {
+        ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, CurrentLevel.MaximumSoldiers, bCanAbort);
+        cs.ShowDialog();
+        if (cs.Soldiers.Count == 0) {
+          MissionOutcome = MissionResult.Aborted;
+          ThisMission = null;
+          return false;
+        }
+        foreach (Soldier s in cs.Soldiers) {
+          CurrentLevel.AddSoldier(s);
+        }
+        Random rnd = new Random();
+        Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to get to the mission location
+      }
+
+      ThisMission.SetCurrentMissionView(this);
+
+      // Set GUI options
+      // TODO Set menu 
+      //missionToolStripMenuItem.Enabled = true;
+      //viewToolStripMenuItem.Enabled = false;
+      //optionsToolStripMenuItem.Enabled = false;
+      bShowEntityLabels = PlayerTeam.Mission_ShowLabels;
+      //labelsToolStripMenuItem.Checked = bShowEntityLabels;
+      bShowStatBars = PlayerTeam.Mission_ShowStatBars;
+      //healthBarsToolStripMenuItem.Checked = bShowStatBars;
+      bShowTravel = PlayerTeam.Mission_ShowTravel;
+      //travelDistanceToolStripMenuItem.Checked = bShowTravel;
+      bShowPath = PlayerTeam.Mission_ShowPath;
+      //movementPathToolStripMenuItem.Checked = bShowPath;
+      bShowEffects = PlayerTeam.Mission_ShowEffects;
+      //viewEffectsToolStripMenuItem.Checked = bShowEffects;
+      bViewDetection = PlayerTeam.Mission_ViewDetection;
+      //viewDetectionRadiiToolStripMenuItem.Checked = bViewDetection;
+
+      // If it's a ship mission then do the starfield;
+      if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) SetupStarfield();
+
+      // Centre around the first soldier
+      CentreView(ThisMission.Soldiers[0]);
+      fMissionViewZ = Const.InitialMissionViewZ;
+      PlayerTeam.SetCurrentMission(ThisMission);
+      view = ViewMode.ViewMission;
+
+      // Set up maps
+      TargetMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+      DistMap = new int[CurrentLevel.Width, CurrentLevel.Height];
+      AoEMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+      DetectionMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+
+      return true;
+    }
+    private void CeaseMission() {
+      view = ViewMode.ViewSystem;
+      PlayerTeam.CeaseMission();
+      Random rnd = new Random();
+
+      // Didn't complete the mission so put it back on the pile
+      if (MissionOutcome != MissionResult.Victory && TravelDetails == null) {
+        ThisMission.ResetMission();
+        if (PlayerTeam.CurrentPosition?.Colony != null) PlayerTeam.CurrentPosition.Colony.AddMission(ThisMission);
+        else PlayerTeam.CurrentPosition.AddMission(ThisMission);
+      }
+
+      // Resolve the mission (either victory or destruction)
+      if (MissionOutcome == MissionResult.Victory) {
+        if (TravelDetails != null) {
+          double dBounty = ThisMission.ShipTarget.EstimatedBountyValue * (0.5 + rnd.NextDouble());
+          if (ThisMission.Type == Mission.MissionType.RepelBoarders) {
+            msgBox.PopupMessage("You have repelled the boarders.\nYou search the attacking vessel and retrieve " + dBounty.ToString("N2") + " credits in bounty");
+            PlayerTeam.Cash += dBounty;
+          }
+          else if (ThisMission.Type == Mission.MissionType.BoardingParty) {
+            msgBox.PopupMessage("You successfully neutralise the enemy crew\nYou receive " + dBounty.ToString("N2") + " credits in bounty");
+            PlayerTeam.Cash += dBounty;
+          }
+          else throw new NotImplementedException();
+        }
+        else {
+          if (ThisMission.Goal == Mission.MissionGoal.Gather) {
+            msgBox.PopupMessage("You returned safely to your ship\nYou can sell any gathered " + ThisMission.MItem + "s at the nearest Colony");
+          }
+          else {
+            if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
+              msgBox.PopupMessage("You return the " + ThisMission.MItem + " to the mission agent\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+              if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
+            }
+            else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+            PlayerTeam.Cash += ThisMission.Reward;
+            foreach (Soldier s in ThisMission.Soldiers) {
+              s.AddExperience(ThisMission.Experience);
+              s.CheckForLevelUp(AnnounceMessage);
+            }
+          }
+        }
+      }
+      else if (MissionOutcome == MissionResult.Defeat) {
+        msgBox.PopupMessage("You were defeated!");
+        if (PlayerTeam.SoldierCount == 0) {
+          // Still alive?
+          // TODO
+        }
+        // TODO: Handle mission defeat
+        throw new NotImplementedException();
+      }
+      else if (MissionOutcome == MissionResult.Evacuated) {
+        // Remove any mission items so they can't be sold and the mission repeated ad infinitum
+        if (ThisMission.MItem != null) PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem, 10000);
+      }
+
+      Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to return home from the mission
+
+      if (TravelDetails != null) {
+        TravelDetails.ResumeTravelling();
+      }
+      // TODO viewToolStripMenuItem.Enabled = true;
+      // TODO optionsToolStripMenuItem.Enabled = true;
+      // TODO missionToolStripMenuItem.Enabled = false;
+    }
+
+    // This is the method to run when the timer is raised.
+    private void SetupStarfield() {
+      Random rnd = new Random();
+      iStarfieldDL = GL.GenLists(1);
+      GL.NewList(iStarfieldDL, ListMode.Compile);
+
+      // Generate a lot of stars
+      GL.Begin(BeginMode.Points);
+      for (int n = 0; n < Const.StarfieldSize; n++) {
+        double col = (1.0 - (Math.Pow(rnd.NextDouble() * 8.0, 0.3333) / 2.0)) * 0.9 + 0.1;
+        double x = (rnd.NextDouble() * 140.0) - 70.0;
+        double y = (rnd.NextDouble() * 90.0) - 45.0;
+        if (rnd.Next(20) == 0) GL.PointSize(3.0f);
+        else if (rnd.Next(5) == 0) GL.PointSize(2.0f);
+        else GL.PointSize(1.0f);
+        GL.Color3(col, col, col);
+        GL.Vertex3(x, y, -100.0);
+      }
+      GL.End();
+      GL.EndList();
+    }
+    private void DrawMission() {
+      if (!bLoaded) return;
+      if (SelectedEntity is Soldier s && s.PlayerTeam == null) SelectedEntity = null; // If player has died, deselect it
+
+      // Set up default OpenGL rendering parameters
+      PrepareScene();
+
+      // Set the correct view location & perspective matrix
+      GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+      GL.Disable(EnableCap.Lighting);
+      GL.MatrixMode(MatrixMode.Projection);
+      GL.LoadMatrix(ref perspective);
+      GL.MatrixMode(MatrixMode.Modelview);
+      GL.LoadIdentity();
+
+      // Draw the starfield (unmoving)
+      if (iStarfieldDL != -1) GL.CallList(iStarfieldDL);
+
+      // Shift to the correct location
+      GL.Translate(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
+
+      // Display the scene
+      CurrentLevel.DisplayMap();
+
+      // Show any indicators on top of the action in the map view
+      ShowMapGUIElements();
+
+      // Show creatures/soldiers
+      CurrentLevel.DisplayEntities(bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
+
+      // Display visual effects
+      for (int n = Effects.Count - 1; n >= 0; n--) {
+        if (Effects[n].Display(sw)) Effects.RemoveAt(n);
+      }
+
+      // Draw any static GUI elements (overlay)
+      ShowOverlayGUI();
+
+      // if we're displaying visual effects then keep re-painting
+      // TODO if (Effects.Any()) glMapView.Invalidate();
+    }
+
+    private void GetKeyboardInput_Mission() {
+      if (bAIRunning) return;
+      if (IsKeyPressed(Keys.Escape)) {
+        if (CurrentAction == SoldierAction.None) SetSelectedEntity(null);
+        CurrentAction = SoldierAction.None;
+        ActionItem = null;
+        // TODO glMapView.Invalidate();
+      }
+      if (SelectedEntity != null && SelectedEntity.GetType() == typeof(Soldier) && CurrentAction == SoldierAction.None) {
+        Soldier s = SelectedEntity as Soldier;
+        if (IsKeyPressed(Keys.Down)) MoveSoldier(s, Utils.Direction.South);
+        if (IsKeyPressed(Keys.Up)) MoveSoldier(s, Utils.Direction.North);
+        if (IsKeyPressed(Keys.Left)) MoveSoldier(s, Utils.Direction.West);
+        if (IsKeyPressed(Keys.Right)) MoveSoldier(s, Utils.Direction.East);
+        if (IsKeyPressed(Keys.V) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) ScavengeAll(s);
+        if (IsKeyPressed(Keys.S) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) SelectedSoldierSearch(null);
+        if (IsKeyPressed(Keys.P) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) PickUpAll(s);
+        if (IsKeyPressed(Keys.Space)) EndTurn();
+      }
+      if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
+    }
+
+    // Mouse stuff
+    private void CheckHoverMission() {
+      if (gpSelect != null && gpSelect.Active) return;
+
+      panelHover = null;
+      // Check GUIPanel first
+      if (gpSelect != null && gpSelect.Active && gpSelect.HoverItem != null) return;
+
+      // Check soldier panels
+      float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
+      double mxfract = (double)mx / (double)Size.X;
+      double myfract = (double)my / (double)Size.Y;
+      if (mxfract >= sx && mxfract <= (sx + Const.GUIPanelWidth)) {
+        foreach (Soldier s in ThisMission.Soldiers) {
+          float step = s.GetGuiPanelHeight(SelectedEntity == s);
+          if (myfract >= sy && myfract <= sy + step) { panelHover = s; return; }
+          sy += step + Const.GUIPanelGap;
+        }
+      }
+
+      // Buttons
+      if (gbEndTurn != null && gbEndTurn.IsHover(mx, my)) return;
+      if (gbTransition != null && gbTransition.IsHover(mx, my)) return;
+      if (gbZoomTo1 != null && gbZoomTo1.IsHover(mx, my)) return;
+      if (gbZoomTo2 != null && gbZoomTo1.IsHover(mx, my)) return;
+      if (gbZoomTo3 != null && gbZoomTo1.IsHover(mx, my)) return;
+      if (gbZoomTo4 != null && gbZoomTo1.IsHover(mx, my)) return;
+      if (gbWest != null && gbWest.IsHover(mx, my)) return;
+      if (gbEast != null && gbEast.IsHover(mx, my)) return;
+      if (gbNorth != null && gbNorth.IsHover(mx, my)) return;
+      if (gbSouth != null && gbSouth.IsHover(mx, my)) return;
+      if (gbAttack != null && gbAttack.IsHover(mx, my)) return;
+      if (gbUseItem != null && gbUseItem.IsHover(mx, my)) return;
+      if (gbInventory != null && gbInventory.IsHover(mx, my)) return;
+      if (gbSearch != null && gbSearch.IsHover(mx, my)) return;
+
+      // Calculate the position of the mouse pointer
+      double mxpos = ((mxfract - 0.5) * (fMissionViewZ / 1.86) * Aspect) + fMissionViewX;
+      double mypos = ((0.5 - myfract) * (fMissionViewZ / 1.86)) + fMissionViewY;
+      int oldhoverx = hoverx;
+      int oldhovery = hovery;
+      hoverx = (int)mxpos;
+      hovery = (int)mypos;
+      if (hoverx != oldhoverx || hovery != oldhovery) {
+        if (SelectedEntity != null && SelectedEntity is Soldier) {
+          if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
+            lCurrentPath = CurrentLevel.ShortestPath(SelectedEntity, SelectedEntity.Location, new Point(hoverx, hovery), 20, true);
+          }
+          else lCurrentPath = null;
+        }
+        else lCurrentPath = null;
+      }
+      CurrentLevel.SetHover(hoverx, hovery);
+    }
+    private void MouseMove_Mission(MouseMoveEventArgs e) {
+      if (MouseState.IsButtonDown(MouseButton.Left)) {
+        float fScale = Const.MouseMoveScale * fMissionViewZ / 50.0f;
+        if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) fScale *= 2.5f;
+        else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) fScale /= 2.5f;
+        fMissionViewX -= (float)(e.X - mx) * fScale;
+        if (fMissionViewX < 0) fMissionViewX = 0;
+        if (fMissionViewX > CurrentLevel.Width) fMissionViewX = CurrentLevel.Width;
+        fMissionViewY += (float)(e.Y - my) * fScale;
+        if (fMissionViewY < 0) fMissionViewY = 0;
+        if (fMissionViewY > CurrentLevel.Height) fMissionViewY = CurrentLevel.Height;
+        // TODO glMapView.Invalidate();
+        bDragging = true;
+      }
+      else bDragging = false;
+      mx = (int)e.X;
+      my = (int)e.Y;
+      int oldhoverx = hoverx, oldhovery = hovery;
+      CheckHoverMission();
+      // Mouse has moved to a different square
+      if (hoverx != oldhoverx || hovery != oldhovery) {
+        if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
+          if (ActionItem != null) {
+            GenerateAoEMap(hoverx, hovery, ActionItem.ItemEffect.Radius, oldhoverx, oldhovery);
+          }
+          else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
+            GenerateAoEMap(hoverx, hovery, s.EquippedWeapon.Type.Area, oldhoverx, oldhovery);
+          }
+        }
+      }
+
+      // TODO glMapView.Invalidate();
+    }
+    private async void MouseUp_Mission(MouseButtonEventArgs e) {
+      // Check R-button released
+      if (bAIRunning) return;
+      Soldier s = null;
+      if (SelectedEntity is Soldier) s = (Soldier)SelectedEntity;
+      if (e.Button == MouseButton.Right) {
+        if (gpSelect != null && gpSelect.Active) {
+          gpSelect.Deactivate();
+          int iSelectHover = gpSelect.HoverID;
+          // Process GUIPanel selection
+          if (s != null && iSelectHover >= 0 && gpSelect.HoverItem.Enabled) {
+            if (iSelectHover == I_OpenDoor) {
+              CurrentLevel.OpenDoor(gpSelect.ClickX, gpSelect.ClickY);
+              SoundEffects.PlaySound("OpenDoor");
+              GenerateDistMap(s);
+              s.UpdateVisibility(CurrentLevel);
+              CurrentLevel.CalculatePlayerVisibility();
+              GenerateDetectionMap();
+              if (UpdateDetectionForSoldier(s)) {
+                msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
+              }
+            }
+            if (iSelectHover == I_CloseDoor) {
+              if (CurrentLevel.CloseDoor(gpSelect.ClickX, gpSelect.ClickY)) {
+                SoundEffects.PlaySound("CloseDoor");
+                GenerateDistMap(SelectedEntity as Soldier);
+                GenerateDetectionMap();
+                s.UpdateVisibility(CurrentLevel);
+                CurrentLevel.CalculatePlayerVisibility();
+              }
+            }
+            if (iSelectHover == I_UnlockDoor) {
+              // TODO
+            }
+            if (iSelectHover == I_LockDoor) {
+              // TODO
+            }
+            if (iSelectHover == I_Attack) {
+              bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
+              //bool bAttacked = s.AttackLocation(level, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, glMissionView.Invalidate, PlaySoundThreaded).Result;
+              if (bAttacked) {
+                if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
+                    UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, 0, Const.BaseDetectionRange)) {
+                  // No alert required
+                }
+              }
+            }
+            if (iSelectHover == I_GoTo) {
+              s.GoTo = new Point(gpSelect.ClickX, gpSelect.ClickY);
+            }
+            if (iSelectHover >= Const.ItemIDBase && iSelectHover < (Const.ItemIDBase + 50000)) {
+              // Clicked on a usable item
+              ItemType it = StaticData.GetItemTypeById(iSelectHover);
+              if (it == null) throw new Exception("Chose unknown ItemType to use");
+              ActionItem = it;
+              CurrentAction = SoldierAction.Item;
+              GenerateTargetMap(s, it.ItemEffect.Range);
+              int sy = SelectedEntity.Y;
+              int sx = SelectedEntity.X;
+              GenerateAoEMap(sx, sy, it.ItemEffect.Radius);
+              // TODO glMapView.Invalidate();
+            }
+          }
+        }
+      }
+      if (e.Button == MouseButton.Left) {
+        if (CurrentAction == SoldierAction.Attack) {
+          CurrentAction = SoldierAction.None;
+          bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
+          //bool bAttacked = s.AttackLocation(level, hoverx, hovery, AddNewEffect, glMissionView.Invalidate, PlaySoundThreaded).Result;
+          if (bAttacked) {
+            if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
+                UpdateDetectionForLocation(hoverx, hovery, 0, Const.BaseDetectionRange)) {
+              // No alert required
+            }
+          }
+        }
+        else if (CurrentAction == SoldierAction.Item) {
+          if (s.Stamina < s.UseItemCost) {
+            msgBox.PopupMessage("You have insufficient Stamina to use Item!");
+            return;
+          }
+          // Firstly, remove the item from the Soldier in question if it's a single use item
+          ItemType temp = ActionItem;
+          s.UseItem(ActionItem);
+          CurrentAction = SoldierAction.None;
+          ActionItem = null;
+          // TODO glMapView.Invalidate();
+          // Now apply the effect
+          ApplyItemEffectToMap(s, temp, hoverx, hovery);
+          if (UpdateDetectionForLocation(hoverx, hovery, 0, Const.BaseDetectionRange)) {
+            // No alert required
+          }
+        }
+        else {
+          bool bClicked = false;
+          foreach (GUIIconButton bt in lButtons) bClicked |= bt.CaptureClick(mx, my);
+          if (gbEndTurn != null) bClicked |= gbEndTurn.CaptureClick(mx, my);
+          if (gbTransition != null) bClicked |= gbTransition.CaptureClick(mx, my);
+          if (gbEndMission != null) bClicked |= gbEndMission.CaptureClick(mx, my);
+          if (!bClicked) {
+            if (panelHover != null) SetSelectedEntity(panelHover);
+            else if (!bDragging) SetSelectedEntity(CurrentLevel.GetHoverEntity());
+          }
+        }
+      }
+      if (SelectedEntity is Soldier) {
+        GenerateDistMap(SelectedEntity as Soldier);
+        GenerateDetectionMap();
+      }
+      CheckHoverMission();
+      // TODO glMapView.Invalidate();
+    }
+    private void MouseDown_Mission(MouseButtonEventArgs e) {
+      if (e.Button == MouseButton.Right) {
+        if (SelectedEntity != null && (SelectedEntity is Soldier) && !bAIRunning) SetupContextMenu();
+      }
+      if (e.Button == MouseButton.Left) {
+        // TODO: Left click
+      }
+    }
+    private void DoubleClick_Mission() {
+      if (panelHover != null) return;
+      foreach (GUIIconButton bt in lButtons) {
+        if (bt.IsHover(mx, my)) return;
+      }
+      if (gbEndTurn.IsHover(mx, my)) return;
+      if (gbTransition.IsHover(mx, my)) return;
+      if (gbEndMission.IsHover(mx, my)) return;
+      Point pt = CurrentLevel.MouseHover;
+      if (pt == null) return;
+      IEntity he = CurrentLevel.GetHoverEntity();
+      if (he != null) {
+        using (CreatureView cv = new CreatureView(he, Cursor.X, Cursor.Y)) {
+          cv.ShowDialog();
+        }
+      }
+      else {
+        fMissionViewX = pt.X + 0.5f;
+        fMissionViewY = pt.Y + 0.5f;
+      }
+    }
+    private void MouseWheel_Mission(float delta) {
+      fMissionViewZ += delta;
+      if (fMissionViewZ < Const.MinimumMissionViewZ) fMissionViewZ = Const.MinimumMissionViewZ;
+      if (fMissionViewZ > Const.MaximumMissionViewZ) fMissionViewZ = Const.MaximumMissionViewZ;
+    }
+
+    private void AddNewEffect(VisualEffect.EffectType type, double x, double y, Dictionary<string, object> dict) {
+      Effects.Add(new VisualEffect(type, x, y, sw, 1.0, dict));
+    }
+
+    // Actions
+    private void MoveSoldier(Soldier s, Utils.Direction d) {
+      if (s.Move(d)) UpdateLevelAfterSoldierMove(s);
+    }
+    private void UpdateLevelAfterSoldierMove(Soldier s) {
+      CheckForTransition();
+      if (SelectedEntity is Soldier se) GenerateDistMap(se);
+      GenerateDetectionMap();
+      // Check if this soldier was detected
+      if (DetectionMap[s.X, s.Y]) {
+        if (UpdateDetectionForSoldier(s)) {
+          msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
+        }
+      }
+      CheckForTraps(s);
+      foreach (Creature cr in CurrentLevel.Creatures) {
+        if (cr.CurrentTarget == s && cr.CanSee(s)) cr.SetTarget(s);   // Make sure creature is following us by setting the target (NOP) and updating the Investigation square with Soldier's current position
+      }
+    }
+    private void CheckForTransition() {
+      // Test if all soldiers are now on an entrance/exit square and set up the button if so.
+      if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
+        gbTransition.Activate();
+        if (CurrentLevel.LevelID == 0) gbTransition.UpdateText("Exit Mission");
+        else gbTransition.UpdateText("Ascend to Level " + (CurrentLevel.LevelID - 1));
+      }
+      else if (CurrentLevel.CheckAllSoldiersAtExit()) {
+        gbTransition.Activate();
+        gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 1));
+      }
+      else gbTransition.Deactivate();
+    }
+    private void ApplyItemEffectToMap(Soldier s, ItemType it, int px, int py) {
+      ItemEffect ie = it.ItemEffect;
+      HashSet<IEntity> hsEntities = new HashSet<IEntity>();
+
+      // Play a sound, if there is one
+      if (!String.IsNullOrEmpty(ie.SoundEffect)) {
+        SoundEffects.PlaySound(ie.SoundEffect);
+        Thread.Sleep(500);
+      }
+      for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {
+        for (int x = (int)Math.Max(px - ie.Radius, 0); x <= (int)Math.Min(px + ie.Radius, CurrentLevel.Width - 1); x++) {
+          if ((x - px) * (x - px) + (y - py) * (y - py) > ie.Radius * ie.Radius) continue;
+          IEntity en = CurrentLevel.GetEntityAt(x, y);
+          if (en != null && !hsEntities.Contains(en)) {
+            hsEntities.Add(en); // Make sure we don't double count e.g. large entities
+          }
+        }
+      }
+      foreach (IEntity en in hsEntities) {
+        en.ApplyEffectToEntity(s, ie, AddNewEffect);
+      }
+    }
+    private bool CheckForTraps(Soldier s) {
+      Trap tr = CurrentLevel.GetTrapAtPoint(s.X, s.Y);
+      if (tr == null) return false;
+
+      // Stop auto-move
+      s.GoTo = Point.Empty;
+
+      // Generate Damage
+      Dictionary<WeaponType.DamageType, double> AllDam = tr.GenerateDamage();
+      double TotalDam = s.InflictDamage(AllDam);
+      Thread.Sleep(100);
+      SoundEffects.PlaySound("Click");
+      Thread.Sleep(100);
+      SoundEffects.PlaySound("Grunt");
+      AddNewEffect(VisualEffect.EffectType.Damage, s.X + 0.5, s.Y + 0.5, new Dictionary<string, object>() { { "Value", TotalDam } });
+
+      if (tr.Hidden) {
+        msgBox.PopupMessage("You have triggered a hidden trap!");
+        tr.Reveal();
+      }
+
+      return true;
+    }
+    private bool UpdateDetectionForSoldier(Soldier s, double extraRange = 0.0) {
+      if (s == null) return false;
+      if (extraRange == 0.0 && !DetectionMap[s.X, s.Y]) return false;
+      double baseRange = s.DetectionRange + extraRange;
+      return UpdateDetectionForLocation(s.X, s.Y, s.Level, baseRange);
+    }
+    private bool UpdateDetectionForLocation(int x, int y, int sLevel, double baseRange) {
+      if (x < 0 || y < 0 || x >= CurrentLevel.Width || y >= CurrentLevel.Height) return false;
+      // Check every nearby creature to see if it can detect this soldier
+      HashSet<Creature> hsDetected = new HashSet<Creature>();
+      foreach (Creature cr in CurrentLevel.Creatures) {
+        if (!cr.IsAlert && !hsDetected.Contains(cr)) {
+          double range = baseRange;
+          if (sLevel > 0) range += ((cr.Level - sLevel) / 3.0); // sLevel == 0 means no level bonuses to be applied
+          // Check range
+          double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
+          if (r2 <= (range * range) && cr.CanSee(x, y)) {
+            hsDetected.Add(cr);
+            cr.Alert();
+            cr.SetTargetInvestigation(x, y);
+          }
+        }
+      }
+      if (hsDetected.Count == 0) return false;
+      foreach (Creature crd in hsDetected) {
+        foreach (Creature cr in CurrentLevel.Creatures) {
+          if (!cr.IsAlert) {
+            int r2 = (crd.X - cr.X) * (crd.X - cr.X) + (crd.Y - cr.Y) * (crd.Y - cr.Y);
+            if (r2 <= Const.CreatureAlertWarningDistance * Const.CreatureAlertWarningDistance) {
+              if (cr.CanSee(crd)) cr.Alert();
+              cr.SetTargetInvestigation(x, y);
+            }
+          }
+        }
+      }
+      GenerateDetectionMap();
+      return true;
+    }
+    private void ScavengeAll(Soldier s) {
+      int sk = s.GetUtilityLevel(Soldier.UtilitySkill.Scavenging);
+      if (sk == 0) return;
+      Stash st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
+      if (st == null) return;
+      Dictionary<IItem, int> Scavenged = new Dictionary<IItem, int>();
+      Random rand = new Random();
+      foreach (IItem it in st.Items()) {
+        if (it is Corpse cp && !cp.IsSoldier) {
+          // Generate stuff
+          for (int n = 0; n < st.GetCount(it); n++) {
+            List<IItem> stuff = cp.Scavenge(sk, rand);
+            foreach (IItem sc in stuff) {
+              s.AddItem(sc);
+              if (Scavenged.ContainsKey(sc)) Scavenged[sc]++;
+              else Scavenged.Add(sc, 1);
+            }
+          }
+          st.Remove(it);
+        }
+      }
+      StringBuilder sb = new StringBuilder();
+      if (!Scavenged.Any()) {
+        sb.AppendLine("You found nothing useful");
+      }
+      else {
+        sb.AppendLine("Scavenging Results:");
+        foreach (IItem sc in Scavenged.Keys) {
+          sb.AppendFormat("{0} [{1}]", sc.Name, Scavenged[sc]);
+          sb.AppendLine();
+        }
+      }
+      msgBox.PopupMessage(sb.ToString());
+      if (st.Count == 0) CurrentLevel.ReplaceStashAtPosition(s.X, s.Y, null);
+    }
+    private void PickUpAll(Soldier s) {
+      Stash st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
+      if (st == null) return;
+      int count = 0;
+      StringBuilder sb = new StringBuilder();
+      sb.AppendLine("Objects Picked Up:");
+      foreach (IItem it in st.Items()) {
+        if (!(it is Corpse)) {
+          int num = st.GetCount(it);
+          s.AddItem(it, num);
+          sb.AppendLine(it.Name + " [" + num + "]");
+          st.Remove(it, num);
+          count++;
+        }
+      }
+      if (st.Count == 0) CurrentLevel.ReplaceStashAtPosition(s.X, s.Y, null);
+      if (count == 0) sb.AppendLine("You found nothing useful");
+      msgBox.PopupMessage(sb.ToString());
+    }
+    private void TabToNextSoldier() {
+      if (SelectedEntity == null || SelectedEntity is Creature) {
+        SetSelectedEntity(ThisMission.Soldiers[0]);
+        CentreView(ThisMission.Soldiers[0]);
+        return;
+      }
+      else {
+        Soldier s = ((Soldier)SelectedEntity);
+        for (int n = 0; n < ThisMission.Soldiers.Count; n++) {
+          if (ThisMission.Soldiers[n] == s) {
+            if (n == ThisMission.Soldiers.Count - 1) n = 0;
+            else n++;
+            SetSelectedEntity(ThisMission.Soldiers[n]);
+            CentreView(ThisMission.Soldiers[n]);
+            return;
+          }
+        }
+      }
+      throw new Exception("Couldn't identify tab soldier");
+    }
+
+    // Menu handlers
+    private void detailsToolStripMenuItem_Click(object sender, EventArgs e) {
+      string strDesc = ThisMission.GetDescription();
+      if (ThisMission.Goal == Mission.MissionGoal.ExploreAll || ThisMission.Goal == Mission.MissionGoal.KillAll || ThisMission.Goal == Mission.MissionGoal.Gather) {
+        strDesc += "----------\nProgress:\n";
+        for (int n = 0; n < ThisMission.LevelCount; n++) {
+          strDesc += "Level " + n + " : ";
+          MissionLevel lev = ThisMission.GetLevel(n);
+          if (lev == null) strDesc += "Not explored\n";
+          else {
+            if (ThisMission.Goal == Mission.MissionGoal.ExploreAll) {
+              Tuple<int, int> tp = lev.UnexploredTiles;
+              int rem = tp.Item1;
+              if (rem == 1) strDesc += "1 tile remaining\n";
+              else if (rem == 0) strDesc += "Complete\n";
+              else strDesc += rem.ToString() + " tiles remaining\n";
+            }
+            else if (ThisMission.Goal == Mission.MissionGoal.KillAll) {
+              int rem = lev.Creatures.Count();
+              if (rem == 1) strDesc += "1 enemy remaining\n";
+              else if (rem == 0) strDesc += "Complete\n";
+              else strDesc += rem.ToString() + " enemies remaining\n";
+            }
+            else if (ThisMission.Goal == Mission.MissionGoal.Gather) {
+              int rem = lev.CountMissionItemsRemaining;
+              if (rem == 1) strDesc += "1 item remaining\n";
+              else if (rem == 0) strDesc += "Complete\n";
+              else strDesc += rem.ToString() + " items remaining\n";
+            }
+          }
+        }
+      }
+      msgBox.PopupMessage(strDesc);
+    }
+    private void labelsToolStripMenuItem_Click(object sender, EventArgs e) {
+      bShowEntityLabels = !bShowEntityLabels;
+      // TODO labelsToolStripMenuItem.Checked = bShowEntityLabels;
+      PlayerTeam.Mission_ShowLabels = bShowEntityLabels;
+      // TODO glMapView.Invalidate();
+    }
+    private void healthBarsToolStripMenuItem_Click(object sender, EventArgs e) {
+      bShowStatBars = !bShowStatBars;
+      // TODO healthBarsToolStripMenuItem.Checked = bShowStatBars;
+      PlayerTeam.Mission_ShowStatBars = bShowStatBars;
+      // TODO glMapView.Invalidate();
+    }
+    private void travelDistanceToolStripMenuItem_Click(object sender, EventArgs e) {
+      bShowTravel = !bShowTravel;
+      // TODO travelDistanceToolStripMenuItem.Checked = bShowTravel;
+      PlayerTeam.Mission_ShowTravel = bShowTravel;
+      // TODO glMapView.Invalidate();
+    }
+    private void movementPathToolStripMenuItem_Click(object sender, EventArgs e) {
+      bShowPath = !bShowPath;
+      // TODO movementPathToolStripMenuItem.Checked = bShowPath;
+      PlayerTeam.Mission_ShowPath = bShowPath;
+      // TODO glMapView.Invalidate();
+    }
+    private void viewEffectsToolStripMenuItem_Click(object sender, EventArgs e) {
+      bShowEffects = !bShowEffects;
+      // TODO viewEffectsToolStripMenuItem.Checked = bShowEffects;
+      PlayerTeam.Mission_ShowEffects = bShowEffects;
+      // TODO glMapView.Invalidate();
+    }
+    private void viewDetectionRadiiToolStripMenuItem_Click(object sender, EventArgs e) {
+      bViewDetection = !bViewDetection;
+      // TODO viewDetectionRadiiToolStripMenuItem.Checked = bViewDetection;
+      PlayerTeam.Mission_ViewDetection = bViewDetection;
+      GenerateDetectionMap();
+      // TODO glMapView.Invalidate();
+    }
+
+    // Show GUI elements in the viewpoint of the map
+    private void ShowMapGUIElements() {
+      // Mouse hover
+      GL.Disable(EnableCap.DepthTest);
+      Point pt = CurrentLevel.MouseHover;
+      if (pt != Point.Empty && CurrentAction == SoldierAction.None) {
+        DrawHoverFrame(pt.X, pt.Y);
+      }
+      if (SelectedEntity != null) {
+        DrawSelectionTile(SelectedEntity.Location.X + SelectedEntity.Size / 2.0, SelectedEntity.Location.Y + SelectedEntity.Size / 2.0, SelectedEntity.Size /* + 0.2 */);
+      }
+
+      if (CurrentAction == SoldierAction.Attack) {
+        DrawTargetGrid();
+        if (TargetMap[pt.X, pt.Y] == true) {
+          DrawHoverFrame(pt.X, pt.Y);
+          if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0) DrawAoEGrid();
+        }
+      }
+      else if (CurrentAction == SoldierAction.Item) {
+        DrawTargetGrid();
+        if (TargetMap[pt.X, pt.Y] == true) {
+          DrawHoverFrame(pt.X, pt.Y);
+          DrawAoEGrid();
+        }
+      }
+      else {
+        if (bShowTravel && SelectedEntity != null && SelectedEntity is Soldier) {
+          DrawTravelGrid();
+        }
+        if (bShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
+          if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
+            DrawTravelPath();
+          }
+        }
+      }
+      if (bViewDetection) CurrentLevel.DrawDetectionMap(DetectionMap);
+      if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(SelectedEntity);
+      GL.Enable(EnableCap.DepthTest);
+    }
+
+    // Show GUI elements in the overlay layer
+    private void ShowOverlayGUI() {
+      SetupGUITextures();
+      InitialiseGUIButtons();
+      GL.MatrixMode(MatrixMode.Projection);
+      GL.LoadMatrix(ref ortho_projection);
+      GL.MatrixMode(MatrixMode.Modelview);
+      GL.LoadIdentity();
+      GL.Disable(EnableCap.Lighting);
+      GL.Disable(EnableCap.DepthTest);
+
+      // Show the selected entity details if it's a creature
+      if (SelectedEntity != null && SelectedEntity is Creature) {
+        ShowSelectedEntityDetails();
+      }
+
+      // Details on the squad
+      ShowSoldierPanels();
+
+      // Show the context menu and other buttons
+      if (gpSelect != null) gpSelect.Display(mx, my);
+      foreach (GUIIconButton bt in lButtons) bt.Display(mx, my);
+      if (gbEndTurn != null) gbEndTurn.Display(mx, my);
+      if (gbTransition != null) gbTransition.Display(mx, my);
+      if (ThisMission.IsComplete) {
+        gbEndMission.Activate();
+        gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
+        gbEndMission.Display(mx, my);
+      }
+      else gbEndMission.Deactivate();
+
+      // Warn that AI is running?
+      if (bAIRunning) {
+        DisplayAILabel();
+      }
+
+      GL.Enable(EnableCap.DepthTest);
+    }
+    private void DisplayAILabel() {
+      if (tlAIRunning == null) tlAIRunning = new TextLabel("AI Running");
+      GL.PushMatrix();
+      GL.Translate(0.5, 0.02, Const.GUILayer);
+      GL.Scale(0.06, 0.06, 0.04);
+      GL.Color3(0.1, 0.1, 0.1);
+      GL.DepthMask(false);
+      GL.Begin(BeginMode.Quads);
+      GL.Vertex3(-1.8, 0.1, 0.0);
+      GL.Vertex3(1.8, 0.1, 0.0);
+      GL.Vertex3(1.8, 1.0, 0.0);
+      GL.Vertex3(-1.8, 1.0, 0.0);
+      GL.End();
+      GL.DepthMask(true);
+      GL.Color3(1.0, 1.0, 1.0);
+      GL.Rotate(180.0, Vector3d.UnitX);
+      tlAIRunning.Draw(TextLabel.Alignment.TopMiddle);
+      GL.PopMatrix();
+    }
+    private void ShowSelectedEntityDetails() {
+      if (tlSelect1 == null) tlSelect1 = new TextLabel();
+      tlSelect1.UpdateText(SelectedEntity.Name);
+      if (tlSelect2 == null) tlSelect2 = new TextLabel();
+      tlSelect2.UpdateText("Level " + SelectedEntity.Level);
+      if (tlSelect3 == null) tlSelect3 = new TextLabel();
+      int hp = (int)SelectedEntity.Health;
+      if (hp < 1) hp = 1;
+      tlSelect3.UpdateText("HP:" + hp + " / " + "St:" + (int)SelectedEntity.Stamina + ((SelectedEntity.MaxShields > 0) ? " / " + "Sh:" + (int)SelectedEntity.Shields : ""));
+
+      // Display the stats for the selected entity
+      GL.PushMatrix();
+      GL.Translate(0.998, 0.81 - (SelectedEntity.MaxShields > 0 ? 0.0368 : 0.0), Const.GUILayer);
+      GL.Scale(0.04, 0.04, 0.04);
+      GL.Rotate(180.0, Vector3d.UnitX);
+      //tlSelect1.SetAlpha(Const.GUIAlpha);
+      tlSelect1.Draw(TextLabel.Alignment.TopRight);
+      GL.Translate(0.0, -0.92, 0.0);
+      //tlSelect2.SetAlpha(Const.GUIAlpha);
+      tlSelect2.Draw(TextLabel.Alignment.TopRight);
+      GL.Translate(0.0, -0.92, 0.0);
+      //tlSelect3.SetAlpha(Const.GUIAlpha);
+      tlSelect3.Draw(TextLabel.Alignment.TopRight);
+      GL.PopMatrix();
+    }
+    private void ShowSoldierPanels() {
+      // Show the details of the soldiers
+      float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
+      IEntity hover = CurrentLevel.GetHoverEntity();
+      if (panelHover != null) hover = panelHover;
+      for (int sno = 0; sno < ThisMission.Soldiers.Count; sno++) {
+        Soldier s = ThisMission.Soldiers[sno];
+        float PanelHeight = s.GetGuiPanelHeight(SelectedEntity == s);
+
+        // Place the buttons (Y only, plus on/off if soldier is selected)
+        if (sno == 0) gbZoomTo1.ButtonY = sy + FrameBorder;
+        if (sno == 1) gbZoomTo2.ButtonY = sy + FrameBorder;
+        if (sno == 2) gbZoomTo3.ButtonY = sy + FrameBorder;
+        if (sno == 3) gbZoomTo4.ButtonY = sy + FrameBorder;
+        if (SelectedEntity == s) {
+          gbWest.ButtonY = sy + PanelHeight - (ButtonSize * 2 + ButtonGap * 2);
+          gbEast.ButtonY = sy + PanelHeight - (ButtonSize * 2 + ButtonGap * 2);
+          gbNorth.ButtonY = sy + PanelHeight - (ButtonSize * 3 + ButtonGap * 3);
+          gbSouth.ButtonY = sy + PanelHeight - (ButtonSize + ButtonGap);
+          gbAttack.ButtonY = sy + PanelHeight - (ButtonSize * 3 + ButtonGap * 3);
+          gbUseItem.ButtonY = sy + PanelHeight - (ButtonSize * 3 + ButtonGap * 3);
+          gbInventory.ButtonY = sy + PanelHeight - (ButtonSize * 1.5 + ButtonGap * 1);
+          gbSearch.ButtonY = sy + PanelHeight - (ButtonSize * 1.5 + ButtonGap * 1);
+          if (bAIRunning) gbInventory.Deactivate();
+          else gbInventory.Activate();
+          if (s.Stamina < s.AttackCost || s.GoTo != Point.Empty || bAIRunning) gbAttack.Deactivate();
+          else gbAttack.Activate();
+          if (s.Stamina < s.SearchCost || s.GoTo != Point.Empty || bAIRunning) gbSearch.Deactivate();
+          else gbSearch.Activate();
+          if (s.Stamina < s.UseItemCost || s.GoTo != Point.Empty || !s.HasUtilityItems() || bAIRunning) gbUseItem.Deactivate();
+          else gbUseItem.Activate();
+          if (s.Stamina < s.MovementCost || s.GoTo != Point.Empty || bAIRunning) {
+            gbWest.Deactivate();
+            gbEast.Deactivate();
+            gbNorth.Deactivate();
+            gbSouth.Deactivate();
+          }
+          else {
+            gbWest.Activate();
+            gbEast.Activate();
+            gbNorth.Activate();
+            gbSouth.Activate();
+          }
+        }
+
+        GL.PushMatrix();
+        GL.Translate(sx, sy, Const.GUILayer);
+        s.DisplaySoldierDetails(SelectedEntity == s, hover == s);
+        sy += PanelHeight + Const.GUIPanelGap;
+        GL.PopMatrix();
+      }
+    }
+    private void SetupGUITextures() {
+      if (iMiscTexture == -1) iMiscTexture = Textures.GetMiscTexture();
+      if (iItemTexture == -1) iItemTexture = Textures.GetItemTexture();
+    }
+    private void InitialiseGUIButtons() {
+      // Initialise all on startup
+      if (!bGUIButtonsInitialised) {
+        lButtons.Clear();
+
+        // ZoomTo buttons
+        SetupZoomToButtons();
+
+        // Direction Control buttons
+        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Left);
+        gbWest = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
+        lButtons.Add(gbWest);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Right);
+        gbEast = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
+        lButtons.Add(gbEast);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Up);
+        gbNorth = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
+        lButtons.Add(gbNorth);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Down);
+        gbSouth = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
+        lButtons.Add(gbSouth);
+
+        // Misc controls
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+        gbAttack = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierAttack, null);
+        lButtons.Add(gbAttack);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+        gbUseItem = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierUseItems, null);
+        lButtons.Add(gbUseItem);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
+        gbInventory = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierInventory, null);
+        lButtons.Add(gbInventory);
+        tp = Textures.GetTexCoords(Textures.MiscTexture.Search);
+        gbSearch = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierSearch, null);
+        lButtons.Add(gbSearch);
+
+        // Other buttons
+        gbEndTurn = new GUIButton("End Turn", this, EndTurn);
+        gbEndTurn.Activate();
+        gbEndTurn.SetPosition(0.9, 0.93);
+        gbEndTurn.SetSize(0.09, 0.05);
+        gbEndTurn.SetBlend(true);
+
+        gbTransition = new GUIButton("Transition", this, Transition);
+        gbTransition.SetPosition(0.9, 0.85);
+        gbTransition.SetSize(0.09, 0.05);
+        gbTransition.SetBlend(true);
+
+        gbEndMission = new GUIButton("End Mission", this, EndMission);
+        gbEndMission.SetPosition(0.9, 0.77);
+        gbEndMission.SetSize(0.09, 0.05);
+        gbEndMission.SetBlend(true);
+
+        // Done
+        bGUIButtonsInitialised = true;
+
+        // Set button state as required
+        CheckForTransition();
+      }
+
+      // Switch control buttons on/off when required
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) {
+        gbWest.Deactivate();
+        gbEast.Deactivate();
+        gbNorth.Deactivate();
+        gbSouth.Deactivate();
+        gbAttack.Deactivate();
+        gbSearch.Deactivate();
+        gbInventory.Deactivate();
+        gbUseItem.Deactivate();
+      }
+      else {
+        gbWest.Activate();
+        gbEast.Activate();
+        gbNorth.Activate();
+        gbSouth.Activate();
+        gbAttack.Activate();
+        gbSearch.Activate();
+        gbInventory.Activate();
+        gbUseItem.Activate();
+      }
+    }
+    private void SetupZoomToButtons() {
+      Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Eye);
+      if (ThisMission.Soldiers.Count >= 1) {
+        if (gbZoomTo1 == null || gbZoomTo1.InternalData != ThisMission.Soldiers[0]) {
+          gbZoomTo1 = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[0]);
+          if (!lButtons.Contains(gbZoomTo1)) lButtons.Add(gbZoomTo1);
+        }
+        if (ThisMission.Soldiers.Count >= 2) {
+          if (gbZoomTo2 == null || gbZoomTo2.InternalData != ThisMission.Soldiers[1]) {
+            gbZoomTo2 = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[1]);
+            if (!lButtons.Contains(gbZoomTo2)) lButtons.Add(gbZoomTo2);
+          }
+          if (ThisMission.Soldiers.Count >= 3) {
+            if (gbZoomTo3 == null || gbZoomTo3.InternalData != ThisMission.Soldiers[2]) {
+              gbZoomTo3 = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[2]);
+              if (!lButtons.Contains(gbZoomTo3)) lButtons.Add(gbZoomTo3);
+            }
+            if (ThisMission.Soldiers.Count >= 4) {
+              if (gbZoomTo4 == null || gbZoomTo4.InternalData != ThisMission.Soldiers[3]) {
+                gbZoomTo4 = new GUIIconButton(this, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[3]);
+                if (!lButtons.Contains(gbZoomTo4)) lButtons.Add(gbZoomTo4);
+              }
+            }
+          }
+        }
+      }
+      if (ThisMission.Soldiers.Count < 4) {
+        if (lButtons.Contains(gbZoomTo4)) lButtons.Remove(gbZoomTo4);
+        gbZoomTo4 = null;
+      }
+      if (ThisMission.Soldiers.Count < 3) {
+        if (lButtons.Contains(gbZoomTo3)) lButtons.Remove(gbZoomTo3);
+        gbZoomTo3 = null;
+      }
+      if (ThisMission.Soldiers.Count < 2) {
+        if (lButtons.Contains(gbZoomTo2)) lButtons.Remove(gbZoomTo2);
+        gbZoomTo2 = null;
+      }
+      if (ThisMission.Soldiers.Count == 0) {
+        if (lButtons.Contains(gbZoomTo1)) lButtons.Remove(gbZoomTo1);
+        gbZoomTo1 = null;
+      }
+    }
+    private void DrawTargetGrid() {
+      GL.Color3(1.0, 0.0, 0.0);
+      GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+      GL.Begin(BeginMode.Quads);
+      for (int y = 0; y < CurrentLevel.Height; y++) {
+        for (int x = 0; x < CurrentLevel.Width; x++) {
+          if (!TargetMap[x, y]) continue;
+          GL.Vertex3(x, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
+          GL.Vertex3(x, y + 1, Const.DoodadLayer);
+        }
+      }
+      GL.End();
+      GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+    }
+
+    private void DrawAoEGrid() {
+      GL.Color4(1.0, 0.0, 0.0, 0.2);
+      //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+      GL.Enable(EnableCap.Blend);
+      GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+      GL.Begin(BeginMode.Quads);
+      for (int y = (int)Math.Max(hovery - AoERadius, 0); y < (int)Math.Min(hovery + AoERadius + 1, CurrentLevel.Height); y++) {
+        for (int x = (int)Math.Max(hoverx - AoERadius, 0); x < (int)Math.Min(hoverx + AoERadius + 1, CurrentLevel.Width); x++) {
+          if (!AoEMap[x, y]) continue;
+          GL.Vertex3(x, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
+          GL.Vertex3(x, y + 1, Const.DoodadLayer);
+        }
+      }
+      GL.End();
+      GL.Disable(EnableCap.Blend);
+      //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+    }
+    private void DrawTravelGrid() {
+      GL.Color3(0.0, 1.0, 0.0);
+      GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+      GL.Begin(BeginMode.Quads);
+      for (int y = 0; y < CurrentLevel.Height; y++) {
+        for (int x = 0; x < CurrentLevel.Width; x++) {
+          if (DistMap[x, y] == -1) continue;
+          GL.Vertex3(x, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y, Const.DoodadLayer);
+          GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
+          GL.Vertex3(x, y + 1, Const.DoodadLayer);
+        }
+      }
+      GL.End();
+      GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+    }
+    private void DrawTravelPath() {
+      if (lCurrentPath == null || lCurrentPath.Count == 0) return;
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) return;
+      GL.Color3(0.0, 1.0, 0.0);
+      GL.Begin(BeginMode.LineStrip);
+      GL.Vertex3(SelectedEntity.X + 0.5, SelectedEntity.Y + 0.5, Const.DoodadLayer);
+      foreach (Point pt in lCurrentPath) {
+        // TODO : This needs to start at the square that the entity has currently got to, 
+        GL.Vertex3(pt.X + 0.5, pt.Y + 0.5, Const.DoodadLayer);
+      }
+      GL.Vertex3(hoverx + 0.5, hovery + 0.5, Const.DoodadLayer);
+      GL.End();
+      GL.Begin(BeginMode.Quads);
+      GL.Vertex3(hoverx + 0.45, hovery + 0.45, Const.DoodadLayer);
+      GL.Vertex3(hoverx + 0.55, hovery + 0.45, Const.DoodadLayer);
+      GL.Vertex3(hoverx + 0.55, hovery + 0.55, Const.DoodadLayer);
+      GL.Vertex3(hoverx + 0.45, hovery + 0.55, Const.DoodadLayer);
+      GL.End();
+    }
+    private void DrawHoverFrame(int xpos, int ypos) {
+      double px = xpos + 0.5, py = ypos + 0.5;
+      double xSize = 1.0, ySize = 1.0;
+      // Hovering over a large entity
+      IEntity en = CurrentLevel.GetEntityAt(xpos, ypos);
+      if (en != null && en.Size > 1) {
+        px = en.X + (en.Size / 2.0);
+        py = en.Y + (en.Size / 2.0);
+        xSize = en.Size;
+        ySize = en.Size;
+      }
+      // Hovering over a door
+      else if (CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.OpenDoorHorizontal) {
+        int endx = xpos, startx = xpos;
+        while (startx - 1 > 0 && CurrentLevel.Map[startx - 1, ypos] == CurrentLevel.Map[xpos, ypos]) startx--;
+        while (endx + 1 < CurrentLevel.Width - 1 && CurrentLevel.Map[endx + 1, ypos] == CurrentLevel.Map[xpos, ypos]) endx++;
+        px = (startx + endx) / 2.0 + 0.5;
+        xSize = Math.Abs(startx - endx) + 1.0;
+      }
+      else if (CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.DoorVertical || CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.OpenDoorVertical) {
+        int endy = ypos, starty = ypos;
+        while (starty - 1 > 0 && CurrentLevel.Map[xpos, starty - 1] == CurrentLevel.Map[xpos, ypos]) starty--;
+        while (endy + 1 < CurrentLevel.Height - 1 && CurrentLevel.Map[xpos, endy + 1] == CurrentLevel.Map[xpos, ypos]) endy++;
+        py = (starty + endy) / 2.0 + 0.5;
+        ySize = Math.Abs(starty - endy) + 1.0;
+      }
+      const double dFrame = 0.1;
+      if (CurrentAction == SoldierAction.Attack || CurrentAction == SoldierAction.Item) GL.Color3(1.0, 0.0, 0.0);
+      else GL.Color3(0.0, 1.0, 0.0);
+      double dx = -(xSize / 2.0);
+      double dy = -(ySize / 2.0);
+      GL.Begin(BeginMode.QuadStrip);
+      GL.Vertex3(px + dx, py + dy, Const.GUILayer);
+      GL.Vertex3(px + dx + dFrame, py + dy + dFrame, Const.GUILayer);
+      GL.Vertex3(px + dx, py + dy + ySize, Const.GUILayer);
+      GL.Vertex3(px + dx + dFrame, py + dy + (ySize - dFrame), Const.GUILayer);
+      GL.Vertex3(px + dx + xSize, py + dy + ySize, Const.GUILayer);
+      GL.Vertex3(px + dx + (xSize - dFrame), py + dy + (ySize - dFrame), Const.GUILayer);
+      GL.Vertex3(px + dx + xSize, py + dy, Const.GUILayer);
+      GL.Vertex3(px + dx + (xSize - dFrame), py + dy + dFrame, Const.GUILayer);
+      GL.Vertex3(px + dx, py + dy, Const.GUILayer);
+      GL.Vertex3(px + dx + dFrame, py + dy + dFrame, Const.GUILayer);
+      GL.End();
+    }
+    private void DrawSelectionTile(double px, double py, double dSize) {
+      double d = -(dSize / 2.0);
+      GL.Color3(1.0, 1.0, 1.0);
+      GL.Enable(EnableCap.Texture2D);
+      if (iSelectionTexID == -1) iSelectionTexID = Textures.GenerateSelectionTexture(); //Textures.GenerateHighlightTexture();
+      GL.Enable(EnableCap.Blend);
+      GL.BindTexture(TextureTarget.Texture2D, iSelectionTexID);
+      GL.Begin(BeginMode.Quads);
+      GL.TexCoord2(0.0, 0.0); GL.Vertex3(px + d, py + d, Const.DoodadLayer);
+      GL.TexCoord2(1.0, 0.0); GL.Vertex3(px + d, py + d + dSize, Const.DoodadLayer);
+      GL.TexCoord2(1.0, 1.0); GL.Vertex3(px + d + dSize, py + d + dSize, Const.DoodadLayer);
+      GL.TexCoord2(0.0, 1.0); GL.Vertex3(px + d + dSize, py + d, Const.DoodadLayer);
+      GL.End();
+      GL.Disable(EnableCap.Blend);
+      GL.Disable(EnableCap.Texture2D);
+    }
+
+    // Setup mouse-hover context menu
+    private void SetupContextMenu() {
+      if (gpSelect == null) gpSelect = new GUIPanel(this);
+      gpSelect.Reset();
+      gpSelect.ClickX = hoverx;
+      gpSelect.ClickY = hovery;
+      gpSelect.SetIconScale(0.7);
+      gpSelect.PanelX = (double)mx / (double)Size.X + 0.01;
+      gpSelect.PanelY = (double)my / (double)Size.Y + 0.01;
+      CheckHoverMission();
+
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) {
+        gpSelect.Deactivate();
+        return;
+      }
+      Soldier s = (Soldier)SelectedEntity;
+      if (s.GoTo != Point.Empty) return;
+      if (hoverx < 0 || hoverx >= CurrentLevel.Width || hovery < 0 || hovery >= CurrentLevel.Height) {
+        gpSelect.Deactivate();
+        return;
+      }
+      // Open doors
+      if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.DoorHorizontal) {
+        bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
+        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
+        gpSelect.InsertIcon(I_OpenDoor, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+      }
+      if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.DoorVertical) {
+        bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
+        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
+        gpSelect.InsertIcon(I_OpenDoor, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+      }
+      // Close doors
+      if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.OpenDoorHorizontal && CurrentLevel.GetEntityAt(hoverx, hovery) == null) {
+        bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
+        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
+        gpSelect.InsertIcon(I_CloseDoor, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+      }
+      if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.OpenDoorVertical && CurrentLevel.GetEntityAt(hoverx, hovery) == null) {
+        bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
+        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
+        gpSelect.InsertIcon(I_CloseDoor, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+      }
+      // Passable square
+      if (Utils.IsPassable(CurrentLevel.Map[hoverx, hovery])) {
+        IEntity en = CurrentLevel.GetEntityAt(hoverx, hovery);
+        // Walk to this point
+        if (en == null) {
+          Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Walk);
+          bool bIsInRange = DistMap[hoverx, hovery] != -1;
+          gpSelect.InsertIcon(I_GoTo, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bIsInRange, null);
+        }
+        // Attack a creature
+        else if (en is Creature) {
+          Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+          bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
+          bool bEnabled = (bIsInRange && (s.Stamina >= s.AttackCost));
+          if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
+          gpSelect.InsertIcon(I_Attack, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEnabled, null);
+        }
+      }
+      // Click on self
+      if (hoverx == s.X && hovery == s.Y) {
+        bool bHasUtilityItems = s.HasUtilityItems();
+        Tuple<double, double> tpReuse = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
+        GUIPanel gpItems = null;
+        if (bHasUtilityItems) {
+          bool bEnabled = s.Stamina >= s.UseItemCost;
+          gpItems = new GUIPanel(this);
+          // Set up list of items
+          foreach (ItemType it in s.GetUtilityItems()) {
+            Tuple<double, double> tp2 = Textures.GetTexCoords(it);
+            IPanelItem ip = gpItems.InsertIcon(it.ItemID, iItemTexture, tp2.Item1, tp2.Item2, Textures.ItemTextureWidth, Textures.ItemTextureHeight, bEnabled, null);
+            if (it.ItemEffect != null && !it.ItemEffect.SingleUse) {
+              ip.SetOverlay(iMiscTexture, new Vector4d(tpReuse.Item1, tpReuse.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight), new Vector4d(0.7, 0.0, 0.3, 0.3));
+            }
+          }
+        }
+        Tuple<double, double> tpInv = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
+        gpSelect.InsertIcon(I_UseItem, iMiscTexture, tpInv.Item1, tpInv.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bHasUtilityItems, gpItems);
+      }
+      if (gpSelect.Count == 0) {
+        gpSelect.Deactivate();
+        return;
+      }
+      gpSelect.Activate();
+      // TODO glMapView.Invalidate();
+    }
+
+    #region ButtonHandlers
+    private void CentreView(IEntity ent) {
+      fMissionViewX = ent.X;
+      fMissionViewY = ent.Y;
+      // TODO glMapView.Invalidate();
+    }
+    private void CentreViewForceRedraw(IEntity ent) {
+      fMissionViewX = ent.X;
+      fMissionViewY = ent.Y;
+      // TODO glMapView.Invalidate();
+      ThisDispatcher.Invoke(() => { DrawMission(); });
+      //glMissionView_Paint(null, null);  // This line causes fun when called from a thread. Could probably do this with a dispatcher & lock?
+    }
+    private void ZoomToSoldier(GUIIconButton sender) {
+      if (bAIRunning) return;
+      Soldier s = sender.InternalData as Soldier;
+      if (s == null) throw new Exception("ZoomToSoldier: GUIIconButton did not have Soldier set as internal data");
+      SetSelectedEntity(s);
+      CentreView(s);
+    }
+    private void SelectedSoldierMove(GUIIconButton sender) {
+      if (bAIRunning) return;
+      Utils.Direction d = (Utils.Direction)sender.InternalData;
+      //if (d == null) throw new Exception("MoveSelectedSoldier: GUIIconButton did not have Direction set as internal data");
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
+      Soldier s = SelectedEntity as Soldier;
+      MoveSoldier(s, d);
+      CurrentAction = SoldierAction.None;
+      ActionItem = null;
+      if (s.PlayerTeam != null) { // Not dead
+        GenerateDistMap(SelectedEntity as Soldier);
+        GenerateDetectionMap();
+        CheckForTraps(s);
+      }
+      // TODO glMapView.Invalidate();
+    }
+    private void SelectedSoldierAttack(GUIIconButton sender) {
+      if (bAIRunning) return;
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
+      Soldier s = (Soldier)SelectedEntity;
+      GenerateTargetMap(s, s.AttackRange);
+      CurrentAction = SoldierAction.Attack;
+      if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
+        GenerateAoEMap(s.X, s.Y, s.EquippedWeapon.Type.Area);
+      }
+      // TODO glMapView.Invalidate();
+    }
+    private void SelectedSoldierUseItems(GUIIconButton sender) {
+      if (bAIRunning) return;
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
+      using (UseItem ui = new UseItem(SelectedEntity as Soldier)) {
+        ui.ShowDialog();
+        if (ui.ChosenItem != null) {
+          ActionItem = ui.ChosenItem.BaseType;
+          CurrentAction = SoldierAction.Item;
+          Soldier s = (Soldier)SelectedEntity;
+          GenerateTargetMap(s, ActionItem.ItemEffect.Range);
+          int sy = SelectedEntity.Y;
+          int sx = SelectedEntity.X;
+          GenerateAoEMap(sx, sy, ActionItem.ItemEffect.Radius);
+          // TODO glMapView.Invalidate();
+        }
+      }
+    }
+    private void SelectedSoldierInventory(GUIIconButton sender) {
+      if (bAIRunning) return;
+      if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
+      int sy = SelectedEntity.Y;
+      int sx = SelectedEntity.X;
+      Stash st = CurrentLevel.GetStashAtPoint(sx, sy);
+      if (st == null) st = new Stash(new Point(sx, sy));
+      EquipmentView eqv = new EquipmentView(SelectedEntity as Soldier, st);
+      eqv.ShowDialog();
+      CurrentLevel.ReplaceStashAtPosition(sx, sy, st);
+      // TODO glMapView.Invalidate();
+    }
+    private void SelectedSoldierSearch(GUIIconButton sender) {
+      if (bAIRunning) return;
+      if (SelectedEntity == null || !(SelectedEntity is Soldier s)) return;
+      if (s.Stamina < s.SearchCost) return;
+      List<string> lFound = s.PerformSearch(CurrentLevel);
+      if (lFound.Count == 0) msgBox.PopupMessage("Despite a thorough search, you found nothing");
+      else msgBox.PopupMessage(lFound);
+      GenerateDistMap(SelectedEntity as Soldier);
+      GenerateDetectionMap();
+      CurrentLevel.CalculatePlayerVisibility();
+      // TODO glMapView.Invalidate();
+    }
+    private async void EndTurn() {
+      if (bAIRunning) return;
+      foreach (Soldier s in CurrentLevel.Soldiers) {
+        if (s.GoTo != Point.Empty) return; // Can't end turn if soldiers are still moving
+      }
+
+      if (ThisMission.Soldiers.Count == 0) {
+        MissionOutcome = MissionResult.Defeat;
+        CeaseMission();
+      }
+
+      bAIRunning = true;
+      // TODO fileToolStripMenuItem.Enabled = false;
+
+      // Handle periodic effects not aimed at an entity e.g. burning floor, delayed-timer explosives
+      // TODO
+
+      // Reset stamina, do periodic effects etc.
+      List<Soldier> lSoldiers = new List<Soldier>(ThisMission.Soldiers); // In case one dies
+      foreach (Soldier s in lSoldiers) {
+        await Task.Run(() => s.EndOfTurn(AddNewEffect, CentreViewForceRedraw, PlaySoundThreaded, AnnounceMessage));
+        if (s.PlayerTeam == null && SelectedEntity == s) SelectedEntity = null;
+      }
+
+      // Creature AI
+      await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage));
+
+      // All done
+      if (SelectedEntity != null && SelectedEntity is Soldier se && se.PlayerTeam == null) SelectedEntity = null;
+      GenerateDistMap(SelectedEntity as Soldier);
+      GenerateDetectionMap();
+      if (SelectedEntity != null) SelectedEntity.UpdateVisibility(CurrentLevel);
+      CurrentLevel.CalculatePlayerVisibility();
+      // TODO glMapView.Invalidate();
+      bAIRunning = false;
+      // TODO fileToolStripMenuItem.Enabled = true;
+      Const.dtTime.AddSeconds(10);
+    }
+    private void PlaySoundThreaded(string strSound) {
+      ThisDispatcher.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
+      //ThisDispatcher.Invoke(() => { SoundEffects.PlaySound(strSound); });
+    }
+    private void AnnounceMessage(string strMsg) {
+      ThisDispatcher.Invoke(() => { msgBox.PopupMessage(strMsg); });
+    }
+    private void PostMoveCheck(IEntity en) {
+      // Stuff we need to check after a creature moves
+      GenerateDetectionMap();
+      foreach (Soldier s in CurrentLevel.Soldiers) {
+        if (UpdateDetectionForSoldier(s)) {
+          AnnounceMessage(s.Name + " has been detected by the enemy!");
+        }
+      }
+    }
+    private void Transition() {
+      if (bAIRunning) return;
+      int oldlev = ThisMission.CurrentLevel;
+      int newlev = oldlev;
+      // Check if we're going up or down, or exiting
+      if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
+        newlev--;
+      }
+      else if (CurrentLevel.CheckAllSoldiersAtExit()) {
+        newlev++;
+      }
+      else return;
+
+      // Leave the dungeon?
+      if (newlev == -1) {
+        MissionOutcome = MissionResult.Evacuated;
+        CeaseMission();
+        return;
+      }
+      if (newlev >= ThisMission.LevelCount) throw new Exception("Attempting to transition to illegal level");
+      CurrentLevel.RemoveAllSoldiers();
+      ThisMission.SetCurrentLevel(newlev);
+      CurrentLevel = ThisMission.GetOrCreateCurrentLevel();
+
+      // Redim the various maps
+      TargetMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+      DistMap = new int[CurrentLevel.Width, CurrentLevel.Height];
+      AoEMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+      DetectionMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+
+      // Update all soldiers
+      foreach (Soldier s in ThisMission.Soldiers) {
+        if (newlev > oldlev) CurrentLevel.AddSoldier(s);
+        else CurrentLevel.AddSoldierAtExit(s);
+        UpdateLevelAfterSoldierMove(s);
+      }
+      CentreView(ThisMission.Soldiers[0]);
+      // TODO glMapView.Invalidate();
+    }
+    private void EndMission() {
+      if (bAIRunning) return;
+      if (CurrentLevel.AlertedEnemies) {
+        msgBox.PopupMessage("You cannot leave this mission\nThere are enemies alerted to your presence");
+        return;
+      }
+      if (ThisMission.Type == Mission.MissionType.RepelBoarders) {
+        msgBox.PopupConfirmation("Deactivate ship defence systems and return to your posts?", EndMission_Victory);
+      }
+      else {
+        msgBox.PopupConfirmation("Leave this mission and return to the ship?", EndMission_Victory);
+      }
+    }
+    private void EndMission_Victory() {
+      MissionOutcome = MissionResult.Victory;
+      CeaseMission();
+    }
+    #endregion //  ButtonHandlers
+
+    // Generate maps for overlays
+    private void SetSelectedEntity(IEntity en) {
+      SelectedEntity = en;
+      GenerateDetectionMap();
+      if (en != null && en is Soldier s) {
+        GenerateDistMap(s);
+      }
+    }
+    private void GenerateTargetMap(Soldier s, double range) {
+      // Check every square
+      for (int y = 0; y < CurrentLevel.Height; y++) {
+        for (int x = 0; x < CurrentLevel.Width; x++) {
+          if (!Utils.IsPassable(CurrentLevel.Map[x, y])) {
+            TargetMap[x, y] = false;
+          }
+          else {
+            TargetMap[x, y] = s.CanSee(x, y);
+            if (TargetMap[x, y]) {
+              // Check range
+              double r2 = (x - s.X) * (x - s.X) + (y - s.Y) * (y - s.Y);
+              TargetMap[x, y] = (r2 <= (range * range));
+            }
+          }
+        }
+      }
+    }
+    private void GenerateAoEMap(int px, int py, double range, int ox = -1, int oy = -1) {
+      int startx = 0, starty = 0, endx = CurrentLevel.Width - 1, endy = CurrentLevel.Height - 1;
+      // Check every square
+      if (ox >= 0 && oy >= 0) {
+        startx = (int)Math.Max(Math.Min(ox, px) - range, 0);
+        starty = (int)Math.Max(Math.Min(oy, py) - range, 0);
+        endx = (int)Math.Min(Math.Max(ox, px) + range, CurrentLevel.Width - 1);
+        endy = (int)Math.Min(Math.Max(oy, py) + range, CurrentLevel.Height - 1);
+      }
+      for (int y = starty; y <= endy; y++) {
+        for (int x = startx; x <= endx; x++) {
+          if (!Utils.IsPassable(CurrentLevel.Map[x, y])) {
+            AoEMap[x, y] = false;
+          }
+          else {
+            double r2 = (x - px) * (x - px) + (y - py) * (y - py);
+            AoEMap[x, y] = (r2 <= (range * range));
+          }
+        }
+      }
+      AoERadius = (int)Math.Ceiling(range);
+    }
+    private void GenerateDistMap(Soldier s) {
+      if (s == null) return;
+      for (int y = 0; y < CurrentLevel.Height; y++) {
+        for (int x = 0; x < CurrentLevel.Width; x++) {
+          DistMap[x, y] = -1;
+        }
+      }
+      int maxdist = s.TravelRange;
+      DistMap[s.X, s.Y] = 0;
+      if (s.X > 0) FloodFillDist(s.X - 1, s.Y, 1, maxdist);
+      if (s.X < CurrentLevel.Width - 1) FloodFillDist(s.X + 1, s.Y, 1, maxdist);
+      if (s.Y > 0) FloodFillDist(s.X, s.Y - 1, 1, maxdist);
+      if (s.Y < CurrentLevel.Height - 1) FloodFillDist(s.X, s.Y + 1, 1, maxdist);
+    }
+    private void FloodFillDist(int x, int y, int dist, int maxdist) {
+      if (!CurrentLevel.Explored[x, y]) return;
+      if (!Utils.IsPassable(CurrentLevel.Map[x, y])) return;
+      if (CurrentLevel.GetEntityAt(x, y) != null) return;
+      Trap tr = CurrentLevel.GetTrapAtPoint(x, y);
+      if (tr != null && !tr.Hidden) return;
+      if (dist > maxdist) return;
+      DistMap[x, y] = dist;
+      if (dist == maxdist) return;
+      if (x > 0 && (DistMap[x - 1, y] == -1 || DistMap[x - 1, y] > dist)) FloodFillDist(x - 1, y, dist + 1, maxdist);
+      if (x < CurrentLevel.Width - 1 && (DistMap[x + 1, y] == -1 || DistMap[x + 1, y] > dist)) FloodFillDist(x + 1, y, dist + 1, maxdist);
+      if (y > 0 && (DistMap[x, y - 1] == -1 || DistMap[x, y - 1] > dist)) FloodFillDist(x, y - 1, dist + 1, maxdist);
+      if (y < CurrentLevel.Height - 1 && (DistMap[x, y + 1] == -1 || DistMap[x, y + 1] > dist)) FloodFillDist(x, y + 1, dist + 1, maxdist);
+    }
+    private void GenerateDetectionMap() {
+      // Clear the grid
+      for (int y = 0; y < CurrentLevel.Height; y++) {
+        for (int x = 0; x < CurrentLevel.Width; x++) {
+          DetectionMap[x, y] = false;
+        }
+      }
+      Soldier s = SelectedEntity as Soldier;
+      if (s == null) return;
+
+      // Check every nearby entity
+      foreach (Creature cr in CurrentLevel.Creatures) {
+        if (!cr.IsAlert && (CurrentLevel.Visible[cr.X, cr.Y] || Const.DEBUG_VISIBLE_ALL)) {
+          double range = cr.SoldierVisibilityRange(s);
+          for (int y = Math.Max(0, (int)Math.Floor(cr.Y - range)); y <= Math.Min(CurrentLevel.Height - 1, (int)Math.Ceiling(cr.Y + range)); y++) {
+            for (int x = Math.Max(0, (int)Math.Floor(cr.X - range)); x <= Math.Min(CurrentLevel.Width - 1, (int)Math.Ceiling(cr.X + range)); x++) {
+              if (Utils.IsPassable(CurrentLevel.Map[x, y]) && !DetectionMap[x, y]) {
+                // Check range
+                double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
+                if (r2 <= (range * range)) { // Check range properly
+                  DetectionMap[x, y] |= cr.CanSee(x, y);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // External event handlers
+    public void KillSoldierOnView(Soldier s) {
+      SetupZoomToButtons();
+      if (SelectedEntity == s) SelectedEntity = null;
+    }
+  }
+}

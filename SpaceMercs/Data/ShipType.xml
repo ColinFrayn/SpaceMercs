@@ -1,0 +1,82 @@
+﻿<Data>
+  <!-- Rooms for a ship -->
+  <ShipType Name="Shuttle">
+    <AKA>Wildcat</AKA>
+    <Small>4</Small>
+    <Medium>0</Medium>
+    <Large>0</Large>
+    <Weapon>1</Weapon>
+    <Cost>50</Cost>
+    <Desc>A small shuttle for travel betweena planet and its moons</Desc>
+  </ShipType>
+  <ShipType Name="Transport">
+    <AKA>Lynx</AKA>
+    <Small>4</Small>
+    <Medium>1</Medium>
+    <Large>0</Large>
+    <Weapon>1</Weapon>
+    <Cost>450</Cost>
+    <Desc>A small-medium transport ship, useful for travelling within a single system, or small interplanetary hops</Desc>
+  </ShipType>
+  <ShipType Name="Light Freighter">
+    <Small>6</Small>
+    <Medium>2</Medium>
+    <Large>1</Large>
+    <Weapon>1</Weapon>
+    <Cost>2000</Cost>
+    <Desc>A small-medium transport ship</Desc>
+  </ShipType>
+  <ShipType Name="Medium Freighter">
+    <AKA>Cougar</AKA>
+    <Small>8</Small>
+    <Medium>4</Medium>
+    <Large>2</Large>
+    <Weapon>2</Weapon>
+    <Cost>9500</Cost>
+    <Desc>A mid-sized transport ship ship</Desc>
+  </ShipType>
+  <ShipType Name="Heavy Freighter">
+    <AKA>Panther</AKA>
+    <Small>10</Small>
+    <Medium>5</Medium>
+    <Large>3</Large>
+    <Weapon>2</Weapon>
+    <Cost>20000</Cost>
+    <Desc>The largest transport ship</Desc>
+  </ShipType>
+  <ShipType Name="Corvette">
+    <Small>4</Small>
+    <Medium>1</Medium>
+    <Large>0</Large>
+    <Weapon>2</Weapon>
+    <Cost>700</Cost>
+    <Desc>A small-medium military ship</Desc>
+  </ShipType>
+  <ShipType Name="Light Cruiser">
+    <AKA>Leopard</AKA>
+    <Small>6</Small>
+    <Medium>3</Medium>
+    <Large>1</Large>
+    <Weapon>2</Weapon>
+    <Cost>3500</Cost>
+    <Desc>The small-medium military ship</Desc>
+  </ShipType>
+  <ShipType Name="Medium Cruiser">
+    <AKA>Tiger</AKA>
+    <Small>6</Small>
+    <Medium>4</Medium>
+    <Large>2</Large>
+    <Weapon>3</Weapon>
+    <Cost>9500</Cost>
+    <Desc>The middle-sized military ship</Desc>
+  </ShipType>
+  <ShipType Name="Heavy Cruiser">
+    <AKA>Lion</AKA>
+    <Small>7</Small>
+    <Medium>4</Medium>
+    <Large>2</Large>
+    <Weapon>4</Weapon>
+    <Cost>22000</Cost>
+    <Desc>The biggest military ship</Desc>
+  </ShipType>
+</Data>

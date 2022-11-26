@@ -1,0 +1,111 @@
+-------------------------------------------------
+ToDo List
+-------------------------------------------------
+
+Learn modern OpenGL : https://www.youtube.com/watch?v=HY093mB44zU
+
+Write Menu control & add menu back to MapView
+
+Update text display to use SharpFont - Graphics.FreeTypeFont? GUIObjects.TextLabel
+
+Remove all MessageBoxes
+
+==========================================================================================================
+
+-----------------------
+Done Since Last Release
+-----------------------
+
+Should not be able to target self or own team
+
+
+----------
+Backburner
+----------
+
+First Contact
+- Encounter a stranded/hostile vessel of a new alien race
+- Encounter creatures in a scanner mission e.g. "Ursalon Bandits"
+-- Maybe display in mission details as "Unknown Bandits"
+- Arriving at a planet with a colony of that race
+- If ship is alien but you haven't met that alien race then handle it differently
+-- Display as unknown
+
+Displaying colonies of other races: Are they visually distinct?
+
+Profile everything, especially AI
+
+Add graphics for more creature types
+- Or replace them with textures?
+
+MissionLevel.DisplayEntities : Concurrent access to Entities caused crash. Have wrapped in RO list to avoid this. Monitor stability.
+
+Need to do missions to gain favour with alien races first
+- Need a baseline rep before you can trade
+- Higher rep = better prices
+
+Check what happens when we found colonies in systems owned by other races (should worsen race relations and warn before)
+
+Add new trade routes automatically over time?
+- Connect based on size of colonies in systems and their separation
+
+Better soldier textures
+- Change texture based on race
+- Change texture based on equipment / weapons
+
+Bonus damage on weapons? Framework for this exists, but nothing adds bonus damage
+
+More things that need Sound Effects (Sounds from http://soundbible.com/)
+- Pick up all
+- Scavenge (All or single)
+- Hover on buttons in GUI?
+- Soldier death
+- Walking?
+
+ShipView: Show ship shields
+- Display ellipse, blended, before drawing the rooms (but after starfield)
+- Vary transparency based on shield strength
+
+Name planets/systems based on what the owning race's language sounds like
+
+Travel / ShipCombat:
+- Ships should move around a bit
+- Check if regen works (auto repair, regen plating)
+
+Change message boxes to be a graphical popup inside the main window (and pass through a "ReportMessage" Action<string> to all function calls)
+
+Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
+
+Research Functionality
+- Research higher tier weapons & armour ; Research bionics
+-- Rely on the appropriate skills
+-- How does this work?
+- Add a button for it?
+
+Add locked doors in dungeon maps?
+
+Add bionic implants? Salvageable from dead humanoids of higher level or manufactured in Medlab? Too complex?
+
+Display visual effect on creatures if they have shields
+- Textures.GenerateCreatureTexture()  (all types)
+-- Need to make textures specifically for each creature
+
+Add light sources for max. vision range? 
+
+Allow creatures to have multiple weapons (ranged and melee)?
+
+Allow creatures to enter stealth
+- Allow searching for them (modifying chance by the creature level or stealth score)
+
+Monitor savegame file size and reduce if necessary
+- Utils.RunLengthEncode(string str)
+- Utils.RunLengthDecode(string str)
+- Zip it up (gives 8-9x but makes it unreadable)
+
+Handle defeat:
+- ScanPlanet.RunMission -> Defeat
+- ColonyView.RunMission -> Defeat
+- Not necessarily dead, provided there's at least one soldier left in the current ship...
+- MapView.GameOver()
+
+Investigate Blockly for scripting soldiers?

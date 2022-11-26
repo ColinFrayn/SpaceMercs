@@ -1,0 +1,112 @@
+﻿<Data>
+  <CreatureType Name="Giant Lizard">
+    <LevelRange>1,10</LevelRange>
+    <Attack>10</Attack>
+    <Defence>10</Defence>
+    <Health>10</Health>
+    <Stamina>14</Stamina>
+    <Armour>10</Armour>
+    <BodyType>Lizard</BodyType>
+    <Col1>80, 60, 40</Col1>
+    <Col2>140, 115, 90</Col2>
+    <Col3>130, 105, 80</Col3>
+    <Desc>A large lizard with a think skin</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Sand Snake">
+    <Scale>0.9</Scale>
+    <LevelRange>1,10</LevelRange>
+    <Attack>12</Attack>
+    <Defence>12</Defence>
+    <Health>8</Health>
+    <Stamina>16</Stamina>
+    <Armour>10</Armour>
+    <BodyType>Snake</BodyType>
+    <Col1>200, 160, 0</Col1>
+    <Col2>240, 210, 60</Col2>
+    <Col3>220, 200, 30</Col3>
+    <Desc>A large snake with a vicious bite</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Giant Centipede">
+    <LevelRange>1,10</LevelRange>
+    <Attack>13</Attack>
+    <Defence>12</Defence>
+    <Health>10</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <BodyType>Centipede</BodyType>
+    <Col1>80, 60, 40</Col1>
+    <Col2>130, 105, 80</Col2>
+    <Col3>120, 95, 70</Col3>
+    <Desc>A large carnivorous centipede</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Giant Scorpion">
+    <Size>2</Size>
+    <LevelRange>2,12</LevelRange>
+    <Attack>14</Attack>
+    <Defence>11</Defence>
+    <Health>11</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <Col1>40, 30, 30</Col1>
+    <Col2>60, 60, 60</Col2>
+    <Col3>70, 70, 70</Col3>
+    <BodyType>Scorpion</BodyType>
+    <Desc>A large scorpion with a vicious stinger</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Giant Sand Beetle">
+    <Size>2</Size>
+    <LevelRange>2,12</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Health>12</Health>
+    <Stamina>16</Stamina>
+    <Armour>26</Armour>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <BodyType>Beetle</BodyType>
+    <Desc>A large armoured beetle with huge mandibles</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Sand Shark">
+    <Size>2</Size>
+    <LevelRange>6,15</LevelRange>
+    <Attack>19</Attack>
+    <Defence>13</Defence>
+    <Health>25</Health>
+    <Stamina>20</Stamina>
+    <Armour>34</Armour>
+    <BodyType>Dragon</BodyType>
+    <Col1>70, 50, 40</Col1>
+    <Col2>130, 90, 90</Col2>
+    <Col3>150, 100, 100</Col3>
+    <Desc>A large, armoured tunneling beast with a ferocious bite.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="2.0">Heavy Chitin</Item>
+    </Scavenge>
+    <Boss/>
+  </CreatureType>
+</Data>

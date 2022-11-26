@@ -1,0 +1,101 @@
+﻿<Data>
+  <!--Enemy creatures -->
+  <CreatureType Name="Smuggler">
+    <Scale>0.9</Scale>
+    <LevelRange>1,10</LevelRange>
+    <Attack>10</Attack>
+    <Defence>8</Defence>
+    <Armour>18</Armour>
+    <Health>10</Health>
+    <Stamina>14</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>180, 160, 140</Col2>
+    <Col3>200, 160, 120</Col3>
+    <Desc>A smuggler</Desc>
+    <Weapons>
+      <Weapon Weight="2">Shortblade</Weapon>
+      <Weapon Weight="3">Pistol</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Pirate">
+    <LevelRange>1,10</LevelRange>
+    <Attack>11</Attack>
+    <Defence>9</Defence>
+    <Armour>22</Armour>
+    <Health>12</Health>
+    <Stamina>16</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>200, 150, 140</Col2>
+    <Col3>200, 160, 120</Col3>
+    <Desc>A rank-and-file pirate</Desc>
+    <Weapons>
+      <Weapon Weight="2">Shortblade</Weapon>
+      <Weapon Weight="2">Shotgun</Weapon>
+      <Weapon Weight="3">Pistol</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mercenary">
+    <LevelRange>1,20</LevelRange>
+    <Attack>12</Attack>
+    <Defence>10</Defence>
+    <Armour>25</Armour>
+    <Health>14</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Col1>120, 120, 120</Col1>
+    <Col2>180, 160, 140</Col2>
+    <Col3>170, 170, 170</Col3>    
+    <Desc>A mercenary</Desc>
+    <Weapons>
+      <Weapon Weight="3">Shotgun</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Elite Pirate">
+    <Scale>1.05</Scale>
+    <LevelRange>1,15</LevelRange>
+    <Attack>13</Attack>
+    <Defence>11</Defence>
+    <Armour>26</Armour>
+    <Health>16</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>220, 150, 140</Col2>
+    <Col3>200, 160, 120</Col3>
+    <Desc>A tougher pirate</Desc>
+    <Weapons>
+      <Weapon Weight="1">Shotgun</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="1">Heavy Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Pirate Leader">
+    <Scale>1.1</Scale>
+    <LevelRange>4,18</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Armour>30</Armour>
+    <Health>20</Health>
+    <Stamina>20</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>240, 150, 140</Col2>
+    <Col3>200, 160, 120</Col3>
+    <Desc>A pirate leader</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Shotgun</Weapon>
+      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+</Data>
+

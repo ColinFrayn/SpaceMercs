@@ -1,0 +1,108 @@
+﻿<Data>
+  <CreatureType Name="Void Servant">
+    <LevelRange>8,16</LevelRange>
+    <Attack>13</Attack>
+    <Defence>11</Defence>
+    <Armour>22</Armour>
+    <Health>12</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <BodyType>VoidBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious creature from the void</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.6">Voidskin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Void Assassin">
+    <LevelRange>9,17</LevelRange>
+    <Attack>15</Attack>
+    <Defence>11</Defence>
+    <Armour>22</Armour>
+    <Health>13</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <BodyType>VoidBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious creature from the void</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.7">Voidskin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Void Flayer">
+    <LevelRange>9,17</LevelRange>
+    <Attack>16</Attack>
+    <Defence>11</Defence>
+    <Armour>22</Armour>
+    <Health>14</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <BodyType>VoidBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious creature from the void</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.7">Voidskin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Void Devourer">
+    <LevelRange>10,18</LevelRange>
+    <Size>2</Size>
+    <Attack>16</Attack>
+    <Defence>11</Defence>
+    <Armour>22</Armour>
+    <Health>16</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <BodyType>VoidBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious creature from the void</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Physical" Value="40"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.9">Voidskin</Item>
+    </Scavenge>
+  </CreatureType>
+</Data>
+

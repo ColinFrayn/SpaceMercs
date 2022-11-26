@@ -1,0 +1,82 @@
+﻿<Data>
+  <!--Enemy creatures -->
+  <!-- Possible locations: Rocky, Desert, Volcanic, Oceanic, Ice, Caves, Ships -->
+  <CreatureType Name="Trooper">
+    <LevelRange>1,15</LevelRange>
+    <Attack>12</Attack>
+    <Defence>10</Defence>
+    <Armour>22</Armour>
+    <Health>12</Health>
+    <Stamina>14</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A rank-and-file trooper</Desc>
+    <Weapons>
+      <Weapon Weight="1">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Elite Trooper">
+    <LevelRange>3,18</LevelRange>
+    <Attack>13</Attack>
+    <Defence>11</Defence>
+    <Armour>26</Armour>
+    <Health>16</Health>
+    <Stamina>16</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>An elite trooper</Desc>
+    <Weapons>
+      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2">Heavy Rifle</Weapon>
+      <Weapon Weight="2">Sniper Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Hero Trooper">
+    <Scale>1.05</Scale>
+    <LevelRange>5,22</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Armour>30</Armour>
+    <Health>20</Health>
+    <Stamina>18</Stamina>
+    <Shields>10</Shields>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A heroic soldier</Desc>
+    <Weapons>
+      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="1">Shortblade</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2">Heavy Rifle</Weapon>
+      <Weapon Weight="1">Sniper Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Commander">
+    <Scale>1.1</Scale>
+    <LevelRange>7,24</LevelRange>
+    <Attack>15</Attack>
+    <Defence>13</Defence>
+    <Armour>34</Armour>
+    <Health>25</Health>
+    <Stamina>20</Stamina>
+    <Shields>20</Shields>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A commanding officer</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="2">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+</Data>
+

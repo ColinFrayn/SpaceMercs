@@ -1,0 +1,57 @@
+﻿<Data>
+  <!-- Ship armour -->
+  <ShipArmour Name="Reinforced Plating">
+    <Cost>50</Cost>
+    <BaseArmour>10</BaseArmour>
+    <Desc>Standard plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>1,3</Tex>
+  </ShipArmour>
+  <ShipArmour Name="Monofilament Plating">
+    <Cost>120</Cost>
+    <BaseArmour>15</BaseArmour>
+    <Desc>Monofilament plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>2,3</Tex>
+  </ShipArmour>
+  <ShipArmour Name="Mithril Plating">
+    <Cost>400</Cost>
+    <BaseArmour>20</BaseArmour>
+    <Desc>Mithril plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>3,3</Tex>
+    <Race>Gokan</Race>
+  </ShipArmour>
+  <ShipArmour Name="Adamantium Plating">
+    <Cost>900</Cost>
+    <BaseArmour>25</BaseArmour>
+    <Desc>Adamantium plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>4,3</Tex>
+  </ShipArmour>
+  <ShipArmour Name="Adaptive Plating">
+    <Cost>1500</Cost>
+    <BaseArmour>20</BaseArmour>
+    <Heal>1</Heal>
+    <Desc>Adaptive plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>5,3</Tex>
+  </ShipArmour>
+  <ShipArmour Name="Regenerative Plating">
+    <Cost>2500</Cost>
+    <BaseArmour>20</BaseArmour>
+    <Heal>2</Heal>
+    <Desc>Regenerative plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>6,3</Tex>
+    <Race>Insectoid</Race>
+  </ShipArmour>
+  <ShipArmour Name="Chameleon Plating">
+    <Cost>2750</Cost>
+    <BaseArmour>15</BaseArmour>
+    <Defence>3</Defence>
+    <Desc>Adaptive plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>7,3</Tex>
+  </ShipArmour>
+</Data>

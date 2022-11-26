@@ -1,0 +1,89 @@
+﻿<Data>
+  <CreatureType Name="Ogre Scout">
+    <Size>2</Size>
+    <LevelRange>5,13</LevelRange>
+    <Attack>15</Attack>
+    <Defence>11</Defence>
+    <Health>18</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Armour>28</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Ogre Warrior">
+    <Size>2</Size>
+    <LevelRange>6,14</LevelRange>
+    <Attack>16</Attack>
+    <Defence>12</Defence>
+    <Health>20</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Armour>30</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Ogre Brute">
+    <Size>2</Size>
+    <LevelRange>6,14</LevelRange>
+    <Attack>17</Attack>
+    <Defence>12</Defence>
+    <Health>21</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Armour>30</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Club</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Ogre Elite">
+    <Size>2</Size>
+    <LevelRange>7,15</LevelRange>
+    <Attack>18</Attack>
+    <Defence>12</Defence>
+    <Health>20</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Armour>32</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Club</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Ogre Chief">
+    <Size>2</Size>
+    <LevelRange>8,16</LevelRange>
+    <Attack>19</Attack>
+    <Defence>13</Defence>
+    <Health>22</Health>
+    <Stamina>19</Stamina>
+    <Interact/>
+    <Armour>34</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Greatsword</Weapon>
+    </Weapons>
+    <Boss/>
+  </CreatureType>
+
+</Data>

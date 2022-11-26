@@ -1,0 +1,106 @@
+﻿<Data>
+  <CreatureType Name="Xenomorph">
+    <LevelRange>5,14</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Armour>22</Armour>
+    <Health>13</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>An Alien</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Xenomorph Soldier">
+    <Size>1</Size>
+    <Scale>1.2</Scale>
+    <LevelRange>6,15</LevelRange>
+    <Attack>17</Attack>
+    <Defence>14</Defence>
+    <Armour>28</Armour>
+    <Health>16</Health>
+    <Stamina>20</Stamina>
+    <Interact/>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large and more vicious Alien</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+      <Item Amount="0.1">Heavy Chitin</Item>
+      <Item Amount="0.1">Xenolite</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Xenomorph Scythebeast">
+    <Size>2</Size>
+    <LevelRange>7,16</LevelRange>
+    <Attack>19</Attack>
+    <Defence>14</Defence>
+    <Armour>30</Armour>
+    <Health>18</Health>
+    <Stamina>22</Stamina>
+    <Interact/>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large and more vicious Alien with twin blades for arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Xenoblades</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+      <Item Amount="0.1">Heavy Chitin</Item>
+      <Item Amount="0.1">Xenolite</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Xenomorph Queen">
+    <Size>2</Size>
+    <LevelRange>9,17</LevelRange>
+    <Attack>21</Attack>
+    <Defence>13</Defence>
+    <Armour>33</Armour>
+    <Health>32</Health>
+    <Stamina>24</Stamina>
+    <Interact/>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A huge xenomorph queen</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Xenoblades</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="1.5">Heavy Chitin</Item>
+      <Item Amount="2.0">Xenolite</Item>
+    </Scavenge>
+    <Boss/>
+  </CreatureType>
+</Data>
+

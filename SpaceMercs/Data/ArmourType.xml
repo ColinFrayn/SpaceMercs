@@ -1,0 +1,296 @@
+﻿<Data>
+  <!-- Armour types for Soldiers -->
+  <ArmourType Name="Cap">
+    <Mass>0.5</Mass>
+    <Cost>3</Cost>
+    <Rarity>3</Rarity>
+    <BaseArmour>2</BaseArmour>
+    <Location>Head</Location>
+    <Desc>A simple cap offering minimal protection</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Helmet">
+    <Mass>1.5</Mass>
+    <Cost>8</Cost>
+    <Rarity>5</Rarity>
+    <BaseArmour>4</BaseArmour>
+    <Location>Head</Location>
+    <Desc>A simple protective helmet</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Military Helmet">
+    <Mass>2.0</Mass>
+    <Cost>15</Cost>
+    <Rarity>9</Rarity>
+    <Attack>1</Attack>
+    <BaseArmour>5</BaseArmour>
+    <Location>Head</Location>
+    <Desc>A military spec helmet with HUD and slightly higher protection</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Stealth Helmet">
+    <Mass>1.5</Mass>
+    <Cost>30</Cost>
+    <Rarity>38</Rarity>
+    <Attack>1</Attack>
+    <BaseArmour>4</BaseArmour>
+    <Utility>
+      <Stealth>1</Stealth>
+    </Utility>
+    <Location>Head</Location>
+    <Desc>A military spec helmet with HUD and sensor arrays and stealth coating</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Chestplate">
+    <Mass>5.0</Mass>
+    <Cost>20</Cost>
+    <Rarity>15</Rarity>
+    <Agility>-2</Agility>
+    <BaseArmour>8</BaseArmour>
+    <Location>Chest</Location>
+    <Desc>A chestplate</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Arm Plating">
+    <Mass>2.0</Mass>
+    <Cost>14</Cost>
+    <Rarity>11</Rarity>
+    <Agility>-1</Agility>
+    <BaseArmour>4</BaseArmour>
+    <Location>Arms</Location>
+    <Desc>Plating for arms</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Powered Arm Plating">
+    <Mass>4.0</Mass>
+    <Cost>30</Cost>
+    <Rarity>17</Rarity>
+    <Agility>-1</Agility>
+    <Strength>1</Strength>
+    <BaseArmour>4</BaseArmour>
+    <Location>Arms</Location>
+    <Desc>Powered plating for arms</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Leg Plating">
+    <Mass>3.0</Mass>
+    <Cost>15</Cost>
+    <Rarity>13</Rarity>
+    <Agility>-2</Agility>
+    <BaseArmour>5</BaseArmour>
+    <Location>Legs</Location>
+    <Desc>Plating for legs</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Powered Leg Plating">
+    <Mass>5.0</Mass>
+    <Cost>32</Cost>
+    <Rarity>25</Rarity>
+    <Agility>-1</Agility>
+    <Strength>1</Strength>
+    <BaseArmour>5</BaseArmour>
+    <Location>Legs</Location>
+    <Desc>Powered plating for legs</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Full Armour">
+    <Mass>10.0</Mass>
+    <Cost>45</Cost>
+    <Rarity>25</Rarity>
+    <Agility>-5</Agility>
+    <BaseArmour>18</BaseArmour>
+    <Location>Chest,Arms,Legs</Location>
+    <Desc>A chestplate, arm plating and leg plating combined</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Shock Armour">
+    <Mass>8.0</Mass>
+    <Cost>65</Cost>
+    <Rarity>40</Rarity>
+    <Agility>-3</Agility>
+    <BaseArmour>15</BaseArmour>
+    <Location>Chest,Arms,Legs</Location>
+    <Desc>A lightweight, shielded chestplate, arm plating and leg plating combined</Desc>
+    <Shields>10</Shields>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Crystals" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Stealth Armour">
+    <Mass>6.0</Mass>
+    <Cost>50</Cost>
+    <Rarity>40</Rarity>
+    <Agility>-1</Agility>
+    <Utility>
+      <Stealth>2</Stealth>
+    </Utility>
+    <BaseArmour>12</BaseArmour>
+    <Location>Chest,Arms,Legs</Location>
+    <Desc>A lightweight chestplate, arm plating and leg plating combined, with stealth coating</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Aluminium" Amount="3"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Plate Boots">
+    <Mass>1.0</Mass>
+    <Cost>10</Cost>
+    <Rarity>8</Rarity>
+    <Agility>-1</Agility>
+    <BaseArmour>3</BaseArmour>
+    <Location>Feet</Location>
+    <Desc>Plate metal boots</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Stealth Boots">
+    <Mass>0.6</Mass>
+    <Cost>24</Cost>
+    <Rarity>36</Rarity>
+    <Utility>
+      <Stealth>1</Stealth>
+    </Utility>
+    <BaseArmour>2</BaseArmour>
+    <Location>Feet</Location>
+    <Desc>Lightweight plate boots with a stealth coating</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Plate Gauntlets">
+    <Mass>0.8</Mass>
+    <Cost>10</Cost>
+    <Rarity>8</Rarity>
+    <Agility>-1</Agility>
+    <BaseArmour>3</BaseArmour>
+    <Location>Hands</Location>
+    <Desc>Plate metal gauntlets</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Gloves">
+    <Mass>0.5</Mass>
+    <Cost>6</Cost>
+    <Rarity>5</Rarity>
+    <BaseArmour>1</BaseArmour>
+    <Location>Hands</Location>
+    <Desc>Thin, flexible gloves</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Powered Gauntlets">
+    <Mass>1.6</Mass>
+    <Cost>20</Cost>
+    <Rarity>18</Rarity>
+    <Agility>-1</Agility>
+    <Strength>1</Strength>
+    <Attack>1</Attack>
+    <BaseArmour>3</BaseArmour>
+    <Location>Hands</Location>
+    <Desc>Powered plate metal gauntlets</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Stealth Gauntlets">
+    <Mass>0.7</Mass>
+    <Cost>26</Cost>
+    <Rarity>36</Rarity>
+    <Utility>
+      <Stealth>1</Stealth>
+    </Utility>
+    <BaseArmour>2</BaseArmour>
+    <Location>Hands</Location>
+    <Desc>Lightweight plate gauntlets with a stealth coating</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Power Armour">
+    <Mass>30.0</Mass>
+    <Cost>160</Cost>
+    <Rarity>50</Rarity>
+    <Agility>-6</Agility>
+    <Strength>8</Strength>
+    <Attack>2</Attack>
+    <BaseArmour>28</BaseArmour>
+    <BonusArmour>
+      <Bonus Type="Fire" Amount="40"/>
+      <Bonus Type="Cold" Amount="40"/>
+    </BonusArmour>
+    <Location>Chest,Arms,Legs,Hands,Feet</Location>
+    <Desc>A powered full-body armour</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Shielded Power Armour">
+    <Mass>35.0</Mass>
+    <Cost>600</Cost>
+    <Rarity>70</Rarity>
+    <Agility>-6</Agility>
+    <Strength>8</Strength>
+    <Attack>2</Attack>
+    <BaseArmour>28</BaseArmour>
+    <Shields>20</Shields>
+    <BonusArmour>
+      <Bonus Type="Fire" Amount="40"/>
+      <Bonus Type="Cold" Amount="40"/>
+    </BonusArmour>
+    <Location>Chest,Arms,Legs,Hands,Feet</Location>
+    <Desc>A powered full-body armour with energy shields incorporated</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+    </Materials>
+  </ArmourType>
+</Data>

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMercs", "SpaceMercs\SpaceMercs.csproj", "{5941DD5B-37DA-42E3-A475-2B5A978E5059}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB9F990F-A016-4ED2-B3D9-562D855D9266}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5941DD5B-37DA-42E3-A475-2B5A978E5059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5941DD5B-37DA-42E3-A475-2B5A978E5059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5941DD5B-37DA-42E3-A475-2B5A978E5059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5941DD5B-37DA-42E3-A475-2B5A978E5059}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB0A5654-EE30-43CE-BBDA-42B0CF9EA391}
+	EndGlobalSection
+EndGlobal

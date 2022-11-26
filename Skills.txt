@@ -1,0 +1,13 @@
+Perception : Improves search range and search success chance
+Avoidance: Improves defence
+Medic: Improves healing
+Stealth: Reduces radius within which enemies will spot you
+Scavenging: Improves returns from scavenging corpses
+Sniper : Reduce range penalty of firing a gun, 10% per level
+
+Engineer: Manufacture items
+Gunsmith: Manufacture guns
+Bladesmith: Manufacture melee weapons
+Armoursmith: Manufacture armour
+
+Maximum of any skill = lvl 10

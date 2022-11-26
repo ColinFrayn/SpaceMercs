@@ -1,0 +1,75 @@
+﻿<Data>
+  <ShipEngine Name="Thrusters">
+    <!-- Maximum range, in LY -->
+    <Range>0.000001</Range>
+    <!-- Multiple of speed of light. Really this is a factor of how much fuel it would take to accelerate. -->
+    <Speed>0.00003</Speed>
+    <!-- Max Accel in m/s/s within systems -->
+    <Accel>4</Accel>
+    <Power>4</Power>
+    <Cost>0</Cost>
+    <Desc>Basic ion thrusters, for manoeuvering around a single planet or moon, but insufficient for interplanetary travel</Desc>
+    <Tex>1,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="Impulse Drive">
+    <Range>0.00005</Range>
+    <Speed>0.001</Speed>
+    <Accel>30</Accel>
+    <Cost>50</Cost>
+    <Power>6</Power>
+    <Desc>An impulse Drive, much faster than basic thrusters, but still insufficient for interstellar travel. Can carry out small inter-planetary hops.</Desc>
+    <Avail>MRCTE</Avail>
+    <Tex>2,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="Fusion Drive">
+    <Range>0.001</Range>
+    <Speed>0.1</Speed>
+    <Accel>50</Accel>
+    <Cost>200</Cost>
+    <Power>10</Power>
+    <Desc>A Fusion Drive, able to accelerate your craft to enormous speeds, making an entire solar system reachable with ease.</Desc>
+    <Avail>MRTE</Avail>
+    <Tex>3,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="NearLight Drive">
+    <Range>5</Range>
+    <Speed>0.99</Speed>
+    <Accel>100</Accel>
+    <Cost>500</Cost>
+    <Power>16</Power>
+    <Desc>A NearLight Drive, suitable for reaching the nearest stars.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>4,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="Hyperspace Drive">
+    <Range>8</Range>
+    <Speed>10</Speed>
+    <Accel>999999</Accel>
+    <Cost>2500</Cost>
+    <Power>24</Power>
+    <Desc>A Hyperspace Drive, able to traverse the distance between the stars extremely quickly.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>5,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="Subspace Drive">
+    <Range>12</Range>
+    <Speed>20</Speed>
+    <Accel>999999</Accel>
+    <Cost>6000</Cost>
+    <Power>30</Power>
+    <Desc>A Subspace Drive, slicing throught he space between dimensions to travel between systems at extraordinary speed</Desc>
+    <Avail>RE</Avail>
+    <Tex>6,4</Tex>
+  </ShipEngine>
+  <ShipEngine Name="Ethereal Drive">
+    <Range>11</Range>
+    <Speed>22</Speed>
+    <Accel>999999</Accel>
+    <Cost>7000</Cost>
+    <Power>30</Power>
+    <Desc>An Ethereal Drive, using an improvement on subspace technology to travel even faster.</Desc>
+    <Avail>RE</Avail>
+    <Tex>7,4</Tex>
+    <Race>Elithiri</Race>
+  </ShipEngine>
+</Data>

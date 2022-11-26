@@ -1,0 +1,63 @@
+﻿<Data>
+  <!-- Creature Groups Bootstrap File -->
+  <!-- Possible locations: Rocky, Desert, Volcanic, Oceanic, Ice, Caves, Ships -->
+  <CreatureGroup Name="Arachnids">
+    <Filename>Arachnids.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Cave</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Bandits">
+    <Filename>Bandits.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+    <Racial/>
+  </CreatureGroup>
+  <CreatureGroup Name="Bugs">
+    <Filename>Bugs.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Desert Creatures">
+    <Filename>DesertCreatures.xml</Filename>
+    <Locations>Desert</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Ogres">
+    <Filename>Ogres.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Pirates">
+    <Filename>Pirates.xml</Filename>
+    <Locations>Ship</Locations>
+    <Racial/>
+  </CreatureGroup>
+  <CreatureGroup Name="Rock Creatures">
+    <Filename>RockCreatures.xml</Filename>
+    <Locations>Rocky</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Shadow Beasts">
+    <Filename>ShadowBeasts.xml</Filename>
+    <Locations>Cave,Ship</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Slime Creatures">
+    <Filename>Slimes.xml</Filename>
+    <Locations>Oceanic,Cave,Ship</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Soldiers">
+    <Filename>Soldiers.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
+    <Racial MaxRelations="-2"/>
+  </CreatureGroup>
+  <CreatureGroup Name="Triffids">
+    <Filename>Triffids.xml</Filename>
+    <Locations>Oceanic,Cave,Ship</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Void Beasts">
+    <Filename>VoidBeasts.xml</Filename>
+    <Locations>Ship</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Volcanic Creatures">
+    <Filename>VolcanicCreatures.xml</Filename>
+    <Locations>Volcanic</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Xenomorphs">
+    <Filename>Xenomorphs.xml</Filename>
+    <Locations>Cave,Ship</Locations>
+  </CreatureGroup>
+</Data>

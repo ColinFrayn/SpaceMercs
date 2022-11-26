@@ -1,0 +1,64 @@
+﻿<Data>
+  <!-- Weapons for Ships -->
+  <ShipWeapon Name="Chain Gun">
+    <Cost>10</Cost>
+    <Power>1</Power>
+    <Attack>1</Attack>
+    <Range>5000</Range>
+    <Rate>1.0</Rate>
+    <Desc>A chain gun</Desc>
+    <Avail>MTCE</Avail>
+    <Tex>1,5</Tex>
+  </ShipWeapon>
+  <ShipWeapon Name="Rail Gun">
+    <Cost>75</Cost>
+    <Power>2</Power>
+    <Attack>3</Attack>
+    <Range>12000</Range>
+    <Rate>2.5</Rate>
+    <Desc>A rail gun</Desc>
+    <Avail>MTE</Avail>
+    <Tex>2,5</Tex>
+  </ShipWeapon>
+  <ShipWeapon Name="Slug Gun">
+    <Cost>50</Cost>
+    <Power>2</Power>
+    <Attack>2</Attack>
+    <Range>6000</Range>
+    <Rate>1.5</Rate>
+    <Desc>A slug gun</Desc>
+    <Avail>MTE</Avail>
+    <Tex>3,5</Tex>
+    <Race>Ogrish</Race>
+  </ShipWeapon>
+  <ShipWeapon Name="Laser Rifle">
+    <Cost>150</Cost>
+    <Power>3</Power>
+    <Attack>3</Attack>
+    <Range>10000</Range>
+    <Rate>1.3</Rate>
+    <Desc>A laser rifle</Desc>
+    <Avail>MTE</Avail>
+    <Tex>4,5</Tex>
+  </ShipWeapon>
+  <ShipWeapon Name="Proton Gun">
+    <Cost>250</Cost>
+    <Power>3</Power>
+    <Attack>4</Attack>
+    <Range>10000</Range>
+    <Rate>1.3</Rate>
+    <Desc>A proton gun</Desc>
+    <Avail>MTE</Avail>
+    <Tex>5,5</Tex>
+  </ShipWeapon>
+  <ShipWeapon Name="Plasma Cannon">
+    <Cost>350</Cost>
+    <Power>4</Power>
+    <Attack>5</Attack>
+    <Range>8000</Range>
+    <Rate>1.5</Rate>
+    <Desc>A plasma cannon</Desc>
+    <Avail>ME</Avail>
+    <Tex>6,5</Tex>
+  </ShipWeapon>
+</Data>
