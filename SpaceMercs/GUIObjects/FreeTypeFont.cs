@@ -1,5 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using SharpFont;
+using System.IO;
 using System.Reflection;
 
 namespace SpaceMercs {
@@ -12,23 +14,27 @@ namespace SpaceMercs {
   }
 
   public class FreeTypeFont {
-    Dictionary<uint, Character> _characters = new Dictionary<uint, Character>();
-    int _vao;
-    int _vbo;
+    private readonly Dictionary<uint, Character> _characters = new Dictionary<uint, Character>();
+    private readonly int _vao;
+    private readonly int _vbo;
 
     public FreeTypeFont(uint pixelheight) {
-      // initialize library
       Library lib = new Library();
+      //SharpFont.Face face = new SharpFont.Face(lib, "GUIObjects/FreeSans.ttf");
 
-      //Face face = new Face(lib, "FreeSans.ottf");
-
-      Assembly assembly = Assembly.GetExecutingAssembly();
+      Assembly assembly = this.GetType().GetTypeInfo().Assembly;
       //string[] names = assembly.GetManifestResourceNames();
-      Stream resource_stream = assembly.GetManifestResourceStream("OpenTK_example_5.Resource.FreeSans.ttf");
+      Stream? resource_stream = assembly.GetManifestResourceStream("SpaceMercs.GUIObjects.FreeSans.ttf");
+      if (resource_stream is null) {
+        throw new Exception("Unable to build resource stream");
+      }
       MemoryStream ms = new MemoryStream();
       resource_stream.CopyTo(ms);
-      SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0);
 
+      // Setup the new font face
+      SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0); // Unknown file format exception
+
+      // ?
       face.SetPixelSizes(0, pixelheight);
 
       // set 1 byte pixel alignment 
@@ -80,14 +86,14 @@ namespace SpaceMercs {
 
       float[] vquad =
       {
-            // x      y      u     v    
-                0.0f, -1.0f,   0.0f, 0.0f,
-                0.0f,  0.0f,   0.0f, 1.0f,
-                1.0f,  0.0f,   1.0f, 1.0f,
-                0.0f, -1.0f,   0.0f, 0.0f,
-                1.0f,  0.0f,   1.0f, 1.0f,
-                1.0f, -1.0f,   1.0f, 0.0f
-            };
+          // x   y      u     v    
+          0.0f, -1.0f,  0.0f, 0.0f,
+          0.0f,  0.0f,  0.0f, 1.0f,
+          1.0f,  0.0f,  1.0f, 1.0f,
+          0.0f, -1.0f,  0.0f, 0.0f,
+          1.0f,  0.0f,  1.0f, 1.0f,
+          1.0f, -1.0f,  1.0f, 0.0f
+      };
 
       // Create [Vertex Buffer Object](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object)
       _vbo = GL.GenBuffer();
@@ -107,7 +113,7 @@ namespace SpaceMercs {
       GL.BindVertexArray(0);
     }
 
-    public void RenderText(string text, float x, float y, float scale, Vector2 dir) {
+    public void RenderText(string text, float x, float y, float xScale, float yScale, Vector2 dir) {
       GL.ActiveTexture(TextureUnit.Texture0);
       GL.BindVertexArray(_vao);
 
@@ -117,18 +123,17 @@ namespace SpaceMercs {
 
       // Iterate through all characters
       float char_x = 0.0f;
-      foreach (var c in text) {
-        if (_characters.ContainsKey(c) == false)
-          continue;
+      foreach (char c in text) {
+        if (!_characters.ContainsKey(c)) continue;
         Character ch = _characters[c];
 
-        float w = ch.Size.X * scale;
-        float h = ch.Size.Y * scale;
-        float xrel = char_x + ch.Bearing.X * scale;
-        float yrel = (ch.Size.Y - ch.Bearing.Y) * scale;
+        float w = ch.Size.X * xScale;
+        float h = ch.Size.Y * yScale;
+        float xrel = char_x + ch.Bearing.X * xScale;
+        float yrel = (ch.Size.Y - ch.Bearing.Y) * yScale;
 
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        char_x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+        char_x += (ch.Advance >> 6) * xScale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 
         Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
         Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));

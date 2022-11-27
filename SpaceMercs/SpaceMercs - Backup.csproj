@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.7.5" />
-    <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" GeneratePathProperty="true" />
     <PackageReference Include="SharpFontCore" Version="0.1.1" />
     <PackageReference Include="SpaceWizards.SharpFont" Version="1.0.1" />
   </ItemGroup>
@@ -41,7 +40,7 @@
      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
    </Content>
  </ItemGroup>
-  
+ 
    <ItemGroup>
      <EmbeddedResource Include="GUIObjects\FreeSans.ttf">
        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -132,6 +131,9 @@
     </None>
     <None Update="Graphics\Bitmaps\MiscTextures.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="freetype6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\Bite.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

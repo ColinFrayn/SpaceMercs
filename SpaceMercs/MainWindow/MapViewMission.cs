@@ -869,7 +869,7 @@ namespace SpaceMercs.MainWindow {
       GL.DepthMask(true);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlAIRunning.Draw(TextLabel.Alignment.TopMiddle);
+      //tlAIRunning.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
     }
     private void ShowSelectedEntityDetails() {
@@ -888,13 +888,13 @@ namespace SpaceMercs.MainWindow {
       GL.Scale(0.04, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
       //tlSelect1.SetAlpha(Const.GUIAlpha);
-      tlSelect1.Draw(TextLabel.Alignment.TopRight);
+      //tlSelect1.Draw(TextLabel.Alignment.TopRight);
       GL.Translate(0.0, -0.92, 0.0);
       //tlSelect2.SetAlpha(Const.GUIAlpha);
-      tlSelect2.Draw(TextLabel.Alignment.TopRight);
+      //tlSelect2.Draw(TextLabel.Alignment.TopRight);
       GL.Translate(0.0, -0.92, 0.0);
       //tlSelect3.SetAlpha(Const.GUIAlpha);
-      tlSelect3.Draw(TextLabel.Alignment.TopRight);
+      //tlSelect3.Draw(TextLabel.Alignment.TopRight);
       GL.PopMatrix();
     }
     private void ShowSoldierPanels() {

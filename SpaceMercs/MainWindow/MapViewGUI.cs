@@ -38,7 +38,7 @@ namespace SpaceMercs.MainWindow {
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
       tlClock.UpdateText(Const.dtTime.ToString("F"));
-      tlClock.Draw(TextLabel.Alignment.TopLeft);
+      //tlClock.Draw(TextLabel.Alignment.TopLeft);
       GL.PopMatrix();
 
       // Draw stuff that's only visible when there's a game underway
@@ -50,8 +50,8 @@ namespace SpaceMercs.MainWindow {
         GL.Scale(0.04 / Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
         tlCash = new TextLabel(PlayerTeam.Cash.ToString("F2") + " credits");
-        tlCash.SetTextColor(Color.White);
-        tlCash.Draw(TextLabel.Alignment.TopRight);
+        tlCash.TextColour = Color.White;
+        //tlCash.Draw(TextLabel.Alignment.TopRight);
         GL.PopMatrix();
         // Toggles
         DrawToggles();
@@ -94,31 +94,31 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(dXMargin, dYStart, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel1.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel1.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel2.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel2.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap * 2.0, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel3.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel3.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap * 3.0, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel4.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel4.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap * 4.0, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel5.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel5.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
     }
 
@@ -128,7 +128,7 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlL.Draw(TextLabel.Alignment.CentreLeft);
+      //tlL.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
     }
 
@@ -138,7 +138,7 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlC.Draw(TextLabel.Alignment.CentreLeft);
+      //tlC.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
     }
 
@@ -148,31 +148,31 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlA.Draw(TextLabel.Alignment.CentreLeft);
+      //tlA.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 3, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlF.Draw(TextLabel.Alignment.CentreLeft);
+      //tlF.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 4, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlG.Draw(TextLabel.Alignment.CentreLeft);
+      //tlG.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 5, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlR.Draw(TextLabel.Alignment.CentreLeft);
+      //tlR.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 6, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlV.Draw(TextLabel.Alignment.CentreLeft);
+      //tlV.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
     }
 
@@ -280,7 +280,7 @@ namespace SpaceMercs.MainWindow {
       if (thHeight > 0.0) GL.Translate(0.0, yy - ySep, 0.0);
       else GL.Translate(0.0, yy - thHeight - ySep, 0.0);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlHover.Draw(TextLabel.Alignment.TopLeft, Math.Abs(thWidth), Math.Abs(thHeight));
+      //tlHover.Draw(TextLabel.Alignment.TopLeft, Math.Abs(thWidth), Math.Abs(thHeight));
       GL.PopMatrix();
     }
 
@@ -295,9 +295,9 @@ namespace SpaceMercs.MainWindow {
 
       // GUI text
       tlClock = new TextLabel(Const.dtTime.ToShortTimeString());
-      tlClock.SetTextColor(Color.White);
+      tlClock.TextColour = Color.White;
       tlCash = new TextLabel("");
-      tlCash.SetTextColor(Color.White);
+      //tlCash.SetTextColor(Color.White);
 
       // "View the colony at the current location" button
       gbViewColony = new GUIButton("Colony", this, OpenColonyViewDialog);
@@ -325,26 +325,26 @@ namespace SpaceMercs.MainWindow {
 
       // Options overlays
       tlA = new TextLabel("A");
-      if (bShowTradeRoutes) tlA.SetTextColor(Color.White);
-      else tlA.SetTextColor(Color.DimGray);
+      if (bShowTradeRoutes) tlA.TextColour = Color.White;
+      else tlA.TextColour = Color.DimGray;
       tlF = new TextLabel("F");
-      if (bShowFlags) tlF.SetTextColor(Color.White);
-      else tlF.SetTextColor(Color.DimGray);
+      if (bShowFlags) tlF.TextColour = Color.White;
+      else tlF.TextColour = Color.DimGray;
       tlG = new TextLabel("G");
-      if (bShowGridlines) tlG.SetTextColor(Color.White);
-      else tlG.SetTextColor(Color.DimGray);
+      if (bShowGridlines) tlG.TextColour = Color.White;
+      else tlG.TextColour = Color.DimGray;
       tlL = new TextLabel("L");
-      if (bShowLabels) tlL.SetTextColor(Color.White);
-      else tlL.SetTextColor(Color.DimGray);
+      if (bShowLabels) tlL.TextColour = Color.White;
+      else tlL.TextColour = Color.DimGray;
       tlR = new TextLabel("R");
-      if (bShowRangeCircles) tlR.SetTextColor(Color.White);
-      else tlR.SetTextColor(Color.DimGray);
+      if (bShowRangeCircles) tlR.TextColour = Color.White;
+      else tlR.TextColour = Color.DimGray;
       tlV = new TextLabel("V");
-      if (bFadeUnvisited) tlV.SetTextColor(Color.White);
-      else tlV.SetTextColor(Color.DimGray);
+      if (bFadeUnvisited) tlV.TextColour = Color.White;
+      else tlV.TextColour = Color.DimGray;
       tlC = new TextLabel("C");
-      if (bShowColonies) tlC.SetTextColor(Color.White);
-      else tlC.SetTextColor(Color.DimGray);
+      if (bShowColonies) tlC.TextColour = Color.White;
+      else tlC.TextColour = Color.DimGray;
     }
 
     // Dialog action handlers

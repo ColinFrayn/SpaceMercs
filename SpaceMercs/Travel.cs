@@ -130,7 +130,7 @@ namespace SpaceMercs {
       string strDist = Utils.PrintDistance(dDist);
       string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
       tlTravel = new TextLabel(strDist + " " + strTime);
-      tlTravel.SetTextColor(Color.White);
+      tlTravel.TextColour = Color.White;
       tlStatusL1 = new TextLabel("");
       tlStatusL2 = new TextLabel("");
       tlStatusR1 = new TextLabel("");
@@ -412,7 +412,7 @@ namespace SpaceMercs {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.05 / ParentView.Aspect, 0.05, 0.05);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlTravel.Draw(TextLabel.Alignment.TopMiddle);
+      //tlTravel.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
       GL.Enable(EnableCap.DepthTest);
       GL.DepthMask(true);
@@ -516,7 +516,7 @@ namespace SpaceMercs {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlStatusL1.Draw(TextLabel.Alignment.TopLeft);
+      //tlStatusL1.Draw(TextLabel.Alignment.TopLeft);
       GL.PopMatrix();
       if (PlayerTeam.PlayerShip.MaxShield > 0.0) {
         strStatus = Math.Round(PlayerTeam.PlayerShip.Shield, 1) + "/" + PlayerTeam.PlayerShip.MaxShield;
@@ -527,7 +527,7 @@ namespace SpaceMercs {
         GL.Color3(1.0, 1.0, 1.0);
         GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
-        tlStatusL2.Draw(TextLabel.Alignment.TopLeft);
+        //tlStatusL2.Draw(TextLabel.Alignment.TopLeft);
         GL.PopMatrix();
       }
 
@@ -541,7 +541,7 @@ namespace SpaceMercs {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlStatusR1.Draw(TextLabel.Alignment.TopRight);
+      //tlStatusR1.Draw(TextLabel.Alignment.TopRight);
       GL.PopMatrix();
       if (PlayerTeam.CurrentMission.ShipTarget.MaxShield > 0.0) {
         strStatus = Math.Round(PlayerTeam.CurrentMission.ShipTarget.Shield, 1) + "/" + PlayerTeam.CurrentMission.ShipTarget.MaxShield;
@@ -552,7 +552,7 @@ namespace SpaceMercs {
         GL.Color3(1.0, 1.0, 1.0);
         GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
-        tlStatusR2.Draw(TextLabel.Alignment.TopRight);
+        //tlStatusR2.Draw(TextLabel.Alignment.TopRight);
         GL.PopMatrix();
       }
 

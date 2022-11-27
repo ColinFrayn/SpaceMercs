@@ -124,7 +124,7 @@ namespace SpaceMercs.MainWindow
 
       vertexArray = new VertexArray(vertexBuffer);
 
-      shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderCode);
+      shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);
 
       // Set uniform for screen dimensions in vertex shader
       int[] viewport = new int[4];
@@ -321,26 +321,14 @@ namespace SpaceMercs.MainWindow
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
       // Display welcome message
-      GL.PushMatrix();
-      GL.Translate(0.5, 0.25, 0.1);
-      GL.Color3(1.0, 1.0, 1.0);
-      GL.PushMatrix();
-      GL.Scale(0.15 / Aspect, 0.15, 0.15);
-      GL.Rotate(180.0, Vector3d.UnitX);
-      if (tlWelcome1 == null) {
-        tlWelcome1 = new TextLabel("Welcome to SpaceMercs v" + Const.strVersion);
-        tlWelcome1.SetTextColor(Color.White);
-      }
-      if (tlWelcome2 == null) {
-        tlWelcome2 = new TextLabel("To start a new game, use the file menu");
-        tlWelcome2.SetTextColor(Color.White);
-      }
-      tlWelcome1.Draw(TextLabel.Alignment.TopMiddle);
+      tlWelcome1 = new TextLabel("Welcome to SpaceMercs v" + Const.strVersion);
+      tlWelcome1.TextColour = Color.White;
+      tlWelcome1.Draw(Size, TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
       GL.Translate(0.0, 0.3, 0.0);
       GL.Scale(0.07 / Aspect, 0.07, 0.07);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlWelcome2.Draw(TextLabel.Alignment.TopMiddle);
+      //tlWelcome2.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
     }
 
@@ -419,8 +407,8 @@ namespace SpaceMercs.MainWindow
           }
         }
         if (IsKeyPressed(Keys.L)) { // Toggle on/off showing labels for stars, planets & moons
-          if (bShowLabels) { bShowLabels = false; tlL.SetTextColor(Color.DimGray); }
-          else { bShowLabels = true; tlL.SetTextColor(Color.White); }
+          if (bShowLabels) { bShowLabels = false; tlL.TextColour = Color.DimGray; }
+          else { bShowLabels = true; tlL.TextColour = Color.White; }
         }
         if (IsKeyPressed(Keys.Escape)) { // Deselect
           if (aoSelected != null) aoSelected = null;
@@ -442,24 +430,24 @@ namespace SpaceMercs.MainWindow
     }
     private void GetKeyboardInput_MapView() {
       if (IsKeyPressed(Keys.G)) {  // Toggle on/off gridlines
-        if (bShowGridlines) { bShowGridlines = false; tlG.SetTextColor(Color.DimGray); }
-        else { bShowGridlines = true; tlG.SetTextColor(Color.White); }
+        if (bShowGridlines) { bShowGridlines = false; tlG.TextColour = Color.DimGray; }
+        else { bShowGridlines = true; tlG.TextColour = Color.White; }
       }
       if (IsKeyPressed(Keys.V)) {  // Toggle on/off fading of unvisited stars
-        if (bFadeUnvisited) { bFadeUnvisited = false; tlV.SetTextColor(Color.DimGray); }
-        else { bFadeUnvisited = true; tlV.SetTextColor(Color.White); }
+        if (bFadeUnvisited) { bFadeUnvisited = false; tlV.TextColour = Color.DimGray; }
+        else { bFadeUnvisited = true; tlV.TextColour = Color.White; }
       }
       if (IsKeyPressed(Keys.R)) {  // Toggle on/off range circles
-        if (bShowRangeCircles) { bShowRangeCircles = false; tlR.SetTextColor(Color.DimGray); }
-        else { bShowRangeCircles = true; tlR.SetTextColor(Color.White); }
+        if (bShowRangeCircles) { bShowRangeCircles = false; tlR.TextColour = Color.DimGray; }
+        else { bShowRangeCircles = true; tlR.TextColour = Color.White; }
       }
       if (IsKeyPressed(Keys.A)) {  // Toggle on/off trade routes
-        if (bShowTradeRoutes) { bShowTradeRoutes = false; tlA.SetTextColor(Color.DimGray); }
-        else { bShowTradeRoutes = true; tlA.SetTextColor(Color.White); }
+        if (bShowTradeRoutes) { bShowTradeRoutes = false; tlA.TextColour = Color.DimGray; }
+        else { bShowTradeRoutes = true; tlA.TextColour = Color.White; }
       }
       if (IsKeyPressed(Keys.F)) {  // Toggle on/off ownership flags
-        if (bShowFlags) { bShowFlags = false; tlF.SetTextColor(Color.DimGray); }
-        else { bShowFlags = true; tlF.SetTextColor(Color.White); }
+        if (bShowFlags) { bShowFlags = false; tlF.TextColour = Color.DimGray; }
+        else { bShowFlags = true; tlF.TextColour = Color.White; }
       }
       MapHover();
     }

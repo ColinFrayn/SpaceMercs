@@ -40,7 +40,7 @@ void main()
   vColour = aColour;
 }";
 
-    public static string PixelShaderCode = @"
+    public static string PixelShaderColour = @"
 #version 330 core
 
 in vec4 vColour;

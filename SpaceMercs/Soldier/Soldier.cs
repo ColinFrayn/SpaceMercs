@@ -96,7 +96,7 @@ namespace SpaceMercs {
         GL.Scale(lScale, lScale, lScale);
         if (Label == null) Label = new TextLabel();
         Label.UpdateText(Name);
-        Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
+        //Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
         GL.PopMatrix();
       }
       if (bStatBars) {
@@ -1301,26 +1301,26 @@ namespace SpaceMercs {
       if (EquippedWeapon != null) {
         if (tlWeapon == null) tlWeapon = new TextLabel();
         tlWeapon.UpdateText(EquippedWeapon.Type.Name);
-        tlWeapon.SetTextColor(Utils.LevelToColour(EquippedWeapon.Level));
+        tlWeapon.TextColour = Utils.LevelToColour(EquippedWeapon.Level);
       }
       GL.PushMatrix();
       const float TextScale = 0.02f;
       GL.Scale(TextScale, TextScale, TextScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlName.Draw(TextLabel.Alignment.TopLeft);
+      //tlName.Draw(TextLabel.Alignment.TopLeft);
       GL.Translate(0.0, -1.0, 0.0f);
-      tlDesc.Draw(TextLabel.Alignment.TopLeft);
+      //tlDesc.Draw(TextLabel.Alignment.TopLeft);
       if (EquippedWeapon != null) {
         GL.Translate(0.0, -1.0, 0.0f);
-        tlWeapon.Draw(TextLabel.Alignment.TopLeft);
+        //tlWeapon.Draw(TextLabel.Alignment.TopLeft);
       }
       GL.Translate(Const.GUIPanelWidth * 0.385 / TextScale, -1.0, 0.0f);
-      tlHP.Draw(TextLabel.Alignment.TopMiddle);
+      //tlHP.Draw(TextLabel.Alignment.TopMiddle);
       GL.Translate(0.0, -1.0, 0.0f);
-      tlStamina.Draw(TextLabel.Alignment.TopMiddle);
+      //tlStamina.Draw(TextLabel.Alignment.TopMiddle);
       if (MaxShields > 0) {
         GL.Translate(0.0, -1.0, 0.0f);
-        tlShields.Draw(TextLabel.Alignment.TopMiddle);
+        //tlShields.Draw(TextLabel.Alignment.TopMiddle);
       }
       GL.PopMatrix();
 

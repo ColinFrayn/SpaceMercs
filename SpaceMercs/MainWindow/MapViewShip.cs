@@ -37,7 +37,7 @@ namespace SpaceMercs.MainWindow {
       if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
       if (tlCash == null) {
         tlCash = new TextLabel(PlayerTeam.Cash.ToString("F2") + " credits");
-        tlCash.SetTextColor(Color.White);
+        tlCash.TextColour = Color.White;
       }
       if (tlHull == null) tlHull = new TextLabel("Hull");
       if (tlPower == null) tlPower = new TextLabel("Power");
@@ -223,7 +223,7 @@ namespace SpaceMercs.MainWindow {
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
       tlCash.UpdateText(PlayerTeam.Cash.ToString("F2") + " credits");
-      tlCash.Draw(TextLabel.Alignment.TopLeft);
+      //tlCash.Draw(TextLabel.Alignment.TopLeft);
       GL.PopMatrix();
 
       DrawHullCondition();
@@ -239,8 +239,9 @@ namespace SpaceMercs.MainWindow {
     private void SetupRoomHoverInfo() {
       if (tlHover == null) {
         tlHover = new TextLabel("...");
-        tlHover.SetBorder(1, Color.LightGray);
-        tlHover.SetBackgroundColor(Color.Black);
+        tlHover.Border = 1;
+        tlHover.BorderColour = Color.LightGray;
+        tlHover.BackgroundColour = Color.Black;
       }
       if (gpSelect.Active) {
         int ID = gpSelect.HoverID;
@@ -305,7 +306,7 @@ namespace SpaceMercs.MainWindow {
       if (thHeight > 0.0) GL.Translate(0.0, yy - ySep, 0.0);
       else GL.Translate(0.0, yy - thHeight - ySep, 0.0);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlHover.Draw(TextLabel.Alignment.BottomLeft, Math.Abs(thWidth), Math.Abs(thHeight));
+      //tlHover.Draw(TextLabel.Alignment.BottomLeft, Math.Abs(thWidth), Math.Abs(thHeight));
       GL.PopMatrix();
     }
 
@@ -444,7 +445,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlHull.Draw(TextLabel.Alignment.TopRight);
+      //tlHull.Draw(TextLabel.Alignment.TopRight);
       GL.PopMatrix();
 
       // Show the value
@@ -455,7 +456,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.03 / Aspect, 0.03, 0.03);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlHullValue.Draw(TextLabel.Alignment.TopMiddle);
+      //tlHullValue.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
     }
     private void DrawPowerBar() {
@@ -521,7 +522,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlPower.Draw(TextLabel.Alignment.TopRight);
+      //tlPower.Draw(TextLabel.Alignment.TopRight);
       GL.PopMatrix();
 
       // Show the value
@@ -532,7 +533,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.03 / Aspect, 0.03, 0.03);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlPowerValue.Draw(TextLabel.Alignment.TopMiddle);
+      //tlPowerValue.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
 
     }
@@ -548,25 +549,25 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(dXMargin, dYStart, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel1.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel1.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel2.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel2.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap * 2.0, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel3.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel3.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(dXMargin, dYStart + dYGap * 3.0, 0.1);
       GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSel4.Draw(TextLabel.Alignment.CentreLeft);
+      //tlSel4.Draw(TextLabel.Alignment.CentreLeft);
       GL.PopMatrix();
     }
 

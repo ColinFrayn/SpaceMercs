@@ -92,7 +92,7 @@ namespace SpaceMercs {
     }
     private void SetupBoxes(IEnumerable<string> lines) {
       tlText.UpdateTextFromList(lines);
-      tlText.SetTextAlign(TextLabel.TextAlign.Centre);
+      tlText.TextPos = TextLabel.TextAlign.Centre;
       BoxHeight = ButtonHeight + (ButtonBorder * 2) + TextH; // lines.Count() * 0.04;
       if (BoxHeight > 0.6) BoxHeight = 0.6;
       BoxX = (1.0 - MaxBoxWidth) / 2.0;
@@ -128,7 +128,7 @@ namespace SpaceMercs {
       GL.PushMatrix();
       GL.Translate(0.5, BoxY, 0.15);
       GL.Rotate(180.0, Vector3d.UnitX);    
-      tlText.Draw(TextLabel.Alignment.TopMiddle, TextW, TextH);
+      //tlText.Draw(TextLabel.Alignment.TopMiddle, TextW, TextH);
       GL.PopMatrix();
 
       // Draw the framework
@@ -166,8 +166,8 @@ namespace SpaceMercs {
       if (id == 1) GL.Translate(ButtonX + 0.015, ButtonY + 0.008, 0.25);
       else GL.Translate(ButtonX, ButtonY, 0.25);
       GL.Rotate(180.0, Vector3d.UnitX);
-      if (id == 1) tlButton1.Draw(TextLabel.Alignment.TopLeft, ButtonWidth * 0.55, ButtonHeight * 0.6);
-      else tlButton2.Draw(TextLabel.Alignment.TopLeft, ButtonWidth, ButtonHeight);
+      //if (id == 1) tlButton1.Draw(TextLabel.Alignment.TopLeft, ButtonWidth * 0.55, ButtonHeight * 0.6);
+      //else tlButton2.Draw(TextLabel.Alignment.TopLeft, ButtonWidth, ButtonHeight);
       GL.PopMatrix();
 
       // Draw the framework

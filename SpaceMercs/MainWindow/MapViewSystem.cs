@@ -82,7 +82,7 @@ namespace SpaceMercs.MainWindow {
       GL.PushMatrix();
       GL.Scale(0.6, 0.6, 0.6);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSystemName.Draw(TextLabel.Alignment.TopMiddle);
+      //tlSystemName.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(0.0, 0.5, 0.0);
@@ -90,15 +90,15 @@ namespace SpaceMercs.MainWindow {
       if (SystemStar.Owner == null) GL.Color3(0.5, 0.5, 0.5);
       else GL.Color3(SystemStar.Owner.Colour);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlSystemOwner.Draw(TextLabel.Alignment.TopMiddle);
+      //tlSystemOwner.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
       GL.PopMatrix();
     }
 
     private void GetKeyboardInput_SystemView() {
       if (IsKeyPressed(Keys.C)) {  // Toggle on/off colony icons
-        if (bShowColonies) { bShowColonies = false; tlC.SetTextColor(Color.DimGray); }
-        else { bShowColonies = true; tlC.SetTextColor(Color.White); }
+        if (bShowColonies) { bShowColonies = false; tlC.TextColour = Color.DimGray; }
+        else { bShowColonies = true; tlC.TextColour = Color.White; }
       }
       SystemHover();
     }

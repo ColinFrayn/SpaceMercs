@@ -79,7 +79,7 @@ namespace SpaceMercs {
         GL.Scale(lScale, lScale, lScale);
         if (Label == null) Label = new TextLabel();
         Label.UpdateText(Name);
-        Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
+        //Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
         GL.PopMatrix();
       }
       if (bStatBars) {

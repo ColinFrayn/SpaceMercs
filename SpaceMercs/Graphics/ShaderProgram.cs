@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using System.Collections.Immutable;
 
 namespace SpaceMercs.Graphics {
@@ -43,7 +44,9 @@ namespace SpaceMercs.Graphics {
       Attributes = CreateAttributeList();
     }
 
+
     // Internal builders / setup
+
     private static bool CompilePixelShader(string code, out int pixelShaderHandle, out string error) {
       pixelShaderHandle = GL.CreateShader(ShaderType.FragmentShader);
       GL.ShaderSource(pixelShaderHandle, code);
@@ -100,7 +103,8 @@ namespace SpaceMercs.Graphics {
       return attributes.ToImmutableDictionary();
     }
 
-    // Access
+
+    // Access / Set Uniforms and attributes
 
     public IReadOnlyDictionary<string, ShaderUniform> GetUniformList() {
       return new Dictionary<string, ShaderUniform>(Uniforms).ToImmutableDictionary();
@@ -111,9 +115,7 @@ namespace SpaceMercs.Graphics {
     }
 
     public void SetUniform(string name, float v1) {
-      if (!Uniforms.ContainsKey(name)) {
-        throw new ArgumentException($"Uniform was not found : {nameof(name)}");
-      }
+      VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.Float) {
         throw new ArgumentException($"Uniform was not of type Float : {nameof(name)}");
@@ -124,9 +126,7 @@ namespace SpaceMercs.Graphics {
     }
 
     public void SetUniform(string name, float v1, float v2) {
-      if (!Uniforms.ContainsKey(name)) {
-        throw new ArgumentException($"Uniform was not found : {nameof(name)}");
-      }
+      VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.FloatVec2) {
         throw new ArgumentException($"Uniform was not of type FloatVec2 : {nameof(name)}");
@@ -136,8 +136,36 @@ namespace SpaceMercs.Graphics {
       GL.UseProgram(0);
     }
 
+    public void SetUniform(string name, float v1, float v2, float v3) {
+      VerifyUniform(name);
+      ShaderUniform uniform = Uniforms[name];
+      if (uniform.Type != ActiveUniformType.FloatVec3) {
+        throw new ArgumentException($"Uniform was not of type Float-Vector3 : {nameof(name)}");
+      }
+      GL.UseProgram(ShaderProgramHandle);
+      GL.Uniform3(uniform.Location, v1, v2, v3);
+      GL.UseProgram(0);
+    }
 
-    // System
+    public void SetUniform(string name, Matrix4 m4) {
+      VerifyUniform(name);
+      ShaderUniform uniform = Uniforms[name];
+      if (uniform.Type != ActiveUniformType.FloatMat4) {
+        throw new ArgumentException($"Uniform was not of type Float-Matrix4 : {nameof(name)}");
+      }
+      GL.UseProgram(ShaderProgramHandle);
+      GL.UniformMatrix4(uniform.Location, false, ref m4);
+      GL.UseProgram(0);
+    }
+
+    private void VerifyUniform(string name) {
+      if (!Uniforms.ContainsKey(name)) {
+        throw new ArgumentException($"Uniform was not found : {nameof(name)}");
+      }
+    }
+
+    
+    // IDisposable
     ~ShaderProgram() {
       Dispose();
     }

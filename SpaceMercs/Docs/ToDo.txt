@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Update the TextLabel class
+Why are FreeType fonts not loading correctly?? And why does that other example project work just fine???
 
 Convert the welcome screen to use modern OpenGL
 

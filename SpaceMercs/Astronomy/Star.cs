@@ -184,7 +184,7 @@ namespace SpaceMercs {
       if (tlName == null) {
         tlName = new TextLabel(strName);
       }
-      tlName.Draw(TextLabel.Alignment.TopMiddle);
+      //tlName.Draw(TextLabel.Alignment.TopMiddle);
     }
 
     // Generate a star's details according to the required IMF etc.

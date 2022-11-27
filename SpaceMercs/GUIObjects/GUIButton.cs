@@ -64,7 +64,7 @@ namespace SpaceMercs {
       GL.PushMatrix();
       GL.Translate(ButtonX, ButtonY, 0.2);
       GL.Rotate(180.0, Vector3d.UnitX);    
-      tlText.Draw(TextLabel.Alignment.TopLeft,ButtonWidth,ButtonHeight);
+      //tlText.Draw(TextLabel.Alignment.TopLeft,ButtonWidth,ButtonHeight);
       GL.PopMatrix();
 
       // Set up stipple

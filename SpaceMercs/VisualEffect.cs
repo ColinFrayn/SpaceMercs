@@ -42,7 +42,7 @@ namespace SpaceMercs {
       if (tl == null) {
         double val = (double)data["Value"];
         tl = new TextLabel(val.ToString("N1"));
-        tl.SetTextColor(Color.Red);
+        tl.TextColour = Color.Red;
       }
       double dScale = lScale;
       if (mili < 400) dScale *= 0.8 + (mili / 600.0);
@@ -51,7 +51,7 @@ namespace SpaceMercs {
       GL.PushMatrix();
       GL.Translate(X, Y, Const.GUILayer);
       GL.Scale(dScale, dScale, dScale);
-      tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
+      //tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
       GL.PopMatrix();
       return false;
     }
@@ -61,7 +61,7 @@ namespace SpaceMercs {
       if (tl == null) {
         double val = (double)data["Value"];
         tl = new TextLabel(val.ToString("N1"));
-        tl.SetTextColor(System.Drawing.Color.Green);
+        tl.TextColour = Color.Green;
       }
       double dScale = lScale;
       if (mili < 400) dScale *= 0.8 + (mili / 600.0);
@@ -69,7 +69,7 @@ namespace SpaceMercs {
       GL.PushMatrix();
       GL.Translate(X, Y, Const.GUILayer);
       GL.Scale(dScale, dScale, dScale);
-      tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
+      //tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
       GL.PopMatrix();
       return false;
     }

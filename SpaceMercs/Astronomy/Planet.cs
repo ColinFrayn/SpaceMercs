@@ -133,8 +133,8 @@ namespace SpaceMercs {
       else GL.Translate(0.0, (DrawScale * 1.06) + 0.06, 0.0);
       GL.Scale(1.7, 1.7, 1.7);
       GL.Rotate(180.0, Vector3d.UnitX);
-      if ((ID & 1) == 0) tlName.Draw(TextLabel.Alignment.BottomMiddle);
-      else tlName.Draw(TextLabel.Alignment.TopMiddle);
+      //if ((ID & 1) == 0) tlName.Draw(TextLabel.Alignment.BottomMiddle);
+      //else tlName.Draw(TextLabel.Alignment.TopMiddle);
       GL.PopMatrix();
     }
 
@@ -400,7 +400,6 @@ namespace SpaceMercs {
     }
     public override void ClearData() {
       if (tlName != null) {
-        tlName.Dispose();
         tlName = null;
       }
       GL.DeleteTexture(iTexture);
