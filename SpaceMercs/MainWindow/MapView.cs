@@ -84,7 +84,7 @@ namespace SpaceMercs.MainWindow
       ThisDispatcher = Dispatcher.CurrentDispatcher;
       msgBox = new GUIMessageBox(this);
 
-      //SetupDemo(); // DEBUG
+      SetupDemo(); // DEBUG
 
       base.OnLoad();
     }
@@ -118,8 +118,7 @@ namespace SpaceMercs.MainWindow
 
       vertexBuffer = new VertexBuffer(VertexPos2DCol.VertexInfo, vertices.Length);
       vertexBuffer.SetData(vertices);
-      indexBuffer = new IndexBuffer(indices.Length);
-      indexBuffer.SetData(indices);
+      indexBuffer = new IndexBuffer(indices);
       vertexArray = new VertexArray(vertexBuffer);
       shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);
       shaderProgram.SetUniform("model", Matrix4.Identity);
@@ -218,8 +217,8 @@ namespace SpaceMercs.MainWindow
       PrepareScene();
 
       if (!GalaxyMap.bMapSetup) {
-        //RunDemo(); // DEBUG
-        DisplayWelcomeScreen();
+        RunDemo(); // DEBUG
+        //DisplayWelcomeScreen();
         SwapBuffers();
         return;
       }
@@ -315,7 +314,7 @@ namespace SpaceMercs.MainWindow
       tlWelcome1.TextColour = Color.White;
       tlWelcome1.Draw(Size, TextLabel.Alignment.TopMiddle);
 
-      // Add a label about "Start a new game"
+      // TODO: Add a label about "Start a new game"
     }
 
     // Set up the scene ready for rendering

@@ -9,27 +9,17 @@ namespace SpaceMercs.Graphics {
     public readonly int IndexBufferHandle;
     public readonly int IndexCount;
 
-    public IndexBuffer(int indexCount, bool isStatic = true) {
-      if (indexCount < MinIndexCount || indexCount > MaxIndexCount) {
-        throw new ArgumentOutOfRangeException(nameof(indexCount));
-      }
-      IndexCount = indexCount;
-      IndexBufferHandle = GL.GenBuffer();
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferHandle);
-      GL.BufferData(BufferTarget.ElementArrayBuffer, indexCount * sizeof(int), IntPtr.Zero, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0); // Unbind
-    }
-
-    public void SetData(int[] data) {
+    public IndexBuffer(int[] data, bool isStatic = true) {
       if (data is null) {
         throw new ArgumentNullException(nameof(data));
       }
-      if (data.Length != IndexCount) {
-        throw new ArgumentOutOfRangeException(nameof(data));
+      IndexCount = data.Length;
+      if (IndexCount < MinIndexCount || IndexCount > MaxIndexCount) {
+        throw new ArgumentOutOfRangeException(nameof(IndexCount));
       }
-
+      IndexBufferHandle = GL.GenBuffer();
       GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferHandle);
-      GL.BufferSubData(BufferTarget.ElementArrayBuffer, IntPtr.Zero, data.Length * sizeof(int), data);
+      GL.BufferData(BufferTarget.ElementArrayBuffer, IndexCount * sizeof(int), data, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
       GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0); // Unbind
     }
 

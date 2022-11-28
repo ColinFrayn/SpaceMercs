@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Convert IndexBuffer to accept inputs on creation
+
 Convert TextLabel:
 - Display correctly
 

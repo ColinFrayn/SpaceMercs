@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace SpaceMercs {
 
-  public struct Character {
+  public struct TexChar {
     public int TextureID { get; set; }
     public Vector2 Size { get; set; }
     public Vector2 Bearing { get; set; }
@@ -15,7 +15,7 @@ namespace SpaceMercs {
   }
 
   internal class FreeTypeFont {
-    private readonly Dictionary<uint, Character> _characters = new Dictionary<uint, Character>();
+    private readonly Dictionary<uint, TexChar> _characters = new Dictionary<uint, TexChar>();
     private readonly VertexBuffer vertexBuffer;
     private readonly IndexBuffer indexBuffer;
     private readonly VertexArray vertexArray;
@@ -70,7 +70,7 @@ namespace SpaceMercs {
           GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
 
           // add character
-          Character ch = new Character();
+          TexChar ch = new TexChar();
           ch.TextureID = texObj;
           ch.Size = new Vector2(bitmap.Width, bitmap.Rows);
           ch.Bearing = new Vector2(glyph.BitmapLeft, glyph.BitmapTop);
@@ -89,23 +89,17 @@ namespace SpaceMercs {
       // set default (4 byte) pixel alignment 
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
 
-      VertexPos2DTex[] vertices = new VertexPos2DTex[4];
-      int[] indices = new int[6];
-      vertices[0] = new VertexPos2DTex(new Vector2(0f, -1f), new Vector2(0f,0f));
-      vertices[1] = new VertexPos2DTex(new Vector2(0f, 0f), new Vector2(0f,1f));
-      vertices[2] = new VertexPos2DTex(new Vector2(1f, 0f), new Vector2(1f,1f));
-      vertices[3] = new VertexPos2DTex(new Vector2(1f, -1f), new Vector2(1f,0f));
-      indices[0] = 0;
-      indices[1] = 1;
-      indices[2] = 2;
-      indices[3] = 0;
-      indices[4] = 2;
-      indices[5] = 3;
+      VertexPos2DTex[] vertices = new VertexPos2DTex[] {
+        new VertexPos2DTex(new Vector2(0f, -1f), new Vector2(0f, 0f)),
+        new VertexPos2DTex(new Vector2(0f, 0.5f), new Vector2(0f, 1f)),
+        new VertexPos2DTex(new Vector2(1f, 0.5f), new Vector2(1f, 1f)),
+        new VertexPos2DTex(new Vector2(1f, -1f), new Vector2(1f, 0f))
+      };
+      int[] indices = new int[6] { 0, 1, 2, 0, 2, 3 };
 
       vertexBuffer = new VertexBuffer(VertexPos2DTex.VertexInfo, vertices.Length);
       vertexBuffer.SetData(vertices);
-      indexBuffer = new IndexBuffer(indices.Length);
-      indexBuffer.SetData(indices);
+      indexBuffer = new IndexBuffer(indices);
       vertexArray = new VertexArray(vertexBuffer);
     }
 
@@ -121,8 +115,8 @@ namespace SpaceMercs {
       // Iterate through all characters
       float char_x = 0.0f;
       foreach (char c in text) {
-        if (!_characters.ContainsKey(c)) continue;
-        Character ch = _characters[c];
+        TexChar ch = _characters['?']; // Unprintable character => ?
+        if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
 
         float w = ch.Size.X * xScale;
         float h = ch.Size.Y * yScale;
@@ -143,7 +137,6 @@ namespace SpaceMercs {
 
         // Render quad
         GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
-        break; // DEBUG
       }
 
       GL.BindVertexArray(0);

@@ -30,7 +30,7 @@ namespace SpaceMercs {
     private readonly List<string> strText;
 
     // SharpFont Settings
-    private static readonly FreeTypeFont _font;
+    private static readonly FreeTypeFont textLabelFont32;
     private static readonly string TextLabelVertexShader = @"
 #version 460
 uniform mat4 model;
@@ -70,7 +70,7 @@ void main()
       textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
       textLabelShaderProgram.SetUniform("model", Matrix4.Identity);
       GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
-      _font = new FreeTypeFont(32);
+      textLabelFont32 = new FreeTypeFont(32);
       GL.UseProgram(0);
     }
 
@@ -153,7 +153,7 @@ void main()
       textLabelShaderProgram.SetUniform("projection", projectionM);
       //textLabelShaderProgram.SetUniform("textColour", (float)TextColour.R / 255f, (float)TextColour.G / 255f, (float)TextColour.B / 255f);
       //_font.RenderText("This is sample text", xshift, yshift, (float)dXScale, (float)dYScale, new Vector2(1f, 0f));
-      _font.RenderText(textLabelShaderProgram, "This is sample text", 0.0f, 0.0f, 1f, 1f);
+      textLabelFont32.RenderText(textLabelShaderProgram, "This is sample text", 0.0f, 0.0f, 1f, 1f);
 
       //if (ali == Alignment.BottomLeft || ali == Alignment.BottomMiddle || ali == Alignment.BottomRight) yshift = -TextBitmap.Height;
       //if (ali == Alignment.CentreLeft || ali == Alignment.CentreMiddle || ali == Alignment.CentreRight) yshift = -TextBitmap.Height / 2;
