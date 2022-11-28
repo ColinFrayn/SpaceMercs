@@ -12,9 +12,8 @@ namespace SpaceMercs {
     private const double ButtonBorder = 0.01, ButtonSplit = 0.03;
     private const double MaxBoxHeight = 0.8, MaxBoxWidth = 0.8;
     private readonly double ButtonAlpha;
-    private readonly TextLabel tlText, tlButton1, tlButton2;
-    private double TextW { get { return Math.Min(tlText.Width / 1000.0, MaxBoxWidth); } }
-    private double TextH { get { return Math.Min(TextW * tlText.Height / tlText.Width, MaxBoxHeight - (ButtonHeight + ButtonBorder)); } }
+    //private double TextW { get { return Math.Min(tlText.Width / 1000.0, MaxBoxWidth); } }
+    //private double TextH { get { return Math.Min(TextW * tlText.Height / tlText.Width, MaxBoxHeight - (ButtonHeight + ButtonBorder)); } }
 
     private Action? OnClick = null;
     private Action<object>? OnClickObj = null;
@@ -35,9 +34,9 @@ namespace SpaceMercs {
       ButtonAlpha = 0.8f;
       Window = parentWindow;
       Active = false;
-      tlText = new TextLabel();
-      tlButton1 = new TextLabel("OK");
-      tlButton2 = new TextLabel("Cancel");
+      //tlText = new TextRenderer();
+      //tlButton1 = new TextRenderer("OK");
+      //tlButton2 = new TextRenderer("Cancel");
     }
 
     // Change the text to be shown on this button & update the texture. If it's the same then don't redo texture.
@@ -91,9 +90,9 @@ namespace SpaceMercs {
       Active = true;
     }
     private void SetupBoxes(IEnumerable<string> lines) {
-      tlText.UpdateTextFromList(lines);
-      tlText.TextPos = TextLabel.TextAlign.Centre;
-      BoxHeight = ButtonHeight + (ButtonBorder * 2) + TextH; // lines.Count() * 0.04;
+      //tlText.UpdateTextFromList(lines);
+      //tlText.TextPos = TextRenderer.TextAlign.Centre;
+      BoxHeight = ButtonHeight + (ButtonBorder * 2); // + TextH; // lines.Count() * 0.04;
       if (BoxHeight > 0.6) BoxHeight = 0.6;
       BoxX = (1.0 - MaxBoxWidth) / 2.0;
       BoxY = (1.0 - BoxHeight) / 2.0;

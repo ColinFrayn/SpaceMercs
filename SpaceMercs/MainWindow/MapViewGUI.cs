@@ -1,13 +1,14 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs.MainWindow {
   partial class MapView {
     private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-    private TextLabel tlSel1, tlSel2, tlSel3, tlSel4, tlSel5;
-    private TextLabel tlF, tlG, tlL, tlR, tlA, tlV, tlC;
-    private TextLabel tlHover, tlClock, tlCash, tlWelcome1, tlWelcome2;
+    //private TextRenderer tlSel1, tlSel2, tlSel3, tlSel4, tlSel5;
+    //private TextRenderer tlF, tlG, tlL, tlR, tlA, tlV, tlC;
+    //private TextRenderer tlHover, tlClock, tlCash, tlWelcome1, tlWelcome2;
     private readonly int iGUIHoverN = -1; // What is this??
     private static readonly double toggleY = 0.1, toggleX = 0.002, toggleStep = 0.03, toggleScale = 0.05;
     private static Matrix4 ortho_projection = Matrix4.CreateOrthographicOffCenter(0, 1, 1, 0, -1, 1);
@@ -37,8 +38,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlClock.UpdateText(Const.dtTime.ToString("F"));
-      //tlClock.Draw(TextLabel.Alignment.TopLeft);
+      TextRenderer.Draw(Const.dtTime.ToString("F"), Alignment.TopLeft);
       GL.PopMatrix();
 
       // Draw stuff that's only visible when there's a game underway
@@ -49,9 +49,7 @@ namespace SpaceMercs.MainWindow {
         GL.Color3(1.0, 1.0, 1.0);
         GL.Scale(0.04 / Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
-        tlCash = new TextLabel(PlayerTeam.Cash.ToString("F2") + " credits");
-        tlCash.TextColour = Color.White;
-        //tlCash.Draw(TextLabel.Alignment.TopRight);
+        TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopRight, Color.White);
         GL.PopMatrix();
         // Toggles
         DrawToggles();
@@ -128,7 +126,7 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlL.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("L", Alignment.CentreLeft, bShowLabels ? Color.White : Color.DimGray);
       GL.PopMatrix();
     }
 
@@ -138,7 +136,7 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlC.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("C", Alignment.CentreLeft, bShowColonies ? Color.White : Color.DimGray);
       GL.PopMatrix();
     }
 
@@ -148,31 +146,31 @@ namespace SpaceMercs.MainWindow {
       GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlA.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("A", Alignment.CentreLeft, bShowTradeRoutes ? Color.White : Color.DimGray);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 3, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlF.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("F", Alignment.CentreLeft, bShowFlags ? Color.White : Color.DimGray);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 4, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlG.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("G", Alignment.CentreLeft, bShowGridlines ? Color.White : Color.DimGray);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 5, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlR.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("R", Alignment.CentreLeft, bShowRangeCircles ? Color.White : Color.DimGray);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(toggleX, toggleY + toggleStep * 6, 0.1);
       GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlV.Draw(TextLabel.Alignment.CentreLeft);
+      TextRenderer.Draw("V", Alignment.CentreLeft, bFadeUnvisited ? Color.White : Color.DimGray);
       GL.PopMatrix();
     }
 
@@ -181,7 +179,6 @@ namespace SpaceMercs.MainWindow {
       bShowGUIHover = false;
       if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
       if (aoHover == null && iGUIHoverN == -1) return;
-      if (tlHover == null) tlHover = new TextLabel("...");
       bShowGUIHover = true;
       List<string> strHoverText = new List<string>();
 
@@ -233,20 +230,19 @@ namespace SpaceMercs.MainWindow {
         }
         lastAOHover = aoHover;
       }
-      if (strHoverText.Count > 0) {
-        tlHover.UpdateTextFromList(strHoverText);
-      }
+      //if (strHoverText.Count > 0) {
+      //  tlHover.UpdateTextFromList(strHoverText);
+      //}
     }
 
     // Draw the hover info when hovering over an object with "Alt" pressed
     private void DrawGUIHoverInfo() {
       if (!bShowGUIHover) return;
-      if (tlHover == null) return; // Should never happen, but just in case...
       // Draw the mouse hover text
       double xx = (double)mx / (double)Size.X;
       double yy = (double)my / (double)Size.Y;
       double thHeight = 0.06;
-      double thWidth = thHeight * (double)tlHover.Width / (double)tlHover.Height;
+      double thWidth = thHeight * 1.0; // (double)tlHover.Width / (double)tlHover.Height;
       double xSep = 0.01, ySep = 0.01;
       if (xx > 0.5) {
         thWidth = -thWidth;
@@ -286,19 +282,6 @@ namespace SpaceMercs.MainWindow {
 
     // Set up the various GUI elements of class GUIObject that need to be initialised
     private void SetupGUIElements() {
-      // Text writer for planet details
-      tlSel1 = new TextLabel();
-      tlSel2 = new TextLabel();
-      tlSel3 = new TextLabel();
-      tlSel4 = new TextLabel();
-      tlSel5 = new TextLabel();
-
-      // GUI text
-      tlClock = new TextLabel(Const.dtTime.ToShortTimeString());
-      tlClock.TextColour = Color.White;
-      tlCash = new TextLabel("");
-      //tlCash.SetTextColor(Color.White);
-
       // "View the colony at the current location" button
       gbViewColony = new GUIButton("Colony", this, OpenColonyViewDialog);
       gbViewColony.SetPosition(0.01, 0.07);
@@ -322,29 +305,6 @@ namespace SpaceMercs.MainWindow {
       gbScan.SetPosition(0.23, 0.07);
       gbScan.SetSize(0.065, 0.035);
       gbScan.SetBlend(false);
-
-      // Options overlays
-      tlA = new TextLabel("A");
-      if (bShowTradeRoutes) tlA.TextColour = Color.White;
-      else tlA.TextColour = Color.DimGray;
-      tlF = new TextLabel("F");
-      if (bShowFlags) tlF.TextColour = Color.White;
-      else tlF.TextColour = Color.DimGray;
-      tlG = new TextLabel("G");
-      if (bShowGridlines) tlG.TextColour = Color.White;
-      else tlG.TextColour = Color.DimGray;
-      tlL = new TextLabel("L");
-      if (bShowLabels) tlL.TextColour = Color.White;
-      else tlL.TextColour = Color.DimGray;
-      tlR = new TextLabel("R");
-      if (bShowRangeCircles) tlR.TextColour = Color.White;
-      else tlR.TextColour = Color.DimGray;
-      tlV = new TextLabel("V");
-      if (bFadeUnvisited) tlV.TextColour = Color.White;
-      else tlV.TextColour = Color.DimGray;
-      tlC = new TextLabel("C");
-      if (bShowColonies) tlC.TextColour = Color.White;
-      else tlC.TextColour = Color.DimGray;
     }
 
     // Dialog action handlers

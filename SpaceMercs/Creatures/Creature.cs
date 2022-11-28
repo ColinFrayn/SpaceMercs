@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
 
@@ -77,9 +78,7 @@ namespace SpaceMercs {
         GL.Translate(X + ((float)Type.Size / 2), Y - (0.015 * fViewHeight), Const.GUILayer);
         double lScale = fViewHeight / 50.0;
         GL.Scale(lScale, lScale, lScale);
-        if (Label == null) Label = new TextLabel();
-        Label.UpdateText(Name);
-        //Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
+        TextRenderer.Draw(Name, Alignment.BottomMiddle);
         GL.PopMatrix();
       }
       if (bStatBars) {
@@ -268,7 +267,6 @@ namespace SpaceMercs {
     private double MovementCost { get { return Type.MovementCost / SpeedModifier(); } }
     public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
     private readonly MissionLevel CurrentLevel;
-    private TextLabel Label;
     private readonly Random rnd = new Random();
     public int Experience {
       get {

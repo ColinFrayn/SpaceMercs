@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
 using System.Xml;
@@ -19,7 +20,6 @@ namespace SpaceMercs {
     private readonly MapView ParentView;
     private int EncounterCount = 0;
     private DateTime dtStart;
-    private TextLabel tlTravel, tlStatusL1, tlStatusL2, tlStatusR1, tlStatusR2;
     private readonly Random rand = new Random();
 
     private class Shot {
@@ -129,12 +129,6 @@ namespace SpaceMercs {
       dDist = AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo);
       string strDist = Utils.PrintDistance(dDist);
       string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
-      tlTravel = new TextLabel(strDist + " " + strTime);
-      tlTravel.TextColour = Color.White;
-      tlStatusL1 = new TextLabel("");
-      tlStatusL2 = new TextLabel("");
-      tlStatusR1 = new TextLabel("");
-      tlStatusR2 = new TextLabel("");
       clockTick = new Timer();
       clockTick.Tick += new EventHandler(ClockTickProcessor);
       clockTick.Interval = 250;
@@ -421,7 +415,7 @@ namespace SpaceMercs {
       // Set up the text
       string strDist = Utils.PrintDistance(AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo));
       string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
-      tlTravel.UpdateText(strDist + " " + strTime);
+      //tlTravel.UpdateText(strDist + " " + strTime);
 
       // Progress Bar
       double dFract = dElapsed / dTravelTime;
@@ -459,7 +453,7 @@ namespace SpaceMercs {
     private void DrawSalvage() {
       // Set up the text
       string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
-      tlTravel.UpdateText("Salvaging " + strTime);
+      //tlTravel.UpdateText("Salvaging " + strTime);
       // Progress Bar
       double dFract = dMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
       GL.Color3(1.0, 0.0, 0.0);
@@ -482,7 +476,7 @@ namespace SpaceMercs {
     private void DrawRepair() {
       // Set up the text
       string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
-      tlTravel.UpdateText("Repairing " + strTime);
+      //tlTravel.UpdateText("Repairing " + strTime);
       // Progress Bar
       double dFract = dMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
       GL.Color3(0.0, 0.0, 1.0);
@@ -503,56 +497,52 @@ namespace SpaceMercs {
       GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
     }
     private void DrawBattle() {
-      if (PlayerTeam.CurrentMission.RacialOpponent == null) tlTravel.UpdateText("Battle versus unidentified alien ship");
-      else tlTravel.UpdateText("Battle versus " + PlayerTeam.CurrentMission.RacialOpponent.Name + " ship");
+      //if (PlayerTeam.CurrentMission.RacialOpponent == null) tlTravel.UpdateText("Battle versus unidentified alien ship");
+      //else tlTravel.UpdateText("Battle versus " + PlayerTeam.CurrentMission.RacialOpponent.Name + " ship");
 
       // Setup and draw status text
       // Player Ship Stats:
       string strStatus = Math.Round(PlayerTeam.PlayerShip.Hull, 1) + "/" + Math.Round(PlayerTeam.PlayerShip.Type.MaxHull, 0);
-      tlStatusL1.UpdateText(strStatus);
       DrawFractBar(0.22, 0.35, 0.1, 0.02, PlayerTeam.PlayerShip.HullFract, Color.Green);
       GL.PushMatrix();
       GL.Translate(0.33, 0.34, 0.0);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlStatusL1.Draw(TextLabel.Alignment.TopLeft);
+      TextRenderer.Draw(strStatus, Alignment.TopLeft);
       GL.PopMatrix();
       if (PlayerTeam.PlayerShip.MaxShield > 0.0) {
         strStatus = Math.Round(PlayerTeam.PlayerShip.Shield, 1) + "/" + PlayerTeam.PlayerShip.MaxShield;
-        tlStatusL2.UpdateText(strStatus);
         DrawFractBar(0.22, 0.42, 0.1, 0.02, PlayerTeam.PlayerShip.ShieldFract, Color.Blue);
         GL.PushMatrix();
         GL.Translate(0.33, 0.41, 0.0);
         GL.Color3(1.0, 1.0, 1.0);
         GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
-        //tlStatusL2.Draw(TextLabel.Alignment.TopLeft);
+        TextRenderer.Draw(strStatus, Alignment.TopLeft);
         GL.PopMatrix();
       }
 
       // Enemy Ship Stats:
       double stHull = Math.Max(0.0, Math.Round(PlayerTeam.CurrentMission.ShipTarget.Hull, 1));
       strStatus = stHull + "/" + Math.Round(PlayerTeam.CurrentMission.ShipTarget.Type.MaxHull, 0);
-      tlStatusR1.UpdateText(strStatus);
       DrawFractBar(0.68, 0.35, 0.1, 0.02, PlayerTeam.CurrentMission.ShipTarget.HullFract, Color.Green);
       GL.PushMatrix();
       GL.Translate(0.67, 0.34, 0.0);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlStatusR1.Draw(TextLabel.Alignment.TopRight);
+      TextRenderer.Draw(strStatus, Alignment.TopLeft);
       GL.PopMatrix();
       if (PlayerTeam.CurrentMission.ShipTarget.MaxShield > 0.0) {
         strStatus = Math.Round(PlayerTeam.CurrentMission.ShipTarget.Shield, 1) + "/" + PlayerTeam.CurrentMission.ShipTarget.MaxShield;
-        tlStatusR2.UpdateText(strStatus);
         DrawFractBar(0.68, 0.42, 0.1, 0.02, PlayerTeam.CurrentMission.ShipTarget.ShieldFract, Color.Blue);
         GL.PushMatrix();
         GL.Translate(0.67, 0.41, 0.0);
         GL.Color3(1.0, 1.0, 1.0);
         GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
         GL.Rotate(180.0, Vector3d.UnitX);
-        //tlStatusR2.Draw(TextLabel.Alignment.TopRight);
+        TextRenderer.Draw(strStatus, Alignment.TopLeft);
         GL.PopMatrix();
       }
 

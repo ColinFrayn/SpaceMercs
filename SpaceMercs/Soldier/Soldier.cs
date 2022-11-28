@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics.Shapes;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -19,7 +20,6 @@ namespace SpaceMercs {
         return Name + "/" + Level + "/" + Race.Name + "/" + Gender + "/" + (BaseStrength ^ BaseAgility ^ BaseIntellect ^ BaseToughness ^ BaseEndurance);
       }
     }
-    private TextLabel Label;
     public Point GoTo { get; set; }
     public bool OnMission { get; set; }
     private readonly Random rnd;
@@ -94,9 +94,7 @@ namespace SpaceMercs {
         GL.Translate(X + 0.5, Y - (0.015 * fViewHeight), Const.GUILayer);
         double lScale = fViewHeight / 50.0;
         GL.Scale(lScale, lScale, lScale);
-        if (Label == null) Label = new TextLabel();
-        Label.UpdateText(Name);
-        //Label.DrawAt(TextLabel.Alignment.BottomMiddle, 0, 0);
+        TextRenderer.Draw(Name, Alignment.BottomMiddle);
         GL.PopMatrix();
       }
       if (bStatBars) {
@@ -440,7 +438,6 @@ namespace SpaceMercs {
     }
 
     // Display stuff
-    TextLabel tlName, tlDesc, tlHP, tlStamina, tlShields, tlWeapon;
     private bool bShieldsInTexture = false;
 
     // CTORs
@@ -1288,39 +1285,24 @@ namespace SpaceMercs {
       if (MaxShields > 0) GraphicsFunctions.DisplayFractBar(Color.FromArgb(255, 50, 100, 255), Color.FromArgb(255, 50, 50, 50), Const.GUIPanelWidth * 0.02f, TopBar + 0.04f, Const.GUIPanelWidth * 0.75f, 0.01f, Shields, MaxShields);
 
       // Text summary
-      if (tlName == null) tlName = new TextLabel();
-      tlName.UpdateText(Name);
-      if (tlDesc == null) tlDesc = new TextLabel();
-      tlDesc.UpdateText("Level " + Level + " " + Race.Name);
-      if (tlHP == null) tlHP = new TextLabel();
-      tlHP.UpdateText((int)Health + "/" + (int)MaxHealth);
-      if (tlStamina == null) tlStamina = new TextLabel();
-      tlStamina.UpdateText((int)Stamina + "/" + (int)MaxStamina);
-      if (tlShields == null) tlShields = new TextLabel();
-      tlShields.UpdateText((int)Shields + "/" + (int)MaxShields);
-      if (EquippedWeapon != null) {
-        if (tlWeapon == null) tlWeapon = new TextLabel();
-        tlWeapon.UpdateText(EquippedWeapon.Type.Name);
-        tlWeapon.TextColour = Utils.LevelToColour(EquippedWeapon.Level);
-      }
       GL.PushMatrix();
       const float TextScale = 0.02f;
       GL.Scale(TextScale, TextScale, TextScale);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlName.Draw(TextLabel.Alignment.TopLeft);
+      TextRenderer.Draw(Name, Alignment.TopLeft);
       GL.Translate(0.0, -1.0, 0.0f);
-      //tlDesc.Draw(TextLabel.Alignment.TopLeft);
+      TextRenderer.Draw("Level " + Level + " " + Race.Name, Alignment.TopLeft);
       if (EquippedWeapon != null) {
         GL.Translate(0.0, -1.0, 0.0f);
-        //tlWeapon.Draw(TextLabel.Alignment.TopLeft);
+        TextRenderer.Draw(EquippedWeapon.Type.Name, Alignment.TopLeft, Utils.LevelToColour(EquippedWeapon.Level));
       }
       GL.Translate(Const.GUIPanelWidth * 0.385 / TextScale, -1.0, 0.0f);
-      //tlHP.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw((int)Health + "/" + (int)MaxHealth, Alignment.TopMiddle);
       GL.Translate(0.0, -1.0, 0.0f);
-      //tlStamina.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw((int)Stamina + "/" + (int)MaxStamina, Alignment.TopMiddle);
       if (MaxShields > 0) {
         GL.Translate(0.0, -1.0, 0.0f);
-        //tlShields.Draw(TextLabel.Alignment.TopMiddle);
+        TextRenderer.Draw((int)Shields + "/" + (int)MaxShields, Alignment.TopMiddle);
       }
       GL.PopMatrix();
 

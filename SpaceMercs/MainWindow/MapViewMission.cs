@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Threading;
@@ -18,7 +19,6 @@ namespace SpaceMercs.MainWindow {
     private float fMissionViewX, fMissionViewY, fMissionViewZ;
     private int iStarfieldDL = -1;
     private int iSelectionTexID = -1;
-    private TextLabel tlSelect1, tlSelect2, tlSelect3, tlAIRunning;
     private GUIPanel gpSelect;
     private GUIIconButton gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4, gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
     private GUIButton gbEndTurn, gbTransition, gbEndMission;
@@ -854,7 +854,6 @@ namespace SpaceMercs.MainWindow {
       GL.Enable(EnableCap.DepthTest);
     }
     private void DisplayAILabel() {
-      if (tlAIRunning == null) tlAIRunning = new TextLabel("AI Running");
       GL.PushMatrix();
       GL.Translate(0.5, 0.02, Const.GUILayer);
       GL.Scale(0.06, 0.06, 0.04);
@@ -869,32 +868,27 @@ namespace SpaceMercs.MainWindow {
       GL.DepthMask(true);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlAIRunning.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw("AI Running", Alignment.TopMiddle);
       GL.PopMatrix();
     }
     private void ShowSelectedEntityDetails() {
-      if (tlSelect1 == null) tlSelect1 = new TextLabel();
-      tlSelect1.UpdateText(SelectedEntity.Name);
-      if (tlSelect2 == null) tlSelect2 = new TextLabel();
-      tlSelect2.UpdateText("Level " + SelectedEntity.Level);
-      if (tlSelect3 == null) tlSelect3 = new TextLabel();
-      int hp = (int)SelectedEntity.Health;
-      if (hp < 1) hp = 1;
-      tlSelect3.UpdateText("HP:" + hp + " / " + "St:" + (int)SelectedEntity.Stamina + ((SelectedEntity.MaxShields > 0) ? " / " + "Sh:" + (int)SelectedEntity.Shields : ""));
-
       // Display the stats for the selected entity
       GL.PushMatrix();
       GL.Translate(0.998, 0.81 - (SelectedEntity.MaxShields > 0 ? 0.0368 : 0.0), Const.GUILayer);
       GL.Scale(0.04, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
       //tlSelect1.SetAlpha(Const.GUIAlpha);
-      //tlSelect1.Draw(TextLabel.Alignment.TopRight);
+      TextRenderer.Draw(SelectedEntity.Name, Alignment.TopRight);
       GL.Translate(0.0, -0.92, 0.0);
       //tlSelect2.SetAlpha(Const.GUIAlpha);
-      //tlSelect2.Draw(TextLabel.Alignment.TopRight);
+      TextRenderer.Draw("Level " + SelectedEntity.Level, Alignment.TopRight);
       GL.Translate(0.0, -0.92, 0.0);
       //tlSelect3.SetAlpha(Const.GUIAlpha);
-      //tlSelect3.Draw(TextLabel.Alignment.TopRight);
+      int hp = (int)SelectedEntity.Health;
+      if (hp < 1) hp = 1;
+      string strStats = $"HP:{hp} / St:{(int)SelectedEntity.Stamina}";
+      if (SelectedEntity.MaxShields > 0) strStats += $" / Sh: {(int)SelectedEntity.Shields}";
+      TextRenderer.Draw(strStats, Alignment.TopRight);
       GL.PopMatrix();
     }
     private void ShowSoldierPanels() {

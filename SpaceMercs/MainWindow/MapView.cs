@@ -44,7 +44,7 @@ namespace SpaceMercs.MainWindow
     private GLShape? squares;
     private ShaderProgram shaderProgram;
     private int frameCount = 0;
-    private bool DEMO_MODE = false;
+    private bool DEMO_MODE = false;  // -----=====## DEMO MODE ##=====-----
 
     // Initialise the game
     public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -72,14 +72,14 @@ namespace SpaceMercs.MainWindow
       bShowRangeCircles = true;
       bShowTradeRoutes = true;
       MakeCurrent();
-      SetupMapTextures();
-      Planet.BuildPlanetHalo();
-      GraphicsFunctions.Initialise();
-      Terrain.GenerateSeedMap();
-      SetupGUIElements();
+      //SetupMapTextures();
+      //Planet.BuildPlanetHalo();
+      //GraphicsFunctions.Initialise();
+      //Terrain.GenerateSeedMap();
+      //SetupGUIElements();
       bLoaded = true;
       SetupViewport();
-      SetupOptionsMenu();
+      //SetupOptionsMenu();
       //TODO this.missionToolStripMenuItem.Enabled = false;
       ThisDispatcher = Dispatcher.CurrentDispatcher;
       msgBox = new GUIMessageBox(this);
@@ -117,7 +117,7 @@ namespace SpaceMercs.MainWindow
       }
 
       squares = new GLShape(vertices, indices);
-      shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);
+      shaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
       shaderProgram.SetUniform("model", Matrix4.Identity);
     }
 
@@ -133,7 +133,7 @@ namespace SpaceMercs.MainWindow
       base.OnUpdateFrame(e);
 
       frameCount++; // DEBUG
-
+      
       // Check keypresses
       GetKeyboardInput();
 
@@ -201,7 +201,7 @@ namespace SpaceMercs.MainWindow
       Matrix4 translateM = Matrix4.CreateTranslation(Size.X / 2, Size.Y / 2, 0.0f);
       Matrix4 modelM = translateM.Inverted() * rotationM * translateM;
       shaderProgram.SetUniform("model", modelM);
-      float fract = (float)(Math.Abs(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5));
+      float fract = (float)(Math.Abs(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5)) * 0.9f + 0.1f;
       shaderProgram.SetUniform("colourFactor", fract);
       GL.UseProgram(shaderProgram.ShaderProgramHandle);
       squares?.Bind();
@@ -302,16 +302,13 @@ namespace SpaceMercs.MainWindow
     // Display a welcome screen on startup
     private void DisplayWelcomeScreen() {
       // Set up scene
-      GL.Disable(EnableCap.Lighting);
       GL.DepthMask(false);
       GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
       //GL.ClearColor(Color.Black);
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
       // Display welcome message
-      tlWelcome1 = new TextLabel("Welcome to SpaceMercs v" + Const.strVersion);
-      tlWelcome1.TextColour = Color.White;
-      tlWelcome1.Draw(Size, Alignment.TopMiddle);
+      TextRenderer.Draw("Welcome to SpaceMercs v" + Const.strVersion, Alignment.TopMiddle, Color.White);
 
       // TODO: Add a label about "Start a new game"
     }
@@ -326,9 +323,7 @@ namespace SpaceMercs.MainWindow
       GL.Enable(EnableCap.DepthTest);
       GL.Disable(EnableCap.Blend);
       GL.DepthFunc(DepthFunction.Lequal);
-      GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
       GL.DepthMask(true);
-      GL.Disable(EnableCap.Texture2D);
     }
 
     // Setup the OpenGL viewport
@@ -389,8 +384,8 @@ namespace SpaceMercs.MainWindow
           }
         }
         if (IsKeyPressed(Keys.L)) { // Toggle on/off showing labels for stars, planets & moons
-          if (bShowLabels) { bShowLabels = false; tlL.TextColour = Color.DimGray; }
-          else { bShowLabels = true; tlL.TextColour = Color.White; }
+          if (bShowLabels) { bShowLabels = false; }
+          else { bShowLabels = true; }
         }
         if (IsKeyPressed(Keys.Escape)) { // Deselect
           if (aoSelected != null) aoSelected = null;
@@ -412,24 +407,24 @@ namespace SpaceMercs.MainWindow
     }
     private void GetKeyboardInput_MapView() {
       if (IsKeyPressed(Keys.G)) {  // Toggle on/off gridlines
-        if (bShowGridlines) { bShowGridlines = false; tlG.TextColour = Color.DimGray; }
-        else { bShowGridlines = true; tlG.TextColour = Color.White; }
+        if (bShowGridlines) { bShowGridlines = false; }
+        else { bShowGridlines = true; }
       }
       if (IsKeyPressed(Keys.V)) {  // Toggle on/off fading of unvisited stars
-        if (bFadeUnvisited) { bFadeUnvisited = false; tlV.TextColour = Color.DimGray; }
-        else { bFadeUnvisited = true; tlV.TextColour = Color.White; }
+        if (bFadeUnvisited) { bFadeUnvisited = false; }
+        else { bFadeUnvisited = true; }
       }
       if (IsKeyPressed(Keys.R)) {  // Toggle on/off range circles
-        if (bShowRangeCircles) { bShowRangeCircles = false; tlR.TextColour = Color.DimGray; }
-        else { bShowRangeCircles = true; tlR.TextColour = Color.White; }
+        if (bShowRangeCircles) { bShowRangeCircles = false; }
+        else { bShowRangeCircles = true; }
       }
       if (IsKeyPressed(Keys.A)) {  // Toggle on/off trade routes
-        if (bShowTradeRoutes) { bShowTradeRoutes = false; tlA.TextColour = Color.DimGray; }
-        else { bShowTradeRoutes = true; tlA.TextColour = Color.White; }
+        if (bShowTradeRoutes) { bShowTradeRoutes = false; }
+        else { bShowTradeRoutes = true; }
       }
       if (IsKeyPressed(Keys.F)) {  // Toggle on/off ownership flags
-        if (bShowFlags) { bShowFlags = false; tlF.TextColour = Color.DimGray; }
-        else { bShowFlags = true; tlF.TextColour = Color.White; }
+        if (bShowFlags) { bShowFlags = false; }
+        else { bShowFlags = true; }
       }
       MapHover();
     }
@@ -731,32 +726,32 @@ namespace SpaceMercs.MainWindow
       if (aoSelected != null) {
         if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
           Star st = (Star)aoSelected;
-          if (!String.IsNullOrEmpty(st.Name)) tlSel1.UpdateText(st.Name);
-          else tlSel1.UpdateText("Unnamed Star");
-          tlSel2.UpdateText("M = " + Math.Round(st.Mass, 2).ToString() + " Sol");
-          tlSel3.UpdateText("R = " + Math.Round(st.radius / Const.Million, 0).ToString() + " Mm");
-          tlSel4.UpdateText("Type " + st.StarType);
-          tlSel5.UpdateText("(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")");
+          //if (!String.IsNullOrEmpty(st.Name)) tlSel1.UpdateText(st.Name);
+          //else tlSel1.UpdateText("Unnamed Star");
+          //tlSel2.UpdateText("M = " + Math.Round(st.Mass, 2).ToString() + " Sol");
+          //tlSel3.UpdateText("R = " + Math.Round(st.radius / Const.Million, 0).ToString() + " Mm");
+          //tlSel4.UpdateText("Type " + st.StarType);
+          //tlSel5.UpdateText("(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")");
         }
         if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
           Planet pl = (Planet)aoSelected;
-          if (!String.IsNullOrEmpty(pl.Name)) tlSel1.UpdateText(pl.Name);
-          else tlSel1.UpdateText("Unnamed Planet");
-          tlSel2.UpdateText(pl.Type.ToString());
-          tlSel3.UpdateText("R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km");
-          string strTemp = "Temp = " + pl.Temperature + "K";
-          //strTemp += "  <" + pl.GetTempRange(Const.races[0]).ToString() + ">";
-          tlSel4.UpdateText(strTemp);
-          tlSel5.UpdateText("Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU");
+          //if (!String.IsNullOrEmpty(pl.Name)) tlSel1.UpdateText(pl.Name);
+          //else tlSel1.UpdateText("Unnamed Planet");
+          //tlSel2.UpdateText(pl.Type.ToString());
+          //tlSel3.UpdateText("R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km");
+          //string strTemp = "Temp = " + pl.Temperature + "K";
+          ////strTemp += "  <" + pl.GetTempRange(Const.races[0]).ToString() + ">";
+          //tlSel4.UpdateText(strTemp);
+          //tlSel5.UpdateText("Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU");
           //tw.Update(iTextSelected4, "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm");
         }
         if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
           Moon mn = (Moon)aoSelected;
-          tlSel1.UpdateText("Moon " + (mn.ID + 1).ToString());
-          tlSel2.UpdateText(mn.Type.ToString());
-          tlSel3.UpdateText("R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km");
-          tlSel4.UpdateText("Temp = " + mn.Temperature + "K");
-          tlSel5.UpdateText("Orbit = " + Math.Round(mn.orbit / Const.Million, 0).ToString() + " Mm");
+          //tlSel1.UpdateText("Moon " + (mn.ID + 1).ToString());
+          //tlSel2.UpdateText(mn.Type.ToString());
+          //tlSel3.UpdateText("R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km");
+          //tlSel4.UpdateText("Temp = " + mn.Temperature + "K");
+          //tlSel5.UpdateText("Orbit = " + Math.Round(mn.orbit / Const.Million, 0).ToString() + " Mm");
         }
       }
       SetAOButtonsOnGUI(aoSelected);

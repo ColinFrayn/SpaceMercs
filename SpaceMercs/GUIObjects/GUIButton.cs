@@ -10,7 +10,7 @@ namespace SpaceMercs {
     private double ButtonWidth, ButtonHeight;
     private bool State, Blend, Stipple;
     private readonly GUIButton_Trigger Trigger = null;
-    private readonly TextLabel tlText;
+    private string Text;
 
     public GUIButton(string strText, GameWindow parentWindow, GUIButton_Trigger _trigger) {
       Alpha = 0.4f;
@@ -21,12 +21,12 @@ namespace SpaceMercs {
       Active = false;
       State = false;
       Blend = true;
-      tlText = new TextLabel(strText);
+      Text = strText;
     }
 
     // Change the text to be shown on this button & update the texture. If it's the same then don't redo texture.
     public void UpdateText(string strText) {
-      tlText.UpdateText(strText);
+      Text = strText;
     }
 
     // Display the button

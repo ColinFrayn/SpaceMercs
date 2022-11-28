@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
   class VisualEffect {
@@ -12,7 +13,6 @@ namespace SpaceMercs {
     private readonly long tStart;
     private readonly Dictionary<string,object> data;
     private readonly double X, Y, lScale;
-    private TextLabel tl = null;
 
     // Delegate
     public delegate void EffectFactory(EffectType tp, double xpos, double ypos, Dictionary<string, object> dict);
@@ -39,11 +39,7 @@ namespace SpaceMercs {
     private bool DisplayDamage(Stopwatch sw) {
       long mili = sw.ElapsedMilliseconds - tStart;
       if (mili > 800) return true; // Remove this effect after a second
-      if (tl == null) {
-        double val = (double)data["Value"];
-        tl = new TextLabel(val.ToString("N1"));
-        tl.TextColour = Color.Red;
-      }
+      double val = (double)data["Value"];
       double dScale = lScale;
       if (mili < 400) dScale *= 0.8 + (mili / 600.0);
       else dScale *= 0.8 + ((800 - mili) / 600.0);
@@ -51,25 +47,21 @@ namespace SpaceMercs {
       GL.PushMatrix();
       GL.Translate(X, Y, Const.GUILayer);
       GL.Scale(dScale, dScale, dScale);
-      //tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
+      TextRenderer.Draw(val.ToString("N1"), Alignment.CentreMiddle, Color.Red);
       GL.PopMatrix();
       return false;
     }
     private bool DisplayHealing(Stopwatch sw) {
       long mili = sw.ElapsedMilliseconds - tStart;
       if (mili > 800) return true; // Remove this effect after a second
-      if (tl == null) {
-        double val = (double)data["Value"];
-        tl = new TextLabel(val.ToString("N1"));
-        tl.TextColour = Color.Green;
-      }
+      double val = (double)data["Value"];
       double dScale = lScale;
       if (mili < 400) dScale *= 0.8 + (mili / 600.0);
       else dScale *= 0.8 + ((800 - mili) / 600.0);
       GL.PushMatrix();
       GL.Translate(X, Y, Const.GUILayer);
       GL.Scale(dScale, dScale, dScale);
-      //tl.DrawAt(TextLabel.Alignment.CentreMiddle, 0, 0);
+      TextRenderer.Draw(val.ToString("N1"), Alignment.CentreMiddle, Color.Green);
       GL.PopMatrix();
       return false;
     }

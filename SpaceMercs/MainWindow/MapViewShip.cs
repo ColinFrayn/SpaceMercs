@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics.Shapes;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -12,7 +13,6 @@ namespace SpaceMercs.MainWindow {
     private int irHover = -1, irContextRoom = -1, irSelected = -1;
     private IPanelItem piHoverItem;
     private GUIButton gbRepair, gbFabricate;
-    private TextLabel tlHull, tlPower, tlHullValue, tlPowerValue;
     private bool bHoverHull = false, bContextHull = false;
     private ViewMode PreviousViewMode = ViewMode.ViewMap;
 
@@ -35,14 +35,14 @@ namespace SpaceMercs.MainWindow {
       if (gpSelect == null) gpSelect = new GUIPanel(this);
       if (gbRepair == null) gbRepair = new GUIButton("Repair", this, RepairShip);
       if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
-      if (tlCash == null) {
-        tlCash = new TextLabel(PlayerTeam.Cash.ToString("F2") + " credits");
-        tlCash.TextColour = Color.White;
-      }
-      if (tlHull == null) tlHull = new TextLabel("Hull");
-      if (tlPower == null) tlPower = new TextLabel("Power");
-      if (tlHullValue == null) tlHullValue = new TextLabel();
-      if (tlPowerValue == null) tlPowerValue = new TextLabel();
+      //if (tlCash == null) {
+      //  tlCash = new TextRenderer(PlayerTeam.Cash.ToString("F2") + " credits");
+      //  tlCash.TextColour = Color.White;
+      //}
+      //if (tlHull == null) tlHull = new TextRenderer("Hull");
+      //if (tlPower == null) tlPower = new TextRenderer("Power");
+      //if (tlHullValue == null) tlHullValue = new TextRenderer();
+      //if (tlPowerValue == null) tlPowerValue = new TextRenderer();
       // TODO shipToolStripMenuItem.Enabled = false;
       SetupUtilityButtons();
     }
@@ -222,8 +222,7 @@ namespace SpaceMercs.MainWindow {
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.04 / Aspect, 0.04, 0.04);
       GL.Rotate(180.0, Vector3d.UnitX);
-      tlCash.UpdateText(PlayerTeam.Cash.ToString("F2") + " credits");
-      //tlCash.Draw(TextLabel.Alignment.TopLeft);
+      TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopLeft);
       GL.PopMatrix();
 
       DrawHullCondition();
@@ -237,26 +236,26 @@ namespace SpaceMercs.MainWindow {
 
     // Setup a mini window to show details of the current hover room or context menu icon
     private void SetupRoomHoverInfo() {
-      if (tlHover == null) {
-        tlHover = new TextLabel("...");
-        tlHover.Border = 1;
-        tlHover.BorderColour = Color.LightGray;
-        tlHover.BackgroundColour = Color.Black;
-      }
+      //if (tlHover == null) {
+      //  tlHover = new TextRenderer("...");
+      //  tlHover.Border = 1;
+      //  tlHover.BorderColour = Color.LightGray;
+      //  tlHover.BackgroundColour = Color.Black;
+      //}
       if (gpSelect.Active) {
         int ID = gpSelect.HoverID;
         if (ID >= 0) {
           if (ID < StaticData.ShipEquipment.Count) {
             ShipEquipment se = StaticData.ShipEquipment[ID];
-            tlHover.UpdateTextFromList(se.GetHoverText(PlayerTeam.PlayerShip));
+            //tlHover.UpdateTextFromList(se.GetHoverText(PlayerTeam.PlayerShip));
           }
           else {
-            if (ID == (int)I_Build) tlHover.UpdateText("Build");
-            if (ID == (int)I_Cancel) tlHover.UpdateText("Cancel");
-            if (ID == (int)I_Salvage) tlHover.UpdateText("Salvage");
-            if (ID == (int)I_Timer) tlHover.UpdateText("Sleep");
-            if (ID == (int)I_Disconnect) tlHover.UpdateText("Deactivate");
-            if (ID == (int)I_Connect) tlHover.UpdateText("Activate");
+            //if (ID == (int)I_Build) tlHover.UpdateText("Build");
+            //if (ID == (int)I_Cancel) tlHover.UpdateText("Cancel");
+            //if (ID == (int)I_Salvage) tlHover.UpdateText("Salvage");
+            //if (ID == (int)I_Timer) tlHover.UpdateText("Sleep");
+            //if (ID == (int)I_Disconnect) tlHover.UpdateText("Deactivate");
+            //if (ID == (int)I_Connect) tlHover.UpdateText("Activate");
           }
           return;
         }
@@ -265,16 +264,16 @@ namespace SpaceMercs.MainWindow {
       if (bHoverHull || irHover > -1) {
         ShipEquipment se = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irHover);
         if (se == null) {
-          if (bHoverHull) tlHover.UpdateText("<No Armour>");
-          else tlHover.UpdateText("<Empty>");
+          //if (bHoverHull) tlHover.UpdateText("<No Armour>");
+          //else tlHover.UpdateText("<Empty>");
           return;
         }
 
         if (se != null) {
-          if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
-            tlHover.UpdateTextFromList(se.GetHoverText());
-          }
-          else tlHover.UpdateText(se.Name + " (Deactivated)");
+          //if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
+          //  tlHover.UpdateTextFromList(se.GetHoverText());
+          //}
+          //else tlHover.UpdateText(se.Name + " (Deactivated)");
         }
         return;
       }
@@ -286,8 +285,8 @@ namespace SpaceMercs.MainWindow {
       // Draw the hover text
       double xx = (double)mx / (double)Size.X;
       double yy = (double)my / (double)Size.Y;
-      double thHeight = 0.04 * tlHover.Lines;
-      double thWidth = thHeight * (double)tlHover.Width / (double)tlHover.Height;
+      double thHeight = 0.04;// * tlHover.Lines;
+      double thWidth = thHeight;// * (double)tlHover.Width / (double)tlHover.Height;
       double xSep = 0.01, ySep = 0.01;
       if (xx > 0.5) {
         thWidth = -thWidth;
@@ -450,13 +449,12 @@ namespace SpaceMercs.MainWindow {
 
       // Show the value
       string strHull = PlayerTeam.PlayerShip.Hull.ToString("0.#") + " / " + PlayerTeam.PlayerShip.Type.MaxHull.ToString("0.#");
-      tlHullValue.UpdateText(strHull);
       GL.PushMatrix();
       GL.Translate(0.89, 0.03, 0.1);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.03 / Aspect, 0.03, 0.03);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlHullValue.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw(strHull, Alignment.TopMiddle);
       GL.PopMatrix();
     }
     private void DrawPowerBar() {
@@ -527,13 +525,12 @@ namespace SpaceMercs.MainWindow {
 
       // Show the value
       string strPower = "Using " + pc + " / " + pg;
-      tlPowerValue.UpdateText(strPower);
       GL.PushMatrix();
       GL.Translate(0.89, 0.14, 0.1);
       GL.Color3(1.0, 1.0, 1.0);
       GL.Scale(0.03 / Aspect, 0.03, 0.03);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlPowerValue.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw(strPower, Alignment.TopMiddle);
       GL.PopMatrix();
 
     }
@@ -593,50 +590,50 @@ namespace SpaceMercs.MainWindow {
     private void SetSelection(int iRoomID) {
       ShipEquipment se = PlayerTeam.PlayerShip.GetEquipmentByRoomID(iRoomID);
       if (se == null) {
-        tlSel1.UpdateText("<Empty>");
-        tlSel2.bEnabled = false;
-        tlSel3.bEnabled = false;
-        tlSel4.bEnabled = false;
+        //tlSel1.UpdateText("<Empty>");
+        //tlSel2.bEnabled = false;
+        //tlSel3.bEnabled = false;
+        //tlSel4.bEnabled = false;
         return;
       }
 
-      tlSel1.UpdateText(se.Name);
+      //tlSel1.UpdateText(se.Name);
       if (se is ShipArmour) {
-        tlSel2.UpdateText("Armour : " + ((ShipArmour)se).BaseArmour + "%");
-        if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
-        else tlSel3.bEnabled = false;
-        if (((ShipArmour)se).HealRate > 0) tlSel4.UpdateText("Heal Rate : " + ((ShipArmour)se).HealRate);
-        else tlSel4.bEnabled = false;
+        //tlSel2.UpdateText("Armour : " + ((ShipArmour)se).BaseArmour + "%");
+        //if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
+        //else tlSel3.bEnabled = false;
+        //if (((ShipArmour)se).HealRate > 0) tlSel4.UpdateText("Heal Rate : " + ((ShipArmour)se).HealRate);
+        //else tlSel4.bEnabled = false;
       }
       else if (se is ShipEngine) {
-        if (((ShipEngine)se).Range >= Const.LightYear) tlSel2.UpdateText("Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly");
-        else tlSel2.UpdateText("Range : System");
-        tlSel3.UpdateText("Speed : " + Math.Round(((ShipEngine)se).Speed / Const.SpeedOfLight, 1) + "c");
-        tlSel4.UpdateText("Accel : " + Math.Round(((ShipEngine)se).Accel / 10.0, 1) + "g"); // Yeah I know g =~9.8, but whatever
+        //if (((ShipEngine)se).Range >= Const.LightYear) tlSel2.UpdateText("Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly");
+        //else tlSel2.UpdateText("Range : System");
+        //tlSel3.UpdateText("Speed : " + Math.Round(((ShipEngine)se).Speed / Const.SpeedOfLight, 1) + "c");
+        //tlSel4.UpdateText("Accel : " + Math.Round(((ShipEngine)se).Accel / 10.0, 1) + "g"); // Yeah I know g =~9.8, but whatever
       }
       else if (se is ShipEquipment) {
-        if (se.Generate > 0) tlSel2.UpdateText("Generate : " + se.Generate);
-        else tlSel2.UpdateText("Power : " + se.Power);
-        if (se.Attack > 0) tlSel3.UpdateText("Attack Bonus : " + se.Attack);
-        else if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
-        else tlSel3.bEnabled = false;
+        //if (se.Generate > 0) tlSel2.UpdateText("Generate : " + se.Generate);
+        //else tlSel2.UpdateText("Power : " + se.Power);
+        //if (se.Attack > 0) tlSel3.UpdateText("Attack Bonus : " + se.Attack);
+        //else if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
+        //else tlSel3.bEnabled = false;
         string strDesc = "";
         if (se.Capacity > 0) strDesc = "Support : " + se.Capacity;
         else if (se.Medlab) strDesc += "Medbay";
         else if (se.Armoury) strDesc += "Armoury";
         else if (se.Workshop) strDesc += "Workshop";
-        else tlSel4.bEnabled = false;
-        if (!String.IsNullOrEmpty(strDesc)) tlSel4.UpdateText(strDesc);
+        //else tlSel4.bEnabled = false;
+        //if (!String.IsNullOrEmpty(strDesc)) tlSel4.UpdateText(strDesc);
       }
       else if (se is ShipWeapon) {
-        tlSel2.UpdateText("Power : " + se.Power);
-        tlSel3.UpdateText("Attack Bonus : " + se.Attack);
-        tlSel4.bEnabled = false;
+        //tlSel2.UpdateText("Power : " + se.Power);
+        //tlSel3.UpdateText("Attack Bonus : " + se.Attack);
+        //tlSel4.bEnabled = false;
       }
       else {
-        tlSel2.UpdateText("Unknown Room Type : " + se.GetType());
-        tlSel3.bEnabled = false;
-        tlSel4.bEnabled = false;
+        //tlSel2.UpdateText("Unknown Room Type : " + se.GetType());
+        //tlSel3.bEnabled = false;
+        //tlSel4.bEnabled = false;
       }
     }
 

@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
 
@@ -8,7 +9,6 @@ namespace SpaceMercs {
   class Star : AstronomicalObject {
     private readonly int PDensity;
     private double Age;
-    private TextLabel tlName;
     private readonly List<Planet> planets;
 
     public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
@@ -181,10 +181,7 @@ namespace SpaceMercs {
     // Draw a name label (and construct one if it doesn't exist yet)
     public void DrawName() {
       if (strName.Length == 0) return;
-      if (tlName == null) {
-        tlName = new TextLabel(strName);
-      }
-      //tlName.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw(strName, Alignment.TopMiddle);
     }
 
     // Generate a star's details according to the required IMF etc.
@@ -487,15 +484,6 @@ namespace SpaceMercs {
     }
     public override void SetName(string str) {
       strName = str;
-      if (tlName == null) {
-        if (strName.Length > 0) {
-          tlName = new TextLabel(strName);
-        }
-        else return;
-      }
-      else {
-        tlName.UpdateText(strName);
-      }
     }
     public override Star GetSystem() {
       return this;

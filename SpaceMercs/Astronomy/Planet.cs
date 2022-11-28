@@ -12,7 +12,6 @@ namespace SpaceMercs {
     public Star Parent { get; set; }
     private readonly List<Moon> Moons;
     public double tempbase;
-    private TextLabel tlName;
     private readonly BackgroundWorker bw;
     private bool bDrawing = false, bGenerating = false;
     public override double DrawScale { get { return Math.Pow(radius / 1000.0, 0.4) / 25.0; } }
@@ -124,7 +123,7 @@ namespace SpaceMercs {
     // Draw the planet's name label
     private void DrawNameLabel() {
       if (Name == null || Name.Length == 0) return;
-      if (tlName == null) SetName(Name);
+      SetName(Name);
       GL.PushMatrix();
       GL.Disable(EnableCap.Lighting);
       GL.Color3(1.0, 1.0, 1.0);
@@ -399,9 +398,6 @@ namespace SpaceMercs {
       }
     }
     public override void ClearData() {
-      if (tlName != null) {
-        tlName = null;
-      }
       GL.DeleteTexture(iTexture);
       iTexture = -1;
       texture = null;
@@ -411,15 +407,6 @@ namespace SpaceMercs {
     }
     public override void SetName(string str) {
       strName = str;
-      if (tlName == null) {
-        if (strName.Length > 0) {
-          tlName = new TextLabel(strName);
-        }
-        else return;
-      }
-      else {
-        tlName.UpdateText(strName);
-      }
     }
     public override Star GetSystem() {
       return Parent;

@@ -3,9 +3,12 @@ ToDo List
 -------------------------------------------------
 
 Convert TextLabel:
-- Display correctly
+- Display correctly compared to example
+- Extract height and width of text by querying font object
 
-Convert the welcome screen to use modern OpenGL
+Convert the entire welcome screen
+
+Convert MapView
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 

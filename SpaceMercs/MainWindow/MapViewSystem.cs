@@ -1,12 +1,12 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SpaceMercs.Graphics.Shapes;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
   // Partial class including functions for drawing the full galaxymap view
   partial class MapView {
     private Star SystemStar = null;
-    TextLabel tlSystemName, tlSystemOwner;
     private bool bShowColonies = true;
 
     // Root call for displaying the system when zoomed in
@@ -69,12 +69,9 @@ namespace SpaceMercs.MainWindow {
 
     // Draw the system name and affiliation on the system view
     private void DrawSystemText() {
-      if (tlSystemName == null) tlSystemName = new TextLabel("");
-      if (tlSystemOwner == null) tlSystemOwner = new TextLabel("");
-      if (String.IsNullOrEmpty(SystemStar.Name)) tlSystemName.UpdateText("Unnamed Star");
-      else tlSystemName.UpdateText(SystemStar.Name);
-      if (SystemStar.Owner == null) tlSystemOwner.UpdateText("No Owner");
-      else tlSystemOwner.UpdateText(SystemStar.Owner.Name);
+      string strSystem = "Unnamed Star";
+      if (!string.IsNullOrEmpty(SystemStar?.Name)) strSystem = SystemStar.Name;
+      string strOwner = SystemStar?.Owner?.Name ?? "No Owner";
       GL.PushMatrix();
       GL.Disable(EnableCap.Lighting);
       GL.Color3(1.0, 1.0, 1.0);
@@ -82,7 +79,7 @@ namespace SpaceMercs.MainWindow {
       GL.PushMatrix();
       GL.Scale(0.6, 0.6, 0.6);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlSystemName.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw(strSystem, Alignment.TopMiddle);
       GL.PopMatrix();
       GL.PushMatrix();
       GL.Translate(0.0, 0.5, 0.0);
@@ -90,15 +87,15 @@ namespace SpaceMercs.MainWindow {
       if (SystemStar.Owner == null) GL.Color3(0.5, 0.5, 0.5);
       else GL.Color3(SystemStar.Owner.Colour);
       GL.Rotate(180.0, Vector3d.UnitX);
-      //tlSystemOwner.Draw(TextLabel.Alignment.TopMiddle);
+      TextRenderer.Draw(strOwner, Alignment.TopMiddle);
       GL.PopMatrix();
       GL.PopMatrix();
     }
 
     private void GetKeyboardInput_SystemView() {
       if (IsKeyPressed(Keys.C)) {  // Toggle on/off colony icons
-        if (bShowColonies) { bShowColonies = false; tlC.TextColour = Color.DimGray; }
-        else { bShowColonies = true; tlC.TextColour = Color.White; }
+        if (bShowColonies) { bShowColonies = false; }
+        else { bShowColonies = true; }
       }
       SystemHover();
     }
