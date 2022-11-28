@@ -116,8 +116,7 @@ namespace SpaceMercs.MainWindow
         indices[ixCount++] = 3 + (i * 4);
       }
 
-      vertexBuffer = new VertexBuffer(VertexPos2DCol.VertexInfo, vertices.Length);
-      vertexBuffer.SetData(vertices);
+      vertexBuffer = new VertexBuffer(vertices);
       indexBuffer = new IndexBuffer(indices);
       vertexArray = new VertexArray(vertexBuffer);
       shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);

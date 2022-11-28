@@ -11,34 +11,39 @@ namespace SpaceMercs.Graphics {
     public readonly VertexInfo VertexInfo;
     public readonly bool IsStatic;
 
-    public VertexBuffer(VertexInfo vertexInfo, int vertexCount, bool isStatic = true) {
+    public VertexBuffer(VertexPos2DTex[] vertices, bool isStatic = true) {
       isDisposed = false;
-      if (vertexCount < MinVertexCount || vertexCount > MaxVertexCount) {
-        throw new ArgumentOutOfRangeException(nameof(vertexCount));
+      if (vertices is null) {
+        throw new ArgumentNullException(nameof(vertices));
       }
-      VertexInfo = vertexInfo;
-      VertexCount = vertexCount;
-      IsStatic = isStatic; 
+      VertexCount = vertices.Length;
+      if (VertexCount < MinVertexCount || VertexCount > MaxVertexCount) {
+        throw new ArgumentOutOfRangeException(nameof(vertices));
+      }
+      IsStatic = isStatic;
+      VertexInfo = VertexPos2DTex.VertexInfo;
       VertexBufferHandle = GL.GenBuffer();
+
       GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, IntPtr.Zero, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
+      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, vertices, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
       GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
     }
 
-    public void SetData<T>(T[] data) where T : struct {
-      if (typeof(T) != VertexInfo.Type) {
-        throw new ArgumentException($"Generic Type {typeof(T).FullName} does not match the configured vertex type of the vertex buffer");
+    public VertexBuffer(VertexPos2DCol[] vertices, bool isStatic = true) {
+      isDisposed = false;
+      if (vertices is null) {
+        throw new ArgumentNullException(nameof(vertices));
       }
-      if (data is null) {
-        throw new ArgumentNullException(nameof(data));
+      VertexCount = vertices.Length;
+      if (VertexCount < MinVertexCount || VertexCount > MaxVertexCount) {
+        throw new ArgumentOutOfRangeException(nameof(vertices));
       }
-
-      if (data.Length != VertexCount) {
-        throw new ArgumentOutOfRangeException(nameof(data));
-      }
+      IsStatic = isStatic;
+      VertexInfo = VertexPos2DCol.VertexInfo;
+      VertexBufferHandle = GL.GenBuffer();
 
       GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-      GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, data.Length * VertexInfo.SizeInBytes, data);
+      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, vertices, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
       GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
     }
 

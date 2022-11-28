@@ -97,8 +97,7 @@ namespace SpaceMercs {
       };
       int[] indices = new int[6] { 0, 1, 2, 0, 2, 3 };
 
-      vertexBuffer = new VertexBuffer(VertexPos2DTex.VertexInfo, vertices.Length);
-      vertexBuffer.SetData(vertices);
+      vertexBuffer = new VertexBuffer(vertices);
       indexBuffer = new IndexBuffer(indices);
       vertexArray = new VertexArray(vertexBuffer);
     }
