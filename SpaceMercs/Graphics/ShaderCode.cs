@@ -5,7 +5,6 @@
 
 uniform mat4 model;
 uniform mat4 projection;
-uniform float colourFactor;
 
 layout (location = 0) in vec2 aPosition;
 layout (location = 1) in vec4 aColour;
@@ -16,7 +15,7 @@ void main()
 {
   gl_Position = projection * model * vec4(aPosition.x, aPosition.y, 0f, 1f);
 
-  vColour = aColour * colourFactor;
+  vColour = aColour;
 }";
 
     public static string VertexShader3DTransform = @"
@@ -42,12 +41,14 @@ void main()
     public static string PixelShaderColour = @"
 #version 460
 
+uniform float colourFactor;
+
 in vec4 vColour;
 out vec4 pixelColour;
 
 void main() 
 {
-  pixelColour = vColour;
+  pixelColour = vColour * colourFactor;
 }";
   }
 }

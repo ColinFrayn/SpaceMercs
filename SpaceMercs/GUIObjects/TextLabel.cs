@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SharpFont;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Reflection;
 
@@ -11,7 +12,6 @@ using System.Reflection;
 
 namespace SpaceMercs {
   class TextLabel {
-    public enum Alignment { TopLeft, TopMiddle, TopRight, CentreLeft, CentreMiddle, CentreRight, BottomLeft, BottomMiddle, BottomRight };
     public enum TextAlign { Left, Centre, Right }
     public TextAlign TextPos { get; set; } = TextLabel.TextAlign.Centre;
     public int Width { get; private set; }
@@ -33,6 +33,7 @@ namespace SpaceMercs {
     private static readonly FreeTypeFont textLabelFont32;
     private static readonly string TextLabelVertexShader = @"
 #version 460
+
 uniform mat4 model;
 uniform mat4 projection;
 
@@ -46,32 +47,58 @@ void main()
   vUV         = in_uv.xy;
 	gl_Position = projection * model * vec4(in_pos.xy, 0.0, 1.0);
 }";
+    private static readonly string TextLabelVertexShader_New = @"
+#version 460
+
+uniform mat4 model;
+uniform mat4 projection;
+
+layout (location = 0) in vec2 in_pos;
+layout (location = 1) in vec2 in_uv;
+
+void main()
+{
+	gl_Position = projection * model * vec4(in_pos.xy, 0.0, 1.0);
+}";
     private static readonly string TextLabelFragmentShader = @"
 #version 460
 
 in vec2 vUV;
 
-layout (binding = 0)  uniform sampler2D u_texture;
+layout (binding = 0) uniform sampler2D u_texture;
 
-//layout (location = 2) uniform vec3 textColour;
+uniform vec3 textColour;
 
 out vec4 fragColor;
 
 void main()
 {
-  //vec2 uv = vUV.xy;
-  //float text = texture(u_texture, uv).r;
-  fragColor = vec4(1f,1f,1f,1f); //vec4(textColour.rgb*text, 1f);
+  vec2 uv = vUV.xy;
+  float textureVal = texture(u_texture, uv).r;
+  //fragColor = vec4(1f,1f,1f,1f);
+  //fragColor = vec4(textColour.rgb*textureVal, 1f);
+  fragColor = vec4(textColour.rgb, 1f);
+}";
+    private static readonly string TextLabelFragmentShader_New = @"
+#version 460
+
+uniform vec3 textColour;
+
+out vec4 fragColor;
+
+void main()
+{
+  fragColor = vec4(textColour.rgb, 1f);
 }";
     private static readonly ShaderProgram textLabelShaderProgram;
 
     // Static constructor sets up shader program
     static TextLabel() {
-      textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
+      //textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
+      textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader_New, TextLabelFragmentShader_New);
       textLabelShaderProgram.SetUniform("model", Matrix4.Identity);
-      GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
+      textLabelShaderProgram.SetUniform("projection", Matrix4.Identity);
       textLabelFont32 = new FreeTypeFont(32);
-      GL.UseProgram(0);
     }
 
     // Set up the text label
@@ -146,14 +173,20 @@ void main()
 
       Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
 
-      GL.Enable(EnableCap.Blend);
-      GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+      //GL.Enable(EnableCap.Blend);
+      //GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
       GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
       textLabelShaderProgram.SetUniform("projection", projectionM);
-      //textLabelShaderProgram.SetUniform("textColour", (float)TextColour.R / 255f, (float)TextColour.G / 255f, (float)TextColour.B / 255f);
-      //_font.RenderText("This is sample text", xshift, yshift, (float)dXScale, (float)dYScale, new Vector2(1f, 0f));
-      textLabelFont32.RenderText(textLabelShaderProgram, "This is sample text", 0.0f, 0.0f, 1f, 1f);
+      textLabelShaderProgram.SetUniform("textColour", (float)TextColour.R / 255f, (float)TextColour.G / 255f, (float)TextColour.B / 255f);
+      //textLabelFont32.RenderText("This is sample text", xshift, yshift, (float)dXScale, (float)dYScale, new Vector2(1f, 0f));
+      //textLabelFont32.RenderText(textLabelShaderProgram, "This is sample text", 0.0f, 0.0f, 1f, 1f);
+      textLabelFont32.RenderTest();
+
+      Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(0.0f, 0.0f, 0.0f));
+      Matrix4 scaleM = Matrix4.CreateScale(new Vector3(0.8f, 0.5f, 1.0f));
+      Matrix4 modelM = scaleM * transOriginM;
+      textLabelShaderProgram.SetUniform("model", modelM);
 
       //if (ali == Alignment.BottomLeft || ali == Alignment.BottomMiddle || ali == Alignment.BottomRight) yshift = -TextBitmap.Height;
       //if (ali == Alignment.CentreLeft || ali == Alignment.CentreMiddle || ali == Alignment.CentreRight) yshift = -TextBitmap.Height / 2;

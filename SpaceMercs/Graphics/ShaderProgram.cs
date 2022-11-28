@@ -118,7 +118,7 @@ namespace SpaceMercs.Graphics {
       VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.Float) {
-        throw new ArgumentException($"Uniform was not of type Float : {nameof(name)}");
+        throw new ArgumentException($"Uniform was not of type Float : {name}");
       }
       GL.UseProgram(ShaderProgramHandle);
       GL.Uniform1(uniform.Location, v1);
@@ -129,7 +129,7 @@ namespace SpaceMercs.Graphics {
       VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.FloatVec2) {
-        throw new ArgumentException($"Uniform was not of type FloatVec2 : {nameof(name)}");
+        throw new ArgumentException($"Uniform was not of type FloatVec2 : {name}");
       }
       GL.UseProgram(ShaderProgramHandle);
       GL.Uniform2(uniform.Location, v1, v2);
@@ -140,7 +140,7 @@ namespace SpaceMercs.Graphics {
       VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.FloatVec3) {
-        throw new ArgumentException($"Uniform was not of type Float-Vector3 : {nameof(name)}");
+        throw new ArgumentException($"Uniform was not of type Float-Vector3 : {name}");
       }
       GL.UseProgram(ShaderProgramHandle);
       GL.Uniform3(uniform.Location, v1, v2, v3);
@@ -151,7 +151,7 @@ namespace SpaceMercs.Graphics {
       VerifyUniform(name);
       ShaderUniform uniform = Uniforms[name];
       if (uniform.Type != ActiveUniformType.FloatMat4) {
-        throw new ArgumentException($"Uniform was not of type Float-Matrix4 : {nameof(name)}");
+        throw new ArgumentException($"Uniform was not of type Float-Matrix4 : {name}");
       }
       GL.UseProgram(ShaderProgramHandle);
       GL.UniformMatrix4(uniform.Location, false, ref m4);
@@ -160,7 +160,7 @@ namespace SpaceMercs.Graphics {
 
     private void VerifyUniform(string name) {
       if (!Uniforms.ContainsKey(name)) {
-        throw new ArgumentException($"Uniform was not found : {nameof(name)}");
+        throw new ArgumentException($"Uniform was not found : {name}");
       }
     }
 

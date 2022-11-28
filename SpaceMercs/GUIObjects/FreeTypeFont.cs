@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SharpFont;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Reflection;
 
@@ -16,98 +17,92 @@ namespace SpaceMercs {
 
   internal class FreeTypeFont {
     private readonly Dictionary<uint, TexChar> _characters = new Dictionary<uint, TexChar>();
-    private readonly VertexBuffer vertexBuffer;
-    private readonly IndexBuffer indexBuffer;
-    private readonly VertexArray vertexArray;
     public uint PixelHeight;
+    private GLShape square;
 
     public FreeTypeFont(uint pixelheight) {
       PixelHeight = pixelheight;
-      Library lib = new Library();
 
-      Assembly assembly = this.GetType().GetTypeInfo().Assembly;
-      //string[] names = assembly.GetManifestResourceNames();
-      Stream? resource_stream = assembly.GetManifestResourceStream("SpaceMercs.GUIObjects.FreeSans.ttf");
-      if (resource_stream is null) {
-        throw new Exception("Unable to build resource stream");
-      }
-      MemoryStream ms = new MemoryStream();
-      resource_stream.CopyTo(ms);
+      //Library lib = new Library();
 
-      // Setup the new font face
-      SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0);
+      //Assembly assembly = this.GetType().GetTypeInfo().Assembly;
+      ////string[] names = assembly.GetManifestResourceNames();
+      //Stream? resource_stream = assembly.GetManifestResourceStream("SpaceMercs.GUIObjects.FreeSans.ttf");
+      //if (resource_stream is null) {
+      //  throw new Exception("Unable to build resource stream");
+      //}
+      //MemoryStream ms = new MemoryStream();
+      //resource_stream.CopyTo(ms);
 
-      // Set the font scale
-      face.SetPixelSizes(0, PixelHeight);
+      //// Setup the new font face
+      //SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0);
 
-      // set 1 byte pixel alignment 
-      GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
+      //// Set the font scale
+      //face.SetPixelSizes(0, PixelHeight);
 
-      // set texture unit
-      GL.Enable(EnableCap.Texture2D);
-      GL.ActiveTexture(TextureUnit.Texture0);
+      //// Set 1 byte pixel alignment 
+      //GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
-      // Load the useful characters of ASCII set, skipping the functional chars at the beginning
-      for (uint c = 32; c < 127; c++) {
-        try {
-          // load glyph
-          //face.LoadGlyph(c, LoadFlags.Render, LoadTarget.Normal);
-          face.LoadChar(c, LoadFlags.Render, LoadTarget.Normal);
-          GlyphSlot glyph = face.Glyph;
-          FTBitmap bitmap = glyph.Bitmap;
+      //// Set texture unit
+      //GL.Enable(EnableCap.Texture2D);
+      //GL.ActiveTexture(TextureUnit.Texture0);
 
-          // create glyph texture
-          int texObj = GL.GenTexture();
-          GL.BindTexture(TextureTarget.Texture2D, texObj);
-          GL.TexImage2D(TextureTarget.Texture2D, 0,
-                        PixelInternalFormat.R8, bitmap.Width, bitmap.Rows, 0,
-                        PixelFormat.Red, PixelType.UnsignedByte, bitmap.Buffer);
+      //// Load the useful characters of ASCII set, skipping the functional chars at the beginning
+      //for (uint c = 32; c < 127; c++) {
+      //  try {
+      //    // Load glyph
+      //    face.LoadChar(c, LoadFlags.Render, LoadTarget.Normal);
+      //    GlyphSlot glyph = face.Glyph;
+      //    FTBitmap bitmap = glyph.Bitmap;
 
-          // set texture parameters
-          GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-          GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-          GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
-          GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+      //    // Create glyph texture
+      //    int texObj = GL.GenTexture();
+      //    GL.BindTexture(TextureTarget.Texture2D, texObj);
+      //    GL.TexImage2D(TextureTarget.Texture2D, 0,
+      //                  PixelInternalFormat.R8, bitmap.Width, bitmap.Rows, 0,
+      //                  PixelFormat.Red, PixelType.UnsignedByte, bitmap.Buffer);
 
-          // add character
-          TexChar ch = new TexChar();
-          ch.TextureID = texObj;
-          ch.Size = new Vector2(bitmap.Width, bitmap.Rows);
-          ch.Bearing = new Vector2(glyph.BitmapLeft, glyph.BitmapTop);
-          ch.Advance = (int)glyph.Advance.X.Value;
-          _characters.Add(c, ch);
-        }
-        catch (Exception ex) {
-          Console.WriteLine(ex);
-        }
-      }
+      //    // Set texture parameters
+      //    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+      //    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+      //    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+      //    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
 
-      // bind default texture
-      GL.BindTexture(TextureTarget.Texture2D, 0);
-      GL.Disable(EnableCap.Texture2D);
+      //    // Add character
+      //    TexChar ch = new TexChar();
+      //    ch.TextureID = texObj;
+      //    ch.Size = new Vector2(bitmap.Width, bitmap.Rows);
+      //    ch.Bearing = new Vector2(glyph.BitmapLeft, glyph.BitmapTop);
+      //    ch.Advance = (int)glyph.Advance.X.Value;
+      //    _characters.Add(c, ch);
+      //  }
+      //  catch (Exception ex) {
+      //    Console.WriteLine(ex);
+      //  }
+      //}
 
-      // set default (4 byte) pixel alignment 
-      GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
+      //// Bind default texture
+      //GL.BindTexture(TextureTarget.Texture2D, 0);
+      //GL.Disable(EnableCap.Texture2D);
 
-      VertexPos2DTex[] vertices = new VertexPos2DTex[] {
-        new VertexPos2DTex(new Vector2(0f, -1f), new Vector2(0f, 0f)),
-        new VertexPos2DTex(new Vector2(0f, 0.5f), new Vector2(0f, 1f)),
-        new VertexPos2DTex(new Vector2(1f, 0.5f), new Vector2(1f, 1f)),
-        new VertexPos2DTex(new Vector2(1f, -1f), new Vector2(1f, 0f))
-      };
-      int[] indices = new int[6] { 0, 1, 2, 0, 2, 3 };
+      //// Set default (4 byte) pixel alignment 
+      //GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
 
-      vertexBuffer = new VertexBuffer(vertices);
-      indexBuffer = new IndexBuffer(indices);
-      vertexArray = new VertexArray(vertexBuffer);
+      square = Square.BuildTextured(Alignment.TopLeft);
+    }
+
+    // DEBUG : Just draw a square
+    public void RenderTest() {
+      square.Bind();
+      square.Draw();
+      square.Unbind();
     }
 
     public void RenderText(ShaderProgram prog, string text, float x, float y, float xScale, float yScale) {
-      //GL.Enable(EnableCap.Texture2D);
-      //GL.ActiveTexture(TextureUnit.Texture0);
+      GL.ActiveTexture(TextureUnit.Texture0);
       GL.UseProgram(prog.ShaderProgramHandle);
-      GL.BindVertexArray(vertexArray.VertexArrayHandle);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
+      
+      square.Bind();
 
       Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(x, y, 0f));
 
@@ -132,16 +127,14 @@ namespace SpaceMercs {
         prog.SetUniform("model", modelM);
 
         // Render glyph texture over quad
-        //GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
+        GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
 
         // Render quad
-        GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
+        square.Draw();
       }
 
-      GL.BindVertexArray(0);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+      square.Unbind();
       GL.BindTexture(TextureTarget.Texture2D, 0);
-      //GL.Disable(EnableCap.Texture2D);
     }
   }
 }

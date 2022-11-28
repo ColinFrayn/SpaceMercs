@@ -5,6 +5,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
@@ -40,11 +41,10 @@ namespace SpaceMercs.MainWindow
     private Star? CurrentSystem { get { return PlayerTeam?.CurrentPosition?.GetSystem(); } }
 
     // DEBUGGING
-    private VertexBuffer vertexBuffer;
-    private IndexBuffer indexBuffer;
-    private VertexArray vertexArray;
+    private GLShape? squares;
     private ShaderProgram shaderProgram;
     private int frameCount = 0;
+    private bool DEMO_MODE = false;
 
     // Initialise the game
     public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -84,7 +84,7 @@ namespace SpaceMercs.MainWindow
       ThisDispatcher = Dispatcher.CurrentDispatcher;
       msgBox = new GUIMessageBox(this);
 
-      SetupDemo(); // DEBUG
+      if (DEMO_MODE) SetupDemo(); // DEBUG
 
       base.OnLoad();
     }
@@ -116,18 +116,14 @@ namespace SpaceMercs.MainWindow
         indices[ixCount++] = 3 + (i * 4);
       }
 
-      vertexBuffer = new VertexBuffer(vertices);
-      indexBuffer = new IndexBuffer(indices);
-      vertexArray = new VertexArray(vertexBuffer);
+      squares = new GLShape(vertices, indices);
       shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);
       shaderProgram.SetUniform("model", Matrix4.Identity);
     }
 
     // Free stuff when the window is being closed
     protected override void OnUnload() {
-      vertexBuffer?.Dispose();
-      indexBuffer?.Dispose();
-      vertexArray?.Dispose();
+      squares?.Dispose();
       shaderProgram?.Dispose();
       base.OnUnload();
     }
@@ -200,12 +196,17 @@ namespace SpaceMercs.MainWindow
     private void RunDemo() {
       Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
       shaderProgram.SetUniform("projection", projectionM);
-      float fact = (float)(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5);
-      shaderProgram.SetUniform("colourFactor", fact);
+      float ang = (float)frameCount * (float)Math.PI / 240f;
+      Matrix4 rotationM = Matrix4.CreateRotationZ(ang);
+      Matrix4 translateM = Matrix4.CreateTranslation(Size.X / 2, Size.Y / 2, 0.0f);
+      Matrix4 modelM = translateM.Inverted() * rotationM * translateM;
+      shaderProgram.SetUniform("model", modelM);
+      float fract = (float)(Math.Abs(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5));
+      shaderProgram.SetUniform("colourFactor", fract);
       GL.UseProgram(shaderProgram.ShaderProgramHandle);
-      GL.BindVertexArray(vertexArray.VertexArrayHandle);
-      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
-      GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
+      squares?.Bind();
+      squares?.Draw();
+      squares?.Unbind();
     }
 
     // Draw the main view, whatever state it's in
@@ -216,8 +217,8 @@ namespace SpaceMercs.MainWindow
       PrepareScene();
 
       if (!GalaxyMap.bMapSetup) {
-        RunDemo(); // DEBUG
-        //DisplayWelcomeScreen();
+        if (DEMO_MODE) RunDemo();
+        else DisplayWelcomeScreen();
         SwapBuffers();
         return;
       }
@@ -302,16 +303,15 @@ namespace SpaceMercs.MainWindow
     private void DisplayWelcomeScreen() {
       // Set up scene
       GL.Disable(EnableCap.Lighting);
-      GL.DepthMask(true);
-      GL.Clear(ClearBufferMask.DepthBufferBit);
+      GL.DepthMask(false);
       GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
       //GL.ClearColor(Color.Black);
-      GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+      GL.Clear(ClearBufferMask.ColorBufferBit);
 
       // Display welcome message
       tlWelcome1 = new TextLabel("Welcome to SpaceMercs v" + Const.strVersion);
       tlWelcome1.TextColour = Color.White;
-      tlWelcome1.Draw(Size, TextLabel.Alignment.TopMiddle);
+      tlWelcome1.Draw(Size, Alignment.TopMiddle);
 
       // TODO: Add a label about "Start a new game"
     }
