@@ -11,39 +11,29 @@ namespace SpaceMercs.Graphics {
     public readonly VertexInfo VertexInfo;
     public readonly bool IsStatic;
 
-    public VertexBuffer(VertexPos2DTex[] vertices, bool isStatic = true) {
+    public VertexBuffer(IVertex[] vertices, bool isStatic = true) {
       isDisposed = false;
       if (vertices is null) {
         throw new ArgumentNullException(nameof(vertices));
+      }
+      var types = vertices.Select(x => x.GetType()).Distinct();
+      if (types.Count() != 1) {
+        throw new ArgumentException("Vertex array must all be of the same type");
       }
       VertexCount = vertices.Length;
       if (VertexCount < MinVertexCount || VertexCount > MaxVertexCount) {
         throw new ArgumentOutOfRangeException(nameof(vertices));
       }
       IsStatic = isStatic;
-      VertexInfo = VertexPos2DTex.VertexInfo;
+      VertexInfo = vertices.First().VertexInfo;
       VertexBufferHandle = GL.GenBuffer();
 
-      GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, vertices, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
-      GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
-    }
-
-    public VertexBuffer(VertexPos2DCol[] vertices, bool isStatic = true) {
-      isDisposed = false;
-      if (vertices is null) {
-        throw new ArgumentNullException(nameof(vertices));
-      }
-      VertexCount = vertices.Length;
-      if (VertexCount < MinVertexCount || VertexCount > MaxVertexCount) {
-        throw new ArgumentOutOfRangeException(nameof(vertices));
-      }
-      IsStatic = isStatic;
-      VertexInfo = VertexPos2DCol.VertexInfo;
-      VertexBufferHandle = GL.GenBuffer();
+      // Flatten this structure into a single array that can be passed simply to OpenGL.
+      // Note: I could have stored everything ins tructs and pass them in without flattening, but that makes the code ugly.
+      float[] flattened = vertices.SelectMany(x => x.Flattened).ToArray();
 
       GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, vertices, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
+      GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, flattened, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
       GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
     }
 
