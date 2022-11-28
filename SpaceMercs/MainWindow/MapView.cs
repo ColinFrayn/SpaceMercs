@@ -92,9 +92,9 @@ namespace SpaceMercs.MainWindow
     private void SetupDemo() {
       frameCount = 0;
       Random rnd = new Random();
-      int boxCount = 1000;
+      int boxCount = 100;
       int vxCount = 0, ixCount = 0;
-      VertexPosCol[] vertices = new VertexPosCol[boxCount * 4];
+      VertexPos2DCol[] vertices = new VertexPos2DCol[boxCount * 4];
       int[] indices = new int[boxCount * 6];
       for (int i = 0; i < boxCount; i++) {
         int w = rnd.Next(32, 128);
@@ -104,10 +104,10 @@ namespace SpaceMercs.MainWindow
         float r = (float)rnd.NextDouble();
         float g = (float)rnd.NextDouble();
         float b = (float)rnd.NextDouble();
-        vertices[vxCount++] = new VertexPosCol(new Vector2(x, y + h), new Color4(r, g, b, 1f));
-        vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y + h), new Color4(r, g, b, 1f));
-        vertices[vxCount++] = new VertexPosCol(new Vector2(x + w, y), new Color4(r, g, b, 1f));
-        vertices[vxCount++] = new VertexPosCol(new Vector2(x, y), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPos2DCol(new Vector2(x, y + h), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPos2DCol(new Vector2(x + w, y + h), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPos2DCol(new Vector2(x + w, y), new Color4(r, g, b, 1f));
+        vertices[vxCount++] = new VertexPos2DCol(new Vector2(x, y), new Color4(r, g, b, 1f));
         indices[ixCount++] = 0 + (i * 4);
         indices[ixCount++] = 1 + (i * 4);
         indices[ixCount++] = 2 + (i * 4);
@@ -116,20 +116,13 @@ namespace SpaceMercs.MainWindow
         indices[ixCount++] = 3 + (i * 4);
       }
 
-      vertexBuffer = new VertexBuffer(VertexPosCol.VertexInfo, vertices.Length);
+      vertexBuffer = new VertexBuffer(VertexPos2DCol.VertexInfo, vertices.Length);
       vertexBuffer.SetData(vertices);
-
       indexBuffer = new IndexBuffer(indices.Length);
       indexBuffer.SetData(indices);
-
       vertexArray = new VertexArray(vertexBuffer);
-
       shaderProgram = new ShaderProgram(ShaderCode.VertexShader2DColourFactor, ShaderCode.PixelShaderColour);
-
-      // Set uniform for screen dimensions in vertex shader
-      int[] viewport = new int[4];
-      GL.GetInteger(GetPName.Viewport, viewport);
-      shaderProgram.SetUniform("viewportSize", (float)viewport[2], (float)viewport[3]);
+      shaderProgram.SetUniform("model", Matrix4.Identity);
     }
 
     // Free stuff when the window is being closed
@@ -207,13 +200,14 @@ namespace SpaceMercs.MainWindow
     }
 
     private void RunDemo() {
+      Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
+      shaderProgram.SetUniform("projection", projectionM);
       float fact = (float)(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5);
       shaderProgram.SetUniform("colourFactor", fact);
       GL.UseProgram(shaderProgram.ShaderProgramHandle);
       GL.BindVertexArray(vertexArray.VertexArrayHandle);
       GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
       GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
-      Context.SwapBuffers();
     }
 
     // Draw the main view, whatever state it's in
@@ -308,28 +302,20 @@ namespace SpaceMercs.MainWindow
 
     // Display a welcome screen on startup
     private void DisplayWelcomeScreen() {
-      GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref ortho_projection);
-      GL.MatrixMode(MatrixMode.Modelview);
-      GL.LoadIdentity();
-
       // Set up scene
       GL.Disable(EnableCap.Lighting);
       GL.DepthMask(true);
       GL.Clear(ClearBufferMask.DepthBufferBit);
-      GL.ClearColor(Color.Black);
+      GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+      //GL.ClearColor(Color.Black);
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
       // Display welcome message
       tlWelcome1 = new TextLabel("Welcome to SpaceMercs v" + Const.strVersion);
       tlWelcome1.TextColour = Color.White;
       tlWelcome1.Draw(Size, TextLabel.Alignment.TopMiddle);
-      GL.PopMatrix();
-      GL.Translate(0.0, 0.3, 0.0);
-      GL.Scale(0.07 / Aspect, 0.07, 0.07);
-      GL.Rotate(180.0, Vector3d.UnitX);
-      //tlWelcome2.Draw(TextLabel.Alignment.TopMiddle);
-      GL.PopMatrix();
+
+      // Add a label about "Start a new game"
     }
 
     // Set up the scene ready for rendering
@@ -350,9 +336,7 @@ namespace SpaceMercs.MainWindow
     // Setup the OpenGL viewport
     private void SetupViewport() {
       MakeCurrent();
-      perspective = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
-      GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref perspective);
+      //perspective = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
       GL.Viewport(0, 0, Size.X, Size.Y);
     }
     #endregion // Rendering

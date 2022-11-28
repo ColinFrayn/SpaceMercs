@@ -1,7 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 
 namespace SpaceMercs.Graphics {
-  public sealed class VertexBuffer : IDisposable {
+  internal sealed class VertexBuffer : IDisposable {
     private bool isDisposed;
     private const int MinVertexCount = 2;
     private const int MaxVertexCount = 100_000;

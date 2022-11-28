@@ -43,9 +43,7 @@
  </ItemGroup>
   
    <ItemGroup>
-     <EmbeddedResource Include="GUIObjects\FreeSans.ttf">
-       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-     </EmbeddedResource>
+     <EmbeddedResource Include="GUIObjects\FreeSans.ttf" />
    </ItemGroup>
 
   <ItemGroup>

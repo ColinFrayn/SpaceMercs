@@ -2,7 +2,8 @@
 ToDo List
 -------------------------------------------------
 
-Why are FreeType fonts not loading correctly?? And why does that other example project work just fine???
+Convert TextLabel:
+- Display correctly
 
 Convert the welcome screen to use modern OpenGL
 

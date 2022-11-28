@@ -1,11 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL;
 
 namespace SpaceMercs.Graphics {
-  public sealed class VertexArray : IDisposable {
+  internal sealed class VertexArray : IDisposable {
     private bool isDisposed;
-    private const int MinVertexCount = 2;
-    private const int MaxVertexCount = 100_000;
-
     public readonly VertexBuffer VertexBuffer;
     public readonly int VertexArrayHandle;
 

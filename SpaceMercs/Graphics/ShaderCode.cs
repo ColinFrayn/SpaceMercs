@@ -1,9 +1,10 @@
 ﻿namespace SpaceMercs.Graphics {
   internal class ShaderCode {
     public static string VertexShader2DColourFactor = @"
-#version 330 core
+#version 460
 
-uniform vec2 viewportSize;
+uniform mat4 model;
+uniform mat4 projection;
 uniform float colourFactor;
 
 layout (location = 0) in vec2 aPosition;
@@ -13,15 +14,13 @@ out vec4 vColour;
 
 void main()
 {
-  float nx = aPosition.x / viewportSize.x * 2f - 1f;
-  float ny = aPosition.y / viewportSize.y * 2f - 1f;
-  gl_Position = vec4(nx, ny, 0f, 1f);
+  gl_Position = projection * model * vec4(aPosition.x, aPosition.y, 0f, 1f);
 
   vColour = aColour * colourFactor;
 }";
 
     public static string VertexShader3DTransform = @"
-#version 330 core
+#version 460
 
 uniform vec2 viewportSize;
 uniform mat4 transform;
@@ -41,7 +40,7 @@ void main()
 }";
 
     public static string PixelShaderColour = @"
-#version 330 core
+#version 460
 
 in vec4 vColour;
 out vec4 pixelColour;

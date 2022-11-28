@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using SharpFont;
+using SpaceMercs.Graphics;
 using System.IO;
 using System.Reflection;
 
@@ -13,14 +14,16 @@ namespace SpaceMercs {
     public int Advance { get; set; }
   }
 
-  public class FreeTypeFont {
+  internal class FreeTypeFont {
     private readonly Dictionary<uint, Character> _characters = new Dictionary<uint, Character>();
-    private readonly int _vao;
-    private readonly int _vbo;
+    private readonly VertexBuffer vertexBuffer;
+    private readonly IndexBuffer indexBuffer;
+    private readonly VertexArray vertexArray;
+    public uint PixelHeight;
 
     public FreeTypeFont(uint pixelheight) {
+      PixelHeight = pixelheight;
       Library lib = new Library();
-      //SharpFont.Face face = new SharpFont.Face(lib, "GUIObjects/FreeSans.ttf");
 
       Assembly assembly = this.GetType().GetTypeInfo().Assembly;
       //string[] names = assembly.GetManifestResourceNames();
@@ -32,19 +35,20 @@ namespace SpaceMercs {
       resource_stream.CopyTo(ms);
 
       // Setup the new font face
-      SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0); // Unknown file format exception
+      SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0);
 
-      // ?
-      face.SetPixelSizes(0, pixelheight);
+      // Set the font scale
+      face.SetPixelSizes(0, PixelHeight);
 
       // set 1 byte pixel alignment 
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
       // set texture unit
+      GL.Enable(EnableCap.Texture2D);
       GL.ActiveTexture(TextureUnit.Texture0);
 
-      // Load first 128 characters of ASCII set
-      for (uint c = 0; c < 128; c++) {
+      // Load the useful characters of ASCII set, skipping the functional chars at the beginning
+      for (uint c = 32; c < 127; c++) {
         try {
           // load glyph
           //face.LoadGlyph(c, LoadFlags.Render, LoadTarget.Normal);
@@ -80,45 +84,38 @@ namespace SpaceMercs {
 
       // bind default texture
       GL.BindTexture(TextureTarget.Texture2D, 0);
+      GL.Disable(EnableCap.Texture2D);
 
       // set default (4 byte) pixel alignment 
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
 
-      float[] vquad =
-      {
-          // x   y      u     v    
-          0.0f, -1.0f,  0.0f, 0.0f,
-          0.0f,  0.0f,  0.0f, 1.0f,
-          1.0f,  0.0f,  1.0f, 1.0f,
-          0.0f, -1.0f,  0.0f, 0.0f,
-          1.0f,  0.0f,  1.0f, 1.0f,
-          1.0f, -1.0f,  1.0f, 0.0f
-      };
+      VertexPos2DTex[] vertices = new VertexPos2DTex[4];
+      int[] indices = new int[6];
+      vertices[0] = new VertexPos2DTex(new Vector2(0f, -1f), new Vector2(0f,0f));
+      vertices[1] = new VertexPos2DTex(new Vector2(0f, 0f), new Vector2(0f,1f));
+      vertices[2] = new VertexPos2DTex(new Vector2(1f, 0f), new Vector2(1f,1f));
+      vertices[3] = new VertexPos2DTex(new Vector2(1f, -1f), new Vector2(1f,0f));
+      indices[0] = 0;
+      indices[1] = 1;
+      indices[2] = 2;
+      indices[3] = 0;
+      indices[4] = 2;
+      indices[5] = 3;
 
-      // Create [Vertex Buffer Object](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object)
-      _vbo = GL.GenBuffer();
-      GL.BindBuffer(BufferTarget.ArrayBuffer, _vbo);
-      int arraySize = 4 * 6 * 4;
-      GL.BufferData<float>(BufferTarget.ArrayBuffer, arraySize, vquad, BufferUsageHint.StaticDraw);
-
-      // [Vertex Array Object](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object)
-      _vao = GL.GenVertexArray();
-      GL.BindVertexArray(_vao);
-      GL.EnableVertexAttribArray(0);
-      GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, 4 * 4, 0);
-      GL.EnableVertexAttribArray(1);
-      GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, 4 * 4, 2 * 4);
-
-      GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-      GL.BindVertexArray(0);
+      vertexBuffer = new VertexBuffer(VertexPos2DTex.VertexInfo, vertices.Length);
+      vertexBuffer.SetData(vertices);
+      indexBuffer = new IndexBuffer(indices.Length);
+      indexBuffer.SetData(indices);
+      vertexArray = new VertexArray(vertexBuffer);
     }
 
-    public void RenderText(string text, float x, float y, float xScale, float yScale, Vector2 dir) {
-      GL.ActiveTexture(TextureUnit.Texture0);
-      GL.BindVertexArray(_vao);
+    public void RenderText(ShaderProgram prog, string text, float x, float y, float xScale, float yScale) {
+      //GL.Enable(EnableCap.Texture2D);
+      //GL.ActiveTexture(TextureUnit.Texture0);
+      GL.UseProgram(prog.ShaderProgramHandle);
+      GL.BindVertexArray(vertexArray.VertexArrayHandle);
+      GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
 
-      float angle_rad = (float)Math.Atan2(dir.Y, dir.X);
-      Matrix4 rotateM = Matrix4.CreateRotationZ(angle_rad);
       Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(x, y, 0f));
 
       // Iterate through all characters
@@ -138,18 +135,21 @@ namespace SpaceMercs {
         Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
         Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
 
-        Matrix4 modelM = scaleM * transRelM * rotateM * transOriginM; // OpenTK `*`-operator is reversed
-        GL.UniformMatrix4(0, false, ref modelM);
+        Matrix4 modelM = scaleM * transRelM * transOriginM;
+        prog.SetUniform("model", modelM);
 
         // Render glyph texture over quad
-        GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
+        //GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
 
         // Render quad
-        GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+        GL.DrawElements(PrimitiveType.Triangles, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
+        break; // DEBUG
       }
 
       GL.BindVertexArray(0);
+      GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
       GL.BindTexture(TextureTarget.Texture2D, 0);
+      //GL.Disable(EnableCap.Texture2D);
     }
   }
 }

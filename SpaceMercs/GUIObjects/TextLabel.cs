@@ -33,8 +33,8 @@ namespace SpaceMercs {
     private static readonly FreeTypeFont _font;
     private static readonly string TextLabelVertexShader = @"
 #version 460
-layout (location = 0) uniform mat4 model;
-layout (location = 1) uniform mat4 projection;
+uniform mat4 model;
+uniform mat4 projection;
 
 layout (location = 0) in vec2 in_pos;
 layout (location = 1) in vec2 in_uv;
@@ -53,22 +53,25 @@ in vec2 vUV;
 
 layout (binding = 0)  uniform sampler2D u_texture;
 
-layout (location = 2) uniform vec3 textColour;
+//layout (location = 2) uniform vec3 textColour;
 
 out vec4 fragColor;
 
 void main()
 {
-  vec2 uv = vUV.xy;
-  float text = texture(u_texture, uv).r;
-  fragColor = vec4(textColour.rgb*text, text);
+  //vec2 uv = vUV.xy;
+  //float text = texture(u_texture, uv).r;
+  fragColor = vec4(1f,1f,1f,1f); //vec4(textColour.rgb*text, 1f);
 }";
-    private static readonly ShaderProgram shaderProgram;
+    private static readonly ShaderProgram textLabelShaderProgram;
 
     // Static constructor sets up shader program
     static TextLabel() {
-      shaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
+      textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
+      textLabelShaderProgram.SetUniform("model", Matrix4.Identity);
+      GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
       _font = new FreeTypeFont(32);
+      GL.UseProgram(0);
     }
 
     // Set up the text label
@@ -141,16 +144,16 @@ void main()
     private void DrawAtInternal(Vector2i Size, Alignment ali, double dXScale, double dYScale, int xshift, int yshift) {
       if (!bEnabled) return;
 
-      Matrix4 projectionM = Matrix4.CreateScale(new Vector3(1f / Size.X, 1f / Size.Y, 1.0f));
-      projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
-      
+      Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
+
       GL.Enable(EnableCap.Blend);
       GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-      GL.UseProgram(shaderProgram.ShaderProgramHandle);
-      shaderProgram.SetUniform("projection", projectionM);
-      shaderProgram.SetUniform("textColour", (float)TextColour.R/255f, (float)TextColour.G / 255f, (float)TextColour.B / 255f);
-      _font.RenderText("This is sample text", xshift, yshift, (float)dXScale, (float)dYScale, new Vector2(1f, 0f));
+      GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
+      textLabelShaderProgram.SetUniform("projection", projectionM);
+      //textLabelShaderProgram.SetUniform("textColour", (float)TextColour.R / 255f, (float)TextColour.G / 255f, (float)TextColour.B / 255f);
+      //_font.RenderText("This is sample text", xshift, yshift, (float)dXScale, (float)dYScale, new Vector2(1f, 0f));
+      _font.RenderText(textLabelShaderProgram, "This is sample text", 0.0f, 0.0f, 1f, 1f);
 
       //if (ali == Alignment.BottomLeft || ali == Alignment.BottomMiddle || ali == Alignment.BottomRight) yshift = -TextBitmap.Height;
       //if (ali == Alignment.CentreLeft || ali == Alignment.CentreMiddle || ali == Alignment.CentreRight) yshift = -TextBitmap.Height / 2;

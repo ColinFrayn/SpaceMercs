@@ -18,8 +18,8 @@ namespace SpaceMercs {
             StartVisible = false,
             StartFocused = true,
             API = OpenTK.Windowing.Common.ContextAPI.OpenGL,
-            Profile = OpenTK.Windowing.Common.ContextProfile.Core,
-            APIVersion = new Version(3,3)
+            //Profile = OpenTK.Windowing.Common.ContextProfile.Core,
+            APIVersion = new Version(4,6)
           };
         using (MapView window = new MapView(GameWindowSettings.Default, nws)) {
           window.Run();
