@@ -77,9 +77,8 @@ void main()
 {
   vec2 uv = vUV.xy;
   float textureVal = texture(u_texture, uv).r;
-  //fragColor = vec4(1f,1f,1f,1f);
-  //fragColor = vec4(textColour.rgb*textureVal, 1f);
-  fragColor = vec4(textColour.rgb, 1f);
+  fragColor = vec4(textColour.rgb*textureVal, 1f);
+  //fragColor = vec4(textColour.rgb, 1f);
 }";
     private static readonly string TextLabelFragmentShader_New = @"
 #version 460
@@ -93,31 +92,16 @@ void main()
   fragColor = vec4(textColour.rgb, 1f);
 }";
     private static readonly ShaderProgram textLabelShaderProgram;
-    private static ShaderProgram defaultShaderProgram;
-    private static GLShape exampleSquare;
 
     // Static constructor sets up shader program
     static TextRenderer() {
       textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader, TextLabelFragmentShader);
       //textLabelShaderProgram = new ShaderProgram(TextLabelVertexShader_New, TextLabelFragmentShader_New);
       textLabelShaderProgram.SetUniform("model", Matrix4.Identity);
+      textLabelShaderProgram.SetUniform("view", Matrix4.Identity);
       textLabelShaderProgram.SetUniform("projection", Matrix4.Identity);
       textLabelShaderProgram.SetUniform("textColour", 1f, 1f, 1f);
       textLabelFont32 = new FreeTypeFont(32);
-
-      // DEBUG
-      VertexPos2DCol[] vertices = new VertexPos2DCol[] {
-        new VertexPos2DCol(new Vector2(-0.5f, 0.5f), new Color4(1f, 0f, 0f, 1f)),
-        new VertexPos2DCol(new Vector2(0.5f, 0.5f), new Color4(1f, 0f, 0f, 1f)),
-        new VertexPos2DCol(new Vector2(0.5f, -0.5f), new Color4(1f, 0f, 0f, 1f)),
-        new VertexPos2DCol(new Vector2(-0.5f, -0.5f), new Color4(1f, 0f, 0f, 1f))
-      };
-      int[] indices = new int[6] { 0, 1, 2, 0, 2, 3 };
-      exampleSquare = new GLShape(vertices, indices);
-      defaultShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
-      defaultShaderProgram.SetUniform("model", Matrix4.Identity);
-      defaultShaderProgram.SetUniform("colourFactor", 1.0f);
-      // END DEBUG
     }
 
     // Draw this label
@@ -137,37 +121,30 @@ void main()
       //DrawAtInternal(ali, dwidth / (double)TextBitmap.Width, dheight / (double)TextBitmap.Height, xshift, yshift);
     }
     private static void DrawAtInternal(string strText, Alignment ali, Color col, float dXScale, float dYScale, float xshift, float yshift) {
-      Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+      Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(-10.0f, 10.0f, 10.0f, -10.0f, -1.0f, 1.0f);
 
       // "View matrix" components?
       // TODO
       //Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xshift, yshift, 0f));
 
-      GL.Enable(EnableCap.Blend);
-      GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+      //GL.Enable(EnableCap.Blend);
+      //GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
       GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
-      //defaultShaderProgram.SetUniform("projection", projectionM);
       textLabelShaderProgram.SetUniform("projection", projectionM);
       textLabelShaderProgram.SetUniform("textColour", (float)col.R / 255f, (float)col.G / 255f, (float)col.B / 255f);
 
-      // Get scale of text from Font and scale accordingly
-      Matrix4 scaleM = Matrix4.CreateScale(new Vector3(0.01f, 0.01f, 1.0f));
-      textLabelShaderProgram.SetUniform("view", projectionM);
+      // Get scale of text from Font and scale/align accordingly
+      Vector2 textSize = textLabelFont32.MeasureText(strText);
+      Matrix4 scaleM = Matrix4.CreateScale(new Vector3(1/textSize.Y, 1 / textSize.Y, 1.0f));
+      // TODO ALIGN
+      textLabelShaderProgram.SetUniform("view", scaleM);
 
+      // Render the actual text using teh selected font
       textLabelFont32.RenderText(textLabelShaderProgram, strText);
 
-      //Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xshift, yshift, 0.0f));
-      //Matrix4 scaleM = Matrix4.CreateScale(new Vector3(dXScale, dYScale, 1.0f));
-      //Matrix4 modelM = scaleM * transOriginM;
-      //defaultShaderProgram.SetUniform("model", modelM);
-      //textLabelShaderProgram.SetUniform("model", modelM);
-
-      //GL.UseProgram(defaultShaderProgram.ShaderProgramHandle);
-      //exampleSquare.Bind();
-      //exampleSquare.Draw();
-      //exampleSquare.Unbind();
-      //GL.UseProgram(0);
+      GL.UseProgram(0);
+      //GL.Disable(EnableCap.Blend);
 
       //if (ali == Alignment.BottomLeft || ali == Alignment.BottomMiddle || ali == Alignment.BottomRight) yshift = -TextBitmap.Height;
       //if (ali == Alignment.CentreLeft || ali == Alignment.CentreMiddle || ali == Alignment.CentreRight) yshift = -TextBitmap.Height / 2;

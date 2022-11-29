@@ -3,8 +3,7 @@ ToDo List
 -------------------------------------------------
 
 Convert TextLabel:
-- Display correctly compared to example
-- Extract height and width of text by querying font object
+- Fix scaling, rotation, alignment of text (currently unit height)
 
 Convert the entire welcome screen
 

@@ -5,6 +5,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 
 namespace SpaceMercs {
 
@@ -45,7 +46,7 @@ namespace SpaceMercs {
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
       // Set texture unit
-      GL.Enable(EnableCap.Texture2D);
+      //GL.Enable(EnableCap.Texture2D);
       GL.ActiveTexture(TextureUnit.Texture0);
 
       // Load the useful characters of ASCII set, skipping the functional chars at the beginning
@@ -84,62 +85,63 @@ namespace SpaceMercs {
 
       // Bind default texture
       GL.BindTexture(TextureTarget.Texture2D, 0);
-      GL.Disable(EnableCap.Texture2D);
+      //GL.Disable(EnableCap.Texture2D);
 
       // Set default (4 byte) pixel alignment 
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
 
       square = Square.BuildTextured(Alignment.TopLeft);
+      //square = Square.BuildMultiColoured(Alignment.TopLeft);
+    }
+
+    // Return a translation offset to be used to get the alignment / scaling right
+    public Vector2 MeasureText(string text) {
+      float char_x = 0.0f;
+      foreach (char c in text) {
+        TexChar ch = _characters['?']; // Unprintable character => ?
+        if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
+        // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+        char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+      }
+      float height = _characters['A'].Size.Y;
+      return new Vector2(char_x, height);
     }
 
     public void RenderText(ShaderProgram prog, string text) {
       GL.ActiveTexture(TextureUnit.Texture0);
-      GL.UseProgram(prog.ShaderProgramHandle);
-      
-      square.Bind();
-
+  
       // Iterate through all characters
-      //float char_x = 0.0f;
-      //foreach (char c in text) {
-      //  TexChar ch = _characters['?']; // Unprintable character => ?
-      //  if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
+      float char_x = 0.0f;
+      foreach (char c in text) {
+        TexChar ch = _characters['?']; // Unprintable character => ?
+        if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
 
-      //  float w = ch.Size.X;
-      //  float h = ch.Size.Y;
-      //  float xrel = char_x + ch.Bearing.X;
-      //  float yrel = (ch.Size.Y - ch.Bearing.Y);
+        float w = ch.Size.X;
+        float h = ch.Size.Y;
+        float xrel = char_x + ch.Bearing.X;
+        float yrel = (ch.Size.Y - ch.Bearing.Y);
 
-      //  // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-      //  char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+        // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+        char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 
-      //  Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
-      //  Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
+        Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
+        Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
 
-      //  Matrix4 modelM = scaleM * transRelM;
-      //  prog.SetUniform("model", modelM);
+        Matrix4 modelM = scaleM * transRelM;
+        prog.SetUniform("model", modelM);
 
-      //  // Render glyph texture over quad
-      //  GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
+        // Render glyph texture over quad
+        GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
 
-      //  // Render quad
-      //  square.Draw();
-      //}
-
-      // DEBUG
-      Matrix4 scaleM = Matrix4.CreateScale(new Vector3(30f, 20f, 1.0f));
-      Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(0.0f, 0.0f, 0.0f));
-      Matrix4 modelM = scaleM * transRelM;
-      prog.SetUniform("model", modelM);
-      square.Draw();
-      // END DEBUG
+        // Render quad
+        GL.UseProgram(prog.ShaderProgramHandle);
+        square.Bind();
+        square.Draw();
+      }
 
       square.Unbind();
       GL.BindTexture(TextureTarget.Texture2D, 0);
       GL.UseProgram(0);
-
-      // TODO: Return a translation offset to be used to get the alignment / scaling right in the level above
-      // Width = char_x?
-      // Height = size of a default char e.g. _characters['A'].Size.Y ?
     }
   }
 }
