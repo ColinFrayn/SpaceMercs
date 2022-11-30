@@ -2,12 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Convert TextLabel:
-- Fix scaling, rotation, alignment of text (currently unit height)
-
-Convert the entire welcome screen
-
-Convert MapView
+MapViewMap.DrawMap()
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 
@@ -31,6 +26,9 @@ Should not be able to target self or own team
 ----------
 Backburner
 ----------
+
+Improve TextRenderer
+- Bold, Shadow, Border
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race

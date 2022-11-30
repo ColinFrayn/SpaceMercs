@@ -5,11 +5,10 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Reflection;
-using System.Windows;
 
 namespace SpaceMercs {
 
-  public struct TexChar {
+    public struct TexChar {
     public int TextureID { get; set; }
     public Vector2 Size { get; set; }
     public Vector2 Bearing { get; set; }
@@ -94,20 +93,25 @@ namespace SpaceMercs {
       //square = Square.BuildMultiColoured(Alignment.TopLeft);
     }
 
+    // Return the average font height
+    public float FontHeight() {
+      return _characters['A'].Size.Y;
+    }
+
     // Return a translation offset to be used to get the alignment / scaling right
-    public Vector2 MeasureText(string text) {
+    public Vector2 MeasureText(string text, int kerningShift = 0) {
       float char_x = 0.0f;
       foreach (char c in text) {
         TexChar ch = _characters['?']; // Unprintable character => ?
         if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+        char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
       }
       float height = _characters['A'].Size.Y;
       return new Vector2(char_x, height);
     }
 
-    public void RenderText(ShaderProgram prog, string text) {
+    public void RenderText(ShaderProgram prog, string text, int kerningShift = 0) {
       GL.ActiveTexture(TextureUnit.Texture0);
   
       // Iterate through all characters
@@ -122,7 +126,7 @@ namespace SpaceMercs {
         float yrel = (ch.Size.Y - ch.Bearing.Y);
 
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+        char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 
         Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
         Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
