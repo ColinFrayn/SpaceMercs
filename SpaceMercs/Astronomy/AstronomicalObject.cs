@@ -31,7 +31,7 @@ namespace SpaceMercs {
     public abstract void ClearData();
     public abstract void SetName(string str);
     public abstract Star GetSystem();   // Parent Star (or self, if star)
-    public Vector3d GetMapLocation() {
+    public Vector3 GetMapLocation() {
       return this.GetSystem().MapPos;
     }
 

@@ -184,7 +184,7 @@ namespace SpaceMercs {
     public const float  MaximumMapViewZ = 50.0f;
     public const float  MapViewportAngle = (float)Math.PI / 6.0f;
     public const float  InitialMapViewZ = 15.0f;
-    public const double MaximumScrollRange = 75.0;
+    public const float  MaximumScrollRange = 75.0f;
 
     // System viewer settings
     public const double SystemViewDist = 20.0;

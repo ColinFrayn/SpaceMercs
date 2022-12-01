@@ -39,9 +39,12 @@ namespace SpaceMercs.MainWindow {
         public float Aspect { get { return bLoaded ? (float)Size.X / (float)Size.Y : 1f; } }
         private Star? CurrentSystem { get { return PlayerTeam?.CurrentPosition?.GetSystem(); } }
 
+        // Graphics
+        private ShaderProgram flatColourShaderProgram;
+
         // DEBUGGING
+        private ShaderProgram pos2DCol4ShaderProgram;
         private GLShape? squares;
-        private ShaderProgram shaderProgram;
         private int frameCount = 0;
         private bool DEMO_MODE = false;  // -----=====## DEMO MODE ##=====-----
 
@@ -83,6 +86,17 @@ namespace SpaceMercs.MainWindow {
             ThisDispatcher = Dispatcher.CurrentDispatcher;
             msgBox = new GUIMessageBox(this);
 
+            // Setup the default shader programs
+            pos2DCol4ShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3, ShaderCode.PixelShaderFlatColour);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f,1f,1f,1f));
+
             if (DEMO_MODE) SetupDemo(); // DEBUG
 
             base.OnLoad();
@@ -116,14 +130,12 @@ namespace SpaceMercs.MainWindow {
             }
 
             squares = new GLShape(vertices, indices);
-            shaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
-            shaderProgram.SetUniform("model", Matrix4.Identity);
         }
 
         // Free stuff when the window is being closed
         protected override void OnUnload() {
             squares?.Dispose();
-            shaderProgram?.Dispose();
+            pos2DCol4ShaderProgram?.Dispose();
             base.OnUnload();
         }
 
@@ -194,15 +206,15 @@ namespace SpaceMercs.MainWindow {
 
         private void RunDemo() {
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
-            shaderProgram.SetUniform("projection", projectionM);
+            pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
             float ang = (float)frameCount * (float)Math.PI / 240f;
             Matrix4 rotationM = Matrix4.CreateRotationZ(ang);
             Matrix4 translateM = Matrix4.CreateTranslation(Size.X / 2, Size.Y / 2, 0.0f);
             Matrix4 modelM = translateM.Inverted() * rotationM * translateM;
-            shaderProgram.SetUniform("model", modelM);
+            pos2DCol4ShaderProgram.SetUniform("model", modelM);
             float fract = (float)(Math.Abs(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5)) * 0.9f + 0.1f;
-            shaderProgram.SetUniform("colourFactor", fract);
-            GL.UseProgram(shaderProgram.ShaderProgramHandle);
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", fract);
+            GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
             squares?.Bind();
             squares?.Draw();
             squares?.Unbind();
@@ -456,7 +468,7 @@ namespace SpaceMercs.MainWindow {
                 if (fMapViewY > (CurrentSystem.MapPos.Y + Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y + Const.MaximumScrollRange);
                 // TODO glMapView.Invalidate();
             }
-
+            return;
             // Hover over GUI objects
             bool b1 = gbRenameObject.IsHover(mx, my);
             bool b2 = gbFlyTo.IsHover(mx, my);

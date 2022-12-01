@@ -3,6 +3,7 @@ ToDo List
 -------------------------------------------------
 
 MapViewMap.DrawMap()
+- DrawMapGrid()
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 

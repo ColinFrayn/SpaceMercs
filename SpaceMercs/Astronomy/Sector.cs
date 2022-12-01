@@ -20,15 +20,15 @@ namespace SpaceMercs {
       int seed = map.MapSeed ^ ((sx * 85091) + (sy * 29527)) ^ ((sx * 34501) + (sy * 61819)); // Non-random seed; repeatable
       Random rand = new Random(seed);
       // Setup the stars in this sector
-      double yoffset = (((sy * 2) - 1) * Const.SectorSize) / 2.0;
-      double xoffset = (((sx * 2) - 1) * Const.SectorSize) / 2.0;
+      float yoffset = (float)(((sy * 2) - 1) * Const.SectorSize) / 2.0f;
+      float xoffset = (float)(((sx * 2) - 1) * Const.SectorSize) / 2.0f;
       for (int sno = 0; sno < map.StarsPerSector; sno++) {
-        double X, Y;
+        float X, Y;
         do {
           // Create a star somewhere in the sector, but avoid the edges (so we don't end up overlapping with other stars in other sectors.)
           // Note we can't really just check the neighbouring sectors, because then the details of this sector would depend on which other sectors were built first, which would make this unrepeatable.
-          X = rand.NextDouble() * ((double)Const.SectorSize * 0.96) + xoffset + ((double)Const.SectorSize * 0.02);
-          Y = rand.NextDouble() * ((double)Const.SectorSize * 0.96) + yoffset + ((double)Const.SectorSize * 0.02);
+          X = (float)rand.NextDouble() * ((float)Const.SectorSize * 0.96f) + xoffset + ((float)Const.SectorSize * 0.02f);
+          Y = (float)rand.NextDouble() * ((float)Const.SectorSize * 0.96f) + yoffset + ((float)Const.SectorSize * 0.02f);
         } while (CheckProximity(X, Y));
         Star st = new Star(X, Y, rand.Next(10000000), map.PlanetDensity, this);
         st.ID = sno;

@@ -14,7 +14,7 @@ namespace SpaceMercs {
     public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
     public string StarType { get; private set; }
     public Race Owner { get; private set; }
-    public Vector3d MapPos { get; private set; }
+    public Vector3 MapPos { get; private set; }
     public bool bGenerated { get; private set; }
     public bool Visited { get; private set; }
     public override double DrawScale { get { return Math.Pow(radius/Const.Billion, 0.3) * 2.0; } }
@@ -38,8 +38,8 @@ namespace SpaceMercs {
       if (!st.TradeRoutes.Contains(this)) st.AddTradeRoute(this);
     }
 
-    public Star(double X,  double Y, int _seed, int PlanetDensity, Sector s) {
-      MapPos = new Vector3d(X,Y,0.0);
+    public Star(float X, float Y, int _seed, int PlanetDensity, Sector s) {
+      MapPos = new Vector3(X,Y,0f);
       PDensity = PlanetDensity;
       planets = new List<Planet>();
       Visited = false;
@@ -61,9 +61,9 @@ namespace SpaceMercs {
 
       XmlNode xmlpos = xml.SelectSingleNode("MapPos");
       if (xmlpos == null) throw new Exception("Could not locate MapPos for Star with ID = " + ID);
-      double X = Double.Parse(xmlpos.Attributes["X"].Value);
-      double Y = Double.Parse(xmlpos.Attributes["Y"].Value);
-      MapPos = new Vector3d(X, Y, 0.0);
+      float X = float.Parse(xmlpos.Attributes["X"].Value);
+      float Y = float.Parse(xmlpos.Attributes["Y"].Value);
+      MapPos = new Vector3(X, Y, 0f);
 
       Visited = (xml.SelectSingleNode("Visited") != null);
 
