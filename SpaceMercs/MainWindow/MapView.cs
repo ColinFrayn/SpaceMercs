@@ -460,7 +460,7 @@ namespace SpaceMercs.MainWindow {
                 float fScale = Const.MouseMoveScale * (float)fMapViewZ / 27.0f; // To make sure that the scrolling is a sensible speed regardless of zoom level
                 if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) fScale *= 2.5f;
                 else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) fScale /= 2.5f;
-                fMapViewX -= (float)(e.X - mx) * fScale;
+                fMapViewX += (float)(e.X - mx) * fScale;
                 fMapViewY += (float)(e.Y - my) * fScale;
                 if (fMapViewX < (CurrentSystem.MapPos.X - Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X - Const.MaximumScrollRange);
                 if (fMapViewX > (CurrentSystem.MapPos.X + Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X + Const.MaximumScrollRange);
@@ -535,9 +535,9 @@ namespace SpaceMercs.MainWindow {
             if (msgBox.Active) return;
 
             float delta;
-            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 50.0f;
-            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 500.0f;
-            else delta = -e.OffsetY / 150.0f;
+            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 1.5f;
+            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 10.0f;
+            else delta = -e.OffsetY / 3.0f;
 
             if (view == ViewMode.ViewMission) {
                 MouseWheel_Mission(delta);

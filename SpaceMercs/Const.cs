@@ -182,7 +182,7 @@ namespace SpaceMercs {
     public const double MapStarScale = 0.03;
     public const float  MinimumMapViewZ = 8.0f;
     public const float  MaximumMapViewZ = 50.0f;
-    public const float  MapViewportAngle = (float)Math.PI / 6.0f;
+    public const float  MapViewportAngle = (float)Math.PI / 3.0f;
     public const float  InitialMapViewZ = 15.0f;
     public const float  MaximumScrollRange = 75.0f;
 

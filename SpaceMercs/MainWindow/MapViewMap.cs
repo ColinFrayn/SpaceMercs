@@ -66,7 +66,7 @@ namespace SpaceMercs.MainWindow {
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
             flatColourShaderProgram.SetUniform("projection", projectionM);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(fMapViewX, fMapViewY, fMapViewZ);
+            Matrix4 translateM = Matrix4.CreateTranslation(fMapViewX, -fMapViewY, -fMapViewZ);
             Matrix4 viewM = translateM;
             flatColourShaderProgram.SetUniform("view", viewM);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
