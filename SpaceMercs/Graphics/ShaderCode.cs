@@ -32,7 +32,7 @@ out vec4 vColour;
 
 void main()
 {
-  gl_Position = projection * model * vec4(aPosition.x, aPosition.y, aPosition.z, 1f);
+  gl_Position = projection * model * vec4(aPosition.x, 1f);
 
   vColour = aColour;
 }";
@@ -48,7 +48,7 @@ layout (location = 0) in vec3 aPosition;
 
 void main()
 {
-  gl_Position = projection * view * model * vec4(aPosition.x, aPosition.y, aPosition.z, 1f);
+  gl_Position = projection * view * model * vec4(aPosition, 1f);
 }";
 
         public static string PixelShaderFlatColour = @"

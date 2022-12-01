@@ -9,9 +9,9 @@ namespace SpaceMercs.Graphics {
         public readonly int VertexBufferHandle;
         public int VertexCount { get; private set; }
         public readonly VertexInfo VertexInfo;
-        public readonly bool IsStatic;
+        public readonly BufferUsageHint BufferUsageHint;
 
-        public VertexBuffer(IVertex[] vertices, bool isStatic = true) {
+        public VertexBuffer(IVertex[] vertices, BufferUsageHint hint = BufferUsageHint.StaticDraw) {
             isDisposed = false;
             if (vertices is null) {
                 throw new ArgumentNullException(nameof(vertices));
@@ -24,7 +24,7 @@ namespace SpaceMercs.Graphics {
             if (VertexCount < MinVertexCount || VertexCount > MaxVertexCount) {
                 throw new ArgumentOutOfRangeException(nameof(vertices));
             }
-            IsStatic = isStatic;
+            BufferUsageHint = hint;
             VertexInfo = vertices.First().VertexInfo;
             VertexBufferHandle = GL.GenBuffer();
 
@@ -33,7 +33,7 @@ namespace SpaceMercs.Graphics {
             float[] flattened = vertices.SelectMany(x => x.Flattened).ToArray();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-            GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, flattened, isStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, flattened, hint);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
         }
 
@@ -52,7 +52,7 @@ namespace SpaceMercs.Graphics {
             float[] flattened = vertices.SelectMany(x => x.Flattened).ToArray();
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferHandle);
-            GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, flattened, IsStatic ? BufferUsageHint.StaticDraw : BufferUsageHint.StreamDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, VertexCount * VertexInfo.SizeInBytes, flattened, BufferUsageHint);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0); // Unbind
         }
 

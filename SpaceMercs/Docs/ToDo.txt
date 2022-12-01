@@ -3,7 +3,7 @@ ToDo List
 -------------------------------------------------
 
 MapViewMap.DrawMap()
-- DrawMapGrid()
+- DrawMapGrid() : Why are they not displaying??
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 

@@ -78,7 +78,7 @@ namespace SpaceMercs.MainWindow {
             //Planet.BuildPlanetHalo();
             //GraphicsFunctions.Initialise();
             //Terrain.GenerateSeedMap();
-            //SetupGUIElements();
+            SetupGUIElements();
             bLoaded = true;
             SetupViewport();
             //SetupOptionsMenu();
@@ -468,7 +468,7 @@ namespace SpaceMercs.MainWindow {
                 if (fMapViewY > (CurrentSystem.MapPos.Y + Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y + Const.MaximumScrollRange);
                 // TODO glMapView.Invalidate();
             }
-            return;
+            
             // Hover over GUI objects
             bool b1 = gbRenameObject.IsHover(mx, my);
             bool b2 = gbFlyTo.IsHover(mx, my);
@@ -481,7 +481,6 @@ namespace SpaceMercs.MainWindow {
             if (gbFlyTo.IsHover(mx, my) != b2) bUpdate = true;
             if (gbViewColony.IsHover(mx, my) != b3) bUpdate = true;
             if (gbScan.IsHover(mx, my) != b4) bUpdate = true;
-            // TODO if (bUpdate) glMapView.Invalidate();
             if (view == ViewMode.ViewMap) MapHover();
             if (view == ViewMode.ViewSystem) SystemHover();
         }
@@ -536,9 +535,9 @@ namespace SpaceMercs.MainWindow {
             if (msgBox.Active) return;
 
             float delta;
-            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetX / 50.0f;
-            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetX / 500.0f;
-            else delta = -e.OffsetX / 150.0f;
+            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 50.0f;
+            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 500.0f;
+            else delta = -e.OffsetY / 150.0f;
 
             if (view == ViewMode.ViewMission) {
                 MouseWheel_Mission(delta);

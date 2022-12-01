@@ -151,7 +151,6 @@ namespace SpaceMercs.MainWindow {
 
             // If limits unchanged then don't recreate
             if (MinSectorX != lastMinX || MaxSectorX != lastMaxX || MinSectorY != lastMinY || MaxSectorY != lastMaxY || mapLinesBuffer is null) {
-
                 List<VertexPos3D> vertices = new List<VertexPos3D>();
                 // Draw the map grid
                 for (int x = MinSectorX; x <= MaxSectorX + 1; x++) {
@@ -164,13 +163,19 @@ namespace SpaceMercs.MainWindow {
                 }
 
                 // Create the buffers/arrays if not already done
-                if (mapLinesBuffer is null) mapLinesBuffer = new VertexBuffer(vertices.ToArray(), false);
+                if (mapLinesBuffer is null) mapLinesBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
                 else mapLinesBuffer.SetData(vertices.ToArray());
+
+                // Store new values so we can check later if they change
+                lastMinX = MinSectorX;
+                lastMinY = MinSectorY;
+                lastMaxX = MaxSectorX;
+                lastMaxY = MaxSectorY;
             }
             if (mapLinesArray is null) mapLinesArray = new VertexArray(mapLinesBuffer);
 
-            GL.BindVertexArray(mapLinesArray.VertexArrayHandle);
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            GL.BindVertexArray(mapLinesArray.VertexArrayHandle);
             GL.DrawArrays(PrimitiveType.Lines, 0, mapLinesBuffer.VertexCount);
             GL.BindVertexArray(0);
 
