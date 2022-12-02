@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs.MainWindow {
     // Partial class including functions for drawing the full galaxymap view
@@ -11,6 +12,7 @@ namespace SpaceMercs.MainWindow {
         VertexBuffer? mapLinesBuffer = null;
         VertexArray? mapLinesArray = null;
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
+        private GLShape? circle32 = null, circle64 = null;
 
         // Build texture maps for the stars' radial brightness maps
         private void SetupMapTextures() {
@@ -65,28 +67,32 @@ namespace SpaceMercs.MainWindow {
             // Set the correct view location & perspective matrix
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
             flatColourShaderProgram.SetUniform("projection", projectionM);
+            pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
 
             Matrix4 translateM = Matrix4.CreateTranslation(fMapViewX, -fMapViewY, -fMapViewZ);
             Matrix4 viewM = translateM;
             flatColourShaderProgram.SetUniform("view", viewM);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("view", viewM);
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
 
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the map
             if (bShowGridlines) DrawMapGrid();
-            //if (bShowRangeCircles) DrawRangeCircles();
-            //if (bShowTradeRoutes) DrawTradeRoutes();
-            //DrawStars();
-            //DrawMapHoverLink();
-            //DrawMapSelectionIcons();
-            //SetupGUIHoverInfo();
-            //DrawGUI();
+            if (bShowRangeCircles) DrawRangeCircles();
+            if (bShowTradeRoutes) DrawTradeRoutes();
+            DrawStars();
+            DrawMapHoverLink();
+            DrawMapSelectionIcons();
+            SetupGUIHoverInfo();
+            DrawGUI();
         }
 
         // Highlight aoSelected and aoHover, if they exist; Highlight current location
         private void DrawMapSelectionIcons() {
+            return;
             if (aoHover != null) {
                 GL.PushMatrix();
                 GL.Translate(((Star)aoHover).MapPos);
@@ -117,11 +123,13 @@ namespace SpaceMercs.MainWindow {
 
         // If we have any trade routes between systems, show them here
         private void DrawTradeRoutes() {
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
+
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
                     Sector sc = GalaxyMap.GetSector(tp);
-                    sc.DrawTradeRoutes();
+                    sc.DrawTradeRoutes(pos2DCol4ShaderProgram);
                 }
             }
         }
@@ -129,6 +137,7 @@ namespace SpaceMercs.MainWindow {
         // Draw the stars on the map screen
         private void DrawStars() {
             if (GalaxyMap.bMapSetup == false) return;
+            return;
 
             // Display all stars by sector
             SetupMapLighting();
@@ -146,7 +155,6 @@ namespace SpaceMercs.MainWindow {
 
         // Draw the grid for the map screen
         private void DrawMapGrid() {
-            GL.DepthMask(false);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.5f, 0.5f, 0.5f, 0.7f));
 
             // If limits unchanged then don't recreate
@@ -163,6 +171,7 @@ namespace SpaceMercs.MainWindow {
                 }
 
                 // Create the buffers/arrays if not already done
+                if (!vertices.Any()) return;
                 if (mapLinesBuffer is null) mapLinesBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
                 else mapLinesBuffer.SetData(vertices.ToArray());
 
@@ -178,31 +187,39 @@ namespace SpaceMercs.MainWindow {
             GL.BindVertexArray(mapLinesArray.VertexArrayHandle);
             GL.DrawArrays(PrimitiveType.Lines, 0, mapLinesBuffer.VertexCount);
             GL.BindVertexArray(0);
-
-            // Reset OpenGL Parameters
-            GL.DepthMask(true);
         }
 
         // Draw range circles from the current location
         private void DrawRangeCircles() {
-            GL.PushMatrix();
-            GL.Translate(CurrentSystem!.MapPos);
-            GL.LineWidth(1.0f);
+            if (circle32 is null) circle32 = Circle.BuildFlat(32);
+            if (circle64 is null) circle64 = Circle.BuildFlat(64);
+            Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem!.MapPos);
             for (int range = 2; range <= 14; range += 2) {
-                double col = 0.8 - ((double)range / 20.0);
-                GL.Color3(col, col, col);
-                GL.PushMatrix();
-                GL.Scale(range, range, range);
-                GL.CallList(GraphicsFunctions.iOrbitDL);
-                GL.PopMatrix();
+                float col = 0.8f - ((float)range / 20.0f);
+                flatColourShaderProgram.SetUniform("flatColour", new Vector4(col, col, col, 1f));
+                Matrix4 scaleM = Matrix4.CreateScale(range, range, range);
+                Matrix4 modelM = scaleM * translateM;
+                flatColourShaderProgram.SetUniform("model", modelM);
+                GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                if (fMapViewZ + range > 20) {
+                    circle64.Bind();
+                    circle64.Draw();
+                    circle64.Unbind();
+                }
+                else {
+                    circle32.Bind();
+                    circle32.Draw();
+                    circle32.Unbind();
+                }
             }
-            GL.PopMatrix();
+            GL.BindVertexArray(0);
         }
 
         // Join hover star with selected star
         private void DrawMapHoverLink() {
             if (aoHover == null || aoSelected == null || aoHover == aoSelected) return;
             if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
+            return;
 
             // Join selected and hover AOs if necessary
             GL.Disable(EnableCap.Blend);

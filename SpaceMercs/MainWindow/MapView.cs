@@ -41,9 +41,9 @@ namespace SpaceMercs.MainWindow {
 
         // Graphics
         private ShaderProgram flatColourShaderProgram;
+        private ShaderProgram pos2DCol4ShaderProgram;
 
         // DEBUGGING
-        private ShaderProgram pos2DCol4ShaderProgram;
         private GLShape? squares;
         private int frameCount = 0;
         private bool DEMO_MODE = false;  // -----=====## DEMO MODE ##=====-----
@@ -535,9 +535,9 @@ namespace SpaceMercs.MainWindow {
             if (msgBox.Active) return;
 
             float delta;
-            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 1.5f;
-            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 10.0f;
-            else delta = -e.OffsetY / 3.0f;
+            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 1.0f;
+            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 7.0f;
+            else delta = -e.OffsetY / 2.5f;
 
             if (view == ViewMode.ViewMission) {
                 MouseWheel_Mission(delta);

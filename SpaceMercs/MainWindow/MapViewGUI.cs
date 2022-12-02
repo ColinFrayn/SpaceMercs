@@ -17,6 +17,7 @@ namespace SpaceMercs.MainWindow {
 
         // Draw the GUI elements
         private void DrawGUI() {
+            return;
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(ref ortho_projection);
             GL.MatrixMode(MatrixMode.Modelview);
@@ -230,9 +231,10 @@ namespace SpaceMercs.MainWindow {
                 }
                 lastAOHover = aoHover;
             }
-            //if (strHoverText.Count > 0) {
-            //  tlHover.UpdateTextFromList(strHoverText);
-            //}
+            return;
+            if (strHoverText.Any()) {
+              //tlHover.UpdateTextFromList(strHoverText);
+            }
         }
 
         // Draw the hover info when hovering over an object with "Alt" pressed

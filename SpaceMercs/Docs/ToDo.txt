@@ -3,7 +3,10 @@ ToDo List
 -------------------------------------------------
 
 MapViewMap.DrawMap()
-- DrawMapGrid() : Why are they not displaying??
+- DrawMapHoverLink
+- DrawMapSelectionIcons
+- DrawStars (basic first, then proper)
+- SetupGUIHoverInfo
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 

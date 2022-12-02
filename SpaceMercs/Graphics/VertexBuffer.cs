@@ -38,7 +38,7 @@ namespace SpaceMercs.Graphics {
         }
 
         public void SetData(IVertex[] vertices) {
-            if (vertices is null) {
+            if (vertices is null || vertices.Length == 0) {
                 throw new ArgumentNullException(nameof(vertices));
             }
             var types = vertices.Select(x => x.GetType()).Distinct();
