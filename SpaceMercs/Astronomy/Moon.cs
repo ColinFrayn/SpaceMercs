@@ -84,7 +84,7 @@ namespace SpaceMercs {
       GL.PopMatrix();
       GL.LineWidth(1.0f);
     }
-    public override void DrawSelected(IGraphicsContext currentContext, int Level = 5) {
+    public override void DrawSelected(int Level = 5) {
       SetupTextureMap(32, 16);
       // Draw this planet
       GL.PushMatrix();
@@ -95,7 +95,7 @@ namespace SpaceMercs {
       GL.Scale(pscale, pscale, pscale);
       //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
       GL.Rotate(90.0, Vector3d.UnitX);
-      GraphicsFunctions.sphere(Level).Draw(currentContext);
+      //GraphicsFunctions.sphere(Level).Draw();
       GL.Disable(EnableCap.Texture2D);
       GL.PopMatrix();
     }

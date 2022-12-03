@@ -69,7 +69,7 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("projection", projectionM);
             pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(fMapViewX, -fMapViewY, -fMapViewZ);
+            Matrix4 translateM = Matrix4.CreateTranslation(-fMapViewX, -fMapViewY, -fMapViewZ);
             Matrix4 viewM = translateM;
             flatColourShaderProgram.SetUniform("view", viewM);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
@@ -149,20 +149,18 @@ namespace SpaceMercs.MainWindow {
         // Draw the stars on the map screen
         private void DrawStars() {
             if (GalaxyMap.bMapSetup == false) return;
-            return;
 
             // Display all stars by sector
-            SetupMapLighting();
-            GL.Enable(EnableCap.Lighting);
+            //SetupMapLighting();
+            //GL.Enable(EnableCap.Lighting);
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
                     Sector sc = GalaxyMap.GetSector(tp);
-                    sc.Draw(Context, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
+                    sc.Draw(flatColourShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
                 }
             }
-            GL.Disable(EnableCap.Lighting);
-
+            //GL.Disable(EnableCap.Lighting);
         }
 
         // Draw the grid for the map screen

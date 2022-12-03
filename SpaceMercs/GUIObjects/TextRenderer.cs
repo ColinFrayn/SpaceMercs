@@ -82,6 +82,9 @@ void main()
             textLabelFont32 = new FreeTypeFont(32);
         }
 
+        // External measuring
+        public static Vector2 MeasureText(string strText) => textLabelFont32.MeasureText(strText);
+
         // Draw this label
         public static void Draw(string strText, Alignment ali) {
             DrawAtInternal(strText, ali, Color.White, 1f, 1f, 0f, 0f);
@@ -97,8 +100,8 @@ void main()
                 DrawAtInternal(strText, tro.Alignment, tro.TextColour, tro.Scale / tro.Aspect, tro.Scale, tro.XPos, tro.YPos);
             }
         }
-        public static void DrawAt(string strText, Alignment ali, float fwidth, float fheight, float xshift, float yshift) {
-            DrawAtInternal(strText, ali, Color.White, fwidth, fheight, xshift, yshift);
+        public static void DrawAt(string strText, Alignment ali, float fwidth, float fheight, float xshift, float yshift, Color? col = null) {
+            DrawAtInternal(strText, ali, col ?? Color.White, fwidth, fheight, xshift, yshift);
         }
 
         private static void DrawAtInternal(string strText, Alignment ali, Color col, float xScale, float yScale, float xShift, float yShift) {

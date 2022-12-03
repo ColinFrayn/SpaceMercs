@@ -1,16 +1,15 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics.Shapes;
+using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-        //private TextRenderer tlSel1, tlSel2, tlSel3, tlSel4, tlSel5;
-        //private TextRenderer tlF, tlG, tlL, tlR, tlA, tlV, tlC;
-        //private TextRenderer tlHover, tlClock, tlCash, tlWelcome1, tlWelcome2;
         private readonly int iGUIHoverN = -1; // What is this??
-        private static readonly float toggleY = 0.1f, toggleX = 0.002f, toggleStep = 0.03f, toggleScale = 0.05f;
+        private static readonly float toggleY = 0.1f, toggleX = 0.002f, toggleStep = 0.035f, toggleScale = 0.03f;
         private AstronomicalObject lastAOHover = null;
 
         // Draw the GUI elements
@@ -30,21 +29,13 @@ namespace SpaceMercs.MainWindow {
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
 
-            return;
-
             // Draw details of currently selected object
             if (aoSelected != null) {
                 DisplaySelectionText();
             }
 
             // Display the player's remaining cash reserves
-            GL.PushMatrix();
-            GL.Translate(0.99, 0.01, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopRight, Color.White);
-            GL.PopMatrix();
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f / Aspect, 0.03f, 0.99f, 0.04f);
 
             // Toggles
             DrawToggles();
@@ -57,7 +48,7 @@ namespace SpaceMercs.MainWindow {
             // If we're travelling then display that
             if (TravelDetails != null) {
                 if (TravelDetails.GameOver) TravelDetails = null;
-                else TravelDetails.Display(Context);
+                else TravelDetails.Display();
             }
             // Display the various GUI Buttons
             else {
@@ -79,95 +70,69 @@ namespace SpaceMercs.MainWindow {
 
         // Display the text labels required for the GUI
         private void DisplaySelectionText() {
-            double dTLScale = 0.035;
-            double dXMargin = 0.01;
-            double dYStart = 0.84;
-            double dYGap = 0.0325;
+            float dTLScale = 0.032f;
+            float dXMargin = 0.01f;
+            float dYStart = 0.8f;
+            float dYGap = 0.0425f;
+
+            // Get the text strings
+            if (aoSelected == null) return;
+
+            string tl1 = "", tl2 = "", tl3 = "", tl4 = "", tl5 = "";
+
+            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
+                Star st = (Star)aoSelected;
+                if (!string.IsNullOrEmpty(st.Name)) tl1 = st.Name;
+                else tl1 = "Unnamed Star";
+                tl2 = "M = " + Math.Round(st.Mass, 2).ToString() + " Sol";
+                tl3 = "R = " + Math.Round(st.radius / Const.Million, 0).ToString() + " Mm";
+                tl4 = "Type " + st.StarType;
+                tl5 = "(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")";
+            }
+            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
+                Planet pl = (Planet)aoSelected;
+                if (!string.IsNullOrEmpty(pl.Name)) tl1 = pl.Name;
+                else tl1 = "Unnamed Planet";
+                tl2 = pl.Type.ToString();
+                tl3 = "R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km";
+                tl4 = $"Temp = {pl.Temperature}K";
+                tl5 = "Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU";
+                //tw.Update(iTextSelected4, "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm");
+            }
+            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
+                Moon mn = (Moon)aoSelected;
+                tl1 = "Moon " + (mn.ID + 1).ToString();
+                tl2 = mn.Type.ToString();
+                tl3 = "R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km";
+                tl4 = $"Temp = {mn.Temperature}K";
+                tl5 = "Orbit = " + Math.Round(mn.orbit / Const.Million, 0).ToString() + " Mm";
+            }
+
             // Display the text details of the selected object
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel1.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel2.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap * 2.0, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel3.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap * 3.0, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel4.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap * 4.0, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel5.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
+            TextRenderer.DrawAt(tl1, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart);
+            TextRenderer.DrawAt(tl2, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap);
+            TextRenderer.DrawAt(tl3, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 2f);
+            TextRenderer.DrawAt(tl4, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 3f);
+            TextRenderer.DrawAt(tl5, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 4f);
         }
 
         // Draw toggles for all screens (L)
         private void DrawToggles() {
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("L", Alignment.CentreLeft, bShowLabels ? Color.White : Color.DimGray);
-            GL.PopMatrix();
+            TextRenderer.DrawAt("L", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the System View (C)
         private void DrawSystemToggles() {
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("C", Alignment.CentreLeft, bShowColonies ? Color.White : Color.DimGray);
-            GL.PopMatrix();
+            TextRenderer.DrawAt("C", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the map screen (RFGAV)
         private void DrawMapToggles() {
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 2, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("A", Alignment.CentreLeft, bShowTradeRoutes ? Color.White : Color.DimGray);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 3, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("F", Alignment.CentreLeft, bShowFlags ? Color.White : Color.DimGray);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 4, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("G", Alignment.CentreLeft, bShowGridlines ? Color.White : Color.DimGray);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 5, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("R", Alignment.CentreLeft, bShowRangeCircles ? Color.White : Color.DimGray);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(toggleX, toggleY + toggleStep * 6, 0.1);
-            GL.Scale(toggleScale / Aspect, toggleScale, toggleScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("V", Alignment.CentreLeft, bFadeUnvisited ? Color.White : Color.DimGray);
-            GL.PopMatrix();
+            TextRenderer.DrawAt("A", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("G", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("R", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("V", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
         }
 
         // Setup a mini window to show details of the current hover target
@@ -227,56 +192,60 @@ namespace SpaceMercs.MainWindow {
 
         // Draw the hover info when hovering over an object with "Alt" pressed
         private void DrawGUIHoverInfo() {
-            if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
+            //if (!IsKeyDown(Keys.LeftAlt) && !IsKeyDown(Keys.RightAlt)) return; // Only display if Alt is held down
             if (aoHover == null && iGUIHoverN == -1) return;
 
             List<string> strHoverText = SetupGUIHoverInfo();
             if (!strHoverText.Any()) return;
 
-            // Draw a dark grey box with a black background, and overlay the relevant text
-            // TODO
-            return;
+            // -- Draw a dark grey box with a black background, and overlay the relevant text
+            float thWidth = 0f, thHeight = 0f;
+            foreach (string str in strHoverText) {
+                Vector2 size = TextRenderer.MeasureText(str);
+                if (size.X > thWidth) thWidth = size.X;
+                if (size.Y > thHeight) thHeight = size.Y;
+            }
+            float hoverTextScale = 0.03f;
+            thWidth *= hoverTextScale / thHeight;
+            thHeight = hoverTextScale * 1.5f;
 
-            // Draw the mouse hover text
-            double xx = (double)mx / (double)Size.X;
-            double yy = (double)my / (double)Size.Y;
-            double thHeight = 0.06;
-            double thWidth = thHeight * 1.0; // (double)tlHover.Width / (double)tlHover.Height;
-            double xSep = 0.01, ySep = 0.01;
+            // First, calculate box dimensions
+            float xx = (float)mx / (float)Size.X;
+            float yy = (float)my / (float)Size.Y;
+            float xSep = 0.01f, ySep = 0.01f;
             if (xx > 0.5) {
                 thWidth = -thWidth;
-                xSep = -0.01;
+                xSep = -0.01f;
             }
             if (yy < 0.5) {
                 thHeight = -thHeight;
-                ySep = -0.01;
+                ySep = -0.01f;
             }
-            GL.Color3(0.7, 0.7, 0.7);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(xx + xSep, yy - ySep, 0.21);
-            GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.21);
-            GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.21);
-            GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.21);
-            GL.End();
-            GL.Color3(0.0, 0.0, 0.0);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(xx + xSep, yy - ySep, 0.2);
-            GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.2);
-            GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.2);
-            GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.2);
-            GL.End();
+
+            //GL.Color3(0.7, 0.7, 0.7);
+            ////GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            //GL.Begin(BeginMode.LineLoop);
+            //GL.Vertex3(xx + xSep, yy - ySep, 0.21);
+            //GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.21);
+            //GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.21);
+            //GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.21);
+            //GL.End();
+            //GL.Color3(0.0, 0.0, 0.0);
+            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            //GL.Begin(BeginMode.Quads);
+            //GL.Vertex3(xx + xSep, yy - ySep, 0.2);
+            //GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.2);
+            //GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.2);
+            //GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.2);
+            //GL.End();
             // Draw the hover text
-            GL.Color3(0.7, 0.7, 0.7);
-            GL.PushMatrix();
-            if (thWidth < 0.0) GL.Translate(xx + thWidth + xSep, 0.0, 0.3);
-            else GL.Translate(xx + xSep, 0.0, 0.3);
-            if (thHeight > 0.0) GL.Translate(0.0, yy - ySep, 0.0);
-            else GL.Translate(0.0, yy - thHeight - ySep, 0.0);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlHover.Draw(TextLabel.Alignment.TopLeft, Math.Abs(thWidth), Math.Abs(thHeight));
-            GL.PopMatrix();
+
+            float dx = (thWidth < 0.0) ? xx + thWidth + xSep : xx + xSep;
+            float dy = (thHeight > 0.0) ? yy - ySep : yy - thHeight - ySep;
+            foreach (string str in strHoverText) {
+                TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale / Aspect, hoverTextScale, dx, dy, Color.LightGray);
+                dy += 0.045f;
+            }
         }
 
         // Set up the various GUI elements of class GUIObject that need to be initialised
@@ -395,7 +364,6 @@ namespace SpaceMercs.MainWindow {
 
         // Set the button relevant for the selected AO
         public void SetAOButtonsOnGUI(AstronomicalObject ao) {
-            return;
             gbRenameObject.Deactivate();
             gbFlyTo.Deactivate();
             if (ao == null) return;

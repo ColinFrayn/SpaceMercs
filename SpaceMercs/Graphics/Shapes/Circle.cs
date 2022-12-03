@@ -23,7 +23,7 @@ namespace SpaceMercs.Graphics.Shapes {
                 double ang = (double)i * Math.PI * 2 / (double)count;
                 vertices[i] = new VertexPos3D(new Vector3((float)Math.Cos(ang), (float)Math.Sin(ang), 0f));
             }
-            return new GLShape(vertices, Enumerable.Range(0, count - 1).ToArray(), PrimitiveType.LineLoop);
+            return new GLShape(vertices, Enumerable.Range(0, count).ToArray(), PrimitiveType.LineLoop);
         }
     }
 }

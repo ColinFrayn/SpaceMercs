@@ -421,7 +421,7 @@ namespace SpaceMercs.MainWindow {
                 float fScale = Const.MouseMoveScale * (float)fMapViewZ / 27.0f; // To make sure that the scrolling is a sensible speed regardless of zoom level
                 if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) fScale *= 2.5f;
                 else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) fScale /= 2.5f;
-                fMapViewX += (float)(e.X - mx) * fScale;
+                fMapViewX -= (float)(e.X - mx) * fScale;
                 fMapViewY += (float)(e.Y - my) * fScale;
                 if (fMapViewX < (CurrentSystem.MapPos.X - Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X - Const.MaximumScrollRange);
                 if (fMapViewX > (CurrentSystem.MapPos.X + Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X + Const.MaximumScrollRange);
@@ -496,9 +496,9 @@ namespace SpaceMercs.MainWindow {
             if (msgBox.Active) return;
 
             float delta;
-            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY / 1.0f;
-            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 7.0f;
-            else delta = -e.OffsetY / 2.5f;
+            if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) delta = -e.OffsetY * 2.0f;
+            else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) delta = -e.OffsetY / 4.0f;
+            else delta = -e.OffsetY / 1.5f;
 
             if (view == ViewMode.ViewMission) {
                 MouseWheel_Mission(delta);
@@ -693,37 +693,6 @@ namespace SpaceMercs.MainWindow {
 
         // Setup the current selection as the true selection. Set up text, textures etc.
         private void SetSelection() {
-            if (aoSelected != null) {
-                if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                    Star st = (Star)aoSelected;
-                    //if (!String.IsNullOrEmpty(st.Name)) tlSel1.UpdateText(st.Name);
-                    //else tlSel1.UpdateText("Unnamed Star");
-                    //tlSel2.UpdateText("M = " + Math.Round(st.Mass, 2).ToString() + " Sol");
-                    //tlSel3.UpdateText("R = " + Math.Round(st.radius / Const.Million, 0).ToString() + " Mm");
-                    //tlSel4.UpdateText("Type " + st.StarType);
-                    //tlSel5.UpdateText("(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")");
-                }
-                if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
-                    Planet pl = (Planet)aoSelected;
-                    //if (!String.IsNullOrEmpty(pl.Name)) tlSel1.UpdateText(pl.Name);
-                    //else tlSel1.UpdateText("Unnamed Planet");
-                    //tlSel2.UpdateText(pl.Type.ToString());
-                    //tlSel3.UpdateText("R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km");
-                    //string strTemp = "Temp = " + pl.Temperature + "K";
-                    ////strTemp += "  <" + pl.GetTempRange(Const.races[0]).ToString() + ">";
-                    //tlSel4.UpdateText(strTemp);
-                    //tlSel5.UpdateText("Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU");
-                    //tw.Update(iTextSelected4, "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm");
-                }
-                if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
-                    Moon mn = (Moon)aoSelected;
-                    //tlSel1.UpdateText("Moon " + (mn.ID + 1).ToString());
-                    //tlSel2.UpdateText(mn.Type.ToString());
-                    //tlSel3.UpdateText("R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km");
-                    //tlSel4.UpdateText("Temp = " + mn.Temperature + "K");
-                    //tlSel5.UpdateText("Orbit = " + Math.Round(mn.orbit / Const.Million, 0).ToString() + " Mm");
-                }
-            }
             SetAOButtonsOnGUI(aoSelected);
         }
 

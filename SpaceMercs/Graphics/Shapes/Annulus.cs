@@ -24,7 +24,7 @@ namespace SpaceMercs.Graphics.Shapes {
                 vertices[i * 2 + 0] = new VertexPos3D(new Vector3((float)Math.Cos(ang) * outerRadius, (float)Math.Sin(ang) * outerRadius, 0f));
                 vertices[i * 2 + 1] = new VertexPos3D(new Vector3((float)Math.Cos(ang), (float)Math.Sin(ang), 0f));
             }
-            return new GLShape(vertices, Enumerable.Range(0, count*2 + 1).ToArray(), PrimitiveType.TriangleStrip);
+            return new GLShape(vertices, Enumerable.Range(0, vertices.Length).ToArray(), PrimitiveType.TriangleStrip);
         }
     }
 }

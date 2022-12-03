@@ -137,13 +137,13 @@ namespace SpaceMercs {
     }
 
     // Draw this system in the SystemView view
-    public void DrawSystem(IGraphicsContext currentContext, double aspect, AstronomicalObject aoSelected, AstronomicalObject aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+    public void DrawSystem(double aspect, AstronomicalObject aoSelected, AstronomicalObject aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
       // Draw star
       GL.PushMatrix();
       double StarScale = 2.0;
       GL.Translate((9.2 * aspect) + (DrawScale * StarScale), 5.0, 0.0);
       GL.Scale(StarScale, StarScale, StarScale);
-      DrawSelected(currentContext, 7);
+      DrawSelected(7);
       GL.PopMatrix();
 
       // Draw system
@@ -154,7 +154,7 @@ namespace SpaceMercs {
         GL.PushMatrix();
         GL.Translate(px, py, 0.0);
         GL.Scale(Const.PlanetScale, Const.PlanetScale, Const.PlanetScale);
-        pl.DrawSystem(currentContext, aoSelected, aoHover, aoCurrentPosition, bShowLabels, bShowColonies);
+        pl.DrawSystem(aoSelected, aoHover, aoCurrentPosition, bShowLabels, bShowColonies);
         GL.PopMatrix();
         px -= ((pl.DrawScale * Const.PlanetScale) + 0.3) * aspect * 0.6;
       }
@@ -449,7 +449,7 @@ namespace SpaceMercs {
 
     // Overrides
     public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
-    public override void DrawSelected(IGraphicsContext currentContext, int Level = 7) {
+    public override void DrawSelected(int Level = 7) {
       SetupTextureMap(64, 32);
       GL.PushMatrix();
       GL.BindTexture(TextureTarget.Texture2D, iTexture);
@@ -459,7 +459,7 @@ namespace SpaceMercs {
       GL.Scale(dscale, dscale, dscale);
       // Rotate the star
       //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-      GraphicsFunctions.sphere(Level).Draw(currentContext);
+      //GraphicsFunctions.sphere(Level).Draw();
       GL.Disable(EnableCap.Texture2D);
       GL.PopMatrix();
     }

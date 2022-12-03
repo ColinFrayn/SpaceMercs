@@ -3,15 +3,17 @@ ToDo List
 -------------------------------------------------
 
 MapViewMap.DrawMap()
-- SetupGUIHoverInfo
 - DrawStars (basic first, then proper)
-- DrawMapSelectionIcons : Add location icon?
+- Hover text : Needs backing rectangle; Only display when Alt is pressed?
+- DrawMapSelectionIcons : Add location icon? What is it? Triangle above star?
 
-Resize doesn't seem tow ork properly (blanks out the screen; Doesn't work for Maximise)
+GUIButton (.Display)
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 
 Convert GraphicsObject instances to use modern OpenGL and test them all
+
+TravelDetails.Display()
 
 Write Menu control & add menu back to MapView
 
@@ -32,7 +34,7 @@ MapViewDrawMap
 - DrawRangeCircles
 - DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
 
-Display the clock
+Display the clock, cash, hover text, toggles
 
 Should not be able to target self or own team
 

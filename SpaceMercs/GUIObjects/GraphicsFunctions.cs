@@ -5,63 +5,6 @@ using OpenTK.Mathematics;
 namespace SpaceMercs {
   // Common graphics elements
   static class GraphicsFunctions {
-    private static List<GraphicsObject> _spheres, _toroids;
-    public static List<GraphicsObject> spheres { get { return _spheres; } }
-    public static List<GraphicsObject> toroids { get { return _toroids; } }
-    public static GraphicsObject sphere(int n) { return _spheres[n]; }
-    
-    // Setup spheres ready for drawing
-    static GraphicsFunctions() {
-      _spheres = new List<GraphicsObject>();
-      _toroids = new List<GraphicsObject>();
-    }
-
-    // Setup the sphere display lists
-    private static void SetupSpheres() {
-      if (_spheres != null) _spheres.Clear();
-      else _spheres = new List<GraphicsObject>();
-      _spheres.Add(SetupSphere(3, 4));
-      _spheres.Add(SetupSphere(5, 6));
-      _spheres.Add(SetupSphere(7, 8));
-      _spheres.Add(SetupSphere(9, 12));
-      _spheres.Add(SetupSphere(13, 16));
-      _spheres.Add(SetupSphere(19, 24));
-      _spheres.Add(SetupSphere(25, 36));
-      _spheres.Add(SetupSphere(35, 48));
-    }
-
-    // Setup the sphere display lists
-    private static void SetupToroids() {
-      if (_toroids != null) _toroids.Clear();
-      else _toroids = new List<GraphicsObject>();
-      _toroids.Add(SetupToroid(20, 10, 0.08f));
-    }
-
-    // Setup a graphics object representing a sphere
-    private static GraphicsObject SetupSphere(int nphi, int ntheta) {
-      GraphicsObject obj = new GraphicsObject();
-
-      for (int phi = 0; phi < nphi; phi++) {
-        for (int theta = 0; theta < ntheta; theta++) {
-          // Upper triangle
-          if (phi > 0) {
-            Vector2d v1 = new Vector2d((double)theta / (double)ntheta, (double)phi / (double)nphi);
-            Vector2d v2 = new Vector2d((double)(theta + 1) / (double)ntheta, (double)phi / (double)nphi);
-            Vector2d v3 = new Vector2d((double)theta / (double)ntheta, (double)(phi + 1) / (double)nphi);
-            obj.AddFace(SetupSphereFace(v1, v2, v3));
-          }
-          // Lower triangle
-          if (phi + 1 < nphi) {
-            Vector2d v1 = new Vector2d((double)(theta + 1) / (double)ntheta, (double)phi / (double)nphi);
-            Vector2d v2 = new Vector2d((double)(theta + 1) / (double)ntheta, (double)(phi + 1) / (double)nphi);
-            Vector2d v3 = new Vector2d((double)theta / (double)ntheta, (double)(phi + 1) / (double)nphi);
-            obj.AddFace(SetupSphereFace(v1, v2, v3));
-          }
-        }
-      }
-      return obj;
-    }
-
     // Setup a graphics object representing a sphere
     public static GraphicsObject SetupToroid(int nslices, int ntheta, float radius) {
       GraphicsObject obj = new GraphicsObject();
@@ -166,40 +109,6 @@ namespace SpaceMercs {
       }
 
       return obj;
-    }
-
-    // Set up a face for the planet
-    private static Face SetupSphereFace(Vector2d v1, Vector2d v2, Vector2d v3) {
-      // Convert from three 2D vectors in the map, to their theta/phi coordinates
-      double tr1 = v1.X * 2.0 * Math.PI;
-      double pr1 = v1.Y * 1.0 * Math.PI;
-      double tr2 = v2.X * 2.0 * Math.PI;
-      double pr2 = v2.Y * 1.0 * Math.PI;
-      double tr3 = v3.X * 2.0 * Math.PI;
-      double pr3 = v3.Y * 1.0 * Math.PI;
-
-      // Calculate 3D positions of the three corners
-      Vector3d pv1 = new Vector3d(Math.Sin(pr1) * Math.Sin(tr1), Math.Sin(pr1) * Math.Cos(tr1), Math.Cos(pr1));
-      Vector3d pv2 = new Vector3d(Math.Sin(pr2) * Math.Sin(tr2), Math.Sin(pr2) * Math.Cos(tr2), Math.Cos(pr2));
-      Vector3d pv3 = new Vector3d(Math.Sin(pr3) * Math.Sin(tr3), Math.Sin(pr3) * Math.Cos(tr3), Math.Cos(pr3));
-
-      // Zero area face at the poles? Skip it.
-      if (pv1 == pv2 || pv2 == pv3 || pv1 == pv3) return null;
-
-      // Setup the new face
-      Face newFace = new Face(pv1, pv2, pv3);
-
-      // Calculate the normal
-      newFace.n1 = new Vector3d(pv1);
-      newFace.n2 = new Vector3d(pv2);
-      newFace.n3 = new Vector3d(pv3);
-
-      // Texture coordinates
-      newFace.t1 = new Vector2d(1.0f - v1.X, v1.Y);
-      newFace.t2 = new Vector2d(1.0f - v2.X, v2.Y);
-      newFace.t3 = new Vector2d(1.0f - v3.X, v3.Y);
-
-      return newFace;
     }
 
     // Draw a cuboid at the current location

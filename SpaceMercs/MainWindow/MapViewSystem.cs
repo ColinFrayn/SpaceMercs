@@ -25,7 +25,7 @@ namespace SpaceMercs.MainWindow {
       GL.Scale(0.1 / Aspect, 0.1, 0.1);
 
       // Display the scene
-      SystemStar.DrawSystem(Context, Aspect, aoSelected, aoHover, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies);
+      SystemStar.DrawSystem(Aspect, aoSelected, aoHover, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies);
       DrawSystemText();
       SetupGUIHoverInfo();
       DrawGUI();

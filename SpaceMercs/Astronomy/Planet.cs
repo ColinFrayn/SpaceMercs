@@ -88,9 +88,9 @@ namespace SpaceMercs {
     }
 
     // Draw this planet plus moons on the system view
-    public void DrawSystem(IGraphicsContext currentContext, AstronomicalObject aoSelected, AstronomicalObject aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
-      if (radius > 7 * Const.Million) DrawSelected(currentContext, 7);
-      else DrawSelected(currentContext, 6);
+    public void DrawSystem(AstronomicalObject aoSelected, AstronomicalObject aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+      if (radius > 7 * Const.Million) DrawSelected(7);
+      else DrawSelected(6);
       DrawHalo();
       if (bShowLabels) DrawNameLabel();
       if (aoHover == this) GraphicsFunctions.DrawHoverReticule(DrawScale * 1.1);
@@ -102,7 +102,7 @@ namespace SpaceMercs {
       GL.Scale(Const.MoonScale, Const.MoonScale, Const.MoonScale); // Make moons noticeably smaller than planets
       foreach (Moon mn in Moons) {
         if (bShowColonies) mn.DrawBaseIcon();
-        mn.DrawSelected(currentContext, 5);
+        mn.DrawSelected(5);
         if (aoHover == mn) GraphicsFunctions.DrawHoverReticule(mn.DrawScale * 1.2);
         if (aoSelected == mn) GraphicsFunctions.DrawSelectedReticule(mn.DrawScale * 1.2);
         if (aoCurrentPosition == mn) GraphicsFunctions.DrawLocationIcon(mn.DrawScale * 1.25);
@@ -363,7 +363,7 @@ namespace SpaceMercs {
       GL.PopMatrix();
       GL.Enable(EnableCap.DepthTest);
     }
-    public override void DrawSelected(IGraphicsContext currentContext, int Level = 7) {
+    public override void DrawSelected(int Level = 7) {
       // Draw this planet
       SetupTextureMap(64, 32);
       GL.PushMatrix();
@@ -374,7 +374,7 @@ namespace SpaceMercs {
       GL.Scale(pscale, pscale, pscale);
       GL.Rotate(90.0, Vector3d.UnitY);
       //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-      GraphicsFunctions.sphere(Level).Draw(currentContext);
+      //GraphicsFunctions.sphere(Level).Draw();
       GL.Disable(EnableCap.Texture2D);
       GL.PopMatrix();
     }

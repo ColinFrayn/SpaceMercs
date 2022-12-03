@@ -26,7 +26,7 @@ namespace SpaceMercs {
 
     public virtual AstronomicalObjectType AOType { get { return AstronomicalObjectType.Unknown; } }
     public abstract string PrintCoordinates();
-    public abstract void DrawSelected(IGraphicsContext currentContext, int Level);
+    public abstract void DrawSelected(int Level);
     public abstract void SetupTextureMap(int width, int height);
     public abstract void ClearData();
     public abstract void SetName(string str);

@@ -2,6 +2,8 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
+using System;
 using System.IO;
 using System.Xml;
 
@@ -72,26 +74,28 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(IGraphicsContext currentContext, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, double fMapViewX, double fMapViewY, double fMapViewZ) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
             foreach (Star st in Stars) {
-                // Rotate into the star frame
-                GL.PushMatrix();
-                GL.Translate(st.MapPos);
+                // Translate into the star frame
+                Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos);
 
-                // Display star 
+                // Scale this star to its actual size
                 double StarScale = st.DrawScale * 0.1;
 
                 // Fade out unvisited stars
-                if (bFadeUnvisited && !st.Visited) GL.Color3(st.colour.X / 3.0, st.colour.Y / 3.0, st.colour.Z / 3.0);
-                else GL.Color3(st.colour.X, st.colour.Y, st.colour.Z);
+                float fade = 1.0f;
+                if (bFadeUnvisited && !st.Visited) fade = 3.0f;
+                Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
+                prog.SetUniform("flatColour", col);
 
                 // Work out the degree of detail to show in this star
-                double dx = fMapViewX - st.MapPos.X;
-                double dy = fMapViewY - st.MapPos.Y;
-                double dist2 = ((dx * dx) + (dy * dy) + (fMapViewZ * fMapViewZ));
-                double DetailScale = Math.Sqrt(dist2) / StarScale;
+                float dx = fMapViewX - st.MapPos.X;
+                float dy = fMapViewY - st.MapPos.Y;
+                float dist2 = ((dx * dx) + (dy * dy) + (fMapViewZ * fMapViewZ));
+                float DetailScale = (float)(Math.Sqrt(dist2) / StarScale);
                 int iLevel = 1;
-                if (DetailScale < 25.0) iLevel = 7;
+                if (DetailScale < 25.0) iLevel = 8;
+                else if (DetailScale < 32.0) iLevel = 7;
                 else if (DetailScale < 40.0) iLevel = 6;
                 else if (DetailScale < 80.0) iLevel = 5;
                 else if (DetailScale < 150.0) iLevel = 4;
@@ -101,33 +105,27 @@ namespace SpaceMercs {
 
                 // Display the star. If close and not faded then show the texture
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
-                    GL.PushMatrix();
-                    GL.Scale(0.1, 0.1, 0.1);
-                    st.DrawSelected(currentContext, iLevel);
-                    GL.PopMatrix();
+                    Matrix4 scaleM = Matrix4.CreateScale(0.1f);
+                    Matrix4 modelM = scaleM * translateM;
+                    prog.SetUniform("model", modelM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    //st.DrawSelected(iLevel);
                 }
                 else {
-                    GL.PushMatrix();
-                    GL.Scale(StarScale, StarScale, StarScale);
-                    GraphicsFunctions.spheres[iLevel].Draw(currentContext);
-                    GL.PopMatrix();
+                    Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                    Matrix4 modelM = scaleM * translateM;
+                    prog.SetUniform("model", modelM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    GLShape sphere = Sphere.Build(iLevel);
+                    sphere.Bind();
+                    sphere.Draw();
+                    sphere.Unbind();
                 }
 
-                // Test the LOD code
-                //if (iLevel == 1) GL.Color3(1.0, 0.0, 0.0);
-                //if (iLevel == 2) GL.Color3(0.0, 1.0, 0.0);
-                //if (iLevel == 3) GL.Color3(0.0, 0.0, 1.0);
-                //if (iLevel == 4) GL.Color3(1.0, 1.0, 0.0);
-                //if (iLevel == 5) GL.Color3(0.0, 1.0, 1.0);
-                //if (iLevel == 6) GL.Color3(1.0, 0.0, 1.0);
-                //if (iLevel == 7) GL.Color3(1.0, 1.0, 1.0);
-                //GL.PushMatrix();
-                //GL.Scale(StarScale * 10.0, StarScale * 10.0, StarScale * 10.0);
-                //GraphicsFunctions.spheres[iLevel].Draw();
-                //GL.PopMatrix();
+                continue;
 
                 // Draw the name label
-                if (bShowLabels && st.Visited && !String.IsNullOrEmpty(st.Name)) {
+                if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
                     GL.PushMatrix();
                     GL.Translate(0.0, -(StarScale + 0.02), 0.01);
                     double scale = 0.02 * fMapViewZ;
