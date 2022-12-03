@@ -10,54 +10,49 @@ namespace SpaceMercs.MainWindow {
         //private TextRenderer tlF, tlG, tlL, tlR, tlA, tlV, tlC;
         //private TextRenderer tlHover, tlClock, tlCash, tlWelcome1, tlWelcome2;
         private readonly int iGUIHoverN = -1; // What is this??
-        private static readonly double toggleY = 0.1, toggleX = 0.002, toggleStep = 0.03, toggleScale = 0.05;
-        private static Matrix4 ortho_projection = Matrix4.CreateOrthographicOffCenter(0, 1, 1, 0, -1, 1);
+        private static readonly float toggleY = 0.1f, toggleX = 0.002f, toggleStep = 0.03f, toggleScale = 0.05f;
         private AstronomicalObject lastAOHover = null;
-        private bool bShowGUIHover = false;
 
         // Draw the GUI elements
         private void DrawGUI() {
-            return;
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadMatrix(ref ortho_projection);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
 
             // Set up scene
-            GL.Disable(EnableCap.Lighting);
             GL.DepthMask(true);
             GL.Clear(ClearBufferMask.DepthBufferBit);
+
+            // Display the current date and time
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f / Aspect, 0.03f, toggleX, 0.04f);
+
+            // Draw stuff that's only visible when there's a game underway
+            if (!bLoaded || !GalaxyMap.bMapSetup) return;
+
+            return;
 
             // Draw details of currently selected object
             if (aoSelected != null) {
                 DisplaySelectionText();
             }
 
-            // Display the current date and time
+            // Display the player's remaining cash reserves
             GL.PushMatrix();
-            GL.Translate(toggleX, 0.01, 0.1);
+            GL.Translate(0.99, 0.01, 0.1);
             GL.Color3(1.0, 1.0, 1.0);
             GL.Scale(0.04 / Aspect, 0.04, 0.04);
             GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(Const.dtTime.ToString("F"), Alignment.TopLeft);
+            TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopRight, Color.White);
             GL.PopMatrix();
 
-            // Draw stuff that's only visible when there's a game underway
-            if (bLoaded && GalaxyMap.bMapSetup) {
-                // Display the player's remaining cash reserves
-                GL.PushMatrix();
-                GL.Translate(0.99, 0.01, 0.1);
-                GL.Color3(1.0, 1.0, 1.0);
-                GL.Scale(0.04 / Aspect, 0.04, 0.04);
-                GL.Rotate(180.0, Vector3d.UnitX);
-                TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopRight, Color.White);
-                GL.PopMatrix();
-                // Toggles
-                DrawToggles();
-                if (view == ViewMode.ViewMap) DrawMapToggles();
-                if (view == ViewMode.ViewSystem) DrawSystemToggles();
-                DrawGUIHoverInfo();
-            }
+            // Toggles
+            DrawToggles();
+            if (view == ViewMode.ViewMap) DrawMapToggles();
+            if (view == ViewMode.ViewSystem) DrawSystemToggles();
+
+            // Hover info for the current setup
+            DrawGUIHoverInfo();
 
             // If we're travelling then display that
             if (TravelDetails != null) {
@@ -176,11 +171,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Setup a mini window to show details of the current hover target
-        private void SetupGUIHoverInfo() {
-            bShowGUIHover = false;
-            if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
-            if (aoHover == null && iGUIHoverN == -1) return;
-            bShowGUIHover = true;
+        private List<string> SetupGUIHoverInfo() {
             List<string> strHoverText = new List<string>();
 
             // Check for AO hover.
@@ -231,15 +222,21 @@ namespace SpaceMercs.MainWindow {
                 }
                 lastAOHover = aoHover;
             }
-            return;
-            if (strHoverText.Any()) {
-              //tlHover.UpdateTextFromList(strHoverText);
-            }
+            return strHoverText;
         }
 
         // Draw the hover info when hovering over an object with "Alt" pressed
         private void DrawGUIHoverInfo() {
-            if (!bShowGUIHover) return;
+            if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
+            if (aoHover == null && iGUIHoverN == -1) return;
+
+            List<string> strHoverText = SetupGUIHoverInfo();
+            if (!strHoverText.Any()) return;
+
+            // Draw a dark grey box with a black background, and overlay the relevant text
+            // TODO
+            return;
+
             // Draw the mouse hover text
             double xx = (double)mx / (double)Size.X;
             double yy = (double)my / (double)Size.Y;

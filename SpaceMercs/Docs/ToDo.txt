@@ -3,10 +3,11 @@ ToDo List
 -------------------------------------------------
 
 MapViewMap.DrawMap()
-- DrawMapHoverLink
-- DrawMapSelectionIcons
-- DrawStars (basic first, then proper)
 - SetupGUIHoverInfo
+- DrawStars (basic first, then proper)
+- DrawMapSelectionIcons : Add location icon?
+
+Resize doesn't seem tow ork properly (blanks out the screen; Doesn't work for Maximise)
 
 Transforms : https://opentk.net/learn/chapter1/7-transformations.html
 
@@ -23,6 +24,15 @@ Remove all MessageBoxes
 -----------------------
 Done Since Last Release
 -----------------------
+
+MapView title page
+MapViewDrawMap
+- DrawGrid
+- DrawTradeRoutes
+- DrawRangeCircles
+- DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
+
+Display the clock
 
 Should not be able to target self or own team
 

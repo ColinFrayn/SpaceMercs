@@ -30,6 +30,7 @@ namespace SpaceMercs {
         public float Scale { get; set; } = 1f;
         public bool IsFixedSize { get; set; } = false;
         public Alignment Alignment { get; set; } = Alignment.TopLeft;
+        public float Aspect { get; set; } = 1f;
     }
 
     internal static class TextRenderer {
@@ -88,18 +89,15 @@ void main()
         public static void Draw(string strText, Alignment ali, Color col) {
             DrawAtInternal(strText, ali, col, 1f, 1f, 0f, 0f);
         }
-        public static void Draw(string strText, TextRenderOptions tro, float aspect) {
+        public static void Draw(string strText, TextRenderOptions tro) {
             if (tro.IsFixedSize) {
                 DrawAtInternal(strText, tro.Alignment, tro.TextColour, tro.FixedWidth, tro.FixedHeight, tro.XPos, tro.YPos);
             }
             else {
-                DrawAtInternal(strText, tro.Alignment, tro.TextColour, tro.Scale / aspect, tro.Scale, tro.XPos, tro.YPos);
+                DrawAtInternal(strText, tro.Alignment, tro.TextColour, tro.Scale / tro.Aspect, tro.Scale, tro.XPos, tro.YPos);
             }
         }
         public static void DrawAt(string strText, Alignment ali, float fwidth, float fheight, float xshift, float yshift) {
-            DrawAtInternal(strText, ali, Color.White, fwidth, fheight, xshift, yshift);
-        }
-        public static void DrawScaled(string strText, Alignment ali, float fwidth, float fheight, float xshift, float yshift) {
             DrawAtInternal(strText, ali, Color.White, fwidth, fheight, xshift, yshift);
         }
 
@@ -108,7 +106,6 @@ void main()
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            //GL.BlendFunc(0, BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             GL.UseProgram(textLabelShaderProgram.ShaderProgramHandle);
             textLabelShaderProgram.SetUniform("projection", projectionM);

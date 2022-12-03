@@ -203,7 +203,7 @@ namespace SpaceMercs.MainWindow {
     // Show static GUI elements
     private void ShowShipGUI() {
       GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref ortho_projection);
+      //GL.LoadMatrix(ref ortho_projection);
       GL.MatrixMode(MatrixMode.Modelview);
       GL.LoadIdentity();
       GL.Disable(EnableCap.Lighting);

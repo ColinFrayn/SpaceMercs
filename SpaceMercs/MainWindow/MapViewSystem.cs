@@ -17,7 +17,7 @@ namespace SpaceMercs.MainWindow {
 
       // Set the correct view location & perspective matrix
       GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref ortho_projection); //GL.LoadMatrix(ref perspective);
+      //GL.LoadMatrix(ref ortho_projection); //GL.LoadMatrix(ref perspective);
       GL.ClearColor(Color.Black);
       GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
       GL.MatrixMode(MatrixMode.Modelview);

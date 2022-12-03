@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -9,10 +10,9 @@ namespace SpaceMercs.MainWindow {
         private float fMapViewZ, fMapViewX, fMapViewY;
         private bool bShowGridlines, bFadeUnvisited, bShowRangeCircles, bShowTradeRoutes, bShowFlags;
         private int iMiscTexture = -1, iBuildingTexture = -1;
-        VertexBuffer? mapLinesBuffer = null;
-        VertexArray? mapLinesArray = null;
+        VertexBuffer? mapLinesBuffer = null, hoverLinkBuffer = null;
+        VertexArray? mapLinesArray = null, hoverLinkArray = null;
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
-        private GLShape? circle32 = null, circle64 = null;
 
         // Build texture maps for the stars' radial brightness maps
         private void SetupMapTextures() {
@@ -86,38 +86,50 @@ namespace SpaceMercs.MainWindow {
             DrawStars();
             DrawMapHoverLink();
             DrawMapSelectionIcons();
-            SetupGUIHoverInfo();
             DrawGUI();
         }
 
         // Highlight aoSelected and aoHover, if they exist; Highlight current location
         private void DrawMapSelectionIcons() {
-            return;
             if (aoHover != null) {
-                GL.PushMatrix();
-                GL.Translate(((Star)aoHover).MapPos);
+                Matrix4 translateM = Matrix4.CreateTranslation(((Star)aoHover).MapPos);
                 double StarScale = Const.MapStarScale * Math.Pow(aoHover.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
-                GraphicsFunctions.DrawHoverReticule(StarScale * 1.1);
-                GL.PopMatrix();
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale * 1.1f);
+                Matrix4 modelM = scaleM * translateM;
+                flatColourShaderProgram.SetUniform("model", modelM);
+                flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f,1f,1f,1f));
+                GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                Annulus.Annulus16.Bind();
+                Annulus.Annulus16.Draw();
+                Annulus.Annulus16.Unbind();
             }
 
             if (aoSelected != null) {
-                GL.PushMatrix();
-                GL.Translate(((Star)aoSelected).MapPos);
+                Matrix4 translateM = Matrix4.CreateTranslation(((Star)aoSelected).MapPos);
                 double StarScale = Const.MapStarScale * Math.Pow(aoSelected.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
-                GraphicsFunctions.DrawSelectedReticule(StarScale);
-                GL.PopMatrix();
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                Matrix4 modelM = scaleM * translateM;
+                flatColourShaderProgram.SetUniform("model", modelM);
+                flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.2f, 1f, 0.4f, 1f));
+                GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                Annulus.Annulus16.Bind();
+                Annulus.Annulus16.Draw();
+                Annulus.Annulus16.Unbind();
             }
 
             {
-                GL.PushMatrix();
-                GL.Translate(CurrentSystem.MapPos);
+                Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos);
                 double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
-                GraphicsFunctions.DrawLocationIcon(StarScale);
-                GL.PopMatrix();
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                Matrix4 modelM = scaleM * translateM;
+                flatColourShaderProgram.SetUniform("model", modelM);
+                flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                // TODO: What? A triangle?
+                //GraphicsFunctions.DrawLocationIcon(StarScale);
             }
         }
 
@@ -191,8 +203,6 @@ namespace SpaceMercs.MainWindow {
 
         // Draw range circles from the current location
         private void DrawRangeCircles() {
-            if (circle32 is null) circle32 = Circle.BuildFlat(32);
-            if (circle64 is null) circle64 = Circle.BuildFlat(64);
             Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem!.MapPos);
             for (int range = 2; range <= 14; range += 2) {
                 float col = 0.8f - ((float)range / 20.0f);
@@ -202,14 +212,14 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("model", modelM);
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                 if (fMapViewZ + range > 20) {
-                    circle64.Bind();
-                    circle64.Draw();
-                    circle64.Unbind();
+                    Circle.Circle64.Bind();
+                    Circle.Circle64.Draw();
+                    Circle.Circle64.Unbind();
                 }
                 else {
-                    circle32.Bind();
-                    circle32.Draw();
-                    circle32.Unbind();
+                    Circle.Circle32.Bind();
+                    Circle.Circle32.Draw();
+                    Circle.Circle32.Unbind();
                 }
             }
             GL.BindVertexArray(0);
@@ -218,18 +228,26 @@ namespace SpaceMercs.MainWindow {
         // Join hover star with selected star
         private void DrawMapHoverLink() {
             if (aoHover == null || aoSelected == null || aoHover == aoSelected) return;
-            if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down
-            return;
+            if (Control.ModifierKeys != Keys.Alt) return; // Only display if Alt is held down            
+
+            VertexPos3D[] vertices = new VertexPos3D[2] {
+                new VertexPos3D(aoSelected.GetMapLocation()),
+                new VertexPos3D(aoHover.GetMapLocation())
+            };
+
+            if (hoverLinkBuffer is null) hoverLinkBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.StreamDraw);
+            else hoverLinkBuffer.SetData(vertices.ToArray());
+            if (hoverLinkArray is null) hoverLinkArray = new VertexArray(hoverLinkBuffer);
 
             // Join selected and hover AOs if necessary
-            GL.Disable(EnableCap.Blend);
-            GL.Disable(EnableCap.Texture2D);
-            if (PlayerTeam.PlayerShip.Range >= aoSelected.GetSystem().DistanceTo(aoHover.GetSystem())) GL.Color3(0.0, 1.0, 0.0);
-            else GL.Color3(1.0, 0.0, 0.0);
-            GL.Begin(BeginMode.Lines);
-            GL.Vertex3(aoSelected.GetMapLocation());
-            GL.Vertex3(aoHover.GetMapLocation());
-            GL.End();
+            Vector4 col = new Vector4(1f, 0f, 0f, 1f);
+            if (PlayerTeam.PlayerShip.Range >= aoSelected.GetSystem().DistanceTo(aoHover.GetSystem())) col = new Vector4(0f, 1f, 0f, 1f);
+            flatColourShaderProgram.SetUniform("flatColour", col);
+
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            GL.BindVertexArray(hoverLinkArray.VertexArrayHandle);
+            GL.DrawArrays(PrimitiveType.Lines, 0, 2);
+            GL.BindVertexArray(0);
         }
 
         // Get the system under the mouse pointer

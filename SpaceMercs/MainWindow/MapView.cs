@@ -43,15 +43,10 @@ namespace SpaceMercs.MainWindow {
         private ShaderProgram flatColourShaderProgram;
         private ShaderProgram pos2DCol4ShaderProgram;
 
-        // DEBUGGING
-        private GLShape? squares;
-        private int frameCount = 0;
-        private bool DEMO_MODE = false;  // -----=====## DEMO MODE ##=====-----
-
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
             CenterWindow();
-            InitialiseGUIElements();
+            InitialiseGUIElements_FIXME();
             DisableMenus();
 
             // Load static data and close if this fails
@@ -80,7 +75,6 @@ namespace SpaceMercs.MainWindow {
             //Terrain.GenerateSeedMap();
             SetupGUIElements();
             bLoaded = true;
-            SetupViewport();
             //SetupOptionsMenu();
             //TODO this.missionToolStripMenuItem.Enabled = false;
             ThisDispatcher = Dispatcher.CurrentDispatcher;
@@ -97,44 +91,11 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f,1f,1f,1f));
 
-            if (DEMO_MODE) SetupDemo(); // DEBUG
-
             base.OnLoad();
-        }
-
-        private void SetupDemo() {
-            frameCount = 0;
-            Random rnd = new Random();
-            int boxCount = 100;
-            int vxCount = 0, ixCount = 0;
-            VertexPos2DCol[] vertices = new VertexPos2DCol[boxCount * 4];
-            int[] indices = new int[boxCount * 6];
-            for (int i = 0; i < boxCount; i++) {
-                int w = rnd.Next(32, 128);
-                int h = rnd.Next(32, 128);
-                int x = rnd.Next(0, Size.X - 128);
-                int y = rnd.Next(0, Size.Y - 128);
-                float r = (float)rnd.NextDouble();
-                float g = (float)rnd.NextDouble();
-                float b = (float)rnd.NextDouble();
-                vertices[vxCount++] = new VertexPos2DCol(new Vector2(x, y + h), new Color4(r, g, b, 1f));
-                vertices[vxCount++] = new VertexPos2DCol(new Vector2(x + w, y + h), new Color4(r, g, b, 1f));
-                vertices[vxCount++] = new VertexPos2DCol(new Vector2(x + w, y), new Color4(r, g, b, 1f));
-                vertices[vxCount++] = new VertexPos2DCol(new Vector2(x, y), new Color4(r, g, b, 1f));
-                indices[ixCount++] = 0 + (i * 4);
-                indices[ixCount++] = 1 + (i * 4);
-                indices[ixCount++] = 2 + (i * 4);
-                indices[ixCount++] = 0 + (i * 4);
-                indices[ixCount++] = 2 + (i * 4);
-                indices[ixCount++] = 3 + (i * 4);
-            }
-
-            squares = new GLShape(vertices, indices);
         }
 
         // Free stuff when the window is being closed
         protected override void OnUnload() {
-            squares?.Dispose();
             pos2DCol4ShaderProgram?.Dispose();
             base.OnUnload();
         }
@@ -142,8 +103,6 @@ namespace SpaceMercs.MainWindow {
         // This gets called every 1/60 of a second. AI updates etc.
         protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
-
-            frameCount++; // DEBUG
 
             // Check keypresses
             GetKeyboardInput();
@@ -200,24 +159,8 @@ namespace SpaceMercs.MainWindow {
         // Main window is resized so setup viewport again
         protected override void OnResize(ResizeEventArgs e) {
             if (!bLoaded) return;
-            SetupViewport();
+            // Annoyingly this isn't called first when maximising the window, so we have to setup the viewport in the main render loop
             base.OnResize(e);
-        }
-
-        private void RunDemo() {
-            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, Size.X, Size.Y, 0.0f, -1.0f, 1.0f);
-            pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
-            float ang = (float)frameCount * (float)Math.PI / 240f;
-            Matrix4 rotationM = Matrix4.CreateRotationZ(ang);
-            Matrix4 translateM = Matrix4.CreateTranslation(Size.X / 2, Size.Y / 2, 0.0f);
-            Matrix4 modelM = translateM.Inverted() * rotationM * translateM;
-            pos2DCol4ShaderProgram.SetUniform("model", modelM);
-            float fract = (float)(Math.Abs(Math.Sin((double)frameCount * 2.0 * Math.PI / 120) / 2.0 + 0.5)) * 0.9f + 0.1f;
-            pos2DCol4ShaderProgram.SetUniform("colourFactor", fract);
-            GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
-            squares?.Bind();
-            squares?.Draw();
-            squares?.Unbind();
         }
 
         // Draw the main view, whatever state it's in
@@ -228,8 +171,7 @@ namespace SpaceMercs.MainWindow {
             PrepareScene();
 
             if (!GalaxyMap.bMapSetup) {
-                if (DEMO_MODE) RunDemo();
-                else DisplayWelcomeScreen();
+                DisplayWelcomeScreen();
                 SwapBuffers();
                 return;
             }
@@ -262,7 +204,7 @@ namespace SpaceMercs.MainWindow {
         #endregion // GameWindow Triggers
 
         #region Rendering
-        private void InitialiseGUIElements() {
+        private void InitialiseGUIElements_FIXME() {
             // 
             // MapView
             // 
@@ -312,21 +254,46 @@ namespace SpaceMercs.MainWindow {
 
         // Display a welcome screen on startup
         private void DisplayWelcomeScreen() {
-            // Set up scene
-            GL.DepthMask(false);
             GL.ClearColor(Color.Black);
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            // Display welcome message
-            TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.05f };
-            TextRenderer.Draw("Welcome to SpaceMercs v" + Const.strVersion, tro, Aspect);
-            TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.03f };
-            TextRenderer.Draw("Select An Option From The File Menu", tro2, Aspect);
+            TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.05f, Aspect = Aspect };
+            TextRenderer.Draw($"Welcome to SpaceMercs v{Const.strVersion}", tro);
+            TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.03f, Aspect = Aspect };
+            TextRenderer.Draw("Select An Option From The File Menu", tro2);
+
+            //DisplayDebuggingCircles(); // DEBUGGING
+        }
+
+        private void DisplayDebuggingCircles() {
+            //DEBUGGING
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("view", Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.5f));
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Bind();
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.4f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.3f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.2f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.1f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            Circle.Circle64.Unbind();
         }
 
         // Set up the scene ready for rendering
         private void PrepareScene() {
             MakeCurrent();
+            GL.Viewport(0, 0, Size.X, Size.Y);
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.CullFace(CullFaceMode.Back);
@@ -335,12 +302,6 @@ namespace SpaceMercs.MainWindow {
             GL.Disable(EnableCap.Blend);
             GL.DepthFunc(DepthFunction.Lequal);
             GL.DepthMask(true);
-        }
-
-        // Setup the OpenGL viewport
-        private void SetupViewport() {
-            MakeCurrent();
-            GL.Viewport(0, 0, Size.X, Size.Y);
         }
         #endregion // Rendering
 

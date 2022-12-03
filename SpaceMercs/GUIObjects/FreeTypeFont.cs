@@ -90,7 +90,6 @@ namespace SpaceMercs {
       GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
 
       square = Square.BuildTextured(Alignment.TopLeft);
-      //square = Square.BuildMultiColoured(Alignment.TopLeft);
     }
 
     // Return the average font height
@@ -123,7 +122,7 @@ namespace SpaceMercs {
         float w = ch.Size.X;
         float h = ch.Size.Y;
         float xrel = char_x + ch.Bearing.X;
-        float yrel = (ch.Size.Y - ch.Bearing.Y);
+        float yrel = -ch.Bearing.Y;
 
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
         char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))

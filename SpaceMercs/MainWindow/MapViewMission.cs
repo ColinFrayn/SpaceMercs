@@ -820,7 +820,7 @@ namespace SpaceMercs.MainWindow {
       SetupGUITextures();
       InitialiseGUIButtons();
       GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref ortho_projection);
+      //GL.LoadMatrix(ref ortho_projection);
       GL.MatrixMode(MatrixMode.Modelview);
       GL.LoadIdentity();
       GL.Disable(EnableCap.Lighting);

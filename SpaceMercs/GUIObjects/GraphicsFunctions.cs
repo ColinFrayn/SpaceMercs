@@ -9,19 +9,11 @@ namespace SpaceMercs {
     public static List<GraphicsObject> spheres { get { return _spheres; } }
     public static List<GraphicsObject> toroids { get { return _toroids; } }
     public static GraphicsObject sphere(int n) { return _spheres[n]; }
-    public static int iOrbitDL;
     
     // Setup spheres ready for drawing
     static GraphicsFunctions() {
       _spheres = new List<GraphicsObject>();
       _toroids = new List<GraphicsObject>();
-    }
-
-    // Initialise everything
-    public static void Initialise() {
-      SetupSpheres();
-      SetupToroids();
-      SetupOrbitDL();
     }
 
     // Setup the sphere display lists
@@ -296,26 +288,6 @@ namespace SpaceMercs {
       }
     }
 
-    // Setup orbit display list
-    private static void SetupOrbitDL() {
-      // Create the id for the list
-      iOrbitDL = GL.GenLists(1);
-
-      // Start list
-      GL.NewList(iOrbitDL, ListMode.Compile);
-
-      // Call the function that contains the rendering commands
-      double ostep = Math.PI / 40.0;
-      GL.Begin(BeginMode.LineLoop);
-      for (double n = 0.0; n < 2.0 * Math.PI; n += ostep) {
-        GL.Vertex3(Math.Cos(n), Math.Sin(n), 0.0);
-      }
-      GL.End();
-
-      // endList
-      GL.EndList();
-    }
-
     // Setup a hemispherical framework
     public static GraphicsObject SetupFramework(int level) {
       GraphicsObject obj = new GraphicsObject();
@@ -455,30 +427,6 @@ namespace SpaceMercs {
     }
 
     // Other random 2D geometry
-    public static void DrawSquare(double scale) {
-      GL.Begin(BeginMode.Quads);
-      GL.Vertex3(-scale / 2.0, -scale / 2.0, 0.0);
-      GL.Vertex3( scale / 2.0, -scale / 2.0, 0.0);
-      GL.Vertex3( scale / 2.0,  scale / 2.0, 0.0);
-      GL.Vertex3(-scale / 2.0,  scale / 2.0, 0.0);
-      GL.End();
-    }
-    public static void DrawCircle(double scale, int divs) {
-      GL.Begin(BeginMode.Polygon);
-      for (int n = 0; n <= divs; n++) {
-        double ang = n * Math.PI * 2.0 / (double)divs;
-        GL.Vertex3(scale * Math.Cos(ang), scale * Math.Sin(ang), 0.0);
-      }
-      GL.End();
-    }
-    public static void DrawRing(double scale, int divs) {
-      GL.Begin(BeginMode.LineLoop);
-      for (int n = 0; n <= divs; n++) {
-        double ang = n * Math.PI * 2.0 / (double)divs;
-        GL.Vertex3(scale * Math.Cos(ang), scale * Math.Sin(ang), 0.0);
-      }
-      GL.End();
-    }
     public static void DrawRhomboid(double scale) {
       GL.Begin(BeginMode.Quads);
       GL.Vertex3(0.0, -scale / 2.0, 0.0);
