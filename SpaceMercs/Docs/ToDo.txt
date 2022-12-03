@@ -2,16 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-Taking ages to start. Why?
-
 MapViewMap.DrawMap()
-- DrawStars (texMap)
-- Hover text : Needs backing rectangle; Display properly when flipped to left/top
+- Hover text : Fix rectangle alignment
 - DrawMapSelectionIcons : Add location icon? What is it? Triangle above star?
 
 GUIButton (.Display)
 
-Transforms : https://opentk.net/learn/chapter1/7-transformations.html
+Taking ages to start. Why?
 
 Convert GraphicsObject instances to use modern OpenGL and test them all
 
@@ -36,7 +33,9 @@ MapViewDrawMap
 - DrawRangeCircles
 - DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
 - GUI text
-- Basic stars (not textured)
+- Drawing stars (with and without texmap; plus lighting)
+
+Added in a lit flat shader, lit textured shader
 
 Display the clock, cash, hover text, toggles
 

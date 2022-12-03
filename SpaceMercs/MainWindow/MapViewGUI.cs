@@ -202,27 +202,39 @@ namespace SpaceMercs.MainWindow {
             foreach (string str in strHoverText) {
                 Vector2 size = TextRenderer.MeasureText(str);
                 if (size.X > thWidth) thWidth = size.X;
-                if (size.Y > thHeight) thHeight = size.Y;
+                thHeight = size.Y; // Currently same value for all rows, just height of "A"
             }
             float hoverTextScale = 0.03f;
             thWidth *= hoverTextScale / thHeight;
-            thHeight = hoverTextScale * 1.5f;
+            thHeight = hoverTextScale * strHoverText.Count() * 1.5f;
 
             // First, calculate box dimensions
             float xx = (float)mx / (float)Size.X;
             float yy = (float)my / (float)Size.Y;
             float xSep = 0.01f, ySep = 0.01f;
-            if (xx > 0.5) {
-                thWidth = -thWidth;
-                xSep = -0.01f;
-            }
-            if (yy < 0.5) {
-                thHeight = -thHeight;
-                ySep = -0.01f;
-            }
+            float dx = (xx > 0.5) ? xx - xSep - thWidth : xx + xSep; // (xx > 0.5) ? xx - thWidth + xSep : xx + xSep;
+            float dy = (yy > 0.5) ? yy - thHeight - ySep : yy + ySep + (hoverTextScale * 0.5f);
 
-            //GL.Color3(0.7, 0.7, 0.7);
-            ////GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            Matrix4 translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale, -0.1f);
+            Matrix4 scaleM = Matrix4.CreateScale(thWidth, thHeight, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            flatColourShaderProgram.SetUniform("model", modelM);
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1.0f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Square.Flat.Bind();
+            Square.Flat.Draw();
+            Square.Flat.Unbind();
+
+            translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale, -0.05f);
+            modelM = scaleM * translateM;
+            flatColourShaderProgram.SetUniform("model", modelM);
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1.0f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Square.Lines.Bind();
+            Square.Lines.Draw();
+            Square.Lines.Unbind();
+
+
             //GL.Begin(BeginMode.LineLoop);
             //GL.Vertex3(xx + xSep, yy - ySep, 0.21);
             //GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.21);
@@ -239,8 +251,6 @@ namespace SpaceMercs.MainWindow {
             //GL.End();
             // Draw the hover text
 
-            float dx = (thWidth < 0.0) ? xx + thWidth + xSep : xx + xSep;
-            float dy = (thHeight > 0.0) ? yy - ySep : yy - thHeight - ySep;
             foreach (string str in strHoverText) {
                 TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale / Aspect, hoverTextScale, dx, dy, Color.LightGray);
                 dy += 0.045f;

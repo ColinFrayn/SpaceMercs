@@ -455,11 +455,11 @@ namespace SpaceMercs {
             SetupTextureMap(64, 32);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.UseProgram(texProg.ShaderProgramHandle);
             // Rotate the star?
             //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-            Sphere.Draw(Level);
+            Sphere.Draw(Level, true);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
         public override void SetupTextureMap(int width, int height) {
             if (iTexture == -1 || texture == null) iTexture = GL.GenTexture();

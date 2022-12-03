@@ -64,9 +64,10 @@ namespace SpaceMercs.MainWindow {
 
             //-- Display the scene
 
-            // Set the correct view location & perspective matrix
+            // Set the correct view location & perspective matrices for each shader program
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
             flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourLitShaderProgram.SetUniform("projection", projectionM);
             pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
             fullShaderProgram.SetUniform("projection", projectionM);
 
@@ -78,6 +79,8 @@ namespace SpaceMercs.MainWindow {
             pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
             fullShaderProgram.SetUniform("view", viewM);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("view", viewM);
+            flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
 
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -153,17 +156,20 @@ namespace SpaceMercs.MainWindow {
         private void DrawStars() {
             if (GalaxyMap.bMapSetup == false) return;
 
+            // Setup basic lighting parameters (light colour is White by default)
+            fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
+            fullShaderProgram.SetUniform("ambient", 0.25f);
+            flatColourLitShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
+            flatColourLitShaderProgram.SetUniform("ambient", 0.25f);
+
             // Display all stars by sector
-            //SetupMapLighting();
-            //GL.Enable(EnableCap.Lighting);
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
                     Sector sc = GalaxyMap.GetSector(tp);
-                    sc.Draw(flatColourShaderProgram, fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
+                    sc.Draw(flatColourLitShaderProgram, fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
                 }
             }
-            //GL.Disable(EnableCap.Lighting);
         }
 
         // Draw the grid for the map screen

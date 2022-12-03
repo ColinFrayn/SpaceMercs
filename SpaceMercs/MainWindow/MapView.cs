@@ -43,6 +43,7 @@ namespace SpaceMercs.MainWindow {
         private ShaderProgram flatColourShaderProgram;
         private ShaderProgram pos2DCol4ShaderProgram;
         private ShaderProgram fullShaderProgram;
+        private ShaderProgram flatColourLitShaderProgram;
 
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -91,10 +92,15 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderTexNorm);
+            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderTexLitNorm);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourLitShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3FlatNorm, ShaderCode.PixelShaderLitFlatColour);
+            flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
 
             base.OnLoad();
         }

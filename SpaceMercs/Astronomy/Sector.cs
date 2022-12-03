@@ -82,14 +82,15 @@ namespace SpaceMercs {
                 // Scale this star to its actual size
                 double StarScale = st.DrawScale * 0.1;
                 Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                Matrix4 modelM = scaleM * translateM;
 
                 // Work out the degree of detail to show in this star
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
-                // If close and not faded then show the textured sphere
+                // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
-                    Matrix4 scale2M = Matrix4.CreateScale(0.1f);
-                    Matrix4 modelM = scaleM * scale2M * translateM;
+                    //Matrix4 scale2M = Matrix4.CreateScale(0.1f);
+                    //Matrix4 modelM = scaleM * scale2M * translateM;
                     texProg.SetUniform("model", modelM);
                     st.DrawSelected(texProg, iLevel);
                 }
@@ -99,8 +100,6 @@ namespace SpaceMercs {
                     if (bFadeUnvisited && !st.Visited) fade = 3.0f;
                     Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
                     flatProg.SetUniform("flatColour", col);
-
-                    Matrix4 modelM = scaleM * translateM;
                     flatProg.SetUniform("model", modelM);
                     GL.UseProgram(flatProg.ShaderProgramHandle);
                     Sphere.Draw(iLevel);
