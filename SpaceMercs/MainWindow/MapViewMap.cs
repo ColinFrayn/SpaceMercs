@@ -68,6 +68,7 @@ namespace SpaceMercs.MainWindow {
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
             flatColourShaderProgram.SetUniform("projection", projectionM);
             pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
+            fullShaderProgram.SetUniform("projection", projectionM);
 
             Matrix4 translateM = Matrix4.CreateTranslation(-fMapViewX, -fMapViewY, -fMapViewZ);
             Matrix4 viewM = translateM;
@@ -75,6 +76,8 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
             pos2DCol4ShaderProgram.SetUniform("view", viewM);
             pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+            fullShaderProgram.SetUniform("view", viewM);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -157,7 +160,7 @@ namespace SpaceMercs.MainWindow {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
                     Sector sc = GalaxyMap.GetSector(tp);
-                    sc.Draw(flatColourShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
+                    sc.Draw(flatColourShaderProgram, fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
                 }
             }
             //GL.Disable(EnableCap.Lighting);

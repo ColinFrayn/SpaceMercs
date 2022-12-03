@@ -48,7 +48,7 @@ namespace SpaceMercs.MainWindow {
             // If we're travelling then display that
             if (TravelDetails != null) {
                 if (TravelDetails.GameOver) TravelDetails = null;
-                else TravelDetails.Display();
+                else TravelDetails.Display(fullShaderProgram);
             }
             // Display the various GUI Buttons
             else {
@@ -140,60 +140,59 @@ namespace SpaceMercs.MainWindow {
             List<string> strHoverText = new List<string>();
 
             // Check for AO hover.
-            if (aoHover != null && aoHover != lastAOHover) {
-                double dist = AstronomicalObject.CalculateDistance(aoSelected, aoHover);
-                if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                    Star stHover = (Star)aoHover;
-                    if (stHover.Name.Length == 0) {
-                        strHoverText.Add("<Unnamed>");
+            if (aoHover == null) return strHoverText;
+            double dist = AstronomicalObject.CalculateDistance(aoSelected, aoHover);
+            if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
+                Star stHover = (Star)aoHover;
+                if (stHover.Name.Length == 0) {
+                    strHoverText.Add("<Unnamed>");
+                }
+                else {
+                    strHoverText.Add(stHover.Name);
+                }
+                strHoverText.Add("Type " + stHover.StarType);
+                if (dist > 0.0 && aoHover.GetSystem() != aoSelected.GetSystem()) {
+                    strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
+                }
+            }
+            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
+                Planet plHover = (Planet)aoHover;
+                if (plHover.Name.Length == 0) {
+                    strHoverText.Add("<Unnamed>");
+                }
+                else {
+                    strHoverText.Add(plHover.Name);
+                }
+                strHoverText.Add(plHover.Type.ToString());
+                if (aoSelected != null) {
+                    if (aoSelected.GetSystem() == aoHover.GetSystem()) {
+                        strHoverText.Add("Dist: " + Math.Round(dist / Const.Billion, 1).ToString() + " Gm");
                     }
                     else {
-                        strHoverText.Add(stHover.Name);
-                    }
-                    strHoverText.Add("Type " + stHover.StarType);
-                    if (dist > 0.0 && aoHover.GetSystem() != aoSelected.GetSystem()) {
                         strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
                     }
                 }
-                else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
-                    Planet plHover = (Planet)aoHover;
-                    if (plHover.Name.Length == 0) {
-                        strHoverText.Add("<Unnamed>");
+            }
+            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
+                Moon mnHover = (Moon)aoHover;
+                strHoverText.Add(mnHover.Type.ToString() + " Moon");
+                if (aoSelected != null) {
+                    if (aoSelected.GetSystem() == aoHover.GetSystem()) {
+                        strHoverText.Add("Dist: " + Math.Round(dist / Const.Billion, 1).ToString() + " Gm");
                     }
                     else {
-                        strHoverText.Add(plHover.Name);
-                    }
-                    strHoverText.Add(plHover.Type.ToString());
-                    if (aoSelected != null) {
-                        if (aoSelected.GetSystem() == aoHover.GetSystem()) {
-                            strHoverText.Add("Dist: " + Math.Round(dist / Const.Billion, 1).ToString() + " Gm");
-                        }
-                        else {
-                            strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
-                        }
+                        strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
                     }
                 }
-                else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
-                    Moon mnHover = (Moon)aoHover;
-                    strHoverText.Add(mnHover.Type.ToString() + " Moon");
-                    if (aoSelected != null) {
-                        if (aoSelected.GetSystem() == aoHover.GetSystem()) {
-                            strHoverText.Add("Dist: " + Math.Round(dist / Const.Billion, 1).ToString() + " Gm");
-                        }
-                        else {
-                            strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
-                        }
-                    }
-                }
-                lastAOHover = aoHover;
             }
+            lastAOHover = aoHover;
             return strHoverText;
         }
 
         // Draw the hover info when hovering over an object with "Alt" pressed
         private void DrawGUIHoverInfo() {
-            //if (!IsKeyDown(Keys.LeftAlt) && !IsKeyDown(Keys.RightAlt)) return; // Only display if Alt is held down
-            if (aoHover == null && iGUIHoverN == -1) return;
+            if (aoHover == null) return;
+            if (!IsKeyDown(Keys.LeftAlt) && !IsKeyDown(Keys.RightAlt)) return; // Only display if Alt is held down
 
             List<string> strHoverText = SetupGUIHoverInfo();
             if (!strHoverText.Any()) return;

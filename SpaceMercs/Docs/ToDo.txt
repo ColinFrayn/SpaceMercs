@@ -2,9 +2,11 @@
 ToDo List
 -------------------------------------------------
 
+Taking ages to start. Why?
+
 MapViewMap.DrawMap()
-- DrawStars (basic first, then proper)
-- Hover text : Needs backing rectangle; Only display when Alt is pressed?
+- DrawStars (texMap)
+- Hover text : Needs backing rectangle; Display properly when flipped to left/top
 - DrawMapSelectionIcons : Add location icon? What is it? Triangle above star?
 
 GUIButton (.Display)
@@ -33,6 +35,8 @@ MapViewDrawMap
 - DrawTradeRoutes
 - DrawRangeCircles
 - DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
+- GUI text
+- Basic stars (not textured)
 
 Display the clock, cash, hover text, toggles
 

@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
@@ -371,7 +372,7 @@ namespace SpaceMercs {
         }
 
         // Draw the progress with whatever is happening
-        public void Display() {
+        public void Display(ShaderProgram texProg) {
 
             return;
 
@@ -398,7 +399,7 @@ namespace SpaceMercs {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
 
             //  Task specific stuff
-            if (PlayerTeam.CurrentMission == null) DrawTravelProgress();
+            if (PlayerTeam.CurrentMission == null) DrawTravelProgress(texProg);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) DrawRepair();
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage();
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle();
@@ -414,7 +415,7 @@ namespace SpaceMercs {
             GL.Enable(EnableCap.DepthTest);
             GL.DepthMask(true);
         }
-        private void DrawTravelProgress() {
+        private void DrawTravelProgress(ShaderProgram texProg) {
             // Set up the text
             string strDist = Utils.PrintDistance(AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo));
             string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
@@ -444,13 +445,13 @@ namespace SpaceMercs {
             GL.Translate(0.25, 0.42, 0.0);
             GL.Scale(0.025 / ParentView.Aspect, 0.025, 0.025);
             GL.Rotate(90.0, Vector3d.UnitY);
-            aoTravelFrom.DrawSelected(6);
+            aoTravelFrom.DrawSelected(texProg, 6);
             GL.PopMatrix();
             GL.PushMatrix();
             GL.Translate(0.75, 0.42, 0.0);
             GL.Scale(0.025 / ParentView.Aspect, 0.025, 0.025);
             GL.Rotate(90.0, Vector3d.UnitY);
-            aoTravelTo.DrawSelected(6);
+            aoTravelTo.DrawSelected(texProg, 6);
             GL.PopMatrix();
         }
         private void DrawSalvage() {

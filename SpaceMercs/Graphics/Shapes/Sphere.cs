@@ -11,6 +11,13 @@ namespace SpaceMercs.Graphics.Shapes {
             return _spheres[detail];
         }
 
+        public static void Draw(int detail) {
+            GLShape sphere = Build(detail);
+            sphere.Bind();
+            sphere.Draw();
+            sphere.Unbind();
+        }
+
         // Setup the sphere by generating rings of triangles
         private static GLShape SetupSphere(int nphi, int ntheta) {
             List<VertexPos3D> vertices = new List<VertexPos3D>();

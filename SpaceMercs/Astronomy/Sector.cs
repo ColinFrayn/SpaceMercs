@@ -74,52 +74,36 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
+        public void Draw(ShaderProgram flatProg, ShaderProgram texProg, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
             foreach (Star st in Stars) {
                 // Translate into the star frame
                 Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos);
 
                 // Scale this star to its actual size
                 double StarScale = st.DrawScale * 0.1;
-
-                // Fade out unvisited stars
-                float fade = 1.0f;
-                if (bFadeUnvisited && !st.Visited) fade = 3.0f;
-                Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
-                prog.SetUniform("flatColour", col);
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
 
                 // Work out the degree of detail to show in this star
-                float dx = fMapViewX - st.MapPos.X;
-                float dy = fMapViewY - st.MapPos.Y;
-                float dist2 = ((dx * dx) + (dy * dy) + (fMapViewZ * fMapViewZ));
-                float DetailScale = (float)(Math.Sqrt(dist2) / StarScale);
-                int iLevel = 1;
-                if (DetailScale < 25.0) iLevel = 8;
-                else if (DetailScale < 32.0) iLevel = 7;
-                else if (DetailScale < 40.0) iLevel = 6;
-                else if (DetailScale < 80.0) iLevel = 5;
-                else if (DetailScale < 150.0) iLevel = 4;
-                else if (DetailScale < 300.0) iLevel = 3;
-                else if (DetailScale < 600.0) iLevel = 2;
-                else iLevel = 1;
+                int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
-                // Display the star. If close and not faded then show the texture
+                // If close and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
-                    Matrix4 scaleM = Matrix4.CreateScale(0.1f);
-                    Matrix4 modelM = scaleM * translateM;
-                    prog.SetUniform("model", modelM);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    //st.DrawSelected(iLevel);
+                    Matrix4 scale2M = Matrix4.CreateScale(0.1f);
+                    Matrix4 modelM = scaleM * scale2M * translateM;
+                    texProg.SetUniform("model", modelM);
+                    st.DrawSelected(texProg, iLevel);
                 }
                 else {
-                    Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                    // Fade out unvisited stars
+                    float fade = 1.0f;
+                    if (bFadeUnvisited && !st.Visited) fade = 3.0f;
+                    Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
+                    flatProg.SetUniform("flatColour", col);
+
                     Matrix4 modelM = scaleM * translateM;
-                    prog.SetUniform("model", modelM);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    GLShape sphere = Sphere.Build(iLevel);
-                    sphere.Bind();
-                    sphere.Draw();
-                    sphere.Unbind();
+                    flatProg.SetUniform("model", modelM);
+                    GL.UseProgram(flatProg.ShaderProgramHandle);
+                    Sphere.Draw(iLevel);
                 }
 
                 continue;

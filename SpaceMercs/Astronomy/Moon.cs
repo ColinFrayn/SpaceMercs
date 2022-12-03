@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using SpaceMercs.Graphics;
 using System.IO;
 using System.Xml;
 
@@ -84,7 +85,7 @@ namespace SpaceMercs {
       GL.PopMatrix();
       GL.LineWidth(1.0f);
     }
-    public override void DrawSelected(int Level = 5) {
+    public override void DrawSelected(ShaderProgram prog, int Level = 5) {
       SetupTextureMap(32, 16);
       // Draw this planet
       GL.PushMatrix();

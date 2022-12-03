@@ -51,7 +51,7 @@ out vec2 vUV;
 void main()
 {
   vUV         = in_uv.xy;
-	gl_Position = projection * view * model * vec4(in_pos.xy, 0.0, 1.0);
+  gl_Position = projection * view * model * vec4(in_pos.xy, 0.0, 1.0);
 }";
         private static readonly string TextLabelFragmentShader = @"
 #version 460

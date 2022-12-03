@@ -42,6 +42,7 @@ namespace SpaceMercs.MainWindow {
         // Graphics
         private ShaderProgram flatColourShaderProgram;
         private ShaderProgram pos2DCol4ShaderProgram;
+        private ShaderProgram fullShaderProgram;
 
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -72,7 +73,7 @@ namespace SpaceMercs.MainWindow {
             //SetupMapTextures();
             //Planet.BuildPlanetHalo();
             //GraphicsFunctions.Initialise();
-            //Terrain.GenerateSeedMap();
+            Terrain.GenerateSeedMap();
             SetupGUIElements();
             bLoaded = true;
             //SetupOptionsMenu();
@@ -89,7 +90,11 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
-            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f,1f,1f,1f));
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderTexNorm);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("projection", Matrix4.Identity);
 
             base.OnLoad();
         }
