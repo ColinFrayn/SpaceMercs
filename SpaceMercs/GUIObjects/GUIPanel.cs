@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
   // A fold-out context menu object
@@ -19,16 +20,14 @@ namespace SpaceMercs {
     private bool bBlendState, bLightingState, bTextureState, bDepthMaskState, bDepthTestState;
 
     // Constructors
-    public GUIPanel(GameWindow parent) {
+    public GUIPanel(GameWindow parent) : base(parent,true,1.0f) {
       PanelX = 0.0;
       PanelY = 0.0;
-      Window = parent;
       Reset();
     }
-    public GUIPanel(GameWindow parent, double px, double py) {
+    public GUIPanel(GameWindow parent, double px, double py) : base(parent, true, 1.0f) {
       PanelX = px;
       PanelY = py;
-      Window = parent;
       Reset();
     }
 
@@ -121,7 +120,7 @@ namespace SpaceMercs {
     }
     
     // Display the menu
-    public override void Display(int mx, int my) {
+    public override void Display(int mx, int my, ShaderProgram prog) {
       if (!Active) return;
       double xx = (double)mx / (double)Window.Size.X;
       double yy = (double)my / (double)Window.Size.Y;

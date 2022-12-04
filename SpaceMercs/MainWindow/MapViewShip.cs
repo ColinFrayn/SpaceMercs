@@ -49,8 +49,8 @@ namespace SpaceMercs.MainWindow {
 
     private void SetupUtilityButtons() {
       // "Repair Ship" button
-      gbRepair.SetPosition(0.89, 0.85);
-      gbRepair.SetSize(0.08, 0.03);
+      gbRepair.SetPosition(0.89f, 0.85f);
+      gbRepair.SetSize(0.08f, 0.03f);
       gbRepair.SetBlend(false);
       if (PlayerTeam.PlayerShip.HullFract < 1.0) gbRepair.Activate();
       else gbRepair.Deactivate();
@@ -58,8 +58,8 @@ namespace SpaceMercs.MainWindow {
       if ((PlayerTeam.CurrentPosition.Base & (Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military)) == 0) gbRepair.Deactivate(); // Only colonies, metropolis or military bases can repair
 
       // Fabrication Button
-      gbFabricate.SetPosition(0.89, 0.9);
-      gbFabricate.SetSize(0.08, 0.03);
+      gbFabricate.SetPosition(0.89f, 0.9f);
+      gbFabricate.SetSize(0.08f, 0.03f);
       gbFabricate.SetBlend(false);
       gbFabricate.Deactivate();
       if (PlayerTeam.PlayerShip.HasArmoury) gbFabricate.Activate();
@@ -210,7 +210,7 @@ namespace SpaceMercs.MainWindow {
       GL.Clear(ClearBufferMask.DepthBufferBit);
 
       // Show the context menu, if it's available
-      gpSelect.Display(mx, my);
+      gpSelect.Display(mx, my, flatColourShaderProgram);
 
       // Show hover text
       SetupRoomHoverInfo();
@@ -230,8 +230,8 @@ namespace SpaceMercs.MainWindow {
       if (irSelected != -1) DisplaySelectionText_Ship();
 
       // Display all buttons
-      gbRepair.Display(mx, my);
-      gbFabricate.Display(mx, my);
+      gbRepair.Display(mx, my, flatColourShaderProgram);
+      gbFabricate.Display(mx, my, flatColourShaderProgram);
     }
 
     // Setup a mini window to show details of the current hover room or context menu icon

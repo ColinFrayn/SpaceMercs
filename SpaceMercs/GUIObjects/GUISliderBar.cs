@@ -1,4 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Windowing.Desktop;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
   class GUISliderBar : GUIObject {
@@ -23,7 +25,7 @@ namespace SpaceMercs {
     public double BarStep;
     public bool bMarkZero;
 
-    public GUISliderBar () {
+    public GUISliderBar (GameWindow parent) : base(parent, true, 0.4f) {
       BarX = 0.0;
       BarY = 0.0;
       BarHeight = 0.07;
@@ -34,14 +36,12 @@ namespace SpaceMercs {
       ArrowSz = 0.03;
       SlideGap = 0.004;
       DragBar = false;
-      Active = true;
       BarStep = 8.0;
-      Alpha = 0.4f;
       bMarkZero = false;
     }
 
     // Display the slider bars
-    public override void Display(int x, int y) {
+    public override void Display(int x, int y, ShaderProgram prog) {
       int WindowWidth = Window.Size.X;
       int WindowHeight = Window.Size.Y;
       double xpos = (double)x / (double)WindowWidth, ypos = (double)y / (double)WindowHeight;

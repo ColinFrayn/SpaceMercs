@@ -24,7 +24,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f / Aspect, 0.03f, toggleX, 0.04f);
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, toggleX, 0.03f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
@@ -35,7 +35,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Display the player's remaining cash reserves
-            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f / Aspect, 0.03f, 0.99f, 0.04f);
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f , Aspect, 0.99f, 0.03f);
 
             // Toggles
             DrawToggles();
@@ -53,14 +53,14 @@ namespace SpaceMercs.MainWindow {
             // Display the various GUI Buttons
             else {
                 SetAOButtonsOnGUI(aoSelected);
-                gbRenameObject.Display(mx, my);
-                gbFlyTo.Display(mx, my);
-                gbViewColony.Display(mx, my);
-                gbScan.Display(mx, my);
+                gbRenameObject.Display(mx, my, flatColourShaderProgram);
+                gbFlyTo.Display(mx, my, flatColourShaderProgram);
+                gbViewColony.Display(mx, my, flatColourShaderProgram);
+                gbScan.Display(mx, my, flatColourShaderProgram);
             }
 
             // Colony?
-            // TODO Enable
+            // TODO Enable this. Was not enabled before...
             //if (TravelDetails != null) colonyToolStripMenuItem.Enabled = false;
             //else {
             //  if (PlayerTeam.CurrentPosition.BaseSize > 0) colonyToolStripMenuItem.Enabled = true;
@@ -109,30 +109,30 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Display the text details of the selected object
-            TextRenderer.DrawAt(tl1, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart);
-            TextRenderer.DrawAt(tl2, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap);
-            TextRenderer.DrawAt(tl3, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 2f);
-            TextRenderer.DrawAt(tl4, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 3f);
-            TextRenderer.DrawAt(tl5, Alignment.TopLeft, dTLScale / Aspect, dTLScale, dXMargin, dYStart + dYGap * 4f);
+            TextRenderer.DrawAt(tl1, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart);
+            TextRenderer.DrawAt(tl2, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap);
+            TextRenderer.DrawAt(tl3, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 2f);
+            TextRenderer.DrawAt(tl4, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 3f);
+            TextRenderer.DrawAt(tl5, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 4f);
         }
 
         // Draw toggles for all screens (L)
         private void DrawToggles() {
-            TextRenderer.DrawAt("L", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the System View (C)
         private void DrawSystemToggles() {
-            TextRenderer.DrawAt("C", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("C", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the map screen (RFGAV)
         private void DrawMapToggles() {
-            TextRenderer.DrawAt("A", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("F", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("G", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("R", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("V", Alignment.CentreLeft, toggleScale / Aspect, toggleScale, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("A", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("G", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("R", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("V", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
         }
 
         // Setup a mini window to show details of the current hover target
@@ -215,8 +215,8 @@ namespace SpaceMercs.MainWindow {
             float dx = (xx > 0.5) ? xx - xSep - thWidth : xx + xSep; // (xx > 0.5) ? xx - thWidth + xSep : xx + xSep;
             float dy = (yy > 0.5) ? yy - thHeight - ySep : yy + ySep + (hoverTextScale * 0.5f);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale, -0.1f);
-            Matrix4 scaleM = Matrix4.CreateScale(thWidth, thHeight, 1f);
+            Matrix4 translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale - ySep, -0.1f);
+            Matrix4 scaleM = Matrix4.CreateScale(thWidth / Aspect + xSep, thHeight + ySep, 1f);
             Matrix4 modelM = scaleM * translateM;
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1.0f));
@@ -225,7 +225,7 @@ namespace SpaceMercs.MainWindow {
             Square.Flat.Draw();
             Square.Flat.Unbind();
 
-            translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale, -0.05f);
+            translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale - ySep, -0.05f);
             modelM = scaleM * translateM;
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1.0f));
@@ -234,25 +234,8 @@ namespace SpaceMercs.MainWindow {
             Square.Lines.Draw();
             Square.Lines.Unbind();
 
-
-            //GL.Begin(BeginMode.LineLoop);
-            //GL.Vertex3(xx + xSep, yy - ySep, 0.21);
-            //GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.21);
-            //GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.21);
-            //GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.21);
-            //GL.End();
-            //GL.Color3(0.0, 0.0, 0.0);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            //GL.Begin(BeginMode.Quads);
-            //GL.Vertex3(xx + xSep, yy - ySep, 0.2);
-            //GL.Vertex3(xx + xSep + thWidth, yy - ySep, 0.2);
-            //GL.Vertex3(xx + xSep + thWidth, yy - (ySep + thHeight), 0.2);
-            //GL.Vertex3(xx + xSep, yy - (ySep + thHeight), 0.2);
-            //GL.End();
-            // Draw the hover text
-
             foreach (string str in strHoverText) {
-                TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale / Aspect, hoverTextScale, dx, dy, Color.LightGray);
+                TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale, Aspect, dx, dy, Color.LightGray);
                 dy += 0.045f;
             }
         }
@@ -261,26 +244,26 @@ namespace SpaceMercs.MainWindow {
         private void SetupGUIElements() {
             // "View the colony at the current location" button
             gbViewColony = new GUIButton("Colony", this, OpenColonyViewDialog);
-            gbViewColony.SetPosition(0.01, 0.07);
-            gbViewColony.SetSize(0.065, 0.035);
+            gbViewColony.SetPosition(0.01f, 0.07f);
+            gbViewColony.SetSize(0.065f, 0.035f);
             gbViewColony.SetBlend(false);
 
             // "Rename this planet" button
             gbRenameObject = new GUIButton("Rename", this, OpenRenameObjectDialog);
-            gbRenameObject.SetPosition(0.08, 0.07);
-            gbRenameObject.SetSize(0.065, 0.035);
+            gbRenameObject.SetPosition(0.08f, 0.07f);
+            gbRenameObject.SetSize(0.065f, 0.035f);
             gbRenameObject.SetBlend(false);
 
             // "Fly to this target" button
             gbFlyTo = new GUIButton("Fly To", this, OpenFlyToDialog);
-            gbFlyTo.SetPosition(0.15, 0.07);
-            gbFlyTo.SetSize(0.065, 0.035);
+            gbFlyTo.SetPosition(0.15f, 0.07f);
+            gbFlyTo.SetSize(0.065f, 0.035f);
             gbFlyTo.SetBlend(false);
 
             // "Scan this planet" button
             gbScan = new GUIButton("Scan", this, OpenScanPlanetDialog);
-            gbScan.SetPosition(0.23, 0.07);
-            gbScan.SetSize(0.065, 0.035);
+            gbScan.SetPosition(0.23f, 0.07f);
+            gbScan.SetSize(0.065f, 0.035f);
             gbScan.SetBlend(false);
         }
 

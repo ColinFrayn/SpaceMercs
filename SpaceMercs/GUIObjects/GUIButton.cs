@@ -1,24 +1,23 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
+using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class GUIButton : GUIObject {
         public delegate void GUIButton_Trigger();
 
-        private double ButtonX, ButtonY;
-        private double ButtonWidth, ButtonHeight;
+        private float ButtonX, ButtonY;
+        private float ButtonWidth, ButtonHeight;
         private bool State, Blend, Stipple;
-        private readonly GUIButton_Trigger Trigger = null;
+        private readonly GUIButton_Trigger Trigger;
         private string Text;
 
-        public GUIButton(string strText, GameWindow parentWindow, GUIButton_Trigger _trigger) {
-            Alpha = 0.4f;
-            Window = parentWindow;
+        public GUIButton(string strText, GameWindow parentWindow, GUIButton_Trigger _trigger) : base(parentWindow, false, 0.4f) {
             Trigger = _trigger;
-            ButtonWidth = 0.05;
-            ButtonHeight = 0.02;
-            Active = false;
+            ButtonWidth = 0.05f;
+            ButtonHeight = 0.02f;
             State = false;
             Blend = true;
             Text = strText;
@@ -30,18 +29,14 @@ namespace SpaceMercs {
         }
 
         // Display the button
-        public override void Display(int x, int y) {
+        public override void Display(int x, int y, ShaderProgram prog) {
             if (!Active) return;
-
-            return;
 
             int WindowWidth = Window.Size.X;
             int WindowHeight = Window.Size.Y;
-            double xpos = (double)x / (double)WindowWidth, ypos = (double)y / (double)WindowHeight;
+            float xpos = (float)x / (float)WindowWidth, ypos = (float)y / (float)WindowHeight;
 
             // Set up transparency
-            GL.Disable(EnableCap.Lighting);
-            GL.Disable(EnableCap.Texture2D);
             if (Blend) {
                 GL.Enable(EnableCap.Blend);
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -49,44 +44,52 @@ namespace SpaceMercs {
             else {
                 GL.Disable(EnableCap.Blend);
             }
+            GL.Disable(EnableCap.DepthTest);
 
             // Draw the button background
-            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) GL.Color4(0.8f, 0.8f, 0.8f, Alpha);
-            else if (State) GL.Color4(0.6f, 0.6f, 0.6f, Alpha);
-            else GL.Color4(0.4f, 0.4f, 0.4f, Alpha);
-            GL.Disable(EnableCap.DepthTest);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(ButtonX, ButtonY, 0.1f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY, 0.1f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY + ButtonHeight, 0.1f);
-            GL.Vertex3(ButtonX, ButtonY + ButtonHeight, 0.1f);
-            GL.End();
+            Vector4 col = new Vector4(0.4f, 0.4f, 0.4f, Alpha);
+            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) col = new Vector4(0.8f, 0.8f, 0.8f, Alpha);
+            else if (State) col = new Vector4(0.6f, 0.6f, 0.6f, Alpha);
+
+            Matrix4 translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.1f);
+            Matrix4 scaleM = Matrix4.CreateScale(ButtonWidth, ButtonHeight, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", col);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.Bind();
+            Square.Flat.Draw();
+            Square.Flat.Unbind();
 
             // Draw the button text
-            GL.PushMatrix();
-            GL.Translate(ButtonX, ButtonY, 0.2);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlText.Draw(TextLabel.Alignment.TopLeft,ButtonWidth,ButtonHeight);
-            GL.PopMatrix();
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopLeft,
+                Aspect = WindowHeight / WindowWidth,
+                FixedHeight = ButtonHeight * 0.8f,
+                FixedWidth = ButtonWidth * 0.9f,
+                IsFixedSize = true,
+                TextColour = Color.White,
+                TextPos = TextAlign.Centre,
+                XPos = ButtonX,
+                YPos = ButtonY
+            };
+            TextRenderer.DrawWithOptions(Text, tro);
 
-            // Set up stipple
-            if (Stipple) {
-                GL.Enable(EnableCap.LineStipple);
-                GL.LineStipple(1, 255);
-            }
-            else GL.Disable(EnableCap.LineStipple);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.Bind();
+            Square.Lines.Draw();
+            Square.Lines.Unbind();
 
-            // Draw the framework
-            GL.Disable(EnableCap.DepthTest);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(ButtonX, ButtonY, 0.15f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY, 0.15f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY + ButtonHeight, 0.15f);
-            GL.Vertex3(ButtonX, ButtonY + ButtonHeight, 0.15f);
-            GL.End();
+            //// Set up stipple
+            //if (Stipple) {
+            //    GL.Enable(EnableCap.LineStipple);
+            //    GL.LineStipple(1, 255);
+            //}
+            //else GL.Disable(EnableCap.LineStipple);
+
+            //GL.Disable(EnableCap.LineStipple);
             GL.Enable(EnableCap.DepthTest);
-            GL.Disable(EnableCap.LineStipple);
         }
 
         // See if there's anything that needs to be done for the slider bar after a L-click
@@ -143,11 +146,11 @@ namespace SpaceMercs {
         public void SetStipple(bool b) {
             Stipple = b;
         }
-        public void SetPosition(double x, double y) {
+        public void SetPosition(float x, float y) {
             ButtonX = x;
             ButtonY = y;
         }
-        public void SetSize(double w, double h) {
+        public void SetSize(float w, float h) {
             ButtonWidth = w;
             ButtonHeight = h;
         }

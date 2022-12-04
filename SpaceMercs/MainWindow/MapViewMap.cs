@@ -1,5 +1,4 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -15,6 +14,7 @@ namespace SpaceMercs.MainWindow {
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
 
         // Build texture maps for the stars' radial brightness maps
+        // TODO : What is all this for??
         private void SetupMapTextures() {
             double D = -0.7, D2 = -0.6;
             double RMin = 0.05;
@@ -126,16 +126,17 @@ namespace SpaceMercs.MainWindow {
             }
 
             {
-                Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos);
                 double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
-                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos.X, CurrentSystem.MapPos.Y + (float)StarScale * 1.8f, 0f);
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale * 1.2f / Aspect, -(float)StarScale * 1.4f, 1f);
                 Matrix4 modelM = scaleM * translateM;
                 flatColourShaderProgram.SetUniform("model", modelM);
                 flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-                // TODO: What? A triangle?
-                //GraphicsFunctions.DrawLocationIcon(StarScale);
+                Triangle.Flat.Bind();
+                Triangle.Flat.Draw();
+                Triangle.Flat.Unbind();
             }
         }
 
@@ -275,29 +276,5 @@ namespace SpaceMercs.MainWindow {
             aoHover = sc.CheckHover(mxpos, mypos, fMapViewZ);
             // TODO if (aoHover != aoHoverOld) glMapView.Invalidate();
         }
-
-        // Configure and locate the light from the star
-        private void SetupMapLighting() {
-            GL.Enable(EnableCap.Normalize);
-            // Setup parallel light source
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 100000.0f, 100000.0f, 10000.0f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.3f, 0.3f, 0.3f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.8f, 0.8f, 0.8f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Specular, new float[] { 0.0f, 0.0f, 0.0f, 1.0f });
-            GL.Enable(EnableCap.Light0);
-
-            // Material properties
-            GL.Material(MaterialFace.Front, MaterialParameter.Specular, new float[] { 0.1f, 0.1f, 0.1f, 1.0f });
-            GL.Material(MaterialFace.Front, MaterialParameter.Ambient, new float[] { 0.5f, 0.5f, 0.5f, 1.0f });
-            GL.Material(MaterialFace.Front, MaterialParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
-
-            // Global ambient light level
-            GL.LightModel(LightModelParameter.LightModelAmbient, 0.25f);
-
-            // Set colouring
-            GL.Enable(EnableCap.ColorMaterial);
-            GL.ColorMaterial(MaterialFace.Front, ColorMaterialParameter.AmbientAndDiffuse);
-        }
-
     }
 }

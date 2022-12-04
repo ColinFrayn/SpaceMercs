@@ -202,7 +202,7 @@ namespace SpaceMercs.MainWindow {
             else throw new NotImplementedException();
 
             // Any message? If so then display it here. Should affect all mapview modes
-            msgBox.Display(mx, my);
+            msgBox.Display(mx, my, flatColourShaderProgram); // TODO Setup properly
 
             // Swap rendered surface to front
             SwapBuffers();
@@ -269,13 +269,14 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.05f, Aspect = Aspect };
-            TextRenderer.Draw($"Welcome to SpaceMercs v{Const.strVersion}", tro);
+            TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);
             TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.03f, Aspect = Aspect };
-            TextRenderer.Draw("Select An Option From The File Menu", tro2);
+            TextRenderer.DrawWithOptions("Select An Option From The File Menu", tro2);
 
             //DisplayDebuggingCircles(); // DEBUGGING
         }
 
+        // Display a set of circles at incremental radii to debug positions
         private void DisplayDebuggingCircles() {
             //DEBUGGING
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);

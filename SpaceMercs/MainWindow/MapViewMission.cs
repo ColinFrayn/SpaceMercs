@@ -835,14 +835,14 @@ namespace SpaceMercs.MainWindow {
       ShowSoldierPanels();
 
       // Show the context menu and other buttons
-      if (gpSelect != null) gpSelect.Display(mx, my);
-      foreach (GUIIconButton bt in lButtons) bt.Display(mx, my);
-      if (gbEndTurn != null) gbEndTurn.Display(mx, my);
-      if (gbTransition != null) gbTransition.Display(mx, my);
+      if (gpSelect != null) gpSelect.Display(mx, my, flatColourShaderProgram);
+      foreach (GUIIconButton bt in lButtons) bt.Display(mx, my, flatColourShaderProgram);
+      if (gbEndTurn != null) gbEndTurn.Display(mx, my, flatColourShaderProgram);
+      if (gbTransition != null) gbTransition.Display(mx, my, flatColourShaderProgram);
       if (ThisMission.IsComplete) {
         gbEndMission.Activate();
         gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
-        gbEndMission.Display(mx, my);
+        gbEndMission.Display(mx, my, flatColourShaderProgram);
       }
       else gbEndMission.Deactivate();
 
@@ -986,18 +986,18 @@ namespace SpaceMercs.MainWindow {
         // Other buttons
         gbEndTurn = new GUIButton("End Turn", this, EndTurn);
         gbEndTurn.Activate();
-        gbEndTurn.SetPosition(0.9, 0.93);
-        gbEndTurn.SetSize(0.09, 0.05);
+        gbEndTurn.SetPosition(0.9f, 0.93f);
+        gbEndTurn.SetSize(0.09f, 0.05f);
         gbEndTurn.SetBlend(true);
 
         gbTransition = new GUIButton("Transition", this, Transition);
-        gbTransition.SetPosition(0.9, 0.85);
-        gbTransition.SetSize(0.09, 0.05);
+        gbTransition.SetPosition(0.9f, 0.85f);
+        gbTransition.SetSize(0.09f, 0.05f);
         gbTransition.SetBlend(true);
 
         gbEndMission = new GUIButton("End Mission", this, EndMission);
-        gbEndMission.SetPosition(0.9, 0.77);
-        gbEndMission.SetSize(0.09, 0.05);
+        gbEndMission.SetPosition(0.9f, 0.77f);
+        gbEndMission.SetSize(0.09f, 0.05f);
         gbEndMission.SetBlend(true);
 
         // Done

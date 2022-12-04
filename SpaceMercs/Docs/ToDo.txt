@@ -2,23 +2,24 @@
 ToDo List
 -------------------------------------------------
 
-MapViewMap.DrawMap()
-- Hover text : Fix rectangle alignment
-- DrawMapSelectionIcons : Add location icon? What is it? Triangle above star?
+Mouse hover text : too large for the box
 
-GUIButton (.Display)
+GUIButton (.Display) : Text display is wrong (rendering with fixed size?)
+
+GUIMessageBox()
 
 Taking ages to start. Why?
 
-Convert GraphicsObject instances to use modern OpenGL and test them all
+Remove old GraphicsObject class & replace all (relevant) functionality with GLShape
 
 TravelDetails.Display()
 
 Write Menu control & add menu back to MapView
-
-Update text display to use SharpFont - Graphics.FreeTypeFont? GUIObjects.TextLabel
+- Buttons for the main welcome screen? (Load, New)
 
 Remove all MessageBoxes
+
+Text rendering tutorial : https://learnopengl.com/In-Practice/Text-Rendering
 
 ==========================================================================================================
 
@@ -34,6 +35,10 @@ MapViewDrawMap
 - DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
 - GUI text
 - Drawing stars (with and without texmap; plus lighting)
+- Hover text
+- DrawMapSelectionIcons
+
+Updated text renderer to use TrueType fonts
 
 Added in a lit flat shader, lit textured shader
 

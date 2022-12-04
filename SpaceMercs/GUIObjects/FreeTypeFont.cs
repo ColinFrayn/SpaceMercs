@@ -91,21 +91,25 @@ namespace SpaceMercs {
         }
 
         // Return the average font height
-        public float FontHeight() {
-            return _characters['A'].Size.Y;
+        public float FontHeight {
+            get {
+                return _characters['A'].Size.Y;
+            }
         }
 
         // Return a translation offset to be used to get the alignment / scaling right
         public Vector2 MeasureText(string text, int kerningShift = 0) {
-            float char_x = 0.0f;
+            float char_x = 0f, maxBearing = 0f, maxDrop = 0f;
             foreach (char c in text) {
                 TexChar ch = _characters['?']; // Unprintable character => ?
                 if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
                                                                           // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
                 char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+                if (ch.Bearing.Y > maxBearing) maxBearing = ch.Bearing.Y;
+                float drop = ch.Size.Y - ch.Bearing.Y;
+                if (drop > maxDrop) maxDrop = drop;
             }
-            float height = _characters['A'].Size.Y;
-            return new Vector2(char_x, height);
+            return new Vector2(char_x, maxBearing + maxDrop);
         }
 
         public void RenderText(ShaderProgram prog, string text, int kerningShift = 0) {
