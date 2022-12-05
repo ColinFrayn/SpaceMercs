@@ -14,7 +14,7 @@ namespace SpaceMercs {
         private readonly GUIButton_Trigger Trigger;
         private string Text;
 
-        public GUIButton(string strText, GameWindow parentWindow, GUIButton_Trigger _trigger) : base(parentWindow, false, 0.4f) {
+        public GUIButton(string strText, GameWindow parentWindow, GUIButton_Trigger _trigger) : base(parentWindow, false, 0.3f) {
             Trigger = _trigger;
             ButtonWidth = 0.05f;
             ButtonHeight = 0.02f;
@@ -47,11 +47,11 @@ namespace SpaceMercs {
             GL.Disable(EnableCap.DepthTest);
 
             // Draw the button background
-            Vector4 col = new Vector4(0.4f, 0.4f, 0.4f, Alpha);
-            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) col = new Vector4(0.8f, 0.8f, 0.8f, Alpha);
-            else if (State) col = new Vector4(0.6f, 0.6f, 0.6f, Alpha);
+            Vector4 col = new Vector4(0.3f, 0.3f, 0.3f, Alpha);
+            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) col = new Vector4(0.6f, 0.6f, 0.6f, Alpha);
+            else if (State) col = new Vector4(0.45f, 0.45f, 0.45f, Alpha);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.1f);
+            Matrix4 translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.005f);
             Matrix4 scaleM = Matrix4.CreateScale(ButtonWidth, ButtonHeight, 1f);
             Matrix4 modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
@@ -64,17 +64,21 @@ namespace SpaceMercs {
             // Draw the button text
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopLeft,
-                Aspect = WindowHeight / WindowWidth,
-                FixedHeight = ButtonHeight * 0.8f,
-                FixedWidth = ButtonWidth * 0.9f,
+                Aspect = (float)WindowWidth / (float)WindowHeight,
+                FixedHeight = ButtonHeight,
+                FixedWidth = ButtonWidth,
                 IsFixedSize = true,
                 TextColour = Color.White,
                 TextPos = TextAlign.Centre,
                 XPos = ButtonX,
-                YPos = ButtonY
+                YPos = ButtonY,
+                ZPos = 0.15f
             };
             TextRenderer.DrawWithOptions(Text, tro);
 
+            translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.01f);
+            modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Lines.Bind();

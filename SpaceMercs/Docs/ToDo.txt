@@ -2,9 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Mouse hover text : too large for the box
-
-GUIButton (.Display) : Text display is wrong (rendering with fixed size?)
+GUIButton (.Display) : Text display is wrong. Was so close...
 
 GUIMessageBox()
 

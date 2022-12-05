@@ -24,7 +24,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, toggleX, 0.03f);
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, toggleX, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
@@ -35,7 +35,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Display the player's remaining cash reserves
-            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f , Aspect, 0.99f, 0.03f);
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f , Aspect, 0.99f, 0.01f);
 
             // Toggles
             DrawToggles();
@@ -70,10 +70,10 @@ namespace SpaceMercs.MainWindow {
 
         // Display the text labels required for the GUI
         private void DisplaySelectionText() {
-            float dTLScale = 0.032f;
+            float dTLScale = 0.03f;
             float dXMargin = 0.01f;
-            float dYStart = 0.8f;
-            float dYGap = 0.0425f;
+            float dYStart = 0.78f;
+            float dYGap = 0.04f;
 
             // Get the text strings
             if (aoSelected == null) return;
@@ -97,7 +97,7 @@ namespace SpaceMercs.MainWindow {
                 tl3 = "R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km";
                 tl4 = $"Temp = {pl.Temperature}K";
                 tl5 = "Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU";
-                //tw.Update(iTextSelected4, "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm");
+                //tl4 = "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm";
             }
             if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
                 Moon mn = (Moon)aoSelected;
@@ -198,15 +198,14 @@ namespace SpaceMercs.MainWindow {
             if (!strHoverText.Any()) return;
 
             // -- Draw a dark grey box with a black background, and overlay the relevant text
-            float thWidth = 0f, thHeight = 0f;
+            float thWidth = 0f;
             foreach (string str in strHoverText) {
                 Vector2 size = TextRenderer.MeasureText(str);
                 if (size.X > thWidth) thWidth = size.X;
-                thHeight = size.Y; // Currently same value for all rows, just height of "A"
             }
             float hoverTextScale = 0.03f;
-            thWidth *= hoverTextScale / thHeight;
-            thHeight = hoverTextScale * strHoverText.Count() * 1.5f;
+            thWidth *= hoverTextScale / TextRenderer.FontSize;
+            float thHeight = hoverTextScale * strHoverText.Count() * 1.3f;
 
             // First, calculate box dimensions
             float xx = (float)mx / (float)Size.X;
@@ -215,8 +214,8 @@ namespace SpaceMercs.MainWindow {
             float dx = (xx > 0.5) ? xx - xSep - thWidth : xx + xSep; // (xx > 0.5) ? xx - thWidth + xSep : xx + xSep;
             float dy = (yy > 0.5) ? yy - thHeight - ySep : yy + ySep + (hoverTextScale * 0.5f);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale - ySep, -0.1f);
-            Matrix4 scaleM = Matrix4.CreateScale(thWidth / Aspect + xSep, thHeight + ySep, 1f);
+            Matrix4 translateM = Matrix4.CreateTranslation(dx, dy, -0.1f);
+            Matrix4 scaleM = Matrix4.CreateScale(thWidth / Aspect, thHeight, 1f);
             Matrix4 modelM = scaleM * translateM;
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1.0f));
@@ -225,7 +224,7 @@ namespace SpaceMercs.MainWindow {
             Square.Flat.Draw();
             Square.Flat.Unbind();
 
-            translateM = Matrix4.CreateTranslation(dx, dy - hoverTextScale - ySep, -0.05f);
+            translateM = Matrix4.CreateTranslation(dx, dy, -0.05f);
             modelM = scaleM * translateM;
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1.0f));
@@ -236,7 +235,7 @@ namespace SpaceMercs.MainWindow {
 
             foreach (string str in strHoverText) {
                 TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale, Aspect, dx, dy, Color.LightGray);
-                dy += 0.045f;
+                dy += hoverTextScale * 1.15f;
             }
         }
 

@@ -17,8 +17,6 @@ namespace SpaceMercs {
 
     internal class FreeTypeFont {
         private readonly Dictionary<uint, TexChar> _characters = new Dictionary<uint, TexChar>();
-        private readonly GLShape square;
-
         public uint PixelHeight { get; private set; }
 
         public FreeTypeFont(uint pixelheight) {
@@ -88,13 +86,6 @@ namespace SpaceMercs {
 
             // Set default (4 byte) pixel alignment 
             GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
-        }
-
-        // Return the average font height
-        public float FontHeight {
-            get {
-                return _characters['A'].Size.Y;
-            }
         }
 
         // Return a translation offset to be used to get the alignment / scaling right

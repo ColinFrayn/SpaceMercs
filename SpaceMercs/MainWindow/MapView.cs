@@ -268,9 +268,9 @@ namespace SpaceMercs.MainWindow {
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.05f, Aspect = Aspect };
+            TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.07f, Aspect = Aspect };
             TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);
-            TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.03f, Aspect = Aspect };
+            TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.04f, Aspect = Aspect };
             TextRenderer.DrawWithOptions("Select An Option From The File Menu", tro2);
 
             //DisplayDebuggingCircles(); // DEBUGGING
