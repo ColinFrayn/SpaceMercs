@@ -28,15 +28,6 @@ namespace SpaceMercs {
         //public int Shadow { get; set; } = 0;
     }
 
-    internal class FixedSizeTextRenderOptions : TextRenderOptions {
-        public TextAlign TextPos { get; set; } = TextAlign.Centre;
-        public float FixedWidth { get; set; } = 1f;
-        public float FixedHeight { get; set; } = 1f;
-        public int Padding { get; set; } = 0; // In points
-        public float MaxScale { get; set; } = 1e9f;
-        public bool AlignYAtOrigin { get; set; } = false;
-    }
-
     internal static class TextRenderer {
         // SharpFont Settings
         private static readonly FreeTypeFont textLabelFont32;
@@ -123,10 +114,6 @@ void main()
 
         // Draw this label with the given settings
         private static void DrawAtInternal(string strText, TextRenderOptions tro) {
-            float yShift = tro.YPos;
-            float xShift = tro.XPos;
-            FixedSizeTextRenderOptions? trof = tro as FixedSizeTextRenderOptions;
-
             // Blend this font so we don't obscure the background in the gaps
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -140,40 +127,25 @@ void main()
 
             // Get calculated dimensions of the text so we can scale/align accordingly
             TextMeasure textSize = textLabelFont32.MeasureText(strText, tro.KerningShift);
-            float textHeight = textLabelFont32.PixelSize;
+            float pixelSize = textLabelFont32.PixelSize;
 
             // Generate the scale matrix based on the desired scale size, bound size, text size etc.
-            Matrix4 scaleM;
-            if (trof is not null) {
-                float scale = trof.FixedHeight / (textSize.Height + trof.Padding * 2f);
-                float textLen = scale * (textSize.Width + trof.Padding * 2f) / tro.Aspect;
-                if (textLen > trof.FixedWidth) scale /= (textLen / trof.FixedWidth);
-                if (scale > trof.MaxScale) scale = trof.MaxScale;
-                scaleM = Matrix4.CreateScale(new Vector3(scale / tro.Aspect, scale, 1.0f));
-                // Text align (horizontal)
-                if (trof.TextPos != TextAlign.Left) {
-                    float gap = trof.FixedWidth - (scale * (textSize.Width + trof.Padding * 2f) / tro.Aspect);
-                    if (trof.TextPos == TextAlign.Centre) xShift += gap / 2f;
-                    if (trof.TextPos == TextAlign.Right) xShift += gap;
-                }
-                // Make the text centrally-aligned in the box vertically
-                float vgap = trof.FixedHeight - (scale * (textSize.Height + trof.Padding * 2f));
-                yShift += vgap / 2f;
-            }
-            else {
-                float yScale = tro.Scale;
-                float xScale = tro.Scale / tro.Aspect;
-                scaleM = Matrix4.CreateScale(new Vector3(xScale / textHeight, yScale / textHeight, 1.0f));
-            }
+            float yScale = tro.Scale;
+            float xScale = tro.Scale / tro.Aspect;
+            Matrix4 scaleM = Matrix4.CreateScale(new Vector3(xScale / pixelSize, yScale / pixelSize, 1.0f));
 
-            // Translate based on required alignment
+            // Calculate font location
+            float yShift = tro.YPos;
+            float xShift = tro.XPos;
             float finalXScale = scaleM.M11;
             float finalYScale = scaleM.M22;
+
             // Align to the top left corner of the text
-            yShift += textHeight * finalYScale;
-            // Correct if text alignment is not TL. We always align to the range between max height and the origin.
-            if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * textHeight;
-            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * textHeight / 2f;
+            yShift += pixelSize * finalYScale;
+
+            // Change the starting location if text alignment is not TL. We always align to the range between max height and the origin.
+            if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * pixelSize;
+            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * pixelSize / 2f;
             if (tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.BottomMiddle) xShift -= finalXScale * textSize.Width / 2f;
             if (tro.Alignment == Alignment.TopRight || tro.Alignment == Alignment.CentreRight || tro.Alignment == Alignment.BottomRight) xShift -= finalXScale * textSize.Width;
 

@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-GUIButton (.Display) : Text display should really align the bottom edge
-
 GUIMessageBox()
 
 Taking ages to start. Why?
@@ -35,6 +33,8 @@ MapViewDrawMap
 - Drawing stars (with and without texmap; plus lighting)
 - Hover text
 - DrawMapSelectionIcons
+
+GUIButton
 
 Updated text renderer to use TrueType fonts
 

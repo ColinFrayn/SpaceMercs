@@ -62,19 +62,22 @@ namespace SpaceMercs {
             Square.Flat.Draw();
             Square.Flat.Unbind();
 
-            // Draw the button text
-            FixedSizeTextRenderOptions tro = new FixedSizeTextRenderOptions() {
-                Alignment = Alignment.TopLeft,
-                Aspect = (float)WindowWidth / (float)WindowHeight,
-                FixedHeight = ButtonHeight,
-                FixedWidth = ButtonWidth,
+            // Draw the button text at the correct location, horizontally centred
+            TextMeasure tm = TextRenderer.MeasureText(Text);
+            float scale = ButtonHeight * 0.7f;
+            float aspect = (float)WindowWidth / (float)WindowHeight;
+            float xsize = scale * tm.Width / aspect / (float)TextRenderer.FontSize;
+            float gap = 0f;
+            if (xsize > ButtonWidth) scale /= (xsize / ButtonWidth);
+            else gap = (ButtonWidth - xsize) / 2f;
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.BottomLeft,
+                Aspect = aspect,
                 TextColour = Color.White,
-                TextPos = TextAlign.Centre,
-                XPos = ButtonX,
-                YPos = ButtonY,
-                ZPos = 0.15f,
-                MaxScale = 0.00074f,
-                Padding = 0
+                XPos = ButtonX + gap,
+                YPos = ButtonY + (ButtonHeight * 0.78f),
+                ZPos = 0.015f,
+                Scale = scale
             };
             TextRenderer.DrawWithOptions(Text, tro);
 
