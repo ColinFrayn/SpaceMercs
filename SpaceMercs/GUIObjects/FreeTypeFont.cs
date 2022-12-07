@@ -15,12 +15,20 @@ namespace SpaceMercs {
         public int Advance { get; set; }
     }
 
+    public struct TextMeasure {
+        public float Width;
+        public float Height;
+        public float MaxYBearing;
+        public float MaxYDrop;
+    }
+
     internal class FreeTypeFont {
         private readonly Dictionary<uint, TexChar> _characters = new Dictionary<uint, TexChar>();
+        public uint PixelSize { get; private set; }
         public uint PixelHeight { get; private set; }
 
         public FreeTypeFont(uint pixelheight) {
-            PixelHeight = pixelheight;
+            PixelSize = pixelheight;
 
             Library lib = new Library();
 
@@ -37,13 +45,12 @@ namespace SpaceMercs {
             SharpFont.Face face = new SharpFont.Face(lib, ms.ToArray(), 0);
 
             // Set the font scale
-            face.SetPixelSizes(0, PixelHeight);
+            face.SetPixelSizes(0, PixelSize);
 
             // Set 1 byte pixel alignment 
             GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
             // Set texture unit
-            //GL.Enable(EnableCap.Texture2D);
             GL.ActiveTexture(TextureUnit.Texture0);
 
             // Load the useful characters of ASCII set, skipping the functional chars at the beginning
@@ -74,6 +81,7 @@ namespace SpaceMercs {
                     ch.Bearing = new Vector2(glyph.BitmapLeft, glyph.BitmapTop);
                     ch.Advance = (int)glyph.Advance.X.Value;
                     _characters.Add(c, ch);
+                    if (glyph.BitmapTop > PixelHeight) PixelHeight = (uint)glyph.BitmapTop;
                 }
                 catch (Exception ex) {
                     Console.WriteLine(ex);
@@ -82,28 +90,30 @@ namespace SpaceMercs {
 
             // Bind default texture
             GL.BindTexture(TextureTarget.Texture2D, 0);
-            //GL.Disable(EnableCap.Texture2D);
 
             // Set default (4 byte) pixel alignment 
             GL.PixelStore(PixelStoreParameter.UnpackAlignment, 4);
         }
 
         // Return a translation offset to be used to get the alignment / scaling right
-        public Vector2 MeasureText(string text, int kerningShift = 0) {
+        public TextMeasure MeasureText(string text, float kerningShift = 0f) {
             float char_x = 0f, maxBearing = 0f, maxDrop = 0f;
             foreach (char c in text) {
                 TexChar ch = _characters['?']; // Unprintable character => ?
                 if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
-                                                                          // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-                char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+
+                // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+                if (char_x > 0) char_x += kerningShift;
+                char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+
                 if (ch.Bearing.Y > maxBearing) maxBearing = ch.Bearing.Y;
                 float drop = ch.Size.Y - ch.Bearing.Y;
                 if (drop > maxDrop) maxDrop = drop;
             }
-            return new Vector2(char_x, maxBearing + maxDrop);
+            return new TextMeasure() { Width = char_x, Height = maxBearing + maxDrop, MaxYBearing = maxBearing, MaxYDrop = maxDrop };
         }
 
-        public void RenderText(ShaderProgram prog, string text, int kerningShift = 0) {
+        public void RenderText(ShaderProgram prog, string text, float kerningShift = 0f) {
             GL.ActiveTexture(TextureUnit.Texture0);
 
             // Iterate through all characters
@@ -117,12 +127,9 @@ namespace SpaceMercs {
                 float xrel = char_x + ch.Bearing.X;
                 float yrel = -ch.Bearing.Y;
 
-                // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-                char_x += ((ch.Advance + kerningShift) >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
-
+                // Transform to local coords & scale to draw this glyph at the orgin line with the correct spacing
                 Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
                 Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
-
                 Matrix4 modelM = scaleM * transRelM;
                 prog.SetUniform("model", modelM);
 
@@ -133,6 +140,10 @@ namespace SpaceMercs {
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.Textured.Bind();
                 Square.Textured.Draw();
+
+                // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+                if (char_x > 0) char_x += kerningShift;
+                char_x += (ch.Advance >> 6); // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
             }
 
             Square.Textured.Unbind();

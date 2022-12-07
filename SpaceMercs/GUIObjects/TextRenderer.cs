@@ -1,6 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 
@@ -12,23 +11,30 @@ namespace SpaceMercs {
     internal enum TextAlign { Left, Centre, Right }
 
     internal class TextRenderOptions {
-        public TextAlign TextPos { get; set; } = TextAlign.Centre;
-        public float FixedWidth { get; set; } = 1f;
-        public float FixedHeight { get; set; } = 1f;
-        //public float Border { get; set; }
-        public int Padding { get; set; } = 0; // In points
-        //public Color BorderColour { get; set; }
         public Color TextColour { get; set; } = Color.White;
-        //public Color ShadowColour { get; set; } = Color.LightGray;
-        //public Color BackgroundColour { get; set; } = Color.Black;
-        //public int Shadow { get; set; } = 0;
+        public float KerningShift { get; set; } = 0f;
         public float XPos { get; set; } = 0f;
         public float YPos { get; set; } = 0f;
         public float ZPos { get; set; } = 0f;
         public float Scale { get; set; } = 1f;
-        public bool IsFixedSize { get; set; } = false;
         public Alignment Alignment { get; set; } = Alignment.TopLeft;
         public float Aspect { get; set; } = 1f;
+
+        // TBC
+        //public float Border { get; set; }
+        //public Color BorderColour { get; set; }
+        //public Color ShadowColour { get; set; } = Color.LightGray;
+        //public Color BackgroundColour { get; set; } = Color.Black;
+        //public int Shadow { get; set; } = 0;
+    }
+
+    internal class FixedSizeTextRenderOptions : TextRenderOptions {
+        public TextAlign TextPos { get; set; } = TextAlign.Centre;
+        public float FixedWidth { get; set; } = 1f;
+        public float FixedHeight { get; set; } = 1f;
+        public int Padding { get; set; } = 0; // In points
+        public float MaxScale { get; set; } = 1e9f;
+        public bool AlignYAtOrigin { get; set; } = false;
     }
 
     internal static class TextRenderer {
@@ -82,7 +88,7 @@ void main()
         }
 
         // External measuring
-        public static Vector2 MeasureText(string strText) => textLabelFont32.MeasureText(strText);
+        public static TextMeasure MeasureText(string strText, float kerningShift = 0f) => textLabelFont32.MeasureText(strText, kerningShift);
         public static int FontSize => _fontSize;
 
         // Draw this label (public wrappers)
@@ -117,55 +123,67 @@ void main()
 
         // Draw this label with the given settings
         private static void DrawAtInternal(string strText, TextRenderOptions tro) {
-            float yScale = tro.Scale;
-            float xScale = yScale / tro.Aspect;
             float yShift = tro.YPos;
             float xShift = tro.XPos;
+            FixedSizeTextRenderOptions? trof = tro as FixedSizeTextRenderOptions;
 
-            // Blend this font so we don't' obscure the background in the gaps
+            // Blend this font so we don't obscure the background in the gaps
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            // Setup projection so scren is unitised
+            // Setup the projection so that the screen coordinates are unitised
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             textLabelShaderProgram.SetUniform("projection", projectionM);
 
-            // Render in the desired colour
+            // Setup the desired font colour in the shader program
             textLabelShaderProgram.SetUniform("textColour", (float)tro.TextColour.R / 255f, (float)tro.TextColour.G / 255f, (float)tro.TextColour.B / 255f);
 
-            // Get scale of text from Font and scale/align accordingly
-            Vector2 textSize = textLabelFont32.MeasureText(strText);
-            float textHeight = textLabelFont32.PixelHeight;
+            // Get calculated dimensions of the text so we can scale/align accordingly
+            TextMeasure textSize = textLabelFont32.MeasureText(strText, tro.KerningShift);
+            float textHeight = textLabelFont32.PixelSize;
 
-            // Translate based on required alignment
-            if (tro.Alignment == Alignment.TopLeft || tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.TopRight) yShift += tro.IsFixedSize ? tro.FixedHeight : yScale;
-            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift += tro.IsFixedSize ? tro.FixedHeight / 2f : yScale / 2f;
-            if (tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.BottomMiddle) xShift -= tro.IsFixedSize ? tro.FixedWidth / 2f : textSize.X * xScale / (2f * textHeight);
-            if (tro.Alignment == Alignment.TopRight || tro.Alignment == Alignment.CentreRight || tro.Alignment == Alignment.BottomRight) xShift -= tro.IsFixedSize ? tro.FixedWidth : textSize.X * xScale / textHeight;
-
-            // Generate the view matrix based on the desired scale
+            // Generate the scale matrix based on the desired scale size, bound size, text size etc.
             Matrix4 scaleM;
-            if (tro.IsFixedSize) {
-                float scale = tro.FixedHeight;
-                float textLen = scale * textSize.X / (tro.Aspect * textHeight);
-                if (textLen > tro.FixedWidth) scale /= (textLen / tro.FixedWidth);
+            if (trof is not null) {
+                float scale = trof.FixedHeight / (textSize.Height + trof.Padding * 2f);
+                float textLen = scale * (textSize.Width + trof.Padding * 2f) / tro.Aspect;
+                if (textLen > trof.FixedWidth) scale /= (textLen / trof.FixedWidth);
+                if (scale > trof.MaxScale) scale = trof.MaxScale;
                 scaleM = Matrix4.CreateScale(new Vector3(scale / tro.Aspect, scale, 1.0f));
-                // Text align (horizontal only, and only for fixed size)
-                if (tro.TextPos != TextAlign.Left) {
-                    float gap = tro.FixedWidth - (scale * textSize.X / (tro.Aspect * textHeight));
-                    if (tro.TextPos == TextAlign.Centre) xShift += gap / 2f;
-                    if (tro.TextPos == TextAlign.Right) xShift += gap;
+                // Text align (horizontal)
+                if (trof.TextPos != TextAlign.Left) {
+                    float gap = trof.FixedWidth - (scale * (textSize.Width + trof.Padding * 2f) / tro.Aspect);
+                    if (trof.TextPos == TextAlign.Centre) xShift += gap / 2f;
+                    if (trof.TextPos == TextAlign.Right) xShift += gap;
                 }
+                // Make the text centrally-aligned in the box vertically
+                float vgap = trof.FixedHeight - (scale * (textSize.Height + trof.Padding * 2f));
+                yShift += vgap / 2f;
             }
             else {
+                float yScale = tro.Scale;
+                float xScale = tro.Scale / tro.Aspect;
                 scaleM = Matrix4.CreateScale(new Vector3(xScale / textHeight, yScale / textHeight, 1.0f));
             }
+
+            // Translate based on required alignment
+            float finalXScale = scaleM.M11;
+            float finalYScale = scaleM.M22;
+            // Align to the top left corner of the text
+            yShift += textHeight * finalYScale;
+            // Correct if text alignment is not TL. We always align to the range between max height and the origin.
+            if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * textHeight;
+            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * textHeight / 2f;
+            if (tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.BottomMiddle) xShift -= finalXScale * textSize.Width / 2f;
+            if (tro.Alignment == Alignment.TopRight || tro.Alignment == Alignment.CentreRight || tro.Alignment == Alignment.BottomRight) xShift -= finalXScale * textSize.Width;
+
+            // Calculate translation to align us correctly and scale to achieve the desired size
             Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xShift, yShift, tro.ZPos));
             Matrix4 viewM = scaleM * transOriginM;
             textLabelShaderProgram.SetUniform("view", viewM);
 
-            // --- Render the actual text using the selected font ---
-            textLabelFont32.RenderText(textLabelShaderProgram, strText);
+            // --- Render the actual text aligned at the origin line, using the selected font ---
+            textLabelFont32.RenderText(textLabelShaderProgram, strText, tro.KerningShift);
 
             // Clean up
             GL.UseProgram(0);

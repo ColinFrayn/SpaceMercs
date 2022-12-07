@@ -200,8 +200,8 @@ namespace SpaceMercs.MainWindow {
             // -- Draw a dark grey box with a black background, and overlay the relevant text
             float thWidth = 0f;
             foreach (string str in strHoverText) {
-                Vector2 size = TextRenderer.MeasureText(str);
-                if (size.X > thWidth) thWidth = size.X;
+                TextMeasure size = TextRenderer.MeasureText(str);
+                if (size.Width > thWidth) thWidth = size.Width;
             }
             float hoverTextScale = 0.03f;
             thWidth *= hoverTextScale / TextRenderer.FontSize;

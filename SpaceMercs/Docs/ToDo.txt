@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-GUIButton (.Display) : Text display is wrong. Was so close...
+GUIButton (.Display) : Text display should really align the bottom edge
 
 GUIMessageBox()
 

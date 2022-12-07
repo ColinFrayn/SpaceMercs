@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Windows.Forms;
 
 namespace SpaceMercs {
     class GUIButton : GUIObject {
@@ -62,17 +63,18 @@ namespace SpaceMercs {
             Square.Flat.Unbind();
 
             // Draw the button text
-            TextRenderOptions tro = new TextRenderOptions() {
+            FixedSizeTextRenderOptions tro = new FixedSizeTextRenderOptions() {
                 Alignment = Alignment.TopLeft,
                 Aspect = (float)WindowWidth / (float)WindowHeight,
                 FixedHeight = ButtonHeight,
                 FixedWidth = ButtonWidth,
-                IsFixedSize = true,
                 TextColour = Color.White,
                 TextPos = TextAlign.Centre,
                 XPos = ButtonX,
                 YPos = ButtonY,
-                ZPos = 0.15f
+                ZPos = 0.15f,
+                MaxScale = 0.00074f,
+                Padding = 0
             };
             TextRenderer.DrawWithOptions(Text, tro);
 
@@ -85,14 +87,11 @@ namespace SpaceMercs {
             Square.Lines.Draw();
             Square.Lines.Unbind();
 
-            //// Set up stipple
-            //if (Stipple) {
-            //    GL.Enable(EnableCap.LineStipple);
-            //    GL.LineStipple(1, 255);
-            //}
-            //else GL.Disable(EnableCap.LineStipple);
+            // Set up stipple
+            if (Stipple) {
+                // TODO
+            }
 
-            //GL.Disable(EnableCap.LineStipple);
             GL.Enable(EnableCap.DepthTest);
         }
 

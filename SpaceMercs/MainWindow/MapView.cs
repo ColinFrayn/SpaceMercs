@@ -278,7 +278,6 @@ namespace SpaceMercs.MainWindow {
 
         // Display a set of circles at incremental radii to debug positions
         private void DisplayDebuggingCircles() {
-            //DEBUGGING
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             flatColourShaderProgram.SetUniform("projection", projectionM);
             flatColourShaderProgram.SetUniform("view", Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
@@ -287,13 +286,25 @@ namespace SpaceMercs.MainWindow {
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
             Circle.Circle64.Bind();
             Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.45f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
             flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.4f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.35f));
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
             Circle.Circle64.Draw();
             flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.3f));
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
             Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.25f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
             flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.2f));
+            GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+            Circle.Circle64.Draw();
+            flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.15f));
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
             Circle.Circle64.Draw();
             flatColourShaderProgram.SetUniform("model", Matrix4.CreateScale(0.1f));
