@@ -81,7 +81,7 @@ namespace SpaceMercs {
         }
       }
     }
-    public IPanelItem HoverItem { get; private set; } = null;
+    public IPanelItem? HoverItem { get; private set; } = null;
     public int HoverID {
       get {
         if (HoverItem == null) return -1;

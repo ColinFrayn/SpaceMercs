@@ -10,11 +10,11 @@ namespace SpaceMercs {
         public bool bBlend;
         private int iTexID;
         private readonly double TX, TY, TH, TW;
-        public object InternalData;
+        public object? InternalData;
         public delegate void GUIIconButton_Trigger(GUIIconButton self);
-        public GUIIconButton_Trigger Trigger = null;
+        public GUIIconButton_Trigger? Trigger = null;
 
-        public GUIIconButton(GameWindow parentWindow, int TextureID, double tx, double ty, double tw, double th, double x, double y, double w, double h, GUIIconButton_Trigger trigger = null, object dat = null) : base(parentWindow, true, 0.4f) {
+        public GUIIconButton(GameWindow parentWindow, int TextureID, double tx, double ty, double tw, double th, double x, double y, double w, double h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
             TX = tx;
             TY = ty;
             TW = tw;

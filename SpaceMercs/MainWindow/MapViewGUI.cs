@@ -245,25 +245,39 @@ namespace SpaceMercs.MainWindow {
             gbViewColony = new GUIButton("Colony", this, OpenColonyViewDialog);
             gbViewColony.SetPosition(0.01f, 0.07f);
             gbViewColony.SetSize(0.065f, 0.035f);
-            gbViewColony.SetBlend(false);
 
             // "Rename this planet" button
             gbRenameObject = new GUIButton("Rename", this, OpenRenameObjectDialog);
             gbRenameObject.SetPosition(0.08f, 0.07f);
             gbRenameObject.SetSize(0.065f, 0.035f);
-            gbRenameObject.SetBlend(false);
 
             // "Fly to this target" button
             gbFlyTo = new GUIButton("Fly To", this, OpenFlyToDialog);
             gbFlyTo.SetPosition(0.15f, 0.07f);
             gbFlyTo.SetSize(0.065f, 0.035f);
-            gbFlyTo.SetBlend(false);
 
             // "Scan this planet" button
             gbScan = new GUIButton("Scan", this, OpenScanPlanetDialog);
             gbScan.SetPosition(0.23f, 0.07f);
             gbScan.SetSize(0.065f, 0.035f);
-            gbScan.SetBlend(false);
+
+            // Start a new game
+            gbNewGame = new GUIButton("Start New Game", this, NewGame_Continue);
+            gbNewGame.SetPosition(0.35f, 0.4f);
+            gbNewGame.SetSize(0.3f, 0.08f);
+            gbNewGame.Activate();
+
+            // Load a saved game
+            gbLoadGame = new GUIButton("Load Saved Game", this, LoadGame);
+            gbLoadGame.SetPosition(0.35f, 0.55f);
+            gbLoadGame.SetSize(0.3f, 0.08f);
+            gbLoadGame.Activate();
+
+            // Exit the game
+            gbExitGame = new GUIButton("Exit Game", this, ExitTheGame);
+            gbExitGame.SetPosition(0.35f, 0.7f);
+            gbExitGame.SetSize(0.3f, 0.08f);
+            gbExitGame.Activate();
         }
 
         // Dialog action handlers
@@ -351,6 +365,9 @@ namespace SpaceMercs.MainWindow {
             ScanPlanet sp = new ScanPlanet(PlayerTeam.CurrentPosition, PlayerTeam, RunMission);
             sp.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
+        }
+        private void ExitTheGame() {
+            this.Close();
         }
 
         // Set the button relevant for the selected AO

@@ -18,9 +18,8 @@ namespace SpaceMercs.MainWindow {
 
         private const int DoubleClickTime = 250; // Milliseconds
         private bool bLoaded = false;
-        private int mx, my;
+        private int mx = -1, my = -1;
         private readonly LinkedList<Star> RecentlyVisited = new LinkedList<Star>();
-        private Matrix4 perspective = new Matrix4();
         private ViewMode view = ViewMode.ViewMap;
         private AstronomicalObject? aoSelected = null, aoHover = null;
         private Map GalaxyMap = new Map();
@@ -31,6 +30,7 @@ namespace SpaceMercs.MainWindow {
         private readonly Stopwatch swLastTick = new Stopwatch();
         private DateTime lastLoad = DateTime.MinValue;
         private readonly Stopwatch swLastClick = new Stopwatch();
+        private GUIButton gbLoadGame, gbNewGame, gbExitGame;
 
         public GUIMessageBox msgBox { get; private set; }
         public Travel TravelDetails { get; private set; }
@@ -48,7 +48,6 @@ namespace SpaceMercs.MainWindow {
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
             CenterWindow();
-            InitialiseGUIElements_FIXME();
             DisableMenus();
 
             // Load static data and close if this fails
@@ -202,7 +201,7 @@ namespace SpaceMercs.MainWindow {
             else throw new NotImplementedException();
 
             // Any message? If so then display it here. Should affect all mapview modes
-            msgBox.Display(mx, my, flatColourShaderProgram); // TODO Setup properly
+            msgBox.Display(mx, my, flatColourShaderProgram);
 
             // Swap rendered surface to front
             SwapBuffers();
@@ -215,65 +214,22 @@ namespace SpaceMercs.MainWindow {
         #endregion // GameWindow Triggers
 
         #region Rendering
-        private void InitialiseGUIElements_FIXME() {
-            // 
-            // MapView
-            // 
-
-            //this.FormClosing += new FormClosingEventHandler(this.glMapView_Close);
-            //this.KeyDown += new KeyEventHandler(this.MapView_KeyDown);
-            //this.KeyUp += new KeyEventHandler(this.glMapView_KeyUp);
-
-            // 
-            // fileToolStripMenuItem
-            // 
-            //this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            //this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            //this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            //this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-
-            // 
-            // optionsToolStripMenuItem
-            // 
-            //this.showLabelsToolStripMenuItem.Click += new System.EventHandler(this.showLabelsToolStripMenuItem_Click);
-            //this.showMapGridToolStripMenuItem.Click += new System.EventHandler(this.showMapGridToolStripMenuItem_Click);
-            //this.fadeUnvisitedStarsToolStripMenuItem.Click += new System.EventHandler(this.fadeUnvisitedStarsToolStripMenuItem_Click);
-            //this.showRangeCirclesToolStripMenuItem.Click += new System.EventHandler(this.showRangeCirclesToolStripMenuItem_Click);
-            //this.showTradeRoutesToolStripMenuItem.Click += new System.EventHandler(this.showTradeRoutesToolStripMenuItem_Click);
-            //this.showFlagsToolStripMenuItem.Click += new System.EventHandler(this.showFlagsToolStripMenuItem_Click);
-            //this.showColoniesToolStripMenuItem.Click += new System.EventHandler(this.showColoniesToolStripMenuItem_Click);
-
-            // 
-            // viewToolStripMenuItem
-            // 
-            //this.shipToolStripMenuItem.Click += new System.EventHandler(this.shipToolStripMenuItem_Click);
-            //this.teamToolStripMenuItem.Click += new System.EventHandler(this.teamToolStripMenuItem_Click);
-            //this.colonyToolStripMenuItem.Click += new System.EventHandler(this.colonyToolStripMenuItem_Click);
-            //this.racesToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
-
-            // 
-            // missionToolStripMenuItem
-            // 
-            //this.labelsToolStripMenuItem.Click += new System.EventHandler(this.labelsToolStripMenuItem_Click);
-            //this.healthBarsToolStripMenuItem.Click += new System.EventHandler(this.healthBarsToolStripMenuItem_Click);
-            //this.travelDistanceToolStripMenuItem.Click += new System.EventHandler(this.travelDistanceToolStripMenuItem_Click);
-            //this.movementPathToolStripMenuItem.Click += new System.EventHandler(this.movementPathToolStripMenuItem_Click);
-            //this.viewEffectsToolStripMenuItem.Click += new System.EventHandler(this.viewEffectsToolStripMenuItem_Click);
-            //this.viewDetectionRadiiToolStripMenuItem.Click += new System.EventHandler(this.viewDetectionRadiiToolStripMenuItem_Click);
-            //this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
-        }
-
         // Display a welcome screen on startup
         private void DisplayWelcomeScreen() {
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.07f, Aspect = Aspect };
             TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);
-            TextRenderOptions tro2 = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.45f, Scale = 0.04f, Aspect = Aspect };
-            TextRenderer.DrawWithOptions("Select An Option From The File Menu", tro2);
 
-            //DisplayDebuggingCircles(); // DEBUGGING
+            gbLoadGame.Display(mx, my, flatColourShaderProgram);
+            gbNewGame.Display(mx, my, flatColourShaderProgram);
+            gbExitGame.Display(mx, my, flatColourShaderProgram);
         }
 
         // Display a set of circles at incremental radii to debug positions
@@ -425,6 +381,14 @@ namespace SpaceMercs.MainWindow {
 
         // Mouse handling
         protected override void OnMouseMove(MouseMoveEventArgs e) {
+            mx = (int)e.X;
+            my = (int)e.Y;
+            if (!GalaxyMap.bMapSetup) {
+                gbLoadGame.IsHover(mx, my);
+                gbNewGame.IsHover(mx, my);
+                gbExitGame.IsHover(mx, my);
+                return;
+            }
             if (PlayerTeam is null) return;
             if (msgBox.Active) {
                 mx = (int)e.X;
@@ -454,17 +418,10 @@ namespace SpaceMercs.MainWindow {
             }
             
             // Hover over GUI objects
-            bool b1 = gbRenameObject.IsHover(mx, my);
-            bool b2 = gbFlyTo.IsHover(mx, my);
-            bool b3 = gbViewColony.IsHover(mx, my);
-            bool b4 = gbScan.IsHover(mx, my);
-            mx = (int)e.X;
-            my = (int)e.Y;
-            bool bUpdate = false;
-            if (gbRenameObject.IsHover(mx, my) != b1) bUpdate = true;
-            if (gbFlyTo.IsHover(mx, my) != b2) bUpdate = true;
-            if (gbViewColony.IsHover(mx, my) != b3) bUpdate = true;
-            if (gbScan.IsHover(mx, my) != b4) bUpdate = true;
+            gbRenameObject.IsHover(mx, my);
+            gbFlyTo.IsHover(mx, my);
+            gbViewColony.IsHover(mx, my);
+            gbScan.IsHover(mx, my);
             if (view == ViewMode.ViewMap) MapHover();
             if (view == ViewMode.ViewSystem) SystemHover();
         }
@@ -483,6 +440,14 @@ namespace SpaceMercs.MainWindow {
             }
         }
         protected override void OnMouseUp(MouseButtonEventArgs e) {
+            if (!GalaxyMap.bMapSetup) {
+                if (e.Button == MouseButton.Left) {
+                    if (gbLoadGame.CaptureClick(mx, my)) return;
+                    if (gbNewGame.CaptureClick(mx, my)) return;
+                    if (gbExitGame.CaptureClick(mx, my)) return;
+                }
+                return;
+            }
             if (PlayerTeam == null) return;
             if (msgBox.Active) {
                 msgBox.CaptureClick(mx, my);

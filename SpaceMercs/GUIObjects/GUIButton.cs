@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System.Windows.Forms;
 
 namespace SpaceMercs {
     class GUIButton : GUIObject {

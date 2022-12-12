@@ -220,7 +220,7 @@ namespace SpaceMercs.MainWindow {
       GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
       GL.Disable(EnableCap.Lighting);
       GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref perspective);
+      //GL.LoadMatrix(ref perspective);
       GL.MatrixMode(MatrixMode.Modelview);
       GL.LoadIdentity();
 

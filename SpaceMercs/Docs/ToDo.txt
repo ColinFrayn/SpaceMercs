@@ -2,16 +2,15 @@
 ToDo List
 -------------------------------------------------
 
-GUIMessageBox()
-
-Taking ages to start. Why?
-
-Remove old GraphicsObject class & replace all (relevant) functionality with GLShape
+GUIPanel for main menu
+Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
+Sub-menus are text
+File -> New, Load, Save, Exit
+Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
+View -> Ship, Team, Colony, Races
+Options -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
 
 TravelDetails.Display()
-
-Write Menu control & add menu back to MapView
-- Buttons for the main welcome screen? (Load, New)
 
 Remove all MessageBoxes
 
@@ -24,6 +23,7 @@ Done Since Last Release
 -----------------------
 
 MapView title page
+
 MapViewDrawMap
 - DrawGrid
 - DrawTradeRoutes
@@ -35,6 +35,7 @@ MapViewDrawMap
 - DrawMapSelectionIcons
 
 GUIButton
+GUIMessageBox
 
 Updated text renderer to use TrueType fonts
 

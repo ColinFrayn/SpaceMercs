@@ -7,7 +7,7 @@ namespace SpaceMercs.MainWindow {
     // Partial class including functions for drawing the full galaxymap view
     partial class MapView {
         private float fMapViewZ, fMapViewX, fMapViewY;
-        private bool bShowGridlines, bFadeUnvisited, bShowRangeCircles, bShowTradeRoutes, bShowFlags;
+        private bool bShowGridlines = true, bFadeUnvisited = false, bShowRangeCircles = false, bShowTradeRoutes = false, bShowFlags = true;
         private int iMiscTexture = -1, iBuildingTexture = -1;
         VertexBuffer? mapLinesBuffer = null, hoverLinkBuffer = null;
         VertexArray? mapLinesArray = null, hoverLinkArray = null;

@@ -2,19 +2,22 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.Collections.Concurrent;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SpaceMercs {
     class GUIMessageBox : GUIObject {
-        private double BoxX, BoxY;
-        private double BoxHeight;
-        private double ButtonY;
-        private const double ButtonWidth = 0.065, ButtonHeight = 0.04;
-        private const double ButtonBorder = 0.01, ButtonSplit = 0.03;
-        private const double MaxBoxHeight = 0.8, MaxBoxWidth = 0.8;
-        private readonly double ButtonAlpha;
-        //private double TextW { get { return Math.Min(tlText.Width / 1000.0, MaxBoxWidth); } }
-        //private double TextH { get { return Math.Min(TextW * tlText.Height / tlText.Width, MaxBoxHeight - (ButtonHeight + ButtonBorder)); } }
+        private float BoxX, BoxY;
+        private float BoxHeight;
+        private float ButtonY;
+        private const float ButtonWidth = 0.065f, ButtonHeight = 0.04f;
+        private const float ButtonBorder = 0.01f, ButtonSplit = 0.03f;
+        private const float MaxBoxHeight = 0.8f, MaxBoxWidth = 0.8f;
+        private const float TopBorder = 0.015f;
+        private const float MessageFontScale = 0.045f;
+        private readonly float ButtonAlpha;
+        private List<string> Lines;
 
         private Action? OnClick = null;
         private Action<object>? OnClickObj = null;
@@ -31,10 +34,7 @@ namespace SpaceMercs {
         private readonly ConcurrentQueue<MsgConfig> queue = new ConcurrentQueue<MsgConfig>();
 
         public GUIMessageBox(GameWindow parentWindow) : base(parentWindow, false, 0.8f) {
-            ButtonAlpha = 0.8f;
-            //tlText = new TextRenderer();
-            //tlButton1 = new TextRenderer("OK");
-            //tlButton2 = new TextRenderer("Cancel");
+            Lines = new List<string>();
         }
 
         // Change the text to be shown on this button & update the texture. If it's the same then don't redo texture.
@@ -88,94 +88,121 @@ namespace SpaceMercs {
             Active = true;
         }
         private void SetupBoxes(IEnumerable<string> lines) {
-            //tlText.UpdateTextFromList(lines);
-            //tlText.TextPos = TextRenderer.TextAlign.Centre;
-            BoxHeight = ButtonHeight + (ButtonBorder * 2); // + TextH; // lines.Count() * 0.04;
-            if (BoxHeight > 0.6) BoxHeight = 0.6;
-            BoxX = (1.0 - MaxBoxWidth) / 2.0;
-            BoxY = (1.0 - BoxHeight) / 2.0;
+            Lines = new List<string>(lines);
+
+            //float maxWidth = 0f;
+            //foreach (string str in Lines) {
+            //    TextMeasure tm = TextRenderer.MeasureText(str);
+            //    if (tm.Width > maxWidth) maxWidth = tm.Width;
+            //}
+            // TODO Setup box width based off text width??
+
+            BoxHeight = ButtonHeight + (ButtonBorder * 2f) + MessageFontScale * 1.15f * Lines.Count + TopBorder;
+            if (BoxHeight > 0.6f) BoxHeight = 0.6f;
+            BoxX = (1f - MaxBoxWidth) / 2f;
+            BoxY = (1f - BoxHeight) / 2f;
             ButtonY = (BoxY + BoxHeight) - (ButtonHeight + ButtonBorder);
         }
 
-        // Display the button
+        // Draw the message box and buttons
         public override void Display(int x, int y, ShaderProgram prog) {
             if (!Active) return;
 
             int WindowWidth = Window.Size.X;
             int WindowHeight = Window.Size.Y;
-            double xpos = (double)x / (double)WindowWidth, ypos = (double)y / (double)WindowHeight;
+            float xpos = (float)x / (float)WindowWidth, ypos = (float)y / (float)WindowHeight;
 
             // Set up transparency
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-
-            return;
+            GL.Disable(EnableCap.DepthTest);
 
             // Draw the message box background
-            GL.Color4(0.4f, 0.4f, 0.4f, Alpha);
-            GL.Disable(EnableCap.DepthTest);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(BoxX, BoxY, 0.1f);
-            GL.Vertex3(BoxX + MaxBoxWidth, BoxY, 0.1f);
-            GL.Vertex3(BoxX + MaxBoxWidth, BoxY + BoxHeight, 0.1f);
-            GL.Vertex3(BoxX, BoxY + BoxHeight, 0.1f);
-            GL.End();
+            Matrix4 translateM = Matrix4.CreateTranslation(BoxX, BoxY, 0.005f);
+            Matrix4 scaleM = Matrix4.CreateScale(MaxBoxWidth, BoxHeight, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, Alpha));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.Bind();
+            Square.Flat.Draw();
+            Square.Flat.Unbind();
 
-            // Draw the main message text
-            GL.PushMatrix();
-            GL.Translate(0.5, BoxY, 0.15);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlText.Draw(TextLabel.Alignment.TopMiddle, TextW, TextH);
-            GL.PopMatrix();
-
-            // Draw the framework
-            GL.Color4(1.0, 1.0, 1.0, Alpha);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(BoxX, BoxY, 0.15f);
-            GL.Vertex3(BoxX + MaxBoxWidth, BoxY, 0.15f);
-            GL.Vertex3(BoxX + MaxBoxWidth, BoxY + BoxHeight, 0.15f);
-            GL.Vertex3(BoxX, BoxY + BoxHeight, 0.15f);
-            GL.End();
-
-            DrawButton(xpos, ypos, 1);
-            if (Decision) DrawButton(xpos, ypos, 2);
-        }
-        private void DrawButton(double xpos, double ypos, int id) {
-            double ButtonX = (1.0 - ButtonWidth) / 2.0;
-            if (Decision) {
-                if (id == 1) ButtonX = 0.5 - (ButtonSplit + ButtonWidth);
-                else if (id == 2) ButtonX = 0.5 + ButtonSplit;
-                else throw new NotImplementedException();
+            // Draw the button text at the correct location, horizontally centred
+            float aspect = (float)WindowWidth / (float)WindowHeight;
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = BoxY + TopBorder,
+                ZPos = 0.015f,
+                Scale = MessageFontScale
+            };
+            foreach (string str in Lines) {
+                TextRenderer.DrawWithOptions(str, tro);
+                tro.YPos += MessageFontScale * 1.15f;
             }
 
-            // Draw the button
-            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) GL.Color4(0.8f, 0.8f, 0.8f, ButtonAlpha);
-            else GL.Color4(0.4f, 0.4f, 0.4f, ButtonAlpha);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(ButtonX, ButtonY, 0.2f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY, 0.2f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY + ButtonHeight, 0.2f);
-            GL.Vertex3(ButtonX, ButtonY + ButtonHeight, 0.2f);
-            GL.End();
+            translateM = Matrix4.CreateTranslation(BoxX, BoxY, 0.01f);
+            modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.Bind();
+            Square.Lines.Draw();
+            Square.Lines.Unbind();
 
-            // Draw the button text
-            GL.PushMatrix();
-            if (id == 1) GL.Translate(ButtonX + 0.015, ButtonY + 0.008, 0.25);
-            else GL.Translate(ButtonX, ButtonY, 0.25);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //if (id == 1) tlButton1.Draw(TextLabel.Alignment.TopLeft, ButtonWidth * 0.55, ButtonHeight * 0.6);
-            //else tlButton2.Draw(TextLabel.Alignment.TopLeft, ButtonWidth, ButtonHeight);
-            GL.PopMatrix();
+            DrawButton(prog, xpos, ypos, 1, aspect);
+            if (Decision) DrawButton(prog, xpos, ypos, 2, aspect);
 
-            // Draw the framework
-            GL.Color4(1.0, 1.0, 1.0, ButtonAlpha);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(ButtonX, ButtonY, 0.2f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY, 0.2f);
-            GL.Vertex3(ButtonX + ButtonWidth, ButtonY + ButtonHeight, 0.2f);
-            GL.Vertex3(ButtonX, ButtonY + ButtonHeight, 0.2f);
-            GL.End();
             GL.Enable(EnableCap.DepthTest);
+        }
+        private void DrawButton(ShaderProgram prog, float xpos, float ypos, int id, float aspect) {
+            float ButtonX = (1f - ButtonWidth) / 2f;
+            if (Decision) {
+                ButtonX = id switch {
+                    1 => 0.5f - (ButtonSplit + ButtonWidth),
+                    2 => 0.5f + ButtonSplit,
+                    3 => throw new NotImplementedException()
+                };
+            }
+
+            // Draw the button background
+            Vector4 col = new Vector4(0.3f, 0.3f, 0.3f, ButtonAlpha);
+            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) col = new Vector4(0.75f, 0.75f, 0.75f, ButtonAlpha);
+
+            Matrix4 translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.015f);
+            Matrix4 scaleM = Matrix4.CreateScale(ButtonWidth, ButtonHeight, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", col);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.Bind();
+            Square.Flat.Draw();
+            Square.Flat.Unbind();
+
+            // Draw the button text at the correct location, horizontally centred
+            string Text = (id == 1) ? "OK" : "Cancel";
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopLeft,
+                Aspect = aspect,
+                TextColour = Color.White,
+                XPos = ButtonX + ((id == 1) ? 0.015f : 0f),
+                YPos = ButtonY + ((id == 1) ? 0f : 0f),
+                ZPos = 0.025f,
+                Scale = ButtonHeight * 0.7f
+            };
+            TextRenderer.DrawWithOptions(Text, tro);
+
+            translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.02f);
+            modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.Bind();
+            Square.Lines.Draw();
+            Square.Lines.Unbind();
         }
 
         // See if there's anything that needs to be done for the slider bar after a L-click
@@ -235,16 +262,6 @@ namespace SpaceMercs {
             Decision = msgc.Decision;
         }
 
-        // Track the slider bar
-        public override void TrackMouse(int x, int y) {
-            // Nothing to do here
-        }
-
-        // Set the default (calculated) values
-        public override void Initialise() {
-            // Nothing to do here
-        }
-
         // Are we hovering over this control?
         public override bool IsHover(int x, int y) {
             if (!Active) return false;
@@ -273,5 +290,8 @@ namespace SpaceMercs {
             return false;
         }
 
+        // Unused
+        public override void TrackMouse(int x, int y) { }
+        public override void Initialise() { }
     }
 }

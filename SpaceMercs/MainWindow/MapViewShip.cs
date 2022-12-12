@@ -77,7 +77,7 @@ namespace SpaceMercs.MainWindow {
 
       // Set the correct view location & perspective matrix
       GL.MatrixMode(MatrixMode.Projection);
-      GL.LoadMatrix(ref perspective);
+      //GL.LoadMatrix(ref perspective);
       GL.MatrixMode(MatrixMode.Modelview);
       GL.LoadIdentity();
 
@@ -118,8 +118,8 @@ namespace SpaceMercs.MainWindow {
         if (fShipViewY > PlayerTeam.PlayerShip.Width / 1.9f) fShipViewY = PlayerTeam.PlayerShip.Width / 1.9f;
         // TODO glMapView.Invalidate();
       }
-      bool bRep = gbRepair.IsHover(mx, my);
-      bool bFab = gbFabricate.IsHover(mx, my);
+      gbRepair.IsHover(mx, my);
+      gbFabricate.IsHover(mx, my);
       mx = (int)e.X;
       my = (int)e.Y;
       int rOldHover = irHover;
