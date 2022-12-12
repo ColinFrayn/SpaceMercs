@@ -310,8 +310,8 @@ namespace SpaceMercs.MainWindow {
             irContextRoom = -1;
             bContextHull = false;
             gpSelect.Reset();
-            gpSelect.PanelX = (double)MousePosition.X / (double)Size.X + 0.02;
-            gpSelect.PanelY = (double)MousePosition.Y / (double)Size.Y + 0.01;
+            gpSelect.PanelX = (float)MousePosition.X / (float)Size.X + 0.02f;
+            gpSelect.PanelY = (float)MousePosition.Y / (float)Size.Y + 0.01f;
             if (irHover != -1 || bHoverHull) {
                 irContextRoom = irHover;
                 bContextHull = bHoverHull;
@@ -319,27 +319,26 @@ namespace SpaceMercs.MainWindow {
                 if (seHover == null) {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
                         GUIPanel buildingPanel = GenerateBuildingList();
-                        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Build);
-                        gpSelect.InsertIcon(I_Build, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, buildingPanel);
+                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Build);
+                        gpSelect.InsertIcon(I_Build, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, buildingPanel);
                     }
                 }
                 else {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
-                        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
-                        gpSelect.InsertIcon(I_Salvage, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
+                        gpSelect.InsertIcon(I_Salvage, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
                     }
                     if (!bHoverHull && PlayerTeam.PlayerShip.GetCanDeactivateRoom(irContextRoom)) {
-                        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
-                        gpSelect.InsertIcon(I_Disconnect, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
+                        gpSelect.InsertIcon(I_Disconnect, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
                     }
                     else if (!bHoverHull && !PlayerTeam.PlayerShip.GetIsRoomActive(irContextRoom)) {
-                        Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Connect);
-                        gpSelect.InsertIcon(I_Connect, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Connect);
+                        gpSelect.InsertIcon(I_Connect, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
                     }
                 }
                 gpSelect.Activate();
             }
-            // TODO glMapView.Invalidate();
         }
 
         // Generate a building icon list for the sub-panel when building a new room
@@ -366,13 +365,13 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.PlayerShip.CostToBuildEquipment(se) > PlayerTeam.Cash) bAfford = false;
 
                 // Insert this icon & add to the tally
-                Tuple<double, double> tp = Textures.GetTexCoords(se);
-                gp.InsertIcon((uint)eno, iBuildingTexture, tp.Item1, tp.Item2, Textures.BuildingTextureWidth, Textures.BuildingTextureHeight, bAfford, null);
+                (float tx, float ty) = Textures.GetTexCoords(se);
+                gp.InsertIcon((uint)eno, iBuildingTexture, tx, ty, Textures.BuildingTextureWidth, Textures.BuildingTextureHeight, bAfford, null);
                 count++;
             }
             if (count == 0) {
-                Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.None);
-                gp.InsertIcon(I_None, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
+                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.None);
+                gp.InsertIcon(I_None, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
             }
             return gp;
         }

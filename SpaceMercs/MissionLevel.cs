@@ -294,43 +294,43 @@ namespace SpaceMercs {
     }
     private void DisplayItemStack(Point pt) {
       if (Items[pt].Hidden) return;
-      Tuple<double, double> tp;
-      if (Items[pt].OnlyCorpses) tp = Textures.GetTexCoords(Textures.MiscTexture.Bones);
-      else if (Items[pt].Count < 6) tp = Textures.GetTexCoords(Textures.MiscTexture.Coins);
-      else tp = Textures.GetTexCoords(Textures.MiscTexture.Treasure);
+      float tx, ty;
+      if (Items[pt].OnlyCorpses) (tx,ty) = Textures.GetTexCoords(Textures.MiscTexture.Bones);
+      else if (Items[pt].Count < 6) (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Coins);
+      else (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Treasure);
       GL.Color3(1.0, 1.0, 1.0);
       if (iMiscTextureTransparentID == -1) iMiscTextureTransparentID = Textures.GetMiscTextureTransparent();
       GL.BindTexture(TextureTarget.Texture2D, iMiscTextureTransparentID);
       GL.PushMatrix();
       GL.Translate(pt.X + 0.5, pt.Y + 0.5, Const.EntityLayer);
       GL.Begin(BeginMode.Quads);
-      GL.TexCoord2(tp.Item1, tp.Item2 + Textures.MiscTextureHeight);
+      GL.TexCoord2(tx, ty + Textures.MiscTextureHeight);
       GL.Vertex3(-0.4, -0.4, 0);
-      GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2 + Textures.MiscTextureHeight);
+      GL.TexCoord2(tx + Textures.MiscTextureWidth, ty + Textures.MiscTextureHeight);
       GL.Vertex3(0.4, -0.4, 0);
-      GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2);
+      GL.TexCoord2(tx + Textures.MiscTextureWidth, ty);
       GL.Vertex3(0.4, 0.4, 0);
-      GL.TexCoord2(tp.Item1, tp.Item2);
+      GL.TexCoord2(tx, ty);
       GL.Vertex3(-0.4, 0.4, 0);
       GL.End();
       GL.PopMatrix();
     }
     private void DisplayTrap(Point pt) {
       if (Traps[pt].Hidden) return;
-      Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Trap);
+      (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Trap);
       GL.Color3(1.0, 1.0, 1.0);
       if (iMiscTextureTransparentID == -1) iMiscTextureTransparentID = Textures.GetMiscTextureTransparent();
       GL.BindTexture(TextureTarget.Texture2D, iMiscTextureTransparentID);
       GL.PushMatrix();
       GL.Translate(pt.X + 0.5, pt.Y + 0.5, Const.EntityLayer);
       GL.Begin(BeginMode.Quads);
-      GL.TexCoord2(tp.Item1, tp.Item2 + Textures.MiscTextureHeight);
+      GL.TexCoord2(tx, ty + Textures.MiscTextureHeight);
       GL.Vertex3(-0.4, -0.4, 0);
-      GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2 + Textures.MiscTextureHeight);
+      GL.TexCoord2(tx + Textures.MiscTextureWidth, ty+ Textures.MiscTextureHeight);
       GL.Vertex3(0.4, -0.4, 0);
-      GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2);
+      GL.TexCoord2(tx + Textures.MiscTextureWidth, ty);
       GL.Vertex3(0.4, 0.4, 0);
-      GL.TexCoord2(tp.Item1, tp.Item2);
+      GL.TexCoord2(tx, ty);
       GL.Vertex3(-0.4, 0.4, 0);
       GL.End();
       GL.PopMatrix();
@@ -502,7 +502,7 @@ namespace SpaceMercs {
       GL.Enable(EnableCap.Texture2D);
       if (iMiscTextureTransparentID == -1) iMiscTextureTransparentID = Textures.GetMiscTextureTransparent();
       GL.BindTexture(TextureTarget.Texture2D, iMiscTextureTransparentID);
-      Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.Alert);
+      (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Alert);
       for (int y = 0; y < Height; y++) {
         for (int x = 0; x < Width; x++) {
           if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
@@ -510,13 +510,13 @@ namespace SpaceMercs {
           GL.PushMatrix();
           GL.Translate(x + 0.5, y + 0.5, Const.GUILayer);
           GL.Begin(BeginMode.Quads);
-          GL.TexCoord2(tp.Item1, tp.Item2 + Textures.MiscTextureHeight);
+          GL.TexCoord2(tx, ty + Textures.MiscTextureHeight);
           GL.Vertex3(-0.4, -0.4, 0);
-          GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2 + Textures.MiscTextureHeight);
+          GL.TexCoord2(tx + Textures.MiscTextureWidth, ty + Textures.MiscTextureHeight);
           GL.Vertex3(0.4, -0.4, 0);
-          GL.TexCoord2(tp.Item1 + Textures.MiscTextureWidth, tp.Item2);
+          GL.TexCoord2(tx + Textures.MiscTextureWidth, ty);
           GL.Vertex3(0.4, 0.4, 0);
-          GL.TexCoord2(tp.Item1, tp.Item2);
+          GL.TexCoord2(tx, ty);
           GL.Vertex3(-0.4, 0.4, 0);
           GL.End();
           GL.PopMatrix();

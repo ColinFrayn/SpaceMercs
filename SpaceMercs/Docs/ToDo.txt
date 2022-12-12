@@ -2,13 +2,15 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel for main menu, LHS, 20% down
+GUIPanel.Display
+
+GUIPanel for main menu, LHS, 20% down : Display it
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
-Sub-menus are text
-File -> New, Load, Save, Exit
-Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
-View -> Ship, Team, Colony, Races
-Options -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
+ Sub-menus are text:
+  File -> New, Load, Save, Exit
+  Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
+  View -> Ship, Team, Colony, Races
+  Options -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
 
 TravelDetails.Display()
 

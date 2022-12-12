@@ -1,27 +1,27 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Graphics.OpenGL;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
-  class TextPanelItem : IPanelItem {
+    class TextPanelItem : IPanelItem {
     private readonly int texID;
-    private readonly double texX, texY, texW, texH;
-    private double iconX, iconY, iconW, iconH;
+    private readonly float texX, texY, texW, texH;
+    private float iconX, iconY, iconW, iconH;
     private int ovTexID = -1;
-    private double ovX, ovY, ovW, ovH;
-    private double ovTX, ovTY, ovTW, ovTH;
+    private float ovX, ovY, ovW, ovH;
+    private float ovTX, ovTY, ovTW, ovTH;
     public uint ID { get; private set; }
     public bool Enabled { get; private set; }
-    public double ZDist { get; private set; }
-    public GUIPanel SubPanel { get; private set; }
+    public float ZDist { get; private set; }
+    public GUIPanel? SubPanel { get; private set; }
 
-    public TextPanelItem(string strText, Vector4d iconRect, double zd) {
+    public TextPanelItem(string strText, Vector4 iconRect, float zd) {
       iconX = iconRect.X;
       iconY = iconRect.Y;
       iconW = iconRect.Z;
       iconH = iconRect.W;
       texID = 0; // TEMP
-      texX = texY = texW = texH = 0.0; // TEMP
+      texX = texY = texW = texH = 0f; // TEMP
       ID = 0;
       Enabled = true;
       ZDist = zd;
@@ -39,8 +39,8 @@ namespace SpaceMercs {
       GL.End();
       GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
     }
-    public IPanelItem Draw(double xx, double yy, GUIPanel gpParent) {
-      IPanelItem piHover = null;
+    public IPanelItem Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
+      IPanelItem? piHover = null;
       double BorderY = gpParent.BorderY;
       if (xx >= iconX && xx <= iconX + iconW && yy >= iconY - BorderY && yy <= iconY + iconH + BorderY) {
         piHover = this;
@@ -89,11 +89,11 @@ namespace SpaceMercs {
       }
       return piHover;
     }
-    public void SetPos(double x, double y) {
+    public void SetPos(float x, float y) {
       iconX = x;
       iconY = y;
     }
-    public void SetIconSize(double w, double h) {
+    public void SetIconSize(float w, float h) {
       iconW = w;
       iconH = h;
     }
@@ -101,10 +101,10 @@ namespace SpaceMercs {
       //SubPanel = gpl;
       throw new Exception("Shouldn't be setting sub panels on test icon items");
     }
-    public void SetZDist(double zd) {
+    public void SetZDist(float zd) {
       ZDist = zd;
     }
-    public void SetOverlay(int iOvTexID, Vector4d texRect, Vector4d dimRect) {
+    public void SetOverlay(int iOvTexID, Vector4 texRect, Vector4 dimRect) {
       ovTexID = iOvTexID;
       ovTX = texRect.X;
       ovTY = texRect.Y;

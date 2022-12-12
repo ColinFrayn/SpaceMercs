@@ -1,18 +1,19 @@
 ﻿using OpenTK.Mathematics;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
-  interface IPanelItem {
-    double ZDist { get; }
-    bool Enabled { get; }
-    uint ID { get; }
-    GUIPanel? SubPanel { get; }
+    interface IPanelItem {
+        float ZDist { get; }
+        bool Enabled { get; }
+        uint ID { get; }
+        GUIPanel? SubPanel { get; }
 
-    void DrawSelectionFrame();
-    IPanelItem Draw(double xx, double yy, GUIPanel gpParent);
-    void SetPos(double x, double y);
-    void SetIconSize(double w, double h);
-    void SetSubPanel(GUIPanel gpl);
-    void SetZDist(double zd);
-    void SetOverlay(int _texID, Vector4d texRect, Vector4d dimRect);
-  }
+        void DrawSelectionFrame();
+        IPanelItem Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent);
+        void SetPos(float x, float y);
+        void SetIconSize(float w, float h);
+        void SetSubPanel(GUIPanel gpl);
+        void SetZDist(float zd);
+        void SetOverlay(int _texID, Vector4 texRect, Vector4 dimRect);
+    }
 }

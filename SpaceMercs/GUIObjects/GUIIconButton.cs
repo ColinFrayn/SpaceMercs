@@ -43,7 +43,6 @@ namespace SpaceMercs {
             double xpos = (double)x / (double)WindowWidth, ypos = (double)y / (double)WindowHeight;
 
             // Set up transparency
-            GL.Disable(EnableCap.Lighting);
             GL.Enable(EnableCap.Texture2D);
             if (bBlend) {
                 GL.Enable(EnableCap.Blend);

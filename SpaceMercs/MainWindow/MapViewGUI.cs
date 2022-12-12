@@ -294,18 +294,18 @@ namespace SpaceMercs.MainWindow {
             // Add the main menu
             gpSubMenu = new GUIPanel(this);
             gpSubMenu.SetPosition(0.01f, 0.22f);
-            Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.File);
-            gpSubMenu.InsertIcon(I_File, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            tp = Textures.GetTexCoords(Textures.MiscTexture.Eye);
-            gpSubMenu.InsertIcon(I_View, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            tp = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-            gpSubMenu.InsertIcon(I_Options, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            tp = Textures.GetTexCoords(Textures.MiscTexture.Mission);
-            gpSubMenu.InsertIcon(I_Mission, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
+            (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.File);
+            gpSubMenu.InsertIcon(I_File, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Eye);
+            gpSubMenu.InsertIcon(I_View, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+            gpSubMenu.InsertIcon(I_Options, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Mission);
+            gpSubMenu.InsertIcon(I_Mission, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
             gpMenu = new GUIPanel(this);
             gpMenu.SetPosition(0.01f, 0.15f);
-            tp = Textures.GetTexCoords(Textures.MiscTexture.Menu);
-            gpMenu.InsertIcon(I_Menu, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, gpSubMenu);
+            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Menu);
+            gpMenu.InsertIcon(I_Menu, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, gpSubMenu);
             gpMenu.Activate();
             gpSubMenu.Activate();
 
