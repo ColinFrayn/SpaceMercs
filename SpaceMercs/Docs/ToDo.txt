@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel for main menu
+GUIPanel for main menu, LHS, 20% down
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
 Sub-menus are text
 File -> New, Load, Save, Exit

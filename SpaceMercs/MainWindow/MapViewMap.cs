@@ -265,8 +265,8 @@ namespace SpaceMercs.MainWindow {
             if (GalaxyMap.bMapSetup == false) return;
 
             // Work out what we're hovering over (pick the closest one!)
-            double mxfract = (double)mx / (double)Size.X;
-            double myfract = (double)my / (double)Size.Y;
+            double mxfract = (double)MousePosition.X / (double)Size.X;
+            double myfract = (double)MousePosition.Y / (double)Size.Y;
             double mxpos = ((mxfract - 0.5) * (fMapViewZ / 18.6) * (double)Const.SectorSize * Aspect) + fMapViewX;
             double mypos = ((0.5 - myfract) * (fMapViewZ / 18.6) * (double)Const.SectorSize) + fMapViewY;
             int sx = (int)Math.Floor((mxpos / (double)Const.SectorSize) + 0.5);

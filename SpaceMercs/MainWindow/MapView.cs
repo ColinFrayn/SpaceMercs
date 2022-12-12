@@ -18,7 +18,6 @@ namespace SpaceMercs.MainWindow {
 
         private const int DoubleClickTime = 250; // Milliseconds
         private bool bLoaded = false;
-        private int mx = -1, my = -1;
         private readonly LinkedList<Star> RecentlyVisited = new LinkedList<Star>();
         private ViewMode view = ViewMode.ViewMap;
         private AstronomicalObject? aoSelected = null, aoHover = null;
@@ -201,7 +200,7 @@ namespace SpaceMercs.MainWindow {
             else throw new NotImplementedException();
 
             // Any message? If so then display it here. Should affect all mapview modes
-            msgBox.Display(mx, my, flatColourShaderProgram);
+            msgBox.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
 
             // Swap rendered surface to front
             SwapBuffers();
@@ -227,9 +226,9 @@ namespace SpaceMercs.MainWindow {
             TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.07f, Aspect = Aspect };
             TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);
 
-            gbLoadGame.Display(mx, my, flatColourShaderProgram);
-            gbNewGame.Display(mx, my, flatColourShaderProgram);
-            gbExitGame.Display(mx, my, flatColourShaderProgram);
+            gbLoadGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbNewGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbExitGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
         }
 
         // Display a set of circles at incremental radii to debug positions
@@ -381,18 +380,14 @@ namespace SpaceMercs.MainWindow {
 
         // Mouse handling
         protected override void OnMouseMove(MouseMoveEventArgs e) {
-            mx = (int)e.X;
-            my = (int)e.Y;
             if (!GalaxyMap.bMapSetup) {
-                gbLoadGame.IsHover(mx, my);
-                gbNewGame.IsHover(mx, my);
-                gbExitGame.IsHover(mx, my);
+                gbLoadGame.IsHover((int)e.X, (int)e.Y);
+                gbNewGame.IsHover((int)e.X, (int)e.Y);
+                gbExitGame.IsHover((int)e.X, (int)e.Y);
                 return;
             }
             if (PlayerTeam is null) return;
             if (msgBox.Active) {
-                mx = (int)e.X;
-                my = (int)e.Y;
                 return;
             }
             if (view == ViewMode.ViewShip) {
@@ -408,28 +403,25 @@ namespace SpaceMercs.MainWindow {
                 float fScale = Const.MouseMoveScale * (float)fMapViewZ / 27.0f; // To make sure that the scrolling is a sensible speed regardless of zoom level
                 if (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl)) fScale *= 2.5f;
                 else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) fScale /= 2.5f;
-                fMapViewX -= (float)(e.X - mx) * fScale;
-                fMapViewY += (float)(e.Y - my) * fScale;
+                fMapViewX -= (float)(e.DeltaX) * fScale;
+                fMapViewY += (float)(e.DeltaY) * fScale;
                 if (fMapViewX < (CurrentSystem.MapPos.X - Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X - Const.MaximumScrollRange);
                 if (fMapViewX > (CurrentSystem.MapPos.X + Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X + Const.MaximumScrollRange);
                 if (fMapViewY < (CurrentSystem.MapPos.Y - Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y - Const.MaximumScrollRange);
                 if (fMapViewY > (CurrentSystem.MapPos.Y + Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y + Const.MaximumScrollRange);
-                // TODO glMapView.Invalidate();
             }
-            
+
             // Hover over GUI objects
-            gbRenameObject.IsHover(mx, my);
-            gbFlyTo.IsHover(mx, my);
-            gbViewColony.IsHover(mx, my);
-            gbScan.IsHover(mx, my);
+            gbRenameObject.IsHover((int)e.X, (int)e.Y);
+            gbFlyTo.IsHover((int)e.X, (int)e.Y);
+            gbViewColony.IsHover((int)e.X, (int)e.Y);
+            gbScan.IsHover((int)e.X, (int)e.Y);
             if (view == ViewMode.ViewMap) MapHover();
             if (view == ViewMode.ViewSystem) SystemHover();
         }
         protected override void OnMouseDown(MouseButtonEventArgs e) {
             if (PlayerTeam == null) return;
             if (msgBox.Active) return;
-            mx = (int)MousePosition.X;
-            my = (int)MousePosition.Y;
             if (view == ViewMode.ViewMission) {
                 MouseDown_Mission(e);
                 return;
@@ -442,15 +434,15 @@ namespace SpaceMercs.MainWindow {
         protected override void OnMouseUp(MouseButtonEventArgs e) {
             if (!GalaxyMap.bMapSetup) {
                 if (e.Button == MouseButton.Left) {
-                    if (gbLoadGame.CaptureClick(mx, my)) return;
-                    if (gbNewGame.CaptureClick(mx, my)) return;
-                    if (gbExitGame.CaptureClick(mx, my)) return;
+                    if (gbLoadGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                    if (gbNewGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                    if (gbExitGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 }
                 return;
             }
             if (PlayerTeam == null) return;
             if (msgBox.Active) {
-                msgBox.CaptureClick(mx, my);
+                msgBox.CaptureClick((int)MousePosition.X, (int)MousePosition.Y);
                 return;
             }
             long clickGap = swLastClick.ElapsedMilliseconds;
@@ -471,10 +463,10 @@ namespace SpaceMercs.MainWindow {
                 // Add right click stuff here, if needed
             }
             if (e.Button == MouseButton.Left) {
-                if (gbRenameObject.CaptureClick(mx, my)) return;
-                if (gbFlyTo.CaptureClick(mx, my)) return;
-                if (gbViewColony.CaptureClick(mx, my)) return;
-                if (gbScan.CaptureClick(mx, my)) return;
+                if (gbRenameObject.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbFlyTo.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbViewColony.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbScan.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (aoHover != null) aoSelected = aoHover;
                 SetSelection();
             }

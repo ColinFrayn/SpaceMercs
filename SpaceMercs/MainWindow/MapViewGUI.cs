@@ -8,9 +8,18 @@ using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
+        private GUIPanel gpMenu, gpSubMenu;
         private readonly int iGUIHoverN = -1; // What is this??
-        private static readonly float toggleY = 0.1f, toggleX = 0.002f, toggleStep = 0.035f, toggleScale = 0.03f;
+        private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
         private AstronomicalObject lastAOHover = null;
+
+        // GUIPanel for main menu
+        public const uint I_Menu = 11000;
+        public const uint I_File = 11001;
+        public const uint I_Mission = 11002;
+        public const uint I_View = 11003;
+        public const uint I_Options = 11004;
+
 
         // Draw the GUI elements
         private void DrawGUI() {
@@ -24,7 +33,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, toggleX, 0.01f);
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, 0.01f, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
@@ -35,12 +44,15 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Display the player's remaining cash reserves
-            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f , Aspect, 0.99f, 0.01f);
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
 
             // Toggles
             DrawToggles();
             if (view == ViewMode.ViewMap) DrawMapToggles();
             if (view == ViewMode.ViewSystem) DrawSystemToggles();
+
+            // Main menu
+            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
 
             // Hover info for the current setup
             DrawGUIHoverInfo();
@@ -53,10 +65,10 @@ namespace SpaceMercs.MainWindow {
             // Display the various GUI Buttons
             else {
                 SetAOButtonsOnGUI(aoSelected);
-                gbRenameObject.Display(mx, my, flatColourShaderProgram);
-                gbFlyTo.Display(mx, my, flatColourShaderProgram);
-                gbViewColony.Display(mx, my, flatColourShaderProgram);
-                gbScan.Display(mx, my, flatColourShaderProgram);
+                gbRenameObject.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbFlyTo.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbViewColony.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbScan.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             }
 
             // Colony?
@@ -118,21 +130,21 @@ namespace SpaceMercs.MainWindow {
 
         // Draw toggles for all screens (L)
         private void DrawToggles() {
-            TextRenderer.DrawAt("L", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the System View (C)
         private void DrawSystemToggles() {
-            TextRenderer.DrawAt("C", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("C", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the map screen (RFGAV)
         private void DrawMapToggles() {
-            TextRenderer.DrawAt("A", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("F", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("G", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("R", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("V", Alignment.CentreLeft, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("A", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("R", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("V", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
         }
 
         // Setup a mini window to show details of the current hover target
@@ -208,8 +220,8 @@ namespace SpaceMercs.MainWindow {
             float thHeight = hoverTextScale * strHoverText.Count() * 1.3f;
 
             // First, calculate box dimensions
-            float xx = (float)mx / (float)Size.X;
-            float yy = (float)my / (float)Size.Y;
+            float xx = MousePosition.X / (float)Size.X;
+            float yy = MousePosition.Y / (float)Size.Y;
             float xSep = 0.01f, ySep = 0.01f;
             float dx = (xx > 0.5) ? xx - xSep - thWidth : xx + xSep; // (xx > 0.5) ? xx - thWidth + xSep : xx + xSep;
             float dy = (yy > 0.5) ? yy - thHeight - ySep : yy + ySep + (hoverTextScale * 0.5f);
@@ -278,6 +290,25 @@ namespace SpaceMercs.MainWindow {
             gbExitGame.SetPosition(0.35f, 0.7f);
             gbExitGame.SetSize(0.3f, 0.08f);
             gbExitGame.Activate();
+
+            // Add the main menu
+            gpSubMenu = new GUIPanel(this);
+            gpSubMenu.SetPosition(0.01f, 0.22f);
+            Tuple<double, double> tp = Textures.GetTexCoords(Textures.MiscTexture.File);
+            gpSubMenu.InsertIcon(I_File, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            tp = Textures.GetTexCoords(Textures.MiscTexture.Eye);
+            gpSubMenu.InsertIcon(I_View, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            tp = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+            gpSubMenu.InsertIcon(I_Options, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+            tp = Textures.GetTexCoords(Textures.MiscTexture.Mission);
+            gpSubMenu.InsertIcon(I_Mission, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
+            gpMenu = new GUIPanel(this);
+            gpMenu.SetPosition(0.01f, 0.15f);
+            tp = Textures.GetTexCoords(Textures.MiscTexture.Menu);
+            gpMenu.InsertIcon(I_Menu, iMiscTexture, tp.Item1, tp.Item2, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, gpSubMenu);
+            gpMenu.Activate();
+            gpSubMenu.Activate();
+
         }
 
         // Dialog action handlers

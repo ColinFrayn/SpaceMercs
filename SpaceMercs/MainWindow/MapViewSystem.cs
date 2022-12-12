@@ -38,8 +38,8 @@ namespace SpaceMercs.MainWindow {
       if (GalaxyMap.bMapSetup == false) return;
 
       // Set aoHover
-      double mousex = ((double)mx / (double)Size.X) * 10.0 * Aspect;
-      double mousey = ((double)my / (double)Size.Y) * 10.0;
+      double mousex = ((double)MousePosition.X / (double)Size.X) * 10.0 * Aspect;
+      double mousey = ((double)MousePosition.Y / (double)Size.Y) * 10.0;
       aoHover = SystemStar.GetHover(Aspect, mousex, mousey);
       // TODO if (aoHover != aoHoverOld) glMapView.Invalidate();
     }

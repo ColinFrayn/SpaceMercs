@@ -5,7 +5,7 @@ namespace SpaceMercs {
     double ZDist { get; }
     bool Enabled { get; }
     uint ID { get; }
-    GUIPanel SubPanel { get; }
+    GUIPanel? SubPanel { get; }
 
     void DrawSelectionFrame();
     IPanelItem Draw(double xx, double yy, GUIPanel gpParent);

@@ -38,7 +38,7 @@ namespace SpaceMercs {
       Active = false;
       SetIconScale(1.0);
     }
-    public IPanelItem InsertIcon(uint ID, int texID, double texX, double texY, double texW, double texH, bool bEnabled, GUIPanel subPanel) {
+    public IPanelItem InsertIcon(uint ID, int texID, double texX, double texY, double texW, double texH, bool bEnabled, GUIPanel? subPanel) {
       int col = Items.Count % PanelWidth;
       int row = (Items.Count - col) / PanelWidth;
       double IconX = PanelX + (col * IconW);
@@ -61,7 +61,6 @@ namespace SpaceMercs {
       Items.Add(new TextPanelItem(strText, new Vector4d(IconX, IconY, IconW, IconH), _ZDepth + 0.1));
       PanelW = Math.Min(Items.Count, PanelWidth) * IconW;
       PanelH = Math.Ceiling((double)Items.Count / (double)PanelWidth) * IconH;
-      // TODO
     }
     public void SetWidth(int w) {
       PanelWidth = w;
@@ -187,14 +186,10 @@ namespace SpaceMercs {
     }
 
     // Track a mouse
-    public override void TrackMouse(int x, int y) {
-      // Nothing here
-    }
+    public override void TrackMouse(int x, int y) { }
 
     // Set the default (calculated) values
-    public override void Initialise() {
-      // Nothing to do here
-    }
+    public override void Initialise() { }
 
     // Set up for drawing
     private void SetupDrawing() {
