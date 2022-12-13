@@ -206,7 +206,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Show the context menu, if it's available
-            gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Show hover text
             SetupRoomHoverInfo();
@@ -218,7 +218,7 @@ namespace SpaceMercs.MainWindow {
             GL.Color3(1.0, 1.0, 1.0);
             GL.Scale(0.04 / Aspect, 0.04, 0.04);
             GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(PlayerTeam.Cash.ToString("F2") + " credits", Alignment.TopLeft);
+            TextRenderer.Draw(PlayerTeam!.Cash.ToString("F2") + " credits", Alignment.TopLeft);
             GL.PopMatrix();
 
             DrawHullCondition();

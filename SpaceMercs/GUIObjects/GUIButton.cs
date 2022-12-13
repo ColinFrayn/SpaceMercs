@@ -57,9 +57,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", col);
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Flat.Bind();
-            Square.Flat.Draw();
-            Square.Flat.Unbind();
+            Square.Flat.BindAndDraw();
 
             // Draw the button text at the correct location, horizontally centred
             TextMeasure tm = TextRenderer.MeasureText(Text);
@@ -85,9 +83,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Lines.Bind();
-            Square.Lines.Draw();
-            Square.Lines.Unbind();
+            Square.Lines.BindAndDraw();
 
             // Set up stipple
             if (Stipple) {

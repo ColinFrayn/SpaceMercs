@@ -90,10 +90,14 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderTexLitNorm);
+            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderFull);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("projection", Matrix4.Identity);
+            fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram.SetUniform("lightEnabled", true);
+            fullShaderProgram.SetUniform("textureEnabled", true);
             flatColourLitShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3FlatNorm, ShaderCode.PixelShaderLitFlatColour);
             flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
             flatColourLitShaderProgram.SetUniform("view", Matrix4.Identity);

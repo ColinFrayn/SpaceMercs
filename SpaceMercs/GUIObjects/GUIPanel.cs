@@ -17,9 +17,6 @@ namespace SpaceMercs {
         public int ClickX, ClickY;
         public int Count { get { return Items.Count; } }
 
-        // Keep track of previous settings when drawing
-        private bool bBlendState, bLightingState, bTextureState, bDepthMaskState, bDepthTestState;
-
         // Constructors
         public GUIPanel(GameWindow parent) : base(parent, true, 1f) {
             PanelX = 0f;
@@ -124,28 +121,28 @@ namespace SpaceMercs {
             if (!Active) return;
             double xx = (double)mx / (double)Window.Size.X;
             double yy = (double)my / (double)Window.Size.Y;
-            HoverItem = Display2(prog, xx, yy);
+            HoverItem = DisplayNormalisedCoords(prog, xx, yy);
         }
 
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
-        public IPanelItem Display2(ShaderProgram prog, double xx, double yy) {
-            IPanelItem piHover = null;
+        public IPanelItem? DisplayNormalisedCoords(ShaderProgram prog, double xx, double yy) {
+            IPanelItem? piHover = null;
             float BorderX = 1f / (float)Window.Size.X;
             BorderY = 1f / (float)Window.Size.Y;
 
             GL.Disable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("lightEnabled", false);
 
             Matrix4 translateM = Matrix4.CreateTranslation(PanelX - BorderX, PanelY - BorderY, _ZDepth);
-            Matrix4 scaleM = Matrix4.CreateScale(PanelW + BorderX * 2f, PanelH * BorderY * 2f, 1f);
+            Matrix4 scaleM = Matrix4.CreateScale(PanelW + BorderX * 2f, PanelH + BorderY * 2f, 1f);
             Matrix4 modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
-            prog.SetUniform("flatColour", new Vector4(0.1f, 0.1f, 0.1f, 0.3f));
+            prog.SetUniform("flatColour", new Vector4(0.1f, 0.1f, 0.1f, 0.5f));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Flat.Bind();
-            Square.Flat.Draw();
-            Square.Flat.Unbind();
+            Square.Flat.BindAndDraw();
 
             // Draw the icons
             foreach (IPanelItem pi in Items) {
@@ -156,18 +153,17 @@ namespace SpaceMercs {
             }
 
             // Draw the frame
-            translateM = Matrix4.CreateTranslation(PanelX - BorderX, PanelY - BorderY, _ZDepth + 0.001f);
+            translateM = Matrix4.CreateTranslation(PanelX - BorderX, PanelY - BorderY, _ZDepth + 0.01f);
             modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1f));
+            prog.SetUniform("textureEnabled", false);
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Lines.Bind();
-            Square.Lines.Draw();
-            Square.Lines.Unbind();
+            Square.Lines.BindAndDraw();
 
             // Draw the selected icon frame
             if (piHover != null && piHover.Enabled) {
-                piHover.DrawSelectionFrame(); // TODO
+                piHover.DrawSelectionFrame();
             }
 
             // Return if we're hovering over anything

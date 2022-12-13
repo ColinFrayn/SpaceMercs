@@ -19,14 +19,17 @@ namespace SpaceMercs.Graphics.Shapes {
             GL.BindVertexArray(vertexArray.VertexArrayHandle);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, indexBuffer.IndexBufferHandle);
         }
-
         public void Unbind() {
             GL.BindVertexArray(0);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
-
         public void Draw() {
             GL.DrawElements(PrimitiveType, indexBuffer.IndexCount, DrawElementsType.UnsignedInt, 0);
+        }
+        public void BindAndDraw() {
+            Bind();
+            Draw();
+            Unbind();
         }
 
         // IDisposable

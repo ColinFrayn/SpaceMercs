@@ -372,7 +372,9 @@ namespace SpaceMercs {
         }
 
         // Draw the progress with whatever is happening
-        public void Display(ShaderProgram texProg) {
+        public void Display(ShaderProgram prog) {
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("lightEnabled", false);
 
             return;
 
@@ -399,7 +401,7 @@ namespace SpaceMercs {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
 
             //  Task specific stuff
-            if (PlayerTeam.CurrentMission == null) DrawTravelProgress(texProg);
+            if (PlayerTeam.CurrentMission == null) DrawTravelProgress(prog);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) DrawRepair();
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage();
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle();

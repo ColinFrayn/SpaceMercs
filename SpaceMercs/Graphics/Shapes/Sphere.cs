@@ -14,9 +14,7 @@ namespace SpaceMercs.Graphics.Shapes {
 
         public static void Draw(int detail, bool bTexture = false) {
             GLShape sphere = Build(detail, bTexture);
-            sphere.Bind();
-            sphere.Draw();
-            sphere.Unbind();
+            sphere.BindAndDraw();
         }
 
         // Setup the sphere by generating rings of triangles

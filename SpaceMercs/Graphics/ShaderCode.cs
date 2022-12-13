@@ -121,11 +121,15 @@ void main()
   pixelColour = vColour * colourFactor;
 }";
 
-        public static string PixelShaderTexLitNorm = @"
+        public static string PixelShaderFull = @"
 #version 460
 
 uniform vec3 lightPos;
+uniform vec3 lightCol;
 uniform float ambient;
+uniform bool lightEnabled;
+uniform bool textureEnabled;
+uniform vec4 flatColour;
 
 in vec2 vUV;
 in vec3 vNorm;
@@ -137,15 +141,20 @@ out vec4 fragColor;
 
 void main()
 {
-  vec4 textureVal = texture(u_texture, vUV);
-  vec3 norm = normalize(vNorm);
-  vec3 lightDir = normalize(lightPos - vFragPos);  
-  float diff = max(dot(norm, lightDir), 0.0);
-  vec3 diffuseCol = diff * vec3(1.0,1.0,1.0); // * lightColor;
-  vec3 ambientCol = ambient * vec3(1.0,1.0,1.0); // * lightColor
-  vec3 result = (ambientCol + diffuseCol) * textureVal.xyz;
-  fragColor = vec4(result, 1.0);
-  //fragColor = textureVal;
+  vec4 result = flatColour;
+  if (textureEnabled) {
+    vec4 textureVal = texture(u_texture, vUV);
+    result = textureVal;
+  }
+  if (lightEnabled) {
+    vec3 norm = normalize(vNorm);
+    vec3 lightDir = normalize(lightPos - vFragPos);  
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec4 diffuseCol = diff * vec4(lightCol.xyz, 1.0);
+    vec4 ambientCol = ambient * vec4(lightCol.xyz, 1.0);
+    result = result * (ambientCol + diffuseCol);
+  }
+  fragColor = result;
 }";
 
         public static string PixelShaderLitFlatColour = @"

@@ -74,7 +74,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram flatProg, ShaderProgram texProg, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
             foreach (Star st in Stars) {
                 // Translate into the star frame
                 Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos);
@@ -89,19 +89,20 @@ namespace SpaceMercs {
 
                 // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
-                    //Matrix4 scale2M = Matrix4.CreateScale(0.1f);
-                    //Matrix4 modelM = scaleM * scale2M * translateM;
-                    texProg.SetUniform("model", modelM);
-                    st.DrawSelected(texProg, iLevel);
+                    prog.SetUniform("lightEnabled", true);
+                    prog.SetUniform("model", modelM);
+                    st.DrawSelected(prog, iLevel);
                 }
                 else {
-                    // Fade out unvisited stars
-                    float fade = 1.0f;
-                    if (bFadeUnvisited && !st.Visited) fade = 3.0f;
+                    // Fade out unvisited stars (if set to do so)
+                    float fade = 1f;
+                    if (bFadeUnvisited && !st.Visited) fade = 4f;
                     Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
-                    flatProg.SetUniform("flatColour", col);
-                    flatProg.SetUniform("model", modelM);
-                    GL.UseProgram(flatProg.ShaderProgramHandle);
+                    prog.SetUniform("lightEnabled", false);
+                    prog.SetUniform("textureEnabled", false);
+                    prog.SetUniform("flatColour", col);
+                    prog.SetUniform("model", modelM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
                     Sphere.Draw(iLevel);
                 }
 

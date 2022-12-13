@@ -124,9 +124,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, Alpha));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Flat.Bind();
-            Square.Flat.Draw();
-            Square.Flat.Unbind();
+            Square.Flat.BindAndDraw();
 
             // Draw the button text at the correct location, horizontally centred
             float aspect = (float)WindowWidth / (float)WindowHeight;
@@ -149,9 +147,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Lines.Bind();
-            Square.Lines.Draw();
-            Square.Lines.Unbind();
+            Square.Lines.BindAndDraw();
 
             DrawButton(prog, xpos, ypos, 1, aspect);
             if (Decision) DrawButton(prog, xpos, ypos, 2, aspect);
@@ -178,9 +174,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", col);
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Flat.Bind();
-            Square.Flat.Draw();
-            Square.Flat.Unbind();
+            Square.Flat.BindAndDraw();
 
             // Draw the button text at the correct location, horizontally centred
             string Text = (id == 1) ? "OK" : "Cancel";
@@ -200,9 +194,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Lines.Bind();
-            Square.Lines.Draw();
-            Square.Lines.Unbind();
+            Square.Lines.BindAndDraw();
         }
 
         // See if there's anything that needs to be done for the slider bar after a L-click

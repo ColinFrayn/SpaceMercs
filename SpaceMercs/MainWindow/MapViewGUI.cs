@@ -27,6 +27,9 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("projection", projectionM);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+            fullShaderProgram.SetUniform("projection", projectionM);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
             // Set up scene
             GL.DepthMask(true);
@@ -52,7 +55,7 @@ namespace SpaceMercs.MainWindow {
             if (view == ViewMode.ViewSystem) DrawSystemToggles();
 
             // Main menu
-            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Hover info for the current setup
             DrawGUIHoverInfo();
@@ -232,18 +235,14 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1.0f));
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-            Square.Flat.Bind();
-            Square.Flat.Draw();
-            Square.Flat.Unbind();
+            Square.Flat.BindAndDraw();
 
             translateM = Matrix4.CreateTranslation(dx, dy, -0.05f);
             modelM = scaleM * translateM;
             flatColourShaderProgram.SetUniform("model", modelM);
             flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1.0f));
             GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-            Square.Lines.Bind();
-            Square.Lines.Draw();
-            Square.Lines.Unbind();
+            Square.Lines.BindAndDraw();
 
             foreach (string str in strHoverText) {
                 TextRenderer.DrawAt(str, Alignment.TopLeft, hoverTextScale, Aspect, dx, dy, Color.LightGray);

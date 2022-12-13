@@ -114,6 +114,17 @@ namespace SpaceMercs.Graphics {
             return new Dictionary<string, ShaderAttribute>(Attributes).ToImmutableDictionary();
         }
 
+        public void SetUniform(string name, bool b) {
+            VerifyUniform(name);
+            ShaderUniform uniform = Uniforms[name];
+            if (uniform.Type != ActiveUniformType.Bool) {
+                throw new ArgumentException($"Uniform was not of type Bool : {name}");
+            }
+            GL.UseProgram(ShaderProgramHandle);
+            GL.Uniform1(uniform.Location, b ? 1 : 0); // Annoyingly you can't set bools directly
+            GL.UseProgram(0);
+        }
+
         public void SetUniform(string name, float v1) {
             VerifyUniform(name);
             ShaderUniform uniform = Uniforms[name];
@@ -155,6 +166,17 @@ namespace SpaceMercs.Graphics {
             }
             GL.UseProgram(ShaderProgramHandle);
             GL.UniformMatrix4(uniform.Location, false, ref m4);
+            GL.UseProgram(0);
+        }
+
+        public void SetUniform(string name, Vector3 v3) {
+            VerifyUniform(name);
+            ShaderUniform uniform = Uniforms[name];
+            if (uniform.Type != ActiveUniformType.FloatVec3) {
+                throw new ArgumentException($"Uniform was not of type Float-Vector3 : {name}");
+            }
+            GL.UseProgram(ShaderProgramHandle);
+            GL.Uniform3(uniform.Location, v3.X, v3.Y, v3.Z);
             GL.UseProgram(0);
         }
 

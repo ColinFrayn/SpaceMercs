@@ -9,7 +9,7 @@ namespace SpaceMercs {
         GUIPanel? SubPanel { get; }
 
         void DrawSelectionFrame();
-        IPanelItem Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent);
+        IPanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent);
         void SetPos(float x, float y);
         void SetIconSize(float w, float h);
         void SetSubPanel(GUIPanel gpl);

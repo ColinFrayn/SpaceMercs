@@ -837,10 +837,10 @@ namespace SpaceMercs.MainWindow {
             foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (gbEndTurn != null) gbEndTurn.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            if (ThisMission.IsComplete) {
+            if (ThisMission?.IsComplete ?? false) {
                 gbEndMission.Activate();
                 gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
-                gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             }
             else gbEndMission.Deactivate();
 

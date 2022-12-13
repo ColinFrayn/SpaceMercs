@@ -451,11 +451,13 @@ namespace SpaceMercs {
 
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
-        public override void DrawSelected(ShaderProgram texProg, int Level = 7) {
+        public override void DrawSelected(ShaderProgram prog, int Level = 7) {
+            prog.SetUniform("lightEnabled", true);
+            prog.SetUniform("textureEnabled", true);
             SetupTextureMap(64, 32);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
-            GL.UseProgram(texProg.ShaderProgramHandle);
+            GL.UseProgram(prog.ShaderProgramHandle);
             // Rotate the star?
             //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
             Sphere.Draw(Level, true);

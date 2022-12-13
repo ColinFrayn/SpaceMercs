@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class IconPanelItem : IPanelItem {
@@ -41,55 +42,54 @@ namespace SpaceMercs {
             GL.End();
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }
-        public IPanelItem Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
+        public IPanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
             IPanelItem? piHover = null;
             float BorderY = gpParent.BorderY;
 
             if (xx >= iconX && xx <= iconX + iconW && yy >= iconY - BorderY && yy <= iconY + iconH + BorderY) {
                 piHover = this;
             }
-            if (Enabled) {
+            if (Enabled) { // TODO: Used for what?
                 if (piHover != null) {
-                    GL.Color3(1.0, 1.0, 1.0);
+                    //GL.Color3(1.0, 1.0, 1.0);
                 }
                 else {
-                    GL.Color3(0.8, 0.8, 0.8);
+                    //GL.Color3(0.8, 0.8, 0.8);
                 }
             }
             else {
-                GL.Color3(0.3, 0.3, 0.3);
+                //GL.Color3(0.3, 0.3, 0.3);
             }
+
             // Draw the icon
-            GL.Enable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.Blend);
+            GL.Disable(EnableCap.DepthTest);
             GL.BindTexture(TextureTarget.Texture2D, texID);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(texX, texY);
-            GL.Vertex3(iconX, iconY, ZDist);
-            GL.TexCoord2(texX + texW, texY);
-            GL.Vertex3(iconX + iconW, iconY, ZDist);
-            GL.TexCoord2(texX + texW, texY + texH);
-            GL.Vertex3(iconX + iconW, iconY + iconH, ZDist);
-            GL.TexCoord2(texX, texY + texH);
-            GL.Vertex3(iconX, iconY + iconH, ZDist);
-            GL.End();
+            GL.DepthMask(false);
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("lightEnabled", false);
+
+            Matrix4 translateM = Matrix4.CreateTranslation(iconX, iconY, ZDist);
+            Matrix4 scaleM = Matrix4.CreateScale(texW, texH, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+
             if (ovTexID != -1) {
                 GL.BindTexture(TextureTarget.Texture2D, ovTexID);
-                GL.Begin(BeginMode.Quads);
-                GL.TexCoord2(ovTX, ovTY);
-                GL.Vertex3(iconX + (iconW * ovX), iconY + (iconH * ovY), ZDist + 0.0001);
-                GL.TexCoord2(ovTX + ovTW, ovTY);
-                GL.Vertex3(iconX + (iconW * ovX) + (iconW * ovW), iconY + (iconH * ovY), ZDist + 0.0001);
-                GL.TexCoord2(ovTX + ovTW, ovTY + ovTH);
-                GL.Vertex3(iconX + (iconW * ovX) + (iconW * ovW), iconY + (iconH * ovY) + (iconH * ovH), ZDist + 0.0001);
-                GL.TexCoord2(ovTX, ovTY + ovTH);
-                GL.Vertex3(iconX + (iconW * ovX), iconY + (iconH * ovY) + (iconH * ovH), ZDist + 0.0001);
-                GL.End();
+                translateM = Matrix4.CreateTranslation(iconX + (iconW * ovX), iconY + (iconH * ovY), ZDist + 0.001f);
+                scaleM = Matrix4.CreateScale(iconW * ovW, iconH * ovH, 1f);
+                modelM = scaleM * translateM;
+                prog.SetUniform("model", modelM);
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
             }
-            GL.Disable(EnableCap.Texture2D);
+            prog.SetUniform("textureEnabled", false);
 
-            if (SubPanel != null) {
+            if (SubPanel is not null) {
                 // If this item hovered then open subpanel
-                if (piHover != null) {
+                if (piHover is not null) {
                     SubPanel.Activate();
                 }
 
@@ -101,10 +101,10 @@ namespace SpaceMercs {
                     else {
                         SubPanel.SetPosition(iconX, iconY + iconH + BorderY * 2f);
                     }
-                    IPanelItem piHover2 = SubPanel.Display2(prog, xx, yy);
-                    if (piHover2 != null) piHover = piHover2;
+                    IPanelItem? piHover2 = SubPanel.DisplayNormalisedCoords(prog, xx, yy);
+                    if (piHover2 is not null) piHover = piHover2;
                     // If subpanel is active but not hovered then close it, unless we're hovering on empty squares
-                    if (piHover == null) {
+                    if (piHover is null) {
                         if (!SubPanel.IsHover(xx, yy)) {
                             SubPanel.Deactivate();
                         }
@@ -112,17 +112,27 @@ namespace SpaceMercs {
                 }
                 // Otherwise draw an arrow indicating that subpanel exists
                 else {
-                    GL.Color3(0.8, 0.8, 0.8);
-                    GL.Begin(BeginMode.Triangles);
+                    prog.SetUniform("flatColour", 0.8f, 0.8f, 0.8f);
+                    scaleM = Matrix4.CreateScale(iconW * 0.3f, iconH * 0.3f, 1f);
                     if (iconY > 0.5) {
-                        GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.15), ZDist + 0.01);
-                        GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.15), ZDist + 0.01);
-                        GL.Vertex3(iconX + (iconW * 0.5), iconY - (iconH * 0.15), ZDist + 0.01);
+                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 0.15f), ZDist + 0.01f);
+                        modelM = scaleM * translateM;
+                        prog.SetUniform("model", modelM);
+                        Triangle.Flat.BindAndDraw();
+                        // TODO: Need to get texture coords right
+                        //GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.15), ZDist + 0.01);
+                        //GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.15), ZDist + 0.01);
+                        //GL.Vertex3(iconX + (iconW * 0.5), iconY - (iconH * 0.15), ZDist + 0.01);
                     }
                     else {
-                        GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.85), ZDist + 0.01);
-                        GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.85), ZDist + 0.01);
-                        GL.Vertex3(iconX + (iconW * 0.5), iconY + (iconH * 1.15), ZDist + 0.01);
+                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 1.0f), ZDist + 0.01f);
+                        modelM = scaleM * translateM;
+                        prog.SetUniform("model", modelM);
+                        Triangle.Flat.BindAndDraw();
+                        // TODO: Need to get texture coords right
+                        //GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.85), ZDist + 0.01);
+                        //GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.85), ZDist + 0.01);
+                        //GL.Vertex3(iconX + (iconW * 0.5), iconY + (iconH * 1.15), ZDist + 0.01);
                     }
                     GL.End();
                 }

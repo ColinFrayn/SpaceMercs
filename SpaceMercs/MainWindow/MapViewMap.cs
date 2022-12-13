@@ -106,9 +106,7 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("model", modelM);
                 flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f,1f,1f,1f));
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-                Annulus.Annulus16.Bind();
-                Annulus.Annulus16.Draw();
-                Annulus.Annulus16.Unbind();
+                Annulus.Annulus16.BindAndDraw();
             }
 
             if (aoSelected != null) {
@@ -120,9 +118,7 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("model", modelM);
                 flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.2f, 1f, 0.4f, 1f));
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-                Annulus.Annulus16.Bind();
-                Annulus.Annulus16.Draw();
-                Annulus.Annulus16.Unbind();
+                Annulus.Annulus16.BindAndDraw();
             }
 
             {
@@ -134,9 +130,7 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("model", modelM);
                 flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-                Triangle.Flat.Bind();
-                Triangle.Flat.Draw();
-                Triangle.Flat.Unbind();
+                Triangle.Flat.BindAndDraw();
             }
         }
 
@@ -168,7 +162,7 @@ namespace SpaceMercs.MainWindow {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
                     Sector sc = GalaxyMap.GetSector(tp);
-                    sc.Draw(flatColourLitShaderProgram, fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
+                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
                 }
             }
         }
@@ -220,14 +214,10 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("model", modelM);
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                 if (fMapViewZ + range > 20) {
-                    Circle.Circle64.Bind();
-                    Circle.Circle64.Draw();
-                    Circle.Circle64.Unbind();
+                    Circle.Circle64.BindAndDraw();
                 }
                 else {
-                    Circle.Circle32.Bind();
-                    Circle.Circle32.Draw();
-                    Circle.Circle32.Unbind();
+                    Circle.Circle32.BindAndDraw();
                 }
             }
             GL.BindVertexArray(0);
