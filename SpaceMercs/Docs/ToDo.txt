@@ -2,8 +2,16 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel.Display: Display icons/text; Accept clicks; Add ability to arrange tiles vertically
-- Needs to be able to specify tex coords in displaying a square. Or set up a specialised shape??
+GUIPanel.Display: 
+- Add ability to arrange tiles vertically.
+- Foldout arrows are far too large and black.
+- Accept clicks
+
+IconPanelIcon:
+- Not displaying textured icons
+
+TextPanelIcon:
+- Implement
 
 GUIPanel for main menu, LHS, 20% down : Display it
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)

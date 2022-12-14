@@ -8,7 +8,7 @@ namespace SpaceMercs {
     // A fold-out context menu object
     class GUIPanel : GUIObject {
         private float PanelW, PanelH;
-        private readonly List<IPanelItem> Items = new List<IPanelItem>();
+        private readonly List<PanelItem> Items = new List<PanelItem>();
         private float _ZDepth = 0.5f;
         private int PanelWidth;
         private float IconW = 0.08f, IconH = 0.08f;
@@ -36,13 +36,13 @@ namespace SpaceMercs {
             Active = false;
             SetIconScale(1f);
         }
-        public IPanelItem InsertIcon(uint ID, int texID, float texX, float texY, float texW, float texH, bool bEnabled, GUIPanel? subPanel) {
+        public PanelItem InsertIcon(uint ID, int texID, float texX, float texY, float texW, float texH, bool bEnabled, GUIPanel? subPanel) {
             int col = Items.Count % PanelWidth;
             int row = (Items.Count - col) / PanelWidth;
             float IconX = PanelX + (col * IconW);
             float IconY = PanelY + (row * IconH);
             Items.Add(new IconPanelItem(texID, new Vector4(texX, texY, texW, texH), new Vector4(IconX, IconY, IconW, IconH), bEnabled, ID, _ZDepth + 0.1f));
-            IPanelItem icon = Items[Items.Count - 1];
+            PanelItem icon = Items[Items.Count - 1];
             if (subPanel != null) {
                 icon.SetSubPanel(subPanel);
             }
@@ -67,7 +67,7 @@ namespace SpaceMercs {
             PanelH = nRows * IconH;
             // Reposition all items
             int col = 0, row = 0;
-            foreach (IPanelItem pi in Items) {
+            foreach (PanelItem pi in Items) {
                 float IconX = PanelX + (col * IconW);
                 float IconY = PanelY + (row * IconH);
                 pi.SetPos(IconX, IconY);
@@ -78,7 +78,7 @@ namespace SpaceMercs {
                 }
             }
         }
-        public IPanelItem? HoverItem { get; private set; } = null;
+        public PanelItem? HoverItem { get; private set; } = null;
         public int HoverID {
             get {
                 if (HoverItem == null) return -1;
@@ -98,14 +98,14 @@ namespace SpaceMercs {
                 IconW = sc * 0.08f;
             }
             IconH = sc * 0.08f;
-            foreach (IPanelItem pi in Items) {
+            foreach (PanelItem pi in Items) {
                 pi.SetIconSize(IconW, IconH);
             }
         }
         public float ZDepth {
             set {
                 _ZDepth = value;
-                foreach (IPanelItem pi in Items) {
+                foreach (PanelItem pi in Items) {
                     pi.SetZDist(_ZDepth + 0.1f);
                 }
             }
@@ -125,8 +125,8 @@ namespace SpaceMercs {
         }
 
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
-        public IPanelItem? DisplayNormalisedCoords(ShaderProgram prog, double xx, double yy) {
-            IPanelItem? piHover = null;
+        public PanelItem? DisplayNormalisedCoords(ShaderProgram prog, double xx, double yy) {
+            PanelItem? piHover = null;
             float BorderX = 1f / (float)Window.Size.X;
             BorderY = 1f / (float)Window.Size.Y;
 
@@ -145,8 +145,8 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             // Draw the icons
-            foreach (IPanelItem pi in Items) {
-                IPanelItem piHover2 = pi.Draw(prog, xx, yy, this);
+            foreach (PanelItem pi in Items) {
+                PanelItem piHover2 = pi.Draw(prog, xx, yy, this);
                 if (piHover2 != null) {
                     piHover = piHover2;
                 }
@@ -163,7 +163,7 @@ namespace SpaceMercs {
 
             // Draw the selected icon frame
             if (piHover != null && piHover.Enabled) {
-                piHover.DrawSelectionFrame();
+                piHover.DrawSelectionFrame(prog);
             }
 
             // Return if we're hovering over anything

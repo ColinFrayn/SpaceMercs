@@ -98,6 +98,8 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             fullShaderProgram.SetUniform("lightEnabled", true);
             fullShaderProgram.SetUniform("textureEnabled", true);
+            fullShaderProgram.SetUniform("texPos", 0f, 0f);
+            fullShaderProgram.SetUniform("texScale", 1f, 1f);
             flatColourLitShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3FlatNorm, ShaderCode.PixelShaderLitFlatColour);
             flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
             flatColourLitShaderProgram.SetUniform("view", Matrix4.Identity);

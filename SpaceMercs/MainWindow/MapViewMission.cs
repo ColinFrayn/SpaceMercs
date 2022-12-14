@@ -1274,7 +1274,7 @@ namespace SpaceMercs.MainWindow {
                     // Set up list of items
                     foreach (ItemType it in s.GetUtilityItems()) {
                         (float tx, float ty) = Textures.GetTexCoords(it);
-                        IPanelItem ip = gpItems.InsertIcon(it.ItemID, iItemTexture, tx, ty, Textures.ItemTextureWidth, Textures.ItemTextureHeight, bEnabled, null);
+                        PanelItem ip = gpItems.InsertIcon(it.ItemID, iItemTexture, tx, ty, Textures.ItemTextureWidth, Textures.ItemTextureHeight, bEnabled, null);
                         if (it.ItemEffect != null && !it.ItemEffect.SingleUse) {
                             ip.SetOverlay(iMiscTexture, new Vector4(txr, tyr, Textures.MiscTextureWidth, Textures.MiscTextureHeight), new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
                         }

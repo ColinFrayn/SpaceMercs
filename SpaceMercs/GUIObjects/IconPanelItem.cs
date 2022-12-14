@@ -4,61 +4,29 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
-    class IconPanelItem : IPanelItem {
-        private readonly int texID;
-        private readonly float texX, texY, texW, texH;
-        private float iconX, iconY, iconW, iconH;
-        private int ovTexID = -1;
-        private float ovX, ovY, ovW, ovH;
-        private float ovTX, ovTY, ovTW, ovTH;
-        public uint ID { get; private set; }
-        public bool Enabled { get; private set; }
-        public float ZDist { get; private set; }
-        public GUIPanel? SubPanel { get; private set; }
+    class IconPanelItem : PanelItem {
 
-        public IconPanelItem(int _texID, Vector4 texRect, Vector4 iconRect, bool _Enabled, uint _ID, float zd) {
-            texID = _texID;
-            texX = texRect.X;
-            texY = texRect.Y;
-            texW = texRect.Z;
-            texH = texRect.W;
-            iconX = iconRect.X;
-            iconY = iconRect.Y;
-            iconW = iconRect.Z;
-            iconH = iconRect.W;
-            ID = _ID;
-            Enabled = _Enabled;
-            ZDist = zd;
-            SubPanel = null;
+        public IconPanelItem(int _texID, Vector4 texRect, Vector4 iconRect, bool _enabled, uint _ID, float zd) : base(_texID, texRect, iconRect, _enabled, _ID, zd) {
+            // Nothing to see here
         }
-        public void DrawSelectionFrame() {
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(iconX, iconY, ZDist + 0.1);
-            GL.Vertex3(iconX + iconW, iconY, ZDist + 0.1);
-            GL.Vertex3(iconX + iconW, iconY + iconH, ZDist + 0.1);
-            GL.Vertex3(iconX, iconY + iconH, ZDist + 0.1);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-        }
-        public IPanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
-            IPanelItem? piHover = null;
+
+        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
+            PanelItem? piHover = null;
             float BorderY = gpParent.BorderY;
 
             if (xx >= iconX && xx <= iconX + iconW && yy >= iconY - BorderY && yy <= iconY + iconH + BorderY) {
                 piHover = this;
             }
-            if (Enabled) { // TODO: Used for what?
+            if (Enabled) {
                 if (piHover != null) {
-                    //GL.Color3(1.0, 1.0, 1.0);
+                    prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                 }
                 else {
-                    //GL.Color3(0.8, 0.8, 0.8);
+                    prog.SetUniform("flatColour", new Vector4(0.8f, 0.8f, 0.8f, 1f));
                 }
             }
             else {
-                //GL.Color3(0.3, 0.3, 0.3);
+                prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
             }
 
             // Draw the icon
@@ -68,6 +36,8 @@ namespace SpaceMercs {
             GL.DepthMask(false);
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("lightEnabled", false);
+            prog.SetUniform("texPos", texX, texY);
+            prog.SetUniform("texScale", texW, texH);
 
             Matrix4 translateM = Matrix4.CreateTranslation(iconX, iconY, ZDist);
             Matrix4 scaleM = Matrix4.CreateScale(texW, texH, 1f);
@@ -77,6 +47,8 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             if (ovTexID != -1) {
+                prog.SetUniform("texPos", ovTX, ovTY);
+                prog.SetUniform("texScale", ovTW, ovTH);
                 GL.BindTexture(TextureTarget.Texture2D, ovTexID);
                 translateM = Matrix4.CreateTranslation(iconX + (iconW * ovX), iconY + (iconH * ovY), ZDist + 0.001f);
                 scaleM = Matrix4.CreateScale(iconW * ovW, iconH * ovH, 1f);
@@ -101,7 +73,7 @@ namespace SpaceMercs {
                     else {
                         SubPanel.SetPosition(iconX, iconY + iconH + BorderY * 2f);
                     }
-                    IPanelItem? piHover2 = SubPanel.DisplayNormalisedCoords(prog, xx, yy);
+                    PanelItem? piHover2 = SubPanel.DisplayNormalisedCoords(prog, xx, yy);
                     if (piHover2 is not null) piHover = piHover2;
                     // If subpanel is active but not hovered then close it, unless we're hovering on empty squares
                     if (piHover is null) {
@@ -112,48 +84,40 @@ namespace SpaceMercs {
                 }
                 // Otherwise draw an arrow indicating that subpanel exists
                 else {
-                    prog.SetUniform("flatColour", 0.8f, 0.8f, 0.8f);
+                    prog.SetUniform("textureEnabled", false);
+                    prog.SetUniform("flatColour", new Vector4(0.8f, 0.8f, 0.8f, 1f));
                     scaleM = Matrix4.CreateScale(iconW * 0.3f, iconH * 0.3f, 1f);
                     if (iconY > 0.5) {
                         translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 0.15f), ZDist + 0.01f);
                         modelM = scaleM * translateM;
                         prog.SetUniform("model", modelM);
                         Triangle.Flat.BindAndDraw();
-                        // TODO: Need to get texture coords right
-                        //GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.15), ZDist + 0.01);
-                        //GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.15), ZDist + 0.01);
-                        //GL.Vertex3(iconX + (iconW * 0.5), iconY - (iconH * 0.15), ZDist + 0.01);
                     }
                     else {
                         translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 1.0f), ZDist + 0.01f);
                         modelM = scaleM * translateM;
                         prog.SetUniform("model", modelM);
                         Triangle.Flat.BindAndDraw();
-                        // TODO: Need to get texture coords right
-                        //GL.Vertex3(iconX + (iconW * 0.35), iconY + (iconH * 0.85), ZDist + 0.01);
-                        //GL.Vertex3(iconX + (iconW * 0.65), iconY + (iconH * 0.85), ZDist + 0.01);
-                        //GL.Vertex3(iconX + (iconW * 0.5), iconY + (iconH * 1.15), ZDist + 0.01);
                     }
-                    GL.End();
                 }
             }
             return piHover;
         }
-        public void SetPos(float x, float y) {
+        public override void SetPos(float x, float y) {
             iconX = x;
             iconY = y;
         }
-        public void SetIconSize(float w, float h) {
+        public override void SetIconSize(float w, float h) {
             iconW = w;
             iconH = h;
         }
-        public void SetSubPanel(GUIPanel gpl) {
+        public override void SetSubPanel(GUIPanel gpl) {
             SubPanel = gpl;
         }
-        public void SetZDist(float zd) {
+        public override void SetZDist(float zd) {
             ZDist = zd;
         }
-        public void SetOverlay(int iOvTexID, Vector4 texRect, Vector4 dimRect) {
+        public override void SetOverlay(int iOvTexID, Vector4 texRect, Vector4 dimRect) {
             ovTexID = iOvTexID;
             ovTX = texRect.X;
             ovTY = texRect.Y;

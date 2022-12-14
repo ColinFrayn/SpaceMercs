@@ -43,6 +43,8 @@ void main()
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec2 texPos;
+uniform vec2 texScale;
 
 layout (location = 0) in vec3 aPosition;
 layout (location = 1) in vec2 aTexturePos;
@@ -55,7 +57,7 @@ out vec3 vFragPos;
 void main()
 {
   gl_Position = projection * view * model * vec4(aPosition, 1f);
-  vUV = aTexturePos;
+  vUV = vec2(aTexturePos.x * texScale.x + texPos.x, aTexturePos.y * texScale.y + texPos.y);
   //vNorm = aNormal;
   vNorm = mat3(transpose(inverse(model))) * aNormal;  
   vFragPos = vec3(model * vec4(aPosition, 1.0));
@@ -144,7 +146,7 @@ void main()
   vec4 result = flatColour;
   if (textureEnabled) {
     vec4 textureVal = texture(u_texture, vUV);
-    result = textureVal;
+    result = result * textureVal;
   }
   if (lightEnabled) {
     vec3 norm = normalize(vNorm);

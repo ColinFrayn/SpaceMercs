@@ -11,7 +11,7 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private float fShipViewX, fShipViewY, fShipViewZ = Const.MinimumShipViewZ;
         private int irHover = -1, irContextRoom = -1, irSelected = -1;
-        private IPanelItem piHoverItem;
+        private PanelItem piHoverItem;
         private GUIButton gbRepair, gbFabricate;
         private bool bHoverHull = false, bContextHull = false;
         private ViewMode PreviousViewMode = ViewMode.ViewMap;
@@ -121,7 +121,7 @@ namespace SpaceMercs.MainWindow {
             gbRepair.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             gbFabricate.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             int rOldHover = irHover;
-            IPanelItem piOldItem = piHoverItem;
+            PanelItem piOldItem = piHoverItem;
             CheckHover_Ship();
             // TODO glMapView.Invalidate();
         }
