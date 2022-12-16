@@ -2,11 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel: 
-- Accept clicks
+GUIPanel
+- Hovering doesn't work (possibly only for text panels)
 
 TextPanelItem:
-- Implement?
+- Draw it
 
 GUIPanel for main menu, LHS, 20% down : Display it
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)

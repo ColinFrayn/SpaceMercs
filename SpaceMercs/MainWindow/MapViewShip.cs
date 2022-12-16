@@ -311,8 +311,7 @@ namespace SpaceMercs.MainWindow {
             irContextRoom = -1;
             bContextHull = false;
             gpSelect.Reset();
-            gpSelect.PanelX = (float)MousePosition.X / (float)Size.X + 0.02f;
-            gpSelect.PanelY = (float)MousePosition.Y / (float)Size.Y + 0.01f;
+            gpSelect.SetPosition((float)MousePosition.X / (float)Size.X + 0.02f, (float)MousePosition.Y / (float)Size.Y + 0.01f);
             if (irHover != -1 || bHoverHull) {
                 irContextRoom = irHover;
                 bContextHull = bHoverHull;
@@ -321,21 +320,21 @@ namespace SpaceMercs.MainWindow {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
                         GUIPanel buildingPanel = GenerateBuildingList();
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Build);
-                        gpSelect.InsertIcon(I_Build, ts, true, buildingPanel);
+                        gpSelect.InsertIconItem(I_Build, ts, true, buildingPanel);
                     }
                 }
                 else {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
-                        gpSelect.InsertIcon(I_Salvage, ts, true, null);
+                        gpSelect.InsertIconItem(I_Salvage, ts, true, null);
                     }
                     if (!bHoverHull && PlayerTeam.PlayerShip.GetCanDeactivateRoom(irContextRoom)) {
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
-                        gpSelect.InsertIcon(I_Disconnect, ts, true, null);
+                        gpSelect.InsertIconItem(I_Disconnect, ts, true, null);
                     }
                     else if (!bHoverHull && !PlayerTeam.PlayerShip.GetIsRoomActive(irContextRoom)) {
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Connect);
-                        gpSelect.InsertIcon(I_Connect, ts, true, null);
+                        gpSelect.InsertIconItem(I_Connect, ts, true, null);
                     }
                 }
                 gpSelect.Activate();
@@ -367,12 +366,12 @@ namespace SpaceMercs.MainWindow {
 
                 // Insert this icon & add to the tally
                 TexSpecs ts = Textures.GetTexCoords(se);
-                gp.InsertIcon((uint)eno, ts, bAfford, null);
+                gp.InsertIconItem((uint)eno, ts, bAfford, null);
                 count++;
             }
             if (count == 0) {
                 TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.None);
-                gp.InsertIcon(I_None, ts, false, null);
+                gp.InsertIconItem(I_None, ts, false, null);
             }
             return gp;
         }

@@ -9,25 +9,21 @@ namespace SpaceMercs {
     class GUIPanel : GUIObject {
         public enum PanelDirection { Horizontal, Vertical };
         private readonly PanelDirection Direction = PanelDirection.Horizontal;
-        private float PanelW, PanelH;
+        private float PanelW = 0f, PanelH = 0f;
         private readonly List<PanelItem> Items = new List<PanelItem>();
         private float _ZDepth = 0.5f;
-        private int PanelWidth;
         private float IconW = 0.08f, IconH = 0.08f;
 
         // Public properties
-        public float PanelX, PanelY, BorderY;
-        public int ClickX, ClickY;
+        public float PanelX { get; private set; }
+        public float PanelY { get; private set; }
+        public float BorderY { get; private set; }
+        public int ClickX { get; private set; }
+        public int ClickY { get; private set; }
         public int Count { get { return Items.Count; } }
 
         // Constructors
-        public GUIPanel(GameWindow parent, PanelDirection direction = PanelDirection.Horizontal) : base(parent, true, 1f) {
-            PanelX = 0f;
-            PanelY = 0f;
-            Direction = direction;
-            Reset();
-        }
-        public GUIPanel(GameWindow parent, float px, float py, PanelDirection direction = PanelDirection.Horizontal) : base(parent, true, 1f) {
+        public GUIPanel(GameWindow parent, float px = 0f, float py = 0f, PanelDirection direction = PanelDirection.Horizontal) : base(parent, true, 1f) {
             PanelX = px;
             PanelY = py;
             Direction = direction;
@@ -36,49 +32,29 @@ namespace SpaceMercs {
 
         // Set up the panel
         public void Reset() {
-            PanelWidth = 5;
             Items.Clear();
             Active = false;
             SetIconScale(1f);
         }
-        public PanelItem InsertIcon(uint ID, TexSpecs spec, bool bEnabled, GUIPanel? subPanel) {
-            int col = (Direction == PanelDirection.Vertical) ? 0 : Items.Count;
-            int row = (Direction == PanelDirection.Vertical) ? Items.Count : 0;
-            float IconX = PanelX + (col * IconW);
-            float IconY = PanelY + (row * IconH);
-            PanelItem icon = new IconPanelItem(spec, new Vector4(IconX, IconY, IconW, IconH), bEnabled, ID, _ZDepth + 0.1f);
+        public PanelItem InsertIconItem(uint ID, TexSpecs spec, bool bEnabled, GUIPanel? subPanel) {
+            PanelItem icon = new IconPanelItem(spec, bEnabled, ID);
             icon.SetSubPanel(subPanel);
             Items.Add(icon);
-            PanelW = (float)((Direction == PanelDirection.Vertical) ? 1 : Items.Count) * IconW;
-            PanelH = (float)((Direction == PanelDirection.Vertical) ? Items.Count : 1) * IconH;
+            UpdatePanelDimensions();
             return icon;
         }
-        public void InsertText(string strText) {
-            int col = Items.Count % PanelWidth;
-            int row = (Items.Count - col) / PanelWidth;
-            float IconX = PanelX + (col * IconW);
-            float IconY = PanelY + (row * IconH);
-            // Not implemented - this will throw!
-            Items.Add(new TextPanelItem(strText, new Vector4(IconX, IconY, IconW, IconH), _ZDepth + 0.1f));
-            PanelW = (float)Math.Min(Items.Count, PanelWidth) * IconW;
-            PanelH = (float)Math.Ceiling((double)Items.Count / (double)PanelWidth) * IconH;
+        public void InsertTextItem(uint ID, string strText, float aspect) {
+            PanelItem pi = new TextPanelItem(strText, ID);
+            Items.Add(pi);
+            UpdatePanelDimensions();
         }
-        public void SetWidth(int w) {
-            PanelWidth = w;
-            PanelW = Math.Min(Items.Count, PanelWidth) * IconW;
-            float nRows = (float)Math.Ceiling((double)(Items.Count) / (double)PanelWidth);
-            PanelH = nRows * IconH;
-            // Reposition all items
-            int col = 0, row = 0;
+
+        private void UpdatePanelDimensions() {
+            PanelW = 0f;
+            PanelH = 0f;
             foreach (PanelItem pi in Items) {
-                float IconX = PanelX + (col * IconW);
-                float IconY = PanelY + (row * IconH);
-                pi.SetPos(IconX, IconY);
-                col++;
-                if (col == PanelWidth) {
-                    col = 0;
-                    row++;
-                }
+                if (Direction == PanelDirection.Horizontal) { PanelW += pi.Width(IconW, IconH); PanelH = Math.Max(PanelH, pi.Height(IconW, IconH)); }
+                else { PanelW = Math.Max(PanelW, pi.Width(IconW, IconH)); PanelH += pi.Height(IconW, IconH); }
             }
         }
         public PanelItem? HoverItem { get; private set; } = null;
@@ -86,11 +62,6 @@ namespace SpaceMercs {
             get {
                 if (HoverItem == null) return -1;
                 return (int)HoverItem.ID;
-            }
-        }
-        public float Height {
-            get {
-                return (float)Math.Max(1.0, Math.Ceiling((double)Items.Count / (double)PanelWidth)) * IconH;
             }
         }
         public void SetIconScale(float sc) {
@@ -101,34 +72,27 @@ namespace SpaceMercs {
                 IconW = sc * 0.08f;
             }
             IconH = sc * 0.08f;
-            foreach (PanelItem pi in Items) {
-                pi.SetIconSize(IconW, IconH);
-            }
-        }
-        public float ZDepth {
-            set {
-                _ZDepth = value;
-                foreach (PanelItem pi in Items) {
-                    pi.SetZDist(_ZDepth + 0.1f);
-                }
-            }
         }
         public void SetPosition(float xx, float yy) {
             PanelX = xx;
             PanelY = yy;
-            SetWidth(PanelWidth);
+        }
+        public void SetClick(int x, int y) {
+            ClickX = x;
+            ClickY = y;
         }
 
+        #region GUIObject
         // Display the panel
         public override void Display(int mx, int my, ShaderProgram prog) {
             if (!Active) return;
-            double xx = (double)mx / (double)Window.Size.X;
-            double yy = (double)my / (double)Window.Size.Y;
-            HoverItem = DisplayAndCalculateMouseHover(prog, xx, yy);
+            double fmousex = (double)mx / (double)Window.Size.X;
+            double fmousey = (double)my / (double)Window.Size.Y;
+            HoverItem = DisplayAndCalculateMouseHover(prog, fmousex, fmousey);
         }
 
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
-        public PanelItem? DisplayAndCalculateMouseHover(ShaderProgram prog, double xx, double yy) {
+        public PanelItem? DisplayAndCalculateMouseHover(ShaderProgram prog, double fmousex, double fmousey) {
             PanelItem? piHover = null;
             float BorderX = 1f / (float)Window.Size.X;
             BorderY = 1f / (float)Window.Size.Y;
@@ -148,11 +112,14 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             // Draw the icons
+            float px = PanelX, py = PanelY;
             foreach (PanelItem pi in Items) {
-                PanelItem? piHover2 = pi.Draw(prog, xx, yy, this);
+                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(IconW, IconH), _ZDepth + 0.01f);
                 if (piHover2 is not null) {
                     piHover = piHover2;
                 }
+                if (Direction == PanelDirection.Horizontal) px += pi.Width(IconW, IconH);
+                else py += pi.Height(IconW, IconH);
             }
 
             // Draw the frame
@@ -163,11 +130,6 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Lines.BindAndDraw();
-
-            // Draw the selected icon frame
-            if (piHover is not null && piHover.Enabled) {
-                piHover.DrawSelectionFrame(prog);
-            }
 
             // Return if we're hovering over anything
             return piHover;
@@ -210,5 +172,7 @@ namespace SpaceMercs {
             }
             return false;
         }
+
+        #endregion // GUIObject
     }
 }

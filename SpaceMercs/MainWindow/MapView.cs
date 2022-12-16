@@ -451,6 +451,7 @@ namespace SpaceMercs.MainWindow {
                 msgBox.CaptureClick((int)MousePosition.X, (int)MousePosition.Y);
                 return;
             }
+
             long clickGap = swLastClick.ElapsedMilliseconds;
             swLastClick.Restart();
             if (e.Button == MouseButton.Left && clickGap < DoubleClickTime) {
@@ -475,6 +476,23 @@ namespace SpaceMercs.MainWindow {
                 if (gbScan.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (aoHover != null) aoSelected = aoHover;
                 SetSelection();
+                if (gpMenu.HoverID != -1) {
+                    switch ((uint)gpMenu.HoverID) {
+                        case I_New:
+                            if (GalaxyMap.bMapSetup) {
+                                msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
+                            }
+                            else NewGame_Continue();
+                            return;
+                        case I_Load: LoadGame(); return;
+                        case I_Save: SaveGame(); return;
+                        case I_Exit:
+                            if (GalaxyMap.bMapSetup == true) {
+                                msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
+                            }
+                            return;
+                    }
+                }
             }
         }
         protected override void OnMouseWheel(MouseWheelEventArgs e) {

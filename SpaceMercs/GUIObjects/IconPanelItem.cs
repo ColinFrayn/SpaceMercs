@@ -6,13 +6,16 @@ using SpaceMercs.Graphics.Shapes;
 namespace SpaceMercs {
     class IconPanelItem : PanelItem {
 
-        public IconPanelItem(TexSpecs ts, Vector4 iconRect, bool _enabled, uint _ID, float zd) : base(ts, iconRect, _enabled, _ID, zd) {
-            // Nothing to see here
+        public IconPanelItem(TexSpecs ts, bool _enabled, uint _ID) : base(ts, _enabled, _ID) {
         }
 
-        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent) {
+        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist) {
             PanelItem? piHover = null;
             float BorderY = gpParent.BorderY;
+            float iconX = itemPos.X;
+            float iconY = itemPos.Y;
+            float iconW = itemSize.X;
+            float iconH = itemSize.Y;
 
             if (xx >= iconX && xx <= iconX + iconW && yy >= iconY - BorderY && yy <= iconY + iconH + BorderY) {
                 piHover = this;
@@ -37,7 +40,7 @@ namespace SpaceMercs {
             prog.SetUniform("texPos", texX, texY);
             prog.SetUniform("texScale", texW, texH);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(iconX, iconY, ZDist);
+            Matrix4 translateM = Matrix4.CreateTranslation(iconX, iconY, zdist);
             Matrix4 scaleM = Matrix4.CreateScale(iconW, iconH, 1f);
             Matrix4 modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
@@ -48,7 +51,7 @@ namespace SpaceMercs {
                 prog.SetUniform("texPos", ovTX, ovTY);
                 prog.SetUniform("texScale", ovTW, ovTH);
                 GL.BindTexture(TextureTarget.Texture2D, ovTexID);
-                translateM = Matrix4.CreateTranslation(iconX + (iconW * ovX), iconY + (iconH * ovY), ZDist + 0.001f);
+                translateM = Matrix4.CreateTranslation(iconX + (iconW * ovX), iconY + (iconH * ovY), zdist + 0.001f);
                 scaleM = Matrix4.CreateScale(iconW * ovW, iconH * ovH, 1f);
                 modelM = scaleM * translateM;
                 prog.SetUniform("model", modelM);
@@ -80,14 +83,14 @@ namespace SpaceMercs {
                     prog.SetUniform("flatColour", new Vector4(0.6f, 0.6f, 0.6f, 1f));
                     scaleM = Matrix4.CreateScale(iconW * 0.25f, iconH * 0.25f, 1f);
                     if (iconY > 0.5f) {
-                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 0.15f), ZDist + 0.01f);
+                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 0.15f), zdist + 0.01f);
                         modelM = scaleM * translateM;
                         prog.SetUniform("model", modelM);
                         GL.UseProgram(prog.ShaderProgramHandle);
                         Triangle.Flat.BindAndDraw();
                     }
                     else {
-                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 1.0f), ZDist + 0.01f);
+                        translateM = Matrix4.CreateTranslation(iconX + (iconW * 0.5f), iconY + (iconH * 1.0f), zdist + 0.01f);
                         modelM = scaleM * translateM;
                         prog.SetUniform("model", modelM);
                         GL.UseProgram(prog.ShaderProgramHandle);
@@ -95,22 +98,12 @@ namespace SpaceMercs {
                     }
                 }
             }
+            if (piHover != null) DrawSelectionFrame(prog, iconX, iconY, iconW, iconH, zdist);
             return piHover;
         }
 
-        public override void SetPos(float x, float y) {
-            iconX = x;
-            iconY = y;
-        }
-        public override void SetIconSize(float w, float h) {
-            iconW = w;
-            iconH = h;
-        }
         public override void SetSubPanel(GUIPanel? gpl) {
             SubPanel = gpl;
-        }
-        public override void SetZDist(float zd) {
-            ZDist = zd;
         }
         public override void SetOverlay(TexSpecs ts, Vector4 dimRect) {
             ovTexID = ts.ID;
@@ -122,6 +115,12 @@ namespace SpaceMercs {
             ovY = dimRect.Y;
             ovW = dimRect.Z;
             ovH = dimRect.W;
+        }
+        public override float Width(float tw, float th) {
+            return tw;
+        }
+        public override float Height(float tw, float th) {
+            return th;
         }
     }
 }

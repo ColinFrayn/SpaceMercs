@@ -16,10 +16,14 @@ namespace SpaceMercs.MainWindow {
 
         // GUIPanel for main menu
         public const uint I_Menu = 11000;
-        public const uint I_File = 11001;
-        public const uint I_Mission = 11002;
-        public const uint I_View = 11003;
-        public const uint I_Options = 11004;
+        public const uint I_File = 11010;
+        public const uint I_New = 11011;
+        public const uint I_Load = 11012;
+        public const uint I_Save = 11013;
+        public const uint I_Exit = 11014;
+        public const uint I_Mission = 11020;
+        public const uint I_View = 11030;
+        public const uint I_Options = 11040;
 
         // Draw the GUI elements
         private void DrawGUI() {
@@ -293,30 +297,27 @@ namespace SpaceMercs.MainWindow {
             // --- Configure the main menu ---
 
             // File menu
-            gpFileMenu = new GUIPanel(this, GUIPanel.PanelDirection.Horizontal);
-            gpFileMenu.SetPosition(0.08f, 0.23f);
-            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
-            gpFileMenu.InsertIcon(I_File, ts, true, null);
-            gpFileMenu.InsertIcon(I_File, ts, true, null);
-            gpFileMenu.InsertIcon(I_File, ts, true, null);
+            gpFileMenu = new GUIPanel(this, 0.08f, 0.23f, GUIPanel.PanelDirection.Vertical);
+            gpFileMenu.InsertTextItem(I_New, "New Game", Aspect);
+            gpFileMenu.InsertTextItem(I_Load, "Load Game", Aspect);
+            gpFileMenu.InsertTextItem(I_Save, "Save Game", Aspect);
+            gpFileMenu.InsertTextItem(I_Exit, "Exit Game", Aspect);
 
             // First level menus
-            gpSubMenu = new GUIPanel(this, GUIPanel.PanelDirection.Vertical);
-            gpSubMenu.SetPosition(0.01f, 0.23f);
-            ts = Textures.GetTexCoords(Textures.MiscTexture.File);
-            gpSubMenu.InsertIcon(I_File, ts, true, gpFileMenu);
+            gpSubMenu = new GUIPanel(this, 0.01f, 0.23f, GUIPanel.PanelDirection.Vertical);
+            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
+            gpSubMenu.InsertIconItem(I_File, ts, true, gpFileMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);
-            gpSubMenu.InsertIcon(I_View, ts, true, null);
+            gpSubMenu.InsertIconItem(I_View, ts, true, null);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-            gpSubMenu.InsertIcon(I_Options, ts, true, null);
+            gpSubMenu.InsertIconItem(I_Options, ts, true, null);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Mission);
-            gpSubMenu.InsertIcon(I_Mission, ts, false, null);
+            gpSubMenu.InsertIconItem(I_Mission, ts, false, null);
 
             // Top level menu
-            gpMenu = new GUIPanel(this);
-            gpMenu.SetPosition(0.01f, 0.15f);
+            gpMenu = new GUIPanel(this, 0.01f, 0.15f);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Menu);
-            gpMenu.InsertIcon(I_Menu, ts, true, gpSubMenu);
+            gpMenu.InsertIconItem(I_Menu, ts, true, gpSubMenu);
             gpMenu.Activate();
             gpSubMenu.Activate();
 
