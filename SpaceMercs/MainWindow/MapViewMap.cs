@@ -8,14 +8,15 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private float fMapViewZ, fMapViewX, fMapViewY;
         private bool bShowGridlines = true, bFadeUnvisited = false, bShowRangeCircles = false, bShowTradeRoutes = false, bShowFlags = true;
-        private int iMiscTexture = -1, iBuildingTexture = -1;
         VertexBuffer? mapLinesBuffer = null, hoverLinkBuffer = null;
         VertexArray? mapLinesArray = null, hoverLinkArray = null;
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
 
+        // Load in the default texture bitmaps
         // Build texture maps for the stars' radial brightness maps
-        // TODO : What is all this for??
         private void SetupMapTextures() {
+            return;
+
             double D = -0.7, D2 = -0.6;
             double RMin = 0.05;
             double RScale = Math.Pow(RMin, D) - 1.0;
@@ -46,8 +47,6 @@ namespace SpaceMercs.MainWindow {
                     Textures.byteShipHaloTexture[((y * Textures.ShipHaloTextureSize) + x) * 3 + 2] = val2;
                 }
             }
-            iMiscTexture = Textures.GetMiscTexture();
-            iBuildingTexture = Textures.GetBuildingTexture();
         }
 
         // Display the galaxy map on the screen
@@ -154,8 +153,10 @@ namespace SpaceMercs.MainWindow {
             // Setup basic lighting parameters (light colour is White by default)
             fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
             fullShaderProgram.SetUniform("ambient", 0.25f);
-            flatColourLitShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
-            flatColourLitShaderProgram.SetUniform("ambient", 0.25f);
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", true);
+            fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
 
             // Display all stars by sector
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {

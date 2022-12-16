@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
@@ -815,7 +816,6 @@ namespace SpaceMercs.MainWindow {
 
         // Show GUI elements in the overlay layer
         private void ShowOverlayGUI() {
-            SetupGUITextures();
             InitialiseGUIButtons();
             GL.MatrixMode(MatrixMode.Projection);
             //GL.LoadMatrix(ref ortho_projection);
@@ -941,10 +941,6 @@ namespace SpaceMercs.MainWindow {
                 GL.PopMatrix();
             }
         }
-        private void SetupGUITextures() {
-            if (iMiscTexture == -1) iMiscTexture = Textures.GetMiscTexture();
-            if (iItemTexture == -1) iItemTexture = Textures.GetItemTexture();
-        }
         private void InitialiseGUIButtons() {
             // Initialise all on startup
             if (!bGUIButtonsInitialised) {
@@ -954,31 +950,31 @@ namespace SpaceMercs.MainWindow {
                 SetupZoomToButtons();
 
                 // Direction Control buttons
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Left);
-                gbWest = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Left);
+                gbWest = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
                 lButtons.Add(gbWest);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Right);
-                gbEast = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Right);
+                gbEast = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
                 lButtons.Add(gbEast);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Up);
-                gbNorth = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Up);
+                gbNorth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
                 lButtons.Add(gbNorth);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Down);
-                gbSouth = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Down);
+                gbSouth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0.0, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
                 lButtons.Add(gbSouth);
 
                 // Misc controls
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Attack);
-                gbAttack = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierAttack, null);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+                gbAttack = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierAttack, null);
                 lButtons.Add(gbAttack);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-                gbUseItem = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierUseItems, null);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+                gbUseItem = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierUseItems, null);
                 lButtons.Add(gbUseItem);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
-                gbInventory = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierInventory, null);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
+                gbInventory = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 3) + (ButtonGap * 2), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierInventory, null);
                 lButtons.Add(gbInventory);
-                (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Search);
-                gbSearch = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierSearch, null);
+                ts = Textures.GetTexCoords(Textures.MiscTexture.Search);
+                gbSearch = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 4.5) + (ButtonGap * 4), 0.0, ButtonSize * 1.5, ButtonSize * 1.5, SelectedSoldierSearch, null);
                 lButtons.Add(gbSearch);
 
                 // Other buttons
@@ -1028,25 +1024,25 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void SetupZoomToButtons() {
-            (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Eye);
+            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);
             if (ThisMission.Soldiers.Count >= 1) {
                 if (gbZoomTo1 == null || gbZoomTo1.InternalData != ThisMission.Soldiers[0]) {
-                    gbZoomTo1 = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[0]);
+                    gbZoomTo1 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[0]);
                     if (!lButtons.Contains(gbZoomTo1)) lButtons.Add(gbZoomTo1);
                 }
                 if (ThisMission.Soldiers.Count >= 2) {
                     if (gbZoomTo2 == null || gbZoomTo2.InternalData != ThisMission.Soldiers[1]) {
-                        gbZoomTo2 = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[1]);
+                        gbZoomTo2 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[1]);
                         if (!lButtons.Contains(gbZoomTo2)) lButtons.Add(gbZoomTo2);
                     }
                     if (ThisMission.Soldiers.Count >= 3) {
                         if (gbZoomTo3 == null || gbZoomTo3.InternalData != ThisMission.Soldiers[2]) {
-                            gbZoomTo3 = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[2]);
+                            gbZoomTo3 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[2]);
                             if (!lButtons.Contains(gbZoomTo3)) lButtons.Add(gbZoomTo3);
                         }
                         if (ThisMission.Soldiers.Count >= 4) {
                             if (gbZoomTo4 == null || gbZoomTo4.InternalData != ThisMission.Soldiers[3]) {
-                                gbZoomTo4 = new GUIIconButton(this, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[3]);
+                                gbZoomTo4 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0.0, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[3]);
                                 if (!lButtons.Contains(gbZoomTo4)) lButtons.Add(gbZoomTo4);
                             }
                         }
@@ -1226,69 +1222,68 @@ namespace SpaceMercs.MainWindow {
             // Open doors
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.DoorHorizontal) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
-                gpSelect.InsertIcon(I_OpenDoor, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
+                gpSelect.InsertIcon(I_OpenDoor, ts, bEntityIsAdjacent, null);
             }
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.DoorVertical) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
-                gpSelect.InsertIcon(I_OpenDoor, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
+                gpSelect.InsertIcon(I_OpenDoor, ts, bEntityIsAdjacent, null);
             }
             // Close doors
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.OpenDoorHorizontal && CurrentLevel.GetEntityAt(hoverx, hovery) == null) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
-                gpSelect.InsertIcon(I_CloseDoor, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
+                gpSelect.InsertIcon(I_CloseDoor, ts, bEntityIsAdjacent, null);
             }
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.OpenDoorVertical && CurrentLevel.GetEntityAt(hoverx, hovery) == null) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
-                gpSelect.InsertIcon(I_CloseDoor, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEntityIsAdjacent, null);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
+                gpSelect.InsertIcon(I_CloseDoor, ts, bEntityIsAdjacent, null);
             }
             // Passable square
             if (Utils.IsPassable(CurrentLevel.Map[hoverx, hovery])) {
                 IEntity en = CurrentLevel.GetEntityAt(hoverx, hovery);
                 // Walk to this point
                 if (en == null) {
-                    (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Walk);
+                    TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Walk);
                     bool bIsInRange = DistMap[hoverx, hovery] != -1;
-                    gpSelect.InsertIcon(I_GoTo, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bIsInRange, null);
+                    gpSelect.InsertIcon(I_GoTo, ts, bIsInRange, null);
                 }
                 // Attack a creature
                 else if (en is Creature) {
-                    (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+                    TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
                     bool bEnabled = (bIsInRange && (s.Stamina >= s.AttackCost));
                     if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
-                    gpSelect.InsertIcon(I_Attack, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bEnabled, null);
+                    gpSelect.InsertIcon(I_Attack, ts, bEnabled, null);
                 }
             }
             // Click on self
             if (hoverx == s.X && hovery == s.Y) {
                 bool bHasUtilityItems = s.HasUtilityItems();
-                (float txr, float tyr) = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
+                TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
                 GUIPanel? gpItems = null;
                 if (bHasUtilityItems) {
                     bool bEnabled = s.Stamina >= s.UseItemCost;
                     gpItems = new GUIPanel(this);
                     // Set up list of items
                     foreach (ItemType it in s.GetUtilityItems()) {
-                        (float tx, float ty) = Textures.GetTexCoords(it);
-                        PanelItem ip = gpItems.InsertIcon(it.ItemID, iItemTexture, tx, ty, Textures.ItemTextureWidth, Textures.ItemTextureHeight, bEnabled, null);
+                        TexSpecs ts = Textures.GetTexCoords(it);
+                        PanelItem ip = gpItems.InsertIcon(it.ItemID, ts, bEnabled, null);
                         if (it.ItemEffect != null && !it.ItemEffect.SingleUse) {
-                            ip.SetOverlay(iMiscTexture, new Vector4(txr, tyr, Textures.MiscTextureWidth, Textures.MiscTextureHeight), new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
+                            ip.SetOverlay(tsr, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
                         }
                     }
                 }
-                (float txi, float tyi) = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
-                gpSelect.InsertIcon(I_UseItem, iMiscTexture, txi, tyi, Textures.MiscTextureWidth, Textures.MiscTextureHeight, bHasUtilityItems, gpItems);
+                TexSpecs tsi = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
+                gpSelect.InsertIcon(I_UseItem, tsi, bHasUtilityItems, gpItems);
             }
             if (gpSelect.Count == 0) {
                 gpSelect.Deactivate();
                 return;
             }
             gpSelect.Activate();
-            // TODO glMapView.Invalidate();
         }
 
         #region ButtonHandlers

@@ -1,17 +1,18 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-        private GUIPanel gpMenu, gpSubMenu;
+        private GUIPanel gpMenu, gpSubMenu, gpFileMenu;
         private readonly int iGUIHoverN = -1; // What is this??
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
         private AstronomicalObject lastAOHover = null;
+        private string DebugString = string.Empty; // DEBUG
 
         // GUIPanel for main menu
         public const uint I_Menu = 11000;
@@ -19,7 +20,6 @@ namespace SpaceMercs.MainWindow {
         public const uint I_Mission = 11002;
         public const uint I_View = 11003;
         public const uint I_Options = 11004;
-
 
         // Draw the GUI elements
         private void DrawGUI() {
@@ -36,7 +36,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f , Aspect, 0.01f, 0.01f);
+            TextRenderer.DrawAt(string.IsNullOrEmpty(DebugString) ? Const.dtTime.ToString("F") : DebugString, Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
@@ -272,39 +272,51 @@ namespace SpaceMercs.MainWindow {
             gbScan.SetPosition(0.23f, 0.07f);
             gbScan.SetSize(0.065f, 0.035f);
 
-            // Start a new game
+            // "Start a new game" button
             gbNewGame = new GUIButton("Start New Game", this, NewGame_Continue);
             gbNewGame.SetPosition(0.35f, 0.4f);
             gbNewGame.SetSize(0.3f, 0.08f);
             gbNewGame.Activate();
 
-            // Load a saved game
+            // "Load a saved game" button
             gbLoadGame = new GUIButton("Load Saved Game", this, LoadGame);
             gbLoadGame.SetPosition(0.35f, 0.55f);
             gbLoadGame.SetSize(0.3f, 0.08f);
             gbLoadGame.Activate();
 
-            // Exit the game
+            // "Exit the game" button
             gbExitGame = new GUIButton("Exit Game", this, ExitTheGame);
             gbExitGame.SetPosition(0.35f, 0.7f);
             gbExitGame.SetSize(0.3f, 0.08f);
             gbExitGame.Activate();
 
-            // Add the main menu
-            gpSubMenu = new GUIPanel(this);
-            gpSubMenu.SetPosition(0.01f, 0.22f);
-            (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.File);
-            gpSubMenu.InsertIcon(I_File, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Eye);
-            gpSubMenu.InsertIcon(I_View, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-            gpSubMenu.InsertIcon(I_Options, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
-            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Mission);
-            gpSubMenu.InsertIcon(I_Mission, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
+            // --- Configure the main menu ---
+
+            // File menu
+            gpFileMenu = new GUIPanel(this, GUIPanel.PanelDirection.Horizontal);
+            gpFileMenu.SetPosition(0.08f, 0.23f);
+            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
+            gpFileMenu.InsertIcon(I_File, ts, true, null);
+            gpFileMenu.InsertIcon(I_File, ts, true, null);
+            gpFileMenu.InsertIcon(I_File, ts, true, null);
+
+            // First level menus
+            gpSubMenu = new GUIPanel(this, GUIPanel.PanelDirection.Vertical);
+            gpSubMenu.SetPosition(0.01f, 0.23f);
+            ts = Textures.GetTexCoords(Textures.MiscTexture.File);
+            gpSubMenu.InsertIcon(I_File, ts, true, gpFileMenu);
+            ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);
+            gpSubMenu.InsertIcon(I_View, ts, true, null);
+            ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+            gpSubMenu.InsertIcon(I_Options, ts, true, null);
+            ts = Textures.GetTexCoords(Textures.MiscTexture.Mission);
+            gpSubMenu.InsertIcon(I_Mission, ts, false, null);
+
+            // Top level menu
             gpMenu = new GUIPanel(this);
             gpMenu.SetPosition(0.01f, 0.15f);
-            (tx, ty) = Textures.GetTexCoords(Textures.MiscTexture.Menu);
-            gpMenu.InsertIcon(I_Menu, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, gpSubMenu);
+            ts = Textures.GetTexCoords(Textures.MiscTexture.Menu);
+            gpMenu.InsertIcon(I_Menu, ts, true, gpSubMenu);
             gpMenu.Activate();
             gpSubMenu.Activate();
 

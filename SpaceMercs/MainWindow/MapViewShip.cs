@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -89,7 +90,7 @@ namespace SpaceMercs.MainWindow {
             GL.Translate(-fShipViewX, -fShipViewY, -fShipViewZ);
 
             // Draw the ship
-            PlayerTeam.PlayerShip.DrawSchematic(irHover, iBuildingTexture, bHoverHull);
+            PlayerTeam.PlayerShip.DrawSchematic(irHover, bHoverHull);
 
             // Draw any static GUI elements
             ShowShipGUI();
@@ -319,22 +320,22 @@ namespace SpaceMercs.MainWindow {
                 if (seHover == null) {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
                         GUIPanel buildingPanel = GenerateBuildingList();
-                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Build);
-                        gpSelect.InsertIcon(I_Build, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, buildingPanel);
+                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Build);
+                        gpSelect.InsertIcon(I_Build, ts, true, buildingPanel);
                     }
                 }
                 else {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
-                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
-                        gpSelect.InsertIcon(I_Salvage, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
+                        gpSelect.InsertIcon(I_Salvage, ts, true, null);
                     }
                     if (!bHoverHull && PlayerTeam.PlayerShip.GetCanDeactivateRoom(irContextRoom)) {
-                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
-                        gpSelect.InsertIcon(I_Disconnect, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
+                        gpSelect.InsertIcon(I_Disconnect, ts, true, null);
                     }
                     else if (!bHoverHull && !PlayerTeam.PlayerShip.GetIsRoomActive(irContextRoom)) {
-                        (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.Connect);
-                        gpSelect.InsertIcon(I_Connect, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, true, null);
+                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Connect);
+                        gpSelect.InsertIcon(I_Connect, ts, true, null);
                     }
                 }
                 gpSelect.Activate();
@@ -365,13 +366,13 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.PlayerShip.CostToBuildEquipment(se) > PlayerTeam.Cash) bAfford = false;
 
                 // Insert this icon & add to the tally
-                (float tx, float ty) = Textures.GetTexCoords(se);
-                gp.InsertIcon((uint)eno, iBuildingTexture, tx, ty, Textures.BuildingTextureWidth, Textures.BuildingTextureHeight, bAfford, null);
+                TexSpecs ts = Textures.GetTexCoords(se);
+                gp.InsertIcon((uint)eno, ts, bAfford, null);
                 count++;
             }
             if (count == 0) {
-                (float tx, float ty) = Textures.GetTexCoords(Textures.MiscTexture.None);
-                gp.InsertIcon(I_None, iMiscTexture, tx, ty, Textures.MiscTextureWidth, Textures.MiscTextureHeight, false, null);
+                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.None);
+                gp.InsertIcon(I_None, ts, false, null);
             }
             return gp;
         }

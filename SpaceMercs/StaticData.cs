@@ -48,7 +48,7 @@ namespace SpaceMercs {
       if (!LoadCreatureTypes()) return false;
 
       try {
-        Textures.InitialiseTextures(strGraphicsDir);
+        Textures.LoadTextureFiles(strGraphicsDir);
       }
       catch (Exception ex) {
         MessageBox.Show("Failed to load texture data : " + ex.Message, "Texture error", MessageBoxButtons.OK);

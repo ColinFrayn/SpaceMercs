@@ -18,12 +18,12 @@ namespace SpaceMercs {
         protected readonly float texX, texY, texW, texH;
         protected float iconX, iconY, iconW, iconH;
 
-        public PanelItem(int _texID, Vector4? texRect, Vector4? iconRect, bool _enabled, uint _ID, float zd) {
-            texID = _texID;
-            texX = texRect?.X ?? 0f;
-            texY = texRect?.Y ?? 0f;
-            texW = texRect?.Z ?? 0f;
-            texH = texRect?.W ?? 0f;
+        public PanelItem(TexSpecs? ts, Vector4? iconRect, bool _enabled, uint _ID, float zd) {
+            texID = ts?.ID ?? 0;
+            texX = ts?.X ?? 0f;
+            texY = ts?.Y ?? 0f;
+            texW = ts?.W ?? 0f;
+            texH = ts?.H ?? 0f;
             iconX = iconRect?.X ?? 0f;
             iconY = iconRect?.Y ?? 0f;
             iconW = iconRect?.Z ?? 0f;
@@ -49,8 +49,8 @@ namespace SpaceMercs {
         abstract public PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent);
         abstract public void SetPos(float x, float y);
         abstract public void SetIconSize(float w, float h);
-        abstract public void SetSubPanel(GUIPanel gpl);
+        abstract public void SetSubPanel(GUIPanel? gpl);
         abstract public void SetZDist(float zd);
-        abstract public void SetOverlay(int _texID, Vector4 texRect, Vector4 dimRect);
+        abstract public void SetOverlay(TexSpecs ts, Vector4 dimRect);
     }
 }

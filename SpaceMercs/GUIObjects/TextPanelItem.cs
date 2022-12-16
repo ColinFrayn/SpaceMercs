@@ -5,7 +5,7 @@ using SpaceMercs.Graphics;
 namespace SpaceMercs {
     class TextPanelItem : PanelItem {
 
-        public TextPanelItem(string strText, Vector4 iconRect, float zd) : base(0, null, iconRect, true, 0, zd) {
+        public TextPanelItem(string strText, Vector4 iconRect, float zd) : base(null, iconRect, true, 0, zd) {
             throw new NotImplementedException();
         }
 
@@ -67,19 +67,19 @@ namespace SpaceMercs {
             iconW = w;
             iconH = h;
         }
-        public override void SetSubPanel(GUIPanel gpl) {
+        public override void SetSubPanel(GUIPanel? gpl) {
             //SubPanel = gpl;
             throw new Exception("Shouldn't be setting sub panels on test icon items");
         }
         public override void SetZDist(float zd) {
             ZDist = zd;
         }
-        public override void SetOverlay(int iOvTexID, Vector4 texRect, Vector4 dimRect) {
-            ovTexID = iOvTexID;
-            ovTX = texRect.X;
-            ovTY = texRect.Y;
-            ovTW = texRect.Z;
-            ovTH = texRect.W;
+        public override void SetOverlay(TexSpecs ts, Vector4 dimRect) {
+            ovTexID = ts.ID;
+            ovTX = ts.X;
+            ovTY = ts.Y;
+            ovTW = ts.W;
+            ovTH = ts.H;
             ovX = dimRect.X;
             ovY = dimRect.Y;
             ovW = dimRect.Z;

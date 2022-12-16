@@ -2,24 +2,19 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel.Display: 
-- Add ability to arrange tiles vertically.
-- Foldout arrows are far too large and black.
+GUIPanel: 
 - Accept clicks
 
-IconPanelIcon:
-- Not displaying textured icons
-
-TextPanelIcon:
-- Implement
+TextPanelItem:
+- Implement?
 
 GUIPanel for main menu, LHS, 20% down : Display it
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
  Sub-menus are text or dialogs?:
   File -> New, Load, Save, Exit
-  Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
   View -> Ship, Team, Colony, Races
-  Options -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
+  Options (dialog?) -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
+  Mission (dialog?) -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
 
 TravelDetails.Display()
 
@@ -45,6 +40,7 @@ MapViewDrawMap
 
 GUIButton
 GUIMessageBox
+IconPanelIcon
 
 Updated text renderer to use TrueType fonts
 

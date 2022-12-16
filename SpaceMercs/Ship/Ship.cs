@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using SpaceMercs.Graphics;
 using System.IO;
 using System.Xml;
 
@@ -280,10 +281,10 @@ namespace SpaceMercs {
         }
 
         // Draw this ship on the ShipView dialog, including room types etc.
-        public void DrawSchematic(int iHover, int iBuildingTexture, bool bHoverHull) {
+        public void DrawSchematic(int iHover, bool bHoverHull) {
             double maxy = 0.0;
-            float tx = 0f, ty = 0f;
-            if (ArmourType != null) (tx,ty) = Textures.GetTexCoords(ArmourType);
+            TexSpecs? ts = null;
+            if (ArmourType != null) ts = Textures.GetTexCoords(ArmourType);
             // Background / corridors
             foreach (ShipRoomDesign r in Type.Rooms) {
                 GL.Color3(0.2, 0.2, 0.2);
@@ -296,19 +297,20 @@ namespace SpaceMercs {
                     GL.End();
                 }
                 else {
-                    if (ArmourType != null) {
-                        GL.BindTexture(TextureTarget.Texture2D, iBuildingTexture);
+                    if (ArmourType != null && ts != null) {
+                        GL.BindTexture(TextureTarget.Texture2D, ts.Value.ID);
                         GL.Enable(EnableCap.Texture2D);
                         GL.Color4(1.0, 1.0, 1.0, 0.7);
                         GL.Begin(BeginMode.Quads);
+                        float tx = ts.Value.X, ty = ts.Value.Y, tw = ts.Value.W, th = ts.Value.H;
                         for (int y = r.YPos - 1; y <= r.YPos + r.Height; y++) {
                             for (int x = r.XPos - 1; x <= r.XPos + r.Width; x++) {
                                 if (y == r.YPos - 1 || x == r.XPos - 1 || y == r.YPos + r.Height || x == r.XPos + r.Width) {
-                                    GL.TexCoord2(tx, ty + Textures.BuildingTextureHeight);
+                                    GL.TexCoord2(tx, ty + th);
                                     GL.Vertex3(x, y, 0.0);
-                                    GL.TexCoord2(tx + Textures.BuildingTextureWidth, ty + Textures.BuildingTextureHeight);
+                                    GL.TexCoord2(tx + tw, ty + th);
                                     GL.Vertex3(x + 1, y, 0.0);
-                                    GL.TexCoord2(tx + Textures.BuildingTextureWidth, ty);
+                                    GL.TexCoord2(tx + tw, ty);
                                     GL.Vertex3(x + 1, y + 1, 0.0);
                                     GL.TexCoord2(tx, ty);
                                     GL.Vertex3(x, y + 1, 0.0);
@@ -340,17 +342,18 @@ namespace SpaceMercs {
             // Display fillers
             if (Type.Fillers.Any()) {
                 if (ArmourType != null) {
-                    GL.BindTexture(TextureTarget.Texture2D, iBuildingTexture);
+                    GL.BindTexture(TextureTarget.Texture2D, ts.Value.ID);
                     GL.Enable(EnableCap.Texture2D);
                 }
                 else GL.Color3(0.2, 0.2, 0.2);
+                float tx = ts.Value.X, ty = ts.Value.Y, tw = ts.Value.W, th = ts.Value.H;
                 GL.Begin(BeginMode.Quads);
                 foreach (Point pt in Type.Fillers) {
-                    if (ArmourType != null) GL.TexCoord2(tx, ty + Textures.BuildingTextureHeight);
+                    if (ArmourType != null) GL.TexCoord2(tx, ty + th);
                     GL.Vertex3(pt.X, pt.Y, 0.0);
-                    if (ArmourType != null) GL.TexCoord2(tx + Textures.BuildingTextureWidth, ty + Textures.BuildingTextureHeight);
+                    if (ArmourType != null) GL.TexCoord2(tx + tw, ty + th);
                     GL.Vertex3(pt.X + 1, pt.Y, 0.0);
-                    if (ArmourType != null) GL.TexCoord2(ty + Textures.BuildingTextureWidth, ty);
+                    if (ArmourType != null) GL.TexCoord2(ty + tw, ty);
                     GL.Vertex3(pt.X + 1, pt.Y + 1, 0.0);
                     if (ArmourType != null) GL.TexCoord2(ty, ty);
                     GL.Vertex3(pt.X, pt.Y + 1, 0.0);
@@ -382,7 +385,7 @@ namespace SpaceMercs {
                 GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
                 GL.End();
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-                if (Equipment.ContainsKey(n)) DrawEquipment(n, iBuildingTexture);
+                if (Equipment.ContainsKey(n)) DrawEquipment(n, ts.Value.ID);
             }
 
             // Perimeter
@@ -456,17 +459,17 @@ namespace SpaceMercs {
             else dIconSize = 0.85;
             double sx = rd.XPos + (rd.Width - dIconSize) / 2.0;
             double sy = rd.YPos + (rd.Height - dIconSize) / 2.0;
-            (float tx, float ty) = Textures.GetTexCoords(se);
+            TexSpecs ts = Textures.GetTexCoords(se);
             GL.BindTexture(TextureTarget.Texture2D, iBuildingTexture);
             GL.Enable(EnableCap.Texture2D);
             GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(tx, ty + Textures.BuildingTextureHeight);
+            GL.TexCoord2(ts.X, ts.Y + ts.H);
             GL.Vertex3(sx, sy, 0.0);
-            GL.TexCoord2(tx + Textures.BuildingTextureWidth, ty + Textures.BuildingTextureHeight);
+            GL.TexCoord2(ts.X + ts.W, ts.Y + ts.H);
             GL.Vertex3(sx + dIconSize, sy, 0.0);
-            GL.TexCoord2(tx + Textures.BuildingTextureWidth, ty);
+            GL.TexCoord2(ts.X + ts.W, ts.Y);
             GL.Vertex3(sx + dIconSize, sy + dIconSize, 0.0);
-            GL.TexCoord2(tx, ty);
+            GL.TexCoord2(ts.X, ts.Y);
             GL.Vertex3(sx, sy + dIconSize, 0.0);
             GL.End();
             GL.Disable(EnableCap.Texture2D);
