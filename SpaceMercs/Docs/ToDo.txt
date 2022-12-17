@@ -3,10 +3,7 @@ ToDo List
 -------------------------------------------------
 
 GUIPanel
-- Hovering doesn't work (possibly only for text panels)
-
-TextPanelItem:
-- Draw it
+- Text panels are not the correct width. Why?
 
 GUIPanel for main menu, LHS, 20% down : Display it
 Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
@@ -41,6 +38,8 @@ MapViewDrawMap
 GUIButton
 GUIMessageBox
 IconPanelIcon
+TextPanelItem
+Multi-depth panels
 
 Updated text renderer to use TrueType fonts
 

@@ -40,21 +40,21 @@ namespace SpaceMercs {
             PanelItem icon = new IconPanelItem(spec, bEnabled, ID);
             icon.SetSubPanel(subPanel);
             Items.Add(icon);
-            UpdatePanelDimensions();
+            UpdatePanelDimensions(1f); // Aspect is irrelevant for icon panels
             return icon;
         }
         public void InsertTextItem(uint ID, string strText, float aspect) {
             PanelItem pi = new TextPanelItem(strText, ID);
             Items.Add(pi);
-            UpdatePanelDimensions();
+            UpdatePanelDimensions(aspect);
         }
 
-        private void UpdatePanelDimensions() {
+        private void UpdatePanelDimensions(float aspect) {
             PanelW = 0f;
             PanelH = 0f;
             foreach (PanelItem pi in Items) {
-                if (Direction == PanelDirection.Horizontal) { PanelW += pi.Width(IconW, IconH); PanelH = Math.Max(PanelH, pi.Height(IconW, IconH)); }
-                else { PanelW = Math.Max(PanelW, pi.Width(IconW, IconH)); PanelH += pi.Height(IconW, IconH); }
+                if (Direction == PanelDirection.Horizontal) { PanelW += pi.Width(IconW, IconH, aspect); PanelH = Math.Max(PanelH, pi.Height(IconW, IconH)); }
+                else { PanelW = Math.Max(PanelW, pi.Width(IconW, IconH, aspect)); PanelH += pi.Height(IconW, IconH); }
             }
         }
         public PanelItem? HoverItem { get; private set; } = null;
@@ -113,12 +113,13 @@ namespace SpaceMercs {
 
             // Draw the icons
             float px = PanelX, py = PanelY;
+            float aspect = (float)Window.Size.Y / (float)Window.Size.X;
             foreach (PanelItem pi in Items) {
-                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(IconW, IconH), _ZDepth + 0.01f);
+                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(PanelW, IconH), _ZDepth + 0.01f, aspect);
                 if (piHover2 is not null) {
                     piHover = piHover2;
                 }
-                if (Direction == PanelDirection.Horizontal) px += pi.Width(IconW, IconH);
+                if (Direction == PanelDirection.Horizontal) px += pi.Width(IconW, IconH, aspect);
                 else py += pi.Height(IconW, IconH);
             }
 

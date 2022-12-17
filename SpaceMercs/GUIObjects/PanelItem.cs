@@ -32,17 +32,17 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("lightEnabled", false);
             Matrix4 translateM = Matrix4.CreateTranslation(xpos, ypos, zdist + 0.1f);
-            Matrix4 scaleM = Matrix4.CreateScale(Width(iconW, iconH), Height(iconW, iconH), 1f);
+            Matrix4 scaleM = Matrix4.CreateScale(iconW, iconH, 1f);
             Matrix4 modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Lines.BindAndDraw();
         }
 
-        abstract public PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist);
+        abstract public PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect);
         abstract public void SetSubPanel(GUIPanel? gpl);
         abstract public void SetOverlay(TexSpecs ts, Vector4 dimRect);
-        abstract public float Width(float tw, float th);
+        abstract public float Width(float tw, float th, float aspect);
         abstract public float Height(float tw, float th);
     }
 }

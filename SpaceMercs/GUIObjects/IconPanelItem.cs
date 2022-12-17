@@ -5,11 +5,10 @@ using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class IconPanelItem : PanelItem {
-
         public IconPanelItem(TexSpecs ts, bool _enabled, uint _ID) : base(ts, _enabled, _ID) {
         }
 
-        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist) {
+        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect) {
             PanelItem? piHover = null;
             float BorderY = gpParent.BorderY;
             float iconX = itemPos.X;
@@ -61,9 +60,12 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
 
             if (SubPanel != null) {
+                bool bJustOpened = false;
                 // If this item hovered then open subpanel
                 if (piHover is not null) {
                     SubPanel.Activate();
+                    bJustOpened= true;
+                    
                 }
 
                 // Draw subpanel if it's active
@@ -71,7 +73,7 @@ namespace SpaceMercs {
                     PanelItem? piHover2 = SubPanel.DisplayAndCalculateMouseHover(prog, xx, yy);
                     if (piHover2 is not null) piHover = piHover2;
                     // If subpanel is active but not hovered then close it, unless we're hovering on empty squares
-                    if (piHover is null) {
+                    if (piHover is null && !bJustOpened) {
                         if (!SubPanel.IsHover(xx, yy)) {
                             SubPanel.Deactivate();
                         }
@@ -116,7 +118,7 @@ namespace SpaceMercs {
             ovW = dimRect.Z;
             ovH = dimRect.W;
         }
-        public override float Width(float tw, float th) {
+        public override float Width(float tw, float th, float aspect) {
             return tw;
         }
         public override float Height(float tw, float th) {

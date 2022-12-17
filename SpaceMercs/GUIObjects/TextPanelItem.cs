@@ -1,71 +1,81 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class TextPanelItem : PanelItem {
         private readonly TextMeasure measure;
+        private string Text;
+        private const float TextSizeScale = 0.4f;
 
         public TextPanelItem(string strText, uint _id) : base(null, true, _id) {
             measure = TextRenderer.MeasureText(strText);
+            Text = strText;
         }
 
-        public override PanelItem Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist) {
+        public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect) {
             PanelItem? piHover = null;
             double BorderY = gpParent.BorderY;
-            float iconX = itemPos.X;
-            float iconY = itemPos.Y;
-            float iconW = itemSize.X;
-            float iconH = itemSize.Y;
-            if (xx >= iconX && xx <= iconX + iconW && yy >= iconY - BorderY && yy <= iconY + iconH + BorderY) {
+            float itemX = itemPos.X;
+            float itemY = itemPos.Y;
+            float itemW = itemSize.X;
+            float itemH = itemSize.Y;
+
+            if (xx >= itemX && xx <= itemX + itemW && yy >= itemY - BorderY && yy <= itemY + itemH + BorderY) {
                 piHover = this;
             }
-            
-            // TODO
 
             if (Enabled) {
                 if (piHover != null) {
-                    GL.Color3(1.0, 1.0, 1.0);
+                    prog.SetUniform("flatColour", new Vector4(0.5f, 0.5f, 0.5f, 1f));
                 }
                 else {
-                    GL.Color3(0.8, 0.8, 0.8);
+                    prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
                 }
             }
-            else {
-                GL.Color3(0.3, 0.3, 0.3);
-            }
+
+            // Draw the background
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("lightEnabled", false);
+            Matrix4 translateM = Matrix4.CreateTranslation(itemX, itemY, zdist);
+            Matrix4 scaleM = Matrix4.CreateScale(itemW, itemH, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
+
             // Draw the text string
-            GL.Enable(EnableCap.Texture2D);
-            GL.BindTexture(TextureTarget.Texture2D, texID);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(texX, texY);
-            GL.Vertex3(iconX, iconY, zdist);
-            GL.TexCoord2(texX + texW, texY);
-            GL.Vertex3(iconX + iconW, iconY, zdist);
-            GL.TexCoord2(texX + texW, texY + texH);
-            GL.Vertex3(iconX + iconW, iconY + iconH, zdist);
-            GL.TexCoord2(texX, texY + texH);
-            GL.Vertex3(iconX, iconY + iconH, zdist);
-            GL.End();
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.CentreLeft,
+                Aspect = aspect,
+                TextColour = Color.White,
+                XPos = itemX + (itemH/8f),
+                YPos = itemY + (itemH/2f),
+                ZPos = zdist + 0.01f,
+                Scale = itemH * TextSizeScale
+            };
+            TextRenderer.DrawWithOptions(Text, tro);
+
             if (ovTexID != -1) {
+                GL.ActiveTexture(TextureUnit.Texture0);
+                GL.BindTexture(TextureTarget.Texture2D, texID);
+                prog.SetUniform("textureEnabled", true);
+                prog.SetUniform("texPos", ovTX, ovTY);
+                prog.SetUniform("texScale", ovTW, ovTH);
                 GL.BindTexture(TextureTarget.Texture2D, ovTexID);
-                GL.Begin(BeginMode.Quads);
-                GL.TexCoord2(ovTX, ovTY);
-                GL.Vertex3(iconX + (iconW * ovX), iconY + (iconH * ovY), zdist + 0.0001);
-                GL.TexCoord2(ovTX + ovTW, ovTY);
-                GL.Vertex3(iconX + (iconW * ovX) + (iconW * ovW), iconY + (iconH * ovY), zdist + 0.0001);
-                GL.TexCoord2(ovTX + ovTW, ovTY + ovTH);
-                GL.Vertex3(iconX + (iconW * ovX) + (iconW * ovW), iconY + (iconH * ovY) + (iconH * ovH), zdist + 0.0001);
-                GL.TexCoord2(ovTX, ovTY + ovTH);
-                GL.Vertex3(iconX + (iconW * ovX), iconY + (iconH * ovY) + (iconH * ovH), zdist + 0.0001);
-                GL.End();
+                translateM = Matrix4.CreateTranslation(itemX + (itemW * ovX), itemY + (itemH * ovY), zdist + 0.001f);
+                scaleM = Matrix4.CreateScale(itemW * ovW, itemH * ovH, 1f);
+                modelM = scaleM * translateM;
+                prog.SetUniform("model", modelM);
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Textured.BindAndDraw();
             }
-            GL.Disable(EnableCap.Texture2D);
 
             if (SubPanel != null) {
                 throw new Exception("Text Panel shouldn't have sub panel");
             }
-            if (piHover != null) DrawSelectionFrame(prog, iconX, iconY, iconW, iconH, zdist);
+            if (piHover != null) DrawSelectionFrame(prog, itemX, itemY, itemW, itemH, zdist);
             return piHover;
         }
         public override void SetSubPanel(GUIPanel? gpl) {
@@ -82,8 +92,8 @@ namespace SpaceMercs {
             ovW = dimRect.Z;
             ovH = dimRect.W;
         }
-        public override float Width(float tw, float th) {
-            return measure.Width * th / ((th/tw) * TextRenderer.FontSize);
+        public override float Width(float tw, float th, float aspect) {
+            return measure.Width * th * TextSizeScale / (aspect * TextRenderer.FontSize);
         }
         public override float Height(float tw, float th) {
             return th;

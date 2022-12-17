@@ -297,7 +297,7 @@ namespace SpaceMercs.MainWindow {
             // --- Configure the main menu ---
 
             // File menu
-            gpFileMenu = new GUIPanel(this, 0.08f, 0.23f, GUIPanel.PanelDirection.Vertical);
+            gpFileMenu = new GUIPanel(this, 0.07f, 0.23f, GUIPanel.PanelDirection.Vertical);
             gpFileMenu.InsertTextItem(I_New, "New Game", Aspect);
             gpFileMenu.InsertTextItem(I_Load, "Load Game", Aspect);
             gpFileMenu.InsertTextItem(I_Save, "Save Game", Aspect);
