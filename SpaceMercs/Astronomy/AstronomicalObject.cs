@@ -19,7 +19,7 @@ namespace SpaceMercs {
     protected byte[]? texture;
     protected int iTexture;
     public int ID;
-    public abstract double DrawScale { get; }
+    public abstract float DrawScale { get; }
 
     public AstronomicalObject() {
       iTexture = -1;

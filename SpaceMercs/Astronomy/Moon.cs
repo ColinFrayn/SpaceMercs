@@ -8,7 +8,7 @@ using System.Xml;
 namespace SpaceMercs {
   class Moon : HabitableAO {
     public Planet Parent { get; set; }
-    public override double DrawScale { get { return Math.Sqrt(radius / 1000.0) / 50.0; } }
+    public override float DrawScale { get { return (float)Math.Sqrt(radius / 1000.0) / 50f; } }
     
     public Moon(int _seed) {
       Seed = _seed;

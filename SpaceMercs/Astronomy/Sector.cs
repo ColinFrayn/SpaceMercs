@@ -1,16 +1,14 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System;
 using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
     class Sector {
         private readonly List<Star> Stars = new List<Star>();
-        public Race Inhabitant = null;
+        public Race? Inhabitant = null;
         public int SectorX { get; private set; }
         public int SectorY { get; private set; }
         public Map ParentMap { get; private set; }
@@ -80,8 +78,8 @@ namespace SpaceMercs {
                 Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos);
 
                 // Scale this star to its actual size
-                double StarScale = st.DrawScale * 0.1;
-                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
+                float StarScale = st.DrawScale * 0.1f;
+                Matrix4 scaleM = Matrix4.CreateScale(StarScale);
                 Matrix4 modelM = scaleM * translateM;
 
                 // Work out the degree of detail to show in this star

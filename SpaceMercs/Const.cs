@@ -187,12 +187,12 @@ namespace SpaceMercs {
     public const float  MaximumScrollRange = 75.0f;
 
     // System viewer settings
-    public const double SystemViewDist = 20.0;
-    public const double PlanetScale = 0.2;
-    public const double MoonScale = 0.7;  // Multiplied by planet scale
-    public const double SystemViewSelectionTolerance = 1.2;
-    public const double MoonGap = 6.5; // Gap from planet to first displayed moon
-    public const double DrawBattleScale = 0.15 / 20000.0;  // Scale for ships drawn in the travel battle
+    public const float SystemViewDist = 20f;
+    public const float PlanetScale = 0.2f;
+    public const float MoonScale = 0.7f;  // Multiplied by planet scale
+    public const float SystemViewSelectionTolerance = 1.2f;
+    public const float MoonGap = 6.5f; // Gap from planet to first displayed moon
+    public const float DrawBattleScale = 0.15f / 20000f;  // Scale for ships drawn in the travel battle
 
     // Ship viewer settings
     public const float  MinimumShipViewZ = 20.0f;

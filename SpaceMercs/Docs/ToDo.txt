@@ -2,9 +2,15 @@
 ToDo List
 -------------------------------------------------
 
+MapViewMap
+- Faded out planets have vanished : Z-limit issue ? Not sure - scroll out...
+
 MapViewSystem
+- Display the actual planets
 
 MapViewShip
+
+IconPanelItem : Should scale dimensions by aspect
 
 TravelDetails.Display()
 

@@ -15,7 +15,7 @@ namespace SpaceMercs {
     public double tempbase;
     private readonly BackgroundWorker bw;
     private bool bDrawing = false, bGenerating = false;
-    public override double DrawScale { get { return Math.Pow(radius / 1000.0, 0.4) / 25.0; } }
+    public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
 
     public Planet(int _seed) {
       Moons = new List<Moon>();
