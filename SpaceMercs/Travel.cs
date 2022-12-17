@@ -167,12 +167,10 @@ namespace SpaceMercs {
                     if (PlayerTeam.CurrentMission != null) {
                         dMissionElapsed = 0.0;
                         EncounterCount++;
-                        ParentView.RefreshView();
                         PlayerTeam.PlayerShip.InitialiseForBattle();
                         bSurrendered = false;
                         if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
                             RunBoardingPartyMission(PlayerTeam.CurrentMission);
-                            ParentView.RefreshView();
                             return;
                         }
                         if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) dSep = 18000.0;
@@ -187,13 +185,11 @@ namespace SpaceMercs {
                     dElapsed = dTravelTime;
                     clockTick.Stop();
                     Const.dtTime = dtStart.AddSeconds(dElapsed);
-                    ParentView.RefreshView();
                     ParentView.ArriveAt(aoTravelTo);
                     return;
                 }
                 Const.dtTime = dtStart.AddSeconds(dElapsed);
             }
-            ParentView.RefreshView();
         }
 
         // Run a clock tick for the encounter

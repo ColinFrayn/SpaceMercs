@@ -385,7 +385,7 @@ namespace SpaceMercs {
                 GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
                 GL.End();
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-                if (Equipment.ContainsKey(n)) DrawEquipment(n, ts.Value.ID);
+                if (Equipment.ContainsKey(n)) DrawEquipment(n);
             }
 
             // Perimeter
@@ -450,7 +450,7 @@ namespace SpaceMercs {
         }
 
         // Draw the equipment in a room
-        private void DrawEquipment(int id, int iBuildingTexture) {
+        private void DrawEquipment(int id) {
             if (!Equipment.ContainsKey(id)) throw new Exception("Attempting to draw non-existent ship equipment!");
             ShipEquipment se = Equipment[id].Item1;
             ShipRoomDesign rd = Type.Rooms[id];
@@ -460,7 +460,7 @@ namespace SpaceMercs {
             double sx = rd.XPos + (rd.Width - dIconSize) / 2.0;
             double sy = rd.YPos + (rd.Height - dIconSize) / 2.0;
             TexSpecs ts = Textures.GetTexCoords(se);
-            GL.BindTexture(TextureTarget.Texture2D, iBuildingTexture);
+            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
             GL.Enable(EnableCap.Texture2D);
             GL.Begin(BeginMode.Quads);
             GL.TexCoord2(ts.X, ts.Y + ts.H);

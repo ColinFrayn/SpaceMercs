@@ -35,7 +35,7 @@ namespace SpaceMercs.MainWindow {
         public Travel TravelDetails { get; private set; }
 
         // Macros
-        public float Aspect { get { return bLoaded ? (float)Size.X / (float)Size.Y : 1f; } }
+        public float Aspect { get { return (float)Size.X / (float)Size.Y; } }
         private Star? CurrentSystem { get { return PlayerTeam?.CurrentPosition?.GetSystem(); } }
 
         // Graphics
@@ -47,7 +47,6 @@ namespace SpaceMercs.MainWindow {
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
             CenterWindow();
-            DisableMenus();
 
             // Load static data and close if this fails
             if (!StaticData.LoadAll()) this.Close();
@@ -64,7 +63,7 @@ namespace SpaceMercs.MainWindow {
             IsVisible = true;
             fMapViewZ = Const.InitialMapViewZ;
             fMapViewX = fMapViewY = 0;
-            bShowGridlines = true;
+            bShowGridLines = true;
             bFadeUnvisited = true;
             bShowRangeCircles = true;
             bShowTradeRoutes = true;
@@ -362,8 +361,8 @@ namespace SpaceMercs.MainWindow {
         }
         private void GetKeyboardInput_MapView() {
             if (IsKeyPressed(Keys.G)) {  // Toggle on/off gridlines
-                if (bShowGridlines) { bShowGridlines = false; }
-                else { bShowGridlines = true; }
+                if (bShowGridLines) { bShowGridLines = false; }
+                else { bShowGridLines = true; }
             }
             if (IsKeyPressed(Keys.V)) {  // Toggle on/off fading of unvisited stars
                 if (bFadeUnvisited) { bFadeUnvisited = false; }
@@ -476,23 +475,7 @@ namespace SpaceMercs.MainWindow {
                 if (gbScan.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (aoHover != null) aoSelected = aoHover;
                 SetSelection();
-                if (gpMenu.HoverID != -1) {
-                    switch ((uint)gpMenu.HoverID) {
-                        case I_New:
-                            if (GalaxyMap.bMapSetup) {
-                                msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
-                            }
-                            else NewGame_Continue();
-                            return;
-                        case I_Load: LoadGame(); return;
-                        case I_Save: SaveGame(); return;
-                        case I_Exit:
-                            if (GalaxyMap.bMapSetup == true) {
-                                msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
-                            }
-                            return;
-                    }
-                }
+                CheckMenuClick();
             }
         }
         protected override void OnMouseWheel(MouseWheelEventArgs e) {
@@ -547,6 +530,50 @@ namespace SpaceMercs.MainWindow {
                 }
             }
         }
+        private void CheckMenuClick() {
+            if (gpMenu.HoverID == -1) return;
+            switch ((uint)gpMenu.HoverID) {
+                case I_New:
+                    if (GalaxyMap.bMapSetup) {
+                        msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
+                    }
+                    else NewGame_Continue();
+                    return;
+                case I_Load: LoadGame(); return;
+                case I_Save: SaveGame(); return;
+                case I_Exit:
+                    if (GalaxyMap.bMapSetup == true) {
+                        msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
+                    }
+                    return;
+                case I_ViewShip:
+                    if (GalaxyMap.bMapSetup) SetupShipView();
+                    return;
+                case I_ViewTeam:
+                    if (!GalaxyMap.bMapSetup) return;
+                    TeamView tv = new TeamView(PlayerTeam);
+                    tv.ShowDialog();
+                    return;
+                case I_ViewColony:
+                    if (!GalaxyMap.bMapSetup) return;
+                    if (PlayerTeam!.CurrentPosition.BaseSize == 0) return;
+                    ColonyView cv = new ColonyView(PlayerTeam, RunMission);
+                    cv.Show();
+                    return;
+                case I_ViewRaces:
+                    if (!GalaxyMap.bMapSetup) return;
+                    RaceView rv = new RaceView();
+                    rv.Show();
+                    return;
+                case I_OptionsLabels: bShowLabels = !bShowLabels; return;
+                case I_OptionsGridLines: bShowGridLines = !bShowGridLines; return;
+                case I_OptionsFadeUnvisited: bFadeUnvisited = !bFadeUnvisited; return;
+                case I_OptionsRangeCircles: bShowRangeCircles = !bShowRangeCircles; return;
+                case I_OptionsTradeRoutes: bShowTradeRoutes = !bShowTradeRoutes; return;
+                case I_OptionsFlags: bShowFlags = !bShowFlags; return;
+                case I_OptionsColonies: bShowColonies = !bShowColonies; return;
+            }
+        }
         #endregion // Input Handling
 
         #region Game Management
@@ -561,15 +588,9 @@ namespace SpaceMercs.MainWindow {
             PlayerTeam = new Team(ng, StaticData.Races[0]);
             if (PlayerTeam.CurrentPosition == null || PlayerTeam.CurrentPosition.Colony == null) throw new Exception("Did not set up PlayerTeam correctly - not at home planet!");
             PlayerTeam.CurrentPosition.Colony.UpdateStock(PlayerTeam);
-            SetupOptionsMenu();
-            // TODO glMapView.Invalidate();
-            // TODO saveToolStripMenuItem.Enabled = true;
         }
 
         // External triggers
-        public void RefreshView() {
-            // TODO glMapView.Invalidate();
-        }
         private void NewGame_Continue() {
             // Set up the new game dialog box
             NewGame ng = new NewGame();
@@ -579,7 +600,6 @@ namespace SpaceMercs.MainWindow {
                     MakeCurrent();
                     GalaxyMap.Generate(ng);
                     SetupNewGame(ng);
-                    EnableMenus();
                     SetAOButtonsOnGUI(aoSelected);
                 }
                 catch (Exception ex) {
@@ -635,13 +655,11 @@ namespace SpaceMercs.MainWindow {
                     aoSelected = null;
                     aoHover = null;
                     fMapViewZ = Const.InitialMapViewZ;
-                    EnableMenus();
                     bLoaded = true;
                     RecentlyVisited.Clear();
 
                     // Close down any windows
                     CloseAllDialogs();
-                    SetupOptionsMenu();
 
                     // Zoom to current location
                     SystemStar = PlayerTeam.CurrentPosition.GetSystem();
@@ -699,169 +717,5 @@ namespace SpaceMercs.MainWindow {
         private void SetSelection() {
             SetAOButtonsOnGUI(aoSelected);
         }
-
-        #region Menu Code
-        // Disable/enable the game menus
-        private void DisableMenus() {
-            // TODO saveToolStripMenuItem.Enabled = false;
-            // TODO shipToolStripMenuItem.Enabled = false;
-            // TODO teamToolStripMenuItem.Enabled = false;
-            // TODO colonyToolStripMenuItem.Enabled = false;
-            // TODO racesToolStripMenuItem.Enabled = false;
-        }
-        private void EnableMenus() {
-            // TODO saveToolStripMenuItem.Enabled = true;
-            // TODO shipToolStripMenuItem.Enabled = true;
-            // TODO teamToolStripMenuItem.Enabled = true;
-            // TODO colonyToolStripMenuItem.Enabled = true;
-            // TODO racesToolStripMenuItem.Enabled = true;
-        }
-
-        // Display the "About" box
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            MessageBox.Show($"SpaceMercs v{Const.strVersion}\n(c) 2016-{DateTime.Now.Year} Colin Frayn\nwww.frayn.net", "About SpaceMercs", MessageBoxButtons.OK);
-        }
-
-        #region File Menu
-        private void newToolStripMenuItem_Click(object sender, EventArgs e) {
-            // Need to check to see if we already have a map set up
-            if (GalaxyMap.bMapSetup) {
-                msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
-            }
-        }
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
-            LoadGame();
-        }
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            SaveGame();
-        }
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            // Need to check to see if we already have a map set up
-            if (GalaxyMap.bMapSetup == true) {
-                msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
-            }
-            this.Close();
-        }
-        #endregion
-
-        #region Options Menu
-        private void SetupOptionsMenu() {
-            // TODO Enable menus
-            //if (bShowLabels) showLabelsToolStripMenuItem.Checked = true;
-            //else showLabelsToolStripMenuItem.Checked = false;
-            //if (bShowGridlines) showMapGridToolStripMenuItem.Checked = true;
-            //else showMapGridToolStripMenuItem.Checked = false;
-            //if (bFadeUnvisited) fadeUnvisitedStarsToolStripMenuItem.Checked = true;
-            //else fadeUnvisitedStarsToolStripMenuItem.Checked = false;
-            //if (bShowRangeCircles) showRangeCirclesToolStripMenuItem.Checked = true;
-            //else showRangeCirclesToolStripMenuItem.Checked = false;
-            //if (bShowTradeRoutes) showTradeRoutesToolStripMenuItem.Checked = true;
-            //else showTradeRoutesToolStripMenuItem.Checked = false;
-            //if (bShowFlags) showFlagsToolStripMenuItem.Checked = true;
-            //else showFlagsToolStripMenuItem.Checked = false;
-            //if (bShowColonies) showColoniesToolStripMenuItem.Checked = true;
-            //else showColoniesToolStripMenuItem.Checked = false;
-        }
-        private void showLabelsToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowLabels) {
-                bShowLabels = false;
-                // TODO showLabelsToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowLabels = true;
-                // TODO showLabelsToolStripMenuItem.Checked = true;
-            }
-            // TODO glMapView.Invalidate();
-        }
-        private void showMapGridToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowGridlines) {
-                bShowGridlines = false;
-                // TODO showMapGridToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowGridlines = true;
-                // TODO showMapGridToolStripMenuItem.Checked = true;
-            }
-            // TODO glMapView.Invalidate();
-        }
-        private void fadeUnvisitedStarsToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bFadeUnvisited) {
-                bFadeUnvisited = false;
-                // TODO fadeUnvisitedStarsToolStripMenuItem.Checked = false;
-            }
-            else {
-                bFadeUnvisited = true;
-                // TODO fadeUnvisitedStarsToolStripMenuItem.Checked = true;
-            }
-        }
-        private void showRangeCirclesToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowRangeCircles) {
-                bShowRangeCircles = false;
-                // TODO showRangeCirclesToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowRangeCircles = true;
-                // TODO showRangeCirclesToolStripMenuItem.Checked = true;
-            }
-        }
-        private void showTradeRoutesToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowTradeRoutes) {
-                bShowTradeRoutes = false;
-                // TODO showTradeRoutesToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowTradeRoutes = true;
-                // TODO showTradeRoutesToolStripMenuItem.Checked = true;
-            }
-        }
-        private void showFlagsToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowFlags) {
-                bShowFlags = false;
-                // TODO showFlagsToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowFlags = true;
-                // TODO showFlagsToolStripMenuItem.Checked = true;
-            }
-        }
-        private void showColoniesToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (bShowColonies) {
-                bShowColonies = false;
-                // TODO showColoniesToolStripMenuItem.Checked = false;
-            }
-            else {
-                bShowColonies = true;
-                // TODO showColoniesToolStripMenuItem.Checked = true;
-            }
-        }
-
-        #endregion
-
-        #region View Menu
-        private void shipToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (!GalaxyMap.bMapSetup) return;
-            SetupShipView();
-        }
-        private void teamToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (!GalaxyMap.bMapSetup) return;
-            TeamView tv = new TeamView(PlayerTeam);
-            tv.ShowDialog();
-        }
-        private void colonyToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (!GalaxyMap.bMapSetup) return;
-            if (PlayerTeam!.CurrentPosition.BaseSize == 0) return;
-            ColonyView cv = new ColonyView(PlayerTeam, RunMission);
-            cv.Show();
-        }
-        private void racesToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (!GalaxyMap.bMapSetup) return;
-            RaceView rv = new RaceView();
-            rv.Show();
-        }
-        #endregion // View Menu
-
-
-        #endregion // Menu Code
-
     }
 }

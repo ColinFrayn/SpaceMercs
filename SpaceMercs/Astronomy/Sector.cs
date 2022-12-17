@@ -90,6 +90,7 @@ namespace SpaceMercs {
                 // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
                     prog.SetUniform("lightEnabled", true);
+                    prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                     prog.SetUniform("model", modelM);
                     st.DrawSelected(prog, iLevel);
                 }
@@ -99,7 +100,6 @@ namespace SpaceMercs {
                     if (bFadeUnvisited && !st.Visited) fade = 4f;
                     Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
                     prog.SetUniform("lightEnabled", false);
-                    prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("flatColour", col);
                     prog.SetUniform("model", modelM);
                     GL.UseProgram(prog.ShaderProgramHandle);

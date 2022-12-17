@@ -36,15 +36,17 @@ namespace SpaceMercs {
             Active = false;
             SetIconScale(1f);
         }
-        public PanelItem InsertIconItem(uint ID, TexSpecs spec, bool bEnabled, GUIPanel? subPanel) {
-            PanelItem icon = new IconPanelItem(spec, bEnabled, ID);
-            icon.SetSubPanel(subPanel);
-            Items.Add(icon);
+        public PanelItem InsertIconItem(uint ID, TexSpecs spec, bool bEnabled, GUIPanel? subPanel, Func<bool>? getBoolFunc = null) {
+            PanelItem pi = new IconPanelItem(spec, bEnabled, ID, getBoolFunc != null);
+            pi.SetSubPanel(subPanel);
+            pi.SetToggleDelegate(getBoolFunc);
+            Items.Add(pi);
             UpdatePanelDimensions(1f); // Aspect is irrelevant for icon panels
-            return icon;
+            return pi;
         }
-        public void InsertTextItem(uint ID, string strText, float aspect) {
-            PanelItem pi = new TextPanelItem(strText, ID);
+        public void InsertTextItem(uint ID, string strText, float aspect, Func<bool>? getBoolFunc = null) {
+            PanelItem pi = new TextPanelItem(strText, ID, getBoolFunc != null);
+            pi.SetToggleDelegate(getBoolFunc);
             Items.Add(pi);
             UpdatePanelDimensions(aspect);
         }
@@ -113,7 +115,7 @@ namespace SpaceMercs {
 
             // Draw the icons
             float px = PanelX, py = PanelY;
-            float aspect = (float)Window.Size.Y / (float)Window.Size.X;
+            float aspect = (float)Window.Size.X / (float)Window.Size.Y;
             foreach (PanelItem pi in Items) {
                 PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(PanelW, IconH), _ZDepth + 0.01f, aspect);
                 if (piHover2 is not null) {

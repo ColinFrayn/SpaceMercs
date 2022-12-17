@@ -8,8 +8,9 @@ namespace SpaceMercs {
         private readonly TextMeasure measure;
         private string Text;
         private const float TextSizeScale = 0.4f;
+        private const float XBufferScale = 0.12f;
 
-        public TextPanelItem(string strText, uint _id) : base(null, true, _id) {
+        public TextPanelItem(string strText, uint _id, bool togglable) : base(null, true, _id, togglable) {
             measure = TextRenderer.MeasureText(strText);
             Text = strText;
         }
@@ -50,7 +51,7 @@ namespace SpaceMercs {
                 Alignment = Alignment.CentreLeft,
                 Aspect = aspect,
                 TextColour = Color.White,
-                XPos = itemX + (itemH/8f),
+                XPos = itemX + (itemH * XBufferScale),
                 YPos = itemY + (itemH/2f),
                 ZPos = zdist + 0.01f,
                 Scale = itemH * TextSizeScale
@@ -72,10 +73,15 @@ namespace SpaceMercs {
                 Square.Textured.BindAndDraw();
             }
 
+            // Toggle icon
+            if (IsTogglable) {
+                DrawToggleIcon(prog, itemX, itemY, itemW, itemH, zdist);
+            }
+
             if (SubPanel != null) {
                 throw new Exception("Text Panel shouldn't have sub panel");
             }
-            if (piHover != null) DrawSelectionFrame(prog, itemX, itemY, itemW, itemH, zdist);
+            //if (piHover != null) DrawSelectionFrame(prog, itemX, itemY, itemW, itemH, zdist);
             return piHover;
         }
         public override void SetSubPanel(GUIPanel? gpl) {
@@ -93,7 +99,10 @@ namespace SpaceMercs {
             ovH = dimRect.W;
         }
         public override float Width(float tw, float th, float aspect) {
-            return measure.Width * th * TextSizeScale / (aspect * TextRenderer.FontSize);
+            float width = (measure.Width * th * TextSizeScale / (aspect * TextRenderer.FontSize));
+            width += th * 2f * XBufferScale; // Horizontal padding at either end
+            if (IsTogglable) width += th;
+            return width;
         }
         public override float Height(float tw, float th) {
             return th;

@@ -29,8 +29,8 @@ namespace SpaceMercs.MainWindow {
       else {
         if (xGUI.SelectSingleNode("ShowLabels") != null) bShowLabels = true;
         else bShowLabels = false;
-        if (xGUI.SelectSingleNode("ShowMapGrid") != null) bShowGridlines = true;
-        else bShowGridlines = false;
+        if (xGUI.SelectSingleNode("ShowMapGrid") != null) bShowGridLines = true;
+        else bShowGridLines = false;
         if (xGUI.SelectSingleNode("FadeStars") != null) bFadeUnvisited = true;
         else bFadeUnvisited = false;
         if (xGUI.SelectSingleNode("ShowRangeCircles") != null) bShowRangeCircles = true;
@@ -89,7 +89,7 @@ namespace SpaceMercs.MainWindow {
         // Save GUI details
         file.WriteLine("<GUI>");
         if (bShowLabels) file.WriteLine("<ShowLabels/>");
-        if (bShowGridlines) file.WriteLine("<ShowMapGrid/>");
+        if (bShowGridLines) file.WriteLine("<ShowMapGrid/>");
         if (bShowRangeCircles) file.WriteLine("<ShowRangeCircles/>");
         if (bShowTradeRoutes) file.WriteLine("<ShowTradeRoutes/>");
         if (bFadeUnvisited) file.WriteLine("<FadeStars/>");

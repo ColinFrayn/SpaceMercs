@@ -8,12 +8,13 @@ using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-        private GUIPanel gpMenu, gpSubMenu, gpFileMenu;
+        private GUIPanel gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu;
         private readonly int iGUIHoverN = -1; // What is this??
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
         private AstronomicalObject lastAOHover = null;
         private string DebugString = string.Empty; // DEBUG
 
+        #region Menu Codes
         // GUIPanel for main menu
         public const uint I_Menu = 11000;
         public const uint I_File = 11010;
@@ -23,7 +24,19 @@ namespace SpaceMercs.MainWindow {
         public const uint I_Exit = 11014;
         public const uint I_Mission = 11020;
         public const uint I_View = 11030;
+        public const uint I_ViewShip = 11031;
+        public const uint I_ViewTeam = 11032;
+        public const uint I_ViewColony = 11033;
+        public const uint I_ViewRaces = 11034;
         public const uint I_Options = 11040;
+        public const uint I_OptionsLabels = 11041;
+        public const uint I_OptionsGridLines = 11042;
+        public const uint I_OptionsFadeUnvisited = 11043;
+        public const uint I_OptionsRangeCircles = 11044;
+        public const uint I_OptionsTradeRoutes = 11045;
+        public const uint I_OptionsFlags = 11046;
+        public const uint I_OptionsColonies = 11047;
+        #endregion // Menu Codes
 
         // Draw the GUI elements
         private void DrawGUI() {
@@ -149,7 +162,7 @@ namespace SpaceMercs.MainWindow {
         private void DrawMapToggles() {
             TextRenderer.DrawAt("A", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridlines ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridLines ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("R", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("V", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
         }
@@ -303,14 +316,31 @@ namespace SpaceMercs.MainWindow {
             gpFileMenu.InsertTextItem(I_Save, "Save Game", Aspect);
             gpFileMenu.InsertTextItem(I_Exit, "Exit Game", Aspect);
 
+            // View menu
+            gpViewMenu = new GUIPanel(this, 0.07f, 0.3f, GUIPanel.PanelDirection.Vertical);
+            gpViewMenu.InsertTextItem(I_ViewShip, "View Ship", Aspect);
+            gpViewMenu.InsertTextItem(I_ViewTeam, "View Team", Aspect);
+            gpViewMenu.InsertTextItem(I_ViewColony, "View Colony", Aspect);
+            gpViewMenu.InsertTextItem(I_ViewRaces, "View Races", Aspect);
+
+            // Skills menu
+            gpOptionsMenu = new GUIPanel(this, 0.07f, 0.38f, GUIPanel.PanelDirection.Vertical);
+            gpOptionsMenu.InsertTextItem(I_OptionsLabels, "Labels", Aspect, () => bShowLabels);
+            gpOptionsMenu.InsertTextItem(I_OptionsGridLines, "Grid Lines", Aspect, () => bShowGridLines);
+            gpOptionsMenu.InsertTextItem(I_OptionsFadeUnvisited, "Fade Unvisited", Aspect, () => bFadeUnvisited);
+            gpOptionsMenu.InsertTextItem(I_OptionsRangeCircles, "Range Circles", Aspect, () => bShowRangeCircles);
+            gpOptionsMenu.InsertTextItem(I_OptionsTradeRoutes, "Trade Routes", Aspect, () => bShowTradeRoutes);
+            gpOptionsMenu.InsertTextItem(I_OptionsFlags, "Flags", Aspect, () => bShowFlags);
+            gpOptionsMenu.InsertTextItem(I_OptionsColonies, "Colonies", Aspect, () => bShowColonies);
+
             // First level menus
             gpSubMenu = new GUIPanel(this, 0.01f, 0.23f, GUIPanel.PanelDirection.Vertical);
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
             gpSubMenu.InsertIconItem(I_File, ts, true, gpFileMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);
-            gpSubMenu.InsertIconItem(I_View, ts, true, null);
+            gpSubMenu.InsertIconItem(I_View, ts, true, gpViewMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-            gpSubMenu.InsertIconItem(I_Options, ts, true, null);
+            gpSubMenu.InsertIconItem(I_Options, ts, true, gpOptionsMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Mission);
             gpSubMenu.InsertIconItem(I_Mission, ts, false, null);
 

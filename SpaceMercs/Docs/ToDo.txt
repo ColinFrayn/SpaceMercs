@@ -2,18 +2,14 @@
 ToDo List
 -------------------------------------------------
 
-GUIPanel
-- Text panels are not the correct width. Why?
+MapViewSystem
 
-GUIPanel for main menu, LHS, 20% down : Display it
-Burger -> File (Disk), Mission (Target), View (Eye), Options (Cog)
- Sub-menus are text or dialogs?:
-  File -> New, Load, Save, Exit
-  View -> Ship, Team, Colony, Races
-  Options (dialog?) -> Labels, MapGrid, FadeUnvisited, RangeCircles, TradeRoutes, Flags, Colonies
-  Mission (dialog?) -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
+MapViewShip
 
 TravelDetails.Display()
+
+Main Menu
+  Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
 
 Remove all Windows MessageBoxes
 
@@ -35,6 +31,7 @@ MapViewDrawMap
 - Hover text
 - DrawMapSelectionIcons
 
+GUIPanel
 GUIButton
 GUIMessageBox
 IconPanelIcon

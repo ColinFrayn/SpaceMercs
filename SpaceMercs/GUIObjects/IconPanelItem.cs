@@ -5,7 +5,7 @@ using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class IconPanelItem : PanelItem {
-        public IconPanelItem(TexSpecs ts, bool _enabled, uint _ID) : base(ts, _enabled, _ID) {
+        public IconPanelItem(TexSpecs ts, bool _enabled, uint _ID, bool togglable) : base(ts, _enabled, _ID, togglable) {
         }
 
         public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect) {
@@ -59,6 +59,11 @@ namespace SpaceMercs {
             }
             prog.SetUniform("textureEnabled", false);
 
+            // Toggle icon
+            if (IsTogglable) {
+                DrawToggleIcon(prog, iconX, iconY, iconW, iconH, zdist);
+            }
+
             if (SubPanel != null) {
                 bool bJustOpened = false;
                 // If this item hovered then open subpanel
@@ -100,7 +105,7 @@ namespace SpaceMercs {
                     }
                 }
             }
-            if (piHover != null) DrawSelectionFrame(prog, iconX, iconY, iconW, iconH, zdist);
+            //if (piHover != null) DrawSelectionFrame(prog, iconX, iconY, iconW, iconH, zdist);
             return piHover;
         }
 
@@ -119,7 +124,9 @@ namespace SpaceMercs {
             ovH = dimRect.W;
         }
         public override float Width(float tw, float th, float aspect) {
-            return tw;
+            float width = tw;
+            if (IsTogglable) width += th;
+            return width;
         }
         public override float Height(float tw, float th) {
             return th;
