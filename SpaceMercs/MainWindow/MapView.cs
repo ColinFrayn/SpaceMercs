@@ -68,14 +68,11 @@ namespace SpaceMercs.MainWindow {
             bShowRangeCircles = true;
             bShowTradeRoutes = true;
             MakeCurrent();
-            //SetupMapTextures();
-            //Planet.BuildPlanetHalo();
-            //GraphicsFunctions.Initialise();
+            SetupMapTextures();
+            Planet.BuildPlanetHalo();
             Terrain.GenerateSeedMap();
             SetupGUIElements();
             bLoaded = true;
-            //SetupOptionsMenu();
-            //TODO this.missionToolStripMenuItem.Enabled = false;
             ThisDispatcher = Dispatcher.CurrentDispatcher;
             msgBox = new GUIMessageBox(this);
 

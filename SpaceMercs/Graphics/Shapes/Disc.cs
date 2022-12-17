@@ -3,7 +3,13 @@ using OpenTK.Mathematics;
 
 namespace SpaceMercs.Graphics.Shapes {
     internal static class Disc {
-        private static GLShape? _disc32 = null, _disc64 = null;
+        private static GLShape? _disc16 = null, _disc32 = null, _disc64 = null;
+        public static GLShape Disc16 {
+            get {
+                if (_disc16 is null) _disc16 = BuildFlat(16);
+                return _disc16;
+            }
+        }
         public static GLShape Disc32 {
             get {
                 if (_disc32 is null) _disc32 = BuildFlat(32);

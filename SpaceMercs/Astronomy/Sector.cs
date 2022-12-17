@@ -1,5 +1,7 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
@@ -81,15 +83,14 @@ namespace SpaceMercs {
                 float StarScale = st.DrawScale * 0.1f;
                 Matrix4 scaleM = Matrix4.CreateScale(StarScale);
                 Matrix4 modelM = scaleM * translateM;
+                prog.SetUniform("model", modelM);
 
                 // Work out the degree of detail to show in this star
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
                 // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
-                    prog.SetUniform("lightEnabled", true);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-                    prog.SetUniform("model", modelM);
                     st.DrawSelected(prog, iLevel);
                 }
                 else {
@@ -97,11 +98,12 @@ namespace SpaceMercs {
                     float fade = 1f;
                     if (bFadeUnvisited && !st.Visited) fade = 4f;
                     Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
+                    prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("lightEnabled", false);
                     prog.SetUniform("flatColour", col);
-                    prog.SetUniform("model", modelM);
                     GL.UseProgram(prog.ShaderProgramHandle);
-                    Sphere.Draw(iLevel);
+                    if (iLevel > 5) Disc.Disc32.BindAndDraw();
+                    else Disc.Disc16.BindAndDraw();
                 }
 
                 continue;
