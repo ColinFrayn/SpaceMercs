@@ -139,23 +139,33 @@ namespace SpaceMercs {
         }
 
         // Draw this system in the SystemView view
-        public void DrawSystem(ShaderProgram prog, float aspect, AstronomicalObject aoSelected, AstronomicalObject aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
-            // Draw star
+        public void DrawSystem(ShaderProgram prog, float aspect, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+            // Draw the star
             float StarScale = 0.2f;
-            Matrix4 translateM = Matrix4.CreateTranslation((0.92f * aspect) + (DrawScale * StarScale), 0.5f, 0f);
-            Matrix4 scaleM = Matrix4.CreateScale(StarScale, StarScale, StarScale);
-            Matrix4 viewM = scaleM * translateM;
-            prog.SetUniform("view", viewM);
+            Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
+            prog.SetUniform("view", squashM);
 
-            DrawSelected(prog, 7);
+            //prog.SetUniform("textureEnabled", false);
+            //prog.SetUniform("lightEnabled", false);
+            //prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            //GL.UseProgram(prog.ShaderProgramHandle);
+            //Grid.Lines.BindAndDraw();
+
+            {
+                Matrix4 translateM = Matrix4.CreateTranslation((0.92f * aspect) + (DrawScale * StarScale), 0.5f, 0f);
+                Matrix4 scaleM = Matrix4.CreateScale(StarScale * DrawScale, StarScale * DrawScale, 1f);
+                Matrix4 modelM = scaleM * translateM;
+                prog.SetUniform("model", modelM);
+                DrawSelected(prog, 12);
+            }
 
             // Draw system
-            float px = 0.86f * aspect;
+            float px = (0.86f * aspect);
             float py = 0.2f;
+            Matrix4 pScaleM = Matrix4.CreateScale(Const.PlanetScale, Const.PlanetScale, Const.PlanetScale);
             foreach (Planet pl in planets) {
-                px -= pl.DrawScale * Const.PlanetScale * aspect * 0.6f;
+                px -= pl.DrawScale * Const.PlanetScale * 0.6f * aspect;
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
-                Matrix4 pScaleM = Matrix4.CreateScale(Const.PlanetScale, Const.PlanetScale, Const.PlanetScale);
                 Matrix4 modelM = pScaleM * pTranslateM;
                 prog.SetUniform("model", modelM);
                 pl.DrawSystem(prog, aoSelected, aoHover, aoCurrentPosition, bShowLabels, bShowColonies);
@@ -453,15 +463,15 @@ namespace SpaceMercs {
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 7) {
+            // Rotate the star?
+            //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
             SetupTextureMap(64, 32);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
             GL.UseProgram(prog.ShaderProgramHandle);
-            // Rotate the star?
-            //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-            Sphere.Draw(Level, true);
+            Sphere.CachedBuildAndDraw(Level, true);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
         public override void SetupTextureMap(int width, int height) {

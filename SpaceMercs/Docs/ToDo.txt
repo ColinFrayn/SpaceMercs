@@ -3,7 +3,11 @@ ToDo List
 -------------------------------------------------
 
 MapViewSystem
-- Display the actual planets
+- Planets
+-- Textures are wrong
+-- Sizes and locations are wrong
+- Moons
+-- Display the moons at the right scale
 
 MapViewShip
 

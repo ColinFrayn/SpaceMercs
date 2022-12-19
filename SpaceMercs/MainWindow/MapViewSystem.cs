@@ -12,8 +12,8 @@ namespace SpaceMercs.MainWindow {
         // Root call for displaying the system when zoomed in
         private void DrawSystem() {
             // Make sure we haven't still got the star selected
-            if (aoSelected != null && aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoSelected = null;
-            if (aoHover != null && aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoHover = null;
+            if (aoSelected?.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoSelected = null;
+            if (aoHover?.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoHover = null;
 
             // Set the correct view location & perspective matrices for each shader program
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
@@ -21,11 +21,16 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
+            fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
+            fullShaderProgram.SetUniform("ambient", 0.25f);
+            fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the scene
-            SystemStar.DrawSystem(fullShaderProgram, Aspect, aoSelected, aoHover, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies);
+            SystemStar.DrawSystem(fullShaderProgram, Aspect, aoSelected, aoHover, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
             DrawSystemText();
             SetupGUIHoverInfo();
             DrawGUI();

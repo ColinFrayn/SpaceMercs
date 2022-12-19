@@ -4,17 +4,17 @@ namespace SpaceMercs.Graphics.Shapes {
     internal static class Sphere {
         private static IDictionary<(int,bool), GLShape> _spheres = new Dictionary<(int, bool), GLShape>();
 
-        public static GLShape Build(int detail, bool bTexture = false) {
-            if (detail < 0 || detail > 10) throw new ArgumentException($"Values for {nameof(detail)} must be between 1 .. 10");
-            if (!_spheres.ContainsKey((detail, bTexture))) {
-                _spheres.Add((detail, bTexture), SetupSphere(2 * detail + 3, 2 * detail + 4, bTexture));
-            }
-            return _spheres[(detail, bTexture)];
-        }
-
-        public static void Draw(int detail, bool bTexture = false) {
+        public static void CachedBuildAndDraw(int detail, bool bTexture = false) {
             GLShape sphere = Build(detail, bTexture);
             sphere.BindAndDraw();
+        }
+
+        public static GLShape Build(int detail, bool bTexture = false) {
+            if (detail < 1 || detail > 12) throw new ArgumentException($"Values for {nameof(detail)} must be between 1 .. 12");
+            if (!_spheres.ContainsKey((detail, bTexture))) {
+                _spheres.Add((detail, bTexture), SetupSphere(2 * detail + 3, 4 * detail + 2, bTexture));
+            }
+            return _spheres[(detail, bTexture)];
         }
 
         // Setup the sphere by generating rings of triangles
@@ -65,9 +65,9 @@ namespace SpaceMercs.Graphics.Shapes {
             Vector3 n3 = new Vector3(pv3);
 
             // Texture coordinates
-            Vector2 t1 = new Vector2(1.0f - v1.X, v1.Y);
-            Vector2 t2 = new Vector2(1.0f - v2.X, v2.Y);
-            Vector2 t3 = new Vector2(1.0f - v3.X, v3.Y);
+            Vector2 t1 = new Vector2(1f - v1.X, v1.Y);
+            Vector2 t2 = new Vector2(1f - v2.X, v2.Y);
+            Vector2 t3 = new Vector2(1f - v3.X, v3.Y);
 
             if (bTexture) {
                 return new VertexPos3DTexNorm[] {
@@ -82,14 +82,5 @@ namespace SpaceMercs.Graphics.Shapes {
                     new VertexPos3DNorm(pv3, n3)
                 };
         }
-
-        //_spheres.Add(SetupSphere(3, 4));
-        //_spheres.Add(SetupSphere(5, 6));
-        //_spheres.Add(SetupSphere(7, 8));
-        //_spheres.Add(SetupSphere(9, 12));
-        //_spheres.Add(SetupSphere(13, 16));
-        //_spheres.Add(SetupSphere(19, 24));
-        //_spheres.Add(SetupSphere(25, 36));
-        //_spheres.Add(SetupSphere(35, 48));
     }
 }
