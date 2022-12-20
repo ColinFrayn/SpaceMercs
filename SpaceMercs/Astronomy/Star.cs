@@ -11,8 +11,8 @@ namespace SpaceMercs {
     class Star : AstronomicalObject {
         private readonly int PDensity;
         private double Age;
-        private readonly List<Planet> planets;
 
+        public readonly List<Planet> Planets;
         public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
         public string StarType { get; private set; }
         public Race Owner { get; private set; }
@@ -23,7 +23,7 @@ namespace SpaceMercs {
         public Sector Sector { get; private set; }
         public bool Scanned {
             get {
-                foreach (Planet pl in planets) {
+                foreach (Planet pl in Planets) {
                     if (pl.Scanned) return true;
                 }
                 return false;
@@ -43,7 +43,7 @@ namespace SpaceMercs {
         public Star(float X, float Y, int _seed, int PlanetDensity, Sector s) {
             MapPos = new Vector3(X, Y, 0f);
             PDensity = PlanetDensity;
-            planets = new List<Planet>();
+            Planets = new List<Planet>();
             Visited = false;
             Sector = s;
             strName = "";
@@ -91,13 +91,13 @@ namespace SpaceMercs {
                 }
             }
 
-            planets = new List<Planet>();
+            Planets = new List<Planet>();
             foreach (XmlNode xmlp in xml.SelectNodes("Planets/Planet")) {
                 Planet pl = new Planet(xmlp, this);
                 pl.Parent = this;
-                planets.Add(pl);
+                Planets.Add(pl);
             }
-            if (planets.Count == 0) GeneratePlanets(sect.ParentMap.PlanetDensity); // Didn't save them, so regenerate here
+            if (Planets.Count == 0) GeneratePlanets(sect.ParentMap.PlanetDensity); // Didn't save them, so regenerate here
             SetupColour();
             SetupType();
         }
@@ -121,7 +121,7 @@ namespace SpaceMercs {
             // Also save if this system has been scanned at all
             if (Owner != null || Scanned) {
                 file.WriteLine(" <Planets>");
-                foreach (Planet pl in planets) {
+                foreach (Planet pl in Planets) {
                     pl.SaveToFile(file);
                 }
                 file.WriteLine(" </Planets>");
@@ -134,50 +134,15 @@ namespace SpaceMercs {
 
         // Retrieve a planet from this system by ID
         public Planet GetPlanetByID(int ID) {
-            if (ID < 0 || ID >= planets.Count) return null;
-            return planets[ID];
-        }
-
-        // Draw this system in the SystemView view
-        public void DrawSystem(ShaderProgram prog, float aspect, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
-            // Draw the star
-            float StarScale = 0.2f;
-            Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
-            prog.SetUniform("view", squashM);
-
-            //prog.SetUniform("textureEnabled", false);
-            //prog.SetUniform("lightEnabled", false);
-            //prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-            //GL.UseProgram(prog.ShaderProgramHandle);
-            //Grid.Lines.BindAndDraw();
-
-            {
-                Matrix4 translateM = Matrix4.CreateTranslation((0.92f * aspect) + (DrawScale * StarScale), 0.5f, 0f);
-                Matrix4 scaleM = Matrix4.CreateScale(StarScale * DrawScale, StarScale * DrawScale, 1f);
-                Matrix4 modelM = scaleM * translateM;
-                prog.SetUniform("model", modelM);
-                DrawSelected(prog, 12);
-            }
-
-            // Draw system
-            float px = (0.86f * aspect);
-            float py = 0.2f;
-            Matrix4 pScaleM = Matrix4.CreateScale(Const.PlanetScale, Const.PlanetScale, Const.PlanetScale);
-            foreach (Planet pl in planets) {
-                px -= pl.DrawScale * Const.PlanetScale * 0.6f * aspect;
-                Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
-                Matrix4 modelM = pScaleM * pTranslateM;
-                prog.SetUniform("model", modelM);
-                pl.DrawSystem(prog, aoSelected, aoHover, aoCurrentPosition, bShowLabels, bShowColonies);
-                px -= ((pl.DrawScale * Const.PlanetScale) + 0.3f) * aspect * 0.6f;
-            }
+            if (ID < 0 || ID >= Planets.Count) return null;
+            return Planets[ID];
         }
 
         // Are we hovering over anything here?
-        public AstronomicalObject GetHover(double aspect, double mousex, double mousey) {
+        public AstronomicalObject? GetHover(double aspect, double mousex, double mousey) {
             double px = 8.6 * aspect;
             double py = 2.0;
-            foreach (Planet pl in planets) {
+            foreach (Planet pl in Planets) {
                 px -= pl.DrawScale * Const.PlanetScale * aspect * 0.6;
                 double buffer = (pl.DrawScale * Const.PlanetScale * Const.SystemViewSelectionTolerance);
                 if (mousex > px + buffer) return null; // Too far right. Abort
@@ -269,7 +234,7 @@ namespace SpaceMercs {
             } while (RotationPeriod < Const.StarRotationMin);
 
             // Make sure we don't have any planets. We generate them later
-            planets.Clear();
+            Planets.Clear();
         }
 
         // Set up the stellar type
@@ -309,7 +274,7 @@ namespace SpaceMercs {
                 Seed = rand.Next(10000000);
                 Generate();
                 GeneratePlanets(9);
-                foreach (Planet pl in planets) {
+                foreach (Planet pl in Planets) {
                     if (pl.Type == rc.PlanetType && Math.Abs(pl.Temperature - rc.BaseTemp) < dTempBest) {
                         dTempBest = Math.Abs(pl.Temperature - rc.BaseTemp);
                         plHome = pl;
@@ -325,7 +290,7 @@ namespace SpaceMercs {
 
         // Generate the rest of the solar system
         public void GeneratePlanets(int pdensity) {
-            if (planets.Count > 0) return;
+            if (Planets.Count > 0) return;
             Random rnd = new Random(Seed);
             // Number of planets
             int npl = (rnd.Next(pdensity + 1) + rnd.Next(pdensity + 4) + rnd.Next(pdensity + 4)) / 2;
@@ -386,7 +351,7 @@ namespace SpaceMercs {
                 if (pl.Type == Planet.PlanetType.Gas) {
                     pl.radius *= Utils.NextGaussian(rnd, Const.GasGiantScale, Const.GasGiantScaleSigma);
                 }
-                pl.colour = Const.PlanetTypeToCol1(pl.Type);
+                pl.colour = Const.PlanetTypeToCol2(pl.Type);
 
                 // Rotation/Orbital periods
                 double prot = Utils.NextGaussian(rnd, Const.PlanetRotation, Const.PlanetRotationSigma);
@@ -394,7 +359,7 @@ namespace SpaceMercs {
                 pl.RotationPeriod = (int)prot;
 
                 pl.GenerateMoons(rnd, pdensity);
-                planets.Add(pl);
+                Planets.Add(pl);
             }
             bGenerated = true;
         }
@@ -416,7 +381,7 @@ namespace SpaceMercs {
         public void SetOwner(Race rc) {
             Owner = rc;
             if (rc == StaticData.Races[0]) Visited = true;
-            if (planets.Count == 0 && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+            if (Planets.Count == 0 && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
         }
         public void SetVisited(bool v) {
             Visited = v;
@@ -425,19 +390,19 @@ namespace SpaceMercs {
         // For a few habitable planets in this system (or moons), insert a colony for the given race
         public void InsertColoniesForRace(Race rc, int Count) {
             int tries = 0, inserted = 0, iterations = 0;
-            if (planets.Count == 0) return;
+            if (Planets.Count == 0) return;
             Random rand = new Random();
             // Just so we don't get the same place every time, randomise a bit
             do {
-                int pno = rand.Next(planets.Count);
-                Planet pl = planets[pno];
+                int pno = rand.Next(Planets.Count);
+                Planet pl = Planets[pno];
                 if (pl.BaseSize == 0) break;
             } while (++iterations < 10);
             // Now add the colonies
             do {
                 tries++;
-                int pno = rand.Next(planets.Count);
-                Planet pl = planets[pno];
+                int pno = rand.Next(Planets.Count);
+                Planet pl = Planets[pno];
                 double tdiff = pl.TDiff(rc);
                 if (rand.NextDouble() * 100.0 > tdiff) {
                     if (rand.NextDouble() > 0.5) {
@@ -450,21 +415,26 @@ namespace SpaceMercs {
 
         // When we arrive in this system (or moev about the system) update colony growth
         public void UpdateColonies() {
-            foreach (Planet pl in planets) {
+            foreach (Planet pl in Planets) {
                 pl.CheckGrowth();
             }
         }
 
         public Planet? GetOutermostPlanet() {
-            if (planets.Count == 0) return null;
-            return planets.Last();
+            if (Planets.Count == 0) return null;
+            return Planets.Last();
         }
 
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 7) {
-            // Rotate the star?
-            //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
+            // Sort out scaling and rotation
+            Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale, Const.StarScale * DrawScale, 1f);
+            Matrix4 rotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 200000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 modelM = rotateM * scaleM;
+            prog.SetUniform("model", modelM);
+
+            // Setup the texture & draw it
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
             SetupTextureMap(64, 32);
@@ -477,9 +447,11 @@ namespace SpaceMercs {
         public override void SetupTextureMap(int width, int height) {
             if (iTexture == -1 || texture == null) iTexture = GL.GenTexture();
             else {
+                // Have we already built a texture of sufficient detail?
                 if (texture.Length >= (width * height * 3)) return;
             }
             texture = Terrain.GenerateMap(this, width, height);
+            GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, texture);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
@@ -489,7 +461,7 @@ namespace SpaceMercs {
             GL.DeleteTexture(iTexture);
             texture = null;
             iTexture = -1;
-            foreach (Planet pl in planets) {
+            foreach (Planet pl in Planets) {
                 pl.ClearData();
             }
         }

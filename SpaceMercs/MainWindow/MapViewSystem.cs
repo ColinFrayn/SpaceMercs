@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -8,6 +9,8 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private Star SystemStar = null;
         private bool bShowColonies = true;
+
+        private float ax = 0f, ay = 0f, az = 0f; // DEBUG
 
         // Root call for displaying the system when zoomed in
         private void DrawSystem() {
@@ -30,10 +33,60 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the scene
-            SystemStar.DrawSystem(fullShaderProgram, Aspect, aoSelected, aoHover, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
+            DrawAstronomicalObjects(fullShaderProgram, Aspect, aoSelected, aoHover, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
             DrawSystemText();
             SetupGUIHoverInfo();
             DrawGUI();
+        }
+
+        private void DrawAstronomicalObjects(ShaderProgram prog, float aspect, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("lightEnabled", true);
+            Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
+            Matrix4 translateM = Matrix4.CreateTranslation((0.8f * aspect) + (DrawScale * StarScale), 0.5f, 0f);
+            prog.SetUniform("view", squashM * translateM);
+
+            // Draw the star
+            SystemStar.DrawSelected(prog, 12);
+
+            // Draw system
+            float px = (0.86f * aspect);
+            float py = 0.25f;
+            ax += 0.0011f; // DEBUG
+            ay += 0.0013f; // DEBUG
+            az += 0.0017f; // DEBUG
+            foreach (Planet pl in SystemStar.Planets) {
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+                prog.SetUniform("view", squashM * pTranslateM);
+
+                // Draw the Planet
+                int Level = pl.radius > 7 * Const.Million ? 10 : 9;
+                pl.DrawSelected(prog, Level);
+
+                // Draw all other Planet icons
+                //pl.DrawHalo();
+                //if (bShowLabels) pl.DrawNameLabel();
+                //if (aoHover == pl) GraphicsFunctions.DrawHoverReticule(pl.DrawScale * 1.1);
+                //if (aoSelected == pl) GraphicsFunctions.DrawSelectedReticule(pl.DrawScale * 1.1);
+                //if (bShowColonies) pl.DrawBaseIcon();
+                //if (aoCurrentPosition == pl) GraphicsFunctions.DrawLocationIcon(pl.DrawScale * 1.0);
+
+                // Draw the moons
+                float my = py + 0.1f;
+                foreach (Moon mn in pl.Moons) {
+                    Matrix4 mTranslateM = Matrix4.CreateTranslation(px, my, 0f);
+                    prog.SetUniform("view", squashM * mTranslateM);
+                    //if (bShowColonies) mn.DrawBaseIcon();
+                    mn.DrawSelected(prog, 7);
+                    //if (aoHover == mn) GraphicsFunctions.DrawHoverReticule(mn.DrawScale * 1.2);
+                    //if (aoSelected == mn) GraphicsFunctions.DrawSelectedReticule(mn.DrawScale * 1.2);
+                    //if (aoCurrentPosition == mn) GraphicsFunctions.DrawLocationIcon(mn.DrawScale * 1.25);
+                    my += 0.08f;
+                }
+
+                px -= (pl.DrawScale * Const.PlanetScale + 0.27f) * aspect * 0.3f;
+            }
+
         }
 
         // Get the system under the mouse pointer

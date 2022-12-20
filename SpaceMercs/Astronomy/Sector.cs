@@ -1,7 +1,5 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
@@ -77,19 +75,16 @@ namespace SpaceMercs {
         public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ) {
             foreach (Star st in Stars) {
                 // Translate into the star frame
-                Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos);
-
-                // Scale this star to its actual size
-                float StarScale = st.DrawScale * 0.1f;
-                Matrix4 scaleM = Matrix4.CreateScale(StarScale);
-                Matrix4 modelM = scaleM * translateM;
-                prog.SetUniform("model", modelM);
+                Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos.X - fMapViewX, st.MapPos.Y - fMapViewY, -fMapViewZ);
 
                 // Work out the degree of detail to show in this star
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
                 // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
+                    Matrix4 scaleM = Matrix4.CreateScale(0.5f);
+                    Matrix4 viewM = scaleM * translateM;
+                    prog.SetUniform("view", viewM);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                     st.DrawSelected(prog, iLevel);
                 }
@@ -98,6 +93,11 @@ namespace SpaceMercs {
                     float fade = 1f;
                     if (bFadeUnvisited && !st.Visited) fade = 4f;
                     Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
+
+                    Matrix4 scaleM = Matrix4.CreateScale(st.DrawScale / 8f);
+                    Matrix4 viewM = scaleM * translateM;
+                    prog.SetUniform("view", viewM);
+                    prog.SetUniform("model", Matrix4.Identity);
                     prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("lightEnabled", false);
                     prog.SetUniform("flatColour", col);
@@ -108,10 +108,10 @@ namespace SpaceMercs {
 
                 continue;
 
-                // Draw the name label
+                // Draw the name label for this star
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
                     GL.PushMatrix();
-                    GL.Translate(0.0, -(StarScale + 0.02), 0.01);
+                    GL.Translate(0.0, -(Const.StarScale + 0.02), 0.01);
                     double scale = 0.02 * fMapViewZ;
                     GL.Scale(scale, scale, scale);
                     st.DrawName();
@@ -121,7 +121,7 @@ namespace SpaceMercs {
                 // Display whether this system has been colonised with a flag
                 if (bShowFlags && st.Visited && st.Owner != null) {
                     GL.PushMatrix();
-                    GL.Translate(0.0, StarScale, 0.01);
+                    GL.Translate(0.0, Const.StarScale, 0.01);
                     double scale = 0.01 * fMapViewZ;
                     GL.Scale(scale, scale, scale);
                     GL.Color3(st.Owner.Colour);

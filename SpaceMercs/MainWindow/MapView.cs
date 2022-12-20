@@ -70,7 +70,6 @@ namespace SpaceMercs.MainWindow {
             MakeCurrent();
             SetupMapTextures();
             Planet.BuildPlanetHalo();
-            Terrain.GenerateSeedMap();
             SetupGUIElements();
             bLoaded = true;
             ThisDispatcher = Dispatcher.CurrentDispatcher;
@@ -305,12 +304,6 @@ namespace SpaceMercs.MainWindow {
             }
             if (IsKeyReleased(Keys.F9)) { // Load Game
                 LoadGame();
-                return;
-            }
-            if (IsKeyReleased(Keys.Escape)) { // Quit Game
-                if (GalaxyMap.bMapSetup == true) {
-                    msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
-                }
                 return;
             }
             if (view == ViewMode.ViewShip) {

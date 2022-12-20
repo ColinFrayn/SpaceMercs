@@ -27,7 +27,7 @@ namespace SpaceMercs {
             Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type").InnerText);
             XmlNode xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
-            colour = Const.PlanetTypeToCol1(Type);
+            colour = Const.PlanetTypeToCol2(Type);
             LoadMissions(xml);
         }
 
@@ -44,6 +44,9 @@ namespace SpaceMercs {
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Moon; } }
         public override void DrawBaseIcon() {
+            // Scale by MoonScale * PlanetScale
+            GL.Scale(Const.MoonScale * Const.PlanetScale, Const.MoonScale * Const.PlanetScale, 1f); // Make moons noticeably smaller than planets
+
             if (BaseSize == 0) return;
             GL.PushMatrix();
             GL.Scale(DrawScale * 1.3, DrawScale * 1.3, 1.0);
@@ -86,17 +89,22 @@ namespace SpaceMercs {
             GL.PopMatrix();
             GL.LineWidth(1.0f);
         }
-        public override void DrawSelected(ShaderProgram prog, int Level = 5) {
+        public override void DrawSelected(ShaderProgram prog, int Level = 6) {
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
+
+            float scale = DrawScale * Const.PlanetScale * Const.MoonScale;
+            Matrix4 pScaleM = Matrix4.CreateScale(scale, scale, 1f);
+            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 20000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 modelM = pRotateM * pScaleM;
+            prog.SetUniform("model", modelM);
+
             SetupTextureMap(32, 16);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
             GL.UseProgram(prog.ShaderProgramHandle);
             Sphere.CachedBuildAndDraw(Level, true);
             GL.BindTexture(TextureTarget.Texture2D, 0);
-            //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-            //GraphicsFunctions.sphere(Level).Draw();
         }
         public override void SetupTextureMap(int width, int height) {
             if (iTexture == -1 || texture == null) iTexture = GL.GenTexture();

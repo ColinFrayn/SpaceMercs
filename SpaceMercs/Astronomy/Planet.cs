@@ -12,7 +12,7 @@ namespace SpaceMercs {
         [Flags]
         public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40 };
         public Star Parent { get; set; }
-        private readonly List<Moon> Moons;
+        public readonly List<Moon> Moons;
         public double tempbase;
         private readonly BackgroundWorker bw;
         private bool bDrawing = false, bGenerating = false;
@@ -53,7 +53,7 @@ namespace SpaceMercs {
                     Moons.Add(mn);
                 }
             }
-            colour = Const.PlanetTypeToCol1(Type);
+            colour = Const.PlanetTypeToCol2(Type);
 
             LoadMissions(xml);
 
@@ -87,30 +87,6 @@ namespace SpaceMercs {
         public Moon GetMoonByID(int ID) {
             if (ID < 0 || ID >= Moons.Count) return null;
             return Moons[ID];
-        }
-
-        // Draw this planet plus moons on the system view
-        public void DrawSystem(ShaderProgram prog, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
-            GL.UseProgram(prog.ShaderProgramHandle);
-            if (radius > 7 * Const.Million) DrawSelected(prog, 7);
-            else DrawSelected(prog, 6);
-            DrawHalo();
-            if (bShowLabels) DrawNameLabel();
-            if (aoHover == this) GraphicsFunctions.DrawHoverReticule(DrawScale * 1.1);
-            if (aoSelected == this) GraphicsFunctions.DrawSelectedReticule(DrawScale * 1.1);
-            if (bShowColonies) DrawBaseIcon();
-            if (aoCurrentPosition == this) GraphicsFunctions.DrawLocationIcon(DrawScale * 1.0);
-
-            GL.Translate(0.0, Const.MoonGap, 0.0);
-            GL.Scale(Const.MoonScale, Const.MoonScale, Const.MoonScale); // Make moons noticeably smaller than planets
-            foreach (Moon mn in Moons) {
-                if (bShowColonies) mn.DrawBaseIcon();
-                mn.DrawSelected(prog, 7);
-                if (aoHover == mn) GraphicsFunctions.DrawHoverReticule(mn.DrawScale * 1.2);
-                if (aoSelected == mn) GraphicsFunctions.DrawSelectedReticule(mn.DrawScale * 1.2);
-                if (aoCurrentPosition == mn) GraphicsFunctions.DrawLocationIcon(mn.DrawScale * 1.25);
-                GL.Translate(0.0, 4.5, 0.0);
-            }
         }
 
         // Are we hovering over anything here?
@@ -256,7 +232,7 @@ namespace SpaceMercs {
                     if (mn.Temperature < 160 && mn.Type == PlanetType.Volcanic) bOK = false;
                 } while (bOK != true);
 
-                mn.colour = Const.PlanetTypeToCol1(mn.Type);
+                mn.colour = Const.PlanetTypeToCol2(mn.Type);
 
                 // Rotational/orbital parameters
                 double pmass; // Rough estimate of planet's mass / 10^18
@@ -366,7 +342,13 @@ namespace SpaceMercs {
             GL.PopMatrix();
             GL.Enable(EnableCap.DepthTest);
         }
-        public override void DrawSelected(ShaderProgram prog, int Level = 7) {
+        public override void DrawSelected(ShaderProgram prog, int Level = 8) {
+            float scale = DrawScale * Const.PlanetScale;
+            Matrix4 pScaleM = Matrix4.CreateScale(scale, scale, 1f);
+            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 10000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 modelM = pRotateM * pScaleM;
+            prog.SetUniform("model", modelM);
+
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
             SetupTextureMap(64, 32);
@@ -375,8 +357,11 @@ namespace SpaceMercs {
             GL.UseProgram(prog.ShaderProgramHandle);
             Sphere.CachedBuildAndDraw(Level, true);
             GL.BindTexture(TextureTarget.Texture2D, 0);
-            //GL.Rotate(Const.dSeconds * 360.0 / prot, Vector3d.UnitZ);
-            //GraphicsFunctions.sphere(Level).Draw();
+
+            //prog.SetUniform("textureEnabled", false);
+            //prog.SetUniform("flatColour", new Vector4(colour, 1f));
+            //GL.UseProgram(prog.ShaderProgramHandle);
+            //Sphere.CachedBuildAndDraw(Level, true);
         }
         public override void SetupTextureMap(int width, int height) {
             if (iTexture == -1 || texture == null) iTexture = GL.GenTexture();

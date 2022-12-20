@@ -2,10 +2,24 @@
 
 namespace SpaceMercs {
     static class Terrain {
-        private static double[,,] dSeedMap;
-        private static double[] dWeights = { 0.6, 0.8, 1.0, 0.8, 0.6, 0.4, 0.20, 0.14, 0.1 };
+        private static readonly double[,,] dSeedMap;
+        private static readonly double[] dWeights = { 0.6, 0.8, 1.0, 0.8, 0.6, 0.4, 0.20, 0.14, 0.1 };
         public delegate Vector3 HeightToColor(int height);
         private static Vector3 col1, col2, col3, col4, cdiff1, cdiff2;
+
+        static Terrain() {
+            // Generate Perlin noise seed map
+            Random rnd = new Random();
+            int SeedSize = (1 << (Const.PerlinOctaves)) + Const.SeedBuffer + 1;
+            dSeedMap = new double[SeedSize, SeedSize, SeedSize];
+            for (int x = 0; x < SeedSize; x++) {
+                for (int y = 0; y < SeedSize; y++) {
+                    for (int z = 0; z < SeedSize; z++) {
+                        dSeedMap[x, y, z] = Utils.NextGaussian(rnd, 0.0, 1.0);
+                    }
+                }
+            }
+        }
 
         // Generate the new map
         public static byte[] GenerateMap(AstronomicalObject ao, int width, int height) {
@@ -17,10 +31,10 @@ namespace SpaceMercs {
             // Get the anchor colours for the map
             if (ao.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
                 Star st = (Star)ao;
-                col1 = Vector3.Multiply(st.colour, 0.7f);
+                col1 = Vector3.Multiply(st.colour, 0.5f);
                 col2 = st.colour;
                 col3 = st.colour;
-                col4 = Vector3.Multiply(st.colour, 0.9f);
+                col4 = Vector3.Multiply(st.colour, 0.8f);
                 htc = HeightToColor_Default;
             }
             else {
@@ -84,20 +98,6 @@ namespace SpaceMercs {
                     double py = sy * Math.Cos(2 * xx);
                     iMap[x, y] = GetTerrainHeight(px, py, pz, Ox, Oy, Oz);
                     xx += pw;
-                }
-            }
-        }
-
-        // Generate Perlin noise seed map
-        public static void GenerateSeedMap() {
-            Random rnd = new Random();
-            int SeedSize = (1 << (Const.PerlinOctaves)) + Const.SeedBuffer + 1;
-            dSeedMap = new double[SeedSize, SeedSize, SeedSize];
-            for (int x = 0; x < SeedSize; x++) {
-                for (int y = 0; y < SeedSize; y++) {
-                    for (int z = 0; z < SeedSize; z++) {
-                        dSeedMap[x, y, z] = Utils.NextGaussian(rnd, 0.0, 1.0);
-                    }
                 }
             }
         }

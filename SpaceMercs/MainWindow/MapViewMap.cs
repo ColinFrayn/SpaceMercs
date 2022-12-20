@@ -161,8 +161,7 @@ namespace SpaceMercs.MainWindow {
             // Display all stars by sector
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
-                    Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
-                    Sector sc = GalaxyMap.GetSector(tp);
+                    Sector sc = GalaxyMap.GetSector(sx, sy);
                     sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
                 }
             }

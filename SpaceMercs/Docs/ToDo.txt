@@ -3,11 +3,15 @@ ToDo List
 -------------------------------------------------
 
 MapViewSystem
+- Stars
+-- Textures are not right
+-- Very clear dividing line.
 - Planets
--- Textures are wrong
--- Sizes and locations are wrong
+-- Textures are not right
+-- Very clear dividing line.
+-- Maybe some breaks in teh textures??
 - Moons
--- Display the moons at the right scale
+-- Why are moons not displaying?
 
 MapViewShip
 
