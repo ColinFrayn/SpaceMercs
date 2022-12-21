@@ -310,21 +310,21 @@ namespace SpaceMercs.MainWindow {
             // --- Configure the main menu ---
 
             // File menu
-            gpFileMenu = new GUIPanel(this, 0.07f, 0.23f, GUIPanel.PanelDirection.Vertical);
+            gpFileMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             gpFileMenu.InsertTextItem(I_New, "New Game", Aspect);
             gpFileMenu.InsertTextItem(I_Load, "Load Game", Aspect);
             gpFileMenu.InsertTextItem(I_Save, "Save Game", Aspect);
             gpFileMenu.InsertTextItem(I_Exit, "Exit Game", Aspect);
 
             // View menu
-            gpViewMenu = new GUIPanel(this, 0.07f, 0.3f, GUIPanel.PanelDirection.Vertical);
+            gpViewMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             gpViewMenu.InsertTextItem(I_ViewShip, "View Ship", Aspect);
             gpViewMenu.InsertTextItem(I_ViewTeam, "View Team", Aspect);
             gpViewMenu.InsertTextItem(I_ViewColony, "View Colony", Aspect);
             gpViewMenu.InsertTextItem(I_ViewRaces, "View Races", Aspect);
 
             // Skills menu
-            gpOptionsMenu = new GUIPanel(this, 0.07f, 0.38f, GUIPanel.PanelDirection.Vertical);
+            gpOptionsMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             gpOptionsMenu.InsertTextItem(I_OptionsLabels, "Labels", Aspect, () => bShowLabels);
             gpOptionsMenu.InsertTextItem(I_OptionsGridLines, "Grid Lines", Aspect, () => bShowGridLines);
             gpOptionsMenu.InsertTextItem(I_OptionsFadeUnvisited, "Fade Unvisited", Aspect, () => bFadeUnvisited);
@@ -334,7 +334,7 @@ namespace SpaceMercs.MainWindow {
             gpOptionsMenu.InsertTextItem(I_OptionsColonies, "Colonies", Aspect, () => bShowColonies);
 
             // First level menus
-            gpSubMenu = new GUIPanel(this, 0.01f, 0.23f, GUIPanel.PanelDirection.Vertical);
+            gpSubMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
             gpSubMenu.InsertIconItem(I_File, ts, true, gpFileMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);

@@ -68,9 +68,9 @@ namespace SpaceMercs {
                 bool bJustOpened = false;
                 // If this item hovered then open subpanel
                 if (piHover is not null) {
-                    SubPanel.Activate();
-                    bJustOpened= true;
-                    
+                    if (gpParent.Direction == GUIPanel.PanelDirection.Horizontal) SubPanel.Activate(iconX, iconY + iconH);
+                    else SubPanel.Activate(iconX + iconW + (BorderY*aspect), iconY);
+                    bJustOpened = true;                    
                 }
 
                 // Draw subpanel if it's active

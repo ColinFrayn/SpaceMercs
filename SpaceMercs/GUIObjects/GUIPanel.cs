@@ -8,13 +8,16 @@ namespace SpaceMercs {
     // A fold-out context menu object
     class GUIPanel : GUIObject {
         public enum PanelDirection { Horizontal, Vertical };
-        private readonly PanelDirection Direction = PanelDirection.Horizontal;
         private float PanelW = 0f, PanelH = 0f;
         private readonly List<PanelItem> Items = new List<PanelItem>();
         private readonly float _ZDepth = 0.5f;
-        private float IconW = 0.08f, IconH = 0.08f;
+        private const float MenuSize = 50; // Pixels
+        private float IconScale = 1f;
+        private float IconW { get { return IconScale * (float)MenuSize / (float)Window.Size.X; } }
+        private float IconH { get { return IconScale * (float)MenuSize / (float)Window.Size.Y; } }
 
         // Public properties
+        public readonly PanelDirection Direction = PanelDirection.Horizontal;
         public float PanelX { get; private set; }
         public float PanelY { get; private set; }
         public float BorderY { get; private set; }
@@ -68,13 +71,7 @@ namespace SpaceMercs {
             }
         }
         public void SetIconScale(float sc) {
-            if (Window != null) {
-                IconW = sc * 0.08f * (float)Window.Size.Y / (float)Window.Size.X;
-            }
-            else {
-                IconW = sc * 0.08f;
-            }
-            IconH = sc * 0.08f;
+            IconScale = sc;
         }
         public void SetPosition(float xx, float yy) {
             PanelX = xx;
@@ -84,14 +81,10 @@ namespace SpaceMercs {
             ClickX = x;
             ClickY = y;
         }
-
-        #region GUIObject
-        // Display the panel
-        public override void Display(int mx, int my, ShaderProgram prog) {
-            if (!Active) return;
-            double fmousex = (double)mx / (double)Window.Size.X;
-            double fmousey = (double)my / (double)Window.Size.Y;
-            HoverItem = DisplayAndCalculateMouseHover(prog, fmousex, fmousey);
+        public void Activate(float px, float py) {
+            PanelX = px;
+            PanelY = py;
+            this.Activate();
         }
 
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
@@ -136,8 +129,17 @@ namespace SpaceMercs {
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Lines.BindAndDraw();
 
-            // Return if we're hovering over anything
+            // Return details of the item we're hovering over, if any
             return piHover;
+        }
+
+        #region GUIObject
+        // Display the panel
+        public override void Display(int mx, int my, ShaderProgram prog) {
+            if (!Active) return;
+            double fmousex = (double)mx / (double)Window.Size.X;
+            double fmousey = (double)my / (double)Window.Size.Y;
+            HoverItem = DisplayAndCalculateMouseHover(prog, fmousex, fmousey);
         }
 
         // See if there's anything that needs to be done for the panel after a L-click

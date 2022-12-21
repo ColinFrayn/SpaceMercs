@@ -3,12 +3,9 @@ ToDo List
 -------------------------------------------------
 
 MapViewSystem
-- Base Icons
+- Colony Icons
 
 MapViewShip
-
-IconPanelItem : Should scale dimensions by aspect so it always appears with the correct aspect ratio
-- Make them a constant pixel size
 
 TravelDetails.Display()
 
@@ -30,7 +27,7 @@ MapViewSystem
 GUIPanel
 GUIButton
 GUIMessageBox
-IconPanelIcon
+IconPanelIcon (const pixel size)
 TextPanelItem
 Multi-depth panels
 
