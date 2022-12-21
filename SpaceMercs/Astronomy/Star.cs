@@ -244,8 +244,9 @@ namespace SpaceMercs {
 
             // Axial rotation period
             do {
-                RotationPeriod = (int)Utils.NextGaussian(rnd, Const.StarRotation, Const.StarRotationSigma);
-            } while (RotationPeriod < Const.StarRotationMin);
+                AxialRotationPeriod = (int)Utils.NextGaussian(rnd, Const.StarRotation, Const.StarRotationSigma);
+            } while (AxialRotationPeriod < Const.StarRotationMin);
+            OrbitalPeriod = 1; // Irrelevant, but avoiding zero :)
 
             // Make sure we don't have any planets. We generate them later
             Planets.Clear();
@@ -367,10 +368,14 @@ namespace SpaceMercs {
                 }
                 pl.colour = Const.PlanetTypeToCol2(pl.Type);
 
-                // Rotation/Orbital periods
-                double prot = Utils.NextGaussian(rnd, Const.PlanetRotation, Const.PlanetRotationSigma);
+                // Orbital period
+                double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
                 prot /= ((pl.orbit / Const.AU) * Math.Pow(pl.radius / (6.0 * Const.Million), 0.5));
-                pl.RotationPeriod = (int)prot;
+                pl.OrbitalPeriod = (int)prot;
+
+                // Axial rotation period (i.e. a day length)
+                double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
+                pl.AxialRotationPeriod = (int)(arot * (pl.radius / Const.PlanetSize));
 
                 pl.GenerateMoons(rnd, pdensity);
                 Planets.Add(pl);
@@ -441,10 +446,10 @@ namespace SpaceMercs {
 
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
-        public override void DrawSelected(ShaderProgram prog, int Level = 7) {
+        public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             // Sort out scaling and rotation
             Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
-            Matrix4 rotateM = Matrix4.Identity; // Matrix4.CreateRotationZ((float)Math.PI / 2.0f);
+            Matrix4 rotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 modelM = rotateM * scaleM;
             prog.SetUniform("model", modelM);
 

@@ -4,6 +4,7 @@ using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Xml;
 
@@ -14,7 +15,6 @@ namespace SpaceMercs {
         public Star Parent { get; set; }
         public readonly List<Moon> Moons;
         public double tempbase;
-        private bool bDrawing = false, bGenerating = false;
         public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
 
         public Planet(int _seed) {
@@ -90,26 +90,10 @@ namespace SpaceMercs {
             return null;
         }
 
-        // Draw the planet's name label
-        private void DrawNameLabel() {
-            if (Name == null || Name.Length == 0) return;
-            SetName(Name);
-            GL.PushMatrix();
-            GL.Disable(EnableCap.Lighting);
-            GL.Color3(1.0, 1.0, 1.0);
-            double dskip = (Colony != null) ? 0.7 : 0.06;
-            if ((ID & 1) == 0) GL.Translate(0.0, -(DrawScale * 1.06) - dskip, 0.0);
-            else GL.Translate(0.0, (DrawScale * 1.06) + 0.06, 0.0);
-            GL.Scale(1.7, 1.7, 1.7);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //if ((ID & 1) == 0) tlName.Draw(TextLabel.Alignment.BottomMiddle);
-            //else tlName.Draw(TextLabel.Alignment.TopMiddle);
-            GL.PopMatrix();
-        }
-
         // Build texture maps for the planets' radial brightness maps
         public static void BuildPlanetHalo() {
             double RMin = 0.8;
+            GL.ActiveTexture(TextureUnit.Texture0);
             Textures.iPlanetHalo = GL.GenTexture();
             Textures.bytePlanetHalo = new byte[Textures.PlanetHaloTextureSize * Textures.PlanetHaloTextureSize * 3];
             for (int y = 0; y < Textures.PlanetHaloTextureSize; y++) {
@@ -125,43 +109,36 @@ namespace SpaceMercs {
                     Textures.bytePlanetHalo[((y * Textures.PlanetHaloTextureSize) + x) * 3 + 1] = val;
                     Textures.bytePlanetHalo[((y * Textures.PlanetHaloTextureSize) + x) * 3 + 2] = val;
                 }
-            }
-        }
-
-        // Draw a halo-type atmosphere effect round a planet
-        public void DrawHalo() {
-            if (Type == PlanetType.Gas) return;
-            GL.DepthMask(false);
-            GL.Disable(EnableCap.Lighting);
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);
-            GL.Enable(EnableCap.Texture2D);
+            }            
             GL.BindTexture(TextureTarget.Texture2D, Textures.iPlanetHalo);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, Textures.PlanetHaloTextureSize, Textures.PlanetHaloTextureSize, 0, PixelFormat.Rgb, PixelType.UnsignedByte, Textures.bytePlanetHalo);
             Textures.SetParameters();
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            GL.PushMatrix();
-            double pscale = DrawScale * 1.08;
-            if (Type == PlanetType.Oceanic) pscale *= 1.1;
-            if (Type == PlanetType.Ice) pscale *= 1.05;
-            GL.Scale(pscale, pscale, pscale);
-            GL.Color3(1.0, 1.0, 1.0);
+        }
 
-            // Draw the halo
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(0.0, 1.0);
-            GL.Vertex3(-1.0, 1.0, 0.0);
-            GL.TexCoord2(1.0, 1.0);
-            GL.Vertex3(1.0, 1.0, 0.0);
-            GL.TexCoord2(1.0, 0.0);
-            GL.Vertex3(1.0, -1.0, 0.0);
-            GL.TexCoord2(0.0, 0.0);
-            GL.Vertex3(-1.0, -1.0, 0.0);
-            GL.End();
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.Blend);
-            GL.DepthMask(true);
+        // Draw a halo-type atmosphere effect round a planet
+        public void DrawHalo(ShaderProgram prog) {
+            if (Type == PlanetType.Gas) return;
+
+            float pscale = DrawScale * Const.PlanetScale * 2.16f;
+            if (Type == PlanetType.Oceanic) pscale *= 1.1f;
+            if (Type == PlanetType.Ice) pscale *= 1.05f;
+
+            Matrix4 pScaleM = Matrix4.CreateScale(pscale);
+            Matrix4 pTranslationM = Matrix4.CreateTranslation(-0.5f, -0.5f, 0f);
+            prog.SetUniform("model", pTranslationM * pScaleM);
+
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("lightEnabled", false);
+            prog.SetUniform("texPos", 0f, 0f);
+            prog.SetUniform("texScale", 1f, 1f);
+
+            GL.ActiveTexture(TextureUnit.Texture0);
+            GL.BindTexture(TextureTarget.Texture2D, Textures.iPlanetHalo);
+
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
         }
 
         // Generate the moons for this planet
@@ -186,7 +163,7 @@ namespace SpaceMercs {
             if (radius < 2.5 * Const.Million) nmn -= rnd.Next(2) + 1;
             if (radius < 2 * Const.Million) nmn -= rnd.Next(2) + 1;
             if (Type != PlanetType.Gas) nmn /= 3;
-            if (nmn > 8) nmn = 8 + rnd.Next(2);
+            if (nmn > 7) nmn = 7 + rnd.Next(2);
             if (nmn < minMoons) nmn = minMoons;
 
             // Generate moons
@@ -225,35 +202,22 @@ namespace SpaceMercs {
 
                 mn.colour = Const.PlanetTypeToCol2(mn.Type);
 
-                // Rotational/orbital parameters
+                // Mass
                 double pmass; // Rough estimate of planet's mass / 10^18
                 pmass = Math.Pow((radius / Const.EarthRadius), 3.0) * 6000000.0;
                 if (Type == PlanetType.Gas) pmass /= 4.0;
 
+                // Orbital period
+                double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
+                prot /= ((mn.orbit / Const.AU) * Math.Pow(mn.radius / (6.0 * Const.Million), 0.5));
+                mn.OrbitalPeriod = (int)prot;
+
+                // Axial rotation
+                double arot = Utils.NextGaussian(rnd, prot, prot / 12f);
+                mn.AxialRotationPeriod = (int)arot;
+
                 Moons.Add(mn);
             }
-        }
-
-        // Set up more detailed texture maps if necessary
-        // If this is a large one then do it in a thread so we don't freeze the main GUI
-        private void bw_DoWork(object sender, DoWorkEventArgs e) {
-            int width = ((KeyValuePair<int, int>)e.Argument).Key;
-            int height = ((KeyValuePair<int, int>)e.Argument).Value;
-            TexResult tr = new TexResult();
-            tr.width = width;
-            tr.height = height;
-            tr.texture = Terrain.GenerateMap(this, width, height);
-            e.Result = tr;
-        }
-        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            TexResult tr = (TexResult)e.Result;
-            while (bDrawing) ;
-            texture = tr.texture;
-            GL.BindTexture(TextureTarget.Texture2D, iTexture);
-            GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, tr.width, tr.height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, texture);
-            Textures.SetParameters();
-            bGenerating = false;
         }
 
         // Randomly expand a moon base
@@ -281,8 +245,6 @@ namespace SpaceMercs {
             if (BaseSize == 0) return;
             GL.Disable(EnableCap.DepthTest);
             GL.PushMatrix();
-            // Opposite the name tag
-            //GL.Translate(0.0, (DrawScale * 1.3) + 0.2, 0.0); // Below planet icon
             GL.Translate(0.0, -(DrawScale * 1.3) - 0.2, 0.0); // Above planet icon
             GL.Scale(1.0, 1.0, 1.0);
             GL.Translate(-((BaseSize - 1) * 0.7) / 2.0, 0.0, 0.0);
@@ -336,9 +298,7 @@ namespace SpaceMercs {
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             float scale = DrawScale * Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Math.PI / 2.0f);
-            //Matrix4 pRotateM = Matrix4.CreateRotationZ((float)Math.PI / 2.0f) *
-            //                   Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 5000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 modelM = pRotateM * pScaleM;
             prog.SetUniform("model", modelM);
 
@@ -350,11 +310,6 @@ namespace SpaceMercs {
             GL.UseProgram(prog.ShaderProgramHandle);
             Sphere.CachedBuildAndDraw(Level, true);
             GL.BindTexture(TextureTarget.Texture2D, 0);
-
-            //prog.SetUniform("textureEnabled", false);
-            //prog.SetUniform("flatColour", new Vector4(colour, 1f));
-            //GL.UseProgram(prog.ShaderProgramHandle);
-            //Sphere.CachedBuildAndDraw(Level, true);
         }
         public override void SetupTextureMap(int width, int height) {
             if (iTexture == -1 || texture == null) iTexture = GL.GenTexture();

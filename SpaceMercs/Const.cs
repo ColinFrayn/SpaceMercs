@@ -47,16 +47,18 @@ namespace SpaceMercs {
         public const double PlanetOrbitFactor = 1.4;
         public const double PlanetOrbitFactorSigma = 0.02;
         public const double PlanetSize = 6000000.0;
-        public const double PlanetSizeSigma = 1000000.0;
-        public const double PlanetSizeMin = 1500000.0;
+        public const double PlanetSizeSigma = PlanetSize / 6;
+        public const double PlanetSizeMin = PlanetSize / 4;
         public const double GasGiantScale = 10.0;
         public const double GasGiantScaleSigma = 1.0;
         public const int MaxPlanetsPerSystem = 9;
         public const double StarRotation = 25.0 * 24.0 * 3600.0;
         public const double StarRotationSigma = StarRotation / 10.0;
         public const double StarRotationMin = StarRotation / 5.0;
-        public const double PlanetRotation = 1.0 * 24.0 * 3600.0;
-        public const double PlanetRotationSigma = PlanetRotation / 10.0;
+        public const double AverageOrbitalPeriod = 1.0 * 24.0 * 3600.0 * 365.0;
+        public const double AverageOrbitalPeriodSigma = AverageOrbitalPeriod / 10.0;
+        public const double DayLength = 24.0 * 3600.0;
+        public const double DayLengthSigma = DayLength / 10.0;
 
         // Planet generation
         public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) {

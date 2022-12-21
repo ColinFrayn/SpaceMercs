@@ -3,13 +3,14 @@ ToDo List
 -------------------------------------------------
 
 MapViewSystem
-- Hover frames etc.
+- Base Icons
 
 MapViewShip
 
-iconPanelText : Does not display well when screwing with aspect
+TextPanelItem : Does not display well when screwing with aspect
 
-IconPanelItem : Should scale dimensions by aspect
+IconPanelItem : Should scale dimensions by aspect so it always appears with the correct aspect ratio
+- Make them a constant pixel size
 
 TravelDetails.Display()
 
@@ -49,7 +50,6 @@ Backburner
 ----------
 
 System view
-- Planet textures
 - Star sometimes vanishes on certain aspect ratios
 
 Improve TextRenderer

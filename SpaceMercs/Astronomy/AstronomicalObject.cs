@@ -11,7 +11,8 @@ namespace SpaceMercs {
         public string Name { get { return strName; } }
         public double radius; // In metres
         public double orbit; // In metres
-        public int RotationPeriod; // Period of rotation (seconds)
+        public int OrbitalPeriod; // Period of orbit (seconds)
+        public int AxialRotationPeriod; // Period of axial rotation (seconds)
         public int Temperature { get; set; } // Kelvin
         public Vector3 colour;
         public int Seed;
@@ -76,7 +77,14 @@ namespace SpaceMercs {
             radius = double.Parse(xml.SelectSingleNode("Radius").InnerText);
             if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit").InnerText);
             else orbit = 0;
-            RotationPeriod = Int32.Parse(xml.SelectSingleNode("PRot").InnerText);
+            OrbitalPeriod = Int32.Parse(xml.SelectSingleNode("PRot").InnerText);
+            if (xml.SelectSingleNode("ARot") != null) {
+                AxialRotationPeriod = Int32.Parse(xml.SelectSingleNode("ARot").InnerText);
+            }
+            else {
+                // Approximation, for backwards compatibility
+                AxialRotationPeriod = (int)(Const.DayLength * (radius / Const.PlanetSize));
+            }
             Temperature = Int32.Parse(xml.SelectSingleNode("Temp").InnerText);
             Seed = Int32.Parse(xml.SelectSingleNode("Seed").InnerText);
             Random rnd = new Random(Seed);
@@ -90,7 +98,8 @@ namespace SpaceMercs {
             if (!String.IsNullOrEmpty(strName)) file.WriteLine("<Name>" + strName + "</Name>");
             if (orbit != 0.0) file.WriteLine("<Orbit>" + Math.Round(orbit, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(radius, 0).ToString() + "</Radius>");
-            file.WriteLine("<PRot>" + RotationPeriod.ToString() + "</PRot>");
+            file.WriteLine("<PRot>" + OrbitalPeriod.ToString() + "</PRot>");
+            file.WriteLine("<ARot>" + AxialRotationPeriod.ToString() + "</ARot>");
             file.WriteLine("<Temp>" + Temperature.ToString() + "</Temp>");
             file.WriteLine("<Seed>" + Seed + "</Seed>");
         }

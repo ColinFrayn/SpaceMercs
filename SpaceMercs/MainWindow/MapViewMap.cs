@@ -123,13 +123,13 @@ namespace SpaceMercs.MainWindow {
             {
                 double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
-                Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos.X, CurrentSystem.MapPos.Y + (float)StarScale * 1.8f, 0f);
-                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale * 1.2f / Aspect, -(float)StarScale * 1.4f, 1f);
+                Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos.X, CurrentSystem.MapPos.Y, 0f);
+                Matrix4 scaleM = Matrix4.CreateScale((float)StarScale, (float)StarScale, 1f);
                 Matrix4 modelM = scaleM * translateM;
                 flatColourShaderProgram.SetUniform("model", modelM);
                 flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                 GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
-                Triangle.Flat.BindAndDraw();
+                TriangleFocus.Flat.BindAndDraw();
             }
         }
 
@@ -157,6 +157,8 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("lightEnabled", true);
             fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
             fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram.SetUniform("texPos", 0f, 0f);
+            fullShaderProgram.SetUniform("texScale", 1f, 1f);
 
             // Display all stars by sector
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {

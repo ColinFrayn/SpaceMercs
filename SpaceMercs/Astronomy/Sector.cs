@@ -84,7 +84,8 @@ namespace SpaceMercs {
                     Matrix4 viewM = scaleM * translateM;
                     prog.SetUniform("view", viewM);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-                    st.DrawMap(prog, iLevel);
+                    //st.DrawMap(prog, iLevel);
+                    st.DrawSelected(prog, iLevel);
                 }
                 else {
                     // Fade out unvisited stars (if set to do so)

@@ -95,8 +95,7 @@ namespace SpaceMercs {
 
             float scale = DrawScale * Const.PlanetScale * Const.MoonScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Math.PI / 2.0f);
-            //Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 10000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 modelM = pRotateM * pScaleM;
             prog.SetUniform("model", modelM);
 
