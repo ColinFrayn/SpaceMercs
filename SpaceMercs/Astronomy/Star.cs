@@ -9,13 +9,12 @@ using System.Xml;
 
 namespace SpaceMercs {
     class Star : AstronomicalObject {
-        private readonly int PDensity;
         private double Age;
 
         public readonly List<Planet> Planets;
         public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
         public string StarType { get; private set; }
-        public Race Owner { get; private set; }
+        public Race? Owner { get; private set; }
         public Vector3 MapPos { get; private set; }
         public bool bGenerated { get; private set; }
         public bool Visited { get; private set; }
@@ -40,18 +39,20 @@ namespace SpaceMercs {
             if (!st.TradeRoutes.Contains(this)) st.AddTradeRoute(this);
         }
 
-        public Star(float X, float Y, int _seed, int PlanetDensity, Sector s) {
+        public Star(float X, float Y, int _seed, Sector s, int sno) {
             MapPos = new Vector3(X, Y, 0f);
-            PDensity = PlanetDensity;
             Planets = new List<Planet>();
             Visited = false;
             Sector = s;
             strName = "";
             Seed = _seed;
+            StarType = "";
+            ID = sno;
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
+            Generate();
         }
         public Star(XmlNode xml, Sector sect) {
             Sector = sect;
@@ -308,7 +309,7 @@ namespace SpaceMercs {
             // Number of planets
             int npl = (rnd.Next(pdensity + 1) + rnd.Next(pdensity + 4) + rnd.Next(pdensity + 4)) / 2;
             if (radius < 30.0 * Const.Million) npl = (npl * 2) / 3; // Reduce npl for white dwarfs
-            if (npl > 10) npl = Const.MaxPlanetsPerSystem;
+            if (npl > Const.MaxPlanetsPerSystem) npl = Const.MaxPlanetsPerSystem;
             if (npl < 1) npl = 1;
             double porbit = Const.PlanetOrbit * Mass;
 

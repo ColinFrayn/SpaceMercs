@@ -51,7 +51,7 @@ namespace SpaceMercs {
         public const double PlanetSizeMin = 1500000.0;
         public const double GasGiantScale = 10.0;
         public const double GasGiantScaleSigma = 1.0;
-        public const int MaxPlanetsPerSystem = 10;
+        public const int MaxPlanetsPerSystem = 9;
         public const double StarRotation = 25.0 * 24.0 * 3600.0;
         public const double StarRotationSigma = StarRotation / 10.0;
         public const double StarRotationMin = StarRotation / 5.0;

@@ -412,7 +412,6 @@ namespace SpaceMercs.MainWindow {
             gbViewColony.IsHover((int)e.X, (int)e.Y);
             gbScan.IsHover((int)e.X, (int)e.Y);
             if (view == ViewMode.ViewMap) MapHover();
-            if (view == ViewMode.ViewSystem) SystemHover();
         }
         protected override void OnMouseDown(MouseButtonEventArgs e) {
             if (PlayerTeam == null) return;

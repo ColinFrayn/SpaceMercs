@@ -21,6 +21,8 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("projection", projectionM);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
 
             fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
             fullShaderProgram.SetUniform("ambient", 0.25f);
@@ -31,71 +33,84 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the scene
-            DrawAstronomicalObjects(fullShaderProgram, Aspect, aoSelected, aoHover, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
+            DrawAstronomicalObjects(Aspect, aoSelected, aoHover, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
             DrawSystemText();
             SetupGUIHoverInfo();
             DrawGUI();
         }
 
-        private void DrawAstronomicalObjects(ShaderProgram prog, float aspect, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
-            prog.SetUniform("textureEnabled", false);
-            prog.SetUniform("lightEnabled", true);
+        private void DrawAstronomicalObjects(float aspect, AstronomicalObject? aoSelected, AstronomicalObject? aoHover, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
             Matrix4 translateM = Matrix4.CreateTranslation(0.8f + (SystemStar.DrawScale * Const.StarScale), 0.5f, 0f);
-            prog.SetUniform("view", squashM * translateM);
+            fullShaderProgram.SetUniform("view", squashM * translateM);
 
             // Draw the star
-            SystemStar.DrawSelected(prog, 12);
+            SystemStar.DrawSelected(fullShaderProgram, 12);
 
             // Draw system
             float px = 0.8f;
             float py = 0.25f;
+            float mx = (float)MousePosition.X / (float)Size.X;
+            float my = (float)MousePosition.Y / (float)Size.Y;
             foreach (Planet pl in SystemStar.Planets) {
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
                 //if (pl.Type == Planet.PlanetType.Oceanic) prog.SetUniform("view", Matrix4.CreateScale(10f) * squashM * pTranslateM); else
-                prog.SetUniform("view", squashM * pTranslateM);
+                fullShaderProgram.SetUniform("view", squashM * pTranslateM);
+                flatColourShaderProgram.SetUniform("view", squashM * pTranslateM);
 
                 // Draw the Planet
                 int Level = pl.radius > 7 * Const.Million ? 10 : 9;
-                pl.DrawSelected(prog, Level);
+                pl.DrawSelected(fullShaderProgram, Level);
 
                 // Draw all other Planet icons
                 //pl.DrawHalo();
                 //if (bShowLabels) pl.DrawNameLabel();
-                //if (aoHover == pl) GraphicsFunctions.DrawHoverReticule(pl.DrawScale * 1.1);
+                float dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (py - my) * (py - my);
+                if (dist2 <= (pl.DrawScale * Const.PlanetScale)*(pl.DrawScale * Const.PlanetScale)) {
+                    aoHover = pl;
+                    float scale = pl.DrawScale * Const.PlanetScale * 1.2f;
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    Annulus.Annulus32.BindAndDraw();
+                }
                 //if (aoSelected == pl) GraphicsFunctions.DrawSelectedReticule(pl.DrawScale * 1.1);
                 //if (bShowColonies) pl.DrawBaseIcon();
                 //if (aoCurrentPosition == pl) GraphicsFunctions.DrawLocationIcon(pl.DrawScale * 1.0);
 
                 // Draw the moons
-                float my = py + 0.1f;
+                float moony = py + 0.1f;
                 foreach (Moon mn in pl.Moons) {
-                    Matrix4 mTranslateM = Matrix4.CreateTranslation(px, my, 0f);
-                    prog.SetUniform("view", squashM * mTranslateM);
+                    Matrix4 mTranslateM = Matrix4.CreateTranslation(px, moony, 0f);
+                    fullShaderProgram.SetUniform("view", squashM * mTranslateM);
+                    flatColourShaderProgram.SetUniform("view", squashM * mTranslateM);
+
                     //if (bShowColonies) mn.DrawBaseIcon();
-                    mn.DrawSelected(prog, 7);
+                    mn.DrawSelected(fullShaderProgram, 7);
+
+                    dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (moony - my) * (moony - my);
+                    if (dist2 <= (pl.DrawScale * Const.PlanetScale * Const.MoonScale) * (pl.DrawScale * Const.PlanetScale * Const.MoonScale)) {
+                        aoHover = mn;
+                        float scale = mn.DrawScale * Const.PlanetScale * Const.MoonScale * 1.2f;
+                        Matrix4 pScaleM = Matrix4.CreateScale(scale);
+                        flatColourShaderProgram.SetUniform("model", pScaleM);
+                        flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                        GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                        Annulus.Annulus16.BindAndDraw();
+                    }
+
                     //if (aoHover == mn) GraphicsFunctions.DrawHoverReticule(mn.DrawScale * 1.2);
                     //if (aoSelected == mn) GraphicsFunctions.DrawSelectedReticule(mn.DrawScale * 1.2);
                     //if (aoCurrentPosition == mn) GraphicsFunctions.DrawLocationIcon(mn.DrawScale * 1.25);
-                    my += 0.07f;
+                    moony += 0.07f;
                 }
 
-                px -= (pl.DrawScale * Const.PlanetScale + 0.22f) * 0.3f;
+                px -= (pl.DrawScale * Const.PlanetScale + 0.18f) * 0.35f;
             }
 
-        }
-
-        // Get the system under the mouse pointer
-        private void SystemHover() {
-            AstronomicalObject aoHoverOld = aoHover;
-            aoHover = null;
-            if (GalaxyMap.bMapSetup == false) return;
-
-            // Set aoHover
-            double mousex = ((double)MousePosition.X / (double)Size.X) * 10.0 * Aspect;
-            double mousey = ((double)MousePosition.Y / (double)Size.Y) * 10.0;
-            aoHover = SystemStar.GetHover(Aspect, mousex, mousey);
-            // TODO if (aoHover != aoHoverOld) glMapView.Invalidate();
         }
 
         // Configure and locate the light from the star
@@ -149,7 +164,6 @@ namespace SpaceMercs.MainWindow {
                 if (bShowColonies) { bShowColonies = false; }
                 else { bShowColonies = true; }
             }
-            SystemHover();
         }
 
     }

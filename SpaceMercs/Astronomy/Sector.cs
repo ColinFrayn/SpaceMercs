@@ -32,9 +32,7 @@ namespace SpaceMercs {
                     X = (float)rand.NextDouble() * ((float)Const.SectorSize * 0.96f) + xoffset + ((float)Const.SectorSize * 0.02f);
                     Y = (float)rand.NextDouble() * ((float)Const.SectorSize * 0.96f) + yoffset + ((float)Const.SectorSize * 0.02f);
                 } while (CheckProximity(X, Y));
-                Star st = new Star(X, Y, rand.Next(10000000), map.PlanetDensity, this);
-                st.ID = sno;
-                st.Generate();
+                Star st = new Star(X, Y, rand.Next(10000000), this, sno);
                 Stars.Add(st);
             }
             // Done
