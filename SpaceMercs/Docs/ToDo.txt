@@ -7,8 +7,6 @@ MapViewSystem
 
 MapViewShip
 
-TextPanelItem : Does not display well when screwing with aspect
-
 IconPanelItem : Should scale dimensions by aspect so it always appears with the correct aspect ratio
 - Make them a constant pixel size
 

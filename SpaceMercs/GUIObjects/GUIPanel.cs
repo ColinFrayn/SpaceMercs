@@ -11,7 +11,7 @@ namespace SpaceMercs {
         private readonly PanelDirection Direction = PanelDirection.Horizontal;
         private float PanelW = 0f, PanelH = 0f;
         private readonly List<PanelItem> Items = new List<PanelItem>();
-        private float _ZDepth = 0.5f;
+        private readonly float _ZDepth = 0.5f;
         private float IconW = 0.08f, IconH = 0.08f;
 
         // Public properties
@@ -41,7 +41,8 @@ namespace SpaceMercs {
             pi.SetSubPanel(subPanel);
             pi.SetToggleDelegate(getBoolFunc);
             Items.Add(pi);
-            UpdatePanelDimensions(1f); // Aspect is irrelevant for icon panels
+            float aspect = (float)Window.Size.X / (float)Window.Size.Y;
+            UpdatePanelDimensions(aspect);
             return pi;
         }
         public void InsertTextItem(uint ID, string strText, float aspect, Func<bool>? getBoolFunc = null) {
@@ -98,6 +99,8 @@ namespace SpaceMercs {
             PanelItem? piHover = null;
             float BorderX = 1f / (float)Window.Size.X;
             BorderY = 1f / (float)Window.Size.Y;
+            float aspect = (float)Window.Size.X / (float)Window.Size.Y;
+            UpdatePanelDimensions(aspect);
 
             GL.Disable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
@@ -115,7 +118,6 @@ namespace SpaceMercs {
 
             // Draw the icons
             float px = PanelX, py = PanelY;
-            float aspect = (float)Window.Size.X / (float)Window.Size.Y;
             foreach (PanelItem pi in Items) {
                 PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(PanelW, IconH), _ZDepth + 0.01f, aspect);
                 if (piHover2 is not null) {
