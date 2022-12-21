@@ -14,7 +14,6 @@ namespace SpaceMercs {
         public Star Parent { get; set; }
         public readonly List<Moon> Moons;
         public double tempbase;
-        private readonly BackgroundWorker bw;
         private bool bDrawing = false, bGenerating = false;
         public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
 
@@ -27,9 +26,6 @@ namespace SpaceMercs {
             Ox = rnd.Next(Const.SeedBuffer);
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
-            bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
         }
         public Planet(XmlNode xml, Star parent) {
             Parent = parent;
@@ -56,11 +52,6 @@ namespace SpaceMercs {
             colour = Const.PlanetTypeToCol2(Type);
 
             LoadMissions(xml);
-
-            // Trigger the terrain generation
-            bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
         }
 
         // Save this planet to an Xml file
@@ -346,7 +337,6 @@ namespace SpaceMercs {
             float scale = DrawScale * Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
             Matrix4 pRotateM = Matrix4.CreateRotationY((float)Math.PI / 2.0f);
-            //Matrix4 pRotateM = Matrix4.Identity;
             //Matrix4 pRotateM = Matrix4.CreateRotationZ((float)Math.PI / 2.0f) *
             //                   Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 5000f / (float)RotationPeriod); // DEBUG Remove Scaling
             Matrix4 modelM = pRotateM * pScaleM;
@@ -371,19 +361,11 @@ namespace SpaceMercs {
             else {
                 if (texture.Length >= (width * height * 3)) return;
             }
-            if (width < 1000) {
-                texture = Terrain.GenerateMap(this, width, height);
-                GL.BindTexture(TextureTarget.Texture2D, iTexture);
-                GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, texture);
-                Textures.SetParameters();
-            }
-            else {
-                if (!bGenerating) {
-                    bGenerating = true;
-                    bw.RunWorkerAsync(new KeyValuePair<int, int>(width, height));
-                }
-            }
+            texture = Terrain.GenerateMap(this, width, height);
+            GL.BindTexture(TextureTarget.Texture2D, iTexture);
+            GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, texture);
+            Textures.SetParameters();
         }
         public override void ClearData() {
             GL.DeleteTexture(iTexture);

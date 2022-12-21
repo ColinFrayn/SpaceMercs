@@ -31,7 +31,7 @@ namespace SpaceMercs {
             // Get the anchor colours for the map
             if (ao.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
                 Star st = (Star)ao;
-                col1 = Vector3.Multiply(st.colour, 0.5f);
+                col1 = Vector3.Multiply(st.colour, 0.4f);
                 col2 = st.colour;
                 col3 = st.colour;
                 col4 = Vector3.Multiply(st.colour, 0.8f);

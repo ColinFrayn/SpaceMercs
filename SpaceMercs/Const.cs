@@ -61,7 +61,7 @@ namespace SpaceMercs {
         // Planet generation
         public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) {
             switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(0.5f, 0.5f, 0);
+                case Planet.PlanetType.Desert: return new Vector3(0.4f, 0.3f, 0);
                 case Planet.PlanetType.Gas: return new Vector3(0.5f, 0.5f, 0.6f);
                 case Planet.PlanetType.Oceanic: return new Vector3(0.0f, 0.0f, 0.4f);
                 case Planet.PlanetType.Ice: return new Vector3(0.0f, 0.0f, 0.5f);
@@ -83,7 +83,7 @@ namespace SpaceMercs {
         }
         public static Vector3 PlanetTypeToCol3(Planet.PlanetType pt) {
             switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(0.8f, 0.8f, 0.0f);
+                case Planet.PlanetType.Desert: return new Vector3(0.9f, 0.8f, 0.0f);
                 case Planet.PlanetType.Gas: return new Vector3(0.7f, 0.7f, 0.9f);
                 case Planet.PlanetType.Oceanic: return new Vector3(0.0f, 1.0f, 0.0f);
                 case Planet.PlanetType.Ice: return new Vector3(0.0f, 0.2f, 1.0f);
@@ -94,7 +94,7 @@ namespace SpaceMercs {
         }
         public static Vector3 PlanetTypeToCol4(Planet.PlanetType pt) {
             switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(1.0f, 1.0f, 0.0f);
+                case Planet.PlanetType.Desert: return new Vector3(1.0f, 1.0f, 0.3f);
                 case Planet.PlanetType.Gas: return new Vector3(0.8f, 0.8f, 1.0f);
                 case Planet.PlanetType.Oceanic: return new Vector3(0.6f, 1.0f, 0.8f);
                 case Planet.PlanetType.Ice: return new Vector3(0.8f, 1.0f, 1.0f);

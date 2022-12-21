@@ -3,15 +3,11 @@ ToDo List
 -------------------------------------------------
 
 MapViewSystem
-- Stars
--- Textures are not great : need more contrast
--- Not always displayed, especially if large
-- Planets
--- Textures are not great : need more contrast
-- Moons
--- Why are moons not displaying?
+- Hover frames etc.
 
 MapViewShip
+
+iconPanelText : Does not display well when screwing with aspect
 
 IconPanelItem : Should scale dimensions by aspect
 
@@ -29,16 +25,8 @@ Done Since Last Release
 -----------------------
 
 MapView title page
-
 MapViewDrawMap
-- DrawGrid
-- DrawTradeRoutes
-- DrawRangeCircles
-- DrawMapHoverLink : Done but not tested as I'm not sure when it's actually used
-- GUI text
-- Drawing stars (with and without texmap; plus lighting)
-- Hover text
-- DrawMapSelectionIcons
+MapViewSystem
 
 GUIPanel
 GUIButton
@@ -59,6 +47,10 @@ Should not be able to target self or own team
 ----------
 Backburner
 ----------
+
+System view
+- Planet textures
+- Star sometimes vanishes on certain aspect ratios
 
 Improve TextRenderer
 - Bold, Shadow, Border

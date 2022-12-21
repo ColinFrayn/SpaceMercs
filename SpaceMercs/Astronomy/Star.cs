@@ -32,7 +32,7 @@ namespace SpaceMercs {
 
         private static Vector3 cHottest = new Vector3(1.0f, 1.0f, 1.0f);
         private static Vector3 cMid = new Vector3(1.0f, 0.8f, 0.0f);
-        private static Vector3 cCoolest = new Vector3(0.9f, 0.2f, 0.1f);
+        private static Vector3 cCoolest = new Vector3(0.8f, 0.2f, 0.1f);
 
         public readonly List<Star> TradeRoutes = new List<Star>();
         public void AddTradeRoute(Star st) {

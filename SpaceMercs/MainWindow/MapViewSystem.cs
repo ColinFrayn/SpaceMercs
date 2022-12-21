@@ -52,6 +52,7 @@ namespace SpaceMercs.MainWindow {
             float py = 0.25f;
             foreach (Planet pl in SystemStar.Planets) {
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+                //if (pl.Type == Planet.PlanetType.Oceanic) prog.SetUniform("view", Matrix4.CreateScale(10f) * squashM * pTranslateM); else
                 prog.SetUniform("view", squashM * pTranslateM);
 
                 // Draw the Planet
@@ -76,7 +77,7 @@ namespace SpaceMercs.MainWindow {
                     //if (aoHover == mn) GraphicsFunctions.DrawHoverReticule(mn.DrawScale * 1.2);
                     //if (aoSelected == mn) GraphicsFunctions.DrawSelectedReticule(mn.DrawScale * 1.2);
                     //if (aoCurrentPosition == mn) GraphicsFunctions.DrawLocationIcon(mn.DrawScale * 1.25);
-                    my += 0.08f;
+                    my += 0.07f;
                 }
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.22f) * 0.3f;
