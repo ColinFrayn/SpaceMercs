@@ -4,12 +4,10 @@ ToDo List
 
 MapViewSystem
 - Stars
--- Textures are not right
--- Very clear dividing line.
+-- Textures are not great : need more contrast
+-- Not always displayed, especially if large
 - Planets
--- Textures are not right
--- Very clear dividing line.
--- Maybe some breaks in teh textures??
+-- Textures are not great : need more contrast
 - Moons
 -- Why are moons not displaying?
 

@@ -156,6 +156,19 @@ namespace SpaceMercs {
             return null;
         }
 
+        // Draw a simplified version on the map
+        public void DrawMap(ShaderProgram prog, int Level = 7) {
+            // Sort out scaling and rotation
+            Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
+            prog.SetUniform("model", scaleM);
+
+            // Setup the colour & draw it
+            prog.SetUniform("flatColour", new Vector4(colour, 1f));
+            prog.SetUniform("lightEnabled", true);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Sphere.CachedBuildAndDraw(Level, true);
+        }
+
         // Draw a name label (and construct one if it doesn't exist yet)
         public void DrawName() {
             if (strName.Length == 0) return;
@@ -413,7 +426,7 @@ namespace SpaceMercs {
             } while (inserted < Count && tries < 1000);
         }
 
-        // When we arrive in this system (or moev about the system) update colony growth
+        // When we arrive in this system (or move about the system) update colony growth
         public void UpdateColonies() {
             foreach (Planet pl in Planets) {
                 pl.CheckGrowth();
@@ -429,8 +442,8 @@ namespace SpaceMercs {
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 7) {
             // Sort out scaling and rotation
-            Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale, Const.StarScale * DrawScale, 1f);
-            Matrix4 rotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 200000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
+            Matrix4 rotateM = Matrix4.Identity; // Matrix4.CreateRotationZ((float)Math.PI / 2.0f);
             Matrix4 modelM = rotateM * scaleM;
             prog.SetUniform("model", modelM);
 

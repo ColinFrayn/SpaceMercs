@@ -10,8 +10,6 @@ namespace SpaceMercs.MainWindow {
         private Star SystemStar = null;
         private bool bShowColonies = true;
 
-        private float ax = 0f, ay = 0f, az = 0f; // DEBUG
-
         // Root call for displaying the system when zoomed in
         private void DrawSystem() {
             // Make sure we haven't still got the star selected
@@ -43,18 +41,15 @@ namespace SpaceMercs.MainWindow {
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
-            Matrix4 translateM = Matrix4.CreateTranslation((0.8f * aspect) + (DrawScale * StarScale), 0.5f, 0f);
+            Matrix4 translateM = Matrix4.CreateTranslation(0.8f + (SystemStar.DrawScale * Const.StarScale), 0.5f, 0f);
             prog.SetUniform("view", squashM * translateM);
 
             // Draw the star
             SystemStar.DrawSelected(prog, 12);
 
             // Draw system
-            float px = (0.86f * aspect);
+            float px = 0.8f;
             float py = 0.25f;
-            ax += 0.0011f; // DEBUG
-            ay += 0.0013f; // DEBUG
-            az += 0.0017f; // DEBUG
             foreach (Planet pl in SystemStar.Planets) {
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
                 prog.SetUniform("view", squashM * pTranslateM);
@@ -84,7 +79,7 @@ namespace SpaceMercs.MainWindow {
                     my += 0.08f;
                 }
 
-                px -= (pl.DrawScale * Const.PlanetScale + 0.27f) * aspect * 0.3f;
+                px -= (pl.DrawScale * Const.PlanetScale + 0.22f) * 0.3f;
             }
 
         }

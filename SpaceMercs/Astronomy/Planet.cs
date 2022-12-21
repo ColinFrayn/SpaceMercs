@@ -344,8 +344,11 @@ namespace SpaceMercs {
         }
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             float scale = DrawScale * Const.PlanetScale;
-            Matrix4 pScaleM = Matrix4.CreateScale(scale, scale, 1f);
-            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 10000f / (float)RotationPeriod); // DEBUG Remove Scaling
+            Matrix4 pScaleM = Matrix4.CreateScale(scale);
+            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Math.PI / 2.0f);
+            //Matrix4 pRotateM = Matrix4.Identity;
+            //Matrix4 pRotateM = Matrix4.CreateRotationZ((float)Math.PI / 2.0f) *
+            //                   Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI * 5000f / (float)RotationPeriod); // DEBUG Remove Scaling
             Matrix4 modelM = pRotateM * pScaleM;
             prog.SetUniform("model", modelM);
 
