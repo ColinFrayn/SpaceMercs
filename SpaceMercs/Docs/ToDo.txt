@@ -4,15 +4,17 @@ ToDo List
 
 MapViewShip
 - DrawShipHoverInfo()
--- Hover text needs an opaque background
-- Context menu setup??
-- DrawHullCondition()
-- DrawPowerBar()
+-- Add multi-line info for equipment
+
+Travel
+- Travel.Display()
+- Don't run it off the periodic timer, run it off the built-in update tick
+- Turn it off when saving
+- Make sure it restarts when loading
+
+Disable Colony button when travelling
 
 Ship.DrawBattle()
-
-TravelDetails.Display()
-- Also don't run it off the periodic timer, run it off the built-in update tick
 
 Main Menu
   Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details

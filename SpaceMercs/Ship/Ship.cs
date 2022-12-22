@@ -62,9 +62,9 @@ namespace SpaceMercs {
                 return Cap;
             }
         } // Maximum number of soldiers
-        public double HullFract {
+        public float HullFract {
             get {
-                return Hull / Type.MaxHull;
+                return (float)(Hull / Type.MaxHull);
             }
         }
         public double ShieldFract {
@@ -469,11 +469,10 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
 
             if (!Equipment[id].Item2) {
-                Matrix4 piScaleM = Matrix4.CreateScale(fIconSize / 2f);
-                Matrix4 piSquashM = Matrix4.CreateScale(1f, 0.2f, 1f);
-                Matrix4 piTranslateM = Matrix4.CreateTranslation(sx + fIconSize / 2f, sy + fIconSize / 2f, 0f);
+                Matrix4 piSquashM = Matrix4.CreateScale(1.2f, 0.2f, 1f);
                 Matrix4 piRotateM = Matrix4.CreateRotationZ((float)Math.PI / 4f);
-                prog.SetUniform("model", piSquashM * piRotateM * piTranslateM * piScaleM);
+                Matrix4 piTranslateM = Matrix4.CreateTranslation(sx + (fIconSize*0.1f), sy + (fIconSize * 0.0f), 0f);
+                prog.SetUniform("model", piSquashM * piRotateM * pScaleM * piTranslateM);
                 prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.Flat.BindAndDraw();

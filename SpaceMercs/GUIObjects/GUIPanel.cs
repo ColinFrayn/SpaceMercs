@@ -112,7 +112,7 @@ namespace SpaceMercs {
             // Draw the icons
             float px = PanelX, py = PanelY;
             foreach (PanelItem pi in Items) {
-                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(PanelW, IconH), _ZDepth + 0.01f, aspect);
+                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(Direction == PanelDirection.Horizontal ? IconW : PanelW, IconH), _ZDepth + 0.01f, aspect);
                 if (piHover2 is not null) {
                     piHover = piHover2;
                 }

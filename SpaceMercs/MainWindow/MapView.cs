@@ -26,13 +26,13 @@ namespace SpaceMercs.MainWindow {
         private bool bJustLoaded = false;
         private Team? PlayerTeam = null;
         private int MinSectorX, MaxSectorX, MinSectorY, MaxSectorY;
-        private readonly Stopwatch swLastTick = new Stopwatch();
         private DateTime lastLoad = DateTime.MinValue;
+        private readonly Stopwatch swLastTick = new Stopwatch();
         private readonly Stopwatch swLastClick = new Stopwatch();
         private GUIButton gbLoadGame, gbNewGame, gbExitGame;
 
         public GUIMessageBox msgBox { get; private set; }
-        public Travel TravelDetails { get; private set; }
+        public Travel? TravelDetails { get; private set; }
 
         // Macros
         public float Aspect { get { return (float)Size.X / (float)Size.Y; } }

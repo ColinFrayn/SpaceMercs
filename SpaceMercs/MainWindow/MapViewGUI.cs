@@ -378,14 +378,12 @@ namespace SpaceMercs.MainWindow {
             // Get journey time & check if it's ok
             double dJourneyTime = PlayerTeam.PlayerShip.CalculateTravelTime(PlayerTeam.CurrentPosition, aoSelected);
             TimeSpan ts = TimeSpan.FromSeconds(dJourneyTime);
-            msgBox.PopupConfirmation(String.Format("Really travel? Journey time = {0:%d}d {0:%h}h {0:%m}m {0:%s}s", ts), FlyTo_Continue, dJourneyTime);
+            msgBox.PopupConfirmation(String.Format("Really travel? Journey time = {0:%d}d {0:%h}h {0:%m}m {0:%s}s", ts), () => FlyTo_Continue(dJourneyTime));
         }
-        private void FlyTo_Continue(object jt) {
+        private void FlyTo_Continue(double jt) {
             // Set up that we're travelling
             double dJourneyTime = (double)jt;
             TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, dJourneyTime, PlayerTeam, this);
-            // TODO glMapView.Invalidate();
-            // TODO colonyToolStripMenuItem.Enabled = false;
         }
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.bMapSetup) return;

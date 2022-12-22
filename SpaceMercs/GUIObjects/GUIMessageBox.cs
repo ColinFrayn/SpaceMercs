@@ -4,7 +4,6 @@ using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Collections.Concurrent;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SpaceMercs {
     class GUIMessageBox : GUIObject {
@@ -20,8 +19,6 @@ namespace SpaceMercs {
         private List<string> Lines;
 
         private Action? OnClick = null;
-        private Action<object>? OnClickObj = null;
-        private object? Obj = null;
         private bool Decision = false;
 
         private class MsgConfig {
@@ -49,7 +46,6 @@ namespace SpaceMercs {
             else {
                 SetupBoxes(lines);
                 OnClick = null;
-                OnClickObj = null;
                 Decision = false;
             }
             Active = true;
@@ -65,24 +61,6 @@ namespace SpaceMercs {
             else {
                 SetupBoxes(lines);
                 OnClick = _onClick;
-                OnClickObj = null;
-                Decision = true;
-            }
-            Active = true;
-        }
-        public void PopupConfirmation(string strText, Action<object> _onClick, object _obj) {
-            List<string> lines = new List<string>(strText.Split('\n'));
-            PopupConfirmation(lines, _onClick, _obj);
-        }
-        public void PopupConfirmation(IEnumerable<string> lines, Action<object> _onClick, object _obj) {
-            if (Active) {
-                queue.Enqueue(new MsgConfig() { Decision = true, Lines = new List<string>(lines), OnClickObj = _onClick, Obj = _obj });
-            }
-            else {
-                SetupBoxes(lines);
-                OnClickObj = _onClick;
-                OnClick = null;
-                Obj = _obj;
                 Decision = true;
             }
             Active = true;
@@ -209,7 +187,6 @@ namespace SpaceMercs {
                 double ButtonX = 0.5 - (ButtonSplit + ButtonWidth);
                 if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) {
                     OnClick?.Invoke();
-                    OnClickObj?.Invoke(Obj);
                     CheckNext();
                     return true;
                 }
@@ -223,7 +200,6 @@ namespace SpaceMercs {
                 double ButtonX = (1.0 - ButtonWidth) / 2.0;
                 if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) {
                     OnClick?.Invoke();
-                    OnClickObj?.Invoke(Obj);
                     CheckNext();
                     return true;
                 }
@@ -237,7 +213,6 @@ namespace SpaceMercs {
             }
             else {
                 OnClick?.Invoke();
-                OnClickObj?.Invoke(Obj);
                 CheckNext();
             }
         }
@@ -249,8 +224,6 @@ namespace SpaceMercs {
             }
             SetupBoxes(msgc.Lines);
             OnClick = msgc.OnClick;
-            OnClickObj = msgc.OnClickObj;
-            Obj = msgc.Obj;
             Decision = msgc.Decision;
         }
 

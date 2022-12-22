@@ -39,7 +39,6 @@ namespace SpaceMercs.MainWindow {
             if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
             SetupUtilityButtons();
         }
-
         private void SetupUtilityButtons() {
             // "Repair Ship" button
             gbRepair.SetPosition(0.89f, 0.85f);
@@ -59,6 +58,7 @@ namespace SpaceMercs.MainWindow {
             else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
         }
+
         private void DrawShip() {
             if (!bLoaded || PlayerTeam?.PlayerShip is null) return;
 
@@ -202,12 +202,12 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("projection", projectionM);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
 
             // Show the context menu, if it's available
             gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-
-            // Show hover text
-            DrawShipHoverInfo();
 
             // Display the current date and time
             TextRenderer.DrawAt(string.IsNullOrEmpty(DebugString) ? Const.dtTime.ToString("F") : DebugString, Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
@@ -217,51 +217,54 @@ namespace SpaceMercs.MainWindow {
 
             if (irSelected != -1) DisplaySelectionText_Ship();
 
-            //DrawHullCondition();
-            //DrawPowerBar();
+            DrawHullCondition();
+            DrawPowerBar();
 
             // Display all buttons
             gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbFabricate.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+
+            // Show hover text
+            DrawShipHoverInfo();
         }
 
         // Setup a mini window to show details of the current hover room or context menu icon
-        private string GetShipHoverText() {
+        private IEnumerable<string>? GetShipHoverText() {
             if (gpSelect.Active) {
                 int ID = gpSelect.HoverID;
                 if (ID >= 0) {
                     if (ID < StaticData.ShipEquipment.Count) {
                         ShipEquipment se = StaticData.ShipEquipment[ID];
-                        return se.Name; // GetHoverText(PlayerTeam.PlayerShip);
+                        return se.GetHoverText(PlayerTeam.PlayerShip);
                     }
                     else {
-                        if (ID == (int)I_Build) return "Build";
-                        if (ID == (int)I_Cancel) return "Cancel";
-                        if (ID == (int)I_Salvage) return "Salvage";
-                        if (ID == (int)I_Timer) return "Sleep";
-                        if (ID == (int)I_Disconnect) return "Deactivate";
-                        if (ID == (int)I_Connect) return "Activate";
+                        if (ID == (int)I_Build) return new List<string>() { "Build" };
+                        if (ID == (int)I_Cancel) return new List<string>() { "Cancel" };
+                        if (ID == (int)I_Salvage) return new List<string>() { "Salvage" };
+                        if (ID == (int)I_Timer) return new List<string>() { "Sleep" };
+                        if (ID == (int)I_Disconnect) return new List<string>() { "Deactivate" };
+                        if (ID == (int)I_Connect) return new List<string>() { "Activate" };
                     }
-                    return "";
+                    return null;
                 }
             }
 
             if (bHoverHull || irHover > -1) {
                 ShipEquipment se = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irHover);
                 if (se == null) {
-                    if (bHoverHull) return "<No Armour>";
-                    else return "<Empty>";
+                    if (bHoverHull) return new List<string>() { "<No Armour>" };
+                    else return new List<string>() { "<Empty>" };
                 }
 
                 if (se != null) {
                     if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
-                        return se.Name; // GetHoverText();
+                        return se.GetHoverText();
                     }
-                    else return se.Name + " (Deactivated)";
+                    else return new List<string>() { se.Name + " (Deactivated)" };
                 }
-                return "";
+                return null;
             }
-            return "";
+            return null;
         }
 
         // Draw the hover info when hovering over a room
@@ -276,14 +279,21 @@ namespace SpaceMercs.MainWindow {
             float dYStart = 0.78f;
             float dYGap = 0.04f;
 
-            string txt = GetShipHoverText();
-            if (string.IsNullOrEmpty(txt)) return;
+            IEnumerable<string>? txtList = GetShipHoverText();
+            if (txtList is null || !txtList.Any()) return;
+            string txt = txtList.First(); // TODO: Display all lines
+
             float tx = xx > 0.5 ? xx - 0.02f : xx + 0.02f;
             float ty = yy > 0.5 ? yy - 0.02f : yy + 0.02f;
+            float px = tx, py = ty;
+            float ph = 0.03f, phb = ph * 0.2f;
+            TextMeasure tm = TextRenderer.MeasureText(txt);
+            float pw = ph * tm.Width / (Aspect * TextRenderer.FontSize);
 
             // Draw the hover text
             Alignment al = Alignment.BottomLeft;
             if (xx > 0.5) {
+                px -= pw;
                 if (yy > 0.5) al = Alignment.BottomRight;
                 else al = Alignment.TopRight;
             }
@@ -291,6 +301,18 @@ namespace SpaceMercs.MainWindow {
                 if (yy > 0.5) al = Alignment.BottomLeft;
                 else al = Alignment.TopLeft;
             }
+            if (yy > 0.5) py -= ph;
+
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", false);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+            Matrix4 pScaleM = Matrix4.CreateScale(pw, ph + (phb * 2f), 1f);
+            fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+            fullShaderProgram.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
+            GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = al,
                 Aspect = Aspect,
@@ -298,7 +320,7 @@ namespace SpaceMercs.MainWindow {
                 XPos = tx,
                 YPos = ty,
                 ZPos = 0.015f,
-                Scale = 0.03f
+                Scale = ph
             };
             TextRenderer.DrawWithOptions(txt, tro);
         }
@@ -376,155 +398,118 @@ namespace SpaceMercs.MainWindow {
         // Condition bars
         private void DrawHullCondition() {
             // Show the hull condition
-            GL.Disable(EnableCap.Texture2D);
-            GL.Enable(EnableCap.Blend);
-            double dFract = PlayerTeam.PlayerShip.HullFract;
-            GL.PushMatrix();
-            GL.Translate(0.79, 0.01, 0.1);
-            GL.Scale(0.2, 0.2, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Color3(0.6, 0.0, 0.0);
-            GL.Vertex3(0.0, 0.0, 0.0);
-            GL.Vertex3(0.0, 0.1, 0.0);
-            GL.Color3(1.0, 0.5, 0.0);
-            GL.Vertex3(Math.Min(dFract, 0.3), 0.1, 0.0);
-            GL.Vertex3(Math.Min(dFract, 0.3), 0.0, 0.0);
-            //
-            if (dFract > 0.3) {
-                GL.Color3(1.0, 0.5, 0.0);
-                GL.Vertex3(0.3, 0.0, 0.0);
-                GL.Vertex3(0.3, 0.1, 0.0);
-                GL.Color3(1.0, 1.0, 0.0);
-                GL.Vertex3(Math.Min(dFract, 0.5), 0.1, 0.0);
-                GL.Vertex3(Math.Min(dFract, 0.5), 0.0, 0.0);
+            float fract = PlayerTeam.PlayerShip.HullFract;
+            float barWidth = 0.2f, barHeight = 0.03f;
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(0.79f, 0.09f, 0f);
+            Matrix4 pScaleM = Matrix4.CreateScale(barWidth, barHeight, 1f);
+            fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+
+            // Display fractional progress bar
+            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
+            Spectrum.Flat.BindAndDraw();
+
+            // Black out the unused bit
+            if (fract < 1.0f) {
+                Matrix4 pbTranslateM = Matrix4.CreateTranslation(0.79f + (fract * barWidth), 0.1f, 0f);
+                fullShaderProgram.SetUniform("model", pScaleM * pbTranslateM);
+                fullShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1f));
+                GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
             }
-            //
-            if (dFract > 0.5) {
-                GL.Color3(1.0, 1.0, 0.0);
-                GL.Vertex3(0.5, 0.0, 0.0);
-                GL.Vertex3(0.5, 0.1, 0.0);
-                GL.Color3(0.0, 1.0, 0.0);
-                GL.Vertex3(Math.Min(dFract, 0.8), 0.1, 0.0);
-                GL.Vertex3(Math.Min(dFract, 0.8), 0.0, 0.0);
-            }
-            //
-            if (dFract > 0.8) {
-                GL.Color3(0.0, 1.0, 0.0);
-                GL.Vertex3(0.8, 0.0, 0.0);
-                GL.Vertex3(0.8, 0.1, 0.0);
-                GL.Color3(0.0, 0.0, 0.7);
-                GL.Vertex3(Math.Min(dFract, 1.0), 0.1, 0.0);
-                GL.Vertex3(Math.Min(dFract, 1.0), 0.0, 0.0);
-            }
-            GL.End();
 
             // Now draw the frame
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.0, 0.0, 0.1);
-            GL.Vertex3(1.0, 0.0, 0.1);
-            GL.Vertex3(1.0, 0.1, 0.1);
-            GL.Vertex3(0.0, 0.1, 0.1);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.PopMatrix();
+            fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
 
             // Show the label
-            GL.PushMatrix();
-            GL.Translate(0.78, 0.0, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlHull.Draw(TextLabel.Alignment.TopRight);
-            GL.PopMatrix();
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopRight,
+                Aspect = Aspect,
+                TextColour = Color.White,
+                XPos = 0.78f,
+                YPos = 0.09f,
+                ZPos = 0.015f,
+                Scale = 0.02f
+            };
+            TextRenderer.DrawWithOptions("Hull", tro);
 
             // Show the value
             string strHull = PlayerTeam.PlayerShip.Hull.ToString("0.#") + " / " + PlayerTeam.PlayerShip.Type.MaxHull.ToString("0.#");
-            GL.PushMatrix();
-            GL.Translate(0.89, 0.03, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.03 / Aspect, 0.03, 0.03);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(strHull, Alignment.TopMiddle);
-            GL.PopMatrix();
+            tro.Alignment = Alignment.TopMiddle;
+            tro.XPos = 0.89f;
+            tro.YPos = 0.09f;
+            TextRenderer.DrawWithOptions(strHull, tro);
         }
         private void DrawPowerBar() {
             // Show the power bar
-            GL.Disable(EnableCap.Texture2D);
-            double dFract = 0.0;
-            GL.PushMatrix();
-            GL.Translate(0.79, 0.12, 0.1);
-            GL.Scale(0.2, 0.2, 1.0);
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", false);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(0.79f, 0.15f, 0f);
             int pg = PlayerTeam.PlayerShip.PowerGeneration;
             int pc = PlayerTeam.PlayerShip.PowerConsumption;
+            float barWidth = 0.2f, barHeight = 0.03f;
+            Matrix4 pScaleM = Matrix4.CreateScale(barWidth, barHeight, 1f);
+
             if (pg > 0) {
-                dFract = (double)pc / (double)pg;
-                if (dFract < 1.0) {
-                    GL.Color3(0.0, 1.0, 0.0);
-                    GL.Begin(BeginMode.Quads);
-                    GL.Vertex3(0.0, 0.0, 0.0);
-                    GL.Vertex3(dFract, 0.0, 0.0);
-                    GL.Vertex3(dFract, 0.1, 0.0);
-                    GL.Vertex3(0.0, 0.1, 0.0);
-                    GL.End();
+                float fract = (float)pc / (float)pg;
+                if (fract < 1.0) {
+                    Matrix4 pfScaleM = Matrix4.CreateScale(barWidth * fract, barHeight, 1f);
+                    fullShaderProgram.SetUniform("model", pfScaleM * pTranslateM);
+                    fullShaderProgram.SetUniform("flatColour", new Vector4(0f, 1f, 0f, 1f));
+                    GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
                 else {
-                    GL.Color3(0.0, 1.0, 0.0);
-                    GL.Begin(BeginMode.Quads);
-                    GL.Vertex3(0.0, 0.0, 0.0);
-                    GL.Vertex3(1 / dFract, 0.0, 0.0);
-                    GL.Vertex3(1 / dFract, 0.1, 0.0);
-                    GL.Vertex3(0.0, 0.1, 0.0);
-                    GL.Color3(1.0, 0.0, 0.0);
-                    GL.Vertex3(1 / dFract, 0.0, 0.0);
-                    GL.Vertex3(1.0, 0.0, 0.0);
-                    GL.Vertex3(1.0, 0.1, 0.0);
-                    GL.Vertex3(1 / dFract, 0.1, 0.0);
-                    GL.End();
+                    Matrix4 pfScaleM = Matrix4.CreateScale(barWidth * (1f/fract), barHeight, 1f);
+                    fullShaderProgram.SetUniform("model", pfScaleM * pTranslateM);
+                    fullShaderProgram.SetUniform("flatColour", new Vector4(0f, 1f, 0f, 1f));
+                    GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
+                    Matrix4 p2TranslateM = Matrix4.CreateTranslation(0.79f + (0.2f/fract), 0.12f, 0f);
+                    pfScaleM = Matrix4.CreateScale(barWidth * (1f - (1f / fract)), barHeight, 1f);
+                    fullShaderProgram.SetUniform("model", pfScaleM * p2TranslateM);
+                    fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                    GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
             }
             else {
-                GL.Color3(1.0, 0.0, 0.0);
-                GL.Begin(BeginMode.Quads);
-                GL.Vertex3(0.0, 0.0, 0.0);
-                GL.Vertex3(1.0, 0.0, 0.0);
-                GL.Vertex3(1.0, 0.1, 0.0);
-                GL.Vertex3(0.0, 0.1, 0.0);
-                GL.End();
+                fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+                fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
             }
 
             // Now draw the frame
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.0, 0.0, 0.1);
-            GL.Vertex3(1.0, 0.0, 0.1);
-            GL.Vertex3(1.0, 0.1, 0.1);
-            GL.Vertex3(0.0, 0.1, 0.1);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.PopMatrix();
+            fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
 
             // Show the label
-            GL.PushMatrix();
-            GL.Translate(0.78, 0.11, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlPower.Draw(TextLabel.Alignment.TopRight);
-            GL.PopMatrix();
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopRight,
+                Aspect = Aspect,
+                TextColour = Color.White,
+                XPos = 0.78f,
+                YPos = 0.15f,
+                ZPos = 0.015f,
+                Scale = 0.02f
+            };
+            TextRenderer.DrawWithOptions("Power", tro);
 
             // Show the value
             string strPower = "Using " + pc + " / " + pg;
-            GL.PushMatrix();
-            GL.Translate(0.89, 0.14, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.03 / Aspect, 0.03, 0.03);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(strPower, Alignment.TopMiddle);
-            GL.PopMatrix();
-
+            tro.Alignment = Alignment.TopMiddle;
+            tro.XPos = 0.89f;
+            tro.YPos = 0.15f;
+            TextRenderer.DrawWithOptions(strPower, tro);
         }
 
         // Display the text labels required for the GUI
@@ -562,12 +547,10 @@ namespace SpaceMercs.MainWindow {
                     else tl2 = "Power : " + se.Power;
                     if (se.Attack > 0) tl3 = "Attack Bonus : " + se.Attack;
                     else if (se.Defence > 0) tl3 = "Defence Bonus : " + se.Defence;
-                    string strDesc = "";
-                    if (se.Capacity > 0) strDesc = "Support : " + se.Capacity;
-                    else if (se.Medlab) strDesc += "Medbay";
-                    else if (se.Armoury) strDesc += "Armoury";
-                    else if (se.Workshop) strDesc += "Workshop";
-                    if (!String.IsNullOrEmpty(strDesc)) tl4 = strDesc;
+                    if (se.Capacity > 0) tl4 = "Support : " + se.Capacity;
+                    else if (se.Medlab) tl4 = "Medbay";
+                    else if (se.Armoury) tl4 = "Armoury";
+                    else if (se.Workshop) tl4 = "Workshop";
                 }
                 else if (se is ShipWeapon) {
                     tl2 = "Power : " + se.Power;
@@ -589,9 +572,9 @@ namespace SpaceMercs.MainWindow {
             double cost = PlayerTeam.PlayerShip.CalculateRepairCost();
             if (cost == 0.0) return;
             cost = Math.Round(cost, 2);
-            msgBox.PopupConfirmation("Repair would cost " + cost + " credits. Proceed?", RepairShip_Continue, cost);
+            msgBox.PopupConfirmation("Repair would cost " + cost + " credits. Proceed?", () => RepairShip_Continue(cost));
         }
-        private void RepairShip_Continue(object c) {
+        private void RepairShip_Continue(double c) {
             double cost = (double)c;
             PlayerTeam.Cash -= cost;
             PlayerTeam.PlayerShip.RepairHull();
