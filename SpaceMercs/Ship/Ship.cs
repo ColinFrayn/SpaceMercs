@@ -178,7 +178,7 @@ namespace SpaceMercs {
         public int Defence { get; private set; }
         public int Armour { get { if (ArmourType == null) return 0; return ArmourType.BaseArmour; } }
 
-        public static Ship GenerateStarterShip(Team tm, ShipType st = null) {
+        public static Ship GenerateStarterShip(Team tm, ShipType? st = null) {
             Ship sh = new Ship(st != null ? st : StaticData.GetStarterShip());
             sh.Owner = tm;
             sh.Name = "Player Ship";
@@ -287,6 +287,7 @@ namespace SpaceMercs {
             double maxy = 0.0;
             TexSpecs? ts = null;
             if (ArmourType != null) ts = Textures.GetTexCoords(ArmourType);
+
             // Background / corridors
             foreach (ShipRoomDesign r in Type.Rooms) {
                 prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
@@ -345,7 +346,7 @@ namespace SpaceMercs {
                 foreach (Point pt in Type.Fillers) {
                     Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X, pt.Y, 0f);
                     prog.SetUniform("model", pScaleM * pTranslateM);
-                    if (ArmourType is null) {
+                    if (ArmourType is null || ts is null) {
                         prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
                         Square.Flat.BindAndDraw();
                     }
@@ -384,16 +385,11 @@ namespace SpaceMercs {
                 if (Equipment.ContainsKey(n)) DrawEquipment(prog, n);
             }
 
-            return;
-
             // Perimeter
-            if (bHoverHull) GL.Color3(1.0, 1.0, 1.0);
-            else GL.Color3(0.4, 0.4, 0.4);
-            GL.Begin(BeginMode.LineLoop);
-            foreach (Point pt in Type.Perimeter) {
-                GL.Vertex3(pt.X, pt.Y, 0.0);
-            }
-            GL.End();
+            if (bHoverHull) prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            else prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, 1f));
+            prog.SetUniform("model", Matrix4.Identity);
+            Type.DrawPerimeter(prog);
         }
 
         // Draw this ship when in battle
@@ -452,33 +448,35 @@ namespace SpaceMercs {
             if (!Equipment.ContainsKey(id)) throw new Exception("Attempting to draw non-existent ship equipment!");
             ShipEquipment se = Equipment[id].Item1;
             ShipRoomDesign rd = Type.Rooms[id];
-            double dIconSize = Math.Min(rd.Width, rd.Height);
-            if (dIconSize > 1.0) dIconSize = 1.0 + (dIconSize - 1.0) / 2.0;
-            else dIconSize = 0.85;
-            double sx = rd.XPos + (rd.Width - dIconSize) / 2.0;
-            double sy = rd.YPos + (rd.Height - dIconSize) / 2.0;
+            float fIconSize = (float)Math.Min(rd.Width, rd.Height);
+            if (fIconSize > 1f) fIconSize = 1f + (fIconSize - 1f) / 2f;
+            else fIconSize = 0.85f;
+            float sx = rd.XPos + (rd.Width - fIconSize) / 2f;
+            float sy = rd.YPos + (rd.Height - fIconSize) / 2f;
             TexSpecs ts = Textures.GetTexCoords(se);
 
-            return;
-
+            Matrix4 pScaleM = Matrix4.CreateScale(fIconSize);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(sx, sy, 0f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
-            GL.Enable(EnableCap.Texture2D);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(ts.X, ts.Y + ts.H);
-            GL.Vertex3(sx, sy, 0.0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y + ts.H);
-            GL.Vertex3(sx + dIconSize, sy, 0.0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y);
-            GL.Vertex3(sx + dIconSize, sy + dIconSize, 0.0);
-            GL.TexCoord2(ts.X, ts.Y);
-            GL.Vertex3(sx, sy + dIconSize, 0.0);
-            GL.End();
-            GL.Disable(EnableCap.Texture2D);
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
+            prog.SetUniform("textureEnabled", false);
+
             if (!Equipment[id].Item2) {
-                GL.PushMatrix();
-                GL.Translate(sx + dIconSize / 2.0, sy + dIconSize / 2.0, 0.0);
-                GraphicsFunctions.DrawInactiveIcon(dIconSize);
-                GL.PopMatrix();
+                Matrix4 piScaleM = Matrix4.CreateScale(fIconSize / 2f);
+                Matrix4 piSquashM = Matrix4.CreateScale(1f, 0.2f, 1f);
+                Matrix4 piTranslateM = Matrix4.CreateTranslation(sx + fIconSize / 2f, sy + fIconSize / 2f, 0f);
+                Matrix4 piRotateM = Matrix4.CreateRotationZ((float)Math.PI / 4f);
+                prog.SetUniform("model", piSquashM * piRotateM * piTranslateM * piScaleM);
+                prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
             }
         }
 

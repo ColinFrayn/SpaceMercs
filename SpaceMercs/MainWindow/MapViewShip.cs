@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -164,7 +165,6 @@ namespace SpaceMercs.MainWindow {
                 SetupContextMenu_Ship();
             }
             if (e.Button == MouseButton.Left) {
-                SetSelection(irHover);
                 irSelected = irHover;
             }
         }
@@ -200,107 +200,107 @@ namespace SpaceMercs.MainWindow {
         private void ShowShipGUI() {
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             fullShaderProgram.SetUniform("projection", projectionM);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
             // Show the context menu, if it's available
             gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
-            return;
-
             // Show hover text
-            SetupRoomHoverInfo();
-            DrawRoomHoverInfo();
+            DrawShipHoverInfo();
 
-            // Show the cash
-            GL.PushMatrix();
-            GL.Translate(0.01, 0.0, 0.1);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(PlayerTeam!.Cash.ToString("F2") + " credits", Alignment.TopLeft);
-            GL.PopMatrix();
+            // Display the current date and time
+            TextRenderer.DrawAt(string.IsNullOrEmpty(DebugString) ? Const.dtTime.ToString("F") : DebugString, Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
-            DrawHullCondition();
-            DrawPowerBar();
+            // Display the player's remaining cash reserves
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
+
             if (irSelected != -1) DisplaySelectionText_Ship();
 
+            //DrawHullCondition();
+            //DrawPowerBar();
+
             // Display all buttons
-            gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            gbFabricate.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gbFabricate.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
         }
 
         // Setup a mini window to show details of the current hover room or context menu icon
-        private void SetupRoomHoverInfo() {
-            //if (tlHover == null) {
-            //  tlHover = new TextRenderer("...");
-            //  tlHover.Border = 1;
-            //  tlHover.BorderColour = Color.LightGray;
-            //  tlHover.BackgroundColour = Color.Black;
-            //}
+        private string GetShipHoverText() {
             if (gpSelect.Active) {
                 int ID = gpSelect.HoverID;
                 if (ID >= 0) {
                     if (ID < StaticData.ShipEquipment.Count) {
                         ShipEquipment se = StaticData.ShipEquipment[ID];
-                        //tlHover.UpdateTextFromList(se.GetHoverText(PlayerTeam.PlayerShip));
+                        return se.Name; // GetHoverText(PlayerTeam.PlayerShip);
                     }
                     else {
-                        //if (ID == (int)I_Build) tlHover.UpdateText("Build");
-                        //if (ID == (int)I_Cancel) tlHover.UpdateText("Cancel");
-                        //if (ID == (int)I_Salvage) tlHover.UpdateText("Salvage");
-                        //if (ID == (int)I_Timer) tlHover.UpdateText("Sleep");
-                        //if (ID == (int)I_Disconnect) tlHover.UpdateText("Deactivate");
-                        //if (ID == (int)I_Connect) tlHover.UpdateText("Activate");
+                        if (ID == (int)I_Build) return "Build";
+                        if (ID == (int)I_Cancel) return "Cancel";
+                        if (ID == (int)I_Salvage) return "Salvage";
+                        if (ID == (int)I_Timer) return "Sleep";
+                        if (ID == (int)I_Disconnect) return "Deactivate";
+                        if (ID == (int)I_Connect) return "Activate";
                     }
-                    return;
+                    return "";
                 }
             }
 
             if (bHoverHull || irHover > -1) {
                 ShipEquipment se = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irHover);
                 if (se == null) {
-                    //if (bHoverHull) tlHover.UpdateText("<No Armour>");
-                    //else tlHover.UpdateText("<Empty>");
-                    return;
+                    if (bHoverHull) return "<No Armour>";
+                    else return "<Empty>";
                 }
 
                 if (se != null) {
-                    //if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
-                    //  tlHover.UpdateTextFromList(se.GetHoverText());
-                    //}
-                    //else tlHover.UpdateText(se.Name + " (Deactivated)");
+                    if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
+                        return se.Name; // GetHoverText();
+                    }
+                    else return se.Name + " (Deactivated)";
                 }
-                return;
+                return "";
             }
+            return "";
         }
 
         // Draw the hover info when hovering over a room
-        private void DrawRoomHoverInfo() {
+        private void DrawShipHoverInfo() {
             if (irHover == -1 && !bHoverHull && (!gpSelect.Active || gpSelect.HoverItem == null)) return; // No label to show
-                                                                                                          // Draw the hover text
-            double xx = (double)MousePosition.X / (double)Size.X;
-            double yy = (double)MousePosition.Y / (double)Size.Y;
-            double thHeight = 0.04;// * tlHover.Lines;
-            double thWidth = thHeight;// * (double)tlHover.Width / (double)tlHover.Height;
-            double xSep = 0.01, ySep = 0.01;
-            if (xx > 0.5) {
-                thWidth = -thWidth;
-                xSep = -0.01;
-            }
-            if (yy < 0.5) {
-                thHeight = -thHeight;
-                ySep = -0.01;
-            }
+
+            float xx = (float)MousePosition.X / (float)Size.X;
+            float yy = (float)MousePosition.Y / (float)Size.Y;
+
+            float dTLScale = 0.03f;
+            float dXMargin = 0.01f;
+            float dYStart = 0.78f;
+            float dYGap = 0.04f;
+
+            string txt = GetShipHoverText();
+            if (string.IsNullOrEmpty(txt)) return;
+            float tx = xx > 0.5 ? xx - 0.02f : xx + 0.02f;
+            float ty = yy > 0.5 ? yy - 0.02f : yy + 0.02f;
 
             // Draw the hover text
-            GL.Color3(0.7, 0.7, 0.7);
-            GL.PushMatrix();
-            if (thWidth < 0.0) GL.Translate(xx + thWidth + xSep, 0.0, 0.3);
-            else GL.Translate(xx + xSep, 0.0, 0.3);
-            if (thHeight > 0.0) GL.Translate(0.0, yy - ySep, 0.0);
-            else GL.Translate(0.0, yy - thHeight - ySep, 0.0);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlHover.Draw(TextLabel.Alignment.BottomLeft, Math.Abs(thWidth), Math.Abs(thHeight));
-            GL.PopMatrix();
+            Alignment al = Alignment.BottomLeft;
+            if (xx > 0.5) {
+                if (yy > 0.5) al = Alignment.BottomRight;
+                else al = Alignment.TopRight;
+            }
+            else {
+                if (yy > 0.5) al = Alignment.BottomLeft;
+                else al = Alignment.TopLeft;
+            }
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = al,
+                Aspect = Aspect,
+                TextColour = Color.LightGray,
+                XPos = tx,
+                YPos = ty,
+                ZPos = 0.015f,
+                Scale = 0.03f
+            };
+            TextRenderer.DrawWithOptions(txt, tro);
         }
 
         // Setup mouse-hover context menu
@@ -529,35 +529,59 @@ namespace SpaceMercs.MainWindow {
 
         // Display the text labels required for the GUI
         private void DisplaySelectionText_Ship() {
-            double dTLScale = 0.035;
-            double dXMargin = 0.01;
-            double dYStart = 0.83;
-            double dYGap = 0.0325;
+            float dTLScale = 0.03f;
+            float dXMargin = 0.01f;
+            float dYStart = 0.82f;
+            float dYGap = 0.04f;
+
+            // Get the text strings
+            if (irSelected == -1) return;
+
+            string tl1 = "", tl2 = "", tl3 = "", tl4 = "";
+
+            ShipEquipment se = PlayerTeam.PlayerShip.GetEquipmentByRoomID(irSelected);
+            if (se == null) {
+                tl1 = "<Empty>";
+            }
+            else {
+                tl1 = se.Name;
+
+                if (se is ShipArmour) {
+                    tl2 = "Armour : " + ((ShipArmour)se).BaseArmour + "%";
+                    if (se.Defence > 0) tl3 = "Defence Bonus : " + se.Defence;
+                    if (((ShipArmour)se).HealRate > 0) tl4 = "Heal Rate : " + ((ShipArmour)se).HealRate;
+                }
+                else if (se is ShipEngine) {
+                    if (((ShipEngine)se).Range >= Const.LightYear) tl2 = "Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly";
+                    else tl2 = "Range : System";
+                    tl3 = "Speed : " + Math.Round(((ShipEngine)se).Speed / Const.SpeedOfLight, 1) + "c";
+                    tl4 = "Accel : " + Math.Round(((ShipEngine)se).Accel / 10.0, 1) + "g"; // Yeah I know g =~9.8, but whatever
+                }
+                else if (se is ShipEquipment) {
+                    if (se.Generate > 0) tl2 = "Generate : " + se.Generate;
+                    else tl2 = "Power : " + se.Power;
+                    if (se.Attack > 0) tl3 = "Attack Bonus : " + se.Attack;
+                    else if (se.Defence > 0) tl3 = "Defence Bonus : " + se.Defence;
+                    string strDesc = "";
+                    if (se.Capacity > 0) strDesc = "Support : " + se.Capacity;
+                    else if (se.Medlab) strDesc += "Medbay";
+                    else if (se.Armoury) strDesc += "Armoury";
+                    else if (se.Workshop) strDesc += "Workshop";
+                    if (!String.IsNullOrEmpty(strDesc)) tl4 = strDesc;
+                }
+                else if (se is ShipWeapon) {
+                    tl2 = "Power : " + se.Power;
+                    tl3 = "Attack Bonus : " + se.Attack;
+                }
+                else {
+                    tl2 = "Unknown Room Type : " + se.GetType();
+                }
+            }
             // Display the text details of the selected object
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel1.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel2.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap * 2.0, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel3.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(dXMargin, dYStart + dYGap * 3.0, 0.1);
-            GL.Scale(dTLScale / Aspect, dTLScale, dTLScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSel4.Draw(TextLabel.Alignment.CentreLeft);
-            GL.PopMatrix();
+            if (!string.IsNullOrEmpty(tl1)) TextRenderer.DrawAt(tl1, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart);
+            if (!string.IsNullOrEmpty(tl2)) TextRenderer.DrawAt(tl2, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap);
+            if (!string.IsNullOrEmpty(tl3)) TextRenderer.DrawAt(tl3, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 2f);
+            if (!string.IsNullOrEmpty(tl4)) TextRenderer.DrawAt(tl4, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 3f);
         }
 
         // Ship function buttons
@@ -577,57 +601,5 @@ namespace SpaceMercs.MainWindow {
             FabricateItems fi = new FabricateItems(PlayerTeam);
             fi.ShowDialog();
         }
-
-        // Setup the details for the selected room
-        private void SetSelection(int iRoomID) {
-            ShipEquipment se = PlayerTeam.PlayerShip.GetEquipmentByRoomID(iRoomID);
-            if (se == null) {
-                //tlSel1.UpdateText("<Empty>");
-                //tlSel2.bEnabled = false;
-                //tlSel3.bEnabled = false;
-                //tlSel4.bEnabled = false;
-                return;
-            }
-
-            //tlSel1.UpdateText(se.Name);
-            if (se is ShipArmour) {
-                //tlSel2.UpdateText("Armour : " + ((ShipArmour)se).BaseArmour + "%");
-                //if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
-                //else tlSel3.bEnabled = false;
-                //if (((ShipArmour)se).HealRate > 0) tlSel4.UpdateText("Heal Rate : " + ((ShipArmour)se).HealRate);
-                //else tlSel4.bEnabled = false;
-            }
-            else if (se is ShipEngine) {
-                //if (((ShipEngine)se).Range >= Const.LightYear) tlSel2.UpdateText("Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly");
-                //else tlSel2.UpdateText("Range : System");
-                //tlSel3.UpdateText("Speed : " + Math.Round(((ShipEngine)se).Speed / Const.SpeedOfLight, 1) + "c");
-                //tlSel4.UpdateText("Accel : " + Math.Round(((ShipEngine)se).Accel / 10.0, 1) + "g"); // Yeah I know g =~9.8, but whatever
-            }
-            else if (se is ShipEquipment) {
-                //if (se.Generate > 0) tlSel2.UpdateText("Generate : " + se.Generate);
-                //else tlSel2.UpdateText("Power : " + se.Power);
-                //if (se.Attack > 0) tlSel3.UpdateText("Attack Bonus : " + se.Attack);
-                //else if (se.Defence > 0) tlSel3.UpdateText("Defence Bonus : " + se.Defence);
-                //else tlSel3.bEnabled = false;
-                string strDesc = "";
-                if (se.Capacity > 0) strDesc = "Support : " + se.Capacity;
-                else if (se.Medlab) strDesc += "Medbay";
-                else if (se.Armoury) strDesc += "Armoury";
-                else if (se.Workshop) strDesc += "Workshop";
-                //else tlSel4.bEnabled = false;
-                //if (!String.IsNullOrEmpty(strDesc)) tlSel4.UpdateText(strDesc);
-            }
-            else if (se is ShipWeapon) {
-                //tlSel2.UpdateText("Power : " + se.Power);
-                //tlSel3.UpdateText("Attack Bonus : " + se.Attack);
-                //tlSel4.bEnabled = false;
-            }
-            else {
-                //tlSel2.UpdateText("Unknown Room Type : " + se.GetType());
-                //tlSel3.bEnabled = false;
-                //tlSel4.bEnabled = false;
-            }
-        }
-
     }
 }

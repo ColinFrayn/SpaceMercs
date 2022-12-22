@@ -72,8 +72,7 @@ namespace SpaceMercs {
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
             ID = Int32.Parse(xml.Attributes["ID"]?.InnerText);
-            strName = "";
-            strName = xml.SelectSingleNode("Name")?.InnerText;
+            strName = xml.SelectSingleNode("Name")?.InnerText ?? "";
             radius = double.Parse(xml.SelectSingleNode("Radius").InnerText);
             if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit").InnerText);
             else orbit = 0;

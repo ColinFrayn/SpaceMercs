@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
   // Common graphics elements
@@ -308,30 +309,6 @@ namespace SpaceMercs {
       //GL.Vertex2(1.5, 0.25);
       //GL.Vertex2(1.0, 0.0);
       //GL.End();
-      GL.PopMatrix();
-    }
-    public static void DrawInactiveIcon(double scale) {
-      GL.PushMatrix();
-      GL.Scale(scale / 2.0, scale / 2.0, scale / 2.0);
-      GL.Color3(1.0, 0.0, 0.0);
-      //GL.Begin(BeginMode.QuadStrip);
-      //for (int n = 0; n <= 16; n++) {
-      //  double ang = n * Math.PI / 8.0;
-      //  GL.Vertex3(Math.Cos(ang), Math.Sin(ang), 0.0);
-      //  GL.Vertex3(Math.Cos(ang) * 1.2, Math.Sin(ang) * 1.2, 0.0);
-      //}
-      //GL.End();
-      double sr2 = Math.Sqrt(2.0) / 2.0;
-      GL.Begin(BeginMode.Quads);
-      GL.Vertex3(0.9, 1.0, 0.0);
-      GL.Vertex3(1.0, 0.9, 0.0);
-      GL.Vertex3(-0.9, -1.0, 0.0);
-      GL.Vertex3(-1.0, -0.9, 0.0);
-      //GL.Vertex3(sr2, sr2, 0.0);
-      //GL.Vertex3(sr2 + 0.1, sr2 + 0.1, 0.0);
-      //GL.Vertex3(-sr2, -sr2, 0.0);
-      //GL.Vertex3(-(sr2 + 0.1), -(sr2 + 0.1), 0.0);
-      GL.End();
       GL.PopMatrix();
     }
 

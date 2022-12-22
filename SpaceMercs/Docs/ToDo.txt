@@ -3,9 +3,13 @@ ToDo List
 -------------------------------------------------
 
 MapViewShip
-- Mouse controls don't work
-- Finish drawing the ship
--- Ship.DrawEquipment()
+- DrawShipHoverInfo()
+-- Hover text needs an opaque background
+- Context menu setup??
+- DrawHullCondition()
+- DrawPowerBar()
+
+Ship.DrawBattle()
 
 TravelDetails.Display()
 - Also don't run it off the periodic timer, run it off the built-in update tick

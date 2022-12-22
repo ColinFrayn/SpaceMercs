@@ -189,7 +189,7 @@ namespace SpaceMercs.MainWindow {
             }
             else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
                 Planet plHover = (Planet)aoHover;
-                if (plHover.Name.Length == 0) {
+                if (string.IsNullOrEmpty(plHover?.Name)) {
                     strHoverText.Add("<Unnamed>");
                 }
                 else {
