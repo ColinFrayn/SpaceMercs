@@ -43,51 +43,10 @@ namespace SpaceMercs {
 
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Moon; } }
-        public override void DrawBaseIcon() {
-            // Scale by MoonScale * PlanetScale
-            GL.Scale(Const.MoonScale * Const.PlanetScale, Const.MoonScale * Const.PlanetScale, 1f); // Make moons noticeably smaller than planets
-
-            if (BaseSize == 0) return;
-            GL.PushMatrix();
-            GL.Scale(DrawScale * 1.3, DrawScale * 1.3, 1.0);
-            GL.Color3(0.8, 0.8, 0.8);
-            GL.LineWidth(2.0f);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex3(-1.0, -1.0, 0.0);
-            GL.Vertex3(1.0, -1.0, 0.0);
-            GL.Vertex3(1.0, 1.0, 0.0);
-            GL.Vertex3(-1.0, 1.0, 0.0);
-            GL.End();
-            if ((Base & Colony.BaseType.Colony) != 0) {
-                GL.PushMatrix();
-                GL.Translate(-1.0, -1.0, 0.0);
-                GL.Color3(0.0, 1.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.75);
-                GL.PopMatrix();
-            }
-            if ((Base & Colony.BaseType.Trading) != 0) {
-                GL.PushMatrix();
-                GL.Translate(1.0, -1.0, 0.0);
-                GL.Color3(1.0, 1.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.75);
-                GL.PopMatrix();
-            }
-            if ((Base & Colony.BaseType.Research) != 0) {
-                GL.PushMatrix();
-                GL.Translate(1.0, 1.0, 0.0);
-                GL.Color3(0.0, 0.0, 1.0);
-                GraphicsFunctions.DrawRhomboid(0.75);
-                GL.PopMatrix();
-            }
-            if ((Base & Colony.BaseType.Military) != 0) {
-                GL.PushMatrix();
-                GL.Translate(-1.0, 1.0, 0.0);
-                GL.Color3(1.0, 0.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.75);
-                GL.PopMatrix();
-            }
-            GL.PopMatrix();
-            GL.LineWidth(1.0f);
+        public override void DrawBaseIcon(ShaderProgram prog) {
+            if (Colony is null) return;
+            float scale = Const.PlanetScale * Const.MoonScale * 1.5f;
+            Colony.DrawBaseIcon(prog, scale);
         }
         public override void DrawSelected(ShaderProgram prog, int Level = 6) {
             prog.SetUniform("lightEnabled", true);

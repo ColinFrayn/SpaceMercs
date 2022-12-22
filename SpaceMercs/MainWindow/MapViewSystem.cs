@@ -1,8 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -25,7 +23,6 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("projection", projectionM);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
 
-            fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
             fullShaderProgram.SetUniform("ambient", 0.25f);
             fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
             fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
@@ -42,12 +39,14 @@ namespace SpaceMercs.MainWindow {
             DrawGUI();
         }
 
+        // Draw all objects in this system
         private void DrawAstronomicalObjects(float aspect, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
             Matrix4 translateM = Matrix4.CreateTranslation(0.8f + (SystemStar.DrawScale * Const.StarScale), 0.5f, 0f);
             fullShaderProgram.SetUniform("view", squashM * translateM);
+            fullShaderProgram.SetUniform("lightPos", -100000f, 0f, 10000f);
 
             // Draw the star
             SystemStar.DrawSelected(fullShaderProgram, 12);
@@ -59,6 +58,7 @@ namespace SpaceMercs.MainWindow {
             float mx = (float)MousePosition.X / (float)Size.X;
             float my = (float)MousePosition.Y / (float)Size.Y;
             bool bOdd = true;
+            fullShaderProgram.SetUniform("lightPos", 100000f, 10000f, 10000f);
             foreach (Planet pl in SystemStar.Planets) {
                 float scale = pl.DrawScale * Const.PlanetScale;
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
@@ -72,7 +72,7 @@ namespace SpaceMercs.MainWindow {
                 // Draw all other Planet icons
                 pl.DrawHalo(fullShaderProgram);
 
-                if (bShowLabels) {
+                if (bShowLabels && !string.IsNullOrEmpty(pl.Name)) {
                     float dskip = (pl.Colony != null) ? 0.06f : 0.01f;
                     float yskip = bOdd ? (scale * 1.06f) + 0.01f : -(scale * 1.06f) - dskip;
                     TextRenderOptions tro = new TextRenderOptions() {
@@ -102,13 +102,16 @@ namespace SpaceMercs.MainWindow {
                     GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                     Annulus.Annulus32.BindAndDraw();
                 }
-                //if (bShowColonies) pl.DrawBaseIcon();  // TODO
                 if (aoCurrentPosition == pl) {
                     Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.4f);
                     flatColourShaderProgram.SetUniform("model", pScaleM);
                     flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                     GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                     TriangleFocus.Flat.BindAndDraw();
+                }
+
+                if (bShowColonies) {
+                    pl.DrawBaseIcon(flatColourShaderProgram);  // TODO
                 }
 
                 // Draw the moons
@@ -119,7 +122,6 @@ namespace SpaceMercs.MainWindow {
                     fullShaderProgram.SetUniform("view", squashM * mTranslateM);
                     flatColourShaderProgram.SetUniform("view", squashM * mTranslateM);
 
-                    //if (bShowColonies) mn.DrawBaseIcon();  // TODO
                     mn.DrawSelected(fullShaderProgram, 7);
 
                     dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (moony - my) * (moony - my);
@@ -145,34 +147,14 @@ namespace SpaceMercs.MainWindow {
                         GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                         TriangleFocus.Flat.BindAndDraw();
                     }
+
+                    //if (bShowColonies) mn.DrawBaseIcon();  // TODO
+
                     moony += 0.07f;
                 }
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.1f) * 0.6f;
             }
-        }
-
-        // Configure and locate the light from the star
-        private void SetupSystemLighting() {
-            GL.Enable(EnableCap.Normalize);
-            // Setup parallel light source
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 100000.0f, 100000.0f, 10000.0f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.3f, 0.3f, 0.3f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.8f, 0.8f, 0.8f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Specular, new float[] { 0.0f, 0.0f, 0.0f, 1.0f });
-            GL.Enable(EnableCap.Light0);
-
-            // Material properties
-            GL.Material(MaterialFace.Front, MaterialParameter.Specular, new float[] { 0.1f, 0.1f, 0.1f, 1.0f });
-            GL.Material(MaterialFace.Front, MaterialParameter.Ambient, new float[] { 0.5f, 0.5f, 0.5f, 1.0f });
-            GL.Material(MaterialFace.Front, MaterialParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
-
-            // Global ambient light level
-            GL.LightModel(LightModelParameter.LightModelAmbient, 0.25f);
-
-            // Set colouring
-            GL.Enable(EnableCap.ColorMaterial);
-            GL.ColorMaterial(MaterialFace.Front, ColorMaterialParameter.AmbientAndDiffuse);
         }
 
         // Draw the system name and affiliation on the system view
@@ -198,6 +180,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawWithOptions(strOwner, tro);
         }
 
+        // Keyboard handler specific for this view
         private void GetKeyboardInput_SystemView() {
             if (IsKeyPressed(Keys.C)) {  // Toggle on/off colony icons
                 if (bShowColonies) { bShowColonies = false; }

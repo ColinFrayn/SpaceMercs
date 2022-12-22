@@ -12,7 +12,7 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private float fShipViewX, fShipViewY, fShipViewZ = Const.MinimumShipViewZ;
         private int irHover = -1, irContextRoom = -1, irSelected = -1;
-        private PanelItem piHoverItem;
+        private PanelItem? piHoverItem;
         private GUIButton gbRepair, gbFabricate;
         private bool bHoverHull = false, bContextHull = false;
         private ViewMode PreviousViewMode = ViewMode.ViewMap;
@@ -36,15 +36,6 @@ namespace SpaceMercs.MainWindow {
             if (gpSelect == null) gpSelect = new GUIPanel(this);
             if (gbRepair == null) gbRepair = new GUIButton("Repair", this, RepairShip);
             if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
-            //if (tlCash == null) {
-            //  tlCash = new TextRenderer(PlayerTeam.Cash.ToString("F2") + " credits");
-            //  tlCash.TextColour = Color.White;
-            //}
-            //if (tlHull == null) tlHull = new TextRenderer("Hull");
-            //if (tlPower == null) tlPower = new TextRenderer("Power");
-            //if (tlHullValue == null) tlHullValue = new TextRenderer();
-            //if (tlPowerValue == null) tlPowerValue = new TextRenderer();
-            // TODO shipToolStripMenuItem.Enabled = false;
             SetupUtilityButtons();
         }
 
@@ -68,29 +59,41 @@ namespace SpaceMercs.MainWindow {
             else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
         }
         private void DrawShip() {
-            if (!bLoaded) return;
-
-            // Set up default OpenGL rendering parameters
-            GL.DepthMask(false);
-            GL.Disable(EnableCap.Lighting);
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.DepthTest);
+            if (!bLoaded || PlayerTeam?.PlayerShip is null) return;
 
             // Set the correct view location & perspective matrix
-            GL.MatrixMode(MatrixMode.Projection);
-            //GL.LoadMatrix(ref perspective);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            Matrix4 projectionUnitM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            pos2DCol4ShaderProgram.SetUniform("projection", projectionUnitM);
+            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+
+            Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
+            fullShaderProgram.SetUniform("projection", projectionM);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram.SetUniform("texPos", 0f, 0f);
+            fullShaderProgram.SetUniform("texScale", 1f, 1f);
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", false);
+
+            GL.ClearColor(Color.Black);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.Enable(EnableCap.DepthTest);
 
             // Draw the starfield (unmoving)
-            if (iStarfieldDL == -1) SetupStarfield();
-            GL.CallList(iStarfieldDL);
+            Matrix4 backgroundM = Matrix4.CreateTranslation(0f, 0f, -0.1f);
+            fullShaderProgram.SetUniform("view", backgroundM);
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
+            GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
+            Starfield.Build.BindAndDraw();
 
             // Shift to the correct location
-            GL.Translate(-fShipViewX, -fShipViewY, -fShipViewZ);
+            Matrix4 translateM = Matrix4.CreateTranslation(-fShipViewX, -fShipViewY, -fShipViewZ);
+            fullShaderProgram.SetUniform("view", translateM);
 
             // Draw the ship
-            PlayerTeam.PlayerShip.DrawSchematic(irHover, bHoverHull);
+            GL.Disable(EnableCap.DepthTest);
+            PlayerTeam.PlayerShip.DrawSchematic(fullShaderProgram, irHover, bHoverHull);
 
             // Draw any static GUI elements
             ShowShipGUI();
@@ -100,8 +103,6 @@ namespace SpaceMercs.MainWindow {
             if (bAIRunning) return;
             if (IsKeyPressed(Keys.Escape)) {
                 view = PreviousViewMode;
-                // TODO shipToolStripMenuItem.Enabled = true;
-                // TODO glMapView.Invalidate();
             }
         }
 
@@ -117,14 +118,12 @@ namespace SpaceMercs.MainWindow {
                 fShipViewY += e.DeltaY * fScale;
                 if (fShipViewY < -PlayerTeam.PlayerShip.Width / 1.9f) fShipViewY = -PlayerTeam.PlayerShip.Width / 1.9f;
                 if (fShipViewY > PlayerTeam.PlayerShip.Width / 1.9f) fShipViewY = PlayerTeam.PlayerShip.Width / 1.9f;
-                // TODO glMapView.Invalidate();
             }
             gbRepair.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             gbFabricate.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             int rOldHover = irHover;
             PanelItem piOldItem = piHoverItem;
             CheckHover_Ship();
-            // TODO glMapView.Invalidate();
         }
         private void MouseUp_Ship(MouseButtonEventArgs e) {
             // Check R-button released
@@ -199,15 +198,13 @@ namespace SpaceMercs.MainWindow {
 
         // Show static GUI elements
         private void ShowShipGUI() {
-            GL.MatrixMode(MatrixMode.Projection);
-            //GL.LoadMatrix(ref ortho_projection);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-            GL.Disable(EnableCap.Lighting);
-            GL.Clear(ClearBufferMask.DepthBufferBit);
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            fullShaderProgram.SetUniform("projection", projectionM);
 
             // Show the context menu, if it's available
             gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+
+            return;
 
             // Show hover text
             SetupRoomHoverInfo();

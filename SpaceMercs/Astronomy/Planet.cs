@@ -241,59 +241,10 @@ namespace SpaceMercs {
 
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Planet; } }
-        public override void DrawBaseIcon() {
-            if (BaseSize == 0) return;
-            GL.Disable(EnableCap.DepthTest);
-            GL.PushMatrix();
-            GL.Translate(0.0, -(DrawScale * 1.3) - 0.2, 0.0); // Above planet icon
-            GL.Scale(1.0, 1.0, 1.0);
-            GL.Translate(-((BaseSize - 1) * 0.7) / 2.0, 0.0, 0.0);
-            if ((Base & Colony.BaseType.Outpost) != 0) {
-                GL.Color3(1.0, 1.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            if ((Base & Colony.BaseType.Colony) != 0) {
-                GL.Color3(0.0, 1.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            if ((Base & Colony.BaseType.Trading) != 0) {
-                GL.Color3(0.0, 1.0, 1.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            if ((Base & Colony.BaseType.Research) != 0) {
-                GL.Color3(0.0, 0.0, 1.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            if ((Base & Colony.BaseType.Military) != 0) {
-                GL.Color3(1.0, 0.0, 0.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            if ((Base & Colony.BaseType.Metropolis) != 0) {
-                GL.Color3(1.0, 1.0, 1.0);
-                GraphicsFunctions.DrawRhomboid(0.65);
-                GL.Translate(0.7, 0.0, 0.0);
-            }
-            // Frame
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(-0.3 - (BaseSize * 0.7), -0.4, 0.0);
-            GL.Vertex3(-0.4, -0.4, 0.0);
-            GL.Vertex3(-0.4, 0.4, 0.0);
-            GL.Vertex3(-0.3 - (BaseSize * 0.7), 0.4, 0.0);
-            GL.Vertex3(-0.3 - (BaseSize * 0.7), -0.4, 0.0);
-            GL.Vertex3(-0.4, -0.4, 0.0);
-            GL.Vertex3(-0.4, 0.4, 0.0);
-            GL.Vertex3(-0.3 - (BaseSize * 0.7), 0.4, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.PopMatrix();
-            GL.Enable(EnableCap.DepthTest);
+        public override void DrawBaseIcon(ShaderProgram prog) {
+            if (Colony is null) return;
+            float scale = Const.PlanetScale * 1.8f;
+            Colony.DrawBaseIcon(prog, scale);
         }
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             float scale = DrawScale * Const.PlanetScale;

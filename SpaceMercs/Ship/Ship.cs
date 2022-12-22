@@ -1,5 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
 
@@ -10,7 +12,7 @@ namespace SpaceMercs {
         public double Hull { get; private set; } // Amount of health left
         public double Shield { get; private set; } // Amount of shield left
         private readonly Dictionary<int, Tuple<ShipEquipment, bool>> Equipment = new Dictionary<int, Tuple<ShipEquipment, bool>>();
-        public Team Owner { get; private set; }
+        public Team? Owner { get; private set; }
         public int Seed { get; private set; }
 
         // Feed-through properties
@@ -47,7 +49,7 @@ namespace SpaceMercs {
                 return lw;
             }
         }
-        public ShipArmour ArmourType { get; private set; }
+        public ShipArmour? ArmourType { get; private set; }
         public double Range { get { if (!EngineEnabled) return 0.0; return Engine.Range; } } // Range in metres
         public int Length { get { return Type.Length; } }
         public int Width { get { return Type.Width; } }
@@ -281,59 +283,57 @@ namespace SpaceMercs {
         }
 
         // Draw this ship on the ShipView dialog, including room types etc.
-        public void DrawSchematic(int iHover, bool bHoverHull) {
+        public void DrawSchematic(ShaderProgram prog, int iHover, bool bHoverHull) {
             double maxy = 0.0;
             TexSpecs? ts = null;
             if (ArmourType != null) ts = Textures.GetTexCoords(ArmourType);
             // Background / corridors
             foreach (ShipRoomDesign r in Type.Rooms) {
-                GL.Color3(0.2, 0.2, 0.2);
+                prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
                 if (r.Size == ShipEquipment.RoomSize.Weapon || r.Size == ShipEquipment.RoomSize.Engine) { // No border
-                    GL.Begin(BeginMode.Quads);
-                    GL.Vertex3(r.XPos, r.YPos, 0.0);
-                    GL.Vertex3(r.XPos + r.Width, r.YPos, 0.0);
-                    GL.Vertex3(r.XPos + r.Width, r.YPos + r.Height, 0.0);
-                    GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
-                    GL.End();
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos, r.YPos, 0f);
+                    Matrix4 pScaleM = Matrix4.CreateScale(r.Width, r.Height, 0f);
+                    prog.SetUniform("model", pScaleM * pTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
                 else {
                     if (ArmourType != null && ts != null) {
+                        prog.SetUniform("textureEnabled", true);
+                        GL.ActiveTexture(TextureUnit.Texture0);
                         GL.BindTexture(TextureTarget.Texture2D, ts.Value.ID);
-                        GL.Enable(EnableCap.Texture2D);
-                        GL.Color4(1.0, 1.0, 1.0, 0.7);
-                        GL.Begin(BeginMode.Quads);
+                        prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 0.7f));
+
                         float tx = ts.Value.X, ty = ts.Value.Y, tw = ts.Value.W, th = ts.Value.H;
                         for (int y = r.YPos - 1; y <= r.YPos + r.Height; y++) {
                             for (int x = r.XPos - 1; x <= r.XPos + r.Width; x++) {
                                 if (y == r.YPos - 1 || x == r.XPos - 1 || y == r.YPos + r.Height || x == r.XPos + r.Width) {
-                                    GL.TexCoord2(tx, ty + th);
-                                    GL.Vertex3(x, y, 0.0);
-                                    GL.TexCoord2(tx + tw, ty + th);
-                                    GL.Vertex3(x + 1, y, 0.0);
-                                    GL.TexCoord2(tx + tw, ty);
-                                    GL.Vertex3(x + 1, y + 1, 0.0);
-                                    GL.TexCoord2(tx, ty);
-                                    GL.Vertex3(x, y + 1, 0.0);
+                                    prog.SetUniform("texPos", tx, ty);
+                                    prog.SetUniform("texScale", tw, th);
+                                    Matrix4 paTranslateM = Matrix4.CreateTranslation(x, y, 0f);
+                                    Matrix4 paScaleM = Matrix4.CreateScale(1f, 1f, 0f);
+                                    prog.SetUniform("model", paScaleM * paTranslateM);
+                                    GL.UseProgram(prog.ShaderProgramHandle);
+                                    Square.Textured.BindAndDraw();
                                 }
                             }
                         }
-                        GL.End();
-                        GL.Color3(0.2, 0.2, 0.2);
-                        GL.Disable(EnableCap.Texture2D);
-                        GL.Begin(BeginMode.Quads);
-                        GL.Vertex3(r.XPos, r.YPos, 0.0);
-                        GL.Vertex3(r.XPos + r.Width, r.YPos, 0.0);
-                        GL.Vertex3(r.XPos + r.Width, r.YPos + r.Height, 0.0);
-                        GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
-                        GL.End();
+                        GL.BindTexture(TextureTarget.Texture2D, 0);
+                        prog.SetUniform("textureEnabled", false);
+                        Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos, r.YPos, 0f);
+                        Matrix4 pScaleM = Matrix4.CreateScale(r.Width, r.Height, 0f);
+                        prog.SetUniform("model", pScaleM * pTranslateM);
+                        prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                        GL.UseProgram(prog.ShaderProgramHandle);
+                        Square.Flat.BindAndDraw();
                     }
                     else {
-                        GL.Begin(BeginMode.Quads);
-                        GL.Vertex3(r.XPos - 1, r.YPos - 1, 0.0);
-                        GL.Vertex3(r.XPos + r.Width + 1, r.YPos - 1, 0.0);
-                        GL.Vertex3(r.XPos + r.Width + 1, r.YPos + r.Height + 1, 0.0);
-                        GL.Vertex3(r.XPos - 1, r.YPos + r.Height + 1, 0.0);
-                        GL.End();
+                        Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos - 1f, r.YPos - 1f, 0f);
+                        Matrix4 pScaleM = Matrix4.CreateScale(r.Width + 2f, r.Height + 2f, 0f);
+                        prog.SetUniform("model", pScaleM * pTranslateM);
+                        prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                        GL.UseProgram(prog.ShaderProgramHandle);
+                        Square.Flat.BindAndDraw();
                     }
                 }
                 if (r.YPos + r.Height > maxy) maxy = r.YPos + r.Height;
@@ -341,52 +341,50 @@ namespace SpaceMercs {
 
             // Display fillers
             if (Type.Fillers.Any()) {
-                if (ArmourType != null) {
-                    GL.BindTexture(TextureTarget.Texture2D, ts.Value.ID);
-                    GL.Enable(EnableCap.Texture2D);
-                }
-                else GL.Color3(0.2, 0.2, 0.2);
-                float tx = ts.Value.X, ty = ts.Value.Y, tw = ts.Value.W, th = ts.Value.H;
-                GL.Begin(BeginMode.Quads);
+                Matrix4 pScaleM = Matrix4.CreateScale(1f, 1f, 0f);
                 foreach (Point pt in Type.Fillers) {
-                    if (ArmourType != null) GL.TexCoord2(tx, ty + th);
-                    GL.Vertex3(pt.X, pt.Y, 0.0);
-                    if (ArmourType != null) GL.TexCoord2(tx + tw, ty + th);
-                    GL.Vertex3(pt.X + 1, pt.Y, 0.0);
-                    if (ArmourType != null) GL.TexCoord2(ty + tw, ty);
-                    GL.Vertex3(pt.X + 1, pt.Y + 1, 0.0);
-                    if (ArmourType != null) GL.TexCoord2(ty, ty);
-                    GL.Vertex3(pt.X, pt.Y + 1, 0.0);
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X, pt.Y, 0f);
+                    prog.SetUniform("model", pScaleM * pTranslateM);
+                    if (ArmourType is null) {
+                        prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                        Square.Flat.BindAndDraw();
+                    }
+                    else {
+                        float tx = ts.Value.X, ty = ts.Value.Y, tw = ts.Value.W, th = ts.Value.H;
+                        GL.BindTexture(TextureTarget.Texture2D, ts.Value.ID);
+                        prog.SetUniform("textureEnabled", true);
+                        prog.SetUniform("texPos", tx, ty);
+                        prog.SetUniform("texScale", tw, th);
+                        prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                        Square.Textured.BindAndDraw();
+                        prog.SetUniform("textureEnabled", false);
+                    }
                 }
-                GL.End();
-                if (ArmourType != null) GL.Disable(EnableCap.Texture2D);
             }
 
             // Hover boundary
             if (iHover >= 0 && iHover < Type.Rooms.Count) {
                 ShipRoomDesign rHover = Type.Rooms[iHover];
-                GL.Color3(1.0, 0.0, 0.0);
-                GL.Begin(BeginMode.Quads);
-                GL.Vertex3(rHover.XPos - 0.2, rHover.YPos - 0.2, 0.1);
-                GL.Vertex3(rHover.XPos + rHover.Width + 0.2, rHover.YPos - 0.2, 0.1);
-                GL.Vertex3(rHover.XPos + rHover.Width + 0.2, rHover.YPos + rHover.Height + 0.2, 0.1);
-                GL.Vertex3(rHover.XPos - 0.2, rHover.YPos + rHover.Height + 0.2, 0.1);
-                GL.End();
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(rHover.XPos - 0.2f, rHover.YPos - 0.2f, 0f);
+                Matrix4 pScaleM = Matrix4.CreateScale(rHover.Width + 0.4f, rHover.Height + 0.4f, 0f);
+                prog.SetUniform("model", pScaleM * pTranslateM);
+                prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Lines.BindAndDraw();
             }
             // Rooms
             for (int n = 0; n < Type.Rooms.Count; n++) {
                 ShipRoomDesign r = Type.Rooms[n];
-                GL.Color3(0.6, 0.6, 0.6);
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.Begin(BeginMode.Quads);
-                GL.Vertex3(r.XPos, r.YPos, 0.0);
-                GL.Vertex3(r.XPos + r.Width, r.YPos, 0.0);
-                GL.Vertex3(r.XPos + r.Width, r.YPos + r.Height, 0.0);
-                GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
-                GL.End();
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-                if (Equipment.ContainsKey(n)) DrawEquipment(n);
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos, r.YPos, 0f);
+                Matrix4 pScaleM = Matrix4.CreateScale(r.Width, r.Height, 0f);
+                prog.SetUniform("model", pScaleM * pTranslateM);
+                prog.SetUniform("flatColour", new Vector4(0.6f, 0.6f, 0.6f, 1f));
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Lines.BindAndDraw();
+                if (Equipment.ContainsKey(n)) DrawEquipment(prog, n);
             }
+
+            return;
 
             // Perimeter
             if (bHoverHull) GL.Color3(1.0, 1.0, 1.0);
@@ -450,7 +448,7 @@ namespace SpaceMercs {
         }
 
         // Draw the equipment in a room
-        private void DrawEquipment(int id) {
+        private void DrawEquipment(ShaderProgram prog, int id) {
             if (!Equipment.ContainsKey(id)) throw new Exception("Attempting to draw non-existent ship equipment!");
             ShipEquipment se = Equipment[id].Item1;
             ShipRoomDesign rd = Type.Rooms[id];
@@ -460,6 +458,9 @@ namespace SpaceMercs {
             double sx = rd.XPos + (rd.Width - dIconSize) / 2.0;
             double sy = rd.YPos + (rd.Height - dIconSize) / 2.0;
             TexSpecs ts = Textures.GetTexCoords(se);
+
+            return;
+
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
             GL.Enable(EnableCap.Texture2D);
             GL.Begin(BeginMode.Quads);

@@ -2,12 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-MapViewSystem
-- Colony Icons
-
 MapViewShip
+- Mouse controls don't work
+- Finish drawing the ship
+-- Ship.DrawEquipment()
 
 TravelDetails.Display()
+- Also don't run it off the periodic timer, run it off the built-in update tick
 
 Main Menu
   Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details

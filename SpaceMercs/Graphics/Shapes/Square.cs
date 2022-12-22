@@ -3,10 +3,12 @@
 namespace SpaceMercs.Graphics.Shapes {
     internal static class Square {
         private static GLShape? _square = null;
+        private static GLShape? _squareCentred = null;
         private static GLShape? _squareNorm = null;
         private static GLShape? _squareLines = null;
         private static GLShape? _squareTex = null;
         public static GLShape Flat { get { if (_square is null) { _square = Build(Alignment.TopLeft); } return _square; } }
+        public static GLShape FlatCentred { get { if (_squareCentred is null) { _squareCentred = Build(Alignment.CentreMiddle); } return _squareCentred; } }
         public static GLShape Norm { get { if (_squareNorm is null) { _squareNorm = BuildNorm(Alignment.TopLeft); } return _squareNorm; } }
         public static GLShape Lines { get { if (_squareLines is null) { _squareLines = BuildLines(Alignment.TopLeft); } return _squareLines; } }
         public static GLShape Textured { get { if (_squareTex is null) { _squareTex = BuildTextured(Alignment.TopLeft); } return _squareTex; } }
