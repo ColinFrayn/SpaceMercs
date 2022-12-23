@@ -11,6 +11,13 @@ namespace SpaceMercs.Graphics {
         public readonly VertexInfo VertexInfo;
         public readonly BufferUsageHint BufferUsageHint;
 
+        public VertexBuffer(VertexInfo info, BufferUsageHint hint = BufferUsageHint.StaticDraw) {
+            isDisposed = false;
+            VertexCount = 0;
+            BufferUsageHint = hint;
+            VertexInfo = info;
+            VertexBufferHandle = GL.GenBuffer();
+        }
         public VertexBuffer(IVertex[] vertices, BufferUsageHint hint = BufferUsageHint.StaticDraw) {
             isDisposed = false;
             if (vertices is null) {

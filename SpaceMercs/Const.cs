@@ -7,10 +7,9 @@ namespace SpaceMercs {
         public const string strVersion = "1.0";
 
         // ---=== DEBUG MODE SETTINGS ===---
-        public const int DEBUG_ENCOUNTER_FREQ_MOD = 0;  // Positive = more encounters, negative = fewer. Default = 0.
+        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Default = 1; Higher number increases encounter frequency. <=0 turns it off.
         public const bool DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
-        public const bool DEBUG_TEXTLABEL_RECTANGLES = false;  // Display white rectangles for positioning purposes
         public const bool DEBUG_VIEW_ALL_CIVS = true;  // Set starting systems for all civs = visited
         public const bool DEBUG_LOADS_OF_CASH = false;  // Start with loads of cash
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
@@ -163,7 +162,7 @@ namespace SpaceMercs {
         public const int NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
-        public const double BaseEncounterFrequency = 40.0;  // base chance for an encounter when travelling
+        public const double BaseEncounterScarcity = 1200.0;  // Base chance for an encounter when travelling (higher = less frequent)
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel to make missions harder
         public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies
         public const double ShipBountyScale = 1.0;  // Scale for calculating bounty of enemy ships defeated

@@ -44,6 +44,9 @@ namespace SpaceMercs.MainWindow {
             flatColourShaderProgram.SetUniform("projection", projectionM);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
+            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
             fullShaderProgram.SetUniform("projection", projectionM);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
@@ -80,7 +83,7 @@ namespace SpaceMercs.MainWindow {
             // If we're travelling then display that
             if (TravelDetails != null) {
                 if (TravelDetails.GameOver) TravelDetails = null;
-                else TravelDetails.Display(fullShaderProgram);
+                else TravelDetails.Display(fullShaderProgram, pos2DCol4ShaderProgram);
             }
             // Display the various GUI Buttons
             else {
@@ -382,8 +385,8 @@ namespace SpaceMercs.MainWindow {
         }
         private void FlyTo_Continue(double jt) {
             // Set up that we're travelling
-            double dJourneyTime = (double)jt;
-            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, dJourneyTime, PlayerTeam, this);
+            float fJourneyTime = (float)jt;
+            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, fJourneyTime, PlayerTeam, this);
         }
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.bMapSetup) return;
@@ -442,7 +445,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Set the button relevant for the selected AO
-        public void SetAOButtonsOnGUI(AstronomicalObject ao) {
+        public void SetAOButtonsOnGUI(AstronomicalObject? ao) {
             gbRenameObject.Deactivate();
             gbFlyTo.Deactivate();
             if (ao == null) return;

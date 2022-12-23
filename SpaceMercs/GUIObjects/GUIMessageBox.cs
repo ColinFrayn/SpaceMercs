@@ -157,11 +157,11 @@ namespace SpaceMercs {
             // Draw the button text at the correct location, horizontally centred
             string Text = (id == 1) ? "OK" : "Cancel";
             TextRenderOptions tro = new TextRenderOptions() {
-                Alignment = Alignment.TopLeft,
+                Alignment = Alignment.CentreMiddle,
                 Aspect = aspect,
                 TextColour = Color.White,
-                XPos = ButtonX + ((id == 1) ? 0.015f : 0f),
-                YPos = ButtonY + ((id == 1) ? 0f : 0f),
+                XPos = ButtonX + ButtonWidth * 0.5f,
+                YPos = ButtonY + ButtonHeight * 0.42f,
                 ZPos = 0.025f,
                 Scale = ButtonHeight * 0.7f
             };

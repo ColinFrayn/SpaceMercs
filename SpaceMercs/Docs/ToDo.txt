@@ -2,19 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-MapViewShip
-- DrawShipHoverInfo()
--- Add multi-line info for equipment
-
 Travel
-- Travel.Display()
-- Don't run it off the periodic timer, run it off the built-in update tick
-- Turn it off when saving
-- Make sure it restarts when loading
+- DrawTravelProgress : Mini planets skip rotation / reverse rotation / look awful occasionally?
+
+Encounters : Are there too many of them? Test in lots of situations.
 
 Disable Colony button when travelling
-
-Ship.DrawBattle()
 
 Main Menu
   Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
@@ -30,6 +23,9 @@ Done Since Last Release
 MapView title page
 MapViewDrawMap
 MapViewSystem
+MapViewShip
+
+Travel
 
 GUIPanel
 GUIButton
@@ -51,6 +47,10 @@ Should not be able to target self or own team
 Backburner
 ----------
 
+Travel.Drawbattle() : Convert Frag to a vertex array for optimisation
+
+DrawShipHoverInfo() : Add multi-line info for equipment?
+
 System view
 - Star sometimes vanishes on certain aspect ratios
 
@@ -66,6 +66,10 @@ First Contact
 -- Display as unknown
 
 Displaying colonies of other races: Are they visually distinct?
+
+Encounter.cs : Remove MessageBox and replace with in-game messages
+- InactiveEncounter
+- ActiveEncounter
 
 Profile everything, especially AI
 

@@ -1,97 +1,91 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
 using System.Xml;
-using Timer = System.Windows.Forms.Timer;
 
 namespace SpaceMercs {
     // Deal with travelling between AstronomicalObjects
     class Travel {
         private readonly AstronomicalObject aoTravelFrom, aoTravelTo;
-        private readonly double dTravelTime;
-        private double dMissionElapsed, dElapsed, dDist;
-        private double dSep; // Separation between two ships
+        private readonly float fTravelTime;
+        private float fMissionElapsed, fElapsed, fDist;
+        private float fSep; // Separation between two ships
         private bool bSurrendered = false;
         private readonly Team PlayerTeam;
-        private Timer clockTick;
         private readonly MapView ParentView;
         private int EncounterCount = 0;
         private DateTime dtStart;
+        private bool bPause = false;
         private readonly Random rand = new Random();
+        private VertexBuffer? vbShot = null;
+        private VertexArray? vaShot = null;
+
+        private readonly Color4 ShotColPlayer = new Color4(0.1f, 0.3f, 1.0f, 1.0f);
+        private readonly Color4 ShotColEnemy = new Color4(1.0f, 0.3f, 0.1f, 1.0f);
+        private const float shipYpos = 0.48f;
 
         private class Shot {
             public bool Player { get; private set; }
             public int Attack { get; private set; }
             public int Life { get; private set; }
-            private readonly double fx, fy, tx, ty;
-            public Shot(bool pl, ShipRoomDesign rf, ShipRoomDesign rt, int att, double dSep, double aspect) {
+            public readonly float fx, fy, tx, ty;
+            public Shot(bool pl, ShipRoomDesign rf, ShipRoomDesign rt, int att, float fSep, float aspect) {
                 Player = pl;
                 Attack = att;
-                Life = (att / 2) + 2;
-                double dSpace = dSep * Const.DrawBattleScale;
+                Life = (att * 5) + 15;
+                float fSpace = fSep * Const.DrawBattleScale;
 
                 if (Player) {
-                    fx = (0.46 - dSpace) - ((rf.XPos + rf.Width / 2) * 0.005 / aspect);
-                    tx = (0.54 + dSpace) + ((rt.XPos + rt.Width / 2) * 0.005 / aspect);
+                    fx = (0.46f - fSpace) - ((rf.XPos + rf.Width / 2f) * 0.005f / aspect);
+                    tx = (0.54f + fSpace) + ((rt.XPos + rt.Width / 2f) * 0.005f / aspect);
                 }
                 else {
-                    fx = (0.54 + dSpace) + ((rf.XPos + rf.Width / 2) * 0.005 / aspect);
-                    tx = (0.46 - dSpace) - ((rt.XPos + rf.Width / 2) * 0.005 / aspect);
+                    fx = (0.54f + fSpace) + ((rf.XPos + rf.Width / 2f) * 0.005f / aspect);
+                    tx = (0.46f - fSpace) - ((rt.XPos + rf.Width / 2f) * 0.005f / aspect);
                 }
-                fy = 0.58 + ((rf.YPos - rf.Height / 2) * 0.005);
-                ty = 0.58 + ((rt.YPos - rf.Height / 2) * 0.005);
+                fy = shipYpos + ((rf.YPos - rf.Height / 2f) * 0.005f);
+                ty = shipYpos + ((rt.YPos - rf.Height / 2f) * 0.005f);
             }
-            public void Display() {
-                if (Life <= 0) return;
-                GL.LineWidth(Attack);
-                if (Player) GL.Color3(0.1, 0.3, 1.0);
-                else GL.Color3(1.0, 0.3, 0.1);
-                GL.Vertex3(fx, fy, 0.0);
-                GL.Vertex3(tx, ty, 0.0);
+            public void Update() {
                 Life--;
             }
         }
         private readonly List<Shot> lShots = new List<Shot>();
 
         private class Frag {
-            private double X, Y;
-            private readonly double VX, VY;
-            public double F { get; private set; }
-            public Frag(double x, double y, double vx, double vy, double f) {
+            private float X, Y;
+            private readonly float VX, VY;
+            public float F { get; private set; }
+            public Frag(float x, float y, float vx, float vy, float f) {
                 X = x;
                 Y = y;
                 VX = vx;
                 VY = vy;
                 F = f;
             }
-            public void Display(double aspect) {
-                GL.Color3(0.2 + F * 0.8, 0.2 + F * 0.8, 0.2 + F * 0.8);
-                GL.Vertex3(X - 0.0015 / aspect, Y - 0.0015, 0.0);
-                GL.Vertex3(X + 0.0015 / aspect, Y - 0.0015, 0.0);
-                GL.Vertex3(X + 0.0015 / aspect, Y + 0.0015, 0.0);
-                GL.Vertex3(X - 0.0015 / aspect, Y + 0.0015, 0.0);
-                X += VX;
-                Y += VY;
-                F = (F * 0.98) - 0.01;
-                if (F <= 0.0) F = 0.0;
+            public void Display(ShaderProgram prog, float aspect) {
+                Matrix4 translateM = Matrix4.CreateTranslation(X - 0.0015f / aspect, Y - 0.0015f, 0f);
+                Matrix4 scaleM = Matrix4.CreateScale(0.003f / aspect, 0.003f, 1f);
+                prog.SetUniform("model", scaleM * translateM);
+                prog.SetUniform("flatColour", new Vector4(0.2f + F * 0.8f, 0.2f + F * 0.8f, 0.2f + F * 0.8f, 1f));
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
+            }
+            public void Update() {
+                X += VX / 10f;
+                Y += VY / 10f;
+                F = (F * 0.995f) - 0.002f;
+                if (F <= 0.0f) F = 0.0f;
             }
         }
         private readonly List<Frag> lFrag = new List<Frag>();
 
         // Public
         public bool GameOver { get; private set; }
-
-        // Getters
-        private double dTickStep {
-            get {
-                if (dTravelTime < Const.SecondsPerDay) return 3600.0; // One hour
-                else return dTravelTime / 24.0;
-            }
-        }
         public HabitableAO Destination {
             get {
                 if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet();
@@ -99,12 +93,13 @@ namespace SpaceMercs {
             }
         }
 
-        public Travel(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dTime, Team team, MapView parent) {
+        public Travel(AstronomicalObject aoFrom, AstronomicalObject aoTo, float fTime, Team team, MapView parent) {
             aoTravelFrom = aoFrom;
             aoTravelTo = aoTo;
-            dTravelTime = dTime;
+            fTravelTime = fTime;
             PlayerTeam = team;
             ParentView = parent;
+            bPause = false;
             SetUp();
         }
         public Travel(XmlNode xml, Team team, MapView parent) {
@@ -114,92 +109,87 @@ namespace SpaceMercs {
             aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectSingleNode("AOFrom").InnerText);
             aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectSingleNode("AOTo").InnerText);
 
-            dTravelTime = Double.Parse(xml.SelectSingleNode("Time").InnerText);
-            dElapsed = Double.Parse(xml.SelectSingleNode("Elapsed").InnerText);
-            dMissionElapsed = Double.Parse(xml.SelectSingleNode("MissionElapsed").InnerText);
-            dSep = Double.Parse(xml.SelectSingleNode("Sep").InnerText);
+            fTravelTime = float.Parse(xml.SelectSingleNode("Time").InnerText);
+            fElapsed = float.Parse(xml.SelectSingleNode("Elapsed").InnerText);
+            fMissionElapsed = float.Parse(xml.SelectSingleNode("MissionElapsed").InnerText);
+            fSep = float.Parse(xml.SelectSingleNode("Sep").InnerText);
             EncounterCount = Int32.Parse(xml.SelectSingleNode("EncounterCount").InnerText);
             dtStart = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("Start").InnerText));
             bSurrendered = (xml.SelectSingleNode("Surrendered") != null);
 
             SetUp();
-            clockTick.Stop();
-        }
-        private void SetUp() {
-            dtStart = Const.dtTime;
-            dDist = AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo);
-            string strDist = Utils.PrintDistance(dDist);
-            string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
-            clockTick = new Timer();
-            clockTick.Tick += new EventHandler(ClockTickProcessor);
-            clockTick.Interval = 250;
-            clockTick.Start();
-            GameOver = false;
+            bPause = true;
         }
 
+        private void SetUp() {
+            dtStart = Const.dtTime;
+            GameOver = false;
+        }
         public void SaveToFile(StreamWriter file) {
             file.WriteLine("<Travel>");
             file.WriteLine("<AOFrom>" + aoTravelFrom.PrintCoordinates() + "</AOFrom>");
             file.WriteLine("<AOTo>" + aoTravelTo.PrintCoordinates() + "</AOTo>");
-            file.WriteLine("<Time>" + dTravelTime + "</Time>");
-            file.WriteLine("<Elapsed>" + dElapsed + "</Elapsed>");
-            file.WriteLine("<MissionElapsed>" + dMissionElapsed + "</MissionElapsed>");
+            file.WriteLine("<Time>" + fTravelTime + "</Time>");
+            file.WriteLine("<Elapsed>" + fElapsed + "</Elapsed>");
+            file.WriteLine("<MissionElapsed>" + fMissionElapsed + "</MissionElapsed>");
             file.WriteLine("<EncounterCount>" + EncounterCount + "</EncounterCount>");
             file.WriteLine("<Start>" + dtStart.ToBinary() + "</Start>");
-            file.WriteLine("<Sep>" + dSep + "</Sep>");
+            file.WriteLine("<Sep>" + fSep + "</Sep>");
             if (bSurrendered) file.WriteLine("<Surrendered/>");
             file.WriteLine("</Travel>");
         }
 
-        // This is the method to run when the timer is raised.
-        private void ClockTickProcessor(Object myObject, EventArgs myEventArgs) {
+        // Clock tick update methods
+        public void ClockTickProcessor() {
+            if (bPause) return;
             if (ParentView.msgBox.Active) return;
-            if (ParentView.TravelDetails == null) {
-                clockTick.Stop();
+            if (ParentView.TravelDetails == null) return;
+            if (PlayerTeam.CurrentMission != null) {
+                ResolveEncounter();
                 return;
             }
-            if (PlayerTeam.CurrentMission != null) ResolveEncounter();
-            else {
-                lShots.Clear();
-                if ((rand.NextDouble() * (1 + EncounterCount / 2.0)) < 0.2) {  // Reduce the chance of multiple encounters
-                    clockTick.Stop();
-                    PlayerTeam.SetCurrentMission(Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, dTravelTime, PlayerTeam, dElapsed / dTravelTime));
-                    if (PlayerTeam.CurrentMission != null) {
-                        dMissionElapsed = 0.0;
-                        EncounterCount++;
-                        PlayerTeam.PlayerShip.InitialiseForBattle();
-                        bSurrendered = false;
-                        if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
-                            RunBoardingPartyMission(PlayerTeam.CurrentMission);
-                            return;
-                        }
-                        if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) dSep = 18000.0;
-                        clockTick.Start();
-                        if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Ignore) PlayerTeam.SetCurrentMission(null);
+
+            // Travelling somewhere
+            lShots.Clear();
+            if ((rand.NextDouble() * (1 + EncounterCount / 2.0)) < 0.2) {  // Reduce the chance of multiple encounters
+                bPause = true;
+                PlayerTeam.SetCurrentMission(Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime));
+                if (PlayerTeam.CurrentMission != null) {
+                    fMissionElapsed = 0.0f;
+                    EncounterCount++;
+                    PlayerTeam.PlayerShip.InitialiseForBattle();
+                    bSurrendered = false;
+                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
+                        RunBoardingPartyMission(PlayerTeam.CurrentMission);
                         return;
                     }
-                    clockTick.Start();
-                }
-                dElapsed += dTickStep; // Move forward if we're not currently on a mission
-                if (dElapsed >= dTravelTime) {
-                    dElapsed = dTravelTime;
-                    clockTick.Stop();
-                    Const.dtTime = dtStart.AddSeconds(dElapsed);
-                    ParentView.ArriveAt(aoTravelTo);
+                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) fSep = 18000.0f;
+                    bPause = false;
+                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Ignore) PlayerTeam.SetCurrentMission(null);
                     return;
                 }
-                Const.dtTime = dtStart.AddSeconds(dElapsed);
+                bPause = false;
             }
-        }
 
-        // Run a clock tick for the encounter
+            // Move forward if we're not currently on a mission
+            if (fTravelTime < Const.SecondsPerDay) fElapsed += 60f * 5f;
+            else fElapsed += fTravelTime / 600f;
+            if (fElapsed >= fTravelTime) {
+                fElapsed = fTravelTime;
+                bPause = true;
+                Const.dtTime = dtStart.AddSeconds(fElapsed);
+                ParentView.ArriveAt(aoTravelTo);
+                return;
+            }
+            Const.dtTime = dtStart.AddSeconds(fElapsed);
+        }
         private void ResolveEncounter() {
             if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) {
-                dMissionElapsed += 60.0 * 60.0 * 6.0; // Add six hours
-                if (dMissionElapsed > PlayerTeam.CurrentMission.TimeCost) dMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
-                Const.dtTime = dtStart.AddSeconds(dElapsed).AddSeconds(dMissionElapsed);
-                if (dMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
-                    clockTick.Stop();
+                fMissionElapsed += 60f * 10f; 
+                if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
+                Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
+                if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
+                    bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
                     Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(false);
                     AnnounceSalvage(dSalvage);
@@ -208,24 +198,23 @@ namespace SpaceMercs {
                         ParentView.msgBox.PopupMessage("Your cargo hold is full - couldn't collect all salvage. It has been jettisoned into space.");
                     }
                     PlayerTeam.CeaseMission();
-                    clockTick.Start();
+                    bPause = false;
                 }
             }
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) {
-                dMissionElapsed += 60.0 * 60.0 * 6.0; // Add six hours
-                if (dMissionElapsed > PlayerTeam.CurrentMission.TimeCost) dMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
-                Const.dtTime = dtStart.AddSeconds(dElapsed).AddSeconds(dMissionElapsed);
-                if (dMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
-                    clockTick.Stop();
+                fMissionElapsed += 60f * 10f;
+                if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
+                Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
+                if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
+                    bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
                     PlayerTeam.Cash += PlayerTeam.CurrentMission.Reward;
                     ParentView.msgBox.PopupMessage("Repairs completed. You receive a reward of " + PlayerTeam.CurrentMission.Reward + " credits.");
                     PlayerTeam.CeaseMission();
-                    clockTick.Start();
+                    bPause = false;
                 }
             }
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
-                clockTick.Interval = 50;
                 RunBattle();
             }
             else {
@@ -234,57 +223,48 @@ namespace SpaceMercs {
             }
         }
         public void ResumeMissionAfterReload() {
-            if (PlayerTeam.CurrentMission == null) {
-                clockTick.Interval = 250;
-                clockTick.Start();
-            }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) {
-                clockTick.Interval = 250;
-                clockTick.Start();
-            }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) {
-                clockTick.Interval = 250;
-                clockTick.Start();
-            }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
-                clockTick.Interval = 50;
-                clockTick.Start();
-            }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.RepelBoarders) {
+            if (PlayerTeam.CurrentMission.Type == Mission.MissionType.RepelBoarders) {
                 RunRepelBoardersMission(PlayerTeam.CurrentMission);
             }
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
                 RunBoardingPartyMission(PlayerTeam.CurrentMission);
             }
+            else {
+                bPause = false;
+            }
         }
 
         // Run a step of a battle between the player ship and an enemy vessel
         private void RunBattle() {
+            if (PlayerTeam.CurrentMission == null) return;
             Random rand = new Random();
-            if (dSep > 4000.0) dSep -= 100.0;
+            if (fSep > 4000.0f) fSep -= 10.0f;
 
             // -- Player ship fires weapons
             foreach (int r in PlayerTeam.PlayerShip.AllWeaponRooms) {
-                ShipWeapon sw = PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) as ShipWeapon;
-                if (sw == null) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
-                sw.Cooldown -= 0.05;
-                if (sw.Cooldown <= 0.0 && sw.Range >= dSep) {
+                if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
+                sw.Cooldown -= 0.005;
+                if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
                     int Attack = PlayerTeam.PlayerShip.Attack + sw.Attack;
                     int Defence = PlayerTeam.CurrentMission.ShipTarget.Defence;
                     double Damage = (rand.NextDouble() * Attack) - (rand.NextDouble() * Defence);
                     double dmg = PlayerTeam.CurrentMission.ShipTarget.DamageShip(Damage);
                     sw.Cooldown = sw.Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
                     ShipRoomDesign sT = PlayerTeam.CurrentMission.ShipTarget.PickRandomRoom(rand);
-                    lShots.Add(new Shot(true, PlayerTeam.PlayerShip.Type.Rooms[r], sT, sw.Attack, dSep, ParentView.Aspect));
+                    lShots.Add(new Shot(true, PlayerTeam.PlayerShip.Type.Rooms[r], sT, sw.Attack, fSep, ParentView.Aspect));
                     for (int n = 0; n <= (int)(dmg * 5.0); n++) {
-                        lFrag.Add(new Frag((0.54 + dSep * Const.DrawBattleScale) + ((sT.XPos + sT.Width / 2) * 0.005 / ParentView.Aspect), 0.58 + ((sT.YPos - sT.Height / 2) * 0.005), (rand.NextDouble() - 0.5) * 0.003, (rand.NextDouble() - 0.5) * 0.003, rand.NextDouble() * rand.NextDouble()));
+                        lFrag.Add(new Frag((0.54f + fSep * Const.DrawBattleScale) + ((sT.XPos + sT.Width / 2f) * 0.005f / ParentView.Aspect),
+                                           shipYpos + ((sT.YPos - sT.Height / 2f) * 0.005f),
+                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
+                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
+                                           (float)rand.NextDouble() * (float)rand.NextDouble()));
                     }
                 }
             }
 
             // Enemy ship destroyed?
             if (PlayerTeam.CurrentMission.ShipTarget.Hull <= 0.0) {
-                clockTick.Stop();
+                bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
                 Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(true);
                 AnnounceSalvage(dSalvage);
@@ -293,8 +273,7 @@ namespace SpaceMercs {
                     ParentView.msgBox.PopupMessage("Your cargo hold is full - couldn't collect all the salvage.\nAny excess has been jettisoned into space.");
                 }
                 PlayerTeam.CeaseMission();
-                clockTick.Interval = 250;
-                clockTick.Start();
+                bPause = false;
                 return;
             }
 
@@ -302,18 +281,17 @@ namespace SpaceMercs {
             if (!bSurrendered) {
                 if ((PlayerTeam.CurrentMission.ShipTarget.HullFract + 0.4 + (rand.NextDouble() * 0.1) < PlayerTeam.PlayerShip.HullFract) || (PlayerTeam.PlayerShip.HullFract > 0.25 && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.1)) {
                     bSurrendered = true;
-                    clockTick.Stop();
+                    bPause = true;
                     double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 0.5), 3);
                     string strMessage = String.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
                     if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                         PlayerTeam.Cash += dReward;
                         PlayerTeam.CeaseMission();
                         ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
-                        clockTick.Interval = 250;
-                        clockTick.Start();
+                        bPause = false;
                         return;
                     }
-                    clockTick.Start();
+                    bPause = false;
                 }
             }
 
@@ -321,24 +299,28 @@ namespace SpaceMercs {
             foreach (int r in PlayerTeam.CurrentMission.ShipTarget.AllWeaponRooms) {
                 ShipWeapon sw = PlayerTeam.CurrentMission.ShipTarget.GetEquipmentByRoomID(r) as ShipWeapon;
                 if (sw == null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
-                sw.Cooldown -= 0.05;
-                if (sw.Cooldown <= 0.0 && sw.Range >= dSep) {
+                sw.Cooldown -= 0.005;
+                if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
                     int Attack = PlayerTeam.CurrentMission.ShipTarget.Attack + sw.Attack;
                     int Defence = PlayerTeam.PlayerShip.Defence;
                     double Damage = (rand.NextDouble() * Attack) - (rand.NextDouble() * Defence);
                     double dmg = PlayerTeam.PlayerShip.DamageShip(Damage);
                     sw.Cooldown = sw.Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
                     ShipRoomDesign sT = PlayerTeam.PlayerShip.PickRandomRoom(rand);
-                    lShots.Add(new Shot(false, PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r], sT, sw.Attack, dSep, ParentView.Aspect));
+                    lShots.Add(new Shot(false, PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r], sT, sw.Attack, fSep, ParentView.Aspect));
                     for (int n = 0; n <= (int)(dmg * 5.0); n++) {
-                        lFrag.Add(new Frag((0.46 - dSep * Const.DrawBattleScale) - ((sT.XPos + sT.Width / 2) * 0.005 / ParentView.Aspect), 0.58 + ((sT.YPos - sT.Height / 2) * 0.005), (rand.NextDouble() - 0.5) * 0.003, (rand.NextDouble() - 0.5) * 0.003, rand.NextDouble() * rand.NextDouble()));
+                        lFrag.Add(new Frag((0.46f - fSep * Const.DrawBattleScale) - ((sT.XPos + sT.Width / 2f) * 0.005f / ParentView.Aspect),
+                                           shipYpos + ((sT.YPos - sT.Height / 2f) * 0.005f),
+                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
+                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
+                                           (float)rand.NextDouble() * (float)rand.NextDouble()));
                     }
                 }
             }
 
             // Player Ship defeated?
             if (PlayerTeam.PlayerShip.Hull <= 0.0) {
-                clockTick.Stop();
+                bPause = true;
                 ParentView.msgBox.PopupMessage("Your Ship has been destroyed!");
                 PlayerTeam.CeaseMission();
                 GameOver = true;
@@ -346,255 +328,229 @@ namespace SpaceMercs {
             }
 
             // Enemy attempts to board?
-            if (dSep <= 4000.0 && PlayerTeam.PlayerShip.HullFract < (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.2) && PlayerTeam.CurrentMission.ShipTarget.HullFract > (Const.DEBUG_MORE_BOARDERS ? 0.2 : 0.3) && rand.NextDouble() > (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.7)) {
-                clockTick.Stop();
+            if (fSep <= 4000.0 && PlayerTeam.PlayerShip.HullFract < (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.2) && PlayerTeam.CurrentMission.ShipTarget.HullFract > (Const.DEBUG_MORE_BOARDERS ? 0.2 : 0.3) && rand.NextDouble() > (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.7)) {
+                bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy are attempting to board your ship. Get ready to repel boarders");
                 PlayerTeam.SetCurrentMission(Mission.CreateRepelBoardersMission(PlayerTeam.CurrentMission.RacialOpponent, PlayerTeam.CurrentMission.Diff, PlayerTeam.PlayerShip));
                 RunRepelBoardersMission(PlayerTeam.CurrentMission);
             }
         }
         private void RunRepelBoardersMission(Mission miss) {
-            clockTick.Stop();
+            bPause = true;
             ParentView.RunMission(miss);
         }
         private void RunBoardingPartyMission(Mission miss) {
-            clockTick.Stop();
+            bPause = true;
             ParentView.RunMission(miss);
         }
         public void ResumeTravelling() {
-            // If victory then continue travelling
-            clockTick.Interval = 250;
-            clockTick.Start();
+            bPause = false;
         }
 
         // Draw the progress with whatever is happening
-        public void Display(ShaderProgram prog) {
+        public void Display(ShaderProgram prog, ShaderProgram colprog) {
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            prog.SetUniform("projection", projectionM);
+            prog.SetUniform("view", Matrix4.Identity);
+            prog.SetUniform("model", Matrix4.Identity);
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("lightEnabled", false);
-
-            return;
-
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
+
             // Draw a large box in the centre of the screen
-            GL.Disable(EnableCap.Texture2D);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.Color3(0.0, 0.0, 0.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.2, 0.2, 0.0);
-            GL.Vertex3(0.8, 0.2, 0.0);
-            GL.Vertex3(0.8, 0.8, 0.0);
-            GL.Vertex3(0.2, 0.8, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.2, 0.2, 0.0);
-            GL.Vertex3(0.8, 0.2, 0.0);
-            GL.Vertex3(0.8, 0.8, 0.0);
-            GL.Vertex3(0.2, 0.8, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            Matrix4 translateM = Matrix4.CreateTranslation(0.2f, 0.2f, 0f);
+            Matrix4 scaleM = Matrix4.CreateScale(0.6f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1.0f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1.0f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
 
             //  Task specific stuff
             if (PlayerTeam.CurrentMission == null) DrawTravelProgress(prog);
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) DrawRepair();
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage();
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle();
-
-            // Display the description
-            GL.PushMatrix();
-            GL.Translate(0.5, 0.25, 0.0);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.05 / ParentView.Aspect, 0.05, 0.05);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlTravel.Draw(TextLabel.Alignment.TopMiddle);
-            GL.PopMatrix();
-            GL.Enable(EnableCap.DepthTest);
-            GL.DepthMask(true);
+            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) DrawRepair(prog);
+            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage(prog);
+            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle(prog, colprog);
         }
-        private void DrawTravelProgress(ShaderProgram texProg) {
+        private void DrawTravelProgress(ShaderProgram prog) {
             // Set up the text
             string strDist = Utils.PrintDistance(AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo));
-            string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(dTravelTime));
-            //tlTravel.UpdateText(strDist + " " + strTime);
+            string strTime = string.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(fTravelTime));
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = ParentView.Aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = 0.55f,
+                ZPos = 0.015f,
+                Scale = 0.05f
+            };
+            TextRenderer.DrawWithOptions(strDist + " " + strTime, tro);
 
             // Progress Bar
-            double dFract = dElapsed / dTravelTime;
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            float fract = (float)fElapsed / (float)fTravelTime;
+            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
 
             // Source and Target AOs
-            GL.PushMatrix();
-            GL.Translate(0.25, 0.42, 0.0);
-            GL.Scale(0.025 / ParentView.Aspect, 0.025, 0.025);
-            GL.Rotate(90.0, Vector3d.UnitY);
-            aoTravelFrom.DrawSelected(texProg, 6);
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(0.75, 0.42, 0.0);
-            GL.Scale(0.025 / ParentView.Aspect, 0.025, 0.025);
-            GL.Rotate(90.0, Vector3d.UnitY);
-            aoTravelTo.DrawSelected(texProg, 6);
-            GL.PopMatrix();
+            Matrix4 translateM = Matrix4.CreateTranslation(0.25f, 0.42f, 0f);
+            Matrix4 scaleM = Matrix4.CreateScale(1f / ParentView.Aspect, 1f, 1f);
+            prog.SetUniform("view", scaleM * translateM);
+            aoTravelFrom.DrawSelected(prog, 8);
+            translateM = Matrix4.CreateTranslation(0.75f, 0.42f, 0f);
+            prog.SetUniform("view", scaleM * translateM);
+            aoTravelTo.DrawSelected(prog, 8);
         }
-        private void DrawSalvage() {
+        private void DrawSalvage(ShaderProgram prog) {
             // Set up the text
             string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
-            //tlTravel.UpdateText("Salvaging " + strTime);
+            string strText = "Salvaging " + strTime;
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = ParentView.Aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = 0.55f,
+                ZPos = 0.015f,
+                Scale = 0.05f
+            };
+            TextRenderer.DrawWithOptions(strText, tro);            
             // Progress Bar
-            double dFract = dMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
-            GL.Color3(1.0, 0.0, 0.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            float fract = fMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
+            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(1f, 0f, 0f, 1f));
         }
-        private void DrawRepair() {
+        private void DrawRepair(ShaderProgram prog) {
             // Set up the text
             string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
-            //tlTravel.UpdateText("Repairing " + strTime);
+            string strText = "Repairing " + strTime;
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = ParentView.Aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = 0.55f,
+                ZPos = 0.015f,
+                Scale = 0.05f
+            };
+            TextRenderer.DrawWithOptions(strText, tro);
             // Progress Bar
-            double dFract = dMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
-            GL.Color3(0.0, 0.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.5, 0.0);
-            GL.Vertex3(0.3 + (dFract * 0.4), 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(0.3, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.5, 0.0);
-            GL.Vertex3(0.7, 0.55, 0.0);
-            GL.Vertex3(0.3, 0.55, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            float fract = fMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
+            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 0f, 1f, 1f));
         }
-        private void DrawBattle() {
-            //if (PlayerTeam.CurrentMission.RacialOpponent == null) tlTravel.UpdateText("Battle versus unidentified alien ship");
-            //else tlTravel.UpdateText("Battle versus " + PlayerTeam.CurrentMission.RacialOpponent.Name + " ship");
+        private void DrawBattle(ShaderProgram prog, ShaderProgram colprog) {
+            string strText = "Battle versus unidentified alien ship";
+            if (PlayerTeam?.CurrentMission?.RacialOpponent != null) strText = $"Battle versus {PlayerTeam.CurrentMission.RacialOpponent.Name} ship";
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = ParentView.Aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = 0.65f,
+                ZPos = 0.015f,
+                Scale = 0.05f
+            };
+            TextRenderer.DrawWithOptions(strText, tro);
 
             // Setup and draw status text
             // Player Ship Stats:
             string strStatus = Math.Round(PlayerTeam.PlayerShip.Hull, 1) + "/" + Math.Round(PlayerTeam.PlayerShip.Type.MaxHull, 0);
-            DrawFractBar(0.22, 0.35, 0.1, 0.02, PlayerTeam.PlayerShip.HullFract, Color.Green);
-            GL.PushMatrix();
-            GL.Translate(0.33, 0.34, 0.0);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(strStatus, Alignment.TopLeft);
-            GL.PopMatrix();
+            DrawFractBar(prog, 0.22f, 0.35f, 0.1f, 0.02f, PlayerTeam.PlayerShip.HullFract, new Vector4(0f, 1f, 0f, 1f));
+            tro.Scale = 0.04f;
+            tro.XPos = 0.27f;
+            tro.YPos = 0.37f;
+            tro.Alignment = Alignment.TopMiddle;
+            TextRenderer.DrawWithOptions(strStatus, tro);
+
             if (PlayerTeam.PlayerShip.MaxShield > 0.0) {
                 strStatus = Math.Round(PlayerTeam.PlayerShip.Shield, 1) + "/" + PlayerTeam.PlayerShip.MaxShield;
-                DrawFractBar(0.22, 0.42, 0.1, 0.02, PlayerTeam.PlayerShip.ShieldFract, Color.Blue);
-                GL.PushMatrix();
-                GL.Translate(0.33, 0.41, 0.0);
-                GL.Color3(1.0, 1.0, 1.0);
-                GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
-                GL.Rotate(180.0, Vector3d.UnitX);
-                TextRenderer.Draw(strStatus, Alignment.TopLeft);
-                GL.PopMatrix();
+                DrawFractBar(prog, 0.22f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.PlayerShip.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
+                tro.YPos = 0.41f;
+                TextRenderer.DrawWithOptions(strStatus, tro);
             }
 
             // Enemy Ship Stats:
             double stHull = Math.Max(0.0, Math.Round(PlayerTeam.CurrentMission.ShipTarget.Hull, 1));
             strStatus = stHull + "/" + Math.Round(PlayerTeam.CurrentMission.ShipTarget.Type.MaxHull, 0);
-            DrawFractBar(0.68, 0.35, 0.1, 0.02, PlayerTeam.CurrentMission.ShipTarget.HullFract, Color.Green);
-            GL.PushMatrix();
-            GL.Translate(0.67, 0.34, 0.0);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(strStatus, Alignment.TopLeft);
-            GL.PopMatrix();
+            DrawFractBar(prog, 0.68f, 0.35f, 0.1f, 0.02f, PlayerTeam.CurrentMission.ShipTarget.HullFract, new Vector4(0f, 1f, 0f, 1f));
+            tro.Scale = 0.04f;
+            tro.XPos = 0.73f;
+            tro.YPos = 0.37f;
+            tro.Alignment = Alignment.TopMiddle;
+            TextRenderer.DrawWithOptions(strStatus, tro);
             if (PlayerTeam.CurrentMission.ShipTarget.MaxShield > 0.0) {
                 strStatus = Math.Round(PlayerTeam.CurrentMission.ShipTarget.Shield, 1) + "/" + PlayerTeam.CurrentMission.ShipTarget.MaxShield;
-                DrawFractBar(0.68, 0.42, 0.1, 0.02, PlayerTeam.CurrentMission.ShipTarget.ShieldFract, Color.Blue);
-                GL.PushMatrix();
-                GL.Translate(0.67, 0.41, 0.0);
-                GL.Color3(1.0, 1.0, 1.0);
-                GL.Scale(0.04 / ParentView.Aspect, 0.04, 0.04);
-                GL.Rotate(180.0, Vector3d.UnitX);
-                TextRenderer.Draw(strStatus, Alignment.TopLeft);
-                GL.PopMatrix();
+                DrawFractBar(prog, 0.68f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.CurrentMission.ShipTarget.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
+                tro.YPos = 0.41f;
+                TextRenderer.DrawWithOptions(strStatus, tro);
             }
 
             // Display ships
-            double dSpace = dSep * Const.DrawBattleScale;
-            GL.PushMatrix();
-            GL.Translate(0.46 - dSpace, 0.58, 0.0);
-            GL.Scale(-0.005 / ParentView.Aspect, 0.005, 0.005);
-            PlayerTeam.PlayerShip.DrawBattle();
-            GL.PopMatrix();
-            GL.PushMatrix();
-            GL.Translate(0.54 + dSpace, 0.58, 0.0);
-            GL.Scale(0.005 / ParentView.Aspect, 0.005, 0.005);
-            PlayerTeam.CurrentMission.ShipTarget.DrawBattle();
-            GL.PopMatrix();
+            float fSpace = fSep * Const.DrawBattleScale;
+            Matrix4 translateM = Matrix4.CreateTranslation(0.46f - fSpace, shipYpos, 0f);
+            Matrix4 scaleM = Matrix4.CreateScale(-0.005f / ParentView.Aspect, 0.005f, 0.005f);
+            prog.SetUniform("view", scaleM * translateM);
+            PlayerTeam.PlayerShip.DrawBattle(prog);
+            translateM = Matrix4.CreateTranslation(0.54f + fSpace, shipYpos, 0f);
+            scaleM = Matrix4.CreateScale(0.005f / ParentView.Aspect, 0.005f, 0.005f);
+            prog.SetUniform("view", scaleM * translateM);
+            PlayerTeam.CurrentMission.ShipTarget.DrawBattle(prog);
 
             // Draw weapon shots (Blue = player, red = enemy, width = power) and Frag
-            GL.Begin(BeginMode.Lines);
-            foreach (Shot sh in lShots) {
-                sh.Display();
+            UpdateShotLines();
+            if (vaShot is not null && vbShot is not null && vbShot.VertexCount > 0 && lShots.Any()) {
+                GL.UseProgram(colprog.ShaderProgramHandle);
+                GL.BindVertexArray(vaShot.VertexArrayHandle);
+                GL.DrawArrays(PrimitiveType.Lines, 0, vbShot.VertexCount);
+                GL.BindVertexArray(0);
             }
-            GL.End();
-            lShots.RemoveAll(s => s.Life <= 0);
-            GL.Begin(BeginMode.Quads);
+
+            // Draw any frag items
+            prog.SetUniform("view", Matrix4.Identity);
             foreach (Frag fr in lFrag) {
-                fr.Display(ParentView.Aspect);
+                fr.Display(prog, ParentView.Aspect);
+                fr.Update();
             }
-            GL.End();
-            lFrag.RemoveAll(f => f.F <= 0.0);
+            lFrag.RemoveAll(f => f.F <= 0.0f);
         }
-        private void DrawFractBar(double dTLCX, double dTLCY, double dWidth, double dHeight, double dFract, Color cBar) {
-            if (dFract < 0.0) dFract = 0.0;
-            if (dFract > 1.0) dFract = 1.0;
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.Color3(cBar);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(dTLCX, dTLCY, 0.0);
-            GL.Vertex3(dTLCX + (dFract * dWidth), dTLCY, 0.0);
-            GL.Vertex3(dTLCX + (dFract * dWidth), dTLCY + dHeight, 0.0);
-            GL.Vertex3(dTLCX, dTLCY + dHeight, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(dTLCX, dTLCY, 0.0);
-            GL.Vertex3(dTLCX + dWidth, dTLCY, 0.0);
-            GL.Vertex3(dTLCX + dWidth, dTLCY + dHeight, 0.0);
-            GL.Vertex3(dTLCX, dTLCY + dHeight, 0.0);
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+        private void UpdateShotLines() {
+            if (!lShots.Any()) return;
+            List<VertexPos2DCol> lines = new List<VertexPos2DCol>();
+            foreach (Shot sh in lShots) {
+                if (sh.Life <= 0) continue;
+                float fract = (float)sh.Life / 20f;
+                if (fract > 1.0f) fract = 1.0f;
+                Color4 col = sh.Player ? ShotColPlayer : ShotColEnemy;
+                col.R *= fract;
+                col.G *= fract;
+                col.B *= fract;
+                lines.Add(new VertexPos2DCol(new Vector2(sh.fx, sh.fy), col));
+                lines.Add(new VertexPos2DCol(new Vector2(sh.tx, sh.ty), col));
+                sh.Update();
+            }
+            lShots.RemoveAll(s => s.Life <= 0);
+            if (vbShot is null) {
+                vbShot = new VertexBuffer(lines.ToArray(), BufferUsageHint.StreamDraw);
+                vaShot = new VertexArray(vbShot);
+            }
+            else vbShot.SetData(lines.ToArray());
+        }
+        private static void DrawFractBar(ShaderProgram prog, float fTLCX, float fTLCY, float fWidth, float fHeight, float fract, Vector4 col) {
+            if (fract < 0.0f) fract = 0.0f;
+            if (fract > 1.0f) fract = 1.0f;
+            Matrix4 translateM = Matrix4.CreateTranslation(fTLCX, fTLCY, 0f);
+            Matrix4 scaleM = Matrix4.CreateScale(fWidth * fract, fHeight, 1f);
+            prog.SetUniform("model", scaleM * translateM);
+            prog.SetUniform("flatColour", col);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+            scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
+            prog.SetUniform("model", scaleM * translateM);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1.0f));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
         }
 
         // Announce the salvage gained 
@@ -602,16 +558,11 @@ namespace SpaceMercs {
             ParentView.msgBox.PopupMessage("Got " + dSalvage.Count + " item(s) of salvage");
         }
 
-        public bool StopTimer() {
-            if (clockTick == null) return false;
-            if (clockTick.Enabled) {
-                clockTick.Stop();
-                return true;
-            }
-            return false;
+        public void Pause() {
+            bPause = true;
         }
-        public void StartTimer() {
-            if (clockTick != null) clockTick.Start();
+        public void Unpause() {
+            bPause = false;
         }
     }
 }

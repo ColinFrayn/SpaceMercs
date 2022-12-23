@@ -15,7 +15,7 @@ namespace SpaceMercs {
     public double Cash { get; set; }
     private readonly Dictionary<Race, int> Relations = new Dictionary<Race, int>();  // 0 = neutral, -5 = war, +5 = worshipful
     public readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
-    public Mission CurrentMission { get; private set; }
+    public Mission? CurrentMission { get; private set; }
     public bool Mission_ShowLabels { get; set; }
     public bool Mission_ShowStatBars { get; set; }
     public bool Mission_ShowTravel { get; set; }
@@ -236,7 +236,7 @@ namespace SpaceMercs {
       PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEngineByName("Thrusters"));
     }
 
-    public void SetCurrentMission(Mission miss) {
+    public void SetCurrentMission(Mission? miss) {
       CurrentMission = miss;
     }
     public void CeaseMission() {

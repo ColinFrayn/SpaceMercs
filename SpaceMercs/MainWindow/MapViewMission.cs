@@ -167,12 +167,12 @@ namespace SpaceMercs.MainWindow {
             }
             else if (MissionOutcome == MissionResult.Defeat) {
                 msgBox.PopupMessage("You were defeated!");
+                throw new NotImplementedException();
                 if (PlayerTeam.SoldierCount == 0) {
                     // Still alive?
                     // TODO
                 }
                 // TODO: Handle mission defeat
-                throw new NotImplementedException();
             }
             else if (MissionOutcome == MissionResult.Evacuated) {
                 // Remove any mission items so they can't be sold and the mission repeated ad infinitum

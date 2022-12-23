@@ -255,6 +255,8 @@ namespace SpaceMercs {
 
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", 0f, 0f);
+            prog.SetUniform("texScale", 1f, 1f);
             SetupTextureMap(64, 32);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);

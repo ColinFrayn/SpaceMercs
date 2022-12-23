@@ -158,6 +158,9 @@ namespace SpaceMercs.MainWindow {
                 return;
             }
 
+            // Any travel/combat to update?
+            if (TravelDetails != null) TravelDetails.ClockTickProcessor();
+
             // Not on mission screen, so tick the clock & check if we died
             if (GalaxyMap.bMapSetup) {
                 Const.dtTime = Const.dtTime.AddMilliseconds(swLastTick.ElapsedMilliseconds);
@@ -599,7 +602,7 @@ namespace SpaceMercs.MainWindow {
         public void SaveGame() {
             if (GalaxyMap.bMapSetup == false) return;
             bool bTick = false;
-            if (TravelDetails != null) bTick = TravelDetails.StopTimer();
+            if (TravelDetails != null) TravelDetails.Pause();
 
             // Get the filename
             SaveFileDialog sfd = new SaveFileDialog();
@@ -615,7 +618,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 }
                 finally {
-                    if (TravelDetails != null && bTick) TravelDetails.StartTimer();
+                    if (TravelDetails != null) TravelDetails.Unpause();
                 }
             }
         }
@@ -656,7 +659,6 @@ namespace SpaceMercs.MainWindow {
                     fMapViewY = PlayerTeam.CurrentPosition.GetMapLocation().Y;
                     lastLoad = DateTime.Now;
                     SetAOButtonsOnGUI(aoSelected);
-                    // TODO glMapView.Invalidate();
                     view = ViewMode.ViewMap;
 
                     // If we're on a mission then set it up

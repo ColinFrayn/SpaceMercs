@@ -111,7 +111,7 @@ namespace SpaceMercs.MainWindow {
                 }
 
                 if (bShowColonies) {
-                    pl.DrawBaseIcon(flatColourShaderProgram);  // TODO
+                    pl.DrawBaseIcon(flatColourShaderProgram);
                 }
 
                 // Draw the moons
@@ -148,12 +148,15 @@ namespace SpaceMercs.MainWindow {
                         TriangleFocus.Flat.BindAndDraw();
                     }
 
-                    //if (bShowColonies) mn.DrawBaseIcon();  // TODO
+                    if (bShowColonies) {
+                        mn.DrawBaseIcon(flatColourShaderProgram);
+                    }
 
                     moony += 0.07f;
                 }
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.1f) * 0.6f;
+                // bOdd = !bOdd;
             }
         }
 

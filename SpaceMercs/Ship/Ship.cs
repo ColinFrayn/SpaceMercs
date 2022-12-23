@@ -393,54 +393,43 @@ namespace SpaceMercs {
         }
 
         // Draw this ship when in battle
-        public void DrawBattle() {
-            GL.Begin(BeginMode.Quads);
+        public void DrawBattle(ShaderProgram prog) {
             for (int rno = 0; rno < Type.Rooms.Count; rno++) {
                 ShipRoomDesign r = Type.Rooms[rno];
                 if (r.Size != ShipEquipment.RoomSize.Weapon && r.Size != ShipEquipment.RoomSize.Engine) { // draw a border?
-                    GL.Color3(0.2, 0.2, 0.2);
-                    GL.Vertex3(r.XPos - 1, r.YPos - 1, 0.0);
-                    GL.Vertex3(r.XPos + r.Width + 1, r.YPos - 1, 0.0);
-                    GL.Vertex3(r.XPos + r.Width + 1, r.YPos + r.Height + 1, 0.0);
-                    GL.Vertex3(r.XPos - 1, r.YPos + r.Height + 1, 0.0);
+                    prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                    Matrix4 piTranslateM = Matrix4.CreateTranslation(r.XPos - 1f, r.YPos - 1f, 0f);
+                    Matrix4 piScaleM = Matrix4.CreateScale(r.Width + 2f, r.Height + 2f, 0f);
+                    prog.SetUniform("model", piScaleM * piTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
                 if (Equipment.ContainsKey(rno)) {
-                    if (Equipment[rno].Item2) GL.Color3(0.4, 0.4, 0.4);
-                    else GL.Color3(0.3, 0.3, 0.3);
+                    if (Equipment[rno].Item2) prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, 1f));
+                    else prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));                    
                 }
-                else GL.Color3(0.2, 0.2, 0.2);
-                GL.Vertex3(r.XPos, r.YPos, 0.0);
-                GL.Vertex3(r.XPos + r.Width, r.YPos, 0.0);
-                GL.Vertex3(r.XPos + r.Width, r.YPos + r.Height, 0.0);
-                GL.Vertex3(r.XPos, r.YPos + r.Height, 0.0);
+                else prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos, r.YPos, 0f);
+                Matrix4 pScaleM = Matrix4.CreateScale(r.Width, r.Height, 0f);
+                prog.SetUniform("model", pScaleM * pTranslateM);
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Flat.BindAndDraw();
             }
-            GL.End();
 
             // Display fillers
+            prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
             if (Type.Fillers.Any()) {
-                GL.Color3(0.2, 0.2, 0.2);
-                GL.Begin(BeginMode.Quads);
                 foreach (Point pt in Type.Fillers) {
-                    GL.Vertex3(pt.X, pt.Y, 0.0);
-                    GL.Vertex3(pt.X + 1, pt.Y, 0.0);
-                    GL.Vertex3(pt.X + 1, pt.Y + 1, 0.0);
-                    GL.Vertex3(pt.X, pt.Y + 1, 0.0);
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X, pt.Y, 0f);
+                    prog.SetUniform("model", pTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
-                GL.End();
             }
 
-            GL.Color3(0.5, 0.5, 0.5);
-            GL.Begin(BeginMode.LineLoop);
-            foreach (Point pt in Type.Perimeter) {
-                GL.Vertex3(pt.X, pt.Y, 0.0);
-            }
-            GL.End();
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Begin(BeginMode.LineLoop);
-            foreach (Point pt in Type.Perimeter) {
-                GL.Vertex3(pt.X, pt.Y, 0.0);
-            }
-            GL.End();
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            prog.SetUniform("model", Matrix4.Identity);
+            Type.DrawPerimeter(prog);
         }
 
         // Draw the equipment in a room
