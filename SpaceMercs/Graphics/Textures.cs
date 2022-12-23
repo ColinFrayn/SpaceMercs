@@ -4,6 +4,10 @@ using System.Drawing.Imaging;
 using System.IO;
 
 namespace SpaceMercs {
+    public struct TexDetails {
+        public int ID;
+        public int W, H;
+    }
     static class Textures {
         [Flags]
         public enum WallSide { UpLeft = 1, Up = 2, UpRight = 4, Left = 8, Right = 16, DownLeft = 32, Down = 64, DownRight = 128 }; // Do we need a wall on this side of the cell? (i.e. is the cell in this direction a floor tile?)
@@ -126,10 +130,10 @@ namespace SpaceMercs {
         }
 
         #region Wall And Floor Textures
-        public static Tuple<int, int, int> GenerateFloorTexture(MissionLevel lev) {
+        public static TexDetails GenerateFloorTexture(MissionLevel lev) {
             return BindTexture(GenerateFloorTextureMap(lev));
         }
-        public static byte[,,] GenerateFloorTextureMap(MissionLevel lev) {
+        private static byte[,,] GenerateFloorTextureMap(MissionLevel lev) {
             if (lev.ParentMission.IsShipMission) {
                 return GenerateMetalFloorTile(Color.FromArgb(255, 180, 180, 180), 3, Textures.TileSize, Textures.TileSize);
             }
@@ -152,11 +156,11 @@ namespace SpaceMercs {
             }
             throw new NotImplementedException();
         }
-        public static Dictionary<WallSide, Tuple<int, int, int>> GenerateWallTexture(MissionLevel lev) {
-            Color col = Color.FromArgb(255, 150, 150, 150);
-            Dictionary<WallSide, Tuple<int, int, int>> dWallTextures = new Dictionary<WallSide, Tuple<int, int, int>>();
-            Tuple<int, int, int> TexID = null;
-            byte[,,] baseImage = null;
+        public static Dictionary<WallSide, TexDetails> GenerateWallTexture(MissionLevel lev) {
+            //Color col = Color.FromArgb(255, 150, 150, 150);
+            Dictionary<WallSide, TexDetails> dWallTextures = new Dictionary<WallSide, TexDetails>();
+            TexDetails? TexID = null;
+            byte[,,]? baseImage = null;
             if (lev.ParentMission.Type == Mission.MissionType.Caves || lev.ParentMission.Type == Mission.MissionType.Mines) {
                 baseImage = GenerateRockWallTexture(Color.FromArgb(255, 150, 150, 150), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev);
             }
@@ -176,7 +180,7 @@ namespace SpaceMercs {
                 if (lev.ParentMission.Type == Mission.MissionType.Caves || lev.ParentMission.Type == Mission.MissionType.Mines) TexID = BindTexture(FadeWallImage(baseImage, s));
                 if (lev.ParentMission.Type == Mission.MissionType.Surface) TexID = BindTexture(baseImage);
                 if (TexID == null) TexID = BindTexture(GenerateAlignedVarianceMap(Color.FromArgb(255, 150, 150, 150), 10, Textures.TileSize, Textures.TileSize));
-                dWallTextures.Add(s, TexID);
+                if (TexID.HasValue) dWallTextures.Add(s, TexID.Value);
             }
             return dWallTextures;
         }
@@ -550,7 +554,7 @@ namespace SpaceMercs {
         }
 
         #region Utility Methods
-        private static Tuple<int, int, int> BindTexture(byte[,,] image) {
+        private static TexDetails BindTexture(byte[,,] image) {
             int texID;
             GL.Enable(EnableCap.Texture2D);
             texID = GL.GenTexture();
@@ -558,7 +562,7 @@ namespace SpaceMercs {
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             SetParameters();
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.GetLength(0), image.GetLength(1), 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgb, PixelType.UnsignedByte, image);
-            return new Tuple<int, int, int>(texID, image.GetLength(0), image.GetLength(1));
+            return new TexDetails() { ID = texID, W = image.GetLength(0), H = image.GetLength(1) };
         }
         private static int BindEntityTexture(byte[,,] image) {
             int texID;

@@ -162,9 +162,9 @@ namespace SpaceMercs {
         public const int NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
-        public const double BaseEncounterScarcity = 1200.0;  // Base chance for an encounter when travelling (higher = less frequent)
-        public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel to make missions harder
-        public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies
+        public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
+        public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
+        public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
         public const double ShipBountyScale = 1.0;  // Scale for calculating bounty of enemy ships defeated
         public static DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         public static DateTime dtTime = Const.dtStart;

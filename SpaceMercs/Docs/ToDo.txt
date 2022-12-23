@@ -3,14 +3,27 @@ ToDo List
 -------------------------------------------------
 
 Travel
-- DrawTravelProgress : Mini planets skip rotation / reverse rotation / look awful occasionally?
+- DrawTravelProgress : Mini planets skip rotation / reverse rotation / look awful occasionally. WTF?
 
-Encounters : Are there too many of them? Test in lots of situations.
-
-Disable Colony button when travelling
+MapViewMission
+- CurrentLevel.DisplayMap()
+-- Convert from display list to a large vertex array / quads
+-- DrawEntryLocation()
+-- DrawExitLocation()
+-- DisplayTrap()
+-- DisplayItemStack()
+- CurrentLevel.DrawDetectionMap()
+- CurrentLevel.DrawSelectedEntityVis()
+- CurrentLevel.DisplayEntities()
+- ShowMapGUIElements()
+- Display visual effects
+- ShowOverlayGUI()
 
 Main Menu
   Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
+- Enable Mission item in missions, disable options
+
+Check all MenuItem.Enabled/Disabled
 
 Remove all Windows MessageBoxes
 
@@ -43,16 +56,22 @@ Display the clock, cash, hover text, toggles
 Should not be able to target self or own team
 
 
+-------
+Testing
+-------
+
+Encounters : Are there too many of them? Test in lots of situations.
+
+System view : Star sometimes vanishes on certain aspect ratios
+
+
 ----------
 Backburner
 ----------
 
-Travel.Drawbattle() : Convert Frag to a vertex array for optimisation
+Travel.DrawBattle() : Convert Frag to a vertex array for optimisation
 
 DrawShipHoverInfo() : Add multi-line info for equipment?
-
-System view
-- Star sometimes vanishes on certain aspect ratios
 
 Improve TextRenderer
 - Bold, Shadow, Border

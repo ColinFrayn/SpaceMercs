@@ -14,7 +14,6 @@ namespace SpaceMercs {
         private readonly bool bInitialised;
         private int[,] TextureCoords;
         private int iMapDL = -1;
-        private int iMiscTextureTransparentID = -1;
         private readonly HashSet<Point> EntryLocations = new HashSet<Point>(); //  = "To/From above" if multi-level
         private readonly HashSet<Point> ExitLocations = new HashSet<Point>(); //  = "To/From below" if multi-level
         private readonly List<IEntity> Entities = new List<IEntity>();
@@ -23,8 +22,8 @@ namespace SpaceMercs {
         private IEntity[,] EntityMap;
         private int HoverX = -1, HoverY = -1;
         private Random rand = new Random();
-        private Tuple<int, int, int> FloorTexture = null;
-        private Dictionary<Textures.WallSide, Tuple<int, int, int>> dWallTextures = null;
+        private TexDetails? FloorTexture = null;
+        private Dictionary<Textures.WallSide, TexDetails>? dWallTextures = null;
         private const double TexEpsilon = 0.01;
 
         public TileType[,] Map { get; private set; }
@@ -265,7 +264,7 @@ namespace SpaceMercs {
         }
 
         #region Display
-        public void DisplayMap() {
+        public void DisplayMap(ShaderProgram prog) {
             if (!bInitialised) return;
             if (iMapDL == -1) UpdateMapDisplayList();
             GL.CallList(iMapDL);
@@ -349,16 +348,16 @@ namespace SpaceMercs {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
                     int iTexID = -1;
                     if (Map[x, y] == TileType.Floor || Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) {
-                        iTexID = FloorTexture.Item1;
-                        tw = FloorTexture.Item2 / Textures.TileSize;
-                        th = FloorTexture.Item3 / Textures.TileSize;
+                        iTexID = FloorTexture.Value.ID;
+                        tw = FloorTexture.Value.W / Textures.TileSize;
+                        th = FloorTexture.Value.H / Textures.TileSize;
                     }
                     else if (Map[x, y] == TileType.Wall || Map[x, y] == TileType.SecretDoorHorizontal || Map[x, y] == TileType.SecretDoorVertical) {
                         Textures.WallSide ws = GetWallSides(x, y);
                         if (!dWallTextures.ContainsKey(ws)) throw new Exception("Illegal wall texture requested");
-                        iTexID = dWallTextures[ws].Item1;
-                        tw = dWallTextures[ws].Item2 / Textures.TileSize;
-                        th = dWallTextures[ws].Item3 / Textures.TileSize;
+                        iTexID = dWallTextures[ws].ID;
+                        tw = dWallTextures[ws].W / Textures.TileSize;
+                        th = dWallTextures[ws].H / Textures.TileSize;
                     }
                     else {
                         throw new Exception("Weird texture type requested : " + Map[x, y]);

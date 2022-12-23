@@ -74,8 +74,10 @@ namespace SpaceMercs.MainWindow {
             if (view == ViewMode.ViewMap) DrawMapToggles();
             if (view == ViewMode.ViewSystem) DrawSystemToggles();
 
-            // Main menu
-            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            // Main menu (if not travelling)
+            if (TravelDetails == null) {
+                gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            }
 
             // Hover info for the current setup
             DrawGUIHoverInfo();
@@ -93,14 +95,6 @@ namespace SpaceMercs.MainWindow {
                 gbViewColony.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
                 gbScan.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             }
-
-            // Colony?
-            // TODO Enable this. Was not enabled before...
-            //if (TravelDetails != null) colonyToolStripMenuItem.Enabled = false;
-            //else {
-            //  if (PlayerTeam.CurrentPosition.BaseSize > 0) colonyToolStripMenuItem.Enabled = true;
-            //  else colonyToolStripMenuItem.Enabled = false;
-            //}
         }
 
         // Display the text labels required for the GUI
@@ -384,9 +378,8 @@ namespace SpaceMercs.MainWindow {
             msgBox.PopupConfirmation(String.Format("Really travel? Journey time = {0:%d}d {0:%h}h {0:%m}m {0:%s}s", ts), () => FlyTo_Continue(dJourneyTime));
         }
         private void FlyTo_Continue(double jt) {
-            // Set up that we're travelling
-            float fJourneyTime = (float)jt;
-            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, fJourneyTime, PlayerTeam, this);
+            // Set up that we're travelling somewhere
+            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, (float)jt, PlayerTeam, this);
         }
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.bMapSetup) return;

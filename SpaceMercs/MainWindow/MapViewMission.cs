@@ -30,7 +30,6 @@ namespace SpaceMercs.MainWindow {
         private IEntity SelectedEntity = null;
         private Soldier panelHover = null;
         private bool bDragging = false;
-        private int iItemTexture = -1;
         private int[,] DistMap;
         private bool[,] TargetMap;
         private bool[,] AoEMap;
@@ -92,20 +91,11 @@ namespace SpaceMercs.MainWindow {
             //viewToolStripMenuItem.Enabled = false;
             //optionsToolStripMenuItem.Enabled = false;
             bShowEntityLabels = PlayerTeam.Mission_ShowLabels;
-            //labelsToolStripMenuItem.Checked = bShowEntityLabels;
             bShowStatBars = PlayerTeam.Mission_ShowStatBars;
-            //healthBarsToolStripMenuItem.Checked = bShowStatBars;
             bShowTravel = PlayerTeam.Mission_ShowTravel;
-            //travelDistanceToolStripMenuItem.Checked = bShowTravel;
             bShowPath = PlayerTeam.Mission_ShowPath;
-            //movementPathToolStripMenuItem.Checked = bShowPath;
             bShowEffects = PlayerTeam.Mission_ShowEffects;
-            //viewEffectsToolStripMenuItem.Checked = bShowEffects;
             bViewDetection = PlayerTeam.Mission_ViewDetection;
-            //viewDetectionRadiiToolStripMenuItem.Checked = bViewDetection;
-
-            // If it's a ship mission then do the starfield;
-            if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) SetupStarfield();
 
             // Centre around the first soldier
             CentreView(ThisMission.Soldiers[0]);
@@ -189,27 +179,6 @@ namespace SpaceMercs.MainWindow {
             // TODO missionToolStripMenuItem.Enabled = false;
         }
 
-        // This is the method to run when the timer is raised.
-        private void SetupStarfield() {
-            Random rnd = new Random();
-            iStarfieldDL = GL.GenLists(1);
-            GL.NewList(iStarfieldDL, ListMode.Compile);
-
-            // Generate a lot of stars
-            GL.Begin(BeginMode.Points);
-            for (int n = 0; n < Const.StarfieldSize; n++) {
-                double col = (1.0 - (Math.Pow(rnd.NextDouble() * 8.0, 0.3333) / 2.0)) * 0.9 + 0.1;
-                double x = (rnd.NextDouble() * 140.0) - 70.0;
-                double y = (rnd.NextDouble() * 90.0) - 45.0;
-                if (rnd.Next(20) == 0) GL.PointSize(3.0f);
-                else if (rnd.Next(5) == 0) GL.PointSize(2.0f);
-                else GL.PointSize(1.0f);
-                GL.Color3(col, col, col);
-                GL.Vertex3(x, y, -100.0);
-            }
-            GL.End();
-            GL.EndList();
-        }
         private void DrawMission() {
             if (!bLoaded) return;
             if (SelectedEntity is Soldier s && s.PlayerTeam == null) SelectedEntity = null; // If player has died, deselect it
@@ -219,20 +188,20 @@ namespace SpaceMercs.MainWindow {
 
             // Set the correct view location & perspective matrix
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.Disable(EnableCap.Lighting);
-            GL.MatrixMode(MatrixMode.Projection);
-            //GL.LoadMatrix(ref perspective);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
+            fullShaderProgram.SetUniform("projection", projectionM);
 
-            // Draw the starfield (unmoving)
-            if (iStarfieldDL != -1) GL.CallList(iStarfieldDL);
+            Matrix4 translateM = Matrix4.CreateTranslation(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
+            fullShaderProgram.SetUniform("view", translateM);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
-            // Shift to the correct location
-            GL.Translate(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
+            // If it's a ship mission then do the starfield;
+            if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) {
+                Starfield.Build.BindAndDraw();
+            }
 
             // Display the scene
-            CurrentLevel.DisplayMap();
+            CurrentLevel.DisplayMap(fullShaderProgram);
 
             // Show any indicators on top of the action in the map view
             ShowMapGUIElements();
@@ -247,18 +216,15 @@ namespace SpaceMercs.MainWindow {
 
             // Draw any static GUI elements (overlay)
             ShowOverlayGUI();
-
-            // if we're displaying visual effects then keep re-painting
-            // TODO if (Effects.Any()) glMapView.Invalidate();
         }
 
+        // Input stuff
         private void GetKeyboardInput_Mission() {
             if (bAIRunning) return;
             if (IsKeyPressed(Keys.Escape)) {
                 if (CurrentAction == SoldierAction.None) SetSelectedEntity(null);
                 CurrentAction = SoldierAction.None;
                 ActionItem = null;
-                // TODO glMapView.Invalidate();
             }
             if (SelectedEntity != null && SelectedEntity.GetType() == typeof(Soldier) && CurrentAction == SoldierAction.None) {
                 Soldier s = SelectedEntity as Soldier;
@@ -273,8 +239,6 @@ namespace SpaceMercs.MainWindow {
             }
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
         }
-
-        // Mouse stuff
         private void CheckHoverMission() {
             if (gpSelect != null && gpSelect.Active) return;
 
@@ -851,7 +815,7 @@ namespace SpaceMercs.MainWindow {
 
             GL.Enable(EnableCap.DepthTest);
         }
-        private void DisplayAILabel() {
+        private static void DisplayAILabel() {
             GL.PushMatrix();
             GL.Translate(0.5, 0.02, Const.GUILayer);
             GL.Scale(0.06, 0.06, 0.04);
@@ -1487,7 +1451,7 @@ namespace SpaceMercs.MainWindow {
         #endregion //  ButtonHandlers
 
         // Generate maps for overlays
-        private void SetSelectedEntity(IEntity en) {
+        private void SetSelectedEntity(IEntity? en) {
             SelectedEntity = en;
             GenerateDetectionMap();
             if (en != null && en is Soldier s) {
