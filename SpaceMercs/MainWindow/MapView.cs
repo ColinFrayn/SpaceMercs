@@ -564,6 +564,13 @@ namespace SpaceMercs.MainWindow {
                 case I_OptionsTradeRoutes: bShowTradeRoutes = !bShowTradeRoutes; return;
                 case I_OptionsFlags: bShowFlags = !bShowFlags; return;
                 case I_OptionsColonies: bShowColonies = !bShowColonies; return;
+                case I_MissionDetails: DisplayMissionDetails();  return;
+                case I_MissionLabels: bShowEntityLabels = !bShowEntityLabels; return;
+                case I_MissionStatBars: bShowStatBars = !bShowStatBars; return;
+                case I_MissionTravel: bShowTravel = !bShowTravel; return;
+                case I_MissionPath: bShowPath = !bShowPath; return;
+                case I_MissionEffects: bShowEffects = !bShowEffects; return;
+                case I_MissionDetection: bViewDetection = !bViewDetection; return;
             }
         }
         #endregion // Input Handling

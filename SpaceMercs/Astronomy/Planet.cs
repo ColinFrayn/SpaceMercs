@@ -292,12 +292,6 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
-
-        struct TexResult {
-            public int width;
-            public int height;
-            public byte[] texture;
-        }
     }
 
 }

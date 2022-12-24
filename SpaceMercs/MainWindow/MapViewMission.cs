@@ -215,6 +215,8 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Draw any static GUI elements (overlay)
+            gpOptionsMenu.Deactivate();
+            gpMissionMenu.Activate();
             ShowOverlayGUI();
         }
 
@@ -666,7 +668,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Menu handlers
-        private void detailsToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void DisplayMissionDetails() {
             string strDesc = ThisMission.GetDescription();
             if (ThisMission.Goal == Mission.MissionGoal.ExploreAll || ThisMission.Goal == Mission.MissionGoal.KillAll || ThisMission.Goal == Mission.MissionGoal.Gather) {
                 strDesc += "----------\nProgress:\n";
@@ -698,43 +700,6 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             msgBox.PopupMessage(strDesc);
-        }
-        private void labelsToolStripMenuItem_Click(object sender, EventArgs e) {
-            bShowEntityLabels = !bShowEntityLabels;
-            // TODO labelsToolStripMenuItem.Checked = bShowEntityLabels;
-            PlayerTeam.Mission_ShowLabels = bShowEntityLabels;
-            // TODO glMapView.Invalidate();
-        }
-        private void healthBarsToolStripMenuItem_Click(object sender, EventArgs e) {
-            bShowStatBars = !bShowStatBars;
-            // TODO healthBarsToolStripMenuItem.Checked = bShowStatBars;
-            PlayerTeam.Mission_ShowStatBars = bShowStatBars;
-            // TODO glMapView.Invalidate();
-        }
-        private void travelDistanceToolStripMenuItem_Click(object sender, EventArgs e) {
-            bShowTravel = !bShowTravel;
-            // TODO travelDistanceToolStripMenuItem.Checked = bShowTravel;
-            PlayerTeam.Mission_ShowTravel = bShowTravel;
-            // TODO glMapView.Invalidate();
-        }
-        private void movementPathToolStripMenuItem_Click(object sender, EventArgs e) {
-            bShowPath = !bShowPath;
-            // TODO movementPathToolStripMenuItem.Checked = bShowPath;
-            PlayerTeam.Mission_ShowPath = bShowPath;
-            // TODO glMapView.Invalidate();
-        }
-        private void viewEffectsToolStripMenuItem_Click(object sender, EventArgs e) {
-            bShowEffects = !bShowEffects;
-            // TODO viewEffectsToolStripMenuItem.Checked = bShowEffects;
-            PlayerTeam.Mission_ShowEffects = bShowEffects;
-            // TODO glMapView.Invalidate();
-        }
-        private void viewDetectionRadiiToolStripMenuItem_Click(object sender, EventArgs e) {
-            bViewDetection = !bViewDetection;
-            // TODO viewDetectionRadiiToolStripMenuItem.Checked = bViewDetection;
-            PlayerTeam.Mission_ViewDetection = bViewDetection;
-            GenerateDetectionMap();
-            // TODO glMapView.Invalidate();
         }
 
         // Show GUI elements in the viewpoint of the map

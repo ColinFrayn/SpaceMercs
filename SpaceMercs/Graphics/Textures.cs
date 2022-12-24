@@ -82,11 +82,11 @@ namespace SpaceMercs {
         public const int ShipHaloTextureSize = 128;
         public const int PlanetHaloTextureSize = 256;
         public static int iPlanetHalo = -1;
-        public static byte[] bytePlanetHalo;
+        public static byte[]? bytePlanetHalo;
         public static int iStarTexture = -1;
-        public static byte[] byteStarTexture;
+        public static byte[]? byteStarTexture;
         public static int iShipHalo = -1;
-        public static byte[] byteShipHaloTexture;
+        public static byte[]? byteShipHaloTexture;
 
         // Mission textures
         public static byte[] FogOfWarStipple = new byte[128];

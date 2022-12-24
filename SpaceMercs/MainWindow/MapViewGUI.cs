@@ -8,7 +8,7 @@ using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-        private GUIPanel gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu;
+        private GUIPanel gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
         private readonly int iGUIHoverN = -1; // What is this??
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
         private AstronomicalObject lastAOHover = null;
@@ -22,20 +22,27 @@ namespace SpaceMercs.MainWindow {
         public const uint I_Load = 11012;
         public const uint I_Save = 11013;
         public const uint I_Exit = 11014;
-        public const uint I_Mission = 11020;
-        public const uint I_View = 11030;
-        public const uint I_ViewShip = 11031;
-        public const uint I_ViewTeam = 11032;
-        public const uint I_ViewColony = 11033;
-        public const uint I_ViewRaces = 11034;
-        public const uint I_Options = 11040;
-        public const uint I_OptionsLabels = 11041;
-        public const uint I_OptionsGridLines = 11042;
-        public const uint I_OptionsFadeUnvisited = 11043;
-        public const uint I_OptionsRangeCircles = 11044;
-        public const uint I_OptionsTradeRoutes = 11045;
-        public const uint I_OptionsFlags = 11046;
-        public const uint I_OptionsColonies = 11047;
+        public const uint I_View = 11020;
+        public const uint I_ViewShip = 11021;
+        public const uint I_ViewTeam = 11022;
+        public const uint I_ViewColony = 11023;
+        public const uint I_ViewRaces = 11024;
+        public const uint I_Options = 11030;
+        public const uint I_OptionsLabels = 11031;
+        public const uint I_OptionsGridLines = 11032;
+        public const uint I_OptionsFadeUnvisited = 11033;
+        public const uint I_OptionsRangeCircles = 11034;
+        public const uint I_OptionsTradeRoutes = 11035;
+        public const uint I_OptionsFlags = 11036;
+        public const uint I_OptionsColonies = 11037;
+        public const uint I_Mission = 11040;
+        public const uint I_MissionDetails = 11041;
+        public const uint I_MissionLabels = 11042;
+        public const uint I_MissionStatBars = 11043;
+        public const uint I_MissionTravel = 11044;
+        public const uint I_MissionPath = 11045;
+        public const uint I_MissionEffects = 11046;
+        public const uint I_MissionDetection = 11047;
         #endregion // Menu Codes
 
         // Draw the GUI elements
@@ -77,6 +84,8 @@ namespace SpaceMercs.MainWindow {
             // Main menu (if not travelling)
             if (TravelDetails == null) {
                 gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+                gpOptionsMenu.Activate();
+                gpMissionMenu.Deactivate();
             }
 
             // Hover info for the current setup
@@ -330,6 +339,16 @@ namespace SpaceMercs.MainWindow {
             gpOptionsMenu.InsertTextItem(I_OptionsFlags, "Flags", Aspect, () => bShowFlags);
             gpOptionsMenu.InsertTextItem(I_OptionsColonies, "Colonies", Aspect, () => bShowColonies);
 
+            // Mission menu
+            gpMissionMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
+            gpMissionMenu.InsertTextItem(I_MissionDetails, "Mission Details", Aspect);
+            gpMissionMenu.InsertTextItem(I_MissionLabels, "Labels", Aspect, () => bShowEntityLabels);
+            gpMissionMenu.InsertTextItem(I_MissionStatBars, "Stat Bars", Aspect, () => bShowStatBars);
+            gpMissionMenu.InsertTextItem(I_MissionTravel, "Travel Distance", Aspect, () => bShowTravel);
+            gpMissionMenu.InsertTextItem(I_MissionPath, "Best Path", Aspect, () => bShowPath);
+            gpMissionMenu.InsertTextItem(I_MissionEffects, "Effects", Aspect, () => bShowEffects);
+            gpMissionMenu.InsertTextItem(I_MissionDetection, "Detection Area", Aspect, () => bViewDetection);
+
             // First level menus
             gpSubMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.File);
@@ -339,7 +358,7 @@ namespace SpaceMercs.MainWindow {
             ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
             gpSubMenu.InsertIconItem(I_Options, ts, true, gpOptionsMenu);
             ts = Textures.GetTexCoords(Textures.MiscTexture.Mission);
-            gpSubMenu.InsertIconItem(I_Mission, ts, false, null);
+            gpSubMenu.InsertIconItem(I_Mission, ts, false, gpMissionMenu);
 
             // Top level menu
             gpMenu = new GUIPanel(this, 0.01f, 0.15f);
