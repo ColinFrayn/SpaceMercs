@@ -217,10 +217,10 @@ namespace SpaceMercs {
         public const float InitialMissionViewZ = 40.0f;
         public const float MinimumMissionViewZ = 8.0f;
         public const float MaximumMissionViewZ = 120.0f;
-        public const double TileLayer = 0.0;
-        public const double DoodadLayer = 0.01;
-        public const double EntityLayer = 0.02;
-        public const double GUILayer = 0.05;
+        public const float TileLayer = 0.0f;
+        public const float DoodadLayer = 0.01f;
+        public const float EntityLayer = 0.02f;
+        public const float GUILayer = 0.05f;
 
         // MissionView GUI Panel settings
         public const float GUIPanelWidth = 0.16f;

@@ -84,8 +84,8 @@ namespace SpaceMercs.MainWindow {
             // Main menu (if not travelling)
             if (TravelDetails == null) {
                 gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-                gpOptionsMenu.Activate();
-                gpMissionMenu.Deactivate();
+                gpSubMenu.GetItem(I_Options)?.Enable();
+                gpSubMenu.GetItem(I_Mission)?.Disable();
             }
 
             // Hover info for the current setup

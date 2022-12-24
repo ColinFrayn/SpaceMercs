@@ -86,6 +86,12 @@ namespace SpaceMercs {
             PanelY = py;
             this.Activate();
         }
+        public PanelItem? GetItem(uint ID) {
+            foreach (PanelItem it in Items) {
+                if (it.ID == ID) return it;
+            }
+            return null;
+        }
 
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
         public PanelItem? DisplayAndCalculateMouseHover(ShaderProgram prog, double fmousex, double fmousey) {

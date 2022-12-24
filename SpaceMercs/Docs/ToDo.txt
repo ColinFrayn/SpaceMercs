@@ -18,6 +18,9 @@ MapViewMission
 - ShowMapGUIElements()
 - Display visual effects
 - ShowOverlayGUI()
+-- ShowSoldierPanels()
+-- DisplayAILabel()
+-- ShowSelectedEntityDetails()
 
 Main Menu
   Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
@@ -63,6 +66,8 @@ Testing
 Encounters : Are there too many of them? Test in lots of situations.
 
 System view : Star sometimes vanishes on certain aspect ratios
+
+Got a crash doing ship battle and disposing something
 
 
 ----------

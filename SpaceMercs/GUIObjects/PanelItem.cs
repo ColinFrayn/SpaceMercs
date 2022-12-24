@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System.Security.Cryptography;
 
 namespace SpaceMercs {
     abstract class PanelItem {
@@ -69,5 +68,7 @@ namespace SpaceMercs {
         public void SetToggleDelegate(Func<bool>? getBool) {
             GetBool = getBool;
         }
+        public void Enable() { Enabled = true; }
+        public void Disable() { Enabled = false; }
     }
 }

@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -215,8 +216,8 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Draw any static GUI elements (overlay)
-            gpOptionsMenu.Deactivate();
-            gpMissionMenu.Activate();
+            gpSubMenu.GetItem(I_Options)?.Disable();
+            gpSubMenu.GetItem(I_Mission)?.Enable();
             ShowOverlayGUI();
         }
 
@@ -746,12 +747,10 @@ namespace SpaceMercs.MainWindow {
         // Show GUI elements in the overlay layer
         private void ShowOverlayGUI() {
             InitialiseGUIButtons();
-            GL.MatrixMode(MatrixMode.Projection);
-            //GL.LoadMatrix(ref ortho_projection);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-            GL.Disable(EnableCap.Lighting);
-            GL.Disable(EnableCap.DepthTest);
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            fullShaderProgram.SetUniform("projection", projectionM);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
             // Show the selected entity details if it's a creature
             if (SelectedEntity != null && SelectedEntity is Creature) {
@@ -759,7 +758,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Details on the squad
-            ShowSoldierPanels();
+            ShowSoldierPanels(fullShaderProgram);
 
             // Show the context menu and other buttons
             if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
@@ -768,19 +767,18 @@ namespace SpaceMercs.MainWindow {
             if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (ThisMission?.IsComplete ?? false) {
                 gbEndMission.Activate();
-                gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
+                //gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
                 gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             }
             else gbEndMission.Deactivate();
 
             // Warn that AI is running?
             if (bAIRunning) {
-                DisplayAILabel();
+                DisplayAILabel(fullShaderProgram);
             }
-
             GL.Enable(EnableCap.DepthTest);
         }
-        private static void DisplayAILabel() {
+        private static void DisplayAILabel(ShaderProgram prog) {
             GL.PushMatrix();
             GL.Translate(0.5, 0.02, Const.GUILayer);
             GL.Scale(0.06, 0.06, 0.04);
@@ -800,25 +798,26 @@ namespace SpaceMercs.MainWindow {
         }
         private void ShowSelectedEntityDetails() {
             // Display the stats for the selected entity
-            GL.PushMatrix();
-            GL.Translate(0.998, 0.81 - (SelectedEntity.MaxShields > 0 ? 0.0368 : 0.0), Const.GUILayer);
-            GL.Scale(0.04, 0.04, 0.04);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            //tlSelect1.SetAlpha(Const.GUIAlpha);
-            TextRenderer.Draw(SelectedEntity.Name, Alignment.TopRight);
-            GL.Translate(0.0, -0.92, 0.0);
-            //tlSelect2.SetAlpha(Const.GUIAlpha);
-            TextRenderer.Draw("Level " + SelectedEntity.Level, Alignment.TopRight);
-            GL.Translate(0.0, -0.92, 0.0);
-            //tlSelect3.SetAlpha(Const.GUIAlpha);
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopRight,
+                Aspect = Aspect,
+                TextColour = Color.White,
+                XPos = 0.998f,
+                YPos = 0.81f - (SelectedEntity.MaxShields > 0f ? 0.0368f : 0f),
+                ZPos = Const.GUILayer,
+                Scale = 0.04f
+            };
+            TextRenderer.DrawWithOptions(SelectedEntity.Name, tro);
+            tro.YPos += (tro.Scale*1.2f);
+            TextRenderer.DrawWithOptions("Level " + SelectedEntity.Level, tro);
+            tro.YPos += (tro.Scale * 1.2f);
             int hp = (int)SelectedEntity.Health;
             if (hp < 1) hp = 1;
             string strStats = $"HP:{hp} / St:{(int)SelectedEntity.Stamina}";
             if (SelectedEntity.MaxShields > 0) strStats += $" / Sh: {(int)SelectedEntity.Shields}";
-            TextRenderer.Draw(strStats, Alignment.TopRight);
-            GL.PopMatrix();
+            TextRenderer.DrawWithOptions(strStats, tro);
         }
-        private void ShowSoldierPanels() {
+        private void ShowSoldierPanels(ShaderProgram prog) {
             // Show the details of the soldiers
             float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
             IEntity hover = CurrentLevel.GetHoverEntity();

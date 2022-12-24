@@ -64,7 +64,7 @@ namespace SpaceMercs {
                 DrawToggleIcon(prog, iconX, iconY, iconW, iconH, zdist);
             }
 
-            if (SubPanel != null) {
+            if (Enabled && SubPanel != null) {
                 bool bJustOpened = false;
                 // If this item hovered then open subpanel
                 if (piHover is not null) {
@@ -105,7 +105,6 @@ namespace SpaceMercs {
                     }
                 }
             }
-            //if (piHover != null) DrawSelectionFrame(prog, iconX, iconY, iconW, iconH, zdist);
             return piHover;
         }
 
