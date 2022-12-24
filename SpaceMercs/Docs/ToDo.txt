@@ -2,9 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Travel
-- DrawTravelProgress : Mini planets skip rotation / reverse rotation / look awful occasionally. WTF?
-
 MapViewMission
 - CurrentLevel.DisplayMap()
 -- Convert from display list to a large vertex array / quads
@@ -21,10 +18,6 @@ MapViewMission
 -- ShowSoldierPanels()
 -- DisplayAILabel()
 -- ShowSelectedEntityDetails()
-
-Main Menu
-  Mission -> (Checkboxes) Labels, HealthBars, TravelDistance, MovementPath, ViewEffects, ViewDetectionRadii, Details
-- Enable Mission item in missions, disable options
 
 Check all MenuItem.Enabled/Disabled
 

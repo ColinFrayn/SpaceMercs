@@ -397,6 +397,8 @@ namespace SpaceMercs {
             DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
 
             // Source and Target AOs
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthMask(true);
             Matrix4 translateM = Matrix4.CreateTranslation(0.25f, 0.42f, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(1f / ParentView.Aspect, 1f, 1f);
             prog.SetUniform("view", scaleM * translateM);

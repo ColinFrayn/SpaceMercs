@@ -249,16 +249,17 @@ namespace SpaceMercs {
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             float scale = DrawScale * Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
-            Matrix4 modelM = pRotateM * pScaleM;
+            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
+            Matrix4 modelM =  pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
 
             prog.SetUniform("lightEnabled", false);
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
-            SetupTextureMap(64, 32);
             GL.ActiveTexture(TextureUnit.Texture0);
+            SetupTextureMap(64, 32);
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
             GL.UseProgram(prog.ShaderProgramHandle);
             Sphere.CachedBuildAndDraw(Level, true);

@@ -448,9 +448,11 @@ namespace SpaceMercs {
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             // Sort out scaling and rotation
-            Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
-            Matrix4 rotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
-            Matrix4 modelM = rotateM * scaleM;
+            float scale = Const.StarScale * DrawScale;
+            Matrix4 pScaleM = Matrix4.CreateScale(scale);
+            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
+            Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
 
             // Setup the texture & draw it

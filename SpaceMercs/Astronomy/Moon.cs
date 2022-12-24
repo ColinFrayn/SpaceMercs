@@ -49,16 +49,17 @@ namespace SpaceMercs {
             Colony.DrawBaseIcon(prog, scale);
         }
         public override void DrawSelected(ShaderProgram prog, int Level = 6) {
+            float scale = DrawScale * Const.PlanetScale * Const.MoonScale;
+            Matrix4 pScaleM = Matrix4.CreateScale(scale);
+            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
+            Matrix4 modelM = pRotateM * pTurnM * pScaleM;
+            prog.SetUniform("model", modelM);
+
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
-
-            float scale = DrawScale * Const.PlanetScale * Const.MoonScale;
-            Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
-            Matrix4 modelM = pRotateM * pScaleM;
-            prog.SetUniform("model", modelM);
 
             SetupTextureMap(32, 16);
             GL.ActiveTexture(TextureUnit.Texture0);
