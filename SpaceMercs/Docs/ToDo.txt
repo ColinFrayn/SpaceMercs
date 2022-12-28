@@ -4,7 +4,11 @@ ToDo List
 
 MapViewMission
 - CurrentLevel.DisplayMap()
--- Convert from display list to a large vertex array / quads
+-- DisplayTiles()
+--- FogOfWar is weird, not transparent etc.
+--- FOW should perhaps be done last, over the top of exit/entry locs etc.?
+--- Wall textures are incorrectly rotated
+-- DrawDoors()
 -- DrawEntryLocation()
 -- DrawExitLocation()
 -- DisplayTrap()
@@ -33,6 +37,7 @@ MapView title page
 MapViewDrawMap
 MapViewSystem
 MapViewShip
+MapViewGUI
 
 Travel
 
@@ -44,10 +49,6 @@ TextPanelItem
 Multi-depth panels
 
 Updated text renderer to use TrueType fonts
-
-Added in a lit flat shader, lit textured shader
-
-Display the clock, cash, hover text, toggles
 
 Should not be able to target self or own team
 

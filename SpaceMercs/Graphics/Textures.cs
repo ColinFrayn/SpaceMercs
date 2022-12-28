@@ -89,21 +89,7 @@ namespace SpaceMercs {
         public static byte[]? byteShipHaloTexture;
 
         // Mission textures
-        public static byte[] FogOfWarStipple = new byte[128];
         public const int TileSize = 32;
-
-        static Textures() {
-            // Stipple pattern:
-            for (int row = 0; row < 32; row++) {
-                byte val;
-                if (row % 4 < 2) val = 0x0f;
-                else val = 0xf0;
-                FogOfWarStipple[(row * 4) + 0] = val;
-                FogOfWarStipple[(row * 4) + 1] = val;
-                FogOfWarStipple[(row * 4) + 2] = val;
-                FogOfWarStipple[(row * 4) + 3] = val;
-            }
-        }
 
         // Initialise textures from the built-in BMPs
         public static void LoadTextureFiles(string strGraphicsDir) {
@@ -128,6 +114,69 @@ namespace SpaceMercs {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
         }
+
+        #region Utility Textures
+        private static int _fogOfWarTexture = -1;
+        public static int FogOfWarTexture { get { if (_fogOfWarTexture == -1) _fogOfWarTexture = GenerateFogOfWarTexture(); return _fogOfWarTexture; } }
+
+        private static int GenerateHighlightTexture_UNUSED() {
+            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
+            Color col = Color.FromArgb(255, 255, 100, 100);
+            for (int y = 0; y < Textures.TileSize; y++) {
+                for (int x = 0; x < Textures.TileSize; x++) {
+                    image[x, y, 0] = col.R;
+                    image[x, y, 1] = col.G;
+                    image[x, y, 2] = col.B;
+                    int dist = Math.Min(Math.Min(x, Textures.TileSize - x), Math.Min(y, Textures.TileSize - y));
+                    image[x, y, 3] = (byte)Math.Max(0, (255 - dist * 40));
+                }
+            }
+            return BindEntityTexture(image);
+        }
+        private static int GenerateHoverTexture_UNUSED() {
+            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
+            Color col = Color.FromArgb(255, 0, 255, 50);
+            for (int y = 0; y < Textures.TileSize; y++) {
+                for (int x = 0; x < Textures.TileSize; x++) {
+                    image[x, y, 0] = col.R;
+                    image[x, y, 1] = col.G;
+                    image[x, y, 2] = col.B;
+                    double dfract = Math.Max(0.0, Math.Sqrt((Textures.TileSize / 2 - x) * (Textures.TileSize / 2 - x) + (Textures.TileSize / 2 - y) * (Textures.TileSize / 2 - y)) * 4.0 / Textures.TileSize - 1.0);
+                    image[x, y, 3] = (byte)Math.Max(0, 255 - (180 * dfract));
+                    if (dfract > 1.0) image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = image[x, y, 3] = 0;
+                }
+            }
+            return BindEntityTexture(image);
+        }
+        private static int GenerateSelectionTexture_UNUSED_ISH() {
+            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
+            Color col = Color.FromArgb(255, 255, 50, 0);
+            for (int y = 0; y < Textures.TileSize; y++) {
+                for (int x = 0; x < Textures.TileSize; x++) {
+                    image[x, y, 0] = col.R;
+                    image[x, y, 1] = col.G;
+                    image[x, y, 2] = col.B;
+                    double dfract = Math.Max(0.0, Math.Sqrt((Textures.TileSize / 2 - x) * (Textures.TileSize / 2 - x) + (Textures.TileSize / 2 - y) * (Textures.TileSize / 2 - y)) * 4.0 / Textures.TileSize - 1.0);
+                    image[x, y, 3] = (byte)Math.Max(0, 255 - (180 * dfract));
+                    if (dfract > 1.0) image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = image[x, y, 3] = 0;
+                }
+            }
+            return BindEntityTexture(image);
+        }
+        private static int GenerateFogOfWarTexture() {
+            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
+            for (int y = 0; y < Textures.TileSize; y++) {
+                for (int x = 0; x < Textures.TileSize; x++) {
+                    byte val = 0x00;
+                    if ((x % 4 == 0 || x % 4 == 1) && (y % 4 == 0 || y % 4 == 1)) val = 0xf0;
+                    else if ((x % 4 == 2 || x % 4 == 3) && (y % 4 == 2 || y % 4 == 3)) val = 0xf0;
+                    image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = val;
+                    image[x, y, 3] = 0; // 0 = Transparent background
+                }
+            }
+            return BindEntityTexture(image);
+        }
+        #endregion // Utility Textures
 
         #region Wall And Floor Textures
         public static TexDetails GenerateFloorTexture(MissionLevel lev) {
@@ -391,52 +440,6 @@ namespace SpaceMercs {
             return newImage;
         }
         #endregion // Wall And Floor Textures
-
-        // Utility textures
-        public static int GenerateHighlightTexture() {
-            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
-            Color col = Color.FromArgb(255, 255, 100, 100);
-            for (int y = 0; y < Textures.TileSize; y++) {
-                for (int x = 0; x < Textures.TileSize; x++) {
-                    image[x, y, 0] = col.R;
-                    image[x, y, 1] = col.G;
-                    image[x, y, 2] = col.B;
-                    int dist = Math.Min(Math.Min(x, Textures.TileSize - x), Math.Min(y, Textures.TileSize - y));
-                    image[x, y, 3] = (byte)Math.Max(0, (255 - dist * 40));
-                }
-            }
-            return BindEntityTexture(image);
-        }
-        public static int GenerateHoverTexture() {
-            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
-            Color col = Color.FromArgb(255, 0, 255, 50);
-            for (int y = 0; y < Textures.TileSize; y++) {
-                for (int x = 0; x < Textures.TileSize; x++) {
-                    image[x, y, 0] = col.R;
-                    image[x, y, 1] = col.G;
-                    image[x, y, 2] = col.B;
-                    double dfract = Math.Max(0.0, Math.Sqrt((Textures.TileSize / 2 - x) * (Textures.TileSize / 2 - x) + (Textures.TileSize / 2 - y) * (Textures.TileSize / 2 - y)) * 4.0 / Textures.TileSize - 1.0);
-                    image[x, y, 3] = (byte)Math.Max(0, 255 - (180 * dfract));
-                    if (dfract > 1.0) image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = image[x, y, 3] = 0;
-                }
-            }
-            return BindEntityTexture(image);
-        }
-        public static int GenerateSelectionTexture() {
-            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
-            Color col = Color.FromArgb(255, 255, 50, 0);
-            for (int y = 0; y < Textures.TileSize; y++) {
-                for (int x = 0; x < Textures.TileSize; x++) {
-                    image[x, y, 0] = col.R;
-                    image[x, y, 1] = col.G;
-                    image[x, y, 2] = col.B;
-                    double dfract = Math.Max(0.0, Math.Sqrt((Textures.TileSize / 2 - x) * (Textures.TileSize / 2 - x) + (Textures.TileSize / 2 - y) * (Textures.TileSize / 2 - y)) * 4.0 / Textures.TileSize - 1.0);
-                    image[x, y, 3] = (byte)Math.Max(0, 255 - (180 * dfract));
-                    if (dfract > 1.0) image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = image[x, y, 3] = 0;
-                }
-            }
-            return BindEntityTexture(image);
-        }
 
         // ----- Creature/Soldier textures
         public static int GenerateSoldierTexture(Soldier s) {

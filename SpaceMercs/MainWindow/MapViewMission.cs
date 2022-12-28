@@ -196,6 +196,12 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("view", translateM);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram.SetUniform("texPos", 0f, 0f);
+            fullShaderProgram.SetUniform("texScale", 1f, 1f);
+            fullShaderProgram.SetUniform("textureEnabled", false);
+            fullShaderProgram.SetUniform("lightEnabled", false);
+
             // If it's a ship mission then do the starfield;
             if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) {
                 Starfield.Build.BindAndDraw();
@@ -705,6 +711,9 @@ namespace SpaceMercs.MainWindow {
 
         // Show GUI elements in the viewpoint of the map
         private void ShowMapGUIElements() {
+
+            return; // TODO
+
             // Mouse hover
             GL.Disable(EnableCap.DepthTest);
             Point pt = CurrentLevel.MouseHover;
@@ -751,6 +760,8 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("projection", projectionM);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
+
+            return; // TODO
 
             // Show the selected entity details if it's a creature
             if (SelectedEntity != null && SelectedEntity is Creature) {
@@ -1113,7 +1124,7 @@ namespace SpaceMercs.MainWindow {
             double d = -(dSize / 2.0);
             GL.Color3(1.0, 1.0, 1.0);
             GL.Enable(EnableCap.Texture2D);
-            if (iSelectionTexID == -1) iSelectionTexID = Textures.GenerateSelectionTexture(); //Textures.GenerateHighlightTexture();
+            //if (iSelectionTexID == -1) iSelectionTexID = Textures.GenerateSelectionTexture();
             GL.Enable(EnableCap.Blend);
             GL.BindTexture(TextureTarget.Texture2D, iSelectionTexID);
             GL.Begin(BeginMode.Quads);

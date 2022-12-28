@@ -1,5 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -24,7 +26,9 @@ namespace SpaceMercs {
         private Random rand = new Random();
         private TexDetails? FloorTexture = null;
         private Dictionary<Textures.WallSide, TexDetails>? dWallTextures = null;
-        private const double TexEpsilon = 0.01;
+        private const float TexEpsilon = 0.01f;
+        private VertexBuffer? vbTiles = null;
+        private VertexArray? vaTiles = null;
 
         public TileType[,] Map { get; private set; }
         public bool[,] Explored { get; private set; }
@@ -266,10 +270,23 @@ namespace SpaceMercs {
         #region Display
         public void DisplayMap(ShaderProgram prog) {
             if (!bInitialised) return;
-            if (iMapDL == -1) UpdateMapDisplayList();
-            GL.CallList(iMapDL);
+            prog.SetUniform("textureEnabled", true);
+            GL.ActiveTexture(TextureUnit.Texture0);
+            DisplayTiles(prog);
+            
+            return;
+
+            DisplayDoors(prog);
+
+            // Entry/exit locations
+            GL.DepthMask(false);
+            foreach (Point p in EntryLocations) DrawEntryLocation(p);
+            foreach (Point p in ExitLocations) DrawExitLocation(p);
         }
         public void DisplayEntities(bool bShowLabels, bool bShowStatBars, bool bShowEffects, float fViewHeight) {
+
+            return; // TODO
+
             // Display soldiers & creatures
             GL.Enable(EnableCap.Texture2D);
             GL.Enable(EnableCap.Blend);
@@ -333,54 +350,7 @@ namespace SpaceMercs {
             GL.End();
             GL.PopMatrix();
         }
-        private void UpdateMapDisplayList() {
-            if (FloorTexture == null) GenerateTextures();
-            if (iMapDL == -1) iMapDL = GL.GenLists(1);
-            GL.NewList(iMapDL, ListMode.Compile);
-
-            // Draw the visible terrain
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Enable(EnableCap.Texture2D);
-            GL.Begin(BeginMode.Quads);
-            int iLastID = -1, tw = 0, th = 0;
-            for (int y = 0; y < Height; y++) {
-                for (int x = 0; x < Width; x++) {
-                    if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
-                    int iTexID = -1;
-                    if (Map[x, y] == TileType.Floor || Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) {
-                        iTexID = FloorTexture.Value.ID;
-                        tw = FloorTexture.Value.W / Textures.TileSize;
-                        th = FloorTexture.Value.H / Textures.TileSize;
-                    }
-                    else if (Map[x, y] == TileType.Wall || Map[x, y] == TileType.SecretDoorHorizontal || Map[x, y] == TileType.SecretDoorVertical) {
-                        Textures.WallSide ws = GetWallSides(x, y);
-                        if (!dWallTextures.ContainsKey(ws)) throw new Exception("Illegal wall texture requested");
-                        iTexID = dWallTextures[ws].ID;
-                        tw = dWallTextures[ws].W / Textures.TileSize;
-                        th = dWallTextures[ws].H / Textures.TileSize;
-                    }
-                    else {
-                        throw new Exception("Weird texture type requested : " + Map[x, y]);
-                    }
-                    if (iTexID != iLastID) {
-                        GL.End();
-                        GL.BindTexture(TextureTarget.Texture2D, iTexID);
-                        iLastID = iTexID;
-                        GL.Begin(BeginMode.Quads);
-                    }
-                    // Draw the square using the correct texture
-                    int itc = TextureCoords[x, y];
-                    float tx = (float)((itc & 3) % tw) / (float)tw;
-                    float ty = (float)((itc / 4) % th) / (float)th;
-                    GL.TexCoord2(tx + TexEpsilon, ty + TexEpsilon); GL.Vertex3(x, y, Const.TileLayer);
-                    GL.TexCoord2(tx + TexEpsilon, ty + (1.0 / th) - TexEpsilon); GL.Vertex3(x + 1, y, Const.TileLayer);
-                    GL.TexCoord2(tx + (1.0 / tw) - TexEpsilon, ty + (1.0 / th) - TexEpsilon); GL.Vertex3(x + 1, y + 1, Const.TileLayer);
-                    GL.TexCoord2(tx + (1.0 / tw) - TexEpsilon, ty + TexEpsilon); GL.Vertex3(x, y + 1, Const.TileLayer);
-                }
-            }
-            GL.End();
-            GL.Disable(EnableCap.Texture2D);
-
+        private void DisplayDoors(ShaderProgram prog) {
             // Draw all doors
             GL.Enable(EnableCap.Blend);
             GL.Begin(BeginMode.Quads);
@@ -407,34 +377,65 @@ namespace SpaceMercs {
             }
             GL.End();
             GL.Disable(EnableCap.Blend);
+        }
+        private void DisplayTiles(ShaderProgram prog) {
+            if (FloorTexture == null) GenerateTextures();
 
-            // Entry/exit locations
-            GL.DepthMask(false);
-            foreach (Point p in EntryLocations) DrawEntryLocation(p);
-            foreach (Point p in ExitLocations) DrawExitLocation(p);
+            // Draw the visible terrain
+            int iLastID = -1, tw = 0, th = 0;
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
+                    if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
+                    int iTexID = -1;
+                    if (Map[x, y] == TileType.Floor || Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) {
+                        iTexID = FloorTexture.Value.ID;
+                        tw = FloorTexture.Value.W / Textures.TileSize;
+                        th = FloorTexture.Value.H / Textures.TileSize;
+                    }
+                    else if (Map[x, y] == TileType.Wall || Map[x, y] == TileType.SecretDoorHorizontal || Map[x, y] == TileType.SecretDoorVertical) {
+                        Textures.WallSide ws = GetWallSides(x, y);
+                        if (!dWallTextures.ContainsKey(ws)) throw new Exception("Illegal wall texture requested");
+                        iTexID = dWallTextures[ws].ID;
+                        tw = dWallTextures[ws].W / Textures.TileSize;
+                        th = dWallTextures[ws].H / Textures.TileSize;
+                    }
+                    else {
+                        throw new Exception("Weird texture type requested : " + Map[x, y]);
+                    }
+                    if (iTexID != iLastID) {
+                        GL.BindTexture(TextureTarget.Texture2D, iTexID);
+                        iLastID = iTexID;
+                    }
+                    // Draw the square using the correct texture
+                    int itc = TextureCoords[x, y];
+                    float tx = (float)((itc & 3) % tw) / (float)tw;
+                    float ty = (float)((itc / 4) % th) / (float)th;
+                    prog.SetUniform("texPos", tx + TexEpsilon, ty + TexEpsilon);
+                    prog.SetUniform("texScale", 1f / tw, 1f / th);
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y, Const.TileLayer);
+                    prog.SetUniform("model", pTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Textured.BindAndDraw();
+                }
+            }
 
             // Fog of war (seen but not currently in LOS)
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.PolygonStipple);
-            GL.PolygonStipple(Textures.FogOfWarStipple);
-            GL.Begin(BeginMode.Quads);
+            GL.BindTexture(TextureTarget.Texture2D, Textures.FogOfWarTexture);
+            prog.SetUniform("texPos", 0f, 0f);
+            prog.SetUniform("texScale", 1f, 1f);
+            GL.DepthMask(false);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (Map[x, y] == TileType.Void) continue;
                     if (!Const.DEBUG_VISIBLE_ALL && Explored[x, y] && !Visible[x, y]) {
-                        GL.Color4(0.2, 0.2, 0.2, 0.7);
-                        GL.Vertex3(x, y, Const.EntityLayer);
-                        GL.Vertex3(x + 1, y, Const.EntityLayer);
-                        GL.Vertex3(x + 1, y + 1, Const.EntityLayer);
-                        GL.Vertex3(x, y + 1, Const.EntityLayer);
+                        Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y, Const.EntityLayer);
+                        prog.SetUniform("model", pTranslateM);
+                        GL.UseProgram(prog.ShaderProgramHandle);
+                        Square.Textured.BindAndDraw();
                     }
                 }
             }
-            GL.End();
-            GL.Disable(EnableCap.PolygonStipple);
             GL.DepthMask(true);
-            GL.Disable(EnableCap.Blend);
-            GL.EndList();
         }
         private void GenerateTextures() {
             FloorTexture = Textures.GenerateFloorTexture(this);
@@ -1796,7 +1797,7 @@ namespace SpaceMercs {
                     }
                 }
             }
-            UpdateMapDisplayList();
+//            UpdateTileVertexArray();
         }
         public bool[,] CalculateVisibilityFromEntity(IEntity en) {
             // This is crazily inefficient. If it turns out that it's too slow then I'll have to do it more efficiently somehow
