@@ -170,8 +170,8 @@ namespace SpaceMercs {
                     byte val = 0x00;
                     if ((x % 4 == 0 || x % 4 == 1) && (y % 4 == 0 || y % 4 == 1)) val = 0xf0;
                     else if ((x % 4 == 2 || x % 4 == 3) && (y % 4 == 2 || y % 4 == 3)) val = 0xf0;
-                    image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = val;
-                    image[x, y, 3] = 0; // 0 = Transparent background
+                    image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = 0;
+                    image[x, y, 3] = val; // 0 = Transparent background
                 }
             }
             return BindEntityTexture(image);
@@ -206,7 +206,6 @@ namespace SpaceMercs {
             throw new NotImplementedException();
         }
         public static Dictionary<WallSide, TexDetails> GenerateWallTexture(MissionLevel lev) {
-            //Color col = Color.FromArgb(255, 150, 150, 150);
             Dictionary<WallSide, TexDetails> dWallTextures = new Dictionary<WallSide, TexDetails>();
             TexDetails? TexID = null;
             byte[,,]? baseImage = null;
@@ -564,8 +563,18 @@ namespace SpaceMercs {
             GL.BindTexture(TextureTarget.Texture2D, texID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             SetParameters();
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.GetLength(0), image.GetLength(1), 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgb, PixelType.UnsignedByte, image);
-            return new TexDetails() { ID = texID, W = image.GetLength(0), H = image.GetLength(1) };
+            // Flip the image. For reasons I don't understand.
+            int Width = image.GetLength(0), Height = image.GetLength(1);
+            byte[,,] newImage = new byte[Height, Width, 3];
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
+                    newImage[y, x, 0] = image[x, y, 0];
+                    newImage[y, x, 1] = image[x, y, 1];
+                    newImage[y, x, 2] = image[x, y, 2];
+                }
+            }
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Height, Width, 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgb, PixelType.UnsignedByte, newImage);
+            return new TexDetails() { ID = texID, W = newImage.GetLength(0), H = newImage.GetLength(1) };
         }
         private static int BindEntityTexture(byte[,,] image) {
             int texID;

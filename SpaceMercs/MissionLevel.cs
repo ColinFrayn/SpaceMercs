@@ -1,10 +1,12 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
 using System.Xml;
+using static SpaceMercs.Textures;
 
 namespace SpaceMercs {
     class MissionLevel {
@@ -15,7 +17,6 @@ namespace SpaceMercs {
         private readonly int Diff;
         private readonly bool bInitialised;
         private int[,] TextureCoords;
-        private int iMapDL = -1;
         private readonly HashSet<Point> EntryLocations = new HashSet<Point>(); //  = "To/From above" if multi-level
         private readonly HashSet<Point> ExitLocations = new HashSet<Point>(); //  = "To/From below" if multi-level
         private readonly List<IEntity> Entities = new List<IEntity>();
@@ -27,8 +28,8 @@ namespace SpaceMercs {
         private TexDetails? FloorTexture = null;
         private Dictionary<Textures.WallSide, TexDetails>? dWallTextures = null;
         private const float TexEpsilon = 0.01f;
-        private VertexBuffer? vbTiles = null;
-        private VertexArray? vaTiles = null;
+        //private VertexBuffer? vbTiles = null;
+        //private VertexArray? vaTiles = null;
 
         public TileType[,] Map { get; private set; }
         public bool[,] Explored { get; private set; }
@@ -116,7 +117,6 @@ namespace SpaceMercs {
         }
         public MissionLevel(XmlNode xml, Mission m) {
             ParentMission = m;
-            iMapDL = -1;
             HoverX = HoverY = -1;
             int w = Int32.Parse(xml.Attributes["Width"].Value);
             int h = Int32.Parse(xml.Attributes["Height"].Value);
@@ -272,114 +272,49 @@ namespace SpaceMercs {
             if (!bInitialised) return;
             prog.SetUniform("textureEnabled", true);
             GL.ActiveTexture(TextureUnit.Texture0);
-            DisplayTiles(prog);
-            
-            return;
+            GL.Disable(EnableCap.DepthTest);
 
+            DisplayTiles(prog);            
             DisplayDoors(prog);
 
             // Entry/exit locations
-            GL.DepthMask(false);
-            foreach (Point p in EntryLocations) DrawEntryLocation(p);
-            foreach (Point p in ExitLocations) DrawExitLocation(p);
-        }
-        public void DisplayEntities(bool bShowLabels, bool bShowStatBars, bool bShowEffects, float fViewHeight) {
+            foreach (Point p in EntryLocations) DrawEntryLocation(prog, p);
+            foreach (Point p in ExitLocations) DrawExitLocation(prog, p);
 
-            return; // TODO
-
-            // Display soldiers & creatures
-            GL.Enable(EnableCap.Texture2D);
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.DepthMask(false);
-            // To handle concurrent access to these lists, create RO copies first, and loop over those
-            IEnumerable<Point> lItems = new List<Point>(Items.Keys).AsReadOnly();
-            foreach (Point pt in lItems) {
-                if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayItemStack(pt);
-            }
-            IEnumerable<Point> lTraps = new List<Point>(Traps.Keys).AsReadOnly();
-            foreach (Point pt in lTraps) {
-                if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(pt);
-            }
-            IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
-            foreach (IEntity e in lEntities) {
-                if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(bShowLabels, bShowStatBars, bShowEffects, fViewHeight);
-            }
-            GL.DepthMask(true);
-            GL.Disable(EnableCap.Blend);
-            GL.Disable(EnableCap.Texture2D);
-        }
-        private void DisplayItemStack(Point pt) {
-            if (Items[pt].Hidden) return;
-            TexSpecs ts;
-            if (Items[pt].OnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
-            else if (Items[pt].Count < 6) ts = Textures.GetTexCoords(Textures.MiscTexture.Coins, true);
-            else ts = Textures.GetTexCoords(Textures.MiscTexture.Treasure, true);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
-            GL.PushMatrix();
-            GL.Translate(pt.X + 0.5, pt.Y + 0.5, Const.EntityLayer);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(ts.X, ts.Y + ts.H);
-            GL.Vertex3(-0.4, -0.4, 0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y + ts.H);
-            GL.Vertex3(0.4, -0.4, 0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y);
-            GL.Vertex3(0.4, 0.4, 0);
-            GL.TexCoord2(ts.X, ts.Y);
-            GL.Vertex3(-0.4, 0.4, 0);
-            GL.End();
-            GL.PopMatrix();
-        }
-        private void DisplayTrap(Point pt) {
-            if (Traps[pt].Hidden) return;
-            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Trap, true);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
-            GL.PushMatrix();
-            GL.Translate(pt.X + 0.5, pt.Y + 0.5, Const.EntityLayer);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(ts.X, ts.Y + ts.H);
-            GL.Vertex3(-0.4, -0.4, 0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y + ts.H);
-            GL.Vertex3(0.4, -0.4, 0);
-            GL.TexCoord2(ts.X + ts.W, ts.Y);
-            GL.Vertex3(0.4, 0.4, 0);
-            GL.TexCoord2(ts.X, ts.Y);
-            GL.Vertex3(-0.4, 0.4, 0);
-            GL.End();
-            GL.PopMatrix();
+            DrawFogOfWar(prog);
         }
         private void DisplayDoors(ShaderProgram prog) {
             // Draw all doors
+            prog.SetUniform("textureEnabled", false);
             GL.Enable(EnableCap.Blend);
-            GL.Begin(BeginMode.Quads);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
-                    if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
-                    if (Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal) GL.Color3(0.6, 0.4, 0.1);
-                    else if (Map[x, y] == TileType.SecretDoorVertical || Map[x, y] == TileType.SecretDoorHorizontal) GL.Color3(0.9, 0.8, 0.0);
-                    else if (Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) GL.Color4(0.6, 0.4, 0.1, 0.2);
+                    if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;                    
+                    if (Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal) prog.SetUniform("flatColour", new Vector4(0.6f, 0.4f, 0.1f, 1f));
+                    else if (Map[x, y] == TileType.SecretDoorVertical || Map[x, y] == TileType.SecretDoorHorizontal) prog.SetUniform("flatColour", new Vector4(0.9f, 0.8f, 0f, 1f));
+                    else if (Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) prog.SetUniform("flatColour", new Vector4(0.6f, 0.4f, 0.1f, 0.2f));
                     // Draw it
                     if (Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.OpenDoorVertical || (Const.DEBUG_VISIBLE_ALL && Map[x, y] == TileType.SecretDoorVertical)) {
-                        GL.Vertex3(x + 0.2, y, Const.DoodadLayer);
-                        GL.Vertex3(x + 0.8, y, Const.DoodadLayer);
-                        GL.Vertex3(x + 0.8, y + 1, Const.DoodadLayer);
-                        GL.Vertex3(x + 0.2, y + 1, Const.DoodadLayer);
+                        Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.2f, y, Const.DoodadLayer);
+                        Matrix4 pScaleM = Matrix4.CreateScale(0.6f, 1f, 1f);
+                        prog.SetUniform("model", pScaleM * pTranslateM);
+                        GL.UseProgram(prog.ShaderProgramHandle);
+                        Square.Flat.BindAndDraw();
                     }
                     else if (Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorHorizontal || (Const.DEBUG_VISIBLE_ALL && Map[x, y] == TileType.SecretDoorHorizontal)) {
-                        GL.Vertex3(x, y + 0.2, Const.DoodadLayer);
-                        GL.Vertex3(x + 1, y + 0.2, Const.DoodadLayer);
-                        GL.Vertex3(x + 1, y + 0.8, Const.DoodadLayer);
-                        GL.Vertex3(x, y + 0.8, Const.DoodadLayer);
+                        Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y + 0.2f, Const.DoodadLayer);
+                        Matrix4 pScaleM = Matrix4.CreateScale(1f, 0.6f, 1f);
+                        prog.SetUniform("model", pScaleM * pTranslateM);
+                        GL.UseProgram(prog.ShaderProgramHandle);
+                        Square.Flat.BindAndDraw();
                     }
                 }
             }
-            GL.End();
             GL.Disable(EnableCap.Blend);
         }
         private void DisplayTiles(ShaderProgram prog) {
             if (FloorTexture == null) GenerateTextures();
+            GL.Disable(EnableCap.Blend);
 
             // Draw the visible terrain
             int iLastID = -1, tw = 0, th = 0;
@@ -400,7 +335,7 @@ namespace SpaceMercs {
                         th = dWallTextures[ws].H / Textures.TileSize;
                     }
                     else {
-                        throw new Exception("Weird texture type requested : " + Map[x, y]);
+                        throw new Exception("Unhandled texture requested : " + Map[x, y]);
                     }
                     if (iTexID != iLastID) {
                         GL.BindTexture(TextureTarget.Texture2D, iTexID);
@@ -411,15 +346,79 @@ namespace SpaceMercs {
                     float tx = (float)((itc & 3) % tw) / (float)tw;
                     float ty = (float)((itc / 4) % th) / (float)th;
                     prog.SetUniform("texPos", tx + TexEpsilon, ty + TexEpsilon);
-                    prog.SetUniform("texScale", 1f / tw, 1f / th);
+                    prog.SetUniform("texScale", (1f / tw) - (TexEpsilon*2f), (1f / th) - (TexEpsilon * 2f));
                     Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y, Const.TileLayer);
                     prog.SetUniform("model", pTranslateM);
                     GL.UseProgram(prog.ShaderProgramHandle);
                     Square.Textured.BindAndDraw();
                 }
             }
+        }
+        private void GenerateTextures() {
+            FloorTexture = Textures.GenerateFloorTexture(this);
+            dWallTextures = Textures.GenerateWallTexture(this);
+            TextureCoords = new int[Width, Height];
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
+                    TextureCoords[x, y] = rand.Next(16);
+                }
+            }
+        }
+        private Textures.WallSide GetWallSides(int x, int y) {
+            // Catch unexpected values
+            if (x < 0 || x >= Width || y < 0 || y >= Height) return Textures.AllSides;
+            if (!LooksLikeAWall(x, y)) return Textures.AllSides;
 
-            // Fog of war (seen but not currently in LOS)
+            // Is there a floor tile in the eight neighbouring cells?
+            Textures.WallSide ws = 0;
+            if (x > 0 && !LooksLikeAWall(x - 1, y)) ws |= Textures.WallSide.Left;
+            if (x < Width - 1 && !LooksLikeAWall(x + 1, y)) ws |= Textures.WallSide.Right;
+            if (y > 0 && !LooksLikeAWall(x, y - 1)) ws |= Textures.WallSide.Up;
+            if (y < Height - 1 && !LooksLikeAWall(x, y + 1)) ws |= Textures.WallSide.Down;
+            if (x > 0 && y > 0 && !LooksLikeAWall(x - 1, y - 1)) ws |= Textures.WallSide.UpLeft;
+            if (x < Width - 1 && y > 0 && !LooksLikeAWall(x + 1, y - 1)) ws |= Textures.WallSide.UpRight;
+            if (x > 0 && y < Height - 1 && !LooksLikeAWall(x - 1, y + 1)) ws |= Textures.WallSide.DownLeft;
+            if (x < Width - 1 && y < Height - 1 && !LooksLikeAWall(x + 1, y + 1)) ws |= Textures.WallSide.DownRight;
+            return ws;
+        }
+        private void DrawEntryLocation(ShaderProgram prog, Point p) {
+            if (!Const.DEBUG_VISIBLE_ALL && !Explored[p.X, p.Y]) return;
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 0f, 1f));
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(p.X + 0.1f, p.Y + 0.1f, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+
+            prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.75f, Const.DoodadLayer);
+            pScaleM = Matrix4.CreateScale(0.3f, -0.4f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Triangle.Flat.BindAndDraw();
+        }
+        private void DrawExitLocation(ShaderProgram prog, Point p) {
+            if (!Const.DEBUG_VISIBLE_ALL && !Explored[p.X, p.Y]) return;
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 0f, 1f));
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(p.X + 0.1f, p.Y + 0.1f, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+
+            prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.75f, Const.DoodadLayer);
+            pScaleM = Matrix4.CreateScale(0.3f, 0.4f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Triangle.Flat.BindAndDraw();
+        }
+        private void DrawFogOfWar(ShaderProgram prog) {
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            prog.SetUniform("textureEnabled", true);
             GL.BindTexture(TextureTarget.Texture2D, Textures.FogOfWarTexture);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
@@ -436,68 +435,59 @@ namespace SpaceMercs {
                 }
             }
             GL.DepthMask(true);
+            GL.Disable(EnableCap.Blend);
         }
-        private void GenerateTextures() {
-            FloorTexture = Textures.GenerateFloorTexture(this);
-            dWallTextures = Textures.GenerateWallTexture(this);
-            TextureCoords = new int[Width, Height];
-            for (int y = 0; y < Height; y++) {
-                for (int x = 0; x < Width; x++) {
-                    TextureCoords[x, y] = rand.Next(16);
-                }
+        public void DisplayEntities(ShaderProgram prog, bool bShowLabels, bool bShowStatBars, bool bShowEffects, float fViewHeight) {
+            // Display soldiers & creatures
+            GL.Enable(EnableCap.Blend);
+            GL.Disable(EnableCap.DepthTest);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            // To handle concurrent access to these lists, create RO copies first, and loop over those
+            IEnumerable<Point> lItems = new List<Point>(Items.Keys).AsReadOnly();
+            foreach (Point pt in lItems) {
+                if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayItemStack(prog, pt);
+            }
+            IEnumerable<Point> lTraps = new List<Point>(Traps.Keys).AsReadOnly();
+            foreach (Point pt in lTraps) {
+                if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(prog, pt);
+            }
+            IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
+            foreach (IEntity e in lEntities) {
+                if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight);
             }
         }
-        private Textures.WallSide GetWallSides(int x, int y) {
-            if (x < 0 || x >= Width || y < 0 || y >= Height) return Textures.AllSides; // Whatever
-            if (!LooksLikeAWall(x, y)) return Textures.AllSides; // Whatever
-                                                                 // Is there a floor tile in the eight neighbouring cells?
-            Textures.WallSide ws = 0;
-            if (x > 0 && !LooksLikeAWall(x - 1, y)) ws |= Textures.WallSide.Left;
-            if (x < Width - 1 && !LooksLikeAWall(x + 1, y)) ws |= Textures.WallSide.Right;
-            if (y > 0 && !LooksLikeAWall(x, y - 1)) ws |= Textures.WallSide.Up;
-            if (y < Height - 1 && !LooksLikeAWall(x, y + 1)) ws |= Textures.WallSide.Down;
-            if (x > 0 && y > 0 && !LooksLikeAWall(x - 1, y - 1)) ws |= Textures.WallSide.UpLeft;
-            if (x < Width - 1 && y > 0 && !LooksLikeAWall(x + 1, y - 1)) ws |= Textures.WallSide.UpRight;
-            if (x > 0 && y < Height - 1 && !LooksLikeAWall(x - 1, y + 1)) ws |= Textures.WallSide.DownLeft;
-            if (x < Width - 1 && y < Height - 1 && !LooksLikeAWall(x + 1, y + 1)) ws |= Textures.WallSide.DownRight;
-            return ws;
+        private void DisplayItemStack(ShaderProgram prog, Point pt) {
+            if (Items[pt].Hidden) return;
+            TexSpecs ts;
+            if (Items[pt].OnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
+            else if (Items[pt].Count < 6) ts = Textures.GetTexCoords(Textures.MiscTexture.Coins, true);
+            else ts = Textures.GetTexCoords(Textures.MiscTexture.Treasure, true);
+
+            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.1f, Const.EntityLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
         }
-        private void DrawEntryLocation(Point p) {
-            if (!Const.DEBUG_VISIBLE_ALL && !Explored[p.X, p.Y]) return;
-            GL.Color4(1.0, 1.0, 0.0, 0.6);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(p.X + 0.1, p.Y + 0.1, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.9, p.Y + 0.1, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.9, p.Y + 0.9, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.1, p.Y + 0.9, Const.DoodadLayer);
-            GL.End();
-            GL.Color4(0.3, 0.3, 0.3, 1.0);
-            GL.Begin(BeginMode.Triangles);
-            GL.Vertex3(p.X + 0.3, p.Y + 0.4, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.5, p.Y + 0.7, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.7, p.Y + 0.4, Const.DoodadLayer);
-            GL.End();
-        }
-        private void DrawExitLocation(Point p) {
-            if (!Const.DEBUG_VISIBLE_ALL && !Explored[p.X, p.Y]) return;
-            GL.Color4(1.0, 1.0, 0.0, 0.6);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(p.X + 0.1, p.Y + 0.1, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.9, p.Y + 0.1, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.9, p.Y + 0.9, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.1, p.Y + 0.9, Const.DoodadLayer);
-            GL.End();
-            GL.Color4(0.3, 0.3, 0.3, 1.0);
-            GL.Begin(BeginMode.Triangles);
-            GL.Vertex3(p.X + 0.3, p.Y + 0.6, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.5, p.Y + 0.3, Const.DoodadLayer);
-            GL.Vertex3(p.X + 0.7, p.Y + 0.6, Const.DoodadLayer);
-            GL.End();
+        private void DisplayTrap(ShaderProgram prog, Point pt) {
+            if (Traps[pt].Hidden) return;
+            TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Trap, true);
+            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.1f, Const.EntityLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
         }
         public void DrawDetectionMap(bool[,] DetectionMap) {
-            GL.Color4(1.0, 1.0, 1.0, 0.5);
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            return;
             GL.Enable(EnableCap.Texture2D);
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Alert, true);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
@@ -525,6 +515,7 @@ namespace SpaceMercs {
             GL.Disable(EnableCap.Blend);
         }
         public void DrawSelectedEntityVis(IEntity en) {
+            return;
             GL.Color4(1.0, 1.0, 1.0, 0.5);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

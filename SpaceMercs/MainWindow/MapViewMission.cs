@@ -28,7 +28,7 @@ namespace SpaceMercs.MainWindow {
         private bool bGUIButtonsInitialised = false;
         private Mission? ThisMission;
         private MissionLevel CurrentLevel;
-        private IEntity SelectedEntity = null;
+        private IEntity? SelectedEntity = null;
         private Soldier panelHover = null;
         private bool bDragging = false;
         private int[,] DistMap;
@@ -42,7 +42,7 @@ namespace SpaceMercs.MainWindow {
         private readonly List<VisualEffect> Effects = new List<VisualEffect>();
         private readonly Stopwatch sw = Stopwatch.StartNew();
         private ItemType ActionItem = null;
-        private Dispatcher ThisDispatcher = null;
+        private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
 
         // GUIPanel actions
@@ -187,6 +187,17 @@ namespace SpaceMercs.MainWindow {
             // Set up default OpenGL rendering parameters
             PrepareScene();
 
+            // If it's a ship mission then do the starfield;
+            if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) {
+                Matrix4 projectionUnitM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+                pos2DCol4ShaderProgram.SetUniform("projection", projectionUnitM);
+                pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+                pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+                pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
+                GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
+                Starfield.Build.BindAndDraw();
+            }
+
             // Set the correct view location & perspective matrix
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
@@ -195,17 +206,11 @@ namespace SpaceMercs.MainWindow {
             Matrix4 translateM = Matrix4.CreateTranslation(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
             fullShaderProgram.SetUniform("view", translateM);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
-
             fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             fullShaderProgram.SetUniform("texPos", 0f, 0f);
             fullShaderProgram.SetUniform("texScale", 1f, 1f);
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", false);
-
-            // If it's a ship mission then do the starfield;
-            if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) {
-                Starfield.Build.BindAndDraw();
-            }
 
             // Display the scene
             CurrentLevel.DisplayMap(fullShaderProgram);
@@ -214,7 +219,7 @@ namespace SpaceMercs.MainWindow {
             ShowMapGUIElements();
 
             // Show creatures/soldiers
-            CurrentLevel.DisplayEntities(bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
+            CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
 
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
@@ -875,7 +880,7 @@ namespace SpaceMercs.MainWindow {
 
                 GL.PushMatrix();
                 GL.Translate(sx, sy, Const.GUILayer);
-                s.DisplaySoldierDetails(SelectedEntity == s, hover == s);
+                s.DisplaySoldierDetails(prog, SelectedEntity == s, hover == s);
                 sy += PanelHeight + Const.GUIPanelGap;
                 GL.PopMatrix();
             }

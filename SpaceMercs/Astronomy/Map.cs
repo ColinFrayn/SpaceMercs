@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+﻿using SpaceMercs.Dialogs;
 using System.IO;
-using SpaceMercs.Dialogs;
+using System.Xml;
 
 namespace SpaceMercs {
     class Map {

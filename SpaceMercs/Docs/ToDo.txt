@@ -3,20 +3,12 @@ ToDo List
 -------------------------------------------------
 
 MapViewMission
-- CurrentLevel.DisplayMap()
--- DisplayTiles()
---- FogOfWar is weird, not transparent etc.
---- FOW should perhaps be done last, over the top of exit/entry locs etc.?
---- Wall textures are incorrectly rotated
--- DrawDoors()
--- DrawEntryLocation()
--- DrawExitLocation()
--- DisplayTrap()
--- DisplayItemStack()
-- CurrentLevel.DrawDetectionMap()
-- CurrentLevel.DrawSelectedEntityVis()
 - CurrentLevel.DisplayEntities()
+-- Creature.Display() : TEST, Label, Effects
+-- Soldier.Display() : Label, Location is wrong
 - ShowMapGUIElements()
+-- CurrentLevel.DrawDetectionMap()
+-- CurrentLevel.DrawSelectedEntityVis()
 - Display visual effects
 - ShowOverlayGUI()
 -- ShowSoldierPanels()

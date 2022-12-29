@@ -394,7 +394,7 @@ namespace SpaceMercs {
 
             // Progress Bar
             float fract = (float)fElapsed / (float)fTravelTime;
-            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
 
             // Source and Target AOs
             GL.Enable(EnableCap.DepthTest);
@@ -423,7 +423,7 @@ namespace SpaceMercs {
             TextRenderer.DrawWithOptions(strText, tro);            
             // Progress Bar
             float fract = fMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
-            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(1f, 0f, 0f, 1f));
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(1f, 0f, 0f, 1f));
         }
         private void DrawRepair(ShaderProgram prog) {
             // Set up the text
@@ -441,7 +441,7 @@ namespace SpaceMercs {
             TextRenderer.DrawWithOptions(strText, tro);
             // Progress Bar
             float fract = fMissionElapsed / PlayerTeam.CurrentMission.TimeCost;
-            DrawFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 0f, 1f, 1f));
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 0f, 1f, 1f));
         }
         private void DrawBattle(ShaderProgram prog, ShaderProgram colprog) {
             string strText = "Battle versus unidentified alien ship";
@@ -460,7 +460,7 @@ namespace SpaceMercs {
             // Setup and draw status text
             // Player Ship Stats:
             string strStatus = Math.Round(PlayerTeam.PlayerShip.Hull, 1) + "/" + Math.Round(PlayerTeam.PlayerShip.Type.MaxHull, 0);
-            DrawFractBar(prog, 0.22f, 0.35f, 0.1f, 0.02f, PlayerTeam.PlayerShip.HullFract, new Vector4(0f, 1f, 0f, 1f));
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.22f, 0.35f, 0.1f, 0.02f, PlayerTeam.PlayerShip.HullFract, new Vector4(0f, 1f, 0f, 1f));
             tro.Scale = 0.04f;
             tro.XPos = 0.27f;
             tro.YPos = 0.37f;
@@ -469,7 +469,7 @@ namespace SpaceMercs {
 
             if (PlayerTeam.PlayerShip.MaxShield > 0.0) {
                 strStatus = Math.Round(PlayerTeam.PlayerShip.Shield, 1) + "/" + PlayerTeam.PlayerShip.MaxShield;
-                DrawFractBar(prog, 0.22f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.PlayerShip.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
+                GraphicsFunctions.DrawFramedFractBar(prog, 0.22f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.PlayerShip.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
                 tro.YPos = 0.41f;
                 TextRenderer.DrawWithOptions(strStatus, tro);
             }
@@ -477,7 +477,7 @@ namespace SpaceMercs {
             // Enemy Ship Stats:
             double stHull = Math.Max(0.0, Math.Round(PlayerTeam.CurrentMission.ShipTarget.Hull, 1));
             strStatus = stHull + "/" + Math.Round(PlayerTeam.CurrentMission.ShipTarget.Type.MaxHull, 0);
-            DrawFractBar(prog, 0.68f, 0.35f, 0.1f, 0.02f, PlayerTeam.CurrentMission.ShipTarget.HullFract, new Vector4(0f, 1f, 0f, 1f));
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.68f, 0.35f, 0.1f, 0.02f, PlayerTeam.CurrentMission.ShipTarget.HullFract, new Vector4(0f, 1f, 0f, 1f));
             tro.Scale = 0.04f;
             tro.XPos = 0.73f;
             tro.YPos = 0.37f;
@@ -485,7 +485,7 @@ namespace SpaceMercs {
             TextRenderer.DrawWithOptions(strStatus, tro);
             if (PlayerTeam.CurrentMission.ShipTarget.MaxShield > 0.0) {
                 strStatus = Math.Round(PlayerTeam.CurrentMission.ShipTarget.Shield, 1) + "/" + PlayerTeam.CurrentMission.ShipTarget.MaxShield;
-                DrawFractBar(prog, 0.68f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.CurrentMission.ShipTarget.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
+                GraphicsFunctions.DrawFramedFractBar(prog, 0.68f, 0.42f, 0.1f, 0.02f, (float)PlayerTeam.CurrentMission.ShipTarget.ShieldFract, new Vector4(0f, 0f, 1f, 1f));
                 tro.YPos = 0.41f;
                 TextRenderer.DrawWithOptions(strStatus, tro);
             }
@@ -539,21 +539,6 @@ namespace SpaceMercs {
                 vaShot = new VertexArray(vbShot);
             }
             else vbShot.SetData(lines.ToArray());
-        }
-        private static void DrawFractBar(ShaderProgram prog, float fTLCX, float fTLCY, float fWidth, float fHeight, float fract, Vector4 col) {
-            if (fract < 0.0f) fract = 0.0f;
-            if (fract > 1.0f) fract = 1.0f;
-            Matrix4 translateM = Matrix4.CreateTranslation(fTLCX, fTLCY, 0f);
-            Matrix4 scaleM = Matrix4.CreateScale(fWidth * fract, fHeight, 1f);
-            prog.SetUniform("model", scaleM * translateM);
-            prog.SetUniform("flatColour", col);
-            GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Flat.BindAndDraw();
-            scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
-            prog.SetUniform("model", scaleM * translateM);
-            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1.0f));
-            GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Lines.BindAndDraw();
         }
 
         // Announce the salvage gained 

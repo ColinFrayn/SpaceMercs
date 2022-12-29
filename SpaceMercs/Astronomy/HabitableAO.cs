@@ -67,7 +67,7 @@ namespace SpaceMercs {
             Colony = new Colony(rc, iSize, Seed, this);
         }
         public void ExpandBase(Colony.BaseType bt) {
-            Colony.ExpandBase(bt);
+            if (Colony is not null) Colony.ExpandBase(bt);
         }
         public int ExpandBase(Race rc, Random rand) {
             if (Colony == null) {

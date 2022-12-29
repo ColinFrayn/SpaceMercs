@@ -82,8 +82,8 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
 
             // Draw the starfield (unmoving)
-            Matrix4 backgroundM = Matrix4.CreateTranslation(0f, 0f, -0.1f);
-            fullShaderProgram.SetUniform("view", backgroundM);
+            //Matrix4 backgroundM = Matrix4.CreateTranslation(0f, 0f, -0.1f);
+            //pos2DCol4ShaderProgram.SetUniform("view", backgroundM);
             pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
             GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
             Starfield.Build.BindAndDraw();
