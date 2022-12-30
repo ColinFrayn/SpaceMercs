@@ -42,8 +42,8 @@ namespace SpaceMercs.MainWindow {
         private ItemType ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
-        private VertexBuffer? vbGrid = null;
-        private VertexArray? vaGrid = null;
+        private VertexBuffer? vbGrid = null, vbPath = null;
+        private VertexArray? vaGrid = null, vaPath = null;
         private IndexBuffer? ibGrid = null;
 
         // GUIPanel actions
@@ -771,7 +771,7 @@ namespace SpaceMercs.MainWindow {
                 }
                 if (bShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
                     if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
-                        DrawTravelPath(); // TODO
+                        DrawTravelPath(texProg);
                     }
                 }
             }
@@ -827,10 +827,10 @@ namespace SpaceMercs.MainWindow {
 
             // Show the context menu and other buttons
             gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-            if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            if (gbEndTurn != null) gbEndTurn.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            if (gbEndTurn != null) gbEndTurn.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             if (ThisMission?.IsComplete ?? false) {
                 gbEndMission.Activate();
                 gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
@@ -839,7 +839,7 @@ namespace SpaceMercs.MainWindow {
             DrawMissionToggles();
 
             // Warn that AI is running?
-            if ( bAIRunning) {
+            if (bAIRunning) {
                 DisplayAILabel(fullShaderProgram);
             }
             GL.Enable(EnableCap.DepthTest);
@@ -855,7 +855,6 @@ namespace SpaceMercs.MainWindow {
         private void DisplayAILabel(ShaderProgram prog) {
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("flatColour", new Vector4(0.1f, 0.1f, 0.1f, 1f));
-            GL.BindTexture(TextureTarget.Texture2D, Textures.SelectionTexture);
             Matrix4 pTranslateM = Matrix4.CreateTranslation(0.4f, 0.02f, Const.DoodadLayer);
             Matrix4 pScaleM = Matrix4.CreateScale(0.2f, 0.08f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
@@ -1116,27 +1115,36 @@ namespace SpaceMercs.MainWindow {
             }
             return vertices;
         }
-        private void DrawTravelPath() {
+        private void DrawTravelPath(ShaderProgram prog) {
             if (lCurrentPath == null || lCurrentPath.Count == 0) return;
             if (SelectedEntity == null || !(SelectedEntity is Soldier)) return;
 
-            return;
+            List<VertexPos3D> vertices = new List<VertexPos3D>();
 
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.Begin(BeginMode.LineStrip);
-            GL.Vertex3(SelectedEntity.X + 0.5, SelectedEntity.Y + 0.5, Const.DoodadLayer);
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("flatColour", new Vector4(0f, 1f, 0f, 1f));
+
+            vertices.Add(new VertexPos3D(new Vector3(SelectedEntity.X + 0.5f, SelectedEntity.Y + 0.5f, Const.DoodadLayer)));
             foreach (Point pt in lCurrentPath) {
-                // TODO : This needs to start at the square that the entity has currently got to, 
-                GL.Vertex3(pt.X + 0.5, pt.Y + 0.5, Const.DoodadLayer);
+                vertices.Add(new VertexPos3D(new Vector3(pt.X + 0.5f, pt.Y + 0.5f, Const.DoodadLayer)));
             }
-            GL.Vertex3(hoverx + 0.5, hovery + 0.5, Const.DoodadLayer);
-            GL.End();
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(hoverx + 0.45, hovery + 0.45, Const.DoodadLayer);
-            GL.Vertex3(hoverx + 0.55, hovery + 0.45, Const.DoodadLayer);
-            GL.Vertex3(hoverx + 0.55, hovery + 0.55, Const.DoodadLayer);
-            GL.Vertex3(hoverx + 0.45, hovery + 0.55, Const.DoodadLayer);
-            GL.End();
+            vertices.Add(new VertexPos3D(new Vector3(hoverx + 0.5f, hovery + 0.5f, Const.DoodadLayer)));
+
+            if (vbPath is null) vbPath = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
+            else vbPath.SetData(vertices.ToArray());
+            if (vaPath is null) vaPath = new VertexArray(vbPath);
+            prog.SetUniform("model", Matrix4.Identity);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            GL.BindVertexArray(vaPath.VertexArrayHandle);
+            GL.DrawArrays(PrimitiveType.LineStrip, 0, vbPath.VertexCount);
+            GL.BindVertexArray(0);
+
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 0f, 1f));
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(hoverx + 0.45f, hovery + 0.45f, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
         }
         private void DrawHoverFrame(ShaderProgram prog, int xpos, int ypos) {
             float px = xpos + 0.5f, py = ypos + 0.5f;
@@ -1176,7 +1184,7 @@ namespace SpaceMercs.MainWindow {
             GL.UseProgram(prog.ShaderProgramHandle);
             SquareRing.Flat.BindAndDraw();
         }
-        private void DrawSelectionTile(ShaderProgram prog, float px, float py, float dSize) {
+        private static void DrawSelectionTile(ShaderProgram prog, float px, float py, float dSize) {
             float d = -(dSize / 2f);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

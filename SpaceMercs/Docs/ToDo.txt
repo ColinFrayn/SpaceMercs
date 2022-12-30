@@ -8,7 +8,6 @@ MapViewMission
 - Creature.Display() : Example sve?, large creatures e.g. SniperMisses save not in centre; Test Label (esp size>1)
 - CurrentLevel.DrawDetectionMap() : TEST needs creatures
 - ShowSelectedEntityDetails() : TEST needs creatures
-- DrawTravelPath()
 - ShowSoldierPanels()
 - Display visual effects??
 
