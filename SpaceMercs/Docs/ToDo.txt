@@ -2,14 +2,15 @@
 ToDo List
 -------------------------------------------------
 
-For label, pass in optional Matrix4 for View?
-
 MapViewMission
 - Creature.Display() : Example sve?, large creatures e.g. SniperMisses save not in centre; Test Label (esp size>1)
 - CurrentLevel.DrawDetectionMap() : TEST needs creatures
 - ShowSelectedEntityDetails() : TEST needs creatures
-- ShowSoldierPanels()
-- Display visual effects??
+- Soldier.DisplaySoldierDetails() : Half done
+- VisualEffect.DisplayDamage()
+- VisualEffect.DisplayHealing()
+- VisualEffect.DisplayShotLine()
+- Test handling of large creatures
 
 Check all MenuItem.Enabled/Disabled
 

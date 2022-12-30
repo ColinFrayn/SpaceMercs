@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -1251,46 +1252,34 @@ namespace SpaceMercs {
         }
 
         // Display options
-        public void DisplaySoldierDetails(ShaderProgram prog, bool bSelected, bool bHover) {
+        public void DisplaySoldierDetails(ShaderProgram prog, float px, float py, bool bSelected, bool bHover) {
             float PanelHeight = GetGuiPanelHeight(bSelected);
             GL.Enable(EnableCap.Blend);
-            const float border = 0.002f;
 
             // Background selection colour, if selected
-            GL.Begin(BeginMode.Quads);
-            if (bSelected) GL.Color4(0.3, 0.3, 0.3, 0.8);
-            else GL.Color4(0.0, 0.0, 0.0, 0.6);
-            GL.Vertex2(0.0, 0.0);
-            GL.Vertex2(Const.GUIPanelWidth, 0.0);
-            GL.Vertex2(Const.GUIPanelWidth, PanelHeight);
-            GL.Vertex2(0.0, PanelHeight);
-            GL.End();
+            prog.SetUniform("textureEnabled", false);
+            if (bSelected) prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 0.8f));
+            else prog.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 0.6f));
+            Matrix4 pScaleM = Matrix4.CreateScale(Const.GUIPanelWidth, PanelHeight, 1f);
+            prog.SetUniform("model", pScaleM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
 
             // Hovering over this one
             if (bHover) {
-                GL.Color4(0.2, 1.0, 0.4, Const.GUIAlpha);
-                GL.Begin(BeginMode.QuadStrip);
-                GL.Vertex2(-border, -border);
-                GL.Vertex2(border, border);
-                GL.Vertex2(Const.GUIPanelWidth + border, -border);
-                GL.Vertex2(Const.GUIPanelWidth - border, border);
-                GL.Vertex2(Const.GUIPanelWidth + border, PanelHeight + border);
-                GL.Vertex2(Const.GUIPanelWidth - border, PanelHeight - border);
-                GL.Vertex2(-border, PanelHeight + border);
-                GL.Vertex2(border, PanelHeight - border);
-                GL.Vertex2(-border, -border);
-                GL.Vertex2(border, border);
-                GL.End();
+                Matrix4 phTransM = Matrix4.CreateTranslation(-0.005f, -0.005f, 0f);
+                Matrix4 phScaleM = Matrix4.CreateScale(Const.GUIPanelWidth + 0.01f, PanelHeight + 0.01f, 1f);
+                prog.SetUniform("model", phScaleM * phTransM);
+                prog.SetUniform("flatColour", new Vector4(0.2f, 1f, 0.4f, Const.GUIAlpha));
+                GL.UseProgram(prog.ShaderProgramHandle);
+                SquareRing.Thin.BindAndDraw();
             }
 
             // Frame
-            GL.Color4(1.0, 1.0, 1.0, Const.GUIAlpha);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex2(0.0, 0.0);
-            GL.Vertex2(Const.GUIPanelWidth, 0.0);
-            GL.Vertex2(Const.GUIPanelWidth, PanelHeight);
-            GL.Vertex2(0.0, PanelHeight);
-            GL.End();
+            prog.SetUniform("model", pScaleM);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, Const.GUIAlpha));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
 
             // Health/Stamina bars
             float TopBar = 0.045f;
@@ -1300,26 +1289,38 @@ namespace SpaceMercs {
             if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, Const.GUIPanelWidth * 0.02f, TopBar + 0.04f, Const.GUIPanelWidth * 0.75f, 0.01f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
 
             // Text summary
-            GL.PushMatrix();
-            const float TextScale = 0.02f;
-            GL.Scale(TextScale, TextScale, TextScale);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw(Name, Alignment.TopLeft);
-            GL.Translate(0.0, -1.0, 0.0f);
-            TextRenderer.Draw("Level " + Level + " " + Race.Name, Alignment.TopLeft);
+            const float TextScale = 0.015f;
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopLeft,
+                Aspect = PlayerTeam.CurrentMission.CurrentMapView.Aspect,
+                TextColour = Color.White,
+                XPos = px + 0.002f,
+                YPos = py,
+                ZPos = 0.015f,
+                Scale = TextScale
+            };
+            TextRenderer.DrawWithOptions(Name, tro);
+            tro.YPos += TextScale * 1.2f;
+            TextRenderer.DrawWithOptions($"Level {Level} {Race.Name}", tro);
             if (EquippedWeapon != null) {
-                GL.Translate(0.0, -1.0, 0.0f);
-                TextRenderer.Draw(EquippedWeapon.Type.Name, Alignment.TopLeft, Utils.LevelToColour(EquippedWeapon.Level));
+                tro.YPos += tro.Scale * 1.2f;
+                tro.TextColour = Utils.LevelToColour(EquippedWeapon.Level);
+                TextRenderer.DrawWithOptions(EquippedWeapon.Type.Name, tro);
             }
-            GL.Translate(Const.GUIPanelWidth * 0.385 / TextScale, -1.0, 0.0f);
-            TextRenderer.Draw((int)Health + "/" + (int)MaxHealth, Alignment.TopMiddle);
-            GL.Translate(0.0, -1.0, 0.0f);
-            TextRenderer.Draw((int)Stamina + "/" + (int)MaxStamina, Alignment.TopMiddle);
+
+            tro.XPos = px + (Const.GUIPanelWidth / 2f);
+            tro.YPos = py + TopBar + 0.02f;
+            tro.Alignment = Alignment.TopMiddle;
+            tro.Scale = TextScale * 0.7f;
+            TextRenderer.DrawWithOptions($"{(int)Health}/{(int)MaxHealth}", tro);
+            tro.YPos += 0.02f;
+            TextRenderer.DrawWithOptions($"{(int)Stamina}/{(int)MaxStamina}", tro);
             if (MaxShields > 0) {
-                GL.Translate(0.0, -1.0, 0.0f);
-                TextRenderer.Draw((int)Shields + "/" + (int)MaxShields, Alignment.TopMiddle);
+                tro.YPos += 0.02f;
+                TextRenderer.DrawWithOptions($"{(int)Shields}/{(int)MaxShields}", tro);
             }
-            GL.PopMatrix();
+
+            return;
 
             // Encumbrance icon
             float encX = Const.GUIPanelWidth - 0.024f;

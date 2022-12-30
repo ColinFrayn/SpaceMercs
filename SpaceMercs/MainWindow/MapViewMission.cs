@@ -826,6 +826,8 @@ namespace SpaceMercs.MainWindow {
             ShowSoldierPanels(fullShaderProgram);
 
             // Show the context menu and other buttons
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
             gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
@@ -845,12 +847,12 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
         }
         private void DrawMissionToggles() {
-            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 0f, bShowEntityLabels ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 1f, bShowStatBars ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTravel ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowPath ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowEffects ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bViewDetection ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 10f, bShowEntityLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, bShowStatBars ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, bShowTravel ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, bShowPath ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, bShowEffects ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, bViewDetection ? Color.White : Color.DimGray);
         }
         private void DisplayAILabel(ShaderProgram prog) {
             prog.SetUniform("textureEnabled", false);
@@ -893,7 +895,6 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawWithOptions(strStats, tro);
         }
         private void ShowSoldierPanels(ShaderProgram prog) {
-            return;
             // Show the details of the soldiers
             float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
             IEntity hover = CurrentLevel.GetHoverEntity();
@@ -938,11 +939,10 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
 
-                GL.PushMatrix();
-                GL.Translate(sx, sy, Const.GUILayer);
-                s.DisplaySoldierDetails(prog, SelectedEntity == s, hover == s);
+                Matrix4 transM = Matrix4.CreateTranslation(sx, sy, Const.GUILayer);
+                prog.SetUniform("view", transM);
+                s.DisplaySoldierDetails(prog, sx, sy, SelectedEntity == s, hover == s);
                 sy += PanelHeight + Const.GUIPanelGap;
-                GL.PopMatrix();
             }
         }
         private void InitialiseGUIButtons() {
