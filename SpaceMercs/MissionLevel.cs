@@ -25,11 +25,7 @@ namespace SpaceMercs {
         private IEntity[,] EntityMap;
         private int HoverX = -1, HoverY = -1;
         private Random rand = new Random();
-        private TexDetails? FloorTexture = null;
-        private Dictionary<Textures.WallSide, TexDetails>? dWallTextures = null;
         private const float TexEpsilon = 0.01f;
-        //private VertexBuffer? vbTiles = null;
-        //private VertexArray? vaTiles = null;
 
         public TileType[,] Map { get; private set; }
         public bool[,] Explored { get; private set; }
@@ -313,7 +309,7 @@ namespace SpaceMercs {
             GL.Disable(EnableCap.Blend);
         }
         private void DisplayTiles(ShaderProgram prog) {
-            if (FloorTexture == null) GenerateTextures();
+            if (TextureCoords is null) GenerateTextures();
             GL.Disable(EnableCap.Blend);
 
             // Draw the visible terrain
@@ -321,22 +317,20 @@ namespace SpaceMercs {
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
-                    int iTexID = -1;
+                    TexDetails det;
                     if (Map[x, y] == TileType.Floor || Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) {
-                        iTexID = FloorTexture.Value.ID;
-                        tw = FloorTexture.Value.W / Textures.TileSize;
-                        th = FloorTexture.Value.H / Textures.TileSize;
+                        det = Textures.GenerateFloorTexture(this);
                     }
                     else if (Map[x, y] == TileType.Wall || Map[x, y] == TileType.SecretDoorHorizontal || Map[x, y] == TileType.SecretDoorVertical) {
                         Textures.WallSide ws = GetWallSides(x, y);
-                        if (!dWallTextures.ContainsKey(ws)) throw new Exception("Illegal wall texture requested");
-                        iTexID = dWallTextures[ws].ID;
-                        tw = dWallTextures[ws].W / Textures.TileSize;
-                        th = dWallTextures[ws].H / Textures.TileSize;
+                        det = Textures.GenerateWallTexture(this, ws);
                     }
                     else {
                         throw new Exception("Unhandled texture requested : " + Map[x, y]);
                     }
+                    int iTexID = det.ID;
+                    tw = det.W / Textures.TileSize;
+                    th = det.H / Textures.TileSize;
                     if (iTexID != iLastID) {
                         GL.BindTexture(TextureTarget.Texture2D, iTexID);
                         iLastID = iTexID;
@@ -355,8 +349,6 @@ namespace SpaceMercs {
             }
         }
         private void GenerateTextures() {
-            FloorTexture = Textures.GenerateFloorTexture(this);
-            dWallTextures = Textures.GenerateWallTexture(this);
             TextureCoords = new int[Width, Height];
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
@@ -464,10 +456,11 @@ namespace SpaceMercs {
             else ts = Textures.GetTexCoords(Textures.MiscTexture.Treasure, true);
 
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", ts.X, ts.Y);
             prog.SetUniform("texScale", ts.W, ts.H);
-            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.1f, Const.EntityLayer);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.9f, Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
@@ -477,10 +470,11 @@ namespace SpaceMercs {
             if (Traps[pt].Hidden) return;
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Trap, true);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", ts.X, ts.Y);
             prog.SetUniform("texScale", ts.W, ts.H);
-            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.1f, Const.EntityLayer);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(pt.X + 0.1f, pt.Y + 0.9f, Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);

@@ -66,13 +66,13 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
-            Matrix4 pTranslateM = Matrix4.CreateTranslation(X, Y, Const.EntityLayer);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(X + 0.5f, Y + 0.5f, Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale((float)Type.Scale);
             Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing+180)*Math.PI/180));
             prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
-            Square.Textured.BindAndDraw();
+            Square.TexturedCentred.BindAndDraw();
 
             if (bLabel && false) { // DEBUG
                 GL.Translate(X + ((float)Type.Size / 2), Y - (0.015 * fViewHeight), Const.GUILayer);
@@ -89,20 +89,32 @@ namespace SpaceMercs {
                 GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.8f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
                 if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog , -0.5f, 0.9f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
             }
-            if (bShowEffects && _Effects.Any()) { // DEBUG
-                prog.SetUniform("textureEnabled", false);
-                GL.Color3(1.0, 0.0, 0.0);
-                GL.PushMatrix();
-                GL.Translate(X + (float)Type.Size, Y + ((float)Type.Size * 0.25f), Const.EntityLayer);
-                GL.Scale(Type.Scale, Type.Scale, 1.0);
+            if (bShowEffects && _Effects.Any()) {
+                //GL.Translate(X + (float)Type.Size, Y + ((float)Type.Size * 0.25f), Const.EntityLayer);
+                //GL.Scale(Type.Scale, Type.Scale, 1.0);
                 int nEffects = _Effects.Count;
                 if (nEffects > 4) nEffects = 4;
+                pScaleM = Matrix4.CreateScale(0.08f);
+                Matrix4 pbScaleM = Matrix4.CreateScale(0.1f);
+                pRotateM = Matrix4.CreateRotationZ((float)Math.PI / 4f);
                 for (int i = 0; i < nEffects; i++) {
-                    GraphicsFunctions.DrawRhomboid(0.1);
-                    GL.Translate(0.0, 0.12, 0.0);
+                    pTranslateM = Matrix4.CreateTranslation(X + 0.94f, Y + (i * 0.2f) - 0.01f, Const.EntityLayer);
+                    prog.SetUniform("model", pRotateM * pbScaleM * pTranslateM);
+                    prog.SetUniform("flatColour", new Vector4(0.5f, 0.2f, 0.2f, 0.5f));
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
+                    pTranslateM = Matrix4.CreateTranslation(X + 0.95f, Y + (i * 0.2f), Const.EntityLayer);
+                    prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
+                    prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Flat.BindAndDraw();
                 }
                 if (_Effects.Count > 4) {
-                    GraphicsFunctions.DrawCross(0.1);
+                    pTranslateM = Matrix4.CreateTranslation(X + 0.91f, Y + 0.8f, Const.EntityLayer);
+                    prog.SetUniform("model", pScaleM * pTranslateM);
+                    prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Cross.Flat.BindAndDraw();
                 }
             }
         }

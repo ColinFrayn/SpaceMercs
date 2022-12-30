@@ -4,9 +4,14 @@ ToDo List
 
 MapViewMission
 - CurrentLevel.DisplayEntities()
+-- Make effects label look better
 -- Creature.Display() : TEST, Label, Effects
--- Soldier.Display() : Label, Location is wrong
+-- Soldier.Display() : Label
 - ShowMapGUIElements()
+-- DrawTargetGrid() : TEST - how to display
+-- DrawAoEGrid() : TEST - how to display
+-- DrawTravelGrid() : TEST - how to display
+-- DrawTravelPath()
 -- CurrentLevel.DrawDetectionMap()
 -- CurrentLevel.DrawSelectedEntityVis()
 - Display visual effects

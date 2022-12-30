@@ -1,7 +1,9 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using Microsoft.VisualBasic;
+using OpenTK.Graphics.OpenGL;
 using SpaceMercs.Graphics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows.Navigation;
 
 namespace SpaceMercs {
     public struct TexDetails {
@@ -118,6 +120,8 @@ namespace SpaceMercs {
         #region Utility Textures
         private static int _fogOfWarTexture = -1;
         public static int FogOfWarTexture { get { if (_fogOfWarTexture == -1) _fogOfWarTexture = GenerateFogOfWarTexture(); return _fogOfWarTexture; } }
+        private static int _selectionTexture = -1;
+        public static int SelectionTexture { get { if (_selectionTexture == -1) _selectionTexture = GenerateSelectionTexture(); return _selectionTexture; } }
 
         private static int GenerateHighlightTexture_UNUSED() {
             byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
@@ -148,7 +152,7 @@ namespace SpaceMercs {
             }
             return BindEntityTexture(image);
         }
-        private static int GenerateSelectionTexture_UNUSED_ISH() {
+        private static int GenerateSelectionTexture() {
             byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
             Color col = Color.FromArgb(255, 255, 50, 0);
             for (int y = 0; y < Textures.TileSize; y++) {
@@ -179,58 +183,63 @@ namespace SpaceMercs {
         #endregion // Utility Textures
 
         #region Wall And Floor Textures
+        private enum WallType { Caves, Desert, Ice, Oceanic, Rocky, Volcanic, Ship, City };
+        private static readonly Dictionary<(WallType, WallSide), TexDetails> dWallTextures = new Dictionary<(WallType, WallSide), TexDetails>();
+        private static readonly Dictionary<WallType, TexDetails> dFloorTextures = new Dictionary<WallType, TexDetails>();
         public static TexDetails GenerateFloorTexture(MissionLevel lev) {
-            return BindTexture(GenerateFloorTextureMap(lev));
+            WallType wt = WallTypeFromMission(lev.ParentMission);
+            if (!dFloorTextures.ContainsKey(wt)) {
+                dFloorTextures.TryAdd(wt,BindTexture(GenerateFloorTextureMap(wt)));
+            }
+            return dFloorTextures[wt];
         }
-        private static byte[,,] GenerateFloorTextureMap(MissionLevel lev) {
-            if (lev.ParentMission.IsShipMission) {
-                return GenerateMetalFloorTile(Color.FromArgb(255, 180, 180, 180), 3, Textures.TileSize, Textures.TileSize);
-            }
-            if (lev.ParentMission.Type == Mission.MissionType.Caves || lev.ParentMission.Type == Mission.MissionType.Mines) {
-                return GenerateAlignedVarianceMap(Color.FromArgb(255, 150, 150, 150), 20, Textures.TileSize * 2, Textures.TileSize * 2);
-            }
-            if (lev.ParentMission.Type == Mission.MissionType.Surface) {
-                if (lev.ParentMission.Location == null) throw new Exception("Location not set for surface mission");
-                switch (lev.ParentMission.Location.Type) {
-                    case Planet.PlanetType.Desert: return GenerateAlignedVarianceMap(Color.FromArgb(255, 230, 210, 60), 15, Textures.TileSize * 2, Textures.TileSize * 2); // Sand
-                    case Planet.PlanetType.Ice: return GenerateAlignedVarianceMap(Color.FromArgb(255, 200, 210, 255), 15, Textures.TileSize * 2, Textures.TileSize * 2); // Ice/snow
-                    case Planet.PlanetType.Oceanic: return GenerateAlignedVarianceMap(Color.FromArgb(255, 70, 180, 90), 20, Textures.TileSize * 2, Textures.TileSize * 2); // Grass
-                    case Planet.PlanetType.Rocky: return GenerateAlignedVarianceMap(Color.FromArgb(255, 180, 180, 180), 20, Textures.TileSize * 2, Textures.TileSize * 2); // Rocks
-                    case Planet.PlanetType.Volcanic: return GenerateAlignedVarianceMap(Color.FromArgb(255, 200, 150, 140), 30, Textures.TileSize * 2, Textures.TileSize * 2); // Igneous
-                }
-                throw new NotImplementedException();
-            }
-            if (lev.ParentMission.Type == Mission.MissionType.AbandonedCity) {
-                return GenerateStoneFloorTile(Textures.TileSize, Textures.TileSize);
+        private static byte[,,] GenerateFloorTextureMap(WallType wt) {
+            switch (wt) {
+                case WallType.Ship: return GenerateMetalFloorTile(Color.FromArgb(255, 180, 180, 180), 3, Textures.TileSize, Textures.TileSize);
+                case WallType.Caves: return GenerateAlignedVarianceMap(Color.FromArgb(255, 150, 150, 150), 20, Textures.TileSize * 2, Textures.TileSize * 2);               
+                case WallType.Desert: return GenerateAlignedVarianceMap(Color.FromArgb(255, 230, 210, 60), 15, Textures.TileSize * 2, Textures.TileSize * 2); // Sand
+                case WallType.Ice: return GenerateAlignedVarianceMap(Color.FromArgb(255, 200, 210, 255), 15, Textures.TileSize * 2, Textures.TileSize * 2); // Ice/snow
+                case WallType.Oceanic: return GenerateAlignedVarianceMap(Color.FromArgb(255, 70, 180, 90), 20, Textures.TileSize * 2, Textures.TileSize * 2); // Grass
+                case WallType.Rocky: return GenerateAlignedVarianceMap(Color.FromArgb(255, 180, 180, 180), 20, Textures.TileSize * 2, Textures.TileSize * 2); // Rocks
+                case WallType.Volcanic: return GenerateAlignedVarianceMap(Color.FromArgb(255, 200, 150, 140), 30, Textures.TileSize * 2, Textures.TileSize * 2); // Igneous
+                case WallType.City: return GenerateStoneFloorTile(Textures.TileSize, Textures.TileSize);
             }
             throw new NotImplementedException();
         }
-        public static Dictionary<WallSide, TexDetails> GenerateWallTexture(MissionLevel lev) {
-            Dictionary<WallSide, TexDetails> dWallTextures = new Dictionary<WallSide, TexDetails>();
-            TexDetails? TexID = null;
-            byte[,,]? baseImage = null;
-            if (lev.ParentMission.Type == Mission.MissionType.Caves || lev.ParentMission.Type == Mission.MissionType.Mines) {
-                baseImage = GenerateRockWallTexture(Color.FromArgb(255, 150, 150, 150), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev);
-            }
-            if (lev.ParentMission.Type == Mission.MissionType.Surface) {
-                switch (lev.ParentMission.Location.Type) {
-                    case Planet.PlanetType.Desert: baseImage = GenerateRockWallTexture(Color.FromArgb(255, 230, 210, 60), Color.FromArgb(255, 220, 160, 50), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev); break;
-                    case Planet.PlanetType.Ice: baseImage = GenerateRockWallTexture(Color.FromArgb(255, 200, 210, 255), Color.FromArgb(255, 180, 190, 255), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev); break;
-                    case Planet.PlanetType.Oceanic: baseImage = GenerateRockWallTexture(Color.FromArgb(255, 100, 255, 120), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev); break;
-                    case Planet.PlanetType.Rocky: baseImage = GenerateRockWallTexture(Color.FromArgb(255, 180, 180, 180), Color.FromArgb(255, 180, 180, 180), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev); break;
-                    case Planet.PlanetType.Volcanic: baseImage = GenerateRockWallTexture(Color.FromArgb(255, 200, 150, 140), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, lev); break;
+        public static TexDetails GenerateWallTexture(MissionLevel lev, WallSide ws) {
+            WallType wt = WallTypeFromMission(lev.ParentMission);
+            if (dWallTextures.ContainsKey((wt, ws))) return dWallTextures[(wt, ws)];
+            byte[,,] baseImage = wt switch {
+                WallType.Caves => FadeWallImage(GenerateRockWallTexture(Color.FromArgb(255, 150, 150, 150), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt), ws),
+                WallType.Desert => GenerateRockWallTexture(Color.FromArgb(255, 230, 210, 60), Color.FromArgb(255, 220, 160, 50), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt),
+                WallType.Ice => GenerateRockWallTexture(Color.FromArgb(255, 200, 210, 255), Color.FromArgb(255, 180, 190, 255), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt),
+                WallType.Oceanic => GenerateRockWallTexture(Color.FromArgb(255, 100, 255, 120), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt),
+                WallType.Rocky => GenerateRockWallTexture(Color.FromArgb(255, 180, 180, 180), Color.FromArgb(255, 180, 180, 180), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt),
+                WallType.Volcanic => GenerateRockWallTexture(Color.FromArgb(255, 200, 150, 140), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt),
+                WallType.Ship => GenerateMetalWall(Color.FromArgb(255, 150, 150, 150), 3, Textures.TileSize, Textures.TileSize, ws),
+                WallType.City => GenerateBrickWall(Color.FromArgb(255, 132, 31, 29), Color.FromArgb(255, 90, 90, 80), 3, Textures.TileSize, Textures.TileSize, ws),
+                _ => throw new NotImplementedException()
+            };
+            TexDetails TexID = BindTexture(baseImage);
+            //if (TexID == null) TexID = BindTexture(GenerateAlignedVarianceMap(Color.FromArgb(255, 150, 150, 150), 10, Textures.TileSize, Textures.TileSize));
+            dWallTextures.TryAdd((wt, ws), TexID);
+            return TexID;
+        }
+        private static WallType WallTypeFromMission(Mission m) {
+            if (m.Type == Mission.MissionType.Caves || m.Type == Mission.MissionType.Mines) return WallType.Caves;
+            if (m.Type == Mission.MissionType.Surface) {
+                switch (m.Location.Type) {
+                    case Planet.PlanetType.Desert: return WallType.Desert;
+                    case Planet.PlanetType.Ice: return WallType.Ice;
+                    case Planet.PlanetType.Oceanic: return WallType.Oceanic;
+                    case Planet.PlanetType.Rocky: return WallType.Rocky;
+                    case Planet.PlanetType.Volcanic: return WallType.Volcanic;
                     default: throw new NotImplementedException();
                 }
             }
-            for (WallSide s = 0; s <= AllSides; s++) {
-                if (lev.ParentMission.IsShipMission) TexID = BindTexture(GenerateMetalWall(Color.FromArgb(255, 150, 150, 150), 3, Textures.TileSize, Textures.TileSize, s));
-                if (lev.ParentMission.Type == Mission.MissionType.AbandonedCity) TexID = BindTexture(GenerateBrickWall(Color.FromArgb(255, 132, 31, 29), Color.FromArgb(255, 90, 90, 80), 3, Textures.TileSize, Textures.TileSize, s));
-                if (lev.ParentMission.Type == Mission.MissionType.Caves || lev.ParentMission.Type == Mission.MissionType.Mines) TexID = BindTexture(FadeWallImage(baseImage, s));
-                if (lev.ParentMission.Type == Mission.MissionType.Surface) TexID = BindTexture(baseImage);
-                if (TexID == null) TexID = BindTexture(GenerateAlignedVarianceMap(Color.FromArgb(255, 150, 150, 150), 10, Textures.TileSize, Textures.TileSize));
-                if (TexID.HasValue) dWallTextures.Add(s, TexID.Value);
-            }
-            return dWallTextures;
+            if (m.IsShipMission) return WallType.Ship;
+            if (m.Type == Mission.MissionType.AbandonedCity) return WallType.City;
+            throw new NotImplementedException();
         }
 
         // Individual algorithms
@@ -305,8 +314,8 @@ namespace SpaceMercs {
             }
             return image;
         }
-        private static byte[,,] GenerateRockWallTexture(Color colBase, Color colWall, int Range, int Width, int Height, MissionLevel lev) {
-            byte[,,] image = GenerateFloorTextureMap(lev);
+        private static byte[,,] GenerateRockWallTexture(Color colBase, Color colWall, int Range, int Width, int Height, WallType wt) {
+            byte[,,] image = GenerateFloorTextureMap(wt);
             int scale = 12;
             for (int imx = 0; imx < (Width / Textures.TileSize); imx++) {
                 for (int imy = 0; imy < (Height / Textures.TileSize); imy++) {

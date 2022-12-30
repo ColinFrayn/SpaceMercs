@@ -19,8 +19,6 @@ namespace SpaceMercs.MainWindow {
         public MissionResult MissionOutcome { get; private set; } // Did we win?
         private int hoverx, hovery;
         private float fMissionViewX, fMissionViewY, fMissionViewZ;
-        private int iStarfieldDL = -1;
-        private int iSelectionTexID = -1;
         private GUIPanel gpSelect;
         private GUIIconButton gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4, gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
         private GUIButton gbEndTurn, gbTransition, gbEndMission;
@@ -44,6 +42,9 @@ namespace SpaceMercs.MainWindow {
         private ItemType ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
+        private VertexBuffer? vbGrid = null;
+        private VertexArray? vaGrid = null;
+        private IndexBuffer? ibGrid = null;
 
         // GUIPanel actions
         public const uint I_OpenDoor = 10001;
@@ -216,7 +217,7 @@ namespace SpaceMercs.MainWindow {
             CurrentLevel.DisplayMap(fullShaderProgram);
 
             // Show any indicators on top of the action in the map view
-            ShowMapGUIElements();
+            ShowMapGUIElements(fullShaderProgram);
 
             // Show creatures/soldiers
             CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
@@ -715,31 +716,29 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Show GUI elements in the viewpoint of the map
-        private void ShowMapGUIElements() {
-
-            return; // TODO
-
+        private void ShowMapGUIElements(ShaderProgram prog) {
             // Mouse hover
             GL.Disable(EnableCap.DepthTest);
             Point pt = CurrentLevel.MouseHover;
             if (pt != Point.Empty && CurrentAction == SoldierAction.None) {
-                DrawHoverFrame(pt.X, pt.Y);
+                DrawHoverFrame(prog, pt.X, pt.Y);
             }
             if (SelectedEntity != null) {
-                DrawSelectionTile(SelectedEntity.Location.X + SelectedEntity.Size / 2.0, SelectedEntity.Location.Y + SelectedEntity.Size / 2.0, SelectedEntity.Size /* + 0.2 */);
+                DrawSelectionTile(prog, SelectedEntity.Location.X + SelectedEntity.Size / 2f, SelectedEntity.Location.Y + SelectedEntity.Size / 2f, SelectedEntity.Size);
             }
 
+            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
             if (CurrentAction == SoldierAction.Attack) {
-                DrawTargetGrid();
+                vertices.AddRange(DrawTargetGrid());
                 if (TargetMap[pt.X, pt.Y] == true) {
-                    DrawHoverFrame(pt.X, pt.Y);
-                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0) DrawAoEGrid();
+                    DrawHoverFrame(prog, pt.X, pt.Y);
+                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0) vertices.AddRange(DrawAoEGrid());
                 }
             }
             else if (CurrentAction == SoldierAction.Item) {
                 DrawTargetGrid();
                 if (TargetMap[pt.X, pt.Y] == true) {
-                    DrawHoverFrame(pt.X, pt.Y);
+                    DrawHoverFrame(prog, pt.X, pt.Y);
                     DrawAoEGrid();
                 }
             }
@@ -753,6 +752,32 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
+            int numGrids = vertices.Count / 4;
+            if (numGrids > 0) {
+                if (vbGrid is null) vbGrid = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
+                else vbGrid.SetData(vertices.ToArray());
+                if (vaGrid is null) vaGrid = new VertexArray(vbGrid);
+                int[] indices = new int[numGrids*8];
+                for (int n=0; n<numGrids; n++) {
+                    indices[n * 8 + 0] = n * 4 + 0;
+                    indices[n * 8 + 1] = n * 4 + 1;
+                    indices[n * 8 + 2] = n * 4 + 1;
+                    indices[n * 8 + 3] = n * 4 + 2;
+                    indices[n * 8 + 4] = n * 4 + 2;
+                    indices[n * 8 + 5] = n * 4 + 3;
+                    indices[n * 8 + 6] = n * 4 + 3;
+                    indices[n * 8 + 7] = n * 4 + 0;
+                }
+                if (ibGrid is null) ibGrid = new IndexBuffer(indices, false);
+                else ibGrid.SetData(indices);
+                GL.UseProgram(prog.ShaderProgramHandle);
+                GL.BindVertexArray(vaGrid.VertexArrayHandle);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibGrid.IndexBufferHandle);
+                GL.DrawElements(PrimitiveType.Lines, ibGrid.IndexCount, DrawElementsType.UnsignedInt, 0);
+                GL.BindVertexArray(0);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+            }
+
             if (bViewDetection) CurrentLevel.DrawDetectionMap(DetectionMap);
             if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(SelectedEntity);
             GL.Enable(EnableCap.DepthTest);
@@ -1010,57 +1035,47 @@ namespace SpaceMercs.MainWindow {
                 gbZoomTo1 = null;
             }
         }
-        private void DrawTargetGrid() {
-            GL.Color3(1.0, 0.0, 0.0);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Begin(BeginMode.Quads);
+        private List<VertexPos2DCol> DrawTargetGrid() {
+            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
+            Color4 col = new Color4(1f, 0f, 0f, 1f);
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
                     if (!TargetMap[x, y]) continue;
-                    GL.Vertex3(x, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
-                    GL.Vertex3(x, y + 1, Const.DoodadLayer);
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
                 }
             }
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            return vertices;
         }
-
-        private void DrawAoEGrid() {
-            GL.Color4(1.0, 0.0, 0.0, 0.2);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            GL.Begin(BeginMode.Quads);
+        private List<VertexPos2DCol> DrawAoEGrid() {
+            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
+            Color4 col = new Color4(1f, 0f, 0f, 1f);
             for (int y = (int)Math.Max(hovery - AoERadius, 0); y < (int)Math.Min(hovery + AoERadius + 1, CurrentLevel.Height); y++) {
                 for (int x = (int)Math.Max(hoverx - AoERadius, 0); x < (int)Math.Min(hoverx + AoERadius + 1, CurrentLevel.Width); x++) {
                     if (!AoEMap[x, y]) continue;
-                    GL.Vertex3(x, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
-                    GL.Vertex3(x, y + 1, Const.DoodadLayer);
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
                 }
             }
-            GL.End();
-            GL.Disable(EnableCap.Blend);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            return vertices;
         }
-        private void DrawTravelGrid() {
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            GL.Begin(BeginMode.Quads);
+        private List<VertexPos2DCol> DrawTravelGrid() {
+            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
+            Color4 col = new Color4(0f, 1f, 0f, 1f);
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
                     if (DistMap[x, y] == -1) continue;
-                    GL.Vertex3(x, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y, Const.DoodadLayer);
-                    GL.Vertex3(x + 1, y + 1, Const.DoodadLayer);
-                    GL.Vertex3(x, y + 1, Const.DoodadLayer);
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
+                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
                 }
             }
-            GL.End();
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            return vertices;
         }
         private void DrawTravelPath() {
             if (lCurrentPath == null || lCurrentPath.Count == 0) return;
@@ -1081,14 +1096,14 @@ namespace SpaceMercs.MainWindow {
             GL.Vertex3(hoverx + 0.45, hovery + 0.55, Const.DoodadLayer);
             GL.End();
         }
-        private void DrawHoverFrame(int xpos, int ypos) {
-            double px = xpos + 0.5, py = ypos + 0.5;
-            double xSize = 1.0, ySize = 1.0;
+        private void DrawHoverFrame(ShaderProgram prog, int xpos, int ypos) {
+            float px = xpos + 0.5f, py = ypos + 0.5f;
+            float xSize = 1f, ySize = 1f;
             // Hovering over a large entity
             IEntity en = CurrentLevel.GetEntityAt(xpos, ypos);
             if (en != null && en.Size > 1) {
-                px = en.X + (en.Size / 2.0);
-                py = en.Y + (en.Size / 2.0);
+                px = en.X + (en.Size / 2f);
+                py = en.Y + (en.Size / 2f);
                 xSize = en.Size;
                 ySize = en.Size;
             }
@@ -1097,49 +1112,42 @@ namespace SpaceMercs.MainWindow {
                 int endx = xpos, startx = xpos;
                 while (startx - 1 > 0 && CurrentLevel.Map[startx - 1, ypos] == CurrentLevel.Map[xpos, ypos]) startx--;
                 while (endx + 1 < CurrentLevel.Width - 1 && CurrentLevel.Map[endx + 1, ypos] == CurrentLevel.Map[xpos, ypos]) endx++;
-                px = (startx + endx) / 2.0 + 0.5;
-                xSize = Math.Abs(startx - endx) + 1.0;
+                px = (startx + endx) / 2f + 0.5f;
+                xSize = Math.Abs(startx - endx) + 1f;
             }
             else if (CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.DoorVertical || CurrentLevel.Map[xpos, ypos] == MissionLevel.TileType.OpenDoorVertical) {
                 int endy = ypos, starty = ypos;
                 while (starty - 1 > 0 && CurrentLevel.Map[xpos, starty - 1] == CurrentLevel.Map[xpos, ypos]) starty--;
                 while (endy + 1 < CurrentLevel.Height - 1 && CurrentLevel.Map[xpos, endy + 1] == CurrentLevel.Map[xpos, ypos]) endy++;
-                py = (starty + endy) / 2.0 + 0.5;
-                ySize = Math.Abs(starty - endy) + 1.0;
+                py = (starty + endy) / 2f + 0.5f;
+                ySize = Math.Abs(starty - endy) + 1f;
             }
-            const double dFrame = 0.1;
-            if (CurrentAction == SoldierAction.Attack || CurrentAction == SoldierAction.Item) GL.Color3(1.0, 0.0, 0.0);
-            else GL.Color3(0.0, 1.0, 0.0);
-            double dx = -(xSize / 2.0);
-            double dy = -(ySize / 2.0);
-            GL.Begin(BeginMode.QuadStrip);
-            GL.Vertex3(px + dx, py + dy, Const.GUILayer);
-            GL.Vertex3(px + dx + dFrame, py + dy + dFrame, Const.GUILayer);
-            GL.Vertex3(px + dx, py + dy + ySize, Const.GUILayer);
-            GL.Vertex3(px + dx + dFrame, py + dy + (ySize - dFrame), Const.GUILayer);
-            GL.Vertex3(px + dx + xSize, py + dy + ySize, Const.GUILayer);
-            GL.Vertex3(px + dx + (xSize - dFrame), py + dy + (ySize - dFrame), Const.GUILayer);
-            GL.Vertex3(px + dx + xSize, py + dy, Const.GUILayer);
-            GL.Vertex3(px + dx + (xSize - dFrame), py + dy + dFrame, Const.GUILayer);
-            GL.Vertex3(px + dx, py + dy, Const.GUILayer);
-            GL.Vertex3(px + dx + dFrame, py + dy + dFrame, Const.GUILayer);
-            GL.End();
+            if (CurrentAction == SoldierAction.Attack || CurrentAction == SoldierAction.Item) prog.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));
+            else prog.SetUniform("flatColour", new Vector4(0f, 1f, 0f, 1f));
+            float dx = -(xSize / 2f);
+            float dy = -(ySize / 2f);
+
+            prog.SetUniform("textureEnabled", false);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(px + dx, py + dy, Const.EntityLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(xSize, ySize, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            SquareRing.Flat.BindAndDraw();
         }
-        private void DrawSelectionTile(double px, double py, double dSize) {
-            double d = -(dSize / 2.0);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Enable(EnableCap.Texture2D);
-            //if (iSelectionTexID == -1) iSelectionTexID = Textures.GenerateSelectionTexture();
+        private void DrawSelectionTile(ShaderProgram prog, float px, float py, float dSize) {
+            float d = -(dSize / 2f);
             GL.Enable(EnableCap.Blend);
-            GL.BindTexture(TextureTarget.Texture2D, iSelectionTexID);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(0.0, 0.0); GL.Vertex3(px + d, py + d, Const.DoodadLayer);
-            GL.TexCoord2(1.0, 0.0); GL.Vertex3(px + d, py + d + dSize, Const.DoodadLayer);
-            GL.TexCoord2(1.0, 1.0); GL.Vertex3(px + d + dSize, py + d + dSize, Const.DoodadLayer);
-            GL.TexCoord2(0.0, 1.0); GL.Vertex3(px + d + dSize, py + d, Const.DoodadLayer);
-            GL.End();
-            GL.Disable(EnableCap.Blend);
-            GL.Disable(EnableCap.Texture2D);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            GL.BindTexture(TextureTarget.Texture2D, Textures.SelectionTexture);
+            prog.SetUniform("texPos", 0f, 0f);
+            prog.SetUniform("texScale", 1f, 1f);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(px + d, py + d, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(dSize);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
         }
 
         // Setup mouse-hover context menu
