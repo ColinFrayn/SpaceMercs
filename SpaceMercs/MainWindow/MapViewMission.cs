@@ -739,29 +739,29 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Show GUI elements in the viewpoint of the map
-        private void ShowMapGUIElements(ShaderProgram prog, ShaderProgram progFlat) {
+        private void ShowMapGUIElements(ShaderProgram texProg, ShaderProgram flatProg) {
             // Mouse hover
             GL.Disable(EnableCap.DepthTest);
             Point pt = CurrentLevel.MouseHover;
             if (pt != Point.Empty && CurrentAction == SoldierAction.None) {
-                DrawHoverFrame(prog, pt.X, pt.Y);
+                DrawHoverFrame(texProg, pt.X, pt.Y);
             }
             if (SelectedEntity != null) {
-                DrawSelectionTile(prog, SelectedEntity.Location.X + SelectedEntity.Size / 2f, SelectedEntity.Location.Y + SelectedEntity.Size / 2f, SelectedEntity.Size);
+                DrawSelectionTile(texProg, SelectedEntity.Location.X + SelectedEntity.Size / 2f, SelectedEntity.Location.Y + SelectedEntity.Size / 2f, SelectedEntity.Size);
             }
 
             List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
             if (CurrentAction == SoldierAction.Attack) {
                 vertices.AddRange(DrawTargetGrid());
                 if (TargetMap[pt.X, pt.Y] == true) {
-                    DrawHoverFrame(prog, pt.X, pt.Y);
+                    DrawHoverFrame(texProg, pt.X, pt.Y);
                     if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0) vertices.AddRange(DrawAoEGrid());
                 }
             }
             else if (CurrentAction == SoldierAction.Item) {
                 vertices.AddRange(DrawTargetGrid());
                 if (TargetMap[pt.X, pt.Y] == true) {
-                    DrawHoverFrame(prog, pt.X, pt.Y);
+                    DrawHoverFrame(texProg, pt.X, pt.Y);
                     vertices.AddRange(DrawAoEGrid());
                 }
             }
@@ -795,8 +795,8 @@ namespace SpaceMercs.MainWindow {
                 }
                 if (ibGrid is null) ibGrid = new IndexBuffer(indices, false);
                 else ibGrid.SetData(indices);
-                progFlat.SetUniform("colourFactor", 1f);
-                GL.UseProgram(progFlat.ShaderProgramHandle);
+                flatProg.SetUniform("colourFactor", 1f);
+                GL.UseProgram(flatProg.ShaderProgramHandle);
                 GL.BindVertexArray(vaGrid.VertexArrayHandle);
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibGrid.IndexBufferHandle);
                 GL.DrawElements(PrimitiveType.Lines, ibGrid.IndexCount, DrawElementsType.UnsignedInt, 0);
@@ -804,8 +804,8 @@ namespace SpaceMercs.MainWindow {
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
             }
 
-            if (bViewDetection) CurrentLevel.DrawDetectionMap(DetectionMap);
-            if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(SelectedEntity);
+            if (bViewDetection) CurrentLevel.DrawDetectionMap(texProg, DetectionMap);
+            if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(texProg, SelectedEntity);
             GL.Enable(EnableCap.DepthTest);
         }
 
@@ -839,7 +839,7 @@ namespace SpaceMercs.MainWindow {
             DrawMissionToggles();
 
             // Warn that AI is running?
-            if (bAIRunning) {
+            if ( bAIRunning) {
                 DisplayAILabel(fullShaderProgram);
             }
             GL.Enable(EnableCap.DepthTest);
@@ -852,24 +852,25 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowEffects ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bViewDetection ? Color.White : Color.DimGray);
         }
-        private static void DisplayAILabel(ShaderProgram prog) {
-            return;
-            GL.PushMatrix();
-            GL.Translate(0.5, 0.02, Const.GUILayer);
-            GL.Scale(0.06, 0.06, 0.04);
-            GL.Color3(0.1, 0.1, 0.1);
-            GL.DepthMask(false);
-            GL.Begin(BeginMode.Quads);
-            GL.Vertex3(-1.8, 0.1, 0.0);
-            GL.Vertex3(1.8, 0.1, 0.0);
-            GL.Vertex3(1.8, 1.0, 0.0);
-            GL.Vertex3(-1.8, 1.0, 0.0);
-            GL.End();
-            GL.DepthMask(true);
-            GL.Color3(1.0, 1.0, 1.0);
-            GL.Rotate(180.0, Vector3d.UnitX);
-            TextRenderer.Draw("AI Running", Alignment.TopMiddle);
-            GL.PopMatrix();
+        private void DisplayAILabel(ShaderProgram prog) {
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("flatColour", new Vector4(0.1f, 0.1f, 0.1f, 1f));
+            GL.BindTexture(TextureTarget.Texture2D, Textures.SelectionTexture);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(0.4f, 0.02f, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.2f, 0.08f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+            TextRenderOptions tro = new TextRenderOptions() {
+                Alignment = Alignment.TopMiddle,
+                Aspect = Aspect,
+                TextColour = Color.White,
+                XPos = 0.5f,
+                YPos = 0.03f,
+                ZPos = 0.02f,
+                Scale = 0.04f
+            };
+            TextRenderer.DrawWithOptions("AI Running", tro);
         }
         private void ShowSelectedEntityDetails() {
             // Display the stats for the selected entity

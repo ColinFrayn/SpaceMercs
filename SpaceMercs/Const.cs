@@ -10,7 +10,7 @@ namespace SpaceMercs {
         public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Default = 1; Higher number increases encounter frequency. <=0 turns it off.
         public const bool DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
-        public const bool DEBUG_VIEW_ALL_CIVS = true;  // Set starting systems for all civs = visited
+        public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
         public const bool DEBUG_LOADS_OF_CASH = false;  // Start with loads of cash
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
         public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely randomise all items/mercs/missions at a colony

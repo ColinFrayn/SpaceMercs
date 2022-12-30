@@ -480,55 +480,40 @@ namespace SpaceMercs {
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Textured.BindAndDraw();
         }
-        public void DrawDetectionMap(bool[,] DetectionMap) {
-            return;
-            GL.Enable(EnableCap.Texture2D);
+        public void DrawDetectionMap(ShaderProgram prog, bool[,] DetectionMap) {
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Alert, true);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
                     if (!DetectionMap[x, y]) continue;
-                    GL.PushMatrix();
-                    GL.Translate(x + 0.5, y + 0.5, Const.GUILayer);
-                    GL.Begin(BeginMode.Quads);
-                    GL.TexCoord2(ts.X, ts.Y + ts.H);
-                    GL.Vertex3(-0.4, -0.4, 0);
-                    GL.TexCoord2(ts.X + ts.W, ts.Y + ts.H);
-                    GL.Vertex3(0.4, -0.4, 0);
-                    GL.TexCoord2(ts.X + ts.W, ts.Y);
-                    GL.Vertex3(0.4, 0.4, 0);
-                    GL.TexCoord2(ts.X, ts.Y);
-                    GL.Vertex3(-0.4, 0.4, 0);
-                    GL.End();
-                    GL.PopMatrix();
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.1f, y + 0.1f, Const.GUILayer);
+                    prog.SetUniform("model", pScaleM * pTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Textured.BindAndDraw();
                 }
             }
-            GL.End();
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.Blend);
         }
-        public void DrawSelectedEntityVis(IEntity en) {
-            return;
-            GL.Color4(1.0, 1.0, 1.0, 0.5);
+        public void DrawSelectedEntityVis(ShaderProgram prog, IEntity en) {
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 0.5f));
+            prog.SetUniform("textureEnabled", false);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.4f);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!en.CanSee(x, y)) continue;
-                    GL.PushMatrix();
-                    GL.Translate(x + 0.5, y + 0.5, Const.GUILayer);
-                    GL.Begin(BeginMode.Quads);
-                    GL.Vertex3(-0.2, -0.2, 0);
-                    GL.Vertex3(0.2, -0.2, 0);
-                    GL.Vertex3(0.2, 0.2, 0);
-                    GL.Vertex3(-0.2, 0.2, 0);
-                    GL.End();
-                    GL.PopMatrix();
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.3f, y + 0.3f, Const.GUILayer);
+                    prog.SetUniform("model", pScaleM * pTranslateM);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+                    Square.Textured.BindAndDraw();
                 }
             }
-            GL.End();
-            GL.Disable(EnableCap.Blend);
         }
         #endregion // Display
 

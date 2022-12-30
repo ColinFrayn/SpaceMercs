@@ -2,22 +2,16 @@
 ToDo List
 -------------------------------------------------
 
+For label, pass in optional Matrix4 for View?
+
 MapViewMission
-- CurrentLevel.DisplayEntities()
--- Creature.Display() : TEST, Label
--- Soldier.Display() : Label
-- ShowMapGUIElements()
--- DrawTargetGrid() : TEST - not showing
--- DrawAoEGrid() : TEST - not showing
--- DrawTravelGrid() : TEST - not showing
--- DrawTravelPath()
--- CurrentLevel.DrawDetectionMap()
--- CurrentLevel.DrawSelectedEntityVis()
-- Display visual effects
-- ShowOverlayGUI()
--- ShowSoldierPanels()
--- DisplayAILabel()
--- ShowSelectedEntityDetails() : TEST (creatures only)
+- Creature.Display() : Label, example sve?, large creatures e.g. SniperMisses save not in centre  
+- Soldier.Display() : Label, 
+- CurrentLevel.DrawDetectionMap() : TEST needs creatures
+- ShowSelectedEntityDetails() : TEST needs creatures
+- DrawTravelPath()
+- ShowSoldierPanels()
+- Display visual effects??
 
 Check all MenuItem.Enabled/Disabled
 
