@@ -36,7 +36,7 @@ namespace SpaceMercs {
 
         // Change the text to be shown on this button & update the texture. If it's the same then don't redo texture.
         public void PopupMessage(string strText) {
-            List<string> lines = new List<string>(strText.Split('\n'));
+            List<string> lines = new List<string>(strText.Replace("\r", string.Empty).Split('\n'));
             PopupMessage(lines);
         }
         public void PopupMessage(IEnumerable<string> lines) {
@@ -67,13 +67,6 @@ namespace SpaceMercs {
         }
         private void SetupBoxes(IEnumerable<string> lines) {
             Lines = new List<string>(lines);
-
-            //float maxWidth = 0f;
-            //foreach (string str in Lines) {
-            //    TextMeasure tm = TextRenderer.MeasureText(str);
-            //    if (tm.Width > maxWidth) maxWidth = tm.Width;
-            //}
-            // TODO Setup box width based off text width??
 
             BoxHeight = ButtonHeight + (ButtonBorder * 2f) + MessageFontScale * 1.15f * Lines.Count + TopBorder;
             if (BoxHeight > 0.6f) BoxHeight = 0.6f;
@@ -106,16 +99,19 @@ namespace SpaceMercs {
 
             // Draw the button text at the correct location, horizontally centred
             float aspect = (float)WindowWidth / (float)WindowHeight;
+            float ModifiedFontScale = MessageFontScale;
+
             TextRenderOptions tro = new TextRenderOptions() {
-                Alignment = Alignment.TopMiddle,
+            Alignment = Alignment.TopMiddle,
                 Aspect = aspect,
                 TextColour = Color.White,
                 XPos = 0.5f,
                 YPos = BoxY + TopBorder,
-                ZPos = 0.015f,
-                Scale = MessageFontScale
+                ZPos = 0.015f
             };
             foreach (string str in Lines) {
+                TextMeasure tm = TextRenderer.MeasureText(str);
+                tro.Scale = ModifiedFontScale * (tm.Width > 1000f ? 1000f/tm.Width : 1f);
                 TextRenderer.DrawWithOptions(str, tro);
                 tro.YPos += MessageFontScale * 1.15f;
             }

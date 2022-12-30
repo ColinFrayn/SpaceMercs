@@ -210,7 +210,7 @@ namespace SpaceMercs.MainWindow {
             gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Display the current date and time
-            TextRenderer.DrawAt(string.IsNullOrEmpty(DebugString) ? Const.dtTime.ToString("F") : DebugString, Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Display the player's remaining cash reserves
             TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);

@@ -384,7 +384,7 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
-            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.75f, Const.DoodadLayer);
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.65f, Const.DoodadLayer);
             pScaleM = Matrix4.CreateScale(0.3f, -0.4f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
@@ -401,7 +401,7 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
-            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.75f, Const.DoodadLayer);
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.3f, Const.DoodadLayer);
             pScaleM = Matrix4.CreateScale(0.3f, 0.4f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);

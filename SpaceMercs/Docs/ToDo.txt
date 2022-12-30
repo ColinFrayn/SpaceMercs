@@ -4,13 +4,12 @@ ToDo List
 
 MapViewMission
 - CurrentLevel.DisplayEntities()
--- Make effects label look better
--- Creature.Display() : TEST, Label, Effects
+-- Creature.Display() : TEST, Label
 -- Soldier.Display() : Label
 - ShowMapGUIElements()
--- DrawTargetGrid() : TEST - how to display
--- DrawAoEGrid() : TEST - how to display
--- DrawTravelGrid() : TEST - how to display
+-- DrawTargetGrid() : TEST - not showing
+-- DrawAoEGrid() : TEST - not showing
+-- DrawTravelGrid() : TEST - not showing
 -- DrawTravelPath()
 -- CurrentLevel.DrawDetectionMap()
 -- CurrentLevel.DrawSelectedEntityVis()
@@ -18,7 +17,7 @@ MapViewMission
 - ShowOverlayGUI()
 -- ShowSoldierPanels()
 -- DisplayAILabel()
--- ShowSelectedEntityDetails()
+-- ShowSelectedEntityDetails() : TEST (creatures only)
 
 Check all MenuItem.Enabled/Disabled
 

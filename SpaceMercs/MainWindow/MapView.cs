@@ -80,6 +80,7 @@ namespace SpaceMercs.MainWindow {
             pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
             pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
             pos2DCol4ShaderProgram.SetUniform("projection", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
             flatColourShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3, ShaderCode.PixelShaderFlatColour);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);

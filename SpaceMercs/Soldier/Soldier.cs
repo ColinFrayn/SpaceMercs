@@ -98,12 +98,9 @@ namespace SpaceMercs {
                 TextRenderer.Draw(Name, Alignment.BottomMiddle);
             }
             if (bStatBars) {
-                Matrix4 pbTranslateM = Matrix4.CreateTranslation(X, Y, Const.EntityLayer);
-                Matrix4 pbScaleM = Matrix4.CreateScale((float)Race.Scale);
-                prog.SetUniform("model", pbScaleM * pbTranslateM);
-                GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.7f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
-                GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.8f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
-                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.9f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.1f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.3f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
+                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.5f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
             }
 
             if (bShowEffects && _Effects.Any()) {

@@ -73,6 +73,7 @@ namespace SpaceMercs {
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.TexturedCentred.BindAndDraw();
+            prog.SetUniform("textureEnabled", false);
 
             if (bLabel && false) { // DEBUG
                 GL.Translate(X + ((float)Type.Size / 2), Y - (0.015 * fViewHeight), Const.GUILayer);
@@ -82,12 +83,9 @@ namespace SpaceMercs {
             }
             if (bStatBars) {
                 prog.SetUniform("textureEnabled", false);
-                Matrix4 pbTranslateM = Matrix4.CreateTranslation(X, Y, Const.EntityLayer);
-                Matrix4 pbScaleM = Matrix4.CreateScale((float)Type.Scale);
-                prog.SetUniform("model", pbScaleM * pbTranslateM);
-                GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.7f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
-                GraphicsFunctions.DisplayBicolourFractBar(prog, -0.5f, 0.8f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
-                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog , -0.5f, 0.9f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.1f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.3f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
+                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.5f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
             }
             if (bShowEffects && _Effects.Any()) {
                 //GL.Translate(X + (float)Type.Size, Y + ((float)Type.Size * 0.25f), Const.EntityLayer);

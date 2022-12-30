@@ -203,6 +203,7 @@ namespace SpaceMercs.MainWindow {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
             fullShaderProgram.SetUniform("projection", projectionM);
+            pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
 
             Matrix4 translateM = Matrix4.CreateTranslation(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
             fullShaderProgram.SetUniform("view", translateM);
@@ -212,12 +213,13 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("texScale", 1f, 1f);
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", false);
+            pos2DCol4ShaderProgram.SetUniform("view", translateM);
 
             // Display the scene
             CurrentLevel.DisplayMap(fullShaderProgram);
 
             // Show any indicators on top of the action in the map view
-            ShowMapGUIElements(fullShaderProgram);
+            ShowMapGUIElements(fullShaderProgram, pos2DCol4ShaderProgram);
 
             // Show creatures/soldiers
             CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
@@ -228,8 +230,6 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Draw any static GUI elements (overlay)
-            gpSubMenu.GetItem(I_Options)?.Disable();
-            gpSubMenu.GetItem(I_Mission)?.Enable();
             ShowOverlayGUI();
         }
 
@@ -253,6 +253,30 @@ namespace SpaceMercs.MainWindow {
                 if (IsKeyPressed(Keys.Space)) EndTurn();
             }
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
+            if (IsKeyPressed(Keys.L)) {
+                if (bShowEntityLabels) { bShowEntityLabels = false; }
+                else { bShowEntityLabels = true; }
+            }
+            if (IsKeyPressed(Keys.S)) {
+                if (bShowStatBars) { bShowStatBars = false; }
+                else { bShowStatBars = true; }
+            }
+            if (IsKeyPressed(Keys.T)) {
+                if (bShowTravel) { bShowTravel = false; }
+                else { bShowTravel = true; }
+            }
+            if (IsKeyPressed(Keys.P)) {
+                if (bShowPath) { bShowPath = false; }
+                else { bShowPath = true; }
+            }
+            if (IsKeyPressed(Keys.E)) {
+                if (bShowEffects) { bShowEffects = false; }
+                else { bShowEffects = true; }
+            }
+            if (IsKeyPressed(Keys.D)) {
+                if (bViewDetection) { bViewDetection = false; }
+                else { bViewDetection = true; }
+            }
         }
         private void CheckHoverMission() {
             if (gpSelect != null && gpSelect.Active) return;
@@ -425,7 +449,6 @@ namespace SpaceMercs.MainWindow {
                     s.UseItem(ActionItem);
                     CurrentAction = SoldierAction.None;
                     ActionItem = null;
-                    // TODO glMapView.Invalidate();
                     // Now apply the effect
                     ApplyItemEffectToMap(s, temp, hoverx, hovery);
                     if (UpdateDetectionForLocation(hoverx, hovery, 0, Const.BaseDetectionRange)) {
@@ -443,13 +466,13 @@ namespace SpaceMercs.MainWindow {
                         else if (!bDragging) SetSelectedEntity(CurrentLevel.GetHoverEntity());
                     }
                 }
+                CheckMenuClick();
             }
             if (SelectedEntity is Soldier) {
                 GenerateDistMap(SelectedEntity as Soldier);
                 GenerateDetectionMap();
             }
             CheckHoverMission();
-            // TODO glMapView.Invalidate();
         }
         private void MouseDown_Mission(MouseButtonEventArgs e) {
             if (e.Button == MouseButton.Right) {
@@ -716,7 +739,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Show GUI elements in the viewpoint of the map
-        private void ShowMapGUIElements(ShaderProgram prog) {
+        private void ShowMapGUIElements(ShaderProgram prog, ShaderProgram progFlat) {
             // Mouse hover
             GL.Disable(EnableCap.DepthTest);
             Point pt = CurrentLevel.MouseHover;
@@ -736,22 +759,24 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             else if (CurrentAction == SoldierAction.Item) {
-                DrawTargetGrid();
+                vertices.AddRange(DrawTargetGrid());
                 if (TargetMap[pt.X, pt.Y] == true) {
                     DrawHoverFrame(prog, pt.X, pt.Y);
-                    DrawAoEGrid();
+                    vertices.AddRange(DrawAoEGrid());
                 }
             }
             else {
                 if (bShowTravel && SelectedEntity != null && SelectedEntity is Soldier) {
-                    DrawTravelGrid();
+                    vertices.AddRange(DrawTravelGrid());
                 }
                 if (bShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
                     if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
-                        DrawTravelPath();
+                        DrawTravelPath(); // TODO
                     }
                 }
             }
+
+            // Set up the overlay grids as an index buffer
             int numGrids = vertices.Count / 4;
             if (numGrids > 0) {
                 if (vbGrid is null) vbGrid = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
@@ -770,7 +795,8 @@ namespace SpaceMercs.MainWindow {
                 }
                 if (ibGrid is null) ibGrid = new IndexBuffer(indices, false);
                 else ibGrid.SetData(indices);
-                GL.UseProgram(prog.ShaderProgramHandle);
+                progFlat.SetUniform("colourFactor", 1f);
+                GL.UseProgram(progFlat.ShaderProgramHandle);
                 GL.BindVertexArray(vaGrid.VertexArrayHandle);
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibGrid.IndexBufferHandle);
                 GL.DrawElements(PrimitiveType.Lines, ibGrid.IndexCount, DrawElementsType.UnsignedInt, 0);
@@ -791,8 +817,6 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
 
-            return; // TODO
-
             // Show the selected entity details if it's a creature
             if (SelectedEntity != null && SelectedEntity is Creature) {
                 ShowSelectedEntityDetails();
@@ -802,16 +826,17 @@ namespace SpaceMercs.MainWindow {
             ShowSoldierPanels(fullShaderProgram);
 
             // Show the context menu and other buttons
+            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (gbEndTurn != null) gbEndTurn.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             if (ThisMission?.IsComplete ?? false) {
                 gbEndMission.Activate();
-                //gbEndMission.SetStipple(CurrentLevel.AlertedEnemies);
                 gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             }
             else gbEndMission.Deactivate();
+            DrawMissionToggles();
 
             // Warn that AI is running?
             if (bAIRunning) {
@@ -819,7 +844,16 @@ namespace SpaceMercs.MainWindow {
             }
             GL.Enable(EnableCap.DepthTest);
         }
+        private void DrawMissionToggles() {
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 0f, bShowEntityLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 1f, bShowStatBars ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTravel ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowPath ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowEffects ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bViewDetection ? Color.White : Color.DimGray);
+        }
         private static void DisplayAILabel(ShaderProgram prog) {
+            return;
             GL.PushMatrix();
             GL.Translate(0.5, 0.02, Const.GUILayer);
             GL.Scale(0.06, 0.06, 0.04);
@@ -859,6 +893,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawWithOptions(strStats, tro);
         }
         private void ShowSoldierPanels(ShaderProgram prog) {
+            return;
             // Show the details of the soldiers
             float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
             IEntity hover = CurrentLevel.GetHoverEntity();
@@ -911,6 +946,9 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void InitialiseGUIButtons() {
+            gpSubMenu.GetItem(I_View)?.Disable();
+            gpSubMenu.GetItem(I_Options)?.Disable();
+            gpSubMenu.GetItem(I_Mission)?.Enable();
             // Initialise all on startup
             if (!bGUIButtonsInitialised) {
                 lButtons.Clear();
@@ -1080,6 +1118,9 @@ namespace SpaceMercs.MainWindow {
         private void DrawTravelPath() {
             if (lCurrentPath == null || lCurrentPath.Count == 0) return;
             if (SelectedEntity == null || !(SelectedEntity is Soldier)) return;
+
+            return;
+
             GL.Color3(0.0, 1.0, 0.0);
             GL.Begin(BeginMode.LineStrip);
             GL.Vertex3(SelectedEntity.X + 0.5, SelectedEntity.Y + 0.5, Const.DoodadLayer);

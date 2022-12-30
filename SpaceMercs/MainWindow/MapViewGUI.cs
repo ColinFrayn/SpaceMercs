@@ -12,7 +12,6 @@ namespace SpaceMercs.MainWindow {
         private readonly int iGUIHoverN = -1; // What is this??
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
         private AstronomicalObject lastAOHover = null;
-        private string DebugString = string.Empty; // DEBUG
 
         #region Menu Codes
         // GUIPanel for main menu
@@ -63,7 +62,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(string.IsNullOrEmpty(DebugString) ? Const.dtTime.ToString("F") : DebugString, Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
+            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.bMapSetup) return;
@@ -84,6 +83,7 @@ namespace SpaceMercs.MainWindow {
             // Main menu (if not travelling)
             if (TravelDetails == null) {
                 gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+                gpSubMenu.GetItem(I_View)?.Enable();
                 gpSubMenu.GetItem(I_Options)?.Enable();
                 gpSubMenu.GetItem(I_Mission)?.Disable();
             }
