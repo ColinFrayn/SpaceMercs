@@ -5,8 +5,7 @@ ToDo List
 For label, pass in optional Matrix4 for View?
 
 MapViewMission
-- Creature.Display() : Label, example sve?, large creatures e.g. SniperMisses save not in centre  
-- Soldier.Display() : Label, 
+- Creature.Display() : Example sve?, large creatures e.g. SniperMisses save not in centre; Test Label (esp size>1)
 - CurrentLevel.DrawDetectionMap() : TEST needs creatures
 - ShowSelectedEntityDetails() : TEST needs creatures
 - DrawTravelPath()

@@ -444,8 +444,10 @@ namespace SpaceMercs {
                 if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(prog, pt);
             }
             IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
+            float aspect = ParentMission?.CurrentMapView?.Aspect ?? 1f;
+            Matrix4 viewM = ParentMission?.CurrentMapView?.ViewMatrix ?? Matrix4.Identity;
             foreach (IEntity e in lEntities) {
-                if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight);
+                if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight, aspect, viewM);
             }
         }
         private void DisplayItemStack(ShaderProgram prog, Point pt) {

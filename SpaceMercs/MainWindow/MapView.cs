@@ -286,6 +286,12 @@ namespace SpaceMercs.MainWindow {
             GL.DepthFunc(DepthFunction.Lequal);
             GL.DepthMask(true);
         }
+
+        public Matrix4 ViewMatrix {
+            get {
+                return Matrix4.CreateTranslation(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
+            }
+        }
         #endregion // Rendering
 
         #region Input Handling

@@ -205,7 +205,7 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("projection", projectionM);
             pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
 
-            Matrix4 translateM = Matrix4.CreateTranslation(-fMissionViewX, -fMissionViewY, -fMissionViewZ);
+            Matrix4 translateM = this.ViewMatrix;
             fullShaderProgram.SetUniform("view", translateM);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
             fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));

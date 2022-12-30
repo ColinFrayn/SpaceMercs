@@ -19,6 +19,9 @@ namespace SpaceMercs {
         public float Scale { get; set; } = 1f;
         public Alignment Alignment { get; set; } = Alignment.TopLeft;
         public float Aspect { get; set; } = 1f;
+        public Matrix4? View { get; set; } = null;
+        public Matrix4? Projection { get; set; } = null;
+        public bool FlipY { get; set; } = false;
 
         // TBC
         //public float Border { get; set; }
@@ -119,7 +122,7 @@ void main()
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             // Setup the projection so that the screen coordinates are unitised
-            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            Matrix4 projectionM = tro.Projection ?? Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             textLabelShaderProgram.SetUniform("projection", projectionM);
 
             // Setup the desired font colour in the shader program
@@ -132,7 +135,7 @@ void main()
             // Generate the scale matrix based on the desired scale size, bound size, text size etc.
             float yScale = tro.Scale;
             float xScale = tro.Scale / tro.Aspect;
-            Matrix4 scaleM = Matrix4.CreateScale(new Vector3(xScale / pixelSize, yScale / pixelSize, 1.0f));
+            Matrix4 scaleM = Matrix4.CreateScale(new Vector3(xScale / pixelSize, (tro.FlipY ? -1f : 1f) * yScale / pixelSize, 1.0f));
 
             // Calculate font location
             float yShift = tro.YPos;
@@ -151,7 +154,7 @@ void main()
 
             // Calculate translation to align us correctly and scale to achieve the desired size
             Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xShift, yShift, tro.ZPos));
-            Matrix4 viewM = scaleM * transOriginM;
+            Matrix4 viewM = scaleM * transOriginM * (tro.View ?? Matrix4.Identity);
             textLabelShaderProgram.SetUniform("view", viewM);
 
             // --- Render the actual text aligned at the origin line, using the selected font ---

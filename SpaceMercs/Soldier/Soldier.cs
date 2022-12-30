@@ -71,13 +71,15 @@ namespace SpaceMercs {
         }
         public void SetFacing(Utils.Direction d) { Facing = Utils.DirectionToAngle(d); }
         public void SetFacing(double d) { Facing = d; }
-        public void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight) {
+        public void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight, float aspect, Matrix4 viewM) {
             if (iTextureID > -1 && (bShieldsInTexture != (Shields > 0.0))) { GL.DeleteTexture(iTextureID); iTextureID = -1; }
             if (iTextureID == -1) {
                 iTextureID = Textures.GenerateSoldierTexture(this);
                 bShieldsInTexture = (Shields > 0.0);
             }
             GL.BindTexture(TextureTarget.Texture2D, iTextureID);
+            GL.Enable(EnableCap.Blend);
+            GL.Disable(EnableCap.DepthTest);
 
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
@@ -91,16 +93,25 @@ namespace SpaceMercs {
             Square.TexturedCentred.BindAndDraw();
             prog.SetUniform("textureEnabled", false);
 
-            if (bLabel && false) { // DEBUG
-                GL.Translate(X + 0.5, Y - (0.015 * fViewHeight), Const.GUILayer);
-                double lScale = fViewHeight / 50.0;
-                GL.Scale(lScale, lScale, lScale);
-                TextRenderer.Draw(Name, Alignment.BottomMiddle);
+            if (bLabel) {
+                TextRenderOptions tro = new TextRenderOptions() {
+                    Alignment = Alignment.BottomMiddle,
+                    Aspect = 1f,
+                    TextColour = Color.White,
+                    XPos = X + 0.5f,
+                    YPos = Y - 0f,
+                    ZPos = 0.02f,
+                    Scale = 0.35f,
+                    FlipY = true,
+                    Projection = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, aspect, 0.05f, 5000.0f),
+                    View = viewM
+                };
+                TextRenderer.DrawWithOptions(Name, tro);
             }
             if (bStatBars) {
                 GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.1f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
-                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.3f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
-                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.5f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.25f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
+                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.4f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
             }
 
             if (bShowEffects && _Effects.Any()) {

@@ -1,7 +1,5 @@
-﻿using SpaceMercs.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using OpenTK.Mathematics;
+using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
     public enum StatType { Strength = 1, Agility = 2, Intelligence = 3, Toughness = 4, Endurance = 5, Health = 6, Stamina = 7, Attack = 8, Defence = 9 };
@@ -38,7 +36,7 @@ namespace SpaceMercs {
         void SetLocation(Point p);
         void SetFacing(Utils.Direction d);
         void SetFacing(double d);
-        void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight);
+        void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight, float aspect, Matrix4 viewM);
         void ResetForBattle();
         double RangeTo(IEntity en);
         double RangeTo(Point pt);
