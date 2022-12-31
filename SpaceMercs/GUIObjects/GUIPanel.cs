@@ -104,6 +104,7 @@ namespace SpaceMercs {
             GL.Disable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
+            prog.SetUniform("view", Matrix4.Identity);
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("lightEnabled", false);
 

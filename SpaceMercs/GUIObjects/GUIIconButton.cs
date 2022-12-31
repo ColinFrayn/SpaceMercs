@@ -1,20 +1,22 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
+using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class GUIIconButton : GUIObject {
-        public double ButtonX, ButtonY;
-        public double ButtonWidth, ButtonHeight;
+        public float ButtonX, ButtonY;
+        public float ButtonWidth, ButtonHeight;
         public bool bState;
         public bool bBlend;
         private int iTexID;
-        private readonly double TX, TY, TH, TW;
+        private readonly float TX, TY, TH, TW;
         public object? InternalData;
         public delegate void GUIIconButton_Trigger(GUIIconButton self);
         public GUIIconButton_Trigger? Trigger = null;
 
-        public GUIIconButton(GameWindow parentWindow, TexSpecs ts, double x, double y, double w, double h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
+        public GUIIconButton(GameWindow parentWindow, TexSpecs ts, float x, float y, float w, float h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
             TX = ts.X;
             TY = ts.Y;
             TW = ts.W;
@@ -29,7 +31,7 @@ namespace SpaceMercs {
             bBlend = true;
             iTexID = ts.ID;
         }
-        public GUIIconButton(GameWindow parentWindow, int TextureID, double tx, double ty, double tw, double th, double x, double y, double w, double h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
+        public GUIIconButton(GameWindow parentWindow, int TextureID, float tx, float ty, float tw, float th, float x, float y, float w, float h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
             TX = tx;
             TY = ty;
             TW = tw;
@@ -58,7 +60,6 @@ namespace SpaceMercs {
             double xpos = (double)x / (double)WindowWidth, ypos = (double)y / (double)WindowHeight;
 
             // Set up transparency
-            GL.Enable(EnableCap.Texture2D);
             if (bBlend) {
                 GL.Enable(EnableCap.Blend);
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -66,33 +67,35 @@ namespace SpaceMercs {
             else {
                 GL.Disable(EnableCap.Blend);
             }
-
             GL.Disable(EnableCap.DepthTest);
+            GL.Disable(EnableCap.Blend);
+
+            // Draw the button background
+            Vector4 col = new Vector4(1f, 1f, 1f, Alpha);
+            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) col = new Vector4(0.2f, 1f, 0.4f, Alpha);
+            else if (bState) col = new Vector4(1f, 0.2f, 0.2f, Alpha);
+
+            prog.SetUniform("lightEnabled", false);
+            prog.SetUniform("textureEnabled", true);
+            Matrix4 translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.005f);
+            Matrix4 scaleM = Matrix4.CreateScale(ButtonWidth, ButtonHeight, 1f);
+            Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", col);
+            prog.SetUniform("texPos", TX, TY);
+            prog.SetUniform("texScale", TW, TH);
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, iTexID);
-            if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) GL.Color4(0.2f, 1.0f, 0.4f, Alpha);
-            else if (bState) GL.Color4(1.0f, 0.2f, 0.2f, Alpha);
-            else GL.Color4(1.0f, 1.0f, 1.0f, Alpha);
-            GL.Begin(BeginMode.Quads);
-            GL.TexCoord2(TX, TY);
-            GL.Vertex2(ButtonX, ButtonY);
-            GL.TexCoord2(TX + TW, TY);
-            GL.Vertex2(ButtonX + ButtonWidth, ButtonY);
-            GL.TexCoord2(TX + TW, TY + TH);
-            GL.Vertex2(ButtonX + ButtonWidth, ButtonY + ButtonHeight);
-            GL.TexCoord2(TX, TY + TH);
-            GL.Vertex2(ButtonX, ButtonY + ButtonHeight);
-            GL.End();
-            GL.Disable(EnableCap.Texture2D);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.BindAndDraw();
 
-            GL.Color4(0.8f, 0.8f, 0.8f, Alpha);
-            GL.Begin(BeginMode.LineLoop);
-            GL.Vertex2(ButtonX, ButtonY);
-            GL.Vertex2(ButtonX + ButtonWidth, ButtonY);
-            GL.Vertex2(ButtonX + ButtonWidth, ButtonY + ButtonHeight);
-            GL.Vertex2(ButtonX, ButtonY + ButtonHeight);
-            GL.End();
-            GL.Enable(EnableCap.DepthTest);
+            prog.SetUniform("textureEnabled", false);
+            translateM = Matrix4.CreateTranslation(ButtonX, ButtonY, 0.01f);
+            modelM = scaleM * translateM;
+            prog.SetUniform("model", modelM);
+            prog.SetUniform("flatColour", new Vector4(0.8f, 0.8f, 0.8f, Alpha));
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Lines.BindAndDraw();
         }
 
         // See if there's anything that needs to be done for the slider bar after a L-click

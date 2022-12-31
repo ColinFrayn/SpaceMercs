@@ -364,14 +364,14 @@ namespace SpaceMercs {
             if (fract < 0f) fract = 0f;
             if (fract > 1f) fract = 1f;
             Matrix4 translateM = Matrix4.CreateTranslation(fTLCX, fTLCY, 0f);
-            Matrix4 scaleM = Matrix4.CreateScale(fWidth * fract, fHeight, 1f);
+            Matrix4 scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
             if (fract < 1f) {
                 prog.SetUniform("model", scaleM * translateM);
                 prog.SetUniform("flatColour", bg);
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.Flat.BindAndDraw();
             }
-            scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
+            scaleM = Matrix4.CreateScale(fWidth * fract, fHeight, 1f);
             prog.SetUniform("model", scaleM * translateM);
             prog.SetUniform("flatColour", col);
             GL.UseProgram(prog.ShaderProgramHandle);

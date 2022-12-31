@@ -132579,13 +132579,13 @@
  <Soldiers>
 <Soldier Name="Carek Thornwind">
  <OnMission/>
- <Location X="23" Y="19"/>
+ <Location X="18" Y="14"/>
  <Health>24.8917007830398</Health>
- <Stamina>32</Stamina>
+ <Stamina>5.920070631916147</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>270</Facing>
  <Level>8</Level>
- <XP>95872</XP>
+ <XP>95955</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>15,15,11,12,14</Stats>
@@ -132631,7 +132631,7 @@
 <Weapon Type="Automatic Rifle" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">705</Exp>
+  <Exp Type="Automatic Rifle">708</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Perception">2</Exp>
@@ -132640,16 +132640,17 @@
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="John Roberts">
  <OnMission/>
- <Location X="17" Y="15"/>
+ <Location X="16" Y="13"/>
  <Health>25.1367909225038</Health>
- <Stamina>1.8258352847388362</Stamina>
+ <Stamina>0.316159467224324</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>360</Facing>
  <Level>7</Level>
- <XP>89795</XP>
+ <XP>89878</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>14,16,10,16,12</Stats>
@@ -132716,13 +132717,13 @@
 </Soldier>
 <Soldier Name="Quin Davies">
  <OnMission/>
- <Location X="9" Y="11"/>
+ <Location X="17" Y="15"/>
  <Health>10.0658017046257</Health>
- <Stamina>8</Stamina>
+ <Stamina>30</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>274.76364169072616</Facing>
  <Level>7</Level>
- <XP>82198</XP>
+ <XP>82281</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,10,19,12,13</Stats>
@@ -132751,7 +132752,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">82</Exp>
-  <Exp Type="Sniper Rifle">629</Exp>
+  <Exp Type="Sniper Rifle">630</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -132759,17 +132760,16 @@
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Zoe Brown">
  <OnMission/>
- <Location X="23" Y="21"/>
+ <Location X="17" Y="14"/>
  <Health>23.6270437588308</Health>
  <Stamina>30</Stamina>
  <Shields>0</Shields>
- <Facing>206.565051177078</Facing>
+ <Facing>-90</Facing>
  <Level>7</Level>
- <XP>73785</XP>
+ <XP>73868</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>13,12,15,16,13</Stats>
@@ -132966,18 +132966,15 @@
  <Weapon>Axe</Weapon>
 </Creature>
 <Creature Type="Enforcer">
- <Location X="19" Y="3"/>
+ <Location X="18" Y="13"/>
+ <Health>29.18</Health>
  <Level>6</Level>
- <Facing>334</Facing>
+ <Facing>90</Facing>
  <OverrideRace>Ursalon</OverrideRace>
  <Weapon>Chainsword</Weapon>
-</Creature>
-<Creature Type="Enforcer">
- <Location X="18" Y="3"/>
- <Level>6</Level>
- <Facing>146</Facing>
- <OverrideRace>Ursalon</OverrideRace>
- <Weapon>Chainsword</Weapon>
+ <Target X="18" Y="14"/>
+ <Investigate X="18" Y="14"/>
+ <Alert/>
 </Creature>
 <Creature Type="Rogue">
  <Location X="34" Y="4"/>
@@ -133046,6 +133043,14 @@
 <Stash X="21" Y="20">
 <StashItem N="1">
 <Corpse Type="Mercenary" Level="6"/>
+</StashItem>
+</Stash>
+<Stash X="17" Y="13">
+<StashItem N="1">
+<Corpse Type="Enforcer" Level="6"/>
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Chitin" Level="1"/>
 </StashItem>
 </Stash>
 </Stashes>

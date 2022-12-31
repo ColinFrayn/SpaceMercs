@@ -384,8 +384,8 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
-            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.65f, Const.DoodadLayer);
-            pScaleM = Matrix4.CreateScale(0.3f, -0.4f, 1f);
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.3f, Const.DoodadLayer);
+            pScaleM = Matrix4.CreateScale(0.3f, 0.4f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
             Triangle.Flat.BindAndDraw();
@@ -401,8 +401,8 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
 
             prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
-            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.3f, Const.DoodadLayer);
-            pScaleM = Matrix4.CreateScale(0.3f, 0.4f, 1f);
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.5f, p.Y + 0.65f, Const.DoodadLayer);
+            pScaleM = Matrix4.CreateScale(0.3f, -0.4f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
             Triangle.Flat.BindAndDraw();
@@ -489,12 +489,12 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", ts.X, ts.Y);
             prog.SetUniform("texScale", ts.W, ts.H);
-            Matrix4 pScaleM = Matrix4.CreateScale(0.8f);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
                     if (!DetectionMap[x, y]) continue;
-                    Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.1f, y + 0.1f, Const.GUILayer);
+                    Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.1f, y + 0.9f, Const.GUILayer);
                     prog.SetUniform("model", pScaleM * pTranslateM);
                     GL.UseProgram(prog.ShaderProgramHandle);
                     Square.Textured.BindAndDraw();

@@ -5,7 +5,7 @@ namespace SpaceMercs.Graphics.Shapes {
         private static GLShape? _squareRing = null;
         private static GLShape? _thinRing = null;
         public static GLShape Flat { get { if (_squareRing is null) { _squareRing = Build(0.15f); } return _squareRing; } }
-        public static GLShape Thin { get { if (_thinRing is null) { _thinRing = Build(0.05f); } return _thinRing; } }
+        public static GLShape Thin { get { if (_thinRing is null) { _thinRing = Build(0.025f); } return _thinRing; } }
 
         private static GLShape Build(float border) {
             VertexPos3D[] vertices = new VertexPos3D[] {

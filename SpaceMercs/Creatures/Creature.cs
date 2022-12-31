@@ -268,9 +268,9 @@ namespace SpaceMercs {
                     _Effects.Add(new Effect(eff));
                 }
             }
-            double TotalDam = InflictDamage(AllDam);
-            if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2.0), Y + (Size / 2.0), new Dictionary<string, object>() { { "Value", TotalDam } });
-            else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2.0), Y + (Size / 2.0), new Dictionary<string, object>() { { "Value", -TotalDam } });
+            float TotalDam = (float)InflictDamage(AllDam);
+            if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+            else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
         }
 
         // Creature-specific
@@ -491,8 +491,8 @@ namespace SpaceMercs {
             if (EquippedWeapon == null) playSound("Punches");
             else playSound(EquippedWeapon.Type.SoundEffect);
             if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
-                double pow = EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0);
-                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5 }, { "TX", en.X + 0.5 }, { "FY", Y + 0.5 }, { "TY", en.Y + 0.5 }, { "Power", pow }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
+                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f }, { "Power", pow }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
             }
 
             // Do the attack
@@ -504,7 +504,7 @@ namespace SpaceMercs {
             int delay = (int)(RangeTo(en) * 25.0);
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
             Thread.Sleep(delay);
-            effectFactory(VisualEffect.EffectType.Damage, en.X + (en.Size / 2.0), en.Y + (en.Size / 2.0), new Dictionary<string, object>() { { "Value", TotalDam } });
+            effectFactory(VisualEffect.EffectType.Damage, en.X + (en.Size / 2f), en.Y + (en.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
 
             // Play sound
             if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
@@ -672,7 +672,7 @@ namespace SpaceMercs {
                 if (e.Damage != 0.0) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = InflictDamage(AllDam);
-                    fact(VisualEffect.EffectType.Damage, X + (Size / 2.0), Y + (Size / 2.0), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (TotalDam > 0.0) playSound("Grunt");
                     if (Health <= 0.0) break; // If this effect killed this creature, stop here
                 }

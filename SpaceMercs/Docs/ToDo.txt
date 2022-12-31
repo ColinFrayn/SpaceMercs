@@ -3,12 +3,6 @@ ToDo List
 -------------------------------------------------
 
 MapViewMission
-- Creature.Display() : Example sve?, large creatures e.g. SniperMisses save not in centre; Test Label (esp size>1)
-- CurrentLevel.DrawDetectionMap() : TEST needs creatures
-- ShowSelectedEntityDetails() : TEST needs creatures
-- Soldier.DisplaySoldierDetails() : Half done
-- VisualEffect.DisplayDamage()
-- VisualEffect.DisplayHealing()
 - VisualEffect.DisplayShotLine()
 - Test handling of large creatures
 
@@ -32,6 +26,7 @@ Travel
 
 GUIPanel
 GUIButton
+GUIIconButton
 GUIMessageBox
 IconPanelIcon (const pixel size)
 TextPanelItem
@@ -56,6 +51,8 @@ Got a crash doing ship battle and disposing something
 ----------
 Backburner
 ----------
+
+Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
 
 Travel.DrawBattle() : Convert Frag to a vertex array for optimisation
 
