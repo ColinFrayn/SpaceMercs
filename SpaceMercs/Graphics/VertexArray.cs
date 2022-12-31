@@ -25,7 +25,7 @@ namespace SpaceMercs.Graphics {
 
     public void Dispose() {
       if (isDisposed) return;
-      GL.BindVertexArray(0);
+      GL.BindVertexArray(0); // Crashes here
       GL.DeleteVertexArray(VertexArrayHandle);
       isDisposed = true;
       GC.SuppressFinalize(this);

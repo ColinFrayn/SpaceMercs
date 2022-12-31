@@ -1,116 +1,116 @@
 ﻿using Timer = System.Windows.Forms.Timer;
 
 namespace SpaceMercs.Dialogs {
-  internal partial class ScanPlanet : Form {
-    private readonly HabitableAO _aoScan;
-    private readonly Team _playerTeam;
-    private readonly Timer clockTick;
-    private readonly Func<Mission, bool> StartMission;
-    private int iProgress = 0;
+    internal partial class ScanPlanet : Form {
+        private readonly HabitableAO _aoScan;
+        private readonly Team _playerTeam;
+        private readonly Timer clockTick;
+        private readonly Func<Mission, bool> StartMission;
+        private int iProgress = 0;
 
-    public ScanPlanet(HabitableAO aoScan, Team team, Func<Mission, bool> _startMission) {
-      _aoScan = aoScan;
-      _playerTeam = team;
-      StartMission = _startMission;
-      InitializeComponent();
-      clockTick = new Timer();
-      clockTick.Tick += new EventHandler(UpdateScan);
-      clockTick.Interval = 250;
+        public ScanPlanet(HabitableAO aoScan, Team team, Func<Mission, bool> _startMission) {
+            _aoScan = aoScan;
+            _playerTeam = team;
+            StartMission = _startMission;
+            InitializeComponent();
+            clockTick = new Timer();
+            clockTick.Tick += new EventHandler(UpdateScan);
+            clockTick.Interval = 250;
 
-      if (!_aoScan.Scanned) {
-        lbNone.Visible = false;
-        dgMissions.Visible = false;
-        pbScan.Visible = false;
-        btRunMission.Text = "Scan Planet";
-      }
-      else DisplayMissionList();
-    }
+            if (!_aoScan.Scanned) {
+                lbNone.Visible = false;
+                dgMissions.Visible = false;
+                pbScan.Visible = false;
+                btRunMission.Text = "Scan Planet";
+            }
+            else DisplayMissionList();
+        }
 
-    private void RunScan() {
-      // Scan for new missions
-      pbScan.Value = 0;
-      pbScan.Visible = true;
-      btRunMission.Text = "Scanning...";
-      btRunMission.Enabled = false;
-      clockTick.Start();
-    }
-    private void UpdateScan(Object myObject, EventArgs myEventArgs) {
-      iProgress++;
-      pbScan.Value = Math.Min(iProgress, 20);
-      if (iProgress > 21) {
-        clockTick.Stop();
-        ScanComplete();
-      }
-    }
-    private void ScanComplete() {
-      Random rnd = new Random();
-      int nm = rnd.Next(3) + 1;
-      if (_aoScan is Planet) nm++;
-      if (_aoScan.Type == Planet.PlanetType.Oceanic) nm += rnd.Next(2) + 1;
-      if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
-      while (rnd.NextDouble() < 0.5) nm++;
-      if (nm < 1) nm = 1;
-      for (int n=0; n<nm; n++) {
-        Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
-        _aoScan.AddMission(m);
-      }
-      pbScan.Visible = false;
-      DisplayMissionList();
-    }
-    private void DisplayMissionList() {
-      pbScan.Visible = false;
-      btRunMission.Text = "Run Mission";
-      btRunMission.Enabled = false;
-      if (!_aoScan.MissionList.Any()) {
-        dgMissions.Visible = false;
-        lbNone.Visible = true;
-        return;
-      }
-      lbNone.Visible = false;
-      dgMissions.Visible = true;
-      dgMissions.Rows.Clear();
-      string[] arrRowMiss = new string[5];
-      foreach (Mission miss in _aoScan.MissionList) {
-        arrRowMiss[0] = miss.Summary;
-        arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
-        if (miss.RacialOpponent != null) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
-        else arrRowMiss[2] = miss.PrimaryEnemy.Name;
-        arrRowMiss[3] = miss.Diff.ToString();
-        arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
+        private void RunScan() {
+            // Scan for new missions
+            pbScan.Value = 0;
+            pbScan.Visible = true;
+            btRunMission.Text = "Scanning...";
+            btRunMission.Enabled = false;
+            clockTick.Start();
+        }
+        private void UpdateScan(Object myObject, EventArgs myEventArgs) {
+            iProgress++;
+            pbScan.Value = Math.Min(iProgress, 20);
+            if (iProgress > 21) {
+                clockTick.Stop();
+                ScanComplete();
+            }
+        }
+        private void ScanComplete() {
+            Random rnd = new Random();
+            int nm = rnd.Next(3) + 1;
+            if (_aoScan is Planet) nm++;
+            if (_aoScan.Type == Planet.PlanetType.Oceanic) nm += rnd.Next(2) + 1;
+            if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
+            while (rnd.NextDouble() < 0.5) nm++;
+            if (nm < 1) nm = 1;
+            for (int n = 0; n < nm; n++) {
+                Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
+                _aoScan.AddMission(m);
+            }
+            pbScan.Visible = false;
+            DisplayMissionList();
+        }
+        private void DisplayMissionList() {
+            pbScan.Visible = false;
+            btRunMission.Text = "Run Mission";
+            btRunMission.Enabled = false;
+            if (!_aoScan.MissionList.Any()) {
+                dgMissions.Visible = false;
+                lbNone.Visible = true;
+                return;
+            }
+            lbNone.Visible = false;
+            dgMissions.Visible = true;
+            dgMissions.Rows.Clear();
+            string[] arrRowMiss = new string[5];
+            foreach (Mission miss in _aoScan.MissionList) {
+                arrRowMiss[0] = miss.Summary;
+                arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
+                if (miss.RacialOpponent != null) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
+                else arrRowMiss[2] = miss.PrimaryEnemy.Name;
+                arrRowMiss[3] = miss.Diff.ToString();
+                arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
 
-        dgMissions.Rows.Add(arrRowMiss);
-        dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
-      }
-      dgMissions.ClearSelection();
-    }
+                dgMissions.Rows.Add(arrRowMiss);
+                dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
+            }
+            dgMissions.ClearSelection();
+        }
 
-    // Run selected mission *or* run a scan if no scan has yet been done
-    private void btRunMission_Click(object sender, EventArgs e) {
-      if (_playerTeam.CurrentPosition != _aoScan) {
-        MessageBox.Show("Your team is no longer located here!");
-        return;
-      }
-      if (!_aoScan.Scanned) {
-        RunScan();
-        return;
-      }
-      if (dgMissions.SelectedRows.Count != 1) return;
-      Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
-      if (StartMission(miss)) {
-        _aoScan.RemoveMission(miss);
-        this.Close();
-      }
-    }
+        // Run selected mission *or* run a scan if no scan has yet been done
+        private void btRunMission_Click(object sender, EventArgs e) {
+            if (_playerTeam.CurrentPosition != _aoScan) {
+                MessageBox.Show("Your team is no longer located here!");
+                return;
+            }
+            if (!_aoScan.Scanned) {
+                RunScan();
+                return;
+            }
+            if (dgMissions.SelectedRows.Count != 1) return;
+            Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
+            if (StartMission(miss)) {
+                _aoScan.RemoveMission(miss);
+                this.Close();
+            }
+        }
 
-    private void dgMissions_SelectionChanged(object sender, EventArgs e) {
-      if (dgMissions.SelectedRows.Count == 1) btRunMission.Enabled = true;
-      else btRunMission.Enabled = false;
-    }
+        private void dgMissions_SelectionChanged(object sender, EventArgs e) {
+            if (dgMissions.SelectedRows.Count == 1) btRunMission.Enabled = true;
+            else btRunMission.Enabled = false;
+        }
 
-    private void dgMissions_DoubleClick(object sender, EventArgs e) {
-      if (dgMissions.SelectedRows.Count != 1) return;
-      Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
-      MessageBox.Show(this, miss.GetDescription(), "Mission Details");
+        private void dgMissions_DoubleClick(object sender, EventArgs e) {
+            if (dgMissions.SelectedRows.Count != 1) return;
+            Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
+            MessageBox.Show(this, miss.GetDescription(), "Mission Details");
+        }
     }
-  }
 }

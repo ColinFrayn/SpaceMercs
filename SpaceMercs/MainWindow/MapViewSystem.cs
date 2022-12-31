@@ -155,7 +155,7 @@ namespace SpaceMercs.MainWindow {
                     moony += 0.07f;
                 }
 
-                px -= (pl.DrawScale * Const.PlanetScale + 0.1f) * 0.6f;
+                px -= (pl.DrawScale * Const.PlanetScale + 0.05f) * 0.8f;
                 // bOdd = !bOdd;
             }
         }

@@ -1,12 +1,10 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
 using System.Xml;
-using static SpaceMercs.Textures;
 
 namespace SpaceMercs {
     class MissionLevel {

@@ -609,7 +609,7 @@ namespace SpaceMercs.MainWindow {
                     SetAOButtonsOnGUI(aoSelected);
                 }
                 catch (Exception ex) {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show(ex.ToString(), "New Game Failed", MessageBoxButtons.OK);
                 }
             }
         }

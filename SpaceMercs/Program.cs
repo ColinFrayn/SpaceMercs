@@ -26,7 +26,7 @@ namespace SpaceMercs {
         }
       }
       catch (Exception ex) {
-        MessageBox.Show("An error has occurred : " + ex);
+        MessageBox.Show("A fatal error has occurred : " + ex);
       }
     }
   }

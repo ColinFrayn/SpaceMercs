@@ -6,35 +6,17 @@ MapViewMission
 - VisualEffect.DisplayShotLine()
 - Test handling of large creatures
 
-Check all MenuItem.Enabled/Disabled
-
-Remove all Windows MessageBoxes
-
 ==========================================================================================================
 
 -----------------------
 Done Since Last Release
 -----------------------
 
-MapView title page
-MapViewDrawMap
-MapViewSystem
-MapViewShip
-MapViewGUI
-
-Travel
-
-GUIPanel
-GUIButton
-GUIIconButton
-GUIMessageBox
-IconPanelIcon (const pixel size)
-TextPanelItem
-Multi-depth panels
+Updated all grapics to OpenGL4
 
 Updated text renderer to use TrueType fonts
 
-Should not be able to target self or own team
+Should not be able to target self or own team in missions
 
 
 -------
@@ -47,19 +29,12 @@ System view : Star sometimes vanishes on certain aspect ratios
 
 Got a crash doing ship battle and disposing something
 
+Check all MenuItem.Enabled/Disabled correctly
 
-----------
-Backburner
-----------
 
-Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
-
-Travel.DrawBattle() : Convert Frag to a vertex array for optimisation
-
-DrawShipHoverInfo() : Add multi-line info for equipment?
-
-Improve TextRenderer
-- Bold, Shadow, Border
+---------------------
+Backburner : Features
+---------------------
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race
@@ -68,19 +43,6 @@ First Contact
 - Arriving at a planet with a colony of that race
 - If ship is alien but you haven't met that alien race then handle it differently
 -- Display as unknown
-
-Displaying colonies of other races: Are they visually distinct?
-
-Encounter.cs : Remove MessageBox and replace with in-game messages
-- InactiveEncounter
-- ActiveEncounter
-
-Profile everything, especially AI
-
-Add graphics for more creature types
-- Or replace them with textures?
-
-MissionLevel.DisplayEntities : Concurrent access to Entities caused crash. Have wrapped in RO list to avoid this. Monitor stability.
 
 Need to do missions to gain favour with alien races first
 - Need a baseline rep before you can trade
@@ -114,10 +76,6 @@ Travel / ShipCombat:
 - Ships should move around a bit
 - Check if regen works (auto repair, regen plating)
 
-Change message boxes to be a graphical popup inside the main window (and pass through a "ReportMessage" Action<string> to all function calls)
-
-Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
-
 Research Functionality
 - Research higher tier weapons & armour ; Research bionics
 -- Rely on the appropriate skills
@@ -139,11 +97,6 @@ Allow creatures to have multiple weapons (ranged and melee)?
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
 
-Monitor savegame file size and reduce if necessary
-- Utils.RunLengthEncode(string str)
-- Utils.RunLengthDecode(string str)
-- Zip it up (gives 8-9x but makes it unreadable)
-
 Handle defeat:
 - ScanPlanet.RunMission -> Defeat
 - ColonyView.RunMission -> Defeat
@@ -151,3 +104,39 @@ Handle defeat:
 - MapView.GameOver()
 
 Investigate Blockly for scripting soldiers?
+
+
+-------------------------
+Backburner : Improvements
+-------------------------
+
+Remove all Windows MessageBoxes
+
+Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
+
+Travel.DrawBattle() : Convert Frag to a vertex array for optimisation
+
+DrawShipHoverInfo() : Add multi-line info for equipment?
+
+Improve TextRenderer
+- Bold, Shadow, Border
+
+Displaying colonies of other races: Are they visually distinct?
+
+Encounter.cs : Remove MessageBox and replace with in-game messages
+- InactiveEncounter
+- ActiveEncounter
+
+Profile everything, especially AI
+
+Add graphics for more creature types
+- Or replace them with textures?
+
+MissionLevel.DisplayEntities : Concurrent access to Entities caused crash. Have wrapped in RO list to avoid this. Monitor stability.
+
+Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
+
+Monitor savegame file size and reduce if necessary
+- Utils.RunLengthEncode(string str)
+- Utils.RunLengthDecode(string str)
+- Zip it up (gives 8-9x but makes it unreadable)

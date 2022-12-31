@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -988,17 +987,17 @@ namespace SpaceMercs.MainWindow {
                 // Other buttons
                 gbEndTurn = new GUIButton("End Turn", this, EndTurn);
                 gbEndTurn.Activate();
-                gbEndTurn.SetPosition(0.9f, 0.93f);
+                gbEndTurn.SetPosition(0.45f, 0.93f);
                 gbEndTurn.SetSize(0.09f, 0.05f);
                 gbEndTurn.SetBlend(true);
 
                 gbTransition = new GUIButton("Transition", this, Transition);
-                gbTransition.SetPosition(0.9f, 0.85f);
+                gbTransition.SetPosition(0.34f, 0.93f);
                 gbTransition.SetSize(0.09f, 0.05f);
                 gbTransition.SetBlend(true);
 
                 gbEndMission = new GUIButton("End Mission", this, EndMission);
-                gbEndMission.SetPosition(0.9f, 0.77f);
+                gbEndMission.SetPosition(0.56f, 0.93f);
                 gbEndMission.SetSize(0.09f, 0.05f);
                 gbEndMission.SetBlend(true);
 
