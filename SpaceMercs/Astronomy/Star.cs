@@ -39,6 +39,11 @@ namespace SpaceMercs {
             if (!st.TradeRoutes.Contains(this)) st.AddTradeRoute(this);
         }
 
+        public Star() {
+            StarType = "No Type";
+            Sector = Sector.Empty;
+            Planets = new List<Planet>();
+        }
         public Star(float X, float Y, int _seed, Sector s, int sno) {
             MapPos = new Vector3(X, Y, 0f);
             Planets = new List<Planet>();
@@ -102,6 +107,7 @@ namespace SpaceMercs {
             SetupColour();
             StarType = SetupType();
         }
+        public static Star Empty { get { return new Star(); } }
 
         // Save this star to an Xml file
         public void SaveToFile(StreamWriter file) {

@@ -27,19 +27,19 @@ namespace SpaceMercs.MainWindow {
         private Mission? ThisMission;
         private MissionLevel CurrentLevel;
         private IEntity? SelectedEntity = null;
-        private Soldier panelHover = null;
+        private Soldier? soldierPanelCurrentHover = null;
         private bool bDragging = false;
         private int[,] DistMap;
         private bool[,] TargetMap;
         private bool[,] AoEMap;
         private bool[,] DetectionMap;
         private int AoERadius = -1;
-        private List<Point> lCurrentPath;
+        private List<Point>? lCurrentPath;
         private SoldierAction CurrentAction = SoldierAction.None;
         private bool bShowEntityLabels = false, bShowStatBars = false, bShowTravel = false, bShowPath = false, bShowEffects = false, bViewDetection = false;
         private readonly List<VisualEffect> Effects = new List<VisualEffect>();
         private readonly Stopwatch sw = Stopwatch.StartNew();
-        private ItemType ActionItem = null;
+        private ItemType? ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
         private VertexBuffer? vbGrid = null, vbPath = null;
@@ -88,10 +88,6 @@ namespace SpaceMercs.MainWindow {
             ThisMission.SetCurrentMissionView(this);
 
             // Set GUI options
-            // TODO Set menu 
-            //missionToolStripMenuItem.Enabled = true;
-            //viewToolStripMenuItem.Enabled = false;
-            //optionsToolStripMenuItem.Enabled = false;
             bShowEntityLabels = PlayerTeam.Mission_ShowLabels;
             bShowStatBars = PlayerTeam.Mission_ShowStatBars;
             bShowTravel = PlayerTeam.Mission_ShowTravel;
@@ -114,6 +110,10 @@ namespace SpaceMercs.MainWindow {
             return true;
         }
         private void CeaseMission() {
+            if (PlayerTeam is null) throw new Exception("PlayerTeam is null in CeaseMission()");
+            if (PlayerTeam.CurrentPosition is null) throw new Exception("PlayerTeam.CurrentPosition is null in CeaseMission()");
+            if (ThisMission is null) throw new Exception("ThisMission is null in CeaseMission()");
+
             view = ViewMode.ViewSystem;
             PlayerTeam.CeaseMission();
             Random rnd = new Random();
@@ -122,12 +122,13 @@ namespace SpaceMercs.MainWindow {
             if (MissionOutcome != MissionResult.Victory && TravelDetails == null) {
                 ThisMission.ResetMission();
                 if (PlayerTeam.CurrentPosition?.Colony != null) PlayerTeam.CurrentPosition.Colony.AddMission(ThisMission);
-                else PlayerTeam.CurrentPosition.AddMission(ThisMission);
+                else PlayerTeam.CurrentPosition!.AddMission(ThisMission);
             }
 
             // Resolve the mission (either victory or destruction)
             if (MissionOutcome == MissionResult.Victory) {
                 if (TravelDetails != null) {
+                    if (ThisMission.ShipTarget is null) throw new Exception("ThisMission.ShipTarget is null in CeaseMission()");
                     double dBounty = ThisMission.ShipTarget.EstimatedBountyValue * (0.5 + rnd.NextDouble());
                     if (ThisMission.Type == Mission.MissionType.RepelBoarders) {
                         msgBox.PopupMessage("You have repelled the boarders.\nYou search the attacking vessel and retrieve " + dBounty.ToString("N2") + " credits in bounty");
@@ -282,7 +283,7 @@ namespace SpaceMercs.MainWindow {
         private void CheckHoverMission() {
             if (gpSelect != null && gpSelect.Active) return;
 
-            panelHover = null;
+            soldierPanelCurrentHover = null;
             // Check GUIPanel first
             if (gpSelect != null && gpSelect.Active && gpSelect.HoverItem != null) return;
 
@@ -293,7 +294,7 @@ namespace SpaceMercs.MainWindow {
             if (mxfract >= sx && mxfract <= (sx + Const.GUIPanelWidth)) {
                 foreach (Soldier s in ThisMission.Soldiers) {
                     float step = s.GetGuiPanelHeight(SelectedEntity == s);
-                    if (myfract >= sy && myfract <= sy + step) { panelHover = s; return; }
+                    if (myfract >= sy && myfract <= sy + step) { soldierPanelCurrentHover = s; return; }
                     sy += step + Const.GUIPanelGap;
                 }
             }
@@ -302,9 +303,9 @@ namespace SpaceMercs.MainWindow {
             if (gbEndTurn != null && gbEndTurn.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbTransition != null && gbTransition.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbZoomTo1 != null && gbZoomTo1.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbZoomTo2 != null && gbZoomTo1.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbZoomTo3 != null && gbZoomTo1.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbZoomTo4 != null && gbZoomTo1.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbZoomTo2 != null && gbZoomTo2.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbZoomTo3 != null && gbZoomTo3.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbZoomTo4 != null && gbZoomTo4.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbWest != null && gbWest.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbEast != null && gbEast.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbNorth != null && gbNorth.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
@@ -366,8 +367,8 @@ namespace SpaceMercs.MainWindow {
         private async void MouseUp_Mission(MouseButtonEventArgs e) {
             // Check R-button released
             if (bAIRunning) return;
-            Soldier s = null;
-            if (SelectedEntity is Soldier) s = (Soldier)SelectedEntity;
+            Soldier? s = null;
+            if (SelectedEntity != null && SelectedEntity is Soldier) s = (Soldier)SelectedEntity;
             if (e.Button == MouseButton.Right) {
                 if (gpSelect != null && gpSelect.Active) {
                     gpSelect.Deactivate();
@@ -415,21 +416,22 @@ namespace SpaceMercs.MainWindow {
                         }
                         if (iSelectHover >= Const.ItemIDBase && iSelectHover < (Const.ItemIDBase + 50000)) {
                             // Clicked on a usable item
-                            ItemType it = StaticData.GetItemTypeById(iSelectHover);
+                            ItemType? it = StaticData.GetItemTypeById(iSelectHover);
                             if (it == null) throw new Exception("Chose unknown ItemType to use");
                             ActionItem = it;
                             CurrentAction = SoldierAction.Item;
                             GenerateTargetMap(s, it.ItemEffect.Range);
-                            int sy = SelectedEntity.Y;
-                            int sx = SelectedEntity.X;
-                            GenerateAoEMap(sx, sy, it.ItemEffect.Radius);
-                            // TODO glMapView.Invalidate();
+                            if (SelectedEntity != null) {
+                                int sy = SelectedEntity.Y;
+                                int sx = SelectedEntity.X;
+                                GenerateAoEMap(sx, sy, it.ItemEffect.Radius);
+                            }
                         }
                     }
                 }
             }
             if (e.Button == MouseButton.Left) {
-                if (CurrentAction == SoldierAction.Attack) {
+                if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
                     bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
                     //bool bAttacked = s.AttackLocation(level, hoverx, hovery, AddNewEffect, glMissionView.Invalidate, PlaySoundThreaded).Result;
@@ -440,14 +442,15 @@ namespace SpaceMercs.MainWindow {
                         }
                     }
                 }
-                else if (CurrentAction == SoldierAction.Item) {
+                else if (s != null && CurrentAction == SoldierAction.Item) {
                     if (s.Stamina < s.UseItemCost) {
                         msgBox.PopupMessage("You have insufficient Stamina to use Item!");
                         return;
                     }
+                    if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
                     // Firstly, remove the item from the Soldier in question if it's a single use item
-                    ItemType temp = ActionItem;
-                    s.UseItem(ActionItem);
+                    ItemType temp = ActionItem!;
+                    s.UseItem(ActionItem!);
                     CurrentAction = SoldierAction.None;
                     ActionItem = null;
                     // Now apply the effect
@@ -463,7 +466,7 @@ namespace SpaceMercs.MainWindow {
                     if (gbTransition != null) bClicked |= gbTransition.CaptureClick((int)MousePosition.X, (int)MousePosition.Y);
                     if (gbEndMission != null) bClicked |= gbEndMission.CaptureClick((int)MousePosition.X, (int)MousePosition.Y);
                     if (!bClicked) {
-                        if (panelHover != null) SetSelectedEntity(panelHover);
+                        if (soldierPanelCurrentHover != null) SetSelectedEntity(soldierPanelCurrentHover);
                         else if (!bDragging) SetSelectedEntity(CurrentLevel.GetHoverEntity());
                     }
                 }
@@ -484,16 +487,15 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void DoubleClick_Mission() {
-            if (panelHover != null) return;
+            if (soldierPanelCurrentHover != null) return;
             foreach (GUIIconButton bt in lButtons) {
                 if (bt.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             }
             if (gbEndTurn.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbTransition.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbEndMission.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            Point? pt = CurrentLevel.MouseHover;
-            if (pt == null) return;
-            IEntity he = CurrentLevel.GetHoverEntity();
+            Point pt = CurrentLevel.MouseHover;
+            IEntity? he = CurrentLevel.GetHoverEntity();
             if (he != null) {
                 using (CreatureView cv = new CreatureView(he, Cursor.X, Cursor.Y)) {
                     cv.ShowDialog();
@@ -898,10 +900,11 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawWithOptions(strStats, tro);
         }
         private void ShowSoldierPanels(ShaderProgram prog) {
+            if (ThisMission is null) return;
             // Show the details of the soldiers
             float sx = 0.99f - Const.GUIPanelWidth, sy = Const.GUIPanelTop;
-            IEntity hover = CurrentLevel.GetHoverEntity();
-            if (panelHover != null) hover = panelHover;
+            IEntity? hover = CurrentLevel.GetHoverEntity();
+            if (soldierPanelCurrentHover != null) hover = soldierPanelCurrentHover;
             for (int sno = 0; sno < ThisMission.Soldiers.Count; sno++) {
                 Soldier s = ThisMission.Soldiers[sno];
                 float PanelHeight = s.GetGuiPanelHeight(SelectedEntity == s);
@@ -1154,7 +1157,7 @@ namespace SpaceMercs.MainWindow {
             float px = xpos + 0.5f, py = ypos + 0.5f;
             float xSize = 1f, ySize = 1f;
             // Hovering over a large entity
-            IEntity en = CurrentLevel.GetEntityAt(xpos, ypos);
+            IEntity? en = CurrentLevel.GetEntityAt(xpos, ypos);
             if (en != null && en.Size > 1) {
                 px = en.X + (en.Size / 2f);
                 py = en.Y + (en.Size / 2f);
@@ -1249,7 +1252,7 @@ namespace SpaceMercs.MainWindow {
             }
             // Passable square
             if (Utils.IsPassable(CurrentLevel.Map[hoverx, hovery])) {
-                IEntity en = CurrentLevel.GetEntityAt(hoverx, hovery);
+                IEntity? en = CurrentLevel.GetEntityAt(hoverx, hovery);
                 // Walk to this point
                 if (en == null) {
                     TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Walk);
@@ -1353,7 +1356,7 @@ namespace SpaceMercs.MainWindow {
             if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
             int sy = SelectedEntity.Y;
             int sx = SelectedEntity.X;
-            Stash st = CurrentLevel.GetStashAtPoint(sx, sy);
+            Stash? st = CurrentLevel.GetStashAtPoint(sx, sy);
             if (st == null) st = new Stash(new Point(sx, sy));
             EquipmentView eqv = new EquipmentView(SelectedEntity as Soldier, st);
             eqv.ShowDialog();
@@ -1548,7 +1551,7 @@ namespace SpaceMercs.MainWindow {
             if (!CurrentLevel.Explored[x, y]) return;
             if (!Utils.IsPassable(CurrentLevel.Map[x, y])) return;
             if (CurrentLevel.GetEntityAt(x, y) != null) return;
-            Trap tr = CurrentLevel.GetTrapAtPoint(x, y);
+            Trap? tr = CurrentLevel.GetTrapAtPoint(x, y);
             if (tr != null && !tr.Hidden) return;
             if (dist > maxdist) return;
             DistMap[x, y] = dist;

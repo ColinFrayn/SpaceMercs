@@ -24,7 +24,7 @@ namespace SpaceMercs.MainWindow {
         private Map GalaxyMap = new Map();
         private bool bShowLabels = true;
         private bool bJustLoaded = false;
-        private Team? PlayerTeam = null;
+        private Team PlayerTeam = null;
         private int MinSectorX, MaxSectorX, MinSectorY, MaxSectorY;
         private DateTime lastLoad = DateTime.MinValue;
         private readonly Stopwatch swLastTick = new Stopwatch();
@@ -555,7 +555,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 case I_ViewColony:
                     if (!GalaxyMap.bMapSetup) return;
-                    if (PlayerTeam!.CurrentPosition.BaseSize == 0) return;
+                    if (PlayerTeam.CurrentPosition.BaseSize == 0) return;
                     ColonyView cv = new ColonyView(PlayerTeam, RunMission);
                     cv.Show();
                     return;

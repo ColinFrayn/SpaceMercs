@@ -41,7 +41,11 @@ namespace SpaceMercs {
         private GLShape? GLPerimeter;
 
         public ShipType() {
-            // Nothing
+            Name = "Uninitialised";
+            AKA = "Unnamed";
+            Description = "No description";
+            Perimeter = new List<Point>();
+            Fillers = new List<Point>();
         }
         public ShipType(int seed, double diff) {
             Seed = seed;
@@ -59,6 +63,7 @@ namespace SpaceMercs {
             Description = xml.SelectSingleNode("Desc").InnerText;
             SetupLayout();
         }
+        public static ShipType Empty { get { return new ShipType(); } }
 
         public int MaximumRoomsOfSize(ShipEquipment.RoomSize sz) {
             if (sz == ShipEquipment.RoomSize.Small) return Small;

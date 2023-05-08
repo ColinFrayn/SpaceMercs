@@ -11,7 +11,8 @@ namespace SpaceMercs {
         public Planet Parent { get; set; }
         public override float DrawScale { get { return (float)Math.Sqrt(radius / 1000.0) / 50f; } }
 
-        public Moon(int _seed, Planet parent) {
+        public Moon(int _seed, Planet parent, int id) {
+            ID = id;
             Seed = _seed;
             Parent = parent;
             _MissionList = null;
@@ -36,7 +37,7 @@ namespace SpaceMercs {
         public void SaveToFile(StreamWriter file) {
             file.WriteLine("<Moon ID=\"" + ID.ToString() + "\">");
             WriteAODetailsToFile(file);
-            if (Colony != null) Colony.SaveToFile(file);
+            Colony?.SaveToFile(file);
             file.WriteLine("<Type>" + Type.ToString() + "</Type>");
             SaveMissions(file);
             file.WriteLine("</Moon>");

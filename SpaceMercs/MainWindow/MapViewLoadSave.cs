@@ -6,7 +6,7 @@ namespace SpaceMercs.MainWindow {
         static readonly float FileVersion = 1.0f;
 
         // Load a game from an exported XML file
-        private Tuple<Map, Team, Travel> LoadGame(string strFile) {
+        private Tuple<Map, Team, Travel?> LoadGame(string strFile) {
             // Write the string to a file.
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(strFile);
@@ -14,7 +14,7 @@ namespace SpaceMercs.MainWindow {
             if (xnl.Count == 0) {
                 throw new Exception("Unknown File Type - Not a SpaceMercs save Game");
             }
-            XmlNode xml = xnl.Item(0);
+            XmlNode xml = xnl.Item(0)!;
             float version = float.Parse(xml.Attributes["Version"].InnerText);
             if (version != FileVersion) {
                 throw new Exception("Incorrect file version. Expected = " + FileVersion + ", found " + version + ".");
@@ -71,13 +71,13 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Load in Travel details
-            Travel newTravel = null;
+            Travel? newTravel = null;
             XmlNode xTravel = xml.SelectSingleNode("Travel");
             if (xTravel != null) {
                 newTravel = new Travel(xTravel, newTeam, this);
             }
 
-            return new Tuple<Map, Team, Travel>(newMap, newTeam, newTravel);
+            return new Tuple<Map, Team, Travel?>(newMap, newTeam, newTravel);
         }
 
         // Save the current game to an XML format (faking this with StreamWriter for simplicity)

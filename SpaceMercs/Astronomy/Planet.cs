@@ -17,6 +17,10 @@ namespace SpaceMercs {
         public double tempbase;
         public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
 
+        public Planet() {
+            Parent = Star.Empty;
+            Moons = new List<Moon>();
+        }
         public Planet(int _seed, Star parent) {
             Parent = parent;
             Moons = new List<Moon>();
@@ -46,7 +50,6 @@ namespace SpaceMercs {
             if (xmlMoons != null) {
                 foreach (XmlNode xmlm in xmlMoons.ChildNodes) {
                     Moon mn = new Moon(xmlm, this);
-                    mn.Parent = this;
                     Moons.Add(mn);
                 }
             }
@@ -54,6 +57,8 @@ namespace SpaceMercs {
 
             LoadMissions(xml);
         }
+
+        public static Planet Empty { get { return new Planet(); } }
 
         // Save this planet to an Xml file
         public void SaveToFile(StreamWriter file) {
@@ -110,7 +115,7 @@ namespace SpaceMercs {
                     Textures.bytePlanetHalo[((y * Textures.PlanetHaloTextureSize) + x) * 3 + 1] = val;
                     Textures.bytePlanetHalo[((y * Textures.PlanetHaloTextureSize) + x) * 3 + 2] = val;
                 }
-            }            
+            }
             GL.BindTexture(TextureTarget.Texture2D, Textures.iPlanetHalo);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, Textures.PlanetHaloTextureSize, Textures.PlanetHaloTextureSize, 0, PixelFormat.Rgb, PixelType.UnsignedByte, Textures.bytePlanetHalo);
             Textures.SetParameters();
@@ -146,8 +151,7 @@ namespace SpaceMercs {
         public void GenerateMoons(Random rnd, int pdensity, int minMoons = 0) {
             Moons.Clear();
             // Get number of moons, based on planet density setting and planet size
-            int nmn = 0;
-            nmn = rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) - 3;
+            int nmn = rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) - 3;
             if (Temperature > 350) nmn -= rnd.Next(2);
             if (Temperature > 400) nmn -= rnd.Next(2);
             if (Temperature > 450) nmn -= rnd.Next(2);
@@ -169,8 +173,7 @@ namespace SpaceMercs {
 
             // Generate moons
             for (int n = 0; n < nmn; n++) {
-                Moon mn = new Moon(rnd.Next(10000000), this);
-                mn.ID = n;
+                Moon mn = new Moon(rnd.Next(10000000), this, n);
 
                 do {
                     mn.radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
@@ -202,9 +205,8 @@ namespace SpaceMercs {
 
                 mn.colour = Const.PlanetTypeToCol2(mn.Type);
 
-                // Mass
-                double pmass; // Rough estimate of planet's mass / 10^18
-                pmass = Math.Pow((radius / Const.EarthRadius), 3.0) * 6000000.0;
+                // Rough estimate of planet's mass / 10^18kg
+                double pmass = Math.Pow((radius / Const.EarthRadius), 3.0) * 6000000.0;
                 if (Type == PlanetType.Gas) pmass /= 4.0;
 
                 // Orbital period
@@ -233,9 +235,9 @@ namespace SpaceMercs {
             return 0;
         }
         public void CheckGrowth() {
-            if (Colony != null) Colony.CheckGrowth();
+            Colony?.CheckGrowth();
             foreach (Moon mn in Moons) {
-                if (mn.Colony != null) mn.Colony.CheckGrowth();
+                mn.Colony?.CheckGrowth();
             }
         }
 
@@ -251,7 +253,7 @@ namespace SpaceMercs {
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
             Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
-            Matrix4 modelM =  pRotateM * pTurnM * pScaleM;
+            Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
 
             prog.SetUniform("lightEnabled", false);
@@ -294,5 +296,4 @@ namespace SpaceMercs {
             return Parent.PrintCoordinates() + "." + ID;
         }
     }
-
 }

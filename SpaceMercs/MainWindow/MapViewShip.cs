@@ -133,18 +133,18 @@ namespace SpaceMercs.MainWindow {
                     // Process GUIPanel selection
                     if (iSelectHover >= 0) {
                         if (iSelectHover < StaticData.ShipEquipment.Count) {
-                            if (bContextHull) PlayerTeam!.PlayerShip.UpgradeHull(StaticData.ShipEquipment[iSelectHover]);
-                            else PlayerTeam!.PlayerShip.BuildEquipment(irContextRoom, StaticData.ShipEquipment[iSelectHover]);
+                            if (bContextHull) PlayerTeam.PlayerShip.UpgradeHull(StaticData.ShipEquipment[iSelectHover]);
+                            else PlayerTeam.PlayerShip.BuildEquipment(irContextRoom, StaticData.ShipEquipment[iSelectHover]);
                         }
                         if (iSelectHover == I_Salvage) {
-                            if (bContextHull) PlayerTeam!.PlayerShip.SalvageHull();
-                            else PlayerTeam!.PlayerShip.SalvageRoom(irContextRoom);
+                            if (bContextHull) PlayerTeam.PlayerShip.SalvageHull();
+                            else PlayerTeam.PlayerShip.SalvageRoom(irContextRoom);
                         }
                         if (iSelectHover == I_Disconnect) {
-                            PlayerTeam!.PlayerShip.DeactivateRoom(irContextRoom);
+                            PlayerTeam.PlayerShip.DeactivateRoom(irContextRoom);
                         }
                         if (iSelectHover == I_Connect) {
-                            PlayerTeam!.PlayerShip.ActivateRoom(irContextRoom);
+                            PlayerTeam.PlayerShip.ActivateRoom(irContextRoom);
                         }
                     }
                 }
@@ -168,7 +168,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void DoubleClick_Ship() {
             fShipViewX = fShipViewY = 0.0f;
-            fShipViewZ = PlayerTeam!.PlayerShip.Length * 2;
+            fShipViewZ = PlayerTeam.PlayerShip.Length * 2;
             if (fShipViewZ < Const.MinimumShipViewZ) fShipViewZ = Const.MinimumShipViewZ;
         }
         private void MouseWheel_Ship(float delta) {
@@ -191,7 +191,7 @@ namespace SpaceMercs.MainWindow {
             double myfract = (double)MousePosition.Y / (double)Size.Y;
             double mxpos = ((mxfract - 0.5) * (fShipViewZ / 1.86) * Aspect) + fShipViewX;
             double mypos = ((0.5 - myfract) * (fShipViewZ / 1.86)) + fShipViewY;
-            irHover = PlayerTeam!.PlayerShip.CheckHoverRoom(mxpos, mypos, out bHoverHull);
+            irHover = PlayerTeam.PlayerShip.CheckHoverRoom(mxpos, mypos, out bHoverHull);
         }
 
         // Show static GUI elements
@@ -211,7 +211,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Display the player's remaining cash reserves
-            TextRenderer.DrawAt($"{PlayerTeam!.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
+            TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
 
             if (irSelected != -1) DisplaySelectionText_Ship();
 
@@ -233,7 +233,7 @@ namespace SpaceMercs.MainWindow {
                 if (ID >= 0) {
                     if (ID < StaticData.ShipEquipment.Count) {
                         ShipEquipment se = StaticData.ShipEquipment[ID];
-                        return se.GetHoverText(PlayerTeam!.PlayerShip);
+                        return se.GetHoverText(PlayerTeam.PlayerShip);
                     }
                     else {
                         if (ID == (int)I_Build) return new List<string>() { "Build" };
@@ -248,14 +248,14 @@ namespace SpaceMercs.MainWindow {
             }
 
             if (bHoverHull || irHover > -1) {
-                ShipEquipment? se = bHoverHull ? PlayerTeam!.PlayerShip.ArmourType : PlayerTeam!.PlayerShip.GetEquipmentByRoomID(irHover);
+                ShipEquipment? se = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irHover);
                 if (se == null) {
                     if (bHoverHull) return new List<string>() { "<No Armour>" };
                     else return new List<string>() { "<Empty>" };
                 }
 
                 if (se != null) {
-                    if (bHoverHull || PlayerTeam!.PlayerShip.GetIsRoomActive(irHover)) {
+                    if (bHoverHull || PlayerTeam.PlayerShip.GetIsRoomActive(irHover)) {
                         return se.GetHoverText();
                     }
                     else return new List<string>() { se.Name + " (Deactivated)" };
@@ -327,7 +327,7 @@ namespace SpaceMercs.MainWindow {
             if (irHover != -1 || bHoverHull) {
                 irContextRoom = irHover;
                 bContextHull = bHoverHull;
-                ShipEquipment? seHover = bHoverHull ? PlayerTeam!.PlayerShip.ArmourType : PlayerTeam!.PlayerShip.GetEquipmentByRoomID(irContextRoom);
+                ShipEquipment? seHover = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irContextRoom);
                 if (seHover == null) {
                     if (PlayerTeam.CurrentPosition.BaseSize > 0) {
                         GUIPanel? buildingPanel = GenerateBuildingList();
@@ -355,8 +355,8 @@ namespace SpaceMercs.MainWindow {
 
         // Generate a building icon list for the sub-panel when building a new room
         private GUIPanel? GenerateBuildingList() {
-            if (!bHoverHull && (irContextRoom < 0 || irContextRoom > PlayerTeam!.PlayerShip.Type.Rooms.Count)) return null;
-            ShipRoomDesign? rd = bHoverHull ? null : PlayerTeam!.PlayerShip.Type.Rooms[irContextRoom];
+            if (!bHoverHull && (irContextRoom < 0 || irContextRoom > PlayerTeam.PlayerShip.Type.Rooms.Count)) return null;
+            ShipRoomDesign? rd = bHoverHull ? null : PlayerTeam.PlayerShip.Type.Rooms[irContextRoom];
             ShipEquipment.RoomSize roomSize = rd?.Size ?? ShipEquipment.RoomSize.Armour;
             int count = 0;
             GUIPanel gp = new GUIPanel(this);
@@ -365,16 +365,16 @@ namespace SpaceMercs.MainWindow {
             foreach (int eno in lIDs) {
                 ShipEquipment se = StaticData.ShipEquipment[eno];
                 // Can we build this at the current location?
-                if ((se.Available & PlayerTeam!.CurrentPosition.Base) == 0) continue;
-                if (se.RequiredRace != null && PlayerTeam!.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
-                if (se.RequiredRace != null && PlayerTeam!.CurrentPosition.PriceModifier >= 1.0) continue; // Correct race, but player team is not at least friendly
+                if ((se.Available & PlayerTeam.CurrentPosition.Base) == 0) continue;
+                if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
+                if (se.RequiredRace != null && PlayerTeam.CurrentPosition.PriceModifier >= 1.0) continue; // Correct race, but player team is not at least friendly
 
                 // Is it the right size?
                 if (se.Size != roomSize) continue;
 
                 // Can we afford it?
                 bool bAfford = true;
-                if (PlayerTeam.PlayerShip.CostToBuildEquipment(se) > PlayerTeam!.Cash) bAfford = false;
+                if (PlayerTeam.PlayerShip.CostToBuildEquipment(se) > PlayerTeam.Cash) bAfford = false;
 
                 // Insert this icon & add to the tally
                 TexSpecs ts = Textures.GetTexCoords(se);
@@ -519,7 +519,7 @@ namespace SpaceMercs.MainWindow {
 
             string tl1 = "", tl2 = "", tl3 = "", tl4 = "";
 
-            ShipEquipment? se = PlayerTeam!.PlayerShip.GetEquipmentByRoomID(irSelected);
+            ShipEquipment? se = PlayerTeam.PlayerShip.GetEquipmentByRoomID(irSelected);
             if (se == null) {
                 tl1 = "<Empty>";
             }
@@ -564,19 +564,19 @@ namespace SpaceMercs.MainWindow {
 
         // Ship function buttons
         public void RepairShip() {
-            double cost = PlayerTeam!.PlayerShip.CalculateRepairCost();
+            double cost = PlayerTeam.PlayerShip.CalculateRepairCost();
             if (cost == 0.0) return;
             cost = Math.Round(cost, 2);
             msgBox.PopupConfirmation("Repair would cost " + cost + " credits. Proceed?", () => RepairShip_Continue(cost));
         }
         private void RepairShip_Continue(double c) {
             double cost = (double)c;
-            PlayerTeam!.Cash -= cost;
-            PlayerTeam!.PlayerShip.RepairHull();
+            PlayerTeam.Cash -= cost;
+            PlayerTeam.PlayerShip.RepairHull();
             gbRepair.Deactivate();
         }
         public void FabricateItems() {
-            FabricateItems fi = new FabricateItems(PlayerTeam!);
+            FabricateItems fi = new FabricateItems(PlayerTeam);
             fi.ShowDialog();
         }
     }

@@ -6,7 +6,6 @@ namespace SpaceMercs {
     class Map {
         private readonly Dictionary<Tuple<int, int>, Sector> dSectors = new Dictionary<Tuple<int, int>, Sector>();
         public bool bMapSetup = false;
-        static Random rnd = new Random();
         private const int INITIAL_MAP_SIZE = 3; // Just make sure that you set up an inital map of a reasonable size. This must be >= 1!
         public int MapSeed { get; private set; }
         public int StarsPerSector { get; private set; }
@@ -33,6 +32,7 @@ namespace SpaceMercs {
 
             bMapSetup = true;
         }
+        public static Map Empty { get { return new Map(); } }
 
         // Generate a map with the given races
         public void Generate(NewGame ng) {
@@ -57,7 +57,7 @@ namespace SpaceMercs {
             // Setup Race starting locations by modifying existing map to create habitable systems
             foreach (Race rc in StaticData.Races) {
                 if (rc == StaticData.Races[0]) {
-                    SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng, rand);
+                    SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng);
                     rc.SetAsKnown();
                 }
                 else {
@@ -67,7 +67,7 @@ namespace SpaceMercs {
                         int sy = rand.Next(3) - 1;
                         sc = dSectors[new Tuple<int, int>(sx, sy)];
                     } while (sc.Inhabitant != null);
-                    SetupHomeSector(rc, sc, ng, rand);
+                    SetupHomeSector(rc, sc, ng);
                 }
             }
 
@@ -76,7 +76,7 @@ namespace SpaceMercs {
         }
 
         // Setup the given sector as the home for this race
-        private void SetupHomeSector(Race rc, Sector sc, NewGame ng, Random rand) {
+        private static void SetupHomeSector(Race rc, Sector sc, NewGame ng) {
             // Get the most central star to be the home system
             sc.Inhabitant = rc;
             Star? stHome = sc.GetMostCentralStar();
@@ -142,7 +142,7 @@ namespace SpaceMercs {
         }
 
         public AstronomicalObject? GetAOFromLocationString(string strLoc) {
-            if (!strLoc.StartsWith("(") || !strLoc.Contains(")")) throw new Exception("Illegal location string:" + strLoc);
+            if (!strLoc.StartsWith("(") || !strLoc.Contains(')')) throw new Exception("Illegal location string:" + strLoc);
             string strMapLoc = strLoc.Substring(0, strLoc.IndexOf(")") + 1);
             string[] bits = strMapLoc.Replace("(", "").Replace(")", "").Split(',');
             if (bits.Length != 2) throw new Exception("Couldn't parse location string : " + strLoc + " - Sector location invalid : " + strMapLoc);

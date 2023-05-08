@@ -1,627 +1,621 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace SpaceMercs.Dialogs {
-  partial class ColonyView : Form {
-    private readonly Team PlayerTeam;
-    private readonly Colony cl;
-    private readonly double PriceMod = 1.0; // Price modifier based on the colony owner relations with the team
-    private readonly Color clExists = Color.Black;
-    private readonly Color clDoesntExist = Color.LightGray;
-    private readonly Func<Mission,bool> StartMission;
+    partial class ColonyView : Form {
+        private readonly Team PlayerTeam;
+        private readonly Colony cl;
+        private readonly double PriceMod = 1.0; // Price modifier based on the colony owner relations with the team
+        private readonly Color clExists = Color.Black;
+        private readonly Color clDoesntExist = Color.LightGray;
+        private readonly Func<Mission, bool> StartMission;
 
-    private class SaleItem {
-      public IItem Item { get; private set; }
-      public Soldier Soldier { get; private set; }
-      public bool Equipped { get; private set; }
-      public int Count { get; private set; }
-      public SaleItem(IItem it, Soldier s, bool eq, int c) {
-        Item = it;
-        Soldier = s;
-        Equipped = eq;
-        Count = c;
-      }
-      public override bool Equals(object? obj) {
-        if (!(obj is SaleItem s)) return false;
-        if (s.Item != Item) return false;
-        if (s.Soldier != Soldier) return false;
-        if (s.Equipped != Equipped) return false;
-        return true;
-      }
-      public override int GetHashCode() {
-        unchecked {
-          int hash = 17;
-          hash = hash * 37 + Item.GetHashCode();
-          if (Soldier != null) hash = hash * 23 + Soldier.Name.GetHashCode();
-          hash += Equipped.GetHashCode();
-          return hash;
+        private class SaleItem {
+            public IItem Item { get; private set; }
+            public Soldier Soldier { get; private set; }
+            public bool Equipped { get; private set; }
+            public int Count { get; private set; }
+            public SaleItem(IItem it, Soldier s, bool eq, int c) {
+                Item = it;
+                Soldier = s;
+                Equipped = eq;
+                Count = c;
+            }
+            public override bool Equals(object? obj) {
+                if (!(obj is SaleItem s)) return false;
+                if (s.Item != Item) return false;
+                if (s.Soldier != Soldier) return false;
+                if (s.Equipped != Equipped) return false;
+                return true;
+            }
+            public override int GetHashCode() {
+                unchecked {
+                    int hash = 17;
+                    hash = hash * 37 + Item.GetHashCode();
+                    if (Soldier != null) hash = hash * 23 + Soldier.Name.GetHashCode();
+                    hash += Equipped.GetHashCode();
+                    return hash;
+                }
+            }
         }
-      }
-    }
 
-    public ColonyView(Team t, Func<Mission,bool> _StartMission) {
-      PlayerTeam = t;
-      StartMission = _StartMission;
-      cl = PlayerTeam.CurrentPosition.Colony;
-      PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
-      InitializeComponent();
-      SetupTabs();
-      btRandomiseMissions.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
-      btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-      btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
-      btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-      if (String.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
-      else lbColonyName.Text = cl.Location.Name;
-      lbColonySize.Text = cl.BaseSize.ToString();
-      if ((cl.Base & Colony.BaseType.Colony) != 0) lbResidential.ForeColor = clExists;
-      else lbResidential.ForeColor = clDoesntExist;
-      if ((cl.Base & Colony.BaseType.Research) != 0) lbResearch.ForeColor = clExists;
-      else lbResearch.ForeColor = clDoesntExist;
-      if ((cl.Base & Colony.BaseType.Trading) != 0) lbTrade.ForeColor = clExists;
-      else lbTrade.ForeColor = clDoesntExist;
-      if ((cl.Base & Colony.BaseType.Military) != 0) lbMilitary.ForeColor = clExists;
-      else lbMilitary.ForeColor = clDoesntExist;
-      if ((cl.Base & Colony.BaseType.Metropolis) != 0) lbMetropolis.ForeColor = clExists;
-      else lbMetropolis.ForeColor = clDoesntExist;
-      lbLastGrowth.Text = cl.dtLastGrowth.ToString("D");
-      if (!cl.CanGrow) lbNextGrowth.Text = "n/a";
-      else lbNextGrowth.Text = cl.dtNextGrowth.ToString("D");
-      lbLocation.Text = cl.Location.PrintCoordinates();
-      if (String.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
-      else lbSystemName.Text = cl.Location.GetSystem().Name;
-      lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
-      lbPlanetType.Text = cl.Location.Type.ToString();
-    }
-
-    private void SetupTabs() {
-      // Item types in Merchant and Foundry tabs
-      cbItemType.Items.Clear();
-      cbItemType.Items.Add("All");
-      cbItemType.Items.Add("Weapons");
-      cbItemType.Items.Add("Armour");
-      cbItemType.Items.Add("Medical");
-      cbItemType.Items.Add("Equipment");
-      cbItemType.Items.Add("Materials");
-      cbItemType.SelectedIndex = 0;
-      cbUpgradeItemType.Items.Add("All");
-      cbUpgradeItemType.Items.Add("Weapons");
-      cbUpgradeItemType.Items.Add("Armour");
-      cbUpgradeItemType.Items.Add("Medical");
-      cbUpgradeItemType.Items.Add("Equipment");
-      cbUpgradeItemType.Items.Add("Materials");
-      cbUpgradeItemType.Items.Add("Mission Items");
-      cbUpgradeItemType.SelectedIndex = 0;
-
-      DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
-      columnHeaderStyle.BackColor = Color.Beige;
-      columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
-      dgMerchant.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
-      SetupMerchantDataGrid();
-      SetupMercenariesTab();
-      SetupMissionsTab();
-      SetupShipsTab();
-      SetupFoundryTab();
-    }
-
-    // Setup data grid based on drop down setting
-    private void SetupMerchantDataGrid() {
-      string strType = cbItemType.SelectedItem.ToString();
-      dgMerchant.Rows.Clear();
-      string[] arrRow = new string[4];
-      string strFilter = tbFilter.Text;
-      foreach (IItem eq in cl.InventoryList()) {
-        if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-        if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-           (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
-           (strType.Equals("Materials") && eq is Material) ||
-           (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
-          arrRow[0] = eq.Name;
-          arrRow[1] = (cl.CostModifier * eq.Cost * PriceMod).ToString("N2");
-          arrRow[2] = eq.Mass.ToString("N2") + "kg";
-          int count = cl.GetAvailability(eq);
-          arrRow[3] = count > 999 ? "999" : count.ToString();
-          dgMerchant.Rows.Add(arrRow);
-          dgMerchant.Rows[dgMerchant.Rows.Count - 1].Tag = eq;
+        public ColonyView(Team t, Func<Mission, bool> _StartMission) {
+            PlayerTeam = t;
+            StartMission = _StartMission;
+            cl = PlayerTeam.CurrentPosition.Colony;
+            PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
+            InitializeComponent();
+            SetupTabs();
+            btRandomiseMissions.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            if (String.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
+            else lbColonyName.Text = cl.Location.Name;
+            lbColonySize.Text = cl.BaseSize.ToString();
+            if ((cl.Base & Colony.BaseType.Colony) != 0) lbResidential.ForeColor = clExists;
+            else lbResidential.ForeColor = clDoesntExist;
+            if ((cl.Base & Colony.BaseType.Research) != 0) lbResearch.ForeColor = clExists;
+            else lbResearch.ForeColor = clDoesntExist;
+            if ((cl.Base & Colony.BaseType.Trading) != 0) lbTrade.ForeColor = clExists;
+            else lbTrade.ForeColor = clDoesntExist;
+            if ((cl.Base & Colony.BaseType.Military) != 0) lbMilitary.ForeColor = clExists;
+            else lbMilitary.ForeColor = clDoesntExist;
+            if ((cl.Base & Colony.BaseType.Metropolis) != 0) lbMetropolis.ForeColor = clExists;
+            else lbMetropolis.ForeColor = clDoesntExist;
+            lbLastGrowth.Text = cl.dtLastGrowth.ToString("D");
+            if (!cl.CanGrow) lbNextGrowth.Text = "n/a";
+            else lbNextGrowth.Text = cl.dtNextGrowth.ToString("D");
+            lbLocation.Text = cl.Location.PrintCoordinates();
+            if (String.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
+            else lbSystemName.Text = cl.Location.GetSystem().Name;
+            lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
+            lbPlanetType.Text = cl.Location.Type.ToString();
         }
-      }
-      lbTeamCash.Text = PlayerTeam.Cash.ToString("N2") + "cr";
-    }
-    private void SetupMercenariesTab() {
-      dgMercenaries.Rows.Clear();
-      string[] arrRowMerc = new string[4];
-      foreach (Soldier merc in cl.MercenariesList()) {
-        arrRowMerc[0] = merc.Name;
-        arrRowMerc[1] = merc.Level.ToString();
-        arrRowMerc[2] = merc.Race.Name;
-        arrRowMerc[3] = (merc.HireCost() * PriceMod).ToString("N2");
-        dgMercenaries.Rows.Add(arrRowMerc);
-        dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
-      }
-    }
-    private void SetupMissionsTab() {
-      dgMissions.Rows.Clear();
-      string[] arrRowMiss = new string[6];
-      foreach (Mission miss in cl.MissionsList()) {
-        arrRowMiss[0] = miss.Summary;
-        arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
-        if (miss.RacialOpponent != null) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
-        else arrRowMiss[2] = miss.PrimaryEnemy.Name;  //miss.IsShipMission ? "Unknown" : "Wildlife";
-        arrRowMiss[3] = miss.Diff.ToString();
-        arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
-        arrRowMiss[5] = miss.Reward.ToString("N2") + "cr";
-        dgMissions.Rows.Add(arrRowMiss);
-        dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
-      }
-    }
-    private void SetupShipsTab() {
-      dgShips.Rows.Clear();
-      double SalvageValue = PlayerTeam.PlayerShip.CalculateSalvageValue();
-      string[] arrRowShip = new string[3];
-      foreach (ShipType st in StaticData.ShipTypes) {
-        if (st == PlayerTeam.PlayerShip.Type) continue;
-        if (!cl.CanBuildShipType(st)) continue;
-        arrRowShip[0] = st.Name;
-        arrRowShip[1] = st.RoomConfigString;
-        arrRowShip[2] = ((st.Cost * PriceMod) - SalvageValue).ToString("N2");
-        dgShips.Rows.Add(arrRowShip);
-        dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
-      }
-    }
-    private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
-      HashSet<SaleItem> hsLast;
-      if (tpLast == null) hsLast = new HashSet<SaleItem>();
-      else hsLast = new HashSet<SaleItem>(tpLast);
-      string strType = cbUpgradeItemType.SelectedItem.ToString();
-      List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
-      int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
-      dgInventory.Rows.Clear();
-      string[] arrRow = new string[4];
-      string strFilter = tbUpgradeFilter.Text;
-      foreach (IItem eq in PlayerTeam.Inventory.Keys) {
-        if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-        if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-           (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
-           (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
-           (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
-          arrRow[0] = eq.Name;
-          arrRow[1] = "Ship Stores";
-          arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-          arrRow[3] = PlayerTeam.Inventory[eq].ToString();
-          dgInventory.Rows.Add(arrRow);
-          SaleItem si = new SaleItem(eq, null, false, PlayerTeam.Inventory[eq]);
-          dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-          if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+
+        private void SetupTabs() {
+            // Item types in Merchant and Foundry tabs
+            cbItemType.Items.Clear();
+            cbItemType.Items.Add("All");
+            cbItemType.Items.Add("Weapons");
+            cbItemType.Items.Add("Armour");
+            cbItemType.Items.Add("Medical");
+            cbItemType.Items.Add("Equipment");
+            cbItemType.Items.Add("Materials");
+            cbItemType.SelectedIndex = 0;
+            cbUpgradeItemType.Items.Add("All");
+            cbUpgradeItemType.Items.Add("Weapons");
+            cbUpgradeItemType.Items.Add("Armour");
+            cbUpgradeItemType.Items.Add("Medical");
+            cbUpgradeItemType.Items.Add("Equipment");
+            cbUpgradeItemType.Items.Add("Materials");
+            cbUpgradeItemType.Items.Add("Mission Items");
+            cbUpgradeItemType.SelectedIndex = 0;
+
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+            columnHeaderStyle.BackColor = Color.Beige;
+            columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            dgMerchant.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            SetupMerchantDataGrid();
+            SetupMercenariesTab();
+            SetupMissionsTab();
+            SetupShipsTab();
+            SetupFoundryTab();
         }
-      }
-      foreach (Soldier s in PlayerTeam.SoldiersRO) {
-        foreach (IItem eq in s.InventoryRO.Keys) {
-          if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-          if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-             (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
-             (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
-             (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
-            arrRow[0] = eq.Name;
-            arrRow[1] = s.Name;
-            arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-            arrRow[3] = s.InventoryRO[eq].ToString();
-            dgInventory.Rows.Add(arrRow);
-            SaleItem si = new SaleItem(eq, s, false, s.InventoryRO[eq]);
-            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-            if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
-          }
+
+        // Setup data grid based on drop down setting
+        private void SetupMerchantDataGrid() {
+            string strType = cbItemType.SelectedItem.ToString();
+            dgMerchant.Rows.Clear();
+            string[] arrRow = new string[4];
+            string strFilter = tbFilter.Text;
+            foreach (IItem eq in cl.InventoryList()) {
+                if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
+                   (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
+                   (strType.Equals("Materials") && eq is Material) ||
+                   (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                    arrRow[0] = eq.Name;
+                    arrRow[1] = (cl.CostModifier * eq.Cost * PriceMod).ToString("N2");
+                    arrRow[2] = eq.Mass.ToString("N2") + "kg";
+                    int count = cl.GetAvailability(eq);
+                    arrRow[3] = count > 999 ? "999" : count.ToString();
+                    dgMerchant.Rows.Add(arrRow);
+                    dgMerchant.Rows[dgMerchant.Rows.Count - 1].Tag = eq;
+                }
+            }
+            lbTeamCash.Text = PlayerTeam.Cash.ToString("N2") + "cr";
         }
-        foreach (Armour ar in s.EquippedArmour) {
-          if (!String.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-          if (strType.Equals("All") || strType.Equals("Armour")) {
-            arrRow[0] = ar.Name;
-            arrRow[1] = s.Name + " [Eq]";
-            arrRow[2] = (ar.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-            arrRow[3] = "1";
-            dgInventory.Rows.Add(arrRow);
-            SaleItem si = new SaleItem(ar, s, true, 1);
-            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-            if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
-          }
+        private void SetupMercenariesTab() {
+            dgMercenaries.Rows.Clear();
+            string[] arrRowMerc = new string[4];
+            foreach (Soldier merc in cl.MercenariesList()) {
+                arrRowMerc[0] = merc.Name;
+                arrRowMerc[1] = merc.Level.ToString();
+                arrRowMerc[2] = merc.Race.Name;
+                arrRowMerc[3] = (merc.HireCost() * PriceMod).ToString("N2");
+                dgMercenaries.Rows.Add(arrRowMerc);
+                dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
+            }
         }
-        if (s.EquippedWeapon != null) {
-          if (!String.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-          if (strType.Equals("All") || strType.Equals("Weapon")) {
-            arrRow[0] = s.EquippedWeapon.Name;
-            arrRow[1] = s.Name + " [Eq]";
-            arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-            arrRow[3] = "1";
-            dgInventory.Rows.Add(arrRow);
-            SaleItem si = new SaleItem(s.EquippedWeapon, s, true, 1);
-            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-            if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
-          }
+        private void SetupMissionsTab() {
+            dgMissions.Rows.Clear();
+            string[] arrRowMiss = new string[6];
+            foreach (Mission miss in cl.MissionsList()) {
+                arrRowMiss[0] = miss.Summary;
+                arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
+                if (miss.RacialOpponent != null) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
+                else arrRowMiss[2] = miss.PrimaryEnemy.Name;  //miss.IsShipMission ? "Unknown" : "Wildlife";
+                arrRowMiss[3] = miss.Diff.ToString();
+                arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
+                arrRowMiss[5] = miss.Reward.ToString("N2") + "cr";
+                dgMissions.Rows.Add(arrRowMiss);
+                dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
+            }
         }
-      }
-      dgInventory.ClearSelection();
-      foreach (DataGridViewRow row in lSelected) row.Selected = true;
-      if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
-    }
-
-    // Button clicks
-    private void btBuyFromMerchant_Click(object sender, EventArgs e) {
-      if (dgMerchant.SelectedRows.Count == 0) return;
-      int iScroll = dgMerchant.FirstDisplayedScrollingRowIndex;
-      IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
-      int iRowNo = dgMerchant.SelectedRows[0].Index;
-      double Cost = cl.CostModifier * eq.Cost * PriceMod;
-      if (Cost > PlayerTeam.Cash) {
-        MessageBox.Show("You cannot afford to buy that item!");
-        return;
-      }
-      // Buy it
-      PlayerTeam.Cash -= Cost;
-      PlayerTeam.AddItem(eq, 1);
-      SoundEffects.PlaySound("CashRegister");
-      cl.RemoveItem(eq);
-      SetupMerchantDataGrid();
-      if (cl.GetAvailability(eq) > 0) {
-        dgMerchant.Rows[iRowNo].Selected = true;
-        dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
-      }
-      else if (iRowNo > 0) {
-        dgMerchant.Rows[iRowNo - 1].Selected = true;
-        dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
-      }
-
-    }
-    private void btHireMercenary_Click(object sender, EventArgs e) {
-      Soldier merc = (Soldier)dgMercenaries.SelectedRows[0].Tag;
-      double Cost = merc.HireCost() * PriceMod;
-      if (Cost > PlayerTeam.Cash) {
-        MessageBox.Show("You cannot afford to hire that soldier!");
-        return;
-      }
-
-      // Check if we have enough berths
-      int nSpace = PlayerTeam.GetSpareBerths();
-      if (nSpace < 1) {
-        if (MessageBox.Show("You don't have sufficient accommodation for this new soldier, so you won't be able to take off. Continue anyway?", "No More Space", MessageBoxButtons.YesNo) == DialogResult.No) return;        
-      }
-
-      // Recruit the soldier
-      MessageBox.Show("You have hired the soldier " + merc.Name);
-      cl.RemoveMercenary(merc);
-      PlayerTeam.AddSoldier(merc);
-      PlayerTeam.Cash -= Cost;
-      SoundEffects.PlaySound("CashRegister");
-      SetupMercenariesTab();
-    }
-    private void btRunMission_Click(object sender, EventArgs e) {
-      Mission miss = (Mission)dgMissions.SelectedRows[0].Tag;
-      if (StartMission(miss)) {
-        cl.RemoveMission(miss);
-        this.Close();
-      }
-    }
-    private void btUpgradeShip_Click(object sender, EventArgs e) {
-      double SalvageValue = Math.Round(PlayerTeam.PlayerShip.CalculateSalvageValue(),2);
-      ShipType st = (ShipType)dgShips.SelectedRows[0].Tag;
-
-      if (st == PlayerTeam.PlayerShip.Type) {
-        MessageBox.Show("This is the same as the ship you already own!");
-        return;
-      }
-
-      double Cost = Math.Round((st.Cost * PriceMod) - SalvageValue,2);
-      if (Cost > PlayerTeam.Cash) {
-        MessageBox.Show("You cannot afford to upgrade to that model!");
-        return;
-      }
-
-      // Downgrading to a less valuable ship type. WTF?
-      if (PlayerTeam.PlayerShip.Type.Cost > st.Cost) {
-        if (MessageBox.Show("This would be a downgrade. Your current ship is already better. Continue anyway?", "Really Downgrade?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-      }
-      if (MessageBox.Show("Really upgrade your ship to a " + st.Name + "? Total Cost = " + Cost + " credits (includes " + SalvageValue + " credits salvage value from existing ship)", "Really Buy Ship?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-
-      // Do the upgrade
-      PlayerTeam.SetTeamShip(st);
-
-      PlayerTeam.Cash -= Cost;
-      SoundEffects.PlaySound("CashRegister");
-      SetupShipsTab();
-    }
-    private void btImproveWeaponOrArmour_Click(object sender, EventArgs e) {
-      if (dgInventory.SelectedRows.Count != 1) return;
-      SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-      if (tp == null | tp.Item == null) return;
-      Soldier s = tp.Soldier;
-      if (!(tp.Item is IEquippable)) return;
-      IEquippable eq = tp.Item as IEquippable;
-      bool bEquipped = tp.Equipped;
-      UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam);
-      ui.ShowDialog(this.Owner);
-      if (ui.Upgraded) {
-        if (s == null) {
-          PlayerTeam.RemoveItemFromStores(eq);
-          if (!ui.Destroyed && ui.NewItem != null) PlayerTeam.AddItem(ui.NewItem);
+        private void SetupShipsTab() {
+            dgShips.Rows.Clear();
+            double SalvageValue = PlayerTeam.PlayerShip.CalculateSalvageValue();
+            string[] arrRowShip = new string[3];
+            foreach (ShipType st in StaticData.ShipTypes) {
+                if (st == PlayerTeam.PlayerShip.Type) continue;
+                if (!cl.CanBuildShipType(st)) continue;
+                arrRowShip[0] = st.Name;
+                arrRowShip[1] = st.RoomConfigString;
+                arrRowShip[2] = ((st.Cost * PriceMod) - SalvageValue).ToString("N2");
+                dgShips.Rows.Add(arrRowShip);
+                dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
+            }
         }
-        else {
-          if (bEquipped) s.Unequip(eq);
-          s.DestroyItem(eq);
-          if (!ui.Destroyed && ui.NewItem != null) {
-            s.AddItem(ui.NewItem);
-            if (bEquipped) s.Equip(ui.NewItem);
-          }
+        private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
+            HashSet<SaleItem> hsLast;
+            if (tpLast == null) hsLast = new HashSet<SaleItem>();
+            else hsLast = new HashSet<SaleItem>(tpLast);
+            string strType = cbUpgradeItemType.SelectedItem.ToString();
+            List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
+            int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
+            dgInventory.Rows.Clear();
+            string[] arrRow = new string[4];
+            string strFilter = tbUpgradeFilter.Text;
+            foreach (IItem eq in PlayerTeam.Inventory.Keys) {
+                if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
+                   (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
+                   (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
+                   (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                    arrRow[0] = eq.Name;
+                    arrRow[1] = "Ship Stores";
+                    arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                    arrRow[3] = PlayerTeam.Inventory[eq].ToString();
+                    dgInventory.Rows.Add(arrRow);
+                    SaleItem si = new SaleItem(eq, null, false, PlayerTeam.Inventory[eq]);
+                    dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                    if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                }
+            }
+            foreach (Soldier s in PlayerTeam.SoldiersRO) {
+                foreach (IItem eq in s.InventoryRO.Keys) {
+                    if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
+                       (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
+                       (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
+                       (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                        arrRow[0] = eq.Name;
+                        arrRow[1] = s.Name;
+                        arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                        arrRow[3] = s.InventoryRO[eq].ToString();
+                        dgInventory.Rows.Add(arrRow);
+                        SaleItem si = new SaleItem(eq, s, false, s.InventoryRO[eq]);
+                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                        if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                    }
+                }
+                foreach (Armour ar in s.EquippedArmour) {
+                    if (!String.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (strType.Equals("All") || strType.Equals("Armour")) {
+                        arrRow[0] = ar.Name;
+                        arrRow[1] = s.Name + " [Eq]";
+                        arrRow[2] = (ar.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                        arrRow[3] = "1";
+                        dgInventory.Rows.Add(arrRow);
+                        SaleItem si = new SaleItem(ar, s, true, 1);
+                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                        if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                    }
+                }
+                if (s.EquippedWeapon != null) {
+                    if (!String.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (strType.Equals("All") || strType.Equals("Weapon")) {
+                        arrRow[0] = s.EquippedWeapon.Name;
+                        arrRow[1] = s.Name + " [Eq]";
+                        arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                        arrRow[3] = "1";
+                        dgInventory.Rows.Add(arrRow);
+                        SaleItem si = new SaleItem(s.EquippedWeapon, s, true, 1);
+                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                        if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                    }
+                }
+            }
+            dgInventory.ClearSelection();
+            foreach (DataGridViewRow row in lSelected) row.Selected = true;
+            if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
         }
-        if (ui.Destroyed) SetupFoundryTab();
-        else SetupFoundryTab(new List<SaleItem>() { new SaleItem(ui.NewItem, s, bEquipped, 1) });
-      }
-    }
-    private void btSellItem_Click(object sender, EventArgs e) {
-      SellSelectedItems(false);
-    }
-    private void btSellAll_Click(object sender, EventArgs e) {
-      SellSelectedItems(true);
-    }
-    private void btDismantleEquippable_Click(object sender, EventArgs e) {
-      if (dgInventory.SelectedRows.Count == 0) return;
-      // Get a list of everything to sell
-      SaleItem tpFirst = (SaleItem)dgInventory.SelectedRows[0].Tag;
-      // Do we need to ask if the player is sure?
-      if (dgInventory.SelectedRows.Count == 1) {
-        if (MessageBox.Show("Really dismantle your " + tpFirst.Item.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-      }
-      else {
-        if (MessageBox.Show("Really dismantle these " + dgInventory.SelectedRows.Count + " items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-      }
-      Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
-      List<SaleItem> lSI = new List<SaleItem>();
-      int count = 0;
-      foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-        SaleItem tp = (SaleItem)row.Tag;
-        lSI.Add(tp);
-        Soldier s = tp.Soldier;
-        IItem eq = tp.Item;
-        bool bEquipped = tp.Equipped;
-        if (!(eq is IEquippable)) continue;
-        Dictionary<IItem, int> dr = Utils.DismantleEquipment(tp.Item as IEquippable, 10);
-        foreach (IItem it in dr.Keys) {
-          if (dRemains.ContainsKey(it)) dRemains[it] += dr[it];
-          else dRemains.Add(it, dr[it]);
+
+        // Button clicks
+        private void btBuyFromMerchant_Click(object sender, EventArgs e) {
+            if (dgMerchant.SelectedRows.Count == 0) return;
+            int iScroll = dgMerchant.FirstDisplayedScrollingRowIndex;
+            IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
+            int iRowNo = dgMerchant.SelectedRows[0].Index;
+            double Cost = cl.CostModifier * eq.Cost * PriceMod;
+            if (Cost > PlayerTeam.Cash) {
+                MessageBox.Show("You cannot afford to buy that item!");
+                return;
+            }
+            // Buy it
+            PlayerTeam.Cash -= Cost;
+            PlayerTeam.AddItem(eq, 1);
+            SoundEffects.PlaySound("CashRegister");
+            cl.RemoveItem(eq);
+            SetupMerchantDataGrid();
+            if (cl.GetAvailability(eq) > 0) {
+                dgMerchant.Rows[iRowNo].Selected = true;
+                dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
+            }
+            else if (iRowNo > 0) {
+                dgMerchant.Rows[iRowNo - 1].Selected = true;
+                dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
+            }
+
         }
-        if (s == null) PlayerTeam.RemoveItemFromStores(eq);
-        else {
-          if (bEquipped) s.Unequip(eq as IEquippable);
-          s.DestroyItem(eq);
+        private void btHireMercenary_Click(object sender, EventArgs e) {
+            Soldier merc = (Soldier)dgMercenaries.SelectedRows[0].Tag;
+            double Cost = merc.HireCost() * PriceMod;
+            if (Cost > PlayerTeam.Cash) {
+                MessageBox.Show("You cannot afford to hire that soldier!");
+                return;
+            }
+
+            // Check if we have enough berths
+            int nSpace = PlayerTeam.GetSpareBerths();
+            if (nSpace < 1) {
+                if (MessageBox.Show("You don't have sufficient accommodation for this new soldier, so you won't be able to take off. Continue anyway?", "No More Space", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            }
+
+            // Recruit the soldier
+            MessageBox.Show("You have hired the soldier " + merc.Name);
+            cl.RemoveMercenary(merc);
+            PlayerTeam.AddSoldier(merc);
+            PlayerTeam.Cash -= Cost;
+            SoundEffects.PlaySound("CashRegister");
+            SetupMercenariesTab();
         }
-        count++;
-      }
-      // Inform the user what we got back
-      if (count == 0) {
-        MessageBox.Show("None of these items could be dismantled");
-        return;
-      }
-      StringBuilder sb = new StringBuilder();
-      sb.AppendLine("Dismantled " + count + " item" + (count == 1 ? "" : "s"));
-      sb.AppendLine("Materials obtained:");
-      foreach (IItem r in dRemains.Keys) {
-        PlayerTeam.AddItem(r, dRemains[r]);
-        sb.AppendLine(r.Name + " [" + dRemains[r] + "]");
-      }
-      if (dRemains.Count == 0) sb.AppendLine("None");
-      MessageBox.Show(sb.ToString());
-      SetupFoundryTab(lSI);
-    }
-    private void SellSelectedItems(bool bAll) {
-      if (dgInventory.SelectedRows.Count == 0) return;
-      bool bQuery = false;
-      double TotalValue = 0.0;
-      int nitem = 0;
-      // Get a list of everything to sell
-      List<SaleItem> tpSelected = new List<SaleItem>();
-      foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-        SaleItem tp = (SaleItem)row.Tag;
-        tpSelected.Add(tp);
-        IItem eq = tp.Item;
-        double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod;
-        if ((eq is IEquippable ieq && (ieq.Level > 0)) || SalePrice > 10.0) bQuery = true;
-        TotalValue += SalePrice;
-        nitem += (bAll? tp.Count : 1);
-      }
-      if (nitem > 1 || TotalValue > 10.0) bQuery = true;
-      // Do we neeed to ask if the player is sure?
-      if (bQuery) {
-        if (nitem == 1) {
-          if (TotalValue > 100.0) {
-            if (MessageBox.Show("Really sell your " + tpSelected[0].Item.Name + " for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-          }
+        private void btRunMission_Click(object sender, EventArgs e) {
+            Mission miss = (Mission)dgMissions.SelectedRows[0].Tag;
+            if (StartMission(miss)) {
+                cl.RemoveMission(miss);
+                this.Close();
+            }
         }
-        else {
-          if (MessageBox.Show("Really sell these " + nitem + " items for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+        private void btUpgradeShip_Click(object sender, EventArgs e) {
+            double SalvageValue = Math.Round(PlayerTeam.PlayerShip.CalculateSalvageValue(), 2);
+            ShipType st = (ShipType)dgShips.SelectedRows[0].Tag;
+
+            if (st == PlayerTeam.PlayerShip.Type) {
+                MessageBox.Show("This is the same as the ship you already own!");
+                return;
+            }
+
+            double Cost = Math.Round((st.Cost * PriceMod) - SalvageValue, 2);
+            if (Cost > PlayerTeam.Cash) {
+                MessageBox.Show("You cannot afford to upgrade to that model!");
+                return;
+            }
+
+            // Downgrading to a less valuable ship type. WTF?
+            if (PlayerTeam.PlayerShip.Type.Cost > st.Cost) {
+                if (MessageBox.Show("This would be a downgrade. Your current ship is already better. Continue anyway?", "Really Downgrade?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            }
+            if (MessageBox.Show("Really upgrade your ship to a " + st.Name + "? Total Cost = " + Cost + " credits (includes " + SalvageValue + " credits salvage value from existing ship)", "Really Buy Ship?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            // Do the upgrade
+            PlayerTeam.SetTeamShip(st);
+
+            PlayerTeam.Cash -= Cost;
+            SoundEffects.PlaySound("CashRegister");
+            SetupShipsTab();
         }
-      }
-      // Remove items from player
-      foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-        SaleItem tp = (SaleItem)row.Tag;
-        Soldier s = tp.Soldier;
-        IItem eq = tp.Item;
-        bool bEquipped = tp.Equipped;
-        if (s == null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
-        else {
-          if (bEquipped) s.Unequip(eq as IEquippable);
-          s.DestroyItem(eq, bAll ? tp.Count : 1);
+        private void btImproveWeaponOrArmour_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
+            SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
+            if (tp == null | tp.Item == null) return;
+            Soldier s = tp.Soldier;
+            if (!(tp.Item is IEquippable)) return;
+            IEquippable eq = tp.Item as IEquippable;
+            bool bEquipped = tp.Equipped;
+            UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam);
+            ui.ShowDialog(this.Owner);
+            if (ui.Upgraded) {
+                if (s == null) {
+                    PlayerTeam.RemoveItemFromStores(eq);
+                    if (!ui.Destroyed && ui.NewItem != null) PlayerTeam.AddItem(ui.NewItem);
+                }
+                else {
+                    if (bEquipped) s.Unequip(eq);
+                    s.DestroyItem(eq);
+                    if (!ui.Destroyed && ui.NewItem != null) {
+                        s.AddItem(ui.NewItem);
+                        if (bEquipped) s.Equip(ui.NewItem);
+                    }
+                }
+                if (ui.Destroyed) SetupFoundryTab();
+                else SetupFoundryTab(new List<SaleItem>() { new SaleItem(ui.NewItem, s, bEquipped, 1) });
+            }
         }
-      }
-      PlayerTeam.Cash += TotalValue;
-      SoundEffects.PlaySound("CashRegister");
-      if (bAll) SetupFoundryTab(null);
-      else SetupFoundryTab(tpSelected);
-    }
-
-    // Double click to get further details on specific entries
-    private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
-      StringBuilder sb = new StringBuilder();
-      int i = dgMercenaries.CurrentCell.RowIndex;
-      Soldier merc = (cl.MercenariesList()).ElementAt(i);
-      sb.AppendLine(merc.Name);
-      sb.AppendLine("Level " + merc.Level + " " + merc.Gender + " " + merc.Race.Name);
-      sb.AppendLine("Strength = " + merc.BaseStrength);
-      sb.AppendLine("Agility = " + merc.BaseAgility);
-      sb.AppendLine("Intellect = " + merc.BaseIntellect);
-      sb.AppendLine("Toughness = " + merc.BaseToughness);
-      sb.AppendLine("Endurance = " + merc.BaseEndurance);
-      sb.AppendLine("");
-      sb.AppendLine("Equipment:");
-      foreach (Armour ar in merc.EquippedArmour) {
-        sb.AppendLine(ar.Name);
-      }
-      if (merc.EquippedWeapon != null) sb.AppendLine(merc.EquippedWeapon.Name);
-      sb.AppendLine("");
-      sb.AppendLine("Inventory:");
-      foreach (IItem eq in merc.InventoryRO.Keys) {
-        if (merc.InventoryRO[eq] == 1) sb.AppendLine(eq.Name);
-        else sb.AppendLine(eq.Name + " [" + merc.InventoryRO[eq] + "]");
-      }
-
-      MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
-    }
-    private void dgMissions_DoubleClick(object sender, EventArgs e) {
-      int i = dgMissions.CurrentCell.RowIndex;
-      Mission miss = cl.MissionsList().ElementAt(i);
-      MessageBox.Show(this, miss.GetDescription(), "Mission Details");
-    }
-    private void dgMerchant_DoubleClick(object sender, EventArgs e) {
-      if (dgMerchant.SelectedRows.Count == 0) return;
-      IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
-      if (eq == null) return;
-      MessageBox.Show(eq.Desc);
-    }
-    private void dgInventory_DoubleClick(object sender, EventArgs e) {
-      if (dgInventory.SelectedRows.Count != 1) return;
-      SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-      if (tp == null || tp.Item == null) return;
-      MessageBox.Show(tp.Item.Desc);
-    }
-
-    // Other handlers
-    private void tbFilter_TextChanged(object sender, EventArgs e) {
-      SetupMerchantDataGrid();
-    }
-    private void tbUpgradeFilter_TextChanged(object sender, EventArgs e) {
-      SetupFoundryTab();
-    }
-    private void cbItemType_SelectedIndexChanged(object sender, EventArgs e) {
-      SetupMerchantDataGrid();
-    }
-    private void cbUpgradeItemType_SelectedIndexChanged(object sender, EventArgs e) {
-      SetupFoundryTab();
-    }
-    private void btRandomiseMissions_Click(object sender, EventArgs e) {
-      cl.ResetMissions();
-      SetupMissionsTab();
-    }
-    private void btRandomiseMercs_Click(object sender, EventArgs e) {
-      cl.ResetMercenaries();
-      SetupMercenariesTab();
-    }
-    private void btRandomiseMerchant_Click(object sender, EventArgs e) {
-      cl.ResetStock();
-      SetupMerchantDataGrid();
-    }
-    private void dgInventory_SelectionChanged(object sender, EventArgs e) {
-      btSell.Enabled = (dgInventory.SelectedRows.Count > 0);
-      btImprove.Enabled = false;
-      btDismantle.Enabled = false;
-      if (dgInventory.SelectedRows.Count == 1) { // Can improve only one weapon/armour
-        SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-        if (tp == null) return; // Still setting up
-        if (tp.Item is IEquippable eq) {
-          if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
+        private void btSellItem_Click(object sender, EventArgs e) {
+            SellSelectedItems(false);
         }
-      }
-      foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-        SaleItem tp = (SaleItem)row.Tag;
-        if (tp == null) return; // Still setting up
-        btDismantle.Enabled = true;
-      }
-    }
+        private void btSellAll_Click(object sender, EventArgs e) {
+            SellSelectedItems(true);
+        }
+        private void btDismantleEquippable_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count == 0) return;
+            // Get a list of everything to sell
+            SaleItem tpFirst = (SaleItem)dgInventory.SelectedRows[0].Tag;
+            // Do we need to ask if the player is sure?
+            if (dgInventory.SelectedRows.Count == 1) {
+                if (MessageBox.Show("Really dismantle your " + tpFirst.Item.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            }
+            else {
+                if (MessageBox.Show("Really dismantle these " + dgInventory.SelectedRows.Count + " items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            }
+            Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
+            List<SaleItem> lSI = new List<SaleItem>();
+            int count = 0;
+            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+                SaleItem tp = (SaleItem)row.Tag;
+                lSI.Add(tp);
+                Soldier s = tp.Soldier;
+                IItem eq = tp.Item;
+                bool bEquipped = tp.Equipped;
+                if (!(eq is IEquippable)) continue;
+                Dictionary<IItem, int> dr = Utils.DismantleEquipment(tp.Item as IEquippable, 10);
+                foreach (IItem it in dr.Keys) {
+                    if (dRemains.ContainsKey(it)) dRemains[it] += dr[it];
+                    else dRemains.Add(it, dr[it]);
+                }
+                if (s == null) PlayerTeam.RemoveItemFromStores(eq);
+                else {
+                    if (bEquipped) s.Unequip(eq as IEquippable);
+                    s.DestroyItem(eq);
+                }
+                count++;
+            }
+            // Inform the user what we got back
+            if (count == 0) {
+                MessageBox.Show("None of these items could be dismantled");
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dismantled " + count + " item" + (count == 1 ? "" : "s"));
+            sb.AppendLine("Materials obtained:");
+            foreach (IItem r in dRemains.Keys) {
+                PlayerTeam.AddItem(r, dRemains[r]);
+                sb.AppendLine(r.Name + " [" + dRemains[r] + "]");
+            }
+            if (dRemains.Count == 0) sb.AppendLine("None");
+            MessageBox.Show(sb.ToString());
+            SetupFoundryTab(lSI);
+        }
+        private void SellSelectedItems(bool bAll) {
+            if (dgInventory.SelectedRows.Count == 0) return;
+            bool bQuery = false;
+            double TotalValue = 0.0;
+            int nitem = 0;
+            // Get a list of everything to sell
+            List<SaleItem> tpSelected = new List<SaleItem>();
+            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+                SaleItem tp = (SaleItem)row.Tag;
+                tpSelected.Add(tp);
+                IItem eq = tp.Item;
+                double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod;
+                if ((eq is IEquippable ieq && (ieq.Level > 0)) || SalePrice > 10.0) bQuery = true;
+                TotalValue += SalePrice;
+                nitem += (bAll ? tp.Count : 1);
+            }
+            if (nitem > 1 || TotalValue > 10.0) bQuery = true;
+            // Do we neeed to ask if the player is sure?
+            if (bQuery) {
+                if (nitem == 1) {
+                    if (TotalValue > 100.0) {
+                        if (MessageBox.Show("Really sell your " + tpSelected[0].Item.Name + " for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                    }
+                }
+                else {
+                    if (MessageBox.Show("Really sell these " + nitem + " items for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                }
+            }
+            // Remove items from player
+            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+                SaleItem tp = (SaleItem)row.Tag;
+                Soldier s = tp.Soldier;
+                IItem eq = tp.Item;
+                bool bEquipped = tp.Equipped;
+                if (s == null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
+                else {
+                    if (bEquipped) s.Unequip(eq as IEquippable);
+                    s.DestroyItem(eq, bAll ? tp.Count : 1);
+                }
+            }
+            PlayerTeam.Cash += TotalValue;
+            SoundEffects.PlaySound("CashRegister");
+            if (bAll) SetupFoundryTab(null);
+            else SetupFoundryTab(tpSelected);
+        }
 
-    // Changed tab so update lists
-    private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
-      int iTabNo = tcMain.SelectedIndex;
-      switch (iTabNo) {
-        case 0: SetupMerchantDataGrid(); break;
-        case 1: SetupMercenariesTab(); break;
-        case 2: SetupMissionsTab(); break;
-        case 3: SetupShipsTab(); break;
-        case 4: SetupFoundryTab(); break;
-        case 5: break;
-        default: throw new NotImplementedException();
-      }
-    }
+        // Double click to get further details on specific entries
+        private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
+            StringBuilder sb = new StringBuilder();
+            int i = dgMercenaries.CurrentCell.RowIndex;
+            Soldier merc = (cl.MercenariesList()).ElementAt(i);
+            sb.AppendLine(merc.Name);
+            sb.AppendLine("Level " + merc.Level + " " + merc.Gender + " " + merc.Race.Name);
+            sb.AppendLine("Strength = " + merc.BaseStrength);
+            sb.AppendLine("Agility = " + merc.BaseAgility);
+            sb.AppendLine("Intellect = " + merc.BaseIntellect);
+            sb.AppendLine("Toughness = " + merc.BaseToughness);
+            sb.AppendLine("Endurance = " + merc.BaseEndurance);
+            sb.AppendLine("");
+            sb.AppendLine("Equipment:");
+            foreach (Armour ar in merc.EquippedArmour) {
+                sb.AppendLine(ar.Name);
+            }
+            if (merc.EquippedWeapon != null) sb.AppendLine(merc.EquippedWeapon.Name);
+            sb.AppendLine("");
+            sb.AppendLine("Inventory:");
+            foreach (IItem eq in merc.InventoryRO.Keys) {
+                if (merc.InventoryRO[eq] == 1) sb.AppendLine(eq.Name);
+                else sb.AppendLine(eq.Name + " [" + merc.InventoryRO[eq] + "]");
+            }
 
-    // DataGridView sort handlers
-    private void dgMerchant_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-      if (e.Column.Index == 1) { // Cost
-        e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 2) { // Mass
-        e.SortResult = double.Parse(e.CellValue1.ToString().Replace("kg","")).CompareTo(double.Parse(e.CellValue2.ToString().Replace("kg", "")));
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 3) { // Avail
-        e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
+            MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
+        }
+        private void dgMissions_DoubleClick(object sender, EventArgs e) {
+            int i = dgMissions.CurrentCell.RowIndex;
+            Mission miss = cl.MissionsList().ElementAt(i);
+            MessageBox.Show(this, miss.GetDescription(), "Mission Details");
+        }
+        private void dgMerchant_DoubleClick(object sender, EventArgs e) {
+            if (dgMerchant.SelectedRows.Count == 0) return;
+            IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
+            if (eq == null) return;
+            MessageBox.Show(eq.Desc);
+        }
+        private void dgInventory_DoubleClick(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
+            SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
+            if (tp == null || tp.Item == null) return;
+            MessageBox.Show(tp.Item.Desc);
+        }
 
-    }
-    private void dgMercenaries_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-      if (e.Column.Index == 1) { // Level
-        e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 3) { // Fee
-        e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-    }
-    private void dgMissions_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-      Mission miss1 = (Mission)(dgMissions.Rows[e.RowIndex1].Tag);
-      Mission miss2 = (Mission)(dgMissions.Rows[e.RowIndex2].Tag);
-      if (e.Column.Index == 3) { // Diff
-        //e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-        e.SortResult = miss1.Diff.CompareTo(miss2.Diff);
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 4) { // Size
-        //e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-        if (miss1.Size == miss2.Size) e.SortResult = miss1.LevelCount.CompareTo(miss2.LevelCount);
-        else e.SortResult = miss1.Size.CompareTo(miss2.Size);
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 5) { // Reward
-        //e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
-        e.SortResult = miss1.Reward.CompareTo(miss2.Reward);
-        e.Handled = true;//pass by the default sorting
-      }
-    }
-    private void dgShips_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-      if (e.Column.Index == 2) { // Cost
-        e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-    }
-    private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-      if (e.Column.Index == 2) { // Value
-        e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-      if (e.Column.Index == 3) { // Avail
-        e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-        e.Handled = true;//pass by the default sorting
-      }
-    }
+        // Other handlers
+        private void tbFilter_TextChanged(object sender, EventArgs e) {
+            SetupMerchantDataGrid();
+        }
+        private void tbUpgradeFilter_TextChanged(object sender, EventArgs e) {
+            SetupFoundryTab();
+        }
+        private void cbItemType_SelectedIndexChanged(object sender, EventArgs e) {
+            SetupMerchantDataGrid();
+        }
+        private void cbUpgradeItemType_SelectedIndexChanged(object sender, EventArgs e) {
+            SetupFoundryTab();
+        }
+        private void btRandomiseMissions_Click(object sender, EventArgs e) {
+            cl.ResetMissions();
+            SetupMissionsTab();
+        }
+        private void btRandomiseMercs_Click(object sender, EventArgs e) {
+            cl.ResetMercenaries();
+            SetupMercenariesTab();
+        }
+        private void btRandomiseMerchant_Click(object sender, EventArgs e) {
+            cl.ResetStock();
+            SetupMerchantDataGrid();
+        }
+        private void dgInventory_SelectionChanged(object sender, EventArgs e) {
+            btSell.Enabled = (dgInventory.SelectedRows.Count > 0);
+            btImprove.Enabled = false;
+            btDismantle.Enabled = false;
+            if (dgInventory.SelectedRows.Count == 1) { // Can improve only one weapon/armour
+                SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
+                if (tp == null) return; // Still setting up
+                if (tp.Item is IEquippable eq) {
+                    if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
+                }
+            }
+            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+                SaleItem tp = (SaleItem)row.Tag;
+                if (tp == null) return; // Still setting up
+                btDismantle.Enabled = true;
+            }
+        }
 
-  }
+        // Changed tab so update lists
+        private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
+            int iTabNo = tcMain.SelectedIndex;
+            switch (iTabNo) {
+                case 0: SetupMerchantDataGrid(); break;
+                case 1: SetupMercenariesTab(); break;
+                case 2: SetupMissionsTab(); break;
+                case 3: SetupShipsTab(); break;
+                case 4: SetupFoundryTab(); break;
+                case 5: break;
+                default: throw new NotImplementedException();
+            }
+        }
+
+        // DataGridView sort handlers
+        private void dgMerchant_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
+            if (e.Column.Index == 1) { // Cost
+                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 2) { // Mass
+                e.SortResult = double.Parse(e.CellValue1.ToString().Replace("kg", "")).CompareTo(double.Parse(e.CellValue2.ToString().Replace("kg", "")));
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 3) { // Avail
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+
+        }
+        private void dgMercenaries_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
+            if (e.Column.Index == 1) { // Level
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 3) { // Fee
+                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+        }
+        private void dgMissions_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
+            Mission miss1 = (Mission)(dgMissions.Rows[e.RowIndex1].Tag);
+            Mission miss2 = (Mission)(dgMissions.Rows[e.RowIndex2].Tag);
+            if (e.Column.Index == 3) { // Diff
+                                       //e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = miss1.Diff.CompareTo(miss2.Diff);
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 4) { // Size
+                                       //e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                if (miss1.Size == miss2.Size) e.SortResult = miss1.LevelCount.CompareTo(miss2.LevelCount);
+                else e.SortResult = miss1.Size.CompareTo(miss2.Size);
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 5) { // Reward
+                                       //e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = miss1.Reward.CompareTo(miss2.Reward);
+                e.Handled = true;//pass by the default sorting
+            }
+        }
+        private void dgShips_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
+            if (e.Column.Index == 2) { // Cost
+                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+        }
+        private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
+            if (e.Column.Index == 2) { // Value
+                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+            if (e.Column.Index == 3) { // Avail
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+        }
+    }
 }

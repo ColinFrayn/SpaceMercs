@@ -254,8 +254,8 @@ namespace SpaceMercs {
                 if (eff.Duration == 0) {
                     // Do the action now, whatever it is
                     double dmod = 1.0;
-                    if (ie.AssociatedSkill != Soldier.UtilitySkill.Unspent && src is Soldier) {
-                        int sk = ((Soldier)src).GetUtilityLevel(ie.AssociatedSkill);
+                    if (ie.AssociatedSkill != Soldier.UtilitySkill.Unspent && src is Soldier s) {
+                        int sk = s.GetUtilityLevel(ie.AssociatedSkill);
                         if (ie.SkillRequired && sk == 0) throw new Exception("Attempting to perform unskilled application of effect");
                         if (sk == 0) dmod /= 2.0; // Unskilled use
                         else dmod += Math.Pow(sk - 1, 1.5) / 10.0;

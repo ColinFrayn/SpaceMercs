@@ -24,6 +24,10 @@ namespace SpaceMercs {
         public double CargoMass { get { double c = 0.0; foreach (KeyValuePair<IItem, int> kvp in Inventory) c += kvp.Key.Mass * kvp.Value; return c; } }
         public int ActiveSoldiers { get { return _Soldiers.Where(x => x.IsActive).Count(); } }
 
+        public Team() {
+            CurrentPosition = Planet.Empty;
+            PlayerShip = Ship.Empty;
+        }
         public Team(NewGame newGame, Race playerRace) {
             CurrentPosition = playerRace.HomePlanet;
             Random rand = new Random();

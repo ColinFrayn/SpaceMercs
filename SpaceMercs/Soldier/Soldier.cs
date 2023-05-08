@@ -13,8 +13,8 @@ namespace SpaceMercs {
         public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Sniper }
 
         // Generic stuff
-        public Team PlayerTeam;
-        public AstronomicalObject aoLocation; // Usually ignored, unless soldier is deactivated
+        public Team? PlayerTeam; // Could be null (if an unhired mercenary)
+        public AstronomicalObject? aoLocation; // Usually ignored, unless soldier is deactivated
         private int iTextureID = -1;
         public bool IsActive { get; private set; }
         public string SoldierID {
@@ -732,7 +732,7 @@ namespace SpaceMercs {
         }
 
         #region Inventory
-        public Armour GetArmourAtLocation(BodyPart bp) {
+        public Armour? GetArmourAtLocation(BodyPart bp) {
             foreach (Armour ar in EquippedArmour) {
                 if (ar.Type.Locations.Contains(bp)) return ar;
             }
@@ -750,9 +750,8 @@ namespace SpaceMercs {
             if (!(eq is Armour || eq is Weapon)) return false;
             Inventory[eq]--;
             if (Inventory[eq] == 0) Inventory.Remove(eq);
-            if (eq is Armour) {
+            if (eq is Armour ar) {
                 HashSet<Armour> hsToUnequip = new HashSet<Armour>();
-                Armour ar = eq as Armour;
                 foreach (BodyPart bp in ar.Type.Locations) {
                     foreach (Armour aeq in EquippedArmour) {
                         if (aeq.Type.Locations.Contains(bp)) {
@@ -773,7 +772,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public void Unequip(IEquippable eq) {
+        public void Unequip(IEquippable? eq) {
             if (eq == null) return;
             if (eq == EquippedWeapon) {
                 EquippedWeapon = null;
@@ -1168,7 +1167,7 @@ namespace SpaceMercs {
             }
             return lFound;
         }
-        public void UseItem(ItemType ActionItem) {
+        public void UseItem(ItemType? ActionItem) {
             if (ActionItem.ItemEffect.SingleUse) RemoveItemByType(ActionItem);
             Stamina -= UseItemCost;
             bHasMoved = true;

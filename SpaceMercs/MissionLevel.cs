@@ -1936,10 +1936,10 @@ namespace SpaceMercs {
             HoverX = hx;
             HoverY = hy;
         }
-        public IEntity GetHoverEntity() {
+        public IEntity? GetHoverEntity() {
             return GetEntityAt(HoverX, HoverY);
         }
-        public IEntity GetEntityAt(int x, int y) {
+        public IEntity? GetEntityAt(int x, int y) {
             if (x >= 0 && x < Width && y >= 0 && y < Height) {
                 return EntityMap[x, y];
             }

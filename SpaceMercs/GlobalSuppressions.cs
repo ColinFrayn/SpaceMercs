@@ -5,4 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "SpaceMercs")]
+[assembly: SuppressMessage("Style", "IDE0090:Use 'new(...)'")] // Not in my code you don't.
+[assembly: SuppressMessage("Style", "IDE0063:Use simple 'using' statement")] // No, it's confusing. The point of using is to make the scope obvious.

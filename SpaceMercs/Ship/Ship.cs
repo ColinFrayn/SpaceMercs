@@ -189,6 +189,10 @@ namespace SpaceMercs {
             return sh;
         }
 
+        public Ship() {
+            Type = ShipType.Empty;
+            Name = "Uninitialised";
+        }
         public Ship(ShipType st) {
             Type = st;
             Hull = Type.MaxHull;
@@ -244,6 +248,7 @@ namespace SpaceMercs {
             InitialiseForBattle();
             Shield = Double.Parse(xml.SelectSingleNode("Shield").InnerText); // Do this after InitialiseForBattle() because that method resets the shield
         }
+        public static Ship Empty { get { return new Ship(); } }
 
         // Save this Ship to an Xml file
         public void SaveToFile(StreamWriter file) {

@@ -15,6 +15,9 @@ namespace SpaceMercs {
         VertexBuffer? tradeRoutesBuffer = null;
         VertexArray? tradeRoutesArray = null;
 
+        public Sector() {
+            ParentMap = Map.Empty;
+        }
         public Sector(int sx, int sy, Map map) {
             SectorX = sx;
             SectorY = sy;
@@ -48,6 +51,7 @@ namespace SpaceMercs {
                 Stars.Add(st);
             }
         }
+        public static Sector Empty { get { return new Sector(); } }
 
         // Save this sector to an Xml file
         public void SaveToFile(StreamWriter file) {
@@ -214,7 +218,7 @@ namespace SpaceMercs {
             if (tradeRoutesBuffer is null || tradeRoutesBuffer.VertexCount != vertices.Count) { 
                 tradeRoutesBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
             }
-            if (tradeRoutesArray is null) tradeRoutesArray = new VertexArray(tradeRoutesBuffer);
+            tradeRoutesArray ??= new VertexArray(tradeRoutesBuffer);
 
             // Draw the lines
             GL.UseProgram(prog.ShaderProgramHandle);

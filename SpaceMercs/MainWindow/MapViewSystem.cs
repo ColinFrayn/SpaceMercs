@@ -33,7 +33,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the scene
-            DrawAstronomicalObjects(Aspect, PlayerTeam!.CurrentPosition, bShowLabels, bShowColonies);
+            DrawAstronomicalObjects(Aspect, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies);
             DrawSystemText();
             SetupGUIHoverInfo();
             DrawGUI();
