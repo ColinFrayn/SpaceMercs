@@ -32,17 +32,17 @@ namespace SpaceMercs {
         public Race(XmlNode xml) {
             Name = xml.SelectSingleNode("Name").InnerText;
             Scale = Double.Parse(xml.SelectSingleNode("Scale").InnerText);
-            Intellect = Int32.Parse(xml.SelectSingleNode("Intellect").InnerText);
-            Strength = Int32.Parse(xml.SelectSingleNode("Strength").InnerText);
-            Toughness = Int32.Parse(xml.SelectSingleNode("Toughness").InnerText);
-            Agility = Int32.Parse(xml.SelectSingleNode("Agility").InnerText);
-            Endurance = Int32.Parse(xml.SelectSingleNode("Endurance").InnerText);
+            Intellect = int.Parse(xml.SelectSingleNode("Intellect").InnerText);
+            Strength = int.Parse(xml.SelectSingleNode("Strength").InnerText);
+            Toughness = int.Parse(xml.SelectSingleNode("Toughness").InnerText);
+            Agility = int.Parse(xml.SelectSingleNode("Agility").InnerText);
+            Endurance = int.Parse(xml.SelectSingleNode("Endurance").InnerText);
             Description = xml.SelectSingleNode("Description").InnerText;
-            BaseTemp = Int32.Parse(xml.SelectSingleNode("BaseTemp").InnerText);
+            BaseTemp = int.Parse(xml.SelectSingleNode("BaseTemp").InnerText);
             PlanetType = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("PlanetType").InnerText);
             string strCol = xml.SelectSingleNode("Colour").InnerText;
             string[] bits = strCol.Split(',');
-            Colour = Color.FromArgb(255, Int32.Parse(bits[0]), Int32.Parse(bits[1]), Int32.Parse(bits[2]));
+            Colour = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
             foreach (XmlNode xn in xml.SelectSingleNode("Names/Personal").ChildNodes) {
                 List<string> lNames = xn.InnerText.Split(',').ToList<string>();
                 if (lNames.Count == 0) throw new Exception("No names defined for Gender=" + xn.Name + ", Race=" + Name);
@@ -68,7 +68,7 @@ namespace SpaceMercs {
             if (aoHome == null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = (Planet)aoHome;
             Known = (xml.SelectSingleNode("Known") != null);
-            Relations = Int32.Parse(xml.SelectSingleNode("Relations").InnerText);
+            Relations = int.Parse(xml.SelectSingleNode("Relations").InnerText);
         }
 
         public void SetHomePlanet(Planet pl) {
@@ -78,9 +78,6 @@ namespace SpaceMercs {
         }
 
         public void Colonise(Star st) {
-            if (st == null) {
-                throw new Exception("Error - Null system to Colonise!");
-            }
             st.SetOwner(this);
             st.InsertColoniesForRace(this, Const.InitialColonyCount);
             AddSystem(st);

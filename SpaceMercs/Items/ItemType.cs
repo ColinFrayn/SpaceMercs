@@ -35,7 +35,7 @@ namespace SpaceMercs {
       }
       else Cost = 0.0;
       if (xml.SelectSingleNode("Rarity") != null) {
-        BaseRarity = Int32.Parse(xml.SelectSingleNode("Rarity").InnerText);
+        BaseRarity = int.Parse(xml.SelectSingleNode("Rarity").InnerText);
         Rarity = (100.0 / ((Math.Pow(BaseRarity,1.5)) + 1.0));
       }
       else Rarity = 0.0;
@@ -48,7 +48,7 @@ namespace SpaceMercs {
       if (xml.SelectSingleNode("Materials") != null) {
         foreach (XmlNode xn in xml.SelectNodes("Materials/Material")) {
           string strMat = xn.Attributes["Name"].Value;
-          int iVal = Int32.Parse(xn.Attributes["Amount"].Value);
+          int iVal = int.Parse(xn.Attributes["Amount"].Value);
           MaterialType m = StaticData.GetMaterialTypeByName(strMat);
           if (m == null) throw new Exception("Could not identify material " + strMat + " required for item " + Name);
           if (Materials.ContainsKey(m)) throw new Exception("Duplicate material in item description : " + Name);
@@ -59,7 +59,7 @@ namespace SpaceMercs {
         foreach (XmlNode xn in xml.SelectSingleNode("Utility").ChildNodes) {
           string strSkill = xn.Name;
           Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), strSkill);
-          int iVal = Int32.Parse(xn.InnerText);
+          int iVal = int.Parse(xn.InnerText);
           if (_SkillBoosts.ContainsKey(sk)) throw new Exception("Duplicate Utility Boost in item " + Name);
           _SkillBoosts.Add(sk, iVal);
         }
@@ -82,8 +82,8 @@ namespace SpaceMercs {
       if (xml.SelectSingleNode("Tex") != null) {
         string strTex = xml.SelectSingleNode("Tex").InnerText;
         string[] TexBits = strTex.Split(',');
-        TextureX = Int32.Parse(TexBits[0]) - 1;
-        TextureY = Int32.Parse(TexBits[1]) - 1;
+        TextureX = int.Parse(TexBits[0]) - 1;
+        TextureY = int.Parse(TexBits[1]) - 1;
       }
 
       // Update ItemID

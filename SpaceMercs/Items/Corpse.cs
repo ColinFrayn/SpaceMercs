@@ -40,7 +40,7 @@ namespace SpaceMercs {
         SoldierName = null;
       }
       if (xml.Attributes["Level"] != null) {
-        Level = Int32.Parse(xml.Attributes["Level"].Value);
+        Level = int.Parse(xml.Attributes["Level"].Value);
       }
       else if (Type != null) {
         Level = Type.LevelMin;
@@ -75,7 +75,7 @@ namespace SpaceMercs {
         return hash;
       }
     }
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (obj == null || GetType() != obj.GetType()) return false;
       if (((Corpse)obj).SoldierName != SoldierName) return false;
       return (((Corpse)obj).Type == Type);

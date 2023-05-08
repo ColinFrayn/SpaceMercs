@@ -205,7 +205,7 @@ namespace SpaceMercs {
       if (ang < 337.5) return Direction.SouthEast;
       return Direction.East;
     }
-    public static IItem LoadItem(XmlNode xml) {
+    public static IItem? LoadItem(XmlNode xml) {
       if (xml == null) return null;
       if (xml.Name.Equals("Armour")) return new Armour(xml);
       if (xml.Name.Equals("Weapon")) return new Weapon(xml);

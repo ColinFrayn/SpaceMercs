@@ -34,8 +34,8 @@ namespace SpaceMercs {
             Description = xml.SelectSingleNode("Desc").InnerText;
             string strTex = xml.SelectSingleNode("Tex").InnerText;
             string[] TexBits = strTex.Split(',');
-            TextureX = Int32.Parse(TexBits[0]) - 1;
-            TextureY = Int32.Parse(TexBits[1]) - 1;
+            TextureX = int.Parse(TexBits[0]) - 1;
+            TextureY = int.Parse(TexBits[1]) - 1;
 
             // Optional stuff
             if (xml.SelectSingleNode("Size") != null) {
@@ -43,13 +43,13 @@ namespace SpaceMercs {
                 Size = ParseRoomSize(strSize);
             }
             else Size = sz;
-            if (xml.SelectSingleNode("Generate") != null) Generate = Int32.Parse(xml.SelectSingleNode("Generate").InnerText);
-            if (xml.SelectSingleNode("Defence") != null) Defence = Int32.Parse(xml.SelectSingleNode("Defence").InnerText);
-            if (xml.SelectSingleNode("Power") != null) Power = Int32.Parse(xml.SelectSingleNode("Power").InnerText);
-            if (xml.SelectSingleNode("Attack") != null) Attack = Int32.Parse(xml.SelectSingleNode("Attack").InnerText);
-            if (xml.SelectSingleNode("Shield") != null) Shield = Int32.Parse(xml.SelectSingleNode("Shield").InnerText);
+            if (xml.SelectSingleNode("Generate") != null) Generate = int.Parse(xml.SelectSingleNode("Generate").InnerText);
+            if (xml.SelectSingleNode("Defence") != null) Defence = int.Parse(xml.SelectSingleNode("Defence").InnerText);
+            if (xml.SelectSingleNode("Power") != null) Power = int.Parse(xml.SelectSingleNode("Power").InnerText);
+            if (xml.SelectSingleNode("Attack") != null) Attack = int.Parse(xml.SelectSingleNode("Attack").InnerText);
+            if (xml.SelectSingleNode("Shield") != null) Shield = int.Parse(xml.SelectSingleNode("Shield").InnerText);
             Scanner = (xml.SelectSingleNode("Scanner") != null);
-            if (xml.SelectSingleNode("Capacity") != null) Capacity = Int32.Parse(xml.SelectSingleNode("Capacity").InnerText);
+            if (xml.SelectSingleNode("Capacity") != null) Capacity = int.Parse(xml.SelectSingleNode("Capacity").InnerText);
             Medlab = (xml.SelectSingleNode("Medlab") != null);
             Armoury = (xml.SelectSingleNode("Armoury") != null);
             Workshop = (xml.SelectSingleNode("Workshop") != null);
@@ -91,10 +91,8 @@ namespace SpaceMercs {
             throw new Exception("Unknown room size : " + strSize);
         }
 
-        public IEnumerable<string> GetHoverText(Ship sh = null) {
-            List<string> strList = new List<string> {
-                Name
-            };
+        public IEnumerable<string> GetHoverText(Ship? sh = null) {
+            List<string> strList = new List<string> { Name };
             if (sh != null) {
                 double cost = sh.CostToBuildEquipment(this);
                 strList.Add("Cost: " + cost + "cr");

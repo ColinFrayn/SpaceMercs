@@ -20,7 +20,7 @@ namespace SpaceMercs {
         private readonly List<IEntity> Entities = new List<IEntity>();
         private readonly Dictionary<Point, Stash> Items = new Dictionary<Point, Stash>();
         private readonly Dictionary<Point, Trap> Traps = new Dictionary<Point, Trap>();
-        private IEntity[,] EntityMap;
+        private IEntity?[,] EntityMap;
         private int HoverX = -1, HoverY = -1;
         private Random rand = new Random();
         private const float TexEpsilon = 0.01f;
@@ -112,21 +112,21 @@ namespace SpaceMercs {
         public MissionLevel(XmlNode xml, Mission m) {
             ParentMission = m;
             HoverX = HoverY = -1;
-            int w = Int32.Parse(xml.Attributes["Width"].Value);
-            int h = Int32.Parse(xml.Attributes["Height"].Value);
+            int w = int.Parse(xml.Attributes["Width"].Value);
+            int h = int.Parse(xml.Attributes["Height"].Value);
             Width = w;
             Height = h;
-            Diff = Int32.Parse(xml.SelectSingleNode("Diff").InnerText);
-            LevelID = Int32.Parse(xml.SelectSingleNode("Level").InnerText);
+            Diff = int.Parse(xml.SelectSingleNode("Diff").InnerText);
+            LevelID = int.Parse(xml.SelectSingleNode("Level").InnerText);
             Map = new TileType[w, h];
             Explored = new bool[w, h];
             Visible = new bool[w, h];
             EntityMap = new IEntity[w, h];
-            StartX = Int32.Parse(xml.SelectSingleNode("Start").Attributes["X"].Value);
-            StartY = Int32.Parse(xml.SelectSingleNode("Start").Attributes["Y"].Value);
+            StartX = int.Parse(xml.SelectSingleNode("Start").Attributes["X"].Value);
+            StartY = int.Parse(xml.SelectSingleNode("Start").Attributes["Y"].Value);
             SetupEntryLocations();
-            EndX = Int32.Parse(xml.SelectSingleNode("End").Attributes["X"].Value);
-            EndY = Int32.Parse(xml.SelectSingleNode("End").Attributes["Y"].Value);
+            EndX = int.Parse(xml.SelectSingleNode("End").Attributes["X"].Value);
+            EndY = int.Parse(xml.SelectSingleNode("End").Attributes["Y"].Value);
             SetupExitLocations();
 
             // Map
@@ -160,11 +160,11 @@ namespace SpaceMercs {
             if (xmli != null) {
                 foreach (XmlNode xn in xmli.SelectNodes("Stack")) {
                     Dictionary<IItem, int> dict = new Dictionary<IItem, int>();
-                    int x = Int32.Parse(xn.Attributes["X"].Value);
-                    int y = Int32.Parse(xn.Attributes["Y"].Value);
+                    int x = int.Parse(xn.Attributes["X"].Value);
+                    int y = int.Parse(xn.Attributes["Y"].Value);
                     Point pt = new Point(x, y);
                     foreach (XmlNode xnn in xn.SelectNodes("StackItem")) {
-                        int n = Int32.Parse(xnn.Attributes["N"].Value);
+                        int n = int.Parse(xnn.Attributes["N"].Value);
                         IItem it = Utils.LoadItem(xnn.FirstChild);
                         dict.Add(it, n);
                     }
@@ -1010,7 +1010,7 @@ namespace SpaceMercs {
                 if (nCreatures > 15) iGroupSize += rand.Next(nCreatures / 15);
                 if (ParentMission.Soldiers.Count > 1) iGroupSize += rand.Next(ParentMission.Soldiers.Count);
                 if (Entities.Count == 0 && cg.HasBoss && (nCreatures > 8 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
-                    Creature cr = cg.GenerateRandomBoss(ra, Diff, this);
+                    Creature? cr = cg.GenerateRandomBoss(ra, Diff, this);
                     if (cr != null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
@@ -1020,7 +1020,7 @@ namespace SpaceMercs {
                 }
                 if (iGroupSize > nLeft) iGroupSize = nLeft;
                 for (int i = cGroup.Count; i < iGroupSize; i++) {
-                    Creature cr = cg.GenerateRandomCreature(ra, Diff, this);
+                    Creature? cr = cg.GenerateRandomCreature(ra, Diff, this);
                     if (cGroup.Count == 0) {
                         if (PlaceFirstCreatureInGroup(cr, ParentMission.Type == Mission.MissionType.Surface)) cGroup.Add(cr);
                         else break;
@@ -1214,7 +1214,7 @@ namespace SpaceMercs {
                 }
                 // Find two close cells in R1 and Rn
                 int best = 10000;
-                Tuple<int, int> b1 = null, b2 = null;
+                Tuple<int, int>? b1 = null, b2 = null;
                 for (int c = 0; c < 250; c++) {
                     Tuple<int, int> c1 = (dRegions[1])[rand.Next(dRegions[1].Count)];
                     int x1 = c1.Item1;
@@ -1241,7 +1241,8 @@ namespace SpaceMercs {
             if (y > 0 && Map[x, y - 1] == TileType.Floor && FloodFill[x, y - 1] == 0) FloodFillRegion(x, y - 1, FloodFill, region);
             if (y < Height - 1 && Map[x, y + 1] == TileType.Floor && FloodFill[x, y + 1] == 0) FloodFillRegion(x, y + 1, FloodFill, region);
         }
-        private void JoinCells(Tuple<int, int> b1, Tuple<int, int> b2, int[,] FloodFill, Dictionary<int, List<Tuple<int, int>>> dRegions) {
+        private void JoinCells(Tuple<int, int>? b1, Tuple<int, int>? b2, int[,] FloodFill, Dictionary<int, List<Tuple<int, int>>> dRegions) {
+            if (b1 is null || b2 is null) return;
             // Join two cells and therefore join the relevant regions containing them
             int rtgt = FloodFill[b2.Item1, b2.Item2];
             int sx = b1.Item1;
@@ -1879,7 +1880,7 @@ namespace SpaceMercs {
                 }
             } while (!bBlocked && x >= 0.0 && y >= 0.0 && (int)x < Width && (int)y < Height);
         }
-        public Trap GetTrapAtPoint(int x, int y) {
+        public Trap? GetTrapAtPoint(int x, int y) {
             if (x < 0 || x >= Width || y < 0 || y >= Height) throw new Exception("Attemptign to get trap at illegal point!");
             Point pt = new Point(x, y);
             if (Traps.ContainsKey(pt)) return Traps[pt];
@@ -1887,7 +1888,7 @@ namespace SpaceMercs {
         }
 
         // Item functions
-        public Stash GetStashAtPoint(int x, int y) {
+        public Stash? GetStashAtPoint(int x, int y) {
             if (x < 0 || x >= Width || y < 0 || y >= Height) throw new Exception("Attempting to get stash at illegal point!");
             Point pt = new Point(x, y);
             if (Items.ContainsKey(pt)) return Items[pt];
@@ -1905,7 +1906,7 @@ namespace SpaceMercs {
                 Items.Add(pt, st);
             }
         }
-        public void ReplaceStashAtPosition(int x, int y, Stash st) {
+        public void ReplaceStashAtPosition(int x, int y, Stash? st) {
             if (x < 0 || x >= Width || y < 0 || y >= Height) return;
             Point pt = new Point(x, y);
             if (st != null) st.SetLocation(pt);
@@ -1946,7 +1947,7 @@ namespace SpaceMercs {
         }
         public bool IsFriendlyAt(int x, int y) {
             if (x >= 0 && x < Width && y >= 0 && y < Height) {
-                IEntity en = EntityMap[x, y];
+                IEntity? en = EntityMap[x, y];
                 if (en is null) return false;
                 if (en is Soldier) return true;
             }
@@ -1954,7 +1955,7 @@ namespace SpaceMercs {
         }
 
         // ---- Pathfinding
-        public List<Point> ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1) {
+        public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1) {
             int[,] AStarG = new int[Width, Height];
             Dictionary<Point, int> lOpen = new Dictionary<Point, int>();
             Dictionary<Point, int> lClosed = new Dictionary<Point, int>();
@@ -2107,8 +2108,8 @@ namespace SpaceMercs {
             return bpt;
         }
         private int ShortestPathLength(IEntity en, Point start, Point end, int PruningModifier) {
-            List<Point> lpt = ShortestPath(en, start, end, PruningModifier, false);
-            if (lpt == null) return Int32.MaxValue;
+            List<Point>? lpt = ShortestPath(en, start, end, PruningModifier, false);
+            if (lpt == null) return int.MaxValue;
             return lpt.Count;
         }
         private List<Point> ExtractPath(Point start, Point end, int[,] AStarG) {

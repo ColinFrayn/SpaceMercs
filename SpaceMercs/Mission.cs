@@ -80,7 +80,7 @@ namespace SpaceMercs {
             }
         }
         public int Experience { get { if (Goal == MissionGoal.Gather) return 0; return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
-        public MissionItem MItem { get; private set; }
+        public MissionItem? MItem { get; private set; }
         private string FullDescription;
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
         public readonly List<Soldier> Soldiers = new List<Soldier>();
@@ -136,35 +136,33 @@ namespace SpaceMercs {
             else MItem = null;
 
             string strOpp = xml.SelectSingleNode("Opponent")?.InnerText;
-            if (!String.IsNullOrEmpty(strOpp)) {
-                RacialOpponent = StaticData.GetRaceByName(strOpp);
-                if (RacialOpponent == null) throw new Exception("Could not ID RacialOpponent : " + strOpp);
+            if (!string.IsNullOrEmpty(strOpp)) {
+                RacialOpponent = StaticData.GetRaceByName(strOpp) ?? throw new Exception("Could not ID RacialOpponent : " + strOpp);
             }
 
             string strEn = xml.SelectSingleNode("Enemy")?.InnerText;
-            if (!String.IsNullOrEmpty(strEn)) {
-                PrimaryEnemy = StaticData.GetCreatureGroupByName(strEn);
-                if (PrimaryEnemy == null) throw new Exception("Could not ID PrimaryEnemy : " + strEn);
+            if (!string.IsNullOrEmpty(strEn)) {
+                PrimaryEnemy = StaticData.GetCreatureGroupByName(strEn) ?? throw new Exception("Could not ID PrimaryEnemy : " + strEn);
             }
 
             TimeCost = float.Parse(xml.SelectSingleNode("TimeCost").InnerText);
-            Reward = Double.Parse(xml.SelectSingleNode("Reward").InnerText);
-            Diff = Int32.Parse(xml.SelectSingleNode("Diff").InnerText);
-            LevelCount = Int32.Parse(xml.SelectSingleNode("LevelCount").InnerText);
-            CurrentLevel = Int32.Parse(xml.SelectSingleNode("CurrentLevel").InnerText);
+            Reward = double.Parse(xml.SelectSingleNode("Reward").InnerText);
+            Diff = int.Parse(xml.SelectSingleNode("Diff").InnerText);
+            LevelCount = int.Parse(xml.SelectSingleNode("LevelCount").InnerText);
+            CurrentLevel = int.Parse(xml.SelectSingleNode("CurrentLevel").InnerText);
 
             if (xml.SelectSingleNode("Seed") != null) {
-                Seed = Int32.Parse(xml.SelectSingleNode("Seed").InnerText);
+                Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
             }
             else Seed = 0;
 
             if (xml.SelectSingleNode("Size") != null) {
-                Size = Int32.Parse(xml.SelectSingleNode("Size").InnerText);
+                Size = int.Parse(xml.SelectSingleNode("Size").InnerText);
             }
             else Size = 1;
 
             foreach (XmlNode xl in xml.SelectNodes("Level")) {
-                int id = Int32.Parse(xl.Attributes["ID"].Value);
+                int id = int.Parse(xl.Attributes["ID"].Value);
                 MissionLevel lev = new MissionLevel(xl.FirstChild, this);
                 Levels.Add(id, lev);
             }

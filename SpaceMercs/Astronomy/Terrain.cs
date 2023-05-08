@@ -154,46 +154,6 @@ namespace SpaceMercs {
             if (pt == Planet.PlanetType.Gas) {
                 AddGasGiantCloudFeatures(iMap, rnd);
             }
-            else {
-                AddCraters(iMap, rnd, pt, width, height);
-            }
-
-        }
-
-        // Add craters (currently disabled)
-        private static void AddCraters(int[,] iMap, Random rnd, Planet.PlanetType pt, int width, int height) {
-            return;
-            //Add craters
-            int nCrater = 0;
-            if (pt == Planet.PlanetType.Ice) nCrater = 3 + rnd.Next(4) + rnd.Next(4);
-            if (pt == Planet.PlanetType.Rocky) nCrater = 4 + rnd.Next(7) + rnd.Next(7) + rnd.Next(7);
-            if (pt == Planet.PlanetType.Volcanic) nCrater = 2 + rnd.Next(4) + rnd.Next(4);
-            for (int n = 0; n < nCrater; n++) {
-                int cSize = rnd.Next(10) + rnd.Next(10) + rnd.Next(10) + 1;
-                double cRad = (double)cSize * (double)height / 2000.0;
-                int cx = rnd.Next(width);
-                int cy = rnd.Next(height * 3 / 4) + (height / 8);
-                int cr = (int)(cRad * 1.3);
-                int cDepth = cSize * 5 + rnd.Next(15) - rnd.Next(15);
-                if (cDepth < 1) cDepth = 1;
-                double dDepth = (double)cDepth / 8.0;
-                for (int yy = -cr; yy <= cr; yy++) {
-                    for (int xx = -cr; xx <= cr; xx++) {
-                        double r = Math.Sqrt((yy * yy) + (xx * xx));
-                        int px = cx + xx;
-                        if (px < 0) px += width;
-                        if (px >= width) px -= width;
-                        double amount = 0.0;
-                        if (r > cRad) {
-                            amount = (cRad / Math.Max(5.0 * (r - cRad), 0.5)) / 2.0;
-                        }
-                        else {
-                            amount = (1.0 / Math.Max(10.0 * (cRad - r) / cRad, 0.5)) - 1.0;
-                        }
-                        iMap[px, cy + yy] += (int)(amount * dDepth);
-                    }
-                }
-            }
         }
 
         // Add bands and eyes to gas giants

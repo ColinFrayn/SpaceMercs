@@ -72,8 +72,10 @@ namespace SpaceMercs {
         }
         public Colony(XmlNode xml, HabitableAO loc) {
             Location = loc;
-            Owner = StaticData.GetRaceByName(xml.SelectSingleNode("Owner").InnerText);
-            if (Owner == null) throw new Exception("Could not ID colony owning race : " + xml.SelectSingleNode("Owner").InnerText);
+            string? raceName = xml.SelectSingleNode("Owner")?.InnerText;
+            Race? owner = StaticData.GetRaceByName(raceName);
+            if (owner == null) throw new Exception("Could not ID colony owning race : " + raceName);
+            Owner = owner;
             Owner.AddColony(this);
             Base = (BaseType)Enum.Parse(typeof(BaseType), xml.SelectSingleNode("BaseType").InnerText);
             Base |= BaseType.Outpost; // All colonies have it
@@ -84,7 +86,7 @@ namespace SpaceMercs {
             else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
 
-            XmlNode xmlmerc = xml.SelectSingleNode("Mercenaries");
+            XmlNode? xmlmerc = xml.SelectSingleNode("Mercenaries");
             Mercenaries.Clear();
             if (xmlmerc != null) {
                 foreach (XmlNode xm in xmlmerc.SelectNodes("Soldier")) {
@@ -93,7 +95,7 @@ namespace SpaceMercs {
                 }
             }
 
-            XmlNode xmlmiss = xml.SelectSingleNode("Missions");
+            XmlNode? xmlmiss = xml.SelectSingleNode("Missions");
             Missions.Clear();
             if (xmlmiss != null) {
                 foreach (XmlNode xm in xmlmiss.SelectNodes("Mission")) {
@@ -102,11 +104,11 @@ namespace SpaceMercs {
                 }
             }
 
-            XmlNode xmli = xml.SelectSingleNode("Inventory");
+            XmlNode? xmli = xml.SelectSingleNode("Inventory");
             Inventory.Clear();
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
-                    int count = Int32.Parse(xi.Attributes["Count"].Value);
+                    int count = int.Parse(xi.Attributes["Count"].Value);
                     IItem eq;
                     try {
                         eq = Utils.LoadItem(xi.FirstChild);

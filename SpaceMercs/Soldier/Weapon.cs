@@ -66,7 +66,7 @@ namespace SpaceMercs {
       Level = iNewLevel;
     }
     public Weapon(XmlNode xml) {
-      Level = Int32.Parse(xml.Attributes["Level"].Value);
+      Level = int.Parse(xml.Attributes["Level"].Value);
       string strType = xml.Attributes["Type"].Value;
       Type = StaticData.GetWeaponTypeByName(strType);
       if (Type == null) throw new Exception("Could not ID weapon type : " + strType);
@@ -85,7 +85,7 @@ namespace SpaceMercs {
         return hash;
       }
     }
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (obj == null || GetType() != obj.GetType()) return false;
       Weapon wp = obj as Weapon;
       if (wp.Level != Level || wp.Type != Type) return false;

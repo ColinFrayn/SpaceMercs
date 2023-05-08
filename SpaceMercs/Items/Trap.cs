@@ -26,10 +26,10 @@ namespace SpaceMercs {
       else Type = WeaponType.DamageType.Acid;
     }
     public Trap(XmlNode xml) {
-      int X = Int32.Parse(xml.Attributes["X"].Value);
-      int Y = Int32.Parse(xml.Attributes["Y"].Value);
+      int X = int.Parse(xml.Attributes["X"].Value);
+      int Y = int.Parse(xml.Attributes["Y"].Value);
       Location = new Point(X, Y);
-      Level = Int32.Parse(xml.Attributes["L"].Value);
+      Level = int.Parse(xml.Attributes["L"].Value);
       Hidden = (xml.SelectSingleNode("Hidden") != null);
       if (xml.SelectSingleNode("Type") != null) {
         string strType = xml.SelectSingleNode("Type").InnerText;

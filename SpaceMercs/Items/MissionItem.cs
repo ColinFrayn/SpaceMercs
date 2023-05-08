@@ -51,7 +51,7 @@ namespace SpaceMercs {
         return hash;
       }
     }
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (obj == null || GetType() != obj.GetType()) return false;
       if (((MissionItem)obj).Name != Name) return false;
       if (((MissionItem)obj).Cost != Cost) return false;

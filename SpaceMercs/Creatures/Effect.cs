@@ -32,7 +32,7 @@ namespace SpaceMercs {
         DamageType = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xml.SelectSingleNode("Damage").Attributes["Type"].Value);
       }
       if (xml.SelectSingleNode("Duration") != null) {
-        Duration = Int32.Parse(xml.SelectSingleNode("Duration").InnerText);
+        Duration = int.Parse(xml.SelectSingleNode("Duration").InnerText);
         if (Duration > 0 && String.IsNullOrEmpty(Name)) throw new Exception("If Effect duration > 0 then effect must have a name");
       }
       else Duration = 0;
@@ -44,12 +44,12 @@ namespace SpaceMercs {
       else SpeedMod = 1.0;
 
       StatMods = new Dictionary<StatType, int>();
-      XmlNode sm = xml.SelectSingleNode("StatMods");
+      XmlNode? sm = xml.SelectSingleNode("StatMods");
       if (sm != null) {
         foreach (XmlNode xn in sm.SelectNodes("Mod")) {
           string strMod = xn.Attributes["Stat"].Value;
           StatType st = (StatType)Enum.Parse(typeof(StatType), strMod);
-          int val = Int32.Parse(xn.InnerText);
+          int val = int.Parse(xn.InnerText);
           if (StatMods.ContainsKey(st)) throw new Exception("Loading Effect : " + Name + "; Duplicate stat mod : " + st);
           StatMods.Add(st, val);
         }
@@ -100,7 +100,7 @@ namespace SpaceMercs {
       return 0;
     }
 
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (!(obj is Effect eff)) return false;
       return Name.Equals(eff.Name);
     }

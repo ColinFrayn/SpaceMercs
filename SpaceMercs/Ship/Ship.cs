@@ -202,18 +202,18 @@ namespace SpaceMercs {
             Name = xml.SelectSingleNode("Name").InnerText;
             if (xml.Attributes["Type"] != null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
             else {
-                int seed = Int32.Parse(xml.Attributes["Seed"].Value);
+                int seed = int.Parse(xml.Attributes["Seed"].Value);
                 double diff = Double.Parse(xml.Attributes["Diff"].Value);
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
             if (Type == null) throw new Exception("Could not ID Ship Type : " + xml.Attributes["Type"].Value);
             Hull = Double.Parse(xml.SelectSingleNode("Hull").InnerText);
-            Seed = Int32.Parse(xml.SelectSingleNode("Seed").InnerText);
+            Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
             Equipment.Clear();
 
             // Compatibility mode
             foreach (XmlNode xr in xml.SelectNodes("Room")) {
-                //int id = Int32.Parse(xr.Attributes["ID"].Value);
+                //int id = int.Parse(xr.Attributes["ID"].Value);
                 XmlNode xn = xr.SelectSingleNode("ShipRoom/Equipment");
                 ShipEquipment se = StaticData.GetShipEquipmentByName(xn.InnerText);
                 if (se == null) throw new Exception("Could not find room type : " + xn.InnerText);
@@ -229,7 +229,7 @@ namespace SpaceMercs {
 
             // New-style Equipment loading
             foreach (XmlNode xr in xml.SelectNodes("Eqp")) {
-                int id = Int32.Parse(xr.Attributes["ID"].Value);
+                int id = int.Parse(xr.Attributes["ID"].Value);
                 ShipEquipment se = StaticData.GetShipEquipmentByName(xr.InnerText);
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
@@ -516,7 +516,7 @@ namespace SpaceMercs {
             if (!Equipment.ContainsKey(iRoomID)) return;
             Equipment[iRoomID] = new Tuple<ShipEquipment, bool>(Equipment[iRoomID].Item1, false);
         }
-        public ShipEquipment GetEquipmentByRoomID(int id) {
+        public ShipEquipment? GetEquipmentByRoomID(int id) {
             if (!Equipment.ContainsKey(id)) return null;
             return Equipment[id].Item1;
         }

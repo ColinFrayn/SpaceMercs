@@ -19,7 +19,8 @@ namespace SpaceMercs.MainWindow {
         private int hoverx, hovery;
         private float fMissionViewX, fMissionViewY, fMissionViewZ;
         private GUIPanel gpSelect;
-        private GUIIconButton gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4, gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
+        private GUIIconButton? gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4;
+        private GUIIconButton gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
         private GUIButton gbEndTurn, gbTransition, gbEndMission;
         private readonly List<GUIIconButton> lButtons = new List<GUIIconButton>();
         private bool bGUIButtonsInitialised = false;
@@ -241,14 +242,15 @@ namespace SpaceMercs.MainWindow {
                 ActionItem = null;
             }
             if (SelectedEntity != null && SelectedEntity.GetType() == typeof(Soldier) && CurrentAction == SoldierAction.None) {
-                Soldier s = SelectedEntity as Soldier;
-                if (IsKeyPressed(Keys.Down)) MoveSoldier(s, Utils.Direction.South);
-                if (IsKeyPressed(Keys.Up)) MoveSoldier(s, Utils.Direction.North);
-                if (IsKeyPressed(Keys.Left)) MoveSoldier(s, Utils.Direction.West);
-                if (IsKeyPressed(Keys.Right)) MoveSoldier(s, Utils.Direction.East);
-                if (IsKeyPressed(Keys.V) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) ScavengeAll(s);
-                if (IsKeyPressed(Keys.S) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) SelectedSoldierSearch(null);
-                if (IsKeyPressed(Keys.P) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) PickUpAll(s);
+                if (SelectedEntity is Soldier s) {
+                    if (IsKeyPressed(Keys.Down)) MoveSoldier(s, Utils.Direction.South);
+                    if (IsKeyPressed(Keys.Up)) MoveSoldier(s, Utils.Direction.North);
+                    if (IsKeyPressed(Keys.Left)) MoveSoldier(s, Utils.Direction.West);
+                    if (IsKeyPressed(Keys.Right)) MoveSoldier(s, Utils.Direction.East);
+                    if (IsKeyPressed(Keys.V) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) ScavengeAll(s);
+                    if (IsKeyPressed(Keys.S) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) SelectedSoldierSearch(null);
+                    if (IsKeyPressed(Keys.P) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) PickUpAll(s);
+                }
                 if (IsKeyPressed(Keys.Space)) EndTurn();
             }
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
@@ -489,7 +491,7 @@ namespace SpaceMercs.MainWindow {
             if (gbEndTurn.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbTransition.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbEndMission.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            Point pt = CurrentLevel.MouseHover;
+            Point? pt = CurrentLevel.MouseHover;
             if (pt == null) return;
             IEntity he = CurrentLevel.GetHoverEntity();
             if (he != null) {
@@ -704,12 +706,13 @@ namespace SpaceMercs.MainWindow {
 
         // Menu handlers
         private void DisplayMissionDetails() {
+            if (ThisMission is null) return;
             string strDesc = ThisMission.GetDescription();
             if (ThisMission.Goal == Mission.MissionGoal.ExploreAll || ThisMission.Goal == Mission.MissionGoal.KillAll || ThisMission.Goal == Mission.MissionGoal.Gather) {
                 strDesc += "----------\nProgress:\n";
                 for (int n = 0; n < ThisMission.LevelCount; n++) {
                     strDesc += "Level " + n + " : ";
-                    MissionLevel lev = ThisMission.GetLevel(n);
+                    MissionLevel? lev = ThisMission.GetLevel(n);
                     if (lev == null) strDesc += "Not explored\n";
                     else {
                         if (ThisMission.Goal == Mission.MissionGoal.ExploreAll) {
@@ -904,10 +907,10 @@ namespace SpaceMercs.MainWindow {
                 float PanelHeight = s.GetGuiPanelHeight(SelectedEntity == s);
 
                 // Place the buttons (Y only, plus on/off if soldier is selected)
-                if (sno == 0) gbZoomTo1.ButtonY = sy + FrameBorder;
-                if (sno == 1) gbZoomTo2.ButtonY = sy + FrameBorder;
-                if (sno == 2) gbZoomTo3.ButtonY = sy + FrameBorder;
-                if (sno == 3) gbZoomTo4.ButtonY = sy + FrameBorder;
+                if (sno == 0 && gbZoomTo1 is not null) gbZoomTo1.ButtonY = sy + FrameBorder;
+                if (sno == 1 && gbZoomTo2 is not null) gbZoomTo2.ButtonY = sy + FrameBorder;
+                if (sno == 2 && gbZoomTo3 is not null) gbZoomTo3.ButtonY = sy + FrameBorder;
+                if (sno == 3 && gbZoomTo4 is not null) gbZoomTo4.ButtonY = sy + FrameBorder;
                 if (SelectedEntity == s) {
                     gbWest.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
                     gbEast.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
@@ -1031,6 +1034,7 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void SetupZoomToButtons() {
+            if (ThisMission is null) return;
             TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Eye);
             if (ThisMission.Soldiers.Count >= 1) {
                 if (gbZoomTo1 == null || gbZoomTo1.InternalData != ThisMission.Soldiers[0]) {
@@ -1057,19 +1061,19 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             if (ThisMission.Soldiers.Count < 4) {
-                if (lButtons.Contains(gbZoomTo4)) lButtons.Remove(gbZoomTo4);
+                if (gbZoomTo4 is not null && lButtons.Contains(gbZoomTo4)) lButtons.Remove(gbZoomTo4);
                 gbZoomTo4 = null;
             }
             if (ThisMission.Soldiers.Count < 3) {
-                if (lButtons.Contains(gbZoomTo3)) lButtons.Remove(gbZoomTo3);
+                if (gbZoomTo3 is not null && lButtons.Contains(gbZoomTo3)) lButtons.Remove(gbZoomTo3);
                 gbZoomTo3 = null;
             }
             if (ThisMission.Soldiers.Count < 2) {
-                if (lButtons.Contains(gbZoomTo2)) lButtons.Remove(gbZoomTo2);
+                if (gbZoomTo2 is not null && lButtons.Contains(gbZoomTo2)) lButtons.Remove(gbZoomTo2);
                 gbZoomTo2 = null;
             }
             if (ThisMission.Soldiers.Count == 0) {
-                if (lButtons.Contains(gbZoomTo1)) lButtons.Remove(gbZoomTo1);
+                if (gbZoomTo1 is not null && lButtons.Contains(gbZoomTo1)) lButtons.Remove(gbZoomTo1);
                 gbZoomTo1 = null;
             }
         }
@@ -1292,19 +1296,16 @@ namespace SpaceMercs.MainWindow {
         private void CentreView(IEntity ent) {
             fMissionViewX = ent.X;
             fMissionViewY = ent.Y;
-            // TODO glMapView.Invalidate();
         }
         private void CentreViewForceRedraw(IEntity ent) {
             fMissionViewX = ent.X;
             fMissionViewY = ent.Y;
-            // TODO glMapView.Invalidate();
-            ThisDispatcher.Invoke(() => { DrawMission(); });
-            //glMissionView_Paint(null, null);  // This line causes fun when called from a thread. Could probably do this with a dispatcher & lock?
         }
         private void ZoomToSoldier(GUIIconButton sender) {
             if (bAIRunning) return;
-            Soldier s = sender.InternalData as Soldier;
-            if (s == null) throw new Exception("ZoomToSoldier: GUIIconButton did not have Soldier set as internal data");
+            if (sender.InternalData is not Soldier s) {
+                throw new Exception("ZoomToSoldier: GUIIconButton did not have Soldier set as internal data");
+            }
             SetSelectedEntity(s);
             CentreView(s);
         }
@@ -1312,8 +1313,7 @@ namespace SpaceMercs.MainWindow {
             if (bAIRunning) return;
             Utils.Direction d = (Utils.Direction)sender.InternalData;
             //if (d == null) throw new Exception("MoveSelectedSoldier: GUIIconButton did not have Direction set as internal data");
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
-            Soldier s = SelectedEntity as Soldier;
+            if (SelectedEntity == null || !(SelectedEntity is Soldier s)) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
             MoveSoldier(s, d);
             CurrentAction = SoldierAction.None;
             ActionItem = null;
@@ -1322,7 +1322,6 @@ namespace SpaceMercs.MainWindow {
                 GenerateDetectionMap();
                 CheckForTraps(s);
             }
-            // TODO glMapView.Invalidate();
         }
         private void SelectedSoldierAttack(GUIIconButton sender) {
             if (bAIRunning) return;
@@ -1333,22 +1332,19 @@ namespace SpaceMercs.MainWindow {
             if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
                 GenerateAoEMap(s.X, s.Y, s.EquippedWeapon.Type.Area);
             }
-            // TODO glMapView.Invalidate();
         }
         private void SelectedSoldierUseItems(GUIIconButton sender) {
             if (bAIRunning) return;
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
-            using (UseItem ui = new UseItem(SelectedEntity as Soldier)) {
+            if (SelectedEntity == null || !(SelectedEntity is Soldier s)) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
+            using (UseItem ui = new UseItem(s)) {
                 ui.ShowDialog();
                 if (ui.ChosenItem != null) {
                     ActionItem = ui.ChosenItem.BaseType;
                     CurrentAction = SoldierAction.Item;
-                    Soldier s = (Soldier)SelectedEntity;
                     GenerateTargetMap(s, ActionItem.ItemEffect.Range);
                     int sy = SelectedEntity.Y;
                     int sx = SelectedEntity.X;
                     GenerateAoEMap(sx, sy, ActionItem.ItemEffect.Radius);
-                    // TODO glMapView.Invalidate();
                 }
             }
         }
@@ -1362,9 +1358,8 @@ namespace SpaceMercs.MainWindow {
             EquipmentView eqv = new EquipmentView(SelectedEntity as Soldier, st);
             eqv.ShowDialog();
             CurrentLevel.ReplaceStashAtPosition(sx, sy, st);
-            // TODO glMapView.Invalidate();
         }
-        private void SelectedSoldierSearch(GUIIconButton sender) {
+        private void SelectedSoldierSearch(GUIIconButton? sender) {
             if (bAIRunning) return;
             if (SelectedEntity == null || !(SelectedEntity is Soldier s)) return;
             if (s.Stamina < s.SearchCost) return;
@@ -1374,7 +1369,6 @@ namespace SpaceMercs.MainWindow {
             GenerateDistMap(SelectedEntity as Soldier);
             GenerateDetectionMap();
             CurrentLevel.CalculatePlayerVisibility();
-            // TODO glMapView.Invalidate();
         }
         private async void EndTurn() {
             if (bAIRunning) return;
@@ -1536,7 +1530,7 @@ namespace SpaceMercs.MainWindow {
             }
             AoERadius = (int)Math.Ceiling(range);
         }
-        private void GenerateDistMap(Soldier s) {
+        private void GenerateDistMap(Soldier? s) {
             if (s == null) return;
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
@@ -1571,7 +1565,7 @@ namespace SpaceMercs.MainWindow {
                     DetectionMap[x, y] = false;
                 }
             }
-            Soldier s = SelectedEntity as Soldier;
+            Soldier? s = SelectedEntity as Soldier;
             if (s == null) return;
 
             // Check every nearby entity

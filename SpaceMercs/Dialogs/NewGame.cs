@@ -24,7 +24,7 @@ namespace SpaceMercs.Dialogs {
         public int Seed {
             get {
                 try {
-                    return Int32.Parse(tbSeed.Text);
+                    return int.Parse(tbSeed.Text);
                 }
                 catch {
                     Random rand = new Random();

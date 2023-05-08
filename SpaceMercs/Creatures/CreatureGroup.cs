@@ -14,7 +14,7 @@ namespace SpaceMercs {
     public int MaxRelations { get; private set; }  // Won't show up against any race with which racial relations are better than this value.
     public readonly List<CreatureType> CreatureTypes = new List<CreatureType>();
     public bool HasBoss { get { return (Boss != null); } }
-    public CreatureType Boss {
+    public CreatureType? Boss {
       get {
         foreach (CreatureType tp in CreatureTypes) {
           if (tp.IsBoss) return tp;
@@ -34,7 +34,7 @@ namespace SpaceMercs {
       FoundInCaves = Locs.Contains("Cave");
       RaceSpecific = (xml.SelectSingleNode("Racial") != null);
       if (RaceSpecific) {
-        if (xml.SelectSingleNode("Racial").Attributes["MaxRelations"] != null) MaxRelations = Int32.Parse(xml.SelectSingleNode("Racial").Attributes["MaxRelations"].Value);
+        if (xml.SelectSingleNode("Racial").Attributes["MaxRelations"] != null) MaxRelations = int.Parse(xml.SelectSingleNode("Racial").Attributes["MaxRelations"].Value);
         else MaxRelations = 100; // Ignore
       }
       foreach (Planet.PlanetType pt in Enum.GetValues(typeof(Planet.PlanetType))) {
@@ -43,7 +43,7 @@ namespace SpaceMercs {
       rand = new Random();
     }
 
-    public Creature GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
+    public Creature? GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
       CreatureType tp = Boss;
 
       // Generate a suitable level

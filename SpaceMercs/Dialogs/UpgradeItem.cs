@@ -12,7 +12,7 @@ namespace SpaceMercs.Dialogs {
     public bool Upgraded = false; // Did we attempt the upgrade? (i.e. should we remove the old item?) We need this in case the upgrade destroys the object, in which case NewItem will be null.
     public bool Destroyed = false; // Destroyed in attempting to upgrade?
 
-    public UpgradeItem(IEquippable eq, double PriceMod, int skill, Team t, Soldier s = null) {
+    public UpgradeItem(IEquippable eq, double PriceMod, int skill, Team t, Soldier? s = null) {
       InitializeComponent();
       item = eq;
       PlayerTeam = t;

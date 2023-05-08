@@ -73,13 +73,14 @@ namespace SpaceMercs {
             Color col = (Color)data["Colour"];
             float fract = 1f - (mili / (pow * 50f));
             if (fract < 0.0) return true;
-            GL.LineWidth(2.0f);
-            GL.Begin(BeginMode.Lines);
-            GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
-            GL.Vertex3(fx, fy, Const.GUILayer);
-            GL.Vertex3(tx, ty, Const.GUILayer);
-            GL.End();
-            GL.LineWidth(1.0f);
+            // TODO Replace this code
+            //GL.LineWidth(2.0f);
+            //GL.Begin(BeginMode.Lines);
+            //GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
+            //GL.Vertex3(fx, fy, Const.GUILayer);
+            //GL.Vertex3(tx, ty, Const.GUILayer);
+            //GL.End();
+            //GL.LineWidth(1.0f);
             return false;
         }
         private bool DisplayShotBullets(Stopwatch sw) {
@@ -102,16 +103,17 @@ namespace SpaceMercs {
             double st = Math.Max(0.0, (mililast * speed) / dist);
             double sx = fx + ((tx - fx) * st);
             double sy = fy + ((ty - fy) * st);
-            GL.LineWidth(2.0f);
-            GL.Begin(BeginMode.Lines);
-            double fract = (mililast - (mili - dt)) / dt;
-            GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
-            GL.Vertex3(sx, sy, Const.GUILayer);
-            double fract2 = 1.0 - ((mili - milimod) / dt);
-            GL.Color4(col.R * fract2, col.G * fract2, col.B * fract2, 255);
-            GL.Vertex3(xx, yy, Const.GUILayer);
-            GL.End();
-            GL.LineWidth(1.0f);
+            // TODO Replace this code
+            //GL.LineWidth(2.0f);
+            //GL.Begin(BeginMode.Lines);
+            //double fract = (mililast - (mili - dt)) / dt;
+            //GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
+            //GL.Vertex3(sx, sy, Const.GUILayer);
+            //double fract2 = 1.0 - ((mili - milimod) / dt);
+            //GL.Color4(col.R * fract2, col.G * fract2, col.B * fract2, 255);
+            //GL.Vertex3(xx, yy, Const.GUILayer);
+            //GL.End();
+            //GL.LineWidth(1.0f);
             return false;
         }
     }

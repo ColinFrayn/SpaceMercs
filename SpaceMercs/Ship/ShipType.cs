@@ -52,10 +52,10 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("AKA") != null) AKA = xml.SelectSingleNode("AKA").InnerText;
             else AKA = "";
             Cost = double.Parse(xml.SelectSingleNode("Cost").InnerText);
-            Small = Int32.Parse(xml.SelectSingleNode("Small").InnerText);
-            Medium = Int32.Parse(xml.SelectSingleNode("Medium").InnerText);
-            Large = Int32.Parse(xml.SelectSingleNode("Large").InnerText);
-            Weapon = Int32.Parse(xml.SelectSingleNode("Weapon").InnerText);
+            Small = int.Parse(xml.SelectSingleNode("Small").InnerText);
+            Medium = int.Parse(xml.SelectSingleNode("Medium").InnerText);
+            Large = int.Parse(xml.SelectSingleNode("Large").InnerText);
+            Weapon = int.Parse(xml.SelectSingleNode("Weapon").InnerText);
             Description = xml.SelectSingleNode("Desc").InnerText;
             SetupLayout();
         }

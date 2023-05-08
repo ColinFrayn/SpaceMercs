@@ -14,15 +14,15 @@ namespace SpaceMercs {
         }
         public Planet.PlanetType Type;
         protected List<Mission>? _MissionList = null;
-        public IEnumerable<Mission> MissionList { get { return _MissionList?.AsReadOnly(); } }
+        public IEnumerable<Mission> MissionList { get { return _MissionList?.AsReadOnly() ?? new List<Mission>().AsReadOnly(); } }
         public bool Scanned { get { return (_MissionList != null); } }
         public int CountMissions { get { return _MissionList == null ? 0 : _MissionList.Count; } }
 
         protected void LoadMissions(XmlNode xml) {
-            XmlNode xms = xml.SelectSingleNode("Missions");
-            if (xms == null) return;
+            XmlNodeList? nodes = xml.SelectSingleNode("Missions")?.SelectNodes("Mission");
+            if (nodes == null) return;
             _MissionList = new List<Mission>();
-            foreach (XmlNode xm in xms.SelectNodes("Mission")) {
+            foreach (XmlNode xm in nodes) {
                 _MissionList.Add(new Mission(xm, this));
             }
         }

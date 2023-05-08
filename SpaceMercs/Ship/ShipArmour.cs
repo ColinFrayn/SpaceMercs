@@ -10,7 +10,7 @@ namespace SpaceMercs {
     public double HealRate { get; private set; }
 
     public ShipArmour(XmlNode xml) : base(xml, ShipEquipment.RoomSize.Armour) {
-      BaseArmour = Int32.Parse(xml.SelectSingleNode("BaseArmour").InnerText);
+      BaseArmour = int.Parse(xml.SelectSingleNode("BaseArmour").InnerText);
       if (xml.SelectSingleNode("Heal") != null) HealRate = double.Parse(xml.SelectSingleNode("Heal").InnerText);
     }
   }

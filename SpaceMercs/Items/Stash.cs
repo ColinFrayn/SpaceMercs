@@ -42,11 +42,11 @@ namespace SpaceMercs {
     }
     public Stash(XmlNode xml) {
       stash = new Dictionary<IItem, int>();
-      int X = Int32.Parse(xml.Attributes["X"].Value);
-      int Y = Int32.Parse(xml.Attributes["Y"].Value);
+      int X = int.Parse(xml.Attributes["X"].Value);
+      int Y = int.Parse(xml.Attributes["Y"].Value);
       Location = new Point(X, Y);
       foreach (XmlNode xn in xml.SelectNodes("StashItem")) {
-        int n = Int32.Parse(xn.Attributes["N"].Value);
+        int n = int.Parse(xn.Attributes["N"].Value);
         IItem it = Utils.LoadItem(xn.FirstChild);
         stash.Add(it, n);
       }

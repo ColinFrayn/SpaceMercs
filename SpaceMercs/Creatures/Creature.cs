@@ -276,7 +276,7 @@ namespace SpaceMercs {
         // Creature-specific
         public CreatureType Type { get; private set; }
         public Race? OverrideRace { get; private set; }  // If this is a humanoid then create a race-specific version (if the Type can be overridden)
-        public IEntity CurrentTarget { get; private set; }
+        public IEntity? CurrentTarget { get; private set; }
         private double MovementCost { get { return Type.MovementCost / SpeedModifier(); } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
         private readonly MissionLevel CurrentLevel;
@@ -333,9 +333,9 @@ namespace SpaceMercs {
             if (Type == null) throw new Exception("Could not ID Type for Creature : " + strName);
 
             XmlNode xmll = xml.SelectSingleNode("Location");
-            X = Int32.Parse(xmll.Attributes["X"].Value);
-            Y = Int32.Parse(xmll.Attributes["Y"].Value);
-            Level = Int32.Parse(xml.SelectSingleNode("Level").InnerText);
+            X = int.Parse(xmll.Attributes["X"].Value);
+            Y = int.Parse(xmll.Attributes["Y"].Value);
+            Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
             if (Double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
                 Facing = fac;
             }
@@ -368,8 +368,8 @@ namespace SpaceMercs {
             // Current target
             XmlNode xnt = xml.SelectSingleNode("Target");
             if (xnt != null) {
-                TX = Int32.Parse(xnt.Attributes["X"].Value);
-                TY = Int32.Parse(xnt.Attributes["Y"].Value);
+                TX = int.Parse(xnt.Attributes["X"].Value);
+                TY = int.Parse(xnt.Attributes["Y"].Value);
             }
             else {
                 TX = -1;
@@ -377,7 +377,7 @@ namespace SpaceMercs {
             }
             XmlNode xni = xml.SelectSingleNode("Investigate");
             if (xni != null) {
-                Investigate = new Point(Int32.Parse(xni.Attributes["X"].Value), Int32.Parse(xni.Attributes["Y"].Value));
+                Investigate = new Point(int.Parse(xni.Attributes["X"].Value), int.Parse(xni.Attributes["Y"].Value));
             }
             else Investigate = Point.Empty;
 
@@ -682,7 +682,7 @@ namespace SpaceMercs {
             _Effects.RemoveAll(e => e.Duration <= 0);
             if (Health < 0.0) _Effects.Clear();
         }
-        public void SetTarget(IEntity tg) {
+        public void SetTarget(IEntity? tg) {
             CurrentTarget = tg;
             if (tg == null) Investigate = Point.Empty;
             else Investigate = tg.Location;

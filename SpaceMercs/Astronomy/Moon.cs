@@ -11,8 +11,9 @@ namespace SpaceMercs {
         public Planet Parent { get; set; }
         public override float DrawScale { get { return (float)Math.Sqrt(radius / 1000.0) / 50f; } }
 
-        public Moon(int _seed) {
+        public Moon(int _seed, Planet parent) {
             Seed = _seed;
+            Parent = parent;
             _MissionList = null;
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
@@ -24,8 +25,8 @@ namespace SpaceMercs {
             // Load this moon from the given Xml node
             // Start with generic AO stuff
             LoadAODetailsFromFile(xml);
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type").InnerText);
-            XmlNode xmlc = xml.SelectSingleNode("Colony");
+            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type")?.InnerText ?? throw new Exception("Unable to find PlanetType in moon saved details"));
+            XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
             colour = Const.PlanetTypeToCol2(Type);
             LoadMissions(xml);

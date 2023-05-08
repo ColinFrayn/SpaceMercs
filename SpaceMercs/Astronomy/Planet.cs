@@ -17,7 +17,8 @@ namespace SpaceMercs {
         public double tempbase;
         public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
 
-        public Planet(int _seed) {
+        public Planet(int _seed, Star parent) {
+            Parent = parent;
             Moons = new List<Moon>();
             _MissionList = null;
             strName = "";
@@ -33,15 +34,15 @@ namespace SpaceMercs {
             // Start with generic AO stuff
             LoadAODetailsFromFile(xml);
 
-            XmlNode xmlc = xml.SelectSingleNode("Colony");
+            XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
 
             // Load planet-specific stuff
-            tempbase = double.Parse(xml.SelectSingleNode("TempBase").InnerText);
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type").InnerText);
+            tempbase = double.Parse(xml.SelectSingleNode("TempBase")?.InnerText ?? throw new Exception("Unable to find TempBase in planet saved details"));
+            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type")?.InnerText ?? throw new Exception("Unable to find PlanetType in planet saved details"));
 
             Moons = new List<Moon>();
-            XmlNode xmlMoons = xml.SelectSingleNode("Moons");
+            XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
             if (xmlMoons != null) {
                 foreach (XmlNode xmlm in xmlMoons.ChildNodes) {
                     Moon mn = new Moon(xmlm, this);
@@ -75,13 +76,13 @@ namespace SpaceMercs {
         }
 
         // Retrieve a moon from this system by ID
-        public Moon GetMoonByID(int ID) {
+        public Moon? GetMoonByID(int ID) {
             if (ID < 0 || ID >= Moons.Count) return null;
             return Moons[ID];
         }
 
         // Are we hovering over anything here?
-        public AstronomicalObject GetHover(double mousex, double mousey, double px, double py) {
+        public AstronomicalObject? GetHover(double mousex, double mousey, double px, double py) {
             py += Const.MoonGap * Const.PlanetScale;
             foreach (Moon mn in Moons) {
                 if (Math.Abs(px - mousex) < (mn.DrawScale * Const.PlanetScale * Const.MoonScale * Const.SystemViewSelectionTolerance) && Math.Abs(py - mousey) < (mn.DrawScale * Const.PlanetScale * Const.MoonScale * Const.SystemViewSelectionTolerance)) return mn;
@@ -168,7 +169,7 @@ namespace SpaceMercs {
 
             // Generate moons
             for (int n = 0; n < nmn; n++) {
-                Moon mn = new Moon(rnd.Next(10000000));
+                Moon mn = new Moon(rnd.Next(10000000), this);
                 mn.ID = n;
 
                 do {
@@ -177,7 +178,6 @@ namespace SpaceMercs {
 
                 mn.orbit = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(n + 1), Const.MoonOrbitSigma);
                 mn.orbit += radius;
-                mn.Parent = this;
                 bool bOK = true;
                 do {
                     mn.Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees

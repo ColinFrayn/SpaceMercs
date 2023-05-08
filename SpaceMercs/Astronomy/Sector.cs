@@ -38,10 +38,10 @@ namespace SpaceMercs {
             // Done
         }
         public Sector(XmlNode xml, Map map) {
-            SectorX = Int32.Parse(xml.Attributes["X"].Value);
-            SectorY = Int32.Parse(xml.Attributes["Y"].Value);
+            SectorX = int.Parse(xml.Attributes?["X"]?.Value ?? throw new Exception("Unable to find X pos in sector saved details"));
+            SectorY = int.Parse(xml.Attributes?["Y"]?.Value ?? throw new Exception("Unable to find Y pos in sector saved details"));
             ParentMap = map;
-            Inhabitant = StaticData.GetRaceByName(xml.Attributes["Inhabitant"].Value);
+            Inhabitant = StaticData.GetRaceByName(xml.Attributes["Inhabitant"]?.Value);
 
             foreach (XmlNode xmls in xml.ChildNodes) {
                 Star st = new Star(xmls, this);
@@ -105,44 +105,44 @@ namespace SpaceMercs {
                     else Disc.Disc16.BindAndDraw();
                 }
 
-                continue;
-
                 // Draw the name label for this star
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
-                    GL.PushMatrix();
-                    GL.Translate(0.0, -(Const.StarScale + 0.02), 0.01);
-                    double scale = 0.02 * fMapViewZ;
-                    GL.Scale(scale, scale, scale);
-                    st.DrawName();
-                    GL.PopMatrix();
+                    // TODO
+                    //GL.PushMatrix();
+                    //GL.Translate(0.0, -(Const.StarScale + 0.02), 0.01);
+                    //double scale = 0.02 * fMapViewZ;
+                    //GL.Scale(scale, scale, scale);
+                    //st.DrawName();
+                    //GL.PopMatrix();
                 }
 
                 // Display whether this system has been colonised with a flag
                 if (bShowFlags && st.Visited && st.Owner != null) {
-                    GL.PushMatrix();
-                    GL.Translate(0.0, Const.StarScale, 0.01);
-                    double scale = 0.01 * fMapViewZ;
-                    GL.Scale(scale, scale, scale);
-                    GL.Color3(st.Owner.Colour);
-                    GL.Begin(BeginMode.Quads);
-                    GL.Vertex3(0.0, 0.5, 0.0);
-                    GL.Vertex3(0.7, 0.5, 0.0);
-                    GL.Vertex3(0.7, 1.0, 0.0);
-                    GL.Vertex3(0.0, 1.0, 0.0);
-                    GL.End();
-                    GL.Color3(0.7, 0.45, 0.2);
-                    GL.Begin(BeginMode.Lines);
-                    GL.Vertex3(0.0, 0.0, 0.0);
-                    GL.Vertex3(0.0, 1.0, 0.0);
-                    GL.End();
-                    GL.PopMatrix();
+                    // TODO
+                    //GL.PushMatrix();
+                    //GL.Translate(0.0, Const.StarScale, 0.01);
+                    //double scale = 0.01 * fMapViewZ;
+                    //GL.Scale(scale, scale, scale);
+                    //GL.Color3(st.Owner.Colour);
+                    //GL.Begin(BeginMode.Quads);
+                    //GL.Vertex3(0.0, 0.5, 0.0);
+                    //GL.Vertex3(0.7, 0.5, 0.0);
+                    //GL.Vertex3(0.7, 1.0, 0.0);
+                    //GL.Vertex3(0.0, 1.0, 0.0);
+                    //GL.End();
+                    //GL.Color3(0.7, 0.45, 0.2);
+                    //GL.Begin(BeginMode.Lines);
+                    //GL.Vertex3(0.0, 0.0, 0.0);
+                    //GL.Vertex3(0.0, 1.0, 0.0);
+                    //GL.End();
+                    //GL.PopMatrix();
                 }
 
-                GL.PopMatrix();
+                //GL.PopMatrix();
             }
         }
 
-        public Star CheckHover(double x, double y, double fMapViewZ) {
+        public Star? CheckHover(double x, double y, double fMapViewZ) {
             foreach (Star st in Stars) {
                 double dx = x - st.MapPos.X;
                 double dy = y - st.MapPos.Y;
@@ -153,7 +153,7 @@ namespace SpaceMercs {
             return null;
         }
 
-        public Star GetMostCentralStar() {
+        public Star? GetMostCentralStar() {
             double AveX = 0.0, AveY = 0.0;
             foreach (Star st in Stars) {
                 AveX += st.MapPos.X;
@@ -161,7 +161,7 @@ namespace SpaceMercs {
             }
             AveX /= Stars.Count;
             AveY /= Stars.Count;
-            Star stClosest = null;
+            Star? stClosest = null;
             double dClosest = 100000.0;
             foreach (Star st in Stars) {
                 double dx = st.MapPos.X - AveX;
@@ -175,8 +175,8 @@ namespace SpaceMercs {
             return stClosest;
         }
 
-        public Star GetClosestNonColonisedSystemTo(Star stCentral) {
-            Star stClosest = null;
+        public Star? GetClosestNonColonisedSystemTo(Star stCentral) {
+            Star? stClosest = null;
             double dClosest = 100000.0;
             foreach (Star st in Stars) {
                 if (st.Owner != null) continue;
@@ -198,8 +198,10 @@ namespace SpaceMercs {
                     // Only draw them from left to right, in order not to draw each one twice
                     if (st.MapPos.X < targ.MapPos.X && (st.Visited || targ.Visited)) {
                         // Add this line
-                        VertexPos2DCol v1 = new VertexPos2DCol(new Vector2(st.MapPos.X, st.MapPos.Y), new Color4(st.Owner.Colour.R, st.Owner.Colour.G, st.Owner.Colour.B, 1f));
-                        VertexPos2DCol v2 = new VertexPos2DCol(new Vector2(targ.MapPos.X, targ.MapPos.Y), new Color4(targ.Owner.Colour.R, targ.Owner.Colour.G, targ.Owner.Colour.B, 1f));
+                        Color4 colFrom = (st.Owner is null) ? Color4.LightGray : new Color4(st.Owner.Colour.R, st.Owner.Colour.G, st.Owner.Colour.B, 1f);
+                        Color4 colTo = (targ.Owner is null) ? Color4.LightGray : new Color4(targ.Owner.Colour.R, targ.Owner.Colour.G, targ.Owner.Colour.B, 1f);
+                        VertexPos2DCol v1 = new VertexPos2DCol(new Vector2(st.MapPos.X, st.MapPos.Y), colFrom);
+                        VertexPos2DCol v2 = new VertexPos2DCol(new Vector2(targ.MapPos.X, targ.MapPos.Y), colTo);
                         vertices.Add(v1);
                         vertices.Add(v2);
                     }
@@ -221,32 +223,32 @@ namespace SpaceMercs {
             GL.BindVertexArray(0);
         }
 
-        public Star GetStarByID(int id) {
+        public Star? GetStarByID(int id) {
             if (id < 0 || id >= Stars.Count) return null;
             return Stars[id];
         }
 
-        public AstronomicalObject GetAOFromLocationString(string strLoc) {
+        public AstronomicalObject? GetAOFromLocationString(string strLoc) {
             if (!strLoc.StartsWith("(") || !strLoc.Contains(")")) throw new Exception("Illegal location string:" + strLoc);
             string strMapLoc = strLoc.Substring(0, strLoc.IndexOf(")") + 1);
             string[] bits = strMapLoc.Replace("(", "").Replace(")", "").Split(',');
             if (bits.Length != 2) throw new Exception("Couldn't parse location string : " + strLoc + " - Sector location invalid : " + strMapLoc);
-            int sX = Int32.Parse(bits[0]);
-            int sY = Int32.Parse(bits[1]);
+            int sX = int.Parse(bits[0]);
+            int sY = int.Parse(bits[1]);
             if (sX != SectorX || sY != SectorY) return null;
             return GetAOFromLocationWithinSector(strLoc.Substring(strLoc.IndexOf(")") + 1));
         }
-        public AstronomicalObject GetAOFromLocationWithinSector(string strAOID) {
+        public AstronomicalObject? GetAOFromLocationWithinSector(string strAOID) {
             string[] bits = strAOID.Split('.');
             if (bits.Length == 0 || bits.Length > 3) throw new Exception("Illegal location within sector : \"" + strAOID + "\"");
-            int sno = Int32.Parse(bits[0]);
-            Star st = GetStarByID(sno);
+            int sno = int.Parse(bits[0]);
+            Star? st = GetStarByID(sno);
             if (st == null || bits.Length == 1) return st;
-            int pno = Int32.Parse(bits[1]);
-            Planet pl = st.GetPlanetByID(pno);
+            int pno = int.Parse(bits[1]);
+            Planet? pl = st.GetPlanetByID(pno);
             if (pl == null || bits.Length == 2) return pl;
-            int mno = Int32.Parse(bits[2]);
-            Moon mn = pl.GetMoonByID(mno);
+            int mno = int.Parse(bits[2]);
+            Moon? mn = pl.GetMoonByID(mno);
             return mn;
         }
 

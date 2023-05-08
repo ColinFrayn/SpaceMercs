@@ -25,7 +25,7 @@ namespace SpaceMercs.Dialogs {
         Equipped = eq;
         Count = c;
       }
-      public override bool Equals(object obj) {
+      public override bool Equals(object? obj) {
         if (!(obj is SaleItem s)) return false;
         if (s.Item != Item) return false;
         if (s.Soldier != Soldier) return false;
@@ -171,7 +171,7 @@ namespace SpaceMercs.Dialogs {
         dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
       }
     }
-    private void SetupFoundryTab(List<SaleItem> tpLast = null) {
+    private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
       HashSet<SaleItem> hsLast;
       if (tpLast == null) hsLast = new HashSet<SaleItem>();
       else hsLast = new HashSet<SaleItem>(tpLast);

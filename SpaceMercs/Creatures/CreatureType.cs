@@ -37,7 +37,7 @@ namespace SpaceMercs {
 
         public CreatureType(XmlNode xml, CreatureGroup gp) {
             Name = xml.Attributes["Name"].InnerText;
-            if (xml.SelectSingleNode("Size") != null) Size = Int32.Parse(xml.SelectSingleNode("Size").InnerText);
+            if (xml.SelectSingleNode("Size") != null) Size = int.Parse(xml.SelectSingleNode("Size").InnerText);
             else Size = 1;
             if (xml.SelectSingleNode("Scale") != null) Scale = Double.Parse(xml.SelectSingleNode("Scale").InnerText);
             else Scale = (double)Size;
@@ -45,15 +45,15 @@ namespace SpaceMercs {
             string strLevel = xml.SelectSingleNode("LevelRange").InnerText;
             string[] bits = strLevel.Split(',');
             if (bits.Length != 2) throw new Exception(Name + " : Could not parse level range string : " + strLevel);
-            LevelMin = Int32.Parse(bits[0]);
-            LevelMax = Int32.Parse(bits[1]);
+            LevelMin = int.Parse(bits[0]);
+            LevelMax = int.Parse(bits[1]);
 
-            HealthBase = Int32.Parse(xml.SelectSingleNode("Health").InnerText);
-            StaminaBase = Int32.Parse(xml.SelectSingleNode("Stamina").InnerText);
-            ArmourBase = Int32.Parse(xml.SelectSingleNode("Armour").InnerText);
+            HealthBase = int.Parse(xml.SelectSingleNode("Health").InnerText);
+            StaminaBase = int.Parse(xml.SelectSingleNode("Stamina").InnerText);
+            ArmourBase = int.Parse(xml.SelectSingleNode("Armour").InnerText);
 
             if (xml.SelectSingleNode("Shields") != null) {
-                ShieldsBase = Int32.Parse(xml.SelectSingleNode("Shields").InnerText);
+                ShieldsBase = int.Parse(xml.SelectSingleNode("Shields").InnerText);
             }
             else ShieldsBase = 0;
 
@@ -62,8 +62,8 @@ namespace SpaceMercs {
             }
             else MovementCost = Const.MovementCost; // Default = 2.0
 
-            AttackBase = Int32.Parse(xml.SelectSingleNode("Attack").InnerText);
-            DefenceBase = Int32.Parse(xml.SelectSingleNode("Defence").InnerText);
+            AttackBase = int.Parse(xml.SelectSingleNode("Attack").InnerText);
+            DefenceBase = int.Parse(xml.SelectSingleNode("Defence").InnerText);
 
             if (xml.SelectSingleNode("BodyType") != null) {
                 Body = (BodyType)Enum.Parse(typeof(BodyType), xml.SelectSingleNode("BodyType").InnerText);
@@ -77,17 +77,17 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("Col1") != null) {
                 bits = xml.SelectSingleNode("Col1").InnerText.Split(',');
                 if (bits.Length != 3) throw new Exception("Could not parse Colour1 string : " + xml.SelectSingleNode("Col1").InnerText);
-                Col1 = Color.FromArgb(255, Int32.Parse(bits[0]), Int32.Parse(bits[1]), Int32.Parse(bits[2]));
+                Col1 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
             }
             if (xml.SelectSingleNode("Col2") != null) {
                 bits = xml.SelectSingleNode("Col2").InnerText.Split(',');
                 if (bits.Length != 3) throw new Exception("Could not parse Colour2 string : " + xml.SelectSingleNode("Col2").InnerText);
-                Col2 = Color.FromArgb(255, Int32.Parse(bits[0]), Int32.Parse(bits[1]), Int32.Parse(bits[2]));
+                Col2 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
             }
             if (xml.SelectSingleNode("Col3") != null) {
                 bits = xml.SelectSingleNode("Col3").InnerText.Split(',');
                 if (bits.Length != 3) throw new Exception("Could not parse Colour3 string : " + xml.SelectSingleNode("Col3").InnerText);
-                Col3 = Color.FromArgb(255, Int32.Parse(bits[0]), Int32.Parse(bits[1]), Int32.Parse(bits[2]));
+                Col3 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
             }
 
             // Special resistances
@@ -104,7 +104,7 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("Scavenge") != null) {
                 foreach (XmlNode xn in xml.SelectNodes("Scavenge/Item")) {
                     double amount = Double.Parse(xn.Attributes["Amount"].Value);
-                    MaterialType tp = StaticData.GetMaterialTypeByName(xn.InnerText);
+                    MaterialType? tp = StaticData.GetMaterialTypeByName(xn.InnerText);
                     if (tp == null) throw new Exception("Couldn't identify scavenging material " + xn.InnerText + " in creature type " + Name);
                     if (Scavenge.ContainsKey(tp)) throw new Exception("Duplicate scavenging result of type " + tp + " for creature " + Name);
                     Scavenge.Add(tp, amount);
@@ -114,9 +114,9 @@ namespace SpaceMercs {
             // Weapons
             if (xml.SelectSingleNode("Weapons") != null) {
                 foreach (XmlNode xn in xml.SelectNodes("Weapons/Weapon")) {
-                    WeaponType wpt = StaticData.GetWeaponTypeByName(xn.InnerText);
+                    WeaponType? wpt = StaticData.GetWeaponTypeByName(xn.InnerText);
                     if (wpt == null) throw new Exception("Creature " + Name + " has unknown weapon : " + xn.InnerText);
-                    int wgt = Int32.Parse(xn.Attributes["Weight"].Value);
+                    int wgt = int.Parse(xn.Attributes["Weight"].Value);
                     if (Weapons.ContainsKey(wpt)) throw new Exception("Creature " + Name + " has repeated weapons : " + wpt.Name);
                     Weapons.Add(wpt, wgt);
                     WeaponTotalWeight += wgt;
@@ -124,7 +124,8 @@ namespace SpaceMercs {
             }
             else {
                 WeaponTotalWeight = 1;
-                Weapons.Add(StaticData.GetWeaponTypeByName("Bite"), 1);
+                WeaponType? wtyp = StaticData.GetWeaponTypeByName("Bite");
+                if (wtyp != null) Weapons.Add(wtyp, 1);
             }
 
             // Misc

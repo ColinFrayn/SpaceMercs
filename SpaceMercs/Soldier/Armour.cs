@@ -95,7 +95,7 @@ namespace SpaceMercs {
       Level = iNewLevel;
     }
     public Armour(XmlNode xml) {
-      Level = Int32.Parse(xml.Attributes["Level"].Value);
+      Level = int.Parse(xml.Attributes["Level"].Value);
       string strType = xml.Attributes["Type"].Value;
       Type = StaticData.GetArmourTypeByName(strType);
       if (Type == null) throw new Exception("Could not ID armour type : " + strType);
@@ -114,7 +114,7 @@ namespace SpaceMercs {
         return hash;
       }
     }
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (obj == null || GetType() != obj.GetType()) return false;
       Armour ar = obj as Armour;
       return (ar.Level == Level && ar.Material == Material && ar.Type == Type);

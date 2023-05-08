@@ -149,33 +149,33 @@ namespace SpaceMercs {
     }
 
     // Utility functions
-    public static ItemType GetItemTypeByName(string strName) {
+    public static ItemType? GetItemTypeByName(string strName) {
       foreach (ItemType it in ItemTypes) {
         if (it.Name.Equals(strName)) return it;
       }
       return null;
     }
-    public static ItemType GetItemTypeById(int id) {
+    public static ItemType? GetItemTypeById(int id) {
       foreach (ItemType it in ItemTypes) {
         if (it.ItemID == id) return it;
       }
       return null;
     }
-    public static Race GetRaceByName(string strName) {
+    public static Race? GetRaceByName(string? strName) {
       foreach (Race rc in Races) {
         if (rc.Name.Equals(strName)) return rc;
       }
       return null;
     }
-    public static ShipType GetShipTypeByName(string strName) {
+    public static ShipType? GetShipTypeByName(string strName) {
       foreach (ShipType st in ShipTypes) {
         if (st.Name.Equals(strName)) return st;
         if (st.AKA.Equals(strName)) return st;
       }
       return null;
     }
-    public static ShipType GetStarterShip() {
-      ShipType stCheapest = null;
+    public static ShipType? GetStarterShip() {
+      ShipType? stCheapest = null;
       double best = 1000000.0;
       foreach (ShipType st in ShipTypes) {
         if (stCheapest == null || st.Cost < best) {
@@ -185,15 +185,15 @@ namespace SpaceMercs {
       }
       return stCheapest;
     }
-    public static ShipEngine GetShipEngineByName(string strName) {
+    public static ShipEngine? GetShipEngineByName(string strName) {
       foreach (ShipEngine se in ShipEngines) {
         if (se.Name.Equals(strName)) return se;
       }
       return null;
     }
-    public static ShipEngine GetMinimumDriveByDistance(double dist) {
+    public static ShipEngine? GetMinimumDriveByDistance(double dist) {
       double cheapest = 10000.0;
-      ShipEngine seBest = null;
+      ShipEngine? seBest = null;
       foreach (ShipEngine se in ShipEngines) {
         if (se.Range >= dist && (seBest == null || se.Cost < cheapest)) {
           cheapest = se.Cost;
@@ -202,49 +202,49 @@ namespace SpaceMercs {
       }
       return seBest;
     }
-    public static ShipWeapon GetShipWeaponByName(string strName) {
+    public static ShipWeapon? GetShipWeaponByName(string strName) {
       foreach (ShipWeapon sw in ShipWeapons) {
         if (sw.Name.Equals(strName)) return sw;
       }
       return null;
     }
-    public static ShipArmour GetShipArmourByName(string strName) {
+    public static ShipArmour? GetShipArmourByName(string strName) {
       foreach (ShipArmour sa in ShipArmours) {
         if (sa.Name.Equals(strName)) return sa;
       }
       return null;
     }
-    public static MaterialType GetMaterialTypeByName(string strName) {
+    public static MaterialType? GetMaterialTypeByName(string strName) {
       foreach (MaterialType m in Materials) {
         if (m.Name.Equals(strName)) return m;
       }
       return null;
     }
-    public static ShipEquipment GetShipEquipmentByName(string strName) {
+    public static ShipEquipment? GetShipEquipmentByName(string strName) {
       foreach (ShipEquipment se in ShipEquipment) {
         if (se.Name.Equals(strName)) return se;
       }
       return null;
     }
-    public static WeaponType GetWeaponTypeByName(string strName) {
+    public static WeaponType? GetWeaponTypeByName(string strName) {
       foreach (WeaponType wt in WeaponTypes) {
         if (wt.Name.Equals(strName)) return wt;
       }
       return null;
     }
-    public static ArmourType GetArmourTypeByName(string strName) {
+    public static ArmourType? GetArmourTypeByName(string strName) {
       foreach (ArmourType at in ArmourTypes) {
         if (at.Name.Equals(strName)) return at;
       }
       return null;
     }
-    public static CreatureType GetCreatureTypeByName(string strName) {
+    public static CreatureType? GetCreatureTypeByName(string strName) {
       foreach (CreatureType ct in CreatureTypes) {
         if (ct.Name.Equals(strName)) return ct;
       }
       return null;
     }
-    public static CreatureGroup GetCreatureGroupByName(string strName) {
+    public static CreatureGroup? GetCreatureGroupByName(string strName) {
       foreach (CreatureGroup cg in CreatureGroups) {
         if (cg.Name.Equals(strName)) return cg;
       }

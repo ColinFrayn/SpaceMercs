@@ -40,7 +40,7 @@ namespace SpaceMercs {
         public double Attack { get; private set; }
         public double Defence { get; private set; }
         public string Name { get; private set; }
-        public Weapon EquippedWeapon { get; private set; }
+        public Weapon? EquippedWeapon { get; private set; }
         public int Size { get { return 1; } }
         public int TravelRange { get { /* if (Encumbrance >= 1.0) return 0; */ return (int)Math.Floor(Stamina / MovementCost); } }
         public double AttackRange { get { if (EquippedWeapon == null) return 1.0; return EquippedWeapon.Range; } }
@@ -494,23 +494,23 @@ namespace SpaceMercs {
 
             XmlNode xmll = xml.SelectSingleNode("Location");
             if (xmll != null) {
-                X = Int32.Parse(xmll.Attributes["X"].Value);
-                Y = Int32.Parse(xmll.Attributes["Y"].Value);
+                X = int.Parse(xmll.Attributes["X"].Value);
+                Y = int.Parse(xmll.Attributes["Y"].Value);
             }
             else X = Y = 0;
-            Level = Int32.Parse(xml.SelectSingleNode("Level").InnerText);
+            Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
             Gender = (GenderType)Enum.Parse(typeof(GenderType), xml.SelectSingleNode("Gender").InnerText);
             Race = StaticData.GetRaceByName(xml.SelectSingleNode("Race").InnerText);
             if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectSingleNode("Race").InnerText);
             XmlNode xmls = xml.SelectSingleNode("Stats");
             string[] stats = xmls.InnerText.Split(',');
             if (stats.Length != 5) throw new Exception("Could not understand stats string for Soldier " + Name + " : " + xmls.InnerText);
-            BaseStrength = Int32.Parse(stats[0]);
-            BaseAgility = Int32.Parse(stats[1]);
-            BaseIntellect = Int32.Parse(stats[2]);
-            BaseToughness = Int32.Parse(stats[3]);
-            BaseEndurance = Int32.Parse(stats[4]);
-            Experience = Int32.Parse(xml.SelectSingleNode("XP").InnerText);
+            BaseStrength = int.Parse(stats[0]);
+            BaseAgility = int.Parse(stats[1]);
+            BaseIntellect = int.Parse(stats[2]);
+            BaseToughness = int.Parse(stats[3]);
+            BaseEndurance = int.Parse(stats[4]);
+            Experience = int.Parse(xml.SelectSingleNode("XP").InnerText);
             if (xml.SelectSingleNode("Health") != null) Health = Double.Parse(xml.SelectSingleNode("Health").InnerText);
             else Health = MaxHealth;
             if (xml.SelectSingleNode("Stamina") != null) Stamina = Double.Parse(xml.SelectSingleNode("Stamina").InnerText);
@@ -536,8 +536,8 @@ namespace SpaceMercs {
 
             XmlNode xg = xml.SelectSingleNode("GoTo");
             if (xg != null) {
-                int gx = Int32.Parse(xg.Attributes["X"].Value);
-                int gy = Int32.Parse(xg.Attributes["Y"].Value);
+                int gx = int.Parse(xg.Attributes["X"].Value);
+                int gy = int.Parse(xg.Attributes["Y"].Value);
                 GoTo = new Point(gx, gy);
             }
             else GoTo = Point.Empty;
@@ -546,7 +546,7 @@ namespace SpaceMercs {
             Inventory.Clear();
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
-                    int count = Int32.Parse(xi.Attributes["Count"].Value);
+                    int count = int.Parse(xi.Attributes["Count"].Value);
                     IItem eq = Utils.LoadItem(xi.FirstChild);
                     if (Inventory.ContainsKey(eq)) Inventory[eq] += count; // Ideally shouldn't happen, but we might as well tidy it up here if it does...
                     else Inventory.Add(eq, count);
@@ -574,7 +574,7 @@ namespace SpaceMercs {
                 foreach (XmlNode xw in wex.SelectNodes("Exp")) {
                     WeaponType tp = StaticData.GetWeaponTypeByName(xw.Attributes["Type"].Value);
                     if (tp == null) throw new Exception("Could not ID WeaponType : " + xw.Attributes["Type"].Value);
-                    int exp = Int32.Parse(xw.InnerText);
+                    int exp = int.Parse(xw.InnerText);
                     WeaponExperience.Add(tp, exp);
                 }
             }
@@ -585,7 +585,7 @@ namespace SpaceMercs {
             if (wut != null) {
                 foreach (XmlNode xu in wut.SelectNodes("Exp")) {
                     UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.Attributes["Skill"].Value);
-                    int lvl = Int32.Parse(xu.InnerText);
+                    int lvl = int.Parse(xu.InnerText);
                     totsk += lvl;
                     UtilitySkills.Add(sk, lvl);
                 }

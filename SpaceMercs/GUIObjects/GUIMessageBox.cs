@@ -15,7 +15,7 @@ namespace SpaceMercs {
         private const float MaxBoxHeight = 0.8f, MaxBoxWidth = 0.8f;
         private const float TopBorder = 0.015f;
         private const float MessageFontScale = 0.045f;
-        private readonly float ButtonAlpha;
+        private const float ButtonAlpha = 0.0f; // Was previously overrideable?
         private List<string> Lines;
 
         private Action? OnClick = null;

@@ -13,7 +13,7 @@ namespace SpaceMercs {
     class Travel {
         private readonly AstronomicalObject aoTravelFrom, aoTravelTo;
         private readonly float fTravelTime;
-        private float fMissionElapsed, fElapsed, fDist;
+        private float fMissionElapsed, fElapsed;
         private float fSep; // Separation between two ships
         private bool bSurrendered = false;
         private readonly Team PlayerTeam;
@@ -114,7 +114,7 @@ namespace SpaceMercs {
             fElapsed = float.Parse(xml.SelectSingleNode("Elapsed").InnerText);
             fMissionElapsed = float.Parse(xml.SelectSingleNode("MissionElapsed").InnerText);
             fSep = float.Parse(xml.SelectSingleNode("Sep").InnerText);
-            EncounterCount = Int32.Parse(xml.SelectSingleNode("EncounterCount").InnerText);
+            EncounterCount = int.Parse(xml.SelectSingleNode("EncounterCount").InnerText);
             dtStart = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("Start").InnerText));
             bSurrendered = (xml.SelectSingleNode("Surrendered") != null);
 

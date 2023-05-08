@@ -71,7 +71,7 @@ namespace SpaceMercs {
         // Load generic AO details from an XML file
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
-            ID = Int32.Parse(xml.Attributes["ID"]?.InnerText);
+            ID = int.Parse(xml.Attributes?["ID"]?.InnerText);
             strName = xml.SelectSingleNode("Name")?.InnerText ?? "";
             radius = double.Parse(xml.SelectSingleNode("Radius").InnerText);
             if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit").InnerText);
@@ -84,8 +84,8 @@ namespace SpaceMercs {
                 // Approximation, for backwards compatibility
                 AxialRotationPeriod = (Const.DayLength * (radius / Const.PlanetSize));
             }
-            Temperature = Int32.Parse(xml.SelectSingleNode("Temp").InnerText);
-            Seed = Int32.Parse(xml.SelectSingleNode("Seed").InnerText);
+            Temperature = int.Parse(xml.SelectSingleNode("Temp").InnerText);
+            Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
             Oy = rnd.Next(Const.SeedBuffer);
@@ -113,7 +113,7 @@ namespace SpaceMercs {
                 iLevelBase++;  // Not the home planet (but may be a moon)
                 if (this.GetSystem() != StaticData.Races[0].HomePlanet.GetSystem()) iLevelBase++;  // Not in home system, so more dangerous
                 if (this is HabitableAO hao) {
-                    Planet pl = null;
+                    Planet? pl = null;
                     if (hao is Planet) pl = ((Planet)this);
                     else if (hao is Moon) pl = ((Moon)this).Parent;
                     if (pl != null) {
@@ -134,11 +134,11 @@ namespace SpaceMercs {
         }
 
         // Get a random race suitable for this location
-        public Race GetRandomRace(Random rand) {
+        public Race? GetRandomRace(Random rand) {
             if (this is HabitableAO hao) {
                 if (hao.Colony != null) return hao.Colony.Owner;
             }
-            Race rBest = null;
+            Race? rBest = null;
             double dBestScore = 0.0;
             foreach (Race r in StaticData.Races) {
                 //if (!r.Known) continue;

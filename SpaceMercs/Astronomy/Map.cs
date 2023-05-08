@@ -16,12 +16,17 @@ namespace SpaceMercs {
             // We're good
         }
         public Map(XmlNode xml) {
-            MapSeed = Int32.Parse(xml.Attributes["Seed"].Value);
-            StarsPerSector = Int32.Parse(xml.Attributes["SPS"].Value);
-            PlanetDensity = Int32.Parse(xml.Attributes["PD"].Value);
+            if (xml.Attributes?["Seed"] is null) throw new Exception("Map seed is missing from save file");
+            if (xml.Attributes?["SPS"] is null) throw new Exception("Map StarsPerSector is missing from save file");
+            if (xml.Attributes?["PD"] is null) throw new Exception("Map PlanetDensity is missing from save file");
+            MapSeed = int.Parse(xml.Attributes["Seed"]!.Value);
+            StarsPerSector = int.Parse(xml.Attributes["SPS"]!.Value);
+            PlanetDensity = int.Parse(xml.Attributes["PD"]!.Value);
 
             dSectors.Clear();
-            foreach (XmlNode xmls in xml.SelectNodes("Sector")) {
+            XmlNodeList? sectorNodes = xml.SelectNodes("Sector");
+            if (sectorNodes is null) throw new Exception("Could not locate sector nodes in save file");
+            foreach (XmlNode xmls in sectorNodes) {
                 Sector sect = new Sector(xmls, this);
                 dSectors.Add(new Tuple<int, int>(sect.SectorX, sect.SectorY), sect);
             }
@@ -74,12 +79,16 @@ namespace SpaceMercs {
         private void SetupHomeSector(Race rc, Sector sc, NewGame ng, Random rand) {
             // Get the most central star to be the home system
             sc.Inhabitant = rc;
-            Star stHome = sc.GetMostCentralStar();
+            Star? stHome = sc.GetMostCentralStar();
+            if (stHome is null) {
+                throw new Exception("Could not find most central star");
+            }
             stHome.GenerateHomeSystem(rc);
 
             // Setup other stars in this sector, allied to this race, if specified in NewGame dialog.
             for (int sno = 2; sno <= ng.CivSize; sno++) {
-                Star st = sc.GetClosestNonColonisedSystemTo(stHome);
+                Star? st = sc.GetClosestNonColonisedSystemTo(stHome);
+                if (st is null) continue;
                 rc.Colonise(st);
                 stHome.AddTradeRoute(st);
             }
@@ -87,7 +96,7 @@ namespace SpaceMercs {
             // Set up extra trade routes between nearest neighbours
             foreach (Star st1 in rc.Systems) {
                 if (st1 == stHome) continue;
-                Star stClosest = null;
+                Star? stClosest = null;
                 double best = st1.DistanceTo(stHome);
                 foreach (Star st2 in rc.Systems) {
                     if (st2 == stHome) continue;
@@ -132,13 +141,13 @@ namespace SpaceMercs {
             return sc;
         }
 
-        public AstronomicalObject GetAOFromLocationString(string strLoc) {
+        public AstronomicalObject? GetAOFromLocationString(string strLoc) {
             if (!strLoc.StartsWith("(") || !strLoc.Contains(")")) throw new Exception("Illegal location string:" + strLoc);
             string strMapLoc = strLoc.Substring(0, strLoc.IndexOf(")") + 1);
             string[] bits = strMapLoc.Replace("(", "").Replace(")", "").Split(',');
             if (bits.Length != 2) throw new Exception("Couldn't parse location string : " + strLoc + " - Sector location invalid : " + strMapLoc);
-            int sX = Int32.Parse(bits[0]);
-            int sY = Int32.Parse(bits[1]);
+            int sX = int.Parse(bits[0]);
+            int sY = int.Parse(bits[1]);
             // If target sector hasn't yet been initialised then skip out of here
             if (!dSectors.ContainsKey(new Tuple<int, int>(sX, sY))) return null;
             Sector sec = dSectors[new Tuple<int, int>(sX, sY)];

@@ -58,11 +58,11 @@ namespace SpaceMercs {
             Sector = sect;
             LoadAODetailsFromFile(xml);
 
-            XmlNode xmln = xml.SelectSingleNode("Mass");
+            XmlNode? xmln = xml.SelectSingleNode("Mass");
             if (xmln == null) throw new Exception("Could not locate Mass for Star with ID = " + ID);
             Mass = Double.Parse(xmln.InnerText);
 
-            XmlNode xmlpos = xml.SelectSingleNode("MapPos");
+            XmlNode? xmlpos = xml.SelectSingleNode("MapPos");
             if (xmlpos == null) throw new Exception("Could not locate MapPos for Star with ID = " + ID);
             float X = float.Parse(xmlpos.Attributes["X"].Value);
             float Y = float.Parse(xmlpos.Attributes["Y"].Value);
@@ -70,7 +70,7 @@ namespace SpaceMercs {
 
             Visited = (xml.SelectSingleNode("Visited") != null);
 
-            XmlNode xmlown = xml.SelectSingleNode("Owner");
+            XmlNode? xmlown = xml.SelectSingleNode("Owner");
             if (xmlown == null) Owner = null;
             else {
                 Owner = StaticData.GetRaceByName(xmlown.InnerText);
@@ -80,7 +80,7 @@ namespace SpaceMercs {
 
             TradeRoutes.Clear();
             foreach (XmlNode xmlt in xml.SelectNodes("TradeRoute")) {
-                AstronomicalObject aotr = sect.ParentMap.GetAOFromLocationString(xmlt.InnerText);
+                AstronomicalObject? aotr = sect.ParentMap.GetAOFromLocationString(xmlt.InnerText);
                 if (aotr == null) { // It could be that the target is in the current sector (which hasn't been added to the Map yet), so check that
                     aotr = sect.GetAOFromLocationString(xmlt.InnerText);
                 }
@@ -100,7 +100,7 @@ namespace SpaceMercs {
             }
             if (Planets.Count == 0) GeneratePlanets(sect.ParentMap.PlanetDensity); // Didn't save them, so regenerate here
             SetupColour();
-            SetupType();
+            StarType = SetupType();
         }
 
         // Save this star to an Xml file
@@ -134,7 +134,7 @@ namespace SpaceMercs {
         }
 
         // Retrieve a planet from this system by ID
-        public Planet GetPlanetByID(int ID) {
+        public Planet? GetPlanetByID(int ID) {
             if (ID < 0 || ID >= Planets.Count) return null;
             return Planets[ID];
         }
@@ -149,7 +149,7 @@ namespace SpaceMercs {
                 if (mousex > px + buffer) return null; // Too far right. Abort
                 if (Math.Abs(px - mousex) < buffer && Math.Abs(py - mousey) < buffer) return pl;
                 if (mousey > py + buffer) {
-                    AstronomicalObject aoHover = pl.GetHover(mousex, mousey, px, py);
+                    AstronomicalObject? aoHover = pl.GetHover(mousex, mousey, px, py);
                     if (aoHover != null) return aoHover;
                 }
                 px -= ((pl.DrawScale * Const.PlanetScale) + 0.3) * aspect * 0.6;
@@ -253,17 +253,17 @@ namespace SpaceMercs {
         }
 
         // Set up the stellar type
-        private void SetupType() {
+        private string SetupType() {
             // Set up the stellar type 
-            if (Temperature > 40000) { StarType = "O0"; }
-            else if (Temperature >= 33000) { StarType = "O" + (9 - ((Temperature - 33000) / 700)).ToString(); }
-            else if (Temperature >= 10000) { StarType = "B" + (9 - ((Temperature - 10000) / 2300)).ToString(); }
-            else if (Temperature >= 7500) { StarType = "A" + (9 - ((Temperature - 7500) / 250)).ToString(); }
-            else if (Temperature >= 6000) { StarType = "F" + (9 - ((Temperature - 6000) / 150)).ToString(); }
-            else if (Temperature >= 5200) { StarType = "G" + (9 - ((Temperature - 5200) / 80)).ToString(); }
-            else if (Temperature >= 3700) { StarType = "K" + (9 - ((Temperature - 3700) / 150)).ToString(); }
-            else if (Temperature >= 2800) { StarType = "M" + (9 - ((Temperature - 2800) / 90)).ToString(); }
-            else { StarType = "R"; }
+            if (Temperature > 40000) return "O0";
+            else if (Temperature >= 33000) return "O" + (9 - ((Temperature - 33000) / 700)).ToString();
+            else if (Temperature >= 10000) return "B" + (9 - ((Temperature - 10000) / 2300)).ToString();
+            else if (Temperature >= 7500) return "A" + (9 - ((Temperature - 7500) / 250)).ToString();
+            else if (Temperature >= 6000) return "F" + (9 - ((Temperature - 6000) / 150)).ToString();
+            else if (Temperature >= 5200) return "G" + (9 - ((Temperature - 5200) / 80)).ToString();
+            else if (Temperature >= 3700) return "K" + (9 - ((Temperature - 3700) / 150)).ToString();
+            else if (Temperature >= 2800) return "M" + (9 - ((Temperature - 2800) / 90)).ToString();
+            else return "R";
         }
 
         // Set up the star's colour
@@ -283,7 +283,7 @@ namespace SpaceMercs {
         // Generate this system as a home system
         public void GenerateHomeSystem(Race rc) {
             Random rand = new Random(Seed);
-            Planet plHome = null;
+            Planet? plHome = null;
             double dTempBest = Const.TempTolerance;
             do {
                 Seed = rand.Next(10000000);
@@ -316,7 +316,7 @@ namespace SpaceMercs {
 
             // Generate all planets
             for (int n = 0; n < npl; n++) {
-                Planet pl = new Planet(rnd.Next(10000000));
+                Planet pl = new Planet(rnd.Next(10000000), this);
                 pl.Parent = this;
                 pl.ID = n;
 

@@ -2,11 +2,17 @@
 ToDo List
 -------------------------------------------------
 
+Testing
+
 MapViewMission
 - VisualEffect.DisplayShotLine()
 - Test handling of large creatures
 
+Display star labels & flags on map
+
+
 ==========================================================================================================
+
 
 -----------------------
 Done Since Last Release
@@ -16,7 +22,7 @@ Updated all grapics to OpenGL4
 
 Updated text renderer to use TrueType fonts
 
-Should not be able to target self or own team in missions
+Prevented targetting of self or own team in missions
 
 
 -------
@@ -25,9 +31,10 @@ Testing
 
 Encounters : Are there too many of them? Test in lots of situations.
 
-System view : Star sometimes vanishes on certain aspect ratios
+System view : Star sometimes vanishes on certain aspect ratios; planets overlap;
 
 Got a crash doing ship battle and disposing something
+- Similar after ship mission, returning to system view (Test Encounter End). Not easy to replicate.
 
 Check all MenuItem.Enabled/Disabled correctly
 

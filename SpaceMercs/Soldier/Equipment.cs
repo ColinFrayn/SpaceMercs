@@ -37,7 +37,7 @@ namespace SpaceMercs {
         return hash;
       }
     }
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
       if (obj == null || GetType() != obj.GetType()) return false;
       Equipment wp = obj as Equipment;
       return (wp.BaseType == BaseType);

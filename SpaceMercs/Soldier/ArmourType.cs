@@ -26,17 +26,17 @@ namespace SpaceMercs {
     public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
 
     public ArmourType(XmlNode xml) : base(xml) {
-      if (xml.SelectSingleNode("Strength") != null) Strength = Int32.Parse(xml.SelectSingleNode("Strength").InnerText);
-      if (xml.SelectSingleNode("Agility") != null) Agility = Int32.Parse(xml.SelectSingleNode("Agility").InnerText);
-      if (xml.SelectSingleNode("Intellect") != null) Intellect = Int32.Parse(xml.SelectSingleNode("Intellect").InnerText);
-      if (xml.SelectSingleNode("Toughness") != null) Toughness = Int32.Parse(xml.SelectSingleNode("Toughness").InnerText);
-      if (xml.SelectSingleNode("Endurance") != null) Endurance = Int32.Parse(xml.SelectSingleNode("Endurance").InnerText);
-      if (xml.SelectSingleNode("Health") != null) Health = Int32.Parse(xml.SelectSingleNode("Health").InnerText);
-      if (xml.SelectSingleNode("Stamina") != null) Stamina = Int32.Parse(xml.SelectSingleNode("Stamina").InnerText);
-      if (xml.SelectSingleNode("Shields") != null) Shields = Int32.Parse(xml.SelectSingleNode("Shields").InnerText);
-      if (xml.SelectSingleNode("Attack") != null) Attack = Int32.Parse(xml.SelectSingleNode("Attack").InnerText);
-      if (xml.SelectSingleNode("Defence") != null) Defence = Int32.Parse(xml.SelectSingleNode("Defence").InnerText);
-      if (xml.SelectSingleNode("BaseArmour") != null) BaseArmour = Int32.Parse(xml.SelectSingleNode("BaseArmour").InnerText);
+      if (xml.SelectSingleNode("Strength") != null) Strength = int.Parse(xml.SelectSingleNode("Strength").InnerText);
+      if (xml.SelectSingleNode("Agility") != null) Agility = int.Parse(xml.SelectSingleNode("Agility").InnerText);
+      if (xml.SelectSingleNode("Intellect") != null) Intellect = int.Parse(xml.SelectSingleNode("Intellect").InnerText);
+      if (xml.SelectSingleNode("Toughness") != null) Toughness = int.Parse(xml.SelectSingleNode("Toughness").InnerText);
+      if (xml.SelectSingleNode("Endurance") != null) Endurance = int.Parse(xml.SelectSingleNode("Endurance").InnerText);
+      if (xml.SelectSingleNode("Health") != null) Health = int.Parse(xml.SelectSingleNode("Health").InnerText);
+      if (xml.SelectSingleNode("Stamina") != null) Stamina = int.Parse(xml.SelectSingleNode("Stamina").InnerText);
+      if (xml.SelectSingleNode("Shields") != null) Shields = int.Parse(xml.SelectSingleNode("Shields").InnerText);
+      if (xml.SelectSingleNode("Attack") != null) Attack = int.Parse(xml.SelectSingleNode("Attack").InnerText);
+      if (xml.SelectSingleNode("Defence") != null) Defence = int.Parse(xml.SelectSingleNode("Defence").InnerText);
+      if (xml.SelectSingleNode("BaseArmour") != null) BaseArmour = int.Parse(xml.SelectSingleNode("BaseArmour").InnerText);
       if (xml.SelectSingleNode("BonusArmour") != null) {
         foreach (XmlNode xn in xml.SelectNodes("BonusArmour/Bonus")) {
           WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.Attributes["Type"].Value);
