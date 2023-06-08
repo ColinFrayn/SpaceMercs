@@ -48,21 +48,21 @@ namespace SpaceMercs {
         public Point Location { get { return new Point(X, Y); } }
         private readonly List<Effect> _Effects = new List<Effect>();
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
-        private bool[,] Visible;
+        private bool[,] SightMap;
         public Color PrimaryColor { get; private set; }
 
-        public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= Visible.GetLength(0) || y >= Visible.GetLength(1)) return false; return Visible[x, y]; }
-        public bool CanSee(IEntity en) {
+        public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
+        public bool CanSee(IEntity? en) {
             if (en == null) return false;
             for (int yy = en.Y; yy < en.Y + en.Size; yy++) {
                 for (int xx = en.X; xx < en.X + en.Size; xx++) {
-                    if (Visible[xx, yy]) return true;
+                    if (SightMap[xx, yy]) return true;
                 }
             }
             return false;
         }
         public void UpdateVisibility(MissionLevel m) {
-            Visible = m.CalculateVisibilityFromEntity(this);
+            SightMap = m.CalculateVisibilityFromEntity(this);
         }
         public void SetLocation(Point p) {
             //double ang = Math.Atan2(p.Y - Y, p.X - X) * 180.0 / Math.PI;
@@ -885,23 +885,25 @@ namespace SpaceMercs {
                 }
             }
         }
-        private Armour PickRandomBaseArmourForLocation(BodyPart bp) {
-            MaterialType mat = null;
+        private Armour? PickRandomBaseArmourForLocation(BodyPart bp) {
+            MaterialType? mat = null;
             // Get base material
             foreach (MaterialType m in StaticData.Materials) {
-                if (m.IsArmourMaterial && (mat == null || m.CostMod < mat.CostMod)) mat = m;
+                if (m.IsArmourMaterial && (mat is null || m.CostMod < mat.CostMod)) mat = m;
             }
+            if (mat is null) return null;
             // Get base armour for this location
-            ArmourType choice = null;
+            ArmourType? choice = null;
             foreach (ArmourType at in StaticData.ArmourTypes) {
-                if (at.Locations.Contains(bp) && (choice == null || at.Rarity > choice.Rarity)) {
+                if (at.Locations.Contains(bp) && (choice is null || at.Rarity > choice.Rarity)) {
                     bool bOK = true;
                     foreach (BodyPart abp in at.Locations) {
-                        if (GetArmourAtLocation(abp) != null) { bOK = false; break; }
+                        if (GetArmourAtLocation(abp) is not null) { bOK = false; break; }
                     }
                     if (bOK) choice = at;
                 }
             }
+            if (choice is null) return null;
             return new Armour(choice, mat, 0);
         }
         private void UpgradeArmourAtRandom() {
@@ -979,13 +981,14 @@ namespace SpaceMercs {
             return false;
         }
         public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string> showMessage) {
+            if (level is null) throw new Exception("Null level in AttackLocation");
             // Check that we're attacking a square in range, or an entity part of which is in range
             if (RangeTo(tx, ty) > AttackRange) {
-                IEntity en = level.GetEntityAt(tx, ty);
+                IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return false;
                 if (RangeTo(en) > AttackRange) return false;
             }
-            if (!Visible[tx, ty]) return false;
+            if (!SightMap[tx, ty]) return false;
 
             // Don't attack a friendly square
             if (level.IsFriendlyAt(tx, ty)) {
@@ -999,7 +1002,6 @@ namespace SpaceMercs {
             float dx = X - tx;
             float dy = Y - ty;
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
-            // TODO refreshView();
             Thread.Sleep(100);
 
             // Play weapon sound
@@ -1019,7 +1021,7 @@ namespace SpaceMercs {
                 for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
                     int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
                     if (dr2 > r * r) continue;
-                    IEntity en = level.GetEntityAt(x, y);
+                    IEntity? en = level.GetEntityAt(x, y);
                     if (en != null && !hsAttacked.Contains(en)) {
                         AttackEntity(en, effectFactory, playSound, showMessage);
                         hsAttacked.Add(en);

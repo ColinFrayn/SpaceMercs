@@ -44,10 +44,10 @@ namespace SpaceMercs {
     }
 
     public Creature? GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
-      CreatureType tp = Boss;
+      CreatureType? tp = Boss;
 
       // Generate a suitable level
-      if (tp.LevelMin > diff) return null; // Can't make one
+      if (tp is null || tp.LevelMin > diff) return null; // Can't make one
       int lvl = diff;
       if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
       if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;

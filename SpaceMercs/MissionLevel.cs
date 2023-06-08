@@ -451,7 +451,7 @@ namespace SpaceMercs {
         private void DisplayItemStack(ShaderProgram prog, Point pt) {
             if (Items[pt].Hidden) return;
             TexSpecs ts;
-            if (Items[pt].OnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
+            if (Items[pt].ContainsOnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
             else if (Items[pt].Count < 6) ts = Textures.GetTexCoords(Textures.MiscTexture.Coins, true);
             else ts = Textures.GetTexCoords(Textures.MiscTexture.Treasure, true);
 
@@ -1704,7 +1704,7 @@ namespace SpaceMercs {
                 }
             }
             Stash st = cr.GenerateStash();
-            if (cr.QuestItem) st.Add(ParentMission.MItem);
+            if (cr.QuestItem) st.Add(ParentMission?.MItem);
             AddToStashAtPosition(cr.X, cr.Y, st);
 
             // Experience
@@ -1717,7 +1717,7 @@ namespace SpaceMercs {
             // Remove soldier from Team & Mission
             Entities.Remove(s);
             ParentMission.Soldiers.Remove(s);
-            s.PlayerTeam.RemoveSoldier(s);
+            s.PlayerTeam?.RemoveSoldier(s);
             EntityMap[s.X, s.Y] = null;
 
             // Generate corpse & drop items
@@ -1725,8 +1725,8 @@ namespace SpaceMercs {
 
             // Make sure nothing is targeting it
             foreach (IEntity en in Entities) {
-                if (en is Creature) {
-                    if (((Creature)en).CurrentTarget == s) ((Creature)en).SetTarget(null);
+                if (en is Creature ct) {
+                    if (ct.CurrentTarget == s) ct.SetTarget(null);
                 }
             }
             ParentMission.CurrentMapView.KillSoldierOnView(s);

@@ -77,28 +77,29 @@ namespace SpaceMercs {
             if (owner == null) throw new Exception("Could not ID colony owning race : " + raceName);
             Owner = owner;
             Owner.AddColony(this);
-            Base = (BaseType)Enum.Parse(typeof(BaseType), xml.SelectSingleNode("BaseType").InnerText);
+            string? baseType = xml.SelectSingleNode("BaseType")?.InnerText;
+            if (!string.IsNullOrEmpty(baseType)) Base = (BaseType)Enum.Parse(typeof(BaseType), baseType);
             Base |= BaseType.Outpost; // All colonies have it
-            dtLastUpdate = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastUpdate").InnerText));
-            if (xml.SelectSingleNode("LastGrowth") != null) dtLastGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastGrowth").InnerText));
+            dtLastUpdate = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastUpdate")!.InnerText));
+            if (xml.SelectSingleNode("LastGrowth") != null) dtLastGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastGrowth")!.InnerText));
             else dtLastGrowth = Const.dtStart;
-            if (xml.SelectSingleNode("NextGrowth") != null) dtNextGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("NextGrowth").InnerText));
+            if (xml.SelectSingleNode("NextGrowth") != null) dtNextGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("NextGrowth")!.InnerText));
             else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
 
-            XmlNode? xmlmerc = xml.SelectSingleNode("Mercenaries");
             Mercenaries.Clear();
-            if (xmlmerc != null) {
-                foreach (XmlNode xm in xmlmerc.SelectNodes("Soldier")) {
+            XmlNodeList? soldiers = xml.SelectSingleNode("Mercenaries")?.SelectNodes("Soldier");
+            if (soldiers is not null) {
+                foreach (XmlNode xm in soldiers) {
                     Soldier s = new Soldier(xm, null);
                     Mercenaries.Add(s);
                 }
             }
 
-            XmlNode? xmlmiss = xml.SelectSingleNode("Missions");
+            XmlNodeList? missions = xml.SelectSingleNode("Missions")?.SelectNodes("Soldier");
             Missions.Clear();
-            if (xmlmiss != null) {
-                foreach (XmlNode xm in xmlmiss.SelectNodes("Mission")) {
+            if (missions != null) {
+                foreach (XmlNode xm in missions) {
                     Mission m = new Mission(xm, loc);
                     Missions.Add(m);
                 }
@@ -108,14 +109,14 @@ namespace SpaceMercs {
             Inventory.Clear();
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
-                    int count = int.Parse(xi.Attributes["Count"].Value);
+                    int count = int.Parse(xi.Attributes!["Count"]!.Value);
                     IItem eq;
                     try {
                         eq = Utils.LoadItem(xi.FirstChild);
                     }
                     catch (Exception) {
                         // Try re-loading as if it's a material
-                        if (xi.FirstChild.Name.Equals("Equipment")) {
+                        if (xi.FirstChild!.Name.Equals("Equipment")) {
                             eq = new Material(xi.FirstChild);
                         }
                         else throw;

@@ -168,7 +168,8 @@ namespace SpaceMercs {
         }
 
         // Add a single item, if we can, and return how many were left over
-        public int AddItem(IItem equip, int Count = 1) {
+        public int AddItem(IItem? equip, int Count = 1) {
+            if (equip is null) return Count;
             int CargoMax = PlayerShip.Type.Cargo;
             if (CargoMax - CargoMass < equip.Mass) return Count;
             if (!Inventory.ContainsKey(equip)) Inventory.Add(equip, 0);
@@ -177,12 +178,14 @@ namespace SpaceMercs {
             return Count - NumToTake;
         }
 
-        public void RemoveItemFromStores(IItem equip, int Count = 1) {
+        public void RemoveItemFromStores(IItem? equip, int Count = 1) {
+            if (equip is null) return;
             if (!Inventory.ContainsKey(equip)) return;
             if (Count >= Inventory[equip]) Inventory.Remove(equip);
             else Inventory[equip] -= Count;
         }
-        public bool RemoveItemFromStoresOrSoldiers(IItem equip, int Count = 1) {
+        public bool RemoveItemFromStoresOrSoldiers(IItem? equip, int Count = 1) {
+            if (equip is null) return false;
             if (Inventory.ContainsKey(equip)) {
                 if (Count >= Inventory[equip]) {
                     Count -= Inventory[equip];

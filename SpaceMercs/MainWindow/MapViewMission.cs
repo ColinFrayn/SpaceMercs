@@ -161,10 +161,10 @@ namespace SpaceMercs.MainWindow {
             else if (MissionOutcome == MissionResult.Defeat) {
                 msgBox.PopupMessage("You were defeated!");
                 throw new NotImplementedException();
-                if (PlayerTeam.SoldierCount == 0) {
+                //if (PlayerTeam.SoldierCount == 0) {
                     // Still alive?
                     // TODO
-                }
+                //}
                 // TODO: Handle mission defeat
             }
             else if (MissionOutcome == MissionResult.Evacuated) {
@@ -374,7 +374,7 @@ namespace SpaceMercs.MainWindow {
                     gpSelect.Deactivate();
                     int iSelectHover = gpSelect.HoverID;
                     // Process GUIPanel selection
-                    if (s != null && iSelectHover >= 0 && gpSelect.HoverItem.Enabled) {
+                    if (s != null && iSelectHover >= 0 && gpSelect.HoverItem!.Enabled) {
                         if (iSelectHover == I_OpenDoor) {
                             CurrentLevel.OpenDoor(gpSelect.ClickX, gpSelect.ClickY);
                             SoundEffects.PlaySound("OpenDoor");
@@ -560,7 +560,7 @@ namespace SpaceMercs.MainWindow {
             for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {
                 for (int x = (int)Math.Max(px - ie.Radius, 0); x <= (int)Math.Min(px + ie.Radius, CurrentLevel.Width - 1); x++) {
                     if ((x - px) * (x - px) + (y - py) * (y - py) > ie.Radius * ie.Radius) continue;
-                    IEntity en = CurrentLevel.GetEntityAt(x, y);
+                    IEntity? en = CurrentLevel.GetEntityAt(x, y);
                     if (en != null && !hsEntities.Contains(en)) {
                         hsEntities.Add(en); // Make sure we don't double count e.g. large entities
                     }
@@ -571,7 +571,7 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private bool CheckForTraps(Soldier s) {
-            Trap tr = CurrentLevel.GetTrapAtPoint(s.X, s.Y);
+            Trap? tr = CurrentLevel.GetTrapAtPoint(s.X, s.Y);
             if (tr == null) return false;
 
             // Stop auto-move
@@ -634,7 +634,7 @@ namespace SpaceMercs.MainWindow {
         private void ScavengeAll(Soldier s) {
             int sk = s.GetUtilityLevel(Soldier.UtilitySkill.Scavenging);
             if (sk == 0) return;
-            Stash st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
+            Stash? st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
             if (st == null) return;
             Dictionary<IItem, int> Scavenged = new Dictionary<IItem, int>();
             Random rand = new Random();
@@ -667,13 +667,13 @@ namespace SpaceMercs.MainWindow {
             if (st.Count == 0) CurrentLevel.ReplaceStashAtPosition(s.X, s.Y, null);
         }
         private void PickUpAll(Soldier s) {
-            Stash st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
+            Stash? st = CurrentLevel.GetStashAtPoint(s.X, s.Y);
             if (st == null) return;
             int count = 0;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Objects Picked Up:");
             foreach (IItem it in st.Items()) {
-                if (!(it is Corpse)) {
+                if (it is not Corpse) {
                     int num = st.GetCount(it);
                     s.AddItem(it, num);
                     sb.AppendLine(it.Name + " [" + num + "]");
@@ -879,6 +879,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawWithOptions("AI Running", tro);
         }
         private void ShowSelectedEntityDetails() {
+            if (SelectedEntity is null) return;
             // Display the stats for the selected entity
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopRight,
@@ -1314,9 +1315,9 @@ namespace SpaceMercs.MainWindow {
         }
         private void SelectedSoldierMove(GUIIconButton sender) {
             if (bAIRunning) return;
+            if (sender?.InternalData is null) throw new Exception("MoveSelectedSoldier: GUIIconButton did not have Direction set as internal data");
             Utils.Direction d = (Utils.Direction)sender.InternalData;
-            //if (d == null) throw new Exception("MoveSelectedSoldier: GUIIconButton did not have Direction set as internal data");
-            if (SelectedEntity == null || !(SelectedEntity is Soldier s)) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
+            if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
             MoveSoldier(s, d);
             CurrentAction = SoldierAction.None;
             ActionItem = null;
@@ -1404,19 +1405,18 @@ namespace SpaceMercs.MainWindow {
             if (SelectedEntity != null && SelectedEntity is Soldier se && se.PlayerTeam == null) SelectedEntity = null;
             GenerateDistMap(SelectedEntity as Soldier);
             GenerateDetectionMap();
-            if (SelectedEntity != null) SelectedEntity.UpdateVisibility(CurrentLevel);
+            SelectedEntity?.UpdateVisibility(CurrentLevel);
             CurrentLevel.CalculatePlayerVisibility();
-            // TODO glMapView.Invalidate();
             bAIRunning = false;
             // TODO fileToolStripMenuItem.Enabled = true;
             Const.dtTime.AddSeconds(10);
         }
         private void PlaySoundThreaded(string strSound) {
-            ThisDispatcher.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
+            ThisDispatcher?.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
             //ThisDispatcher.Invoke(() => { SoundEffects.PlaySound(strSound); });
         }
         private void AnnounceMessage(string strMsg) {
-            ThisDispatcher.Invoke(() => { msgBox.PopupMessage(strMsg); });
+            ThisDispatcher?.Invoke(() => { msgBox.PopupMessage(strMsg); });
         }
         private void PostMoveCheck(IEntity en) {
             // Stuff we need to check after a creature moves

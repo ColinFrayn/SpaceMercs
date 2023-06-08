@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Remove all warnings and messages
+Remove all compiler warnings and messages 
 
 Testing
 
