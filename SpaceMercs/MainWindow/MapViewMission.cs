@@ -686,14 +686,13 @@ namespace SpaceMercs.MainWindow {
             msgBox.PopupMessage(sb.ToString());
         }
         private void TabToNextSoldier() {
-            if (SelectedEntity == null || SelectedEntity is Creature) {
-                SetSelectedEntity(ThisMission.Soldiers[0]);
-                CentreView(ThisMission.Soldiers[0]);
+            if (SelectedEntity is null || SelectedEntity is Creature) {
+                SetSelectedEntity(ThisMission!.Soldiers[0]);
+                CentreView(ThisMission!.Soldiers[0]);
                 return;
             }
-            else {
-                Soldier s = ((Soldier)SelectedEntity);
-                for (int n = 0; n < ThisMission.Soldiers.Count; n++) {
+            else if (SelectedEntity is Soldier s) {
+                for (int n = 0; n < ThisMission!.Soldiers.Count; n++) {
                     if (ThisMission.Soldiers[n] == s) {
                         if (n == ThisMission.Soldiers.Count - 1) n = 0;
                         else n++;
@@ -1380,7 +1379,7 @@ namespace SpaceMercs.MainWindow {
                 if (s.GoTo != Point.Empty) return; // Can't end turn if soldiers are still moving
             }
 
-            if (ThisMission.Soldiers.Count == 0) {
+            if (ThisMission!.Soldiers.Count == 0) {
                 MissionOutcome = MissionResult.Defeat;
                 CeaseMission();
             }
@@ -1429,7 +1428,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void Transition() {
             if (bAIRunning) return;
-            int oldlev = ThisMission.CurrentLevel;
+            int oldlev = ThisMission!.CurrentLevel;
             int newlev = oldlev;
             // Check if we're going up or down, or exiting
             if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
@@ -1472,7 +1471,7 @@ namespace SpaceMercs.MainWindow {
                 msgBox.PopupMessage("You cannot leave this mission\nThere are enemies alerted to your presence");
                 return;
             }
-            if (ThisMission.Type == Mission.MissionType.RepelBoarders) {
+            if (ThisMission!.Type == Mission.MissionType.RepelBoarders) {
                 msgBox.PopupConfirmation("Deactivate ship defence systems and return to your posts?", EndMission_Victory);
             }
             else {

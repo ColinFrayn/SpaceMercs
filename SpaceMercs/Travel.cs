@@ -1,11 +1,9 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace SpaceMercs {

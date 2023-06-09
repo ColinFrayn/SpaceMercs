@@ -305,8 +305,8 @@ namespace SpaceMercs {
             // If opponent race is null (i.e. a creature group of some type) then get a non-racial enemy
             Dictionary<CreatureGroup, double> dScores = new Dictionary<CreatureGroup, double>();
             foreach (CreatureGroup cg in StaticData.CreatureGroups) {
-                if (m.RacialOpponent == null && cg.RaceSpecific) continue;
-                if (m.RacialOpponent != null && !cg.RaceSpecific) continue;
+                if (m.RacialOpponent is null && cg.RaceSpecific) continue;
+                if (m.RacialOpponent is not null && !cg.RaceSpecific) continue;
                 if (m.IsShipMission && !cg.FoundInShips) continue;
                 if ((m.Type == MissionType.Caves || m.Type == MissionType.Mines) && !cg.FoundInCaves) continue;
                 if (!m.IsShipMission && m.Type != MissionType.Caves && m.Type != MissionType.Mines && !cg.FoundIn.Contains(m.Location.Type)) continue; // If a surface mission then check planet type is ok
@@ -342,11 +342,11 @@ namespace SpaceMercs {
 
             return null;
         }
-        private static Tuple<MissionGoal, MissionItem> GetRandomMissionGoal(Mission m, Random rand) {
+        private static Tuple<MissionGoal, MissionItem?> GetRandomMissionGoal(Mission m, Random rand) {
             MissionGoal mg = MissionGoal.KillAll;
-            MissionItem it = null;
+            MissionItem? it = null;
 
-            if (m.IsShipMission) return new Tuple<MissionGoal, MissionItem>(MissionGoal.KillAll, null); // Shouldn't ever happen...
+            if (m.IsShipMission) return new Tuple<MissionGoal, MissionItem?>(MissionGoal.KillAll, null); // Shouldn't ever happen...
 
             int r = rand.Next(100);
             if (r < 30) {
@@ -369,7 +369,7 @@ namespace SpaceMercs {
                 it = MissionItem.GenerateRandomGatherItem(m.Diff, rand);
             }
 
-            return new Tuple<MissionGoal, MissionItem>(mg, it);
+            return new Tuple<MissionGoal, MissionItem?>(mg, it);
         }
         public bool IsSameMissionAs(Mission m) {
             if (m.Seed != Seed) return false;
@@ -424,19 +424,19 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the ruins and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the ruins, take care of the " + PrimaryEnemy.Boss.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the ruins, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the ruins and map every part of it for the official records.");
-                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the ruins and search out a " + MItem.Name + " hidden inside.");
-                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the ruins and gather as many " + MItem.Name + "s as you can.");
+                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the ruins and search out a " + MItem!.Name + " hidden inside.");
+                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the ruins and gather as many " + MItem!.Name + "s as you can.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.BoardingParty) {
                 string strSource = "Our long range scanners have detected";
                 if (r % 3 == 0) strSource = "A group of merchants have informed us about ";
                 if (r % 3 == 1) strSource = "We are receiving classified military reports concerning ";
-                if (r < 30) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget.Name + "-class ship nearing the colony.");
-                else if (r < 60) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget.Name + "-class ship with potentially valuable cargo onboard.");
-                else sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget.Name + "-class ship in dangerous proximity to a nearby military zone.");
+                if (r < 30) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship nearing the colony.");
+                else if (r < 60) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship with potentially valuable cargo onboard.");
+                else sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship in dangerous proximity to a nearby military zone.");
                 sb.AppendLine("We would like you to investigate the ship, clear out any opposition and report back to us.");
                 strSz = "Size : " + ShipTarget.Name + "-class";
             }
@@ -452,10 +452,10 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the cave system and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the cave system, take care of the " + PrimaryEnemy.Boss.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the cave system, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the cave system and map every part of it for the official records.");
-                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the cave system and find a " + MItem.Name + " hidden inside.");
-                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the cave system and gather as many " + MItem.Name + "s as you can.");
+                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the cave system and find a " + MItem!.Name + " hidden inside.");
+                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the cave system and gather as many " + MItem!.Name + "s as you can.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Mines) {
@@ -470,10 +470,10 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the mines and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the mines, take care of the " + PrimaryEnemy.Boss.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the mines, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the mines and map every part of it for the official records.");
-                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the mines and find a " + MItem.Name + " hidden inside.");
-                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the mines and gather as many " + MItem.Name + "s as you can.");
+                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the mines and find a " + MItem!.Name + " hidden inside.");
+                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the mines and gather as many " + MItem!.Name + "s as you can.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Surface) {
@@ -488,10 +488,10 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate this area and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate this area, take care of the " + PrimaryEnemy.Boss.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate this area, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate this area and map every part of it for the official records.");
-                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate this area and find a " + MItem.Name + " hidden inside.");
-                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate this area and gather as many " + MItem.Name + "s as you can.");
+                if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate this area and find a " + MItem!.Name + " hidden inside.");
+                if (Goal == MissionGoal.Gather) sb.AppendLine("investigate this area and gather as many " + MItem!.Name + "s as you can.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)

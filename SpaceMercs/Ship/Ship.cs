@@ -234,15 +234,14 @@ namespace SpaceMercs {
             // New-style Equipment loading
             foreach (XmlNode xr in xml.SelectNodes("Eqp")) {
                 int id = int.Parse(xr.Attributes["ID"].Value);
-                ShipEquipment se = StaticData.GetShipEquipmentByName(xr.InnerText);
+                ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText);
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }
             if (xml.SelectSingleNode("Armour") != null) {
                 string strArm = xml.SelectSingleNode("Armour").InnerText;
-                ShipArmour sa = StaticData.GetShipArmourByName(strArm);
-                if (sa == null) throw new Exception("Couldn't find ShipArmour type " + strArm);
-                ArmourType = sa;
+                ShipArmour? sa = StaticData.GetShipArmourByName(strArm);
+                ArmourType = sa ?? throw new Exception("Couldn't find ShipArmour type " + strArm);
             }
             else ArmourType = null;
             InitialiseForBattle();
@@ -618,7 +617,7 @@ namespace SpaceMercs {
         }
 
         // Generate a ship for the given race, of the given difficulty
-        public static Ship GenerateRandomShipOfRace(Race rc, double dDiff, ShipEngine minDrive) {
+        public static Ship GenerateRandomShipOfRace(Race rc, double dDiff, ShipEngine?minDrive) {
             Random rand = new Random();
             Ship sh = new Ship(ShipType.SetupRandomShipType(dDiff, rand.Next()));
 
@@ -713,7 +712,7 @@ namespace SpaceMercs {
             }
 
             // Modify based on salvage rate & race relations etc.
-            return Value * Const.SalvageRate / Owner.GetPriceModifier(Owner.CurrentPosition.GetSystem().Owner);
+            return Value * Const.SalvageRate / (Owner?.GetLocalPriceModifier() ?? 1.0);
         }
 
         // Calculate how much it would cost to repair this ship
@@ -733,19 +732,20 @@ namespace SpaceMercs {
 
         // Fabrication stuff
         public double CostToBuildEquipment(ShipEquipment se) {
-            double cost = se.Cost * Owner.GetPriceModifier(Owner.CurrentPosition.GetSystem().Owner);
+            double cost = se.Cost * Owner.GetLocalPriceModifier();
             if (se.Size == ShipEquipment.RoomSize.Armour) cost *= Type.MaxHull / Const.HullUpgradeCost;
             return Math.Round(cost, 2);
         }
         public double SalvageValue(ShipEquipment se) {
-            double rebate = se.Cost * Const.SalvageRate / Owner.GetPriceModifier(Owner.CurrentPosition.GetSystem().Owner);
+            double priceMod = Owner?.GetLocalPriceModifier() ?? 1.0;
+            double rebate = se.Cost * Const.SalvageRate / priceMod;
             if (se.Size == ShipEquipment.RoomSize.Armour) rebate *= Type.MaxHull / Const.HullUpgradeCost;
             return rebate;
         }
         public bool CanBuildItem(IItem it) {
             // Can we build this item in ths ship?
             // This required (1) the right room equipment and (2) a soldier with the right skill
-            Equipment eqi = (it is Equipment eqp) ? eqp : null;
+            Equipment? eqi = (it is Equipment eqp) ? eqp : null;
             if ((!HasMedlab || !Owner.HasSkill(Soldier.UtilitySkill.Medic)) && eqi != null && eqi.BaseType.Source == ItemType.ItemSource.Medlab) return false;
             if ((!HasWorkshop || !Owner.HasSkill(Soldier.UtilitySkill.Engineer)) && eqi != null && eqi.BaseType.Source == ItemType.ItemSource.Workshop) return false;
             if (it is Weapon || it is Armour) {

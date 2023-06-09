@@ -67,8 +67,7 @@ namespace SpaceMercs {
             if (xmln == null) throw new Exception("Could not locate Mass for Star with ID = " + ID);
             Mass = Double.Parse(xmln.InnerText);
 
-            XmlNode? xmlpos = xml.SelectSingleNode("MapPos");
-            if (xmlpos == null) throw new Exception("Could not locate MapPos for Star with ID = " + ID);
+            XmlNode? xmlpos = xml.SelectSingleNode("MapPos") ?? throw new Exception("Could not locate MapPos for Star with ID = " + ID);
             float X = float.Parse(xmlpos.Attributes["X"].Value);
             float Y = float.Parse(xmlpos.Attributes["Y"].Value);
             MapPos = new Vector3(X, Y, 0f);

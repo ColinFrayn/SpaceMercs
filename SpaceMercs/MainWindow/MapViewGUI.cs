@@ -201,7 +201,7 @@ namespace SpaceMercs.MainWindow {
                     strHoverText.Add(plHover.Name);
                 }
                 strHoverText.Add(plHover.Type.ToString());
-                if (aoSelected != null) {
+                if (aoSelected is not null) {
                     if (aoSelected.GetSystem() == aoHover.GetSystem()) {
                         strHoverText.Add("Dist: " + Math.Round(dist / Const.Billion, 1).ToString() + " Gm");
                     }
@@ -438,7 +438,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void OpenScanPlanetDialog() {
             if (!GalaxyMap.bMapSetup) return;
-            if (PlayerTeam.CurrentPosition == null) {
+            if (PlayerTeam.CurrentPosition is null) {
                 msgBox.PopupMessage("Cannot scan current location\nScanner only works on terrestrial palnets and moons.");
                 return;
             }
@@ -447,7 +447,7 @@ namespace SpaceMercs.MainWindow {
                 return;
             }
             // Open the ScanPlanet dialog
-            ScanPlanet sp = new ScanPlanet(PlayerTeam.CurrentPosition, PlayerTeam, RunMission);
+            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPosition!, PlayerTeam!, RunMission);
             sp.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
         }

@@ -615,7 +615,6 @@ namespace SpaceMercs.MainWindow {
         }
         public void SaveGame() {
             if (GalaxyMap.bMapSetup == false) return;
-            bool bTick = false;
             if (TravelDetails != null) TravelDetails.Pause();
 
             // Get the filename
@@ -632,7 +631,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 }
                 finally {
-                    if (TravelDetails != null) TravelDetails.Unpause();
+                    TravelDetails?.Unpause();
                 }
             }
         }

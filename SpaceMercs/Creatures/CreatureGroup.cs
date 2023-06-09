@@ -1,79 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SpaceMercs {
-  class CreatureGroup {
-    public string Name { get; private set; }
-    public string Filename { get; private set; }
-    public bool FoundInCaves { get; private set; }
-    public bool FoundInShips { get; private set; }
-    public bool RaceSpecific { get; private set; } // True = this is a group of creatures that must be assigned to a specific alien race. False = This is just random creatures/unknown aliens
-    public HashSet<Planet.PlanetType> FoundIn { get; private set; }
-    public int MaxRelations { get; private set; }  // Won't show up against any race with which racial relations are better than this value.
-    public readonly List<CreatureType> CreatureTypes = new List<CreatureType>();
-    public bool HasBoss { get { return (Boss != null); } }
-    public CreatureType? Boss {
-      get {
-        foreach (CreatureType tp in CreatureTypes) {
-          if (tp.IsBoss) return tp;
+    class CreatureGroup {
+        public string Name { get; private set; }
+        public string Filename { get; private set; }
+        public bool FoundInCaves { get; private set; }
+        public bool FoundInShips { get; private set; }
+        public bool RaceSpecific { get; private set; } // True = this is a group of creatures that must be assigned to a specific alien race. False = This is just random creatures/unknown aliens
+        public HashSet<Planet.PlanetType> FoundIn { get; private set; }
+        public int MaxRelations { get; private set; }  // Won't show up against any race with which racial relations are better than this value.
+        public readonly List<CreatureType> CreatureTypes = new List<CreatureType>();
+        public bool HasBoss { get { return (Boss != null); } }
+        public CreatureType? Boss {
+            get {
+                foreach (CreatureType tp in CreatureTypes) {
+                    if (tp.IsBoss) return tp;
+                }
+                return null;
+            }
         }
-        return null;
-      }
-    }
-    private readonly Random rand; // Let's set this here because it's easier than passing one through (and just setting it each time risks getting the exact same seed if insufficient time has passed)
+        private readonly Random rand; // Let's set this here because it's easier than passing one through (and just setting it each time risks getting the exact same seed if insufficient time has passed)
 
-    public CreatureGroup(XmlNode xml) {
-      Name = xml.Attributes["Name"].InnerText;
-      Filename = xml.SelectSingleNode("Filename").InnerText;
-      string strLocation = xml.SelectSingleNode("Locations").InnerText;
-      HashSet<string> Locs = new HashSet<string>(strLocation.Split(',').ToList());
-      FoundIn = new HashSet<Planet.PlanetType>();
-      FoundInShips = Locs.Contains("Ship");
-      FoundInCaves = Locs.Contains("Cave");
-      RaceSpecific = (xml.SelectSingleNode("Racial") != null);
-      if (RaceSpecific) {
-        if (xml.SelectSingleNode("Racial").Attributes["MaxRelations"] != null) MaxRelations = int.Parse(xml.SelectSingleNode("Racial").Attributes["MaxRelations"].Value);
-        else MaxRelations = 100; // Ignore
-      }
-      foreach (Planet.PlanetType pt in Enum.GetValues(typeof(Planet.PlanetType))) {
-        if (Locs.Contains(pt.ToString())) FoundIn.Add(pt);
-      }
-      rand = new Random();
-    }
-
-    public Creature? GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
-      CreatureType? tp = Boss;
-
-      // Generate a suitable level
-      if (tp is null || tp.LevelMin > diff) return null; // Can't make one
-      int lvl = diff;
-      if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
-      if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;
-
-      return new Creature(tp, lvl, lev, ra);
-    }
-    public Creature GenerateRandomCreature(Race ra, int diff, MissionLevel lev) {
-      // Get a creature type at random that's suitable for the difficulty and not the boss
-      CreatureType tp = GetRandomNonBossCreatureType(diff);
-
-      // Generate a suitable level
-      int lvl = diff;
-      if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
-      if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;
-
-      return new Creature(tp, lvl, lev, ra);
-    }
-    private CreatureType GetRandomNonBossCreatureType(int diff) {
-      int count = 0;
-      do {
-        int n = rand.Next(CreatureTypes.Count);
-        if (!CreatureTypes[n].IsBoss) {
-          if (CreatureTypes[n].LevelMin <= diff && CreatureTypes[n].LevelMax >= diff) return CreatureTypes[n];
+        public CreatureGroup(XmlNode xml) {
+            Name = xml.Attributes["Name"]!.InnerText;
+            Filename = xml.SelectSingleNode("Filename")!.InnerText;
+            string strLocation = xml.SelectSingleNode("Locations")!.InnerText;
+            HashSet<string> Locs = new HashSet<string>(strLocation.Split(',').ToList());
+            FoundIn = new HashSet<Planet.PlanetType>();
+            FoundInShips = Locs.Contains("Ship");
+            FoundInCaves = Locs.Contains("Cave");
+            RaceSpecific = (xml.SelectSingleNode("Racial") != null);
+            if (RaceSpecific) {
+                if (xml.SelectSingleNode("Racial").Attributes["MaxRelations"] != null) MaxRelations = int.Parse(xml.SelectSingleNode("Racial").Attributes["MaxRelations"].Value);
+                else MaxRelations = 100; // Ignore
+            }
+            foreach (Planet.PlanetType pt in Enum.GetValues(typeof(Planet.PlanetType))) {
+                if (Locs.Contains(pt.ToString())) FoundIn.Add(pt);
+            }
+            rand = new Random();
         }
-      } while (++count < 50);
-      throw new Exception("Could not find random creature fitting requirements");
+
+        public Creature? GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
+            CreatureType? tp = Boss;
+
+            // Generate a suitable level
+            if (tp is null || tp.LevelMin > diff) return null; // Can't make one
+            int lvl = diff;
+            if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
+            if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;
+
+            return new Creature(tp, lvl, lev, ra);
+        }
+        public Creature GenerateRandomCreature(Race ra, int diff, MissionLevel lev) {
+            // Get a creature type at random that's suitable for the difficulty and not the boss
+            CreatureType tp = GetRandomNonBossCreatureType(diff);
+
+            // Generate a suitable level
+            int lvl = diff;
+            if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
+            if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;
+
+            return new Creature(tp, lvl, lev, ra);
+        }
+        private CreatureType GetRandomNonBossCreatureType(int diff) {
+            int count = 0;
+            do {
+                int n = rand.Next(CreatureTypes.Count);
+                if (!CreatureTypes[n].IsBoss) {
+                    if (CreatureTypes[n].LevelMin <= diff && CreatureTypes[n].LevelMax >= diff) return CreatureTypes[n];
+                }
+            } while (++count < 50);
+            throw new Exception("Could not find random creature fitting requirements");
+        }
     }
-  }
 }

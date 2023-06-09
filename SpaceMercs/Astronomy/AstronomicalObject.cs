@@ -71,21 +71,21 @@ namespace SpaceMercs {
         // Load generic AO details from an XML file
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
-            ID = int.Parse(xml.Attributes?["ID"]?.InnerText);
+            ID = int.Parse(xml.Attributes?["ID"]!.InnerText!);
             strName = xml.SelectSingleNode("Name")?.InnerText ?? "";
-            radius = double.Parse(xml.SelectSingleNode("Radius").InnerText);
-            if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit").InnerText);
+            radius = double.Parse(xml.SelectSingleNode("Radius")!.InnerText);
+            if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit")!.InnerText);
             else orbit = 0;
-            OrbitalPeriod = Double.Parse(xml.SelectSingleNode("PRot").InnerText);
+            OrbitalPeriod = Double.Parse(xml.SelectSingleNode("PRot")!.InnerText);
             if (xml.SelectSingleNode("ARot") != null) {
-                AxialRotationPeriod = Double.Parse(xml.SelectSingleNode("ARot").InnerText);
+                AxialRotationPeriod = Double.Parse(xml.SelectSingleNode("ARot")!.InnerText);
             }
             else {
                 // Approximation, for backwards compatibility
                 AxialRotationPeriod = (Const.DayLength * (radius / Const.PlanetSize));
             }
-            Temperature = int.Parse(xml.SelectSingleNode("Temp").InnerText);
-            Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
+            Temperature = int.Parse(xml.SelectSingleNode("Temp")!.InnerText);
+            Seed = int.Parse(xml.SelectSingleNode("Seed")!.InnerText);
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
             Oy = rnd.Next(Const.SeedBuffer);

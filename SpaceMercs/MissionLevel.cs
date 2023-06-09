@@ -999,8 +999,8 @@ namespace SpaceMercs {
 
             // Who are we fighting against?
             CreatureGroup cg = ParentMission.PrimaryEnemy;
-            Race ra = ParentMission.RacialOpponent;
-            if (ra != null && cg == null) cg = GenerateCreatureGroupForRacialOpponent(ra);
+            Race? ra = ParentMission.RacialOpponent;
+            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra);
             int niter = 0;
 
             // Add all creatures
@@ -1011,7 +1011,7 @@ namespace SpaceMercs {
                 if (ParentMission.Soldiers.Count > 1) iGroupSize += rand.Next(ParentMission.Soldiers.Count);
                 if (Entities.Count == 0 && cg.HasBoss && (nCreatures > 8 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
                     Creature? cr = cg.GenerateRandomBoss(ra, Diff, this);
-                    if (cr != null) {
+                    if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
                         cGroup.Add(cr);

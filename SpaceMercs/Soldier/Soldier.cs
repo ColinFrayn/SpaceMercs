@@ -909,14 +909,14 @@ namespace SpaceMercs {
         private void UpgradeArmourAtRandom() {
             // Pick a random location
             BodyPart bp = Utils.GetRandomBodyPart();
-            Armour ar = GetArmourAtLocation(bp);
+            Armour? ar = GetArmourAtLocation(bp);
             // Try to fill in empty armour slots if at all possible by having another go at finding an empty slot.
-            if (ar != null) {
+            if (ar is not null) {
                 bp = Utils.GetRandomBodyPart();
                 ar = GetArmourAtLocation(bp);
             }
             // If armour doesn't exist at this location, then generate something
-            if (ar == null) {
+            if (ar is null) {
                 ar = PickRandomBaseArmourForLocation(bp);
                 EquippedArmour.Add(ar);
             }

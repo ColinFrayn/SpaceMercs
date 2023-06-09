@@ -7,7 +7,7 @@ namespace SpaceMercs {
         public HabitableAO CurrentPosition { get; set; }
         private readonly List<Soldier> _Soldiers = new List<Soldier>();
         public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }
-        public int SoldierCount { get { return _Soldiers.Count(); } }
+        public int SoldierCount { get { return _Soldiers.Count; } }
         public Ship PlayerShip { get; private set; }
         public double Cash { get; set; }
         private readonly Dictionary<Race, int> Relations = new Dictionary<Race, int>();  // 0 = neutral, -5 = war, +5 = worshipful
@@ -146,9 +146,12 @@ namespace SpaceMercs {
             return (Range >= Dist);
         }
 
-        public double GetPriceModifier(Race rc) {
-            if (rc == null || !Relations.ContainsKey(rc)) return 100.0;
+        public double GetPriceModifier(Race? rc) {
+            if (rc is null || !Relations.ContainsKey(rc)) return 100.0;
             return Utils.RelationsToCostMod(Relations[rc]);
+        }
+        public double GetLocalPriceModifier() {
+            return GetPriceModifier(CurrentPosition?.GetSystem()?.Owner);
         }
 
         public double GetRelations(Race rc) {
