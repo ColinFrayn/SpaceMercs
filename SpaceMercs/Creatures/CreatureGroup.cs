@@ -40,7 +40,7 @@ namespace SpaceMercs {
             rand = new Random();
         }
 
-        public Creature? GenerateRandomBoss(Race ra, int diff, MissionLevel lev) {
+        public Creature? GenerateRandomBoss(Race? ra, int diff, MissionLevel lev) {
             CreatureType? tp = Boss;
 
             // Generate a suitable level
@@ -51,7 +51,7 @@ namespace SpaceMercs {
 
             return new Creature(tp, lvl, lev, ra);
         }
-        public Creature GenerateRandomCreature(Race ra, int diff, MissionLevel lev) {
+        public Creature GenerateRandomCreature(Race? ra, int diff, MissionLevel lev) {
             // Get a creature type at random that's suitable for the difficulty and not the boss
             CreatureType tp = GetRandomNonBossCreatureType(diff);
 

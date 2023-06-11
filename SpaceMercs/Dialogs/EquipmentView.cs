@@ -406,7 +406,7 @@ namespace SpaceMercs.Dialogs {
 
         private void dgFloor_DoubleClick(object sender, EventArgs e) {
             if (dgFloor.SelectedRows.Count != 1) return;
-            IItem it = (IItem)(dgFloor.SelectedRows[0].Tag);
+            if (dgFloor.SelectedRows[0].Tag is not IItem it) return;
             MessageBox.Show(it.Desc);
         }
     }

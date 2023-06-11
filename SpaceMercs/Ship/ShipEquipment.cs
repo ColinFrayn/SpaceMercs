@@ -15,7 +15,7 @@ namespace SpaceMercs {
         public Colony.BaseType Available { get; private set; }
         public int TextureX { get; private set; }
         public int TextureY { get; private set; }
-        public Race RequiredRace { get; private set; }
+        public Race? RequiredRace { get; private set; }
         public int Capacity { get; private set; } // How many soldiers can it support? 
         public bool Medlab { get; private set; }
         public bool Armoury { get; private set; }

@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public MissionType Type { get; private set; }
         public MissionGoal Goal { get; private set; }
         public Ship? ShipTarget { get; private set; }
-        public Race RacialOpponent { get; private set; }
+        public Race? RacialOpponent { get; private set; }
         public CreatureGroup PrimaryEnemy { get; private set; }
         public HabitableAO Location { get; private set; }
         public float TimeCost { get; private set; }
@@ -244,7 +244,7 @@ namespace SpaceMercs {
             }
             else {
                 // Set mission goal
-                Tuple<MissionGoal, MissionItem> mgtp = GetRandomMissionGoal(m, rand);
+                Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
                 m.Goal = mgtp.Item1;
                 m.MItem = mgtp.Item2;
             }
@@ -265,7 +265,7 @@ namespace SpaceMercs {
             if (m.Size < 1) m.Size = 1;
 
             // Set mission goal
-            Tuple<MissionGoal, MissionItem> mgtp = GetRandomMissionGoal(m, rand);
+            Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
             m.Goal = mgtp.Item1;
             m.MItem = mgtp.Item2;
             if (m.Goal == MissionGoal.KillBoss) m.Reward *= 0.9;

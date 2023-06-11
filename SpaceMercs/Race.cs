@@ -64,8 +64,8 @@ namespace SpaceMercs {
             file.WriteLine("</Race>");
         }
         public void LoadAdditionalData(XmlNode xml, Map map) {
-            AstronomicalObject aoHome = map.GetAOFromLocationString(xml.SelectSingleNode("HomePlanet").InnerText);
-            if (aoHome == null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
+            AstronomicalObject? aoHome = map.GetAOFromLocationString(xml.SelectSingleNode("HomePlanet").InnerText);
+            if (aoHome is null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = (Planet)aoHome;
             Known = (xml.SelectSingleNode("Known") != null);
             Relations = int.Parse(xml.SelectSingleNode("Relations").InnerText);
@@ -133,9 +133,9 @@ namespace SpaceMercs {
         public Star GetNearestSystemTo(Star st) {
             if (Systems.Contains(st)) return st;
             double closest = 100000.0;
-            Star stBest = null;
+            Star stBest = st;
             foreach (Star st2 in Systems) {
-                if (stBest == null || st.DistanceTo(st2) < closest) {
+                if (stBest == st || st.DistanceTo(st2) < closest) {
                     closest = st.DistanceTo(st2);
                     stBest = st2;
                 }
@@ -144,10 +144,10 @@ namespace SpaceMercs {
         }
         public Star GetNearestSystemToNotIncludingSelf(Star st) {
             double closest = 100000.0;
-            Star stBest = null;
+            Star stBest = st;
             foreach (Star st2 in Systems) {
                 if (st2 == st) continue;
-                if (stBest == null || st.DistanceTo(st2) < closest) {
+                if (stBest == st || st.DistanceTo(st2) < closest) {
                     closest = st.DistanceTo(st2);
                     stBest = st2;
                 }

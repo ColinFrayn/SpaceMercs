@@ -252,9 +252,8 @@ namespace SpaceMercs.MainWindow {
 
         // Get the system under the mouse pointer
         private void MapHover() {
-            AstronomicalObject aoHoverOld = aoHover;
             aoHover = null;
-            if (GalaxyMap.bMapSetup == false) return;
+            if (!GalaxyMap.bMapSetup) return;
 
             // Work out what we're hovering over (pick the closest one!)
             double mxfract = (double)MousePosition.X / (double)Size.X;
@@ -266,7 +265,6 @@ namespace SpaceMercs.MainWindow {
             Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
             Sector sc = GalaxyMap.GetSector(tp);
             aoHover = sc.CheckHover(mxpos, mypos, fMapViewZ);
-            // TODO if (aoHover != aoHoverOld) glMapView.Invalidate();
         }
     }
 }

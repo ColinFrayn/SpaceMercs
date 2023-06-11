@@ -177,10 +177,9 @@ namespace SpaceMercs.MainWindow {
             List<string> strHoverText = new List<string>();
 
             // Check for AO hover.
-            if (aoHover == null) return strHoverText;
+            if (aoHover is null || aoSelected is null) return strHoverText;
             double dist = AstronomicalObject.CalculateDistance(aoSelected, aoHover);
-            if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                Star stHover = (Star)aoHover;
+            if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star && aoHover is Star stHover) {
                 if (stHover.Name.Length == 0) {
                     strHoverText.Add("<Unnamed>");
                 }
@@ -192,8 +191,7 @@ namespace SpaceMercs.MainWindow {
                     strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
                 }
             }
-            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
-                Planet plHover = (Planet)aoHover;
+            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet && aoHover is Planet plHover) {
                 if (string.IsNullOrEmpty(plHover?.Name)) {
                     strHoverText.Add("<Unnamed>");
                 }
@@ -210,8 +208,7 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
-            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
-                Moon mnHover = (Moon)aoHover;
+            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Moon && aoHover is Moon mnHover) {
                 strHoverText.Add(mnHover.Type.ToString() + " Moon");
                 if (aoSelected != null) {
                     if (aoSelected.GetSystem() == aoHover.GetSystem()) {
@@ -397,6 +394,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void FlyTo_Continue(double jt) {
             // Set up that we're travelling somewhere
+            if (aoSelected is null) throw new Exception("Attempting to set up travel to a null target");
             TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, (float)jt, PlayerTeam, this);
         }
         private void OpenColonyViewDialog() {

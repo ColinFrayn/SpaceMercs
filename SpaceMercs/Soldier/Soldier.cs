@@ -502,7 +502,7 @@ namespace SpaceMercs {
             Gender = (GenderType)Enum.Parse(typeof(GenderType), xml.SelectSingleNode("Gender").InnerText);
             Race = StaticData.GetRaceByName(xml.SelectSingleNode("Race").InnerText);
             if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectSingleNode("Race").InnerText);
-            XmlNode xmls = xml.SelectSingleNode("Stats");
+            XmlNode? xmls = xml.SelectSingleNode("Stats");
             string[] stats = xmls.InnerText.Split(',');
             if (stats.Length != 5) throw new Exception("Could not understand stats string for Soldier " + Name + " : " + xmls.InnerText);
             BaseStrength = int.Parse(stats[0]);
@@ -518,7 +518,7 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("Shields") != null) Shields = Double.Parse(xml.SelectSingleNode("Shields").InnerText);
             else Shields = MaxShields;
             if (xml.SelectSingleNode("Facing") != null) {
-                if (Double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
+                if (double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
                     Facing = fac;
                 }
                 else {
@@ -547,9 +547,11 @@ namespace SpaceMercs {
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
                     int count = int.Parse(xi.Attributes["Count"].Value);
-                    IItem eq = Utils.LoadItem(xi.FirstChild);
-                    if (Inventory.ContainsKey(eq)) Inventory[eq] += count; // Ideally shouldn't happen, but we might as well tidy it up here if it does...
-                    else Inventory.Add(eq, count);
+                    IItem? eq = Utils.LoadItem(xi.FirstChild);
+                    if (eq is not null) {
+                        if (Inventory.ContainsKey(eq)) Inventory[eq] += count; // Ideally shouldn't happen, but we might as well tidy it up here if it does...
+                        else Inventory.Add(eq, count);
+                    }
                 }
             }
 
@@ -564,16 +566,15 @@ namespace SpaceMercs {
 
             XmlNode xmlwp = xml.SelectSingleNode("EquippedWeapon");
             EquippedWeapon = null;
-            if (xmlwp != null) {
+            if (xmlwp?.FirstChild is not null) {
                 EquippedWeapon = new Weapon(xmlwp.FirstChild);
             }
 
             XmlNode wex = xml.SelectSingleNode("WeaponExperience");
             WeaponExperience.Clear();
-            if (wex != null) {
+            if (wex is not null) {
                 foreach (XmlNode xw in wex.SelectNodes("Exp")) {
-                    WeaponType tp = StaticData.GetWeaponTypeByName(xw.Attributes["Type"].Value);
-                    if (tp == null) throw new Exception("Could not ID WeaponType : " + xw.Attributes["Type"].Value);
+                    WeaponType? tp = StaticData.GetWeaponTypeByName(xw.Attributes["Type"].Value) ?? throw new Exception("Could not ID WeaponType : " + xw.Attributes["Type"].Value);
                     int exp = int.Parse(xw.InnerText);
                     WeaponExperience.Add(tp, exp);
                 }
@@ -918,7 +919,7 @@ namespace SpaceMercs {
             // If armour doesn't exist at this location, then generate something
             if (ar is null) {
                 ar = PickRandomBaseArmourForLocation(bp);
-                EquippedArmour.Add(ar);
+                if (ar is not null) EquippedArmour.Add(ar);
             }
             // Otherwise upgrade what's there
             else {

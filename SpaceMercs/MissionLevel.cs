@@ -533,11 +533,13 @@ namespace SpaceMercs {
             GenerateCreatures();
             // Add goal if required
             if (ParentMission.Goal == Mission.MissionGoal.FindItem) {
+                if (ParentMission.MItem is null) throw new Exception("No goal item type set up for FindItem mission");
                 if (LevelID == ParentMission.LevelCount - 1) {
                     InsertGoalItem(ParentMission.MItem);
                 }
             }
             if (ParentMission.Goal == Mission.MissionGoal.Gather) {
+                if (ParentMission.MItem is null) throw new Exception("No goal item type set up for Gather mission");
                 int nitems = ParentMission.Size + 2 + LevelID;
                 for (int n = 0; n < nitems; n++) {
                     InsertGoalItem(ParentMission.MItem);
@@ -546,6 +548,7 @@ namespace SpaceMercs {
         }
         private void SetupMapDimensions() {
             if (ParentMission.IsShipMission) {
+                if (ParentMission.ShipTarget is null) throw new Exception("No ship item set up for Ship mission");
                 Width = (ParentMission.ShipTarget.Type.Length * 4) + 9;
                 Height = (ParentMission.ShipTarget.Type.Width * 4) + 9;
             }

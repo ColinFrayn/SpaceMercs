@@ -219,8 +219,7 @@ namespace SpaceMercs {
             foreach (XmlNode xr in xml.SelectNodes("Room")) {
                 //int id = int.Parse(xr.Attributes["ID"].Value);
                 XmlNode xn = xr.SelectSingleNode("ShipRoom/Equipment");
-                ShipEquipment se = StaticData.GetShipEquipmentByName(xn.InnerText);
-                if (se == null) throw new Exception("Could not find room type : " + xn.InnerText);
+                ShipEquipment? se = StaticData.GetShipEquipmentByName(xn.InnerText) ?? throw new Exception("Could not find room type : " + xn.InnerText);
                 bool bActive = (xr.SelectSingleNode("ShipRoom/Active") != null);
                 if (se is ShipArmour) ArmourType = se as ShipArmour;
                 else {
@@ -234,7 +233,7 @@ namespace SpaceMercs {
             // New-style Equipment loading
             foreach (XmlNode xr in xml.SelectNodes("Eqp")) {
                 int id = int.Parse(xr.Attributes["ID"].Value);
-                ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText);
+                ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }
@@ -276,7 +275,7 @@ namespace SpaceMercs {
 
         // Add to this ship equipment of the given type, in the first available slot. FULLY BUILT.
         public void AddBuiltEquipmentAutoSlot(ShipEquipment se, int RID = -1) {
-            if (se == null) return;
+            if (se is null) return;
             int n = RID;
             if (RID == -1) {
                 n = 0;
@@ -607,7 +606,8 @@ namespace SpaceMercs {
             Random rand = new Random();
             foreach (string strMat in dMats.Keys) {
                 double dmult = dMats[strMat];
-                MaterialType mat = StaticData.GetMaterialTypeByName(strMat);
+                MaterialType? mat = StaticData.GetMaterialTypeByName(strMat);
+                if (mat is null) throw new Exception($"Unknown material : {strMat}"); // Should never happen
                 int num = (int)(Type.MaxHull * dmult * (rand.NextDouble() + 2.0) / 5.0);
                 if (bDestroyed) num = (int)(num * (rand.NextDouble() + 2.0) / 5.0);
                 if (num > 0) dSalvage.Add(new Material(mat), num);
@@ -628,7 +628,7 @@ namespace SpaceMercs {
 
             // Set up equipment (we only care about weapons, equipment, armour, engine)
             double dCash = (dDiff * (40.0 + sh.Equipment.Count * 6.0)) + 20.0;
-            ShipEngine seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, rc, dCash / 5.0, rand) as ShipEngine;
+            ShipEngine? seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, rc, dCash / 5.0, rand) as ShipEngine;
             if (minDrive != null && (seng == null || seng.Range < minDrive.Range)) seng = minDrive;
             if (seng != null) sh.SetEngine(seng); // Engine doesn't come out of the cash reserves
 
@@ -639,7 +639,7 @@ namespace SpaceMercs {
                     double dCashToSpend = dCash / 5.0;
                     int iTries = 0;
                     do {
-                        ShipEquipment se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCashToSpend, rand);
+                        ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCashToSpend, rand);
                         sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
                         if (se == null) {
                             if (iTries++ > 5) dCashToSpend *= 1.1; // If we didn't get a weapon after a few tries then allow us to spend more until we get one.
@@ -656,9 +656,11 @@ namespace SpaceMercs {
                     if (se != null) dCash -= se.Cost;
                 }
                 else if (rd.Size == ShipEquipment.RoomSize.Small || rd.Size == ShipEquipment.RoomSize.Medium || rd.Size == ShipEquipment.RoomSize.Large) {
-                    ShipEquipment se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEquipment, rd.Size, rc, dCash / 5.0, rand);
-                    sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                    if (se != null) dCash -= se.Cost;
+                    ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEquipment, rd.Size, rc, dCash / 5.0, rand);
+                    if (se is not null) {
+                        sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
+                        dCash -= se.Cost;
+                    }
                 }
             }
 

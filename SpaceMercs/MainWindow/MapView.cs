@@ -410,10 +410,12 @@ namespace SpaceMercs.MainWindow {
                 else if (IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift)) fScale /= 2.5f;
                 fMapViewX -= (float)(e.DeltaX) * fScale;
                 fMapViewY += (float)(e.DeltaY) * fScale;
-                if (fMapViewX < (CurrentSystem.MapPos.X - Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X - Const.MaximumScrollRange);
-                if (fMapViewX > (CurrentSystem.MapPos.X + Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X + Const.MaximumScrollRange);
-                if (fMapViewY < (CurrentSystem.MapPos.Y - Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y - Const.MaximumScrollRange);
-                if (fMapViewY > (CurrentSystem.MapPos.Y + Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y + Const.MaximumScrollRange);
+                if (CurrentSystem is not null) {
+                    if (fMapViewX < (CurrentSystem.MapPos.X - Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X - Const.MaximumScrollRange);
+                    if (fMapViewX > (CurrentSystem.MapPos.X + Const.MaximumScrollRange)) fMapViewX = (CurrentSystem.MapPos.X + Const.MaximumScrollRange);
+                    if (fMapViewY < (CurrentSystem.MapPos.Y - Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y - Const.MaximumScrollRange);
+                    if (fMapViewY > (CurrentSystem.MapPos.Y + Const.MaximumScrollRange)) fMapViewY = (CurrentSystem.MapPos.Y + Const.MaximumScrollRange);
+                }
             }
 
             // Hover over GUI objects
@@ -650,7 +652,7 @@ namespace SpaceMercs.MainWindow {
             DialogResult result = ofd.ShowDialog();
             if (result == DialogResult.OK) {
                 try {
-                    Tuple<Map, Team, Travel> tp = LoadGame(ofd.FileName);
+                    Tuple<Map, Team, Travel?> tp = LoadGame(ofd.FileName);
                     // If we get here then it loaded OK, so overwrite everything
                     GalaxyMap = tp.Item1;
                     PlayerTeam = tp.Item2;
