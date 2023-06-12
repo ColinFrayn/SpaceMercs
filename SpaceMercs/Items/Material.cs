@@ -18,9 +18,8 @@ namespace SpaceMercs {
       BaseType = mt;
     }
     public Material(XmlNode xml) {
-      string strType = xml.Attributes["Type"].Value;
-      MaterialType mt = StaticData.GetMaterialTypeByName(strType);
-      if (mt == null) throw new Exception("Could not find base type for material \"" + strType + "\"");
+      string strType = xml.Attributes!["Type"]?.Value ?? "<Name Unknown>";
+      MaterialType mt = StaticData.GetMaterialTypeByName(strType) ?? throw new Exception($"Could not find base type for material \"{strType}\"");
       BaseType = mt;
     }
 

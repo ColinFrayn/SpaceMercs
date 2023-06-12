@@ -35,7 +35,7 @@ namespace SpaceMercs {
             get {
                 List<ShipWeapon> lw = new List<ShipWeapon>();
                 foreach (int id in Equipment.Keys) {
-                    if (Equipment[id].Item1 is ShipWeapon) lw.Add(Equipment[id].Item1 as ShipWeapon);
+                    if (Equipment[id].Item1 is ShipWeapon sw) lw.Add(sw);
                 }
                 return lw;
             }
@@ -179,7 +179,7 @@ namespace SpaceMercs {
         public int Armour { get { if (ArmourType == null) return 0; return ArmourType.BaseArmour; } }
 
         public static Ship GenerateStarterShip(Team tm, ShipType? st = null) {
-            Ship sh = new Ship(st != null ? st : StaticData.GetStarterShip());
+            Ship sh = new Ship(st ?? StaticData.GetStarterShip() ?? throw new Exception("Could not find ship type!"));
             sh.Owner = tm;
             sh.Name = "Player Ship";
             sh.SetEngine(StaticData.GetShipEngineByName("Thrusters"));
@@ -207,18 +207,17 @@ namespace SpaceMercs {
             if (xml.Attributes["Type"] != null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
             else {
                 int seed = int.Parse(xml.Attributes["Seed"].Value);
-                double diff = Double.Parse(xml.Attributes["Diff"].Value);
+                double diff = double.Parse(xml.Attributes["Diff"].Value);
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
-            if (Type == null) throw new Exception("Could not ID Ship Type : " + xml.Attributes["Type"].Value);
-            Hull = Double.Parse(xml.SelectSingleNode("Hull").InnerText);
+            if (Type is null) throw new Exception("Could not ID Ship Type : " + xml.Attributes["Type"].Value);
+            Hull = double.Parse(xml.SelectSingleNode("Hull").InnerText);
             Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
             Equipment.Clear();
 
             // Compatibility mode
             foreach (XmlNode xr in xml.SelectNodes("Room")) {
-                //int id = int.Parse(xr.Attributes["ID"].Value);
-                XmlNode xn = xr.SelectSingleNode("ShipRoom/Equipment");
+                XmlNode xn = xr.SelectSingleNode("ShipRoom/Equipment") ?? throw new Exception("Could not find ShipRoom/Equipment details in savegame");
                 ShipEquipment? se = StaticData.GetShipEquipmentByName(xn.InnerText) ?? throw new Exception("Could not find room type : " + xn.InnerText);
                 bool bActive = (xr.SelectSingleNode("ShipRoom/Active") != null);
                 if (se is ShipArmour) ArmourType = se as ShipArmour;
@@ -238,13 +237,13 @@ namespace SpaceMercs {
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }
             if (xml.SelectSingleNode("Armour") != null) {
-                string strArm = xml.SelectSingleNode("Armour").InnerText;
+                string strArm = xml.SelectSingleNode("Armour")?.InnerText ?? throw new Exception("Couldn't find ShipArmour name");
                 ShipArmour? sa = StaticData.GetShipArmourByName(strArm);
                 ArmourType = sa ?? throw new Exception("Couldn't find ShipArmour type " + strArm);
             }
             else ArmourType = null;
             InitialiseForBattle();
-            Shield = Double.Parse(xml.SelectSingleNode("Shield").InnerText); // Do this after InitialiseForBattle() because that method resets the shield
+            Shield = double.Parse(xml.SelectSingleNode("Shield").InnerText); // Do this after InitialiseForBattle() because that method resets the shield
         }
         public static Ship Empty { get { return new Ship(); } }
 
@@ -264,7 +263,8 @@ namespace SpaceMercs {
         }
 
         // Configure the ship
-        public void SetEngine(ShipEngine se) {
+        public void SetEngine(ShipEngine? se) {
+            if (se is null) return;
             int n = 0;
             while (Type.Rooms[n].Size != ShipEquipment.RoomSize.Engine) n++;
             AddBuiltEquipmentAutoSlot(se, n); // Overwrite
@@ -274,7 +274,7 @@ namespace SpaceMercs {
         }
 
         // Add to this ship equipment of the given type, in the first available slot. FULLY BUILT.
-        public void AddBuiltEquipmentAutoSlot(ShipEquipment se, int RID = -1) {
+        public void AddBuiltEquipmentAutoSlot(ShipEquipment? se, int RID = -1) {
             if (se is null) return;
             int n = RID;
             if (RID == -1) {
@@ -640,20 +640,22 @@ namespace SpaceMercs {
                     int iTries = 0;
                     do {
                         ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCashToSpend, rand);
-                        sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                        if (se == null) {
+                        if (se is null) {
                             if (iTries++ > 5) dCashToSpend *= 1.1; // If we didn't get a weapon after a few tries then allow us to spend more until we get one.
                         }
                         else {
+                            sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
                             dCash -= se.Cost;
                             bIsArmed = true;
                         }
                     } while (!bIsArmed); // Ensure that the ship has at least one weapon
                 }
                 else if (rd.Size == ShipEquipment.RoomSize.Armour) {
-                    ShipEquipment se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), rd.Size, rc, dCash / 5.0, rand);
-                    sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                    if (se != null) dCash -= se.Cost;
+                    ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), rd.Size, rc, dCash / 5.0, rand);
+                    if (se is not null) {
+                        sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
+                        dCash -= se.Cost;
+                    }
                 }
                 else if (rd.Size == ShipEquipment.RoomSize.Small || rd.Size == ShipEquipment.RoomSize.Medium || rd.Size == ShipEquipment.RoomSize.Large) {
                     ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEquipment, rd.Size, rc, dCash / 5.0, rand);

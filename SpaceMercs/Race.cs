@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Drawing;
-using System.Xml;
+﻿using System.Xml;
 using System.IO;
-using OpenTK.Graphics.ES20;
 
 namespace SpaceMercs {
     class Race {
@@ -31,7 +26,7 @@ namespace SpaceMercs {
 
         public Race(XmlNode xml) {
             Name = xml.SelectSingleNode("Name").InnerText;
-            Scale = Double.Parse(xml.SelectSingleNode("Scale").InnerText);
+            Scale = double.Parse(xml.SelectSingleNode("Scale").InnerText);
             Intellect = int.Parse(xml.SelectSingleNode("Intellect").InnerText);
             Strength = int.Parse(xml.SelectSingleNode("Strength").InnerText);
             Toughness = int.Parse(xml.SelectSingleNode("Toughness").InnerText);
@@ -50,7 +45,7 @@ namespace SpaceMercs {
                 if (FirstNames.ContainsKey(gt)) throw new Exception("Duplicate gender key " + xn.Name + " for race names for " + Name + " race");
                 FirstNames.Add(gt, lNames);
             }
-            FamilyNames = xml.SelectSingleNode("Names/Family").InnerText.Split(',').ToList<string>();
+            FamilyNames = xml.SelectSingleNode("Names/Family")?.InnerText?.Split(',')?.ToList<string>() ?? throw new Exception("No family names defined for race " + Name);
             if (FamilyNames.Count == 0) throw new Exception("No family names defined for race " + Name);
             if (FirstNames.Keys.Count == 0) throw new Exception("No possible genders defined for race " + Name + ". Please add some names!");
             Reset();

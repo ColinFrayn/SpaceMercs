@@ -52,15 +52,16 @@ namespace SpaceMercs {
             Diff = diff;
         }
         public ShipType(XmlNode xml) {
-            Name = xml.Attributes["Name"].Value;
-            if (xml.SelectSingleNode("AKA") != null) AKA = xml.SelectSingleNode("AKA").InnerText;
-            else AKA = "";
+            Name = xml.Attributes!["Name"]?.Value ?? "<No Name>";
+            AKA = xml.SelectSingleNode("AKA")?.InnerText ?? "";
             Cost = double.Parse(xml.SelectSingleNode("Cost").InnerText);
             Small = int.Parse(xml.SelectSingleNode("Small").InnerText);
             Medium = int.Parse(xml.SelectSingleNode("Medium").InnerText);
             Large = int.Parse(xml.SelectSingleNode("Large").InnerText);
             Weapon = int.Parse(xml.SelectSingleNode("Weapon").InnerText);
             Description = xml.SelectSingleNode("Desc").InnerText;
+            Perimeter = new List<Point>();
+            Fillers = new List<Point>();
             SetupLayout();
         }
         public static ShipType Empty { get { return new ShipType(); } }
@@ -314,7 +315,6 @@ namespace SpaceMercs {
         // Calculate the points along the perimeter of this ship
         private void SetupPerimeter(int XShift) {
             if (!Rooms.Any()) return;
-            Perimeter = new List<Point>();
 
             int dx = -XShift - 100, dy = -99;
             int x = MinX, y = 100, dir = Layout[x, y + 1] ? 2 : 1;
@@ -391,7 +391,6 @@ namespace SpaceMercs {
         private void SetupFillers(int XShift) {
             int dx = -XShift - 100, dy = -100;
             // Flood fill outside ship
-            Fillers = new List<Point>();
             bool[,] Outside = new bool[201, 201];
             Queue<Point> qBacklog = new Queue<Point>();
             do {

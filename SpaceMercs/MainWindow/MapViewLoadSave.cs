@@ -21,27 +21,23 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Load in GUI details
-            XmlNode xGUI = xml.SelectSingleNode("GUI");
-            if (xGUI == null) {
-                throw new Exception("Could not find GUI details in save file");
-            }
+            XmlNode xGUI = xml.SelectSingleNode("GUI") ?? throw new Exception("Could not find GUI details in save file");
+
             // Load GUI Details here
-            else {
-                if (xGUI.SelectSingleNode("ShowLabels") != null) bShowLabels = true;
-                else bShowLabels = false;
-                if (xGUI.SelectSingleNode("ShowMapGrid") != null) bShowGridLines = true;
-                else bShowGridLines = false;
-                if (xGUI.SelectSingleNode("FadeStars") != null) bFadeUnvisited = true;
-                else bFadeUnvisited = false;
-                if (xGUI.SelectSingleNode("ShowRangeCircles") != null) bShowRangeCircles = true;
-                else bShowRangeCircles = false;
-                if (xGUI.SelectSingleNode("ShowTradeRoutes") != null) bShowTradeRoutes = true;
-                else bShowTradeRoutes = false;
-                if (xGUI.SelectSingleNode("ShowFlags") != null) bShowFlags = true;
-                else bShowFlags = false;
-                if (xGUI.SelectSingleNode("ShowColonies") != null) bShowColonies = true;
-                else bShowColonies = false;
-            }
+            if (xGUI.SelectSingleNode("ShowLabels") != null) bShowLabels = true;
+            else bShowLabels = false;
+            if (xGUI.SelectSingleNode("ShowMapGrid") != null) bShowGridLines = true;
+            else bShowGridLines = false;
+            if (xGUI.SelectSingleNode("FadeStars") != null) bFadeUnvisited = true;
+            else bFadeUnvisited = false;
+            if (xGUI.SelectSingleNode("ShowRangeCircles") != null) bShowRangeCircles = true;
+            else bShowRangeCircles = false;
+            if (xGUI.SelectSingleNode("ShowTradeRoutes") != null) bShowTradeRoutes = true;
+            else bShowTradeRoutes = false;
+            if (xGUI.SelectSingleNode("ShowFlags") != null) bShowFlags = true;
+            else bShowFlags = false;
+            if (xGUI.SelectSingleNode("ShowColonies") != null) bShowColonies = true;
+            else bShowColonies = false;
 
             // Load in the clock
             DateTime newTime = DateTime.Parse(xml.SelectSingleNode("Clock").InnerText);
@@ -62,11 +58,10 @@ namespace SpaceMercs.MainWindow {
             Team newTeam = new Team(xTeam, newMap);
 
             // Load additional race data
-            XmlNode xRaces = xml.SelectSingleNode("Races");
+            XmlNode? xRaces = xml.SelectSingleNode("Races");
             foreach (XmlNode xr in xRaces.SelectNodes("Race")) {
                 string strName = xr.Attributes["Name"].Value;
-                Race r = StaticData.GetRaceByName(strName);
-                if (r == null) throw new Exception("Could not ID Race : " + strName);
+                Race r = StaticData.GetRaceByName(strName) ?? throw new Exception("Could not ID Race : " + strName);
                 r.LoadAdditionalData(xr, newMap);
             }
 

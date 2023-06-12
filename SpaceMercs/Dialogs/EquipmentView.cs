@@ -347,8 +347,7 @@ namespace SpaceMercs.Dialogs {
             if (dgFloor.SelectedRows.Count == 0) return;
             HashSet<IItem> hsIt = new HashSet<IItem>();
             for (int i = 0; i < dgFloor.SelectedRows.Count; i++) {
-                IItem it = (IItem)dgFloor.SelectedRows[i].Tag;
-                hsIt.Add(it);
+                if (dgFloor.SelectedRows[i].Tag is IItem it) hsIt.Add(it);
             }
             foreach (IItem it in hsIt) {
                 ThisStash.Remove(it);
@@ -357,8 +356,7 @@ namespace SpaceMercs.Dialogs {
             UpdateAllDetails();
             // Re-select the same items
             foreach (DataGridViewRow row in dgFloor.Rows) {
-                IItem it = (IItem)row.Tag;
-                if (hsIt.Contains(it)) row.Selected = true;
+                if (row.Tag is IItem it && hsIt.Contains(it)) row.Selected = true;
                 else row.Selected = false;
             }
         }
@@ -378,8 +376,7 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
             for (int i = 0; i < dgFloor.SelectedRows.Count; i++) {
-                IItem it = (IItem)dgFloor.SelectedRows[i].Tag;
-                if (!(it is Corpse)) {
+                if (dgFloor.SelectedRows[i].Tag is IItem it && it is not Corpse) {
                     btScavenge.Enabled = false;
                     return;
                 }

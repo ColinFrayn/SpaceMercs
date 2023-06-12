@@ -65,14 +65,14 @@ namespace SpaceMercs {
         }
       }
 
-      XmlNode xie = xml.SelectSingleNode("ItemEffect");
-      if (xie != null) {
+      XmlNode? xie = xml.SelectSingleNode("ItemEffect");
+      if (xie is not null) {
         ItemEffect = new ItemEffect(xie);
       }
 
       // Source (where can it be made?)
-      XmlNode xs = xml.SelectSingleNode("Source");
-      if (xs != null) {
+      XmlNode? xs = xml.SelectSingleNode("Source");
+      if (xs is not null) {
         Source = (ItemSource)Enum.Parse(typeof(ItemSource), xs.InnerText);
       }
       else Source = ItemSource.None;

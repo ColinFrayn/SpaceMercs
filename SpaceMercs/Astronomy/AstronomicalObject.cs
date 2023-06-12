@@ -134,7 +134,7 @@ namespace SpaceMercs {
         }
 
         // Get a random race suitable for this location
-        public Race? GetRandomRace(Random rand) {
+        public Race GetRandomRace(Random rand) {
             if (this is HabitableAO hao) {
                 if (hao.Colony != null) return hao.Colony.Owner;
             }
@@ -145,13 +145,13 @@ namespace SpaceMercs {
                 double dDist = AstronomicalObject.CalculateDistance(GetSystem(), r.HomePlanet.GetSystem()) / Const.LightYear;
                 if (dDist < 0.2) dDist = 0.2; // Just being careful... Even in a home system, there is a tiny chance of getting aliens
                 double dScore = (rand.NextDouble() + 0.1) / (dDist * dDist);
-                if (GetSystem().Sector == r.HomePlanet.GetSystem().Sector) dScore *= 1.5; // More likely to encounter race if it's their home sector
-                if (rBest == null || dScore > dBestScore) {
+                if (GetSystem().Sector == r.HomePlanet.GetSystem().Sector) dScore *= 1.5; // More likely to encounter a race if it's their home sector
+                if (rBest is null || dScore > dBestScore) {
                     dBestScore = dScore;
                     rBest = r;
                 }
             }
-            return rBest;
+            return rBest ?? throw new Exception("Could not generate a random race");
         }
 
         // Location to string

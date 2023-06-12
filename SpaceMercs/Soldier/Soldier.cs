@@ -231,6 +231,7 @@ namespace SpaceMercs {
         }
         public void KillEntity() {
             Health = 0.0;
+            IsActive = false;
             CurrentLevel.KillSoldier(this);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
@@ -480,27 +481,29 @@ namespace SpaceMercs {
             iTextureID = -1;
             Name = xml.Attributes["Name"].Value;
             rnd = new Random(Name.GetHashCode());
-            XmlNode xac = xml.SelectSingleNode("Inactive");
-            if (xac == null) {
+            XmlNode? xac = xml.SelectSingleNode("Inactive");
+            if (xac is null) {
                 IsActive = true;
-                if (pt != null) aoLocation = pt.CurrentPosition;
+                if (pt is not null) aoLocation = pt.CurrentPosition;
             }
             else {
                 IsActive = false;
-                if (pt != null) aoLocation = pt.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xac.Attributes["Loc"].Value);
-                if (aoLocation == null) throw new Exception("Could not ID location of soldier : " + xac.Attributes["Loc"].Value);
+                string location = xac.Attributes!["Loc"]?.Value ?? throw new Exception($"Could not ID location of soldier {Name} = (null)");
+                if (pt is not null) aoLocation = pt.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(location);
+                if (aoLocation is null) throw new Exception($"Could not ID location of soldier {Name} = {location}");
             }
             OnMission = (xml.SelectSingleNode("OnMission") != null);
 
-            XmlNode xmll = xml.SelectSingleNode("Location");
-            if (xmll != null) {
+            XmlNode? xmll = xml.SelectSingleNode("Location");
+            if (xmll is not null) {
                 X = int.Parse(xmll.Attributes["X"].Value);
                 Y = int.Parse(xmll.Attributes["Y"].Value);
             }
             else X = Y = 0;
             Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
             Gender = (GenderType)Enum.Parse(typeof(GenderType), xml.SelectSingleNode("Gender").InnerText);
-            Race = StaticData.GetRaceByName(xml.SelectSingleNode("Race").InnerText);
+            string raceName = xml.SelectSingleNode("Race")?.InnerText ?? "";
+            Race = StaticData.GetRaceByName(raceName) ?? throw new Exception($"Unrecognised Race in Soldier data : {raceName}");
             if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectSingleNode("Race").InnerText);
             XmlNode? xmls = xml.SelectSingleNode("Stats");
             string[] stats = xmls.InnerText.Split(',');
@@ -534,17 +537,17 @@ namespace SpaceMercs {
 
             bHasMoved = (xml.SelectSingleNode("Moved") != null);
 
-            XmlNode xg = xml.SelectSingleNode("GoTo");
-            if (xg != null) {
+            XmlNode? xg = xml.SelectSingleNode("GoTo");
+            if (xg is not null) {
                 int gx = int.Parse(xg.Attributes["X"].Value);
                 int gy = int.Parse(xg.Attributes["Y"].Value);
                 GoTo = new Point(gx, gy);
             }
             else GoTo = Point.Empty;
 
-            XmlNode xmli = xml.SelectSingleNode("Inventory");
+            XmlNode? xmli = xml.SelectSingleNode("Inventory");
             Inventory.Clear();
-            if (xmli != null) {
+            if (xmli is not null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
                     int count = int.Parse(xi.Attributes["Count"].Value);
                     IItem? eq = Utils.LoadItem(xi.FirstChild);
@@ -555,22 +558,22 @@ namespace SpaceMercs {
                 }
             }
 
-            XmlNode xmlar = xml.SelectSingleNode("EquippedArmour");
+            XmlNode? xmlar = xml.SelectSingleNode("EquippedArmour");
             EquippedArmour.Clear();
-            if (xmlar != null) {
+            if (xmlar is not null) {
                 foreach (XmlNode xar in xmlar.ChildNodes) {
                     Armour ar = new Armour(xar);
                     EquippedArmour.Add(ar);
                 }
             }
 
-            XmlNode xmlwp = xml.SelectSingleNode("EquippedWeapon");
+            XmlNode? xmlwp = xml.SelectSingleNode("EquippedWeapon");
             EquippedWeapon = null;
             if (xmlwp?.FirstChild is not null) {
                 EquippedWeapon = new Weapon(xmlwp.FirstChild);
             }
 
-            XmlNode wex = xml.SelectSingleNode("WeaponExperience");
+            XmlNode? wex = xml.SelectSingleNode("WeaponExperience");
             WeaponExperience.Clear();
             if (wex is not null) {
                 foreach (XmlNode xw in wex.SelectNodes("Exp")) {
@@ -580,10 +583,10 @@ namespace SpaceMercs {
                 }
             }
 
-            XmlNode wut = xml.SelectSingleNode("UtilityExperience");
+            XmlNode? wut = xml.SelectSingleNode("UtilityExperience");
             UtilitySkills.Clear();
             int totsk = 0;
-            if (wut != null) {
+            if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodes("Exp")) {
                     UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.Attributes["Skill"].Value);
                     int lvl = int.Parse(xu.InnerText);
@@ -595,9 +598,9 @@ namespace SpaceMercs {
                 AddUtilitySkill(UtilitySkill.Unspent, Level + 1 - totsk); // Make sure we've got our unspent points
             }
 
-            XmlNode xmlef = xml.SelectSingleNode("Effects");
+            XmlNode? xmlef = xml.SelectSingleNode("Effects");
             _Effects.Clear();
-            if (xmlef != null) {
+            if (xmlef is not null) {
                 foreach (XmlNode xef in xmlef.ChildNodes) {
                     Effect e = new Effect(xef);
                     _Effects.Add(e);
@@ -619,7 +622,7 @@ namespace SpaceMercs {
             for (int n = 0; n < 5; n++) {
                 if (Stats[n] < 5) Stats[n] = 5;
             }
-            Race r = cl.Location.GetRandomRace(rand);
+            Race r = cl.Location.GetRandomRace(rand); 
             GenderType gt = r.GenerateRandomGender(rand);
             string strName = r.GenerateRandomName(rand, gt);
             int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
@@ -635,7 +638,7 @@ namespace SpaceMercs {
         // Save this soldier to an Xml file
         public void SaveToFile(StreamWriter file) {
             file.WriteLine("<Soldier Name=\"" + Name + "\">");
-            if (!IsActive) file.WriteLine(" <Inactive Loc=\"" + aoLocation.PrintCoordinates() + "\"/>");
+            if (!IsActive) file.WriteLine(" <Inactive Loc=\"" + aoLocation?.PrintCoordinates() + "\"/>");
             if (OnMission) file.WriteLine(" <OnMission/>");
             if (PlayerTeam != null) file.WriteLine(" <Location X=\"" + X + "\" Y=\"" + Y + "\"/>");
             if (PlayerTeam != null) file.WriteLine(" <Health>" + Health + "</Health>");
@@ -798,7 +801,7 @@ namespace SpaceMercs {
         public void DropItem(IItem it, int Count = 1) {
             if (Inventory.ContainsKey(it)) {
                 if (Count > Inventory[it]) Count = Inventory[it];
-                PlayerTeam.AddItem(it, Count);
+                PlayerTeam?.AddItem(it, Count);
                 Inventory[it] -= Count;
                 if (Inventory[it] <= 0) Inventory.Remove(it);
             }
@@ -806,7 +809,7 @@ namespace SpaceMercs {
         }
         public void DropAll(IItem it) {
             if (Inventory.ContainsKey(it)) {
-                PlayerTeam.AddItem(it, Inventory[it]);
+                PlayerTeam?.AddItem(it, Inventory[it]);
                 Inventory.Remove(it);
             }
             CalculateMaxStats();
@@ -877,12 +880,12 @@ namespace SpaceMercs {
             }
         }
         private void SetupBasicArmour() {
-            Armour chest = PickRandomBaseArmourForLocation(BodyPart.Chest);
-            if (chest != null && rnd.NextDouble() < 0.8) EquippedArmour.Add(chest);
+            Armour? chest = PickRandomBaseArmourForLocation(BodyPart.Chest);
+            if (chest is not null && rnd.NextDouble() < 0.8) EquippedArmour.Add(chest);
             foreach (BodyPart bp in Enum.GetValues(typeof(BodyPart))) {
                 if (rnd.NextDouble() < 0.3 && GetArmourAtLocation(bp) == null) {
-                    Armour arm = PickRandomBaseArmourForLocation(bp);
-                    if (arm != null) EquippedArmour.Add(arm);
+                    Armour? arm = PickRandomBaseArmourForLocation(bp);
+                    if (arm is not null) EquippedArmour.Add(arm);
                 }
             }
         }
@@ -1118,10 +1121,10 @@ namespace SpaceMercs {
                         // Is there something hidden here?
                         bool bFound = false;
                         if (level.Map[x, y] == MissionLevel.TileType.SecretDoorHorizontal || level.Map[x, y] == MissionLevel.TileType.SecretDoorVertical) bFound = true;
-                        Stash st = level.GetStashAtPoint(x, y);
-                        if (st != null && st.Hidden) bFound = true;
-                        Trap tr = level.GetTrapAtPoint(x, y);
-                        if (tr != null && tr.Hidden) bFound = true;
+                        Stash? st = level.GetStashAtPoint(x, y);
+                        if (st is not null && st.Hidden) bFound = true;
+                        Trap? tr = level.GetTrapAtPoint(x, y);
+                        if (tr is not null && tr.Hidden) bFound = true;
 
                         // TODO Add hidden creatures, traps
 

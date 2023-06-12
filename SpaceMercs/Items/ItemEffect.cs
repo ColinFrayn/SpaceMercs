@@ -14,14 +14,14 @@ namespace SpaceMercs {
     public string SoundEffect { get; private set; }
 
     public ItemEffect(XmlNode xml) {
-      Name = xml.Attributes["Name"].Value;
-      if (xml.SelectSingleNode("Radius") != null) Radius = Double.Parse(xml.SelectSingleNode("Radius").InnerText);
+      Name = xml.Attributes["Name"]?.Value ?? "<No Name>";
+      if (xml.SelectSingleNode("Radius") != null) Radius = double.Parse(xml.SelectSingleNode("Radius").InnerText);
       else Radius = 0.0;
-      if (xml.SelectSingleNode("Range") != null) Range = Double.Parse(xml.SelectSingleNode("Range").InnerText);
+      if (xml.SelectSingleNode("Range") != null) Range = double.Parse(xml.SelectSingleNode("Range").InnerText);
       else Range = 1.0;
       SingleUse = (xml.SelectSingleNode("SingleUse") != null);
-      XmlNode xsk = xml.SelectSingleNode("Skill");
-      if (xsk != null) {
+      XmlNode? xsk = xml.SelectSingleNode("Skill");
+      if (xsk is not null) {
         if (xsk.Attributes["Required"] == null) SkillRequired = false;
         else SkillRequired = bool.Parse(xsk.Attributes["Required"].Value);
         AssociatedSkill = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), xml.SelectSingleNode("Skill").InnerText);
@@ -33,8 +33,8 @@ namespace SpaceMercs {
       if (xml.SelectSingleNode("Sound") != null) SoundEffect = xml.SelectSingleNode("Sound").InnerText;
       else SoundEffect = "";
 
-      XmlNodeList xes = xml.SelectNodes("Effect");
-      if (xes.Count == 0) throw new Exception("No Effect(s) in ItemEffect");
+      XmlNodeList? xes = xml.SelectNodes("Effect");
+      if (xes is null || xes.Count == 0) throw new Exception("No Effect(s) in ItemEffect");
       Effects = new List<Effect>();
       foreach (XmlNode xn in xes) {
         Effect eff = new Effect(xn);

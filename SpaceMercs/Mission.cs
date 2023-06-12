@@ -135,12 +135,12 @@ namespace SpaceMercs {
             }
             else MItem = null;
 
-            string strOpp = xml.SelectSingleNode("Opponent")?.InnerText;
+            string? strOpp = xml.SelectSingleNode("Opponent")?.InnerText;
             if (!string.IsNullOrEmpty(strOpp)) {
                 RacialOpponent = StaticData.GetRaceByName(strOpp) ?? throw new Exception("Could not ID RacialOpponent : " + strOpp);
             }
 
-            string strEn = xml.SelectSingleNode("Enemy")?.InnerText;
+            string? strEn = xml.SelectSingleNode("Enemy")?.InnerText;
             if (!string.IsNullOrEmpty(strEn)) {
                 PrimaryEnemy = StaticData.GetCreatureGroupByName(strEn) ?? throw new Exception("Could not ID PrimaryEnemy : " + strEn);
             }
@@ -235,8 +235,9 @@ namespace SpaceMercs {
             m.Location = cl.Location;
             if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
             else m.RacialOpponent = cl.Location.GetRandomRace(rand);
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand);
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
             if (m.Type == MissionType.BoardingParty) {
+                if (m.RacialOpponent is null) throw new Exception("Attempting to create a boarding party mission with no opponent");
                 m.ShipTarget = Ship.GenerateRandomShipOfRace(m.RacialOpponent, m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
@@ -260,7 +261,7 @@ namespace SpaceMercs {
             m.Location = loc;
             if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
             else m.RacialOpponent = loc.GetRandomRace(rand);
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand);
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
             if (m.Size < 1) m.Size = 1;
 

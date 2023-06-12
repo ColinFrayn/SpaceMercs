@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -92,25 +93,25 @@ namespace SpaceMercs {
         }
 
         // Public access to entities sorted by type
-        public IEnumerable<Creature> Creatures { get { return Entities.Where(e => e is Creature).Select(e => e as Creature).ToList().AsReadOnly(); } }
-        public IEnumerable<Soldier> Soldiers { get { return Entities.Where(e => e is Soldier).Select(e => e as Soldier).ToList().AsReadOnly(); } }
+        public IEnumerable<Creature> Creatures { get { return Entities.OfType<Creature>().Select(e => e as Creature).ToList<Creature>().AsReadOnly(); } }
+        public IEnumerable<Soldier> Soldiers { get { return Entities.OfType<Soldier>().Select(e => e as Soldier).ToList().AsReadOnly(); } }
 
         // These are used for map generation only (can be ignored after this point)
         private int[,] RoomMap; // Only used for dungeon map generation
         private int StartX = -1, StartY = -1, EndX = -1, EndY = -1; // Only used for map generation
 
         // CTORs
-        public MissionLevel(Mission m, int d, int l) {
-            ParentMission = m;
-            Diff = d;
-            LevelID = l;
+        public MissionLevel(Mission parentMission, int diff, int level) {
+            ParentMission = parentMission;
+            Diff = diff;
+            LevelID = level;
             bInitialised = false;
             GenerateMap();
             // All done
             bInitialised = true;
         }
-        public MissionLevel(XmlNode xml, Mission m) {
-            ParentMission = m;
+        public MissionLevel(XmlNode xml, Mission parentMission) {
+            ParentMission = parentMission;
             HoverX = HoverY = -1;
             int w = int.Parse(xml.Attributes["Width"].Value);
             int h = int.Parse(xml.Attributes["Height"].Value);
@@ -165,14 +166,14 @@ namespace SpaceMercs {
                     Point pt = new Point(x, y);
                     foreach (XmlNode xnn in xn.SelectNodes("StackItem")) {
                         int n = int.Parse(xnn.Attributes["N"].Value);
-                        IItem it = Utils.LoadItem(xnn.FirstChild);
+                        IItem it = Utils.LoadItem(xnn.FirstChild) ?? throw new Exception($"Could not load item from stack : {xnn.FirstChild?.InnerText ?? "null"}");
                         dict.Add(it, n);
                     }
                     Items.Add(pt, new Stash(dict, pt));
                 }
             }
-            XmlNode xmls = xml.SelectSingleNode("Stashes"); // New format
-            if (xmls != null) {
+            XmlNode? xmls = xml.SelectSingleNode("Stashes"); // New format
+            if (xmls is not null) {
                 foreach (XmlNode xn in xmls.SelectNodes("Stash")) {
                     Stash s = new Stash(xn);
                     Items.Add(s.Location, s);
@@ -181,8 +182,8 @@ namespace SpaceMercs {
 
             // Traps
             Traps.Clear();
-            XmlNode xmlt = xml.SelectSingleNode("Traps");
-            if (xmlt != null) {
+            XmlNode? xmlt = xml.SelectSingleNode("Traps");
+            if (xmlt is not null) {
                 foreach (XmlNode xn in xmlt.SelectNodes("Trap")) {
                     Trap t = new Trap(xn);
                     Traps.Add(t.Location, t);
@@ -442,8 +443,8 @@ namespace SpaceMercs {
                 if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(prog, pt);
             }
             IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
-            float aspect = ParentMission?.CurrentMapView?.Aspect ?? 1f;
-            Matrix4 viewM = ParentMission?.CurrentMapView?.ViewMatrix ?? Matrix4.Identity;
+            float aspect = ParentMission.CurrentMapView?.Aspect ?? 1f;
+            Matrix4 viewM = ParentMission.CurrentMapView?.ViewMatrix ?? Matrix4.Identity;
             foreach (IEntity e in lEntities) {
                 if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight, aspect, viewM);
             }
@@ -568,7 +569,7 @@ namespace SpaceMercs {
             Map = new TileType[Width, Height];
         }
         private void GenerateShipMap() {
-            Ship sh = ParentMission.ShipTarget;
+            Ship sh = ParentMission.ShipTarget ?? throw new Exception("No ship target found in mission");
             int tx = (sh.Type.Length * 2) + 4;
             int ty = (sh.Type.Width * 2) + 4;
 
@@ -1707,7 +1708,7 @@ namespace SpaceMercs {
                 }
             }
             Stash st = cr.GenerateStash();
-            if (cr.QuestItem) st.Add(ParentMission?.MItem);
+            if (cr.QuestItem) st.Add(ParentMission.MItem);
             AddToStashAtPosition(cr.X, cr.Y, st);
 
             // Experience
@@ -1727,12 +1728,9 @@ namespace SpaceMercs {
             AddToStashAtPosition(s.X, s.Y, s.GenerateStash());
 
             // Make sure nothing is targeting it
-            foreach (IEntity en in Entities) {
-                if (en is Creature ct) {
-                    if (ct.CurrentTarget == s) ct.SetTarget(null);
-                }
+            foreach (Creature ct in Entities.OfType<Creature>()) {
+                if (ct.CurrentTarget == s) ct.SetTarget(null);
             }
-            ParentMission.CurrentMapView.KillSoldierOnView(s);
         }
 
         // Utility functions

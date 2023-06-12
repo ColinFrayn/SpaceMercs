@@ -140,8 +140,8 @@ namespace SpaceMercs.MainWindow {
                         if (s.GoTo == s.Location) s.GoTo = Point.Empty;
                         if (s.GoTo != Point.Empty) {
                             if (s.TravelRange == 0) { s.GoTo = Point.Empty; continue; } // May happen if something that occurs during movement alters stamina / movement points remaining
-                            List<Point> path = CurrentLevel.ShortestPath(s, s.Location, s.GoTo, 20, true, 0);
-                            if (path == null || path.Count == 0) { s.GoTo = Point.Empty; continue; }  // e.g. if some other soldier moved in the way and blocked the route
+                            List<Point>? path = CurrentLevel.ShortestPath(s, s.Location, s.GoTo, 20, true, 0);
+                            if (path is null || path.Count == 0) { s.GoTo = Point.Empty; continue; }  // e.g. if some other soldier moved in the way and blocked the route
                             if (path[0].X == s.X && path[0].Y == s.Y + 1) MoveSoldier(s, Utils.Direction.North);
                             else if (path[0].X == s.X && path[0].Y == s.Y - 1) MoveSoldier(s, Utils.Direction.South);
                             else if (path[0].Y == s.Y && path[0].X == s.X - 1) MoveSoldier(s, Utils.Direction.West);

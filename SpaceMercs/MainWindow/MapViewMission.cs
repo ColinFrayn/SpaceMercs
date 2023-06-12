@@ -184,7 +184,11 @@ namespace SpaceMercs.MainWindow {
 
         private void DrawMission() {
             if (!bLoaded) return;
-            if (SelectedEntity is Soldier s && s.PlayerTeam == null) SelectedEntity = null; // If player has died, deselect it
+            if (SelectedEntity is Soldier s && s.PlayerTeam is null) {
+                // If player has died since the last tick, deselect it and update the buttons
+                SelectedEntity = null; 
+                SetupZoomToButtons();
+            }
 
             // Set up default OpenGL rendering parameters
             PrepareScene();
@@ -1463,7 +1467,6 @@ namespace SpaceMercs.MainWindow {
                 UpdateLevelAfterSoldierMove(s);
             }
             CentreView(ThisMission.Soldiers[0]);
-            // TODO glMapView.Invalidate();
         }
         private void EndMission() {
             if (bAIRunning) return;
@@ -1587,12 +1590,6 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
-        }
-
-        // External event handlers
-        public void KillSoldierOnView(Soldier s) {
-            SetupZoomToButtons();
-            if (SelectedEntity == s) SelectedEntity = null;
         }
     }
 }
