@@ -20,7 +20,7 @@ namespace SpaceMercs {
         public double Attack { get { return Type.AttackBase * (1.0 + Const.CreatureLevelAttackStep * (Level - 1)) + StatBonuses(StatType.Attack); } }
         public double Defence { get { return Type.DefenceBase * (1.0 + Const.CreatureLevelDefenceStep * (Level - 1)) + StatBonuses(StatType.Defence); } }
         public int TravelRange { get { return (int)Stamina; } }
-        public Weapon EquippedWeapon { get; private set; }
+        public Weapon? EquippedWeapon { get; private set; }
         public double AttackRange { get { return (EquippedWeapon == null) ? 1.0 : EquippedWeapon.Range; } }
         public string Name { get { if (OverrideRace != null) return OverrideRace.Name + " " + Type.Name; else return Type.Name; } }
         public int Size { get { return Type.Size; } }
@@ -215,9 +215,8 @@ namespace SpaceMercs {
                 int num = (int)Math.Round(dnum);
                 for (int n = 0; n < num; n++) {
                     // Generate a random item suitable for this creature
-                    IItem eq = Utils.GenerateRandomItem(rnd, this.Level);
-                    if (eq == null) continue;
-                    st.Add(eq);
+                    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level);
+                    if (eq is not null) st.Add(eq);
                 }
             }
 
@@ -328,15 +327,14 @@ namespace SpaceMercs {
         }
         public Creature(XmlNode xml, MissionLevel lev) {
             CurrentLevel = lev;
-            string strName = xml.Attributes["Type"].Value;
-            Type = StaticData.GetCreatureTypeByName(strName);
-            if (Type == null) throw new Exception("Could not ID Type for Creature : " + strName);
+            string strName = xml.Attributes["Type"].Value ?? string.Empty;
+            Type = StaticData.GetCreatureTypeByName(strName) ?? throw new Exception("Could not ID Type for Creature : " + strName);
 
-            XmlNode xmll = xml.SelectSingleNode("Location");
+            XmlNode? xmll = xml.SelectSingleNode("Location") ?? throw new Exception("Could not ID Location for Creature : " + strName);
             X = int.Parse(xmll.Attributes["X"].Value);
             Y = int.Parse(xmll.Attributes["Y"].Value);
             Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
-            if (Double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
+            if (double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
                 Facing = fac;
             }
             else {
@@ -356,18 +354,17 @@ namespace SpaceMercs {
 
             // Load equipped weapon
             if (xml.SelectSingleNode("Weapon") != null) {
-                EquippedWeapon = new Weapon(StaticData.GetWeaponTypeByName(xml.SelectSingleNode("Weapon").InnerText), 0);
-                if (EquippedWeapon == null) throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + xml.SelectSingleNode("Weapon").InnerText);
+                WeaponType tp = StaticData.GetWeaponTypeByName(xml.SelectSingleNode("Weapon").InnerText) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + xml.SelectSingleNode("Weapon").InnerText);
+                EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + xml.SelectSingleNode("Weapon").InnerText);
             }
-            if (EquippedWeapon == null) {
-                if (Type.Weapons.Count == 0) EquippedWeapon = null;
-                else if (Type.Weapons.Count == 1) EquippedWeapon = Type.GenerateRandomWeapon();
-                else throw new Exception("Missing ambiguous weapon in creature : " + Name);
+            if (EquippedWeapon is null) {
+                if (Type.Weapons.Count == 1)  EquippedWeapon = Type.GenerateRandomWeapon();
+                else if (Type.Weapons.Count > 1) throw new Exception("Missing ambiguous weapon in creature : " + Name);
             }
 
             // Current target
-            XmlNode xnt = xml.SelectSingleNode("Target");
-            if (xnt != null) {
+            XmlNode? xnt = xml.SelectSingleNode("Target");
+            if (xnt is not null) {
                 TX = int.Parse(xnt.Attributes["X"].Value);
                 TY = int.Parse(xnt.Attributes["Y"].Value);
             }
@@ -375,16 +372,16 @@ namespace SpaceMercs {
                 TX = -1;
                 TY = -1;
             }
-            XmlNode xni = xml.SelectSingleNode("Investigate");
-            if (xni != null) {
+            XmlNode? xni = xml.SelectSingleNode("Investigate");
+            if (xni is not null) {
                 Investigate = new Point(int.Parse(xni.Attributes["X"].Value), int.Parse(xni.Attributes["Y"].Value));
             }
             else Investigate = Point.Empty;
 
             // Effects
-            XmlNode xmlef = xml.SelectSingleNode("Effects");
+            XmlNode? xmlef = xml.SelectSingleNode("Effects");
             _Effects.Clear();
-            if (xmlef != null) {
+            if (xmlef is not null) {
                 foreach (XmlNode xef in xmlef.ChildNodes) {
                     Effect e = new Effect(xef);
                     _Effects.Add(e);
@@ -554,8 +551,8 @@ namespace SpaceMercs {
                     // Can we attack? If not then maybe move a bit closer for a better shot?
                     if (r <= atr) {
                         if (!CanSee(CurrentTarget)) {
-                            List<Point> path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
-                            if (path == null || path.Count == 0) {
+                            List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
+                            if (path is null || path.Count == 0) {
                                 CurrentTarget = null; // No way of getting close enough to see target
                                 return;
                             }
@@ -567,8 +564,8 @@ namespace SpaceMercs {
                         else if (Stamina < AttackCost) {
                             // Optionally move closer?
                             if (r > 5.0 && Stamina >= MovementCost && r > 1.0 && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
-                                List<Point> path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
-                                if (path == null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
+                                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
+                                if (path is null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 MoveTo(path[0], playSound);
                                 postMoveCheck(this);
                                 // TODO refreshView();
@@ -589,8 +586,8 @@ namespace SpaceMercs {
                         if (bFleeing) return;
                         // Close the distance
                         if (Stamina < MovementCost) return;
-                        List<Point> path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
-                        if (path == null || path.Count == 0) CurrentTarget = null; // No way of getting close enough to hit target
+                        List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
+                        if (path is null || path.Count == 0) CurrentTarget = null; // No way of getting close enough to hit target
                         else {
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
@@ -606,8 +603,8 @@ namespace SpaceMercs {
                         return;
                     }
                     if (Stamina < MovementCost) return;
-                    List<Point> path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1); // Go to this square or nearby
-                    if (path == null || path.Count == 0) {
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1); // Go to this square or nearby
+                    if (path is null || path.Count == 0) {
                         Investigate = Point.Empty;
                         return;
                     }
@@ -632,8 +629,8 @@ namespace SpaceMercs {
                     double score = 100.0 / RangeTo(s);
                     if (s == CurrentTarget) score += 5.0;
                     if (AttackRange < this.RangeTo(s)) {
-                        List<Point> path = CurrentLevel.ShortestPath(this, Location, s.Location, 50, false, (int)Math.Floor(AttackRange));
-                        if (path == null) continue;
+                        List<Point>? path = CurrentLevel.ShortestPath(this, Location, s.Location, 50, false, (int)Math.Floor(AttackRange));
+                        if (path is null) continue;
                         else score -= path.Count;
                     }
                     if (score > bestscore) {

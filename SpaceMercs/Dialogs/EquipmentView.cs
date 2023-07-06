@@ -3,7 +3,7 @@ using System.Drawing.Text;
 
 namespace SpaceMercs.Dialogs {
     partial class EquipmentView : Form {
-        private InventoryView ivForm = null;
+        private InventoryView? ivForm = null;
         private readonly ToolTip ttSoldier = new ToolTip();
         private readonly Soldier ThisSoldier;
         private readonly Stash ThisStash;
@@ -247,7 +247,7 @@ namespace SpaceMercs.Dialogs {
             if (lbUtilitySkills.SelectedIndex < 0) return;
             int nut = ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
             if (nut == 0) return;
-            string stsk = lbUtilitySkills.SelectedItem.ToString();
+            string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
             if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) return; // Should never get here
@@ -291,7 +291,7 @@ namespace SpaceMercs.Dialogs {
             if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                 // Disable if existing skill is already max level (== Player's level)
                 // Otherwise Enable
-                string stsk = lbUtilitySkills.SelectedItem.ToString();
+                string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
                 if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) btIncreaseSkill.Enabled = false;
@@ -304,12 +304,11 @@ namespace SpaceMercs.Dialogs {
             if (dgFloor.SelectedRows.Count == 0) return;
             Dictionary<IItem, int> Scavenged = new Dictionary<IItem, int>();
             for (int i = 0; i < dgFloor.SelectedRows.Count; i++) {
-                IItem it = (IItem)dgFloor.SelectedRows[i].Tag;
-                if (!(it is Corpse)) {
+                IItem? it = dgFloor.SelectedRows[i].Tag as IItem;
+                if (it is not Corpse cp) {
                     MessageBox.Show("You can only scavenge corpses!", "Skin error");
                     return;
                 }
-                Corpse cp = (Corpse)it;
                 if (cp.IsSoldier) {
                     MessageBox.Show("You can't scavenge soldier corpses!", "Skin error");
                     return;
@@ -397,8 +396,8 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbEquipped_DoubleClick(object sender, EventArgs e) {
-            if (SelectedItem() == null) return;
-            MessageBox.Show(SelectedItem().Desc);
+            IItem? it = SelectedItem();
+            if (it is not null) MessageBox.Show(it.Desc);
         }
 
         private void dgFloor_DoubleClick(object sender, EventArgs e) {

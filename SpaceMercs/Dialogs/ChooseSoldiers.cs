@@ -43,7 +43,7 @@ namespace SpaceMercs.Dialogs {
       Soldiers.Clear();
       foreach (DataGridViewRow row in dgSoldiers.Rows) {
         bool bSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
-        if (bSelected) Soldiers.Add((Soldier)row.Tag);
+        if (bSelected && row.Tag is Soldier s) Soldiers.Add(s);
       }
       if (Soldiers.Count == 0 || Soldiers.Count > MaxSize) return;
       this.Close();

@@ -149,7 +149,7 @@ namespace SpaceMercs {
             }
         }
 
-        public Weapon GenerateRandomWeapon() {
+        public Weapon? GenerateRandomWeapon() {
             if (WeaponTotalWeight == 0) return null;
             Random rnd = new Random();
             int r = rnd.Next(WeaponTotalWeight);

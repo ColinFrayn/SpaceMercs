@@ -110,7 +110,7 @@ namespace SpaceMercs.Dialogs {
                     arrRow[2] = eq.Cost.ToString("N2");
                     arrRow[3] = PlayerTeam.Inventory[eq].ToString();
                     dgInventory.Rows.Add(arrRow);
-                    dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier, IItem, bool>(null, eq, false);
+                    dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(null, eq, false);
                 }
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
@@ -125,7 +125,7 @@ namespace SpaceMercs.Dialogs {
                         arrRow[2] = eq.Cost.ToString("N2");
                         arrRow[3] = s.InventoryRO[eq].ToString();
                         dgInventory.Rows.Add(arrRow);
-                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier, IItem, bool>(s, eq, false);
+                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, eq, false);
                     }
                 }
                 if (PlayerTeam.PlayerShip.HasArmoury) {
@@ -138,7 +138,7 @@ namespace SpaceMercs.Dialogs {
                                 arrRow[2] = ar.Cost.ToString("N2");
                                 arrRow[3] = "1";
                                 dgInventory.Rows.Add(arrRow);
-                                dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier, IItem, bool>(s, ar, true);
+                                dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, ar, true);
                             }
                         }
                     }
@@ -150,7 +150,7 @@ namespace SpaceMercs.Dialogs {
                             arrRow[2] = s.EquippedWeapon.Cost.ToString("N2");
                             arrRow[3] = "1";
                             dgInventory.Rows.Add(arrRow);
-                            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier, IItem, bool>(s, s.EquippedWeapon, true);
+                            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, s.EquippedWeapon, true);
                         }
                     }
                 }
@@ -162,7 +162,7 @@ namespace SpaceMercs.Dialogs {
         private void btConstruct_Click(object sender, EventArgs e) {
             if (dgConstruct.SelectedRows.Count == 0) return;
             int iScroll = dgConstruct.FirstDisplayedScrollingRowIndex;
-            ItemType newType = (ItemType)dgConstruct.SelectedRows[0].Tag;
+            ItemType? newType = dgConstruct.SelectedRows[0].Tag as ItemType;
             int iRowNo = dgConstruct.SelectedRows[0].Index;
 
             // Make sure we can make it
@@ -183,15 +183,15 @@ namespace SpaceMercs.Dialogs {
             }
 
             // Select armour material
-            MaterialType armourMat = null;
-            if (newType is ArmourType) {
+            MaterialType? armourMat = null;
+            if (newType is ArmourType at) {
                 // Choose armour material and add it to the list
-                SelectArmourMaterial sam = new SelectArmourMaterial(mats, newType as ArmourType, PlayerTeam);
+                SelectArmourMaterial sam = new SelectArmourMaterial(mats, at, PlayerTeam);
                 sam.ShowDialog(this);
                 if (sam.SelectedMat == null) return; // Cancelled
                 armourMat = sam.SelectedMat;
-                if (mats.ContainsKey(armourMat)) mats[armourMat] += (newType as ArmourType).Size;
-                else mats.Add(armourMat, (newType as ArmourType).Size);
+                if (mats.ContainsKey(armourMat)) mats[armourMat] += at.Size;
+                else mats.Add(armourMat, at.Size);
             }
 
             // Get construction chance
@@ -241,7 +241,7 @@ namespace SpaceMercs.Dialogs {
             if (lvl > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(lvl));
             else MessageBox.Show("Construction succeeded!");
             IEquippable? newItem = null;
-            if (newType is ArmourType at) newItem = new Armour(at, armourMat, lvl);
+            if (newType is ArmourType at2) newItem = new Armour(at2, armourMat, lvl);
             else if (newType is WeaponType wt) newItem = new Weapon(wt, lvl);
             else newItem = new Equipment(newType);
 
@@ -252,7 +252,7 @@ namespace SpaceMercs.Dialogs {
             dgConstruct.FirstDisplayedScrollingRowIndex = iScroll;
         }
         private void btImprove_Click(object sender, EventArgs e) {
-            Tuple<Soldier, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier, IItem, bool>;
+            Tuple<Soldier?, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier?, IItem, bool>;
             if (tp is null) return;
             Soldier s = tp.Item1;
             if (!(tp.Item2 is IEquippable eq) || eq is Equipment) return;
@@ -284,15 +284,18 @@ namespace SpaceMercs.Dialogs {
             }
         }
         private void btDismantle_Click(object sender, EventArgs e) {
-            Tuple<Soldier, IItem, bool> tp = (Tuple<Soldier, IItem, bool>)dgInventory.SelectedRows[0].Tag;
-            Soldier s = tp.Item1;
+            if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) {
+                MessageBox.Show("Error picking item to dismantle");
+                return;
+            }            
+            Soldier? s = tp.Item1;
             IItem it = tp.Item2;
-            if (!(it is IEquippable eq)) return;
+            if (it is not IEquippable eq) return;
             bool bEquipped = tp.Item3;
             if (MessageBox.Show("Really dismantle your " + eq.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             int maxlev = PlayerTeam.GetMaxSkillByItem(it);
             Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq as IEquippable, maxlev);
-            if (s == null) {
+            if (s is null) {
                 PlayerTeam.RemoveItemFromStores(eq);
             }
             else {
@@ -327,7 +330,7 @@ namespace SpaceMercs.Dialogs {
                 btImprove.Enabled = false;
                 return;
             }
-            Tuple<Soldier, IItem, bool> tp = (Tuple<Soldier, IItem, bool>)dgInventory.SelectedRows[0].Tag;
+            Tuple<Soldier?, IItem, bool> tp = (Tuple<Soldier?, IItem, bool>)dgInventory.SelectedRows[0].Tag;
             if (tp == null) return;
             IItem it = tp.Item2;
             btImprove.Enabled = false;

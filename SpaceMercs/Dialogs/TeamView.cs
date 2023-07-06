@@ -57,13 +57,13 @@ namespace SpaceMercs.Dialogs {
       dgSoldiers.Rows[0].Selected = true;
     }
 
-    public Soldier SelectedSoldier() {
+    public Soldier? SelectedSoldier() {
       if (dgSoldiers.SelectedRows.Count == 0) return null;
       return (Soldier)dgSoldiers.SelectedRows[0].Tag;
     }
-    public IItem SelectedItem() {
+    public IItem? SelectedItem() {
       Soldier s = SelectedSoldier();
-      if (s == null) return null;
+      if (s is null) return null;
       if (lbInventory.SelectedIndex >= 0) return s.InventoryRO.Keys.ElementAt(lbInventory.SelectedIndex);
       if (lbEquipped.SelectedIndex >= 0) {
         int iIndex = lbEquipped.SelectedIndex;
@@ -75,7 +75,7 @@ namespace SpaceMercs.Dialogs {
 
     public void ShowSelectedSoldierDetails() {
       Soldier s = SelectedSoldier();
-      if (s == null) return;
+      if (s is null) return;
 
       // Soldier management
       if (s.IsActive) {

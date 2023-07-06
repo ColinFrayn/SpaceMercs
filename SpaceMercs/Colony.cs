@@ -110,7 +110,7 @@ namespace SpaceMercs {
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
                     int count = int.Parse(xi.Attributes!["Count"]!.Value);
-                    IItem eq;
+                    IItem? eq;
                     try {
                         eq = Utils.LoadItem(xi.FirstChild);
                     }
@@ -121,7 +121,7 @@ namespace SpaceMercs {
                         }
                         else throw;
                     }
-                    Inventory.Add(eq, count);
+                    if (eq is not null) Inventory.Add(eq, count);
                 }
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace SpaceMercs.Dialogs {
   partial class ChooseNewUtilitySkill : Form {
@@ -16,7 +15,7 @@ namespace SpaceMercs.Dialogs {
     private void btChoose_Click(object sender, EventArgs e) {
       if (lbSkills.SelectedIndex < 0) return;
       if (MessageBox.Show(this,"Really learn this skill?", "Learn skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
-      ChosenSkill = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), lbSkills.SelectedItem.ToString());
+      ChosenSkill = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), lbSkills.SelectedItem?.ToString() ?? string.Empty);
       this.Close();
     }
 

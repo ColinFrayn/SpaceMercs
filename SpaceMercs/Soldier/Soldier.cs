@@ -476,7 +476,7 @@ namespace SpaceMercs {
             rnd = new Random(randseed);
             PrimaryColor = Color.Blue;
         }
-        public Soldier(XmlNode xml, Team pt) {
+        public Soldier(XmlNode xml, Team? pt) {
             PlayerTeam = pt;
             iTextureID = -1;
             Name = xml.Attributes["Name"].Value;

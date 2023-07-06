@@ -9,38 +9,23 @@ namespace SpaceMercs.Dialogs {
         private readonly Color clDoesntExist = Color.LightGray;
         private readonly Func<Mission, bool> StartMission;
 
-        private class SaleItem {
-            public IItem Item { get; private set; }
-            public Soldier Soldier { get; private set; }
+        private record SaleItem {
+            public IItem? Item { get; private set; }
+            public Soldier? Soldier { get; private set; }
             public bool Equipped { get; private set; }
             public int Count { get; private set; }
-            public SaleItem(IItem it, Soldier s, bool eq, int c) {
+            public SaleItem(IItem it, Soldier? s, bool eq, int c) {
                 Item = it;
                 Soldier = s;
                 Equipped = eq;
                 Count = c;
-            }
-            public override bool Equals(object? obj) {
-                if (!(obj is SaleItem s)) return false;
-                if (s.Item != Item) return false;
-                if (s.Soldier != Soldier) return false;
-                if (s.Equipped != Equipped) return false;
-                return true;
-            }
-            public override int GetHashCode() {
-                unchecked {
-                    int hash = 17;
-                    hash = hash * 37 + Item.GetHashCode();
-                    if (Soldier != null) hash = hash * 23 + Soldier.Name.GetHashCode();
-                    hash += Equipped.GetHashCode();
-                    return hash;
-                }
             }
         }
 
         public ColonyView(Team t, Func<Mission, bool> _StartMission) {
             PlayerTeam = t;
             StartMission = _StartMission;
+            if (PlayerTeam.CurrentPosition.Colony is null) throw new Exception("Null colony in ColonyView!");
             cl = PlayerTeam.CurrentPosition.Colony;
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
             InitializeComponent();
@@ -49,7 +34,7 @@ namespace SpaceMercs.Dialogs {
             btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-            if (String.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
+            if (string.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
             else lbColonyName.Text = cl.Location.Name;
             lbColonySize.Text = cl.BaseSize.ToString();
             if ((cl.Base & Colony.BaseType.Colony) != 0) lbResidential.ForeColor = clExists;
@@ -66,7 +51,7 @@ namespace SpaceMercs.Dialogs {
             if (!cl.CanGrow) lbNextGrowth.Text = "n/a";
             else lbNextGrowth.Text = cl.dtNextGrowth.ToString("D");
             lbLocation.Text = cl.Location.PrintCoordinates();
-            if (String.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
+            if (string.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
             else lbSystemName.Text = cl.Location.GetSystem().Name;
             lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
             lbPlanetType.Text = cl.Location.Type.ToString();
@@ -104,16 +89,16 @@ namespace SpaceMercs.Dialogs {
 
         // Setup data grid based on drop down setting
         private void SetupMerchantDataGrid() {
-            string strType = cbItemType.SelectedItem.ToString();
+            string? strType = cbItemType.SelectedItem.ToString() ?? string.Empty;
             dgMerchant.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbFilter.Text;
             foreach (IItem eq in cl.InventoryList()) {
-                if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-                   (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
+                   (strType.Equals("Medical") && eq is Equipment eqp && eqp.BaseType.Source == ItemType.ItemSource.Medlab) ||
                    (strType.Equals("Materials") && eq is Material) ||
-                   (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                   (strType.Equals("Equipment") && eq is Equipment eqp2 && eqp2.BaseType.Source == ItemType.ItemSource.Workshop)) {
                     arrRow[0] = eq.Name;
                     arrRow[1] = (cl.CostModifier * eq.Cost * PriceMod).ToString("N2");
                     arrRow[2] = eq.Mass.ToString("N2") + "kg";
@@ -170,14 +155,14 @@ namespace SpaceMercs.Dialogs {
             HashSet<SaleItem> hsLast;
             if (tpLast == null) hsLast = new HashSet<SaleItem>();
             else hsLast = new HashSet<SaleItem>(tpLast);
-            string strType = cbUpgradeItemType.SelectedItem.ToString();
+            string? strType = cbUpgradeItemType.SelectedItem.ToString();
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
             int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
             foreach (IItem eq in PlayerTeam.Inventory.Keys) {
-                if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
                    (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
                    (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
@@ -194,7 +179,7 @@ namespace SpaceMercs.Dialogs {
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
                 foreach (IItem eq in s.InventoryRO.Keys) {
-                    if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
                        (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
                        (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
@@ -210,7 +195,7 @@ namespace SpaceMercs.Dialogs {
                     }
                 }
                 foreach (Armour ar in s.EquippedArmour) {
-                    if (!String.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (!string.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (strType.Equals("All") || strType.Equals("Armour")) {
                         arrRow[0] = ar.Name;
                         arrRow[1] = s.Name + " [Eq]";
@@ -223,7 +208,7 @@ namespace SpaceMercs.Dialogs {
                     }
                 }
                 if (s.EquippedWeapon != null) {
-                    if (!String.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (!string.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (strType.Equals("All") || strType.Equals("Weapon")) {
                         arrRow[0] = s.EquippedWeapon.Name;
                         arrRow[1] = s.Name + " [Eq]";
@@ -245,7 +230,8 @@ namespace SpaceMercs.Dialogs {
         private void btBuyFromMerchant_Click(object sender, EventArgs e) {
             if (dgMerchant.SelectedRows.Count == 0) return;
             int iScroll = dgMerchant.FirstDisplayedScrollingRowIndex;
-            IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
+            IItem? eq = dgMerchant.SelectedRows[0].Tag as IItem;
+            if (eq is null) return;
             int iRowNo = dgMerchant.SelectedRows[0].Index;
             double Cost = cl.CostModifier * eq.Cost * PriceMod;
             if (Cost > PlayerTeam.Cash) {
@@ -269,7 +255,8 @@ namespace SpaceMercs.Dialogs {
 
         }
         private void btHireMercenary_Click(object sender, EventArgs e) {
-            Soldier merc = (Soldier)dgMercenaries.SelectedRows[0].Tag;
+            Soldier? merc = dgMercenaries.SelectedRows[0].Tag as Soldier;
+            if (merc is null) return;
             double Cost = merc.HireCost() * PriceMod;
             if (Cost > PlayerTeam.Cash) {
                 MessageBox.Show("You cannot afford to hire that soldier!");
@@ -291,7 +278,11 @@ namespace SpaceMercs.Dialogs {
             SetupMercenariesTab();
         }
         private void btRunMission_Click(object sender, EventArgs e) {
-            Mission miss = (Mission)dgMissions.SelectedRows[0].Tag;
+            Mission? miss = dgMissions.SelectedRows[0].Tag as Mission;
+            if (miss is null) {
+                MessageBox.Show("Null mission");
+                return;
+            }
             if (StartMission(miss)) {
                 cl.RemoveMission(miss);
                 this.Close();
@@ -299,7 +290,11 @@ namespace SpaceMercs.Dialogs {
         }
         private void btUpgradeShip_Click(object sender, EventArgs e) {
             double SalvageValue = Math.Round(PlayerTeam.PlayerShip.CalculateSalvageValue(), 2);
-            ShipType st = (ShipType)dgShips.SelectedRows[0].Tag;
+            ShipType? st = dgShips.SelectedRows[0].Tag as ShipType;
+            if (st is null) {
+                MessageBox.Show("Null ship type");
+                return;
+            }
 
             if (st == PlayerTeam.PlayerShip.Type) {
                 MessageBox.Show("This is the same as the ship you already own!");
@@ -327,16 +322,15 @@ namespace SpaceMercs.Dialogs {
         }
         private void btImproveWeaponOrArmour_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
-            SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-            if (tp == null | tp.Item == null) return;
-            Soldier s = tp.Soldier;
-            if (!(tp.Item is IEquippable)) return;
-            IEquippable eq = tp.Item as IEquippable;
+            SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
+            if (tp is null | tp.Item is null) return;
+            Soldier? s = tp.Soldier;
+            if (tp.Item is not IEquippable eq) return;
             bool bEquipped = tp.Equipped;
             UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam);
             ui.ShowDialog(this.Owner);
             if (ui.Upgraded) {
-                if (s == null) {
+                if (s is null) {
                     PlayerTeam.RemoveItemFromStores(eq);
                     if (!ui.Destroyed && ui.NewItem != null) PlayerTeam.AddItem(ui.NewItem);
                 }
@@ -361,7 +355,7 @@ namespace SpaceMercs.Dialogs {
         private void btDismantleEquippable_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
             // Get a list of everything to sell
-            SaleItem tpFirst = (SaleItem)dgInventory.SelectedRows[0].Tag;
+            SaleItem? tpFirst = dgInventory.SelectedRows[0].Tag as SaleItem;
             // Do we need to ask if the player is sure?
             if (dgInventory.SelectedRows.Count == 1) {
                 if (MessageBox.Show("Really dismantle your " + tpFirst.Item.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
@@ -373,20 +367,21 @@ namespace SpaceMercs.Dialogs {
             List<SaleItem> lSI = new List<SaleItem>();
             int count = 0;
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-                SaleItem tp = (SaleItem)row.Tag;
+                SaleItem? tp = row.Tag as SaleItem;
+                if (tp is null) continue;
                 lSI.Add(tp);
-                Soldier s = tp.Soldier;
-                IItem eq = tp.Item;
+                Soldier? s = tp.Soldier;
+                IItem? eq = tp.Item;
                 bool bEquipped = tp.Equipped;
-                if (!(eq is IEquippable)) continue;
-                Dictionary<IItem, int> dr = Utils.DismantleEquipment(tp.Item as IEquippable, 10);
+                if (eq is not IEquippable eqp) continue;
+                Dictionary<IItem, int> dr = Utils.DismantleEquipment(eqp, 10);
                 foreach (IItem it in dr.Keys) {
                     if (dRemains.ContainsKey(it)) dRemains[it] += dr[it];
                     else dRemains.Add(it, dr[it]);
                 }
                 if (s == null) PlayerTeam.RemoveItemFromStores(eq);
                 else {
-                    if (bEquipped) s.Unequip(eq as IEquippable);
+                    if (bEquipped) s.Unequip(eqp);
                     s.DestroyItem(eq);
                 }
                 count++;
@@ -415,9 +410,10 @@ namespace SpaceMercs.Dialogs {
             // Get a list of everything to sell
             List<SaleItem> tpSelected = new List<SaleItem>();
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-                SaleItem tp = (SaleItem)row.Tag;
+                SaleItem? tp = row.Tag as SaleItem;
+                if (tp is null) continue;
                 tpSelected.Add(tp);
-                IItem eq = tp.Item;
+                IItem? eq = tp.Item;
                 double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod;
                 if ((eq is IEquippable ieq && (ieq.Level > 0)) || SalePrice > 10.0) bQuery = true;
                 TotalValue += SalePrice;
@@ -437,9 +433,10 @@ namespace SpaceMercs.Dialogs {
             }
             // Remove items from player
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-                SaleItem tp = (SaleItem)row.Tag;
-                Soldier s = tp.Soldier;
-                IItem eq = tp.Item;
+                SaleItem? tp = row.Tag as SaleItem;
+                if (tp is null) continue;
+                Soldier? s = tp.Soldier;
+                IItem? eq = tp.Item;
                 bool bEquipped = tp.Equipped;
                 if (s == null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
                 else {
@@ -487,14 +484,14 @@ namespace SpaceMercs.Dialogs {
         }
         private void dgMerchant_DoubleClick(object sender, EventArgs e) {
             if (dgMerchant.SelectedRows.Count == 0) return;
-            IItem eq = (IItem)dgMerchant.SelectedRows[0].Tag;
-            if (eq == null) return;
-            MessageBox.Show(eq.Desc);
+            if (dgMerchant.SelectedRows[0].Tag is IItem eq) {
+                MessageBox.Show(eq.Desc);
+            }
         }
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
-            SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-            if (tp == null || tp.Item == null) return;
+            SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
+            if (tp is null || tp.Item is null) return;
             MessageBox.Show(tp.Item.Desc);
         }
 
@@ -528,15 +525,15 @@ namespace SpaceMercs.Dialogs {
             btImprove.Enabled = false;
             btDismantle.Enabled = false;
             if (dgInventory.SelectedRows.Count == 1) { // Can improve only one weapon/armour
-                SaleItem tp = (SaleItem)dgInventory.SelectedRows[0].Tag;
-                if (tp == null) return; // Still setting up
+                SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
+                if (tp is null) return; // Still setting up
                 if (tp.Item is IEquippable eq) {
                     if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
                 }
             }
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-                SaleItem tp = (SaleItem)row.Tag;
-                if (tp == null) return; // Still setting up
+                SaleItem? tp = row.Tag as SaleItem;
+                if (tp is null) return; // Still setting up
                 btDismantle.Enabled = true;
             }
         }
@@ -582,8 +579,9 @@ namespace SpaceMercs.Dialogs {
             }
         }
         private void dgMissions_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
-            Mission miss1 = (Mission)(dgMissions.Rows[e.RowIndex1].Tag);
-            Mission miss2 = (Mission)(dgMissions.Rows[e.RowIndex2].Tag);
+            Mission? miss1 = dgMissions.Rows[e.RowIndex1].Tag as Mission;
+            Mission? miss2 = dgMissions.Rows[e.RowIndex2].Tag as Mission;
+            if (miss1 is null || miss2 is null) return;
             if (e.Column.Index == 3) { // Diff
                                        //e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
                 e.SortResult = miss1.Diff.CompareTo(miss2.Diff);

@@ -5,10 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using OpenTK.Mathematics;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 
 namespace SpaceMercs.Dialogs {
     public partial class NewGame : Form {
@@ -33,7 +29,7 @@ namespace SpaceMercs.Dialogs {
             }
         }
         public string PlayerName { get; set; }
-        private readonly Race rc = StaticData.GetRaceByName("Human");
+        private readonly Race rc = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not ID Human race when creating new game");
 
         // Set up everything
         public NewGame() {
