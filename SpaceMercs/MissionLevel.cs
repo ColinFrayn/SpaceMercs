@@ -113,21 +113,21 @@ namespace SpaceMercs {
         public MissionLevel(XmlNode xml, Mission parentMission) {
             ParentMission = parentMission;
             HoverX = HoverY = -1;
-            int w = int.Parse(xml.Attributes["Width"].Value);
-            int h = int.Parse(xml.Attributes["Height"].Value);
+            int w = int.Parse(xml.Attributes!["Width"]?.Value ?? throw new Exception("MissionLevel has no Width"));
+            int h = int.Parse(xml.Attributes!["Height"]?.Value ?? throw new Exception("MissionLevel has no Height"));
             Width = w;
             Height = h;
-            Diff = int.Parse(xml.SelectSingleNode("Diff").InnerText);
-            LevelID = int.Parse(xml.SelectSingleNode("Level").InnerText);
+            Diff = int.Parse(xml.SelectSingleNode("Diff")?.InnerText ?? throw new Exception("MissionLevel has no Diff"));
+            LevelID = int.Parse(xml.SelectSingleNode("Level")?.InnerText ?? throw new Exception("MissionLevel has no LevelID"));
             Map = new TileType[w, h];
             Explored = new bool[w, h];
             Visible = new bool[w, h];
             EntityMap = new IEntity[w, h];
-            StartX = int.Parse(xml.SelectSingleNode("Start").Attributes["X"].Value);
-            StartY = int.Parse(xml.SelectSingleNode("Start").Attributes["Y"].Value);
+            StartX = int.Parse(xml.SelectSingleNode("Start")?.Attributes?["X"]?.Value ?? throw new Exception("MissionLevel has no StartX"));
+            StartY = int.Parse(xml.SelectSingleNode("Start")?.Attributes?["Y"]?.Value ?? throw new Exception("MissionLevel has no StartY"));
             SetupEntryLocations();
-            EndX = int.Parse(xml.SelectSingleNode("End").Attributes["X"].Value);
-            EndY = int.Parse(xml.SelectSingleNode("End").Attributes["Y"].Value);
+            EndX = int.Parse(xml.SelectSingleNode("End")?.Attributes?["X"]?.Value ?? throw new Exception("MissionLevel has no EndX"));
+            EndY = int.Parse(xml.SelectSingleNode("End")?.Attributes?["Y"]?.Value ?? throw new Exception("MissionLevel has no EndY"));
             SetupExitLocations();
 
             // Map

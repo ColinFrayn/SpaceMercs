@@ -324,38 +324,45 @@ namespace SpaceMercs {
             TX = -1;
             TY = -1;
             QuestItem = false;
+            Visible = new bool[0, 0];
         }
         public Creature(XmlNode xml, MissionLevel lev) {
             CurrentLevel = lev;
-            string strName = xml.Attributes["Type"].Value ?? string.Empty;
+            string strName = xml.Attributes!["Type"]?.Value ?? string.Empty;
             Type = StaticData.GetCreatureTypeByName(strName) ?? throw new Exception("Could not ID Type for Creature : " + strName);
 
             XmlNode? xmll = xml.SelectSingleNode("Location") ?? throw new Exception("Could not ID Location for Creature : " + strName);
-            X = int.Parse(xmll.Attributes["X"].Value);
-            Y = int.Parse(xmll.Attributes["Y"].Value);
-            Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
-            if (double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
+            X = int.Parse(xmll.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Creature X-Coord with Name = {strName}"));
+            Y = int.Parse(xmll.Attributes!["Y"]?.Value ?? throw new Exception($"Could not identify Creature Y-Coord with Name = {strName}"));
+            Level = int.Parse(xml.SelectSingleNode("Level")?.InnerText ?? string.Empty);
+            string strFacing = xml.SelectSingleNode("Facing")?.InnerText ?? string.Empty;
+            if (double.TryParse(strFacing, out double fac)) {
                 Facing = fac;
             }
             else {
-                SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), xml.SelectSingleNode("Facing").InnerText));
+                SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), strFacing));
             }
-            if (xml.SelectSingleNode("Health") != null) Health = Double.Parse(xml.SelectSingleNode("Health").InnerText);
+            string strHealth = xml.SelectSingleNode("Health")?.InnerText ?? string.Empty;
+            if (!string.IsNullOrEmpty(strHealth)) Health = double.Parse(strHealth);
             else Health = MaxHealth;
-            if (xml.SelectSingleNode("Stamina") != null) Stamina = Double.Parse(xml.SelectSingleNode("Stamina").InnerText);
+            string strStamina = xml.SelectSingleNode("Stamina")?.InnerText ?? string.Empty;
+            if (!string.IsNullOrEmpty(strStamina)) Stamina = double.Parse(strStamina);
             else Stamina = MaxStamina;
-            if (xml.SelectSingleNode("Shields") != null) Shields = Double.Parse(xml.SelectSingleNode("Shields").InnerText);
+            string strShields = xml.SelectSingleNode("Shields")?.InnerText ?? string.Empty;
+            if (!string.IsNullOrEmpty(strShields)) Shields = double.Parse(strShields);
             else Shields = MaxShields;
 
-            if (xml.SelectSingleNode("OverrideRace") != null) OverrideRace = StaticData.GetRaceByName(xml.SelectSingleNode("OverrideRace").InnerText);
+            string strOverride = xml.SelectSingleNode("OverrideRace")?.InnerText ?? string.Empty;
+            if (!string.IsNullOrEmpty(strOverride)) OverrideRace = StaticData.GetRaceByName(strOverride);
 
             IsAlert = (xml.SelectSingleNode("Alert") != null);
             QuestItem = (xml.SelectSingleNode("QuestItem") != null);
 
             // Load equipped weapon
-            if (xml.SelectSingleNode("Weapon") != null) {
-                WeaponType tp = StaticData.GetWeaponTypeByName(xml.SelectSingleNode("Weapon").InnerText) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + xml.SelectSingleNode("Weapon").InnerText);
-                EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + xml.SelectSingleNode("Weapon").InnerText);
+            string strWeapon = xml.SelectSingleNode("Weapon")?.InnerText ?? string.Empty;
+            if (!string.IsNullOrEmpty(strWeapon)) {
+                WeaponType tp = StaticData.GetWeaponTypeByName(strWeapon) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
+                EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
             }
             if (EquippedWeapon is null) {
                 if (Type.Weapons.Count == 1)  EquippedWeapon = Type.GenerateRandomWeapon();
@@ -363,18 +370,18 @@ namespace SpaceMercs {
             }
 
             // Current target
+            TX = TY = -1;
             XmlNode? xnt = xml.SelectSingleNode("Target");
             if (xnt is not null) {
-                TX = int.Parse(xnt.Attributes["X"].Value);
-                TY = int.Parse(xnt.Attributes["Y"].Value);
+                TX = int.Parse(xnt.Attributes!["X"]?.Value ?? throw new Exception("Missing X-coord for Target"));
+                TY = int.Parse(xnt.Attributes!["Y"]?.Value ?? throw new Exception("Missing Y-coord for Target"));
             }
-            else {
-                TX = -1;
-                TY = -1;
-            }
+
             XmlNode? xni = xml.SelectSingleNode("Investigate");
             if (xni is not null) {
-                Investigate = new Point(int.Parse(xni.Attributes["X"].Value), int.Parse(xni.Attributes["Y"].Value));
+                int ix = int.Parse(xni.Attributes!["X"]?.Value ?? throw new Exception("Missing X-coord for Investigate spot"));
+                int iy = int.Parse(xni.Attributes!["Y"]?.Value ?? throw new Exception("Missing Y-coord for Investigate spot"));
+                Investigate = new Point(ix, iy);
             }
             else Investigate = Point.Empty;
 
@@ -387,6 +394,8 @@ namespace SpaceMercs {
                     _Effects.Add(e);
                 }
             }
+
+            Visible = new bool[0, 0];
         }
 
         public void SaveToFile(StreamWriter file) {

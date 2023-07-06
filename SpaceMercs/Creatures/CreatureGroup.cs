@@ -22,16 +22,17 @@ namespace SpaceMercs {
         private readonly Random rand; // Let's set this here because it's easier than passing one through (and just setting it each time risks getting the exact same seed if insufficient time has passed)
 
         public CreatureGroup(XmlNode xml) {
-            Name = xml.Attributes["Name"]!.InnerText;
-            Filename = xml.SelectSingleNode("Filename")!.InnerText;
-            string strLocation = xml.SelectSingleNode("Locations")!.InnerText;
+            Name = xml.Attributes!["Name"]?.InnerText ?? throw new Exception("Missing Name for creature group");
+            Filename = xml.SelectSingleNode("Filename")?.InnerText ?? throw new Exception("Missing Filename for creature group");
+            string strLocation = xml.SelectSingleNode("Locations")?.InnerText ?? throw new Exception("Missing Locations for creature group");
             HashSet<string> Locs = new HashSet<string>(strLocation.Split(',').ToList());
             FoundIn = new HashSet<Planet.PlanetType>();
             FoundInShips = Locs.Contains("Ship");
             FoundInCaves = Locs.Contains("Cave");
             RaceSpecific = (xml.SelectSingleNode("Racial") != null);
             if (RaceSpecific) {
-                if (xml.SelectSingleNode("Racial").Attributes["MaxRelations"] != null) MaxRelations = int.Parse(xml.SelectSingleNode("Racial").Attributes["MaxRelations"].Value);
+                string strMaxRel = xml.SelectSingleNode("Racial")?.Attributes?["MaxRelations"]?.Value ?? string.Empty;
+                if (!string.IsNullOrEmpty(strMaxRel)) MaxRelations = int.Parse(strMaxRel);
                 else MaxRelations = 100; // Ignore
             }
             foreach (Planet.PlanetType pt in Enum.GetValues(typeof(Planet.PlanetType))) {

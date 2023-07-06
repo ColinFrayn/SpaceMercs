@@ -168,8 +168,10 @@ namespace SpaceMercs {
 
             foreach (XmlNode xl in xml.SelectNodes("Level")) {
                 int id = int.Parse(xl.Attributes["ID"].Value);
-                MissionLevel lev = new MissionLevel(xl.FirstChild, this);
-                Levels.Add(id, lev);
+                if (xl.FirstChild is not null) {
+                    MissionLevel lev = new MissionLevel(xl.FirstChild, this);
+                    Levels.Add(id, lev);
+                }
             }
             GetDescription();
         }

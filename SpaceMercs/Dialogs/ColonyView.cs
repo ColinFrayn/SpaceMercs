@@ -155,7 +155,7 @@ namespace SpaceMercs.Dialogs {
             HashSet<SaleItem> hsLast;
             if (tpLast == null) hsLast = new HashSet<SaleItem>();
             else hsLast = new HashSet<SaleItem>(tpLast);
-            string? strType = cbUpgradeItemType.SelectedItem.ToString();
+            string strType = cbUpgradeItemType.SelectedItem.ToString() ?? throw new Exception("Could not identify selected item string");
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
             int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
             dgInventory.Rows.Clear();
@@ -163,10 +163,7 @@ namespace SpaceMercs.Dialogs {
             string strFilter = tbUpgradeFilter.Text;
             foreach (IItem eq in PlayerTeam.Inventory.Keys) {
                 if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-                if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-                   (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
-                   (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
-                   (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                if (ShouldDisplayInFoundry(strType, eq)) {
                     arrRow[0] = eq.Name;
                     arrRow[1] = "Ship Stores";
                     arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
@@ -180,10 +177,7 @@ namespace SpaceMercs.Dialogs {
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
                 foreach (IItem eq in s.InventoryRO.Keys) {
                     if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-                    if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-                       (strType.Equals("Materials") && eq is Material) || (strType.Equals("Mission Items") && eq is MissionItem) ||
-                       (strType.Equals("Medical") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Medlab) ||
-                       (strType.Equals("Equipment") && eq is Equipment && (eq as Equipment).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                    if (ShouldDisplayInFoundry(strType, eq)) {
                         arrRow[0] = eq.Name;
                         arrRow[1] = s.Name;
                         arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
@@ -224,6 +218,17 @@ namespace SpaceMercs.Dialogs {
             dgInventory.ClearSelection();
             foreach (DataGridViewRow row in lSelected) row.Selected = true;
             if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
+        }
+
+        private static bool ShouldDisplayInFoundry(string strType, IItem eq) {
+            if (strType.Equals("All")) return true;
+            if (strType.Equals("Weapons") && eq is Weapon) return true;
+            if (strType.Equals("Armour") && eq is Armour) return true;
+            if (strType.Equals("Materials") && eq is Material) return true;
+            if (strType.Equals("Mission Items") && eq is MissionItem) return true;
+            if (strType.Equals("Medical") && eq is Equipment eq2 && eq2.BaseType.Source == ItemType.ItemSource.Medlab) return true;
+            if (strType.Equals("Equipment") && eq is Equipment eq3 && eq3.BaseType.Source == ItemType.ItemSource.Workshop) return true;
+            return false;
         }
 
         // Button clicks

@@ -421,7 +421,8 @@ namespace SpaceMercs {
             }
             Array values = Enum.GetValues(typeof(UtilitySkill));
             while (nsk > 0) {
-                UtilitySkill sk = (UtilitySkill)values.GetValue(rnd.Next(values.Length));
+                object randomSkill = values.GetValue(rnd.Next(values.Length)) ?? throw new Exception("Could not identify random utility skill");
+                UtilitySkill sk = (UtilitySkill)randomSkill;
                 if (sk == UtilitySkill.Unspent) continue;
                 else if (UtilitySkills.ContainsKey(sk) && UtilitySkills[sk] >= Level) continue;
                 else {
@@ -875,8 +876,8 @@ namespace SpaceMercs {
             int num = (rnd.Next(Level) + 3 + rnd.Next(3)) / 2;
             for (int n = 0; n < num; n++) {
                 // Generate a random item suitable for this soldier (not a weapon or armour)
-                IItem eq = Utils.GenerateRandomItem(rnd, Level, false);
-                if (eq != null) AddItem(eq);
+                IItem? eq = Utils.GenerateRandomItem(rnd, Level, false);
+                if (eq is not null) AddItem(eq);
             }
         }
         private void SetupBasicArmour() {

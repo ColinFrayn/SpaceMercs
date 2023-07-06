@@ -63,21 +63,20 @@ namespace SpaceMercs {
             Sector = sect;
             LoadAODetailsFromFile(xml);
 
-            XmlNode? xmln = xml.SelectSingleNode("Mass");
-            if (xmln == null) throw new Exception("Could not locate Mass for Star with ID = " + ID);
-            Mass = Double.Parse(xmln.InnerText);
+            XmlNode xmln = xml.SelectSingleNode("Mass") ?? throw new Exception($"Could not locate Mass for Star with ID = {ID}");
+            Mass = double.Parse(xmln.InnerText);
 
-            XmlNode? xmlpos = xml.SelectSingleNode("MapPos") ?? throw new Exception("Could not locate MapPos for Star with ID = " + ID);
-            float X = float.Parse(xmlpos.Attributes["X"].Value);
-            float Y = float.Parse(xmlpos.Attributes["Y"].Value);
+            XmlNode xmlpos = xml.SelectSingleNode("MapPos") ?? throw new Exception($"Could not locate MapPos for Star with ID = {ID}");
+            float X = float.Parse(xmlpos.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Star X-Coord with ID = {ID}"));
+            float Y = float.Parse(xmlpos.Attributes!["Y"]?.Value ?? throw new Exception($"Could not identify Star Y-Coord with ID = {ID}"));
             MapPos = new Vector3(X, Y, 0f);
 
             Visited = (xml.SelectSingleNode("Visited") != null);
 
             XmlNode? xmlown = xml.SelectSingleNode("Owner");
-            if (xmlown == null) Owner = null;
-            else {
-                Owner = StaticData.GetRaceByName(xmlown.InnerText);
+            Owner = null;
+            if (xmlown is not null) {
+                Owner = StaticData.GetRaceByName(xmlown.InnerText) ?? throw new Exception($"Could not identify system owner race {xmlown.InnerText}");
                 Owner.AddSystem(this);
                 if (Const.DEBUG_VIEW_ALL_CIVS) SetVisited(true);
             }
@@ -85,10 +84,10 @@ namespace SpaceMercs {
             TradeRoutes.Clear();
             foreach (XmlNode xmlt in xml.SelectNodes("TradeRoute")) {
                 AstronomicalObject? aotr = sect.ParentMap.GetAOFromLocationString(xmlt.InnerText);
-                if (aotr == null) { // It could be that the target is in the current sector (which hasn't been added to the Map yet), so check that
+                if (aotr is null) { // It could be that the target is in the current sector (which hasn't been added to the Map yet), so check that
                     aotr = sect.GetAOFromLocationString(xmlt.InnerText);
                 }
-                if (aotr != null) { // If the target system has been created, then create the trade routes. If it hasn't, then when we load the target system, it will set the route up from there.
+                if (aotr is not null) { // If the target system has been created, then create the trade routes. If it hasn't, then when we load the target system, it will set the route up from there.
                     if (aotr.AOType != AstronomicalObjectType.Star) throw new Exception("Illegal TradeRoute destination (was " + aotr.AOType + " ) at " + xmlt.InnerText);
                     Star sttr = (Star)aotr;
                     TradeRoutes.Add(sttr);

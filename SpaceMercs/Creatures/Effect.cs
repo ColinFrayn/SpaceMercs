@@ -15,9 +15,9 @@ namespace SpaceMercs {
             Name = xml.Attributes!["Name"]?.Value ?? "";
             Damage = 0.0;
             DamageType = WeaponType.DamageType.Physical;
-            if (xml.SelectSingleNode("Damage") != null) {
+            if (xml.SelectSingleNode("Damage") is not null) {
                 Damage = double.Parse(xml.SelectSingleNode("Damage")!.InnerText);
-                DamageType = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xml.SelectSingleNode("Damage")!.Attributes!["Type"].Value);
+                DamageType = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xml.SelectSingleNode("Damage")!.Attributes!["Type"]?.Value ?? string.Empty);
             }
             if (xml.SelectSingleNode("Duration") != null) {
                 Duration = int.Parse(xml.SelectSingleNode("Duration")!.InnerText);
@@ -25,17 +25,17 @@ namespace SpaceMercs {
             }
             else Duration = 0;
 
-            if (xml.SelectSingleNode("Sound") != null) SoundEffect = xml.SelectSingleNode("Sound").InnerText;
+            if (xml.SelectSingleNode("Sound") != null) SoundEffect = xml.SelectSingleNode("Sound")!.InnerText;
             else SoundEffect = "";
 
-            if (xml.SelectSingleNode("SpeedMod") != null) SpeedMod = double.Parse(xml.SelectSingleNode("SpeedMod").InnerText);
+            if (xml.SelectSingleNode("SpeedMod") != null) SpeedMod = double.Parse(xml.SelectSingleNode("SpeedMod")!.InnerText);
             else SpeedMod = 1.0;
 
             StatMods = new Dictionary<StatType, int>();
             XmlNode? sm = xml.SelectSingleNode("StatMods");
             if (sm != null) {
                 foreach (XmlNode xn in sm.SelectNodes("Mod")) {
-                    string strMod = xn.Attributes["Stat"].Value;
+                    string strMod = xn.Attributes["Stat"]!.Value;
                     StatType st = (StatType)Enum.Parse(typeof(StatType), strMod);
                     int val = int.Parse(xn.InnerText);
                     if (StatMods.ContainsKey(st)) throw new Exception("Loading Effect : " + Name + "; Duplicate stat mod : " + st);

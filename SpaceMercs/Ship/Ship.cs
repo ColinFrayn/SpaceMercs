@@ -103,7 +103,7 @@ namespace SpaceMercs {
         public bool CanFly {
             get {
                 if (PowerConsumption > PowerGeneration) return false;
-                if (Engine == null) return false;
+                if (Engine is null || Owner is null) return false;
                 if (Owner.ActiveSoldiers > MaxCapacity) return false;
                 return true;
             }
@@ -204,13 +204,13 @@ namespace SpaceMercs {
         public Ship(XmlNode xml, Team? owner) {
             Owner = owner;
             Name = xml.SelectSingleNode("Name").InnerText;
-            if (xml.Attributes["Type"] != null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
+            if (xml.Attributes["Type"] is not null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
             else {
                 int seed = int.Parse(xml.Attributes["Seed"].Value);
                 double diff = double.Parse(xml.Attributes["Diff"].Value);
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
-            if (Type is null) throw new Exception("Could not ID Ship Type : " + xml.Attributes["Type"].Value);
+            if (Type is null) throw new Exception($"Could not ID Ship Type : {xml.Attributes["Type"].Value}");
             Hull = double.Parse(xml.SelectSingleNode("Hull").InnerText);
             Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
             Equipment.Clear();
