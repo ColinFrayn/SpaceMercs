@@ -7,12 +7,12 @@ namespace SpaceMercs.Dialogs {
     private readonly double UpgradeCost;
     private readonly double SuccessChance;
     private readonly Team PlayerTeam;
-    private readonly Soldier ThisSoldier = null;
-    public IEquippable NewItem = null; // If this is set to non-null then it represents the new item after modification
+    private readonly Soldier? ThisSoldier;
+    public IEquippable? NewItem = null; // If this is set to non-null then it represents the new item after modification
     public bool Upgraded = false; // Did we attempt the upgrade? (i.e. should we remove the old item?) We need this in case the upgrade destroys the object, in which case NewItem will be null.
     public bool Destroyed = false; // Destroyed in attempting to upgrade?
 
-    public UpgradeItem(IEquippable eq, double PriceMod, int skill, Team t, Soldier? s = null) {
+    public UpgradeItem(IEquippable eq, double PriceMod, int skill, Team t, Soldier? s) {
       InitializeComponent();
       item = eq;
       PlayerTeam = t;

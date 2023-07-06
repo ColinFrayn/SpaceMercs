@@ -44,15 +44,15 @@ namespace SpaceMercs.MainWindow {
             Const.dtTime = newTime;
 
             // Load in Map data
-            XmlNode xMap = xml.SelectSingleNode("Map");
-            if (xMap == null) {
+            XmlNode? xMap = xml.SelectSingleNode("Map");
+            if (xMap is null) {
                 throw new Exception("Could not find Map details in save file");
             }
             Map newMap = new Map(xMap);
 
             // Load in player team
-            XmlNode xTeam = xml.SelectSingleNode("Team");
-            if (xTeam == null) {
+            XmlNode? xTeam = xml.SelectSingleNode("Team");
+            if (xTeam is null) {
                 throw new Exception("Could not find Player Team details in save file");
             }
             Team newTeam = new Team(xTeam, newMap);
@@ -67,8 +67,8 @@ namespace SpaceMercs.MainWindow {
 
             // Load in Travel details
             Travel? newTravel = null;
-            XmlNode xTravel = xml.SelectSingleNode("Travel");
-            if (xTravel != null) {
+            XmlNode? xTravel = xml.SelectSingleNode("Travel");
+            if (xTravel is not null) {
                 newTravel = new Travel(xTravel, newTeam, this);
             }
 

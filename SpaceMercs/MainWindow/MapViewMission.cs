@@ -1357,23 +1357,23 @@ namespace SpaceMercs.MainWindow {
         }
         private void SelectedSoldierInventory(GUIIconButton sender) {
             if (bAIRunning) return;
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
+            if (SelectedEntity == null || SelectedEntity is not Soldier ss) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
             int sy = SelectedEntity.Y;
             int sx = SelectedEntity.X;
             Stash? st = CurrentLevel.GetStashAtPoint(sx, sy);
-            if (st == null) st = new Stash(new Point(sx, sy));
-            EquipmentView eqv = new EquipmentView(SelectedEntity as Soldier, st);
+            if (st is null) st = new Stash(new Point(sx, sy));
+            EquipmentView eqv = new EquipmentView(ss, st);
             eqv.ShowDialog();
             CurrentLevel.ReplaceStashAtPosition(sx, sy, st);
         }
         private void SelectedSoldierSearch(GUIIconButton? sender) {
             if (bAIRunning) return;
-            if (SelectedEntity == null || !(SelectedEntity is Soldier s)) return;
-            if (s.Stamina < s.SearchCost) return;
-            List<string> lFound = s.PerformSearch(CurrentLevel);
+            if (SelectedEntity is not Soldier ss) return;
+            if (ss.Stamina < ss.SearchCost) return;
+            List<string> lFound = ss.PerformSearch(CurrentLevel);
             if (lFound.Count == 0) msgBox.PopupMessage("Despite a thorough search, you found nothing");
             else msgBox.PopupMessage(lFound);
-            GenerateDistMap(SelectedEntity as Soldier);
+            GenerateDistMap(ss);
             GenerateDetectionMap();
             CurrentLevel.CalculatePlayerVisibility();
         }

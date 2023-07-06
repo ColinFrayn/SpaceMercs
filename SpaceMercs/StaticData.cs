@@ -28,7 +28,7 @@ namespace SpaceMercs {
 
         // Static constructor sets up the root directory where all data are to be found
         static StaticData() {
-            string strRootDir = Path.GetDirectoryName(Application.ExecutablePath);
+            string strRootDir = Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty;
             strDataDir = strRootDir + @"\Data\";
             strGraphicsDir = strRootDir + @"\Graphics\Bitmaps\";
         }
@@ -36,7 +36,7 @@ namespace SpaceMercs {
         // Load up all static data types via reflection
         public static bool LoadAll() {
             // Get a list of all public List<>s in this class
-            Type tpThis = MethodBase.GetCurrentMethod().DeclaringType;
+            Type tpThis = MethodBase.GetCurrentMethod()?.DeclaringType ?? throw new Exception("Could not get declaring type");
             foreach (FieldInfo fi in tpThis.GetFields(BindingFlags.Public | BindingFlags.Static)) {
                 if (fi.FieldType.IsGenericType) {
                     if (fi.FieldType.GetGenericArguments() != null && fi.FieldType.GetGenericArguments().Length == 1) {
@@ -60,7 +60,7 @@ namespace SpaceMercs {
             Type tp = fi.FieldType.GetGenericArguments()[0];
             if (tp.Name.Equals("CreatureType")) return true; // We load these in a special way later
             Type genericListType = typeof(List<>).MakeGenericType(tp);
-            IList newList = (IList)Activator.CreateInstance(genericListType);
+            IList newList = Activator.CreateInstance(genericListType) as IList ?? throw new Exception("Could not create generic list");
 
             // Load in the static data root file (and potentially recurse through includes)
             string strFile = strDataDir + tp.Name + ".xml";
@@ -78,8 +78,8 @@ namespace SpaceMercs {
                 return false;
             }
 
-            ConstructorInfo ctor = tp.GetConstructor(new[] { typeof(XmlNode) });
-            if (ctor == null) {
+            ConstructorInfo? ctor = tp.GetConstructor(new[] { typeof(XmlNode) });
+            if (ctor is null) {
                 MessageBox.Show("Could not find a constructor for type " + tp.Name + " that takes XmlNode", "Error in Static Data Load", MessageBoxButtons.OK);
                 return false;
             }
@@ -103,8 +103,8 @@ namespace SpaceMercs {
             Type tp = typeof(CreatureType);
             CreatureTypes = new List<CreatureType>();
 
-            ConstructorInfo ctor = tp.GetConstructor(new[] { typeof(XmlNode), typeof(CreatureGroup) });
-            if (ctor == null) {
+            ConstructorInfo? ctor = tp.GetConstructor(new[] { typeof(XmlNode), typeof(CreatureGroup) });
+            if (ctor is null) {
                 MessageBox.Show("Could not find a constructor for type " + tp.Name + " that takes (XmlNode,string)", "Error in Static Data Load", MessageBoxButtons.OK);
                 return false;
             }

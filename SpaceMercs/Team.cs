@@ -42,18 +42,18 @@ namespace SpaceMercs {
             Mission_ShowTravel = Mission_ShowPath = true;
         }
         public Team(XmlNode xml, Map map) {
-            XmlNode xmll = xml.SelectSingleNode("Pos");
-            if (xmll == null) throw new Exception("Could not locate Team Position node");
-            AstronomicalObject ao = map.GetAOFromLocationString(xmll.InnerText);
-            if (ao == null) throw new Exception("Could not decode Team Position : " + xmll.InnerText);
-            if (!(ao is HabitableAO)) throw new Exception("Team Position was not HabitableAO!");
-            CurrentPosition = (HabitableAO)ao;
+            XmlNode? xmll = xml.SelectSingleNode("Pos");
+            if (xmll is null) throw new Exception("Could not locate Team Position node");
+            AstronomicalObject? ao = map.GetAOFromLocationString(xmll.InnerText);
+            if (ao is null) throw new Exception("Could not decode Team Position : " + xmll.InnerText);
+            if (ao is not HabitableAO hao) throw new Exception("Team Position was not HabitableAO!");
+            CurrentPosition = hao;
 
-            XmlNode xmlc = xml.SelectSingleNode("Cash");
-            if (xmlc == null) throw new Exception("Could not locate Team Cash node");
-            Cash = Double.Parse(xmlc.InnerText);
+            XmlNode? xmlc = xml.SelectSingleNode("Cash");
+            if (xmlc is null) throw new Exception("Could not locate Team Cash node");
+            Cash = double.Parse(xmlc.InnerText);
 
-            XmlNode xmls = xml.SelectSingleNode("Soldiers");
+            XmlNode? xmls = xml.SelectSingleNode("Soldiers");
             foreach (XmlNode xs in xmls.ChildNodes) {
                 Soldier s = new Soldier(xs, this);
                 _Soldiers.Add(s);
@@ -69,20 +69,20 @@ namespace SpaceMercs {
             Mission_ShowEffects = (xml.SelectSingleNode("Mission_ShowEffects") != null);
             Mission_ViewDetection = (xml.SelectSingleNode("Mission_ViewDetection") != null);
 
-            XmlNode xmlr = xml.SelectSingleNode("Relations");
+            XmlNode? xmlr = xml.SelectSingleNode("Relations");
             Relations.Clear();
             foreach (XmlNode xr in xmlr.ChildNodes) {
                 string strRace = xr.Attributes["Race"].Value;
-                Race rc = StaticData.GetRaceByName(strRace);
+                Race rc = StaticData.GetRaceByName(strRace) ?? throw new Exception($"Found unknown Race : {strRace}");
                 int rel = int.Parse(xr.Attributes["Value"].Value);
                 Relations.Add(rc, rel);
             }
 
-            XmlNode xmli = xml.SelectSingleNode("Inventory");
+            XmlNode? xmli = xml.SelectSingleNode("Inventory");
             Inventory.Clear();
             foreach (XmlNode xi in xmli.ChildNodes) {
                 int count = int.Parse(xi.Attributes["Count"].Value);
-                IItem eq = Utils.LoadItem(xi.FirstChild);
+                IItem eq = Utils.LoadItem(xi.FirstChild) ?? throw new Exception("Could not load inventory item!");
                 if (Inventory.ContainsKey(eq)) Inventory[eq] += count;
                 else Inventory.Add(eq, count);
             }
@@ -158,6 +158,12 @@ namespace SpaceMercs {
             if (rc == null) return 0;
             if (!Relations.ContainsKey(rc)) return 0;
             return Relations[rc];
+        }
+        public double GetRelations(AstronomicalObject ao) {
+            if (ao == null) return 0;
+            Star sys = ao.GetSystem();
+            if (sys.Owner is null) return 0;
+            return GetRelations(sys.Owner);
         }
 
         // Add a list of items to the team's inventory if we have space
@@ -256,15 +262,13 @@ namespace SpaceMercs {
         public int CountMaterial(MaterialType mat) {
             int count = 0;
             foreach (IItem it in Inventory.Keys) {
-                if (it is Material) {
-                    Material m = it as Material;
+                if (it is Material m) {
                     if (m.BaseType == mat) count += Inventory[it];
                 }
             }
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
                 foreach (IItem it in s.InventoryRO.Keys) {
-                    if (it is Material) {
-                        Material m = it as Material;
+                    if (it is Material m) {
                         if (m.BaseType == mat) count += s.InventoryRO[it];
                     }
                 }
@@ -274,8 +278,7 @@ namespace SpaceMercs {
         public void RemoveMaterial(MaterialType mat, int num) {
             // Remove what we can from ship's inventory
             foreach (IItem it in Inventory.Keys) {
-                if (it is Material) {
-                    Material m = it as Material;
+                if (it is Material m) {
                     if (m.BaseType == mat) {
                         int left = num - Inventory[it];
                         RemoveItemFromStores(it, num);
@@ -288,8 +291,7 @@ namespace SpaceMercs {
             // If there's any left, take it from soldiers
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
                 foreach (IItem it in s.InventoryRO.Keys) {
-                    if (it is Material) {
-                        Material m = it as Material;
+                    if (it is Material m) {
                         if (m.BaseType == mat) {
                             int left = num - s.InventoryRO[it];
                             s.DestroyItem(it, num);
@@ -327,11 +329,12 @@ namespace SpaceMercs {
             return lvl;
         }
         private Soldier MaxSkillSoldier(Soldier.UtilitySkill sk) {
-            Soldier sbest = null;
+            Soldier? sbest = null;
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
-                if (sbest == null || s.GetUtilityLevel(sk) > sbest.GetUtilityLevel(sk)) sbest = s;
+                if (sbest is null || s.GetUtilityLevel(sk) > sbest.GetUtilityLevel(sk)) sbest = s;
             }
-            return sbest;
+            if (sbest is null) throw new Exception($"Couldn't find any soldier with the skill : {sk}");
+            return sbest!;
         }
         public int GetMaxSkillByItemType(ItemType newType) {
             if (newType is ArmourType) return MaxSkillLevel(Soldier.UtilitySkill.Armoursmith);

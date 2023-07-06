@@ -65,12 +65,14 @@ namespace SpaceMercs {
                     return true;
                 }
                 if (Goal == MissionGoal.FindItem) { // You can quit whenever you pick up the one single item
+                    if (MItem is null) throw new Exception("No mission item in FindItem mission");
                     foreach (Soldier s in Soldiers) {
                         if (s.HasItem(MItem)) return true;
                     }
                     return false;
                 }
                 if (Goal == MissionGoal.Gather) { // You can quit whenever you pick up at least one item
+                    if (MItem is null) throw new Exception("No mission item in Gather mission");
                     foreach (Soldier s in Soldiers) {
                         if (s.HasItem(MItem)) return true;
                     }
@@ -121,17 +123,20 @@ namespace SpaceMercs {
             Location = loc;
             Type = (MissionType)Enum.Parse(typeof(MissionType), xml.SelectSingleNode("Type").InnerText);
 
-            if (xml.SelectSingleNode("Ship") != null) {
-                ShipTarget = new Ship(xml.SelectSingleNode("Ship"), null);
+            XmlNode? sn = xml.SelectSingleNode("Ship");
+            if (sn is not null) {
+                ShipTarget = new Ship(sn, null);
             }
 
-            if (xml.SelectSingleNode("Goal") != null) {
-                Goal = (MissionGoal)Enum.Parse(typeof(MissionGoal), xml.SelectSingleNode("Goal").InnerText);
+            XmlNode? xg = xml.SelectSingleNode("Goal");
+            if (xg is not null) {
+                Goal = (MissionGoal)Enum.Parse(typeof(MissionGoal), xg.InnerText);
             }
             else Goal = MissionGoal.KillAll;
 
-            if (xml.SelectSingleNode("MissionItem") != null) {
-                MItem = new MissionItem(xml.SelectSingleNode("MissionItem"));
+            XmlNode? xmi = xml.SelectSingleNode("MissionItem");
+            if (xmi is not null) {
+                MItem = new MissionItem(xmi);
             }
             else MItem = null;
 
@@ -216,7 +221,7 @@ namespace SpaceMercs {
             m.ShipTarget = Ship.GenerateRandomShipOfRace(rc, dDiff, null);
             return m;
         }
-        public static Mission CreateRepelBoardersMission(Race rc, int dDiff, Ship sh) {
+        public static Mission CreateRepelBoardersMission(Race? rc, int dDiff, Ship sh) {
             Mission m = new Mission(MissionType.RepelBoarders, dDiff);
             m.RacialOpponent = rc;
             m.ShipTarget = sh;

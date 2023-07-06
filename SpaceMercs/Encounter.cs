@@ -23,8 +23,8 @@
             }
 
             // Greater risk if you're not very friendly with the target system
-            if (PlayerTeam.GetRelations(aoFrom.GetSystem().Owner) <= 2) dDanger -= (PlayerTeam.GetRelations(aoFrom.GetSystem().Owner) - 3) * 2.0;
-            if (PlayerTeam.GetRelations(aoTo.GetSystem().Owner) <= 2) dDanger -= (PlayerTeam.GetRelations(aoTo.GetSystem().Owner) - 3) * 2.0;
+            if (PlayerTeam.GetRelations(aoFrom) <= 2) dDanger -= (PlayerTeam.GetRelations(aoFrom) - 3) * 2.0;
+            if (PlayerTeam.GetRelations(aoTo) <= 2) dDanger -= (PlayerTeam.GetRelations(aoTo) - 3) * 2.0;
 
             // Take into account journey time (if short). We should really look at distance here, but if we're travelling fast then it's harder to attack us, too.
             double dDays = dJourneyTime / Const.SecondsPerDay;

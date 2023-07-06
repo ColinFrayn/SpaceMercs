@@ -109,7 +109,7 @@ namespace SpaceMercs.Dialogs {
 
         private void dgMissions_DoubleClick(object sender, EventArgs e) {
             if (dgMissions.SelectedRows.Count != 1) return;
-            Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
+            Mission miss = dgMissions.SelectedRows[0].Tag as Mission ?? throw new Exception("Could not convert to Mission");
             MessageBox.Show(this, miss.GetDescription(), "Mission Details");
         }
     }

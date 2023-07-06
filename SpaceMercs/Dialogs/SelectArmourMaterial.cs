@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SpaceMercs.Dialogs {
   partial class SelectArmourMaterial : Form {
     private readonly Dictionary<MaterialType, int> BaseMats;
     private readonly Team PlayerTeam;
     private readonly ArmourType ThisType;
-    public MaterialType SelectedMat { get; private set; }
+    public MaterialType? SelectedMat { get; private set; }
 
     public SelectArmourMaterial(Dictionary<MaterialType,int> mats, ArmourType tp, Team pt) {
       BaseMats = new Dictionary<MaterialType, int>(mats);

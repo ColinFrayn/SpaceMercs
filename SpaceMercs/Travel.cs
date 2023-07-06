@@ -88,7 +88,7 @@ namespace SpaceMercs {
         public HabitableAO Destination {
             get {
                 if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet();
-                else return (HabitableAO)aoTravelTo;
+                else return aoTravelTo as HabitableAO;
             }
         }
 
@@ -296,8 +296,8 @@ namespace SpaceMercs {
 
             // -- Enemy fires weapons
             foreach (int r in PlayerTeam.CurrentMission.ShipTarget.AllWeaponRooms) {
-                ShipWeapon sw = PlayerTeam.CurrentMission.ShipTarget.GetEquipmentByRoomID(r) as ShipWeapon;
-                if (sw == null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
+                ShipWeapon? sw = PlayerTeam.CurrentMission.ShipTarget.GetEquipmentByRoomID(r) as ShipWeapon;
+                if (sw is null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
                 sw.Cooldown -= 0.005;
                 if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
                     int Attack = PlayerTeam.CurrentMission.ShipTarget.Attack + sw.Attack;

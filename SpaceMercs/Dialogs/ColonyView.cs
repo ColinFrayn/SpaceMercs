@@ -327,7 +327,7 @@ namespace SpaceMercs.Dialogs {
             Soldier? s = tp.Soldier;
             if (tp.Item is not IEquippable eq) return;
             bool bEquipped = tp.Equipped;
-            UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam);
+            UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam, null);
             ui.ShowDialog(this.Owner);
             if (ui.Upgraded) {
                 if (s is null) {
@@ -343,7 +343,7 @@ namespace SpaceMercs.Dialogs {
                     }
                 }
                 if (ui.Destroyed) SetupFoundryTab();
-                else SetupFoundryTab(new List<SaleItem>() { new SaleItem(ui.NewItem, s, bEquipped, 1) });
+                else if (ui.NewItem is not null) SetupFoundryTab(new List<SaleItem>() { new SaleItem(ui.NewItem, s, bEquipped, 1) });
             }
         }
         private void btSellItem_Click(object sender, EventArgs e) {
@@ -436,7 +436,7 @@ namespace SpaceMercs.Dialogs {
                 SaleItem? tp = row.Tag as SaleItem;
                 if (tp is null) continue;
                 Soldier? s = tp.Soldier;
-                IItem? eq = tp.Item;
+                IItem eq = tp.Item ?? throw new Exception("Found incomprehensible equipment in DGViewRow");
                 bool bEquipped = tp.Equipped;
                 if (s == null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
                 else {
@@ -555,26 +555,26 @@ namespace SpaceMercs.Dialogs {
         // DataGridView sort handlers
         private void dgMerchant_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Cost
-                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 2) { // Mass
-                e.SortResult = double.Parse(e.CellValue1.ToString().Replace("kg", "")).CompareTo(double.Parse(e.CellValue2.ToString().Replace("kg", "")));
+                e.SortResult = double.Parse(e.CellValue1.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString()?.Replace("kg", "") ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
 
         }
         private void dgMercenaries_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Level
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Fee
-                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
@@ -601,17 +601,17 @@ namespace SpaceMercs.Dialogs {
         }
         private void dgShips_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Cost
-                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
         private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Value
-                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }

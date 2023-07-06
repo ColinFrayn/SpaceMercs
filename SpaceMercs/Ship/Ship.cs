@@ -201,7 +201,7 @@ namespace SpaceMercs {
             Random rand = new Random();
             Seed = rand.Next(1000000);
         }
-        public Ship(XmlNode xml, Team owner) {
+        public Ship(XmlNode xml, Team? owner) {
             Owner = owner;
             Name = xml.SelectSingleNode("Name").InnerText;
             if (xml.Attributes["Type"] != null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);

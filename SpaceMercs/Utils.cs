@@ -347,7 +347,7 @@ namespace SpaceMercs {
             }
             if (rnum < 0.8) { // Random material
                 double best = 0.0;
-                MaterialType mbest = null;
+                MaterialType? mbest = null;
                 foreach (MaterialType mat in StaticData.Materials) {
                     double r = rnd.NextDouble() * Math.Pow(mat.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
@@ -355,12 +355,12 @@ namespace SpaceMercs {
                         mbest = mat;
                     }
                 }
-                if (mbest == null) return null;
+                if (mbest is null) return null;
                 return new Material(mbest);
             }
             else { // Random item
                 double best = 0.0;
-                ItemType ibest = null;
+                ItemType? ibest = null;
                 foreach (ItemType it in StaticData.ItemTypes) {
                     if (it.BaseRarity > lvl + 5) continue;
                     double r = rnd.NextDouble() * Math.Pow(it.Rarity, 5.0 / (lvl + 4.0));
@@ -369,7 +369,7 @@ namespace SpaceMercs {
                         ibest = it;
                     }
                 }
-                if (ibest == null) return null;
+                if (ibest is null) return null;
                 return new Equipment(ibest);
             }
         }
@@ -406,8 +406,8 @@ namespace SpaceMercs {
         public static Armour? GenerateRandomArmour(Random rnd, int Level) {
             // Choose between all single-location armour pieces
             double best = 0.0;
-            ArmourType abest = null;
-            MaterialType mbest = null;
+            ArmourType? abest = null;
+            MaterialType? mbest = null;
             foreach (ArmourType at in StaticData.ArmourTypes) {
                 if (at.Locations.Count == 1) {
                     foreach (MaterialType mat in StaticData.Materials) {
@@ -421,7 +421,7 @@ namespace SpaceMercs {
                     }
                 }
             }
-            if (abest == null || mbest == null) return null;
+            if (abest is null || mbest is null) return null;
             Armour ar = new Armour(abest, mbest, 0);
 
             // Scale to level

@@ -8,7 +8,7 @@ namespace SpaceMercs.Dialogs {
         private readonly Soldier ThisSoldier;
         private readonly Stash ThisStash;
 
-        public EquipmentView(Soldier? s, Stash st) {
+        public EquipmentView(Soldier s, Stash st) {
             ThisSoldier = s;
             ThisStash = st;
             InitializeComponent();
@@ -95,7 +95,7 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             lbUnspent.Text = ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Unspent).ToString();
-            tbSkills_SelectedIndexChanged(null, null); // We might as well use the existing function. Params are ignored anyway...
+            tbSkills_SelectedIndexChanged(new object(), EventArgs.Empty); // We might as well use the existing function. Params are ignored anyway...
 
             // Inventory
             lbInventory.Items.Clear();
@@ -134,8 +134,8 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
-        private Color ArmourToColour(Armour ar) {
-            if (ar == null) return Color.Black;
+        private Color ArmourToColour(Armour? ar) {
+            if (ar is null) return Color.Black;
             if (ar.BaseArmour == 0.0) return Color.Gray;
             return Color.Green;
         }
@@ -157,8 +157,9 @@ namespace SpaceMercs.Dialogs {
         }
         private void btDrop_Click(object sender, EventArgs e) {
             IItem? it = SelectedItem();
+            if (it is null) return;
             int iPrevIndex = -1;
-            if (lbEquipped.SelectedIndex >= 0 && (it is IEquippable)) ThisSoldier.Unequip((IEquippable)it);
+            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) ThisSoldier.Unequip(eq);
             else iPrevIndex = lbInventory.SelectedIndex;
             ThisStash.Add(it);
             ThisSoldier.DestroyItem(it, 1);

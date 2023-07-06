@@ -163,6 +163,7 @@ namespace SpaceMercs.Dialogs {
             if (dgConstruct.SelectedRows.Count == 0) return;
             int iScroll = dgConstruct.FirstDisplayedScrollingRowIndex;
             ItemType? newType = dgConstruct.SelectedRows[0].Tag as ItemType;
+            if (newType is null) return;
             int iRowNo = dgConstruct.SelectedRows[0].Index;
 
             // Make sure we can make it
@@ -198,7 +199,7 @@ namespace SpaceMercs.Dialogs {
             int maxlev = PlayerTeam.GetMaxSkillByItemType(newType);
             Soldier s = PlayerTeam.GetSoldierWithMaxSkillByItemType(newType);
             double chance = newType.ConstructionChance + (maxlev * Const.SkillConstructChanceModifier);
-            if (newType is ArmourType) chance += armourMat.ConstructionChanceModifier;
+            if (armourMat is not null) chance += armourMat.ConstructionChanceModifier;
             double basechance = chance;
             if (chance > 99.0) chance = 99.0;
 
@@ -241,7 +242,7 @@ namespace SpaceMercs.Dialogs {
             if (lvl > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(lvl));
             else MessageBox.Show("Construction succeeded!");
             IEquippable? newItem = null;
-            if (newType is ArmourType at2) newItem = new Armour(at2, armourMat, lvl);
+            if (newType is ArmourType at2) newItem = new Armour(at2, armourMat!, lvl);
             else if (newType is WeaponType wt) newItem = new Weapon(wt, lvl);
             else newItem = new Equipment(newType);
 
@@ -252,10 +253,9 @@ namespace SpaceMercs.Dialogs {
             dgConstruct.FirstDisplayedScrollingRowIndex = iScroll;
         }
         private void btImprove_Click(object sender, EventArgs e) {
-            Tuple<Soldier?, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier?, IItem, bool>;
-            if (tp is null) return;
-            Soldier s = tp.Item1;
-            if (!(tp.Item2 is IEquippable eq) || eq is Equipment) return;
+            if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
+            Soldier? s = tp.Item1;
+            if (tp.Item2 is not IEquippable eq || eq is Equipment) return;
             bool bEquipped = tp.Item3;
             int maxlev = PlayerTeam.GetMaxSkillByItemType(eq.BaseType);
             if (maxlev == 0) {
@@ -330,8 +330,8 @@ namespace SpaceMercs.Dialogs {
                 btImprove.Enabled = false;
                 return;
             }
-            Tuple<Soldier?, IItem, bool> tp = (Tuple<Soldier?, IItem, bool>)dgInventory.SelectedRows[0].Tag;
-            if (tp == null) return;
+            Tuple<Soldier?, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier?, IItem, bool>;
+            if (tp is null) return;
             IItem it = tp.Item2;
             btImprove.Enabled = false;
             if (it is IEquippable eq) {
