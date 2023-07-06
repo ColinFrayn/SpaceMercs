@@ -54,7 +54,7 @@
             }
 
             // Still not found a suitable owning race?
-            if (rc == null) {
+            if (rc is null) {
                 double rF = aoFrom.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
                 double rT = aoTo.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
                 double r = (rF + rT) / 2.0;
@@ -68,7 +68,7 @@
             // Calculate the difficulty of this mission, based on the distance from home
             //Vector3d Pos = aoFrom.GetMapLocation() + ((aoTo.GetMapLocation() - aoFrom.GetMapLocation()) * dFract);
             int iDiff = (int)((aoFrom.GetRandomMissionDifficulty(rand) * (1.0 - dFract)) + (aoTo.GetRandomMissionDifficulty(rand) * dFract));
-            ShipEngine minDrive = StaticData.GetMinimumDriveByDistance(AstronomicalObject.CalculateDistance(aoFrom, aoTo));
+            ShipEngine minDrive = StaticData.GetMinimumDriveByDistance(AstronomicalObject.CalculateDistance(aoFrom, aoTo)) ?? throw new Exception("Mission not reachable!");
 
             // Check for the various intercept types:
             if (dDanger - dIntercept < 15.0 + (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000.0 : 0.0)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive);
@@ -107,13 +107,13 @@
             // No life forms - let's just get salvage
             if (!bLifeForms) {
                 double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
-                string strMessage = "You have discovered a stranded " + rc.Name + " freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
+                string strMessage = $"You have discovered a stranded {rc?.Name ?? "unfamiliar"} freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
                 if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Abandoned Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
                 return Mission.CreateSalvageMission(rc, iDiff, (float)(dTime * Const.SecondsPerDay));
             }
 
             // Otherwise you will need a hostile boarding party
-            string strMessage2 = "You have discovered a stranded " + rc.Name + " freighter. Scans have detected hostile life forms. Do you wish to board?";
+            string strMessage2 = $"You have discovered a stranded {rc?.Name ?? "unfamiliar"} freighter. Scans have detected hostile life forms. Do you wish to board?";
             if (MessageBox.Show(strMessage2, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
 
             // Create a mission for the landing party scenario
@@ -124,6 +124,7 @@
         private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
             // Generate a mission, including the random ship
             Mission miss = Mission.CreateShipCombatMission(rc, iDiff, minDrive);
+            if (miss.ShipTarget is null) throw new Exception("ShipCombat Mission does not have a target ship");
 
             // Can attempt to flee (if faster accel) or fight. If slower/equal speed then must fight.
             string strRace = " unidentified alien vessel";

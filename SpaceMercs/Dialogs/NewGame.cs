@@ -44,6 +44,7 @@ namespace SpaceMercs.Dialogs {
             tbCivSize.Maximum = Const.MinStarsPerSector;
             tbCivSize.Value = Const.MinStarsPerSector - 2;
             tbName.Text = "Unnamed";
+            PlayerName = "Unnamed";
             Strength = rc.Strength;
             Agility = rc.Agility;
             Intellect = rc.Intellect;

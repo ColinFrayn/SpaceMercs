@@ -354,25 +354,25 @@ namespace SpaceMercs.Dialogs {
         // DataGridView sort handlers
         private void dgConstruct_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Type
-                e.SortResult = e.CellValue1.ToString().CompareTo(e.CellValue2.ToString());
+                e.SortResult = e.CellValue1.ToString().CompareTo(e.CellValue2.ToString() ?? string.Empty);
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 2) { // Mass
-                e.SortResult = double.Parse(e.CellValue1.ToString().Replace("kg", "")).CompareTo(double.Parse(e.CellValue2.ToString().Replace("kg", "")));
+                e.SortResult = double.Parse(e.CellValue1.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString()?.Replace("kg", "") ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
         private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Value
-                e.SortResult = double.Parse(e.CellValue1.ToString()).CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }

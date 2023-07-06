@@ -134,7 +134,7 @@ namespace SpaceMercs {
                 ButtonX = id switch {
                     1 => 0.5f - (ButtonSplit + ButtonWidth),
                     2 => 0.5f + ButtonSplit,
-                    3 => throw new NotImplementedException()
+                    _ => throw new NotImplementedException()
                 };
             }
 
@@ -214,7 +214,7 @@ namespace SpaceMercs {
         }
 
         private void CheckNext() {
-            if (!queue.TryDequeue(out MsgConfig msgc)) {
+            if (!queue.TryDequeue(out MsgConfig? msgc) || msgc is null) {
                 Active = false;
                 return;
             }

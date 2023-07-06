@@ -49,8 +49,8 @@ namespace SpaceMercs {
         foreach (XmlNode xn in xml.SelectNodes("Materials/Material")) {
           string strMat = xn.Attributes["Name"].Value;
           int iVal = int.Parse(xn.Attributes["Amount"].Value);
-          MaterialType m = StaticData.GetMaterialTypeByName(strMat);
-          if (m == null) throw new Exception("Could not identify material " + strMat + " required for item " + Name);
+          MaterialType? m = StaticData.GetMaterialTypeByName(strMat);
+          if (m is null) throw new Exception("Could not identify material " + strMat + " required for item " + Name);
           if (Materials.ContainsKey(m)) throw new Exception("Duplicate material in item description : " + Name);
           Materials.Add(m, iVal);
         }

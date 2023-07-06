@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Drawing.Text;
+﻿using System.Drawing.Text;
 
 namespace SpaceMercs.Dialogs {
     partial class TeamView : Form {
@@ -48,7 +43,7 @@ namespace SpaceMercs.Dialogs {
                 if (s.IsActive) arrRow[3] = "Active";
                 else {
                     if (s.aoLocation == PlayerTeam.CurrentPosition) arrRow[3] = "Inactive";
-                    else arrRow[3] = s.aoLocation.PrintCoordinates();
+                    else arrRow[3] = s.aoLocation?.PrintCoordinates() ?? string.Empty;
                 }
                 dgSoldiers.Rows.Add(arrRow);
                 dgSoldiers.Rows[dgSoldiers.Rows.Count - 1].Tag = s;
@@ -246,7 +241,7 @@ namespace SpaceMercs.Dialogs {
             if (ivForm != null) ivForm.UpdateInventory();
         }
         private void btEquip_Click(object sender, EventArgs e) {
-            Soldier? s = SelectedSoldier();
+            Soldier s = SelectedSoldier() ?? throw new Exception("Selected soldier was null");
             if (SelectedItem() is not IEquippable eq) return;
             int iPrevIndex = -1;
             if (lbInventory.SelectedIndex >= 0) {
@@ -405,7 +400,7 @@ namespace SpaceMercs.Dialogs {
             if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                 // Disable if existing skill is already max level (== Player's level)
                 // Otherwise Enable
-                string stsk = lbUtilitySkills.SelectedItem.ToString();
+                string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
                 if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;

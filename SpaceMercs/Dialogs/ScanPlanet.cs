@@ -34,7 +34,7 @@ namespace SpaceMercs.Dialogs {
             btRunMission.Enabled = false;
             clockTick.Start();
         }
-        private void UpdateScan(Object myObject, EventArgs myEventArgs) {
+        private void UpdateScan(object? myObject, EventArgs myEventArgs) {
             iProgress++;
             pbScan.Value = Math.Min(iProgress, 20);
             if (iProgress > 21) {
@@ -95,7 +95,7 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
             if (dgMissions.SelectedRows.Count != 1) return;
-            Mission miss = dgMissions.SelectedRows[0].Tag as Mission;
+            Mission miss = dgMissions.SelectedRows[0].Tag as Mission ?? throw new Exception("Mission could not be found to run");
             if (StartMission(miss)) {
                 _aoScan.RemoveMission(miss);
                 this.Close();

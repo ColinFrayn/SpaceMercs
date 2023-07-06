@@ -393,7 +393,7 @@ namespace SpaceMercs.Dialogs {
 
         private void lbInventory_DoubleClick(object sender, EventArgs e) {
             if (SelectedItem() == null) return;
-            MessageBox.Show(SelectedItem().Desc);
+            MessageBox.Show(SelectedItem()?.Desc ?? "Could not find selected item!");
         }
 
         private void lbEquipped_DoubleClick(object sender, EventArgs e) {

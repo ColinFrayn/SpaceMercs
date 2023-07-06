@@ -23,12 +23,12 @@ namespace SpaceMercs {
         private static int ItemTextureID = -1;
 
         // Texture dimensions
-        private static float MiscTextureWidth { get { return (float)(Textures.TexSize - 1) / Textures.MiscTextureData.Width; } }
-        private static float MiscTextureHeight { get { return (float)(Textures.TexSize - 1) / Textures.MiscTextureData.Height; } }
-        private static float BuildingTextureWidth { get { return (float)(Textures.TexSize - 1) / Textures.BuildingTextureData.Width; } }
-        private static float BuildingTextureHeight { get { return (float)(Textures.TexSize - 1) / Textures.BuildingTextureData.Height; } }
-        private static float ItemTextureWidth { get { return (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Width; } }
-        private static float ItemTextureHeight { get { return (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Height; } }
+        private static float MiscTextureWidth { get { return Textures.MiscTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.MiscTextureData.Width; } }
+        private static float MiscTextureHeight { get { return Textures.MiscTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.MiscTextureData.Height; } }
+        private static float BuildingTextureWidth { get { return Textures.BuildingTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.BuildingTextureData.Width; } }
+        private static float BuildingTextureHeight { get { return Textures.BuildingTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.BuildingTextureData.Height; } }
+        private static float ItemTextureWidth { get { return Textures.ItemTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Width; } }
+        private static float ItemTextureHeight { get { return Textures.ItemTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Height; } }
 
         // Texture coordinates
         public enum MiscTexture { Build = 0, Salvage = 1, Up = 2, Right = 3, Cancel = 4, None = 5, Down = 6, Left = 7, Timer = 8, Connect = 9, Attack = 10, Search = 11, Disconnect = 12, Eye = 13, Inventory = 14, Skills = 15, Walk = 16, Unlock = 17, Lock = 18, Treasure = 19, Coins = 20, OpenDoor = 21, CloseDoor = 22, Bones = 23, Trap = 24, Alert = 25, Reuse = 26, Menu = 27, File = 28, Mission = 29 };
@@ -47,6 +47,7 @@ namespace SpaceMercs {
                 }
             }
             int xpos = (int)tex & 3, ypos = (int)tex / 4;
+            if (Textures.MiscTextureData is null) throw new Exception("Misc texture data is null");
             float tx = (float)((xpos * Textures.TexSize) + 0.5) / Textures.MiscTextureData.Width;
             float ty = (float)((ypos * Textures.TexSize) + 0.5) / Textures.MiscTextureData.Height;
             return new(bTransparent ? MiscTextureTransparentID : MiscTextureID, tx, ty, MiscTextureWidth, MiscTextureHeight);
@@ -56,6 +57,7 @@ namespace SpaceMercs {
                 SetupBuildingTexture();
                 SetParameters();
             }
+            if (Textures.BuildingTextureData is null) throw new Exception("Building texture data is null");
             float tx = (float)((se.TextureX * Textures.TexSize) + 0.5) / Textures.BuildingTextureData.Width;
             float ty = (float)((se.TextureY * Textures.TexSize) + 0.5) / Textures.BuildingTextureData.Height;
             return new(BuildingTextureID, tx, ty, BuildingTextureWidth, BuildingTextureHeight);
@@ -66,6 +68,7 @@ namespace SpaceMercs {
                 SetParameters();
             }
             if (it.TextureX == -1 || it.TextureY == -1) throw new Exception("Attempting to generate texture coordinates for item with no configured texture");
+            if (Textures.ItemTextureData is null) throw new Exception("Item texture data is null");
             float tx = (float)((it.TextureX * Textures.TexSize) + 0.5) / Textures.ItemTextureData.Width;
             float ty = (float)((it.TextureY * Textures.TexSize) + 0.5) / Textures.ItemTextureData.Height;
             return new(ItemTextureID, tx, ty, ItemTextureWidth, ItemTextureHeight);
@@ -669,34 +672,38 @@ namespace SpaceMercs {
             MiscTextureID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, MiscTextureID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Textures.MiscTextureData.Width, Textures.MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, Textures.MiscTextureData.Scan0);
+            if (MiscTextureData is null) throw new Exception("Misc Texture Data was null");
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, MiscTextureData.Width, MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, MiscTextureData.Scan0);
             SetParameters();
         }
         private static void SetupMiscTextureTransparent() {
             MiscTextureTransparentID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, MiscTextureTransparentID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            int texture_size = Textures.MiscTextureData.Width * Textures.MiscTextureData.Height * 4;
+            if (MiscTextureData is null) throw new Exception("Misc Texture Data was null");
+            int texture_size = MiscTextureData.Width * MiscTextureData.Height * 4;
             byte[] bytes = new byte[texture_size];
-            System.Runtime.InteropServices.Marshal.Copy(Textures.MiscTextureData.Scan0, bytes, 0, texture_size);
-            for (int i = 0; i < Textures.MiscTextureData.Width * Textures.MiscTextureData.Height; i++) {
+            System.Runtime.InteropServices.Marshal.Copy(MiscTextureData.Scan0, bytes, 0, texture_size);
+            for (int i = 0; i < MiscTextureData.Width * MiscTextureData.Height; i++) {
                 if (bytes[i * 4 + 0] > 242 && bytes[i * 4 + 1] > 242 && bytes[i * 4 + 2] > 242) bytes[i * 4 + 3] = 0; // Make white-ish colours all transparent
             }
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Textures.MiscTextureData.Width, Textures.MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bytes);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, MiscTextureData.Width, MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bytes);
             SetParameters();
         }
         private static void SetupBuildingTexture() {
             BuildingTextureID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, BuildingTextureID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Textures.BuildingTextureData.Width, Textures.BuildingTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, Textures.BuildingTextureData.Scan0);
+            if (BuildingTextureData is null) throw new Exception("Building Texture Data was null");
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, BuildingTextureData.Width, BuildingTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, BuildingTextureData.Scan0);
             SetParameters();
         }
         private static void SetupItemTexture() {
             ItemTextureID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, ItemTextureID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, Textures.ItemTextureData.Width, Textures.ItemTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, Textures.ItemTextureData.Scan0);
+            if (ItemTextureData is null) throw new Exception("Item Texture Data was null");
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, ItemTextureData.Width, ItemTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, ItemTextureData.Scan0);
         }
         private static void AddHaloToImage(byte[,,] image, Color col) {
             int width = image.GetLength(0);

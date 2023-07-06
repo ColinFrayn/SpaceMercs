@@ -131,7 +131,7 @@ namespace SpaceMercs {
             SetupExitLocations();
 
             // Map
-            XmlNode xmlm = xml.SelectSingleNode("Map");
+            XmlNode xmlm = xml.SelectSingleNode("Map") ?? throw new Exception("Could not identify Map node");
             string strMap = Utils.RunLengthDecode(xmlm.InnerText);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
@@ -140,7 +140,7 @@ namespace SpaceMercs {
             }
 
             // Explored
-            XmlNode xmlx = xml.SelectSingleNode("Explored");
+            XmlNode xmlx = xml.SelectSingleNode("Explored") ?? throw new Exception("Could not identify Explored node");
             string strExp = Utils.RunLengthDecode(xmlx.InnerText);
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
@@ -149,7 +149,7 @@ namespace SpaceMercs {
             }
 
             // Creatures
-            XmlNode xmlc = xml.SelectSingleNode("Creatures");
+            XmlNode xmlc = xml.SelectSingleNode("Creatures") ?? throw new Exception("Could not identify Creatures node");
             foreach (XmlNode xc in xmlc.SelectNodes("Creature")) {
                 Creature cr = new Creature(xc, this);
                 AddCreatureWithoutReset(cr);
@@ -157,8 +157,8 @@ namespace SpaceMercs {
 
             Items.Clear();
             // Item stashes
-            XmlNode xmli = xml.SelectSingleNode("Items"); // Old format
-            if (xmli != null) {
+            XmlNode? xmli = xml.SelectSingleNode("Items"); // Old format
+            if (xmli is not null) {
                 foreach (XmlNode xn in xmli.SelectNodes("Stack")) {
                     Dictionary<IItem, int> dict = new Dictionary<IItem, int>();
                     int x = int.Parse(xn.Attributes["X"].Value);

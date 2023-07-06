@@ -20,7 +20,8 @@ namespace SpaceMercs.Dialogs {
             btTransfer.Enabled = false;
             if (dgInventory.SelectedRows.Count > 0) {
                 btDestroy.Enabled = true;
-                if (tvParent.SelectedSoldier() != null && tvParent.SelectedSoldier().IsActive) btTransfer.Enabled = true;
+                Soldier? selected = tvParent.SelectedSoldier();
+                if (selected is not null && selected.IsActive) btTransfer.Enabled = true;
             }
         }
 
@@ -41,7 +42,7 @@ namespace SpaceMercs.Dialogs {
 
         private void btTransfer_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
-            Soldier s = tvParent.SelectedSoldier();
+            Soldier? s = tvParent.SelectedSoldier();
             if (s is null) return;
             if (dgInventory.SelectedRows[0].Tag is not IItem eq) {
                 throw new Exception("Could not identify item in data grid");
