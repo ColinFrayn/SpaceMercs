@@ -39,14 +39,15 @@
 
             // Work out which species we're dealing with
             Race? rc = null; // Unknown alien race
-                             // Work out which race this is, biased by how far through the journey you are
+
+            // Work out which race this is, biased by how far through the journey you are
             if (rand.NextDouble() < dFract) rc = aoTo.GetSystem().GetRandomRace(rand);
             else rc = aoFrom.GetSystem().GetRandomRace(rand);
-            if (rc == null && aoFrom.GetSystem().Owner != null) rc = aoFrom.GetSystem().Owner;
-            if (rc == null && aoTo.GetSystem().Owner != null) rc = aoTo.GetSystem().Owner;
+            if (rc is null && aoFrom.GetSystem().Owner is not null) rc = aoFrom.GetSystem().Owner;
+            if (rc is null && aoTo.GetSystem().Owner is not null) rc = aoTo.GetSystem().Owner;
 
             // No luck with system owners so test sector owners
-            if (rc == null) {
+            if (rc is null) {
                 if (aoFrom.GetSystem().Sector.Inhabitant == null) rc = aoTo.GetSystem().Sector.Inhabitant;
                 else if (aoTo.GetSystem().Sector.Inhabitant == null) rc = aoFrom.GetSystem().Sector.Inhabitant;
                 else if (rand.NextDouble() > 0.5) rc = aoFrom.GetSystem().Sector.Inhabitant;
@@ -55,14 +56,15 @@
 
             // Still not found a suitable owning race?
             if (rc is null) {
-                double rF = aoFrom.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
-                double rT = aoTo.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
-                double r = (rF + rT) / 2.0;
-                if (rand.NextDouble() > 0.5 && (rand.NextDouble() * 100.0) < r) {
-                    // Unidentified alien race
-                    rc = null;
-                }
-                else return null; // Give up!
+                //double rF = aoFrom.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
+                //double rT = aoTo.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
+                //double r = (rF + rT) / 2.0;
+                //if (rand.NextDouble() < 0.5 || (rand.NextDouble() * 100.0) > r) {
+                //    return null;
+                //}
+                // Unidentified alien race
+                // TODO: Does this mean anything? For now just abort the encounter. I don't want Race ever to be null
+                return null;
             }
 
             // Calculate the difficulty of this mission, based on the distance from home
@@ -77,43 +79,38 @@
 
         // Do an inactive encounter
         private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
-            string strRace = "an unidentified alien vessel";
-            if (rc != null) strRace = "a " + rc.Name + " vessel";
-            if (MessageBox.Show(new Form { TopMost = true }, "You have detected a distress signal from " + strRace + " nearby. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) {
+            string strDesc = rc.Known ? rc.Name : "unidentified alien";
+            if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) {
                 return Mission.CreateIgnoreMission();
             }
 
             // If race != null then it could turn out to be trap (->Active)
-            if (rc != null && rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive);
+            if (rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive);
 
             // Scan for life forms. If none then can just collect resources.
-            bool bLifeForms = false;
-            if (rc == null) bLifeForms = (rand.NextDouble() > 0.5);
-            else {
-                bLifeForms = (rand.NextDouble() > 0.3);
-                if (bLifeForms) {
-                    // Ship might be friendly - they could offer cash to help them with repairs (which takes time)
-                    bool bFriendly = (rand.NextDouble() * 20.0 > dDanger);
-                    if (bFriendly) {
-                        double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
-                        double dReward = Math.Round((dTime * 5.0) + (rand.NextDouble() * (iDiff + 2.0) / 2.0), 2);
-                        string strMessage = "You have discovered a stranded " + rc.Name + " freighter. They request your help for repairs. Time = " + dTime + " days; Reward = " + dReward + " credits. Will you help?";
-                        if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
-                        return Mission.CreateRepairMission(rc, (float)(dTime * Const.SecondsPerDay), dReward);
-                    }
+            bool bLifeForms = (rand.NextDouble() > 0.3);
+            if (bLifeForms) {
+                // Ship might be friendly - they could offer cash to help them with repairs (which takes time)
+                bool bFriendly = (rand.NextDouble() * 20.0 > dDanger);
+                if (bFriendly) {
+                    double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
+                    double dReward = Math.Round((dTime * 5.0) + (rand.NextDouble() * (iDiff + 2.0) / 2.0), 2);
+                    string strMessage = $"You have discovered a stranded {strDesc} freighter. They request your help for repairs. Time = {dTime} days; Reward = {dReward} credits. Will you help?";
+                    if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
+                    return Mission.CreateRepairMission(rc, (float)(dTime * Const.SecondsPerDay), dReward);
                 }
             }
-
+        
             // No life forms - let's just get salvage
             if (!bLifeForms) {
                 double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
-                string strMessage = $"You have discovered a stranded {rc?.Name ?? "unfamiliar"} freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
+                string strMessage = $"You have discovered a stranded {strDesc} freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
                 if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Abandoned Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
                 return Mission.CreateSalvageMission(rc, iDiff, (float)(dTime * Const.SecondsPerDay));
             }
 
             // Otherwise you will need a hostile boarding party
-            string strMessage2 = $"You have discovered a stranded {rc?.Name ?? "unfamiliar"} freighter. Scans have detected hostile life forms. Do you wish to board?";
+            string strMessage2 = $"You have discovered a stranded {strDesc} vessel. Scans have detected hostile life forms. Do you wish to board?";
             if (MessageBox.Show(strMessage2, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
 
             // Create a mission for the landing party scenario
@@ -127,9 +124,8 @@
             if (miss.ShipTarget is null) throw new Exception("ShipCombat Mission does not have a target ship");
 
             // Can attempt to flee (if faster accel) or fight. If slower/equal speed then must fight.
-            string strRace = " unidentified alien vessel";
-            if (rc != null) strRace = rc.Name + " vessel";
-            string strMessage = "You have been ambushed by a hostile " + strRace + ".";
+            string strRace = rc.Known ? rc.Name : "unidentified alien";
+            string strMessage = $"You have been ambushed by a hostile {strRace} vessel.";
             if (PlayerTeam.PlayerShip.CanOutrun(miss.ShipTarget)) {
                 if (MessageBox.Show(new Form { TopMost = true }, strMessage + " You can outrun the ambushers. Do you want to flee?", "Ambush", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                     return Mission.CreateIgnoreMission();

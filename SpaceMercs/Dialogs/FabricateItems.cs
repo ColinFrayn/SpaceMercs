@@ -354,7 +354,7 @@ namespace SpaceMercs.Dialogs {
         // DataGridView sort handlers
         private void dgConstruct_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Type
-                e.SortResult = e.CellValue1.ToString().CompareTo(e.CellValue2.ToString() ?? string.Empty);
+                e.SortResult = (e.CellValue1.ToString() ?? string.Empty).CompareTo(e.CellValue2.ToString() ?? string.Empty);
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 2) { // Mass

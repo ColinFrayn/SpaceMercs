@@ -23,12 +23,11 @@ namespace SpaceMercs {
             PlanetDensity = int.Parse(xml.Attributes["PD"]!.Value);
 
             dSectors.Clear();
-            XmlNodeList? sectorNodes = xml.SelectNodes("Sector");
-            if (sectorNodes is null) throw new Exception("Could not locate sector nodes in save file");
-            foreach (XmlNode xmls in sectorNodes) {
-                Sector sect = new Sector(xmls, this);
+            foreach (XmlNode xmls in xml.SelectNodesToList("Sector")) {
+                Sector sect = new Sector(xml, this);
                 dSectors.Add(new Tuple<int, int>(sect.SectorX, sect.SectorY), sect);
             }
+            if (!dSectors.Any()) throw new Exception("Could not locate sector nodes in save file");
 
             bMapSetup = true;
         }

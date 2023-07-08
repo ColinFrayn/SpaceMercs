@@ -33,9 +33,9 @@ namespace SpaceMercs {
 
       // Special resistances if this is made into armour
       if (xml.SelectSingleNode("BonusArmour") != null) {
-        foreach (XmlNode xn in xml.SelectNodes("BonusArmour/Bonus")) {
+        foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
           WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.Attributes["Type"].Value);
-          double val = Double.Parse(xn.Attributes["Amount"].Value);
+          double val = double.Parse(xn.Attributes["Amount"].Value);
           BonusArmour.Add(type, val);
         }
       }

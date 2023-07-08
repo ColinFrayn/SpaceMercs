@@ -88,21 +88,15 @@ namespace SpaceMercs {
             else dtNextGrowth = DateTime.MaxValue;
 
             Mercenaries.Clear();
-            XmlNodeList? soldiers = xml.SelectSingleNode("Mercenaries")?.SelectNodes("Soldier");
-            if (soldiers is not null) {
-                foreach (XmlNode xm in soldiers) {
-                    Soldier s = new Soldier(xm, null);
-                    Mercenaries.Add(s);
-                }
+            foreach (XmlNode xm in xml.SelectNodesToList("Mercenaries/Soldier")) {
+                Soldier s = new Soldier(xm, null);
+                Mercenaries.Add(s);
             }
 
-            XmlNodeList? missions = xml.SelectSingleNode("Missions")?.SelectNodes("Soldier");
             Missions.Clear();
-            if (missions != null) {
-                foreach (XmlNode xm in missions) {
-                    Mission m = new Mission(xm, loc);
-                    Missions.Add(m);
-                }
+            foreach (XmlNode xm in xml.SelectNodesToList("Missions/Soldier")) {
+                Mission m = new Mission(xm, loc);
+                Missions.Add(m);
             }
 
             XmlNode? xmli = xml.SelectSingleNode("Inventory");

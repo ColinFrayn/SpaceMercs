@@ -4,6 +4,7 @@ using System.Xml;
 using OpenTK.Mathematics;
 using System.Drawing;
 using System.Linq;
+using System.Diagnostics;
 
 namespace SpaceMercs {
     static class Utils {
@@ -461,6 +462,17 @@ namespace SpaceMercs {
             if (d == 0) return 0;
             decimal scale = (decimal)Math.Pow(10, Math.Floor(Math.Log10(Math.Abs(d))) + 1);
             return (double)(scale * Math.Round((decimal)d / scale, digits));
+        }
+
+        public static IEnumerable<XmlNode> SelectNodesToList(this XmlNode root, string name) {
+            List<XmlNode> nodes = new List<XmlNode>();
+            if (string.IsNullOrEmpty(name)) return nodes;
+            XmlNodeList? nodeList = root.SelectNodes(name);
+            if (nodeList is null) return nodes;            
+            foreach (XmlNode node in nodeList) {
+                nodes.Add(node);
+            }
+            return nodes;
         }
     }
 }

@@ -28,18 +28,17 @@ namespace SpaceMercs {
             Level = s.Level;
         }
         public Corpse(XmlNode xml) {
-            string strType = xml.Attributes["Type"].Value;
+            string strType = xml.Attributes?["Type"]?.Value ?? string.Empty;
             if (strType.StartsWith("Soldier:")) {
                 SoldierName = strType.Substring(8);
                 Type = null;
             }
             else {
-                Type = StaticData.GetCreatureTypeByName(strType);
-                if (Type == null) throw new Exception("Could not ID creature type for corpse : " + strType);
+                Type = StaticData.GetCreatureTypeByName(strType) ?? throw new Exception("Could not ID creature type for corpse : " + strType);
                 SoldierName = null;
             }
-            if (xml.Attributes["Level"] != null) {
-                Level = int.Parse(xml.Attributes["Level"].Value);
+            if (xml.Attributes?["Level"] is not null) {
+                Level = int.Parse(xml.Attributes["Level"]?.Value ?? string.Empty);
             }
             else if (Type != null) {
                 Level = Type.LevelMin;

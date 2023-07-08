@@ -82,7 +82,7 @@ namespace SpaceMercs {
             }
 
             TradeRoutes.Clear();
-            foreach (XmlNode xmlt in xml.SelectNodes("TradeRoute")) {
+            foreach (XmlNode xmlt in xml.SelectNodesToList("TradeRoute")) {
                 AstronomicalObject? aotr = sect.ParentMap.GetAOFromLocationString(xmlt.InnerText);
                 if (aotr is null) { // It could be that the target is in the current sector (which hasn't been added to the Map yet), so check that
                     aotr = sect.GetAOFromLocationString(xmlt.InnerText);
@@ -96,7 +96,7 @@ namespace SpaceMercs {
             }
 
             Planets = new List<Planet>();
-            foreach (XmlNode xmlp in xml.SelectNodes("Planets/Planet")) {
+            foreach (XmlNode xmlp in xml.SelectNodesToList("Planets/Planet")) {
                 Planet pl = new Planet(xmlp, this);
                 pl.Parent = this;
                 Planets.Add(pl);

@@ -319,7 +319,7 @@ namespace SpaceMercs.Dialogs {
             // Clear the background.
             e.Graphics.Clear(Color.White);
 
-            Soldier? s = SelectedSoldier();
+            Soldier s = SelectedSoldier() ?? throw new Exception("No selected soldier to paint");
             float fraction = (float)s.Experience / (float)s.ExperienceRequiredToReachNextLevel();
             int wid = (int)(fraction * pbExperience.ClientSize.Width);
             e.Graphics.FillRectangle(Brushes.Red, 0, 0, wid, pbExperience.ClientSize.Height);
@@ -410,13 +410,15 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbInventory_DoubleClick(object sender, EventArgs e) {
-            if (SelectedItem() is null) return;
-            MessageBox.Show(SelectedItem().Desc);
+            IItem? it = SelectedItem();
+            if (it is null) return;
+            MessageBox.Show(it.Desc);
         }
 
         private void lbEquipped_DoubleClick(object sender, EventArgs e) {
-            if (SelectedItem() is null) return;
-            MessageBox.Show(SelectedItem().Desc);
+            IItem? it = SelectedItem();
+            if (it is null) return;
+            MessageBox.Show(it.Desc);
         }
 
         private void btColour_Click(object sender, EventArgs e) {

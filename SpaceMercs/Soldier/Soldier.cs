@@ -577,7 +577,7 @@ namespace SpaceMercs {
             XmlNode? wex = xml.SelectSingleNode("WeaponExperience");
             WeaponExperience.Clear();
             if (wex is not null) {
-                foreach (XmlNode xw in wex.SelectNodes("Exp")) {
+                foreach (XmlNode xw in wex.SelectNodesToList("Exp")) {
                     WeaponType? tp = StaticData.GetWeaponTypeByName(xw.Attributes["Type"].Value) ?? throw new Exception("Could not ID WeaponType : " + xw.Attributes["Type"].Value);
                     int exp = int.Parse(xw.InnerText);
                     WeaponExperience.Add(tp, exp);
@@ -588,7 +588,7 @@ namespace SpaceMercs {
             UtilitySkills.Clear();
             int totsk = 0;
             if (wut is not null) {
-                foreach (XmlNode xu in wut.SelectNodes("Exp")) {
+                foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
                     UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.Attributes["Skill"].Value);
                     int lvl = int.Parse(xu.InnerText);
                     totsk += lvl;

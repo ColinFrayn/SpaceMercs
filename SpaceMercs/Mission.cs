@@ -166,7 +166,7 @@ namespace SpaceMercs {
             }
             else Size = 1;
 
-            foreach (XmlNode xl in xml.SelectNodes("Level")) {
+            foreach (XmlNode xl in xml.SelectNodesToList("Level")) {
                 int id = int.Parse(xl.Attributes["ID"].Value);
                 if (xl.FirstChild is not null) {
                     MissionLevel lev = new MissionLevel(xl.FirstChild, this);

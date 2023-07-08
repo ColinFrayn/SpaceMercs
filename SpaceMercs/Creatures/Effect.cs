@@ -34,8 +34,8 @@ namespace SpaceMercs {
             StatMods = new Dictionary<StatType, int>();
             XmlNode? sm = xml.SelectSingleNode("StatMods");
             if (sm != null) {
-                foreach (XmlNode xn in sm.SelectNodes("Mod")) {
-                    string strMod = xn.Attributes["Stat"]!.Value;
+                foreach (XmlNode xn in sm.SelectNodesToList("Mod")) {
+                    string strMod = xn.Attributes!["Stat"]!.Value;
                     StatType st = (StatType)Enum.Parse(typeof(StatType), strMod);
                     int val = int.Parse(xn.InnerText);
                     if (StatMods.ContainsKey(st)) throw new Exception("Loading Effect : " + Name + "; Duplicate stat mod : " + st);

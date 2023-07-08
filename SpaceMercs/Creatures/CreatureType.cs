@@ -94,7 +94,7 @@ namespace SpaceMercs {
 
             // Special resistances
             if (xml.SelectSingleNode("Resistances") != null) {
-                foreach (XmlNode xn in xml.SelectNodes("Resistances/Resistance")) {
+                foreach (XmlNode xn in xml.SelectNodesToList("Resistances/Resistance")) {
                     WeaponType.DamageType tp = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.Attributes!["Type"]?.Value ?? string.Empty);
                     if (Resistances.ContainsKey(tp)) throw new Exception("Duplicate resistance of type " + tp + " for creature " + Name);
                     double res = double.Parse(xn.Attributes["Value"]?.Value ?? throw new Exception($"No Value provided in CreatureType {Name} Resistances list item"));
@@ -104,7 +104,7 @@ namespace SpaceMercs {
 
             // Scavenging results
             if (xml.SelectSingleNode("Scavenge") != null) {
-                foreach (XmlNode xn in xml.SelectNodes("Scavenge/Item")) {
+                foreach (XmlNode xn in xml.SelectNodesToList("Scavenge/Item")) {
                     double amount = double.Parse(xn.Attributes?["Amount"]?.Value ?? throw new Exception($"No Amount provided in CreatureType {Name} Scavenge list item"));
                     MaterialType? tp = StaticData.GetMaterialTypeByName(xn.InnerText);
                     if (tp == null) throw new Exception("Couldn't identify scavenging material " + xn.InnerText + " in creature type " + Name);
@@ -115,7 +115,7 @@ namespace SpaceMercs {
 
             // Weapons
             if (xml.SelectSingleNode("Weapons") != null) {
-                foreach (XmlNode xn in xml.SelectNodes("Weapons/Weapon")) {
+                foreach (XmlNode xn in xml.SelectNodesToList("Weapons/Weapon")) {
                     WeaponType? wpt = StaticData.GetWeaponTypeByName(xn.InnerText);
                     if (wpt == null) throw new Exception("Creature " + Name + " has unknown weapon : " + xn.InnerText);
                     int wgt = int.Parse(xn.Attributes?["Weight"]?.Value ?? throw new Exception($"No Weight provided in CreatureType {Name} Weapons list item"));

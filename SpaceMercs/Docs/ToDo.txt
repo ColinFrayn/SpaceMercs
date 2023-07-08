@@ -47,6 +47,7 @@ Backburner : Features
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race
+-- Loads of places where Race.Name is used. If Race is not known then replace with "Unidentified"
 - Encounter creatures in a scanner mission e.g. "Ursalon Bandits"
 -- Maybe display in mission details as "Unknown Bandits"
 - Arriving at a planet with a colony of that race

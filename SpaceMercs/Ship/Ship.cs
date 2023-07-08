@@ -216,7 +216,7 @@ namespace SpaceMercs {
             Equipment.Clear();
 
             // Compatibility mode
-            foreach (XmlNode xr in xml.SelectNodes("Room")) {
+            foreach (XmlNode xr in xml.SelectNodesToList("Room")) {
                 XmlNode xn = xr.SelectSingleNode("ShipRoom/Equipment") ?? throw new Exception("Could not find ShipRoom/Equipment details in savegame");
                 ShipEquipment? se = StaticData.GetShipEquipmentByName(xn.InnerText) ?? throw new Exception("Could not find room type : " + xn.InnerText);
                 bool bActive = (xr.SelectSingleNode("ShipRoom/Active") != null);
@@ -230,7 +230,7 @@ namespace SpaceMercs {
             }
 
             // New-style Equipment loading
-            foreach (XmlNode xr in xml.SelectNodes("Eqp")) {
+            foreach (XmlNode xr in xml.SelectNodesToList("Eqp")) {
                 int id = int.Parse(xr.Attributes["ID"].Value);
                 ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);

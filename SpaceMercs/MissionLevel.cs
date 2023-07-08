@@ -150,7 +150,7 @@ namespace SpaceMercs {
 
             // Creatures
             XmlNode xmlc = xml.SelectSingleNode("Creatures") ?? throw new Exception("Could not identify Creatures node");
-            foreach (XmlNode xc in xmlc.SelectNodes("Creature")) {
+            foreach (XmlNode xc in xmlc.SelectNodesToList("Creature")) {
                 Creature cr = new Creature(xc, this);
                 AddCreatureWithoutReset(cr);
             }
@@ -159,12 +159,12 @@ namespace SpaceMercs {
             // Item stashes
             XmlNode? xmli = xml.SelectSingleNode("Items"); // Old format
             if (xmli is not null) {
-                foreach (XmlNode xn in xmli.SelectNodes("Stack")) {
+                foreach (XmlNode xn in xmli.SelectNodesToList("Stack")) {
                     Dictionary<IItem, int> dict = new Dictionary<IItem, int>();
                     int x = int.Parse(xn.Attributes["X"].Value);
                     int y = int.Parse(xn.Attributes["Y"].Value);
                     Point pt = new Point(x, y);
-                    foreach (XmlNode xnn in xn.SelectNodes("StackItem")) {
+                    foreach (XmlNode xnn in xn.SelectNodesToList("StackItem")) {
                         int n = int.Parse(xnn.Attributes["N"].Value);
                         IItem it = Utils.LoadItem(xnn.FirstChild) ?? throw new Exception($"Could not load item from stack : {xnn.FirstChild?.InnerText ?? "null"}");
                         dict.Add(it, n);
@@ -172,22 +172,16 @@ namespace SpaceMercs {
                     Items.Add(pt, new Stash(dict, pt));
                 }
             }
-            XmlNode? xmls = xml.SelectSingleNode("Stashes"); // New format
-            if (xmls is not null) {
-                foreach (XmlNode xn in xmls.SelectNodes("Stash")) {
-                    Stash s = new Stash(xn);
-                    Items.Add(s.Location, s);
-                }
+            foreach (XmlNode xn in xml.SelectNodesToList("Stashes/Stash")) {
+                Stash s = new Stash(xn);
+                Items.Add(s.Location, s);
             }
 
             // Traps
             Traps.Clear();
-            XmlNode? xmlt = xml.SelectSingleNode("Traps");
-            if (xmlt is not null) {
-                foreach (XmlNode xn in xmlt.SelectNodes("Trap")) {
-                    Trap t = new Trap(xn);
-                    Traps.Add(t.Location, t);
-                }
+            foreach (XmlNode xn in xml.SelectNodesToList("Traps/Trap")) {
+                Trap t = new Trap(xn);
+                Traps.Add(t.Location, t);
             }
 
             bInitialised = true;

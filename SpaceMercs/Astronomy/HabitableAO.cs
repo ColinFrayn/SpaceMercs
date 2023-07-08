@@ -19,8 +19,8 @@ namespace SpaceMercs {
         public int CountMissions { get { return _MissionList == null ? 0 : _MissionList.Count; } }
 
         protected void LoadMissions(XmlNode xml) {
-            XmlNodeList? nodes = xml.SelectSingleNode("Missions")?.SelectNodes("Mission");
-            if (nodes == null) return;
+            IEnumerable<XmlNode> nodes = xml.SelectNodesToList("Missions/Mission");
+            if (!nodes.Any()) return;
             _MissionList = new List<Mission>();
             foreach (XmlNode xm in nodes) {
                 _MissionList.Add(new Mission(xm, this));

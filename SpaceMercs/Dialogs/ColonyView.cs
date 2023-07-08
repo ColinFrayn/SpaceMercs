@@ -328,7 +328,7 @@ namespace SpaceMercs.Dialogs {
         private void btImproveWeaponOrArmour_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
             SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
-            if (tp is null | tp.Item is null) return;
+            if (tp is null || tp.Item is null) return;
             Soldier? s = tp.Soldier;
             if (tp.Item is not IEquippable eq) return;
             bool bEquipped = tp.Equipped;
@@ -360,13 +360,14 @@ namespace SpaceMercs.Dialogs {
         private void btDismantleEquippable_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
             // Get a list of everything to sell
-            SaleItem? tpFirst = dgInventory.SelectedRows[0].Tag as SaleItem;
-            // Do we need to ask if the player is sure?
+            SaleItem tpFirst = dgInventory.SelectedRows[0].Tag as SaleItem ?? throw new Exception("No item selected for dismantling");
+            if (tpFirst.Item is null) throw new Exception("Selected row has no item associated with it");
+            // Ask if the player is sure
             if (dgInventory.SelectedRows.Count == 1) {
-                if (MessageBox.Show("Really dismantle your " + tpFirst.Item.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                if (MessageBox.Show($"Really dismantle your {tpFirst.Item.Name}? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             }
             else {
-                if (MessageBox.Show("Really dismantle these " + dgInventory.SelectedRows.Count + " items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                if (MessageBox.Show($"Really dismantle these {dgInventory.SelectedRows.Count} items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             }
             Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
             List<SaleItem> lSI = new List<SaleItem>();
@@ -417,23 +418,25 @@ namespace SpaceMercs.Dialogs {
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
                 SaleItem? tp = row.Tag as SaleItem;
                 if (tp is null) continue;
-                tpSelected.Add(tp);
                 IItem? eq = tp.Item;
+                if (eq is null) continue;
+                tpSelected.Add(tp);
                 double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod;
-                if ((eq is IEquippable ieq && (ieq.Level > 0)) || SalePrice > 10.0) bQuery = true;
+                if ((eq is IEquippable ieq && ieq.Level > 0) || SalePrice > 10.0) bQuery = true;
                 TotalValue += SalePrice;
                 nitem += (bAll ? tp.Count : 1);
             }
+            if (tpSelected.Count == 0 || tpSelected[0].Item is null)
             if (nitem > 1 || TotalValue > 10.0) bQuery = true;
             // Do we neeed to ask if the player is sure?
             if (bQuery) {
                 if (nitem == 1) {
                     if (TotalValue > 100.0) {
-                        if (MessageBox.Show("Really sell your " + tpSelected[0].Item.Name + " for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                        if (MessageBox.Show($"Really sell your {tpSelected[0]!.Item!.Name} for {TotalValue.ToString("N2")}?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
                     }
                 }
                 else {
-                    if (MessageBox.Show("Really sell these " + nitem + " items for " + TotalValue.ToString("N2") + "?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+                    if (MessageBox.Show($"Really sell these {nitem} items for {TotalValue.ToString("N2")}?", "Really Sell?", MessageBoxButtons.YesNo) == DialogResult.No) return;
                 }
             }
             // Remove items from player
@@ -443,7 +446,7 @@ namespace SpaceMercs.Dialogs {
                 Soldier? s = tp.Soldier;
                 IItem eq = tp.Item ?? throw new Exception("Found incomprehensible equipment in DGViewRow");
                 bool bEquipped = tp.Equipped;
-                if (s == null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
+                if (s is null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
                 else {
                     if (bEquipped) s.Unequip(eq as IEquippable);
                     s.DestroyItem(eq, bAll ? tp.Count : 1);
