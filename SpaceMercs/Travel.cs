@@ -105,15 +105,15 @@ namespace SpaceMercs {
             PlayerTeam = team;
             ParentView = parent;
 
-            aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectSingleNode("AOFrom").InnerText);
-            aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectSingleNode("AOTo").InnerText);
+            aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOFrom"));
+            aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOTo"));
 
-            fTravelTime = float.Parse(xml.SelectSingleNode("Time").InnerText);
-            fElapsed = float.Parse(xml.SelectSingleNode("Elapsed").InnerText);
-            fMissionElapsed = float.Parse(xml.SelectSingleNode("MissionElapsed").InnerText);
-            fSep = float.Parse(xml.SelectSingleNode("Sep").InnerText);
-            EncounterCount = int.Parse(xml.SelectSingleNode("EncounterCount").InnerText);
-            dtStart = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("Start").InnerText));
+            fTravelTime = float.Parse(xml.SelectNodeText("Time"));
+            fElapsed = float.Parse(xml.SelectNodeText("Elapsed"));
+            fMissionElapsed = float.Parse(xml.SelectNodeText("MissionElapsed"));
+            fSep = float.Parse(xml.SelectNodeText("Sep"));
+            EncounterCount = xml.SelectNodeInt("EncounterCount");
+            dtStart = DateTime.FromBinary(long.Parse(xml.SelectNodeText("Start")));
             bSurrendered = (xml.SelectSingleNode("Surrendered") != null);
 
             SetUp();

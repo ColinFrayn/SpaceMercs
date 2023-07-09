@@ -10,7 +10,7 @@ namespace SpaceMercs {
         protected string strName = "Unnamed";
         public string Name { get { return strName; } }
         public double radius; // In metres
-        public double orbit; // In metres
+        public double OrbitalDistance; // In metres
         public double OrbitalPeriod; // Period of orbit (seconds)
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
         public int Temperature { get; set; } // Kelvin
@@ -52,14 +52,14 @@ namespace SpaceMercs {
                 if (ao2.AOType == AstronomicalObjectType.Planet) pl2 = (Planet)ao2;
                 else pl2 = ((Moon)ao2).Parent;
                 if (pl1 == pl2) {
-                    if (ao1.AOType == AstronomicalObjectType.Moon) dist = ((Moon)ao1).orbit;
-                    if (ao2.AOType == AstronomicalObjectType.Moon) dist -= ((Moon)ao2).orbit;
+                    if (ao1.AOType == AstronomicalObjectType.Moon) dist = ((Moon)ao1).OrbitalDistance;
+                    if (ao2.AOType == AstronomicalObjectType.Moon) dist -= ((Moon)ao2).OrbitalDistance;
                     dist = Math.Abs(dist);
                 }
                 else {
-                    dist = Math.Abs(pl1.orbit - pl2.orbit);
-                    if (ao1.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao1).orbit;
-                    if (ao2.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao2).orbit;
+                    dist = Math.Abs(pl1.OrbitalDistance - pl2.OrbitalDistance);
+                    if (ao1.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao1).OrbitalDistance;
+                    if (ao2.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao2).OrbitalDistance;
                 }
             }
             else {
@@ -72,20 +72,16 @@ namespace SpaceMercs {
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
             ID = int.Parse(xml.Attributes?["ID"]!.InnerText!);
-            strName = xml.SelectSingleNode("Name")?.InnerText ?? "";
-            radius = double.Parse(xml.SelectSingleNode("Radius")!.InnerText);
-            if (xml.SelectSingleNode("Orbit") != null) orbit = double.Parse(xml.SelectSingleNode("Orbit")!.InnerText);
-            else orbit = 0;
-            OrbitalPeriod = Double.Parse(xml.SelectSingleNode("PRot")!.InnerText);
-            if (xml.SelectSingleNode("ARot") != null) {
-                AxialRotationPeriod = Double.Parse(xml.SelectSingleNode("ARot")!.InnerText);
-            }
-            else {
-                // Approximation, for backwards compatibility
-                AxialRotationPeriod = (Const.DayLength * (radius / Const.PlanetSize));
-            }
-            Temperature = int.Parse(xml.SelectSingleNode("Temp")!.InnerText);
-            Seed = int.Parse(xml.SelectSingleNode("Seed")!.InnerText);
+            strName = xml.SelectNodeText("Name");
+            radius = xml.SelectNodeDouble("Radius");
+
+            OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
+
+            OrbitalPeriod = xml.SelectNodeDouble("PRot");
+            // Default here is an approximation, for backwards compatibility with versions where I didn't save this
+            AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (radius / Const.PlanetSize));
+            Temperature = xml.SelectNodeInt("Temp");
+            Seed = xml.SelectNodeInt("Seed");
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
             Oy = rnd.Next(Const.SeedBuffer);
@@ -94,8 +90,8 @@ namespace SpaceMercs {
 
         // Save this planet to an Xml file
         protected void WriteAODetailsToFile(StreamWriter file) {
-            if (!String.IsNullOrEmpty(strName)) file.WriteLine("<Name>" + strName + "</Name>");
-            if (orbit != 0.0) file.WriteLine("<Orbit>" + Math.Round(orbit, 0).ToString() + "</Orbit>");
+            if (!string.IsNullOrEmpty(strName)) file.WriteLine("<Name>" + strName + "</Name>");
+            if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(radius, 0).ToString() + "</Radius>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
             file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");
@@ -164,6 +160,5 @@ namespace SpaceMercs {
             }
             throw new NotImplementedException();
         }
-
     }
 }

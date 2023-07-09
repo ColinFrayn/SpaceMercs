@@ -16,20 +16,15 @@ namespace SpaceMercs {
             Damage = 0.0;
             DamageType = WeaponType.DamageType.Physical;
             if (xml.SelectSingleNode("Damage") is not null) {
-                Damage = double.Parse(xml.SelectSingleNode("Damage")!.InnerText);
+                Damage = double.Parse(xml.SelectNodeText("Damage"));
                 DamageType = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xml.SelectSingleNode("Damage")!.Attributes!["Type"]?.Value ?? string.Empty);
             }
-            if (xml.SelectSingleNode("Duration") != null) {
-                Duration = int.Parse(xml.SelectSingleNode("Duration")!.InnerText);
-                if (Duration > 0 && String.IsNullOrEmpty(Name)) throw new Exception("If Effect duration > 0 then effect must have a name");
-            }
-            else Duration = 0;
+            Duration = xml.SelectNodeInt("Duration", 0);
+            if (Duration > 0 && string.IsNullOrEmpty(Name)) throw new Exception("If Effect duration > 0 then effect must have a name");
 
-            if (xml.SelectSingleNode("Sound") != null) SoundEffect = xml.SelectSingleNode("Sound")!.InnerText;
-            else SoundEffect = "";
-
-            if (xml.SelectSingleNode("SpeedMod") != null) SpeedMod = double.Parse(xml.SelectSingleNode("SpeedMod")!.InnerText);
-            else SpeedMod = 1.0;
+            SoundEffect = xml.SelectNodeText("Sound");
+            
+            SpeedMod = xml.SelectNodeDouble("SpeedMod", 1.0);
 
             StatMods = new Dictionary<StatType, int>();
             XmlNode? sm = xml.SelectSingleNode("StatMods");

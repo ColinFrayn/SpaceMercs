@@ -41,10 +41,10 @@ namespace SpaceMercs {
             // Done
         }
         public Sector(XmlNode xml, Map map) {
-            SectorX = int.Parse(xml.Attributes?["X"]?.Value ?? throw new Exception("Unable to find X pos in sector saved details"));
-            SectorY = int.Parse(xml.Attributes?["Y"]?.Value ?? throw new Exception("Unable to find Y pos in sector saved details"));
+            SectorX = int.Parse(xml.GetAttributeValue("X"));
+            SectorY = int.Parse(xml.GetAttributeValue("Y"));
             ParentMap = map;
-            Inhabitant = StaticData.GetRaceByName(xml.Attributes["Inhabitant"]?.Value);
+            Inhabitant = StaticData.GetRaceByName(xml.GetAttributeValue("Inhabitant"));
 
             foreach (XmlNode xmls in xml.ChildNodes) {
                 Star st = new Star(xmls, this);

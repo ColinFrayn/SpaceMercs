@@ -203,7 +203,7 @@ namespace SpaceMercs {
         }
         public Ship(XmlNode xml, Team? owner) {
             Owner = owner;
-            Name = xml.SelectSingleNode("Name").InnerText;
+            Name = xml.SelectNodeText("Name");
             if (xml.Attributes["Type"] is not null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
             else {
                 int seed = int.Parse(xml.Attributes["Seed"].Value);
@@ -211,8 +211,8 @@ namespace SpaceMercs {
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
             if (Type is null) throw new Exception($"Could not ID Ship Type : {xml.Attributes["Type"].Value}");
-            Hull = double.Parse(xml.SelectSingleNode("Hull").InnerText);
-            Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
+            Hull = xml.SelectNodeDouble("Hull");
+            Seed = xml.SelectNodeInt("Seed");
             Equipment.Clear();
 
             // Compatibility mode
@@ -236,14 +236,14 @@ namespace SpaceMercs {
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }
-            if (xml.SelectSingleNode("Armour") != null) {
-                string strArm = xml.SelectSingleNode("Armour")?.InnerText ?? throw new Exception("Couldn't find ShipArmour name");
+            string strArm = xml.SelectNodeText("Armour");
+            if (!string.IsNullOrEmpty(strArm)) {
                 ShipArmour? sa = StaticData.GetShipArmourByName(strArm);
                 ArmourType = sa ?? throw new Exception("Couldn't find ShipArmour type " + strArm);
             }
             else ArmourType = null;
             InitialiseForBattle();
-            Shield = double.Parse(xml.SelectSingleNode("Shield").InnerText); // Do this after InitialiseForBattle() because that method resets the shield
+            Shield = xml.SelectNodeDouble("Shield"); // Do this after InitialiseForBattle() because that method resets the shield
         }
         public static Ship Empty { get { return new Ship(); } }
 

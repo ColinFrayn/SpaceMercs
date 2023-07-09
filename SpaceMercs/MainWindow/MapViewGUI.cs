@@ -133,7 +133,7 @@ namespace SpaceMercs.MainWindow {
                 tl2 = pl.Type.ToString();
                 tl3 = "R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km";
                 tl4 = $"Temp = {pl.Temperature}K";
-                tl5 = "Orbit = " + Math.Round(pl.orbit / Const.AU, 2).ToString() + " AU";
+                tl5 = "Orbit = " + Math.Round(pl.OrbitalDistance / Const.AU, 2).ToString() + " AU";
                 //tl4 = "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm";
             }
             if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
@@ -142,7 +142,7 @@ namespace SpaceMercs.MainWindow {
                 tl2 = mn.Type.ToString();
                 tl3 = "R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km";
                 tl4 = $"Temp = {mn.Temperature}K";
-                tl5 = "Orbit = " + Math.Round(mn.orbit / Const.Million, 0).ToString() + " Mm";
+                tl5 = "Orbit = " + Math.Round(mn.OrbitalDistance / Const.Million, 0).ToString() + " Mm";
             }
 
             // Display the text details of the selected object

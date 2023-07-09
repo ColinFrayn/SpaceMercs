@@ -49,9 +49,7 @@ namespace SpaceMercs {
             if (ao is not HabitableAO hao) throw new Exception("Team Position was not HabitableAO!");
             CurrentPosition = hao;
 
-            XmlNode? xmlc = xml.SelectSingleNode("Cash");
-            if (xmlc is null) throw new Exception("Could not locate Team Cash node");
-            Cash = double.Parse(xmlc.InnerText);
+            Cash = xml.SelectNodeDouble("Cash");
 
             XmlNode? xmls = xml.SelectSingleNode("Soldiers");
             foreach (XmlNode xs in xmls.ChildNodes) {

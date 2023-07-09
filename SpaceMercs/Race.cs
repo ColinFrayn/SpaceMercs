@@ -25,17 +25,17 @@ namespace SpaceMercs {
         public int SystemCount { get { return Systems.Count; } }
 
         public Race(XmlNode xml) {
-            Name = xml.SelectSingleNode("Name").InnerText;
-            Scale = double.Parse(xml.SelectSingleNode("Scale").InnerText);
-            Intellect = int.Parse(xml.SelectSingleNode("Intellect").InnerText);
-            Strength = int.Parse(xml.SelectSingleNode("Strength").InnerText);
-            Toughness = int.Parse(xml.SelectSingleNode("Toughness").InnerText);
-            Agility = int.Parse(xml.SelectSingleNode("Agility").InnerText);
-            Endurance = int.Parse(xml.SelectSingleNode("Endurance").InnerText);
-            Description = xml.SelectSingleNode("Description").InnerText;
-            BaseTemp = int.Parse(xml.SelectSingleNode("BaseTemp").InnerText);
-            PlanetType = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("PlanetType").InnerText);
-            string strCol = xml.SelectSingleNode("Colour").InnerText;
+            Name = xml.SelectNodeText("Name");
+            Scale = xml.SelectNodeDouble("Scale");
+            Intellect = xml.SelectNodeInt("Intellect"); 
+            Strength = xml.SelectNodeInt("Strength");
+            Toughness = xml.SelectNodeInt("Toughness");
+            Agility = xml.SelectNodeInt("Agility");
+            Endurance = xml.SelectNodeInt("Endurance");
+            Description = xml.SelectNodeText("Description");
+            BaseTemp = xml.SelectNodeInt("BaseTemp");
+            PlanetType = xml.SelectNodeEnum<Planet.PlanetType>("PlanetType");
+            string strCol = xml.SelectNodeText("Colour");
             string[] bits = strCol.Split(',');
             Colour = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
             foreach (XmlNode xn in xml.SelectSingleNode("Names/Personal").ChildNodes) {
@@ -45,7 +45,7 @@ namespace SpaceMercs {
                 if (FirstNames.ContainsKey(gt)) throw new Exception("Duplicate gender key " + xn.Name + " for race names for " + Name + " race");
                 FirstNames.Add(gt, lNames);
             }
-            FamilyNames = xml.SelectSingleNode("Names/Family")?.InnerText?.Split(',')?.ToList<string>() ?? throw new Exception("No family names defined for race " + Name);
+            FamilyNames = xml.SelectNodeText("Names/Family").Split(',').ToList<string>();
             if (FamilyNames.Count == 0) throw new Exception("No family names defined for race " + Name);
             if (FirstNames.Keys.Count == 0) throw new Exception("No possible genders defined for race " + Name + ". Please add some names!");
             Reset();
@@ -59,11 +59,11 @@ namespace SpaceMercs {
             file.WriteLine("</Race>");
         }
         public void LoadAdditionalData(XmlNode xml, Map map) {
-            AstronomicalObject? aoHome = map.GetAOFromLocationString(xml.SelectSingleNode("HomePlanet").InnerText);
+            AstronomicalObject? aoHome = map.GetAOFromLocationString(xml.SelectNodeText("HomePlanet"));
             if (aoHome is null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = (Planet)aoHome;
-            Known = (xml.SelectSingleNode("Known") != null);
-            Relations = int.Parse(xml.SelectSingleNode("Relations").InnerText);
+            Known = (xml.SelectSingleNode("Known") is not null);
+            Relations = xml.SelectNodeInt("Relations");
         }
 
         public void SetHomePlanet(Planet pl) {

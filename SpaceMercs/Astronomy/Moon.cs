@@ -26,7 +26,7 @@ namespace SpaceMercs {
             // Load this moon from the given Xml node
             // Start with generic AO stuff
             LoadAODetailsFromFile(xml);
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type")?.InnerText ?? throw new Exception("Unable to find PlanetType in moon saved details"));
+            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
             colour = Const.PlanetTypeToCol2(Type);

@@ -53,13 +53,13 @@ namespace SpaceMercs {
         }
         public ShipType(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.Value ?? "<No Name>";
-            AKA = xml.SelectSingleNode("AKA")?.InnerText ?? "";
-            Cost = double.Parse(xml.SelectSingleNode("Cost").InnerText);
-            Small = int.Parse(xml.SelectSingleNode("Small").InnerText);
-            Medium = int.Parse(xml.SelectSingleNode("Medium").InnerText);
-            Large = int.Parse(xml.SelectSingleNode("Large").InnerText);
-            Weapon = int.Parse(xml.SelectSingleNode("Weapon").InnerText);
-            Description = xml.SelectSingleNode("Desc").InnerText;
+            AKA = xml.SelectNodeText("AKA");
+            Cost = xml.SelectNodeDouble("Cost");
+            Small = xml.SelectNodeInt("Small");
+            Medium = xml.SelectNodeInt("Medium");
+            Large = xml.SelectNodeInt("Large");
+            Weapon = xml.SelectNodeInt("Weapon");
+            Description = xml.SelectNodeText("Desc");
             Perimeter = new List<Point>();
             Fillers = new List<Point>();
             SetupLayout();

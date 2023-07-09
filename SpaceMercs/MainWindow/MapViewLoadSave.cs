@@ -40,7 +40,7 @@ namespace SpaceMercs.MainWindow {
             else bShowColonies = false;
 
             // Load in the clock
-            DateTime newTime = DateTime.Parse(xml.SelectSingleNode("Clock").InnerText);
+            DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));
             Const.dtTime = newTime;
 
             // Load in Map data

@@ -23,13 +23,13 @@ namespace SpaceMercs {
 
         public CreatureGroup(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.InnerText ?? throw new Exception("Missing Name for creature group");
-            Filename = xml.SelectSingleNode("Filename")?.InnerText ?? throw new Exception("Missing Filename for creature group");
-            string strLocation = xml.SelectSingleNode("Locations")?.InnerText ?? throw new Exception("Missing Locations for creature group");
+            Filename = xml.SelectNodeText("Filename");
+            string strLocation = xml.SelectNodeText("Locations");
             HashSet<string> Locs = new HashSet<string>(strLocation.Split(',').ToList());
             FoundIn = new HashSet<Planet.PlanetType>();
             FoundInShips = Locs.Contains("Ship");
             FoundInCaves = Locs.Contains("Cave");
-            RaceSpecific = (xml.SelectSingleNode("Racial") != null);
+            RaceSpecific = (xml.SelectSingleNode("Racial") is not null);
             if (RaceSpecific) {
                 string strMaxRel = xml.SelectSingleNode("Racial")?.Attributes?["MaxRelations"]?.Value ?? string.Empty;
                 if (!string.IsNullOrEmpty(strMaxRel)) MaxRelations = int.Parse(strMaxRel);

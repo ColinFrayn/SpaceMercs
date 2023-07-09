@@ -334,32 +334,26 @@ namespace SpaceMercs {
             XmlNode? xmll = xml.SelectSingleNode("Location") ?? throw new Exception("Could not ID Location for Creature : " + strName);
             X = int.Parse(xmll.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Creature X-Coord with Name = {strName}"));
             Y = int.Parse(xmll.Attributes!["Y"]?.Value ?? throw new Exception($"Could not identify Creature Y-Coord with Name = {strName}"));
-            Level = int.Parse(xml.SelectSingleNode("Level")?.InnerText ?? string.Empty);
-            string strFacing = xml.SelectSingleNode("Facing")?.InnerText ?? string.Empty;
+            Level = xml.SelectNodeInt("Level");
+            string strFacing = xml.SelectNodeText("Facing");
             if (double.TryParse(strFacing, out double fac)) {
                 Facing = fac;
             }
             else {
                 SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), strFacing));
             }
-            string strHealth = xml.SelectSingleNode("Health")?.InnerText ?? string.Empty;
-            if (!string.IsNullOrEmpty(strHealth)) Health = double.Parse(strHealth);
-            else Health = MaxHealth;
-            string strStamina = xml.SelectSingleNode("Stamina")?.InnerText ?? string.Empty;
-            if (!string.IsNullOrEmpty(strStamina)) Stamina = double.Parse(strStamina);
-            else Stamina = MaxStamina;
-            string strShields = xml.SelectSingleNode("Shields")?.InnerText ?? string.Empty;
-            if (!string.IsNullOrEmpty(strShields)) Shields = double.Parse(strShields);
-            else Shields = MaxShields;
+            Health = xml.SelectNodeDouble("Health", MaxHealth);
+            Stamina = xml.SelectNodeDouble("Stamina", MaxHealth);
+            Shields = xml.SelectNodeDouble("Shields", MaxHealth);
 
-            string strOverride = xml.SelectSingleNode("OverrideRace")?.InnerText ?? string.Empty;
+            string strOverride = xml.SelectNodeText("OverrideRace");
             if (!string.IsNullOrEmpty(strOverride)) OverrideRace = StaticData.GetRaceByName(strOverride);
 
-            IsAlert = (xml.SelectSingleNode("Alert") != null);
-            QuestItem = (xml.SelectSingleNode("QuestItem") != null);
+            IsAlert = (xml.SelectSingleNode("Alert") is not null);
+            QuestItem = (xml.SelectSingleNode("QuestItem") is not null);
 
             // Load equipped weapon
-            string strWeapon = xml.SelectSingleNode("Weapon")?.InnerText ?? string.Empty;
+            string strWeapon = xml.SelectNodeText("Weapon");
             if (!string.IsNullOrEmpty(strWeapon)) {
                 WeaponType tp = StaticData.GetWeaponTypeByName(strWeapon) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
                 EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);

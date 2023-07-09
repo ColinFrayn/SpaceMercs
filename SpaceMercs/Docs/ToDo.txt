@@ -12,6 +12,7 @@ MapViewMission
 
 Display star labels & flags on map
 
+Descended to next level - random bit of map was visible (shaded) that shouldn't have been
 
 ==========================================================================================================
 

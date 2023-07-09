@@ -117,8 +117,8 @@ namespace SpaceMercs {
             int h = int.Parse(xml.Attributes!["Height"]?.Value ?? throw new Exception("MissionLevel has no Height"));
             Width = w;
             Height = h;
-            Diff = int.Parse(xml.SelectSingleNode("Diff")?.InnerText ?? throw new Exception("MissionLevel has no Diff"));
-            LevelID = int.Parse(xml.SelectSingleNode("Level")?.InnerText ?? throw new Exception("MissionLevel has no LevelID"));
+            Diff = xml.SelectNodeInt("Diff");
+            LevelID = xml.SelectNodeInt("Level");
             Map = new TileType[w, h];
             Explored = new bool[w, h];
             Visible = new bool[w, h];

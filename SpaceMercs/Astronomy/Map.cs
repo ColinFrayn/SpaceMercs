@@ -24,7 +24,7 @@ namespace SpaceMercs {
 
             dSectors.Clear();
             foreach (XmlNode xmls in xml.SelectNodesToList("Sector")) {
-                Sector sect = new Sector(xml, this);
+                Sector sect = new Sector(xmls, this);
                 dSectors.Add(new Tuple<int, int>(sect.SectorX, sect.SectorY), sect);
             }
             if (!dSectors.Any()) throw new Exception("Could not locate sector nodes in save file");

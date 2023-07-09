@@ -63,15 +63,14 @@ namespace SpaceMercs {
             Sector = sect;
             LoadAODetailsFromFile(xml);
 
-            XmlNode xmln = xml.SelectSingleNode("Mass") ?? throw new Exception($"Could not locate Mass for Star with ID = {ID}");
-            Mass = double.Parse(xmln.InnerText);
+            Mass = xml.SelectNodeDouble("Mass");
 
             XmlNode xmlpos = xml.SelectSingleNode("MapPos") ?? throw new Exception($"Could not locate MapPos for Star with ID = {ID}");
             float X = float.Parse(xmlpos.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Star X-Coord with ID = {ID}"));
             float Y = float.Parse(xmlpos.Attributes!["Y"]?.Value ?? throw new Exception($"Could not identify Star Y-Coord with ID = {ID}"));
             MapPos = new Vector3(X, Y, 0f);
 
-            Visited = (xml.SelectSingleNode("Visited") != null);
+            Visited = (xml.SelectSingleNode("Visited") is not null);
 
             XmlNode? xmlown = xml.SelectSingleNode("Owner");
             Owner = null;
@@ -88,7 +87,7 @@ namespace SpaceMercs {
                     aotr = sect.GetAOFromLocationString(xmlt.InnerText);
                 }
                 if (aotr is not null) { // If the target system has been created, then create the trade routes. If it hasn't, then when we load the target system, it will set the route up from there.
-                    if (aotr.AOType != AstronomicalObjectType.Star) throw new Exception("Illegal TradeRoute destination (was " + aotr.AOType + " ) at " + xmlt.InnerText);
+                    if (aotr.AOType != AstronomicalObjectType.Star) throw new Exception($"Illegal TradeRoute destination (was {aotr.AOType}) at {xmlt.InnerText}");
                     Star sttr = (Star)aotr;
                     TradeRoutes.Add(sttr);
                     sttr.TradeRoutes.Add(this);
@@ -328,7 +327,7 @@ namespace SpaceMercs {
                 do {
                     porbit *= Utils.NextGaussian(rnd, Const.PlanetOrbitFactor, Const.PlanetOrbitFactorSigma);
                 } while (rnd.Next(npl + 2) == 0);
-                pl.orbit = porbit + (radius * 2.0);
+                pl.OrbitalDistance = porbit + (radius * 2.0);
 
                 // Work out planet type
                 bool bOK = true;
@@ -374,7 +373,7 @@ namespace SpaceMercs {
 
                 // Orbital period
                 double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
-                prot /= ((pl.orbit / Const.AU) * Math.Pow(pl.radius / (6.0 * Const.Million), 0.5));
+                prot /= ((pl.OrbitalDistance / Const.AU) * Math.Pow(pl.radius / (6.0 * Const.Million), 0.5));
                 pl.OrbitalPeriod = (int)prot;
 
                 // Axial rotation period (i.e. a day length)

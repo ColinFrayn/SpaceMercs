@@ -30,26 +30,26 @@ namespace SpaceMercs {
         }
         public ShipEquipment(XmlNode xml, RoomSize sz = RoomSize.Small) {
             Name = xml.Attributes["Name"].InnerText;
-            Cost = double.Parse(xml.SelectSingleNode("Cost").InnerText);
-            Description = xml.SelectSingleNode("Desc").InnerText;
-            string strTex = xml.SelectSingleNode("Tex").InnerText;
+            Cost = xml.SelectNodeDouble("Cost");
+            Description = xml.SelectNodeText("Desc");
+            string strTex = xml.SelectNodeText("Tex");
             string[] TexBits = strTex.Split(',');
             TextureX = int.Parse(TexBits[0]) - 1;
             TextureY = int.Parse(TexBits[1]) - 1;
 
             // Optional stuff
             if (xml.SelectSingleNode("Size") != null) {
-                string strSize = xml.SelectSingleNode("Size").InnerText;
+                string strSize = xml.SelectNodeText("Size");
                 Size = ParseRoomSize(strSize);
             }
             else Size = sz;
-            if (xml.SelectSingleNode("Generate") != null) Generate = int.Parse(xml.SelectSingleNode("Generate").InnerText);
-            if (xml.SelectSingleNode("Defence") != null) Defence = int.Parse(xml.SelectSingleNode("Defence").InnerText);
-            if (xml.SelectSingleNode("Power") != null) Power = int.Parse(xml.SelectSingleNode("Power").InnerText);
-            if (xml.SelectSingleNode("Attack") != null) Attack = int.Parse(xml.SelectSingleNode("Attack").InnerText);
-            if (xml.SelectSingleNode("Shield") != null) Shield = int.Parse(xml.SelectSingleNode("Shield").InnerText);
+            Generate = xml.SelectNodeInt("Generate", 0);
+            Defence = xml.SelectNodeInt("Defence", 0);
+            Power = xml.SelectNodeInt("Power", 0);
+            Attack = xml.SelectNodeInt("Attack", 0);
+            Shield = xml.SelectNodeInt("Shield", 0);
             Scanner = (xml.SelectSingleNode("Scanner") != null);
-            if (xml.SelectSingleNode("Capacity") != null) Capacity = int.Parse(xml.SelectSingleNode("Capacity").InnerText);
+            Capacity = xml.SelectNodeInt("Capacity", 0);
             Medlab = (xml.SelectSingleNode("Medlab") != null);
             Armoury = (xml.SelectSingleNode("Armoury") != null);
             Workshop = (xml.SelectSingleNode("Workshop") != null);
@@ -59,7 +59,7 @@ namespace SpaceMercs {
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.
             if (xml.SelectSingleNode("Avail") != null) {
-                string strAvail = xml.SelectSingleNode("Avail").InnerText;
+                string strAvail = xml.SelectNodeText("Avail");
                 Available = Colony.BaseType.None;
                 if (strAvail.Contains("C")) Available |= Colony.BaseType.Colony;
                 if (strAvail.Contains("E")) Available |= Colony.BaseType.Metropolis;
@@ -72,9 +72,9 @@ namespace SpaceMercs {
 
             // Load the race that this equipment is restricted to (default null), or otherwise fail
             if (xml.SelectSingleNode("Race") != null) {
-                RequiredRace = StaticData.GetRaceByName(xml.SelectSingleNode("Race").InnerText);
+                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
                 if (RequiredRace == null) {
-                    throw new Exception("Could not find restricted race \"" + xml.SelectSingleNode("Race").InnerText + "\" for equipment " + Name);
+                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
                 }
             }
         }

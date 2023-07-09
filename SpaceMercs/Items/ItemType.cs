@@ -29,31 +29,20 @@ namespace SpaceMercs {
         public ItemType(XmlNode xml) {
             Name = xml.Attributes?["Name"]?.InnerText ?? throw new Exception("ItemType has no name!");
 
-            string strCost = xml.SelectSingleNode("Cost")?.InnerText ?? string.Empty;
-            if (!string.IsNullOrEmpty(strCost)) {
-                Cost = double.Parse(strCost);
-            }
-            else Cost = 0.0;
+            Cost = xml.SelectNodeDouble("Cost", 0.0);
 
-            string strRarity = xml.SelectSingleNode("Rarity")?.InnerText ?? string.Empty;
-            if (!string.IsNullOrEmpty(strRarity)) {
-                BaseRarity = int.Parse(strRarity);
-                Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
-            }
-            else Rarity = 0.0;
+            BaseRarity = xml.SelectNodeInt("Rarity");
+            Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
 
-            if (xml.SelectSingleNode("Mass") != null) Mass = double.Parse(xml.SelectSingleNode("Mass").InnerText);
-            else Mass = 0.0;
+            Mass = xml.SelectNodeDouble ("Mass", 0.0);
 
-            if (xml.SelectSingleNode("Desc") != null) Desc = xml.SelectSingleNode("Desc").InnerText;
-            else Desc = "";
-            Desc.Trim();
+            Desc = xml.SelectNodeText("Desc").Trim();
 
             Materials = new Dictionary<MaterialType, int>();
-            if (xml.SelectSingleNode("Materials") != null) {
+            if (xml.SelectSingleNode("Materials") is not null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("Materials/Material")) {
-                    string strMat = xn.Attributes["Name"].Value;
-                    int iVal = int.Parse(xn.Attributes["Amount"].Value);
+                    string strMat = xn.GetAttributeValue("Name");
+                    int iVal = int.Parse(xn.GetAttributeValue("Amount"));
                     MaterialType? m = StaticData.GetMaterialTypeByName(strMat);
                     if (m is null) throw new Exception("Could not identify material " + strMat + " required for item " + Name);
                     if (Materials.ContainsKey(m)) throw new Exception("Duplicate material in item description : " + Name);
@@ -76,19 +65,16 @@ namespace SpaceMercs {
             }
 
             // Source (where can it be made?)
-            XmlNode? xs = xml.SelectSingleNode("Source");
-            if (xs is not null) {
-                Source = (ItemSource)Enum.Parse(typeof(ItemSource), xs.InnerText);
-            }
-            else Source = ItemSource.None;
+            Source = xml.SelectNodeEnum<ItemSource>("Source", ItemSource.None);
 
             // Texture coords (optional)
             TextureX = TextureY = -1;
-            if (xml.SelectSingleNode("Tex") != null) {
-                string strTex = xml.SelectSingleNode("Tex").InnerText;
-                string[] TexBits = strTex.Split(',');
-                TextureX = int.Parse(TexBits[0]) - 1;
-                TextureY = int.Parse(TexBits[1]) - 1;
+            string strTex = xml.SelectNodeText("Tex");
+            if (!string.IsNullOrEmpty(strTex)) {                
+                string[] texBits = strTex.Split(',');
+                if (texBits.Length != 2) throw new Exception($"Illegal Tex string : {strTex}");
+                TextureX = int.Parse(texBits[0]) - 1;
+                TextureY = int.Parse(texBits[1]) - 1;
             }
 
             // Update ItemID

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SpaceMercs {
-  class ShipArmour : ShipEquipment {
-    public int BaseArmour { get; private set; } // %age damage reduction
-    public double HealRate { get; private set; }
+    class ShipArmour : ShipEquipment {
+        public int BaseArmour { get; private set; } // %age damage reduction
+        public double HealRate { get; private set; }
 
-    public ShipArmour(XmlNode xml) : base(xml, ShipEquipment.RoomSize.Armour) {
-      BaseArmour = int.Parse(xml.SelectSingleNode("BaseArmour").InnerText);
-      if (xml.SelectSingleNode("Heal") != null) HealRate = double.Parse(xml.SelectSingleNode("Heal").InnerText);
+        public ShipArmour(XmlNode xml) : base(xml, ShipEquipment.RoomSize.Armour) {
+            BaseArmour = xml.SelectNodeInt("BaseArmour");
+            HealRate = xml.SelectNodeDouble("Heal", 0.0);
+        }
     }
-  }
-
 }

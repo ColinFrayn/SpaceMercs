@@ -121,7 +121,7 @@ namespace SpaceMercs {
         }
         public Mission(XmlNode xml, HabitableAO loc) {
             Location = loc;
-            Type = (MissionType)Enum.Parse(typeof(MissionType), xml.SelectSingleNode("Type").InnerText);
+            Type = (MissionType)Enum.Parse(typeof(MissionType), xml.SelectNodeText("Type"));
 
             XmlNode? sn = xml.SelectSingleNode("Ship");
             if (sn is not null) {
@@ -140,31 +140,24 @@ namespace SpaceMercs {
             }
             else MItem = null;
 
-            string? strOpp = xml.SelectSingleNode("Opponent")?.InnerText;
+            string? strOpp = xml.SelectNodeText("Opponent");
             if (!string.IsNullOrEmpty(strOpp)) {
                 RacialOpponent = StaticData.GetRaceByName(strOpp) ?? throw new Exception("Could not ID RacialOpponent : " + strOpp);
             }
 
-            string? strEn = xml.SelectSingleNode("Enemy")?.InnerText;
+            string? strEn = xml.SelectNodeText("Enemy");
             if (!string.IsNullOrEmpty(strEn)) {
                 PrimaryEnemy = StaticData.GetCreatureGroupByName(strEn) ?? throw new Exception("Could not ID PrimaryEnemy : " + strEn);
             }
 
-            TimeCost = float.Parse(xml.SelectSingleNode("TimeCost").InnerText);
-            Reward = double.Parse(xml.SelectSingleNode("Reward").InnerText);
-            Diff = int.Parse(xml.SelectSingleNode("Diff").InnerText);
-            LevelCount = int.Parse(xml.SelectSingleNode("LevelCount").InnerText);
-            CurrentLevel = int.Parse(xml.SelectSingleNode("CurrentLevel").InnerText);
+            TimeCost = float.Parse(xml.SelectNodeText("TimeCost"));
+            Reward = xml.SelectNodeDouble("Reward");
+            Diff = xml.SelectNodeInt("Diff");
+            LevelCount = xml.SelectNodeInt("LevelCount");
+            CurrentLevel = xml.SelectNodeInt("CurrentLevel");
 
-            if (xml.SelectSingleNode("Seed") != null) {
-                Seed = int.Parse(xml.SelectSingleNode("Seed").InnerText);
-            }
-            else Seed = 0;
-
-            if (xml.SelectSingleNode("Size") != null) {
-                Size = int.Parse(xml.SelectSingleNode("Size").InnerText);
-            }
-            else Size = 1;
+            Seed = xml.SelectNodeInt("Seed", 0);
+            Seed = xml.SelectNodeInt("Size", 1);
 
             foreach (XmlNode xl in xml.SelectNodesToList("Level")) {
                 int id = int.Parse(xl.Attributes["ID"].Value);

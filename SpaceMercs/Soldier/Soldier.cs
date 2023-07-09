@@ -501,11 +501,11 @@ namespace SpaceMercs {
                 Y = int.Parse(xmll.Attributes["Y"].Value);
             }
             else X = Y = 0;
-            Level = int.Parse(xml.SelectSingleNode("Level").InnerText);
-            Gender = (GenderType)Enum.Parse(typeof(GenderType), xml.SelectSingleNode("Gender").InnerText);
+            Level = xml.SelectNodeInt("Level");
+            Gender = xml.SelectNodeEnum<GenderType>("Gender");
             string raceName = xml.SelectSingleNode("Race")?.InnerText ?? "";
             Race = StaticData.GetRaceByName(raceName) ?? throw new Exception($"Unrecognised Race in Soldier data : {raceName}");
-            if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectSingleNode("Race").InnerText);
+            if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectNodeText("Race"));
             XmlNode? xmls = xml.SelectSingleNode("Stats");
             string[] stats = xmls.InnerText.Split(',');
             if (stats.Length != 5) throw new Exception("Could not understand stats string for Soldier " + Name + " : " + xmls.InnerText);
@@ -514,25 +514,23 @@ namespace SpaceMercs {
             BaseIntellect = int.Parse(stats[2]);
             BaseToughness = int.Parse(stats[3]);
             BaseEndurance = int.Parse(stats[4]);
-            Experience = int.Parse(xml.SelectSingleNode("XP").InnerText);
-            if (xml.SelectSingleNode("Health") != null) Health = Double.Parse(xml.SelectSingleNode("Health").InnerText);
-            else Health = MaxHealth;
-            if (xml.SelectSingleNode("Stamina") != null) Stamina = Double.Parse(xml.SelectSingleNode("Stamina").InnerText);
-            else Stamina = MaxStamina;
-            if (xml.SelectSingleNode("Shields") != null) Shields = Double.Parse(xml.SelectSingleNode("Shields").InnerText);
-            else Shields = MaxShields;
+            Experience = xml.SelectNodeInt("XP");
+            Health = xml.SelectNodeDouble("Health", MaxHealth);
+            Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
+            Shields = xml.SelectNodeDouble("Health", MaxHealth);
+            // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {
-                if (double.TryParse(xml.SelectSingleNode("Facing").InnerText, out double fac)) {
+                if (double.TryParse(xml.SelectNodeText("Facing"), out double fac)) {
                     Facing = fac;
                 }
                 else {
-                    SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), xml.SelectSingleNode("Facing").InnerText));
+                    SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), xml.SelectNodeText("Facing")));
                 }
             }
             else Facing = 90.0;
 
             if (xml.SelectSingleNode("Colour") != null) {
-                PrimaryColor = ColorTranslator.FromHtml(xml.SelectSingleNode("Colour").InnerText);
+                PrimaryColor = ColorTranslator.FromHtml(xml.SelectNodeText("Colour"));
             }
             else PrimaryColor = Color.Blue;
 

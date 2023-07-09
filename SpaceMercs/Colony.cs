@@ -72,18 +72,20 @@ namespace SpaceMercs {
         }
         public Colony(XmlNode xml, HabitableAO loc) {
             Location = loc;
-            string? raceName = xml.SelectSingleNode("Owner")?.InnerText;
-            Race? owner = StaticData.GetRaceByName(raceName);
-            if (owner == null) throw new Exception("Could not ID colony owning race : " + raceName);
-            Owner = owner;
+            string raceName = xml.SelectNodeText("Owner");
+            Owner = StaticData.GetRaceByName(raceName) ?? throw new Exception("Could not ID colony owning race : " + raceName);
             Owner.AddColony(this);
-            string? baseType = xml.SelectSingleNode("BaseType")?.InnerText;
+            string baseType = xml.SelectNodeText("BaseType");
             if (!string.IsNullOrEmpty(baseType)) Base = (BaseType)Enum.Parse(typeof(BaseType), baseType);
             Base |= BaseType.Outpost; // All colonies have it
-            dtLastUpdate = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastUpdate")!.InnerText));
-            if (xml.SelectSingleNode("LastGrowth") != null) dtLastGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("LastGrowth")!.InnerText));
+            dtLastUpdate = DateTime.FromBinary(long.Parse(xml.SelectNodeText("LastUpdate")));
+
+            string strLastGrowth = xml.SelectNodeText("LastGrowth");
+            if (!string.IsNullOrEmpty(strLastGrowth)) dtLastGrowth = DateTime.FromBinary(long.Parse(strLastGrowth));
             else dtLastGrowth = Const.dtStart;
-            if (xml.SelectSingleNode("NextGrowth") != null) dtNextGrowth = DateTime.FromBinary(long.Parse(xml.SelectSingleNode("NextGrowth")!.InnerText));
+
+            string strNextGrowth = xml.SelectNodeText("NextGrowth");
+            if (!string.IsNullOrEmpty(strNextGrowth)) dtNextGrowth = DateTime.FromBinary(long.Parse(strNextGrowth));
             else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
 

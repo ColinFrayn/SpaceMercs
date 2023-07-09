@@ -5,6 +5,8 @@ using OpenTK.Mathematics;
 using System.Drawing;
 using System.Linq;
 using System.Diagnostics;
+using static SpaceMercs.ItemType;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpaceMercs {
     static class Utils {
@@ -464,15 +466,69 @@ namespace SpaceMercs {
             return (double)(scale * Math.Round((decimal)d / scale, digits));
         }
 
-        public static IEnumerable<XmlNode> SelectNodesToList(this XmlNode root, string name) {
+        // Xml parsing utility functions
+
+        public static IEnumerable<XmlNode> SelectNodesToList(this XmlNode root, string path) {
             List<XmlNode> nodes = new List<XmlNode>();
-            if (string.IsNullOrEmpty(name)) return nodes;
-            XmlNodeList? nodeList = root.SelectNodes(name);
-            if (nodeList is null) return nodes;            
+            if (string.IsNullOrEmpty(path) || root is null) return nodes;
+            XmlNodeList? nodeList = root.SelectNodes(path);
+            if (nodeList is null) return nodes;
             foreach (XmlNode node in nodeList) {
                 nodes.Add(node);
             }
             return nodes;
+        }
+
+        public static string SelectNodeText(this XmlNode root, string path) {
+            if (string.IsNullOrEmpty(path) || root is null) return string.Empty;
+            return root.SelectSingleNode(path)?.InnerText ?? string.Empty;
+        }
+
+        public static double SelectNodeDouble(this XmlNode root, string path, double? defaultValue = null) {
+            if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? throw new Exception($"Could not find double data for path {path}");
+            string? strText = root.SelectSingleNode(path)?.InnerText;
+            if (string.IsNullOrEmpty(strText)) return defaultValue ?? throw new Exception($"Found empty double data for path {path}");
+            if (!double.TryParse(strText, out double dVal)) {
+                throw new Exception($"Could not parse double data for path {path} : {strText}");
+            }
+            return dVal;
+        }
+
+        public static int SelectNodeInt(this XmlNode root, string path, int? defaultValue = null) {
+            if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? throw new Exception($"Could not find int data for path {path}");
+            string? strText = root.SelectSingleNode(path)?.InnerText;
+            if (string.IsNullOrEmpty(strText)) return defaultValue ?? throw new Exception($"Found empty int data for path {path}");
+            if (!int.TryParse(strText, out int iVal)) {
+                throw new Exception($"Could not parse int data for path {path} : {strText}");
+            }
+            return iVal;
+        }
+
+        public static EnumType SelectNodeEnum<EnumType>(this XmlNode root, string path, EnumType defaultValue) {
+            if (string.IsNullOrEmpty(path) || root is null) return defaultValue;
+            string? strText = root.SelectSingleNode(path)?.InnerText;
+            if (string.IsNullOrEmpty(strText)) return defaultValue;
+            return InterpretEnum<EnumType>(strText);
+        }
+        public static EnumType SelectNodeEnum<EnumType>(this XmlNode root, string path) {
+            if (string.IsNullOrEmpty(path) || root is null) throw new Exception($"Path not found : {path}");
+            string? strText = root.SelectSingleNode(path)?.InnerText;
+            if (string.IsNullOrEmpty(strText)) throw new Exception($"Path was empty : {path}");
+            return InterpretEnum<EnumType>(strText);
+        }
+        private static EnumType InterpretEnum<EnumType>(string strText) {
+            if (!Enum.TryParse(typeof(EnumType), strText, out object? oVal)) {
+                throw new Exception($"Could not parse string {strText} to enum of type {typeof(EnumType).FullName}");
+            }
+            if (oVal is null) throw new Exception($"Enum string {strText} converted to a null object");
+            if (oVal is not EnumType eVal) throw new Exception($"Could not convert enum {oVal} to enum of type {typeof(EnumType).FullName}");
+            return eVal;
+
+        }
+
+        public static string GetAttributeValue(this XmlNode root, string attributeName) {
+            if (string.IsNullOrEmpty(attributeName) || root is null) return string.Empty;
+            return root.Attributes?[attributeName]?.Value ?? string.Empty;
         }
     }
 }

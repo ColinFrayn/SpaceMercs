@@ -161,7 +161,7 @@ namespace SpaceMercs {
             }
             return null;
         }
-        public static Race? GetRaceByName(string? strName) {
+        public static Race? GetRaceByName(string strName) {
             foreach (Race rc in Races) {
                 if (rc.Name.Equals(strName)) return rc;
             }

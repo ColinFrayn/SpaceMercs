@@ -23,9 +23,9 @@ namespace SpaceMercs.Dialogs {
             lbItems.ValueMember = "Eq";
             bHasItems = false;
             foreach (KeyValuePair<IItem, int> kvp in ThisSoldier.InventoryRO) {
-                if (!(kvp.Key is IEquippable eq)) continue;
-                ItemEffect ie = eq.BaseType.ItemEffect;
-                if (ie != null) {
+                if (kvp.Key is not IEquippable eq) continue;
+                ItemEffect? ie = eq.BaseType.ItemEffect;
+                if (ie is not null) {
                     if (ie.AssociatedSkill == Soldier.UtilitySkill.Unspent || !ie.SkillRequired || ThisSoldier.GetUtilityLevel(ie.AssociatedSkill) > 0) {
                         string strReuse = "";
                         if (eq is Equipment eqi && eqi.BaseType.ItemEffect != null) {

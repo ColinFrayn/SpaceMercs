@@ -42,8 +42,8 @@ namespace SpaceMercs {
             if (xmlc != null) SetColony(new Colony(xmlc, this));
 
             // Load planet-specific stuff
-            tempbase = double.Parse(xml.SelectSingleNode("TempBase")?.InnerText ?? throw new Exception("Unable to find TempBase in planet saved details"));
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectSingleNode("Type")?.InnerText ?? throw new Exception("Unable to find PlanetType in planet saved details"));
+            tempbase = double.Parse(xml.SelectNodeText("TempBase"));
+            Type = xml.SelectNodeEnum<Planet.PlanetType>("Type");
 
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
@@ -179,8 +179,8 @@ namespace SpaceMercs {
                     mn.radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
                 } while (mn.radius < Const.MoonRadiusMin);
 
-                mn.orbit = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(n + 1), Const.MoonOrbitSigma);
-                mn.orbit += radius;
+                mn.OrbitalDistance = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(n + 1), Const.MoonOrbitSigma);
+                mn.OrbitalDistance += radius;
                 bool bOK = true;
                 do {
                     mn.Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees
@@ -211,7 +211,7 @@ namespace SpaceMercs {
 
                 // Orbital period
                 double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
-                prot /= ((mn.orbit / Const.AU) * Math.Pow(mn.radius / (6.0 * Const.Million), 0.5));
+                prot /= ((mn.OrbitalDistance / Const.AU) * Math.Pow(mn.radius / (6.0 * Const.Million), 0.5));
                 mn.OrbitalPeriod = (int)prot;
 
                 // Axial rotation
