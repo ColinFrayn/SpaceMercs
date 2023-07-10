@@ -10,7 +10,6 @@ namespace SpaceMercs.MainWindow {
         private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
         private GUIPanel gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
-        private AstronomicalObject lastAOHover = null;
 
         #region Menu Codes
         // GUIPanel for main menu
@@ -214,7 +213,6 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
-            lastAOHover = aoHover;
             return strHoverText;
         }
 
@@ -487,7 +485,7 @@ namespace SpaceMercs.MainWindow {
             }
             if (bCanScanHere) {
                 gbScan.Activate();
-                if (!PlayerTeam.CurrentPosition.Scanned) gbScan.UpdateText("Scan");
+                if (!(PlayerTeam.CurrentPosition?.Scanned ?? false)) gbScan.UpdateText("Scan");
                 else gbScan.UpdateText("Missions");
             }
             else gbScan.Deactivate();

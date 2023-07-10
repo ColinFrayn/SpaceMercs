@@ -4,7 +4,7 @@ namespace SpaceMercs.Dialogs {
     partial class TeamView : Form {
         private readonly Team PlayerTeam;
         private readonly ToolTip ttSoldier = new ToolTip();
-        private InventoryView ivForm = null;
+        private InventoryView? ivForm = null;
 
         public TeamView(Team t) {
             PlayerTeam = t;

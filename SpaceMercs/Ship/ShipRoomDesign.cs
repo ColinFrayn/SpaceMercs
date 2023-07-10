@@ -27,8 +27,8 @@ namespace SpaceMercs {
     public ShipRoomDesign(XmlNode xml) {
       XPos = xml.GetAttributeInt("X");
       YPos = xml.GetAttributeInt("Y");
-      Size = (ShipEquipment.RoomSize)Enum.Parse(typeof(ShipEquipment.RoomSize), xml.Attributes["Size"].Value);
-      Rotated = (xml.Attributes["Rotated"] != null);
+      Size = (ShipEquipment.RoomSize)Enum.Parse(typeof(ShipEquipment.RoomSize), xml.GetAttributeText("Size"));
+      Rotated = (xml.Attributes?["Rotated"] != null);
     }
 
     // Save this ShipRoom to an Xml file

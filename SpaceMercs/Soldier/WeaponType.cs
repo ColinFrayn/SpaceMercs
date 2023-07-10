@@ -17,24 +17,19 @@ namespace SpaceMercs {
         public bool Stable { get; private set; }  // This weapon requires stability i.e. you can't move in the same turn before firing
 
         public WeaponType(XmlNode xml) : base(xml) {
-            Range = xml.SelectNodeDouble("Range");
+            XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
+            Range = double.Parse(nRange.InnerText);
             Speed = xml.SelectNodeDouble("Speed");
             SoundEffect = xml.SelectNodeText("Sound");
-            if (xml.SelectSingleNode("Range").Attributes["Accuracy"] != null) Accuracy = double.Parse(xml.SelectSingleNode("Range").Attributes["Accuracy"].Value);
-            else Accuracy = 0.0;
-            if (xml.SelectSingleNode("Range").Attributes["DropOff"] != null) DropOff = double.Parse(xml.SelectSingleNode("Range").Attributes["DropOff"].Value);
-            else DropOff = 0.0;
+            Accuracy = nRange.GetAttributeDouble("Accuracy", 0.0);
+            DropOff = nRange.GetAttributeDouble("DropOff", 0.0);
             Area = xml.GetAttributeDouble("Damage/Area", 0.0);
             string strDam = xml.SelectNodeText("Damage");
             string[] bits = strDam.Split('+');
             if (bits.Length != 2) throw new Exception("Could not parse damage string : " + strDam);
             DBase = double.Parse(bits[0]);
             DMod = double.Parse(bits[1]);
-            if (xml.SelectSingleNode("HealingRate") != null) {
-                throw new Exception("healing rate not used for Weapons!");
-            }
-            if (xml.SelectSingleNode("Type") != null) DType = (DamageType)Enum.Parse(typeof(DamageType), xml.SelectNodeText("Type"));
-            else DType = DamageType.Physical;
+            DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
         }

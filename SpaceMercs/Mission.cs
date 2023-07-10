@@ -86,7 +86,6 @@ namespace SpaceMercs {
         private string FullDescription;
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
         public readonly List<Soldier> Soldiers = new List<Soldier>();
-        public MapView CurrentMapView { get; private set; }
 
         public Mission(MissionType t, int dif, int sd = 0) {
             Goal = MissionGoal.KillAll;
@@ -514,14 +513,10 @@ namespace SpaceMercs {
         public void SetCurrentLevel(int lvl) {
             CurrentLevel = lvl;
         }
-        public void SetCurrentMissionView(MapView mv) {
-            CurrentMapView = mv;
-        }
         public void ResetMission() {
             // Reset the mission so it can be run again
             CurrentLevel = 0;
             Levels.Clear();
-            CurrentMapView = null;
             Soldiers.Clear();
         }
     }

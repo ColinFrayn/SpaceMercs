@@ -60,15 +60,15 @@ namespace SpaceMercs {
       Level = lvl;
     }
     public Weapon(IEquippable eq, int iNewLevel) {
-      Weapon wp = eq as Weapon;
+      Weapon? wp = eq as Weapon;
       if (wp == null) throw new Exception("Attempting to clone Weapon with object of type " + eq.GetType());
       Type = wp.Type;
       Level = iNewLevel;
     }
     public Weapon(XmlNode xml) {
       Level = xml.GetAttributeInt("Level");
-      string strType = xml.Attributes["Type"].Value;
-      Type = StaticData.GetWeaponTypeByName(strType);
+      string strType = xml.GetAttributeText("Type");
+      Type = StaticData.GetWeaponTypeByName(strType) ?? throw new Exception($"Could not identify weapon type {strType}");
       if (Type == null) throw new Exception("Could not ID weapon type : " + strType);
     }
     public Weapon(Weapon wp) {
@@ -86,8 +86,8 @@ namespace SpaceMercs {
       }
     }
     public override bool Equals(object? obj) {
-      if (obj == null || GetType() != obj.GetType()) return false;
-      Weapon wp = obj as Weapon;
+      if (obj is null) return false;
+      if (obj is not Weapon wp) return false;
       if (wp.Level != Level || wp.Type != Type) return false;
       return true;
     }

@@ -14,9 +14,8 @@ namespace SpaceMercs.MainWindow {
 
         // Load in the default texture bitmaps
         // Build texture maps for the stars' radial brightness maps
+        // !!! NOT USED
         private void SetupMapTextures() {
-            return;
-
             double D = -0.7, D2 = -0.6;
             double RMin = 0.05;
             double RScale = Math.Pow(RMin, D) - 1.0;

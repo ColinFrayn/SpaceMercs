@@ -16,7 +16,7 @@ namespace SpaceMercs {
         public int Seed { get; private set; }
 
         // Feed-through properties
-        public ShipEngine Engine {
+        public ShipEngine? Engine {
             get {
                 if (Type.EngineRoomID == -1) return null;
                 if (!Equipment.ContainsKey(Type.EngineRoomID)) return null;
@@ -50,7 +50,7 @@ namespace SpaceMercs {
             }
         }
         public ShipArmour? ArmourType { get; private set; }
-        public double Range { get { if (!EngineEnabled) return 0.0; return Engine.Range; } } // Range in metres
+        public double Range { get { if (!EngineEnabled) return 0.0; return Engine?.Range ?? 0.0; } } // Range in metres
         public int Length { get { return Type.Length; } }
         public int Width { get { return Type.Width; } }
         public int MaxCapacity {
@@ -204,13 +204,14 @@ namespace SpaceMercs {
         public Ship(XmlNode xml, Team? owner) {
             Owner = owner;
             Name = xml.SelectNodeText("Name");
-            if (xml.Attributes["Type"] is not null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
+            string strType = xml.GetAttributeText("Type");
+            if (!string.IsNullOrEmpty(strType)) Type = StaticData.GetShipTypeByName(strType) ?? throw new Exception($"Could not identify ship type {strType} for ship {Name}");
             else {
                 int seed = xml.GetAttributeInt("Seed");
                 double diff = xml.GetAttributeDouble("Diff");
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
-            if (Type is null) throw new Exception($"Could not ID Ship Type : {xml.Attributes["Type"].Value}");
+            if (Type is null) throw new Exception($"Could not ID Ship Type for ship {Name}");
             Hull = xml.SelectNodeDouble("Hull");
             Seed = xml.SelectNodeInt("Seed");
             Equipment.Clear();
@@ -233,7 +234,7 @@ namespace SpaceMercs {
             foreach (XmlNode xr in xml.SelectNodesToList("Eqp")) {
                 int id = xr.GetAttributeInt("ID");
                 ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
-                bool bActive = bool.Parse(xr.Attributes["Active"].Value);
+                bool bActive = bool.Parse(xr.GetAttributeText("Active"));
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }
             string strArm = xml.SelectNodeText("Armour");
@@ -492,9 +493,10 @@ namespace SpaceMercs {
             if (iRoomID == -1 || iRoomID >= Type.Rooms.Count || se == null) return;
             if (se.Size != Type.Rooms[iRoomID].Size) return;
             if (Equipment.ContainsKey(iRoomID)) return;
+            if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = CostToBuildEquipment(se);
             if (cost > Owner.Cash) return;
-            string strMessage = String.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
+            string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
             if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Build Room", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Owner.Cash -= cost;
                 Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
@@ -502,13 +504,14 @@ namespace SpaceMercs {
         }
         public void UpgradeHull(ShipEquipment se) {
             if (se.Size != ShipEquipment.RoomSize.Armour) return;
-            if (!(se is ShipArmour)) return;
+            if (se is not ShipArmour sa) return;
+            if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = CostToBuildEquipment(se);
             if (cost > Owner.Cash) return;
-            string strMessage = String.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
+            string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
             if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Upgrade Hull", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Owner.Cash -= cost;
-                ArmourType = se as ShipArmour;
+                ArmourType = sa;
             }
         }
         public void ActivateRoom(int iRoomID) {
@@ -550,8 +553,9 @@ namespace SpaceMercs {
         // User wants to salvage this room
         public void SalvageRoom(int iRoomID) {
             if (!Equipment.ContainsKey(iRoomID)) return;
+            if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(Equipment[iRoomID].Item1);
-            string strMessage = String.Format("Really salvage this room ({0})? You will recover {1:F2} credits", Equipment[iRoomID].Item1.Name, rebate);
+            string strMessage = string.Format("Really salvage this room ({0})? You will recover {1:F2} credits", Equipment[iRoomID].Item1.Name, rebate);
             if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Room", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Owner.Cash += rebate;
                 Equipment.Remove(iRoomID);
@@ -559,8 +563,9 @@ namespace SpaceMercs {
         }
         public void SalvageHull() {
             if (ArmourType == null) return;
+            if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(ArmourType);
-            string strMessage = String.Format("Really salvage your ship armour ({0})? You will recover {1:F2} credits", ArmourType.Name, rebate);
+            string strMessage = string.Format("Really salvage your ship armour ({0})? You will recover {1:F2} credits", ArmourType.Name, rebate);
             if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Armour", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Owner.Cash += rebate;
                 ArmourType = null;
@@ -736,6 +741,7 @@ namespace SpaceMercs {
 
         // Fabrication stuff
         public double CostToBuildEquipment(ShipEquipment se) {
+            if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = se.Cost * Owner.GetLocalPriceModifier();
             if (se.Size == ShipEquipment.RoomSize.Armour) cost *= Type.MaxHull / Const.HullUpgradeCost;
             return Math.Round(cost, 2);
@@ -749,6 +755,7 @@ namespace SpaceMercs {
         public bool CanBuildItem(IItem it) {
             // Can we build this item in ths ship?
             // This required (1) the right room equipment and (2) a soldier with the right skill
+            if (Owner is null) throw new Exception("Ship owner is null!");
             Equipment? eqi = (it is Equipment eqp) ? eqp : null;
             if ((!HasMedlab || !Owner.HasSkill(Soldier.UtilitySkill.Medic)) && eqi != null && eqi.BaseType.Source == ItemType.ItemSource.Medlab) return false;
             if ((!HasWorkshop || !Owner.HasSkill(Soldier.UtilitySkill.Engineer)) && eqi != null && eqi.BaseType.Source == ItemType.ItemSource.Workshop) return false;

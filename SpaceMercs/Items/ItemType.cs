@@ -27,15 +27,11 @@ namespace SpaceMercs {
         public double ConstructionChance { get { return 120.0 - (BaseRarity * 5.0); } }
 
         public ItemType(XmlNode xml) {
-            Name = xml.Attributes?["Name"]?.InnerText ?? throw new Exception("ItemType has no name!");
-
+            Name = xml.GetAttributeText("Name");
             Cost = xml.SelectNodeDouble("Cost", 0.0);
-
             BaseRarity = xml.SelectNodeInt("Rarity", 0);
             Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
-
             Mass = xml.SelectNodeDouble ("Mass", 0.0);
-
             Desc = xml.SelectNodeText("Desc").Trim();
 
             Materials = new Dictionary<MaterialType, int>();
@@ -49,8 +45,9 @@ namespace SpaceMercs {
                     Materials.Add(m, iVal);
                 }
             }
-            if (xml.SelectSingleNode("Utility") != null) {
-                foreach (XmlNode xn in xml.SelectSingleNode("Utility").ChildNodes) {
+            XmlNode? nUtility = xml.SelectSingleNode("Utility");
+            if (nUtility is not null) {
+                foreach (XmlNode xn in nUtility.ChildNodes) {
                     string strSkill = xn.Name;
                     Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), strSkill);
                     int iVal = int.Parse(xn.InnerText);

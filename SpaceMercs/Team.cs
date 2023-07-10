@@ -36,7 +36,6 @@ namespace SpaceMercs {
             _Soldiers.Add(s);
             PlayerShip = Ship.GenerateStarterShip(this);
             Cash = Const.InitialCash;
-            if (Const.DEBUG_LOADS_OF_CASH) Cash = 1e9;
             Relations.Add(playerRace, 2);
             Mission_ShowLabels = Mission_ShowStatBars = false;
             Mission_ShowTravel = Mission_ShowPath = true;
@@ -51,13 +50,13 @@ namespace SpaceMercs {
 
             Cash = xml.SelectNodeDouble("Cash");
 
-            XmlNode? xmls = xml.SelectSingleNode("Soldiers");
+            XmlNode xmls = xml.SelectSingleNode("Soldiers") ?? throw new Exception("Could not find team Soldiers data");
             foreach (XmlNode xs in xmls.ChildNodes) {
                 Soldier s = new Soldier(xs, this);
                 _Soldiers.Add(s);
             }
 
-            PlayerShip = new Ship(xml.SelectSingleNode("Ship"), this);
+            PlayerShip = new Ship(xml.SelectSingleNode("Ship") ?? throw new Exception("Could not find team Ship data"), this);
 
             // Mission GUI options
             Mission_ShowLabels = (xml.SelectSingleNode("Mission_ShowLabels") != null);
@@ -67,16 +66,16 @@ namespace SpaceMercs {
             Mission_ShowEffects = (xml.SelectSingleNode("Mission_ShowEffects") != null);
             Mission_ViewDetection = (xml.SelectSingleNode("Mission_ViewDetection") != null);
 
-            XmlNode? xmlr = xml.SelectSingleNode("Relations");
+            XmlNode xmlr = xml.SelectSingleNode("Relations") ?? throw new Exception("Could not find team Relations data");
             Relations.Clear();
             foreach (XmlNode xr in xmlr.ChildNodes) {
-                string strRace = xr.Attributes["Race"].Value;
+                string strRace = xr.GetAttributeText("Race");
                 Race rc = StaticData.GetRaceByName(strRace) ?? throw new Exception($"Found unknown Race : {strRace}");
                 int rel = xr.GetAttributeInt("Value");
                 Relations.Add(rc, rel);
             }
 
-            XmlNode? xmli = xml.SelectSingleNode("Inventory");
+            XmlNode xmli = xml.SelectSingleNode("Inventory") ?? throw new Exception("Could not find team Inventory data");
             Inventory.Clear();
             foreach (XmlNode xi in xmli.ChildNodes) {
                 int count = xi.GetAttributeInt("Count");
@@ -85,8 +84,9 @@ namespace SpaceMercs {
                 else Inventory.Add(eq, count);
             }
 
-            if (xml.SelectSingleNode("Mission") != null) {
-                CurrentMission = new Mission(xml.SelectSingleNode("Mission"), CurrentPosition);
+            XmlNode? xMission = xml.SelectSingleNode("Mission");
+            if (xMission is not null) {
+                CurrentMission = new Mission(xMission, CurrentPosition);
                 // If it's a tactical mission then insert all participating soldiers
                 if (CurrentMission.IsTacticalMission) {
                     foreach (Soldier s in _Soldiers) {
@@ -96,6 +96,8 @@ namespace SpaceMercs {
                 }
             }
         }
+
+        public static Team Empty() => new Team();
 
         // Save this team to an Xml file
         public void SaveToFile(StreamWriter file) {

@@ -303,10 +303,12 @@ namespace SpaceMercs {
         }
         private void DisplayTiles(ShaderProgram prog) {
             if (TextureCoords is null) GenerateTextures();
+            // *still* null, so can't set up textures
+            if (TextureCoords is null) throw new Exception("Could not generate textures");
             GL.Disable(EnableCap.Blend);
 
             // Draw the visible terrain
-            int iLastID = -1, tw = 0, th = 0;
+            int iLastID = -1;
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
@@ -322,8 +324,8 @@ namespace SpaceMercs {
                         throw new Exception("Unhandled texture requested : " + Map[x, y]);
                     }
                     int iTexID = det.ID;
-                    tw = det.W / Textures.TileSize;
-                    th = det.H / Textures.TileSize;
+                    int tw = det.W / Textures.TileSize;
+                    int th = det.H / Textures.TileSize;
                     if (iTexID != iLastID) {
                         GL.BindTexture(TextureTarget.Texture2D, iTexID);
                         iLastID = iTexID;
@@ -422,7 +424,7 @@ namespace SpaceMercs {
             GL.DepthMask(true);
             GL.Disable(EnableCap.Blend);
         }
-        public void DisplayEntities(ShaderProgram prog, bool bShowLabels, bool bShowStatBars, bool bShowEffects, float fViewHeight) {
+        public void DisplayEntities(ShaderProgram prog, bool bShowLabels, bool bShowStatBars, bool bShowEffects, float fViewHeight, float aspect, Matrix4 viewM) {
             // Display soldiers & creatures
             GL.Enable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
@@ -437,8 +439,6 @@ namespace SpaceMercs {
                 if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(prog, pt);
             }
             IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
-            float aspect = ParentMission.CurrentMapView?.Aspect ?? 1f;
-            Matrix4 viewM = ParentMission.CurrentMapView?.ViewMatrix ?? Matrix4.Identity;
             foreach (IEntity e in lEntities) {
                 if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight, aspect, viewM);
             }

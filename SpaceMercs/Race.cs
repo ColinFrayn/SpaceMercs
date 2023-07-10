@@ -38,7 +38,8 @@ namespace SpaceMercs {
             string strCol = xml.SelectNodeText("Colour");
             string[] bits = strCol.Split(',');
             Colour = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
-            foreach (XmlNode xn in xml.SelectSingleNode("Names/Personal").ChildNodes) {
+            XmlNode nPersonal = xml.SelectSingleNode("Names/Personal") ?? throw new Exception($"Could not find personal names list for Race {Name}");
+            foreach (XmlNode xn in nPersonal.ChildNodes) {
                 List<string> lNames = xn.InnerText.Split(',').ToList<string>();
                 if (lNames.Count == 0) throw new Exception("No names defined for Gender=" + xn.Name + ", Race=" + Name);
                 GenderType gt = (GenderType)Enum.Parse(typeof(GenderType), xn.Name);
@@ -88,7 +89,7 @@ namespace SpaceMercs {
         }
 
         public void Reset() {
-            HomePlanet = null;
+            HomePlanet = Planet.Empty;
             Relations = 0;
             Known = false;
             Systems.Clear();

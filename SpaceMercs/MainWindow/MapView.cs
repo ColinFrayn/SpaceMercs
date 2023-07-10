@@ -24,7 +24,7 @@ namespace SpaceMercs.MainWindow {
         private Map GalaxyMap = new Map();
         private bool bShowLabels = true;
         private bool bJustLoaded = false;
-        private Team PlayerTeam = null;
+        private Team PlayerTeam = Team.Empty();
         private int MinSectorX, MaxSectorX, MinSectorY, MaxSectorY;
         private DateTime lastLoad = DateTime.MinValue;
         private readonly Stopwatch swLastTick = new Stopwatch();
@@ -68,7 +68,7 @@ namespace SpaceMercs.MainWindow {
             bShowRangeCircles = true;
             bShowTradeRoutes = true;
             MakeCurrent();
-            SetupMapTextures();
+            //SetupMapTextures(); // Not implemented
             Planet.BuildPlanetHalo();
             SetupGUIElements();
             bLoaded = true;
@@ -131,7 +131,7 @@ namespace SpaceMercs.MainWindow {
             if (!bLoaded) return;
 
             if (view == ViewMode.ViewMission) {
-                if (swLastTick.ElapsedMilliseconds > 300) {
+                if (ThisMission is not null && swLastTick.ElapsedMilliseconds > 300) {
                     swLastTick.Restart();
                     // --- Resolve clock tick stuff
                     // Soldiers auto moving
@@ -160,7 +160,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Any travel/combat to update?
-            if (TravelDetails != null) TravelDetails.ClockTickProcessor();
+            if (TravelDetails is not null) TravelDetails.ClockTickProcessor();
 
             // Not on mission screen, so tick the clock & check if we died
             if (GalaxyMap.bMapSetup) {
@@ -328,9 +328,9 @@ namespace SpaceMercs.MainWindow {
             // -- Applies to all views except ship & mission
             {
                 if (IsKeyPressed(Keys.C)) { // Centre on selected AO
-                    if (aoSelected == null) {
-                        fMapViewX = CurrentSystem.MapPos.X;
-                        fMapViewY = CurrentSystem.MapPos.Y;
+                    if (aoSelected is null) {
+                        fMapViewX = CurrentSystem?.MapPos.X ?? 0.0f;
+                        fMapViewY = CurrentSystem?.MapPos.Y ?? 0.0f;
                     }
                     else {
                         fMapViewX = aoSelected.GetSystem().MapPos.X;
@@ -695,6 +695,7 @@ namespace SpaceMercs.MainWindow {
 
         // Finish travelling
         public void ArriveAt(AstronomicalObject aoTo) {
+            if (TravelDetails is null) throw new Exception("Null TravelDetails upon arrival");
             // Close colonyview if open
             foreach (Form f in Application.OpenForms) {
                 if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }

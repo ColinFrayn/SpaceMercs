@@ -321,7 +321,7 @@ namespace SpaceMercs {
         public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost * (1.0 + Encumbrance)); } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; if (bHasMoved && EquippedWeapon.Type.Stable) return 999.0; return EquippedWeapon.StaminaCost * (1.0 + Encumbrance); } }
         public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost * (1.0 + Encumbrance)); } }
-        private MissionLevel CurrentLevel { get { return PlayerTeam.CurrentMission.GetOrCreateCurrentLevel(); } }
+        private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
         public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill; } }
         private void CalculateMaxStats() {
@@ -480,7 +480,7 @@ namespace SpaceMercs {
         public Soldier(XmlNode xml, Team? pt) {
             PlayerTeam = pt;
             iTextureID = -1;
-            Name = xml.Attributes["Name"].Value;
+            Name = xml.GetAttributeText("Name");
             rnd = new Random(Name.GetHashCode());
             XmlNode? xac = xml.SelectSingleNode("Inactive");
             if (xac is null) {
@@ -506,9 +506,8 @@ namespace SpaceMercs {
             string raceName = xml.SelectSingleNode("Race")?.InnerText ?? "";
             Race = StaticData.GetRaceByName(raceName) ?? throw new Exception($"Unrecognised Race in Soldier data : {raceName}");
             if (Race == null) throw new Exception("Could not ID Soldier " + Name + " Race : " + xml.SelectNodeText("Race"));
-            XmlNode? xmls = xml.SelectSingleNode("Stats");
-            string[] stats = xmls.InnerText.Split(',');
-            if (stats.Length != 5) throw new Exception("Could not understand stats string for Soldier " + Name + " : " + xmls.InnerText);
+            string[] stats = xml.SelectNodeText("Stats").Split(',');
+            if (stats.Length != 5) throw new Exception($"Could not understand stats string for Soldier {Name}");
             BaseStrength = int.Parse(stats[0]);
             BaseAgility = int.Parse(stats[1]);
             BaseIntellect = int.Parse(stats[2]);
@@ -576,7 +575,7 @@ namespace SpaceMercs {
             WeaponExperience.Clear();
             if (wex is not null) {
                 foreach (XmlNode xw in wex.SelectNodesToList("Exp")) {
-                    WeaponType? tp = StaticData.GetWeaponTypeByName(xw.Attributes["Type"].Value) ?? throw new Exception("Could not ID WeaponType : " + xw.Attributes["Type"].Value);
+                    WeaponType? tp = StaticData.GetWeaponTypeByName(xw.GetAttributeText("Type")) ?? throw new Exception("Could not ID WeaponType : " + xw.GetAttributeText("Type"));
                     int exp = int.Parse(xw.InnerText);
                     WeaponExperience.Add(tp, exp);
                 }
@@ -587,7 +586,7 @@ namespace SpaceMercs {
             int totsk = 0;
             if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
-                    UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.Attributes["Skill"].Value);
+                    UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.GetAttributeText("Skill"));
                     int lvl = int.Parse(xu.InnerText);
                     totsk += lvl;
                     UtilitySkills.Add(sk, lvl);
@@ -859,7 +858,7 @@ namespace SpaceMercs {
             // Firstly, generate a weapon
             do {
                 EquippedWeapon = Utils.GenerateRandomWeapon(rnd, Level);
-            } while (EquippedWeapon.StaminaCost > MaxStamina);
+            } while (EquippedWeapon is null || EquippedWeapon.StaminaCost > MaxStamina);
 
             // Next generate armour
             // Start with a base set of kit, then incrementally improve it
@@ -938,14 +937,14 @@ namespace SpaceMercs {
 
         // Is this soldier active in the team?
         public void Activate() {
-            if (aoLocation != PlayerTeam.CurrentPosition) return;
+            if (aoLocation != PlayerTeam?.CurrentPosition) return;
             IsActive = true;
-            // Anything else we want to do?
+            // TODO: Anything else we want to do?
         }
         public void Deactivate() {
             IsActive = false;
-            aoLocation = PlayerTeam.CurrentPosition;
-            // Anything else we want to do?
+            aoLocation = PlayerTeam?.CurrentPosition;
+            // TODO: Anything else we want to do?
         }
 
         // Actions
@@ -1173,7 +1172,7 @@ namespace SpaceMercs {
             return lFound;
         }
         public void UseItem(ItemType? ActionItem) {
-            if (ActionItem.ItemEffect.SingleUse) RemoveItemByType(ActionItem);
+            if (ActionItem?.ItemEffect?.SingleUse ?? false) RemoveItemByType(ActionItem);
             Stamina -= UseItemCost;
             bHasMoved = true;
         }
@@ -1223,8 +1222,8 @@ namespace SpaceMercs {
         }
         public bool HasUtilityItems() {
             foreach (IEquippable eq in Inventory.Keys.Where(e => e is IEquippable)) {
-                ItemEffect ie = eq.BaseType.ItemEffect;
-                if (ie != null) {
+                ItemEffect? ie = eq.BaseType.ItemEffect;
+                if (ie is not null) {
                     if (ie.AssociatedSkill == UtilitySkill.Unspent || !ie.SkillRequired || GetUtilityLevel(ie.AssociatedSkill) > 0) {
                         return true;
                     }
@@ -1236,8 +1235,8 @@ namespace SpaceMercs {
             List<ItemType> lItems = new List<ItemType>();
             foreach (IEquippable eq in Inventory.Keys.Where(e => e is IEquippable)) {
                 if (eq is Weapon || eq is Armour) continue;
-                ItemEffect ie = eq.BaseType.ItemEffect;
-                if (ie != null) {
+                ItemEffect? ie = eq.BaseType.ItemEffect;
+                if (ie is not null) {
                     if (ie.AssociatedSkill == UtilitySkill.Unspent || !ie.SkillRequired || GetUtilityLevel(ie.AssociatedSkill) > 0) {
                         if (!lItems.Contains(eq.BaseType)) lItems.Add(eq.BaseType);
                     }
@@ -1256,7 +1255,7 @@ namespace SpaceMercs {
         }
 
         // Display options
-        public void DisplaySoldierDetails(ShaderProgram prog, float px, float py, bool bSelected, bool bHover) {
+        public void DisplaySoldierDetails(ShaderProgram prog, float px, float py, bool bSelected, bool bHover, float aspect) {
             float PanelHeight = GetGuiPanelHeight(bSelected);
             GL.Enable(EnableCap.Blend);
 
@@ -1296,7 +1295,7 @@ namespace SpaceMercs {
             const float TextScale = 0.015f;
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopLeft,
-                Aspect = PlayerTeam.CurrentMission?.CurrentMapView?.Aspect ?? 1f,
+                Aspect = aspect,
                 TextColour = Color.White,
                 XPos = px + 0.002f,
                 YPos = py,

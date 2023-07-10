@@ -94,9 +94,9 @@ namespace SpaceMercs {
         }
         public Armour(XmlNode xml) {
             Level = xml.GetAttributeInt("Level");
-            string strType = xml.Attributes!["Type"]!.Value;
+            string strType = xml.GetAttributeText("Type");
             Type = StaticData.GetArmourTypeByName(strType) ?? throw new Exception("Could not ID armour type : " + strType);
-            string strMat = xml.Attributes["Material"].Value;
+            string strMat = xml.GetAttributeText("Material");
             Material = StaticData.GetMaterialTypeByName(strMat) ?? throw new Exception("Could not ID armour material : " + strMat);
         }
 

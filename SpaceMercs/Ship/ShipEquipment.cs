@@ -29,7 +29,7 @@ namespace SpaceMercs {
             // Nothing to see
         }
         public ShipEquipment(XmlNode xml, RoomSize sz = RoomSize.Small) {
-            Name = xml.Attributes["Name"].InnerText;
+            Name = xml.GetAttributeText("Name");
             Cost = xml.SelectNodeDouble("Cost");
             Description = xml.SelectNodeText("Desc");
             string strTex = xml.SelectNodeText("Tex");

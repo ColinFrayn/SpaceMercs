@@ -60,8 +60,7 @@ namespace SpaceMercs.MainWindow {
             Team newTeam = new Team(xTeam, newMap);
 
             // Load additional race data
-            XmlNode? xRaces = xml.SelectSingleNode("Races");
-            foreach (XmlNode xr in xRaces.SelectNodesToList("Race")) {
+            foreach (XmlNode xr in xml.SelectNodesToList("Races/Race")) {
                 string strName = xr.GetAttributeText("Name");
                 Race r = StaticData.GetRaceByName(strName) ?? throw new Exception("Could not ID Race : " + strName);
                 r.LoadAdditionalData(xr, newMap);

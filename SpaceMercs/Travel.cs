@@ -87,8 +87,9 @@ namespace SpaceMercs {
         public bool GameOver { get; private set; }
         public HabitableAO Destination {
             get {
-                if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet();
-                else return aoTravelTo as HabitableAO;
+                if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet() ?? throw new Exception("Could not fidn suitable planet target for travel");
+                else if (aoTravelTo is HabitableAO hao) return hao;
+                throw new Exception("Travel Destination is not a valid target");
             }
         }
 
@@ -105,8 +106,8 @@ namespace SpaceMercs {
             PlayerTeam = team;
             ParentView = parent;
 
-            aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOFrom"));
-            aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOTo"));
+            aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOFrom")) ?? throw new Exception("Could not parse From location for travel node");
+            aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOTo")) ?? throw new Exception("Could not parse To location for travel node");
 
             fTravelTime = float.Parse(xml.SelectNodeText("Time"));
             fElapsed = float.Parse(xml.SelectNodeText("Elapsed"));
@@ -183,13 +184,14 @@ namespace SpaceMercs {
             Const.dtTime = dtStart.AddSeconds(fElapsed);
         }
         private void ResolveEncounter() {
-            if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) {
+            if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Salvage) {
                 fMissionElapsed += 60f * 10f; 
                 if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
                 Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
                 if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
                     bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
+                    if (PlayerTeam.CurrentMission.ShipTarget is null) throw new Exception("ShipTarget is null in Salvage mission");
                     Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(false);
                     AnnounceSalvage(dSalvage);
                     dSalvage = PlayerTeam.AddItems(dSalvage);
@@ -200,7 +202,7 @@ namespace SpaceMercs {
                     bPause = false;
                 }
             }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) {
+            else if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Repair) {
                 fMissionElapsed += 60f * 10f;
                 if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
                 Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
@@ -213,19 +215,19 @@ namespace SpaceMercs {
                     bPause = false;
                 }
             }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
+            else if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.ShipCombat) {
                 RunBattle();
             }
             else {
                 PlayerTeam.CeaseMission();
-                throw new Exception("Unexpected Mission Type : " + PlayerTeam.CurrentMission.Type);
+                throw new Exception("Unexpected Mission Type : " + PlayerTeam.CurrentMission?.Type ?? "none");
             }
         }
         public void ResumeMissionAfterReload() {
-            if (PlayerTeam.CurrentMission.Type == Mission.MissionType.RepelBoarders) {
+            if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.RepelBoarders) {
                 RunRepelBoardersMission(PlayerTeam.CurrentMission);
             }
-            else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
+            else if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.BoardingParty) {
                 RunBoardingPartyMission(PlayerTeam.CurrentMission);
             }
             else {
@@ -235,7 +237,7 @@ namespace SpaceMercs {
 
         // Run a step of a battle between the player ship and an enemy vessel
         private void RunBattle() {
-            if (PlayerTeam.CurrentMission == null) return;
+            if (PlayerTeam.CurrentMission?.ShipTarget is null) return;
             Random rand = new Random();
             if (fSep > 4000.0f) fSep -= 10.0f;
 
@@ -406,8 +408,9 @@ namespace SpaceMercs {
             aoTravelTo.DrawSelected(prog, 8);
         }
         private void DrawSalvage(ShaderProgram prog) {
+            if (PlayerTeam.CurrentMission is null) return;
             // Set up the text
-            string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
+            string strTime = string.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
             string strText = "Salvaging " + strTime;
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
@@ -424,6 +427,7 @@ namespace SpaceMercs {
             GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(1f, 0f, 0f, 1f));
         }
         private void DrawRepair(ShaderProgram prog) {
+            if (PlayerTeam.CurrentMission is null) return;
             // Set up the text
             string strTime = String.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(PlayerTeam.CurrentMission.TimeCost));
             string strText = "Repairing " + strTime;
@@ -442,8 +446,10 @@ namespace SpaceMercs {
             GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 0f, 1f, 1f));
         }
         private void DrawBattle(ShaderProgram prog, ShaderProgram colprog) {
+            if (PlayerTeam.PlayerShip is null) throw new Exception("Battle without Player Team Ship");
+            if (PlayerTeam.CurrentMission?.ShipTarget is null) throw new Exception("Battle without Enemy Ship");
             string strText = "Battle versus unidentified alien ship";
-            if (PlayerTeam?.CurrentMission?.RacialOpponent != null) strText = $"Battle versus {PlayerTeam.CurrentMission.RacialOpponent.Name} ship";
+            if (PlayerTeam.CurrentMission?.RacialOpponent is not null) strText = $"Battle versus {PlayerTeam.CurrentMission.RacialOpponent.Name} ship";
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = ParentView.Aspect,
@@ -473,7 +479,7 @@ namespace SpaceMercs {
             }
 
             // Enemy Ship Stats:
-            double stHull = Math.Max(0.0, Math.Round(PlayerTeam.CurrentMission.ShipTarget.Hull, 1));
+            double stHull = Math.Max(0.0, Math.Round(PlayerTeam.CurrentMission!.ShipTarget.Hull, 1));
             strStatus = stHull + "/" + Math.Round(PlayerTeam.CurrentMission.ShipTarget.Type.MaxHull, 0);
             GraphicsFunctions.DrawFramedFractBar(prog, 0.68f, 0.35f, 0.1f, 0.02f, PlayerTeam.CurrentMission.ShipTarget.HullFract, new Vector4(0f, 1f, 0f, 1f));
             tro.Scale = 0.04f;

@@ -85,8 +85,6 @@ namespace SpaceMercs.MainWindow {
                 Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to get to the mission location
             }
 
-            ThisMission.SetCurrentMissionView(this);
-
             // Set GUI options
             bShowEntityLabels = PlayerTeam.Mission_ShowLabels;
             bShowStatBars = PlayerTeam.Mission_ShowStatBars;
@@ -183,7 +181,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         private void DrawMission() {
-            if (!bLoaded) return;
+            if (!bLoaded || ThisMission is null) return;
             if (SelectedEntity is Soldier s && s.PlayerTeam is null) {
                 // If player has died since the last tick, deselect it and update the buttons
                 SelectedEntity = null; 
@@ -206,7 +204,7 @@ namespace SpaceMercs.MainWindow {
 
             // Set the correct view location & perspective matrix
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, (float)Aspect, 0.05f, 5000.0f);
+            Matrix4 projectionM = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, Aspect, 0.05f, 5000.0f);
             fullShaderProgram.SetUniform("projection", projectionM);
             pos2DCol4ShaderProgram.SetUniform("projection", projectionM);
 
@@ -227,7 +225,7 @@ namespace SpaceMercs.MainWindow {
             ShowMapGUIElements(fullShaderProgram, pos2DCol4ShaderProgram);
 
             // Show creatures/soldiers
-            CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ);
+            CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ, Aspect, translateM);
 
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
@@ -286,6 +284,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void CheckHoverMission() {
             if (gpSelect != null && gpSelect.Active) return;
+            if (ThisMission is null) return;
 
             soldierPanelCurrentHover = null;
             // Check GUIPanel first
@@ -357,7 +356,7 @@ namespace SpaceMercs.MainWindow {
             // Mouse has moved to a different square
             if (hoverx != oldhoverx || hovery != oldhovery) {
                 if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
-                    if (ActionItem != null) {
+                    if (ActionItem?.ItemEffect is not null) {
                         GenerateAoEMap(hoverx, hovery, ActionItem.ItemEffect.Radius, oldhoverx, oldhovery);
                     }
                     else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
@@ -420,15 +419,14 @@ namespace SpaceMercs.MainWindow {
                         }
                         if (iSelectHover >= Const.ItemIDBase && iSelectHover < (Const.ItemIDBase + 50000)) {
                             // Clicked on a usable item
-                            ItemType? it = StaticData.GetItemTypeById(iSelectHover);
-                            if (it == null) throw new Exception("Chose unknown ItemType to use");
-                            ActionItem = it;
+                            ActionItem = StaticData.GetItemTypeById(iSelectHover) ?? throw new Exception("Chose unknown ItemType to use");
                             CurrentAction = SoldierAction.Item;
-                            GenerateTargetMap(s, it.ItemEffect.Range);
-                            if (SelectedEntity != null) {
+                            if (ActionItem?.ItemEffect is not null)
+                            GenerateTargetMap(s, ActionItem.ItemEffect.Range);
+                            if (SelectedEntity is not null) {
                                 int sy = SelectedEntity.Y;
                                 int sx = SelectedEntity.X;
-                                GenerateAoEMap(sx, sy, it.ItemEffect.Radius);
+                                GenerateAoEMap(sx, sy, ActionItem!.ItemEffect!.Radius);
                             }
                         }
                     }
@@ -952,7 +950,7 @@ namespace SpaceMercs.MainWindow {
 
                 Matrix4 transM = Matrix4.CreateTranslation(sx, sy, Const.GUILayer);
                 prog.SetUniform("view", transM);
-                s.DisplaySoldierDetails(prog, sx, sy, SelectedEntity == s, hover == s);
+                s.DisplaySoldierDetails(prog, sx, sy, SelectedEntity == s, hover == s, Aspect);
                 sy += PanelHeight + Const.GUIPanelGap;
             }
         }
@@ -1349,10 +1347,12 @@ namespace SpaceMercs.MainWindow {
                 if (ui.ChosenItem != null) {
                     ActionItem = ui.ChosenItem.BaseType;
                     CurrentAction = SoldierAction.Item;
-                    GenerateTargetMap(s, ActionItem.ItemEffect.Range);
-                    int sy = SelectedEntity.Y;
-                    int sx = SelectedEntity.X;
-                    GenerateAoEMap(sx, sy, ActionItem.ItemEffect.Radius);
+                    if (ActionItem.ItemEffect is not null) {
+                        GenerateTargetMap(s, ActionItem.ItemEffect.Range);
+                        int sy = SelectedEntity.Y;
+                        int sx = SelectedEntity.X;
+                        GenerateAoEMap(sx, sy, ActionItem.ItemEffect.Radius);
+                    }
                 }
             }
         }
