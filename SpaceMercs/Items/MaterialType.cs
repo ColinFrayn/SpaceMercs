@@ -14,7 +14,7 @@ namespace SpaceMercs {
         public double ConstructionChanceModifier { get { return Math.Log(Rarity > 0 ? Rarity : 0.0001) * 10.0; } }
 
         public MaterialType(XmlNode xml) {
-            Name = xml.GetAttributeValue("Name");
+            Name = xml.GetAttributeText("Name");
             CostMod = xml.SelectNodeDouble("CostMod", 1.0);
             MassMod = xml.SelectNodeDouble("MassMod", 1.0);
             Rarity = xml.SelectNodeDouble("Rarity", 1.0);
@@ -24,8 +24,8 @@ namespace SpaceMercs {
 
             // Special resistances if this is made into armour
             foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
-                WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeValue("Type"));
-                double val = double.Parse(xn.GetAttributeValue("Amount"));
+                WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));
+                double val = double.Parse(xn.GetAttributeText("Amount"));
                 BonusArmour.Add(type, val);
             }
         }

@@ -84,7 +84,7 @@ namespace SpaceMercs {
                 foreach (XmlNode xn in xml.SelectNodesToList("Resistances/Resistance")) {
                     WeaponType.DamageType tp = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.Attributes!["Type"]?.Value ?? string.Empty);
                     if (Resistances.ContainsKey(tp)) throw new Exception("Duplicate resistance of type " + tp + " for creature " + Name);
-                    double res = double.Parse(xn.Attributes["Value"]?.Value ?? throw new Exception($"No Value provided in CreatureType {Name} Resistances list item"));
+                    double res = xn.GetAttributeDouble("Value");
                     Resistances.Add(tp, res);
                 }
             }
@@ -92,8 +92,8 @@ namespace SpaceMercs {
             // Scavenging results
             if (xml.SelectSingleNode("Scavenge") is not null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("Scavenge/Item")) {
-                    double amount = double.Parse(xn.Attributes?["Amount"]?.Value ?? throw new Exception($"No Amount provided in CreatureType {Name} Scavenge list item"));
-                    MaterialType? tp = StaticData.GetMaterialTypeByName(xn.InnerText);
+                    double amount = xn.GetAttributeDouble("Amount");
+                    MaterialType ? tp = StaticData.GetMaterialTypeByName(xn.InnerText);
                     if (tp == null) throw new Exception("Couldn't identify scavenging material " + xn.InnerText + " in creature type " + Name);
                     if (Scavenge.ContainsKey(tp)) throw new Exception("Duplicate scavenging result of type " + tp + " for creature " + Name);
                     Scavenge.Add(tp, amount);

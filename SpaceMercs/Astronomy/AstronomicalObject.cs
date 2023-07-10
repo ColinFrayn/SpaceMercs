@@ -7,8 +7,7 @@ using System.Xml;
 namespace SpaceMercs {
     abstract class AstronomicalObject {
         public enum AstronomicalObjectType { Star, Planet, Moon, Unknown };
-        protected string strName = "Unnamed";
-        public string Name { get { return strName; } }
+        public string Name { get; protected set; }
         public double radius; // In metres
         public double OrbitalDistance; // In metres
         public double OrbitalPeriod; // Period of orbit (seconds)
@@ -24,6 +23,7 @@ namespace SpaceMercs {
 
         public AstronomicalObject() {
             iTexture = -1;
+            Name = "Unnamed";
         }
 
         public virtual AstronomicalObjectType AOType { get { return AstronomicalObjectType.Unknown; } }
@@ -72,7 +72,7 @@ namespace SpaceMercs {
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
             ID = int.Parse(xml.Attributes?["ID"]!.InnerText!);
-            strName = xml.SelectNodeText("Name");
+            Name = xml.SelectNodeText("Name");
             radius = xml.SelectNodeDouble("Radius");
 
             OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
@@ -90,7 +90,7 @@ namespace SpaceMercs {
 
         // Save this planet to an Xml file
         protected void WriteAODetailsToFile(StreamWriter file) {
-            if (!string.IsNullOrEmpty(strName)) file.WriteLine("<Name>" + strName + "</Name>");
+            if (!string.IsNullOrEmpty(Name)) file.WriteLine("<Name>" + Name + "</Name>");
             if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(radius, 0).ToString() + "</Radius>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");

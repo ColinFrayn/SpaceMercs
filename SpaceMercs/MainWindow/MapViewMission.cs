@@ -553,11 +553,12 @@ namespace SpaceMercs.MainWindow {
             else gbTransition.Deactivate();
         }
         private void ApplyItemEffectToMap(Soldier s, ItemType it, int px, int py) {
-            ItemEffect ie = it.ItemEffect;
+            ItemEffect? ie = it.ItemEffect;
+            if (ie is null) return;
             HashSet<IEntity> hsEntities = new HashSet<IEntity>();
 
             // Play a sound, if there is one
-            if (!String.IsNullOrEmpty(ie.SoundEffect)) {
+            if (!string.IsNullOrEmpty(ie.SoundEffect)) {
                 SoundEffects.PlaySound(ie.SoundEffect);
                 Thread.Sleep(500);
             }

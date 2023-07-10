@@ -37,11 +37,11 @@ namespace SpaceMercs {
         }
         public Stash(XmlNode xml) {
             stash = new Dictionary<IItem, int>();
-            int X = int.Parse(xml.Attributes["X"].Value);
-            int Y = int.Parse(xml.Attributes["Y"].Value);
+            int X = xml.GetAttributeInt("X");
+            int Y = xml.GetAttributeInt("Y");
             Location = new Point(X, Y);
             foreach (XmlNode xn in xml.SelectNodesToList("StashItem")) {
-                int n = int.Parse(xn.Attributes["N"].Value);
+                int n = xml.GetAttributeInt("N");
                 IItem? it = Utils.LoadItem(xn.FirstChild);
                 if (it is not null) stash.Add(it, n);
             }

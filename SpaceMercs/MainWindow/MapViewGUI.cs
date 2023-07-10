@@ -192,12 +192,7 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet && aoHover is Planet plHover) {
-                if (string.IsNullOrEmpty(plHover?.Name)) {
-                    strHoverText.Add("<Unnamed>");
-                }
-                else {
-                    strHoverText.Add(plHover.Name);
-                }
+                strHoverText.Add(plHover.Name);
                 strHoverText.Add(plHover.Type.ToString());
                 if (aoSelected is not null) {
                     if (aoSelected.GetSystem() == aoHover.GetSystem()) {

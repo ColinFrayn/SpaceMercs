@@ -49,7 +49,7 @@ namespace SpaceMercs {
             Planets = new List<Planet>();
             Visited = false;
             Sector = s;
-            strName = "";
+            Name = "";
             Seed = _seed;
             StarType = "";
             ID = sno;
@@ -175,8 +175,8 @@ namespace SpaceMercs {
 
         // Draw a name label (and construct one if it doesn't exist yet)
         public void DrawName() {
-            if (strName.Length == 0) return;
-            TextRenderer.Draw(strName, Alignment.TopMiddle);
+            if (string.IsNullOrEmpty(Name)) return;
+            TextRenderer.Draw(Name, Alignment.TopMiddle);
         }
 
         // Generate a star's details according to the required IMF etc.
@@ -492,7 +492,7 @@ namespace SpaceMercs {
             }
         }
         public override void SetName(string str) {
-            strName = str;
+            Name = str;
         }
         public override Star GetSystem() {
             return this;

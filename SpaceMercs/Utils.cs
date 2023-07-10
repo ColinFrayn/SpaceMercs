@@ -483,7 +483,6 @@ namespace SpaceMercs {
             if (string.IsNullOrEmpty(path) || root is null) return string.Empty;
             return root.SelectSingleNode(path)?.InnerText ?? string.Empty;
         }
-
         public static double SelectNodeDouble(this XmlNode root, string path, double? defaultValue = null) {
             if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? throw new Exception($"Could not find double data for path {path}");
             string? strText = root.SelectSingleNode(path)?.InnerText;
@@ -493,7 +492,6 @@ namespace SpaceMercs {
             }
             return dVal;
         }
-
         public static int SelectNodeInt(this XmlNode root, string path, int? defaultValue = null) {
             if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? throw new Exception($"Could not find int data for path {path}");
             string? strText = root.SelectSingleNode(path)?.InnerText;
@@ -526,9 +524,27 @@ namespace SpaceMercs {
 
         }
 
-        public static string GetAttributeValue(this XmlNode root, string attributeName) {
+        public static string GetAttributeText(this XmlNode root, string attributeName) {
             if (string.IsNullOrEmpty(attributeName) || root is null) return string.Empty;
             return root.Attributes?[attributeName]?.Value ?? string.Empty;
+        }
+        public static double GetAttributeDouble(this XmlNode root, string attributeName, double? defaultValue = null) {
+            if (string.IsNullOrEmpty(attributeName) || root is null) return defaultValue ?? throw new Exception($"Could not find double data for path {attributeName}");
+            string? strText = root.Attributes?[attributeName]?.Value;
+            if (string.IsNullOrEmpty(strText)) return defaultValue ?? throw new Exception($"Found empty double data for path {attributeName}");
+            if (!double.TryParse(strText, out double dVal)) {
+                throw new Exception($"Could not parse double data for path {attributeName} : {strText}");
+            }
+            return dVal;
+        }
+        public static int GetAttributeInt(this XmlNode root, string attributeName, int? defaultValue = null) {
+            if (string.IsNullOrEmpty(attributeName) || root is null) return defaultValue ?? throw new Exception($"Could not find int data for path {attributeName}");
+            string? strText = root.Attributes?[attributeName]?.Value;
+            if (string.IsNullOrEmpty(strText)) return defaultValue ?? throw new Exception($"Found empty int data for path {attributeName}");
+            if (!int.TryParse(strText, out int iVal)) {
+                throw new Exception($"Could not parse int data for path {attributeName} : {strText}");
+            }
+            return iVal;
         }
     }
 }

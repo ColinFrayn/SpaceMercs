@@ -120,7 +120,7 @@ namespace SpaceMercs.MainWindow {
                 Annulus.Annulus16.BindAndDraw();
             }
 
-            {
+            if (CurrentSystem is not null) {
                 double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
                 Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos.X, CurrentSystem.MapPos.Y, 0f);

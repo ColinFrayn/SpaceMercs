@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SpaceMercs.MainWindow {
     partial class MapView {
-        static readonly float FileVersion = 1.0f;
+        static readonly string FileVersion = "1.0";
 
         // Load a game from an exported XML file
         private Tuple<Map, Team, Travel?> LoadGame(string strFile) {
@@ -15,9 +15,9 @@ namespace SpaceMercs.MainWindow {
                 throw new Exception("Unknown File Type - Not a SpaceMercs save Game");
             }
             XmlNode xml = xnl.Item(0)!;
-            float version = float.Parse(xml.Attributes["Version"].InnerText);
+            string version = xml.GetAttributeText("Version");
             if (version != FileVersion) {
-                throw new Exception("Incorrect file version. Expected = " + FileVersion + ", found " + version + ".");
+                throw new Exception($"Incorrect file version. Expected = {FileVersion}, found {version}.");
             }
 
             // Load in GUI details
@@ -60,7 +60,7 @@ namespace SpaceMercs.MainWindow {
             // Load additional race data
             XmlNode? xRaces = xml.SelectSingleNode("Races");
             foreach (XmlNode xr in xRaces.SelectNodesToList("Race")) {
-                string strName = xr.Attributes["Name"].Value;
+                string strName = xr.GetAttributeText("Name");
                 Race r = StaticData.GetRaceByName(strName) ?? throw new Exception("Could not ID Race : " + strName);
                 r.LoadAdditionalData(xr, newMap);
             }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -23,9 +21,9 @@ namespace SpaceMercs {
       Cost = c;
     }
     public MissionItem(XmlNode xml) {
-      Mass = double.Parse(xml.Attributes["Mass"].Value);
-      Cost = double.Parse(xml.Attributes["Cost"].Value);
-      Name = xml.InnerText;
+      Mass = xml.GetAttributeDouble("Mass");
+      Cost = xml.GetAttributeDouble("Cost");
+            Name = xml.InnerText;
     }
 
     public static MissionItem GenerateRandomGoalItem(int diff, Random rand) {

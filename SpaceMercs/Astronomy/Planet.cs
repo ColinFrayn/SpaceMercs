@@ -1,10 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Xml;
 
@@ -25,7 +22,7 @@ namespace SpaceMercs {
             Parent = parent;
             Moons = new List<Moon>();
             _MissionList = null;
-            strName = "";
+            Name = "";
             Seed = _seed;
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
@@ -42,7 +39,7 @@ namespace SpaceMercs {
             if (xmlc != null) SetColony(new Colony(xmlc, this));
 
             // Load planet-specific stuff
-            tempbase = double.Parse(xml.SelectNodeText("TempBase"));
+            tempbase = xml.SelectNodeDouble("TempBase");
             Type = xml.SelectNodeEnum<Planet.PlanetType>("Type");
 
             Moons = new List<Moon>();
@@ -287,7 +284,7 @@ namespace SpaceMercs {
             }
         }
         public override void SetName(string str) {
-            strName = str;
+            Name = str;
         }
         public override Star GetSystem() {
             return Parent;

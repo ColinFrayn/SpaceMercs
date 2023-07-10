@@ -41,10 +41,10 @@ namespace SpaceMercs {
             // Done
         }
         public Sector(XmlNode xml, Map map) {
-            SectorX = int.Parse(xml.GetAttributeValue("X"));
-            SectorY = int.Parse(xml.GetAttributeValue("Y"));
+            SectorX = int.Parse(xml.GetAttributeText("X"));
+            SectorY = int.Parse(xml.GetAttributeText("Y"));
             ParentMap = map;
-            Inhabitant = StaticData.GetRaceByName(xml.GetAttributeValue("Inhabitant"));
+            Inhabitant = StaticData.GetRaceByName(xml.GetAttributeText("Inhabitant"));
 
             foreach (XmlNode xmls in xml.ChildNodes) {
                 Star st = new Star(xmls, this);
