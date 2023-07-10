@@ -332,8 +332,8 @@ namespace SpaceMercs {
             Type = StaticData.GetCreatureTypeByName(strName) ?? throw new Exception("Could not ID Type for Creature : " + strName);
 
             XmlNode? xmll = xml.SelectSingleNode("Location") ?? throw new Exception("Could not ID Location for Creature : " + strName);
-            X = int.Parse(xmll.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Creature X-Coord with Name = {strName}"));
-            Y = int.Parse(xmll.Attributes!["Y"]?.Value ?? throw new Exception($"Could not identify Creature Y-Coord with Name = {strName}"));
+            X = xmll.GetAttributeInt("X");
+            Y = xmll.GetAttributeInt("Y");
             Level = xml.SelectNodeInt("Level");
             string strFacing = xml.SelectNodeText("Facing");
             if (double.TryParse(strFacing, out double fac)) {
@@ -367,14 +367,14 @@ namespace SpaceMercs {
             TX = TY = -1;
             XmlNode? xnt = xml.SelectSingleNode("Target");
             if (xnt is not null) {
-                TX = int.Parse(xnt.Attributes!["X"]?.Value ?? throw new Exception("Missing X-coord for Target"));
-                TY = int.Parse(xnt.Attributes!["Y"]?.Value ?? throw new Exception("Missing Y-coord for Target"));
+                TX = xnt.GetAttributeInt("X");
+                TY = xnt.GetAttributeInt("Y");
             }
 
             XmlNode? xni = xml.SelectSingleNode("Investigate");
             if (xni is not null) {
-                int ix = int.Parse(xni.Attributes!["X"]?.Value ?? throw new Exception("Missing X-coord for Investigate spot"));
-                int iy = int.Parse(xni.Attributes!["Y"]?.Value ?? throw new Exception("Missing Y-coord for Investigate spot"));
+                int ix = xni.GetAttributeInt("X");
+                int iy = xni.GetAttributeInt("Y");
                 Investigate = new Point(ix, iy);
             }
             else Investigate = Point.Empty;

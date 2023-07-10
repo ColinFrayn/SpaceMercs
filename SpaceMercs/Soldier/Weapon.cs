@@ -66,7 +66,7 @@ namespace SpaceMercs {
       Level = iNewLevel;
     }
     public Weapon(XmlNode xml) {
-      Level = int.Parse(xml.Attributes["Level"].Value);
+      Level = xml.GetAttributeInt("Level");
       string strType = xml.Attributes["Type"].Value;
       Type = StaticData.GetWeaponTypeByName(strType);
       if (Type == null) throw new Exception("Could not ID weapon type : " + strType);

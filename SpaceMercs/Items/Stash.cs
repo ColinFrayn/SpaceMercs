@@ -41,7 +41,7 @@ namespace SpaceMercs {
             int Y = xml.GetAttributeInt("Y");
             Location = new Point(X, Y);
             foreach (XmlNode xn in xml.SelectNodesToList("StashItem")) {
-                int n = xml.GetAttributeInt("N");
+                int n = xn.GetAttributeInt("N");
                 IItem? it = Utils.LoadItem(xn.FirstChild);
                 if (it is not null) stash.Add(it, n);
             }

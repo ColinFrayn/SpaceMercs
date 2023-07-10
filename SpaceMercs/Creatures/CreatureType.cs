@@ -105,7 +105,7 @@ namespace SpaceMercs {
                 foreach (XmlNode xn in xml.SelectNodesToList("Weapons/Weapon")) {
                     WeaponType? wpt = StaticData.GetWeaponTypeByName(xn.InnerText);
                     if (wpt == null) throw new Exception("Creature " + Name + " has unknown weapon : " + xn.InnerText);
-                    int wgt = int.Parse(xn.Attributes?["Weight"]?.Value ?? throw new Exception($"No Weight provided in CreatureType {Name} Weapons list item"));
+                    int wgt = xn.GetAttributeInt("Weight");
                     if (Weapons.ContainsKey(wpt)) throw new Exception("Creature " + Name + " has repeated weapons : " + wpt.Name);
                     Weapons.Add(wpt, wgt);
                     WeaponTotalWeight += wgt;

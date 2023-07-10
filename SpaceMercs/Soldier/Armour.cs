@@ -93,7 +93,7 @@ namespace SpaceMercs {
             Level = iNewLevel;
         }
         public Armour(XmlNode xml) {
-            Level = int.Parse(xml.Attributes!["Level"]!.Value);
+            Level = xml.GetAttributeInt("Level");
             string strType = xml.Attributes!["Type"]!.Value;
             Type = StaticData.GetArmourTypeByName(strType) ?? throw new Exception("Could not ID armour type : " + strType);
             string strMat = xml.Attributes["Material"].Value;

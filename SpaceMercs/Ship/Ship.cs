@@ -206,8 +206,8 @@ namespace SpaceMercs {
             Name = xml.SelectNodeText("Name");
             if (xml.Attributes["Type"] is not null) Type = StaticData.GetShipTypeByName(xml.Attributes["Type"].Value);
             else {
-                int seed = int.Parse(xml.Attributes["Seed"].Value);
-                double diff = double.Parse(xml.Attributes["Diff"].Value);
+                int seed = xml.GetAttributeInt("Seed");
+                double diff = xml.GetAttributeDouble("Diff");
                 Type = ShipType.SetupRandomShipType(diff, seed);
             }
             if (Type is null) throw new Exception($"Could not ID Ship Type : {xml.Attributes["Type"].Value}");
@@ -231,7 +231,7 @@ namespace SpaceMercs {
 
             // New-style Equipment loading
             foreach (XmlNode xr in xml.SelectNodesToList("Eqp")) {
-                int id = int.Parse(xr.Attributes["ID"].Value);
+                int id = xr.GetAttributeInt("ID");
                 ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
                 bool bActive = bool.Parse(xr.Attributes["Active"].Value);
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));

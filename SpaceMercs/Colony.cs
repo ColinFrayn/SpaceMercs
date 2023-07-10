@@ -105,7 +105,7 @@ namespace SpaceMercs {
             Inventory.Clear();
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
-                    int count = int.Parse(xi.Attributes!["Count"]!.Value);
+                    int count = xi.GetAttributeInt("Count");
                     IItem? eq;
                     try {
                         eq = Utils.LoadItem(xi.FirstChild);

@@ -24,10 +24,8 @@ namespace SpaceMercs {
             else Accuracy = 0.0;
             if (xml.SelectSingleNode("Range").Attributes["DropOff"] != null) DropOff = double.Parse(xml.SelectSingleNode("Range").Attributes["DropOff"].Value);
             else DropOff = 0.0;
-            XmlNode xn = xml.SelectSingleNode("Damage");
-            if (xn.Attributes["Area"] != null) Area = double.Parse(xn.Attributes["Area"].Value);
-            else Area = 0;
-            string strDam = xn.InnerText;
+            Area = xml.GetAttributeDouble("Damage/Area", 0.0);
+            string strDam = xml.SelectNodeText("Damage");
             string[] bits = strDam.Split('+');
             if (bits.Length != 2) throw new Exception("Could not parse damage string : " + strDam);
             DBase = double.Parse(bits[0]);

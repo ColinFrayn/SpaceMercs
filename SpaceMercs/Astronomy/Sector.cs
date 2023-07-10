@@ -41,8 +41,8 @@ namespace SpaceMercs {
             // Done
         }
         public Sector(XmlNode xml, Map map) {
-            SectorX = int.Parse(xml.GetAttributeText("X"));
-            SectorY = int.Parse(xml.GetAttributeText("Y"));
+            SectorX = xml.GetAttributeInt("X");
+            SectorY = xml.GetAttributeInt("Y");
             ParentMap = map;
             Inhabitant = StaticData.GetRaceByName(xml.GetAttributeText("Inhabitant"));
 

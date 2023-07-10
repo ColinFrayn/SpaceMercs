@@ -497,8 +497,8 @@ namespace SpaceMercs {
 
             XmlNode? xmll = xml.SelectSingleNode("Location");
             if (xmll is not null) {
-                X = int.Parse(xmll.Attributes["X"].Value);
-                Y = int.Parse(xmll.Attributes["Y"].Value);
+                X = xmll.GetAttributeInt("X");
+                Y = xmll.GetAttributeInt("Y");
             }
             else X = Y = 0;
             Level = xml.SelectNodeInt("Level");
@@ -538,8 +538,8 @@ namespace SpaceMercs {
 
             XmlNode? xg = xml.SelectSingleNode("GoTo");
             if (xg is not null) {
-                int gx = int.Parse(xg.Attributes["X"].Value);
-                int gy = int.Parse(xg.Attributes["Y"].Value);
+                int gx = xg.GetAttributeInt("X");
+                int gy = xg.GetAttributeInt("Y");
                 GoTo = new Point(gx, gy);
             }
             else GoTo = Point.Empty;
@@ -548,7 +548,7 @@ namespace SpaceMercs {
             Inventory.Clear();
             if (xmli is not null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
-                    int count = int.Parse(xi.Attributes["Count"].Value);
+                    int count = xi.GetAttributeInt("Count");
                     IItem? eq = Utils.LoadItem(xi.FirstChild);
                     if (eq is not null) {
                         if (Inventory.ContainsKey(eq)) Inventory[eq] += count; // Ideally shouldn't happen, but we might as well tidy it up here if it does...

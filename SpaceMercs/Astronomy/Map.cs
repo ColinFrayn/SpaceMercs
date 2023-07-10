@@ -18,9 +18,9 @@ namespace SpaceMercs {
             if (xml.Attributes?["Seed"] is null) throw new Exception("Map seed is missing from save file");
             if (xml.Attributes?["SPS"] is null) throw new Exception("Map StarsPerSector is missing from save file");
             if (xml.Attributes?["PD"] is null) throw new Exception("Map PlanetDensity is missing from save file");
-            MapSeed = int.Parse(xml.Attributes["Seed"]!.Value);
-            StarsPerSector = int.Parse(xml.Attributes["SPS"]!.Value);
-            PlanetDensity = int.Parse(xml.Attributes["PD"]!.Value);
+            MapSeed = xml.GetAttributeInt("Seed");
+            StarsPerSector = xml.GetAttributeInt("SPS");
+            PlanetDensity = xml.GetAttributeInt("PD");
 
             dSectors.Clear();
             foreach (XmlNode xmls in xml.SelectNodesToList("Sector")) {

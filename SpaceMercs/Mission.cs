@@ -157,10 +157,10 @@ namespace SpaceMercs {
             CurrentLevel = xml.SelectNodeInt("CurrentLevel");
 
             Seed = xml.SelectNodeInt("Seed", 0);
-            Seed = xml.SelectNodeInt("Size", 1);
+            Size = xml.SelectNodeInt("Size", 1);
 
             foreach (XmlNode xl in xml.SelectNodesToList("Level")) {
-                int id = int.Parse(xl.Attributes["ID"].Value);
+                int id = xl.GetAttributeInt("ID");
                 if (xl.FirstChild is not null) {
                     MissionLevel lev = new MissionLevel(xl.FirstChild, this);
                     Levels.Add(id, lev);

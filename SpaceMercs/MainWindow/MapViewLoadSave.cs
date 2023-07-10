@@ -16,7 +16,9 @@ namespace SpaceMercs.MainWindow {
             }
             XmlNode xml = xnl.Item(0)!;
             string version = xml.GetAttributeText("Version");
-            if (version != FileVersion) {
+            double thisVersion = double.Parse(FileVersion);
+            double fileVersion = double.Parse(version);
+            if (thisVersion != fileVersion) {
                 throw new Exception($"Incorrect file version. Expected = {FileVersion}, found {version}.");
             }
 

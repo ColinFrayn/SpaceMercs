@@ -72,14 +72,14 @@ namespace SpaceMercs {
             foreach (XmlNode xr in xmlr.ChildNodes) {
                 string strRace = xr.Attributes["Race"].Value;
                 Race rc = StaticData.GetRaceByName(strRace) ?? throw new Exception($"Found unknown Race : {strRace}");
-                int rel = int.Parse(xr.Attributes["Value"].Value);
+                int rel = xr.GetAttributeInt("Value");
                 Relations.Add(rc, rel);
             }
 
             XmlNode? xmli = xml.SelectSingleNode("Inventory");
             Inventory.Clear();
             foreach (XmlNode xi in xmli.ChildNodes) {
-                int count = int.Parse(xi.Attributes["Count"].Value);
+                int count = xi.GetAttributeInt("Count");
                 IItem eq = Utils.LoadItem(xi.FirstChild) ?? throw new Exception("Could not load inventory item!");
                 if (Inventory.ContainsKey(eq)) Inventory[eq] += count;
                 else Inventory.Add(eq, count);

@@ -71,7 +71,7 @@ namespace SpaceMercs {
         // Load generic AO details from an XML file
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
-            ID = int.Parse(xml.Attributes?["ID"]!.InnerText!);
+            ID = xml.GetAttributeInt("ID");
             Name = xml.SelectNodeText("Name");
             radius = xml.SelectNodeDouble("Radius");
 

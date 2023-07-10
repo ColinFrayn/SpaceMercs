@@ -38,7 +38,7 @@ namespace SpaceMercs {
                 SoldierName = null;
             }
             if (xml.Attributes?["Level"] is not null) {
-                Level = int.Parse(xml.Attributes["Level"]?.Value ?? string.Empty);
+                Level = xml.GetAttributeInt("Level");
             }
             else if (Type != null) {
                 Level = Type.LevelMin;

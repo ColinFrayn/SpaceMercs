@@ -40,7 +40,7 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("BonusArmour") != null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
                     WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.Attributes["Type"].Value);
-                    double val = double.Parse(xn.Attributes["Amount"].Value);
+                    double val = xn.GetAttributeDouble("Amount");
                     BonusArmour.Add(type, val);
                 }
             }

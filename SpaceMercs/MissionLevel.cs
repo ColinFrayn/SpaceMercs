@@ -113,8 +113,8 @@ namespace SpaceMercs {
         public MissionLevel(XmlNode xml, Mission parentMission) {
             ParentMission = parentMission;
             HoverX = HoverY = -1;
-            int w = int.Parse(xml.Attributes!["Width"]?.Value ?? throw new Exception("MissionLevel has no Width"));
-            int h = int.Parse(xml.Attributes!["Height"]?.Value ?? throw new Exception("MissionLevel has no Height"));
+            int w = xml.GetAttributeInt("Width");
+            int h = xml.GetAttributeInt("Height");
             Width = w;
             Height = h;
             Diff = xml.SelectNodeInt("Diff");
@@ -161,11 +161,11 @@ namespace SpaceMercs {
             if (xmli is not null) {
                 foreach (XmlNode xn in xmli.SelectNodesToList("Stack")) {
                     Dictionary<IItem, int> dict = new Dictionary<IItem, int>();
-                    int x = int.Parse(xn.Attributes["X"].Value);
-                    int y = int.Parse(xn.Attributes["Y"].Value);
+                    int x = xn.GetAttributeInt("X");
+                    int y = xn.GetAttributeInt("Y");
                     Point pt = new Point(x, y);
                     foreach (XmlNode xnn in xn.SelectNodesToList("StackItem")) {
-                        int n = int.Parse(xnn.Attributes["N"].Value);
+                        int n = xnn.GetAttributeInt("N");
                         IItem it = Utils.LoadItem(xnn.FirstChild) ?? throw new Exception($"Could not load item from stack : {xnn.FirstChild?.InnerText ?? "null"}");
                         dict.Add(it, n);
                     }

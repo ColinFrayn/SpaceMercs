@@ -31,7 +31,7 @@ namespace SpaceMercs {
 
             Cost = xml.SelectNodeDouble("Cost", 0.0);
 
-            BaseRarity = xml.SelectNodeInt("Rarity");
+            BaseRarity = xml.SelectNodeInt("Rarity", 0);
             Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
 
             Mass = xml.SelectNodeDouble ("Mass", 0.0);
@@ -42,7 +42,7 @@ namespace SpaceMercs {
             if (xml.SelectSingleNode("Materials") is not null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("Materials/Material")) {
                     string strMat = xn.GetAttributeText("Name");
-                    int iVal = int.Parse(xn.GetAttributeText("Amount"));
+                    int iVal = xn.GetAttributeInt("Amount");
                     MaterialType? m = StaticData.GetMaterialTypeByName(strMat);
                     if (m is null) throw new Exception("Could not identify material " + strMat + " required for item " + Name);
                     if (Materials.ContainsKey(m)) throw new Exception("Duplicate material in item description : " + Name);
