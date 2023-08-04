@@ -7,8 +7,8 @@ using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
     partial class MapView {
-        private GUIButton gbRenameObject, gbFlyTo, gbViewColony, gbScan;
-        private GUIPanel gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
+        private GUIButton? gbRenameObject, gbFlyTo, gbViewColony, gbScan;
+        private GUIPanel? gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
 
         #region Menu Codes
@@ -80,10 +80,10 @@ namespace SpaceMercs.MainWindow {
 
             // Main menu (if not travelling)
             if (TravelDetails == null) {
-                gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-                gpSubMenu.GetItem(I_View)?.Enable();
-                gpSubMenu.GetItem(I_Options)?.Enable();
-                gpSubMenu.GetItem(I_Mission)?.Disable();
+                gpMenu!.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+                gpSubMenu?.GetItem(I_View)?.Enable();
+                gpSubMenu?.GetItem(I_Options)?.Enable();
+                gpSubMenu?.GetItem(I_Mission)?.Disable();
             }
 
             // Hover info for the current setup
@@ -97,10 +97,10 @@ namespace SpaceMercs.MainWindow {
             // Display the various GUI Buttons
             else {
                 SetAOButtonsOnGUI(aoSelected);
-                gbRenameObject.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-                gbFlyTo.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-                gbViewColony.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-                gbScan.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbRenameObject!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbFlyTo!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbViewColony!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbScan!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             }
         }
 
@@ -331,12 +331,12 @@ namespace SpaceMercs.MainWindow {
             // Mission menu
             gpMissionMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             gpMissionMenu.InsertTextItem(I_MissionDetails, "Mission Details", Aspect);
-            gpMissionMenu.InsertTextItem(I_MissionLabels, "Labels", Aspect, () => bShowEntityLabels);
-            gpMissionMenu.InsertTextItem(I_MissionStatBars, "Stat Bars", Aspect, () => bShowStatBars);
-            gpMissionMenu.InsertTextItem(I_MissionTravel, "Travel Distance", Aspect, () => bShowTravel);
-            gpMissionMenu.InsertTextItem(I_MissionPath, "Best Path", Aspect, () => bShowPath);
-            gpMissionMenu.InsertTextItem(I_MissionEffects, "Effects", Aspect, () => bShowEffects);
-            gpMissionMenu.InsertTextItem(I_MissionDetection, "Detection Area", Aspect, () => bViewDetection);
+            gpMissionMenu.InsertTextItem(I_MissionLabels, "Labels", Aspect, () => PlayerTeam.Mission_ShowLabels);
+            gpMissionMenu.InsertTextItem(I_MissionStatBars, "Stat Bars", Aspect, () => PlayerTeam.Mission_ShowStatBars);
+            gpMissionMenu.InsertTextItem(I_MissionTravel, "Travel Distance", Aspect, () => PlayerTeam.Mission_ShowTravel);
+            gpMissionMenu.InsertTextItem(I_MissionPath, "Best Path", Aspect, () => PlayerTeam.Mission_ShowPath);
+            gpMissionMenu.InsertTextItem(I_MissionEffects, "Effects", Aspect, () => PlayerTeam.Mission_ShowEffects);
+            gpMissionMenu.InsertTextItem(I_MissionDetection, "Detection Area", Aspect, () => PlayerTeam.Mission_ViewDetection);
 
             // First level menus
             gpSubMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
@@ -448,24 +448,24 @@ namespace SpaceMercs.MainWindow {
 
         // Set the button relevant for the selected AO
         public void SetAOButtonsOnGUI(AstronomicalObject? ao) {
-            gbRenameObject.Deactivate();
-            gbFlyTo.Deactivate();
+            gbRenameObject?.Deactivate();
+            gbFlyTo?.Deactivate();
             if (ao == null) return;
             if (ao.AOType != AstronomicalObject.AstronomicalObjectType.Moon) {
-                gbRenameObject.Activate();
+                gbRenameObject!.Activate();
             }
-            if (PlayerTeam.CanTravel(ao) && ao != PlayerTeam.CurrentPosition) gbFlyTo.Activate();
+            if (PlayerTeam.CanTravel(ao) && ao != PlayerTeam.CurrentPosition) gbFlyTo!.Activate();
 
-            gbViewColony.Deactivate();
+            gbViewColony?.Deactivate();
             if (view == ViewMode.ViewSystem && ao == PlayerTeam.CurrentPosition) {
                 if (PlayerTeam.CurrentPosition?.BaseSize > 0) {
-                    gbViewColony.UpdateText("Colony");
-                    gbViewColony.Activate();
+                    gbViewColony!.UpdateText("Colony");
+                    gbViewColony!.Activate();
                 }
                 else if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas) {
                     if (PlayerTeam.PlayerShip.CanFoundColony) {
-                        gbViewColony.UpdateText("Colonise");
-                        gbViewColony.Activate();
+                        gbViewColony!.UpdateText("Colonise");
+                        gbViewColony!.Activate();
                     }
                 }
             }
@@ -484,11 +484,11 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             if (bCanScanHere) {
-                gbScan.Activate();
-                if (!(PlayerTeam.CurrentPosition?.Scanned ?? false)) gbScan.UpdateText("Scan");
+                gbScan!.Activate();
+                if (!(PlayerTeam.CurrentPosition?.Scanned ?? false)) gbScan!.UpdateText("Scan");
                 else gbScan.UpdateText("Missions");
             }
-            else gbScan.Deactivate();
+            else gbScan!.Deactivate();
         }
     }
 }

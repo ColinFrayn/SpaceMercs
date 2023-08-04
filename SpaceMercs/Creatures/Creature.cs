@@ -62,6 +62,9 @@ namespace SpaceMercs {
                 itexid = Type.TextureID;
             }
             GL.BindTexture(TextureTarget.Texture2D, itexid);
+            GL.Enable(EnableCap.Blend);
+            GL.Disable(EnableCap.DepthTest);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
@@ -89,10 +92,6 @@ namespace SpaceMercs {
                     View = viewM
                 };
                 TextRenderer.DrawWithOptions(Name, tro);
-                GL.Translate(X + ((float)Type.Size / 2), Y - (0.015 * fViewHeight), Const.GUILayer);
-                double lScale = fViewHeight / 50.0;
-                GL.Scale(lScale, lScale, lScale);
-                TextRenderer.Draw(Name, Alignment.BottomMiddle);
             }
             if (bStatBars) {
                 prog.SetUniform("textureEnabled", false);
@@ -230,13 +229,13 @@ namespace SpaceMercs {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             if (EquippedWeapon == null) {
                 double dam = rnd.NextDouble() * (Level + 5) + Level + 5;
-                dam *= Const.CreatureMeleeDamageScale * Const.AttackDamageScale;
+                dam *= Const.CreatureMeleeDamageScale * Const.CreatureAttackDamageScale;
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
                 double dam = rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
                 double hmod = 0.9 + (Attack / 10.0);
-                hmod *= Const.AttackDamageScale;
+                hmod *= Const.CreatureAttackDamageScale;
                 //if (EquippedWeapon.Type.IsMeleeWeapon) dam *= (Level + 4) / 5.0;
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {

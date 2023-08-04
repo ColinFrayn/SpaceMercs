@@ -3,7 +3,7 @@
   <CreatureType Name="Smuggler">
     <Scale>0.9</Scale>
     <LevelRange>1,10</LevelRange>
-    <Attack>10</Attack>
+    <Attack>8</Attack>
     <Defence>8</Defence>
     <Armour>18</Armour>
     <Health>10</Health>
@@ -20,7 +20,7 @@
   </CreatureType>
   <CreatureType Name="Pirate">
     <LevelRange>1,10</LevelRange>
-    <Attack>11</Attack>
+    <Attack>9</Attack>
     <Defence>9</Defence>
     <Armour>22</Armour>
     <Health>12</Health>
@@ -39,7 +39,7 @@
   </CreatureType>
   <CreatureType Name="Mercenary">
     <LevelRange>1,20</LevelRange>
-    <Attack>12</Attack>
+    <Attack>11</Attack>
     <Defence>10</Defence>
     <Armour>25</Armour>
     <Health>14</Health>

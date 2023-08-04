@@ -7,10 +7,10 @@ using System.Xml;
 namespace SpaceMercs {
     using RoomSize = ShipEquipment.RoomSize;
     class ShipType {
-        public string Name { get; private set; }
-        public string AKA { get; private set; } // Backwards compatibility for names
+        public string Name { get; private set; } = string.Empty;
+        public string AKA { get; private set; } = string.Empty; // Backwards compatibility for names
         public double Cost { get; private set; }
-        public string Description { get; private set; }
+        public string Description { get; private set; } = string.Empty;
         public readonly List<ShipRoomDesign> Rooms = new List<ShipRoomDesign>();
         public int Length { get; private set; }
         public int Width { get; private set; }
@@ -50,6 +50,8 @@ namespace SpaceMercs {
         public ShipType(int seed, double diff) {
             Seed = seed;
             Diff = diff;
+            Perimeter = new List<Point>();
+            Fillers = new List<Point>();
         }
         public ShipType(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.Value ?? "<No Name>";

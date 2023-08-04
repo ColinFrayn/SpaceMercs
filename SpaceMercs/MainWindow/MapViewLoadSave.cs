@@ -26,20 +26,13 @@ namespace SpaceMercs.MainWindow {
             XmlNode xGUI = xml.SelectSingleNode("GUI") ?? throw new Exception("Could not find GUI details in save file");
 
             // Load GUI Details here
-            if (xGUI.SelectSingleNode("ShowLabels") != null) bShowLabels = true;
-            else bShowLabels = false;
-            if (xGUI.SelectSingleNode("ShowMapGrid") != null) bShowGridLines = true;
-            else bShowGridLines = false;
-            if (xGUI.SelectSingleNode("FadeStars") != null) bFadeUnvisited = true;
-            else bFadeUnvisited = false;
-            if (xGUI.SelectSingleNode("ShowRangeCircles") != null) bShowRangeCircles = true;
-            else bShowRangeCircles = false;
-            if (xGUI.SelectSingleNode("ShowTradeRoutes") != null) bShowTradeRoutes = true;
-            else bShowTradeRoutes = false;
-            if (xGUI.SelectSingleNode("ShowFlags") != null) bShowFlags = true;
-            else bShowFlags = false;
-            if (xGUI.SelectSingleNode("ShowColonies") != null) bShowColonies = true;
-            else bShowColonies = false;
+            bShowLabels = (xGUI.SelectSingleNode("ShowLabels") != null);
+            bShowGridLines = (xGUI.SelectSingleNode("ShowMapGrid") != null);
+            bFadeUnvisited = (xGUI.SelectSingleNode("FadeStars") != null);
+            bShowRangeCircles = (xGUI.SelectSingleNode("ShowRangeCircles") != null);
+            bShowTradeRoutes = (xGUI.SelectSingleNode("ShowTradeRoutes") != null);
+            bShowFlags = (xGUI.SelectSingleNode("ShowFlags") != null);
+            bShowColonies = (xGUI.SelectSingleNode("ShowColonies") != null);
 
             // Load in the clock
             DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));

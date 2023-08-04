@@ -2,7 +2,7 @@
   <CreatureType Name="Giant Bug">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>9</Attack>
+    <Attack>7</Attack>
     <Defence>6</Defence>
     <Health>8</Health>
     <Stamina>14</Stamina>
@@ -19,11 +19,12 @@
   <CreatureType Name="Armoured Bug">
     <Scale>0.95</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>9</Attack>
-    <Defence>7</Defence>
+    <Attack>8</Attack>
+    <Defence>9</Defence>
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>22</Armour>
+    <MovementCost>1.4</MovementCost>
     <BodyType>Bug</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>90, 90, 90</Col2>
@@ -36,7 +37,7 @@
   <CreatureType Name="Soldier Bug">
     <Scale>1.1</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>13</Attack>
+    <Attack>12</Attack>
     <Defence>8</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>

@@ -5,7 +5,7 @@
     <Cost>10</Cost>
     <Rarity>3</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="2" DropOff="1.0">6</Range>
+    <Range Accuracy="2" DropOff="1.0">5</Range>
     <Damage>6+3</Damage>
     <Desc>A double-barrelled shotgun</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -21,7 +21,7 @@
     <Cost>50</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
-    <Range Accuracy="3" DropOff="1.0">6</Range>
+    <Range Accuracy="3" DropOff="1.0">5</Range>
     <Damage>7+4</Damage>
     <Desc>A powerful shotgun with 4 barrels instead of 2.</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -37,7 +37,7 @@
     <Cost>6</Cost>
     <Rarity>2</Rarity>
     <Speed>8</Speed>
-    <Range Accuracy="0" DropOff="0.5">8</Range>
+    <Range Accuracy="0" DropOff="0.5">7</Range>
     <Damage>2+2</Damage>
     <Desc>A pistol</Desc>
     <Sound>Pistol</Sound>
@@ -78,7 +78,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Gauss Cannon">
-    <Mass>15.0</Mass>
+    <Mass>16.0</Mass>
     <Cost>75</Cost>
     <Rarity>14</Rarity>
     <Speed>20</Speed>
@@ -112,7 +112,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle">
-    <Mass>12.0</Mass>
+    <Mass>14.0</Mass>
     <Cost>70</Cost>
     <Rarity>14</Rarity>
     <Speed>14</Speed>
@@ -170,11 +170,11 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Sniper Rifle">
-    <Mass>2.5</Mass>
+    <Mass>2.0</Mass>
     <Cost>15</Cost>
     <Rarity>5</Rarity>
     <Speed>22</Speed>
-    <Range Accuracy="3" DropOff="0.2">20</Range>
+    <Range Accuracy="3" DropOff="0.16">22</Range>
     <Damage>5+4</Damage>
     <Desc>A sniper rifle</Desc>
     <Sound>SniperRifle</Sound>
@@ -186,11 +186,11 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Gauss Sniper Rifle">
-    <Mass>4.5</Mass>
+    <Mass>4.0</Mass>
     <Cost>120</Cost>
     <Rarity>18</Rarity>
     <Speed>26</Speed>
-    <Range Accuracy="3" DropOff="0.18">22</Range>
+    <Range Accuracy="3" DropOff="0.14">25</Range>
     <Damage>7+4</Damage>
     <Desc>A light railgun converted to a sniper rifle</Desc>
     <Sound>GaussSniper</Sound>
@@ -207,7 +207,7 @@
     <Mass>1.0</Mass>
     <Cost>4</Cost>
     <Rarity>3</Rarity>
-    <Speed>10</Speed>
+    <Speed>9</Speed>
     <Range Accuracy="1">1</Range>
     <Damage>2+2</Damage>
     <Desc>A sharp bladed weapon</Desc>
@@ -234,7 +234,7 @@
   </WeaponType>
   <WeaponType Name="Axe">
     <Mass>2.0</Mass>
-    <Cost>5</Cost>
+    <Cost>6</Cost>
     <Rarity>4</Rarity>
     <Speed>10</Speed>
     <Range>1</Range>
@@ -248,7 +248,7 @@
   </WeaponType>
   <WeaponType Name="Power Axe">
     <Mass>2.5</Mass>
-    <Cost>56</Cost>
+    <Cost>65</Cost>
     <Rarity>15</Rarity>
     <Speed>10</Speed>
     <Range>1</Range>
@@ -265,9 +265,9 @@
   </WeaponType>
   <WeaponType Name="Chainsword">
     <Mass>3.0</Mass>
-    <Cost>26</Cost>
+    <Cost>30</Cost>
     <Rarity>9</Rarity>
-    <Speed>11</Speed>
+    <Speed>12</Speed>
     <Range>1</Range>
     <Damage>3+4</Damage>
     <Desc>A whirring chainsaw in a sword shape</Desc>

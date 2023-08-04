@@ -132,7 +132,7 @@ namespace SpaceMercs.Dialogs {
                 else arrRowMiss[2] = miss.PrimaryEnemy.Name;  //miss.IsShipMission ? "Unknown" : "Wildlife";
                 arrRowMiss[3] = miss.Diff.ToString();
                 arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
-                arrRowMiss[5] = miss.Reward.ToString("N2") + "cr";
+                arrRowMiss[5] = miss.Goal == Mission.MissionGoal.Gather ? "Variable" : miss.Reward.ToString("N2") + "cr";
                 dgMissions.Rows.Add(arrRowMiss);
                 dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
             }

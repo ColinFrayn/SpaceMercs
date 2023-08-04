@@ -1,8 +1,8 @@
 ﻿<Data>
   <CreatureType Name="Giant Lizard">
     <LevelRange>1,10</LevelRange>
-    <Attack>10</Attack>
-    <Defence>10</Defence>
+    <Attack>8</Attack>
+    <Defence>8</Defence>
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>10</Armour>
@@ -18,8 +18,8 @@
   <CreatureType Name="Sand Snake">
     <Scale>0.9</Scale>
     <LevelRange>1,10</LevelRange>
-    <Attack>12</Attack>
-    <Defence>12</Defence>
+    <Attack>10</Attack>
+    <Defence>10</Defence>
     <Health>8</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
@@ -37,11 +37,12 @@
   </CreatureType>
   <CreatureType Name="Giant Centipede">
     <LevelRange>1,10</LevelRange>
-    <Attack>13</Attack>
+    <Attack>11</Attack>
     <Defence>12</Defence>
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
+    <MovementCost>1.4</MovementCost>
     <BodyType>Centipede</BodyType>
     <Col1>80, 60, 40</Col1>
     <Col2>130, 105, 80</Col2>
@@ -54,8 +55,8 @@
   <CreatureType Name="Giant Scorpion">
     <Size>2</Size>
     <LevelRange>2,12</LevelRange>
-    <Attack>14</Attack>
-    <Defence>11</Defence>
+    <Attack>12</Attack>
+    <Defence>13</Defence>
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
@@ -74,7 +75,7 @@
   <CreatureType Name="Giant Sand Beetle">
     <Size>2</Size>
     <LevelRange>2,12</LevelRange>
-    <Attack>12</Attack>
+    <Attack>10</Attack>
     <Defence>11</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>

@@ -20,8 +20,8 @@ namespace SpaceMercs.MainWindow {
         private float fMissionViewX, fMissionViewY, fMissionViewZ;
         private GUIPanel gpSelect;
         private GUIIconButton? gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4;
-        private GUIIconButton gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
-        private GUIButton gbEndTurn, gbTransition, gbEndMission;
+        private GUIIconButton? gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
+        private GUIButton? gbEndTurn, gbTransition, gbEndMission;
         private readonly List<GUIIconButton> lButtons = new List<GUIIconButton>();
         private bool bGUIButtonsInitialised = false;
         private Mission? ThisMission;
@@ -36,7 +36,6 @@ namespace SpaceMercs.MainWindow {
         private int AoERadius = -1;
         private List<Point>? lCurrentPath;
         private SoldierAction CurrentAction = SoldierAction.None;
-        private bool bShowEntityLabels = false, bShowStatBars = false, bShowTravel = false, bShowPath = false, bShowEffects = false, bViewDetection = false;
         private readonly List<VisualEffect> Effects = new List<VisualEffect>();
         private readonly Stopwatch sw = Stopwatch.StartNew();
         private ItemType? ActionItem = null;
@@ -85,13 +84,8 @@ namespace SpaceMercs.MainWindow {
                 Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to get to the mission location
             }
 
-            // Set GUI options
-            bShowEntityLabels = PlayerTeam.Mission_ShowLabels;
-            bShowStatBars = PlayerTeam.Mission_ShowStatBars;
-            bShowTravel = PlayerTeam.Mission_ShowTravel;
-            bShowPath = PlayerTeam.Mission_ShowPath;
-            bShowEffects = PlayerTeam.Mission_ShowEffects;
-            bViewDetection = PlayerTeam.Mission_ViewDetection;
+            // Force buttons to reinitialise to relink new soldiers
+            bGUIButtonsInitialised = false; 
 
             // Centre around the first soldier
             CentreView(ThisMission.Soldiers[0]);
@@ -160,8 +154,8 @@ namespace SpaceMercs.MainWindow {
                 msgBox.PopupMessage("You were defeated!");
                 throw new NotImplementedException();
                 //if (PlayerTeam.SoldierCount == 0) {
-                    // Still alive?
-                    // TODO
+                // Still alive?
+                // TODO
                 //}
                 // TODO: Handle mission defeat
             }
@@ -184,7 +178,7 @@ namespace SpaceMercs.MainWindow {
             if (!bLoaded || ThisMission is null) return;
             if (SelectedEntity is Soldier s && s.PlayerTeam is null) {
                 // If player has died since the last tick, deselect it and update the buttons
-                SelectedEntity = null; 
+                SelectedEntity = null;
                 SetupZoomToButtons();
             }
 
@@ -225,7 +219,7 @@ namespace SpaceMercs.MainWindow {
             ShowMapGUIElements(fullShaderProgram, pos2DCol4ShaderProgram);
 
             // Show creatures/soldiers
-            CurrentLevel.DisplayEntities(fullShaderProgram, bShowEntityLabels, bShowStatBars, bShowEffects, fMissionViewZ, Aspect, translateM);
+            CurrentLevel.DisplayEntities(fullShaderProgram, PlayerTeam.Mission_ShowLabels, PlayerTeam.Mission_ShowStatBars, PlayerTeam.Mission_ShowEffects, fMissionViewZ, Aspect, translateM);
 
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
@@ -258,28 +252,28 @@ namespace SpaceMercs.MainWindow {
             }
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
             if (IsKeyPressed(Keys.L)) {
-                if (bShowEntityLabels) { bShowEntityLabels = false; }
-                else { bShowEntityLabels = true; }
+                if (PlayerTeam.Mission_ShowLabels) { PlayerTeam.Mission_ShowLabels = false; }
+                else { PlayerTeam.Mission_ShowLabels = true; }
             }
             if (IsKeyPressed(Keys.S)) {
-                if (bShowStatBars) { bShowStatBars = false; }
-                else { bShowStatBars = true; }
+                if (PlayerTeam.Mission_ShowStatBars) { PlayerTeam.Mission_ShowStatBars = false; }
+                else { PlayerTeam.Mission_ShowStatBars = true; }
             }
             if (IsKeyPressed(Keys.T)) {
-                if (bShowTravel) { bShowTravel = false; }
-                else { bShowTravel = true; }
+                if (PlayerTeam.Mission_ShowTravel) { PlayerTeam.Mission_ShowTravel = false; }
+                else { PlayerTeam.Mission_ShowTravel = true; }
             }
             if (IsKeyPressed(Keys.P)) {
-                if (bShowPath) { bShowPath = false; }
-                else { bShowPath = true; }
+                if (PlayerTeam.Mission_ShowPath) { PlayerTeam.Mission_ShowPath = false; }
+                else { PlayerTeam.Mission_ShowPath = true; }
             }
             if (IsKeyPressed(Keys.E)) {
-                if (bShowEffects) { bShowEffects = false; }
-                else { bShowEffects = true; }
+                if (PlayerTeam.Mission_ShowEffects) { PlayerTeam.Mission_ShowEffects = false; }
+                else { PlayerTeam.Mission_ShowEffects = true; }
             }
             if (IsKeyPressed(Keys.D)) {
-                if (bViewDetection) { bViewDetection = false; }
-                else { bViewDetection = true; }
+                if (PlayerTeam.Mission_ViewDetection) { PlayerTeam.Mission_ViewDetection = false; }
+                else { PlayerTeam.Mission_ViewDetection = true; }
             }
         }
         private void CheckHoverMission() {
@@ -422,7 +416,7 @@ namespace SpaceMercs.MainWindow {
                             ActionItem = StaticData.GetItemTypeById(iSelectHover) ?? throw new Exception("Chose unknown ItemType to use");
                             CurrentAction = SoldierAction.Item;
                             if (ActionItem?.ItemEffect is not null)
-                            GenerateTargetMap(s, ActionItem.ItemEffect.Range);
+                                GenerateTargetMap(s, ActionItem.ItemEffect.Range);
                             if (SelectedEntity is not null) {
                                 int sy = SelectedEntity.Y;
                                 int sx = SelectedEntity.X;
@@ -450,6 +444,13 @@ namespace SpaceMercs.MainWindow {
                         return;
                     }
                     if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
+                    if (ActionItem.ItemEffect is null) {
+                        throw new Exception("Item without effect!");
+                    }
+                    if (s.RangeTo(hoverx, hovery) > ActionItem.ItemEffect.Range) {
+                        msgBox.PopupMessage("Target out of range!");
+                        return;
+                    }
                     // Firstly, remove the item from the Soldier in question if it's a single use item
                     ItemType temp = ActionItem!;
                     s.UseItem(ActionItem!);
@@ -493,9 +494,9 @@ namespace SpaceMercs.MainWindow {
             foreach (GUIIconButton bt in lButtons) {
                 if (bt.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             }
-            if (gbEndTurn.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbTransition.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbEndMission.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbEndTurn!.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbTransition!.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
+            if (gbEndMission!.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             Point pt = CurrentLevel.MouseHover;
             IEntity? he = CurrentLevel.GetHoverEntity();
             if (he != null) {
@@ -540,15 +541,15 @@ namespace SpaceMercs.MainWindow {
         private void CheckForTransition() {
             // Test if all soldiers are now on an entrance/exit square and set up the button if so.
             if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
-                gbTransition.Activate();
+                gbTransition!.Activate();
                 if (CurrentLevel.LevelID == 0) gbTransition.UpdateText("Exit Mission");
                 else gbTransition.UpdateText("Ascend to Level " + CurrentLevel.LevelID);  // LevelID starts at zero
             }
             else if (CurrentLevel.CheckAllSoldiersAtExit()) {
-                gbTransition.Activate();
+                gbTransition!.Activate();
                 gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 2));  // LevelID starts at zero
             }
-            else gbTransition.Deactivate();
+            else gbTransition!.Deactivate();
         }
         private void ApplyItemEffectToMap(Soldier s, ItemType it, int px, int py) {
             ItemEffect? ie = it.ItemEffect;
@@ -772,10 +773,10 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             else {
-                if (bShowTravel && SelectedEntity != null && SelectedEntity is Soldier) {
+                if (PlayerTeam.Mission_ShowTravel && SelectedEntity != null && SelectedEntity is Soldier) {
                     vertices.AddRange(DrawTravelGrid());
                 }
-                if (bShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
+                if (PlayerTeam.Mission_ShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
                     if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
                         DrawTravelPath(texProg);
                     }
@@ -788,8 +789,8 @@ namespace SpaceMercs.MainWindow {
                 if (vbGrid is null) vbGrid = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
                 else vbGrid.SetData(vertices.ToArray());
                 if (vaGrid is null) vaGrid = new VertexArray(vbGrid);
-                int[] indices = new int[numGrids*8];
-                for (int n=0; n<numGrids; n++) {
+                int[] indices = new int[numGrids * 8];
+                for (int n = 0; n < numGrids; n++) {
                     indices[n * 8 + 0] = n * 4 + 0;
                     indices[n * 8 + 1] = n * 4 + 1;
                     indices[n * 8 + 2] = n * 4 + 1;
@@ -810,7 +811,7 @@ namespace SpaceMercs.MainWindow {
                 GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
             }
 
-            if (bViewDetection) CurrentLevel.DrawDetectionMap(texProg, DetectionMap);
+            if (PlayerTeam.Mission_ViewDetection) CurrentLevel.DrawDetectionMap(texProg, DetectionMap);
             if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(texProg, SelectedEntity);
             GL.Enable(EnableCap.DepthTest);
         }
@@ -835,16 +836,16 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             fullShaderProgram.SetUniform("model", Matrix4.Identity);
             GL.Disable(EnableCap.DepthTest);
-            gpMenu.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-            if (gpSelect != null) gpSelect.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gpMenu!.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gpSelect?.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-            if (gbEndTurn != null) gbEndTurn.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-            if (gbTransition != null) gbTransition.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gbEndTurn?.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gbTransition?.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             if (ThisMission?.IsComplete ?? false) {
-                gbEndMission.Activate();
+                gbEndMission!.Activate();
                 gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             }
-            else gbEndMission.Deactivate();
+            else gbEndMission!.Deactivate();
             DrawMissionToggles();
 
             // Warn that AI is running?
@@ -854,12 +855,12 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
         }
         private void DrawMissionToggles() {
-            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 10f, bShowEntityLabels ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, bShowStatBars ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, bShowTravel ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, bShowPath ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, bShowEffects ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, bViewDetection ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 10f, PlayerTeam.Mission_ShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, PlayerTeam.Mission_ShowStatBars ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, PlayerTeam.Mission_ShowTravel ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, PlayerTeam.Mission_ShowPath ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, PlayerTeam.Mission_ShowEffects ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, PlayerTeam.Mission_ViewDetection ? Color.White : Color.DimGray);
         }
         private void DisplayAILabel(ShaderProgram prog) {
             prog.SetUniform("textureEnabled", false);
@@ -893,7 +894,7 @@ namespace SpaceMercs.MainWindow {
                 Scale = 0.04f
             };
             TextRenderer.DrawWithOptions(SelectedEntity.Name, tro);
-            tro.YPos += (tro.Scale*1.2f);
+            tro.YPos += (tro.Scale * 1.2f);
             TextRenderer.DrawWithOptions("Level " + SelectedEntity.Level, tro);
             tro.YPos += (tro.Scale * 1.2f);
             int hp = (int)SelectedEntity.Health;
@@ -918,14 +919,14 @@ namespace SpaceMercs.MainWindow {
                 if (sno == 2 && gbZoomTo3 is not null) gbZoomTo3.ButtonY = sy + FrameBorder;
                 if (sno == 3 && gbZoomTo4 is not null) gbZoomTo4.ButtonY = sy + FrameBorder;
                 if (SelectedEntity == s) {
-                    gbWest.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
-                    gbEast.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
-                    gbNorth.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbSouth.ButtonY = sy + PanelHeight - (ButtonSize + ButtonGap);
-                    gbAttack.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbUseItem.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbInventory.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
-                    gbSearch.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
+                    gbWest!.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
+                    gbEast!.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
+                    gbNorth!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
+                    gbSouth!.ButtonY = sy + PanelHeight - (ButtonSize + ButtonGap);
+                    gbAttack!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
+                    gbUseItem!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
+                    gbInventory!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
+                    gbSearch!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
                     if (bAIRunning) gbInventory.Deactivate();
                     else gbInventory.Activate();
                     if (s.Stamina < s.AttackCost || s.GoTo != Point.Empty || bAIRunning) gbAttack.Deactivate();
@@ -955,9 +956,9 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void InitialiseGUIButtons() {
-            gpSubMenu.GetItem(I_View)?.Disable();
-            gpSubMenu.GetItem(I_Options)?.Disable();
-            gpSubMenu.GetItem(I_Mission)?.Enable();
+            gpSubMenu?.GetItem(I_View)?.Disable();
+            gpSubMenu?.GetItem(I_Options)?.Disable();
+            gpSubMenu?.GetItem(I_Mission)?.Enable();
             // Initialise all on startup
             if (!bGUIButtonsInitialised) {
                 lButtons.Clear();
@@ -1019,24 +1020,24 @@ namespace SpaceMercs.MainWindow {
 
             // Switch control buttons on/off when required
             if (SelectedEntity == null || !(SelectedEntity is Soldier)) {
-                gbWest.Deactivate();
-                gbEast.Deactivate();
-                gbNorth.Deactivate();
-                gbSouth.Deactivate();
-                gbAttack.Deactivate();
-                gbSearch.Deactivate();
-                gbInventory.Deactivate();
-                gbUseItem.Deactivate();
+                gbWest?.Deactivate();
+                gbEast?.Deactivate();
+                gbNorth?.Deactivate();
+                gbSouth?.Deactivate();
+                gbAttack?.Deactivate();
+                gbSearch?.Deactivate();
+                gbUseItem?.Deactivate();
+                gbInventory?.Deactivate();
             }
             else {
-                gbWest.Activate();
-                gbEast.Activate();
-                gbNorth.Activate();
-                gbSouth.Activate();
-                gbAttack.Activate();
-                gbSearch.Activate();
-                gbInventory.Activate();
-                gbUseItem.Activate();
+                gbWest!.Activate();
+                gbEast!.Activate();
+                gbNorth!.Activate();
+                gbSouth!.Activate();
+                gbAttack!.Activate();
+                gbSearch!.Activate();
+                gbUseItem!.Activate();
+                gbInventory!.Activate();
             }
         }
         private void SetupZoomToButtons() {

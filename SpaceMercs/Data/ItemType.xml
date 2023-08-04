@@ -1,7 +1,7 @@
 ﻿<Data>
   <!-- Equipment for Soldiers -->
   <ItemType Name="Medikit">
-    <Mass>0.5</Mass>
+    <Mass>0.3</Mass>
     <Cost>6</Cost>
     <Rarity>4</Rarity>
     <Desc>A medikit, combining bandages and medication required to patch up serious wounds.</Desc>
@@ -44,7 +44,7 @@
     <Tex>1,1</Tex>
   </ItemType>
   <ItemType Name="Nannite Medikit">
-    <Mass>0.7</Mass>
+    <Mass>0.4</Mass>
     <Cost>20</Cost>
     <Rarity>8</Rarity>
     <Desc>A medikit, combining bandages and medication required to patch up serious wounds. Based on nannite technology.</Desc>

@@ -4,9 +4,9 @@
     <LevelRange>1,4</LevelRange>
     <Attack>8</Attack>
     <Defence>5</Defence>
-    <Health>8</Health>
+    <Health>10</Health>
     <Stamina>16</Stamina>
-    <Armour>8</Armour>
+    <Armour>12</Armour>
     <BodyType>Plant</BodyType>
     <MovementCost>6.0</MovementCost>
     <Col1>0, 225, 0</Col1>
@@ -24,11 +24,11 @@
   <CreatureType Name="Triffid Lasher">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>11</Attack>
+    <Attack>10</Attack>
     <Defence>6</Defence>
-    <Health>10</Health>
+    <Health>12</Health>
     <Stamina>16</Stamina>
-    <Armour>12</Armour>
+    <Armour>14</Armour>
     <BodyType>Plant</BodyType>
     <MovementCost>10.0</MovementCost>
     <Col1>0, 215, 0</Col1>
@@ -46,11 +46,11 @@
   <CreatureType Name="Triffid Spore Thrower">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>12</Attack>
+    <Attack>10</Attack>
     <Defence>6</Defence>
-    <Health>10</Health>
+    <Health>14</Health>
     <Stamina>16</Stamina>
-    <Armour>14</Armour>
+    <Armour>16</Armour>
     <BodyType>Plant</BodyType>
     <MovementCost>10.0</MovementCost>
     <Col1>20, 215, 0</Col1>
@@ -70,7 +70,7 @@
     <LevelRange>2,7</LevelRange>
     <Attack>15</Attack>
     <Defence>6</Defence>
-    <Health>22</Health>
+    <Health>28</Health>
     <Stamina>18</Stamina>
     <Armour>20</Armour>
     <BodyType>Plant</BodyType>

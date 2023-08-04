@@ -25,7 +25,7 @@ namespace SpaceMercs {
         public const double SearchCost = 10.0; // Cost, in stamina points, for searching the nearby area
         public const double UseItemCost = 10.0; // Cost, in stamina points, for using an item
         public const int BaseSearchRadius = 5; // Maximum radius of any search for unskilled searcher (increase by 1 per point in perception)
-        public const double BaseSearchChance = 75.0; // Chance of spotting a hidden object at distance zero
+        public const double BaseSearchChance = 70.0; // Chance of spotting a hidden object at distance zero (plus Intellect)
         public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
         public const double SearchBoostPerSkill = 5.0; // Increase in chance to spot a hidden object for each point in Perception.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
@@ -138,10 +138,10 @@ namespace SpaceMercs {
         public const double BaseDetectionRange = 7.0; // Range in squares at which a creature of same level can spot you, if you're unencumbered and with default agility
         public const int CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detectionr ange
-        public const double SoldierDamageModifier = 1.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
-        public const double AttackDamageScale = 0.8;  // Creature and Soldier damage scaled by this
+        public const double CreatureAttackDamageScale = 0.6;  // Modifier applied to damage done by Creatures
+        public const double SoldierAttackDamageScale = 1.0;  // Modifier applied to damage done by player-controlled Soldiers
 
         // Miscellaneous
         public const int BufferSize = 10000;

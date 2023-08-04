@@ -29,7 +29,7 @@ namespace SpaceMercs.MainWindow {
         private DateTime lastLoad = DateTime.MinValue;
         private readonly Stopwatch swLastTick = new Stopwatch();
         private readonly Stopwatch swLastClick = new Stopwatch();
-        private GUIButton gbLoadGame, gbNewGame, gbExitGame;
+        private GUIButton? gbLoadGame, gbNewGame, gbExitGame;
 
         public GUIMessageBox msgBox { get; private set; }
         public Travel? TravelDetails { get; private set; }
@@ -55,6 +55,7 @@ namespace SpaceMercs.MainWindow {
             swLastClick.Start();
 
             WindowState = WindowState.Normal;
+            msgBox = new GUIMessageBox(this);
         }
 
         #region GameWindow Triggers
@@ -73,7 +74,6 @@ namespace SpaceMercs.MainWindow {
             SetupGUIElements();
             bLoaded = true;
             ThisDispatcher = Dispatcher.CurrentDispatcher;
-            msgBox = new GUIMessageBox(this);
 
             // Setup the default shader programs
             pos2DCol4ShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
@@ -213,7 +213,15 @@ namespace SpaceMercs.MainWindow {
 
         // Closing the window - shut down stuff
         protected override void OnClosing(CancelEventArgs e) {
-            bLoaded = false;
+            if (MessageBox.Show("Really close the game? You will lose unsaved progress!", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+                // Cancel closing - keep the window open
+                e.Cancel = true;
+            }
+            else {
+                // Actually closing
+                bLoaded = false;
+            }
+            base.OnClosing(e);
         }
         #endregion // GameWindow Triggers
 
@@ -231,9 +239,9 @@ namespace SpaceMercs.MainWindow {
             TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.07f, Aspect = Aspect };
             TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);
 
-            gbLoadGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            gbNewGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
-            gbExitGame.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbLoadGame!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbNewGame!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+            gbExitGame!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
         }
 
         // Display a set of circles at incremental radii to debug positions
@@ -386,9 +394,9 @@ namespace SpaceMercs.MainWindow {
         // Mouse handling
         protected override void OnMouseMove(MouseMoveEventArgs e) {
             if (!GalaxyMap.bMapSetup) {
-                gbLoadGame.IsHover((int)e.X, (int)e.Y);
-                gbNewGame.IsHover((int)e.X, (int)e.Y);
-                gbExitGame.IsHover((int)e.X, (int)e.Y);
+                gbLoadGame?.IsHover((int)e.X, (int)e.Y);
+                gbNewGame?.IsHover((int)e.X, (int)e.Y);
+                gbExitGame?.IsHover((int)e.X, (int)e.Y);
                 return;
             }
             if (PlayerTeam is null) return;
@@ -419,10 +427,10 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Hover over GUI objects
-            gbRenameObject.IsHover((int)e.X, (int)e.Y);
-            gbFlyTo.IsHover((int)e.X, (int)e.Y);
-            gbViewColony.IsHover((int)e.X, (int)e.Y);
-            gbScan.IsHover((int)e.X, (int)e.Y);
+            gbRenameObject?.IsHover((int)e.X, (int)e.Y);
+            gbFlyTo?.IsHover((int)e.X, (int)e.Y);
+            gbViewColony?.IsHover((int)e.X, (int)e.Y);
+            gbScan?.IsHover((int)e.X, (int)e.Y);
             if (view == ViewMode.ViewMap) MapHover();
         }
         protected override void OnMouseDown(MouseButtonEventArgs e) {
@@ -440,14 +448,14 @@ namespace SpaceMercs.MainWindow {
         protected override void OnMouseUp(MouseButtonEventArgs e) {
             if (!GalaxyMap.bMapSetup) {
                 if (e.Button == MouseButton.Left) {
-                    if (gbLoadGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
-                    if (gbNewGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
-                    if (gbExitGame.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                    if (gbLoadGame?.CaptureClick((int)MousePosition.X, (int)MousePosition.Y) ?? false) return;
+                    if (gbNewGame?.CaptureClick((int)MousePosition.X, (int)MousePosition.Y) ?? false) return;
+                    if (gbExitGame?.CaptureClick((int)MousePosition.X, (int)MousePosition.Y) ?? false) return;
                 }
                 return;
             }
             if (PlayerTeam == null) return;
-            if (msgBox.Active) {
+            if (msgBox is not null && msgBox.Active) {
                 msgBox.CaptureClick((int)MousePosition.X, (int)MousePosition.Y);
                 return;
             }
@@ -470,10 +478,10 @@ namespace SpaceMercs.MainWindow {
                 // Add right click stuff here, if needed
             }
             if (e.Button == MouseButton.Left) {
-                if (gbRenameObject.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
-                if (gbFlyTo.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
-                if (gbViewColony.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
-                if (gbScan.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbRenameObject!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbFlyTo!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbViewColony!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbScan!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (aoHover != null) aoSelected = aoHover;
                 SetSelection();
                 CheckMenuClick();
@@ -520,10 +528,10 @@ namespace SpaceMercs.MainWindow {
                         st.GeneratePlanets(GalaxyMap.PlanetDensity);
                         view = ViewMode.ViewSystem;
                         aoSelected = null;
-                        gbRenameObject.Deactivate();
-                        gbFlyTo.Deactivate();
-                        gbViewColony.Deactivate();
-                        gbScan.Deactivate();
+                        gbRenameObject?.Deactivate();
+                        gbFlyTo?.Deactivate();
+                        gbViewColony?.Deactivate();
+                        gbScan?.Deactivate();
                     }
                     else {
                         msgBox.PopupMessage("You have not yet visited that system");
@@ -532,7 +540,7 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void CheckMenuClick() {
-            if (gpMenu.HoverID == -1) return;
+            if (gpMenu!.HoverID == -1) return;
             switch ((uint)gpMenu.HoverID) {
                 case I_New:
                     if (GalaxyMap.bMapSetup) {
@@ -574,12 +582,12 @@ namespace SpaceMercs.MainWindow {
                 case I_OptionsFlags: bShowFlags = !bShowFlags; return;
                 case I_OptionsColonies: bShowColonies = !bShowColonies; return;
                 case I_MissionDetails: DisplayMissionDetails();  return;
-                case I_MissionLabels: bShowEntityLabels = !bShowEntityLabels; return;
-                case I_MissionStatBars: bShowStatBars = !bShowStatBars; return;
-                case I_MissionTravel: bShowTravel = !bShowTravel; return;
-                case I_MissionPath: bShowPath = !bShowPath; return;
-                case I_MissionEffects: bShowEffects = !bShowEffects; return;
-                case I_MissionDetection: bViewDetection = !bViewDetection; return;
+                case I_MissionLabels: PlayerTeam.Mission_ShowLabels = !PlayerTeam.Mission_ShowLabels; return;
+                case I_MissionStatBars: PlayerTeam.Mission_ShowStatBars = !PlayerTeam.Mission_ShowStatBars; return;
+                case I_MissionTravel: PlayerTeam.Mission_ShowTravel = !PlayerTeam.Mission_ShowTravel; return;
+                case I_MissionPath: PlayerTeam.Mission_ShowPath = !PlayerTeam.Mission_ShowPath; return;
+                case I_MissionEffects: PlayerTeam.Mission_ShowEffects = !PlayerTeam.Mission_ShowEffects; return;
+                case I_MissionDetection: PlayerTeam.Mission_ViewDetection = !PlayerTeam.Mission_ViewDetection; return;
             }
         }
         #endregion // Input Handling

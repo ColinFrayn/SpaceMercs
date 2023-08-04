@@ -2,10 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Remove all compiler warnings and messages 
-
-Testing
-
 MapViewMission
 - VisualEffect.DisplayShotLine()
 - Test handling of large creatures
@@ -13,6 +9,16 @@ MapViewMission
 Display star labels & flags on map
 
 Descended to next level - random bit of map was visible (shaded) that shouldn't have been
+
+Add "BackToMap" icon on ship view screen
+
+"Quality" filter in merchant store
+
+Quality scaling for cost overrides material cost scaling. Maybe base it off the item's properties??
+
+On menu, when moving over to the RHS, be more forgiving of slowness
+
+Hit regenerate mission loads of times and get a crash in vertex buffer disposal. Seems to just be happening in GC?? Something not initialised?
 
 ==========================================================================================================
 
@@ -26,6 +32,14 @@ Updated all grapics to OpenGL4
 Updated text renderer to use TrueType fonts
 
 Prevented targetting of self or own team in missions
+
+"Are you sure" on close window
+
+Rebalanced (reduced slightly) creature damage, especially at low levels
+
+Bugfix: After saving/reloading, ZoomTo button links to the wrong location
+Bugfix: Fixed handling/saving of view options
+Bugfix: Numerous minor bugfixes
 
 
 -------

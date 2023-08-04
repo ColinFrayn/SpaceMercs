@@ -232,17 +232,18 @@ namespace SpaceMercs {
             MissionType tp = GenerateRandomColonyMissionType(cl.Location, rand);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = cl.Location;
-            if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            else m.RacialOpponent = cl.Location.GetRandomRace(rand);
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
             if (m.Type == MissionType.BoardingParty) {
-                if (m.RacialOpponent is null) throw new Exception("Attempting to create a boarding party mission with no opponent");
+                m.RacialOpponent = cl.Location.GetRandomRace(rand);
+                m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 m.ShipTarget = Ship.GenerateRandomShipOfRace(m.RacialOpponent, m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
                 if (m.Size < 1) m.Size = 1;
             }
             else {
+                if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+                else m.RacialOpponent = cl.Location.GetRandomRace(rand);
+                m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 // Set mission goal
                 Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
                 m.Goal = mgtp.Item1;
@@ -495,6 +496,7 @@ namespace SpaceMercs {
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)
+            if (Goal == MissionGoal.Gather) sb.AppendLine("We will give you a share of the profits from the items you gather.");
             if (RacialOpponent != null) sb.AppendLine("Primary threat will be " + RacialOpponent.Name + " " + PrimaryEnemy.Name);
             else sb.AppendLine("Primary threat will be " + PrimaryEnemy.Name);
             if (!String.IsNullOrEmpty(strSz)) sb.AppendLine(strSz);

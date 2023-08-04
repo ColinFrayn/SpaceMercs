@@ -1,8 +1,8 @@
 ﻿<Data>
   <CreatureType Name="Rock Hopper">
     <LevelRange>1,10</LevelRange>
-    <Attack>10</Attack>
-    <Defence>11</Defence>
+    <Attack>8</Attack>
+    <Defence>10</Defence>
     <Health>13</Health>
     <Stamina>17</Stamina>
     <Armour>10</Armour>
@@ -16,8 +16,8 @@
   </CreatureType>
   <CreatureType Name="Rock Python">
     <LevelRange>1,10</LevelRange>
-    <Attack>11</Attack>
-    <Defence>10</Defence>
+    <Attack>10</Attack>
+    <Defence>9</Defence>
     <Health>9</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
@@ -35,7 +35,7 @@
   </CreatureType>
   <CreatureType Name="Cliff Dweller">
     <LevelRange>1,10</LevelRange>
-    <Attack>12</Attack>
+    <Attack>11</Attack>
     <Defence>11</Defence>
     <Health>11</Health>
     <Stamina>16</Stamina>
@@ -52,7 +52,7 @@
   <CreatureType Name="Giant Scorpion">
     <Size>2</Size>
     <LevelRange>2,12</LevelRange>
-    <Attack>13</Attack>
+    <Attack>11</Attack>
     <Defence>12</Defence>
     <Health>14</Health>
     <Stamina>16</Stamina>
@@ -77,6 +77,7 @@
     <Health>15</Health>
     <Stamina>17</Stamina>
     <Interact/>
+    <MovementCost>1.2</MovementCost>
     <Armour>36</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>

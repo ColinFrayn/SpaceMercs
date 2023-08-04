@@ -96,7 +96,7 @@ namespace SpaceMercs {
             }
 
             Missions.Clear();
-            foreach (XmlNode xm in xml.SelectNodesToList("Missions/Soldier")) {
+            foreach (XmlNode xm in xml.SelectNodesToList("Missions/Mission")) {
                 Mission m = new Mission(xm, loc);
                 Missions.Add(m);
             }

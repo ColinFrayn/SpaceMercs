@@ -1,8 +1,8 @@
 ﻿<Data>
   <CreatureType Name="Arachnid Drone">
     <LevelRange>1,10</LevelRange>
-    <Attack>10</Attack>
-    <Defence>10</Defence>
+    <Attack>8</Attack>
+    <Defence>8</Defence>
     <Armour>10</Armour>
     <Health>8</Health>
     <Stamina>16</Stamina>
@@ -17,8 +17,8 @@
   </CreatureType>
   <CreatureType Name="Giant Arachnid">
     <LevelRange>1,10</LevelRange>
-    <Attack>14</Attack>
-    <Defence>14</Defence>
+    <Attack>12</Attack>
+    <Defence>12</Defence>
     <Armour>14</Armour>
     <Health>12</Health>
     <Stamina>18</Stamina>
@@ -37,8 +37,8 @@
   <CreatureType Name="Arachnid Soldier">
     <Size>2</Size>
     <LevelRange>2,15</LevelRange>
-    <Attack>18</Attack>
-    <Defence>16</Defence>
+    <Attack>15</Attack>
+    <Defence>14</Defence>
     <Armour>18</Armour>
     <Health>14</Health>
     <Stamina>18</Stamina>
@@ -57,7 +57,7 @@
   <CreatureType Name="Arachnid Queen">
     <Size>3</Size>
     <LevelRange>5,20</LevelRange>
-    <Attack>24</Attack>
+    <Attack>22</Attack>
     <Defence>14</Defence>
     <Armour>22</Armour>
     <Health>20</Health>

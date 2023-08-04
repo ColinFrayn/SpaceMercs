@@ -1,7 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Void Servant">
     <LevelRange>8,16</LevelRange>
-    <Attack>13</Attack>
+    <Attack>11</Attack>
     <Defence>11</Defence>
     <Armour>22</Armour>
     <Health>12</Health>

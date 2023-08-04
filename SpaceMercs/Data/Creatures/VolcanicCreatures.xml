@@ -1,8 +1,8 @@
 ﻿<Data>
   <CreatureType Name="Fire Lizard">
     <LevelRange>1,10</LevelRange>
-    <Attack>10</Attack>
-    <Defence>10</Defence>
+    <Attack>8</Attack>
+    <Defence>8</Defence>
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
@@ -21,8 +21,8 @@
   </CreatureType>
   <CreatureType Name="Rock Viper">
     <LevelRange>1,10</LevelRange>
-    <Attack>12</Attack>
-    <Defence>11</Defence>
+    <Attack>11</Attack>
+    <Defence>9</Defence>
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
@@ -42,8 +42,8 @@
   </CreatureType>
   <CreatureType Name="Lava Beetle">
     <LevelRange>1,10</LevelRange>
-    <Attack>12</Attack>
-    <Defence>10</Defence>
+    <Attack>10</Attack>
+    <Defence>11</Defence>
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
@@ -67,8 +67,8 @@
   <CreatureType Name="Lava Spider">
     <Size>2</Size>
     <LevelRange>2,12</LevelRange>
-    <Attack>14</Attack>
-    <Defence>11</Defence>
+    <Attack>12</Attack>
+    <Defence>10</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>

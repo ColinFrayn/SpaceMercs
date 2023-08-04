@@ -81,6 +81,7 @@ namespace SpaceMercs {
             GL.BindTexture(TextureTarget.Texture2D, iTextureID);
             GL.Enable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
@@ -239,19 +240,19 @@ namespace SpaceMercs {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             WeaponType.DamageType type = WeaponType.DamageType.Physical;
             if (EquippedWeapon == null) {
-                double dam = (rnd.NextDouble() + 1.0) * Const.AttackDamageScale * Strength / 15.0;  // Melee does rubbish damage, in general
-                AllDam.Add(WeaponType.DamageType.Physical, dam * hmod * Const.SoldierDamageModifier);
+                double dam = (rnd.NextDouble() + 1.0) * Const.SoldierAttackDamageScale * Strength / 15.0;  // Melee does rubbish damage, in general
+                AllDam.Add(WeaponType.DamageType.Physical, dam * hmod);
             }
             else {
                 double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
                 //if (EquippedWeapon.Type.IsMeleeWeapon) dam *= Strength / 10.0;
                 hmod = Attack / 10.0; // 10% damage bonus per attack point (includes weapon skill etc.)
-                hmod *= Const.AttackDamageScale;
+                hmod *= Const.SoldierAttackDamageScale;
                 type = EquippedWeapon.Type.DType;
-                AllDam.Add(type, dam * hmod * Const.SoldierDamageModifier);
+                AllDam.Add(type, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
-                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * Const.SoldierDamageModifier;
-                    else AllDam.Add(bdam.Key, bdam.Value * hmod * Const.SoldierDamageModifier);
+                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
+                    else AllDam.Add(bdam.Key, bdam.Value * hmod);
                 }
             }
 
@@ -323,7 +324,7 @@ namespace SpaceMercs {
         public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost * (1.0 + Encumbrance)); } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
-        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill; } }
+        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Intellect; } }
         private void CalculateMaxStats() {
             MaxHealth = BaseHealth + StatBonuses(StatType.Health);
             if (Health > MaxHealth) Health = MaxHealth;
@@ -1124,7 +1125,7 @@ namespace SpaceMercs {
                         Trap? tr = level.GetTrapAtPoint(x, y);
                         if (tr is not null && tr.Hidden) bFound = true;
 
-                        // TODO Add hidden creatures, traps
+                        // TODO Add hidden creatures
 
                         if (!bFound) continue;
 
