@@ -5,8 +5,6 @@ ToDo List
 MapViewMission
 - VisualEffect.DisplayShotLine()
 
-Soldier death on a mission, at least one left alive on ship, should continue
-
 Display star labels & flags on map
 
 Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
@@ -42,6 +40,7 @@ Bugfix: After saving/reloading, ZoomTo button links to the wrong location
 Bugfix: Fixed handling/saving of view options
 Bugfix: Numerous minor bugfixes
 Bugfix: Fixed issue when occasional crashes would occur disposing graphical elements
+Bugfix: Mercenary hiring dialog did not work correctly when sorted
 
 
 -------
@@ -51,6 +50,8 @@ Testing
 Encounters : Are there too many of them? Test in lots of situations.
 
 Test handling of large creatures
+
+Soldier death on a mission, at least one left alive on ship, should continue
 
 
 ---------------------

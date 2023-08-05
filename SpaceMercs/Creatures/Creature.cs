@@ -69,7 +69,7 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
-            Matrix4 pTranslateM = Matrix4.CreateTranslation(X + 0.5f, Y + 0.5f, Const.EntityLayer);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(X + ((float)Type.Size / 2.0f), Y + ((float)Type.Size / 2.0f), Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale((float)Type.Scale);
             Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing+180)*Math.PI/180));
             prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
@@ -83,7 +83,7 @@ namespace SpaceMercs {
                     Alignment = Alignment.BottomMiddle,
                     Aspect = 1f,
                     TextColour = Color.White,
-                    XPos = X + 0.5f,
+                    XPos = X + ((float)Type.Size / 2.0f),
                     YPos = Y - 0f,
                     ZPos = 0.02f,
                     Scale = 0.35f,
@@ -95,13 +95,11 @@ namespace SpaceMercs {
             }
             if (bStatBars) {
                 prog.SetUniform("textureEnabled", false);
-                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.1f, 1.0f, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
-                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.25f, 1.0f, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
-                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.4f, 1.0f, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.1f, (float)Type.Size, 0.09f, (float)(Health / MaxHealth), new Vector4(0.3f, 1f, 0.3f, 1f), new Vector4(1f, 0f, 0f, 1f));
+                GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.25f, (float)Type.Size, 0.09f, (float)(Stamina / MaxStamina), new Vector4(1f, 1f, 1f, 1f), new Vector4(0.6f, 0.6f, 0.6f, 1f));
+                if (MaxShields > 0) GraphicsFunctions.DisplayBicolourFractBar(prog, X, Y - 0.4f, (float)Type.Size, 0.09f, (float)(Shields / MaxShields), new Vector4(0.2f, 0.5f, 1f, 1f), new Vector4(0.2f, 0.2f, 0.2f, 1f));
             }
             if (bShowEffects && _Effects.Any()) {
-                //GL.Translate(X + (float)Type.Size, Y + ((float)Type.Size * 0.25f), Const.EntityLayer);
-                //GL.Scale(Type.Scale, Type.Scale, 1.0);
                 int nEffects = _Effects.Count;
                 if (nEffects > 4) nEffects = 4;
                 pScaleM = Matrix4.CreateScale(0.08f);

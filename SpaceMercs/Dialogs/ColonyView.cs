@@ -264,8 +264,7 @@ namespace SpaceMercs.Dialogs {
 
         }
         private void btHireMercenary_Click(object sender, EventArgs e) {
-            Soldier? merc = dgMercenaries.SelectedRows[0].Tag as Soldier;
-            if (merc is null) return;
+            if (dgMercenaries.SelectedRows[0].Tag is not Soldier merc) return;
             double Cost = merc.HireCost() * PriceMod;
             if (Cost > PlayerTeam.Cash) {
                 MessageBox.Show("You cannot afford to hire that soldier!");
@@ -287,8 +286,7 @@ namespace SpaceMercs.Dialogs {
             SetupMercenariesTab();
         }
         private void btRunMission_Click(object sender, EventArgs e) {
-            Mission? miss = dgMissions.SelectedRows[0].Tag as Mission;
-            if (miss is null) {
+            if (dgMissions.SelectedRows[0].Tag is not Mission miss) {
                 MessageBox.Show("Null mission");
                 return;
             }
@@ -464,11 +462,10 @@ namespace SpaceMercs.Dialogs {
 
         // Double click to get further details on specific entries
         private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
+            if (dgMercenaries.CurrentRow.Tag is not Soldier merc) return;
             StringBuilder sb = new StringBuilder();
-            int i = dgMercenaries.CurrentCell.RowIndex;
-            Soldier merc = (cl.MercenariesList()).ElementAt(i);
             sb.AppendLine(merc.Name);
-            sb.AppendLine("Level " + merc.Level + " " + merc.Gender + " " + merc.Race.Name);
+            sb.AppendLine($"Level {merc.Level} {merc.Gender} {merc.Race.Name}");
             sb.AppendLine("Strength = " + merc.BaseStrength);
             sb.AppendLine("Agility = " + merc.BaseAgility);
             sb.AppendLine("Intellect = " + merc.BaseIntellect);
@@ -490,8 +487,7 @@ namespace SpaceMercs.Dialogs {
             MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
         }
         private void dgMissions_DoubleClick(object sender, EventArgs e) {
-            int i = dgMissions.CurrentCell.RowIndex;
-            Mission miss = cl.MissionsList().ElementAt(i);
+            if (dgMercenaries.CurrentRow.Tag is not Mission miss) return;
             MessageBox.Show(this, miss.GetDescription(), "Mission Details");
         }
         private void dgMerchant_DoubleClick(object sender, EventArgs e) {
