@@ -707,12 +707,13 @@ namespace SpaceMercs {
 
         // How much to hire this soldier as a mercenary? (ignoring race relations)
         public double HireCost() {
-            double dBase = (Level + 3) * (Level + 1) * Const.MercenaryCostScale;
-            double dKit = EquipmentCost();
+            double dBase = Level * Math.Pow(Const.MercenaryCostBase, Const.MercenaryCostExponent * Level) * Const.MercenaryCostScale;
+            
+            // Bonus cost if they are better than average
             int Bonus = (BaseStrength + BaseAgility + BaseIntellect + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Intellect + Race.Toughness + Race.Endurance);
             if (Bonus < 1) Bonus = 0;
             else Bonus++;
-            double dStats = 1.0 + ((Bonus * Bonus) / 30.0); // Bonus cost if they are better than average
+            double dStats = 1.0 + ((Bonus * Bonus) / 30.0);
 
             // Bonuses for large individual scores
             if (BaseStrength - Race.Strength > 3) dStats += Math.Pow(BaseStrength - Race.Strength - 2, 2) / 25.0;
@@ -721,8 +722,11 @@ namespace SpaceMercs {
             if (BaseToughness - Race.Toughness > 3) dStats += Math.Pow(BaseToughness - Race.Toughness - 2, 2) / 25.0;
             if (BaseEndurance - Race.Endurance > 3) dStats += Math.Pow(BaseEndurance - Race.Endurance - 2, 2) / 25.0;
 
+            // Additional cost for teh mercenary's equipment
+            double dKit = EquipmentCost();
+
             // Final cost
-            return (dBase * dStats) + dKit;
+            return (dBase * dStats) + (dKit * Const.MercenaryKitValueScale);
         }
         public double EquipmentCost() {
             double dCost = 0.0;

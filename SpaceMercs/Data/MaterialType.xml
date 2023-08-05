@@ -1,14 +1,14 @@
 ﻿<Data>
   <!-- Armour materials -->
   <MaterialType Name="Carbon Fibre">
-    <MassMod>0.8</MassMod>
+    <MassMod>0.7</MassMod>
     <CostMod>0.75</CostMod>
     <ArmourMod>0.6</ArmourMod>
     <Rarity>0.7</Rarity>
     <Desc>Carbon fibre is cheap, light and plentiful, but doesn't offer much protection.</Desc>
   </MaterialType>
   <MaterialType Name="Steel">
-    <MassMod>1.2</MassMod>
+    <MassMod>1.0</MassMod>
     <CostMod>1</CostMod>
     <ArmourMod>1</ArmourMod>
     <Rarity>1.0</Rarity>
@@ -36,7 +36,7 @@
     <Desc>Nanomesh is made from fine carbon nanotubes. It is light and very strong.</Desc>
   </MaterialType>
   <MaterialType Name="Mithril">
-    <MassMod>0.85</MassMod>
+    <MassMod>0.8</MassMod>
     <CostMod>12.0</CostMod>
     <ArmourMod>2.4</ArmourMod>
     <Rarity>0.02</Rarity>
@@ -50,14 +50,14 @@
     <Desc>Adamantium is a weighty but highly resistant nano-engineered metallic substance.</Desc>
   </MaterialType>
   <MaterialType Name="Ultramesh">
-    <MassMod>0.75</MassMod>
+    <MassMod>0.6</MassMod>
     <CostMod>18.0</CostMod>
     <ArmourMod>2.5</ArmourMod>
     <Rarity>0.005</Rarity>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>
   </MaterialType>
   <MaterialType Name="Aeromesh">
-    <MassMod>0.5</MassMod>
+    <MassMod>0.4</MassMod>
     <CostMod>18.0</CostMod>
     <ArmourMod>2.0</ArmourMod>
     <Rarity>0.005</Rarity>

@@ -161,6 +161,9 @@ namespace SpaceMercs {
         public const int ItemIDBase = 2000000; // ID of first ItemType
         public const int NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
+        public const double MercenaryCostBase = 1.1;  // Base for exponential price calculation for a mercenary
+        public const double MercenaryCostExponent = 1.4;  // Exponent scale for exponential price calculation for a mercenary
+        public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount

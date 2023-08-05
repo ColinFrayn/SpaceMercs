@@ -57,7 +57,6 @@ namespace SpaceMercs.MainWindow {
             float py = 0.25f;
             float mx = (float)MousePosition.X / (float)Size.X;
             float my = (float)MousePosition.Y / (float)Size.Y;
-            bool bOdd = true;
             fullShaderProgram.SetUniform("lightPos", 100000f, 10000f, 10000f);
             foreach (Planet pl in SystemStar.Planets) {
                 float scale = pl.DrawScale * Const.PlanetScale;
@@ -74,9 +73,9 @@ namespace SpaceMercs.MainWindow {
 
                 if (bShowLabels && !string.IsNullOrEmpty(pl.Name)) {
                     float dskip = (pl.Colony != null) ? 0.06f : 0.01f;
-                    float yskip = bOdd ? (scale * 1.06f) + 0.01f : -(scale * 1.06f) - dskip;
+                    float yskip = (scale * 1.06f) + 0.01f;
                     TextRenderOptions tro = new TextRenderOptions() {
-                        Alignment = bOdd ? Alignment.TopMiddle : Alignment.BottomMiddle,
+                        Alignment = Alignment.TopMiddle,
                         Aspect = aspect,
                         TextColour = Color.White,
                         XPos = px,
@@ -156,7 +155,6 @@ namespace SpaceMercs.MainWindow {
                 }
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.05f) * 0.8f;
-                // bOdd = !bOdd;
             }
         }
 

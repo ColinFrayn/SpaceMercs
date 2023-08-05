@@ -23,18 +23,19 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             tcMain = new TabControl();
             tpMerchant = new TabPage();
+            cbAffordable = new CheckBox();
             btRandomiseMerchant = new Button();
-            lbTeamCash = new Label();
+            lbTeamCashMerch = new Label();
             label3 = new Label();
             label1 = new Label();
             tbFilter = new TextBox();
@@ -46,6 +47,8 @@
             colAvail = new DataGridViewTextBoxColumn();
             cbItemType = new ComboBox();
             tpMercenaries = new TabPage();
+            lbTeamCashMercs = new Label();
+            label12 = new Label();
             btRandomiseMercs = new Button();
             btHire = new Button();
             dgMercenaries = new DataGridView();
@@ -64,12 +67,16 @@
             colLevels = new DataGridViewTextBoxColumn();
             colReward = new DataGridViewTextBoxColumn();
             tpShips = new TabPage();
+            lbTeamCashShips = new Label();
+            label13 = new Label();
             btUpgrade = new Button();
             dgShips = new DataGridView();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
             tpUpgrade = new TabPage();
+            lbTeamCashFoundry = new Label();
+            label14 = new Label();
             btSellAll = new Button();
             btDismantle = new Button();
             btSell = new Button();
@@ -105,7 +112,6 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            cbAffordable = new CheckBox();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -143,7 +149,7 @@
             // 
             tpMerchant.Controls.Add(cbAffordable);
             tpMerchant.Controls.Add(btRandomiseMerchant);
-            tpMerchant.Controls.Add(lbTeamCash);
+            tpMerchant.Controls.Add(lbTeamCashMerch);
             tpMerchant.Controls.Add(label3);
             tpMerchant.Controls.Add(label1);
             tpMerchant.Controls.Add(tbFilter);
@@ -158,6 +164,19 @@
             tpMerchant.Text = "Merchants";
             tpMerchant.UseVisualStyleBackColor = true;
             // 
+            // cbAffordable
+            // 
+            cbAffordable.AutoSize = true;
+            cbAffordable.CheckAlign = ContentAlignment.MiddleRight;
+            cbAffordable.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbAffordable.Location = new Point(207, 17);
+            cbAffordable.Name = "cbAffordable";
+            cbAffordable.Size = new Size(124, 20);
+            cbAffordable.TabIndex = 8;
+            cbAffordable.Text = "Show Affordable";
+            cbAffordable.UseVisualStyleBackColor = true;
+            cbAffordable.CheckedChanged += cbAffordable_CheckedChanged;
+            // 
             // btRandomiseMerchant
             // 
             btRandomiseMerchant.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
@@ -170,20 +189,20 @@
             btRandomiseMerchant.UseVisualStyleBackColor = true;
             btRandomiseMerchant.Click += btRandomiseMerchant_Click;
             // 
-            // lbTeamCash
+            // lbTeamCashMerch
             // 
-            lbTeamCash.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbTeamCash.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCash.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbTeamCash.ImageAlign = ContentAlignment.MiddleRight;
-            lbTeamCash.Location = new Point(62, 478);
-            lbTeamCash.Margin = new Padding(5, 5, 5, 5);
-            lbTeamCash.Name = "lbTeamCash";
-            lbTeamCash.Padding = new Padding(2);
-            lbTeamCash.Size = new Size(128, 27);
-            lbTeamCash.TabIndex = 6;
-            lbTeamCash.Text = "888888.88cr";
-            lbTeamCash.TextAlign = ContentAlignment.MiddleCenter;
+            lbTeamCashMerch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashMerch.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCashMerch.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashMerch.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashMerch.Location = new Point(61, 479);
+            lbTeamCashMerch.Margin = new Padding(5);
+            lbTeamCashMerch.Name = "lbTeamCashMerch";
+            lbTeamCashMerch.Padding = new Padding(2);
+            lbTeamCashMerch.Size = new Size(128, 27);
+            lbTeamCashMerch.TabIndex = 6;
+            lbTeamCashMerch.Text = "888888.88cr";
+            lbTeamCashMerch.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -191,7 +210,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ImageAlign = ContentAlignment.MiddleRight;
-            label3.Location = new Point(14, 482);
+            label3.Location = new Point(13, 483);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(38, 16);
@@ -261,8 +280,8 @@
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colItem.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colItem.DefaultCellStyle = dataGridViewCellStyle9;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
             colItem.ReadOnly = true;
@@ -278,8 +297,8 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            Mass.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            Mass.DefaultCellStyle = dataGridViewCellStyle10;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
@@ -305,6 +324,8 @@
             // 
             // tpMercenaries
             // 
+            tpMercenaries.Controls.Add(lbTeamCashMercs);
+            tpMercenaries.Controls.Add(label12);
             tpMercenaries.Controls.Add(btRandomiseMercs);
             tpMercenaries.Controls.Add(btHire);
             tpMercenaries.Controls.Add(dgMercenaries);
@@ -315,6 +336,35 @@
             tpMercenaries.TabIndex = 1;
             tpMercenaries.Text = "Mercenaries";
             tpMercenaries.UseVisualStyleBackColor = true;
+            // 
+            // lbTeamCashMercs
+            // 
+            lbTeamCashMercs.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashMercs.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCashMercs.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashMercs.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashMercs.Location = new Point(61, 479);
+            lbTeamCashMercs.Margin = new Padding(5);
+            lbTeamCashMercs.Name = "lbTeamCashMercs";
+            lbTeamCashMercs.Padding = new Padding(2);
+            lbTeamCashMercs.Size = new Size(128, 27);
+            lbTeamCashMercs.TabIndex = 8;
+            lbTeamCashMercs.Text = "888888.88cr";
+            lbTeamCashMercs.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.ImageAlign = ContentAlignment.MiddleRight;
+            label12.Location = new Point(13, 483);
+            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(38, 16);
+            label12.TabIndex = 7;
+            label12.Text = "Cash";
+            label12.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btRandomiseMercs
             // 
@@ -366,8 +416,8 @@
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle11;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -459,8 +509,8 @@
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colMission.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colMission.DefaultCellStyle = dataGridViewCellStyle12;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
             colMission.ReadOnly = true;
@@ -468,8 +518,8 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colGoal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colGoal.DefaultCellStyle = dataGridViewCellStyle13;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
             colGoal.ReadOnly = true;
@@ -478,8 +528,8 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colOpp.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle14.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colOpp.DefaultCellStyle = dataGridViewCellStyle14;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
             colOpp.ReadOnly = true;
@@ -511,6 +561,8 @@
             // 
             // tpShips
             // 
+            tpShips.Controls.Add(lbTeamCashShips);
+            tpShips.Controls.Add(label13);
             tpShips.Controls.Add(btUpgrade);
             tpShips.Controls.Add(dgShips);
             tpShips.Location = new Point(4, 29);
@@ -521,11 +573,40 @@
             tpShips.Text = "Ship Vendor";
             tpShips.UseVisualStyleBackColor = true;
             // 
+            // lbTeamCashShips
+            // 
+            lbTeamCashShips.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashShips.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCashShips.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashShips.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashShips.Location = new Point(60, 478);
+            lbTeamCashShips.Margin = new Padding(5);
+            lbTeamCashShips.Name = "lbTeamCashShips";
+            lbTeamCashShips.Padding = new Padding(2);
+            lbTeamCashShips.Size = new Size(128, 27);
+            lbTeamCashShips.TabIndex = 10;
+            lbTeamCashShips.Text = "888888.88cr";
+            lbTeamCashShips.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label13.AutoSize = true;
+            label13.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.ImageAlign = ContentAlignment.MiddleRight;
+            label13.Location = new Point(12, 482);
+            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(38, 16);
+            label13.TabIndex = 9;
+            label13.Text = "Cash";
+            label13.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // btUpgrade
             // 
             btUpgrade.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btUpgrade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btUpgrade.Location = new Point(223, 473);
+            btUpgrade.Location = new Point(223, 477);
             btUpgrade.Margin = new Padding(4, 3, 4, 3);
             btUpgrade.Name = "btUpgrade";
             btUpgrade.Size = new Size(189, 28);
@@ -551,15 +632,15 @@
             dgShips.RowHeadersVisible = false;
             dgShips.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgShips.ShowEditingIcon = false;
-            dgShips.Size = new Size(612, 455);
+            dgShips.Size = new Size(612, 462);
             dgShips.TabIndex = 5;
             dgShips.SortCompare += dgShips_SortCompare;
             // 
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle15.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle15;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -582,6 +663,8 @@
             // 
             // tpUpgrade
             // 
+            tpUpgrade.Controls.Add(lbTeamCashFoundry);
+            tpUpgrade.Controls.Add(label14);
             tpUpgrade.Controls.Add(btSellAll);
             tpUpgrade.Controls.Add(btDismantle);
             tpUpgrade.Controls.Add(btSell);
@@ -597,6 +680,35 @@
             tpUpgrade.TabIndex = 4;
             tpUpgrade.Text = "Foundry";
             tpUpgrade.UseVisualStyleBackColor = true;
+            // 
+            // lbTeamCashFoundry
+            // 
+            lbTeamCashFoundry.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashFoundry.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCashFoundry.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashFoundry.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashFoundry.Location = new Point(63, 476);
+            lbTeamCashFoundry.Margin = new Padding(5);
+            lbTeamCashFoundry.Name = "lbTeamCashFoundry";
+            lbTeamCashFoundry.Padding = new Padding(2);
+            lbTeamCashFoundry.Size = new Size(128, 27);
+            lbTeamCashFoundry.TabIndex = 14;
+            lbTeamCashFoundry.Text = "888888.88cr";
+            lbTeamCashFoundry.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            label14.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label14.AutoSize = true;
+            label14.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.ImageAlign = ContentAlignment.MiddleRight;
+            label14.Location = new Point(15, 480);
+            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(38, 16);
+            label14.TabIndex = 13;
+            label14.Text = "Cash";
+            label14.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btSellAll
             // 
@@ -615,10 +727,10 @@
             // 
             btDismantle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btDismantle.Location = new Point(162, 475);
+            btDismantle.Location = new Point(345, 475);
             btDismantle.Margin = new Padding(4, 3, 4, 3);
             btDismantle.Name = "btDismantle";
-            btDismantle.Size = new Size(118, 28);
+            btDismantle.Size = new Size(90, 28);
             btDismantle.TabIndex = 11;
             btDismantle.Text = "Dismantle";
             btDismantle.UseVisualStyleBackColor = true;
@@ -641,10 +753,10 @@
             // 
             btImprove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btImprove.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btImprove.Location = new Point(9, 475);
+            btImprove.Location = new Point(240, 476);
             btImprove.Margin = new Padding(4, 3, 4, 3);
             btImprove.Name = "btImprove";
-            btImprove.Size = new Size(118, 28);
+            btImprove.Size = new Size(90, 28);
             btImprove.TabIndex = 9;
             btImprove.Text = "Improve";
             btImprove.UseVisualStyleBackColor = true;
@@ -709,8 +821,8 @@
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle16.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dgcItem.DefaultCellStyle = dataGridViewCellStyle16;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
             dgcItem.ReadOnly = true;
@@ -770,7 +882,7 @@
             lbNextGrowth.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbNextGrowth.ImageAlign = ContentAlignment.MiddleRight;
             lbNextGrowth.Location = new Point(120, 426);
-            lbNextGrowth.Margin = new Padding(5, 5, 5, 5);
+            lbNextGrowth.Margin = new Padding(5);
             lbNextGrowth.Name = "lbNextGrowth";
             lbNextGrowth.Padding = new Padding(2);
             lbNextGrowth.Size = new Size(193, 27);
@@ -799,7 +911,7 @@
             lbLastGrowth.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbLastGrowth.ImageAlign = ContentAlignment.MiddleRight;
             lbLastGrowth.Location = new Point(120, 377);
-            lbLastGrowth.Margin = new Padding(5, 5, 5, 5);
+            lbLastGrowth.Margin = new Padding(5);
             lbLastGrowth.Name = "lbLastGrowth";
             lbLastGrowth.Padding = new Padding(2);
             lbLastGrowth.Size = new Size(193, 27);
@@ -945,7 +1057,7 @@
             lbSystemName.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbSystemName.ImageAlign = ContentAlignment.MiddleRight;
             lbSystemName.Location = new Point(152, 72);
-            lbSystemName.Margin = new Padding(5, 5, 5, 5);
+            lbSystemName.Margin = new Padding(5);
             lbSystemName.Name = "lbSystemName";
             lbSystemName.Padding = new Padding(2);
             lbSystemName.Size = new Size(186, 27);
@@ -973,7 +1085,7 @@
             lbStarType.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbStarType.ImageAlign = ContentAlignment.MiddleRight;
             lbStarType.Location = new Point(152, 110);
-            lbStarType.Margin = new Padding(5, 5, 5, 5);
+            lbStarType.Margin = new Padding(5);
             lbStarType.Name = "lbStarType";
             lbStarType.Padding = new Padding(2);
             lbStarType.Size = new Size(186, 27);
@@ -1001,7 +1113,7 @@
             lbPlanetType.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbPlanetType.ImageAlign = ContentAlignment.MiddleRight;
             lbPlanetType.Location = new Point(152, 147);
-            lbPlanetType.Margin = new Padding(5, 5, 5, 5);
+            lbPlanetType.Margin = new Padding(5);
             lbPlanetType.Name = "lbPlanetType";
             lbPlanetType.Padding = new Padding(2);
             lbPlanetType.Size = new Size(186, 27);
@@ -1029,7 +1141,7 @@
             lbLocation.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbLocation.ImageAlign = ContentAlignment.MiddleRight;
             lbLocation.Location = new Point(152, 35);
-            lbLocation.Margin = new Padding(5, 5, 5, 5);
+            lbLocation.Margin = new Padding(5);
             lbLocation.Name = "lbLocation";
             lbLocation.Padding = new Padding(2);
             lbLocation.Size = new Size(186, 27);
@@ -1050,19 +1162,6 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // cbAffordable
-            // 
-            cbAffordable.AutoSize = true;
-            cbAffordable.CheckAlign = ContentAlignment.MiddleRight;
-            cbAffordable.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            cbAffordable.Location = new Point(207, 17);
-            cbAffordable.Name = "cbAffordable";
-            cbAffordable.Size = new Size(124, 20);
-            cbAffordable.TabIndex = 8;
-            cbAffordable.Text = "Show Affordable";
-            cbAffordable.UseVisualStyleBackColor = true;
-            cbAffordable.CheckedChanged += cbAffordable_CheckedChanged;
-            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1078,10 +1177,12 @@
             tpMerchant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).EndInit();
             tpMercenaries.ResumeLayout(false);
+            tpMercenaries.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgMercenaries).EndInit();
             tpMissions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgMissions).EndInit();
             tpShips.ResumeLayout(false);
+            tpShips.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgShips).EndInit();
             tpUpgrade.ResumeLayout(false);
             tpUpgrade.PerformLayout();
@@ -1133,7 +1234,7 @@
         private DataGridViewTextBoxColumn dgcLocation;
         private DataGridViewTextBoxColumn dgcValue;
         private DataGridViewTextBoxColumn dgcAvail;
-        private Label lbTeamCash;
+        private Label lbTeamCashMerch;
         private Label label3;
         private Button btRandomiseMissions;
         private Button btRandomiseMercs;
@@ -1169,5 +1270,11 @@
         private Label lbSystemName;
         private Label label10;
         private CheckBox cbAffordable;
+        private Label lbTeamCashMercs;
+        private Label label12;
+        private Label lbTeamCashShips;
+        private Label label13;
+        private Label lbTeamCashFoundry;
+        private Label label14;
     }
 }

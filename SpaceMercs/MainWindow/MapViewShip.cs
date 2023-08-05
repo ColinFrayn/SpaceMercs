@@ -421,7 +421,7 @@ namespace SpaceMercs.MainWindow {
 
             // Black out the unused bit
             if (fract < 1.0f) {
-                Matrix4 pbTranslateM = Matrix4.CreateTranslation(0.79f + (fract * barWidth), 0.1f, 0f);
+                Matrix4 pbTranslateM = Matrix4.CreateTranslation(0.79f + (fract * barWidth), 0.09f, 0f);
                 fullShaderProgram.SetUniform("model", pScaleM * pbTranslateM);
                 fullShaderProgram.SetUniform("flatColour", new Vector4(0f, 0f, 0f, 1f));
                 GL.UseProgram(fullShaderProgram.ShaderProgramHandle);

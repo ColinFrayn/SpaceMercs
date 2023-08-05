@@ -164,7 +164,7 @@ namespace SpaceMercs.Dialogs {
                 lbEquipped.Items.Add(ar.Name);
             }
             if (s.EquippedWeapon != null) lbEquipped.Items.Add(s.EquippedWeapon.Name);
-            lbWeight.Text = s.CalculateInventoryMass().ToString() + " kg";
+            lbWeight.Text = s.CalculateInventoryMass().ToString("N2") + " kg";
             lbCapacity.Text = Math.Round(s.MaximumCarry, 2).ToString() + " kg";
             lbEncumber.Text = Math.Round(s.Encumbrance * 100.0, 0).ToString() + "%";
             if (s.Encumbrance >= 1.0) lbEncumber.BackColor = Color.Red;

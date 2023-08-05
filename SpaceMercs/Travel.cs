@@ -331,10 +331,13 @@ namespace SpaceMercs {
             // Enemy attempts to board?
             if (fSep <= 4000.0 && PlayerTeam.PlayerShip.HullFract < (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.2) && PlayerTeam.CurrentMission.ShipTarget.HullFract > (Const.DEBUG_MORE_BOARDERS ? 0.2 : 0.3) && rand.NextDouble() > (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.7)) {
                 bPause = true;
-                ParentView.msgBox.PopupMessage("The enemy are attempting to board your ship. Get ready to repel boarders");
-                PlayerTeam.SetCurrentMission(Mission.CreateRepelBoardersMission(PlayerTeam.CurrentMission.RacialOpponent, PlayerTeam.CurrentMission.Diff, PlayerTeam.PlayerShip));
-                RunRepelBoardersMission(PlayerTeam.CurrentMission);
+                ParentView.msgBox.PopupMessage("The enemy are attempting to board your ship. Get ready to repel boarders", TriggerRepelBoardersMissionAction);
             }
+        }
+        private void TriggerRepelBoardersMissionAction() {
+            if (PlayerTeam.CurrentMission is null) return;
+            PlayerTeam.SetCurrentMission(Mission.CreateRepelBoardersMission(PlayerTeam.CurrentMission.RacialOpponent, PlayerTeam.CurrentMission.Diff, PlayerTeam.PlayerShip));
+            RunRepelBoardersMission(PlayerTeam.CurrentMission);
         }
         private void RunRepelBoardersMission(Mission miss) {
             bPause = true;

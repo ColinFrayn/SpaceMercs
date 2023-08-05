@@ -17,7 +17,8 @@ namespace SpaceMercs {
                       Title = $"SpaceMercs v{Const.strVersion}",
                       StartVisible = false,
                       StartFocused = true,
-                      MinimumSize = (500, 400),
+                      MinimumSize = (600, 600*5/7),
+                      AspectRatio = (700, 500),
                       API = OpenTK.Windowing.Common.ContextAPI.OpenGL,
                       //Profile = OpenTK.Windowing.Common.ContextProfile.Core,
                       APIVersion = new Version(4, 6)

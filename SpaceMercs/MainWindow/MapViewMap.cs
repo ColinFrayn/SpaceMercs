@@ -163,7 +163,7 @@ namespace SpaceMercs.MainWindow {
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Sector sc = GalaxyMap.GetSector(sx, sy);
-                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ);
+                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ, Aspect);
                 }
             }
         }

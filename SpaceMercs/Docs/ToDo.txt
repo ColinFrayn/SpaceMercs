@@ -2,14 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-MapViewMission
-- VisualEffect.DisplayShotLine()
-
-Display star labels & flags on map
-
 Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
-
-System view : Star sometimes vanishes on certain aspect ratios; planets overlap;
 
 ==========================================================================================================
 
@@ -34,7 +27,11 @@ Improved menu handling to stop submenus dropping out when hovering
 
 Handling soldier death, failed missions and the team being killed
 
-Several UI enhancements
+Display team cash on Mercenary Shop, Ship Vendor, Foundry
+
+Star labels and ownership flags on main map
+
+Several UI enhancements incl. locking the aspect ratio
 
 Bugfix: After saving/reloading, ZoomTo button links to the wrong location
 Bugfix: Fixed handling/saving of view options
@@ -49,10 +46,6 @@ Testing
 
 Encounters : Are there too many of them? Test in lots of situations.
 
-Test handling of large creatures
-
-Soldier death on a mission, at least one left alive on ship, should continue
-
 
 ---------------------
 Backburner : Features
@@ -66,6 +59,8 @@ First Contact
 - Arriving at a planet with a colony of that race
 - If ship is alien but you haven't met that alien race then handle it differently
 -- Display as unknown
+
+MapViewMission - VisualEffect.DisplayShotLine()
 
 Need to do missions to gain favour with alien races first
 - Need a baseline rep before you can trade
@@ -120,12 +115,6 @@ Allow creatures to have multiple weapons (ranged and melee)?
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
 
-Handle defeat:
-- ScanPlanet.RunMission -> Defeat
-- ColonyView.RunMission -> Defeat
-- Not necessarily dead, provided there's at least one soldier left in the current ship...
-- MapView.GameOver()
-
 Investigate Blockly for scripting soldiers?
 
 
@@ -154,8 +143,6 @@ Profile everything, especially AI
 
 Add graphics for more creature types
 - Or replace them with textures?
-
-MissionLevel.DisplayEntities : Concurrent access to Entities caused crash. Have wrapped in RO list to avoid this. Monitor stability.
 
 Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
 

@@ -62,6 +62,26 @@
       <Material Name="Aluminium" Amount="1"/>
     </Materials>
   </ArmourType>
+  <ArmourType Name="Shielded Chestplate">
+    <Mass>7.0</Mass>
+    <Cost>100</Cost>
+    <Rarity>45</Rarity>
+    <Agility>-2</Agility>
+    <BaseArmour>8</BaseArmour>
+    <Location>Chest</Location>
+    <Shields>10</Shields>
+    <BonusArmour>
+      <Bonus Type="Fire" Amount="15"/>
+      <Bonus Type="Cold" Amount="15"/>
+    </BonusArmour>
+    <Desc>A chestplate</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+    </Materials>
+  </ArmourType>
   <ArmourType Name="Arm Plating">
     <Mass>2.0</Mass>
     <Cost>14</Cost>
@@ -94,7 +114,7 @@
     <Mass>3.0</Mass>
     <Cost>15</Cost>
     <Rarity>13</Rarity>
-    <Agility>-2</Agility>
+    <Agility>-1</Agility>
     <BaseArmour>5</BaseArmour>
     <Location>Legs</Location>
     <Desc>Plating for legs</Desc>
@@ -107,8 +127,6 @@
     <Mass>5.0</Mass>
     <Cost>32</Cost>
     <Rarity>25</Rarity>
-    <Agility>-1</Agility>
-    <Strength>1</Strength>
     <BaseArmour>5</BaseArmour>
     <Location>Legs</Location>
     <Desc>Powered plating for legs</Desc>
@@ -122,7 +140,7 @@
     <Mass>10.0</Mass>
     <Cost>45</Cost>
     <Rarity>25</Rarity>
-    <Agility>-5</Agility>
+    <Agility>-4</Agility>
     <BaseArmour>18</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A chestplate, arm plating and leg plating combined</Desc>
@@ -198,9 +216,8 @@
   </ArmourType>
   <ArmourType Name="Plate Gauntlets">
     <Mass>0.8</Mass>
-    <Cost>10</Cost>
+    <Cost>11</Cost>
     <Rarity>8</Rarity>
-    <Agility>-1</Agility>
     <BaseArmour>3</BaseArmour>
     <Location>Hands</Location>
     <Desc>Plate metal gauntlets</Desc>
@@ -223,7 +240,6 @@
     <Mass>1.6</Mass>
     <Cost>20</Cost>
     <Rarity>18</Rarity>
-    <Agility>-1</Agility>
     <Strength>1</Strength>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>

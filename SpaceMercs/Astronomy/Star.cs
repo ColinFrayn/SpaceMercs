@@ -5,6 +5,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -161,7 +162,7 @@ namespace SpaceMercs {
         }
 
         // Draw a simplified version on the map
-        public void DrawMap(ShaderProgram prog, int Level = 7) {
+        public void DrawMap(ShaderProgram prog, bool bLabel, int Level = 7) {
             // Sort out scaling and rotation
             Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
             prog.SetUniform("model", scaleM);

@@ -20,15 +20,15 @@ namespace SpaceMercs {
                 foreach (KeyValuePair<WeaponType.DamageType, double> tp in GetAllResistances()) {
                     sb.AppendLine("Resist (" + tp.Key + ") : " + tp.Value.ToString("0.#") + "%");
                 }
-                if (Type.Strength != 0.0) sb.AppendLine("Strength : " + Type.Strength.ToString("0.#"));
-                if (Type.Agility != 0.0) sb.AppendLine("Agility : " + Type.Agility.ToString("0.#"));
-                if (Type.Intellect != 0.0) sb.AppendLine("Intellect : " + Type.Intellect.ToString("0.#"));
-                if (Type.Toughness != 0.0) sb.AppendLine("Toughness : " + Type.Toughness.ToString("0.#"));
-                if (Type.Endurance != 0.0) sb.AppendLine("Endurance : " + Type.Endurance.ToString("0.#"));
-                if (Type.Health != 0.0) sb.AppendLine("Health : " + Type.Health.ToString("0.#"));
-                if (Type.Stamina != 0.0) sb.AppendLine("Stamina : " + Type.Stamina.ToString("0.#"));
-                if (Type.Attack != 0.0) sb.AppendLine("Attack : " + Type.Attack.ToString("0.#"));
-                if (Type.Defence != 0.0) sb.AppendLine("Defence : " + Type.Defence.ToString("0.#"));
+                if (Type.Strength != 0) sb.AppendLine("Strength : " + Type.Strength.ToString("0.#"));
+                if (Type.Agility != 0) sb.AppendLine("Agility : " + Type.Agility.ToString("0.#"));
+                if (Type.Intellect != 0) sb.AppendLine("Intellect : " + Type.Intellect.ToString("0.#"));
+                if (Type.Toughness != 0) sb.AppendLine("Toughness : " + Type.Toughness.ToString("0.#"));
+                if (Type.Endurance != 0) sb.AppendLine("Endurance : " + Type.Endurance.ToString("0.#"));
+                if (Type.Health != 0) sb.AppendLine("Health : " + Type.Health.ToString("0.#"));
+                if (Type.Stamina != 0) sb.AppendLine("Stamina : " + Type.Stamina.ToString("0.#"));
+                if (Type.Attack != 0) sb.AppendLine("Attack : " + Type.Attack.ToString("0.#"));
+                if (Type.Defence != 0) sb.AppendLine("Defence : " + Type.Defence.ToString("0.#"));
                 foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {
                     sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
                 }
@@ -101,15 +101,8 @@ namespace SpaceMercs {
         }
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
-        public override int GetHashCode() {
-            unchecked {
-                int hash = 17;
-                hash = hash * 23 + Level.GetHashCode();
-                hash = hash * 37 + Type.GetHashCode();
-                hash = hash * 31 + Material.GetHashCode();
-                return hash;
-            }
-        }
+        public override int GetHashCode() => HashCode.Combine(Level, Type, Material);
+
         public override bool Equals(object? obj) {
             if (obj is null || GetType() != obj.GetType() || obj is not Armour ar) return false;
             return (ar.Level == Level && ar.Material == Material && ar.Type == Type);
@@ -144,6 +137,13 @@ namespace SpaceMercs {
                     }
                 }
                 Type = atnew;
+            }
+        }
+        public int ModifiedAgility {
+            get {
+                double agi = (double)Type.Agility;
+                agi *= Material.MassMod * (1.0 - (Level / 20.0));
+                return (int)Math.Floor(agi);
             }
         }
     }

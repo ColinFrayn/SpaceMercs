@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Windows.Controls;
 
 namespace SpaceMercs.Dialogs {
     partial class ColonyView : Form {
@@ -90,7 +91,7 @@ namespace SpaceMercs.Dialogs {
 
         // Setup data grid based on drop down setting
         private void SetupMerchantDataGrid() {
-            string? strType = cbItemType.SelectedItem.ToString() ?? string.Empty;
+            string? strType = cbItemType?.SelectedItem?.ToString() ?? string.Empty;
             bool bAffordable = cbAffordable.Checked;
             dgMerchant.Rows.Clear();
             string[] arrRow = new string[4];
@@ -112,7 +113,7 @@ namespace SpaceMercs.Dialogs {
                     dgMerchant.Rows[dgMerchant.Rows.Count - 1].Tag = eq;
                 }
             }
-            lbTeamCash.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            lbTeamCashMerch.Text = PlayerTeam.Cash.ToString("N2") + "cr";
         }
         private void SetupMercenariesTab() {
             dgMercenaries.Rows.Clear();
@@ -125,6 +126,7 @@ namespace SpaceMercs.Dialogs {
                 dgMercenaries.Rows.Add(arrRowMerc);
                 dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
             }
+            lbTeamCashMercs.Text = PlayerTeam.Cash.ToString("N2") + "cr";
         }
         private void SetupMissionsTab() {
             dgMissions.Rows.Clear();
@@ -154,6 +156,7 @@ namespace SpaceMercs.Dialogs {
                 dgShips.Rows.Add(arrRowShip);
                 dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
             }
+            lbTeamCashShips.Text = PlayerTeam.Cash.ToString("N2") + "cr";
         }
         private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
             HashSet<SaleItem> hsLast;
@@ -222,6 +225,7 @@ namespace SpaceMercs.Dialogs {
             dgInventory.ClearSelection();
             foreach (DataGridViewRow row in lSelected) row.Selected = true;
             if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
+            lbTeamCashFoundry.Text = PlayerTeam.Cash.ToString("N2") + "cr";
         }
 
         private static bool ShouldDisplayInFoundry(string strType, IItem eq) {
@@ -238,7 +242,7 @@ namespace SpaceMercs.Dialogs {
         // Button clicks
         private void btBuyFromMerchant_Click(object sender, EventArgs e) {
             if (dgMerchant.SelectedRows.Count == 0) return;
-            int iScroll = dgMerchant.FirstDisplayedScrollingRowIndex;
+            int iScroll = dgMerchant.SelectedRows[0].Index - dgMerchant.FirstDisplayedScrollingRowIndex;
             IItem? eq = dgMerchant.SelectedRows[0].Tag as IItem;
             if (eq is null) return;
             int iRowNo = dgMerchant.SelectedRows[0].Index;
@@ -252,16 +256,18 @@ namespace SpaceMercs.Dialogs {
             PlayerTeam.AddItem(eq, 1);
             SoundEffects.PlaySound("CashRegister");
             cl.RemoveItem(eq);
-            SetupMerchantDataGrid();
-            if (cl.GetAvailability(eq) > 0) {
-                dgMerchant.Rows[iRowNo].Selected = true;
-                dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
+            // Reinitialise the data grid after purchase to reflect the new state
+            SetupMerchantDataGrid(); 
+            // Re-highlight the correct row, if it still exists (might have bought the last one, or only showing affordable and can no longer afford)
+            foreach (DataGridViewRow row in dgMerchant.Rows) {
+                if (row.Tag is IItem it) {
+                    if (it.Name == eq.Name) {
+                        row.Selected = true;
+                        dgMerchant.FirstDisplayedScrollingRowIndex = Math.Max(row.Index - iScroll, 0);
+                        break;
+                    }
+                }
             }
-            else if (iRowNo > 0) {
-                dgMerchant.Rows[iRowNo - 1].Selected = true;
-                dgMerchant.FirstDisplayedScrollingRowIndex = iScroll;
-            }
-
         }
         private void btHireMercenary_Click(object sender, EventArgs e) {
             if (dgMercenaries.SelectedRows[0].Tag is not Soldier merc) return;

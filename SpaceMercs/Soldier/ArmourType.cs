@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml;
-using System.Collections.Generic;
+﻿using System.Xml;
 
 namespace SpaceMercs {
     class ArmourType : ItemType {
