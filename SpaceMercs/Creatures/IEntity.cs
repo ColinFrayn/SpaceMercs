@@ -41,7 +41,7 @@ namespace SpaceMercs {
         double RangeTo(IEntity en);
         double RangeTo(Point pt);
         double RangeTo(int tx, int ty);
-        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string> showMessage);
+        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage);
         double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam);
         Stash GenerateStash();
         double GetDamageReductionByDamageType(WeaponType.DamageType type);

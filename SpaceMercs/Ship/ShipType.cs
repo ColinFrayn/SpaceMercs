@@ -41,8 +41,6 @@ namespace SpaceMercs {
         private GLShape? GLPerimeter;
 
         public ShipType() {
-            Name = "Uninitialised";
-            AKA = "Unnamed";
             Description = "No description";
             Perimeter = new List<Point>();
             Fillers = new List<Point>();
@@ -54,7 +52,7 @@ namespace SpaceMercs {
             Fillers = new List<Point>();
         }
         public ShipType(XmlNode xml) {
-            Name = xml.Attributes!["Name"]?.Value ?? "<No Name>";
+            Name = xml.Attributes!["Name"]?.Value ?? string.Empty;
             AKA = xml.SelectNodeText("AKA");
             Cost = xml.SelectNodeDouble("Cost");
             Small = xml.SelectNodeInt("Small");
@@ -414,6 +412,17 @@ namespace SpaceMercs {
                     }
                 }
             }
+        }
+
+        // Get a string that describes the size of this ship
+        public string SizeString() {
+            double hull = MaxHull;
+            if (hull < 13.0) return "Tiny";
+            if (hull < 25.0) return "Small";
+            if (hull < 40.0) return "Medium";
+            if (hull < 70.0) return "Large";
+            if (hull < 100.0) return "Huge";
+            return "Enormous";
         }
     }
 }

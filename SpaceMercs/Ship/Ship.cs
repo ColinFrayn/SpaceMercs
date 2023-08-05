@@ -14,6 +14,13 @@ namespace SpaceMercs {
         private readonly Dictionary<int, Tuple<ShipEquipment, bool>> Equipment = new Dictionary<int, Tuple<ShipEquipment, bool>>();
         public Team? Owner { get; private set; }
         public int Seed { get; private set; }
+        public string ClassName {  
+            get {
+                if (Type is null) return "unknown";
+                if (string.IsNullOrEmpty(Type.Name)) return Type.SizeString();
+                return $"{Type.Name}-class"; 
+            }
+        }
 
         // Feed-through properties
         public ShipEngine? Engine {
@@ -622,7 +629,7 @@ namespace SpaceMercs {
         }
 
         // Generate a ship for the given race, of the given difficulty
-        public static Ship GenerateRandomShipOfRace(Race rc, double dDiff, ShipEngine?minDrive) {
+        public static Ship GenerateRandomShipOfRace(Race rc, double dDiff, ShipEngine? minDrive) {
             Random rand = new Random();
             Ship sh = new Ship(ShipType.SetupRandomShipType(dDiff, rand.Next()));
 

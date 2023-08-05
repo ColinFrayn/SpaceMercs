@@ -21,6 +21,7 @@ namespace SpaceMercs {
         public float PanelX { get; private set; }
         public float PanelY { get; private set; }
         public float BorderY { get; private set; }
+        public float BorderX { get; private set; }
         public int ClickX { get; private set; }
         public int ClickY { get; private set; }
         public int Count { get { return Items.Count; } }
@@ -96,7 +97,7 @@ namespace SpaceMercs {
         // Display the panel, using window-relative fractional coords instead of mouse coords. Return the hover item.
         public PanelItem? DisplayAndCalculateMouseHover(ShaderProgram prog, double fmousex, double fmousey) {
             PanelItem? piHover = null;
-            float BorderX = 1f / (float)Window.Size.X;
+            BorderX = 1f / (float)Window.Size.X;
             BorderY = 1f / (float)Window.Size.Y;
             float aspect = (float)Window.Size.X / (float)Window.Size.Y;
             UpdatePanelDimensions(aspect);

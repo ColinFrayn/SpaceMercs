@@ -191,6 +191,7 @@ namespace SpaceMercs {
             file.WriteLine("</Mission>");
         }
 
+        #region Create Mission
         public static Mission CreateIgnoreMission() {
             Mission m = new Mission(MissionType.Ignore, 0);
             return m;
@@ -386,6 +387,7 @@ namespace SpaceMercs {
                 lev.SetCreatureTargets();
             }
         }
+        #endregion // Create Msision
 
         public MissionLevel GetOrCreateCurrentLevel() {
             if (Levels.ContainsKey(CurrentLevel)) return Levels[CurrentLevel];
@@ -435,11 +437,11 @@ namespace SpaceMercs {
                 string strSource = "Our long range scanners have detected";
                 if (r % 3 == 0) strSource = "A group of merchants have informed us about ";
                 if (r % 3 == 1) strSource = "We are receiving classified military reports concerning ";
-                if (r < 30) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship nearing the colony.");
-                else if (r < 60) sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship with potentially valuable cargo onboard.");
-                else sb.AppendLine(strSource + " an apparently lifeless " + ShipTarget!.Name + "-class ship in dangerous proximity to a nearby military zone.");
+                if (r < 30) sb.AppendLine(strSource + $" an apparently lifeless {ShipTarget!.ClassName} ship nearing the colony.");
+                else if (r < 60) sb.AppendLine(strSource + $" an apparently lifeless {ShipTarget!.ClassName} ship with potentially valuable cargo onboard.");
+                else sb.AppendLine(strSource + $" an apparently lifeless {ShipTarget!.ClassName} ship in dangerous proximity to a nearby military zone.");
                 sb.AppendLine("We would like you to investigate the ship, clear out any opposition and report back to us.");
-                strSz = "Size : " + ShipTarget.Name + "-class";
+                strSz = $"Size : {ShipTarget!.ClassName}";
             }
             else if (Type == MissionType.Caves) {
                 string strSource = "Our scans of the planet surface indicate";

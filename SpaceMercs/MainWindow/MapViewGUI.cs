@@ -63,7 +63,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
-            if (!bLoaded || !GalaxyMap.bMapSetup) return;
+            if (!bLoaded || !GalaxyMap.MapIsInitialised) return;
 
             // Draw details of currently selected object
             if (aoSelected != null) {
@@ -391,7 +391,7 @@ namespace SpaceMercs.MainWindow {
             TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, (float)jt, PlayerTeam, this);
         }
         private void OpenColonyViewDialog() {
-            if (!GalaxyMap.bMapSetup) return;
+            if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPosition?.BaseSize == 0) {
                 if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas && PlayerTeam.PlayerShip.CanFoundColony) {
                     if (!hao.Scanned) {
@@ -428,7 +428,7 @@ namespace SpaceMercs.MainWindow {
             SetAOButtonsOnGUI(hao);
         }
         private void OpenScanPlanetDialog() {
-            if (!GalaxyMap.bMapSetup) return;
+            if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPosition is null) {
                 msgBox.PopupMessage("Cannot scan current location\nScanner only works on terrestrial palnets and moons.");
                 return;

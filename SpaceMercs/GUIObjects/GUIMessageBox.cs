@@ -35,17 +35,17 @@ namespace SpaceMercs {
         }
 
         // Change the text to be shown on this button & update the texture. If it's the same then don't redo texture.
-        public void PopupMessage(string strText) {
+        public void PopupMessage(string strText, Action? _onClick = null) {
             List<string> lines = new List<string>(strText.Replace("\r", string.Empty).Split('\n'));
-            PopupMessage(lines);
+            PopupMessage(lines, _onClick);
         }
-        public void PopupMessage(IEnumerable<string> lines) {
+        public void PopupMessage(IEnumerable<string> lines, Action? _onClick = null) {
             if (Active) {
-                queue.Enqueue(new MsgConfig() { Decision = false, Lines = new List<string>(lines), OnClick = null });
+                queue.Enqueue(new MsgConfig() { Decision = false, Lines = new List<string>(lines), OnClick = _onClick });
             }
             else {
                 SetupBoxes(lines);
-                OnClick = null;
+                OnClick = _onClick;
                 Decision = false;
             }
             Active = true;
@@ -211,6 +211,10 @@ namespace SpaceMercs {
                 OnClick?.Invoke();
                 CheckNext();
             }
+        }
+        public void Clear() {
+            queue.Clear();
+            Active = false;
         }
 
         private void CheckNext() {

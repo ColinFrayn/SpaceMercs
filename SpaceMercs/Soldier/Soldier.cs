@@ -392,15 +392,17 @@ namespace SpaceMercs {
         public void AddExperience(int exp) {
             Experience += exp * Const.DEBUG_EXPERIENCE_MOD;
         }
-        public void CheckForLevelUp(Action<string> showMessage) {
+        public void CheckForLevelUp(Action<string, Action?> showMessage) {
             if (Experience >= ExperienceRequiredToReachNextLevel()) {
                 Level++;
                 AddUtilitySkill(UtilitySkill.Unspent);
-                showMessage("Congratulations! Soldier " + Name + " has reached level " + Level);
-                ChooseStat cs = new ChooseStat(this);
-                cs.ShowDialog(new Form { TopMost = true });
-                CalculateMaxStats();
+                showMessage($"Congratulations! Soldier {Name} has reached level {Level}", () => UpgradeStat(this));
             }
+        }
+        private static void UpgradeStat(Soldier s) {
+            ChooseStat cs = new ChooseStat(s);
+            cs.ShowDialog(new Form { TopMost = true });
+            s.CalculateMaxStats();
         }
         public int ExperienceRequiredToReachNextLevel() {
             return (int)(Const.SoldierLevelExperience * ((Math.Pow(Const.SoldierLevelExponent, Level - 1) * Const.SoldierLevelScale) - (Const.SoldierLevelScale - 1.0)));
@@ -983,7 +985,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string> showMessage) {
+        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             if (level is null) throw new Exception("Null level in AttackLocation");
             // Check that we're attacking a square in range, or an entity part of which is in range
             if (RangeTo(tx, ty) > AttackRange) {
@@ -1033,7 +1035,7 @@ namespace SpaceMercs {
             }
             return true;
         }
-        private bool AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string> showMessage) {
+        private bool AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             bHasMoved = true;
             double hit = Utils.GenerateHitRoll(this, en);
             if (hit <= 0.0) {
@@ -1072,13 +1074,13 @@ namespace SpaceMercs {
                 if (WeaponExperience[EquippedWeapon.Type] > maxExp) WeaponExperience[EquippedWeapon.Type] = maxExp; // Clamp at maximum for this level
                 int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type]);
                 if (newlvl > oldlvl) {
-                    showMessage("Soldier " + Name + " has gained level " + newlvl + " proficiency in " + EquippedWeapon.Type.Name);
+                    showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.Name}", null);
                 }
             }
 
             return true;
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string> showMessage) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
             CheckForLevelUp(showMessage);
             //foreach (Effect e in Effects) {
             //  dStam += e.GetStatMod(StatType.Stamina);

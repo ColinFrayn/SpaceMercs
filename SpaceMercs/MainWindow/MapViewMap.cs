@@ -147,7 +147,7 @@ namespace SpaceMercs.MainWindow {
 
         // Draw the stars on the map screen
         private void DrawStars() {
-            if (GalaxyMap.bMapSetup == false) return;
+            if (GalaxyMap.MapIsInitialised == false) return;
 
             // Setup basic lighting parameters (light colour is White by default)
             fullShaderProgram.SetUniform("lightPos", 100000f, 100000f, 10000f);
@@ -252,7 +252,7 @@ namespace SpaceMercs.MainWindow {
         // Get the system under the mouse pointer
         private void MapHover() {
             aoHover = null;
-            if (!GalaxyMap.bMapSetup) return;
+            if (!GalaxyMap.MapIsInitialised) return;
 
             // Work out what we're hovering over (pick the closest one!)
             double mxfract = (double)MousePosition.X / (double)Size.X;

@@ -34,6 +34,7 @@ namespace SpaceMercs.Dialogs {
 
         private void ShowTeamSoldiers() {
             dgSoldiers.Rows.Clear();
+            if (!PlayerTeam.SoldiersRO.Any()) return;
             string[] arrRow = new string[4];
             Font defaultFont = dgSoldiers.DefaultCellStyle.Font;
             foreach (Soldier s in PlayerTeam.SoldiersRO) {

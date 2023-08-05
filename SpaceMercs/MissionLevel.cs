@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -93,8 +92,8 @@ namespace SpaceMercs {
         }
 
         // Public access to entities sorted by type
-        public IEnumerable<Creature> Creatures { get { return Entities.OfType<Creature>().Select(e => e as Creature).ToList<Creature>().AsReadOnly(); } }
-        public IEnumerable<Soldier> Soldiers { get { return Entities.OfType<Soldier>().Select(e => e as Soldier).ToList().AsReadOnly(); } }
+        public IReadOnlyCollection<Creature> Creatures { get { return Entities.OfType<Creature>().ToList().AsReadOnly(); } }
+        public IReadOnlyCollection<Soldier> Soldiers { get { return Entities.OfType<Soldier>().ToList().AsReadOnly(); } }
 
         // These are used for map generation only (can be ignored after this point)
         private int[,] RoomMap; // Only used for dungeon map generation
@@ -1686,7 +1685,7 @@ namespace SpaceMercs {
             foreach (IEntity en in Entities) en.UpdateVisibility(this);
             return true;
         }
-        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string> showMessage) {
+        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage) {
             List<Creature> lCreatures = new List<Creature>(Creatures); // In case one dies...
             foreach (Creature cr in lCreatures) {
                 cr.AIStep(fact, postMoveCheck, playSound, centreView);
@@ -1721,7 +1720,7 @@ namespace SpaceMercs {
             // Generate corpse & drop items
             AddToStashAtPosition(s.X, s.Y, s.GenerateStash());
 
-            // Make sure nothing is targeting it
+            // Make sure nothing is targeting the dead soldier
             foreach (Creature ct in Entities.OfType<Creature>()) {
                 if (ct.CurrentTarget == s) ct.SetTarget(null);
             }
@@ -2091,7 +2090,7 @@ namespace SpaceMercs {
             } while (lOpen.Any());
             return null; // No possible path
         }
-        private Point GetLowest(Dictionary<Point, int> lpt) {
+        private static Point GetLowest(Dictionary<Point, int> lpt) {
             int best = 1000;
             Point bpt = Point.Empty;
             foreach (Point pt in lpt.Keys) {
@@ -2107,7 +2106,7 @@ namespace SpaceMercs {
             if (lpt == null) return int.MaxValue;
             return lpt.Count;
         }
-        private List<Point> ExtractPath(Point start, Point end, int[,] AStarG) {
+        private static List<Point> ExtractPath(Point start, Point end, int[,] AStarG) {
             List<Point> lpt = new List<Point>();
             Point pt = end;
             lpt.Add(pt);

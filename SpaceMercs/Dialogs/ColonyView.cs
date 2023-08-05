@@ -27,6 +27,7 @@ namespace SpaceMercs.Dialogs {
             StartMission = _StartMission;
             if (PlayerTeam.CurrentPosition.Colony is null) throw new Exception("Null colony in ColonyView!");
             cl = PlayerTeam.CurrentPosition.Colony;
+            cl.UpdateStock(PlayerTeam); // Make sure we have updated everything sinze the last mission
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
             InitializeComponent();
             SetupTabs();
@@ -90,6 +91,7 @@ namespace SpaceMercs.Dialogs {
         // Setup data grid based on drop down setting
         private void SetupMerchantDataGrid() {
             string? strType = cbItemType.SelectedItem.ToString() ?? string.Empty;
+            bool bAffordable = cbAffordable.Checked;
             dgMerchant.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbFilter.Text;
@@ -99,8 +101,10 @@ namespace SpaceMercs.Dialogs {
                    (strType.Equals("Medical") && eq is Equipment eqp && eqp.BaseType.Source == ItemType.ItemSource.Medlab) ||
                    (strType.Equals("Materials") && eq is Material) ||
                    (strType.Equals("Equipment") && eq is Equipment eqp2 && eqp2.BaseType.Source == ItemType.ItemSource.Workshop)) {
+                    double cost = cl.CostModifier * eq.Cost * PriceMod;
+                    if (cost > PlayerTeam.Cash && bAffordable) continue;
                     arrRow[0] = eq.Name;
-                    arrRow[1] = (cl.CostModifier * eq.Cost * PriceMod).ToString("N2");
+                    arrRow[1] = cost.ToString("N2");
                     arrRow[2] = eq.Mass.ToString("N2") + "kg";
                     int count = cl.GetAvailability(eq);
                     arrRow[3] = count > 999 ? "999" : count.ToString();
@@ -427,7 +431,7 @@ namespace SpaceMercs.Dialogs {
                 nitem += (bAll ? tp.Count : 1);
             }
             if (tpSelected.Count == 0 || tpSelected[0].Item is null)
-            if (nitem > 1 || TotalValue > 10.0) bQuery = true;
+                if (nitem > 1 || TotalValue > 10.0) bQuery = true;
             // Do we neeed to ask if the player is sure?
             if (bQuery) {
                 if (nitem == 1) {
@@ -545,6 +549,9 @@ namespace SpaceMercs.Dialogs {
                 btDismantle.Enabled = true;
             }
         }
+        private void cbAffordable_CheckedChanged(object sender, EventArgs e) {
+            SetupMerchantDataGrid();
+        }
 
         // Changed tab so update lists
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
@@ -623,5 +630,6 @@ namespace SpaceMercs.Dialogs {
                 e.Handled = true;//pass by the default sorting
             }
         }
+
     }
 }

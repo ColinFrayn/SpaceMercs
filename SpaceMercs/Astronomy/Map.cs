@@ -5,7 +5,7 @@ using System.Xml;
 namespace SpaceMercs {
     class Map {
         private readonly Dictionary<Tuple<int, int>, Sector> dSectors = new Dictionary<Tuple<int, int>, Sector>();
-        public bool bMapSetup = false;
+        public bool MapIsInitialised { get; private set; }
         private const int INITIAL_MAP_SIZE = 3; // Just make sure that you set up an inital map of a reasonable size. This must be >= 1!
         public int MapSeed { get; private set; }
         public int StarsPerSector { get; private set; }
@@ -29,7 +29,7 @@ namespace SpaceMercs {
             }
             if (!dSectors.Any()) throw new Exception("Could not locate sector nodes in save file");
 
-            bMapSetup = true;
+            MapIsInitialised = true;
         }
         public static Map Empty { get { return new Map(); } }
 
@@ -37,7 +37,7 @@ namespace SpaceMercs {
         public void Generate(NewGame ng) {
             // Get the new values and reset our map
             Random rand = new Random(ng.Seed);
-            bMapSetup = false;
+            MapIsInitialised = false;
             dSectors.Clear();
             MapSeed = ng.Seed;
             StarsPerSector = ng.StarsPerSector;
@@ -71,7 +71,7 @@ namespace SpaceMercs {
             }
 
             // Flag everything as done
-            bMapSetup = true;
+            MapIsInitialised = true;
         }
 
         // Setup the given sector as the home for this race
@@ -151,6 +151,12 @@ namespace SpaceMercs {
             if (!dSectors.ContainsKey(new Tuple<int, int>(sX, sY))) return null;
             Sector sec = dSectors[new Tuple<int, int>(sX, sY)];
             return sec.GetAOFromLocationWithinSector(strLoc.Substring(strLoc.IndexOf(")") + 1));
+        }
+
+        // Unload this map
+        public void Unload() {
+            MapIsInitialised = false;
+            dSectors.Clear();
         }
 
     }

@@ -4,21 +4,14 @@ ToDo List
 
 MapViewMission
 - VisualEffect.DisplayShotLine()
-- Test handling of large creatures
+
+Soldier death on a mission, at least one left alive on ship, should continue
 
 Display star labels & flags on map
 
-Descended to next level - random bit of map was visible (shaded) that shouldn't have been
+Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
-Add "BackToMap" icon on ship view screen
-
-"Quality" filter in merchant store
-
-Quality scaling for cost overrides material cost scaling. Maybe base it off the item's properties??
-
-On menu, when moving over to the RHS, be more forgiving of slowness
-
-Hit regenerate mission loads of times and get a crash in vertex buffer disposal. Seems to just be happening in GC?? Something not initialised?
+System view : Star sometimes vanishes on certain aspect ratios; planets overlap;
 
 ==========================================================================================================
 
@@ -37,9 +30,18 @@ Prevented targetting of self or own team in missions
 
 Rebalanced (reduced slightly) creature damage, especially at low levels
 
+Significantly reduced the cost scaling for higher quality items
+
+Improved menu handling to stop submenus dropping out when hovering
+
+Handling soldier death, failed missions and the team being killed
+
+Several UI enhancements
+
 Bugfix: After saving/reloading, ZoomTo button links to the wrong location
 Bugfix: Fixed handling/saving of view options
 Bugfix: Numerous minor bugfixes
+Bugfix: Fixed issue when occasional crashes would occur disposing graphical elements
 
 
 -------
@@ -48,12 +50,7 @@ Testing
 
 Encounters : Are there too many of them? Test in lots of situations.
 
-System view : Star sometimes vanishes on certain aspect ratios; planets overlap;
-
-Got a crash doing ship battle and disposing something
-- Similar after ship mission, returning to system view (Test Encounter End). Not easy to replicate.
-
-Check all MenuItem.Enabled/Disabled correctly
+Test handling of large creatures
 
 
 ---------------------

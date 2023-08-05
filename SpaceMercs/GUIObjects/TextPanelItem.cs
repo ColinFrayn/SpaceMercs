@@ -6,7 +6,7 @@ using SpaceMercs.Graphics.Shapes;
 namespace SpaceMercs {
     class TextPanelItem : PanelItem {
         private readonly TextMeasure measure;
-        private string Text;
+        private readonly string Text;
         private const float TextSizeScale = 0.4f;
         private const float XBufferScale = 0.12f;
 
@@ -17,7 +17,7 @@ namespace SpaceMercs {
 
         public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect) {
             PanelItem? piHover = null;
-            double BorderY = gpParent.BorderY;
+            float BorderY = gpParent.BorderY;
             float itemX = itemPos.X;
             float itemY = itemPos.Y;
             float itemW = itemSize.X;

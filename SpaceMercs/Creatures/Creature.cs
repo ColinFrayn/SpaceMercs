@@ -656,18 +656,18 @@ namespace SpaceMercs {
             if (rnd.NextDouble() < 0.5) Move(d1, playSound);
             else Move(d2, playSound);
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string> showMessage) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
             Stamina = MaxStamina;
 
             // Handle periodic effects
             foreach (Effect e in Effects) {
-                bool bZoom = (!String.IsNullOrEmpty(e.SoundEffect) || e.Damage != 0.0);
+                bool bZoom = (!string.IsNullOrEmpty(e.SoundEffect) || e.Damage != 0.0);
                 if (bZoom) {
                     // Zoom to this creature & redraw
                     centreView(this);
                     Thread.Sleep(250);
                 }
-                if (!String.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
+                if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                 if (e.Damage != 0.0) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = InflictDamage(AllDam);

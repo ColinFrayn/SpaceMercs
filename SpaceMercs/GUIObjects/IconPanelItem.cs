@@ -69,7 +69,7 @@ namespace SpaceMercs {
                 // If this item hovered then open subpanel
                 if (piHover is not null) {
                     if (gpParent.Direction == GUIPanel.PanelDirection.Horizontal) SubPanel.Activate(iconX, iconY + iconH);
-                    else SubPanel.Activate(iconX + iconW + (BorderY*aspect), iconY);
+                    else SubPanel.Activate(iconX + iconW + gpParent.BorderX*2, iconY);
                     bJustOpened = true;                    
                 }
 

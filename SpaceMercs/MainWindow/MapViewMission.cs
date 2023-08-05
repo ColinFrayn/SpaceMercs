@@ -44,6 +44,7 @@ namespace SpaceMercs.MainWindow {
         private VertexBuffer? vbGrid = null, vbPath = null;
         private VertexArray? vaGrid = null, vaPath = null;
         private IndexBuffer? ibGrid = null;
+        private HashSet<Soldier> lastSoldiers = new HashSet<Soldier>();
 
         // GUIPanel actions
         public const uint I_OpenDoor = 10001;
@@ -81,7 +82,7 @@ namespace SpaceMercs.MainWindow {
                     CurrentLevel.AddSoldier(s);
                 }
                 Random rnd = new Random();
-                Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to get to the mission location
+                Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
             }
 
             // Force buttons to reinitialise to relink new soldiers
@@ -92,6 +93,7 @@ namespace SpaceMercs.MainWindow {
             fMissionViewZ = Const.InitialMissionViewZ;
             PlayerTeam.SetCurrentMission(ThisMission);
             view = ViewMode.ViewMission;
+            SelectedEntity = null;
 
             // Set up maps
             TargetMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
@@ -101,12 +103,15 @@ namespace SpaceMercs.MainWindow {
 
             return true;
         }
+        private void FailMission() {
+            MissionOutcome = MissionResult.Defeat;
+            CeaseMission();
+        }
         private void CeaseMission() {
             if (PlayerTeam is null) throw new Exception("PlayerTeam is null in CeaseMission()");
             if (PlayerTeam.CurrentPosition is null) throw new Exception("PlayerTeam.CurrentPosition is null in CeaseMission()");
             if (ThisMission is null) throw new Exception("ThisMission is null in CeaseMission()");
 
-            view = ViewMode.ViewSystem;
             PlayerTeam.CeaseMission();
             Random rnd = new Random();
 
@@ -116,6 +121,8 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.CurrentPosition?.Colony != null) PlayerTeam.CurrentPosition.Colony.AddMission(ThisMission);
                 else PlayerTeam.CurrentPosition!.AddMission(ThisMission);
             }
+
+            view = ViewMode.ViewSystem;
 
             // Resolve the mission (either victory or destruction)
             if (MissionOutcome == MissionResult.Victory) {
@@ -150,38 +157,39 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
-            else if (MissionOutcome == MissionResult.Defeat) {
-                msgBox.PopupMessage("You were defeated!");
-                throw new NotImplementedException();
-                //if (PlayerTeam.SoldierCount == 0) {
-                // Still alive?
-                // TODO
-                //}
-                // TODO: Handle mission defeat
-            }
             else if (MissionOutcome == MissionResult.Evacuated) {
                 // Remove any mission items so they can't be sold and the mission repeated ad infinitum
                 if (ThisMission.MItem != null) PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem, 10000);
             }
 
-            Const.dtTime.AddHours(1.0 + rnd.NextDouble()); // Time taken to return home from the mission
+            Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to return home from the mission
 
             if (TravelDetails != null) {
+                // What to do if defeated??
                 TravelDetails.ResumeTravelling();
             }
-            // TODO viewToolStripMenuItem.Enabled = true;
-            // TODO optionsToolStripMenuItem.Enabled = true;
-            // TODO missionToolStripMenuItem.Enabled = false;
         }
 
         private void DrawMission() {
             if (!bLoaded || ThisMission is null) return;
             if (SelectedEntity is Soldier s && s.PlayerTeam is null) {
-                // If player has died since the last tick, deselect it and update the buttons
+                // If selected soldier has died since the last tick, deselect it
                 SelectedEntity = null;
-                SetupZoomToButtons();
             }
-
+            // If any soldier has died, update the buttons
+            if (lastSoldiers.Count != ThisMission!.Soldiers.Count) {
+                IEnumerable<Soldier> deadSoldiers = lastSoldiers.Except(ThisMission.Soldiers);
+                lastSoldiers = new HashSet<Soldier>(ThisMission!.Soldiers);
+                SetupZoomToButtons();
+                // Work out which soldier(s) died
+                foreach (Soldier recentlyDied in deadSoldiers) {
+                    msgBox.PopupMessage($"Soldier {recentlyDied.Name} was killed!");
+                }
+                // All soldiers on mission are dead -> fail
+                if (!ThisMission!.Soldiers.Any()) {
+                    msgBox.PopupMessage("Your mission team was defeated!", FailMission);
+                }
+            }
             // Set up default OpenGL rendering parameters
             PrepareScene();
 
@@ -1385,19 +1393,13 @@ namespace SpaceMercs.MainWindow {
                 if (s.GoTo != Point.Empty) return; // Can't end turn if soldiers are still moving
             }
 
-            if (ThisMission!.Soldiers.Count == 0) {
-                MissionOutcome = MissionResult.Defeat;
-                CeaseMission();
-            }
-
             bAIRunning = true;
-            // TODO fileToolStripMenuItem.Enabled = false;
 
             // Handle periodic effects not aimed at an entity e.g. burning floor, delayed-timer explosives
             // TODO
 
             // Reset stamina, do periodic effects etc.
-            List<Soldier> lSoldiers = new List<Soldier>(ThisMission.Soldiers); // In case one dies
+            List<Soldier> lSoldiers = new List<Soldier>(ThisMission!.Soldiers); // In case one dies
             foreach (Soldier s in lSoldiers) {
                 await Task.Run(() => s.EndOfTurn(AddNewEffect, CentreViewForceRedraw, PlaySoundThreaded, AnnounceMessage));
                 if (s.PlayerTeam == null && SelectedEntity == s) SelectedEntity = null;
@@ -1413,22 +1415,21 @@ namespace SpaceMercs.MainWindow {
             SelectedEntity?.UpdateVisibility(CurrentLevel);
             CurrentLevel.CalculatePlayerVisibility();
             bAIRunning = false;
-            // TODO fileToolStripMenuItem.Enabled = true;
-            Const.dtTime.AddSeconds(10);
+            Const.dtTime.AddSeconds(Const.TurnLength);
         }
         private void PlaySoundThreaded(string strSound) {
             ThisDispatcher?.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
             //ThisDispatcher.Invoke(() => { SoundEffects.PlaySound(strSound); });
         }
-        private void AnnounceMessage(string strMsg) {
-            ThisDispatcher?.Invoke(() => { msgBox.PopupMessage(strMsg); });
+        private void AnnounceMessage(string strMsg, Action? _onClick) {
+            ThisDispatcher?.Invoke(() => { msgBox.PopupMessage(strMsg, _onClick); });
         }
         private void PostMoveCheck(IEntity en) {
             // Stuff we need to check after a creature moves
             GenerateDetectionMap();
             foreach (Soldier s in CurrentLevel.Soldiers) {
                 if (UpdateDetectionForSoldier(s)) {
-                    AnnounceMessage(s.Name + " has been detected by the enemy!");
+                    AnnounceMessage(s.Name + " has been detected by the enemy!", null);
                 }
             }
         }

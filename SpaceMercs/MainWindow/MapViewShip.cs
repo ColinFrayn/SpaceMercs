@@ -14,7 +14,7 @@ namespace SpaceMercs.MainWindow {
         private float fShipViewX, fShipViewY, fShipViewZ = Const.MinimumShipViewZ;
         private int irHover = -1, irContextRoom = -1, irSelected = -1;
         private PanelItem? piHoverItem;
-        private GUIButton gbRepair, gbFabricate;
+        private GUIButton gbRepair, gbFabricate, gbBack;
         private bool bHoverHull = false, bContextHull = false;
         private ViewMode PreviousViewMode = ViewMode.ViewMap;
 
@@ -36,6 +36,7 @@ namespace SpaceMercs.MainWindow {
             if (fShipViewZ < Const.MinimumShipViewZ) fShipViewZ = Const.MinimumShipViewZ;
             if (gpSelect == null) gpSelect = new GUIPanel(this);
             if (gbRepair == null) gbRepair = new GUIButton("Repair", this, RepairShip);
+            if (gbBack == null) gbBack = new GUIButton("Back", this, BackToMap);
             if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
             SetupUtilityButtons();
         }
@@ -57,6 +58,12 @@ namespace SpaceMercs.MainWindow {
             if (PlayerTeam.PlayerShip.HasArmoury) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
+
+            // "Back to last view" button
+            gbBack.SetPosition(0.01f, 0.05f);
+            gbBack.SetSize(0.06f, 0.03f);
+            gbBack.SetBlend(false);
+            gbBack.Activate();
         }
 
         private void DrawShip() {
@@ -107,6 +114,10 @@ namespace SpaceMercs.MainWindow {
             }
         }
 
+        private void BackToMap() {
+            view = PreviousViewMode;
+        }
+
         // Mouse stuff
         private void MouseMove_Ship(MouseMoveEventArgs e) {
             if (MouseState.IsButtonDown(MouseButton.Left)) {
@@ -122,6 +133,7 @@ namespace SpaceMercs.MainWindow {
             }
             gbRepair.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             gbFabricate.IsHover((int)MousePosition.X, (int)MousePosition.Y);
+            gbBack.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             CheckHover_Ship();
         }
         private void MouseUp_Ship(MouseButtonEventArgs e) {
@@ -154,6 +166,7 @@ namespace SpaceMercs.MainWindow {
             if (e.Button == MouseButton.Left) {
                 if (gbRepair.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (gbFabricate.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbBack.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
             }
             CheckHover_Ship();
             SetupUtilityButtons();
@@ -221,6 +234,7 @@ namespace SpaceMercs.MainWindow {
             // Display all buttons
             gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbFabricate.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gbBack.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Show hover text
             DrawShipHoverInfo();

@@ -118,7 +118,7 @@ namespace SpaceMercs.MainWindow {
             // Check keypresses
             GetKeyboardInput();
 
-            if (bJustLoaded) {  // resuming a mission after a load
+            if (bJustLoaded) {  // Resuming a mission after a load
                 bJustLoaded = false;
                 if (TravelDetails != null) TravelDetails.ResumeMissionAfterReload();
                 else if (PlayerTeam.CurrentMission != null) {
@@ -163,10 +163,13 @@ namespace SpaceMercs.MainWindow {
             if (TravelDetails is not null) TravelDetails.ClockTickProcessor();
 
             // Not on mission screen, so tick the clock & check if we died
-            if (GalaxyMap.bMapSetup) {
+            if (GalaxyMap.MapIsInitialised) {
                 Const.dtTime = Const.dtTime.AddMilliseconds(swLastTick.ElapsedMilliseconds);
                 swLastTick.Restart();
+                // Is our ship destroyed?
                 if (PlayerTeam.PlayerShip.Hull <= 0.0) GameOver();
+                // Did all our soldiers die?
+                if (PlayerTeam.SoldierCount == 0) GameOver();
             }
         }
 
@@ -184,7 +187,7 @@ namespace SpaceMercs.MainWindow {
             // Set up default OpenGL rendering parameters
             PrepareScene();
 
-            if (!GalaxyMap.bMapSetup) {
+            if (!GalaxyMap.MapIsInitialised) {
                 DisplayWelcomeScreen();
                 SwapBuffers();
                 return;
@@ -310,7 +313,7 @@ namespace SpaceMercs.MainWindow {
                 return;
             }
             if (IsKeyReleased(Keys.F1)) { // New Game
-                if (GalaxyMap.bMapSetup) {
+                if (GalaxyMap.MapIsInitialised) {
                     msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
                 }
                 else NewGame_Continue();
@@ -393,7 +396,7 @@ namespace SpaceMercs.MainWindow {
 
         // Mouse handling
         protected override void OnMouseMove(MouseMoveEventArgs e) {
-            if (!GalaxyMap.bMapSetup) {
+            if (!GalaxyMap.MapIsInitialised) {
                 gbLoadGame?.IsHover((int)e.X, (int)e.Y);
                 gbNewGame?.IsHover((int)e.X, (int)e.Y);
                 gbExitGame?.IsHover((int)e.X, (int)e.Y);
@@ -446,7 +449,7 @@ namespace SpaceMercs.MainWindow {
             }
         }
         protected override void OnMouseUp(MouseButtonEventArgs e) {
-            if (!GalaxyMap.bMapSetup) {
+            if (!GalaxyMap.MapIsInitialised) {
                 if (e.Button == MouseButton.Left) {
                     if (gbLoadGame?.CaptureClick((int)MousePosition.X, (int)MousePosition.Y) ?? false) return;
                     if (gbNewGame?.CaptureClick((int)MousePosition.X, (int)MousePosition.Y) ?? false) return;
@@ -543,7 +546,7 @@ namespace SpaceMercs.MainWindow {
             if (gpMenu!.HoverID == -1) return;
             switch ((uint)gpMenu.HoverID) {
                 case I_New:
-                    if (GalaxyMap.bMapSetup) {
+                    if (GalaxyMap.MapIsInitialised) {
                         msgBox.PopupConfirmation("You are in the middle of a game.\nGenerating a new game will lose all unsaved progress.\nAre you sure you want to continue?", NewGame_Continue);
                     }
                     else NewGame_Continue();
@@ -551,26 +554,26 @@ namespace SpaceMercs.MainWindow {
                 case I_Load: LoadGame(); return;
                 case I_Save: SaveGame(); return;
                 case I_Exit:
-                    if (GalaxyMap.bMapSetup == true) {
+                    if (GalaxyMap.MapIsInitialised == true) {
                         msgBox.PopupConfirmation("You are in the middle of a game.\nExiting will lose all unsaved progress.\nAre you sure you want to continue?", this.Close);
                     }
                     return;
                 case I_ViewShip:
-                    if (GalaxyMap.bMapSetup) SetupShipView();
+                    if (GalaxyMap.MapIsInitialised) SetupShipView();
                     return;
                 case I_ViewTeam:
-                    if (!GalaxyMap.bMapSetup) return;
+                    if (!GalaxyMap.MapIsInitialised) return;
                     TeamView tv = new TeamView(PlayerTeam);
                     tv.ShowDialog();
                     return;
                 case I_ViewColony:
-                    if (!GalaxyMap.bMapSetup) return;
+                    if (!GalaxyMap.MapIsInitialised) return;
                     if (PlayerTeam.CurrentPosition.BaseSize == 0) return;
                     ColonyView cv = new ColonyView(PlayerTeam, RunMission);
                     cv.Show();
                     return;
                 case I_ViewRaces:
-                    if (!GalaxyMap.bMapSetup) return;
+                    if (!GalaxyMap.MapIsInitialised) return;
                     RaceView rv = new RaceView();
                     rv.Show();
                     return;
@@ -624,7 +627,7 @@ namespace SpaceMercs.MainWindow {
             }
         }
         public void SaveGame() {
-            if (GalaxyMap.bMapSetup == false) return;
+            if (GalaxyMap.MapIsInitialised == false) return;
             if (TravelDetails != null) TravelDetails.Pause();
 
             // Get the filename
@@ -647,7 +650,7 @@ namespace SpaceMercs.MainWindow {
         }
         public void LoadGame() {
             // Need to check to see if we already have a map set up
-            if (GalaxyMap.bMapSetup == true) {
+            if (GalaxyMap.MapIsInitialised == true) {
                 msgBox.PopupConfirmation("You are in the middle of a game.\nLoading a game will lose all unsaved progress.\nAre you sure you want to continue?", LoadGame_Continue);
             }
             else LoadGame_Continue();
@@ -683,6 +686,7 @@ namespace SpaceMercs.MainWindow {
                     lastLoad = DateTime.Now;
                     SetAOButtonsOnGUI(aoSelected);
                     view = ViewMode.ViewMap;
+                    msgBox?.Clear();
 
                     // If we're on a mission then set it up
                     // Do this by configuring a flag that is consumed at the top of OnUpdateFrame()
@@ -696,8 +700,12 @@ namespace SpaceMercs.MainWindow {
             }
         }
         private void GameOver() {
-            bLoaded = false;
-            msgBox.PopupMessage("Game Over!\nPlease start a new game or load a saved game to continue playing");
+            msgBox.PopupMessage("Game Over!\nPlease start a new game or load a saved game to continue playing", ClearGame);
+        }
+        private void ClearGame() {
+            GalaxyMap.Unload();
+            PlayerTeam = Team.Empty();
+            msgBox?.Clear();
         }
         #endregion // Game Management
 

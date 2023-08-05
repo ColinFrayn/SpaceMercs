@@ -237,7 +237,7 @@ namespace SpaceMercs {
         }
         private void PopulateMissions() {
             Random rand = new Random();
-            int total = BaseSize + rand.Next(5) + rand.Next(5) - rand.Next(5);
+            int total = BaseSize + rand.Next(4) + rand.Next(4) + 1;
             if ((Base & BaseType.Military) != 0) total += 2;
             if ((Base & BaseType.Research) != 0) total++;
             if (total > Const.MaxColonyMissions) total = Const.MaxColonyMissions;

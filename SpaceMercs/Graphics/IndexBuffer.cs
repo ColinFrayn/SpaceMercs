@@ -39,8 +39,8 @@ namespace SpaceMercs.Graphics {
 
         public void Dispose() {
             if (isDisposed) return;
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-            GL.DeleteBuffer(IndexBufferHandle);
+            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0); // Crashes here
+            //GL.DeleteBuffer(IndexBufferHandle); // Crashes here
             isDisposed = true;
             GC.SuppressFinalize(this);
         }

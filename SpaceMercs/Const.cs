@@ -30,8 +30,8 @@ namespace SpaceMercs {
         public const double SearchBoostPerSkill = 5.0; // Increase in chance to spot a hidden object for each point in Perception.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
         public const int WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
-        public const double EquipmentLevelCostExponent = 3.0;  // For each level the weapon quality improves, this is the power law relationship to cost
-        public const double EquipmentLevelCostBaseExponent = 1.2;  // For each level the weapon quality improves, additionally multiply cost by this factor 
+        public const double EquipmentLevelCostExponent = 1.5;  // For each level the weapon quality improves, this is the power law relationship to cost
+        public const double EquipmentLevelCostBaseExponent = 1.0;  // For each level the weapon quality improves, additionally multiply cost by this factor 
         public const double EquipmentLevelRarityScale = 0.2;  // Each level of equipment quality makes it this much rarer
         public const double MaxCarryScale = 0.6; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
 
@@ -142,6 +142,7 @@ namespace SpaceMercs {
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
         public const double CreatureAttackDamageScale = 0.6;  // Modifier applied to damage done by Creatures
         public const double SoldierAttackDamageScale = 1.0;  // Modifier applied to damage done by player-controlled Soldiers
+        public const double TurnLength = 10.0; // Length of one combat turn in seconds
 
         // Miscellaneous
         public const int BufferSize = 10000;
