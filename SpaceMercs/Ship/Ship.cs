@@ -461,8 +461,8 @@ namespace SpaceMercs {
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
             prog.SetUniform("textureEnabled", true);
-            prog.SetUniform("texPos", ts.X, ts.Y);
-            prog.SetUniform("texScale", ts.W, ts.H);
+            prog.SetUniform("texPos", ts.X, ts.Y + ts.H);
+            prog.SetUniform("texScale", ts.W, -ts.H);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Textured.BindAndDraw();
@@ -504,7 +504,7 @@ namespace SpaceMercs {
             double cost = CostToBuildEquipment(se);
             if (cost > Owner.Cash) return;
             string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Build Room", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Build Room", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                 Owner.Cash -= cost;
                 Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
             }
@@ -516,7 +516,7 @@ namespace SpaceMercs {
             double cost = CostToBuildEquipment(se);
             if (cost > Owner.Cash) return;
             string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Upgrade Hull", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Upgrade Hull", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                 Owner.Cash -= cost;
                 ArmourType = sa;
             }
@@ -563,7 +563,7 @@ namespace SpaceMercs {
             if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(Equipment[iRoomID].Item1);
             string strMessage = string.Format("Really salvage this room ({0})? You will recover {1:F2} credits", Equipment[iRoomID].Item1.Name, rebate);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Room", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Room", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                 Owner.Cash += rebate;
                 Equipment.Remove(iRoomID);
             }
@@ -573,7 +573,7 @@ namespace SpaceMercs {
             if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(ArmourType);
             string strMessage = string.Format("Really salvage your ship armour ({0})? You will recover {1:F2} credits", ArmourType.Name, rebate);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Armour", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Armour", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                 Owner.Cash += rebate;
                 ArmourType = null;
             }

@@ -4,47 +4,11 @@ ToDo List
 
 Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
+Pick Up All doesn't work (shouldn't rely on highlighting all objects)
+
+Display system population on map view
+
 ==========================================================================================================
-
-
------------------------
-Done Since Last Release
------------------------
-
-Updated all grapics to OpenGL4
-
-Updated text renderer to use TrueType fonts
-
-Prevented targetting of self or own team in missions
-
-"Are you sure" on close window
-
-Rebalanced (reduced slightly) creature damage, especially at low levels
-
-Significantly reduced the cost scaling for higher quality items
-
-Improved menu handling to stop submenus dropping out when hovering
-
-Handling soldier death, failed missions and the team being killed
-
-Display team cash on Mercenary Shop, Ship Vendor, Foundry
-
-Star labels and ownership flags on main map
-
-Several UI enhancements incl. locking the aspect ratio
-
-Bugfix: After saving/reloading, ZoomTo button links to the wrong location
-Bugfix: Fixed handling/saving of view options
-Bugfix: Numerous minor bugfixes
-Bugfix: Fixed issue when occasional crashes would occur disposing graphical elements
-Bugfix: Mercenary hiring dialog did not work correctly when sorted
-
-
--------
-Testing
--------
-
-Encounters : Are there too many of them? Test in lots of situations.
 
 
 ---------------------
@@ -88,8 +52,6 @@ ShipView: Show ship shields
 - Display ellipse, blended, before drawing the rooms (but after starfield)
 - Vary transparency based on shield strength
 
-Name planets/systems based on what the owning race's language sounds like
-
 Travel / ShipCombat:
 - Ships should move around a bit
 - Check if regen works (auto repair, regen plating)
@@ -106,7 +68,7 @@ Add bionic implants? Salvageable from dead humanoids of higher level or manufact
 
 Display visual effect on creatures if they have shields
 - Textures.GenerateCreatureTexture()  (all types)
--- Need to make textures specifically for each creature
+-- Need to make textures specifically for each individual creature?
 
 Add light sources for max. vision range? 
 
@@ -117,32 +79,27 @@ Allow creatures to enter stealth
 
 Investigate Blockly for scripting soldiers?
 
+Add graphics for more creature types
+- Or replace them with textures?
+
+Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
+
+Improve colony icon on System View
+
 
 -------------------------
 Backburner : Improvements
 -------------------------
 
-Remove all Windows MessageBoxes
-
-Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
-
-Travel.DrawBattle() : Convert Frag to a vertex array for optimisation
+Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
 
 DrawShipHoverInfo() : Add multi-line info for equipment?
 
-Improve TextRenderer
-- Bold, Shadow, Border
+Improve TextRenderer: Add Bold, Shadow, Border
 
 Displaying colonies of other races: Are they visually distinct?
 
-Encounter.cs : Remove MessageBox and replace with in-game messages
-- InactiveEncounter
-- ActiveEncounter
-
 Profile everything, especially AI
-
-Add graphics for more creature types
-- Or replace them with textures?
 
 Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
 
@@ -150,3 +107,6 @@ Monitor savegame file size and reduce if necessary
 - Utils.RunLengthEncode(string str)
 - Utils.RunLengthDecode(string str)
 - Zip it up (gives 8-9x but makes it unreadable)
+
+Name planets/systems based on what the owning race's language sounds like??
+

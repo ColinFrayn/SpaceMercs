@@ -213,7 +213,7 @@ namespace SpaceMercs {
         public const double SalvageScale = 0.5; // Times area of the object
         public const double SalvageRate = 0.25; // Purchase price from vendors as a fraction of the sale price
         public const double ShipEquipmentRepairFract = 0.4; // Ship equipment contributes thiss fraction of its value to repair cost
-        public const double ShipRepairCostScale = 0.3;  // Fraction of calculated value required to repair 100%
+        public const double ShipRepairCostScale = 0.6;  // Fraction of calculated value required to repair 100%
         public const double HullUpgradeCost = 15.0;  // Divide MaxHull by this for scale factor
 
         // MissionView Settings

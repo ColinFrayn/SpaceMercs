@@ -104,7 +104,7 @@ namespace SpaceMercs.Dialogs {
         // Close the window and generate the new map
         private void buttonGenerate_Click(object sender, EventArgs e) {
             if (Unspent > 0) {
-                if (MessageBox.Show("You have unspent points. Really continue?", "Unspent points", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes) {
+                if (MessageBox.Show("You have unspent points. Really continue?", "Unspent points", MessageBoxButtons.YesNo) != DialogResult.Yes) {
                     return;
                 }
             }

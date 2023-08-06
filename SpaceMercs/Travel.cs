@@ -285,7 +285,7 @@ namespace SpaceMercs {
                     bPause = true;
                     double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 0.5), 3);
                     string strMessage = String.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
-                    if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                         PlayerTeam.Cash += dReward;
                         PlayerTeam.CeaseMission();
                         ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");

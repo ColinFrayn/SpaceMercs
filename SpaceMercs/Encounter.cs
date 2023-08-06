@@ -80,7 +80,7 @@
         // Do an inactive encounter
         private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
             string strDesc = rc.Known ? rc.Name : "unidentified alien";
-            if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) {
+            if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) { // REPLACE WITH msgBox
                 return Mission.CreateIgnoreMission();
             }
 
@@ -96,7 +96,7 @@
                     double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
                     double dReward = Math.Round((dTime * 5.0) + (rand.NextDouble() * (iDiff + 2.0) / 2.0), 2);
                     string strMessage = $"You have discovered a stranded {strDesc} freighter. They request your help for repairs. Time = {dTime} days; Reward = {dReward} credits. Will you help?";
-                    if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
+                    if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
                     return Mission.CreateRepairMission(rc, (float)(dTime * Const.SecondsPerDay), dReward);
                 }
             }
@@ -105,13 +105,13 @@
             if (!bLifeForms) {
                 double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
                 string strMessage = $"You have discovered a stranded {strDesc} freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
-                if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Abandoned Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
+                if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Abandoned Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
                 return Mission.CreateSalvageMission(rc, iDiff, (float)(dTime * Const.SecondsPerDay));
             }
 
             // Otherwise you will need a hostile boarding party
             string strMessage2 = $"You have discovered a stranded {strDesc} vessel. Scans have detected hostile life forms. Do you wish to board?";
-            if (MessageBox.Show(strMessage2, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission();
+            if (MessageBox.Show(strMessage2, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
 
             // Create a mission for the landing party scenario
             return Mission.CreateBoardingPartyMission(rc, iDiff);
@@ -127,12 +127,12 @@
             string strRace = rc.Known ? rc.Name : "unidentified alien";
             string strMessage = $"You have been ambushed by a hostile {strRace} vessel.";
             if (PlayerTeam.PlayerShip.CanOutrun(miss.ShipTarget)) {
-                if (MessageBox.Show(new Form { TopMost = true }, strMessage + " You can outrun the ambushers. Do you want to flee?", "Ambush", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                if (MessageBox.Show(new Form { TopMost = true }, strMessage + " You can outrun the ambushers. Do you want to flee?", "Ambush", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                     return Mission.CreateIgnoreMission();
                 }
             }
             else {
-                MessageBox.Show(new Form { TopMost = true }, strMessage + " Prepare to fight!");
+                MessageBox.Show(new Form { TopMost = true }, strMessage + " Prepare to fight!"); // REPLACE WITH msgBox
             }
 
             return miss;
