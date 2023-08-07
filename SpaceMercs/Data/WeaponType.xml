@@ -63,18 +63,68 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Rifle">
-    <Mass>12.0</Mass>
+    <Mass>15.0</Mass>
     <Cost>55</Cost>
-    <Rarity>10</Rarity>
-    <Speed>15</Speed>
+    <Rarity>11</Rarity>
+    <Speed>16</Speed>
     <Range Accuracy="0" DropOff="0.8">10</Range>
-    <Damage>7+4</Damage>
+    <Damage>7+5</Damage>
     <Desc>A heavy automatic rifle</Desc>
     <Sound>HeavyMachineGun</Sound>
     <Materials>
       <Material Name="Steel" Amount="10"/>
       <Material Name="Aluminium" Amount="3"/>
       <Material Name="Copper" Amount="2"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Laser Rifle">
+    <Mass>3.0</Mass>
+    <Cost>160</Cost>
+    <Rarity>9</Rarity>
+    <Speed>13</Speed>
+    <Range Accuracy="0" DropOff="0.4">12</Range>
+    <Damage>5+2</Damage>
+    <Desc>A laser rifle</Desc>
+    <Sound>LaserRifle</Sound>
+    <Materials>
+      <Material Name="Steel" Amount="3"/>
+      <Material Name="Plastic" Amount="2"/>
+      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Heavy Laser Rifle">
+    <Mass>15.0</Mass>
+    <Cost>150</Cost>
+    <Rarity>22</Rarity>
+    <Speed>16</Speed>
+    <Range Accuracy="0" DropOff="0.6">12</Range>
+    <Damage>7+5</Damage>
+    <Desc>A heavy laser rifle</Desc>
+    <Sound>HeavyLaserRifle</Sound>
+    <Materials>
+      <Material Name="Steel" Amount="6"/>
+      <Material Name="Plastic" Amount="5"/>
+      <Material Name="Aluminium" Amount="3"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Crystals" Amount="2"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Pistol">
+    <Mass>0.7</Mass>
+    <Cost>20</Cost>
+    <Rarity>7</Rarity>
+    <Speed>8</Speed>
+    <Range Accuracy="0" DropOff="0.4">8</Range>
+    <Damage>2+2</Damage>
+    <Desc>A laser pistol</Desc>
+    <Sound>LaserPistol</Sound>
+    <Materials>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Gauss Cannon">

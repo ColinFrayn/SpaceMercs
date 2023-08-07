@@ -8,8 +8,6 @@ Display system population on map view
 
 ZoomTo buttons keep vanishing.
 
-Heavy assault rifle sound should play more slowly and maybe do more dmg?
-
 ==========================================================================================================
 
 
