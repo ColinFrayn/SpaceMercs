@@ -270,8 +270,7 @@ namespace SpaceMercs {
             if (from is Soldier s) {
                 hit += Const.SoldierHitBias;
                 int sniper = s.GetUtilityLevel(Soldier.UtilitySkill.Sniper);
-                dropoffmod *= 1.0 - ((double)sniper / 10.0);
-                if (dropoffmod < 0.0) dropoffmod = 0.0;
+                dropoffmod *= Math.Pow(Const.SniperRangeMod, sniper);
             }
             if (dropoff > 0.0) hit -= dropoffmod; // Harder to hit at long range. 0.0 = melee weapon.
             return hit;

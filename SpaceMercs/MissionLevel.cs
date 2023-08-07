@@ -989,7 +989,7 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) / (Const.CreatureCountScale - (ParentMission.Soldiers.Count * 2)));
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) / (Const.CreatureCountScale - (ParentMission.Soldiers.Count * 4)));
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
@@ -1004,9 +1004,10 @@ namespace SpaceMercs {
             while (nLeft > 0 && niter < 1000) {
                 List<Creature> cGroup = new List<Creature>();
                 int iGroupSize = 1 + rand.Next(2);
-                if (nCreatures > 15) iGroupSize += rand.Next(nCreatures / 15);
+                if (rand.Next(nCreatures) > 15) iGroupSize++;
+                if (rand.Next(nCreatures) > 25) iGroupSize++;
                 if (ParentMission.Soldiers.Count > 1) iGroupSize += rand.Next(ParentMission.Soldiers.Count);
-                if (Entities.Count == 0 && cg.HasBoss && (nCreatures > 8 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
+                if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
                     Creature? cr = cg.GenerateRandomBoss(ra, Diff, this);
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }

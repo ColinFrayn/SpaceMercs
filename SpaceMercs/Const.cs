@@ -143,6 +143,7 @@ namespace SpaceMercs {
         public const double CreatureAttackDamageScale = 0.6;  // Modifier applied to damage done by Creatures
         public const double SoldierAttackDamageScale = 1.0;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
+        public const double SniperRangeMod = 0.85; // Snipers reduce drop off mod by this factor per level
 
         // Miscellaneous
         public const int BufferSize = 10000;
@@ -179,7 +180,7 @@ namespace SpaceMercs {
         public const double AutomataSurfaceFract = 0.3;
         public const int MinimumCreatureDistanceFromStartLocation = 10;
         public const double CreatureCountExponent = 0.82;  // Scale creature count as level area ^ This
-        public const double CreatureCountScale = 28.0;   // Divide creature count ^ Exponent by (this-2N)
+        public const double CreatureCountScale = 30.0;   // Divide creature count ^ Exponent by (this-2N)
 
         // Map viewer settings
         public const double MinAngSize = 0.004; // View settings

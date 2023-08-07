@@ -4,9 +4,11 @@ ToDo List
 
 Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
-Pick Up All doesn't work (shouldn't rely on highlighting all objects)
-
 Display system population on map view
+
+ZoomTo buttons keep vanishing.
+
+Heavy assault rifle sound should play more slowly and maybe do more dmg?
 
 ==========================================================================================================
 

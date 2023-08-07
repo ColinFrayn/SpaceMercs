@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>11/01/2150 20:44:27</Clock>
+<Clock>11/01/2150 20:47:33</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -8372,26 +8372,6 @@
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
  <Seed>1131583676</Seed>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="907673144" Diff="3">
- <Name>Enemy Ship</Name>
- <Hull>13</Hull>
- <Shield>0</Shield>
- <Seed>730470</Seed>
- <Eqp ID="3" Active="True">Thrusters</Eqp>
- <Eqp ID="2" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>24.45</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1785646907</Seed>
 </Mission>
 <Mission>
  <Type>Caves</Type>
@@ -64802,16 +64782,16 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>136.21654602149295</Cash>
+ <Cash>210.56277929437695</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="43" Y="20"/>
- <Health>26</Health>
- <Stamina>5.53436178752888</Stamina>
+ <Location X="55" Y="28"/>
+ <Health>13.973390615023218</Health>
+ <Stamina>30</Stamina>
  <Shields>0</Shields>
- <Facing>341.565051177078</Facing>
+ <Facing>0</Facing>
  <Level>4</Level>
- <XP>5864</XP>
+ <XP>6319</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,16</Stats>
@@ -64822,12 +64802,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Automatic Rifle" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Shortblade" Level="1"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -64842,23 +64816,22 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">139</Exp>
+  <Exp Type="Automatic Rifle">146</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Perception">1</Exp>
   <Exp Skill="Unspent">3</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="44" Y="19"/>
- <Health>26</Health>
- <Stamina>0.7000000000000011</Stamina>
+ <Location X="55" Y="17"/>
+ <Health>4.384157953767257</Health>
+ <Stamina>22</Stamina>
  <Shields>0</Shields>
- <Facing>348.69006752597977</Facing>
+ <Facing>-90</Facing>
  <Level>2</Level>
- <XP>1465</XP>
+ <XP>1920</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,14,12</Stats>
@@ -64867,13 +64840,10 @@
   <Inv Count="1">
 <Equipment Type="Acid Grenade"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
-<Material Type="Fabric"/>
-  </Inv>
-  <Inv Count="2">
 <Equipment Type="Medikit"/>
   </Inv>
  </Inventory>
@@ -64896,51 +64866,41 @@
  <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="49" Y="19"/>
- <Health>25</Health>
- <Stamina>4</Stamina>
+ <Location X="56" Y="27"/>
+ <Health>18.853546275077672</Health>
+ <Stamina>20</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>270</Facing>
  <Level>3</Level>
- <XP>537</XP>
+ <XP>992</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>16,13,12,12,7</Stats>
  <Colour>Red</Colour>
  <Inventory>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Automatic Rifle" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Shortblade" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
 <Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Shortblade" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
-  <Exp Type="Shortblade">5</Exp>
+  <Exp Type="Shortblade">17</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
  </Soldiers>
 <Ship Type="Shuttle">
@@ -64959,11 +64919,22 @@
  <Mission_ShowTravel/>
  <Mission_ShowPath/>
  <Mission_ShowEffects/>
- <Mission_ViewDetection/>
  <Relations>
   <Relation Race="Human" Value="2"/>
  </Relations>
  <Inventory>
+  <Inv Count="1">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Steel"/>
+  </Inv>
  </Inventory>
 </Team>
 <Races>
