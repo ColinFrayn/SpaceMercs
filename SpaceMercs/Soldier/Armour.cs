@@ -29,6 +29,10 @@ namespace SpaceMercs {
                 if (Type.Stamina != 0) sb.AppendLine("Stamina : " + Type.Stamina.ToString("0.#"));
                 if (Type.Attack != 0) sb.AppendLine("Attack : " + Type.Attack.ToString("0.#"));
                 if (Type.Defence != 0) sb.AppendLine("Defence : " + Type.Defence.ToString("0.#"));
+                if (Type.Speed != 1.0) {
+                    if (Type.Speed > 1.0) sb.AppendLine($"Speed : +{((Type.Speed - 1.0) * 100).ToString("0")}%");
+                    else sb.AppendLine($"Speed : -{((1.0 - Type.Speed) * 100).ToString("0")}%");
+                }
                 foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {
                     sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
                 }
