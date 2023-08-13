@@ -150,8 +150,8 @@ namespace SpaceMercs {
         public static string LevelToDescription(int lvl) {
             return lvl switch {
                 0 => "Basic",
-                1 => "Fine",
-                2 => "Good",
+                1 => "Good",
+                2 => "Fine",
                 3 => "Superb",
                 4 => "Epic",
                 5 => "Legendary",

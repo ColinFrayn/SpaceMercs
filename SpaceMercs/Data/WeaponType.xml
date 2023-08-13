@@ -63,7 +63,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Rifle">
-    <Mass>15.0</Mass>
+    <Mass>20.0</Mass>
     <Cost>55</Cost>
     <Rarity>11</Rarity>
     <Speed>16</Speed>
@@ -95,7 +95,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Laser Rifle">
-    <Mass>15.0</Mass>
+    <Mass>22.0</Mass>
     <Cost>150</Cost>
     <Rarity>22</Rarity>
     <Speed>16</Speed>
@@ -111,7 +111,7 @@
       <Material Name="Crystals" Amount="2"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Pistol">
+  <WeaponType Name="Laser Pistol">
     <Mass>0.7</Mass>
     <Cost>20</Cost>
     <Rarity>7</Rarity>
@@ -162,7 +162,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle">
-    <Mass>14.0</Mass>
+    <Mass>18.0</Mass>
     <Cost>70</Cost>
     <Rarity>14</Rarity>
     <Speed>14</Speed>
@@ -179,7 +179,7 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Flame Thrower">
-    <Mass>14.0</Mass>
+    <Mass>15.0</Mass>
     <Cost>90</Cost>
     <Rarity>12</Rarity>
     <Speed>14</Speed>

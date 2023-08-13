@@ -165,6 +165,8 @@ namespace SpaceMercs.Dialogs {
             string strType = cbUpgradeItemType.SelectedItem.ToString() ?? throw new Exception("Could not identify selected item string");
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
             int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
+            bool bIncludeEquipped = cbEquipped.Checked;
+
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
@@ -195,30 +197,32 @@ namespace SpaceMercs.Dialogs {
                         if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                     }
                 }
-                foreach (Armour ar in s.EquippedArmour) {
-                    if (!string.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-                    if (strType.Equals("All") || strType.Equals("Armour")) {
-                        arrRow[0] = ar.Name;
-                        arrRow[1] = s.Name + " [Eq]";
-                        arrRow[2] = (ar.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-                        arrRow[3] = "1";
-                        dgInventory.Rows.Add(arrRow);
-                        SaleItem si = new SaleItem(ar, s, true, 1);
-                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-                        if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                if (bIncludeEquipped) {
+                    foreach (Armour ar in s.EquippedArmour) {
+                        if (!string.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                        if (strType.Equals("All") || strType.Equals("Armour")) {
+                            arrRow[0] = ar.Name;
+                            arrRow[1] = s.Name + " [Eq]";
+                            arrRow[2] = (ar.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                            arrRow[3] = "1";
+                            dgInventory.Rows.Add(arrRow);
+                            SaleItem si = new SaleItem(ar, s, true, 1);
+                            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                            if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                        }
                     }
-                }
-                if (s.EquippedWeapon != null) {
-                    if (!string.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
-                    if (strType.Equals("All") || strType.Equals("Weapon")) {
-                        arrRow[0] = s.EquippedWeapon.Name;
-                        arrRow[1] = s.Name + " [Eq]";
-                        arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-                        arrRow[3] = "1";
-                        dgInventory.Rows.Add(arrRow);
-                        SaleItem si = new SaleItem(s.EquippedWeapon, s, true, 1);
-                        dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
-                        if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                    if (s.EquippedWeapon != null) {
+                        if (!string.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                        if (strType.Equals("All") || strType.Equals("Weapon")) {
+                            arrRow[0] = s.EquippedWeapon.Name;
+                            arrRow[1] = s.Name + " [Eq]";
+                            arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
+                            arrRow[3] = "1";
+                            dgInventory.Rows.Add(arrRow);
+                            SaleItem si = new SaleItem(s.EquippedWeapon, s, true, 1);
+                            dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
+                            if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
+                        }
                     }
                 }
             }
@@ -257,7 +261,7 @@ namespace SpaceMercs.Dialogs {
             SoundEffects.PlaySound("CashRegister");
             cl.RemoveItem(eq);
             // Reinitialise the data grid after purchase to reflect the new state
-            SetupMerchantDataGrid(); 
+            SetupMerchantDataGrid();
             // Re-highlight the correct row, if it still exists (might have bought the last one, or only showing affordable and can no longer afford)
             foreach (DataGridViewRow row in dgMerchant.Rows) {
                 if (row.Tag is IItem it) {
@@ -554,6 +558,9 @@ namespace SpaceMercs.Dialogs {
         private void cbAffordable_CheckedChanged(object sender, EventArgs e) {
             SetupMerchantDataGrid();
         }
+        private void cbEquipped_CheckedChanged(object sender, EventArgs e) {
+            SetupFoundryTab();
+        }
 
         // Changed tab so update lists
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
@@ -632,6 +639,5 @@ namespace SpaceMercs.Dialogs {
                 e.Handled = true;//pass by the default sorting
             }
         }
-
     }
 }
