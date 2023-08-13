@@ -8,8 +8,6 @@ Display system population on map view
 
 ZoomTo buttons keep vanishing on MissionView soldier tabs
 
-When travelling to a moon, it doesn't rotate on the view screen
-
 
 ==========================================================================================================
 

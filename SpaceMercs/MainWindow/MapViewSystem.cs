@@ -65,7 +65,7 @@ namespace SpaceMercs.MainWindow {
                 flatColourShaderProgram.SetUniform("view", squashM * pTranslateM);
 
                 // Draw the Planet
-                int Level = pl.radius > 7 * Const.Million ? 10 : 9;
+                int Level = pl.Radius > 7 * Const.Million ? 10 : 9;
                 pl.DrawSelected(fullShaderProgram, Level);
 
                 // Draw all other Planet icons

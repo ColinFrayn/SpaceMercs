@@ -12,7 +12,7 @@ namespace SpaceMercs {
         public Star Parent { get; set; }
         public readonly List<Moon> Moons;
         public double tempbase;
-        public override float DrawScale { get { return (float)Math.Pow(radius / 1000.0, 0.4) / 25f; } }
+        public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
 
         public Planet() {
             Parent = Star.Empty;
@@ -159,11 +159,11 @@ namespace SpaceMercs {
             if (Temperature < 150) nmn -= rnd.Next(2);
             if (Temperature < 130) nmn -= rnd.Next(2);
             if (Temperature < 110) nmn -= rnd.Next(2);
-            if (radius < 4 * Const.Million) nmn -= rnd.Next(2) + 1;
-            if (radius < 3.5 * Const.Million) nmn -= rnd.Next(2) + 1;
-            if (radius < 3 * Const.Million) nmn -= rnd.Next(2) + 1;
-            if (radius < 2.5 * Const.Million) nmn -= rnd.Next(2) + 1;
-            if (radius < 2 * Const.Million) nmn -= rnd.Next(2) + 1;
+            if (Radius < 4 * Const.Million) nmn -= rnd.Next(2) + 1;
+            if (Radius < 3.5 * Const.Million) nmn -= rnd.Next(2) + 1;
+            if (Radius < 3 * Const.Million) nmn -= rnd.Next(2) + 1;
+            if (Radius < 2.5 * Const.Million) nmn -= rnd.Next(2) + 1;
+            if (Radius < 2 * Const.Million) nmn -= rnd.Next(2) + 1;
             if (Type != PlanetType.Gas) nmn /= 3;
             if (nmn > 7) nmn = 7 + rnd.Next(2);
             if (nmn < minMoons) nmn = minMoons;
@@ -173,11 +173,11 @@ namespace SpaceMercs {
                 Moon mn = new Moon(rnd.Next(10000000), this, n);
 
                 do {
-                    mn.radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
-                } while (mn.radius < Const.MoonRadiusMin);
+                    mn.Radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
+                } while (mn.Radius < Const.MoonRadiusMin);
 
                 mn.OrbitalDistance = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(n + 1), Const.MoonOrbitSigma);
-                mn.OrbitalDistance += radius;
+                mn.OrbitalDistance += Radius;
                 bool bOK = true;
                 do {
                     mn.Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees
@@ -202,17 +202,13 @@ namespace SpaceMercs {
 
                 mn.colour = Const.PlanetTypeToCol2(mn.Type);
 
-                // Rough estimate of planet's mass / 10^18kg
-                double pmass = Math.Pow((radius / Const.EarthRadius), 3.0) * 6000000.0;
-                if (Type == PlanetType.Gas) pmass /= 4.0;
-
                 // Orbital period
-                double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
-                prot /= ((mn.OrbitalDistance / Const.AU) * Math.Pow(mn.radius / (6.0 * Const.Million), 0.5));
+                double prot = Utils.NextGaussian(rnd, Const.MoonOrbitalPeriod, Const.MoonOrbitalPeriodSigma);
+                prot /= (mn.OrbitalDistance / Const.MoonOrbit) * Math.Pow(mn.Radius / Const.MoonRadius, 0.5);
                 mn.OrbitalPeriod = (int)prot;
 
                 // Axial rotation
-                double arot = Utils.NextGaussian(rnd, prot, prot / 12f);
+                double arot = Utils.NextGaussian(rnd, prot, prot / 15f);
                 mn.AxialRotationPeriod = (int)arot;
 
                 Moons.Add(mn);

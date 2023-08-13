@@ -53,8 +53,10 @@ namespace SpaceMercs {
         public const double StarRotation = 25.0 * 24.0 * 3600.0;
         public const double StarRotationSigma = StarRotation / 10.0;
         public const double StarRotationMin = StarRotation / 5.0;
-        public const double AverageOrbitalPeriod = 1.0 * 24.0 * 3600.0 * 365.0;
-        public const double AverageOrbitalPeriodSigma = AverageOrbitalPeriod / 10.0;
+        public const double EarthOrbitalPeriod = 1.0 * 24.0 * 3600.0 * 365.0;
+        public const double EarthOrbitalPeriodSigma = EarthOrbitalPeriod / 15.0;
+        public const double MoonOrbitalPeriod = 1.0 * 24.0 * 3600.0 * 27.32; // Sidereal month
+        public const double MoonOrbitalPeriodSigma = MoonOrbitalPeriod / 15.0;
         public const double DayLength = 24.0 * 3600.0;
         public const double DayLengthSigma = DayLength / 10.0;
 

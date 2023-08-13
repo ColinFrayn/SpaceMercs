@@ -97,7 +97,7 @@ namespace SpaceMercs.MainWindow {
         private void DrawMapSelectionIcons() {
             if (aoHover != null) {
                 Matrix4 translateM = Matrix4.CreateTranslation(((Star)aoHover).MapPos);
-                double StarScale = Const.MapStarScale * Math.Pow(aoHover.radius / Const.Million, 0.28) + 0.05;
+                double StarScale = Const.MapStarScale * Math.Pow(aoHover.Radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
                 Matrix4 scaleM = Matrix4.CreateScale((float)StarScale * 1.1f);
                 Matrix4 modelM = scaleM * translateM;
@@ -109,7 +109,7 @@ namespace SpaceMercs.MainWindow {
 
             if (aoSelected != null) {
                 Matrix4 translateM = Matrix4.CreateTranslation(((Star)aoSelected).MapPos);
-                double StarScale = Const.MapStarScale * Math.Pow(aoSelected.radius / Const.Million, 0.28) + 0.05;
+                double StarScale = Const.MapStarScale * Math.Pow(aoSelected.Radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
                 Matrix4 scaleM = Matrix4.CreateScale((float)StarScale);
                 Matrix4 modelM = scaleM * translateM;
@@ -120,7 +120,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             if (CurrentSystem is not null) {
-                double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.radius / Const.Million, 0.28) + 0.05;
+                double StarScale = Const.MapStarScale * Math.Pow(CurrentSystem.Radius / Const.Million, 0.28) + 0.05;
                 if (StarScale < Const.MapStarScale * 0.5) StarScale = Const.MapStarScale * 0.5;
                 Matrix4 translateM = Matrix4.CreateTranslation(CurrentSystem.MapPos.X, CurrentSystem.MapPos.Y, 0f);
                 Matrix4 scaleM = Matrix4.CreateScale((float)StarScale, (float)StarScale, 1f);

@@ -1,6 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
@@ -9,7 +8,7 @@ using System.Xml;
 namespace SpaceMercs {
     class Moon : HabitableAO {
         public Planet Parent { get; set; }
-        public override float DrawScale { get { return (float)Math.Sqrt(radius / 1000.0) / 50f; } }
+        public override float DrawScale { get { return (float)Math.Sqrt(Radius / 1000.0) / 50f; } }
 
         public Moon(int _seed, Planet parent, int id) {
             ID = id;
@@ -26,6 +25,15 @@ namespace SpaceMercs {
             // Load this moon from the given Xml node
             // Start with generic AO stuff
             LoadAODetailsFromFile(xml);
+
+            // Bugfix - handle some dodgy data saved down because moon orbital period was wrapping as it was miscalculated too large
+            if (OrbitalPeriod < 0 || AxialRotationPeriod < 0) {
+                Random rnd = new Random();
+                OrbitalPeriod = Utils.NextGaussian(rnd, Const.MoonOrbitalPeriod, Const.MoonOrbitalPeriodSigma);
+                OrbitalPeriod /= (OrbitalDistance / Const.MoonOrbit) * Math.Pow(Radius / Const.MoonRadius, 0.5);
+                AxialRotationPeriod = Utils.NextGaussian(rnd, OrbitalPeriod, OrbitalPeriod / 15f);
+            }
+
             Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));

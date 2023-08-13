@@ -8,7 +8,7 @@ namespace SpaceMercs {
     abstract class AstronomicalObject {
         public enum AstronomicalObjectType { Star, Planet, Moon, Unknown };
         public string Name { get; protected set; }
-        public double radius; // In metres
+        public double Radius; // In metres
         public double OrbitalDistance; // In metres
         public double OrbitalPeriod; // Period of orbit (seconds)
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
@@ -73,13 +73,13 @@ namespace SpaceMercs {
             iTexture = -1;
             ID = xml.GetAttributeInt("ID");
             Name = xml.SelectNodeText("Name");
-            radius = xml.SelectNodeDouble("Radius");
+            Radius = xml.SelectNodeDouble("Radius");
 
             OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
 
             OrbitalPeriod = xml.SelectNodeDouble("PRot");
             // Default here is an approximation, for backwards compatibility with versions where I didn't save this
-            AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (radius / Const.PlanetSize));
+            AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (Radius / Const.PlanetSize));
             Temperature = xml.SelectNodeInt("Temp");
             Seed = xml.SelectNodeInt("Seed");
             Random rnd = new Random(Seed);
@@ -92,7 +92,7 @@ namespace SpaceMercs {
         protected void WriteAODetailsToFile(StreamWriter file) {
             if (!string.IsNullOrEmpty(Name)) file.WriteLine("<Name>" + Name + "</Name>");
             if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
-            file.WriteLine("<Radius>" + Math.Round(radius, 0).ToString() + "</Radius>");
+            file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
             file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");
             file.WriteLine("<Temp>" + Temperature.ToString() + "</Temp>");

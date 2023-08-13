@@ -19,7 +19,7 @@ namespace SpaceMercs {
         public Vector3 MapPos { get; private set; }
         public bool bGenerated { get; private set; }
         public bool Visited { get; private set; }
-        public override float DrawScale { get { return (float)Math.Pow(radius / Const.Billion, 0.3) * 2f; } }
+        public override float DrawScale { get { return (float)Math.Pow(Radius / Const.Billion, 0.3) * 2f; } }
         public Sector Sector { get; private set; }
         public bool Scanned {
             get {
@@ -214,22 +214,22 @@ namespace SpaceMercs {
             // Calculate what lifestage the star is in
             // Based on this, set up the star's radius and colour
             double lifestage = Age / Lifetime(Mass);
-            radius = Mass * 700.0 * Const.Million;
+            Radius = Mass * 700.0 * Const.Million;
             // Main sequence
             if (lifestage <= 0.8) {
-                radius *= 1.0 + ((lifestage - 0.4) / 2.0);
+                Radius *= 1.0 + ((lifestage - 0.4) / 2.0);
                 float lsc = (float)(lifestage / 0.8);
                 Temperature = (int)((double)(8000 - 3500) * lifestage / 0.8) + 3500;
             }
             // Giant branch (simplifying this as one stage atm)
             else if (lifestage <= 1.0) {
-                radius *= 1.2 * Math.Pow(2, (lifestage - 0.8) * 20.0);
+                Radius *= 1.2 * Math.Pow(2, (lifestage - 0.8) * 20.0);
                 float lsc = (float)(lifestage - 0.8) / 0.2f;
                 Temperature = (int)((double)(3000 - 6000) * (lifestage - 0.8) * 5.0) + 6000;
             }
             // White dwarf
             else {
-                radius = 6.0 * Const.Million / Math.Pow(Mass, 0.33333);
+                Radius = 6.0 * Const.Million / Math.Pow(Mass, 0.33333);
                 Temperature = (int)(10000.0 / (lifestage * lifestage));
             }
 
@@ -241,7 +241,7 @@ namespace SpaceMercs {
             if (lifestage <= 0.8) StarType += " Star";
             else if (lifestage <= 0.9) StarType += " Subgiant";
             else if (lifestage <= 1.0) {
-                if (radius < 10 * Const.Million) StarType += " Giant";
+                if (Radius < 10 * Const.Million) StarType += " Giant";
                 else StarType += " Supergiant";
             }
             else StarType += " Dwarf";
@@ -313,7 +313,7 @@ namespace SpaceMercs {
             Random rnd = new Random(Seed);
             // Number of planets
             int npl = (rnd.Next(pdensity + 1) + rnd.Next(pdensity + 4) + rnd.Next(pdensity + 4)) / 2;
-            if (radius < 30.0 * Const.Million) npl = (npl * 2) / 3; // Reduce npl for white dwarfs
+            if (Radius < 30.0 * Const.Million) npl = (npl * 2) / 3; // Reduce npl for white dwarfs
             if (npl > Const.MaxPlanetsPerSystem) npl = Const.MaxPlanetsPerSystem;
             if (npl < 1) npl = 1;
             double porbit = Const.PlanetOrbit * Mass;
@@ -328,7 +328,7 @@ namespace SpaceMercs {
                 do {
                     porbit *= Utils.NextGaussian(rnd, Const.PlanetOrbitFactor, Const.PlanetOrbitFactorSigma);
                 } while (rnd.Next(npl + 2) == 0);
-                pl.OrbitalDistance = porbit + (radius * 2.0);
+                pl.OrbitalDistance = porbit + (Radius * 2.0);
 
                 // Work out planet type
                 bool bOK = true;
@@ -337,7 +337,7 @@ namespace SpaceMercs {
                     // 280K * (T/Ts) * (R/Rs)^1/2 * (1-A)^1/4 / a^1/2  + modifier_for_atmosphere
                     // (a = orbit in AU, A = albedo, T = star temperature, R = stellar radius)
                     pl.tempbase = 300.0 / Math.Pow(porbit / Const.AU, 0.5);
-                    pl.tempbase *= (Temperature / Const.SunTemperature) * Math.Pow(radius / Const.SunRadius, 0.5); // Scale by the star's properties
+                    pl.tempbase *= (Temperature / Const.SunTemperature) * Math.Pow(Radius / Const.SunRadius, 0.5); // Scale by the star's properties
 
                     double tempmod = 0.0;
                     double albedo = 0.3;
@@ -365,21 +365,21 @@ namespace SpaceMercs {
 
                 // Get radius based on type
                 do {
-                    pl.radius = Utils.NextGaussian(rnd, Const.PlanetSize, Const.PlanetSizeSigma);
-                } while (pl.radius < Const.PlanetSizeMin);
+                    pl.Radius = Utils.NextGaussian(rnd, Const.PlanetSize, Const.PlanetSizeSigma);
+                } while (pl.Radius < Const.PlanetSizeMin);
                 if (pl.Type == Planet.PlanetType.Gas) {
-                    pl.radius *= Utils.NextGaussian(rnd, Const.GasGiantScale, Const.GasGiantScaleSigma);
+                    pl.Radius *= Utils.NextGaussian(rnd, Const.GasGiantScale, Const.GasGiantScaleSigma);
                 }
                 pl.colour = Const.PlanetTypeToCol2(pl.Type);
 
                 // Orbital period
-                double prot = Utils.NextGaussian(rnd, Const.AverageOrbitalPeriod, Const.AverageOrbitalPeriodSigma);
-                prot /= ((pl.OrbitalDistance / Const.AU) * Math.Pow(pl.radius / (6.0 * Const.Million), 0.5));
+                double prot = Utils.NextGaussian(rnd, Const.EarthOrbitalPeriod, Const.EarthOrbitalPeriodSigma);
+                prot /= ((pl.OrbitalDistance / Const.AU) * Math.Pow(pl.Radius / Const.PlanetSize, 0.5));
                 pl.OrbitalPeriod = (int)prot;
 
                 // Axial rotation period (i.e. a day length)
                 double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
-                pl.AxialRotationPeriod = (int)(arot * (pl.radius / Const.PlanetSize));
+                pl.AxialRotationPeriod = (int)(arot * (pl.Radius / Const.PlanetSize));
 
                 pl.GenerateMoons(rnd, pdensity);
                 Planets.Add(pl);

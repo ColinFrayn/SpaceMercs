@@ -124,7 +124,7 @@ namespace SpaceMercs.MainWindow {
                 if (!string.IsNullOrEmpty(st.Name)) tl1 = st.Name;
                 else tl1 = "Unnamed Star";
                 tl2 = "M = " + Math.Round(st.Mass, 2).ToString() + " Sol";
-                tl3 = "R = " + Math.Round(st.radius / Const.Million, 0).ToString() + " Mm";
+                tl3 = "R = " + Math.Round(st.Radius / Const.Million, 0).ToString() + " Mm";
                 tl4 = "Type " + st.StarType;
                 tl5 = "(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")";
             }
@@ -133,7 +133,7 @@ namespace SpaceMercs.MainWindow {
                 if (!string.IsNullOrEmpty(pl.Name)) tl1 = pl.Name;
                 else tl1 = "Unnamed Planet";
                 tl2 = pl.Type.ToString();
-                tl3 = "R = " + Math.Round(pl.radius / 1000.0, 0).ToString() + "km";
+                tl3 = "R = " + Math.Round(pl.Radius / 1000.0, 0).ToString() + "km";
                 tl4 = $"Temp = {pl.Temperature}K";
                 tl5 = "Orbit = " + Math.Round(pl.OrbitalDistance / Const.AU, 2).ToString() + " AU";
                 //tl4 = "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm";
@@ -142,7 +142,7 @@ namespace SpaceMercs.MainWindow {
                 Moon mn = (Moon)aoSelected;
                 tl1 = "Moon " + (mn.ID + 1).ToString();
                 tl2 = mn.Type.ToString();
-                tl3 = "R = " + Math.Round(mn.radius / 1000.0, 0).ToString() + "km";
+                tl3 = "R = " + Math.Round(mn.Radius / 1000.0, 0).ToString() + "km";
                 tl4 = $"Temp = {mn.Temperature}K";
                 tl5 = "Orbit = " + Math.Round(mn.OrbitalDistance / Const.Million, 0).ToString() + " Mm";
             }
