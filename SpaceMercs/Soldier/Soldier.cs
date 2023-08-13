@@ -1218,6 +1218,9 @@ namespace SpaceMercs {
             foreach (Effect e in Effects) {
                 mod *= e.SpeedMod;
             }
+            foreach (Armour ar in EquippedArmour) {
+                mod *= ar.Type.Speed;
+            }
             return mod;
         }
         private double ShieldsFromItems() {

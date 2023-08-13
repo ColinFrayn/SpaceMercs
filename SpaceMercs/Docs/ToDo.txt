@@ -18,7 +18,7 @@ When travelling to a moon, it doesn't rotate on the view screen
 Backburner : Features
 ---------------------
 
-Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate? 
+Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race

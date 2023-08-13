@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public int Shields { get; private set; } // Bonus
         public int Attack { get; private set; } // Bonus
         public int Defence { get; private set; } // Bonus
+        public double Speed { get; private set; } // Divides movment cost -> higher number = faster
         public int BaseArmour { get; private set; }
         public int Size {
             get {
@@ -35,6 +36,7 @@ namespace SpaceMercs {
             Attack = xml.SelectNodeInt("Attack", 0);
             Defence = xml.SelectNodeInt("Defence", 0);
             BaseArmour = xml.SelectNodeInt("BaseArmour", 0);
+            Speed = xml.SelectNodeDouble("Speed", 1.0);
             if (xml.SelectSingleNode("BonusArmour") != null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
                     WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));

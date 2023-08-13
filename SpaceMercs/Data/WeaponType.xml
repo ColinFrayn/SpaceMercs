@@ -18,7 +18,7 @@
   </WeaponType>
   <WeaponType Name="Quad Shotgun">
     <Mass>4.0</Mass>
-    <Cost>50</Cost>
+    <Cost>55</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="3" DropOff="1.0">5</Range>
@@ -64,7 +64,7 @@
   </WeaponType>
   <WeaponType Name="Heavy Rifle">
     <Mass>20.0</Mass>
-    <Cost>55</Cost>
+    <Cost>110</Cost>
     <Rarity>11</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="0" DropOff="0.8">10</Range>
@@ -96,7 +96,7 @@
   </WeaponType>
   <WeaponType Name="Heavy Laser Rifle">
     <Mass>22.0</Mass>
-    <Cost>150</Cost>
+    <Cost>350</Cost>
     <Rarity>22</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="0" DropOff="0.6">12</Range>
@@ -129,7 +129,7 @@
   </WeaponType>
   <WeaponType Name="Gauss Cannon">
     <Mass>16.0</Mass>
-    <Cost>75</Cost>
+    <Cost>100</Cost>
     <Rarity>14</Rarity>
     <Speed>20</Speed>
     <Range Accuracy="0" DropOff="0.7">14</Range>
@@ -146,13 +146,13 @@
   </WeaponType>
   <WeaponType Name="Arc Rifle">
     <Mass>5.0</Mass>
-    <Cost>36</Cost>
+    <Cost>45</Cost>
     <Rarity>9</Rarity>
     <Speed>12</Speed>
-    <Range Accuracy="0" DropOff="1.0">6</Range>
-    <Damage>6+4</Damage>
+    <Range Accuracy="0" DropOff="1.0">5</Range>
+    <Damage>6+5</Damage>
     <Type>Electrical</Type>
-    <Desc>An arc thrower that sends out electrical discharges towards the target.</Desc>
+    <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>
     <Materials>
       <Material Name="Steel" Amount="3"/>
@@ -163,13 +163,13 @@
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle">
     <Mass>18.0</Mass>
-    <Cost>70</Cost>
+    <Cost>180</Cost>
     <Rarity>14</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="1" DropOff="1.1">6</Range>
-    <Damage>7+5</Damage>
+    <Range Accuracy="1" DropOff="1.0">5</Range>
+    <Damage>7+6</Damage>
     <Type>Electrical</Type>
-    <Desc>A heavy arc thrower that sends out electrical discharges towards the target.</Desc>
+    <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>
     <Materials>
       <Material Name="Steel" Amount="9"/>
@@ -237,8 +237,8 @@
   </WeaponType>
   <WeaponType Name="Laser Sniper Rifle">
     <Mass>3.0</Mass>
-    <Cost>60</Cost>
-    <Rarity>14</Rarity>
+    <Cost>130</Cost>
+    <Rarity>15</Rarity>
     <Speed>24</Speed>
     <Range Accuracy="3" DropOff="0.13">22</Range>
     <Damage>6+4</Damage>
@@ -249,13 +249,13 @@
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Copper" Amount="1"/>
-      <Material Name="Crystal" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Gauss Sniper Rifle">
     <Mass>4.0</Mass>
-    <Cost>120</Cost>
-    <Rarity>18</Rarity>
+    <Cost>420</Cost>
+    <Rarity>26</Rarity>
     <Speed>26</Speed>
     <Range Accuracy="3" DropOff="0.15">24</Range>
     <Damage>7+4</Damage>
@@ -285,8 +285,8 @@
   </WeaponType>
   <WeaponType Name="Powerblade">
     <Mass>1.5</Mass>
-    <Cost>50</Cost>
-    <Rarity>14</Rarity>
+    <Cost>80</Cost>
+    <Rarity>18</Rarity>
     <Speed>10</Speed>
     <Range Accuracy="1">1</Range>
     <Damage>3+3</Damage>
@@ -315,8 +315,8 @@
   </WeaponType>
   <WeaponType Name="Power Axe">
     <Mass>2.5</Mass>
-    <Cost>65</Cost>
-    <Rarity>15</Rarity>
+    <Cost>85</Cost>
+    <Rarity>17</Rarity>
     <Speed>10</Speed>
     <Range>1</Range>
     <Damage>4+3</Damage>
@@ -331,12 +331,12 @@
     </Materials>
   </WeaponType>
   <WeaponType Name="Chainsword">
-    <Mass>3.0</Mass>
-    <Cost>30</Cost>
+    <Mass>5.0</Mass>
+    <Cost>60</Cost>
     <Rarity>9</Rarity>
-    <Speed>12</Speed>
+    <Speed>16</Speed>
     <Range>1</Range>
-    <Damage>3+4</Damage>
+    <Damage>5+4</Damage>
     <Desc>A whirring chainsaw in a sword shape</Desc>
     <Sound>Chainsaw</Sound>
     <Materials>

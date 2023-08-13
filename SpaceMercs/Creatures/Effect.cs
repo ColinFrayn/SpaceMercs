@@ -52,7 +52,7 @@ namespace SpaceMercs {
             file.WriteLine("<Effect Name=\"" + Name + "\">");
             if (Damage != 0.0) file.WriteLine(" <Damage Type=\"" + DamageType.ToString() + "\">" + Damage + "</Damage>");
             file.WriteLine(" <Duration>" + Duration + "</Duration>");
-            if (!String.IsNullOrEmpty(SoundEffect)) file.WriteLine(" <Sound>" + SoundEffect + "</Sound>");
+            if (!string.IsNullOrEmpty(SoundEffect)) file.WriteLine(" <Sound>" + SoundEffect + "</Sound>");
             if (SpeedMod != 1.0) file.WriteLine(" <SpeedMod>" + SpeedMod + "</SpeedMod>");
             if (StatMods.Count > 0) {
                 file.WriteLine(" <StatMods>");

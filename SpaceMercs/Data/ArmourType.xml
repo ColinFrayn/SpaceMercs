@@ -24,7 +24,7 @@
   </ArmourType>
   <ArmourType Name="Military Helmet">
     <Mass>2.0</Mass>
-    <Cost>22</Cost>
+    <Cost>30</Cost>
     <Rarity>9</Rarity>
     <Attack>1</Attack>
     <BaseArmour>5</BaseArmour>
@@ -36,7 +36,7 @@
   </ArmourType>
   <ArmourType Name="Stealth Helmet">
     <Mass>1.0</Mass>
-    <Cost>32</Cost>
+    <Cost>35</Cost>
     <Rarity>38</Rarity>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
@@ -64,7 +64,7 @@
   </ArmourType>
   <ArmourType Name="Shielded Chestplate">
     <Mass>7.0</Mass>
-    <Cost>100</Cost>
+    <Cost>150</Cost>
     <Rarity>45</Rarity>
     <Agility>-2</Agility>
     <BaseArmour>10</BaseArmour>
@@ -97,7 +97,7 @@
   </ArmourType>
   <ArmourType Name="Powered Arm Plating">
     <Mass>4.0</Mass>
-    <Cost>30</Cost>
+    <Cost>50</Cost>
     <Rarity>17</Rarity>
     <Agility>-1</Agility>
     <Strength>1</Strength>
@@ -125,9 +125,10 @@
   </ArmourType>
   <ArmourType Name="Powered Leg Plating">
     <Mass>5.0</Mass>
-    <Cost>32</Cost>
+    <Cost>50</Cost>
     <Rarity>25</Rarity>
     <BaseArmour>5</BaseArmour>
+    <Speed>1.1</Speed>
     <Location>Legs</Location>
     <Desc>Powered plating for legs</Desc>
     <Materials>
@@ -272,6 +273,7 @@
     <Rarity>50</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
+    <Speed>0.85</Speed>
     <Attack>2</Attack>
     <BaseArmour>35</BaseArmour>
     <BonusArmour>
@@ -295,6 +297,7 @@
     <Agility>-8</Agility>
     <Strength>8</Strength>
     <Attack>2</Attack>
+    <Speed>0.7</Speed>
     <BaseArmour>50</BaseArmour>
     <BonusArmour>
       <Bonus Type="Fire" Amount="50"/>
@@ -317,6 +320,7 @@
     <Agility>-6</Agility>
     <Strength>6</Strength>
     <Attack>2</Attack>
+    <Speed>0.85</Speed>
     <BaseArmour>35</BaseArmour>
     <Shields>20</Shields>
     <BonusArmour>
