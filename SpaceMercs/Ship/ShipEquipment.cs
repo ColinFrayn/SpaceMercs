@@ -20,7 +20,7 @@ namespace SpaceMercs {
         public bool Medlab { get; private set; }
         public bool Armoury { get; private set; }
         public bool Workshop { get; private set; }
-        public bool Repair { get; private set; }
+        public int Repair { get; private set; }
         public bool Research { get; private set; }
         public bool BuildColony { get; private set; }
         public enum RoomSize { Weapon, Small, Medium, Large, Core, Engine, Armour };
@@ -53,7 +53,7 @@ namespace SpaceMercs {
             Medlab = (xml.SelectSingleNode("Medlab") != null);
             Armoury = (xml.SelectSingleNode("Armoury") != null);
             Workshop = (xml.SelectSingleNode("Workshop") != null);
-            Repair = (xml.SelectSingleNode("Repair") != null);
+            Repair = xml.SelectNodeInt("Repair", 0);
             Research = (xml.SelectSingleNode("Research") != null);
             BuildColony = (xml.SelectSingleNode("BuildColony") != null);
 
@@ -105,7 +105,7 @@ namespace SpaceMercs {
             if (Shield > 0) strList.Add("Shields: " + Shield);
             if (Armoury) strList.Add("Ability: Armoury");
             if (Medlab) strList.Add("Ability: Medlab");
-            if (Repair) strList.Add("Ability: Repair");
+            if (Repair > 0) strList.Add("Ability: Repair");
             if (Research) strList.Add("Ability: Research");
             if (Scanner) strList.Add("Ability: Scanner");
             if (Workshop) strList.Add("Ability: Workshop");

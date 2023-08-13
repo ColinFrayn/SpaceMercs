@@ -10,5 +10,13 @@ namespace SpaceMercs {
             Range = xml.SelectNodeDouble("Range");
             Rate = xml.SelectNodeDouble("Rate");
         }
+
+        public double FireWeapon(Ship source, Ship target, Random rand) {
+            int attackScore = source.Attack + Attack;
+            int defenceScore = target.Defence;
+            double damage = (rand.NextDouble() * attackScore) - (rand.NextDouble() * defenceScore);
+            Cooldown = Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
+            return target.DamageShip(damage);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace SpaceMercs {
         private readonly AstronomicalObject aoTravelFrom, aoTravelTo;
         private readonly float fTravelTime;
         private float fMissionElapsed, fElapsed;
-        private float fSep; // Separation between two ships
+        private float fSep; // Separation between two ships in battle
         private bool bSurrendered = false;
         private readonly Team PlayerTeam;
         private readonly MapView ParentView;
@@ -25,46 +25,42 @@ namespace SpaceMercs {
 
         private readonly Color4 ShotColPlayer = new Color4(0.1f, 0.3f, 1.0f, 1.0f);
         private readonly Color4 ShotColEnemy = new Color4(1.0f, 0.3f, 0.1f, 1.0f);
-        private const float shipYpos = 0.48f;
+        private const float ShipYPos = 0.48f;
 
         private class Shot {
-            public bool Player { get; private set; }
             public int Attack { get; private set; }
             public int Life { get; private set; }
-            public readonly float fx, fy, tx, ty;
-            public Shot(bool pl, ShipRoomDesign rf, ShipRoomDesign rt, int att, float fSep, float aspect) {
-                Player = pl;
-                Attack = att;
-                Life = (att * 5) + 15;
-                float fSpace = fSep * Const.DrawBattleScale;
+            public Color4 Colour { get; private set; }
+            private readonly float fx, fy, tx, ty;
 
-                if (Player) {
-                    fx = (0.46f - fSpace) - ((rf.XPos + rf.Width / 2f) * 0.005f / aspect);
-                    tx = (0.54f + fSpace) + ((rt.XPos + rt.Width / 2f) * 0.005f / aspect);
-                }
-                else {
-                    fx = (0.54f + fSpace) + ((rf.XPos + rf.Width / 2f) * 0.005f / aspect);
-                    tx = (0.46f - fSpace) - ((rt.XPos + rf.Width / 2f) * 0.005f / aspect);
-                }
-                fy = shipYpos + ((rf.YPos - rf.Height / 2f) * 0.005f);
-                ty = shipYpos + ((rt.YPos - rf.Height / 2f) * 0.005f);
+            public Shot(ShipRoomDesign rf, ShipRoomDesign rt, Color4 col, int att, float fromx, float tox) {
+                Attack = att;
+                Life = (att * 3) + 18;
+                Colour = col;
+                fx = fromx;
+                tx = tox;
+                fy = ShipYPos + ((rf.YPos - rf.Height / 2f) * 0.005f);
+                ty = ShipYPos + ((rt.YPos - rf.Height / 2f) * 0.005f);
             }
             public void Update() {
                 Life--;
             }
+            public Vector2 From { get { return new Vector2(fx, fy); } }
+            public Vector2 To { get { return new Vector2(tx, ty); } }
         }
         private readonly List<Shot> lShots = new List<Shot>();
 
         private class Frag {
-            private float X, Y;
             private readonly float VX, VY;
-            public float F { get; private set; }
-            public Frag(float x, float y, float vx, float vy, float f) {
+            private float X, Y;
+            private float F;
+
+            public Frag(float x, float y, Random rand) {
                 X = x;
                 Y = y;
-                VX = vx;
-                VY = vy;
-                F = f;
+                VX = ((float)rand.NextDouble() - 0.5f) * 0.003f;
+                VY = ((float)rand.NextDouble() - 0.5f) * 0.003f;
+                F = (float)rand.NextDouble() * (float)rand.NextDouble();
             }
             public void Display(ShaderProgram prog, float aspect) {
                 Matrix4 translateM = Matrix4.CreateTranslation(X - 0.0015f / aspect, Y - 0.0015f, 0f);
@@ -75,11 +71,12 @@ namespace SpaceMercs {
                 Square.Flat.BindAndDraw();
             }
             public void Update() {
-                X += VX / 10f;
-                Y += VY / 10f;
+                X += VX / 8f;
+                Y += VY / 8f;
                 F = (F * 0.995f) - 0.002f;
                 if (F <= 0.0f) F = 0.0f;
             }
+            public bool Faded => (F <= 0.0f);
         }
         private readonly List<Frag> lFrag = new List<Frag>();
 
@@ -179,6 +176,7 @@ namespace SpaceMercs {
                 bPause = true;
                 Const.dtTime = dtStart.AddSeconds(fElapsed);
                 ParentView.ArriveAt(aoTravelTo);
+                if (PlayerTeam.PlayerShip.CanRepair) PlayerTeam.PlayerShip.RepairHull();
                 return;
             }
             Const.dtTime = dtStart.AddSeconds(fElapsed);
@@ -240,25 +238,21 @@ namespace SpaceMercs {
             if (PlayerTeam.CurrentMission?.ShipTarget is null) return;
             Random rand = new Random();
             if (fSep > 4000.0f) fSep -= 10.0f;
+            float fSpace = fSep * Const.DrawBattleScale;
 
             // -- Player ship fires weapons
             foreach (int r in PlayerTeam.PlayerShip.AllWeaponRooms) {
                 if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
                 sw.Cooldown -= 0.005;
                 if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
-                    int Attack = PlayerTeam.PlayerShip.Attack + sw.Attack;
-                    int Defence = PlayerTeam.CurrentMission.ShipTarget.Defence;
-                    double Damage = (rand.NextDouble() * Attack) - (rand.NextDouble() * Defence);
-                    double dmg = PlayerTeam.CurrentMission.ShipTarget.DamageShip(Damage);
-                    sw.Cooldown = sw.Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
-                    ShipRoomDesign sT = PlayerTeam.CurrentMission.ShipTarget.PickRandomRoom(rand);
-                    lShots.Add(new Shot(true, PlayerTeam.PlayerShip.Type.Rooms[r], sT, sw.Attack, fSep, ParentView.Aspect));
-                    for (int n = 0; n <= (int)(dmg * 5.0); n++) {
-                        lFrag.Add(new Frag((0.54f + fSep * Const.DrawBattleScale) + ((sT.XPos + sT.Width / 2f) * 0.005f / ParentView.Aspect),
-                                           shipYpos + ((sT.YPos - sT.Height / 2f) * 0.005f),
-                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
-                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
-                                           (float)rand.NextDouble() * (float)rand.NextDouble()));
+                    double dmg = sw.FireWeapon(PlayerTeam.PlayerShip, PlayerTeam.CurrentMission.ShipTarget, rand);
+                    ShipRoomDesign rF = PlayerTeam.PlayerShip.Type.Rooms[r];
+                    ShipRoomDesign rT = PlayerTeam.CurrentMission.ShipTarget.PickRandomRoom(rand);
+                    float fx = (0.46f - fSpace) - ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
+                    float tx = (0.54f + fSpace) + ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
+                    lShots.Add(new Shot(rF, rT, ShotColPlayer, sw.Attack, fx, tx));
+                    for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
+                        lFrag.Add(new Frag(tx, ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f), rand));
                     }
                 }
             }
@@ -271,7 +265,7 @@ namespace SpaceMercs {
                 AnnounceSalvage(dSalvage);
                 dSalvage = PlayerTeam.AddItems(dSalvage);
                 if (Utils.CalculateMass(dSalvage) > 0.0) {
-                    ParentView.msgBox.PopupMessage("Your cargo hold is full - couldn't collect all the salvage.\nAny excess has been jettisoned into space.");
+                    ParentView.msgBox.PopupMessage("Your cargo hold is full - you couldn't collect all the salvage.\nAny excess has been jettisoned into space.");
                 }
                 PlayerTeam.CeaseMission();
                 bPause = false;
@@ -284,7 +278,7 @@ namespace SpaceMercs {
                     bSurrendered = true;
                     bPause = true;
                     double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 0.5), 3);
-                    string strMessage = String.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
+                    string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
                     if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                         PlayerTeam.Cash += dReward;
                         PlayerTeam.CeaseMission();
@@ -302,19 +296,14 @@ namespace SpaceMercs {
                 if (sw is null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
                 sw.Cooldown -= 0.005;
                 if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
-                    int Attack = PlayerTeam.CurrentMission.ShipTarget.Attack + sw.Attack;
-                    int Defence = PlayerTeam.PlayerShip.Defence;
-                    double Damage = (rand.NextDouble() * Attack) - (rand.NextDouble() * Defence);
-                    double dmg = PlayerTeam.PlayerShip.DamageShip(Damage);
-                    sw.Cooldown = sw.Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
-                    ShipRoomDesign sT = PlayerTeam.PlayerShip.PickRandomRoom(rand);
-                    lShots.Add(new Shot(false, PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r], sT, sw.Attack, fSep, ParentView.Aspect));
-                    for (int n = 0; n <= (int)(dmg * 5.0); n++) {
-                        lFrag.Add(new Frag((0.46f - fSep * Const.DrawBattleScale) - ((sT.XPos + sT.Width / 2f) * 0.005f / ParentView.Aspect),
-                                           shipYpos + ((sT.YPos - sT.Height / 2f) * 0.005f),
-                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
-                                           ((float)rand.NextDouble() - 0.5f) * 0.003f,
-                                           (float)rand.NextDouble() * (float)rand.NextDouble()));
+                    double dmg = sw.FireWeapon(PlayerTeam.CurrentMission.ShipTarget, PlayerTeam.PlayerShip, rand);
+                    ShipRoomDesign rF = PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r];
+                    ShipRoomDesign rT = PlayerTeam.PlayerShip.PickRandomRoom(rand);
+                    float fx = (0.54f + fSpace) + ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
+                    float tx = (0.46f - fSpace) - ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
+                    lShots.Add(new Shot(rF, rT, ShotColEnemy, sw.Attack, fx, tx));
+                    for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
+                        lFrag.Add(new Frag(tx, ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f), rand));
                     }
                 }
             }
@@ -333,6 +322,10 @@ namespace SpaceMercs {
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy are attempting to board your ship. Get ready to repel boarders", TriggerRepelBoardersMissionAction);
             }
+
+            // Update both ships
+            PlayerTeam.PlayerShip.BattleUpdate();
+            PlayerTeam.CurrentMission.ShipTarget.BattleUpdate();
         }
         private void TriggerRepelBoardersMissionAction() {
             if (PlayerTeam.CurrentMission is null) return;
@@ -499,11 +492,11 @@ namespace SpaceMercs {
 
             // Display ships
             float fSpace = fSep * Const.DrawBattleScale;
-            Matrix4 translateM = Matrix4.CreateTranslation(0.46f - fSpace, shipYpos, 0f);
+            Matrix4 translateM = Matrix4.CreateTranslation(0.46f - fSpace, ShipYPos, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(-0.005f / ParentView.Aspect, 0.005f, 0.005f);
             prog.SetUniform("view", scaleM * translateM);
             PlayerTeam.PlayerShip.DrawBattle(prog);
-            translateM = Matrix4.CreateTranslation(0.54f + fSpace, shipYpos, 0f);
+            translateM = Matrix4.CreateTranslation(0.54f + fSpace, ShipYPos, 0f);
             scaleM = Matrix4.CreateScale(0.005f / ParentView.Aspect, 0.005f, 0.005f);
             prog.SetUniform("view", scaleM * translateM);
             PlayerTeam.CurrentMission.ShipTarget.DrawBattle(prog);
@@ -523,24 +516,26 @@ namespace SpaceMercs {
                 fr.Display(prog, ParentView.Aspect);
                 fr.Update();
             }
-            lFrag.RemoveAll(f => f.F <= 0.0f);
+            lFrag.RemoveAll(f => f.Faded);
         }
         private void UpdateShotLines() {
             if (!lShots.Any()) return;
             List<VertexPos2DCol> lines = new List<VertexPos2DCol>();
             foreach (Shot sh in lShots) {
                 if (sh.Life <= 0) continue;
-                float fract = (float)sh.Life / 20f;
+                float fract = sh.Life / 20f;
                 if (fract > 1.0f) fract = 1.0f;
-                Color4 col = sh.Player ? ShotColPlayer : ShotColEnemy;
+                Color4 col = sh.Colour;
                 col.R *= fract;
                 col.G *= fract;
                 col.B *= fract;
-                lines.Add(new VertexPos2DCol(new Vector2(sh.fx, sh.fy), col));
-                lines.Add(new VertexPos2DCol(new Vector2(sh.tx, sh.ty), col));
+                lines.Add(new VertexPos2DCol(sh.From, col));
+                lines.Add(new VertexPos2DCol(sh.To, col));
                 sh.Update();
             }
             lShots.RemoveAll(s => s.Life <= 0);
+
+            // Display the shots that are still valid
             if (vbShot is null) {
                 vbShot = new VertexBuffer(lines.ToArray(), BufferUsageHint.StreamDraw);
                 vaShot = new VertexArray(vbShot);

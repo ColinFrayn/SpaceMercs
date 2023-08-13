@@ -49,11 +49,9 @@ namespace SpaceMercs {
         }
         public IEnumerable<int> AllWeaponRooms {
             get {
-                List<int> lw = new List<int>();
                 foreach (int id in Equipment.Keys) {
-                    if (Equipment[id].Item1 is ShipWeapon) lw.Add(id);
+                    if (Equipment[id].Item1 is ShipWeapon) yield return id;
                 }
-                return lw;
             }
         }
         public ShipArmour? ArmourType { get; private set; }
@@ -149,10 +147,20 @@ namespace SpaceMercs {
         }
         public bool CanRepair {
             get {
+                if (ArmourType is not null && ArmourType.HealRate > 0) return true; 
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
-                    if (tp.Item2 && tp.Item1.Repair) return true;
+                    if (tp.Item2 && tp.Item1.Repair > 0) return true;
                 }
                 return false;
+            }
+        }
+        public int RepairRate {
+            get {
+                int rep = ArmourType?.HealRate ?? 0;
+                foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                    rep += tp.Item1.Repair;
+                }
+                return rep;
             }
         }
         public bool CanResearch {
@@ -683,7 +691,7 @@ namespace SpaceMercs {
             return sh;
         }
 
-        // Set up the ship's combat statistics correctly
+        // Handle combat
         public void InitialiseForBattle() {
             MaxShield = 0;
             Attack = 0;
@@ -697,9 +705,8 @@ namespace SpaceMercs {
                 }
             }
             Shield = MaxShield;
+            if (CanRepair) RepairHull();
         }
-
-        // Cause damage to this ship
         public double DamageShip(double dmg) {
             if (dmg <= 0.0) return 0.0;
             if (Shield > 0.0) {
@@ -716,6 +723,17 @@ namespace SpaceMercs {
         }
         public void RepairHull() {
             Hull = Type.MaxHull;
+        }
+        public void BattleUpdate() {
+            if (Hull < Type.MaxHull) {
+                int repair = RepairRate;
+                if (repair > 0) {
+                    Hull += ((float)repair * Const.ShipRepairRate);
+                }
+            }
+            if (Hull > Type.MaxHull) {
+                Hull = Type.MaxHull;
+            }
         }
 
         // Calculate salvage value of this entire ship

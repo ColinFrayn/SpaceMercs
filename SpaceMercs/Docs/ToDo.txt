@@ -8,6 +8,10 @@ Display system population on map view
 
 ZoomTo buttons keep vanishing.
 
+Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate? 
+
+Add Menu to travel screen
+
 ==========================================================================================================
 
 
@@ -51,10 +55,6 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 ShipView: Show ship shields
 - Display ellipse, blended, before drawing the rooms (but after starfield)
 - Vary transparency based on shield strength
-
-Travel / ShipCombat:
-- Ships should move around a bit
-- Check if regen works (auto repair, regen plating)
 
 Research Functionality
 - Research higher tier weapons & armour ; Research bionics
