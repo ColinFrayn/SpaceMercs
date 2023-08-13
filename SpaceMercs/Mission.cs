@@ -409,7 +409,7 @@ namespace SpaceMercs {
             return largest;
         }
         public string GetDescription() {
-            if (!String.IsNullOrEmpty(FullDescription)) return FullDescription;
+            if (!string.IsNullOrEmpty(FullDescription)) return FullDescription;
             Random rand = new Random(Seed);
             int r = rand.Next(100);
             string strSz = "";

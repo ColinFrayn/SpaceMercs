@@ -8,9 +8,8 @@ Display system population on map view
 
 ZoomTo buttons keep vanishing.
 
-Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate? 
+When travelling to a moon, it doesn't rotate on the view screen
 
-Add Menu to travel screen
 
 ==========================================================================================================
 
@@ -18,6 +17,8 @@ Add Menu to travel screen
 ---------------------
 Backburner : Features
 ---------------------
+
+Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate? 
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race

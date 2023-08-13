@@ -78,13 +78,16 @@ namespace SpaceMercs.MainWindow {
             if (view == ViewMode.ViewMap) DrawMapToggles();
             if (view == ViewMode.ViewSystem) DrawSystemToggles();
 
-            // Main menu (if not travelling)
+            // Main menu (if not travelling)            
             if (TravelDetails == null) {
-                gpMenu!.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
                 gpSubMenu?.GetItem(I_View)?.Enable();
-                gpSubMenu?.GetItem(I_Options)?.Enable();
-                gpSubMenu?.GetItem(I_Mission)?.Disable();
             }
+            else {
+                gpSubMenu?.GetItem(I_View)?.Disable();
+            }
+            gpSubMenu?.GetItem(I_Options)?.Enable();
+            gpSubMenu?.GetItem(I_Mission)?.Disable();
+            gpMenu!.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Hover info for the current setup
             DrawGUIHoverInfo();
