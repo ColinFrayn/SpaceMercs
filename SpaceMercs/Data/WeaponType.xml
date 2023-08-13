@@ -224,7 +224,7 @@
     <Cost>15</Cost>
     <Rarity>5</Rarity>
     <Speed>22</Speed>
-    <Range Accuracy="3" DropOff="0.16">22</Range>
+    <Range Accuracy="3" DropOff="0.16">20</Range>
     <Damage>5+4</Damage>
     <Desc>A sniper rifle</Desc>
     <Sound>SniperRifle</Sound>
@@ -235,20 +235,37 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="Laser Sniper Rifle">
+    <Mass>3.0</Mass>
+    <Cost>60</Cost>
+    <Rarity>14</Rarity>
+    <Speed>24</Speed>
+    <Range Accuracy="3" DropOff="0.13">22</Range>
+    <Damage>6+4</Damage>
+    <Desc>A laser sniper rifle</Desc>
+    <Sound>LaserSniper</Sound>
+    <Stable/>
+    <Materials>
+      <Material Name="Steel" Amount="3"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Crystal" Amount="1"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Gauss Sniper Rifle">
     <Mass>4.0</Mass>
     <Cost>120</Cost>
     <Rarity>18</Rarity>
     <Speed>26</Speed>
-    <Range Accuracy="3" DropOff="0.14">25</Range>
+    <Range Accuracy="3" DropOff="0.15">24</Range>
     <Damage>7+4</Damage>
     <Desc>A light railgun converted to a sniper rifle</Desc>
     <Sound>GaussSniper</Sound>
     <Stable/>
     <Materials>
-      <Material Name="Steel" Amount="11"/>
-      <Material Name="Aluminium" Amount="3"/>
-      <Material Name="Copper" Amount="2"/>
+      <Material Name="Steel" Amount="3"/>
+      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>

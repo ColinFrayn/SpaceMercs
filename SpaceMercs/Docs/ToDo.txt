@@ -6,7 +6,7 @@ Descend to next level - random bit of map was visible (shaded) that shouldn't ha
 
 Display system population on map view
 
-ZoomTo buttons keep vanishing.
+ZoomTo buttons keep vanishing on MissionView soldier tabs
 
 When travelling to a moon, it doesn't rotate on the view screen
 

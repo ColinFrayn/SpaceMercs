@@ -188,6 +188,9 @@
     <None Update="Sounds\LaserRifle.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\LaserSniper.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\MachineGun.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
