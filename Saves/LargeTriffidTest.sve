@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>11/01/2150 21:26:26</Clock>
+<Clock>11/01/2150 21:25:02</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -64771,16 +64771,17 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>37.297871478756306</Cash>
+ <Cash>1.7370453917997812</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="11" Y="30"/>
+ <OnMission/>
+ <Location X="8" Y="32"/>
  <Health>26</Health>
  <Stamina>30</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>180</Facing>
  <Level>4</Level>
- <XP>8339</XP>
+ <XP>7919</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,16</Stats>
@@ -64805,7 +64806,7 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">182</Exp>
+  <Exp Type="Automatic Rifle">179</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">1</Exp>
@@ -64814,13 +64815,14 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="21" Y="32"/>
- <Health>10.128165268385867</Health>
- <Stamina>7.700000000000001</Stamina>
+ <OnMission/>
+ <Location X="15" Y="33"/>
+ <Health>28</Health>
+ <Stamina>25</Stamina>
  <Shields>0</Shields>
- <Facing>281.30993247402023</Facing>
+ <Facing>0</Facing>
  <Level>3</Level>
- <XP>3940</XP>
+ <XP>3520</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,15,12</Stats>
@@ -64846,7 +64848,7 @@
 <Weapon Type="Shotgun" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">89</Exp>
+  <Exp Type="Shotgun">84</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -64854,16 +64856,16 @@
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="14" Y="35"/>
+ <OnMission/>
+ <Location X="10" Y="35"/>
  <Health>25</Health>
  <Stamina>20</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>90</Facing>
  <Level>3</Level>
- <XP>3012</XP>
+ <XP>2592</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>16,13,12,12,7</Stats>
@@ -64894,19 +64896,20 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="7" Y="33"/>
- <Health>7.667069074799734</Health>
+ <OnMission/>
+ <Location X="8" Y="33"/>
+ <Health>25</Health>
  <Stamina>28</Stamina>
  <Shields>0</Shields>
  <Facing>360</Facing>
  <Level>3</Level>
- <XP>492</XP>
+ <XP>72</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,15,12,15</Stats>
  <Colour>Blue</Colour>
  <Inventory>
-  <Inv Count="2">
+  <Inv Count="3">
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
@@ -64923,7 +64926,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">6</Exp>
+  <Exp Type="Sniper Rifle">2</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -64967,6 +64970,73 @@
 <Material Type="Steel"/>
   </Inv>
  </Inventory>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillBoss</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>32.463</Reward>
+ <Diff>4</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>411994587</Seed>
+ <Size>2</Size>
+ <Level ID="0">
+<MissionLevel Width="32" Height="38">
+ <Diff>4</Diff>
+ <Level>0</Level>
+ <Start X="9" Y="21"/>
+ <End X="-1" Y="-1"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBAABBBBBBBBBBBBBAAAAAABBBBAABBBBBAABBBBBBBBBBBBBAAAAAABBBBAABBBBBAABBBBBBBBBBBBBAAAAAABBBBAABBBBBAABBBBBBBBBBBBBBBBBBBBBBBAABBBBBAABBBBBBBBBAAABBBBBBBBBBBAABBBBBAAAAAAAAAAAAAAABBBBAAAAAAAABBBBBAAAAAAAAAAAAAAABBBBAAAAAAAABBBBBAABBBBBAAAAAAAABBBBAAAAAAAABBBBBAABBBBBAAAAAAAAAAABAAAAAAAABBBBBBBBBBBBAAAAAAAAAAABAAAAAAAABBBBBBBBBBBBAAAAAAAABAAAAAAAAAAABBBBBBBBBBBBAAAAAAAABAAAAAAAAAAABBBBBBBBBBBBAAAAAAAABBBBAAAAAAAABBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBBBAAAAAAAABBBBBBBBBBBBBBBBBBAABBBBAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBAABBBBBBAAAAAAAABBBBBBBBBBBBBBBBAABBBBBBAAAAAAAABBBBBBBBBBBBBBBBAABBBBBBAAAAAAAABBBBBBBBBBBAAAAAAAAABBBBBBBBAABBBBBBBBBBBBBAAAAAAAAABBBBBBBBAAAABBBBBBBBBBBAAAAAAAAABBBBBBBBAAAABBBBBBBBBBBAAAAAAAAABBBBBBBAAAAAABBBBBBBBBBAAAAAAAAABBBBBBBAAAAAABBBBBBBBBBAAAAAAAAABBBBBBBAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBAABBBBBAABBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111000000000000000000000000000011111000000000000000000000000000111110000000000000000000000000001111100000000000000000000000000011111000000000000000000000000000111100000000000000000000000000001111000000000000000000000000000011110000000000000000000000000000111000000000000000000000000000001110000000000000000000000000000011100000000000000000000000000000111000000000000000000000000000001110000000011000000000000000000111100000011111100000000000001111111111111111111000000000000011111111111111111110000000000000111111111111111111100000000000001111111111111111111000000000000001111000000000011110000000001111111111100000000000000000000011111111111000000000000000000000111111111110000000000000000000001111111111100000000000000000000011111111111000000000000000000000111111111110000000000111000000001111111111111111111111110000000011111111111111111111111100000000111111111111111111111111000000001111111111111111111111110000000000000111111111110000000000000000000001111111111100000000000000000000011111111111000000000000</Explored>
+<Creatures>
+<Creature Type="Triffid Mother Plant">
+ <Location X="21" Y="31"/>
+ <Level>4</Level>
+ <Facing>317</Facing>
+ <Target X="8" Y="32"/>
+ <Investigate X="8" Y="32"/>
+ <Alert/>
+</Creature>
+<Creature Type="Triffid Lasher">
+ <Location X="22" Y="30"/>
+ <Level>3</Level>
+ <Facing>90</Facing>
+ <Investigate X="11" Y="31"/>
+ <Alert/>
+</Creature>
+<Creature Type="Triffid Sapling">
+ <Location X="2" Y="4"/>
+ <Level>4</Level>
+ <Facing>170</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="13" Y="33">
+<StashItem N="2">
+<Armour Type="Gloves" Material="Chitin" Level="0"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="14" Y="33">
+<StashItem N="1">
+<Corpse Type="Triffid Sapling" Level="4"/>
+</StashItem>
+</Stash>
+<Stash X="20" Y="33">
+<StashItem N="1">
+<Corpse Type="Triffid Spore Thrower" Level="4"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="25" Y="33" L="5">
+<Hidden/>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">

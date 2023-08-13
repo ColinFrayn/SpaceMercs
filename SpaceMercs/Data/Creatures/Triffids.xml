@@ -26,9 +26,9 @@
     <LevelRange>1,5</LevelRange>
     <Attack>10</Attack>
     <Defence>6</Defence>
-    <Health>12</Health>
+    <Health>14</Health>
     <Stamina>16</Stamina>
-    <Armour>14</Armour>
+    <Armour>20</Armour>
     <BodyType>Plant</BodyType>
     <MovementCost>10.0</MovementCost>
     <Col1>0, 215, 0</Col1>
@@ -48,9 +48,9 @@
     <LevelRange>1,5</LevelRange>
     <Attack>10</Attack>
     <Defence>6</Defence>
-    <Health>14</Health>
+    <Health>16</Health>
     <Stamina>16</Stamina>
-    <Armour>16</Armour>
+    <Armour>20</Armour>
     <BodyType>Plant</BodyType>
     <MovementCost>10.0</MovementCost>
     <Col1>20, 215, 0</Col1>
@@ -70,11 +70,11 @@
     <LevelRange>2,7</LevelRange>
     <Attack>15</Attack>
     <Defence>6</Defence>
-    <Health>28</Health>
+    <Health>35</Health>
     <Stamina>18</Stamina>
-    <Armour>20</Armour>
+    <Armour>30</Armour>
     <BodyType>Plant</BodyType>
-    <MovementCost>999.0</MovementCost>
+    <MovementCost>15.0</MovementCost>
     <Boss/>
     <Col1>0, 205, 0</Col1>
     <Col2>40, 255, 60</Col2>

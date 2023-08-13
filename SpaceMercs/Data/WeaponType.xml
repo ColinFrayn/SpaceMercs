@@ -5,7 +5,7 @@
     <Cost>10</Cost>
     <Rarity>3</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="2" DropOff="1.0">5</Range>
+    <Range Accuracy="2" DropOff="0.7">5</Range>
     <Damage>6+3</Damage>
     <Desc>A double-barrelled shotgun</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -21,7 +21,7 @@
     <Cost>55</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
-    <Range Accuracy="3" DropOff="1.0">5</Range>
+    <Range Accuracy="3" DropOff="0.6">5</Range>
     <Damage>7+4</Damage>
     <Desc>A powerful shotgun with 4 barrels instead of 2.</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -67,7 +67,7 @@
     <Cost>110</Cost>
     <Rarity>11</Rarity>
     <Speed>16</Speed>
-    <Range Accuracy="0" DropOff="0.8">10</Range>
+    <Range Accuracy="0" DropOff="0.7">10</Range>
     <Damage>7+5</Damage>
     <Desc>A heavy automatic rifle</Desc>
     <Sound>HeavyMachineGun</Sound>
@@ -149,7 +149,7 @@
     <Cost>45</Cost>
     <Rarity>9</Rarity>
     <Speed>12</Speed>
-    <Range Accuracy="0" DropOff="1.0">5</Range>
+    <Range Accuracy="2" DropOff="0.7">5</Range>
     <Damage>6+5</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
@@ -166,7 +166,7 @@
     <Cost>180</Cost>
     <Rarity>14</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="1" DropOff="1.0">5</Range>
+    <Range Accuracy="3" DropOff="0.6">5</Range>
     <Damage>7+6</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
@@ -395,8 +395,8 @@
   </WeaponType>
   <WeaponType Name="Spores">
     <Speed>12</Speed>
-    <Range DropOff="0.6">6</Range>
-    <Damage>2+2</Damage>
+    <Range DropOff="0.6">8</Range>
+    <Damage>3+3</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
     <ItemEffect Name="Spore Toxin">
@@ -409,14 +409,14 @@
   </WeaponType>
   <WeaponType Name="Heavy Spores">
     <Speed>14</Speed>
-    <Range DropOff="0.6">8</Range>
-    <Damage>3+3</Damage>
+    <Range DropOff="0.6">12</Range>
+    <Damage>6+5</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
     <ItemEffect Name="Spore Toxin">
       <Effect Name="Spore Toxin">
         <Duration>3</Duration>
-        <Damage Type="Poison">3</Damage>
+        <Damage Type="Poison">4</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>
@@ -437,7 +437,7 @@
   </WeaponType>
   <WeaponType Name="Slime Spitter">
     <Speed>12</Speed>
-    <Range DropOff="0.6">7</Range>
+    <Range DropOff="0.5">7</Range>
     <Damage>3+3</Damage>
     <Type>Acid</Type>
     <Sound>Spore</Sound>

@@ -340,8 +340,8 @@ namespace SpaceMercs {
                 SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), strFacing));
             }
             Health = xml.SelectNodeDouble("Health", MaxHealth);
-            Stamina = xml.SelectNodeDouble("Stamina", MaxHealth);
-            Shields = xml.SelectNodeDouble("Shields", MaxHealth);
+            Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
+            Shields = xml.SelectNodeDouble("Shields", MaxShields);
 
             string strOverride = xml.SelectNodeText("OverrideRace");
             if (!string.IsNullOrEmpty(strOverride)) OverrideRace = StaticData.GetRaceByName(strOverride);
@@ -535,16 +535,10 @@ namespace SpaceMercs {
                 }
             }
             do {
-                // No target, or current target is not visible, so see if we can find another
-                if (CurrentTarget == null) {// || !CanSee(CurrentTarget.X, CurrentTarget.Y)) {
-                    SetBestTarget();
-                }
-                // Do we have a target? If so then behave appropriately
-                if (CurrentTarget != null && rnd.NextDouble() < 0.1) {
-                    IEntity lastTarg = CurrentTarget;
-                    SetBestTarget(); // Occasionally ensure we're on the right target
-                    if (CurrentTarget == null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe that we lost sight of them because we're pathing a complex route. Stay on track.
-                }
+                // Make sure we're on the best target
+                IEntity? lastTarg = CurrentTarget;
+                SetBestTarget();
+                if (CurrentTarget == null && lastTarg != null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe that we lost sight of them because we're pathing a complex route. Stay on track.
                 if (CurrentTarget != null) {
                     double atr = AttackRange;
                     double r = RangeTo(CurrentTarget);
@@ -558,7 +552,6 @@ namespace SpaceMercs {
                             }
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            // TODO refreshView();
                             if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
                         }
                         else if (Stamina < AttackCost) {
@@ -568,7 +561,6 @@ namespace SpaceMercs {
                                 if (path is null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 MoveTo(path[0], playSound);
                                 postMoveCheck(this);
-                                // TODO refreshView();
                                 if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
                             }
                             return;
@@ -576,9 +568,8 @@ namespace SpaceMercs {
                         else {
                             // Do the attack
                             centreView(this);
-                            Thread.Sleep(250);
+                            Thread.Sleep(200);
                             AttackEntity(CurrentTarget, fact, playSound);
-                            //refreshView();
                             Thread.Sleep(Const.AITickSpeed);
                         }
                     }
@@ -591,7 +582,6 @@ namespace SpaceMercs {
                         else {
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            // TODO refreshView();
                             if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
                         }
                     }
@@ -611,7 +601,6 @@ namespace SpaceMercs {
                     else {
                         MoveTo(path[0], playSound);
                         postMoveCheck(this);
-                        // TODO refreshView();
                         if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
                     }
                 }
@@ -623,7 +612,7 @@ namespace SpaceMercs {
         }
         private void SetBestTarget() {
             double bestscore = -10000.0;
-            CurrentTarget = null;
+            //CurrentTarget = null;
             foreach (Soldier s in CurrentLevel.Soldiers) {
                 if (CanSee(s)) {
                     double score = 100.0 / RangeTo(s);

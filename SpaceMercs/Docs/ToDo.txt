@@ -2,12 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-Descend to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
+ZoomTo buttons keep vanishing on MissionView soldier tabs
+
+Show the cost of upgrades on ShipView
 
 Display system population on map view
 
-ZoomTo buttons keep vanishing on MissionView soldier tabs
-
+Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
 ==========================================================================================================
 
