@@ -32,7 +32,7 @@
   <ShipArmour Name="Adaptive Plating">
     <Cost>1500</Cost>
     <BaseArmour>20</BaseArmour>
-    <Heal>1</Heal>
+    <Repair>1</Repair>
     <Desc>Adaptive plating</Desc>
     <Avail>MRE</Avail>
     <Tex>5,3</Tex>
@@ -40,7 +40,7 @@
   <ShipArmour Name="Regenerative Plating">
     <Cost>2500</Cost>
     <BaseArmour>20</BaseArmour>
-    <Heal>2</Heal>
+    <Repair>2</Repair>
     <Desc>Regenerative plating</Desc>
     <Avail>MRE</Avail>
     <Tex>6,3</Tex>

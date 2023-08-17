@@ -147,7 +147,7 @@ namespace SpaceMercs {
         }
         public bool CanRepair {
             get {
-                if (ArmourType is not null && ArmourType.HealRate > 0) return true; 
+                if (ArmourType is not null && ArmourType.Repair > 0) return true; 
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                     if (tp.Item2 && tp.Item1.Repair > 0) return true;
                 }
@@ -156,7 +156,7 @@ namespace SpaceMercs {
         }
         public int RepairRate {
             get {
-                int rep = ArmourType?.HealRate ?? 0;
+                int rep = ArmourType?.Repair ?? 0;
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                     rep += tp.Item1.Repair;
                 }

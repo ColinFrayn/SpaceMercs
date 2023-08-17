@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Windows.Media.TextFormatting;
 
 // Library from here : https://github.com/space-wizards/SharpFont
 // Based on this, updated for .NET : https://github.com/Robmaister/SharpFont
@@ -90,14 +91,14 @@ void main()
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = ali,
             };
-            DrawAtInternal(strText, tro);
+            DrawAtInternal(new List<string>() { strText }, tro);
         }
         public static void Draw(string strText, Alignment ali, Color col) {
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = ali,
                 TextColour = col,
             };
-            DrawAtInternal(strText, tro);
+            DrawAtInternal(new List<string>() { strText }, tro);
 
         }
         public static void DrawAt(string strText, Alignment ali, float scale, float aspect, float xshift, float yshift, Color? col = null) {
@@ -109,14 +110,17 @@ void main()
                 YPos = yshift,
                 Scale = scale
             };
-            DrawAtInternal(strText, tro);
+            DrawAtInternal(new List<string>() { strText }, tro);
         }
         public static void DrawWithOptions(string strText, TextRenderOptions tro) {
-            DrawAtInternal(strText, tro);
+            DrawAtInternal(new List<string>() { strText }, tro);
+        }
+        public static void DrawWithOptions(IEnumerable<string> allText, TextRenderOptions tro) {
+            DrawAtInternal(allText, tro);
         }
 
         // Draw this label with the given settings
-        private static void DrawAtInternal(string strText, TextRenderOptions tro) {
+        private static void DrawAtInternal(IEnumerable<string> allText, TextRenderOptions tro) {
             // Blend this font so we don't obscure the background in the gaps
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -128,11 +132,8 @@ void main()
             // Setup the desired font colour in the shader program
             textLabelShaderProgram.SetUniform("textColour", (float)tro.TextColour.R / 255f, (float)tro.TextColour.G / 255f, (float)tro.TextColour.B / 255f);
 
-            // Get calculated dimensions of the text so we can scale/align accordingly
-            TextMeasure textSize = textLabelFont32.MeasureText(strText, tro.KerningShift);
-            float pixelSize = textLabelFont32.PixelSize;
-
             // Generate the scale matrix based on the desired scale size, bound size, text size etc.
+            float pixelSize = textLabelFont32.PixelSize;
             float yScale = tro.Scale;
             float xScale = tro.Scale / tro.Aspect;
             Matrix4 scaleM = Matrix4.CreateScale(new Vector3(xScale / pixelSize, (tro.FlipY ? -1f : 1f) * yScale / pixelSize, 1.0f));
@@ -143,22 +144,32 @@ void main()
             float finalXScale = scaleM.M11;
             float finalYScale = scaleM.M22;
 
-            // Align to the top left corner of the text
-            yShift += pixelSize * finalYScale;
-
+            float longest = 0.0f;
+            foreach (string strText in allText) {
+                // Get calculated dimensions of the text so we can scale/align accordingly
+                TextMeasure textSize = textLabelFont32.MeasureText(strText, tro.KerningShift);
+                if (textSize.Width > longest) longest = textSize.Width;
+            }
+            
             // Change the starting location if text alignment is not TL. We always align to the range between max height and the origin.
-            if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * pixelSize;
-            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * pixelSize / 2f;
-            if (tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.BottomMiddle) xShift -= finalXScale * textSize.Width / 2f;
-            if (tro.Alignment == Alignment.TopRight || tro.Alignment == Alignment.CentreRight || tro.Alignment == Alignment.BottomRight) xShift -= finalXScale * textSize.Width;
+            if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * pixelSize * allText.Count();
+            if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * pixelSize * allText.Count() / 2f;
+            if (tro.Alignment == Alignment.TopMiddle || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.BottomMiddle) xShift -= finalXScale * longest / 2f;
+            if (tro.Alignment == Alignment.TopRight || tro.Alignment == Alignment.CentreRight || tro.Alignment == Alignment.BottomRight) xShift -= finalXScale * longest;
 
-            // Calculate translation to align us correctly and scale to achieve the desired size
-            Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xShift, yShift, tro.ZPos));
-            Matrix4 viewM = scaleM * transOriginM * (tro.View ?? Matrix4.Identity);
-            textLabelShaderProgram.SetUniform("view", viewM);
+            // Print all lines
+            foreach (string strText in allText) {
+                // Align to the top left corner of the text
+                yShift += pixelSize * finalYScale;
 
-            // --- Render the actual text aligned at the origin line, using the selected font ---
-            textLabelFont32.RenderText(textLabelShaderProgram, strText, tro.KerningShift);
+                // Calculate translation to align us correctly and scale to achieve the desired size
+                Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(xShift, yShift, tro.ZPos));
+                Matrix4 viewM = scaleM * transOriginM * (tro.View ?? Matrix4.Identity);
+                textLabelShaderProgram.SetUniform("view", viewM);
+
+                // --- Render the actual text aligned at the origin line, using the selected font ---
+                textLabelFont32.RenderText(textLabelShaderProgram, strText, tro.KerningShift);
+            }
 
             // Clean up
             GL.UseProgram(0);

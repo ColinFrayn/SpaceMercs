@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public int Generate { get; private set; } // Power generation capability
         public bool Scanner { get; private set; }  // Can scan surfaces of terrestrial planets for missions
         public string Description { get; private set; }
-        public RoomSize Size { get; private set; }
+        public ShipEquipment.RoomSize Size { get; private set; }
         public Colony.BaseType Available { get; private set; }
         public int TextureX { get; private set; }
         public int TextureY { get; private set; }
@@ -91,7 +91,7 @@ namespace SpaceMercs {
             throw new Exception("Unknown room size : " + strSize);
         }
 
-        public IEnumerable<string> GetHoverText(Ship? sh = null) {
+        public virtual IEnumerable<string> GetHoverText(Ship? sh = null) {
             List<string> strList = new List<string> { Name };
             if (sh != null) {
                 double cost = sh.CostToBuildEquipment(this);
@@ -103,12 +103,13 @@ namespace SpaceMercs {
             if (Defence > 0) strList.Add("Defence: " + Defence);
             if (Capacity > 0) strList.Add("Berths: " + Capacity);
             if (Shield > 0) strList.Add("Shields: " + Shield);
+            if (Repair > 0) strList.Add($"Repair: {Repair}h/s");
             if (Armoury) strList.Add("Ability: Armoury");
             if (Medlab) strList.Add("Ability: Medlab");
-            if (Repair > 0) strList.Add("Ability: Repair");
             if (Research) strList.Add("Ability: Research");
             if (Scanner) strList.Add("Ability: Scanner");
             if (Workshop) strList.Add("Ability: Workshop");
+            if (BuildColony) strList.Add("Ability: Colonise");
             return strList;
         }
 

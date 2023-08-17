@@ -286,13 +286,17 @@ namespace SpaceMercs.MainWindow {
 
             IEnumerable<string>? txtList = GetShipHoverText();
             if (txtList is null || !txtList.Any()) return;
-            string txt = txtList.First(); // TODO: Display all lines
+            string longest = string.Empty;
+            // Approximate longest string on display is string with most chars. Might not be, but whatever.
+            foreach (string str in txtList) {
+                if (str.Length > longest.Length) longest = str;
+            }
 
             float tx = xx > 0.5 ? xx - 0.02f : xx + 0.02f;
             float ty = yy > 0.5 ? yy - 0.02f : yy + 0.02f;
             float px = tx, py = ty;
             float ph = 0.03f, phb = ph * 0.2f;
-            TextMeasure tm = TextRenderer.MeasureText(txt);
+            TextMeasure tm = TextRenderer.MeasureText(longest);
             float pw = ph * tm.Width / (Aspect * TextRenderer.FontSize);
 
             // Draw the hover text
@@ -306,13 +310,13 @@ namespace SpaceMercs.MainWindow {
                 if (yy > 0.5) al = Alignment.BottomLeft;
                 else al = Alignment.TopLeft;
             }
-            if (yy > 0.5) py -= ph;
+            if (yy > 0.5) py -= (ph*txtList.Count());
 
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", false);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
             Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
-            Matrix4 pScaleM = Matrix4.CreateScale(pw, ph + (phb * 2f), 1f);
+            Matrix4 pScaleM = Matrix4.CreateScale(pw, (ph * txtList.Count()) + (phb * 2f), 1f);
             fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
             fullShaderProgram.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
             GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
@@ -327,7 +331,7 @@ namespace SpaceMercs.MainWindow {
                 ZPos = 0.015f,
                 Scale = ph
             };
-            TextRenderer.DrawWithOptions(txt, tro);
+            TextRenderer.DrawWithOptions(txtList, tro);
         }
 
         // Setup mouse-hover context menu
@@ -538,16 +542,16 @@ namespace SpaceMercs.MainWindow {
             else {
                 tl1 = se.Name;
 
-                if (se is ShipArmour) {
-                    tl2 = "Armour : " + ((ShipArmour)se).BaseArmour + "%";
+                if (se is ShipArmour arm) {
+                    tl2 = "Armour : " + arm.BaseArmour + "%";
                     if (se.Defence > 0) tl3 = "Defence Bonus : " + se.Defence;
-                    if (((ShipArmour)se).HealRate > 0) tl4 = "Heal Rate : " + ((ShipArmour)se).HealRate;
+                    if (arm.Repair > 0) tl4 = "Heal Rate : " + arm.Repair;
                 }
-                else if (se is ShipEngine) {
-                    if (((ShipEngine)se).Range >= Const.LightYear) tl2 = "Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly";
+                else if (se is ShipEngine eng) {
+                    if (eng.Range >= Const.LightYear) tl2 = "Range : " + Math.Round(((ShipEngine)se).Range / Const.LightYear, 1) + "ly";
                     else tl2 = "Range : System";
-                    tl3 = "Speed : " + Math.Round(((ShipEngine)se).Speed / Const.SpeedOfLight, 1) + "c";
-                    tl4 = "Accel : " + Math.Round(((ShipEngine)se).Accel / 10.0, 1) + "g"; // Yeah I know g =~9.8, but whatever
+                    tl3 = "Speed : " + Math.Round(eng.Speed / Const.SpeedOfLight, 1) + "c";
+                    tl4 = "Accel : " + Math.Round(eng.Accel / 10.0, 1) + "g"; // Yeah I know g =~9.8, but whatever
                 }
                 else if (se is ShipEquipment) {
                     if (se.Generate > 0) tl2 = "Generate : " + se.Generate;
