@@ -126,8 +126,8 @@ namespace SpaceMercs {
         public const double CreatureMeleeDamageScale = 0.40;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
         public const double CreatureLevelAttackStep = 0.20;  // %age growth in creature attack each level (over base)
         public const double CreatureLevelDefenceStep = 0.20;  // %age growth in creature defence each level (over base)
-        public const double CreatureLevelHealthStep = 0.25;  // %age growth in creature health each level (over base)
-        public const double CreatureLevelShieldsStep = 0.20;  // %age growth in creature shields each level (over base)
+        public const double CreatureLevelHealthStep = 0.30;  // %age growth in creature health each level (over base)
+        public const double CreatureLevelShieldsStep = 0.25;  // %age growth in creature shields each level (over base)
         public const double CreatureLevelArmourStep = 0.15;  // %age growth in creature armour each level (over base)
         public const double CreatureLevelStaminaStep = 1.0;  // Absolute growth in creature stamina each level
         public const double HitBias = 3.0; // Bias towards hitting when attacking

@@ -11,7 +11,7 @@
     <Tex>1,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Rail Gun">
-    <Cost>75</Cost>
+    <Cost>85</Cost>
     <Power>2</Power>
     <Attack>3</Attack>
     <Range>12000</Range>
@@ -21,7 +21,7 @@
     <Tex>2,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Slug Gun">
-    <Cost>50</Cost>
+    <Cost>60</Cost>
     <Power>2</Power>
     <Attack>2</Attack>
     <Range>6000</Range>
@@ -32,7 +32,7 @@
     <Race>Ogrish</Race>
   </ShipWeapon>
   <ShipWeapon Name="Laser Rifle">
-    <Cost>150</Cost>
+    <Cost>225</Cost>
     <Power>3</Power>
     <Attack>3</Attack>
     <Range>10000</Range>
@@ -42,7 +42,7 @@
     <Tex>4,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Proton Gun">
-    <Cost>250</Cost>
+    <Cost>500</Cost>
     <Power>3</Power>
     <Attack>4</Attack>
     <Range>10000</Range>
@@ -52,7 +52,7 @@
     <Tex>5,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Plasma Cannon">
-    <Cost>350</Cost>
+    <Cost>600</Cost>
     <Power>4</Power>
     <Attack>5</Attack>
     <Range>8000</Range>

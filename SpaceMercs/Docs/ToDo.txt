@@ -4,9 +4,6 @@ ToDo List
 
 ZoomTo buttons keep vanishing on MissionView soldier tabs
 
-Show the cost of upgrades on ShipView
- - MapViewShip.DrawShipHoverInfo() needs to be able to show multiple lines
-
 Display system population on map view
 
 Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??

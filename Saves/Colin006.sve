@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>11/01/2150 21:26:26</Clock>
+<Clock>11/01/2150 21:37:04</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -8399,18 +8399,6 @@
  <Seed>235413884</Seed>
 </Mission>
 <Mission>
- <Type>Mines</Type>
- <Goal>KillAll</Goal>
- <Enemy>Triffids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>54.95</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1254405311</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
  <Type>Surface</Type>
  <Goal>Gather</Goal>
 <MissionItem Mass="1.50" Cost="4.23">Pulsating Crystal</MissionItem>
@@ -8435,19 +8423,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1049332142</Seed>
  <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="1.00" Cost="3.30">Transparent Diamond</MissionItem>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>277521373</Seed>
 </Mission>
 <Mission>
  <Type>AbandonedCity</Type>
@@ -9001,7 +8976,7 @@
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Voidskin" Level="0"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="6">
 <Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="3">
@@ -9322,7 +9297,7 @@
   <Inv Count="1">
 <Armour Type="Shock Armour" Material="Composite" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="2">
@@ -9397,7 +9372,7 @@
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Heavy Chitin" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="3">
@@ -9589,7 +9564,7 @@
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Vulcanin" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="8">
@@ -64771,16 +64746,16 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>37.297871478756306</Cash>
+ <Cash>57.91143376652144</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="11" Y="30"/>
+ <Location X="22" Y="8"/>
  <Health>26</Health>
  <Stamina>30</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>0</Facing>
  <Level>4</Level>
- <XP>8339</XP>
+ <XP>9029</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,16</Stats>
@@ -64805,7 +64780,7 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">182</Exp>
+  <Exp Type="Automatic Rifle">187</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">1</Exp>
@@ -64814,13 +64789,13 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="21" Y="32"/>
- <Health>10.128165268385867</Health>
- <Stamina>7.700000000000001</Stamina>
+ <Location X="23" Y="2"/>
+ <Health>28</Health>
+ <Stamina>9</Stamina>
  <Shields>0</Shields>
- <Facing>281.30993247402023</Facing>
+ <Facing>-90</Facing>
  <Level>3</Level>
- <XP>3940</XP>
+ <XP>4630</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,15,12</Stats>
@@ -64846,7 +64821,7 @@
 <Weapon Type="Shotgun" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">89</Exp>
+  <Exp Type="Shotgun">98</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -64857,13 +64832,13 @@
  <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="14" Y="35"/>
+ <Location X="17" Y="2"/>
  <Health>25</Health>
- <Stamina>20</Stamina>
+ <Stamina>1.1764705882352926</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>180</Facing>
  <Level>3</Level>
- <XP>3012</XP>
+ <XP>3702</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>16,13,12,12,7</Stats>
@@ -64885,61 +64860,55 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">9</Exp>
+  <Exp Type="Powerblade">17</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="7" Y="33"/>
- <Health>7.667069074799734</Health>
- <Stamina>28</Stamina>
+ <Location X="21" Y="8"/>
+ <Health>25</Health>
+ <Stamina>16.062240517602902</Stamina>
  <Shields>0</Shields>
- <Facing>360</Facing>
+ <Facing>0</Facing>
  <Level>3</Level>
- <XP>492</XP>
+ <XP>1182</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,15,12,15</Stats>
  <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="2">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
  <EquippedArmour>
-<Armour Type="Chestplate" Material="Chitin" Level="0"/>
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="2"/>
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Sniper Rifle" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">6</Exp>
+  <Exp Type="Sniper Rifle">10</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
  </Soldiers>
 <Ship Type="Shuttle">
  <Name>Player Ship</Name>
  <Hull>13</Hull>
  <Shield>0</Shield>
+ <Armour>Reinforced Plating</Armour>
  <Seed>779812</Seed>
- <Eqp ID="6" Active="True">Thrusters</Eqp>
  <Eqp ID="0" Active="True">Fission Core</Eqp>
- <Eqp ID="5" Active="True">Chain Gun</Eqp>
  <Eqp ID="1" Active="True">Cabin</Eqp>
  <Eqp ID="2" Active="True">Cabin</Eqp>
  <Eqp ID="3" Active="True">Cabin</Eqp>
@@ -64959,9 +64928,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="2">
-<Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Steel"/>

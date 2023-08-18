@@ -1221,25 +1221,26 @@ namespace SpaceMercs.MainWindow {
 
         // Setup mouse-hover context menu
         private void SetupContextMenu() {
-            float px = (float)MousePosition.X / (float)Size.X + 0.01f; ;
+            float px = (float)MousePosition.X / (float)Size.X + 0.01f;
             float py = (float)MousePosition.Y / (float)Size.Y + 0.01f;
-            if (gpSelect == null) gpSelect = new GUIPanel(this, px, py);
+            gpSelect ??= new GUIPanel(this, px, py);
             gpSelect.Reset();
             gpSelect.SetClick(hoverx, hovery);
             gpSelect.SetIconScale(0.7f);
             gpSelect.SetPosition(px, py);
             CheckHoverMission();
 
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) {
+            if (SelectedEntity is not Soldier s) {
                 gpSelect.Deactivate();
                 return;
             }
-            Soldier s = (Soldier)SelectedEntity;
-            if (s.GoTo != Point.Empty) return;
+            if (s.GoTo != Point.Empty) return; // Walking somewhere so skip creating the context menu
+
             if (hoverx < 0 || hoverx >= CurrentLevel.Width || hovery < 0 || hovery >= CurrentLevel.Height) {
                 gpSelect.Deactivate();
                 return;
             }
+
             // Open doors
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.DoorHorizontal) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
@@ -1251,6 +1252,7 @@ namespace SpaceMercs.MainWindow {
                 TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.OpenDoor);
                 gpSelect.InsertIconItem(I_OpenDoor, ts, bEntityIsAdjacent, null);
             }
+
             // Close doors
             if (CurrentLevel.Map[hoverx, hovery] == MissionLevel.TileType.OpenDoorHorizontal && CurrentLevel.GetEntityAt(hoverx, hovery) == null) {
                 bool bEntityIsAdjacent = CurrentLevel.EntityIsAdjacentToDoor(SelectedEntity, hoverx, hovery);
@@ -1262,6 +1264,7 @@ namespace SpaceMercs.MainWindow {
                 TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.CloseDoor);
                 gpSelect.InsertIconItem(I_CloseDoor, ts, bEntityIsAdjacent, null);
             }
+
             // Passable square
             if (Utils.IsPassable(CurrentLevel.Map[hoverx, hovery])) {
                 IEntity? en = CurrentLevel.GetEntityAt(hoverx, hovery);
@@ -1275,11 +1278,12 @@ namespace SpaceMercs.MainWindow {
                 else if (en is Creature) {
                     TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
-                    bool bEnabled = (bIsInRange && (s.Stamina >= s.AttackCost));
+                    bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
                     if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
                     gpSelect.InsertIconItem(I_Attack, ts, bEnabled, null);
                 }
             }
+
             // Click on self
             if (hoverx == s.X && hovery == s.Y) {
                 bool bHasUtilityItems = s.HasUtilityItems();
