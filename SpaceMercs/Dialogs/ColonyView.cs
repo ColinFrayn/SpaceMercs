@@ -497,7 +497,7 @@ namespace SpaceMercs.Dialogs {
             MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
         }
         private void dgMissions_DoubleClick(object sender, EventArgs e) {
-            if (dgMercenaries.CurrentRow.Tag is not Mission miss) return;
+            if (dgMissions.CurrentRow.Tag is not Mission miss) return;
             MessageBox.Show(this, miss.GetDescription(), "Mission Details");
         }
         private void dgMerchant_DoubleClick(object sender, EventArgs e) {

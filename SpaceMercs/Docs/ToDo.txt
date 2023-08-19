@@ -6,6 +6,8 @@ ZoomTo buttons keep vanishing on MissionView soldier tabs
 
 Display system population on map view
 
+Medsystem should only be usable every X turns
+
 Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
 ==========================================================================================================

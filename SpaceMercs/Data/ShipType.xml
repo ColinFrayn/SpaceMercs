@@ -41,7 +41,7 @@
     <Medium>5</Medium>
     <Large>3</Large>
     <Weapon>2</Weapon>
-    <Cost>20000</Cost>
+    <Cost>22000</Cost>
     <Desc>The largest transport ship</Desc>
   </ShipType>
   <ShipType Name="Corvette">
@@ -58,7 +58,7 @@
     <Medium>3</Medium>
     <Large>1</Large>
     <Weapon>2</Weapon>
-    <Cost>3500</Cost>
+    <Cost>2800</Cost>
     <Desc>The small-medium military ship</Desc>
   </ShipType>
   <ShipType Name="Medium Cruiser">
@@ -67,7 +67,7 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>3</Weapon>
-    <Cost>9500</Cost>
+    <Cost>10500</Cost>
     <Desc>The middle-sized military ship</Desc>
   </ShipType>
   <ShipType Name="Heavy Cruiser">
@@ -76,7 +76,7 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>4</Weapon>
-    <Cost>22000</Cost>
+    <Cost>24000</Cost>
     <Desc>The biggest military ship</Desc>
   </ShipType>
 </Data>
