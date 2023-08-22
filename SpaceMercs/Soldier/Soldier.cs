@@ -4,6 +4,7 @@ using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -1096,7 +1097,7 @@ namespace SpaceMercs {
             //foreach (Effect e in Effects) {
             //  dStam += e.GetStatMod(StatType.Stamina);
             //}
-            Stamina = MaxStamina;
+            Stamina = MaxStamina; // Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment.
 
             // Handle periodic effects
             foreach (Effect e in Effects) {
@@ -1106,7 +1107,7 @@ namespace SpaceMercs {
                     centreView(this);
                     Thread.Sleep(250);
                 }
-                if (!String.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
+                if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                 if (e.Damage != 0.0) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = InflictDamage(AllDam);
@@ -1117,6 +1118,11 @@ namespace SpaceMercs {
                 e.ReduceDuration(1);
             }
             _Effects.RemoveAll(e => e.Duration <= 0);
+
+            // Handle any items in inventory that reset/recharge etc.
+            foreach (IEquippable eq in Inventory.OfType<IEquippable>()) {
+                eq.EndOfTurn();
+            }
 
             CalculateMaxStats(); // Just in case
             bHasMoved = false;
@@ -1185,8 +1191,12 @@ namespace SpaceMercs {
             }
             return lFound;
         }
-        public void UseItem(ItemType? ActionItem) {
-            if (ActionItem?.ItemEffect?.SingleUse ?? false) RemoveItemByType(ActionItem);
+        public void UseItem(IEquippable? actionItem) {
+            if (actionItem?.BaseType?.ItemEffect?.SingleUse ?? false) DestroyItem(actionItem);
+            if (actionItem is Equipment eq) {
+                int recharge = actionItem?.BaseType?.ItemEffect?.Recharge ?? 0;
+                if (recharge > 0) eq.SetRecharge(recharge);
+            }
             Stamina -= UseItemCost;
             bHasMoved = true;
         }

@@ -67,8 +67,12 @@ namespace SpaceMercs {
         public PanelItem? HoverItem { get; private set; } = null;
         public int HoverID {
             get {
-                if (HoverItem == null) return -1;
-                return (int)HoverItem.ID;
+                return HoverItem?.Datum is null ? -1 : Convert.ToInt32(HoverItem.Datum);
+            }
+        }
+        public object? HoverObject {
+            get {
+                return HoverItem?.Datum;
             }
         }
         public void SetIconScale(float sc) {
@@ -89,7 +93,7 @@ namespace SpaceMercs {
         }
         public PanelItem? GetItem(uint ID) {
             foreach (PanelItem it in Items) {
-                if (it.ID == ID) return it;
+                if (it.Datum is uint id && id == ID) return it;
             }
             return null;
         }

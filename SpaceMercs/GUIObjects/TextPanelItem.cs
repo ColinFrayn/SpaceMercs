@@ -10,7 +10,7 @@ namespace SpaceMercs {
         private const float TextSizeScale = 0.4f;
         private const float XBufferScale = 0.12f;
 
-        public TextPanelItem(string strText, uint _id, bool togglable) : base(null, true, _id, togglable) {
+        public TextPanelItem(string strText, object datum, bool togglable) : base(null, true, datum, togglable) {
             measure = TextRenderer.MeasureText(strText);
             Text = strText;
         }

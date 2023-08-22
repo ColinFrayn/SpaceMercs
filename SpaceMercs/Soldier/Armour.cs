@@ -150,5 +150,8 @@ namespace SpaceMercs {
                 return (int)Math.Floor(agi);
             }
         }
+        public void EndOfTurn() {
+            // Nothing to do yet
+        }
     }
 }

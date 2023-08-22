@@ -14,9 +14,12 @@ namespace SpaceMercs {
         public double UpgradeCost { get { return 0.0; } } // Ignored here
         public ItemType BaseType { get; private set; }
         public static bool IsMedical { get { return false; } }
+        public int Recharge { get; private set; }
 
         public void SaveToFile(StreamWriter file) {
-            file.WriteLine("<Equipment Type=\"" + BaseType.Name + "\"/>");
+            string rst = "";
+            if (Recharge > 0) rst = $" Recharge=\"{Recharge}\"";
+            file.WriteLine($"<Equipment Type=\"{BaseType.Name}\"{rst}/>");
         }
 
         public Equipment(ItemType tp) {
@@ -26,6 +29,14 @@ namespace SpaceMercs {
             string strType = xml.Attributes!["Type"]!.Value;
             ItemType? tp = StaticData.GetItemTypeByName(strType);
             BaseType = tp ?? throw new Exception("Could not ID equipment type : " + strType);
+            Recharge = xml.GetAttributeInt("Recharge", 0);
+        }
+
+        public void SetRecharge(int r) {
+            Recharge = r;
+        }
+        public void EndOfTurn() {
+            if (Recharge > 0) Recharge--;
         }
 
         public override int GetHashCode() {

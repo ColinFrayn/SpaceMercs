@@ -5,7 +5,7 @@ using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
     class IconPanelItem : PanelItem {
-        public IconPanelItem(TexSpecs ts, bool _enabled, uint _ID, bool togglable) : base(ts, _enabled, _ID, togglable) {
+        public IconPanelItem(TexSpecs ts, bool _enabled, object datum, bool togglable) : base(ts, _enabled, datum, togglable) {
         }
 
         public override PanelItem? Draw(ShaderProgram prog, double xx, double yy, GUIPanel gpParent, Vector2 itemPos, Vector2 itemSize, float zdist, float aspect) {

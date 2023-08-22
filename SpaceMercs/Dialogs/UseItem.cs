@@ -30,10 +30,13 @@ namespace SpaceMercs.Dialogs {
                         string strReuse = "";
                         if (eq is Equipment eqi && eqi.BaseType.ItemEffect != null) {
                             if (eqi.BaseType.ItemEffect.SingleUse) strReuse = " sgl";
+                            if (eqi.Recharge > 0) strReuse = $" ...Recharging({eqi.Recharge})";
                         }
-                        lbItems.Items.Add(new ItemPair($"{eq.Name} [{kvp.Value}] {strReuse}", eq));
+                        string strQuantity = kvp.Value == 1 ? "" : $" [{kvp.Value}]";
+                        lbItems.Items.Add(new ItemPair($"{eq.Name}{strQuantity}{strReuse}", eq));
                         bHasItems = true;
-                        // Set this item in the list box to relate to the actual item type
+
+                        // Set this item in the list box to relate to the actual item type?
                         // TODO
                     }
                 }
@@ -43,11 +46,20 @@ namespace SpaceMercs.Dialogs {
 
         private void btUseItem_Click(object sender, EventArgs e) {
             ChosenItem = (lbItems.SelectedItem is ItemPair ip) ? ip.Eq : null;
+            if (ChosenItem is not null && ChosenItem is Equipment eq && eq.Recharge > 0) {
+                ChosenItem = null;
+                return;
+            }
             this.Close();
         }
 
         private void lbItems_SelectedValueChanged(object sender, EventArgs e) {
             if (lbItems.SelectedIndex == -1 || !bHasItems) {
+                btUseItem.Enabled = false;
+                return;
+            }
+            IEquippable? it = (lbItems.SelectedItem is ItemPair ip) ? ip.Eq : null;
+            if (it is not null && it is Equipment eq && eq.Recharge > 0) {
                 btUseItem.Enabled = false;
                 return;
             }

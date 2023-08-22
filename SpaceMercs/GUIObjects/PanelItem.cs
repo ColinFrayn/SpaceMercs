@@ -6,7 +6,7 @@ using SpaceMercs.Graphics.Shapes;
 namespace SpaceMercs {
     abstract class PanelItem {
         public bool Enabled { get; protected set; }
-        public uint ID { get; protected set; }
+        public object Datum { get; protected set; }
 
         protected GUIPanel? SubPanel;
         protected readonly int texID;
@@ -17,14 +17,14 @@ namespace SpaceMercs {
         protected readonly bool IsTogglable = false;
         protected Func<bool>? GetBool = null;
 
-        public PanelItem(TexSpecs? ts, bool _enabled, uint _ID, bool togglable) {
+        public PanelItem(TexSpecs? ts, bool _enabled, object datum, bool togglable) {
             texID = ts?.ID ?? 0;
             texX = ts?.X ?? 0f;
             texY = ts?.Y ?? 0f;
             texW = ts?.W ?? 0f;
             texH = ts?.H ?? 0f;
             SubPanel = null;
-            ID = _ID;
+            Datum = datum;
             Enabled = _enabled;
             IsTogglable = togglable;
         }

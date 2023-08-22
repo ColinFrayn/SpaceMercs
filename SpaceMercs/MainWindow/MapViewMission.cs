@@ -38,7 +38,7 @@ namespace SpaceMercs.MainWindow {
         private SoldierAction CurrentAction = SoldierAction.None;
         private readonly List<VisualEffect> Effects = new List<VisualEffect>();
         private readonly Stopwatch sw = Stopwatch.StartNew();
-        private ItemType? ActionItem = null;
+        private IEquippable? ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
         private VertexBuffer? vbGrid = null, vbPath = null;
@@ -349,7 +349,6 @@ namespace SpaceMercs.MainWindow {
                 fMissionViewY += e.DeltaY * fScale;
                 if (fMissionViewY < 0) fMissionViewY = 0;
                 if (fMissionViewY > CurrentLevel.Height) fMissionViewY = CurrentLevel.Height;
-                // TODO glMapView.Invalidate();
                 bDragging = true;
             }
             else bDragging = false;
@@ -358,28 +357,27 @@ namespace SpaceMercs.MainWindow {
             // Mouse has moved to a different square
             if (hoverx != oldhoverx || hovery != oldhovery) {
                 if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
-                    if (ActionItem?.ItemEffect is not null) {
-                        GenerateAoEMap(hoverx, hovery, ActionItem.ItemEffect.Radius, oldhoverx, oldhovery);
+                    if (ActionItem?.BaseType?.ItemEffect is not null) {
+                        GenerateAoEMap(hoverx, hovery, ActionItem.BaseType.ItemEffect.Radius, oldhoverx, oldhovery);
                     }
                     else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
                         GenerateAoEMap(hoverx, hovery, s.EquippedWeapon.Type.Area, oldhoverx, oldhovery);
                     }
                 }
             }
-
-            // TODO glMapView.Invalidate();
         }
         private async void MouseUp_Mission(MouseButtonEventArgs e) {
             // Check R-button released
             if (bAIRunning) return;
             Soldier? s = null;
-            if (SelectedEntity != null && SelectedEntity is Soldier) s = (Soldier)SelectedEntity;
+            if (SelectedEntity is Soldier sld) s = sld;
             if (e.Button == MouseButton.Right) {
                 if (gpSelect != null && gpSelect.Active) {
                     gpSelect.Deactivate();
-                    int iSelectHover = gpSelect.HoverID;
+                    object? oHover = gpSelect.HoverObject;
                     // Process GUIPanel selection
-                    if (s != null && iSelectHover >= 0 && gpSelect.HoverItem!.Enabled) {
+                    if (s != null && oHover is not null && gpSelect.HoverItem!.Enabled) {
+                        int iSelectHover = gpSelect.HoverID;
                         if (iSelectHover == I_OpenDoor) {
                             CurrentLevel.OpenDoor(gpSelect.ClickX, gpSelect.ClickY);
                             SoundEffects.PlaySound("OpenDoor");
@@ -408,7 +406,6 @@ namespace SpaceMercs.MainWindow {
                         }
                         if (iSelectHover == I_Attack) {
                             bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
-                            //bool bAttacked = s.AttackLocation(level, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, glMissionView.Invalidate, PlaySoundThreaded).Result;
                             if (bAttacked) {
                                 if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
                                     UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, 0, Const.BaseDetectionRange)) {
@@ -419,16 +416,17 @@ namespace SpaceMercs.MainWindow {
                         if (iSelectHover == I_GoTo) {
                             s.GoTo = new Point(gpSelect.ClickX, gpSelect.ClickY);
                         }
-                        if (iSelectHover >= Const.ItemIDBase && iSelectHover < (Const.ItemIDBase + 50000)) {
+                        if (oHover is IEquippable eqp) {
                             // Clicked on a usable item
-                            ActionItem = StaticData.GetItemTypeById(iSelectHover) ?? throw new Exception("Chose unknown ItemType to use");
+                            ActionItem = eqp;
                             CurrentAction = SoldierAction.Item;
-                            if (ActionItem?.ItemEffect is not null)
-                                GenerateTargetMap(s, ActionItem.ItemEffect.Range);
-                            if (SelectedEntity is not null) {
-                                int sy = SelectedEntity.Y;
-                                int sx = SelectedEntity.X;
-                                GenerateAoEMap(sx, sy, ActionItem!.ItemEffect!.Radius);
+                            if (ActionItem?.BaseType?.ItemEffect is not null) {
+                                GenerateTargetMap(s, ActionItem.BaseType.ItemEffect.Range);
+                                if (SelectedEntity is not null) {
+                                    int sy = SelectedEntity.Y;
+                                    int sx = SelectedEntity.X;
+                                    GenerateAoEMap(sx, sy, ActionItem.BaseType.ItemEffect.Radius);
+                                }
                             }
                         }
                     }
@@ -452,15 +450,19 @@ namespace SpaceMercs.MainWindow {
                         return;
                     }
                     if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
-                    if (ActionItem.ItemEffect is null) {
-                        throw new Exception("Item without effect!");
+                    if (ActionItem.BaseType.ItemEffect is null) {
+                        throw new Exception("ActionItem without effect!");
                     }
-                    if (s.RangeTo(hoverx, hovery) > ActionItem.ItemEffect.Range) {
+                    if (s.RangeTo(hoverx, hovery) > ActionItem.BaseType.ItemEffect.Range) {
                         msgBox.PopupMessage("Target out of range!");
                         return;
                     }
+                    if (ActionItem.BaseType.ItemEffect.Radius == 0 && CurrentLevel.GetEntityAt(hoverx, hovery) is null) {
+                        // Single target effect, and no target was selected
+                        return;
+                    }
                     // Firstly, remove the item from the Soldier in question if it's a single use item
-                    ItemType temp = ActionItem!;
+                    IEquippable temp = ActionItem!;
                     s.UseItem(ActionItem!);
                     CurrentAction = SoldierAction.None;
                     ActionItem = null;
@@ -559,16 +561,11 @@ namespace SpaceMercs.MainWindow {
             }
             else gbTransition!.Deactivate();
         }
-        private void ApplyItemEffectToMap(Soldier s, ItemType it, int px, int py) {
-            ItemEffect? ie = it.ItemEffect;
+        private void ApplyItemEffectToMap(Soldier s, IEquippable it, int px, int py) {
+            ItemEffect? ie = it.BaseType.ItemEffect;
             if (ie is null) return;
             HashSet<IEntity> hsEntities = new HashSet<IEntity>();
 
-            // Play a sound, if there is one
-            if (!string.IsNullOrEmpty(ie.SoundEffect)) {
-                SoundEffects.PlaySound(ie.SoundEffect);
-                Thread.Sleep(500);
-            }
             for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {
                 for (int x = (int)Math.Max(px - ie.Radius, 0); x <= (int)Math.Min(px + ie.Radius, CurrentLevel.Width - 1); x++) {
                     if ((x - px) * (x - px) + (y - py) * (y - py) > ie.Radius * ie.Radius) continue;
@@ -578,6 +575,14 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
+
+            // Play a sound, if there is one
+            if (!string.IsNullOrEmpty(ie.SoundEffect)) {
+                SoundEffects.PlaySound(ie.SoundEffect);
+                Thread.Sleep(500);
+            }
+
+            // Apply effect to the targets
             foreach (IEntity en in hsEntities) {
                 en.ApplyEffectToEntity(s, ie, AddNewEffect);
             }
@@ -1288,16 +1293,18 @@ namespace SpaceMercs.MainWindow {
             if (hoverx == s.X && hovery == s.Y) {
                 bool bHasUtilityItems = s.HasUtilityItems();
                 TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
+                TexSpecs tss = Textures.GetTexCoords(Textures.MiscTexture.Stopwatch);
                 GUIPanel? gpItems = null;
                 if (bHasUtilityItems) {
                     bool bEnabled = s.Stamina >= s.UseItemCost;
                     gpItems = new GUIPanel(this);
                     // Set up list of items
-                    foreach (ItemType it in s.GetUtilityItems()) {
-                        TexSpecs ts = Textures.GetTexCoords(it);
-                        PanelItem ip = gpItems.InsertIconItem(it.ItemID, ts, bEnabled, null);
-                        if (it.ItemEffect != null && !it.ItemEffect.SingleUse) {
-                            ip.SetOverlay(tsr, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
+                    foreach (Equipment eq in s.GetUtilityItems().OfType<Equipment>()) {
+                        TexSpecs ts = Textures.GetTexCoords(eq.BaseType);
+                        PanelItem ip = gpItems.InsertIconItem(eq.BaseType.ItemID, ts, bEnabled && (eq.Recharge == 0), null);
+                        if (eq.BaseType.ItemEffect != null && !eq.BaseType.ItemEffect.SingleUse) {
+                            if (eq.Recharge == 0) ip.SetOverlay(tsr, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
+                            else ip.SetOverlay(tss, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
                         }
                     }
                 }
@@ -1354,17 +1361,17 @@ namespace SpaceMercs.MainWindow {
         }
         private void SelectedSoldierUseItems(GUIIconButton sender) {
             if (bAIRunning) return;
-            if (SelectedEntity == null || !(SelectedEntity is Soldier s)) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
+            if (SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
             using (UseItem ui = new UseItem(s)) {
                 ui.ShowDialog();
                 if (ui.ChosenItem != null) {
-                    ActionItem = ui.ChosenItem.BaseType;
+                    ActionItem = ui.ChosenItem;
                     CurrentAction = SoldierAction.Item;
-                    if (ActionItem.ItemEffect is not null) {
-                        GenerateTargetMap(s, ActionItem.ItemEffect.Range);
+                    if (ActionItem.BaseType.ItemEffect is not null) {
+                        GenerateTargetMap(s, ActionItem.BaseType.ItemEffect.Range);
                         int sy = SelectedEntity.Y;
                         int sx = SelectedEntity.X;
-                        GenerateAoEMap(sx, sy, ActionItem.ItemEffect.Radius);
+                        GenerateAoEMap(sx, sy, ActionItem.BaseType.ItemEffect.Radius);
                     }
                 }
             }
