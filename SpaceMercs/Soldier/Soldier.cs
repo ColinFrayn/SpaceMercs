@@ -1258,18 +1258,15 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public IEnumerable<ItemType> GetUtilityItems() {
-            HashSet<ItemType> hsItems = new HashSet<ItemType>();
-            foreach (IEquippable eq in Inventory.Where(e => e is IEquippable)) {
-                if (eq is Weapon || eq is Armour) continue;
+        public IEnumerable<Equipment> GetUtilityItems() {
+            foreach (Equipment eq in Inventory.OfType<Equipment>()) {
                 ItemEffect? ie = eq.BaseType.ItemEffect;
                 if (ie is not null) {
                     if (ie.AssociatedSkill == UtilitySkill.Unspent || !ie.SkillRequired || GetUtilityLevel(ie.AssociatedSkill) > 0) {
-                        hsItems.Add(eq.BaseType);
+                        yield return eq;
                     }
                 }
             }
-            return hsItems;
         }
         public double DetectionRange {
             get {

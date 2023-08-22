@@ -40,8 +40,8 @@ namespace SpaceMercs {
             Active = false;
             SetIconScale(1f);
         }
-        public PanelItem InsertIconItem(uint ID, TexSpecs spec, bool bEnabled, GUIPanel? subPanel, Func<bool>? getBoolFunc = null) {
-            PanelItem pi = new IconPanelItem(spec, bEnabled, ID, getBoolFunc != null);
+        public PanelItem InsertIconItem(object datum, TexSpecs spec, bool bEnabled, GUIPanel? subPanel, Func<bool>? getBoolFunc = null) {
+            PanelItem pi = new IconPanelItem(spec, bEnabled, datum, getBoolFunc != null);
             pi.SetSubPanel(subPanel);
             pi.SetToggleDelegate(getBoolFunc);
             Items.Add(pi);
@@ -49,8 +49,8 @@ namespace SpaceMercs {
             UpdatePanelDimensions(aspect);
             return pi;
         }
-        public void InsertTextItem(uint ID, string strText, float aspect, Func<bool>? getBoolFunc = null) {
-            PanelItem pi = new TextPanelItem(strText, ID, getBoolFunc != null);
+        public void InsertTextItem(object datum, string strText, float aspect, Func<bool>? getBoolFunc = null) {
+            PanelItem pi = new TextPanelItem(strText, datum, getBoolFunc != null);
             pi.SetToggleDelegate(getBoolFunc);
             Items.Add(pi);
             UpdatePanelDimensions(aspect);
@@ -67,7 +67,11 @@ namespace SpaceMercs {
         public PanelItem? HoverItem { get; private set; } = null;
         public int HoverID {
             get {
-                return HoverItem?.Datum is null ? -1 : Convert.ToInt32(HoverItem.Datum);
+                if (HoverItem?.Datum is null) return -1;
+                if (HoverItem?.Datum?.GetType() == typeof(int) || HoverItem?.Datum?.GetType() == typeof(uint)) {
+                    return Convert.ToInt32(HoverItem.Datum);
+                };
+                return -1;
             }
         }
         public object? HoverObject {

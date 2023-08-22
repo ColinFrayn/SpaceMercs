@@ -45,8 +45,9 @@ namespace SpaceMercs {
 
         public override bool Equals(object? obj) {
             if (obj == null || GetType() != obj.GetType()) return false;
-            if (obj is Equipment wp) {
-                return (wp.BaseType == BaseType);
+            if (obj is Equipment eqp) {
+                return eqp.BaseType == BaseType &&
+                       eqp.Recharge == Recharge;
             }
             return false;
         }

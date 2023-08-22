@@ -20,7 +20,7 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.pbExperience, "Experience gained this level");
         }
 
-        public IItem?SelectedItem() {
+        public IItem? SelectedItem() {
             if (ThisSoldier == null) return null;
             if (lbInventory.SelectedIndex >= 0) return ThisSoldier.InventoryGrouped.Keys.ElementAt(lbInventory.SelectedIndex);
             if (lbEquipped.SelectedIndex >= 0) {
@@ -100,7 +100,9 @@ namespace SpaceMercs.Dialogs {
             // Inventory
             lbInventory.Items.Clear();
             foreach (IItem eq in ThisSoldier.InventoryGrouped.Keys) {
-                lbInventory.Items.Add(eq.Name + (ThisSoldier.InventoryGrouped[eq] > 1 ? " [" + ThisSoldier.InventoryGrouped[eq] + "]" : ""));
+                string strRec = "";
+                if (eq is Equipment eqp && eqp.Recharge > 0) strRec = $" (Charging {eqp.Recharge})";
+                lbInventory.Items.Add(eq.Name + (ThisSoldier.InventoryGrouped[eq] > 1 ? " [" + ThisSoldier.InventoryGrouped[eq] + "]" : "") + strRec);
             }
             lbEquipped.Items.Clear();
             foreach (Armour ar in ThisSoldier.EquippedArmour) {

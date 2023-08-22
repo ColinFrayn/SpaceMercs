@@ -6,12 +6,6 @@ ZoomTo buttons keep vanishing on MissionView soldier tabs
 
 Display system population on map view
 
-Medsystem should only be usable every X turns
-- Rechargable items should display as such in DataGrid when using item
-- Right click -> use item doesn't seem to work
-
-Bug: Shouldn't be able to use medsystem/medikit on empty space
-
 Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
 ==========================================================================================================

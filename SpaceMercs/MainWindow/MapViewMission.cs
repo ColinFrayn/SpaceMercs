@@ -1224,7 +1224,7 @@ namespace SpaceMercs.MainWindow {
             Square.Textured.BindAndDraw();
         }
 
-        // Setup mouse-hover context menu
+        // Setup mouse-hover context menu on right-click
         private void SetupContextMenu() {
             float px = (float)MousePosition.X / (float)Size.X + 0.01f;
             float py = (float)MousePosition.Y / (float)Size.Y + 0.01f;
@@ -1292,16 +1292,16 @@ namespace SpaceMercs.MainWindow {
             // Click on self
             if (hoverx == s.X && hovery == s.Y) {
                 bool bHasUtilityItems = s.HasUtilityItems();
-                TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
-                TexSpecs tss = Textures.GetTexCoords(Textures.MiscTexture.Stopwatch);
                 GUIPanel? gpItems = null;
                 if (bHasUtilityItems) {
+                    TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
+                    TexSpecs tss = Textures.GetTexCoords(Textures.MiscTexture.Stopwatch);
                     bool bEnabled = s.Stamina >= s.UseItemCost;
                     gpItems = new GUIPanel(this);
                     // Set up list of items
-                    foreach (Equipment eq in s.GetUtilityItems().OfType<Equipment>()) {
+                    foreach (Equipment eq in s.GetUtilityItems()) {
                         TexSpecs ts = Textures.GetTexCoords(eq.BaseType);
-                        PanelItem ip = gpItems.InsertIconItem(eq.BaseType.ItemID, ts, bEnabled && (eq.Recharge == 0), null);
+                        PanelItem ip = gpItems.InsertIconItem(eq, ts, bEnabled && (eq.Recharge == 0), null);
                         if (eq.BaseType.ItemEffect != null && !eq.BaseType.ItemEffect.SingleUse) {
                             if (eq.Recharge == 0) ip.SetOverlay(tsr, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
                             else ip.SetOverlay(tss, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));
