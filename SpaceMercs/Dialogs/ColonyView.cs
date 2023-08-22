@@ -184,15 +184,15 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
-                foreach (IItem eq in s.InventoryRO.Keys) {
+                foreach (IItem eq in s.InventoryGrouped.Keys) {
                     if (!string.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (ShouldDisplayInFoundry(strType, eq)) {
                         arrRow[0] = eq.Name;
                         arrRow[1] = s.Name;
                         arrRow[2] = (eq.Cost * Const.SellDiscount * cl.CostModifier / PriceMod).ToString("N2");
-                        arrRow[3] = s.InventoryRO[eq].ToString();
+                        arrRow[3] = s.InventoryGrouped[eq].ToString();
                         dgInventory.Rows.Add(arrRow);
-                        SaleItem si = new SaleItem(eq, s, false, s.InventoryRO[eq]);
+                        SaleItem si = new SaleItem(eq, s, false, s.InventoryGrouped[eq]);
                         dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
                         if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                     }
@@ -489,9 +489,9 @@ namespace SpaceMercs.Dialogs {
             if (merc.EquippedWeapon != null) sb.AppendLine(merc.EquippedWeapon.Name);
             sb.AppendLine("");
             sb.AppendLine("Inventory:");
-            foreach (IItem eq in merc.InventoryRO.Keys) {
-                if (merc.InventoryRO[eq] == 1) sb.AppendLine(eq.Name);
-                else sb.AppendLine(eq.Name + " [" + merc.InventoryRO[eq] + "]");
+            foreach (IItem eq in merc.InventoryGrouped.Keys) {
+                if (merc.InventoryGrouped[eq] == 1) sb.AppendLine(eq.Name);
+                else sb.AppendLine(eq.Name + " [" + merc.InventoryGrouped[eq] + "]");
             }
 
             MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);

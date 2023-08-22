@@ -22,7 +22,7 @@ namespace SpaceMercs.Dialogs {
             lbItems.DisplayMember = "Desc";
             lbItems.ValueMember = "Eq";
             bHasItems = false;
-            foreach (KeyValuePair<IItem, int> kvp in ThisSoldier.InventoryRO) {
+            foreach (KeyValuePair<IItem, int> kvp in ThisSoldier.InventoryGrouped) {
                 if (kvp.Key is not IEquippable eq) continue;
                 ItemEffect? ie = eq.BaseType.ItemEffect;
                 if (ie is not null) {

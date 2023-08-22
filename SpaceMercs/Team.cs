@@ -208,8 +208,8 @@ namespace SpaceMercs {
             }
             foreach (Soldier s in _Soldiers) {
                 if (s.HasItem(equip)) {
-                    if (Count >= s.InventoryRO[equip]) {
-                        int n = s.InventoryRO[equip];
+                    if (Count >= s.InventoryGrouped[equip]) {
+                        int n = s.InventoryGrouped[equip];
                         s.DestroyItem(equip, Count);
                         Count -= n;
                         if (Count == 0) return true;
@@ -267,9 +267,9 @@ namespace SpaceMercs {
                 }
             }
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
-                foreach (IItem it in s.InventoryRO.Keys) {
+                foreach (IItem it in s.InventoryGrouped.Keys) {
                     if (it is Material m) {
-                        if (m.BaseType == mat) count += s.InventoryRO[it];
+                        if (m.BaseType == mat) count += s.InventoryGrouped[it];
                     }
                 }
             }
@@ -290,10 +290,10 @@ namespace SpaceMercs {
 
             // If there's any left, take it from soldiers
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
-                foreach (IItem it in s.InventoryRO.Keys) {
+                foreach (IItem it in s.InventoryGrouped.Keys) {
                     if (it is Material m) {
                         if (m.BaseType == mat) {
-                            int left = num - s.InventoryRO[it];
+                            int left = num - s.InventoryGrouped[it];
                             s.DestroyItem(it, num);
                             if (left <= 0) return;
                             num = left;
@@ -309,7 +309,7 @@ namespace SpaceMercs {
             int count = 0;
             if (Inventory.ContainsKey(itFind)) count += Inventory[itFind];
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
-                if (s.InventoryRO.ContainsKey(itFind)) count += s.InventoryRO[itFind];
+                if (s.InventoryGrouped.ContainsKey(itFind)) count += s.InventoryGrouped[itFind];
             }
             return count;
         }

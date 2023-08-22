@@ -22,7 +22,7 @@ namespace SpaceMercs.Dialogs {
 
         public IItem?SelectedItem() {
             if (ThisSoldier == null) return null;
-            if (lbInventory.SelectedIndex >= 0) return ThisSoldier.InventoryRO.Keys.ElementAt(lbInventory.SelectedIndex);
+            if (lbInventory.SelectedIndex >= 0) return ThisSoldier.InventoryGrouped.Keys.ElementAt(lbInventory.SelectedIndex);
             if (lbEquipped.SelectedIndex >= 0) {
                 int iIndex = lbEquipped.SelectedIndex;
                 if (ThisSoldier.EquippedWeapon != null && iIndex == lbEquipped.Items.Count - 1) return ThisSoldier.EquippedWeapon;
@@ -99,8 +99,8 @@ namespace SpaceMercs.Dialogs {
 
             // Inventory
             lbInventory.Items.Clear();
-            foreach (IItem eq in ThisSoldier.InventoryRO.Keys) {
-                lbInventory.Items.Add(eq.Name + (ThisSoldier.InventoryRO[eq] > 1 ? " [" + ThisSoldier.InventoryRO[eq] + "]" : ""));
+            foreach (IItem eq in ThisSoldier.InventoryGrouped.Keys) {
+                lbInventory.Items.Add(eq.Name + (ThisSoldier.InventoryGrouped[eq] > 1 ? " [" + ThisSoldier.InventoryGrouped[eq] + "]" : ""));
             }
             lbEquipped.Items.Clear();
             foreach (Armour ar in ThisSoldier.EquippedArmour) {
@@ -150,7 +150,7 @@ namespace SpaceMercs.Dialogs {
             else ThisSoldier.Unequip(eq);
             UpdateAllDetails();
             if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (ThisSoldier.InventoryRO.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
+                if (ThisSoldier.InventoryGrouped.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
             if (ivForm != null) ivForm.UpdateInventory();
@@ -165,7 +165,7 @@ namespace SpaceMercs.Dialogs {
             ThisSoldier.DestroyItem(it, 1);
             UpdateAllDetails();
             if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (ThisSoldier.InventoryRO.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
+                if (ThisSoldier.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
             if (ivForm != null) ivForm.UpdateInventory();

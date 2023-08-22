@@ -60,7 +60,7 @@ namespace SpaceMercs.Dialogs {
         public IItem? SelectedItem() {
             Soldier? s = SelectedSoldier();
             if (s is null) return null;
-            if (lbInventory.SelectedIndex >= 0) return s.InventoryRO.Keys.ElementAt(lbInventory.SelectedIndex);
+            if (lbInventory.SelectedIndex >= 0) return s.InventoryGrouped.Keys.ElementAt(lbInventory.SelectedIndex);
             if (lbEquipped.SelectedIndex >= 0) {
                 int iIndex = lbEquipped.SelectedIndex;
                 if (s.EquippedWeapon != null && iIndex == lbEquipped.Items.Count - 1) return s.EquippedWeapon;
@@ -156,8 +156,8 @@ namespace SpaceMercs.Dialogs {
 
             // Inventory
             lbInventory.Items.Clear();
-            foreach (IItem eq in s.InventoryRO.Keys) {
-                lbInventory.Items.Add(eq.Name + (s.InventoryRO[eq] > 1 ? " [" + s.InventoryRO[eq] + "]" : ""));
+            foreach (IItem eq in s.InventoryGrouped.Keys) {
+                lbInventory.Items.Add(eq.Name + (s.InventoryGrouped[eq] > 1 ? " [" + s.InventoryGrouped[eq] + "]" : ""));
             }
             lbEquipped.Items.Clear();
             foreach (Armour ar in s.EquippedArmour) {
@@ -173,7 +173,7 @@ namespace SpaceMercs.Dialogs {
             else lbEncumber.BackColor = Color.FromArgb(255, 0, 255, 0);
             btDrop.Enabled = false;
             btEquip.Enabled = false;
-            if (s.InventoryRO.Count == 0 || !s.IsActive) btDropAll.Enabled = false;
+            if (s.InventoryGrouped.Count == 0 || !s.IsActive) btDropAll.Enabled = false;
             else btDropAll.Enabled = true;
 
             // Update inventory if it's open, so that it's up-to-date (just to make sure!)
@@ -236,7 +236,7 @@ namespace SpaceMercs.Dialogs {
             }
             ShowSelectedSoldierDetails();
             if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryRO.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
+                if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
             if (ivForm != null) ivForm.UpdateInventory();
@@ -252,7 +252,7 @@ namespace SpaceMercs.Dialogs {
             else s.Unequip(eq);
             ShowSelectedSoldierDetails();
             if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryRO.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
+                if (s.InventoryGrouped.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
             if (ivForm != null) ivForm.UpdateInventory();
@@ -268,7 +268,7 @@ namespace SpaceMercs.Dialogs {
             s.DropItem(it);
             ShowSelectedSoldierDetails();
             if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryRO.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
+                if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
             if (ivForm != null) ivForm.UpdateInventory();

@@ -4,6 +4,7 @@ using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -224,9 +225,10 @@ namespace SpaceMercs {
             st.Add(cp);
 
             // Generate dropped items
-            foreach (IItem eq in Inventory.Keys) {
-                st.Add(eq, Inventory[eq]);
+            foreach (IGrouping<IItem, IItem> g in Inventory.GroupBy(x => x)) {
+                st.Add(g.Key, g.Count());
             }
+            Inventory.Clear();
 
             return st;
         }
@@ -285,8 +287,13 @@ namespace SpaceMercs {
         }
 
         // Inventory
-        private readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
-        public ReadOnlyDictionary<IItem, int> InventoryRO { get { return new ReadOnlyDictionary<IItem, int>(Inventory); } }
+        private readonly List<IItem> Inventory = new List<IItem>();
+        public ReadOnlyDictionary<IItem, int> InventoryGrouped { 
+            get 
+            {
+                return new ReadOnlyDictionary<IItem, int>(Inventory.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count())); 
+            } 
+        }
         public List<Armour> EquippedArmour = new List<Armour>();
 
         // Base stats
@@ -553,8 +560,7 @@ namespace SpaceMercs {
                     int count = xi.GetAttributeInt("Count");
                     IItem? eq = Utils.LoadItem(xi.FirstChild);
                     if (eq is not null) {
-                        if (Inventory.ContainsKey(eq)) Inventory[eq] += count; // Ideally shouldn't happen, but we might as well tidy it up here if it does...
-                        else Inventory.Add(eq, count);
+                        Inventory.AddRange(Enumerable.Repeat(eq, count));
                     }
                 }
             }
@@ -656,9 +662,9 @@ namespace SpaceMercs {
 
             if (Inventory.Count > 0) {
                 file.WriteLine(" <Inventory>");
-                foreach (IItem it in Inventory.Keys) {
-                    file.WriteLine("  <Inv Count=\"" + Inventory[it] + "\">");
-                    it.SaveToFile(file);
+                foreach (KeyValuePair<IItem, int> kvp in InventoryGrouped) {
+                    file.WriteLine($"  <Inv Count=\"{kvp.Value}\">");
+                    kvp.Key.SaveToFile(file);
                     file.WriteLine("  </Inv>");
                 }
                 file.WriteLine(" </Inventory>");
@@ -730,8 +736,8 @@ namespace SpaceMercs {
         }
         public double EquipmentCost() {
             double dCost = 0.0;
-            foreach (IItem eq in Inventory.Keys) {
-                dCost += eq.Cost * Inventory[eq];
+            foreach (IItem eq in Inventory) {
+                dCost += eq.Cost;
             }
             foreach (Armour ar in EquippedArmour) {
                 dCost += ar.Cost;
@@ -749,16 +755,15 @@ namespace SpaceMercs {
         }
         public double CalculateInventoryMass() {
             double w = 0.0;
-            foreach (IItem eq in Inventory.Keys) w += eq.Mass * Inventory[eq];
+            foreach (IItem eq in Inventory) w += eq.Mass;
             foreach (Armour ar in EquippedArmour) w += ar.Mass;
             if (EquippedWeapon != null) w += EquippedWeapon.Mass;
             return w;
         }
         public bool Equip(IEquippable eq) {
-            if (!Inventory.ContainsKey(eq)) return false;
+            if (!Inventory.Contains(eq)) return false;
             if (!(eq is Armour || eq is Weapon)) return false;
-            Inventory[eq]--;
-            if (Inventory[eq] == 0) Inventory.Remove(eq);
+            Inventory.Remove(eq);
             if (eq is Armour ar) {
                 HashSet<Armour> hsToUnequip = new HashSet<Armour>();
                 foreach (BodyPart bp in ar.Type.Locations) {
@@ -804,41 +809,43 @@ namespace SpaceMercs {
             }
         }
         public void DropItem(IItem it, int Count = 1) {
-            if (Inventory.ContainsKey(it)) {
-                if (Count > Inventory[it]) Count = Inventory[it];
-                PlayerTeam?.AddItem(it, Count);
-                Inventory[it] -= Count;
-                if (Inventory[it] <= 0) Inventory.Remove(it);
+            for (int i = 0; i < Count; i++) {
+                if (Inventory.Contains(it)) {
+                    PlayerTeam?.AddItem(it);
+                    Inventory.Remove(it);
+                }
             }
             CalculateMaxStats();
         }
         public void DropAll(IItem it) {
-            if (Inventory.ContainsKey(it)) {
-                PlayerTeam?.AddItem(it, Inventory[it]);
+            while (Inventory.Contains(it)) { 
+                PlayerTeam?.AddItem(it);
                 Inventory.Remove(it);
             }
             CalculateMaxStats();
         }
         public void DestroyItem(IItem it, int Count = 1) {
-            if (Inventory.ContainsKey(it)) {
-                if (Count > Inventory[it]) Count = Inventory[it];
-                Inventory[it] -= Count;
-                if (Inventory[it] <= 0) Inventory.Remove(it);
+            int tally = 0;
+            while (Inventory.Contains(it)) {
+                Inventory.Remove(it);
+                tally++;
+                if (tally >= Count) return;
             }
             CalculateMaxStats();
         }
         public void RemoveItemByType(ItemType it, int Count = 1) {
-            foreach (IEquippable eq in Inventory.Keys.Where(e => e is IEquippable)) {
+            int tally = 0;
+            foreach (IEquippable eq in Inventory.Where(e => e is IEquippable)) {
                 if (eq.BaseType == it) {
                     DestroyItem(eq);
-                    return;
+                    tally++;
+                    if (tally >= Count) return;
                 }
             }
         }
         public void AddItem(IItem it, int Count = 1) {
             if (it == null || Count < 1) return;
-            if (Inventory.ContainsKey(it)) Inventory[it] += Count;
-            else Inventory.Add(it, Count);
+            Inventory.AddRange(Enumerable.Repeat(it,Count));
             CalculateMaxStats();
         }
         public double BaseArmour {
@@ -938,7 +945,7 @@ namespace SpaceMercs {
             }
         }
         public bool HasItem(IItem it) {
-            return Inventory.ContainsKey(it);
+            return Inventory.Contains(it);
         }
         #endregion // Inventory
 
@@ -1231,7 +1238,7 @@ namespace SpaceMercs {
             return bonus;
         }
         public bool HasUtilityItems() {
-            foreach (IEquippable eq in Inventory.Keys.Where(e => e is IEquippable)) {
+            foreach (IEquippable eq in Inventory.Where(e => e is IEquippable)) {
                 ItemEffect? ie = eq.BaseType.ItemEffect;
                 if (ie is not null) {
                     if (ie.AssociatedSkill == UtilitySkill.Unspent || !ie.SkillRequired || GetUtilityLevel(ie.AssociatedSkill) > 0) {
@@ -1241,18 +1248,18 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public List<ItemType> GetUtilityItems() {
-            List<ItemType> lItems = new List<ItemType>();
-            foreach (IEquippable eq in Inventory.Keys.Where(e => e is IEquippable)) {
+        public IEnumerable<ItemType> GetUtilityItems() {
+            HashSet<ItemType> hsItems = new HashSet<ItemType>();
+            foreach (IEquippable eq in Inventory.Where(e => e is IEquippable)) {
                 if (eq is Weapon || eq is Armour) continue;
                 ItemEffect? ie = eq.BaseType.ItemEffect;
                 if (ie is not null) {
                     if (ie.AssociatedSkill == UtilitySkill.Unspent || !ie.SkillRequired || GetUtilityLevel(ie.AssociatedSkill) > 0) {
-                        if (!lItems.Contains(eq.BaseType)) lItems.Add(eq.BaseType);
+                        hsItems.Add(eq.BaseType);
                     }
                 }
             }
-            return lItems;
+            return hsItems;
         }
         public double DetectionRange {
             get {

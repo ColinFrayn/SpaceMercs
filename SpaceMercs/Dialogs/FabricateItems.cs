@@ -114,7 +114,7 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
-                foreach (IItem eq in s.InventoryRO.Keys.Where(x => !(x is Material))) {
+                foreach (IItem eq in s.InventoryGrouped.Keys.Where(x => !(x is Material))) {
                     if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
                     if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
@@ -123,7 +123,7 @@ namespace SpaceMercs.Dialogs {
                         arrRow[0] = eq.Name;
                         arrRow[1] = s.Name;
                         arrRow[2] = eq.Cost.ToString("N2");
-                        arrRow[3] = s.InventoryRO[eq].ToString();
+                        arrRow[3] = s.InventoryGrouped[eq].ToString();
                         dgInventory.Rows.Add(arrRow);
                         dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, eq, false);
                     }
