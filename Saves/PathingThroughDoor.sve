@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>11/01/2150 21:53:53</Clock>
+<Clock>12/01/2150 17:48:06</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -10395,9 +10395,301 @@
 <Colony>
  <BaseType>Outpost</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>0</LastUpdate>
+ <LastUpdate>678168508094060000</LastUpdate>
  <LastGrowth>678158784000000000</LastGrowth>
  <NextGrowth>678821472000000000</NextGrowth>
+ <Mercenaries>
+<Soldier Name="Charlotte Vale">
+ <Level>3</Level>
+ <XP>0</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>15,12,10,10,13</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Arm Plating" Material="Chitin" Level="0"/>
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Pistol" Level="1"/>
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Pistol">128</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">3</Exp>
+  <Exp Skill="Perception">1</Exp>
+ </UtilityExperience>
+</Soldier>
+ </Mercenaries>
+ <Missions>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1270970588" Diff="3">
+ <Name>Enemy Ship</Name>
+ <Hull>15</Hull>
+ <Shield>0</Shield>
+ <Seed>286907</Seed>
+ <Eqp ID="5" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>25.51</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1236139487</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1606468507" Diff="3">
+ <Name>Enemy Ship</Name>
+ <Hull>11</Hull>
+ <Shield>0</Shield>
+ <Seed>508944</Seed>
+ <Eqp ID="4" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>20.84</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1951905539</Seed>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1833409113" Diff="2">
+ <Name>Enemy Ship</Name>
+ <Hull>13</Hull>
+ <Shield>0</Shield>
+ <Seed>424267</Seed>
+ <Eqp ID="4" Active="True">Thrusters</Eqp>
+ <Eqp ID="3" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>12.94</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>273689719</Seed>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1546940710" Diff="3">
+ <Name>Enemy Ship</Name>
+ <Hull>13</Hull>
+ <Shield>0</Shield>
+ <Seed>677819</Seed>
+ <Eqp ID="6" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Cabin</Eqp>
+ <Eqp ID="5" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>20.48</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>98920104</Seed>
+</Mission>
+ </Missions>
+ <Inventory>
+  <Inv Count="2">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Acid Grenade"/>
+  </Inv>
+  <Inv Count="12">
+<Weapon Type="Shotgun" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Quad Shotgun" Level="0"/>
+  </Inv>
+  <Inv Count="18">
+<Weapon Type="Pistol" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Pistol" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Automatic Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="3"/>
+  </Inv>
+  <Inv Count="5">
+<Weapon Type="Laser Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Rifle" Level="1"/>
+  </Inv>
+  <Inv Count="7">
+<Weapon Type="Laser Pistol" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Sniper Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Sniper Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="7">
+<Weapon Type="Shortblade" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Axe" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Axe" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Power Axe" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Chainsword" Level="0"/>
+  </Inv>
+  <Inv Count="14">
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="8">
+<Armour Type="Cap" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="5">
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Aeromesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Aeromesh" Level="2"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Helmet" Material="Carbon Fibre" Level="2"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="4">
+<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Full Armour" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Full Armour" Material="Steel" Level="3"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Shock Armour" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="4">
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Steel" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Gloves" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Heavy Chitin" Level="0"/>
+  </Inv>
+ </Inventory>
 </Colony>
 <TempBase>216.08790832754056</TempBase>
 <Type>Gas</Type>
@@ -64669,17 +64961,18 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)5.0</Pos>
- <Cash>200.40142126312082</Cash>
+ <Pos>(0,0)5.1</Pos>
+ <Cash>21.048160393555605</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="43" Y="10"/>
+ <OnMission/>
+ <Location X="35" Y="22"/>
  <Health>27</Health>
- <Stamina>1.3559196831624423</Stamina>
+ <Stamina>20.21381526275479</Stamina>
  <Shields>0</Shields>
- <Facing>11.3099324740202</Facing>
+ <Facing>0</Facing>
  <Level>5</Level>
- <XP>12042</XP>
+ <XP>12072</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,17</Stats>
@@ -64687,6 +64980,9 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="1"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -64711,13 +65007,14 @@
  <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="48" Y="11"/>
+ <OnMission/>
+ <Location X="43" Y="18"/>
  <Health>30</Health>
- <Stamina>0</Stamina>
+ <Stamina>26</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>90</Facing>
  <Level>4</Level>
- <XP>7643</XP>
+ <XP>7673</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,16,12</Stats>
@@ -64731,9 +65028,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Steel"/>
@@ -64757,16 +65051,16 @@
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="39" Y="10"/>
+ <OnMission/>
+ <Location X="35" Y="23"/>
  <Health>26</Health>
- <Stamina>21</Stamina>
+ <Stamina>1</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>270</Facing>
  <Level>4</Level>
- <XP>6715</XP>
+ <XP>6745</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>17,13,12,12,7</Stats>
@@ -64785,7 +65079,7 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">58</Exp>
+  <Exp Type="Powerblade">61</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -64793,15 +65087,17 @@
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="42" Y="10"/>
+ <OnMission/>
+ <Location X="32" Y="25"/>
  <Health>25</Health>
- <Stamina>8.2</Stamina>
+ <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>9.462322208025626</Facing>
+ <Facing>0</Facing>
  <Level>3</Level>
- <XP>4195</XP>
+ <XP>4225</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,15,12,15</Stats>
@@ -64832,12 +65128,11 @@
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
  </Soldiers>
 <Ship Type="Shuttle">
  <Name>Player Ship</Name>
- <Hull>13</Hull>
+ <Hull>1.958432515023909</Hull>
  <Shield>0</Shield>
  <Armour>Reinforced Plating</Armour>
  <Seed>779812</Seed>
@@ -64846,6 +65141,7 @@
  <Eqp ID="2" Active="True">Cabin</Eqp>
  <Eqp ID="3" Active="True">Cabin</Eqp>
  <Eqp ID="5" Active="True">Rail Gun</Eqp>
+ <Eqp ID="6" Active="True">Fusion Drive</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
@@ -64867,6 +65163,62 @@
 <Material Type="Steel"/>
   </Inv>
  </Inventory>
+<Mission>
+ <Type>RepelBoarders</Type>
+ <Goal>KillAll</Goal>
+<Ship Type="Shuttle">
+ <Name>Player Ship</Name>
+ <Hull>1.958432515023909</Hull>
+ <Shield>0</Shield>
+ <Armour>Reinforced Plating</Armour>
+ <Seed>779812</Seed>
+ <Eqp ID="0" Active="True">Fission Core</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="5" Active="True">Rail Gun</Eqp>
+ <Eqp ID="6" Active="True">Fusion Drive</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Level ID="0">
+<MissionLevel Width="77" Height="37">
+ <Diff>3</Diff>
+ <Level>0</Level>
+ <Start X="18" Y="20"/>
+ <End X="-1" Y="-1"/>
+ <Map>DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBBBDDDDDDDDDBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBGGBBBBAABBBBBBBBBBBAABBIIBBBBBAABBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAAAAAAAAAAAAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAAAAAAAAAAAAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABBBBBBBBBAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAABAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBAAABAAAAAAABAAABBBBBBGGBAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDBEBAAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBAAAAAAAAAAAAAABAAAAAAABAAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBGGBAAABAAAAAAAFAAABBBBBBBBBAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAFAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABBIIBBBBBAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAABAAAAAAAAAAAAAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAABAAAAAAAAAAAAAAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBAABBBBBBBBBBBAABBGGBBBBBAABBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDBAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBBBDDDDDDDDDBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</Map>
+ <Explored>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111100000001111000000000111111111111111000000000000000000000000000000000000001111000000011110000000001111111111111110000000000000000000000000000000000000011110000000111100000000011111111111111100000000000000000000000000000000000000111100000001111111111111111111111111111000000000000000000000000000000000000001111000000011111111111111111111111110000000000000000000000000000000000000000011110000000111111111111111111111111100000000000000000000000000000000000000000111100000001111111111111111111111111000000000000000000000000000000000000000001111000000011111111111111111111111110000000000000000000000000000000000000000011111111111111111111111111111111111100000000000000000000000000000000000000001111111111111111111111111111111111111111100000000000000000000000000000000000011111111111111111111111111111111111111111000000000000000000000000000000000000111111111111111111111111111111111111111110000000000000000000000000000000000000111111111111111111111111111111111111111100000000000000000000000000000000000001111000000011111111111111111000000000000000000000000000000000000000000000000011110000000111111111111111110000000000000000000000000000000000000000000000000111100000001111111111111111100000000000000000000000000000000000000000000000001111000000011111111111111111000000000000000000000000000000000000000000000000011111111111111111111111111111000000000000000000000000000000000000000000000000111111111111111000000000111110000000000000000000000000000000000000000000000001111111111111110000000001111111000000000000000000000000000000000000000000000011111111111111100000000011111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Mercenary">
+ <Location X="51" Y="19"/>
+ <Level>4</Level>
+ <Facing>162</Facing>
+ <OverrideRace>Human</OverrideRace>
+ <Weapon>Powerblade</Weapon>
+</Creature>
+<Creature Type="Elite Pirate">
+ <Location X="55" Y="20"/>
+ <Level>4</Level>
+ <Facing>347</Facing>
+ <OverrideRace>Human</OverrideRace>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="35" Y="22">
+<StashItem N="1">
+<Corpse Type="Pirate" Level="2"/>
+</StashItem>
+</Stash>
+</Stashes>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">
@@ -64899,4 +65251,14 @@
 <Relations>0</Relations>
 </Race>
 </Races>
+<Travel>
+<AOFrom>(0,0)5.1</AOFrom>
+<AOTo>(0,0)5.3</AOTo>
+<Time>53658.723</Time>
+<Elapsed>42000</Elapsed>
+<MissionElapsed>0</MissionElapsed>
+<EncounterCount>1</EncounterCount>
+<Start>678168928860000000</Start>
+<Sep>4000</Sep>
+</Travel>
 </SpaceMercsSaveFile>

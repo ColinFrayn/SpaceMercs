@@ -169,7 +169,38 @@ namespace SpaceMercs.MainWindow {
                 TravelDetails.ResumeTravelling();
             }
         }
+        private void MissionClockTick() {
+            // Soldiers auto moving
+            List<Soldier> lSoldiers = new List<Soldier>(ThisMission.Soldiers); // In case any die in the middle of the loop
+            foreach (Soldier s in lSoldiers) {
+                if (s.GoTo == s.Location) s.GoTo = Point.Empty;
+                if (s.GoTo != Point.Empty) {
+                    if (s.TravelRange == 0) { s.GoTo = Point.Empty; continue; } // May happen if something that occurs during movement alters stamina / movement points remaining
+                    List<Point>? path = CurrentLevel.ShortestPath(s, s.Location, s.GoTo, 20, true, 0);
+                    if (path is null || path.Count == 0) { s.GoTo = Point.Empty; continue; }  // e.g. if some other soldier moved in the way and blocked the route
 
+                    // Open any door in the way
+                    if (CurrentLevel.Map[path[0].X, path[0].Y] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[path[0].X, path[0].Y] == MissionLevel.TileType.DoorVertical) {
+                        OpenDoor(path[0].X, path[0].Y, s);
+                        continue;
+                    }
+
+                    // Step along the path
+                    if (path[0].X == s.X && path[0].Y == s.Y + 1) MoveSoldier(s, Utils.Direction.North);
+                    else if (path[0].X == s.X && path[0].Y == s.Y - 1) MoveSoldier(s, Utils.Direction.South);
+                    else if (path[0].Y == s.Y && path[0].X == s.X - 1) MoveSoldier(s, Utils.Direction.West);
+                    else if (path[0].Y == s.Y && path[0].X == s.X + 1) MoveSoldier(s, Utils.Direction.East);
+                    else throw new Exception("Next path point is not adjacent to soldier!");
+
+                    if (SelectedEntity == s) { // Soldier is still alive and selected
+                        if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
+                            lCurrentPath = CurrentLevel.ShortestPath(SelectedEntity, SelectedEntity.Location, new Point(hoverx, hovery), 20, true);
+                        }
+                        else lCurrentPath = null;
+                    }
+                }
+            }
+        }
         private void DrawMission() {
             if (!bLoaded || ThisMission is null) return;
             if (SelectedEntity is Soldier s && s.PlayerTeam is null) {
@@ -379,15 +410,7 @@ namespace SpaceMercs.MainWindow {
                     if (s != null && oHover is not null && gpSelect.HoverItem!.Enabled) {
                         int iSelectHover = gpSelect.HoverID;
                         if (iSelectHover == I_OpenDoor) {
-                            CurrentLevel.OpenDoor(gpSelect.ClickX, gpSelect.ClickY);
-                            SoundEffects.PlaySound("OpenDoor");
-                            GenerateDistMap(s);
-                            s.UpdateVisibility(CurrentLevel);
-                            CurrentLevel.CalculatePlayerVisibility();
-                            GenerateDetectionMap();
-                            if (UpdateDetectionForSoldier(s)) {
-                                msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
-                            }
+                            OpenDoor(gpSelect.ClickX, gpSelect.ClickY, s);
                         }
                         if (iSelectHover == I_CloseDoor) {
                             if (CurrentLevel.CloseDoor(gpSelect.ClickX, gpSelect.ClickY)) {
@@ -720,6 +743,17 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             throw new Exception("Couldn't identify tab soldier");
+        }
+        private void OpenDoor(int x, int y, Soldier s) {
+            CurrentLevel.OpenDoor(x, y);
+            SoundEffects.PlaySound("OpenDoor");
+            GenerateDistMap(s);
+            s.UpdateVisibility(CurrentLevel);
+            CurrentLevel.CalculatePlayerVisibility();
+            GenerateDetectionMap();
+            if (UpdateDetectionForSoldier(s)) {
+                msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
+            }
         }
 
         // Menu handlers
