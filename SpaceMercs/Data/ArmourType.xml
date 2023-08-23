@@ -125,7 +125,7 @@
   </ArmourType>
   <ArmourType Name="Powered Leg Plating">
     <Mass>5.0</Mass>
-    <Cost>50</Cost>
+    <Cost>75</Cost>
     <Rarity>25</Rarity>
     <BaseArmour>5</BaseArmour>
     <Speed>1.1</Speed>
@@ -153,7 +153,7 @@
   </ArmourType>
   <ArmourType Name="Shock Armour">
     <Mass>8.0</Mass>
-    <Cost>70</Cost>
+    <Cost>90</Cost>
     <Rarity>40</Rarity>
     <Agility>-3</Agility>
     <BaseArmour>15</BaseArmour>
@@ -170,7 +170,7 @@
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
-    <Cost>50</Cost>
+    <Cost>70</Cost>
     <Rarity>40</Rarity>
     <Agility>-1</Agility>
     <Utility>
@@ -269,7 +269,7 @@
   </ArmourType>
   <ArmourType Name="Power Armour">
     <Mass>30.0</Mass>
-    <Cost>250</Cost>
+    <Cost>350</Cost>
     <Rarity>50</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
@@ -292,7 +292,7 @@
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
     <Mass>60.0</Mass>
-    <Cost>500</Cost>
+    <Cost>1200</Cost>
     <Rarity>60</Rarity>
     <Agility>-8</Agility>
     <Strength>8</Strength>
@@ -305,7 +305,7 @@
       <Bonus Type="Poison" Amount="50"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
-    <Desc>A heavy powered full-body armour</Desc>
+    <Desc>A heavy powered full-body Terminator armour set</Desc>
     <Materials>
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="2"/>
@@ -313,9 +313,32 @@
       <Material Name="Aluminium" Amount="2"/>
     </Materials>
   </ArmourType>
+  <ArmourType Name="Assault Power Armour">
+    <Mass>25.0</Mass>
+    <Cost>1050</Cost>
+    <Rarity>65</Rarity>
+    <Agility>-4</Agility>
+    <Strength>5</Strength>
+    <Speed>1.1</Speed>
+    <Attack>2</Attack>
+    <BaseArmour>32</BaseArmour>
+    <BonusArmour>
+      <Bonus Type="Fire" Amount="25"/>
+      <Bonus Type="Cold" Amount="25"/>
+      <Bonus Type="Poison" Amount="25"/>
+    </BonusArmour>
+    <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
+    <Desc>A powered full-body armour with articulated joints to enable movement and agility.</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Copper" Amount="3"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+    </Materials>
+  </ArmourType>
   <ArmourType Name="Shielded Power Armour">
     <Mass>35.0</Mass>
-    <Cost>600</Cost>
+    <Cost>1300</Cost>
     <Rarity>70</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>

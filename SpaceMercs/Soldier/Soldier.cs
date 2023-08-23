@@ -27,7 +27,7 @@ namespace SpaceMercs {
         public Point GoTo { get; set; }
         public bool OnMission { get; set; }
         private readonly Random rnd;
-        private bool bHasMoved = false;
+        public bool HasMoved { get; private set; } = false;
 
         // IEntity Stuff
         public int X { get; private set; }
@@ -328,7 +328,7 @@ namespace SpaceMercs {
         public bool MeleeWeaponEquipped { get { return (EquippedWeapon != null && EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
         public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost * (1.0 + Encumbrance)); } }
-        public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; if (bHasMoved && EquippedWeapon.Type.Stable) return 999.0; return EquippedWeapon.StaminaCost * (1.0 + Encumbrance); } }
+        public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost * (1.0 + Encumbrance); } }
         public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost * (1.0 + Encumbrance)); } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
@@ -544,7 +544,7 @@ namespace SpaceMercs {
             }
             else PrimaryColor = Color.Blue;
 
-            bHasMoved = (xml.SelectSingleNode("Moved") != null);
+            HasMoved = (xml.SelectSingleNode("Moved") != null);
 
             XmlNode? xg = xml.SelectSingleNode("GoTo");
             if (xg is not null) {
@@ -707,7 +707,7 @@ namespace SpaceMercs {
                 file.WriteLine(" </Effects>");
             }
 
-            if (bHasMoved) file.WriteLine(" <Moved/>");
+            if (HasMoved) file.WriteLine(" <Moved/>");
 
             file.WriteLine("</Soldier>");
         }
@@ -992,7 +992,7 @@ namespace SpaceMercs {
                 }
             }
             if (Stamina < oldStamina) {
-                bHasMoved = true;
+                HasMoved = true;
                 return true;
             }
             return false;
@@ -1013,7 +1013,7 @@ namespace SpaceMercs {
             }
 
             Stamina -= AttackCost;
-            bHasMoved = true;
+            HasMoved = true;
 
             // Rotate soldier
             float dx = X - tx;
@@ -1048,7 +1048,7 @@ namespace SpaceMercs {
             return true;
         }
         private bool AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
-            bHasMoved = true;
+            HasMoved = true;
             double hit = Utils.GenerateHitRoll(this, en);
             if (hit <= 0.0) {
                 if (en is Creature cre) cre.CheckChangeTarget(0.0, this);
@@ -1125,10 +1125,10 @@ namespace SpaceMercs {
             }
 
             CalculateMaxStats(); // Just in case
-            bHasMoved = false;
+            HasMoved = false;
         }
         public List<string> PerformSearch(MissionLevel level) {
-            bHasMoved = true;
+            HasMoved = true;
             Stamina -= SearchCost;
             List<string> lFound = new List<string>();
             int rad = SearchRadius;
@@ -1198,7 +1198,7 @@ namespace SpaceMercs {
                 if (recharge > 0) eq.SetRecharge(recharge);
             }
             Stamina -= UseItemCost;
-            bHasMoved = true;
+            HasMoved = true;
         }
         public void StopMission() {
             OnMission = false;

@@ -182,7 +182,7 @@ namespace SpaceMercs {
         public const double AutomataSurfaceFract = 0.3;
         public const int MinimumCreatureDistanceFromStartLocation = 10;
         public const double CreatureCountExponent = 0.82;  // Scale creature count as level area ^ This
-        public const double CreatureCountScale = 30.0;   // Divide creature count ^ Exponent by (this-2N)
+        public const double CreatureCountScale = 50.0;   // Divide scaled creature count ^ Exponent by (this-2N)
 
         // Map viewer settings
         public const double MinAngSize = 0.004; // View settings

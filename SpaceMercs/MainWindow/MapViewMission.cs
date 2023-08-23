@@ -942,7 +942,7 @@ namespace SpaceMercs.MainWindow {
                     gbSearch!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
                     if (bAIRunning) gbInventory.Deactivate();
                     else gbInventory.Activate();
-                    if (s.Stamina < s.AttackCost || s.GoTo != Point.Empty || bAIRunning) gbAttack.Deactivate();
+                    if (s.Stamina < s.AttackCost || s.GoTo != Point.Empty || bAIRunning || (s.HasMoved && s.EquippedWeapon?.Type?.Stable == true)) gbAttack.Deactivate();
                     else gbAttack.Activate();
                     if (s.Stamina < s.SearchCost || s.GoTo != Point.Empty || bAIRunning) gbSearch.Deactivate();
                     else gbSearch.Activate();
@@ -1281,11 +1281,15 @@ namespace SpaceMercs.MainWindow {
                 }
                 // Attack a creature
                 else if (en is Creature) {
-                    TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+                    TexSpecs tsa = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+                    TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
                     bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
-                    if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
-                    gpSelect.InsertIconItem(I_Attack, ts, bEnabled, null);
+                    if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
+                    if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Stable && s.HasMoved) {
+                        gpSelect.InsertIconItem(I_Attack, tsm, false, null);
+                    }
+                    else gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
                 }
             }
 
