@@ -867,6 +867,11 @@ namespace SpaceMercs {
         }
 
         // Add entities to the map
+        public void AddSoldiers(IEnumerable<Soldier> soldiers) {
+            foreach (Soldier s in soldiers) {
+                AddSoldier(s);
+            }
+        }
         public void AddSoldier(Soldier s) {
             if (ParentMission.Type == Mission.MissionType.RepelBoarders) {
                 AddSoldierInRandomRoom(s);
@@ -989,7 +994,7 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (ParentMission.Soldiers.Count + 1) / Const.CreatureCountScale);
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (ParentMission.Soldiers.Count + 1) * Const.CreatureCountScale) / 10000;
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
@@ -1757,13 +1762,12 @@ namespace SpaceMercs {
             for (int x = 0; x < Width; x++) {
                 for (int y = 0; y < Height; y++) {
                     Visible[x, y] = false;
-                    foreach (Soldier s in ParentMission.Soldiers) {
+                    foreach (Soldier s in Soldiers) {
                         Visible[x, y] |= s.CanSee(x, y);
                         Explored[x, y] |= s.CanSee(x, y);
                     }
                 }
             }
-//            UpdateTileVertexArray();
         }
         public bool[,] CalculateVisibilityFromEntity(IEntity en) {
             // This is crazily inefficient. If it turns out that it's too slow then I'll have to do it more efficiently somehow

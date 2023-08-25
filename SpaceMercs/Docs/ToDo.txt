@@ -8,8 +8,6 @@ Display system population on map view. Where? New toggle option?
 
 Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
-When pathing through a door, open it. PathingThroughDoor.sve
-
 ==========================================================================================================
 
 

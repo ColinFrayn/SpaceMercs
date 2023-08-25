@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>13/01/2150 08:43:13</Clock>
+<Clock>13/01/2150 08:43:49</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -10906,19 +10906,6 @@
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
  <Seed>1383754141</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>KillBoss</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>35.757</Reward>
- <Diff>4</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1324534258</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
@@ -65284,16 +65271,16 @@
 </Map>
 <Team>
  <Pos>(0,0)5.3</Pos>
- <Cash>137.54527652965416</Cash>
+ <Cash>173.30227652965416</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="55" Y="24"/>
- <Health>22.15921916752722</Health>
- <Stamina>27.129204075955293</Stamina>
+ <Location X="28" Y="18"/>
+ <Health>27</Health>
+ <Stamina>32</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>5</Level>
- <XP>12181</XP>
+ <XP>12684</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,17</Stats>
@@ -65304,6 +65291,9 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -65318,23 +65308,22 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">221</Exp>
+  <Exp Type="Automatic Rifle">225</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
   <Exp Skill="Perception">3</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="48" Y="18"/>
+ <Location X="20" Y="2"/>
  <Health>30</Health>
- <Stamina>26</Stamina>
+ <Stamina>2</Stamina>
  <Shields>0</Shields>
- <Facing>360</Facing>
+ <Facing>-90</Facing>
  <Level>4</Level>
- <XP>7782</XP>
+ <XP>8285</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,16,12</Stats>
@@ -65371,15 +65360,16 @@
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="49" Y="18"/>
- <Health>26</Health>
- <Stamina>21</Stamina>
+ <Location X="13" Y="4"/>
+ <Health>6.482593367787643</Health>
+ <Stamina>2.176470588235294</Stamina>
  <Shields>0</Shields>
  <Facing>-90</Facing>
  <Level>4</Level>
- <XP>6854</XP>
+ <XP>7357</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>17,13,12,12,7</Stats>
@@ -65387,6 +65377,9 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Axe" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -65398,7 +65391,7 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">62</Exp>
+  <Exp Type="Powerblade">63</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -65406,15 +65399,16 @@
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="47" Y="19"/>
+ <Location X="11" Y="22"/>
  <Health>25</Health>
  <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>274.76364169072616</Facing>
  <Level>3</Level>
- <XP>4334</XP>
+ <XP>4837</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,15,12,15</Stats>
@@ -65438,7 +65432,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">69</Exp>
+  <Exp Type="Sniper Rifle">81</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>

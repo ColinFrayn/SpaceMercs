@@ -67,23 +67,23 @@ namespace SpaceMercs.MainWindow {
             bool bInProgress = m.Soldiers.Any();
             ThisMission = m;
             if (!bInProgress) ThisMission.Initialise();
-            CurrentLevel = ThisMission.GetOrCreateCurrentLevel();
 
             // Choose the soldiers to deploy
             if (!bInProgress) {
-                ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, CurrentLevel.MaximumSoldiers, bCanAbort);
+                ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, ThisMission.MaximumSoldiers, bCanAbort);
                 cs.ShowDialog();
                 if (cs.Soldiers.Count == 0) {
                     MissionOutcome = MissionResult.Aborted;
                     ThisMission = null;
                     return false;
                 }
-                foreach (Soldier s in cs.Soldiers) {
-                    CurrentLevel.AddSoldier(s);
-                }
+                ThisMission.AddSoldiers(cs.Soldiers);
+                CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Create here as the number of creatures depends on the number of soldiers deployed in the mission
+                CurrentLevel.AddSoldiers(cs.Soldiers); // Add them at the correct starting location, or in a room if ship defence
                 Random rnd = new Random();
                 Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
             }
+            else CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Should definitely exist, so should return from cache
 
             // Force buttons to reinitialise to relink new soldiers
             bGUIButtonsInitialised = false; 
@@ -171,7 +171,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void MissionClockTick() {
             // Soldiers auto moving
-            List<Soldier> lSoldiers = new List<Soldier>(ThisMission.Soldiers); // In case any die in the middle of the loop
+            List<Soldier> lSoldiers = new List<Soldier>(ThisMission!.Soldiers); // In case any die in the middle of the loop
             foreach (Soldier s in lSoldiers) {
                 if (s.GoTo == s.Location) s.GoTo = Point.Empty;
                 if (s.GoTo != Point.Empty) {

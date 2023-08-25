@@ -22,6 +22,7 @@ namespace SpaceMercs {
         public int CurrentLevel { get; private set; }
         public bool IsShipMission { get { if (Type == MissionType.Surface || Type == MissionType.Caves || Type == MissionType.Mines || Type == MissionType.AbandonedCity) return false; else return true; } }
         public bool IsTacticalMission { get { if (Type == MissionType.Repair || Type == MissionType.Salvage || Type == MissionType.Ignore || Type == MissionType.ShipCombat) return false; else return true; } }
+        public int MaximumSoldiers { get { if (Levels.ContainsKey(CurrentLevel) && Levels[CurrentLevel] != null) return Levels[CurrentLevel].MaximumSoldiers; return 4; } }
         public string Summary {
             get {
                 switch (Type) {
@@ -385,6 +386,11 @@ namespace SpaceMercs {
         public void SetCreatureTargets() {
             foreach (MissionLevel lev in Levels.Values) {
                 lev.SetCreatureTargets();
+            }
+        }
+        public void AddSoldiers(IEnumerable<Soldier> soldiers) {
+            foreach (Soldier s in soldiers) {
+                if (!Soldiers.Contains(s)) Soldiers.Add(s);
             }
         }
         #endregion // Create Msision
