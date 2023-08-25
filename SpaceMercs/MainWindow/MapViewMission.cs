@@ -45,6 +45,7 @@ namespace SpaceMercs.MainWindow {
         private VertexArray? vaGrid = null, vaPath = null;
         private IndexBuffer? ibGrid = null;
         private HashSet<Soldier> lastSoldiers = new HashSet<Soldier>();
+        private object oInitialiseLock = new object();
 
         // GUIPanel actions
         public const uint I_OpenDoor = 10001;
@@ -68,6 +69,9 @@ namespace SpaceMercs.MainWindow {
             ThisMission = m;
             if (!bInProgress) ThisMission.Initialise();
 
+            // Force buttons to reinitialise to relink new soldiers
+            bGUIButtonsInitialised = false;
+
             // Choose the soldiers to deploy
             if (!bInProgress) {
                 ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, ThisMission.MaximumSoldiers, bCanAbort);
@@ -84,9 +88,6 @@ namespace SpaceMercs.MainWindow {
                 Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
             }
             else CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Should definitely exist, so should return from cache
-
-            // Force buttons to reinitialise to relink new soldiers
-            bGUIButtonsInitialised = false; 
 
             // Centre around the first soldier
             CentreView(ThisMission.Soldiers[0]);
@@ -1007,66 +1008,68 @@ namespace SpaceMercs.MainWindow {
             gpSubMenu?.GetItem(I_Options)?.Disable();
             gpSubMenu?.GetItem(I_Mission)?.Enable();
             // Initialise all on startup
-            if (!bGUIButtonsInitialised) {
-                lButtons.Clear();
+            lock (oInitialiseLock) {
+                if (!bGUIButtonsInitialised) {
+                    lButtons.Clear();
 
-                // ZoomTo buttons
-                SetupZoomToButtons();
+                    // ZoomTo buttons
+                    SetupZoomToButtons();
 
-                // Direction Control buttons
-                TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Left);
-                gbWest = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
-                lButtons.Add(gbWest);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Right);
-                gbEast = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
-                lButtons.Add(gbEast);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Up);
-                gbNorth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
-                lButtons.Add(gbNorth);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Down);
-                gbSouth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
-                lButtons.Add(gbSouth);
+                    // Direction Control buttons
+                    TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Left);
+                    gbWest = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
+                    lButtons.Add(gbWest);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Right);
+                    gbEast = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
+                    lButtons.Add(gbEast);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Up);
+                    gbNorth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
+                    lButtons.Add(gbNorth);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Down);
+                    gbSouth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
+                    lButtons.Add(gbSouth);
 
-                // Misc controls
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
-                gbAttack = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierAttack, null);
-                lButtons.Add(gbAttack);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-                gbUseItem = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierUseItems, null);
-                lButtons.Add(gbUseItem);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
-                gbInventory = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierInventory, null);
-                lButtons.Add(gbInventory);
-                ts = Textures.GetTexCoords(Textures.MiscTexture.Search);
-                gbSearch = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierSearch, null);
-                lButtons.Add(gbSearch);
+                    // Misc controls
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
+                    gbAttack = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierAttack, null);
+                    lButtons.Add(gbAttack);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
+                    gbUseItem = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierUseItems, null);
+                    lButtons.Add(gbUseItem);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
+                    gbInventory = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierInventory, null);
+                    lButtons.Add(gbInventory);
+                    ts = Textures.GetTexCoords(Textures.MiscTexture.Search);
+                    gbSearch = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierSearch, null);
+                    lButtons.Add(gbSearch);
 
-                // Other buttons
-                gbEndTurn = new GUIButton("End Turn", this, EndTurn);
-                gbEndTurn.Activate();
-                gbEndTurn.SetPosition(0.45f, 0.93f);
-                gbEndTurn.SetSize(0.09f, 0.05f);
-                gbEndTurn.SetBlend(true);
+                    // Other buttons
+                    gbEndTurn = new GUIButton("End Turn", this, EndTurn);
+                    gbEndTurn.Activate();
+                    gbEndTurn.SetPosition(0.45f, 0.93f);
+                    gbEndTurn.SetSize(0.09f, 0.05f);
+                    gbEndTurn.SetBlend(true);
 
-                gbTransition = new GUIButton("Transition", this, Transition);
-                gbTransition.SetPosition(0.34f, 0.93f);
-                gbTransition.SetSize(0.09f, 0.05f);
-                gbTransition.SetBlend(true);
+                    gbTransition = new GUIButton("Transition", this, Transition);
+                    gbTransition.SetPosition(0.34f, 0.93f);
+                    gbTransition.SetSize(0.09f, 0.05f);
+                    gbTransition.SetBlend(true);
 
-                gbEndMission = new GUIButton("End Mission", this, EndMission);
-                gbEndMission.SetPosition(0.56f, 0.93f);
-                gbEndMission.SetSize(0.09f, 0.05f);
-                gbEndMission.SetBlend(true);
+                    gbEndMission = new GUIButton("End Mission", this, EndMission);
+                    gbEndMission.SetPosition(0.56f, 0.93f);
+                    gbEndMission.SetSize(0.09f, 0.05f);
+                    gbEndMission.SetBlend(true);
 
-                // Done
-                bGUIButtonsInitialised = true;
+                    // Done
+                    bGUIButtonsInitialised = true;
 
-                // Set button state as required
-                CheckForTransition();
+                    // Set button state as required
+                    CheckForTransition();
+                }
             }
 
             // Switch control buttons on/off when required
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) {
+            if (SelectedEntity == null || SelectedEntity is not Soldier) {
                 gbWest?.Deactivate();
                 gbEast?.Deactivate();
                 gbNorth?.Deactivate();
@@ -1093,23 +1096,23 @@ namespace SpaceMercs.MainWindow {
             if (ThisMission.Soldiers.Count >= 1) {
                 if (gbZoomTo1 == null || gbZoomTo1.InternalData != ThisMission.Soldiers[0]) {
                     gbZoomTo1 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0f, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[0]);
-                    if (!lButtons.Contains(gbZoomTo1)) lButtons.Add(gbZoomTo1);
                 }
+                if (!lButtons.Contains(gbZoomTo1)) lButtons.Add(gbZoomTo1);
                 if (ThisMission.Soldiers.Count >= 2) {
                     if (gbZoomTo2 == null || gbZoomTo2.InternalData != ThisMission.Soldiers[1]) {
                         gbZoomTo2 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0f, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[1]);
-                        if (!lButtons.Contains(gbZoomTo2)) lButtons.Add(gbZoomTo2);
                     }
+                    if (!lButtons.Contains(gbZoomTo2)) lButtons.Add(gbZoomTo2);
                     if (ThisMission.Soldiers.Count >= 3) {
                         if (gbZoomTo3 == null || gbZoomTo3.InternalData != ThisMission.Soldiers[2]) {
                             gbZoomTo3 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0f, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[2]);
-                            if (!lButtons.Contains(gbZoomTo3)) lButtons.Add(gbZoomTo3);
                         }
+                        if (!lButtons.Contains(gbZoomTo3)) lButtons.Add(gbZoomTo3);
                         if (ThisMission.Soldiers.Count >= 4) {
                             if (gbZoomTo4 == null || gbZoomTo4.InternalData != ThisMission.Soldiers[3]) {
                                 gbZoomTo4 = new GUIIconButton(this, ts, 0.99f - (ButtonSize + FrameBorder), 0f, ButtonSize, ButtonSize, ZoomToSoldier, ThisMission.Soldiers[3]);
-                                if (!lButtons.Contains(gbZoomTo4)) lButtons.Add(gbZoomTo4);
                             }
+                            if (!lButtons.Contains(gbZoomTo4)) lButtons.Add(gbZoomTo4);
                         }
                     }
                 }
