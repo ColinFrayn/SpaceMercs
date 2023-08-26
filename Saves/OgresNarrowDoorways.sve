@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>14/01/2150 01:52:06</Clock>
+<Clock>14/01/2150 16:29:04</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -10831,6 +10831,19 @@
 <Temp>179</Temp>
 <Seed>8283543</Seed>
 <Type>Volcanic</Type>
+ <Missions>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>24.57</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>848724023</Seed>
+</Mission>
+ </Missions>
 </Moon>
 <Moon ID="1">
 <Name>Unnamed</Name>
@@ -10841,6 +10854,44 @@
 <Temp>138</Temp>
 <Seed>6625378</Seed>
 <Type>Rocky</Type>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Rock Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>189.98</Reward>
+ <Diff>7</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>29626777</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Ogres</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>200.08</Reward>
+ <Diff>6</Diff>
+ <LevelCount>3</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1629499894</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillBoss</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>31.005000000000003</Reward>
+ <Diff>4</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>649392752</Seed>
+</Mission>
+ </Missions>
 </Moon>
 <Moon ID="2">
 <Name>Unnamed</Name>
@@ -65366,17 +65417,17 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)5.0</Pos>
- <Cash>82.54264096626297</Cash>
+ <Pos>(0,0)5.2.1</Pos>
+ <Cash>135.20264096626295</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="39" Y="11"/>
- <Health>23.092267807825007</Health>
+ <Location X="33" Y="23"/>
+ <Health>23.97481370767159</Health>
  <Stamina>32</Stamina>
  <Shields>0</Shields>
- <Facing>143.13010235415598</Facing>
+ <Facing>-90</Facing>
  <Level>5</Level>
- <XP>13325</XP>
+ <XP>15088</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,17</Stats>
@@ -65398,22 +65449,21 @@
 <Weapon Type="Automatic Rifle" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">234</Exp>
+  <Exp Type="Automatic Rifle">244</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
-  <Exp Skill="Perception">3</Exp>
-  <Exp Skill="Unspent">1</Exp>
+  <Exp Skill="Perception">4</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="38" Y="11"/>
- <Health>30</Health>
- <Stamina>26</Stamina>
+ <Location X="34" Y="17"/>
+ <Health>11.078227787049265</Health>
+ <Stamina>16</Stamina>
  <Shields>0</Shields>
- <Facing>135</Facing>
+ <Facing>-90</Facing>
  <Level>4</Level>
- <XP>8926</XP>
+ <XP>10689</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,16,12</Stats>
@@ -65424,9 +65474,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -65441,21 +65488,23 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">135</Exp>
+  <Exp Type="Quad Shotgun">10</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="32" Y="20"/>
- <Health>11.608666139929142</Health>
- <Stamina>18.647058823529413</Stamina>
+ <Location X="24" Y="14"/>
+ <Health>19.325901739485708</Health>
+ <Stamina>21</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>0</Facing>
  <Level>4</Level>
- <XP>7998</XP>
+ <XP>9761</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>17,13,12,12,7</Stats>
@@ -65474,27 +65523,26 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">71</Exp>
+  <Exp Type="Powerblade">86</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
-  <Exp Skill="Unspent">1</Exp>
+  <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="37" Y="11"/>
- <Health>25</Health>
- <Stamina>28</Stamina>
+ <Location X="31" Y="14"/>
+ <Health>16.607244950058075</Health>
+ <Stamina>29</Stamina>
  <Shields>0</Shields>
- <Facing>119.05460409907714</Facing>
- <Level>3</Level>
- <XP>5478</XP>
+ <Facing>0</Facing>
+ <Level>4</Level>
+ <XP>7241</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>9,9,15,12,15</Stats>
+ <Stats>9,9,16,12,15</Stats>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
@@ -65515,10 +65563,10 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">86</Exp>
+  <Exp Type="Sniper Rifle">104</Exp>
  </WeaponExperience>
  <UtilityExperience>
-  <Exp Skill="Gunsmith">2</Exp>
+  <Exp Skill="Gunsmith">3</Exp>
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
@@ -65562,6 +65610,9 @@
   </Inv>
   <Inv Count="1">
 <Weapon Type="Shotgun" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<MissionItem Mass="0.90" Cost="4.38">Glowing Egg</MissionItem>
   </Inv>
  </Inventory>
 </Team>

@@ -662,7 +662,7 @@ namespace SpaceMercs {
         private void GenerateDungeonMap(bool bMines = false) {
             int niter = 0;
             RoomMap = new int[Width, Height];
-            int nRooms = 0, MinRooms;
+            int nRooms, MinRooms;
 
             do { // We may have to try this multiple times because the algo is tricky and stochastic.
                  // Clear the dungeon
@@ -682,7 +682,7 @@ namespace SpaceMercs {
                 if (bMines) MinRooms /= 2;
             } while (nRooms < MinRooms);
 
-            CheckConnectivity(); // Added this here as mines are sometimes disconnected
+            CheckConnectivity(); // Make sure that all bits of the map are connected
             if (!bMines) GenerateDoors();
             GenerateHiddenTreasure(bMines ? 1 : 2);
             GenerateTraps(bMines ? 1 : 2);
@@ -1258,17 +1258,11 @@ namespace SpaceMercs {
                 int oldy = y;
                 if (tx > x) {
                     x++;
-                    y = sy + (int)(0.5 + (x - sx) * (ty - sy) / (tx - sx));
+                    y = sy + (int)((float)(x - sx) * (float)(ty - sy) / (float)(tx - sx));
                 }
                 else if (tx < x) {
                     x--;
-                    y = sy + (int)(0.5 + (x - sx) * (ty - sy) / (tx - sx));
-                    if (oldy != y) {
-                        for (int dy = Math.Min(oldy, y); dy <= Math.Max(oldy, y); dy++) {
-                            if (FloodFill[x, dy] == rtgt) bOK = true;
-                            TunnelTo(x, dy, FloodFill, dRegions);
-                        }
-                    }
+                    y = sy + (int)((float)(x - sx) * (float)(ty - sy) / (float)(tx - sx));
                 }
                 else y = ty;
                 for (int dy = Math.Min(oldy, y); dy <= Math.Max(oldy, y); dy++) {
@@ -1554,6 +1548,7 @@ namespace SpaceMercs {
             return nRooms;
         }
         private void GenerateDoors() {
+            WriteOutMap("BeforeDoors"); //DEBUG
             for (int y = 1; y < Height - 1; y++) {
                 for (int x = 1; x < Width - 1; x++) {
                     if (RoomMap[x, y] > 0) {
@@ -1564,6 +1559,28 @@ namespace SpaceMercs {
                     }
                 }
             }
+            WriteOutMap("AfterDoorsFirstPass"); //DEBUG
+
+            // Attempt to widen any doors that are too narrow for the resident monsters
+            if (ParentMission.GetLargestCreatureSize() > 1) {
+                for (int y = 1; y < Height - 1; y++) {
+                    for (int x = 1; x < Width - 1; x++) {
+                        if (Map[x, y] == TileType.DoorHorizontal) {
+                            if (Map[x - 1, y] == TileType.DoorHorizontal || Map[x + 1, y] == TileType.DoorHorizontal) continue;
+                            int dir = rand.Next(2);
+                            if (x > 1 && (dir == 0 || x + 2 == Width) && Map[x - 1, y - 1] == Map[x, y - 1] && Map[x - 1, y + 1] == Map[x, y + 1]) Map[x - 1, y] = TileType.DoorHorizontal;
+                            if (x + 1 < Width && (dir == 1 || x == 1) && Map[x + 1, y - 1] == Map[x, y - 1] && Map[x + 1, y + 1] == Map[x, y + 1]) Map[x + 1, y] = TileType.DoorHorizontal;
+                        }
+                        else if (Map[x, y] == TileType.DoorVertical) {
+                            if (Map[x, y - 1] == TileType.DoorVertical || Map[x, y + 1] == TileType.DoorVertical) continue;
+                            int dir = rand.Next(2);
+                            if (y > 1 && (dir == 0 || y + 2 == Height) && Map[x - 1, y - 1] == Map[x - 1, y] && Map[x + 1, y - 1] == Map[x + 1, y]) Map[x, y - 1] = TileType.DoorVertical;
+                            if (y + 1 < Height && (dir == 1 || y == 1) && Map[x - 1, y + 1] == Map[x - 1, y] && Map[x + 1, y + 1] == Map[x + 1, y]) Map[x, y + 1] = TileType.DoorVertical;
+                        }
+                    }
+                }
+            }
+            WriteOutMap("AfterDoorsSecondPass"); //DEBUG
 
             // Remove all doors that are >2 in width (and any remaining stragglers that are door fragments)
             for (int y = 1; y < Height - 1; y++) {
@@ -1582,6 +1599,7 @@ namespace SpaceMercs {
                     }
                 }
             }
+            //WriteOutMap("AfterDoorsThirdPass"); //DEBUG
 
             // Make some doors secret and remove some others
             for (int y = 1; y < Height - 1; y++) {
@@ -1608,7 +1626,7 @@ namespace SpaceMercs {
                     }
                 }
             }
-
+            //WriteOutMap("AfterDoorsFinal"); //DEBUG
         }
         #endregion // Generate Dungeon
 
@@ -2218,7 +2236,10 @@ namespace SpaceMercs {
 
         // Debugging
         private void WriteOutMap(int id) {
-            using (StreamWriter file = new StreamWriter(@"C:\temp\Map" + id + ".txt")) {
+            WriteOutMap($"Map{id}");
+        }
+        private void WriteOutMap(string str) {
+            using (StreamWriter file = new StreamWriter(@"C:\temp\" + str + ".txt")) {
                 for (int y = Height - 1; y >= 0; y--) {
                     StringBuilder sb = new StringBuilder();
                     for (int x = 0; x < Width; x++) {
@@ -2233,7 +2254,10 @@ namespace SpaceMercs {
             }
         }
         private void WriteOutMapRooms(int id) {
-            using (StreamWriter file = new StreamWriter(@"C:\temp\Map" + id + ".txt")) {
+            WriteOutMapRooms($"MapRooms{id}");
+        }
+        private void WriteOutMapRooms(string str) {
+            using (StreamWriter file = new StreamWriter(@"C:\temp\" + str + ".txt")) {
                 for (int y = Height - 1; y >= 0; y--) {
                     StringBuilder sb = new StringBuilder();
                     for (int x = 0; x < Width; x++) {

@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>14/01/2150 01:52:06</Clock>
+<Clock>14/01/2150 16:29:18</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -10831,6 +10831,19 @@
 <Temp>179</Temp>
 <Seed>8283543</Seed>
 <Type>Volcanic</Type>
+ <Missions>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>24.57</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>848724023</Seed>
+</Mission>
+ </Missions>
 </Moon>
 <Moon ID="1">
 <Name>Unnamed</Name>
@@ -10841,6 +10854,32 @@
 <Temp>138</Temp>
 <Seed>6625378</Seed>
 <Type>Rocky</Type>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Rock Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>189.98</Reward>
+ <Diff>7</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>29626777</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillBoss</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>31.005000000000003</Reward>
+ <Diff>4</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>649392752</Seed>
+</Mission>
+ </Missions>
 </Moon>
 <Moon ID="2">
 <Name>Unnamed</Name>
@@ -65366,24 +65405,25 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)5.0</Pos>
- <Cash>82.54264096626297</Cash>
+ <Pos>(0,0)5.2.1</Pos>
+ <Cash>135.20264096626295</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="39" Y="11"/>
- <Health>23.092267807825007</Health>
- <Stamina>32</Stamina>
+ <OnMission/>
+ <Location X="32" Y="7"/>
+ <Health>14.618587204925369</Health>
+ <Stamina>13.43986066640122</Stamina>
  <Shields>0</Shields>
- <Facing>143.13010235415598</Facing>
+ <Facing>-90</Facing>
  <Level>5</Level>
- <XP>13325</XP>
+ <XP>15316</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,17</Stats>
  <Colour>#0032FF</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Medsystem"/>
+<Equipment Type="Medsystem" Recharge="2"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -65398,22 +65438,23 @@
 <Weapon Type="Automatic Rifle" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">234</Exp>
+  <Exp Type="Automatic Rifle">251</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
-  <Exp Skill="Perception">3</Exp>
-  <Exp Skill="Unspent">1</Exp>
+  <Exp Skill="Perception">4</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="38" Y="11"/>
- <Health>30</Health>
+ <OnMission/>
+ <Location X="32" Y="9"/>
+ <Health>25.38402317955297</Health>
  <Stamina>26</Stamina>
  <Shields>0</Shields>
- <Facing>135</Facing>
+ <Facing>236.30993247402023</Facing>
  <Level>4</Level>
- <XP>8926</XP>
+ <XP>10917</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,16,12</Stats>
@@ -65424,9 +65465,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -65441,6 +65479,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">135</Exp>
+  <Exp Type="Quad Shotgun">13</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -65449,13 +65488,14 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="32" Y="20"/>
- <Health>11.608666139929142</Health>
- <Stamina>18.647058823529413</Stamina>
+ <OnMission/>
+ <Location X="31" Y="8"/>
+ <Health>14.032935411287216</Health>
+ <Stamina>2</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>270</Facing>
  <Level>4</Level>
- <XP>7998</XP>
+ <XP>9989</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>17,13,12,12,7</Stats>
@@ -65474,27 +65514,28 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">71</Exp>
+  <Exp Type="Powerblade">98</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
-  <Exp Skill="Unspent">1</Exp>
+  <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
  <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="37" Y="11"/>
- <Health>25</Health>
- <Stamina>28</Stamina>
+ <OnMission/>
+ <Location X="34" Y="10"/>
+ <Health>20.328054882718696</Health>
+ <Stamina>29</Stamina>
  <Shields>0</Shields>
- <Facing>119.05460409907714</Facing>
- <Level>3</Level>
- <XP>5478</XP>
+ <Facing>233.13010235415598</Facing>
+ <Level>4</Level>
+ <XP>7469</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>9,9,15,12,15</Stats>
+ <Stats>9,9,16,12,15</Stats>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
@@ -65515,10 +65556,10 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">86</Exp>
+  <Exp Type="Sniper Rifle">108</Exp>
  </WeaponExperience>
  <UtilityExperience>
-  <Exp Skill="Gunsmith">2</Exp>
+  <Exp Skill="Gunsmith">3</Exp>
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
@@ -65563,7 +65604,113 @@
   <Inv Count="1">
 <Weapon Type="Shotgun" Level="1"/>
   </Inv>
+  <Inv Count="1">
+<MissionItem Mass="0.90" Cost="4.38">Glowing Egg</MissionItem>
+  </Inv>
  </Inventory>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Ogres</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>200.08</Reward>
+ <Diff>6</Diff>
+ <LevelCount>3</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1629499894</Seed>
+ <Size>2</Size>
+ <Level ID="0">
+<MissionLevel Width="37" Height="30">
+ <Diff>5</Diff>
+ <Level>0</Level>
+ <Start X="31" Y="23"/>
+ <End X="13" Y="4"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAABBBBBBAAAAAAAAAAAAAAAAABBBBBBBBAAAAAABBBBBBAAAAAAAAAAAAAAAAABBBBBBBBAABBAABBBBBBAABBBBBBBBAAAAAAABAABBBBBAABBAABBBBBBAABBBBBBBBAAAAAAABAABBBBBAABBAABBBBBBAABBBBBBBBAAAAAAABAABBBBBAABBAABBBBBBBBBBBBBBBBAAAAAAAHAABBBBBAABBAABBBBBBBBBBBBBBBBAAAAAAAHAABBBBBAABBAABBBBBBBBBBBBBBBBBBBBBBBBAAAABBBAABAAABBBBBBBBBBBBBBBBBBBBBBBAAAAABBBAABAAAAAAABBBBBBAAAAABBBBAAAAAAAAABBBAABAAAAAAABBBBBBAAAAAFAAFAAAAAAAAABBBAAFAAAAAAABBBBBBAAAAAFAAFAAAAAAAAABBBAAFAAAAAAABBBBBBAAAAABBBBAAAAAAAAABBBBBBAAAAAAABBBBBBAAAAABBBBAAAAAAAAABBBBBBAAAAAAABBBBBBAAAAABBBBAAAAAAAAABBBBBBAAAAAAABBBBBBAAAAABBBBAAAAAAAAABBBBBBGGBBBBBBBBBBBGGBGGBBBBAAAAAAAAABBBBBBAABBBBBBBBBBBAABAABBBBAAAAAAAAABBBBBBAABBBBBBBBBBBGGBGGBBBBBBBBAAABBBBBBBBGGBBBBBBBBBBBAAAAAAABBBBBBBAABBBBBBAAAAAABBBBBBBBBAAAAAAAAAAAAAAAABBBBBBAAAAAABBBBBBBBBAAAAAAAAAAAAAAAABBBBBBAAAAAAAAAAAAAABAAAAAAABBBBAABAABBBBBBAAAAAAAAAAAAAABAAAAAAABBBBAABAABBBBBBAAAAAAABBBBBAABAAAAAAABBBBAABBBBBBBBBAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>000000000000000000011111111100000000000000000000000000001111111110000000000000000000000000000001111111101111000000000000000000000000111111110111100000000000000000000000001111111111110000000000000000000000000111111111111000000000000000000000000011111111111100000000000000000000000001111111111111100000000000000000000000111111111111110000000000000000000000000011111111111000000000000000000000000001111111111100000000000000000000000000111111111110000000000000000000000000011111111111000000000000000000000000001111111111100000000000000000000000000111111111110000000000000000000000000011111111111000000000000000000000000001111111111100000000000000000000000000111111111110000000000000000000000000011111111111000000000000000000111111111111111111100000000000000000111111111111111111000000000000000000011111111111111111100000000000000000001111111111111111110000000000000000000111111111111111111000000000000000000011100000000111111100000000000000000000000000000011011110000000000000000000000000000001100000000000000000000000000000000000100000000000000000000000000000000000010000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Ogre Scout">
+ <Location X="17" Y="10"/>
+ <Level>6</Level>
+ <Facing>309</Facing>
+</Creature>
+<Creature Type="Ogre Scout">
+ <Location X="20" Y="13"/>
+ <Level>5</Level>
+ <Facing>253</Facing>
+</Creature>
+<Creature Type="Ogre Scout">
+ <Location X="18" Y="14"/>
+ <Level>5</Level>
+ <Facing>30</Facing>
+</Creature>
+<Creature Type="Ogre Scout">
+ <Location X="4" Y="14"/>
+ <Level>5</Level>
+ <Facing>277</Facing>
+</Creature>
+<Creature Type="Ogre Scout">
+ <Location X="6" Y="12"/>
+ <Level>5</Level>
+ <Facing>347</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="6" Y="8">
+<StashItem N="1">
+<Material Type="Kevlar"/>
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Heavy Chitin" Level="1"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Laser Rifle" Level="0"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="23" Y="24">
+<StashItem N="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Steel" Level="1"/>
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Heavy Chitin" Level="0"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Pistol" Level="2"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="23" Y="20">
+<StashItem N="1">
+<Armour Type="Cap" Material="Chitin" Level="0"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="31" Y="11">
+<StashItem N="1">
+<Corpse Type="Ogre Scout" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="30" Y="6">
+<StashItem N="2">
+<Corpse Type="Ogre Scout" Level="5"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="34" Y="10" L="5">
+</Trap>
+<Trap X="19" Y="24" L="7">
+<Hidden/>
+</Trap>
+<Trap X="32" Y="19" L="5">
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">

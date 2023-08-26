@@ -7,7 +7,7 @@
     <Speed>14</Speed>
     <Range Accuracy="2" DropOff="0.7">5</Range>
     <Damage>6+3</Damage>
-    <Desc>A double-barrelled shotgun</Desc>
+    <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Materials>
       <Material Name="Steel" Amount="3"/>
@@ -18,12 +18,12 @@
   </WeaponType>
   <WeaponType Name="Quad Shotgun">
     <Mass>4.0</Mass>
-    <Cost>55</Cost>
+    <Cost>90</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="3" DropOff="0.6">5</Range>
-    <Damage>7+4</Damage>
-    <Desc>A powerful shotgun with 4 barrels instead of 2.</Desc>
+    <Damage>7+5</Damage>
+    <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Materials>
       <Material Name="Steel" Amount="4"/>

@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-ZoomTo buttons keep vanishing on MissionView soldier tabs
-
 Display system population on map view. Where? New toggle option?
 
 Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
