@@ -288,5 +288,12 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
+        public override int GetPopulation() {
+            int pop = Colony?.BaseSize ?? 0;
+            foreach (Moon mn in Moons) {
+                pop += mn.GetPopulation();
+            }
+            return pop;
+        }
     }
 }

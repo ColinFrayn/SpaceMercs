@@ -7,7 +7,7 @@ namespace SpaceMercs.MainWindow {
     // Partial class including functions for drawing the full galaxymap view
     partial class MapView {
         private float fMapViewZ, fMapViewX, fMapViewY;
-        private bool bShowGridLines = true, bFadeUnvisited = false, bShowRangeCircles = false, bShowTradeRoutes = false, bShowFlags = true;
+        private bool bShowGridLines = true, bFadeUnvisited = false, bShowRangeCircles = false, bShowTradeRoutes = false, bShowFlags = true, bShowPop = false;
         VertexBuffer? mapLinesBuffer = null, hoverLinkBuffer = null;
         VertexArray? mapLinesArray = null, hoverLinkArray = null;
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
@@ -163,7 +163,7 @@ namespace SpaceMercs.MainWindow {
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Sector sc = GalaxyMap.GetSector(sx, sy);
-                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, fMapViewX, fMapViewY, fMapViewZ, Aspect);
+                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, bShowPop, fMapViewX, fMapViewY, fMapViewZ, Aspect);
                 }
             }
         }

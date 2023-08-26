@@ -1,11 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using SpaceMercs.MainWindow;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -443,6 +440,7 @@ namespace SpaceMercs {
             }
         }
 
+        // Utility
         public Planet? GetOutermostPlanet() {
             if (Planets.Count == 0) return null;
             return Planets.Last();
@@ -501,6 +499,14 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Sector.PrintCoordinates() + ID;
         }
+        public override int GetPopulation() {
+            int pop = 0;
+            foreach (Planet pl in Planets) {
+                pop += pl.GetPopulation();
+            }
+            return pop;
+        }
+
         // Detail level to display this star, given the view distance
         public int GetDetailLevel(float fMapViewX, float fMapViewY, float fMapViewZ) {
             float dx = fMapViewX - MapPos.X;

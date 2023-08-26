@@ -32,6 +32,7 @@ namespace SpaceMercs.MainWindow {
         public const uint I_OptionsTradeRoutes = 11035;
         public const uint I_OptionsFlags = 11036;
         public const uint I_OptionsColonies = 11037;
+        public const uint I_OptionsPopulation = 11038;
         public const uint I_Mission = 11040;
         public const uint I_MissionDetails = 11041;
         public const uint I_MissionLabels = 11042;
@@ -172,6 +173,7 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridLines ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("R", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
             TextRenderer.DrawAt("V", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 7f, bShowPop ? Color.White : Color.DimGray);
         }
 
         // Setup a mini window to show details of the current hover target
@@ -321,7 +323,7 @@ namespace SpaceMercs.MainWindow {
             gpViewMenu.InsertTextItem(I_ViewColony, "View Colony", Aspect);
             gpViewMenu.InsertTextItem(I_ViewRaces, "View Races", Aspect);
 
-            // Skills menu
+            // Options menu
             gpOptionsMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);
             gpOptionsMenu.InsertTextItem(I_OptionsLabels, "Labels", Aspect, () => bShowLabels);
             gpOptionsMenu.InsertTextItem(I_OptionsGridLines, "Grid Lines", Aspect, () => bShowGridLines);
@@ -330,6 +332,7 @@ namespace SpaceMercs.MainWindow {
             gpOptionsMenu.InsertTextItem(I_OptionsTradeRoutes, "Trade Routes", Aspect, () => bShowTradeRoutes);
             gpOptionsMenu.InsertTextItem(I_OptionsFlags, "Flags", Aspect, () => bShowFlags);
             gpOptionsMenu.InsertTextItem(I_OptionsColonies, "Colonies", Aspect, () => bShowColonies);
+            gpOptionsMenu.InsertTextItem(I_OptionsPopulation, "Show Population", Aspect, () => bShowPop);
 
             // Mission menu
             gpMissionMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);

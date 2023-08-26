@@ -1187,12 +1187,12 @@ namespace SpaceMercs {
 
             // We had multiple regions, so we need to connect them up.
             // Start by getting lists of cells in each region
-            Dictionary<int, List<Tuple<int, int>>> dRegions = new Dictionary<int, List<Tuple<int, int>>>();
+            Dictionary<int, List<Vector2i>> dRegions = new Dictionary<int, List<Vector2i>>();
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (FloodFill[x, y] > 0) {
-                        if (!dRegions.ContainsKey(FloodFill[x, y])) dRegions.Add(FloodFill[x, y], new List<Tuple<int, int>>());
-                        dRegions[FloodFill[x, y]].Add(new Tuple<int, int>(x, y));
+                        if (!dRegions.ContainsKey(FloodFill[x, y])) dRegions.Add(FloodFill[x, y], new List<Vector2i>());
+                        dRegions[FloodFill[x, y]].Add(new Vector2i(x, y));
                     }
                 }
             }
@@ -1206,8 +1206,8 @@ namespace SpaceMercs {
                     //throw new Exception("Empty region, for some reason!");
                     continue;
                 }
-                int x = (dRegions[region])[0].Item1;
-                int y = (dRegions[region])[0].Item2;
+                int x = (dRegions[region])[0].X;
+                int y = (dRegions[region])[0].Y;
                 if (FloodFill[x, y] == 1) continue; // it might have been connected since the first iteration
                                                     // Tiny region, so just fill it in
                 if (dRegions[region].Count == 1) {
@@ -1217,14 +1217,14 @@ namespace SpaceMercs {
                 }
                 // Find two close cells in R1 and Rn
                 int best = 10000;
-                Tuple<int, int>? b1 = null, b2 = null;
+                Vector2i? b1 = null, b2 = null;
                 for (int c = 0; c < 250; c++) {
-                    Tuple<int, int> c1 = (dRegions[1])[rand.Next(dRegions[1].Count)];
-                    int x1 = c1.Item1;
-                    int y1 = c1.Item2;
-                    Tuple<int, int> c2 = (dRegions[region])[rand.Next(dRegions[region].Count)];
-                    int x2 = c2.Item1;
-                    int y2 = c2.Item2;
+                    Vector2i c1 = (dRegions[1])[rand.Next(dRegions[1].Count)];
+                    int x1 = c1.X;
+                    int y1 = c1.Y;
+                    Vector2i c2 = (dRegions[region])[rand.Next(dRegions[region].Count)];
+                    int x2 = c2.X;
+                    int y2 = c2.Y;
                     int d = Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
                     if (c == 0 || d < best) {
                         best = d;
@@ -1233,7 +1233,7 @@ namespace SpaceMercs {
                     }
                     if (best < 4) break;
                 }
-                JoinCells(b1, b2, FloodFill, dRegions);
+                if (b1.HasValue && b2.HasValue) JoinCells(b1.Value, b2.Value, FloodFill, dRegions);
             }
         }
         private void FloodFillRegion(int x, int y, int[,] FloodFill, int region) {
@@ -1244,14 +1244,13 @@ namespace SpaceMercs {
             if (y > 0 && Map[x, y - 1] == TileType.Floor && FloodFill[x, y - 1] == 0) FloodFillRegion(x, y - 1, FloodFill, region);
             if (y < Height - 1 && Map[x, y + 1] == TileType.Floor && FloodFill[x, y + 1] == 0) FloodFillRegion(x, y + 1, FloodFill, region);
         }
-        private void JoinCells(Tuple<int, int>? b1, Tuple<int, int>? b2, int[,] FloodFill, Dictionary<int, List<Tuple<int, int>>> dRegions) {
-            if (b1 is null || b2 is null) return;
+        private void JoinCells(Vector2i b1, Vector2i b2, int[,] FloodFill, Dictionary<int, List<Vector2i>> dRegions) {
             // Join two cells and therefore join the relevant regions containing them
-            int rtgt = FloodFill[b2.Item1, b2.Item2];
-            int sx = b1.Item1;
-            int sy = b1.Item2;
-            int tx = b2.Item1;
-            int ty = b2.Item2;
+            int rtgt = FloodFill[b2.X, b2.Y];
+            int sx = b1.X;
+            int sy = b1.Y;
+            int tx = b2.X;
+            int ty = b2.Y;
             int x = sx, y = sy;
             bool bOK = false;
             do {
@@ -1271,13 +1270,13 @@ namespace SpaceMercs {
                 }
             } while (!bOK && (x != tx || y != ty));
         }
-        private void TunnelTo(int x, int y, int[,] FloodFill, Dictionary<int, List<Tuple<int, int>>> dRegions) {
+        private void TunnelTo(int x, int y, int[,] FloodFill, Dictionary<int, List<Vector2i>> dRegions) {
             // Draw a tunnel in a cave map. If we break through to a new region then fill it with region 1
             Map[x, y] = TileType.Floor;
             int r = FloodFill[x, y];
             if (r > 1) {
                 for (int i = 0; i < dRegions[r].Count; i++) {
-                    FloodFill[dRegions[r][i].Item1, dRegions[r][i].Item2] = 1;
+                    FloodFill[dRegions[r][i].X, dRegions[r][i].Y] = 1;
                     dRegions[1].Add(dRegions[r][i]);
                 }
                 dRegions[r].Clear();

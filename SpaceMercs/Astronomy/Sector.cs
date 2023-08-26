@@ -77,7 +77,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect) {
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = 1.0f,
@@ -126,6 +126,8 @@ namespace SpaceMercs {
                 // Draw the name label for this star
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
                     tro.View = Matrix4.CreateScale(0.5f) * translateM;
+                    tro.YPos = -0.5f;
+                    tro.TextColour = Color.White;
                     TextRenderer.DrawWithOptions(st.Name, tro);
                 }
 
@@ -147,6 +149,16 @@ namespace SpaceMercs {
                     Square.Flat.BindAndDraw();
                 }
 
+                // Draw the system population
+                if (bShowPop && st.Visited) {
+                    int pop = st.GetPopulation();
+                    if (pop == 0) continue;
+                    if (bShowLabels) tro.YPos = -1.0f; // Offset under system name
+                    else tro.YPos = -0.5f;
+                    tro.View = Matrix4.CreateScale(0.5f) * translateM;
+                    tro.TextColour = Color.Green;
+                    TextRenderer.DrawWithOptions(pop.ToString(), tro);
+                }
             }
         }
 

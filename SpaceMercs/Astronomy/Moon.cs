@@ -103,6 +103,8 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
-
+        public override int GetPopulation() {
+            return Colony?.BaseSize ?? 0;
+        }
     }
 }

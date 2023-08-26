@@ -33,6 +33,7 @@ namespace SpaceMercs.MainWindow {
             bShowTradeRoutes = (xGUI.SelectSingleNode("ShowTradeRoutes") != null);
             bShowFlags = (xGUI.SelectSingleNode("ShowFlags") != null);
             bShowColonies = (xGUI.SelectSingleNode("ShowColonies") != null);
+            bShowPop = (xGUI.SelectSingleNode("ShowPopulation") != null);
 
             // Load in the clock
             DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));
@@ -84,6 +85,7 @@ namespace SpaceMercs.MainWindow {
                 if (bFadeUnvisited) file.WriteLine("<FadeStars/>");
                 if (bShowFlags) file.WriteLine("<ShowFlags/>");
                 if (bShowColonies) file.WriteLine("<ShowColonies/>");
+                if (bShowPop) file.WriteLine("<ShowPopulation/>");
                 file.WriteLine("</GUI>");
 
                 // Game clock

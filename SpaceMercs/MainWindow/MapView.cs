@@ -352,24 +352,22 @@ namespace SpaceMercs.MainWindow {
         }
         private void GetKeyboardInput_MapView() {
             if (IsKeyPressed(Keys.G)) {  // Toggle on/off gridlines
-                if (bShowGridLines) { bShowGridLines = false; }
-                else { bShowGridLines = true; }
+                bShowGridLines = !bShowGridLines;
             }
             if (IsKeyPressed(Keys.V)) {  // Toggle on/off fading of unvisited stars
-                if (bFadeUnvisited) { bFadeUnvisited = false; }
-                else { bFadeUnvisited = true; }
+                bFadeUnvisited = !bFadeUnvisited;
             }
             if (IsKeyPressed(Keys.R)) {  // Toggle on/off range circles
-                if (bShowRangeCircles) { bShowRangeCircles = false; }
-                else { bShowRangeCircles = true; }
+                bShowRangeCircles = !bShowRangeCircles;
             }
             if (IsKeyPressed(Keys.A)) {  // Toggle on/off trade routes
-                if (bShowTradeRoutes) { bShowTradeRoutes = false; }
-                else { bShowTradeRoutes = true; }
+                bShowTradeRoutes = !bShowTradeRoutes;
             }
             if (IsKeyPressed(Keys.F)) {  // Toggle on/off ownership flags
-                if (bShowFlags) { bShowFlags = false; }
-                else { bShowFlags = true; }
+                bShowFlags = !bShowFlags;
+            }
+            if (IsKeyPressed(Keys.P)) {  // Toggle on/off system population
+                bShowPop = !bShowPop;
             }
             MapHover();
         }
@@ -564,6 +562,7 @@ namespace SpaceMercs.MainWindow {
                 case I_OptionsTradeRoutes: bShowTradeRoutes = !bShowTradeRoutes; return;
                 case I_OptionsFlags: bShowFlags = !bShowFlags; return;
                 case I_OptionsColonies: bShowColonies = !bShowColonies; return;
+                case I_OptionsPopulation: bShowPop = !bShowPop; return;
                 case I_MissionDetails: DisplayMissionDetails();  return;
                 case I_MissionLabels: PlayerTeam.Mission_ShowLabels = !PlayerTeam.Mission_ShowLabels; return;
                 case I_MissionStatBars: PlayerTeam.Mission_ShowStatBars = !PlayerTeam.Mission_ShowStatBars; return;
