@@ -36,7 +36,7 @@
   </ArmourType>
   <ArmourType Name="Stealth Helmet">
     <Mass>1.0</Mass>
-    <Cost>35</Cost>
+    <Cost>40</Cost>
     <Rarity>38</Rarity>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
@@ -47,6 +47,23 @@
     <Desc>A military spec helmet with HUD and sensor arrays and stealth coating</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
+    </Materials>
+  </ArmourType>
+  <ArmourType Name="Infiltrator Helmet">
+    <Mass>1.5</Mass>
+    <Cost>50</Cost>
+    <Rarity>15</Rarity>
+    <Attack>1</Attack>
+    <BaseArmour>3</BaseArmour>
+    <Location>Head</Location>
+    <Desc>A military spec helmet with HUD and advanced detection technology.</Desc>
+    <Utility>
+      <Perception>2</Perception>
+    </Utility>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Chestplate">

@@ -4,15 +4,15 @@
     <Cost>5</Cost>
     <Power>1</Power>
     <Capacity>1</Capacity>
-    <Desc>A single bunk room</Desc>
+    <Desc>A small bunk room with a single bed.</Desc>
     <Tex>2,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Bunk Room">
     <Size>M</Size>
-    <Cost>35</Cost>
+    <Cost>60</Cost>
     <Power>2</Power>
     <Capacity>3</Capacity>
-    <Desc>A larger bunk room with three beds</Desc>
+    <Desc>A medium-sized bunk room with three beds.</Desc>
     <Tex>3,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Large Bunk Room">
@@ -20,7 +20,7 @@
     <Cost>350</Cost>
     <Power>3</Power>
     <Capacity>6</Capacity>
-    <Desc>A larger bunk room with six beds</Desc>
+    <Desc>A large bunk room with six beds.</Desc>
     <Tex>4,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Armoury">
@@ -28,7 +28,7 @@
     <Cost>75</Cost>
     <Power>5</Power>
     <Armoury/>
-    <Desc>An armoury</Desc>
+    <Desc>An armoury, where armour and weapons can be fabricated.</Desc>
     <Tex>5,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Workshop">
@@ -36,7 +36,7 @@
     <Cost>75</Cost>
     <Power>5</Power>
     <Workshop/>
-    <Desc>A workshop</Desc>
+    <Desc>A workshop, where utility items can be fabricated.</Desc>
     <Tex>1,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Medbay">
@@ -44,7 +44,7 @@
     <Cost>75</Cost>
     <Power>4</Power>
     <Medlab/>
-    <Desc>A small medical facility</Desc>
+    <Desc>A medical facility, where medical devices can be fabricated.</Desc>
     <Tex>3,6</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Foundry">
@@ -53,7 +53,7 @@
     <Power>8</Power>
     <Armoury/>
     <Workshop/>
-    <Desc>A foundry</Desc>
+    <Desc>A versatile foundry, where armour, weapons and equipment can all be fabricated.</Desc>
     <Tex>7,2</Tex>
     <Race>Ursalon</Race>
   </ShipEquipment>
@@ -62,7 +62,7 @@
     <Cost>250</Cost>
     <Power>8</Power>
     <Repair/>
-    <Desc>An auto repair facility, that will heal your ship slowly over time</Desc>
+    <Desc>An auto repair facility, that will repair your ship slowly over time</Desc>
     <Avail>EMR</Avail>
     <Tex>6,2</Tex>
   </ShipEquipment>
@@ -72,7 +72,7 @@
     <Power>7</Power>
     <Medlab/>
     <Research/>
-    <Desc>A research / medical chamber based on Grey tech</Desc>
+    <Desc>A research and medical chamber based on Grey tech.</Desc>
     <Tex>4,6</Tex>
     <Avail>ER</Avail>
     <Race>Grey</Race>
@@ -91,7 +91,7 @@
     <Shield>10</Shield>
     <Power>14</Power>
     <Size>S</Size>
-    <Desc>A shield generator</Desc>
+    <Desc>A shield generator, protecting your ship against damaging weapons.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
   </ShipEquipment>
@@ -100,7 +100,7 @@
     <Size>S</Size>
     <Power>2</Power>
     <Scanner/>
-    <Desc>A scanner to search for missions on a planet surface</Desc>
+    <Desc>A scanner to search for missions on a planet surface.</Desc>
     <Avail>CEMRT</Avail>
     <Tex>6,6</Tex>
   </ShipEquipment>
@@ -109,7 +109,7 @@
     <Size>S</Size>
     <Power>2</Power>
     <BuildColony/>
-    <Desc>A device which founds a new colony on a suitable planet once it has been cleared of surface anomalies.</Desc>
+    <Desc>A device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
     <Tex>7,6</Tex>
   </ShipEquipment>
@@ -118,7 +118,7 @@
     <Defence>3</Defence>
     <Power>16</Power>
     <Size>S</Size>
-    <Desc>A chameleon device</Desc>
+    <Desc>A chameleon device, making your ship blend in witht he background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,7</Tex>
   </ShipEquipment>
@@ -127,7 +127,7 @@
     <Defence>6</Defence>
     <Power>20</Power>
     <Size>M</Size>
-    <Desc>A cloaking device</Desc>
+    <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,7</Tex>
   </ShipEquipment>
@@ -136,7 +136,7 @@
     <Attack>3</Attack>
     <Power>3</Power>
     <Size>S</Size>
-    <Desc>An AI subsystem that increases Ship attack strength</Desc>
+    <Desc>An AI subsystem that increases Ship attack power.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,6</Tex>
     <Race>Human</Race>
@@ -145,7 +145,7 @@
     <Size>C</Size>
     <Cost>20</Cost>
     <Generate>25</Generate>
-    <Desc>A fission-based power core</Desc>
+    <Desc>A fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,1</Tex>
   </ShipEquipment>
@@ -153,7 +153,7 @@
     <Size>C</Size>
     <Cost>35</Cost>
     <Generate>35</Generate>
-    <Desc>An advanced fission-based power core</Desc>
+    <Desc>An advanced fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
   </ShipEquipment>
@@ -161,7 +161,7 @@
     <Size>C</Size>
     <Cost>130</Cost>
     <Generate>60</Generate>
-    <Desc>A fusion-based power core</Desc>
+    <Desc>A fusion-based power cor.e</Desc>
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
   </ShipEquipment>
@@ -169,7 +169,7 @@
     <Size>C</Size>
     <Cost>195</Cost>
     <Generate>75</Generate>
-    <Desc>An advanced fusion-based power core</Desc>
+    <Desc>An advanced fusion-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
   </ShipEquipment>
@@ -177,7 +177,7 @@
     <Size>C</Size>
     <Cost>850</Cost>
     <Generate>90</Generate>
-    <Desc>A dark-matter-based power core</Desc>
+    <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>5,1</Tex>
   </ShipEquipment>
@@ -185,7 +185,7 @@
     <Size>C</Size>
     <Cost>1200</Cost>
     <Generate>110</Generate>
-    <Desc>An advanced dark-matter-based power core</Desc>
+    <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
   </ShipEquipment>

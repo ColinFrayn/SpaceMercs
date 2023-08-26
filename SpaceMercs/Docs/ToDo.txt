@@ -2,9 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Display system population on map view. Where? New toggle option?
-
-Bug: Descended to next level - random bit of map was visible (shaded) that shouldn't have been. Repro??
+Bug: Descended to next mission level - random bit of map was visible (shaded) that shouldn't have been. Repro??
 
 ==========================================================================================================
 
@@ -34,12 +32,13 @@ Check what happens when we found colonies in systems owned by other races (shoul
 
 Add new trade routes automatically over time?
 - Connect based on size of colonies in systems and their separation
+- What do trade routes accomplish? Maybe make certain colony types > 1 possible? Improve stock? Improve prices based on connectivity?
 
 Better soldier textures
 - Change texture based on race
 - Change texture based on equipment / weapons
 
-Bonus damage on weapons? Framework for this exists, but nothing adds bonus damage
+Bonus damage on weapons? Framework for this exists, but nothing actually adds bonus damage
 
 More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Pick up all
