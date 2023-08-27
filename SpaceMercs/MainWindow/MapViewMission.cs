@@ -438,8 +438,11 @@ namespace SpaceMercs.MainWindow {
                                 }
                             }
                         }
-                        if (iSelectHover == I_GoTo) {
+                        if (iSelectHover == I_GoTo) { // Set up GoTo for a selected square
                             s.GoTo = new Point(gpSelect.ClickX, gpSelect.ClickY);
+                        }
+                        if (iSelectHover == I_UseItem) { // Shortcut to inventory
+                            OpenSoldierInventory(s);
                         }
                         if (oHover is IEquippable eqp) {
                             // Clicked on a usable item
@@ -1426,8 +1429,11 @@ namespace SpaceMercs.MainWindow {
         private void SelectedSoldierInventory(GUIIconButton sender) {
             if (bAIRunning) return;
             if (SelectedEntity == null || SelectedEntity is not Soldier ss) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
-            int sy = SelectedEntity.Y;
-            int sx = SelectedEntity.X;
+            OpenSoldierInventory(ss);
+        }
+        private void OpenSoldierInventory(Soldier ss) {
+            int sy = ss.Y;
+            int sx = ss.X;
             Stash? st = CurrentLevel.GetStashAtPoint(sx, sy);
             if (st is null) st = new Stash(new Point(sx, sy));
             EquipmentView eqv = new EquipmentView(ss, st);
