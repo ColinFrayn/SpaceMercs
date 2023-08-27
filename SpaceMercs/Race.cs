@@ -2,7 +2,7 @@
 using System.IO;
 
 namespace SpaceMercs {
-    class Race {
+    public class Race {
         public string Name { get; set; }
         public double Scale { get; set; }
         public int Strength { get; private set; }

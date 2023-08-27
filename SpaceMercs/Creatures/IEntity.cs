@@ -6,7 +6,7 @@ namespace SpaceMercs {
     public enum GenderType { Male, Female, Neuter };
     public enum BodyPart { Head, Chest, Arms, Legs, Feet, Hands }
 
-    interface IEntity {
+    public interface IEntity {
         int X { get; }
         int Y { get; }
         double Health { get; }

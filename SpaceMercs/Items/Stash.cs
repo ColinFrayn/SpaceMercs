@@ -2,7 +2,7 @@
 using System.Xml;
 
 namespace SpaceMercs {
-    class Stash {
+    public class Stash {
         private readonly Dictionary<IItem, int> stash;
         public Point Location { get; private set; } // Isn't really used; only for storing location on load.
         public bool Hidden { get; private set; }

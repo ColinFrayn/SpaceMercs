@@ -250,7 +250,7 @@ namespace SpaceMercs.Dialogs {
             if (lbUtilitySkills.SelectedIndex < 0) return;
             int nut = ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
             if (nut == 0) return;
-            string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
+            string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
             if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) return; // Should never get here
@@ -281,7 +281,7 @@ namespace SpaceMercs.Dialogs {
                 if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                     // Disable if existing skill is already max level (== Player's level)
                     // Otherwise Enable
-                    Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), (string)lbUtilitySkills.SelectedItem);
+                    Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty);
                     if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) btIncreaseSkill.Enabled = false;
                     else btIncreaseSkill.Enabled = true;
                 }
@@ -294,7 +294,7 @@ namespace SpaceMercs.Dialogs {
             if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                 // Disable if existing skill is already max level (== Player's level)
                 // Otherwise Enable
-                string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
+                string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
                 if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) btIncreaseSkill.Enabled = false;

@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Creature : IEntity {
+    public class Creature : IEntity {
         // IEntity stuff
         public int X { get; private set; }
         public int Y { get; private set; }

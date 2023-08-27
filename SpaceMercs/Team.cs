@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Team {
+    public class Team {
         public HabitableAO CurrentPosition { get; set; }
         private readonly List<Soldier> _Soldiers = new List<Soldier>();
         public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }

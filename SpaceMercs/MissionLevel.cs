@@ -7,7 +7,7 @@ using System.Text;
 using System.Xml;
 
 namespace SpaceMercs {
-    class MissionLevel {
+    public class MissionLevel {
         // "Gap" means that there is no wall, but there is a hole here so that you cannot walk across it, but may cross it if you have a jetpack (e.g.)
         // NOTE - if there are ever > 26 of these types then the current load/save mechanism will fail because it relies on characters
         public enum TileType { Floor, Wall, Gap, Void, Machinery, DoorVertical, DoorHorizontal, OpenDoorVertical, OpenDoorHorizontal, SecretDoorVertical, SecretDoorHorizontal }

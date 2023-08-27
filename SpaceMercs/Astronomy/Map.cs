@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Map {
+    public class Map {
         private readonly Dictionary<Tuple<int, int>, Sector> dSectors = new Dictionary<Tuple<int, int>, Sector>();
         public bool MapIsInitialised { get; private set; }
         private const int INITIAL_MAP_SIZE = 3; // Just make sure that you set up an inital map of a reasonable size. This must be >= 1!

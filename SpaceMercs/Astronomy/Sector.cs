@@ -1,15 +1,12 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace SpaceMercs {
-    class Sector {
+    public class Sector {
         private readonly List<Star> Stars = new List<Star>();
         public Race? Inhabitant = null;
         public int SectorX { get; private set; }

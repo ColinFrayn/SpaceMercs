@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Trap {
+    public class Trap {
         public Point Location { get; private set; } // Isn't really used; only for storing location on load.
         public bool Hidden { get; private set; }
         public WeaponType.DamageType Type { get; private set; }

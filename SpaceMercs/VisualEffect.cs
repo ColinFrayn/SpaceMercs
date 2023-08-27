@@ -4,7 +4,7 @@ using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 
 namespace SpaceMercs {
-    class VisualEffect {
+    public class VisualEffect {
         public enum EffectType { Damage, Healing, Shot, Frag, Explosion }
         private readonly EffectType type;
         private readonly long tStart;

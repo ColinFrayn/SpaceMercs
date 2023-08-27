@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Ship {
+    public class Ship {
         public ShipType Type { get; private set; }
         public string Name { get; private set; }
         public double Hull { get; private set; } // Amount of health left

@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class CreatureGroup {
+    public class CreatureGroup {
         public string Name { get; private set; }
         public string Filename { get; private set; }
         public bool FoundInCaves { get; private set; }

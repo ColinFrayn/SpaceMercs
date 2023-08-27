@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ArmourType : ItemType {
+    public class ArmourType : ItemType {
         public int Strength { get; private set; } // Bonus
         public int Agility { get; private set; } // Bonus
         public int Intellect { get; private set; } // Bonus

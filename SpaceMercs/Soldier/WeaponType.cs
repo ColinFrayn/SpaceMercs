@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class WeaponType : ItemType {
+    public class WeaponType : ItemType {
         public enum DamageType { Physical, Electrical, Fire, Cold, Acid, Poison };
         public DamageType DType { get; private set; } // Damage type
         public double Range { get; private set; } // Maximum range for this weapon

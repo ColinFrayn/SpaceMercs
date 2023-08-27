@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    abstract class AstronomicalObject {
+    public abstract class AstronomicalObject {
         public enum AstronomicalObjectType { Star, Planet, Moon, Unknown };
         public string Name { get; protected set; }
         public double Radius; // In metres

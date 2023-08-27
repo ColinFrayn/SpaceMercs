@@ -3,7 +3,7 @@ using System.Text;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Armour : IEquippable {
+    public class Armour : IEquippable {
         // IEquipment
         public string Name { get { return Material.Name + " " + Type.Name + " [" + Utils.LevelToDescription(Level) + "]"; } }
         public double Mass { get { return Type.Mass * Material.MassMod * (1.0 - (Level / 10.0)); } }

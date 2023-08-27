@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Star : AstronomicalObject {
+    public class Star : AstronomicalObject {
         private double Age;
 
         public readonly List<Planet> Planets;

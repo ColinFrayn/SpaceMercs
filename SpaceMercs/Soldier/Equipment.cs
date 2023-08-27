@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     // Soldier equipment
-    class Equipment : IEquippable {
+    public class Equipment : IEquippable {
         // IEquipment
         public string Name { get { return BaseType.Name; } }
         public double Mass { get { return BaseType.Mass; } }

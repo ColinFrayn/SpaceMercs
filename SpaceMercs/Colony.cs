@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Colony {
+    public class Colony {
         [Flags]
         public enum BaseType { None = 0x0, Outpost = 0x1, Military = 0x2, Research = 0x4, Colony = 0x8, Trading = 0x10, Metropolis = 0x20 };
         public BaseType Base { get; protected set; }

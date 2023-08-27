@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ItemEffect {
+    public class ItemEffect {
         public string Name { get; private set; }
         public double Radius { get; private set; } // Default to zero (single target)
         public double Range { get; private set; } // Default to one (touch)

@@ -354,7 +354,7 @@ namespace SpaceMercs.Dialogs {
             if (lbUtilitySkills.SelectedIndex < 0) throw new Exception("Attempting to add skill level to unselected utility skill");
             int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
             if (nut == 0) return;
-            string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
+            string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
             if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (s.GetRawUtilityLevel(sk) >= s.Level) throw new Exception("Attempting to increase Utility skill when skill is already at or above Soldier level");
@@ -386,7 +386,7 @@ namespace SpaceMercs.Dialogs {
                 if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                     // Disable if existing skill is already max level (== Player's level)
                     // Otherwise Enable
-                    Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), (string)lbUtilitySkills.SelectedItem);
+                    Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty);
                     if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;
                     if (s.GetRawUtilityLevel(sk) >= 10) btIncreaseSkill.Enabled = false;
                     else btIncreaseSkill.Enabled = true;
@@ -401,8 +401,8 @@ namespace SpaceMercs.Dialogs {
             if ((nut > 0) && (lbUtilitySkills.SelectedIndex >= 0)) {
                 // Disable if existing skill is already max level (== Player's level)
                 // Otherwise Enable
-                string stsk = lbUtilitySkills.SelectedItem.ToString() ?? string.Empty;
-                if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+                string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
+                if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf('[') - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;
                 if (s.GetRawUtilityLevel(sk) >= 10) btIncreaseSkill.Enabled = false;

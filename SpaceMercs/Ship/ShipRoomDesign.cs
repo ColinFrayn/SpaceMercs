@@ -2,7 +2,7 @@
 using System.Xml;
 
 namespace SpaceMercs {
-    class ShipRoomDesign {
+    public class ShipRoomDesign {
         public int XPos, YPos;
         public bool Rotated;
         public ShipEquipment.RoomSize Size;

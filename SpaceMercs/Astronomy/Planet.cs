@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    class Planet : HabitableAO {
+    public class Planet : HabitableAO {
         [Flags]
         public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40 };
         public Star Parent { get; set; }

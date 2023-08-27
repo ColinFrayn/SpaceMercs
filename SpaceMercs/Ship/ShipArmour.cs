@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ShipArmour : ShipEquipment {
+    public class ShipArmour : ShipEquipment {
         public int BaseArmour { get; private set; } // %age damage reduction
 
         public ShipArmour(XmlNode xml) : base(xml, ShipEquipment.RoomSize.Armour) {

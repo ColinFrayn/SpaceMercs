@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     using RoomSize = ShipEquipment.RoomSize;
-    class ShipType {
+    public class ShipType {
         public string Name { get; private set; } = string.Empty;
         public string AKA { get; private set; } = string.Empty; // Backwards compatibility for names
         public double Cost { get; private set; }

@@ -2,7 +2,7 @@
 using System.Xml;
 
 namespace SpaceMercs {
-    class Effect {
+    public class Effect {
         public string Name { get; private set; }
         public double Damage { get; private set; }
         public WeaponType.DamageType DamageType { get; private set; }

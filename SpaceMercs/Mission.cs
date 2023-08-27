@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
-    class Mission {
+    public class Mission {
         public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, Repair, Salvage, Ignore }
         public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather }
         public MissionType Type { get; private set; }

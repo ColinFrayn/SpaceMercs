@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ShipEngine : ShipEquipment {
+    public class ShipEngine : ShipEquipment {
         public double Range { get; private set; } // Range in metres
         public double Speed { get; private set; } // Max speed in m/s
         public double Accel { get; private set; } // Max accel in system in m/s/s

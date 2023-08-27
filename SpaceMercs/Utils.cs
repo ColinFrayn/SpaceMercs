@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Xml;
 using OpenTK.Mathematics;
-using System.Drawing;
-using System.Linq;
-using System.Diagnostics;
-using static SpaceMercs.ItemType;
-using System.ComponentModel.DataAnnotations;
 
 namespace SpaceMercs {
-    static class Utils {
+    public static class Utils {
         public enum Direction { West, East, North, South, NorthWest, NorthEast, SouthWest, SouthEast };
         private static readonly Random rnd = new Random();
 

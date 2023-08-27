@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class CreatureType {
+    public class CreatureType {
         public enum BodyType { Humanoid, Bug, Snake, Lizard, Beetle, Arachnid, Xenomorph, Centipede, Scorpion, Dragon, Plant, Slime, ShadowBeast, VoidBeast }
         public enum LootType { Soldier, Trader, Exotic }
         public string Name { get; private set; }

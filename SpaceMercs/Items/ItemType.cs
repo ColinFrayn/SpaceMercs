@@ -2,7 +2,7 @@
 
 namespace SpaceMercs {
     // A type of soldier item
-    class ItemType {
+    public class ItemType {
         public enum ItemSource { None = 0, Workshop = 1, Medlab = 2, Armoury = 3 }
 
         public string Name { get; private set; }

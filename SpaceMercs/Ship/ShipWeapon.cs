@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ShipWeapon : ShipEquipment {
+    public class ShipWeapon : ShipEquipment {
         public double Range { get; private set; } // Range in metres
         public double Rate { get; private set; } // Time in seconds between shots
         public double Cooldown { get; set; }  // In a dogfight, how long before we can fire again (sec)

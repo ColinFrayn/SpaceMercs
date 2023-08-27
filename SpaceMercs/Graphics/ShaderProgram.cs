@@ -20,7 +20,7 @@ namespace SpaceMercs.Graphics {
         }
     }
 
-    internal class ShaderProgram : IDisposable {
+    public class ShaderProgram : IDisposable {
         public readonly int ShaderProgramHandle;
 
         private readonly IReadOnlyDictionary<string, ShaderUniform> Uniforms;

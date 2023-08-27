@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class MaterialType {
+    public class MaterialType {
         public string Name { get; private set; }
         public double MassMod { get; private set; } // Modifier (default = 1.0)
         public double CostMod { get; private set; } // Modifier (default = 1.0)

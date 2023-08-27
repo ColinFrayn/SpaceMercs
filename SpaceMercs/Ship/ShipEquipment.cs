@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    class ShipEquipment {
+    public class ShipEquipment {
         public string Name { get; private set; }
         public double Cost { get; private set; } // Cost per unit ship size
         public int Defence { get; private set; } // Modifier (additive)
@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public int Generate { get; private set; } // Power generation capability
         public bool Scanner { get; private set; }  // Can scan surfaces of terrestrial planets for missions
         public string Description { get; private set; }
-        public ShipEquipment.RoomSize Size { get; private set; }
+        public RoomSize Size { get; private set; }
         public Colony.BaseType Available { get; private set; }
         public int TextureX { get; private set; }
         public int TextureY { get; private set; }
