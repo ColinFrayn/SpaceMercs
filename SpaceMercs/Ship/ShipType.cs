@@ -38,7 +38,20 @@ namespace SpaceMercs {
         private const double dRad = 0.25;
         private int MinX = 1000, MaxX = -1000;
         private int MinY = 1000, MaxY = -1000;
-        private GLShape? GLPerimeter;
+        private GLShape? _glPerimeter = null;
+        private GLShape? GLPerimeter { 
+            get {
+                if (_glPerimeter is null) {                
+                    // Set up the render list
+                    List<VertexPos3D> vertices = new List<VertexPos3D>();
+                    foreach (Point pt in Perimeter) {
+                        vertices.Add(new VertexPos3D(new Vector3(pt.X, pt.Y, 0f)));
+                    }
+                    _glPerimeter = new GLShape(vertices.ToArray(), Enumerable.Range(0, vertices.Count).ToArray(), PrimitiveType.LineLoop);
+                }
+                return _glPerimeter;
+            }
+        }
 
         public ShipType() {
             Description = "No description";
@@ -373,13 +386,6 @@ namespace SpaceMercs {
                 Point pt = Perimeter[n];
                 Perimeter.Add(new Point(pt.X, -pt.Y + 1));
             }
-
-            // Set up the render list
-            List<VertexPos3D> vertices = new List<VertexPos3D>();
-            foreach (Point pt in Perimeter) {
-                vertices.Add(new VertexPos3D(new Vector3(pt.X, pt.Y, 0f)));
-            }
-            GLPerimeter = new GLShape(vertices.ToArray(), Enumerable.Range(0, vertices.Count).ToArray(), OpenTK.Graphics.OpenGL.PrimitiveType.LineLoop);
         }
         public void DrawPerimeter(ShaderProgram prog) {
             if (GLPerimeter is null) return;

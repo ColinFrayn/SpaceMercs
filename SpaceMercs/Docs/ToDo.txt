@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Soldier was killed, loaded game, then told me all soldiers were killed.
+Soldier was killed, loaded game, then told me all soldiers were killed??
 
 Add lots of tests e.g. for inventory stuff
 
