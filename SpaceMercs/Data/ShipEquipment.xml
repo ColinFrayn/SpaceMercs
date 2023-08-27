@@ -2,7 +2,7 @@
   <ShipEquipment Name="Cabin">
     <Size>S</Size>
     <Cost>5</Cost>
-    <Power>1</Power>
+    <Power>2</Power>
     <Capacity>1</Capacity>
     <Desc>A small bunk room with a single bed.</Desc>
     <Tex>2,2</Tex>
@@ -10,7 +10,7 @@
   <ShipEquipment Name="Bunk Room">
     <Size>M</Size>
     <Cost>60</Cost>
-    <Power>2</Power>
+    <Power>3</Power>
     <Capacity>3</Capacity>
     <Desc>A medium-sized bunk room with three beds.</Desc>
     <Tex>3,2</Tex>
@@ -18,7 +18,7 @@
   <ShipEquipment Name="Large Bunk Room">
     <Size>L</Size>
     <Cost>350</Cost>
-    <Power>3</Power>
+    <Power>5</Power>
     <Capacity>6</Capacity>
     <Desc>A large bunk room with six beds.</Desc>
     <Tex>4,2</Tex>
@@ -42,7 +42,7 @@
   <ShipEquipment Name="Medbay">
     <Size>S</Size>
     <Cost>75</Cost>
-    <Power>4</Power>
+    <Power>5</Power>
     <Medlab/>
     <Desc>A medical facility, where medical devices can be fabricated.</Desc>
     <Tex>3,6</Tex>
@@ -69,7 +69,7 @@
   <ShipEquipment Name="Analysis Chamber">
     <Size>M</Size>
     <Cost>300</Cost>
-    <Power>7</Power>
+    <Power>10</Power>
     <Medlab/>
     <Research/>
     <Desc>A research and medical chamber based on Grey tech.</Desc>
@@ -98,16 +98,16 @@
   <ShipEquipment Name="Surface Scanner">
     <Cost>100</Cost>
     <Size>S</Size>
-    <Power>2</Power>
+    <Power>4</Power>
     <Scanner/>
     <Desc>A scanner to search for missions on a planet surface.</Desc>
     <Avail>CEMRT</Avail>
     <Tex>6,6</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Colony Builder">
-    <Cost>100</Cost>
+    <Cost>500</Cost>
     <Size>S</Size>
-    <Power>2</Power>
+    <Power>4</Power>
     <BuildColony/>
     <Desc>A device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>

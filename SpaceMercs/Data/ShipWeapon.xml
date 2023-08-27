@@ -31,7 +31,7 @@
     <Tex>3,5</Tex>
     <Race>Ogrish</Race>
   </ShipWeapon>
-  <ShipWeapon Name="Laser Rifle">
+  <ShipWeapon Name="Laser Cannon">
     <Cost>225</Cost>
     <Power>3</Power>
     <Attack>3</Attack>
