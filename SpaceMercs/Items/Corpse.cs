@@ -2,7 +2,7 @@
 using System.Xml;
 
 namespace SpaceMercs {
-    class Corpse : IItem {
+    public class Corpse : IItem {
         private readonly CreatureType? Type;
         private readonly string? SoldierName;
         private readonly int Level;

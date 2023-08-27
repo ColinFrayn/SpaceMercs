@@ -66,6 +66,7 @@ namespace SpaceMercs.MainWindow {
             if (m == null) throw new Exception("Starting MissionView with empty mission!");
             bool bCanAbort = (m.Type != Mission.MissionType.RepelBoarders);
             bool bInProgress = m.Soldiers.Any();
+            lastSoldiers.Clear(); // Make sure we delete any hangover data from a previosu loaded game
             ThisMission = m;
             if (!bInProgress) ThisMission.Initialise();
 
