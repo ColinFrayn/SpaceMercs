@@ -23,13 +23,13 @@
   </MaterialType>
   <MaterialType Name="Composite">
     <MassMod>0.9</MassMod>
-    <CostMod>3.0</CostMod>
+    <CostMod>3.5</CostMod>
     <ArmourMod>1.4</ArmourMod>
     <Rarity>0.25</Rarity>
     <Desc>Composite materials made from metals, fabrics and precision alloys.</Desc>
   </MaterialType>
   <MaterialType Name="Nanomesh">
-    <MassMod>0.7</MassMod>
+    <MassMod>0.6</MassMod>
     <CostMod>6.0</CostMod>
     <ArmourMod>1.8</ArmourMod>
     <Rarity>0.04</Rarity>
@@ -50,14 +50,14 @@
     <Desc>Adamantium is a weighty but highly resistant nano-engineered metallic substance.</Desc>
   </MaterialType>
   <MaterialType Name="Ultramesh">
-    <MassMod>0.6</MassMod>
+    <MassMod>0.5</MassMod>
     <CostMod>18.0</CostMod>
     <ArmourMod>2.3</ArmourMod>
     <Rarity>0.005</Rarity>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>
   </MaterialType>
   <MaterialType Name="Aeromesh">
-    <MassMod>0.4</MassMod>
+    <MassMod>0.35</MassMod>
     <CostMod>18.0</CostMod>
     <ArmourMod>2.0</ArmourMod>
     <Rarity>0.005</Rarity>

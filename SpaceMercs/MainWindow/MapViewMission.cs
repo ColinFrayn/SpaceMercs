@@ -801,8 +801,13 @@ namespace SpaceMercs.MainWindow {
             if (pt != Point.Empty && CurrentAction == SoldierAction.None) {
                 DrawHoverFrame(texProg, pt.X, pt.Y);
             }
+
+            // Selected entity red shadow
             if (SelectedEntity != null) {
-                DrawSelectionTile(texProg, SelectedEntity.Location.X + SelectedEntity.Size / 2f, SelectedEntity.Location.Y + SelectedEntity.Size / 2f, SelectedEntity.Size);
+                if (CurrentLevel.EntityIsVisible(SelectedEntity))
+                { 
+                    DrawSelectionTile(texProg, SelectedEntity.Location.X + SelectedEntity.Size / 2f, SelectedEntity.Location.Y + SelectedEntity.Size / 2f, SelectedEntity.Size);
+                }
             }
 
             List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();

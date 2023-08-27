@@ -28,6 +28,7 @@ namespace SpaceMercs {
         Weapon? EquippedWeapon { get; }
         double BaseArmour { get; }
         IEnumerable<Effect> Effects { get; }
+        bool IsInjured { get; }
 
         // Methods
         bool CanSee(int x, int y);

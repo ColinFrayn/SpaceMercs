@@ -988,24 +988,26 @@ namespace SpaceMercs {
 
         // Adding the (enemy) creatures to the map
         private void GenerateCreatures() {
+            // Who are we fighting against?
+            CreatureGroup cg = ParentMission.PrimaryEnemy;
+            Race? ra = ParentMission.RacialOpponent;
+            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra);
+            if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
+
+            // How big is this map, and how many creatures should it contain?
             int nFloorTiles = 0;
             for (int x = 0; x < Width; x++) {
                 for (int y = 0; y < Height; y++) {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (ParentMission.Soldiers.Count + 1) * Const.CreatureCountScale) / 10000;
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (ParentMission.Soldiers.Count + 1) * Const.CreatureCountScale * cg.QuantityScale / 10000.0);
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
 
-            // Who are we fighting against?
-            CreatureGroup cg = ParentMission.PrimaryEnemy;
-            Race? ra = ParentMission.RacialOpponent;
-            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra);
-            int niter = 0;
-
             // Add all creatures
+            int niter = 0;
             while (nLeft > 0 && niter < 1000) {
                 List<Creature> cGroup = new List<Creature>();
                 int iGroupSize = 1 + rand.Next(2) + rand.Next(ParentMission.Soldiers.Count);
@@ -1902,6 +1904,38 @@ namespace SpaceMercs {
             if (Traps.ContainsKey(pt)) return Traps[pt];
             return null;
         }
+        public bool EntityIsVisible(IEntity e) {
+            if (e is Soldier) return true;
+            if (e is Creature c) {
+                if (c.Size == 1) return Visible[c.X, c.Y];
+                for (int y = 0; y < c.Size; y++) {
+                    for (int x = 0; x < c.Size; x++) {
+                        if (Visible[c.X + x, c.Y + y]) return true;
+                    }
+                }
+                return false;
+            }
+            throw new NotImplementedException($"Unknown IEntity type : {e.GetType()}");
+        }
+        public Point? GetPointNearby(IEntity en, int range) {
+            for (int n=0; n<20; n++) {
+                int x = en.X + rand.Next(range * 2 + 1) - range;
+                int y = en.Y + rand.Next(range * 2 + 1) - range;
+                if (EntityCanBePlacedAtPosition(en,x,y)) return new Point(x, y);
+            }
+            return null;
+        }
+        public bool EntityCanBePlacedAtPosition(IEntity en, int x, int y) {
+            if (x > 0 && x < Width - 1 && y > 0 && y < Height - 1) {
+                for (int py = y; py < y + en.Size; py++) {
+                    for (int px = x; px < x + en.Size; px++) {
+                        if (IsObstruction(Map[px, py])) return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
 
         // Item functions
         public Stash? GetStashAtPoint(int x, int y) {
@@ -1971,7 +2005,7 @@ namespace SpaceMercs {
         }
 
         // ---- Pathfinding
-        public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1) {
+        public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1, bool preciseTarget = false) {
             int[,] AStarG = new int[Width, Height];
             Dictionary<Point, int> lOpen = new Dictionary<Point, int>();
             Dictionary<Point, int> lClosed = new Dictionary<Point, int>();
@@ -2077,13 +2111,13 @@ namespace SpaceMercs {
                             case (3): dy++; break;
                         }
                         int mintaxicab = 100000;
-                        for (int sdy = dy; sdy < dy + en.Size; sdy++) {
-                            for (int sdx = dx; sdx < dx + en.Size; sdx++) {
+                        int effSz = preciseTarget ? 1 : en.Size;
+                        for (int sdy = dy; sdy < dy + effSz; sdy++) {
+                            for (int sdx = dx; sdx < dx + effSz; sdx++) {
                                 int h = Math.Abs(end.X - sdx) + Math.Abs(end.Y - sdy); // Naive estimated taxicab distance to target
                                 if (h < mintaxicab) mintaxicab = h;
                             }
                         }
-                        //int h = Math.Abs(end.X - dx) + Math.Abs(end.Y-dy); // Naive estimated taxicab distance to target
                         if (dist + mintaxicab < guess + CREATURE_ASTAR_PRUNING_DIST + PruningModifier) { // We're not way off-track
                             Point pt2 = new Point(dx, dy);
                             // Arrived?

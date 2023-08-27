@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml;
-using System.Drawing;
-using System.Collections.Generic;
+﻿using System.Xml;
 
 namespace SpaceMercs {
     class CreatureType {
@@ -152,6 +149,5 @@ namespace SpaceMercs {
         public override string ToString() {
             return Name;
         }
-
     }
 }

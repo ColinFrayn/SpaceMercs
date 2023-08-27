@@ -2,7 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Bug: Descended to next mission level - random bit of map was visible (shaded) that shouldn't have been. Repro??
+Soldier was killed, loaded game, then told me all soldiers were killed.
+
+Make some creatures count as more than one creature (or less) to alter number of creatures per level
+
+Add lots of tests e.g. for inventory stuff
 
 ==========================================================================================================
 
@@ -10,6 +14,10 @@ Bug: Descended to next mission level - random bit of map was visible (shaded) th
 ---------------------
 Backburner : Features
 ---------------------
+
+Maybe add in overwatch?
+
+Life scanner (shows blips for any unseen creatures within a range?)
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 

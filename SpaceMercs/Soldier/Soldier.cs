@@ -52,12 +52,21 @@ namespace SpaceMercs {
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         private bool[,] SightMap;
         public Color PrimaryColor { get; private set; }
+        public bool IsInjured { get { return Health < MaxHealth; } }
 
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
         public bool CanSee(IEntity? en) {
             if (en == null) return false;
             for (int yy = en.Y; yy < en.Y + en.Size; yy++) {
                 for (int xx = en.X; xx < en.X + en.Size; xx++) {
+                    if (SightMap[xx, yy]) return true;
+                }
+            }
+            return false;
+        }
+        public bool CouldSeeEntityAtLocation(IEntity en, Point p) {
+            for (int yy = p.Y; yy < p.Y + en.Size; yy++) {
+                for (int xx = p.X; xx < p.X + en.Size; xx++) {
                     if (SightMap[xx, yy]) return true;
                 }
             }

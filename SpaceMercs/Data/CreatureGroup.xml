@@ -13,6 +13,7 @@
   <CreatureGroup Name="Bugs">
     <Filename>Bugs.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
+    <QuantityScale>1.2</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Desert Creatures">
     <Filename>DesertCreatures.xml</Filename>
@@ -21,6 +22,7 @@
   <CreatureGroup Name="Ogres">
     <Filename>Ogres.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+    <QuantityScale>0.8</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Pirates">
     <Filename>Pirates.xml</Filename>
@@ -38,6 +40,7 @@
   <CreatureGroup Name="Slime Creatures">
     <Filename>Slimes.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
+    <QuantityScale>1.2</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Soldiers">
     <Filename>Soldiers.xml</Filename>
@@ -47,6 +50,7 @@
   <CreatureGroup Name="Triffids">
     <Filename>Triffids.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
+    <QuantityScale>1.3</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Void Beasts">
     <Filename>VoidBeasts.xml</Filename>
@@ -59,5 +63,6 @@
   <CreatureGroup Name="Xenomorphs">
     <Filename>Xenomorphs.xml</Filename>
     <Locations>Cave,Ship</Locations>
+    <QuantityScale>0.9</QuantityScale>
   </CreatureGroup>
 </Data>

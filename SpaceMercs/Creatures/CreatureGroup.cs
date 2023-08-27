@@ -7,6 +7,7 @@ namespace SpaceMercs {
         public bool FoundInCaves { get; private set; }
         public bool FoundInShips { get; private set; }
         public bool RaceSpecific { get; private set; } // True = this is a group of creatures that must be assigned to a specific alien race. False = This is just random creatures/unknown aliens
+        public double QuantityScale { get; private set; } // Multiple of the standard number of creatures found in a level
         public HashSet<Planet.PlanetType> FoundIn { get; private set; }
         public int MaxRelations { get; private set; }  // Won't show up against any race with which racial relations are better than this value.
         public readonly List<CreatureType> CreatureTypes = new List<CreatureType>();
@@ -30,6 +31,7 @@ namespace SpaceMercs {
             FoundInShips = Locs.Contains("Ship");
             FoundInCaves = Locs.Contains("Cave");
             RaceSpecific = (xml.SelectSingleNode("Racial") is not null);
+            QuantityScale = xml.SelectNodeDouble("QuantityScale", 1.0);
             if (RaceSpecific) {
                 string strMaxRel = xml.SelectSingleNode("Racial")?.Attributes?["MaxRelations"]?.Value ?? string.Empty;
                 if (!string.IsNullOrEmpty(strMaxRel)) MaxRelations = int.Parse(strMaxRel);

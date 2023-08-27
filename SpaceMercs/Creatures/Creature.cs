@@ -2,7 +2,9 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System;
 using System.IO;
+using System.Windows.Shapes;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -27,6 +29,7 @@ namespace SpaceMercs {
         public double Facing { get; set; }
         public Point Location { get { return new Point(X, Y); } }
         public Point Investigate { get; set; } = Point.Empty;
+        public Point HidingPlace { get; set; } = Point.Empty;
         private readonly List<Effect> _Effects = new List<Effect>();
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         private bool[,] Visible;
@@ -268,6 +271,7 @@ namespace SpaceMercs {
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
         }
+        public bool IsInjured { get { return Health < MaxHealth; } }
 
         // Creature-specific
         public CreatureType Type { get; private set; }
@@ -318,6 +322,7 @@ namespace SpaceMercs {
             EquippedWeapon = Type.GenerateRandomWeapon();
             CurrentTarget = null;
             Investigate = Point.Empty;
+            HidingPlace = Point.Empty;
             TX = -1;
             TY = -1;
             QuestItem = false;
@@ -376,6 +381,14 @@ namespace SpaceMercs {
             }
             else Investigate = Point.Empty;
 
+            XmlNode? xnh = xml.SelectSingleNode("HidingPlace");
+            if (xnh is not null) {
+                int hx = xnh.GetAttributeInt("X");
+                int hy = xnh.GetAttributeInt("Y");
+                HidingPlace = new Point(hx, hy);
+            }
+            else HidingPlace = Point.Empty;
+
             // Effects
             XmlNode? xmlef = xml.SelectSingleNode("Effects");
             _Effects.Clear();
@@ -403,6 +416,7 @@ namespace SpaceMercs {
                 file.WriteLine(" <Target X=\"" + CurrentTarget.X + "\" Y=\"" + CurrentTarget.Y + "\"/>");
             }
             if (Investigate != Point.Empty) file.WriteLine(" <Investigate X=\"" + Investigate.X + "\" Y=\"" + Investigate.Y + "\"/>");
+            if (HidingPlace != Point.Empty) file.WriteLine(" <HidingPlace X=\"" + HidingPlace.X + "\" Y=\"" + HidingPlace.Y + "\"/>");
             if (_Effects.Count > 0) {
                 file.WriteLine(" <Effects>");
                 foreach (Effect e in Effects) {
@@ -421,7 +435,7 @@ namespace SpaceMercs {
             SetFacing(d);
             int oldx = X, oldy = Y;
             if (d == Utils.Direction.West && X > 0) {
-                if ((CurrentLevel.Map[X - 1, Y] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[X - 1, Y] == MissionLevel.TileType.DoorVertical) && CanOpenDoors) {
+                if (CurrentLevel.Map[X - 1, Y] == MissionLevel.TileType.DoorVertical && CanOpenDoors) {
                     CurrentLevel.OpenDoor(X - 1, Y);
                     if (CurrentLevel.Visible[X - 1, Y]) playSound("OpenDoor");
                 }
@@ -431,9 +445,9 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X - 1, Y));
             }
             if (d == Utils.Direction.East && X < CurrentLevel.Width - Size) {
-                if ((CurrentLevel.Map[X + 1, Y] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[X + 1, Y] == MissionLevel.TileType.DoorVertical) && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X + 1, Y);
-                    if (CurrentLevel.Visible[X + 1, Y]) playSound("OpenDoor");
+                if (CurrentLevel.Map[X + Size, Y] == MissionLevel.TileType.DoorVertical && CanOpenDoors) {
+                    CurrentLevel.OpenDoor(X + Size, Y);
+                    if (CurrentLevel.Visible[X + Size, Y]) playSound("OpenDoor");
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X + Size, Y + i]) || CurrentLevel.GetEntityAt(X + Size, Y + i) != null) return;
@@ -441,9 +455,9 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X + 1, Y));
             }
             if (d == Utils.Direction.North && Y < CurrentLevel.Height - Size) {
-                if ((CurrentLevel.Map[X, Y + 1] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[X, Y + 1] == MissionLevel.TileType.DoorVertical) && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X, Y + 1);
-                    if (CurrentLevel.Visible[X, Y + 1]) playSound("OpenDoor");
+                if (CurrentLevel.Map[X, Y + Size] == MissionLevel.TileType.DoorHorizontal && CanOpenDoors) {
+                    CurrentLevel.OpenDoor(X, Y + Size);
+                    if (CurrentLevel.Visible[X, Y + Size]) playSound("OpenDoor");
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X + i, Y + Size]) || CurrentLevel.GetEntityAt(X + i, Y + Size) != null) return;
@@ -451,7 +465,7 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X, Y + 1));
             }
             if (d == Utils.Direction.South && Y > 0) {
-                if ((CurrentLevel.Map[X, Y - 1] == MissionLevel.TileType.DoorHorizontal || CurrentLevel.Map[X, Y - 1] == MissionLevel.TileType.DoorVertical) && CanOpenDoors) {
+                if (CurrentLevel.Map[X, Y - 1] == MissionLevel.TileType.DoorHorizontal && CanOpenDoors) {
                     CurrentLevel.OpenDoor(X, Y - 1);
                     if (CurrentLevel.Visible[X, Y - 1]) playSound("OpenDoor");
                 }
@@ -466,6 +480,7 @@ namespace SpaceMercs {
         }
         private void MoveTo(Point pt, Action<string> playSound) { // Should be adjacent
             if (pt.X == X && pt.Y == Y) return; // Weird - no move
+
             if (pt.X == X && pt.Y == Y - 1) Move(Utils.Direction.South, playSound);
             else if (pt.X == X && pt.Y == Y + 1) Move(Utils.Direction.North, playSound);
             else if (pt.X == X - 1 && pt.Y == Y) Move(Utils.Direction.West, playSound);
@@ -527,8 +542,7 @@ namespace SpaceMercs {
                         MoveAwayFrom(CurrentTarget, playSound);
                         if (X != oldx || Y != oldy) {
                             postMoveCheck(this);
-                            // TODO refreshView();
-                            if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
                         }
                     }
                     CurrentTarget = null;
@@ -548,11 +562,11 @@ namespace SpaceMercs {
                             List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
                             if (path is null || path.Count == 0) {
                                 CurrentTarget = null; // No way of getting close enough to see target
-                                return;
+                                continue;
                             }
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
                         }
                         else if (Stamina < AttackCost) {
                             // Optionally move closer?
@@ -561,7 +575,7 @@ namespace SpaceMercs {
                                 if (path is null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 MoveTo(path[0], playSound);
                                 postMoveCheck(this);
-                                if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
+                                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
                             }
                             return;
                         }
@@ -582,7 +596,7 @@ namespace SpaceMercs {
                         else {
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
                         }
                     }
                 }
@@ -601,18 +615,75 @@ namespace SpaceMercs {
                     else {
                         MoveTo(path[0], playSound);
                         postMoveCheck(this);
-                        if (CurrentLevel.Visible[X, Y]) Thread.Sleep(Const.AITickSpeed);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                    }
+                }
+                // Running to hide somewhere
+                else if (HidingPlace != Point.Empty) {
+                    if (Stamina < MovementCost) return;
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist:0, preciseTarget:true);
+                    if (path is null || path.Count == 0) {
+                        HidingPlace = Point.Empty;
+                        return;
+                    }
+                    else {
+                        MoveTo(path[0], playSound);
+                        postMoveCheck(this);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
                     }
                 }
                 else {
-                    IsAlert = false;
-                    return; // no target, no hope of finding one, just give up
+                    // Attempt to hide from Soldiers
+                    Point? hidingPlace = null;
+                    if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
+                        hidingPlace = FindHidingPlace();
+                    }
+                    if (hidingPlace is null) {
+                        IsAlert = false;
+                        return; // no target, no hope of finding one, just give up
+                    }
+                    else {
+                        HidingPlace = hidingPlace!.Value; // Go here
+                    }
                 }
             } while (++nsteps < 20 && Stamina >= MovementCost);
         }
+        private Point? FindHidingPlace() {
+            Point? best = null;
+            double bestscore = -10000.0;
+            for (int n=0; n<50; n++) {
+                int range = 3 + (n/15);
+                // Random point nearby
+                Point? hidingSpot;
+                int attempts = 0;
+                List<Point>? path = null;
+                do {
+                    hidingSpot = CurrentLevel.GetPointNearby(this, range);
+                    if (hidingSpot.HasValue) {
+                        path = CurrentLevel.ShortestPath(this, Location, hidingSpot.Value, 30, false, mindist: 0, preciseTarget: true);
+                        if (path is null || path.Count == 0 || path.Count * MovementCost > Stamina) hidingSpot = null;
+                    }
+                } while (hidingSpot == null && ++attempts < 10);
+                if (!hidingSpot.HasValue) return null; // Too hard to get a nearby location
+
+                // Work out how good a hiding spot this is
+                double score = -path!.Count;
+                // Can any soldiers see this place?
+                foreach (Soldier s in CurrentLevel.Soldiers) {
+                    if (s.CouldSeeEntityAtLocation(this, hidingSpot.Value)) {
+                        double dist = Math.Sqrt(((s.X - hidingSpot.Value.X) * (s.X - hidingSpot.Value.X)) + ((s.Y - hidingSpot.Value.Y) * (s.Y - hidingSpot.Value.Y)));
+                        score -= (40-dist);
+                    }
+                }
+                if (score > bestscore) {
+                    bestscore = score;
+                    best = hidingSpot;
+                }
+            }
+            return best;
+        }
         private void SetBestTarget() {
             double bestscore = -10000.0;
-            //CurrentTarget = null;
             foreach (Soldier s in CurrentLevel.Soldiers) {
                 if (CanSee(s)) {
                     double score = 100.0 / RangeTo(s);
