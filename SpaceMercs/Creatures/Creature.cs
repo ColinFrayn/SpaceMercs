@@ -592,7 +592,11 @@ namespace SpaceMercs {
                         // Close the distance
                         if (Stamina < MovementCost) return;
                         List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
-                        if (path is null || path.Count == 0) CurrentTarget = null; // No way of getting close enough to hit target
+                        if (path is null || path.Count == 0) {
+                            // No way of getting close enough to hit target so give up and don't investigate.
+                            CurrentTarget = null;
+                            Investigate = Point.Empty;
+                        }
                         else {
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);

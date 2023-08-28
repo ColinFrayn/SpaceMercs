@@ -49,7 +49,7 @@ namespace SpaceMercs.Dialogs {
             if (_aoScan.Type == Planet.PlanetType.Oceanic) nm += rnd.Next(2) + 1;
             if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
             while (rnd.NextDouble() < 0.5) nm++;
-            if (nm < 1) nm = 1;
+            if (nm < 2) nm = 2;
             for (int n = 0; n < nm; n++) {
                 Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
                 _aoScan.AddMission(m);
