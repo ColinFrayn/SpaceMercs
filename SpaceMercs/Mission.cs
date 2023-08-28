@@ -1,5 +1,4 @@
-﻿using SpaceMercs.MainWindow;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 

@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
 using SpaceMercs.Graphics;
 using System.IO;
 using System.Xml;
@@ -105,17 +104,21 @@ namespace SpaceMercs {
             double dDist = AstronomicalObject.CalculateDistance(StaticData.Races[0].HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
 
-            int iLevelBase = 1 + (int)Math.Sqrt(dDistLY / Const.EncounterLevelScalingDistance);
-            if (dDist > 0.0) {
+            // Base difficulty scales up as we go further from home
+            int iLevelBase = 1 + (int)Math.Sqrt(dDistLY / Const.EncounterLevelScalingDistance); // Why sqrt?
+
+            // Increase the difficulty based on where we are in the system (more distant = more dangerous)
+            if (this != StaticData.Races[0].HomePlanet) { 
                 iLevelBase++;  // Not the home planet (but may be a moon)
-                if (this.GetSystem() != StaticData.Races[0].HomePlanet.GetSystem()) iLevelBase++;  // Not in home system, so more dangerous
+                if (GetSystem() != StaticData.Races[0].HomePlanet.GetSystem()) iLevelBase++;  // Not in home system, so more dangerous
                 if (this is HabitableAO hao) {
                     Planet? pl = null;
-                    if (hao is Planet) pl = ((Planet)this);
-                    else if (hao is Moon) pl = ((Moon)this).Parent;
+                    if (hao is Planet pla) pl = pla;
+                    else if (hao is Moon mn) pl = mn.Parent;
                     if (pl != null) {
                         if (hao.Colony == null && pl.Colony == null) iLevelBase++; // Planet/moon without local colony -> dangerous         
-                        if (rand.Next(10) + 2 < pl.ID) iLevelBase++; // Distant planets are more dangerous
+                        if (rand.Next(8) + 1 < pl.ID) iLevelBase++; // Distant planets are more dangerous
+                        if (rand.Next(8) + 3 < pl.ID) iLevelBase++; // More distant planets are even more dangerous
                     }
                 }
             }
@@ -154,12 +157,12 @@ namespace SpaceMercs {
         // Location to string
         public override string ToString() {
             string str = "(" + GetSystem().Sector.SectorX.ToString() + "," + GetSystem().Sector.SectorY.ToString() + ")";
-            switch (AOType) {
-                case AstronomicalObjectType.Star: return str + ":" + ID;
-                case AstronomicalObjectType.Planet: return str + ":" + GetSystem().ID + ":" + ID;
-                case AstronomicalObjectType.Moon: return str + ":" + GetSystem().ID + ":" + ((Moon)this).Parent.ID + "." + ID;
-            }
-            throw new NotImplementedException();
+            return AOType switch {
+                AstronomicalObjectType.Star => str + ":" + ID,
+                AstronomicalObjectType.Planet => str + ":" + GetSystem().ID + ":" + ID,
+                AstronomicalObjectType.Moon => str + ":" + GetSystem().ID + ":" + ((Moon)this).Parent.ID + "." + ID,
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }
