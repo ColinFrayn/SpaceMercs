@@ -25,9 +25,12 @@ namespace SpaceMercs {
         public const double SearchCost = 10.0; // Cost, in stamina points, for searching the nearby area
         public const double UseItemCost = 10.0; // Cost, in stamina points, for using an item
         public const int BaseSearchRadius = 5; // Maximum radius of any search for unskilled searcher (increase by 1 per point in perception)
+        public const int PassiveSearchRadius = 2; // Maximum radius of any search for unskilled passive searcher (increase by 1 per point in perception)
         public const double BaseSearchChance = 70.0; // Chance of spotting a hidden object at distance zero (plus Intellect)
+        public const double PassiveSearchChance = 30.0; // Chance of spotting a hidden object at distance zero (plus Intellect)
         public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
         public const double SearchBoostPerSkill = 5.0; // Increase in chance to spot a hidden object for each point in Perception.
+        public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
         public const int WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
         public const double EquipmentLevelCostExponent = 1.35;  // For each level the weapon quality improves, this is the power law relationship to cost

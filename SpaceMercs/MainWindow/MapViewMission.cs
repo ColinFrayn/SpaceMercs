@@ -575,6 +575,10 @@ namespace SpaceMercs.MainWindow {
             foreach (Creature cr in CurrentLevel.Creatures) {
                 if (cr.CurrentTarget == s && cr.CanSee(s)) cr.SetTarget(s);   // Make sure creature is following us by setting the target (NOP) and updating the Investigation square with Soldier's current position
             }
+            // Passive search
+            List<string> lFound = s.SearchTheArea(CurrentLevel, true);
+            if (lFound.Count > 0) msgBox.PopupMessage(lFound);
+
         }
         private void CheckForTransition() {
             // Test if all soldiers are now on an entrance/exit square and set up the button if so.
@@ -1444,7 +1448,7 @@ namespace SpaceMercs.MainWindow {
             if (bAIRunning) return;
             if (SelectedEntity is not Soldier ss) return;
             if (ss.Stamina < ss.SearchCost) return;
-            List<string> lFound = ss.PerformSearch(CurrentLevel);
+            List<string> lFound = ss.PerformActiveSearch(CurrentLevel);
             if (lFound.Count == 0) msgBox.PopupMessage("Despite a thorough search, you found nothing");
             else msgBox.PopupMessage(lFound);
             GenerateDistMap(ss);

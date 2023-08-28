@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont.PostScript;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -338,7 +339,9 @@ namespace SpaceMercs {
         public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost * (1.0 + Encumbrance)); } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
+        public int PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
         public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Intellect; } }
+        public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Intellect; } }
         private void CalculateMaxStats() {
             MaxHealth = BaseHealth + StatBonuses(StatType.Health);
             if (Health > MaxHealth) Health = MaxHealth;
@@ -1133,11 +1136,14 @@ namespace SpaceMercs {
             CalculateMaxStats(); // Just in case
             HasMoved = false;
         }
-        public List<string> PerformSearch(MissionLevel level) {
+        public List<string> PerformActiveSearch(MissionLevel level) {
             HasMoved = true;
             Stamina -= SearchCost;
+            return SearchTheArea(level, false);
+        }
+        public List<string> SearchTheArea(MissionLevel level, bool bPassive) { 
             List<string> lFound = new List<string>();
-            int rad = SearchRadius;
+            int rad = bPassive ? PassiveSearchRadius : SearchRadius;
             Random rand = new Random();
             for (int y = Math.Max(0, Y - rad); y <= Math.Min(Y + rad, level.Height - 1); y++) {
                 for (int x = Math.Max(0, X - rad); x <= Math.Min(X + rad, level.Width - 1); x++) {
@@ -1158,7 +1164,9 @@ namespace SpaceMercs {
                         if (!level.CanSee(Location, new Point(x, y))) continue;
 
                         // If so then check if we spot it
-                        double chance = BaseSearchChance - Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * Const.SearchReduction;
+                        double chance = bPassive ? PassiveSearchChance : BaseSearchChance;
+                        chance -= Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * Const.SearchReduction;
+                        chance -= level.ParentMission.Diff * Const.MissionDifficultySearchScale;
                         if (rand.NextDouble() * 100 <= chance) {
                             // Spotted
                             // Hidden door
