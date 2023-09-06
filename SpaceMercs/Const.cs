@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace SpaceMercs {
-    static class Const {
+    public static class Const {
         // Version
         public const string strVersion = "1.0";
 

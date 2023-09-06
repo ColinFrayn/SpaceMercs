@@ -8,8 +8,10 @@
     <ItemEffect Name="Heal">
       <SingleUse/>
       <Skill Required="false">Medic</Skill>
+      <CurePoison/>
       <Effect>
-        <Damage Type="Physical">-10</Damage> <!-- Negative damage = healing -->
+        <Damage Type="Physical">-10</Damage>
+        <!-- Negative damage = healing -->
       </Effect>
       <Sound>Inject</Sound>
     </ItemEffect>
@@ -29,6 +31,7 @@
     <ItemEffect Name="Heal">
       <Recharge>2</Recharge>
       <Skill Required="false">Medic</Skill>
+      <CurePoison/>
       <Effect>
         <Damage Type="Physical">-8</Damage>
         <!-- Negative damage = healing -->
@@ -52,6 +55,7 @@
     <ItemEffect Name="Heal">
       <SingleUse/>
       <Skill Required="false">Medic</Skill>
+      <CurePoison/>
       <Effect>
         <Damage Type="Physical">-20</Damage>
         <!-- Negative damage = healing -->
@@ -76,6 +80,7 @@
     <ItemEffect Name="Heal">
       <Recharge>2</Recharge>
       <Skill Required="false">Medic</Skill>
+      <CurePoison/>
       <Effect>
         <Damage Type="Physical">-16</Damage>
         <!-- Negative damage = healing -->
@@ -245,7 +250,7 @@
     <Mass>0.4</Mass>
     <Cost>12</Cost>
     <Rarity>6</Rarity>
-    <Desc>A grenade which distributes a highly corrosive substance</Desc>
+    <Desc>A grenade which distributes a highly corrosive substance, damaging an enemy's armour.</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
       <Radius>2.0</Radius>
@@ -255,7 +260,8 @@
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
-        <Damage Type="Acid">4</Damage>
+        <Damage Type="Acid">2</Damage>
+        <ArmourMod>-5</ArmourMod>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>

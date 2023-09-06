@@ -65668,6 +65668,9 @@
   <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
   </Inv>
+  <Inv Count="3">
+<Equipment Type="Acid Grenade"/>
+  </Inv>
  </Inventory>
  <EquippedArmour>
 <Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>

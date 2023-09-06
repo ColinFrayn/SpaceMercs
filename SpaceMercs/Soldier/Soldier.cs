@@ -185,7 +185,7 @@ namespace SpaceMercs {
             foreach (Armour ar in EquippedArmour) {
                 red -= ar.GetDamageReductionByDamageType(type);
             }
-            if (red < 0.0) red = 0.0; // Clamp this for Soldiers (i.e. no healing)
+            if (red < 0.0) red = 0.0; // Clamp this for Soldiers (i.e. no reducing the damage so much it flips to healing)
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
         public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
@@ -290,6 +290,9 @@ namespace SpaceMercs {
             float TotalDam = (float)InflictDamage(AllDam);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+            if (ie.CurePoison) {
+                _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
+            }
             CalculateMaxStats();
         }
 
@@ -863,6 +866,10 @@ namespace SpaceMercs {
                 foreach (Armour ar in EquippedArmour) {
                     arm += ar.BaseArmour;
                 }
+                foreach (Effect eff in Effects) {
+                    arm += eff.ArmourMod;
+                }
+                if (arm < 0.0) arm = 0.0;
                 return arm;
             }
         }

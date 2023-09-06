@@ -10,6 +10,7 @@ namespace SpaceMercs {
         public string SoundEffect { get; private set; }
         private readonly Dictionary<StatType, int> StatMods;
         public double SpeedMod { get; private set; }
+        public double ArmourMod { get; private set; }
 
         public Effect(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.Value ?? "";
@@ -23,8 +24,9 @@ namespace SpaceMercs {
             if (Duration > 0 && string.IsNullOrEmpty(Name)) throw new Exception("If Effect duration > 0 then effect must have a name");
 
             SoundEffect = xml.SelectNodeText("Sound");
-            
+
             SpeedMod = xml.SelectNodeDouble("SpeedMod", 1.0);
+            ArmourMod = xml.SelectNodeDouble("ArmourMod", 0.0);
 
             StatMods = new Dictionary<StatType, int>();
             XmlNode? sm = xml.SelectSingleNode("StatMods");
@@ -45,6 +47,7 @@ namespace SpaceMercs {
             Duration = e.Duration;
             SoundEffect = e.SoundEffect;
             SpeedMod = e.SpeedMod;
+            ArmourMod = e.ArmourMod;
             StatMods = new Dictionary<StatType, int>(e.StatMods);
         }
 

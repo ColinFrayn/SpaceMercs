@@ -10,7 +10,8 @@ namespace SpaceMercs {
         public bool SkillRequired { get; private set; }  // Is the AssociatedSkill required to be >0?
         public List<Effect> Effects { get; private set; }
         public string SoundEffect { get; private set; }
-        public int Recharge { get; private set; } // Number of turns to recharge (1 = can use once per round, 0 = unlimited uses)
+        public int Recharge { get; private set; } // Number of turns to recharge (2 = usable every other round, 1 = one use per round, 0 = unlimited uses)
+        public bool CurePoison { get; private set; }
 
         public ItemEffect(XmlNode xml) {
             Name = xml.Attributes?["Name"]?.Value ?? "<No Name>";
@@ -19,7 +20,9 @@ namespace SpaceMercs {
             Range = xml.SelectNodeDouble("Range", 1.0);
             Recharge = xml.SelectNodeInt("Recharge", 0);
 
-            SingleUse = (xml.SelectSingleNode("SingleUse") is not null);
+            SingleUse = xml.SelectSingleNode("SingleUse") != null;
+
+            CurePoison = xml.SelectSingleNode("CurePoison") != null;
 
             XmlNode? xsk = xml.SelectSingleNode("Skill");
             if (xsk is not null) {

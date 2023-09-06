@@ -2,9 +2,7 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System;
 using System.IO;
-using System.Windows.Shapes;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -155,7 +153,16 @@ namespace SpaceMercs {
         public double RangeTo(Point pt) {
             return RangeTo(pt.X, pt.Y);
         }
-        public double BaseArmour { get { return Type.ArmourBase * (1.0 + Const.CreatureLevelArmourStep * (Level - 1)); } }
+        public double BaseArmour { 
+            get {
+                double arm = Type.ArmourBase * (1.0 + Const.CreatureLevelArmourStep * (Level - 1));
+                foreach (Effect eff in Effects) {
+                    arm += eff.ArmourMod;
+                }
+                if (arm < 0.0) arm = 0.0;
+                return arm;
+            } 
+        }
         public double GetDamageReductionByDamageType(WeaponType.DamageType type) {
             double red = 100.0;
             if (Type.Resistances.ContainsKey(type)) red -= Type.Resistances[type];
@@ -270,6 +277,9 @@ namespace SpaceMercs {
             float TotalDam = (float)InflictDamage(AllDam);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+            if (ie.CurePoison) {
+                _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
+            }
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
 
