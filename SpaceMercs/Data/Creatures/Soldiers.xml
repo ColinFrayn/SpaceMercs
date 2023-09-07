@@ -30,10 +30,24 @@
     <Col3>170, 170, 170</Col3>
     <Desc>An elite trooper</Desc>
     <Weapons>
-      <Weapon Weight="1">Chainsword</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
-      <Weapon Weight="2">Heavy Rifle</Weapon>
-      <Weapon Weight="2">Sniper Rifle</Weapon>
+      <Weapon Weight="1">Automatic Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Specialist">
+    <LevelRange>3,18</LevelRange>
+    <Attack>13</Attack>
+    <Defence>11</Defence>
+    <Armour>26</Armour>
+    <Health>16</Health>
+    <Stamina>16</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>An elite trooper with close combat weapons</Desc>
+    <Weapons>
+      <Weapon Weight="1">Shortblade</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Hero Trooper">
@@ -51,10 +65,42 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A heroic soldier</Desc>
     <Weapons>
-      <Weapon Weight="1">Chainsword</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="1">Shortblade</Weapon>
       <Weapon Weight="2">Automatic Rifle</Weapon>
-      <Weapon Weight="2">Heavy Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Heavy Support">
+    <Scale>1.05</Scale>
+    <LevelRange>5,22</LevelRange>
+    <Attack>13</Attack>
+    <Defence>12</Defence>
+    <Armour>28</Armour>
+    <Health>18</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A heroic soldier with a heavy weapon</Desc>
+    <Weapons>
+      <Weapon Weight="1">Heavy Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Sniper">
+    <Scale>1.0</Scale>
+    <LevelRange>5,22</LevelRange>
+    <Attack>14</Attack>
+    <Defence>11</Defence>
+    <Armour>20</Armour>
+    <Health>15</Health>
+    <Stamina>16</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A sniper soldier</Desc>
+    <Weapons>
       <Weapon Weight="1">Sniper Rifle</Weapon>
     </Weapons>
   </CreatureType>

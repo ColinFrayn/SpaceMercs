@@ -55,9 +55,9 @@
       <Weapon Weight="2">Automatic Rifle</Weapon>
     </Weapons>
   </CreatureType>
-  <CreatureType Name="Elite Pirate">
+  <CreatureType Name="Elite Skirmisher">
     <Scale>1.05</Scale>
-    <LevelRange>1,15</LevelRange>
+    <LevelRange>2,15</LevelRange>
     <Attack>13</Attack>
     <Defence>11</Defence>
     <Armour>26</Armour>
@@ -73,10 +73,26 @@
       <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="1">Chainsword</Weapon>
       <Weapon Weight="2">Automatic Rifle</Weapon>
-      <Weapon Weight="1">Heavy Rifle</Weapon>
     </Weapons>
   </CreatureType>
-  <CreatureType Name="Pirate Leader">
+  <CreatureType Name="Deadeye">
+    <Scale>1.00</Scale>
+    <LevelRange>5,15</LevelRange>
+    <Attack>14</Attack>
+    <Defence>11</Defence>
+    <Armour>17</Armour>
+    <Health>12</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>220, 150, 140</Col2>
+    <Col3>200, 160, 120</Col3>
+    <Desc>A pirate sniper</Desc>
+    <Weapons>
+      <Weapon Weight="1">Sniper Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Pirate Lord">
     <Scale>1.1</Scale>
     <LevelRange>4,18</LevelRange>
     <Attack>14</Attack>
