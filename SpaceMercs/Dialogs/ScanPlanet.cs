@@ -36,8 +36,9 @@ namespace SpaceMercs.Dialogs {
         }
         private void UpdateScan(object? myObject, EventArgs myEventArgs) {
             iProgress++;
-            pbScan.Value = Math.Min(iProgress, 20);
-            if (iProgress > 21) {
+            if (iProgress <= 24) Const.dtTime = Const.dtTime.AddHours(1);
+            pbScan.Value = Math.Min(iProgress, 24);
+            if (iProgress > 25) {
                 clockTick.Stop();
                 ScanComplete();
             }

@@ -2,8 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Playtest
-
+Playtest...
 
 ==========================================================================================================
 
@@ -16,7 +15,7 @@ Maybe add in overwatch?
 
 Add in tests as we go
 
-Life scanner (shows blips for any unseen creatures within a range? Not passive)
+Life scanner (shows blips for any unseen creatures within a range? Not passive) ?
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
@@ -29,17 +28,22 @@ First Contact
 - If ship is alien but you haven't met that alien race then handle it differently
 -- Display as unknown
 
-MapViewMission - VisualEffect.DisplayShotLine()
+Add light sources for max. vision range? 
+
+Add new trade routes automatically over time?
+- Connect based on size of colonies in systems and their separation
+- What do trade routes accomplish? Maybe make certain colony types > 1 possible? Improve stock? Improve prices based on connectivity?
+
+Allow creatures to enter stealth
+- Allow searching for them (modifying chance by the creature level or stealth score)
+
+MapViewMission - VisualEffect.DisplayShotLine() ??
 
 Need to do missions to gain favour with alien races first
 - Need a baseline rep before you can trade
 - Higher rep = better prices
 
-Check what happens when we found colonies in systems owned by other races (should worsen race relations and warn before)
-
-Add new trade routes automatically over time?
-- Connect based on size of colonies in systems and their separation
-- What do trade routes accomplish? Maybe make certain colony types > 1 possible? Improve stock? Improve prices based on connectivity?
+Check what happens when we found colonies in systems owned by other races (should worsen race relations and warn before, or maybe just prevent entierly)
 
 Better soldier textures
 - Change texture based on race
@@ -54,7 +58,7 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Soldier death
 - Walking?
 
-ShipView: Show ship shields
+ShipView: Show ship shields in combat
 - Display ellipse, blended, before drawing the rooms (but after starfield)
 - Vary transparency based on shield strength
 
@@ -72,12 +76,7 @@ Display visual effect on creatures if they have shields
 - Textures.GenerateCreatureTexture()  (all types)
 -- Need to make textures specifically for each individual creature?
 
-Add light sources for max. vision range? 
-
 Allow creatures to have multiple weapons (ranged and melee)?
-
-Allow creatures to enter stealth
-- Allow searching for them (modifying chance by the creature level or stealth score)
 
 Investigate Blockly for scripting soldiers?
 
@@ -94,8 +93,6 @@ Backburner : Improvements
 -------------------------
 
 Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
-
-DrawShipHoverInfo() : Add multi-line info for equipment?
 
 Improve TextRenderer: Add Bold, Shadow, Border
 

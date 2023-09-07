@@ -738,7 +738,7 @@ namespace SpaceMercs {
 
         // Calculate salvage value of this entire ship
         public double CalculateSalvageValue() {
-            double Value = Type.Cost; // Value of the base ship
+            double Value = Type.Cost * Const.SalvageRate / (Owner?.GetLocalPriceModifier() ?? 1.0); // Value of the base ship
 
             // Add in salvage value of all equipment/rooms
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
@@ -746,7 +746,7 @@ namespace SpaceMercs {
             }
 
             // Modify based on salvage rate & race relations etc.
-            return Value * Const.SalvageRate / (Owner?.GetLocalPriceModifier() ?? 1.0);
+            return Value;
         }
 
         // Calculate how much it would cost to repair this ship

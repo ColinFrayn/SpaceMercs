@@ -141,7 +141,7 @@
       // pbScan
       // 
       this.pbScan.Location = new System.Drawing.Point(32, 285);
-      this.pbScan.Maximum = 20;
+      this.pbScan.Maximum = 24;
       this.pbScan.Name = "pbScan";
       this.pbScan.Size = new System.Drawing.Size(440, 51);
       this.pbScan.Step = 1;

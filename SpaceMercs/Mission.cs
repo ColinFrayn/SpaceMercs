@@ -359,7 +359,7 @@ namespace SpaceMercs {
                 else mg = MissionGoal.ExploreAll;
             }
             else if (r < 70) {
-                if (m.Diff < 4 || !m.PrimaryEnemy.HasBoss) mg = MissionGoal.KillAll;
+                if (m.Diff < 4 || !m.PrimaryEnemy.HasBoss || m.PrimaryEnemy.Boss!.LevelMin > m.Diff) mg = MissionGoal.KillAll;
                 else mg = MissionGoal.KillBoss;
             }
             else if (r < 85 && m.Location.Colony != null) {

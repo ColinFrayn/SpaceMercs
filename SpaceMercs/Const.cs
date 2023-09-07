@@ -175,7 +175,7 @@ namespace SpaceMercs {
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
         public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
         public const double ShipBountyScale = 1.0;  // Scale for calculating bounty of enemy ships defeated
-        public static DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+        public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         public static DateTime dtTime = Const.dtStart;
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
 
