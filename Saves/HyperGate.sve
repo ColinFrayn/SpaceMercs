@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>20/01/2150 14:46:20</Clock>
+<Clock>22/01/2150 07:37:09</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -11091,7 +11091,6 @@
 </Moons>
 </Planet>
 <Planet ID="3">
-<Name>Home Ice</Name>
 <Orbit>75564679099</Orbit>
 <Radius>7110942</Radius>
 <PRot>63542096</PRot>
@@ -65607,8 +65606,8 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)5.0</Pos>
- <Cash>55.083271553138545</Cash>
+ <Pos>(0,0)5.HG</Pos>
+ <Cash>725.0458802487907</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="10" Y="38"/>
@@ -65770,15 +65769,19 @@
  <Moved/>
 </Soldier>
  </Soldiers>
-<Ship Type="Corvette">
- <Name>Unnamed Ship</Name>
- <Hull>18</Hull>
+<Ship Type="Shuttle">
+ <Name>Player Ship</Name>
+ <Hull>13</Hull>
  <Shield>0</Shield>
- <Seed>835243</Seed>
+ <Armour>Reinforced Plating</Armour>
+ <Seed>779812</Seed>
  <Eqp ID="0" Active="True">Fission Core</Eqp>
- <Eqp ID="6" Active="True">Rail Gun</Eqp>
- <Eqp ID="8" Active="True">Thrusters</Eqp>
- <Eqp ID="7" Active="True">Rail Gun</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="5" Active="True">Rail Gun</Eqp>
+ <Eqp ID="6" Active="True">Fusion Drive</Eqp>
+ <Eqp ID="4" Active="True">Surface Scanner</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>

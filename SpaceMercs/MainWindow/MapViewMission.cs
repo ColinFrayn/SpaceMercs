@@ -120,8 +120,8 @@ namespace SpaceMercs.MainWindow {
             // Didn't complete the mission so put it back on the pile
             if (MissionOutcome != MissionResult.Victory && TravelDetails == null) {
                 ThisMission.ResetMission();
-                if (PlayerTeam.CurrentPosition?.Colony != null) PlayerTeam.CurrentPosition.Colony.AddMission(ThisMission);
-                else PlayerTeam.CurrentPosition!.AddMission(ThisMission);
+                if (PlayerTeam.CurrentPositionHAO?.Colony != null) PlayerTeam.CurrentPositionHAO.Colony.AddMission(ThisMission);
+                else PlayerTeam.CurrentPositionHAO?.AddMission(ThisMission);
             }
 
             view = ViewMode.ViewSystem;

@@ -43,7 +43,7 @@
   </ShipEngine>
   <ShipEngine Name="Hyperspace Drive">
     <Range>8</Range>
-    <Speed>10</Speed>
+    <Speed>20</Speed>
     <Accel>999999</Accel>
     <Cost>2500</Cost>
     <Power>24</Power>
@@ -53,7 +53,7 @@
   </ShipEngine>
   <ShipEngine Name="Subspace Drive">
     <Range>12</Range>
-    <Speed>20</Speed>
+    <Speed>30</Speed>
     <Accel>999999</Accel>
     <Cost>6000</Cost>
     <Power>30</Power>
@@ -63,7 +63,7 @@
   </ShipEngine>
   <ShipEngine Name="Ethereal Drive">
     <Range>11</Range>
-    <Speed>22</Speed>
+    <Speed>35</Speed>
     <Accel>999999</Accel>
     <Cost>7000</Cost>
     <Power>30</Power>

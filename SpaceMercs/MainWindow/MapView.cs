@@ -412,6 +412,7 @@ namespace SpaceMercs.MainWindow {
             gbFlyTo?.IsHover((int)e.X, (int)e.Y);
             gbViewColony?.IsHover((int)e.X, (int)e.Y);
             gbScan?.IsHover((int)e.X, (int)e.Y);
+            gbHyperspace?.IsHover((int)e.X, (int)e.Y);
             if (view == ViewMode.ViewMap) MapHover();
         }
         protected override void OnMouseDown(MouseButtonEventArgs e) {
@@ -463,6 +464,7 @@ namespace SpaceMercs.MainWindow {
                 if (gbFlyTo!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (gbViewColony!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (gbScan!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbHyperspace!.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (aoHover != null) aoSelected = aoHover;
                 SetSelection();
                 CheckMenuClick();
@@ -513,6 +515,7 @@ namespace SpaceMercs.MainWindow {
                         gbFlyTo?.Deactivate();
                         gbViewColony?.Deactivate();
                         gbScan?.Deactivate();
+                        gbHyperspace?.Deactivate();
                     }
                     else {
                         msgBox.PopupMessage("You have not yet visited that system");
@@ -546,7 +549,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 case I_ViewColony:
                     if (!GalaxyMap.MapIsInitialised) return;
-                    if (PlayerTeam.CurrentPosition.BaseSize == 0) return;
+                    if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.BaseSize == 0) return;
                     ColonyView cv = new ColonyView(PlayerTeam, RunMission);
                     cv.Show();
                     return;
@@ -584,8 +587,8 @@ namespace SpaceMercs.MainWindow {
             bLoaded = true;
             CloseAllDialogs();
             PlayerTeam = new Team(ng, StaticData.Races[0]);
-            if (PlayerTeam.CurrentPosition == null || PlayerTeam.CurrentPosition.Colony == null) throw new Exception("Did not set up PlayerTeam correctly - not at home planet!");
-            PlayerTeam.CurrentPosition.Colony.UpdateStock(PlayerTeam);
+            if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony == null) throw new Exception("Did not set up PlayerTeam correctly - not at home planet!");
+            hao.Colony.UpdateStock(PlayerTeam);
         }
 
         // External triggers
@@ -690,7 +693,6 @@ namespace SpaceMercs.MainWindow {
 
         // Finish travelling
         public void ArriveAt(AstronomicalObject aoTo) {
-            if (TravelDetails is null) throw new Exception("Null TravelDetails upon arrival");
             // Close colonyview if open
             foreach (Form f in Application.OpenForms) {
                 if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }
@@ -698,9 +700,12 @@ namespace SpaceMercs.MainWindow {
             aoTo.GetSystem().SetVisited(true);
             aoTo.GetSystem().UpdateColonies();
             msgBox.PopupMessage("You have arrived at your destination");
-            PlayerTeam.CurrentPosition = TravelDetails.Destination;
-            if (PlayerTeam.CurrentPosition.Colony != null) PlayerTeam.CurrentPosition.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
+            PlayerTeam.CurrentPosition = aoTo;
+            if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) hao.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
             TravelDetails = null;
+            SystemStar = PlayerTeam.CurrentPosition.GetSystem();
+            fMapViewX = PlayerTeam.CurrentPosition.GetMapLocation().X;
+            fMapViewY = PlayerTeam.CurrentPosition.GetMapLocation().Y;
             SetAOButtonsOnGUI(aoSelected);
         }
 

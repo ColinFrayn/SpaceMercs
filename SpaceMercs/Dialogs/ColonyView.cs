@@ -26,8 +26,8 @@ namespace SpaceMercs.Dialogs {
         public ColonyView(Team t, Func<Mission, bool> _StartMission) {
             PlayerTeam = t;
             StartMission = _StartMission;
-            if (PlayerTeam.CurrentPosition.Colony is null) throw new Exception("Null colony in ColonyView!");
-            cl = PlayerTeam.CurrentPosition.Colony;
+            if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
+            cl = hao.Colony;
             cl.UpdateStock(PlayerTeam); // Make sure we have updated everything sinze the last mission
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
             InitializeComponent();

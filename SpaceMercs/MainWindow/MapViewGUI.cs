@@ -7,7 +7,7 @@ using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
     partial class MapView {
-        private GUIButton? gbRenameObject, gbFlyTo, gbViewColony, gbScan;
+        private GUIButton? gbRenameObject, gbFlyTo, gbViewColony, gbScan, gbHyperspace;
         private GUIPanel? gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
         private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
 
@@ -105,6 +105,7 @@ namespace SpaceMercs.MainWindow {
                 gbFlyTo!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
                 gbViewColony!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
                 gbScan!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
+                gbHyperspace!.Display((int)MousePosition.X, (int)MousePosition.Y, flatColourShaderProgram);
             }
         }
 
@@ -289,6 +290,11 @@ namespace SpaceMercs.MainWindow {
             gbScan.SetPosition(0.23f, 0.07f);
             gbScan.SetSize(0.065f, 0.035f);
 
+            // "Travel by hyperspace" button
+            gbHyperspace = new GUIButton("Gate", this, OpenHyperspaceDialog);
+            gbHyperspace.SetPosition(0.23f, 0.07f);
+            gbHyperspace.SetSize(0.065f, 0.035f);
+
             // "Start a new game" button
             gbNewGame = new GUIButton("Start New Game", this, NewGame_Continue);
             gbNewGame.SetPosition(0.35f, 0.4f);
@@ -398,7 +404,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.MapIsInitialised) return;
-            if (PlayerTeam.CurrentPosition?.BaseSize == 0) {
+            if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
                 if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas && PlayerTeam.PlayerShip.CanFoundColony) {
                     if (!hao.Scanned) {
                         msgBox.PopupMessage("Before you found a colony you need to scan the planet\nand clear all discovered missions");
@@ -436,16 +442,24 @@ namespace SpaceMercs.MainWindow {
         private void OpenScanPlanetDialog() {
             if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPosition is null) {
-                msgBox.PopupMessage("Cannot scan current location\nScanner only works on terrestrial palnets and moons.");
+                msgBox.PopupMessage("Cannot scan current location\nScanner only works on terrestrial planets and moons.");
                 return;
             }
-            if (PlayerTeam.CurrentPosition?.BaseSize > 0) {
+            if (PlayerTeam.CurrentPositionHAO?.BaseSize > 0) {
                 msgBox.PopupMessage("Please visit colony for missions from this location");
                 return;
             }
             // Open the ScanPlanet dialog
-            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPosition!, PlayerTeam!, RunMission);
+            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPositionHAO!, PlayerTeam!, RunMission);
             sp.ShowDialog();
+            SetAOButtonsOnGUI(aoSelected);
+        }
+        private void OpenHyperspaceDialog() {
+            if (!GalaxyMap.MapIsInitialised) return;
+            if (PlayerTeam.CurrentPosition is not HyperGate hg) throw new Exception("Opened hyperspace dialog when not at a gate");
+            // Open the Hyperspace dialog
+            HyperspaceTravel ht = new HyperspaceTravel(hg, PlayerTeam!, ArriveAt);
+            ht.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
         }
         private void ExitTheGame() {
@@ -456,15 +470,19 @@ namespace SpaceMercs.MainWindow {
         public void SetAOButtonsOnGUI(AstronomicalObject? ao) {
             gbRenameObject?.Deactivate();
             gbFlyTo?.Deactivate();
+            gbHyperspace!.Deactivate();
+            gbScan!.Deactivate();
+
             if (ao == null) return;
-            if (ao.AOType != AstronomicalObject.AstronomicalObjectType.Moon) {
+
+            if (ao.AOType is AstronomicalObject.AstronomicalObjectType.Planet or AstronomicalObject.AstronomicalObjectType.Star) {
                 gbRenameObject!.Activate();
             }
             if (PlayerTeam.CanTravel(ao) && ao != PlayerTeam.CurrentPosition) gbFlyTo!.Activate();
 
             gbViewColony?.Deactivate();
             if (view == ViewMode.ViewSystem && ao == PlayerTeam.CurrentPosition) {
-                if (PlayerTeam.CurrentPosition?.BaseSize > 0) {
+                if (PlayerTeam.CurrentPositionHAO?.BaseSize > 0) {
                     gbViewColony!.UpdateText("Colony");
                     gbViewColony!.Activate();
                 }
@@ -477,8 +495,8 @@ namespace SpaceMercs.MainWindow {
             }
 
             bool bCanScanHere = false;
-            if (view == ViewMode.ViewSystem && PlayerTeam.CurrentPosition != null && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
-                if (PlayerTeam.CurrentPosition?.BaseSize == 0) {
+            if (view == ViewMode.ViewSystem && PlayerTeam.CurrentPositionHAO != null && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
+                if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
                     if (PlayerTeam.CurrentPosition.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
                         if (((Planet)PlayerTeam.CurrentPosition).Type != Planet.PlanetType.Gas) {
                             bCanScanHere = true;
@@ -491,10 +509,14 @@ namespace SpaceMercs.MainWindow {
             }
             if (bCanScanHere) {
                 gbScan!.Activate();
-                if (!(PlayerTeam.CurrentPosition?.Scanned ?? false)) gbScan!.UpdateText("Scan");
+                if (!(PlayerTeam.CurrentPositionHAO?.Scanned ?? false)) gbScan!.UpdateText("Scan");
                 else gbScan.UpdateText("Missions");
             }
-            else gbScan!.Deactivate();
+
+            // Set up hyperspace
+            if (PlayerTeam.CurrentPosition?.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate) {
+                gbHyperspace!.Activate();
+            }
         }
     }
 }

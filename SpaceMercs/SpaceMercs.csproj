@@ -45,6 +45,12 @@
    <ItemGroup>
      <EmbeddedResource Include="GUIObjects\FreeSans.ttf" />
    </ItemGroup>
+  
+   <ItemGroup>
+     <Compile Update="Dialogs\HyperspaceTravel.cs">
+       <SubType>Form</SubType>
+     </Compile>
+   </ItemGroup>
 
   <ItemGroup>
     <None Update="Data\ArmourType.xml">

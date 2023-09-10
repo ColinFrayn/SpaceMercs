@@ -41,29 +41,36 @@ namespace SpaceMercs.MainWindow {
             SetupUtilityButtons();
         }
         private void SetupUtilityButtons() {
-            // "Repair Ship" button
-            gbRepair.SetPosition(0.89f, 0.85f);
-            gbRepair.SetSize(0.08f, 0.03f);
-            gbRepair.SetBlend(false);
-            if (PlayerTeam.PlayerShip.HullFract < 1.0) gbRepair.Activate();
-            else gbRepair.Deactivate();
-            if (PlayerTeam.CurrentPosition.PriceModifier > 1.0) gbRepair.Deactivate(); // Not Neutral or better with the owner race
-            if ((PlayerTeam.CurrentPosition.Base & (Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military)) == 0) gbRepair.Deactivate(); // Only colonies, metropolis or military bases can repair
-
-            // Fabrication Button
-            gbFabricate.SetPosition(0.89f, 0.9f);
-            gbFabricate.SetSize(0.08f, 0.03f);
-            gbFabricate.SetBlend(false);
+            gbRepair.Deactivate();
             gbFabricate.Deactivate();
-            if (PlayerTeam.PlayerShip.HasArmoury) gbFabricate.Activate();
-            else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
-            else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
 
             // "Back to last view" button
             gbBack.SetPosition(0.01f, 0.05f);
             gbBack.SetSize(0.06f, 0.03f);
             gbBack.SetBlend(false);
             gbBack.Activate();
+
+            // Not at a base
+            if (PlayerTeam.CurrentPositionHAO is null) return;
+
+            // "Repair Ship" button
+            gbRepair.SetPosition(0.89f, 0.85f);
+            gbRepair.SetSize(0.08f, 0.03f);
+            gbRepair.SetBlend(false);
+            if (PlayerTeam.PlayerShip.HullFract < 1.0 && // Ship is damaged
+                PlayerTeam.CurrentPositionHAO.PriceModifier <= 1.0 && // Neutral or better with the owner race
+                (PlayerTeam.CurrentPositionHAO.Base & (Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military)) != 0)  // Only colonies, metropolis or military bases can repair
+            {
+                gbRepair.Activate();
+            }
+
+            // Fabrication Button
+            gbFabricate.SetPosition(0.89f, 0.9f);
+            gbFabricate.SetSize(0.08f, 0.03f);
+            gbFabricate.SetBlend(false);
+            if (PlayerTeam.PlayerShip.HasArmoury) gbFabricate.Activate();
+            else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
+            else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
         }
 
         private void DrawShip() {
@@ -345,14 +352,14 @@ namespace SpaceMercs.MainWindow {
                 bContextHull = bHoverHull;
                 ShipEquipment? seHover = bHoverHull ? PlayerTeam.PlayerShip.ArmourType : PlayerTeam.PlayerShip.GetEquipmentByRoomID(irContextRoom);
                 if (seHover == null) {
-                    if (PlayerTeam.CurrentPosition.BaseSize > 0) {
+                    if (PlayerTeam.CurrentPositionHAO?.BaseSize > 0) {
                         GUIPanel? buildingPanel = GenerateBuildingList();
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Build);
                         gpSelect.InsertIconItem(I_Build, ts, true, buildingPanel);
                     }
                 }
                 else {
-                    if (PlayerTeam.CurrentPosition.BaseSize > 0) {
+                    if (PlayerTeam.CurrentPositionHAO?.BaseSize > 0) {
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
                         gpSelect.InsertIconItem(I_Salvage, ts, true, null);
                     }
@@ -381,9 +388,10 @@ namespace SpaceMercs.MainWindow {
             foreach (int eno in lIDs) {
                 ShipEquipment se = StaticData.ShipEquipment[eno];
                 // Can we build this at the current location?
-                if ((se.Available & PlayerTeam.CurrentPosition.Base) == 0) continue;
+                if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
+                if ((se.Available & PlayerTeam.CurrentPositionHAO!.Base) == 0) continue; // Not the correct facilities
                 if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
-                if (se.RequiredRace != null && PlayerTeam.CurrentPosition.PriceModifier >= 1.0) continue; // Correct race, but player team is not at least friendly
+                if (se.RequiredRace != null && PlayerTeam.CurrentPositionHAO.PriceModifier >= 1.0) continue; // Correct race, but player team is not >= friendly
 
                 // Is it the right size?
                 if (se.Size != roomSize) continue;

@@ -249,7 +249,7 @@ namespace SpaceMercs {
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
 
-            prog.SetUniform("lightEnabled", false);
+            prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);

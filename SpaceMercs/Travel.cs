@@ -82,10 +82,11 @@ namespace SpaceMercs {
 
         // Public
         public bool GameOver { get; private set; }
-        public HabitableAO Destination {
+        public AstronomicalObject Destination {
             get {
-                if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet() ?? throw new Exception("Could not fidn suitable planet target for travel");
+                if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet() ?? throw new Exception("Could not find suitable planet target for travel");
                 else if (aoTravelTo is HabitableAO hao) return hao;
+                else if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate) return aoTravelTo;
                 throw new Exception("Travel Destination is not a valid target");
             }
         }

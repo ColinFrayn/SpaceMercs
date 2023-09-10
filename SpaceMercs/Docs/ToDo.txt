@@ -2,7 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-What are we supposed to do in the period when we begin to outlevel the starting system but don't have NLS drive?
+HyperGate: Display as annulus
+
+Add more alien-only items/ship rooms (weapons, armour etc.)
+
+Colony icons should show size
 
 ==========================================================================================================
 
@@ -10,6 +14,9 @@ What are we supposed to do in the period when we begin to outlevel the starting 
 ---------------------
 Backburner : Features
 ---------------------
+
+Add in hyperspace along main trade routes
+- Add in a hyperspace ring somewhere on system map. Have to get to it. Then can select hyperspace from there. Only if there are trade routes.
 
 Maybe add in overwatch?
 

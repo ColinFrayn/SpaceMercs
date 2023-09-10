@@ -261,10 +261,15 @@ namespace SpaceMercs {
             int sno = int.Parse(bits[0]);
             Star? st = GetStarByID(sno);
             if (st == null || bits.Length == 1) return st;
-            int pno = int.Parse(bits[1]);
+            if (string.Equals(bits[1], "HG")) return st.GetHyperGate() ?? throw new Exception($"Could not find saved HyperGate location {strAOID}");
+            if (!int.TryParse(bits[1], out int pno)) {
+                throw new Exception($"Could not parse planet in location string {strAOID}");
+            }
             Planet? pl = st.GetPlanetByID(pno);
             if (pl == null || bits.Length == 2) return pl;
-            int mno = int.Parse(bits[2]);
+            if (!int.TryParse(bits[2], out int mno)) {
+                throw new Exception($"Could not parse moon in location string {strAOID}");
+            }
             Moon? mn = pl.GetMoonByID(mno);
             return mn;
         }

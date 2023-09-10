@@ -471,9 +471,9 @@ namespace SpaceMercs {
             return nodes;
         }
 
-        public static string SelectNodeText(this XmlNode root, string path) {
-            if (string.IsNullOrEmpty(path) || root is null) return string.Empty;
-            return root.SelectSingleNode(path)?.InnerText ?? string.Empty;
+        public static string SelectNodeText(this XmlNode root, string path, string? defaultValue = null) {
+            if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? string.Empty;
+            return root.SelectSingleNode(path)?.InnerText ?? defaultValue ?? string.Empty;
         }
         public static double SelectNodeDouble(this XmlNode root, string path, double? defaultValue = null) {
             if (string.IsNullOrEmpty(path) || root is null) return defaultValue ?? throw new Exception($"Could not find double data for path {path}");

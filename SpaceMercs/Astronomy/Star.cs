@@ -26,6 +26,23 @@ namespace SpaceMercs {
                 return false;
             }
         }
+        public bool HasHyperGate { get { return TradeRoutes.Any(); } }
+        public double HyperGateOrbit { 
+            get {
+                if (Planets.Count == 0) return Const.PlanetOrbit;
+                Planet pl = Planets.Last();
+                return pl.OrbitalDistance * 1.5;
+            } 
+        }
+        private HyperGate _hypergate;
+        private object _hglock = new object();
+        public HyperGate? GetHyperGate() {
+            if (!HasHyperGate) return null;
+            lock (_hglock) {
+                _hypergate ??= new HyperGate(this, HyperGateOrbit);
+                return _hypergate;
+            }
+        }
 
         private static Vector3 cHottest = new Vector3(1.0f, 1.0f, 1.0f);
         private static Vector3 cMid = new Vector3(1.0f, 0.8f, 0.0f);
@@ -138,24 +155,6 @@ namespace SpaceMercs {
         public Planet? GetPlanetByID(int ID) {
             if (ID < 0 || ID >= Planets.Count) return null;
             return Planets[ID];
-        }
-
-        // Are we hovering over anything here?
-        public AstronomicalObject? GetHover(double aspect, double mousex, double mousey) {
-            double px = 8.6 * aspect;
-            double py = 2.0;
-            foreach (Planet pl in Planets) {
-                px -= pl.DrawScale * Const.PlanetScale * aspect * 0.6;
-                double buffer = (pl.DrawScale * Const.PlanetScale * Const.SystemViewSelectionTolerance);
-                if (mousex > px + buffer) return null; // Too far right. Abort
-                if (Math.Abs(px - mousex) < buffer && Math.Abs(py - mousey) < buffer) return pl;
-                if (mousey > py + buffer) {
-                    AstronomicalObject? aoHover = pl.GetHover(mousex, mousey, px, py);
-                    if (aoHover != null) return aoHover;
-                }
-                px -= ((pl.DrawScale * Const.PlanetScale) + 0.3) * aspect * 0.6;
-            }
-            return null;
         }
 
         // Draw a simplified version on the map
@@ -412,21 +411,37 @@ namespace SpaceMercs {
             int tries = 0, inserted = 0, iterations = 0;
             if (Planets.Count == 0) return;
             Random rand = new Random();
+
+            // Firstly colonise any Oceanic planets and maybe some moons
+            foreach (Planet pl in Planets) {
+                if (pl.Type == Planet.PlanetType.Oceanic) {
+                    pl.ExpandBase(rc, rand);
+                    inserted++;
+                    if (inserted >= Count) return;
+                    if (rand.NextDouble() > 0.5) {
+                        inserted += pl.ExpandMoonBase(rand, rc);
+                        if (inserted >= Count) return;
+                    }
+                }
+            }
+
             // Just so we don't get the same place every time, randomise a bit
             do {
                 int pno = rand.Next(Planets.Count);
                 Planet pl = Planets[pno];
                 if (pl.BaseSize == 0) break;
             } while (++iterations < 10);
-            // Now add the colonies
+
+            // Now add any remaining colonies
             do {
                 tries++;
                 int pno = rand.Next(Planets.Count);
                 Planet pl = Planets[pno];
                 double tdiff = pl.TDiff(rc);
+                if (pl.Type == Planet.PlanetType.Gas) tdiff += 15.0; // Make it less likely to colonise Gas giants.
                 if (rand.NextDouble() * 100.0 > tdiff) {
                     if (rand.NextDouble() > 0.5) {
-                        if (pl.Type != Planet.PlanetType.Desert || pl.BaseSize < 4) inserted += pl.ExpandBase(rc, rand);
+                        if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) inserted += pl.ExpandBase(rc, rand);
                     }
                     else inserted += pl.ExpandMoonBase(rand, rc);
                 }

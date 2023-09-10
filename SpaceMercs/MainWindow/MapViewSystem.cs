@@ -8,6 +8,7 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private Star? SystemStar = null;
         private bool bShowColonies = true;
+        private Vector4 SelectionAnnulusColour = new Vector4(0.8f, 0.8f, 0.8f, 1f);
 
         // Root call for displaying the system when zoomed in
         private void DrawSystem() {
@@ -90,7 +91,7 @@ namespace SpaceMercs.MainWindow {
                     aoHover = pl;
                     Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.2f);
                     flatColourShaderProgram.SetUniform("model", pScaleM);
-                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                    flatColourShaderProgram.SetUniform("flatColour", SelectionAnnulusColour);
                     GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                     Annulus.Annulus32.BindAndDraw();
                 }
@@ -128,7 +129,7 @@ namespace SpaceMercs.MainWindow {
                         aoHover = mn;
                         Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.2f);
                         flatColourShaderProgram.SetUniform("model", pScaleM);
-                        flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                        flatColourShaderProgram.SetUniform("flatColour", SelectionAnnulusColour);
                         GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                         Annulus.Annulus16.BindAndDraw();
                     }
@@ -155,6 +156,39 @@ namespace SpaceMercs.MainWindow {
                 }
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.05f) * 0.8f;
+            }
+
+            // Draw the HyperGate
+            if (SystemStar.HasHyperGate) {
+                HyperGate hg = SystemStar.GetHyperGate()!;
+                float scale = Const.PlanetScale;
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+                fullShaderProgram.SetUniform("view", squashM * pTranslateM);
+                flatColourShaderProgram.SetUniform("view", squashM * pTranslateM);
+                HyperGate.DrawHyperGate(fullShaderProgram);
+                float dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (py - my) * (py - my);
+                if (dist2 <= scale * scale) {
+                    aoHover = hg;
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.2f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", SelectionAnnulusColour);
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    Annulus.Annulus32.BindAndDraw();
+                }
+                if (aoSelected == hg) {
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.1f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.2f, 1f, 0.4f, 1f));
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    Annulus.Annulus32.BindAndDraw();
+                }
+                if (aoCurrentPosition == hg) {
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.4f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    TriangleFocus.Flat.BindAndDraw();
+                }
             }
         }
 

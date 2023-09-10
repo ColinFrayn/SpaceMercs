@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     public abstract class AstronomicalObject {
-        public enum AstronomicalObjectType { Star, Planet, Moon, Unknown };
+        public enum AstronomicalObjectType { Star, Planet, Moon, HyperGate, Unknown };
         public string Name { get; protected set; }
         public double Radius; // In metres
         public double OrbitalDistance; // In metres
@@ -46,10 +46,10 @@ namespace SpaceMercs {
             Star st2 = ao2.GetSystem();
             if (st1 == st2) {
                 if (ao1.AOType == AstronomicalObjectType.Star || ao2.AOType == AstronomicalObjectType.Star) return 0.0;
-                Planet pl1, pl2;
-                if (ao1.AOType == AstronomicalObjectType.Planet) pl1 = (Planet)ao1;
+                AstronomicalObject pl1, pl2;
+                if (ao1.AOType is AstronomicalObjectType.Planet or AstronomicalObjectType.HyperGate) pl1 = ao1;
                 else pl1 = ((Moon)ao1).Parent;
-                if (ao2.AOType == AstronomicalObjectType.Planet) pl2 = (Planet)ao2;
+                if (ao2.AOType is AstronomicalObjectType.Planet or AstronomicalObjectType.HyperGate) pl2 = ao2;
                 else pl2 = ((Moon)ao2).Parent;
                 if (pl1 == pl2) {
                     if (ao1.AOType == AstronomicalObjectType.Moon) dist = ((Moon)ao1).OrbitalDistance;
@@ -72,7 +72,7 @@ namespace SpaceMercs {
         protected void LoadAODetailsFromFile(XmlNode xml) {
             iTexture = -1;
             ID = xml.GetAttributeInt("ID");
-            Name = xml.SelectNodeText("Name");
+            Name = xml.SelectNodeText("Name", string.Empty);
             Radius = xml.SelectNodeDouble("Radius");
 
             OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
@@ -90,7 +90,7 @@ namespace SpaceMercs {
 
         // Save this planet to an Xml file
         protected void WriteAODetailsToFile(StreamWriter file) {
-            if (!string.IsNullOrEmpty(Name)) file.WriteLine("<Name>" + Name + "</Name>");
+            if (!string.IsNullOrEmpty(Name) && !string.Equals(Name,"Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
             if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");

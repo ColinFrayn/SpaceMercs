@@ -4,7 +4,8 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Team {
-        public HabitableAO CurrentPosition { get; set; }
+        public AstronomicalObject CurrentPosition { get; set; }
+        public HabitableAO? CurrentPositionHAO {  get { if (CurrentPosition is HabitableAO hao) return hao; return null; } }
         private readonly List<Soldier> _Soldiers = new List<Soldier>();
         public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }
         public int SoldierCount { get { return _Soldiers.Count; } }
@@ -45,8 +46,7 @@ namespace SpaceMercs {
             if (xmll is null) throw new Exception("Could not locate Team Position node");
             AstronomicalObject? ao = map.GetAOFromLocationString(xmll.InnerText);
             if (ao is null) throw new Exception("Could not decode Team Position : " + xmll.InnerText);
-            if (ao is not HabitableAO hao) throw new Exception("Team Position was not HabitableAO!");
-            CurrentPosition = hao;
+            CurrentPosition = ao;
 
             Cash = xml.SelectNodeDouble("Cash");
 
@@ -86,7 +86,7 @@ namespace SpaceMercs {
 
             XmlNode? xMission = xml.SelectSingleNode("Mission");
             if (xMission is not null) {
-                CurrentMission = new Mission(xMission, CurrentPosition);
+                CurrentMission = new Mission(xMission, CurrentPositionHAO!);
                 // If it's a tactical mission then insert all participating soldiers
                 if (CurrentMission.IsTacticalMission) {
                     foreach (Soldier s in _Soldiers) {
@@ -140,10 +140,10 @@ namespace SpaceMercs {
         }
 
         public bool CanTravel(AstronomicalObject aoTarget) {
-            double Dist = AstronomicalObject.CalculateDistance(CurrentPosition, aoTarget);
-            if (Dist < 0.0) return false; // Error
-            double Range = PlayerShip.Range;
-            return (Range >= Dist);
+            double dist = AstronomicalObject.CalculateDistance(CurrentPosition, aoTarget);
+            if (dist < 0.0) return false; // Error
+            double range = PlayerShip.Range;
+            return (range >= dist);
         }
 
         public double GetPriceModifier(Race? rc) {

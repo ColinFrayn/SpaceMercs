@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using System.Globalization;
+using System.Security.RightsManagement;
 
 namespace SpaceMercs {
     public static class Const {
@@ -178,6 +179,8 @@ namespace SpaceMercs {
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         public static DateTime dtTime = Const.dtStart;
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
+        public static double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
+        public static double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
 
         // Mission level generation settings
         public const int AutomataIterations = 6;
