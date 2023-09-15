@@ -76,9 +76,12 @@ namespace SpaceMercs {
         }
         public Star(XmlNode xml, Sector sect) {
             Sector = sect;
-            LoadAODetailsFromFile(xml);
 
-            Mass = xml.SelectNodeDouble("Mass");
+            Seed = xml.SelectNodeInt("Seed");
+            ID = xml.GetAttributeInt("ID");
+
+            // Shortcut - no details saved for the star itself so regenerate them (identically) from the seed
+            Generate();
 
             XmlNode xmlpos = xml.SelectSingleNode("MapPos") ?? throw new Exception($"Could not locate MapPos for Star with ID = {ID}");
             float X = float.Parse(xmlpos.Attributes!["X"]?.Value ?? throw new Exception($"Could not identify Star X-Coord with ID = {ID}"));
@@ -109,26 +112,27 @@ namespace SpaceMercs {
                 }
             }
 
+            // Load any planets that might have been saved specially
             Planets = new List<Planet>();
             foreach (XmlNode xmlp in xml.SelectNodesToList("Planets/Planet")) {
                 Planet pl = new Planet(xmlp, this);
                 pl.Parent = this;
                 Planets.Add(pl);
             }
+
+            // If planets not saevd down then regenerate them. 
             if (Planets.Count == 0) GeneratePlanets(sect.ParentMap.PlanetDensity); // Didn't save them, so regenerate here
             SetupColour();
             StarType = SetupType();
         }
+
         public static Star Empty { get { return new Star(); } }
 
         // Save this star to an Xml file
         public void SaveToFile(StreamWriter file) {
             file.WriteLine("<Star ID=\"" + ID.ToString() + "\">");
-            // Write generic AO details
-            WriteAODetailsToFile(file);
-
-            // Write star details to file
-            file.WriteLine(" <Mass>" + Math.Round(Mass, 6).ToString() + "</Mass>");
+            file.WriteLine("<Seed>" + Seed + "</Seed>");
+            if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
             file.WriteLine(" <MapPos X=\"" + Math.Round(MapPos.X, 2).ToString() + "\" Y=\"" + Math.Round(MapPos.Y, 2).ToString() + "\"/>");
             if (Owner != null) file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
 
@@ -214,13 +218,11 @@ namespace SpaceMercs {
             // Main sequence
             if (lifestage <= 0.8) {
                 Radius *= 1.0 + ((lifestage - 0.4) / 2.0);
-                float lsc = (float)(lifestage / 0.8);
                 Temperature = (int)((double)(8000 - 3500) * lifestage / 0.8) + 3500;
             }
             // Giant branch (simplifying this as one stage atm)
             else if (lifestage <= 1.0) {
                 Radius *= 1.2 * Math.Pow(2, (lifestage - 0.8) * 20.0);
-                float lsc = (float)(lifestage - 0.8) / 0.2f;
                 Temperature = (int)((double)(3000 - 6000) * (lifestage - 0.8) * 5.0) + 6000;
             }
             // White dwarf
@@ -248,8 +250,8 @@ namespace SpaceMercs {
             } while (AxialRotationPeriod < Const.StarRotationMin);
             OrbitalPeriod = 1; // Irrelevant, but avoiding zero :)
 
-            // Make sure we don't have any planets. We generate them later
-            Planets.Clear();
+            // Finally, clear out the planets
+            Planets?.Clear();
         }
 
         // Set up the stellar type

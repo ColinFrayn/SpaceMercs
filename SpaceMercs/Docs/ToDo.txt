@@ -8,6 +8,9 @@ Add more alien-only items/ship rooms (weapons, armour etc.)
 
 Colony icons should show size
 
+Optimise save game file size. 
+- Do we need to regen planets on load? Only for home systems or named planets. Visited?
+
 ==========================================================================================================
 
 
