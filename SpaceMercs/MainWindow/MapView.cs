@@ -508,7 +508,7 @@ namespace SpaceMercs.MainWindow {
                     Star st = (Star)aoSelected;
                     if (st.Visited) {
                         SystemStar = st;
-                        st.GeneratePlanets(GalaxyMap.PlanetDensity);
+                        if (!st.bGenerated) st.GeneratePlanets(GalaxyMap.PlanetDensity);
                         view = ViewMode.ViewSystem;
                         aoSelected = null;
                         gbRenameObject?.Deactivate();

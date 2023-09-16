@@ -3,25 +3,35 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Windows;
 using System.Xml;
 
 namespace SpaceMercs {
     public class Star : AstronomicalObject {
         private double Age;
 
-        public readonly List<Planet> Planets;
+        public IReadOnlyList<Planet> Planets => _planets;
+        private readonly List<Planet> _planets = new List<Planet>();
         public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
         public string StarType { get; private set; }
         public Race? Owner { get; private set; }
         public Vector3 MapPos { get; private set; }
-        public bool bGenerated { get; private set; }
+        public bool bGenerated { get; private set; } = false;
         public bool Visited { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / Const.Billion, 0.3) * 2f; } }
         public Sector Sector { get; private set; }
         public bool Scanned {
             get {
-                foreach (Planet pl in Planets) {
+                foreach (Planet pl in _planets) {
                     if (pl.Scanned) return true;
+                }
+                return false;
+            }
+        }
+        public bool Renamed {
+            get {
+                foreach (Planet pl in _planets) {
+                    if (!string.IsNullOrEmpty(pl.Name)) return true;
                 }
                 return false;
             }
@@ -29,13 +39,13 @@ namespace SpaceMercs {
         public bool HasHyperGate { get { return TradeRoutes.Any(); } }
         public double HyperGateOrbit { 
             get {
-                if (Planets.Count == 0) return Const.PlanetOrbit;
-                Planet pl = Planets.Last();
+                if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+                Planet pl = _planets.Last();
                 return pl.OrbitalDistance * 1.5;
             } 
         }
         private HyperGate _hypergate;
-        private object _hglock = new object();
+        private readonly object _hglock = new object();
         public HyperGate? GetHyperGate() {
             if (!HasHyperGate) return null;
             lock (_hglock) {
@@ -57,11 +67,9 @@ namespace SpaceMercs {
         public Star() {
             StarType = "No Type";
             Sector = Sector.Empty;
-            Planets = new List<Planet>();
         }
         public Star(float X, float Y, int _seed, Sector s, int sno) {
             MapPos = new Vector3(X, Y, 0f);
-            Planets = new List<Planet>();
             Visited = false;
             Sector = s;
             Name = "";
@@ -79,6 +87,7 @@ namespace SpaceMercs {
 
             Seed = xml.SelectNodeInt("Seed");
             ID = xml.GetAttributeInt("ID");
+            Name = xml.SelectNodeText("Name", string.Empty);
 
             // Shortcut - no details saved for the star itself so regenerate them (identically) from the seed
             Generate();
@@ -113,15 +122,13 @@ namespace SpaceMercs {
             }
 
             // Load any planets that might have been saved specially
-            Planets = new List<Planet>();
             foreach (XmlNode xmlp in xml.SelectNodesToList("Planets/Planet")) {
                 Planet pl = new Planet(xmlp, this);
                 pl.Parent = this;
-                Planets.Add(pl);
+                _planets.Add(pl);
+                bGenerated = true;
             }
 
-            // If planets not saevd down then regenerate them. 
-            if (Planets.Count == 0) GeneratePlanets(sect.ParentMap.PlanetDensity); // Didn't save them, so regenerate here
             SetupColour();
             StarType = SetupType();
         }
@@ -141,10 +148,10 @@ namespace SpaceMercs {
             }
 
             // Now write out all planets, but only do this if the system is owned by someone (i.e. it might have colonies in it). Otherwise we can procedurally re-generate it identically on loading.
-            // Also save if this system has been scanned at all
-            if (Owner != null || Scanned) {
+            // Also save if this system has been scanned at all or any planets have been renamed
+            if (_planets.Any() && (Owner != null || Scanned || Renamed)) {
                 file.WriteLine(" <Planets>");
-                foreach (Planet pl in Planets) {
+                foreach (Planet pl in _planets) {
                     pl.SaveToFile(file);
                 }
                 file.WriteLine(" </Planets>");
@@ -157,8 +164,9 @@ namespace SpaceMercs {
 
         // Retrieve a planet from this system by ID
         public Planet? GetPlanetByID(int ID) {
-            if (ID < 0 || ID >= Planets.Count) return null;
-            return Planets[ID];
+            if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+            if (ID < 0 || ID >= _planets.Count) return null;
+            return _planets[ID];
         }
 
         // Draw a simplified version on the map
@@ -251,7 +259,8 @@ namespace SpaceMercs {
             OrbitalPeriod = 1; // Irrelevant, but avoiding zero :)
 
             // Finally, clear out the planets
-            Planets?.Clear();
+            _planets?.Clear();
+            bGenerated = false;
         }
 
         // Set up the stellar type
@@ -307,7 +316,7 @@ namespace SpaceMercs {
 
         // Generate the rest of the solar system
         public void GeneratePlanets(int pdensity) {
-            if (Planets.Count > 0) return;
+            _planets.Clear();
             Random rnd = new Random(Seed);
             // Number of planets
             int npl = (rnd.Next(pdensity + 1) + rnd.Next(pdensity + 4) + rnd.Next(pdensity + 4)) / 2;
@@ -380,7 +389,7 @@ namespace SpaceMercs {
                 pl.AxialRotationPeriod = (int)(arot * (pl.Radius / Const.PlanetSize));
 
                 pl.GenerateMoons(rnd, pdensity);
-                Planets.Add(pl);
+                _planets.Add(pl);
             }
             bGenerated = true;
         }
@@ -402,7 +411,7 @@ namespace SpaceMercs {
         public void SetOwner(Race rc) {
             Owner = rc;
             if (rc == StaticData.Races[0]) Visited = true;
-            if (Planets.Count == 0 && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+            if (!_planets.Any() && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
         }
         public void SetVisited(bool v) {
             Visited = v;
@@ -411,7 +420,7 @@ namespace SpaceMercs {
         // For a few habitable planets in this system (or moons), insert a colony for the given race
         public void InsertColoniesForRace(Race rc, int Count) {
             int tries = 0, inserted = 0, iterations = 0;
-            if (Planets.Count == 0) return;
+            if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
             Random rand = new Random();
 
             // Firstly colonise any Oceanic planets and maybe some moons
@@ -429,16 +438,16 @@ namespace SpaceMercs {
 
             // Just so we don't get the same place every time, randomise a bit
             do {
-                int pno = rand.Next(Planets.Count);
-                Planet pl = Planets[pno];
+                int pno = rand.Next(_planets.Count);
+                Planet pl = _planets[pno];
                 if (pl.BaseSize == 0) break;
             } while (++iterations < 10);
 
             // Now add any remaining colonies
             do {
                 tries++;
-                int pno = rand.Next(Planets.Count);
-                Planet pl = Planets[pno];
+                int pno = rand.Next(_planets.Count);
+                Planet pl = _planets[pno];
                 double tdiff = pl.TDiff(rc);
                 if (pl.Type == Planet.PlanetType.Gas) tdiff += 15.0; // Make it less likely to colonise Gas giants.
                 if (rand.NextDouble() * 100.0 > tdiff) {
@@ -452,15 +461,15 @@ namespace SpaceMercs {
 
         // When we arrive in this system (or move about the system) update colony growth
         public void UpdateColonies() {
-            foreach (Planet pl in Planets) {
+            foreach (Planet pl in _planets) {
                 pl.CheckGrowth();
             }
         }
 
         // Utility
         public Planet? GetOutermostPlanet() {
-            if (Planets.Count == 0) return null;
-            return Planets.Last();
+            if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+            return _planets.Last();
         }
 
         // Overrides
@@ -503,7 +512,7 @@ namespace SpaceMercs {
             GL.DeleteTexture(iTexture);
             texture = null;
             iTexture = -1;
-            foreach (Planet pl in Planets) {
+            foreach (Planet pl in _planets) {
                 pl.ClearData();
             }
         }
@@ -518,7 +527,7 @@ namespace SpaceMercs {
         }
         public override int GetPopulation() {
             int pop = 0;
-            foreach (Planet pl in Planets) {
+            foreach (Planet pl in _planets) {
                 pop += pl.GetPopulation();
             }
             return pop;

@@ -15,15 +15,13 @@ namespace SpaceMercs {
         public static void DrawHyperGate(ShaderProgram prog) {
             float scale = Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
-            Matrix4 modelM = pRotateM * pScaleM;
+            Matrix4 modelM = pScaleM;
             prog.SetUniform("model", modelM);
 
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", false);
-            // TODO : Draw as a torus
             GL.UseProgram(prog.ShaderProgramHandle);
-            Sphere.CachedBuildAndDraw(6, true);
+            Torus.CachedBuildAndDraw(6, 15, true);
         }
 
         // Overrides

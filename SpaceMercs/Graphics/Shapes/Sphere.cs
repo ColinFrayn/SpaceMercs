@@ -41,7 +41,7 @@ namespace SpaceMercs.Graphics.Shapes {
             return new GLShape(vertices.ToArray(), Enumerable.Range(0, vertices.Count).ToArray());
         }
 
-        // Set up a face for the planet
+        // Set up a face for the sphere
         private static IEnumerable<IVertex> SetupSphereFace(Vector2 v1, Vector2 v2, Vector2 v3, bool bTexture) {
             // Convert from three 2D vectors in the map, to their theta/phi coordinates
             double tr1 = v1.X * 2.0 * Math.PI;

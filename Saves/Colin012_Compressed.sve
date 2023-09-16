@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>20/01/2150 14:46:28</Clock>
+<Clock>20/01/2150 14:47:07</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -1408,6 +1408,7 @@
 </Star>
 <Star ID="10">
 <Seed>8879034</Seed>
+<Name>Insectoid Home</Name>
  <MapPos X="-9.54" Y="-10.91"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)7</TradeRoute>
@@ -2828,6 +2829,7 @@
 </Star>
 <Star ID="10">
 <Seed>5361937</Seed>
+<Name>Ursalon Home</Name>
  <MapPos X="0.75" Y="-11.28"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)2</TradeRoute>
@@ -3763,6 +3765,7 @@
 </Star>
 <Star ID="12">
 <Seed>9737123</Seed>
+<Name>Gokan Home</Name>
  <MapPos X="9.63" Y="-9.66"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)9</TradeRoute>
@@ -4739,6 +4742,7 @@
 </Star>
 <Star ID="5">
 <Seed>1282808</Seed>
+<Name>Grey Home</Name>
  <MapPos X="-9.19" Y="-0.75"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
@@ -5534,6 +5538,7 @@
 </Star>
 <Star ID="2">
 <Seed>395096</Seed>
+<Name>Red Cousin</Name>
  <MapPos X="-0.96" Y="1.85"/>
  <Owner>Human</Owner>
  <TradeRoute>(0,0)5</TradeRoute>
@@ -5673,6 +5678,7 @@
 </Star>
 <Star ID="4">
 <Seed>6546632</Seed>
+<Name>Second Home</Name>
  <MapPos X="-2.43" Y="0.23"/>
  <Owner>Human</Owner>
  <TradeRoute>(0,0)5</TradeRoute>
@@ -5893,6 +5899,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>9608841</Seed>
+<Name>Human Home</Name>
  <MapPos X="-0.45" Y="-0.19"/>
  <Owner>Human</Owner>
  <TradeRoute>(0,0)4</TradeRoute>
@@ -9678,6 +9685,7 @@
 </Star>
 <Star ID="7">
 <Seed>9320605</Seed>
+<Name>Giants</Name>
  <MapPos X="0.67" Y="-2.05"/>
  <Owner>Human</Owner>
  <TradeRoute>(0,0)5</TradeRoute>
@@ -10844,6 +10852,7 @@
 </Star>
 <Star ID="6">
 <Seed>8971842</Seed>
+<Name>Elithiri Home</Name>
  <MapPos X="-10.7" Y="10.12"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)4</TradeRoute>
@@ -12230,6 +12239,7 @@
 </Star>
 <Star ID="10">
 <Seed>9267024</Seed>
+<Name>Ogrish Home</Name>
  <MapPos X="0.75" Y="8.72"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)2</TradeRoute>

@@ -157,7 +157,6 @@ namespace SpaceMercs.MainWindow {
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.05f) * 0.8f;
             }
-
             // Draw the HyperGate
             if (SystemStar.HasHyperGate) {
                 HyperGate hg = SystemStar.GetHyperGate()!;
