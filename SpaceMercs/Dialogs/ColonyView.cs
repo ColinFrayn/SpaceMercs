@@ -29,7 +29,7 @@ namespace SpaceMercs.Dialogs {
             if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
             cl = hao.Colony;
             cl.UpdateStock(PlayerTeam); // Make sure we have updated everything sinze the last mission
-            PriceMod = PlayerTeam.GetPriceModifier(cl.Owner);
+            PriceMod = PlayerTeam.GetPriceModifier(cl.Owner, cl.Location.GetSystem());
             InitializeComponent();
             SetupTabs();
             btRandomiseMissions.Enabled = Const.DEBUG_RANDOMISE_VENDORS;

@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Windows;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -457,6 +456,50 @@ namespace SpaceMercs {
                     else inserted += pl.ExpandMoonBase(rand, rc);
                 }
             } while (inserted < Count && tries < 1000);
+        }
+
+        // Maybe build trade routes for this system based on the largest colony size and number of colonies for the given race
+        public void CheckBuildTradeRoutes(Race rc) {
+            int colonyCount = 0;
+            int maxColonySize = 0;
+            foreach (Planet planet in Planets) {
+                if (planet.Colony?.Owner == rc) {
+                    colonyCount++;
+                    if (planet.BaseSize > maxColonySize) maxColonySize = planet.BaseSize;
+                }
+                foreach (Moon mn in planet.Moons) {
+                    if (mn.Colony?.Owner == rc) {
+                        colonyCount++;
+                        if (mn.BaseSize > maxColonySize) maxColonySize = mn.BaseSize;
+                    }
+                }
+            }
+
+            // Threshold for at least one trade route
+            int expectedTradeRoutes = 0;
+            if (maxColonySize > 3) expectedTradeRoutes = 1;
+            if (maxColonySize > 4 && colonyCount > 1) expectedTradeRoutes = 2;
+            if (maxColonySize == 6 && colonyCount > 2) expectedTradeRoutes = 3;
+            if (TradeRoutes.Count < expectedTradeRoutes) {
+                MaybeAddTradeRoute(rc, true);
+            }
+        }
+        public void MaybeAddTradeRoute(Race rc, bool onlyToExistingTradeRouteDestinations) {
+            Star? stClosest = null;
+            double best = DistanceTo(rc.HomePlanet.Parent);
+            foreach (Star st2 in rc.Systems) {
+                if (st2 == rc.HomePlanet.Parent) continue;
+                if (st2 == this) continue;
+                if (onlyToExistingTradeRouteDestinations && !st2.TradeRoutes.Any()) continue;
+                double d = DistanceTo(st2);
+                if (d < best && !TradeRoutes.Contains(st2)) {
+                    stClosest = st2;
+                    best = d;
+                }
+            }
+            if (stClosest != null) {
+                AddTradeRoute(stClosest);
+            }
         }
 
         // When we arrive in this system (or move about the system) update colony growth

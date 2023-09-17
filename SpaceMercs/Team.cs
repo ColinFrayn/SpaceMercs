@@ -146,12 +146,15 @@ namespace SpaceMercs {
             return (range >= dist);
         }
 
-        public double GetPriceModifier(Race? rc) {
+        public double GetPriceModifier(Race? rc, Star st) {
             if (rc is null || !Relations.ContainsKey(rc)) return 100.0;
-            return Utils.RelationsToCostMod(Relations[rc]);
+            double mod = Utils.RelationsToCostMod(Relations[rc]);
+            // Unconnected systems are expensive
+            if (!st.TradeRoutes.Any()) mod *= Const.UnconnectedColonyCostMod;
+            return mod;
         }
         public double GetLocalPriceModifier() {
-            return GetPriceModifier(CurrentPosition?.GetSystem()?.Owner);
+            return GetPriceModifier(CurrentPosition.GetSystem().Owner, CurrentPosition.GetSystem());
         }
 
         public double GetRelations(Race rc) {

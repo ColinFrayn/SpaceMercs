@@ -9,7 +9,7 @@ namespace SpaceMercs.MainWindow {
     partial class MapView {
         private GUIButton? gbRenameObject, gbFlyTo, gbViewColony, gbScan, gbHyperspace;
         private GUIPanel? gpMenu, gpSubMenu, gpFileMenu, gpViewMenu, gpOptionsMenu, gpMissionMenu;
-        private static readonly float toggleY = 0.16f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
+        private static readonly float toggleY = 0.06f, toggleX = 0.99f, toggleStep = 0.04f, toggleScale = 0.035f;
 
         #region Menu Codes
         // GUIPanel for main menu
@@ -75,7 +75,6 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
 
             // Toggles
-            DrawToggles();
             if (view == ViewMode.ViewMap) DrawMapToggles();
             if (view == ViewMode.ViewSystem) DrawSystemToggles();
 
@@ -157,24 +156,21 @@ namespace SpaceMercs.MainWindow {
             TextRenderer.DrawAt(tl5, Alignment.TopLeft, dTLScale, Aspect, dXMargin, dYStart + dYGap * 4f);
         }
 
-        // Draw toggles for all screens (L)
-        private void DrawToggles() {
-            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep, bShowLabels ? Color.White : Color.DimGray);
-        }
-
         // Draw toggles for the System View (C)
         private void DrawSystemToggles() {
-            TextRenderer.DrawAt("C", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowColonies ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY, bShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("C", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 1f, bShowColonies ? Color.White : Color.DimGray);
         }
 
         // Draw toggles for the map screen (RFGAV)
         private void DrawMapToggles() {
-            TextRenderer.DrawAt("A", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowTradeRoutes ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowFlags ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowGridLines ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("R", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bShowRangeCircles ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("V", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bFadeUnvisited ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 7f, bShowPop ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY, bShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("A", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 1f, bShowTradeRoutes ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 2f, bShowFlags ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("G", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 3f, bShowGridLines ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("R", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 4f, bShowRangeCircles ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("V", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 5f, bFadeUnvisited ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 6f, bShowPop ? Color.White : Color.DimGray);
         }
 
         // Setup a mini window to show details of the current hover target
@@ -431,10 +427,10 @@ namespace SpaceMercs.MainWindow {
             if (hao.GetSystem().Owner == null) {
                 StaticData.Races[0].AddSystem(hao.GetSystem());
             }
-            Star stTR = StaticData.Races[0].GetNearestSystemToNotIncludingSelf(hao.GetSystem());
-            if (stTR != null && stTR.DistanceTo(hao.GetSystem()) <= Const.MaxTradeRouteDistInLY) {
-                hao.GetSystem().AddTradeRoute(stTR);
-            }
+            //Star stTR = StaticData.Races[0].GetNearestSystemToNotIncludingSelf(hao.GetSystem());
+            //if (stTR != null && stTR.DistanceTo(hao.GetSystem()) <= Const.MaxTradeRouteDistInLY) {
+            //    hao.GetSystem().AddTradeRoute(stTR);
+            //}
             PlayerTeam.PlayerShip.RemoveColonyBuilder();
             msgBox.PopupMessage("Colony Founded");
             SetAOButtonsOnGUI(hao);

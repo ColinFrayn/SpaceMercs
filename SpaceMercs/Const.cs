@@ -159,6 +159,8 @@ namespace SpaceMercs {
         public const double InitialCash = 50.0;
         public const int MaxColonyMercenaries = 16;  // In a colony
         public const int MaxColonyMissions = 16;  // In a colony
+        public const double TradeRouteColonyGrowthRate = 0.75; // Colonies grow more quickly when system has trade route(s) (modify delay by this amount)
+        public const double UnconnectedColonyCostMod = 1.5; // Everything is more expensive (and valuable) in distant systems without trade routes
         public const int MaxItemLevel = 5;
         public const double UpgradeCostModifier = 1.3; // To upgrade an item by one level
         public const double SellDiscount = 0.6; // Get this fraction back when selling an item

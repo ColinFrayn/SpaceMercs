@@ -95,20 +95,7 @@ namespace SpaceMercs {
             // Set up extra trade routes between nearest neighbours
             foreach (Star st1 in rc.Systems) {
                 if (st1 == stHome) continue;
-                Star? stClosest = null;
-                double best = st1.DistanceTo(stHome);
-                foreach (Star st2 in rc.Systems) {
-                    if (st2 == stHome) continue;
-                    if (st2 == st1) continue;
-                    double d = st1.DistanceTo(st2);
-                    if (d < best && !st1.TradeRoutes.Contains(st2)) {
-                        stClosest = st2;
-                        best = d;
-                    }
-                }
-                if (stClosest != null) {
-                    st1.AddTradeRoute(stClosest);
-                }
+                st1.MaybeAddTradeRoute(rc, false);
             }
 
         }

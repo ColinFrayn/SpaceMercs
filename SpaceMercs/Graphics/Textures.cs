@@ -3,7 +3,6 @@ using OpenTK.Graphics.OpenGL;
 using SpaceMercs.Graphics;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Windows.Navigation;
 
 namespace SpaceMercs {
     public struct TexDetails {

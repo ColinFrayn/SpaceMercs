@@ -4,11 +4,7 @@ ToDo List
 
 Add more alien-only items/ship rooms (weapons, armour etc.)
 
-Colony icons should show colony size
-
-Optimise save game file size. 
-- Only save homesystems and systems where planets have been named/scanned?
--- Even then for non-homesystems, we only need to save the Name/Scan results
+Check auto building of trade routes, colony expansion etc. (fast forward??)
 
 ==========================================================================================================
 
@@ -16,9 +12,6 @@ Optimise save game file size.
 ---------------------
 Backburner : Features
 ---------------------
-
-Add in hyperspace along main trade routes
-- Add in a hyperspace ring somewhere on system map. Have to get to it. Then can select hyperspace from there. Only if there are trade routes.
 
 Maybe add in overwatch?
 
@@ -39,12 +32,12 @@ First Contact
 
 Add light sources for max. vision range? 
 
-Add new trade routes automatically over time?
-- Connect based on size of colonies in systems and their separation
-- What do trade routes accomplish? Maybe make certain colony types > 1 possible? Improve stock? Improve prices based on connectivity?
-
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
+
+Optimise save game file size. 
+- Only save homesystems and systems where planets have been named/scanned?
+-- Even then for non-homesystems, we only need to save the Name/Scan results
 
 MapViewMission - VisualEffect.DisplayShotLine() ??
 

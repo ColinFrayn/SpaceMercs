@@ -112,6 +112,19 @@ namespace SpaceMercs.MainWindow {
 
                 if (bShowColonies) {
                     pl.DrawBaseIcon(flatColourShaderProgram);
+                    if (pl.Colony is not null) {
+                        int size = pl.Colony.BaseSize;
+                        TextRenderOptions tro = new TextRenderOptions() {
+                            Alignment = Alignment.CentreMiddle,
+                            Aspect = aspect,
+                            TextColour = Color.White,
+                            XPos = px,
+                            YPos = py - (Const.PlanetScale * 0.12f),
+                            ZPos = 0.05f,
+                            Scale = Const.PlanetScale
+                        };
+                        TextRenderer.DrawWithOptions(size.ToString(), tro);
+                    }
                 }
 
                 // Draw the moons

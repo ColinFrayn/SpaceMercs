@@ -215,7 +215,7 @@ namespace SpaceMercs {
             }
         }
 
-        // Randomly expand a moon base
+        // Randomly expand a moon base (as part of system generation)
         public int ExpandMoonBase(Random rand, Race rc) {
             if (Moons.Count == 0) return 0;
             int mno = rand.Next(Moons.Count);
@@ -227,6 +227,8 @@ namespace SpaceMercs {
             }
             return 0;
         }
+
+        // Check if any colonies on this planet or moons should expand
         public void CheckGrowth() {
             Colony?.CheckGrowth();
             foreach (Moon mn in Moons) {

@@ -180,6 +180,7 @@ namespace SpaceMercs {
                 ForceExpandBase();
                 dtLastGrowth = dtNextGrowth;
                 dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
+                Location.GetSystem().CheckBuildTradeRoutes(Owner);
             }
         }
         private void ForceExpandBase() {
@@ -465,10 +466,13 @@ namespace SpaceMercs {
             return true;
         }
         private int GetNextGrowthPeriod() { // In days
-            if (!CanGrow) return 1000000;
+            if (!CanGrow) return (int)Const.Million; // i.e. never
             Random rand = new Random(Location.GetHashCode());
-            int dt = (int)(BaseSize * BaseSize * (Const.DaysPerYear + 50.0 * rand.NextDouble()));
+            int dt = (int)(BaseSize * BaseSize * (Const.DaysPerYear * 2.0 + 100.0 * rand.NextDouble()));
             dt += rand.Next(250) + rand.Next(250);
+            if (Location.GetSystem().TradeRoutes.Any()) {
+                dt = (int)((double)dt * Const.TradeRouteColonyGrowthRate);
+            }
             return dt;
         }
 
