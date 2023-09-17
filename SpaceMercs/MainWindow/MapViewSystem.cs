@@ -110,21 +110,20 @@ namespace SpaceMercs.MainWindow {
                     TriangleFocus.Flat.BindAndDraw();
                 }
 
-                if (bShowColonies) {
+                if (bShowColonies && pl.Colony is not null) {
                     pl.DrawBaseIcon(flatColourShaderProgram);
-                    if (pl.Colony is not null) {
-                        int size = pl.Colony.BaseSize;
-                        TextRenderOptions tro = new TextRenderOptions() {
-                            Alignment = Alignment.CentreMiddle,
-                            Aspect = aspect,
-                            TextColour = Color.White,
-                            XPos = px,
-                            YPos = py - (Const.PlanetScale * 0.12f),
-                            ZPos = 0.05f,
-                            Scale = Const.PlanetScale
-                        };
-                        TextRenderer.DrawWithOptions(size.ToString(), tro);
-                    }
+                    TextRenderOptions tro = new TextRenderOptions() {
+                        Alignment = Alignment.CentreMiddle,
+                        Aspect = aspect,
+                        TextColour = Color.White,
+                        XPos = px,
+                        YPos = py - (Const.PlanetScale * 0.12f),
+                        ZPos = 0.0f,
+                        Scale = Const.PlanetScale
+                    };
+                    GL.Disable(EnableCap.DepthTest);
+                    TextRenderer.DrawWithOptions(pl.Colony.BaseSize.ToString(), tro);
+                    GL.Enable(EnableCap.DepthTest);                   
                 }
 
                 // Draw the moons
@@ -161,8 +160,20 @@ namespace SpaceMercs.MainWindow {
                         TriangleFocus.Flat.BindAndDraw();
                     }
 
-                    if (bShowColonies) {
+                    if (bShowColonies && mn.Colony is not null) {
                         mn.DrawBaseIcon(flatColourShaderProgram);
+                        TextRenderOptions tro = new TextRenderOptions() {
+                            Alignment = Alignment.CentreMiddle,
+                            Aspect = aspect,
+                            TextColour = Color.White,
+                            XPos = px,
+                            YPos = moony - (Const.PlanetScale * 0.12f),
+                            ZPos = 0.0f,
+                            Scale = Const.PlanetScale * 0.8f
+                        };
+                        GL.Disable(EnableCap.DepthTest);
+                        TextRenderer.DrawWithOptions(mn.Colony.BaseSize.ToString(), tro);
+                        GL.Enable(EnableCap.DepthTest);
                     }
 
                     moony += 0.07f;
@@ -170,7 +181,8 @@ namespace SpaceMercs.MainWindow {
 
                 px -= (pl.DrawScale * Const.PlanetScale + 0.05f) * 0.8f;
             }
-            // Draw the HyperGate
+
+            // Draw the HyperGate, if there is one
             if (SystemStar.HasHyperGate) {
                 HyperGate hg = SystemStar.GetHyperGate()!;
                 float scale = Const.PlanetScale;

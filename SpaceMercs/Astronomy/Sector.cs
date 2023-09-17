@@ -153,8 +153,10 @@ namespace SpaceMercs {
                     if (bShowLabels) tro.YPos = -1.0f; // Offset under system name
                     else tro.YPos = -0.5f;
                     tro.View = Matrix4.CreateScale(0.5f) * translateM;
-                    tro.TextColour = Color.Green;
+                    tro.TextColour = Color.LightGreen;
+                    tro.Scale = 0.5f;
                     TextRenderer.DrawWithOptions(pop.ToString(), tro);
+                    tro.Scale = 0.3f;
                 }
             }
         }

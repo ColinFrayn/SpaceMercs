@@ -15,8 +15,6 @@ Backburner : Features
 
 Maybe add in overwatch?
 
-Add in tests as we go
-
 Life scanner (shows blips for any unseen creatures within a range? Not passive) ?
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
