@@ -6,6 +6,8 @@ Add more alien-only items/ship rooms (weapons, armour etc.)
 
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
+Some weapons should be multi-shot but with a penalty.
+
 ==========================================================================================================
 
 

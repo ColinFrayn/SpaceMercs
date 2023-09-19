@@ -384,7 +384,12 @@ namespace SpaceMercs.Dialogs {
         private void dgConstruct_DoubleClick(object sender, EventArgs e) {
             if (dgConstruct.SelectedRows.Count != 1) return;
             if (dgConstruct.SelectedRows[0].Tag is not ItemType it) return;
-            MessageBox.Show(this, it.Desc);
+            string desc = $"{it.Name}\n{it.Desc}\n\nMaterials Required:\n";
+            foreach (MaterialType mat in it.Materials.Keys) {
+                int req = it.Materials[mat];
+                desc += $"{mat.Name} * {req}\n";
+            }
+            MessageBox.Show(this, desc);
         }
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
