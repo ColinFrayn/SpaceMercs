@@ -244,25 +244,30 @@ namespace SpaceMercs {
             IsActive = false;
             CurrentLevel.KillSoldier(this);
         }
-        public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
+        public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
             double hmod = 1.0; // Utils.HitToMod(hit); // Damage modifier for quality of hit
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             WeaponType.DamageType type = WeaponType.DamageType.Physical;
             if (EquippedWeapon == null) {
-                double dam = (rnd.NextDouble() + 1.0) * Const.SoldierAttackDamageScale * Strength / 15.0;  // Melee does rubbish damage, in general
+                double dam = 0.0;
+                for (int n = 0; n < nhits; n++) {
+                    dam += (rnd.NextDouble() + 1.0) * Const.SoldierAttackDamageScale * Strength / 15.0;  // Melee does rubbish damage, in general
+                }
                 AllDam.Add(WeaponType.DamageType.Physical, dam * hmod);
             }
             else {
-                double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
-                //if (EquippedWeapon.Type.IsMeleeWeapon) dam *= Strength / 10.0;
+                type = EquippedWeapon.Type.DType;
+                double dam = 0.0;
                 hmod = Attack / 10.0; // 10% damage bonus per attack point (includes weapon skill etc.)
                 hmod *= Const.SoldierAttackDamageScale;
-                type = EquippedWeapon.Type.DType;
+                for (int n = 0; n < nhits; n++) {
+                    dam += EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
+                }
                 AllDam.Add(type, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
-                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
-                    else AllDam.Add(bdam.Key, bdam.Value * hmod);
-                }
+                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
+                    else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
+                }                
             }
 
             return AllDam;
@@ -1064,12 +1069,16 @@ namespace SpaceMercs {
         }
         private bool AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             HasMoved = true;
-            double hit = Utils.GenerateHitRoll(this, en);
-            if (hit <= 0.0) {
+            int nhits = 0, nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            for (int n = 0; n < nshots; n++) {                
+                double hit = Utils.GenerateHitRoll(this, en);
+                if (hit > 0.0) nhits++;
+            }
+            if (nhits == 0) {
                 if (en is Creature cre) cre.CheckChangeTarget(0.0, this);
                 return false;
             }
-            double TotalDam = en.InflictDamage(GenerateDamage());
+            double TotalDam = en.InflictDamage(GenerateDamage(nhits));
             if (en is Creature cr) cr.CheckChangeTarget(TotalDam, this);
 
             // Graphics for damage

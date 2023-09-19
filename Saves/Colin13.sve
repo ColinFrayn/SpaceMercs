@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>09/03/2150 19:52:08</Clock>
+<Clock>09/03/2150 20:02:01</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -9950,20 +9950,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1255411922</Seed>
  <Size>2</Size>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="1.40" Cost="4.87">Golden Geode</MissionItem>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>405139354</Seed>
- <Size>3</Size>
 </Mission>
 <Mission>
  <Type>Mines</Type>
@@ -35580,17 +35566,16 @@
 </Map>
 <Team>
  <Pos>(0,0)7.3</Pos>
- <Cash>144.48188648923315</Cash>
+ <Cash>1209.747601861428</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <OnMission/>
- <Location X="10" Y="24"/>
- <Health>28</Health>
- <Stamina>34</Stamina>
+ <Location X="4" Y="40"/>
+ <Health>19.91853893279627</Health>
+ <Stamina>3.5047978061592224</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>180</Facing>
  <Level>6</Level>
- <XP>25597</XP>
+ <XP>29892</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,18</Stats>
@@ -35599,7 +35584,7 @@
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
@@ -35609,32 +35594,32 @@
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gloves" Material="Steel" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Automatic Rifle" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">372</Exp>
+  <Exp Type="Automatic Rifle">401</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
   <Exp Skill="Perception">4</Exp>
   <Exp Skill="Avoidance">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <OnMission/>
- <Location X="15" Y="27"/>
- <Health>32</Health>
- <Stamina>27</Stamina>
+ <Location X="3" Y="31"/>
+ <Health>16.168738715450054</Health>
+ <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
- <Level>5</Level>
- <XP>21198</XP>
+ <Facing>360</Facing>
+ <Level>6</Level>
+ <XP>25493</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
- <Stats>14,12,9,17,12</Stats>
+ <Stats>14,12,9,18,12</Stats>
  <Colour>#FFE600</Colour>
  <Inventory>
   <Inv Count="1">
@@ -35663,26 +35648,26 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">135</Exp>
-  <Exp Type="Quad Shotgun">97</Exp>
+  <Exp Type="Quad Shotgun">114</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Mel Webster">
- <OnMission/>
- <Location X="5" Y="29"/>
- <Health>27</Health>
- <Stamina>22</Stamina>
+ <Location X="5" Y="30"/>
+ <Health>14.6669224815805</Health>
+ <Stamina>23</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
- <Level>5</Level>
- <XP>20270</XP>
+ <Facing>90</Facing>
+ <Level>6</Level>
+ <XP>24565</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>18,13,12,12,7</Stats>
+ <Stats>19,13,12,12,7</Stats>
  <Colour>Red</Colour>
  <Inventory>
   <Inv Count="1">
@@ -35690,6 +35675,12 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Acid Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -35701,24 +35692,24 @@
  <WeaponExperience>
   <Exp Type="Automatic Rifle">138</Exp>
   <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">289</Exp>
+  <Exp Type="Powerblade">310</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Sniper">2</Exp>
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Scavenging">2</Exp>
+  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <OnMission/>
- <Location X="12" Y="28"/>
+ <Location X="4" Y="28"/>
  <Health>27</Health>
- <Stamina>30</Stamina>
+ <Stamina>10.2</Stamina>
  <Shields>0</Shields>
- <Facing>315</Facing>
+ <Facing>90</Facing>
  <Level>5</Level>
- <XP>17750</XP>
+ <XP>22045</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,17,12,15</Stats>
@@ -35739,7 +35730,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">261</Exp>
+  <Exp Type="Sniper Rifle">281</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -35747,6 +35738,7 @@
   <Exp Skill="Engineer">1</Exp>
   <Exp Skill="Sniper">1</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
  </Soldiers>
 <Ship Type="Corvette">
@@ -35770,7 +35762,7 @@
   <Relation Race="Human" Value="2"/>
  </Relations>
  <Inventory>
-  <Inv Count="2">
+  <Inv Count="3">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="1">
@@ -35782,10 +35774,7 @@
   <Inv Count="5">
 <Material Type="Carbon Fibre"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Shotgun" Level="1"/>
-  </Inv>
-  <Inv Count="2">
+  <Inv Count="3">
 <Material Type="Plastic"/>
   </Inv>
   <Inv Count="1">
@@ -35797,102 +35786,13 @@
   <Inv Count="4">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Chainsword" Level="0"/>
-  </Inv>
   <Inv Count="15">
 <Material Type="Chitin"/>
   </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Rifle" Level="0"/>
+  </Inv>
  </Inventory>
-<Mission>
- <Type>Caves</Type>
- <Goal>FindItem</Goal>
-<MissionItem Mass="6.70" Cost="22.77">Fine Luminous Ruby</MissionItem>
- <Enemy>Shadow Beasts</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>58.09</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>432504357</Seed>
- <Size>2</Size>
- <Level ID="0">
-<MissionLevel Width="32" Height="33">
- <Diff>5</Diff>
- <Level>0</Level>
- <Start X="11" Y="27"/>
- <End X="-1" Y="-1"/>
- <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABAABBAABABBBBBBBBBBBBBBBBBBBBAAAAAABBAAAAABBBAABBBBBBBBBBBBBBAAAAAAAAAAAABBBAAABBAABBBBBBBBBBAAAAAAAAAAAABBBBAAAAAAABBBBBBBBBAAAAAAAAAAABBBBBBAAAAAAABAAAABBBAAAAAAAAAAABBBBBBBAAAAAAAAAAAABBAAAABAAABBBAABBBBBAAAAAAAAAAAABBAABBBBABBBAAAABBBBAAAAAAAAAAAABBBBBBBAAABAAAAAABBAAAAAAAAAAAAABBBBBAAAAAAAAAAABBAAAAAAAAAAAAAABBBBAAAAAABBAAAABBAAAAAAABBAAAAABBBBBAAAAABBBBAAAAAAAAABBBBBBAAABBBBAAAAAABBBBBAAAAAAAABBBBBBAABBBBBAAAAAAABBBBAAAAAAAAABBBAAAAABBBBBAAAAAAABBBAAAAAAAAABBBAAAAABBBBBAAAAAAAAAAAAAAAAAABBBBBAAABBBBAAAAAAAAAAAAABAAAAAABBBBBBABBBBAAAAAAAAAAAAABBBAAAAAABBBBBBBBBBAAAABAAAAAAAABBBAAAAAAABBBBBBBBBBABBBBBAAAAAABBBAAAAAAAAABBBBBBBAABBBBBAAAAAAABBAAAAAABAABBBBBBBAAABAABBAAAAAABBAAAAABBBBBAABBBBBBBAAAABAAAAAAAAAAAAAABBBBAABBBBBBBAAAAAAAAAAAAAAABBABBBBBAAAABBAAAAAABAAAAAAAAAAABBAAAABBAAAABBAAAAABBBAAAAAAAAAAAAAABAAAAAAABBBAAABBBBAAAAAAAAAAAAABBAAAAAAABBAAAABBBAAAAAAAAAAAABBBBBAAAAAABBAAAAAAAAAAAAAAAAAABBBAAAAAAAABBBAAAAAAAABBAAAAAAAABAAAABBBBBBBBBAAAABAAABBAAABAAABAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
- <Explored>000001100000000000000000000000000000111000000000000000000000000000000111000000000000001100000000000001110000000000000011100000000000011100000000000001111000000000000011000000000000011110000000000000110000000000001111100000000000001100000000000111110000000000000111100000000011111100000000000111111000000001110111000000000001111110000011111101100000000000011111100000111110111000000000001111111100001111001111000000000011111111100011110011110000000000111111111101111001111100000000001111111111111100011111000000000001111111111111000111110000000000000111111111110011111100000000000000111111111100111111100000000000000111111110001111111100000000000001111111110111111111000000110111111111111111111111000000001111111111111111111111110000000000111111111111111111111100000000111111111111111111111001110000001111111111111111111111111100000011111111111111111111111100000000111111111111111111111111000000001111111111111111111111110000000011111111111111111111110000000000111111111111111111110000000000001111111111111111111111111000000011111111111111111111111110000000</Explored>
-<Creatures>
-<Creature Type="Shadow Minion">
- <Location X="2" Y="5"/>
- <Level>5</Level>
- <Facing>323</Facing>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="3" Y="7"/>
- <Level>5</Level>
- <Facing>97</Facing>
- <QuestItem/>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="6" Y="6"/>
- <Level>5</Level>
- <Facing>148</Facing>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="5" Y="1"/>
- <Level>6</Level>
- <Facing>274</Facing>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="15" Y="26"/>
- <Level>5</Level>
- <Facing>180</Facing>
- <Target X="15" Y="27"/>
- <Investigate X="15" Y="27"/>
- <Alert/>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="18" Y="26"/>
- <Level>5</Level>
- <Facing>90</Facing>
- <Target X="15" Y="27"/>
- <Investigate X="15" Y="27"/>
- <Alert/>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="18" Y="25"/>
- <Health>12.34</Health>
- <Level>5</Level>
- <Facing>90</Facing>
- <Target X="15" Y="27"/>
- <Investigate X="15" Y="27"/>
- <Alert/>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="19" Y="5"/>
- <Level>5</Level>
- <Facing>280</Facing>
-</Creature>
-<Creature Type="Shadow Minion">
- <Location X="19" Y="4"/>
- <Level>6</Level>
- <Facing>127</Facing>
-</Creature>
-</Creatures>
-<Stashes>
-<Stash X="19" Y="20">
-<StashItem N="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
-</StashItem>
-<Hidden/>
-</Stash>
-</Stashes>
-</MissionLevel>
- </Level>
-</Mission>
 </Team>
 <Races>
 <Race Name="Human">

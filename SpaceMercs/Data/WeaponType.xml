@@ -5,8 +5,9 @@
     <Cost>10</Cost>
     <Rarity>3</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="2" DropOff="0.7">5</Range>
-    <Damage>6+3</Damage>
+    <Shots>2</Shots>
+    <Range Accuracy="-1" DropOff="0.7">6</Range>
+    <Damage>3+2</Damage>
     <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Materials>
@@ -21,8 +22,9 @@
     <Cost>90</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
-    <Range Accuracy="3" DropOff="0.6">5</Range>
-    <Damage>7+5</Damage>
+    <Shots>4</Shots>
+    <Range Accuracy="-2" DropOff="0.7">6</Range>
+    <Damage>3+2</Damage>
     <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Materials>
@@ -149,8 +151,9 @@
     <Cost>45</Cost>
     <Rarity>9</Rarity>
     <Speed>12</Speed>
-    <Range Accuracy="2" DropOff="0.7">5</Range>
-    <Damage>6+5</Damage>
+    <Range Accuracy="-1" DropOff="0.7">6</Range>
+    <Shots>3</Shots>
+    <Damage>3+2</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>
@@ -166,8 +169,9 @@
     <Cost>180</Cost>
     <Rarity>14</Rarity>
     <Speed>14</Speed>
-    <Range Accuracy="3" DropOff="0.6">5</Range>
-    <Damage>7+6</Damage>
+    <Range Accuracy="-1" DropOff="0.7">6</Range>
+    <Shots>4</Shots>
+    <Damage>4+2</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>

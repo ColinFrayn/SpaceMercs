@@ -15,6 +15,7 @@ namespace SpaceMercs {
         public string SoundEffect { get; private set; }
         public bool IsUsable { get; private set; }
         public bool Stable { get; private set; }  // This weapon requires stability i.e. you can't move in the same turn before firing
+        public int Shots { get; private set; } // Number of shots
 
         public WeaponType(XmlNode xml) : base(xml) {
             XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
@@ -32,6 +33,7 @@ namespace SpaceMercs {
             DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
+            Shots = xml.SelectNodeInt("Shots", 1);
         }
 
         public override string ToString() {

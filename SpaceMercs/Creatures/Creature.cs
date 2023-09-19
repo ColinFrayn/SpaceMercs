@@ -233,22 +233,25 @@ namespace SpaceMercs {
             Health = 0.0;
             CurrentLevel.KillCreature(this);
         }
-        public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
+        public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             if (EquippedWeapon == null) {
-                double dam = rnd.NextDouble() * (Level + 5) + Level + 5;
+                double dam = 0.0;
+                for (int n=0; n<nhits; n++) dam += rnd.NextDouble() * (Level + 5) + Level + 5;
                 dam *= Const.CreatureMeleeDamageScale * Const.CreatureAttackDamageScale;
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double dam = rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
+                double dam = 0.0;
+                for (int n = 0; n < nhits; n++) {
+                    dam += rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
+                }
                 double hmod = 0.9 + (Attack / 10.0);
                 hmod *= Const.CreatureAttackDamageScale;
-                //if (EquippedWeapon.Type.IsMeleeWeapon) dam *= (Level + 4) / 5.0;
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
-                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
-                    else AllDam.Add(bdam.Key, bdam.Value * hmod);
+                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
+                    else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
                 }
             }
 
@@ -518,9 +521,13 @@ namespace SpaceMercs {
             }
 
             // Do the attack
-            double hit = Utils.GenerateHitRoll(this, en);
-            if (hit <= 0.0) return;
-            double TotalDam = en.InflictDamage(GenerateDamage());
+            int nhits = 0, nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            for (int n = 0; n < nshots; n++) {
+                double hit = Utils.GenerateHitRoll(this, en);
+                if (hit > 0.0) nhits++;
+            }
+            if (nhits == 0) return;
+            double TotalDam = en.InflictDamage(GenerateDamage(nhits));
 
             // Graphics for damage
             int delay = (int)(RangeTo(en) * 25.0);
