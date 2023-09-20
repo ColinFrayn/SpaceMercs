@@ -280,6 +280,23 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="Disc Thrower">
+    <Mass>3.0</Mass>
+    <Cost>50</Cost>
+    <Rarity>25</Rarity>
+    <Speed>13</Speed>
+    <Race>Insectoid</Race>
+    <Range Accuracy="-1" DropOff="0.5">12</Range>
+    <Damage>5+2</Damage>
+    <Desc>A rifle-like device that throws bladed discs with high speed</Desc>
+    <Sound>MachineGun</Sound>
+    <Materials>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Tungsten" Amount="1"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Shortblade">
     <Mass>1.0</Mass>
     <Cost>4</Cost>

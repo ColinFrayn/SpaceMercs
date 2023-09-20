@@ -27,9 +27,9 @@
     <Toughness>13</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>289</BaseTemp>
-    <PlanetType>Oceanic</PlanetType>
+    <PlanetType>Rocky</PlanetType>
     <Colour>255,0,0</Colour>
-    <Scale>1.0</Scale>
+    <Scale>0.9</Scale>
     <Names>
       <Personal>
         <Male>Agkor,Began,Carg,Dokan,Erag,Farg,Grak,Horak,Koram,Logak,Merok,Nerak,Ogam,Pagrok,Rokam,Somak,Tarok</Male>
@@ -37,7 +37,7 @@
       </Personal>
       <Family>Almok,Bagem,Carok,Degam,Egor,Forak,Gokam,Hokar,Kemok,Lenog,Mogam,Nogram,Okem,Pekom,Ramok,Satok,Tembak</Family>
     </Names>    
-    <Description>Short, stocky, muscular humanoids.</Description>
+    <Description>Short, stocky, muscular humanoids with a love of material goods and resilient to harsh environments.</Description>
   </Race>
   <Race>
     <Name>Elithiri</Name>
@@ -57,7 +57,7 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Slender humanoids.</Description>
+    <Description>Slender humanoids, peaceful but secretive. They rely on mystical technology in all aspects of their lives.</Description>
 </Race>
   <Race>
     <Name>Ogrish</Name>
@@ -77,7 +77,7 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Large, imposing, brutish creatures.</Description>
+    <Description>Large, imposing, brutish creatures with a love for combat.</Description>
   </Race>
   <Race>
     <Name>Insectoid</Name>
@@ -96,7 +96,7 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Humanoid insects</Description>
+    <Description>Humanoid insects, slightly shorter than teh average human, but with multiple limbs and compound eyes.</Description>
   </Race>
   <Race>
     <Name>Grey</Name>
@@ -115,7 +115,7 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Big brains, like in traditional ET films</Description>
+    <Description>Short, enigmatic creatures with oversized heads and an alleged psychic ability.</Description>
   </Race>
   <Race>
     <Name>Ursalon</Name>
@@ -135,6 +135,6 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Hairy, ursine humanoids.</Description>
+    <Description>Hairy, ursine humanoids with a fiercely noble tradition.</Description>
   </Race>
 </Data>

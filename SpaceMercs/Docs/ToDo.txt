@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Add more alien-only items/ship rooms (weapons, armour etc.)
-
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
 ==========================================================================================================
@@ -15,7 +13,10 @@ Backburner : Features
 
 Maybe add in overwatch?
 
-Life scanner (shows blips for any unseen creatures within a range? Not passive) ?
+Add more alien-only items
+- Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
+- ? [Gokan]
+- ? [Ogrish]
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
