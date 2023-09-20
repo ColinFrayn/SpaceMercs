@@ -8,6 +8,7 @@
     <Stamina>16</Stamina>
     <Armour>12</Armour>
     <BodyType>Plant</BodyType>
+    <Frequency>2</Frequency>
     <MovementCost>6.0</MovementCost>
     <Col1>0, 225, 0</Col1>
     <Col2>80, 255, 100</Col2>

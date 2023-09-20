@@ -24,6 +24,7 @@ namespace SpaceMercs {
         public bool Corporeal { get; private set; }
         public bool Interact { get; private set; }  // Can interact with objects? (i.e. open doors) Default = false
         public double MovementCost { get; private set; }
+        public int FrequencyModifier { get; private set; }
         public Color Col1 { get; private set; }
         public Color Col2 { get; private set; }
         public Color Col3 { get; private set; }
@@ -55,6 +56,8 @@ namespace SpaceMercs {
             DefenceBase = xml.SelectNodeInt("Defence");
 
             Body = xml.SelectNodeEnum<BodyType>("BodyType", BodyType.Humanoid);
+
+            FrequencyModifier = xml.SelectNodeInt("Frequency", 1);
 
             // Base colours
             Col1 = Color.Black;

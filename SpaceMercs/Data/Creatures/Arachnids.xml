@@ -6,6 +6,7 @@
     <Armour>10</Armour>
     <Health>8</Health>
     <Stamina>16</Stamina>
+    <Frequency>3</Frequency>
     <BodyType>Arachnid</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>80, 80, 80</Col2>
@@ -22,6 +23,7 @@
     <Armour>14</Armour>
     <Health>12</Health>
     <Stamina>18</Stamina>
+    <Frequency>2</Frequency>
     <BodyType>Arachnid</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>80, 80, 80</Col2>

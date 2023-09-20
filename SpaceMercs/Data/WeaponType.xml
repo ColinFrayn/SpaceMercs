@@ -19,7 +19,7 @@
   </WeaponType>
   <WeaponType Name="Quad Shotgun">
     <Mass>4.0</Mass>
-    <Cost>90</Cost>
+    <Cost>120</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
     <Shots>4</Shots>

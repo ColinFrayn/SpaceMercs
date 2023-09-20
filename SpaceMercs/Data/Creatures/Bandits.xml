@@ -8,6 +8,7 @@
     <Armour>18</Armour>
     <Health>11</Health>
     <Stamina>14</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <Col1>120, 90, 60</Col1>
     <Col2>170, 170, 170</Col2>
@@ -26,6 +27,7 @@
     <Armour>22</Armour>
     <Health>12</Health>
     <Stamina>15</Stamina>
+    <Frequency>3</Frequency>
     <Interact/>
     <Col1>120, 90, 60</Col1>
     <Col2>180, 160, 140</Col2>
@@ -46,6 +48,7 @@
     <Armour>25</Armour>
     <Health>14</Health>
     <Stamina>17</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <Col1>120, 120, 120</Col1>
     <Col2>180, 160, 140</Col2>
@@ -76,7 +79,6 @@
       <Weapon Weight="3">Chainsword</Weapon>
       <Weapon Weight="2">Powerblade</Weapon>
       <Weapon Weight="1">Automatic Rifle</Weapon>
-      <Weapon Weight="1">Heavy Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Heavy Gunner">
@@ -84,7 +86,7 @@
     <LevelRange>5,15</LevelRange>
     <Attack>14</Attack>
     <Defence>12</Defence>
-    <Armour>3</Armour>
+    <Armour>30</Armour>
     <Health>16</Health>
     <Stamina>17</Stamina>
     <Interact/>
@@ -95,6 +97,7 @@
     <Weapons>
       <Weapon Weight="1">Heavy Rifle</Weapon>
     </Weapons>
+    <MovementCost>3.0</MovementCost>
   </CreatureType>
   <CreatureType Name="Bandit Leader">
     <Scale>1.1</Scale>

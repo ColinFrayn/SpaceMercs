@@ -6,6 +6,7 @@
     <Armour>22</Armour>
     <Health>13</Health>
     <Stamina>18</Stamina>
+    <Frequency>3</Frequency>
     <Interact/>
     <BodyType>Xenomorph</BodyType>
     <Col1>60, 50, 40</Col1>
@@ -31,6 +32,7 @@
     <Armour>28</Armour>
     <Health>16</Health>
     <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <BodyType>Xenomorph</BodyType>
     <Col1>60, 50, 40</Col1>

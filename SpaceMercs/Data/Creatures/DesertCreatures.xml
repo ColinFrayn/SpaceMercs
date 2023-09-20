@@ -6,6 +6,7 @@
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>10</Armour>
+    <Frequency>2</Frequency>
     <BodyType>Lizard</BodyType>
     <Col1>80, 60, 40</Col1>
     <Col2>140, 115, 90</Col2>
@@ -23,6 +24,7 @@
     <Health>8</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
+    <Frequency>2</Frequency>
     <BodyType>Snake</BodyType>
     <Col1>200, 160, 0</Col1>
     <Col2>240, 210, 60</Col2>
@@ -42,6 +44,7 @@
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
+    <Frequency>2</Frequency>
     <MovementCost>1.4</MovementCost>
     <BodyType>Centipede</BodyType>
     <Col1>80, 60, 40</Col1>

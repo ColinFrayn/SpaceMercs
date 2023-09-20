@@ -4,6 +4,12 @@ ToDo List
 
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
+Sniper rifle should start off steady when mission starts
+
+Too many heavy gunners in level
+
+Clear frag when battle starts
+
 ==========================================================================================================
 
 

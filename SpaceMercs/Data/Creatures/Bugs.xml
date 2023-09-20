@@ -7,6 +7,7 @@
     <Health>8</Health>
     <Stamina>14</Stamina>
     <Armour>8</Armour>
+    <Frequency>4</Frequency>
     <BodyType>Bug</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>80, 80, 80</Col2>
@@ -24,6 +25,7 @@
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>22</Armour>
+    <Frequency>2</Frequency>
     <MovementCost>1.4</MovementCost>
     <BodyType>Bug</BodyType>
     <Col1>60, 50, 40</Col1>

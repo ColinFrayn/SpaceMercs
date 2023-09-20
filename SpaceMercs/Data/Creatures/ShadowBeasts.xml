@@ -6,6 +6,7 @@
     <Armour>18</Armour>
     <Health>13</Health>
     <Stamina>19</Stamina>
+    <Frequency>3</Frequency>
     <Interact/>
     <BodyType>ShadowBeast</BodyType>
     <Col1>60, 50, 40</Col1>
@@ -28,6 +29,7 @@
     <Armour>19</Armour>
     <Health>14</Health>
     <Stamina>19</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <BodyType>ShadowBeast</BodyType>
     <Col1>60, 50, 40</Col1>

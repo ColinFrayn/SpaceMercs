@@ -6,6 +6,7 @@
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
+    <Frequency>3</Frequency>
     <BodyType>Lizard</BodyType>
     <Col1>100, 60, 40</Col1>
     <Col2>200, 115, 90</Col2>
@@ -26,6 +27,7 @@
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
+    <Frequency>3</Frequency>
     <BodyType>Snake</BodyType>
     <Col1>200, 120, 0</Col1>
     <Col2>240, 170, 40</Col2>
@@ -47,6 +49,7 @@
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
+    <Frequency>3</Frequency>
     <BodyType>Beetle</BodyType>
     <Col1>70, 50, 40</Col1>
     <Col2>80, 70, 70</Col2>
@@ -72,6 +75,7 @@
     <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
+    <Frequency>2</Frequency>
     <BodyType>Arachnid</BodyType>
     <Col1>70, 50, 40</Col1>
     <Col2>80, 70, 70</Col2>

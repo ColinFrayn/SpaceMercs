@@ -6,6 +6,7 @@
     <Defence>11</Defence>
     <Health>18</Health>
     <Stamina>17</Stamina>
+    <Frequency>3</Frequency>
     <Interact/>
     <Armour>28</Armour>
     <Col1>60, 60, 50</Col1>
@@ -23,6 +24,7 @@
     <Defence>12</Defence>
     <Health>20</Health>
     <Stamina>17</Stamina>
+    <Frequency>3</Frequency>
     <Interact/>
     <Armour>30</Armour>
     <Col1>60, 60, 50</Col1>
@@ -40,6 +42,7 @@
     <Defence>12</Defence>
     <Health>21</Health>
     <Stamina>17</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <Armour>30</Armour>
     <Col1>60, 60, 50</Col1>

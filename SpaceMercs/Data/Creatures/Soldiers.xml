@@ -8,6 +8,7 @@
     <Armour>22</Armour>
     <Health>12</Health>
     <Stamina>14</Stamina>
+    <Frequency>4</Frequency>
     <Interact/>
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
@@ -24,6 +25,7 @@
     <Armour>26</Armour>
     <Health>16</Health>
     <Stamina>16</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
@@ -40,6 +42,7 @@
     <Armour>26</Armour>
     <Health>16</Health>
     <Stamina>16</Stamina>
+    <Frequency>2</Frequency>
     <Interact/>
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
@@ -78,6 +81,7 @@
     <Armour>28</Armour>
     <Health>18</Health>
     <Stamina>18</Stamina>
+    <MovementCost>3.0</MovementCost>
     <Interact/>
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>

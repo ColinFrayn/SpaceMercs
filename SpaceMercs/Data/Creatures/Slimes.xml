@@ -8,6 +8,7 @@
     <Stamina>16</Stamina>
     <Armour>4</Armour>
     <BodyType>Slime</BodyType>
+    <Frequency>3</Frequency>
     <MovementCost>2.5</MovementCost>
     <Col1>0, 240, 10</Col1>
     <Col2>0, 190, 0</Col2>
@@ -28,6 +29,7 @@
     <Health>9</Health>
     <Stamina>16</Stamina>
     <Armour>5</Armour>
+    <Frequency>2</Frequency>
     <BodyType>Slime</BodyType>
     <MovementCost>3.0</MovementCost>
     <Col1>0, 230, 10</Col1>
@@ -52,6 +54,7 @@
     <Health>9</Health>
     <Stamina>16</Stamina>
     <Armour>4</Armour>
+    <Frequency>2</Frequency>
     <BodyType>Slime</BodyType>
     <MovementCost>3.0</MovementCost>
     <Col1>30, 230, 10</Col1>
