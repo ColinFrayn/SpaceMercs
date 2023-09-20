@@ -222,7 +222,7 @@ namespace SpaceMercs {
                 int num = (int)Math.Round(dnum);
                 for (int n = 0; n < num; n++) {
                     // Generate a random item suitable for this creature
-                    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level);
+                    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level, OverrideRace);
                     if (eq is not null) st.Add(eq);
                 }
             }

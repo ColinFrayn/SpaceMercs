@@ -892,7 +892,7 @@ namespace SpaceMercs {
         private void GenerateRandomItems() {
             // Firstly, generate a weapon
             do {
-                EquippedWeapon = Utils.GenerateRandomWeapon(rnd, Level);
+                EquippedWeapon = Utils.GenerateRandomWeapon(rnd, Level, Race);
             } while (EquippedWeapon is null || EquippedWeapon.StaminaCost > MaxStamina);
 
             // Next generate armour
@@ -908,7 +908,7 @@ namespace SpaceMercs {
             int num = (rnd.Next(Level) + 3 + rnd.Next(3)) / 2;
             for (int n = 0; n < num; n++) {
                 // Generate a random item suitable for this soldier (not a weapon or armour)
-                IItem? eq = Utils.GenerateRandomItem(rnd, Level, false);
+                IItem? eq = Utils.GenerateRandomItem(rnd, Level, Race, false);
                 if (eq is not null) AddItem(eq);
             }
         }

@@ -330,15 +330,15 @@ namespace SpaceMercs {
             return dict;
         }
 
-        public static IItem? GenerateRandomItem(Random rnd, int lvl, bool bAddEquipment = true) {
+        public static IItem? GenerateRandomItem(Random rnd, int lvl, Race? race, bool bAddEquipment = true) {
             // Armour
             double rnum = rnd.NextDouble();
             if (!bAddEquipment) rnum = 1.0;
             if (rnum < 0.2) { // Random weapon
-                return GenerateRandomWeapon(rnd, lvl);
+                return GenerateRandomWeapon(rnd, lvl, race);
             }
             if (rnum < 0.7) { // Random armour
-                return GenerateRandomArmour(rnd, lvl);
+                return GenerateRandomArmour(rnd, lvl, race);
             }
             if (rnum < 0.8) { // Random material
                 double best = 0.0;
@@ -358,6 +358,7 @@ namespace SpaceMercs {
                 ItemType? ibest = null;
                 foreach (ItemType it in StaticData.ItemTypes) {
                     if (it.BaseRarity > lvl + 5) continue;
+                    if (it.RequiredRace != null && it.RequiredRace != race) continue;
                     double r = rnd.NextDouble() * Math.Pow(it.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;
@@ -369,10 +370,11 @@ namespace SpaceMercs {
             }
         }
 
-        public static Weapon? GenerateRandomWeapon(Random rnd, int Level) {
+        public static Weapon? GenerateRandomWeapon(Random rnd, int Level, Race? race) {
             List<WeaponType> wts = new List<WeaponType>();
             double trar = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
+                if (tp.RequiredRace != null && tp.RequiredRace != race) continue;
                 if (tp.BaseRarity <= Level + 5 && tp.IsUsable) {
                     wts.Add(tp);
                     trar += tp.Rarity;
@@ -398,12 +400,13 @@ namespace SpaceMercs {
             return null;
         }
 
-        public static Armour? GenerateRandomArmour(Random rnd, int Level) {
+        public static Armour? GenerateRandomArmour(Random rnd, int Level, Race? race) {
             // Choose between all single-location armour pieces
             double best = 0.0;
             ArmourType? abest = null;
             MaterialType? mbest = null;
             foreach (ArmourType at in StaticData.ArmourTypes) {
+                if (at.RequiredRace != null && at.RequiredRace != race) continue;
                 if (at.Locations.Count == 1) {
                     foreach (MaterialType mat in StaticData.Materials) {
                         if (!mat.IsArmourMaterial) continue;

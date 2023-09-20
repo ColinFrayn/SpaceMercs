@@ -104,6 +104,11 @@
     <Rarity>0.05</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
+  <MaterialType Name="Electronic Components">
+    <CostMod>10.0</CostMod>
+    <Rarity>0.05</Rarity>
+    <UnitMass>0.1</UnitMass>
+  </MaterialType>
   <MaterialType Name="Gold">
     <CostMod>20.0</CostMod>
     <Rarity>0.001</Rarity>

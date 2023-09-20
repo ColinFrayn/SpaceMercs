@@ -55,7 +55,7 @@ namespace SpaceMercs {
             int num = (int)Math.Round(dnum);
             if (num < 1) num = 1;
             for (int n = 0; n < num; n++) {
-                IItem? eq = Utils.GenerateRandomItem(rnd, lvl);
+                IItem? eq = Utils.GenerateRandomItem(rnd, lvl, null);
                 if (eq is not null) Add(eq);
             }
         }

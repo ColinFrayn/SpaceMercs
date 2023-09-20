@@ -275,6 +275,7 @@ namespace SpaceMercs {
         private void PopulateInventory(int days) {
             Random rand = new Random();
             foreach (ItemType eq in StaticData.ItemTypes) {
+                if (eq.RequiredRace != null && eq.RequiredRace != Owner) continue;
                 double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                 // Modify rarity by colony details & add this item if required
                 if ((Base & BaseType.Military) == 0) rarity /= 2.0;
@@ -287,6 +288,7 @@ namespace SpaceMercs {
             // Now add all weapons
             foreach (WeaponType wt in StaticData.WeaponTypes) {
                 if (!wt.IsUsable) continue;
+                if (wt.RequiredRace != null && wt.RequiredRace != Owner) continue;
                 for (int Level = 0; Level < 4; Level++) {
                     Weapon wp = new Weapon(wt, Level);
                     double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
@@ -301,6 +303,7 @@ namespace SpaceMercs {
 
             // Now add all armour types
             foreach (ArmourType atp in StaticData.ArmourTypes) {
+                if (atp.RequiredRace != null && atp.RequiredRace != Owner) continue;
                 foreach (MaterialType mat in StaticData.Materials) {
                     for (int Level = 0; Level < 4; Level++) {
                         if (!mat.IsArmourMaterial) continue;

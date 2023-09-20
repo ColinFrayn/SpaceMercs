@@ -20,6 +20,7 @@ namespace SpaceMercs {
         public int TextureX { get; private set; }
         public int TextureY { get; private set; }
         public uint ItemID { get; private set; }
+        public Race? RequiredRace { get; private set; }
         public ItemSource Source { get; private set; }
         public Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; private set; } = new Dictionary<Soldier.UtilitySkill, int>();
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get { return _SkillBoosts; } }
@@ -72,6 +73,14 @@ namespace SpaceMercs {
                 if (texBits.Length != 2) throw new Exception($"Illegal Tex string : {strTex}");
                 TextureX = int.Parse(texBits[0]) - 1;
                 TextureY = int.Parse(texBits[1]) - 1;
+            }
+
+            // Load the race that this equipment is restricted to (default null), or otherwise fail
+            if (xml.SelectSingleNode("Race") != null) {
+                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
+                if (RequiredRace == null) {
+                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
+                }
             }
 
             // Update ItemID
