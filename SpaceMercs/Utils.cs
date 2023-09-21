@@ -519,9 +519,9 @@ namespace SpaceMercs {
 
         }
 
-        public static string GetAttributeText(this XmlNode root, string attributeName) {
-            if (string.IsNullOrEmpty(attributeName) || root is null) return string.Empty;
-            return root.Attributes?[attributeName]?.Value ?? string.Empty;
+        public static string GetAttributeText(this XmlNode root, string attributeName, string defaultValue = "") {
+            if (string.IsNullOrEmpty(attributeName) || root is null) return defaultValue;
+            return root.Attributes?[attributeName]?.Value ?? defaultValue;
         }
         public static double GetAttributeDouble(this XmlNode root, string attributeName, double? defaultValue = null) {
             if (string.IsNullOrEmpty(attributeName) || root is null) return defaultValue ?? throw new Exception($"Could not find double data for path {attributeName}");

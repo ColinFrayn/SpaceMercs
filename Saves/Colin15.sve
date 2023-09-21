@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>14/07/2150 17:57:49</Clock>
+<Clock>14/07/2150 18:02:12</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -5888,7 +5888,7 @@
 <Weapon Type="Sniper Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Sniper Rifle">256</Exp>
+  <Exp Type="Sniper">256</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -6265,7 +6265,7 @@
 <Weapon Type="Axe" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Axe">184</Exp>
+  <Exp Type="Melee">184</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -6748,7 +6748,7 @@
 <Weapon Type="Sniper Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Sniper Rifle">264</Exp>
+  <Exp Type="Sniper">264</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -6809,7 +6809,7 @@
 <Weapon Type="Shortblade" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">26</Exp>
+  <Exp Type="Melee">26</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -6840,7 +6840,7 @@
 <Weapon Type="Axe" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Axe">22</Exp>
+  <Exp Type="Melee">22</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -6913,7 +6913,7 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">173</Exp>
+  <Exp Type="Rifle">173</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -6975,7 +6975,7 @@
 <Weapon Type="Automatic Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">75</Exp>
+  <Exp Type="Rifle">75</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -7007,7 +7007,7 @@
 <Weapon Type="Shortblade" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">20</Exp>
+  <Exp Type="Melee">20</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -7040,7 +7040,7 @@
 <Weapon Type="Shortblade" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">246</Exp>
+  <Exp Type="Melee">246</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -8882,7 +8882,7 @@
 <Weapon Type="Shortblade" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">77</Exp>
+  <Exp Type="Melee">77</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -8914,7 +8914,7 @@
 <Weapon Type="Axe" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Axe">484</Exp>
+  <Exp Type="Melee">484</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">2</Exp>
@@ -8950,7 +8950,7 @@
 <Weapon Type="Shortblade" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">283</Exp>
+  <Exp Type="Melee">283</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">3</Exp>
@@ -9430,7 +9430,7 @@
 <Weapon Type="Sniper Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Sniper Rifle">136</Exp>
+  <Exp Type="Sniper">136</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -10002,7 +10002,7 @@
 <Weapon Type="Axe" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Axe">479</Exp>
+  <Exp Type="Melee">479</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -10841,7 +10841,7 @@
 <Weapon Type="Shortblade" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shortblade">134</Exp>
+  <Exp Type="Melee">134</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -36559,7 +36559,7 @@
 <Weapon Type="Laser Rifle" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">445</Exp>
+  <Exp Type="Rifle">445</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
@@ -36599,8 +36599,7 @@
 <Weapon Type="Quad Shotgun" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">135</Exp>
-  <Exp Type="Quad Shotgun">136</Exp>
+  <Exp Type="Shotgun">271</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -36644,10 +36643,9 @@
 <Weapon Type="Heavy Rifle" Level="0"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Automatic Rifle">138</Exp>
-  <Exp Type="Shortblade">24</Exp>
-  <Exp Type="Powerblade">332</Exp>
-  <Exp Type="Heavy Rifle">11</Exp>
+  <Exp Type="Rifle">138</Exp>
+  <Exp Type="Melee">355</Exp>
+  <Exp Type="Heavy">11</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -36688,7 +36686,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper Rifle">312</Exp>
+  <Exp Type="Sniper">312</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>

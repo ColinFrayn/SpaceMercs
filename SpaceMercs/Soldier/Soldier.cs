@@ -362,9 +362,9 @@ namespace SpaceMercs {
         }
 
         // Skills & experience
-        private readonly Dictionary<WeaponType, int> WeaponExperience = new Dictionary<WeaponType, int>();
+        private readonly Dictionary<WeaponType.WeaponClass, int> WeaponExperience = new Dictionary<WeaponType.WeaponClass, int>();
         private readonly Dictionary<UtilitySkill, int> UtilitySkills = new Dictionary<UtilitySkill, int>();
-        public List<WeaponType> SkilledWeapons {
+        public IReadOnlyList<WeaponType.WeaponClass> SkilledWeaponClasses {
             get {
                 return WeaponExperience.Keys.Where(x => Utils.ExperienceToSkillLevel(WeaponExperience[x]) > 0).ToList();
             }
@@ -382,9 +382,15 @@ namespace SpaceMercs {
             }
             CalculateMaxStats();
         }
-        public int GetSoldierSkillWithWeapon(WeaponType wp) {
+        public int GetSoldierSkillWithWeaponClass(WeaponType.WeaponClass wp) {
             if (!WeaponExperience.ContainsKey(wp)) return 0;
             int lvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp]);
+            if (lvl > Level) return Level;
+            else return lvl;
+        }
+        public int GetSoldierSkillWithWeapon(WeaponType wp) {
+            if (!WeaponExperience.ContainsKey(wp.WClass)) return 0;
+            int lvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp.WClass]);
             if (lvl > Level) return Level;
             else return lvl;
         }
@@ -467,7 +473,7 @@ namespace SpaceMercs {
             WeaponExperience.Clear();
             int val = Utils.SkillLevelToExperience(Level);
             val = rnd.Next(val / 2) + (val * 2 / 3);
-            if (EquippedWeapon != null) WeaponExperience.Add(EquippedWeapon.Type, val);
+            if (EquippedWeapon != null) WeaponExperience.Add(EquippedWeapon.Type.WClass, val);
         }
         public void IncreaseStat(StatType tp, int val = 1) {
             switch (tp) {
@@ -602,9 +608,17 @@ namespace SpaceMercs {
             WeaponExperience.Clear();
             if (wex is not null) {
                 foreach (XmlNode xw in wex.SelectNodesToList("Exp")) {
-                    WeaponType? tp = StaticData.GetWeaponTypeByName(xw.GetAttributeText("Type")) ?? throw new Exception("Could not ID WeaponType : " + xw.GetAttributeText("Type"));
                     int exp = int.Parse(xw.InnerText);
-                    WeaponExperience.Add(tp, exp);
+                    // Previously we stored this per weapon. Now we do it per WeaponClass, so for reverse compatibility, we attempt to fallback to weapontype.
+                    if (Enum.TryParse<WeaponType.WeaponClass>(xw.GetAttributeText("Type"), out var wc)) {
+                        if (WeaponExperience.ContainsKey(wc)) WeaponExperience[wc] += exp;
+                        else WeaponExperience.Add(wc, exp);
+                    }
+                    else {
+                        WeaponType? tp = StaticData.GetWeaponTypeByName(xw.GetAttributeText("Type")) ?? throw new Exception("Could not ID WeaponType : " + xw.GetAttributeText("Type"));
+                        if (WeaponExperience.ContainsKey(tp.WClass)) WeaponExperience[tp.WClass] += exp;
+                        else WeaponExperience.Add(tp.WClass, exp);
+                    }
                 }
             }
 
@@ -702,8 +716,8 @@ namespace SpaceMercs {
 
             if (WeaponExperience.Count > 0) {
                 file.WriteLine(" <WeaponExperience>");
-                foreach (WeaponType tp in WeaponExperience.Keys) {
-                    file.WriteLine("  <Exp Type=\"" + tp.Name + "\">" + WeaponExperience[tp] + "</Exp>");
+                foreach (WeaponType.WeaponClass tp in WeaponExperience.Keys) {
+                    file.WriteLine($"  <Exp Type=\"{tp}\">{WeaponExperience[tp]}</Exp>");
                 }
                 file.WriteLine(" </WeaponExperience>");
             }
@@ -1103,13 +1117,13 @@ namespace SpaceMercs {
                 int exp = Math.Max(1, en.Level - Level) * Const.DEBUG_WEAPON_SKILL_MOD;
                 int maxExp = Utils.SkillLevelToExperience(Level);
                 int oldlvl = 0;
-                if (WeaponExperience.ContainsKey(EquippedWeapon.Type)) {
-                    oldlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type]);
-                    WeaponExperience[EquippedWeapon.Type] += exp;
+                if (WeaponExperience.ContainsKey(EquippedWeapon.Type.WClass)) {
+                    oldlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
+                    WeaponExperience[EquippedWeapon.Type.WClass] += exp;
                 }
-                else WeaponExperience.Add(EquippedWeapon.Type, exp);
-                if (WeaponExperience[EquippedWeapon.Type] > maxExp) WeaponExperience[EquippedWeapon.Type] = maxExp; // Clamp at maximum for this level
-                int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type]);
+                else WeaponExperience.Add(EquippedWeapon.Type.WClass, exp);
+                if (WeaponExperience[EquippedWeapon.Type.WClass] > maxExp) WeaponExperience[EquippedWeapon.Type.WClass] = maxExp; // Clamp at maximum for this level
+                int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
                 if (newlvl > oldlvl) {
                     showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.Name}", null);
                 }

@@ -1,6 +1,6 @@
 ﻿<Data>
   <!-- Weapons for Soldiers -->
-  <WeaponType Name="Shotgun">
+  <WeaponType Name="Shotgun" Class="Shotgun">
     <Mass>2.5</Mass>
     <Cost>10</Cost>
     <Rarity>3</Rarity>
@@ -17,7 +17,7 @@
       <Material Name="Carbon" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Quad Shotgun">
+  <WeaponType Name="Quad Shotgun" Class="Shotgun">
     <Mass>4.0</Mass>
     <Cost>120</Cost>
     <Rarity>9</Rarity>
@@ -34,7 +34,7 @@
       <Material Name="Carbon" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Pistol">
+  <WeaponType Name="Pistol" Class="Pistol">
     <Mass>0.7</Mass>
     <Cost>6</Cost>
     <Rarity>2</Rarity>
@@ -49,7 +49,7 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Automatic Rifle">
+  <WeaponType Name="Automatic Rifle" Class="Rifle">
     <Mass>3.0</Mass>
     <Cost>12</Cost>
     <Rarity>5</Rarity>
@@ -64,7 +64,7 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Heavy Rifle">
+  <WeaponType Name="Heavy Rifle" Class="Heavy">
     <Mass>20.0</Mass>
     <Cost>180</Cost>
     <Rarity>12</Rarity>
@@ -79,7 +79,7 @@
       <Material Name="Copper" Amount="2"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Laser Rifle">
+  <WeaponType Name="Laser Rifle" Class="Rifle">
     <Mass>3.0</Mass>
     <Cost>160</Cost>
     <Rarity>9</Rarity>
@@ -97,7 +97,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Heavy Laser Rifle">
+  <WeaponType Name="Heavy Laser Rifle" Class="Heavy">
     <Mass>22.0</Mass>
     <Cost>650</Cost>
     <Rarity>22</Rarity>
@@ -115,7 +115,7 @@
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Laser Pistol">
+  <WeaponType Name="Laser Pistol" Class="Pistol">
     <Mass>0.7</Mass>
     <Cost>20</Cost>
     <Rarity>7</Rarity>
@@ -132,7 +132,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Gauss Cannon">
+  <WeaponType Name="Gauss Cannon" Class="Heavy">
     <Mass>16.0</Mass>
     <Cost>100</Cost>
     <Rarity>14</Rarity>
@@ -150,7 +150,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Arc Rifle">
+  <WeaponType Name="Arc Rifle" Class="Shotgun">
     <Mass>5.0</Mass>
     <Cost>45</Cost>
     <Rarity>9</Rarity>
@@ -169,7 +169,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Heavy Arc Rifle">
+  <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>18.0</Mass>
     <Cost>180</Cost>
     <Rarity>14</Rarity>
@@ -188,7 +188,7 @@
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Flame Thrower">
+  <WeaponType Name="Flame Thrower" Class="Launcher">
     <Mass>15.0</Mass>
     <Cost>90</Cost>
     <Rarity>12</Rarity>
@@ -212,7 +212,7 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Grenade Launcher">
+  <WeaponType Name="Grenade Launcher" Class="Launcher">
     <Mass>8.0</Mass>
     <Cost>50</Cost>
     <Rarity>12</Rarity>
@@ -229,7 +229,7 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Sniper Rifle">
+  <WeaponType Name="Sniper Rifle" Class="Sniper">
     <Mass>2.0</Mass>
     <Cost>15</Cost>
     <Rarity>5</Rarity>
@@ -245,7 +245,7 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Laser Sniper Rifle">
+  <WeaponType Name="Laser Sniper Rifle" Class="Sniper">
     <Mass>3.0</Mass>
     <Cost>130</Cost>
     <Rarity>15</Rarity>
@@ -263,7 +263,7 @@
       <Material Name="Electronic Components" Amount="2"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Gauss Sniper Rifle">
+  <WeaponType Name="Gauss Sniper Rifle" Class="Sniper">
     <Mass>4.0</Mass>
     <Cost>420</Cost>
     <Rarity>26</Rarity>
@@ -280,7 +280,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Disc Thrower">
+  <WeaponType Name="Disc Thrower" Class="Rifle">
     <Mass>3.0</Mass>
     <Cost>50</Cost>
     <Rarity>25</Rarity>
@@ -297,7 +297,7 @@
       <Material Name="Tungsten" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Shortblade">
+  <WeaponType Name="Shortblade" Class="Melee">
     <Mass>1.0</Mass>
     <Cost>4</Cost>
     <Rarity>3</Rarity>
@@ -311,7 +311,7 @@
       <Material Name="Tungsten" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Powerblade">
+  <WeaponType Name="Powerblade" Class="Melee">
     <Mass>1.5</Mass>
     <Cost>80</Cost>
     <Rarity>18</Rarity>
@@ -328,7 +328,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Axe">
+  <WeaponType Name="Axe" Class="Melee">
     <Mass>2.0</Mass>
     <Cost>6</Cost>
     <Rarity>4</Rarity>
@@ -342,7 +342,7 @@
       <Material Name="Tungsten" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Power Axe">
+  <WeaponType Name="Power Axe" Class="Melee">
     <Mass>2.5</Mass>
     <Cost>85</Cost>
     <Rarity>17</Rarity>
@@ -358,7 +358,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Chainsword">
+  <WeaponType Name="Chainsword" Class="Melee">
     <Mass>5.0</Mass>
     <Cost>60</Cost>
     <Rarity>9</Rarity>
@@ -374,7 +374,7 @@
       <Material Name="Rubber" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Power Claws">
+  <WeaponType Name="Power Claws" Class="Melee">
     <Mass>2.5</Mass>
     <Cost>260</Cost>
     <Rarity>40</Rarity>

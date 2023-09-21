@@ -137,9 +137,9 @@ namespace SpaceMercs.Dialogs {
 
             // Weapon skills
             lbWeaponSkills.Items.Clear();
-            foreach (WeaponType wp in s.SkilledWeapons) {
-                int lvl = s.GetSoldierSkillWithWeapon(wp);
-                lbWeaponSkills.Items.Add(wp.Name + " [" + lvl + "]");
+            foreach (WeaponType.WeaponClass wp in s.SkilledWeaponClasses) {
+                int lvl = s.GetSoldierSkillWithWeaponClass(wp);
+                lbWeaponSkills.Items.Add($"{wp} [{lvl}]");
             }
 
             // Utility Skills

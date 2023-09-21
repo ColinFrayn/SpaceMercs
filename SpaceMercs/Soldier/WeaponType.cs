@@ -3,6 +3,8 @@
 namespace SpaceMercs {
     public class WeaponType : ItemType {
         public enum DamageType { Physical, Electrical, Fire, Cold, Acid, Poison };
+        public enum WeaponClass { Rifle, Shotgun, Pistol, Melee, Launcher, Sniper, Heavy, Other };
+        public WeaponClass WClass { get; private set; }
         public DamageType DType { get; private set; } // Damage type
         public double Range { get; private set; } // Maximum range for this weapon
         public double Accuracy { get; private set; } // Accuracy bonus for this weapon (default = 0)
@@ -19,6 +21,11 @@ namespace SpaceMercs {
 
         public WeaponType(XmlNode xml) : base(xml) {
             XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
+            string wclass = xml.GetAttributeText("Class", "Other");
+            if (!Enum.TryParse<WeaponClass>(wclass, out WeaponClass wc)) {
+                 throw new Exception($"Could not find weapon class {wclass}");
+            }
+            WClass = wc;
             Range = double.Parse(nRange.InnerText);
             Speed = xml.SelectNodeDouble("Speed");
             SoundEffect = xml.SelectNodeText("Sound");
