@@ -161,6 +161,7 @@ namespace SpaceMercs {
                 iTextureID = -1;
             }
             Facing = 0.0;
+            HasMoved = false;
         }
         public bool CanOpenDoors { get { return true; } }
         public double RangeTo(IEntity en) {
@@ -324,7 +325,7 @@ namespace SpaceMercs {
         // Calculated stats
         public int Strength { get { return Math.Max(0, BaseStrength + StatBonuses(StatType.Strength)); } }
         public int Agility { get { return Math.Max(0, BaseAgility + StatBonuses(StatType.Agility)); } }
-        public int Intellect { get { return Math.Max(0, BaseIntellect + StatBonuses(StatType.Intelligence)); } }
+        public int Intellect { get { return Math.Max(0, BaseIntellect + StatBonuses(StatType.Insight)); } }
         public int Toughness { get { return Math.Max(0, BaseToughness + StatBonuses(StatType.Toughness)); } }
         public int Endurance { get { return Math.Max(0, BaseEndurance + StatBonuses(StatType.Endurance)); } }
         public int BaseAttack { get { return (MeleeWeaponEquipped ? Strength : Intellect) + Level + 2; } }
@@ -472,7 +473,7 @@ namespace SpaceMercs {
             switch (tp) {
                 case StatType.Strength: BaseStrength += val; break;
                 case StatType.Agility: BaseAgility += val; break;
-                case StatType.Intelligence: BaseIntellect += val; break;
+                case StatType.Insight: BaseIntellect += val; break;
                 case StatType.Toughness: BaseToughness += val; break;
                 case StatType.Endurance: BaseEndurance += val; break;
                 default: throw new NotImplementedException("Attemptign to increase non-primary stat : " + tp.ToString());
@@ -1241,7 +1242,7 @@ namespace SpaceMercs {
                 switch (st) {
                     case StatType.Strength: bonus += ar.Type.Strength; break;
                     case StatType.Agility: bonus += ar.Type.Agility; break;
-                    case StatType.Intelligence: bonus += ar.Type.Intellect; break;
+                    case StatType.Insight: bonus += ar.Type.Intellect; break;
                     case StatType.Toughness: bonus += ar.Type.Toughness; break;
                     case StatType.Endurance: bonus += ar.Type.Endurance; break;
                     case StatType.Health: bonus += ar.Type.Health; break;

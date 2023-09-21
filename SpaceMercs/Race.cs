@@ -10,6 +10,7 @@ namespace SpaceMercs {
         public int Toughness { get; private set; }
         public int Agility { get; private set; }
         public int Endurance { get; private set; }
+        public int Aggression { get; private set; }
         public double BaseTemp;
         public string Description { get; private set; }
         public Planet.PlanetType PlanetType { get; private set; } // Preferred planet type
@@ -32,6 +33,7 @@ namespace SpaceMercs {
             Toughness = xml.SelectNodeInt("Toughness");
             Agility = xml.SelectNodeInt("Agility");
             Endurance = xml.SelectNodeInt("Endurance");
+            Aggression = xml.SelectNodeInt("Aggression", 0);
             Description = xml.SelectNodeText("Description");
             BaseTemp = xml.SelectNodeInt("BaseTemp");
             PlanetType = xml.SelectNodeEnum<Planet.PlanetType>("PlanetType");

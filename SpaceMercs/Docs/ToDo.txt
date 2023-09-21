@@ -2,13 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
-Sniper rifle should start off steady when mission starts
-
-Too many heavy gunners in level
-
-Clear frag when battle starts
+Update encounter freq. based on System owning race.Aggression (-2 .. +2)
 
 ==========================================================================================================
 
@@ -17,7 +14,7 @@ Clear frag when battle starts
 Backburner : Features
 ---------------------
 
-Maybe add in overwatch?
+Add in overwatch?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]

@@ -19,8 +19,8 @@ namespace SpaceMercs.Dialogs {
             this.Close();
         }
 
-        private void btIntelligence_Click(object sender, EventArgs e) {
-            ThisSoldier?.IncreaseStat(StatType.Intelligence);
+        private void btInsight_Click(object sender, EventArgs e) {
+            ThisSoldier?.IncreaseStat(StatType.Insight);
             this.Close();
         }
 

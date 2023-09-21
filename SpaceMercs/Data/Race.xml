@@ -50,6 +50,7 @@
     <PlanetType>Oceanic</PlanetType>
     <Colour>30,90,255</Colour>
     <Scale>0.9</Scale>
+    <Aggression>-2</Aggression>
     <Names>
       <Personal>
         <Male>MaleName</Male>
@@ -69,6 +70,7 @@
     <BaseTemp>293</BaseTemp>
     <PlanetType>Rocky</PlanetType>
     <Colour>255,255,0</Colour>
+    <Aggression>2</Aggression>
     <Scale>1.2</Scale>
     <Names>
       <Personal>
@@ -90,13 +92,14 @@
     <PlanetType>Desert</PlanetType>
     <Colour>0,255,0</Colour>
     <Scale>1.0</Scale>
+    <Aggression>1</Aggression>
     <Names>
       <Personal>
         <Neuter>NeuterName</Neuter>
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Humanoid insects, slightly shorter than teh average human, but with multiple limbs and compound eyes.</Description>
+    <Description>Humanoid insects, slightly shorter than the average human, but with multiple limbs and compound eyes. Suspicious of other alien races.</Description>
   </Race>
   <Race>
     <Name>Grey</Name>
@@ -108,10 +111,11 @@
     <BaseTemp>293</BaseTemp>
     <PlanetType>Oceanic</PlanetType>
     <Colour>140,140,140</Colour>
+    <Aggression>-1</Aggression>
     <Scale>1.0</Scale>
     <Names>
       <Personal>
-        <Neuter>Ek'thrish,</Neuter>
+        <Neuter>NeuterName</Neuter>
       </Personal>
       <Family>FamilyName</Family>
     </Names>
@@ -135,6 +139,6 @@
       </Personal>
       <Family>FamilyName</Family>
     </Names>
-    <Description>Hairy, ursine humanoids with a fiercely noble tradition.</Description>
+    <Description>Hairy, ursine humanoids with a fiercely noble, lawful tradition.</Description>
   </Race>
 </Data>

@@ -121,6 +121,7 @@ namespace SpaceMercs {
 
         private void SetUp() {
             dtStart = Const.dtTime;
+            lFrag.Clear();
             GameOver = false;
         }
         public void SaveToFile(StreamWriter file) {
@@ -147,23 +148,30 @@ namespace SpaceMercs {
                 return;
             }
 
-            // Travelling somewhere
-            lShots.Clear();
+            // Travelling somewhere - check for an Encounter
             if ((rand.NextDouble() * (1 + EncounterCount / 2.0)) < 0.2) {  // Reduce the chance of multiple encounters
                 bPause = true;
-                PlayerTeam.SetCurrentMission(Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime));
-                if (PlayerTeam.CurrentMission != null) {
-                    fMissionElapsed = 0.0f;
+                Mission? foundMission = Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime);
+                if (foundMission != null) {
                     EncounterCount++;
-                    PlayerTeam.PlayerShip.InitialiseForBattle();
-                    bSurrendered = false;
-                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.BoardingParty) {
+                    if (foundMission.Type == Mission.MissionType.Ignore) return;
+                    PlayerTeam.SetCurrentMission(foundMission);
+                    if (PlayerTeam.CurrentMission!.Type == Mission.MissionType.BoardingParty) {
                         RunBoardingPartyMission(PlayerTeam.CurrentMission);
                         return;
                     }
-                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) fSep = 18000.0f;
+                    fMissionElapsed = 0.0f;
+                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
+                        lShots.Clear();
+                        lFrag.Clear();
+                        PlayerTeam.PlayerShip.InitialiseForBattle();
+                        bSurrendered = false;
+                        fSep = 18000.0f;
+                    }
+                    else {
+                        // Could be e.g. Salvage/Repair
+                    }
                     bPause = false;
-                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Ignore) PlayerTeam.SetCurrentMission(null);
                     return;
                 }
                 bPause = false;
@@ -241,6 +249,25 @@ namespace SpaceMercs {
             if (fSep > 4000.0f) fSep -= 10.0f;
             float fSpace = fSep * Const.DrawBattleScale;
 
+            // Enemy offers to surrender?
+            if (!bSurrendered && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.35 && rand.NextDouble() < 0.1) {
+                if (PlayerTeam.PlayerShip.HullFract > 0.7 || // You're in a much better condition than them
+                    (PlayerTeam.PlayerShip.HullFract > 0.25 && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.1)) { // You're in a slightly better condition, but they're nearly dead
+                    bSurrendered = true;
+                    bPause = true;
+                    double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 3.5) / 5.0, 3);
+                    string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
+                    if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
+                        PlayerTeam.Cash += dReward;
+                        PlayerTeam.CeaseMission();
+                        ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
+                        bPause = false;
+                        return;
+                    }
+                    bPause = false;
+                }
+            }
+
             // -- Player ship fires weapons
             foreach (int r in PlayerTeam.PlayerShip.AllWeaponRooms) {
                 if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
@@ -271,24 +298,6 @@ namespace SpaceMercs {
                 PlayerTeam.CeaseMission();
                 bPause = false;
                 return;
-            }
-
-            // Enemy offers to surrender?
-            if (!bSurrendered) {
-                if ((PlayerTeam.CurrentMission.ShipTarget.HullFract + 0.4 + (rand.NextDouble() * 0.1) < PlayerTeam.PlayerShip.HullFract) || (PlayerTeam.PlayerShip.HullFract > 0.25 && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.1)) {
-                    bSurrendered = true;
-                    bPause = true;
-                    double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 0.5), 3);
-                    string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
-                    if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                        PlayerTeam.Cash += dReward;
-                        PlayerTeam.CeaseMission();
-                        ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
-                        bPause = false;
-                        return;
-                    }
-                    bPause = false;
-                }
             }
 
             // -- Enemy fires weapons

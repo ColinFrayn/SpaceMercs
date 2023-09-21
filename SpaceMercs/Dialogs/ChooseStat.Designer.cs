@@ -26,7 +26,7 @@
             label1 = new Label();
             btStrength = new Button();
             btAgility = new Button();
-            btIntelligence = new Button();
+            btInsight = new Button();
             btToughness = new Button();
             btEndurance = new Button();
             SuspendLayout();
@@ -66,17 +66,17 @@
             btAgility.UseVisualStyleBackColor = true;
             btAgility.Click += btAgility_Click;
             // 
-            // btIntelligence
+            // btInsight
             // 
-            btIntelligence.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btIntelligence.Location = new Point(10, 83);
-            btIntelligence.Margin = new Padding(4, 3, 4, 3);
-            btIntelligence.Name = "btIntelligence";
-            btIntelligence.Size = new Size(108, 70);
-            btIntelligence.TabIndex = 3;
-            btIntelligence.Text = "Intelligence";
-            btIntelligence.UseVisualStyleBackColor = true;
-            btIntelligence.Click += btIntelligence_Click;
+            btInsight.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btInsight.Location = new Point(10, 83);
+            btInsight.Margin = new Padding(4, 3, 4, 3);
+            btInsight.Name = "btInsight";
+            btInsight.Size = new Size(108, 70);
+            btInsight.TabIndex = 3;
+            btInsight.Text = "Insight";
+            btInsight.UseVisualStyleBackColor = true;
+            btInsight.Click += btInsight_Click;
             // 
             // btToughness
             // 
@@ -109,7 +109,7 @@
             ControlBox = false;
             Controls.Add(btEndurance);
             Controls.Add(btToughness);
-            Controls.Add(btIntelligence);
+            Controls.Add(btInsight);
             Controls.Add(btAgility);
             Controls.Add(btStrength);
             Controls.Add(label1);
@@ -129,7 +129,7 @@
         private Label label1;
         private Button btStrength;
         private Button btAgility;
-        private Button btIntelligence;
+        private Button btInsight;
         private Button btToughness;
         private Button btEndurance;
     }

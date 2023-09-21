@@ -2,7 +2,7 @@
 using SpaceMercs.Graphics;
 
 namespace SpaceMercs {
-    public enum StatType { Strength = 1, Agility = 2, Intelligence = 3, Toughness = 4, Endurance = 5, Health = 6, Stamina = 7, Attack = 8, Defence = 9 };
+    public enum StatType { Strength = 1, Agility = 2, Insight = 3, Toughness = 4, Endurance = 5, Health = 6, Stamina = 7, Attack = 8, Defence = 9 };
     public enum GenderType { Male, Female, Neuter };
     public enum BodyPart { Head, Chest, Arms, Legs, Feet, Hands }
 

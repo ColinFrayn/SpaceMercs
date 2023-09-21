@@ -56,14 +56,6 @@
 
             // Still not found a suitable owning race?
             if (rc is null) {
-                //double rF = aoFrom.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
-                //double rT = aoTo.GetMapLocation().Length; // Distance from origin of map (proportional to danger rating)
-                //double r = (rF + rT) / 2.0;
-                //if (rand.NextDouble() < 0.5 || (rand.NextDouble() * 100.0) > r) {
-                //    return null;
-                //}
-                // Unidentified alien race
-                // TODO: Does this mean anything? For now just abort the encounter. I don't want Race ever to be null
                 return null;
             }
 
@@ -121,7 +113,13 @@
         private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
             // Generate a mission, including the random ship
             Mission miss = Mission.CreateShipCombatMission(rc, iDiff, minDrive);
-            if (miss.ShipTarget is null) throw new Exception("ShipCombat Mission does not have a target ship");
+            // If this ship is clearly underclassed then try again with a higher diff
+            double pVal = PlayerTeam.PlayerShip.EstimatedStrength;
+            if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale < pVal) {
+                miss = Mission.CreateShipCombatMission(rc, iDiff + 1, minDrive);
+                // If the ship is still underclassed then give up - the player ship is tough enough to be safe in this system
+                if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale < pVal) return Mission.CreateIgnoreMission();
+            }
 
             // Can attempt to flee (if faster accel) or fight. If slower/equal speed then must fight.
             string strRace = rc.Known ? rc.Name : "unidentified alien";

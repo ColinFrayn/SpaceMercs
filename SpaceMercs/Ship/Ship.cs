@@ -181,9 +181,22 @@ namespace SpaceMercs {
         }
         public double EstimatedBountyValue {
             get {
-                double value = Type.MaxHull * Type.MaxHull / 5.0;
+                double value = Type.MaxHull * Type.MaxHull;
                 // Bounty is some measure of what a captain can pay, so ignore equipment and just scale it off the size of ship they own
                 return value * Const.ShipBountyScale;
+            }
+        }
+        public double EstimatedStrength {
+            get {
+                double strength = (Type.MaxHull * Hull); // Scale a bit by the current level of damage
+                strength *= (RepairRate + 10.0) / 10.0;  // +10% for each repair tick
+                strength *= (Armour + 20.0) / 20.0; // +5% for each armour point
+                strength += (Shield * MaxShield * 1.5); // Shields are more valuable than hull as they regen automatically
+                strength += Defence * 25.0;
+                foreach (ShipWeapon sw in AllWeapons) {
+                    strength += (sw.Attack + Attack) * sw.Range / (250.0 * sw.Rate);
+                }
+                return strength;
             }
         }
 
@@ -695,17 +708,17 @@ namespace SpaceMercs {
         public void InitialiseForBattle() {
             MaxShield = 0;
             Attack = 0;
-            Defence = 0;
+            Defence = ArmourType?.Defence ?? 0; // Armour that offers defensive benefits e.g. chameleon plating
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                 if (tp.Item2) {
                     MaxShield += tp.Item1.Shield;
-                    if (tp.Item1 is ShipWeapon) ((ShipWeapon)tp.Item1).Cooldown = 0.0;
-                    Attack += tp.Item1.Attack;
-                    Defence += tp.Item1.Defence;
+                    if (tp.Item1 is ShipWeapon weapon) weapon.Cooldown = 0.0;
+                    else Attack += tp.Item1.Attack; // Any ship rooms that add to attack such as targetting systems
+                    Defence += tp.Item1.Defence; // Defensive items such as a cloaking device
                 }
             }
             Shield = MaxShield;
-            if (CanRepair) RepairHull();
+            if (CanRepair) RepairHull(); // Hull repair is quick enough that it can fully repair ships between battles
         }
         public double DamageShip(double dmg) {
             if (dmg <= 0.0) return 0.0;
@@ -733,6 +746,12 @@ namespace SpaceMercs {
             }
             if (Hull > Type.MaxHull) {
                 Hull = Type.MaxHull;
+            }
+            if (Shield < MaxShield) {
+                Shield += Const.ShipShieldRegenRate;
+            }
+            if (Shield > MaxShield) {
+                Shield = MaxShield;
             }
         }
 

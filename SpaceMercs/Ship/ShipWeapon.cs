@@ -16,6 +16,7 @@ namespace SpaceMercs {
             int defenceScore = target.Defence;
             double damage = (rand.NextDouble() * attackScore) - (rand.NextDouble() * defenceScore);
             Cooldown = Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
+            if (damage < 0.0) damage = 0.0;
             return target.DamageShip(damage);
         }
     }

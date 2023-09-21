@@ -226,6 +226,7 @@ namespace SpaceMercs {
             Mission m = new Mission(MissionType.ShipCombat, dDiff);
             m.RacialOpponent = rc;
             m.ShipTarget = Ship.GenerateRandomShipOfRace(rc, dDiff, minDrive);
+            if (m.ShipTarget is null) throw new Exception("ShipCombat Mission could not generate a target ship");
             return m;
         }
         public static Mission CreateRandomColonyMission(Colony cl, Random rand) {

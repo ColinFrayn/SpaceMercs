@@ -177,7 +177,7 @@ namespace SpaceMercs {
         public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
         public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
-        public const double ShipBountyScale = 1.0;  // Scale for calculating bounty of enemy ships defeated
+        public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         public static DateTime dtTime = Const.dtStart;
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
@@ -211,6 +211,7 @@ namespace SpaceMercs {
         public const float MoonGap = 6.5f; // Gap from planet to first displayed moon
         public const float DrawBattleScale = 0.15f / 20000f;  // Scale for ships drawn in the travel battle
         public const float ShipRepairRate = 0.001f;
+        public const float ShipShieldRegenRate = 0.002f;
 
         // Ship viewer settings
         public const float MinimumShipViewZ = 20.0f;
@@ -227,6 +228,7 @@ namespace SpaceMercs {
         public const double ShipEquipmentRepairFract = 0.4; // Ship equipment contributes thiss fraction of its value to repair cost
         public const double ShipRepairCostScale = 0.6;  // Fraction of calculated value required to repair 100%
         public const double HullUpgradeCost = 15.0;  // Divide MaxHull by this for scale factor
+        public const double ShipRelativeStrengthScale = 1.8; // If attacking ship is this many times weaker than defending ship then don't even bother...
 
         // MissionView Settings
         public const float InitialMissionViewZ = 40.0f;
