@@ -32,7 +32,7 @@ namespace SpaceMercs {
         public Team(NewGame newGame, Race playerRace) {
             CurrentPosition = playerRace.HomePlanet;
             Random rand = new Random();
-            Soldier s = new Soldier(newGame.PlayerName, playerRace, newGame.Strength, newGame.Agility, newGame.Intellect, newGame.Toughness, newGame.Endurance, GenderType.Male, 1, rand.Next());
+            Soldier s = new Soldier(newGame.PlayerName, playerRace, newGame.Strength, newGame.Agility, newGame.Insight, newGame.Toughness, newGame.Endurance, GenderType.Male, 1, rand.Next());
             s.PlayerTeam = this;
             _Soldiers.Add(s);
             PlayerShip = Ship.GenerateStarterShip(this);

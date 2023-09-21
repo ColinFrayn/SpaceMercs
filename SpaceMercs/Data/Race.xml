@@ -3,7 +3,7 @@
     <Name>Human</Name>
     <Strength>12</Strength>
     <Agility>12</Agility>
-    <Intellect>12</Intellect>
+    <Insight>12</Insight>
     <Toughness>12</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>293</BaseTemp>
@@ -23,7 +23,7 @@
     <Name>Gokan</Name>
     <Strength>13</Strength>
     <Agility>10</Agility>
-    <Intellect>12</Intellect>
+    <Insight>12</Insight>
     <Toughness>13</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>289</BaseTemp>
@@ -43,7 +43,7 @@
     <Name>Elithiri</Name>
     <Strength>11</Strength>
     <Agility>13</Agility>
-    <Intellect>13</Intellect>
+    <Insight>13</Insight>
     <Toughness>11</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>292</BaseTemp>
@@ -64,7 +64,7 @@
     <Name>Ogrish</Name>
     <Strength>15</Strength>
     <Agility>9</Agility>
-    <Intellect>9</Intellect>
+    <Insight>9</Insight>
     <Toughness>15</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>293</BaseTemp>
@@ -85,7 +85,7 @@
     <Name>Insectoid</Name>
     <Strength>12</Strength>
     <Agility>14</Agility>
-    <Intellect>10</Intellect>
+    <Insight>10</Insight>
     <Toughness>12</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>298</BaseTemp>
@@ -105,7 +105,7 @@
     <Name>Grey</Name>
     <Strength>10</Strength>
     <Agility>12</Agility>
-    <Intellect>15</Intellect>
+    <Insight>15</Insight>
     <Toughness>11</Toughness>
     <Endurance>12</Endurance>
     <BaseTemp>293</BaseTemp>
@@ -125,7 +125,7 @@
     <Name>Ursalon</Name>
     <Strength>13</Strength>
     <Agility>11</Agility>
-    <Intellect>12</Intellect>
+    <Insight>12</Insight>
     <Toughness>13</Toughness>
     <Endurance>11</Endurance>
     <BaseTemp>289</BaseTemp>

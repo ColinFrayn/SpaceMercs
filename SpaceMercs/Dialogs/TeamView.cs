@@ -95,8 +95,8 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.lbStrength, s.BaseStrength + " (base) + " + s.StatBonuses(StatType.Strength) + " (items)");
             lbAgility.Text = s.Agility.ToString();
             ttSoldier.SetToolTip(this.lbAgility, s.BaseAgility + " (base) + " + s.StatBonuses(StatType.Agility) + " (items)");
-            lbIntellect.Text = s.Intellect.ToString();
-            ttSoldier.SetToolTip(this.lbIntellect, s.BaseIntellect + " (base) + " + s.StatBonuses(StatType.Insight) + " (items)");
+            lbInsight.Text = s.Insight.ToString();
+            ttSoldier.SetToolTip(this.lbInsight, s.BaseInsight + " (base) + " + s.StatBonuses(StatType.Insight) + " (items)");
             lbToughness.Text = s.Toughness.ToString();
             ttSoldier.SetToolTip(this.lbToughness, s.BaseToughness + " (base) + " + s.StatBonuses(StatType.Toughness) + " (items)");
             lbEndurance.Text = s.Endurance.ToString();

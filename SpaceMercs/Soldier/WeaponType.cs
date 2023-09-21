@@ -23,7 +23,7 @@ namespace SpaceMercs {
             XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
             string wclass = xml.GetAttributeText("Class", "Other");
             if (!Enum.TryParse<WeaponClass>(wclass, out WeaponClass wc)) {
-                 throw new Exception($"Could not find weapon class {wclass}");
+                throw new Exception($"Could not find weapon class {wclass}");
             }
             WClass = wc;
             Range = double.Parse(nRange.InnerText);

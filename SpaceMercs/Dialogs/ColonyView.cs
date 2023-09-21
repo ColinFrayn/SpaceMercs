@@ -478,7 +478,7 @@ namespace SpaceMercs.Dialogs {
             sb.AppendLine($"Level {merc.Level} {merc.Gender} {merc.Race.Name}");
             sb.AppendLine("Strength = " + merc.BaseStrength);
             sb.AppendLine("Agility = " + merc.BaseAgility);
-            sb.AppendLine("Intellect = " + merc.BaseIntellect);
+            sb.AppendLine("Insight = " + merc.BaseInsight);
             sb.AppendLine("Toughness = " + merc.BaseToughness);
             sb.AppendLine("Endurance = " + merc.BaseEndurance);
             sb.AppendLine("");

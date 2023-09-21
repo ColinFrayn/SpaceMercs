@@ -68,7 +68,7 @@
       this.label16 = new System.Windows.Forms.Label();
       this.lbToughness = new System.Windows.Forms.Label();
       this.label14 = new System.Windows.Forms.Label();
-      this.lbIntellect = new System.Windows.Forms.Label();
+      this.lbInsight = new System.Windows.Forms.Label();
       this.label12 = new System.Windows.Forms.Label();
       this.lbAgility = new System.Windows.Forms.Label();
       this.label10 = new System.Windows.Forms.Label();
@@ -210,7 +210,7 @@
       this.gbSoldier.Controls.Add(this.label16);
       this.gbSoldier.Controls.Add(this.lbToughness);
       this.gbSoldier.Controls.Add(this.label14);
-      this.gbSoldier.Controls.Add(this.lbIntellect);
+      this.gbSoldier.Controls.Add(this.lbInsight);
       this.gbSoldier.Controls.Add(this.label12);
       this.gbSoldier.Controls.Add(this.lbAgility);
       this.gbSoldier.Controls.Add(this.label10);
@@ -644,17 +644,17 @@
       this.label14.Text = "Toughness";
       this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
-      // lbIntellect
+      // lbInsight
       // 
-      this.lbIntellect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbIntellect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbIntellect.Location = new System.Drawing.Point(95, 86);
-      this.lbIntellect.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbIntellect.Name = "lbIntellect";
-      this.lbIntellect.Size = new System.Drawing.Size(47, 22);
-      this.lbIntellect.TabIndex = 25;
-      this.lbIntellect.Text = "888";
-      this.lbIntellect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.lbInsight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.lbInsight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lbInsight.Location = new System.Drawing.Point(95, 86);
+      this.lbInsight.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+      this.lbInsight.Name = "lbInsight";
+      this.lbInsight.Size = new System.Drawing.Size(47, 22);
+      this.lbInsight.TabIndex = 25;
+      this.lbInsight.Text = "888";
+      this.lbInsight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // label12
       // 
@@ -664,7 +664,7 @@
       this.label12.Name = "label12";
       this.label12.Size = new System.Drawing.Size(53, 16);
       this.label12.TabIndex = 24;
-      this.label12.Text = "Intellect";
+      this.label12.Text = "Insight";
       this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // lbAgility
@@ -1100,7 +1100,7 @@
     private System.Windows.Forms.Label label16;
     private System.Windows.Forms.Label lbToughness;
     private System.Windows.Forms.Label label14;
-    private System.Windows.Forms.Label lbIntellect;
+    private System.Windows.Forms.Label lbInsight;
     private System.Windows.Forms.Label label12;
     private System.Windows.Forms.Label lbAgility;
     private System.Windows.Forms.Label label10;

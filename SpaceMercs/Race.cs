@@ -6,7 +6,7 @@ namespace SpaceMercs {
         public string Name { get; set; }
         public double Scale { get; set; }
         public int Strength { get; private set; }
-        public int Intellect { get; private set; }
+        public int Insight { get; private set; }
         public int Toughness { get; private set; }
         public int Agility { get; private set; }
         public int Endurance { get; private set; }
@@ -28,7 +28,7 @@ namespace SpaceMercs {
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
             Scale = xml.SelectNodeDouble("Scale");
-            Intellect = xml.SelectNodeInt("Intellect"); 
+            Insight = xml.SelectNodeInt("Insight"); 
             Strength = xml.SelectNodeInt("Strength");
             Toughness = xml.SelectNodeInt("Toughness");
             Agility = xml.SelectNodeInt("Agility");

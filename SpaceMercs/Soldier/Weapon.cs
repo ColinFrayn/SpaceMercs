@@ -12,6 +12,7 @@ namespace SpaceMercs {
             get {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(Type.Desc);
+                sb.AppendLine("Class : " + Type.WClass.ToString());
                 sb.AppendLine("Quality : " + Utils.LevelToDescription(Level));
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 if (Range > 1) sb.AppendLine("Range : " + Range.ToString("0.##") + "m");
@@ -50,8 +51,9 @@ namespace SpaceMercs {
         public double AttackBonus { get { return Type.Accuracy + (Level * 0.5); } }
         public Dictionary<WeaponType.DamageType, double> GetBonusDamage() {
             Dictionary<WeaponType.DamageType, double> bdam = new Dictionary<WeaponType.DamageType, double>();
+            // TODO Implement bonus damage
             return bdam;
-        } // TODO Implement bonus damage
+        }
         private double CalculateCost(int lev) {
             return Type.Cost * Utils.ItemLevelToCostMod(lev);
         }

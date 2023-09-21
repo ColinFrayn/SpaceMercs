@@ -35,9 +35,9 @@
       this.btToughnessDown = new System.Windows.Forms.Button();
       this.btToughnessUp = new System.Windows.Forms.Button();
       this.lbToughness = new System.Windows.Forms.Label();
-      this.btIntellectDown = new System.Windows.Forms.Button();
-      this.btIntellectUp = new System.Windows.Forms.Button();
-      this.lbIntellect = new System.Windows.Forms.Label();
+      this.btInsightDown = new System.Windows.Forms.Button();
+      this.btInsightUp = new System.Windows.Forms.Button();
+      this.lbInsight = new System.Windows.Forms.Label();
       this.btAgilityDown = new System.Windows.Forms.Button();
       this.btAgilityUp = new System.Windows.Forms.Button();
       this.lbAgility = new System.Windows.Forms.Label();
@@ -122,9 +122,9 @@
       this.groupBox1.Controls.Add(this.btToughnessDown);
       this.groupBox1.Controls.Add(this.btToughnessUp);
       this.groupBox1.Controls.Add(this.lbToughness);
-      this.groupBox1.Controls.Add(this.btIntellectDown);
-      this.groupBox1.Controls.Add(this.btIntellectUp);
-      this.groupBox1.Controls.Add(this.lbIntellect);
+      this.groupBox1.Controls.Add(this.btInsightDown);
+      this.groupBox1.Controls.Add(this.btInsightUp);
+      this.groupBox1.Controls.Add(this.lbInsight);
       this.groupBox1.Controls.Add(this.btAgilityDown);
       this.groupBox1.Controls.Add(this.btAgilityUp);
       this.groupBox1.Controls.Add(this.lbAgility);
@@ -217,40 +217,40 @@
       this.lbToughness.Text = "88";
       this.lbToughness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // btIntellectDown
+      // btInsightDown
       // 
-      this.btIntellectDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btIntellectDown.Location = new System.Drawing.Point(178, 120);
-      this.btIntellectDown.Margin = new System.Windows.Forms.Padding(0);
-      this.btIntellectDown.Name = "btIntellectDown";
-      this.btIntellectDown.Size = new System.Drawing.Size(42, 23);
-      this.btIntellectDown.TabIndex = 17;
-      this.btIntellectDown.Text = "-";
-      this.btIntellectDown.UseVisualStyleBackColor = true;
-      this.btIntellectDown.Click += new System.EventHandler(this.btIntellectDown_Click);
+      this.btInsightDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btInsightDown.Location = new System.Drawing.Point(178, 120);
+      this.btInsightDown.Margin = new System.Windows.Forms.Padding(0);
+      this.btInsightDown.Name = "btInsightDown";
+      this.btInsightDown.Size = new System.Drawing.Size(42, 23);
+      this.btInsightDown.TabIndex = 17;
+      this.btInsightDown.Text = "-";
+      this.btInsightDown.UseVisualStyleBackColor = true;
+      this.btInsightDown.Click += new System.EventHandler(this.btInsightDown_Click);
       // 
-      // btIntellectUp
+      // btInsightUp
       // 
-      this.btIntellectUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btIntellectUp.Location = new System.Drawing.Point(179, 52);
-      this.btIntellectUp.Margin = new System.Windows.Forms.Padding(0);
-      this.btIntellectUp.Name = "btIntellectUp";
-      this.btIntellectUp.Size = new System.Drawing.Size(42, 23);
-      this.btIntellectUp.TabIndex = 16;
-      this.btIntellectUp.Text = "+";
-      this.btIntellectUp.UseVisualStyleBackColor = true;
-      this.btIntellectUp.Click += new System.EventHandler(this.btIntellectUp_Click);
+      this.btInsightUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btInsightUp.Location = new System.Drawing.Point(179, 52);
+      this.btInsightUp.Margin = new System.Windows.Forms.Padding(0);
+      this.btInsightUp.Name = "btInsightUp";
+      this.btInsightUp.Size = new System.Drawing.Size(42, 23);
+      this.btInsightUp.TabIndex = 16;
+      this.btInsightUp.Text = "+";
+      this.btInsightUp.UseVisualStyleBackColor = true;
+      this.btInsightUp.Click += new System.EventHandler(this.btInsightUp_Click);
       // 
-      // lbIntellect
+      // lbInsight
       // 
-      this.lbIntellect.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.lbIntellect.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbIntellect.Location = new System.Drawing.Point(168, 78);
-      this.lbIntellect.Name = "lbIntellect";
-      this.lbIntellect.Size = new System.Drawing.Size(62, 40);
-      this.lbIntellect.TabIndex = 15;
-      this.lbIntellect.Text = "88";
-      this.lbIntellect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.lbInsight.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.lbInsight.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lbInsight.Location = new System.Drawing.Point(168, 78);
+      this.lbInsight.Name = "lbInsight";
+      this.lbInsight.Size = new System.Drawing.Size(62, 40);
+      this.lbInsight.TabIndex = 15;
+      this.lbInsight.Text = "88";
+      this.lbInsight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // btAgilityDown
       // 
@@ -371,7 +371,7 @@
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(62, 18);
       this.label8.TabIndex = 4;
-      this.label8.Text = "Intellect";
+      this.label8.Text = "Insight";
       this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // label7
@@ -518,9 +518,9 @@
     private System.Windows.Forms.Button btToughnessDown;
     private System.Windows.Forms.Button btToughnessUp;
     private System.Windows.Forms.Label lbToughness;
-    private System.Windows.Forms.Button btIntellectDown;
-    private System.Windows.Forms.Button btIntellectUp;
-    private System.Windows.Forms.Label lbIntellect;
+    private System.Windows.Forms.Button btInsightDown;
+    private System.Windows.Forms.Button btInsightUp;
+    private System.Windows.Forms.Label lbInsight;
     private System.Windows.Forms.Button btAgilityDown;
     private System.Windows.Forms.Button btAgilityUp;
     private System.Windows.Forms.Label lbAgility;

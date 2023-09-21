@@ -4,7 +4,7 @@ namespace SpaceMercs {
     public class ArmourType : ItemType {
         public int Strength { get; private set; } // Bonus
         public int Agility { get; private set; } // Bonus
-        public int Intellect { get; private set; } // Bonus
+        public int Insight { get; private set; } // Bonus
         public int Toughness { get; private set; } // Bonus
         public int Endurance { get; private set; } // Bonus
         public int Health { get; private set; } // Bonus
@@ -27,7 +27,7 @@ namespace SpaceMercs {
         public ArmourType(XmlNode xml) : base(xml) {
             Strength = xml.SelectNodeInt("Strength", 0);
             Agility = xml.SelectNodeInt("Agility", 0);
-            Intellect = xml.SelectNodeInt("Intellect", 0);
+            Insight = xml.SelectNodeInt("Insight", 0);
             Toughness = xml.SelectNodeInt("Toughness", 0);
             Endurance = xml.SelectNodeInt("Endurance", 0);
             Health = xml.SelectNodeInt("Health", 0);

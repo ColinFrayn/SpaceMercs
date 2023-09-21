@@ -22,7 +22,7 @@ namespace SpaceMercs {
                 }
                 if (Type.Strength != 0) sb.AppendLine("Strength : " + Type.Strength.ToString("0.#"));
                 if (Type.Agility != 0) sb.AppendLine("Agility : " + Type.Agility.ToString("0.#"));
-                if (Type.Intellect != 0) sb.AppendLine("Intellect : " + Type.Intellect.ToString("0.#"));
+                if (Type.Insight != 0) sb.AppendLine("Insight : " + Type.Insight.ToString("0.#"));
                 if (Type.Toughness != 0) sb.AppendLine("Toughness : " + Type.Toughness.ToString("0.#"));
                 if (Type.Endurance != 0) sb.AppendLine("Endurance : " + Type.Endurance.ToString("0.#"));
                 if (Type.Health != 0) sb.AppendLine("Health : " + Type.Health.ToString("0.#"));

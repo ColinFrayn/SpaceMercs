@@ -18,7 +18,7 @@ namespace SpaceMercs {
         public bool IsActive { get; private set; }
         public string SoldierID {
             get {
-                return Name + "/" + Level + "/" + Race.Name + "/" + Gender + "/" + (BaseStrength ^ BaseAgility ^ BaseIntellect ^ BaseToughness ^ BaseEndurance);
+                return Name + "/" + Level + "/" + Race.Name + "/" + Gender + "/" + (BaseStrength ^ BaseAgility ^ BaseInsight ^ BaseToughness ^ BaseEndurance);
             }
         }
         public Point GoTo { get; set; }
@@ -317,7 +317,7 @@ namespace SpaceMercs {
         public Race Race { get; private set; }
         public int BaseStrength { get; private set; }
         public int BaseAgility { get; private set; }
-        public int BaseIntellect { get; private set; }
+        public int BaseInsight { get; private set; }
         public int BaseToughness { get; private set; }
         public int BaseEndurance { get; private set; }
         public int Experience { get; private set; }
@@ -325,10 +325,10 @@ namespace SpaceMercs {
         // Calculated stats
         public int Strength { get { return Math.Max(0, BaseStrength + StatBonuses(StatType.Strength)); } }
         public int Agility { get { return Math.Max(0, BaseAgility + StatBonuses(StatType.Agility)); } }
-        public int Intellect { get { return Math.Max(0, BaseIntellect + StatBonuses(StatType.Insight)); } }
+        public int Insight { get { return Math.Max(0, BaseInsight + StatBonuses(StatType.Insight)); } }
         public int Toughness { get { return Math.Max(0, BaseToughness + StatBonuses(StatType.Toughness)); } }
         public int Endurance { get { return Math.Max(0, BaseEndurance + StatBonuses(StatType.Endurance)); } }
-        public int BaseAttack { get { return (MeleeWeaponEquipped ? Strength : Intellect) + Level + 2; } }
+        public int BaseAttack { get { return (MeleeWeaponEquipped ? Strength : Insight) + Level + 2; } }
         public int BaseDefence { get { return Agility + Level + 2; } }
         public int BaseHealth { get { return Toughness + Level + 10; } }
         public int BaseStamina { get { return Endurance + Level + 10; } }
@@ -348,8 +348,8 @@ namespace SpaceMercs {
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
         public int PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
-        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Intellect; } }
-        public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Intellect; } }
+        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
+        public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
         private void CalculateMaxStats() {
             MaxHealth = BaseHealth + StatBonuses(StatType.Health);
             if (Health > MaxHealth) Health = MaxHealth;
@@ -479,7 +479,7 @@ namespace SpaceMercs {
             switch (tp) {
                 case StatType.Strength: BaseStrength += val; break;
                 case StatType.Agility: BaseAgility += val; break;
-                case StatType.Insight: BaseIntellect += val; break;
+                case StatType.Insight: BaseInsight += val; break;
                 case StatType.Toughness: BaseToughness += val; break;
                 case StatType.Endurance: BaseEndurance += val; break;
                 default: throw new NotImplementedException("Attemptign to increase non-primary stat : " + tp.ToString());
@@ -497,7 +497,7 @@ namespace SpaceMercs {
             Race = rc;
             BaseStrength = Str;
             BaseAgility = Agi;
-            BaseIntellect = Int;
+            BaseInsight = Int;
             BaseToughness = Tou;
             BaseEndurance = End;
             Gender = G;
@@ -544,7 +544,7 @@ namespace SpaceMercs {
             if (stats.Length != 5) throw new Exception($"Could not understand stats string for Soldier {Name}");
             BaseStrength = int.Parse(stats[0]);
             BaseAgility = int.Parse(stats[1]);
-            BaseIntellect = int.Parse(stats[2]);
+            BaseInsight = int.Parse(stats[2]);
             BaseToughness = int.Parse(stats[3]);
             BaseEndurance = int.Parse(stats[4]);
             Experience = xml.SelectNodeInt("XP");
@@ -653,7 +653,7 @@ namespace SpaceMercs {
             int Bonus = Math.Max(rand.Next(8) - 2, 0); // Some mercs are just better than others
             Stats[0] = cl.Owner.Strength;
             Stats[1] = cl.Owner.Agility;
-            Stats[2] = cl.Owner.Intellect;
+            Stats[2] = cl.Owner.Insight;
             Stats[3] = cl.Owner.Toughness;
             Stats[4] = cl.Owner.Endurance;
             for (int n = 0; n < 20; n++) Stats[rand.Next(5)]--;
@@ -688,7 +688,7 @@ namespace SpaceMercs {
             file.WriteLine(" <XP>" + Experience + "</XP>");
             file.WriteLine(" <Gender>" + Gender + "</Gender>");
             file.WriteLine(" <Race>" + Race.Name + "</Race>");
-            file.WriteLine(" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseIntellect + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
+            file.WriteLine(" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
             if (GoTo != Point.Empty && GoTo != Location) file.WriteLine(" <GoTo X=\"" + GoTo.X + "\" Y=\"" + GoTo.Y + "\"/>");
             file.WriteLine(" <Colour>" + ColorTranslator.ToHtml(PrimaryColor) + "</Colour>");
 
@@ -748,7 +748,7 @@ namespace SpaceMercs {
             double dBase = Level * Math.Pow(Const.MercenaryCostBase, Const.MercenaryCostExponent * Level) * Const.MercenaryCostScale;
             
             // Bonus cost if they are better than average
-            int Bonus = (BaseStrength + BaseAgility + BaseIntellect + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Intellect + Race.Toughness + Race.Endurance);
+            int Bonus = (BaseStrength + BaseAgility + BaseInsight + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Insight + Race.Toughness + Race.Endurance);
             if (Bonus < 1) Bonus = 0;
             else Bonus++;
             double dStats = 1.0 + ((Bonus * Bonus) / 30.0);
@@ -756,7 +756,7 @@ namespace SpaceMercs {
             // Bonuses for large individual scores
             if (BaseStrength - Race.Strength > 3) dStats += Math.Pow(BaseStrength - Race.Strength - 2, 2) / 25.0;
             if (BaseAgility - Race.Agility > 3) dStats += Math.Pow(BaseAgility - Race.Agility - 2, 2) / 25.0;
-            if (BaseIntellect - Race.Intellect > 3) dStats += Math.Pow(BaseIntellect - Race.Intellect - 2, 2) / 25.0;
+            if (BaseInsight - Race.Insight > 3) dStats += Math.Pow(BaseInsight - Race.Insight - 2, 2) / 25.0;
             if (BaseToughness - Race.Toughness > 3) dStats += Math.Pow(BaseToughness - Race.Toughness - 2, 2) / 25.0;
             if (BaseEndurance - Race.Endurance > 3) dStats += Math.Pow(BaseEndurance - Race.Endurance - 2, 2) / 25.0;
 
@@ -1256,7 +1256,7 @@ namespace SpaceMercs {
                 switch (st) {
                     case StatType.Strength: bonus += ar.Type.Strength; break;
                     case StatType.Agility: bonus += ar.Type.Agility; break;
-                    case StatType.Insight: bonus += ar.Type.Intellect; break;
+                    case StatType.Insight: bonus += ar.Type.Insight; break;
                     case StatType.Toughness: bonus += ar.Type.Toughness; break;
                     case StatType.Endurance: bonus += ar.Type.Endurance; break;
                     case StatType.Health: bonus += ar.Type.Health; break;

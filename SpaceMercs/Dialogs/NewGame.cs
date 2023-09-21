@@ -14,7 +14,7 @@ namespace SpaceMercs.Dialogs {
         private int Unspent = Const.SpareAttributePoints;
         public int Strength { get; set; }
         public int Agility { get; set; }
-        public int Intellect { get; set; }
+        public int Insight { get; set; }
         public int Toughness { get; set; }
         public int Endurance { get; set; }
         public int Seed {
@@ -47,7 +47,7 @@ namespace SpaceMercs.Dialogs {
             PlayerName = "Unnamed";
             Strength = rc.Strength;
             Agility = rc.Agility;
-            Intellect = rc.Intellect;
+            Insight = rc.Insight;
             Toughness = rc.Toughness;
             Endurance = rc.Endurance;
             Random rand = new Random();
@@ -62,14 +62,14 @@ namespace SpaceMercs.Dialogs {
             if (Unspent == 0) {
                 btStrengthUp.Enabled = false;
                 btAgilityUp.Enabled = false;
-                btIntellectUp.Enabled = false;
+                btInsightUp.Enabled = false;
                 btToughnessUp.Enabled = false;
                 btEnduranceUp.Enabled = false;
             }
             else {
                 btStrengthUp.Enabled = true;
                 btAgilityUp.Enabled = true;
-                btIntellectUp.Enabled = true;
+                btInsightUp.Enabled = true;
                 btToughnessUp.Enabled = true;
                 btEnduranceUp.Enabled = true;
             }
@@ -84,10 +84,10 @@ namespace SpaceMercs.Dialogs {
             if (Agility + Const.MaximumSkillDeficit <= rc.Agility) btAgilityDown.Enabled = false;
             else btAgilityDown.Enabled = true;
 
-            // Intellect
-            lbIntellect.Text = Intellect.ToString();
-            if (Intellect + Const.MaximumSkillDeficit <= rc.Intellect) btIntellectDown.Enabled = false;
-            else btIntellectDown.Enabled = true;
+            // Insight
+            lbInsight.Text = Insight.ToString();
+            if (Insight + Const.MaximumSkillDeficit <= rc.Insight) btInsightDown.Enabled = false;
+            else btInsightDown.Enabled = true;
 
             // Toughness
             lbToughness.Text = Toughness.ToString();
@@ -139,16 +139,16 @@ namespace SpaceMercs.Dialogs {
             Agility--;
             SetupSkillButtons();
         }
-        private void btIntellectUp_Click(object sender, EventArgs e) {
+        private void btInsightUp_Click(object sender, EventArgs e) {
             if (Unspent == 0) return;
             Unspent--;
-            Intellect++;
+            Insight++;
             SetupSkillButtons();
         }
-        private void btIntellectDown_Click(object sender, EventArgs e) {
-            if (Intellect + Const.MaximumSkillDeficit <= rc.Intellect) return;
+        private void btInsightDown_Click(object sender, EventArgs e) {
+            if (Insight + Const.MaximumSkillDeficit <= rc.Insight) return;
             Unspent++;
-            Intellect--;
+            Insight--;
             SetupSkillButtons();
         }
         private void btToughnessUp_Click(object sender, EventArgs e) {
