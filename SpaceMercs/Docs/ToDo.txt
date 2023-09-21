@@ -5,8 +5,6 @@ ToDo List
 
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
-Update encounter freq. based on System owning race.Aggression (-2 .. +2)
-
 ==========================================================================================================
 
 
