@@ -389,6 +389,9 @@ namespace SpaceMercs {
             }
         }
         public void AddSoldiers(IEnumerable<Soldier> soldiers) {
+            if (Soldiers.Count + soldiers.Count() > 4) {
+                throw new Exception("Too many soldiers added to mission!");
+            }
             foreach (Soldier s in soldiers) {
                 if (!Soldiers.Contains(s)) Soldiers.Add(s);
             }

@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>14/07/2150 18:02:12</Clock>
+<Clock>14/07/2150 18:24:03</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -7311,7 +7311,7 @@
   <Inv Count="16">
 <Equipment Type="Nannite Medikit"/>
   </Inv>
-  <Inv Count="17">
+  <Inv Count="16">
 <Equipment Type="Nannite Medsystem"/>
   </Inv>
   <Inv Count="10">
@@ -36525,7 +36525,7 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>343.27199877734836</Cash>
+ <Cash>162.86981524630443</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="63" Y="15"/>
@@ -36585,6 +36585,9 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Tar Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Nannite Medsystem"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -36747,15 +36750,6 @@
   </Inv>
   <Inv Count="15">
 <Material Type="Chitin"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Pistol" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Automatic Rifle" Level="1"/>

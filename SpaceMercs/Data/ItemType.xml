@@ -67,7 +67,6 @@
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
-      <Material Name="Gold" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
     <Tex>2,1</Tex>
@@ -92,6 +91,7 @@
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
     <Tex>2,1</Tex>
@@ -353,5 +353,54 @@
     </Materials>
     <Source>Workshop</Source>
     <Tex>4,3</Tex>
+  </ItemType>
+  <ItemType Name="Quantum Medikit">
+    <Mass>0.4</Mass>
+    <Cost>50</Cost>
+    <Rarity>16</Rarity>
+    <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
+    <ItemEffect Name="Heal">
+      <SingleUse/>
+      <Skill Required="false">Medic</Skill>
+      <CurePoison/>
+      <Effect>
+        <Damage Type="Physical">-30</Damage>
+        <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>1,4</Tex>
+  </ItemType>
+  <ItemType Name="Quantum Medsystem">
+    <Mass>3.0</Mass>
+    <Cost>1500</Cost>
+    <Rarity>24</Rarity>
+    <Desc>A medical device that heals wounds almost as well as a quantum medikit, but can be reused after a short charging period.</Desc>
+    <ItemEffect Name="Heal">
+      <Recharge>2</Recharge>
+      <Skill Required="false">Medic</Skill>
+      <CurePoison/>
+      <Effect>
+        <Damage Type="Physical">-24</Damage>
+        <!-- Negative damage = healing -->
+      </Effect>
+      <Sound>Inject</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Electronic Components" Amount="1"/>
+    </Materials>
+    <Source>Medlab</Source>
+    <Tex>1,4</Tex>
   </ItemType>
 </Data>
