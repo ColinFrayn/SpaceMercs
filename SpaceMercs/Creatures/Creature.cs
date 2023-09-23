@@ -243,16 +243,16 @@ namespace SpaceMercs {
             }
             else {
                 double dam = 0.0;
+                double hmod = 0.9 + (Attack / 10.0);
+                hmod *= Const.CreatureAttackDamageScale;
                 for (int n = 0; n < nhits; n++) {
                     dam += rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
                 }
-                double hmod = 0.9 + (Attack / 10.0);
-                hmod *= Const.CreatureAttackDamageScale;
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
                     if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
                     else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
-                }
+                }                
             }
 
             return AllDam;

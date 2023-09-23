@@ -21,6 +21,10 @@
                 if (aoFrom.AOType == AstronomicalObject.AstronomicalObjectType.Planet && aoTo.AOType == AstronomicalObject.AstronomicalObjectType.Moon && ((Moon)aoTo).Parent == aoFrom) dDanger -= (double)(iFromSize + iToSize);
                 else if (aoFrom.AOType == AstronomicalObject.AstronomicalObjectType.Moon && aoTo.AOType == AstronomicalObject.AstronomicalObjectType.Planet && ((Moon)aoFrom).Parent == aoTo) dDanger -= (double)(iFromSize + iToSize);
             }
+            // Interstellar routes are much emptier
+            else {
+                dDanger -= Const.InterstellarTravelSafetyBonus;
+            }
 
             // Greater risk if you're not very friendly with the target system
             if (PlayerTeam.GetRelations(aoFrom) <= 2) dDanger -= (PlayerTeam.GetRelations(aoFrom) - 3) * 2.0;

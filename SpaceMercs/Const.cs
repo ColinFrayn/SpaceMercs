@@ -30,8 +30,9 @@ namespace SpaceMercs {
         public const double BaseSearchChance = 70.0; // Chance of spotting a hidden object at distance zero (plus Insight)
         public const double PassiveSearchChance = 30.0; // Chance of spotting a hidden object at distance zero (plus Insight)
         public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
-        public const double SearchBoostPerSkill = 5.0; // Increase in chance to spot a hidden object for each point in Perception.
+        public const double SearchBoostPerSkill = 2.0; // Increase in chance to spot a hidden object for each point in Perception.
         public const double EncumbranceSearchPenalty = 20.0; // Penalty (proportionately applied) for searching when 100% encumbered.
+        public const double PerceptionSearchRadiusBoost = 0.5; // Increase in search radius for every point of perception
         public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
         public const int WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
@@ -149,8 +150,8 @@ namespace SpaceMercs {
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detectionr ange
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
-        public const double CreatureAttackDamageScale = 0.6;  // Modifier applied to damage done by Creatures
-        public const double SoldierAttackDamageScale = 1.0;  // Modifier applied to damage done by player-controlled Soldiers
+        public const double CreatureAttackDamageScale = 0.06;  // Modifier applied to damage done by Creatures
+        public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
         public const double SniperRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
 
@@ -178,6 +179,7 @@ namespace SpaceMercs {
         public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
+        public const double InterstellarTravelSafetyBonus = 10.0; // Less likely to get intercepted in interstellar space
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
         public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
         public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated

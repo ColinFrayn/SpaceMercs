@@ -246,29 +246,26 @@ namespace SpaceMercs {
             CurrentLevel.KillSoldier(this);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
-            double hmod = 1.0; // Utils.HitToMod(hit); // Damage modifier for quality of hit
+            // Utils.HitToMod(hit); // Damage modifier for quality of hit
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
-            WeaponType.DamageType type = WeaponType.DamageType.Physical;
             if (EquippedWeapon == null) {
                 double dam = 0.0;
                 for (int n = 0; n < nhits; n++) {
-                    dam += (rnd.NextDouble() + 1.0) * Const.SoldierAttackDamageScale * Strength / 15.0;  // Melee does rubbish damage, in general
+                    dam += (rnd.NextDouble() + 0.5) * Const.SoldierAttackDamageScale * Attack;  // Unarmed melee does rubbish damage, in general
                 }
-                AllDam.Add(WeaponType.DamageType.Physical, dam * hmod);
+                AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                type = EquippedWeapon.Type.DType;
+                double hmod = Attack * Const.SoldierAttackDamageScale; // 10% damage bonus per attack point (includes weapon skill etc.)
                 double dam = 0.0;
-                hmod = Attack / 10.0; // 10% damage bonus per attack point (includes weapon skill etc.)
-                hmod *= Const.SoldierAttackDamageScale;
                 for (int n = 0; n < nhits; n++) {
                     dam += EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
                 }
-                AllDam.Add(type, dam * hmod);
+                AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
                     if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
                     else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
-                }                
+                }
             }
 
             return AllDam;
@@ -328,7 +325,7 @@ namespace SpaceMercs {
         public int Insight { get { return Math.Max(0, BaseInsight + StatBonuses(StatType.Insight)); } }
         public int Toughness { get { return Math.Max(0, BaseToughness + StatBonuses(StatType.Toughness)); } }
         public int Endurance { get { return Math.Max(0, BaseEndurance + StatBonuses(StatType.Endurance)); } }
-        public int BaseAttack { get { return (MeleeWeaponEquipped ? Strength : Insight) + Level + 2; } }
+        public int BaseAttack { get { return (MeleeAttacker ? Strength : Insight) + Level + 2; } }
         public int BaseDefence { get { return Agility + Level + 2; } }
         public int BaseHealth { get { return Toughness + Level + 10; } }
         public int BaseStamina { get { return Endurance + Level + 10; } }
@@ -340,14 +337,14 @@ namespace SpaceMercs {
                 return Math.Min(1.0, (m - (MaximumCarry / 2.0)) * 2.0 / MaximumCarry);
             }
         }
-        public bool MeleeWeaponEquipped { get { return (EquippedWeapon != null && EquippedWeapon.Type.IsMeleeWeapon); } }
+        public bool MeleeAttacker { get { return (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
         public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost); } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
         public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost); } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
-        public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
-        public int PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
+        public double SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
+        public double PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
         public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
         public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
         private void CalculateMaxStats() {
@@ -1173,12 +1170,12 @@ namespace SpaceMercs {
         }
         public List<string> SearchTheArea(MissionLevel level, bool bPassive) { 
             List<string> lFound = new List<string>();
-            int rad = bPassive ? PassiveSearchRadius : SearchRadius;
+            double rad = bPassive ? PassiveSearchRadius : SearchRadius;
             double dPenalty = Const.EncumbranceSearchPenalty * Encumbrance;
             double baseChance = (bPassive ? PassiveSearchChance : BaseSearchChance) - dPenalty;
             Random rand = new Random();
-            for (int y = Math.Max(0, Y - rad); y <= Math.Min(Y + rad, level.Height - 1); y++) {
-                for (int x = Math.Max(0, X - rad); x <= Math.Min(X + rad, level.Width - 1); x++) {
+            for (int y = Math.Max(0, Y - (int)rad); y <= Math.Min(Y + rad, level.Height - 1); y++) {
+                for (int x = Math.Max(0, X - (int)rad); x <= Math.Min(X + rad, level.Width - 1); x++) {
                     if ((x - X) * (x - X) + (y - Y) * (y - Y) <= (rad * rad)) {
                         // Is there something hidden here?
                         bool bFound = false;
@@ -1199,7 +1196,7 @@ namespace SpaceMercs {
                         double chance = baseChance;
                         chance -= Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * Const.SearchReduction;
                         chance -= level.ParentMission.Diff * Const.MissionDifficultySearchScale;
-                        if (rand.NextDouble() * 100 <= chance) {
+                        if (rand.NextDouble() * 100.0 <= chance) {
                             // Spotted
                             // Hidden door
                             if (level.Map[x, y] == MissionLevel.TileType.SecretDoorHorizontal) {

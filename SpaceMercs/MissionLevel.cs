@@ -684,7 +684,7 @@ namespace SpaceMercs {
 
             CheckConnectivity(); // Make sure that all bits of the map are connected
             if (!bMines) GenerateDoors();
-            GenerateHiddenTreasure(bMines ? 1 : 2);
+            GenerateHiddenTreasure(bMines ? 1.0 : 1.4);
             GenerateTraps(bMines ? 1 : 2);
         }
         private void GenerateCaveMap() {
@@ -702,7 +702,7 @@ namespace SpaceMercs {
             for (int i = 0; i < Const.AutomataIterations; i++) RunAutomata();
             CheckConnectivity();
             GenerateTransitionLocations();
-            GenerateHiddenTreasure(1);
+            GenerateHiddenTreasure(1.0);
             GenerateTraps(1);
         }
         private void GenerateSurfaceMap() {
@@ -771,9 +771,8 @@ namespace SpaceMercs {
             ExitLocations.Add(new Point(EndX + 1, EndY + 1));
             Map[EndX, EndY] = Map[EndX + 1, EndY] = Map[EndX, EndY + 1] = Map[EndX + 1, EndY + 1] = TileType.Floor;
         }
-        private void GenerateHiddenTreasure(int scale) {
-            int size = Width * Height;
-            int nTreasure = (rand.Next(size * scale) * 2 + (size * scale)) / 1500;
+        private void GenerateHiddenTreasure(double scale) {
+            int nTreasure = (int)Math.Floor((rand.NextDouble() + 0.3) * ParentMission.Size * scale);
             int ntries = 0;
             while (Items.Count < nTreasure && ++ntries < (nTreasure * 10 + 10)) {
                 // Pick a random location

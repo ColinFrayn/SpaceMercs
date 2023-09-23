@@ -364,7 +364,6 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void btPickUpAll_Click(object sender, EventArgs e) {
-            if (dgFloor.SelectedRows.Count == 0) return;
             foreach (IItem it in ThisStash.Items()) {
                 ThisSoldier.AddItem(it, ThisStash.GetCount(it));
             }

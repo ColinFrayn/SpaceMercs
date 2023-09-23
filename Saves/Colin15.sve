@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>23/08/2150 22:57:08</Clock>
+<Clock>12/01/2156 01:18:29</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -5530,8 +5530,419 @@
  <Sector X="0" Y="0" Inhabitant="Human">
 <Star ID="0">
 <Seed>2601560</Seed>
+<Name>New Horizon</Name>
  <MapPos X="1.81" Y="-2.96"/>
-</Star>
+ <Planets>
+<Planet ID="0">
+<Orbit>30541147927</Orbit>
+<Radius>5689229</Radius>
+<PRot>155565693</PRot>
+<ARot>76148</ARot>
+<Temp>319</Temp>
+<Seed>1486550</Seed>
+<TempBase>319.0458457267682</TempBase>
+<Type>Rocky</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>398666667</Orbit>
+<Radius>1417543</Radius>
+<PRot>2391203</PRot>
+<ARot>2612275</ARot>
+<Temp>285</Temp>
+<Seed>9114882</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Name>New Home</Name>
+<Orbit>42264967828</Orbit>
+<Radius>4758574</Radius>
+<PRot>130855356</PRot>
+<ARot>83314</ARot>
+<Temp>297</Temp>
+<Seed>1054684</Seed>
+<TempBase>297.8830617206375</TempBase>
+<Type>Oceanic</Type>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Ogres</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>300.62</Reward>
+ <Diff>7</Diff>
+ <LevelCount>3</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>681896999</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>67.91</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1529180805</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Ogres</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>108.55</Reward>
+ <Diff>7</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>175269741</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.00" Cost="4.98">Luminous Geode</MissionItem>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1500609858</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>197.36</Reward>
+ <Diff>6</Diff>
+ <LevelCount>3</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>230932848</Seed>
+ <Size>2</Size>
+</Mission>
+ </Missions>
+<Moons>
+<Moon ID="0">
+<Orbit>396499792</Orbit>
+<Radius>1040189</Radius>
+<PRot>2511986</PRot>
+<ARot>2373210</ARot>
+<Temp>295</Temp>
+<Seed>2226074</Seed>
+<Type>Volcanic</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>917042726</Orbit>
+<Radius>1694366</Radius>
+<PRot>991688</PRot>
+<ARot>987140</ARot>
+<Temp>295</Temp>
+<Seed>636248</Seed>
+<Type>Oceanic</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Orbit>59529781108</Orbit>
+<Radius>8483846</Radius>
+<PRot>64330995</PRot>
+<ARot>132975</ARot>
+<Temp>227</Temp>
+<Seed>1768823</Seed>
+<TempBase>227.3309942445882</TempBase>
+<Type>Rocky</Type>
+ <Missions>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.20" Cost="6.60">Glowing Statue</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>633181383</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.30" Cost="6.03">Luminous Emerald</MissionItem>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>3</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>721986532</Seed>
+ <Size>3</Size>
+</Mission>
+ </Missions>
+<Moons>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Orbit>82173586520</Orbit>
+<Radius>70719687</Radius>
+<PRot>18003230</PRot>
+<ARot>1050131</ARot>
+<Temp>174</Temp>
+<Seed>427687</Seed>
+<TempBase>174.57508478560123</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>504007523</Orbit>
+<Radius>771096</Radius>
+<PRot>2469728</PRot>
+<ARot>2399954</ARot>
+<Temp>141</Temp>
+<Seed>2441181</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>902922806</Orbit>
+<Radius>1295737</Radius>
+<PRot>1170645</PRot>
+<ARot>1101651</ARot>
+<Temp>153</Temp>
+<Seed>8300909</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1243417259</Orbit>
+<Radius>1204896</Radius>
+<PRot>841271</PRot>
+<ARot>892288</ARot>
+<Temp>134</Temp>
+<Seed>3908852</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1684026218</Orbit>
+<Radius>1308745</Radius>
+<PRot>627520</PRot>
+<ARot>680092</ARot>
+<Temp>139</Temp>
+<Seed>8560890</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Orbit>115212365030</Orbit>
+<Radius>48899946</Radius>
+<PRot>14546107</PRot>
+<ARot>580873</ARot>
+<Temp>147</Temp>
+<Seed>4952048</Seed>
+<TempBase>147.26740782322042</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>411238033</Orbit>
+<Radius>1626371</Radius>
+<PRot>2101242</PRot>
+<ARot>2172220</ARot>
+<Temp>112</Temp>
+<Seed>2786851</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>902091217</Orbit>
+<Radius>1365269</Radius>
+<PRot>1020765</PRot>
+<ARot>1089592</ARot>
+<Temp>107</Temp>
+<Seed>2325438</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1260721595</Orbit>
+<Radius>960364</Radius>
+<PRot>904417</PRot>
+<ARot>906824</ARot>
+<Temp>107</Temp>
+<Seed>2888449</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1689426128</Orbit>
+<Radius>1562960</Radius>
+<PRot>512439</PRot>
+<ARot>550098</ARot>
+<Temp>118</Temp>
+<Seed>1104086</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="4">
+<Orbit>2149885534</Orbit>
+<Radius>1586317</Radius>
+<PRot>457600</PRot>
+<ARot>456122</ARot>
+<Temp>111</Temp>
+<Seed>3615938</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="5">
+<Orbit>161281316467</Orbit>
+<Radius>60900378</Radius>
+<PRot>9397537</PRot>
+<ARot>886759</ARot>
+<Temp>124</Temp>
+<Seed>7470281</Seed>
+<TempBase>124.36986311590374</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>467711626</Orbit>
+<Radius>1699408</Radius>
+<PRot>1888449</PRot>
+<ARot>1894059</ARot>
+<Temp>89</Temp>
+<Seed>6387331</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="6">
+<Orbit>222838146953</Orbit>
+<Radius>6641410</Radius>
+<PRot>20857182</PRot>
+<ARot>90990</ARot>
+<Temp>117</Temp>
+<Seed>8766310</Seed>
+<TempBase>117.0292587625357</TempBase>
+<Type>Rocky</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>411576912</Orbit>
+<Radius>1432858</Radius>
+<PRot>2168398</PRot>
+<ARot>1929573</ARot>
+<Temp>84</Temp>
+<Seed>1048886</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="7">
+<Orbit>315987953375</Orbit>
+<Radius>60256201</Radius>
+<PRot>4708376</PRot>
+<ARot>762683</ARot>
+<Temp>88</Temp>
+<Seed>3013015</Seed>
+<TempBase>88.76573666341251</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>431424638</Orbit>
+<Radius>823109</Radius>
+<PRot>2963918</PRot>
+<ARot>2977031</ARot>
+<Temp>48</Temp>
+<Seed>1205278</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>798719405</Orbit>
+<Radius>1440343</Radius>
+<PRot>1070240</PRot>
+<ARot>1122567</ARot>
+<Temp>52</Temp>
+<Seed>6945358</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1251526767</Orbit>
+<Radius>1209842</Radius>
+<PRot>765790</PRot>
+<ARot>776656</ARot>
+<Temp>49</Temp>
+<Seed>2636642</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="8">
+<Orbit>440383318311</Orbit>
+<Radius>59641583</Radius>
+<PRot>3254964</PRot>
+<ARot>881763</ARot>
+<Temp>75</Temp>
+<Seed>7349637</Seed>
+<TempBase>75.16916788259779</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>359790524</Orbit>
+<Radius>1134014</Radius>
+<PRot>3054838</PRot>
+<ARot>3137551</ARot>
+<Temp>42</Temp>
+<Seed>1887838</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>762644563</Orbit>
+<Radius>1404069</Radius>
+<PRot>1231845</PRot>
+<ARot>1178210</ARot>
+<Temp>35</Temp>
+<Seed>9274315</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1197244894</Orbit>
+<Radius>1635096</Radius>
+<PRot>724119</PRot>
+<ARot>698204</ARot>
+<Temp>37</Temp>
+<Seed>5399951</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1615242974</Orbit>
+<Radius>1458961</Radius>
+<PRot>552481</PRot>
+<ARot>554266</ARot>
+<Temp>44</Temp>
+<Seed>9176534</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="4">
+<Orbit>2041175396</Orbit>
+<Radius>1514817</Radius>
+<PRot>464357</PRot>
+<ARot>408188</ARot>
+<Temp>39</Temp>
+<Seed>898764</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="5">
+<Orbit>2520289234</Orbit>
+<Radius>1422727</Radius>
+<PRot>375916</PRot>
+<ARot>318573</ARot>
+<Temp>43</Temp>
+<Seed>8727207</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+ <Visited/></Star>
 <Star ID="1">
 <Seed>4133432</Seed>
  <MapPos X="4.36" Y="-1.22"/>
@@ -5551,11 +5962,11 @@
 <Temp>225</Temp>
 <Seed>62637</Seed>
 <Colony>
- <BaseType>Outpost, Research, Trading</BaseType>
+ <BaseType>Outpost, Research, Colony, Trading</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>0</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678722976000000000</NextGrowth>
+ <LastGrowth>678722976000000000</LastGrowth>
+ <NextGrowth>687153024000000000</NextGrowth>
 </Colony>
 <TempBase>225.42563217930064</TempBase>
 <Type>Gas</Type>
@@ -6720,7 +7131,7 @@
 <Colony>
  <BaseType>Outpost, Military, Research, Colony, Trading, Metropolis</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>678327042495320934</LastUpdate>
+ <LastUpdate>678400208114831823</LastUpdate>
  <LastGrowth>678158784000000000</LastGrowth>
  <NextGrowth>686867904000000000</NextGrowth>
  <Mercenaries>
@@ -6755,37 +7166,6 @@
   <Exp Skill="Armoursmith">4</Exp>
  </UtilityExperience>
 </Soldier>
-<Soldier Name="Luke King">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>11,15,13,12,11</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Adrenaline"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Pistol" Level="0"/>
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Pistol">27</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Perception">1</Exp>
- </UtilityExperience>
-</Soldier>
 <Soldier Name="Harriet Roberts">
  <Level>1</Level>
  <XP>0</XP>
@@ -6810,37 +7190,6 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Melee">26</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Bladesmith">1</Exp>
-  <Exp Skill="Avoidance">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Peter Taylor">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>14,13,10,10,13</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Stimulant"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Axe" Level="0"/>
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Melee">22</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -6882,42 +7231,6 @@
   <Exp Skill="Bladesmith">2</Exp>
   <Exp Skill="Engineer">1</Exp>
   <Exp Skill="Stealth">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Louise Upton">
- <Level>3</Level>
- <XP>0</XP>
- <Gender>Female</Gender>
- <Race>Human</Race>
- <Stats>12,17,13,14,9</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Tar Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Medikit"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Automatic Rifle" Level="0"/>
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Rifle">173</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">2</Exp>
-  <Exp Skill="Perception">2</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Natalie Underhill">
@@ -7049,6 +7362,102 @@
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
 </Soldier>
+<Soldier Name="Colin Jackson">
+ <Level>3</Level>
+ <XP>0</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>13,12,13,11,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shortblade" Level="0"/>
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">105</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">2</Exp>
+  <Exp Skill="Armoursmith">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Harry Xao">
+ <Level>1</Level>
+ <XP>0</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>6,10,11,18,15</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Pistol" Level="0"/>
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Pistol">23</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Stealth">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Zeke Martin">
+ <Level>2</Level>
+ <XP>0</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>14,18,10,11,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Pistol" Level="1"/>
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Pistol">80</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">3</Exp>
+ </UtilityExperience>
+</Soldier>
  </Mercenaries>
  <Missions>
 <Mission>
@@ -7121,18 +7530,6 @@
  <Seed>1133070499</Seed>
 </Mission>
 <Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Triffids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>28.02</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>370238797</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
  <Type>AbandonedCity</Type>
  <Goal>KillAll</Goal>
  <Enemy>Bugs</Enemy>
@@ -7188,19 +7585,6 @@
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
  <Seed>1124487635</Seed>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>FindItem</Goal>
-<MissionItem Mass="4.17" Cost="11.19">Ancient Alien Egg</MissionItem>
- <Enemy>Bugs</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>26.66</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>224455065</Seed>
- <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Caves</Type>
@@ -7263,32 +7647,6 @@
  <Size>2</Size>
 </Mission>
 <Mission>
- <Type>Mines</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="1.00" Cost="3.35">Glowing Skull</MissionItem>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>224152428</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>21.73</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1987905544</Seed>
-</Mission>
-<Mission>
  <Type>Surface</Type>
  <Goal>FindItem</Goal>
 <MissionItem Mass="5.64" Cost="12.45">Ethereal Transparent Statue</MissionItem>
@@ -7302,209 +7660,206 @@
 </Mission>
  </Missions>
  <Inventory>
-  <Inv Count="35">
+  <Inv Count="47">
 <Equipment Type="Medikit"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
-  <Inv Count="16">
+  <Inv Count="14">
 <Equipment Type="Nannite Medikit"/>
   </Inv>
-  <Inv Count="16">
+  <Inv Count="10">
 <Equipment Type="Nannite Medsystem"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="8">
 <Equipment Type="Adrenaline"/>
   </Inv>
-  <Inv Count="21">
+  <Inv Count="10">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="111">
+  <Inv Count="59">
 <Equipment Type="Frag Grenade"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="34">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="28">
 <Equipment Type="Poison Grenade"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="3">
 <Equipment Type="Tar Grenade"/>
   </Inv>
-  <Inv Count="14">
+  <Inv Count="11">
 <Equipment Type="Acid Grenade"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Arm Plating" Material="Chitin" Level="0"/>
-  </Inv>
-  <Inv Count="99">
+  <Inv Count="44">
 <Weapon Type="Shotgun" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="3">
 <Weapon Type="Shotgun" Level="1"/>
   </Inv>
-  <Inv Count="7">
-<Armour Type="Gloves" Material="Composite" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="5">
 <Weapon Type="Quad Shotgun" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shielded Chestplate" Material="Steel" Level="1"/>
+  <Inv Count="2">
+<Armour Type="Full Armour" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="2"/>
   </Inv>
-  <Inv Count="76">
+  <Inv Count="61">
 <Weapon Type="Pistol" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="15">
 <Weapon Type="Pistol" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Arm Plating" Material="Composite" Level="2"/>
+<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="18">
+  <Inv Count="11">
 <Weapon Type="Automatic Rifle" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Arm Plating" Material="Mithril" Level="3"/>
+<Armour Type="Power Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Steel" Level="0"/>
+<Armour Type="Assault Power Armour" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Automatic Rifle" Level="3"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="12">
 <Weapon Type="Heavy Rifle" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Mithril" Level="0"/>
+<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="18">
-<Weapon Type="Laser Rifle" Level="0"/>
+  <Inv Count="1">
+<Armour Type="Stealth Boots" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Helmet" Material="Steel" Level="2"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="3"/>
+  <Inv Count="2">
+<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Heavy Power Armour" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Shielded Chestplate" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="3"/>
+<Armour Type="Shock Armour" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Gauss Sniper Rifle" Level="0"/>
+<Armour Type="Full Armour" Material="Mithril" Level="2"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="19">
 <Weapon Type="Laser Pistol" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Laser Pistol" Level="1"/>
-  </Inv>
-  <Inv Count="6">
-<Weapon Type="Gauss Cannon" Level="0"/>
+<Armour Type="Plate Gauntlets" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Chitin" Level="1"/>
+<Armour Type="Stealth Armour" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="1">
+<Armour Type="Assault Power Armour" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="4">
 <Weapon Type="Arc Rifle" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Weapon Type="Arc Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Kevlar" Level="0"/>
+<Armour Type="Powered Arm Plating" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Infiltrator Helmet" Material="Steel" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="9">
 <Weapon Type="Heavy Arc Rifle" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Armour Type="Powered Gauntlets" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Arc Rifle" Level="2"/>
+<Armour Type="Stealth Gauntlets" Material="Composite" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="7">
 <Weapon Type="Flame Thrower" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Heavy Chitin" Level="1"/>
+<Armour Type="Infiltrator Helmet" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Nanomesh" Level="3"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="41">
 <Weapon Type="Sniper Rifle" Level="0"/>
   </Inv>
-  <Inv Count="3">
-<Armour Type="Cap" Material="Kevlar" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="3"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Plate Boots" Material="Composite" Level="2"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="3">
 <Weapon Type="Laser Sniper Rifle" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Pistol" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Mithril" Level="0"/>
+<Armour Type="Assault Power Armour" Material="Aeromesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Steel" Level="1"/>
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="3"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="1">
 <Weapon Type="Pistol" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Composite" Level="0"/>
+<Armour Type="Full Armour" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="40">
+  <Inv Count="106">
 <Weapon Type="Shortblade" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Heavy Power Armour" Material="Steel" Level="0"/>
+<Armour Type="Full Armour" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Powered Gauntlets" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Weapon Type="Shortblade" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Powerblade" Level="0"/>
+<Armour Type="Stealth Gauntlets" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Aeromesh" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shielded Chestplate" Material="Steel" Level="2"/>
+  <Inv Count="3">
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Mithril" Level="1"/>
   </Inv>
-  <Inv Count="17">
+  <Inv Count="22">
 <Weapon Type="Axe" Level="0"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="3">
 <Weapon Type="Axe" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Nanomesh" Level="0"/>
+  <Inv Count="2">
+<Armour Type="Stealth Boots" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Assault Power Armour" Material="Steel" Level="1"/>
@@ -7513,61 +7868,61 @@
 <Weapon Type="Power Axe" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="2"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="8">
 <Weapon Type="Chainsword" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Chainsword" Level="1"/>
+<Armour Type="Stealth Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+  <Inv Count="1">
+<Weapon Type="Gauss Cannon" Level="1"/>
   </Inv>
-  <Inv Count="31">
+  <Inv Count="32">
 <Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shielded Power Armour" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="3">
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Shock Armour" Material="Nanomesh" Level="1"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Armour Type="Plate Gauntlets" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="47">
+  <Inv Count="55">
 <Armour Type="Cap" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Chitin" Level="2"/>
+<Armour Type="Gloves" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Chitin" Level="1"/>
+<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="3"/>
   </Inv>
-  <Inv Count="44">
+  <Inv Count="10">
 <Armour Type="Cap" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Gauntlets" Material="Mithril" Level="0"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="22">
 <Armour Type="Cap" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="3">
 <Armour Type="Cap" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Steel" Level="2"/>
+<Armour Type="Shielded Power Armour" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Nanomesh" Level="0"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Full Armour" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Nanomesh" Level="0"/>
+<Armour Type="Heavy Power Armour" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Full Armour" Material="Kevlar" Level="3"/>
@@ -7579,10 +7934,10 @@
 <Armour Type="Powered Gauntlets" Material="Nanomesh" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Chitin" Level="1"/>
+<Armour Type="Shielded Power Armour" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Chitin" Level="0"/>
+<Armour Type="Stealth Armour" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Axe" Level="2"/>
@@ -7591,9 +7946,9 @@
 <Armour Type="Cap" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Heavy Chitin" Level="1"/>
+<Armour Type="Stealth Boots" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="11">
 <Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -7602,26 +7957,26 @@
   <Inv Count="2">
 <Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="18">
+  <Inv Count="13">
 <Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="5">
 <Armour Type="Helmet" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Chitin" Level="0"/>
+<Armour Type="Cap" Material="Xenolite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Ultramesh" Level="0"/>
+<Armour Type="Power Armour" Material="Chitin" Level="0"/>
   </Inv>
-  <Inv Count="26">
+  <Inv Count="7">
 <Armour Type="Helmet" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Heavy Laser Rifle" Level="2"/>
+  <Inv Count="3">
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shielded Chestplate" Material="Chitin" Level="1"/>
+<Armour Type="Stealth Gauntlets" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="4">
 <Armour Type="Helmet" Material="Composite" Level="0"/>
@@ -7630,27 +7985,27 @@
 <Armour Type="Helmet" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="2"/>
+<Armour Type="Leg Plating" Material="Voidskin" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Helmet" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Ultramesh" Level="0"/>
+<Armour Type="Power Armour" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Xenolite" Level="2"/>
+<Armour Type="Arm Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Gauntlets" Material="Nanomesh" Level="0"/>
+<Armour Type="Gloves" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Helmet" Material="Mithril" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Ultramesh" Level="1"/>
+<Armour Type="Infiltrator Helmet" Material="Xenolite" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -7660,10 +8015,10 @@
 <Armour Type="Plate Gauntlets" Material="Xenolite" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Ultramesh" Level="2"/>
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shock Armour" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Infiltrator Helmet" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Carbon Fibre" Level="3"/>
@@ -7671,16 +8026,16 @@
   <Inv Count="1">
 <Armour Type="Helmet" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="14">
+  <Inv Count="3">
 <Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Shielded Power Armour" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="10">
 <Armour Type="Military Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -7690,36 +8045,33 @@
 <Armour Type="Helmet" Material="Adamantium" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Steel" Level="1"/>
+<Armour Type="Arm Plating" Material="Adamantium" Level="2"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Military Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Nanomesh" Level="1"/>
+<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Infiltrator Helmet" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shock Armour" Material="Composite" Level="1"/>
+  <Inv Count="2">
+<Weapon Type="Gauss Sniper Rifle" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="5">
 <Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Military Helmet" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Equipment Type="Plasma Grenade"/>
   </Inv>
   <Inv Count="1">
@@ -7729,58 +8081,58 @@
 <Armour Type="Plate Boots" Material="Vulcanin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Gauntlets" Material="Composite" Level="1"/>
+<Armour Type="Assault Power Armour" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Plate Gauntlets" Material="Voidskin" Level="0"/>
   </Inv>
   <Inv Count="2">
+<Armour Type="Plate Boots" Material="Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
 <Weapon Type="Flame Thrower" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Helmet" Material="Chitin" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Composite" Level="2"/>
+  <Inv Count="11">
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="2">
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Plate Boots" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="7">
-<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shielded Power Armour" Material="Chitin" Level="0"/>
+<Armour Type="Helmet" Material="Heavy Chitin" Level="1"/>
   </Inv>
-  <Inv Count="3">
-<Armour Type="Chestplate" Material="Composite" Level="0"/>
+  <Inv Count="1">
+<Armour Type="Power Armour" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Infiltrator Helmet" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Stealth Armour" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Nanomesh" Level="1"/>
+<Armour Type="Cap" Material="Nanomesh" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Rifle" Level="1"/>
+<Armour Type="Shielded Chestplate" Material="Carbon Fibre" Level="2"/>
+  </Inv>
+  <Inv Count="5">
+<Armour Type="Plate Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Chitin" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shielded Chestplate" Material="Steel" Level="0"/>
@@ -7788,7 +8140,7 @@
   <Inv Count="1">
 <Armour Type="Gloves" Material="Xenolite" Level="1"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Armour Type="Stealth Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -7801,9 +8153,9 @@
 <Armour Type="Shielded Chestplate" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Heavy Chitin" Level="1"/>
+<Armour Type="Gloves" Material="Kevlar" Level="2"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="2">
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -7813,76 +8165,76 @@
 <Armour Type="Powered Arm Plating" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Steel" Level="1"/>
+<Armour Type="Plate Boots" Material="Aeromesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Kevlar" Level="3"/>
+<Armour Type="Leg Plating" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Heavy Chitin" Level="3"/>
+<Armour Type="Stealth Helmet" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Xenolite" Level="0"/>
+<Armour Type="Powered Leg Plating" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="8">
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Heavy Power Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Heavy Power Armour" Material="Heavy Chitin" Level="1"/>
+<Armour Type="Cap" Material="Xenolite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Power Armour" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Adamantium" Level="0"/>
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="2"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Gloves" Material="Chitin" Level="0"/>
+  <Inv Count="2">
+<Armour Type="Stealth Armour" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Arm Plating" Material="Composite" Level="1"/>
+<Armour Type="Power Armour" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Antimatter Grenade"/>
+<Armour Type="Stealth Gauntlets" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="3">
-<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
+  <Inv Count="1">
+<Armour Type="Shielded Chestplate" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Arm Plating" Material="Steel" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="11">
 <Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Steel" Level="1"/>
+<Armour Type="Plate Boots" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="2">
+<Armour Type="Leg Plating" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
 <Armour Type="Full Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Helmet" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Boots" Material="Chitin" Level="0"/>
+  <Inv Count="2">
+<Weapon Type="Powerblade" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Quantum Medikit"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="3"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Boots" Material="Ultramesh" Level="1"/>
+<Armour Type="Arm Plating" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="1"/>
@@ -7891,54 +8243,54 @@
 <Armour Type="Heavy Power Armour" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Ultramesh" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Composite" Level="1"/>
+<Armour Type="Cap" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Aeromesh" Level="1"/>
+<Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="3"/>
   </Inv>
-  <Inv Count="9">
+  <Inv Count="5">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Arm Plating" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="1">
 <Armour Type="Gloves" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Mithril" Level="0"/>
+<Armour Type="Plate Gauntlets" Material="Aeromesh" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Leg Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Gauntlets" Material="Kevlar" Level="2"/>
+<Armour Type="Infiltrator Helmet" Material="Composite" Level="1"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Adamantium" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Xenolite" Level="0"/>
+<Armour Type="Helmet" Material="Ultramesh" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shock Armour" Material="Steel" Level="0"/>
+  <Inv Count="4">
+<Weapon Type="Grenade Launcher" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Chitin" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="11">
 <Armour Type="Cap" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -7948,27 +8300,27 @@
 <Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Powered Gauntlets" Material="Steel" Level="2"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Gauntlets" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Composite" Level="1"/>
+<Armour Type="Full Armour" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Chitin" Level="0"/>
+<Armour Type="Shielded Chestplate" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Weapon Type="Shotgun" Level="3"/>
   </Inv>
   <Inv Count="1">
@@ -7983,38 +8335,38 @@
   <Inv Count="1">
 <Armour Type="Helmet" Material="Kevlar" Level="2"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shock Armour" Material="Nanomesh" Level="0"/>
+  <Inv Count="2">
+<Weapon Type="Laser Pistol" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Heavy Power Armour" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Weapon Type="Shortblade" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Ultramesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Composite" Level="0"/>
+<Armour Type="Chestplate" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Heavy Arc Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shock Armour" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Powerblade" Level="1"/>
+<Armour Type="Stealth Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Ultramesh" Level="0"/>
+<Armour Type="Cap" Material="Heavy Chitin" Level="1"/>
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Flame Thrower" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shock Armour" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
+<Weapon Type="Powerblade" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Heavy Chitin" Level="1"/>
@@ -8038,55 +8390,55 @@
 <Armour Type="Full Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Steel" Level="2"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Kevlar" Level="2"/>
+<Armour Type="Leg Plating" Material="Xenolite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Mithril" Level="0"/>
+<Armour Type="Powered Arm Plating" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Full Armour" Material="Mithril" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="12">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Adamantium" Level="1"/>
+<Armour Type="Military Helmet" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="25">
+  <Inv Count="2">
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Full Armour" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Kevlar" Level="2"/>
+<Armour Type="Plate Boots" Material="Voidskin" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Adamantium" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Kevlar" Level="2"/>
+<Armour Type="Cap" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Chitin" Level="2"/>
+<Armour Type="Powered Gauntlets" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Leg Plating" Material="Steel" Level="2"/>
+<Armour Type="Gloves" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Adamantium" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Composite" Level="0"/>
+<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Vulcanin" Level="0"/>
@@ -8095,7 +8447,7 @@
 <Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Gauss Sniper Rifle" Level="1"/>
+<Armour Type="Assault Power Armour" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Chitin" Level="1"/>
@@ -8109,40 +8461,40 @@
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Vulcanin" Level="0"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Shielded Power Armour" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Composite" Level="3"/>
+<Weapon Type="Sniper Rifle" Level="2"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Stealth Boots" Material="Steel" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Infiltrator Helmet" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Aeromesh" Level="0"/>
+<Armour Type="Cap" Material="Heavy Chitin" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Chitin" Level="0"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="17">
 <Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Shielded Chestplate" Material="Adamantium" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Heavy Chitin" Level="0"/>
+  <Inv Count="3">
+<Armour Type="Infiltrator Helmet" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="5">
 <Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -8152,124 +8504,124 @@
 <Armour Type="Cap" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="4">
+<Armour Type="Cap" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Leg Plating" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Heavy Chitin" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Steel" Level="3"/>
+<Armour Type="Assault Power Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Ultramesh" Level="2"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="14">
 <Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Nanomesh" Level="2"/>
+  <Inv Count="6">
+<Armour Type="Cap" Material="Mithril" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Gauntlets" Material="Mithril" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Weapon Type="Grenade Launcher" Level="2"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Heavy Power Armour" Material="Kevlar" Level="0"/>
+  <Inv Count="5">
+<Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Chitin" Level="0"/>
+<Armour Type="Leg Plating" Material="Nanomesh" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shielded Chestplate" Material="Chitin" Level="0"/>
+<Equipment Type="Quantum Medsystem"/>
   </Inv>
-  <Inv Count="9">
+  <Inv Count="10">
 <Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="4">
 <Armour Type="Gloves" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Plate Boots" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="22">
+  <Inv Count="7">
 <Armour Type="Gloves" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="9">
 <Armour Type="Gloves" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Steel" Level="3"/>
-  </Inv>
-  <Inv Count="18">
-<Armour Type="Gloves" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Gloves" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Arm Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="4">
+<Armour Type="Gloves" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="5">
+<Armour Type="Gloves" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
 <Armour Type="Cap" Material="Steel" Level="2"/>
   </Inv>
-  <Inv Count="8">
+  <Inv Count="4">
 <Armour Type="Gloves" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="3">
-<Weapon Type="Pistol" Level="3"/>
-  </Inv>
   <Inv Count="2">
-<Armour Type="Powered Leg Plating" Material="Kevlar" Level="0"/>
+<Armour Type="Helmet" Material="Nanomesh" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="2"/>
+<Armour Type="Shock Armour" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Composite" Level="1"/>
+<Weapon Type="Quad Shotgun" Level="3"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Adamantium" Level="0"/>
+  </Inv>
+  <Inv Count="1">
 <Armour Type="Military Helmet" Material="Composite" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Ultramesh" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="2">
 <Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Gauss Sniper Rifle" Level="2"/>
+  <Inv Count="2">
+<Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Chitin" Level="1"/>
+<Armour Type="Gloves" Material="Mithril" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Leg Plating" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Voidskin" Level="1"/>
   </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Helmet" Material="Steel" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Gauss Cannon" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Ultramesh" Level="2"/>
+<Armour Type="Shock Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Powered Arm Plating" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Kevlar" Level="1"/>
@@ -8277,38 +8629,38 @@
   <Inv Count="1">
 <Armour Type="Infiltrator Helmet" Material="Chitin" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Chainsword" Level="2"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Steel" Level="1"/>
+<Weapon Type="Laser Sniper Rifle" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="2"/>
+<Armour Type="Plate Boots" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Power Axe" Level="2"/>
+<Armour Type="Cap" Material="Aeromesh" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Vulcanin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shielded Power Armour" Material="Composite" Level="1"/>
+<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="3"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Armour Type="Stealth Gauntlets" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Gloves" Material="Composite" Level="2"/>
+  <Inv Count="3">
+<Armour Type="Cap" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Stealth Armour" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="1"/>
+<Weapon Type="Heavy Rifle" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Aeromesh" Level="1"/>
@@ -8317,24 +8669,24 @@
 <Armour Type="Shielded Chestplate" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Steel" Level="1"/>
+<Armour Type="Stealth Armour" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Mithril" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Weapon Type="Powerblade" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Heavy Chitin" Level="0"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Composite" Level="2"/>
+<Armour Type="Arm Plating" Material="Kevlar" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Nanomesh" Level="0"/>
+<Armour Type="Cap" Material="Vulcanin" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Chestplate" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -8344,37 +8696,37 @@
 <Armour Type="Cap" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Steel" Level="2"/>
+<Armour Type="Stealth Armour" Material="Ultramesh" Level="1"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="8">
 <Weapon Type="Shortblade" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Adamantium" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Weapon Type="Laser Sniper Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Mithril" Level="2"/>
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Steel" Level="2"/>
+<Weapon Type="Gauss Cannon" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
+<Weapon Type="Grenade Launcher" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Military Helmet" Material="Chitin" Level="2"/>
+<Armour Type="Cap" Material="Voidskin" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Arc Rifle" Level="1"/>
+<Armour Type="Powered Arm Plating" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Cap" Material="Voidskin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Heavy Chitin" Level="0"/>
+<Weapon Type="Axe" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Steel" Level="3"/>
@@ -8385,29 +8737,29 @@
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Nanomesh" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Armour Type="Infiltrator Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Mithril" Level="0"/>
+<Armour Type="Cap" Material="Chitin" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Xenolite" Level="0"/>
+<Weapon Type="Heavy Laser Rifle" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Mithril" Level="2"/>
+<Weapon Type="Sniper Rifle" Level="3"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="10">
 <Weapon Type="Automatic Rifle" Level="1"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Armour Type="Shielded Chestplate" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="2">
-<Weapon Type="Arc Rifle" Level="2"/>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Helmet" Material="Vulcanin" Level="1"/>
@@ -8421,20 +8773,20 @@
   <Inv Count="1">
 <Weapon Type="Gauss Cannon" Level="3"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Grenade Launcher" Level="0"/>
+  <Inv Count="2">
+<Armour Type="Plate Gauntlets" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Shotgun" Level="2"/>
+<Weapon Type="Chainsword" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Nanomesh" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Weapon Type="Quad Shotgun" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Chitin" Level="1"/>
+<Armour Type="Arm Plating" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Steel" Level="3"/>
@@ -8448,50 +8800,50 @@
   <Inv Count="1">
 <Armour Type="Helmet" Material="Heavy Chitin" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="5">
 <Equipment Type="Sonic Grenade"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Sniper Rifle" Level="3"/>
+<Weapon Type="Laser Rifle" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Vulcanin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Nanomesh" Level="1"/>
+<Armour Type="Helmet" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Laser Pistol" Level="2"/>
+<Armour Type="Infiltrator Helmet" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shielded Chestplate" Material="Heavy Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Adamantium" Level="1"/>
+<Equipment Type="Antimatter Grenade"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Shock Armour" Material="Chitin" Level="1"/>
+<Armour Type="Military Helmet" Material="Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Gauntlets" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Laser Rifle" Level="0"/>
+<Armour Type="Power Armour" Material="Steel" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Chitin" Level="3"/>
+  <Inv Count="2">
+<Armour Type="Cap" Material="Carbon Fibre" Level="3"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Armour Type="Chestplate" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Laser Rifle" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Cap" Material="Composite" Level="2"/>
+<Weapon Type="Shotgun" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Mithril" Level="2"/>
+<Armour Type="Heavy Power Armour" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Arc Rifle" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Composite" Level="2"/>
@@ -8499,31 +8851,31 @@
   <Inv Count="1">
 <Armour Type="Helmet" Material="Chitin" Level="1"/>
   </Inv>
-  <Inv Count="2">
-<Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
+  <Inv Count="1">
+<Weapon Type="Power Axe" Level="1"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="3">
 <Armour Type="Helmet" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Composite" Level="2"/>
   </Inv>
-  <Inv Count="2">
-<Weapon Type="Quad Shotgun" Level="1"/>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Power Armour" Material="Heavy Chitin" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Assault Power Armour" Material="Kevlar" Level="0"/>
+  <Inv Count="2">
+<Armour Type="Gloves" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Flame Thrower" Level="2"/>
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Aeromesh" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="4">
 <Weapon Type="Sniper Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -8533,7 +8885,7 @@
 <Armour Type="Shielded Power Armour" Material="Heavy Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="3"/>
+<Weapon Type="Laser Rifle" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="1"/>
@@ -8542,16 +8894,55 @@
 <Armour Type="Powered Arm Plating" Material="Heavy Chitin" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="1"/>
+<Weapon Type="Heavy Rifle" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Shielded Power Armour" Material="Kevlar" Level="0"/>
+  <Inv Count="2">
+<Armour Type="Stealth Helmet" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Heavy Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Pistol" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Shock Armour" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Kevlar" Level="3"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Nanomesh" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Chitin" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Ultramesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Steel" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Grenade Launcher" Level="3"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Shielded Power Armour" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Full Armour" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Quad Shotgun" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="2"/>
   </Inv>
  </Inventory>
 </Colony>
@@ -8566,11 +8957,11 @@
 <Temp>267</Temp>
 <Seed>1366280</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Trading</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>678160980966340000</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678718656000000000</NextGrowth>
+ <LastGrowth>678718656000000000</LastGrowth>
+ <NextGrowth>681054048000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Eva Nolan">
  <Level>3</Level>
@@ -8851,11 +9242,11 @@
 <Temp>291</Temp>
 <Seed>5620967</Seed>
 <Colony>
- <BaseType>Outpost, Military</BaseType>
+ <BaseType>Outpost, Military, Trading</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>678166755941050000</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678908736000000000</NextGrowth>
+ <LastGrowth>678908736000000000</LastGrowth>
+ <NextGrowth>683821440000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Vera Quimby">
  <Level>2</Level>
@@ -9398,11 +9789,11 @@
 <Temp>216</Temp>
 <Seed>2185176</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Trading</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>678171377511824218</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678821472000000000</NextGrowth>
+ <LastGrowth>678821472000000000</LastGrowth>
+ <NextGrowth>681073920000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Konrad Young">
  <Level>3</Level>
@@ -9969,11 +10360,11 @@
 <Temp>198</Temp>
 <Seed>6359450</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Colony</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>678169465447230000</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678635712000000000</NextGrowth>
+ <LastGrowth>678635712000000000</LastGrowth>
+ <NextGrowth>680836320000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Vera Cooper">
  <Level>6</Level>
@@ -10653,11 +11044,11 @@
 <Temp>265</Temp>
 <Seed>3017885</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Colony</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>0</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678678912000000000</NextGrowth>
+ <LastGrowth>678678912000000000</LastGrowth>
+ <NextGrowth>680959008000000000</NextGrowth>
 </Colony>
 <TempBase>265.5173559670655</TempBase>
 <Type>Gas</Type>
@@ -10679,11 +11070,11 @@
 <Temp>269</Temp>
 <Seed>1060321</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Military</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>0</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678773952000000000</NextGrowth>
+ <LastGrowth>678773952000000000</LastGrowth>
+ <NextGrowth>680896800000000000</NextGrowth>
 </Colony>
 <Type>Ice</Type>
 </Moon>
@@ -10809,106 +11200,58 @@
 <Temp>207</Temp>
 <Seed>9073660</Seed>
 <Colony>
- <BaseType>Outpost</BaseType>
+ <BaseType>Outpost, Colony</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>678217380342895886</LastUpdate>
- <LastGrowth>678158784000000000</LastGrowth>
- <NextGrowth>678897504000000000</NextGrowth>
+ <LastUpdate>678435688477870521</LastUpdate>
+ <LastGrowth>678897504000000000</LastGrowth>
+ <NextGrowth>681099840000000000</NextGrowth>
  <Mercenaries>
-<Soldier Name="Bridgit Xanthos">
- <Level>3</Level>
+<Soldier Name="Colin Kane">
+ <Level>4</Level>
  <XP>0</XP>
- <Gender>Female</Gender>
+ <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>15,12,12,13,11</Stats>
+ <Stats>12,10,14,13,11</Stats>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="2">
-<Equipment Type="Frag Grenade"/>
+<Equipment Type="Stimulant"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
 <Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Shortblade" Level="1"/>
+<Weapon Type="Axe" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">134</Exp>
+  <Exp Type="Melee">283</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
   <Exp Skill="Avoidance">1</Exp>
-  <Exp Skill="Scavenging">1</Exp>
-  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Perception">2</Exp>
+  <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
 </Soldier>
  </Mercenaries>
  <Missions>
 <Mission>
- <Type>Caves</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>39.75</Reward>
- <Diff>4</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>312386001</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="1593435926" Diff="4">
- <Name>Enemy Ship</Name>
- <Hull>11</Hull>
- <Shield>0</Shield>
- <Seed>189855</Seed>
- <Eqp ID="4" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="3" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>35.13</Reward>
- <Diff>4</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1741897172</Seed>
-</Mission>
-<Mission>
- <Type>Caves</Type>
+ <Type>Surface</Type>
  <Goal>FindItem</Goal>
-<MissionItem Mass="5.93" Cost="39.33">Mysterious Luminous Crystal</MissionItem>
- <Enemy>Ogres</Enemy>
+<MissionItem Mass="5.07" Cost="18.84">Ethereal Luminous Medal</MissionItem>
+ <Enemy>Bugs</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>179.17</Reward>
- <Diff>7</Diff>
- <LevelCount>2</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>974594662</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Rock Creatures</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>56.08</Reward>
- <Diff>5</Diff>
+ <Reward>37.8</Reward>
+ <Diff>4</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>1067452521</Seed>
+ <Seed>97511296</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
@@ -10917,164 +11260,175 @@
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>85.69</Reward>
- <Diff>6</Diff>
+ <Reward>34.92</Reward>
+ <Diff>4</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>1406118098</Seed>
- <Size>3</Size>
+ <Seed>819390625</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>24.98</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1607722070</Seed>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="5.51" Cost="18.30">Ancient Transparent Device</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>31.73</Reward>
+ <Diff>4</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1798686231</Seed>
 </Mission>
  </Missions>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Stimulant"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Incendiary Grenade"/>
+<Weapon Type="Laser Sniper Rifle" Level="1"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="1">
 <Weapon Type="Shotgun" Level="0"/>
   </Inv>
-  <Inv Count="2">
-<Weapon Type="Shotgun" Level="1"/>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Quad Shotgun" Level="2"/>
+<Weapon Type="Quad Shotgun" Level="0"/>
   </Inv>
-  <Inv Count="23">
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Kevlar" Level="3"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Heavy Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Sonic Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="2">
 <Weapon Type="Pistol" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Automatic Rifle" Level="1"/>
+<Armour Type="Gloves" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Laser Rifle" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Weapon Type="Laser Pistol" Level="0"/>
+<Armour Type="Gloves" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Gauss Cannon" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Weapon Type="Arc Rifle" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Sniper Rifle" Level="0"/>
-  </Inv>
-  <Inv Count="13">
-<Weapon Type="Shortblade" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Weapon Type="Axe" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Chainsword" Level="0"/>
-  </Inv>
-  <Inv Count="14">
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="8">
-<Armour Type="Cap" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Cap" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Chitin" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Nanomesh" Level="3"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Boots" Material="Mithril" Level="0"/>
+<Armour Type="Cap" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Cap" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
+<Weapon Type="Sniper Rifle" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Gauss Sniper Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Pistol" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Infiltrator Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Automatic Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Chainsword" Level="1"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Cap" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Arc Rifle" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Weapon Type="Laser Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Composite" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Sniper Rifle" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Gloves" Material="Composite" Level="2"/>
@@ -11086,13 +11440,88 @@
 <Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Full Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Power Armour" Material="Kevlar" Level="1"/>
+<Armour Type="Heavy Power Armour" Material="Chitin" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Heavy Power Armour" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Sniper Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Heavy Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Chainsword" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Pistol" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Arc Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Shielded Power Armour" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Gauss Cannon" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Gloves" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Gauntlets" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
   </Inv>
  </Inventory>
 </Colony>
@@ -11280,7 +11709,497 @@
 <Star ID="8">
 <Seed>3796426</Seed>
  <MapPos X="0.93" Y="2"/>
-</Star>
+ <Planets>
+<Planet ID="0">
+<Orbit>62662020195</Orbit>
+<Radius>7540322</Radius>
+<PRot>66034171</PRot>
+<ARot>115697</ARot>
+<Temp>404</Temp>
+<Seed>8493519</Seed>
+<TempBase>404.70765869003515</TempBase>
+<Type>Volcanic</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>344863112</Orbit>
+<Radius>1392321</Radius>
+<PRot>2661769</PRot>
+<ARot>2332587</ARot>
+<Temp>364</Temp>
+<Seed>1387267</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>784130209</Orbit>
+<Radius>1189082</Radius>
+<PRot>1318904</PRot>
+<ARot>1429883</ARot>
+<Temp>409</Temp>
+<Seed>4478654</Seed>
+<Type>Volcanic</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Orbit>87622709133</Orbit>
+<Radius>55668961</Radius>
+<PRot>16469047</PRot>
+<ARot>646626</ARot>
+<Temp>297</Temp>
+<Seed>4568585</Seed>
+<TempBase>297.3961857364309</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>410501555</Orbit>
+<Radius>1719862</Radius>
+<PRot>2086751</PRot>
+<ARot>1832427</ARot>
+<Temp>259</Temp>
+<Seed>4064491</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>853312747</Orbit>
+<Radius>1380005</Radius>
+<PRot>1216080</PRot>
+<ARot>1200117</ARot>
+<Temp>257</Temp>
+<Seed>6263785</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1281840365</Orbit>
+<Radius>1452319</Radius>
+<PRot>713422</PRot>
+<ARot>673324</ARot>
+<Temp>265</Temp>
+<Seed>1642831</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1681822825</Orbit>
+<Radius>1387020</Radius>
+<PRot>559209</PRot>
+<ARot>535596</ARot>
+<Temp>292</Temp>
+<Seed>187878</Seed>
+<Type>Oceanic</Type>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>140.02</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1120953360</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
+ <Enemy>Xenomorphs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1518419601</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.10" Cost="5.65">Alien Emerald</MissionItem>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>939522820</Seed>
+ <Size>2</Size>
+</Mission>
+ </Missions>
+</Moon>
+<Moon ID="4">
+<Orbit>2086450054</Orbit>
+<Radius>1492461</Radius>
+<PRot>486352</PRot>
+<ARot>483592</ARot>
+<Temp>293</Temp>
+<Seed>6055582</Seed>
+<Type>Oceanic</Type>
+</Moon>
+<Moon ID="5">
+<Orbit>2417098051</Orbit>
+<Radius>1537820</Radius>
+<PRot>343995</PRot>
+<ARot>324721</ARot>
+<Temp>271</Temp>
+<Seed>5789816</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Orbit>124079282219</Orbit>
+<Radius>61291833</Radius>
+<PRot>11796048</PRot>
+<ARot>819650</ARot>
+<Temp>249</Temp>
+<Seed>3227822</Seed>
+<TempBase>249.45414170491802</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>509704284</Orbit>
+<Radius>853629</Radius>
+<PRot>2380747</PRot>
+<ARot>2471582</ARot>
+<Temp>223</Temp>
+<Seed>8764070</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>833165519</Orbit>
+<Radius>1117806</Radius>
+<PRot>1238708</PRot>
+<ARot>1046750</ARot>
+<Temp>209</Temp>
+<Seed>9623876</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1187747990</Orbit>
+<Radius>1437063</Radius>
+<PRot>811238</PRot>
+<ARot>735158</ARot>
+<Temp>245</Temp>
+<Seed>4668118</Seed>
+<Type>Ice</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1701446730</Orbit>
+<Radius>1310904</Radius>
+<PRot>575550</PRot>
+<ARot>554130</ARot>
+<Temp>209</Temp>
+<Seed>2112726</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="4">
+<Orbit>2024578919</Orbit>
+<Radius>1459749</Radius>
+<PRot>459967</PRot>
+<ARot>506198</ARot>
+<Temp>241</Temp>
+<Seed>7475952</Seed>
+<Type>Ice</Type>
+</Moon>
+<Moon ID="5">
+<Orbit>2509101828</Orbit>
+<Radius>1454057</Radius>
+<PRot>358864</PRot>
+<ARot>358575</ARot>
+<Temp>209</Temp>
+<Seed>377494</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="6">
+<Orbit>2818417512</Orbit>
+<Radius>1958605</Radius>
+<PRot>293101</PRot>
+<ARot>268003</ARot>
+<Temp>245</Temp>
+<Seed>7520752</Seed>
+<Type>Ice</Type>
+</Moon>
+<Moon ID="7">
+<Orbit>3246832919</Orbit>
+<Radius>1572238</Radius>
+<PRot>289618</PRot>
+<ARot>269542</ARot>
+<Temp>217</Temp>
+<Seed>6654048</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Orbit>172997534285</Orbit>
+<Radius>5920567</Radius>
+<PRot>26635786</PRot>
+<ARot>83105</ARot>
+<Temp>220</Temp>
+<Seed>9314946</Seed>
+<TempBase>220.83677851467638</TempBase>
+<Type>Desert</Type>
+ <Missions>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>130.89</Reward>
+ <Diff>8</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1992898044</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="0.90" Cost="5.21">Luminous Statue</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1771233216</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.50" Cost="6.21">Glowing Ruby</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1242693569</Seed>
+ <Size>3</Size>
+</Mission>
+ </Missions>
+<Moons>
+<Moon ID="0">
+<Orbit>402423181</Orbit>
+<Radius>1491989</Radius>
+<PRot>2554635</PRot>
+<ARot>2602590</ARot>
+<Temp>185</Temp>
+<Seed>8668577</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>794739252</Orbit>
+<Radius>1426419</Radius>
+<PRot>1251700</PRot>
+<ARot>1235573</ARot>
+<Temp>179</Temp>
+<Seed>5939795</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Orbit>244945226880</Orbit>
+<Radius>6067981</Radius>
+<PRot>19245308</PRot>
+<ARot>83976</ARot>
+<Temp>196</Temp>
+<Seed>2045992</Seed>
+<TempBase>196.05581607049362</TempBase>
+<Type>Rocky</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>422518787</Orbit>
+<Radius>1557861</Radius>
+<PRot>2220639</PRot>
+<ARot>2203425</ARot>
+<Temp>163</Temp>
+<Seed>2860857</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>723042720</Orbit>
+<Radius>1650421</Radius>
+<PRot>1231129</PRot>
+<ARot>1160318</ARot>
+<Temp>159</Temp>
+<Seed>7277369</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="5">
+<Orbit>344567534543</Orbit>
+<Radius>64664197</Radius>
+<PRot>4172611</PRot>
+<ARot>817515</ARot>
+<Temp>149</Temp>
+<Seed>7958609</Seed>
+<TempBase>149.27028693661552</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>528560348</Orbit>
+<Radius>1615656</Radius>
+<PRot>1881809</PRot>
+<ARot>1789299</ARot>
+<Temp>114</Temp>
+<Seed>5186238</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>802557616</Orbit>
+<Radius>1378584</Radius>
+<PRot>1104015</PRot>
+<ARot>1005299</ARot>
+<Temp>118</Temp>
+<Seed>5709771</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1317461387</Orbit>
+<Radius>1830489</Radius>
+<PRot>654299</PRot>
+<ARot>685067</ARot>
+<Temp>118</Temp>
+<Seed>4754795</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="3">
+<Orbit>1672057975</Orbit>
+<Radius>1322881</Radius>
+<PRot>596209</PRot>
+<ARot>648493</ARot>
+<Temp>111</Temp>
+<Seed>4341795</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="4">
+<Orbit>2068252177</Orbit>
+<Radius>1162528</Radius>
+<PRot>424154</PRot>
+<ARot>426364</ARot>
+<Temp>111</Temp>
+<Seed>4396339</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="5">
+<Orbit>2433969212</Orbit>
+<Radius>1090162</Radius>
+<PRot>464383</PRot>
+<ARot>436063</ARot>
+<Temp>122</Temp>
+<Seed>5560801</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="6">
+<Orbit>2784791192</Orbit>
+<Radius>1366214</Radius>
+<PRot>351960</PRot>
+<ARot>331873</ARot>
+<Temp>115</Temp>
+<Seed>8282285</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="7">
+<Orbit>3235452619</Orbit>
+<Radius>1534667</Radius>
+<PRot>269764</PRot>
+<ARot>294811</ARot>
+<Temp>115</Temp>
+<Seed>5277770</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="6">
+<Orbit>481624936097</Orbit>
+<Radius>6575975</Radius>
+<PRot>9450234</PRot>
+<ARot>92264</ARot>
+<Temp>132</Temp>
+<Seed>2448545</Seed>
+<TempBase>132.08547883054356</TempBase>
+<Type>Desert</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>359927564</Orbit>
+<Radius>1144122</Radius>
+<PRot>3105382</PRot>
+<ARot>3198523</ARot>
+<Temp>94</Temp>
+<Seed>3608418</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>782599796</Orbit>
+<Radius>994513</Radius>
+<PRot>1492703</PRot>
+<ARot>1421748</ARot>
+<Temp>96</Temp>
+<Seed>9419073</Seed>
+<Type>Rocky</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="7">
+<Orbit>701915926514</Orbit>
+<Radius>55900815</Radius>
+<PRot>2269950</PRot>
+<ARot>700895</ARot>
+<Temp>104</Temp>
+<Seed>7150158</Seed>
+<TempBase>104.50015619373819</TempBase>
+<Type>Gas</Type>
+<Moons>
+<Moon ID="0">
+<Orbit>536708412</Orbit>
+<Radius>1209550</Radius>
+<PRot>2021078</PRot>
+<ARot>2098665</ARot>
+<Temp>64</Temp>
+<Seed>3855823</Seed>
+<Type>Desert</Type>
+</Moon>
+<Moon ID="1">
+<Orbit>822890845</Orbit>
+<Radius>1558894</Radius>
+<PRot>1073933</PRot>
+<ARot>1119257</ARot>
+<Temp>64</Temp>
+<Seed>5697832</Seed>
+<Type>Rocky</Type>
+</Moon>
+<Moon ID="2">
+<Orbit>1147966846</Orbit>
+<Radius>1347257</Radius>
+<PRot>775381</PRot>
+<ARot>701801</ARot>
+<Temp>64</Temp>
+<Seed>7237872</Seed>
+<Type>Desert</Type>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="8">
+<Orbit>995948097740</Orbit>
+<Radius>6379208</Radius>
+<PRot>4810231</PRot>
+<ARot>97798</ARot>
+<Temp>91</Temp>
+<Seed>5733091</Seed>
+<TempBase>91.79871767114169</TempBase>
+<Type>Desert</Type>
+<Moons>
+</Moons>
+</Planet>
+ </Planets>
+ <Visited/></Star>
 <Star ID="9">
 <Seed>8927798</Seed>
  <MapPos X="1.95" Y="2.92"/>
@@ -36524,17 +37443,18 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)7.HG</Pos>
- <Cash>158.9617006699647</Cash>
+ <Pos>(0,0)8.1.3</Pos>
+ <Cash>779.5221316708489</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="63" Y="15"/>
+ <OnMission/>
+ <Location X="13" Y="9"/>
  <Health>28</Health>
  <Stamina>34</Stamina>
  <Shields>0</Shields>
- <Facing>111.80140948635182</Facing>
+ <Facing>66.80140948635182</Facing>
  <Level>6</Level>
- <XP>32692</XP>
+ <XP>35681</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,18</Stats>
@@ -36559,7 +37479,7 @@
 <Weapon Type="Laser Rifle" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">445</Exp>
+  <Exp Type="Rifle">476</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
@@ -36568,19 +37488,20 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="60" Y="31"/>
- <Health>12.065554104847571</Health>
+ <OnMission/>
+ <Location X="19" Y="10"/>
+ <Health>32.41382222674591</Health>
  <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>0</Facing>
  <Level>6</Level>
- <XP>28293</XP>
+ <XP>31282</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,18,12</Stats>
  <Colour>#FFE600</Colour>
  <Inventory>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
@@ -36588,6 +37509,15 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Powerblade" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -36602,7 +37532,7 @@
 <Weapon Type="Quad Shotgun" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">271</Exp>
+  <Exp Type="Shotgun">285</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -36611,13 +37541,14 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="60" Y="21"/>
- <Health>7.649684048425328</Health>
- <Stamina>8.15111227014863</Stamina>
+ <OnMission/>
+ <Location X="16" Y="15"/>
+ <Health>28</Health>
+ <Stamina>8.63653702387743</Stamina>
  <Shields>0</Shields>
- <Facing>90</Facing>
+ <Facing>0</Facing>
  <Level>6</Level>
- <XP>27365</XP>
+ <XP>30354</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,12,12,7</Stats>
@@ -36630,13 +37561,16 @@
 <Equipment Type="Acid Grenade"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="1">
 <Weapon Type="Powerblade" Level="1"/>
   </Inv>
   <Inv Count="2">
 <Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -36648,7 +37582,7 @@
  <WeaponExperience>
   <Exp Type="Rifle">138</Exp>
   <Exp Type="Melee">355</Exp>
-  <Exp Type="Heavy">11</Exp>
+  <Exp Type="Heavy">21</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -36659,21 +37593,19 @@
  <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="63" Y="32"/>
- <Health>16.623442653586135</Health>
+ <OnMission/>
+ <Location X="9" Y="10"/>
+ <Health>28</Health>
  <Stamina>31</Stamina>
  <Shields>0</Shields>
- <Facing>260.5376777919744</Facing>
+ <Facing>40.60129464500446</Facing>
  <Level>6</Level>
- <XP>24845</XP>
+ <XP>27834</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,18,12,15</Stats>
  <Colour>Blue</Colour>
  <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
   </Inv>
@@ -36689,7 +37621,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">312</Exp>
+  <Exp Type="Sniper">330</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -36701,7 +37633,7 @@
  </Soldiers>
 <Ship Type="Corvette">
  <Name>Unnamed Ship</Name>
- <Hull>3.4804867529099943</Hull>
+ <Hull>5.19040959733525</Hull>
  <Shield>0</Shield>
  <Armour>Monofilament Plating</Armour>
  <Seed>835243</Seed>
@@ -36754,7 +37686,93 @@
   <Inv Count="1">
 <Weapon Type="Automatic Rifle" Level="1"/>
   </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+  <Inv Count="3">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Powerblade" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Axe" Level="0"/>
+  </Inv>
  </Inventory>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>43.51</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>636405992</Seed>
+ <Level ID="0">
+<MissionLevel Width="28" Height="29">
+ <Diff>5</Diff>
+ <Level>0</Level>
+ <Start X="13" Y="4"/>
+ <End X="-1" Y="-1"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBAAABBBBBBAABBBBBABABBBBAAAAAAAAAABBBAAAABBAAAAAABBBBAAAAAAAAAABBAAAABBAAAAAABBBBAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAAAAAAAAAAAAAAABBAABBBBAAAAAAAAAAAAAAAAAAABBBAAAABBAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAABBAAAAAAAABBAAAAAAAAAAAAAAAABBAAAAAAAABBAAAAAAAAAAAAAAAABBAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAABBBBBBBBAAAAAABBAAAAAAAAAAAABBBBBBBAAAAAAABBAAAAAAAAAAAAABBBBBAAAAAAAABBAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAABBAAAAAAAAAAAAAABBAAAAAAAAAABBAAAAAAAAAAAAAABBBAAAAAAAAABAAAAAAAAAAAAAABBBBAABBAAAABAABABBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>00111111111000011110000010100111111111111011111101111111011111111111111111111111111101111111111111111111111111110011111111111111111111111111001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000111111111111111111111111100111111111111111111111111000111111111111111111111111100011111111111111111111111111001111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111011111111111111100111111111101111111111111110</Explored>
+<Creatures>
+<Creature Type="Mercenary">
+ <Location X="4" Y="25"/>
+ <Level>5</Level>
+ <Facing>161</Facing>
+ <OverrideRace>Human</OverrideRace>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Location X="8" Y="24"/>
+ <Level>5</Level>
+ <Facing>40</Facing>
+ <OverrideRace>Human</OverrideRace>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="19" Y="10">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="17" Y="9">
+<StashItem N="1">
+<Corpse Type="Enforcer" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="16" Y="10">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="16" Y="15">
+<StashItem N="1">
+<Corpse Type="Mercenary" Level="4"/>
+</StashItem>
+</Stash>
+<Stash X="16" Y="16">
+<StashItem N="1">
+<Corpse Type="Bandit" Level="6"/>
+</StashItem>
+</Stash>
+</Stashes>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">

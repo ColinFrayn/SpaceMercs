@@ -258,7 +258,7 @@
     <Mass>1.6</Mass>
     <Cost>30</Cost>
     <Rarity>18</Rarity>
-    <Strength>1</Strength>
+    <Strength>2</Strength>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
     <Location>Hands</Location>
@@ -335,7 +335,7 @@
     <Cost>1050</Cost>
     <Rarity>65</Rarity>
     <Agility>-4</Agility>
-    <Strength>5</Strength>
+    <Strength>6</Strength>
     <Speed>1.1</Speed>
     <Attack>2</Attack>
     <BaseArmour>32</BaseArmour>

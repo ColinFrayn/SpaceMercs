@@ -2,11 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Check auto building of trade routes, colony expansion etc. (fast forward??)
-
-Cover
-- When covered from the attacker, get a def bonus
-- Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
+Check auto building of trade routes
 
 ==========================================================================================================
 
@@ -15,7 +11,7 @@ Cover
 Backburner : Features
 ---------------------
 
-Add in overwatch?
+Add overwatch?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
@@ -23,6 +19,10 @@ Add more alien-only items
 - ? [Ogrish]
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
+
+Cover
+- When covered from the attacker, get a def bonus
+- Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
 
 First Contact
 - Encounter a stranded/hostile vessel of a new alien race
