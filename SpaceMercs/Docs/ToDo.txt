@@ -4,10 +4,9 @@ ToDo List
 
 Check auto building of trade routes, colony expansion etc. (fast forward??)
 
-Ship got boarded - ended up with 2x soldier panels (2 of each soldier in the list). Investigate.
-
-How to make large weapons like heavy rifle actually good for players. Misses too often. 
-- Maybe reduce the dropoff for a few weapons?
+Cover
+- When covered from the attacker, get a def bonus
+- Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
 
 ==========================================================================================================
 
@@ -116,3 +115,4 @@ Monitor savegame file size and reduce if necessary
 
 Name planets/systems based on what the owning race's language sounds like??
 
+Update documentation

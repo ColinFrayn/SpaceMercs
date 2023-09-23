@@ -398,20 +398,23 @@ namespace SpaceMercs {
             };
             TextRenderer.DrawWithOptions(strDist + " " + strTime, tro);
 
-            // Progress Bar
-            float fract = (float)fElapsed / (float)fTravelTime;
-            GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
-
             // Source and Target AOs
             GL.Enable(EnableCap.DepthTest);
             GL.DepthMask(true);
             Matrix4 translateM = Matrix4.CreateTranslation(0.25f, 0.42f, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(1f / ParentView.Aspect, 1f, 1f);
-            prog.SetUniform("view", scaleM * translateM);
+            Matrix4 starScaleM = Matrix4.CreateScale(0.1f, 0.1f, 0.1f);
+            prog.SetUniform("view", (aoTravelFrom.AOType == AstronomicalObject.AstronomicalObjectType.Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
             aoTravelFrom.DrawSelected(prog, 8);
             translateM = Matrix4.CreateTranslation(0.75f, 0.42f, 0f);
-            prog.SetUniform("view", scaleM * translateM);
+            prog.SetUniform("view", (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
             aoTravelTo.DrawSelected(prog, 8);
+
+            // Progress Bar
+            GL.Disable(EnableCap.DepthTest);
+            float fract = (float)fElapsed / (float)fTravelTime;
+            GraphicsFunctions.DrawFramedFractBar(prog, 0.3f, 0.4f, 0.4f, 0.05f, fract, new Vector4(0f, 1f, 0f, 1f));
+            GL.Enable(EnableCap.DepthTest);
         }
         private void DrawSalvage(ShaderProgram prog) {
             if (PlayerTeam.CurrentMission is null) return;

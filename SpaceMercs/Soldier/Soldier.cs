@@ -342,9 +342,9 @@ namespace SpaceMercs {
         }
         public bool MeleeWeaponEquipped { get { return (EquippedWeapon != null && EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
-        public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost * (1.0 + Encumbrance)); } }
-        public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost * (1.0 + Encumbrance); } }
-        public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost * (1.0 + Encumbrance)); } }
+        public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost); } }
+        public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
+        public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost); } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public int SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
         public int PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception); } }
@@ -1082,25 +1082,25 @@ namespace SpaceMercs {
             }
             return true;
         }
-        private bool AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
+        private bool AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             HasMoved = true;
             int nhits = 0, nshots = EquippedWeapon?.Type?.Shots ?? 1;
             for (int n = 0; n < nshots; n++) {                
-                double hit = Utils.GenerateHitRoll(this, en);
+                double hit = Utils.GenerateHitRoll(this, targetEntity);
                 if (hit > 0.0) nhits++;
             }
             if (nhits == 0) {
-                if (en is Creature cre) cre.CheckChangeTarget(0.0, this);
+                if (targetEntity is Creature cre) cre.CheckChangeTarget(0.0, this);
                 return false;
             }
-            double TotalDam = en.InflictDamage(GenerateDamage(nhits));
-            if (en is Creature cr) cr.CheckChangeTarget(TotalDam, this);
+            double TotalDam = targetEntity.InflictDamage(GenerateDamage(nhits));
+            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
 
             // Graphics for damage
-            int delay = (int)(RangeTo(en) * 25.0);
+            int delay = (int)(RangeTo(targetEntity) * 25.0);
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
             Thread.Sleep(delay);
-            effectFactory(VisualEffect.EffectType.Damage, en.X + (en.Size / 2f), en.Y + (en.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+            effectFactory(VisualEffect.EffectType.Damage, targetEntity.X + (targetEntity.Size / 2f), targetEntity.Y + (targetEntity.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
 
             // Play sound
             if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
@@ -1108,13 +1108,13 @@ namespace SpaceMercs {
             // Apply effect?
             if (EquippedWeapon != null) {
                 if (EquippedWeapon.Type.ItemEffect != null) {
-                    en.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory);
+                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory);
                 }
             }
 
             // Add weapon experience
             if (EquippedWeapon != null) {
-                int exp = Math.Max(1, en.Level - Level) * Const.DEBUG_WEAPON_SKILL_MOD;
+                int exp = Math.Max(1, targetEntity.Level - Level) * Const.DEBUG_WEAPON_SKILL_MOD;
                 int maxExp = Utils.SkillLevelToExperience(Level);
                 int oldlvl = 0;
                 if (WeaponExperience.ContainsKey(EquippedWeapon.Type.WClass)) {
@@ -1174,6 +1174,8 @@ namespace SpaceMercs {
         public List<string> SearchTheArea(MissionLevel level, bool bPassive) { 
             List<string> lFound = new List<string>();
             int rad = bPassive ? PassiveSearchRadius : SearchRadius;
+            double dPenalty = Const.EncumbranceSearchPenalty * Encumbrance;
+            double baseChance = (bPassive ? PassiveSearchChance : BaseSearchChance) - dPenalty;
             Random rand = new Random();
             for (int y = Math.Max(0, Y - rad); y <= Math.Min(Y + rad, level.Height - 1); y++) {
                 for (int x = Math.Max(0, X - rad); x <= Math.Min(X + rad, level.Width - 1); x++) {
@@ -1194,7 +1196,7 @@ namespace SpaceMercs {
                         if (!level.CanSee(Location, new Point(x, y))) continue;
 
                         // If so then check if we spot it
-                        double chance = bPassive ? PassiveSearchChance : BaseSearchChance;
+                        double chance = baseChance;
                         chance -= Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * Const.SearchReduction;
                         chance -= level.ParentMission.Diff * Const.MissionDifficultySearchScale;
                         if (rand.NextDouble() * 100 <= chance) {

@@ -258,7 +258,14 @@ namespace SpaceMercs {
             double dist = from.RangeTo(to);
             double size = to.Size;
             double dropoff = (from.EquippedWeapon == null) ? 0.0 : from.EquippedWeapon.Type.DropOff;
-            double hit = Const.HitBias + ((rnd.NextDouble() - 0.5) * Const.HitScale) + ((att - def) * Const.GuaranteedHitScale) + (rnd.NextDouble() * att * Const.AttackScale) - (rnd.NextDouble() * def * Const.DefenceScale) + Math.Pow(size, Const.HitSizePowerLaw);
+            double encumbrancePenalty = from.Encumbrance * Const.EncumbranceHitPenalty;
+            double hit = Const.HitBias
+                         + ((rnd.NextDouble() - 0.5) * Const.HitScale)
+                         + ((att - def) * Const.GuaranteedHitScale)
+                         + (rnd.NextDouble() * att * Const.AttackScale)
+                         - (rnd.NextDouble() * def * Const.DefenceScale)
+                         + Math.Pow(size, Const.HitSizePowerLaw)
+                         - encumbrancePenalty;
             double dropoffmod = (dist * dropoff);
             if (from is Soldier s) {
                 hit += Const.SoldierHitBias;

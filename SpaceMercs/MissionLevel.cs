@@ -957,7 +957,6 @@ namespace SpaceMercs {
             s.UpdateVisibility(this);
             Entities.Add(s);
             EntityMap[pt.X, pt.Y] = s;
-            ParentMission.Soldiers.Add(s);
             CalculatePlayerVisibility();
         }
         private void AddCreature(Creature cr) {

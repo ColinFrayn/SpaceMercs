@@ -285,6 +285,7 @@ namespace SpaceMercs {
             }
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
+        public double Encumbrance => 0.0;
 
         // Creature-specific
         public CreatureType Type { get; private set; }
@@ -509,7 +510,6 @@ namespace SpaceMercs {
             float dx = X - en.X;
             float dy = Y - en.Y;
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
-            // TODO refreshView();
             Thread.Sleep(100);
 
             // Play weapon sound & draw shot

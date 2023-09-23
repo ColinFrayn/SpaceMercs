@@ -14,7 +14,7 @@
   <ShipEngine Name="Impulse Drive">
     <Range>0.00005</Range>
     <Speed>0.001</Speed>
-    <Accel>30</Accel>
+    <Accel>20</Accel>
     <Cost>50</Cost>
     <Power>6</Power>
     <Desc>An impulse Drive, much faster than basic thrusters, but still insufficient for interstellar travel. Can carry out small inter-planetary hops.</Desc>
@@ -34,7 +34,7 @@
   <ShipEngine Name="NearLight Drive">
     <Range>5</Range>
     <Speed>0.99</Speed>
-    <Accel>100</Accel>
+    <Accel>500</Accel>
     <Cost>500</Cost>
     <Power>16</Power>
     <Desc>A NearLight Drive, suitable for reaching the nearest stars.</Desc>

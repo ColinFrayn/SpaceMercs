@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>23/08/2150 22:57:08</Clock>
+<Clock>31/08/2150 05:22:08</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -36755,6 +36755,26 @@
 <Weapon Type="Automatic Rifle" Level="1"/>
   </Inv>
  </Inventory>
+<Mission>
+ <Type>ShipCombat</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1913709359" Diff="5">
+ <Name>Enemy Ship</Name>
+ <Hull>14.66883027701095</Hull>
+ <Shield>0</Shield>
+ <Seed>893129</Seed>
+ <Eqp ID="6" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Chain Gun</Eqp>
+ <Eqp ID="5" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">
@@ -36787,4 +36807,14 @@
 <Relations>0</Relations>
 </Race>
 </Races>
+<Travel>
+<AOFrom>(0,0)7.HG</AOFrom>
+<AOTo>(0,0)0</AOTo>
+<Time>47089492</Time>
+<Elapsed>627859.94</Elapsed>
+<MissionElapsed>0</MissionElapsed>
+<EncounterCount>1</EncounterCount>
+<Start>678361786468971823</Start>
+<Sep>6140</Sep>
+</Travel>
 </SpaceMercsSaveFile>

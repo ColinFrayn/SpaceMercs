@@ -31,6 +31,7 @@ namespace SpaceMercs {
         public const double PassiveSearchChance = 30.0; // Chance of spotting a hidden object at distance zero (plus Insight)
         public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
         public const double SearchBoostPerSkill = 5.0; // Increase in chance to spot a hidden object for each point in Perception.
+        public const double EncumbranceSearchPenalty = 20.0; // Penalty (proportionately applied) for searching when 100% encumbered.
         public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
         public const int WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
@@ -139,8 +140,10 @@ namespace SpaceMercs {
         public const double HitScale = 10.0; // Add extra randomness to help cancel out "certain hit" or "certain miss"
         public const double AttackScale = 0.8; // Bias towards attack score
         public const double DefenceScale = 0.8; // Bias towards defence score
-        public const double GuaranteedHitScale = 0.5;  // The higher this is, the higher the weighting for absolute att-def, leading to more predictable hits/misses
+        public const double GuaranteedHitScale = 0.7;  // The higher this is, the higher the weighting for absolute att-def, leading to more predictable hits/misses
+        public const double EncumbranceHitPenalty = 4.0; // When fully encumbered, reduce hit rolls by this much (or proportionately).
         public const double HitSizePowerLaw = 2.0;  // Increase chance to hit for larger creatures
+        public const double PartialCoverDefenceBonus = 2.5; // When hiding by a wall from perspective of the (ranged) attacker, increase defence by this much
         public const double BaseDetectionRange = 7.0; // Range in squares at which a creature of same level can spot you, if you're unencumbered and with default agility
         public const int CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detectionr ange
@@ -149,7 +152,7 @@ namespace SpaceMercs {
         public const double CreatureAttackDamageScale = 0.6;  // Modifier applied to damage done by Creatures
         public const double SoldierAttackDamageScale = 1.0;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
-        public const double SniperRangeMod = 0.85; // Snipers reduce drop off mod by this factor per level
+        public const double SniperRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
 
         // Miscellaneous
         public const int BufferSize = 10000;
