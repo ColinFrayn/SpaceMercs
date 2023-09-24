@@ -253,7 +253,7 @@ namespace SpaceMercs {
         }
 
         public static double GenerateHitRoll(IEntity from, IEntity to) {
-            double att = from.Attack;
+            double att = from.Attack + (from.EquippedWeapon?.AccuracyBonus ?? 0);
             double def = to.Defence;
             double dist = from.RangeTo(to);
             double size = to.Size;
@@ -273,6 +273,9 @@ namespace SpaceMercs {
                 dropoffmod *= Math.Pow(Const.SniperRangeMod, sniper);
             }
             if (dropoff > 0.0) hit -= dropoffmod; // Harder to hit at long range. 0.0 = melee weapon.
+            if (to is Creature cre && !cre.IsAlert) {
+                hit += Const.SurpriseHitMod;
+            }
             return hit;
         }
 

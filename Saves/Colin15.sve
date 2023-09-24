@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>12/01/2156 01:18:29</Clock>
+<Clock>12/01/2156 01:21:31</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -11786,45 +11786,6 @@
 <Seed>187878</Seed>
 <Type>Oceanic</Type>
  <Missions>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>140.02</Reward>
- <Diff>6</Diff>
- <LevelCount>2</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1120953360</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
- <Enemy>Xenomorphs</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>6</Diff>
- <LevelCount>2</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1518419601</Seed>
- <Size>3</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="1.10" Cost="5.65">Alien Emerald</MissionItem>
- <Enemy>Arachnids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>939522820</Seed>
- <Size>2</Size>
-</Mission>
  </Missions>
 </Moon>
 <Moon ID="4">
@@ -37444,17 +37405,17 @@
 </Map>
 <Team>
  <Pos>(0,0)8.1.3</Pos>
- <Cash>779.5221316708489</Cash>
+ <Cash>963.0521316708489</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <OnMission/>
- <Location X="13" Y="9"/>
+ <Location X="23" Y="17"/>
  <Health>28</Health>
  <Stamina>34</Stamina>
  <Shields>0</Shields>
- <Facing>66.80140948635182</Facing>
+ <Facing>-90</Facing>
  <Level>6</Level>
- <XP>35681</XP>
+ <XP>39780</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,11,12,18</Stats>
@@ -37463,7 +37424,7 @@
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
@@ -37479,7 +37440,7 @@
 <Weapon Type="Laser Rifle" Level="2"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">476</Exp>
+  <Exp Type="Rifle">509</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
@@ -37489,19 +37450,19 @@
 </Soldier>
 <Soldier Name="Tracy Nolan">
  <OnMission/>
- <Location X="19" Y="10"/>
- <Health>32.41382222674591</Health>
+ <Location X="24" Y="16"/>
+ <Health>34</Health>
  <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>6</Level>
- <XP>31282</XP>
+ <XP>35381</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,18,12</Stats>
  <Colour>#FFE600</Colour>
  <Inventory>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
@@ -37511,13 +37472,7 @@
 <Equipment Type="Nannite Medsystem"/>
   </Inv>
   <Inv Count="1">
-<Weapon Type="Shortblade" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Powerblade" Level="0"/>
+<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -37532,7 +37487,7 @@
 <Weapon Type="Quad Shotgun" Level="1"/>
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">285</Exp>
+  <Exp Type="Shotgun">301</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -37542,23 +37497,20 @@
 </Soldier>
 <Soldier Name="Mel Webster">
  <OnMission/>
- <Location X="16" Y="15"/>
- <Health>28</Health>
- <Stamina>8.63653702387743</Stamina>
+ <Location X="25" Y="15"/>
+ <Health>22.289678066090595</Health>
+ <Stamina>4.275739003802398</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>6</Level>
- <XP>30354</XP>
+ <XP>34453</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,12,12,7</Stats>
  <Colour>Red</Colour>
  <Inventory>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Stimulant"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Acid Grenade"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Powerblade" Level="1"/>
@@ -37567,10 +37519,16 @@
 <Equipment Type="Medikit"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
+<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+<Material Type="Chitin"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Pistol" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -37582,7 +37540,7 @@
  <WeaponExperience>
   <Exp Type="Rifle">138</Exp>
   <Exp Type="Melee">355</Exp>
-  <Exp Type="Heavy">21</Exp>
+  <Exp Type="Heavy">33</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -37594,13 +37552,13 @@
 </Soldier>
 <Soldier Name="Owen Gibbs">
  <OnMission/>
- <Location X="9" Y="10"/>
+ <Location X="25" Y="18"/>
  <Health>28</Health>
  <Stamina>31</Stamina>
  <Shields>0</Shields>
- <Facing>40.60129464500446</Facing>
+ <Facing>-90</Facing>
  <Level>6</Level>
- <XP>27834</XP>
+ <XP>31933</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,18,12,15</Stats>
@@ -37621,7 +37579,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">330</Exp>
+  <Exp Type="Sniper">351</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -37659,7 +37617,7 @@
   <Inv Count="4">
 <Material Type="Fabric"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Medikit"/>
   </Inv>
   <Inv Count="8">
@@ -37671,7 +37629,7 @@
   <Inv Count="3">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Material Type="Rubber"/>
   </Inv>
   <Inv Count="5">
@@ -37683,7 +37641,7 @@
   <Inv Count="15">
 <Material Type="Chitin"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Weapon Type="Automatic Rifle" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -37695,10 +37653,10 @@
   <Inv Count="3">
 <Equipment Type="Frag Grenade"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Weapon Type="Automatic Rifle" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Weapon Type="Powerblade" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -37707,69 +37665,152 @@
   <Inv Count="1">
 <Weapon Type="Axe" Level="0"/>
   </Inv>
+  <Inv Count="1">
+<Weapon Type="Sniper Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Cap" Material="Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Shortblade" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Cap" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Chainsword" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Heavy Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Pistol" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Chitin" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<MissionItem Mass="1.10" Cost="5.65">Alien Emerald</MissionItem>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Arc Rifle" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="0"/>
+  </Inv>
  </Inventory>
 <Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
+ <Enemy>Xenomorphs</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>43.51</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>636405992</Seed>
+ <Seed>1518419601</Seed>
+ <Size>3</Size>
  <Level ID="0">
-<MissionLevel Width="28" Height="29">
+<MissionLevel Width="49" Height="39">
  <Diff>5</Diff>
  <Level>0</Level>
- <Start X="13" Y="4"/>
- <End X="-1" Y="-1"/>
- <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBAAABBBBBBAABBBBBABABBBBAAAAAAAAAABBBAAAABBAAAAAABBBBAAAAAAAAAABBAAAABBAAAAAABBBBAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAAAAAAAAAAAAAAABBAABBBBAAAAAAAAAAAAAAAAAAABBBAAAABBAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAABBAAAAAAAABBAAAAAAAAAAAAAAAABBAAAAAAAABBAAAAAAAAAAAAAAAABBAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAABBBBBBBBAAAAAABBAAAAAAAAAAAABBBBBBBAAAAAAABBAAAAAAAAAAAAABBBBBAAAAAAAABBAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAABBAAAAAAAAAAAAAABBAAAAAAAAAABBAAAAAAAAAAAAAABBBAAAAAAAAABAAAAAAAAAAAAAABBBBAABBAAAABAABABBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
- <Explored>00111111111000011110000010100111111111111011111101111111011111111111111111111111111101111111111111111111111111110011111111111111111111111111001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000111111111111111111111111100111111111111111111111111000111111111111111111111111100011111111111111111111111111001111111110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101111111111011111111111111100111111111101111111111111110</Explored>
+ <Start X="28" Y="34"/>
+ <End X="10" Y="5"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBAABBBBBBBABBBBBBBBBBBBBBAABAABBBBBBBBBBBBBBBBAABBAABBBBBBAAABBBBBBAABBAAAAAAAABBBBAAAABBBBBABBAABBABBBBBBAAABBBBBBAAABBAAAAAAABBBBAAAAAABBAAAAAAAAAABAABBAAAABBBBBAAAABAAAAAAABBBBBBAAAABBBAAAAAAAAAAAAAAAAAAABABAAAAAAABAAAAABBBBBBBAAABBBBAAABBBBBAAAAAAAAAABAAAAAAAAAABBAAAABBAABBBAAABBBAAAABBBBBBAAAAAAAABBAAAAAAAAAABAAAAABBAABBBAAABBAAAAABBBBBAAAAAAAAABAAAAAAAAAAAABBAAAAAAABBBAAAAAAAABBBAABAAAAAAAABBAAAAAABBAAAABBBAABBBAABBBAAAAAAABBBBAAAABAAAAAABBBAAAABBBAAAAABAABBBBABBBAAABBAABBBBBBABBBAAAAAABBBBAABBBAAAAAAAABBBBAABBBBAABBBBBBBBBBBABBAAAAAABBBBAAABAAAAAAAABBBBBAAABBBBAAABBBBBBBBAAABAAAAAAABAAAAAABAAAAAAABBBBBBAABBBBAAABBBBBAAAAAAABBAAAAAAAAAAAABBAAAAAABBBBBBBBBBAAAAAABBBAABBAAAABBAAAAAAAAAAAABBAAAAAABBBBBBBBBBAAAAAABBBAABBAABBBBBAAAAAAAAAABBAAAAABBBBAAABBBBBBAAAAAAAAAAAAABBBAAAAAAAAABBAABBBABABBBBAAAAAAABBBAAAAAAAAAAAAABBAAAABAAAABBBBABBBBBBBBBAAAAAAAABBBBAAAAAAAAAAAAABAAAABBAAAABBBAABABBBBAAAAAAAAAABBBBAAAAAAAAAAAABBAAABBBAAAABBBBAAAABBBAAAAAAAAAABBBBAAAAAAAAAAAAABAAABBAAAAAABBBAAAABBBAAAAAAAAAABBBBAAAAAAAAAAAAABBBBBAAAAAAAAABBBAABBBAABAAAAAAABBBBBAAAAAAABBAAAABBBBBAAAAAAAABBBBABAAABBAAAABBBBBBBAAAAAAAABBBAAAAAABBBAAAAAAABBBBBAABBABABAABBBBBBABBAAAAABBBBAAAAAAABBAAAAAAAABBBBBBBAAAABAABBBBBAABBAAAAAABBAAAAAAAABBBAAAAAAAABBBBBBAAAABBBBBBBBAAAAAABBAABBAAAABBAAAABBBBAAAAABBAAAAAAAAAABBBBBBBAAAAABBAAABBBAABBAAAAAABBAAAABBBAAAAAAAAAAABBBBBBAAAAAAAAAABBBAAAAAAAAAABBAAAAABBAAAAAAAAAAAABBBBBBBAAAAAAAAAAAAAAAAAAABBBAAAAABBAAAAAAABBAAAAABBBBBBAAAAAAAAAAAAAAAAAAABBAAAAAABBAAAAAAABBAAAAABBBBAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAABBAAAAAAABBAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAABBBBAAAAAABBAABBBAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAABBABBBBAABBAABBBAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBAAAAAABBAAAAABBBBAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBAAAAAABBAAAABBBBBBAAAAABAABBBAABAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>000000000000000000000000000000000000000000000000000000000000001100100000000000000000111000000000000000000000000111111000000000000000111100000000000000000000000011111111111100000001111110000000000000000000000000011111111110000001111111000000000000000000000000000111111111000001111110000000000000000000000000000011111111100000111110000000000000000000000000000001111111110000011110000000000000000000000000000000111111111000011110000000000000000000000000000000011111111100001111000000000000000000000000000000000111111110000111100000000000000000000000000000000011111111001111110000000000000000000000000000000001111111111111110000000000000000000000000000000000111111111111111100000000000000000000000000000000001111111111111110000000000000000000000000000000000111111111111111000000011111100000000000000000000111111111111111100000011111111110000000000000000111111111111111110000011111111111000000000000000011111111111111000000011111111111100000000000000001111011111110000000001111111111110000000000000000110001111111110000000111111111111000000000000000000001111111111100000011111111111100000000000000000000111111111110000011111111111110000000000000000000011111111111000011111111111111000000000000000000001111111111110011111111111100000000000000000000000011111111111101111111111110000000000000000000000001111111111111111111111111000000000000000000000000001111111111111111111111100001100000000000000000000001111111111111111111111000001111100000000000000000111111111111111111111110000000001111100000000000111111111111111111111111000011111000001111100000111111111111111111111111110000000011111111111111111111111111111111101111111000000000000000000000111111111111111111111111111100000000000000000000011111111111111111111111111110000000000000000000001111111111111111111111101111000000000000000000000011111111111111111111110000000000000000000000000001111111111111111111110000000000000000000000000000011111111110111111111000000</Explored>
 <Creatures>
-<Creature Type="Mercenary">
- <Location X="4" Y="25"/>
+<Creature Type="Xenomorph">
+ <Location X="4" Y="19"/>
  <Level>5</Level>
- <Facing>161</Facing>
- <OverrideRace>Human</OverrideRace>
- <Weapon>Shortblade</Weapon>
+ <Facing>322</Facing>
 </Creature>
-<Creature Type="Bandit">
- <Location X="8" Y="24"/>
+<Creature Type="Xenomorph">
+ <Location X="5" Y="23"/>
  <Level>5</Level>
- <Facing>40</Facing>
- <OverrideRace>Human</OverrideRace>
- <Weapon>Shortblade</Weapon>
+ <Facing>43</Facing>
+</Creature>
+<Creature Type="Xenomorph Scythebeast">
+ <Location X="7" Y="24"/>
+ <Level>5</Level>
+ <Facing>212</Facing>
+</Creature>
+<Creature Type="Xenomorph Soldier">
+ <Location X="11" Y="20"/>
+ <Level>5</Level>
+ <Facing>352</Facing>
+</Creature>
+<Creature Type="Xenomorph">
+ <Location X="3" Y="19"/>
+ <Level>5</Level>
+ <Facing>134</Facing>
+</Creature>
+<Creature Type="Xenomorph Soldier">
+ <Location X="2" Y="33"/>
+ <Level>5</Level>
+ <Facing>290</Facing>
+</Creature>
+<Creature Type="Xenomorph">
+ <Location X="6" Y="33"/>
+ <Level>6</Level>
+ <Facing>322</Facing>
+</Creature>
+<Creature Type="Xenomorph">
+ <Location X="5" Y="33"/>
+ <Level>5</Level>
+ <Facing>134</Facing>
+</Creature>
+<Creature Type="Xenomorph Soldier">
+ <Location X="19" Y="6"/>
+ <Level>5</Level>
+ <Facing>73</Facing>
+ <QuestItem/>
+</Creature>
+<Creature Type="Xenomorph">
+ <Location X="18" Y="4"/>
+ <Level>5</Level>
+ <Facing>299</Facing>
 </Creature>
 </Creatures>
 <Stashes>
-<Stash X="19" Y="10">
+<Stash X="19" Y="21">
 <StashItem N="1">
-<Corpse Type="Rogue" Level="5"/>
+<Armour Type="Cap" Material="Heavy Chitin" Level="1"/>
 </StashItem>
-</Stash>
-<Stash X="17" Y="9">
 <StashItem N="1">
-<Corpse Type="Enforcer" Level="5"/>
+<Armour Type="Military Helmet" Material="Chitin" Level="0"/>
 </StashItem>
-</Stash>
-<Stash X="16" Y="10">
 <StashItem N="1">
-<Corpse Type="Rogue" Level="5"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 </StashItem>
-</Stash>
-<Stash X="16" Y="15">
 <StashItem N="1">
-<Corpse Type="Mercenary" Level="4"/>
+<Armour Type="Cap" Material="Chitin" Level="0"/>
 </StashItem>
+<StashItem N="2">
+<MissionItem Mass="0.90" Cost="6.96">Glowing Geode</MissionItem>
+</StashItem>
+<Hidden/>
 </Stash>
-<Stash X="16" Y="16">
+<Stash X="41" Y="24">
 <StashItem N="1">
-<Corpse Type="Bandit" Level="6"/>
+<Corpse Type="Xenomorph" Level="5"/>
 </StashItem>
 </Stash>
 </Stashes>
+<Traps>
+<Trap X="26" Y="30" L="6">
+<Type>Acid</Type>
+</Trap>
+</Traps>
 </MissionLevel>
  </Level>
 </Mission>

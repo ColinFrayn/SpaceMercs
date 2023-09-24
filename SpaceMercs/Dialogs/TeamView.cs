@@ -121,7 +121,7 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.lbHealthTotal, s.BaseHealth + " (base) + " + s.StatBonuses(StatType.Health) + " (items)");
             lbAttackTotal.Text = s.Attack.ToString();
             double bfi = s.StatBonuses(StatType.Attack);
-            if (s.EquippedWeapon != null) bfi += s.EquippedWeapon.AttackBonus;
+            //if (s.EquippedWeapon != null) bfi += s.EquippedWeapon.AccuracyBonus;
             ttSoldier.SetToolTip(this.lbAttackTotal, s.BaseAttack + " (base) + " + bfi + " (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : ""));
             lbDefenceTotal.Text = s.Defence.ToString();
             ttSoldier.SetToolTip(this.lbDefenceTotal, s.BaseDefence + " (base) + " + s.StatBonuses(StatType.Defence) + " (items) + " + s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance) + " (skills)");

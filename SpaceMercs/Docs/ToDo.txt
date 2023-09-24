@@ -4,6 +4,11 @@ ToDo List
 
 Check auto building of trade routes
 
+Sniper silencer? UpdateDetectionForLocation() is where this happens
+
+Change Stamina: Level is added to max, but amount regenerated each turn is endurance + base.
+- Maybe encumbrance just affects Stamina regen??
+
 ==========================================================================================================
 
 

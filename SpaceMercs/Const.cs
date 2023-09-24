@@ -154,6 +154,7 @@ namespace SpaceMercs {
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
         public const double SniperRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
+        public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
 
         // Miscellaneous
         public const int BufferSize = 10000;

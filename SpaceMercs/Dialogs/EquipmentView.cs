@@ -64,7 +64,7 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.lbHealthTotal, ThisSoldier.BaseHealth + " (base) + " + ThisSoldier.StatBonuses(StatType.Health) + " (items)");
             lbAttackTotal.Text = ThisSoldier.Attack.ToString();
             double bfi = ThisSoldier.StatBonuses(StatType.Attack);
-            if (ThisSoldier.EquippedWeapon != null) bfi += ThisSoldier.EquippedWeapon.AttackBonus;
+            //if (ThisSoldier.EquippedWeapon != null) bfi += ThisSoldier.EquippedWeapon.AccuracyBonus;
             ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.BaseAttack + " (base) + " + bfi + " (items)" + ((ThisSoldier.EquippedWeapon != null) ? (" + " + ThisSoldier.GetSoldierSkillWithWeapon(ThisSoldier.EquippedWeapon.Type) + " (weapon skills)") : ""));
             lbDefenceTotal.Text = ThisSoldier.Defence.ToString();
             ttSoldier.SetToolTip(this.lbDefenceTotal, ThisSoldier.BaseDefence + " (base) + " + ThisSoldier.StatBonuses(StatType.Defence) + " (items) + " + ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance) + " (skills)");
@@ -136,7 +136,7 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
-        private Color ArmourToColour(Armour? ar) {
+        private static Color ArmourToColour(Armour? ar) {
             if (ar is null) return Color.Black;
             if (ar.BaseArmour == 0.0) return Color.Gray;
             return Color.Green;

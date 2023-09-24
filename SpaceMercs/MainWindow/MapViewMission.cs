@@ -433,7 +433,7 @@ namespace SpaceMercs.MainWindow {
                             bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
                             if (bAttacked) {
                                 if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
-                                    UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, 0, Const.BaseDetectionRange)) {
+                                    UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
                                     // No alert required
                                 }
                             }
@@ -464,10 +464,9 @@ namespace SpaceMercs.MainWindow {
                 if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
                     bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
-                    //bool bAttacked = s.AttackLocation(level, hoverx, hovery, AddNewEffect, glMissionView.Invalidate, PlaySoundThreaded).Result;
                     if (bAttacked) {
                         if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
-                            UpdateDetectionForLocation(hoverx, hovery, 0, Const.BaseDetectionRange)) {
+                            UpdateDetectionForLocation(hoverx, hovery, Const.BaseDetectionRange)) {
                             // No alert required
                         }
                     }
@@ -496,7 +495,8 @@ namespace SpaceMercs.MainWindow {
                     ActionItem = null;
                     // Now apply the effect
                     ApplyItemEffectToMap(s, temp, hoverx, hovery);
-                    if (UpdateDetectionForLocation(hoverx, hovery, 0, Const.BaseDetectionRange)) {
+                    double range = Const.BaseDetectionRange - (s.GetUtilityLevel(Soldier.UtilitySkill.Stealth)/2.0);
+                    if (range >= 1.0 && UpdateDetectionForLocation(hoverx, hovery, range)) {
                         // No alert required
                     }
                 }
@@ -643,20 +643,19 @@ namespace SpaceMercs.MainWindow {
             return true;
         }
         private bool UpdateDetectionForSoldier(Soldier s, double extraRange = 0.0) {
-            if (s == null) return false;
             if (extraRange == 0.0 && !DetectionMap[s.X, s.Y]) return false;
             double baseRange = s.DetectionRange + extraRange;
-            return UpdateDetectionForLocation(s.X, s.Y, s.Level, baseRange);
+            return UpdateDetectionForLocation(s.X, s.Y, baseRange);
         }
-        private bool UpdateDetectionForLocation(int x, int y, int sLevel, double baseRange) {
+        private bool UpdateDetectionForLocation(int x, int y, double baseRange) {
+            // Calculate the effects of a noise at location x,y.
+            // baseRange is the range in which this noise can be heard
             if (x < 0 || y < 0 || x >= CurrentLevel.Width || y >= CurrentLevel.Height) return false;
             // Check every nearby creature to see if it can detect this soldier
             HashSet<Creature> hsDetected = new HashSet<Creature>();
             foreach (Creature cr in CurrentLevel.Creatures) {
                 if (!cr.IsAlert && !hsDetected.Contains(cr)) {
                     double range = baseRange;
-                    if (sLevel > 0) range += ((cr.Level - sLevel) / 3.0); // sLevel == 0 means no level bonuses to be applied
-                                                                          // Check range
                     double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
                     if (r2 <= (range * range) && cr.CanSee(x, y)) {
                         hsDetected.Add(cr);
@@ -666,17 +665,18 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             if (hsDetected.Count == 0) return false;
-            foreach (Creature crd in hsDetected) {
-                foreach (Creature cr in CurrentLevel.Creatures) {
-                    if (!cr.IsAlert) {
-                        int r2 = (crd.X - cr.X) * (crd.X - cr.X) + (crd.Y - cr.Y) * (crd.Y - cr.Y);
-                        if (r2 <= Const.CreatureAlertWarningDistance * Const.CreatureAlertWarningDistance) {
-                            if (cr.CanSee(crd)) cr.Alert();
-                            cr.SetTargetInvestigation(x, y);
-                        }
-                    }
-                }
-            }
+            // Why do we do this? Not just creatures near the impact, but anyone within sight and range of them??
+            //foreach (Creature crd in hsDetected) {
+            //    foreach (Creature cr in CurrentLevel.Creatures) {
+            //        if (!cr.IsAlert) {
+            //            int r2 = (crd.X - cr.X) * (crd.X - cr.X) + (crd.Y - cr.Y) * (crd.Y - cr.Y);
+            //            if (r2 <= Const.CreatureAlertWarningDistance * Const.CreatureAlertWarningDistance) {
+            //                if (cr.CanSee(crd)) cr.Alert();
+            //                cr.SetTargetInvestigation(x, y);
+            //            }
+            //        }
+            //    }
+            //}
             GenerateDetectionMap();
             return true;
         }

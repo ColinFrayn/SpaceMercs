@@ -31,6 +31,7 @@ namespace SpaceMercs {
         private readonly List<Effect> _Effects = new List<Effect>();
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         private bool[,] Visible;
+
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x > Visible.GetLength(0) || y > Visible.GetLength(1)) return false; return Visible[x, y]; }
         public bool CanSee(IEntity en) {
             if (en == null) return false;
@@ -243,8 +244,7 @@ namespace SpaceMercs {
             }
             else {
                 double dam = 0.0;
-                double hmod = 0.9 + (Attack / 10.0);
-                hmod *= Const.CreatureAttackDamageScale;
+                double hmod = 1.0 + Attack * Const.CreatureAttackDamageScale;
                 for (int n = 0; n < nhits; n++) {
                     dam += rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
                 }
@@ -777,11 +777,11 @@ namespace SpaceMercs {
         }
         public void CheckChangeTarget(double totalDam, Soldier attacker) {
             if (CurrentTarget == attacker) return;
-            if (attacker == null) return;
             if (CurrentTarget == null) {
                 SetTarget(attacker);
                 return;
             }
+            // Got a target which is different from the attacker. Swap?
             double dCur = RangeTo(CurrentTarget);
             double dNew = RangeTo(attacker);
             if (dCur * (4.0 + rnd.NextDouble()) * totalDam / MaxHealth > dNew) { // Swap if new attacker is nearer, or if they did a lot of damage

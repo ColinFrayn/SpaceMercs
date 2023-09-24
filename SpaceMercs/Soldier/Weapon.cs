@@ -18,7 +18,7 @@ namespace SpaceMercs {
                 if (Range > 1) sb.AppendLine("Range : " + Range.ToString("0.##") + "m");
                 sb.AppendLine("Damage : " + DBase.ToString("0.#") + " + R" + DMod.ToString("0.#"));
                 sb.AppendLine("Stamina : " + StaminaCost.ToString("0.#"));
-                sb.AppendLine($"Accuracy : {AttackBonus.ToString()} - {Type.DropOff}/m");
+                sb.AppendLine($"Accuracy : {AccuracyBonus.ToString()} - {Type.DropOff}/m");
                 if (Type.Area > 0) sb.AppendLine($"Area : {Type.Area}m rad");
                 //if (AttackBonus != 0) sb.AppendLine("Attack : " + AttackBonus.ToString("+#;-#"));
                 if (Type.Shots > 1) sb.AppendLine($"MultiShot : {Type.Shots}");
@@ -37,8 +37,8 @@ namespace SpaceMercs {
             }
         }
         public ItemType BaseType { get { return Type; } }
-        public double DBase { get { return Type.DBase * (1.0 + (Level / 5.0)); } }
-        public double DMod { get { return Type.DMod * (1.0 + (Level / 5.0)); } }
+        public double DBase { get { return Type.DBase * (1.0 + (Level / 10.0)); } }
+        public double DMod { get { return Type.DMod * (1.0 + (Level / 10.0)); } }
         public int Level { get; private set; }
         public void SaveToFile(StreamWriter file) {
             file.Write("<Weapon Type=\"" + BaseType.Name + "\" Level=\"" + Level.ToString() + "\"");
@@ -48,7 +48,7 @@ namespace SpaceMercs {
         // Weapon-specific properties
         public WeaponType Type { get; private set; }
         public double StaminaCost { get { return Type.Speed * (1.0 - (Level / 20.0)); } }
-        public double AttackBonus { get { return Type.Accuracy + (Level * 0.5); } }
+        public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5); } }
         public Dictionary<WeaponType.DamageType, double> GetBonusDamage() {
             Dictionary<WeaponType.DamageType, double> bdam = new Dictionary<WeaponType.DamageType, double>();
             // TODO Implement bonus damage

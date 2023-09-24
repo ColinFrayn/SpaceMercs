@@ -329,6 +329,7 @@ namespace SpaceMercs {
         public int BaseDefence { get { return Agility + Level + 2; } }
         public int BaseHealth { get { return Toughness + Level + 10; } }
         public int BaseStamina { get { return Endurance + Level + 10; } }
+        public double StaminaRegen {  get { return MaxStamina - Level; } }
         public double MaximumCarry { get { return (Math.Pow(Strength, 1.55) * Const.MaxCarryScale) + 4.0; } }
         public double Encumbrance {
             get {
@@ -339,9 +340,9 @@ namespace SpaceMercs {
         }
         public bool MeleeAttacker { get { return (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
-        public double SearchCost { get { return Math.Min(MaxStamina, Const.SearchCost); } }
+        public double SearchCost { get { return Const.SearchCost; } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
-        public double UseItemCost { get { return Math.Min(MaxStamina, Const.UseItemCost); } }
+        public double UseItemCost { get { return Const.UseItemCost; } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public double SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
         public double PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
@@ -354,7 +355,7 @@ namespace SpaceMercs {
             if (Stamina > MaxStamina) Stamina = MaxStamina;
             MaxShields = ShieldsFromItems();
             if (Shields > MaxShields) Shields = MaxShields;
-            Attack = BaseAttack + StatBonuses(StatType.Attack) + ((EquippedWeapon != null) ? (EquippedWeapon.AttackBonus + GetSoldierSkillWithWeapon(EquippedWeapon.Type)) : 0);
+            Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
             Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
         }
 
@@ -385,7 +386,8 @@ namespace SpaceMercs {
             if (lvl > Level) return Level;
             else return lvl;
         }
-        public int GetSoldierSkillWithWeapon(WeaponType wp) {
+        public int GetSoldierSkillWithWeapon(WeaponType? wp) {
+            if (wp is null) return 0;
             if (!WeaponExperience.ContainsKey(wp.WClass)) return 0;
             int lvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp.WClass]);
             if (lvl > Level) return Level;
@@ -1130,10 +1132,9 @@ namespace SpaceMercs {
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
             CheckForLevelUp(showMessage);
-            //foreach (Effect e in Effects) {
-            //  dStam += e.GetStatMod(StatType.Stamina);
-            //}
-            Stamina = MaxStamina; // Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment.
+            // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
+            // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
+            Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 
 
             // Handle periodic effects
             foreach (Effect e in Effects) {
@@ -1313,9 +1314,10 @@ namespace SpaceMercs {
         }
         public double DetectionRange {
             get {
-                double range = Const.BaseDetectionRange + ((10.0 - Agility) / 2.0);
-                range -= (GetUtilityLevel(UtilitySkill.Stealth) / 2.0);
-                range += Encumbrance * 4.0;  // Encumbrance = [0,1]. Easily spotted if heavily encumbered.
+                double range = Const.BaseDetectionRange;
+                range += (10.0 - Agility) / 5.0; // Agility has a very minor effect
+                range -= (GetUtilityLevel(UtilitySkill.Stealth) / 2.0); // Stealth makes you harder to spot
+                range += Encumbrance * 2.0;  // Encumbrance = [0,1]. Easily spotted if heavily encumbered.
                 if (range < 1.0) range = 1.0;
                 return range;
             }
