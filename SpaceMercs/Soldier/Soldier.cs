@@ -1124,7 +1124,7 @@ namespace SpaceMercs {
                 if (WeaponExperience[EquippedWeapon.Type.WClass] > maxExp) WeaponExperience[EquippedWeapon.Type.WClass] = maxExp; // Clamp at maximum for this level
                 int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
                 if (newlvl > oldlvl) {
-                    showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.Name}", null);
+                    showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.WClass}", null);
                 }
             }
 

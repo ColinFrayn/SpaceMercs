@@ -62,11 +62,11 @@
     <Tex>6,4</Tex>
   </ShipEngine>
   <ShipEngine Name="Ethereal Drive">
-    <Range>11</Range>
+    <Range>12</Range>
     <Speed>35</Speed>
     <Accel>999999</Accel>
     <Cost>7000</Cost>
-    <Power>30</Power>
+    <Power>35</Power>
     <Desc>An Ethereal Drive, using an improvement on subspace technology to travel even faster.</Desc>
     <Avail>RE</Avail>
     <Tex>7,4</Tex>

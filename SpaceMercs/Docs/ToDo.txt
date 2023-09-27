@@ -2,12 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Check auto building of trade routes
+Check auto-building of trade routes
 
-Sniper silencer? UpdateDetectionForLocation() is where this happens
+Is HAO.PriceModifier implemented? Everywhere? Check in base class.
 
-Change Stamina: Level is added to max, but amount regenerated each turn is endurance + base.
-- Maybe encumbrance just affects Stamina regen??
+Some creatures have very high def - this should probably be lower, but armour higher.
 
 ==========================================================================================================
 
@@ -18,10 +17,12 @@ Backburner : Features
 
 Add overwatch?
 
+Maybe add in weapon mods like elemental damage, extra range, sight, silencer?
+- Silencer affects calculation in UpdateDetectionForLocation()
+
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
-- ? [Gokan]
-- ? [Ogrish]
+- Some kind of shotgun? [Ogrish]
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
@@ -54,7 +55,7 @@ Need to do missions to gain favour with alien races first
 - Need a baseline rep before you can trade
 - Higher rep = better prices
 
-Check what happens when we found colonies in systems owned by other races (should worsen race relations and warn before, or maybe just prevent entierly)
+Check what happens when we found colonies in systems owned by other races (should worsen race relations and warn before, or maybe just prevent entirely)
 
 Better soldier textures
 - Change texture based on race

@@ -15,10 +15,11 @@ namespace SpaceMercs {
         public Planet.PlanetType Type;
         protected List<Mission>? _MissionList = null;
         public IEnumerable<Mission> MissionList { get { return _MissionList?.AsReadOnly() ?? new List<Mission>().AsReadOnly(); } }
-        public bool Scanned { get { return (_MissionList != null); } }
-        public int CountMissions { get { return _MissionList == null ? 0 : _MissionList.Count; } }
+        public bool Scanned { get; private set; }
+        public int CountMissions { get { return _MissionList?.Count ?? 0; } }
 
         protected void LoadMissions(XmlNode xml) {
+            Scanned = (xml.SelectSingleNode("Scanned") is not null);
             IEnumerable<XmlNode> nodes = xml.SelectNodesToList("Missions/Mission");
             if (!nodes.Any()) return;
             _MissionList = new List<Mission>();
@@ -27,6 +28,7 @@ namespace SpaceMercs {
             }
         }
         protected void SaveMissions(StreamWriter file) {
+            if (Scanned || CountMissions > 0) file.WriteLine(" <Scanned/>");
             if (_MissionList == null) return;
             file.WriteLine(" <Missions>");
             foreach (Mission m in _MissionList) m.SaveToFile(file);
@@ -51,6 +53,7 @@ namespace SpaceMercs {
             if (_MissionList == null) _MissionList = new List<Mission>();
             if (_MissionList.Contains(miss)) return;
             _MissionList.Add(miss);
+            Scanned = true;
         }
 
         public double TDiff(Race rc) {
