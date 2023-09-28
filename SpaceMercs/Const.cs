@@ -191,6 +191,7 @@ namespace SpaceMercs {
         public static double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
         public static int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
         public static int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
+        public static int LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
 
         // Mission level generation settings
         public const int AutomataIterations = 6;

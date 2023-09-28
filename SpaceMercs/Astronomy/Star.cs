@@ -148,7 +148,7 @@ namespace SpaceMercs {
 
             // Now write out all planets, but only do this if the system is owned by someone (i.e. it might have colonies in it). Otherwise we can procedurally re-generate it identically on loading.
             // Also save if this system has been scanned at all or any planets have been renamed
-            if (_planets.Any() && (Owner != null || Scanned || Renamed)) {
+            if (_planets.Any() && (Owner != null || Visited || Scanned || Renamed)) {
                 file.WriteLine(" <Planets>");
                 foreach (Planet pl in _planets) {
                     pl.SaveToFile(file);

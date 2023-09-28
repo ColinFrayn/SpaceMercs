@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -67,6 +68,7 @@ namespace SpaceMercs {
             dtLastGrowth = Const.dtTime;
             if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
+            dtLastUpdate = Const.dtTime;
 
             rc.AddColony(this);
         }
@@ -130,28 +132,31 @@ namespace SpaceMercs {
             file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
             file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
 
-            if (Mercenaries.Count > 0) {
-                file.WriteLine(" <Mercenaries>");
-                foreach (Soldier s in Mercenaries) s.SaveToFile(file);
-                file.WriteLine(" </Mercenaries>");
-            }
-
-            if (Missions.Count > 0) {
-                file.WriteLine(" <Missions>");
-                foreach (Mission m in Missions) m.SaveToFile(file);
-                file.WriteLine(" </Missions>");
-            }
-
-            if (Inventory.Count > 0) {
-                file.WriteLine(" <Inventory>");
-                foreach (IItem it in Inventory.Keys) {
-                    file.WriteLine("  <Inv Count=\"" + Inventory[it] + "\">");
-                    it.SaveToFile(file);
-                    file.WriteLine("  </Inv>");
+            TimeSpan ts = Const.dtTime - dtLastUpdate;
+            // Only bother writing the inventory if it's likely to be relevant
+            if (ts.TotalDays < Const.LongEnoughGapToResetColonyInventory) {
+                if (Mercenaries.Count > 0) {
+                    file.WriteLine(" <Mercenaries>");
+                    foreach (Soldier s in Mercenaries) s.SaveToFile(file);
+                    file.WriteLine(" </Mercenaries>");
                 }
-                file.WriteLine(" </Inventory>");
-            }
 
+                if (Missions.Count > 0) {
+                    file.WriteLine(" <Missions>");
+                    foreach (Mission m in Missions) m.SaveToFile(file);
+                    file.WriteLine(" </Missions>");
+                }
+
+                if (Inventory.Count > 0) {
+                    file.WriteLine(" <Inventory>");
+                    foreach (IItem it in Inventory.Keys) {
+                        file.WriteLine("  <Inv Count=\"" + Inventory[it] + "\">");
+                        it.SaveToFile(file);
+                        file.WriteLine("  </Inv>");
+                    }
+                    file.WriteLine(" </Inventory>");
+                }
+            }
             file.WriteLine("</Colony>");
         }
         public void ExpandBase(BaseType bt) {
@@ -214,7 +219,7 @@ namespace SpaceMercs {
             }
 
             if (dDays < 0.1) return; // Tiny gap - do nothing
-            if (dDays > 400) {
+            if (dDays > Const.LongEnoughGapToResetColonyInventory) {
                 // Very long gap - just refresh all
                 Mercenaries.Clear();
                 Missions.Clear();

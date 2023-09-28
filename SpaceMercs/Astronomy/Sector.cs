@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.ComponentModel;
 using System.IO;
 using System.Xml;
 
@@ -22,12 +23,34 @@ namespace SpaceMercs {
             SectorX = sx;
             SectorY = sy;
             ParentMap = map;
-            int seed = map.MapSeed ^ ((sx * 85091) + (sy * 29527)) ^ ((sx * 34501) + (sy * 61819)); // Non-random seed; repeatable
+            Generate();
+        }
+        public Sector(XmlNode xml, Map map) {
+            SectorX = xml.GetAttributeInt("X");
+            SectorY = xml.GetAttributeInt("Y");
+            ParentMap = map;
+            Inhabitant = StaticData.GetRaceByName(xml.GetAttributeText("Inhabitant")); // May be blank
+
+            IEnumerable<XmlNode> xStars = xml.SelectNodesToList("Star");
+            if (xStars.Any()) {
+                foreach (XmlNode xmls in xStars) {
+                    Star st = new Star(xmls, this);
+                    Stars.Add(st);
+                }
+            }
+            else {
+                Generate();
+            }
+        }
+        public static Sector Empty { get { return new Sector(); } }
+
+        private void Generate() {
+            int seed = ParentMap.MapSeed ^ ((SectorX * 85091) + (SectorY * 29527)) ^ ((SectorX * 34501) + (SectorY * 61819)); // Non-random seed; repeatable
             Random rand = new Random(seed);
             // Setup the stars in this sector
-            float yoffset = (float)(((sy * 2) - 1) * Const.SectorSize) / 2.0f;
-            float xoffset = (float)(((sx * 2) - 1) * Const.SectorSize) / 2.0f;
-            for (int sno = 0; sno < map.StarsPerSector; sno++) {
+            float yoffset = (float)(((SectorY * 2) - 1) * Const.SectorSize) / 2.0f;
+            float xoffset = (float)(((SectorX * 2) - 1) * Const.SectorSize) / 2.0f;
+            for (int sno = 0; sno < ParentMap.StarsPerSector; sno++) {
                 float X, Y;
                 do {
                     // Create a star somewhere in the sector, but avoid the edges (so we don't end up overlapping with other stars in other sectors.)
@@ -38,31 +61,26 @@ namespace SpaceMercs {
                 Star st = new Star(X, Y, rand.Next(10000000), this, sno);
                 Stars.Add(st);
             }
-            // Done
         }
-        public Sector(XmlNode xml, Map map) {
-            SectorX = xml.GetAttributeInt("X");
-            SectorY = xml.GetAttributeInt("Y");
-            ParentMap = map;
-            Inhabitant = StaticData.GetRaceByName(xml.GetAttributeText("Inhabitant"));
-
-            foreach (XmlNode xmls in xml.ChildNodes) {
-                Star st = new Star(xmls, this);
-                Stars.Add(st);
-            }
-        }
-        public static Sector Empty { get { return new Sector(); } }
 
         // Save this sector to an Xml file
         public void SaveToFile(StreamWriter file) {
             file.WriteLine(" <Sector X=\"" + SectorX + "\" Y=\"" + SectorY + "\" Inhabitant=\"" + ((Inhabitant == null) ? "" : Inhabitant.Name) + "\">");
-            foreach (Star st in Stars) {
-                st.SaveToFile(file);
+            if (ShouldBeSaved()) {
+                foreach (Star st in Stars) {
+                    st.SaveToFile(file);
+                }
             }
             file.WriteLine(" </Sector>");
         }
+        private bool ShouldBeSaved() {
+            foreach (Star st in Stars) {
+                if (st.bGenerated && (st.Owner != null || st.Visited || st.Scanned || st.Renamed)) return true;
+            }
+            return false;
+        }
 
-        // Is this star too close to another? Note that we need to check neighbouring sectors, too...
+            // Is this star too close to another? Note that we need to check neighbouring sectors, too...
         private bool CheckProximity(double x, double y) {
             double MD2 = Const.MinStarDistance * Const.MinStarDistance;
             foreach (Star st in Stars) {

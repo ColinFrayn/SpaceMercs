@@ -427,10 +427,6 @@ namespace SpaceMercs.MainWindow {
             if (hao.GetSystem().Owner == null) {
                 StaticData.Races[0].AddSystem(hao.GetSystem());
             }
-            //Star stTR = StaticData.Races[0].GetNearestSystemToNotIncludingSelf(hao.GetSystem());
-            //if (stTR != null && stTR.DistanceTo(hao.GetSystem()) <= Const.MaxTradeRouteDistInLY) {
-            //    hao.GetSystem().AddTradeRoute(stTR);
-            //}
             PlayerTeam.PlayerShip.RemoveColonyBuilder();
             msgBox.PopupMessage("Colony Founded");
             SetAOButtonsOnGUI(hao);

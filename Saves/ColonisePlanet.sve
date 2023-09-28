@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>12/01/2156 01:30:45</Clock>
+<Clock>12/01/2156 01:30:16</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-3" Y="-3" Inhabitant="">
 <Star ID="0">
@@ -11792,13 +11792,6 @@
 <ARot>535596</ARot>
 <Temp>292</Temp>
 <Seed>187878</Seed>
-<Colony>
- <BaseType>Outpost</BaseType>
- <Owner>Human</Owner>
- <LastUpdate>680061366305650000</LastUpdate>
- <LastGrowth>680061366305650000</LastGrowth>
- <NextGrowth>680874390305650000</NextGrowth>
-</Colony>
 <Type>Oceanic</Type>
  <Scanned/>
 </Moon>
@@ -37621,6 +37614,7 @@
  <Eqp ID="7" Active="True">Rail Gun</Eqp>
  <Eqp ID="5" Active="True">Bunk Room</Eqp>
  <Eqp ID="1" Active="True">Surface Scanner</Eqp>
+ <Eqp ID="2" Active="True">Colony Builder</Eqp>
  <Eqp ID="3" Active="True">Armoury</Eqp>
 </Ship>
  <Mission_ShowLabels/>
