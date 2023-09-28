@@ -4,8 +4,6 @@ ToDo List
 
 Check auto-building of trade routes
 
-Is HAO.PriceModifier implemented? Everywhere? Check in base class.
-
 Some creatures have very high def - this should probably be lower, but armour higher.
 
 ==========================================================================================================

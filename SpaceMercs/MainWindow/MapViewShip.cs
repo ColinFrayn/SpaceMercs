@@ -58,7 +58,8 @@ namespace SpaceMercs.MainWindow {
             gbRepair.SetSize(0.08f, 0.03f);
             gbRepair.SetBlend(false);
             if (PlayerTeam.PlayerShip.HullFract < 1.0 && // Ship is damaged
-                PlayerTeam.CurrentPositionHAO.PriceModifier <= 1.0 && // Neutral or better with the owner race
+                PlayerTeam.CurrentPositionHAO.Colony is not null &&
+                PlayerTeam.CurrentPositionHAO.Colony.Owner.Relations >= Const.RaceRelationsLevelToAllowShipRepair && // Neutral or better with the owner race
                 (PlayerTeam.CurrentPositionHAO.Base & (Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military)) != 0)  // Only colonies, metropolis or military bases can repair
             {
                 gbRepair.Activate();
@@ -391,7 +392,7 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
                 if ((se.Available & PlayerTeam.CurrentPositionHAO!.Base) == 0) continue; // Not the correct facilities
                 if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
-                if (se.RequiredRace != null && PlayerTeam.CurrentPositionHAO.PriceModifier >= 1.0) continue; // Correct race, but player team is not >= friendly
+                if (se.RequiredRace != null && se.RequiredRace.Relations < Const.RaceRelationsLevelToAllowSpecialisedEquipmentSale) continue; // Correct race, but player team is not >= friendly
 
                 // Is it the right size?
                 if (se.Size != roomSize) continue;

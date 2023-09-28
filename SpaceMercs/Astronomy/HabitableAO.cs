@@ -82,13 +82,5 @@ namespace SpaceMercs {
 
         // Draw icons showing whether or not this body has a base on it and, if so, then what type.
         public abstract void DrawBaseIcon(ShaderProgram prog);
-
-        // Price modifier, based on the relations with the owning race
-        public double PriceModifier {
-            get {
-                return 1.0; // TODO
-            }
-        }
-
     }
 }

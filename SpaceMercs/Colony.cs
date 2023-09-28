@@ -26,7 +26,7 @@ namespace SpaceMercs {
         public HabitableAO Location { get; private set; }
         public double CostModifier {
             get {
-                if (Base == BaseType.Outpost) return 3.0;
+                if (Base == BaseType.Outpost) return 2.0;
                 double Modifier = 1.6 - (BaseSize * 0.1);
                 if ((Base & BaseType.Trading) != 0) Modifier *= 0.95;
                 return Modifier;

@@ -130,10 +130,10 @@ namespace SpaceMercs {
         // Combat settings
         public const double ArmourScale = 30.0; // The higher this is, the less effective armour is at mitigating damage.
         public const double CreatureMeleeDamageScale = 0.40;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
-        public const double CreatureLevelAttackStep = 0.20;  // %age growth in creature attack each level (over base)
-        public const double CreatureLevelDefenceStep = 0.20;  // %age growth in creature defence each level (over base)
-        public const double CreatureLevelHealthStep = 0.30;  // %age growth in creature health each level (over base)
-        public const double CreatureLevelShieldsStep = 0.25;  // %age growth in creature shields each level (over base)
+        public const double CreatureLevelAttackStep = 0.15;  // %age growth in creature attack each level (over base)
+        public const double CreatureLevelDefenceStep = 0.15;  // %age growth in creature defence each level (over base)
+        public const double CreatureLevelHealthStep = 0.25;  // %age growth in creature health each level (over base)
+        public const double CreatureLevelShieldsStep = 0.2;  // %age growth in creature shields each level (over base)
         public const double CreatureLevelArmourStep = 0.15;  // %age growth in creature armour each level (over base)
         public const double CreatureLevelStaminaStep = 1.0;  // Absolute growth in creature stamina each level
         public const double HitBias = 3.0; // Bias towards hitting when attacking
@@ -189,6 +189,8 @@ namespace SpaceMercs {
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
         public static double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
         public static double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
+        public static int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
+        public static int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
 
         // Mission level generation settings
         public const int AutomataIterations = 6;
