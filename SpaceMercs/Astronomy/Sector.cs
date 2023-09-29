@@ -65,15 +65,13 @@ namespace SpaceMercs {
 
         // Save this sector to an Xml file
         public void SaveToFile(StreamWriter file) {
-            file.WriteLine(" <Sector X=\"" + SectorX + "\" Y=\"" + SectorY + "\" Inhabitant=\"" + ((Inhabitant == null) ? "" : Inhabitant.Name) + "\">");
-            if (ShouldBeSaved()) {
-                foreach (Star st in Stars) {
-                    st.SaveToFile(file);
-                }
+            file.WriteLine($" <Sector X=\"{SectorX}\" Y=\"{SectorY}\" Inhabitant=\"{((Inhabitant == null) ? "" : Inhabitant.Name)}\">");
+            foreach (Star st in Stars) {
+                st.SaveToFile(file);
             }
             file.WriteLine(" </Sector>");
         }
-        private bool ShouldBeSaved() {
+        public bool ShouldBeSaved() {
             foreach (Star st in Stars) {
                 if (st.bGenerated && (st.Owner != null || st.Visited || st.Scanned || st.Renamed)) return true;
             }

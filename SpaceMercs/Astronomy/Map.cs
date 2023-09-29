@@ -105,7 +105,7 @@ namespace SpaceMercs {
             file.WriteLine("<Map Seed=\"" + MapSeed + "\" SPS=\"" + StarsPerSector + "\" PD=\"" + PlanetDensity + "\">");
             // Save the sectors
             foreach (Sector sec in dSectors.Values) {
-                sec.SaveToFile(file);
+                if (sec.ShouldBeSaved()) sec.SaveToFile(file);
             }
             file.WriteLine("</Map>");
         }
