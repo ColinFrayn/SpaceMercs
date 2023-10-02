@@ -28,8 +28,8 @@ namespace SpaceMercs {
 
         public static MissionItem GenerateRandomGoalItem(int diff, Random rand) {
             string strName = GoalAdjectives[rand.Next(GoalAdjectives.Length)] + " " + GatherAdjectives[rand.Next(GatherAdjectives.Length)] + " " + ItemTypes[rand.Next(ItemTypes.Length)];
-            double m = 4.0 + (rand.NextDouble() * 3.0);
-            double c = (2.0 + rand.NextDouble()) * Math.Pow(1.25, diff - 1) * 3.5;
+            double m = 3.0 + (rand.NextDouble() * 2.0);
+            double c = (3.0 + rand.NextDouble()) * Math.Pow(1.25, diff - 1) * 4.0;
             return new MissionItem(strName, m, c);
         }
         public static MissionItem GenerateRandomGatherItem(int diff, Random rand) {

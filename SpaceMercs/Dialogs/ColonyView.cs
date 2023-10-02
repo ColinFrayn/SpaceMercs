@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Windows.Controls;
 
 namespace SpaceMercs.Dialogs {
     partial class ColonyView : Form {
@@ -114,6 +113,7 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             lbTeamCashMerch.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            btBuyMerchant.Enabled = dgMerchant.Rows.Count > 0;
         }
         private void SetupMercenariesTab() {
             dgMercenaries.Rows.Clear();
@@ -127,6 +127,7 @@ namespace SpaceMercs.Dialogs {
                 dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
             }
             lbTeamCashMercs.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            btHire.Enabled = dgMercenaries.Rows.Count > 0;
         }
         private void SetupMissionsTab() {
             dgMissions.Rows.Clear();
@@ -142,6 +143,7 @@ namespace SpaceMercs.Dialogs {
                 dgMissions.Rows.Add(arrRowMiss);
                 dgMissions.Rows[dgMissions.Rows.Count - 1].Tag = miss;
             }
+            btAccept.Enabled = dgMissions.Rows.Count > 0;
         }
         private void SetupShipsTab() {
             dgShips.Rows.Clear();
@@ -157,6 +159,8 @@ namespace SpaceMercs.Dialogs {
                 dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
             }
             lbTeamCashShips.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            btUpgrade.Enabled = dgShips.Rows.Count > 0;
+
         }
         private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
             HashSet<SaleItem> hsLast;
@@ -274,6 +278,7 @@ namespace SpaceMercs.Dialogs {
             }
         }
         private void btHireMercenary_Click(object sender, EventArgs e) {
+            if (dgMercenaries.SelectedRows.Count == 0) return;
             if (dgMercenaries.SelectedRows[0].Tag is not Soldier merc) return;
             double Cost = merc.HireCost() * PriceMod;
             if (Cost > PlayerTeam.Cash) {
@@ -296,16 +301,15 @@ namespace SpaceMercs.Dialogs {
             SetupMercenariesTab();
         }
         private void btRunMission_Click(object sender, EventArgs e) {
-            if (dgMissions.SelectedRows[0].Tag is not Mission miss) {
-                MessageBox.Show("Null mission");
-                return;
-            }
+            if (dgMissions.SelectedRows.Count == 0) return;
+            if (dgMissions.SelectedRows[0].Tag is not Mission miss) return;
             if (StartMission(miss)) {
                 cl.RemoveMission(miss);
                 this.Close();
             }
         }
         private void btUpgradeShip_Click(object sender, EventArgs e) {
+            if (dgShips.SelectedRows.Count == 0) return;
             double SalvageValue = Math.Round(PlayerTeam.PlayerShip.CalculateSalvageValue(), 2);
             ShipType? st = dgShips.SelectedRows[0].Tag as ShipType;
             if (st is null) {

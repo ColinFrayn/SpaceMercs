@@ -4,7 +4,9 @@ ToDo List
 
 Check auto-building of trade routes
 
-Test compressed saving
+Anything more we can do to compress the save game file?
+
+Mission objects should be worth more
 
 ==========================================================================================================
 
@@ -15,8 +17,10 @@ Backburner : Features
 
 Add overwatch?
 
+Maybe add in an Invasion mission type (More creatures get added in waves. Have to survive X waves.)
+
 Maybe add in weapon mods like elemental damage, extra range, sight, silencer?
-- Silencer affects calculation in UpdateDetectionForLocation()
+- Silencer affects calculation in UpdateDetectionForLocation() and reduces volume of sound played?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
@@ -37,7 +41,7 @@ First Contact
 - If ship is alien but you haven't met that alien race then handle it differently
 -- Display as unknown
 
-Add light sources for max. vision range? 
+Add light sources for max. vision range on missions? 
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
