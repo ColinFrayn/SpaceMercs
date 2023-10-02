@@ -623,7 +623,7 @@ namespace SpaceMercs {
                 }
                 // No target and couldn't find one. Maybe investigate nearby if we heard something
                 else if (Investigate != Point.Empty) {
-                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) {
+                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got there, can't see target
                         Investigate = Point.Empty;
                         return;
                     }
@@ -772,7 +772,7 @@ namespace SpaceMercs {
         public void SetHasQuestItem() {
             QuestItem = true;
         }
-        public void Alert() {
+        public void SetAlert() {
             IsAlert = true;
         }
         public void CheckChangeTarget(double totalDam, Soldier attacker) {

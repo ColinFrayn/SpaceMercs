@@ -15,6 +15,10 @@ namespace SpaceMercs {
         private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine" };
         private static readonly string[] GatherAdjectives = new string[] { "Alien", "Golden", "Luminous", "Shiny", "Transparent", "Glowing", "Pulsating", "Ornate" };
 
+        private static readonly string[] ObjectiveAdjectives = new string[] { "historically significant", "potentially valuable", "fascinating", "strategically important", "mysterious", "delicate", "scientifically interesting", "large", "key" };
+        private static readonly string[] ObjectiveTypes = new string[] { "structure", "crystal formation", "geologic area", "relic", "mineral deposit", "fossil deposit", "alien artefact" };
+
+
         public MissionItem(string strName, double m, double c) {
             Name = strName;
             Mass = m;
@@ -37,6 +41,10 @@ namespace SpaceMercs {
             double m = 0.8 + (rand.Next(10) / 10.0);
             double c = (2.0 + rand.NextDouble()) * Math.Pow(1.25, diff - 1) * 0.8;
             return new MissionItem(strName, m, c);
+        }
+        public static MissionItem GenerateRandomDefendItem(Random rand) {
+            string strName = $"{ObjectiveAdjectives[rand.Next(ObjectiveAdjectives.Length)]} {ObjectiveTypes[rand.Next(ObjectiveTypes.Length)]}";
+            return new MissionItem(strName, 0.0, 0.0);
         }
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly

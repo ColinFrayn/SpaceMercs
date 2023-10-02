@@ -457,6 +457,7 @@ namespace SpaceMercs {
                 Mission.MissionGoal.KillBoss => "Assassination",
                 Mission.MissionGoal.Gather => "Gathering",
                 Mission.MissionGoal.FindItem => "Treasure Hunt",
+                Mission.MissionGoal.Defend => "Defend Objective",
                 _ => "Unknown",
             };
         }

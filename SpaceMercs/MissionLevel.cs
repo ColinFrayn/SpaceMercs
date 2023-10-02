@@ -986,10 +986,11 @@ namespace SpaceMercs {
 
         // Adding the (enemy) creatures to the map
         private void GenerateCreatures() {
+            if (ParentMission.Goal == Mission.MissionGoal.Defend) return; // Start with an empty map
             // Who are we fighting against?
             CreatureGroup cg = ParentMission.PrimaryEnemy;
             Race? ra = ParentMission.RacialOpponent;
-            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra);
+            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
             // How big is this map, and how many creatures should it contain?
@@ -1127,6 +1128,64 @@ namespace SpaceMercs {
             if (cgList.Count == 0) throw new Exception("Found no suitable CreatureGroups for racial opponent : " + ra.Name);
             if (cgList.Count == 1) return cgList[0];
             return cgList[rand.Next(cgList.Count)];
+        }
+        public void AddWaveOfCreatures() {
+            if (ParentMission.Goal != Mission.MissionGoal.Defend) return;
+            // Who are we fighting against?
+            CreatureGroup cg = ParentMission.PrimaryEnemy;
+            Race? ra = ParentMission.RacialOpponent;
+            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
+            if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
+
+            int nCreatures = (int)((ParentMission.Soldiers.Count + rand.Next(2) + rand.Next(2)) * Const.CreatureCountScale * cg.QuantityScale / 100.0);
+            if (ParentMission.WavesRemaining < 3) nCreatures += rand.Next(2);
+            if (ParentMission.WavesRemaining < 2) nCreatures += rand.Next(2);
+            if (ParentMission.WavesRemaining == 0) nCreatures += rand.Next(2);
+            if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
+            if (nCreatures < 2) nCreatures = 2;
+
+            // Add all creatures
+            for (int n = 0; n<nCreatures; n++) {
+                Creature? cr = null;
+                if (ParentMission.WavesRemaining == 0) { // Last wave. Add a boss.
+                    cr = cg.GenerateRandomBoss(ra, Diff, this);
+                }
+                if (cr is null) {
+                    cr = cg.GenerateRandomCreature(ra, Diff, this);
+                }
+                if (cr is null) throw new Exception("Could not generate an attacking creature!");
+                PlaceAttackingCreatureInWave(cr);
+            }
+        }
+        private void PlaceAttackingCreatureInWave(Creature cr) {
+            int nTries = 6;
+            int MinDist = Const.MinimumCreatureDistanceFromStartLocation + (Width + Height) / 6;
+            double BestScore = -1;
+            Point best = Point.Empty;
+            Point ptStart = EntryLocations.First<Point>();
+            for (int n = 0; n < nTries; n++) {
+                double score = 0.0;
+                int x, y;
+                score = 0.0;
+                int dist = 0;
+                do {
+                    x = rand.Next(Width - 5) + 2;
+                    y = rand.Next(Height - 5) + 2;
+                    if (ptStart == Point.Empty) dist = MinDist + 1;
+                    else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                } while (!CreatureCanGo(cr, x, y) || (dist < MinDist && CanSee(ptStart, new Point(x, y))));
+                // Attempt to put all creatures far from the EntryLocations
+                score += dist;
+                if (score > BestScore || best == Point.Empty) {
+                    BestScore = score;
+                    best = new Point(x, y);
+                }
+            }
+            if (best == Point.Empty) throw new Exception("Could not find location for creature!");
+            cr.SetLocation(best);            
+            cr.SetTargetInvestigation(ptStart.X, ptStart.Y); // Set the creature target as the entry point
+            cr.SetAlert();
+            AddCreature(cr);
         }
 
         #region Generate Caves

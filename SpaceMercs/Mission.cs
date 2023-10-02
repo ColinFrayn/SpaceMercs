@@ -6,7 +6,7 @@ namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
     public class Mission {
         public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, Repair, Salvage, Ignore }
-        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather }
+        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather, Defend }
         public MissionType Type { get; private set; }
         public MissionGoal Goal { get; private set; }
         public Ship? ShipTarget { get; private set; }
@@ -78,14 +78,25 @@ namespace SpaceMercs {
                     }
                     return false;
                 }
+                if (Goal == MissionGoal.Defend) { // You must defeat all the waves
+                    if (Levels.Count > 1) throw new Exception("Weird defence mission with multiple levels");
+                    if (MItem is null) throw new Exception("No objective in defence mission");
+                    MissionLevel lev = Levels.First().Value;
+                    // Check that all enemies have been killed & no more are coming
+                    if (lev.AllEnemiesKilled && WavesRemaining == 0) return true;
+                    return false;
+                }
                 throw new Exception("Unknown mission goal");
             }
         }
         public int Experience { get { if (Goal == MissionGoal.Gather) return 0; return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
+        public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private string FullDescription;
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
         public readonly List<Soldier> Soldiers = new List<Soldier>();
+        public int WavesRemaining { get; private set; }
+        public int TurnCount { get; private set; }
 
         public Mission(MissionType t, int dif, int sd = 0) {
             Goal = MissionGoal.KillAll;
@@ -115,6 +126,8 @@ namespace SpaceMercs {
                 }
                 LevelCount = lc;
             }
+            TurnCount = 0;
+            WavesRemaining = 0;
             TimeCost = 0.0f;
             ShipTarget = null;
         }
@@ -158,6 +171,9 @@ namespace SpaceMercs {
             Seed = xml.SelectNodeInt("Seed", 0);
             Size = xml.SelectNodeInt("Size", 1);
 
+            WavesRemaining = xml.SelectNodeInt("Waves", 0);
+            TurnCount = xml.SelectNodeInt("Turn", 0);
+
             foreach (XmlNode xl in xml.SelectNodesToList("Level")) {
                 int id = xl.GetAttributeInt("ID");
                 if (xl.FirstChild is not null) {
@@ -183,6 +199,12 @@ namespace SpaceMercs {
             file.WriteLine(" <CurrentLevel>" + CurrentLevel + "</CurrentLevel>");
             if (Seed != 0) file.WriteLine(" <Seed>" + Seed + "</Seed>");
             if (Size != 1) file.WriteLine(" <Size>" + Size + "</Size>");
+            if (WavesRemaining > 0) {
+                file.WriteLine($" <Waves>{WavesRemaining}</Waves>");
+            }
+            if (TurnCount > 0) {
+                file.WriteLine($" <Turn>{TurnCount}</Turn>");
+            }
             foreach (int lev in Levels.Keys) {
                 file.WriteLine(" <Level ID=\"" + lev + "\">");
                 Levels[lev].SaveToFile(file);
@@ -254,6 +276,7 @@ namespace SpaceMercs {
             m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
             if (m.Goal == MissionGoal.KillBoss) m.Reward *= 0.9;
             if (m.Goal == MissionGoal.Gather) m.Reward = 0.0;
+            if (m.Goal == MissionGoal.Defend) m.WavesRemaining = m.MaxWaves;
             return m;
         }
         public static Mission CreateRandomScannerMission(HabitableAO loc, Random rand) {
@@ -273,6 +296,7 @@ namespace SpaceMercs {
             m.MItem = mgtp.Item2;
             if (m.Goal == MissionGoal.KillBoss) m.Reward *= 0.9;
             if (m.Goal == MissionGoal.Gather) m.Reward = 0.0;
+            if (m.Goal == MissionGoal.Defend) m.WavesRemaining = m.MaxWaves;
 
             return m;
         }
@@ -363,9 +387,15 @@ namespace SpaceMercs {
                 if (m.Diff < 4 || !m.PrimaryEnemy.HasBoss || m.PrimaryEnemy.Boss!.LevelMin > m.Diff) mg = MissionGoal.KillAll;
                 else mg = MissionGoal.KillBoss;
             }
-            else if (r < 85 && m.Location.Colony != null) {
+            else if (r < 80 && m.Location.Colony != null) {
                 mg = MissionGoal.FindItem;
                 it = MissionItem.GenerateRandomGoalItem(m.Diff, rand);
+            }
+            else if (r < 85 && (m.LevelCount == 1 || rand.Next(100)<40)) {
+                mg = MissionGoal.Defend;
+                m.LevelCount = 1;
+                if (m.Size > 3) m.Size = 3;
+                it = MissionItem.GenerateRandomDefendItem(rand);
             }
             else {
                 mg = MissionGoal.Gather;
@@ -440,6 +470,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the ruins and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the ruins and search out a " + MItem!.Name + " hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the ruins and gather as many " + MItem!.Name + "s as you can.");
+                if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem!.Name} against a determined enemy assault");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.BoardingParty) {
@@ -468,6 +499,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the cave system and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the cave system and find a " + MItem!.Name + " hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the cave system and gather as many " + MItem!.Name + "s as you can.");
+                if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem!.Name} against a determined enemy assault");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Mines) {
@@ -486,6 +518,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the mines and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate the mines and find a " + MItem!.Name + " hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine("investigate the mines and gather as many " + MItem!.Name + "s as you can.");
+                if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem!.Name} against a determined enemy assault");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Surface) {
@@ -504,9 +537,11 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate this area and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine("investigate this area and find a " + MItem!.Name + " hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine("investigate this area and gather as many " + MItem!.Name + "s as you can.");
+                if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem!.Name} against a determined enemy assault");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)
+            if (Goal == MissionGoal.Defend) sb.AppendLine($"You will face {MaxWaves} waves of enemy attacks");
             if (Goal == MissionGoal.Gather) sb.AppendLine("We will give you a share of the profits from the items you gather.");
             if (RacialOpponent != null) sb.AppendLine("Primary threat will be " + RacialOpponent.Name + " " + PrimaryEnemy.Name);
             else sb.AppendLine("Primary threat will be " + PrimaryEnemy.Name);
@@ -529,8 +564,18 @@ namespace SpaceMercs {
         public void ResetMission() {
             // Reset the mission so it can be run again
             CurrentLevel = 0;
+            TurnCount = 0;
+            WavesRemaining = MaxWaves;
             Levels.Clear();
             Soldiers.Clear();
+        }
+        public void NextTurn(Action<string, Action?> showMessage) {
+            TurnCount++;
+            if (Goal == MissionGoal.Defend && TurnCount%5 == 1 && WavesRemaining > 0) {
+                WavesRemaining--;
+                Levels[CurrentLevel].AddWaveOfCreatures();
+                showMessage("A wave of enemies has appeared near your location", null);
+            }
         }
     }
 }

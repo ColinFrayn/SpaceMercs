@@ -659,7 +659,7 @@ namespace SpaceMercs.MainWindow {
                     double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
                     if (r2 <= (range * range) && cr.CanSee(x, y)) {
                         hsDetected.Add(cr);
-                        cr.Alert();
+                        cr.SetAlert();
                         cr.SetTargetInvestigation(x, y);
                     }
                 }
@@ -769,7 +769,7 @@ namespace SpaceMercs.MainWindow {
         private void DisplayMissionDetails() {
             if (ThisMission is null) return;
             string strDesc = ThisMission.GetDescription();
-            if (ThisMission.Goal == Mission.MissionGoal.ExploreAll || ThisMission.Goal == Mission.MissionGoal.KillAll || ThisMission.Goal == Mission.MissionGoal.Gather) {
+            if (ThisMission.Goal == Mission.MissionGoal.ExploreAll || ThisMission.Goal == Mission.MissionGoal.KillAll || ThisMission.Goal == Mission.MissionGoal.Gather || ThisMission.Goal == Mission.MissionGoal.Defend) {
                 strDesc += "----------\nProgress:\n";
                 for (int n = 0; n < ThisMission.LevelCount; n++) {
                     strDesc += "Level " + n + " : ";
@@ -794,6 +794,16 @@ namespace SpaceMercs.MainWindow {
                             if (rem == 1) strDesc += "1 item remaining\n";
                             else if (rem == 0) strDesc += "Complete\n";
                             else strDesc += rem.ToString() + " items remaining\n";
+                        }
+                        else if (ThisMission.Goal == Mission.MissionGoal.Defend) {
+                            int rem = ThisMission.WavesRemaining;
+                            if (rem == 1) strDesc += "1 wave remaining\n";
+                            else if (rem == 0) strDesc += "No more waves\n";
+                            else strDesc += $"{rem} waves remaining\n";
+                            int en = lev.Creatures.Count();
+                            if (en == 1) strDesc += "1 enemy remaining\n";
+                            else if (en == 0) strDesc += "All enemied defeated\n";
+                            else strDesc += $"{en} enemies remaining\n";
                         }
                     }
                 }
@@ -1484,6 +1494,7 @@ namespace SpaceMercs.MainWindow {
             CurrentLevel.CalculatePlayerVisibility();
             bAIRunning = false;
             Const.dtTime.AddSeconds(Const.TurnLength);
+            CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
         }
         private void PlaySoundThreaded(string strSound) {
             ThisDispatcher?.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
