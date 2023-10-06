@@ -15,7 +15,6 @@ namespace SpaceMercs {
         public string Description { get; private set; }
         public Planet.PlanetType PlanetType { get; private set; } // Preferred planet type
         public Planet HomePlanet { get; private set; }
-        public int Relations { get; private set; } // Ambassadorial relations between this race the player team. 0 = neutral, >0 = good, <0 = bad
         public bool Known { get; private set; } // Have we met them yet?
         public readonly List<Star> Systems = new List<Star>();
         private readonly List<Colony> Colonies = new List<Colony>();
@@ -58,7 +57,6 @@ namespace SpaceMercs {
             file.WriteLine("<Race Name=\"" + Name + "\">");
             file.WriteLine("<HomePlanet>" + HomePlanet.PrintCoordinates() + "</HomePlanet>");
             if (Known) file.WriteLine("<Known/>");
-            file.WriteLine("<Relations>" + Relations + "</Relations>");
             file.WriteLine("</Race>");
         }
         public void LoadAdditionalData(XmlNode xml, Map map) {
@@ -66,7 +64,6 @@ namespace SpaceMercs {
             if (aoHome is null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = (Planet)aoHome;
             Known = (xml.SelectSingleNode("Known") is not null);
-            Relations = xml.SelectNodeInt("Relations");
         }
 
         public void SetHomePlanet(Planet pl) {
@@ -92,7 +89,6 @@ namespace SpaceMercs {
 
         public void Reset() {
             HomePlanet = Planet.Empty;
-            Relations = 0;
             Known = false;
             Systems.Clear();
         }
@@ -120,12 +116,11 @@ namespace SpaceMercs {
 
         public void SetAsKnown() {
             Known = true;
-            Relations = 0;
         }
 
-        public string RelationsToString() {
+        public string RelationsToString(Team t) {
             if (!Known) return "No Contact";
-            return Utils.RelationsToString(Relations);
+            return Utils.RelationsToString(t.GetRelations(this));
         }
 
         public Star GetNearestSystemTo(Star st) {

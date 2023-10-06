@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public int SoldierCount { get { return _Soldiers.Count; } }
         public Ship PlayerShip { get; private set; }
         public double Cash { get; set; }
-        private readonly Dictionary<Race, int> Relations = new Dictionary<Race, int>();  // 0 = neutral, -5 = war, +5 = worshipful
+        private readonly Dictionary<Race, int> Relations = new Dictionary<Race, int>();  // This is the experience level
         public readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
         public Mission? CurrentMission { get; private set; }
         public bool Mission_ShowLabels { get; set; }
@@ -37,7 +37,7 @@ namespace SpaceMercs {
             _Soldiers.Add(s);
             PlayerShip = Ship.GenerateStarterShip(this);
             Cash = Const.InitialCash;
-            Relations.Add(playerRace, 2);
+            Relations.Add(playerRace, Const.StartingRelationsWithHomeRace);
             Mission_ShowLabels = Mission_ShowStatBars = false;
             Mission_ShowTravel = Mission_ShowPath = true;
         }
@@ -122,13 +122,13 @@ namespace SpaceMercs {
 
             file.WriteLine(" <Relations>");
             foreach (Race rc in Relations.Keys) {
-                file.WriteLine("  <Relation Race=\"" + rc.Name + "\" Value=\"" + Relations[rc].ToString() + "\"/>");
+                file.WriteLine($"  <Relation Race=\"{rc.Name}\" Value=\"{Relations[rc]}\"/>");
             }
             file.WriteLine(" </Relations>");
 
             file.WriteLine(" <Inventory>");
             foreach (IItem it in Inventory.Keys) {
-                file.WriteLine("  <Inv Count=\"" + Inventory[it] + "\">");
+                file.WriteLine($"  <Inv Count=\"{Inventory[it]}\">");
                 it.SaveToFile(file);
                 file.WriteLine("  </Inv>");
             }
@@ -147,9 +147,11 @@ namespace SpaceMercs {
         }
 
         public double GetPriceModifier(Race? rc, Star st) {
+            // We have not met this race, or it doesn't exist, so impossible to trade
             if (rc is null || !Relations.ContainsKey(rc)) return 100.0;
-            double mod = Utils.RelationsToCostMod(Relations[rc]);
-            // Unconnected systems are expensive
+            // Cost mod based on relations with the owning race
+            double mod = Utils.RelationsToCostMod(GetRelations(rc));
+            // Unconnected systems are expensive because it's hard to get goods there
             if (!st.TradeRoutes.Any()) mod *= Const.UnconnectedColonyCostMod;
             return mod;
         }
@@ -157,16 +159,32 @@ namespace SpaceMercs {
             return GetPriceModifier(CurrentPosition.GetSystem().Owner, CurrentPosition.GetSystem());
         }
 
-        public double GetRelations(Race rc) {
+        public int GetRelations(Race rc) {
             if (rc == null) return 0;
             if (!Relations.ContainsKey(rc)) return 0;
-            return Relations[rc];
+            int exp = Relations[rc];
+            return Utils.ExperienceToRelations(exp);
         }
-        public double GetRelations(AstronomicalObject ao) {
+        public int GetRelations(AstronomicalObject ao) {
             if (ao == null) return 0;
             Star sys = ao.GetSystem();
             if (sys.Owner is null) return 0;
             return GetRelations(sys.Owner);
+        }
+        public void ImproveRelations(Race? rc, int exp, Action<string, Action?> showMessage) {
+            if (rc == null) return;
+            int oldRelations = GetRelations(rc);
+            if (!Relations.ContainsKey(rc)) {
+                Relations.Add(rc, exp);
+            }
+            else Relations[rc] += exp;
+            int newRelations = GetRelations(rc);
+            if (newRelations > oldRelations) {
+                showMessage($"Thanks to your efforts, relations with the {rc.Name} race have improved\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
+            }
+            if (newRelations < oldRelations) {
+                showMessage($"Because of your persistent attacks, relations with the {rc.Name} race have worsened\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
+            }
         }
 
         // Add a list of items to the team's inventory if we have space
@@ -371,7 +389,5 @@ namespace SpaceMercs {
             }
             throw new Exception("Unknown skill required in item construction: " + it.ToString());
         }
-
-
     }
 }

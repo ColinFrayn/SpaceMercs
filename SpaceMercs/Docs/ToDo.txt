@@ -36,8 +36,6 @@ First Contact
 - Arriving at a planet with a colony of that race
 - If ship is alien but you haven't met that alien race then handle it differently
 -- Display as unknown
-- Need to do missions to gain favour with alien races
-- Prevent founding colonies in systems owned by other races
 
 Anything more we can do to compress the save game file? Maybe store only AOs that are not as generated?
 

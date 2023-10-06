@@ -149,7 +149,7 @@ namespace SpaceMercs {
             }
 
             // Travelling somewhere - check for an Encounter
-            if ((rand.NextDouble() * (1 + EncounterCount / 2.0)) < 0.2) {  // Reduce the chance of multiple encounters
+            if ((rand.NextDouble() * (1 + EncounterCount)) < Const.EncounterFreqScale) {  // Reduce the chance of multiple encounters
                 Mission? foundMission = Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime);
                 if (foundMission != null) {
                     EncounterCount++;

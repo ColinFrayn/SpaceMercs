@@ -555,7 +555,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 case I_ViewRaces:
                     if (!GalaxyMap.MapIsInitialised) return;
-                    RaceView rv = new RaceView();
+                    RaceView rv = new RaceView(PlayerTeam);
                     rv.Show();
                     return;
                 case I_OptionsLabels: bShowLabels = !bShowLabels; return;

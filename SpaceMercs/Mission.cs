@@ -89,7 +89,7 @@ namespace SpaceMercs {
                 throw new Exception("Unknown mission goal");
             }
         }
-        public int Experience { get { if (Goal == MissionGoal.Gather) return 0; return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
+        public int Experience { get { return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private string FullDescription;
@@ -274,7 +274,8 @@ namespace SpaceMercs {
                 m.MItem = mgtp.Item2;
             }
             m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
-            if (m.Goal == MissionGoal.KillBoss) m.Reward *= 0.9;
+            if (m.Goal == MissionGoal.KillBoss) m.Reward *= 1.1;
+            if (m.Goal == MissionGoal.ExploreAll) m.Reward *= 0.8;
             if (m.Goal == MissionGoal.Gather) m.Reward = 0.0;
             if (m.Goal == MissionGoal.Defend) m.WavesRemaining = m.MaxWaves;
             return m;

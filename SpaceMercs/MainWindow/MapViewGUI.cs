@@ -402,6 +402,10 @@ namespace SpaceMercs.MainWindow {
             if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
                 if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas && PlayerTeam.PlayerShip.CanFoundColony) {
+                    if (PlayerTeam.CurrentPosition.GetSystem().Owner is Race ra && ra != StaticData.GetRaceByName("Human")) {
+                        msgBox.PopupMessage($"This system is owned by the {ra.Name} race.\nYou may not found a new colony here!");
+                        return;
+                    }
                     if (!hao.Scanned) {
                         msgBox.PopupMessage("Before you found a colony you need to scan the planet\nand clear all discovered missions");
                         return;

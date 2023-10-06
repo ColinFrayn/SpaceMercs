@@ -113,6 +113,14 @@ namespace SpaceMercs {
             };
         }
 
+        public static int ExperienceToRelations(int xp) {
+            double d = xp / Const.RaceRelationsExperienceScale;
+            // Exp = Lev * (Lev+1) * Scale if Lev >= 0
+            // Exp = -Lev * (Lev+1) * Scale if Lev < 0
+            if (d<0) return Math.Max(-5,-(int)Math.Floor(Math.Sqrt(-d + 0.25) - 0.5) - 1);
+            return Math.Min(5,(int)Math.Floor(Math.Sqrt(d + 0.25) - 0.5));
+        }
+
         public static string PrintDistance(double dist) {
             if (dist > Const.LightYear / 20.0) {
                 return Math.Round(dist / Const.LightYear, 2).ToString() + "ly";

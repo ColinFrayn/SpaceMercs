@@ -143,19 +143,23 @@ namespace SpaceMercs.MainWindow {
                 }
                 else {
                     if (ThisMission.Goal == Mission.MissionGoal.Gather) {
-                        msgBox.PopupMessage("You returned safely to your ship\nYou can sell any gathered " + ThisMission.MItem + "s at the nearest Colony");
+                        msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
                     }
-                    else {
-                        if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
+                    else if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
                             msgBox.PopupMessage("You return the " + ThisMission.MItem + " to the mission agent\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
                             if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
-                        }
-                        else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
-                        PlayerTeam.Cash += ThisMission.Reward;
-                        foreach (Soldier s in ThisMission.Soldiers) {
-                            s.AddExperience(ThisMission.Experience);
-                            s.CheckForLevelUp(AnnounceMessage);
-                        }
+                    }
+                    else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+                    PlayerTeam.Cash += ThisMission.Reward;                        
+                    foreach (Soldier s in ThisMission.Soldiers) {
+                        s.AddExperience(ThisMission.Experience);
+                        s.CheckForLevelUp(AnnounceMessage);
+                    }
+                    if (PlayerTeam.CurrentPositionHAO?.Colony is not null) {
+                        PlayerTeam.ImproveRelations(PlayerTeam.CurrentPositionHAO?.Colony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
+                    }    
+                    else if (PlayerTeam.CurrentPosition.GetSystem().Owner is Race ra) {
+                        PlayerTeam.ImproveRelations(ra, ThisMission.Experience / Const.RelationsExpPenaltyScale, AnnounceMessage);
                     }
                 }
             }

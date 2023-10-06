@@ -7,14 +7,13 @@
             if (Const.DEBUG_ENCOUNTER_FREQ_MOD <= 0.0) return null; // Turn off encounters if debugging
 
             // Calculate interception chance
-            double dDanger = 40.0;
+            double dDanger = Const.BaseInterceptionChance;
             int iFromSize = (aoFrom is HabitableAO haof) ? haof.BaseSize : 0;
             int iToSize = (aoTo is HabitableAO haot) ? haot.BaseSize : 0;
 
-            if (iFromSize + iToSize > 8) return null; // No chance of pirates when travelling between large bases, as these routes are well policed.
-
             // Travelling between two locations in the same system
             if (aoFrom.GetSystem() == aoTo.GetSystem()) {
+                if (iFromSize + iToSize > 6) return null; // No chance of pirates when travelling between bases in a system if they're both big or one is very big, as these routes are well policed.
                 // One or the other is a colony, so it's safer
                 dDanger -= (double)(iFromSize + iToSize);
                 // Check if we're travelling from a planet to one of its satellites, or vice versa, and double the safety bonus
@@ -27,8 +26,8 @@
             }
 
             // Greater risk if you're not very friendly with the target system
-            if (PlayerTeam.GetRelations(aoFrom) <= 2) dDanger -= (PlayerTeam.GetRelations(aoFrom) - 3) * 2.0;
-            if (PlayerTeam.GetRelations(aoTo) <= 2) dDanger -= (PlayerTeam.GetRelations(aoTo) - 3) * 2.0;
+            if (PlayerTeam.GetRelations(aoFrom) < 2) dDanger -= (PlayerTeam.GetRelations(aoFrom) - 2) * 2.0;
+            if (PlayerTeam.GetRelations(aoTo) < 2) dDanger -= (PlayerTeam.GetRelations(aoTo) - 2) * 2.0;
 
             // Take into account journey time (if short). We should really look at distance here, but if we're travelling fast then it's harder to attack us, too.
             double dDays = dJourneyTime / Const.SecondsPerDay;

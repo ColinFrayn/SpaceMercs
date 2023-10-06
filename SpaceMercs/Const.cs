@@ -157,41 +157,51 @@ namespace SpaceMercs {
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
 
         // Miscellaneous
-        public const int BufferSize = 10000;
-        public const int MRUSize = 5;
-        public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system
-        public const int HomeSysColonyCount = 3;   // Extra colonies for home system
         public const double InitialCash = 50.0;
-        public const int MaxColonyMercenaries = 16;  // In a colony
-        public const int MaxColonyMissions = 16;  // In a colony
-        public const double TradeRouteColonyGrowthRate = 0.75; // Colonies grow more quickly when system has trade route(s) (modify delay by this amount)
-        public const double UnconnectedColonyCostMod = 1.5; // Everything is more expensive (and valuable) in distant systems without trade routes
         public const int MaxItemLevel = 5;
-        public const double UpgradeCostModifier = 1.3; // To upgrade an item by one level
-        public const double SellDiscount = 0.6; // Get this fraction back when selling an item
         public const int SoldierLevelExperience = 1000; // Experience for level 1->2
         public const double SoldierLevelExponent = 2.0;  // Each level gets this many times further apart
         public const double SoldierLevelScale = 1.5; // Experience scale
         public const int ItemIDBase = 2000000; // ID of first ItemType
         public const int NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
+        public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
+        public const double InterstellarTravelSafetyBonus = 15.0; // Less likely to get intercepted in interstellar space
+        public const double BaseInterceptionChance = 40.0; // Base scaling for encountering something during a journey. The higher the more often and the more dangerous.
+        public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
+        public const double EncounterFreqScale = 0.15; // The lower this is (>0.0) the less frequently we encounter anything when travelling (active or passive).
+        public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
+        public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
+        public const double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
+        public const double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
+
+        // Colony stuff
+        public const int MaxColonyMercenaries = 16;  // In a colony
+        public const int MaxColonyMissions = 16;  // In a colony
+        public const double TradeRouteColonyGrowthRate = 0.75; // Colonies grow more quickly when system has trade route(s) (modify delay by this amount)
+        public const double UnconnectedColonyCostMod = 1.5; // Everything is more expensive (and valuable) in distant systems without trade routes
+        public const int LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
         public const double MercenaryCostBase = 1.1;  // Base for exponential price calculation for a mercenary
         public const double MercenaryCostExponent = 1.4;  // Exponent scale for exponential price calculation for a mercenary
         public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
-        public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
-        public const double InterstellarTravelSafetyBonus = 10.0; // Less likely to get intercepted in interstellar space
-        public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
-        public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
-        public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
+        public const double UpgradeCostModifier = 1.3; // To upgrade an item by one level
+        public const double SellDiscount = 0.5; // Get this fraction back when selling an item
+
+        // Race relations
+        public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system
+        public const int HomeSysColonyCount = 3;   // Extra colonies for home system
+        public const int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
+        public const int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
+        public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations
+        public const int StartingRelationsWithHomeRace = 6000; // Experience points. Equivalent to level 2.
+        public const int RelationsExpPenaltyScaleColony = 8; // Experience accrues this many times slower for gaining race relations when doing colony missions
+        public const int RelationsExpPenaltyScale = 16; // Experience accrues this many times slower for gaining race relations when doing non-colony missions in an alien system
+
+        // Time stuff / global clock
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         public static DateTime dtTime = Const.dtStart;
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
-        public static double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
-        public static double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
-        public static int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
-        public static int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
-        public static int LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
 
         // Mission level generation settings
         public const int AutomataIterations = 6;

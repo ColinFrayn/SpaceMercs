@@ -990,7 +990,7 @@ namespace SpaceMercs {
             // Who are we fighting against?
             CreatureGroup cg = ParentMission.PrimaryEnemy;
             Race? ra = ParentMission.RacialOpponent;
-            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
+            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Happens in boarding missions
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
             // How big is this map, and how many creatures should it contain?
@@ -1119,11 +1119,7 @@ namespace SpaceMercs {
         private CreatureGroup GenerateCreatureGroupForRacialOpponent(Race ra) {
             List<CreatureGroup> cgList = new List<CreatureGroup>();
             foreach (CreatureGroup cg in StaticData.CreatureGroups) {
-                if (cg.RaceSpecific) {
-                    if (ra.Relations <= cg.MaxRelations) {
-                        cgList.Add(cg);
-                    }
-                }
+                if (cg.RaceSpecific) cgList.Add(cg);
             }
             if (cgList.Count == 0) throw new Exception("Found no suitable CreatureGroups for racial opponent : " + ra.Name);
             if (cgList.Count == 1) return cgList[0];
