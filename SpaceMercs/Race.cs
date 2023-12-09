@@ -116,8 +116,9 @@ namespace SpaceMercs {
             return strName;
         }
 
-        public void SetAsKnown() {
+        public void SetAsKnownBy(Team? pt) {
             Known = true;
+            pt?.SetBaselineRelations(this);
         }
 
         public string RelationsToString(Team t) {

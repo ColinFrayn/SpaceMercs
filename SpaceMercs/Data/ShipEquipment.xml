@@ -82,7 +82,7 @@
     <Cost>500</Cost>
     <Power>8</Power>
     <Research/>
-    <Desc>A laboratory for researching bionics advances.</Desc>
+    <Desc>A laboratory for researching technological advances.</Desc>
     <Avail>ER</Avail>
     <Tex>5,6</Tex>
   </ShipEquipment>
@@ -118,7 +118,7 @@
     <Defence>3</Defence>
     <Power>16</Power>
     <Size>S</Size>
-    <Desc>A chameleon device, making your ship blend in witht he background stars and hence much harder to hit.</Desc>
+    <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,7</Tex>
   </ShipEquipment>

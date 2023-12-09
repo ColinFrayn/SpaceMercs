@@ -53,7 +53,7 @@
     <Colour>30,90,255</Colour>
     <Scale>0.9</Scale>
     <Aggression>-2</Aggression>
-    <BaseAttitude>-1000</BaseAttitude>
+    <BaseAttitude>-500</BaseAttitude>
     <Names>
       <Personal>
         <Male>MaleName</Male>
@@ -75,7 +75,7 @@
     <Colour>255,255,0</Colour>
     <Aggression>2</Aggression>
     <Scale>1.2</Scale>
-    <BaseAttitude>-2500</BaseAttitude>
+    <BaseAttitude>-4500</BaseAttitude>
     <Names>
       <Personal>
         <Male>MaleName</Male>
@@ -97,7 +97,7 @@
     <Colour>0,255,0</Colour>
     <Scale>1.0</Scale>
     <Aggression>1</Aggression>
-    <BaseAttitude>-1200</BaseAttitude>
+    <BaseAttitude>-1600</BaseAttitude>
     <Names>
       <Personal>
         <Neuter>NeuterName</Neuter>

@@ -107,7 +107,7 @@ namespace SpaceMercs.MainWindow {
             Race? ra = m.RacialOpponent;
             if (ra is not null && !ra.Known) {
                 msgBox.PopupMessage($"Your opponents on this mission are from a previously unknown alien race!\nThey claim the name of their species is {ra.Name}");
-                ra.SetAsKnown();
+                ra.SetAsKnownBy(PlayerTeam);
             }            
 
             return true;

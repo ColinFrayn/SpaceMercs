@@ -4,7 +4,7 @@ ToDo List
 
 Check auto-building of trade routes
 
-Check gaining rep with aliens + gaining a level
+Ship.CanResearch : What does it do? (ShipType.Research)
 
 ==========================================================================================================
 

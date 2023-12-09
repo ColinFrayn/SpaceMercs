@@ -17,7 +17,7 @@
     <Accel>20</Accel>
     <Cost>50</Cost>
     <Power>6</Power>
-    <Desc>An impulse Drive, much faster than basic thrusters, but still insufficient for interstellar travel. Can carry out small inter-planetary hops.</Desc>
+    <Desc>An impulse Drive, much faster than basic thrusters but still insufficient for interstellar travel. Can carry out small inter-planetary hops.</Desc>
     <Avail>MRCTE</Avail>
     <Tex>2,4</Tex>
   </ShipEngine>
@@ -57,7 +57,7 @@
     <Accel>999999</Accel>
     <Cost>6000</Cost>
     <Power>30</Power>
-    <Desc>A Subspace Drive, slicing throught he space between dimensions to travel between systems at extraordinary speed</Desc>
+    <Desc>A Subspace Drive, slicing through the space between dimensions to travel between systems at extraordinary speed</Desc>
     <Avail>RE</Avail>
     <Tex>6,4</Tex>
   </ShipEngine>

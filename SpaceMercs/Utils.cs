@@ -98,17 +98,17 @@ namespace SpaceMercs {
 
         public static double RelationsToCostMod(int r) {
             return r switch {
-                -5 => 100d,
-                -4 => 100d,
+                -5 => 10d,
+                -4 => 5d,
                 -3 => 3d,
-                -2 => 1.5d,
-                -1 => 1.1d,
+                -2 => 2.0d,
+                -1 => 1.2d,
                 0 => 1d,
-                1 => 0.97d,
-                2 => 0.92d,
+                1 => 0.95d,
+                2 => 0.9d,
                 3 => 0.85d,
-                4 => 0.76d,
-                5 => 0.65d,
+                4 => 0.8d,
+                5 => 0.75d,
                 _ => throw new Exception($"Unexpected relation level : {r}")
             };
         }

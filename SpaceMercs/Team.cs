@@ -185,6 +185,11 @@ namespace SpaceMercs {
                 showMessage($"Because of your persistent attacks, relations with the {rc.Name} race have worsened\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
             }
         }
+        public void SetBaselineRelations(Race rc) {
+            if (!Relations.ContainsKey(rc)) {
+                Relations.Add(rc, rc.BaseAttitude);
+            }
+        }
 
         // Add a list of items to the team's inventory if we have space
         public Dictionary<IItem, int> AddItems(Dictionary<IItem, int> dEquip) {

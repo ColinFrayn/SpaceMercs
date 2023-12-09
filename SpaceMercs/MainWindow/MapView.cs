@@ -705,7 +705,7 @@ namespace SpaceMercs.MainWindow {
                 hao.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
                 if (!hao.Colony.Owner.Known) {
                     msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}");
-                    hao.Colony.Owner.SetAsKnown();
+                    hao.Colony.Owner.SetAsKnownBy(PlayerTeam);
                 }
             }
             TravelDetails = null;

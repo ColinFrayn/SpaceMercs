@@ -57,7 +57,7 @@ namespace SpaceMercs {
             foreach (Race rc in StaticData.Races) {
                 if (rc == StaticData.Races[0]) {
                     SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng);
-                    rc.SetAsKnown();
+                    rc.SetAsKnownBy(null);
                 }
                 else {
                     Sector sc;

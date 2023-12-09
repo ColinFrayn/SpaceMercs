@@ -261,7 +261,7 @@ namespace SpaceMercs {
                         Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
                         if (ra is not null && !ra.Known) {
                             string strMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
-                            ra.SetAsKnown();
+                            ra.SetAsKnownBy(PlayerTeam);
                             if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                                 PlayerTeam.CeaseMission();
                                 ParentView.msgBox.PopupMessage("The enemy ship flees the battle scene");
@@ -288,7 +288,7 @@ namespace SpaceMercs {
                     if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
                     sw.Cooldown -= 0.005;
                     if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
-                        double dmg = sw.FireWeapon(PlayerTeam.PlayerShip, PlayerTeam.CurrentMission.ShipTarget, rand);
+                        double dmg = sw.FireWeapon(PlayerTeam.PlayerShip, PlayerTeam.CurrentMission!.ShipTarget, rand);
                         int nfrag = PlayerTeam.CurrentMission.ShipTarget.Hull > 0 ? 1 : 10;
                         for (int i = 0; i < nfrag; i++) {
                             ShipRoomDesign rF = PlayerTeam.PlayerShip.Type.Rooms[r];
@@ -305,7 +305,7 @@ namespace SpaceMercs {
             }
 
             // Enemy ship destroyed?
-            if (PlayerTeam.CurrentMission.ShipTarget.Hull <= 0.0) {
+            if (PlayerTeam.CurrentMission!.ShipTarget.Hull <= 0.0) {
                 if (lFrag.Any()) return;
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
@@ -318,7 +318,7 @@ namespace SpaceMercs {
                 Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
                 if (ra is not null && !ra.Known) {
                     ParentView.msgBox.PopupMessage($"You pick apart the wreckage of the alien ship and identify individuals of a previously unknown alien race!\nBased on their appearance and technology, you name them {ra.Name}");
-                    ra.SetAsKnown();
+                    ra.SetAsKnownBy(PlayerTeam);
                 }
                 PlayerTeam.CeaseMission();
                 bPause = false;
