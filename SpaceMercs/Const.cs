@@ -230,7 +230,7 @@ namespace SpaceMercs {
         public const float MoonGap = 6.5f; // Gap from planet to first displayed moon
         public const float DrawBattleScale = 0.15f / 20000f;  // Scale for ships drawn in the travel battle
         public const float ShipRepairRate = 0.001f;
-        public const float ShipShieldRegenRate = 0.002f;
+        public const float ShipShieldRegenRate = 0.001f;
 
         // Ship viewer settings
         public const float MinimumShipViewZ = 20.0f;

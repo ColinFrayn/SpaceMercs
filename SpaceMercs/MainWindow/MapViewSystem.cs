@@ -220,7 +220,13 @@ namespace SpaceMercs.MainWindow {
         private void DrawSystemText() {
             string strSystem = "Unnamed Star";
             if (!string.IsNullOrEmpty(SystemStar?.Name)) strSystem = SystemStar.Name;
-            string strOwner = SystemStar?.Owner?.Name ?? "No Owner";
+            string strOwner = "No Owner";
+            if (SystemStar?.Owner is not null) {
+                if (SystemStar.Owner.Known) {
+                    strOwner = SystemStar.Owner.Name;
+                }
+                else strOwner = "Unknown Alien Race";
+            }
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = Aspect,

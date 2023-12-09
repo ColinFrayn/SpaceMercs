@@ -416,6 +416,24 @@
       <Material Name="Electronic Components" Amount="1"/>      
     </Materials>
   </WeaponType>
+  <WeaponType Name="Heavy Slugger" Class="Shotgun">
+    <Mass>8.0</Mass>
+    <Cost>180</Cost>
+    <Rarity>20</Rarity>
+    <Speed>18</Speed>
+    <Shots>3</Shots>
+    <Race>Ogrish</Race>
+    <Range Accuracy="-2" DropOff="0.6">6</Range>
+    <Damage>3+3</Damage>
+    <Desc>A powerful Ogrish blast gun that fires heavy slugs. Great damage up close but terrible range.</Desc>
+    <Sound>ShotgunAndReload</Sound>
+    <Materials>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Tungsten" Amount="2"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Carbon" Amount="1"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Claws">
     <Speed>10</Speed>
     <Range>1</Range>

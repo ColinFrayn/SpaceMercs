@@ -701,7 +701,13 @@ namespace SpaceMercs.MainWindow {
             aoTo.GetSystem().UpdateColonies();
             msgBox.PopupMessage("You have arrived at your destination");
             PlayerTeam.CurrentPosition = aoTo;
-            if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) hao.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
+            if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {
+                hao.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
+                if (!hao.Colony.Owner.Known) {
+                    msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}");
+                    hao.Colony.Owner.SetAsKnown();
+                }
+            }
             TravelDetails = null;
             SystemStar = PlayerTeam.CurrentPosition.GetSystem();
             fMapViewX = PlayerTeam.CurrentPosition.GetMapLocation().X;

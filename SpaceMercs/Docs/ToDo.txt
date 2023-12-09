@@ -4,6 +4,8 @@ ToDo List
 
 Check auto-building of trade routes
 
+Check gaining rep with aliens + gaining a level
+
 ==========================================================================================================
 
 
@@ -13,14 +15,13 @@ Backburner : Features
 
 Add overwatch?
 
-Maybe add in an Invasion mission type (More creatures get added in waves. Have to survive X waves.)
-
 Maybe add in weapon mods like elemental damage, extra range, sight, silencer?
 - Silencer affects calculation in UpdateDetectionForLocation() and reduces volume of sound played?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
-- Some kind of shotgun? [Ogrish]
+
+How do we lose favour with races? Why would we want to?
 
 Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
@@ -28,18 +29,9 @@ Cover
 - When covered from the attacker, get a def bonus
 - Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
 
-First Contact
-- Encounter a stranded/hostile vessel of a new alien race
--- Loads of places where Race.Name is used. If Race is not known then replace with "Unidentified"
-- Encounter creatures in a scanner mission e.g. "Ursalon Bandits"
--- Maybe display in mission details as "Unknown Bandits"
-- Arriving at a planet with a colony of that race
-- If ship is alien but you haven't met that alien race then handle it differently
--- Display as unknown
-
 Anything more we can do to compress the save game file? Maybe store only AOs that are not as generated?
 
-Add light sources for max. vision range on missions? 
+Add light sources for max. vision range on missions??
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
@@ -56,6 +48,7 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Hover on buttons in GUI?
 - Soldier death
 - Walking?
+- Ship combat
 
 ShipView: Show ship shields in combat
 - Display ellipse, blended, before drawing the rooms (but after starfield)
@@ -97,11 +90,6 @@ Displaying colonies of other races: Are they visually distinct?
 Profile everything, especially AI
 
 Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
-
-Monitor savegame file size and reduce if necessary
-- Utils.RunLengthEncode(string str)
-- Utils.RunLengthDecode(string str)
-- Zip it up (gives 8-9x but makes it unreadable)
 
 Name planets/systems based on what the owning race's language sounds like??
 

@@ -66,7 +66,7 @@ namespace SpaceMercs.MainWindow {
             if (m == null) throw new Exception("Starting MissionView with empty mission!");
             bool bCanAbort = (m.Type != Mission.MissionType.RepelBoarders);
             bool bInProgress = m.Soldiers.Any();
-            lastSoldiers.Clear(); // Make sure we delete any hangover data from a previosu loaded game
+            lastSoldiers.Clear(); // Make sure we delete any hangover data from a previous loaded game
             ThisMission = m;
             if (!bInProgress) ThisMission.Initialise();
 
@@ -102,6 +102,13 @@ namespace SpaceMercs.MainWindow {
             DistMap = new int[CurrentLevel.Width, CurrentLevel.Height];
             AoEMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
             DetectionMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+
+            // First contact?
+            Race? ra = m.RacialOpponent;
+            if (ra is not null && !ra.Known) {
+                msgBox.PopupMessage($"Your opponents on this mission are from a previously unknown alien race!\nThey claim the name of their species is {ra.Name}");
+                ra.SetAsKnown();
+            }            
 
             return true;
         }

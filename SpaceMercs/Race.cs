@@ -11,6 +11,7 @@ namespace SpaceMercs {
         public int Agility { get; private set; }
         public int Endurance { get; private set; }
         public int Aggression { get; private set; }
+        public int BaseAttitude { get; private set; }
         public double BaseTemp;
         public string Description { get; private set; }
         public Planet.PlanetType PlanetType { get; private set; } // Preferred planet type
@@ -35,6 +36,7 @@ namespace SpaceMercs {
             Aggression = xml.SelectNodeInt("Aggression", 0);
             Description = xml.SelectNodeText("Description");
             BaseTemp = xml.SelectNodeInt("BaseTemp");
+            BaseAttitude = xml.SelectNodeInt("BaseAttitude", 0);
             PlanetType = xml.SelectNodeEnum<Planet.PlanetType>("PlanetType");
             string strCol = xml.SelectNodeText("Colour");
             string[] bits = strCol.Split(',');
@@ -106,7 +108,7 @@ namespace SpaceMercs {
             throw new Exception("Error in Race.GenerateRandomGender!");
         }
         public string GenerateRandomName(Random rand, GenderType gt) {
-            if (!FirstNames.ContainsKey(gt)) throw new Exception("Attemptign to generate name for soldier of impossible gender for this race (" + Name + ", " + gt + ")");
+            if (!FirstNames.ContainsKey(gt)) throw new Exception("Attempting to generate name for soldier of impossible gender for this race (" + Name + ", " + gt + ")");
             int r = rand.Next(FirstNames[gt].Count);
             string strName = (FirstNames[gt])[r] + " ";
             r = rand.Next(FamilyNames.Count);

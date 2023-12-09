@@ -544,7 +544,10 @@ namespace SpaceMercs {
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)
             if (Goal == MissionGoal.Defend) sb.AppendLine($"You will face {MaxWaves} waves of enemy attacks");
             if (Goal == MissionGoal.Gather) sb.AppendLine("We will give you a share of the profits from the items you gather.");
-            if (RacialOpponent != null) sb.AppendLine("Primary threat will be " + RacialOpponent.Name + " " + PrimaryEnemy.Name);
+            if (RacialOpponent != null) {
+                if (RacialOpponent.Known) sb.AppendLine("Primary threat will be " + RacialOpponent.Name + " " + PrimaryEnemy.Name);
+                else sb.AppendLine("Primary threat will be unidentified alien " + PrimaryEnemy.Name);
+            }
             else sb.AppendLine("Primary threat will be " + PrimaryEnemy.Name);
             if (!String.IsNullOrEmpty(strSz)) sb.AppendLine(strSz);
             if (LevelCount > 1) {

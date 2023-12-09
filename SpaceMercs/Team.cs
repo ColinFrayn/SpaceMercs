@@ -161,8 +161,7 @@ namespace SpaceMercs {
 
         public int GetRelations(Race rc) {
             if (rc == null) return 0;
-            if (!Relations.ContainsKey(rc)) return 0;
-            int exp = Relations[rc];
+            int exp = Relations.ContainsKey(rc) ? Relations[rc] : rc.BaseAttitude;
             return Utils.ExperienceToRelations(exp);
         }
         public int GetRelations(AstronomicalObject ao) {
@@ -175,7 +174,7 @@ namespace SpaceMercs {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
             if (!Relations.ContainsKey(rc)) {
-                Relations.Add(rc, exp);
+                Relations.Add(rc, rc.BaseAttitude + exp);
             }
             else Relations[rc] += exp;
             int newRelations = GetRelations(rc);

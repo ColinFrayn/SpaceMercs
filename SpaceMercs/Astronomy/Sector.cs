@@ -148,6 +148,8 @@ namespace SpaceMercs {
                 if (bShowFlags && st.Visited && st.Owner != null) {
                     Matrix4 translateM2 = Matrix4.CreateTranslation(0.0f, 0.5f, 0f);
                     Matrix4 scaleM = Matrix4.CreateScale(0.05f, 1.0f, 0.01f);
+                    Matrix4 viewM = Matrix4.CreateScale(0.5f) * translateM;
+                    prog.SetUniform("view", viewM);
                     prog.SetUniform("model", scaleM * translateM * translateM2);
                     prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("lightEnabled", false);

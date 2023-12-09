@@ -10,6 +10,7 @@
     <PlanetType>Oceanic</PlanetType>
     <Colour>255,255,255</Colour>
     <Scale>1.0</Scale>
+    <BaseAttitude>6000</BaseAttitude>
     <Names>
       <Personal>
         <Male>Andrew,Adam,Brian,Boris,Craig,Colin,Douglas,David,Evan,Edward,Frank,Freddy,Glen,Graham,Harvey,Harry,Ivan,Ian,Jack,John,Konrad,Kallum,Luke,Liam,Mark,Mel,Neil,Nick,Oliver,Owen,Patrick,Peter,Quentin,Quin,Richard,Robert,Simon,Steven,Thomas,Trey,Umberto,Uriah,Victor,Vincent,William,Winston,Xander,Xavier,Yoshi,Yank,Zach,Zeke</Male>
@@ -30,6 +31,7 @@
     <PlanetType>Rocky</PlanetType>
     <Colour>255,0,0</Colour>
     <Scale>0.9</Scale>
+    <BaseAttitude>0</BaseAttitude>
     <Names>
       <Personal>
         <Male>Agkor,Began,Carg,Dokan,Erag,Farg,Grak,Horak,Koram,Logak,Merok,Nerak,Ogam,Pagrok,Rokam,Somak,Tarok</Male>
@@ -51,6 +53,7 @@
     <Colour>30,90,255</Colour>
     <Scale>0.9</Scale>
     <Aggression>-2</Aggression>
+    <BaseAttitude>-1000</BaseAttitude>
     <Names>
       <Personal>
         <Male>MaleName</Male>
@@ -72,6 +75,7 @@
     <Colour>255,255,0</Colour>
     <Aggression>2</Aggression>
     <Scale>1.2</Scale>
+    <BaseAttitude>-2500</BaseAttitude>
     <Names>
       <Personal>
         <Male>MaleName</Male>
@@ -93,6 +97,7 @@
     <Colour>0,255,0</Colour>
     <Scale>1.0</Scale>
     <Aggression>1</Aggression>
+    <BaseAttitude>-1200</BaseAttitude>
     <Names>
       <Personal>
         <Neuter>NeuterName</Neuter>
@@ -112,6 +117,7 @@
     <PlanetType>Oceanic</PlanetType>
     <Colour>140,140,140</Colour>
     <Aggression>-1</Aggression>
+    <BaseAttitude>1000</BaseAttitude>
     <Scale>1.0</Scale>
     <Names>
       <Personal>
@@ -131,6 +137,7 @@
     <BaseTemp>289</BaseTemp>
     <PlanetType>Oceanic</PlanetType>
     <Colour>140,85,50</Colour>
+    <BaseAttitude>1500</BaseAttitude>
     <Scale>1.1</Scale>
     <Names>
       <Personal>
