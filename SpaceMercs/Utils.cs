@@ -362,6 +362,7 @@ namespace SpaceMercs {
                 double best = 0.0;
                 MaterialType? mbest = null;
                 foreach (MaterialType mat in StaticData.Materials) {
+                    if (race is not null && mat.RequiredRace is not null && race != mat.RequiredRace) continue;
                     double r = rnd.NextDouble() * Math.Pow(mat.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;
@@ -428,6 +429,7 @@ namespace SpaceMercs {
                 if (at.Locations.Count == 1) {
                     foreach (MaterialType mat in StaticData.Materials) {
                         if (!mat.IsArmourMaterial) continue;
+                        if (race is not null && mat.RequiredRace is not null && race != mat.RequiredRace) continue;
                         double r = rnd.NextDouble() * at.Rarity * mat.Rarity;
                         if (r > best) {
                             best = r;

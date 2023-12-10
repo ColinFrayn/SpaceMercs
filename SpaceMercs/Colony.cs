@@ -310,6 +310,7 @@ namespace SpaceMercs {
             foreach (ArmourType atp in StaticData.ArmourTypes) {
                 if (atp.RequiredRace != null && atp.RequiredRace != Owner) continue;
                 foreach (MaterialType mat in StaticData.Materials) {
+                    if (mat.RequiredRace is not null &&  mat.RequiredRace != Owner) continue;
                     for (int Level = 0; Level < 4; Level++) {
                         if (!mat.IsArmourMaterial) continue;
                         Armour ar = new Armour(atp, mat, Level);

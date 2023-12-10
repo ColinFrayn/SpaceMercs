@@ -40,6 +40,7 @@
     <CostMod>12.0</CostMod>
     <ArmourMod>2.2</ArmourMod>
     <Rarity>0.02</Rarity>
+    <Race>Gokan</Race>
     <Desc>Mithril is an advanced alloy with exceptionally high strength and relatively low density.</Desc>
   </MaterialType>
   <MaterialType Name="Adamantium">

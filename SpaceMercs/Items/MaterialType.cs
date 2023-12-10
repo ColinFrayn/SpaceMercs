@@ -9,6 +9,7 @@ namespace SpaceMercs {
         public double Rarity { get; private set; } // Modifier (default = 1.0)
         public string Desc { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
+        public Race? RequiredRace { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
         public double ConstructionChanceModifier { get { return Math.Log(Rarity > 0 ? Rarity : 0.0001) * 10.0; } }
@@ -27,6 +28,14 @@ namespace SpaceMercs {
                 WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));
                 double val = xn.GetAttributeDouble("Amount");
                 BonusArmour.Add(type, val);
+            }
+
+            // Load the race that this equipment is restricted to (default null), or otherwise fail
+            if (xml.SelectSingleNode("Race") != null) {
+                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
+                if (RequiredRace == null) {
+                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
+                }
             }
         }
     }
