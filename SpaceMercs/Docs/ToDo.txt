@@ -4,7 +4,7 @@ ToDo List
 
 Check auto-building of trade routes
 
-Ship.CanResearch : What does it do? (ShipType.Research)
+Gate certain techs behind a level of civilisation size (e.g. Nanomesh, Adamantium, Ultramesh, Aeromesh)
 
 ==========================================================================================================
 
@@ -14,9 +14,6 @@ Backburner : Features
 ---------------------
 
 Add overwatch?
-
-Maybe add in weapon mods like elemental damage, extra range, sight, silencer?
-- Silencer affects calculation in UpdateDetectionForLocation() and reduces volume of sound played?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]

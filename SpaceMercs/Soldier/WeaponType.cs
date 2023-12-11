@@ -18,6 +18,8 @@ namespace SpaceMercs {
         public bool IsUsable { get; private set; }
         public bool Stable { get; private set; }  // This weapon requires stability i.e. you can't move in the same turn before firing
         public int Shots { get; private set; } // Number of shots
+        public int NoiseLevel { get; private set; } // Noise level is the number of squares away this weapon can be heard
+        public bool Modifiable { get; private set; }
 
         public WeaponType(XmlNode xml) : base(xml) {
             XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
@@ -32,6 +34,7 @@ namespace SpaceMercs {
             Accuracy = nRange.GetAttributeDouble("Accuracy", 0.0);
             DropOff = nRange.GetAttributeDouble("DropOff", 0.0);
             Area = xml.GetAttributeDouble("Damage/Area", 0.0);
+            NoiseLevel = xml.GetAttributeInt("Noise", 0);
             string strDam = xml.SelectNodeText("Damage");
             string[] bits = strDam.Split('+');
             if (bits.Length != 2) throw new Exception("Could not parse damage string : " + strDam);
@@ -41,6 +44,7 @@ namespace SpaceMercs {
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
             Shots = xml.SelectNodeInt("Shots", 1);
+            Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
         }
 
         public override string ToString() {

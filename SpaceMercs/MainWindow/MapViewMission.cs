@@ -443,9 +443,10 @@ namespace SpaceMercs.MainWindow {
                         if (iSelectHover == I_Attack) {
                             bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
                             if (bAttacked) {
-                                if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
+                                if (UpdateDetectionForSoldierAfterAttack(s) ||
                                     UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
-                                    // No alert required
+                                    // Something has been alerted
+                                    // No message required
                                 }
                             }
                         }
@@ -476,7 +477,7 @@ namespace SpaceMercs.MainWindow {
                     CurrentAction = SoldierAction.None;
                     bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
                     if (bAttacked) {
-                        if (UpdateDetectionForSoldier(s, Const.FireWeaponExtraDetectionRange) ||
+                        if (UpdateDetectionForSoldierAfterAttack(s) ||
                             UpdateDetectionForLocation(hoverx, hovery, Const.BaseDetectionRange)) {
                             // No alert required
                         }
@@ -578,7 +579,7 @@ namespace SpaceMercs.MainWindow {
             GenerateDetectionMap();
             // Check if this soldier was detected
             if (DetectionMap[s.X, s.Y]) {
-                if (UpdateDetectionForSoldier(s)) {
+                if (UpdateDetectionForSoldierAfterAction(s)) {
                     msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
                 }
             }
@@ -653,10 +654,13 @@ namespace SpaceMercs.MainWindow {
 
             return true;
         }
-        private bool UpdateDetectionForSoldier(Soldier s, double extraRange = 0.0) {
-            if (extraRange == 0.0 && !DetectionMap[s.X, s.Y]) return false;
-            double baseRange = s.DetectionRange + extraRange;
-            return UpdateDetectionForLocation(s.X, s.Y, baseRange);
+        private bool UpdateDetectionForSoldierAfterAction(Soldier s) {
+            if (!DetectionMap[s.X, s.Y]) return false;
+            return UpdateDetectionForLocation(s.X, s.Y, s.DetectionRange);
+        }
+        private bool UpdateDetectionForSoldierAfterAttack(Soldier s) {
+            if (s.EquippedWeapon is null) return false;
+            return UpdateDetectionForLocation(s.X, s.Y, s.EquippedWeapon.NoiseLevel);
         }
         private bool UpdateDetectionForLocation(int x, int y, double baseRange) {
             // Calculate the effects of a noise at location x,y.
@@ -771,7 +775,7 @@ namespace SpaceMercs.MainWindow {
             s.UpdateVisibility(CurrentLevel);
             CurrentLevel.CalculatePlayerVisibility();
             GenerateDetectionMap();
-            if (UpdateDetectionForSoldier(s)) {
+            if (UpdateDetectionForSoldierAfterAction(s)) {
                 msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
             }
         }
@@ -1518,7 +1522,7 @@ namespace SpaceMercs.MainWindow {
             // Stuff we need to check after a creature moves
             GenerateDetectionMap();
             foreach (Soldier s in CurrentLevel.Soldiers) {
-                if (UpdateDetectionForSoldier(s)) {
+                if (UpdateDetectionForSoldierAfterAction(s)) {
                     AnnounceMessage(s.Name + " has been detected by the enemy!", null);
                 }
             }

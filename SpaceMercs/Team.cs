@@ -346,14 +346,14 @@ namespace SpaceMercs {
             }
             return false;
         }
-        private int MaxSkillLevel(Soldier.UtilitySkill sk) {
+        public int MaxSkillLevel(Soldier.UtilitySkill sk) {
             int lvl = 0;
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
                 if (s.GetUtilityLevel(sk) > lvl) lvl = s.GetUtilityLevel(sk);
             }
             return lvl;
         }
-        private Soldier MaxSkillSoldier(Soldier.UtilitySkill sk) {
+        public Soldier MaxSkillSoldier(Soldier.UtilitySkill sk) {
             Soldier? sbest = null;
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
                 if (sbest is null || s.GetUtilityLevel(sk) > sbest.GetUtilityLevel(sk)) sbest = s;

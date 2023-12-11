@@ -182,7 +182,7 @@ namespace SpaceMercs {
             return RangeTo(pt.X, pt.Y);
         }
         public double GetDamageReductionByDamageType(WeaponType.DamageType type) {
-            double red = 100.0;
+            double red = 100.0; // TODO CHECK
             foreach (Armour ar in EquippedArmour) {
                 red -= ar.GetDamageReductionByDamageType(type);
             }
@@ -214,8 +214,8 @@ namespace SpaceMercs {
                 double dam = AllDam[type];
 
                 // Armour reduces damage but doesn't reduce healing
-                if (dam > 0.0) TotalDam += dam * GetDamageReductionByDamageType(type); // Damage
-                else TotalDam += dam; // Healing
+                if (dam > 0.0) TotalDam += dam * GetDamageReductionByDamageType(type); // Actual damage
+                else TotalDam += dam; // Negative damage = healing
             }
 
             // Do the damage / healing
@@ -940,7 +940,7 @@ namespace SpaceMercs {
             MaterialType? mat = null;
             // Get base material
             foreach (MaterialType m in StaticData.Materials) {
-                if (m.IsArmourMaterial && (mat is null || m.CostMod < mat.CostMod)) mat = m;
+                if (m.IsArmourMaterial && (mat is null || m.Rarity > mat.Rarity)) mat = m; // Pick the most common material
             }
             if (mat is null) return null;
             // Get base armour for this location

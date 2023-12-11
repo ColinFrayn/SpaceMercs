@@ -21,7 +21,7 @@ namespace SpaceMercs {
         public bool Armoury { get; private set; }
         public bool Workshop { get; private set; }
         public int Repair { get; private set; }
-        public bool Research { get; private set; }
+        public bool Engineering { get; private set; }
         public bool BuildColony { get; private set; }
         public enum RoomSize { Weapon, Small, Medium, Large, Core, Engine, Armour };
 
@@ -54,7 +54,7 @@ namespace SpaceMercs {
             Armoury = (xml.SelectSingleNode("Armoury") != null);
             Workshop = (xml.SelectSingleNode("Workshop") != null);
             Repair = xml.SelectNodeInt("Repair", 0);
-            Research = (xml.SelectSingleNode("Research") != null);
+            Engineering = (xml.SelectSingleNode("Engineering") != null);
             BuildColony = (xml.SelectSingleNode("BuildColony") != null);
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.
@@ -106,7 +106,7 @@ namespace SpaceMercs {
             if (Repair > 0) strList.Add($"Repair: {Repair}h/s");
             if (Armoury) strList.Add("Ability: Armoury");
             if (Medlab) strList.Add("Ability: Medlab");
-            if (Research) strList.Add("Ability: Research");
+            if (Engineering) strList.Add("Ability: Engineering");
             if (Scanner) strList.Add("Ability: Scanner");
             if (Workshop) strList.Add("Ability: Workshop");
             if (BuildColony) strList.Add("Ability: Colonise");

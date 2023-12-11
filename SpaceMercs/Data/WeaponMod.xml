@@ -1,0 +1,47 @@
+﻿<Data>
+  <!-- Weapon modifications -->
+  <WeaponMod Name="Precision Sight" Char="P">
+    <Mass>0.2</Mass>
+    <CostMod>0.1</CostMod>
+    <Desc>A precision laser sight which reduces the penalty for firing at long distance.</Desc>
+    <DropoffMod>0.8</DropoffMod>
+  </WeaponMod>
+  <WeaponMod Name="Range Enhancer" Char="R">
+    <Mass>0.2</Mass>
+    <CostMod>0.15</CostMod>
+    <Desc>A rifled barrel extension which increases the range of your weapon slightly.</Desc>
+    <Range>1</Range>
+  </WeaponMod>
+  <WeaponMod Name="Silencer" Char="~">
+    <Mass>0.2</Mass>
+    <CostMod>0.05</CostMod>
+    <Desc>A finely constructed silencer which significantly reduces weapon noise.</Desc>
+    <Silencer>5</Silencer>
+  </WeaponMod>
+  <WeaponMod Name="Muzzle Stabiliser" Char="+">
+    <Mass>0.2</Mass>
+    <CostMod>0.15</CostMod>
+    <Desc>A balancing device which makes the weapon more accurate.</Desc>
+    <Accuracy>1</Accuracy>
+  </WeaponMod>
+  <WeaponMod Name="Enhanced Core" Char="D">
+    <Mass>0.2</Mass>
+    <CostMod>0.2</CostMod>
+    <Desc>A powerful enhancement to this weapon's damage.</Desc>
+    <Damage>1</Damage>
+  </WeaponMod>
+  <WeaponMod Name="Nanofine Blade" Char="D">
+    <Mass>0.0</Mass>
+    <CostMod>0.25</CostMod>
+    <Desc>A highly sharpened blade modification which enhances the damage of this weapon.</Desc>
+    <Damage>1</Damage>
+    <Melee/>
+  </WeaponMod>
+  <WeaponMod Name="Gyro Stabiliser" Char="+">
+    <Mass>0.2</Mass>
+    <CostMod>0.25</CostMod>
+    <Desc>A balancing device which makes the weapon more accurate.</Desc>
+    <Accuracy>1</Accuracy>
+    <Melee/>
+  </WeaponMod>
+</Data>

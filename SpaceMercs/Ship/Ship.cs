@@ -163,10 +163,10 @@ namespace SpaceMercs {
                 return rep;
             }
         }
-        public bool CanResearch {
+        public bool HasEngineering {
             get {
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
-                    if (tp.Item2 && tp.Item1.Research) return true;
+                    if (tp.Item2 && tp.Item1.Engineering) return true;
                 }
                 return false;
             }

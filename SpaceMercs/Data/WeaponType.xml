@@ -10,6 +10,7 @@
     <Damage>3+2</Damage>
     <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
+    <Noise>9</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -27,6 +28,7 @@
     <Damage>3+2</Damage>
     <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
+    <Noise>10</Noise>
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -43,6 +45,7 @@
     <Damage>2+2</Damage>
     <Desc>A pistol</Desc>
     <Sound>Pistol</Sound>
+    <Noise>6</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -58,6 +61,7 @@
     <Damage>4+3</Damage>
     <Desc>An automatic rifle</Desc>
     <Sound>MachineGun</Sound>
+    <Noise>8</Noise>
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -73,6 +77,7 @@
     <Damage>8+3</Damage>
     <Desc>A heavy automatic rifle</Desc>
     <Sound>HeavyMachineGun</Sound>
+    <Noise>10</Noise>
     <Materials>
       <Material Name="Steel" Amount="10"/>
       <Material Name="Aluminium" Amount="3"/>
@@ -88,6 +93,7 @@
     <Damage>4+3</Damage>
     <Desc>A laser rifle</Desc>
     <Sound>LaserRifle</Sound>
+    <Noise>6</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Plastic" Amount="2"/>
@@ -106,6 +112,7 @@
     <Damage>7+5</Damage>
     <Desc>A heavy laser rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
+    <Noise>8</Noise>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Plastic" Amount="5"/>
@@ -124,6 +131,7 @@
     <Damage>2+2</Damage>
     <Desc>A laser pistol</Desc>
     <Sound>LaserPistol</Sound>
+    <Noise>4</Noise>
     <Materials>
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -142,6 +150,7 @@
     <Desc>A heavy railgun</Desc>
     <Sound>GaussCannon</Sound>
     <Stable/>
+    <Noise>9</Noise>
     <Materials>
       <Material Name="Steel" Amount="11"/>
       <Material Name="Aluminium" Amount="3"/>
@@ -161,6 +170,8 @@
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>
+    <Noise>8</Noise>
+    <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -180,6 +191,8 @@
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electricity</Sound>
+    <Noise>10</Noise>
+    <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="9"/>
       <Material Name="Aluminium" Amount="6"/>
@@ -198,6 +211,8 @@
     <Type>Fire</Type>
     <Desc>A flame thrower</Desc>
     <Sound>Flamethrower</Sound>
+    <Noise>8</Noise>
+    <Unmodifiable/>
     <ItemEffect Name="Flame Thrower">
       <Effect Name="Burning">
         <Duration>2</Duration>        
@@ -221,6 +236,8 @@
     <Type>Fire</Type>
     <Desc>A heavy weapon that shoots balls of superheated plasma</Desc>
     <Sound>Flamethrower</Sound>
+    <Noise>8</Noise>
+    <Unmodifiable/>
     <ItemEffect Name="Plasma Thrower">
       <Effect Name="Burning">
         <Duration>2</Duration>
@@ -245,6 +262,8 @@
     <Damage Area="2">5+4</Damage>
     <Desc>A grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
+    <Noise>12</Noise>
+    <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="8"/>
       <Material Name="Plastic" Amount="2"/>
@@ -263,6 +282,7 @@
     <Desc>A sniper rifle</Desc>
     <Sound>SniperRifle</Sound>
     <Stable/>
+    <Noise>9</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -279,6 +299,7 @@
     <Desc>A highly precise laser sniper rifle</Desc>
     <Sound>LaserSniper</Sound>
     <Stable/>
+    <Noise>8</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -297,6 +318,7 @@
     <Desc>A light railgun converted to a sniper rifle. Lower accuracy but with high damage.</Desc>
     <Sound>GaussSniper</Sound>
     <Stable/>
+    <Noise>9</Noise>
     <Materials>
       <Material Name="Aluminium" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -314,6 +336,7 @@
     <Damage>5+2</Damage>
     <Desc>A rifle-like device that throws bladed discs with high speed</Desc>
     <Sound>MachineGun</Sound>
+    <Noise>8</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -330,6 +353,7 @@
     <Damage>2+2</Damage>
     <Desc>A sharp bladed weapon</Desc>
     <Sound>SwordSlice</Sound>
+    <Noise>3</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -344,6 +368,7 @@
     <Damage>3+3</Damage>
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
+    <Noise>3</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="3"/>
@@ -361,6 +386,7 @@
     <Damage>3+2</Damage>
     <Desc>A sturdy axe</Desc>
     <Sound>SwordSlice</Sound>
+    <Noise>3</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -375,6 +401,7 @@
     <Damage>4+3</Damage>
     <Desc>A sturdy axe powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
+    <Noise>3</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -391,6 +418,7 @@
     <Damage>5+4</Damage>
     <Desc>A whirring chainsaw in a sword shape</Desc>
     <Sound>Chainsaw</Sound>
+    <Noise>6</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -408,6 +436,7 @@
     <Desc>Sharp, powered claws attached over your armour.</Desc>
     <Sound>SwordSlice</Sound>
     <Race>Ursalon</Race>
+    <Noise>4</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
@@ -427,6 +456,7 @@
     <Damage>3+3</Damage>
     <Desc>A powerful Ogrish blast gun that fires heavy slugs. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
+    <Noise>11</Noise>
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Tungsten" Amount="2"/>

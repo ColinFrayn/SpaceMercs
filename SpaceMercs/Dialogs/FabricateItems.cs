@@ -99,7 +99,7 @@ namespace SpaceMercs.Dialogs {
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
-            foreach (IItem eq in PlayerTeam.Inventory.Keys.Where(x => !(x is Material))) {
+            foreach (IItem eq in PlayerTeam.Inventory.Keys.Where(x => x is not Material)) {
                 if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
                 if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
@@ -114,7 +114,7 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
-                foreach (IItem eq in s.InventoryGrouped.Keys.Where(x => !(x is Material))) {
+                foreach (IItem eq in s.InventoryGrouped.Keys.Where(x => x is not Material)) {
                     if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
                     if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
                     if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
@@ -156,6 +156,17 @@ namespace SpaceMercs.Dialogs {
                 }
             }
             if (dgInventory.Rows.Count > 0) dgInventory.Rows[0].Selected = true;
+
+            if (PlayerTeam.PlayerShip.HasEngineering) {
+                btModify.Show();
+                btImprove.Show();
+                lbNoEngineering.Hide();
+            }
+            else {
+                btModify.Hide();
+                btImprove.Hide();
+                lbNoEngineering.Show();
+            }
         }
 
         // Button clicks
@@ -287,7 +298,7 @@ namespace SpaceMercs.Dialogs {
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) {
                 MessageBox.Show("Error picking item to dismantle");
                 return;
-            }            
+            }
             Soldier? s = tp.Item1;
             IItem it = tp.Item2;
             if (it is not IEquippable eq) return;
@@ -311,6 +322,40 @@ namespace SpaceMercs.Dialogs {
             MessageBox.Show(strRemains);
             SetupModifyTab();
         }
+        private void btModify_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
+            Soldier? s = tp.Item1;
+            if (tp.Item2 is not Weapon wp || !wp.Type.Modifiable) return;
+            bool bEquipped = tp.Item3;
+            int maxLev = PlayerTeam.GetMaxSkillByItemType(wp.BaseType);
+            int maxEngLev = PlayerTeam.MaxSkillLevel(Soldier.UtilitySkill.Engineer);
+            if (maxLev == 0 || maxEngLev == 0) {
+                Soldier.UtilitySkill skillReq = wp.Type.IsMeleeWeapon ? Soldier.UtilitySkill.Bladesmith : Soldier.UtilitySkill.Gunsmith;
+                MessageBox.Show($"You do not have the required skills on board to perform that action!\nRequires Engineering and {skillReq}");
+                return;
+            }
+            Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItemType(wp.BaseType);
+            Soldier sskEng = PlayerTeam.MaxSkillSoldier(Soldier.UtilitySkill.Engineer);
+            ModifyWeapon mw = new ModifyWeapon(wp, 1.0, maxLev, maxEngLev, PlayerTeam, ssk, sskEng);
+            mw.ShowDialog(this);
+            if (mw.Modified) {
+                if (s == null) {
+                    PlayerTeam.RemoveItemFromStores(wp);
+                    if (!mw.Destroyed && mw.NewItem != null) PlayerTeam.AddItem(mw.NewItem);
+                }
+                else {
+                    if (bEquipped) {
+                        s.Unequip(wp);
+                    }
+                    s.DestroyItem(wp);
+                    if (!mw.Destroyed && mw.NewItem != null) {
+                        s.AddItem(mw.NewItem);
+                        if (bEquipped) s.Equip(mw.NewItem);
+                    }
+                }
+                SetupModifyTab();
+            }
+        }
 
         // Other handlers
         private void tbFilter_TextChanged(object sender, EventArgs e) {
@@ -326,19 +371,19 @@ namespace SpaceMercs.Dialogs {
             SetupModifyTab();
         }
         private void dgInventory_SelectionChanged(object sender, EventArgs e) {
-            if (dgInventory.SelectedRows.Count == 0) {
-                btImprove.Enabled = false;
-                return;
-            }
+            btImprove.Enabled = false;
+            btModify.Enabled = false;
+            btDismantle.Enabled = false;
+            if (dgInventory.SelectedRows.Count == 0) return;
             Tuple<Soldier?, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier?, IItem, bool>;
             if (tp is null) return;
             IItem it = tp.Item2;
-            btImprove.Enabled = false;
+            if (it is not Material) btDismantle.Enabled = true;
+            if (!PlayerTeam.PlayerShip.HasEngineering) return;
             if (it is IEquippable eq) {
                 if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
+                if (eq is Weapon wp && wp.Type.Modifiable) btModify.Enabled = true;
             }
-            if (it is Material) btDismantle.Enabled = false;
-            else btDismantle.Enabled = true;
         }
 
         // Changed tab so update lists
@@ -393,7 +438,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
-            Tuple<Soldier, IItem>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier, IItem>;
+            Tuple<Soldier, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier, IItem, bool>;
             if (tp is null || tp.Item2 is null) return;
             MessageBox.Show(this, tp.Item2.Desc);
         }

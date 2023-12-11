@@ -24,6 +24,7 @@ namespace SpaceMercs {
         public static List<ShipWeapon> ShipWeapons;
         public static List<ShipArmour> ShipArmours;
         public static List<CreatureGroup> CreatureGroups;
+        public static List<WeaponMod> WeaponMods;
 #pragma warning restore 0649
 
         // Static constructor sets up the root directory where all data are to be found
@@ -247,6 +248,12 @@ namespace SpaceMercs {
         public static CreatureGroup? GetCreatureGroupByName(string strName) {
             foreach (CreatureGroup cg in CreatureGroups) {
                 if (cg.Name.Equals(strName)) return cg;
+            }
+            return null;
+        }
+        public static WeaponMod? GetWeaponModByName(string strName) {
+            foreach (WeaponMod wm in WeaponMods) {
+                if (wm.Name.Equals(strName)) return wm;
             }
             return null;
         }

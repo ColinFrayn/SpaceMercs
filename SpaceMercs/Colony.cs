@@ -279,6 +279,8 @@ namespace SpaceMercs {
         // Fill the inventory with deliveries for the given number of days
         private void PopulateInventory(int days) {
             Random rand = new Random();
+
+            // Add specific utility items
             foreach (ItemType eq in StaticData.ItemTypes) {
                 if (eq.RequiredRace != null && eq.RequiredRace != Owner) continue;
                 double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
@@ -310,7 +312,8 @@ namespace SpaceMercs {
             foreach (ArmourType atp in StaticData.ArmourTypes) {
                 if (atp.RequiredRace != null && atp.RequiredRace != Owner) continue;
                 foreach (MaterialType mat in StaticData.Materials) {
-                    if (mat.RequiredRace is not null &&  mat.RequiredRace != Owner) continue;
+                    if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
+                    if (mat.IsScavenged) continue;
                     for (int Level = 0; Level < 4; Level++) {
                         if (!mat.IsArmourMaterial) continue;
                         Armour ar = new Armour(atp, mat, Level);
@@ -323,6 +326,13 @@ namespace SpaceMercs {
                         AddItem(ar, rarity, days, rand);
                     }
                 }
+            }
+
+            // Add some raw materials
+            foreach (MaterialType mat in StaticData.Materials) {
+                if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
+                if (mat.IsScavenged) continue;
+                AddItem(new Material(mat), mat.Rarity, days, rand);
             }
         }
         private void AddItem(IItem eq, double rarity, int days, Random rand) {

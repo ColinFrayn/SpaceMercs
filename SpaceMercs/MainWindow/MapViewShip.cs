@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using SharpFont;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -72,6 +71,7 @@ namespace SpaceMercs.MainWindow {
             if (PlayerTeam.PlayerShip.HasArmoury) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
+            else if (PlayerTeam.PlayerShip.HasEngineering) gbFabricate.Activate();
         }
 
         private void DrawShip() {

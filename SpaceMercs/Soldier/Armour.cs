@@ -6,7 +6,7 @@ namespace SpaceMercs {
     public class Armour : IEquippable {
         // IEquipment
         public string Name { get { return Material.Name + " " + Type.Name + " [" + Utils.LevelToDescription(Level) + "]"; } }
-        public double Mass { get { return Type.Mass * Material.MassMod * (1.0 - (Level / 10.0)); } }
+        public double Mass { get { return MassAtLevel(Level); } }
         public double Cost { get { return CalculateCost(Level); } }
         public string Desc {
             get {
@@ -55,8 +55,8 @@ namespace SpaceMercs {
         // Armour-specific properties
         private MaterialType Material;
         public ArmourType Type { get; private set; }
-        public double BaseArmour { get { return Type.BaseArmour * Material.ArmourMod * (1 + (Level / 5.0)); } }
-        public double Shields { get { return Type.Shields * (1 + (Level / 4)); } }
+        public double BaseArmour { get { return ArmourAtLevel(Level); } }
+        public double Shields { get { return ShieldsAtLevel(Level); } }
 
         public double GetDamageReductionByDamageType(WeaponType.DamageType type) {
             double red = 0.0;
@@ -73,12 +73,12 @@ namespace SpaceMercs {
         public Dictionary<WeaponType.DamageType, double> GetAllResistances() {
             Dictionary<WeaponType.DamageType, double> AllRes = new Dictionary<WeaponType.DamageType, double>();
             foreach (WeaponType.DamageType tp in Type.BonusArmour.Keys) {
-                if (AllRes.ContainsKey(tp)) AllRes[tp] += Type.BonusArmour[tp];
+                if (AllRes.ContainsKey(tp)) AllRes[tp] = AllRes[tp] + Type.BonusArmour[tp];
                 else AllRes.Add(tp, Type.BonusArmour[tp]);
             }
             foreach (WeaponType.DamageType tp in Material.BonusArmour.Keys) {
                 foreach (BodyPart bp in Type.Locations) {
-                    if (AllRes.ContainsKey(tp)) AllRes[tp] += Material.BonusArmour[tp] * Utils.BodyPartToArmourScale(bp);
+                    if (AllRes.ContainsKey(tp)) AllRes[tp] = AllRes[tp] + Material.BonusArmour[tp] * Utils.BodyPartToArmourScale(bp);
                     else AllRes.Add(tp, Material.BonusArmour[tp] * Utils.BodyPartToArmourScale(bp));
                 }
             }
@@ -116,8 +116,34 @@ namespace SpaceMercs {
         }
 
         // Misc
+        private double ArmourAtLevel(int lev) {
+            return Type.BaseArmour * Material.ArmourMod * (1 + (lev / 5.0));
+        }
+        private double ShieldsAtLevel(int lev) {
+            return Type.Shields * (1 + (lev / 4));
+        }
+        private double MassAtLevel(int lev) {
+            return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
+        }
         private double CalculateCost(int lev) {
-            return Type.Cost * Material.CostMod * Utils.ItemLevelToCostMod(lev);
+            double cost = Type.Cost;
+            double armourFact = ArmourAtLevel(lev) / Type.BaseArmour;
+            double shieldFact = Type.Shields == 0 ? 1 : ShieldsAtLevel(lev) / Type.Shields;
+            double massFact = Type.Mass / MassAtLevel(lev);
+            cost *= Math.Pow(armourFact, Const.ArmourCostExponent) * Math.Pow(shieldFact, Const.ShieldCostExponent) * Math.Pow(massFact, Const.MassCostExponent);
+
+            // Modifier for extra damage resistance from the material
+            double bonusProt = 0.0;
+            foreach (WeaponType.DamageType tp in Material.BonusArmour.Keys) {
+                double bonusPerPoint = tp == WeaponType.DamageType.Physical ? Const.BonusPhysicalArmourValue : Const.BonusOtherArmourValue;
+                foreach (BodyPart bp in Type.Locations) {
+                    bonusProt += Material.BonusArmour[tp] * bonusPerPoint;
+                }
+            }
+            cost *= 1.0 + bonusProt;
+
+            return cost;
+
         }
         public void UpgradeArmour() {
             // Upgrade Level, Material or Type
@@ -127,7 +153,9 @@ namespace SpaceMercs {
             else if (r < 0.85) { // Upgrade mats, if possible
                 MaterialType matnew = Material;
                 foreach (MaterialType mat2 in StaticData.Materials) {
-                    if (mat2.IsArmourMaterial && mat2.CostMod > Material.CostMod && (matnew == Material || mat2.CostMod < matnew.CostMod)) {
+                    // Is this material strictly better, or largely better?
+                    if (mat2.IsArmourMaterial &&
+                       (mat2.ArmourMod > matnew.ArmourMod || (mat2.ArmourMod * 1.1 > matnew.ArmourMod && mat2.MassMod < matnew.MassMod && rnd.NextDouble() > 0.5))) {
                         matnew = mat2;
                     }
                 }

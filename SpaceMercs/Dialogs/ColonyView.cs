@@ -473,6 +473,32 @@ namespace SpaceMercs.Dialogs {
             if (bAll) SetupFoundryTab(null);
             else SetupFoundryTab(tpSelected);
         }
+        private void btModifyWeapon_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
+            SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
+            if (tp is null || tp.Item is null) return;
+            Soldier? s = tp.Soldier;
+            if (tp.Item is not Weapon wp || !wp.Type.Modifiable) return;
+            bool bEquipped = tp.Equipped;
+            ModifyWeapon mw = new ModifyWeapon(wp, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, (cl.BaseSize * 2) - 1, PlayerTeam, null, null);
+            mw.ShowDialog(this.Owner);
+            if (mw.Modified) {
+                if (s is null) {
+                    PlayerTeam.RemoveItemFromStores(wp);
+                    if (!mw.Destroyed && mw.NewItem != null) PlayerTeam.AddItem(mw.NewItem);
+                }
+                else {
+                    if (bEquipped) s.Unequip(wp);
+                    s.DestroyItem(wp);
+                    if (!mw.Destroyed && mw.NewItem != null) {
+                        s.AddItem(mw.NewItem);
+                        if (bEquipped) s.Equip(mw.NewItem);
+                    }
+                }
+                if (mw.Destroyed) SetupFoundryTab();
+                else if (mw.NewItem is not null) SetupFoundryTab(new List<SaleItem>() { new SaleItem(mw.NewItem, s, bEquipped, 1) });
+            }
+        }
 
         // Double click to get further details on specific entries
         private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
@@ -543,21 +569,21 @@ namespace SpaceMercs.Dialogs {
             SetupMerchantDataGrid();
         }
         private void dgInventory_SelectionChanged(object sender, EventArgs e) {
-            btSell.Enabled = (dgInventory.SelectedRows.Count > 0);
+            btSell.Enabled = btDismantle.Enabled = (dgInventory.SelectedRows.Count > 0);
             btImprove.Enabled = false;
-            btDismantle.Enabled = false;
+            btModify.Enabled = false;
             if (dgInventory.SelectedRows.Count == 1) { // Can improve only one weapon/armour
                 SaleItem? tp = dgInventory.SelectedRows[0].Tag as SaleItem;
                 if (tp is null) return; // Still setting up
                 if (tp.Item is IEquippable eq) {
                     if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
+                    if (eq is Weapon wp && wp.Type.Modifiable) btModify.Enabled = true;
                 }
             }
-            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
-                SaleItem? tp = row.Tag as SaleItem;
-                if (tp is null) return; // Still setting up
-                btDismantle.Enabled = true;
-            }
+            //foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+            //    SaleItem? tp = row.Tag as SaleItem;
+            //    if (tp is null) return; // Still setting up
+            //}
         }
         private void cbAffordable_CheckedChanged(object sender, EventArgs e) {
             SetupMerchantDataGrid();
@@ -643,5 +669,6 @@ namespace SpaceMercs.Dialogs {
                 e.Handled = true;//pass by the default sorting
             }
         }
+
     }
 }

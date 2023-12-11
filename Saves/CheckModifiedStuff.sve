@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>02/09/2158 13:59:09</Clock>
+<Clock>02/09/2158 14:01:10</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -5194,7 +5194,7 @@
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Pistol" Level="0"/>
+<Weapon Type="Pistol" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">21</Exp>
@@ -5222,7 +5222,7 @@
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Pistol" Level="0"/>
+<Weapon Type="Pistol" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">77</Exp>
@@ -5252,7 +5252,7 @@
 <Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Axe" Level="1"/>
+<Weapon Type="Axe" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Melee">410</Exp>
@@ -5284,7 +5284,7 @@
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Shotgun" Level="1"/>
+<Weapon Type="Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">171</Exp>
@@ -5318,7 +5318,7 @@
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Shotgun" Level="1"/>
+<Weapon Type="Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">133</Exp>
@@ -5570,197 +5570,197 @@
   <Inv Count="14">
 <Equipment Type="Quantum Medsystem"/>
   </Inv>
-  <Inv Count="101">
-<Weapon Type="Shotgun" Level="0"/>
+  <Inv Count="98">
+<Weapon Type="Shotgun" Level="0" />
   </Inv>
   <Inv Count="77">
-<Weapon Type="Shotgun" Level="1"/>
+<Weapon Type="Shotgun" Level="1" />
   </Inv>
   <Inv Count="18">
-<Weapon Type="Shotgun" Level="2"/>
+<Weapon Type="Shotgun" Level="2" />
   </Inv>
   <Inv Count="41">
-<Weapon Type="Quad Shotgun" Level="0"/>
+<Weapon Type="Quad Shotgun" Level="0" />
   </Inv>
   <Inv Count="10">
-<Weapon Type="Quad Shotgun" Level="1"/>
+<Weapon Type="Quad Shotgun" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Quad Shotgun" Level="2"/>
+<Weapon Type="Quad Shotgun" Level="2" />
   </Inv>
   <Inv Count="293">
-<Weapon Type="Pistol" Level="0"/>
+<Weapon Type="Pistol" Level="0" />
   </Inv>
   <Inv Count="35">
-<Weapon Type="Pistol" Level="1"/>
+<Weapon Type="Pistol" Level="1" />
   </Inv>
   <Inv Count="3">
-<Weapon Type="Pistol" Level="2"/>
+<Weapon Type="Pistol" Level="2" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Pistol" Level="3"/>
+<Weapon Type="Pistol" Level="3" />
   </Inv>
   <Inv Count="46">
-<Weapon Type="Automatic Rifle" Level="0"/>
+<Weapon Type="Automatic Rifle" Level="0" />
   </Inv>
   <Inv Count="39">
-<Weapon Type="Automatic Rifle" Level="1"/>
+<Weapon Type="Automatic Rifle" Level="1" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Automatic Rifle" Level="2"/>
+<Weapon Type="Automatic Rifle" Level="2" />
   </Inv>
   <Inv Count="23">
-<Weapon Type="Heavy Rifle" Level="0"/>
+<Weapon Type="Heavy Rifle" Level="0" />
   </Inv>
   <Inv Count="11">
-<Weapon Type="Heavy Rifle" Level="1"/>
+<Weapon Type="Heavy Rifle" Level="1" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Heavy Rifle" Level="2"/>
+<Weapon Type="Heavy Rifle" Level="2" />
   </Inv>
   <Inv Count="94">
-<Weapon Type="Laser Rifle" Level="0"/>
+<Weapon Type="Laser Rifle" Level="0" />
   </Inv>
   <Inv Count="18">
-<Weapon Type="Laser Rifle" Level="1"/>
+<Weapon Type="Laser Rifle" Level="1" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Laser Rifle" Level="3"/>
+<Weapon Type="Laser Rifle" Level="3" />
   </Inv>
   <Inv Count="9">
-<Weapon Type="Heavy Laser Rifle" Level="0"/>
+<Weapon Type="Heavy Laser Rifle" Level="0" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Heavy Laser Rifle" Level="1"/>
+<Weapon Type="Heavy Laser Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Laser Rifle" Level="3"/>
+<Weapon Type="Heavy Laser Rifle" Level="3" />
   </Inv>
   <Inv Count="46">
-<Weapon Type="Laser Pistol" Level="0"/>
+<Weapon Type="Laser Pistol" Level="0" />
   </Inv>
   <Inv Count="11">
-<Weapon Type="Laser Pistol" Level="1"/>
+<Weapon Type="Laser Pistol" Level="1" />
   </Inv>
   <Inv Count="5">
-<Weapon Type="Laser Pistol" Level="2"/>
+<Weapon Type="Laser Pistol" Level="2" />
   </Inv>
   <Inv Count="9">
-<Weapon Type="Gauss Cannon" Level="0"/>
+<Weapon Type="Gauss Cannon" Level="0" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Gauss Cannon" Level="1"/>
+<Weapon Type="Gauss Cannon" Level="1" />
   </Inv>
   <Inv Count="59">
-<Weapon Type="Arc Rifle" Level="0"/>
+<Weapon Type="Arc Rifle" Level="0" />
   </Inv>
   <Inv Count="8">
-<Weapon Type="Arc Rifle" Level="1"/>
+<Weapon Type="Arc Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Arc Rifle" Level="2"/>
+<Weapon Type="Arc Rifle" Level="2" />
   </Inv>
   <Inv Count="39">
-<Weapon Type="Heavy Arc Rifle" Level="0"/>
+<Weapon Type="Heavy Arc Rifle" Level="0" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Arc Rifle" Level="1"/>
+<Weapon Type="Heavy Arc Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Heavy Arc Rifle" Level="2"/>
+<Weapon Type="Heavy Arc Rifle" Level="2" />
   </Inv>
   <Inv Count="22">
-<Weapon Type="Flame Thrower" Level="0"/>
+<Weapon Type="Flame Thrower" Level="0" />
   </Inv>
   <Inv Count="5">
-<Weapon Type="Flame Thrower" Level="1"/>
+<Weapon Type="Flame Thrower" Level="1" />
   </Inv>
   <Inv Count="3">
-<Weapon Type="Flame Thrower" Level="2"/>
+<Weapon Type="Flame Thrower" Level="2" />
   </Inv>
   <Inv Count="3">
-<Weapon Type="Plasma Thrower" Level="0"/>
+<Weapon Type="Plasma Thrower" Level="0" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Plasma Thrower" Level="2"/>
+<Weapon Type="Plasma Thrower" Level="2" />
   </Inv>
   <Inv Count="28">
-<Weapon Type="Grenade Launcher" Level="0"/>
+<Weapon Type="Grenade Launcher" Level="0" />
   </Inv>
   <Inv Count="6">
-<Weapon Type="Grenade Launcher" Level="1"/>
+<Weapon Type="Grenade Launcher" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Grenade Launcher" Level="2"/>
+<Weapon Type="Grenade Launcher" Level="2" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Grenade Launcher" Level="3"/>
+<Weapon Type="Grenade Launcher" Level="3" />
   </Inv>
   <Inv Count="156">
-<Weapon Type="Sniper Rifle" Level="0"/>
+<Weapon Type="Sniper Rifle" Level="0" />
   </Inv>
   <Inv Count="21">
-<Weapon Type="Sniper Rifle" Level="1"/>
+<Weapon Type="Sniper Rifle" Level="1" />
   </Inv>
   <Inv Count="4">
-<Weapon Type="Sniper Rifle" Level="2"/>
+<Weapon Type="Sniper Rifle" Level="2" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Sniper Rifle" Level="3"/>
+<Weapon Type="Sniper Rifle" Level="3" />
   </Inv>
   <Inv Count="14">
-<Weapon Type="Laser Sniper Rifle" Level="0"/>
+<Weapon Type="Laser Sniper Rifle" Level="0" />
   </Inv>
   <Inv Count="5">
-<Weapon Type="Laser Sniper Rifle" Level="1"/>
+<Weapon Type="Laser Sniper Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Weapon Type="Laser Sniper Rifle" Level="2"/>
+<Weapon Type="Laser Sniper Rifle" Level="2" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Gauss Sniper Rifle" Level="1"/>
+<Weapon Type="Gauss Sniper Rifle" Level="1" />
   </Inv>
   <Inv Count="67">
-<Weapon Type="Shortblade" Level="0"/>
+<Weapon Type="Shortblade" Level="0" />
   </Inv>
   <Inv Count="36">
-<Weapon Type="Shortblade" Level="1"/>
+<Weapon Type="Shortblade" Level="1" />
   </Inv>
   <Inv Count="11">
-<Weapon Type="Shortblade" Level="2"/>
+<Weapon Type="Shortblade" Level="2" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Shortblade" Level="3"/>
+<Weapon Type="Shortblade" Level="3" />
   </Inv>
   <Inv Count="18">
-<Weapon Type="Powerblade" Level="0"/>
+<Weapon Type="Powerblade" Level="0" />
   </Inv>
   <Inv Count="72">
-<Weapon Type="Axe" Level="0"/>
+<Weapon Type="Axe" Level="0" />
   </Inv>
   <Inv Count="20">
-<Weapon Type="Axe" Level="1"/>
+<Weapon Type="Axe" Level="1" />
   </Inv>
   <Inv Count="9">
-<Weapon Type="Axe" Level="2"/>
+<Weapon Type="Axe" Level="2" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Axe" Level="3"/>
+<Weapon Type="Axe" Level="3" />
   </Inv>
   <Inv Count="39">
-<Weapon Type="Power Axe" Level="0"/>
+<Weapon Type="Power Axe" Level="0" />
   </Inv>
   <Inv Count="4">
-<Weapon Type="Power Axe" Level="1"/>
+<Weapon Type="Power Axe" Level="1" />
   </Inv>
   <Inv Count="24">
-<Weapon Type="Chainsword" Level="0"/>
+<Weapon Type="Chainsword" Level="0" />
   </Inv>
   <Inv Count="8">
-<Weapon Type="Chainsword" Level="1"/>
+<Weapon Type="Chainsword" Level="1" />
   </Inv>
   <Inv Count="3">
-<Weapon Type="Chainsword" Level="2"/>
+<Weapon Type="Chainsword" Level="2" />
   </Inv>
   <Inv Count="133">
 <Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
@@ -10071,7 +10071,7 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>861.5308853268109</Cash>
+ <Cash>562.9344809282702</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="30" Y="26"/>
@@ -10102,7 +10102,7 @@
 <Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Laser Rifle" Level="2"/>
+<Weapon Type="Laser Rifle" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Rifle">525</Exp>
@@ -10145,7 +10145,7 @@
 <Armour Type="Plate Boots" Material="Steel" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Quad Shotgun" Level="1"/>
+<Weapon Type="Quad Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Shotgun">333</Exp>
@@ -10183,7 +10183,7 @@
 <Armour Type="Power Armour" Material="Kevlar" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Heavy Rifle" Level="0"/>
+<Weapon Type="Heavy Rifle" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Rifle">138</Exp>
@@ -10221,7 +10221,7 @@
 <Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Sniper Rifle" Level="2"/>
+<Weapon Type="Sniper Rifle" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
@@ -10246,7 +10246,7 @@
  <Eqp ID="6" Active="True">Rail Gun</Eqp>
  <Eqp ID="8" Active="True">NearLight Drive</Eqp>
  <Eqp ID="7" Active="True">Rail Gun</Eqp>
- <Eqp ID="5" Active="True">Bunk Room</Eqp>
+ <Eqp ID="5" Active="True">Engineering Bay</Eqp>
  <Eqp ID="1" Active="True">Surface Scanner</Eqp>
  <Eqp ID="3" Active="True">Armoury</Eqp>
  <Eqp ID="2" Active="True">Shield Generator</Eqp>
@@ -10288,8 +10288,8 @@
   <Inv Count="16">
 <Material Type="Chitin"/>
   </Inv>
-  <Inv Count="2">
-<Weapon Type="Automatic Rifle" Level="1"/>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="1" Mod="Range Enhancer" />
   </Inv>
   <Inv Count="1">
 <Material Type="Heavy Chitin"/>
@@ -10300,8 +10300,8 @@
   <Inv Count="4">
 <Equipment Type="Frag Grenade"/>
   </Inv>
-  <Inv Count="1">
-<Weapon Type="Powerblade" Level="1"/>
+  <Inv Count="3">
+<Weapon Type="Shotgun" Level="0" />
   </Inv>
  </Inventory>
 </Team>

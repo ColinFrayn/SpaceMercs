@@ -50,6 +50,9 @@
      <Compile Update="Dialogs\HyperspaceTravel.cs">
        <SubType>Form</SubType>
      </Compile>
+     <Compile Update="Dialogs\ModifyWeapon.cs">
+       <SubType>Form</SubType>
+     </Compile>
    </ItemGroup>
 
   <ItemGroup>
@@ -102,6 +105,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\ItemType.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\WeaponMod.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\MaterialType.xml">

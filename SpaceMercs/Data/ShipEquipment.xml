@@ -54,7 +54,7 @@
     <Armoury/>
     <Workshop/>
     <Desc>A versatile foundry, where armour, weapons and equipment can all be fabricated.</Desc>
-    <Tex>7,2</Tex>
+    <Tex>3,7</Tex>
     <Race>Ursalon</Race>
   </ShipEquipment>
   <ShipEquipment Name="Auto Repair">
@@ -66,25 +66,25 @@
     <Avail>EMR</Avail>
     <Tex>6,2</Tex>
   </ShipEquipment>
-  <ShipEquipment Name="Analysis Chamber">
+  <ShipEquipment Name="Tinkering Chamber">
     <Size>M</Size>
     <Cost>300</Cost>
     <Power>10</Power>
     <Medlab/>
-    <Research/>
-    <Desc>A research and medical chamber based on Grey tech.</Desc>
-    <Tex>4,6</Tex>
+    <Engineering/>
+    <Desc>An engineering and medical chamber based on Grey tech.</Desc>
+    <Tex>5,6</Tex>
     <Avail>ER</Avail>
     <Race>Grey</Race>
   </ShipEquipment>
-  <ShipEquipment Name="Research Lab">
+  <ShipEquipment Name="Engineering Bay">
     <Size>M</Size>
-    <Cost>500</Cost>
+    <Cost>250</Cost>
     <Power>8</Power>
-    <Research/>
-    <Desc>A laboratory for researching technological advances.</Desc>
-    <Avail>ER</Avail>
-    <Tex>5,6</Tex>
+    <Engineering/>
+    <Desc>An engineering bay for making modifications to existing equipment.</Desc>
+    <Avail>EM</Avail>
+    <Tex>7,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Shield Generator">
     <Cost>1250</Cost>
@@ -106,10 +106,10 @@
   </ShipEquipment>
   <ShipEquipment Name="Colony Builder">
     <Cost>500</Cost>
-    <Size>S</Size>
-    <Power>4</Power>
+    <Size>M</Size>
+    <Power>8</Power>
     <BuildColony/>
-    <Desc>A device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
+    <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
     <Tex>7,6</Tex>
   </ShipEquipment>
@@ -119,15 +119,15 @@
     <Power>16</Power>
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
-    <Race>Elithiri</Race>
     <Avail>MRE</Avail>
     <Tex>1,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Cloaking Device">
     <Cost>3500</Cost>
-    <Defence>6</Defence>
+    <Defence>5</Defence>
     <Power>20</Power>
     <Size>M</Size>
+    <Race>Elithiri</Race>
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,7</Tex>

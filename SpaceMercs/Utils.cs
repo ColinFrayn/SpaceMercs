@@ -79,6 +79,92 @@ namespace SpaceMercs {
             return new Vector3d(x, y, z);
         }
 
+        public static string PrintDistance(double dist) {
+            if (dist > Const.LightYear / 20.0) {
+                return Math.Round(dist / Const.LightYear, 2).ToString() + "ly";
+            }
+            if (dist > Const.AU * 1000.0) {
+                return Math.Round(dist / (Const.AU * 1000.0), 2).ToString() + "kAU";
+            }
+            if (dist > Const.AU / 10.0) {
+                return Math.Round(dist / Const.AU, 2).ToString() + "AU";
+            }
+            if (dist > 1E8) {
+                return Math.Round(dist / Const.Billion, 2).ToString() + "Gm";
+            }
+            if (dist > 1E5) {
+                return Math.Round(dist / Const.Million, 2).ToString() + "Mm";
+            }
+            return Math.Round(dist / 1000.0, 2).ToString() + "km";
+        }
+
+        public static string MapSizeToDescription(int sz) {
+            return sz switch {
+                1 => "Tiny",
+                2 => "Small",
+                3 => "Medium",
+                4 => "Large",
+                5 => "Huge",
+                6 => "Enormous",
+                7 => "Gargantuan",
+                _ => throw new Exception($"Unexpected Mission Size {sz}")
+            };
+        }
+
+        public static float DirectionToAngle(Direction d) {
+            return d switch {
+                Direction.East => 0.0f,
+                Direction.NorthEast => 45.0f,
+                Direction.North => 90.0f,
+                Direction.NorthWest => 135.0f,
+                Direction.West => 180.0f,
+                Direction.SouthWest => -135.0f,
+                Direction.South => -90.0f,
+                Direction.SouthEast => -45.0f,
+                _ => throw new NotImplementedException(),
+            };
+        }
+
+        public static Direction AngleToDirection(double ang) {
+            if (ang < 0) ang += 360.0;
+            ang = ang % 360.0;
+            if (ang < 22.5) return Direction.East;
+            if (ang < 67.5) return Direction.NorthEast;
+            if (ang < 112.5) return Direction.North;
+            if (ang < 157.5) return Direction.NorthWest;
+            if (ang < 202.5) return Direction.West;
+            if (ang < 247.5) return Direction.SouthWest;
+            if (ang < 292.5) return Direction.South;
+            if (ang < 337.5) return Direction.SouthEast;
+            return Direction.East;
+        }
+
+        public static string RunLengthEncode(string str) {
+            return str; // TODO
+        }
+        public static string RunLengthDecode(string str) {
+            return str; // TODO
+        }
+
+        public static string MissionGoalToString(Mission.MissionGoal mg) {
+            return mg switch {
+                Mission.MissionGoal.ExploreAll => "Explore",
+                Mission.MissionGoal.KillAll => "Kill All",
+                Mission.MissionGoal.KillBoss => "Assassination",
+                Mission.MissionGoal.Gather => "Gathering",
+                Mission.MissionGoal.FindItem => "Treasure Hunt",
+                Mission.MissionGoal.Defend => "Defend Objective",
+                _ => "Unknown",
+            };
+        }
+
+        public static double RoundSF(double d, int digits) {
+            if (d == 0) return 0;
+            decimal scale = (decimal)Math.Pow(10, Math.Floor(Math.Log10(Math.Abs(d))) + 1);
+            return (double)(scale * Math.Round((decimal)d / scale, digits));
+        }
+
+        #region Soldier Functions
         public static string RelationsToString(int r) {
             return r switch {
                 -5 => "Despised",
@@ -117,87 +203,8 @@ namespace SpaceMercs {
             double d = xp / Const.RaceRelationsExperienceScale;
             // Exp = Lev * (Lev+1) * Scale if Lev >= 0
             // Exp = -Lev * (Lev+1) * Scale if Lev < 0
-            if (d<0) return Math.Max(-5,-(int)Math.Floor(Math.Sqrt(-d + 0.25) - 0.5) - 1);
-            return Math.Min(5,(int)Math.Floor(Math.Sqrt(d + 0.25) - 0.5));
-        }
-
-        public static string PrintDistance(double dist) {
-            if (dist > Const.LightYear / 20.0) {
-                return Math.Round(dist / Const.LightYear, 2).ToString() + "ly";
-            }
-            if (dist > Const.AU * 1000.0) {
-                return Math.Round(dist / (Const.AU * 1000.0), 2).ToString() + "kAU";
-            }
-            if (dist > Const.AU / 10.0) {
-                return Math.Round(dist / Const.AU, 2).ToString() + "AU";
-            }
-            if (dist > 1E8) {
-                return Math.Round(dist / Const.Billion, 2).ToString() + "Gm";
-            }
-            if (dist > 1E5) {
-                return Math.Round(dist / Const.Million, 2).ToString() + "Mm";
-            }
-            return Math.Round(dist / 1000.0, 2).ToString() + "km";
-        }
-
-        public static double CalculateMass(Dictionary<IItem, int> dEquip) {
-            double Mass = 0.0;
-            foreach (KeyValuePair<IItem, int> kvp in dEquip) {
-                Mass += kvp.Key.Mass * kvp.Value;
-            }
-            return Mass;
-        }
-
-        public static string LevelToDescription(int lvl) {
-            return lvl switch {
-                0 => "Basic",
-                1 => "Good",
-                2 => "Fine",
-                3 => "Superb",
-                4 => "Epic",
-                5 => "Legendary",
-                _ => throw new Exception($"Unexpected equipment level : {lvl}")
-            };
-        }
-
-        public static string MapSizeToDescription(int sz) {
-            return sz switch {
-                1 => "Tiny",
-                2 => "Small",
-                3 => "Medium",
-                4 => "Large",
-                5 => "Huge",
-                6 => "Enormous",
-                7 => "Gargantuan",
-                _ => throw new Exception($"Unexpected Mission Size {sz}")
-            };
-        }
-
-        public static Color LevelToColour(int lvl) {
-            return lvl switch {
-                0 => Color.FromArgb(255, 255, 255, 255),
-                1 => Color.FromArgb(255, 255, 255, 0),
-                2 => Color.FromArgb(255, 50, 255, 100),
-                3 => Color.FromArgb(255, 50, 100, 255),
-                4 => Color.FromArgb(255, 170, 45, 255),
-                5 => Color.FromArgb(255, 255, 100, 70),
-                _ => throw new Exception("Unexpected equipment level : " + lvl)
-            };
-        }
-
-        public static Dictionary<IItem, int> DismantleEquipment(IEquippable eq, int lvl) {
-            Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
-            Random rand = new Random();
-            double diff = ((double)eq.BaseType.BaseRarity / 2.0) + (double)eq.Level;
-            double fract = (double)lvl / diff;
-            foreach (MaterialType mat in eq.BaseType.Materials.Keys) {
-                int iQuantity = eq.BaseType.Materials[mat];
-                int iRecovered = (int)((rand.NextDouble() * fract) * (double)(iQuantity + 1.0));
-                if (iRecovered > iQuantity) iRecovered = iQuantity;
-                if (iRecovered > 0) dRemains.Add(new Material(mat), iRecovered);
-            }
-
-            return dRemains;
+            if (d < 0) return Math.Max(-5, -(int)Math.Floor(Math.Sqrt(-d + 0.25) - 0.5) - 1);
+            return Math.Min(5, (int)Math.Floor(Math.Sqrt(d + 0.25) - 0.5));
         }
 
         public static int ExperienceToSkillLevel(int xp) {
@@ -210,62 +217,12 @@ namespace SpaceMercs {
             return lvl * (lvl + 1) * Const.WeaponSkillBase / 2;
         }
 
-        public static double ArmourReduction(double ar) {
-            return Math.Pow(0.5, ar / Const.ArmourScale);
-        }
-
-        public static float DirectionToAngle(Direction d) {
-            return d switch {
-                Direction.East => 0.0f,
-                Direction.NorthEast => 45.0f,
-                Direction.North => 90.0f,
-                Direction.NorthWest => 135.0f,
-                Direction.West => 180.0f,
-                Direction.SouthWest => -135.0f,
-                Direction.South => -90.0f,
-                Direction.SouthEast => -45.0f,
-                _ => throw new NotImplementedException(),
-            };
-        }
-
-        public static Direction AngleToDirection(double ang) {
-            if (ang < 0) ang += 360.0;
-            ang = ang % 360.0;
-            if (ang < 22.5) return Direction.East;
-            if (ang < 67.5) return Direction.NorthEast;
-            if (ang < 112.5) return Direction.North;
-            if (ang < 157.5) return Direction.NorthWest;
-            if (ang < 202.5) return Direction.West;
-            if (ang < 247.5) return Direction.SouthWest;
-            if (ang < 292.5) return Direction.South;
-            if (ang < 337.5) return Direction.SouthEast;
-            return Direction.East;
-        }
-
-        public static IItem? LoadItem(XmlNode? xml) {
-            if (xml == null) return null;
-            if (xml.Name.Equals("Armour")) return new Armour(xml);
-            if (xml.Name.Equals("Weapon")) return new Weapon(xml);
-            if (xml.Name.Equals("Equipment")) return new Equipment(xml);
-            if (xml.Name.Equals("Corpse")) return new Corpse(xml);
-            if (xml.Name.Equals("Material")) return new Material(xml);
-            if (xml.Name.Equals("MissionItem")) return new MissionItem(xml);
-            throw new Exception("Attempting to load IItem of unknown type : " + xml.Name);
-        }
-
-        public static string RunLengthEncode(string str) {
-            return str; // TODO
-        }
-        public static string RunLengthDecode(string str) {
-            return str; // TODO
-        }
-
         public static double GenerateHitRoll(IEntity from, IEntity to) {
             double att = from.Attack + (from.EquippedWeapon?.AccuracyBonus ?? 0);
             double def = to.Defence;
             double dist = from.RangeTo(to);
             double size = to.Size;
-            double dropoff = (from.EquippedWeapon == null) ? 0.0 : from.EquippedWeapon.Type.DropOff;
+            double dropoff = (from.EquippedWeapon == null) ? 0.0 : from.EquippedWeapon.DropOff;
             double encumbrancePenalty = from.Encumbrance * Const.EncumbranceHitPenalty;
             double hit = Const.HitBias
                          + ((rnd.NextDouble() - 0.5) * Const.HitScale)
@@ -285,15 +242,6 @@ namespace SpaceMercs {
                 hit += Const.SurpriseHitMod;
             }
             return hit;
-        }
-
-        public static int GenerateDroppedItemLevel(int lev, bool boss) {
-            int ilev = (int)((rnd.NextDouble() * lev) / 4.0);
-            if (boss) {
-                int ilev2 = (int)((rnd.NextDouble() * lev) / 4.0);
-                if (ilev2 > ilev) ilev = ilev2;
-            }
-            return ilev;
         }
 
         public static double BodyPartToArmourScale(BodyPart bp) {
@@ -346,6 +294,99 @@ namespace SpaceMercs {
                 else dict.Add(dt, d2[dt]);
             }
             return dict;
+        }
+
+        public static bool IsPassable(MissionLevel.TileType tp) {
+            return tp switch {
+                MissionLevel.TileType.Floor => true,
+                MissionLevel.TileType.OpenDoorHorizontal => true,
+                MissionLevel.TileType.OpenDoorVertical => true,
+                _ => false,
+            };
+        }
+        #endregion
+
+        #region Item Functions
+        public static Dictionary<IItem, int> DismantleEquipment(IEquippable eq, int lvl) {
+            Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
+            Random rand = new Random();
+            double diff = ((double)eq.BaseType.BaseRarity / 2.0) + (double)eq.Level;
+            double fract = (double)lvl / diff;
+            Dictionary<MaterialType, int> dMats = new (eq.BaseType.Materials);
+            if (eq is Weapon wp && wp.Mod is not null) {
+                foreach (MaterialType mmat in wp.Mod.Materials.Keys) {
+                    if (dMats.ContainsKey(mmat)) dMats[mmat] += wp.Mod.Materials[mmat];
+                    else dMats.Add(mmat, wp.Mod.Materials[mmat]);
+                }
+            }
+            foreach (MaterialType mat in dMats.Keys) {
+                int iQuantity = dMats[mat];
+                int iRecovered = (int)(rand.NextDouble() * fract * (double)(iQuantity + 1.0));
+                if (iRecovered > iQuantity) iRecovered = iQuantity;
+                if (iRecovered > 0) dRemains.Add(new Material(mat), iRecovered);
+            }
+
+            return dRemains;
+        }
+
+        public static Color LevelToColour(int lvl) {
+            return lvl switch {
+                0 => Color.FromArgb(255, 255, 255, 255),
+                1 => Color.FromArgb(255, 255, 255, 0),
+                2 => Color.FromArgb(255, 50, 255, 100),
+                3 => Color.FromArgb(255, 50, 100, 255),
+                4 => Color.FromArgb(255, 170, 45, 255),
+                5 => Color.FromArgb(255, 255, 100, 70),
+                _ => throw new Exception("Unexpected equipment level : " + lvl)
+            };
+        }
+
+        public static IItem? LoadItem(XmlNode? xml) {
+            if (xml == null) return null;
+            if (xml.Name.Equals("Armour")) return new Armour(xml);
+            if (xml.Name.Equals("Weapon")) return new Weapon(xml);
+            if (xml.Name.Equals("Equipment")) return new Equipment(xml);
+            if (xml.Name.Equals("Corpse")) return new Corpse(xml);
+            if (xml.Name.Equals("Material")) return new Material(xml);
+            if (xml.Name.Equals("MissionItem")) return new MissionItem(xml);
+            throw new Exception("Attempting to load IItem of unknown type : " + xml.Name);
+        }
+
+        public static string LevelToDescription(int lvl) {
+            return lvl switch {
+                0 => "Basic",
+                1 => "Good",
+                2 => "Fine",
+                3 => "Superb",
+                4 => "Epic",
+                5 => "Legendary",
+                _ => throw new Exception($"Unexpected equipment level : {lvl}")
+            };
+        }
+
+        public static double CalculateMass(Dictionary<IItem, int> dEquip) {
+            double Mass = 0.0;
+            foreach (KeyValuePair<IItem, int> kvp in dEquip) {
+                Mass += kvp.Key.Mass * kvp.Value;
+            }
+            return Mass;
+        }
+
+        public static double ArmourReduction(double ar) {
+            return Math.Pow(0.5, ar / Const.ArmourScale);
+        }
+
+        public static int GenerateDroppedItemLevel(int lev, bool boss) {
+            int ilev = (int)((rnd.NextDouble() * lev) / 4.0);
+            if (boss) {
+                int ilev2 = (int)((rnd.NextDouble() * lev) / 4.0);
+                if (ilev2 > ilev) ilev = ilev2;
+            }
+            return ilev;
+        }
+
+        public static double ItemLevelToCostMod(int lev) {
+            return Math.Pow(lev + 1, Const.EquipmentLevelCostExponent) * Math.Pow(Const.EquipmentLevelCostBaseExponent, lev);
         }
 
         public static IItem? GenerateRandomItem(Random rnd, int lvl, Race? race, bool bAddEquipment = true) {
@@ -450,40 +491,9 @@ namespace SpaceMercs {
 
             return ar;
         }
+        #endregion
 
-        public static bool IsPassable(MissionLevel.TileType tp) {
-            return tp switch {
-                MissionLevel.TileType.Floor => true,
-                MissionLevel.TileType.OpenDoorHorizontal => true,
-                MissionLevel.TileType.OpenDoorVertical => true,
-                _ => false,
-            };
-        }
-
-        public static string MissionGoalToString(Mission.MissionGoal mg) {
-            return mg switch {
-                Mission.MissionGoal.ExploreAll => "Explore",
-                Mission.MissionGoal.KillAll => "Kill All",
-                Mission.MissionGoal.KillBoss => "Assassination",
-                Mission.MissionGoal.Gather => "Gathering",
-                Mission.MissionGoal.FindItem => "Treasure Hunt",
-                Mission.MissionGoal.Defend => "Defend Objective",
-                _ => "Unknown",
-            };
-        }
-
-        public static double ItemLevelToCostMod(int lev) {
-            return Math.Pow(lev + 1, Const.EquipmentLevelCostExponent) * Math.Pow(Const.EquipmentLevelCostBaseExponent, lev);
-        }
-
-        public static double RoundSF(double d, int digits) {
-            if (d == 0) return 0;
-            decimal scale = (decimal)Math.Pow(10, Math.Floor(Math.Log10(Math.Abs(d))) + 1);
-            return (double)(scale * Math.Round((decimal)d / scale, digits));
-        }
-
-        // Xml parsing utility functions
-
+        #region Xml Parsing Utility Functions
         public static IEnumerable<XmlNode> SelectNodesToList(this XmlNode root, string path) {
             List<XmlNode> nodes = new List<XmlNode>();
             if (string.IsNullOrEmpty(path) || root is null) return nodes;
@@ -562,5 +572,6 @@ namespace SpaceMercs {
             }
             return iVal;
         }
+        #endregion
     }
 }
