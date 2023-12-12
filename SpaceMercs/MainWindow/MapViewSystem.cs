@@ -45,7 +45,7 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
-            Matrix4 translateM = Matrix4.CreateTranslation(0.8f + (SystemStar!.DrawScale * Const.StarScale), 0.5f, 0f);
+            Matrix4 translateM = Matrix4.CreateTranslation(0.9f + (SystemStar!.DrawScale * Const.StarScale / aspect), 0.5f, 0f);
             fullShaderProgram.SetUniform("view", squashM * translateM);
             fullShaderProgram.SetUniform("lightPos", -100000f, 0f, 10000f);
 
