@@ -307,9 +307,8 @@ namespace SpaceMercs {
                 }
             } while (plHome == null);
             plHome.GenerateMoons(rand, 9, 2); // Make sure that this planet has at least two moons
-            rc.SetHomePlanet(plHome);
             rc.Colonise(this);
-            InsertColoniesForRace(rc, Const.HomeSysColonyCount);
+            rc.SetHomePlanet(plHome);
             plHome.SetName("Homeworld");
         }
 
@@ -416,31 +415,22 @@ namespace SpaceMercs {
             Visited = v;
         }
 
-        // For a few habitable planets in this system (or moons), insert a colony for the given race
-        public void InsertColoniesForRace(Race rc, int Count) {
-            int tries = 0, inserted = 0, iterations = 0;
+        // Either expand an existing base or add a new one in this system
+        public bool AddPopulationInSystem(Race rc, Random rand) {
+            int tries = 0;
             if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
-            Random rand = new Random();
 
             // Firstly colonise any Oceanic planets and maybe some moons
+            int plcols = 0;
             foreach (Planet pl in Planets) {
+                if (pl.Colony is not null) plcols++;
                 if (pl.Type == Planet.PlanetType.Oceanic) {
-                    pl.ExpandBase(rc, rand);
-                    inserted++;
-                    if (inserted >= Count) return;
+                    if (pl.ExpandBase(rc, rand) > 0) return true;
                     if (rand.NextDouble() > 0.5) {
-                        inserted += pl.ExpandMoonBase(rand, rc);
-                        if (inserted >= Count) return;
+                        if (pl.ExpandMoonBase(rand, rc) > 0) return true;
                     }
                 }
             }
-
-            // Just so we don't get the same place every time, randomise a bit
-            do {
-                int pno = rand.Next(_planets.Count);
-                Planet pl = _planets[pno];
-                if (pl.BaseSize == 0) break;
-            } while (++iterations < 10);
 
             // Now add any remaining colonies
             do {
@@ -448,14 +438,21 @@ namespace SpaceMercs {
                 int pno = rand.Next(_planets.Count);
                 Planet pl = _planets[pno];
                 double tdiff = pl.TDiff(rc);
-                if (pl.Type == Planet.PlanetType.Gas) tdiff += 15.0; // Make it less likely to colonise Gas giants.
-                if (rand.NextDouble() * 100.0 > tdiff) {
-                    if (rand.NextDouble() > 0.5) {
-                        if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) inserted += pl.ExpandBase(rc, rand);
-                    }
-                    else inserted += pl.ExpandMoonBase(rand, rc);
+                if (pl.Type == Planet.PlanetType.Gas) {
+                    tdiff += 15.0; // Make it less likely to colonise Gas giants.
+                    if (plcols == 0) tdiff += 30; // Much less likely if this is the first colony in this system
+                    if (plcols == 1) tdiff += 15; // Quite a bit less likely if this is the second colony in this system
                 }
-            } while (inserted < Count && tries < 1000);
+                if (rand.NextDouble() * 150.0 > tdiff) {
+                    if (rand.NextDouble() > 0.5) {
+                        if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) {
+                            if (pl.ExpandBase(rc, rand) > 0) return true;
+                        }
+                    }
+                    else if (pl.ExpandMoonBase(rand, rc) > 0) return true;
+                }
+            } while (tries < 50);
+            return false;
         }
 
         // Maybe build trade routes for this system based on the largest colony size and number of colonies for the given race

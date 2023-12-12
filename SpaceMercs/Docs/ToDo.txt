@@ -5,6 +5,11 @@ ToDo List
 Check auto-building of trade routes
 
 Gate certain techs behind a level of civilisation size (e.g. Nanomesh, Adamantium, Ultramesh, Aeromesh)
+- Create initial civs with fixed size.
+- When civ expands, make a notice if it is 
+- Gate materials by race, civ size when creating any objects in Merchants, dropping items from corpses, Mercenary inventories
+
+- Seed 185232 : Star was huge but invisible in sector??
 
 ==========================================================================================================
 

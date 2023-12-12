@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace SpaceMercs.Dialogs {
     public partial class NewGame : Form {
         public int StarsPerSector { get { return tbStarsPerSector.Value; } }
         public int PlanetDensity { get { return tbPlanetDensity.Value; } }
         public int CivSize { get { return tbCivSize.Value; } }
+        public int AlienCivSize { get { return tbAlienCivSize.Value; } }
         private int Unspent = Const.SpareAttributePoints;
         public int Strength { get; set; }
         public int Agility { get; set; }
@@ -40,9 +35,12 @@ namespace SpaceMercs.Dialogs {
             tbPlanetDensity.Minimum = Const.MinPlanetDensity;
             tbPlanetDensity.Maximum = Const.MaxPlanetDensity;
             tbPlanetDensity.Value = Const.DefaultPlanetDensity;
-            tbCivSize.Minimum = 1;
-            tbCivSize.Maximum = Const.MinStarsPerSector;
-            tbCivSize.Value = Const.MinStarsPerSector - 2;
+            tbCivSize.Minimum = 5;
+            tbCivSize.Maximum = 25;
+            tbCivSize.Value = 18;
+            tbAlienCivSize.Minimum = 5;
+            tbAlienCivSize.Maximum = 25;
+            tbAlienCivSize.Value = 18;
             tbName.Text = "Unnamed";
             PlayerName = "Unnamed";
             Strength = rc.Strength;
@@ -175,6 +173,5 @@ namespace SpaceMercs.Dialogs {
             Endurance--;
             SetupSkillButtons();
         }
-
     }
 }

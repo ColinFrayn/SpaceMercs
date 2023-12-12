@@ -178,6 +178,7 @@ namespace SpaceMercs {
         public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
         public const double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
         public const double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
+        public const int InitialCivilisationSize = 20; // Total population of all civs at the start
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony

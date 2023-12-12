@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System.ComponentModel;
 using System.IO;
 using System.Xml;
 
@@ -111,7 +110,7 @@ namespace SpaceMercs {
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
                 // If the star is close to the viewer and not faded then show the textured sphere
-                if ((!bFadeUnvisited || st.Visited) && iLevel >= 4) {
+                if ((!bFadeUnvisited || st.Visited) && iLevel >= 3) {
                     Matrix4 scaleM = Matrix4.CreateScale(0.5f);
                     Matrix4 viewM = scaleM * translateM;
                     prog.SetUniform("view", viewM);
@@ -226,6 +225,17 @@ namespace SpaceMercs {
                 }
             }
             return stClosest;
+        }
+        public Star? GetRandomColonisedSystem(Random rand) {
+            List<Star> colonisedStars = new List<Star>();
+            foreach (Star st in Stars) {
+                if (st.Owner != null) colonisedStars.Add(st);
+            }
+            if (colonisedStars.Count == 0) return null;
+            return colonisedStars[rand.Next(colonisedStars.Count)];
+        }
+        public List<Star> GetStarsInDistanceOrderFrom(Star stCentral) {
+            return Stars.OrderBy(st => (st.MapPos - stCentral.MapPos).LengthFast).ToList();
         }
 
         public void DrawTradeRoutes(ShaderProgram prog) {

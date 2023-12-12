@@ -12,42 +12,6 @@ namespace SpaceMercs.MainWindow {
         VertexArray? mapLinesArray = null, hoverLinkArray = null;
         private int lastMinX = -1, lastMinY = -1, lastMaxX = -1, lastMaxY = -1;
 
-        // Load in the default texture bitmaps
-        // Build texture maps for the stars' radial brightness maps
-        // !!! NOT USED
-        private void SetupMapTextures() {
-            double D = -0.7, D2 = -0.6;
-            double RMin = 0.05;
-            double RScale = Math.Pow(RMin, D) - 1.0;
-            double RScale2 = Math.Pow(RMin, D2) - 1.0;
-            Textures.iStarTexture = GL.GenTexture();
-            Textures.iShipHalo = GL.GenTexture();
-            Textures.byteStarTexture = new byte[Textures.StarTextureSize * Textures.StarTextureSize * 3];
-            Textures.byteShipHaloTexture = new byte[Textures.ShipHaloTextureSize * Textures.ShipHaloTextureSize * 3];
-            for (int y = 0; y < Textures.StarTextureSize; y++) {
-                double dy = ((double)Textures.StarTextureSize / 2.0) - ((double)y + 0.5);
-                for (int x = 0; x < Textures.StarTextureSize; x++) {
-                    double dx = ((double)Textures.StarTextureSize / 2.0) - ((double)x + 0.5);
-                    double r = Math.Pow((dx * dx) + (dy * dy), 0.5) * 2.0 / (double)Textures.StarTextureSize;
-                    double r2 = r * 0.8;
-                    byte val, val2;
-                    if (r > 1.0) val = 0;
-                    else if (r < RMin) val = 255;
-                    else val = (byte)((Math.Pow(r, D) - 1.0) * 255.0 / RScale);
-                    if (r2 > 1.0) val2 = 0;
-                    else if (r2 < RMin) val2 = 255;
-                    else val2 = (byte)((Math.Pow(r2, D2) - 1.0) * 255.0 / RScale2);
-                    if (val2 > 150) val2 = 150;
-                    Textures.byteStarTexture[((y * Textures.StarTextureSize) + x) * 3 + 0] = val;
-                    Textures.byteStarTexture[((y * Textures.StarTextureSize) + x) * 3 + 1] = val;
-                    Textures.byteStarTexture[((y * Textures.StarTextureSize) + x) * 3 + 2] = val;
-                    Textures.byteShipHaloTexture[((y * Textures.ShipHaloTextureSize) + x) * 3 + 0] = val2;
-                    Textures.byteShipHaloTexture[((y * Textures.ShipHaloTextureSize) + x) * 3 + 1] = val2;
-                    Textures.byteShipHaloTexture[((y * Textures.ShipHaloTextureSize) + x) * 3 + 2] = val2;
-                }
-            }
-        }
-
         // Display the galaxy map on the screen
         private void DrawMap() {
             // What are the extents of the map that we can show here?

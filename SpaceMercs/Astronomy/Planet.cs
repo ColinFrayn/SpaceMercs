@@ -222,6 +222,7 @@ namespace SpaceMercs {
             Moon mn = Moons[mno];
             if (mn.BaseSize == 4) return 0;
             double tdiff = mn.TDiff(rc);
+            if (mn.Colony is not null) tdiff -= 5; // More likely to expand an existing colony
             if (rand.NextDouble() * 100.0 > tdiff) {
                 return mn.ExpandBase(rc, rand);
             }

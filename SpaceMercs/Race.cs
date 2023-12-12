@@ -24,6 +24,7 @@ namespace SpaceMercs {
         public Color Colour { get; private set; }
         public int ColonyCount { get { return Colonies.Count; } }
         public int SystemCount { get { return Systems.Count; } }
+        public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -76,7 +77,6 @@ namespace SpaceMercs {
 
         public void Colonise(Star st) {
             st.SetOwner(this);
-            st.InsertColoniesForRace(this, Const.InitialColonyCount);
             AddSystem(st);
             if (Const.DEBUG_VIEW_ALL_CIVS) st.SetVisited(true);
         }
@@ -93,6 +93,7 @@ namespace SpaceMercs {
             HomePlanet = Planet.Empty;
             Known = false;
             Systems.Clear();
+            Colonies.Clear();
         }
 
         public GenderType GenerateRandomGender(Random rand) {

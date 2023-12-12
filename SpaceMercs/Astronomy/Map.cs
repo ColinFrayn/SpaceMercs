@@ -82,14 +82,44 @@ namespace SpaceMercs {
             if (stHome is null) {
                 throw new Exception("Could not find most central star");
             }
+            bool isPlayer = (sc.SectorX==0 && sc.SectorY==0);
+            int maxSize = isPlayer ? ng.CivSize : ng.AlienCivSize;
+
             stHome.GenerateHomeSystem(rc);
 
-            // Setup other stars in this sector, allied to this race, if specified in NewGame dialog.
-            for (int sno = 2; sno <= ng.CivSize; sno++) {
-                Star? st = sc.GetClosestNonColonisedSystemTo(stHome);
+            // Setup other stars in this sector, allied to this race, based on the maximum civ size
+            Random rand = new Random(ng.Seed);
+
+            // Force multiple systems based on civ size
+            List<Star> SystemsInOrderOfDistance = sc.GetStarsInDistanceOrderFrom(stHome);
+            SystemsInOrderOfDistance.Remove(stHome);
+            int nsys = maxSize / 5;
+            do {
+                if (SystemsInOrderOfDistance.Count == 0) break;
+                Star st = SystemsInOrderOfDistance.First(); // Get nearest uncolonised system
+                for (int ntry = 0; ntry < 50; ntry++) { // Attempt lots of times to colonise it with a single size 1 colony.
+                    if (st.AddPopulationInSystem(rc, rand)) {
+                        rc.Colonise(st);
+                        stHome.AddTradeRoute(st);
+                        if (isPlayer) st.SetVisited(true);
+                        break;
+                    }
+                }
+                SystemsInOrderOfDistance.Remove(st);
+            } while (rc.SystemCount < nsys);
+
+            // Add extra colonies up to required population size
+            while (rc.Population < maxSize) {
+                Star st = stHome;
+                int r = rand.Next(100);
+                if (r < 10) st = sc.GetClosestNonColonisedSystemTo(stHome) ?? stHome;
+                else if (r < 80) st = sc.GetRandomColonisedSystem(rand) ?? stHome;
                 if (st is null) continue;
-                rc.Colonise(st);
-                stHome.AddTradeRoute(st);
+                if (st.AddPopulationInSystem(rc, rand)) {
+                    rc.Colonise(st);
+                    if (st != stHome) stHome.AddTradeRoute(st); // Doesn't add duplicates so no worries
+                    if (isPlayer) st.SetVisited(true);
+                }
             }
 
             // Set up extra trade routes between nearest neighbours
