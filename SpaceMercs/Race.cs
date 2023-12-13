@@ -88,6 +88,11 @@ namespace SpaceMercs {
         public void AddColony(Colony cl) {
             if (!Colonies.Contains(cl)) Colonies.Add(cl);
         }
+        public void CheckGrowthForAllColonies() {
+            foreach (Colony cl in Colonies) {
+                cl.CheckGrowth();
+            }
+        }
 
         public void Reset() {
             HomePlanet = Planet.Empty;

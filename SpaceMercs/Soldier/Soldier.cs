@@ -973,9 +973,7 @@ namespace SpaceMercs {
             }
             // Otherwise upgrade what's there
             else {
-                ar.UpgradeArmour();
-                //EquippedArmour.Remove(ar);
-                //EquippedArmour.Add(new Armour(at, mat, lvl));
+                ar.UpgradeArmour(Race);
                 CalculateMaxStats();
             }
         }

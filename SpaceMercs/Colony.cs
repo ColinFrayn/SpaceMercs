@@ -68,7 +68,7 @@ namespace SpaceMercs {
             dtLastGrowth = Const.dtTime;
             if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
-            dtLastUpdate = Const.dtTime;
+            dtLastUpdate = DateTime.MinValue;
 
             rc.AddColony(this);
         }
@@ -279,10 +279,12 @@ namespace SpaceMercs {
         // Fill the inventory with deliveries for the given number of days
         private void PopulateInventory(int days) {
             Random rand = new Random();
+            int civSize = Owner.Population;
 
             // Add specific utility items
             foreach (ItemType eq in StaticData.ItemTypes) {
                 if (eq.RequiredRace != null && eq.RequiredRace != Owner) continue;
+                if (eq.CivSize > civSize) continue;
                 double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                 // Modify rarity by colony details & add this item if required
                 if ((Base & BaseType.Military) == 0) rarity /= 2.0;
@@ -296,6 +298,7 @@ namespace SpaceMercs {
             foreach (WeaponType wt in StaticData.WeaponTypes) {
                 if (!wt.IsUsable) continue;
                 if (wt.RequiredRace != null && wt.RequiredRace != Owner) continue;
+                if (wt.CivSize > civSize) continue;
                 for (int Level = 0; Level < 4; Level++) {
                     Weapon wp = new Weapon(wt, Level);
                     double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
@@ -311,11 +314,13 @@ namespace SpaceMercs {
             // Now add all armour types
             foreach (ArmourType atp in StaticData.ArmourTypes) {
                 if (atp.RequiredRace != null && atp.RequiredRace != Owner) continue;
+                if (atp.CivSize > civSize) continue;
                 foreach (MaterialType mat in StaticData.Materials) {
+                    if (!mat.IsArmourMaterial) continue;
                     if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
                     if (mat.IsScavenged) continue;
+                    if (mat.CivSize > civSize) continue;
                     for (int Level = 0; Level < 4; Level++) {
-                        if (!mat.IsArmourMaterial) continue;
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                         // Modify rarity by colony details & add this armour if required
@@ -332,6 +337,7 @@ namespace SpaceMercs {
             foreach (MaterialType mat in StaticData.Materials) {
                 if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
                 if (mat.IsScavenged) continue;
+                if (mat.CivSize > civSize) continue;
                 AddItem(new Material(mat), mat.Rarity, days, rand);
             }
         }
@@ -487,12 +493,17 @@ namespace SpaceMercs {
         private int GetNextGrowthPeriod() { // In days
             if (!CanGrow) return (int)Const.Million; // i.e. never
             Random rand = new Random(Location.GetHashCode());
-            int dt = (int)(BaseSize * BaseSize * (Const.DaysPerYear * 2.0 + 100.0 * rand.NextDouble()));
-            dt += rand.Next(250) + rand.Next(250);
-            if (Location.GetSystem().TradeRoutes.Any()) {
-                dt = (int)((double)dt * Const.TradeRouteColonyGrowthRate);
+            double dt = Math.Pow(BaseSize, 1.6) * (Const.DaysPerYear * 2.0 + 100.0 * rand.NextDouble());
+            dt += rand.Next(250);
+            double tdiff = Location.TDiff(Owner);
+            for (int i=0; i<Math.Abs(tdiff/10); i++) {
+                dt *= rand.NextDouble() * 0.1 + 1.1; // The worse the temperature, the harder to grow
             }
-            return dt;
+            if (Location is Moon) dt *= 1.2; // Moons suck
+            if (Location.GetSystem().TradeRoutes.Any()) {
+                dt *= Const.TradeRouteColonyGrowthRate;
+            }
+            return (int)dt;
         }
 
         // Iterators

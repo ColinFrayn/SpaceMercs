@@ -7,6 +7,7 @@ using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
@@ -588,7 +589,6 @@ namespace SpaceMercs.MainWindow {
             CloseAllDialogs();
             PlayerTeam = new Team(ng, StaticData.Races[0]);
             if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony == null) throw new Exception("Did not set up PlayerTeam correctly - not at home planet!");
-            hao.Colony.UpdateStock(PlayerTeam);
         }
 
         // External triggers
@@ -702,7 +702,6 @@ namespace SpaceMercs.MainWindow {
             msgBox.PopupMessage("You have arrived at your destination");
             PlayerTeam.CurrentPosition = aoTo;
             if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {
-                hao.Colony.UpdateStock(PlayerTeam); // Make sure we get up to date with what this colony has in store
                 if (!hao.Colony.Owner.Known) {
                     msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}");
                     hao.Colony.Owner.SetAsKnownBy(PlayerTeam);
@@ -713,6 +712,51 @@ namespace SpaceMercs.MainWindow {
             fMapViewX = PlayerTeam.CurrentPosition.GetMapLocation().X;
             fMapViewY = PlayerTeam.CurrentPosition.GetMapLocation().Y;
             SetAOButtonsOnGUI(aoSelected);
+            CheckPopulationGrowth();
+        }
+
+        private void CheckPopulationGrowth() {
+            // Go through all races and check colonies for growth.
+            // If human population grows then announce it, and any newly available techs
+            int humanPop = StaticData.Races[0].Population;
+            foreach (Race rc in StaticData.Races) {
+                rc.CheckGrowthForAllColonies();
+            }
+            int newHumanPop = StaticData.Races[0].Population;
+            if (newHumanPop == humanPop) return;
+
+            msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
+            List<string> newTech = new List<string>();
+            foreach (MaterialType mat in StaticData.Materials) {
+                if (mat.CivSize > humanPop && mat.CivSize <= newHumanPop) newTech.Add($"Material: {mat.Name}");
+            }
+            foreach (WeaponType wp in StaticData.WeaponTypes) {
+                if (wp.CivSize > humanPop && wp.CivSize <= newHumanPop) newTech.Add($"Weapon: {wp.Name}");
+            }
+            foreach (ArmourType ar in StaticData.ArmourTypes) {
+                if (ar.CivSize > humanPop && ar.CivSize <= newHumanPop) newTech.Add($"Armour: {ar.Name}");
+            }
+            foreach (ItemType it in StaticData.ItemTypes) {
+                if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
+            }
+            foreach (ItemType it in StaticData.ItemTypes) {
+                if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
+            }
+            foreach (ShipWeapon sw in StaticData.ShipWeapons) {
+                if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Weapon: {sw.Name}");
+            }
+            foreach (ShipArmour sw in StaticData.ShipArmours) {
+                if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Armour: {sw.Name}");
+            }
+            foreach (ShipEngine se in StaticData.ShipEngines) {
+                if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Engine: {se.Name}");
+            }
+            foreach (ShipEquipment se in StaticData.ShipEquipment) {
+                if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Equipment: {se.Name}");
+            }
+            if (newTech.Count > 0) {
+                msgBox.PopupMessage($"Human scientists have made great technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
+            }
         }
 
         // Close down all dialogs

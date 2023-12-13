@@ -158,6 +158,7 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
+    <CivSize>20</CivSize>
   </WeaponType>
   <WeaponType Name="Arc Rifle" Class="Shotgun">
     <Mass>5.0</Mass>
@@ -179,6 +180,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
+    <CivSize>20</CivSize>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>18.0</Mass>
@@ -200,6 +202,7 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
+    <CivSize>20</CivSize>
   </WeaponType>
   <WeaponType Name="Flame Thrower" Class="Launcher">
     <Mass>15.0</Mass>
@@ -252,6 +255,7 @@
       <Material Name="Electronic Components" Amount="1"/>
       <Material Name="Crystals" Amount="3"/>
     </Materials>
+    <CivSize>27</CivSize>
   </WeaponType>
   <WeaponType Name="Grenade Launcher" Class="Launcher">
     <Mass>8.0</Mass>
@@ -325,6 +329,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
+    <CivSize>20</CivSize>
   </WeaponType>
   <WeaponType Name="Disc Thrower" Class="Rifle">
     <Mass>3.0</Mass>

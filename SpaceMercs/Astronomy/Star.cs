@@ -239,7 +239,7 @@ namespace SpaceMercs {
             }
 
             // Setup the star's type & colour based on temperature, mass, lifetime etc.
-            SetupType();
+            StarType = SetupType();
             SetupColour();
 
             // Stellar type

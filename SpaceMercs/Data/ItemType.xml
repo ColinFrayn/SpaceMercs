@@ -69,6 +69,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
+    <CivSize>20</CivSize>
     <Tex>2,1</Tex>
   </ItemType>
   <ItemType Name="Nannite Medsystem">
@@ -94,6 +95,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
+    <CivSize>20</CivSize>
     <Tex>2,1</Tex>
   </ItemType>
   <ItemType Name="Adrenaline">
@@ -322,6 +324,7 @@
       <Material Name="Uranium" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
+    <CivSize>25</CivSize>
     <Tex>3,3</Tex>
   </ItemType>
   <ItemType Name="Sonic Grenade">

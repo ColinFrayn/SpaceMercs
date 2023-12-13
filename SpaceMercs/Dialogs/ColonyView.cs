@@ -27,7 +27,7 @@ namespace SpaceMercs.Dialogs {
             StartMission = _StartMission;
             if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
             cl = hao.Colony;
-            cl.UpdateStock(PlayerTeam); // Make sure we have updated everything sinze the last mission
+            cl.UpdateStock(PlayerTeam); // Make sure we have updated everything since the last time we visited
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner, cl.Location.GetSystem());
             InitializeComponent();
             SetupTabs();
@@ -114,6 +114,9 @@ namespace SpaceMercs.Dialogs {
             }
             lbTeamCashMerch.Text = PlayerTeam.Cash.ToString("N2") + "cr";
             btBuyMerchant.Enabled = dgMerchant.Rows.Count > 0;
+            if (dgMerchant.SortOrder != SortOrder.None) {
+                dgMerchant.Sort(dgMerchant.SortedColumn, dgMerchant.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
+            }
         }
         private void SetupMercenariesTab() {
             dgMercenaries.Rows.Clear();
@@ -234,6 +237,9 @@ namespace SpaceMercs.Dialogs {
             foreach (DataGridViewRow row in lSelected) row.Selected = true;
             if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
             lbTeamCashFoundry.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            if (dgInventory.SortOrder != SortOrder.None) {
+                dgInventory.Sort(dgInventory.SortedColumn, dgInventory.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
+            }
         }
 
         private static bool ShouldDisplayInFoundry(string strType, IItem eq) {

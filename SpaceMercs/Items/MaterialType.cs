@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Security.Policy;
+using System.Xml;
 
 namespace SpaceMercs {
     public class MaterialType {
@@ -11,6 +12,7 @@ namespace SpaceMercs {
         public string Desc { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
         public Race? RequiredRace { get; private set; }
+        public int CivSize { get; private set; }  // Will first be discovered when your civ reaches this size
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
         public double ConstructionChanceModifier { get { return Math.Log(Rarity > 0 ? Rarity : 0.0001) * 10.0; } }
@@ -24,6 +26,7 @@ namespace SpaceMercs {
             UnitMass = xml.SelectNodeDouble("UnitMass", 1.0);
             Desc = xml.SelectNodeText("Desc").Trim();
             IsScavenged = xml.SelectSingleNode("Scavenged") != null;
+            CivSize = xml.SelectNodeInt("CivSize", 5);
 
             // Special resistances if this is made into armour
             foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {

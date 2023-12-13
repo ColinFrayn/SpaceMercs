@@ -635,13 +635,10 @@ namespace SpaceMercs {
         // Generate what salvage this ship contains (if it has been destroyed, then generate less)
         public Dictionary<IItem, int> GenerateSalvage(bool bDestroyed) {
             Dictionary<IItem, int> dSalvage = new Dictionary<IItem, int>();
-            Dictionary<string, double> dMats = new Dictionary<string, double>() { { "Steel", 0.4 }, { "Aluminium", 0.8 }, { "Rubber", 0.1 }, { "Carbon Fibre", 0.5 }, { "Composite", 0.6 }, { "Rare Earth Metals", 0.1 }, { "Copper", 0.1 }, { "Fabric", 0.1 }, { "Plastic", 0.1 } };
+            IEnumerable<MaterialType> dMats = StaticData.Materials.Where(m => m.RequiredRace is null && m.CivSize <= 5);
             Random rand = new Random();
-            foreach (string strMat in dMats.Keys) {
-                double dmult = dMats[strMat];
-                MaterialType? mat = StaticData.GetMaterialTypeByName(strMat);
-                if (mat is null) throw new Exception($"Unknown material : {strMat}"); // Should never happen
-                int num = (int)(Type.MaxHull * dmult * (rand.NextDouble() + 2.0) / 5.0);
+            foreach (MaterialType mat in dMats) {
+                int num = (int)(Type.MaxHull * mat.Rarity * (rand.NextDouble() + 2.0) / 5.0);
                 if (bDestroyed) num = (int)(num * (rand.NextDouble() + 2.0) / 5.0);
                 if (num > 0) dSalvage.Add(new Material(mat), num);
             }

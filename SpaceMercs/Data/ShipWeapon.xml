@@ -50,6 +50,7 @@
     <Desc>A proton gun</Desc>
     <Avail>MTE</Avail>
     <Tex>5,5</Tex>
+    <CivSize>23</CivSize>
   </ShipWeapon>
   <ShipWeapon Name="Plasma Cannon">
     <Cost>600</Cost>
@@ -60,5 +61,6 @@
     <Desc>A plasma cannon</Desc>
     <Avail>ME</Avail>
     <Tex>6,5</Tex>
+    <CivSize>26</CivSize>
   </ShipWeapon>
 </Data>

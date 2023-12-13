@@ -89,9 +89,7 @@ namespace SpaceMercs {
         public static int iPlanetHalo = -1;
         public static byte[]? bytePlanetHalo;
         public static int iStarTexture = -1;
-        public static byte[]? byteStarTexture;
         public static int iShipHalo = -1;
-        public static byte[]? byteShipHaloTexture;
 
         // Mission textures
         public const int TileSize = 32;

@@ -2,12 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Check auto-building of trade routes
-
-Gate certain techs behind a level of civilisation size (e.g. Nanomesh, Adamantium, Ultramesh, Aeromesh)
-- Create initial civs with fixed size.
-- When civ expands, make a notice if it is 
-- Gate materials by race, civ size when creating any objects in Merchants, dropping items from corpses, Mercenary inventories
+Check civ expansion from the beginning. is it too fast?
+- Check auto-building of trade routes
+- Maybe put some new techs behind much larger civ size?
 
 ==========================================================================================================
 

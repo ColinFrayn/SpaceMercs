@@ -78,6 +78,10 @@ namespace SpaceMercs.Dialogs {
                 arrRow[0] = thisItem.Name;
                 arrRow[1] = strType;
                 arrRow[2] = thisItem.Mass.ToString("N2") + "kg";
+                Race playerRace = StaticData.Races[0];
+                if (thisItem.RequiredRace != null && thisItem.RequiredRace != playerRace) return;
+                if (playerRace.Population < thisItem.CivSize) return;
+
                 // How many can we build?
                 int count = 999;
                 foreach (MaterialType mat in thisItem.Materials.Keys) {

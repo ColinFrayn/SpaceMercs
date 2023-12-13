@@ -403,7 +403,8 @@ namespace SpaceMercs {
                 double best = 0.0;
                 MaterialType? mbest = null;
                 foreach (MaterialType mat in StaticData.Materials) {
-                    if (race is not null && mat.RequiredRace is not null && race != mat.RequiredRace) continue;
+                    if (mat.RequiredRace is not null && race != mat.RequiredRace) continue;
+                    if (race is not null && race.Population < mat.CivSize) continue;
                     double r = rnd.NextDouble() * Math.Pow(mat.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;
@@ -419,6 +420,7 @@ namespace SpaceMercs {
                 foreach (ItemType it in StaticData.ItemTypes) {
                     if (it.BaseRarity > lvl + 5) continue;
                     if (it.RequiredRace != null && it.RequiredRace != race) continue;
+                    if (race is not null && race.Population < it.CivSize) continue;
                     double r = rnd.NextDouble() * Math.Pow(it.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;
@@ -435,6 +437,7 @@ namespace SpaceMercs {
             double trar = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
                 if (tp.RequiredRace != null && tp.RequiredRace != race) continue;
+                if (race is not null && race.Population < tp.CivSize) continue;
                 if (tp.BaseRarity <= Level + 5 && tp.IsUsable) {
                     wts.Add(tp);
                     trar += tp.Rarity;
@@ -467,6 +470,7 @@ namespace SpaceMercs {
             MaterialType? mbest = null;
             foreach (ArmourType at in StaticData.ArmourTypes) {
                 if (at.RequiredRace != null && at.RequiredRace != race) continue;
+                if (race is not null && race.Population < at.CivSize) continue;
                 if (at.Locations.Count == 1) {
                     foreach (MaterialType mat in StaticData.Materials) {
                         if (!mat.IsArmourMaterial) continue;
@@ -485,9 +489,9 @@ namespace SpaceMercs {
 
             // Scale to level
             for (int n = 0; n < Level / 2; n++) {
-                if (rnd.NextDouble() < 0.6) ar.UpgradeArmour();
+                if (rnd.NextDouble() < 0.6) ar.UpgradeArmour(race);
             }
-            if (Level % 1 == 1 && rnd.NextDouble() < 0.3) ar.UpgradeArmour();
+            if (Level % 1 == 1 && rnd.NextDouble() < 0.3) ar.UpgradeArmour(race);
 
             return ar;
         }

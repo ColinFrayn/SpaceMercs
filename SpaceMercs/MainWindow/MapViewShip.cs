@@ -382,6 +382,7 @@ namespace SpaceMercs.MainWindow {
             if (!bHoverHull && (irContextRoom < 0 || irContextRoom > PlayerTeam.PlayerShip.Type.Rooms.Count)) return null;
             ShipRoomDesign? rd = bHoverHull ? null : PlayerTeam.PlayerShip.Type.Rooms[irContextRoom];
             ShipEquipment.RoomSize roomSize = rd?.Size ?? ShipEquipment.RoomSize.Armour;
+            Race playerRace = StaticData.Races[0];
             int count = 0;
             GUIPanel gp = new GUIPanel(this);
             List<int> lIDs = Enumerable.Range(0, StaticData.ShipEquipment.Count).ToList<int>();
@@ -392,6 +393,7 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
                 if ((se.Available & PlayerTeam.CurrentPositionHAO!.Base) == 0) continue; // Not the correct facilities
                 if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
+                if (playerRace.Population < se.CivSize) continue; // Not discovered yet
                 if (se.RequiredRace != null && PlayerTeam.GetRelations(se.RequiredRace) < Const.RaceRelationsLevelToAllowSpecialisedEquipmentSale) continue; // Correct race, but player team is not >= friendly
 
                 // Is it the right size?

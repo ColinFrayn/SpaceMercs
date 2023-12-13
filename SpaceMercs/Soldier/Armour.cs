@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -145,7 +146,7 @@ namespace SpaceMercs {
             return cost;
 
         }
-        public void UpgradeArmour() {
+        public void UpgradeArmour(Race? rc) {
             // Upgrade Level, Material or Type
             Random rnd = new Random();
             double r = rnd.NextDouble();
@@ -153,6 +154,9 @@ namespace SpaceMercs {
             else if (r < 0.85) { // Upgrade mats, if possible
                 MaterialType matnew = Material;
                 foreach (MaterialType mat2 in StaticData.Materials) {
+                    if (mat2.RequiredRace != null && mat2.RequiredRace != rc) continue;
+                    if (rc is not null && rc.Population < mat2.CivSize) continue;
+                    if (mat2.IsScavenged) continue;
                     // Is this material strictly better, or largely better?
                     if (mat2.IsArmourMaterial &&
                        (mat2.ArmourMod > matnew.ArmourMod || (mat2.ArmourMod * 1.1 > matnew.ArmourMod && mat2.MassMod < matnew.MassMod && rnd.NextDouble() > 0.5))) {
@@ -164,6 +168,7 @@ namespace SpaceMercs {
             else { // Upgrade type, if possible
                 ArmourType atnew = Type;
                 foreach (ArmourType at2 in StaticData.ArmourTypes) {
+                    if (rc is not null && rc.Population < at2.CivSize) continue;
                     if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && (atnew == Type || at2.Cost < atnew.Cost)) {
                         atnew = at2;
                     }

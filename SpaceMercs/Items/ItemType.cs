@@ -22,6 +22,7 @@ namespace SpaceMercs {
         public uint ItemID { get; private set; }
         public Race? RequiredRace { get; private set; }
         public ItemSource Source { get; private set; }
+        public int CivSize { get; private set; }
         public Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; private set; } = new Dictionary<Soldier.UtilitySkill, int>();
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get { return _SkillBoosts; } }
         private static uint NextID = Const.ItemIDBase;
@@ -34,6 +35,7 @@ namespace SpaceMercs {
             Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
             Mass = xml.SelectNodeDouble ("Mass", 0.0);
             Desc = xml.SelectNodeText("Desc").Trim();
+            CivSize = xml.SelectNodeInt("CivSize", 5);
 
             Materials = new Dictionary<MaterialType, int>();
             if (xml.SelectSingleNode("Materials") is not null) {

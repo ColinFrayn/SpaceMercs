@@ -23,6 +23,7 @@ namespace SpaceMercs {
         public int Repair { get; private set; }
         public bool Engineering { get; private set; }
         public bool BuildColony { get; private set; }
+        public int CivSize { get; private set; }
         public enum RoomSize { Weapon, Small, Medium, Large, Core, Engine, Armour };
 
         public ShipEquipment(XmlNode xml) : this(xml, ShipEquipment.RoomSize.Small) {
@@ -56,6 +57,7 @@ namespace SpaceMercs {
             Repair = xml.SelectNodeInt("Repair", 0);
             Engineering = (xml.SelectSingleNode("Engineering") != null);
             BuildColony = (xml.SelectSingleNode("BuildColony") != null);
+            CivSize = xml.SelectNodeInt("CivSize", 5);
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.
             if (xml.SelectSingleNode("Avail") != null) {

@@ -26,6 +26,8 @@ namespace SpaceMercs.Dialogs {
                 lbColonies.Visible = false;
                 lbSystemsLabel.Visible = false;
                 lbSystems.Visible = false;
+                lbPopulationLabel.Visible = false;
+                lbPopulation.Visible = false;
                 lbHomeLabel.Visible = false;
                 lbHome.Visible = false;
                 tbDescription.Visible = false;
@@ -35,11 +37,14 @@ namespace SpaceMercs.Dialogs {
                 lbColonies.Visible = true;
                 lbSystemsLabel.Visible = true;
                 lbSystems.Visible = true;
+                lbPopulationLabel.Visible = true;
+                lbPopulation.Visible = true;
                 lbHomeLabel.Visible = true;
                 lbHome.Visible = true;
                 tbDescription.Visible = true;
                 lbColonies.Text = rSelected.ColonyCount.ToString();
                 lbSystems.Text = rSelected.SystemCount.ToString();
+                lbPopulation.Text = rSelected.Population.ToString();
                 lbHome.Text = "(" + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.X, 2) + "," + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.Y, 2) + ")";
                 tbDescription.Text = rSelected.Description;
             }
