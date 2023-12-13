@@ -35,6 +35,9 @@ namespace SpaceMercs.MainWindow {
             bShowColonies = (xGUI.SelectSingleNode("ShowColonies") != null);
             bShowPop = (xGUI.SelectSingleNode("ShowPopulation") != null);
 
+            // Reset all races
+            foreach (Race rc in StaticData.Races) rc.Reset();
+
             // Load in the clock
             DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));
             Const.dtTime = newTime;

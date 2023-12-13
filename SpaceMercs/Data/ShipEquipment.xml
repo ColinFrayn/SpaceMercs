@@ -95,7 +95,7 @@
     <Desc>A shield generator, protecting your ship against damaging weapons.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
-    <CivSize>25</CivSize>
+    <CivSize>30</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Surface Scanner">
     <Cost>100</Cost>
@@ -122,7 +122,7 @@
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
-    <CivSize>30</CivSize>
+    <CivSize>37</CivSize>
     <Tex>1,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Cloaking Device">
@@ -169,7 +169,7 @@
     <Desc>A fusion-based power cor.e</Desc>
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
-    <CivSize>22</CivSize>
+    <CivSize>23</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Fusion Core">
     <Size>C</Size>
@@ -178,7 +178,7 @@
     <Desc>An advanced fusion-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
-    <CivSize>26</CivSize>
+    <CivSize>28</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
@@ -187,7 +187,7 @@
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>5,1</Tex>
-    <CivSize>30</CivSize>
+    <CivSize>36</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
@@ -196,7 +196,7 @@
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
-    <CivSize>34</CivSize>
+    <CivSize>41</CivSize>
   </ShipEquipment>
 </Data>
   

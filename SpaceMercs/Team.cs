@@ -36,7 +36,7 @@ namespace SpaceMercs {
             s.PlayerTeam = this;
             _Soldiers.Add(s);
             PlayerShip = Ship.GenerateStarterShip(this);
-            Cash = Const.InitialCash;
+            Cash = Const.InitialCash + Const.DEBUG_ADDITIONAL_STARTING_CASH;
             Relations.Add(playerRace, Const.StartingRelationsWithHomeRace);
             Mission_ShowLabels = Mission_ShowStatBars = false;
             Mission_ShowTravel = Mission_ShowPath = true;

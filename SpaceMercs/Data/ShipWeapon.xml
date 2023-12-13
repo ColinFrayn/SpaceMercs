@@ -50,7 +50,7 @@
     <Desc>A proton gun</Desc>
     <Avail>MTE</Avail>
     <Tex>5,5</Tex>
-    <CivSize>23</CivSize>
+    <CivSize>27</CivSize>
   </ShipWeapon>
   <ShipWeapon Name="Plasma Cannon">
     <Cost>600</Cost>
@@ -61,6 +61,17 @@
     <Desc>A plasma cannon</Desc>
     <Avail>ME</Avail>
     <Tex>6,5</Tex>
-    <CivSize>26</CivSize>
+    <CivSize>31</CivSize>
+  </ShipWeapon>
+  <ShipWeapon Name="Antimatter Cannon">
+    <Cost>1400</Cost>
+    <Power>6</Power>
+    <Attack>6</Attack>
+    <Range>9000</Range>
+    <Rate>1.4</Rate>
+    <Desc>An antimatter cannon</Desc>
+    <Avail>ME</Avail>
+    <Tex>7,5</Tex>
+    <CivSize>39</CivSize>
   </ShipWeapon>
 </Data>

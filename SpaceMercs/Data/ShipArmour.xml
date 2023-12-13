@@ -29,7 +29,7 @@
     <Desc>Adamantium plating</Desc>
     <Avail>MRE</Avail>
     <Tex>4,3</Tex>
-    <CivSize>30</CivSize>
+    <CivSize>35</CivSize>
   </ShipArmour>
   <ShipArmour Name="Adaptive Plating">
     <Cost>1500</Cost>
@@ -38,7 +38,7 @@
     <Desc>Adaptive plating</Desc>
     <Avail>MRE</Avail>
     <Tex>5,3</Tex>
-    <CivSize>33</CivSize>
+    <CivSize>40</CivSize>
   </ShipArmour>
   <ShipArmour Name="Regenerative Plating">
     <Cost>2500</Cost>
@@ -53,9 +53,9 @@
     <Cost>2750</Cost>
     <BaseArmour>15</BaseArmour>
     <Defence>3</Defence>
-    <Desc>Adaptive plating</Desc>
+    <Desc>Chameleon plating that helps camouflage the ship</Desc>
     <Avail>MRE</Avail>
     <Tex>7,3</Tex>
-    <CivSize>30</CivSize>
+    <CivSize>37</CivSize>
   </ShipArmour>
 </Data>

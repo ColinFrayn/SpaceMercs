@@ -7,7 +7,7 @@ namespace SpaceMercs {
         public const string strVersion = "1.0";
 
         // ---=== DEBUG MODE SETTINGS ===---
-        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Default = 1; Higher number increases encounter frequency. <=0 turns it off.
+        public const float DEBUG_ENCOUNTER_FREQ_MOD = 0;  // Default = 1; Higher number increases encounter frequency. <=0 turns it off.
         public const bool DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
         public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
@@ -16,6 +16,7 @@ namespace SpaceMercs {
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
         public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain much faster than normal (multiplier)
         public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues much faster than normal (multiplier)
+        public const int DEBUG_ADDITIONAL_STARTING_CASH = 100000; // Richer at the start
 
         // Character settings
         public const int SpareAttributePoints = 0; // Starting pot of skill points
@@ -179,6 +180,7 @@ namespace SpaceMercs {
         public const double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
         public const double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
+        public const double MaxTradeRouteLength = 6.0; // Maximum length of a trade route in light years
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony

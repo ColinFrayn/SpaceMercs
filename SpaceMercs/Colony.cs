@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -179,13 +178,24 @@ namespace SpaceMercs {
             }
             return 0;
         }
-        public void CheckGrowth() {
+        internal void CheckGrowth(GUIMessageBox msgBox) {
             if (!CanGrow) return;
             while (Const.dtTime > dtNextGrowth) {
-                ForceExpandBase();
+                // Maybe don't expand this base but build a new one?
+                Random rand = new Random();
+                if (rand.NextDouble() > 0.8 &&
+                    Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
+                    // Built a new colony in this system instead
+                    string sysName = Location.GetSystem().Name;
+                    if (string.IsNullOrEmpty(sysName)) sysName = Location.GetSystem().PrintCoordinates();
+                    if (Owner.IsPlayer) msgBox.PopupMessage($"The { Owner.Name} Race has founded a new colony in system {sysName}");
+                }
+                else {
+                    ForceExpandBase();
+                    Location.GetSystem().CheckBuildTradeRoutes(Owner);
+                }
                 dtLastGrowth = dtNextGrowth;
                 dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
-                Location.GetSystem().CheckBuildTradeRoutes(Owner);
             }
         }
         private void ForceExpandBase() {
@@ -492,16 +502,15 @@ namespace SpaceMercs {
         }
         private int GetNextGrowthPeriod() { // In days
             if (!CanGrow) return (int)Const.Million; // i.e. never
-            Random rand = new Random(Location.GetHashCode());
-            double dt = Math.Pow(BaseSize, 1.6) * (Const.DaysPerYear * 2.0 + 100.0 * rand.NextDouble());
-            dt += rand.Next(250);
+            Random rand = new Random(Location.GetHashCode() + Const.dtTime.DayOfYear); // Repeatable random seed
+            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 250.0 * rand.NextDouble());
             double tdiff = Location.TDiff(Owner);
             for (int i=0; i<Math.Abs(tdiff/10); i++) {
-                dt *= rand.NextDouble() * 0.1 + 1.1; // The worse the temperature, the harder to grow
+                dt *= rand.NextDouble() * 0.15 + 1.1; // The worse the temperature, the harder to grow
             }
-            if (Location is Moon) dt *= 1.2; // Moons suck
+            if (Location is Moon) dt *= 1.25; // Moons suck
             if (Location.GetSystem().TradeRoutes.Any()) {
-                dt *= Const.TradeRouteColonyGrowthRate;
+                dt *= Const.TradeRouteColonyGrowthRate; // Much easier to grow with trade routes set up
             }
             return (int)dt;
         }

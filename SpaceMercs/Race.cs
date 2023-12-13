@@ -17,6 +17,7 @@ namespace SpaceMercs {
         public Planet.PlanetType PlanetType { get; private set; } // Preferred planet type
         public Planet HomePlanet { get; private set; }
         public bool Known { get; private set; } // Have we met them yet?
+        public DateTime LastExpandCheck { get; private set; }
         public readonly List<Star> Systems = new List<Star>();
         private readonly List<Colony> Colonies = new List<Colony>();
         private readonly Dictionary<GenderType, List<string>> FirstNames = new Dictionary<GenderType, List<string>>();
@@ -25,6 +26,7 @@ namespace SpaceMercs {
         public int ColonyCount { get { return Colonies.Count; } }
         public int SystemCount { get { return Systems.Count; } }
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
+        public bool IsPlayer { get { return HomePlanet.GetSystem().Sector.SectorX == 0 && HomePlanet.GetSystem().Sector.SectorY == 0; } }
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -42,6 +44,7 @@ namespace SpaceMercs {
             string strCol = xml.SelectNodeText("Colour");
             string[] bits = strCol.Split(',');
             Colour = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
+
             XmlNode nPersonal = xml.SelectSingleNode("Names/Personal") ?? throw new Exception($"Could not find personal names list for Race {Name}");
             foreach (XmlNode xn in nPersonal.ChildNodes) {
                 List<string> lNames = xn.InnerText.Split(',').ToList<string>();
@@ -59,6 +62,7 @@ namespace SpaceMercs {
         public void SaveAdditionalData(StreamWriter file) {
             file.WriteLine("<Race Name=\"" + Name + "\">");
             file.WriteLine("<HomePlanet>" + HomePlanet.PrintCoordinates() + "</HomePlanet>");
+            file.WriteLine("<LastExpand>" + LastExpandCheck.ToBinary() + "</LastExpand>");
             if (Known) file.WriteLine("<Known/>");
             file.WriteLine("</Race>");
         }
@@ -67,6 +71,10 @@ namespace SpaceMercs {
             if (aoHome is null || aoHome.AOType != AstronomicalObject.AstronomicalObjectType.Planet) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = (Planet)aoHome;
             Known = (xml.SelectSingleNode("Known") is not null);
+
+            string strLastExpand = xml.SelectNodeText("LastExpand");
+            if (!string.IsNullOrEmpty(strLastExpand)) LastExpandCheck = DateTime.FromBinary(long.Parse(strLastExpand));
+            else LastExpandCheck = Const.dtStart;
         }
 
         public void SetHomePlanet(Planet pl) {
@@ -88,10 +96,56 @@ namespace SpaceMercs {
         public void AddColony(Colony cl) {
             if (!Colonies.Contains(cl)) Colonies.Add(cl);
         }
-        public void CheckGrowthForAllColonies() {
-            foreach (Colony cl in Colonies) {
-                cl.CheckGrowth();
+        internal void CheckGrowthForAllColonies(GUIMessageBox msgBox) {
+            // Take a copy as we may modify the original
+            List<Colony> backup = new List<Colony>(Colonies);
+            foreach (Colony cl in backup) {
+                cl.CheckGrowth(msgBox);
             }
+        }
+        internal void CheckForNewColonies(GUIMessageBox msgBox) {
+            HashSet<Star> nearestUncolonisedStars = new HashSet<Star>();
+            double daysSinceLast = (Const.dtTime - LastExpandCheck).TotalDays;
+            Star stHome = HomePlanet.GetSystem();
+            Sector scHome = stHome.Sector;
+
+            foreach (Star st in Systems) {
+                // Get stars nearby this colonised system, and add them to a "maybe colonise" list
+                List<Star> systemsInOrderOfDistance = scHome.GetStarsInDistanceOrderFrom(st);
+                systemsInOrderOfDistance.Remove(st);
+                // If any nearby systems are uncolonised then add them to the list
+                int count = 0;
+                while (systemsInOrderOfDistance.Any()) { 
+                    Star? nearest = systemsInOrderOfDistance.FirstOrDefault();
+                    if (nearest is null) break;
+                    if ((nearest.Owner is null || nearest.Owner == this) && nearest.GetPopulation() == 0) {
+                        nearestUncolonisedStars.Add(nearest);
+                        count++;
+                        if (count >= 2) break;
+                    }
+                    systemsInOrderOfDistance.Remove(nearest);
+                }
+            }
+
+            // Check if any new system has been colonised in this period
+            if (nearestUncolonisedStars.Count == 0) return;
+            Random rand = new Random();
+            bool isPlayer = scHome.SectorX == 0 && scHome.SectorY == 0;
+            Star candidate = nearestUncolonisedStars.ElementAt(rand.Next(nearestUncolonisedStars.Count)); // Get a star to check
+            do {
+                double span = 200.0 + rand.NextDouble() * 100;
+                if (daysSinceLast < span) return;
+                daysSinceLast -= span;
+                LastExpandCheck.AddDays(span);
+                if (rand.NextDouble() > 0.9 && candidate.AddPopulationInSystem(this, rand)) {
+                    Colonise(candidate);
+                    if (isPlayer) {
+                        candidate.SetVisited(true);
+                        msgBox.PopupMessage($"The {Name} Race has colonised a new system at {candidate.PrintCoordinates()}");
+                    }
+                    return;
+                }
+            } while (daysSinceLast > 0);
         }
 
         public void Reset() {

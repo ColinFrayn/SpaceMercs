@@ -136,11 +136,13 @@ namespace SpaceMercs {
                 }
 
                 // Draw the name label for this star
+                bool hasLabel = false;
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
                     tro.View = Matrix4.CreateScale(0.5f) * translateM;
                     tro.YPos = -0.5f;
                     tro.TextColour = Color.White;
                     TextRenderer.DrawWithOptions(st.Name, tro);
+                    hasLabel = true;
                 }
 
                 // Display whether this system has been colonised with a flag
@@ -167,7 +169,7 @@ namespace SpaceMercs {
                 if (bShowPop && st.Visited) {
                     int pop = st.GetPopulation();
                     if (pop == 0) continue;
-                    if (bShowLabels) tro.YPos = -1.0f; // Offset under system name
+                    if (hasLabel) tro.YPos = -1.0f; // Offset under system name
                     else tro.YPos = -0.5f;
                     tro.View = Matrix4.CreateScale(0.5f) * translateM;
                     tro.TextColour = Color.LightGreen;

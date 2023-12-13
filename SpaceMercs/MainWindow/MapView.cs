@@ -698,7 +698,6 @@ namespace SpaceMercs.MainWindow {
                 if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }
             }
             aoTo.GetSystem().SetVisited(true);
-            aoTo.GetSystem().UpdateColonies();
             msgBox.PopupMessage("You have arrived at your destination");
             PlayerTeam.CurrentPosition = aoTo;
             if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {
@@ -712,6 +711,7 @@ namespace SpaceMercs.MainWindow {
             fMapViewX = PlayerTeam.CurrentPosition.GetMapLocation().X;
             fMapViewY = PlayerTeam.CurrentPosition.GetMapLocation().Y;
             SetAOButtonsOnGUI(aoSelected);
+            // Make sure that all existing colonies are expanded if it's time to do so
             CheckPopulationGrowth();
         }
 
@@ -720,7 +720,8 @@ namespace SpaceMercs.MainWindow {
             // If human population grows then announce it, and any newly available techs
             int humanPop = StaticData.Races[0].Population;
             foreach (Race rc in StaticData.Races) {
-                rc.CheckGrowthForAllColonies();
+                rc.CheckForNewColonies(msgBox);
+                rc.CheckGrowthForAllColonies(msgBox);
             }
             int newHumanPop = StaticData.Races[0].Population;
             if (newHumanPop == humanPop) return;

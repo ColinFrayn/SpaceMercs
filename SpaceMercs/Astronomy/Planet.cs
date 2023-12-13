@@ -229,14 +229,6 @@ namespace SpaceMercs {
             return 0;
         }
 
-        // Check if any colonies on this planet or moons should expand
-        public void CheckGrowth() {
-            Colony?.CheckGrowth();
-            foreach (Moon mn in Moons) {
-                mn.Colony?.CheckGrowth();
-            }
-        }
-
         // Overrides
         public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Planet; } }
         public override void DrawBaseIcon(ShaderProgram prog) {

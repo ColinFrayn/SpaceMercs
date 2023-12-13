@@ -98,7 +98,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <CivSize>30</CivSize>
   </ArmourType>
   <ArmourType Name="Arm Plating">
     <Mass>2.0</Mass>
@@ -204,7 +204,7 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
-    <CivSize>20</CivSize>
+    <CivSize>25</CivSize>
   </ArmourType>
   <ArmourType Name="Plate Boots">
     <Mass>1.0</Mass>
@@ -233,7 +233,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
-    <CivSize>20</CivSize>
+    <CivSize>25</CivSize>
   </ArmourType>
   <ArmourType Name="Plate Gauntlets">
     <Mass>0.8</Mass>
@@ -286,7 +286,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
-    <CivSize>20</CivSize>
+    <CivSize>25</CivSize>
   </ArmourType>
   <ArmourType Name="Power Armour">
     <Mass>30.0</Mass>
@@ -297,6 +297,7 @@
     <Speed>0.85</Speed>
     <Attack>2</Attack>
     <BaseArmour>35</BaseArmour>
+    <CivSize>26</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
       <Bonus Type="Cold" Amount="30"/>
@@ -320,6 +321,7 @@
     <Attack>2</Attack>
     <Speed>0.7</Speed>
     <BaseArmour>50</BaseArmour>
+    <CivSize>32</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="50"/>
       <Bonus Type="Cold" Amount="50"/>
@@ -343,6 +345,7 @@
     <Speed>1.1</Speed>
     <Attack>2</Attack>
     <BaseArmour>32</BaseArmour>
+    <CivSize>34</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="25"/>
       <Bonus Type="Cold" Amount="25"/>
@@ -381,6 +384,6 @@
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <CivSize>36</CivSize>
   </ArmourType>
 </Data>

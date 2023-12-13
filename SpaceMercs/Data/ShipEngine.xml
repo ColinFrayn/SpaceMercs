@@ -47,10 +47,10 @@
     <Accel>999999</Accel>
     <Cost>2500</Cost>
     <Power>24</Power>
-    <Desc>A Hyperspace Drive, able to traverse the distance between the stars extremely quickly.</Desc>
+    <Desc>A Hyperspace Drive, able to traverse the distance between the stars extremely quickly and small enoguh to be fitted to a space ship.</Desc>
     <Avail>MRE</Avail>
     <Tex>5,4</Tex>
-    <CivSize>27</CivSize>
+    <CivSize>31</CivSize>
   </ShipEngine>
   <ShipEngine Name="Subspace Drive">
     <Range>12</Range>
@@ -58,10 +58,10 @@
     <Accel>999999</Accel>
     <Cost>6000</Cost>
     <Power>30</Power>
-    <Desc>A Subspace Drive, slicing through the space between dimensions to travel between systems at extraordinary speed</Desc>
+    <Desc>A Subspace Drive, slicing through the space between dimensions to travel between systems at extraordinary speed and small enoguh to be fitted to a space ship</Desc>
     <Avail>RE</Avail>
     <Tex>6,4</Tex>
-    <CivSize>33</CivSize>
+    <CivSize>43</CivSize>
   </ShipEngine>
   <ShipEngine Name="Ethereal Drive">
     <Range>12</Range>

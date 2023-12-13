@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -455,6 +456,42 @@ namespace SpaceMercs {
             return false;
         }
 
+        public bool MaybeAddNewColony(Race rc, Random rand) {
+            int plcols = 0;
+            foreach (Planet pl in Planets) {
+                if (pl.Colony is not null) plcols++;
+            }
+            int maxTries = Planets.Count * 4 + 8;
+            int tries = 0;
+            do {
+                int pno = rand.Next(_planets.Count);
+                Planet pl = _planets[pno];
+                double tdiff = pl.TDiff(rc);
+                if (pl.Type == Planet.PlanetType.Gas) {
+                    tdiff += 15.0; // Make it less likely to colonise Gas giants.
+                    if (plcols == 0) tdiff += 30; // Much less likely if this is the first planet colony in this system
+                    if (plcols == 1) tdiff += 15; // Quite a bit less likely if this is the second planet colony in this system
+                }
+                if (rand.NextDouble() * rand.NextDouble() * 200.0 > tdiff) {
+                    if (rand.NextDouble() > 0.3) {
+                        if (pl.Colony is null) {
+                            if (pl.ExpandBase(rc, rand) > 0) return true;
+                        }
+                    }
+                    else {
+                        if (pl.Moons.Count > 0) {
+                            int mno = rand.Next(pl.Moons.Count);
+                            Moon mn = pl.Moons[mno];
+                            if (mn.Colony is null) {
+                                if (mn.ExpandBase(rc, rand) > 0) return true;
+                            }
+                        }
+                    }
+                }
+            } while (++tries < maxTries);
+            return false;
+        }
+
         // Maybe build trade routes for this system based on the largest colony size and number of colonies for the given race
         public void CheckBuildTradeRoutes(Race rc) {
             int colonyCount = 0;
@@ -474,8 +511,8 @@ namespace SpaceMercs {
 
             // Threshold for at least one trade route
             int expectedTradeRoutes = 0;
-            if (maxColonySize > 3) expectedTradeRoutes = 1;
-            if (maxColonySize > 4 && colonyCount > 1) expectedTradeRoutes = 2;
+            if (maxColonySize >= 3) expectedTradeRoutes = 1;
+            if (maxColonySize >= 4 && colonyCount > 1) expectedTradeRoutes = 2;
             if (maxColonySize == 6 && colonyCount > 2) expectedTradeRoutes = 3;
             if (TradeRoutes.Count < expectedTradeRoutes) {
                 MaybeAddTradeRoute(rc, true);
@@ -483,9 +520,8 @@ namespace SpaceMercs {
         }
         public void MaybeAddTradeRoute(Race rc, bool onlyToExistingTradeRouteDestinations) {
             Star? stClosest = null;
-            double best = DistanceTo(rc.HomePlanet.Parent);
+            double best = Const.MaxTradeRouteLength;
             foreach (Star st2 in rc.Systems) {
-                if (st2 == rc.HomePlanet.Parent) continue;
                 if (st2 == this) continue;
                 if (onlyToExistingTradeRouteDestinations && !st2.TradeRoutes.Any()) continue;
                 double d = DistanceTo(st2);
@@ -496,13 +532,6 @@ namespace SpaceMercs {
             }
             if (stClosest != null) {
                 AddTradeRoute(stClosest);
-            }
-        }
-
-        // When we arrive in this system (or move about the system) update colony growth
-        public void UpdateColonies() {
-            foreach (Planet pl in _planets) {
-                pl.CheckGrowth();
             }
         }
 

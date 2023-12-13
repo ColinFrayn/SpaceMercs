@@ -17,6 +17,7 @@ namespace UnitTests {
             Assert.Equals(1.0f, Const.DEBUG_ENCOUNTER_FREQ_MOD);
             Assert.Equals(1, Const.DEBUG_WEAPON_SKILL_MOD);
             Assert.Equals(1, Const.DEBUG_EXPERIENCE_MOD);
+            Assert.Equals(0, Const.DEBUG_ADDITIONAL_STARTING_CASH);
         }
     }
 }
