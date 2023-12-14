@@ -94,6 +94,7 @@
     <Desc>A laser rifle</Desc>
     <Sound>LaserRifle</Sound>
     <Noise>6</Noise>
+    <CivSize>20</CivSize>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Plastic" Amount="2"/>
@@ -113,6 +114,7 @@
     <Desc>A heavy laser rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
     <Noise>8</Noise>
+    <CivSize>23</CivSize>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Plastic" Amount="5"/>
@@ -132,6 +134,7 @@
     <Desc>A laser pistol</Desc>
     <Sound>LaserPistol</Sound>
     <Noise>4</Noise>
+    <CivSize>20</CivSize>
     <Materials>
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -158,7 +161,7 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>20</CivSize>
+    <CivSize>25</CivSize>
   </WeaponType>
   <WeaponType Name="Arc Rifle" Class="Shotgun">
     <Mass>5.0</Mass>
@@ -180,7 +183,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>22</CivSize>
+    <CivSize>26</CivSize>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>18.0</Mass>
@@ -202,7 +205,7 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
-    <CivSize>24</CivSize>
+    <CivSize>29</CivSize>
   </WeaponType>
   <WeaponType Name="Flame Thrower" Class="Launcher">
     <Mass>15.0</Mass>
@@ -304,6 +307,7 @@
     <Sound>LaserSniper</Sound>
     <Stable/>
     <Noise>8</Noise>
+    <CivSize>21</CivSize>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -321,6 +325,7 @@
     <Damage>7+7</Damage>
     <Desc>A light railgun converted to a sniper rifle. Lower accuracy but with high damage.</Desc>
     <Sound>GaussSniper</Sound>
+    <CivSize>26</CivSize>
     <Stable/>
     <Noise>9</Noise>
     <Materials>

@@ -65,7 +65,7 @@
     <Desc>An auto repair facility, that will repair your ship slowly over time</Desc>
     <Avail>EMR</Avail>
     <Tex>6,2</Tex>
-    <CivSize>20</CivSize>
+    <CivSize>25</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Tinkering Chamber">
     <Size>M</Size>
@@ -88,14 +88,24 @@
     <Tex>7,2</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Shield Generator">
-    <Cost>1250</Cost>
-    <Shield>10</Shield>
-    <Power>14</Power>
+    <Cost>850</Cost>
+    <Shield>5</Shield>
+    <Power>12</Power>
     <Size>S</Size>
-    <Desc>A shield generator, protecting your ship against damaging weapons.</Desc>
+    <Desc>A small shield generator, protecting your ship against damaging weapons.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
     <CivSize>30</CivSize>
+  </ShipEquipment>
+  <ShipEquipment Name="Advanced Shield System">
+    <Cost>1750</Cost>
+    <Shield>10</Shield>
+    <Power>20</Power>
+    <Size>M</Size>
+    <Desc>A larger shield generator, protecting your ship against damaging weapons.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>1,6</Tex>
+    <CivSize>35</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Surface Scanner">
     <Cost>100</Cost>
@@ -108,17 +118,18 @@
   </ShipEquipment>
   <ShipEquipment Name="Colony Builder">
     <Cost>500</Cost>
-    <Size>M</Size>
-    <Power>8</Power>
+    <Size>L</Size>
+    <Power>15</Power>
     <BuildColony/>
     <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
+    <CivSize>20</CivSize>
     <Tex>7,6</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Chameleon Device">
-    <Cost>1500</Cost>
+    <Cost>1800</Cost>
     <Defence>3</Defence>
-    <Power>16</Power>
+    <Power>15</Power>
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
@@ -133,6 +144,7 @@
     <Race>Elithiri</Race>
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
+    <CivSize>38</CivSize>
     <Tex>2,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Targetting AI">
@@ -155,48 +167,48 @@
   </ShipEquipment>
   <ShipEquipment Name="Advanced Fission Core">
     <Size>C</Size>
-    <Cost>35</Cost>
+    <Cost>115</Cost>
     <Generate>35</Generate>
     <Desc>An advanced fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
-    <CivSize>18</CivSize>
+    <CivSize>25</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Fusion Core">
     <Size>C</Size>
-    <Cost>130</Cost>
-    <Generate>60</Generate>
+    <Cost>330</Cost>
+    <Generate>50</Generate>
     <Desc>A fusion-based power cor.e</Desc>
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
-    <CivSize>23</CivSize>
+    <CivSize>30</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Fusion Core">
     <Size>C</Size>
-    <Cost>195</Cost>
-    <Generate>75</Generate>
+    <Cost>695</Cost>
+    <Generate>65</Generate>
     <Desc>An advanced fusion-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
-    <CivSize>28</CivSize>
+    <CivSize>35</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
-    <Cost>850</Cost>
-    <Generate>90</Generate>
+    <Cost>1150</Cost>
+    <Generate>80</Generate>
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>5,1</Tex>
-    <CivSize>36</CivSize>
+    <CivSize>40</CivSize>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
-    <Cost>1200</Cost>
-    <Generate>110</Generate>
+    <Cost>1500</Cost>
+    <Generate>90</Generate>
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
-    <CivSize>41</CivSize>
+    <CivSize>50</CivSize>
   </ShipEquipment>
 </Data>
   

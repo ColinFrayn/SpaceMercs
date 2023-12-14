@@ -2,15 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-Is Civ expansion too fast? Do I reduce expansion rate as Civ gets larger, or else it will be exponential??
 
-CivSize gating: Is this the wrong way to do it? Easy to game it by just flying around a lot...
+Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
 ShipView: Show ship shields in combat
 - Display ellipse, blended, before drawing the rooms (but after starfield)
 - Vary transparency based on remaining shield strength
-
-Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
 
 ==========================================================================================================
@@ -55,6 +52,12 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Soldier death
 - Walking?
 - Ship combat
+
+Is Civ expansion too fast? Reduce expansion rate as Civ gets larger, or else it will be exponential??
+- Make moon colonies smaller??
+- Prevent civ from building colonies itself - only allow Team to make them??
+
+CivSize gating: Is this the wrong way to do it? Easy to game it by just flying around a lot with a NLS drive...
 
 Add locked doors in dungeon maps?
 

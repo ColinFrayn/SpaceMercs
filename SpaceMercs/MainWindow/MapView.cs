@@ -752,11 +752,8 @@ namespace SpaceMercs.MainWindow {
             foreach (ShipEngine se in StaticData.ShipEngines) {
                 if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Engine: {se.Name}");
             }
-            foreach (ShipEquipment se in StaticData.ShipEquipment) {
-                if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Equipment: {se.Name}");
-            }
             if (newTech.Count > 0) {
-                msgBox.PopupMessage($"Human scientists have made great technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
+                msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
             }
         }
 

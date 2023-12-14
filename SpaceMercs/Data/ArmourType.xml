@@ -40,6 +40,7 @@
     <Rarity>38</Rarity>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
+    <CivSize>25</CivSize>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
@@ -57,6 +58,7 @@
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
+    <CivSize>18</CivSize>
     <Desc>A military spec helmet with HUD and advanced detection technology.</Desc>
     <Utility>
       <Perception>2</Perception>
@@ -185,6 +187,7 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="1"/>
     </Materials>
+    <CivSize>30</CivSize>
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
@@ -345,7 +348,7 @@
     <Speed>1.1</Speed>
     <Attack>2</Attack>
     <BaseArmour>32</BaseArmour>
-    <CivSize>34</CivSize>
+    <CivSize>36</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="25"/>
       <Bonus Type="Cold" Amount="25"/>
@@ -384,6 +387,6 @@
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
     </Materials>
-    <CivSize>36</CivSize>
+    <CivSize>40</CivSize>
   </ArmourType>
 </Data>

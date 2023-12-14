@@ -33,7 +33,7 @@
     <ItemCost>7.0</ItemCost>
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.07</Rarity>
-    <CivSize>18</CivSize>
+    <CivSize>20</CivSize>
     <Desc>Metasteel is a meta-material made by quantum-engineering steel to significantly increase its strength and durability.</Desc>
   </MaterialType>
   <MaterialType Name="Nanomesh">
@@ -41,7 +41,7 @@
     <ItemCost>8.0</ItemCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.03</Rarity>
-    <CivSize>28</CivSize>
+    <CivSize>30</CivSize>
     <Desc>Nanomesh is made from fine woven carbon nanotubes. It is light and very strong.</Desc>
   </MaterialType>
   <MaterialType Name="Mithril">
@@ -49,6 +49,7 @@
     <ItemCost>12.0</ItemCost>
     <ArmourMod>1.9</ArmourMod>
     <Rarity>0.01</Rarity>
+    <CivSize>30</CivSize>
     <Race>Gokan</Race>
     <Desc>Mithril is an advanced alloy with exceptionally high strength and relatively low density.</Desc>
   </MaterialType>
@@ -57,7 +58,7 @@
     <ItemCost>20.0</ItemCost>
     <ArmourMod>2.6</ArmourMod>
     <Rarity>0.006</Rarity>
-    <CivSize>35</CivSize>
+    <CivSize>40</CivSize>
     <Desc>Adamantium is a weighty but highly resistant nano-engineered metallic substance.</Desc>
   </MaterialType>
   <MaterialType Name="Etherealite">
@@ -65,7 +66,7 @@
     <ItemCost>18.0</ItemCost>
     <ArmourMod>1.8</ArmourMod>
     <Rarity>0.005</Rarity>
-    <CivSize>40</CivSize>
+    <CivSize>50</CivSize>
     <Desc>Etherealite is made from graphene-reinforced carbon nanotubes, merged with ultra-strong quantum-engineered aerogel to give high strength and superbly low density.</Desc>
   </MaterialType>
   <MaterialType Name="Ultramesh">
@@ -73,7 +74,7 @@
     <ItemCost>18.0</ItemCost>
     <ArmourMod>2.1</ArmourMod>
     <Rarity>0.004</Rarity>
-    <CivSize>45</CivSize>
+    <CivSize>60</CivSize>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>
   </MaterialType>
   <!-- Non-armour materials -->

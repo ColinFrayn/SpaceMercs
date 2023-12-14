@@ -69,7 +69,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
-    <CivSize>23</CivSize>
+    <CivSize>24</CivSize>
     <Tex>2,1</Tex>
   </ItemType>
   <ItemType Name="Nannite Medsystem">
@@ -95,7 +95,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
-    <CivSize>23</CivSize>
+    <CivSize>26</CivSize>
     <Tex>2,1</Tex>
   </ItemType>
   <ItemType Name="Adrenaline">
@@ -297,6 +297,7 @@
       <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
+    <CivSize>30</CivSize>
     <Source>Workshop</Source>
     <Tex>2,3</Tex>
   </ItemType>
@@ -324,7 +325,7 @@
       <Material Name="Uranium" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
-    <CivSize>34</CivSize>
+    <CivSize>36</CivSize>
     <Tex>3,3</Tex>
   </ItemType>
   <ItemType Name="Sonic Grenade">
@@ -362,6 +363,7 @@
     <Rarity>16</Rarity>
     <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
     <Race>Grey</Race>
+    <CivSize>34</CivSize>
     <ItemEffect Name="Heal">
       <SingleUse/>
       <Skill Required="false">Medic</Skill>
@@ -387,6 +389,7 @@
     <Rarity>24</Rarity>
     <Desc>A medical device that heals wounds almost as well as a quantum medikit, but can be reused after a short charging period.</Desc>
     <Race>Grey</Race>
+    <CivSize>37</CivSize>
     <ItemEffect Name="Heal">
       <Recharge>2</Recharge>
       <Skill Required="false">Medic</Skill>

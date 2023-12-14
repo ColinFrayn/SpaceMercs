@@ -21,6 +21,7 @@
     <Desc>Mithril plating</Desc>
     <Avail>MRE</Avail>
     <Tex>3,3</Tex>
+    <CivSize>30</CivSize>
     <Race>Gokan</Race>
   </ShipArmour>
   <ShipArmour Name="Adamantium Plating">
@@ -29,7 +30,7 @@
     <Desc>Adamantium plating</Desc>
     <Avail>MRE</Avail>
     <Tex>4,3</Tex>
-    <CivSize>35</CivSize>
+    <CivSize>40</CivSize>
   </ShipArmour>
   <ShipArmour Name="Adaptive Plating">
     <Cost>1500</Cost>
@@ -38,7 +39,7 @@
     <Desc>Adaptive plating</Desc>
     <Avail>MRE</Avail>
     <Tex>5,3</Tex>
-    <CivSize>40</CivSize>
+    <CivSize>45</CivSize>
   </ShipArmour>
   <ShipArmour Name="Regenerative Plating">
     <Cost>2500</Cost>
@@ -48,6 +49,7 @@
     <Avail>MRE</Avail>
     <Tex>6,3</Tex>
     <Race>Insectoid</Race>
+    <CivSize>38</CivSize>
   </ShipArmour>
   <ShipArmour Name="Chameleon Plating">
     <Cost>2750</Cost>
@@ -56,6 +58,6 @@
     <Desc>Chameleon plating that helps camouflage the ship</Desc>
     <Avail>MRE</Avail>
     <Tex>7,3</Tex>
-    <CivSize>37</CivSize>
+    <CivSize>39</CivSize>
   </ShipArmour>
 </Data>
