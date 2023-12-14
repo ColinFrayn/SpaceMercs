@@ -36,11 +36,11 @@ namespace SpaceMercs.Dialogs {
             tbPlanetDensity.Maximum = Const.MaxPlanetDensity;
             tbPlanetDensity.Value = Const.DefaultPlanetDensity;
             tbCivSize.Minimum = 5;
-            tbCivSize.Maximum = 25;
-            tbCivSize.Value = 18;
+            tbCivSize.Maximum = 20;
+            tbCivSize.Value = 15;
             tbAlienCivSize.Minimum = 5;
-            tbAlienCivSize.Maximum = 25;
-            tbAlienCivSize.Value = 18;
+            tbAlienCivSize.Maximum = 20;
+            tbAlienCivSize.Value = 15;
             tbName.Text = "Unnamed";
             PlayerName = "Unnamed";
             Strength = rc.Strength;

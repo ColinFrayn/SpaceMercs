@@ -12,11 +12,11 @@ namespace SpaceMercs {
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
         public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
-        public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely randomise all items/mercs/missions at a colony
+        public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
-        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain much faster than normal (multiplier)
-        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues much faster than normal (multiplier)
-        public const int DEBUG_ADDITIONAL_STARTING_CASH = 100000; // Richer at the start
+        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain much faster than normal (multiplier, default=1)
+        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues much faster than normal (multiplier, default=1)
+        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // Richer at the start
 
         // Character settings
         public const int SpareAttributePoints = 0; // Starting pot of skill points
@@ -128,7 +128,7 @@ namespace SpaceMercs {
 
         // Galaxy settings
         public const int SectorSize = 10; // Light years on a side
-        public const int MinStarsPerSector = 6;
+        public const int MinStarsPerSector = 8;
         public const int MaxStarsPerSector = 22;
         public const int DefaultStarsPerSector = 14;
         public const double MinStarDistance = 1.1; // Light years
@@ -175,12 +175,12 @@ namespace SpaceMercs {
         public const double BaseInterceptionChance = 40.0; // Base scaling for encountering something during a journey. The higher the more often and the more dangerous.
         public const double EncounterLevelScalingDistance = 10.0; // The higher this is, the further you have to travel before missions increase in difficulty by a fixed amount
         public const double EncounterFreqScale = 0.15; // The lower this is (>0.0) the less frequently we encounter anything when travelling (active or passive).
-        public const double MaxTradeRouteDistInLY = 10.0;  // When forming new colonies and working out where they might have a trade route with
         public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
         public const double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
         public const double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
-        public const double MaxTradeRouteLength = 6.0; // Maximum length of a trade route in light years
+        public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
+        public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony

@@ -264,6 +264,8 @@ namespace SpaceMercs {
                 tradeRoutesBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
                 tradeRoutesArray = new VertexArray(tradeRoutesBuffer);
             }
+            // Just in case it hasn't been set up yet...
+            tradeRoutesArray ??= new VertexArray(tradeRoutesBuffer);
 
             // Draw the lines
             GL.UseProgram(prog.ShaderProgramHandle);

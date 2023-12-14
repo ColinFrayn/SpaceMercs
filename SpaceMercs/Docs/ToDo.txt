@@ -2,12 +2,16 @@
 ToDo List
 -------------------------------------------------
 
-Check civ expansion from the beginning. is it too fast?
-- Check auto-building of trade routes : Star.MaybeAddTradeRoute()
+Is Civ expansion too fast? Do I reduce expansion rate as Civ gets larger, or else it will be exponential??
 
-TestCivEvolution_WhyNoTradeRoute : Should be a trade route Homeworld to ETR (0:0/2 -> 0:0/1)  ?TEST?
+CivSize gating: Is this the wrong way to do it? Easy to game it by just flying around a lot...
 
-MapView.ArriveAt() : Should occasionally build a new colony   ?TEST?
+ShipView: Show ship shields in combat
+- Display ellipse, blended, before drawing the rooms (but after starfield)
+- Vary transparency based on remaining shield strength
+
+Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
+
 
 ==========================================================================================================
 
@@ -16,31 +20,33 @@ MapView.ArriveAt() : Should occasionally build a new colony   ?TEST?
 Backburner : Features
 ---------------------
 
-Add overwatch?
-
-Add more alien-only items
-- Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
-
 How do we lose favour with races? Why would we want to?
-
-Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
 Cover
 - When covered from the attacker, get a def bonus
 - Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
 
-Anything more we can do to compress the save game file? Maybe store only AOs that are not as generated?
+Display visual effect on creatures if they have shields
+- Textures.GenerateCreatureTexture()  (all types)
+-- Need to make textures specifically for each individual creature?
 
-Add light sources for max. vision range on missions??
+Add overwatch?
+
+Add more alien-only items
+- Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
 
 MapViewMission - VisualEffect.DisplayShotLine() ??
 
+Anything more we can do to compress the save game file? Maybe store only AOs that are not as generated?
+
 Better soldier textures
 - Change texture based on race
 - Change texture based on equipment / weapons
+
+Add light sources for max. vision range on missions??
 
 More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Pick up all
@@ -50,22 +56,7 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Walking?
 - Ship combat
 
-ShipView: Show ship shields in combat
-- Display ellipse, blended, before drawing the rooms (but after starfield)
-- Vary transparency based on shield strength
-
-Research Functionality
-- Research higher tier weapons & armour ; Research bionics?
--- Rely on the appropriate skills
--- How does this work?
--- Add bionic implants? Salvageable from dead humanoids of higher level or manufactured in Medlab? Too complex?
-- Add a button for it?
-
 Add locked doors in dungeon maps?
-
-Display visual effect on creatures if they have shields
-- Textures.GenerateCreatureTexture()  (all types)
--- Need to make textures specifically for each individual creature?
 
 Allow creatures to have multiple weapons (ranged and melee)?
 

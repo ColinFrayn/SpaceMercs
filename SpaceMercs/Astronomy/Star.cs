@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -520,7 +519,10 @@ namespace SpaceMercs {
         }
         public void MaybeAddTradeRoute(Race rc, bool onlyToExistingTradeRouteDestinations) {
             Star? stClosest = null;
-            double best = Const.MaxTradeRouteLength;
+            double best = Const.BasicTradeRouteLength;
+            int pop = CountPopulation();
+            if (pop > 4) best += (double)(pop - 4) / 4.0; // Highly populated systems can have longer trade routes
+            if (best > Const.MaxTradeRouteLength) best = Const.MaxTradeRouteLength;
             foreach (Star st2 in rc.Systems) {
                 if (st2 == this) continue;
                 if (onlyToExistingTradeRouteDestinations && !st2.TradeRoutes.Any()) continue;
@@ -539,6 +541,16 @@ namespace SpaceMercs {
         public Planet? GetOutermostPlanet() {
             if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
             return _planets.Last();
+        }
+        public int CountPopulation() {
+            int pop = 0;
+            foreach (Planet planet in Planets) {
+                pop += planet.Colony?.BaseSize ?? 0;
+                foreach (Moon mn in planet.Moons) {
+                    pop += mn.Colony?.BaseSize ?? 0;
+                }
+            }
+            return pop;
         }
 
         // Overrides
