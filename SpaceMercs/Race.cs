@@ -136,7 +136,7 @@ namespace SpaceMercs {
                 double span = 200.0 + rand.NextDouble() * 100;
                 if (daysSinceLast < span) return;
                 daysSinceLast -= span;
-                LastExpandCheck.AddDays(span);
+                LastExpandCheck = LastExpandCheck.AddDays(span);
                 if (rand.NextDouble() > 0.9 && candidate.AddPopulationInSystem(this, rand)) {
                     Colonise(candidate);
                     if (isPlayer) {

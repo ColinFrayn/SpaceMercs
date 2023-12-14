@@ -8,6 +8,7 @@
   <CreatureGroup Name="Bandits">
     <Filename>Bandits.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+    <QuantityScale>1.1</QuantityScale>
     <Racial/>
   </CreatureGroup>
   <CreatureGroup Name="Bugs">
@@ -22,11 +23,12 @@
   <CreatureGroup Name="Ogres">
     <Filename>Ogres.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
-    <QuantityScale>0.8</QuantityScale>
+    <QuantityScale>0.7</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Pirates">
     <Filename>Pirates.xml</Filename>
     <Locations>Ship</Locations>
+    <QuantityScale>1.1</QuantityScale>
     <Racial/>
   </CreatureGroup>
   <CreatureGroup Name="Rock Creatures">

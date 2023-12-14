@@ -74,7 +74,8 @@
     <Rarity>12</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="0" DropOff="0.7">10</Range>
-    <Damage>8+3</Damage>
+    <Shots>3</Shots>
+    <Damage>6+3</Damage>
     <Desc>A heavy automatic rifle</Desc>
     <Sound>HeavyMachineGun</Sound>
     <Noise>10</Noise>
@@ -110,7 +111,8 @@
     <Rarity>22</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="0" DropOff="0.6">12</Range>
-    <Damage>7+5</Damage>
+    <Shots>3</Shots>
+    <Damage>7+4</Damage>
     <Desc>A heavy laser rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
     <Noise>8</Noise>
@@ -149,7 +151,7 @@
     <Rarity>14</Rarity>
     <Speed>20</Speed>
     <Range Accuracy="0" DropOff="0.7">14</Range>
-    <Damage>9+6</Damage>
+    <Damage>12+8</Damage>
     <Desc>A heavy railgun</Desc>
     <Sound>GaussCannon</Sound>
     <Stable/>
@@ -455,7 +457,7 @@
       <Material Name="Electronic Components" Amount="1"/>      
     </Materials>
   </WeaponType>
-  <WeaponType Name="Heavy Slugger" Class="Shotgun">
+  <WeaponType Name="Slugger" Class="Shotgun">
     <Mass>8.0</Mass>
     <Cost>180</Cost>
     <Rarity>20</Rarity>
@@ -474,6 +476,7 @@
       <Material Name="Carbon" Amount="1"/>
     </Materials>
   </WeaponType>
+  <!-- Natural weapons - all hidden -->
   <WeaponType Name="Claws">
     <Speed>10</Speed>
     <Range>1</Range>
