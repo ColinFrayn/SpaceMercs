@@ -5,7 +5,7 @@ ToDo List
 Check civ expansion from the beginning. is it too fast?
 - Check auto-building of trade routes : Star.MaybeAddTradeRoute()
 
-TestCivEvolution_WhyNoTradeRoute : Should be a trade route Homeworld to ETR (0:0/2 -> 0:0/1)
+TestCivEvolution_WhyNoTradeRoute : Should be a trade route Homeworld to ETR (0:0/2 -> 0:0/1)  ?TEST?
 
 MapView.ArriveAt() : Should occasionally build a new colony   ?TEST?
 

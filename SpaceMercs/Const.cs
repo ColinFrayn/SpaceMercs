@@ -45,7 +45,7 @@ namespace SpaceMercs {
         public const double MassCostExponent = 1.5; // Affects cost scaling for armour based on how much lighter it is than the base
         public const double BonusPhysicalArmourValue = 0.03; // Percent bonus to the cost for each single point of bonus armour for physical damage
         public const double BonusOtherArmourValue = 0.01; // Percent bonus to the cost for each single point of bonus armour for any other damage type
-        public const double ModificationCost = 10.0; // Cost for a modification for disposable materials
+        public const double ModificationCost = 20.0; // Cost for a modification for disposable materials
 
         // Solar system parameters
         public const double MoonRadius = 1400000.0;

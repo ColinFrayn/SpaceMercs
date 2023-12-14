@@ -258,12 +258,12 @@ namespace SpaceMercs {
             }
             if (!vertices.Any()) return;
             // Create the buffer and array if not already created, or if list has changed
-            // It's lilely only going to change by adding or subtracting routes, and very unlikely to change
-            // but keep the same number of routes.
+            // It's likely only going to change by adding or subtracting routes, and very unlikely to change
+            // whilst keep the same number of routes, so test for a change in route count.
             if (tradeRoutesBuffer is null || tradeRoutesBuffer.VertexCount != vertices.Count) { 
                 tradeRoutesBuffer = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
+                tradeRoutesArray = new VertexArray(tradeRoutesBuffer);
             }
-            tradeRoutesArray ??= new VertexArray(tradeRoutesBuffer);
 
             // Draw the lines
             GL.UseProgram(prog.ShaderProgramHandle);
