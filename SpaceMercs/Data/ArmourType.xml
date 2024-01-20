@@ -191,9 +191,10 @@
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
-    <Cost>70</Cost>
+    <Cost>75</Cost>
     <Rarity>40</Rarity>
     <Agility>-1</Agility>
+    <Defence>1</Defence>
     <Utility>
       <Stealth>3</Stealth>
     </Utility>
@@ -203,11 +204,33 @@
     <Materials>
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="1"/>
-      <Material Name="Aluminium" Amount="3"/>
+      <Material Name="Aluminium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
     <CivSize>25</CivSize>
+  </ArmourType>
+  <ArmourType Name="Infiltration Suit">
+    <Mass>8.0</Mass>
+    <Cost>325</Cost>
+    <Rarity>50</Rarity>
+    <Agility>-1</Agility>
+    <Defence>2</Defence>
+    <Utility>
+      <Stealth>4</Stealth>
+      <Perception>2</Perception>
+    </Utility>
+    <BaseArmour>20</BaseArmour>
+    <Location>Chest,Arms,Legs,Feet,Hands,Head</Location>
+    <Desc>A full body covering armour suit with stealth coating</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="5"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Aluminium" Amount="3"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="3"/>
+    </Materials>
+    <CivSize>32</CivSize>
   </ArmourType>
   <ArmourType Name="Plate Boots">
     <Mass>1.0</Mass>

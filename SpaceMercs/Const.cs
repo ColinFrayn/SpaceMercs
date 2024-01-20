@@ -7,16 +7,16 @@ namespace SpaceMercs {
         public const string strVersion = "1.0";
 
         // ---=== DEBUG MODE SETTINGS ===---
-        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Modification factor for encounter frequency. <=0 turns it off. (Default = 1)
+        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Modification factor for encounter frequency. (multiplier, default = 1, <=0 turns off all encounters)
         public const bool DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
         public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
         public const bool DEBUG_RANDOMISE_VENDORS = false;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
-        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain much faster than normal (multiplier, default=1)
-        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues much faster than normal (multiplier, default=1)
-        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // Richer at the start
+        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain faster than normal (multiplier, default=1)
+        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues faster than normal (multiplier, default=1)
+        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // Richer at the start (additive, default=0)
 
         // Character settings
         public const int SpareAttributePoints = 0; // Starting pot of skill points

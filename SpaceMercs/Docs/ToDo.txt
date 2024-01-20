@@ -9,7 +9,6 @@ ShipView: Show ship shields in combat
 - Display ellipse, blended, before drawing the rooms (but after starfield)
 - Vary transparency based on remaining shield strength
 
-
 ==========================================================================================================
 
 
@@ -17,7 +16,8 @@ ShipView: Show ship shields in combat
 Backburner : Features
 ---------------------
 
-How do we lose favour with races? Why would we want to?
+How do we lose favour with races? Why would we want to? Maybe over time??
+- Colonising one of "their" systems
 
 Cover
 - When covered from the attacker, get a def bonus

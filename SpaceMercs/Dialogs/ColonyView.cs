@@ -35,6 +35,8 @@ namespace SpaceMercs.Dialogs {
             btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMerchant.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMerchant.Visible = Const.DEBUG_RANDOMISE_VENDORS;
             if (string.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
             else lbColonyName.Text = cl.Location.Name;
             lbColonySize.Text = cl.BaseSize.ToString();
