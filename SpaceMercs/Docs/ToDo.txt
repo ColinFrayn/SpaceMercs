@@ -2,12 +2,12 @@
 ToDo List
 -------------------------------------------------
 
+ShipView:
+- Text hover label for Surface Scanner looks awful - fix the size
 
-Travel.RunBattle(): Ships should move around a bit up and down or maybe backwards, rotate etc.? 
+Travel.RunBattle(): 
+- Ships should move around a bit up and down or maybe backwards, rotate etc.? 
 
-ShipView: Show ship shields in combat
-- Display ellipse, blended, before drawing the rooms (but after starfield)
-- Vary transparency based on remaining shield strength
 
 ==========================================================================================================
 

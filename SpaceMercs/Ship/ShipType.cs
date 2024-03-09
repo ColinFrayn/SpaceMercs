@@ -17,8 +17,9 @@ namespace SpaceMercs {
         public double MaxHull { get { return (Small * 2.0) + (Medium * 4.0) + (Large * 8.0) + (Weapon * 1.0) + 4.0; } }
         public int Cargo { get { return (Small * 150) + (Medium * 500) + (Large * 1500) - (Weapon * 50) + 50; } } // Carrying capacity in kg. Weapon rooms need ammo, supplies etc. hence removing space
         public string RoomConfigString { get { return Small + "/" + Medium + "/" + Large + "/" + Weapon; } }
-        public List<Point> Perimeter { get; private set; }
+        public List<Vector2> Perimeter { get; private set; }
         public List<Point> Fillers { get; private set; }
+        public List<Vector2> ShieldShape { get; private set; }
         public int EngineRoomID { get; private set; } = -1;
         public int PowerCoreRoomID { get; private set; } = -1;
 
@@ -39,12 +40,12 @@ namespace SpaceMercs {
         private int MinX = 1000, MaxX = -1000;
         private int MinY = 1000, MaxY = -1000;
         private GLShape? _glPerimeter = null;
-        private GLShape? GLPerimeter { 
+        private GLShape? GLPerimeter {
             get {
-                if (_glPerimeter is null) {                
+                if (_glPerimeter is null) {
                     // Set up the render list
                     List<VertexPos3D> vertices = new List<VertexPos3D>();
-                    foreach (Point pt in Perimeter) {
+                    foreach (Vector2 pt in Perimeter) {
                         vertices.Add(new VertexPos3D(new Vector3(pt.X, pt.Y, 0f)));
                     }
                     _glPerimeter = new GLShape(vertices.ToArray(), Enumerable.Range(0, vertices.Count).ToArray(), PrimitiveType.LineLoop);
@@ -52,16 +53,30 @@ namespace SpaceMercs {
                 return _glPerimeter;
             }
         }
+        private GLShape? _glShields = null;
+        private GLShape? GLShields {
+            get {
+                if (_glShields is null) {
+                    // Triangulate the shield perimeter
+                    List<Vector2> triangles = GraphicsUtils.Triangulate(ShieldShape);
+                    List<VertexPos3D> vertices = new List<VertexPos3D>();
+                    // Set up the render list
+                    foreach (Vector2 pt in triangles) {
+                        vertices.Add(new VertexPos3D(new Vector3(pt.X, pt.Y, 0f)));
+                    }
+                    _glShields = new GLShape(vertices.ToArray(), Enumerable.Range(0, vertices.Count).ToArray(), PrimitiveType.Triangles);
+                }
+                return _glShields;
+            }
+        }
 
         public ShipType() {
             Description = "No description";
-            Perimeter = new List<Point>();
             Fillers = new List<Point>();
         }
         public ShipType(int seed, double diff) {
             Seed = seed;
             Diff = diff;
-            Perimeter = new List<Point>();
             Fillers = new List<Point>();
         }
         public ShipType(XmlNode xml) {
@@ -73,7 +88,6 @@ namespace SpaceMercs {
             Large = xml.SelectNodeInt("Large");
             Weapon = xml.SelectNodeInt("Weapon");
             Description = xml.SelectNodeText("Desc");
-            Perimeter = new List<Point>();
             Fillers = new List<Point>();
             SetupLayout();
         }
@@ -115,7 +129,8 @@ namespace SpaceMercs {
             foreach (ShipRoomDesign rd in Rooms) {
                 rd.Shift(-XShift, 0);
             }
-            SetupPerimeter(XShift);
+            SetupShipPerimeterBox(XShift);
+            SetupShieldShape(XShift);
             SetupFillers(XShift);
         }
 
@@ -326,71 +341,110 @@ namespace SpaceMercs {
         }
 
         // Calculate the points along the perimeter of this ship
-        private void SetupPerimeter(int XShift) {
+        private void SetupShipPerimeterBox(int XShift) {
             if (!Rooms.Any()) return;
-
-            int dx = -XShift - 100, dy = -99;
-            int x = MinX, y = 100, dir = Layout[x, y + 1] ? 2 : 1;
-            Perimeter.Add(new Point(x + dx, y + dy));
-            // Trace the edge anti-clockwise
-            do {
-                if (dir == 0) {
-                    y--;
-                    if (Layout[x, y]) {
-                        dir = 1;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                    else if (!Layout[x - 1, y]) {
-                        dir = 3;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                }
-                else if (dir == 1) {
-                    x++;
-                    if (Layout[x, y + 1]) {
-                        dir = 2;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                    else if (!Layout[x, y]) {
-                        dir = 0;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                }
-                else if (dir == 2) {
-                    y++;
-                    if (Layout[x - 1, y + 1]) {
-                        dir = 3;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                    else if (!Layout[x, y + 1]) {
-                        dir = 1;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                }
-                else if (dir == 3) {
-                    x--;
-                    if (Layout[x - 1, y]) {
-                        dir = 0;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                    else if (!Layout[x - 1, y + 1]) {
-                        dir = 2;
-                        Perimeter.Add(new Point(x + dx, y + dy));
-                    }
-                }
-                if (Perimeter.Count > 100) throw new Exception("Could not trace ship perimeter");
-            } while (y >= 100);
-            // Add in bottom half
-            int np = Perimeter.Count;
-            for (int n = np - 1; n >= 0; n--) {
-                Point pt = Perimeter[n];
-                Perimeter.Add(new Point(pt.X, -pt.Y + 1));
-            }
+            Perimeter = GeneratePerimeter(Layout, XShift);
         }
         public void DrawPerimeter(ShaderProgram prog) {
             if (GLPerimeter is null) return;
             GL.UseProgram(prog.ShaderProgramHandle);
             GLPerimeter.BindAndDraw();
+        }
+
+        // Calculate the shape of shields, if any are installed
+        private void SetupShieldShape(int XShift) {
+            if (!Rooms.Any()) return;
+
+            // Firstly, make a new layout with shield rooms on the edge of the ship
+            bool[,] ShieldLayout = new bool[201, 201]; // Midpoint @ (100,100)
+            for (int y = 0; y <= 200; y++) {
+                for (int x = 0; x <= 200; x++) {
+                    ShieldLayout[x, y] = Layout[x, y];
+                    if (!Layout[x, y]) {
+                        if (x > 0 && Layout[x - 1, y]) ShieldLayout[x, y] = true;
+                        if (x < 200 && Layout[x + 1, y]) ShieldLayout[x, y] = true;
+                        if (y > 0 && Layout[x, y - 1]) ShieldLayout[x, y] = true;
+                        if (y < 200 && Layout[x, y + 1]) ShieldLayout[x, y] = true;
+                        if (x > 0 && y > 0 && Layout[x - 1, y - 1]) ShieldLayout[x, y] = true;
+                        if (x < 200 && y > 0 && Layout[x + 1, y - 1]) ShieldLayout[x, y] = true;
+                        if (x > 0 && y < 200 && Layout[x - 1, y + 1]) ShieldLayout[x, y] = true;
+                        if (x < 200 && y < 200 && Layout[x + 1, y + 1]) ShieldLayout[x, y] = true;
+                    }
+                }
+            }
+
+            ShieldShape = GeneratePerimeter(ShieldLayout, XShift);
+        }
+        public void DrawShields(ShaderProgram prog) {
+            if (GLShields is null) return;
+            GL.UseProgram(prog.ShaderProgramHandle);
+            GLShields.BindAndDraw();
+        }
+
+        // Calculate perimeter of arbitrary layout
+        private static List<Vector2> GeneratePerimeter(bool [,] blocked, int XShift) {
+            List<Vector2> Points = new List<Vector2>();
+            int dx = -XShift - 100, dy = -99;
+            int x = 0, y = 100;
+            while (!blocked[x, y]) x++;
+            int dir = blocked[x, y + 1] ? 2 : 1;
+            Points.Add(new Vector2(x + dx, y + dy));
+            // Trace the edge anti-clockwise
+            do {
+                if (dir == 0) {
+                    y--;
+                    if (blocked[x, y]) {
+                        dir = 1;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                    else if (!blocked[x - 1, y]) {
+                        dir = 3;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                }
+                else if (dir == 1) {
+                    x++;
+                    if (blocked[x, y + 1]) {
+                        dir = 2;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                    else if (!blocked[x, y]) {
+                        dir = 0;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                }
+                else if (dir == 2) {
+                    y++;
+                    if (blocked[x - 1, y + 1]) {
+                        dir = 3;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                    else if (!blocked[x, y + 1]) {
+                        dir = 1;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                }
+                else if (dir == 3) {
+                    x--;
+                    if (blocked[x - 1, y]) {
+                        dir = 0;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                    else if (!blocked[x - 1, y + 1]) {
+                        dir = 2;
+                        Points.Add(new Vector2(x + dx, y + dy));
+                    }
+                }
+                if (Points.Count > 100) throw new Exception("Could not trace ship perimeter");
+            } while (y >= 100);
+
+            // Add in bottom half
+            int np = Points.Count;
+            for (int n = np - 1; n >= 0; n--) {
+                Vector2 pt = Points[n];
+                Points.Add(new Vector2(pt.X, -pt.Y + 1));
+            }
+            return Points;
         }
 
         // Fill in any gaps

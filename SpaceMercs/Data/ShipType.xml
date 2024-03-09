@@ -50,7 +50,7 @@
     <Large>0</Large>
     <Weapon>2</Weapon>
     <Cost>700</Cost>
-    <Desc>A small-medium military ship</Desc>
+    <Desc>A small, lightly-armed military support ship</Desc>
   </ShipType>
   <ShipType Name="Light Cruiser">
     <AKA>Leopard</AKA>
@@ -59,7 +59,7 @@
     <Large>1</Large>
     <Weapon>2</Weapon>
     <Cost>2800</Cost>
-    <Desc>The small-medium military ship</Desc>
+    <Desc>A small military ship</Desc>
   </ShipType>
   <ShipType Name="Medium Cruiser">
     <AKA>Tiger</AKA>
@@ -68,7 +68,7 @@
     <Large>2</Large>
     <Weapon>3</Weapon>
     <Cost>10500</Cost>
-    <Desc>The middle-sized military ship</Desc>
+    <Desc>A medium-sized military ship</Desc>
   </ShipType>
   <ShipType Name="Heavy Cruiser">
     <AKA>Lion</AKA>
@@ -77,6 +77,6 @@
     <Large>2</Large>
     <Weapon>4</Weapon>
     <Cost>24000</Cost>
-    <Desc>The biggest military ship</Desc>
+    <Desc>A large military ship</Desc>
   </ShipType>
 </Data>

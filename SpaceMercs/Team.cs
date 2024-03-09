@@ -272,6 +272,7 @@ namespace SpaceMercs {
             PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEquipmentByName("Fission Core"));
             PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipWeaponByName("Chain Gun"));
             PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEngineByName("Thrusters"));
+            PlayerShip.InitialiseForBattle();
         }
 
         public void SetCurrentMission(Mission? miss) {

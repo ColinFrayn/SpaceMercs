@@ -320,6 +320,13 @@ namespace SpaceMercs {
             TexSpecs? ts = null;
             if (ArmourType != null) ts = Textures.GetTexCoords(ArmourType);
 
+            // Shields
+            if (MaxShield > 0.0) {
+                prog.SetUniform("flatColour", new Vector4(0f, 0f, 1f, 1f));
+                prog.SetUniform("model", Matrix4.CreateScale(1.0f));
+                Type.DrawShields(prog);
+            }
+
             // Background / corridors
             foreach (ShipRoomDesign r in Type.Rooms) {
                 prog.SetUniform("flatColour", new Vector4(0.2f, 0.2f, 0.2f, 1f));
@@ -395,7 +402,7 @@ namespace SpaceMercs {
                 }
             }
 
-            // Hover boundary
+            // Display boundary for currently hovering room
             if (iHover >= 0 && iHover < Type.Rooms.Count) {
                 ShipRoomDesign rHover = Type.Rooms[iHover];
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(rHover.XPos - 0.2f, rHover.YPos - 0.2f, 0f);
@@ -405,7 +412,7 @@ namespace SpaceMercs {
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.Lines.BindAndDraw();
             }
-            // Rooms
+            // Display all rooms
             for (int n = 0; n < Type.Rooms.Count; n++) {
                 ShipRoomDesign r = Type.Rooms[n];
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(r.XPos, r.YPos, 0f);
@@ -417,7 +424,7 @@ namespace SpaceMercs {
                 if (Equipment.ContainsKey(n)) DrawEquipment(prog, n);
             }
 
-            // Perimeter
+            // Display ship perimeter
             if (bHoverHull) prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             else prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, 1f));
             prog.SetUniform("model", Matrix4.Identity);
@@ -426,6 +433,13 @@ namespace SpaceMercs {
 
         // Draw this ship when in battle
         public void DrawBattle(ShaderProgram prog) {
+            // Shields
+            if (Shield > 0.0) {
+                prog.SetUniform("flatColour", new Vector4(0f, Math.Max(0f,(float)ShieldFract - 0.6f), Math.Min(1f,(float)ShieldFract/0.6f), 1.0f));
+                prog.SetUniform("model", Matrix4.CreateScale(1.0f));
+                Type.DrawShields(prog);
+            }
+
             for (int rno = 0; rno < Type.Rooms.Count; rno++) {
                 ShipRoomDesign r = Type.Rooms[rno];
                 if (r.Size != ShipEquipment.RoomSize.Weapon && r.Size != ShipEquipment.RoomSize.Engine) { // draw a border?

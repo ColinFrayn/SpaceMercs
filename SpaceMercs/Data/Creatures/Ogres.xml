@@ -8,6 +8,7 @@
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
+    <MovementCost>3.0</MovementCost>
     <Armour>28</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -26,6 +27,7 @@
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
+    <MovementCost>3.0</MovementCost>
     <Armour>30</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -44,6 +46,7 @@
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
+    <MovementCost>3.0</MovementCost>
     <Armour>30</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -61,6 +64,7 @@
     <Health>20</Health>
     <Stamina>18</Stamina>
     <Interact/>
+    <MovementCost>3.0</MovementCost>
     <Armour>32</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -78,6 +82,7 @@
     <Health>22</Health>
     <Stamina>19</Stamina>
     <Interact/>
+    <MovementCost>3.0</MovementCost>
     <Armour>34</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -88,5 +93,4 @@
     </Weapons>
     <Boss/>
   </CreatureType>
-
 </Data>

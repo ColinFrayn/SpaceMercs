@@ -164,6 +164,7 @@ namespace SpaceMercs.MainWindow {
                         if (iSelectHover == I_Connect) {
                             PlayerTeam.PlayerShip.ActivateRoom(irContextRoom);
                         }
+                        PlayerTeam.PlayerShip.InitialiseForBattle();
                     }
                 }
                 irContextRoom = -1;
@@ -236,6 +237,7 @@ namespace SpaceMercs.MainWindow {
 
             DrawHullCondition();
             DrawPowerBar();
+            if (PlayerTeam.PlayerShip.MaxShield > 0) DrawShields();
 
             // Display all buttons
             gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
@@ -244,6 +246,9 @@ namespace SpaceMercs.MainWindow {
 
             // Show hover text
             DrawShipHoverInfo();
+
+            // Show ship type
+            TextRenderer.DrawAt(PlayerTeam.PlayerShip.Type.Name, Alignment.TopMiddle, 0.04f, Aspect, 0.5f, 0.01f);
         }
 
         // Setup a mini window to show details of the current hover room or context menu icon
@@ -532,6 +537,10 @@ namespace SpaceMercs.MainWindow {
             tro.XPos = 0.89f;
             tro.YPos = 0.15f;
             TextRenderer.DrawWithOptions(strPower, tro);
+        }
+        private void DrawShields() {
+            if (PlayerTeam == null) return;
+            TextRenderer.DrawAt($"Max Shields: {PlayerTeam.PlayerShip.MaxShield}", Alignment.TopRight, 0.02f, Aspect, 0.99f, 0.2f);
         }
 
         // Display the text labels required for the GUI
