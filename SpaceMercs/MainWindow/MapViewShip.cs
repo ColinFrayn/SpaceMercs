@@ -232,7 +232,7 @@ namespace SpaceMercs.MainWindow {
 
             // Display the player's remaining cash reserves
             TextRenderer.DrawAt($"{PlayerTeam.Cash.ToString("F2")} credits", Alignment.TopRight, 0.03f, Aspect, 0.99f, 0.01f);
-
+            
             if (irSelected != -1) DisplaySelectionText_Ship();
 
             DrawHullCondition();
@@ -299,21 +299,20 @@ namespace SpaceMercs.MainWindow {
 
             IEnumerable<string>? txtList = GetShipHoverText();
             if (txtList is null || !txtList.Any()) return;
-            string longest = string.Empty;
-            // Approximate longest string on display is string with most chars. Might not be, but whatever.
+            float longestPixels = 0f;
             foreach (string str in txtList) {
-                if (str.Length > longest.Length) longest = str;
+                TextMeasure tm = TextRenderer.MeasureText(str);
+                if (tm.Width > longestPixels) longestPixels = tm.Width;
             }
 
             float tx = xx > 0.5 ? xx - 0.02f : xx + 0.02f;
             float ty = yy > 0.5 ? yy - 0.02f : yy + 0.02f;
             float px = tx, py = ty;
             float ph = 0.03f, phb = ph * 0.2f;
-            TextMeasure tm = TextRenderer.MeasureText(longest);
-            float pw = ph * tm.Width / (Aspect * TextRenderer.FontSize);
+            float pw = ph * longestPixels / (Aspect * TextRenderer.FontSize);
 
             // Draw the hover text
-            Alignment al = Alignment.BottomLeft;
+            Alignment al;
             if (xx > 0.5) {
                 px -= pw;
                 if (yy > 0.5) al = Alignment.BottomRight;
@@ -323,12 +322,12 @@ namespace SpaceMercs.MainWindow {
                 if (yy > 0.5) al = Alignment.BottomLeft;
                 else al = Alignment.TopLeft;
             }
-            if (yy > 0.5) py -= (ph*txtList.Count());
+            if (yy > 0.5) py -= (ph * txtList.Count());
 
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", false);
             fullShaderProgram.SetUniform("view", Matrix4.Identity);
-            Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0.0f);
             Matrix4 pScaleM = Matrix4.CreateScale(pw, (ph * txtList.Count()) + (phb * 2f), 1f);
             fullShaderProgram.SetUniform("model", pScaleM * pTranslateM);
             fullShaderProgram.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
