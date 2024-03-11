@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System.Windows.Media.TextFormatting;
 
 // Library from here : https://github.com/space-wizards/SharpFont
 // Based on this, updated for .NET : https://github.com/Robmaister/SharpFont
@@ -150,7 +149,7 @@ void main()
                 TextMeasure textSize = textLabelFont32.MeasureText(strText, tro.KerningShift);
                 if (textSize.Width > longest) longest = textSize.Width;
             }
-            
+
             // Change the starting location if text alignment is not TL. We always align to the range between max height and the origin.
             if (tro.Alignment == Alignment.BottomLeft || tro.Alignment == Alignment.BottomMiddle || tro.Alignment == Alignment.BottomRight) yShift -= finalYScale * pixelSize * allText.Count();
             if (tro.Alignment == Alignment.CentreLeft || tro.Alignment == Alignment.CentreMiddle || tro.Alignment == Alignment.CentreRight) yShift -= finalYScale * pixelSize * allText.Count() / 2f;

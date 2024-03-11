@@ -323,7 +323,6 @@ namespace SpaceMercs {
             // Shields
             if (MaxShield > 0.0) {
                 prog.SetUniform("flatColour", new Vector4(0f, 0f, 1f, 1f));
-                prog.SetUniform("model", Matrix4.CreateScale(1.0f));
                 Type.DrawShields(prog);
             }
 
