@@ -205,6 +205,7 @@ namespace SpaceMercs {
         public int Attack { get; private set; }
         public int Defence { get; private set; }
         public int Armour { get { if (ArmourType == null) return 0; return ArmourType.BaseArmour; } }
+        public double WeaponRange { get; private set; }
 
         public static Ship GenerateStarterShip(Team tm, ShipType? st = null) {
             Ship sh = new Ship(st ?? StaticData.GetStarterShip() ?? throw new Exception("Could not find ship type!"));
@@ -719,10 +720,14 @@ namespace SpaceMercs {
             MaxShield = 0;
             Attack = 0;
             Defence = ArmourType?.Defence ?? 0; // Armour that offers defensive benefits e.g. chameleon plating
+            WeaponRange = 0d;
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                 if (tp.Item2) {
                     MaxShield += tp.Item1.Shield;
-                    if (tp.Item1 is ShipWeapon weapon) weapon.Cooldown = 0.0;
+                    if (tp.Item1 is ShipWeapon weapon) {
+                        weapon.Cooldown = 0.0;
+                        if (weapon.Range > WeaponRange) WeaponRange = weapon.Range;
+                    }
                     else Attack += tp.Item1.Attack; // Any ship rooms that add to attack such as targetting systems
                     Defence += tp.Item1.Defence; // Defensive items such as a cloaking device
                 }

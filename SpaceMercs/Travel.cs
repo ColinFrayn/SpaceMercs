@@ -1,6 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common.Input;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
@@ -14,6 +13,8 @@ namespace SpaceMercs {
         private readonly float fTravelTime;
         private float fMissionElapsed, fElapsed;
         private float fSep; // Separation between two ships in battle
+        private float yLeft = 0.0f, yRight = 0.0f;
+        private float vLeft = 0f, vRight = 0f;
         private bool bSurrendered = false;
         private readonly Team PlayerTeam;
         private readonly MapView ParentView;
@@ -26,7 +27,15 @@ namespace SpaceMercs {
 
         private readonly Color4 ShotColPlayer = new Color4(0.1f, 0.3f, 1.0f, 1.0f);
         private readonly Color4 ShotColEnemy = new Color4(1.0f, 0.3f, 0.1f, 1.0f);
-        private const float ShipYPos = 0.48f;
+        private const float ShipYPos = 0.5f;
+        private const float ShipYRange = 3000.0f;
+        private const float ShipVMax = 50.0f;
+        private const float ShipYProximity = 40.0f;
+        private const float ShipYTargetSep = 1000.0f;
+        private const float YScale = 4f;
+        private const float RangeAccel = 0.8f;
+        private const float ChaseAccel = 0.4f;
+
 
         private class Shot {
             public int Attack { get; private set; }
@@ -34,14 +43,14 @@ namespace SpaceMercs {
             public Color4 Colour { get; private set; }
             private readonly float fx, fy, tx, ty;
 
-            public Shot(ShipRoomDesign rf, ShipRoomDesign rt, Color4 col, int att, float fromx, float tox) {
+            public Shot(Color4 col, int att, float fromx, float tox, float fromy, float toy) {
                 Attack = att;
                 Life = (att * 3) + 18;
                 Colour = col;
                 fx = fromx;
                 tx = tox;
-                fy = ShipYPos + ((rf.YPos - rf.Height / 2f) * 0.005f);
-                ty = ShipYPos + ((rt.YPos - rf.Height / 2f) * 0.005f);
+                fy = fromy;
+                ty = toy;
             }
             public void Update() {
                 Life--;
@@ -111,6 +120,14 @@ namespace SpaceMercs {
             fTravelTime = float.Parse(xml.SelectNodeText("Time"));
             fElapsed = float.Parse(xml.SelectNodeText("Elapsed"));
             fMissionElapsed = float.Parse(xml.SelectNodeText("MissionElapsed"));
+            string yLeftNode = xml.SelectNodeText("YLeft");
+            if (!string.IsNullOrEmpty(yLeftNode)) yLeft = float.Parse(yLeftNode);
+            string yRightNode = xml.SelectNodeText("YRight");
+            if (!string.IsNullOrEmpty(yRightNode)) yRight = float.Parse(yRightNode);
+            string vLeftNode = xml.SelectNodeText("VLeft");
+            if (!string.IsNullOrEmpty(vLeftNode)) vLeft = float.Parse(vLeftNode);
+            string vRightNode = xml.SelectNodeText("VRight");
+            if (!string.IsNullOrEmpty(vRightNode)) vRight = float.Parse(vRightNode);
             fSep = float.Parse(xml.SelectNodeText("Sep"));
             EncounterCount = xml.SelectNodeInt("EncounterCount");
             dtStart = DateTime.FromBinary(long.Parse(xml.SelectNodeText("Start")));
@@ -134,6 +151,10 @@ namespace SpaceMercs {
             file.WriteLine("<MissionElapsed>" + fMissionElapsed + "</MissionElapsed>");
             file.WriteLine("<EncounterCount>" + EncounterCount + "</EncounterCount>");
             file.WriteLine("<Start>" + dtStart.ToBinary() + "</Start>");
+            file.WriteLine("<YLeft>" + yLeft + "</YLeft>");
+            file.WriteLine("<YRight>" + yRight + "</YRight>");
+            file.WriteLine("<VLeft>" + vLeft + "</VLeft>");
+            file.WriteLine("<VRight>" + vRight + "</VRight>");
             file.WriteLine("<Sep>" + fSep + "</Sep>");
             if (bSurrendered) file.WriteLine("<Surrendered/>");
             file.WriteLine("</Travel>");
@@ -246,65 +267,18 @@ namespace SpaceMercs {
         // Run a step of a battle between the player ship and an enemy vessel
         private void RunBattle() {
             if (PlayerTeam.CurrentMission?.ShipTarget is null) return;
-            Random rand = new Random();
             if (fSep > 4000.0f) fSep -= 10.0f;
+            float fDist = (float)Math.Sqrt((double)(fSep * fSep + (yLeft - yRight) * (yLeft - yRight)));
             float fSpace = fSep * Const.DrawBattleScale;
 
-            if (PlayerTeam.CurrentMission.ShipTarget.Hull > 0.0) {
-                // Enemy offers to surrender?
-                if (!bSurrendered && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.35 && rand.NextDouble() < 0.1) {
-                    if (PlayerTeam.PlayerShip.HullFract > 0.7 || // You're in a much better condition than them
-                        (PlayerTeam.PlayerShip.HullFract > 0.25 && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.1)) { // You're in a slightly better condition, but they're nearly dead
-                        bSurrendered = true;
-                        bPause = true;
-                        double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 3.5) / 5.0, 3);
-                        Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
-                        if (ra is not null && !ra.Known) {
-                            string strMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
-                            ra.SetAsKnownBy(PlayerTeam);
-                            if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                                PlayerTeam.CeaseMission();
-                                ParentView.msgBox.PopupMessage("The enemy ship flees the battle scene");
-                                bPause = false;
-                                return;
-                            }
-                        }
-                        else {
-                            string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
-                            if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                                PlayerTeam.Cash += dReward;
-                                PlayerTeam.CeaseMission();
-                                ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
-                                bPause = false;
-                                return;
-                            }
-                        }
-                        bPause = false;
-                    }
-                }
+            MoveShips();
 
-                // -- Player ship fires weapons
-                foreach (int r in PlayerTeam.PlayerShip.AllWeaponRooms) {
-                    if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
-                    sw.Cooldown -= 0.005;
-                    if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
-                        double dmg = sw.FireWeapon(PlayerTeam.PlayerShip, PlayerTeam.CurrentMission!.ShipTarget, rand);
-                        int nfrag = PlayerTeam.CurrentMission.ShipTarget.Hull > 0 ? 1 : 10;
-                        for (int i = 0; i < nfrag; i++) {
-                            ShipRoomDesign rF = PlayerTeam.PlayerShip.Type.Rooms[r];
-                            ShipRoomDesign rT = PlayerTeam.CurrentMission.ShipTarget.PickRandomRoom(rand);
-                            float fx = (0.46f - fSpace) - ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
-                            float tx = (0.54f + fSpace) + ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
-                            if (i == 0) lShots.Add(new Shot(rF, rT, ShotColPlayer, sw.Attack, fx, tx));
-                            for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
-                                lFrag.Add(new Frag(tx, ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f), rand));
-                            }
-                        }
-                    }
-                }
+            // If the player ship is still alive...
+            if (PlayerTeam.CurrentMission.ShipTarget.Hull > 0.0) {
+                RunPlayerShipTurn(fDist, fSpace);
             }
 
-            // Enemy ship destroyed?
+            // Was the enemy ship destroyed?
             if (PlayerTeam.CurrentMission!.ShipTarget.Hull <= 0.0) {
                 if (lFrag.Any()) return;
                 bPause = true;
@@ -325,28 +299,10 @@ namespace SpaceMercs {
                 return;
             }
 
-            // -- Enemy fires weapons
-            foreach (int r in PlayerTeam.CurrentMission.ShipTarget.AllWeaponRooms) {
-                ShipWeapon? sw = PlayerTeam.CurrentMission.ShipTarget.GetEquipmentByRoomID(r) as ShipWeapon;
-                if (sw is null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
-                sw.Cooldown -= 0.005;
-                if (sw.Cooldown <= 0.0 && sw.Range >= fSep) {
-                    double dmg = sw.FireWeapon(PlayerTeam.CurrentMission.ShipTarget, PlayerTeam.PlayerShip, rand);
-                    int nfrag = PlayerTeam.PlayerShip.Hull > 0 ? 1 : 10;
-                    for (int i = 0; i < nfrag; i++) {
-                        ShipRoomDesign rF = PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r];
-                        ShipRoomDesign rT = PlayerTeam.PlayerShip.PickRandomRoom(rand);
-                        float fx = (0.54f + fSpace) + ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
-                        float tx = (0.46f - fSpace) - ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
-                        if (i==0) lShots.Add(new Shot(rF, rT, ShotColEnemy, sw.Attack, fx, tx));
-                        for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
-                            lFrag.Add(new Frag(tx, ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f), rand));
-                        }
-                    }
-                }
-            }
+            // Enemy is still alive, so check if it can shoot
+            RunEnemyShipTurn(fDist, fSpace);
 
-            // Player Ship defeated?
+            // Was the player Ship destroyed?
             if (PlayerTeam.PlayerShip.Hull <= 0.0) {
                 bPause = true;
                 ParentView.msgBox.PopupMessage("Your Ship has been destroyed!");
@@ -356,7 +312,10 @@ namespace SpaceMercs {
             }
 
             // Enemy attempts to board?
-            if (fSep <= 4000.0 && PlayerTeam.PlayerShip.HullFract < (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.2) && PlayerTeam.CurrentMission.ShipTarget.HullFract > (Const.DEBUG_MORE_BOARDERS ? 0.2 : 0.3) && rand.NextDouble() > (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.7)) {
+            if (fDist <= 4000.0 &&
+                PlayerTeam.PlayerShip.HullFract < (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.2) &&
+                PlayerTeam.CurrentMission.ShipTarget.HullFract > (Const.DEBUG_MORE_BOARDERS ? 0.2 : 0.3) &&
+                rand.NextDouble() > (Const.DEBUG_MORE_BOARDERS ? 0.4 : 0.7)) {
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy are attempting to board your ship. Get ready to repel boarders", TriggerRepelBoardersMissionAction);
             }
@@ -364,6 +323,140 @@ namespace SpaceMercs {
             // Update both ships
             PlayerTeam.PlayerShip.BattleUpdate();
             PlayerTeam.CurrentMission.ShipTarget.BattleUpdate();
+        }
+        private void RunPlayerShipTurn(float fDist, float fSpace) {
+            // Enemy offers to surrender?
+            if (!bSurrendered && PlayerTeam!.CurrentMission!.ShipTarget!.HullFract < 0.35 && rand.NextDouble() < 0.1) {
+                if (PlayerTeam.PlayerShip.HullFract > 0.7 || // You're in a much better condition than them
+                    (PlayerTeam.PlayerShip.HullFract > 0.25 && PlayerTeam.CurrentMission.ShipTarget.HullFract < 0.1)) { // You're in a slightly better condition, but they're nearly dead
+                    bSurrendered = true;
+                    bPause = true;
+                    double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 3.5) / 5.0, 3);
+                    Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
+                    if (ra is not null && !ra.Known) {
+                        string strMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
+                        ra.SetAsKnownBy(PlayerTeam);
+                        if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
+                            PlayerTeam.CeaseMission();
+                            ParentView.msgBox.PopupMessage("The enemy ship flees the battle scene");
+                            bPause = false;
+                            return;
+                        }
+                    }
+                    else {
+                        string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
+                        if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
+                            PlayerTeam.Cash += dReward;
+                            PlayerTeam.CeaseMission();
+                            ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
+                            bPause = false;
+                            return;
+                        }
+                    }
+                    bPause = false;
+                }
+            }
+
+            // -- Player ship fires weapons
+            foreach (int r in PlayerTeam.PlayerShip.AllWeaponRooms) {
+                if (PlayerTeam.PlayerShip.GetEquipmentByRoomID(r) is not ShipWeapon sw) throw new Exception("Got non-weapon in player ship AllWeaponRooms");
+                sw.Cooldown -= 0.005;
+                if (sw.Cooldown <= 0.0 && sw.Range >= fDist) {
+                    double dmg = sw.FireWeapon(PlayerTeam.PlayerShip, PlayerTeam.CurrentMission!.ShipTarget, rand);
+                    int nfrag = PlayerTeam!.CurrentMission!.ShipTarget!.Hull > 0 ? 1 : 10;
+                    for (int i = 0; i < nfrag; i++) {
+                        ShipRoomDesign rF = PlayerTeam.PlayerShip.Type.Rooms[r];
+                        ShipRoomDesign rT = PlayerTeam.CurrentMission.ShipTarget.PickRandomRoom(rand);
+                        float fx = (0.46f - fSpace) - ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
+                        float tx = (0.54f + fSpace) + ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
+                        float fy = ShipYPos + ((rF.YPos - rF.Height / 2f) * 0.005f) + (Const.DrawBattleScale * yLeft * YScale);
+                        float ty = ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f) + (Const.DrawBattleScale * yRight * YScale);
+                        if (i == 0) lShots.Add(new Shot(ShotColPlayer, sw.Attack, fx, tx, fy, ty));
+                        for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
+                            lFrag.Add(new Frag(tx, ty, rand));
+                        }
+                    }
+                }
+            }
+        }
+        private void RunEnemyShipTurn(float fDist, float fSpace) {
+            // -- Enemy fires weapons
+            foreach (int r in PlayerTeam!.CurrentMission!.ShipTarget!.AllWeaponRooms) {
+                ShipWeapon? sw = PlayerTeam.CurrentMission.ShipTarget.GetEquipmentByRoomID(r) as ShipWeapon;
+                if (sw is null) throw new Exception("Got non-weapon in attacking ship AllWeaponRooms");
+                sw.Cooldown -= 0.005;
+                if (sw.Cooldown <= 0.0 && sw.Range >= fDist) {
+                    double dmg = sw.FireWeapon(PlayerTeam.CurrentMission.ShipTarget, PlayerTeam.PlayerShip, rand);
+                    int nfrag = PlayerTeam.PlayerShip.Hull > 0 ? 1 : 10;
+                    for (int i = 0; i < nfrag; i++) {
+                        ShipRoomDesign rF = PlayerTeam.CurrentMission.ShipTarget.Type.Rooms[r];
+                        ShipRoomDesign rT = PlayerTeam.PlayerShip.PickRandomRoom(rand);
+                        float fx = (0.54f + fSpace) + ((rF.XPos + rF.Width / 2f) * 0.005f / ParentView.Aspect);
+                        float tx = (0.46f - fSpace) - ((rT.XPos + rT.Width / 2f) * 0.005f / ParentView.Aspect);
+                        float fy = ShipYPos + ((rF.YPos - rF.Height / 2f) * 0.005f) + (Const.DrawBattleScale * yRight * YScale);
+                        float ty = ShipYPos + ((rT.YPos - rT.Height / 2f) * 0.005f) + (Const.DrawBattleScale * yLeft * YScale);
+                        if (i == 0) lShots.Add(new Shot(ShotColEnemy, sw.Attack, fx, tx, fy, ty));
+                        for (int n = 0; n <= 3 + (int)(dmg * 2.0); n++) {
+                            lFrag.Add(new Frag(tx, ty, rand));
+                        }
+                    }
+                }
+            }
+        }
+        private void MoveShips() {
+            bool playerHasBetterRange = PlayerTeam.PlayerShip.WeaponRange > PlayerTeam.CurrentMission.ShipTarget.WeaponRange;
+
+            // Player ship moves
+            if (playerHasBetterRange) {
+                if (Math.Abs(yLeft - yRight) < ShipYProximity) {
+                    if (Math.Abs(yLeft) * 2 > ShipYRange) vLeft += (yLeft > 0) ? -RangeAccel : RangeAccel;
+                    else vLeft += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
+                }
+                else if (Math.Abs(yLeft - yRight) < ShipYTargetSep) {
+                    if (yRight > yLeft) vLeft -= RangeAccel;
+                    else vLeft += RangeAccel;
+                }
+                else vLeft *= 0.9f;
+            }
+            else {
+                if (Math.Abs(yLeft - yRight) < ShipYProximity) {
+                    if (Math.Abs(yLeft) * 2 > ShipYRange) vLeft -= (yLeft > 0) ? -ChaseAccel : ChaseAccel;
+                    else vLeft += ((float)rand.NextDouble() * 6.0f * ChaseAccel) - (3.0f * ChaseAccel);
+                }
+                else if (yRight > yLeft) vLeft += ChaseAccel;
+                else vLeft -= ChaseAccel;
+            }
+            if (vLeft > ShipVMax) vLeft = ShipVMax;
+            else if (vLeft < -ShipVMax) vLeft = -ShipVMax;
+            yLeft += vLeft;
+            if (yLeft > ShipYRange) yLeft = ShipYRange;
+            if (yLeft < -ShipYRange) yLeft = -ShipYRange;
+
+            // Enemy Ship
+            if (playerHasBetterRange) {
+                if (Math.Abs(yLeft - yRight) < ShipYProximity) {
+                    if (Math.Abs(yRight) * 2 > ShipYRange) vRight += (vRight > 0) ? -ChaseAccel : ChaseAccel;
+                    else vRight += ((float)rand.NextDouble() * 6.0f * ChaseAccel) - (3.0f * ChaseAccel);
+                }
+                else if (yRight > yLeft) vRight -= ChaseAccel;
+                else vRight += ChaseAccel;
+            }
+            else {
+                if (Math.Abs(yLeft - yRight) < ShipYProximity) {
+                    if (Math.Abs(yRight) * 2 > ShipYRange) vRight -= (vRight > 0) ? -RangeAccel : RangeAccel;
+                    else vRight += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
+                }
+                else if (Math.Abs(yLeft - yRight) < ShipYTargetSep) {
+                    if (yRight > yLeft) vRight += RangeAccel;
+                    else vRight -= RangeAccel;
+                }
+                else vRight *= 0.9f;
+            }
+            if (vRight > ShipVMax) vRight = ShipVMax;
+            else if (vRight < -ShipVMax) vRight = -ShipVMax;
+            yRight += vRight;
+            if (yRight > ShipYRange) yRight = ShipYRange;
+            if (yRight < -ShipYRange) yRight = -ShipYRange;
         }
         private void TriggerRepelBoardersMissionAction() {
             if (PlayerTeam.CurrentMission is null) return;
@@ -529,15 +622,20 @@ namespace SpaceMercs {
                 TextRenderer.DrawWithOptions(strStatus, tro);
             }
 
-            // Display ships
+            // -- Display ships
             float fSpace = fSep * Const.DrawBattleScale;
-            Matrix4 translateM = Matrix4.CreateTranslation(0.46f - fSpace, ShipYPos, 0f);
+
+            // Player Ship
+            Matrix4 translateM = Matrix4.CreateTranslation(0.46f - fSpace, ShipYPos + yLeft * Const.DrawBattleScale * YScale, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(-0.005f / ParentView.Aspect, 0.005f, 0.005f);
-            prog.SetUniform("view", scaleM * translateM);
+            Matrix4 rotateM = Matrix4.CreateRotationZ(-(float)Math.Atan((yRight - yLeft) / (fSep * YScale)));
+            prog.SetUniform("view", rotateM * scaleM * translateM);
             if (PlayerTeam.PlayerShip.Hull > 0) PlayerTeam.PlayerShip.DrawBattle(prog);
-            translateM = Matrix4.CreateTranslation(0.54f + fSpace, ShipYPos, 0f);
+            // Enemy Ship
+            translateM = Matrix4.CreateTranslation(0.54f + fSpace, ShipYPos + yRight * Const.DrawBattleScale * YScale, 0f);
             scaleM = Matrix4.CreateScale(0.005f / ParentView.Aspect, 0.005f, 0.005f);
-            prog.SetUniform("view", scaleM * translateM);
+            rotateM = Matrix4.CreateRotationZ((float)Math.Atan((yRight - yLeft) / (fSep * YScale)));
+            prog.SetUniform("view", rotateM * scaleM * translateM);
             if (PlayerTeam.CurrentMission.ShipTarget.Hull > 0) PlayerTeam.CurrentMission.ShipTarget.DrawBattle(prog);
 
             // Draw weapon shots (Blue = player, red = enemy, width = power) and Frag
@@ -549,7 +647,7 @@ namespace SpaceMercs {
                 GL.BindVertexArray(0);
             }
 
-            // Draw any frag items
+            // Draw & update any frag items
             prog.SetUniform("view", Matrix4.Identity);
             foreach (Frag fr in lFrag) {
                 fr.Display(prog, ParentView.Aspect);

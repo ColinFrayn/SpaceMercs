@@ -11,7 +11,8 @@ namespace SpaceMercs {
             Rate = xml.SelectNodeDouble("Rate");
         }
 
-        public double FireWeapon(Ship source, Ship target, Random rand) {
+        public double FireWeapon(Ship source, Ship? target, Random rand) {
+            if (target is null) return 0.0;
             int attackScore = source.Attack + Attack;
             int defenceScore = target.Defence;
             double damage = (rand.NextDouble() * attackScore) - (rand.NextDouble() * defenceScore);

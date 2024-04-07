@@ -10,6 +10,7 @@ namespace SpaceMercs {
         public static void DisplayBicolourFractBar(ShaderProgram prog, float fTLCX, float fTLCY, float fWidth, float fHeight, float fract, Vector4 col, Vector4 bg) {
             if (fract < 0f) fract = 0f;
             if (fract > 1f) fract = 1f;
+            GL.Disable(EnableCap.Blend);
             Matrix4 translateM = Matrix4.CreateTranslation(fTLCX, fTLCY, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
             if (fract < 1f) {
@@ -27,6 +28,7 @@ namespace SpaceMercs {
         public static void DrawFramedFractBar(ShaderProgram prog, float fTLCX, float fTLCY, float fWidth, float fHeight, float fract, Vector4 col) {
             if (fract < 0f) fract = 0f;
             if (fract > 1f) fract = 1f;
+            GL.Disable(EnableCap.Blend);
             Matrix4 translateM = Matrix4.CreateTranslation(fTLCX, fTLCY, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(fWidth * fract, fHeight, 1f);
             prog.SetUniform("model", scaleM * translateM);
