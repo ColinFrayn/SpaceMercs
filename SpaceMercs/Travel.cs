@@ -274,12 +274,12 @@ namespace SpaceMercs {
             MoveShips();
 
             // If the player ship is still alive...
-            if (PlayerTeam.CurrentMission.ShipTarget.Hull > 0.0) {
+            if ((PlayerTeam.CurrentMission?.ShipTarget?.Hull ?? 0.0) > 0.0) {
                 RunPlayerShipTurn(fDist, fSpace);
             }
 
             // Was the enemy ship destroyed?
-            if (PlayerTeam.CurrentMission!.ShipTarget.Hull <= 0.0) {
+            if ((PlayerTeam.CurrentMission?.ShipTarget?.Hull ?? 0.0) <= 0.0) {
                 if (lFrag.Any()) return;
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
@@ -298,6 +298,8 @@ namespace SpaceMercs {
                 bPause = false;
                 return;
             }
+
+            if (PlayerTeam.CurrentMission is null) return;
 
             // Enemy is still alive, so check if it can shoot
             RunEnemyShipTurn(fDist, fSpace);
@@ -404,7 +406,7 @@ namespace SpaceMercs {
             }
         }
         private void MoveShips() {
-            bool playerHasBetterRange = PlayerTeam.PlayerShip.WeaponRange > PlayerTeam.CurrentMission.ShipTarget.WeaponRange;
+            bool playerHasBetterRange = PlayerTeam.PlayerShip.WeaponRange > PlayerTeam.CurrentMission!.ShipTarget!.WeaponRange;
 
             // Player ship moves
             if (playerHasBetterRange) {
@@ -413,8 +415,9 @@ namespace SpaceMercs {
                     else vLeft += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
                 }
                 else if (Math.Abs(yLeft - yRight) < ShipYTargetSep) {
-                    if (yRight > yLeft) vLeft -= RangeAccel;
-                    else vLeft += RangeAccel;
+                    vLeft += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
+                    //if (yRight > yLeft) vLeft -= RangeAccel;
+                    //else vLeft += RangeAccel;
                 }
                 else vLeft *= 0.9f;
             }
@@ -447,8 +450,9 @@ namespace SpaceMercs {
                     else vRight += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
                 }
                 else if (Math.Abs(yLeft - yRight) < ShipYTargetSep) {
-                    if (yRight > yLeft) vRight += RangeAccel;
-                    else vRight -= RangeAccel;
+                    vRight += ((float)rand.NextDouble() * 6.0f * RangeAccel) - (3.0f * RangeAccel);
+                    //if (yRight > yLeft) vRight += RangeAccel;
+                    //else vRight -= RangeAccel;
                 }
                 else vRight *= 0.9f;
             }
@@ -598,7 +602,6 @@ namespace SpaceMercs {
             tro.YPos = 0.27f;
             tro.Alignment = Alignment.TopMiddle;
             TextRenderer.DrawWithOptions(strStatus, tro);
-
             if (PlayerTeam.PlayerShip.MaxShield > 0.0) {
                 strStatus = Math.Round(PlayerTeam.PlayerShip.Shield, 1) + "/" + PlayerTeam.PlayerShip.MaxShield;
                 GraphicsFunctions.DrawFramedFractBar(prog, 0.22f, 0.32f, 0.1f, 0.02f, (float)PlayerTeam.PlayerShip.ShieldFract, new Vector4(0f, 0f, 1f, 1f));

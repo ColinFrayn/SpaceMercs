@@ -37,7 +37,7 @@ namespace SpaceMercs {
             Square.Flat.BindAndDraw();
             scaleM = Matrix4.CreateScale(fWidth, fHeight, 1f);
             prog.SetUniform("model", scaleM * translateM);
-            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1.0f));
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Lines.BindAndDraw();
         }

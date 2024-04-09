@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using Microsoft.VisualBasic.Logging;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -435,7 +436,8 @@ namespace SpaceMercs {
         public void DrawBattle(ShaderProgram prog) {
             // Shields
             if (Shield > 0.0) {
-                prog.SetUniform("flatColour", new Vector4(0f, Math.Max(0f,(float)ShieldFract - 0.6f), Math.Min(1f,(float)ShieldFract/0.6f), 1.0f));
+                float shieldVis = (ShieldFract > 0.6) ? 1.0f : (float)(ShieldFract * 0.8 / 0.6) + 0.2f;
+                prog.SetUniform("flatColour", new Vector4(0f, Math.Max(0.0f, shieldVis - 0.6f), shieldVis, 1.0f));
                 prog.SetUniform("model", Matrix4.CreateScale(1.0f));
                 Type.DrawShields(prog);
             }

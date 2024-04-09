@@ -623,12 +623,9 @@ namespace SpaceMercs.MainWindow {
                 }
                 catch (Exception ex) {
                     MessageBox.Show(ex.ToString(), "Save Game Failed", MessageBoxButtons.OK);
-                    return;
-                }
-                finally {
-                    TravelDetails?.Unpause();
                 }
             }
+            TravelDetails?.Unpause();
         }
         public void LoadGame() {
             // Need to check to see if we already have a map set up

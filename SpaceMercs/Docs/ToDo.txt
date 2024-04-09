@@ -2,9 +2,8 @@
 ToDo List
 -------------------------------------------------
 
-Travel.RunBattle(): 
-- Shield energy bar should be blue?
-- Save mid-battle, cancel, doesn't restart battle??
+TBC
+
 
 ==========================================================================================================
 
