@@ -1,1155 +1,1199 @@
 ﻿namespace SpaceMercs.Dialogs {
-  partial class TeamView {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
+    partial class TeamView {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing) {
-      if (disposing && (components != null)) {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            dgSoldiers = new DataGridView();
+            SoldierName = new DataGridViewTextBoxColumn();
+            SoldierRace = new DataGridViewTextBoxColumn();
+            SoldierLevel = new DataGridViewTextBoxColumn();
+            SoldierStatus = new DataGridViewTextBoxColumn();
+            btInventory = new Button();
+            gbSoldier = new GroupBox();
+            btColour = new Button();
+            btIncreaseSkill = new Button();
+            btAddNewSkill = new Button();
+            lbUnspent = new Label();
+            label17 = new Label();
+            pbExperience = new PictureBox();
+            groupBox2 = new GroupBox();
+            lbLevel = new Label();
+            label15 = new Label();
+            label20 = new Label();
+            lbAttackTotal = new Label();
+            label38 = new Label();
+            lbDefenceTotal = new Label();
+            lbHealthTotal = new Label();
+            lbArmour = new Label();
+            label11 = new Label();
+            label18 = new Label();
+            lbDeactivated = new Label();
+            lbRFoot = new Label();
+            lbRLeg = new Label();
+            lbLFoot = new Label();
+            lbLLeg = new Label();
+            lbLHand = new Label();
+            lbRHand = new Label();
+            lbLArm = new Label();
+            lbRArm = new Label();
+            tbSkills = new TabControl();
+            tpMilitary = new TabPage();
+            lbWeaponSkills = new ListBox();
+            tpUtility = new TabPage();
+            lbUtilitySkills = new ListBox();
+            lbChest = new Label();
+            lbHead = new Label();
+            lbEndurance = new Label();
+            label16 = new Label();
+            lbToughness = new Label();
+            label14 = new Label();
+            lbInsight = new Label();
+            label12 = new Label();
+            lbAgility = new Label();
+            label10 = new Label();
+            lbStrength = new Label();
+            label6 = new Label();
+            groupBox1 = new GroupBox();
+            lbEquipped = new ListBox();
+            lbEncumber = new Label();
+            btDrop = new Button();
+            btEquip = new Button();
+            label1 = new Label();
+            lbInventory = new ListBox();
+            lbCapacity = new Label();
+            btDropAll = new Button();
+            label13 = new Label();
+            label8 = new Label();
+            lbWeight = new Label();
+            btDismiss = new Button();
+            btDeactivate = new Button();
+            lbCash = new Label();
+            label3 = new Label();
+            lbLocation = new Label();
+            label4 = new Label();
+            lbRoster = new Label();
+            label5 = new Label();
+            lbActive = new Label();
+            label7 = new Label();
+            label2 = new Label();
+            lbShip = new Label();
+            lbBerths = new Label();
+            label9 = new Label();
+            lbInsufficientBerths = new Label();
+            cdPickColour = new ColorDialog();
+            ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
+            gbSoldier.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
+            groupBox2.SuspendLayout();
+            tbSkills.SuspendLayout();
+            tpMilitary.SuspendLayout();
+            tpUtility.SuspendLayout();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // dgSoldiers
+            // 
+            dgSoldiers.AllowUserToAddRows = false;
+            dgSoldiers.AllowUserToDeleteRows = false;
+            dgSoldiers.AllowUserToResizeColumns = false;
+            dgSoldiers.AllowUserToResizeRows = false;
+            dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
+            dgSoldiers.Location = new Point(14, 128);
+            dgSoldiers.Margin = new Padding(4, 3, 4, 3);
+            dgSoldiers.MultiSelect = false;
+            dgSoldiers.Name = "dgSoldiers";
+            dgSoldiers.ReadOnly = true;
+            dgSoldiers.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgSoldiers.ScrollBars = ScrollBars.Vertical;
+            dgSoldiers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSoldiers.Size = new Size(626, 579);
+            dgSoldiers.TabIndex = 0;
+            dgSoldiers.SelectionChanged += dgSoldiers_SelectionChanged;
+            // 
+            // SoldierName
+            // 
+            SoldierName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            SoldierName.HeaderText = "Soldier Name";
+            SoldierName.Name = "SoldierName";
+            SoldierName.ReadOnly = true;
+            // 
+            // SoldierRace
+            // 
+            SoldierRace.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            SoldierRace.HeaderText = "Race";
+            SoldierRace.Name = "SoldierRace";
+            SoldierRace.ReadOnly = true;
+            SoldierRace.Width = 57;
+            // 
+            // SoldierLevel
+            // 
+            SoldierLevel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            SoldierLevel.HeaderText = "Level";
+            SoldierLevel.Name = "SoldierLevel";
+            SoldierLevel.ReadOnly = true;
+            SoldierLevel.Width = 59;
+            // 
+            // SoldierStatus
+            // 
+            SoldierStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            SoldierStatus.HeaderText = "Status";
+            SoldierStatus.Name = "SoldierStatus";
+            SoldierStatus.ReadOnly = true;
+            SoldierStatus.Width = 64;
+            // 
+            // btInventory
+            // 
+            btInventory.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btInventory.Location = new Point(377, 720);
+            btInventory.Margin = new Padding(4, 3, 4, 3);
+            btInventory.Name = "btInventory";
+            btInventory.Size = new Size(264, 96);
+            btInventory.TabIndex = 7;
+            btInventory.Text = "View Ship Storage";
+            btInventory.UseVisualStyleBackColor = true;
+            btInventory.Click += btInventory_Click;
+            // 
+            // gbSoldier
+            // 
+            gbSoldier.Controls.Add(btColour);
+            gbSoldier.Controls.Add(btIncreaseSkill);
+            gbSoldier.Controls.Add(btAddNewSkill);
+            gbSoldier.Controls.Add(lbUnspent);
+            gbSoldier.Controls.Add(label17);
+            gbSoldier.Controls.Add(pbExperience);
+            gbSoldier.Controls.Add(groupBox2);
+            gbSoldier.Controls.Add(lbDeactivated);
+            gbSoldier.Controls.Add(lbRFoot);
+            gbSoldier.Controls.Add(lbRLeg);
+            gbSoldier.Controls.Add(lbLFoot);
+            gbSoldier.Controls.Add(lbLLeg);
+            gbSoldier.Controls.Add(lbLHand);
+            gbSoldier.Controls.Add(lbRHand);
+            gbSoldier.Controls.Add(lbLArm);
+            gbSoldier.Controls.Add(lbRArm);
+            gbSoldier.Controls.Add(tbSkills);
+            gbSoldier.Controls.Add(lbChest);
+            gbSoldier.Controls.Add(lbHead);
+            gbSoldier.Controls.Add(lbEndurance);
+            gbSoldier.Controls.Add(label16);
+            gbSoldier.Controls.Add(lbToughness);
+            gbSoldier.Controls.Add(label14);
+            gbSoldier.Controls.Add(lbInsight);
+            gbSoldier.Controls.Add(label12);
+            gbSoldier.Controls.Add(lbAgility);
+            gbSoldier.Controls.Add(label10);
+            gbSoldier.Controls.Add(lbStrength);
+            gbSoldier.Controls.Add(label6);
+            gbSoldier.Controls.Add(groupBox1);
+            gbSoldier.Location = new Point(654, 13);
+            gbSoldier.Margin = new Padding(4, 3, 4, 3);
+            gbSoldier.Name = "gbSoldier";
+            gbSoldier.Padding = new Padding(4, 3, 4, 3);
+            gbSoldier.Size = new Size(471, 803);
+            gbSoldier.TabIndex = 8;
+            gbSoldier.TabStop = false;
+            gbSoldier.Text = "Soldier Details";
+            // 
+            // btColour
+            // 
+            btColour.Location = new Point(404, 186);
+            btColour.Margin = new Padding(4, 3, 4, 3);
+            btColour.Name = "btColour";
+            btColour.Size = new Size(48, 27);
+            btColour.TabIndex = 92;
+            btColour.UseVisualStyleBackColor = true;
+            btColour.Click += btColour_Click;
+            // 
+            // btIncreaseSkill
+            // 
+            btIncreaseSkill.Location = new Point(132, 751);
+            btIncreaseSkill.Margin = new Padding(0);
+            btIncreaseSkill.Name = "btIncreaseSkill";
+            btIncreaseSkill.Size = new Size(52, 43);
+            btIncreaseSkill.TabIndex = 91;
+            btIncreaseSkill.Text = "Boost Skill";
+            btIncreaseSkill.UseVisualStyleBackColor = true;
+            btIncreaseSkill.Click += btIncreaseSkill_Click;
+            // 
+            // btAddNewSkill
+            // 
+            btAddNewSkill.Location = new Point(69, 751);
+            btAddNewSkill.Margin = new Padding(4, 3, 4, 3);
+            btAddNewSkill.Name = "btAddNewSkill";
+            btAddNewSkill.Size = new Size(59, 44);
+            btAddNewSkill.TabIndex = 90;
+            btAddNewSkill.Text = "Add New";
+            btAddNewSkill.UseVisualStyleBackColor = true;
+            btAddNewSkill.Click += btAddNewSkill_Click;
+            // 
+            // lbUnspent
+            // 
+            lbUnspent.BorderStyle = BorderStyle.FixedSingle;
+            lbUnspent.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbUnspent.Location = new Point(18, 770);
+            lbUnspent.Margin = new Padding(6, 2, 6, 2);
+            lbUnspent.Name = "lbUnspent";
+            lbUnspent.Size = new Size(42, 25);
+            lbUnspent.TabIndex = 89;
+            lbUnspent.Text = "88";
+            lbUnspent.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(12, 750);
+            label17.Margin = new Padding(4, 0, 4, 0);
+            label17.Name = "label17";
+            label17.Size = new Size(51, 15);
+            label17.TabIndex = 88;
+            label17.Text = "Unspent";
+            // 
+            // pbExperience
+            // 
+            pbExperience.BorderStyle = BorderStyle.FixedSingle;
+            pbExperience.Location = new Point(205, 222);
+            pbExperience.Margin = new Padding(4, 3, 4, 3);
+            pbExperience.Name = "pbExperience";
+            pbExperience.Size = new Size(246, 24);
+            pbExperience.TabIndex = 87;
+            pbExperience.TabStop = false;
+            pbExperience.Paint += pbExperience_Paint;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(lbLevel);
+            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(label20);
+            groupBox2.Controls.Add(lbAttackTotal);
+            groupBox2.Controls.Add(label38);
+            groupBox2.Controls.Add(lbDefenceTotal);
+            groupBox2.Controls.Add(lbHealthTotal);
+            groupBox2.Controls.Add(lbArmour);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(label18);
+            groupBox2.Location = new Point(9, 208);
+            groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4, 3, 4, 3);
+            groupBox2.Size = new Size(173, 209);
+            groupBox2.TabIndex = 86;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Primary Stats";
+            // 
+            // lbLevel
+            // 
+            lbLevel.BackColor = SystemColors.Window;
+            lbLevel.BorderStyle = BorderStyle.FixedSingle;
+            lbLevel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLevel.Location = new Point(98, 24);
+            lbLevel.Margin = new Padding(6, 2, 6, 2);
+            lbLevel.Name = "lbLevel";
+            lbLevel.Size = new Size(58, 27);
+            lbLevel.TabIndex = 90;
+            lbLevel.Text = "888";
+            lbLevel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(38, 30);
+            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(40, 16);
+            label15.TabIndex = 49;
+            label15.Text = "Level";
+            label15.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label20.Location = new Point(18, 138);
+            label20.Margin = new Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(58, 16);
+            label20.TabIndex = 89;
+            label20.Text = "Defence";
+            label20.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbAttackTotal
+            // 
+            lbAttackTotal.BackColor = Color.Tomato;
+            lbAttackTotal.BorderStyle = BorderStyle.FixedSingle;
+            lbAttackTotal.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbAttackTotal.Location = new Point(98, 97);
+            lbAttackTotal.Margin = new Padding(6, 2, 6, 2);
+            lbAttackTotal.Name = "lbAttackTotal";
+            lbAttackTotal.Size = new Size(58, 27);
+            lbAttackTotal.TabIndex = 80;
+            lbAttackTotal.Text = "888";
+            lbAttackTotal.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label38.Location = new Point(34, 103);
+            label38.Margin = new Padding(4, 0, 4, 0);
+            label38.Name = "label38";
+            label38.Size = new Size(44, 16);
+            label38.TabIndex = 76;
+            label38.Text = "Attack";
+            label38.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbDefenceTotal
+            // 
+            lbDefenceTotal.BackColor = SystemColors.Highlight;
+            lbDefenceTotal.BorderStyle = BorderStyle.FixedSingle;
+            lbDefenceTotal.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbDefenceTotal.Location = new Point(98, 133);
+            lbDefenceTotal.Margin = new Padding(6, 2, 6, 2);
+            lbDefenceTotal.Name = "lbDefenceTotal";
+            lbDefenceTotal.Size = new Size(58, 27);
+            lbDefenceTotal.TabIndex = 61;
+            lbDefenceTotal.Text = "888";
+            lbDefenceTotal.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbHealthTotal
+            // 
+            lbHealthTotal.BackColor = Color.LimeGreen;
+            lbHealthTotal.BorderStyle = BorderStyle.FixedSingle;
+            lbHealthTotal.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHealthTotal.Location = new Point(98, 61);
+            lbHealthTotal.Margin = new Padding(6, 2, 6, 2);
+            lbHealthTotal.Name = "lbHealthTotal";
+            lbHealthTotal.Size = new Size(58, 27);
+            lbHealthTotal.TabIndex = 60;
+            lbHealthTotal.Text = "888";
+            lbHealthTotal.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbArmour
+            // 
+            lbArmour.BackColor = SystemColors.ControlLight;
+            lbArmour.BorderStyle = BorderStyle.FixedSingle;
+            lbArmour.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbArmour.Location = new Point(98, 168);
+            lbArmour.Margin = new Padding(6, 2, 6, 2);
+            lbArmour.Name = "lbArmour";
+            lbArmour.Size = new Size(58, 27);
+            lbArmour.TabIndex = 88;
+            lbArmour.Text = "888";
+            lbArmour.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(31, 66);
+            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(46, 16);
+            label11.TabIndex = 48;
+            label11.Text = "Health";
+            label11.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label18.Location = new Point(27, 174);
+            label18.Margin = new Padding(4, 0, 4, 0);
+            label18.Name = "label18";
+            label18.Size = new Size(50, 16);
+            label18.TabIndex = 87;
+            label18.Text = "Armour";
+            label18.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbDeactivated
+            // 
+            lbDeactivated.AutoSize = true;
+            lbDeactivated.ForeColor = Color.Red;
+            lbDeactivated.Location = new Point(8, 20);
+            lbDeactivated.Margin = new Padding(4, 0, 4, 0);
+            lbDeactivated.Name = "lbDeactivated";
+            lbDeactivated.Size = new Size(121, 15);
+            lbDeactivated.TabIndex = 85;
+            lbDeactivated.Text = "Soldier is deactivated!";
+            // 
+            // lbRFoot
+            // 
+            lbRFoot.BorderStyle = BorderStyle.FixedSingle;
+            lbRFoot.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRFoot.Location = new Point(329, 189);
+            lbRFoot.Margin = new Padding(0);
+            lbRFoot.Name = "lbRFoot";
+            lbRFoot.Size = new Size(30, 23);
+            lbRFoot.TabIndex = 47;
+            lbRFoot.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbRLeg
+            // 
+            lbRLeg.BorderStyle = BorderStyle.FixedSingle;
+            lbRLeg.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRLeg.Location = new Point(329, 127);
+            lbRLeg.Margin = new Padding(0);
+            lbRLeg.Name = "lbRLeg";
+            lbRLeg.Size = new Size(30, 62);
+            lbRLeg.TabIndex = 46;
+            lbRLeg.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbLFoot
+            // 
+            lbLFoot.BorderStyle = BorderStyle.FixedSingle;
+            lbLFoot.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLFoot.Location = new Point(294, 189);
+            lbLFoot.Margin = new Padding(0);
+            lbLFoot.Name = "lbLFoot";
+            lbLFoot.Size = new Size(30, 23);
+            lbLFoot.TabIndex = 45;
+            lbLFoot.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbLLeg
+            // 
+            lbLLeg.BorderStyle = BorderStyle.FixedSingle;
+            lbLLeg.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLLeg.Location = new Point(294, 127);
+            lbLLeg.Margin = new Padding(0);
+            lbLLeg.Name = "lbLLeg";
+            lbLLeg.Size = new Size(30, 62);
+            lbLLeg.TabIndex = 44;
+            lbLLeg.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbLHand
+            // 
+            lbLHand.BorderStyle = BorderStyle.FixedSingle;
+            lbLHand.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLHand.Location = new Point(262, 125);
+            lbLHand.Margin = new Padding(0);
+            lbLHand.Name = "lbLHand";
+            lbLHand.Size = new Size(30, 27);
+            lbLHand.TabIndex = 43;
+            lbLHand.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbRHand
+            // 
+            lbRHand.BorderStyle = BorderStyle.FixedSingle;
+            lbRHand.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRHand.Location = new Point(360, 125);
+            lbRHand.Margin = new Padding(0);
+            lbRHand.Name = "lbRHand";
+            lbRHand.Size = new Size(30, 27);
+            lbRHand.TabIndex = 42;
+            lbRHand.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbLArm
+            // 
+            lbLArm.BorderStyle = BorderStyle.FixedSingle;
+            lbLArm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLArm.Location = new Point(262, 53);
+            lbLArm.Margin = new Padding(0);
+            lbLArm.Name = "lbLArm";
+            lbLArm.Size = new Size(30, 71);
+            lbLArm.TabIndex = 41;
+            lbLArm.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbRArm
+            // 
+            lbRArm.BorderStyle = BorderStyle.FixedSingle;
+            lbRArm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRArm.Location = new Point(360, 53);
+            lbRArm.Margin = new Padding(0);
+            lbRArm.Name = "lbRArm";
+            lbRArm.Size = new Size(30, 71);
+            lbRArm.TabIndex = 40;
+            lbRArm.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tbSkills
+            // 
+            tbSkills.Controls.Add(tpMilitary);
+            tbSkills.Controls.Add(tpUtility);
+            tbSkills.Location = new Point(10, 434);
+            tbSkills.Margin = new Padding(4, 3, 4, 3);
+            tbSkills.Name = "tbSkills";
+            tbSkills.SelectedIndex = 0;
+            tbSkills.Size = new Size(182, 314);
+            tbSkills.TabIndex = 39;
+            tbSkills.SelectedIndexChanged += tbSkills_SelectedIndexChanged;
+            // 
+            // tpMilitary
+            // 
+            tpMilitary.Controls.Add(lbWeaponSkills);
+            tpMilitary.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            tpMilitary.Location = new Point(4, 24);
+            tpMilitary.Margin = new Padding(4, 3, 4, 3);
+            tpMilitary.Name = "tpMilitary";
+            tpMilitary.Padding = new Padding(4, 3, 4, 3);
+            tpMilitary.Size = new Size(174, 286);
+            tpMilitary.TabIndex = 0;
+            tpMilitary.Text = "Weapon Skills";
+            tpMilitary.UseVisualStyleBackColor = true;
+            // 
+            // lbWeaponSkills
+            // 
+            lbWeaponSkills.FormattingEnabled = true;
+            lbWeaponSkills.ItemHeight = 16;
+            lbWeaponSkills.Location = new Point(0, 2);
+            lbWeaponSkills.Margin = new Padding(4, 3, 4, 3);
+            lbWeaponSkills.Name = "lbWeaponSkills";
+            lbWeaponSkills.Size = new Size(168, 276);
+            lbWeaponSkills.TabIndex = 0;
+            // 
+            // tpUtility
+            // 
+            tpUtility.Controls.Add(lbUtilitySkills);
+            tpUtility.Location = new Point(4, 24);
+            tpUtility.Margin = new Padding(4, 3, 4, 3);
+            tpUtility.Name = "tpUtility";
+            tpUtility.Padding = new Padding(4, 3, 4, 3);
+            tpUtility.Size = new Size(174, 286);
+            tpUtility.TabIndex = 1;
+            tpUtility.Text = "Utility Skills";
+            tpUtility.UseVisualStyleBackColor = true;
+            // 
+            // lbUtilitySkills
+            // 
+            lbUtilitySkills.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbUtilitySkills.FormattingEnabled = true;
+            lbUtilitySkills.ItemHeight = 16;
+            lbUtilitySkills.Location = new Point(0, 2);
+            lbUtilitySkills.Margin = new Padding(4, 3, 4, 3);
+            lbUtilitySkills.Name = "lbUtilitySkills";
+            lbUtilitySkills.Size = new Size(168, 276);
+            lbUtilitySkills.TabIndex = 1;
+            lbUtilitySkills.SelectedIndexChanged += lbUtilitySkills_SelectedIndexChanged;
+            lbUtilitySkills.DoubleClick += lbUtilitySkills_DoubleClick;
+            // 
+            // lbChest
+            // 
+            lbChest.BorderStyle = BorderStyle.FixedSingle;
+            lbChest.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbChest.Location = new Point(293, 53);
+            lbChest.Margin = new Padding(0);
+            lbChest.Name = "lbChest";
+            lbChest.Size = new Size(67, 74);
+            lbChest.TabIndex = 35;
+            lbChest.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbHead
+            // 
+            lbHead.BorderStyle = BorderStyle.FixedSingle;
+            lbHead.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHead.Location = new Point(306, 21);
+            lbHead.Margin = new Padding(0);
+            lbHead.Name = "lbHead";
+            lbHead.Size = new Size(42, 27);
+            lbHead.TabIndex = 34;
+            lbHead.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbEndurance
+            // 
+            lbEndurance.BorderStyle = BorderStyle.FixedSingle;
+            lbEndurance.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbEndurance.Location = new Point(111, 159);
+            lbEndurance.Margin = new Padding(6, 2, 6, 2);
+            lbEndurance.Name = "lbEndurance";
+            lbEndurance.Size = new Size(54, 25);
+            lbEndurance.TabIndex = 29;
+            lbEndurance.Text = "888";
+            lbEndurance.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label16.Location = new Point(19, 163);
+            label16.Margin = new Padding(4, 0, 4, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(72, 16);
+            label16.TabIndex = 28;
+            label16.Text = "Endurance";
+            label16.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbToughness
+            // 
+            lbToughness.BorderStyle = BorderStyle.FixedSingle;
+            lbToughness.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbToughness.Location = new Point(111, 129);
+            lbToughness.Margin = new Padding(6, 2, 6, 2);
+            lbToughness.Name = "lbToughness";
+            lbToughness.Size = new Size(54, 25);
+            lbToughness.TabIndex = 27;
+            lbToughness.Text = "888";
+            lbToughness.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Location = new Point(15, 133);
+            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(75, 16);
+            label14.TabIndex = 26;
+            label14.Text = "Toughness";
+            label14.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbInsight
+            // 
+            lbInsight.BorderStyle = BorderStyle.FixedSingle;
+            lbInsight.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbInsight.Location = new Point(111, 99);
+            lbInsight.Margin = new Padding(6, 2, 6, 2);
+            lbInsight.Name = "lbInsight";
+            lbInsight.Size = new Size(54, 25);
+            lbInsight.TabIndex = 25;
+            lbInsight.Text = "888";
+            lbInsight.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(42, 103);
+            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(45, 16);
+            label12.TabIndex = 24;
+            label12.Text = "Insight";
+            label12.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbAgility
+            // 
+            lbAgility.BorderStyle = BorderStyle.FixedSingle;
+            lbAgility.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbAgility.Location = new Point(111, 69);
+            lbAgility.Margin = new Padding(6, 2, 6, 2);
+            lbAgility.Name = "lbAgility";
+            lbAgility.Size = new Size(54, 25);
+            lbAgility.TabIndex = 23;
+            lbAgility.Text = "888";
+            lbAgility.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(52, 73);
+            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(43, 16);
+            label10.TabIndex = 22;
+            label10.Text = "Agility";
+            label10.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbStrength
+            // 
+            lbStrength.BorderStyle = BorderStyle.FixedSingle;
+            lbStrength.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lbStrength.Location = new Point(111, 39);
+            lbStrength.Margin = new Padding(6, 2, 6, 2);
+            lbStrength.Name = "lbStrength";
+            lbStrength.Size = new Size(54, 25);
+            lbStrength.TabIndex = 21;
+            lbStrength.Text = "888";
+            lbStrength.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(37, 43);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(56, 16);
+            label6.TabIndex = 20;
+            label6.Text = "Strength";
+            label6.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(lbEquipped);
+            groupBox1.Controls.Add(lbEncumber);
+            groupBox1.Controls.Add(btDrop);
+            groupBox1.Controls.Add(btEquip);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(lbInventory);
+            groupBox1.Controls.Add(lbCapacity);
+            groupBox1.Controls.Add(btDropAll);
+            groupBox1.Controls.Add(label13);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(lbWeight);
+            groupBox1.Location = new Point(205, 252);
+            groupBox1.Margin = new Padding(4, 3, 4, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(4, 3, 4, 3);
+            groupBox1.Size = new Size(246, 535);
+            groupBox1.TabIndex = 33;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Inventory";
+            // 
+            // lbEquipped
+            // 
+            lbEquipped.FormattingEnabled = true;
+            lbEquipped.HorizontalScrollbar = true;
+            lbEquipped.ItemHeight = 15;
+            lbEquipped.Location = new Point(15, 315);
+            lbEquipped.Margin = new Padding(4, 3, 4, 3);
+            lbEquipped.Name = "lbEquipped";
+            lbEquipped.Size = new Size(213, 139);
+            lbEquipped.TabIndex = 45;
+            lbEquipped.SelectedIndexChanged += lbEquipped_SelectedIndexChanged;
+            lbEquipped.DoubleClick += lbEquipped_DoubleClick;
+            // 
+            // lbEncumber
+            // 
+            lbEncumber.BorderStyle = BorderStyle.FixedSingle;
+            lbEncumber.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbEncumber.Location = new Point(168, 489);
+            lbEncumber.Margin = new Padding(6, 2, 6, 2);
+            lbEncumber.Name = "lbEncumber";
+            lbEncumber.Size = new Size(58, 30);
+            lbEncumber.TabIndex = 44;
+            lbEncumber.Text = "100%";
+            lbEncumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btDrop
+            // 
+            btDrop.Location = new Point(91, 277);
+            btDrop.Margin = new Padding(4, 3, 4, 3);
+            btDrop.Name = "btDrop";
+            btDrop.Size = new Size(64, 27);
+            btDrop.TabIndex = 2;
+            btDrop.Text = "Drop";
+            btDrop.UseVisualStyleBackColor = true;
+            btDrop.Click += btDrop_Click;
+            // 
+            // btEquip
+            // 
+            btEquip.Location = new Point(15, 277);
+            btEquip.Margin = new Padding(4, 3, 4, 3);
+            btEquip.Name = "btEquip";
+            btEquip.Size = new Size(64, 27);
+            btEquip.TabIndex = 1;
+            btEquip.Text = "Equip";
+            btEquip.UseVisualStyleBackColor = true;
+            btEquip.Click += btEquip_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(164, 466);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 15);
+            label1.TabIndex = 43;
+            label1.Text = "Encumb.";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbInventory
+            // 
+            lbInventory.FormattingEnabled = true;
+            lbInventory.HorizontalScrollbar = true;
+            lbInventory.ItemHeight = 15;
+            lbInventory.Location = new Point(15, 23);
+            lbInventory.Margin = new Padding(4, 3, 4, 3);
+            lbInventory.Name = "lbInventory";
+            lbInventory.Size = new Size(213, 244);
+            lbInventory.TabIndex = 0;
+            lbInventory.SelectedIndexChanged += lbInventory_SelectedIndexChanged;
+            lbInventory.DoubleClick += lbInventory_DoubleClick;
+            // 
+            // lbCapacity
+            // 
+            lbCapacity.BorderStyle = BorderStyle.FixedSingle;
+            lbCapacity.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbCapacity.Location = new Point(71, 497);
+            lbCapacity.Margin = new Padding(6, 2, 6, 2);
+            lbCapacity.Name = "lbCapacity";
+            lbCapacity.Size = new Size(79, 25);
+            lbCapacity.TabIndex = 42;
+            lbCapacity.Text = "888.88 kg";
+            lbCapacity.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btDropAll
+            // 
+            btDropAll.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btDropAll.Location = new Point(166, 277);
+            btDropAll.Margin = new Padding(4, 3, 4, 3);
+            btDropAll.Name = "btDropAll";
+            btDropAll.Size = new Size(64, 27);
+            btDropAll.TabIndex = 31;
+            btDropAll.Text = "Drop All";
+            btDropAll.UseVisualStyleBackColor = true;
+            btDropAll.Click += btDropAllClick;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(9, 501);
+            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(53, 15);
+            label13.TabIndex = 41;
+            label13.Text = "Capacity";
+            label13.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(19, 470);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(45, 15);
+            label8.TabIndex = 39;
+            label8.Text = "Weight";
+            label8.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbWeight
+            // 
+            lbWeight.BorderStyle = BorderStyle.FixedSingle;
+            lbWeight.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbWeight.Location = new Point(71, 466);
+            lbWeight.Margin = new Padding(6, 2, 6, 2);
+            lbWeight.Name = "lbWeight";
+            lbWeight.Size = new Size(79, 25);
+            lbWeight.TabIndex = 40;
+            lbWeight.Text = "888.88 kg";
+            lbWeight.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btDismiss
+            // 
+            btDismiss.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btDismiss.Location = new Point(536, 58);
+            btDismiss.Margin = new Padding(4, 3, 4, 3);
+            btDismiss.Name = "btDismiss";
+            btDismiss.Size = new Size(105, 32);
+            btDismiss.TabIndex = 32;
+            btDismiss.Text = "Dismiss";
+            btDismiss.UseVisualStyleBackColor = true;
+            btDismiss.Click += btDismiss_Click;
+            // 
+            // btDeactivate
+            // 
+            btDeactivate.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btDeactivate.Location = new Point(536, 23);
+            btDeactivate.Margin = new Padding(4, 3, 4, 3);
+            btDeactivate.Name = "btDeactivate";
+            btDeactivate.Size = new Size(105, 32);
+            btDeactivate.TabIndex = 30;
+            btDeactivate.Text = "Deactivate";
+            btDeactivate.UseVisualStyleBackColor = true;
+            btDeactivate.Click += btDeactivate_Click;
+            // 
+            // lbCash
+            // 
+            lbCash.BorderStyle = BorderStyle.FixedSingle;
+            lbCash.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbCash.Location = new Point(91, 23);
+            lbCash.Margin = new Padding(6, 2, 6, 2);
+            lbCash.Name = "lbCash";
+            lbCash.Size = new Size(112, 25);
+            lbCash.TabIndex = 10;
+            lbCash.Text = "8888888.88";
+            lbCash.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(41, 27);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 16);
+            label3.TabIndex = 9;
+            label3.Text = "Cash";
+            // 
+            // lbLocation
+            // 
+            lbLocation.BorderStyle = BorderStyle.FixedSingle;
+            lbLocation.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLocation.Location = new Point(91, 65);
+            lbLocation.Margin = new Padding(6, 2, 6, 2);
+            lbLocation.Name = "lbLocation";
+            lbLocation.Size = new Size(124, 25);
+            lbLocation.TabIndex = 12;
+            lbLocation.Text = "(888.88,888.88)";
+            lbLocation.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(18, 68);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 16);
+            label4.TabIndex = 11;
+            label4.Text = "Location";
+            // 
+            // lbRoster
+            // 
+            lbRoster.BorderStyle = BorderStyle.FixedSingle;
+            lbRoster.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRoster.Location = new Point(366, 23);
+            lbRoster.Margin = new Padding(6, 2, 6, 2);
+            lbRoster.Name = "lbRoster";
+            lbRoster.Size = new Size(112, 25);
+            lbRoster.TabIndex = 14;
+            lbRoster.Text = "888 soldiers";
+            lbRoster.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(301, 27);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(47, 16);
+            label5.TabIndex = 13;
+            label5.Text = "Roster";
+            // 
+            // lbActive
+            // 
+            lbActive.BorderStyle = BorderStyle.FixedSingle;
+            lbActive.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbActive.Location = new Point(366, 65);
+            lbActive.Margin = new Padding(6, 2, 6, 2);
+            lbActive.Name = "lbActive";
+            lbActive.Size = new Size(112, 25);
+            lbActive.TabIndex = 16;
+            lbActive.Text = "888 soldiers";
+            lbActive.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(301, 68);
+            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(44, 16);
+            label7.TabIndex = 15;
+            label7.Text = "Active";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(30, 730);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(34, 16);
+            label2.TabIndex = 1;
+            label2.Text = "Ship";
+            // 
+            // lbShip
+            // 
+            lbShip.BorderStyle = BorderStyle.FixedSingle;
+            lbShip.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbShip.Location = new Point(78, 727);
+            lbShip.Margin = new Padding(6, 2, 6, 2);
+            lbShip.Name = "lbShip";
+            lbShip.Size = new Size(275, 25);
+            lbShip.TabIndex = 5;
+            lbShip.Text = "Ship Design Type";
+            lbShip.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lbBerths
+            // 
+            lbBerths.BorderStyle = BorderStyle.FixedSingle;
+            lbBerths.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbBerths.Location = new Point(78, 768);
+            lbBerths.Margin = new Padding(6, 2, 6, 2);
+            lbBerths.Name = "lbBerths";
+            lbBerths.Size = new Size(48, 25);
+            lbBerths.TabIndex = 18;
+            lbBerths.Text = "888";
+            lbBerths.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(18, 772);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(45, 16);
+            label9.TabIndex = 17;
+            label9.Text = "Berths";
+            // 
+            // lbInsufficientBerths
+            // 
+            lbInsufficientBerths.AutoSize = true;
+            lbInsufficientBerths.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbInsufficientBerths.ForeColor = Color.Red;
+            lbInsufficientBerths.Location = new Point(149, 772);
+            lbInsufficientBerths.Margin = new Padding(4, 0, 4, 0);
+            lbInsufficientBerths.Name = "lbInsufficientBerths";
+            lbInsufficientBerths.Size = new Size(112, 16);
+            lbInsufficientBerths.TabIndex = 19;
+            lbInsufficientBerths.Text = "Insufficient Berths!";
+            // 
+            // cdPickColour
+            // 
+            cdPickColour.AnyColor = true;
+            cdPickColour.Color = Color.Blue;
+            cdPickColour.SolidColorOnly = true;
+            // 
+            // TeamView
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1139, 830);
+            Controls.Add(gbSoldier);
+            Controls.Add(lbInsufficientBerths);
+            Controls.Add(lbBerths);
+            Controls.Add(label9);
+            Controls.Add(lbActive);
+            Controls.Add(label7);
+            Controls.Add(lbRoster);
+            Controls.Add(label5);
+            Controls.Add(lbLocation);
+            Controls.Add(label4);
+            Controls.Add(lbCash);
+            Controls.Add(label3);
+            Controls.Add(btInventory);
+            Controls.Add(lbShip);
+            Controls.Add(label2);
+            Controls.Add(dgSoldiers);
+            Controls.Add(btDeactivate);
+            Controls.Add(btDismiss);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "TeamView";
+            Text = "TeamView";
+            FormClosing += TeamView_FormClosing;
+            Load += TeamView_Load;
+            ((System.ComponentModel.ISupportInitialize)dgSoldiers).EndInit();
+            gbSoldier.ResumeLayout(false);
+            gbSoldier.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbExperience).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            tbSkills.ResumeLayout(false);
+            tpMilitary.ResumeLayout(false);
+            tpUtility.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private DataGridView dgSoldiers;
+        private Button btInventory;
+        private GroupBox gbSoldier;
+        private Label lbCash;
+        private Label label3;
+        private Label lbLocation;
+        private Label label4;
+        private Label lbRoster;
+        private Label label5;
+        private Label lbActive;
+        private Label label7;
+        private Label label2;
+        private Label lbShip;
+        private Label lbBerths;
+        private Label label9;
+        private Label lbInsufficientBerths;
+        private DataGridViewTextBoxColumn SoldierName;
+        private DataGridViewTextBoxColumn SoldierRace;
+        private DataGridViewTextBoxColumn SoldierLevel;
+        private DataGridViewTextBoxColumn SoldierStatus;
+        private Button btDismiss;
+        private Button btDropAll;
+        private Button btDeactivate;
+        private Label lbEndurance;
+        private Label label16;
+        private Label lbToughness;
+        private Label label14;
+        private Label lbInsight;
+        private Label label12;
+        private Label lbAgility;
+        private Label label10;
+        private Label lbStrength;
+        private Label label6;
+        private Label lbChest;
+        private Label lbHead;
+        private GroupBox groupBox1;
+        private Button btDrop;
+        private Button btEquip;
+        private ListBox lbInventory;
+        private Label lbEncumber;
+        private Label label1;
+        private Label lbCapacity;
+        private Label label13;
+        private Label lbWeight;
+        private Label label8;
+        private TabControl tbSkills;
+        private TabPage tpMilitary;
+        private TabPage tpUtility;
+        private Label lbRFoot;
+        private Label lbRLeg;
+        private Label lbLFoot;
+        private Label lbLLeg;
+        private Label lbLHand;
+        private Label lbRHand;
+        private Label lbLArm;
+        private Label lbRArm;
+        private ListBox lbWeaponSkills;
+        private ListBox lbUtilitySkills;
+        private ListBox lbEquipped;
+        private Label lbDeactivated;
+        private Label lbAttackTotal;
+        private Label label38;
+        private Label lbDefenceTotal;
+        private Label lbHealthTotal;
+        private Label label15;
+        private Label label11;
+        private GroupBox groupBox2;
+        private Label lbLevel;
+        private Label label20;
+        private Label lbArmour;
+        private Label label18;
+        private PictureBox pbExperience;
+        private Button btIncreaseSkill;
+        private Button btAddNewSkill;
+        private Label lbUnspent;
+        private Label label17;
+        private ColorDialog cdPickColour;
+        private Button btColour;
     }
-
-    #region Windows Form Designer generated code
-
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      this.dgSoldiers = new System.Windows.Forms.DataGridView();
-      this.SoldierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.SoldierRace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.SoldierLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.SoldierStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.btInventory = new System.Windows.Forms.Button();
-      this.gbSoldier = new System.Windows.Forms.GroupBox();
-      this.btColour = new System.Windows.Forms.Button();
-      this.btIncreaseSkill = new System.Windows.Forms.Button();
-      this.btAddNewSkill = new System.Windows.Forms.Button();
-      this.lbUnspent = new System.Windows.Forms.Label();
-      this.label17 = new System.Windows.Forms.Label();
-      this.pbExperience = new System.Windows.Forms.PictureBox();
-      this.groupBox2 = new System.Windows.Forms.GroupBox();
-      this.lbLevel = new System.Windows.Forms.Label();
-      this.label15 = new System.Windows.Forms.Label();
-      this.label20 = new System.Windows.Forms.Label();
-      this.lbAttackTotal = new System.Windows.Forms.Label();
-      this.label38 = new System.Windows.Forms.Label();
-      this.lbDefenceTotal = new System.Windows.Forms.Label();
-      this.lbHealthTotal = new System.Windows.Forms.Label();
-      this.lbArmour = new System.Windows.Forms.Label();
-      this.label11 = new System.Windows.Forms.Label();
-      this.label18 = new System.Windows.Forms.Label();
-      this.lbDeactivated = new System.Windows.Forms.Label();
-      this.lbRFoot = new System.Windows.Forms.Label();
-      this.lbRLeg = new System.Windows.Forms.Label();
-      this.lbLFoot = new System.Windows.Forms.Label();
-      this.lbLLeg = new System.Windows.Forms.Label();
-      this.lbLHand = new System.Windows.Forms.Label();
-      this.lbRHand = new System.Windows.Forms.Label();
-      this.lbLArm = new System.Windows.Forms.Label();
-      this.lbRArm = new System.Windows.Forms.Label();
-      this.tbSkills = new System.Windows.Forms.TabControl();
-      this.tpMilitary = new System.Windows.Forms.TabPage();
-      this.lbWeaponSkills = new System.Windows.Forms.ListBox();
-      this.tpUtility = new System.Windows.Forms.TabPage();
-      this.lbUtilitySkills = new System.Windows.Forms.ListBox();
-      this.lbChest = new System.Windows.Forms.Label();
-      this.lbHead = new System.Windows.Forms.Label();
-      this.lbEndurance = new System.Windows.Forms.Label();
-      this.label16 = new System.Windows.Forms.Label();
-      this.lbToughness = new System.Windows.Forms.Label();
-      this.label14 = new System.Windows.Forms.Label();
-      this.lbInsight = new System.Windows.Forms.Label();
-      this.label12 = new System.Windows.Forms.Label();
-      this.lbAgility = new System.Windows.Forms.Label();
-      this.label10 = new System.Windows.Forms.Label();
-      this.lbStrength = new System.Windows.Forms.Label();
-      this.label6 = new System.Windows.Forms.Label();
-      this.groupBox1 = new System.Windows.Forms.GroupBox();
-      this.lbEquipped = new System.Windows.Forms.ListBox();
-      this.lbEncumber = new System.Windows.Forms.Label();
-      this.btDrop = new System.Windows.Forms.Button();
-      this.btEquip = new System.Windows.Forms.Button();
-      this.label1 = new System.Windows.Forms.Label();
-      this.lbInventory = new System.Windows.Forms.ListBox();
-      this.lbCapacity = new System.Windows.Forms.Label();
-      this.btDropAll = new System.Windows.Forms.Button();
-      this.label13 = new System.Windows.Forms.Label();
-      this.label8 = new System.Windows.Forms.Label();
-      this.lbWeight = new System.Windows.Forms.Label();
-      this.btDismiss = new System.Windows.Forms.Button();
-      this.btDeactivate = new System.Windows.Forms.Button();
-      this.lbCash = new System.Windows.Forms.Label();
-      this.label3 = new System.Windows.Forms.Label();
-      this.lbLocation = new System.Windows.Forms.Label();
-      this.label4 = new System.Windows.Forms.Label();
-      this.lbRoster = new System.Windows.Forms.Label();
-      this.label5 = new System.Windows.Forms.Label();
-      this.lbActive = new System.Windows.Forms.Label();
-      this.label7 = new System.Windows.Forms.Label();
-      this.label2 = new System.Windows.Forms.Label();
-      this.lbShip = new System.Windows.Forms.Label();
-      this.lbBerths = new System.Windows.Forms.Label();
-      this.label9 = new System.Windows.Forms.Label();
-      this.lbInsufficientBerths = new System.Windows.Forms.Label();
-      this.cdPickColour = new System.Windows.Forms.ColorDialog();
-      ((System.ComponentModel.ISupportInitialize)(this.dgSoldiers)).BeginInit();
-      this.gbSoldier.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.pbExperience)).BeginInit();
-      this.groupBox2.SuspendLayout();
-      this.tbSkills.SuspendLayout();
-      this.tpMilitary.SuspendLayout();
-      this.tpUtility.SuspendLayout();
-      this.groupBox1.SuspendLayout();
-      this.SuspendLayout();
-      // 
-      // dgSoldiers
-      // 
-      this.dgSoldiers.AllowUserToAddRows = false;
-      this.dgSoldiers.AllowUserToDeleteRows = false;
-      this.dgSoldiers.AllowUserToResizeColumns = false;
-      this.dgSoldiers.AllowUserToResizeRows = false;
-      this.dgSoldiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dgSoldiers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SoldierName,
-            this.SoldierRace,
-            this.SoldierLevel,
-            this.SoldierStatus});
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
-      this.dgSoldiers.Location = new System.Drawing.Point(12, 111);
-      this.dgSoldiers.MultiSelect = false;
-      this.dgSoldiers.Name = "dgSoldiers";
-      this.dgSoldiers.ReadOnly = true;
-      this.dgSoldiers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-      this.dgSoldiers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.dgSoldiers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dgSoldiers.Size = new System.Drawing.Size(537, 502);
-      this.dgSoldiers.TabIndex = 0;
-      this.dgSoldiers.SelectionChanged += new System.EventHandler(this.dgSoldiers_SelectionChanged);
-      // 
-      // SoldierName
-      // 
-      this.SoldierName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.SoldierName.HeaderText = "Soldier Name";
-      this.SoldierName.Name = "SoldierName";
-      this.SoldierName.ReadOnly = true;
-      // 
-      // SoldierRace
-      // 
-      this.SoldierRace.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.SoldierRace.HeaderText = "Race";
-      this.SoldierRace.Name = "SoldierRace";
-      this.SoldierRace.ReadOnly = true;
-      this.SoldierRace.Width = 58;
-      // 
-      // SoldierLevel
-      // 
-      this.SoldierLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.SoldierLevel.HeaderText = "Level";
-      this.SoldierLevel.Name = "SoldierLevel";
-      this.SoldierLevel.ReadOnly = true;
-      this.SoldierLevel.Width = 58;
-      // 
-      // SoldierStatus
-      // 
-      this.SoldierStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.SoldierStatus.HeaderText = "Status";
-      this.SoldierStatus.Name = "SoldierStatus";
-      this.SoldierStatus.ReadOnly = true;
-      this.SoldierStatus.Width = 62;
-      // 
-      // btInventory
-      // 
-      this.btInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btInventory.Location = new System.Drawing.Point(323, 624);
-      this.btInventory.Name = "btInventory";
-      this.btInventory.Size = new System.Drawing.Size(226, 83);
-      this.btInventory.TabIndex = 7;
-      this.btInventory.Text = "View Ship Storage";
-      this.btInventory.UseVisualStyleBackColor = true;
-      this.btInventory.Click += new System.EventHandler(this.btInventory_Click);
-      // 
-      // gbSoldier
-      // 
-      this.gbSoldier.Controls.Add(this.btColour);
-      this.gbSoldier.Controls.Add(this.btIncreaseSkill);
-      this.gbSoldier.Controls.Add(this.btAddNewSkill);
-      this.gbSoldier.Controls.Add(this.lbUnspent);
-      this.gbSoldier.Controls.Add(this.label17);
-      this.gbSoldier.Controls.Add(this.pbExperience);
-      this.gbSoldier.Controls.Add(this.groupBox2);
-      this.gbSoldier.Controls.Add(this.lbDeactivated);
-      this.gbSoldier.Controls.Add(this.lbRFoot);
-      this.gbSoldier.Controls.Add(this.lbRLeg);
-      this.gbSoldier.Controls.Add(this.lbLFoot);
-      this.gbSoldier.Controls.Add(this.lbLLeg);
-      this.gbSoldier.Controls.Add(this.lbLHand);
-      this.gbSoldier.Controls.Add(this.lbRHand);
-      this.gbSoldier.Controls.Add(this.lbLArm);
-      this.gbSoldier.Controls.Add(this.lbRArm);
-      this.gbSoldier.Controls.Add(this.tbSkills);
-      this.gbSoldier.Controls.Add(this.lbChest);
-      this.gbSoldier.Controls.Add(this.lbHead);
-      this.gbSoldier.Controls.Add(this.lbEndurance);
-      this.gbSoldier.Controls.Add(this.label16);
-      this.gbSoldier.Controls.Add(this.lbToughness);
-      this.gbSoldier.Controls.Add(this.label14);
-      this.gbSoldier.Controls.Add(this.lbInsight);
-      this.gbSoldier.Controls.Add(this.label12);
-      this.gbSoldier.Controls.Add(this.lbAgility);
-      this.gbSoldier.Controls.Add(this.label10);
-      this.gbSoldier.Controls.Add(this.lbStrength);
-      this.gbSoldier.Controls.Add(this.label6);
-      this.gbSoldier.Controls.Add(this.groupBox1);
-      this.gbSoldier.Location = new System.Drawing.Point(561, 11);
-      this.gbSoldier.Name = "gbSoldier";
-      this.gbSoldier.Size = new System.Drawing.Size(404, 696);
-      this.gbSoldier.TabIndex = 8;
-      this.gbSoldier.TabStop = false;
-      this.gbSoldier.Text = "Soldier Details";
-      // 
-      // btColour
-      // 
-      this.btColour.Location = new System.Drawing.Point(346, 161);
-      this.btColour.Name = "btColour";
-      this.btColour.Size = new System.Drawing.Size(41, 23);
-      this.btColour.TabIndex = 92;
-      this.btColour.UseVisualStyleBackColor = true;
-      this.btColour.Click += new System.EventHandler(this.btColour_Click);
-      // 
-      // btIncreaseSkill
-      // 
-      this.btIncreaseSkill.Location = new System.Drawing.Point(113, 651);
-      this.btIncreaseSkill.Margin = new System.Windows.Forms.Padding(0);
-      this.btIncreaseSkill.Name = "btIncreaseSkill";
-      this.btIncreaseSkill.Size = new System.Drawing.Size(45, 37);
-      this.btIncreaseSkill.TabIndex = 91;
-      this.btIncreaseSkill.Text = "Boost Skill";
-      this.btIncreaseSkill.UseVisualStyleBackColor = true;
-      this.btIncreaseSkill.Click += new System.EventHandler(this.btIncreaseSkill_Click);
-      // 
-      // btAddNewSkill
-      // 
-      this.btAddNewSkill.Location = new System.Drawing.Point(59, 651);
-      this.btAddNewSkill.Name = "btAddNewSkill";
-      this.btAddNewSkill.Size = new System.Drawing.Size(51, 38);
-      this.btAddNewSkill.TabIndex = 90;
-      this.btAddNewSkill.Text = "Add New";
-      this.btAddNewSkill.UseVisualStyleBackColor = true;
-      this.btAddNewSkill.Click += new System.EventHandler(this.btAddNewSkill_Click);
-      // 
-      // lbUnspent
-      // 
-      this.lbUnspent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbUnspent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbUnspent.Location = new System.Drawing.Point(15, 667);
-      this.lbUnspent.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbUnspent.Name = "lbUnspent";
-      this.lbUnspent.Size = new System.Drawing.Size(36, 22);
-      this.lbUnspent.TabIndex = 89;
-      this.lbUnspent.Text = "88";
-      this.lbUnspent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label17
-      // 
-      this.label17.AutoSize = true;
-      this.label17.Location = new System.Drawing.Point(10, 650);
-      this.label17.Name = "label17";
-      this.label17.Size = new System.Drawing.Size(47, 13);
-      this.label17.TabIndex = 88;
-      this.label17.Text = "Unspent";
-      // 
-      // pbExperience
-      // 
-      this.pbExperience.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.pbExperience.Location = new System.Drawing.Point(176, 192);
-      this.pbExperience.Name = "pbExperience";
-      this.pbExperience.Size = new System.Drawing.Size(211, 21);
-      this.pbExperience.TabIndex = 87;
-      this.pbExperience.TabStop = false;
-      this.pbExperience.Paint += new System.Windows.Forms.PaintEventHandler(this.pbExperience_Paint);
-      // 
-      // groupBox2
-      // 
-      this.groupBox2.Controls.Add(this.lbLevel);
-      this.groupBox2.Controls.Add(this.label15);
-      this.groupBox2.Controls.Add(this.label20);
-      this.groupBox2.Controls.Add(this.lbAttackTotal);
-      this.groupBox2.Controls.Add(this.label38);
-      this.groupBox2.Controls.Add(this.lbDefenceTotal);
-      this.groupBox2.Controls.Add(this.lbHealthTotal);
-      this.groupBox2.Controls.Add(this.lbArmour);
-      this.groupBox2.Controls.Add(this.label11);
-      this.groupBox2.Controls.Add(this.label18);
-      this.groupBox2.Location = new System.Drawing.Point(8, 180);
-      this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(148, 181);
-      this.groupBox2.TabIndex = 86;
-      this.groupBox2.TabStop = false;
-      this.groupBox2.Text = "Primary Stats";
-      // 
-      // lbLevel
-      // 
-      this.lbLevel.BackColor = System.Drawing.SystemColors.Window;
-      this.lbLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLevel.Location = new System.Drawing.Point(84, 21);
-      this.lbLevel.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbLevel.Name = "lbLevel";
-      this.lbLevel.Size = new System.Drawing.Size(50, 24);
-      this.lbLevel.TabIndex = 90;
-      this.lbLevel.Text = "888";
-      this.lbLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label15
-      // 
-      this.label15.AutoSize = true;
-      this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label15.Location = new System.Drawing.Point(33, 26);
-      this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(41, 16);
-      this.label15.TabIndex = 49;
-      this.label15.Text = "Level";
-      this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // label20
-      // 
-      this.label20.AutoSize = true;
-      this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label20.Location = new System.Drawing.Point(15, 120);
-      this.label20.Name = "label20";
-      this.label20.Size = new System.Drawing.Size(59, 16);
-      this.label20.TabIndex = 89;
-      this.label20.Text = "Defence";
-      this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbAttackTotal
-      // 
-      this.lbAttackTotal.BackColor = System.Drawing.Color.Tomato;
-      this.lbAttackTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbAttackTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbAttackTotal.Location = new System.Drawing.Point(84, 84);
-      this.lbAttackTotal.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbAttackTotal.Name = "lbAttackTotal";
-      this.lbAttackTotal.Size = new System.Drawing.Size(50, 24);
-      this.lbAttackTotal.TabIndex = 80;
-      this.lbAttackTotal.Text = "888";
-      this.lbAttackTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label38
-      // 
-      this.label38.AutoSize = true;
-      this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label38.Location = new System.Drawing.Point(29, 89);
-      this.label38.Name = "label38";
-      this.label38.Size = new System.Drawing.Size(45, 16);
-      this.label38.TabIndex = 76;
-      this.label38.Text = "Attack";
-      this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbDefenceTotal
-      // 
-      this.lbDefenceTotal.BackColor = System.Drawing.SystemColors.Highlight;
-      this.lbDefenceTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbDefenceTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbDefenceTotal.Location = new System.Drawing.Point(84, 115);
-      this.lbDefenceTotal.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbDefenceTotal.Name = "lbDefenceTotal";
-      this.lbDefenceTotal.Size = new System.Drawing.Size(50, 24);
-      this.lbDefenceTotal.TabIndex = 61;
-      this.lbDefenceTotal.Text = "888";
-      this.lbDefenceTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbHealthTotal
-      // 
-      this.lbHealthTotal.BackColor = System.Drawing.Color.LimeGreen;
-      this.lbHealthTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbHealthTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbHealthTotal.Location = new System.Drawing.Point(84, 53);
-      this.lbHealthTotal.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbHealthTotal.Name = "lbHealthTotal";
-      this.lbHealthTotal.Size = new System.Drawing.Size(50, 24);
-      this.lbHealthTotal.TabIndex = 60;
-      this.lbHealthTotal.Text = "888";
-      this.lbHealthTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbArmour
-      // 
-      this.lbArmour.BackColor = System.Drawing.SystemColors.ControlLight;
-      this.lbArmour.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbArmour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbArmour.Location = new System.Drawing.Point(84, 146);
-      this.lbArmour.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbArmour.Name = "lbArmour";
-      this.lbArmour.Size = new System.Drawing.Size(50, 24);
-      this.lbArmour.TabIndex = 88;
-      this.lbArmour.Text = "888";
-      this.lbArmour.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label11
-      // 
-      this.label11.AutoSize = true;
-      this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label11.Location = new System.Drawing.Point(27, 57);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(47, 16);
-      this.label11.TabIndex = 48;
-      this.label11.Text = "Health";
-      this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // label18
-      // 
-      this.label18.AutoSize = true;
-      this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label18.Location = new System.Drawing.Point(23, 151);
-      this.label18.Name = "label18";
-      this.label18.Size = new System.Drawing.Size(51, 16);
-      this.label18.TabIndex = 87;
-      this.label18.Text = "Armour";
-      this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbDeactivated
-      // 
-      this.lbDeactivated.AutoSize = true;
-      this.lbDeactivated.ForeColor = System.Drawing.Color.Red;
-      this.lbDeactivated.Location = new System.Drawing.Point(7, 17);
-      this.lbDeactivated.Name = "lbDeactivated";
-      this.lbDeactivated.Size = new System.Drawing.Size(111, 13);
-      this.lbDeactivated.TabIndex = 85;
-      this.lbDeactivated.Text = "Soldier is deactivated!";
-      // 
-      // lbRFoot
-      // 
-      this.lbRFoot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbRFoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbRFoot.Location = new System.Drawing.Point(282, 164);
-      this.lbRFoot.Margin = new System.Windows.Forms.Padding(0);
-      this.lbRFoot.Name = "lbRFoot";
-      this.lbRFoot.Size = new System.Drawing.Size(26, 20);
-      this.lbRFoot.TabIndex = 47;
-      this.lbRFoot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbRLeg
-      // 
-      this.lbRLeg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbRLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbRLeg.Location = new System.Drawing.Point(282, 110);
-      this.lbRLeg.Margin = new System.Windows.Forms.Padding(0);
-      this.lbRLeg.Name = "lbRLeg";
-      this.lbRLeg.Size = new System.Drawing.Size(26, 54);
-      this.lbRLeg.TabIndex = 46;
-      this.lbRLeg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbLFoot
-      // 
-      this.lbLFoot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLFoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLFoot.Location = new System.Drawing.Point(252, 164);
-      this.lbLFoot.Margin = new System.Windows.Forms.Padding(0);
-      this.lbLFoot.Name = "lbLFoot";
-      this.lbLFoot.Size = new System.Drawing.Size(26, 20);
-      this.lbLFoot.TabIndex = 45;
-      this.lbLFoot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbLLeg
-      // 
-      this.lbLLeg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLLeg.Location = new System.Drawing.Point(252, 110);
-      this.lbLLeg.Margin = new System.Windows.Forms.Padding(0);
-      this.lbLLeg.Name = "lbLLeg";
-      this.lbLLeg.Size = new System.Drawing.Size(26, 54);
-      this.lbLLeg.TabIndex = 44;
-      this.lbLLeg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbLHand
-      // 
-      this.lbLHand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLHand.Location = new System.Drawing.Point(225, 108);
-      this.lbLHand.Margin = new System.Windows.Forms.Padding(0);
-      this.lbLHand.Name = "lbLHand";
-      this.lbLHand.Size = new System.Drawing.Size(26, 24);
-      this.lbLHand.TabIndex = 43;
-      this.lbLHand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbRHand
-      // 
-      this.lbRHand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbRHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbRHand.Location = new System.Drawing.Point(309, 108);
-      this.lbRHand.Margin = new System.Windows.Forms.Padding(0);
-      this.lbRHand.Name = "lbRHand";
-      this.lbRHand.Size = new System.Drawing.Size(26, 24);
-      this.lbRHand.TabIndex = 42;
-      this.lbRHand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbLArm
-      // 
-      this.lbLArm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLArm.Location = new System.Drawing.Point(225, 46);
-      this.lbLArm.Margin = new System.Windows.Forms.Padding(0);
-      this.lbLArm.Name = "lbLArm";
-      this.lbLArm.Size = new System.Drawing.Size(26, 62);
-      this.lbLArm.TabIndex = 41;
-      this.lbLArm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbRArm
-      // 
-      this.lbRArm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbRArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbRArm.Location = new System.Drawing.Point(309, 46);
-      this.lbRArm.Margin = new System.Windows.Forms.Padding(0);
-      this.lbRArm.Name = "lbRArm";
-      this.lbRArm.Size = new System.Drawing.Size(26, 62);
-      this.lbRArm.TabIndex = 40;
-      this.lbRArm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // tbSkills
-      // 
-      this.tbSkills.Controls.Add(this.tpMilitary);
-      this.tbSkills.Controls.Add(this.tpUtility);
-      this.tbSkills.Location = new System.Drawing.Point(9, 376);
-      this.tbSkills.Name = "tbSkills";
-      this.tbSkills.SelectedIndex = 0;
-      this.tbSkills.Size = new System.Drawing.Size(156, 272);
-      this.tbSkills.TabIndex = 39;
-      this.tbSkills.SelectedIndexChanged += new System.EventHandler(this.tbSkills_SelectedIndexChanged);
-      // 
-      // tpMilitary
-      // 
-      this.tpMilitary.Controls.Add(this.lbWeaponSkills);
-      this.tpMilitary.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tpMilitary.Location = new System.Drawing.Point(4, 22);
-      this.tpMilitary.Name = "tpMilitary";
-      this.tpMilitary.Padding = new System.Windows.Forms.Padding(3);
-      this.tpMilitary.Size = new System.Drawing.Size(148, 246);
-      this.tpMilitary.TabIndex = 0;
-      this.tpMilitary.Text = "Weapon Skills";
-      this.tpMilitary.UseVisualStyleBackColor = true;
-      // 
-      // lbWeaponSkills
-      // 
-      this.lbWeaponSkills.FormattingEnabled = true;
-      this.lbWeaponSkills.ItemHeight = 16;
-      this.lbWeaponSkills.Location = new System.Drawing.Point(0, 2);
-      this.lbWeaponSkills.Name = "lbWeaponSkills";
-      this.lbWeaponSkills.Size = new System.Drawing.Size(145, 244);
-      this.lbWeaponSkills.TabIndex = 0;
-      // 
-      // tpUtility
-      // 
-      this.tpUtility.Controls.Add(this.lbUtilitySkills);
-      this.tpUtility.Location = new System.Drawing.Point(4, 22);
-      this.tpUtility.Name = "tpUtility";
-      this.tpUtility.Padding = new System.Windows.Forms.Padding(3);
-      this.tpUtility.Size = new System.Drawing.Size(148, 246);
-      this.tpUtility.TabIndex = 1;
-      this.tpUtility.Text = "Utility Skills";
-      this.tpUtility.UseVisualStyleBackColor = true;
-      // 
-      // lbUtilitySkills
-      // 
-      this.lbUtilitySkills.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbUtilitySkills.FormattingEnabled = true;
-      this.lbUtilitySkills.ItemHeight = 16;
-      this.lbUtilitySkills.Location = new System.Drawing.Point(0, 2);
-      this.lbUtilitySkills.Name = "lbUtilitySkills";
-      this.lbUtilitySkills.Size = new System.Drawing.Size(145, 244);
-      this.lbUtilitySkills.TabIndex = 1;
-      this.lbUtilitySkills.SelectedIndexChanged += new System.EventHandler(this.lbUtilitySkills_SelectedIndexChanged);
-      // 
-      // lbChest
-      // 
-      this.lbChest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbChest.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbChest.Location = new System.Drawing.Point(251, 46);
-      this.lbChest.Margin = new System.Windows.Forms.Padding(0);
-      this.lbChest.Name = "lbChest";
-      this.lbChest.Size = new System.Drawing.Size(58, 64);
-      this.lbChest.TabIndex = 35;
-      this.lbChest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbHead
-      // 
-      this.lbHead.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbHead.Location = new System.Drawing.Point(262, 18);
-      this.lbHead.Margin = new System.Windows.Forms.Padding(0);
-      this.lbHead.Name = "lbHead";
-      this.lbHead.Size = new System.Drawing.Size(36, 24);
-      this.lbHead.TabIndex = 34;
-      this.lbHead.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lbEndurance
-      // 
-      this.lbEndurance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbEndurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbEndurance.Location = new System.Drawing.Point(95, 138);
-      this.lbEndurance.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbEndurance.Name = "lbEndurance";
-      this.lbEndurance.Size = new System.Drawing.Size(47, 22);
-      this.lbEndurance.TabIndex = 29;
-      this.lbEndurance.Text = "888";
-      this.lbEndurance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label16
-      // 
-      this.label16.AutoSize = true;
-      this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label16.Location = new System.Drawing.Point(16, 141);
-      this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(73, 16);
-      this.label16.TabIndex = 28;
-      this.label16.Text = "Endurance";
-      this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbToughness
-      // 
-      this.lbToughness.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbToughness.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbToughness.Location = new System.Drawing.Point(95, 112);
-      this.lbToughness.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbToughness.Name = "lbToughness";
-      this.lbToughness.Size = new System.Drawing.Size(47, 22);
-      this.lbToughness.TabIndex = 27;
-      this.lbToughness.Text = "888";
-      this.lbToughness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label14
-      // 
-      this.label14.AutoSize = true;
-      this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label14.Location = new System.Drawing.Point(13, 115);
-      this.label14.Name = "label14";
-      this.label14.Size = new System.Drawing.Size(76, 16);
-      this.label14.TabIndex = 26;
-      this.label14.Text = "Toughness";
-      this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbInsight
-      // 
-      this.lbInsight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbInsight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbInsight.Location = new System.Drawing.Point(95, 86);
-      this.lbInsight.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbInsight.Name = "lbInsight";
-      this.lbInsight.Size = new System.Drawing.Size(47, 22);
-      this.lbInsight.TabIndex = 25;
-      this.lbInsight.Text = "888";
-      this.lbInsight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label12
-      // 
-      this.label12.AutoSize = true;
-      this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label12.Location = new System.Drawing.Point(36, 89);
-      this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(53, 16);
-      this.label12.TabIndex = 24;
-      this.label12.Text = "Insight";
-      this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbAgility
-      // 
-      this.lbAgility.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbAgility.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbAgility.Location = new System.Drawing.Point(95, 60);
-      this.lbAgility.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbAgility.Name = "lbAgility";
-      this.lbAgility.Size = new System.Drawing.Size(47, 22);
-      this.lbAgility.TabIndex = 23;
-      this.lbAgility.Text = "888";
-      this.lbAgility.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label10
-      // 
-      this.label10.AutoSize = true;
-      this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label10.Location = new System.Drawing.Point(45, 63);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(44, 16);
-      this.label10.TabIndex = 22;
-      this.label10.Text = "Agility";
-      this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbStrength
-      // 
-      this.lbStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbStrength.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbStrength.Location = new System.Drawing.Point(95, 34);
-      this.lbStrength.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbStrength.Name = "lbStrength";
-      this.lbStrength.Size = new System.Drawing.Size(47, 22);
-      this.lbStrength.TabIndex = 21;
-      this.lbStrength.Text = "888";
-      this.lbStrength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label6
-      // 
-      this.label6.AutoSize = true;
-      this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label6.Location = new System.Drawing.Point(32, 37);
-      this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(57, 16);
-      this.label6.TabIndex = 20;
-      this.label6.Text = "Strength";
-      this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // groupBox1
-      // 
-      this.groupBox1.Controls.Add(this.lbEquipped);
-      this.groupBox1.Controls.Add(this.lbEncumber);
-      this.groupBox1.Controls.Add(this.btDrop);
-      this.groupBox1.Controls.Add(this.btEquip);
-      this.groupBox1.Controls.Add(this.label1);
-      this.groupBox1.Controls.Add(this.lbInventory);
-      this.groupBox1.Controls.Add(this.lbCapacity);
-      this.groupBox1.Controls.Add(this.btDropAll);
-      this.groupBox1.Controls.Add(this.label13);
-      this.groupBox1.Controls.Add(this.label8);
-      this.groupBox1.Controls.Add(this.lbWeight);
-      this.groupBox1.Location = new System.Drawing.Point(176, 218);
-      this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(211, 464);
-      this.groupBox1.TabIndex = 33;
-      this.groupBox1.TabStop = false;
-      this.groupBox1.Text = "Inventory";
-      // 
-      // lbEquipped
-      // 
-      this.lbEquipped.FormattingEnabled = true;
-      this.lbEquipped.HorizontalScrollbar = true;
-      this.lbEquipped.Location = new System.Drawing.Point(13, 273);
-      this.lbEquipped.Name = "lbEquipped";
-      this.lbEquipped.Size = new System.Drawing.Size(183, 121);
-      this.lbEquipped.TabIndex = 45;
-      this.lbEquipped.SelectedIndexChanged += new System.EventHandler(this.lbEquipped_SelectedIndexChanged);
-      this.lbEquipped.DoubleClick += new System.EventHandler(this.lbEquipped_DoubleClick);
-      // 
-      // lbEncumber
-      // 
-      this.lbEncumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbEncumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbEncumber.Location = new System.Drawing.Point(144, 424);
-      this.lbEncumber.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbEncumber.Name = "lbEncumber";
-      this.lbEncumber.Size = new System.Drawing.Size(50, 26);
-      this.lbEncumber.TabIndex = 44;
-      this.lbEncumber.Text = "100%";
-      this.lbEncumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // btDrop
-      // 
-      this.btDrop.Location = new System.Drawing.Point(78, 240);
-      this.btDrop.Name = "btDrop";
-      this.btDrop.Size = new System.Drawing.Size(55, 23);
-      this.btDrop.TabIndex = 2;
-      this.btDrop.Text = "Drop";
-      this.btDrop.UseVisualStyleBackColor = true;
-      this.btDrop.Click += new System.EventHandler(this.btDrop_Click);
-      // 
-      // btEquip
-      // 
-      this.btEquip.Location = new System.Drawing.Point(13, 240);
-      this.btEquip.Name = "btEquip";
-      this.btEquip.Size = new System.Drawing.Size(55, 23);
-      this.btEquip.TabIndex = 1;
-      this.btEquip.Text = "Equip";
-      this.btEquip.UseVisualStyleBackColor = true;
-      this.btEquip.Click += new System.EventHandler(this.btEquip_Click);
-      // 
-      // label1
-      // 
-      this.label1.AutoSize = true;
-      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(141, 404);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(56, 15);
-      this.label1.TabIndex = 43;
-      this.label1.Text = "Encumb.";
-      this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbInventory
-      // 
-      this.lbInventory.FormattingEnabled = true;
-      this.lbInventory.HorizontalScrollbar = true;
-      this.lbInventory.Location = new System.Drawing.Point(13, 20);
-      this.lbInventory.Name = "lbInventory";
-      this.lbInventory.Size = new System.Drawing.Size(183, 212);
-      this.lbInventory.TabIndex = 0;
-      this.lbInventory.SelectedIndexChanged += new System.EventHandler(this.lbInventory_SelectedIndexChanged);
-      this.lbInventory.DoubleClick += new System.EventHandler(this.lbInventory_DoubleClick);
-      // 
-      // lbCapacity
-      // 
-      this.lbCapacity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbCapacity.Location = new System.Drawing.Point(61, 431);
-      this.lbCapacity.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbCapacity.Name = "lbCapacity";
-      this.lbCapacity.Size = new System.Drawing.Size(68, 22);
-      this.lbCapacity.TabIndex = 42;
-      this.lbCapacity.Text = "888.88 kg";
-      this.lbCapacity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // btDropAll
-      // 
-      this.btDropAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btDropAll.Location = new System.Drawing.Point(142, 240);
-      this.btDropAll.Name = "btDropAll";
-      this.btDropAll.Size = new System.Drawing.Size(55, 23);
-      this.btDropAll.TabIndex = 31;
-      this.btDropAll.Text = "Drop All";
-      this.btDropAll.UseVisualStyleBackColor = true;
-      this.btDropAll.Click += new System.EventHandler(this.btDropAllClick);
-      // 
-      // label13
-      // 
-      this.label13.AutoSize = true;
-      this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label13.Location = new System.Drawing.Point(8, 434);
-      this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(53, 15);
-      this.label13.TabIndex = 41;
-      this.label13.Text = "Capacity";
-      this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // label8
-      // 
-      this.label8.AutoSize = true;
-      this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label8.Location = new System.Drawing.Point(16, 407);
-      this.label8.Name = "label8";
-      this.label8.Size = new System.Drawing.Size(45, 15);
-      this.label8.TabIndex = 39;
-      this.label8.Text = "Weight";
-      this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // lbWeight
-      // 
-      this.lbWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbWeight.Location = new System.Drawing.Point(61, 404);
-      this.lbWeight.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbWeight.Name = "lbWeight";
-      this.lbWeight.Size = new System.Drawing.Size(68, 22);
-      this.lbWeight.TabIndex = 40;
-      this.lbWeight.Text = "888.88 kg";
-      this.lbWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // btDismiss
-      // 
-      this.btDismiss.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btDismiss.Location = new System.Drawing.Point(459, 50);
-      this.btDismiss.Name = "btDismiss";
-      this.btDismiss.Size = new System.Drawing.Size(90, 28);
-      this.btDismiss.TabIndex = 32;
-      this.btDismiss.Text = "Dismiss";
-      this.btDismiss.UseVisualStyleBackColor = true;
-      this.btDismiss.Click += new System.EventHandler(this.btDismiss_Click);
-      // 
-      // btDeactivate
-      // 
-      this.btDeactivate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btDeactivate.Location = new System.Drawing.Point(459, 20);
-      this.btDeactivate.Name = "btDeactivate";
-      this.btDeactivate.Size = new System.Drawing.Size(90, 28);
-      this.btDeactivate.TabIndex = 30;
-      this.btDeactivate.Text = "Deactivate";
-      this.btDeactivate.UseVisualStyleBackColor = true;
-      this.btDeactivate.Click += new System.EventHandler(this.btDeactivate_Click);
-      // 
-      // lbCash
-      // 
-      this.lbCash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbCash.Location = new System.Drawing.Point(78, 20);
-      this.lbCash.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbCash.Name = "lbCash";
-      this.lbCash.Size = new System.Drawing.Size(96, 22);
-      this.lbCash.TabIndex = 10;
-      this.lbCash.Text = "8888888.88";
-      this.lbCash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // label3
-      // 
-      this.label3.AutoSize = true;
-      this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label3.Location = new System.Drawing.Point(35, 23);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(39, 16);
-      this.label3.TabIndex = 9;
-      this.label3.Text = "Cash";
-      // 
-      // lbLocation
-      // 
-      this.lbLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbLocation.Location = new System.Drawing.Point(78, 56);
-      this.lbLocation.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbLocation.Name = "lbLocation";
-      this.lbLocation.Size = new System.Drawing.Size(107, 22);
-      this.lbLocation.TabIndex = 12;
-      this.lbLocation.Text = "(888.88,888.88)";
-      this.lbLocation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // label4
-      // 
-      this.label4.AutoSize = true;
-      this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label4.Location = new System.Drawing.Point(15, 59);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(59, 16);
-      this.label4.TabIndex = 11;
-      this.label4.Text = "Location";
-      // 
-      // lbRoster
-      // 
-      this.lbRoster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbRoster.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbRoster.Location = new System.Drawing.Point(314, 20);
-      this.lbRoster.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbRoster.Name = "lbRoster";
-      this.lbRoster.Size = new System.Drawing.Size(96, 22);
-      this.lbRoster.TabIndex = 14;
-      this.lbRoster.Text = "888 soldiers";
-      this.lbRoster.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // label5
-      // 
-      this.label5.AutoSize = true;
-      this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label5.Location = new System.Drawing.Point(258, 23);
-      this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(48, 16);
-      this.label5.TabIndex = 13;
-      this.label5.Text = "Roster";
-      // 
-      // lbActive
-      // 
-      this.lbActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbActive.Location = new System.Drawing.Point(314, 56);
-      this.lbActive.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbActive.Name = "lbActive";
-      this.lbActive.Size = new System.Drawing.Size(96, 22);
-      this.lbActive.TabIndex = 16;
-      this.lbActive.Text = "888 soldiers";
-      this.lbActive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // label7
-      // 
-      this.label7.AutoSize = true;
-      this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label7.Location = new System.Drawing.Point(258, 59);
-      this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(45, 16);
-      this.label7.TabIndex = 15;
-      this.label7.Text = "Active";
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.Location = new System.Drawing.Point(26, 633);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(35, 16);
-      this.label2.TabIndex = 1;
-      this.label2.Text = "Ship";
-      // 
-      // lbShip
-      // 
-      this.lbShip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbShip.Location = new System.Drawing.Point(67, 630);
-      this.lbShip.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbShip.Name = "lbShip";
-      this.lbShip.Size = new System.Drawing.Size(236, 22);
-      this.lbShip.TabIndex = 5;
-      this.lbShip.Text = "Ship Design Type";
-      this.lbShip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // lbBerths
-      // 
-      this.lbBerths.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.lbBerths.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbBerths.Location = new System.Drawing.Point(67, 666);
-      this.lbBerths.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-      this.lbBerths.Name = "lbBerths";
-      this.lbBerths.Size = new System.Drawing.Size(41, 22);
-      this.lbBerths.TabIndex = 18;
-      this.lbBerths.Text = "888";
-      this.lbBerths.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // label9
-      // 
-      this.label9.AutoSize = true;
-      this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label9.Location = new System.Drawing.Point(15, 669);
-      this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(46, 16);
-      this.label9.TabIndex = 17;
-      this.label9.Text = "Berths";
-      // 
-      // lbInsufficientBerths
-      // 
-      this.lbInsufficientBerths.AutoSize = true;
-      this.lbInsufficientBerths.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbInsufficientBerths.ForeColor = System.Drawing.Color.Red;
-      this.lbInsufficientBerths.Location = new System.Drawing.Point(128, 669);
-      this.lbInsufficientBerths.Name = "lbInsufficientBerths";
-      this.lbInsufficientBerths.Size = new System.Drawing.Size(113, 16);
-      this.lbInsufficientBerths.TabIndex = 19;
-      this.lbInsufficientBerths.Text = "Insufficient Berths!";
-      // 
-      // cdPickColour
-      // 
-      this.cdPickColour.AnyColor = true;
-      this.cdPickColour.Color = System.Drawing.Color.Blue;
-      this.cdPickColour.SolidColorOnly = true;
-      // 
-      // TeamView
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(976, 719);
-      this.Controls.Add(this.gbSoldier);
-      this.Controls.Add(this.lbInsufficientBerths);
-      this.Controls.Add(this.lbBerths);
-      this.Controls.Add(this.label9);
-      this.Controls.Add(this.lbActive);
-      this.Controls.Add(this.label7);
-      this.Controls.Add(this.lbRoster);
-      this.Controls.Add(this.label5);
-      this.Controls.Add(this.lbLocation);
-      this.Controls.Add(this.label4);
-      this.Controls.Add(this.lbCash);
-      this.Controls.Add(this.label3);
-      this.Controls.Add(this.btInventory);
-      this.Controls.Add(this.lbShip);
-      this.Controls.Add(this.label2);
-      this.Controls.Add(this.dgSoldiers);
-      this.Controls.Add(this.btDeactivate);
-      this.Controls.Add(this.btDismiss);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-      this.MaximizeBox = false;
-      this.Name = "TeamView";
-      this.Text = "TeamView";
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TeamView_FormClosing);
-      this.Load += new System.EventHandler(this.TeamView_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.dgSoldiers)).EndInit();
-      this.gbSoldier.ResumeLayout(false);
-      this.gbSoldier.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.pbExperience)).EndInit();
-      this.groupBox2.ResumeLayout(false);
-      this.groupBox2.PerformLayout();
-      this.tbSkills.ResumeLayout(false);
-      this.tpMilitary.ResumeLayout(false);
-      this.tpUtility.ResumeLayout(false);
-      this.groupBox1.ResumeLayout(false);
-      this.groupBox1.PerformLayout();
-      this.ResumeLayout(false);
-      this.PerformLayout();
-
-    }
-
-    #endregion
-
-    private System.Windows.Forms.DataGridView dgSoldiers;
-    private System.Windows.Forms.Button btInventory;
-    private System.Windows.Forms.GroupBox gbSoldier;
-    private System.Windows.Forms.Label lbCash;
-    private System.Windows.Forms.Label label3;
-    private System.Windows.Forms.Label lbLocation;
-    private System.Windows.Forms.Label label4;
-    private System.Windows.Forms.Label lbRoster;
-    private System.Windows.Forms.Label label5;
-    private System.Windows.Forms.Label lbActive;
-    private System.Windows.Forms.Label label7;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label lbShip;
-    private System.Windows.Forms.Label lbBerths;
-    private System.Windows.Forms.Label label9;
-    private System.Windows.Forms.Label lbInsufficientBerths;
-    private System.Windows.Forms.DataGridViewTextBoxColumn SoldierName;
-    private System.Windows.Forms.DataGridViewTextBoxColumn SoldierRace;
-    private System.Windows.Forms.DataGridViewTextBoxColumn SoldierLevel;
-    private System.Windows.Forms.DataGridViewTextBoxColumn SoldierStatus;
-    private System.Windows.Forms.Button btDismiss;
-    private System.Windows.Forms.Button btDropAll;
-    private System.Windows.Forms.Button btDeactivate;
-    private System.Windows.Forms.Label lbEndurance;
-    private System.Windows.Forms.Label label16;
-    private System.Windows.Forms.Label lbToughness;
-    private System.Windows.Forms.Label label14;
-    private System.Windows.Forms.Label lbInsight;
-    private System.Windows.Forms.Label label12;
-    private System.Windows.Forms.Label lbAgility;
-    private System.Windows.Forms.Label label10;
-    private System.Windows.Forms.Label lbStrength;
-    private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.Label lbChest;
-    private System.Windows.Forms.Label lbHead;
-    private System.Windows.Forms.GroupBox groupBox1;
-    private System.Windows.Forms.Button btDrop;
-    private System.Windows.Forms.Button btEquip;
-    private System.Windows.Forms.ListBox lbInventory;
-    private System.Windows.Forms.Label lbEncumber;
-    private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.Label lbCapacity;
-    private System.Windows.Forms.Label label13;
-    private System.Windows.Forms.Label lbWeight;
-    private System.Windows.Forms.Label label8;
-    private System.Windows.Forms.TabControl tbSkills;
-    private System.Windows.Forms.TabPage tpMilitary;
-    private System.Windows.Forms.TabPage tpUtility;
-    private System.Windows.Forms.Label lbRFoot;
-    private System.Windows.Forms.Label lbRLeg;
-    private System.Windows.Forms.Label lbLFoot;
-    private System.Windows.Forms.Label lbLLeg;
-    private System.Windows.Forms.Label lbLHand;
-    private System.Windows.Forms.Label lbRHand;
-    private System.Windows.Forms.Label lbLArm;
-    private System.Windows.Forms.Label lbRArm;
-    private System.Windows.Forms.ListBox lbWeaponSkills;
-    private System.Windows.Forms.ListBox lbUtilitySkills;
-    private System.Windows.Forms.ListBox lbEquipped;
-    private System.Windows.Forms.Label lbDeactivated;
-    private System.Windows.Forms.Label lbAttackTotal;
-    private System.Windows.Forms.Label label38;
-    private System.Windows.Forms.Label lbDefenceTotal;
-    private System.Windows.Forms.Label lbHealthTotal;
-    private System.Windows.Forms.Label label15;
-    private System.Windows.Forms.Label label11;
-    private System.Windows.Forms.GroupBox groupBox2;
-    private System.Windows.Forms.Label lbLevel;
-    private System.Windows.Forms.Label label20;
-    private System.Windows.Forms.Label lbArmour;
-    private System.Windows.Forms.Label label18;
-    private System.Windows.Forms.PictureBox pbExperience;
-    private System.Windows.Forms.Button btIncreaseSkill;
-    private System.Windows.Forms.Button btAddNewSkill;
-    private System.Windows.Forms.Label lbUnspent;
-    private System.Windows.Forms.Label label17;
-    private System.Windows.Forms.ColorDialog cdPickColour;
-    private System.Windows.Forms.Button btColour;
-  }
 }

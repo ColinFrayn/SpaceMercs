@@ -205,7 +205,7 @@ namespace SpaceMercs {
         public int MaxShield { get; private set; }
         public int Attack { get; private set; }
         public int Defence { get; private set; }
-        public int Armour { get { if (ArmourType == null) return 0; return ArmourType.BaseArmour; } }
+        public int Armour { get { return Type.Armour + ArmourType?.BaseArmour ?? 0; } }
         public double WeaponRange { get; private set; }
 
         public static Ship GenerateStarterShip(Team tm, ShipType? st = null) {

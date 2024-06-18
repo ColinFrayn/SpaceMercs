@@ -7,7 +7,7 @@
     <Large>0</Large>
     <Weapon>1</Weapon>
     <Cost>50</Cost>
-    <Desc>A small shuttle for travel betweena planet and its moons</Desc>
+    <Desc>A small shuttle suitable for travel between a planet and its moons</Desc>
   </ShipType>
   <ShipType Name="Transport">
     <AKA>Lynx</AKA>
@@ -23,7 +23,7 @@
     <Medium>2</Medium>
     <Large>1</Large>
     <Weapon>1</Weapon>
-    <Cost>2000</Cost>
+    <Cost>2500</Cost>
     <Desc>A small-medium transport ship</Desc>
   </ShipType>
   <ShipType Name="Medium Freighter">
@@ -32,7 +32,7 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>2</Weapon>
-    <Cost>9500</Cost>
+    <Cost>10500</Cost>
     <Desc>A mid-sized transport ship ship</Desc>
   </ShipType>
   <ShipType Name="Heavy Freighter">
@@ -41,7 +41,7 @@
     <Medium>5</Medium>
     <Large>3</Large>
     <Weapon>2</Weapon>
-    <Cost>22000</Cost>
+    <Cost>35000</Cost>
     <Desc>The largest transport ship</Desc>
   </ShipType>
   <ShipType Name="Corvette">
@@ -58,7 +58,8 @@
     <Medium>3</Medium>
     <Large>1</Large>
     <Weapon>2</Weapon>
-    <Cost>2800</Cost>
+    <Cost>3200</Cost>
+    <Armour>1</Armour>
     <Desc>A small military ship</Desc>
   </ShipType>
   <ShipType Name="Medium Cruiser">
@@ -67,7 +68,8 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>3</Weapon>
-    <Cost>10500</Cost>
+    <Cost>12500</Cost>
+    <Armour>2</Armour>
     <Desc>A medium-sized military ship</Desc>
   </ShipType>
   <ShipType Name="Heavy Cruiser">
@@ -76,7 +78,37 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>4</Weapon>
-    <Cost>24000</Cost>
+    <Cost>40000</Cost>
+    <Armour>3</Armour>
     <Desc>A large military ship</Desc>
+  </ShipType>
+  <ShipType Name="Flying Saucer">
+    <Small>5</Small>
+    <Medium>2</Medium>
+    <Large>1</Large>
+    <Weapon>1</Weapon>
+    <Cost>2200</Cost>
+    <Race>Grey</Race>
+    <Desc>A small exploration ship, built by the Grey Race</Desc>
+  </ShipType>
+  <ShipType Name="Bruiser">
+    <Small>5</Small>
+    <Medium>2</Medium>
+    <Large>1</Large>
+    <Weapon>2</Weapon>
+    <Cost>3000</Cost>
+    <Armour>2</Armour>
+    <Race>Ogrish</Race>
+    <Desc>A small military ship with heavy armour</Desc>
+  </ShipType>
+  <ShipType Name="Armadillo">
+    <Small>8</Small>
+    <Medium>5</Medium>
+    <Large>2</Large>
+    <Weapon>2</Weapon>
+    <Cost>24000</Cost>
+    <Race>Gokan</Race>
+    <Armour>2</Armour>
+    <Desc>A medium-sized, heavily armoured transport ship</Desc>
   </ShipType>
 </Data>

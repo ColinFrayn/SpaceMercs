@@ -14,6 +14,7 @@ namespace SpaceMercs {
         public readonly List<ShipRoomDesign> Rooms = new List<ShipRoomDesign>();
         public int Length { get; private set; }
         public int Width { get; private set; }
+        public int Armour { get; private set; }
         public double MaxHull { get { return (Small * 2.0) + (Medium * 4.0) + (Large * 8.0) + (Weapon * 1.0) + 4.0; } }
         public int Cargo { get { return (Small * 150) + (Medium * 500) + (Large * 1500) - (Weapon * 50) + 50; } } // Carrying capacity in kg. Weapon rooms need ammo, supplies etc. hence removing space
         public string RoomConfigString { get { return Small + "/" + Medium + "/" + Large + "/" + Weapon; } }
@@ -22,6 +23,7 @@ namespace SpaceMercs {
         public List<Vector2> ShieldShape { get; private set; }
         public int EngineRoomID { get; private set; } = -1;
         public int PowerCoreRoomID { get; private set; } = -1;
+        public Race? RequiredRace { get; private set; }
 
         // Autogen stuff
         public int Seed { get; private set; }
@@ -89,6 +91,15 @@ namespace SpaceMercs {
             Weapon = xml.SelectNodeInt("Weapon");
             Description = xml.SelectNodeText("Desc");
             Fillers = new List<Point>();
+            Armour = xml.SelectNodeInt("Armour",0);
+            // Load the race that this ship type is restricted to (default null)
+            if (xml.SelectSingleNode("Race") != null) {
+                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
+                if (RequiredRace == null) {
+                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
+                }
+            }
+
             SetupLayout();
         }
         public static ShipType Empty { get { return new ShipType(); } }

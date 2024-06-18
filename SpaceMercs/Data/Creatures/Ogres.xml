@@ -3,13 +3,13 @@
     <Size>2</Size>
     <LevelRange>5,13</LevelRange>
     <Attack>15</Attack>
-    <Defence>11</Defence>
+    <Defence>10</Defence>
     <Health>18</Health>
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
     <MovementCost>3.0</MovementCost>
-    <Armour>28</Armour>
+    <Armour>20</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
@@ -22,13 +22,13 @@
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
     <Attack>16</Attack>
-    <Defence>12</Defence>
+    <Defence>11</Defence>
     <Health>20</Health>
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
     <MovementCost>3.0</MovementCost>
-    <Armour>30</Armour>
+    <Armour>22</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
@@ -41,13 +41,13 @@
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
     <Attack>17</Attack>
-    <Defence>12</Defence>
+    <Defence>11</Defence>
     <Health>21</Health>
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
     <MovementCost>3.0</MovementCost>
-    <Armour>30</Armour>
+    <Armour>22</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
@@ -60,12 +60,12 @@
     <Size>2</Size>
     <LevelRange>7,15</LevelRange>
     <Attack>18</Attack>
-    <Defence>12</Defence>
+    <Defence>11</Defence>
     <Health>20</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>
-    <Armour>32</Armour>
+    <Armour>24</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
@@ -78,12 +78,12 @@
     <Size>2</Size>
     <LevelRange>8,16</LevelRange>
     <Attack>19</Attack>
-    <Defence>13</Defence>
+    <Defence>12</Defence>
     <Health>22</Health>
     <Stamina>19</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>
-    <Armour>34</Armour>
+    <Armour>26</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>

@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
-        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Sniper }
+        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Eyesight }
 
         // Generic stuff
         public Team? PlayerTeam; // Could be null (if an unhired mercenary)
@@ -626,7 +626,9 @@ namespace SpaceMercs {
             int totsk = 0;
             if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
-                    UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), xu.GetAttributeText("Skill"));
+                    string skillName = xu.GetAttributeText("Skill");
+                    if (skillName == "Sniper") skillName = nameof(UtilitySkill.Eyesight); // Backwards compatibility
+                    UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), skillName);
                     int lvl = int.Parse(xu.InnerText);
                     totsk += lvl;
                     UtilitySkills.Add(sk, lvl);

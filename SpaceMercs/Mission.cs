@@ -288,7 +288,7 @@ namespace SpaceMercs {
             if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
             else m.RacialOpponent = loc.GetRandomRace(rand);
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
-            m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
+            m.Reward = 0d;
             if (m.Size < 1) m.Size = 1;
 
             // Set mission goal

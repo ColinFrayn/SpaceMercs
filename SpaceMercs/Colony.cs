@@ -498,6 +498,7 @@ namespace SpaceMercs {
             if (tp.Weapon > 1 && (Base & BaseType.Military) == 0) return false;
             if (tp.Small > 6 && (Base & BaseType.Trading) == 0) return false;
             if (tp.MaxHull > BaseSize * 15.0) return false;
+            if (tp.RequiredRace != null && tp.RequiredRace != Owner) return false;
             return true;
         }
         private int GetNextGrowthPeriod() { // In days
