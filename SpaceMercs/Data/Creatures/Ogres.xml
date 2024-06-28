@@ -2,9 +2,9 @@
   <CreatureType Name="Ogre Scout">
     <Size>2</Size>
     <LevelRange>5,13</LevelRange>
-    <Attack>15</Attack>
+    <Attack>16</Attack>
     <Defence>10</Defence>
-    <Health>18</Health>
+    <Health>17</Health>
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
@@ -21,7 +21,7 @@
   <CreatureType Name="Ogre Warrior">
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
-    <Attack>16</Attack>
+    <Attack>17</Attack>
     <Defence>11</Defence>
     <Health>20</Health>
     <Stamina>17</Stamina>
@@ -40,7 +40,7 @@
   <CreatureType Name="Ogre Brute">
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
-    <Attack>17</Attack>
+    <Attack>18</Attack>
     <Defence>11</Defence>
     <Health>21</Health>
     <Stamina>17</Stamina>
@@ -59,9 +59,9 @@
   <CreatureType Name="Ogre Elite">
     <Size>2</Size>
     <LevelRange>7,15</LevelRange>
-    <Attack>18</Attack>
+    <Attack>19</Attack>
     <Defence>11</Defence>
-    <Health>20</Health>
+    <Health>23</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>
@@ -77,9 +77,9 @@
   <CreatureType Name="Ogre Chief">
     <Size>2</Size>
     <LevelRange>8,16</LevelRange>
-    <Attack>19</Attack>
+    <Attack>20</Attack>
     <Defence>12</Defence>
-    <Health>22</Health>
+    <Health>32</Health>
     <Stamina>19</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>

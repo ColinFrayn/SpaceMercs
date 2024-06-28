@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using SpaceMercs.Graphics;
 using System.Drawing.Imaging;
 using System.IO;
@@ -9,7 +8,7 @@ namespace SpaceMercs {
         public int ID;
         public int W, H;
     }
-    static class Textures {
+    public static class Textures {
         [Flags]
         public enum WallSide { UpLeft = 1, Up = 2, UpRight = 4, Left = 8, Right = 16, DownLeft = 32, Down = 64, DownRight = 128 }; // Do we need a wall on this side of the cell? (i.e. is the cell in this direction a floor tile?)
         public static WallSide AllSides = WallSide.UpLeft | WallSide.Up | WallSide.UpRight | WallSide.Left | WallSide.Right | WallSide.DownLeft | WallSide.Down | WallSide.DownRight;
@@ -31,7 +30,8 @@ namespace SpaceMercs {
 
         // Texture coordinates
         public enum MiscTexture { Build = 0, Salvage = 1, Up = 2, Right = 3, Cancel = 4, None = 5, Down = 6, Left = 7, Timer = 8, Connect = 9, Attack = 10, Search = 11, Disconnect = 12, Eye = 13, Inventory = 14, Skills = 15, Walk = 16,
-                                  Unlock = 17, Lock = 18, Treasure = 19, Coins = 20, OpenDoor = 21, CloseDoor = 22, Bones = 23, Trap = 24, Alert = 25, Reuse = 26, Menu = 27, File = 28, Mission = 29, Stopwatch = 30, Moved = 31 };
+                                  Unlock = 17, Lock = 18, Treasure = 19, Coins = 20, OpenDoor = 21, CloseDoor = 22, Bones = 23, Trap = 24, Alert = 25, Reuse = 26, Menu = 27, File = 28, Mission = 29, Stopwatch = 30, Moved = 31,
+                                  FrameRed = 32, FrameRedThick = 33, FrameGreen = 34, FrameGreenThick = 35 };
         private const int TexSize = 64;
         public static TexSpecs GetTexCoords(MiscTexture tex, bool bTransparent = true) {
             if (bTransparent) {

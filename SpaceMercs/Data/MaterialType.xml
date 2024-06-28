@@ -156,6 +156,12 @@
     <Desc>Energy Crystals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
+  <MaterialType Name="Titanium">
+    <ItemCost>6.0</ItemCost>
+    <Rarity>0.02</Rarity>
+    <Desc>Titanium</Desc>
+    <UnitMass>0.8</UnitMass>
+  </MaterialType>
   <MaterialType Name="Industrial Chemicals">
     <ItemCost>6.0</ItemCost>
     <Rarity>0.05</Rarity>

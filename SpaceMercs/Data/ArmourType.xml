@@ -99,6 +99,7 @@
       <Material Name="Aluminium" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
+      <Material Name="Titanium" Amount="1"/>
     </Materials>
     <CivSize>30</CivSize>
   </ArmourType>
@@ -322,7 +323,7 @@
     <Strength>6</Strength>
     <Speed>0.85</Speed>
     <Attack>2</Attack>
-    <BaseArmour>35</BaseArmour>
+    <BaseArmour>38</BaseArmour>
     <CivSize>26</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -332,10 +333,10 @@
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A powered full-body armour</Desc>
     <Materials>
-      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
-      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
@@ -356,10 +357,10 @@
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A heavy powered full-body Terminator armour set</Desc>
     <Materials>
-      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
-      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Titanium" Amount="3"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Assault Power Armour">
@@ -370,7 +371,7 @@
     <Strength>6</Strength>
     <Speed>1.1</Speed>
     <Attack>2</Attack>
-    <BaseArmour>32</BaseArmour>
+    <BaseArmour>34</BaseArmour>
     <CivSize>36</CivSize>
     <BonusArmour>
       <Bonus Type="Fire" Amount="25"/>
@@ -384,6 +385,7 @@
       <Material Name="Copper" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Shielded Power Armour">
@@ -394,7 +396,7 @@
     <Strength>6</Strength>
     <Attack>2</Attack>
     <Speed>0.85</Speed>
-    <BaseArmour>35</BaseArmour>
+    <BaseArmour>40</BaseArmour>
     <Shields>20</Shields>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -408,7 +410,7 @@
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>
-      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="3"/>
     </Materials>
     <CivSize>40</CivSize>
   </ArmourType>

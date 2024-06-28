@@ -8,6 +8,7 @@ using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -41,9 +42,8 @@ namespace SpaceMercs.MainWindow {
         private IEquippable? ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
-        private VertexBuffer? vbGrid = null, vbPath = null;
-        private VertexArray? vaGrid = null, vaPath = null;
-        private IndexBuffer? ibGrid = null;
+        private VertexBuffer? vbPath = null;
+        private VertexArray? vaPath = null;
         private HashSet<Soldier> lastSoldiers = new HashSet<Soldier>();
         private object oInitialiseLock = new object();
 
@@ -153,10 +153,10 @@ namespace SpaceMercs.MainWindow {
                         msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
-                            msgBox.PopupMessage("You return the " + ThisMission.MItem + " to the mission agent\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+                            msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
                             if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                     }
-                    else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+                    else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
                     PlayerTeam.Cash += ThisMission.Reward;                        
                     foreach (Soldier s in ThisMission.Soldiers) {
                         s.AddExperience(ThisMission.Experience);
@@ -843,24 +843,24 @@ namespace SpaceMercs.MainWindow {
                 }
             }
 
-            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
             if (CurrentAction == SoldierAction.Attack) {
-                vertices.AddRange(DrawTargetGrid());
-                if (TargetMap[pt.X, pt.Y] == true) {
+                DrawOverlayIcons(texProg, BuildTargetOverlay(), Textures.MiscTexture.FrameRed);
+                if (TargetMap[pt.X, pt.Y] == true) { 
                     DrawHoverFrame(texProg, pt.X, pt.Y);
-                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0) vertices.AddRange(DrawAoEGrid());
+                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0)
+                        DrawOverlayIcons(texProg, BuildAoEOverlay(), Textures.MiscTexture.FrameRedThick);
                 }
             }
             else if (CurrentAction == SoldierAction.Item) {
-                vertices.AddRange(DrawTargetGrid());
+                DrawOverlayIcons(texProg, BuildTargetOverlay(), Textures.MiscTexture.FrameRed);
                 if (TargetMap[pt.X, pt.Y] == true) {
                     DrawHoverFrame(texProg, pt.X, pt.Y);
-                    vertices.AddRange(DrawAoEGrid());
+                    DrawOverlayIcons(texProg, BuildAoEOverlay(), Textures.MiscTexture.FrameRedThick);
                 }
             }
             else {
                 if (PlayerTeam.Mission_ShowTravel && SelectedEntity != null && SelectedEntity is Soldier) {
-                    vertices.AddRange(DrawTravelGrid());
+                    DrawOverlayIcons(texProg, DrawTravelGrid(), Textures.MiscTexture.FrameGreen);
                 }
                 if (PlayerTeam.Mission_ShowPath && SelectedEntity != null && SelectedEntity is Soldier) {
                     if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && DistMap[hoverx, hovery] > 0) {
@@ -869,37 +869,26 @@ namespace SpaceMercs.MainWindow {
                 }
             }
 
-            // Set up the overlay grids as an index buffer
-            int numGrids = vertices.Count / 4;
-            if (numGrids > 0) {
-                if (vbGrid is null) vbGrid = new VertexBuffer(vertices.ToArray(), BufferUsageHint.DynamicDraw);
-                else vbGrid.SetData(vertices.ToArray());
-                if (vaGrid is null) vaGrid = new VertexArray(vbGrid);
-                int[] indices = new int[numGrids * 8];
-                for (int n = 0; n < numGrids; n++) {
-                    indices[n * 8 + 0] = n * 4 + 0;
-                    indices[n * 8 + 1] = n * 4 + 1;
-                    indices[n * 8 + 2] = n * 4 + 1;
-                    indices[n * 8 + 3] = n * 4 + 2;
-                    indices[n * 8 + 4] = n * 4 + 2;
-                    indices[n * 8 + 5] = n * 4 + 3;
-                    indices[n * 8 + 6] = n * 4 + 3;
-                    indices[n * 8 + 7] = n * 4 + 0;
-                }
-                if (ibGrid is null) ibGrid = new IndexBuffer(indices, false);
-                else ibGrid.SetData(indices);
-                flatProg.SetUniform("colourFactor", 1f);
-                GL.UseProgram(flatProg.ShaderProgramHandle);
-                GL.BindVertexArray(vaGrid.VertexArrayHandle);
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibGrid.IndexBufferHandle);
-                GL.DrawElements(PrimitiveType.Lines, ibGrid.IndexCount, DrawElementsType.UnsignedInt, 0);
-                GL.BindVertexArray(0);
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-            }
-
             if (PlayerTeam.Mission_ViewDetection) CurrentLevel.DrawDetectionMap(texProg, DetectionMap);
             if (Const.DEBUG_SHOW_SELECTED_ENTITY_VIS && SelectedEntity != null) CurrentLevel.DrawSelectedEntityVis(texProg, SelectedEntity);
             GL.Enable(EnableCap.DepthTest);
+        }
+
+        private static void DrawOverlayIcons(ShaderProgram prog, List<Vector2> vertices, Textures.MiscTexture frameTex) {
+            TexSpecs ts = Textures.GetTexCoords(frameTex, true);
+            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
+            prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            prog.SetUniform("textureEnabled", true);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
+            float scale = 0.95f;
+            Matrix4 pScaleM = Matrix4.CreateScale(scale, -scale, 1f);
+            foreach (Vector2 vec in vertices) {
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(vec.X + ((1f-scale)/2f), vec.Y + 1f - ((1f-scale)/2f), Const.GUILayer);
+                prog.SetUniform("model", pScaleM * pTranslateM);
+                GL.UseProgram(prog.ShaderProgramHandle);
+                Square.Textured.BindAndDraw();
+            }
         }
 
         // Show GUI elements in the overlay layer
@@ -1172,44 +1161,32 @@ namespace SpaceMercs.MainWindow {
                 gbZoomTo1 = null;
             }
         }
-        private List<VertexPos2DCol> DrawTargetGrid() {
-            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
-            Color4 col = new Color4(1f, 0f, 0f, 1f);
+        private List<Vector2> BuildTargetOverlay() {
+            List<Vector2> vertices = new List<Vector2>();
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
                     if (!TargetMap[x, y]) continue;
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
+                    vertices.Add(new Vector2(x, y));
                 }
             }
             return vertices;
         }
-        private List<VertexPos2DCol> DrawAoEGrid() {
-            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
-            Color4 col = new Color4(1f, 0f, 0f, 1f);
+        private List<Vector2> BuildAoEOverlay() {
+            List<Vector2> vertices = new List<Vector2>();
             for (int y = (int)Math.Max(hovery - AoERadius, 0); y < (int)Math.Min(hovery + AoERadius + 1, CurrentLevel.Height); y++) {
                 for (int x = (int)Math.Max(hoverx - AoERadius, 0); x < (int)Math.Min(hoverx + AoERadius + 1, CurrentLevel.Width); x++) {
                     if (!AoEMap[x, y]) continue;
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
+                    vertices.Add(new Vector2(x, y));
                 }
             }
             return vertices;
         }
-        private List<VertexPos2DCol> DrawTravelGrid() {
-            List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
-            Color4 col = new Color4(0f, 1f, 0f, 1f);
+        private List<Vector2> DrawTravelGrid() {
+            List<Vector2> vertices = new List<Vector2>();
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
                     if (DistMap[x, y] == -1) continue;
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x + 1f, y + 1f), col));
-                    vertices.Add(new VertexPos2DCol(new Vector2(x, y + 1f), col));
+                    vertices.Add(new Vector2(x, y));
                 }
             }
             return vertices;

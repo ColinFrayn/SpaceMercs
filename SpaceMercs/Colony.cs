@@ -504,7 +504,7 @@ namespace SpaceMercs {
         private int GetNextGrowthPeriod() { // In days
             if (!CanGrow) return (int)Const.Million; // i.e. never
             Random rand = new Random(Location.GetHashCode() + Const.dtTime.DayOfYear); // Repeatable random seed
-            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 250.0 * rand.NextDouble());
+            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 350.0 * rand.NextDouble());
             double tdiff = Location.TDiff(Owner);
             for (int i=0; i<Math.Abs(tdiff/10); i++) {
                 dt *= rand.NextDouble() * 0.15 + 1.1; // The worse the temperature, the harder to grow

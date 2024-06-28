@@ -283,7 +283,7 @@ namespace SpaceMercs {
                 if (lFrag.Any()) return;
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
-                Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(true);
+                Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission!.ShipTarget.GenerateSalvage(true);
                 AnnounceSalvage(dSalvage);
                 dSalvage = PlayerTeam.AddItems(dSalvage);
                 if (Utils.CalculateMass(dSalvage) > 0.0) {

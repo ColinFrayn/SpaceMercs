@@ -1,5 +1,5 @@
 ﻿namespace SpaceMercs.Graphics {
-    internal struct TexSpecs {
+    public struct TexSpecs {
         public float X, Y, W, H;
         public int ID;
 

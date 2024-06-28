@@ -4,6 +4,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
+using System.Windows.Controls;
 using System.Xml;
 
 namespace SpaceMercs {
