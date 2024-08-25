@@ -5,7 +5,6 @@ using System.Xml;
 namespace SpaceMercs {
     public abstract class HabitableAO : AstronomicalObject {
         public Colony? Colony { get; private set; }
-        public Colony.BaseType Base { get { if (Colony == null) return Colony.BaseType.None; return Colony.Base; } }
         public int BaseSize {
             get {
                 if (Colony == null) return 0;

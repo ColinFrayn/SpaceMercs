@@ -35,6 +35,9 @@
     <Weapons>
       <Weapon Weight="1">Poisonous Bite</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Nanosilk</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Arachnid Soldier">
     <Size>2</Size>
@@ -55,6 +58,9 @@
     <Weapons>
       <Weapon Weight="1">Poisonous Bite</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Nanosilk</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Arachnid Queen">
     <Size>3</Size>
@@ -76,6 +82,9 @@
     <Weapons>
       <Weapon Weight="1">Poisonous Bite</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="1.5">Nanosilk</Item>
+    </Scavenge>
   </CreatureType>
 </Data>
 

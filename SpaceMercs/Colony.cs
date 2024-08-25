@@ -9,16 +9,16 @@ namespace SpaceMercs {
     public class Colony {
         [Flags]
         public enum BaseType { None = 0x0, Outpost = 0x1, Military = 0x2, Research = 0x4, Colony = 0x8, Trading = 0x10, Metropolis = 0x20 };
-        public BaseType Base { get; protected set; }
+        private BaseType Base;
         public int BaseSize {
             get {
                 int Count = 0;
-                if ((Base & BaseType.Outpost) != 0) Count++;
-                if ((Base & BaseType.Military) != 0) Count++;
-                if ((Base & BaseType.Research) != 0) Count++;
-                if ((Base & BaseType.Colony) != 0) Count++;
-                if ((Base & BaseType.Trading) != 0) Count++;
-                if ((Base & BaseType.Metropolis) != 0) Count++;
+                if (HasBaseType(BaseType.Outpost)) Count++;
+                if (HasBaseType(BaseType.Military)) Count++;
+                if (HasBaseType(BaseType.Research)) Count++;
+                if (HasBaseType(BaseType.Colony)) Count++;
+                if (HasBaseType(BaseType.Trading)) Count++;
+                if (HasBaseType(BaseType.Metropolis)) Count++;
                 return Count;
             }
         }
@@ -28,12 +28,18 @@ namespace SpaceMercs {
             get {
                 if (Base == BaseType.Outpost) return 2.0;
                 double Modifier = 1.6 - (BaseSize * 0.1);
-                if ((Base & BaseType.Trading) != 0) Modifier *= 0.95;
+                if (HasBaseType(BaseType.Trading)) Modifier *= 0.95;
                 return Modifier;
             }
         }
         public DateTime dtLastGrowth { get; private set; }
         public DateTime dtNextGrowth { get; private set; }
+        public double SeedProgress { get; private set; }
+        private readonly List<Soldier> Mercenaries = new List<Soldier>();
+        private readonly List<Mission> Missions = new List<Mission>();
+        private readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
+        private DateTime dtLastVisit = DateTime.MinValue;
+
         public bool CanGrow {
             get {
                 if (BaseSize == 6) return false;
@@ -41,11 +47,26 @@ namespace SpaceMercs {
                 return true;
             }
         }
-
-        private readonly List<Soldier> Mercenaries = new List<Soldier>();
-        private readonly List<Mission> Missions = new List<Mission>();
-        private readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
-        private DateTime dtLastUpdate = DateTime.MinValue;
+        public bool CanSeed { // Seed a new colony?
+            get {
+                if (Location is Moon) return false;
+                if (BaseSize < 3) return false;
+                if (!HasBaseType(BaseType.Colony)) return false;
+                return true;
+            }
+        }
+        public bool CanRepairShips {
+            get {
+                return
+                    HasBaseType(BaseType.Colony) ||
+                    HasBaseType(BaseType.Military) ||
+                    HasBaseType(BaseType.Metropolis);
+            }
+        }
+        public bool HasBaseType(BaseType type) {
+            if (type == BaseType.None) return true;
+            return (Base & type) != 0;
+        }
 
         public Colony(Race rc, int iSize, int seed, HabitableAO loc) {
             Owner = rc;
@@ -59,7 +80,7 @@ namespace SpaceMercs {
                     BaseType btOld = Base;
                     do {
                         BaseType bt = (BaseType)(2 << (rand.Next(4)));
-                        if ((Base & bt) == 0) Base |= bt;
+                        if (HasBaseType(bt)) Base |= bt;
                     } while (Base == btOld);
                 }
             }
@@ -67,7 +88,7 @@ namespace SpaceMercs {
             dtLastGrowth = Const.dtTime;
             if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
-            dtLastUpdate = DateTime.MinValue;
+            dtLastVisit = DateTime.MinValue;
 
             rc.AddColony(this);
         }
@@ -79,7 +100,9 @@ namespace SpaceMercs {
             string baseType = xml.SelectNodeText("BaseType");
             if (!string.IsNullOrEmpty(baseType)) Base = (BaseType)Enum.Parse(typeof(BaseType), baseType);
             Base |= BaseType.Outpost; // All colonies have it
-            dtLastUpdate = DateTime.FromBinary(long.Parse(xml.SelectNodeText("LastUpdate")));
+            dtLastVisit = DateTime.FromBinary(long.Parse(xml.SelectNodeText("LastUpdate")));
+
+            SeedProgress = xml.SelectNodeDouble("SeedProgress", 0d);
 
             string strLastGrowth = xml.SelectNodeText("LastGrowth");
             if (!string.IsNullOrEmpty(strLastGrowth)) dtLastGrowth = DateTime.FromBinary(long.Parse(strLastGrowth));
@@ -127,11 +150,12 @@ namespace SpaceMercs {
             file.WriteLine("<Colony>");
             file.WriteLine(" <BaseType>" + Base.ToString() + "</BaseType>");
             file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
-            file.WriteLine(" <LastUpdate>" + dtLastUpdate.ToBinary() + "</LastUpdate>");
-            file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
+            file.WriteLine(" <LastUpdate>" + dtLastVisit.ToBinary() + "</LastUpdate>");
+            if (dtLastGrowth > Const.dtStart) file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
             file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
+            if (SeedProgress > 0d) file.WriteLine(" <SeedProgress>" + SeedProgress.ToString("F4") + "</SeedProgress>");
 
-            TimeSpan ts = Const.dtTime - dtLastUpdate;
+            TimeSpan ts = Const.dtTime - dtLastVisit;
             // Only bother writing the inventory if it's likely to be relevant
             if (ts.TotalDays < Const.LongEnoughGapToResetColonyInventory) {
                 if (Mercenaries.Count > 0) {
@@ -171,31 +195,35 @@ namespace SpaceMercs {
             }
             else {
                 BaseType bt = (BaseType)(1 << (rand.Next(5)));
-                if ((Base & bt) == 0) {
+                if (!HasBaseType(bt)) {
                     ExpandBase(bt);
                     return 1;
                 }
             }
             return 0;
         }
-        internal void CheckGrowth(GUIMessageBox msgBox) {
+        internal void CheckGrowth() {
             if (!CanGrow) return;
             while (Const.dtTime > dtNextGrowth) {
-                // Maybe don't expand this base but build a new one?
-                Random rand = new Random();
-                if (rand.NextDouble() > 0.8 &&
-                    Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
-                    // Built a new colony in this system instead
-                    string sysName = Location.GetSystem().Name;
-                    if (string.IsNullOrEmpty(sysName)) sysName = Location.GetSystem().PrintCoordinates();
-                    if (Owner.IsPlayer) msgBox.PopupMessage($"The { Owner.Name} Race has founded a new colony in system {sysName}");
-                }
-                else {
-                    ForceExpandBase();
-                    Location.GetSystem().CheckBuildTradeRoutes(Owner);
-                }
+                ForceExpandBase();
+                Location.GetSystem().CheckBuildTradeRoutes(Owner);
                 dtLastGrowth = dtNextGrowth;
                 dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
+            }
+        }
+        internal void UpdateSeedProgress(GUIMessageBox msgBox, double tDiff) {
+            if (!CanSeed) return;
+            Random rand = new Random();
+            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff; // Annualised
+            if (SeedProgress >= Const.ColonySeedTarget) {
+                if (Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
+                    // Built a new colony in this system
+                    string sysName = Location.GetSystem().Name;
+                    if (string.IsNullOrEmpty(sysName)) sysName = Location.GetSystem().PrintCoordinates();
+                    if (Owner.IsPlayer) msgBox.PopupMessage($"The {Owner.Name} Race has founded a new colony in system {sysName}");
+                    SeedProgress = 0d;
+                }
+                else SeedProgress = Const.ColonySeedTarget * 0.9; // No seeding this time, so step back a bit
             }
         }
         private void ForceExpandBase() {
@@ -207,7 +235,7 @@ namespace SpaceMercs {
             Random rand = new Random(Location.GetHashCode());
             do {
                 BaseType bt = (BaseType)(1 << (rand.Next(5)));
-                if ((Base & bt) == 0) {
+                if (HasBaseType(bt)) {
                     ExpandBase(bt);
                     return;
                 }
@@ -217,16 +245,11 @@ namespace SpaceMercs {
         // Periodic stock update
         public void UpdateStock(Team t) {
             // Check how much time has elapsed
-            TimeSpan ts = Const.dtTime - dtLastUpdate;
+            TimeSpan ts = Const.dtTime - dtLastVisit;
             double dDays = ts.TotalDays;
 
-            // Remove any mercenaries with names identical to soldiers in the team
-            HashSet<string> hsTeamNames = new HashSet<string>();
-            foreach (Soldier s in t.SoldiersRO) hsTeamNames.Add(s.Name);
-            List<Soldier> lMercs = new List<Soldier>(Mercenaries);
-            foreach (Soldier m in lMercs) {
-                if (hsTeamNames.Contains(m.Name)) Mercenaries.Remove(m);
-            }
+            // Larger colonies have a more rapid turnover; small colonies don't            
+            dDays *= (BaseSize / 2);
 
             if (dDays < 0.1) return; // Tiny gap - do nothing
             if (dDays > Const.LongEnoughGapToResetColonyInventory) {
@@ -249,13 +272,21 @@ namespace SpaceMercs {
             // Now fill the gaps
             PopulateMercenaries();
             PopulateMissions();
-            dtLastUpdate = Const.dtTime;
+            dtLastVisit = Const.dtTime;
+
+            // Remove any mercenaries with names identical to soldiers in the team
+            HashSet<string> hsTeamNames = new HashSet<string>();
+            foreach (Soldier s in t.SoldiersRO) hsTeamNames.Add(s.Name);
+            List<Soldier> lMercs = new List<Soldier>(Mercenaries);
+            foreach (Soldier m in lMercs) {
+                if (hsTeamNames.Contains(m.Name)) Mercenaries.Remove(m);
+            }
         }
         private void PopulateMissions() {
             Random rand = new Random();
             int total = BaseSize + rand.Next(4) + rand.Next(4) + 1;
-            if ((Base & BaseType.Military) != 0) total += 2;
-            if ((Base & BaseType.Research) != 0) total++;
+            if (HasBaseType(BaseType.Military)) total += 2;
+            if (HasBaseType(BaseType.Research)) total++;
             if (total > Const.MaxColonyMissions) total = Const.MaxColonyMissions;
             if (total < 0) total = 0;
             if (Missions.Count >= total) return;
@@ -266,8 +297,8 @@ namespace SpaceMercs {
         private void PopulateMercenaries() {
             Random rand = new Random();
             int total = BaseSize + rand.Next(4) + rand.Next(4) - rand.Next(4);
-            if ((Base & BaseType.Military) != 0) total += 3;
-            if ((Base & BaseType.Metropolis) != 0) total += 2;
+            if (HasBaseType(BaseType.Military)) total += 3;
+            if (HasBaseType(BaseType.Metropolis)) total += 2;
             if (total > Const.MaxColonyMercenaries) total = Const.MaxColonyMercenaries;
             if (total < 0) total = 0;
             if (Mercenaries.Count >= total) return;
@@ -285,6 +316,10 @@ namespace SpaceMercs {
                 } while (ntries < 10);
             }
         }
+        public int GetRandomMissionDifficulty(Random rand) {
+            int diff = Location.GetRandomMissionDifficulty(rand);
+            return diff;
+        }
 
         // Fill the inventory with deliveries for the given number of days
         private void PopulateInventory(int days) {
@@ -297,10 +332,10 @@ namespace SpaceMercs {
                 if (eq.CivSize > civSize) continue;
                 double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                 // Modify rarity by colony details & add this item if required
-                if ((Base & BaseType.Military) == 0) rarity /= 2.0;
-                if ((Base & BaseType.Colony) == 0) rarity /= 2.0;
-                if ((Base & BaseType.Metropolis) != 0) rarity *= 2.0;
-                if ((Base & BaseType.Research) != 0) rarity = Math.Pow(rarity, 0.7);
+                if (!HasBaseType(BaseType.Military)) rarity /= 2.0;
+                if (!HasBaseType(BaseType.Colony)) rarity /= 2.0;
+                if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
+                if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
                 AddItem(new Equipment(eq), rarity, days, rand);
             }
 
@@ -313,10 +348,10 @@ namespace SpaceMercs {
                     Weapon wp = new Weapon(wt, Level);
                     double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                     // Modify rarity by colony details & add this weapon if required
-                    if ((Base & BaseType.Colony) == 0) rarity /= 1.5;
-                    if ((Base & BaseType.Metropolis) != 0) rarity *= 2.0;
-                    if ((Base & BaseType.Military) == 0) rarity *= 2.0;
-                    if ((Base & BaseType.Research) != 0) rarity = Math.Pow(rarity, 0.7);
+                    if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
+                    if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
+                    if (!HasBaseType(BaseType.Military)) rarity *= 2.0;
+                    if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
                     AddItem(wp, rarity, days, rand);
                 }
             }
@@ -334,10 +369,10 @@ namespace SpaceMercs {
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                         // Modify rarity by colony details & add this armour if required
-                        if ((Base & BaseType.Colony) == 0) rarity /= 1.5;
-                        if ((Base & BaseType.Metropolis) != 0) rarity *= 2.0;
-                        if ((Base & BaseType.Military) == 0) rarity *= 2.0;
-                        if ((Base & BaseType.Research) != 0) rarity = Math.Pow(rarity, 0.7);
+                        if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
+                        if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
+                        if (!HasBaseType(BaseType.Military)) rarity *= 2.0;
+                        if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
                         AddItem(ar, rarity, days, rand);
                     }
                 }
@@ -416,7 +451,7 @@ namespace SpaceMercs {
             Matrix4 piScaleM = Matrix4.CreateScale(0.2f);
             Matrix4 bgScaleM = Matrix4.CreateScale(0.25f);
             Matrix4 piRotateM = Matrix4.CreateRotationZ((float)Math.PI / 4f);
-            if ((Base & BaseType.Colony) != 0) {
+            if (HasBaseType(BaseType.Colony)) {
                 Matrix4 piTranslateM = Matrix4.CreateTranslation(-0.5f, -0.5f, 0f);
                 prog.SetUniform("model", piRotateM * bgScaleM * piTranslateM * pScaleM);
                 prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
@@ -427,7 +462,7 @@ namespace SpaceMercs {
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.FlatCentred.BindAndDraw();
             }
-            if ((Base & BaseType.Trading) != 0) {
+            if (HasBaseType(BaseType.Trading)) {
                 Matrix4 piTranslateM = Matrix4.CreateTranslation(0.5f, -0.5f, 0f);
                 prog.SetUniform("model", piRotateM * bgScaleM * piTranslateM * pScaleM);
                 prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
@@ -438,7 +473,7 @@ namespace SpaceMercs {
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.FlatCentred.BindAndDraw();
             }
-            if ((Base & BaseType.Research) != 0) {
+            if (HasBaseType(BaseType.Research)) {
                 Matrix4 piTranslateM = Matrix4.CreateTranslation(-0.5f, 0.5f, 0f);
                 prog.SetUniform("model", piRotateM * bgScaleM * piTranslateM * pScaleM);
                 prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
@@ -449,7 +484,7 @@ namespace SpaceMercs {
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.FlatCentred.BindAndDraw();
             }
-            if ((Base & BaseType.Military) != 0) {
+            if (HasBaseType(BaseType.Military)) {
                 Matrix4 piTranslateM = Matrix4.CreateTranslation(0.5f, 0.5f, 0f);
                 prog.SetUniform("model", piRotateM * bgScaleM * piTranslateM * pScaleM);
                 prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
@@ -495,8 +530,8 @@ namespace SpaceMercs {
             PopulateInventory(Const.MerchantStockResetDuration);
         }
         public bool CanBuildShipType(ShipType tp) {
-            if (tp.Weapon > 1 && (Base & BaseType.Military) == 0) return false;
-            if (tp.Small > 6 && (Base & BaseType.Trading) == 0) return false;
+            if (tp.Weapon > 1 && !HasBaseType(BaseType.Military)) return false;
+            if (tp.Small > 6 && !HasBaseType(BaseType.Trading)) return false;
             if (tp.MaxHull > BaseSize * 15.0) return false;
             if (tp.RequiredRace != null && tp.RequiredRace != Owner) return false;
             return true;
@@ -506,10 +541,10 @@ namespace SpaceMercs {
             Random rand = new Random(Location.GetHashCode() + Const.dtTime.DayOfYear); // Repeatable random seed
             double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 350.0 * rand.NextDouble());
             double tdiff = Location.TDiff(Owner);
-            for (int i=0; i<Math.Abs(tdiff/10); i++) {
+            for (int i = 0; i < Math.Abs(tdiff / 10); i++) {
                 dt *= rand.NextDouble() * 0.15 + 1.1; // The worse the temperature, the harder to grow
             }
-            if (Location is Moon) dt *= 1.25; // Moons suck
+            if (Location is Moon) dt *= 1.5; // Moons suck
             if (Location.GetSystem().TradeRoutes.Any()) {
                 dt *= Const.TradeRouteColonyGrowthRate; // Much easier to grow with trade routes set up
             }

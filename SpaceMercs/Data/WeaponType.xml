@@ -185,7 +185,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>26</CivSize>
+    <CivSize>27</CivSize>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>18.0</Mass>
@@ -207,7 +207,7 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
-    <CivSize>29</CivSize>
+    <CivSize>34</CivSize>
   </WeaponType>
   <WeaponType Name="Flame Thrower" Class="Launcher">
     <Mass>15.0</Mass>
@@ -260,7 +260,7 @@
       <Material Name="Electronic Components" Amount="1"/>
       <Material Name="Crystals" Amount="3"/>
     </Materials>
-    <CivSize>31</CivSize>
+    <CivSize>37</CivSize>
   </WeaponType>
   <WeaponType Name="Grenade Launcher" Class="Launcher">
     <Mass>8.0</Mass>
@@ -511,7 +511,7 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Tentacle">
+  <WeaponType Name="Triffid Tentacle">
     <Speed>10</Speed>
     <Range>2</Range>
     <Damage>2+3</Damage>
@@ -519,35 +519,37 @@
     <ItemEffect Name="Tentacle Sting">
       <Effect Name="Triffid Sting">
         <Duration>2</Duration>
-        <Damage Type="Poison">2</Damage>
+        <Damage Type="Poison">3</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Spores">
+  <WeaponType Name="Triffid Spores">
     <Speed>12</Speed>
     <Range DropOff="0.6">8</Range>
-    <Damage>3+3</Damage>
+    <Damage>3+2</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
+    <Shots>2</Shots>    
     <ItemEffect Name="Spore Toxin">
       <Effect Name="Spore Toxin">
         <Duration>2</Duration>
-        <Damage Type="Poison">2</Damage>
+        <Damage Type="Poison">3</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Heavy Spores">
+  <WeaponType Name="Triffid Heavy Spores">
     <Speed>14</Speed>
     <Range DropOff="0.6">12</Range>
-    <Damage>6+5</Damage>
+    <Damage>5+4</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
+    <Shots>3</Shots>
     <ItemEffect Name="Spore Toxin">
       <Effect Name="Spore Toxin">
         <Duration>3</Duration>
-        <Damage Type="Poison">4</Damage>
+        <Damage Type="Poison">6</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>

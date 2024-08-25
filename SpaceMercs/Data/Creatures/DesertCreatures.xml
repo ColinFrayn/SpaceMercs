@@ -74,6 +74,10 @@
     <Resistances>
       <Resistance Type="Poison" Value="50"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Poison Gland</Item>
+      <Item Amount="0.4">Chitin</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Giant Sand Beetle">
     <Size>2</Size>

@@ -126,9 +126,9 @@ namespace SpaceMercs {
 
             // Create a spread of levels
             double r = rand.NextDouble();
-            if (r < 0.5) iLevel += (int)(rand.NextDouble() * 3.0);
-            else if (r < 0.8) iLevel += (int)(rand.NextDouble() * 4.0);
-            else iLevel += (int)(rand.NextDouble() * 5.0);
+            if (r < 0.4) iLevel += (int)(rand.NextDouble() * 2.0);
+            else if (r < 0.7) iLevel += (int)(rand.NextDouble() * 3.0);
+            else iLevel = (int)((double)iLevel * (1.0 + (rand.NextDouble() * 0.5)));
 
             return iLevel;
         }

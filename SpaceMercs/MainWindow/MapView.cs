@@ -7,7 +7,6 @@ using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
@@ -688,6 +687,20 @@ namespace SpaceMercs.MainWindow {
         }
         #endregion // Game Management
 
+        #region Clock Tick
+        // Update the global clock
+        public void UpdateCurrentTime(DateTime newTime) {
+            DateTime oldTime = Const.dtTime;
+            Const.dtTime = newTime;
+            double tDiff = (newTime - oldTime).TotalSeconds / Const.SecondsPerYear;
+            RunClockTickUpdate(tDiff);
+        }
+
+        private void RunClockTickUpdate(double tDiff) {
+            CheckPopulationGrowth(tDiff);
+            // TODO
+        }
+
         // Finish travelling
         public void ArriveAt(AstronomicalObject aoTo) {
             // Close colonyview if open
@@ -708,17 +721,16 @@ namespace SpaceMercs.MainWindow {
             fMapViewX = PlayerTeam.CurrentPosition.GetMapLocation().X;
             fMapViewY = PlayerTeam.CurrentPosition.GetMapLocation().Y;
             SetAOButtonsOnGUI(aoSelected);
-            // Make sure that all existing colonies are expanded if it's time to do so
-            CheckPopulationGrowth();
         }
 
-        private void CheckPopulationGrowth() {
+        private void CheckPopulationGrowth(double tDiff) {
             // Go through all races and check colonies for growth.
             // If human population grows then announce it, and any newly available techs
             int humanPop = StaticData.Races[0].Population;
             foreach (Race rc in StaticData.Races) {
-                rc.CheckForNewColonies(msgBox);
-                rc.CheckGrowthForAllColonies(msgBox);
+                if (!rc.IsPlayer) rc.CheckForNewColonySystems(msgBox);
+                rc.CheckGrowthForAllColonies();
+                rc.CheckColonySeeds(msgBox, tDiff);
             }
             int newHumanPop = StaticData.Races[0].Population;
             if (newHumanPop == humanPop) return;
@@ -753,6 +765,7 @@ namespace SpaceMercs.MainWindow {
                 msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
             }
         }
+        #endregion // Clock Tick
 
         // Close down all dialogs
         private void CloseAllDialogs() {

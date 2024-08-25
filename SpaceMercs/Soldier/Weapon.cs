@@ -124,6 +124,9 @@ namespace SpaceMercs {
         public void EndOfTurn() {
             // Nothing to do yet
         }
-
+        public int GetUtilitySkill(Soldier.UtilitySkill sk) {
+            // TODO: Add any material properties
+            return Type.GetUtilitySkill(sk);
+        }
     }
 }

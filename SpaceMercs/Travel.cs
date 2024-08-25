@@ -202,15 +202,16 @@ namespace SpaceMercs {
             // Move forward if we're not currently on a mission
             if (fTravelTime < Const.SecondsPerDay) fElapsed += 60f * 5f;
             else fElapsed += fTravelTime / 600f;
+
+            ParentView.UpdateCurrentTime(dtStart.AddSeconds(Math.Min(fElapsed,fTravelTime)));
+
             if (fElapsed >= fTravelTime) {
                 fElapsed = fTravelTime;
                 bPause = true;
-                Const.dtTime = dtStart.AddSeconds(fElapsed);
                 ParentView.ArriveAt(Destination);
                 if (PlayerTeam.PlayerShip.CanRepair) PlayerTeam.PlayerShip.RepairHull();
                 return;
             }
-            Const.dtTime = dtStart.AddSeconds(fElapsed);
         }
         private void ResolveEncounter() {
             if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Salvage) {

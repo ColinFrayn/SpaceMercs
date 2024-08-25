@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
-        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Eyesight }
+        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Sharpshooter }
 
         // Generic stuff
         public Team? PlayerTeam; // Could be null (if an unhired mercenary)
@@ -395,9 +395,9 @@ namespace SpaceMercs {
         }
         public int GetUtilityLevel(UtilitySkill sk) {
             int val = GetRawUtilityLevel(sk);
-            if (EquippedWeapon != null) val += EquippedWeapon.Type.GetUtilitySkill(sk);
+            if (EquippedWeapon != null) val += EquippedWeapon.GetUtilitySkill(sk);
             foreach (Armour ar in EquippedArmour) {
-                val += ar.Type.GetUtilitySkill(sk);
+                val += ar.GetUtilitySkill(sk);
             }
             return val;
         }
@@ -627,7 +627,8 @@ namespace SpaceMercs {
             if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
                     string skillName = xu.GetAttributeText("Skill");
-                    if (skillName == "Sniper") skillName = nameof(UtilitySkill.Eyesight); // Backwards compatibility
+                    if (skillName == "Sniper") skillName = nameof(UtilitySkill.Sharpshooter); // Backwards compatibility
+                    if (skillName == "Eyesight") skillName = nameof(UtilitySkill.Sharpshooter); // Backwards compatibility
                     UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), skillName);
                     int lvl = int.Parse(xu.InnerText);
                     totsk += lvl;
@@ -1033,6 +1034,7 @@ namespace SpaceMercs {
         }
         public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             if (level is null) throw new Exception("Null level in AttackLocation");
+            if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
             if (RangeTo(tx, ty) > AttackRange) {
                 IEntity? en = level.GetEntityAt(tx, ty);

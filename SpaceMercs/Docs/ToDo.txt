@@ -3,6 +3,10 @@ ToDo List
 -------------------------------------------------
 
 Need a different way to control the gain of new tech
+- Pop + number of contacted civs / total relations with other civs? + num systems
+- Make a new utility method for this
+
+Material should give other bonuses to armour like Voidskin -> Stealth [TEST]
 
 
 ==========================================================================================================
@@ -14,6 +18,8 @@ Backburner : Features
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
+
+How to make slime creatures more dangerous? Maybe have them split?
 
 Cover
 - When covered from the attacker, get a def bonus

@@ -197,6 +197,7 @@
     <Mass>0.4</Mass>
     <Cost>12</Cost>
     <Rarity>6</Rarity>
+    <CivSize>20</CivSize>
     <Desc>A grenade which distributes a highly poisonous gas</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
@@ -214,7 +215,7 @@
     <Materials>
       <Material Name="Composite" Amount="1"/>
       <Material Name="Rubber" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Poison Gland" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
     <Tex>3,2</Tex>
@@ -222,7 +223,8 @@
   <ItemType Name="Tar Grenade">
     <Mass>0.6</Mass>
     <Cost>10</Cost>
-    <Rarity>6</Rarity>
+    <Rarity>9</Rarity>
+    <CivSize>18</CivSize>
     <Desc>A grenade which distributes a sticky substance, slowing down all it touches</Desc>
     <ItemEffect Name="TarGrenade">
       <SingleUse/>
@@ -243,7 +245,7 @@
     <Materials>
       <Material Name="Composite" Amount="1"/>
       <Material Name="Rubber" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Slime Egg" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
     <Tex>4,2</Tex>
@@ -251,7 +253,8 @@
   <ItemType Name="Acid Grenade">
     <Mass>0.4</Mass>
     <Cost>12</Cost>
-    <Rarity>6</Rarity>
+    <Rarity>10</Rarity>
+    <CivSize>25</CivSize>
     <Desc>A grenade which distributes a highly corrosive substance, damaging an enemy's armour.</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
@@ -262,7 +265,7 @@
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
-        <Damage Type="Acid">2</Damage>
+        <Damage Type="Acid">3</Damage>
         <ArmourMod>-5</ArmourMod>
       </Effect>
       <Sound>Blast</Sound>
@@ -270,14 +273,14 @@
     <Materials>
       <Material Name="Composite" Amount="1"/>
       <Material Name="Rubber" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Acid Blood" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
     <Tex>1,3</Tex>
   </ItemType>
   <ItemType Name="Plasma Grenade">
     <Mass>0.4</Mass>
-    <Cost>20</Cost>
+    <Cost>22</Cost>
     <Rarity>12</Rarity>
     <Desc>A highly deadly grenade which fires charged plasma in a small radius</Desc>
     <ItemEffect Name="Grenade">
@@ -332,6 +335,7 @@
     <Mass>0.6</Mass>
     <Cost>16</Cost>
     <Rarity>25</Rarity>
+    <CivSize>27</CivSize>
     <Desc>A grenade which sends out a crippling sonic pulse to all nearby targets.</Desc>
     <ItemEffect Name="SonicPulse">
       <SingleUse/>

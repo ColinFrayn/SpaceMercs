@@ -2,7 +2,7 @@
   <CreatureType Name="Triffid Sapling">
     <Scale>0.7</Scale>
     <LevelRange>1,4</LevelRange>
-    <Attack>8</Attack>
+    <Attack>9</Attack>
     <Defence>5</Defence>
     <Health>10</Health>
     <Stamina>16</Stamina>
@@ -19,13 +19,13 @@
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Tentacle</Weapon>
+      <Weapon Weight="1">Triffid Tentacle</Weapon>
     </Weapons>
   </CreatureType>  
   <CreatureType Name="Triffid Lasher">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>10</Attack>
+    <Attack>12</Attack>
     <Defence>6</Defence>
     <Health>14</Health>
     <Stamina>16</Stamina>
@@ -41,13 +41,13 @@
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Tentacle</Weapon>
+      <Weapon Weight="1">Triffid Tentacle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Triffid Spore Thrower">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>10</Attack>
+    <Attack>12</Attack>
     <Defence>6</Defence>
     <Health>16</Health>
     <Stamina>16</Stamina>
@@ -63,13 +63,13 @@
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Spores</Weapon>
+      <Weapon Weight="1">Triffid Spores</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Triffid Mother Plant">
     <Size>2</Size>
     <LevelRange>2,7</LevelRange>
-    <Attack>15</Attack>
+    <Attack>16</Attack>
     <Defence>6</Defence>
     <Health>40</Health>
     <Stamina>18</Stamina>
@@ -86,7 +86,7 @@
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Heavy Spores</Weapon>
+      <Weapon Weight="1">Triffid Heavy Spores</Weapon>
     </Weapons>
     <Boss/>
   </CreatureType>

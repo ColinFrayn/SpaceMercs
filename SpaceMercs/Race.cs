@@ -95,15 +95,23 @@ namespace SpaceMercs {
         }
         public void AddColony(Colony cl) {
             if (!Colonies.Contains(cl)) Colonies.Add(cl);
+            AddSystem(cl.Location.GetSystem());
         }
-        internal void CheckGrowthForAllColonies(GUIMessageBox msgBox) {
+        internal void CheckGrowthForAllColonies() {
             // Take a copy as we may modify the original
             List<Colony> backup = new List<Colony>(Colonies);
             foreach (Colony cl in backup) {
-                cl.CheckGrowth(msgBox);
+                cl.CheckGrowth();
             }
         }
-        internal void CheckForNewColonies(GUIMessageBox msgBox) {
+        internal void CheckColonySeeds(GUIMessageBox msgBox, double tDiff) {
+            // Take a copy as we may modify the original
+            List<Colony> backup = new List<Colony>(Colonies);
+            foreach (Colony cl in backup) {
+                cl.UpdateSeedProgress(msgBox, tDiff);
+            }
+        }
+        internal void CheckForNewColonySystems(GUIMessageBox msgBox) {
             HashSet<Star> nearestUncolonisedStars = new HashSet<Star>();
             double daysSinceLast = (Const.dtTime - LastExpandCheck).TotalDays;
             Star stHome = HomePlanet.GetSystem();

@@ -59,7 +59,7 @@ namespace SpaceMercs.MainWindow {
             if (PlayerTeam.PlayerShip.HullFract < 1.0 && // Ship is damaged
                 PlayerTeam.CurrentPositionHAO.Colony is not null &&
                 PlayerTeam.GetRelations(PlayerTeam.CurrentPositionHAO.Colony.Owner) >= Const.RaceRelationsLevelToAllowShipRepair && // Neutral or better with the owner race
-                (PlayerTeam.CurrentPositionHAO.Base & (Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military)) != 0)  // Only colonies, metropolis or military bases can repair
+                PlayerTeam.CurrentPositionHAO.Colony.CanRepairShips)  // Only colonies, metropolis or military bases can repair
             {
                 gbRepair.Activate();
             }
@@ -395,7 +395,7 @@ namespace SpaceMercs.MainWindow {
                 ShipEquipment se = StaticData.ShipEquipment[eno];
                 // Can we build this at the current location?
                 if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
-                if ((se.Available & PlayerTeam.CurrentPositionHAO!.Base) == 0) continue; // Not the correct facilities
+                if (PlayerTeam.CurrentPositionHAO!.Colony is null || !PlayerTeam.CurrentPositionHAO!.Colony.HasBaseType(se.Available)) continue; // Not the correct facilities
                 if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
                 if (playerRace.Population < se.CivSize) continue; // Not discovered yet
                 if (se.RequiredRace != null && PlayerTeam.GetRelations(se.RequiredRace) < Const.RaceRelationsLevelToAllowSpecialisedEquipmentSale) continue; // Correct race, but player team is not >= friendly

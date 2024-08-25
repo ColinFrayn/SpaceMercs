@@ -8,7 +8,6 @@ using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -420,7 +419,7 @@ namespace SpaceMercs.MainWindow {
                     gpSelect.Deactivate();
                     object? oHover = gpSelect.HoverObject;
                     // Process GUIPanel selection
-                    if (s != null && oHover is not null && gpSelect.HoverItem!.Enabled) {
+                    if (s != null && oHover is not null) {
                         int iSelectHover = gpSelect.HoverID;
                         if (iSelectHover == I_OpenDoor) {
                             OpenDoor(gpSelect.ClickX, gpSelect.ClickY, s);
@@ -1365,7 +1364,7 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 TexSpecs tsi = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
-                gpSelect.InsertIconItem(I_UseItem, tsi, bHasUtilityItems, gpItems);
+                gpSelect.InsertIconItem(I_UseItem, tsi, true, gpItems);
             }
             if (gpSelect.Count == 0) {
                 gpSelect.Deactivate();

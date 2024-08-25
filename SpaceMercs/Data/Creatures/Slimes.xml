@@ -45,6 +45,9 @@
       <Resistance Type="Acid" Value="80"/>
       <Resistance Type="Physical" Value="50"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Slime Egg</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Slime Spitter">
     <Scale>1.0</Scale>
@@ -70,6 +73,9 @@
     <Weapons>
       <Weapon Weight="1">Slime Spitter</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="0.3">Slime Egg</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Slime Hunter">
     <Scale>1.2</Scale>
@@ -94,5 +100,8 @@
     <Weapons>
       <Weapon Weight="1">Slime Bite</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="0.5">Slime Egg</Item>
+    </Scavenge>
   </CreatureType>
 </Data>

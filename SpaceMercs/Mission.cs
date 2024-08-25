@@ -252,7 +252,7 @@ namespace SpaceMercs {
             return m;
         }
         public static Mission CreateRandomColonyMission(Colony cl, Random rand) {
-            int iDiff = cl.Location.GetRandomMissionDifficulty(rand);
+            int iDiff = cl.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomColonyMissionType(cl.Location, rand);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = cl.Location;

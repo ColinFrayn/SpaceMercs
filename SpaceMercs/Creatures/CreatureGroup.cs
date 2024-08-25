@@ -67,18 +67,18 @@ namespace SpaceMercs {
         }
         private CreatureType GetRandomNonBossCreatureType(int diff) {
             int total = 0;
+            Dictionary<CreatureType, int> Candidates = new();
 
             foreach (CreatureType tp in CreatureTypes) {
-                if (!tp.IsBoss) {
+                if (!tp.IsBoss && tp.LevelMin <= diff && tp.LevelMax >= diff) {
                     total += tp.FrequencyModifier;
+                    Candidates.Add(tp,tp.FrequencyModifier);
                 }
             }
             int pick = rand.Next(total);
-            foreach (CreatureType tp in CreatureTypes) {
-                if (!tp.IsBoss) {
-                    pick -= tp.FrequencyModifier;
-                    if (pick < 0) return tp;
-                }
+            foreach (CreatureType tp in Candidates.Keys) {
+                pick -= Candidates[tp];
+                if (pick < 0) return tp;
             }
             throw new Exception("Could not find random creature fitting requirements");
         }

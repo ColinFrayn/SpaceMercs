@@ -6,6 +6,7 @@
     <Health>13</Health>
     <Stamina>17</Stamina>
     <Armour>10</Armour>
+    <MovementCost>0.7</MovementCost>
     <Frequency>3</Frequency>
     <Col1>100, 80, 60</Col1>
     <Col2>140, 115, 90</Col2>
@@ -71,6 +72,10 @@
     <Resistances>
       <Resistance Type="Poison" Value="50"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Poison Gland</Item>
+      <Item Amount="0.4">Chitin</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Boulder Beast">
     <Size>2</Size>
@@ -92,6 +97,9 @@
     <Resistances>
       <Resistance Type="Physical" Value="30"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Mithril</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Rock Giant">
     <Size>2</Size>
@@ -110,5 +118,9 @@
     <Weapons>
       <Weapon Weight="1">Club</Weapon>
     </Weapons>
+    <Scavenge>
+      <Item Amount="0.5">Mithril</Item>
+      <Item Amount="0.3">Adamantium</Item>
+    </Scavenge>
   </CreatureType>
 </Data>

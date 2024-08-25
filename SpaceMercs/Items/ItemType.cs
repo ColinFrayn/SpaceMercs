@@ -23,7 +23,7 @@ namespace SpaceMercs {
         public Race? RequiredRace { get; private set; }
         public ItemSource Source { get; private set; }
         public int CivSize { get; private set; }
-        public Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; private set; } = new Dictionary<Soldier.UtilitySkill, int>();
+        private Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; set; } = new Dictionary<Soldier.UtilitySkill, int>();
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get { return _SkillBoosts; } }
         private static uint NextID = Const.ItemIDBase;
         public double ConstructionChance { get { return 120.0 - (BaseRarity * 5.0); } }

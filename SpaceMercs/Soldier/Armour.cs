@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -185,6 +184,17 @@ namespace SpaceMercs {
         }
         public void EndOfTurn() {
             // Nothing to do yet
+        }
+        public int GetUtilitySkill(Soldier.UtilitySkill sk) {
+            int val = Type.GetUtilitySkill(sk);
+            // Material properties - 
+            int matval = Material.GetUtilitySkill(sk);
+            double scale = 0d;
+            foreach (BodyPart bp in Type.Locations) {
+                scale += Utils.BodyPartToArmourScale(bp);
+            }
+            val += (int)(scale * matval / 3.0); // Material contribution, scaled down.
+            return val;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Security.Policy;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SpaceMercs {
     public class MaterialType {
@@ -14,8 +13,13 @@ namespace SpaceMercs {
         public Race? RequiredRace { get; private set; }
         public int CivSize { get; private set; }  // Will first be discovered when your civ reaches this size
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
+        public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
         public double ConstructionChanceModifier { get { return Math.Log(Rarity > 0 ? Rarity : 0.0001) * 10.0; } }
+        public int GetUtilitySkill(Soldier.UtilitySkill sk) {
+            if (SkillBoosts.ContainsKey(sk)) return SkillBoosts[sk];
+            return 0;
+        }
 
         public MaterialType(XmlNode xml) {
             Name = xml.GetAttributeText("Name");
@@ -42,6 +46,20 @@ namespace SpaceMercs {
                     throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
                 }
             }
+
+            // Load in skill boosts
+            Dictionary<Soldier.UtilitySkill, int> skillBoostsTemp = new();
+            XmlNode? nUtility = xml.SelectSingleNode("Utility");
+            if (nUtility is not null) {
+                foreach (XmlNode xn in nUtility.ChildNodes) {
+                    string strSkill = xn.Name;
+                    Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), strSkill);
+                    int iVal = int.Parse(xn.InnerText);
+                    if (skillBoostsTemp.ContainsKey(sk)) throw new Exception("Duplicate Utility Boost in material type " + Name);
+                    skillBoostsTemp.Add(sk, iVal);
+                }
+            }
+            SkillBoosts = new Dictionary<Soldier.UtilitySkill, int>(skillBoostsTemp);
         }
     }
 }

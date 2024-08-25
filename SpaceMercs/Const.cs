@@ -142,12 +142,12 @@ namespace SpaceMercs {
         public const double CreatureLevelShieldsStep = 0.2;  // %age growth in creature shields each level (over base)
         public const double CreatureLevelArmourStep = 0.15;  // %age growth in creature armour each level (over base)
         public const double CreatureLevelStaminaStep = 1.0;  // Absolute growth in creature stamina each level
-        public const double HitBias = 3.0; // Bias towards hitting when attacking
-        public const double SoldierHitBias = 1.0; // Bias towards a player-controlled soldier hitting when attacking
-        public const double HitScale = 10.0; // Add extra randomness to help cancel out "certain hit" or "certain miss"
+        public const double HitBias = 4.0; // Bias towards hitting when attacking
+        public const double SoldierHitBias = 0.0; // Bias towards a player-controlled soldier hitting when attacking
+        public const double RandomHitScale = 10.0; // Add extra randomness to help cancel out "certain hit" or "certain miss"
         public const double AttackScale = 0.8; // Bias towards attack score
         public const double DefenceScale = 0.8; // Bias towards defence score
-        public const double GuaranteedHitScale = 0.7;  // The higher this is, the higher the weighting for absolute att-def, leading to more predictable hits/misses
+        public const double GuaranteedHitScale = 0.5;  // The higher this is, the higher the weighting for absolute att-def, leading to more predictable hits/misses
         public const double EncumbranceHitPenalty = 4.0; // When fully encumbered, reduce hit rolls by this much (or proportionately).
         public const double HitSizePowerLaw = 2.0;  // Increase chance to hit for larger creatures
         public const double PartialCoverDefenceBonus = 2.5; // When hiding by a wall from perspective of the (ranged) attacker, increase defence by this much
@@ -159,7 +159,7 @@ namespace SpaceMercs {
         public const double CreatureAttackDamageScale = 0.06;  // Modifier applied to damage done by Creatures
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
-        public const double SniperRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
+        public const double SharpshooterRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
 
         // Miscellaneous
@@ -195,6 +195,8 @@ namespace SpaceMercs {
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double UpgradeCostModifier = 1.3; // To upgrade an item by one level
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item
+        public const double ColonySeedRate = 5.0; // Affects the speed at which new colonies are created in populated systems.
+        public const double ColonySeedTarget = 100.0; // Target seeding point at which level the colony may seed
 
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system
