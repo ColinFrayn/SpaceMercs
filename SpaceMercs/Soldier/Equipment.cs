@@ -8,7 +8,7 @@ namespace SpaceMercs {
         public string Name { get { return BaseType.Name; } }
         public double Mass { get { return BaseType.Mass; } }
         public double Cost { get { return BaseType.Cost; } }
-        public string Desc { get { return BaseType.Desc; } }
+        public string Description { get { return BaseType.Description; } }
         public double Rarity { get { return BaseType.Rarity; } }
         public int Level { get { return 0; } } // Ignored here
         public double UpgradeCost { get { return 0.0; } } // Ignored here

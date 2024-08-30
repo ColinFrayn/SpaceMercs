@@ -8,10 +8,10 @@ namespace SpaceMercs {
         public string Name { get { return Type.Name + " [" + Utils.LevelToDescription(Level) + "]" + ModChar(); } }
         public double Mass { get { return Type.Mass * (1.0 - (Level / 12.0)); } }
         public double Cost { get { return CalculateCost(); } }
-        public string Desc {
+        public string Description {
             get {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(Type.Desc);
+                sb.AppendLine(Type.Description);
                 sb.AppendLine("Class : " + Type.WClass.ToString());
                 sb.AppendLine("Quality : " + Utils.LevelToDescription(Level));
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");

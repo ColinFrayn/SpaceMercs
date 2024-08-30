@@ -172,6 +172,14 @@ namespace SpaceMercs {
                 return false;
             }
         }
+        public bool HasFacility(ShipEquipment.RoomAbilities ability) =>
+            ability switch {
+                ShipEquipment.RoomAbilities.Medlab => HasMedlab,
+                ShipEquipment.RoomAbilities.Armoury => HasArmoury,
+                ShipEquipment.RoomAbilities.Workshop => HasWorkshop,
+                ShipEquipment.RoomAbilities.Engineering => HasEngineering,
+                _ => false
+            };
         public bool CanFoundColony {
             get {
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {

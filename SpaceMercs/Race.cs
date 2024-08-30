@@ -27,6 +27,7 @@ namespace SpaceMercs {
         public int SystemCount { get { return Systems.Count; } }
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
         public bool IsPlayer { get { return HomePlanet.GetSystem().Sector.SectorX == 0 && HomePlanet.GetSystem().Sector.SectorY == 0; } }
+        private HashSet<BaseItemType> Researched = new HashSet<BaseItemType>();
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -64,6 +65,11 @@ namespace SpaceMercs {
             file.WriteLine("<HomePlanet>" + HomePlanet.PrintCoordinates() + "</HomePlanet>");
             file.WriteLine("<LastExpand>" + LastExpandCheck.ToBinary() + "</LastExpand>");
             if (Known) file.WriteLine("<Known/>");
+            file.WriteLine("<Research>");
+            foreach (BaseItemType item in Researched) {
+                file.WriteLine($" <Item>{item.Name}</Item>");
+            }
+            file.WriteLine("</Research>");
             file.WriteLine("</Race>");
         }
         public void LoadAdditionalData(XmlNode xml, Map map) {
@@ -75,6 +81,18 @@ namespace SpaceMercs {
             string strLastExpand = xml.SelectNodeText("LastExpand");
             if (!string.IsNullOrEmpty(strLastExpand)) LastExpandCheck = DateTime.FromBinary(long.Parse(strLastExpand));
             else LastExpandCheck = Const.dtStart;
+
+            XmlNodeList? xns = xml.SelectNodes("Research/Item");
+            if (xns is not null) {
+                foreach (XmlNode xn in xns) {
+                    string strItem = xn.InnerText;
+                    if (string.IsNullOrEmpty(strItem)) throw new Exception($"Null item discovered in Race Research list for Race {Name}");
+                    BaseItemType? item = StaticData.GetItemTypeByName(strItem);
+                    if (item == null) throw new Exception($"Unknown item {strItem} discovered in Race Research list for Race {Name}");
+                    if (Researched.Contains(item)) throw new Exception($"Repeated item {strItem} discovered in Race Research list for Race {Name}");
+                    Researched.Add(item);
+                }
+            }
         }
 
         public void SetHomePlanet(Planet pl) {
@@ -161,6 +179,7 @@ namespace SpaceMercs {
             Known = false;
             Systems.Clear();
             Colonies.Clear();
+            Researched.Clear();
         }
 
         public GenderType GenerateRandomGender(Random rand) {
@@ -217,6 +236,10 @@ namespace SpaceMercs {
                 }
             }
             return stBest;
+        }
+
+        public bool HasResearched(BaseItemType tp) {
+            return Researched.Contains(tp);
         }
     }
 }

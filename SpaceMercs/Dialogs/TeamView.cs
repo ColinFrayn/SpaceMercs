@@ -415,13 +415,13 @@ namespace SpaceMercs.Dialogs {
         private void lbInventory_DoubleClick(object sender, EventArgs e) {
             IItem? it = SelectedItem();
             if (it is null) return;
-            MessageBox.Show(it.Desc);
+            MessageBox.Show(it.Description);
         }
 
         private void lbEquipped_DoubleClick(object sender, EventArgs e) {
             IItem? it = SelectedItem();
             if (it is null) return;
-            MessageBox.Show(it.Desc);
+            MessageBox.Show(it.Description);
         }
 
         private void btColour_Click(object sender, EventArgs e) {

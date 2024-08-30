@@ -80,7 +80,7 @@ namespace SpaceMercs.Dialogs {
                 arrRow[2] = thisItem.Mass.ToString("N2") + "kg";
                 Race playerRace = StaticData.Races[0];
                 if (thisItem.RequiredRace != null && thisItem.RequiredRace != playerRace) return;
-                if (playerRace.Population < thisItem.CivSize) return;
+                if (!thisItem.CanBuild(playerRace)) return;
 
                 // How many can we build?
                 int count = 999;
@@ -433,7 +433,7 @@ namespace SpaceMercs.Dialogs {
         private void dgConstruct_DoubleClick(object sender, EventArgs e) {
             if (dgConstruct.SelectedRows.Count != 1) return;
             if (dgConstruct.SelectedRows[0].Tag is not ItemType it) return;
-            string desc = $"{it.Name}\n{it.Desc}\n\nMaterials Required:\n";
+            string desc = $"{it.Name}\n{it.Description}\n\nMaterials Required:\n";
             foreach (MaterialType mat in it.Materials.Keys) {
                 int req = it.Materials[mat];
                 desc += $"{mat.Name} * {req}\n";
@@ -444,7 +444,7 @@ namespace SpaceMercs.Dialogs {
             if (dgInventory.SelectedRows.Count != 1) return;
             Tuple<Soldier, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier, IItem, bool>;
             if (tp is null || tp.Item2 is null) return;
-            MessageBox.Show(this, tp.Item2.Desc);
+            MessageBox.Show(this, tp.Item2.Description);
         }
     }
 }

@@ -3,10 +3,17 @@ ToDo List
 -------------------------------------------------
 
 Need a different way to control the gain of new tech
-- Pop + number of contacted civs / total relations with other civs? + num systems
-- Make a new utility method for this
+* Set Requirements on the relevant items to replace CivSize
+- What can other Races build? When do they do research?
+- Do we also gate Materials behind requirements? Currently they require CivSize
+- MapView.CheckPopulationGrowth() : Announce newly available tech here once BaseRequirements are met
+- Create a research dialog in the ship view screen
+-- Show everything manageable at current level of Relations, character level, nPop, nSys, facilities available
+--- Greyed out if other requirements not met (Cash cost and materials)
+-- Research takes time, cost, materials.
+-- Success chance related to player skill levels compared to requirements
 
-Material should give other bonuses to armour like Voidskin -> Stealth [TEST]
+Voidskin should give bonus stealth to armour [TEST]
 
 
 ==========================================================================================================

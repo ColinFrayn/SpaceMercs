@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using System.Xml;
+using static SpaceMercs.Colony;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public static class StaticData {
@@ -255,6 +258,13 @@ namespace SpaceMercs {
             foreach (WeaponMod wm in WeaponMods) {
                 if (wm.Name.Equals(strName)) return wm;
             }
+            return null;
+        }
+        public static BaseItemType? GetBaseItemByName(string strName) {
+            if (GetItemTypeByName(strName) is BaseItemType it) return it;
+            if (GetWeaponTypeByName(strName) is BaseItemType wp) return wp;
+            if (GetArmourTypeByName(strName) is BaseItemType ar) return ar;
+            if (GetShipEquipmentByName(strName) is BaseItemType se) return se;
             return null;
         }
 

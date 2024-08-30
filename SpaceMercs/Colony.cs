@@ -327,9 +327,7 @@ namespace SpaceMercs {
             int civSize = Owner.Population;
 
             // Add specific utility items
-            foreach (ItemType eq in StaticData.ItemTypes) {
-                if (eq.RequiredRace != null && eq.RequiredRace != Owner) continue;
-                if (eq.CivSize > civSize) continue;
+            foreach (ItemType eq in StaticData.ItemTypes.Where(it => it.CanBuild(Owner))) {
                 double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                 // Modify rarity by colony details & add this item if required
                 if (!HasBaseType(BaseType.Military)) rarity /= 2.0;
@@ -340,10 +338,8 @@ namespace SpaceMercs {
             }
 
             // Now add all weapons
-            foreach (WeaponType wt in StaticData.WeaponTypes) {
+            foreach (WeaponType wt in StaticData.WeaponTypes.Where(it => it.CanBuild(Owner))) {
                 if (!wt.IsUsable) continue;
-                if (wt.RequiredRace != null && wt.RequiredRace != Owner) continue;
-                if (wt.CivSize > civSize) continue;
                 for (int Level = 0; Level < 4; Level++) {
                     Weapon wp = new Weapon(wt, Level);
                     double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
@@ -357,14 +353,10 @@ namespace SpaceMercs {
             }
 
             // Now add all armour types
-            foreach (ArmourType atp in StaticData.ArmourTypes) {
-                if (atp.RequiredRace != null && atp.RequiredRace != Owner) continue;
-                if (atp.CivSize > civSize) continue;
+            foreach (ArmourType atp in StaticData.ArmourTypes.Where(it => it.CanBuild(Owner))) {
                 foreach (MaterialType mat in StaticData.Materials) {
                     if (!mat.IsArmourMaterial) continue;
-                    if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
                     if (mat.IsScavenged) continue;
-                    if (mat.CivSize > civSize) continue;
                     for (int Level = 0; Level < 4; Level++) {
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;

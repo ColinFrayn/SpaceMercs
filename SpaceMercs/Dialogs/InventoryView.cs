@@ -85,7 +85,7 @@ namespace SpaceMercs.Dialogs {
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
             if (dgInventory.SelectedRows[0].Tag is IItem eq) {
-                MessageBox.Show(eq.Desc);
+                MessageBox.Show(eq.Description);
             }
         }
     }

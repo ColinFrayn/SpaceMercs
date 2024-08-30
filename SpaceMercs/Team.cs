@@ -394,5 +394,6 @@ namespace SpaceMercs {
             }
             throw new Exception("Unknown skill required in item construction: " + it.ToString());
         }
+        public int MaximumSoldierLevel => _Soldiers.Where(s => s.aoLocation == CurrentPosition)?.MaxBy(s => s.Level)?.Level ?? 0;
     }
 }

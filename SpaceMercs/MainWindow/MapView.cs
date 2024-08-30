@@ -737,30 +737,27 @@ namespace SpaceMercs.MainWindow {
 
             msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
             List<string> newTech = new List<string>();
-            foreach (MaterialType mat in StaticData.Materials) {
-                if (mat.CivSize > humanPop && mat.CivSize <= newHumanPop) newTech.Add($"Material: {mat.Name}");
-            }
-            foreach (WeaponType wp in StaticData.WeaponTypes) {
-                if (wp.CivSize > humanPop && wp.CivSize <= newHumanPop) newTech.Add($"Weapon: {wp.Name}");
-            }
-            foreach (ArmourType ar in StaticData.ArmourTypes) {
-                if (ar.CivSize > humanPop && ar.CivSize <= newHumanPop) newTech.Add($"Armour: {ar.Name}");
-            }
-            foreach (ItemType it in StaticData.ItemTypes) {
-                if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
-            }
-            foreach (ItemType it in StaticData.ItemTypes) {
-                if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
-            }
-            foreach (ShipWeapon sw in StaticData.ShipWeapons) {
-                if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Weapon: {sw.Name}");
-            }
-            foreach (ShipArmour sw in StaticData.ShipArmours) {
-                if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Armour: {sw.Name}");
-            }
-            foreach (ShipEngine se in StaticData.ShipEngines) {
-                if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Engine: {se.Name}");
-            }
+            //foreach (MaterialType mat in StaticData.Materials) {
+            //    if (mat.CivSize > humanPop && mat.CivSize <= newHumanPop) newTech.Add($"Material: {mat.Name}");
+            //}
+            //foreach (WeaponType wp in StaticData.WeaponTypes) {
+            //    if (wp.CivSize > humanPop && wp.CivSize <= newHumanPop) newTech.Add($"Weapon: {wp.Name}");
+            //}
+            //foreach (ArmourType ar in StaticData.ArmourTypes) {
+            //    if (ar.CivSize > humanPop && ar.CivSize <= newHumanPop) newTech.Add($"Armour: {ar.Name}");
+            //}
+            //foreach (ItemType it in StaticData.ItemTypes) {
+            //    if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
+            //}
+            //foreach (ShipWeapon sw in StaticData.ShipWeapons) {
+            //    if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Weapon: {sw.Name}");
+            //}
+            //foreach (ShipArmour sw in StaticData.ShipArmours) {
+            //    if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Armour: {sw.Name}");
+            //}
+            //foreach (ShipEngine se in StaticData.ShipEngines) {
+            //    if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Engine: {se.Name}");
+            //}
             if (newTech.Count > 0) {
                 msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
             }

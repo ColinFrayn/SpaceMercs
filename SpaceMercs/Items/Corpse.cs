@@ -7,7 +7,7 @@ namespace SpaceMercs {
         private readonly string? SoldierName;
         private readonly int Level;
         public string Name { get { return "Corpse of " + ((Type == null) ? SoldierName : Type.Name); } }
-        public string Desc { get { return Name; } }
+        public string Description { get { return Name; } }
         public double Mass { get { return (Type == null) ? 60.0 : Type.Scale * Type.Scale * Type.Scale * 60.0; } }
         public double Cost { get { return 0.0; } }
 

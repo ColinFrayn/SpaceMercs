@@ -196,7 +196,7 @@
   <ItemType Name="Poison Grenade">
     <Mass>0.4</Mass>
     <Cost>12</Cost>
-    <Rarity>6</Rarity>
+    <Rarity>10</Rarity>
     <CivSize>20</CivSize>
     <Desc>A grenade which distributes a highly poisonous gas</Desc>
     <ItemEffect Name="Grenade">
@@ -223,9 +223,9 @@
   <ItemType Name="Tar Grenade">
     <Mass>0.6</Mass>
     <Cost>10</Cost>
-    <Rarity>9</Rarity>
+    <Rarity>10</Rarity>
     <CivSize>18</CivSize>
-    <Desc>A grenade which distributes a sticky substance, slowing down all it touches</Desc>
+    <Desc>A grenade which distributes a sticky substance, slowing down all creatures in its area of effect.</Desc>
     <ItemEffect Name="TarGrenade">
       <SingleUse/>
       <Radius>2.0</Radius>
@@ -253,9 +253,9 @@
   <ItemType Name="Acid Grenade">
     <Mass>0.4</Mass>
     <Cost>12</Cost>
-    <Rarity>10</Rarity>
+    <Rarity>13</Rarity>
     <CivSize>25</CivSize>
-    <Desc>A grenade which distributes a highly corrosive substance, damaging an enemy's armour.</Desc>
+    <Desc>A grenade which distributes a highly corrosive substance, damaging them and reducing their armour.</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
       <Radius>2.0</Radius>
@@ -281,7 +281,7 @@
   <ItemType Name="Plasma Grenade">
     <Mass>0.4</Mass>
     <Cost>22</Cost>
-    <Rarity>12</Rarity>
+    <Rarity>20</Rarity>
     <Desc>A highly deadly grenade which fires charged plasma in a small radius</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
@@ -306,7 +306,7 @@
   </ItemType>
   <ItemType Name="Antimatter Grenade">
     <Mass>0.4</Mass>
-    <Cost>20</Cost>
+    <Cost>25</Cost>
     <Rarity>30</Rarity>
     <Desc>A technologically advanced killing tool which uses energy release from antimatter reactions to devastate enemies.</Desc>
     <ItemEffect Name="Grenade">
@@ -317,7 +317,7 @@
         <Damage Type="Physical">15</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">15</Damage>
+        <Damage Type="Fire">20</Damage>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>
@@ -336,7 +336,7 @@
     <Cost>16</Cost>
     <Rarity>25</Rarity>
     <CivSize>27</CivSize>
-    <Desc>A grenade which sends out a crippling sonic pulse to all nearby targets.</Desc>
+    <Desc>A grenade which sends out a crippling sonic pulse to all nearby targets, reducing their stamina for some time.</Desc>
     <ItemEffect Name="SonicPulse">
       <SingleUse/>
       <Radius>2.0</Radius>
@@ -347,7 +347,7 @@
       <Effect Name="Stunned">
         <Duration>4</Duration>
         <StatMods>
-          <Mod Stat="Stamina">-5</Mod>
+          <Mod Stat="Stamina">-6</Mod>
         </StatMods>
         <SpeedMod>0.5</SpeedMod>
       </Effect>
@@ -363,7 +363,7 @@
   </ItemType>
   <ItemType Name="Quantum Medikit">
     <Mass>0.4</Mass>
-    <Cost>50</Cost>
+    <Cost>75</Cost>
     <Rarity>16</Rarity>
     <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
     <Race>Grey</Race>

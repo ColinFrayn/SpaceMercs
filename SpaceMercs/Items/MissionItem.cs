@@ -4,7 +4,7 @@ using System.Xml;
 namespace SpaceMercs {
     public class MissionItem : IItem {
         public string Name { get; private set; }
-        public string Desc { get { return Name; } }
+        public string Description { get { return Name; } }
         public double Mass { get; private set; }
         public double Cost { get; private set; }
         public void SaveToFile(StreamWriter file) {

@@ -8,10 +8,10 @@ namespace SpaceMercs {
         public string Name { get { return Material.Name + " " + Type.Name + " [" + Utils.LevelToDescription(Level) + "]"; } }
         public double Mass { get { return MassAtLevel(Level); } }
         public double Cost { get { return CalculateCost(Level); } }
-        public string Desc {
+        public string Description {
             get {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(Type.Desc);
+                sb.AppendLine(Type.Description);
                 sb.AppendLine("Quality : " + Utils.LevelToDescription(Level));
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 sb.AppendLine("Material : " + Material.Name);
@@ -167,7 +167,7 @@ namespace SpaceMercs {
             else { // Upgrade type, if possible
                 ArmourType atnew = Type;
                 foreach (ArmourType at2 in StaticData.ArmourTypes) {
-                    if (rc is not null && rc.Population < at2.CivSize) continue;
+                    if (!at2.CanBuild(rc)) continue;
                     if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && (atnew == Type || at2.Cost < atnew.Cost)) {
                         atnew = at2;
                     }

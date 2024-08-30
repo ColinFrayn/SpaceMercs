@@ -1,21 +1,15 @@
 ﻿using System.Xml;
 
 namespace SpaceMercs {
-    public class ShipEquipment {
-        public string Name { get; private set; }
-        public double Cost { get; private set; } // Cost per unit ship size
+    public class ShipEquipment : BaseItemType {
         public int Defence { get; private set; } // Modifier (additive)
         public int Attack { get; private set; } // Modifier (additive)
         public int Shield { get; private set; } // Modifier (additive)
         public int Power { get; private set; } // Power requirement
         public int Generate { get; private set; } // Power generation capability
         public bool Scanner { get; private set; }  // Can scan surfaces of terrestrial planets for missions
-        public string Description { get; private set; }
         public RoomSize Size { get; private set; }
         public Colony.BaseType Available { get; private set; }
-        public int TextureX { get; private set; }
-        public int TextureY { get; private set; }
-        public Race? RequiredRace { get; private set; }
         public int Capacity { get; private set; } // How many soldiers can it support? 
         public bool Medlab { get; private set; }
         public bool Armoury { get; private set; }
@@ -23,21 +17,13 @@ namespace SpaceMercs {
         public int Repair { get; private set; }
         public bool Engineering { get; private set; }
         public bool BuildColony { get; private set; }
-        public int CivSize { get; private set; }
         public enum RoomSize { Weapon, Small, Medium, Large, Core, Engine, Armour };
+        public enum RoomAbilities { Medlab, Armoury, Workshop, Engineering };
 
         public ShipEquipment(XmlNode xml) : this(xml, ShipEquipment.RoomSize.Small) {
             // Nothing to see
         }
-        public ShipEquipment(XmlNode xml, RoomSize sz = RoomSize.Small) {
-            Name = xml.GetAttributeText("Name");
-            Cost = xml.SelectNodeDouble("Cost");
-            Description = xml.SelectNodeText("Desc");
-            string strTex = xml.SelectNodeText("Tex");
-            string[] TexBits = strTex.Split(',');
-            TextureX = int.Parse(TexBits[0]) - 1;
-            TextureY = int.Parse(TexBits[1]) - 1;
-
+        public ShipEquipment(XmlNode xml, RoomSize sz = RoomSize.Small) : base(xml) {
             // Optional stuff
             if (xml.SelectSingleNode("Size") != null) {
                 string strSize = xml.SelectNodeText("Size");
@@ -57,7 +43,6 @@ namespace SpaceMercs {
             Repair = xml.SelectNodeInt("Repair", 0);
             Engineering = (xml.SelectSingleNode("Engineering") != null);
             BuildColony = (xml.SelectSingleNode("BuildColony") != null);
-            CivSize = xml.SelectNodeInt("CivSize", 5);
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.
             if (xml.SelectSingleNode("Avail") != null) {
@@ -71,14 +56,6 @@ namespace SpaceMercs {
                 if (strAvail.Contains("O")) Available |= Colony.BaseType.Outpost;
             }
             else Available = Colony.BaseType.Outpost | Colony.BaseType.Colony | Colony.BaseType.Metropolis | Colony.BaseType.Military | Colony.BaseType.Research | Colony.BaseType.Trading;
-
-            // Load the race that this equipment is restricted to (default null), or otherwise fail
-            if (xml.SelectSingleNode("Race") != null) {
-                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
-                if (RequiredRace == null) {
-                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
-                }
-            }
         }
 
         // Conversion utility
@@ -114,6 +91,5 @@ namespace SpaceMercs {
             if (BuildColony) strList.Add("Ability: Colonise");
             return strList;
         }
-
     }
 }
