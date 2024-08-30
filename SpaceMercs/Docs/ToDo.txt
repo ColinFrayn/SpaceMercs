@@ -4,17 +4,17 @@ ToDo List
 
 Need a different way to control the gain of new tech
 * Set Requirements on the relevant items to replace CivSize
-- What can other Races build? When do they do research?
-- Do we also gate Materials behind requirements? Currently they require CivSize
+- What can other Races build? When do they do research? Needs to be random to some extent.
+-- How to handle race relations?? Get themselves automatically. How to do the others? Maybe they don't?
+- Gate Materials behind requirements? Currently they require CivSize
 - MapView.CheckPopulationGrowth() : Announce newly available tech here once BaseRequirements are met
+
+Research Dialog
 - Create a research dialog in the ship view screen
 -- Show everything manageable at current level of Relations, character level, nPop, nSys, facilities available
 --- Greyed out if other requirements not met (Cash cost and materials)
 -- Research takes time, cost, materials.
 -- Success chance related to player skill levels compared to requirements
-
-Voidskin should give bonus stealth to armour [TEST]
-
 
 ==========================================================================================================
 
@@ -22,6 +22,8 @@ Voidskin should give bonus stealth to armour [TEST]
 ---------------------
 Backburner : Features
 ---------------------
+
+Ranged weapons for e.g. shadow beasts, void beasts (such as psychic weapons, void lance, ... ?)
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?

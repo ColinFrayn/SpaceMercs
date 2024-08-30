@@ -33,8 +33,10 @@ namespace SpaceMercs {
                     if (Type.Speed > 1.0) sb.AppendLine($"Speed : +{((Type.Speed - 1.0) * 100).ToString("0")}%");
                     else sb.AppendLine($"Speed : -{((1.0 - Type.Speed) * 100).ToString("0")}%");
                 }
-                foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {
-                    sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
+                ICollection<Soldier.UtilitySkill> allSkillBoosts = Type.SkillBoosts.Keys.Union(Material.SkillBoosts.Keys).ToList();
+                foreach (Soldier.UtilitySkill sk in allSkillBoosts) {
+                    int val = GetUtilitySkill(sk);
+                    sb.AppendLine(sk.ToString() + " : +" + val);
                 }
                 return sb.ToString();
             }

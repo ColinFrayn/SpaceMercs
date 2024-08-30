@@ -17,10 +17,10 @@
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="100"/>
+      <Resistance Type="Acid" Value="20"/>
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Electrical" Value="120"/>
-    </Resistances>
+    </Resistances>    
   </CreatureType>
   <CreatureType Name="Shadow Beast">
     <LevelRange>6,13</LevelRange>
@@ -35,15 +35,18 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A shadowy beast with deep, fiery red eyes</Desc>
+    <Desc>A large shadowy beast with deep, fiery red eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="100"/>
+      <Resistance Type="Acid" Value="20"/>
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Electrical" Value="120"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.6">Shadowskin</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Shadow Alpha">
     <LevelRange>7,14</LevelRange>
@@ -57,15 +60,18 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A shadowy beast with deep, fiery red eyes</Desc>
+    <Desc>A huge shadowy beast with deep, fiery red eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="100"/>
+      <Resistance Type="Acid" Value="20"/>
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Electrical" Value="120"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="2.0">Shadowskin</Item>
+    </Scavenge>
     <Boss/>
   </CreatureType>
 </Data>

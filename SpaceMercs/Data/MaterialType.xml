@@ -221,25 +221,34 @@
     <Scavenged/>
     <BonusArmour>
       <Bonus Type="Acid" Amount="1"/>
-      <Bonus Type="Fire" Amount="4"/>
-      <Bonus Type="Cold" Amount="4"/>
+      <Bonus Type="Fire" Amount="1"/>
+      <Bonus Type="Cold" Amount="1"/>
+    </BonusArmour>
+    <Desc>Voidskin is fashioned from the hide of extremely rare void creatures. It is highly resistant and lightweight.</Desc>
+  </MaterialType>
+  <MaterialType Name="Shadowskin">
+    <MassMod>0.75</MassMod>
+    <ItemCost>10</ItemCost>
+    <ArmourMod>1.2</ArmourMod>
+    <Rarity>0.001</Rarity>
+    <Scavenged/>
+    <BonusArmour>
+      <Bonus Type="Electrical" Amount="5"/>
     </BonusArmour>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
-    <Desc>Voidskin is fashioned from the hide of rare void creatures. It is highly resistant and light, and also blends in with the shadows.</Desc>
+    <Desc>Shadowskin is a light and strong material fashioned from the hide of extremely rare shadow creatures. It oozes darkness.</Desc>
   </MaterialType>
   <MaterialType Name="Nanosilk">
     <MassMod>0.6</MassMod>
     <ItemCost>1.5</ItemCost>
     <ArmourMod>1.0</ArmourMod>
-    <Rarity>0.002</Rarity>
+    <Rarity>0.003</Rarity>
     <Scavenged/>
-    <BonusArmour>
-      <Bonus Type="Poison" Amount="2"/>
-    </BonusArmour>
     <Desc>Nanosilk is an extremely strong thread woven by rare species of giant spiders.</Desc>
   </MaterialType>
+  <!-- Other scavenged materials which are components for constructing items -->
   <MaterialType Name="Acid Blood">
     <ItemCost>5.0</ItemCost>
     <Rarity>0.002</Rarity>

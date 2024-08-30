@@ -51,7 +51,12 @@ namespace SpaceMercs.Items {
         public bool MeetsRequirements(Race race) {
             if (race.SystemCount < MinSystems) return false;
             if (race.Population < MinPop) return false;
-            return true;
+
+            // Race relations: Player race passes automatically, because we test this properly elsewhere
+            if (race == StaticData.Races[0]) return true;
+
+            // If this isn't the player race then only pass if the requirements don't include any race other than this one.
+            return (RequiredRaceRelations.Count == 0 || (RequiredRaceRelations.Count == 1 && RequiredRaceRelations.ContainsKey(race)));
         }
 
         // The player team & player race : Can they actually initiate research?
