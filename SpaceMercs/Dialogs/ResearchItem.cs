@@ -7,15 +7,18 @@ namespace SpaceMercs.Dialogs {
         private BaseItemType _typeToResearch;
         private int iProgress = 0;
         private double durationSeconds = 0d;
+        private bool configuring = false;
 
         public ResearchItem(Team team) {
             _playerTeam = team;
+            configuring = true;
             InitializeComponent();
             clockTick = new Timer();
             clockTick.Tick += new EventHandler(UpdateResearchProgress);
             clockTick.Interval = 250;
             btResearch.Enabled = false;
             DisplayAvailableResearch();
+            configuring = false;
         }
 
         private void StartResearch(BaseItemType item) {
@@ -23,12 +26,16 @@ namespace SpaceMercs.Dialogs {
             double cost = item.Requirements.CashCost;
             if (cost > _playerTeam.Cash) return;
             _playerTeam.Cash -= cost;
-            // TODO Remove Materials
+
+            foreach ((MaterialType mat, int count) in item.Requirements.RequiredMaterials) {
+                _playerTeam.RemoveMaterial(mat, count);
+            }
+
             pbResearch.Value = 0;
             pbResearch.Visible = true;
             btResearch.Text = "Researching...";
             btResearch.Enabled = false;
-            durationSeconds = item.Requirements.Duration;
+            durationSeconds = item.Requirements.Duration * Const.SecondsPerDay;
             _typeToResearch = item;
             clockTick.Start();
         }
@@ -45,44 +52,67 @@ namespace SpaceMercs.Dialogs {
             pbResearch.Visible = false;
             if (_typeToResearch is null) throw new Exception("Found a null item to research!");
             StaticData.Races[0].CompleteResearch(_typeToResearch);
-            // Announce it?
-            // TODO
             DisplayAvailableResearch();
         }
         private void DisplayAvailableResearch() {
+            configuring = true;
             pbResearch.Visible = false;
             btResearch.Text = "Research";
             btResearch.Enabled = false;
             dgResearchItems.Visible = true;
             dgResearchItems.Rows.Clear();
+            dgResearchItems.ClearSelection();
             string[] arrRowDest = new string[5];
             foreach (BaseItemType it in _playerTeam.ResearchableItems) {
                 if (it.Requirements is null) continue; // Should never happen
                 arrRowDest[0] = it.Name;
                 double cost = it.Requirements.CashCost;
                 double durationDays = it.Requirements.Duration;
-                arrRowDest[1] = "<materials>"; // TODO
+                bool hasMats = true;
+                foreach (KeyValuePair<MaterialType, int> kvp in it.Requirements.RequiredMaterials) {
+                    if (_playerTeam.CountMaterial(kvp.Key) < kvp.Value) hasMats = false;
+                }
+                arrRowDest[1] = it.Requirements.RequiredMaterials.Count() == 0 ? "-" : (hasMats ? "OK" : "<missing>");
                 arrRowDest[2] = $"{Math.Round(cost, 2)}cr";
                 arrRowDest[3] = $"{Math.Round(durationDays, 2)}d";
                 dgResearchItems.Rows.Add(arrRowDest);
-                dgResearchItems.Rows[dgResearchItems.Rows.Count - 1].Tag = it;
+                var row = dgResearchItems.Rows[dgResearchItems.Rows.Count - 1];
+                row.Tag = it;
+                // If this row can be researched then set it bold, otherwise not
+                if (it.Requirements.MeetsRequirements(_playerTeam)) {
+                    row.DefaultCellStyle.Font = new Font(dgResearchItems.DefaultCellStyle.Font, FontStyle.Bold);
+                }
+                else {
+                    row.DefaultCellStyle.Font = new Font(dgResearchItems.DefaultCellStyle.Font, FontStyle.Italic);
+                }
             }
-            dgResearchItems.ClearSelection();
+            configuring = false;
         }
 
-        // Travel, if possible
+        // Perform research, if possible
         private void btResearch_Click(object sender, EventArgs e) {
+            if (configuring) return;
             if (dgResearchItems.SelectedRows.Count != 1) return;
             BaseItemType item = dgResearchItems.SelectedRows[0].Tag as BaseItemType ?? throw new Exception("Tech could not be found to research");
             StartResearch(item);
         }
 
         private void dgResearchItems_SelectionChanged(object sender, EventArgs e) {
-            if (dgResearchItems.SelectedRows.Count == 1) {
-                BaseItemType item = dgResearchItems.SelectedRows[0].Tag as BaseItemType ?? throw new Exception("Tech could not be found to research");
-                btResearch.Enabled = item.Requirements?.MeetsRequirements(_playerTeam) == true;
+            if (!configuring && dgResearchItems.SelectedRows.Count == 1) {
+                if (dgResearchItems.SelectedRows[0].Tag is BaseItemType item) {
+                    btResearch.Enabled = item.Requirements?.MeetsRequirements(_playerTeam) == true;
+                }
             }
             else btResearch.Enabled = false;
+        }
+
+        private void dgResearchItems_DoubleClick(object sender, EventArgs e) {
+            if (configuring) return;
+            if (dgResearchItems.SelectedRows.Count != 1) return;
+            if (dgResearchItems.SelectedRows[0].Tag is BaseItemType item) {
+                string desc = $"{item.Name}\n{item.Description}\nRequirements:\n{item.Requirements?.Description}";
+                MessageBox.Show(this, desc);
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ namespace SpaceMercs.Items {
         private readonly int MinSystems;
         private readonly int MinPop;
         public int CashCost { get; private set; }
-        private readonly IDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
-        private readonly IDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
-        private readonly ICollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
+        public readonly IReadOnlyDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
+        public readonly IReadOnlyDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
+        public readonly IReadOnlyCollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
 
         public Requirements(XmlNode xml) {
             MinLevel = xml.SelectNodeInt("MinLevel", 1);
@@ -18,6 +18,7 @@ namespace SpaceMercs.Items {
             CashCost = xml.SelectNodeInt("CashCost", 0);
 
             // This item is restricted unless the player race has relations this good or better with the specified race(s)
+            Dictionary<Race, int> tempRelDict = new Dictionary<Race, int>();
             foreach (XmlNode xn in xml.SelectNodesToList("Relations")) {
                 string strName = xn.Attributes!["Name"]?.InnerText ?? "Missing";
                 Race? requiredRace = StaticData.GetRaceByName(strName);
@@ -25,10 +26,12 @@ namespace SpaceMercs.Items {
                     throw new Exception($"Could not find required race \"{strName}\"");
                 }
                 int iVal = int.Parse(xn.InnerText);
-                RequiredRaceRelations.Add(requiredRace, iVal);
+                tempRelDict.Add(requiredRace, iVal);
             }
+            RequiredRaceRelations = new Dictionary<Race, int>(tempRelDict);
 
             // This item is restricted unless the player owns the following materials
+            Dictionary<MaterialType, int> tempMatDict = new Dictionary<MaterialType, int>();
             foreach (XmlNode xn in xml.SelectNodesToList("Material")) {
                 string strName = xn.Attributes!["Name"]?.InnerText ?? "Missing";
                 MaterialType? requiredMaterial = StaticData.GetMaterialTypeByName(strName);
@@ -36,15 +39,18 @@ namespace SpaceMercs.Items {
                     throw new Exception($"Could not find required material \"{strName}\"");
                 }
                 int iVal = int.Parse(xn.InnerText);
-                RequiredMaterials.Add(requiredMaterial, iVal);
+                tempMatDict.Add(requiredMaterial, iVal);
             }
+            RequiredMaterials = new Dictionary<MaterialType, int>(tempMatDict);
 
             // Room facilities required to research this
+            HashSet<RoomAbilities> hsTemp = new HashSet<RoomAbilities>();
             foreach (XmlNode xn in xml.SelectNodesToList("Facility")) {
                 RoomAbilities ab = (RoomAbilities)Enum.Parse(typeof(RoomAbilities), xn.InnerText);
                 if (RequiredFacilities.Contains(ab)) throw new Exception("Duplicate room facility requirement");
-                RequiredFacilities.Add(ab);
+                hsTemp.Add(ab);
             }
+            RequiredFacilities = new HashSet<RoomAbilities>(hsTemp);
         }
 
         // Any race : Have they expanded enough to research this?
@@ -108,6 +114,22 @@ namespace SpaceMercs.Items {
                 dur += RequiredRaceRelations.Count * 5.0;
                 dur += RequiredMaterials.Count * 1.0;
                 return dur;
+            }
+        }
+
+        public string Description {
+            get {
+                string str = $"Min Level = {MinLevel}\nMin Systems = {MinSystems}\nMin Population = {MinPop}\n";
+                foreach (Race rc in RequiredRaceRelations.Keys) {
+                    str += $"Relations with {rc.Name} >= {Utils.RelationsToString(RequiredRaceRelations[rc])}\n";
+                }
+                foreach (RoomAbilities ab in RequiredFacilities) {
+                    str += $"Requires Ship Facility: {ab}\n";
+                }
+                foreach (MaterialType mat in RequiredMaterials.Keys) {
+                    str += $"Materials: {mat.Name} * {RequiredMaterials[mat]}\n";
+                }
+                return str;
             }
         }
     }

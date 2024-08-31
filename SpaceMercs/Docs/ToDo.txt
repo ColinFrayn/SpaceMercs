@@ -2,14 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Research Dialog (maybe copy Gate??)
-- ResearchItem dialog:
--- Items should be greyed out if other requirements not met (Cash cost and materials)
--- Should display any partner races
--- Should display facilities required
--- Remove materials from team once research is completed
-
 Materials also should have Requirements. Currently they require only CivSize.
+
+Level up (post mission) -> new research available announcement? in MapView(Mission).CeaseMission ??
+- Need to store the state before the mission.
 
 ==========================================================================================================
 
@@ -17,8 +13,6 @@ Materials also should have Requirements. Currently they require only CivSize.
 ---------------------
 Backburner : Features
 ---------------------
-
-Level up (post mission) -> new research available announcement? in MapView(Mission).CeaseMission ??
 
 Ranged weapons for e.g. shadow beasts, void beasts (such as psychic weapons, void lance, ... ?)
 

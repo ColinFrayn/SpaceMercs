@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>04/06/2167 21:19:10</Clock>
+<Clock>04/06/2167 21:19:25</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -13964,7 +13964,7 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>411.1997080984301</Cash>
+ <Cash>343.6997080984301</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="9" Y="10"/>
@@ -14134,6 +14134,7 @@
  <Eqp ID="0" Active="True">Fission Core</Eqp>
  <Eqp ID="13" Active="True">NearLight Drive</Eqp>
  <Eqp ID="8" Active="True">Bunk Room</Eqp>
+ <Eqp ID="6" Active="True">Armoury</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
@@ -14200,30 +14201,44 @@
 <HomePlanet>(0,0)5.0</HomePlanet>
 <LastExpand>683004983885350825</LastExpand>
 <Known/>
+<Research>
+</Research>
 </Race>
 <Race Name="Gokan">
 <HomePlanet>(1,-1)12.0</HomePlanet>
 <LastExpand>683518002423793170</LastExpand>
+<Research>
+</Research>
 </Race>
 <Race Name="Elithiri">
 <HomePlanet>(-1,1)6.1</HomePlanet>
 <LastExpand>683503727888891880</LastExpand>
+<Research>
+</Research>
 </Race>
 <Race Name="Ogrish">
 <HomePlanet>(0,1)10.1</HomePlanet>
 <LastExpand>683614665323788447</LastExpand>
+<Research>
+</Research>
 </Race>
 <Race Name="Insectoid">
 <HomePlanet>(-1,-1)10.2</HomePlanet>
 <LastExpand>683652814388177343</LastExpand>
+<Research>
+</Research>
 </Race>
 <Race Name="Grey">
 <HomePlanet>(-1,0)5.3</HomePlanet>
 <LastExpand>683600953435495530</LastExpand>
+<Research>
+</Research>
 </Race>
 <Race Name="Ursalon">
 <HomePlanet>(0,-1)10.1</HomePlanet>
 <LastExpand>683636647522028207</LastExpand>
+<Research>
+</Research>
 </Race>
 </Races>
 </SpaceMercsSaveFile>
