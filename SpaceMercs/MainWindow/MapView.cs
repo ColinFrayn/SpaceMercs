@@ -724,42 +724,35 @@ namespace SpaceMercs.MainWindow {
         }
 
         private void CheckPopulationGrowth(double tDiff) {
-            // Go through all races and check colonies for growth.
-            // If human population grows then announce it, and any newly available techs
-            int humanPop = StaticData.Races[0].Population;
+            // tDiff in fraction of a year
+            Race humanRace = StaticData.Races[0];
+            int oldHumanPop = humanRace.Population;
+
+            // Get all currently unresearchable techs
+            HashSet<BaseItemType> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
+
+            // Go through all races and check colonies for growth. etc.
             foreach (Race rc in StaticData.Races) {
                 if (!rc.IsPlayer) rc.CheckForNewColonySystems(msgBox);
                 rc.CheckGrowthForAllColonies();
                 rc.CheckColonySeeds(msgBox, tDiff);
+                rc.CheckResearch(tDiff);
             }
-            int newHumanPop = StaticData.Races[0].Population;
-            if (newHumanPop == humanPop) return;
 
-            msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
-            List<string> newTech = new List<string>();
-            //foreach (MaterialType mat in StaticData.Materials) {
-            //    if (mat.CivSize > humanPop && mat.CivSize <= newHumanPop) newTech.Add($"Material: {mat.Name}");
-            //}
-            //foreach (WeaponType wp in StaticData.WeaponTypes) {
-            //    if (wp.CivSize > humanPop && wp.CivSize <= newHumanPop) newTech.Add($"Weapon: {wp.Name}");
-            //}
-            //foreach (ArmourType ar in StaticData.ArmourTypes) {
-            //    if (ar.CivSize > humanPop && ar.CivSize <= newHumanPop) newTech.Add($"Armour: {ar.Name}");
-            //}
-            //foreach (ItemType it in StaticData.ItemTypes) {
-            //    if (it.CivSize > humanPop && it.CivSize <= newHumanPop) newTech.Add($"Item: {it.Name}");
-            //}
-            //foreach (ShipWeapon sw in StaticData.ShipWeapons) {
-            //    if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Weapon: {sw.Name}");
-            //}
-            //foreach (ShipArmour sw in StaticData.ShipArmours) {
-            //    if (sw.CivSize > humanPop && sw.CivSize <= newHumanPop) newTech.Add($"Ship Armour: {sw.Name}");
-            //}
-            //foreach (ShipEngine se in StaticData.ShipEngines) {
-            //    if (se.CivSize > humanPop && se.CivSize <= newHumanPop) newTech.Add($"Ship Engine: {se.Name}");
-            //}
-            if (newTech.Count > 0) {
-                msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new equipment is now available:\n{String.Join("\n",newTech)}");
+            // Announce pop growth
+            int newHumanPop = humanRace.Population;
+            if (newHumanPop != oldHumanPop) {
+                msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
+            }
+
+            // See if we can now research any of the previously unresearchable techs. If so then announce it.
+            IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam.UnresearchableItems);
+
+            // Maybe add in materials here?
+            // TODO
+
+            if (newResearchable.Any()) {
+                msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}");
             }
         }
         #endregion // Clock Tick

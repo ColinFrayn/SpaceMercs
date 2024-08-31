@@ -3,13 +3,13 @@ using static SpaceMercs.ShipEquipment;
 
 namespace SpaceMercs.Items {
     public class Requirements {
-        readonly int MinLevel;
-        readonly int MinSystems;
-        readonly int MinPop;
-        readonly int CashCost;
-        readonly IDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
-        readonly IDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
-        readonly ICollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
+        private readonly int MinLevel;
+        private readonly int MinSystems;
+        private readonly int MinPop;
+        private readonly int CashCost;
+        private readonly IDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
+        private readonly IDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
+        private readonly ICollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
 
         public Requirements(XmlNode xml) {
             MinLevel = xml.SelectNodeInt("MinLevel", 1);
@@ -56,7 +56,8 @@ namespace SpaceMercs.Items {
             if (race == StaticData.Races[0]) return true;
 
             // If this isn't the player race then only pass if the requirements don't include any race other than this one.
-            return (RequiredRaceRelations.Count == 0 || (RequiredRaceRelations.Count == 1 && RequiredRaceRelations.ContainsKey(race)));
+            return RequiredRaceRelations.Count == 0 ||
+                (RequiredRaceRelations.Count == 1 && RequiredRaceRelations.ContainsKey(race));
         }
 
         // The player team & player race : Can they actually initiate research?
@@ -79,6 +80,7 @@ namespace SpaceMercs.Items {
         // i.e. ignoring Cash and Material requirements
         public bool MeetsBasicRequirements(Team team) {
             foreach (Race rc in RequiredRaceRelations.Keys) {
+                if (!rc.Known) return false;
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
             if (team.MaximumSoldierLevel < MinLevel) return false;
@@ -86,6 +88,17 @@ namespace SpaceMercs.Items {
                 if (!team.PlayerShip.HasFacility(ra)) return false;
             }
             return MeetsRequirements(StaticData.Races[0]);
+        }
+
+        // How difficult is this (makes it harder for alien races to research it)
+        // 1.0 is base difficulty. Higher number is harder.
+        public double Difficulty {
+            get {
+                double diff = 0.9 + (MinLevel * MinLevel / 200d) + (MinSystems / 20d) + (MinPop / 100d);
+                diff += RequiredRaceRelations.Count / 10.0;
+                diff += RequiredMaterials.Count / 20.0;
+                return diff;
+            }
         }
     }
 }

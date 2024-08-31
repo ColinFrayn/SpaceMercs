@@ -65,7 +65,13 @@
     <Desc>An auto repair facility, that will repair your ship slowly over time</Desc>
     <Avail>EMR</Avail>
     <Tex>6,2</Tex>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>15</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Tinkering Chamber">
     <Size>M</Size>
@@ -95,7 +101,14 @@
     <Desc>A small shield generator, protecting your ship against damaging weapons.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
-    <CivSize>30</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>20</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Elithiri">1</Relations>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Shield System">
     <Cost>1750</Cost>
@@ -105,7 +118,14 @@
     <Desc>A larger shield generator, protecting your ship against damaging weapons.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
-    <CivSize>35</CivSize>
+    <Requirements>
+      <MinLevel>7</MinLevel>
+      <MinPop>35</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Elithiri">2</Relations>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Surface Scanner">
     <Cost>100</Cost>
@@ -123,7 +143,13 @@
     <BuildColony/>
     <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
-    <CivSize>20</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>10</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Tex>7,6</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Chameleon Device">
@@ -133,7 +159,13 @@
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
-    <CivSize>37</CivSize>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>37</MinPop>
+      <CashCost>30</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Tex>1,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Cloaking Device">
@@ -144,7 +176,9 @@
     <Race>Elithiri</Race>
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
-    <CivSize>38</CivSize>
+    <Requirements>
+      <MinPop>38</MinPop>
+    </Requirements>
     <Tex>2,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Targetting AI">
@@ -172,7 +206,13 @@
     <Desc>An advanced fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>10</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Fusion Core">
     <Size>C</Size>
@@ -181,7 +221,13 @@
     <Desc>A fusion-based power cor.e</Desc>
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
-    <CivSize>30</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>20</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Fusion Core">
     <Size>C</Size>
@@ -190,7 +236,13 @@
     <Desc>An advanced fusion-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
-    <CivSize>35</CivSize>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>35</MinPop>
+      <CashCost>30</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
@@ -199,7 +251,13 @@
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>5,1</Tex>
-    <CivSize>40</CivSize>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>40</MinPop>
+      <CashCost>40</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
@@ -208,7 +266,13 @@
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
-    <CivSize>50</CivSize>
+    <Requirements>
+      <MinLevel>12</MinLevel>
+      <MinPop>50</MinPop>
+      <CashCost>50</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipEquipment>
 </Data>
   

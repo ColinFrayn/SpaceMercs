@@ -65,6 +65,7 @@
     <Scavenge>
       <Item Amount="0.25">Chitin</Item>
       <Item Amount="0.25">Vulcanin</Item>
+      <Item Amount="0.1">Incendiary Bulb</Item>
     </Scavenge>
   </CreatureType>
   <CreatureType Name="Lava Spider">
@@ -89,6 +90,10 @@
       <Resistance Type="Fire" Value="25"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.15">Vulcanin</Item>
+      <Item Amount="0.1">Incendiary Bulb</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Fire Dragon">
     <Size>2</Size>
@@ -112,6 +117,7 @@
     </Resistances>
     <Scavenge>
       <Item Amount="2.5">Vulcanin</Item>
+      <Item Amount="1.0">Incendiary Bulb</Item>      
     </Scavenge>
     <Boss/>
   </CreatureType>

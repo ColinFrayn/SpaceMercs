@@ -40,7 +40,14 @@
     <Rarity>38</Rarity>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>15</CashCost>
+      <Material Name="Aluminium">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
@@ -58,7 +65,13 @@
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
-    <CivSize>18</CivSize>
+    <Requirements>
+      <MinLevel>2</MinLevel>
+      <MinPop>16</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Rare Earth Metals">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Desc>A military spec helmet with HUD and advanced detection technology.</Desc>
     <Utility>
       <Perception>2</Perception>
@@ -101,7 +114,16 @@
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Titanium" Amount="1"/>
     </Materials>
-    <CivSize>30</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>30</MinPop>
+      <CashCost>50</CashCost>
+      <Material Name="Crystals">4</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Elithiri">1</Relations>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Arm Plating">
     <Mass>2.0</Mass>
@@ -188,7 +210,16 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="1"/>
     </Materials>
-    <CivSize>30</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinSystems>2</MinSystems>
+      <MinPop>30</MinPop>
+      <CashCost>50</CashCost>
+      <Material Name="Crystals">4</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Elithiri">1</Relations>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
@@ -209,7 +240,14 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinSystems>2</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Aluminium">2</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Infiltration Suit">
     <Mass>8.0</Mass>
@@ -231,7 +269,15 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="3"/>
     </Materials>
-    <CivSize>32</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>32</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Rare Earth Metals">2</Material>
+      <Material Name="Industrial Chemicals">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Plate Boots">
     <Mass>1.0</Mass>
@@ -260,7 +306,14 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>15</CashCost>
+      <Material Name="Aluminium">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Plate Gauntlets">
     <Mass>0.8</Mass>
@@ -313,7 +366,14 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>15</CashCost>
+      <Material Name="Aluminium">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
   </ArmourType>
   <ArmourType Name="Power Armour">
     <Mass>30.0</Mass>
@@ -324,7 +384,16 @@
     <Speed>0.85</Speed>
     <Attack>2</Attack>
     <BaseArmour>38</BaseArmour>
-    <CivSize>26</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>26</MinPop>
+      <CashCost>40</CashCost>
+      <Material Name="Titanium">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Gokan">1</Relations>
+    </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
       <Bonus Type="Cold" Amount="30"/>
@@ -348,7 +417,16 @@
     <Attack>2</Attack>
     <Speed>0.7</Speed>
     <BaseArmour>50</BaseArmour>
-    <CivSize>32</CivSize>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>32</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Titanium">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Gokan">2</Relations>
+    </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="50"/>
       <Bonus Type="Cold" Amount="50"/>
@@ -372,7 +450,16 @@
     <Speed>1.1</Speed>
     <Attack>2</Attack>
     <BaseArmour>34</BaseArmour>
-    <CivSize>36</CivSize>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>36</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Titanium">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Gokan">2</Relations>
+    </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="25"/>
       <Bonus Type="Cold" Amount="25"/>
@@ -412,6 +499,17 @@
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Titanium" Amount="3"/>
     </Materials>
-    <CivSize>40</CivSize>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinSystems>4</MinSystems>
+      <MinPop>40</MinPop>
+      <CashCost>40</CashCost>
+      <Material Name="Titanium">2</Material>
+      <Material Name="Crystals">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Elithiri">2</Relations>
+    </Requirements>
   </ArmourType>
 </Data>

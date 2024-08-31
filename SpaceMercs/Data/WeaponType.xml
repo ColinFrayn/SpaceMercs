@@ -95,7 +95,13 @@
     <Desc>A laser rifle</Desc>
     <Sound>LaserRifle</Sound>
     <Noise>6</Noise>
-    <CivSize>20</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Crystals">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Plastic" Amount="2"/>
@@ -116,7 +122,13 @@
     <Desc>A heavy laser rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
     <Noise>8</Noise>
-    <CivSize>23</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>23</MinPop>
+      <CashCost>20</CashCost>
+      <Material Name="Crystals">2</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Plastic" Amount="5"/>
@@ -136,7 +148,13 @@
     <Desc>A laser pistol</Desc>
     <Sound>LaserPistol</Sound>
     <Noise>4</Noise>
-    <CivSize>20</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Crystals">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Materials>
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -163,7 +181,14 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>25</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Tungsten">1</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Ursalon">1</Relations>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Arc Rifle" Class="Shotgun">
     <Mass>5.0</Mass>
@@ -185,7 +210,14 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>27</CivSize>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>27</MinPop>
+      <CashCost>20</CashCost>
+      <Material Name="Rare Earth Metals">1</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Insectoid">1</Relations>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>18.0</Mass>
@@ -207,7 +239,14 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
-    <CivSize>34</CivSize>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinPop>34</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Rare Earth Metals">2</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Insectoid">2</Relations>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Flame Thrower" Class="Launcher">
     <Mass>15.0</Mass>
@@ -260,7 +299,14 @@
       <Material Name="Electronic Components" Amount="1"/>
       <Material Name="Crystals" Amount="3"/>
     </Materials>
-    <CivSize>37</CivSize>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinPop>37</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Industrial Chemicals">2</Material>
+      <Material Name="Incendiary Bulb">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Grenade Launcher" Class="Launcher">
     <Mass>8.0</Mass>
@@ -309,7 +355,13 @@
     <Sound>LaserSniper</Sound>
     <Stable/>
     <Noise>8</Noise>
-    <CivSize>21</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>21</MinPop>
+      <CashCost>15</CashCost>
+      <Material Name="Crystals">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -327,7 +379,6 @@
     <Damage>7+7</Damage>
     <Desc>A light railgun converted to a sniper rifle. Lower accuracy but with high damage.</Desc>
     <Sound>GaussSniper</Sound>
-    <CivSize>26</CivSize>
     <Stable/>
     <Noise>9</Noise>
     <Materials>
@@ -336,7 +387,14 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
-    <CivSize>22</CivSize>
+    <Requirements>
+      <MinLevel>7</MinLevel>
+      <MinPop>28</MinPop>
+      <CashCost>20</CashCost>
+      <Material Name="Tungsten">1</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Ursalon">2</Relations>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Disc Thrower" Class="Rifle">
     <Mass>3.0</Mass>

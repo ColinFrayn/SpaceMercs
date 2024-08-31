@@ -270,4 +270,11 @@
     <Scavenged/>
     <Desc>The slime-covered egg from a slime creature.</Desc>
   </MaterialType>
+  <MaterialType Name="Incendiary Bulb">
+    <ItemCost>2.5</ItemCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Scavenged/>
+    <Desc>The highly volatile organ from a fire-breathing creature.</Desc>
+  </MaterialType>
 </Data>

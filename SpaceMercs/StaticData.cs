@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Xml;
-using static SpaceMercs.Colony;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public static class StaticData {
@@ -273,6 +270,28 @@ namespace SpaceMercs {
             ShipEquipment.AddRange(ShipEngines);
             ShipEquipment.AddRange(ShipWeapons);
             ShipEquipment.AddRange(ShipArmours);
+        }
+
+        public static IEnumerable<BaseItemType> AllBaseItems {
+            get {
+                foreach (ItemType it in ItemTypes) {
+                    yield return it;
+                }
+                foreach (WeaponType wp in WeaponTypes) {
+                    yield return wp;
+                }
+                foreach (ArmourType ar in ArmourTypes) {
+                    yield return ar;
+                }
+                foreach (ShipEquipment se in ShipEquipment) {
+                    yield return se;
+                }
+            }
+        }
+        public static IEnumerable<BaseItemType> ResearchableBaseItems {
+            get {
+                return AllBaseItems.Where(b => b.Requirements is not null);
+            }
         }
 
         // Given the budget and constraints, see if we can (randomly) pick something

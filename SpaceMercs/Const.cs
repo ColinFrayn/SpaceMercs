@@ -12,11 +12,11 @@ namespace SpaceMercs {
         public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
         public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
-        public const bool DEBUG_RANDOMISE_VENDORS = false;  // Provide a button to completely regenerate all items/mercs/missions at a colony
+        public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
-        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skills gain faster than normal (multiplier, default=1)
-        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrues faster than normal (multiplier, default=1)
-        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // Richer at the start (additive, default=0)
+        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
+        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
+        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
 
         // Character settings
         public const int SpareAttributePoints = 0; // Starting pot of skill points
@@ -181,6 +181,7 @@ namespace SpaceMercs {
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
+        public const double DailyResearchProb = 0.005; // Chance of successfully researching a technology, per day, for a nonHuman race.
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony

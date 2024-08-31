@@ -27,7 +27,7 @@ namespace SpaceMercs {
         public int SystemCount { get { return Systems.Count; } }
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
         public bool IsPlayer { get { return HomePlanet.GetSystem().Sector.SectorX == 0 && HomePlanet.GetSystem().Sector.SectorY == 0; } }
-        private HashSet<BaseItemType> Researched = new HashSet<BaseItemType>();
+        private readonly HashSet<BaseItemType> Researched = new HashSet<BaseItemType>();
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -172,6 +172,24 @@ namespace SpaceMercs {
                     return;
                 }
             } while (daysSinceLast > 0);
+        }
+        internal void CheckResearch(double tDiff) {
+            if (IsPlayer) return;
+
+            double nDays = tDiff * 365.0;
+            Random rand = new Random();
+
+            // Are there any items that this race can research?
+            foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
+                if (HasResearched(it)) continue;
+                if (it.Requirements?.MeetsRequirements(this) == true) {
+                    double diff = it.Requirements.Difficulty;
+                    double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
+                    if (rand.NextDouble() > prob) {
+                        Researched.Add(it);
+                    }
+                }
+            }
         }
 
         public void Reset() {

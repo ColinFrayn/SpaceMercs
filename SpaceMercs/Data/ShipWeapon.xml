@@ -18,7 +18,13 @@
     <Rate>2.5</Rate>
     <Desc>A rail gun</Desc>
     <Avail>MTE</Avail>
-    <CivSize>15</CivSize>
+    <Requirements>
+      <MinLevel>2</MinLevel>
+      <MinPop>15</MinPop>
+      <CashCost>10</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Tex>2,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Slug Gun">
@@ -40,7 +46,14 @@
     <Rate>1.3</Rate>
     <Desc>A laser rifle</Desc>
     <Avail>MTE</Avail>
-    <CivSize>20</CivSize>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>10</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Crystals">1</Material>
+    </Requirements>
     <Tex>4,5</Tex>
   </ShipWeapon>
   <ShipWeapon Name="Proton Gun">
@@ -52,7 +65,14 @@
     <Desc>A proton gun</Desc>
     <Avail>MTE</Avail>
     <Tex>5,5</Tex>
-    <CivSize>27</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>27</MinPop>
+      <CashCost>15</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Electronic Components">1</Material>
+    </Requirements>
   </ShipWeapon>
   <ShipWeapon Name="Plasma Cannon">
     <Cost>600</Cost>
@@ -63,7 +83,14 @@
     <Desc>A plasma cannon</Desc>
     <Avail>ME</Avail>
     <Tex>6,5</Tex>
-    <CivSize>31</CivSize>
+    <Requirements>
+      <MinLevel>7</MinLevel>
+      <MinPop>31</MinPop>
+      <CashCost>20</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Incendiary Bulb">1</Material>
+    </Requirements>
   </ShipWeapon>
   <ShipWeapon Name="Antimatter Cannon">
     <Cost>1400</Cost>
@@ -74,6 +101,12 @@
     <Desc>An antimatter cannon</Desc>
     <Avail>ME</Avail>
     <Tex>7,5</Tex>
-    <CivSize>39</CivSize>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinPop>39</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipWeapon>
 </Data>

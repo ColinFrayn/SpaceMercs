@@ -173,6 +173,8 @@ namespace SpaceMercs {
         public void ImproveRelations(Race? rc, int exp, Action<string, Action?> showMessage) {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
+            // Get all currently unresearchable techs
+            HashSet<BaseItemType> oldUnresearchable = UnresearchableItems.ToHashSet();
             if (!Relations.ContainsKey(rc)) {
                 Relations.Add(rc, rc.BaseAttitude + exp);
             }
@@ -180,6 +182,10 @@ namespace SpaceMercs {
             int newRelations = GetRelations(rc);
             if (newRelations > oldRelations) {
                 showMessage($"Thanks to your efforts, relations with the {rc.Name} race have improved\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
+                IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(UnresearchableItems);
+                if (newResearchable.Any()) {
+                    showMessage($"Collaboration with {rc.Name} scientists have made available new technological advances.\nThe following research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}", null);
+                }
             }
             if (newRelations < oldRelations) {
                 showMessage($"Because of your persistent attacks, relations with the {rc.Name} race have worsened\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
@@ -338,6 +344,18 @@ namespace SpaceMercs {
                 if (s.InventoryGrouped.ContainsKey(itFind)) count += s.InventoryGrouped[itFind];
             }
             return count;
+        }
+        public IEnumerable<BaseItemType> UnresearchableItems {
+            get {
+                // Get all currently unresearchable techs
+                Race humanRace = StaticData.Races[0];
+                foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
+                    if (humanRace.HasResearched(it)) continue;
+                    if (it.Requirements?.MeetsBasicRequirements(this) == false) {
+                        yield return it;
+                    }
+                }
+            }
         }
 
         // Skill stuff

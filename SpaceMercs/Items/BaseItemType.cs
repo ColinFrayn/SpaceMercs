@@ -36,6 +36,7 @@ namespace SpaceMercs {
             }
 
             // Do we have any requirements to be able to research this item. (If not then we get it by default and no research required)
+            Requirements = null;
             if (xml.SelectSingleNode("Requirements") != null) {
                 try {
                     Requirements = new Requirements(xml.SelectSingleNode("Requirements")!);

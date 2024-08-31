@@ -13,7 +13,13 @@
     <Desc>Metasteel plating</Desc>
     <Avail>MRE</Avail>
     <Tex>2,3</Tex>
-    <CivSize>18</CivSize>
+    <Requirements>
+      <MinLevel>2</MinLevel>
+      <MinPop>18</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Metasteel">3</Material>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipArmour>
   <ShipArmour Name="Mithril Plating">
     <Cost>400</Cost>
@@ -21,7 +27,13 @@
     <Desc>Mithril plating</Desc>
     <Avail>MRE</Avail>
     <Tex>3,3</Tex>
-    <CivSize>30</CivSize>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>20</CashCost>
+      <Material Name="Mithril">3</Material>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Race>Gokan</Race>
   </ShipArmour>
   <ShipArmour Name="Adamantium Plating">
@@ -30,7 +42,13 @@
     <Desc>Adamantium plating</Desc>
     <Avail>MRE</Avail>
     <Tex>4,3</Tex>
-    <CivSize>40</CivSize>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>40</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Adamantium">3</Material>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipArmour>
   <ShipArmour Name="Adaptive Plating">
     <Cost>1500</Cost>
@@ -39,7 +57,13 @@
     <Desc>Adaptive plating</Desc>
     <Avail>MRE</Avail>
     <Tex>5,3</Tex>
-    <CivSize>45</CivSize>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>45</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Etherealite">3</Material>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipArmour>
   <ShipArmour Name="Regenerative Plating">
     <Cost>2500</Cost>
@@ -49,7 +73,9 @@
     <Avail>MRE</Avail>
     <Tex>6,3</Tex>
     <Race>Insectoid</Race>
-    <CivSize>38</CivSize>
+    <Requirements>
+      <MinPop>38</MinPop>
+    </Requirements>
   </ShipArmour>
   <ShipArmour Name="Chameleon Plating">
     <Cost>2750</Cost>
@@ -58,6 +84,13 @@
     <Desc>Chameleon plating that helps camouflage the ship</Desc>
     <Avail>MRE</Avail>
     <Tex>7,3</Tex>
-    <CivSize>39</CivSize>
+    <Requirements>
+      <MinLevel>11</MinLevel>
+      <MinPop>39</MinPop>
+      <CashCost>30</CashCost>
+      <Material Name="Shadowskin">2</Material>
+      <Material Name="Voidskin">2</Material>
+      <Facility>Engineering</Facility>
+    </Requirements>
   </ShipArmour>
 </Data>
