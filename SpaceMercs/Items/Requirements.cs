@@ -6,7 +6,7 @@ namespace SpaceMercs.Items {
         private readonly int MinLevel;
         private readonly int MinSystems;
         private readonly int MinPop;
-        private readonly int CashCost;
+        public int CashCost { get; private set; }
         private readonly IDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
         private readonly IDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
         private readonly ICollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
@@ -98,6 +98,16 @@ namespace SpaceMercs.Items {
                 diff += RequiredRaceRelations.Count / 10.0;
                 diff += RequiredMaterials.Count / 20.0;
                 return diff;
+            }
+        }
+
+        // How long will this take to research, in days?
+        public double Duration {
+            get {
+                double dur = 3.0 + (MinLevel * MinLevel / 20d) + (MinSystems / 5d) + (MinPop / 10d);
+                dur += RequiredRaceRelations.Count * 5.0;
+                dur += RequiredMaterials.Count * 1.0;
+                return dur;
             }
         }
     }

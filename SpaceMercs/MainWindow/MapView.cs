@@ -741,18 +741,22 @@ namespace SpaceMercs.MainWindow {
 
             // Announce pop growth
             int newHumanPop = humanRace.Population;
+            List<string> newMats = new List<string>();
             if (newHumanPop != oldHumanPop) {
                 msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
+                foreach (MaterialType mat in StaticData.Materials) {
+                    if (mat.CivSize > oldHumanPop && mat.CivSize <= newHumanPop) newMats.Add(mat.Name);
+                }
             }
 
             // See if we can now research any of the previously unresearchable techs. If so then announce it.
             IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam.UnresearchableItems);
 
-            // Maybe add in materials here?
-            // TODO
-
-            if (newResearchable.Any()) {
-                msgBox.PopupMessage($"Human scientists have made technological advances.\nThe following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}");
+            if (newResearchable.Any() || newMats.Any()) {
+                string msg = $"Human scientists have made technological advances.\n";
+                if (newResearchable.Any()) msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}";
+                if (newMats.Any()) msg += $"The following new materials have been discovered:\n{String.Join("\n", newMats)}";
+                msgBox.PopupMessage(msg);
             }
         }
         #endregion // Clock Tick

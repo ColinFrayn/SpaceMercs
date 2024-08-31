@@ -259,5 +259,9 @@ namespace SpaceMercs {
         public bool HasResearched(BaseItemType tp) {
             return Researched.Contains(tp);
         }
+        public void CompleteResearch(BaseItemType tp) {
+            if (HasResearched(tp)) throw new Exception("Researching already researched tech!");
+            Researched.Add(tp);
+        }
     }
 }

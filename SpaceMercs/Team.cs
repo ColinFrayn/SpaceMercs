@@ -351,7 +351,21 @@ namespace SpaceMercs {
                 Race humanRace = StaticData.Races[0];
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
+                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
                     if (it.Requirements?.MeetsBasicRequirements(this) == false) {
+                        yield return it;
+                    }
+                }
+            }
+        }
+        public IEnumerable<BaseItemType> ResearchableItems {
+            get {
+                // Get all currently unresearchable techs
+                Race humanRace = StaticData.Races[0];
+                foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
+                    if (humanRace.HasResearched(it)) continue;
+                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
+                    if (it.Requirements?.MeetsBasicRequirements(this) == true) {
                         yield return it;
                     }
                 }

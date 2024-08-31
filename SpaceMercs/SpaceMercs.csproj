@@ -47,6 +47,9 @@
    </ItemGroup>
   
    <ItemGroup>
+     <Compile Update="Dialogs\ResearchItem.cs">
+       <SubType>Form</SubType>
+     </Compile>
      <Compile Update="Dialogs\HyperspaceTravel.cs">
        <SubType>Form</SubType>
      </Compile>

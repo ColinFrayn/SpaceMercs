@@ -3,17 +3,13 @@ ToDo List
 -------------------------------------------------
 
 Research Dialog (maybe copy Gate??)
-- Create a research dialog in the ship view screen
--- Show everything manageable at current level of Relations, character level, nPop, nSys, facilities available
---- Greyed out if other requirements not met (Cash cost and materials)
--- Research takes time, cost, materials.
--- Success chance related to player skill levels compared to requirements
+- ResearchItem dialog:
+-- Items should be greyed out if other requirements not met (Cash cost and materials)
+-- Should display any partner races
+-- Should display facilities required
+-- Remove materials from team once research is completed
 
-Materials also should have Requirements? Currently they require CivSize
-- How to deal with them?
-  foreach (MaterialType mat in StaticData.Materials) {
-      if (mat.CivSize > humanPop && mat.CivSize <= newHumanPop) newTech.Add($"Material: {mat.Name}");
-  }
+Materials also should have Requirements. Currently they require only CivSize.
 
 ==========================================================================================================
 

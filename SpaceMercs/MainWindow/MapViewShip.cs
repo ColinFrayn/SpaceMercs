@@ -13,7 +13,7 @@ namespace SpaceMercs.MainWindow {
         private float fShipViewX, fShipViewY, fShipViewZ = Const.MinimumShipViewZ;
         private int irHover = -1, irContextRoom = -1, irSelected = -1;
         private PanelItem? piHoverItem;
-        private GUIButton gbRepair, gbFabricate, gbBack;
+        private GUIButton gbRepair, gbFabricate, gbBack, gbResearch;
         private bool bHoverHull = false, bContextHull = false;
         private ViewMode PreviousViewMode = ViewMode.ViewMap;
 
@@ -33,15 +33,17 @@ namespace SpaceMercs.MainWindow {
             fShipViewX = fShipViewY = 0.0f;
             fShipViewZ = PlayerTeam.PlayerShip.Length * 2;
             if (fShipViewZ < Const.MinimumShipViewZ) fShipViewZ = Const.MinimumShipViewZ;
-            if (gpSelect == null) gpSelect = new GUIPanel(this);
-            if (gbRepair == null) gbRepair = new GUIButton("Repair", this, RepairShip);
-            if (gbBack == null) gbBack = new GUIButton("Back", this, BackToMap);
-            if (gbFabricate == null) gbFabricate = new GUIButton("Fabricate", this, FabricateItems);
+            gpSelect ??= new GUIPanel(this);
+            gbRepair ??= new GUIButton("Repair", this, RepairShip);
+            gbBack ??= new GUIButton("Back", this, BackToMap);
+            gbResearch ??= new GUIButton("Research", this, ResearchTech);
+            gbFabricate ??= new GUIButton("Fabricate", this, FabricateItems);
             SetupUtilityButtons();
         }
         private void SetupUtilityButtons() {
             gbRepair.Deactivate();
             gbFabricate.Deactivate();
+            gbResearch.Deactivate();
 
             // "Back to last view" button
             gbBack.SetPosition(0.01f, 0.05f);
@@ -72,6 +74,16 @@ namespace SpaceMercs.MainWindow {
             else if (PlayerTeam.PlayerShip.HasWorkshop) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasMedlab) gbFabricate.Activate();
             else if (PlayerTeam.PlayerShip.HasEngineering) gbFabricate.Activate();
+
+            // Research Button
+            gbResearch.SetPosition(0.89f, 0.95f);
+            gbResearch.SetSize(0.08f, 0.03f);
+            gbResearch.SetBlend(false);
+            if (PlayerTeam.PlayerShip.HasArmoury) gbResearch.Activate();
+            else if (PlayerTeam.PlayerShip.HasWorkshop) gbResearch.Activate();
+            else if (PlayerTeam.PlayerShip.HasMedlab) gbResearch.Activate();
+            else if (PlayerTeam.PlayerShip.HasEngineering) gbResearch.Activate();
+
         }
 
         private void DrawShip() {
@@ -140,6 +152,7 @@ namespace SpaceMercs.MainWindow {
             gbRepair.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             gbFabricate.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             gbBack.IsHover((int)MousePosition.X, (int)MousePosition.Y);
+            gbResearch.IsHover((int)MousePosition.X, (int)MousePosition.Y);
             CheckHover_Ship();
         }
         private void MouseUp_Ship(MouseButtonEventArgs e) {
@@ -174,6 +187,7 @@ namespace SpaceMercs.MainWindow {
                 if (gbRepair.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (gbFabricate.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
                 if (gbBack.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
+                if (gbResearch.CaptureClick((int)MousePosition.X, (int)MousePosition.Y)) return;
             }
             CheckHover_Ship();
             SetupUtilityButtons();
@@ -243,6 +257,7 @@ namespace SpaceMercs.MainWindow {
             gbRepair.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbFabricate.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbBack.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
+            gbResearch.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
 
             // Show hover text
             DrawShipHoverInfo();
@@ -613,6 +628,10 @@ namespace SpaceMercs.MainWindow {
         public void FabricateItems() {
             FabricateItems fi = new FabricateItems(PlayerTeam);
             fi.ShowDialog();
+        }
+        public void ResearchTech() {
+            ResearchItem ri = new ResearchItem(PlayerTeam);
+            ri.ShowDialog();
         }
     }
 }
