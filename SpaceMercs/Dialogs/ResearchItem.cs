@@ -72,9 +72,10 @@ namespace SpaceMercs.Dialogs {
                 foreach (KeyValuePair<MaterialType, int> kvp in it.Requirements.RequiredMaterials) {
                     if (_playerTeam.CountMaterial(kvp.Key) < kvp.Value) hasMats = false;
                 }
-                arrRowDest[1] = it.Requirements.RequiredMaterials.Count() == 0 ? "-" : (hasMats ? "OK" : "<missing>");
-                arrRowDest[2] = $"{Math.Round(cost, 2)}cr";
-                arrRowDest[3] = $"{Math.Round(durationDays, 2)}d";
+                arrRowDest[1] = it.GetType().Name;
+                arrRowDest[2] = it.Requirements.RequiredMaterials.Count() == 0 ? "-" : (hasMats ? "OK" : "<missing>");
+                arrRowDest[3] = $"{Math.Round(cost, 2)}cr";
+                arrRowDest[4] = $"{Math.Round(durationDays, 2)}d";
                 dgResearchItems.Rows.Add(arrRowDest);
                 var row = dgResearchItems.Rows[dgResearchItems.Rows.Count - 1];
                 row.Tag = it;

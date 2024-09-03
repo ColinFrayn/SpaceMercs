@@ -80,58 +80,58 @@
   <!-- Non-armour materials -->
   <MaterialType Name="Silicates">
     <ItemCost>1.5</ItemCost>
-    <Rarity>0.01</Rarity>
+    <Rarity>0.1</Rarity>
     <Desc>Silicates</Desc>
     <UnitMass>0.5</UnitMass>
   </MaterialType>
   <MaterialType Name="Aluminium">
     <ItemCost>1.5</ItemCost>
-    <Rarity>0.1</Rarity>
+    <Rarity>0.4</Rarity>
     <UnitMass>0.5</UnitMass>
     <Desc>Aluminium</Desc>
   </MaterialType>
   <MaterialType Name="Tungsten">
     <ItemCost>5.0</ItemCost>
-    <Rarity>0.03</Rarity>
+    <Rarity>0.2</Rarity>
     <UnitMass>0.1</UnitMass>
     <Desc>Tungsten</Desc>
   </MaterialType>
   <MaterialType Name="Uranium">
     <ItemCost>10.0</ItemCost>
-    <Rarity>0.01</Rarity>
+    <Rarity>0.1</Rarity>
     <UnitMass>0.001</UnitMass>
     <Desc>Uranium</Desc>
   </MaterialType>
   <MaterialType Name="Water">
     <ItemCost>0.1</ItemCost>
-    <Rarity>0.05</Rarity>
+    <Rarity>0.5</Rarity>
     <Desc>Water</Desc>
   </MaterialType>
   <MaterialType Name="Carbon">
     <ItemCost>0.5</ItemCost>
-    <Rarity>0.05</Rarity>
+    <Rarity>0.5</Rarity>
     <Desc>Carbon</Desc>
   </MaterialType>
   <MaterialType Name="Rare Earth Metals">
     <ItemCost>6.0</ItemCost>
     <Desc>Rare Earth Metals</Desc>
-    <Rarity>0.05</Rarity>
+    <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Electronic Components">
     <ItemCost>10.0</ItemCost>
-    <Rarity>0.05</Rarity>
+    <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Gold">
     <ItemCost>20.0</ItemCost>
-    <Rarity>0.001</Rarity>
+    <Rarity>0.01</Rarity>
     <Desc>Gold</Desc>
     <UnitMass>0.01</UnitMass>
   </MaterialType>
   <MaterialType Name="Copper">
     <ItemCost>2.0</ItemCost>
-    <Rarity>0.1</Rarity>
+    <Rarity>0.7</Rarity>
     <Desc>Copper</Desc>
     <UnitMass>0.5</UnitMass>
   </MaterialType>
@@ -152,19 +152,19 @@
   </MaterialType>
   <MaterialType Name="Crystals">
     <ItemCost>4.0</ItemCost>
-    <Rarity>0.01</Rarity>
+    <Rarity>0.07</Rarity>
     <Desc>Energy Crystals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Titanium">
     <ItemCost>6.0</ItemCost>
-    <Rarity>0.02</Rarity>
+    <Rarity>0.06</Rarity>
     <Desc>Titanium</Desc>
     <UnitMass>0.8</UnitMass>
   </MaterialType>
   <MaterialType Name="Industrial Chemicals">
     <ItemCost>6.0</ItemCost>
-    <Rarity>0.05</Rarity>
+    <Rarity>0.06</Rarity>
     <Desc>Industrial chemicals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>

@@ -371,20 +371,24 @@ namespace SpaceMercs {
             }
 
             // Add some raw materials
+            double matScale = 2d;
+            if (HasBaseType(BaseType.Metropolis)) matScale += 1d;
+            if (HasBaseType(BaseType.Trading)) matScale += 2d;
+            matScale += (BaseSize * BaseSize / 10d);
             foreach (MaterialType mat in StaticData.Materials) {
                 if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
                 if (mat.IsScavenged) continue;
                 if (mat.CivSize > civSize) continue;
-                AddItem(new Material(mat), mat.Rarity, days, rand);
+                AddItem(new Material(mat), mat.Rarity * matScale, days, rand);
             }
         }
         private void AddItem(IItem eq, double rarity, int days, Random rand) {
             // Calculate how many we get
             int count = 0;
             for (int n = 0; n < days; n++) {
-                double dRand = rand.NextDouble() * 10.0;
+                double dRand = rand.NextDouble() * 10d;
                 if (dRand <= rarity) {
-                    dRand += 0.1;
+                    dRand += 0.01;
                     double frac = (rarity / dRand);
                     int dcount = (int)Math.Floor(frac);
                     double dRemainder = frac - Math.Floor(frac);

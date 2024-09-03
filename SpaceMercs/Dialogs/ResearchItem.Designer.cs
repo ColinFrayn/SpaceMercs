@@ -29,11 +29,12 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             btResearch = new Button();
             dgResearchItems = new DataGridView();
+            pbResearch = new ProgressBar();
             colTech = new DataGridViewTextBoxColumn();
+            colType = new DataGridViewTextBoxColumn();
             colMaterials = new DataGridViewTextBoxColumn();
             colCost = new DataGridViewTextBoxColumn();
             colTime = new DataGridViewTextBoxColumn();
-            pbResearch = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)dgResearchItems).BeginInit();
             SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             dgResearchItems.AllowUserToResizeRows = false;
             dgResearchItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgResearchItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgResearchItems.Columns.AddRange(new DataGridViewColumn[] { colTech, colMaterials, colCost, colTime });
+            dgResearchItems.Columns.AddRange(new DataGridViewColumn[] { colTech, colType, colMaterials, colCost, colTime });
             dgResearchItems.Dock = DockStyle.Top;
             dgResearchItems.Location = new Point(0, 0);
             dgResearchItems.Margin = new Padding(4, 3, 4, 3);
@@ -72,6 +73,16 @@
             dgResearchItems.SelectionChanged += dgResearchItems_SelectionChanged;
             dgResearchItems.DoubleClick += dgResearchItems_DoubleClick;
             // 
+            // pbResearch
+            // 
+            pbResearch.Location = new Point(36, 310);
+            pbResearch.Margin = new Padding(4, 3, 4, 3);
+            pbResearch.Maximum = 24;
+            pbResearch.Name = "pbResearch";
+            pbResearch.Size = new Size(513, 59);
+            pbResearch.Step = 1;
+            pbResearch.TabIndex = 9;
+            // 
             // colTech
             // 
             colTech.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -80,6 +91,14 @@
             colTech.HeaderText = "Tech";
             colTech.Name = "colTech";
             colTech.ReadOnly = true;
+            // 
+            // colType
+            // 
+            colType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            colType.HeaderText = "Type";
+            colType.Name = "colType";
+            colType.ReadOnly = true;
+            colType.Width = 56;
             // 
             // colMaterials
             // 
@@ -111,16 +130,6 @@
             colTime.ReadOnly = true;
             colTime.Width = 58;
             // 
-            // pbResearch
-            // 
-            pbResearch.Location = new Point(36, 310);
-            pbResearch.Margin = new Padding(4, 3, 4, 3);
-            pbResearch.Maximum = 24;
-            pbResearch.Name = "pbResearch";
-            pbResearch.Size = new Size(513, 59);
-            pbResearch.Step = 1;
-            pbResearch.TabIndex = 9;
-            // 
             // ResearchItem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -145,6 +154,7 @@
         private DataGridView dgResearchItems;
         private ProgressBar pbResearch;
         private DataGridViewTextBoxColumn colTech;
+        private DataGridViewTextBoxColumn colType;
         private DataGridViewTextBoxColumn colMaterials;
         private DataGridViewTextBoxColumn colCost;
         private DataGridViewTextBoxColumn colTime;

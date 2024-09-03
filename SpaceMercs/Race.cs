@@ -87,7 +87,7 @@ namespace SpaceMercs {
                 foreach (XmlNode xn in xns) {
                     string strItem = xn.InnerText;
                     if (string.IsNullOrEmpty(strItem)) throw new Exception($"Null item discovered in Race Research list for Race {Name}");
-                    BaseItemType? item = StaticData.GetItemTypeByName(strItem);
+                    BaseItemType? item = StaticData.GetBaseItemByName(strItem);
                     if (item == null) throw new Exception($"Unknown item {strItem} discovered in Race Research list for Race {Name}");
                     if (Researched.Contains(item)) throw new Exception($"Repeated item {strItem} discovered in Race Research list for Race {Name}");
                     Researched.Add(item);

@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Team {
-        public AstronomicalObject CurrentPosition { get; set; }
+        public AstronomicalObject CurrentPosition { get; private set; }
         public HabitableAO? CurrentPositionHAO {  get { if (CurrentPosition is HabitableAO hao) return hao; return null; } }
         private readonly List<Soldier> _Soldiers = new List<Soldier>();
         public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }
@@ -144,6 +144,12 @@ namespace SpaceMercs {
             if (dist < 0.0) return false; // Error
             double range = PlayerShip.Range;
             return (range >= dist);
+        }
+        public void SetPosition(AstronomicalObject aoTarget) {
+            CurrentPosition = aoTarget;
+            foreach (Soldier s in _Soldiers) {
+                if (s.IsActive) s.aoLocation = aoTarget;
+            }
         }
 
         public double GetPriceModifier(Race? rc, Star st) {

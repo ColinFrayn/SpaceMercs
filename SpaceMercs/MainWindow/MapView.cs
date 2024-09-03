@@ -709,7 +709,7 @@ namespace SpaceMercs.MainWindow {
             }
             aoTo.GetSystem().SetVisited(true);
             msgBox.PopupMessage("You have arrived at your destination");
-            PlayerTeam.CurrentPosition = aoTo;
+            PlayerTeam.SetPosition(aoTo);
             if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {
                 if (!hao.Colony.Owner.Known) {
                     msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}");

@@ -790,7 +790,7 @@
             btDrop.Name = "btDrop";
             btDrop.Size = new Size(64, 27);
             btDrop.TabIndex = 2;
-            btDrop.Text = "Drop";
+            btDrop.Text = "Store";
             btDrop.UseVisualStyleBackColor = true;
             btDrop.Click += btDrop_Click;
             // 
@@ -850,7 +850,7 @@
             btDropAll.Name = "btDropAll";
             btDropAll.Size = new Size(64, 27);
             btDropAll.TabIndex = 31;
-            btDropAll.Text = "Drop All";
+            btDropAll.Text = "Store All";
             btDropAll.UseVisualStyleBackColor = true;
             btDropAll.Click += btDropAllClick;
             // 
