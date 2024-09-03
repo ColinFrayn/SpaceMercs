@@ -424,9 +424,21 @@ namespace SpaceMercs {
         }
         public void CheckForLevelUp(Action<string, Action?> showMessage) {
             if (Experience >= ExperienceRequiredToReachNextLevel()) {
+                // Get all currently unresearchable techs
+                HashSet<BaseItemType> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
+
                 Level++;
                 AddUtilitySkill(UtilitySkill.Unspent);
                 showMessage($"Congratulations! Soldier {Name} has reached level {Level}", () => UpgradeStat(this));
+
+                // See if we can now research any of the previously unresearchable techs. If so then announce it.
+                IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam!.UnresearchableItems);
+
+                if (newResearchable.Any()) {
+                    string msg = $"Human scientists have made technological advances.\n";
+                    if (newResearchable.Any()) msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}";
+                    showMessage(msg, null);
+                }
             }
         }
         private static void UpgradeStat(Soldier s) {

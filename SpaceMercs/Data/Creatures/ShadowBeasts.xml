@@ -22,6 +22,32 @@
       <Resistance Type="Electrical" Value="120"/>
     </Resistances>    
   </CreatureType>
+  <CreatureType Name="Shadow Soulsucker">
+    <LevelRange>6,13</LevelRange>
+    <Attack>12</Attack>
+    <Defence>14</Defence>
+    <Armour>16</Armour>
+    <Health>14</Health>
+    <Stamina>19</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>ShadowBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large shadowy beast with deep, fiery red eyes and wisps of smoke emanating from all around it.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Soul Drain</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="20"/>
+      <Resistance Type="Physical" Value="20"/>
+      <Resistance Type="Electrical" Value="120"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.6">Shadowskin</Item>
+    </Scavenge>
+  </CreatureType>
   <CreatureType Name="Shadow Beast">
     <LevelRange>6,13</LevelRange>
     <Attack>12</Attack>

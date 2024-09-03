@@ -674,4 +674,20 @@
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Void Lance">
+    <Speed>12</Speed>
+    <Range DropOff="0.2">8</Range>
+    <Damage>5+3</Damage>
+    <Type>Electrical</Type>
+    <Sound>HeavyCrossbow</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Soul Drain">
+    <Speed>12</Speed>
+    <Range DropOff="0.0">6</Range>
+    <Damage>4+3</Damage>
+    <Type>Physical</Type>
+    <Sound>Drain</Sound>
+    <Hidden/>
+  </WeaponType>
 </Data>

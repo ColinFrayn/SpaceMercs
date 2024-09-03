@@ -90,9 +90,6 @@ namespace SpaceMercs.Items {
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
             if (team.MaximumSoldierLevel < MinLevel) return false;
-            foreach (RoomAbilities ra in RequiredFacilities) {
-                if (!team.PlayerShip.HasFacility(ra)) return false;
-            }
             return MeetsRequirements(StaticData.Races[0]);
         }
 

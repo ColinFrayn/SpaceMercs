@@ -4,9 +4,6 @@ ToDo List
 
 Materials also should have Requirements. Currently they require only CivSize.
 
-Level up (post mission) -> new research available announcement? in MapView(Mission).CeaseMission ??
-- Need to store the state before the mission.
-
 ==========================================================================================================
 
 
@@ -14,7 +11,7 @@ Level up (post mission) -> new research available announcement? in MapView(Missi
 Backburner : Features
 ---------------------
 
-Ranged weapons for e.g. shadow beasts, void beasts (such as psychic weapons, void lance, ... ?)
+Maybe don't announce discoveries for new research during a mission - wait until it's over. How?
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?

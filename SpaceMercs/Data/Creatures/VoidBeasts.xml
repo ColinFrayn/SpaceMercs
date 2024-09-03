@@ -41,7 +41,7 @@
     <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Void Lance</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Acid" Value="50"/>

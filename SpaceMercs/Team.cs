@@ -347,28 +347,30 @@ namespace SpaceMercs {
         }
         public IEnumerable<BaseItemType> UnresearchableItems {
             get {
-                // Get all currently unresearchable techs
+                List<BaseItemType> items = new List<BaseItemType>();
                 Race humanRace = StaticData.Races[0];
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
                     if (it.Requirements?.MeetsBasicRequirements(this) == false) {
-                        yield return it;
+                        items.Add(it);
                     }
                 }
+                return items;
             }
         }
         public IEnumerable<BaseItemType> ResearchableItems {
             get {
-                // Get all currently unresearchable techs
+                List<BaseItemType> items = new List<BaseItemType>();
                 Race humanRace = StaticData.Races[0];
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
                     if (it.Requirements?.MeetsBasicRequirements(this) == true) {
-                        yield return it;
+                        items.Add(it);
                     }
                 }
+                return items;
             }
         }
 

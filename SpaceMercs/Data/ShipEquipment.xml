@@ -160,7 +160,7 @@
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
     <Requirements>
-      <MinLevel>8</MinLevel>
+      <MinLevel>9</MinLevel>
       <MinPop>37</MinPop>
       <CashCost>30</CashCost>
       <Facility>Workshop</Facility>
@@ -177,7 +177,7 @@
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Requirements>
-      <MinPop>38</MinPop>
+      <MinPop>40</MinPop>
     </Requirements>
     <Tex>2,7</Tex>
   </ShipEquipment>

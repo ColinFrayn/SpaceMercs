@@ -1489,7 +1489,6 @@ namespace SpaceMercs.MainWindow {
         }
         private void PlaySoundThreaded(string strSound) {
             ThisDispatcher?.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));
-            //ThisDispatcher.Invoke(() => { SoundEffects.PlaySound(strSound); });
         }
         private void AnnounceMessage(string strMsg, Action? _onClick) {
             ThisDispatcher?.Invoke(() => { msgBox.PopupMessage(strMsg, _onClick); });
