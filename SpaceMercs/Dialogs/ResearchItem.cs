@@ -1,10 +1,11 @@
-﻿using Timer = System.Windows.Forms.Timer;
+﻿using SpaceMercs.Items;
+using Timer = System.Windows.Forms.Timer;
 
 namespace SpaceMercs.Dialogs {
     internal partial class ResearchItem : Form {
         private readonly Team _playerTeam;
         private readonly Timer clockTick;
-        private BaseItemType _typeToResearch;
+        private IResearchable _typeToResearch;
         private int iProgress = 0;
         private double durationSeconds = 0d;
         private bool configuring = false;
@@ -21,7 +22,7 @@ namespace SpaceMercs.Dialogs {
             configuring = false;
         }
 
-        private void StartResearch(BaseItemType item) {
+        private void StartResearch(IResearchable item) {
             if (item?.Requirements is null) return;
             double cost = item.Requirements.CashCost;
             if (cost > _playerTeam.Cash) return;
@@ -63,7 +64,7 @@ namespace SpaceMercs.Dialogs {
             dgResearchItems.Rows.Clear();
             dgResearchItems.ClearSelection();
             string[] arrRowDest = new string[5];
-            foreach (BaseItemType it in _playerTeam.ResearchableItems) {
+            foreach (IResearchable it in _playerTeam.AllResearchables) {
                 if (it.Requirements is null) continue; // Should never happen
                 arrRowDest[0] = it.Name;
                 double cost = it.Requirements.CashCost;
@@ -94,13 +95,13 @@ namespace SpaceMercs.Dialogs {
         private void btResearch_Click(object sender, EventArgs e) {
             if (configuring) return;
             if (dgResearchItems.SelectedRows.Count != 1) return;
-            BaseItemType item = dgResearchItems.SelectedRows[0].Tag as BaseItemType ?? throw new Exception("Tech could not be found to research");
+            IResearchable item = dgResearchItems.SelectedRows[0].Tag as IResearchable ?? throw new Exception("Tech could not be found to research");
             StartResearch(item);
         }
 
         private void dgResearchItems_SelectionChanged(object sender, EventArgs e) {
             if (!configuring && dgResearchItems.SelectedRows.Count == 1) {
-                if (dgResearchItems.SelectedRows[0].Tag is BaseItemType item) {
+                if (dgResearchItems.SelectedRows[0].Tag is IResearchable item) {
                     btResearch.Enabled = item.Requirements?.MeetsRequirements(_playerTeam) == true;
                 }
             }
@@ -110,7 +111,7 @@ namespace SpaceMercs.Dialogs {
         private void dgResearchItems_DoubleClick(object sender, EventArgs e) {
             if (configuring) return;
             if (dgResearchItems.SelectedRows.Count != 1) return;
-            if (dgResearchItems.SelectedRows[0].Tag is BaseItemType item) {
+            if (dgResearchItems.SelectedRows[0].Tag is IResearchable item) {
                 string desc = $"{item.Name}\n{item.Description}\nRequirements:\n{item.Requirements?.Description}";
                 MessageBox.Show(this, desc);
             }

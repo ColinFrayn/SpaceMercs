@@ -1,17 +1,18 @@
-﻿using System.Xml;
+﻿using SpaceMercs.Items;
+using System.Xml;
 
 namespace SpaceMercs {
-    public class MaterialType {
+    public class MaterialType : IResearchable {
         public string Name { get; private set; }
         public double MassMod { get; private set; } // Modifier (default = 1.0)
         public double ItemCost { get; private set; } // Modifier (default = 1.0)
         public double ArmourMod { get; private set; } // Modifier (default = 0.0)
         public double Rarity { get; private set; } // Modifier (default = 1.0)
         public bool IsScavenged { get; private set; } // Can this material only be obtained from dead creatures?
-        public string Desc { get; private set; }
+        public string Description { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
         public Race? RequiredRace { get; private set; }
-        public int CivSize { get; private set; }  // Will first be discovered when your civ reaches this size
+        public Requirements? Requirements { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
@@ -28,9 +29,8 @@ namespace SpaceMercs {
             Rarity = xml.SelectNodeDouble("Rarity", 1.0);
             ArmourMod = xml.SelectNodeDouble("ArmourMod", 0.0);
             UnitMass = xml.SelectNodeDouble("UnitMass", 1.0);
-            Desc = xml.SelectNodeText("Desc").Trim();
+            Description = xml.SelectNodeText("Desc").Trim();
             IsScavenged = xml.SelectSingleNode("Scavenged") != null;
-            CivSize = xml.SelectNodeInt("CivSize", 5);
 
             // Special resistances if this is made into armour
             foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
@@ -60,6 +60,27 @@ namespace SpaceMercs {
                 }
             }
             SkillBoosts = new Dictionary<Soldier.UtilitySkill, int>(skillBoostsTemp);
+            Requirements = null;
         }
+
+        public void LoadRequirements(XmlNode xml) {
+            // Do we have any requirements to be able to research this material type. (If not then we get it by default and no research required)
+            if (xml.SelectSingleNode("Requirements") != null) {
+                try {
+                    Requirements = new Requirements(xml.SelectSingleNode("Requirements")!);
+                }
+                catch (Exception ex) {
+                    throw new Exception($"Error loading requirements for material type {Name} : {ex.Message}");
+                }
+            }
+        }
+
+        public bool CanBuild(Race? race) {
+            if (race is null) return RequiredRace is null && Requirements is null;
+            if (RequiredRace != null && RequiredRace != race) return false;
+            if (Requirements is null) return true;
+            return race.HasResearched(this);
+        }
+
     }
 }

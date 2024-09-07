@@ -1,4 +1,5 @@
 ﻿using SpaceMercs.Dialogs;
+using SpaceMercs.Items;
 using System.IO;
 using System.Xml;
 
@@ -377,6 +378,41 @@ namespace SpaceMercs {
                     }
                 }
                 return items;
+            }
+        }
+        public IEnumerable<MaterialType> UnresearchableMaterials {
+            get {
+                List<MaterialType> items = new List<MaterialType>();
+                Race humanRace = StaticData.Races[0];
+                foreach (MaterialType it in StaticData.ResearchableMaterialTypes) {
+                    if (humanRace.HasResearched(it)) continue;
+                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
+                    if (it.Requirements?.MeetsBasicRequirements(this) == false) {
+                        items.Add(it);
+                    }
+                }
+                return items;
+            }
+        }
+        public IEnumerable<MaterialType> ResearchableMaterials {
+            get {
+                List<MaterialType> items = new List<MaterialType>();
+                Race humanRace = StaticData.Races[0];
+                foreach (MaterialType it in StaticData.ResearchableMaterialTypes) {
+                    if (humanRace.HasResearched(it)) continue;
+                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
+                    if (it.Requirements?.MeetsBasicRequirements(this) == true) {
+                        items.Add(it);
+                    }
+                }
+                return items;
+            }
+        }
+        public IEnumerable<IResearchable> AllResearchables {
+            get {
+                IEnumerable<IResearchable> items = ResearchableItems;
+                IEnumerable<IResearchable> mats = ResearchableMaterials;
+                return items.Union(mats);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using System.IO;
+using SpaceMercs.Items;
 
 namespace SpaceMercs {
     public class Race {
@@ -27,7 +28,7 @@ namespace SpaceMercs {
         public int SystemCount { get { return Systems.Count; } }
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
         public bool IsPlayer { get { return HomePlanet.GetSystem().Sector.SectorX == 0 && HomePlanet.GetSystem().Sector.SectorY == 0; } }
-        private readonly HashSet<BaseItemType> Researched = new HashSet<BaseItemType>();
+        private readonly HashSet<IResearchable> ResearchedItems = new HashSet<IResearchable>();
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -66,8 +67,10 @@ namespace SpaceMercs {
             file.WriteLine("<LastExpand>" + LastExpandCheck.ToBinary() + "</LastExpand>");
             if (Known) file.WriteLine("<Known/>");
             file.WriteLine("<Research>");
-            foreach (BaseItemType item in Researched) {
-                file.WriteLine($" <Item>{item.Name}</Item>");
+            foreach (IResearchable item in ResearchedItems) {
+                if (item is BaseItemType it) file.WriteLine($" <Item>{item.Name}</Item>");
+                if (item is MaterialType mat) file.WriteLine($" <Material>{item.Name}</Material>");
+                else throw new Exception($"Unknown IResearchable type : {item.GetType()}");
             }
             file.WriteLine("</Research>");
             file.WriteLine("</Race>");
@@ -89,8 +92,17 @@ namespace SpaceMercs {
                     if (string.IsNullOrEmpty(strItem)) throw new Exception($"Null item discovered in Race Research list for Race {Name}");
                     BaseItemType? item = StaticData.GetBaseItemByName(strItem);
                     if (item == null) throw new Exception($"Unknown item {strItem} discovered in Race Research list for Race {Name}");
-                    if (Researched.Contains(item)) throw new Exception($"Repeated item {strItem} discovered in Race Research list for Race {Name}");
-                    Researched.Add(item);
+                    if (!ResearchedItems.Add(item)) throw new Exception($"Repeated item {strItem} discovered in Race Research list for Race {Name}");
+                }
+            }
+            XmlNodeList? xmats = xml.SelectNodes("Research/Material");
+            if (xmats is not null) {
+                foreach (XmlNode xn in xmats) {
+                    string strMat = xn.InnerText;
+                    if (string.IsNullOrEmpty(strMat)) throw new Exception($"Null material type discovered in Race Research list for Race {Name}");
+                    MaterialType? mat = StaticData.GetMaterialTypeByName(strMat);
+                    if (mat == null) throw new Exception($"Unknown material type {strMat} discovered in Race Research list for Race {Name}");
+                    if (!ResearchedItems.Add(mat)) throw new Exception($"Repeated material type {strMat} discovered in Race Research list for Race {Name}");
                 }
             }
         }
@@ -186,7 +198,18 @@ namespace SpaceMercs {
                     double diff = it.Requirements.Difficulty;
                     double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
                     if (rand.NextDouble() > prob) {
-                        Researched.Add(it);
+                        ResearchedItems.Add(it);
+                    }
+                }
+            }
+            // Are there any material types that this race can research?
+            foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
+                if (HasResearched(mat)) continue;
+                if (mat.Requirements?.MeetsRequirements(this) == true) {
+                    double diff = mat.Requirements.Difficulty;
+                    double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
+                    if (rand.NextDouble() > prob) {
+                        ResearchedItems.Add(mat);
                     }
                 }
             }
@@ -197,7 +220,7 @@ namespace SpaceMercs {
             Known = false;
             Systems.Clear();
             Colonies.Clear();
-            Researched.Clear();
+            ResearchedItems.Clear();
         }
 
         public GenderType GenerateRandomGender(Random rand) {
@@ -256,12 +279,10 @@ namespace SpaceMercs {
             return stBest;
         }
 
-        public bool HasResearched(BaseItemType tp) {
-            return Researched.Contains(tp);
-        }
-        public void CompleteResearch(BaseItemType tp) {
-            if (HasResearched(tp)) throw new Exception("Researching already researched tech!");
-            Researched.Add(tp);
+        public bool HasResearched(IResearchable tp) => ResearchedItems.Contains(tp);
+        public void CompleteResearch(IResearchable item) {
+            if (HasResearched(item)) throw new Exception($"Researching already researched item {item.Name}!");
+            ResearchedItems.Add(item);
         }
     }
 }

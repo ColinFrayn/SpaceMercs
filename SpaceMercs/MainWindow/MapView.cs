@@ -8,6 +8,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -730,6 +731,7 @@ namespace SpaceMercs.MainWindow {
 
             // Get all currently unresearchable techs
             HashSet<BaseItemType> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
+            HashSet<MaterialType> oldUnresearchableMats = PlayerTeam.UnresearchableMaterials.ToHashSet();
 
             // Go through all races and check colonies for growth. etc.
             foreach (Race rc in StaticData.Races) {
@@ -741,21 +743,18 @@ namespace SpaceMercs.MainWindow {
 
             // Announce pop growth
             int newHumanPop = humanRace.Population;
-            List<string> newMats = new List<string>();
             if (newHumanPop != oldHumanPop) {
                 msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
-                foreach (MaterialType mat in StaticData.Materials) {
-                    if (mat.CivSize > oldHumanPop && mat.CivSize <= newHumanPop) newMats.Add(mat.Name);
-                }
             }
 
             // See if we can now research any of the previously unresearchable techs. If so then announce it.
             IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam.UnresearchableItems);
+            IEnumerable<MaterialType> newResearchableMats = oldUnresearchableMats.Except(PlayerTeam.UnresearchableMaterials);
 
-            if (newResearchable.Any() || newMats.Any()) {
+            if (newResearchable.Any() || newResearchableMats.Any()) {
                 string msg = $"Human scientists have made technological advances.\n";
                 if (newResearchable.Any()) msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}";
-                if (newMats.Any()) msg += $"The following new materials have been discovered:\n{String.Join("\n", newMats)}";
+                if (newResearchableMats.Any()) msg += $"The following new materials have been discovered:\n{String.Join("\n", newResearchableMats.Select(mat => mat.Name))}";
                 msgBox.PopupMessage(msg);
             }
         }

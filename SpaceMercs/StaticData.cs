@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -47,6 +48,7 @@ namespace SpaceMercs {
             }
             CombineAllShipEquipment();
             if (!LoadCreatureTypes()) return false;
+            if (!LoadMaterialRequirements()) return false; // Have to reload the file after the first pass because requirements might refer to other materials.
 
             try {
                 Textures.LoadTextureFiles(strGraphicsDir);
@@ -272,6 +274,36 @@ namespace SpaceMercs {
             ShipEquipment.AddRange(ShipArmours);
         }
 
+        // Once we've loaded all material types we have to load the file again to pull in requirements.
+        // This is because some requirements refer to materialTypes.
+        private static bool LoadMaterialRequirements() {
+            string strFile = strDataDir + "MaterialType.xml";
+            XmlDocument xDoc = new XmlDocument();
+            try {
+                xDoc.Load(strFile);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Error loading datafile " + strFile + ". Error:" + ex.Message, "Error in MaterialType Re-Load", MessageBoxButtons.OK);
+                return false;
+            }
+
+            // Load all elements in this file
+            foreach (XmlNode node in xDoc.GetElementsByTagName("MaterialType")) {
+                try {
+                    // Get the material type
+                    var name = node!.Attributes!["Name"]!.InnerText;
+                    // Load the requirements, if any
+                    var mat = GetMaterialTypeByName(name);
+                    mat!.LoadRequirements(node);
+                }
+                catch (Exception ex) {
+                    MessageBox.Show($"Error loading requirements for MaterialType {node.Name}. Error:" + ex.Message, "Error in Static Data Load", MessageBoxButtons.OK);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static IEnumerable<BaseItemType> AllBaseItems {
             get {
                 foreach (ItemType it in ItemTypes) {
@@ -291,6 +323,11 @@ namespace SpaceMercs {
         public static IEnumerable<BaseItemType> ResearchableBaseItems {
             get {
                 return AllBaseItems.Where(b => b.Requirements is not null);
+            }
+        }
+        public static IEnumerable<MaterialType> ResearchableMaterialTypes {
+            get {
+                return Materials.Where(b => b.Requirements is not null);
             }
         }
 

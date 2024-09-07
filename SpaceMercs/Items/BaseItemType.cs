@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     // A type of item, either equippable or ship equipment
-    public class BaseItemType {
+    public class BaseItemType : IResearchable {
         public string Name { get; private set; }
         public double Cost { get; private set; }
         public string Description { get; private set; }
@@ -52,7 +52,7 @@ namespace SpaceMercs {
         }
 
         public bool CanBuild(Race? race) {
-            if (race is null) return false;
+            if (race is null) return RequiredRace is null && Requirements is null;
             if (RequiredRace != null && RequiredRace != race) return false;
             if (Requirements is null) return true;
             return race.HasResearched(this);

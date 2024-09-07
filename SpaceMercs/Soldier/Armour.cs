@@ -154,9 +154,7 @@ namespace SpaceMercs {
             if (r < 0.2 && Level < 3) Level++;
             else if (r < 0.85) { // Upgrade mats, if possible
                 MaterialType matnew = Material;
-                foreach (MaterialType mat2 in StaticData.Materials) {
-                    if (mat2.RequiredRace != null && mat2.RequiredRace != rc) continue;
-                    if (rc is not null && rc.Population < mat2.CivSize) continue;
+                foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc))) {
                     if (mat2.IsScavenged) continue;
                     // Is this material strictly better, or largely better?
                     if (mat2.IsArmourMaterial &&

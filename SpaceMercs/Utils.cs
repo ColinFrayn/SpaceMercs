@@ -404,9 +404,7 @@ namespace SpaceMercs {
             if (rnum < 0.8) { // Random material
                 double best = 0.0;
                 MaterialType? mbest = null;
-                foreach (MaterialType mat in StaticData.Materials) {
-                    if (mat.RequiredRace is not null && race != mat.RequiredRace) continue;
-                    if (race is not null && race.Population < mat.CivSize) continue;
+                foreach (MaterialType mat in StaticData.Materials.Where(m => m.CanBuild(race))) {
                     double r = rnd.NextDouble() * Math.Pow(mat.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;

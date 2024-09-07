@@ -4,7 +4,7 @@ using System.Xml;
 namespace SpaceMercs {
     class Material : IItem {
         public string Name { get { return BaseType.Name; } }
-        public string Description { get { return BaseType.Desc; } }
+        public string Description { get { return BaseType.Description; } }
         public double Mass { get { return BaseType.UnitMass; } }
         public double Cost { get { return BaseType.ItemCost; } }
         public MaterialType BaseType { get; private set; }

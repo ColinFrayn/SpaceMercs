@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.Logging;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -659,7 +658,7 @@ namespace SpaceMercs {
         // Generate what salvage this ship contains (if it has been destroyed, then generate less)
         public Dictionary<IItem, int> GenerateSalvage(bool bDestroyed) {
             Dictionary<IItem, int> dSalvage = new Dictionary<IItem, int>();
-            IEnumerable<MaterialType> dMats = StaticData.Materials.Where(m => m.RequiredRace is null && m.CivSize <= 5);
+            IEnumerable<MaterialType> dMats = StaticData.Materials.Where(m => m.Requirements is null && m.RequiredRace is null);
             Random rand = new Random();
             foreach (MaterialType mat in dMats) {
                 int num = (int)(Type.MaxHull * mat.Rarity * (rand.NextDouble() + 2.0) / 5.0);

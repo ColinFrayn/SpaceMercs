@@ -2,7 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Materials also should have Requirements. Currently they require only CivSize.
+Research Materials (in ResearchItem dialog)
+
+Ship.GenerateSalvage() : Needs to be better at picking materials based on research / rarity / level
+
+Don't announce discoveries for new research during a mission - wait until it's over. How?
 
 ==========================================================================================================
 
@@ -11,12 +15,10 @@ Materials also should have Requirements. Currently they require only CivSize.
 Backburner : Features
 ---------------------
 
-Maybe don't announce discoveries for new research during a mission - wait until it's over. How?
-
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 
-How to make slime creatures more dangerous? Maybe have them split?
+How to make slime creatures more dangerous? Maybe have them split? (Summoning mechanic)
 
 Cover
 - When covered from the attacker, get a def bonus
