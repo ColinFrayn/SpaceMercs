@@ -1,6 +1,7 @@
 ﻿using SpaceMercs.Dialogs;
 using SpaceMercs.Items;
 using System.IO;
+using System.Windows.Interop;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -181,7 +182,7 @@ namespace SpaceMercs {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
             // Get all currently unresearchable techs
-            HashSet<BaseItemType> oldUnresearchable = UnresearchableItems.ToHashSet();
+            HashSet<IResearchable> oldUnresearchable = UnresearchableItems.ToHashSet();
             if (!Relations.ContainsKey(rc)) {
                 Relations.Add(rc, rc.BaseAttitude + exp);
             }
@@ -189,9 +190,16 @@ namespace SpaceMercs {
             int newRelations = GetRelations(rc);
             if (newRelations > oldRelations) {
                 showMessage($"Thanks to your efforts, relations with the {rc.Name} race have improved\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
-                IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(UnresearchableItems);
+                IEnumerable<IResearchable> newResearchable = oldUnresearchable.Except(UnresearchableItems);
                 if (newResearchable.Any()) {
-                    showMessage($"Collaboration with {rc.Name} scientists have made available new technological advances.\nThe following research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}", null);
+                    string msg = $"Collaboration with {rc.Name} scientists have made available new technological advances.\n";
+                    if (newResearchable.OfType<BaseItemType>().Any()) {
+                        msg += $"The following new item research is now available:\n{String.Join("\n", newResearchable.OfType<BaseItemType>().Select(it => it.Name))}";
+                    }
+                    if (newResearchable.OfType<MaterialType>().Any()) {
+                        msg += $"The following new material research is now available:\n{String.Join("\n", newResearchable.OfType<MaterialType>().Select(it => it.Name))}";
+                    }
+                    showMessage(msg, null);
                 }
             }
             if (newRelations < oldRelations) {
@@ -352,9 +360,9 @@ namespace SpaceMercs {
             }
             return count;
         }
-        public IEnumerable<BaseItemType> UnresearchableItems {
+        public IEnumerable<IResearchable> UnresearchableItems {
             get {
-                List<BaseItemType> items = new List<BaseItemType>();
+                List<IResearchable> items = new List<IResearchable>();
                 Race humanRace = StaticData.Races[0];
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
@@ -363,12 +371,19 @@ namespace SpaceMercs {
                         items.Add(it);
                     }
                 }
+                foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
+                    if (humanRace.HasResearched(mat)) continue;
+                    if (mat.RequiredRace != null && mat.RequiredRace != humanRace) continue;
+                    if (mat.Requirements?.MeetsBasicRequirements(this) == false) {
+                        items.Add(mat);
+                    }
+                }
                 return items;
             }
         }
-        public IEnumerable<BaseItemType> ResearchableItems {
+        public IEnumerable<IResearchable> ResearchableItems {
             get {
-                List<BaseItemType> items = new List<BaseItemType>();
+                List<IResearchable> items = new List<IResearchable>();
                 Race humanRace = StaticData.Races[0];
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
@@ -377,42 +392,14 @@ namespace SpaceMercs {
                         items.Add(it);
                     }
                 }
-                return items;
-            }
-        }
-        public IEnumerable<MaterialType> UnresearchableMaterials {
-            get {
-                List<MaterialType> items = new List<MaterialType>();
-                Race humanRace = StaticData.Races[0];
-                foreach (MaterialType it in StaticData.ResearchableMaterialTypes) {
-                    if (humanRace.HasResearched(it)) continue;
-                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
-                    if (it.Requirements?.MeetsBasicRequirements(this) == false) {
-                        items.Add(it);
+                foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
+                    if (humanRace.HasResearched(mat)) continue;
+                    if (mat.RequiredRace != null && mat.RequiredRace != humanRace) continue;
+                    if (mat.Requirements?.MeetsBasicRequirements(this) == true) {
+                        items.Add(mat);
                     }
                 }
                 return items;
-            }
-        }
-        public IEnumerable<MaterialType> ResearchableMaterials {
-            get {
-                List<MaterialType> items = new List<MaterialType>();
-                Race humanRace = StaticData.Races[0];
-                foreach (MaterialType it in StaticData.ResearchableMaterialTypes) {
-                    if (humanRace.HasResearched(it)) continue;
-                    if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
-                    if (it.Requirements?.MeetsBasicRequirements(this) == true) {
-                        items.Add(it);
-                    }
-                }
-                return items;
-            }
-        }
-        public IEnumerable<IResearchable> AllResearchables {
-            get {
-                IEnumerable<IResearchable> items = ResearchableItems;
-                IEnumerable<IResearchable> mats = ResearchableMaterials;
-                return items.Union(mats);
             }
         }
 

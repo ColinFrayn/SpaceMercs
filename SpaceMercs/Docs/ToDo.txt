@@ -2,9 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Research Materials (in ResearchItem dialog)
-
-Ship.GenerateSalvage() : Needs to be better at picking materials based on research / rarity / level
+Researchable materials and items : TEST ALL OF THIS
 
 Don't announce discoveries for new research during a mission - wait until it's over. How?
 
@@ -29,6 +27,8 @@ Display visual effect on creatures if they have shields
 -- Need to make textures specifically for each individual creature?
 
 Add overwatch?
+
+Ship.GenerateSalvage() : Needs to be better at picking materials based on research / rarity / level
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]

@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using SpaceMercs.Items;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -425,18 +426,23 @@ namespace SpaceMercs {
         public void CheckForLevelUp(Action<string, Action?> showMessage) {
             if (Experience >= ExperienceRequiredToReachNextLevel()) {
                 // Get all currently unresearchable techs
-                HashSet<BaseItemType> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
+                HashSet<IResearchable> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
 
                 Level++;
                 AddUtilitySkill(UtilitySkill.Unspent);
                 showMessage($"Congratulations! Soldier {Name} has reached level {Level}", () => UpgradeStat(this));
 
                 // See if we can now research any of the previously unresearchable techs. If so then announce it.
-                IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam!.UnresearchableItems);
+                IEnumerable<IResearchable> newResearchable = oldUnresearchable.Except(PlayerTeam!.UnresearchableItems);
 
                 if (newResearchable.Any()) {
                     string msg = $"Human scientists have made technological advances.\n";
-                    if (newResearchable.Any()) msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}";
+                    if (newResearchable.OfType<BaseItemType>().Any()) {
+                        msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.OfType<BaseItemType>().Select(it => it.Name))}";
+                    }
+                    if (newResearchable.OfType<MaterialType>().Any()) {
+                        msg += $"The following new materials have been discovered:\n{String.Join("\n", newResearchable.OfType<MaterialType>().Select(it => it.Name))}";
+                    }
                     showMessage(msg, null);
                 }
             }

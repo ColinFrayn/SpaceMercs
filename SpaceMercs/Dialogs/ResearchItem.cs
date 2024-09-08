@@ -64,7 +64,7 @@ namespace SpaceMercs.Dialogs {
             dgResearchItems.Rows.Clear();
             dgResearchItems.ClearSelection();
             string[] arrRowDest = new string[5];
-            foreach (IResearchable it in _playerTeam.AllResearchables) {
+            foreach (IResearchable it in _playerTeam.ResearchableItems) {
                 if (it.Requirements is null) continue; // Should never happen
                 arrRowDest[0] = it.Name;
                 double cost = it.Requirements.CashCost;

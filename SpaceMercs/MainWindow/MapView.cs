@@ -6,6 +6,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using SpaceMercs.Items;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -730,8 +731,7 @@ namespace SpaceMercs.MainWindow {
             int oldHumanPop = humanRace.Population;
 
             // Get all currently unresearchable techs
-            HashSet<BaseItemType> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
-            HashSet<MaterialType> oldUnresearchableMats = PlayerTeam.UnresearchableMaterials.ToHashSet();
+            HashSet<IResearchable> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
 
             // Go through all races and check colonies for growth. etc.
             foreach (Race rc in StaticData.Races) {
@@ -748,13 +748,16 @@ namespace SpaceMercs.MainWindow {
             }
 
             // See if we can now research any of the previously unresearchable techs. If so then announce it.
-            IEnumerable<BaseItemType> newResearchable = oldUnresearchable.Except(PlayerTeam.UnresearchableItems);
-            IEnumerable<MaterialType> newResearchableMats = oldUnresearchableMats.Except(PlayerTeam.UnresearchableMaterials);
+            IEnumerable<IResearchable> newResearchable = oldUnresearchable.Except(PlayerTeam.UnresearchableItems);
 
-            if (newResearchable.Any() || newResearchableMats.Any()) {
+            if (newResearchable.Any()) {
                 string msg = $"Human scientists have made technological advances.\n";
-                if (newResearchable.Any()) msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.Select(it => it.Name))}";
-                if (newResearchableMats.Any()) msg += $"The following new materials have been discovered:\n{String.Join("\n", newResearchableMats.Select(mat => mat.Name))}";
+                if (newResearchable.OfType<BaseItemType>().Any()) {
+                    msg += $"The following new research is now available:\n{String.Join("\n", newResearchable.OfType<BaseItemType>().Select(it => it.Name))}";
+                }
+                if (newResearchable.OfType<MaterialType>().Any()) {
+                    msg += $"The following new materials have been discovered:\n{String.Join("\n", newResearchable.OfType<MaterialType>().Select(it => it.Name))}";
+                }
                 msgBox.PopupMessage(msg);
             }
         }
