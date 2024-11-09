@@ -863,16 +863,14 @@ namespace SpaceMercs {
         public void DropItem(IItem it, int Count = 1) {
             for (int i = 0; i < Count; i++) {
                 if (Inventory.Contains(it)) {
-                    PlayerTeam?.AddItem(it);
-                    Inventory.Remove(it);
+                    if (PlayerTeam?.AddItem(it) == 0) Inventory.Remove(it);
                 }
             }
             CalculateMaxStats();
         }
         public void DropAll(IItem it) {
             while (Inventory.Contains(it)) { 
-                PlayerTeam?.AddItem(it);
-                Inventory.Remove(it);
+                if (PlayerTeam?.AddItem(it) == 0) Inventory.Remove(it);
             }
             CalculateMaxStats();
         }

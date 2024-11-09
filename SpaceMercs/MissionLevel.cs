@@ -1134,27 +1134,34 @@ namespace SpaceMercs {
             if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
-            int nCreatures = (int)((ParentMission.Soldiers.Count + rand.Next(2) + rand.Next(2)) * Const.CreatureCountScale * cg.QuantityScale / 100.0);
-            if (ParentMission.WavesRemaining < 3) nCreatures += rand.Next(2);
-            if (ParentMission.WavesRemaining < 2) nCreatures += rand.Next(2);
-            if (ParentMission.WavesRemaining == 0) nCreatures += rand.Next(2);
-            if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
+            int nCreatures = ParentMission.Soldiers.Count + rand.Next(2) - rand.Next(2);
+            if (ParentMission.WavesRemaining == 3) nCreatures += rand.Next(2);
+            if (ParentMission.WavesRemaining == 2) nCreatures++;
+            if (ParentMission.WavesRemaining == 1) nCreatures += 1 + rand.Next(2);
+            if (ParentMission.WavesRemaining == 0) nCreatures += 2 + rand.Next(2);
+            nCreatures = (int)(nCreatures * Const.CreatureCountScale * cg.QuantityScale * cg.QuantityScale / 100.0);
             if (nCreatures < 2) nCreatures = 2;
+            int nTries = 0;
+            bool hasBoss = false;
 
             // Add all creatures
-            for (int n = 0; n<nCreatures; n++) {
+            while (nCreatures > 0 && nTries < 100) {
                 Creature? cr = null;
-                if (ParentMission.WavesRemaining == 0) { // Last wave. Add a boss.
+                if (!hasBoss && ParentMission.WavesRemaining == 0) { // Last wave. Add a boss.
                     cr = cg.GenerateRandomBoss(ra, Diff, this);
                 }
                 if (cr is null) {
                     cr = cg.GenerateRandomCreature(ra, Diff, this);
                 }
                 if (cr is null) throw new Exception("Could not generate an attacking creature!");
-                PlaceAttackingCreatureInWave(cr);
+                if (PlaceAttackingCreatureInWave(cr)) {
+                    nCreatures--;
+                    if (cr.Type.IsBoss) hasBoss = true;
+                }
+                nTries++;
             }
         }
-        private void PlaceAttackingCreatureInWave(Creature cr) {
+        private bool PlaceAttackingCreatureInWave(Creature cr) {
             int nTries = 6;
             int MinDist = Const.MinimumCreatureDistanceFromStartLocation + (Width + Height) / 6;
             double BestScore = -1;
@@ -1163,7 +1170,6 @@ namespace SpaceMercs {
             for (int n = 0; n < nTries; n++) {
                 double score = 0.0;
                 int x, y;
-                score = 0.0;
                 int dist = 0;
                 do {
                     x = rand.Next(Width - 5) + 2;
@@ -1173,16 +1179,21 @@ namespace SpaceMercs {
                 } while (!CreatureCanGo(cr, x, y) || (dist < MinDist && CanSee(ptStart, new Point(x, y))));
                 // Attempt to put all creatures far from the EntryLocations
                 score += dist;
-                if (score > BestScore || best == Point.Empty) {
+                // Make sure creature can make it to the target
+                List<Point>? path = ShortestPath(cr, new Point(x, y), ptStart, 20, false);
+                if (path is not null && (score > BestScore || best == Point.Empty)) {
                     BestScore = score;
                     best = new Point(x, y);
                 }
             }
-            if (best == Point.Empty) throw new Exception("Could not find location for creature!");
+            if (best == Point.Empty) {
+                return false;
+            }
             cr.SetLocation(best);            
             cr.SetTargetInvestigation(ptStart.X, ptStart.Y); // Set the creature target as the entry point
             cr.SetAlert();
             AddCreature(cr);
+            return true;
         }
 
         #region Generate Caves

@@ -16,7 +16,6 @@ namespace SpaceMercs {
         public int Width { get; private set; }
         public int Armour { get; private set; }
         public double MaxHull { get { return (Small * 2.0) + (Medium * 4.0) + (Large * 8.0) + (Weapon * 1.0) + 4.0; } }
-        public int Cargo { get { return (Small * 150) + (Medium * 500) + (Large * 1500) - (Weapon * 50) + 50; } } // Carrying capacity in kg. Weapon rooms need ammo, supplies etc. hence removing space
         public string RoomConfigString { get { return Small + "/" + Medium + "/" + Large + "/" + Weapon; } }
         public List<Vector2> Perimeter { get; private set; }
         public List<Point> Fillers { get; private set; }
@@ -34,6 +33,7 @@ namespace SpaceMercs {
         public int Medium { get; private set; }
         public int Large { get; private set; }
         public int Weapon { get; private set; }
+        public int Capacity { get; private set; }
 
         // Internal stuff
         private readonly bool[,] Layout = new bool[201, 201]; // Midpoint @ (100,100)
@@ -89,6 +89,7 @@ namespace SpaceMercs {
             Medium = xml.SelectNodeInt("Medium");
             Large = xml.SelectNodeInt("Large");
             Weapon = xml.SelectNodeInt("Weapon");
+            Capacity = xml.SelectNodeInt("Capacity");
             Description = xml.SelectNodeText("Desc");
             Fillers = new List<Point>();
             Armour = xml.SelectNodeInt("Armour",0);

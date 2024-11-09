@@ -6,6 +6,7 @@
     <Medium>0</Medium>
     <Large>0</Large>
     <Weapon>1</Weapon>
+    <Capacity>100</Capacity>
     <Cost>50</Cost>
     <Desc>A small shuttle suitable for travel between a planet and its moons</Desc>
   </ShipType>
@@ -15,6 +16,7 @@
     <Medium>1</Medium>
     <Large>0</Large>
     <Weapon>1</Weapon>
+    <Capacity>250</Capacity>
     <Cost>450</Cost>
     <Desc>A small-medium transport ship, useful for travelling within a single system, or small interplanetary hops</Desc>
   </ShipType>
@@ -23,6 +25,7 @@
     <Medium>2</Medium>
     <Large>1</Large>
     <Weapon>1</Weapon>
+    <Capacity>500</Capacity>
     <Cost>2500</Cost>
     <Desc>A small-medium transport ship</Desc>
   </ShipType>
@@ -32,6 +35,7 @@
     <Medium>4</Medium>
     <Large>2</Large>
     <Weapon>2</Weapon>
+    <Capacity>1000</Capacity>
     <Cost>10500</Cost>
     <Desc>A mid-sized transport ship ship</Desc>
   </ShipType>
@@ -41,6 +45,7 @@
     <Medium>5</Medium>
     <Large>3</Large>
     <Weapon>2</Weapon>
+    <Capacity>2000</Capacity>
     <Cost>35000</Cost>
     <Desc>The largest transport ship</Desc>
   </ShipType>
@@ -50,6 +55,7 @@
     <Large>0</Large>
     <Weapon>2</Weapon>
     <Cost>700</Cost>
+    <Capacity>100</Capacity>
     <Desc>A small, lightly-armed military support ship</Desc>
   </ShipType>
   <ShipType Name="Light Cruiser">
@@ -59,6 +65,7 @@
     <Large>1</Large>
     <Weapon>2</Weapon>
     <Cost>3200</Cost>
+    <Capacity>300</Capacity>
     <Armour>1</Armour>
     <Desc>A small military ship</Desc>
   </ShipType>
@@ -69,6 +76,7 @@
     <Large>2</Large>
     <Weapon>3</Weapon>
     <Cost>12500</Cost>
+    <Capacity>500</Capacity>
     <Armour>2</Armour>
     <Desc>A medium-sized military ship</Desc>
   </ShipType>
@@ -79,6 +87,7 @@
     <Large>2</Large>
     <Weapon>4</Weapon>
     <Cost>40000</Cost>
+    <Capacity>1000</Capacity>
     <Armour>3</Armour>
     <Desc>A large military ship</Desc>
   </ShipType>
@@ -88,6 +97,7 @@
     <Large>1</Large>
     <Weapon>1</Weapon>
     <Cost>2200</Cost>
+    <Capacity>150</Capacity>
     <Race>Grey</Race>
     <Desc>A small exploration ship, built by the Grey Race</Desc>
   </ShipType>
@@ -97,6 +107,7 @@
     <Large>1</Large>
     <Weapon>2</Weapon>
     <Cost>3000</Cost>
+    <Capacity>150</Capacity>
     <Armour>2</Armour>
     <Race>Ogrish</Race>
     <Desc>A small military ship with heavy armour</Desc>
@@ -107,6 +118,7 @@
     <Large>2</Large>
     <Weapon>2</Weapon>
     <Cost>24000</Cost>
+    <Capacity>950</Capacity>
     <Race>Gokan</Race>
     <Armour>2</Armour>
     <Desc>A medium-sized, heavily armoured transport ship</Desc>

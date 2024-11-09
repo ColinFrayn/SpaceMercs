@@ -228,7 +228,7 @@ namespace SpaceMercs {
         // Add a single item, if we can, and return how many were left over
         public int AddItem(IItem? equip, int Count = 1) {
             if (equip is null) return Count;
-            int CargoMax = PlayerShip.Type.Cargo;
+            int CargoMax = PlayerShip.Type.Capacity;
             if (CargoMax - CargoMass < equip.Mass) return Count;
             if (!Inventory.ContainsKey(equip)) Inventory.Add(equip, 0);
             int NumToTake = Math.Min((int)Math.Floor((CargoMax - CargoMass) / equip.Mass), Count);

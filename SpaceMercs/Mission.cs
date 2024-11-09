@@ -575,7 +575,7 @@ namespace SpaceMercs {
         }
         public void NextTurn(Action<string, Action?> showMessage) {
             TurnCount++;
-            if (Goal == MissionGoal.Defend && TurnCount%5 == 1 && WavesRemaining > 0) {
+            if (Goal == MissionGoal.Defend && TurnCount%4 == 1 && WavesRemaining > 0) {
                 WavesRemaining--;
                 Levels[CurrentLevel].AddWaveOfCreatures();
                 showMessage("A wave of enemies has appeared near your location", null);

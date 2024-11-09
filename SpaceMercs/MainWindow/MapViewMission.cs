@@ -680,18 +680,7 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             if (hsDetected.Count == 0) return false;
-            // Why do we do this? Not just creatures near the impact, but anyone within sight and range of them??
-            //foreach (Creature crd in hsDetected) {
-            //    foreach (Creature cr in CurrentLevel.Creatures) {
-            //        if (!cr.IsAlert) {
-            //            int r2 = (crd.X - cr.X) * (crd.X - cr.X) + (crd.Y - cr.Y) * (crd.Y - cr.Y);
-            //            if (r2 <= Const.CreatureAlertWarningDistance * Const.CreatureAlertWarningDistance) {
-            //                if (cr.CanSee(crd)) cr.Alert();
-            //                cr.SetTargetInvestigation(x, y);
-            //            }
-            //        }
-            //    }
-            //}
+
             GenerateDetectionMap();
             return true;
         }

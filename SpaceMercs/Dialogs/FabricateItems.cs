@@ -254,12 +254,15 @@ namespace SpaceMercs.Dialogs {
                     if (r < chance) lvl++;
                 } while (r <= chance);
             }
+
             if (lvl > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(lvl));
             else MessageBox.Show("Construction succeeded!");
-            IEquippable? newItem = null;
-            if (newType is ArmourType at2) newItem = new Armour(at2, armourMat!, lvl);
-            else if (newType is WeaponType wt) newItem = new Weapon(wt, lvl);
-            else newItem = new Equipment(newType);
+
+            IEquippable? newItem = newType switch {
+                ArmourType at2 => new Armour(at2, armourMat!, lvl),
+                WeaponType wt => new Weapon(wt, lvl),
+                _ => new Equipment(newType)
+            };
 
             // Add the new item
             PlayerTeam.AddItem(newItem, 1);

@@ -28,16 +28,21 @@ namespace SpaceMercs.Dialogs {
         public void UpdateInventory(IItem? iLast = null) {
             dgInventory.Rows.Clear();
             string[] arrRow = new string[5];
+            double mass = 0d;
             foreach (IItem eq in PlayerTeam.Inventory.Keys) {
                 arrRow[0] = eq.Name;
                 arrRow[1] = eq.GetType().Name; //eq is Armour ? "Armour" : (eq is Weapon ? "Weapon" : "Item");
                 arrRow[2] = Math.Round(eq.Mass, 2) + "kg";
                 arrRow[3] = PlayerTeam.Inventory[eq].ToString();
-                arrRow[4] = Math.Round(eq.Mass * PlayerTeam.Inventory[eq], 2) + "kg";
+                double thisMass = eq.Mass * PlayerTeam.Inventory[eq];
+                arrRow[4] = Math.Round(thisMass, 2) + "kg";
                 dgInventory.Rows.Add(arrRow);
                 dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = eq;
                 if (eq == iLast) dgInventory.Rows[dgInventory.Rows.Count - 1].Selected = true;
+                mass += thisMass;
             }
+            lbTotalMass.Text = $"{Math.Round(mass, 1)} kg";
+            lbCapacity.Text = $"/ {PlayerTeam.PlayerShip.Type.Capacity} kg";
         }
 
         private void btTransfer_Click(object sender, EventArgs e) {

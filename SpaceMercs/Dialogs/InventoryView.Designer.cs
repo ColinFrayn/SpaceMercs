@@ -1,157 +1,184 @@
 ﻿namespace SpaceMercs.Dialogs {
-  partial class InventoryView {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
+    partial class InventoryView {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing) {
-      if (disposing && (components != null)) {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            dgInventory = new DataGridView();
+            Item = new DataGridViewTextBoxColumn();
+            Type = new DataGridViewTextBoxColumn();
+            Mass = new DataGridViewTextBoxColumn();
+            Count = new DataGridViewTextBoxColumn();
+            MassTotal = new DataGridViewTextBoxColumn();
+            btTransfer = new Button();
+            btDestroy = new Button();
+            lbTotalMass = new Label();
+            lbCapacity = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgInventory).BeginInit();
+            SuspendLayout();
+            // 
+            // dgInventory
+            // 
+            dgInventory.AllowUserToAddRows = false;
+            dgInventory.AllowUserToDeleteRows = false;
+            dgInventory.AllowUserToResizeColumns = false;
+            dgInventory.AllowUserToResizeRows = false;
+            dgInventory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgInventory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgInventory.Columns.AddRange(new DataGridViewColumn[] { Item, Type, Mass, Count, MassTotal });
+            dgInventory.Location = new Point(0, 0);
+            dgInventory.Margin = new Padding(4, 3, 4, 3);
+            dgInventory.MultiSelect = false;
+            dgInventory.Name = "dgInventory";
+            dgInventory.ReadOnly = true;
+            dgInventory.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgInventory.Size = new Size(570, 540);
+            dgInventory.TabIndex = 0;
+            dgInventory.SelectionChanged += dgInventory_SelectionChanged;
+            dgInventory.DoubleClick += dgInventory_DoubleClick;
+            // 
+            // Item
+            // 
+            Item.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Item.HeaderText = "Item";
+            Item.Name = "Item";
+            Item.ReadOnly = true;
+            // 
+            // Type
+            // 
+            Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Type.HeaderText = "Type";
+            Type.Name = "Type";
+            Type.ReadOnly = true;
+            Type.Width = 56;
+            // 
+            // Mass
+            // 
+            Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Mass.HeaderText = "Mass (each)";
+            Mass.Name = "Mass";
+            Mass.ReadOnly = true;
+            Mass.Width = 95;
+            // 
+            // Count
+            // 
+            Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Count.HeaderText = "Count";
+            Count.Name = "Count";
+            Count.ReadOnly = true;
+            Count.Width = 65;
+            // 
+            // MassTotal
+            // 
+            MassTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            MassTotal.HeaderText = "Mass (total)";
+            MassTotal.Name = "MassTotal";
+            MassTotal.ReadOnly = true;
+            MassTotal.Width = 94;
+            // 
+            // btTransfer
+            // 
+            btTransfer.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btTransfer.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btTransfer.Location = new Point(24, 552);
+            btTransfer.Margin = new Padding(4, 3, 4, 3);
+            btTransfer.Name = "btTransfer";
+            btTransfer.Size = new Size(164, 32);
+            btTransfer.TabIndex = 1;
+            btTransfer.Text = "Transfer To Soldier";
+            btTransfer.UseVisualStyleBackColor = true;
+            btTransfer.Click += btTransfer_Click;
+            // 
+            // btDestroy
+            // 
+            btDestroy.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btDestroy.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btDestroy.Location = new Point(378, 552);
+            btDestroy.Margin = new Padding(4, 3, 4, 3);
+            btDestroy.Name = "btDestroy";
+            btDestroy.Size = new Size(164, 32);
+            btDestroy.TabIndex = 2;
+            btDestroy.Text = "Destroy";
+            btDestroy.UseVisualStyleBackColor = true;
+            btDestroy.Click += btDestroy_Click;
+            // 
+            // lbTotalMass
+            // 
+            lbTotalMass.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            lbTotalMass.BorderStyle = BorderStyle.FixedSingle;
+            lbTotalMass.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTotalMass.Location = new Point(221, 552);
+            lbTotalMass.Margin = new Padding(4, 3, 4, 3);
+            lbTotalMass.Name = "lbTotalMass";
+            lbTotalMass.Size = new Size(66, 32);
+            lbTotalMass.TabIndex = 3;
+            lbTotalMass.Text = "8888.8 kg";
+            lbTotalMass.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbCapacity
+            // 
+            lbCapacity.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            lbCapacity.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbCapacity.Location = new Point(288, 552);
+            lbCapacity.Margin = new Padding(0, 3, 0, 3);
+            lbCapacity.Name = "lbCapacity";
+            lbCapacity.Size = new Size(74, 32);
+            lbCapacity.TabIndex = 4;
+            lbCapacity.Text = " / 8888 kg";
+            lbCapacity.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // InventoryView
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(570, 598);
+            Controls.Add(lbTotalMass);
+            Controls.Add(lbCapacity);
+            Controls.Add(btDestroy);
+            Controls.Add(btTransfer);
+            Controls.Add(dgInventory);
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "InventoryView";
+            Text = "InventoryView";
+            TopMost = true;
+            Activated += InventoryView_Activated;
+            FormClosing += InventoryView_FormClosing;
+            ((System.ComponentModel.ISupportInitialize)dgInventory).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private DataGridView dgInventory;
+        private Button btTransfer;
+        private Button btDestroy;
+        private DataGridViewTextBoxColumn Item;
+        private DataGridViewTextBoxColumn Type;
+        private DataGridViewTextBoxColumn Mass;
+        private DataGridViewTextBoxColumn Count;
+        private DataGridViewTextBoxColumn MassTotal;
+        private Label lbTotalMass;
+        private Label lbCapacity;
     }
-
-    #region Windows Form Designer generated code
-
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent() {
-      this.dgInventory = new System.Windows.Forms.DataGridView();
-      this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Mass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.MassTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.btTransfer = new System.Windows.Forms.Button();
-      this.btDestroy = new System.Windows.Forms.Button();
-      ((System.ComponentModel.ISupportInitialize)(this.dgInventory)).BeginInit();
-      this.SuspendLayout();
-      // 
-      // dgInventory
-      // 
-      this.dgInventory.AllowUserToAddRows = false;
-      this.dgInventory.AllowUserToDeleteRows = false;
-      this.dgInventory.AllowUserToResizeColumns = false;
-      this.dgInventory.AllowUserToResizeRows = false;
-      this.dgInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.dgInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dgInventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Item,
-            this.Type,
-            this.Mass,
-            this.Count,
-            this.MassTotal});
-      this.dgInventory.Location = new System.Drawing.Point(0, 0);
-      this.dgInventory.MultiSelect = false;
-      this.dgInventory.Name = "dgInventory";
-      this.dgInventory.ReadOnly = true;
-      this.dgInventory.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-      this.dgInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dgInventory.Size = new System.Drawing.Size(489, 468);
-      this.dgInventory.TabIndex = 0;
-      this.dgInventory.SelectionChanged += new System.EventHandler(this.dgInventory_SelectionChanged);
-      this.dgInventory.DoubleClick += new System.EventHandler(this.dgInventory_DoubleClick);
-      // 
-      // Item
-      // 
-      this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.Item.HeaderText = "Item";
-      this.Item.Name = "Item";
-      this.Item.ReadOnly = true;
-      // 
-      // Type
-      // 
-      this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.Type.HeaderText = "Type";
-      this.Type.Name = "Type";
-      this.Type.ReadOnly = true;
-      this.Type.Width = 56;
-      // 
-      // Mass
-      // 
-      this.Mass.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.Mass.HeaderText = "Mass (each)";
-      this.Mass.Name = "Mass";
-      this.Mass.ReadOnly = true;
-      this.Mass.Width = 90;
-      // 
-      // Count
-      // 
-      this.Count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.Count.HeaderText = "Count";
-      this.Count.Name = "Count";
-      this.Count.ReadOnly = true;
-      this.Count.Width = 60;
-      // 
-      // MassTotal
-      // 
-      this.MassTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.MassTotal.HeaderText = "Mass (total)";
-      this.MassTotal.Name = "MassTotal";
-      this.MassTotal.ReadOnly = true;
-      this.MassTotal.Width = 86;
-      // 
-      // btTransfer
-      // 
-      this.btTransfer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.btTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btTransfer.Location = new System.Drawing.Point(21, 478);
-      this.btTransfer.Name = "btTransfer";
-      this.btTransfer.Size = new System.Drawing.Size(141, 28);
-      this.btTransfer.TabIndex = 1;
-      this.btTransfer.Text = "Transfer To Soldier";
-      this.btTransfer.UseVisualStyleBackColor = true;
-      this.btTransfer.Click += new System.EventHandler(this.btTransfer_Click);
-      // 
-      // btDestroy
-      // 
-      this.btDestroy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btDestroy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btDestroy.Location = new System.Drawing.Point(324, 478);
-      this.btDestroy.Name = "btDestroy";
-      this.btDestroy.Size = new System.Drawing.Size(141, 28);
-      this.btDestroy.TabIndex = 2;
-      this.btDestroy.Text = "Destroy";
-      this.btDestroy.UseVisualStyleBackColor = true;
-      this.btDestroy.Click += new System.EventHandler(this.btDestroy_Click);
-      // 
-      // InventoryView
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(489, 518);
-      this.Controls.Add(this.btDestroy);
-      this.Controls.Add(this.btTransfer);
-      this.Controls.Add(this.dgInventory);
-      this.MaximizeBox = false;
-      this.Name = "InventoryView";
-      this.Text = "InventoryView";
-      this.TopMost = true;
-      this.Activated += new System.EventHandler(this.InventoryView_Activated);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InventoryView_FormClosing);
-      ((System.ComponentModel.ISupportInitialize)(this.dgInventory)).EndInit();
-      this.ResumeLayout(false);
-
-    }
-
-    #endregion
-
-    private System.Windows.Forms.DataGridView dgInventory;
-    private System.Windows.Forms.Button btTransfer;
-    private System.Windows.Forms.Button btDestroy;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Item;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Mass;
-    private System.Windows.Forms.DataGridViewTextBoxColumn Count;
-    private System.Windows.Forms.DataGridViewTextBoxColumn MassTotal;
-  }
 }

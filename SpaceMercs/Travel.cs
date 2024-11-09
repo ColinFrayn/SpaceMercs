@@ -224,8 +224,8 @@ namespace SpaceMercs {
                     if (PlayerTeam.CurrentMission.ShipTarget is null) throw new Exception("ShipTarget is null in Salvage mission");
                     Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(false);
                     AnnounceSalvage(dSalvage);
-                    dSalvage = PlayerTeam.AddItems(dSalvage);
-                    if (Utils.CalculateMass(dSalvage) > 0.0) {
+                    Dictionary<IItem, int> dRemains = PlayerTeam.AddItems(dSalvage);
+                    if (Utils.CalculateMass(dRemains) > 0.0) {
                         ParentView.msgBox.PopupMessage("Your cargo hold is full - couldn't collect all salvage. It has been jettisoned into space.");
                     }
                     PlayerTeam.CeaseMission();
@@ -286,8 +286,8 @@ namespace SpaceMercs {
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
                 Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission!.ShipTarget.GenerateSalvage(true);
                 AnnounceSalvage(dSalvage);
-                dSalvage = PlayerTeam.AddItems(dSalvage);
-                if (Utils.CalculateMass(dSalvage) > 0.0) {
+                Dictionary<IItem, int> dRemains = PlayerTeam.AddItems(dSalvage);
+                if (Utils.CalculateMass(dRemains) > 0.0) {
                     ParentView.msgBox.PopupMessage("Your cargo hold is full - you couldn't collect all the salvage.\nAny excess has been jettisoned into space.");
                 }
                 Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
