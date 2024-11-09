@@ -15,7 +15,7 @@ namespace SpaceMercs {
         public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
         public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
-        public const int DEBUG_EXPERIENCE_MOD = 100;  // Experience accrual multiplier
+        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
         public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
 
         // Character settings
@@ -294,6 +294,7 @@ namespace SpaceMercs {
 
         // AI Settings
         public const int AITickSpeed = 350;
+        public const int FastAITickSpeed = 50;
 
         // Static constructor
         static Const() {

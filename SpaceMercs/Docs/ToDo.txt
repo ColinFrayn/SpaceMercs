@@ -4,8 +4,6 @@ ToDo List
 
 Researchable materials and items : TEST ALL OF THIS
 
-Don't announce discoveries for new research during a mission - wait until it's over. How?
-
 ==========================================================================================================
 
 

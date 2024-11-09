@@ -106,5 +106,29 @@
       <Item Amount="0.9">Voidskin</Item>
     </Scavenge>
   </CreatureType>
+  <CreatureType Name="Void Psychic">
+    <LevelRange>11,18</LevelRange>
+    <Boss/>
+    <Attack>17</Attack>
+    <Defence>14</Defence>
+    <Armour>25</Armour>
+    <Health>20</Health>
+    <Stamina>21</Stamina>
+    <Interact/>
+    <BodyType>VoidBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious humanoid creature from the void that seems to command the other void beasts telepathically</Desc>
+    <Weapons>
+      <Weapon Weight="1">Void Lance</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Physical" Value="40"/>
+    </Resistances>
+  </CreatureType>
 </Data>
 

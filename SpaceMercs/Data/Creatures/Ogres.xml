@@ -79,7 +79,7 @@
     <LevelRange>8,16</LevelRange>
     <Attack>20</Attack>
     <Defence>12</Defence>
-    <Health>32</Health>
+    <Health>42</Health>
     <Stamina>19</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>

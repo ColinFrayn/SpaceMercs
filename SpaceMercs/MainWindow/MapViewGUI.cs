@@ -41,6 +41,7 @@ namespace SpaceMercs.MainWindow {
         public const uint I_MissionPath = 11045;
         public const uint I_MissionEffects = 11046;
         public const uint I_MissionDetection = 11047;
+        public const uint I_MissionFastAI = 11048;
         #endregion // Menu Codes
 
         // Draw the GUI elements
@@ -345,6 +346,7 @@ namespace SpaceMercs.MainWindow {
             gpMissionMenu.InsertTextItem(I_MissionPath, "Best Path", Aspect, () => PlayerTeam.Mission_ShowPath);
             gpMissionMenu.InsertTextItem(I_MissionEffects, "Effects", Aspect, () => PlayerTeam.Mission_ShowEffects);
             gpMissionMenu.InsertTextItem(I_MissionDetection, "Detection Area", Aspect, () => PlayerTeam.Mission_ViewDetection);
+            gpMissionMenu.InsertTextItem(I_MissionFastAI, "Fast AI", Aspect, () => PlayerTeam.Mission_FastAI);
 
             // First level menus
             gpSubMenu = new GUIPanel(this, direction: GUIPanel.PanelDirection.Vertical);

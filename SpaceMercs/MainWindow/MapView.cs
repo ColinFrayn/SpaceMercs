@@ -575,6 +575,7 @@ namespace SpaceMercs.MainWindow {
                 case I_MissionPath: PlayerTeam.Mission_ShowPath = !PlayerTeam.Mission_ShowPath; return;
                 case I_MissionEffects: PlayerTeam.Mission_ShowEffects = !PlayerTeam.Mission_ShowEffects; return;
                 case I_MissionDetection: PlayerTeam.Mission_ViewDetection = !PlayerTeam.Mission_ViewDetection; return;
+                case I_MissionFastAI: PlayerTeam.Mission_FastAI = !PlayerTeam.Mission_FastAI; return;
             }
         }
         #endregion // Input Handling

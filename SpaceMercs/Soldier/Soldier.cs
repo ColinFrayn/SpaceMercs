@@ -1151,7 +1151,6 @@ namespace SpaceMercs {
             return true;
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
-            CheckForLevelUp(showMessage);
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
             // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
             Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 

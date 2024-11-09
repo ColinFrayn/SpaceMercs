@@ -1764,10 +1764,10 @@ namespace SpaceMercs {
             foreach (IEntity en in Entities) en.UpdateVisibility(this);
             return true;
         }
-        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage) {
+        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage, bool fastAI) {
             List<Creature> lCreatures = new List<Creature>(Creatures); // In case one dies...
             foreach (Creature cr in lCreatures) {
-                cr.AIStep(fact, postMoveCheck, playSound, centreView);
+                cr.AIStep(fact, postMoveCheck, playSound, centreView, fastAI);
                 cr.EndOfTurn(fact, centreView, playSound, showMessage);
             }
         }

@@ -100,7 +100,7 @@
     <LevelRange>6,15</LevelRange>
     <Attack>15</Attack>
     <Defence>12</Defence>
-    <Health>25</Health>
+    <Health>33</Health>
     <Stamina>22</Stamina>
     <Armour>32</Armour>
     <BodyType>Dragon</BodyType>

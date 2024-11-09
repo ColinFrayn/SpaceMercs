@@ -545,12 +545,17 @@ namespace SpaceMercs {
                 }
             }
         }
-        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView) {
+        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;
             bool bFleeing = false;
             if (!IsAlert) return;
-            // Flee if really damaged?
-            if (Health * 4.0 < MaxHealth && CurrentTarget != null && Health <= CurrentTarget.Health && Level <= CurrentTarget.Level && !Type.IsBoss) {
+            // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
+            if (Health * 4.0 < MaxHealth &&
+                CurrentTarget != null &&
+                Health <= CurrentTarget.Health &&
+                Level <= CurrentTarget.Level &&
+                !Type.IsBoss &&
+                CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) {
                 if (rnd.NextDouble() * Health / MaxHealth < 0.1) {
                     // Flee
                     bFleeing = true;
@@ -559,7 +564,7 @@ namespace SpaceMercs {
                         MoveAwayFrom(CurrentTarget, playSound);
                         if (X != oldx || Y != oldy) {
                             postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
                     CurrentTarget = null;
@@ -583,7 +588,7 @@ namespace SpaceMercs {
                             }
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                         else if (Stamina < AttackCost) {
                             // Optionally move closer?
@@ -592,7 +597,7 @@ namespace SpaceMercs {
                                 if (path is null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 MoveTo(path[0], playSound);
                                 postMoveCheck(this);
-                                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                             }
                             return;
                         }
@@ -601,7 +606,7 @@ namespace SpaceMercs {
                             centreView(this);
                             Thread.Sleep(200);
                             AttackEntity(CurrentTarget, fact, playSound);
-                            Thread.Sleep(Const.AITickSpeed);
+                            Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
                     else {
@@ -617,7 +622,7 @@ namespace SpaceMercs {
                         else {
                             MoveTo(path[0], playSound);
                             postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
                 }
@@ -636,7 +641,7 @@ namespace SpaceMercs {
                     else {
                         MoveTo(path[0], playSound);
                         postMoveCheck(this);
-                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
                 }
                 // Running to hide somewhere
@@ -650,7 +655,7 @@ namespace SpaceMercs {
                     else {
                         MoveTo(path[0], playSound);
                         postMoveCheck(this);
-                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(Const.AITickSpeed);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
                 }
                 else {

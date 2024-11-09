@@ -71,7 +71,7 @@
     <LevelRange>2,7</LevelRange>
     <Attack>16</Attack>
     <Defence>6</Defence>
-    <Health>40</Health>
+    <Health>50</Health>
     <Stamina>18</Stamina>
     <Armour>30</Armour>
     <BodyType>Plant</BodyType>

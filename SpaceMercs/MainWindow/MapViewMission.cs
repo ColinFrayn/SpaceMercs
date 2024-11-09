@@ -159,7 +159,6 @@ namespace SpaceMercs.MainWindow {
                     PlayerTeam.Cash += ThisMission.Reward;                        
                     foreach (Soldier s in ThisMission.Soldiers) {
                         s.AddExperience(ThisMission.Experience);
-                        s.CheckForLevelUp(AnnounceMessage);
                     }
                     if (PlayerTeam.CurrentPositionHAO?.Colony is not null) {
                         PlayerTeam.ImproveRelations(PlayerTeam.CurrentPositionHAO?.Colony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
@@ -179,6 +178,11 @@ namespace SpaceMercs.MainWindow {
             if (TravelDetails != null) {
                 // What to do if defeated??
                 TravelDetails.ResumeTravelling();
+            }
+
+            // Check for level up
+            foreach (Soldier s in ThisMission.Soldiers) {
+                s.CheckForLevelUp(AnnounceMessage);
             }
         }
         private void MissionClockTick() {
@@ -303,28 +307,25 @@ namespace SpaceMercs.MainWindow {
             }
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
             if (IsKeyPressed(Keys.L)) {
-                if (PlayerTeam.Mission_ShowLabels) { PlayerTeam.Mission_ShowLabels = false; }
-                else { PlayerTeam.Mission_ShowLabels = true; }
+                PlayerTeam.Mission_ShowLabels = !PlayerTeam.Mission_ShowLabels;
             }
             if (IsKeyPressed(Keys.S)) {
-                if (PlayerTeam.Mission_ShowStatBars) { PlayerTeam.Mission_ShowStatBars = false; }
-                else { PlayerTeam.Mission_ShowStatBars = true; }
+                PlayerTeam.Mission_ShowStatBars = !PlayerTeam.Mission_ShowStatBars;
             }
             if (IsKeyPressed(Keys.T)) {
-                if (PlayerTeam.Mission_ShowTravel) { PlayerTeam.Mission_ShowTravel = false; }
-                else { PlayerTeam.Mission_ShowTravel = true; }
+                PlayerTeam.Mission_ShowTravel = !PlayerTeam.Mission_ShowTravel;
             }
             if (IsKeyPressed(Keys.P)) {
-                if (PlayerTeam.Mission_ShowPath) { PlayerTeam.Mission_ShowPath = false; }
-                else { PlayerTeam.Mission_ShowPath = true; }
+                PlayerTeam.Mission_ShowPath = !PlayerTeam.Mission_ShowPath;
             }
             if (IsKeyPressed(Keys.E)) {
-                if (PlayerTeam.Mission_ShowEffects) { PlayerTeam.Mission_ShowEffects = false; }
-                else { PlayerTeam.Mission_ShowEffects = true; }
+                PlayerTeam.Mission_ShowEffects = !PlayerTeam.Mission_ShowEffects;
             }
             if (IsKeyPressed(Keys.D)) {
-                if (PlayerTeam.Mission_ViewDetection) { PlayerTeam.Mission_ViewDetection = false; }
-                else { PlayerTeam.Mission_ViewDetection = true; }
+                PlayerTeam.Mission_ViewDetection = !PlayerTeam.Mission_ViewDetection;
+            }
+            if (IsKeyPressed(Keys.F)) {
+                PlayerTeam.Mission_FastAI = !PlayerTeam.Mission_FastAI;
             }
         }
         private void CheckHoverMission() {
@@ -929,12 +930,13 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
         }
         private void DrawMissionToggles() {
-            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 10f, PlayerTeam.Mission_ShowLabels ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, PlayerTeam.Mission_ShowStatBars ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, PlayerTeam.Mission_ShowTravel ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, PlayerTeam.Mission_ShowPath ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, PlayerTeam.Mission_ShowEffects ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, PlayerTeam.Mission_ViewDetection ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, PlayerTeam.Mission_ShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, PlayerTeam.Mission_ShowStatBars ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, PlayerTeam.Mission_ShowTravel ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, PlayerTeam.Mission_ShowPath ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, PlayerTeam.Mission_ShowEffects ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 16f, PlayerTeam.Mission_ViewDetection ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 17f, PlayerTeam.Mission_FastAI ? Color.White : Color.DimGray);
         }
         private void DisplayAILabel(ShaderProgram prog) {
             prog.SetUniform("textureEnabled", false);
@@ -1475,7 +1477,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Creature AI
-            await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage));
+            await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage, PlayerTeam.Mission_FastAI));
 
             // All done
             if (SelectedEntity != null && SelectedEntity is Soldier se && se.PlayerTeam == null) SelectedEntity = null;

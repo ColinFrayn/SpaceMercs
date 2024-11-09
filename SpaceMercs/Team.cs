@@ -22,6 +22,7 @@ namespace SpaceMercs {
         public bool Mission_ShowPath { get; set; }
         public bool Mission_ShowEffects { get; set; }
         public bool Mission_ViewDetection { get; set; }
+        public bool Mission_FastAI { get; set; }
 
         // Calculated
         public double CargoMass { get { double c = 0.0; foreach (KeyValuePair<IItem, int> kvp in Inventory) c += kvp.Key.Mass * kvp.Value; return c; } }
@@ -67,6 +68,7 @@ namespace SpaceMercs {
             Mission_ShowPath = (xml.SelectSingleNode("Mission_ShowPath") != null);
             Mission_ShowEffects = (xml.SelectSingleNode("Mission_ShowEffects") != null);
             Mission_ViewDetection = (xml.SelectSingleNode("Mission_ViewDetection") != null);
+            Mission_FastAI = (xml.SelectSingleNode("Mission_FastAI") != null);
 
             XmlNode xmlr = xml.SelectSingleNode("Relations") ?? throw new Exception("Could not find team Relations data");
             Relations.Clear();
@@ -121,6 +123,7 @@ namespace SpaceMercs {
             if (Mission_ShowPath) file.WriteLine(" <Mission_ShowPath/>");
             if (Mission_ShowEffects) file.WriteLine(" <Mission_ShowEffects/>");
             if (Mission_ViewDetection) file.WriteLine(" <Mission_ViewDetection/>");
+            if (Mission_FastAI) file.WriteLine(" <Mission_FastAI/>");
 
             file.WriteLine(" <Relations>");
             foreach (Race rc in Relations.Keys) {
