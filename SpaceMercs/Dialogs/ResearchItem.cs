@@ -38,6 +38,7 @@ namespace SpaceMercs.Dialogs {
             btResearch.Enabled = false;
             durationSeconds = item.Requirements.Duration * Const.SecondsPerDay;
             _typeToResearch = item;
+            iProgress = 0;
             clockTick.Start();
         }
         private void UpdateResearchProgress(object? myObject, EventArgs myEventArgs) {
@@ -51,6 +52,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void ResearchCompleted() {
             pbResearch.Visible = false;
+            iProgress = 0;
             if (_typeToResearch is null) throw new Exception("Found a null item to research!");
             StaticData.Races[0].CompleteResearch(_typeToResearch);
             DisplayAvailableResearch();

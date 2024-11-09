@@ -960,7 +960,7 @@ namespace SpaceMercs {
         private Armour? PickRandomBaseArmourForLocation(BodyPart bp) {
             MaterialType? mat = null;
             // Get base material
-            foreach (MaterialType m in StaticData.Materials) {
+            foreach (MaterialType m in StaticData.Materials.Where(mat => mat.CanBuild(Race))) {
                 if (m.IsArmourMaterial && (mat is null || m.Rarity > mat.Rarity)) mat = m; // Pick the most common material
             }
             if (mat is null) return null;

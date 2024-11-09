@@ -68,8 +68,8 @@ namespace SpaceMercs {
             if (Known) file.WriteLine("<Known/>");
             file.WriteLine("<Research>");
             foreach (IResearchable item in ResearchedItems) {
-                if (item is BaseItemType it) file.WriteLine($" <Item>{item.Name}</Item>");
-                if (item is MaterialType mat) file.WriteLine($" <Material>{item.Name}</Material>");
+                if (item is BaseItemType it) file.WriteLine($" <Item>{it.Name}</Item>");
+                else if (item is MaterialType mat) file.WriteLine($" <Material>{mat.Name}</Material>");
                 else throw new Exception($"Unknown IResearchable type : {item.GetType()}");
             }
             file.WriteLine("</Research>");

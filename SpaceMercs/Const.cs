@@ -181,7 +181,7 @@ namespace SpaceMercs {
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
-        public const double DailyResearchProb = 0.005; // Chance of successfully researching a technology, per day, for a nonHuman race.
+        public const double DailyResearchProb = 0.002; // Chance of successfully researching a technology, per day, for a nonHuman race.
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony

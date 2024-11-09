@@ -1,6 +1,5 @@
-﻿using System.Xml;
-using OpenTK.Mathematics;
-using static OpenTK.Graphics.OpenGL.GL;
+﻿using OpenTK.Mathematics;
+using System.Xml;
 using static SpaceMercs.Soldier;
 
 namespace SpaceMercs {
@@ -469,7 +468,7 @@ namespace SpaceMercs {
             foreach (ArmourType at in StaticData.ArmourTypes) {
                 if (!at.CanBuild(race)) continue;
                 if (at.Locations.Count == 1) {
-                    foreach (MaterialType mat in StaticData.Materials) {
+                    foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(race))) {
                         if (!mat.IsArmourMaterial) continue;
                         if (race is not null && mat.RequiredRace is not null && race != mat.RequiredRace) continue;
                         double r = rnd.NextDouble() * at.Rarity * mat.Rarity;

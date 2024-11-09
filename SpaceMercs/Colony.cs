@@ -354,7 +354,7 @@ namespace SpaceMercs {
 
             // Now add all armour types
             foreach (ArmourType atp in StaticData.ArmourTypes.Where(it => it.CanBuild(Owner))) {
-                foreach (MaterialType mat in StaticData.Materials) {
+                foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
                     if (!mat.IsArmourMaterial) continue;
                     if (mat.IsScavenged) continue;
                     for (int Level = 0; Level < 4; Level++) {

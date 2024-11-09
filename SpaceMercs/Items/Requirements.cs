@@ -126,6 +126,7 @@ namespace SpaceMercs.Items {
                 foreach (MaterialType mat in RequiredMaterials.Keys) {
                     str += $"Materials: {mat.Name} * {RequiredMaterials[mat]}\n";
                 }
+                str += $"Cost = {CashCost}cr\n";
                 return str;
             }
         }

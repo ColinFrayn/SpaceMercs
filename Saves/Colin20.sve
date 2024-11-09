@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>17/09/2167 13:50:16</Clock>
+<Clock>28/10/2167 03:09:00</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -14792,7 +14792,7 @@
 </Map>
 <Team>
  <Pos>(0,0)5.0</Pos>
- <Cash>142.0138322599216</Cash>
+ <Cash>72.0138322599216</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="32" Y="24"/>
@@ -14982,7 +14982,7 @@
   <Inv Count="3">
 <Equipment Type="Medikit"/>
   </Inv>
-  <Inv Count="24">
+  <Inv Count="22">
 <Material Type="Steel"/>
   </Inv>
   <Inv Count="19">
@@ -15000,7 +15000,7 @@
   <Inv Count="6">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="28">
+  <Inv Count="26">
 <Material Type="Chitin"/>
   </Inv>
   <Inv Count="3">
@@ -15030,9 +15030,6 @@
   <Inv Count="2">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="2">
-<Material Type="Crystals"/>
-  </Inv>
   <Inv Count="3">
 <Material Type="Industrial Chemicals"/>
   </Inv>
@@ -15048,6 +15045,12 @@
  <Item>Proton Gun</Item>
  <Item>Colony Builder</Item>
  <Item>Laser Rifle</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Rail Gun</Item>
+ <Item>Laser Pistol</Item>
+ <Material>Metasteel</Material>
+ <Item>Advanced Fission Core</Item>
+ <Item>Auto Repair</Item>
 </Research>
 </Race>
 <Race Name="Gokan">
