@@ -21,7 +21,7 @@ namespace UnitTests {
 
         [Test]
         public void Test_AddItem() {
-            Team team = Team.Empty();
+            Team team = TestUtils.TestTeam();
             Assert.AreEqual(0, team.Inventory.Count);
             Equipment eq = new Equipment(typ1);
             team.AddItem(eq);
@@ -32,7 +32,7 @@ namespace UnitTests {
 
         [Test]
         public void Test_AddMultipleItems() {
-            Team team = Team.Empty();
+            Team team = TestUtils.TestTeam();
             Equipment eq = new Equipment(typ1);
             team.AddItem(eq, 20);
             Assert.AreEqual(1, team.Inventory.Count);
@@ -42,7 +42,7 @@ namespace UnitTests {
 
         [Test]
         public void Test_AddMultipleItems_ShouldStackSeparately() {
-            Team team = Team.Empty();
+            Team team = TestUtils.TestTeam();
             Equipment eq1 = new Equipment(typ1);
             Equipment eq2 = new Equipment(typ2);
             team.AddItem(eq1);
@@ -59,7 +59,7 @@ namespace UnitTests {
 
         [Test]
         public void Test_RemoveItemByType() {
-            Team team = Team.Empty();
+            Team team = TestUtils.TestTeam();
             Equipment eq = new Equipment(typ1);
             team.AddItem(eq);
             team.RemoveItemFromStores(eq);
@@ -68,7 +68,7 @@ namespace UnitTests {
 
         [Test]
         public void Test_RemoveItemByType_WrongType_ShouldBeNOP() {
-            Team team = Team.Empty();
+            Team team = TestUtils.TestTeam();
             Equipment eq = new Equipment(typ1);
             Equipment eq2 = new Equipment(typ2);
             team.AddItem(eq);

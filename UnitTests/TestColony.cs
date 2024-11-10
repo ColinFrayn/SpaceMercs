@@ -1,3 +1,4 @@
+using Moq;
 using SpaceMercs;
 
 namespace UnitTests {
@@ -76,10 +77,11 @@ namespace UnitTests {
         public void Test_ExpandBase_Random() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
             Colony cl = new Colony(humanRace, 1, 0, planet);
-            Random rand = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(It.IsAny<int>())).Returns(1);
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));
             Assert.False(cl.HasBaseType(Colony.BaseType.Colony));
-            cl.ExpandBase(rand);
+            cl.ExpandBase(mockRandom.Object);
             Assert.AreEqual(2, cl.BaseSize);
             Assert.AreEqual(2, humanRace.Population);
         }

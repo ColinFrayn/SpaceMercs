@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>01/01/2150 00:21:18</Clock>
+<Clock>01/01/2150 00:26:11</Clock>
 <Map Seed="174040" SPS="14" PD="5">
  <Sector X="0" Y="-1" Inhabitant="Gokan">
 <Star ID="0">
@@ -3696,35 +3696,6 @@
   <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
 </Soldier>
-<Soldier Name="Eva Roberts">
- <Level>2</Level>
- <XP>0</XP>
- <Gender>Female</Gender>
- <Race>Human</Race>
- <Stats>10,11,14,11,14</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="2">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Shotgun" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Shotgun">81</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Armoursmith">2</Exp>
- </UtilityExperience>
-</Soldier>
 <Soldier Name="Wilma Quick">
  <Level>2</Level>
  <XP>0</XP>
@@ -3801,29 +3772,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>2034674382</Seed>
  <Waves>5</Waves>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="474033707" Diff="2">
- <Name>Enemy Ship</Name>
- <Hull>15</Hull>
- <Shield>0</Shield>
- <Seed>703079</Seed>
- <Eqp ID="6" Active="True">Thrusters</Eqp>
- <Eqp ID="2" Active="True">Cabin</Eqp>
- <Eqp ID="3" Active="True">Cabin</Eqp>
- <Eqp ID="5" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>16.37</Reward>
- <Diff>2</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>682533552</Seed>
- <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Surface</Type>
@@ -7905,38 +7853,75 @@
 </Map>
 <Team>
  <Pos>(0,0)0.6</Pos>
- <Cash>67.580636974071</Cash>
+ <Cash>34.51084562232069</Cash>
  <Soldiers>
 <Soldier Name="Yakob Ironhelm">
- <Location X="3" Y="35"/>
- <Health>0.8137326262529578</Health>
- <Stamina>1.747926043842404</Stamina>
+ <Location X="47" Y="35"/>
+ <Health>14.576424726021703</Health>
+ <Stamina>0</Stamina>
  <Shields>0</Shields>
  <Facing>90</Facing>
- <Level>2</Level>
- <XP>2388</XP>
+ <Level>3</Level>
+ <XP>2697</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>15,12,10,13,11</Stats>
+ <Stats>15,12,10,13,12</Stats>
  <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
 <Armour Type="Gloves" Material="Kevlar" Level="0"/>
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Axe" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">64</Exp>
+  <Exp Type="Melee">71</Exp>
  </WeaponExperience>
  <UtilityExperience>
-  <Exp Skill="Unspent">1</Exp>
+  <Exp Skill="Unspent">2</Exp>
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Scavenging">1</Exp>
+ </UtilityExperience>
+ <Moved/>
+</Soldier>
+<Soldier Name="Eva Roberts">
+ <Location X="48" Y="29"/>
+ <Health>21.4409265451954</Health>
+ <Stamina>5.380469702081591</Stamina>
+ <Shields>0</Shields>
+ <Facing>101.30993247402021</Facing>
+ <Level>2</Level>
+ <XP>309</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>10,11,14,11,14</Stats>
+ <Colour>Blue</Colour>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Gloves" Material="Kevlar" Level="0"/>
+<Armour Type="Cap" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">75</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Armoursmith">2</Exp>
  </UtilityExperience>
  <Moved/>
 </Soldier>
@@ -7949,6 +7934,7 @@
  <Eqp ID="6" Active="True">Thrusters</Eqp>
  <Eqp ID="0" Active="True">Fission Core</Eqp>
  <Eqp ID="5" Active="True">Chain Gun</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
@@ -7958,15 +7944,9 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="6079"/>
+  <Relation Race="Human" Value="6092"/>
  </Relations>
  <Inventory>
-  <Inv Count="1">
-<Armour Type="Gloves" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Automatic Rifle" Level="0" />
-  </Inv>
  </Inventory>
 </Team>
 <Races>
