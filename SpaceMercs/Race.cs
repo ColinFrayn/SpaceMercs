@@ -134,7 +134,7 @@ namespace SpaceMercs {
                 cl.CheckGrowth();
             }
         }
-        internal void CheckColonySeeds(GUIMessageBox msgBox, double tDiff) {
+        internal void CheckColonySeeds(GUIMessageBox msgBox, TimeSpan tDiff) {
             // Take a copy as we may modify the original
             List<Colony> backup = new List<Colony>(Colonies);
             foreach (Colony cl in backup) {
@@ -185,15 +185,16 @@ namespace SpaceMercs {
                 }
             } while (daysSinceLast > 0);
         }
-        internal void CheckResearch(double tDiff) {
+        internal void CheckResearch(TimeSpan tDiff, int maxLevel) {
             if (IsPlayer) return;
 
-            double nDays = tDiff * 365.0;
+            double nDays = tDiff.TotalSeconds / Const.SecondsPerDay;
             Random rand = new Random();
 
             // Are there any items that this race can research?
             foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                 if (HasResearched(it)) continue;
+                if (maxLevel < (it.Requirements?.MinLevel ?? 0)) continue; // Gate it by player level too so we don't end up with enemy races way more advanced
                 if (it.Requirements?.MeetsRequirements(this) == true) {
                     double diff = it.Requirements.Difficulty;
                     double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
@@ -205,6 +206,7 @@ namespace SpaceMercs {
             // Are there any material types that this race can research?
             foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
                 if (HasResearched(mat)) continue;
+                if (maxLevel < (mat.Requirements?.MinLevel ?? 0)) continue; // Gate it by player level too so we don't end up with enemy races way more advanced
                 if (mat.Requirements?.MeetsRequirements(this) == true) {
                     double diff = mat.Requirements.Difficulty;
                     double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*

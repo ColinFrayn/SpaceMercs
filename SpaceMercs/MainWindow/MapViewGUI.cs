@@ -512,7 +512,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Set up hyperspace
-            if (PlayerTeam.CurrentPosition?.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate) {
+            if (PlayerTeam.CurrentPosition?.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate && PlayerTeam.CurrentPosition.GetSystem() == ao.GetSystem()) {
                 gbHyperspace!.Activate();
             }
         }

@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-???
+Menu bar at left - add a delay to closing it so it doesn't close when we move over to the right
 
 ==========================================================================================================
 

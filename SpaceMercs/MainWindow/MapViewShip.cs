@@ -512,7 +512,7 @@ namespace SpaceMercs.MainWindow {
                     fullShaderProgram.SetUniform("flatColour", new Vector4(0f, 1f, 0f, 1f));
                     GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
                     Square.Flat.BindAndDraw();
-                    Matrix4 p2TranslateM = Matrix4.CreateTranslation(0.79f + (0.2f/fract), 0.12f, 0f);
+                    Matrix4 p2TranslateM = Matrix4.CreateTranslation(0.79f + (0.2f/fract), 0.15f, 0f);
                     pfScaleM = Matrix4.CreateScale(barWidth * (1f - (1f / fract)), barHeight, 1f);
                     fullShaderProgram.SetUniform("model", pfScaleM * p2TranslateM);
                     fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 0f, 0f, 1f));

@@ -211,10 +211,10 @@ namespace SpaceMercs {
                 dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             }
         }
-        internal void UpdateSeedProgress(GUIMessageBox msgBox, double tDiff) {
+        internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff) {
             if (!CanSeed) return;
             Random rand = new Random();
-            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff; // Annualised
+            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds / Const.SecondsPerYear; 
             if (SeedProgress >= Const.ColonySeedTarget) {
                 if (Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
                     // Built a new colony in this system

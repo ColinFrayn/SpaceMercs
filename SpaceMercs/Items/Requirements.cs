@@ -3,7 +3,7 @@ using static SpaceMercs.ShipEquipment;
 
 namespace SpaceMercs.Items {
     public class Requirements {
-        private readonly int MinLevel;
+        public readonly int MinLevel;
         private readonly int MinSystems;
         private readonly int MinPop;
         public int CashCost { get; private set; }

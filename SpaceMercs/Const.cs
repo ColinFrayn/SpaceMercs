@@ -188,7 +188,7 @@ namespace SpaceMercs {
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
-        public const double DailyResearchProb = 0.002; // Chance of successfully researching a technology, per day, for a nonHuman race.
+        public const double DailyResearchProb = 0.0015; // Chance of successfully researching a technology, per day, for a nonHuman race.
 
         // Colony stuff
         public const int MaxColonyMercenaries = 16;  // In a colony
@@ -204,7 +204,7 @@ namespace SpaceMercs {
         public const double UpgradeCostModifier = 1.2; // To upgrade an item by one level
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item
         public const double ColonySeedRate = 5.0; // Affects the speed at which new colonies are created in populated systems.
-        public const double ColonySeedTarget = 100.0; // Target seeding point at which level the colony may seed
+        public const double ColonySeedTarget = 200.0; // Target seeding point at which level the colony may seed
 
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system

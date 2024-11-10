@@ -29,6 +29,7 @@ namespace SpaceMercs.MainWindow {
         private IEntity? SelectedEntity = null;
         private Soldier? soldierPanelCurrentHover = null;
         private bool bDragging = false;
+        private float dragX, dragY;
         private int[,] DistMap;
         private bool[,] TargetMap;
         private bool[,] AoEMap;
@@ -393,7 +394,9 @@ namespace SpaceMercs.MainWindow {
                 fMissionViewY += e.DeltaY * fScale;
                 if (fMissionViewY < 0) fMissionViewY = 0;
                 if (fMissionViewY > CurrentLevel.Height) fMissionViewY = CurrentLevel.Height;
-                bDragging = true;
+                dragX += e.DeltaX;
+                dragY += e.DeltaY;
+                if (Math.Abs(dragX) > 10 || Math.Abs(dragY) > 10) bDragging = true; // Only dragging if we moved a long way
             }
             else bDragging = false;
             int oldhoverx = hoverx, oldhovery = hovery;
@@ -536,7 +539,7 @@ namespace SpaceMercs.MainWindow {
                 if (SelectedEntity != null && (SelectedEntity is Soldier) && !bAIRunning) SetupContextMenu();
             }
             if (e.Button == MouseButton.Left) {
-                // TODO: Left click
+                dragX = dragY = 0f;
             }
         }
         private void DoubleClick_Mission() {

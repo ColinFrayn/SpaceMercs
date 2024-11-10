@@ -696,11 +696,11 @@ namespace SpaceMercs.MainWindow {
         public void UpdateCurrentTime(DateTime newTime) {
             DateTime oldTime = Const.dtTime;
             Const.dtTime = newTime;
-            double tDiff = (newTime - oldTime).TotalSeconds / Const.SecondsPerYear;
+            TimeSpan tDiff = (newTime - oldTime);
             RunClockTickUpdate(tDiff);
         }
 
-        private void RunClockTickUpdate(double tDiff) {
+        private void RunClockTickUpdate(TimeSpan tDiff) {
             CheckPopulationGrowth(tDiff);
             // TODO
         }
@@ -727,7 +727,7 @@ namespace SpaceMercs.MainWindow {
             SetAOButtonsOnGUI(aoSelected);
         }
 
-        private void CheckPopulationGrowth(double tDiff) {
+        private void CheckPopulationGrowth(TimeSpan tDiff) {
             // tDiff in fraction of a year
             Race humanRace = StaticData.Races[0];
             int oldHumanPop = humanRace.Population;
@@ -735,12 +735,14 @@ namespace SpaceMercs.MainWindow {
             // Get all currently unresearchable techs
             HashSet<IResearchable> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
 
+            int maxLevel = PlayerTeam.MaximumSoldierLevel;
+
             // Go through all races and check colonies for growth. etc.
             foreach (Race rc in StaticData.Races) {
                 if (!rc.IsPlayer) rc.CheckForNewColonySystems(msgBox);
                 rc.CheckGrowthForAllColonies();
                 rc.CheckColonySeeds(msgBox, tDiff);
-                rc.CheckResearch(tDiff);
+                rc.CheckResearch(tDiff, maxLevel);
             }
 
             // Announce pop growth
