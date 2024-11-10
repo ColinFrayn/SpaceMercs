@@ -92,15 +92,15 @@ namespace SpaceMercs.Dialogs {
 
             // Stats
             lbStrength.Text = s.Strength.ToString();
-            ttSoldier.SetToolTip(this.lbStrength, s.BaseStrength + " (base) + " + s.StatBonuses(StatType.Strength) + " (items)");
+            ttSoldier.SetToolTip(this.lbStrength, $"{s.BaseStrength} (base) {(s.StatBonuses(StatType.Strength) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Strength)) + " (items)");
             lbAgility.Text = s.Agility.ToString();
-            ttSoldier.SetToolTip(this.lbAgility, s.BaseAgility + " (base) + " + s.StatBonuses(StatType.Agility) + " (items)");
+            ttSoldier.SetToolTip(this.lbAgility, $"{s.BaseAgility} (base) {(s.StatBonuses(StatType.Agility) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Agility)) + " (items)");
             lbInsight.Text = s.Insight.ToString();
-            ttSoldier.SetToolTip(this.lbInsight, s.BaseInsight + " (base) + " + s.StatBonuses(StatType.Insight) + " (items)");
+            ttSoldier.SetToolTip(this.lbInsight, $"{s.BaseInsight} (base) {(s.StatBonuses(StatType.Insight) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Insight)) + " (items)");
             lbToughness.Text = s.Toughness.ToString();
-            ttSoldier.SetToolTip(this.lbToughness, s.BaseToughness + " (base) + " + s.StatBonuses(StatType.Toughness) + " (items)");
+            ttSoldier.SetToolTip(this.lbToughness, $"{s.BaseToughness} (base) {(s.StatBonuses(StatType.Toughness) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Toughness)) + " (items)");
             lbEndurance.Text = s.Endurance.ToString();
-            ttSoldier.SetToolTip(this.lbEndurance, s.BaseEndurance + " (base) + " + s.StatBonuses(StatType.Endurance) + " (items)");
+            ttSoldier.SetToolTip(this.lbEndurance, $"{s.BaseEndurance} (base) {(s.StatBonuses(StatType.Endurance) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Endurance)) + " (items)");
 
             // Display armour presence by colours
             lbHead.BackColor = ArmourToColour(s.GetArmourAtLocation(BodyPart.Head));
@@ -121,7 +121,6 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.lbHealthTotal, s.BaseHealth + " (base) + " + s.StatBonuses(StatType.Health) + " (items)");
             lbAttackTotal.Text = s.Attack.ToString();
             double bfi = s.StatBonuses(StatType.Attack);
-            //if (s.EquippedWeapon != null) bfi += s.EquippedWeapon.AccuracyBonus;
             ttSoldier.SetToolTip(this.lbAttackTotal, s.BaseAttack + " (base) + " + bfi + " (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : ""));
             lbDefenceTotal.Text = s.Defence.ToString();
             ttSoldier.SetToolTip(this.lbDefenceTotal, s.BaseDefence + " (base) + " + s.StatBonuses(StatType.Defence) + " (items) + " + s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance) + " (skills)");
@@ -134,6 +133,9 @@ namespace SpaceMercs.Dialogs {
             }
             ttSoldier.SetToolTip(this.lbArmour, strArmour);
             pbExperience.Refresh(); // Display the experience progress bar
+            btUpgradeStat.Enabled = s.PointsToSpend > 0;
+            btUpgradeStat.Visible = s.PointsToSpend > 0;
+            btUpgradeStat.Text = $"+{s.PointsToSpend}";
 
             // Weapon skills
             lbWeaponSkills.Items.Clear();
@@ -321,7 +323,9 @@ namespace SpaceMercs.Dialogs {
             e.Graphics.Clear(Color.White);
 
             Soldier s = SelectedSoldier() ?? throw new Exception("No selected soldier to paint");
-            float fraction = (float)s.Experience / (float)s.ExperienceRequiredToReachNextLevel();
+            int lastLevel = Soldier.ExperienceRequiredToReachLevel(s.Level);
+            int nextLevel = s.ExperienceRequiredToReachNextLevel();
+            float fraction = (float)(s.Experience - lastLevel) / (float)(nextLevel - lastLevel);
             int wid = (int)(fraction * pbExperience.ClientSize.Width);
             e.Graphics.FillRectangle(Brushes.Red, 0, 0, wid, pbExperience.ClientSize.Height);
 
@@ -331,7 +335,7 @@ namespace SpaceMercs.Dialogs {
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
                 Font f = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-                e.Graphics.DrawString(s.Experience.ToString() + " / " + s.ExperienceRequiredToReachNextLevel().ToString(), f, Brushes.Black, pbExperience.ClientRectangle, sf);
+                e.Graphics.DrawString((s.Experience - lastLevel).ToString() + " / " + (nextLevel - lastLevel).ToString(), f, Brushes.Black, pbExperience.ClientRectangle, sf);
             }
         }
 
@@ -441,6 +445,14 @@ namespace SpaceMercs.Dialogs {
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             string desc = Utils.UtilitySkillToDesc(sk);
             MessageBox.Show(desc);
+        }
+
+        private void btUpgradeStat_Click(object sender, EventArgs e) {
+            Soldier? s = SelectedSoldier();
+            if (s is null) return;
+            if (s.PointsToSpend == 0) return;
+            s.UpgradeStat();
+            ShowSelectedSoldierDetails();
         }
     }
 }

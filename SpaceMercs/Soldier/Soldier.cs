@@ -25,6 +25,7 @@ namespace SpaceMercs {
         public Point GoTo { get; set; }
         public bool OnMission { get; set; }
         private readonly Random rnd;
+        public int PointsToSpend { get; private set; }
 
         // IEntity Stuff
         public int X { get; private set; }
@@ -429,8 +430,9 @@ namespace SpaceMercs {
                 HashSet<IResearchable> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
 
                 Level++;
+                PointsToSpend++;
                 AddUtilitySkill(UtilitySkill.Unspent);
-                showMessage($"Congratulations! Soldier {Name} has reached level {Level}", () => UpgradeStat(this));
+                showMessage($"Congratulations! Soldier {Name} has reached level {Level}", null);
 
                 // See if we can now research any of the previously unresearchable techs. If so then announce it.
                 IEnumerable<IResearchable> newResearchable = oldUnresearchable.Except(PlayerTeam!.UnresearchableItems);
@@ -447,13 +449,16 @@ namespace SpaceMercs {
                 }
             }
         }
-        private static void UpgradeStat(Soldier s) {
-            ChooseStat cs = new ChooseStat(s);
+        public void UpgradeStat() {
+            ChooseStat cs = new ChooseStat(this);
             cs.ShowDialog(new Form { TopMost = true });
-            s.CalculateMaxStats();
+            CalculateMaxStats();
+        }
+        public static int ExperienceRequiredToReachLevel(int lev) {
+            return (int)(Const.SoldierLevelExperience * ((Math.Pow(Const.SoldierLevelExponent, lev - 2) * Const.SoldierLevelScale) - (Const.SoldierLevelScale - 1.0)));
         }
         public int ExperienceRequiredToReachNextLevel() {
-            return (int)(Const.SoldierLevelExperience * ((Math.Pow(Const.SoldierLevelExponent, Level - 1) * Const.SoldierLevelScale) - (Const.SoldierLevelScale - 1.0)));
+            return ExperienceRequiredToReachLevel(Level + 1);
         }
         public void GenerateRandomUtilitySkills() {
             UtilitySkills.Clear();
@@ -493,15 +498,16 @@ namespace SpaceMercs {
             if (EquippedWeapon != null) WeaponExperience.Add(EquippedWeapon.Type.WClass, val);
         }
         public void IncreaseStat(StatType tp, int val = 1) {
+            if (PointsToSpend == 0) return;
             switch (tp) {
                 case StatType.Strength: BaseStrength += val; break;
                 case StatType.Agility: BaseAgility += val; break;
                 case StatType.Insight: BaseInsight += val; break;
                 case StatType.Toughness: BaseToughness += val; break;
                 case StatType.Endurance: BaseEndurance += val; break;
-                default: throw new NotImplementedException("Attemptign to increase non-primary stat : " + tp.ToString());
+                default: throw new NotImplementedException("Attempting to increase non-primary stat : " + tp.ToString());
             }
-
+            PointsToSpend--;
             CalculateMaxStats();
         }
 
@@ -521,6 +527,7 @@ namespace SpaceMercs {
             Level = ilvl;
             IsActive = true;
             Experience = 0;
+            PointsToSpend = 0;
             GoTo = Point.Empty;
             OnMission = false;
             UtilitySkills.Add(UtilitySkill.Unspent, ilvl + 1);
@@ -553,6 +560,7 @@ namespace SpaceMercs {
             }
             else X = Y = 0;
             Level = xml.SelectNodeInt("Level");
+            PointsToSpend = xml.SelectNodeInt("PointsToSpend", 0);
             Gender = xml.SelectNodeEnum<GenderType>("Gender");
             string raceName = xml.SelectSingleNode("Race")?.InnerText ?? "";
             Race = StaticData.GetRaceByName(raceName) ?? throw new Exception($"Unrecognised Race in Soldier data : {raceName}");
@@ -711,6 +719,9 @@ namespace SpaceMercs {
             file.WriteLine(" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
             if (GoTo != Point.Empty && GoTo != Location) file.WriteLine(" <GoTo X=\"" + GoTo.X + "\" Y=\"" + GoTo.Y + "\"/>");
             file.WriteLine(" <Colour>" + ColorTranslator.ToHtml(PrimaryColor) + "</Colour>");
+            if (PointsToSpend > 0) {
+                file.WriteLine(" <PointsToSpend>" + PointsToSpend + "</PointsToSpend>");
+            }
 
             if (Inventory.Count > 0) {
                 file.WriteLine(" <Inventory>");
@@ -1017,7 +1028,7 @@ namespace SpaceMercs {
             aoLocation = PlayerTeam?.CurrentPosition;
             // TODO: Anything else we want to do?
         }
-
+        
         // Actions
         public bool Move(Utils.Direction d) {
             if (Stamina < MovementCost) return false;

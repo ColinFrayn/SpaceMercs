@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -102,6 +102,7 @@
             label9 = new Label();
             lbInsufficientBerths = new Label();
             cdPickColour = new ColorDialog();
+            btUpgradeStat = new Button();
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
             gbSoldier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
@@ -120,14 +121,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle4;
             dgSoldiers.Location = new Point(14, 128);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -185,6 +186,7 @@
             // 
             // gbSoldier
             // 
+            gbSoldier.Controls.Add(btUpgradeStat);
             gbSoldier.Controls.Add(btColour);
             gbSoldier.Controls.Add(btIncreaseSkill);
             gbSoldier.Controls.Add(btAddNewSkill);
@@ -439,12 +441,13 @@
             // 
             lbDeactivated.AutoSize = true;
             lbDeactivated.ForeColor = Color.Red;
-            lbDeactivated.Location = new Point(8, 20);
+            lbDeactivated.Location = new Point(171, 19);
             lbDeactivated.Margin = new Padding(4, 0, 4, 0);
             lbDeactivated.Name = "lbDeactivated";
             lbDeactivated.Size = new Size(121, 15);
             lbDeactivated.TabIndex = 85;
             lbDeactivated.Text = "Soldier is deactivated!";
+            lbDeactivated.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbRFoot
             // 
@@ -1070,6 +1073,18 @@
             cdPickColour.Color = Color.Blue;
             cdPickColour.SolidColorOnly = true;
             // 
+            // btUpgradeStat
+            // 
+            btUpgradeStat.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btUpgradeStat.Location = new Point(121, 14);
+            btUpgradeStat.Margin = new Padding(0);
+            btUpgradeStat.Name = "btUpgradeStat";
+            btUpgradeStat.Size = new Size(34, 24);
+            btUpgradeStat.TabIndex = 93;
+            btUpgradeStat.Text = "+8";
+            btUpgradeStat.UseVisualStyleBackColor = true;
+            btUpgradeStat.Click += btUpgradeStat_Click;
+            // 
             // TeamView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1195,5 +1210,6 @@
         private Label label17;
         private ColorDialog cdPickColour;
         private Button btColour;
+        private Button btUpgradeStat;
     }
 }

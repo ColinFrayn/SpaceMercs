@@ -106,7 +106,6 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(261, 272);
-            ControlBox = false;
             Controls.Add(btEndurance);
             Controls.Add(btToughness);
             Controls.Add(btInsight);
@@ -118,7 +117,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ChooseStat";
-            Text = "ChooseStat";
+            Text = "Enhance A Stat";
             TopMost = true;
             ResumeLayout(false);
             PerformLayout();

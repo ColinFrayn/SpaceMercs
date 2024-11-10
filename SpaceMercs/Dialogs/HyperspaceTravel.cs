@@ -24,9 +24,12 @@ namespace SpaceMercs.Dialogs {
             DisplayHyperspaceDestinations();
         }
 
+        private double CalculateCost(double distLy) {
+            return Math.Pow(distLy, Const.HyperspaceCostDistanceExponent) * Math.Pow(_playerTeam.PlayerShip.Type.MaxHull, Const.HyperspaceCostHullExponent) / Const.HyperspaceCostScale;
+        }
         private void StartTravel(HyperGate targetGate) {
             double distLy = AstronomicalObject.CalculateDistance(_hGate, targetGate) / Const.LightYear;
-            double cost = distLy * _playerTeam.PlayerShip.Type.MaxHull / Const.HyperspaceCostScale;
+            double cost = CalculateCost(distLy);
             if (cost > _playerTeam.Cash) return;
             _playerTeam.Cash -= cost;
             pbTravel.Value = 0;
@@ -63,7 +66,7 @@ namespace SpaceMercs.Dialogs {
             foreach (Star st in _hGate.Parent.TradeRoutes) {
                 HyperGate targ = st?.GetHyperGate() ?? throw new Exception("TradeRoute system doesn't have a gate");
                 double distLy = AstronomicalObject.CalculateDistance(_hGate, targ) / Const.LightYear;
-                double cost = distLy * _playerTeam.PlayerShip.Type.MaxHull / Const.HyperspaceCostScale;
+                double cost = CalculateCost(distLy);
                 double durationYears = distLy / Const.HyperspaceGateTimeFactor;
                 double durationDays = (int)(durationYears * 365.2422);
                 Vector3 loc = st.GetMapLocation();

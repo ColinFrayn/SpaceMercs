@@ -182,7 +182,9 @@ namespace SpaceMercs {
         public const double EncounterFreqScale = 0.15; // The lower this is (>0.0) the less frequently we encounter anything when travelling (active or passive).
         public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
         public const double HyperspaceGateTimeFactor = 20.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
-        public const double HyperspaceCostScale = 10.0; // Divide the cost of the hyperspace travel by this factor
+        public const double HyperspaceCostScale = 15.0; // Divide the cost of the hyperspace travel by this factor
+        public const double HyperspaceCostDistanceExponent = 1.1; // Exponent for distance in Ly when calculating cost. 1 = linear.
+        public const double HyperspaceCostHullExponent = 1.2; // Exponent for hull size when calculating cost. 1 = linear.
         public const int InitialCivilisationSize = 20; // Total population of all civs at the start
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
@@ -199,7 +201,7 @@ namespace SpaceMercs {
         public const double MercenaryCostExponent = 1.4;  // Exponent scale for exponential price calculation for a mercenary
         public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
         public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
-        public const double UpgradeCostModifier = 1.3; // To upgrade an item by one level
+        public const double UpgradeCostModifier = 1.2; // To upgrade an item by one level
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item
         public const double ColonySeedRate = 5.0; // Affects the speed at which new colonies are created in populated systems.
         public const double ColonySeedTarget = 100.0; // Target seeding point at which level the colony may seed
