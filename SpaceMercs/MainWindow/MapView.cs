@@ -198,7 +198,7 @@ namespace SpaceMercs.MainWindow {
 
         // Closing the window - shut down stuff
         protected override void OnClosing(CancelEventArgs e) {
-            if (MessageBox.Show("Really close the game? You will lose unsaved progress!", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+            if (bLoaded && PlayerTeam.SoldierCount > 0 && MessageBox.Show("Really close the game? You will lose unsaved progress!", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
                 // Cancel closing - keep the window open
                 e.Cancel = true;
             }

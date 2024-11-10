@@ -244,7 +244,7 @@ namespace SpaceMercs {
             }
             else {
                 double dam = 0.0;
-                double hmod = 1.0 + Attack * Const.CreatureAttackDamageScale;
+                double hmod = Const.CreatureAttackDamageBaseMod + Attack * Const.CreatureAttackDamageScale;
                 for (int n = 0; n < nhits; n++) {
                     dam += rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
                 }

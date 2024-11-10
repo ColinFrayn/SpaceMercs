@@ -41,7 +41,7 @@
   </CreatureType>
   <CreatureType Name="Arachnid Soldier">
     <Size>2</Size>
-    <LevelRange>2,15</LevelRange>
+    <LevelRange>4,11</LevelRange>
     <Attack>15</Attack>
     <Defence>14</Defence>
     <Armour>18</Armour>
@@ -64,7 +64,7 @@
   </CreatureType>
   <CreatureType Name="Arachnid Queen">
     <Size>3</Size>
-    <LevelRange>5,20</LevelRange>
+    <LevelRange>6,12</LevelRange>
     <Attack>22</Attack>
     <Defence>14</Defence>
     <Armour>22</Armour>

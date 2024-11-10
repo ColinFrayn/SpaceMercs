@@ -933,12 +933,17 @@ namespace SpaceMercs {
             EquippedArmour.Clear();
             SetupBasicArmour();
             for (int i = 0; i < Level; i++) {
-                UpgradeArmourAtRandom();
                 if (rnd.NextDouble() < 0.8) UpgradeArmourAtRandom();
+                if (rnd.NextDouble() < 0.3) UpgradeArmourAtRandom();
             }
 
             // Now generate other random stuff
-            int num = (rnd.Next(Level) + 3 + rnd.Next(3)) / 2;
+            int num = rnd.Next(2);
+            if (Level > 1) num++;
+            if (Level > 2) num += rnd.Next(2);
+            if (Level > 3) num += rnd.Next(2);
+            if (Level > 4) num += rnd.Next(2);
+            num = (int)Math.Max(num, Math.Sqrt(Level));
             for (int n = 0; n < num; n++) {
                 // Generate a random item suitable for this soldier (not a weapon or armour)
                 IItem? eq = Utils.GenerateRandomItem(rnd, Level, Race, false);
@@ -947,9 +952,9 @@ namespace SpaceMercs {
         }
         private void SetupBasicArmour() {
             Armour? chest = PickRandomBaseArmourForLocation(BodyPart.Chest);
-            if (chest is not null && rnd.NextDouble() < 0.8) EquippedArmour.Add(chest);
+            if (chest is not null) EquippedArmour.Add(chest);
             foreach (BodyPart bp in Enum.GetValues(typeof(BodyPart))) {
-                if (rnd.NextDouble() < 0.3 && GetArmourAtLocation(bp) == null) {
+                if (rnd.NextDouble() * Level > 0.8 && GetArmourAtLocation(bp) == null) {
                     Armour? arm = PickRandomBaseArmourForLocation(bp);
                     if (arm is not null) EquippedArmour.Add(arm);
                 }
@@ -992,9 +997,9 @@ namespace SpaceMercs {
             }
             // Otherwise upgrade what's there
             else {
-                ar.UpgradeArmour(Race);
-                CalculateMaxStats();
+                ar.UpgradeArmour(Race, Level);
             }
+            CalculateMaxStats();
         }
         public bool HasItem(IItem it) {
             return Inventory.Contains(it);

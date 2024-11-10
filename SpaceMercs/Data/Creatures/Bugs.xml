@@ -38,8 +38,8 @@
   </CreatureType>
   <CreatureType Name="Soldier Bug">
     <Scale>1.1</Scale>
-    <LevelRange>1,5</LevelRange>
-    <Attack>12</Attack>
+    <LevelRange>2,5</LevelRange>
+    <Attack>11</Attack>
     <Defence>8</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>

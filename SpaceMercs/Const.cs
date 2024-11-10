@@ -157,6 +157,7 @@ namespace SpaceMercs {
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
         public const double CreatureAttackDamageScale = 0.06;  // Modifier applied to damage done by Creatures
+        public const double CreatureAttackDamageBaseMod = 0.7; // Scale factor for zeroth level creatures damage.
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
         public const double SharpshooterRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.

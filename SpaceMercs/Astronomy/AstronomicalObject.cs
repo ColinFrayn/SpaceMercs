@@ -115,7 +115,7 @@ namespace SpaceMercs {
             }
 
             // Home planet is a nursery zone
-            if (this == StaticData.Races[0].HomePlanet) dLevel -= rand.NextDouble();
+            if (this == StaticData.Races[0].HomePlanet) dLevel -= 1.0 + rand.NextDouble();
 
             // Increase the difficulty based on where we are within this system
             if (this is HabitableAO hao) {

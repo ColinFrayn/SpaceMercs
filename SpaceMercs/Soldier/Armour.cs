@@ -147,22 +147,26 @@ namespace SpaceMercs {
             return cost;
 
         }
-        public void UpgradeArmour(Race? rc) {
+        public void UpgradeArmour(Race? rc, int entityLevel) {
             // Upgrade Level, Material or Type
             Random rnd = new Random();
             double r = rnd.NextDouble();
-            if (r < 0.2 && Level < 3) Level++;
+            if (r < 0.2) {
+                if (Level < 3 && entityLevel > 2 && Level * 2 < entityLevel) Level++;
+                return;
+            }
             else if (r < 0.85) { // Upgrade mats, if possible
-                MaterialType matnew = Material;
-                foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc))) {
-                    if (mat2.IsScavenged) continue;
-                    // Is this material strictly better, or largely better?
-                    if (mat2.IsArmourMaterial &&
-                       (mat2.ArmourMod > matnew.ArmourMod || (mat2.ArmourMod * 1.1 > matnew.ArmourMod && mat2.MassMod < matnew.MassMod && rnd.NextDouble() > 0.5))) {
-                        matnew = mat2;
+                MaterialType? matNew = null;
+                // Pick the next best material
+                foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc) && m.ArmourMod > 0)) {
+                    if (mat2.IsScavenged || !mat2.IsArmourMaterial) continue;
+                    // Is this material better (more valuable) and the cheapest such upgrade possible?
+                    if (mat2.ItemCost > Material.ItemCost && (matNew is null || mat2.ItemCost <= matNew.ItemCost)) {
+                        matNew = mat2;
                     }
                 }
-                Material = matnew;
+                Material = matNew ?? Material;
+                return;
             }
             else { // Upgrade type, if possible
                 ArmourType atnew = Type;
@@ -173,6 +177,7 @@ namespace SpaceMercs {
                     }
                 }
                 Type = atnew;
+                return;
             }
         }
         public int ModifiedAgility {

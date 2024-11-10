@@ -2,7 +2,7 @@
   <CreatureType Name="Triffid Sapling">
     <Scale>0.7</Scale>
     <LevelRange>1,4</LevelRange>
-    <Attack>9</Attack>
+    <Attack>8</Attack>
     <Defence>5</Defence>
     <Health>10</Health>
     <Stamina>16</Stamina>
@@ -25,7 +25,7 @@
   <CreatureType Name="Triffid Lasher">
     <Scale>0.8</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>12</Attack>
+    <Attack>11</Attack>
     <Defence>6</Defence>
     <Health>14</Health>
     <Stamina>16</Stamina>
@@ -46,8 +46,8 @@
   </CreatureType>
   <CreatureType Name="Triffid Spore Thrower">
     <Scale>0.8</Scale>
-    <LevelRange>1,5</LevelRange>
-    <Attack>12</Attack>
+    <LevelRange>2,5</LevelRange>
+    <Attack>11</Attack>
     <Defence>6</Defence>
     <Health>16</Health>
     <Stamina>16</Stamina>
@@ -68,7 +68,7 @@
   </CreatureType>
   <CreatureType Name="Triffid Mother Plant">
     <Size>2</Size>
-    <LevelRange>2,7</LevelRange>
+    <LevelRange>3,7</LevelRange>
     <Attack>16</Attack>
     <Defence>6</Defence>
     <Health>50</Health>
