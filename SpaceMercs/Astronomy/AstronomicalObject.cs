@@ -103,33 +103,42 @@ namespace SpaceMercs {
         public int GetRandomMissionDifficulty(Random rand) {
             double dDist = AstronomicalObject.CalculateDistance(StaticData.Races[0].HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
+            double dLevel = 1d + rand.NextDouble() + rand.NextDouble() + rand.NextDouble();
 
             // Base difficulty scales up as we go further from home
-            int iLevelBase = 1 + (int)Math.Sqrt(dDistLY / Const.EncounterLevelScalingDistance); // Why sqrt?
+            // Scale more steeply in home sector (Yes I know sectors are not circular.)
+            double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
+            dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
+            // Scale more shallowly outside home sector
+            if (dDistLY > Const.EncounterLevelScalingInnerRadius) {
+                dLevel += Math.Pow((dDistLY-Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
+            }
 
-            // Increase the difficulty based on where we are in the system (more distant = more dangerous)
-            if (this != StaticData.Races[0].HomePlanet) { 
-                iLevelBase++;  // Not the home planet (but may be a moon)
-                if (GetSystem() != StaticData.Races[0].HomePlanet.GetSystem()) iLevelBase++;  // Not in home system, so more dangerous
-                if (this is HabitableAO hao) {
-                    Planet? pl = null;
-                    if (hao is Planet pla) pl = pla;
-                    else if (hao is Moon mn) pl = mn.Parent;
-                    if (pl != null) {
-                        if (hao.Colony == null && pl.Colony == null) iLevelBase++; // Planet/moon without local colony -> dangerous         
-                        if (rand.Next(8) + 1 < pl.ID) iLevelBase++; // Distant planets are more dangerous
-                        if (rand.Next(8) + 3 < pl.ID) iLevelBase++; // More distant planets are even more dangerous
-                    }
+            // Home planet is a nursery zone
+            if (this == StaticData.Races[0].HomePlanet) dLevel -= rand.NextDouble();
+
+            // Increase the difficulty based on where we are within this system
+            if (this is HabitableAO hao) {
+                Planet? pl = null;
+                if (hao is Planet pla) pl = pla;
+                else if (hao is Moon mn) pl = mn.Parent;
+                if (pl != null) {
+                    // Planet/moon without local colony -> dangerous         
+                    if (hao.Colony == null && pl.Colony == null) dLevel += rand.NextDouble();
+                    // More distant planets can be more hostile
+                    double pDist = Math.Sqrt(pl.ID);
+                    dLevel += pDist * (rand.NextDouble() + 1d) / 2d;
                 }
             }
-            int iLevel = iLevelBase;
 
-            // Create a spread of levels
-            double r = rand.NextDouble();
-            if (r < 0.4) iLevel += (int)(rand.NextDouble() * 2.0);
-            else if (r < 0.7) iLevel += (int)(rand.NextDouble() * 3.0);
-            else iLevel = (int)((double)iLevel * (1.0 + (rand.NextDouble() * 0.5)));
+            // This is a home system so reduce danger level
+            Star sys = GetSystem();
+            foreach (Race r in StaticData.Races) {
+                if (sys == r.HomePlanet.GetSystem()) dLevel -= rand.NextDouble() + rand.NextDouble();
 
+            }
+
+            int iLevel = Math.Max(1, (int)dLevel);
             return iLevel;
         }
 

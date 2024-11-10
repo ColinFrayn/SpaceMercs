@@ -603,6 +603,7 @@ namespace SpaceMercs.MainWindow {
                     MakeCurrent();
                     GalaxyMap.Generate(ng);
                     SetupNewGame(ng);
+                    view = ViewMode.ViewMap;
                     SetAOButtonsOnGUI(aoSelected);
                 }
                 catch (Exception ex) {

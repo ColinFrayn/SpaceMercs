@@ -249,7 +249,7 @@ namespace SpaceMercs {
             double dDays = ts.TotalDays;
 
             // Larger colonies have a more rapid turnover; small colonies don't            
-            dDays *= (BaseSize / 2);
+            dDays = (dDays * BaseSize) / 2d;
 
             if (dDays < 0.1) return; // Tiny gap - do nothing
             if (dDays > Const.LongEnoughGapToResetColonyInventory) {

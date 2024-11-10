@@ -45,7 +45,7 @@ namespace SpaceMercs.Dialogs {
                 if (strType.Equals("Weapons") || strType.Equals("All")) {
                     foreach (WeaponType tp in StaticData.WeaponTypes.Where(w => w.IsUsable)) {
                         if (tp.IsMeleeWeapon && PlayerTeam.HasSkill(Soldier.UtilitySkill.Bladesmith)) FilterAndAdd(tp, "Melee", strFilter);
-                        else if (tp.IsMeleeWeapon && PlayerTeam.HasSkill(Soldier.UtilitySkill.Gunsmith)) FilterAndAdd(tp, "Gun", strFilter);
+                        else if (!tp.IsMeleeWeapon && PlayerTeam.HasSkill(Soldier.UtilitySkill.Gunsmith)) FilterAndAdd(tp, "Gun", strFilter);
                     }
                 }
                 if (PlayerTeam.HasSkill(Soldier.UtilitySkill.Armoursmith)) {

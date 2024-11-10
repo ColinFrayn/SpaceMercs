@@ -1134,12 +1134,11 @@ namespace SpaceMercs {
             if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
-            int nCreatures = ParentMission.Soldiers.Count + rand.Next(2) - rand.Next(2);
-            if (ParentMission.WavesRemaining == 3) nCreatures += rand.Next(2);
-            if (ParentMission.WavesRemaining == 2) nCreatures++;
-            if (ParentMission.WavesRemaining == 1) nCreatures += 1 + rand.Next(2);
-            if (ParentMission.WavesRemaining == 0) nCreatures += 2 + rand.Next(2);
-            nCreatures = (int)(nCreatures * Const.CreatureCountScale * cg.QuantityScale * cg.QuantityScale / 100.0);
+            double dCreatures = ParentMission.Soldiers.Count * (0.6 + rand.NextDouble() * 0.2);
+            if (ParentMission.WavesRemaining <= 2) dCreatures += rand.NextDouble() * 0.3 + 0.3;
+            if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.3;
+            if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.3 + 0.3;
+            int nCreatures = (int)(dCreatures * Const.CreatureCountScale * cg.QuantityScale * cg.QuantityScale / 100.0);
             if (nCreatures < 2) nCreatures = 2;
             int nTries = 0;
             bool hasBoss = false;

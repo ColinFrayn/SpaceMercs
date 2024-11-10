@@ -617,7 +617,7 @@ namespace SpaceMercs {
                         if (path is null || path.Count == 0) {
                             // No way of getting close enough to hit target so give up and don't investigate.
                             CurrentTarget = null;
-                            Investigate = Point.Empty;
+                            if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
                         }
                         else {
                             MoveTo(path[0], playSound);
@@ -626,16 +626,17 @@ namespace SpaceMercs {
                         }
                     }
                 }
-                // No target and couldn't find one. Maybe investigate nearby if we heard something
+                // No target and couldn't find one. Maybe investigate nearby if we heard something.
+                // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
                 else if (Investigate != Point.Empty) {
                     if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got there, can't see target
-                        Investigate = Point.Empty;
+                        if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
                         return;
                     }
                     if (Stamina < MovementCost) return;
                     List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1); // Go to this square or nearby
                     if (path is null || path.Count == 0) {
-                        Investigate = Point.Empty;
+                        if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
                         return;
                     }
                     else {

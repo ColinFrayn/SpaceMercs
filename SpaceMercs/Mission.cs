@@ -118,13 +118,15 @@ namespace SpaceMercs {
             }
             LevelCount = 1;
             if (Diff > 5.0 && !IsShipMission && Type != MissionType.Surface) {
-                double d = Diff;
-                int lc = 1;
-                while (rand.NextDouble() * 5.0 < d) {
-                    d -= 5.0;
-                    lc++;
-                }
-                LevelCount = lc;
+                double scale = 50d;
+                do {
+                    double extraDeep = rand.NextDouble() * scale;
+                    if (extraDeep < Diff) {
+                        LevelCount++;
+                        scale += 20.0d;
+                    }
+                    else break;
+                } while (true);
             }
             TurnCount = 0;
             WavesRemaining = 0;
@@ -306,8 +308,6 @@ namespace SpaceMercs {
             int r = rand.Next(100);
             if (!(loc is HabitableAO)) {
                 throw new Exception("Trying to run a mission near an AO that is not a HabitableAO");
-                //if (r < 40) return MissionType.BoardingParty;
-                //return MissionType.ShipAssault;
             }
             if (((HabitableAO)loc).AOType == AstronomicalObject.AstronomicalObjectType.Planet && ((Planet)loc).Type == Planet.PlanetType.Gas) {
                 return MissionType.BoardingParty;
@@ -427,7 +427,7 @@ namespace SpaceMercs {
                 if (!Soldiers.Contains(s)) Soldiers.Add(s);
             }
         }
-        #endregion // Create Msision
+        #endregion // Create Mission
 
         public MissionLevel GetOrCreateCurrentLevel() {
             if (Levels.ContainsKey(CurrentLevel)) return Levels[CurrentLevel];
@@ -575,7 +575,7 @@ namespace SpaceMercs {
         }
         public void NextTurn(Action<string, Action?> showMessage) {
             TurnCount++;
-            if (Goal == MissionGoal.Defend && TurnCount%4 == 1 && WavesRemaining > 0) {
+            if (Goal == MissionGoal.Defend && TurnCount%5 == 1 && WavesRemaining > 0) {
                 WavesRemaining--;
                 Levels[CurrentLevel].AddWaveOfCreatures();
                 showMessage("A wave of enemies has appeared near your location", null);

@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Next?
+
 
 ==========================================================================================================
 
@@ -13,6 +13,8 @@ Backburner : Features
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
+
+Do we lose a Defend mission if creatures make it to the objective (entrance squares)?
 
 How to make slime creatures more dangerous? Maybe have them split? (Summoning mechanic)
 
