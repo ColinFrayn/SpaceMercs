@@ -124,7 +124,7 @@ namespace SpaceMercs.MainWindow {
             Random rnd = new Random();
 
             // Didn't complete the mission so put it back on the pile
-            if (MissionOutcome != MissionResult.Victory && TravelDetails == null) {
+            if ((MissionOutcome == MissionResult.Evacuated || MissionOutcome == MissionResult.Aborted) && TravelDetails == null) {
                 ThisMission.ResetMission();
                 if (PlayerTeam.CurrentPositionHAO?.Colony != null) PlayerTeam.CurrentPositionHAO.Colony.AddMission(ThisMission);
                 else PlayerTeam.CurrentPositionHAO?.AddMission(ThisMission);
@@ -1475,8 +1475,25 @@ namespace SpaceMercs.MainWindow {
             SelectedEntity?.UpdateVisibility(CurrentLevel);
             CurrentLevel.CalculatePlayerVisibility();
             bAIRunning = false;
+            // Check if this mission has been lost for some reason
+            if (CheckForMissionFailure(AnnounceMessage)) {
+                return;
+            }
             Const.dtTime.AddSeconds(Const.TurnLength);
             CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
+        }
+        private bool CheckForMissionFailure(Action<string, Action?> showMessage) {
+            if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
+                if (CurrentLevel.CountCreaturesAtEntrance() > 0) {
+                    foreach (Creature cr in CurrentLevel.CreaturesAtEntrance()) { 
+                        if (!cr.HasMoved) {
+                            showMessage($"Mission failed!\nThe objective has been destroyed!\nYou flee the scene and return to the ship", FailMission);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
         private void PlaySoundThreaded(string strSound) {
             ThisDispatcher?.BeginInvoke((Action)(() => { SoundEffects.PlaySound(strSound); }));

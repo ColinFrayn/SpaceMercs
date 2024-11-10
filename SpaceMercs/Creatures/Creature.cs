@@ -31,6 +31,7 @@ namespace SpaceMercs {
         private readonly List<Effect> _Effects = new List<Effect>();
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         private bool[,] Visible;
+        public bool HasMoved { get; private set; } = false;
 
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x > Visible.GetLength(0) || y > Visible.GetLength(1)) return false; return Visible[x, y]; }
         public bool CanSee(IEntity en) {
@@ -368,6 +369,8 @@ namespace SpaceMercs {
             IsAlert = (xml.SelectSingleNode("Alert") is not null);
             QuestItem = (xml.SelectSingleNode("QuestItem") is not null);
 
+            HasMoved = (xml.SelectSingleNode("Moved") != null);
+
             // Load equipped weapon
             string strWeapon = xml.SelectNodeText("Weapon");
             if (!string.IsNullOrEmpty(strWeapon)) {
@@ -440,6 +443,7 @@ namespace SpaceMercs {
             }
             if (IsAlert) file.WriteLine(" <Alert/>");
             if (QuestItem) file.WriteLine(" <QuestItem/>");
+            if (HasMoved) file.WriteLine(" <Moved/>");
             file.WriteLine("</Creature>");
         }
 
@@ -489,6 +493,7 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X, Y - 1));
             }
             if (oldx != X || oldy != Y) {
+                HasMoved = true;
                 Stamina -= MovementCost;
             }
         }
@@ -548,6 +553,8 @@ namespace SpaceMercs {
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;
             bool bFleeing = false;
+            bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            HasMoved = false;
             if (!IsAlert) return;
             // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
             if (Health * 4.0 < MaxHealth &&
@@ -555,7 +562,7 @@ namespace SpaceMercs {
                 Health <= CurrentTarget.Health &&
                 Level <= CurrentTarget.Level &&
                 !Type.IsBoss &&
-                CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) {
+                !isDefendLevel) {
                 if (rnd.NextDouble() * Health / MaxHealth < 0.1) {
                     // Flee
                     bFleeing = true;
@@ -574,6 +581,7 @@ namespace SpaceMercs {
                 // Make sure we're on the best target
                 IEntity? lastTarg = CurrentTarget;
                 SetBestTarget();
+                bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
                 if (CurrentTarget == null && lastTarg != null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe that we lost sight of them because we're pathing a complex route. Stay on track.
                 if (CurrentTarget != null) {
                     double atr = AttackRange;
@@ -586,7 +594,7 @@ namespace SpaceMercs {
                                 CurrentTarget = null; // No way of getting close enough to see target
                                 continue;
                             }
-                            MoveTo(path[0], playSound);
+                            if (!atObjective) MoveTo(path[0], playSound);
                             postMoveCheck(this);
                             if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
@@ -595,7 +603,7 @@ namespace SpaceMercs {
                             if (r > 5.0 && Stamina >= MovementCost && r > 1.0 && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
                                 List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
                                 if (path is null || path.Count == 0) return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
-                                MoveTo(path[0], playSound);
+                                if (!atObjective) MoveTo(path[0], playSound);
                                 postMoveCheck(this);
                                 if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                             }
@@ -620,7 +628,7 @@ namespace SpaceMercs {
                             if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
                         }
                         else {
-                            MoveTo(path[0], playSound);
+                            if (!atObjective) MoveTo(path[0], playSound);
                             postMoveCheck(this);
                             if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
@@ -629,14 +637,14 @@ namespace SpaceMercs {
                 // No target and couldn't find one. Maybe investigate nearby if we heard something.
                 // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
                 else if (Investigate != Point.Empty) {
-                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got there, can't see target
-                        if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
+                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got there
+                        if (!isDefendLevel) Investigate = Point.Empty;
                         return;
                     }
                     if (Stamina < MovementCost) return;
                     List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1); // Go to this square or nearby
                     if (path is null || path.Count == 0) {
-                        if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
+                        if (!isDefendLevel) Investigate = Point.Empty;
                         return;
                     }
                     else {
@@ -765,6 +773,22 @@ namespace SpaceMercs {
             }
             _Effects.RemoveAll(e => e.Duration <= 0);
             if (Health < 0.0) _Effects.Clear();
+
+            // If this creature has arrived at the target location we're trying to defend, announce it.
+            if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
+                CheckDefensiveGoal(showMessage);
+            }
+        }
+        private void CheckDefensiveGoal(Action<string, Action?> showMessage) {
+            // Check if this creature has moved on to the entrance squares
+            if (!HasMoved) return;
+            if (!CurrentLevel.CheckIfLocationIsEntranceTile(Location)) return;
+
+            // Check if this creature is the first one to reach the target
+            if (CurrentLevel.CountCreaturesAtEntrance() > 1) return;
+
+            // Announce the incursion
+            showMessage($"A {Name} has reached the objective.\nIf it remains there for a turn then you will be defeated!", null);
         }
         public void SetTarget(IEntity? tg) {
             CurrentTarget = tg;

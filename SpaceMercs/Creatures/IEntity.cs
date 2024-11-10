@@ -30,6 +30,7 @@ namespace SpaceMercs {
         IEnumerable<Effect> Effects { get; }
         bool IsInjured { get; }
         double Encumbrance { get; }
+        bool HasMoved { get; }
 
         // Methods
         bool CanSee(int x, int y);

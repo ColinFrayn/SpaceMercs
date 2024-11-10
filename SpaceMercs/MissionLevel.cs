@@ -1777,6 +1777,7 @@ namespace SpaceMercs {
         public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage, bool fastAI) {
             List<Creature> lCreatures = new List<Creature>(Creatures); // In case one dies...
             foreach (Creature cr in lCreatures) {
+                Point oldLoc = cr.Location;
                 cr.AIStep(fact, postMoveCheck, playSound, centreView, fastAI);
                 cr.EndOfTurn(fact, centreView, playSound, showMessage);
             }
@@ -1999,6 +2000,23 @@ namespace SpaceMercs {
                 return true;
             }
             return false;
+        }
+        public bool CheckIfLocationIsEntranceTile(Point loc) {
+            return EntryLocations.Contains(loc);
+        }
+        public int CountCreaturesAtEntrance() {
+            int count = 0;
+            foreach (Creature c in Creatures) {
+                if (c.Health > 0 && EntryLocations.Contains(c.Location)) count++;
+            }
+            return count;
+        }
+        public IReadOnlyCollection<Creature> CreaturesAtEntrance() {
+            List<Creature> creatures = new List<Creature>();
+            foreach (Creature c in Creatures) {
+                if (c.Health > 0 && EntryLocations.Contains(c.Location)) creatures.Add(c);
+            }
+            return creatures;
         }
 
         // Item functions

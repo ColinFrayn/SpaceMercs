@@ -25,7 +25,6 @@ namespace SpaceMercs {
         public Point GoTo { get; set; }
         public bool OnMission { get; set; }
         private readonly Random rnd;
-        public bool HasMoved { get; private set; } = false;
 
         // IEntity Stuff
         public int X { get; private set; }
@@ -51,6 +50,7 @@ namespace SpaceMercs {
         private bool[,] SightMap;
         public Color PrimaryColor { get; private set; }
         public bool IsInjured { get { return Health < MaxHealth; } }
+        public bool HasMoved { get; private set; } = false;
 
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
         public bool CanSee(IEntity? en) {
