@@ -58,7 +58,7 @@ namespace SpaceMercs {
         // Save this planet to an Xml file
         public override void SaveToFile(StreamWriter file) {
             if (!PlanetOrMoonsHaveBeenEdited()) {
-                file.WriteLine($"<Planet ID=\"{ID}\" Seed=\"{Seed}\" />");
+                file.WriteLine($"<Planet Seed=\"{Seed}\" />");
                 return;
             }
             file.WriteLine($"<Planet ID=\"{ID}\">");

@@ -1,0 +1,5745 @@
+<SpaceMercsSaveFile Version="1.0">
+<GUI>
+<ShowLabels/>
+<ShowMapGrid/>
+<ShowRangeCircles/>
+<ShowTradeRoutes/>
+<FadeStars/>
+<ShowFlags/>
+<ShowColonies/>
+<ShowPopulation/>
+</GUI>
+<Clock>22/06/2186 02:20:27</Clock>
+<Map Seed="700100" SPS="14" PD="5">
+ <Sector X="-1" Y="-1" Inhabitant="Insectoid">
+<Star ID="0">
+<Seed>4678534</Seed>
+ <MapPos X="-8.53" Y="-13.83"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="5659648" />
+<Planet Seed="7302747" />
+<Planet ID="2">
+<Type>Oceanic</Type>
+<PRot>50384559</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>686620045700184687</LastGrowth>
+ <NextGrowth>690308461700184687</NextGrowth>
+</Colony>
+<Radius>7208423</Radius>
+<ARot>104844</ARot>
+<Temp>295</Temp>
+<Seed>4480388</Seed>
+<Orbit>90756040672</Orbit>
+<TempBase>295.91078400340143</TempBase>
+</Planet>
+<Planet Seed="9877472" />
+<Planet Seed="8062865" />
+<Planet Seed="4689277" />
+<Planet Seed="6475854" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>2757711</Seed>
+ <MapPos X="-5.68" Y="-8.7"/>
+</Star>
+<Star ID="2">
+<Seed>6245424</Seed>
+ <MapPos X="-8.28" Y="-7.88"/>
+</Star>
+<Star ID="3">
+<Seed>6175474</Seed>
+ <MapPos X="-11.34" Y="-5.67"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="8264754" />
+<Planet Seed="1442423" />
+<Planet Seed="7835244" />
+<Planet ID="3">
+<Type>Volcanic</Type>
+<PRot>34352098</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>685535003967141823</LastGrowth>
+ <NextGrowth>691307387967141823</NextGrowth>
+</Colony>
+<Radius>5135255</Radius>
+<ARot>88601</ARot>
+<Temp>208</Temp>
+<Seed>6108957</Seed>
+<Orbit>140971331206</Orbit>
+<TempBase>208.72650532901517</TempBase>
+</Planet>
+<Planet Seed="1615022" />
+<Planet Seed="1795188" />
+<Planet Seed="7447766" />
+<Planet Seed="959605" />
+<Planet Seed="3402930" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>3780830</Seed>
+ <MapPos X="-5.33" Y="-11.1"/>
+</Star>
+<Star ID="5">
+<Seed>5488110</Seed>
+ <MapPos X="-9.72" Y="-13.05"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(-1,-1)10</TradeRoute>
+ <Planets>
+<Planet Seed="8399364" />
+<Planet Seed="6948221" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>15222857</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689205024000000000</LastGrowth>
+ <NextGrowth>695868192000000000</NextGrowth>
+</Colony>
+<Radius>51443455</Radius>
+<ARot>890304</ARot>
+<Temp>233</Temp>
+<Seed>9218042</Seed>
+<Orbit>115210441944</Orbit>
+<TempBase>233.81442158397502</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>34461473</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>684343296000000000</LastGrowth>
+ <NextGrowth>690201216000000000</NextGrowth>
+</Colony>
+<Radius>5590944</Radius>
+<ARot>91050</ARot>
+<Temp>254</Temp>
+<Seed>930276</Seed>
+<Orbit>159867001216</Orbit>
+<TempBase>254.5700659397018</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1910884</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>681114528000000000</LastGrowth>
+ <NextGrowth>691245792000000000</NextGrowth>
+</Colony>
+<Radius>1546111</Radius>
+<ARot>1935088</ARot>
+<Temp>225</Temp>
+<Seed>446819</Seed>
+<Orbit>447474753</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1191921</PRot>
+<Radius>1372245</Radius>
+<ARot>1147172</ARot>
+<Temp>250</Temp>
+<Seed>6728516</Seed>
+<Orbit>826249228</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>687367</PRot>
+<Radius>1825874</Radius>
+<ARot>679517</ARot>
+<Temp>220</Temp>
+<Seed>1692849</Seed>
+<Orbit>1217208020</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1634008" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>5862802</Seed>
+ <MapPos X="-13.6" Y="-6.91"/>
+</Star>
+<Star ID="7">
+<Seed>5084971</Seed>
+ <MapPos X="-7.48" Y="-11.2"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(-1,-1)10</TradeRoute>
+ <Planets>
+<Planet Seed="6703431" />
+<Planet Seed="6979687" />
+<Planet Seed="3320576" />
+<Planet Seed="774624" />
+<Planet ID="4">
+<Type>Rocky</Type>
+<PRot>16004691</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687213679932770000</LastGrowth>
+ <NextGrowth>692113423932770000</NextGrowth>
+</Colony>
+<Radius>4739102</Radius>
+<ARot>72909</ARot>
+<Temp>350</Temp>
+<Seed>1808081</Seed>
+<Orbit>278422170320</Orbit>
+<TempBase>350.7076407098307</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Oceanic</Type>
+<PRot>14631940</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687254112000000000</LastGrowth>
+ <NextGrowth>692531424000000000</NextGrowth>
+</Colony>
+<Radius>4661595</Radius>
+<ARot>67446</ARot>
+<Temp>317</Temp>
+<Seed>6411355</Seed>
+<Orbit>382657269636</Orbit>
+<TempBase>317.9698203051808</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2372560</PRot>
+<Radius>1663780</Radius>
+<ARot>2360955</ARot>
+<Temp>285</Temp>
+<Seed>2158277</Seed>
+<Orbit>358048623</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Oceanic</Type>
+<PRot>1209786</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>684057312000000000</LastGrowth>
+ <NextGrowth>690907968000000000</NextGrowth>
+</Colony>
+<Radius>1233058</Radius>
+<ARot>1144425</ARot>
+<Temp>308</Temp>
+<Seed>5728785</Seed>
+<Orbit>805234660</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="8">
+<Seed>3126314</Seed>
+ <MapPos X="-6.23" Y="-6.88"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="1802514" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>14483882</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689243068119391823</LastGrowth>
+ <NextGrowth>690435388119391823</NextGrowth>
+</Colony>
+<Radius>83892794</Radius>
+<ARot>1142686</ARot>
+<Temp>303</Temp>
+<Seed>831936</Seed>
+<Orbit>75481333471</Orbit>
+<TempBase>303.57717985717966</TempBase>
+</Planet>
+<Planet Seed="1835665" />
+<Planet Seed="9378618" />
+<Planet Seed="3111264" />
+ </Planets>
+</Star>
+<Star ID="9">
+<Seed>1134855</Seed>
+ <MapPos X="-9.5" Y="-7.77"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="3351507" />
+<Planet Seed="24383" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>55850854</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>686092641914340625</LastGrowth>
+ <NextGrowth>690279585914340625</NextGrowth>
+</Colony>
+<Radius>7582084</Radius>
+<ARot>129146</ARot>
+<Temp>217</Temp>
+<Seed>9763056</Seed>
+<Orbit>77665143977</Orbit>
+<TempBase>217.53860665543883</TempBase>
+</Planet>
+<Planet Seed="9075101" />
+<Planet Seed="6766029" />
+<Planet Seed="7599654" />
+<Planet Seed="9704426" />
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>8879034</Seed>
+<Name>Insectoid Home</Name>
+ <MapPos X="-9.54" Y="-10.91"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(-1,-1)7</TradeRoute>
+ <TradeRoute>(-1,-1)5</TradeRoute>
+ <TradeRoute>(-1,-1)12</TradeRoute>
+ <Planets>
+<Planet Seed="5958890" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>77530694</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>685944590126890000</LastGrowth>
+ <NextGrowth>693071726126890000</NextGrowth>
+</Colony>
+<Radius>5026195</Radius>
+<ARot>74583</ARot>
+<Temp>355</Temp>
+<Seed>1263334</Seed>
+<Orbit>66842910406</Orbit>
+<TempBase>355.5814902300752</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2374604</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689210637489086250</LastGrowth>
+ <NextGrowth>691719693489086250</NextGrowth>
+</Colony>
+<Radius>1539691</Radius>
+<ARot>2215051</ARot>
+<Temp>318</Temp>
+<Seed>6185290</Seed>
+<Orbit>368552232</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1272481</PRot>
+<Radius>1338817</Radius>
+<ARot>1243391</ARot>
+<Temp>306</Temp>
+<Seed>5687714</Seed>
+<Orbit>805620078</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>48942224</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>686225952000000000</LastGrowth>
+ <NextGrowth>1550225952000000000</NextGrowth>
+ <SeedProgress>9.5172</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6742146</Radius>
+<ARot>80477</ARot>
+<Temp>299</Temp>
+<Seed>8335679</Seed>
+<Orbit>93978895202</Orbit>
+<TempBase>299.1079093061998</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Desert</Type>
+<PRot>2235356</PRot>
+<Colony>
+ <BaseType>25</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>681205248000000000</LastGrowth>
+ <NextGrowth>692848512000000000</NextGrowth>
+</Colony>
+<Radius>1241083</Radius>
+<ARot>2312069</ARot>
+<Temp>259</Temp>
+<Seed>5174370</Seed>
+<Orbit>436230118</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1114156</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687102912000000000</LastGrowth>
+ <NextGrowth>696754656000000000</NextGrowth>
+</Colony>
+<Radius>1611871</Radius>
+<ARot>1019881</ARot>
+<Temp>301</Temp>
+<Seed>7965133</Seed>
+<Orbit>724158209</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>11993642</PRot>
+<Colony>
+ <BaseType>21</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>681995808000000000</LastGrowth>
+ <NextGrowth>695067264000000000</NextGrowth>
+</Colony>
+<Radius>51076769</Radius>
+<ARot>708061</ARot>
+<Temp>239</Temp>
+<Seed>6750008</Seed>
+<Orbit>133539385331</Orbit>
+<TempBase>239.29117549199844</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Ice</Type>
+<PRot>1585421</PRot>
+<Radius>1702905</Radius>
+<ARot>1630607</ARot>
+<Temp>237</Temp>
+<Seed>9995448</Seed>
+<Orbit>501528786</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1283604</PRot>
+<Radius>1336159</Radius>
+<ARot>1193188</ARot>
+<Temp>214</Temp>
+<Seed>232639</Seed>
+<Orbit>715873482</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Desert</Type>
+<PRot>707079</PRot>
+<Radius>1895707</Radius>
+<ARot>676405</ARot>
+<Temp>199</Temp>
+<Seed>835233</Seed>
+<Orbit>1268269277</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>670302</PRot>
+<Radius>1098240</Radius>
+<ARot>659559</ARot>
+<Temp>212</Temp>
+<Seed>9771685</Seed>
+<Orbit>1606336084</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>442893</PRot>
+<Radius>1525525</Radius>
+<ARot>422630</ARot>
+<Temp>199</Temp>
+<Seed>253618</Seed>
+<Orbit>2016356244</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>387208</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689568099989431823</LastGrowth>
+ <NextGrowth>695286915989431823</NextGrowth>
+</Colony>
+<Radius>1546452</Radius>
+<ARot>407516</ARot>
+<Temp>205</Temp>
+<Seed>2011241</Seed>
+<Orbit>2415774497</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Volcanic</Type>
+<PRot>335924</PRot>
+<Radius>1546900</Radius>
+<ARot>311386</ARot>
+<Temp>241</Temp>
+<Seed>4550879</Seed>
+<Orbit>2676753545</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Desert</Type>
+<PRot>273551</PRot>
+<Radius>1523851</Radius>
+<ARot>257534</ARot>
+<Temp>199</Temp>
+<Seed>439107</Seed>
+<Orbit>3174639154</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1226394" />
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>19771537</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687071145615241152</LastGrowth>
+ <NextGrowth>690300777615241152</NextGrowth>
+</Colony>
+<Radius>5162175</Radius>
+<ARot>70067</ARot>
+<Temp>218</Temp>
+<Seed>7981444</Seed>
+<Orbit>255521553506</Orbit>
+<TempBase>218.805646724944</TempBase>
+</Planet>
+<Planet ID="6">
+<Type>Rocky</Type>
+<PRot>13412748</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>688192812119391823</LastGrowth>
+ <NextGrowth>694189836119391823</NextGrowth>
+</Colony>
+<Radius>6323958</Radius>
+<ARot>87106</ARot>
+<Temp>160</Temp>
+<Seed>7993352</Seed>
+<Orbit>361590785957</Orbit>
+<TempBase>160.48264585373542</TempBase>
+</Planet>
+<Planet Seed="8029991" />
+<Planet Seed="1005009" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>7071111</Seed>
+ <MapPos X="-7.6" Y="-13.09"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="2124961" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>40090066</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>688514613349431823</LastGrowth>
+ <NextGrowth>695468949349431823</NextGrowth>
+</Colony>
+<Radius>6752588</Radius>
+<ARot>88444</ARot>
+<Temp>352</Temp>
+<Seed>9332771</Seed>
+<Orbit>105880440423</Orbit>
+<TempBase>352.72533404713727</TempBase>
+</Planet>
+<Planet Seed="9136227" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>1507993</Seed>
+ <MapPos X="-11.01" Y="-11.04"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(-1,-1)10</TradeRoute>
+ <Planets>
+<Planet Seed="33835" />
+<Planet Seed="1535874" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>22890001</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687647311727084320</LastGrowth>
+ <NextGrowth>690727471727084320</NextGrowth>
+</Colony>
+<Radius>40789455</Radius>
+<ARot>534712</ARot>
+<Temp>330</Temp>
+<Seed>7944065</Seed>
+<Orbit>83164122523</Orbit>
+<TempBase>330.92227448563256</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1869536</PRot>
+<Radius>1475111</Radius>
+<ARot>2006184</ARot>
+<Temp>293</Temp>
+<Seed>5374162</Seed>
+<Orbit>524255667</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1147726</PRot>
+<Radius>1337593</Radius>
+<ARot>1060236</ARot>
+<Temp>290</Temp>
+<Seed>6174658</Seed>
+<Orbit>828638775</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>773832</PRot>
+<Radius>1211649</Radius>
+<ARot>743758</ARot>
+<Temp>300</Temp>
+<Seed>1035955</Seed>
+<Orbit>1320170504</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>586132</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689502713319391823</LastGrowth>
+ <NextGrowth>691098521319391823</NextGrowth>
+</Colony>
+<Radius>1425709</Radius>
+<ARot>574724</ARot>
+<Temp>303</Temp>
+<Seed>3969630</Seed>
+<Orbit>1689579940</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>416388</PRot>
+<Radius>1670812</Radius>
+<ARot>408340</ARot>
+<Temp>300</Temp>
+<Seed>4889534</Seed>
+<Orbit>2034915960</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Volcanic</Type>
+<PRot>411651</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>688093920000000000</LastGrowth>
+ <NextGrowth>696981888000000000</NextGrowth>
+</Colony>
+<Radius>1226182</Radius>
+<ARot>373412</ARot>
+<Temp>323</Temp>
+<Seed>4326099</Seed>
+<Orbit>2446784866</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>10840607</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>682951392000000000</LastGrowth>
+ <NextGrowth>690136416000000000</NextGrowth>
+ <SeedProgress>72.3443</SeedProgress>
+</Colony>
+<Radius>80535240</Radius>
+<ARot>1071644</ARot>
+<Temp>280</Temp>
+<Seed>9308650</Seed>
+<Orbit>115487514486</Orbit>
+<TempBase>280.2839966568282</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2281271</PRot>
+<Radius>1495272</Radius>
+<ARot>2364723</ARot>
+<Temp>241</Temp>
+<Seed>1565568</Seed>
+<Orbit>392873413</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1141191</PRot>
+<Radius>1468303</Radius>
+<ARot>1195144</ARot>
+<Temp>242</Temp>
+<Seed>711369</Seed>
+<Orbit>866672315</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>883398</PRot>
+<Radius>1273510</Radius>
+<ARot>930851</ARot>
+<Temp>249</Temp>
+<Seed>4861766</Seed>
+<Orbit>1206102227</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Volcanic</Type>
+<PRot>534756</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>684055584000000000</LastGrowth>
+ <NextGrowth>689944608000000000</NextGrowth>
+</Colony>
+<Radius>1578369</Radius>
+<ARot>542275</ARot>
+<Temp>272</Temp>
+<Seed>358226</Seed>
+<Orbit>1704180965</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Desert</Type>
+<PRot>451374</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>687560941700184687</LastGrowth>
+ <NextGrowth>691067053700184687</NextGrowth>
+</Colony>
+<Radius>1214499</Radius>
+<ARot>403354</ARot>
+<Temp>240</Temp>
+<Seed>82652</Seed>
+<Orbit>2040065233</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>3428016</Seed>
+ <MapPos X="-13.11" Y="-12.03"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="3392949" />
+<Planet Seed="7055277" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>13177322</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>689389730080597136</LastGrowth>
+ <NextGrowth>693365858080597136</NextGrowth>
+</Colony>
+<Radius>55948178</Radius>
+<ARot>637272</ARot>
+<Temp>335</Temp>
+<Seed>8164243</Seed>
+<Orbit>128990462461</Orbit>
+<TempBase>335.4160366555628</TempBase>
+</Planet>
+<Planet Seed="5215553" />
+<Planet Seed="1485608" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="0" Y="-1" Inhabitant="Ursalon">
+<Star ID="0">
+<Seed>1034006</Seed>
+ <MapPos X="-3.06" Y="-7.28"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>142172582</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689217431747084320</LastGrowth>
+ <NextGrowth>690381239747084320</NextGrowth>
+</Colony>
+<Radius>4538210</Radius>
+<ARot>74859</ARot>
+<Temp>291</Temp>
+<Seed>8290441</Seed>
+<Orbit>37043018908</Orbit>
+<TempBase>291.9706819034697</TempBase>
+</Planet>
+<Planet Seed="6878349" />
+<Planet Seed="283377" />
+<Planet Seed="9341303" />
+<Planet Seed="2642143" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5546579</Seed>
+ <MapPos X="-2.33" Y="-13.07"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="6346448" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>56018717</PRot>
+<Radius>6242358</Radius>
+<ARot>86372</ARot>
+<Temp>254</Temp>
+<Seed>6743794</Seed>
+<Orbit>79746099937</Orbit>
+<TempBase>254.0272914453584</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1962860</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>685293441914340625</LastGrowth>
+ <NextGrowth>691093473914340625</NextGrowth>
+</Colony>
+<Radius>1343892</Radius>
+<ARot>2055551</ARot>
+<Temp>216</Temp>
+<Seed>7717518</Seed>
+<Orbit>471922129</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1205867</PRot>
+<Radius>1334783</Radius>
+<ARot>1162284</ARot>
+<Temp>227</Temp>
+<Seed>5024627</Seed>
+<Orbit>767856529</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Ice</Type>
+<PRot>714068</PRot>
+<Radius>1528876</Radius>
+<ARot>751934</ARot>
+<Temp>247</Temp>
+<Seed>2401069</Seed>
+<Orbit>1309197558</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="6706425" />
+<Planet Seed="6715020" />
+<Planet Seed="894349" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>4959616</Seed>
+ <MapPos X="-0.34" Y="-9.24"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>81899319</PRot>
+<Colony>
+ <BaseType>21</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>682872768000000000</LastGrowth>
+ <NextGrowth>698544000000000000</NextGrowth>
+</Colony>
+<Radius>5600919</Radius>
+<ARot>75749</ARot>
+<Temp>236</Temp>
+<Seed>5317796</Seed>
+<Orbit>55481260463</Orbit>
+<TempBase>236.68809308897062</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Ice</Type>
+<PRot>1880136</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689341536000000000</LastGrowth>
+ <NextGrowth>701006400000000000</NextGrowth>
+</Colony>
+<Radius>1422609</Radius>
+<ARot>1983868</ARot>
+<Temp>232</Temp>
+<Seed>6586134</Seed>
+<Orbit>471975790</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1356806</PRot>
+<Radius>1194255</Radius>
+<ARot>1369423</ARot>
+<Temp>230</Temp>
+<Seed>6540158</Seed>
+<Orbit>752950567</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="7128485" />
+<Planet Seed="5269652" />
+<Planet Seed="1411550" />
+<Planet Seed="9742943" />
+<Planet Seed="1887110" />
+<Planet Seed="6002259" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>5371856</Seed>
+ <MapPos X="3.05" Y="-10.76"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,-1)4</TradeRoute>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>38811294</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>685518415727084320</LastGrowth>
+ <NextGrowth>690759439727084320</NextGrowth>
+</Colony>
+<Radius>68674923</Radius>
+<ARot>1181619</ARot>
+<Temp>340</Temp>
+<Seed>2454841</Seed>
+<Orbit>33804536160</Orbit>
+<TempBase>340.4003259585057</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>85762243</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689040836199391823</LastGrowth>
+ <NextGrowth>690407684199391823</NextGrowth>
+</Colony>
+<Radius>7218842</Radius>
+<ARot>105283</ARot>
+<Temp>301</Temp>
+<Seed>6276658</Seed>
+<Orbit>46878652048</Orbit>
+<TempBase>301.5554308129414</TempBase>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>49688150</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>681699456000000000</LastGrowth>
+ <NextGrowth>690036192000000000</NextGrowth>
+ <SeedProgress>92.4506</SeedProgress>
+</Colony>
+<Radius>5871823</Radius>
+<ARot>76364</ARot>
+<Temp>260</Temp>
+<Seed>9296309</Seed>
+<Orbit>93447468728</Orbit>
+<TempBase>260.00656051576647</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2221341</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689574816000000000</LastGrowth>
+ <NextGrowth>700283232000000000</NextGrowth>
+</Colony>
+<Radius>1499034</Radius>
+<ARot>2112263</ARot>
+<Temp>225</Temp>
+<Seed>2268798</Seed>
+<Orbit>421599897</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1615731" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>7267395</Seed>
+ <MapPos X="3.17" Y="-12.24"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,-1)3</TradeRoute>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <Planets>
+<Planet Seed="6446832" />
+<Planet Seed="5020303" />
+<Planet Seed="4830888" />
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>13222182</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>687031200000000000</LastGrowth>
+ <NextGrowth>691545600000000000</NextGrowth>
+</Colony>
+<Radius>56377948</Radius>
+<ARot>911395</ARot>
+<Temp>266</Temp>
+<Seed>5957390</Seed>
+<Orbit>133806240432</Orbit>
+<TempBase>266.8969710109586</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2552933</PRot>
+<Radius>1216734</Radius>
+<ARot>2435350</ARot>
+<Temp>228</Temp>
+<Seed>4702979</Seed>
+<Orbit>430544030</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1150079</PRot>
+<Radius>1602180</Radius>
+<ARot>1093197</ARot>
+<Temp>266</Temp>
+<Seed>1517934</Seed>
+<Orbit>785477321</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>640619</PRot>
+<Radius>1539239</Radius>
+<ARot>621444</ARot>
+<Temp>240</Temp>
+<Seed>6719805</Seed>
+<Orbit>1288813242</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Ice</Type>
+<PRot>547964</PRot>
+<Radius>1471753</Radius>
+<ARot>622772</ARot>
+<Temp>266</Temp>
+<Seed>195622</Seed>
+<Orbit>1638520994</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>407357</PRot>
+<Radius>1384808</Radius>
+<ARot>389155</ARot>
+<Temp>231</Temp>
+<Seed>9747251</Seed>
+<Orbit>2051990113</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Ice</Type>
+<PRot>382180</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>687470112000000000</LastGrowth>
+ <NextGrowth>694509120000000000</NextGrowth>
+</Colony>
+<Radius>1391142</Radius>
+<ARot>446871</ARot>
+<Temp>257</Temp>
+<Seed>4738002</Seed>
+<Orbit>2408542190</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Volcanic</Type>
+<PRot>287621</PRot>
+<Radius>1550806</Radius>
+<ARot>259568</ARot>
+<Temp>268</Temp>
+<Seed>1321041</Seed>
+<Orbit>2826030981</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Ice</Type>
+<PRot>297699</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>683723808000000000</LastGrowth>
+ <NextGrowth>690927840000000000</NextGrowth>
+</Colony>
+<Radius>1462384</Radius>
+<ARot>283642</ARot>
+<Temp>260</Temp>
+<Seed>2592583</Seed>
+<Orbit>3322112312</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8721637" />
+<Planet Seed="7489701" />
+<Planet Seed="2059999" />
+<Planet Seed="4831050" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>968339</Seed>
+ <MapPos X="-2.75" Y="-11.61"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>179546978</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689233827159391823</LastGrowth>
+ <NextGrowth>690925539159391823</NextGrowth>
+</Colony>
+<Radius>4240829</Radius>
+<ARot>58203</ARot>
+<Temp>298</Temp>
+<Seed>6721213</Seed>
+<Orbit>30088204379</Orbit>
+<TempBase>298.90560074663256</TempBase>
+</Planet>
+<Planet Seed="2175987" />
+<Planet Seed="1679658" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>3980070</Seed>
+ <MapPos X="4.77" Y="-10.69"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="3628964" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>9931887</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>686870482465589999</LastGrowth>
+ <NextGrowth>691535218465589999</NextGrowth>
+</Colony>
+<Radius>56414570</Radius>
+<ARot>637504</ARot>
+<Temp>208</Temp>
+<Seed>6058072</Seed>
+<Orbit>177723835635</Orbit>
+<TempBase>208.6482575057218</TempBase>
+</Planet>
+<Planet Seed="3980772" />
+<Planet Seed="7297271" />
+<Planet Seed="4922851" />
+<Planet Seed="2209403" />
+ </Planets>
+</Star>
+<Star ID="7">
+<Seed>9563311</Seed>
+ <MapPos X="4.54" Y="-6.73"/>
+</Star>
+<Star ID="8">
+<Seed>769372</Seed>
+ <MapPos X="0.76" Y="-6.42"/>
+</Star>
+<Star ID="9">
+<Seed>8472350</Seed>
+ <MapPos X="4.38" Y="-8.02"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="7711067" />
+<Planet Seed="6249747" />
+<Planet Seed="5586848" />
+<Planet Seed="163572" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>20018027</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688662388629431823</LastGrowth>
+ <NextGrowth>689804596629431823</NextGrowth>
+</Colony>
+<Radius>5927535</Radius>
+<ARot>81433</ARot>
+<Temp>290</Temp>
+<Seed>2963405</Seed>
+<Orbit>248439711479</Orbit>
+<TempBase>290.76805798310806</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>5361937</Seed>
+<Name>Ursalon Home</Name>
+ <MapPos X="0.75" Y="-11.28"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,-1)2</TradeRoute>
+ <TradeRoute>(0,-1)3</TradeRoute>
+ <TradeRoute>(0,-1)4</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>108674488</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>680528736000000000</LastGrowth>
+ <NextGrowth>689763168000000000</NextGrowth>
+</Colony>
+<Radius>5745459</Radius>
+<ARot>84567</ARot>
+<Temp>303</Temp>
+<Seed>1050557</Seed>
+<Orbit>39308885437</Orbit>
+<TempBase>303.3342169116241</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Desert</Type>
+<PRot>2005621</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>684815040000000000</LastGrowth>
+ <NextGrowth>691282080000000000</NextGrowth>
+</Colony>
+<Radius>1633189</Radius>
+<ARot>1950212</ARot>
+<Temp>263</Temp>
+<Seed>3833440</Seed>
+<Orbit>441277001</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1178746</PRot>
+<Radius>1440527</Radius>
+<ARot>1024979</ARot>
+<Temp>269</Temp>
+<Seed>4688319</Seed>
+<Orbit>830209516</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>833682</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688948525700184687</LastGrowth>
+ <NextGrowth>696441133700184687</NextGrowth>
+</Colony>
+<Radius>1404491</Radius>
+<ARot>897647</ARot>
+<Temp>259</Temp>
+<Seed>6717873</Seed>
+<Orbit>1161969218</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Oceanic</Type>
+<PRot>608130</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>687724495119391823</LastGrowth>
+ <NextGrowth>690165295119391823</NextGrowth>
+</Colony>
+<Radius>1253343</Radius>
+<ARot>544040</ARot>
+<Temp>309</Temp>
+<Seed>5840217</Seed>
+<Orbit>1604804820</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>78897629</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>84.7436</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6516259</Radius>
+<ARot>86902</ARot>
+<Temp>287</Temp>
+<Seed>8084774</Seed>
+<Orbit>54040739237</Orbit>
+<TempBase>287.6419611135964</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2598256</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>687436853649086250</LastGrowth>
+ <NextGrowth>689723861649086250</NextGrowth>
+</Colony>
+<Radius>1209391</Radius>
+<ARot>2388790</ARot>
+<Temp>247</Temp>
+<Seed>1230673</Seed>
+<Orbit>399188058</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1118911</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>687537504000000000</LastGrowth>
+ <NextGrowth>694272384000000000</NextGrowth>
+</Colony>
+<Radius>1546824</Radius>
+<ARot>1234830</ARot>
+<Temp>257</Temp>
+<Seed>7035206</Seed>
+<Orbit>805292448</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>727600</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688555296000000000</LastGrowth>
+ <NextGrowth>693245952000000000</NextGrowth>
+</Colony>
+<Radius>1477185</Radius>
+<ARot>728546</ARot>
+<Temp>293</Temp>
+<Seed>61560</Seed>
+<Orbit>1188956759</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>537686</PRot>
+<Radius>1508660</Radius>
+<ARot>542950</ARot>
+<Temp>253</Temp>
+<Seed>1142631</Seed>
+<Orbit>1608349490</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Oceanic</Type>
+<PRot>433894</PRot>
+<Radius>1626272</Radius>
+<ARot>441048</ARot>
+<Temp>289</Temp>
+<Seed>7823893</Seed>
+<Orbit>1971996847</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>424865</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688852575155589999</LastGrowth>
+ <NextGrowth>690856191155589999</NextGrowth>
+</Colony>
+<Radius>1397310</Radius>
+<ARot>397184</ARot>
+<Temp>250</Temp>
+<Seed>9710151</Seed>
+<Orbit>2455715980</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>76385139</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689396077700184687</LastGrowth>
+ <NextGrowth>695839789700184687</NextGrowth>
+</Colony>
+<Radius>5328785</Radius>
+<ARot>64514</ARot>
+<Temp>229</Temp>
+<Seed>1498968</Seed>
+<Orbit>76056311500</Orbit>
+<TempBase>229.3684586283682</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2605599</PRot>
+<Radius>1411858</Radius>
+<ARot>2518427</ARot>
+<Temp>197</Temp>
+<Seed>5309735</Seed>
+<Orbit>338224716</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1097584</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688776795669431823</LastGrowth>
+ <NextGrowth>692172315669431823</NextGrowth>
+</Colony>
+<Radius>1488941</Radius>
+<ARot>1149501</ARot>
+<Temp>238</Temp>
+<Seed>7233365</Seed>
+<Orbit>810560256</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>784346</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>685519779887084320</LastGrowth>
+ <NextGrowth>692637411887084320</NextGrowth>
+</Colony>
+<Radius>1318162</Radius>
+<ARot>741707</ARot>
+<Temp>186</Temp>
+<Seed>3847715</Seed>
+<Orbit>1291232209</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="9316233" />
+<Planet Seed="5597788" />
+<Planet Seed="5837119" />
+<Planet Seed="3163029" />
+<Planet Seed="8079665" />
+<Planet Seed="9625817" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>3531830</Seed>
+ <MapPos X="3.07" Y="-5.44"/>
+</Star>
+<Star ID="12">
+<Seed>3178001</Seed>
+ <MapPos X="2.72" Y="-13.27"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>34094581</PRot>
+<Radius>49660081</Radius>
+<ARot>759843</ARot>
+<Temp>302</Temp>
+<Seed>4050046</Seed>
+<Orbit>50453259265</Orbit>
+<TempBase>302.98400319896723</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2179498</PRot>
+<Radius>1554626</Radius>
+<ARot>2069415</ARot>
+<Temp>268</Temp>
+<Seed>8180748</Seed>
+<Orbit>392103118</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1258386</PRot>
+<Radius>1190182</Radius>
+<ARot>1161754</ARot>
+<Temp>262</Temp>
+<Seed>6646470</Seed>
+<Orbit>810338812</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>743045</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>689269069700184687</LastGrowth>
+ <NextGrowth>695183149700184687</NextGrowth>
+</Colony>
+<Radius>1575622</Radius>
+<ARot>663562</ARot>
+<Temp>272</Temp>
+<Seed>5809402</Seed>
+<Orbit>1145570212</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="3936274" />
+<Planet Seed="1016911" />
+<Planet Seed="4989462" />
+<Planet Seed="2436091" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>16048</Seed>
+ <MapPos X="-4.6" Y="-12.51"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="8903112" />
+<Planet ID="1">
+<Type>Volcanic</Type>
+<PRot>97108470</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>688495545669431823</LastGrowth>
+ <NextGrowth>690574329669431823</NextGrowth>
+</Colony>
+<Radius>5417287</Radius>
+<ARot>68020</ARot>
+<Temp>263</Temp>
+<Seed>9900664</Seed>
+<Orbit>48911719491</Orbit>
+<TempBase>263.3728609218987</TempBase>
+</Planet>
+<Planet Seed="1637524" />
+<Planet Seed="8456019" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="1" Y="-1" Inhabitant="Gokan">
+<Star ID="0">
+<Seed>8967901</Seed>
+ <MapPos X="11.84" Y="-5.65"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="6288013" />
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>61452820</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>687620005009391823</LastGrowth>
+ <NextGrowth>690230149009391823</NextGrowth>
+</Colony>
+<Radius>4092232</Radius>
+<ARot>56468</ARot>
+<Temp>315</Temp>
+<Seed>6595801</Seed>
+<Orbit>97288241204</Orbit>
+<TempBase>315.2894317257339</TempBase>
+</Planet>
+<Planet Seed="3645008" />
+<Planet Seed="7179096" />
+<Planet Seed="9605916" />
+<Planet Seed="4116992" />
+<Planet Seed="2730545" />
+<Planet Seed="4103895" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>1539127</Seed>
+ <MapPos X="5.31" Y="-8.87"/>
+</Star>
+<Star ID="2">
+<Seed>154212</Seed>
+ <MapPos X="6.85" Y="-14.32"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="193726" />
+<Planet ID="1">
+<Type>Volcanic</Type>
+<PRot>56993309</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>687827553914340625</LastGrowth>
+ <NextGrowth>691742337914340625</NextGrowth>
+</Colony>
+<Radius>6856232</Radius>
+<ARot>87295</ARot>
+<Temp>327</Temp>
+<Seed>483482</Seed>
+<Orbit>77957708494</Orbit>
+<TempBase>327.9818137683215</TempBase>
+</Planet>
+<Planet Seed="4856170" />
+<Planet Seed="4771143" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>8801687</Seed>
+ <MapPos X="5.81" Y="-11.67"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="4255370" />
+<Planet Seed="4484514" />
+<Planet ID="2">
+<Type>Oceanic</Type>
+<PRot>47271075</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688969826080597136</LastGrowth>
+ <NextGrowth>692047394080597136</NextGrowth>
+</Colony>
+<Radius>7316518</Radius>
+<ARot>116050</ARot>
+<Temp>316</Temp>
+<Seed>7620031</Seed>
+<Orbit>90693220519</Orbit>
+<TempBase>316.5591105100749</TempBase>
+</Planet>
+<Planet Seed="1190177" />
+<Planet Seed="6673811" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>3316576</Seed>
+ <MapPos X="13.02" Y="-6.26"/>
+</Star>
+<Star ID="5">
+<Seed>9982253</Seed>
+ <MapPos X="8.11" Y="-14.56"/>
+</Star>
+<Star ID="6">
+<Seed>6674616</Seed>
+ <MapPos X="6.19" Y="-6.07"/>
+</Star>
+<Star ID="7">
+<Seed>1829</Seed>
+ <MapPos X="14.57" Y="-7.83"/>
+</Star>
+<Star ID="8">
+<Seed>8038325</Seed>
+ <MapPos X="13.88" Y="-14.73"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>23817716</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688921354798118698</LastGrowth>
+ <NextGrowth>690835978798118698</NextGrowth>
+</Colony>
+<Radius>66893259</Radius>
+<ARot>931137</ARot>
+<Temp>314</Temp>
+<Seed>2031594</Seed>
+<Orbit>61460465025</Orbit>
+<TempBase>314.56401260105537</TempBase>
+</Planet>
+<Planet Seed="8103523" />
+ </Planets>
+</Star>
+<Star ID="9">
+<Seed>5555723</Seed>
+ <MapPos X="9.71" Y="-11.96"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(1,-1)12</TradeRoute>
+ <TradeRoute>(1,-1)13</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>17272297</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688939776000000000</LastGrowth>
+ <NextGrowth>695857824000000000</NextGrowth>
+</Colony>
+<Radius>77994475</Radius>
+<ARot>1134165</ARot>
+<Temp>276</Temp>
+<Seed>3568021</Seed>
+<Orbit>65632929830</Orbit>
+<TempBase>276.24362075653414</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1967862</PRot>
+<Radius>1436237</Radius>
+<ARot>1776384</ARot>
+<Temp>246</Temp>
+<Seed>9179342</Seed>
+<Orbit>484603941</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1053091</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689192064000000000</LastGrowth>
+ <NextGrowth>695148480000000000</NextGrowth>
+</Colony>
+<Radius>1400702</Radius>
+<ARot>1004790</ARot>
+<Temp>273</Temp>
+<Seed>5806787</Seed>
+<Orbit>906389784</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>837053</PRot>
+<Radius>1258894</Radius>
+<ARot>906681</ARot>
+<Temp>272</Temp>
+<Seed>1368896</Seed>
+<Orbit>1323609134</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>685019</PRot>
+<Radius>806163</Radius>
+<ARot>645826</ARot>
+<Temp>227</Temp>
+<Seed>2374850</Seed>
+<Orbit>1676588976</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="150912" />
+<Planet Seed="4330443" />
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>9461076</Seed>
+ <MapPos X="5.86" Y="-7.48"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>10978159</PRot>
+<Radius>72963745</Radius>
+<ARot>697237</ARot>
+<Temp>328</Temp>
+<Seed>3460928</Seed>
+<Orbit>131285335185</Orbit>
+<TempBase>328.1355991663414</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1773307</PRot>
+<Radius>1429445</Radius>
+<ARot>1622979</ARot>
+<Temp>288</Temp>
+<Seed>771878</Seed>
+<Orbit>488733854</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>942997</PRot>
+<Radius>1479417</Radius>
+<ARot>899605</ARot>
+<Temp>297</Temp>
+<Seed>629048</Seed>
+<Orbit>874879109</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>696614</PRot>
+<Radius>1356064</Radius>
+<ARot>699393</ARot>
+<Temp>298</Temp>
+<Seed>2275821</Seed>
+<Orbit>1352074136</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>466221</PRot>
+<Radius>1531996</Radius>
+<ARot>461055</ARot>
+<Temp>293</Temp>
+<Seed>7065094</Seed>
+<Orbit>1733669982</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>453167</PRot>
+<Radius>1498486</Radius>
+<ARot>416008</ARot>
+<Temp>305</Temp>
+<Seed>4712956</Seed>
+<Orbit>1980874876</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>378688</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688202029700184687</LastGrowth>
+ <NextGrowth>693378253700184687</NextGrowth>
+</Colony>
+<Radius>1462557</Radius>
+<ARot>372710</ARot>
+<Temp>284</Temp>
+<Seed>7989363</Seed>
+<Orbit>2501255645</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>334718</PRot>
+<Radius>1261271</Radius>
+<ARot>335003</ARot>
+<Temp>294</Temp>
+<Seed>7054663</Seed>
+<Orbit>2848448634</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="5579645" />
+<Planet Seed="9055159" />
+<Planet Seed="2432701" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>9161581</Seed>
+ <MapPos X="8.04" Y="-6.89"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(1,-1)12</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>49480288</PRot>
+<Radius>73106629</Radius>
+<ARot>1014622</ARot>
+<Temp>313</Temp>
+<Seed>2555971</Seed>
+<Orbit>32355939661</Orbit>
+<TempBase>313.8331554259879</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2722168</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688796352000000000</LastGrowth>
+ <NextGrowth>692959104000000000</NextGrowth>
+</Colony>
+<Radius>991084</Radius>
+<ARot>2648327</ARot>
+<Temp>285</Temp>
+<Seed>2083266</Seed>
+<Orbit>405907644</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>109142678</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688936320000000000</LastGrowth>
+ <NextGrowth>690692832000000000</NextGrowth>
+</Colony>
+<Radius>6312586</Radius>
+<ARot>92520</ARot>
+<Temp>311</Temp>
+<Seed>5877673</Seed>
+<Orbit>44552233185</Orbit>
+<TempBase>311.9873945166336</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2458571</PRot>
+<Radius>1502866</Radius>
+<ARot>2445561</ARot>
+<Temp>305</Temp>
+<Seed>9771850</Seed>
+<Orbit>373372383</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1151498</PRot>
+<Radius>1476540</Radius>
+<ARot>1157906</ARot>
+<Temp>279</Temp>
+<Seed>8097977</Seed>
+<Orbit>864572571</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>1005821</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>686574144000000000</LastGrowth>
+ <NextGrowth>694463328000000000</NextGrowth>
+</Colony>
+<Radius>998338</Radius>
+<ARot>1012776</ARot>
+<Temp>312</Temp>
+<Seed>3603515</Seed>
+<Orbit>1153648391</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8046377" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>53880743</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>687998989700184687</LastGrowth>
+ <NextGrowth>694297549700184687</NextGrowth>
+</Colony>
+<Radius>6357345</Radius>
+<ARot>95386</ARot>
+<Temp>243</Temp>
+<Seed>7892108</Seed>
+<Orbit>85291669822</Orbit>
+<TempBase>243.3368147364945</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Gas</Type>
+<PRot>14395884</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689556079750210000</LastGrowth>
+ <NextGrowth>697616335750210000</NextGrowth>
+</Colony>
+<Radius>56007716</Radius>
+<ARot>765837</ARot>
+<Temp>163</Temp>
+<Seed>4942118</Seed>
+<Orbit>117507674938</Orbit>
+<TempBase>163.36608946071348</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Rocky</Type>
+<PRot>30890816</PRot>
+<Radius>5858328</Radius>
+<ARot>90906</ARot>
+<Temp>152</Temp>
+<Seed>570923</Seed>
+<Orbit>163811178268</Orbit>
+<TempBase>152.9943925066473</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2586549</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680895181700184687</LastGrowth>
+ <NextGrowth>697826125700184687</NextGrowth>
+</Colony>
+<Radius>1483562</Radius>
+<ARot>2561063</ARot>
+<Temp>124</Temp>
+<Seed>3098738</Seed>
+<Orbit>400404941</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>9737123</Seed>
+<Name>Gokan Home</Name>
+ <MapPos X="9.63" Y="-9.66"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(1,-1)9</TradeRoute>
+ <TradeRoute>(1,-1)11</TradeRoute>
+ <TradeRoute>(1,-1)13</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>50964041</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Gokan</Owner>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>33.9884</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5420964</Radius>
+<ARot>80607</ARot>
+<Temp>286</Temp>
+<Seed>6267521</Seed>
+<Orbit>88126227870</Orbit>
+<TempBase>286.4739382012569</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2916827</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689653181865589999</LastGrowth>
+ <NextGrowth>690994109865589999</NextGrowth>
+</Colony>
+<Radius>1405146</Radius>
+<ARot>2842438</ARot>
+<Temp>288</Temp>
+<Seed>2657744</Seed>
+<Orbit>339263266</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1025961</PRot>
+<Colony>
+ <BaseType>7</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>681721056000000000</LastGrowth>
+ <NextGrowth>695787840000000000</NextGrowth>
+</Colony>
+<Radius>1622264</Radius>
+<ARot>986489</ARot>
+<Temp>251</Temp>
+<Seed>3782290</Seed>
+<Orbit>779835075</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>828540</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688852085649086250</LastGrowth>
+ <NextGrowth>690409013649086250</NextGrowth>
+</Colony>
+<Radius>1157324</Radius>
+<ARot>807515</ARot>
+<Temp>282</Temp>
+<Seed>2734747</Seed>
+<Orbit>1237447993</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Volcanic</Type>
+<PRot>543889</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688310499887084320</LastGrowth>
+ <NextGrowth>689995299887084320</NextGrowth>
+</Colony>
+<Radius>1685123</Radius>
+<ARot>553030</ARot>
+<Temp>286</Temp>
+<Seed>4046187</Seed>
+<Orbit>1661867009</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>427702</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>687933475839391823</LastGrowth>
+ <NextGrowth>689767747839391823</NextGrowth>
+</Colony>
+<Radius>1693654</Radius>
+<ARot>458483</ARot>
+<Temp>259</Temp>
+<Seed>947756</Seed>
+<Orbit>2098322643</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>34345020</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689205024000000000</LastGrowth>
+ <NextGrowth>699592032000000000</NextGrowth>
+ <SeedProgress>82.4574</SeedProgress>
+</Colony>
+<Radius>5381628</Radius>
+<ARot>97560</ARot>
+<Temp>251</Temp>
+<Seed>9956040</Seed>
+<Orbit>122986414026</Orbit>
+<TempBase>251.42180250450667</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2416333</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>687935993679391823</LastGrowth>
+ <NextGrowth>692919545679391823</NextGrowth>
+</Colony>
+<Radius>1411855</Radius>
+<ARot>2300829</ARot>
+<Temp>216</Temp>
+<Seed>1338611</Seed>
+<Orbit>364990718</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1280856</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689035433946890000</LastGrowth>
+ <NextGrowth>691752713946890000</NextGrowth>
+</Colony>
+<Radius>1425598</Radius>
+<ARot>1455628</ARot>
+<Temp>247</Temp>
+<Seed>9420957</Seed>
+<Orbit>778731844</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>759285</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>689310688469431823</LastGrowth>
+ <NextGrowth>694144768469431823</NextGrowth>
+</Colony>
+<Radius>1371123</Radius>
+<ARot>853346</ARot>
+<Temp>208</Temp>
+<Seed>6854709</Seed>
+<Orbit>1176395207</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>615037</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680607360000000000</LastGrowth>
+ <NextGrowth>692289504000000000</NextGrowth>
+</Colony>
+<Radius>1125861</Radius>
+<ARot>610456</ARot>
+<Temp>213</Temp>
+<Seed>6515323</Seed>
+<Orbit>1542370977</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="3692966" />
+<Planet Seed="7258765" />
+<Planet Seed="7753" />
+<Planet Seed="3858894" />
+<Planet Seed="6289322" />
+<Planet Seed="9818714" />
+<Planet Seed="6820554" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>952100</Seed>
+ <MapPos X="10.55" Y="-10.45"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(1,-1)12</TradeRoute>
+ <TradeRoute>(1,-1)9</TradeRoute>
+ <Planets>
+<Planet Seed="5723715" />
+<Planet Seed="886627" />
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>53221038</PRot>
+<Radius>5606137</Radius>
+<ARot>79857</ARot>
+<Temp>322</Temp>
+<Seed>9556928</Seed>
+<Orbit>92336131526</Orbit>
+<TempBase>322.70718862705155</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2203597</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688835232000000000</LastGrowth>
+ <NextGrowth>694039104000000000</NextGrowth>
+</Colony>
+<Radius>1283605</Radius>
+<ARot>2189659</ARot>
+<Temp>330</Temp>
+<Seed>2217904</Seed>
+<Orbit>468905894</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>36129710</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>686372077700184687</LastGrowth>
+ <NextGrowth>692056333700184687</NextGrowth>
+</Colony>
+<Radius>5392147</Radius>
+<ARot>72419</ARot>
+<Temp>305</Temp>
+<Seed>9629635</Seed>
+<Orbit>128795686933</Orbit>
+<TempBase>305.05342340854037</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>3048286</PRot>
+<Radius>1307376</Radius>
+<ARot>3150837</ARot>
+<Temp>274</Temp>
+<Seed>7640006</Seed>
+<Orbit>338903787</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Oceanic</Type>
+<PRot>1159284</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>684389088000000000</LastGrowth>
+ <NextGrowth>691204320000000000</NextGrowth>
+</Colony>
+<Radius>1209042</Radius>
+<ARot>1255193</ARot>
+<Temp>301</Temp>
+<Seed>3393721</Seed>
+<Orbit>869383678</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>22558297</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>688997664000000000</LastGrowth>
+ <NextGrowth>693851616000000000</NextGrowth>
+</Colony>
+<Radius>6057050</Radius>
+<ARot>79376</ARot>
+<Temp>254</Temp>
+<Seed>1850277</Seed>
+<Orbit>179567482457</Orbit>
+<TempBase>254.5334143775386</TempBase>
+</Planet>
+<Planet Seed="9878571" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="-1" Y="0" Inhabitant="Grey">
+<Star ID="0">
+<Seed>77853</Seed>
+ <MapPos X="-11.62" Y="-0.99"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,0)5</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>60217156</PRot>
+<Colony>
+ <BaseType>21</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>683941536000000000</LastGrowth>
+ <NextGrowth>690050016000000000</NextGrowth>
+</Colony>
+<Radius>6099597</Radius>
+<ARot>84524</ARot>
+<Temp>274</Temp>
+<Seed>7306360</Seed>
+<Orbit>74606771624</Orbit>
+<TempBase>274.8232082744819</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>4179671</Seed>
+ <MapPos X="-7.41" Y="2.4"/>
+ <Owner>Grey</Owner>
+ <Planets>
+<Planet Seed="7852841" />
+<Planet Seed="9465652" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>20329313</PRot>
+<Radius>72723924</Radius>
+<ARot>1184199</ARot>
+<Temp>269</Temp>
+<Seed>2219564</Seed>
+<Orbit>72719182026</Orbit>
+<TempBase>269.0585890396962</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2160055</PRot>
+<Radius>1267434</Radius>
+<ARot>1953943</ARot>
+<Temp>237</Temp>
+<Seed>2758722</Seed>
+<Orbit>441228699</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Oceanic</Type>
+<PRot>952664</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>688974146080597136</LastGrowth>
+ <NextGrowth>694832930080597136</NextGrowth>
+</Colony>
+<Radius>1698883</Radius>
+<ARot>986731</ARot>
+<Temp>273</Temp>
+<Seed>8220141</Seed>
+<Orbit>901195191</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8359800" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>1237786</Seed>
+ <MapPos X="-11.46" Y="-4.73"/>
+</Star>
+<Star ID="3">
+<Seed>1877991</Seed>
+ <MapPos X="-8.75" Y="3.68"/>
+</Star>
+<Star ID="4">
+<Seed>7772687</Seed>
+ <MapPos X="-10.3" Y="4.15"/>
+ <Owner>Grey</Owner>
+ <Planets>
+<Planet Seed="6499645" />
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>89237613</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>685882689914340625</LastGrowth>
+ <NextGrowth>689698977914340625</NextGrowth>
+</Colony>
+<Radius>7398645</Radius>
+<ARot>75680</ARot>
+<Temp>285</Temp>
+<Seed>3255175</Seed>
+<Orbit>50335589092</Orbit>
+<TempBase>285.0417525474421</TempBase>
+</Planet>
+<Planet Seed="8788218" />
+<Planet Seed="817976" />
+<Planet Seed="1180218" />
+<Planet Seed="355835" />
+<Planet Seed="9732045" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>1282808</Seed>
+<Name>Grey Home</Name>
+ <MapPos X="-9.19" Y="-0.75"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,0)0</TradeRoute>
+ <TradeRoute>(-1,0)10</TradeRoute>
+ <TradeRoute>(-1,0)13</TradeRoute>
+ <Planets>
+<Planet Seed="8570596" />
+<Planet Seed="4185832" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>22691699</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>689000011279390000</LastGrowth>
+ <NextGrowth>692609803279390000</NextGrowth>
+</Colony>
+<Radius>6424830</Radius>
+<ARot>83256</ARot>
+<Temp>338</Temp>
+<Seed>7381915</Seed>
+<Orbit>196193478758</Orbit>
+<TempBase>338.3605838091711</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2564712</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>689295260529086250</LastGrowth>
+ <NextGrowth>695234396529086250</NextGrowth>
+</Colony>
+<Radius>1207724</Radius>
+<ARot>2814583</ARot>
+<Temp>335</Temp>
+<Seed>4027017</Seed>
+<Orbit>407734785</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1372086</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>689375109739391823</LastGrowth>
+ <NextGrowth>690881061739391823</NextGrowth>
+</Colony>
+<Radius>1426087</Radius>
+<ARot>1381700</ARot>
+<Temp>303</Temp>
+<Seed>7587904</Seed>
+<Orbit>711148037</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>18629444</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Grey</Owner>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>92.4929</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>7076271</Radius>
+<ARot>115938</ARot>
+<Temp>296</Temp>
+<Seed>2122468</Seed>
+<Orbit>277324307356</Orbit>
+<TempBase>296.0129818506969</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2464417</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>683885376000000000</LastGrowth>
+ <NextGrowth>690104448000000000</NextGrowth>
+</Colony>
+<Radius>1580198</Radius>
+<ARot>2533189</ARot>
+<Temp>302</Temp>
+<Seed>3952083</Seed>
+<Orbit>411660631</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1233856</PRot>
+<Colony>
+ <BaseType>25</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>680608224000000000</LastGrowth>
+ <NextGrowth>690886368000000000</NextGrowth>
+</Colony>
+<Radius>1567891</Radius>
+<ARot>1189703</ARot>
+<Temp>304</Temp>
+<Seed>2937602</Seed>
+<Orbit>700496161</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>775659</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>686014272000000000</LastGrowth>
+ <NextGrowth>694815840000000000</NextGrowth>
+</Colony>
+<Radius>1094054</Radius>
+<ARot>829543</ARot>
+<Temp>293</Temp>
+<Seed>2795050</Seed>
+<Orbit>1227788802</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>1635212</Seed>
+ <MapPos X="-12.25" Y="-3.3"/>
+</Star>
+<Star ID="7">
+<Seed>5700549</Seed>
+ <MapPos X="-7.56" Y="-3.66"/>
+</Star>
+<Star ID="8">
+<Seed>5123514</Seed>
+ <MapPos X="-11.95" Y="-2.18"/>
+ <Owner>Grey</Owner>
+ <Planets>
+<Planet Seed="4012167" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>108514034</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>688257199161931823</LastGrowth>
+ <NextGrowth>691134319161931823</NextGrowth>
+</Colony>
+<Radius>6303012</Radius>
+<ARot>85875</ARot>
+<Temp>243</Temp>
+<Seed>6790673</Seed>
+<Orbit>41069740124</Orbit>
+<TempBase>243.0032138964443</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="9">
+<Seed>5656298</Seed>
+ <MapPos X="-10.9" Y="1.32"/>
+</Star>
+<Star ID="10">
+<Seed>9908567</Seed>
+ <MapPos X="-8.54" Y="-1.83"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,0)5</TradeRoute>
+ <TradeRoute>(-1,0)13</TradeRoute>
+ <Planets>
+<Planet Seed="1365434" />
+<Planet Seed="4485437" />
+<Planet Seed="7938441" />
+<Planet Seed="4282286" />
+<Planet Seed="2488343" />
+<Planet ID="5">
+<Type>Gas</Type>
+<PRot>6463555</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>689083200000000000</LastGrowth>
+ <NextGrowth>697303296000000000</NextGrowth>
+ <SeedProgress>82.4574</SeedProgress>
+</Colony>
+<Radius>47963365</Radius>
+<ARot>689592</ARot>
+<Temp>264</Temp>
+<Seed>4538963</Seed>
+<Orbit>268295470179</Orbit>
+<TempBase>264.82106256259635</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Desert</Type>
+<PRot>2035871</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>687933475839391823</LastGrowth>
+ <NextGrowth>691720387839391823</NextGrowth>
+</Colony>
+<Radius>1531025</Radius>
+<ARot>1895097</ARot>
+<Temp>224</Temp>
+<Seed>8094477</Seed>
+<Orbit>457171224</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1059907</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>688674281946890000</LastGrowth>
+ <NextGrowth>691382921946890000</NextGrowth>
+</Colony>
+<Radius>1348583</Radius>
+<ARot>1063051</ARot>
+<Temp>260</Temp>
+<Seed>4510819</Seed>
+<Orbit>898054065</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Ice</Type>
+<PRot>759070</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>684544608000000000</LastGrowth>
+ <NextGrowth>690943392000000000</NextGrowth>
+</Colony>
+<Radius>1814584</Radius>
+<ARot>711422</ARot>
+<Temp>267</Temp>
+<Seed>817346</Seed>
+<Orbit>1178694750</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>528972</PRot>
+<Radius>1459759</Radius>
+<ARot>543587</ARot>
+<Temp>224</Temp>
+<Seed>8916184</Seed>
+<Orbit>1640124765</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>420442</PRot>
+<Radius>1588554</Radius>
+<ARot>389653</ARot>
+<Temp>229</Temp>
+<Seed>7715760</Seed>
+<Orbit>2070381147</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Ice</Type>
+<PRot>378844</PRot>
+<Radius>1332135</Radius>
+<ARot>354187</ARot>
+<Temp>260</Temp>
+<Seed>2529794</Seed>
+<Orbit>2494957833</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Desert</Type>
+<PRot>327664</PRot>
+<Radius>1441143</Radius>
+<ARot>331098</ARot>
+<Temp>224</Temp>
+<Seed>8319646</Seed>
+<Orbit>2941856144</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Rocky</Type>
+<PRot>297818</PRot>
+<Radius>1401192</Radius>
+<ARot>305224</ARot>
+<Temp>220</Temp>
+<Seed>4451743</Seed>
+<Orbit>3268716780</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>5203063</Seed>
+ <MapPos X="-12.04" Y="0.42"/>
+</Star>
+<Star ID="12">
+<Seed>4301369</Seed>
+ <MapPos X="-12.61" Y="4.55"/>
+ <Owner>Grey</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>69348395</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>688494223750210000</LastGrowth>
+ <NextGrowth>690243823750210000</NextGrowth>
+</Colony>
+<Radius>7428221</Radius>
+<ARot>110193</ARot>
+<Temp>312</Temp>
+<Seed>3630505</Seed>
+<Orbit>63280570802</Orbit>
+<TempBase>312.241705474426</TempBase>
+</Planet>
+<Planet Seed="9042909" />
+<Planet Seed="9955149" />
+<Planet Seed="1714178" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>5768417</Seed>
+ <MapPos X="-7.33" Y="-0.38"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,0)5</TradeRoute>
+ <TradeRoute>(-1,0)10</TradeRoute>
+ <Planets>
+<Planet Seed="3874800" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>25352754</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>688456800000000000</LastGrowth>
+ <NextGrowth>698156064000000000</NextGrowth>
+</Colony>
+<Radius>56014417</Radius>
+<ARot>842290</ARot>
+<Temp>325</Temp>
+<Seed>7993784</Seed>
+<Orbit>62687280397</Orbit>
+<TempBase>325.207687201551</TempBase>
+</Planet>
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>52872214</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>688789440000000000</LastGrowth>
+ <NextGrowth>695500128000000000</NextGrowth>
+ <SeedProgress>92.4506</SeedProgress>
+</Colony>
+<Radius>5267214</Radius>
+<ARot>85347</ARot>
+<Temp>291</Temp>
+<Seed>9249903</Seed>
+<Orbit>85216502008</Orbit>
+<TempBase>291.2618721283341</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1964720</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>687959136000000000</LastGrowth>
+ <NextGrowth>695651328000000000</NextGrowth>
+</Colony>
+<Radius>1580404</Radius>
+<ARot>1932778</ARot>
+<Temp>259</Temp>
+<Seed>4837101</Seed>
+<Orbit>405347705</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1340655</PRot>
+<Radius>1144058</Radius>
+<ARot>1470827</ARot>
+<Temp>249</Temp>
+<Seed>509832</Seed>
+<Orbit>814734090</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>11298518</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>689438383727084320</LastGrowth>
+ <NextGrowth>691582831727084320</NextGrowth>
+</Colony>
+<Radius>78233008</Radius>
+<ARot>1298262</ARot>
+<Temp>237</Temp>
+<Seed>2396391</Seed>
+<Orbit>117066623186</Orbit>
+<TempBase>237.01694693427223</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Ice</Type>
+<PRot>2068887</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>687723236199391823</LastGrowth>
+ <NextGrowth>691408196199391823</NextGrowth>
+</Colony>
+<Radius>1638057</Radius>
+<ARot>2083066</ARot>
+<Temp>239</Temp>
+<Seed>4493730</Seed>
+<Orbit>443923307</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1009103</PRot>
+<Radius>1591240</Radius>
+<ARot>1093524</ARot>
+<Temp>207</Temp>
+<Seed>8177851</Seed>
+<Orbit>876215621</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Ice</Type>
+<PRot>750855</PRot>
+<Radius>1434042</Radius>
+<ARot>757166</ARot>
+<Temp>234</Temp>
+<Seed>951254</Seed>
+<Orbit>1263738480</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Ice</Type>
+<PRot>577104</PRot>
+<Radius>1293322</Radius>
+<ARot>597041</ARot>
+<Temp>225</Temp>
+<Seed>4803779</Seed>
+<Orbit>1671587482</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>476663</PRot>
+<Radius>1292794</Radius>
+<ARot>454629</ARot>
+<Temp>207</Temp>
+<Seed>5157324</Seed>
+<Orbit>2145749670</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>415982</PRot>
+<Radius>1361917</Radius>
+<ARot>414677</ARot>
+<Temp>206</Temp>
+<Seed>4465399</Seed>
+<Orbit>2423023681</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>359066</PRot>
+<Radius>1261550</Radius>
+<ARot>378705</ARot>
+<Temp>203</Temp>
+<Seed>7480365</Seed>
+<Orbit>2800879458</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>27697162</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>688049965700184687</LastGrowth>
+ <NextGrowth>689759821700184687</NextGrowth>
+</Colony>
+<Radius>7194809</Radius>
+<ARot>109270</ARot>
+<Temp>244</Temp>
+<Seed>6538867</Seed>
+<Orbit>160043037846</Orbit>
+<TempBase>244.38695978550112</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Volcanic</Type>
+<PRot>16823764</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>687938122798118698</LastGrowth>
+ <NextGrowth>692755786798118698</NextGrowth>
+</Colony>
+<Radius>7531002</Radius>
+<ARot>111506</ARot>
+<Temp>200</Temp>
+<Seed>5954247</Seed>
+<Orbit>227866718158</Orbit>
+<TempBase>200.05550212269395</TempBase>
+</Planet>
+<Planet Seed="8552831" />
+<Planet Seed="3679906" />
+<Planet Seed="3855478" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="0" Y="0" Inhabitant="Human">
+<Star ID="0">
+<Seed>2601560</Seed>
+<Name>New Horizon</Name>
+ <MapPos X="1.81" Y="-2.96"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="1486550" />
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>130855356</PRot>
+ <Scanned/>
+<Colony>
+ <Owner>Human</Owner>
+ <LastUpdate>686917574876800000</LastUpdate>
+ <LastGrowth>689269135932770000</LastGrowth>
+ <NextGrowth>690575503932770000</NextGrowth>
+</Colony>
+<Name>New Home</Name>
+<Radius>4758574</Radius>
+<ARot>83314</ARot>
+<Temp>297</Temp>
+<Seed>1054684</Seed>
+<Orbit>42264967828</Orbit>
+<TempBase>297.8830617206375</TempBase>
+</Planet>
+<Planet Seed="1768823" />
+<Planet Seed="427687" />
+<Planet Seed="4952048" />
+<Planet Seed="7470281" />
+<Planet Seed="8766310" />
+<Planet Seed="3013015" />
+<Planet Seed="7349637" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="1">
+<Seed>4133432</Seed>
+<Name>OnTheEdge</Name>
+ <MapPos X="4.36" Y="-1.22"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="3976168" />
+<Planet Seed="3660745" />
+<Planet ID="2">
+<Type>Oceanic</Type>
+<PRot>32084075</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Human</Owner>
+ <LastGrowth>687249602080597136</LastGrowth>
+ <NextGrowth>691923842080597136</NextGrowth>
+</Colony>
+<Radius>7304973</Radius>
+<ARot>85537</ARot>
+<Temp>277</Temp>
+<Seed>6574561</Seed>
+<Orbit>142387201070</Orbit>
+<TempBase>277.7476327877787</TempBase>
+</Planet>
+ </Planets>
+ <Visited/></Star>
+<Star ID="2">
+<Seed>395096</Seed>
+<Name>Red Cousin</Name>
+ <MapPos X="-0.96" Y="1.85"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)5</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>35126650</PRot>
+<Colony>
+ <BaseType>29</BaseType>
+ <Owner>Human</Owner>
+ <LastGrowth>678722976000000000</LastGrowth>
+ <NextGrowth>694942848000000000</NextGrowth>
+ <SeedProgress>79.7587</SeedProgress>
+</Colony>
+<Radius>48376722</Radius>
+<ARot>713242</ARot>
+<Temp>225</Temp>
+<Seed>62637</Seed>
+<Orbit>50648099397</Orbit>
+<TempBase>225.42563217930064</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>19232932</PRot>
+<Radius>73814600</Radius>
+<ARot>1117607</ARot>
+<Temp>188</Temp>
+<Seed>4350772</Seed>
+<Orbit>71785703425</Orbit>
+<TempBase>188.79816794907055</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2964035</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>686736275985589999</LastGrowth>
+ <NextGrowth>701330099985589999</NextGrowth>
+</Colony>
+<Radius>1112056</Radius>
+<ARot>3117349</ARot>
+<Temp>150</Temp>
+<Seed>8379817</Seed>
+<Orbit>372925210</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1149601</PRot>
+<Radius>1170790</Radius>
+<ARot>1038953</ARot>
+<Temp>148</Temp>
+<Seed>8111457</Seed>
+<Orbit>918077396</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>849652</PRot>
+<Radius>1401504</Radius>
+<ARot>816743</ARot>
+<Temp>144</Temp>
+<Seed>8548850</Seed>
+<Orbit>1269723265</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>570367</PRot>
+<Radius>1433810</Radius>
+<ARot>523850</ARot>
+<Temp>155</Temp>
+<Seed>2115655</Seed>
+<Orbit>1617507936</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Desert</Type>
+<PRot>395527</PRot>
+<Radius>1888938</Radius>
+<ARot>392299</ARot>
+<Temp>148</Temp>
+<Seed>3855375</Seed>
+<Orbit>2044646688</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>392523</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>688409741109431823</LastGrowth>
+ <NextGrowth>697260557109431823</NextGrowth>
+</Colony>
+<Radius>1604732</Radius>
+<ARot>388645</ARot>
+<Temp>157</Temp>
+<Seed>4324775</Seed>
+<Orbit>2493343846</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>40119417</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>685151447327084320</LastGrowth>
+ <NextGrowth>689906039327084320</NextGrowth>
+</Colony>
+<Radius>6081636</Radius>
+<ARot>93170</ARot>
+<Temp>166</Temp>
+<Seed>2015537</Seed>
+<Orbit>101266601352</Orbit>
+<TempBase>166.03464818047314</TempBase>
+</Planet>
+<Planet Seed="1781724" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="3">
+<Seed>1098620</Seed>
+<Name>FourBalls</Name>
+ <MapPos X="-3.04" Y="-2.06"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="2305609" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>94227651</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687024033914340625</LastGrowth>
+ <NextGrowth>689716257914340625</NextGrowth>
+</Colony>
+<Radius>7725745</Radius>
+<ARot>122807</ARot>
+<Temp>241</Temp>
+<Seed>5935862</Seed>
+<Orbit>49521573677</Orbit>
+<TempBase>241.11696674496602</TempBase>
+</Planet>
+<Planet Seed="65305" />
+<Planet Seed="3246255" />
+<Planet Seed="1582262" />
+<Planet Seed="5606719" />
+<Planet Seed="9547712" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="4">
+<Seed>6546632</Seed>
+<Name>Second Home</Name>
+ <MapPos X="-2.43" Y="0.23"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)5</TradeRoute>
+ <Planets>
+<Planet Seed="8777056" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>18539503</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687572143727084320</LastGrowth>
+ <NextGrowth>690199567727084320</NextGrowth>
+</Colony>
+<Radius>60444711</Radius>
+<ARot>918919</ARot>
+<Temp>321</Temp>
+<Seed>3057241</Seed>
+<Orbit>79782797993</Orbit>
+<TempBase>321.843144955636</TempBase>
+</Planet>
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>12527713</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>684730542109803125</LastUpdate>
+ <LastGrowth>687908160000000000</LastGrowth>
+ <NextGrowth>695938176000000000</NextGrowth>
+ <SeedProgress>92.4506</SeedProgress>
+</Colony>
+<Radius>62599700</Radius>
+<ARot>820912</ARot>
+<Temp>273</Temp>
+<Seed>7382691</Seed>
+<Orbit>109808789575</Orbit>
+<TempBase>273.680356846974</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2002707</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678290626707939554</LastUpdate>
+ <LastGrowth>689571360000000000</LastGrowth>
+ <NextGrowth>695182176000000000</NextGrowth>
+</Colony>
+<Radius>1513063</Radius>
+<ARot>1941848</ARot>
+<Temp>273</Temp>
+<Seed>7923718</Seed>
+<Orbit>460165243</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>31800878</PRot>
+ <Scanned/>
+<Radius>5412137</Radius>
+<ARot>95555</ARot>
+<Temp>275</Temp>
+<Seed>3772924</Seed>
+<Orbit>154571813738</Orbit>
+<TempBase>275.14525629634426</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2619573</PRot>
+<Radius>1068463</Radius>
+<ARot>2484448</ARot>
+<Temp>249</Temp>
+<Seed>9215507</Seed>
+<Orbit>430892192</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1229952</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687723236199391823</LastGrowth>
+ <NextGrowth>690794756199391823</NextGrowth>
+</Colony>
+<Radius>1384802</Radius>
+<ARot>1196732</ARot>
+<Temp>235</Temp>
+<Seed>5779311</Seed>
+<Orbit>867204135</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>774150</PRot>
+<Radius>1426485</Radius>
+<ARot>715116</ARot>
+<Temp>245</Temp>
+<Seed>2436187</Seed>
+<Orbit>1195175588</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="2834201" />
+<Planet Seed="4113469" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="5">
+<Seed>9608841</Seed>
+<Name>Human Home</Name>
+ <MapPos X="-0.45" Y="-0.19"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)4</TradeRoute>
+ <TradeRoute>(0,0)2</TradeRoute>
+ <TradeRoute>(0,0)7</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>148419182</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>687448053324552975</LastUpdate>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>13.8223</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6259600</Radius>
+<ARot>92117</ARot>
+<Temp>302</Temp>
+<Seed>7407307</Seed>
+<Orbit>28708001018</Orbit>
+<TempBase>302.6067405275459</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2238917</PRot>
+<Colony>
+ <BaseType>21</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678160980966340000</LastUpdate>
+ <LastGrowth>681500736000000000</LastGrowth>
+ <NextGrowth>690919200000000000</NextGrowth>
+</Colony>
+<Radius>1675894</Radius>
+<ARot>2189585</ARot>
+<Temp>267</Temp>
+<Seed>1366280</Seed>
+<Orbit>383563675</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1205418</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687963029649086250</LastGrowth>
+ <NextGrowth>689685845649086250</NextGrowth>
+</Colony>
+<Radius>1176819</Radius>
+<ARot>1388773</ARot>
+<Temp>274</Temp>
+<Seed>1715131</Seed>
+<Orbit>788365131</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Oceanic</Type>
+<PRot>691439</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678166755941050000</LastUpdate>
+ <LastGrowth>683189856000000000</LastGrowth>
+ <NextGrowth>692877024000000000</NextGrowth>
+</Colony>
+<Radius>1248379</Radius>
+<ARot>683104</ARot>
+<Temp>291</Temp>
+<Seed>5620967</Seed>
+<Orbit>1251567459</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>37311062</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678171377511824218</LastUpdate>
+ <LastGrowth>684039168000000000</LastGrowth>
+ <NextGrowth>693513792000000000</NextGrowth>
+</Colony>
+<Radius>66006851</Radius>
+<ARot>898956</ARot>
+<Temp>216</Temp>
+<Seed>2185176</Seed>
+<Orbit>39573948410</Orbit>
+<TempBase>216.08790832754056</TempBase>
+</Planet>
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>29437971</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>686367489946890000</LastGrowth>
+ <NextGrowth>690635649946890000</NextGrowth>
+</Colony>
+<Radius>66426743</Radius>
+<ARot>986926</ARot>
+<Temp>182</Temp>
+<Seed>6311255</Seed>
+<Orbit>55368965495</Orbit>
+<TempBase>182.29171421093116</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2373410</PRot>
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>24.57</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>848724023</Seed>
+</Mission>
+ </Missions>
+<Radius>1146820</Radius>
+<ARot>2488676</ARot>
+<Temp>179</Temp>
+<Seed>8283543</Seed>
+<Orbit>466110753</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1087802</PRot>
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Rock Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>189.98</Reward>
+ <Diff>7</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>29626777</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillBoss</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>31.005000000000003</Reward>
+ <Diff>4</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>649392752</Seed>
+</Mission>
+ </Missions>
+<Radius>1207671</Radius>
+<ARot>1040312</ARot>
+<Temp>138</Temp>
+<Seed>6625378</Seed>
+<Orbit>879754882</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Desert</Type>
+<PRot>665751</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>689522814629431823</LastGrowth>
+ <NextGrowth>707501790629431823</NextGrowth>
+</Colony>
+<Radius>1580191</Radius>
+<ARot>737541</ARot>
+<Temp>142</Temp>
+<Seed>2063998</Seed>
+<Orbit>1365396506</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>567765</PRot>
+<Radius>1500106</Radius>
+<ARot>566308</ARot>
+<Temp>146</Temp>
+<Seed>5367343</Seed>
+<Orbit>1669522250</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>449471</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>685626091279390000</LastGrowth>
+ <NextGrowth>701131435279390000</NextGrowth>
+</Colony>
+<Radius>1411220</Radius>
+<ARot>450502</ARot>
+<Temp>142</Temp>
+<Seed>2387341</Seed>
+<Orbit>2020216570</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>375787</PRot>
+<Radius>1454942</Radius>
+<ARot>367686</ARot>
+<Temp>144</Temp>
+<Seed>6399934</Seed>
+<Orbit>2397847198</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Volcanic</Type>
+<PRot>377968</PRot>
+<Radius>1321740</Radius>
+<ARot>417452</ARot>
+<Temp>187</Temp>
+<Seed>2120086</Seed>
+<Orbit>2879272198</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Rocky</Type>
+<PRot>277363</PRot>
+<Radius>1544096</Radius>
+<ARot>247811</ARot>
+<Temp>157</Temp>
+<Seed>7324881</Seed>
+<Orbit>3375607033</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>63542096</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678169465447230000</LastUpdate>
+ <LastGrowth>680836320000000000</LastGrowth>
+ <NextGrowth>692517600000000000</NextGrowth>
+ <SeedProgress>21.9791</SeedProgress>
+</Colony>
+<Name>Home Ice</Name>
+<Radius>7110942</Radius>
+<ARot>87310</ARot>
+<Temp>198</Temp>
+<Seed>6359450</Seed>
+<Orbit>75564679099</Orbit>
+<TempBase>198.41111788826706</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2247317</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>688147492239391823</LastGrowth>
+ <NextGrowth>698683972239391823</NextGrowth>
+</Colony>
+<Radius>1518723</Radius>
+<ARot>2192279</ARot>
+<Temp>164</Temp>
+<Seed>6438248</Seed>
+<Orbit>450039692</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1211222</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>689205817109431823</LastGrowth>
+ <NextGrowth>700789465109431823</NextGrowth>
+</Colony>
+<Radius>1638996</Radius>
+<ARot>1183530</ARot>
+<Temp>158</Temp>
+<Seed>6319085</Seed>
+<Orbit>789659281</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Volcanic</Type>
+<PRot>759606</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>686684477865589999</LastGrowth>
+ <NextGrowth>692359229865589999</NextGrowth>
+</Colony>
+<Radius>1421365</Radius>
+<ARot>760098</ARot>
+<Temp>199</Temp>
+<Seed>8079825</Seed>
+<Orbit>1274708026</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="4828450" />
+<Planet Seed="5410356" />
+<Planet Seed="8570073" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="6">
+<Seed>4999457</Seed>
+<Name>Frontier</Name>
+ <MapPos X="-0.96" Y="-4.01"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="3115771" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>65928484</PRot>
+ <Scanned/>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>689668211503891823</LastGrowth>
+ <NextGrowth>693296147503891823</NextGrowth>
+</Colony>
+<Radius>5725259</Radius>
+<ARot>97071</ARot>
+<Temp>224</Temp>
+<Seed>7344440</Seed>
+<Orbit>73611146860</Orbit>
+<TempBase>224.35289459323403</TempBase>
+</Planet>
+<Planet Seed="3529396" />
+<Planet Seed="5471849" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="7">
+<Seed>9320605</Seed>
+<Name>Giants</Name>
+ <MapPos X="0.67" Y="-2.05"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)5</TradeRoute>
+ <Planets>
+<Planet Seed="8041905" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>15976115</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>686446420821343437</LastUpdate>
+ <LastGrowth>689407200000000000</LastGrowth>
+ <NextGrowth>696545568000000000</NextGrowth>
+ <SeedProgress>82.4574</SeedProgress>
+</Colony>
+<Radius>72436431</Radius>
+<ARot>1140902</ARot>
+<Temp>265</Temp>
+<Seed>3017885</Seed>
+<Orbit>80162619980</Orbit>
+<TempBase>265.5173559670655</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2090366</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>688923113946890000</LastGrowth>
+ <NextGrowth>692039561946890000</NextGrowth>
+</Colony>
+<Radius>1428439</Radius>
+<ARot>2272670</ARot>
+<Temp>225</Temp>
+<Seed>3085900</Seed>
+<Orbit>431403371</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1257579</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>683705041755752448</LastUpdate>
+ <LastGrowth>681861024000000000</LastGrowth>
+ <NextGrowth>690939936000000000</NextGrowth>
+</Colony>
+<Radius>1285233</Radius>
+<ARot>1187468</ARot>
+<Temp>269</Temp>
+<Seed>1060321</Seed>
+<Orbit>818206677</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Ice</Type>
+<PRot>853423</PRot>
+<Radius>1376980</Radius>
+<ARot>888227</ARot>
+<Temp>264</Temp>
+<Seed>9323560</Seed>
+<Orbit>1270227181</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>617125</PRot>
+<Radius>1373106</Radius>
+<ARot>626030</ARot>
+<Temp>230</Temp>
+<Seed>2379034</Seed>
+<Orbit>1598913706</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>443186</PRot>
+<Radius>1113871</Radius>
+<ARot>463885</ARot>
+<Temp>223</Temp>
+<Seed>3879871</Seed>
+<Orbit>2101045754</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>10887271</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687933475839391823</LastGrowth>
+ <NextGrowth>690998083839391823</NextGrowth>
+</Colony>
+<Radius>65368747</Radius>
+<ARot>968771</ARot>
+<Temp>222</Temp>
+<Seed>6341661</Seed>
+<Orbit>113489247924</Orbit>
+<TempBase>222.7517575649612</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Rocky</Type>
+<PRot>32371513</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>686446673839149999</LastUpdate>
+ <LastGrowth>685165824000000000</LastGrowth>
+ <NextGrowth>698092992000000000</NextGrowth>
+</Colony>
+<Name>Giant Rock</Name>
+<Radius>4603435</Radius>
+<ARot>66323</ARot>
+<Temp>207</Temp>
+<Seed>9073660</Seed>
+<Orbit>159918528628</Orbit>
+<TempBase>207.4094827106283</TempBase>
+</Planet>
+<Planet Seed="1252039" />
+<Planet Seed="9145138" />
+<Planet Seed="8344379" />
+<Planet Seed="10718" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="8">
+<Seed>3796426</Seed>
+<Name>New Frontier</Name>
+ <MapPos X="0.93" Y="2"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="8493519" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>16469047</PRot>
+<Radius>55668961</Radius>
+<ARot>646626</ARot>
+<Temp>297</Temp>
+<Seed>4568585</Seed>
+<Orbit>87622709133</Orbit>
+<TempBase>297.3961857364309</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2086751</PRot>
+<Radius>1719862</Radius>
+<ARot>1832427</ARot>
+<Temp>259</Temp>
+<Seed>4064491</Seed>
+<Orbit>410501555</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1216080</PRot>
+<Radius>1380005</Radius>
+<ARot>1200117</ARot>
+<Temp>257</Temp>
+<Seed>6263785</Seed>
+<Orbit>853312747</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>713422</PRot>
+<Radius>1452319</Radius>
+<ARot>673324</ARot>
+<Temp>265</Temp>
+<Seed>1642831</Seed>
+<Orbit>1281840365</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Oceanic</Type>
+<PRot>559209</PRot>
+ <Scanned/>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>680061366305650000</LastUpdate>
+ <LastGrowth>685826838305650000</LastGrowth>
+ <NextGrowth>692587638305650000</NextGrowth>
+</Colony>
+<Radius>1387020</Radius>
+<ARot>535596</ARot>
+<Temp>292</Temp>
+<Seed>187878</Seed>
+<Orbit>1681822825</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Oceanic</Type>
+<PRot>486352</PRot>
+<Radius>1492461</Radius>
+<ARot>483592</ARot>
+<Temp>293</Temp>
+<Seed>6055582</Seed>
+<Orbit>2086450054</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>343995</PRot>
+<Radius>1537820</Radius>
+<ARot>324721</ARot>
+<Temp>271</Temp>
+<Seed>5789816</Seed>
+<Orbit>2417098051</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="3227822" />
+<Planet Seed="9314946" />
+<Planet Seed="2045992" />
+<Planet Seed="7958609" />
+<Planet Seed="2448545" />
+<Planet Seed="7150158" />
+<Planet Seed="5733091" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="9">
+<Seed>8927798</Seed>
+ <MapPos X="1.95" Y="2.92"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="9269560" />
+<Planet Seed="4905482" />
+<Planet Seed="7120976" />
+<Planet Seed="4125148" />
+<Planet ID="4">
+<Type>Volcanic</Type>
+<PRot>45334673</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>686609677700184687</LastGrowth>
+ <NextGrowth>693220141700184687</NextGrowth>
+</Colony>
+<Radius>3377738</Radius>
+<ARot>43095</ARot>
+<Temp>184</Temp>
+<Seed>2960618</Seed>
+<Orbit>147335710671</Orbit>
+<TempBase>184.17713102886924</TempBase>
+</Planet>
+<Planet Seed="7458369" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="10">
+<Seed>8150137</Seed>
+ <MapPos X="-4.58" Y="-1.05"/>
+</Star>
+<Star ID="11">
+<Seed>1501913</Seed>
+<Name>BigRed</Name>
+ <MapPos X="3.02" Y="-1.98"/>
+ <Visited/></Star>
+<Star ID="12">
+<Seed>5846650</Seed>
+ <MapPos X="0.12" Y="4.78"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="6682685" />
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>56343867</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>687908411967141823</LastGrowth>
+ <NextGrowth>689989787967141823</NextGrowth>
+</Colony>
+<Radius>6073595</Radius>
+<ARot>83339</ARot>
+<Temp>259</Temp>
+<Seed>2780634</Seed>
+<Orbit>78332777371</Orbit>
+<TempBase>259.7885547861471</TempBase>
+</Planet>
+<Planet Seed="4919028" />
+<Planet Seed="7167422" />
+<Planet Seed="5084422" />
+<Planet Seed="3816407" />
+<Planet Seed="6449010" />
+<Planet Seed="3122372" />
+<Planet Seed="4256026" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="13">
+<Seed>6990677</Seed>
+ <MapPos X="-3.78" Y="0.63"/>
+ <Visited/></Star>
+ </Sector>
+ <Sector X="-1" Y="1" Inhabitant="Elithiri">
+<Star ID="0">
+<Seed>1008382</Seed>
+ <MapPos X="-9.02" Y="12.68"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet Seed="5673908" />
+<Planet Seed="2012353" />
+<Planet Seed="6635866" />
+<Planet Seed="3213912" />
+<Planet Seed="7319834" />
+<Planet ID="5">
+<Type>Rocky</Type>
+<PRot>11335754</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689266113914340625</LastGrowth>
+ <NextGrowth>692068929914340625</NextGrowth>
+</Colony>
+<Radius>5332231</Radius>
+<ARot>69461</ARot>
+<Temp>319</Temp>
+<Seed>8195689</Seed>
+<Orbit>469840905487</Orbit>
+<TempBase>319.2512234868113</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>6583215</Seed>
+ <MapPos X="-13.29" Y="12.99"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet Seed="2604352" />
+<Planet Seed="4190525" />
+<Planet Seed="1668616" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>38650850</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689106883327084320</LastGrowth>
+ <NextGrowth>690481507327084320</NextGrowth>
+</Colony>
+<Radius>5567903</Radius>
+<ARot>75214</ARot>
+<Temp>291</Temp>
+<Seed>4778194</Seed>
+<Orbit>132243773221</Orbit>
+<TempBase>291.0021873201575</TempBase>
+</Planet>
+<Planet Seed="5639217" />
+<Planet Seed="6331724" />
+<Planet Seed="1806234" />
+<Planet Seed="2635371" />
+<Planet Seed="6391708" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>5205544</Seed>
+ <MapPos X="-11.16" Y="5.61"/>
+</Star>
+<Star ID="3">
+<Seed>7573109</Seed>
+ <MapPos X="-9.15" Y="8.84"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,1)6</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>97026914</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>688680685700184687</LastGrowth>
+ <NextGrowth>694564525700184687</NextGrowth>
+</Colony>
+<Radius>4960954</Radius>
+<ARot>79005</ARot>
+<Temp>318</Temp>
+<Seed>1367642</Seed>
+<Orbit>45953689133</Orbit>
+<TempBase>318.95690109496627</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2525107</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>682341408000000000</LastGrowth>
+ <NextGrowth>691241472000000000</NextGrowth>
+</Colony>
+<Radius>1126890</Radius>
+<ARot>2758077</ARot>
+<Temp>317</Temp>
+<Seed>7191723</Seed>
+<Orbit>432122502</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="7161217" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>56469391</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>685484640000000000</LastGrowth>
+ <NextGrowth>691594848000000000</NextGrowth>
+</Colony>
+<Radius>5888835</Radius>
+<ARot>74147</ARot>
+<Temp>246</Temp>
+<Seed>401695</Seed>
+<Orbit>87998878004</Orbit>
+<TempBase>246.5384504272667</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Ice</Type>
+<PRot>2323493</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>687655008000000000</LastGrowth>
+ <NextGrowth>691246656000000000</NextGrowth>
+</Colony>
+<Radius>1332471</Radius>
+<ARot>2210846</ARot>
+<Temp>246</Temp>
+<Seed>4270200</Seed>
+<Orbit>450137349</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>13589331</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>686233837700184687</LastGrowth>
+ <NextGrowth>694917901700184687</NextGrowth>
+</Colony>
+<Radius>50100667</Radius>
+<ARot>543165</ARot>
+<Temp>163</Temp>
+<Seed>2502476</Seed>
+<Orbit>120683107296</Orbit>
+<TempBase>163.88822487066977</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Rocky</Type>
+<PRot>33525982</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>683151562798118698</LastGrowth>
+ <NextGrowth>691121098798118698</NextGrowth>
+</Colony>
+<Radius>4989069</Radius>
+<ARot>67309</ARot>
+<Temp>154</Temp>
+<Seed>2875186</Seed>
+<Orbit>165754181591</Orbit>
+<TempBase>154.63365669733466</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>4121223</Seed>
+ <MapPos X="-9.7" Y="11.72"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,1)6</TradeRoute>
+ <TradeRoute>(-1,1)9</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>78049359</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>681762528000000000</LastGrowth>
+ <NextGrowth>691806528000000000</NextGrowth>
+</Colony>
+<Radius>6373304</Radius>
+<ARot>100439</ARot>
+<Temp>257</Temp>
+<Seed>4728773</Seed>
+<Orbit>54825503107</Orbit>
+<TempBase>257.4328216344242</TempBase>
+</Planet>
+<Planet Seed="5496062" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>50881705</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>681032448000000000</LastGrowth>
+ <NextGrowth>690116544000000000</NextGrowth>
+</Colony>
+<Radius>5503968</Radius>
+<ARot>69114</ARot>
+<Temp>217</Temp>
+<Seed>6456490</Seed>
+<Orbit>106626727450</Orbit>
+<TempBase>217.5586735730298</TempBase>
+</Planet>
+<Planet Seed="8813264" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>168786</Seed>
+ <MapPos X="-7.56" Y="9.94"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet Seed="7366429" />
+<Planet Seed="8785787" />
+<Planet Seed="1779932" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>34171749</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689146407355589999</LastGrowth>
+ <NextGrowth>690513255355589999</NextGrowth>
+</Colony>
+<Radius>5366832</Radius>
+<ARot>84138</ARot>
+<Temp>291</Temp>
+<Seed>8538893</Seed>
+<Orbit>125323312485</Orbit>
+<TempBase>291.6354024801066</TempBase>
+</Planet>
+<Planet Seed="3705605" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>8971842</Seed>
+<Name>Elithiri Home</Name>
+ <MapPos X="-10.7" Y="10.12"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,1)4</TradeRoute>
+ <TradeRoute>(-1,1)3</TradeRoute>
+ <TradeRoute>(-1,1)9</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>44942399</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>685949472000000000</LastGrowth>
+ <NextGrowth>692817408000000000</NextGrowth>
+ <SeedProgress>92.4506</SeedProgress>
+</Colony>
+<Radius>58225392</Radius>
+<ARot>845621</ARot>
+<Temp>291</Temp>
+<Seed>8073907</Seed>
+<Orbit>32995466557</Orbit>
+<TempBase>291.33306827624466</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1980295</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>681375456000000000</LastGrowth>
+ <NextGrowth>694147968000000000</NextGrowth>
+</Colony>
+<Radius>1534363</Radius>
+<ARot>1895414</ARot>
+<Temp>257</Temp>
+<Seed>9352821</Seed>
+<Orbit>414696317</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>932056</PRot>
+<Radius>1543796</Radius>
+<ARot>982863</ARot>
+<Temp>286</Temp>
+<Seed>831510</Seed>
+<Orbit>914434396</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Desert</Type>
+<PRot>735932</PRot>
+<Radius>1329767</Radius>
+<ARot>736476</ARot>
+<Temp>251</Temp>
+<Seed>3905665</Seed>
+<Orbit>1250191422</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Volcanic</Type>
+<PRot>512721</PRot>
+<Radius>1880726</Radius>
+<ARot>580602</ARot>
+<Temp>296</Temp>
+<Seed>3310543</Seed>
+<Orbit>1590920999</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Oceanic</Type>
+<PRot>411559</PRot>
+<Colony>
+ <BaseType>7</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>683112096000000000</LastGrowth>
+ <NextGrowth>690762816000000000</NextGrowth>
+</Colony>
+<Radius>1475422</Radius>
+<ARot>414827</ARot>
+<Temp>297</Temp>
+<Seed>9241098</Seed>
+<Orbit>2059224295</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>406707</PRot>
+<Radius>1333607</Radius>
+<ARot>338563</ARot>
+<Temp>252</Temp>
+<Seed>9695142</Seed>
+<Orbit>2407833991</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Oceanic</Type>
+<PRot>342172</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689600736000000000</LastGrowth>
+ <NextGrowth>693074880000000000</NextGrowth>
+</Colony>
+<Radius>1392317</Radius>
+<ARot>330861</ARot>
+<Temp>292</Temp>
+<Seed>5579645</Seed>
+<Orbit>2871431261</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>107045161</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>686217312000000000</LastGrowth>
+ <NextGrowth>1550217312000000000</NextGrowth>
+ <SeedProgress>30.1364</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>4662321</Radius>
+<ARot>62618</ARot>
+<Temp>288</Temp>
+<Seed>454534</Seed>
+<Orbit>46941826005</Orbit>
+<TempBase>288.2011497566094</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2051994</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>687723236199391823</LastGrowth>
+ <NextGrowth>690522596199391823</NextGrowth>
+</Colony>
+<Radius>1374936</Radius>
+<ARot>1916431</ARot>
+<Temp>253</Temp>
+<Seed>173019</Seed>
+<Orbit>443790541</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1017166</PRot>
+<Radius>1536126</Radius>
+<ARot>925970</ARot>
+<Temp>253</Temp>
+<Seed>1304909</Seed>
+<Orbit>847399045</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Desert</Type>
+<PRot>856726</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>687423021489086250</LastGrowth>
+ <NextGrowth>690224973489086250</NextGrowth>
+</Colony>
+<Radius>1337207</Radius>
+<ARot>929341</ARot>
+<Temp>248</Temp>
+<Seed>4191123</Seed>
+<Orbit>1205228130</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>636622</PRot>
+<Radius>1331354</Radius>
+<ARot>673263</ARot>
+<Temp>255</Temp>
+<Seed>4099851</Seed>
+<Orbit>1556570572</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Volcanic</Type>
+<PRot>439977</PRot>
+<Radius>1220807</Radius>
+<ARot>457588</ARot>
+<Temp>294</Temp>
+<Seed>9577386</Seed>
+<Orbit>1996645451</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>373170</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>688190294359391823</LastGrowth>
+ <NextGrowth>690507542359391823</NextGrowth>
+</Colony>
+<Radius>1423500</Radius>
+<ARot>386348</ARot>
+<Temp>245</Temp>
+<Seed>809915</Seed>
+<Orbit>2390113640</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>378541</PRot>
+<Radius>1125603</Radius>
+<ARot>398365</ARot>
+<Temp>252</Temp>
+<Seed>2077662</Seed>
+<Orbit>2851223701</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>19054180</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689509454126890000</LastGrowth>
+ <NextGrowth>692704526126890000</NextGrowth>
+</Colony>
+<Radius>78192026</Radius>
+<ARot>1121221</ARot>
+<Temp>205</Temp>
+<Seed>7702562</Seed>
+<Orbit>65887429212</Orbit>
+<TempBase>205.04412698475022</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Volcanic</Type>
+<PRot>2146692</PRot>
+<Radius>1623534</Radius>
+<ARot>1858580</ARot>
+<Temp>214</Temp>
+<Seed>4049620</Seed>
+<Orbit>393383645</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1029066</PRot>
+<Radius>1414558</Radius>
+<ARot>1013176</ARot>
+<Temp>177</Temp>
+<Seed>6194299</Seed>
+<Orbit>880272152</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Volcanic</Type>
+<PRot>759727</PRot>
+<Radius>1393063</Radius>
+<ARot>766289</ARot>
+<Temp>199</Temp>
+<Seed>9283621</Seed>
+<Orbit>1336810988</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Volcanic</Type>
+<PRot>587377</PRot>
+<Radius>1401590</Radius>
+<ARot>593081</ARot>
+<Temp>212</Temp>
+<Seed>3363941</Seed>
+<Orbit>1660286984</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>416472</PRot>
+<Radius>1429963</Radius>
+<ARot>361778</ARot>
+<Temp>172</Temp>
+<Seed>5517538</Seed>
+<Orbit>2122866641</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Ice</Type>
+<PRot>332431</PRot>
+<Radius>1337662</Radius>
+<ARot>346770</ARot>
+<Temp>212</Temp>
+<Seed>2453863</Seed>
+<Orbit>2416327266</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Desert</Type>
+<PRot>413885</PRot>
+<Radius>1051585</Radius>
+<ARot>407491</ARot>
+<Temp>165</Temp>
+<Seed>8206710</Seed>
+<Orbit>2841879350</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Rocky</Type>
+<PRot>393079</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689351206949431823</LastGrowth>
+ <NextGrowth>700257478949431823</NextGrowth>
+</Colony>
+<Radius>964409</Radius>
+<ARot>441865</ARot>
+<Temp>171</Temp>
+<Seed>6633687</Seed>
+<Orbit>3307216226</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>15373607</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>687069575975241152</LastGrowth>
+ <NextGrowth>691823303975241152</NextGrowth>
+</Colony>
+<Radius>74568278</Radius>
+<ARot>1178341</ARot>
+<Temp>172</Temp>
+<Seed>9285466</Seed>
+<Orbit>92729842256</Orbit>
+<TempBase>172.56628869073077</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1765015</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>685518415727084320</LastGrowth>
+ <NextGrowth>697119343727084320</NextGrowth>
+</Colony>
+<Radius>1407681</Radius>
+<ARot>1604555</ARot>
+<Temp>132</Temp>
+<Seed>7023059</Seed>
+<Orbit>520171447</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Desert</Type>
+<PRot>1050768</PRot>
+<Radius>1364100</Radius>
+<ARot>949176</ARot>
+<Temp>132</Temp>
+<Seed>4653268</Seed>
+<Orbit>917129166</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>726235</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>682640527932770000</LastGrowth>
+ <NextGrowth>693310063932770000</NextGrowth>
+</Colony>
+<Radius>1522093</Radius>
+<ARot>682738</ARot>
+<Temp>139</Temp>
+<Seed>6672636</Seed>
+<Orbit>1311752918</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>522517</PRot>
+<Radius>1343255</Radius>
+<ARot>520062</ARot>
+<Temp>132</Temp>
+<Seed>9347647</Seed>
+<Orbit>1749140296</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>432833</PRot>
+<Radius>1563078</Radius>
+<ARot>431429</ARot>
+<Temp>134</Temp>
+<Seed>8033965</Seed>
+<Orbit>2061855249</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>366287</PRot>
+<Radius>1490169</Radius>
+<ARot>349846</ARot>
+<Temp>139</Temp>
+<Seed>2056999</Seed>
+<Orbit>2470610290</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>350681</PRot>
+<Radius>1378111</Radius>
+<ARot>388995</ARot>
+<Temp>139</Temp>
+<Seed>569141</Seed>
+<Orbit>2848886964</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Volcanic</Type>
+<PRot>243897</PRot>
+<Radius>1604944</Radius>
+<ARot>232987</ARot>
+<Temp>170</Temp>
+<Seed>3726600</Seed>
+<Orbit>3194219097</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="3586047" />
+ </Planets>
+</Star>
+<Star ID="7">
+<Seed>5217510</Seed>
+ <MapPos X="-10.93" Y="7.96"/>
+</Star>
+<Star ID="8">
+<Seed>3271216</Seed>
+ <MapPos X="-7.13" Y="12.75"/>
+</Star>
+<Star ID="9">
+<Seed>4552898</Seed>
+ <MapPos X="-10.8" Y="11.8"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,1)6</TradeRoute>
+ <TradeRoute>(-1,1)4</TradeRoute>
+ <Planets>
+<Planet Seed="4499378" />
+<Planet Seed="2995951" />
+<Planet Seed="6199933" />
+<Planet Seed="7981201" />
+<Planet ID="4">
+<Type>Volcanic</Type>
+<PRot>21002941</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>685507968000000000</LastGrowth>
+ <NextGrowth>691584480000000000</NextGrowth>
+</Colony>
+<Radius>6420584</Radius>
+<ARot>87044</ARot>
+<Temp>317</Temp>
+<Seed>980442</Seed>
+<Orbit>187708719034</Orbit>
+<TempBase>317.3091396236319</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2344012</PRot>
+<Radius>1330945</Radius>
+<ARot>2104811</ARot>
+<Temp>273</Temp>
+<Seed>6155718</Seed>
+<Orbit>401214809</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Volcanic</Type>
+<PRot>1148616</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>686365056000000000</LastGrowth>
+ <NextGrowth>696011616000000000</NextGrowth>
+</Colony>
+<Radius>1418149</Radius>
+<ARot>1136723</ARot>
+<Temp>316</Temp>
+<Seed>5927191</Seed>
+<Orbit>823757690</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="5">
+<Type>Volcanic</Type>
+<PRot>18675272</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>688434336000000000</LastGrowth>
+ <NextGrowth>692534880000000000</NextGrowth>
+</Colony>
+<Radius>6022151</Radius>
+<ARot>78919</ARot>
+<Temp>271</Temp>
+<Seed>5645019</Seed>
+<Orbit>259993049028</Orbit>
+<TempBase>271.2478900350542</TempBase>
+</Planet>
+<Planet Seed="5161543" />
+<Planet Seed="5439502" />
+<Planet Seed="9336573" />
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>2611000</Seed>
+ <MapPos X="-7.55" Y="5.55"/>
+</Star>
+<Star ID="11">
+<Seed>8048628</Seed>
+ <MapPos X="-14.56" Y="12.43"/>
+</Star>
+<Star ID="12">
+<Seed>1010668</Seed>
+ <MapPos X="-7.12" Y="8.01"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>132177336</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>689089895125241152</LastGrowth>
+ <NextGrowth>690690023125241152</NextGrowth>
+</Colony>
+<Radius>7767651</Radius>
+<ARot>117461</ARot>
+<Temp>268</Temp>
+<Seed>4979301</Seed>
+<Orbit>32524985294</Orbit>
+<TempBase>268.9982851786875</TempBase>
+</Planet>
+<Planet Seed="8504105" />
+<Planet Seed="1095520" />
+<Planet Seed="1977441" />
+<Planet Seed="7862456" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>904110</Seed>
+ <MapPos X="-10.26" Y="13.77"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>120432102</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>687372381927084320</LastGrowth>
+ <NextGrowth>689847741927084320</NextGrowth>
+</Colony>
+<Radius>6761733</Radius>
+<ARot>90135</ARot>
+<Temp>314</Temp>
+<Seed>4461327</Seed>
+<Orbit>38826571359</Orbit>
+<TempBase>314.0516640979593</TempBase>
+</Planet>
+<Planet Seed="5964713" />
+<Planet Seed="5063357" />
+<Planet Seed="6853164" />
+<Planet Seed="8259534" />
+<Planet Seed="4392373" />
+<Planet Seed="4071186" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="0" Y="1" Inhabitant="Ogrish">
+<Star ID="0">
+<Seed>1034006</Seed>
+ <MapPos X="-3.06" Y="12.72"/>
+</Star>
+<Star ID="1">
+<Seed>5546579</Seed>
+ <MapPos X="-2.33" Y="6.93"/>
+</Star>
+<Star ID="2">
+<Seed>4959616</Seed>
+ <MapPos X="-0.34" Y="10.76"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>81899319</PRot>
+<Colony>
+ <BaseType>13</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>687933216000000000</LastGrowth>
+ <NextGrowth>699247296000000000</NextGrowth>
+ <SeedProgress>92.4506</SeedProgress>
+</Colony>
+<Radius>5600919</Radius>
+<ARot>75749</ARot>
+<Temp>236</Temp>
+<Seed>5317796</Seed>
+<Orbit>55481260463</Orbit>
+<TempBase>236.68809308897062</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Ice</Type>
+<PRot>2131552</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>687723236199391823</LastGrowth>
+ <NextGrowth>692164196199391823</NextGrowth>
+</Colony>
+<Radius>1422609</Radius>
+<ARot>2203248</ARot>
+<Temp>232</Temp>
+<Seed>6586134</Seed>
+<Orbit>471975790</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1383665</PRot>
+<Radius>1194255</Radius>
+<ARot>1364592</ARot>
+<Temp>230</Temp>
+<Seed>6540158</Seed>
+<Orbit>752950567</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>63613099</PRot>
+<Radius>5704093</Radius>
+<ARot>75844</ARot>
+<Temp>198</Temp>
+<Seed>7128485</Seed>
+<Orbit>78602880093</Orbit>
+<TempBase>198.43063275838935</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>1892670</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>685518415727084320</LastGrowth>
+ <NextGrowth>694504879727084320</NextGrowth>
+</Colony>
+<Radius>1405947</Radius>
+<ARot>1802804</ARot>
+<Temp>168</Temp>
+<Seed>986075</Seed>
+<Orbit>417940372</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="5269652" />
+<Planet Seed="1411550" />
+<Planet Seed="9742943" />
+<Planet Seed="1887110" />
+<Planet Seed="6002259" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>5371856</Seed>
+ <MapPos X="3.05" Y="9.24"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(0,1)4</TradeRoute>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <Planets>
+<Planet Seed="2454841" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>85762243</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>687906432000000000</LastGrowth>
+ <NextGrowth>691838496000000000</NextGrowth>
+</Colony>
+<Radius>7218842</Radius>
+<ARot>105283</ARot>
+<Temp>301</Temp>
+<Seed>6276658</Seed>
+<Orbit>46878652048</Orbit>
+<TempBase>301.5554308129414</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2678052</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>687474541700184687</LastGrowth>
+ <NextGrowth>694502317700184687</NextGrowth>
+</Colony>
+<Radius>993096</Radius>
+<ARot>2783523</ARot>
+<Temp>306</Temp>
+<Seed>6864203</Seed>
+<Orbit>397242884</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>49688150</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>681993216000000000</LastGrowth>
+ <NextGrowth>691712352000000000</NextGrowth>
+</Colony>
+<Radius>5871823</Radius>
+<ARot>76364</ARot>
+<Temp>260</Temp>
+<Seed>9296309</Seed>
+<Orbit>93447468728</Orbit>
+<TempBase>260.00656051576647</TempBase>
+</Planet>
+<Planet Seed="1615731" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>7267395</Seed>
+ <MapPos X="3.17" Y="7.76"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(0,1)3</TradeRoute>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <Planets>
+<Planet Seed="6446832" />
+<Planet Seed="5020303" />
+<Planet Seed="4830888" />
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>13222182</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>687304224000000000</LastGrowth>
+ <NextGrowth>691435008000000000</NextGrowth>
+</Colony>
+<Radius>56377948</Radius>
+<ARot>911395</ARot>
+<Temp>266</Temp>
+<Seed>5957390</Seed>
+<Orbit>133806240432</Orbit>
+<TempBase>266.8969710109586</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2199800</PRot>
+<Radius>1216734</Radius>
+<ARot>2200162</ARot>
+<Temp>228</Temp>
+<Seed>4702979</Seed>
+<Orbit>430544030</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Ice</Type>
+<PRot>1109630</PRot>
+<Radius>1602180</Radius>
+<ARot>1031032</ARot>
+<Temp>266</Temp>
+<Seed>1517934</Seed>
+<Orbit>785477321</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>708714</PRot>
+<Radius>1539239</Radius>
+<ARot>742890</ARot>
+<Temp>240</Temp>
+<Seed>6719805</Seed>
+<Orbit>1288813242</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Ice</Type>
+<PRot>549544</PRot>
+<Radius>1471753</Radius>
+<ARot>516493</ARot>
+<Temp>266</Temp>
+<Seed>195622</Seed>
+<Orbit>1638520994</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Rocky</Type>
+<PRot>445559</PRot>
+<Radius>1384808</Radius>
+<ARot>386745</ARot>
+<Temp>231</Temp>
+<Seed>9747251</Seed>
+<Orbit>2051990113</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Ice</Type>
+<PRot>377362</PRot>
+<Radius>1391142</Radius>
+<ARot>374607</ARot>
+<Temp>257</Temp>
+<Seed>4738002</Seed>
+<Orbit>2408542190</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Volcanic</Type>
+<PRot>348276</PRot>
+<Radius>1550806</Radius>
+<ARot>339265</ARot>
+<Temp>268</Temp>
+<Seed>1321041</Seed>
+<Orbit>2826030981</Orbit>
+</Moon>
+<Moon ID="7">
+<Type>Ice</Type>
+<PRot>277639</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>685647936000000000</LastGrowth>
+ <NextGrowth>692996256000000000</NextGrowth>
+</Colony>
+<Radius>1462384</Radius>
+<ARot>243627</ARot>
+<Temp>260</Temp>
+<Seed>2592583</Seed>
+<Orbit>3322112312</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8721637" />
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>12802581</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>689658624000000000</LastGrowth>
+ <NextGrowth>701525664000000000</NextGrowth>
+</Colony>
+<Radius>6845010</Radius>
+<ARot>96126</ARot>
+<Temp>204</Temp>
+<Seed>7489701</Seed>
+<Orbit>370780648545</Orbit>
+<TempBase>204.2140808609662</TempBase>
+</Planet>
+<Planet Seed="2059999" />
+<Planet Seed="4831050" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>968339</Seed>
+ <MapPos X="-2.75" Y="8.39"/>
+</Star>
+<Star ID="6">
+<Seed>3980070</Seed>
+ <MapPos X="4.77" Y="9.31"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="3628964" />
+<Planet Seed="6058072" />
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>18208088</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>686745325700184687</LastGrowth>
+ <NextGrowth>691725421700184687</NextGrowth>
+</Colony>
+<Radius>6328869</Radius>
+<ARot>104108</ARot>
+<Temp>185</Temp>
+<Seed>3980772</Seed>
+<Orbit>246450537244</Orbit>
+<TempBase>185.23145142479203</TempBase>
+</Planet>
+<Planet Seed="7297271" />
+<Planet Seed="4922851" />
+<Planet Seed="2209403" />
+ </Planets>
+</Star>
+<Star ID="7">
+<Seed>9563311</Seed>
+ <MapPos X="4.54" Y="13.27"/>
+</Star>
+<Star ID="8">
+<Seed>769372</Seed>
+ <MapPos X="0.76" Y="13.58"/>
+</Star>
+<Star ID="9">
+<Seed>8472350</Seed>
+ <MapPos X="4.38" Y="11.98"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="7711067" />
+<Planet Seed="6249747" />
+<Planet Seed="5586848" />
+<Planet Seed="163572" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>20018027</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>686536379967141823</LastGrowth>
+ <NextGrowth>690699131967141823</NextGrowth>
+</Colony>
+<Radius>5927535</Radius>
+<ARot>81433</ARot>
+<Temp>290</Temp>
+<Seed>2963405</Seed>
+<Orbit>248439711479</Orbit>
+<TempBase>290.76805798310806</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>9267024</Seed>
+<Name>Ogrish Home</Name>
+ <MapPos X="0.75" Y="8.72"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(0,1)2</TradeRoute>
+ <TradeRoute>(0,1)3</TradeRoute>
+ <TradeRoute>(0,1)4</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>29589103</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>686943936000000000</LastGrowth>
+ <NextGrowth>693312480000000000</NextGrowth>
+</Colony>
+<Radius>63990796</Radius>
+<ARot>871488</ARot>
+<Temp>314</Temp>
+<Seed>3185268</Seed>
+<Orbit>51602756291</Orbit>
+<TempBase>314.09947365197974</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2174524</PRot>
+<Radius>1395415</Radius>
+<ARot>2107727</ARot>
+<Temp>317</Temp>
+<Seed>6806428</Seed>
+<Orbit>456212599</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1028038</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>688041742959391823</LastGrowth>
+ <NextGrowth>690116206959391823</NextGrowth>
+</Colony>
+<Radius>1473994</Radius>
+<ARot>1010772</ARot>
+<Temp>272</Temp>
+<Seed>2031588</Seed>
+<Orbit>840861997</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Volcanic</Type>
+<PRot>752645</PRot>
+<Radius>1438919</Radius>
+<ARot>748197</ARot>
+<Temp>310</Temp>
+<Seed>949680</Seed>
+<Orbit>1286459753</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Volcanic</Type>
+<PRot>602619</PRot>
+<Radius>1313437</Radius>
+<ARot>583856</ARot>
+<Temp>304</Temp>
+<Seed>5552179</Seed>
+<Orbit>1655218424</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Oceanic</Type>
+<PRot>529216</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>689003996785589999</LastGrowth>
+ <NextGrowth>691220156785589999</NextGrowth>
+</Colony>
+<Radius>1101397</Radius>
+<ARot>512445</ARot>
+<Temp>312</Temp>
+<Seed>6948226</Seed>
+<Orbit>1992552979</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Oceanic</Type>
+<PRot>436349</PRot>
+<Radius>1334596</Radius>
+<ARot>421648</ARot>
+<Temp>317</Temp>
+<Seed>4935685</Seed>
+<Orbit>2402208064</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>295754</PRot>
+<Radius>1558429</Radius>
+<ARot>319518</ARot>
+<Temp>279</Temp>
+<Seed>2369967</Seed>
+<Orbit>2885820286</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>72106090</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>54.6076</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6501738</Radius>
+<ARot>105836</ARot>
+<Temp>294</Temp>
+<Seed>1294640</Seed>
+<Orbit>71782010291</Orbit>
+<TempBase>294.01448935707026</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Oceanic</Type>
+<PRot>2905590</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>688790923279390000</LastGrowth>
+ <NextGrowth>690270091279390000</NextGrowth>
+</Colony>
+<Radius>1370687</Radius>
+<ARot>2925576</ARot>
+<Temp>291</Temp>
+<Seed>9016955</Seed>
+<Orbit>353663495</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1132312</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>686555136000000000</LastGrowth>
+ <NextGrowth>694924704000000000</NextGrowth>
+</Colony>
+<Radius>1398192</Radius>
+<ARot>1115267</ARot>
+<Temp>257</Temp>
+<Seed>7637837</Seed>
+<Orbit>790386137</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>48465743</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>688997051967141823</LastGrowth>
+ <NextGrowth>694661435967141823</NextGrowth>
+</Colony>
+<Radius>4746859</Radius>
+<ARot>52813</ARot>
+<Temp>246</Temp>
+<Seed>4452792</Seed>
+<Orbit>101963636958</Orbit>
+<TempBase>246.242211677409</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2162915</PRot>
+<Radius>1348333</Radius>
+<ARot>2138710</ARot>
+<Temp>214</Temp>
+<Seed>6909251</Seed>
+<Orbit>412291518</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1211718</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>688615292529086250</LastGrowth>
+ <NextGrowth>692661404529086250</NextGrowth>
+</Colony>
+<Radius>1278354</Radius>
+<ARot>1314355</ARot>
+<Temp>214</Temp>
+<Seed>7411385</Seed>
+<Orbit>786786087</Orbit>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>28297340</PRot>
+<Colony>
+ <BaseType>7</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>682617024000000000</LastGrowth>
+ <NextGrowth>698431680000000000</NextGrowth>
+</Colony>
+<Radius>6244943</Radius>
+<ARot>90769</ARot>
+<Temp>231</Temp>
+<Seed>9869923</Seed>
+<Orbit>146901404110</Orbit>
+<TempBase>231.9893595149566</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Gas</Type>
+<PRot>5895691</PRot>
+<Radius>68329810</Radius>
+<ARot>1103678</ARot>
+<Temp>155</Temp>
+<Seed>4787896</Seed>
+<Orbit>208125167999</Orbit>
+<TempBase>155.39743211991365</TempBase>
+<Moons>
+<Moon ID="0">
+<Type>Rocky</Type>
+<PRot>2334735</PRot>
+<Radius>1450134</Radius>
+<ARot>2525061</ARot>
+<Temp>113</Temp>
+<Seed>426933</Seed>
+<Orbit>421571427</Orbit>
+</Moon>
+<Moon ID="1">
+<Type>Rocky</Type>
+<PRot>1165976</PRot>
+<Radius>1460006</Radius>
+<ARot>1110919</ARot>
+<Temp>123</Temp>
+<Seed>8448924</Seed>
+<Orbit>887768882</Orbit>
+</Moon>
+<Moon ID="2">
+<Type>Rocky</Type>
+<PRot>742774</PRot>
+<Radius>1645125</Radius>
+<ARot>690724</ARot>
+<Temp>120</Temp>
+<Seed>6687683</Seed>
+<Orbit>1206368644</Orbit>
+</Moon>
+<Moon ID="3">
+<Type>Rocky</Type>
+<PRot>623133</PRot>
+<Radius>1296919</Radius>
+<ARot>647791</ARot>
+<Temp>120</Temp>
+<Seed>5106635</Seed>
+<Orbit>1700779597</Orbit>
+</Moon>
+<Moon ID="4">
+<Type>Desert</Type>
+<PRot>477818</PRot>
+<Radius>1378500</Radius>
+<ARot>491242</ARot>
+<Temp>115</Temp>
+<Seed>5399546</Seed>
+<Orbit>2126641613</Orbit>
+</Moon>
+<Moon ID="5">
+<Type>Rocky</Type>
+<PRot>381562</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>689093795429431823</LastGrowth>
+ <NextGrowth>708299651429431823</NextGrowth>
+</Colony>
+<Radius>1453948</Radius>
+<ARot>387939</ARot>
+<Temp>126</Temp>
+<Seed>9501296</Seed>
+<Orbit>2510202453</Orbit>
+</Moon>
+<Moon ID="6">
+<Type>Rocky</Type>
+<PRot>271904</PRot>
+<Radius>1846759</Radius>
+<ARot>233741</ARot>
+<Temp>127</Temp>
+<Seed>9034792</Seed>
+<Orbit>2911361251</Orbit>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>3531830</Seed>
+ <MapPos X="3.07" Y="14.56"/>
+</Star>
+<Star ID="12">
+<Seed>3178001</Seed>
+ <MapPos X="2.72" Y="6.73"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="4050046" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>64138582</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>688788919665589999</LastGrowth>
+ <NextGrowth>690363127665589999</NextGrowth>
+</Colony>
+<Radius>7054311</Radius>
+<ARot>121107</ARot>
+<Temp>267</Temp>
+<Seed>3936274</Seed>
+<Orbit>70441418869</Orbit>
+<TempBase>267.5226021145491</TempBase>
+</Planet>
+<Planet Seed="1016911" />
+<Planet Seed="4989462" />
+<Planet Seed="2436091" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>16048</Seed>
+ <MapPos X="-4.6" Y="7.49"/>
+</Star>
+ </Sector>
+</Map>
+<Team>
+ <Pos>(0,0)6.1</Pos>
+ <Cash>258.4052618194213</Cash>
+ <Soldiers>
+<Soldier Name="Colin Awesome">
+ <Location X="34" Y="43"/>
+ <Health>30</Health>
+ <Stamina>30.476720291736036</Stamina>
+ <Shields>10</Shields>
+ <Facing>0</Facing>
+ <Level>8</Level>
+ <XP>103384</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>12,13,11,12,19</Stats>
+ <Colour>#0032FF</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Nannite Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
+<Armour Type="Shock Armour" Material="Metasteel" Level="0"/>
+<Armour Type="Gloves" Material="Adamantium" Level="1"/>
+<Armour Type="Plate Boots" Material="Composite" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Laser Rifle" Level="2" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Rifle">740</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Perception">5</Exp>
+  <Exp Skill="Avoidance">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Tracy Nolan">
+ <Location X="36" Y="42"/>
+ <Health>38</Health>
+ <Stamina>28</Stamina>
+ <Shields>10</Shields>
+ <Facing>0</Facing>
+ <Level>8</Level>
+ <XP>98985</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>14,12,9,20,12</Stats>
+ <Colour>#FFE600</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Nannite Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Powered Gauntlets" Material="Chitin" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="1"/>
+<Armour Type="Shock Armour" Material="Metasteel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Quad Shotgun" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">541</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">2</Exp>
+  <Exp Skill="Armoursmith">3</Exp>
+  <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Avoidance">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Mel Webster">
+ <Location X="35" Y="46"/>
+ <Health>29</Health>
+ <Stamina>18.358767539239015</Stamina>
+ <Shields>0</Shields>
+ <Facing>0</Facing>
+ <Level>8</Level>
+ <XP>98057</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>19,13,13,12,8</Stats>
+ <Colour>Red</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Acid Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Power Armour" Material="Kevlar" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Heavy Rifle" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Rifle">138</Exp>
+  <Exp Type="Melee">355</Exp>
+  <Exp Type="Heavy">261</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Sharpshooter">2</Exp>
+  <Exp Skill="Armoursmith">1</Exp>
+  <Exp Skill="Scavenging">5</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Owen Gibbs">
+ <Location X="31" Y="49"/>
+ <Health>29</Health>
+ <Stamina>5.399999999999999</Stamina>
+ <Shields>0</Shields>
+ <Facing>320.9061411137705</Facing>
+ <Level>8</Level>
+ <XP>95537</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>9,9,20,12,15</Stats>
+ <Colour>Blue</Colour>
+ <EquippedArmour>
+<Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Sniper Rifle" Level="2" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Pistol">157</Exp>
+  <Exp Type="Sniper">700</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">3</Exp>
+  <Exp Skill="Armoursmith">1</Exp>
+  <Exp Skill="Engineer">1</Exp>
+  <Exp Skill="Sharpshooter">4</Exp>
+ </UtilityExperience>
+ <Moved/>
+</Soldier>
+ </Soldiers>
+<Ship Type="Light Cruiser">
+ <Name>Unnamed Ship</Name>
+ <Hull>38</Hull>
+ <Shield>0</Shield>
+ <Armour>Reinforced Plating</Armour>
+ <Seed>407556</Seed>
+ <Eqp ID="0" Active="True">Advanced Fusion Core</Eqp>
+ <Eqp ID="13" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="8" Active="True">Bunk Room</Eqp>
+ <Eqp ID="3" Active="True">Surface Scanner</Eqp>
+ <Eqp ID="4" Active="True">Targetting AI</Eqp>
+ <Eqp ID="5" Active="True">Armoury</Eqp>
+ <Eqp ID="6" Active="True">Workshop</Eqp>
+ <Eqp ID="1" Active="False">Medbay</Eqp>
+ <Eqp ID="9" Active="True">Engineering Bay</Eqp>
+ <Eqp ID="11" Active="True">Rail Gun</Eqp>
+ <Eqp ID="12" Active="True">Rail Gun</Eqp>
+</Ship>
+ <Mission_ShowLabels/>
+ <Mission_ShowStatBars/>
+ <Mission_ShowTravel/>
+ <Mission_ShowPath/>
+ <Mission_ShowEffects/>
+ <Mission_ViewDetection/>
+ <Mission_FastAI/>
+ <Relations>
+  <Relation Race="Human" Value="10241"/>
+ </Relations>
+ <Inventory>
+  <Inv Count="52">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="2">
+<Material Type="Silicates"/>
+  </Inv>
+  <Inv Count="44">
+<Material Type="Steel"/>
+  </Inv>
+  <Inv Count="37">
+<Material Type="Carbon Fibre"/>
+  </Inv>
+  <Inv Count="26">
+<Material Type="Plastic"/>
+  </Inv>
+  <Inv Count="35">
+<Material Type="Rubber"/>
+  </Inv>
+  <Inv Count="15">
+<Material Type="Aluminium"/>
+  </Inv>
+  <Inv Count="9">
+<Material Type="Composite"/>
+  </Inv>
+  <Inv Count="26">
+<Material Type="Chitin"/>
+  </Inv>
+  <Inv Count="9">
+<Material Type="Water"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Heavy Chitin"/>
+  </Inv>
+  <Inv Count="10">
+<Material Type="Carbon"/>
+  </Inv>
+  <Inv Count="10">
+<Material Type="Rare Earth Metals"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Powerblade" Level="1" />
+  </Inv>
+  <Inv Count="4">
+<Material Type="Tungsten"/>
+  </Inv>
+  <Inv Count="12">
+<Material Type="Copper"/>
+  </Inv>
+  <Inv Count="15">
+<Material Type="Kevlar"/>
+  </Inv>
+  <Inv Count="13">
+<Material Type="Electronic Components"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Industrial Chemicals"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Nanosilk"/>
+  </Inv>
+  <Inv Count="6">
+<Material Type="Shadowskin"/>
+  </Inv>
+ </Inventory>
+</Team>
+<Races>
+<Race Name="Human">
+<HomePlanet>(0,0)5.0</HomePlanet>
+<LastExpand>683004983885350825</LastExpand>
+<Known/>
+<Research>
+ <Item>Fusion Core</Item>
+ <Item>Proton Gun</Item>
+ <Item>Colony Builder</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Rail Gun</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Auto Repair</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Hyperspace Drive</Item>
+ <Material>Metasteel</Material>
+</Research>
+</Race>
+<Race Name="Gokan">
+<HomePlanet>(1,-1)12.0</HomePlanet>
+<LastExpand>689586974176414151</LastExpand>
+<Research>
+ <Item>Metasteel Plating</Item>
+ <Item>Colony Builder</Item>
+ <Item>Proton Gun</Item>
+ <Item>Rail Gun</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Regenerative Plating</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Hyperspace Drive</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Power Armour</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Fusion Core</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Cloaking Device</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Auto Repair</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Dark Core</Item>
+ <Item>Chameleon Plating</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Assault Power Armour</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Heavy Power Armour</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Subspace Drive</Item>
+ <Material>Adamantium</Material>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Mithril</Material>
+</Research>
+</Race>
+<Race Name="Elithiri">
+<HomePlanet>(-1,1)6.1</HomePlanet>
+<LastExpand>689643962517186084</LastExpand>
+<Research>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Fusion Core</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Regenerative Plating</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Auto Repair</Item>
+ <Item>Metasteel Plating</Item>
+ <Item>Shock Armour</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Shield Generator</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Hyperspace Drive</Item>
+ <Item>Colony Builder</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Advanced Shield System</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Rail Gun</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Proton Gun</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Shielded Chestplate</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Chameleon Plating</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Subspace Drive</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Adaptive Plating</Item>
+ <Item>Dark Core</Item>
+ <Item>Cloaking Device</Item>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Adamantium</Material>
+ <Material>Etherealite</Material>
+</Research>
+</Race>
+<Race Name="Ogrish">
+<HomePlanet>(0,1)10.1</HomePlanet>
+<LastExpand>689520389407285234</LastExpand>
+<Research>
+ <Item>Rail Gun</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Fusion Core</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Hyperspace Drive</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Proton Gun</Item>
+ <Item>Colony Builder</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Auto Repair</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Metasteel Plating</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Dark Core</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Cloaking Device</Item>
+ <Item>Chameleon Plating</Item>
+ <Item>Regenerative Plating</Item>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Adamantium</Material>
+</Research>
+</Race>
+<Race Name="Insectoid">
+<HomePlanet>(-1,-1)10.2</HomePlanet>
+<LastExpand>689595915161434112</LastExpand>
+<Research>
+ <Item>Regenerative Plating</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Hyperspace Drive</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Colony Builder</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Metasteel Plating</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Rail Gun</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Proton Gun</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Fusion Core</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Arc Rifle</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Heavy Arc Rifle</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Chameleon Plating</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Auto Repair</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Dark Core</Item>
+ <Item>Cloaking Device</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Adaptive Plating</Item>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Adamantium</Material>
+</Research>
+</Race>
+<Race Name="Grey">
+<HomePlanet>(-1,0)5.3</HomePlanet>
+<LastExpand>689497112443706205</LastExpand>
+<Research>
+ <Item>Hyperspace Drive</Item>
+ <Item>Fusion Core</Item>
+ <Item>Proton Gun</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Metasteel Plating</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Nannite Medikit</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Auto Repair</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Rail Gun</Item>
+ <Item>Nannite Medsystem</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Colony Builder</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Dark Core</Item>
+ <Item>Regenerative Plating</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Cloaking Device</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Chameleon Plating</Item>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Adamantium</Material>
+</Research>
+</Race>
+<Race Name="Ursalon">
+<HomePlanet>(0,-1)10.1</HomePlanet>
+<LastExpand>689582737886746131</LastExpand>
+<Research>
+ <Item>Laser Rifle</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Antimatter Grenade</Item>
+ <Item>Proton Gun</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Metasteel Plating</Item>
+ <Item>Fusion Core</Item>
+ <Item>Quantum Medikit</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Auto Repair</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Gauss Cannon</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Chameleon Device</Item>
+ <Item>Hyperspace Drive</Item>
+ <Item>Mithril Plating</Item>
+ <Item>Gauss Sniper Rifle</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Plasma Thrower</Item>
+ <Item>Regenerative Plating</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Rail Gun</Item>
+ <Item>Plasma Cannon</Item>
+ <Item>Colony Builder</Item>
+ <Item>Plasma Grenade</Item>
+ <Item>Chameleon Plating</Item>
+ <Item>Antimatter Cannon</Item>
+ <Item>Cloaking Device</Item>
+ <Item>Dark Core</Item>
+ <Item>Quantum Medsystem</Item>
+ <Item>Adamantium Plating</Item>
+ <Item>Adaptive Plating</Item>
+ <Item>Subspace Drive</Item>
+ <Item>Advanced Dark Core</Item>
+ <Material>Metasteel</Material>
+ <Material>Nanomesh</Material>
+ <Material>Adamantium</Material>
+ <Material>Etherealite</Material>
+</Research>
+</Race>
+</Races>
+</SpaceMercsSaveFile>

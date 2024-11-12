@@ -97,9 +97,16 @@ namespace SpaceMercs {
             Owner = StaticData.GetRaceByName(raceName) ?? throw new Exception("Could not ID colony owning race : " + raceName);
             Owner.AddColony(this);
             string baseType = xml.SelectNodeText("BaseType");
-            if (!string.IsNullOrEmpty(baseType)) Base = (BaseType)Enum.Parse(typeof(BaseType), baseType);
+            if (!string.IsNullOrEmpty(baseType)) {
+                if (Int32.TryParse(baseType, out int baseInt)) {
+                    Base = (BaseType)baseInt;
+                }
+                else { 
+                    Base = (BaseType)Enum.Parse(typeof(BaseType), baseType);
+                }
+            }
             Base |= BaseType.Outpost; // All colonies have it
-            dtLastVisit = DateTime.FromBinary(long.Parse(xml.SelectNodeText("LastUpdate")));
+            dtLastVisit = DateTime.FromBinary(long.Parse(xml.SelectNodeText("LastUpdate","0")));
 
             SeedProgress = xml.SelectNodeDouble("SeedProgress", 0d);
 
@@ -147,9 +154,9 @@ namespace SpaceMercs {
 
         public void SaveToFile(StreamWriter file) {
             file.WriteLine("<Colony>");
-            file.WriteLine(" <BaseType>" + Base.ToString() + "</BaseType>");
+            if (Base != BaseType.Outpost) file.WriteLine(" <BaseType>" + (int)Base + "</BaseType>");
             file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
-            file.WriteLine(" <LastUpdate>" + dtLastVisit.ToBinary() + "</LastUpdate>");
+            if (dtLastVisit > DateTime.MinValue) file.WriteLine(" <LastUpdate>" + dtLastVisit.ToBinary() + "</LastUpdate>");
             if (dtLastGrowth > Const.dtStart) file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
             file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
             if (SeedProgress > 0d) file.WriteLine(" <SeedProgress>" + SeedProgress.ToString("F4") + "</SeedProgress>");
