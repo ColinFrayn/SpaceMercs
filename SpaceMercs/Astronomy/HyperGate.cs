@@ -4,12 +4,9 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 
 namespace SpaceMercs {
-    public class HyperGate : AstronomicalObject {
-        public Star Parent { get; set; }
-
-        public HyperGate(Star parent, double orbit) {
-            Parent = parent;
-            OrbitalDistance = orbit;
+    public class HyperGate : OrbitalAO {
+        public HyperGate(Star parent, double orbit) : base(orbit, parent) {
+            // Empty
         }
 
         public static void DrawHyperGate(ShaderProgram prog) {
@@ -26,7 +23,6 @@ namespace SpaceMercs {
 
         // Overrides
         public override float DrawScale { get { return 1.0f; } }
-        public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.HyperGate; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             DrawHyperGate(prog);
         }
@@ -40,7 +36,8 @@ namespace SpaceMercs {
             // Nothing to do
         }
         public override Star GetSystem() {
-            return Parent;
+            if (Parent is Star st) return st;
+            throw new Exception($"HyperSpace Gate has illegal parent type : {Parent?.GetType()}");
         }
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + ".HG";

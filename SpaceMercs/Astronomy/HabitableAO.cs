@@ -1,9 +1,10 @@
-﻿using SpaceMercs.Graphics;
+﻿using OpenTK.Windowing.Common.Input;
+using SpaceMercs.Graphics;
 using System.IO;
 using System.Xml;
 
 namespace SpaceMercs {
-    public abstract class HabitableAO : AstronomicalObject {
+    public abstract class HabitableAO : OrbitalAO {
         public Colony? Colony { get; private set; }
         public int BaseSize {
             get {
@@ -18,13 +19,13 @@ namespace SpaceMercs {
         public int CountMissions { get { return _MissionList?.Count ?? 0; } }
         public double OrbitalPeriod; // Period of orbit (seconds)
 
-        protected override void LoadFromFile(XmlNode xml) {
+        public HabitableAO() {}
+        public HabitableAO(XmlNode xml, AstronomicalObject parent) : base(xml, parent) { 
             OrbitalPeriod = xml.SelectNodeDouble("PRot");
             Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
             LoadMissions(xml);
-            base.LoadFromFile(xml);
         }
 
         public override void SaveToFile(StreamWriter file) {
@@ -95,6 +96,11 @@ namespace SpaceMercs {
                 return 1;
             }
             return Colony.ExpandBase(rand);
+        }
+        public Planet ParentPlanet() {
+            if (this is Planet pln) return pln;
+            else if (this is Moon mn && mn.Parent is Planet pln2) return pln2;
+            throw new Exception($"Unexpected HAO type : {this.GetType()}");
         }
 
         // Draw icons showing whether or not this body has a base on it and, if so, then what type.

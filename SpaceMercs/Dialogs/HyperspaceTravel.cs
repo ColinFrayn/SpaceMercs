@@ -63,7 +63,7 @@ namespace SpaceMercs.Dialogs {
             dgDestinations.Visible = true;
             dgDestinations.Rows.Clear();
             string[] arrRowDest = new string[5];
-            foreach (Star st in _hGate.Parent.TradeRoutes) {
+            foreach (Star st in _hGate.GetSystem().TradeRoutes) {
                 HyperGate targ = st?.GetHyperGate() ?? throw new Exception("TradeRoute system doesn't have a gate");
                 double distLy = AstronomicalObject.CalculateDistance(_hGate, targ) / Const.LightYear;
                 double cost = CalculateCost(distLy);

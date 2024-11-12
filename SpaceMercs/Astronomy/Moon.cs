@@ -7,7 +7,6 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Moon : HabitableAO {
-        public Planet Parent { get; set; }
         public override float DrawScale { get { return (float)Math.Sqrt(Radius / 1000.0) / 50f; } }
 
         public Moon(int _seed, Planet parent, int id) {
@@ -20,12 +19,7 @@ namespace SpaceMercs {
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
         }
-        public Moon(XmlNode xml, Planet parent) {
-            Parent = parent;
-            // Load this moon from the given Xml node
-            // Start with generic AO stuff
-            base.LoadFromFile(xml);
-
+        public Moon(XmlNode xml, Planet parent) : base(xml, parent) {
             // Bugfix - handle some dodgy data saved down because moon orbital period was wrapping as it was miscalculated too large
             if (OrbitalPeriod < 0 || AxialRotationPeriod < 0) {
                 Random rnd = new Random();
@@ -45,7 +39,6 @@ namespace SpaceMercs {
         }
 
         // Overrides
-        public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Moon; } }
         public override void DrawBaseIcon(ShaderProgram prog) {
             if (Colony is null) return;
             float scale = Const.PlanetScale * Const.MoonScale * 1.5f;
@@ -91,13 +84,20 @@ namespace SpaceMercs {
             // Meh
         }
         public override Star GetSystem() {
-            return Parent.Parent;
+            if (Parent is Planet pl && pl.Parent is Star st) return st;
+            throw new Exception($"Unexpected Parent setup for Moon in {nameof(GetSystem)}");
         }
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
         public override int GetPopulation() {
             return Colony?.BaseSize ?? 0;
+        }
+        public override double DistanceFromStar() {
+            if (Parent is Planet pl) {
+                return OrbitalDistance + pl.OrbitalDistance;
+            }
+            throw new Exception($"Unexpected Parent setup for Moon in {nameof(DistanceFromStar)}");
         }
     }
 }

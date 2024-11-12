@@ -306,10 +306,10 @@ namespace SpaceMercs {
 
         public static MissionType GenerateRandomColonyMissionType(AstronomicalObject loc, Random rand) {
             int r = rand.Next(100);
-            if (!(loc is HabitableAO)) {
+            if (loc is not HabitableAO hao) {
                 throw new Exception("Trying to run a mission near an AO that is not a HabitableAO");
             }
-            if (((HabitableAO)loc).AOType == AstronomicalObject.AstronomicalObjectType.Planet && ((Planet)loc).Type == Planet.PlanetType.Gas) {
+            if (hao is Planet pl && pl.Type == Planet.PlanetType.Gas) {
                 return MissionType.BoardingParty;
             }
             if (r < 20) return MissionType.AbandonedCity;

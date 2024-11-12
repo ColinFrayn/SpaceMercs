@@ -8,7 +8,6 @@ namespace SpaceMercs {
         public enum AstronomicalObjectType { Star, Planet, Moon, HyperGate, Unknown };
         public string Name { get; protected set; }
         public double Radius; // In metres
-        public double OrbitalDistance; // In metres
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
         public int Temperature { get; set; } // Kelvin
         public Vector3 colour;
@@ -23,8 +22,22 @@ namespace SpaceMercs {
             iTexture = -1;
             Name = "Unnamed";
         }
+        public AstronomicalObject(XmlNode xml) {
+            iTexture = -1;
+            ID = xml.GetAttributeInt("ID");
+            Name = xml.SelectNodeText("Name", string.Empty);
+            Radius = xml.SelectNodeDouble("Radius");
 
-        public virtual AstronomicalObjectType AOType { get { return AstronomicalObjectType.Unknown; } }
+            // Default here is an approximation, for backwards compatibility with versions where I didn't save this
+            AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (Radius / Const.PlanetSize));
+            Temperature = xml.SelectNodeInt("Temp");
+            Seed = xml.SelectNodeInt("Seed");
+            Random rnd = new Random(Seed);
+            Ox = rnd.Next(Const.SeedBuffer);
+            Oy = rnd.Next(Const.SeedBuffer);
+            Oz = rnd.Next(Const.SeedBuffer);
+        }
+
         public abstract string PrintCoordinates();
         public abstract void DrawSelected(ShaderProgram prog, int Level);
         public abstract void SetupTextureMap(int width, int height);
@@ -44,21 +57,27 @@ namespace SpaceMercs {
             Star st1 = ao1.GetSystem();
             Star st2 = ao2.GetSystem();
             if (st1 == st2) {
-                if (ao1.AOType == AstronomicalObjectType.Star || ao2.AOType == AstronomicalObjectType.Star) return 0.0;
-                AstronomicalObject pl1, pl2;
-                if (ao1.AOType is AstronomicalObjectType.Planet or AstronomicalObjectType.HyperGate) pl1 = ao1;
-                else pl1 = ((Moon)ao1).Parent;
-                if (ao2.AOType is AstronomicalObjectType.Planet or AstronomicalObjectType.HyperGate) pl2 = ao2;
-                else pl2 = ((Moon)ao2).Parent;
+                if (ao1 is Star) {
+                    if (ao2 is OrbitalAO ao2o) return ao2o.DistanceFromStar();
+                }
+                if (ao2 is Star) {
+                    if (ao1 is OrbitalAO ao1o) return ao1o.DistanceFromStar();
+                }
+
+                if (ao1 is not OrbitalAO oao1 || ao2 is not OrbitalAO oao2) {
+                    throw new Exception($"Unexpected AO types in CalculateDistance: {ao1.GetType()} : {ao2.GetType()}");
+                }
+                OrbitalAO pl1 = ao1 is Moon m1 ? (Planet)m1.Parent : oao1;
+                OrbitalAO pl2 = ao2 is Moon m2 ? (Planet)m2.Parent : oao2;
                 if (pl1 == pl2) {
-                    if (ao1.AOType == AstronomicalObjectType.Moon) dist = ((Moon)ao1).OrbitalDistance;
-                    if (ao2.AOType == AstronomicalObjectType.Moon) dist -= ((Moon)ao2).OrbitalDistance;
+                    if (ao1 is Moon mn1) dist += mn1.OrbitalDistance;
+                    if (ao2 is Moon mn2) dist -= mn2.OrbitalDistance;
                     dist = Math.Abs(dist);
                 }
                 else {
                     dist = Math.Abs(pl1.OrbitalDistance - pl2.OrbitalDistance);
-                    if (ao1.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao1).OrbitalDistance;
-                    if (ao2.AOType == AstronomicalObjectType.Moon) dist += ((Moon)ao2).OrbitalDistance;
+                    if (ao1 is Moon mn1) dist += mn1.OrbitalDistance;
+                    if (ao2 is Moon mn2) dist += mn2.OrbitalDistance;
                 }
             }
             else {
@@ -67,29 +86,9 @@ namespace SpaceMercs {
             return dist;
         }
 
-        // Load generic AO details from an XML file
-        protected virtual void LoadFromFile(XmlNode xml) {
-            iTexture = -1;
-            ID = xml.GetAttributeInt("ID");
-            Name = xml.SelectNodeText("Name", string.Empty);
-            Radius = xml.SelectNodeDouble("Radius");
-
-            OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
-
-            // Default here is an approximation, for backwards compatibility with versions where I didn't save this
-            AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (Radius / Const.PlanetSize));
-            Temperature = xml.SelectNodeInt("Temp");
-            Seed = xml.SelectNodeInt("Seed");
-            Random rnd = new Random(Seed);
-            Ox = rnd.Next(Const.SeedBuffer);
-            Oy = rnd.Next(Const.SeedBuffer);
-            Oz = rnd.Next(Const.SeedBuffer);
-        }
-
-        // Save this planet to an Xml file
+        // Save this object to an Xml file
         public virtual void SaveToFile(StreamWriter file) {
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
-            if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
             file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");
             file.WriteLine("<Temp>" + Temperature.ToString() + "</Temp>");
@@ -116,9 +115,7 @@ namespace SpaceMercs {
 
             // Increase the difficulty based on where we are within this system
             if (this is HabitableAO hao) {
-                Planet? pl = null;
-                if (hao is Planet pla) pl = pla;
-                else if (hao is Moon mn) pl = mn.Parent;
+                Planet? pl = hao.ParentPlanet();
                 if (pl != null) {
                     // Planet/moon without local colony -> dangerous         
                     if (hao.Colony == null && pl.Colony == null) dLevel += rand.NextDouble();
@@ -163,10 +160,10 @@ namespace SpaceMercs {
         // Location to string
         public override string ToString() {
             string str = "(" + GetSystem().Sector.SectorX.ToString() + "," + GetSystem().Sector.SectorY.ToString() + ")";
-            return AOType switch {
-                AstronomicalObjectType.Star => str + ":" + ID,
-                AstronomicalObjectType.Planet => str + ":" + GetSystem().ID + ":" + ID,
-                AstronomicalObjectType.Moon => str + ":" + GetSystem().ID + ":" + ((Moon)this).Parent.ID + "." + ID,
+            return this switch {
+                Star => str + ":" + ID,
+                Planet => str + ":" + GetSystem().ID + ":" + ID,
+                Moon mn => str + ":" + GetSystem().ID + ":" + mn.Parent.ID + "." + ID,
                 _ => throw new NotImplementedException(),
             };
         }

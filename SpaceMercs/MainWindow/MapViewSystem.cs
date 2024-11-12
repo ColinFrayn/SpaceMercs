@@ -13,8 +13,8 @@ namespace SpaceMercs.MainWindow {
         // Root call for displaying the system when zoomed in
         private void DrawSystem() {
             // Make sure we haven't still got the star selected
-            if (aoSelected?.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoSelected = null;
-            if (aoHover?.AOType == AstronomicalObject.AstronomicalObjectType.Star) aoHover = null;
+            if (aoSelected is Star) aoSelected = null;
+            if (aoHover is Star) aoHover = null;
 
             // Set the correct view location & perspective matrices for each shader program
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);

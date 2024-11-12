@@ -113,7 +113,7 @@ namespace SpaceMercs {
                     aotr = sect.GetAOFromLocationString(xmlt.InnerText);
                 }
                 if (aotr is not null) { // If the target system has been created, then create the trade routes. If it hasn't, then when we load the target system, it will set the route up from there.
-                    if (aotr.AOType != AstronomicalObjectType.Star) throw new Exception($"Illegal TradeRoute destination (was {aotr.AOType}) at {xmlt.InnerText}");
+                    if (aotr is not Star) throw new Exception($"Illegal TradeRoute destination (was {aotr.GetType()}) at {xmlt.InnerText}");
                     Star sttr = (Star)aotr;
                     TradeRoutes.Add(sttr);
                     sttr.TradeRoutes.Add(this);
@@ -123,7 +123,7 @@ namespace SpaceMercs {
             // Load any planets that might have been saved specially
             foreach (XmlNode xmlp in xml.SelectNodesToList("Planets/Planet")) {
                 Planet pl = new Planet(xmlp, this);
-                pl.Parent = this;
+                pl.SetParent(this);
                 _planets.Add(pl);
                 bGenerated = true;
             }
@@ -325,7 +325,7 @@ namespace SpaceMercs {
             // Generate all planets
             for (int n = 0; n < npl; n++) {
                 Planet pl = new Planet(rnd.Next(10000000), this);
-                pl.Parent = this;
+                pl.SetParent(this);
                 pl.ID = n;
 
                 // Get orbit
@@ -553,7 +553,6 @@ namespace SpaceMercs {
         }
 
         // Overrides
-        public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Star; } }
         public override void DrawSelected(ShaderProgram prog, int Level = 8) {
             // Sort out scaling and rotation
             float scale = Const.StarScale * DrawScale;

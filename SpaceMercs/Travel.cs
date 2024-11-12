@@ -94,9 +94,9 @@ namespace SpaceMercs {
         public bool GameOver { get; private set; }
         public AstronomicalObject Destination {
             get {
-                if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star) return aoTravelTo.GetSystem().GetOutermostPlanet() ?? throw new Exception("Could not find suitable planet target for travel");
+                if (aoTravelTo is Star st) return st.GetOutermostPlanet() ?? throw new Exception("Could not find suitable planet target for travel");
                 else if (aoTravelTo is HabitableAO hao) return hao;
-                else if (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate) return aoTravelTo;
+                else if (aoTravelTo is HyperGate hg) return hg;
                 throw new Exception("Travel Destination is not a valid target");
             }
         }
@@ -534,10 +534,10 @@ namespace SpaceMercs {
             Matrix4 translateM = Matrix4.CreateTranslation(0.25f, 0.42f, 0f);
             Matrix4 scaleM = Matrix4.CreateScale(1f / ParentView.Aspect, 1f, 1f);
             Matrix4 starScaleM = Matrix4.CreateScale(0.1f, 0.1f, 0.1f);
-            prog.SetUniform("view", (aoTravelFrom.AOType == AstronomicalObject.AstronomicalObjectType.Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
+            prog.SetUniform("view", (aoTravelFrom is Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
             aoTravelFrom.DrawSelected(prog, 8);
             translateM = Matrix4.CreateTranslation(0.75f, 0.42f, 0f);
-            prog.SetUniform("view", (aoTravelTo.AOType == AstronomicalObject.AstronomicalObjectType.Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
+            prog.SetUniform("view", (aoTravelTo is Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
             aoTravelTo.DrawSelected(prog, 8);
         }
         private void DrawSalvage(ShaderProgram prog) {

@@ -121,8 +121,7 @@ namespace SpaceMercs.MainWindow {
 
             string tl1 = "", tl2 = "", tl3 = "", tl4 = "", tl5 = "";
 
-            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                Star st = (Star)aoSelected;
+            if (aoSelected is Star st) {
                 if (!string.IsNullOrEmpty(st.Name)) tl1 = st.Name;
                 else tl1 = "Unnamed Star";
                 tl2 = "M = " + Math.Round(st.Mass, 2).ToString() + " Sol";
@@ -130,8 +129,7 @@ namespace SpaceMercs.MainWindow {
                 tl4 = "Type " + st.StarType;
                 tl5 = "(" + Math.Round(st.MapPos.X, 1) + "," + Math.Round(st.MapPos.Y, 1) + ")";
             }
-            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
-                Planet pl = (Planet)aoSelected;
+            if (aoSelected is Planet pl) {
                 if (!string.IsNullOrEmpty(pl.Name)) tl1 = pl.Name;
                 else tl1 = "Unnamed Planet";
                 tl2 = pl.Type.ToString();
@@ -140,8 +138,7 @@ namespace SpaceMercs.MainWindow {
                 tl5 = "Orbit = " + Math.Round(pl.OrbitalDistance / Const.AU, 2).ToString() + " AU";
                 //tl4 = "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm";
             }
-            if (aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
-                Moon mn = (Moon)aoSelected;
+            if (aoSelected is Moon mn) {
                 tl1 = "Moon " + (mn.ID + 1).ToString();
                 tl2 = mn.Type.ToString();
                 tl3 = "R = " + Math.Round(mn.Radius / 1000.0, 0).ToString() + "km";
@@ -181,7 +178,7 @@ namespace SpaceMercs.MainWindow {
             // Check for AO hover.
             if (aoHover is null || aoSelected is null) return strHoverText;
             double dist = AstronomicalObject.CalculateDistance(aoSelected, aoHover);
-            if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Star && aoHover is Star stHover) {
+            if (aoHover is Star stHover) {
                 if (stHover.Name.Length == 0) {
                     strHoverText.Add("<Unnamed>");
                 }
@@ -193,7 +190,7 @@ namespace SpaceMercs.MainWindow {
                     strHoverText.Add("Dist: " + Math.Round(dist / Const.LightYear, 1).ToString() + " ly");
                 }
             }
-            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Planet && aoHover is Planet plHover) {
+            else if (aoHover is Planet plHover) {
                 strHoverText.Add(plHover.Name);
                 strHoverText.Add(plHover.Type.ToString());
                 if (aoSelected is not null) {
@@ -205,7 +202,7 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
             }
-            else if (aoHover.AOType == AstronomicalObject.AstronomicalObjectType.Moon && aoHover is Moon mnHover) {
+            else if (aoHover is Moon mnHover) {
                 strHoverText.Add(mnHover.Type.ToString() + " Moon");
                 if (aoSelected != null) {
                     if (aoSelected.GetSystem() == aoHover.GetSystem()) {
@@ -370,7 +367,7 @@ namespace SpaceMercs.MainWindow {
 
         // Dialog action handlers
         public void OpenRenameObjectDialog() {
-            if (aoSelected == null || aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Moon) return;
+            if (aoSelected == null || aoSelected is Moon) return;
             GetString gs = new GetString();
             gs.UpdateString(aoSelected.Name);
             if (gs.ShowDialog() == DialogResult.OK && gs.strText.CompareTo(aoSelected.Name) != 0) {
@@ -473,7 +470,7 @@ namespace SpaceMercs.MainWindow {
 
             if (ao == null) return;
 
-            if (ao.AOType is AstronomicalObject.AstronomicalObjectType.Planet or AstronomicalObject.AstronomicalObjectType.Star) {
+            if (ao is Planet or Star) {
                 gbRenameObject!.Activate();
             }
             if (PlayerTeam.CanTravel(ao) && ao != PlayerTeam.CurrentPosition) gbFlyTo!.Activate();
@@ -495,12 +492,12 @@ namespace SpaceMercs.MainWindow {
             bool bCanScanHere = false;
             if (view == ViewMode.ViewSystem && PlayerTeam.CurrentPositionHAO != null && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
                 if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
-                    if (PlayerTeam.CurrentPosition.AOType == AstronomicalObject.AstronomicalObjectType.Planet) {
-                        if (((Planet)PlayerTeam.CurrentPosition).Type != Planet.PlanetType.Gas) {
+                    if (PlayerTeam.CurrentPosition is Planet pl) {
+                        if (pl.Type != Planet.PlanetType.Gas) {
                             bCanScanHere = true;
                         }
                     }
-                    if (PlayerTeam.CurrentPosition.AOType == AstronomicalObject.AstronomicalObjectType.Moon) {
+                    if (PlayerTeam.CurrentPosition is Moon) {
                         bCanScanHere = true;
                     }
                 }
@@ -512,7 +509,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Set up hyperspace
-            if (PlayerTeam.CurrentPosition?.AOType == AstronomicalObject.AstronomicalObjectType.HyperGate && PlayerTeam.CurrentPosition.GetSystem() == ao.GetSystem()) {
+            if (PlayerTeam.CurrentPosition is HyperGate && PlayerTeam.CurrentPosition.GetSystem() == ao.GetSystem()) {
                 gbHyperspace!.Activate();
             }
         }

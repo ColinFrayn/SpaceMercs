@@ -9,7 +9,6 @@ namespace SpaceMercs {
     public class Planet : HabitableAO {
         [Flags]
         public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40 };
-        public Star Parent { get; set; }
         public readonly List<Moon> Moons;
         public double tempbase;
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
@@ -29,12 +28,7 @@ namespace SpaceMercs {
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
         }
-        public Planet(XmlNode xml, Star parent) {
-            Parent = parent;
-            // Load this planet from the given Xml node
-            // Start with generic AO stuff
-            base.LoadFromFile(xml);
-
+        public Planet(XmlNode xml, Star parent) : base(xml, parent) {
             // Load planet-specific stuff
             tempbase = xml.SelectNodeDouble("TempBase");
 
@@ -47,8 +41,6 @@ namespace SpaceMercs {
                 }
             }
             colour = Const.PlanetTypeToCol2(Type);
-
-            LoadMissions(xml);
         }
 
         public static Planet Empty { get { return new Planet(); } }
@@ -221,7 +213,6 @@ namespace SpaceMercs {
         }
 
         // Overrides
-        public override AstronomicalObjectType AOType { get { return AstronomicalObjectType.Planet; } }
         public override void DrawBaseIcon(ShaderProgram prog) {
             if (Colony is null) return;
             float scale = Const.PlanetScale * 1.8f;
@@ -269,7 +260,8 @@ namespace SpaceMercs {
             Name = str;
         }
         public override Star GetSystem() {
-            return Parent;
+            if (Parent is Star st) return st;
+            throw new Exception($"Parent of Planet was not a star. Was {Parent?.GetType()}");
         }
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;

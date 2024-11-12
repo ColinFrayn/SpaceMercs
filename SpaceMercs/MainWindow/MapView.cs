@@ -505,8 +505,7 @@ namespace SpaceMercs.MainWindow {
             if (e.Button == MouseButton.Left) {
                 if (aoHover != null) aoSelected = aoHover;
                 // Zoom in to system
-                if (view == ViewMode.ViewMap && aoSelected != null && aoSelected.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                    Star st = (Star)aoSelected;
+                if (view == ViewMode.ViewMap && aoSelected != null && aoSelected is Star st) {
                     if (st.Visited) {
                         SystemStar = st;
                         if (!st.bGenerated) st.GeneratePlanets(GalaxyMap.PlanetDensity);

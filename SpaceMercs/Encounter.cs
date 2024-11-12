@@ -17,8 +17,8 @@
                 // One or the other is a colony, so it's safer
                 dDanger -= (double)(iFromSize + iToSize);
                 // Check if we're travelling from a planet to one of its satellites, or vice versa, and double the safety bonus
-                if (aoFrom.AOType == AstronomicalObject.AstronomicalObjectType.Planet && aoTo.AOType == AstronomicalObject.AstronomicalObjectType.Moon && ((Moon)aoTo).Parent == aoFrom) dDanger -= (double)(iFromSize + iToSize);
-                else if (aoFrom.AOType == AstronomicalObject.AstronomicalObjectType.Moon && aoTo.AOType == AstronomicalObject.AstronomicalObjectType.Planet && ((Moon)aoFrom).Parent == aoTo) dDanger -= (double)(iFromSize + iToSize);
+                if (aoFrom is Planet && aoTo is Moon mnt && mnt.Parent == aoFrom) dDanger -= (double)(iFromSize + iToSize);
+                else if (aoFrom is Moon mnf && aoTo is Planet && mnf.Parent == aoTo) dDanger -= (double)(iFromSize + iToSize);
             }
             // Interstellar routes are much emptier
             else {

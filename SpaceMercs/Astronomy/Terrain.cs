@@ -30,8 +30,7 @@ namespace SpaceMercs {
             Planet.PlanetType pt = Planet.PlanetType.Star;
 
             // Get the anchor colours for the map
-            if (ao.AOType == AstronomicalObject.AstronomicalObjectType.Star) {
-                Star st = (Star)ao;
+            if (ao is Star st) {
                 col1 = Vector3.Multiply(st.colour, 0.4f);
                 col2 = st.colour;
                 col3 = st.colour;
@@ -39,7 +38,7 @@ namespace SpaceMercs {
                 htc = HeightToColor_Default;
             }
             else {
-                if (ao.AOType == AstronomicalObject.AstronomicalObjectType.Planet) pt = ((Planet)ao).Type;
+                if (ao is Planet pl) pt = pl.Type;
                 else pt = ((Moon)ao).Type;
                 col1 = Const.PlanetTypeToCol1(pt);
                 col2 = Const.PlanetTypeToCol2(pt);
