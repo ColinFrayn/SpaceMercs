@@ -121,10 +121,17 @@ namespace SpaceMercs {
             }
 
             // Load any planets that might have been saved specially
-            foreach (XmlNode xmlp in xml.SelectNodesToList("Planets/Planet")) {
-                Planet pl = new Planet(xmlp, this);
-                pl.SetParent(this);
-                _planets.Add(pl);
+            var planets = xml.SelectNodesToList("Planets/Planet");
+            foreach (XmlNode xmlp in planets) {
+                if (xmlp.Attributes!["Seed"]?.Value is string strSeed) {
+                    int seed = Int32.Parse(strSeed);
+                    Planet pl = Planet.MakeFromSeed(this, seed, planets.Count());
+                    _planets.Add(pl);
+                }
+                else {
+                    Planet pl = new Planet(xmlp, this);
+                    _planets.Add(pl);
+                }
                 bGenerated = true;
             }
 
@@ -175,7 +182,7 @@ namespace SpaceMercs {
             prog.SetUniform("model", scaleM);
 
             // Setup the colour & draw it
-            prog.SetUniform("flatColour", new Vector4(colour, 1f));
+            prog.SetUniform("flatColour", new Vector4(BaseColour, 1f));
             prog.SetUniform("lightEnabled", true);
             GL.UseProgram(prog.ShaderProgramHandle);
             Sphere.CachedBuildAndDraw(Level, true);
@@ -278,14 +285,14 @@ namespace SpaceMercs {
         // Set up the star's colour
         private void SetupColour() {
             if (Temperature < 6500) {
-                colour = Vector3.Subtract(cMid, cCoolest);
-                colour = Vector3.Multiply(colour, (float)(Temperature - 3000) / (6500 - 3000));
-                colour = Vector3.Add(colour, cCoolest);
+                BaseColour = Vector3.Subtract(cMid, cCoolest);
+                BaseColour = Vector3.Multiply(BaseColour, (float)(Temperature - 3000) / (6500 - 3000));
+                BaseColour = Vector3.Add(BaseColour, cCoolest);
             }
             else {
-                colour = Vector3.Subtract(cHottest, cMid);
-                colour = Vector3.Multiply(colour, (float)(Temperature - 6500) / (10000 - 6500));
-                colour = Vector3.Add(colour, cMid);
+                BaseColour = Vector3.Subtract(cHottest, cMid);
+                BaseColour = Vector3.Multiply(BaseColour, (float)(Temperature - 6500) / (10000 - 6500));
+                BaseColour = Vector3.Add(BaseColour, cMid);
             }
         }
 
@@ -320,72 +327,10 @@ namespace SpaceMercs {
             if (Radius < 30.0 * Const.Million) npl = (npl * 2) / 3; // Reduce npl for white dwarfs
             if (npl > Const.MaxPlanetsPerSystem) npl = Const.MaxPlanetsPerSystem;
             if (npl < 1) npl = 1;
-            double porbit = Const.PlanetOrbit * Mass;
 
             // Generate all planets
             for (int n = 0; n < npl; n++) {
-                Planet pl = new Planet(rnd.Next(10000000), this);
-                pl.SetParent(this);
-                pl.ID = n;
-
-                // Get orbit
-                do {
-                    porbit *= Utils.NextGaussian(rnd, Const.PlanetOrbitFactor, Const.PlanetOrbitFactorSigma);
-                } while (rnd.Next(npl + 2) == 0);
-                pl.OrbitalDistance = porbit + (Radius * 2.0);
-
-                // Work out planet type
-                bool bOK = true;
-                do {
-                    // Calculate temperature at this location
-                    // 280K * (T/Ts) * (R/Rs)^1/2 * (1-A)^1/4 / a^1/2  + modifier_for_atmosphere
-                    // (a = orbit in AU, A = albedo, T = star temperature, R = stellar radius)
-                    pl.tempbase = 300.0 / Math.Pow(porbit / Const.AU, 0.5);
-                    pl.tempbase *= (Temperature / Const.SunTemperature) * Math.Pow(Radius / Const.SunRadius, 0.5); // Scale by the star's properties
-
-                    double tempmod = 0.0;
-                    double albedo = 0.3;
-                    bOK = true;
-                    if (pl.tempbase > 180 && pl.tempbase < 350 && rnd.Next(3) == 0) { pl.Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
-                    else {
-                        int r = rnd.Next(30);
-                        if (r < 2) { pl.Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
-                        else if (r < 5) { pl.Type = Planet.PlanetType.Desert; albedo = 0.4; }
-                        else if (r < 9) { pl.Type = Planet.PlanetType.Volcanic; albedo = 0.18; tempmod = Utils.NextGaussian(rnd, 10, 2); }
-                        else if (r < 15) { pl.Type = Planet.PlanetType.Rocky; albedo = 0.25; }
-                        else { pl.Type = Planet.PlanetType.Gas; albedo = 0.5; }
-                    }
-                    pl.tempbase *= Math.Pow(1.0 - albedo, 0.25);
-                    pl.tempbase += tempmod;
-                    pl.Temperature = (int)pl.tempbase;
-
-                    // Check that this is ok
-                    if (pl.tempbase > 400 && pl.Type == Planet.PlanetType.Gas) bOK = false;
-                    if (pl.tempbase > 320 && pl.Type == Planet.PlanetType.Oceanic) bOK = false;
-                    if (pl.tempbase < 160 && pl.Type == Planet.PlanetType.Oceanic) bOK = false;
-                    if (pl.tempbase < 270 && pl.Type == Planet.PlanetType.Oceanic) pl.Type = Planet.PlanetType.Ice;
-                    if (pl.tempbase < 180 && pl.Type == Planet.PlanetType.Volcanic) bOK = false;
-                } while (bOK == false);
-
-                // Get radius based on type
-                do {
-                    pl.Radius = Utils.NextGaussian(rnd, Const.PlanetSize, Const.PlanetSizeSigma);
-                } while (pl.Radius < Const.PlanetSizeMin);
-                if (pl.Type == Planet.PlanetType.Gas) {
-                    pl.Radius *= Utils.NextGaussian(rnd, Const.GasGiantScale, Const.GasGiantScaleSigma);
-                }
-                pl.colour = Const.PlanetTypeToCol2(pl.Type);
-
-                // Orbital period
-                double prot = Utils.NextGaussian(rnd, Const.EarthOrbitalPeriod, Const.EarthOrbitalPeriodSigma);
-                prot /= ((pl.OrbitalDistance / Const.AU) * Math.Pow(pl.Radius / Const.PlanetSize, 0.5));
-                pl.OrbitalPeriod = (int)prot;
-
-                // Axial rotation period (i.e. a day length)
-                double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
-                pl.AxialRotationPeriod = (int)(arot * (pl.Radius / Const.PlanetSize));
-
-                pl.GenerateMoons(pdensity);
+                Planet pl = new Planet(rnd.Next(10000000), this, npl);
                 _planets.Add(pl);
             }
             bGenerated = true;

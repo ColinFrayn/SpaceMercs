@@ -10,28 +10,24 @@ namespace SpaceMercs {
         [Flags]
         public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40 };
         public readonly List<Moon> Moons;
-        public double tempbase;
+        public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
 
         public Planet() {
             Parent = Star.Empty;
             Moons = new List<Moon>();
         }
-        public Planet(int _seed, Star parent) {
+        public Planet(int _seed, Star parent, int npl) {
             Parent = parent;
+            ID = parent.Planets.Count;
             Moons = new List<Moon>();
             _MissionList = null;
-            Name = "";
+            Name = string.Empty;
             Seed = _seed;
-            Random rnd = new Random(Seed);
-            Ox = rnd.Next(Const.SeedBuffer);
-            Oy = rnd.Next(Const.SeedBuffer);
-            Oz = rnd.Next(Const.SeedBuffer);
+            GeneratePlanetDetails(npl);
         }
         public Planet(XmlNode xml, Star parent) : base(xml, parent) {
-            // Load planet-specific stuff
-            tempbase = xml.SelectNodeDouble("TempBase");
-
+            BaseTemp = xml.SelectNodeDouble("TempBase");
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
             if (xmlMoons != null) {
@@ -43,19 +39,34 @@ namespace SpaceMercs {
             else {
                 GenerateMoons(Parent.GetSystem().Sector.ParentMap.PlanetDensity);
             }
-            colour = Const.PlanetTypeToCol2(Type);
+            BaseColour = Const.PlanetTypeToCol2(Type);
         }
 
         public static Planet Empty { get { return new Planet(); } }
 
+        public static Planet MakeFromSeed(Star parent, int seed, int npl) {
+            Planet pl = new Planet() {
+                Parent = parent,
+                ID = parent.Planets.Count,
+                Name = string.Empty,
+                Seed = seed
+            };
+            pl.GeneratePlanetDetails(npl);
+            return pl;
+        }
+
         // Save this planet to an Xml file
         public override void SaveToFile(StreamWriter file) {
-            file.WriteLine("<Planet ID=\"" + ID.ToString() + "\">");
+            if (!PlanetOrMoonsHaveBeenEdited()) {
+                file.WriteLine($"<Planet ID=\"{ID}\" Seed=\"{Seed}\" />");
+                return;
+            }
+            file.WriteLine($"<Planet ID=\"{ID}\">");
             base.SaveToFile(file);
             // Write planet details to file
-            file.WriteLine("<TempBase>" + tempbase.ToString() + "</TempBase>");
+            file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
             // Now write out all moons, if necessary
-            if (HasBeenEdited()) {
+            if (MoonsHaveBeenEdited()) {
                 file.WriteLine("<Moons>");
                 foreach (Moon mn in Moons) {
                     mn.SaveToFile(file);
@@ -63,6 +74,77 @@ namespace SpaceMercs {
                 file.WriteLine("</Moons>");
             }
             file.WriteLine("</Planet>");
+        }
+
+        private void GeneratePlanetDetails(int npl) {
+            Random rnd = new Random(Seed);
+
+            Ox = rnd.Next(Const.SeedBuffer);
+            Oy = rnd.Next(Const.SeedBuffer);
+            Oz = rnd.Next(Const.SeedBuffer);
+
+            Star st = Parent as Star ?? throw new Exception("Planet parent is not a star!");
+            double porbit = st.Planets.LastOrDefault()?.OrbitalDistance - st.Radius * 2d ?? Const.PlanetOrbit * st.Mass;
+
+            // Get orbit for this planet
+            do {
+                porbit *= Utils.NextGaussian(rnd, Const.PlanetOrbitFactor, Const.PlanetOrbitFactorSigma);
+            } while (rnd.Next(npl + 2) == 0);
+
+            // Generate the planet details
+            bool bOK = true;
+            do {
+                // Calculate temperature at this location
+                // 280K * (T/Ts) * (R/Rs)^1/2 * (1-A)^1/4 / a^1/2  + modifier_for_atmosphere
+                // (a = orbit in AU, A = albedo, T = star temperature, R = stellar radius)
+                BaseTemp = 300.0 / Math.Pow(porbit / Const.AU, 0.5);
+                BaseTemp *= (Parent.Temperature / Const.SunTemperature) * Math.Pow(Parent.Radius / Const.SunRadius, 0.5); // Scale by the star's properties
+
+                double tempmod = 0.0;
+                double albedo = 0.3;
+                bOK = true;
+                if (BaseTemp > 180 && BaseTemp < 350 && rnd.Next(3) == 0) { Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
+                else {
+                    int r = rnd.Next(30);
+                    if (r < 2) { Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
+                    else if (r < 5) { Type = Planet.PlanetType.Desert; albedo = 0.4; }
+                    else if (r < 9) { Type = Planet.PlanetType.Volcanic; albedo = 0.18; tempmod = Utils.NextGaussian(rnd, 10, 2); }
+                    else if (r < 15) { Type = Planet.PlanetType.Rocky; albedo = 0.25; }
+                    else { Type = Planet.PlanetType.Gas; albedo = 0.5; }
+                }
+                BaseTemp *= Math.Pow(1.0 - albedo, 0.25);
+                BaseTemp += tempmod;
+                Temperature = (int)BaseTemp;
+
+                // Check that this is ok
+                if (BaseTemp > 400 && Type == Planet.PlanetType.Gas) bOK = false;
+                if (BaseTemp > 320 && Type == Planet.PlanetType.Oceanic) bOK = false;
+                if (BaseTemp < 160 && Type == Planet.PlanetType.Oceanic) bOK = false;
+                if (BaseTemp < 270 && Type == Planet.PlanetType.Oceanic) Type = Planet.PlanetType.Ice;
+                if (BaseTemp < 180 && Type == Planet.PlanetType.Volcanic) bOK = false;
+            } while (bOK == false);
+
+            // Get radius based on type
+            do {
+                Radius = Utils.NextGaussian(rnd, Const.PlanetSize, Const.PlanetSizeSigma);
+            } while (Radius < Const.PlanetSizeMin);
+            if (Type == Planet.PlanetType.Gas) {
+                Radius *= Utils.NextGaussian(rnd, Const.GasGiantScale, Const.GasGiantScaleSigma);
+            }
+            OrbitalDistance = porbit + (Parent.Radius * 2.0);
+
+            BaseColour = Const.PlanetTypeToCol2(Type);
+
+            // Orbital period
+            double prot = Utils.NextGaussian(rnd, Const.EarthOrbitalPeriod, Const.EarthOrbitalPeriodSigma);
+            prot /= ((OrbitalDistance / Const.AU) * Math.Pow(Radius / Const.PlanetSize, 0.5));
+            OrbitalPeriod = (int)prot;
+
+            // Axial rotation period (i.e. a day length)
+            double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
+            AxialRotationPeriod = (int)(arot * (Radius / Const.PlanetSize));
+
+            GenerateMoons(GetSystem().Sector.ParentMap.PlanetDensity);
         }
 
         // Retrieve a moon from this system by ID
@@ -189,7 +271,7 @@ namespace SpaceMercs {
                     if (mn.Temperature < 160 && mn.Type == PlanetType.Volcanic) bOK = false;
                 } while (bOK != true);
 
-                mn.colour = Const.PlanetTypeToCol2(mn.Type);
+                mn.BaseColour = Const.PlanetTypeToCol2(mn.Type);
 
                 // Orbital period
                 double prot = Utils.NextGaussian(rnd, Const.MoonOrbitalPeriod, Const.MoonOrbitalPeriodSigma);
@@ -219,12 +301,18 @@ namespace SpaceMercs {
         }
 
         // Check if the moons for this planet have been changed in any way, or if they can be recreated from the random seed
-        private bool HasBeenEdited() {
+        private bool MoonsHaveBeenEdited() {
             if (Moons.Count == 0) return false;
             foreach (Moon mn in Moons) {
                 if (!string.IsNullOrEmpty(mn.Name)) return true;
                 if (mn.Colony is not null) return true;
             }
+            return false;
+        }
+        private bool PlanetOrMoonsHaveBeenEdited() {
+            if (MoonsHaveBeenEdited()) return true;
+            if (!string.IsNullOrEmpty(Name)) return true;
+            if (Colony is not null) return true;
             return false;
         }
 

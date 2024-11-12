@@ -86,11 +86,10 @@ namespace SpaceMercs {
             }
             Location = loc;
             dtLastGrowth = Const.dtTime;
+            rc.AddColony(this);
             if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
             dtLastVisit = DateTime.MinValue;
-
-            rc.AddColony(this);
         }
         public Colony(XmlNode xml, HabitableAO loc) {
             Location = loc;
@@ -215,7 +214,7 @@ namespace SpaceMercs {
             if (!CanSeed) return;
             Random rand = new Random();
             // Colony growth rate and seeding should slow down as pop gets larger, or else it will get exponential
-            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds * 50d / (Const.SecondsPerYear * Owner.Population); 
+            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds * 50d / (Const.SecondsPerYear * Math.Max(10, Owner.Population));
             if (SeedProgress >= Const.ColonySeedTarget) {
                 if (Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
                     // Built a new colony in this system
@@ -546,7 +545,7 @@ namespace SpaceMercs {
             if (Location.GetSystem().TradeRoutes.Any()) {
                 dt *= Const.TradeRouteColonyGrowthRate; // Much easier to grow with trade routes set up
             }
-            dt *= 20d / Owner.Population; // Slow down as the civ gets larger, or it will get exponential
+            dt *= 20d / Math.Max(10, Owner.Population); // Slow down as the civ gets larger, or it will get exponential
             return (int)dt;
         }
 

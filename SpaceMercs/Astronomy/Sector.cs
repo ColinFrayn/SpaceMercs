@@ -121,7 +121,7 @@ namespace SpaceMercs {
                     // Fade out unvisited stars (if set to do so)
                     float fade = 1f;
                     if (bFadeUnvisited && !st.Visited) fade = 4f;
-                    Vector4 col = new Vector4(st.colour.X / fade, st.colour.Y / fade, st.colour.Z / fade, 1.0f);
+                    Vector4 col = new Vector4(st.BaseColour.X / fade, st.BaseColour.Y / fade, st.BaseColour.Z / fade, 1.0f);
 
                     Matrix4 scaleM = Matrix4.CreateScale(st.DrawScale / 8f);
                     Matrix4 viewM = scaleM * translateM;

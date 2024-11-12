@@ -28,7 +28,7 @@ namespace SpaceMercs {
                 AxialRotationPeriod = Utils.NextGaussian(rnd, OrbitalPeriod, OrbitalPeriod / 15f);
             }
 
-            colour = Const.PlanetTypeToCol2(Type);
+            BaseColour = Const.PlanetTypeToCol2(Type);
         }
 
         // Save this moon to an Xml file

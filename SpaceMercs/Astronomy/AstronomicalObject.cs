@@ -10,7 +10,7 @@ namespace SpaceMercs {
         public double Radius; // In metres
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
         public int Temperature { get; set; } // Kelvin
-        public Vector3 colour;
+        public Vector3 BaseColour;
         public int Seed;
         public int Ox, Oy, Oz; // Perlin seed offsets
         protected byte[]? texture;

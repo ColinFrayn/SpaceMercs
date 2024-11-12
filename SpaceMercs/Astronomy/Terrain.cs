@@ -31,10 +31,10 @@ namespace SpaceMercs {
 
             // Get the anchor colours for the map
             if (ao is Star st) {
-                col1 = Vector3.Multiply(st.colour, 0.4f);
-                col2 = st.colour;
-                col3 = st.colour;
-                col4 = Vector3.Multiply(st.colour, 0.8f);
+                col1 = Vector3.Multiply(st.BaseColour, 0.4f);
+                col2 = st.BaseColour;
+                col3 = st.BaseColour;
+                col4 = Vector3.Multiply(st.BaseColour, 0.8f);
                 htc = HeightToColor_Default;
             }
             else {
