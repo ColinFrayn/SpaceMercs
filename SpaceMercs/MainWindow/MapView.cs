@@ -9,7 +9,6 @@ using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 

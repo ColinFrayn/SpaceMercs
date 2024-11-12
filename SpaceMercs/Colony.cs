@@ -214,13 +214,16 @@ namespace SpaceMercs {
         internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff) {
             if (!CanSeed) return;
             Random rand = new Random();
-            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds / Const.SecondsPerYear; 
+            // Colony growth rate and seeding should slow down as pop gets larger, or else it will get exponential
+            SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds * 50d / (Const.SecondsPerYear * Owner.Population); 
             if (SeedProgress >= Const.ColonySeedTarget) {
                 if (Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
                     // Built a new colony in this system
-                    string sysName = Location.GetSystem().Name;
-                    if (string.IsNullOrEmpty(sysName)) sysName = Location.GetSystem().PrintCoordinates();
-                    if (Owner.IsPlayer) msgBox.PopupMessage($"The {Owner.Name} Race has founded a new colony in system {sysName}");
+                    if (Owner.IsPlayer) {
+                        string sysName = Location.GetSystem().Name;
+                        if (string.IsNullOrEmpty(sysName)) sysName = Location.GetSystem().PrintCoordinates();
+                        msgBox.PopupMessage($"The {Owner.Name} Race has founded a new colony in system {sysName}");
+                    }
                     SeedProgress = 0d;
                 }
                 else SeedProgress = Const.ColonySeedTarget * 0.9; // No seeding this time, so step back a bit
@@ -543,6 +546,7 @@ namespace SpaceMercs {
             if (Location.GetSystem().TradeRoutes.Any()) {
                 dt *= Const.TradeRouteColonyGrowthRate; // Much easier to grow with trade routes set up
             }
+            dt *= 20d / Owner.Population; // Slow down as the civ gets larger, or it will get exponential
             return (int)dt;
         }
 

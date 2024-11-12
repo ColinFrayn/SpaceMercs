@@ -9,7 +9,6 @@ namespace SpaceMercs {
         public string Name { get; protected set; }
         public double Radius; // In metres
         public double OrbitalDistance; // In metres
-        public double OrbitalPeriod; // Period of orbit (seconds)
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
         public int Temperature { get; set; } // Kelvin
         public Vector3 colour;
@@ -69,7 +68,7 @@ namespace SpaceMercs {
         }
 
         // Load generic AO details from an XML file
-        protected void LoadAODetailsFromFile(XmlNode xml) {
+        protected virtual void LoadFromFile(XmlNode xml) {
             iTexture = -1;
             ID = xml.GetAttributeInt("ID");
             Name = xml.SelectNodeText("Name", string.Empty);
@@ -77,7 +76,6 @@ namespace SpaceMercs {
 
             OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
 
-            OrbitalPeriod = xml.SelectNodeDouble("PRot");
             // Default here is an approximation, for backwards compatibility with versions where I didn't save this
             AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (Radius / Const.PlanetSize));
             Temperature = xml.SelectNodeInt("Temp");
@@ -89,11 +87,10 @@ namespace SpaceMercs {
         }
 
         // Save this planet to an Xml file
-        protected void WriteAODetailsToFile(StreamWriter file) {
-            if (!string.IsNullOrEmpty(Name) && !string.Equals(Name,"Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
+        public virtual void SaveToFile(StreamWriter file) {
+            if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
             if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
-            file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
             file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");
             file.WriteLine("<Temp>" + Temperature.ToString() + "</Temp>");
             file.WriteLine("<Seed>" + Seed + "</Seed>");

@@ -16,6 +16,24 @@ namespace SpaceMercs {
         public IEnumerable<Mission> MissionList { get { return _MissionList?.AsReadOnly() ?? new List<Mission>().AsReadOnly(); } }
         public bool Scanned { get; private set; }
         public int CountMissions { get { return _MissionList?.Count ?? 0; } }
+        public double OrbitalPeriod; // Period of orbit (seconds)
+
+        protected override void LoadFromFile(XmlNode xml) {
+            OrbitalPeriod = xml.SelectNodeDouble("PRot");
+            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
+            XmlNode? xmlc = xml.SelectSingleNode("Colony");
+            if (xmlc != null) SetColony(new Colony(xmlc, this));
+            LoadMissions(xml);
+            base.LoadFromFile(xml);
+        }
+
+        public override void SaveToFile(StreamWriter file) {
+            file.WriteLine("<Type>" + Type.ToString() + "</Type>");
+            file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
+            SaveMissions(file);
+            Colony?.SaveToFile(file);
+            base.SaveToFile(file);
+        }
 
         protected void LoadMissions(XmlNode xml) {
             Scanned = (xml.SelectSingleNode("Scanned") is not null);

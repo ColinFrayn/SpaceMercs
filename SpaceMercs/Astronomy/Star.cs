@@ -135,7 +135,7 @@ namespace SpaceMercs {
         public static Star Empty { get { return new Star(); } }
 
         // Save this star to an Xml file
-        public void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file) {
             file.WriteLine("<Star ID=\"" + ID.ToString() + "\">");
             file.WriteLine("<Seed>" + Seed + "</Seed>");
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
@@ -255,7 +255,6 @@ namespace SpaceMercs {
             do {
                 AxialRotationPeriod = (int)Utils.NextGaussian(rnd, Const.StarRotation, Const.StarRotationSigma);
             } while (AxialRotationPeriod < Const.StarRotationMin);
-            OrbitalPeriod = 1; // Irrelevant, but avoiding zero :)
 
             // Finally, clear out the planets
             _planets?.Clear();

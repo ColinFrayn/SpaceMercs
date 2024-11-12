@@ -24,7 +24,7 @@ namespace SpaceMercs {
             Parent = parent;
             // Load this moon from the given Xml node
             // Start with generic AO stuff
-            LoadAODetailsFromFile(xml);
+            base.LoadFromFile(xml);
 
             // Bugfix - handle some dodgy data saved down because moon orbital period was wrapping as it was miscalculated too large
             if (OrbitalPeriod < 0 || AxialRotationPeriod < 0) {
@@ -34,20 +34,13 @@ namespace SpaceMercs {
                 AxialRotationPeriod = Utils.NextGaussian(rnd, OrbitalPeriod, OrbitalPeriod / 15f);
             }
 
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
-            XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this));
             colour = Const.PlanetTypeToCol2(Type);
-            LoadMissions(xml);
         }
 
         // Save this moon to an Xml file
-        public void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file) {
             file.WriteLine("<Moon ID=\"" + ID.ToString() + "\">");
-            WriteAODetailsToFile(file);
-            Colony?.SaveToFile(file);
-            file.WriteLine("<Type>" + Type.ToString() + "</Type>");
-            SaveMissions(file);
+            base.SaveToFile(file);
             file.WriteLine("</Moon>");
         }
 

@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Diagnostics;
 
 namespace SpaceMercs {
     // A fold-out context menu object
@@ -10,7 +11,7 @@ namespace SpaceMercs {
         public enum PanelDirection { Horizontal, Vertical };
         private float PanelW = 0f, PanelH = 0f;
         private readonly List<PanelItem> Items = new List<PanelItem>();
-        private readonly float _ZDepth = 0.5f;
+        private readonly float _ZDepth = 0.1f;
         private const float MenuSize = 50; // Pixels
         private float IconScale = 1f;
         private float IconW { get { return IconScale * (float)MenuSize / (float)Window.Size.X; } }
@@ -117,6 +118,7 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("lightEnabled", false);
 
+            // Draw the panel background
             Matrix4 translateM = Matrix4.CreateTranslation(PanelX - BorderX, PanelY - BorderY, _ZDepth);
             Matrix4 scaleM = Matrix4.CreateScale(PanelW + BorderX * 2f, PanelH + BorderY * 2f, 1f);
             Matrix4 modelM = scaleM * translateM;
@@ -128,7 +130,7 @@ namespace SpaceMercs {
             // Draw the icons
             float px = PanelX, py = PanelY;
             foreach (PanelItem pi in Items) {
-                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(Direction == PanelDirection.Horizontal ? IconW : PanelW, IconH), _ZDepth + 0.01f, aspect);
+                PanelItem? piHover2 = pi.Draw(prog, fmousex, fmousey, this, new Vector2(px, py), new Vector2(Direction == PanelDirection.Horizontal ? IconW : PanelW, IconH), _ZDepth, aspect);
                 if (piHover2 is not null) {
                     piHover = piHover2;
                 }
@@ -137,8 +139,6 @@ namespace SpaceMercs {
             }
 
             // Draw the frame
-            translateM = Matrix4.CreateTranslation(PanelX - BorderX, PanelY - BorderY, _ZDepth + 0.01f);
-            modelM = scaleM * translateM;
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(0.7f, 0.7f, 0.7f, 1f));
             prog.SetUniform("textureEnabled", false);
@@ -188,8 +188,8 @@ namespace SpaceMercs {
             return false;
         }
         public bool IsHover(double xx, double yy) {
-            double BorderX = 1.0 / (double)Window.Size.X;
-            double BorderY = 1.0 / (double)Window.Size.Y;
+            double BorderX = 2.0 / (double)Window.Size.X;
+            double BorderY = 2.0 / (double)Window.Size.Y;
             if (xx >= (PanelX - BorderX) && yy >= (PanelY - BorderY) && xx <= (PanelX + PanelW + BorderX) && yy <= (PanelY + PanelH + BorderY)) {
                 return true;
             }

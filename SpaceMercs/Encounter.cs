@@ -2,7 +2,7 @@
     static class Encounter {
 
         // Check if we get intercepted when journeying
-        public static Mission? CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract) {
+        public static Mission? CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract, Action<string, Action?> showMessage) {
             if (dJourneyTime < Const.SecondsPerDay / 2.0) return null; // Very fast drive in system, or very short hop
             if (Const.DEBUG_ENCOUNTER_FREQ_MOD <= 0.0) return null; // Turn off encounters if debugging
 
@@ -72,19 +72,19 @@
             ShipEngine minDrive = StaticData.GetMinimumDriveByDistance(AstronomicalObject.CalculateDistance(aoFrom, aoTo)) ?? throw new Exception("Mission not reachable!");
 
             // Check for the various intercept types:
-            if (dDanger - dIntercept < 15.0 + (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000.0 : 0.0)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive);
-            return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive);
+            if (dDanger - dIntercept < 15.0 + (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000.0 : 0.0)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive, showMessage);
+            return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, showMessage);
         }
 
         // Do an inactive encounter
-        private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
+        private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, Action<string, Action?> showMessage) {
             string strDesc = rc.Known ? rc.Name : "unidentified alien";
             if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) { // REPLACE WITH msgBox
                 return Mission.CreateIgnoreMission();
             }
 
             // If race != null then it could turn out to be trap (->Active)
-            if (rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive);
+            if (rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, showMessage);
 
             // Scan for life forms. If none then can just collect resources.
             bool bLifeForms = (rand.NextDouble() > 0.3);
@@ -117,7 +117,7 @@
         }
 
         // Do an active encounter
-        private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive) {
+        private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, Action<string, Action?> showMessage) {
             // Generate a mission, including the random ship
             Mission miss = Mission.CreateShipCombatMission(rc, iDiff, minDrive);
             // If this ship is clearly underclassed then try again with a higher diff
@@ -140,6 +140,7 @@
             }
             else {
                 MessageBox.Show(new Form { TopMost = true }, strMessage + " Prepare to fight!"); // REPLACE WITH msgBox
+                // showMessage(strMessage + " Prepare to fight!", null); // Will this work, or does it need to be blocking?
             }
 
             return miss;

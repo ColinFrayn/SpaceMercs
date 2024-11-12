@@ -172,7 +172,7 @@ namespace SpaceMercs {
 
             // Travelling somewhere - check for an Encounter
             if ((rand.NextDouble() * (1 + EncounterCount)) < Const.EncounterFreqScale) {  // Reduce the chance of multiple encounters
-                Mission? foundMission = Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime);
+                Mission? foundMission = Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime, ParentView.msgBox.PopupMessage);
                 if (foundMission != null) {
                     EncounterCount++;
                     if (foundMission.Type == Mission.MissionType.Ignore) return;
@@ -222,7 +222,7 @@ namespace SpaceMercs {
                     bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
                     if (PlayerTeam.CurrentMission.ShipTarget is null) throw new Exception("ShipTarget is null in Salvage mission");
-                    Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(false);
+                    Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission.ShipTarget.GenerateSalvage(false, PlayerTeam.CurrentMission?.RacialOpponent);
                     AnnounceSalvage(dSalvage);
                     Dictionary<IItem, int> dRemains = PlayerTeam.AddItems(dSalvage);
                     if (Utils.CalculateMass(dRemains) > 0.0) {
@@ -284,7 +284,7 @@ namespace SpaceMercs {
                 if (lFrag.Any()) return;
                 bPause = true;
                 ParentView.msgBox.PopupMessage("The enemy ship has been destroyed");
-                Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission!.ShipTarget.GenerateSalvage(true);
+                Dictionary<IItem, int> dSalvage = PlayerTeam.CurrentMission!.ShipTarget.GenerateSalvage(true, PlayerTeam.CurrentMission?.RacialOpponent);
                 AnnounceSalvage(dSalvage);
                 Dictionary<IItem, int> dRemains = PlayerTeam.AddItems(dSalvage);
                 if (Utils.CalculateMass(dRemains) > 0.0) {

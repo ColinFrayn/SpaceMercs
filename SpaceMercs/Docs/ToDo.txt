@@ -2,7 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Menu bar at left - add a delay to closing it so it doesn't close when we move over to the right
+Loading/saving hierarchically
+
+Anything more we can do to compress the save game file?
+- Maybe store only AOs that are not as generated?
+- Just save AOs as seed if no name and no colony (and, for a planet, no named or colonised moons, no scanned moons, no missions etc.)
 
 ==========================================================================================================
 
@@ -15,9 +19,10 @@ How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 
 How to make slime creatures more dangerous? Maybe have them split? (Summoning mechanic)
+- Die with a splat (acid grenade effect?)
 
 Cover
-- When covered from the attacker, get a def bonus
+- When partially hidden from the attacker, get a def bonus
 - Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
 
 Display visual effect on creatures if they have shields
@@ -26,8 +31,6 @@ Display visual effect on creatures if they have shields
 
 Add overwatch?
 
-Ship.GenerateSalvage() : Needs to be better at picking materials based on research / rarity / level
-
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
 
@@ -35,8 +38,6 @@ Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
 
 MapViewMission - VisualEffect.DisplayShotLine() ??
-
-Anything more we can do to compress the save game file? Maybe store only AOs that are not as generated?
 
 Better soldier textures
 - Change texture based on race
@@ -51,12 +52,6 @@ More things that need Sound Effects (Sounds from http://soundbible.com/)
 - Soldier death
 - Walking?
 - Ship combat
-
-Is Civ expansion too fast? Reduce expansion rate as Civ gets larger, or else it will be exponential??
-- Make moon colonies smaller??
-- Prevent civ from building colonies itself - only allow Team to make them??
-
-CivSize gating: Is this the wrong way to do it? Easy to game it by just flying around a lot with a NLS drive...
 
 Add locked doors in dungeon maps?
 
@@ -75,6 +70,7 @@ Backburner : Improvements
 -------------------------
 
 Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
+- All but one are blocking Yes/No decision boxes
 
 Improve TextRenderer: Add Bold, Shadow, Border
 
@@ -86,4 +82,4 @@ Could potentially get stuck with no doable missions, no money, unable to travel,
 
 Name planets/systems based on what the owning race's language sounds like??
 
-Update documentation
+Write/update documentation

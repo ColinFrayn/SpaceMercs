@@ -33,14 +33,10 @@ namespace SpaceMercs {
             Parent = parent;
             // Load this planet from the given Xml node
             // Start with generic AO stuff
-            LoadAODetailsFromFile(xml);
-
-            XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this));
+            base.LoadFromFile(xml);
 
             // Load planet-specific stuff
             tempbase = xml.SelectNodeDouble("TempBase");
-            Type = xml.SelectNodeEnum<Planet.PlanetType>("Type");
 
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
@@ -58,17 +54,12 @@ namespace SpaceMercs {
         public static Planet Empty { get { return new Planet(); } }
 
         // Save this planet to an Xml file
-        public void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file) {
             file.WriteLine("<Planet ID=\"" + ID.ToString() + "\">");
-            // Write generic AO details
-            WriteAODetailsToFile(file);
-            if (Colony != null) Colony.SaveToFile(file);
+            base.SaveToFile(file);
             // Write planet details to file
             file.WriteLine("<TempBase>" + tempbase.ToString() + "</TempBase>");
-            file.WriteLine("<Type>" + Type.ToString() + "</Type>");
-            SaveMissions(file);
-
-            // Now write out all planets
+            // Now write out all moons
             file.WriteLine("<Moons>");
             foreach (Moon mn in Moons) {
                 mn.SaveToFile(file);

@@ -656,13 +656,14 @@ namespace SpaceMercs {
         }
 
         // Generate what salvage this ship contains (if it has been destroyed, then generate less)
-        public Dictionary<IItem, int> GenerateSalvage(bool bDestroyed) {
+        public Dictionary<IItem, int> GenerateSalvage(bool bDestroyed, Race? ra) {
             Dictionary<IItem, int> dSalvage = new Dictionary<IItem, int>();
-            IEnumerable<MaterialType> dMats = StaticData.Materials.Where(m => m.Requirements is null && m.RequiredRace is null);
+            IEnumerable<MaterialType> dMats = StaticData.Materials.Where(m => m.Requirements is null || (ra is not null && m.Requirements.MeetsRequirements(ra)));
             Random rand = new Random();
             foreach (MaterialType mat in dMats) {
-                int num = (int)(Type.MaxHull * mat.Rarity * (rand.NextDouble() + 2.0) / 5.0);
-                if (bDestroyed) num = (int)(num * (rand.NextDouble() + 2.0) / 5.0);
+                double quantity = Type.MaxHull * mat.Rarity * rand.NextDouble() / 3.0;
+                if (bDestroyed) quantity *= (rand.NextDouble() + 2.0) / 5.0;
+                int num = (int)quantity;
                 if (num > 0) dSalvage.Add(new Material(mat), num);
             }
 
