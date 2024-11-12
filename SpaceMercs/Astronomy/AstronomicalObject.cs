@@ -20,7 +20,7 @@ namespace SpaceMercs {
 
         public AstronomicalObject() {
             iTexture = -1;
-            Name = "Unnamed";
+            Name = string.Empty;
         }
         public AstronomicalObject(XmlNode xml) {
             iTexture = -1;

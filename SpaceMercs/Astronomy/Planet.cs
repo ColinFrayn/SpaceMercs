@@ -40,6 +40,9 @@ namespace SpaceMercs {
                     Moons.Add(mn);
                 }
             }
+            else {
+                GenerateMoons(Parent.GetSystem().Sector.ParentMap.PlanetDensity);
+            }
             colour = Const.PlanetTypeToCol2(Type);
         }
 
@@ -51,12 +54,14 @@ namespace SpaceMercs {
             base.SaveToFile(file);
             // Write planet details to file
             file.WriteLine("<TempBase>" + tempbase.ToString() + "</TempBase>");
-            // Now write out all moons
-            file.WriteLine("<Moons>");
-            foreach (Moon mn in Moons) {
-                mn.SaveToFile(file);
+            // Now write out all moons, if necessary
+            if (HasBeenEdited()) {
+                file.WriteLine("<Moons>");
+                foreach (Moon mn in Moons) {
+                    mn.SaveToFile(file);
+                }
+                file.WriteLine("</Moons>");
             }
-            file.WriteLine("</Moons>");
             file.WriteLine("</Planet>");
         }
 
@@ -128,7 +133,8 @@ namespace SpaceMercs {
         }
 
         // Generate the moons for this planet
-        public void GenerateMoons(Random rnd, int pdensity, int minMoons = 0) {
+        public void GenerateMoons(int pdensity, int minMoons = 0) {
+            Random rnd = new Random(Seed);
             Moons.Clear();
             // Get number of moons, based on planet density setting and planet size
             int nmn = rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) + rnd.Next(pdensity + 1) - 3;
@@ -210,6 +216,16 @@ namespace SpaceMercs {
                 return mn.ExpandBase(rc, rand);
             }
             return 0;
+        }
+
+        // Check if the moons for this planet have been changed in any way, or if they can be recreated from the random seed
+        private bool HasBeenEdited() {
+            if (Moons.Count == 0) return false;
+            foreach (Moon mn in Moons) {
+                if (!string.IsNullOrEmpty(mn.Name)) return true;
+                if (mn.Colony is not null) return true;
+            }
+            return false;
         }
 
         // Overrides

@@ -6,13 +6,13 @@ namespace SpaceMercs.Graphics.Shapes {
         private static GLShape? _circle32 = null, _circle64 = null;
         public static GLShape Circle32 {
             get {
-                if (_circle32 is null) _circle32 = BuildFlat(32);
+                _circle32 ??= BuildFlat(32);
                 return _circle32;
             }
         }
         public static GLShape Circle64 {
             get {
-                if (_circle64 is null) _circle64 = BuildFlat(64);
+                _circle64 ??= BuildFlat(64);
                 return _circle64;
             }
         }

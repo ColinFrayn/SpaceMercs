@@ -143,7 +143,7 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void btEquip_Click(object sender, EventArgs e) {
-            if (!(SelectedItem() is IEquippable eq)) return;
+            if (SelectedItem() is not IEquippable eq) return;
             int iPrevIndex = -1;
             if (lbInventory.SelectedIndex >= 0) {
                 iPrevIndex = lbInventory.SelectedIndex;
@@ -251,7 +251,7 @@ namespace SpaceMercs.Dialogs {
             int nut = ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
             if (nut == 0) return;
             string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
-            if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+            if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf('[') - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) return; // Should never get here
             if (MessageBox.Show("Really increase this skill?", "Increase skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
@@ -295,7 +295,7 @@ namespace SpaceMercs.Dialogs {
                 // Disable if existing skill is already max level (== Player's level)
                 // Otherwise Enable
                 string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
-                if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+                if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf('[') - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (ThisSoldier.GetRawUtilityLevel(sk) >= ThisSoldier.Level) btIncreaseSkill.Enabled = false;
                 else btIncreaseSkill.Enabled = true;
@@ -323,8 +323,7 @@ namespace SpaceMercs.Dialogs {
                     List<IItem> stuff = ((Corpse)it).Scavenge(ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Scavenging), rand);
                     foreach (IItem sc in stuff) {
                         ThisSoldier.AddItem(sc);
-                        if (Scavenged.ContainsKey(sc)) Scavenged[sc]++;
-                        else Scavenged.Add(sc, 1);
+                        if (!Scavenged.TryAdd(sc, 1)) Scavenged[sc]++;
                     }
                 }
 

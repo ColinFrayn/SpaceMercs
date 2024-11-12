@@ -15,7 +15,7 @@ namespace SpaceMercs.Graphics {
             }
             IndexCount = data.Length;
             if (IndexCount < MinIndexCount || IndexCount > MaxIndexCount) {
-                throw new ArgumentOutOfRangeException(nameof(IndexCount));
+                throw new ArgumentOutOfRangeException(nameof(data));
             }
             IndexBufferHandle = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferHandle);

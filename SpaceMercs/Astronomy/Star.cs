@@ -148,7 +148,7 @@ namespace SpaceMercs {
 
             // Now write out all planets, but only do this if the system is owned by someone (i.e. it might have colonies in it). Otherwise we can procedurally re-generate it identically on loading.
             // Also save if this system has been scanned at all or any planets have been renamed
-            if (_planets.Any() && (Owner != null || Visited || Scanned || Renamed)) {
+            if (_planets.Any() && HasBeenEdited()) {
                 file.WriteLine(" <Planets>");
                 foreach (Planet pl in _planets) {
                     pl.SaveToFile(file);
@@ -169,7 +169,7 @@ namespace SpaceMercs {
         }
 
         // Draw a simplified version on the map
-        public void DrawMap(ShaderProgram prog, bool bLabel, int Level = 7) {
+        public void DrawMap(ShaderProgram prog, int Level = 7) {
             // Sort out scaling and rotation
             Matrix4 scaleM = Matrix4.CreateScale(Const.StarScale * DrawScale);
             prog.SetUniform("model", scaleM);
@@ -305,7 +305,7 @@ namespace SpaceMercs {
                     }
                 }
             } while (plHome == null);
-            plHome.GenerateMoons(rand, 9, 2); // Make sure that this planet has at least two moons
+            plHome.GenerateMoons(9, 2); // Make sure that this planet has at least two moons
             rc.Colonise(this);
             rc.SetHomePlanet(plHome);
             plHome.SetName("Homeworld");
@@ -385,7 +385,7 @@ namespace SpaceMercs {
                 double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
                 pl.AxialRotationPeriod = (int)(arot * (pl.Radius / Const.PlanetSize));
 
-                pl.GenerateMoons(rnd, pdensity);
+                pl.GenerateMoons(pdensity);
                 _planets.Add(pl);
             }
             bGenerated = true;
@@ -628,6 +628,15 @@ namespace SpaceMercs {
             else if (DetailScale < 300.0) return 3;
             else if (DetailScale < 600.0) return 2;
             return 1;
+        }
+
+        // If this system has been edited in any way (and hence potentially has to be saved in full)
+        private bool HasBeenEdited() {
+            if (!bGenerated) return false;
+            if (Owner is not null && Owner.HomePlanet.GetSystem() == this) return true;
+            if (GetPopulation() > 0) return true;
+            if (Renamed) return true;
+            return false;
         }
     }
 }

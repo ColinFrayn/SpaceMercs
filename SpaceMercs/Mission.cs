@@ -22,23 +22,20 @@ namespace SpaceMercs {
         public bool IsShipMission { get { if (Type == MissionType.Surface || Type == MissionType.Caves || Type == MissionType.Mines || Type == MissionType.AbandonedCity) return false; else return true; } }
         public bool IsTacticalMission { get { if (Type == MissionType.Repair || Type == MissionType.Salvage || Type == MissionType.Ignore || Type == MissionType.ShipCombat) return false; else return true; } }
         public int MaximumSoldiers { get { if (Levels.ContainsKey(CurrentLevel) && Levels[CurrentLevel] != null) return Levels[CurrentLevel].MaximumSoldiers; return 4; } }
-        public string Summary {
-            get {
-                switch (Type) {
-                    case MissionType.RepelBoarders: return "Repel Boarders";
-                    case MissionType.BoardingParty: return "Derelict Hulk";
-                    case MissionType.Surface: return "Surface Mission";
-                    case MissionType.Caves: return "Cave System";
-                    case MissionType.Mines: return "Abandoned Mines";
-                    case MissionType.ShipCombat: return "Ship Combat";
-                    case MissionType.AbandonedCity: return "Ruined Structure";
-                    case MissionType.Repair: return "Repair Ship";
-                    case MissionType.Salvage: return "Salvage Empty Ship";
-                    case MissionType.Ignore: return "Ignore";
-                }
-                return "Unknown Mission Type";
-            }
-        }
+        public string Summary =>
+                Type switch {
+                    MissionType.RepelBoarders => "Repel Boarders",
+                    MissionType.BoardingParty => "Derelict Hulk",
+                    MissionType.Surface => "Surface Mission",
+                    MissionType.Caves => "Cave System",
+                    MissionType.Mines => "Abandoned Mines",
+                    MissionType.ShipCombat => "Ship Combat",
+                    MissionType.AbandonedCity => "Ruined Structure",
+                    MissionType.Repair => "Repair Ship",
+                    MissionType.Salvage => "Salvage Empty Ship",
+                    MissionType.Ignore => "Ignore",
+                    _ => "Unknown Mission Type",
+                };
         public int Seed { get; private set; }
         public bool IsComplete {
             get {

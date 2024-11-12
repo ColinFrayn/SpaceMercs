@@ -1,5 +1,4 @@
-﻿using OpenTK.Windowing.Common.Input;
-using SpaceMercs.Graphics;
+﻿using SpaceMercs.Graphics;
 using System.IO;
 using System.Xml;
 
@@ -68,7 +67,7 @@ namespace SpaceMercs {
         }
         public void AddMission(Mission miss) {
             if (miss == null) return;
-            if (_MissionList == null) _MissionList = new List<Mission>();
+            _MissionList ??= new List<Mission>();
             if (_MissionList.Contains(miss)) return;
             _MissionList.Add(miss);
             Scanned = true;

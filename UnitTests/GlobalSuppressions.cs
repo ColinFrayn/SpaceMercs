@@ -13,3 +13,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Assertion", "NUnit2037:Consider using Assert.That(collection, Does.Contain(instance)) instead of Assert.Contains(instance, collection)", Justification = "<Pending>", Scope = "module")]
 [assembly: SuppressMessage("Assertion", "NUnit2019:Consider using Assert.That(expr, Is.Not.Null) instead of Assert.IsNotNull(expr)", Justification = "<Pending>", Scope = "module")]
 [assembly: SuppressMessage("Assertion", "NUnit2035:Consider using Assert.That(collection, Is.Empty) instead of Assert.IsEmpty(collection)", Justification = "<Pending>", Scope = "module")]
+[assembly: SuppressMessage("Assertion", "NUnit2004:Consider using Assert.That(expr, Is.True) instead of Assert.True(expr)")] // Obviously not! Why would I do that?

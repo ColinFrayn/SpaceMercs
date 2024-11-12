@@ -498,7 +498,7 @@ namespace SpaceMercs {
 
         // Utility stuff
         public int GetAvailability(IItem eq) {
-            if (Inventory.ContainsKey(eq)) return Inventory[eq];
+            if (Inventory.TryGetValue(eq, out int count)) return count;
             return 0;
         }
         public void RemoveMission(Mission miss) {

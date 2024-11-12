@@ -142,7 +142,7 @@ namespace SpaceMercs {
 
         // Get a sector that exists, or create a new one
         public Sector GetSector(Tuple<int, int> tp) {
-            if (dSectors.ContainsKey(tp)) return dSectors[tp];
+            if (dSectors.TryGetValue(tp, out Sector? sect)) return sect;
             Sector sc = new Sector(tp.Item1, tp.Item2, this);
             dSectors.Add(tp, sc);
             return sc;
@@ -151,7 +151,7 @@ namespace SpaceMercs {
         // Get a sector that exists, or create a new one
         public Sector GetSector(int sx, int sy) {
             Tuple<int, int> tp = new Tuple<int, int>(sx, sy);
-            if (dSectors.ContainsKey(tp)) return dSectors[tp];
+            if (dSectors.TryGetValue(tp, out Sector? sect)) return sect;
             Sector sc = new Sector(tp.Item1, tp.Item2, this);
             dSectors.Add(tp, sc);
             return sc;

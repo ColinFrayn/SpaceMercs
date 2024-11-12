@@ -73,50 +73,46 @@ namespace SpaceMercs {
         public const double DayLengthSigma = DayLength / 10.0;
 
         // Planet generation
-        public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) {
-            switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(0.4f, 0.3f, 0);
-                case Planet.PlanetType.Gas: return new Vector3(0.5f, 0.5f, 0.6f);
-                case Planet.PlanetType.Oceanic: return new Vector3(0.0f, 0.0f, 0.4f);
-                case Planet.PlanetType.Ice: return new Vector3(0.0f, 0.0f, 0.5f);
-                case Planet.PlanetType.Rocky: return new Vector3(0.3f, 0.3f, 0.3f);
-                case Planet.PlanetType.Volcanic: return new Vector3(0.3f, 0.0f, 0.0f);
-            }
-            return new Vector3(0.0f, 0.0f, 0.0f);
-        }
-        public static Vector3 PlanetTypeToCol2(Planet.PlanetType pt) {
-            switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(0.65f, 0.65f, 0.0f);
-                case Planet.PlanetType.Gas: return new Vector3(0.6f, 0.6f, 0.8f);
-                case Planet.PlanetType.Oceanic: return new Vector3(0.2f, 0.4f, 1.0f);
-                case Planet.PlanetType.Ice: return new Vector3(0.0f, 0.1f, 1.0f);
-                case Planet.PlanetType.Rocky: return new Vector3(0.5f, 0.5f, 0.5f);
-                case Planet.PlanetType.Volcanic: return new Vector3(0.7f, 0.0f, 0.0f);
-            }
-            return new Vector3(0.0f, 0.0f, 0.0f);
-        }
-        public static Vector3 PlanetTypeToCol3(Planet.PlanetType pt) {
-            switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(0.9f, 0.8f, 0.0f);
-                case Planet.PlanetType.Gas: return new Vector3(0.7f, 0.7f, 0.9f);
-                case Planet.PlanetType.Oceanic: return new Vector3(0.0f, 1.0f, 0.0f);
-                case Planet.PlanetType.Ice: return new Vector3(0.0f, 0.2f, 1.0f);
-                case Planet.PlanetType.Rocky: return new Vector3(0.5f, 0.5f, 0.5f);
-                case Planet.PlanetType.Volcanic: return new Vector3(1.0f, 0.0f, 0.0f);
-            }
-            return new Vector3(0.0f, 0.0f, 0.0f);
-        }
-        public static Vector3 PlanetTypeToCol4(Planet.PlanetType pt) {
-            switch (pt) {
-                case Planet.PlanetType.Desert: return new Vector3(1.0f, 1.0f, 0.3f);
-                case Planet.PlanetType.Gas: return new Vector3(0.8f, 0.8f, 1.0f);
-                case Planet.PlanetType.Oceanic: return new Vector3(0.6f, 1.0f, 0.8f);
-                case Planet.PlanetType.Ice: return new Vector3(0.8f, 1.0f, 1.0f);
-                case Planet.PlanetType.Rocky: return new Vector3(0.75f, 0.75f, 0.75f);
-                case Planet.PlanetType.Volcanic: return new Vector3(1.0f, 0.8f, 0.0f);
-            }
-            return new Vector3(0.0f, 0.0f, 0.0f);
-        }
+        public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) =>
+            pt switch {
+                Planet.PlanetType.Desert => new Vector3(0.4f, 0.3f, 0),
+                Planet.PlanetType.Gas => new Vector3(0.5f, 0.5f, 0.6f),
+                Planet.PlanetType.Oceanic => new Vector3(0.0f, 0.0f, 0.4f),
+                Planet.PlanetType.Ice => new Vector3(0.0f, 0.0f, 0.5f),
+                Planet.PlanetType.Rocky => new Vector3(0.3f, 0.3f, 0.3f),
+                Planet.PlanetType.Volcanic => new Vector3(0.3f, 0.0f, 0.0f),
+                _ => new Vector3(0.0f, 0.0f, 0.0f),
+            };
+        public static Vector3 PlanetTypeToCol2(Planet.PlanetType pt) =>
+            pt switch {
+                Planet.PlanetType.Desert => new Vector3(0.65f, 0.65f, 0.0f),
+                Planet.PlanetType.Gas => new Vector3(0.6f, 0.6f, 0.8f),
+                Planet.PlanetType.Oceanic => new Vector3(0.2f, 0.4f, 1.0f),
+                Planet.PlanetType.Ice => new Vector3(0.0f, 0.1f, 1.0f),
+                Planet.PlanetType.Rocky => new Vector3(0.5f, 0.5f, 0.5f),
+                Planet.PlanetType.Volcanic => new Vector3(0.7f, 0.0f, 0.0f),
+                _ => new Vector3(0.0f, 0.0f, 0.0f),
+        };
+        public static Vector3 PlanetTypeToCol3(Planet.PlanetType pt) =>
+            pt switch { 
+                Planet.PlanetType.Desert => new Vector3(0.9f, 0.8f, 0.0f),
+                Planet.PlanetType.Gas => new Vector3(0.7f, 0.7f, 0.9f),
+                Planet.PlanetType.Oceanic => new Vector3(0.0f, 1.0f, 0.0f),
+                Planet.PlanetType.Ice => new Vector3(0.0f, 0.2f, 1.0f),
+                Planet.PlanetType.Rocky => new Vector3(0.5f, 0.5f, 0.5f),
+                Planet.PlanetType.Volcanic => new Vector3(1.0f, 0.0f, 0.0f),
+                _ => new Vector3(0.0f, 0.0f, 0.0f),
+        };
+        public static Vector3 PlanetTypeToCol4(Planet.PlanetType pt) =>
+            pt switch {
+                Planet.PlanetType.Desert => new Vector3(1.0f, 1.0f, 0.3f),
+                Planet.PlanetType.Gas => new Vector3(0.8f, 0.8f, 1.0f),
+                Planet.PlanetType.Oceanic => new Vector3(0.6f, 1.0f, 0.8f),
+                Planet.PlanetType.Ice => new Vector3(0.8f, 1.0f, 1.0f),
+                Planet.PlanetType.Rocky => new Vector3(0.75f, 0.75f, 0.75f),
+                Planet.PlanetType.Volcanic => new Vector3(1.0f, 0.8f, 0.0f),
+                _ => new Vector3(0.0f, 0.0f, 0.0f),
+        };
         public const double TerrainScale = 40.0;
         public const int PerlinOctaves = 7;
         public const int SeedBuffer = 50;

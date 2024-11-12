@@ -105,10 +105,10 @@ namespace SpaceMercs.Dialogs {
             string strFilter = tbUpgradeFilter.Text;
             foreach (IItem eq in PlayerTeam.Inventory.Keys.Where(x => x is not Material)) {
                 if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
-                if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                if (!String.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-                   (strType.Equals("Medical") && eq is Equipment && ((Equipment)eq).BaseType.Source == ItemType.ItemSource.Medlab) ||
-                   (strType.Equals("Equipment") && eq is Equipment && ((Equipment)eq).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                   (strType.Equals("Medical") && eq is Equipment eqpm && eqpm.BaseType.Source == ItemType.ItemSource.Medlab) ||
+                   (strType.Equals("Equipment") && eq is Equipment eqpe && eqpe.BaseType.Source == ItemType.ItemSource.Workshop)) {
                     arrRow[0] = eq.Name;
                     arrRow[1] = "Ship Stores";
                     arrRow[2] = eq.Cost.ToString("N2");
@@ -120,10 +120,10 @@ namespace SpaceMercs.Dialogs {
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
                 foreach (IItem eq in s.InventoryGrouped.Keys.Where(x => x is not Material)) {
                     if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
-                    if (!String.IsNullOrEmpty(strFilter) && eq.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                    if (!String.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                     if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
-                       (strType.Equals("Medical") && eq is Equipment && ((Equipment)eq).BaseType.Source == ItemType.ItemSource.Medlab) ||
-                       (strType.Equals("Equipment") && eq is Equipment && ((Equipment)eq).BaseType.Source == ItemType.ItemSource.Workshop)) {
+                       (strType.Equals("Medical") && eq is Equipment eqpm && eqpm.BaseType.Source == ItemType.ItemSource.Medlab) ||
+                       (strType.Equals("Equipment") && eq is Equipment eqpe && eqpe.BaseType.Source == ItemType.ItemSource.Workshop)) {
                         arrRow[0] = eq.Name;
                         arrRow[1] = s.Name;
                         arrRow[2] = eq.Cost.ToString("N2");
@@ -135,7 +135,7 @@ namespace SpaceMercs.Dialogs {
                 if (PlayerTeam.PlayerShip.HasArmoury) {
                     if (PlayerTeam.HasSkill(Soldier.UtilitySkill.Armoursmith)) {
                         foreach (Armour ar in s.EquippedArmour) {
-                            if (!String.IsNullOrEmpty(strFilter) && ar.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                            if (!String.IsNullOrEmpty(strFilter) && !ar.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                             if (strType.Equals("All") || strType.Equals("Armour")) {
                                 arrRow[0] = ar.Name;
                                 arrRow[1] = s.Name + " [Eq]";
@@ -147,7 +147,7 @@ namespace SpaceMercs.Dialogs {
                         }
                     }
                     if (s.EquippedWeapon != null && PlayerTeam.PlayerShip.CanBuildItem(s.EquippedWeapon)) {
-                        if (!String.IsNullOrEmpty(strFilter) && s.EquippedWeapon.Name.IndexOf(strFilter, StringComparison.InvariantCultureIgnoreCase) == -1) continue;
+                        if (!String.IsNullOrEmpty(strFilter) && !s.EquippedWeapon.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                         if (strType.Equals("All") || strType.Equals("Weapon")) {
                             arrRow[0] = s.EquippedWeapon.Name;
                             arrRow[1] = s.Name + " [Eq]";
@@ -177,8 +177,7 @@ namespace SpaceMercs.Dialogs {
         private void btConstruct_Click(object sender, EventArgs e) {
             if (dgConstruct.SelectedRows.Count == 0) return;
             int iScroll = dgConstruct.FirstDisplayedScrollingRowIndex;
-            ItemType? newType = dgConstruct.SelectedRows[0].Tag as ItemType;
-            if (newType is null) return;
+            if (dgConstruct.SelectedRows[0].Tag is not ItemType newType) return;
             int iRowNo = dgConstruct.SelectedRows[0].Index;
 
             // Make sure we can make it
@@ -382,8 +381,7 @@ namespace SpaceMercs.Dialogs {
             btModify.Enabled = false;
             btDismantle.Enabled = false;
             if (dgInventory.SelectedRows.Count == 0) return;
-            Tuple<Soldier?, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier?, IItem, bool>;
-            if (tp is null) return;
+            if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
             IItem it = tp.Item2;
             if (it is not Material) btDismantle.Enabled = true;
             if (!PlayerTeam.PlayerShip.HasEngineering) return;
@@ -445,8 +443,8 @@ namespace SpaceMercs.Dialogs {
         }
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
-            Tuple<Soldier, IItem, bool>? tp = dgInventory.SelectedRows[0].Tag as Tuple<Soldier, IItem, bool>;
-            if (tp is null || tp.Item2 is null) return;
+            if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
+            if (tp.Item2 is null) return;
             MessageBox.Show(this, tp.Item2.Description);
         }
     }

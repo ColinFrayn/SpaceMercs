@@ -6,13 +6,13 @@ namespace SpaceMercs.Graphics.Shapes {
         private static GLShape? _annulus16 = null, _annulus32 = null;
         public static GLShape Annulus16 {
             get {
-                if (_annulus16 is null) _annulus16 = BuildFlat(16, 1.2f);
+                _annulus16 ??= BuildFlat(16, 1.2f);
                 return _annulus16;
             }
         }
         public static GLShape Annulus32 {
             get {
-                if (_annulus32 is null) _annulus32 = BuildFlat(32, 1.2f);
+                _annulus32 ??= BuildFlat(32, 1.2f);
                 return _annulus32;
             }
         }

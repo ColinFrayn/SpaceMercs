@@ -179,7 +179,7 @@ namespace SpaceMercs.Dialogs {
             else btDropAll.Enabled = true;
 
             // Update inventory if it's open, so that it's up-to-date (just to make sure!)
-            if (ivForm != null) ivForm.UpdateAll();
+            ivForm?.UpdateAll();
         }
 
         private static Color ArmourToColour(Armour? ar) {
@@ -228,8 +228,8 @@ namespace SpaceMercs.Dialogs {
             IItem? it = SelectedItem();
             if (it is null) return;
             int iPrevIndex = -1;
-            if (lbEquipped.SelectedIndex >= 0 && (it is IEquippable)) {
-                s.Unequip((IEquippable)it);
+            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) {
+                s.Unequip(eq);
                 s.DropItem(it);
             }
             else {
@@ -241,7 +241,7 @@ namespace SpaceMercs.Dialogs {
                 if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
-            if (ivForm != null) ivForm.UpdateInventory();
+            ivForm?.UpdateInventory();
         }
         private void btEquip_Click(object sender, EventArgs e) {
             Soldier s = SelectedSoldier() ?? throw new Exception("Selected soldier was null");
@@ -257,7 +257,7 @@ namespace SpaceMercs.Dialogs {
                 if (s.InventoryGrouped.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
-            if (ivForm != null) ivForm.UpdateInventory();
+            ivForm?.UpdateInventory();
         }
         private void btDrop_Click(object sender, EventArgs e) {
             Soldier? s = SelectedSoldier();
@@ -273,7 +273,7 @@ namespace SpaceMercs.Dialogs {
                 if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
                 else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
             }
-            if (ivForm != null) ivForm.UpdateInventory();
+            ivForm?.UpdateInventory();
         }
         private void lbInventory_SelectedIndexChanged(object sender, EventArgs e) {
             // Update buttons based on selection
@@ -359,7 +359,7 @@ namespace SpaceMercs.Dialogs {
             int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
             if (nut == 0) return;
             string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
-            if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+            if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (s.GetRawUtilityLevel(sk) >= s.Level) throw new Exception("Attempting to increase Utility skill when skill is already at or above Soldier level");
             if (s.GetRawUtilityLevel(sk) >= 10) throw new Exception("Attempting to increase Utility skill when skill is already at or above maximum level");
@@ -391,7 +391,7 @@ namespace SpaceMercs.Dialogs {
                     // Disable if existing skill is already max level (== Player's level)
                     // Otherwise Enable
                     string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
-                    if (stsk.Contains("[")) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+                    if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
                     Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                     if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;
                     if (s.GetRawUtilityLevel(sk) >= 10) btIncreaseSkill.Enabled = false;

@@ -280,7 +280,7 @@ namespace SpaceMercs {
         }
 
         public AstronomicalObject? GetAOFromLocationString(string strLoc) {
-            if (!strLoc.StartsWith("(") || !strLoc.Contains(")")) throw new Exception("Illegal location string:" + strLoc);
+            if (!strLoc.StartsWith("(") || !strLoc.Contains(')')) throw new Exception("Illegal location string:" + strLoc);
             string strMapLoc = strLoc.Substring(0, strLoc.IndexOf(")") + 1);
             string[] bits = strMapLoc.Replace("(", "").Replace(")", "").Split(',');
             if (bits.Length != 2) throw new Exception("Couldn't parse location string : " + strLoc + " - Sector location invalid : " + strMapLoc);
