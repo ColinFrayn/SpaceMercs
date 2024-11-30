@@ -2354,6 +2354,8 @@ namespace SpaceMercs {
             WriteOutMap($"Map{id}");
         }
         private void WriteOutMap(string str) {
+#pragma warning disable 0162
+            if (!Const.DEBUG_MAP_CREATION) return;
             using (StreamWriter file = new StreamWriter(@"C:\temp\" + str + ".txt")) {
                 for (int y = Height - 1; y >= 0; y--) {
                     StringBuilder sb = new StringBuilder();
@@ -2367,11 +2369,14 @@ namespace SpaceMercs {
                     file.WriteLine(sb.ToString());
                 }
             }
+#pragma warning restore 0162
         }
         private void WriteOutMapRooms(int id) {
             WriteOutMapRooms($"MapRooms{id}");
         }
         private void WriteOutMapRooms(string str) {
+#pragma warning disable 0162
+            if (!Const.DEBUG_MAP_CREATION) return;
             using (StreamWriter file = new StreamWriter(@"C:\temp\" + str + ".txt")) {
                 for (int y = Height - 1; y >= 0; y--) {
                     StringBuilder sb = new StringBuilder();
@@ -2385,8 +2390,11 @@ namespace SpaceMercs {
                     file.WriteLine(sb.ToString());
                 }
             }
+#pragma warning restore 0162
         }
         private void WriteOutAStar(int[,] AStarG) {
+#pragma warning disable 0162
+            if (!Const.DEBUG_MAP_CREATION) return;
             using (StreamWriter file = new StreamWriter(@"C:\temp\AStarG.csv")) {
                 for (int y = Height - 1; y >= 0; y--) {
                     StringBuilder sb = new StringBuilder();
@@ -2398,6 +2406,7 @@ namespace SpaceMercs {
                     file.WriteLine(sb.ToString());
                 }
             }
+#pragma warning restore 0162
         }
     }
 }

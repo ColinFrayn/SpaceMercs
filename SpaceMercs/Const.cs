@@ -14,6 +14,7 @@ namespace SpaceMercs {
         public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
         public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
+        public const bool DEBUG_MAP_CREATION = false; // Write out to disk intermediate map creation stages
         public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
         public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
         public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start

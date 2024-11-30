@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Loading/saving hierarchically
+Loading/saving hierarchically - is this done??
 
 Anything more we can do to compress the save game file?
 - Maybe store only AOs that are not as generated?
