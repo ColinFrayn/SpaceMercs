@@ -32,14 +32,26 @@ namespace SpaceMercs {
             IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
+            if (IsHomeworld) {
+                GenerateMoons(Const.HomeworldPDensity, Const.HomeworldMinMoons);
+            }
+            else GenerateMoons(Parent.GetSystem().Sector.ParentMap.PlanetDensity);
+
             if (xmlMoons != null) {
                 foreach (XmlNode xmlm in xmlMoons.ChildNodes) {
-                    Moon mn = new Moon(xmlm, this);
-                    Moons.Add(mn);
+                    string id = xmlm.Attributes?["ID"]?.Value ?? throw new Exception($"Could not read Moon ID : Planet {this}");
+                    int mno = Int32.Parse(id);
+                    // We might be loading an old game save, in which case just kill this moon (and any after it) and hope we can cope.
+                    // This is because old game saves might not regenerate moon systems identically to the current code version.
+                    // Note, even if this moon has an ID that previously existed, we could still have generated the moon system differently from expectations.
+                    // But seeing as all moons are habitable, we can deal with it.
+                    // If the player happened to be at this location then they're screwed. I guess I'll attempt to fix that in the player team loader??
+                    if (mno >= Moons.Count) {
+                        break;
+                    }
+                    Moon mn = Moons[mno];
+                    mn.ExpandFromXml(xmlm);
                 }
-            }
-            else {
-                GenerateMoons(Parent.GetSystem().Sector.ParentMap.PlanetDensity);
             }
             BaseColour = Const.PlanetTypeToCol2(Type);
         }
@@ -68,14 +80,16 @@ namespace SpaceMercs {
             // Write planet details to file
             if (IsHomeworld) file.WriteLine("<Homeworld/>");
             file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
-            // Now write out all moons, if necessary
-            if (MoonsHaveBeenEdited()) {
-                file.WriteLine("<Moons>");
-                foreach (Moon mn in Moons) {
+            // Now write out any moons necessary
+            bool writeMoons = false;
+            foreach (Moon mn in Moons) {
+                if (mn.HasBeenEdited()) {
+                    if (!writeMoons) file.WriteLine("<Moons>");
                     mn.SaveToFile(file);
+                    writeMoons = true;
                 }
-                file.WriteLine("</Moons>");
             }
+            if (writeMoons) file.WriteLine("</Moons>");
             file.WriteLine("</Planet>");
         }
 

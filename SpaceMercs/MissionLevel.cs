@@ -444,10 +444,13 @@ namespace SpaceMercs {
             }
         }
         private void DisplayItemStack(ShaderProgram prog, Point pt) {
-            if (Items[pt].Hidden) return;
+            if (!Items.TryGetValue(pt, out Stash? st)) {
+                return; // Happened once. No idea why.
+            }
+            if (st.Hidden) return;
             TexSpecs ts;
-            if (Items[pt].ContainsOnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
-            else if (Items[pt].Count < 6) ts = Textures.GetTexCoords(Textures.MiscTexture.Coins, true);
+            if (st.ContainsOnlyCorpses) ts = Textures.GetTexCoords(Textures.MiscTexture.Bones, true);
+            else if (st.Count < 6) ts = Textures.GetTexCoords(Textures.MiscTexture.Coins, true);
             else ts = Textures.GetTexCoords(Textures.MiscTexture.Treasure, true);
 
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);

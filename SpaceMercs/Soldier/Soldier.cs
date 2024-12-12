@@ -1073,7 +1073,13 @@ namespace SpaceMercs {
                 if (en == null) return false;
                 if (RangeTo(en) > AttackRange) return false;
             }
-            if (!SightMap[tx, ty]) return false;
+
+            // Check that we're attacking a square we can see, or an entity part of which we can see
+            if (!SightMap[tx, ty]) {
+                IEntity? en = level.GetEntityAt(tx, ty);
+                if (en == null) return false;
+                if (!CanSee(en)) return false;
+            }
 
             // Don't attack a friendly square
             if (level.IsFriendlyAt(tx, ty)) {

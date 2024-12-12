@@ -2,12 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Loading/saving hierarchically - is this done??
-
-Anything more we can do to compress the save game file?
-- Maybe store only AOs that are not as generated?
-- Just save AOs as seed if no name and no colony (and, for a planet, no named or colonised moons, no scanned moons, no missions etc.)
-- Save moons without colonies
+Targetting partially invisible large creatures doesn't work if you target an unseeable square.
 
 ==========================================================================================================
 

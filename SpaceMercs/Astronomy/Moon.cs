@@ -34,8 +34,10 @@ namespace SpaceMercs {
         // Save this moon to an Xml file
         public override void SaveToFile(StreamWriter file) {
             file.WriteLine("<Moon ID=\"" + ID.ToString() + "\">");
-            base.SaveToFile(file);
-            file.WriteLine("</Moon>");        
+            if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
+            SaveMissions(file);
+            Colony?.SaveToFile(file);
+            file.WriteLine("</Moon>");
         }
 
         public void ExpandFromXml(XmlNode xml) {

@@ -45,11 +45,26 @@ namespace SpaceMercs {
             Mission_ShowTravel = Mission_ShowPath = true;
         }
         public Team(XmlNode xml, Map map) {
-            XmlNode? xmll = xml.SelectSingleNode("Pos");
-            if (xmll is null) throw new Exception("Could not locate Team Position node");
-            AstronomicalObject? ao = map.GetAOFromLocationString(xmll.InnerText);
-            if (ao is null) throw new Exception("Could not decode Team Position : " + xmll.InnerText);
-            CurrentPosition = ao;
+            XmlNode? xmll = xml.SelectSingleNode("Pos") ?? throw new Exception("Could not locate Team Position node");
+            string strLoc = xmll.InnerText;
+            try {
+                AstronomicalObject? ao = map.GetAOFromLocationString(strLoc);
+                if (ao is null) throw new NullReferenceException($"Could not decode Team Position : {xmll.InnerText} : Got null location");
+                CurrentPosition = ao;
+            }
+            catch (NullReferenceException) {
+                throw; // This is really bad
+            }
+            catch {
+                // Here we couldn't identify the location. We might be able to rescue this in case it was a missing moon that was regenerated differently.
+                // In this case, skip back to the parent planet
+                int pos = strLoc.IndexOf('.');
+                if (pos == -1) throw; // OK we're totally screwed as this was not a moon
+                strLoc = strLoc.Substring(0, pos); // This was a moon, so try the parent planet
+                AstronomicalObject? ao = map.GetAOFromLocationString(strLoc);
+                if (ao is null) throw new NullReferenceException($"Could not decode Team Position : {xmll.InnerText} : Also could not move back to parent planet. Aborting game load.");
+                CurrentPosition = ao;
+            }
 
             Cash = xml.SelectNodeDouble("Cash");
 
