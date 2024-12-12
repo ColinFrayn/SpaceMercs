@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>22/06/2186 02:20:27</Clock>
+<Clock>22/06/2186 02:20:33</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -293,8 +293,8 @@
 <Name>Insectoid Home</Name>
  <MapPos X="-9.54" Y="-10.91"/>
  <Owner>Insectoid</Owner>
- <TradeRoute>(-1,-1)7</TradeRoute>
  <TradeRoute>(-1,-1)5</TradeRoute>
+ <TradeRoute>(-1,-1)7</TradeRoute>
  <TradeRoute>(-1,-1)12</TradeRoute>
  <Planets>
 <Planet Seed="5958890" />
@@ -354,6 +354,7 @@
 <Temp>299</Temp>
 <Seed>8335679</Seed>
 <Orbit>93978895202</Orbit>
+<Homeworld/>
 <TempBase>299.1079093061998</TempBase>
 <Moons>
 <Moon ID="0">
@@ -1246,6 +1247,7 @@
 <Temp>287</Temp>
 <Seed>8084774</Seed>
 <Orbit>54040739237</Orbit>
+<Homeworld/>
 <TempBase>287.6419611135964</TempBase>
 <Moons>
 <Moon ID="0">
@@ -1928,6 +1930,7 @@
 <Temp>286</Temp>
 <Seed>6267521</Seed>
 <Orbit>88126227870</Orbit>
+<Homeworld/>
 <TempBase>286.4739382012569</TempBase>
 <Moons>
 <Moon ID="0">
@@ -2092,8 +2095,8 @@
 <Seed>952100</Seed>
  <MapPos X="10.55" Y="-10.45"/>
  <Owner>Gokan</Owner>
- <TradeRoute>(1,-1)12</TradeRoute>
  <TradeRoute>(1,-1)9</TradeRoute>
+ <TradeRoute>(1,-1)12</TradeRoute>
  <Planets>
 <Planet Seed="5723715" />
 <Planet Seed="886627" />
@@ -2364,6 +2367,7 @@
 <Temp>296</Temp>
 <Seed>2122468</Seed>
 <Orbit>277324307356</Orbit>
+<Homeworld/>
 <TempBase>296.0129818506969</TempBase>
 <Moons>
 <Moon ID="0">
@@ -3109,8 +3113,8 @@
 <Name>Human Home</Name>
  <MapPos X="-0.45" Y="-0.19"/>
  <Owner>Human</Owner>
- <TradeRoute>(0,0)4</TradeRoute>
  <TradeRoute>(0,0)2</TradeRoute>
+ <TradeRoute>(0,0)4</TradeRoute>
  <TradeRoute>(0,0)7</TradeRoute>
  <Planets>
 <Planet ID="0">
@@ -3129,6 +3133,7 @@
 <Temp>302</Temp>
 <Seed>7407307</Seed>
 <Orbit>28708001018</Orbit>
+<Homeworld/>
 <TempBase>302.6067405275459</TempBase>
 <Moons>
 <Moon ID="0">
@@ -3956,8 +3961,8 @@
 <Name>Elithiri Home</Name>
  <MapPos X="-10.7" Y="10.12"/>
  <Owner>Elithiri</Owner>
- <TradeRoute>(-1,1)4</TradeRoute>
  <TradeRoute>(-1,1)3</TradeRoute>
+ <TradeRoute>(-1,1)4</TradeRoute>
  <TradeRoute>(-1,1)9</TradeRoute>
  <Planets>
 <Planet ID="0">
@@ -4076,6 +4081,7 @@
 <Temp>288</Temp>
 <Seed>454534</Seed>
 <Orbit>46941826005</Orbit>
+<Homeworld/>
 <TempBase>288.2011497566094</TempBase>
 <Moons>
 <Moon ID="0">
@@ -4366,8 +4372,8 @@
 <Seed>4552898</Seed>
  <MapPos X="-10.8" Y="11.8"/>
  <Owner>Elithiri</Owner>
- <TradeRoute>(-1,1)6</TradeRoute>
  <TradeRoute>(-1,1)4</TradeRoute>
+ <TradeRoute>(-1,1)6</TradeRoute>
  <Planets>
 <Planet Seed="4499378" />
 <Planet Seed="2995951" />
@@ -4957,6 +4963,7 @@
 <Temp>294</Temp>
 <Seed>1294640</Seed>
 <Orbit>71782010291</Orbit>
+<Homeworld/>
 <TempBase>294.01448935707026</TempBase>
 <Moons>
 <Moon ID="0">

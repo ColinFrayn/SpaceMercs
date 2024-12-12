@@ -79,6 +79,7 @@ namespace SpaceMercs {
             AstronomicalObject? aoHome = map.GetAOFromLocationString(xml.SelectNodeText("HomePlanet"));
             if (aoHome is not Planet pl) throw new Exception("Home Planet corrupted in data file (not a planet!)");
             HomePlanet = pl;
+            pl.SetAsHomeworld();
             Known = (xml.SelectSingleNode("Known") is not null);
 
             string strLastExpand = xml.SelectNodeText("LastExpand");
