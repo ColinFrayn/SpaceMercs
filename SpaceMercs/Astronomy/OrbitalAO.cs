@@ -19,7 +19,9 @@ namespace SpaceMercs {
         // Save this object to an Xml file
         public override void SaveToFile(StreamWriter file) {
             base.SaveToFile(file);
-            if (OrbitalDistance != 0.0) file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
+            if (OrbitalDistance != 0.0) {
+                file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
+            }
         }
 
         public virtual double DistanceFromStar() {

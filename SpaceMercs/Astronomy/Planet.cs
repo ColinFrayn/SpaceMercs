@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public readonly List<Moon> Moons;
         public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
+        public bool IsHomeworld { get; private set; }
 
         public Planet() {
             Parent = Star.Empty;
@@ -28,6 +29,7 @@ namespace SpaceMercs {
         }
         public Planet(XmlNode xml, Star parent) : base(xml, parent) {
             BaseTemp = xml.SelectNodeDouble("TempBase");
+            IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
             if (xmlMoons != null) {
@@ -64,6 +66,7 @@ namespace SpaceMercs {
             file.WriteLine($"<Planet ID=\"{ID}\">");
             base.SaveToFile(file);
             // Write planet details to file
+            if (IsHomeworld) file.WriteLine("<Homeworld/>");
             file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
             // Now write out all moons, if necessary
             if (MoonsHaveBeenEdited()) {
@@ -302,10 +305,8 @@ namespace SpaceMercs {
 
         // Check if the moons for this planet have been changed in any way, or if they can be recreated from the random seed
         private bool MoonsHaveBeenEdited() {
-            if (Moons.Count == 0) return false;
             foreach (Moon mn in Moons) {
-                if (!string.IsNullOrEmpty(mn.Name)) return true;
-                if (mn.Colony is not null) return true;
+                if (mn.HasBeenEdited()) return true;
             }
             return false;
         }
@@ -313,7 +314,13 @@ namespace SpaceMercs {
             if (MoonsHaveBeenEdited()) return true;
             if (!string.IsNullOrEmpty(Name)) return true;
             if (Colony is not null) return true;
+            if (Scanned) return true;
+            if (CountMissions > 0) return true;
             return false;
+        }
+
+        public void SetAsHomeworld() {
+            IsHomeworld = true;
         }
 
         // Overrides

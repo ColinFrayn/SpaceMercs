@@ -72,6 +72,8 @@ namespace SpaceMercs {
         public const double MoonOrbitalPeriodSigma = MoonOrbitalPeriod / 15.0;
         public const double DayLength = 24.0 * 3600.0;
         public const double DayLengthSigma = DayLength / 10.0;
+        public const int HomeworldPDensity = 9;
+        public const int HomeworldMinMoons = 2;
 
         // Planet generation
         public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) =>

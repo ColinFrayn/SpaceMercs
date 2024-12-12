@@ -35,7 +35,23 @@ namespace SpaceMercs {
         public override void SaveToFile(StreamWriter file) {
             file.WriteLine("<Moon ID=\"" + ID.ToString() + "\">");
             base.SaveToFile(file);
-            file.WriteLine("</Moon>");
+            file.WriteLine("</Moon>");        
+        }
+
+        public void ExpandFromXml(XmlNode xml) {
+            XmlNode? xmlc = xml.SelectSingleNode("Colony");
+            if (xmlc != null) SetColony(new Colony(xmlc, this));
+            LoadMissions(xml);
+            XmlNode? xmln = xml.SelectSingleNode("Name");
+            if (xmln != null) Name = xml.SelectNodeText("Name", string.Empty);
+        }
+
+        public bool HasBeenEdited() {
+            if (!string.IsNullOrEmpty(Name)) return true;
+            if (Colony is not null) return true;
+            if (CountMissions > 0) return true;
+            if (Scanned) return true;
+            return false;
         }
 
         // Overrides

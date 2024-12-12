@@ -111,6 +111,7 @@ namespace SpaceMercs {
             HomePlanet = pl;
             pl.GetSystem().SetName(Name + " Home");
             pl.SetupBase(this, 5);
+            pl.SetAsHomeworld();
         }
 
         public void Colonise(Star st) {

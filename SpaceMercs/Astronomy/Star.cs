@@ -149,7 +149,7 @@ namespace SpaceMercs {
             file.WriteLine(" <MapPos X=\"" + Math.Round(MapPos.X, 2).ToString() + "\" Y=\"" + Math.Round(MapPos.Y, 2).ToString() + "\"/>");
             if (Owner != null) file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
 
-            foreach (Star st in TradeRoutes) {
+            foreach (Star st in TradeRoutes.OrderBy(t => t.ID)) {
                 file.WriteLine(" <TradeRoute>" + st.PrintCoordinates() + "</TradeRoute>");
             }
 
@@ -312,7 +312,7 @@ namespace SpaceMercs {
                     }
                 }
             } while (plHome == null);
-            plHome.GenerateMoons(9, 2); // Make sure that this planet has at least two moons
+            plHome.GenerateMoons(Const.HomeworldPDensity, Const.HomeworldMinMoons); // Make sure that this planet has at least two moons
             rc.Colonise(this);
             rc.SetHomePlanet(plHome);
             plHome.SetName("Homeworld");
