@@ -2,7 +2,8 @@
 ToDo List
 -------------------------------------------------
 
-Targetting partially invisible large creatures doesn't work if you target an unseeable square.
+- OK button for message box - shift it down based on number of rows
+
 
 ==========================================================================================================
 

@@ -392,19 +392,20 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbInventory_DoubleClick(object sender, EventArgs e) {
-            if (SelectedItem() == null) return;
-            MessageBox.Show(SelectedItem()?.Description ?? "Could not find selected item!");
+            IItem? item = SelectedItem();
+            if (item == null) return;
+            MessageBox.Show(item.Description, item.Name);
         }
 
         private void lbEquipped_DoubleClick(object sender, EventArgs e) {
             IItem? it = SelectedItem();
-            if (it is not null) MessageBox.Show(it.Description);
+            if (it is not null) MessageBox.Show(it.Description, it.Name);
         }
 
         private void dgFloor_DoubleClick(object sender, EventArgs e) {
             if (dgFloor.SelectedRows.Count != 1) return;
             if (dgFloor.SelectedRows[0].Tag is not IItem it) return;
-            MessageBox.Show(it.Description);
+            MessageBox.Show(it.Description, it.Name);
         }
     }
 }

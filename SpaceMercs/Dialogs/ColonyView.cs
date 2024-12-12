@@ -530,13 +530,13 @@ namespace SpaceMercs.Dialogs {
         private void dgMerchant_DoubleClick(object sender, EventArgs e) {
             if (dgMerchant.SelectedRows.Count == 0) return;
             if (dgMerchant.SelectedRows[0].Tag is IItem eq) {
-                MessageBox.Show(eq.Description);
+                MessageBox.Show(eq.Description, eq.Name);
             }
         }
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not SaleItem tp || tp.Item is null) return;
-            MessageBox.Show(tp.Item.Description);
+            MessageBox.Show(tp.Item.Description, tp.Item.Name);
         }
 
         // Other handlers

@@ -982,7 +982,7 @@ namespace SpaceMercs {
                 if (cy < 0 || cy >= Height) return false;
                 for (int cx = x; cx < x + cr.Size; cx++) {
                     if (cx < 0 || cx >= Width) return false;
-                    if (Map[cx, cy] != TileType.Floor || EntityMap[cx, cy] != null) return false;
+                    if (Map[cx, cy] != TileType.Floor || EntityMap[cx, cy] != null || EntryLocations.Contains(new Point(cx,cy))) return false;
                 }
             }
             return true;

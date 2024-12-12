@@ -90,7 +90,7 @@ namespace SpaceMercs.Dialogs {
         private void dgInventory_DoubleClick(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
             if (dgInventory.SelectedRows[0].Tag is IItem eq) {
-                MessageBox.Show(eq.Description);
+                MessageBox.Show(eq.Description, eq.Name);
             }
         }
     }

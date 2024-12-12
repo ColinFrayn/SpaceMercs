@@ -13,6 +13,7 @@ namespace SpaceMercs {
         private const float ButtonWidth = 0.065f, ButtonHeight = 0.04f;
         private const float ButtonBorder = 0.01f, ButtonSplit = 0.03f;
         private const float MaxBoxHeight = 0.8f, MaxBoxWidth = 0.8f;
+        private const float ButtonGap = 0.04f;
         private const float TopBorder = 0.015f;
         private const float MessageFontScale = 0.045f;
         private const float ButtonAlpha = 0.0f; // Was previously overrideable?
@@ -68,11 +69,11 @@ namespace SpaceMercs {
         private void SetupBoxes(IEnumerable<string> lines) {
             Lines = new List<string>(lines);
 
-            BoxHeight = ButtonHeight + (ButtonBorder * 2f) + MessageFontScale * 1.15f * Lines.Count + TopBorder;
+            BoxHeight = ButtonHeight + (ButtonBorder * 2f) + MessageFontScale * 1.15f * Lines.Count + TopBorder + ButtonGap;
             if (BoxHeight > 0.6f) BoxHeight = 0.6f;
             BoxX = (1f - MaxBoxWidth) / 2f;
             BoxY = (1f - BoxHeight) / 2f;
-            ButtonY = (BoxY + BoxHeight) - (ButtonHeight + ButtonBorder);
+            ButtonY = BoxY + BoxHeight + ButtonGap;// - (ButtonHeight + ButtonBorder);
         }
 
         // Draw the message box and buttons

@@ -445,7 +445,7 @@ namespace SpaceMercs.Dialogs {
             if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
             if (tp.Item2 is null) return;
-            MessageBox.Show(this, tp.Item2.Description);
+            MessageBox.Show(this, tp.Item2.Description, tp.Item2.Name);
         }
     }
 }
