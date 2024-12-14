@@ -324,7 +324,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        private bool PlanetOrMoonsHaveBeenEdited() {
+        public bool PlanetOrMoonsHaveBeenEdited() {
             if (MoonsHaveBeenEdited()) return true;
             if (!string.IsNullOrEmpty(Name)) return true;
             if (Colony is not null) return true;

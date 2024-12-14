@@ -578,9 +578,10 @@ namespace SpaceMercs {
         // If this system has been edited in any way (and hence potentially has to be saved in full)
         private bool HasBeenEdited() {
             if (!bGenerated) return false;
-            if (Owner is not null && Owner.HomePlanet.GetSystem() == this) return true;
-            if (GetPopulation() > 0) return true;
             if (Renamed) return true;
+            foreach (Planet pl in Planets) {
+                if (pl.PlanetOrMoonsHaveBeenEdited()) return true;
+            }
             return false;
         }
     }

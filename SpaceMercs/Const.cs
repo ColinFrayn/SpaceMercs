@@ -15,19 +15,19 @@ namespace SpaceMercs {
         public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
         public const bool DEBUG_MAP_CREATION = false; // Write out to disk intermediate map creation stages
-        public const int DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
-        public const int DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
-        public const int DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
+        public const int  DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
+        public const int  DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
+        public const int  DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
 
         // Character settings
-        public const int SpareAttributePoints = 0; // Starting pot of skill points
-        public const int MaximumSkillDeficit = 5; // A skill can't be lowered more than this many points beneath racial average
+        public const int    SpareAttributePoints = 0; // Starting pot of skill points
+        public const int    MaximumSkillDeficit = 5; // A skill can't be lowered more than this many points beneath racial average
         public const double MovementCost = 2.0;  // Cost, in stamina points, for moving one square
         public const double MeleeCost = 6.0;  // Cost, in stamina points, for a melee attack
         public const double SearchCost = 10.0; // Cost, in stamina points, for searching the nearby area
         public const double UseItemCost = 10.0; // Cost, in stamina points, for using an item
-        public const int BaseSearchRadius = 5; // Maximum radius of any search for unskilled searcher (increase by 1 per point in perception)
-        public const int PassiveSearchRadius = 2; // Maximum radius of any search for unskilled passive searcher (increase by 1 per point in perception)
+        public const int    BaseSearchRadius = 5; // Maximum radius of any search for unskilled searcher (increase by 1 per point in perception)
+        public const int    PassiveSearchRadius = 2; // Maximum radius of any search for unskilled passive searcher (increase by 1 per point in perception)
         public const double BaseSearchChance = 70.0; // Chance of spotting a hidden object at distance zero (plus Insight)
         public const double PassiveSearchChance = 30.0; // Chance of spotting a hidden object at distance zero (plus Insight)
         public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
@@ -36,7 +36,7 @@ namespace SpaceMercs {
         public const double PerceptionSearchRadiusBoost = 0.5; // Increase in search radius for every point of perception
         public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
         public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
-        public const int WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
+        public const int    WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
         public const double EquipmentLevelCostExponent = 1.35;  // For each level the weapon quality improves, this is the power law relationship to cost
         public const double EquipmentLevelCostBaseExponent = 1.0;  // For each level the weapon quality improves, additionally multiply cost by this factor 
         public const double EquipmentLevelRarityScale = 0.2;  // Each level of equipment quality makes it this much rarer
@@ -62,7 +62,7 @@ namespace SpaceMercs {
         public const double PlanetSizeMin = PlanetSize / 4;
         public const double GasGiantScale = 10.0;
         public const double GasGiantScaleSigma = 1.0;
-        public const int MaxPlanetsPerSystem = 9;
+        public const int    MaxPlanetsPerSystem = 9;
         public const double StarRotation = 25.0 * 24.0 * 3600.0;
         public const double StarRotationSigma = StarRotation / 10.0;
         public const double StarRotationMin = StarRotation / 5.0;
@@ -72,8 +72,8 @@ namespace SpaceMercs {
         public const double MoonOrbitalPeriodSigma = MoonOrbitalPeriod / 15.0;
         public const double DayLength = 24.0 * 3600.0;
         public const double DayLengthSigma = DayLength / 10.0;
-        public const int HomeworldPDensity = 9;
-        public const int HomeworldMinMoons = 2;
+        public const int    HomeworldPDensity = 9;
+        public const int    HomeworldMinMoons = 2;
 
         // Planet generation
         public static Vector3 PlanetTypeToCol1(Planet.PlanetType pt) =>
@@ -149,10 +149,10 @@ namespace SpaceMercs {
         public const double GuaranteedHitScale = 0.5;  // The higher this is, the higher the weighting for absolute att-def, leading to more predictable hits/misses
         public const double EncumbranceHitPenalty = 4.0; // When fully encumbered, reduce hit rolls by this much (or proportionately).
         public const double HitSizePowerLaw = 2.0;  // Increase chance to hit for larger creatures
-        public const double PartialCoverDefenceBonus = 2.5; // When hiding by a wall from perspective of the (ranged) attacker, increase defence by this much
+        public const double PartialCoverDefenceBonus = 2.5; // When hiding by a wall from perspective of the (ranged) attacker, increase defence by this much  ##UNUSED##
         public const double BaseDetectionRange = 7.0; // Range in squares at which a creature of same level can spot you, if you're unencumbered and with default agility
-        public const int CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
-        public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detectionr ange
+        public const int    CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
+        public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
         public const double CreatureAttackDamageScale = 0.06;  // Modifier applied to damage done by Creatures
@@ -164,12 +164,12 @@ namespace SpaceMercs {
 
         // Miscellaneous
         public const double InitialCash = 50.0;
-        public const int MaxItemLevel = 5;
-        public const int SoldierLevelExperience = 1000; // Experience for level 1->2
+        public const int    MaxItemLevel = 5;
+        public const int    SoldierLevelExperience = 1000; // Experience for level 1->2
         public const double SoldierLevelExponent = 2.0;  // Each level gets this many times further apart
         public const double SoldierLevelScale = 1.5; // Experience scale
-        public const int ItemIDBase = 2000000; // ID of first ItemType
-        public const int NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
+        public const int    ItemIDBase = 2000000; // ID of first ItemType
+        public const int    NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
         public const double BaseEncounterScarcity = 1500.0;  // Base chance for an encounter when travelling (higher = less frequent)
         public const double InterstellarTravelSafetyBonus = 15.0; // Less likely to get intercepted in interstellar space
         public const double BaseInterceptionChance = 40.0; // Base scaling for encountering something during a journey. The higher the more often and the more dangerous.
@@ -184,22 +184,22 @@ namespace SpaceMercs {
         public const double HyperspaceCostScale = 15.0; // Divide the cost of the hyperspace travel by this factor
         public const double HyperspaceCostDistanceExponent = 1.1; // Exponent for distance in Ly when calculating cost. 1 = linear.
         public const double HyperspaceCostHullExponent = 1.2; // Exponent for hull size when calculating cost. 1 = linear.
-        public const int InitialCivilisationSize = 20; // Total population of all civs at the start
+        public const int    InitialCivilisationSize = 20; // Total population of all civs at the start
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
         public const double DailyResearchProb = 0.0015; // Chance of successfully researching a technology, per day, for a nonHuman race.
 
         // Colony stuff
-        public const int MaxColonyMercenaries = 16;  // In a colony
-        public const int MaxColonyMissions = 16;  // In a colony
+        public const int    MaxColonyMercenaries = 16;  // In a colony
+        public const int    MaxColonyMissions = 16;  // In a colony
         public const double TradeRouteColonyGrowthRate = 0.75; // Colonies grow more quickly when system has trade route(s) (modify delay by this amount)
         public const double UnconnectedColonyCostMod = 1.5; // Everything is more expensive (and valuable) in distant systems without trade routes
-        public const int LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
+        public const int    LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
         public const double MercenaryCostBase = 1.1;  // Base for exponential price calculation for a mercenary
         public const double MercenaryCostExponent = 1.4;  // Exponent scale for exponential price calculation for a mercenary
         public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
-        public const int MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
+        public const int    MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double UpgradeCostModifier = 1.2; // To upgrade an item by one level
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item
         public const double ColonySeedRate = 5.0; // Affects the speed at which new colonies are created in populated systems.
@@ -217,7 +217,7 @@ namespace SpaceMercs {
 
         // Time stuff / global clock
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
-        public static DateTime dtTime = Const.dtStart;
+        public static DateTime dtTime = Const.dtStart;      // ****##  The global clock  ##****
         public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
 
         // Mission level generation settings

@@ -258,7 +258,7 @@ namespace SpaceMercs {
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double hmod = Attack * Const.SoldierAttackDamageScale; // 10% damage bonus per attack point (includes weapon skill etc.)
+                double hmod = Attack * Const.SoldierAttackDamageScale; // Increasing damage bonus per attack point (includes weapon skill etc.)
                 double dam = 0.0;
                 for (int n = 0; n < nhits; n++) {
                     dam += EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
@@ -880,8 +880,9 @@ namespace SpaceMercs {
             CalculateMaxStats();
         }
         public void DropAll(IItem it) {
-            while (Inventory.Contains(it)) { 
+            while (Inventory.Contains(it)) {
                 if (PlayerTeam?.AddItem(it) == 0) Inventory.Remove(it);
+                else break;
             }
             CalculateMaxStats();
         }
