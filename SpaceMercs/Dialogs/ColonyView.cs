@@ -21,6 +21,20 @@ namespace SpaceMercs.Dialogs {
                 Count = c;
             }
         }
+        class SaleItemEqualityComparer : IEqualityComparer<SaleItem> {
+            public bool Equals(SaleItem? b1, SaleItem? b2) {
+                if (ReferenceEquals(b1, b2)) return true;
+
+                if (b2 is null || b1 is null) return false;
+
+                return b1.Item == b2.Item
+                    && b1.Soldier == b2.Soldier
+                    && b1.Equipped == b2.Equipped;
+            }
+            public int GetHashCode(SaleItem si) {
+                return HashCode.Combine(si.Item, si.Soldier, si.Equipped);
+            }
+        }
 
         public ColonyView(Team t, Func<Mission, bool> _StartMission) {
             PlayerTeam = t;
@@ -169,8 +183,8 @@ namespace SpaceMercs.Dialogs {
         }
         private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
             HashSet<SaleItem> hsLast;
-            if (tpLast == null) hsLast = new HashSet<SaleItem>();
-            else hsLast = new HashSet<SaleItem>(tpLast);
+            if (tpLast == null) hsLast = new HashSet<SaleItem>(new SaleItemEqualityComparer());
+            else hsLast = new HashSet<SaleItem>(tpLast, new SaleItemEqualityComparer());
             string strType = cbUpgradeItemType.SelectedItem.ToString() ?? throw new Exception("Could not identify selected item string");
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
             int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
@@ -441,8 +455,9 @@ namespace SpaceMercs.Dialogs {
                 TotalValue += SalePrice;
                 nitem += (bAll ? tp.Count : 1);
             }
-            if (tpSelected.Count == 0 || tpSelected[0].Item is null)
+            if (tpSelected.Count == 0 || tpSelected[0].Item is null) {
                 if (nitem > 1 || TotalValue > 10.0) bQuery = true;
+            }
             // Do we neeed to ask if the player is sure?
             if (bQuery) {
                 if (nitem == 1) {

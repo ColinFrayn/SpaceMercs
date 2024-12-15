@@ -61,7 +61,7 @@
     <Size>M</Size>
     <Cost>250</Cost>
     <Power>8</Power>
-    <Repair/>
+    <Repair>1</Repair>
     <Desc>An auto repair facility, that will repair your ship slowly over time</Desc>
     <Avail>EMR</Avail>
     <Tex>6,2</Tex>

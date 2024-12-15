@@ -797,11 +797,6 @@ namespace SpaceMercs {
         public double CalculateRepairCost() {
             double Value = Type.Cost; // Value of the base ship
 
-            // Add in salvage value of all equipment/rooms
-            foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
-                Value += CostToBuildEquipment(tp.Item1) * Const.ShipEquipmentRepairFract;  // Most damage will be the hull
-            }
-
             // Take damage into account
             Value *= HullFract * Const.ShipRepairCostScale;
 

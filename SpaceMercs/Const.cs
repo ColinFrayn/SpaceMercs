@@ -8,16 +8,16 @@ namespace SpaceMercs {
 
         // ---=== DEBUG MODE SETTINGS ===---
         public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Modification factor for encounter frequency. (multiplier, default = 1, <=0 turns off all encounters)
-        public const bool DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
-        public const bool DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
-        public const bool DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
-        public const bool DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
-        public const bool DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
-        public const bool DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
-        public const bool DEBUG_MAP_CREATION = false; // Write out to disk intermediate map creation stages
-        public const int  DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
-        public const int  DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
-        public const int  DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
+        public const bool  DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
+        public const bool  DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
+        public const bool  DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
+        public const bool  DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
+        public const bool  DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
+        public const bool  DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
+        public const bool  DEBUG_MAP_CREATION = false; // Write out to disk intermediate map creation stages
+        public const int   DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier
+        public const int   DEBUG_EXPERIENCE_MOD = 1;  // Experience accrual multiplier
+        public const int   DEBUG_ADDITIONAL_STARTING_CASH = 0; // More cash at the start
 
         // Character settings
         public const int    SpareAttributePoints = 0; // Starting pot of skill points
@@ -261,7 +261,6 @@ namespace SpaceMercs {
         public const int StarfieldSize = 2000;
         public const double SalvageScale = 0.5; // Times area of the object
         public const double SalvageRate = 0.25; // Purchase price from vendors as a fraction of the sale price
-        public const double ShipEquipmentRepairFract = 0.4; // Ship equipment contributes thiss fraction of its value to repair cost
         public const double ShipRepairCostScale = 0.6;  // Fraction of calculated value required to repair 100%
         public const double HullUpgradeCost = 15.0;  // Divide MaxHull by this for scale factor
         public const double ShipRelativeStrengthScale = 1.8; // If attacking ship is this many times weaker than defending ship then don't even bother...
