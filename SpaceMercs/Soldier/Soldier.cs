@@ -1124,9 +1124,11 @@ namespace SpaceMercs {
         }
         private bool AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             HasMoved = true;
-            int nhits = 0, nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            int nhits = 0;
+            int nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
             for (int n = 0; n < nshots; n++) {                
-                double hit = Utils.GenerateHitRoll(this, targetEntity);
+                double hit = Utils.GenerateHitRoll(this, targetEntity) - (n * recoil);  // Subsequent shots are harder to hit
                 if (hit > 0.0) nhits++;
             }
             if (nhits == 0) {

@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>28/10/2200 16:25:07</Clock>
+<Clock>24/06/2203 16:49:45</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -52,8 +52,8 @@
 <PRot>87770737</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>694022901120428386</LastGrowth>
- <NextGrowth>694651029120428386</NextGrowth>
+ <LastGrowth>694651029120428386</LastGrowth>
+ <NextGrowth>695167701120428386</NextGrowth>
 </Colony>
 <Radius>6097833</Radius>
 <ARot>78260</ARot>
@@ -117,8 +117,8 @@
 <PRot>4283696</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693392762165618386</LastGrowth>
- <NextGrowth>694364762165618386</NextGrowth>
+ <LastGrowth>694364762165618386</LastGrowth>
+ <NextGrowth>695456858165618386</NextGrowth>
 </Colony>
 <Radius>60268409</Radius>
 <ARot>834585</ARot>
@@ -191,8 +191,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693451740545618386</LastGrowth>
- <NextGrowth>694784892545618386</NextGrowth>
+ <LastGrowth>694784892545618386</LastGrowth>
+ <NextGrowth>696235548545618386</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -218,8 +218,8 @@
 <PRot>16004691</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>692113423932770000</LastGrowth>
- <NextGrowth>694278607932770000</NextGrowth>
+ <LastGrowth>694278607932770000</LastGrowth>
+ <NextGrowth>695973775932770000</NextGrowth>
 </Colony>
 <Radius>4739102</Radius>
 <ARot>72909</ARot>
@@ -234,8 +234,8 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>692531424000000000</LastGrowth>
- <NextGrowth>694835712000000000</NextGrowth>
+ <LastGrowth>694835712000000000</LastGrowth>
+ <NextGrowth>696938688000000000</NextGrowth>
 </Colony>
 <Radius>4661595</Radius>
 <ARot>67446</ARot>
@@ -267,8 +267,8 @@
 <PRot>14483882</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693683164119391823</LastGrowth>
- <NextGrowth>694333756119391823</NextGrowth>
+ <LastGrowth>694823644119391823</LastGrowth>
+ <NextGrowth>695403388119391823</NextGrowth>
 </Colony>
 <Radius>83892794</Radius>
 <ARot>1142686</ARot>
@@ -294,8 +294,8 @@
 <PRot>55850854</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>692316033914340625</LastGrowth>
- <NextGrowth>694552065914340625</NextGrowth>
+ <LastGrowth>694552065914340625</LastGrowth>
+ <NextGrowth>696697377914340625</NextGrowth>
 </Colony>
 <Radius>7582084</Radius>
 <ARot>129146</ARot>
@@ -343,7 +343,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>686225952000000000</LastGrowth>
  <NextGrowth>1550225952000000000</NextGrowth>
- <SeedProgress>98.3374</SeedProgress>
+ <SeedProgress>182.4833</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6742146</Radius>
@@ -426,8 +426,8 @@
 <PRot>19771537</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693359337615241152</LastGrowth>
- <NextGrowth>694903305615241152</NextGrowth>
+ <LastGrowth>694903305615241152</LastGrowth>
+ <NextGrowth>696227817615241152</NextGrowth>
 </Colony>
 <Radius>5162175</Radius>
 <ARot>70067</ARot>
@@ -492,8 +492,8 @@
 <PRot>22890001</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693138895727084320</LastGrowth>
- <NextGrowth>694258639727084320</NextGrowth>
+ <LastGrowth>694258639727084320</LastGrowth>
+ <NextGrowth>695565871727084320</NextGrowth>
 </Colony>
 <Radius>40789455</Radius>
 <ARot>534712</ARot>
@@ -509,6 +509,13 @@
  <NextGrowth>695098841319391823</NextGrowth>
 </Colony>
 </Moon>
+<Moon ID="4">
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>694673962403638434</LastGrowth>
+ <NextGrowth>695296042403638434</NextGrowth>
+</Colony>
+</Moon>
 </Moons>
 </Planet>
 <Planet ID="3">
@@ -519,7 +526,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>693912960000000000</LastGrowth>
  <NextGrowth>697411296000000000</NextGrowth>
- <SeedProgress>196.5304</SeedProgress>
+ <SeedProgress>18.5661</SeedProgress>
 </Colony>
 <Radius>80535240</Radius>
 <ARot>1071644</ARot>
@@ -542,8 +549,8 @@
 <PRot>13177322</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <LastGrowth>693365858080597136</LastGrowth>
- <NextGrowth>694701602080597136</NextGrowth>
+ <LastGrowth>694701602080597136</LastGrowth>
+ <NextGrowth>696289634080597136</NextGrowth>
 </Colony>
 <Radius>55948178</Radius>
 <ARot>637272</ARot>
@@ -568,8 +575,8 @@
 <PRot>142172582</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>694169879747084320</LastGrowth>
- <NextGrowth>694823063747084320</NextGrowth>
+ <LastGrowth>694823063747084320</LastGrowth>
+ <NextGrowth>695470199747084320</NextGrowth>
 </Colony>
 <Radius>4538210</Radius>
 <ARot>74859</ARot>
@@ -681,8 +688,8 @@
 <PRot>85762243</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>694124612199391823</LastGrowth>
- <NextGrowth>694770884199391823</NextGrowth>
+ <LastGrowth>694770884199391823</LastGrowth>
+ <NextGrowth>695442212199391823</NextGrowth>
 </Colony>
 <Radius>7218842</Radius>
 <ARot>105283</ARot>
@@ -697,9 +704,9 @@
 <Colony>
  <BaseType>11</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>690036192000000000</LastGrowth>
- <NextGrowth>694608480000000000</NextGrowth>
- <SeedProgress>136.0782</SeedProgress>
+ <LastGrowth>694608480000000000</LastGrowth>
+ <NextGrowth>698040288000000000</NextGrowth>
+ <SeedProgress>178.3833</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -765,8 +772,8 @@
 <Colony>
  <BaseType>5</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>687470112000000000</LastGrowth>
- <NextGrowth>694509120000000000</NextGrowth>
+ <LastGrowth>694509120000000000</LastGrowth>
+ <NextGrowth>697383648000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -787,8 +794,8 @@
 <PRot>179546978</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>693714531159391823</LastGrowth>
- <NextGrowth>694324515159391823</NextGrowth>
+ <LastGrowth>694324515159391823</LastGrowth>
+ <NextGrowth>695045091159391823</NextGrowth>
 </Colony>
 <Radius>4240829</Radius>
 <ARot>58203</ARot>
@@ -812,8 +819,8 @@
 <PRot>9931887</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>691535218465589999</LastGrowth>
- <NextGrowth>694215346465589999</NextGrowth>
+ <LastGrowth>694215346465589999</LastGrowth>
+ <NextGrowth>696250066465589999</NextGrowth>
 </Colony>
 <Radius>56414570</Radius>
 <ARot>637504</ARot>
@@ -845,8 +852,8 @@
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>692762978572900000</LastUpdate>
- <LastGrowth>693916417853350000</LastGrowth>
- <NextGrowth>694270657853350000</NextGrowth>
+ <LastGrowth>694649953853350000</LastGrowth>
+ <NextGrowth>695042209853350000</NextGrowth>
 </Colony>
 <Name>Foray Base</Name>
 <Radius>5786577</Radius>
@@ -877,8 +884,8 @@
 <PRot>20018027</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>694121140629431823</LastGrowth>
- <NextGrowth>694711252629431823</NextGrowth>
+ <LastGrowth>694711252629431823</LastGrowth>
+ <NextGrowth>695244340629431823</NextGrowth>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -931,7 +938,7 @@
  <BaseType>63</BaseType>
  <Owner>Ursalon</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>131.6307</SeedProgress>
+ <SeedProgress>16.2363</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6516259</Radius>
@@ -945,16 +952,16 @@
 <Moon ID="0">
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>693759605649086250</LastGrowth>
- <NextGrowth>694771349649086250</NextGrowth>
+ <LastGrowth>694771349649086250</LastGrowth>
+ <NextGrowth>695917877649086250</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="1">
 <Colony>
  <BaseType>5</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>687537504000000000</LastGrowth>
- <NextGrowth>694272384000000000</NextGrowth>
+ <LastGrowth>694272384000000000</LastGrowth>
+ <NextGrowth>696087648000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -978,8 +985,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>692172315669431823</LastGrowth>
- <NextGrowth>694315899669431823</NextGrowth>
+ <LastGrowth>694315899669431823</LastGrowth>
+ <NextGrowth>697314843669431823</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -989,8 +996,8 @@
 <PRot>40417054</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>693274812140428386</LastGrowth>
- <NextGrowth>694567356140428386</NextGrowth>
+ <LastGrowth>694567356140428386</LastGrowth>
+ <NextGrowth>696119100140428386</NextGrowth>
 </Colony>
 <Radius>6866396</Radius>
 <ARot>100968</ARot>
@@ -1002,6 +1009,11 @@
 <Planet ID="4">
 <Type>Rocky</Type>
 <PRot>34982440</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>694876181603638434</LastGrowth>
+ <NextGrowth>697072469603638434</NextGrowth>
+</Colony>
 <Radius>4805755</Radius>
 <ARot>64836</ARot>
 <Temp>164</Temp>
@@ -1037,8 +1049,8 @@
 <PRot>4069071</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>693771830438860000</LastGrowth>
- <NextGrowth>694370582438860000</NextGrowth>
+ <LastGrowth>694939958438860000</LastGrowth>
+ <NextGrowth>695495510438860000</NextGrowth>
 </Colony>
 <Radius>79754297</Radius>
 <ARot>1079121</ARot>
@@ -1092,8 +1104,8 @@
 <PRot>97108470</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <LastGrowth>693848025669431823</LastGrowth>
- <NextGrowth>694644633669431823</NextGrowth>
+ <LastGrowth>694644633669431823</LastGrowth>
+ <NextGrowth>695397177669431823</NextGrowth>
 </Colony>
 <Radius>5417287</Radius>
 <ARot>68020</ARot>
@@ -1140,6 +1152,26 @@
 <Star ID="1">
 <Seed>1539127</Seed>
  <MapPos X="5.31" Y="-8.87"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="3355843" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>85921985</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>694625751203638434</LastGrowth>
+ <NextGrowth>696037527203638434</NextGrowth>
+</Colony>
+<Radius>6628268</Radius>
+<ARot>96629</ARot>
+<Temp>230</Temp>
+<Seed>982211</Seed>
+<Orbit>50658397573</Orbit>
+<TempBase>230.24943087618254</TempBase>
+</Planet>
+<Planet Seed="2683907" />
+ </Planets>
 </Star>
 <Star ID="2">
 <Seed>154212</Seed>
@@ -1244,8 +1276,8 @@
 <PRot>23817716</PRot>
 <Colony>
  <Owner>Gokan</Owner>
- <LastGrowth>693341578798118698</LastGrowth>
- <NextGrowth>694522666798118698</NextGrowth>
+ <LastGrowth>694522666798118698</LastGrowth>
+ <NextGrowth>695713258798118698</NextGrowth>
 </Colony>
 <Radius>66893259</Radius>
 <ARot>931137</ARot>
@@ -1330,8 +1362,8 @@
 <PRot>109142678</PRot>
 <Colony>
  <Owner>Gokan</Owner>
- <LastGrowth>693563040000000000</LastGrowth>
- <NextGrowth>694449504000000000</NextGrowth>
+ <LastGrowth>694449504000000000</LastGrowth>
+ <NextGrowth>695458656000000000</NextGrowth>
 </Colony>
 <Radius>6312586</Radius>
 <ARot>92520</ARot>
@@ -1347,8 +1379,8 @@
 <Colony>
  <BaseType>5</BaseType>
  <Owner>Gokan</Owner>
- <LastGrowth>687998989700184687</LastGrowth>
- <NextGrowth>694297549700184687</NextGrowth>
+ <LastGrowth>694297549700184687</LastGrowth>
+ <NextGrowth>696972493700184687</NextGrowth>
 </Colony>
 <Radius>6357345</Radius>
 <ARot>95386</ARot>
@@ -1391,7 +1423,7 @@
  <BaseType>63</BaseType>
  <Owner>Gokan</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>94.7075</SeedProgress>
+ <SeedProgress>191.5051</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5420964</Radius>
@@ -1427,7 +1459,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>689205024000000000</LastGrowth>
  <NextGrowth>699592032000000000</NextGrowth>
- <SeedProgress>163.2331</SeedProgress>
+ <SeedProgress>191.5638</SeedProgress>
 </Colony>
 <Radius>5381628</Radius>
 <ARot>97560</ARot>
@@ -1454,8 +1486,8 @@
 <Moon ID="0">
 <Colony>
  <Owner>Gokan</Owner>
- <LastGrowth>690994140480428386</LastGrowth>
- <NextGrowth>694431996480428386</NextGrowth>
+ <LastGrowth>694431996480428386</LastGrowth>
+ <NextGrowth>698081532480428386</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="1">
@@ -1497,8 +1529,8 @@
 <Moon ID="0">
 <Colony>
  <Owner>Gokan</Owner>
- <LastGrowth>694039104000000000</LastGrowth>
- <NextGrowth>694706976000000000</NextGrowth>
+ <LastGrowth>694706976000000000</LastGrowth>
+ <NextGrowth>695265120000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1509,8 +1541,8 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Gokan</Owner>
- <LastGrowth>692056333700184687</LastGrowth>
- <NextGrowth>694987885700184687</NextGrowth>
+ <LastGrowth>694987885700184687</LastGrowth>
+ <NextGrowth>697588525700184687</NextGrowth>
 </Colony>
 <Radius>5392147</Radius>
 <ARot>72419</ARot>
@@ -1676,8 +1708,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>694042437739391823</LastGrowth>
- <NextGrowth>694607493739391823</NextGrowth>
+ <LastGrowth>694607493739391823</LastGrowth>
+ <NextGrowth>695290917739391823</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1689,7 +1721,7 @@
  <BaseType>63</BaseType>
  <Owner>Grey</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>183.4253</SeedProgress>
+ <SeedProgress>186.2727</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7076271</Radius>
@@ -1720,15 +1752,15 @@
 <Colony>
  <BaseType>13</BaseType>
  <Owner>Grey</Owner>
- <LastGrowth>686014272000000000</LastGrowth>
- <NextGrowth>694815840000000000</NextGrowth>
+ <LastGrowth>694815840000000000</LastGrowth>
+ <NextGrowth>702206496000000000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="3">
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>693735530767198386</LastGrowth>
- <NextGrowth>694744682767198386</NextGrowth>
+ <LastGrowth>694744682767198386</LastGrowth>
+ <NextGrowth>695953418767198386</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1793,8 +1825,8 @@
 <Moon ID="0">
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>693768599745618386</LastGrowth>
- <NextGrowth>694695671745618386</NextGrowth>
+ <LastGrowth>694695671745618386</LastGrowth>
+ <NextGrowth>695878487745618386</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1808,7 +1840,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>689083200000000000</LastGrowth>
  <NextGrowth>697303296000000000</NextGrowth>
- <SeedProgress>118.2616</SeedProgress>
+ <SeedProgress>159.8235</SeedProgress>
 </Colony>
 <Radius>47963365</Radius>
 <ARot>689592</ARot>
@@ -1827,8 +1859,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>694076873946890000</LastGrowth>
- <NextGrowth>694958153946890000</NextGrowth>
+ <LastGrowth>694958153946890000</LastGrowth>
+ <NextGrowth>695894729946890000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
@@ -1857,8 +1889,8 @@
 <PRot>69348395</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>693850159750210000</LastGrowth>
- <NextGrowth>694835119750210000</NextGrowth>
+ <LastGrowth>694835119750210000</LastGrowth>
+ <NextGrowth>695738863750210000</NextGrowth>
 </Colony>
 <Radius>7428221</Radius>
 <ARot>110193</ARot>
@@ -1899,8 +1931,8 @@
 <Moon ID="3">
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>693802718225618386</LastGrowth>
- <NextGrowth>694518974225618386</NextGrowth>
+ <LastGrowth>694518974225618386</LastGrowth>
+ <NextGrowth>695183390225618386</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1913,7 +1945,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>688789440000000000</LastGrowth>
  <NextGrowth>695500128000000000</NextGrowth>
- <SeedProgress>128.2242</SeedProgress>
+ <SeedProgress>169.7861</SeedProgress>
 </Colony>
 <Radius>5267214</Radius>
 <ARot>85347</ARot>
@@ -1937,8 +1969,8 @@
 <PRot>11298518</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>693806767727084320</LastGrowth>
- <NextGrowth>694537711727084320</NextGrowth>
+ <LastGrowth>694537711727084320</LastGrowth>
+ <NextGrowth>695328271727084320</NextGrowth>
 </Colony>
 <Radius>78233008</Radius>
 <ARot>1298262</ARot>
@@ -1961,8 +1993,8 @@
 <PRot>27697162</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>694046989700184687</LastGrowth>
- <NextGrowth>694841869700184687</NextGrowth>
+ <LastGrowth>694841869700184687</LastGrowth>
+ <NextGrowth>695697229700184687</NextGrowth>
 </Colony>
 <Radius>7194809</Radius>
 <ARot>109270</ARot>
@@ -1976,8 +2008,8 @@
 <PRot>16823764</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <LastGrowth>692755786798118698</LastGrowth>
- <NextGrowth>694882090798118698</NextGrowth>
+ <LastGrowth>694882090798118698</LastGrowth>
+ <NextGrowth>696541834798118698</NextGrowth>
 </Colony>
 <Radius>7531002</Radius>
 <ARot>111506</ARot>
@@ -2007,8 +2039,8 @@
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>686917574876800000</LastUpdate>
- <LastGrowth>693999535932770000</LastGrowth>
- <NextGrowth>694479919932770000</NextGrowth>
+ <LastGrowth>694886863932770000</LastGrowth>
+ <NextGrowth>695299855932770000</NextGrowth>
 </Colony>
 <Name>New Home</Name>
 <Radius>4758574</Radius>
@@ -2067,9 +2099,9 @@
 <Colony>
  <BaseType>29</BaseType>
  <Owner>Human</Owner>
- <LastGrowth>678722976000000000</LastGrowth>
- <NextGrowth>694942848000000000</NextGrowth>
- <SeedProgress>131.4206</SeedProgress>
+ <LastGrowth>694942848000000000</LastGrowth>
+ <NextGrowth>704708640000000000</NextGrowth>
+ <SeedProgress>177.9805</SeedProgress>
 </Colony>
 <Radius>48376722</Radius>
 <ARot>713242</ARot>
@@ -2123,8 +2155,8 @@
 <PRot>94227651</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>693154977914340625</LastGrowth>
- <NextGrowth>694215969914340625</NextGrowth>
+ <LastGrowth>694215969914340625</LastGrowth>
+ <NextGrowth>695311521914340625</NextGrowth>
 </Colony>
 <Radius>7725745</Radius>
 <ARot>122807</ARot>
@@ -2154,8 +2186,8 @@
 <PRot>18539503</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>693712591727084320</LastGrowth>
- <NextGrowth>694491919727084320</NextGrowth>
+ <LastGrowth>694491919727084320</LastGrowth>
+ <NextGrowth>695178799727084320</NextGrowth>
 </Colony>
 <Radius>60444711</Radius>
 <ARot>918919</ARot>
@@ -2173,7 +2205,7 @@
  <LastUpdate>684730542109803125</LastUpdate>
  <LastGrowth>687908160000000000</LastGrowth>
  <NextGrowth>695938176000000000</NextGrowth>
- <SeedProgress>96.2583</SeedProgress>
+ <SeedProgress>131.1782</SeedProgress>
 </Colony>
 <Radius>62599700</Radius>
 <ARot>820912</ARot>
@@ -2199,8 +2231,8 @@
  <Scanned/>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>694159566857198386</LastGrowth>
- <NextGrowth>694661550857198386</NextGrowth>
+ <LastGrowth>694661550857198386</LastGrowth>
+ <NextGrowth>695038254857198386</NextGrowth>
 </Colony>
 <Radius>5412137</Radius>
 <ARot>95555</ARot>
@@ -2212,8 +2244,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>694065860199391823</LastGrowth>
- <NextGrowth>694732868199391823</NextGrowth>
+ <LastGrowth>694732868199391823</LastGrowth>
+ <NextGrowth>695383460199391823</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -2239,1229 +2271,7 @@
  <Owner>Human</Owner>
  <LastUpdate>694196906880488386</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>181.2756</SeedProgress>
- <Mercenaries>
-<Soldier Name="Jack Xanthos">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>7,16,10,17,13</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Shortblade" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Melee">24</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Bladesmith">1</Exp>
-  <Exp Skill="Avoidance">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Luke Harris">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>10,18,14,10,11</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Shotgun" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Shotgun">26</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Armoursmith">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Lily Underhill">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Female</Gender>
- <Race>Human</Race>
- <Stats>11,15,11,12,16</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Medikit"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Pistol" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Pistol">19</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Scavenging">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Evan Zhang">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>11,10,13,13,13</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Adrenaline"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
-<Armour Type="Plate Boots" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Shortblade" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Melee">17</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Bladesmith">1</Exp>
-  <Exp Skill="Avoidance">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Charlotte Ireland">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Female</Gender>
- <Race>Human</Race>
- <Stats>8,11,17,12,14</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Incendiary Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Pistol" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Pistol">25</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Armoursmith">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Delilah Underhill">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Female</Gender>
- <Race>Human</Race>
- <Stats>13,10,13,12,12</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Pistol" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Pistol">19</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Avoidance">1</Exp>
- </UtilityExperience>
-</Soldier>
-<Soldier Name="Xander Jackson">
- <Level>1</Level>
- <XP>0</XP>
- <Gender>Male</Gender>
- <Race>Human</Race>
- <Stats>12,12,10,16,13</Stats>
- <Colour>Blue</Colour>
- <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
- </Inventory>
- <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
-<Armour Type="Plate Boots" Material="Steel" Level="0"/>
- </EquippedArmour>
- <EquippedWeapon>
-<Weapon Type="Pistol" Level="0" />
- </EquippedWeapon>
- <WeaponExperience>
-  <Exp Type="Pistol">18</Exp>
- </WeaponExperience>
- <UtilityExperience>
-  <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Avoidance">1</Exp>
- </UtilityExperience>
-</Soldier>
- </Mercenaries>
- <Missions>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Slime Creatures</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>10.74</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1203823348</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>7.376000000000001</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1388876184</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>ExploreAll</Goal>
- <Enemy>Slime Creatures</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>6.4959999999999996</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>951911200</Seed>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>ExploreAll</Goal>
- <Enemy>Bugs</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>7.88</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1841559051</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>ExploreAll</Goal>
- <Enemy>Bugs</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>6.728000000000001</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>505921365</Seed>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>7.95</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>125914003</Seed>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00">large structure</MissionItem>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>8.93</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>2029373613</Seed>
- <Waves>5</Waves>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="496019841" Diff="1">
- <Name>Enemy Ship</Name>
- <Hull>13</Hull>
- <Shield>0</Shield>
- <Seed>521740</Seed>
- <Eqp ID="5" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="2" Active="True">Cabin</Eqp>
- <Eqp ID="4" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>7.68</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>2082149074</Seed>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="402747361" Diff="1">
- <Name>Enemy Ship</Name>
- <Hull>15</Hull>
- <Shield>0</Shield>
- <Seed>982761</Seed>
- <Eqp ID="5" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="4" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>9.55</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1946161615</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>7.95</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>605613102</Seed>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Slime Creatures</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>9.35</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1034286169</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>KillAll</Goal>
- <Enemy>Triffids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>8.65</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>246488451</Seed>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>8.02</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>28603368</Seed>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="0.90" Cost="4.19">Ornate Geode</MissionItem>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1820945567</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Bugs</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>10.64</Reward>
- <Diff>1</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1183774182</Seed>
- <Size>2</Size>
-</Mission>
- </Missions>
- <Inventory>
-  <Inv Count="104">
-<Equipment Type="Medikit"/>
-  </Inv>
-  <Inv Count="64">
-<Equipment Type="Medsystem"/>
-  </Inv>
-  <Inv Count="250">
-<Equipment Type="Adrenaline"/>
-  </Inv>
-  <Inv Count="75">
-<Equipment Type="Stimulant"/>
-  </Inv>
-  <Inv Count="638">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
-  <Inv Count="220">
-<Equipment Type="Incendiary Grenade"/>
-  </Inv>
-  <Inv Count="240">
-<Weapon Type="Shotgun" Level="0" />
-  </Inv>
-  <Inv Count="27">
-<Weapon Type="Shotgun" Level="1" />
-  </Inv>
-  <Inv Count="5">
-<Weapon Type="Shotgun" Level="2" />
-  </Inv>
-  <Inv Count="54">
-<Weapon Type="Quad Shotgun" Level="0" />
-  </Inv>
-  <Inv Count="51">
-<Weapon Type="Quad Shotgun" Level="1" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Quad Shotgun" Level="2" />
-  </Inv>
-  <Inv Count="214">
-<Weapon Type="Pistol" Level="0" />
-  </Inv>
-  <Inv Count="46">
-<Weapon Type="Pistol" Level="1" />
-  </Inv>
-  <Inv Count="33">
-<Weapon Type="Pistol" Level="2" />
-  </Inv>
-  <Inv Count="7">
-<Weapon Type="Pistol" Level="3" />
-  </Inv>
-  <Inv Count="161">
-<Weapon Type="Automatic Rifle" Level="0" />
-  </Inv>
-  <Inv Count="64">
-<Weapon Type="Automatic Rifle" Level="1" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Automatic Rifle" Level="2" />
-  </Inv>
-  <Inv Count="2">
-<Weapon Type="Automatic Rifle" Level="3" />
-  </Inv>
-  <Inv Count="28">
-<Weapon Type="Heavy Rifle" Level="0" />
-  </Inv>
-  <Inv Count="13">
-<Weapon Type="Heavy Rifle" Level="1" />
-  </Inv>
-  <Inv Count="5">
-<Weapon Type="Heavy Rifle" Level="2" />
-  </Inv>
-  <Inv Count="36">
-<Weapon Type="Laser Rifle" Level="0" />
-  </Inv>
-  <Inv Count="86">
-<Weapon Type="Laser Rifle" Level="1" />
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Laser Rifle" Level="3" />
-  </Inv>
-  <Inv Count="169">
-<Weapon Type="Laser Pistol" Level="0" />
-  </Inv>
-  <Inv Count="8">
-<Weapon Type="Laser Pistol" Level="1" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Laser Pistol" Level="2" />
-  </Inv>
-  <Inv Count="12">
-<Weapon Type="Flame Thrower" Level="0" />
-  </Inv>
-  <Inv Count="23">
-<Weapon Type="Flame Thrower" Level="1" />
-  </Inv>
-  <Inv Count="3">
-<Weapon Type="Flame Thrower" Level="2" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Flame Thrower" Level="3" />
-  </Inv>
-  <Inv Count="14">
-<Weapon Type="Grenade Launcher" Level="0" />
-  </Inv>
-  <Inv Count="28">
-<Weapon Type="Grenade Launcher" Level="1" />
-  </Inv>
-  <Inv Count="7">
-<Weapon Type="Grenade Launcher" Level="2" />
-  </Inv>
-  <Inv Count="68">
-<Weapon Type="Sniper Rifle" Level="0" />
-  </Inv>
-  <Inv Count="9">
-<Weapon Type="Sniper Rifle" Level="1" />
-  </Inv>
-  <Inv Count="15">
-<Weapon Type="Sniper Rifle" Level="2" />
-  </Inv>
-  <Inv Count="13">
-<Weapon Type="Laser Sniper Rifle" Level="0" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Laser Sniper Rifle" Level="1" />
-  </Inv>
-  <Inv Count="3">
-<Weapon Type="Laser Sniper Rifle" Level="2" />
-  </Inv>
-  <Inv Count="619">
-<Weapon Type="Shortblade" Level="0" />
-  </Inv>
-  <Inv Count="14">
-<Weapon Type="Shortblade" Level="1" />
-  </Inv>
-  <Inv Count="4">
-<Weapon Type="Shortblade" Level="2" />
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Shortblade" Level="3" />
-  </Inv>
-  <Inv Count="38">
-<Weapon Type="Powerblade" Level="0" />
-  </Inv>
-  <Inv Count="2">
-<Weapon Type="Powerblade" Level="1" />
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Powerblade" Level="3" />
-  </Inv>
-  <Inv Count="168">
-<Weapon Type="Axe" Level="0" />
-  </Inv>
-  <Inv Count="9">
-<Weapon Type="Axe" Level="1" />
-  </Inv>
-  <Inv Count="3">
-<Weapon Type="Axe" Level="2" />
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Axe" Level="3" />
-  </Inv>
-  <Inv Count="15">
-<Weapon Type="Power Axe" Level="0" />
-  </Inv>
-  <Inv Count="9">
-<Weapon Type="Power Axe" Level="1" />
-  </Inv>
-  <Inv Count="18">
-<Weapon Type="Chainsword" Level="0" />
-  </Inv>
-  <Inv Count="26">
-<Weapon Type="Chainsword" Level="1" />
-  </Inv>
-  <Inv Count="6">
-<Weapon Type="Chainsword" Level="2" />
-  </Inv>
-  <Inv Count="5">
-<Weapon Type="Chainsword" Level="3" />
-  </Inv>
-  <Inv Count="206">
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="19">
-<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="32">
-<Armour Type="Cap" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="310">
-<Armour Type="Cap" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="20">
-<Armour Type="Cap" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="257">
-<Armour Type="Cap" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Cap" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="15">
-<Armour Type="Cap" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="3"/>
-  </Inv>
-  <Inv Count="48">
-<Armour Type="Cap" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="40">
-<Armour Type="Cap" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="13">
-<Armour Type="Cap" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Cap" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Metasteel" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Metasteel" Level="3"/>
-  </Inv>
-  <Inv Count="527">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="73">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="21">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="82">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="14">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Helmet" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="32">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="30">
-<Armour Type="Helmet" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="30">
-<Armour Type="Helmet" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="14">
-<Armour Type="Helmet" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Helmet" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Helmet" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="126">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="16">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="3"/>
-  </Inv>
-  <Inv Count="31">
-<Armour Type="Military Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Military Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="16">
-<Armour Type="Military Helmet" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="41">
-<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="11">
-<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="60">
-<Armour Type="Military Helmet" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Military Helmet" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Military Helmet" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Military Helmet" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Military Helmet" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="38">
-<Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Carbon Fibre" Level="3"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Stealth Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="12">
-<Armour Type="Stealth Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Stealth Helmet" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Helmet" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="16">
-<Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Infiltrator Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="14">
-<Armour Type="Infiltrator Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="20">
-<Armour Type="Infiltrator Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Infiltrator Helmet" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="12">
-<Armour Type="Infiltrator Helmet" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Infiltrator Helmet" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Infiltrator Helmet" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="30">
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="10">
-<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="67">
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="24">
-<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Chestplate" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Chestplate" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Chestplate" Material="Kevlar" Level="3"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Chestplate" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="13">
-<Armour Type="Chestplate" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Chestplate" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Chestplate" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="118">
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="8">
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Arm Plating" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="47">
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Arm Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Arm Plating" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="48">
-<Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Arm Plating" Material="Kevlar" Level="3"/>
-  </Inv>
-  <Inv Count="23">
-<Armour Type="Arm Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="23">
-<Armour Type="Arm Plating" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Arm Plating" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="14">
-<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="20">
-<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Powered Arm Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Arm Plating" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Powered Arm Plating" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Powered Arm Plating" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Powered Arm Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Powered Arm Plating" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Powered Arm Plating" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="17">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="21">
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Leg Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Leg Plating" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="15">
-<Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Leg Plating" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Leg Plating" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="11">
-<Armour Type="Leg Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Leg Plating" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Leg Plating" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="10">
-<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="29">
-<Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="15">
-<Armour Type="Powered Leg Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="8">
-<Armour Type="Powered Leg Plating" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="8">
-<Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="9">
-<Armour Type="Powered Leg Plating" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Powered Leg Plating" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="20">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="26">
-<Armour Type="Full Armour" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Full Armour" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Full Armour" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Stealth Armour" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="21">
-<Armour Type="Stealth Armour" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Armour" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Armour" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Armour" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="12">
-<Armour Type="Infiltration Suit" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Infiltration Suit" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Infiltration Suit" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Infiltration Suit" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Infiltration Suit" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Infiltration Suit" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="31">
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Plate Boots" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="47">
-<Armour Type="Plate Boots" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Plate Boots" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Plate Boots" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="58">
-<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="23">
-<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Plate Boots" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="17">
-<Armour Type="Plate Boots" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Plate Boots" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="12">
-<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="12">
-<Armour Type="Stealth Boots" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Boots" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="19">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="31">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="161">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="23">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="38">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="26">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="16">
-<Armour Type="Plate Gauntlets" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="89">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="56">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="18">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="3"/>
-  </Inv>
-  <Inv Count="358">
-<Armour Type="Gloves" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="30">
-<Armour Type="Gloves" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="18">
-<Armour Type="Gloves" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="445">
-<Armour Type="Gloves" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="19">
-<Armour Type="Gloves" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Gloves" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="102">
-<Armour Type="Gloves" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Gloves" Material="Composite" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Gloves" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Gloves" Material="Metasteel" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Gloves" Material="Metasteel" Level="2"/>
-  </Inv>
-  <Inv Count="44">
-<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="3"/>
-  </Inv>
-  <Inv Count="20">
-<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Powered Gauntlets" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="23">
-<Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Powered Gauntlets" Material="Kevlar" Level="2"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Powered Gauntlets" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Powered Gauntlets" Material="Composite" Level="2"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Powered Gauntlets" Material="Metasteel" Level="0"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Gauntlets" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="13">
-<Armour Type="Stealth Gauntlets" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Stealth Gauntlets" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Stealth Gauntlets" Material="Steel" Level="3"/>
-  </Inv>
-  <Inv Count="6">
-<Armour Type="Stealth Gauntlets" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Stealth Gauntlets" Material="Composite" Level="0"/>
-  </Inv>
-  <Inv Count="125">
-<Material Type="Carbon Fibre"/>
-  </Inv>
-  <Inv Count="191">
-<Material Type="Steel"/>
-  </Inv>
-  <Inv Count="115">
-<Material Type="Kevlar"/>
-  </Inv>
-  <Inv Count="101">
-<Material Type="Composite"/>
-  </Inv>
-  <Inv Count="4">
-<Material Type="Metasteel"/>
-  </Inv>
-  <Inv Count="7">
-<Material Type="Silicates"/>
-  </Inv>
-  <Inv Count="66">
-<Material Type="Aluminium"/>
-  </Inv>
-  <Inv Count="39">
-<Material Type="Tungsten"/>
-  </Inv>
-  <Inv Count="10">
-<Material Type="Uranium"/>
-  </Inv>
-  <Inv Count="76">
-<Material Type="Water"/>
-  </Inv>
-  <Inv Count="77">
-<Material Type="Carbon"/>
-  </Inv>
-  <Inv Count="76">
-<Material Type="Rare Earth Metals"/>
-  </Inv>
-  <Inv Count="103">
-<Material Type="Electronic Components"/>
-  </Inv>
-  <Inv Count="74">
-<Material Type="Copper"/>
-  </Inv>
-  <Inv Count="180">
-<Material Type="Fabric"/>
-  </Inv>
-  <Inv Count="94">
-<Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="369">
-<Material Type="Rubber"/>
-  </Inv>
-  <Inv Count="4">
-<Material Type="Crystals"/>
-  </Inv>
-  <Inv Count="4">
-<Material Type="Titanium"/>
-  </Inv>
-  <Inv Count="4">
-<Material Type="Industrial Chemicals"/>
-  </Inv>
- </Inventory>
+ <SeedProgress>51.0554</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6259600</Radius>
@@ -3484,8 +2294,8 @@
 <Moon ID="1">
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>693625685649086250</LastGrowth>
- <NextGrowth>694212341649086250</NextGrowth>
+ <LastGrowth>694867253649086250</LastGrowth>
+ <NextGrowth>695538581649086250</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
@@ -3523,6 +2333,13 @@
  <NextGrowth>695078898625618386</NextGrowth>
 </Colony>
 </Moon>
+<Moon ID="3">
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>694442280783638434</LastGrowth>
+ <NextGrowth>696400968783638434</NextGrowth>
+</Colony>
+</Moon>
 </Moons>
 </Planet>
 <Planet ID="2">
@@ -3555,6 +2372,11 @@
  <Seed>848724023</Seed>
 </Mission>
  </Missions>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>695018136803638434</LastGrowth>
+ <NextGrowth>700409496803638434</NextGrowth>
+</Colony>
 </Moon>
 </Moons>
 </Planet>
@@ -3567,7 +2389,7 @@
  <LastUpdate>678169465447230000</LastUpdate>
  <LastGrowth>692517600000000000</LastGrowth>
  <NextGrowth>702206496000000000</NextGrowth>
- <SeedProgress>185.7697</SeedProgress>
+ <SeedProgress>0.6439</SeedProgress>
 </Colony>
 <Name>Home Ice</Name>
 <Radius>7110942</Radius>
@@ -3629,8 +2451,8 @@
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>689669633467884687</LastUpdate>
- <LastGrowth>693296147503891823</LastGrowth>
- <NextGrowth>694632755503891823</NextGrowth>
+ <LastGrowth>694632755503891823</LastGrowth>
+ <NextGrowth>695692019503891823</NextGrowth>
 </Colony>
 <Radius>5725259</Radius>
 <ARot>97071</ARot>
@@ -3660,7 +2482,7 @@
  <LastUpdate>686446420821343437</LastUpdate>
  <LastGrowth>689407200000000000</LastGrowth>
  <NextGrowth>696545568000000000</NextGrowth>
- <SeedProgress>86.2532</SeedProgress>
+ <SeedProgress>121.1710</SeedProgress>
 </Colony>
 <Radius>72436431</Radius>
 <ARot>1140902</ARot>
@@ -3674,8 +2496,8 @@
 <PRot>10887271</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>693210787839391823</LastGrowth>
- <NextGrowth>694282147839391823</NextGrowth>
+ <LastGrowth>694282147839391823</LastGrowth>
+ <NextGrowth>695413987839391823</NextGrowth>
 </Colony>
 <Radius>65368747</Radius>
 <ARot>968771</ARot>
@@ -3707,8 +2529,8 @@
 <PRot>6973280</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>692211560572198386</LastGrowth>
- <NextGrowth>694796648572198386</NextGrowth>
+ <LastGrowth>694796648572198386</LastGrowth>
+ <NextGrowth>698091944572198386</NextGrowth>
 </Colony>
 <Radius>67322534</Radius>
 <ARot>899333</ARot>
@@ -3789,8 +2611,48 @@
  <Visited/></Star>
 <Star ID="10">
 <Seed>8150137</Seed>
+<Name>Left Edge</Name>
  <MapPos X="-4.58" Y="-1.05"/>
-</Star>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>36160784</PRot>
+<Radius>75622623</Radius>
+<ARot>1024677</ARot>
+<Temp>290</Temp>
+<Seed>6841140</Seed>
+<Orbit>35285600606</Orbit>
+<TempBase>290.74422707060097</TempBase>
+<Moons>
+<Moon ID="0">
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Cost="0.00">fascinating structure</MissionItem>
+ <Enemy>Shadow Beasts</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>7</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1430510480</Seed>
+ <Size>2</Size>
+ <Waves>5</Waves>
+</Mission>
+ </Missions>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8386679" />
+<Planet Seed="4073473" />
+<Planet Seed="3751404" />
+<Planet Seed="558826" />
+<Planet Seed="351123" />
+<Planet Seed="2383890" />
+ </Planets>
+ <Visited/></Star>
 <Star ID="11">
 <Seed>1501913</Seed>
 <Name>BigRed</Name>
@@ -3807,8 +2669,8 @@
 <PRot>56343867</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastGrowth>693473435967141823</LastGrowth>
- <NextGrowth>694213019967141823</NextGrowth>
+ <LastGrowth>695019131967141823</LastGrowth>
+ <NextGrowth>695816603967141823</NextGrowth>
 </Colony>
 <Radius>6073595</Radius>
 <ARot>83339</ARot>
@@ -3872,8 +2734,8 @@
 <PRot>38650850</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693744835327084320</LastGrowth>
- <NextGrowth>694250275327084320</NextGrowth>
+ <LastGrowth>694877539327084320</LastGrowth>
+ <NextGrowth>695419267327084320</NextGrowth>
 </Colony>
 <Radius>5567903</Radius>
 <ARot>75214</ARot>
@@ -3905,8 +2767,8 @@
 <Colony>
  <BaseType>5</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>688680685700184687</LastGrowth>
- <NextGrowth>694564525700184687</NextGrowth>
+ <LastGrowth>694564525700184687</LastGrowth>
+ <NextGrowth>698031757700184687</NextGrowth>
 </Colony>
 <Radius>4960954</Radius>
 <ARot>79005</ARot>
@@ -3922,8 +2784,8 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>691594848000000000</LastGrowth>
- <NextGrowth>694287936000000000</NextGrowth>
+ <LastGrowth>694287936000000000</LastGrowth>
+ <NextGrowth>696554208000000000</NextGrowth>
 </Colony>
 <Radius>5888835</Radius>
 <ARot>74147</ARot>
@@ -3946,8 +2808,8 @@
 <PRot>13589331</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>686233837700184687</LastGrowth>
- <NextGrowth>694917901700184687</NextGrowth>
+ <LastGrowth>694917901700184687</LastGrowth>
+ <NextGrowth>697695661700184687</NextGrowth>
 </Colony>
 <Radius>50100667</Radius>
 <ARot>543165</ARot>
@@ -3961,8 +2823,8 @@
 <PRot>33525982</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>691121098798118698</LastGrowth>
- <NextGrowth>694726570798118698</NextGrowth>
+ <LastGrowth>694726570798118698</LastGrowth>
+ <NextGrowth>697902634798118698</NextGrowth>
 </Colony>
 <Radius>4989069</Radius>
 <ARot>67309</ARot>
@@ -4003,8 +2865,8 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>690116544000000000</LastGrowth>
- <NextGrowth>694605024000000000</NextGrowth>
+ <LastGrowth>694605024000000000</LastGrowth>
+ <NextGrowth>697951296000000000</NextGrowth>
 </Colony>
 <Radius>5503968</Radius>
 <ARot>69114</ARot>
@@ -4029,8 +2891,8 @@
 <PRot>34171749</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693634887355589999</LastGrowth>
- <NextGrowth>694254375355589999</NextGrowth>
+ <LastGrowth>694794375355589999</LastGrowth>
+ <NextGrowth>695417319355589999</NextGrowth>
 </Colony>
 <Radius>5366832</Radius>
 <ARot>84138</ARot>
@@ -4059,7 +2921,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>692817408000000000</LastGrowth>
  <NextGrowth>696164544000000000</NextGrowth>
- <SeedProgress>138.1093</SeedProgress>
+ <SeedProgress>181.5604</SeedProgress>
 </Colony>
 <Radius>58225392</Radius>
 <ARot>845621</ARot>
@@ -4086,7 +2948,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>686217312000000000</LastGrowth>
  <NextGrowth>1550217312000000000</NextGrowth>
- <SeedProgress>121.2302</SeedProgress>
+ <SeedProgress>188.0045</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>4662321</Radius>
@@ -4100,15 +2962,15 @@
 <Moon ID="0">
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693282212199391823</LastGrowth>
- <NextGrowth>694380356199391823</NextGrowth>
+ <LastGrowth>694380356199391823</LastGrowth>
+ <NextGrowth>695653028199391823</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693747501489086250</LastGrowth>
- <NextGrowth>694360077489086250</NextGrowth>
+ <LastGrowth>694990797489086250</LastGrowth>
+ <NextGrowth>695621517489086250</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -4149,8 +3011,8 @@
 <PRot>15373607</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>691823303975241152</LastGrowth>
- <NextGrowth>694395431975241152</NextGrowth>
+ <LastGrowth>694395431975241152</LastGrowth>
+ <NextGrowth>697069511975241152</NextGrowth>
 </Colony>
 <Radius>74568278</Radius>
 <ARot>1178341</ARot>
@@ -4180,8 +3042,8 @@
 <PRot>33511411</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693490419365618386</LastGrowth>
- <NextGrowth>695003283365618386</NextGrowth>
+ <LastGrowth>695003283365618386</LastGrowth>
+ <NextGrowth>696739923365618386</NextGrowth>
 </Colony>
 <Radius>7169424</Radius>
 <ARot>86183</ARot>
@@ -4217,8 +3079,8 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>691584480000000000</LastGrowth>
- <NextGrowth>694307808000000000</NextGrowth>
+ <LastGrowth>694307808000000000</LastGrowth>
+ <NextGrowth>696761568000000000</NextGrowth>
 </Colony>
 <Radius>6420584</Radius>
 <ARot>87044</ARot>
@@ -4243,8 +3105,8 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>692534880000000000</LastGrowth>
- <NextGrowth>694676736000000000</NextGrowth>
+ <LastGrowth>694676736000000000</LastGrowth>
+ <NextGrowth>696582720000000000</NextGrowth>
 </Colony>
 <Radius>6022151</Radius>
 <ARot>78919</ARot>
@@ -4276,8 +3138,8 @@
 <PRot>132177336</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>694066535125241152</LastGrowth>
- <NextGrowth>694961639125241152</NextGrowth>
+ <LastGrowth>694961639125241152</LastGrowth>
+ <NextGrowth>695799719125241152</NextGrowth>
 </Colony>
 <Radius>7767651</Radius>
 <ARot>117461</ARot>
@@ -4302,8 +3164,8 @@
 <PRot>120432102</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <LastGrowth>693379773927084320</LastGrowth>
- <NextGrowth>694389789927084320</NextGrowth>
+ <LastGrowth>694389789927084320</LastGrowth>
+ <NextGrowth>695347101927084320</NextGrowth>
 </Colony>
 <Radius>6761733</Radius>
 <ARot>90135</ARot>
@@ -4344,7 +3206,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>687933216000000000</LastGrowth>
  <NextGrowth>699247296000000000</NextGrowth>
- <SeedProgress>162.0437</SeedProgress>
+ <SeedProgress>188.0577</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -4367,8 +3229,8 @@
 <PRot>70886171</PRot>
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>693003369345618386</LastGrowth>
- <NextGrowth>694618185345618386</NextGrowth>
+ <LastGrowth>694618185345618386</LastGrowth>
+ <NextGrowth>696334089345618386</NextGrowth>
 </Colony>
 <Radius>5413175</Radius>
 <ARot>75766</ARot>
@@ -4512,6 +3374,29 @@
 <Star ID="8">
 <Seed>769372</Seed>
  <MapPos X="0.76" Y="13.58"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>152292322</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>694725240518638434</LastGrowth>
+ <NextGrowth>695299800518638434</NextGrowth>
+</Colony>
+<Radius>5786577</Radius>
+<ARot>86464</ARot>
+<Temp>293</Temp>
+<Seed>5725515</Seed>
+<Orbit>31440599837</Orbit>
+<TempBase>293.39348583422554</TempBase>
+</Planet>
+<Planet Seed="6926079" />
+<Planet Seed="622077" />
+<Planet Seed="1835640" />
+<Planet Seed="3745403" />
+<Planet Seed="1427807" />
+ </Planets>
 </Star>
 <Star ID="9">
 <Seed>8472350</Seed>
@@ -4528,8 +3413,8 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>692852219967141823</LastGrowth>
- <NextGrowth>694978523967141823</NextGrowth>
+ <LastGrowth>694978523967141823</LastGrowth>
+ <NextGrowth>696971771967141823</NextGrowth>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -4568,15 +3453,15 @@
 <Moon ID="1">
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>693400270959391823</LastGrowth>
- <NextGrowth>695007310959391823</NextGrowth>
+ <LastGrowth>695007310959391823</LastGrowth>
+ <NextGrowth>696287758959391823</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="4">
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>694145660785589999</LastGrowth>
- <NextGrowth>694973372785589999</NextGrowth>
+ <LastGrowth>694973372785589999</LastGrowth>
+ <NextGrowth>695800220785589999</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -4588,7 +3473,7 @@
  <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>193.6690</SeedProgress>
+ <SeedProgress>45.6702</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6501738</Radius>
@@ -4602,16 +3487,16 @@
 <Moon ID="0">
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>693586987279390000</LastGrowth>
- <NextGrowth>694898539279390000</NextGrowth>
+ <LastGrowth>694898539279390000</LastGrowth>
+ <NextGrowth>695882635279390000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="1">
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>686555136000000000</LastGrowth>
- <NextGrowth>694924704000000000</NextGrowth>
+ <LastGrowth>694924704000000000</LastGrowth>
+ <NextGrowth>697083840000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -4622,8 +3507,8 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>688997051967141823</LastGrowth>
- <NextGrowth>694661435967141823</NextGrowth>
+ <LastGrowth>694661435967141823</LastGrowth>
+ <NextGrowth>697660379967141823</NextGrowth>
 </Colony>
 <Radius>4746859</Radius>
 <ARot>52813</ARot>
@@ -4657,11 +3542,18 @@
 <Orbit>146901404110</Orbit>
 <TempBase>231.9893595149566</TempBase>
 <Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>694629768803638434</LastGrowth>
+ <NextGrowth>696241992803638434</NextGrowth>
+</Colony>
+</Moon>
 <Moon ID="1">
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>692531186232198386</LastGrowth>
- <NextGrowth>694646258232198386</NextGrowth>
+ <LastGrowth>694646258232198386</LastGrowth>
+ <NextGrowth>696211826232198386</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -4707,8 +3599,8 @@
 <PRot>64138582</PRot>
 <Colony>
  <Owner>Ogrish</Owner>
- <LastGrowth>693887383665589999</LastGrowth>
- <NextGrowth>694714231665589999</NextGrowth>
+ <LastGrowth>694714231665589999</LastGrowth>
+ <NextGrowth>695608471665589999</NextGrowth>
 </Colony>
 <Radius>7054311</Radius>
 <ARot>121107</ARot>
@@ -4729,17 +3621,17 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)5.0</Pos>
- <Cash>546.7745480475888</Cash>
+ <Pos>(0,0)10.0.0</Pos>
+ <Cash>85.38533516097891</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="19" Y="15"/>
- <Health>19.4608911389184</Health>
- <Stamina>37</Stamina>
- <Shields>10</Shields>
+ <Location X="10" Y="40"/>
+ <Health>27.99403516996179</Health>
+ <Stamina>0.6166024401728727</Stamina>
+ <Shields>0</Shields>
  <Facing>90</Facing>
  <Level>8</Level>
- <XP>129793</XP>
+ <XP>135744</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,13,11,12,19</Stats>
@@ -4747,6 +3639,9 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -4759,22 +3654,23 @@
 <Weapon Type="Laser Rifle" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">864</Exp>
+  <Exp Type="Rifle">900</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
   <Exp Skill="Perception">5</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="6" Y="12"/>
- <Health>15.67128063018622</Health>
+ <Location X="3" Y="11"/>
+ <Health>38</Health>
  <Stamina>30</Stamina>
  <Shields>10</Shields>
  <Facing>90</Facing>
  <Level>8</Level>
- <XP>125394</XP>
+ <XP>131345</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,20,12</Stats>
@@ -4785,6 +3681,9 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -4797,7 +3696,7 @@
 <Weapon Type="Quad Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">599</Exp>
+  <Exp Type="Shotgun">612</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -4807,13 +3706,13 @@
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="11" Y="13"/>
- <Health>30</Health>
- <Stamina>5.237287243437864</Stamina>
+ <Location X="16" Y="9"/>
+ <Health>23.02240447640443</Health>
+ <Stamina>26</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>165.96375653207352</Facing>
  <Level>8</Level>
- <XP>124466</XP>
+ <XP>130417</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,13,12,8</Stats>
@@ -4835,7 +3734,7 @@
  <WeaponExperience>
   <Exp Type="Rifle">138</Exp>
   <Exp Type="Melee">355</Exp>
-  <Exp Type="Heavy">339</Exp>
+  <Exp Type="Heavy">370</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
@@ -4843,16 +3742,15 @@
   <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Scavenging">5</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="2" Y="15"/>
+ <Location X="12" Y="11"/>
  <Health>30</Health>
  <Stamina>33</Stamina>
  <Shields>0</Shields>
  <Facing>180</Facing>
  <Level>8</Level>
- <XP>121946</XP>
+ <XP>127897</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,20,12,15</Stats>
@@ -4868,7 +3766,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">788</Exp>
+  <Exp Type="Sniper">816</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -4896,6 +3794,7 @@
  <Eqp ID="11" Active="True">Rail Gun</Eqp>
  <Eqp ID="12" Active="True">Rail Gun</Eqp>
  <Eqp ID="7" Active="True">Auto Repair</Eqp>
+ <Eqp ID="10" Active="False">Colony Builder</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
@@ -4909,7 +3808,7 @@
   <Relation Race="Ursalon" Value="1500"/>
  </Relations>
  <Inventory>
-  <Inv Count="15">
+  <Inv Count="16">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="2">
@@ -4973,10 +3872,58 @@
 <Material Type="Shadowskin"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Incendiary Grenade"/>
+<Material Type="Metasteel"/>
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Shortblade" Level="0" />
   </Inv>
   <Inv Count="1">
-<Material Type="Metasteel"/>
+<Weapon Type="Chainsword" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Automatic Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="2" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="1" />
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Axe" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="1" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Pistol" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Powerblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Cap" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
  </Inventory>
 </Team>
@@ -5008,7 +3955,7 @@
 </Race>
 <Race Name="Gokan">
 <HomePlanet>(1,-1)12.0</HomePlanet>
-<LastExpand>694087957374362084</LastExpand>
+<LastExpand>694980996414644759</LastExpand>
 <Research>
  <Item>Metasteel Plating</Item>
  <Item>Colony Builder</Item>
@@ -5060,7 +4007,7 @@
 </Race>
 <Race Name="Elithiri">
 <HomePlanet>(-1,1)6.1</HomePlanet>
-<LastExpand>694181006016296214</LastExpand>
+<LastExpand>694907388253310655</LastExpand>
 <Research>
  <Item>Laser Sniper Rifle</Item>
  <Item>Sonic Grenade</Item>
@@ -5114,7 +4061,7 @@
 </Race>
 <Race Name="Ogrish">
 <HomePlanet>(0,1)10.1</HomePlanet>
-<LastExpand>694053150529709100</LastExpand>
+<LastExpand>694953973855080601</LastExpand>
 <Research>
  <Item>Rail Gun</Item>
  <Item>Stealth Boots</Item>
@@ -5161,7 +4108,7 @@
 </Race>
 <Race Name="Insectoid">
 <HomePlanet>(-1,-1)10.2</HomePlanet>
-<LastExpand>694096737610415590</LastExpand>
+<LastExpand>695007489659781638</LastExpand>
 <Research>
  <Item>Regenerative Plating</Item>
  <Item>Infiltration Suit</Item>
@@ -5211,7 +4158,7 @@
 </Race>
 <Race Name="Grey">
 <HomePlanet>(-1,0)5.3</HomePlanet>
-<LastExpand>694188007919843863</LastExpand>
+<LastExpand>694902539560964374</LastExpand>
 <Research>
  <Item>Hyperspace Drive</Item>
  <Item>Fusion Core</Item>
@@ -5260,7 +4207,7 @@
 </Race>
 <Race Name="Ursalon">
 <HomePlanet>(0,-1)10.1</HomePlanet>
-<LastExpand>694034552756229602</LastExpand>
+<LastExpand>694918703814461018</LastExpand>
 <Known/>
 <Research>
  <Item>Laser Rifle</Item>

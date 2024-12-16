@@ -12,13 +12,13 @@ namespace SpaceMercs {
         public int Y { get; private set; }
         public int Level { get; private set; }
         public double Health { get; private set; }
-        public double MaxHealth { get { return Type.HealthBase * (1.0 + Const.CreatureLevelHealthStep * (Level - 1)); } }
+        public double MaxHealth { get { return Type.HealthBase * (1.0 + Const.CreatureLevelHealthScale * (Level - 1)) + (Const.CreatureLevelHealthStep * (Level - 1)); } }
         public double Stamina { get; private set; }
         public double MaxStamina { get { return Type.StaminaBase + ((Level - 1) * Const.CreatureLevelStaminaStep) + StatBonuses(StatType.Stamina); } }
         public double Shields { get; private set; }
-        public double MaxShields { get { return Type.ShieldsBase * (1.0 + Const.CreatureLevelShieldsStep * (Level - 1)); } }
-        public double Attack { get { return Type.AttackBase * (1.0 + Const.CreatureLevelAttackStep * (Level - 1)) + StatBonuses(StatType.Attack); } }
-        public double Defence { get { return Type.DefenceBase * (1.0 + Const.CreatureLevelDefenceStep * (Level - 1)) + StatBonuses(StatType.Defence); } }
+        public double MaxShields { get { return Type.ShieldsBase * (1.0 + Const.CreatureLevelShieldsScale * (Level - 1)); } }
+        public double Attack { get { return Type.AttackBase * (1.0 + Const.CreatureLevelAttackScale * (Level - 1)) + (Const.CreatureLevelAttackStep * (Level - 1)) + StatBonuses(StatType.Attack); } }
+        public double Defence { get { return Type.DefenceBase * (1.0 + Const.CreatureLevelDefenceScale * (Level - 1)) + (Const.CreatureLevelDefenceStep * (Level - 1)) + StatBonuses(StatType.Defence); } }
         public int TravelRange { get { return (int)Stamina; } }
         public Weapon? EquippedWeapon { get; private set; }
         public double AttackRange { get { return (EquippedWeapon == null) ? 1.0 : EquippedWeapon.Range; } }
@@ -157,7 +157,7 @@ namespace SpaceMercs {
         }
         public double BaseArmour { 
             get {
-                double arm = Type.ArmourBase * (1.0 + Const.CreatureLevelArmourStep * (Level - 1));
+                double arm = Type.ArmourBase * (1.0 + Const.CreatureLevelArmourScale * (Level - 1)) + (Const.CreatureLevelArmourStep * (Level - 1));
                 foreach (Effect eff in Effects) {
                     arm += eff.ArmourMod;
                 }
@@ -526,9 +526,12 @@ namespace SpaceMercs {
             }
 
             // Do the attack
-            int nhits = 0, nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            int nhits = 0;
+            int nshots = EquippedWeapon?.Type?.Shots ?? 1;
+            double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
+
             for (int n = 0; n < nshots; n++) {
-                double hit = Utils.GenerateHitRoll(this, en);
+                double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
                 if (hit > 0.0) nhits++;
             }
             if (nhits == 0) return;

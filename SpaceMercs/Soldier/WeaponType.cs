@@ -20,6 +20,7 @@ namespace SpaceMercs {
         public int Shots { get; private set; } // Number of shots
         public int NoiseLevel { get; private set; } // Noise level is the number of squares away this weapon can be heard
         public bool Modifiable { get; private set; }
+        public double Recoil { get; private set; } // Hit penalty for subsequent shots after first.
 
         public WeaponType(XmlNode xml) : base(xml) {
             XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
@@ -45,6 +46,7 @@ namespace SpaceMercs {
             Stable = (xml.SelectSingleNode("Stable") != null);
             Shots = xml.SelectNodeInt("Shots", 1);
             Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
+            Recoil = xml.GetAttributeDouble("Recoil", 0.0);
         }
 
         public override string ToString() {

@@ -135,11 +135,15 @@ namespace SpaceMercs {
         // Combat settings
         public const double ArmourScale = 30.0; // The higher this is, the less effective armour is at mitigating damage.
         public const double CreatureMeleeDamageScale = 0.40;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
-        public const double CreatureLevelAttackStep = 0.15;  // %age growth in creature attack each level (over base)
-        public const double CreatureLevelDefenceStep = 0.15;  // %age growth in creature defence each level (over base)
-        public const double CreatureLevelHealthStep = 0.25;  // %age growth in creature health each level (over base)
-        public const double CreatureLevelShieldsStep = 0.2;  // %age growth in creature shields each level (over base)
-        public const double CreatureLevelArmourStep = 0.15;  // %age growth in creature armour each level (over base)
+        public const double CreatureLevelAttackScale = 0.09;  // %age growth in creature attack each level (over base)
+        public const double CreatureLevelAttackStep = 1.0;  // Absolute growth in creature attack each level
+        public const double CreatureLevelDefenceScale = 0.09;  // %age growth in creature defence each level (over base)
+        public const double CreatureLevelDefenceStep = 1.0;  // Absolute growth in creature defence each level
+        public const double CreatureLevelHealthScale = 0.15;  // %age growth in creature health each level (over base)
+        public const double CreatureLevelHealthStep = 1.5;  // Absolute growth in creature health each level
+        public const double CreatureLevelShieldsScale = 0.1;  // %age growth in creature shields each level (over base)
+        public const double CreatureLevelArmourScale = 0.09;  // %age growth in creature armour each level (over base)
+        public const double CreatureLevelArmourStep = 1.0;  // Absolute growth in creature armour each level
         public const double CreatureLevelStaminaStep = 1.0;  // Absolute growth in creature stamina each level
         public const double HitBias = 4.0; // Bias towards hitting when attacking
         public const double SoldierHitBias = 0.0; // Bias towards a player-controlled soldier hitting when attacking
