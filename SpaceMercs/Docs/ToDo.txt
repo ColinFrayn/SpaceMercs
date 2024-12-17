@@ -2,7 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-I could fire after moving
+Was able to fire sniper rifle once after moving - test that
+
+MapViewMission - VisualEffect.DisplayShotLine()
+- Not displaying
+- Maybe pre-make it and store the GLShape in the data?
+
 
 ==========================================================================================================
 
@@ -32,8 +37,6 @@ Add more alien-only items
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
-
-MapViewMission - VisualEffect.DisplayShotLine() ??
 
 Better soldier textures
 - Change texture based on race

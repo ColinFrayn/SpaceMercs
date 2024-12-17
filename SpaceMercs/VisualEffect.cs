@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 
@@ -24,11 +25,11 @@ namespace SpaceMercs {
         }
 
         // Returns true if this is expired and can be removed
-        public bool Display(Stopwatch sw, float aspect, Matrix4 viewM) {
+        public bool Display(Stopwatch sw, float aspect, Matrix4 viewM, ShaderProgram prog2D) {
             switch (type) {
                 case EffectType.Damage: return DisplayDamage(sw, aspect, viewM);
                 case EffectType.Healing: return DisplayHealing(sw, aspect, viewM);
-                case EffectType.Shot: return DisplayShotLine(sw, aspect, viewM);
+                case EffectType.Shot: return DisplayShotLine(sw, prog2D);
                 default: throw new NotImplementedException("Undisplayable Effect Type : " + type);
             }
         }
@@ -63,24 +64,25 @@ namespace SpaceMercs {
 
             return false;
         }
-        private bool DisplayShotLine(Stopwatch sw, float aspect, Matrix4 viewM) {
+        private bool DisplayShotLine(Stopwatch sw, ShaderProgram prog2D) {
             long mili = sw.ElapsedMilliseconds - tStart;
+            float pow = (float)data["Power"];
+            float fract = 1f - (mili / (pow * 50f));
+            if (fract < 0.0) return true;
+
             float fx = (float)data["FX"];
             float fy = (float)data["FY"];
             float tx = (float)data["TX"];
             float ty = (float)data["TY"];
-            float pow = (float)data["Power"];
+            float size = (float)data["Size"];
             Color col = (Color)data["Colour"];
-            float fract = 1f - (mili / (pow * 50f));
-            if (fract < 0.0) return true;
-            // TODO Replace this code
-            //GL.LineWidth(2.0f);
-            //GL.Begin(BeginMode.Lines);
-            //GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
-            //GL.Vertex3(fx, fy, Const.GUILayer);
-            //GL.Vertex3(tx, ty, Const.GUILayer);
-            //GL.End();
-            //GL.LineWidth(1.0f);
+
+            GL.UseProgram(prog2D.ShaderProgramHandle);
+
+            ThickLine2D line = new ThickLine2D(fx, fy, tx, ty, size, col);
+
+            line.BindAndDraw();
+
             return false;
         }
         private bool DisplayShotBullets(Stopwatch sw) {
@@ -117,5 +119,4 @@ namespace SpaceMercs {
             return false;
         }
     }
-
 }

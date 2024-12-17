@@ -522,7 +522,7 @@ namespace SpaceMercs {
             else playSound(EquippedWeapon.Type.SoundEffect);
             if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
                 float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f }, { "Power", pow }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f }, { "Power", pow }, { "Size", pow / 250f }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
             }
 
             // Do the attack

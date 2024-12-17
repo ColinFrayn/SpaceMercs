@@ -90,11 +90,15 @@ namespace SpaceMercs {
             GL.Disable(EnableCap.DepthTest);
 
             // Draw the message box background
+            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+            prog.SetUniform("projection", projectionM);
             Matrix4 translateM = Matrix4.CreateTranslation(BoxX, BoxY, 0.005f);
             Matrix4 scaleM = Matrix4.CreateScale(MaxBoxWidth, BoxHeight, 1f);
             Matrix4 modelM = scaleM * translateM;
+            prog.SetUniform("view", Matrix4.Identity);
             prog.SetUniform("model", modelM);
             prog.SetUniform("flatColour", new Vector4(0.4f, 0.4f, 0.4f, Alpha));
+
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Flat.BindAndDraw();
 

@@ -242,12 +242,12 @@ namespace SpaceMercs.MainWindow {
             PrepareScene();
 
             // If it's a ship mission then do the starfield;
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
             if (ThisMission.Type == Mission.MissionType.BoardingParty || ThisMission.Type == Mission.MissionType.RepelBoarders || ThisMission.Type == Mission.MissionType.ShipCombat) {
                 Matrix4 projectionUnitM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
                 pos2DCol4ShaderProgram.SetUniform("projection", projectionUnitM);
                 pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
-                pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
-                pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
                 GL.UseProgram(pos2DCol4ShaderProgram.ShaderProgramHandle);
                 Starfield.Build.BindAndDraw();
             }
@@ -272,14 +272,14 @@ namespace SpaceMercs.MainWindow {
             CurrentLevel.DisplayMap(fullShaderProgram);
 
             // Show any indicators on top of the action in the map view
-            ShowMapGUIElements(fullShaderProgram, pos2DCol4ShaderProgram);
+            ShowMapGUIElements(fullShaderProgram);
 
             // Show creatures/soldiers
             CurrentLevel.DisplayEntities(fullShaderProgram, PlayerTeam.Mission_ShowLabels, PlayerTeam.Mission_ShowStatBars, PlayerTeam.Mission_ShowEffects, fMissionViewZ, Aspect, translateM);
 
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
-                if (Effects[n].Display(sw, Aspect, translateM)) Effects.RemoveAt(n);
+                if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) Effects.RemoveAt(n);
             }
 
             // Draw any static GUI elements (overlay)
@@ -819,7 +819,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Show GUI elements in the viewpoint of the map
-        private void ShowMapGUIElements(ShaderProgram texProg, ShaderProgram flatProg) {
+        private void ShowMapGUIElements(ShaderProgram texProg) {
             // Mouse hover
             GL.Disable(EnableCap.DepthTest);
             Point pt = CurrentLevel.MouseHover;
