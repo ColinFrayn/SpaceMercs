@@ -79,7 +79,7 @@ namespace SpaceMercs {
 
             GL.UseProgram(prog2D.ShaderProgramHandle);
 
-            ThickLine2D line = new ThickLine2D(fx, fy, tx, ty, size, col);
+            ThickLine2D line = ThickLine2D.Make_VertexPos2DCol(fx, fy, tx, ty, size, col);
 
             line.BindAndDraw();
 

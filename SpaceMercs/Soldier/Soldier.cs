@@ -1103,7 +1103,8 @@ namespace SpaceMercs {
             // Show the shot
             if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
                 float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", tx + 0.5f }, { "FY", Y + 0.5f }, { "TY", ty + 0.5f }, { "Power", pow }, { "Size", pow / 250f }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                float shotSize = pow * (float)EquippedWeapon.Type.Shots / 500f;
+                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", tx + 0.5f }, { "FY", Y + 0.5f }, { "TY", ty + 0.5f }, { "Power", pow }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
             }
 
             int r = 0;
