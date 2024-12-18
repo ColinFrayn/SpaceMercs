@@ -1131,23 +1131,7 @@ namespace SpaceMercs {
                 IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return true; // Weird!
                 int nHits = AttackEntity(en, effectFactory, playSound, showMessage, applyEffect);
-
-                // Show the shot(s)
-                if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
-                    float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                    float shotSize = pow / Const.ShotSizeScale;
-                    int sharpshooter = GetUtilityLevel(Soldier.UtilitySkill.Sharpshooter);
-                    float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
-                    scatter *= (float)Math.Pow(Const.SharpshooterRangeMod, sharpshooter);
-                    Random rand = new Random();
-                    for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
-                        float scatterMod = n < nHits ? 0.3f : scatter;
-                        float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                        float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                        float delay = n * (float)EquippedWeapon.Type.Delay;
-                        effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", tx + 0.5f + sx }, { "FY", Y + 0.5f }, { "TY", ty + 0.5f + sy }, { "Delay", delay }, { "Duration", pow * Const.ShotDurationScale }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
-                    }
-                }
+                Utils.CreateShots(EquippedWeapon, this, en, nHits, range, effectFactory);
             }
             return true;
         }
@@ -1166,26 +1150,6 @@ namespace SpaceMercs {
             }
 
             Dictionary<WeaponType.DamageType, double> damageDict = GenerateDamage(nhits);
-            double TotalDam = targetEntity.CalculateDamage(damageDict);
-
-            // Graphics for damage
-            int delay = (int)(RangeTo(targetEntity) * 25.0);
-            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
-            Thread.Sleep(delay);
-            effectFactory(VisualEffect.EffectType.Damage, targetEntity.X + (targetEntity.Size / 2f), targetEntity.Y + (targetEntity.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-
-            // Play sound
-            if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
-
-            targetEntity.InflictDamage(damageDict, applyEffect);
-            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
-
-            // Apply effect?
-            if (EquippedWeapon != null) {
-                if (EquippedWeapon.Type.ItemEffect != null) {
-                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
-                }
-            }
 
             // Add weapon experience
             if (EquippedWeapon != null) {
@@ -1201,6 +1165,26 @@ namespace SpaceMercs {
                 int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
                 if (newlvl > oldlvl) {
                     showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.WClass}", null);
+                }
+            }
+
+            // Graphics for damage
+            int delay = (int)(RangeTo(targetEntity) * 25.0);
+            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
+            Thread.Sleep(delay);
+            double TotalDam = targetEntity.CalculateDamage(damageDict);
+            effectFactory(VisualEffect.EffectType.Damage, targetEntity.X + (targetEntity.Size / 2f), targetEntity.Y + (targetEntity.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+
+            // Play sound
+            if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
+
+            targetEntity.InflictDamage(damageDict, applyEffect);
+            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
+
+            // Apply effect?
+            if (EquippedWeapon != null) {
+                if (EquippedWeapon.Type.ItemEffect != null) {
+                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
                 }
             }
 

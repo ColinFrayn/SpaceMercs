@@ -29,7 +29,7 @@ namespace SpaceMercs {
             switch (type) {
                 case EffectType.Damage: return DisplayDamage(sw, aspect, viewM);
                 case EffectType.Healing: return DisplayHealing(sw, aspect, viewM);
-                case EffectType.Shot: return DisplayShotLine(sw, prog2D);
+                case EffectType.Shot: return DisplayShot(sw, prog2D);
                 default: throw new NotImplementedException("Undisplayable Effect Type : " + type);
             }
         }
@@ -64,14 +64,14 @@ namespace SpaceMercs {
 
             return false;
         }
-        private bool DisplayShotLine(Stopwatch sw, ShaderProgram prog2D) {
+        private bool DisplayShot(Stopwatch sw, ShaderProgram prog2D) {
             long mili = sw.ElapsedMilliseconds - tStart;
             float delay = (float)data["Delay"];
             if (mili < delay) return false;
             float duration = (float)data["Duration"];
-            float fract = 1f - ((mili-delay) / duration);
-            if (fract > 1f) fract = 1f;
-            if (fract < 0f) return true;
+            float fract = (mili-delay) / duration;
+            if (fract < 0f) fract = 0f;
+            if (fract > 1f) return true;
 
             float fx = (float)data["FX"];
             float fy = (float)data["FY"];
@@ -79,6 +79,19 @@ namespace SpaceMercs {
             float ty = (float)data["TY"];
             float size = (float)data["Size"];
             Color col = (Color)data["Colour"];
+            if (data.TryGetValue("Length", out object? oLength)) {
+                float length = (float)oLength;
+                Vector2 tVec = new Vector2(tx - fx, ty - fy);
+                float tLen = tVec.Length;
+                if (tLen > 0f) {
+                    float fEnd = Math.Min(fract, 1.0f);
+                    float fStart = Math.Max(0f, fract - length / tLen);
+                    tx = fx + fEnd * tVec.X;
+                    ty = fy + fEnd * tVec.Y;
+                    fx += fStart * tVec.X;
+                    fy += fStart * tVec.Y;
+                }
+            }
 
             GL.UseProgram(prog2D.ShaderProgramHandle);
 
@@ -86,39 +99,6 @@ namespace SpaceMercs {
 
             line.BindAndDraw();
 
-            return false;
-        }
-        private bool DisplayShotBullets(Stopwatch sw) {
-            long mili = sw.ElapsedMilliseconds - tStart;
-            double fx = (double)data["FX"];
-            double tx = (double)data["TX"];
-            double fy = (double)data["FY"];
-            double ty = (double)data["TY"];
-            double speed = (double)data["Speed"];
-            double len = (double)data["Length"];
-            Color col = (Color)data["Colour"];
-            double dt = len / speed;
-            long mililast = mili - (long)dt;
-            if (mililast < 0) mililast = 0;
-            double dist = Math.Sqrt((fx - tx) * (fx - tx) + (fy - ty) * (fy - ty));
-            if (mililast * speed > dist) return true; // Shot has hit and trail dissipated
-            long milimod = (long)Math.Min(mili, dist / speed);
-            double xx = fx + ((tx - fx) * milimod * speed / dist);
-            double yy = fy + ((ty - fy) * milimod * speed / dist);
-            double st = Math.Max(0.0, (mililast * speed) / dist);
-            double sx = fx + ((tx - fx) * st);
-            double sy = fy + ((ty - fy) * st);
-            // TODO Replace this code
-            //GL.LineWidth(2.0f);
-            //GL.Begin(BeginMode.Lines);
-            //double fract = (mililast - (mili - dt)) / dt;
-            //GL.Color4(col.R * fract, col.G * fract, col.B * fract, 255);
-            //GL.Vertex3(sx, sy, Const.GUILayer);
-            //double fract2 = 1.0 - ((mili - milimod) / dt);
-            //GL.Color4(col.R * fract2, col.G * fract2, col.B * fract2, 255);
-            //GL.Vertex3(xx, yy, Const.GUILayer);
-            //GL.End();
-            //GL.LineWidth(1.0f);
             return false;
         }
     }

@@ -7,6 +7,7 @@
     <Speed>14</Speed>
     <Shots>2</Shots>
     <Recoil>0.1</Recoil>
+    <Length>0.2</Length>
     <Range Accuracy="-1" DropOff="0.8">6</Range>
     <Damage>3+2</Damage>
     <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
@@ -26,6 +27,7 @@
     <Speed>16</Speed>
     <Shots>4</Shots>
     <Recoil>0.1</Recoil>
+    <Length>0.2</Length>
     <Range Accuracy="-2" DropOff="0.8">6</Range>
     <Damage>3+2</Damage>
     <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
@@ -43,6 +45,7 @@
     <Cost>6</Cost>
     <Rarity>2</Rarity>
     <Speed>8</Speed>
+    <Length>0.2</Length>
     <Range Accuracy="0" DropOff="0.5">7</Range>
     <Damage>2+2</Damage>
     <Desc>A pistol</Desc>
@@ -59,6 +62,7 @@
     <Cost>12</Cost>
     <Rarity>5</Rarity>
     <Speed>13</Speed>
+    <Length>0.2</Length>
     <Range Accuracy="0" DropOff="0.5">9</Range>
     <Damage>4+3</Damage>
     <Desc>An automatic rifle</Desc>
@@ -75,6 +79,7 @@
     <Cost>180</Cost>
     <Rarity>12</Rarity>
     <Speed>16</Speed>
+    <Length>0.3</Length>
     <Range Accuracy="0" DropOff="0.7">10</Range>
     <Shots>3</Shots>
     <Recoil>1.5</Recoil>
@@ -94,6 +99,7 @@
     <Cost>160</Cost>
     <Rarity>9</Rarity>
     <Speed>13</Speed>
+    <Length>0.6</Length>
     <Range Accuracy="0" DropOff="0.4">10</Range>
     <Damage>4+3</Damage>
     <Desc>A laser rifle</Desc>
@@ -120,6 +126,7 @@
     <Cost>650</Cost>
     <Rarity>22</Rarity>
     <Speed>16</Speed>
+    <Length>0.8</Length>
     <Range Accuracy="0" DropOff="0.6">12</Range>
     <Shots>3</Shots>
     <Delay>200</Delay>
@@ -150,6 +157,7 @@
     <Rarity>7</Rarity>
     <Speed>8</Speed>
     <Range Accuracy="0" DropOff="0.4">8</Range>
+    <Length>0.4</Length>
     <Damage>2+2</Damage>
     <Desc>A laser pistol</Desc>
     <Sound>LaserPistolShort</Sound>
@@ -174,6 +182,7 @@
     <Cost>100</Cost>
     <Rarity>14</Rarity>
     <Speed>20</Speed>
+    <Length>0.3</Length>
     <Range Accuracy="0" DropOff="0.7">14</Range>
     <Damage>12+8</Damage>
     <Desc>A heavy railgun</Desc>
@@ -342,6 +351,7 @@
     <Cost>25</Cost>
     <Rarity>5</Rarity>
     <Speed>22</Speed>
+    <Length>0.3</Length>
     <Range Accuracy="3" DropOff="0.16">20</Range>
     <Damage>5+5</Damage>
     <Desc>A sniper rifle</Desc>
@@ -359,6 +369,7 @@
     <Cost>300</Cost>
     <Rarity>15</Rarity>
     <Speed>24</Speed>
+    <Length>0.5</Length>
     <Range Accuracy="3" DropOff="0.13">22</Range>
     <Damage>6+5</Damage>
     <Desc>A highly precise laser sniper rifle</Desc>
@@ -385,6 +396,7 @@
     <Cost>900</Cost>
     <Rarity>26</Rarity>
     <Speed>26</Speed>
+    <Length>0.4</Length>
     <Range Accuracy="3" DropOff="0.18">24</Range>
     <Damage>7+7</Damage>
     <Desc>A light railgun converted to a sniper rifle. Lower accuracy but with high damage.</Desc>
@@ -411,6 +423,7 @@
     <Cost>75</Cost>
     <Rarity>25</Rarity>
     <Speed>13</Speed>
+    <Length>0.3</Length>
     <Race>Insectoid</Race>
     <Range Accuracy="-1" DropOff="0.5">10</Range>
     <Damage>5+2</Damage>
@@ -531,6 +544,7 @@
     <Rarity>20</Rarity>
     <Speed>18</Speed>
     <Shots>3</Shots>
+    <Length>0.3</Length>
     <Recoil>0.5</Recoil>
     <Race>Ogrish</Race>
     <Range Accuracy="-2" DropOff="0.6">6</Range>
@@ -597,6 +611,7 @@
     <Speed>12</Speed>
     <Range DropOff="0.6">8</Range>
     <Damage>3+2</Damage>
+    <Length>0.3</Length>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
     <Shots>2</Shots>
@@ -614,6 +629,7 @@
     <Speed>14</Speed>
     <Range DropOff="0.6">12</Range>
     <Damage>5+4</Damage>
+    <Length>0.4</Length>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
     <Shots>3</Shots>
@@ -646,6 +662,7 @@
     <Range DropOff="0.5">7</Range>
     <Damage>3+3</Damage>
     <Type>Acid</Type>
+    <Length>0.3</Length>
     <Sound>Spore</Sound>
     <ItemEffect Name="Slimed">
       <Effect Name="Slimed">
@@ -692,6 +709,7 @@
   <WeaponType Name="Void Lance">
     <Speed>12</Speed>
     <Range DropOff="0.2">8</Range>
+    <Length>1.0</Length>
     <Damage>5+3</Damage>
     <Type>Electrical</Type>
     <Sound>HeavyCrossbow</Sound>

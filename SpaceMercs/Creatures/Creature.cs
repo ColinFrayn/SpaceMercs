@@ -543,20 +543,8 @@ namespace SpaceMercs {
             }
             if (nhits == 0) return;
 
-            // Draw the shot
-            if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
-                float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                float shotSize = pow / Const.ShotSizeScale;
-                float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
-                Random rand = new Random();
-                for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
-                    float scatterMod = n < nhits ? 0.3f : scatter;
-                    float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                    float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                    float sdelay = n * (float)EquippedWeapon.Type.Delay;
-                    effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f + sx }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f + sy }, { "Delay", sdelay }, { "Duration", pow * Const.ShotDurationScale }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
-                }
-            }
+            // Draw the shot(s)
+            Utils.CreateShots(EquippedWeapon, this, en, nhits, range, effectFactory);
 
             Dictionary<WeaponType.DamageType, double> damageDict = GenerateDamage(nhits);
             double TotalDam = en.CalculateDamage(damageDict);
