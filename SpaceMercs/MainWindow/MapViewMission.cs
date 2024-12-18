@@ -635,7 +635,7 @@ namespace SpaceMercs.MainWindow {
 
             // Apply effect to the targets
             foreach (IEntity en in hsEntities) {
-                en.ApplyEffectToEntity(s, ie, AddNewEffect);
+                en.ApplyEffectToEntity(source, ie, AddNewEffect);
             }
         }
         private bool CheckForTraps(Soldier s) {

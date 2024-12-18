@@ -50,10 +50,6 @@ namespace SpaceMercs {
         double GetDamageReductionByDamageType(WeaponType.DamageType type);
         void KillEntity();
         Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits);
-        void ApplyEffectToEntity(IEntity src, ItemEffect ie, VisualEffect.EffectFactory fact);
-
-        // Actions
-        //void Move(Utils.Direction d);
-        //void AttackEntity(IEntity en, VisualEffect.EffectFactory fact, Action refresh);
+        void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact);
     }
 }

@@ -1799,6 +1799,11 @@ namespace SpaceMercs {
             if (cr.QuestItem) st.Add(ParentMission.MItem);
             AddToStashAtPosition(cr.X, cr.Y, st);
 
+            // Effect on death?
+            if (cr.Type.OnDeathEffect != null) {
+                // TODO
+            }
+
             // Experience
             int exp = (cr.Experience * 5) / (ParentMission.Soldiers.Count + 4);
             foreach (Soldier s in ParentMission.Soldiers) {
