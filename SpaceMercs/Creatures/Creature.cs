@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System;
 using System.IO;
 using System.Xml;
 
@@ -508,7 +509,8 @@ namespace SpaceMercs {
         }
         public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
             if (en == null) return;
-            if (RangeTo(en) > AttackRange) return;
+            double range = RangeTo(en);
+            if (range > AttackRange) return;
             Stamina -= AttackCost;
 
             // Rotate creature
@@ -517,14 +519,9 @@ namespace SpaceMercs {
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
             Thread.Sleep(100);
 
-            // Play weapon sound & draw shot
+            // Play weapon sound
             if (EquippedWeapon == null) playSound("Punches");
             else playSound(EquippedWeapon.Type.SoundEffect);
-            if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
-                float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                float shotSize = pow * (float)EquippedWeapon.Type.Shots / 500f;
-                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f }, { "Power", pow }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
-            }
 
             // Do the attack
             int nhits = 0;
@@ -537,6 +534,21 @@ namespace SpaceMercs {
             }
             if (nhits == 0) return;
             double TotalDam = en.InflictDamage(GenerateDamage(nhits));
+
+            // Draw the shot
+            if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
+                float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
+                float shotSize = pow / Const.ShotSizeScale;
+                float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
+                Random rand = new Random();
+                for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
+                    float scatterMod = n < nhits ? 0.3f : scatter;
+                    float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
+                    float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
+                    float sdelay = n * (float)EquippedWeapon.Type.Delay;
+                    effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f + sx }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f + sy }, { "Delay", sdelay }, { "Duration", pow * Const.ShotDurationScale }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                }
+            }
 
             // Graphics for damage
             int delay = (int)(RangeTo(en) * 25.0);
@@ -646,7 +658,7 @@ namespace SpaceMercs {
                         return;
                     }
                     if (Stamina < MovementCost) return;
-                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1); // Go to this square or nearby
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1, ignoreEntities: isDefendLevel); // Go to this square or nearby
                     if (path is null || path.Count == 0) {
                         if (!isDefendLevel) Investigate = Point.Empty;
                         return;

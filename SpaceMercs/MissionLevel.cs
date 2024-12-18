@@ -1182,7 +1182,7 @@ namespace SpaceMercs {
                 // Attempt to put all creatures far from the EntryLocations
                 score += dist;
                 // Make sure creature can make it to the target
-                List<Point>? path = ShortestPath(cr, new Point(x, y), ptStart, 20, false);
+                List<Point>? path = ShortestPath(cr, new Point(x, y), ptStart, 20, false, ignoreEntities: true);
                 if (path is not null && (score > BestScore || best == Point.Empty)) {
                     BestScore = score;
                     best = new Point(x, y);
@@ -2090,7 +2090,7 @@ namespace SpaceMercs {
         }
 
         // ---- Pathfinding
-        public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1, bool preciseTarget = false) {
+        public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1, bool preciseTarget = false, bool ignoreEntities = false) {
             int[,] AStarG = new int[Width, Height];
             Dictionary<Point, int> lOpen = new Dictionary<Point, int>();
             Dictionary<Point, int> lClosed = new Dictionary<Point, int>();
@@ -2120,7 +2120,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X - 1, pt.Y + i]) || (EntityMap[pt.X - 1, pt.Y + i] != null && EntityMap[pt.X - 1, pt.Y + i] != en)) {
+                        if (IsObstruction(Map[pt.X - 1, pt.Y + i]) || (!ignoreEntities && EntityMap[pt.X - 1, pt.Y + i] != null && EntityMap[pt.X - 1, pt.Y + i] != en)) {
                             if (en.CanOpenDoors && Map[pt.X - 1, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2137,7 +2137,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + en.Size, pt.Y + i]) || (EntityMap[pt.X + en.Size, pt.Y + i] != null && EntityMap[pt.X + en.Size, pt.Y + i] != en)) {
+                        if (IsObstruction(Map[pt.X + en.Size, pt.Y + i]) || (!ignoreEntities && EntityMap[pt.X + en.Size, pt.Y + i] != null && EntityMap[pt.X + en.Size, pt.Y + i] != en)) {
                             if (en.CanOpenDoors && Map[pt.X + en.Size, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2154,7 +2154,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + i, pt.Y - 1]) || (EntityMap[pt.X + i, pt.Y - 1] != null && EntityMap[pt.X + 1, pt.Y - 1] != en)) {
+                        if (IsObstruction(Map[pt.X + i, pt.Y - 1]) || (!ignoreEntities && EntityMap[pt.X + i, pt.Y - 1] != null && EntityMap[pt.X + 1, pt.Y - 1] != en)) {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y - 1] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2171,7 +2171,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + i, pt.Y + en.Size]) || (EntityMap[pt.X + i, pt.Y + en.Size] != null && EntityMap[pt.X + 1, pt.Y + en.Size] != en)) {
+                        if (IsObstruction(Map[pt.X + i, pt.Y + en.Size]) || (!ignoreEntities && EntityMap[pt.X + i, pt.Y + en.Size] != null && EntityMap[pt.X + 1, pt.Y + en.Size] != en)) {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y + en.Size] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }

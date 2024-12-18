@@ -165,6 +165,9 @@ namespace SpaceMercs {
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
         public const double SharpshooterRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
+        public const float  ShotDurationScale = 50.0f; // Amount of time shot lines are shown
+        public const float  ShotSizeScale = 250.0f; // Size of a shot line (larger = smaller)
+        public const float  ShotScatterScale = 0.2f; // Amount of visual scatter on shot lines
 
         // Miscellaneous
         public const double InitialCash = 50.0;

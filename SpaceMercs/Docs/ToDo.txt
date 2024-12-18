@@ -2,12 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Was able to fire sniper rifle once after moving - test that
-
 MapViewMission - VisualEffect.DisplayShotLine()
-- Not displaying
-- Maybe pre-make it and store the GLShape in the data?
-
+- Vary line colour
+- Show projectiles travelling
 
 ==========================================================================================================
 

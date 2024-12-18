@@ -66,9 +66,12 @@ namespace SpaceMercs {
         }
         private bool DisplayShotLine(Stopwatch sw, ShaderProgram prog2D) {
             long mili = sw.ElapsedMilliseconds - tStart;
-            float pow = (float)data["Power"];
-            float fract = 1f - (mili / (pow * 50f));
-            if (fract < 0.0) return true;
+            float delay = (float)data["Delay"];
+            if (mili < delay) return false;
+            float duration = (float)data["Duration"];
+            float fract = 1f - ((mili-delay) / duration);
+            if (fract > 1f) fract = 1f;
+            if (fract < 0f) return true;
 
             float fx = (float)data["FX"];
             float fy = (float)data["FY"];

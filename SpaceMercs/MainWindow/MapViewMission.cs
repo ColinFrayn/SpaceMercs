@@ -423,7 +423,7 @@ namespace SpaceMercs.MainWindow {
                     gpSelect.Deactivate();
                     object? oHover = gpSelect.HoverObject;
                     // Process GUIPanel selection
-                    if (s != null && oHover is not null) {
+                    if (s != null && oHover is not null && gpSelect.HoverItem?.Enabled == true) {
                         int iSelectHover = gpSelect.HoverID;
                         if (iSelectHover == I_OpenDoor) {
                             OpenDoor(gpSelect.ClickX, gpSelect.ClickY, s);

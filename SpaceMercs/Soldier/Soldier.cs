@@ -1069,7 +1069,8 @@ namespace SpaceMercs {
             if (level is null) throw new Exception("Null level in AttackLocation");
             if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
-            if (RangeTo(tx, ty) > AttackRange) {
+            double range = RangeTo(tx, ty);
+            if (range > AttackRange) {
                 IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return false;
                 if (RangeTo(en) > AttackRange) return false;
@@ -1100,30 +1101,48 @@ namespace SpaceMercs {
             if (EquippedWeapon == null) playSound("Punches");
             else playSound(EquippedWeapon.Type.SoundEffect);
 
-            // Show the shot
-            if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
-                float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
-                float shotSize = pow * (float)EquippedWeapon.Type.Shots / 500f;
-                effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", tx + 0.5f }, { "FY", Y + 0.5f }, { "TY", ty + 0.5f }, { "Power", pow }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+            int r = EquippedWeapon != null ? (int)Math.Ceiling(EquippedWeapon.Type.Area) : 0;
+            // AoE Weapon
+            if (r > 0) {
+                HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
+                for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
+                    for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
+                        int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
+                        if (dr2 > r * r) continue;
+                        IEntity? en = level.GetEntityAt(x, y);
+                        if (en != null && !hsAttacked.Contains(en)) {
+                            AttackEntity(en, effectFactory, playSound, showMessage);
+                            hsAttacked.Add(en);
+                        }
+                    }
+                }
             }
+            // Single target
+            else {
+                IEntity? en = level.GetEntityAt(tx, ty);
+                if (en == null) return true; // Weird!
+                int nHits = AttackEntity(en, effectFactory, playSound, showMessage);
 
-            int r = 0;
-            HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
-            if (EquippedWeapon != null) r = (int)Math.Ceiling(EquippedWeapon.Type.Area);
-            for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
-                for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
-                    int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
-                    if (dr2 > r * r) continue;
-                    IEntity? en = level.GetEntityAt(x, y);
-                    if (en != null && !hsAttacked.Contains(en)) {
-                        AttackEntity(en, effectFactory, playSound, showMessage);
-                        hsAttacked.Add(en);
+                // Show the shot(s)
+                if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
+                    float pow = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
+                    float shotSize = pow / Const.ShotSizeScale;
+                    int sharpshooter = GetUtilityLevel(Soldier.UtilitySkill.Sharpshooter);
+                    float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
+                    scatter *= (float)Math.Pow(Const.SharpshooterRangeMod, sharpshooter);
+                    Random rand = new Random();
+                    for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
+                        float scatterMod = n < nHits ? 0.3f : scatter;
+                        float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
+                        float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
+                        float delay = n * (float)EquippedWeapon.Type.Delay;
+                        effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", tx + 0.5f + sx }, { "FY", Y + 0.5f }, { "TY", ty + 0.5f + sy }, { "Delay", delay }, { "Duration", pow * Const.ShotDurationScale }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
                     }
                 }
             }
             return true;
         }
-        private bool AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
+        private int AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
@@ -1134,7 +1153,7 @@ namespace SpaceMercs {
             }
             if (nhits == 0) {
                 if (targetEntity is Creature cre) cre.CheckChangeTarget(0.0, this);
-                return false;
+                return 0;
             }
             double TotalDam = targetEntity.InflictDamage(GenerateDamage(nhits));
             if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
@@ -1172,7 +1191,7 @@ namespace SpaceMercs {
                 }
             }
 
-            return true;
+            return nhits;
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
