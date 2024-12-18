@@ -169,7 +169,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">10</Damage>
+        <Damage Type="Physical">12</Damage>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>
@@ -191,11 +191,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">4</Damage>
+        <Damage Type="Physical">8</Damage>
       </Effect>
       <Effect Name="Burning">
-        <Duration>4</Duration>        
-        <Damage Type="Fire">4</Damage>
+        <Duration>3</Duration>        
+        <Damage Type="Fire">6</Damage>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>
@@ -224,11 +224,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">4</Damage>
+        <Damage Type="Physical">8</Damage>
       </Effect>
       <Effect Name="Poisoned">
         <Duration>4</Duration>
-        <Damage Type="Poison">4</Damage>
+        <Damage Type="Poison">5</Damage>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>
@@ -257,7 +257,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">5</Damage>
+        <Damage Type="Physical">6</Damage>
       </Effect>
       <Effect Name="Tarred">
         <Duration>4</Duration>
@@ -287,13 +287,13 @@
       <Facility>Workshop</Facility>
       <Material Name="Acid Blood">1</Material>
     </Requirements>
-    <Desc>A grenade which distributes a highly corrosive substance, damaging them and reducing their armour.</Desc>
+    <Desc>A grenade which distributes a highly corrosive substance, damaging targets and reducing their armour.</Desc>
     <ItemEffect Name="Grenade">
       <SingleUse/>
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">4</Damage>
+        <Damage Type="Physical">8</Damage>
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
@@ -320,10 +320,10 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">10</Damage>
+        <Damage Type="Physical">12</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">10</Damage>
+        <Damage Type="Fire">14</Damage>
       </Effect>
       <Sound>Blast</Sound>
     </ItemEffect>
@@ -352,7 +352,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">15</Damage>
+        <Damage Type="Physical">20</Damage>
       </Effect>
       <Effect>
         <Damage Type="Fire">20</Damage>
@@ -392,7 +392,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">3</Damage>
+        <Damage Type="Physical">6</Damage>
       </Effect>
       <Effect Name="Stunned">
         <Duration>4</Duration>

@@ -15,6 +15,7 @@ Backburner : Features
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
+-- Is it possible to disband a colony once created?
 
 How to make slime creatures more dangerous? Maybe have them split? (Summoning mechanic)
 - Die with a splat (acid grenade effect?)

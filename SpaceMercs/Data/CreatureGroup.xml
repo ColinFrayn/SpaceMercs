@@ -4,6 +4,7 @@
   <CreatureGroup Name="Arachnids">
     <Filename>Arachnids.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Cave</Locations>
+    <QuantityScale>1.1</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Bandits">
     <Filename>Bandits.xml</Filename>
@@ -13,7 +14,7 @@
   <CreatureGroup Name="Bugs">
     <Filename>Bugs.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
-    <QuantityScale>1.4</QuantityScale>
+    <QuantityScale>1.5</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Desert Creatures">
     <Filename>DesertCreatures.xml</Filename>
@@ -50,7 +51,7 @@
   <CreatureGroup Name="Triffids">
     <Filename>Triffids.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
-    <QuantityScale>1.4</QuantityScale>
+    <QuantityScale>1.6</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Void Beasts">
     <Filename>VoidBeasts.xml</Filename>

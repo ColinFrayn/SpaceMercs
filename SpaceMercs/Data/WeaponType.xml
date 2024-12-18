@@ -97,7 +97,7 @@
     <Range Accuracy="0" DropOff="0.4">10</Range>
     <Damage>4+3</Damage>
     <Desc>A laser rifle</Desc>
-    <Sound>LaserRifle</Sound>
+    <Sound>LaserRifleSingle</Sound>
     <Noise>6</Noise>
     <Requirements>
       <MinLevel>3</MinLevel>
@@ -152,7 +152,7 @@
     <Range Accuracy="0" DropOff="0.4">8</Range>
     <Damage>2+2</Damage>
     <Desc>A laser pistol</Desc>
-    <Sound>LaserPistol</Sound>
+    <Sound>LaserPistolShort</Sound>
     <Noise>4</Noise>
     <Requirements>
       <MinLevel>3</MinLevel>
