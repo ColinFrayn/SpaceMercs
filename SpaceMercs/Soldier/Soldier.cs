@@ -273,6 +273,7 @@ namespace SpaceMercs {
             return AllDam;
         }
         public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect) {
+            if (Health <= 0.0) return;
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             foreach (Effect eff in ie.Effects) {
                 if (eff.Duration == 0) {

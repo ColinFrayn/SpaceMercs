@@ -1794,11 +1794,6 @@ namespace SpaceMercs {
                 }
             }
 
-            // Effect on death?
-            if (cr.Type.OnDeathEffect != null) {
-                applyEffect(null, cr.Type.OnDeathEffect, cr.X, cr.Y);
-            }
-
             // Drop corpse & stuff?
             Stash st = cr.GenerateStash();
             if (cr.QuestItem) st.Add(ParentMission.MItem);

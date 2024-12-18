@@ -259,6 +259,7 @@ namespace SpaceMercs {
             return AllDam;
         }
         public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect) {
+            if (Health <= 0.0) return;
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             foreach (Effect eff in ie.Effects) {
                 if (eff.Duration == 0) {
@@ -532,7 +533,6 @@ namespace SpaceMercs {
                 if (hit > 0.0) nhits++;
             }
             if (nhits == 0) return;
-            double TotalDam = en.InflictDamage(GenerateDamage(nhits), applyEffect);
 
             // Draw the shot
             if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
@@ -548,6 +548,8 @@ namespace SpaceMercs {
                     effectFactory(VisualEffect.EffectType.Shot, X, Y, new Dictionary<string, object>() { { "FX", X + 0.5f }, { "TX", en.X + 0.5f + sx }, { "FY", Y + 0.5f }, { "TY", en.Y + 0.5f + sy }, { "Delay", sdelay }, { "Duration", pow * Const.ShotDurationScale }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
                 }
             }
+
+            double TotalDam = en.InflictDamage(GenerateDamage(nhits), applyEffect);
 
             // Graphics for damage
             int delay = (int)(RangeTo(en) * 25.0);

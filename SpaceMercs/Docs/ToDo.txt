@@ -3,7 +3,11 @@ ToDo List
 -------------------------------------------------
 
 Creature OnDeathEffect:
-- Play when death occurs
+- Display damage before the death effect
+-- Need to check for creature death after the damage is applied
+--- Creature.AttackEntity() : double TotalDam = en.InflictDamage(GenerateDamage(nhits), applyEffect);
+--- Creature.InflictDamage() checks for death
+---- Can we delay that somehow? But we need the total damage... Maybe have something that calculates it externally.
 
 MapViewMission - VisualEffect.DisplayShotLine()
 - Vary line colour
