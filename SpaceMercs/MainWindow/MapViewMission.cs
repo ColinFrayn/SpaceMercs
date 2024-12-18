@@ -7,6 +7,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -611,6 +612,9 @@ namespace SpaceMercs.MainWindow {
         private void ApplyItemEffectToMap(Soldier s, IEquippable it, int px, int py) {
             ItemEffect? ie = it.BaseType.ItemEffect;
             if (ie is null) return;
+            ApplyItemEffect(s, ie, px, py);
+        }
+        private void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py) {
             HashSet<IEntity> hsEntities = new HashSet<IEntity>();
 
             for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {

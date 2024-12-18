@@ -1793,6 +1793,8 @@ namespace SpaceMercs {
                     EntityMap[x, y] = null;
                 }
             }
+
+            // Drop corpse & stuff?
             Stash st = cr.GenerateStash();
             if (cr.QuestItem) st.Add(ParentMission.MItem);
             AddToStashAtPosition(cr.X, cr.Y, st);

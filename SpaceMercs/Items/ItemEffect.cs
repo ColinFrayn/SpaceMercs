@@ -13,6 +13,9 @@ namespace SpaceMercs {
         public int Recharge { get; private set; } // Number of turns to recharge (2 = usable every other round, 1 = one use per round, 0 = unlimited uses)
         public bool CurePoison { get; private set; }
 
+        // Delegate
+        public delegate void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py);
+
         public ItemEffect(XmlNode xml) {
             Name = xml.Attributes?["Name"]?.Value ?? "<No Name>";
 
