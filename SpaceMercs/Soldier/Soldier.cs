@@ -192,6 +192,12 @@ namespace SpaceMercs {
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
         public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect) {
+            return InflictDamage_Internal(AllDam, applyEffect, true);
+        }
+        public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
+            return InflictDamage_Internal(AllDam, null, false);
+        }
+        public double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Shields?
@@ -200,12 +206,12 @@ namespace SpaceMercs {
                 if (AllDam.ContainsKey(WeaponType.DamageType.Physical)) PhysDam = AllDam[WeaponType.DamageType.Physical];
                 if (PhysDam > 0.0) {
                     if (Shields > PhysDam) {
-                        Shields -= PhysDam;
+                        if (applyDamage) Shields -= PhysDam;
                         AllDam.Remove(WeaponType.DamageType.Physical);
                     }
                     else {
                         AllDam[WeaponType.DamageType.Physical] -= Shields;
-                        Shields = 0.0;
+                        if (applyDamage) Shields = 0.0;
                     }
                 }
             }
@@ -220,11 +226,13 @@ namespace SpaceMercs {
                 else TotalDam += dam; // Negative damage = healing
             }
 
+            if (!applyDamage) return TotalDam;
+
             // Do the damage / healing
             Health -= TotalDam;
 
             // Is the soldier dead?
-            if (Health <= 0.0) KillEntity(applyEffect);
+            if (Health <= 0.0) KillEntity(applyEffect!);
             return TotalDam;
         }
         public Stash GenerateStash() {
@@ -1156,8 +1164,9 @@ namespace SpaceMercs {
                 if (targetEntity is Creature cre) cre.CheckChangeTarget(0.0, this);
                 return 0;
             }
-            double TotalDam = targetEntity.InflictDamage(GenerateDamage(nhits), applyEffect);
-            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
+
+            Dictionary<WeaponType.DamageType, double> damageDict = GenerateDamage(nhits);
+            double TotalDam = targetEntity.CalculateDamage(damageDict);
 
             // Graphics for damage
             int delay = (int)(RangeTo(targetEntity) * 25.0);
@@ -1167,6 +1176,9 @@ namespace SpaceMercs {
 
             // Play sound
             if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
+
+            targetEntity.InflictDamage(damageDict, applyEffect);
+            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
 
             // Apply effect?
             if (EquippedWeapon != null) {
