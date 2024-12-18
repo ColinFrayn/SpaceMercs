@@ -32,6 +32,7 @@ namespace SpaceMercs {
         public readonly Dictionary<WeaponType.DamageType, double> Resistances = new Dictionary<WeaponType.DamageType, double>();
         public readonly Dictionary<MaterialType, double> Scavenge = new Dictionary<MaterialType, double>();
         private readonly int WeaponTotalWeight = 0;
+        public ItemEffect? OnDeathEffect { get; private set; }
 
         public CreatureType(XmlNode xml, CreatureGroup gp) {
             Name = xml.Attributes?["Name"]?.InnerText ?? throw new Exception("CreatureType missing Name");
@@ -115,6 +116,12 @@ namespace SpaceMercs {
                 WeaponTotalWeight = 1;
                 WeaponType? wtyp = StaticData.GetWeaponTypeByName("Bite");
                 if (wtyp != null) Weapons.Add(wtyp, 1);
+            }
+
+            // Special effect on death?
+            XmlNode? xie = xml.SelectSingleNode("OnDeathEffect");
+            if (xie is not null) {
+                OnDeathEffect = new ItemEffect(xie);
             }
 
             // Misc

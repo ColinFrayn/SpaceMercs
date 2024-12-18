@@ -48,6 +48,18 @@
     <Scavenge>
       <Item Amount="0.3">Slime Egg</Item>
     </Scavenge>
+    <OnDeathEffect Name="AcidSplash">
+      <Radius>1.5</Radius>
+      <Effect>
+        <Damage Type="Physical">4</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>2</Duration>
+        <Damage Type="Acid">2</Damage>
+        <ArmourMod>-2</ArmourMod>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
   </CreatureType>
   <CreatureType Name="Slime Spitter">
     <Scale>1.0</Scale>
@@ -76,6 +88,18 @@
     <Scavenge>
       <Item Amount="0.3">Slime Egg</Item>
     </Scavenge>
+    <OnDeathEffect Name="AcidSplash">
+      <Radius>1.5</Radius>
+      <Effect>
+        <Damage Type="Physical">4</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>2</Duration>
+        <Damage Type="Acid">2</Damage>
+        <ArmourMod>-2</ArmourMod>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
   </CreatureType>
   <CreatureType Name="Slime Hunter">
     <Scale>1.2</Scale>
@@ -103,5 +127,17 @@
     <Scavenge>
       <Item Amount="0.5">Slime Egg</Item>
     </Scavenge>
+    <OnDeathEffect Name="AcidSplash">
+      <Radius>1.2</Radius>
+      <Effect>
+        <Damage Type="Physical">6</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>2</Duration>
+        <Damage Type="Acid">3</Damage>
+        <ArmourMod>-3</ArmourMod>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
   </CreatureType>
 </Data>
