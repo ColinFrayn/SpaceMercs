@@ -4,7 +4,6 @@ ToDo List
 
 Creature OnDeathEffect:
 - Play when death occurs
-- Splat sound
 
 MapViewMission - VisualEffect.DisplayShotLine()
 - Vary line colour

@@ -629,7 +629,8 @@ namespace SpaceMercs.MainWindow {
 
             // Play a sound, if there is one
             if (!string.IsNullOrEmpty(ie.SoundEffect)) {
-                SoundEffects.PlaySound(ie.SoundEffect);
+                PlaySoundThreaded(ie.SoundEffect);
+                //SoundEffects.PlaySound(ie.SoundEffect);
                 Thread.Sleep(500);
             }
 
