@@ -170,8 +170,8 @@ namespace SpaceMercs {
             if (Type.Resistances.ContainsKey(type)) red -= Type.Resistances[type];
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
-            if (!AllDam.Any()) return 0.0;
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect) {
+            if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Shields? Reduce only physical damage
             if (Shields > 0.0) {
@@ -202,7 +202,7 @@ namespace SpaceMercs {
             Health -= TotalDam;
 
             // Is the creature dead?
-            if (Health <= 0.0) KillEntity();
+            if (Health <= 0.0) KillEntity(applyEffect);
             return TotalDam;
         }
         public Stash GenerateStash() {
@@ -231,9 +231,9 @@ namespace SpaceMercs {
 
             return st;
         }
-        public void KillEntity() {
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect) {
             Health = 0.0;
-            CurrentLevel.KillCreature(this);
+            CurrentLevel.KillCreature(this, applyEffect);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
@@ -258,7 +258,7 @@ namespace SpaceMercs {
 
             return AllDam;
         }
-        public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact) {
+        public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect) {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             foreach (Effect eff in ie.Effects) {
                 if (eff.Duration == 0) {
@@ -278,7 +278,7 @@ namespace SpaceMercs {
                     _Effects.Add(new Effect(eff));
                 }
             }
-            float TotalDam = (float)InflictDamage(AllDam);
+            float TotalDam = (float)InflictDamage(AllDam, applyEffect);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
             if (ie.CurePoison) {
@@ -506,7 +506,7 @@ namespace SpaceMercs {
             else if (pt.X == X + 1 && pt.Y == Y) Move(Utils.Direction.East, playSound);
             else throw new Exception("Cannot move to non-adjacent point in one step");
         }
-        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
+        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, ItemEffect.ApplyItemEffect applyEffect) {
             if (en == null) return;
             double range = RangeTo(en);
             if (range > AttackRange) return;
@@ -532,7 +532,7 @@ namespace SpaceMercs {
                 if (hit > 0.0) nhits++;
             }
             if (nhits == 0) return;
-            double TotalDam = en.InflictDamage(GenerateDamage(nhits));
+            double TotalDam = en.InflictDamage(GenerateDamage(nhits), applyEffect);
 
             // Draw the shot
             if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
@@ -561,11 +561,11 @@ namespace SpaceMercs {
             // Apply effect?
             if (EquippedWeapon != null) {
                 if (EquippedWeapon.Type.ItemEffect != null) {
-                    en.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory);
+                    en.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
                 }
             }
         }
-        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI) {
+        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI, ItemEffect.ApplyItemEffect applyEffect) {
             int nsteps = 0;
             bool bFleeing = false;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
@@ -628,7 +628,7 @@ namespace SpaceMercs {
                             // Do the attack
                             centreView(this);
                             Thread.Sleep(200);
-                            AttackEntity(CurrentTarget, fact, playSound);
+                            AttackEntity(CurrentTarget, fact, playSound, applyEffect);
                             Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
@@ -764,7 +764,7 @@ namespace SpaceMercs {
             if (rnd.NextDouble() < 0.5) Move(d1, playSound);
             else Move(d2, playSound);
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             Stamina = MaxStamina;
 
             // Handle periodic effects
@@ -776,9 +776,9 @@ namespace SpaceMercs {
                     Thread.Sleep(250);
                 }
                 if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
-                if (e.Damage != 0.0) {
+                if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
-                    double TotalDam = InflictDamage(AllDam);
+                    double TotalDam = InflictDamage(AllDam, applyEffect);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (TotalDam > 0.0) playSound("Grunt");
                     if (Health <= 0.0) break; // If this effect killed this creature, stop here

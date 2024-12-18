@@ -445,7 +445,7 @@ namespace SpaceMercs.MainWindow {
                             // TODO
                         }
                         if (iSelectHover == I_Attack) {
-                            bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
+                            bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage, ApplyItemEffect));
                             if (bAttacked) {
                                 if (UpdateDetectionForSoldierAfterAttack(s) ||
                                     UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
@@ -479,7 +479,7 @@ namespace SpaceMercs.MainWindow {
             if (e.Button == MouseButton.Left) {
                 if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
-                    bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage));
+                    bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage, ApplyItemEffect));
                     if (bAttacked) {
                         if (UpdateDetectionForSoldierAfterAttack(s) ||
                             UpdateDetectionForLocation(hoverx, hovery, Const.BaseDetectionRange)) {
@@ -636,7 +636,7 @@ namespace SpaceMercs.MainWindow {
 
             // Apply effect to the targets
             foreach (IEntity en in hsEntities) {
-                en.ApplyEffectToEntity(source, ie, AddNewEffect);
+                en.ApplyEffectToEntity(source, ie, AddNewEffect, ApplyItemEffect);
             }
         }
         private bool CheckForTraps(Soldier s) {
@@ -648,7 +648,7 @@ namespace SpaceMercs.MainWindow {
 
             // Generate Damage
             Dictionary<WeaponType.DamageType, double> AllDam = tr.GenerateDamage();
-            double TotalDam = s.InflictDamage(AllDam);
+            double TotalDam = s.InflictDamage(AllDam, ApplyItemEffect);
             Thread.Sleep(100);
             SoundEffects.PlaySound("Click");
             Thread.Sleep(100);
@@ -1469,12 +1469,12 @@ namespace SpaceMercs.MainWindow {
             // Reset stamina, do periodic effects etc.
             List<Soldier> lSoldiers = new List<Soldier>(ThisMission!.Soldiers); // In case one dies
             foreach (Soldier s in lSoldiers) {
-                await Task.Run(() => s.EndOfTurn(AddNewEffect, CentreViewForceRedraw, PlaySoundThreaded, AnnounceMessage));
+                await Task.Run(() => s.EndOfTurn(AddNewEffect, CentreViewForceRedraw, PlaySoundThreaded, AnnounceMessage, ApplyItemEffect));
                 if (s.PlayerTeam == null && SelectedEntity == s) SelectedEntity = null;
             }
 
             // Creature AI
-            await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage, PlayerTeam.Mission_FastAI));
+            await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage, PlayerTeam.Mission_FastAI, ApplyItemEffect));
 
             // All done
             if (SelectedEntity != null && SelectedEntity is Soldier se && se.PlayerTeam == null) SelectedEntity = null;

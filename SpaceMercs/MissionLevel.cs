@@ -1777,21 +1777,26 @@ namespace SpaceMercs {
             foreach (IEntity en in Entities) en.UpdateVisibility(this);
             return true;
         }
-        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage, bool fastAI) {
+        public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, Action<string> playSound, Action<string, Action?> showMessage, bool fastAI, ItemEffect.ApplyItemEffect applyEffect) {
             List<Creature> lCreatures = new List<Creature>(Creatures); // In case one dies...
             foreach (Creature cr in lCreatures) {
                 Point oldLoc = cr.Location;
-                cr.AIStep(fact, postMoveCheck, playSound, centreView, fastAI);
-                cr.EndOfTurn(fact, centreView, playSound, showMessage);
+                cr.AIStep(fact, postMoveCheck, playSound, centreView, fastAI, applyEffect);
+                cr.EndOfTurn(fact, centreView, playSound, showMessage, applyEffect);
             }
         }
-        public void KillCreature(Creature cr) {
+        public void KillCreature(Creature cr, ItemEffect.ApplyItemEffect applyEffect) {
             Entities.Remove(cr);
             for (int y = cr.Y; y < cr.Y + cr.Size; y++) {
                 for (int x = cr.X; x < cr.X + cr.Size; x++) {
                     if (EntityMap[x, y] == null) throw new Exception("Attempting to remove creature from empty cell");
                     EntityMap[x, y] = null;
                 }
+            }
+
+            // Effect on death?
+            if (cr.Type.OnDeathEffect != null) {
+                applyEffect(null, cr.Type.OnDeathEffect, cr.X, cr.Y);
             }
 
             // Drop corpse & stuff?
@@ -1801,7 +1806,8 @@ namespace SpaceMercs {
 
             // Effect on death?
             if (cr.Type.OnDeathEffect != null) {
-                // TODO
+                Thread.Sleep(100);
+                applyEffect(null, cr.Type.OnDeathEffect, cr.X, cr.Y);
             }
 
             // Experience

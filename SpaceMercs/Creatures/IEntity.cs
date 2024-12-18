@@ -44,12 +44,12 @@ namespace SpaceMercs {
         double RangeTo(IEntity en);
         double RangeTo(Point pt);
         double RangeTo(int tx, int ty);
-        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage);
-        double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam);
+        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect);
+        double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect);
         Stash GenerateStash();
         double GetDamageReductionByDamageType(WeaponType.DamageType type);
-        void KillEntity();
+        void KillEntity(ItemEffect.ApplyItemEffect applyEffect);
         Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits);
-        void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact);
+        void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect);
     }
 }

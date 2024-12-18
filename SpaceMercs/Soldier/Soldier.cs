@@ -191,8 +191,8 @@ namespace SpaceMercs {
             if (red < 0.0) red = 0.0; // Clamp this for Soldiers (i.e. no reducing the damage so much it flips to healing)
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
-            if (!AllDam.Any()) return 0.0;
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect) {
+            if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Shields?
             if (Shields > 0.0) {
@@ -224,7 +224,7 @@ namespace SpaceMercs {
             Health -= TotalDam;
 
             // Is the soldier dead?
-            if (Health <= 0.0) KillEntity();
+            if (Health <= 0.0) KillEntity(applyEffect);
             return TotalDam;
         }
         public Stash GenerateStash() {
@@ -242,7 +242,7 @@ namespace SpaceMercs {
 
             return st;
         }
-        public void KillEntity() {
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect) {
             Health = 0.0;
             IsActive = false;
             CurrentLevel.KillSoldier(this);
@@ -272,7 +272,7 @@ namespace SpaceMercs {
 
             return AllDam;
         }
-        public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact) {
+        public void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect) {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             foreach (Effect eff in ie.Effects) {
                 if (eff.Duration == 0) {
@@ -292,7 +292,7 @@ namespace SpaceMercs {
                     _Effects.Add(new Effect(eff));
                 }
             }
-            float TotalDam = (float)InflictDamage(AllDam);
+            float TotalDam = (float)InflictDamage(AllDam, applyEffect);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
             if (ie.CurePoison) {
@@ -1065,7 +1065,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
+        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             if (level is null) throw new Exception("Null level in AttackLocation");
             if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
@@ -1111,7 +1111,7 @@ namespace SpaceMercs {
                         if (dr2 > r * r) continue;
                         IEntity? en = level.GetEntityAt(x, y);
                         if (en != null && !hsAttacked.Contains(en)) {
-                            AttackEntity(en, effectFactory, playSound, showMessage);
+                            AttackEntity(en, effectFactory, playSound, showMessage, applyEffect);
                             hsAttacked.Add(en);
                         }
                     }
@@ -1121,7 +1121,7 @@ namespace SpaceMercs {
             else {
                 IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return true; // Weird!
-                int nHits = AttackEntity(en, effectFactory, playSound, showMessage);
+                int nHits = AttackEntity(en, effectFactory, playSound, showMessage, applyEffect);
 
                 // Show the shot(s)
                 if (EquippedWeapon != null && !EquippedWeapon.Type.IsMeleeWeapon) {
@@ -1142,7 +1142,7 @@ namespace SpaceMercs {
             }
             return true;
         }
-        private int AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage) {
+        private int AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
@@ -1155,7 +1155,7 @@ namespace SpaceMercs {
                 if (targetEntity is Creature cre) cre.CheckChangeTarget(0.0, this);
                 return 0;
             }
-            double TotalDam = targetEntity.InflictDamage(GenerateDamage(nhits));
+            double TotalDam = targetEntity.InflictDamage(GenerateDamage(nhits), applyEffect);
             if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
 
             // Graphics for damage
@@ -1170,7 +1170,7 @@ namespace SpaceMercs {
             // Apply effect?
             if (EquippedWeapon != null) {
                 if (EquippedWeapon.Type.ItemEffect != null) {
-                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory);
+                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
                 }
             }
 
@@ -1193,7 +1193,7 @@ namespace SpaceMercs {
 
             return nhits;
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
             // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
             Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 
@@ -1207,9 +1207,9 @@ namespace SpaceMercs {
                     Thread.Sleep(250);
                 }
                 if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
-                if (e.Damage != 0.0) {
+                if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
-                    double TotalDam = InflictDamage(AllDam);
+                    double TotalDam = InflictDamage(AllDam, applyEffect);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (Health <= 0.0) return; // Dead. Abandon update.
                 }
