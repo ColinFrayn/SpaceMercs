@@ -7,7 +7,7 @@ using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class VisualEffect {
-        public enum EffectType { Damage, Healing, Shot, Frag, Explosion }
+        public enum EffectType { Damage, Healing, Shot, Frag, Explosion, Melee }
         private readonly EffectType type;
         private readonly long tStart;
         private readonly Dictionary<string, object> data;
@@ -27,12 +27,13 @@ namespace SpaceMercs {
 
         // Returns true if this is expired and can be removed
         public bool Display(Stopwatch sw, float aspect, Matrix4 viewM, ShaderProgram prog2D) {
-            switch (type) {
-                case EffectType.Damage: return DisplayDamage(sw, aspect, viewM);
-                case EffectType.Healing: return DisplayHealing(sw, aspect, viewM);
-                case EffectType.Shot: return DisplayShot(sw, prog2D);
-                default: throw new NotImplementedException("Undisplayable Effect Type : " + type);
-            }
+            return type switch {
+                EffectType.Damage => DisplayDamage(sw, aspect, viewM),
+                EffectType.Healing => DisplayHealing(sw, aspect, viewM),
+                EffectType.Shot => DisplayShot(sw, prog2D),
+                EffectType.Melee => true, // Nothing to display; remove it immediately
+                _ => throw new NotImplementedException("Undisplayable Effect Type : " + type),
+            };
         }
 
         private bool DisplayDamage(Stopwatch sw, float aspect, Matrix4 viewM) {
@@ -103,27 +104,29 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessage showMessage) {
-            if (type != EffectType.Shot) return;
+        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+            if (type != EffectType.Shot && type != EffectType.Melee) return;
             if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;
             if (result.Damage is null || result.Damage.Count == 0) return;
             if (result.Target is null || result.Target is not IEntity tgt) return;
-            // Graphics for damage
-            double TotalDam = tgt.CalculateDamage(result.Damage);
             Weapon? wp = null;
             IEntity? source = null;
             if (data.TryGetValue("Source", out object? oSrc) && oSrc is IEntity src) {
                 wp = src.EquippedWeapon;
                 source = src;
             }
-            effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-            tgt.InflictDamage(result.Damage, applyEffect);
-            if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+            // Graphics for damage (if tgt is still alive)
+            if (tgt.Health > 0.0) {
+                double TotalDam = tgt.CalculateDamage(result.Damage);
+                effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                tgt.InflictDamage(result.Damage, applyEffect);
+                if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
 
-            // Apply effect?
-            if (wp != null) {
-                if (wp.Type.ItemEffect != null) {
-                    result.Target.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                // Apply effect?
+                if (wp != null) {
+                    if (wp.Type.ItemEffect != null) {
+                        result.Target.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                    }
                 }
             }
 

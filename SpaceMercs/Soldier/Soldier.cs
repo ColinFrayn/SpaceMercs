@@ -405,7 +405,7 @@ namespace SpaceMercs {
             if (lvl > Level) return Level;
             else return lvl;
         }
-        public void AddWeaponExperience(Weapon wp, int exp, ShowMessage showMessage) {
+        public void AddWeaponExperience(Weapon wp, int exp, ShowMessageDelegate showMessage) {
             int maxExp = Utils.SkillLevelToExperience(Level);
             int oldlvl = 0;
             if (WeaponExperience.ContainsKey(wp.Type.WClass)) {
@@ -448,7 +448,7 @@ namespace SpaceMercs {
         public void AddExperience(int exp) {
             Experience += exp * Const.DEBUG_EXPERIENCE_MOD;
         }
-        public void CheckForLevelUp(ShowMessage showMessage) {
+        public void CheckForLevelUp(ShowMessageDelegate showMessage) {
             if (Experience >= ExperienceRequiredToReachNextLevel()) {
                 // Get all currently unresearchable techs
                 HashSet<IResearchable> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
@@ -1089,7 +1089,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
+        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
             if (level is null) throw new Exception("Null level in AttackLocation");
             if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
@@ -1148,7 +1148,7 @@ namespace SpaceMercs {
             }
             return true;
         }
-        private void AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
+        private void AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
@@ -1171,17 +1171,10 @@ namespace SpaceMercs {
             // Play sound
             if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
 
-            // Set up the projectile shots
-            if (EquippedWeapon != null && EquippedWeapon.Type.Range > 0) {
-                Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon.Type.Range, effectFactory);
-            }
-            else {
-                // TODO TESTING
-                //Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon.Type.Range, effectFactory);
-                // TODO Resolve instantly?
-            }
+            // Set up the projectile shots or auto-resolve melee effect
+            Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, ShowMessage showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
             // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
             Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 

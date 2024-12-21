@@ -459,7 +459,7 @@ namespace SpaceMercs {
         }
 
         // Actions
-        public void Move(Utils.Direction d, Action<string> playSound) {
+        public void Move(Utils.Direction d, PlaySoundDelegate playSound) {
             if (Stamina < MovementCost) return;
             SetFacing(d);
             int oldx = X, oldy = Y;
@@ -508,7 +508,7 @@ namespace SpaceMercs {
                 Stamina -= MovementCost;
             }
         }
-        private void MoveTo(Point pt, Action<string> playSound) { // Should be adjacent
+        private void MoveTo(Point pt, PlaySoundDelegate playSound) { // Should be adjacent
             if (pt.X == X && pt.Y == Y) return; // Weird - no move
 
             if (pt.X == X && pt.Y == Y - 1) Move(Utils.Direction.South, playSound);
@@ -517,7 +517,7 @@ namespace SpaceMercs {
             else if (pt.X == X + 1 && pt.Y == Y) Move(Utils.Direction.East, playSound);
             else throw new Exception("Cannot move to non-adjacent point in one step");
         }
-        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
+        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
             if (en == null) return;
             double range = RangeTo(en);
             if (range > AttackRange) return;
@@ -550,15 +550,10 @@ namespace SpaceMercs {
             if (EquippedWeapon == null) playSound("Punches");
             else playSound(EquippedWeapon.Type.SoundEffect);
 
-            // Draw the shot(s)
-            if (EquippedWeapon != null && EquippedWeapon.Type.Range > 0) {
-                Utils.CreateShots(EquippedWeapon, this, en, results, range, effectFactory);
-            }
-            else {
-                // TODO Resolve instantly?
-            }
+            // Set up the projectile shots or auto-resolve melee effect
+            Utils.CreateShots(EquippedWeapon, this, en, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
         }
-        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI, ItemEffect.ApplyItemEffect applyEffect) {
+        public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;
             bool bFleeing = false;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
@@ -743,7 +738,7 @@ namespace SpaceMercs {
                 }
             }
         }
-        private void MoveAwayFrom(IEntity en, Action<string> playSound) {
+        private void MoveAwayFrom(IEntity en, PlaySoundDelegate playSound) {
             if (en == null) return;
             Utils.Direction d1, d2;
             if (en.X > X) d1 = Utils.Direction.West;
@@ -757,7 +752,7 @@ namespace SpaceMercs {
             if (rnd.NextDouble() < 0.5) Move(d1, playSound);
             else Move(d2, playSound);
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, ShowMessage showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             Stamina = MaxStamina;
 
             // Handle periodic effects
@@ -788,7 +783,7 @@ namespace SpaceMercs {
                 CheckDefensiveGoal(showMessage);
             }
         }
-        private void CheckDefensiveGoal(ShowMessage showMessage) {
+        private void CheckDefensiveGoal(ShowMessageDelegate showMessage) {
             // Check if this creature has moved on to the entrance squares
             if (!HasMoved) return;
             if (!CurrentLevel.CheckIfLocationIsEntranceTile(Location)) return;

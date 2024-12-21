@@ -169,7 +169,14 @@ namespace SpaceMercs {
 
         // When shooting a weapon, create shot particles
         public static void CreateShots(Weapon? EquippedWeapon, IEntity from, IEntity to, List<ShotResult> results, double range, VisualEffect.EffectFactory effectFactory) {
-            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) return;
+            float sdelay = 0f;
+            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
+                foreach (ShotResult result in results) {
+                    effectFactory(EffectType.Melee, from.X, from.Y, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay } });
+                    sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
+                }
+                return;
+            }
             float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
             float shotSize = (float)avDam / Const.ShotSizeScale;
             float duration = (float)range * Const.ShotDurationScale;
@@ -177,7 +184,6 @@ namespace SpaceMercs {
             if (sLength == 0.0f) duration = avDam * Const.ShotDurationScale; // This is not a projectile e.g. arc rifle, so just leave it up for a while
             float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
             Random rand = new Random();
-            float sdelay = 0f;
             foreach (ShotResult result in results) {
                 float scatterMod = result.Damage is not null ? 0.3f : scatter;
                 float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);

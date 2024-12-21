@@ -571,7 +571,7 @@ namespace SpaceMercs {
             Levels.Clear();
             Soldiers.Clear();
         }
-        public void NextTurn(ShowMessage showMessage) {
+        public void NextTurn(ShowMessageDelegate showMessage) {
             TurnCount++;
             if (Goal == MissionGoal.Defend && TurnCount%5 == 1 && WavesRemaining > 0) {
                 WavesRemaining--;

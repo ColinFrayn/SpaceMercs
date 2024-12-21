@@ -3,7 +3,7 @@
 namespace SpaceMercs {
     internal static class SoundEffects {
         private static readonly Dictionary<string, MediaPlayer> Players = new Dictionary<string, MediaPlayer>();
-        private static readonly Object oLock = new object();
+        private static readonly object oLock = new object();
 
         public static void PlaySound(string strSound) {
             lock (oLock) {

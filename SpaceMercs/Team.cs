@@ -196,7 +196,7 @@ namespace SpaceMercs {
             if (sys.Owner is null) return 0;
             return GetRelations(sys.Owner);
         }
-        public void ImproveRelations(Race? rc, int exp, ShowMessage showMessage) {
+        public void ImproveRelations(Race? rc, int exp, ShowMessageDelegate showMessage) {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
             // Get all currently unresearchable techs

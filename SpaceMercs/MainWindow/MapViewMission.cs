@@ -1493,7 +1493,7 @@ namespace SpaceMercs.MainWindow {
             Const.dtTime.AddSeconds(Const.TurnLength);
             CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
         }
-        private bool CheckForMissionFailure(ShowMessage showMessage) {
+        private bool CheckForMissionFailure(ShowMessageDelegate showMessage) {
             if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
                 if (CurrentLevel.CountCreaturesAtEntrance() > 0) {
                     foreach (Creature cr in CurrentLevel.CreaturesAtEntrance()) { 
