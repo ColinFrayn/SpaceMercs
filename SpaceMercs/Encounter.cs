@@ -1,8 +1,10 @@
-﻿namespace SpaceMercs {
+﻿using static SpaceMercs.Delegates;
+
+namespace SpaceMercs {
     static class Encounter {
 
         // Check if we get intercepted when journeying
-        public static Mission? CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract, Action<string, Action?> showMessage) {
+        public static Mission? CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract, ShowMessage showMessage) {
             if (dJourneyTime < Const.SecondsPerDay / 2.0) return null; // Very fast drive in system, or very short hop
             if (Const.DEBUG_ENCOUNTER_FREQ_MOD <= 0.0) return null; // Turn off encounters if debugging
 
@@ -77,7 +79,7 @@
         }
 
         // Do an inactive encounter
-        private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, Action<string, Action?> showMessage) {
+        private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, ShowMessage showMessage) {
             string strDesc = rc.Known ? rc.Name : "unidentified alien";
             if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) { // REPLACE WITH msgBox
                 return Mission.CreateIgnoreMission();
@@ -117,7 +119,7 @@
         }
 
         // Do an active encounter
-        private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, Action<string, Action?> showMessage) {
+        private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, ShowMessage showMessage) {
             // Generate a mission, including the random ship
             Mission miss = Mission.CreateShipCombatMission(rc, iDiff, minDrive);
             // If this ship is clearly underclassed then try again with a higher diff

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
@@ -570,7 +571,7 @@ namespace SpaceMercs {
             Levels.Clear();
             Soldiers.Clear();
         }
-        public void NextTurn(Action<string, Action?> showMessage) {
+        public void NextTurn(ShowMessage showMessage) {
             TurnCount++;
             if (Goal == MissionGoal.Defend && TurnCount%5 == 1 && WavesRemaining > 0) {
                 WavesRemaining--;

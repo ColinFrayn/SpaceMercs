@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class VisualEffect {
@@ -100,6 +101,37 @@ namespace SpaceMercs {
             line.BindAndDraw();
 
             return false;
+        }
+
+        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessage showMessage) {
+            if (type != EffectType.Shot) return;
+            if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;
+            if (result.Damage is null || result.Damage.Count == 0) return;
+            if (result.Target is null || result.Target is not IEntity tgt) return;
+            // Graphics for damage
+            double TotalDam = tgt.CalculateDamage(result.Damage);
+            Weapon? wp = null;
+            IEntity? source = null;
+            if (data.TryGetValue("Source", out object? oSrc) && oSrc is IEntity src) {
+                wp = src.EquippedWeapon;
+                source = src;
+            }
+            effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+            tgt.InflictDamage(result.Damage, applyEffect);
+            if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+
+            // Apply effect?
+            if (wp != null) {
+                if (wp.Type.ItemEffect != null) {
+                    result.Target.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                }
+            }
+
+            // Add weapon experience if shot was with a weapon and from a soldier
+            if (source is Soldier s && wp != null && tgt is not null) {
+                int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD;
+                s.AddWeaponExperience(wp, exp, showMessage);
+            }
         }
     }
 }

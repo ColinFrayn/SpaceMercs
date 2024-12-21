@@ -7,6 +7,7 @@ using SpaceMercs.Items;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
@@ -404,6 +405,20 @@ namespace SpaceMercs {
             if (lvl > Level) return Level;
             else return lvl;
         }
+        public void AddWeaponExperience(Weapon wp, int exp, ShowMessage showMessage) {
+            int maxExp = Utils.SkillLevelToExperience(Level);
+            int oldlvl = 0;
+            if (WeaponExperience.ContainsKey(wp.Type.WClass)) {
+                oldlvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp.Type.WClass]);
+                WeaponExperience[wp.Type.WClass] += exp;
+            }
+            else WeaponExperience.Add(wp.Type.WClass, exp);
+            if (WeaponExperience[wp.Type.WClass] > maxExp) WeaponExperience[wp.Type.WClass] = maxExp; // Clamp at maximum for this level
+            int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp.Type.WClass]);
+            if (newlvl > oldlvl) {
+                showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {wp.Type.WClass}", null);
+            }
+        }
         public int GetUtilityLevel(UtilitySkill sk) {
             int val = GetRawUtilityLevel(sk);
             if (EquippedWeapon != null) val += EquippedWeapon.GetUtilitySkill(sk);
@@ -433,7 +448,7 @@ namespace SpaceMercs {
         public void AddExperience(int exp) {
             Experience += exp * Const.DEBUG_EXPERIENCE_MOD;
         }
-        public void CheckForLevelUp(Action<string, Action?> showMessage) {
+        public void CheckForLevelUp(ShowMessage showMessage) {
             if (Experience >= ExperienceRequiredToReachNextLevel()) {
                 // Get all currently unresearchable techs
                 HashSet<IResearchable> oldUnresearchable = PlayerTeam!.UnresearchableItems.ToHashSet();
@@ -1074,7 +1089,7 @@ namespace SpaceMercs {
             }
             return false;
         }
-        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        public bool AttackLocation(MissionLevel level, int tx, int ty, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
             if (level is null) throw new Exception("Null level in AttackLocation");
             if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
@@ -1104,7 +1119,6 @@ namespace SpaceMercs {
             float dx = X - tx;
             float dy = Y - ty;
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
-            Thread.Sleep(100);
 
             // Play weapon sound
             if (EquippedWeapon == null) playSound("Punches");
@@ -1120,7 +1134,7 @@ namespace SpaceMercs {
                         if (dr2 > r * r) continue;
                         IEntity? en = level.GetEntityAt(x, y);
                         if (en != null && !hsAttacked.Contains(en)) {
-                            AttackEntity(en, effectFactory, playSound, showMessage, applyEffect);
+                            AttackEntity(en, effectFactory, playSound);
                             hsAttacked.Add(en);
                         }
                     }
@@ -1130,67 +1144,44 @@ namespace SpaceMercs {
             else {
                 IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return true; // Weird!
-                int nHits = AttackEntity(en, effectFactory, playSound, showMessage, applyEffect);
-                Utils.CreateShots(EquippedWeapon, this, en, nHits, range, effectFactory);
+                AttackEntity(en, effectFactory, playSound);
             }
             return true;
         }
-        private int AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        private void AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
             double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
+
+            // Resolve the attack(s)
+            List<ShotResult> results = new List<ShotResult>();
             for (int n = 0; n < nshots; n++) {                
                 double hit = Utils.GenerateHitRoll(this, targetEntity) - (n * recoil);  // Subsequent shots are harder to hit
-                if (hit > 0.0) nhits++;
-            }
-            if (nhits == 0) {
-                if (targetEntity is Creature cre) cre.CheckChangeTarget(0.0, this);
-                return 0;
-            }
-
-            Dictionary<WeaponType.DamageType, double> damageDict = GenerateDamage(nhits);
-
-            // Add weapon experience
-            if (EquippedWeapon != null) {
-                int exp = Math.Max(1, targetEntity.Level - Level) * Const.DEBUG_WEAPON_SKILL_MOD;
-                int maxExp = Utils.SkillLevelToExperience(Level);
-                int oldlvl = 0;
-                if (WeaponExperience.ContainsKey(EquippedWeapon.Type.WClass)) {
-                    oldlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
-                    WeaponExperience[EquippedWeapon.Type.WClass] += exp;
+                if (hit > 0.0) {
+                    nhits++;
+                    Dictionary<WeaponType.DamageType, double> hitDmg = GenerateDamage(1);
+                    results.Add(new ShotResult(this, targetEntity, hitDmg));
                 }
-                else WeaponExperience.Add(EquippedWeapon.Type.WClass, exp);
-                if (WeaponExperience[EquippedWeapon.Type.WClass] > maxExp) WeaponExperience[EquippedWeapon.Type.WClass] = maxExp; // Clamp at maximum for this level
-                int newlvl = Utils.ExperienceToSkillLevel(WeaponExperience[EquippedWeapon.Type.WClass]);
-                if (newlvl > oldlvl) {
-                    showMessage($"Soldier {Name} has gained level {newlvl} proficiency in {EquippedWeapon.Type.WClass}", null);
+                else {
+                    results.Add(new ShotResult(this, targetEntity, null));
                 }
             }
-
-            // Graphics for damage
-            int delay = (int)(RangeTo(targetEntity) * 25.0);
-            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
-            Thread.Sleep(delay);
-            double TotalDam = targetEntity.CalculateDamage(damageDict);
-            effectFactory(VisualEffect.EffectType.Damage, targetEntity.X + (targetEntity.Size / 2f), targetEntity.Y + (targetEntity.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
 
             // Play sound
             if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
 
-            targetEntity.InflictDamage(damageDict, applyEffect);
-            if (targetEntity is Creature cr) cr.CheckChangeTarget(TotalDam, this);
-
-            // Apply effect?
-            if (EquippedWeapon != null) {
-                if (EquippedWeapon.Type.ItemEffect != null) {
-                    targetEntity.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
-                }
+            // Set up the projectile shots
+            if (EquippedWeapon != null && EquippedWeapon.Type.Range > 0) {
+                Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon.Type.Range, effectFactory);
             }
-
-            return nhits;
+            else {
+                // TODO TESTING
+                //Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon.Type.Range, effectFactory);
+                // TODO Resolve instantly?
+            }
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, ShowMessage showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
             // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
             Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 

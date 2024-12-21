@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public enum StatType { Strength = 1, Agility = 2, Insight = 3, Toughness = 4, Endurance = 5, Health = 6, Stamina = 7, Attack = 8, Defence = 9 };
@@ -44,7 +45,7 @@ namespace SpaceMercs {
         double RangeTo(IEntity en);
         double RangeTo(Point pt);
         double RangeTo(int tx, int ty);
-        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect);
+        void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, ShowMessage showMessage, ItemEffect.ApplyItemEffect applyEffect);
         double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect);
         double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam);
         Stash GenerateStash();

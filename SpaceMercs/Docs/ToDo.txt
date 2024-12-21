@@ -4,7 +4,10 @@ ToDo List
 
 MapViewMission - VisualEffect.DisplayShotLine()
 - Vary line colour
-- Make the impact only happen when the projectile hits
+- [TEST] Make the impact only happen when the projectile hits 
+-- What about length=0/Range=1 stuff? Maybe add in an effect which is instantly completed?
+--- What about adding experiemce after the hit too? Add source soldier to shot if there is one
+-- Test this for grenade launcher, grenades etc
 
 ==========================================================================================================
 
@@ -16,9 +19,6 @@ Backburner : Features
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 -- Is it possible to disband a colony once created?
-
-How to make slime creatures more dangerous? Maybe have them split? (Summoning mechanic)
-- Die with a splat (acid grenade effect?)
 
 Cover
 - When partially hidden from the attacker, get a def bonus

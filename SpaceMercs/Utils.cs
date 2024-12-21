@@ -168,21 +168,22 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, IEntity to, int nhits, double range, VisualEffect.EffectFactory effectFactory) {
+        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, IEntity to, List<ShotResult> results, double range, VisualEffect.EffectFactory effectFactory) {
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) return;
             float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
             float shotSize = (float)avDam / Const.ShotSizeScale;
             float duration = (float)range * Const.ShotDurationScale;
-            float sLength = (float)EquippedWeapon.Type.Length;
+            float sLength = (float)EquippedWeapon.Type.Length; // Length of a shot, not the weapon itself
             if (sLength == 0.0f) duration = avDam * Const.ShotDurationScale; // This is not a projectile e.g. arc rifle, so just leave it up for a while
             float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
             Random rand = new Random();
-            for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
-                float scatterMod = n < nhits ? 0.3f : scatter;
+            float sdelay = 0f;
+            foreach (ShotResult result in results) {
+                float scatterMod = result.Damage is not null ? 0.3f : scatter;
                 float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                float sdelay = n * (float)EquippedWeapon.Type.Delay;
-                effectFactory(VisualEffect.EffectType.Shot, from.X, from.Y, new Dictionary<string, object>() { { "FX", from.X + 0.5f }, { "TX", to.X + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", to.Y + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                effectFactory(EffectType.Shot, from.X, from.Y, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", to.X + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", to.Y + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
+                sdelay += (float)EquippedWeapon.Type.Delay;
             }
         }
 

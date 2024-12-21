@@ -4,6 +4,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Creature : IEntity {
@@ -516,7 +517,7 @@ namespace SpaceMercs {
             else if (pt.X == X + 1 && pt.Y == Y) Move(Utils.Direction.East, playSound);
             else throw new Exception("Cannot move to non-adjacent point in one step");
         }
-        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound, ItemEffect.ApplyItemEffect applyEffect) {
+        public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, Action<string> playSound) {
             if (en == null) return;
             double range = RangeTo(en);
             if (range > AttackRange) return;
@@ -528,43 +529,33 @@ namespace SpaceMercs {
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
             Thread.Sleep(100);
 
-            // Play weapon sound
-            if (EquippedWeapon == null) playSound("Punches");
-            else playSound(EquippedWeapon.Type.SoundEffect);
-
             // Do the attack
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
             double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
-
+            List<ShotResult> results = new List<ShotResult>();
             for (int n = 0; n < nshots; n++) {
                 double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
-                if (hit > 0.0) nhits++;
+                if (hit > 0.0) {
+                    nhits++;
+                    Dictionary<WeaponType.DamageType, double> hitDmg = GenerateDamage(1);
+                    results.Add(new ShotResult(this, en, hitDmg));
+                }
+                else {
+                    results.Add(new ShotResult(this, en, null));
+                }
             }
-            if (nhits == 0) return;
+
+            // Play weapon sound
+            if (EquippedWeapon == null) playSound("Punches");
+            else playSound(EquippedWeapon.Type.SoundEffect);
 
             // Draw the shot(s)
-            Utils.CreateShots(EquippedWeapon, this, en, nhits, range, effectFactory);
-
-            Dictionary<WeaponType.DamageType, double> damageDict = GenerateDamage(nhits);
-            double TotalDam = en.CalculateDamage(damageDict);
-
-            // Graphics for damage
-            int delay = (int)(RangeTo(en) * 25.0);
-            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) delay += 250;
-            Thread.Sleep(delay);
-            effectFactory(VisualEffect.EffectType.Damage, en.X + (en.Size / 2f), en.Y + (en.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-
-            // Play sound
-            if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
-
-            en.InflictDamage(damageDict, applyEffect);
-
-            // Apply effect?
-            if (EquippedWeapon != null) {
-                if (EquippedWeapon.Type.ItemEffect != null) {
-                    en.ApplyEffectToEntity(this, EquippedWeapon.Type.ItemEffect, effectFactory, applyEffect);
-                }
+            if (EquippedWeapon != null && EquippedWeapon.Type.Range > 0) {
+                Utils.CreateShots(EquippedWeapon, this, en, results, range, effectFactory);
+            }
+            else {
+                // TODO Resolve instantly?
             }
         }
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, Action<string> playSound, Action<IEntity> centreView, bool fastAI, ItemEffect.ApplyItemEffect applyEffect) {
@@ -630,7 +621,7 @@ namespace SpaceMercs {
                             // Do the attack
                             centreView(this);
                             Thread.Sleep(200);
-                            AttackEntity(CurrentTarget, fact, playSound, applyEffect);
+                            AttackEntity(CurrentTarget, fact, playSound);
                             Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
@@ -766,7 +757,7 @@ namespace SpaceMercs {
             if (rnd.NextDouble() < 0.5) Move(d1, playSound);
             else Move(d2, playSound);
         }
-        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, Action<string, Action?> showMessage, ItemEffect.ApplyItemEffect applyEffect) {
+        public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<string> playSound, ShowMessage showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             Stamina = MaxStamina;
 
             // Handle periodic effects
@@ -797,7 +788,7 @@ namespace SpaceMercs {
                 CheckDefensiveGoal(showMessage);
             }
         }
-        private void CheckDefensiveGoal(Action<string, Action?> showMessage) {
+        private void CheckDefensiveGoal(ShowMessage showMessage) {
             // Check if this creature has moved on to the entrance squares
             if (!HasMoved) return;
             if (!CurrentLevel.CheckIfLocationIsEntranceTile(Location)) return;
@@ -823,7 +814,8 @@ namespace SpaceMercs {
         public void SetAlert() {
             IsAlert = true;
         }
-        public void CheckChangeTarget(double totalDam, Soldier attacker) {
+        public void CheckChangeTarget(double totalDam, IEntity? attacker) {
+            if (attacker is null) return;
             if (CurrentTarget == attacker) return;
             if (CurrentTarget == null) {
                 SetTarget(attacker);

@@ -7,8 +7,8 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
 using System.Text;
-using System.Windows.Media.Media3D;
 using System.Windows.Threading;
+using static SpaceMercs.Delegates;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -280,7 +280,10 @@ namespace SpaceMercs.MainWindow {
 
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
-                if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) Effects.RemoveAt(n);
+                if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) {
+                    Effects[n].ResolveEffect(AddNewEffect, ApplyItemEffect, AnnounceMessage);
+                    Effects.RemoveAt(n);
+                }
             }
 
             // Draw any static GUI elements (overlay)
@@ -445,7 +448,7 @@ namespace SpaceMercs.MainWindow {
                             // TODO
                         }
                         if (iSelectHover == I_Attack) {
-                            bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded, AnnounceMessage, ApplyItemEffect));
+                            bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded));
                             if (bAttacked) {
                                 if (UpdateDetectionForSoldierAfterAttack(s) ||
                                     UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
@@ -479,7 +482,7 @@ namespace SpaceMercs.MainWindow {
             if (e.Button == MouseButton.Left) {
                 if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
-                    bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded, AnnounceMessage, ApplyItemEffect));
+                    bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded));
                     if (bAttacked) {
                         if (UpdateDetectionForSoldierAfterAttack(s) ||
                             UpdateDetectionForLocation(hoverx, hovery, Const.BaseDetectionRange)) {
@@ -1490,7 +1493,7 @@ namespace SpaceMercs.MainWindow {
             Const.dtTime.AddSeconds(Const.TurnLength);
             CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
         }
-        private bool CheckForMissionFailure(Action<string, Action?> showMessage) {
+        private bool CheckForMissionFailure(ShowMessage showMessage) {
             if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
                 if (CurrentLevel.CountCreaturesAtEntrance() > 0) {
                     foreach (Creature cr in CurrentLevel.CreaturesAtEntrance()) { 

@@ -1,8 +1,8 @@
 ﻿using SpaceMercs.Dialogs;
 using SpaceMercs.Items;
 using System.IO;
-using System.Windows.Interop;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Team {
@@ -196,7 +196,7 @@ namespace SpaceMercs {
             if (sys.Owner is null) return 0;
             return GetRelations(sys.Owner);
         }
-        public void ImproveRelations(Race? rc, int exp, Action<string, Action?> showMessage) {
+        public void ImproveRelations(Race? rc, int exp, ShowMessage showMessage) {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
             // Get all currently unresearchable techs
