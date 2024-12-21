@@ -218,7 +218,7 @@
     <Rarity>0.05</Rarity>
     <Scavenged/>
     <BonusArmour>
-      <Bonus Type="Physical" Amount="1"/>
+      <Bonus Type="Physical" Amount="0.4"/>
     </BonusArmour>
     <Desc>Chitin is fashioned from the carapace of certain creatures and makes a tough armour, resistant to physical attacks.</Desc>
   </MaterialType>
@@ -229,7 +229,7 @@
     <Rarity>0.02</Rarity>
     <Scavenged/>
     <BonusArmour>
-      <Bonus Type="Physical" Amount="1"/>
+      <Bonus Type="Physical" Amount="0.6"/>
     </BonusArmour>
     <Desc>Chitin is fashioned from the carapace of certain creatures and makes a tough armour, resistant to physical attacks.</Desc>
   </MaterialType>
@@ -240,7 +240,7 @@
     <Rarity>0.001</Rarity>
     <Scavenged/>
     <BonusArmour>
-      <Bonus Type="Fire" Amount="5"/>
+      <Bonus Type="Fire" Amount="4"/>
     </BonusArmour>
     <Desc>Vulcanin is fashioned from the skin of extremely rare fire-resistant creatures, and makes a tough armour.</Desc>
   </MaterialType>
@@ -251,7 +251,7 @@
     <Rarity>0.001</Rarity>
     <Scavenged/>
     <BonusArmour>
-      <Bonus Type="Acid" Amount="5"/>
+      <Bonus Type="Acid" Amount="4"/>
     </BonusArmour>
     <Desc>Xenolite is fashioned from the skin of extremely rare acid-resistant creatures, and makes a tough armour.</Desc>
   </MaterialType>

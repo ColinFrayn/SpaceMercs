@@ -8,8 +8,6 @@ Weapon Shots
 - Sometimes there is a delay for the sounds on impact. Why?? Because previous sound is playing? Also blocks the numerical effect.
 - Show dmg at different xPos
 
-Fixed dmg reduction - reduce it a bit maybe or else it's too good with multiple shots??
-
 ==========================================================================================================
 
 
