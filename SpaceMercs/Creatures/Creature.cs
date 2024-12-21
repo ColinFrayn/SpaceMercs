@@ -244,24 +244,20 @@ namespace SpaceMercs {
             Health = 0.0;
             CurrentLevel.KillCreature(this, applyEffect);
         }
-        public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
+        public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             if (EquippedWeapon == null) {
-                double dam = 0.0;
-                for (int n=0; n<nhits; n++) dam += rnd.NextDouble() * (Level + 5) + Level + 5;
+                double dam = rnd.NextDouble() * (Level + 5) + Level + 5;
                 dam *= Const.CreatureMeleeDamageScale * Const.CreatureAttackDamageScale;
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double dam = 0.0;
                 double hmod = Const.CreatureAttackDamageBaseMod + Attack * Const.CreatureAttackDamageScale;
-                for (int n = 0; n < nhits; n++) {
-                    dam += rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
-                }
+                double dam = rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
-                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
-                    else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
+                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
+                    else AllDam.Add(bdam.Key, bdam.Value * hmod);
                 }                
             }
 
@@ -534,15 +530,22 @@ namespace SpaceMercs {
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
             double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
             List<ShotResult> results = new List<ShotResult>();
+            int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
             for (int n = 0; n < nshots; n++) {
-                double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
-                if (hit > 0.0) {
-                    nhits++;
-                    Dictionary<WeaponType.DamageType, double> hitDmg = GenerateDamage(1);
-                    results.Add(new ShotResult(this, en, hitDmg));
+                if (r > 0d) {
+                    results.Add(new ShotResult(this, true));
                 }
                 else {
-                    results.Add(new ShotResult(this, en, null));
+                    // Single target so roll to hit
+                    if (en is null) return;
+                    double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
+                    if (hit > 0.0) {
+                        nhits++;
+                        results.Add(new ShotResult(this, true));
+                    }
+                    else {
+                        results.Add(new ShotResult(this, false));
+                    }
                 }
             }
 
@@ -551,7 +554,7 @@ namespace SpaceMercs {
             else playSound(EquippedWeapon.Type.SoundEffect);
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, en, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
+            Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
         }
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;

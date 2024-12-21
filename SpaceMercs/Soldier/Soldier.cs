@@ -256,26 +256,20 @@ namespace SpaceMercs {
             IsActive = false;
             CurrentLevel.KillSoldier(this);
         }
-        public Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits) {
+        public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             // Utils.HitToMod(hit); // Damage modifier for quality of hit
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
             if (EquippedWeapon == null) {
-                double dam = 0.0;
-                for (int n = 0; n < nhits; n++) {
-                    dam += (rnd.NextDouble() + 0.5) * Const.SoldierAttackDamageScale * Attack;  // Unarmed melee does rubbish damage, in general
-                }
+                double dam = (rnd.NextDouble() + 0.5) * Const.SoldierAttackDamageScale * Attack;  // Unarmed melee does rubbish damage, in general
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
                 double hmod = Attack * Const.SoldierAttackDamageScale; // Increasing damage bonus per attack point (includes weapon skill etc.)
-                double dam = 0.0;
-                for (int n = 0; n < nhits; n++) {
-                    dam += EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
-                }
+                double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
-                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod * nhits;
-                    else AllDam.Add(bdam.Key, bdam.Value * hmod * nhits);
+                    if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
+                    else AllDam.Add(bdam.Key, bdam.Value * hmod);
                 }
             }
 
@@ -1094,15 +1088,14 @@ namespace SpaceMercs {
             if (Stamina < AttackCost) return false;
             // Check that we're attacking a square in range, or an entity part of which is in range
             double range = RangeTo(tx, ty);
+            IEntity? en = level.GetEntityAt(tx, ty);
             if (range > AttackRange) {
-                IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return false;
                 if (RangeTo(en) > AttackRange) return false;
             }
 
             // Check that we're attacking a square we can see, or an entity part of which we can see
             if (!SightMap[tx, ty]) {
-                IEntity? en = level.GetEntityAt(tx, ty);
                 if (en == null) return false;
                 if (!CanSee(en)) return false;
             }
@@ -1124,31 +1117,6 @@ namespace SpaceMercs {
             if (EquippedWeapon == null) playSound("Punches");
             else playSound(EquippedWeapon.Type.SoundEffect);
 
-            int r = EquippedWeapon != null ? (int)Math.Ceiling(EquippedWeapon.Type.Area) : 0;
-            // AoE Weapon
-            if (r > 0) {
-                HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
-                for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
-                    for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
-                        int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
-                        if (dr2 > r * r) continue;
-                        IEntity? en = level.GetEntityAt(x, y);
-                        if (en != null && !hsAttacked.Contains(en)) {
-                            AttackEntity(en, effectFactory, playSound);
-                            hsAttacked.Add(en);
-                        }
-                    }
-                }
-            }
-            // Single target
-            else {
-                IEntity? en = level.GetEntityAt(tx, ty);
-                if (en == null) return true; // Weird!
-                AttackEntity(en, effectFactory, playSound);
-            }
-            return true;
-        }
-        private void AttackEntity(IEntity targetEntity, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
@@ -1156,20 +1124,28 @@ namespace SpaceMercs {
 
             // Resolve the attack(s)
             List<ShotResult> results = new List<ShotResult>();
+            int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
             for (int n = 0; n < nshots; n++) {                
-                double hit = Utils.GenerateHitRoll(this, targetEntity) - (n * recoil);  // Subsequent shots are harder to hit
-                if (hit > 0.0) {
-                    nhits++;
-                    Dictionary<WeaponType.DamageType, double> hitDmg = GenerateDamage(1);
-                    results.Add(new ShotResult(this, targetEntity, hitDmg));
+                if (r > 0d) {
+                    results.Add(new ShotResult(this, true));
                 }
                 else {
-                    results.Add(new ShotResult(this, targetEntity, null));
+                    // Single target so roll to hit
+                    if (en is null) return false;
+                    double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
+                    if (hit > 0.0) {
+                        nhits++;
+                        results.Add(new ShotResult(this, true));
+                    }
+                    else {
+                        results.Add(new ShotResult(this, false));
+                    }
                 }
             }
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
+            Utils.CreateShots(EquippedWeapon, this, tx, ty, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
+            return true;
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)

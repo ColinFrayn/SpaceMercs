@@ -105,38 +105,64 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, PlaySoundDelegate playSound) {
+        public void ResolveEffect(MissionLevel level, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, PlaySoundDelegate playSound) {
             if (type != EffectType.Shot && type != EffectType.Melee) return;
             if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;
-            if (result.Damage is null || result.Damage.Count == 0) return;
-            if (result.Target is null || result.Target is not IEntity tgt) return;
+            if (!result.Hit) return;
             Weapon? wp = null;
             IEntity? source = null;
-            if (data.TryGetValue("Source", out object? oSrc) && oSrc is IEntity src) {
+            if (result.Source is IEntity src) {
                 wp = src.EquippedWeapon;
                 source = src;
             }
-            // Graphics for damage (if tgt is still alive)
-            if (tgt.Health > 0.0) {
-                double TotalDam = tgt.CalculateDamage(result.Damage);
-                effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                tgt.InflictDamage(result.Damage, applyEffect);
-                if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
 
-                playSound("Smash");
+            int tx = (int)X;
+            int ty = (int)Y;
+            HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
 
-                // Apply effect?
-                if (wp != null) {
-                    if (wp.Type.ItemEffect != null) {
-                        result.Target.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+            // Is this an AoE Weapon then resolve the AoE
+            int r = (int)Math.Ceiling(wp?.Type?.Area ?? 0d);
+            if (r > 0) {
+                for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
+                    for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
+                        int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
+                        if (dr2 > r * r) continue;
+                        IEntity? en = level.GetEntityAt(x, y);
+                        if (en != null && !hsAttacked.Contains(en)) {
+                            hsAttacked.Add(en);
+                        }
                     }
                 }
             }
+            // Single target
+            else {
+                IEntity? en = level.GetEntityAt(tx, ty);
+                if (en is null) return; // Weird!
+                hsAttacked.Add(en);
+            }
 
-            // Add weapon experience if shot was with a weapon and from a soldier
-            if (source is Soldier s && wp != null && tgt is not null) {
-                int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD;
-                s.AddWeaponExperience(wp, exp, showMessage);
+            // Graphics for damage (if tgt is still alive)
+            playSound("Smash");
+            foreach (IEntity tgt in hsAttacked) {
+                if (tgt.Health > 0.0 && source is not null) {
+                    Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
+                    double TotalDam = tgt.CalculateDamage(hitDmg);
+                    effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    tgt.InflictDamage(hitDmg, applyEffect);
+                    if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+
+                    // Apply effect?
+                    if (wp != null) {
+                        if (wp.Type.ItemEffect != null) {
+                            tgt.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                        }
+                    }
+                    // Add weapon experience if shot was with a weapon and from a soldier
+                    if (source is Soldier s && wp != null && tgt is not null) {
+                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count;
+                        s.AddWeaponExperience(wp, exp, showMessage);
+                    }
+                }
             }
         }
     }

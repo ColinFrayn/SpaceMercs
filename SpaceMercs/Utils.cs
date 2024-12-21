@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using System;
 using System.Xml;
 using static SpaceMercs.Soldier;
 using static SpaceMercs.VisualEffect;
@@ -168,28 +167,29 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, IEntity to, List<ShotResult> results, double range, VisualEffect.EffectFactory effectFactory) {
+        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, List<ShotResult> results, double range, VisualEffect.EffectFactory effectFactory) {
             float sdelay = 0f;
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
                 foreach (ShotResult result in results) {
-                    effectFactory(EffectType.Melee, from.X, from.Y, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay } });
+                    effectFactory(EffectType.Melee, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay } });
                     sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
                 }
                 return;
             }
             float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
             float shotSize = (float)avDam / Const.ShotSizeScale;
-            float duration = (float)range * Const.ShotDurationScale;
-            float sLength = (float)EquippedWeapon.Type.Length; // Length of a shot, not the weapon itself
+            float duration = (float)range * Const.ShotDurationScale / (float)EquippedWeapon.Type.ShotSpeed;
+            float sLength = (float)EquippedWeapon.Type.ShotLength; // Length of a shot, not the weapon itself
             if (sLength == 0.0f) duration = avDam * Const.ShotDurationScale; // This is not a projectile e.g. arc rifle, so just leave it up for a while
             float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
             Random rand = new Random();
+            Color col = EquippedWeapon?.Type?.ShotColor ?? Color.FromArgb(255, 200, 200, 200);
             foreach (ShotResult result in results) {
-                float scatterMod = result.Damage is not null ? 0.3f : scatter;
+                float scatterMod = result.Hit ? 0.3f : scatter;
                 float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                effectFactory(EffectType.Shot, from.X, from.Y, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", to.X + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", to.Y + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", Color.FromArgb(255, 200, 200, 200) } });
-                sdelay += (float)EquippedWeapon.Type.Delay;
+                effectFactory(EffectType.Shot, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", tx + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", ty + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
+                sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
             }
         }
 

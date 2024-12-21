@@ -22,27 +22,34 @@ namespace SpaceMercs {
         public bool Modifiable { get; private set; }
         public double Recoil { get; private set; } // Hit penalty for subsequent shots after first.
         public double Delay { get; private set; } // Delay between shots
-        public double Length { get; private set; } // Shot length
+        public double ShotLength { get; private set; }
+        public double ShotSpeed { get; private set; }
+        public Color ShotColor { get; private set; }
 
         public WeaponType(XmlNode xml) : base(xml) {
-            XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception("Could not find range setting for weapon type");
             string wclass = xml.GetAttributeText("Class", "Other");
             if (!Enum.TryParse<WeaponClass>(wclass, out WeaponClass wc)) {
                 throw new Exception($"Could not find weapon class {wclass}");
             }
             WClass = wc;
+
+            XmlNode nRange = xml.SelectSingleNode("Range") ?? throw new Exception($"Could not find range setting for weapon type {Name}");
             Range = double.Parse(nRange.InnerText);
-            Speed = xml.SelectNodeDouble("Speed");
-            SoundEffect = xml.SelectNodeText("Sound");
             Accuracy = nRange.GetAttributeDouble("Accuracy", 0.0);
             DropOff = nRange.GetAttributeDouble("DropOff", 0.0);
-            Area = xml.GetAttributeDouble("Damage/Area", 0.0);
+            ShotLength = nRange.GetAttributeDouble("Length", 0.0);
+            ShotSpeed = nRange.GetAttributeDouble("Speed", 1.0);
+
+            Speed = xml.SelectNodeDouble("Speed");
+            SoundEffect = xml.SelectNodeText("Sound");
             NoiseLevel = xml.GetAttributeInt("Noise", 0);
-            string strDam = xml.SelectNodeText("Damage");
+            XmlNode nDam = xml.SelectSingleNode("Damage") ?? throw new Exception($"Could not find damage setting for weapon {Name}"); ;
+            string strDam = nDam.InnerText;
             string[] bits = strDam.Split('+');
-            if (bits.Length != 2) throw new Exception("Could not parse damage string : " + strDam);
+            if (bits.Length != 2) throw new Exception($"Could not parse damage string \"{strDam}\" in weapon {Name}");
             DBase = double.Parse(bits[0]);
             DMod = double.Parse(bits[1]);
+            Area = nDam.GetAttributeDouble("Area", 0.0);
             DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
@@ -50,7 +57,16 @@ namespace SpaceMercs {
             Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);
-            Length = xml.SelectNodeDouble("Length", 0.0);
+            string strCol = xml.GetAttributeText("Colour", string.Empty);
+            ShotColor = Color.FromArgb(255, 200, 200, 200);
+            if (!string.IsNullOrEmpty(strCol)) {
+                string[] cbits = strCol.Split(',');
+                if (cbits.Length != 3) throw new Exception($"Could not parse Colour string \"{strCol}\" in weapon {Name}");
+                int r = (int)(double.Parse(cbits[0]) * 255.0);
+                int g = (int)(double.Parse(cbits[1]) * 255.0);
+                int b = (int)(double.Parse(cbits[2]) * 255.0);
+                ShotColor = Color.FromArgb(255, r, g, b);
+            }
         }
 
         public override string ToString() {

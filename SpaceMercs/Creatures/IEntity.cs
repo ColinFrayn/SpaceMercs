@@ -51,7 +51,7 @@ namespace SpaceMercs {
         Stash GenerateStash();
         double GetDamageReductionByDamageType(WeaponType.DamageType type);
         void KillEntity(ItemEffect.ApplyItemEffect applyEffect);
-        Dictionary<WeaponType.DamageType, double> GenerateDamage(int nhits);
+        Dictionary<WeaponType.DamageType, double> GenerateDamage();
         void ApplyEffectToEntity(IEntity? src, ItemEffect ie, VisualEffect.EffectFactory fact, ItemEffect.ApplyItemEffect applyEffect);
     }
 }

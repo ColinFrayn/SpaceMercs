@@ -281,7 +281,7 @@ namespace SpaceMercs.MainWindow {
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
                 if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) {
-                    Effects[n].ResolveEffect(AddNewEffect, ApplyItemEffect, AnnounceMessage, PlaySoundThreaded);
+                    Effects[n].ResolveEffect(CurrentLevel, AddNewEffect, ApplyItemEffect, AnnounceMessage, PlaySoundThreaded);
                     Effects.RemoveAt(n);
                 }
             }
@@ -1326,19 +1326,23 @@ namespace SpaceMercs.MainWindow {
             // Passable square
             if (Utils.IsPassable(CurrentLevel.Map[hoverx, hovery])) {
                 IEntity? en = CurrentLevel.GetEntityAt(hoverx, hovery);
+                TexSpecs tsa = Textures.GetTexCoords(Textures.MiscTexture.Attack);
                 // Walk to this point
                 if (en == null) {
                     TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Walk);
-                    bool bIsInRange = DistMap[hoverx, hovery] != -1;
-                    gpSelect.InsertIconItem(I_GoTo, ts, bIsInRange, null);
+                    bool bIsInWalkingRange = DistMap[hoverx, hovery] != -1;
+                    gpSelect.InsertIconItem(I_GoTo, ts, bIsInWalkingRange, null);
+                    if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Area > 0) {
+                        bool bIsInRange = SelectedEntity.CanSee(hoverx, hovery) && SelectedEntity.RangeTo(hoverx, hovery) <= SelectedEntity.AttackRange;
+                        bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
+                        gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
+                    }
                 }
                 // Attack a creature
                 else if (en is Creature) {
-                    TexSpecs tsa = Textures.GetTexCoords(Textures.MiscTexture.Attack);
                     TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
                     bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
-                    if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Area > 0) bEnabled = false;
                     if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Stable && s.HasMoved) {
                         gpSelect.InsertIconItem(I_Attack, tsm, false, null);
                     }
@@ -1408,8 +1412,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void SelectedSoldierAttack(GUIIconButton sender) {
             if (bAIRunning) return;
-            if (SelectedEntity == null || !(SelectedEntity is Soldier)) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
-            Soldier s = (Soldier)SelectedEntity;
+            if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
             GenerateTargetMap(s, s.AttackRange);
             CurrentAction = SoldierAction.Attack;
             if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
