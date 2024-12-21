@@ -2,12 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-MapViewMission - VisualEffect.DisplayShotLine()
+Weapon Shots
 - Vary line colour
-- [TEST] Make the impact only happen when the projectile hits 
--- What about length=0/Range=1 stuff? Maybe add in an effect which is instantly completed?
---- What about adding experiemce after the hit too? Add source soldier to shot if there is one
--- Test this for grenade launcher, grenades etc
+- Test this for grenade launcher, grenades etc
+- Sometimes there is a delay for the sounds on impact. Why?? Because previous sound is playing? Also blocks the numerical effect.
+- Show dmg at different xPos
+
+Fixed dmg reduction - reduce it a bit maybe or else it's too good with multiple shots??
 
 ==========================================================================================================
 

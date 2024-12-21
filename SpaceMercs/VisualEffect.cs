@@ -44,18 +44,19 @@ namespace SpaceMercs {
         }
         private bool DisplayText(Stopwatch sw, float aspect, Matrix4 viewM, Color col) {
             long mili = sw.ElapsedMilliseconds - tStart;
-            if (mili > 800) return true; // Remove this effect after a while
+            if (mili > 600) return true; // Remove this effect after a while
+            float fract = ((float)mili / 600f);
             object oVal = data["Value"];
             float val = (oVal is double) ? (float)((double)oVal) : (float)oVal;
             float scale = lScale * 0.8f;
-            if (mili < 400) scale *= 0.8f + (mili / 400f);
-            else scale *= 1.8f - ((mili - 400f) / 300f);
+            if (fract < 0.5) scale *= 0.8f + fract;
+            else scale *= 1.3f - ((fract - 0.5f) * 2f);
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.CentreMiddle,
                 Aspect = 1f,
                 TextColour = col,
                 XPos = X,
-                YPos = Y,
+                YPos = Y + (fract * 1.5f),
                 ZPos = 0.02f,
                 Scale = scale,
                 FlipY = true,
@@ -104,7 +105,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+        public void ResolveEffect(EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, PlaySoundDelegate playSound) {
             if (type != EffectType.Shot && type != EffectType.Melee) return;
             if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;
             if (result.Damage is null || result.Damage.Count == 0) return;
@@ -121,6 +122,8 @@ namespace SpaceMercs {
                 effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                 tgt.InflictDamage(result.Damage, applyEffect);
                 if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+
+                playSound("Smash");
 
                 // Apply effect?
                 if (wp != null) {

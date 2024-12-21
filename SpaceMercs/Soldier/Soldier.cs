@@ -1168,9 +1168,6 @@ namespace SpaceMercs {
                 }
             }
 
-            // Play sound
-            if (EquippedWeapon != null && EquippedWeapon.Type.Area == 0) playSound("Smash");
-
             // Set up the projectile shots or auto-resolve melee effect
             Utils.CreateShots(EquippedWeapon, this, targetEntity, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
         }

@@ -281,7 +281,7 @@ namespace SpaceMercs.MainWindow {
             // Display visual effects
             for (int n = Effects.Count - 1; n >= 0; n--) {
                 if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) {
-                    Effects[n].ResolveEffect(AddNewEffect, ApplyItemEffect, AnnounceMessage);
+                    Effects[n].ResolveEffect(AddNewEffect, ApplyItemEffect, AnnounceMessage, PlaySoundThreaded);
                     Effects.RemoveAt(n);
                 }
             }
