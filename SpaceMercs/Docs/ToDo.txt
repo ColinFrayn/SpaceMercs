@@ -3,10 +3,12 @@ ToDo List
 -------------------------------------------------
 
 Weapon Shots
-- Add a visual effect for an explosion
--- Also apply this to when any effect with an AoE goes off (creature dies with a splot, throw grenade etc.)
+- Visual explosion effect
+-- Add to grenades
+-- Creature dies with a splat
+-- Make it different colours
 - Sometimes there is a delay for the sounds on impact. Why?? Because previous sound is playing? Also blocks the numerical effect.
-- What does attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
+- What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
 
 Show dmg at different xPos when doing multiple so they don't overlap
 

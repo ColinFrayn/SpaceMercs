@@ -1,8 +1,10 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont.Cache;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
+using System.Windows.Forms;
 using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
@@ -31,6 +33,7 @@ namespace SpaceMercs {
                 EffectType.Damage => DisplayDamage(sw, aspect, viewM),
                 EffectType.Healing => DisplayHealing(sw, aspect, viewM),
                 EffectType.Shot => DisplayShot(sw, prog2D),
+                EffectType.Explosion => DisplayExplosion(sw, prog2D, viewM),
                 EffectType.Melee => true, // Nothing to display; remove it immediately
                 _ => throw new NotImplementedException("Undisplayable Effect Type : " + type),
             };
@@ -72,7 +75,7 @@ namespace SpaceMercs {
             float delay = (float)data["Delay"];
             if (mili < delay) return false;
             float duration = (float)data["Duration"];
-            float fract = (mili-delay) / duration;
+            float fract = (mili - delay) / duration;
             if (fract < 0f) fract = 0f;
             if (fract > 1f) return true;
 
@@ -96,12 +99,38 @@ namespace SpaceMercs {
                 }
             }
 
+            Vector4 vCol = new Vector4((float)col.R / 255f, (float)col.G / 255f, (float)col.B / 255f, 1f);
+            prog2D.SetUniform("flatColour", vCol);
             GL.UseProgram(prog2D.ShaderProgramHandle);
 
-            ThickLine2D line = ThickLine2D.Make_VertexPos2DCol(fx, fy, tx, ty, size, col);
+            ThickLine2D line = ThickLine2D.Make_Vertex3D(fx, fy, 0f, tx, ty, 0f, size);
 
             line.BindAndDraw();
 
+            return false;
+        }
+        private bool DisplayExplosion(Stopwatch sw, ShaderProgram prog2D, Matrix4 viewM) {
+            long mili = sw.ElapsedMilliseconds - tStart;
+            float duration = (float)data["Duration"];
+            float fract = mili / duration;
+            if (fract < 0f) fract = 0f;
+            if (fract > 1f) return true;
+
+            float size = (float)data["Size"];
+            if (fract < 0.8) size *= fract * 1.25f;
+            Color col = (Color)data["Colour"];
+
+            Matrix4 scaleM = Matrix4.CreateScale(size);
+            Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(X, Y, 0.02f));
+            prog2D.SetUniform("model", scaleM * transOriginM);
+
+            Vector4 vCol = new Vector4((float)col.R / 255f, (float)col.G / 255f, (float)col.B / 255f, 1f);
+            prog2D.SetUniform("flatColour", vCol);
+
+            GL.UseProgram(prog2D.ShaderProgramHandle);
+            Disc.Disc32.BindAndDraw();
+
+            prog2D.SetUniform("model", Matrix4.Identity);
             return false;
         }
 
@@ -123,6 +152,8 @@ namespace SpaceMercs {
             // Is this an AoE Weapon then resolve the AoE
             int r = (int)Math.Ceiling(wp?.Type?.Area ?? 0d);
             if (r > 0) {
+                Color col = Color.FromArgb(150, 150, 50, 50);
+                effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 300f }, { "Size", (float)r }, { "Colour", col } });
                 for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
                     for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
                         int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);

@@ -267,7 +267,6 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("texScale", 1f, 1f);
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", false);
-            pos2DCol4ShaderProgram.SetUniform("view", translateM);
 
             // Display the scene
             CurrentLevel.DisplayMap(fullShaderProgram);
@@ -279,8 +278,11 @@ namespace SpaceMercs.MainWindow {
             CurrentLevel.DisplayEntities(fullShaderProgram, PlayerTeam.Mission_ShowLabels, PlayerTeam.Mission_ShowStatBars, PlayerTeam.Mission_ShowEffects, fMissionViewZ, Aspect, translateM);
 
             // Display visual effects
+            flatColourShaderProgram.SetUniform("view", translateM);
+            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
             for (int n = Effects.Count - 1; n >= 0; n--) {
-                if (Effects[n].Display(sw, Aspect, translateM, pos2DCol4ShaderProgram)) {
+                if (Effects[n].Display(sw, Aspect, translateM, flatColourShaderProgram)) {
                     Effects[n].ResolveEffect(CurrentLevel, AddNewEffect, ApplyItemEffect, AnnounceMessage, PlaySoundThreaded);
                     Effects.RemoveAt(n);
                 }

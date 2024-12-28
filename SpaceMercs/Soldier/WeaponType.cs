@@ -39,6 +39,16 @@ namespace SpaceMercs {
             DropOff = nRange.GetAttributeDouble("DropOff", 0.0);
             ShotLength = nRange.GetAttributeDouble("Length", 0.0);
             ShotSpeed = nRange.GetAttributeDouble("Speed", 1.0);
+            string strCol = nRange.GetAttributeText("Colour", string.Empty);
+            ShotColor = Color.FromArgb(255, 200, 200, 200);
+            if (!string.IsNullOrEmpty(strCol)) {
+                string[] cbits = strCol.Split(',');
+                if (cbits.Length != 3) throw new Exception($"Could not parse Colour string \"{strCol}\" in weapon {Name}");
+                int r = (int)(double.Parse(cbits[0]) * 255.0);
+                int g = (int)(double.Parse(cbits[1]) * 255.0);
+                int b = (int)(double.Parse(cbits[2]) * 255.0);
+                ShotColor = Color.FromArgb(255, r, g, b);
+            }
 
             Speed = xml.SelectNodeDouble("Speed");
             SoundEffect = xml.SelectNodeText("Sound");
@@ -57,16 +67,6 @@ namespace SpaceMercs {
             Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);
-            string strCol = xml.GetAttributeText("Colour", string.Empty);
-            ShotColor = Color.FromArgb(255, 200, 200, 200);
-            if (!string.IsNullOrEmpty(strCol)) {
-                string[] cbits = strCol.Split(',');
-                if (cbits.Length != 3) throw new Exception($"Could not parse Colour string \"{strCol}\" in weapon {Name}");
-                int r = (int)(double.Parse(cbits[0]) * 255.0);
-                int g = (int)(double.Parse(cbits[1]) * 255.0);
-                int b = (int)(double.Parse(cbits[2]) * 255.0);
-                ShotColor = Color.FromArgb(255, r, g, b);
-            }
         }
 
         public override string ToString() {

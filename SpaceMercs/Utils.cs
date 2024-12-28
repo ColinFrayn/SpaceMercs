@@ -185,7 +185,7 @@ namespace SpaceMercs {
             Random rand = new Random();
             Color col = EquippedWeapon?.Type?.ShotColor ?? Color.FromArgb(255, 200, 200, 200);
             foreach (ShotResult result in results) {
-                float scatterMod = result.Hit ? 0.3f : scatter;
+                float scatterMod = result.Hit ? 0.1f : scatter;
                 float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 effectFactory(EffectType.Shot, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", tx + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", ty + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
