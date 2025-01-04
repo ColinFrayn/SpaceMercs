@@ -4,9 +4,9 @@ ToDo List
 
 Weapon Shots
 - Visual explosion effect
--- Add to grenades
 -- Creature dies with a splat
--- Make it different colours
+-- Make it different colours specified by the item (e.g. grenade)
+- Grenade explosion effect doesn't display, but I checked and it's there when I pause
 - Sometimes there is a delay for the sounds on impact. Why?? Because previous sound is playing? Also blocks the numerical effect.
 - What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
 

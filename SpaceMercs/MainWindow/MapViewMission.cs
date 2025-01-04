@@ -5,10 +5,12 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Threading;
 using static SpaceMercs.Delegates;
+using static SpaceMercs.VisualEffect;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace SpaceMercs.MainWindow {
@@ -516,8 +518,8 @@ namespace SpaceMercs.MainWindow {
                     ActionItem = null;
                     // Now apply the effect
                     ApplyItemEffectToMap(s, temp, hoverx, hovery);
-                    double range = Const.BaseDetectionRange - (s.GetUtilityLevel(Soldier.UtilitySkill.Stealth)/2.0);
-                    if (range >= 1.0 && UpdateDetectionForLocation(hoverx, hovery, range)) {
+                    double visibilityRange = Const.BaseDetectionRange - (s.GetUtilityLevel(Soldier.UtilitySkill.Stealth)/2.0);
+                    if (visibilityRange >= 1.0 && UpdateDetectionForLocation(hoverx, hovery, visibilityRange)) {
                         // No alert required
                     }
                 }
@@ -617,7 +619,18 @@ namespace SpaceMercs.MainWindow {
         private void ApplyItemEffectToMap(Soldier s, IEquippable it, int px, int py) {
             ItemEffect? ie = it.BaseType.ItemEffect;
             if (ie is null) return;
-            ApplyItemEffect(s, ie, px, py);
+            double range = Math.Sqrt((px - s.X) * (px - s.X) + (py - s.Y) * (py - s.Y));
+            if (range > 1d) {
+                // This is a ranged i.e. thrown item
+                float shotSize = 5f / Const.ShotSizeScale;
+                float duration = (float)range * Const.ShotDurationScale / 0.25f;
+                float sLength = 0.2f;
+                Color col = Color.FromArgb(255, 200, 200, 200);
+                AddNewEffect(EffectType.Shot, px, py, new Dictionary<string, object>() { { "Effect", ie }, { "FX", s.X + 0.5f }, { "TX", px + 0.5f }, { "FY", s.Y + 0.5f }, { "TY", py + 0.5f }, { "Delay", 0f }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
+            }
+            else {
+                ApplyItemEffect(s, ie, px, py);
+            }
         }
         private void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py) {
             HashSet<IEntity> hsEntities = new HashSet<IEntity>();

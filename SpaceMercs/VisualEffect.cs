@@ -33,7 +33,7 @@ namespace SpaceMercs {
                 EffectType.Damage => DisplayDamage(sw, aspect, viewM),
                 EffectType.Healing => DisplayHealing(sw, aspect, viewM),
                 EffectType.Shot => DisplayShot(sw, prog2D),
-                EffectType.Explosion => DisplayExplosion(sw, prog2D, viewM),
+                EffectType.Explosion => DisplayExplosion(sw, prog2D),
                 EffectType.Melee => true, // Nothing to display; remove it immediately
                 _ => throw new NotImplementedException("Undisplayable Effect Type : " + type),
             };
@@ -109,7 +109,7 @@ namespace SpaceMercs {
 
             return false;
         }
-        private bool DisplayExplosion(Stopwatch sw, ShaderProgram prog2D, Matrix4 viewM) {
+        private bool DisplayExplosion(Stopwatch sw, ShaderProgram prog2D) {
             long mili = sw.ElapsedMilliseconds - tStart;
             float duration = (float)data["Duration"];
             float fract = mili / duration;
@@ -120,22 +120,40 @@ namespace SpaceMercs {
             if (fract < 0.8) size *= fract * 1.25f;
             Color col = (Color)data["Colour"];
 
+            GL.Enable(EnableCap.Blend);
+            GL.Disable(EnableCap.DepthTest);
+
             Matrix4 scaleM = Matrix4.CreateScale(size);
             Matrix4 transOriginM = Matrix4.CreateTranslation(new Vector3(X, Y, 0.02f));
             prog2D.SetUniform("model", scaleM * transOriginM);
 
-            Vector4 vCol = new Vector4((float)col.R / 255f, (float)col.G / 255f, (float)col.B / 255f, 1f);
+            Vector4 vCol = new Vector4((float)col.R / 255f, (float)col.G / 255f, (float)col.B / 255f, 0.5f);
             prog2D.SetUniform("flatColour", vCol);
 
             GL.UseProgram(prog2D.ShaderProgramHandle);
             Disc.Disc32.BindAndDraw();
+            //Annulus.Annulus32.BindAndDraw();
 
             prog2D.SetUniform("model", Matrix4.Identity);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Disable(EnableCap.Blend);
+
             return false;
         }
 
         public void ResolveEffect(MissionLevel level, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, PlaySoundDelegate playSound) {
             if (type != EffectType.Shot && type != EffectType.Melee) return;
+            int tx = (int)X;
+            int ty = (int)Y;
+
+            if (data.TryGetValue("Effect", out object? effect) && effect is ItemEffect iEffect) {
+                Color col = Color.FromArgb(150, 150, 50, 50);
+                if (iEffect.Radius > 0d) {
+                    effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 300f }, { "Size", (float)iEffect.Radius }, { "Colour", col } });
+                }
+                applyEffect(null, iEffect, tx, ty);
+                return;
+            }
             if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;
             if (!result.Hit) return;
             Weapon? wp = null;
@@ -145,8 +163,6 @@ namespace SpaceMercs {
                 source = src;
             }
 
-            int tx = (int)X;
-            int ty = (int)Y;
             HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
 
             // Is this an AoE Weapon then resolve the AoE
