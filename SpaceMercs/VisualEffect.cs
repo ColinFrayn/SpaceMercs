@@ -149,7 +149,7 @@ namespace SpaceMercs {
             if (data.TryGetValue("Effect", out object? effect) && effect is ItemEffect iEffect) {
                 Color col = Color.FromArgb(150, 150, 50, 50);
                 if (iEffect.Radius > 0d) {
-                    effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 300f }, { "Size", (float)iEffect.Radius }, { "Colour", col } });
+                    effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 250f }, { "Size", (float)iEffect.Radius }, { "Colour", col } });
                 }
                 applyEffect(null, iEffect, tx, ty);
                 return;
@@ -169,7 +169,7 @@ namespace SpaceMercs {
             int r = (int)Math.Ceiling(wp?.Type?.Area ?? 0d);
             if (r > 0) {
                 Color col = Color.FromArgb(150, 150, 50, 50);
-                effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 300f }, { "Size", (float)r }, { "Colour", col } });
+                effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 250f }, { "Size", (float)r }, { "Colour", col } });
                 for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
                     for (int x = Math.Max(0, tx - r); x <= Math.Min(level.Width - 1, tx + r); x++) {
                         int dr2 = (ty - y) * (ty - y) + (tx - x) * (tx - x);
@@ -195,7 +195,7 @@ namespace SpaceMercs {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                    tgt.InflictDamage(hitDmg, applyEffect);
+                    tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
                     if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
 
                     // Apply effect?

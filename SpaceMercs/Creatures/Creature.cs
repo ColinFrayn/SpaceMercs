@@ -172,12 +172,12 @@ namespace SpaceMercs {
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
         public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
-            return InflictDamage_Internal(AllDam, null, false);
+            return InflictDamage_Internal(AllDam, null, null, false);
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect) {
-            return InflictDamage_Internal(AllDam, applyEffect, true);
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
+            return InflictDamage_Internal(AllDam, applyEffect, fact, true);
         }
-        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, bool applyDamage) {
+        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, VisualEffect.EffectFactory? fact, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Shields? Reduce only physical damage
@@ -211,7 +211,7 @@ namespace SpaceMercs {
             Health -= TotalDam;
 
             // Is the creature dead?
-            if (Health <= 0.0) KillEntity(applyEffect!);
+            if (Health <= 0.0) KillEntity(applyEffect!, fact!);
             return TotalDam;
         }
         public Stash GenerateStash() {
@@ -240,9 +240,9 @@ namespace SpaceMercs {
 
             return st;
         }
-        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect) {
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
             Health = 0.0;
-            CurrentLevel.KillCreature(this, applyEffect);
+            CurrentLevel.KillCreature(this, applyEffect, fact);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
@@ -290,7 +290,7 @@ namespace SpaceMercs {
             if (ie.CurePoison) {
                 _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
             }
-            InflictDamage(AllDam, applyEffect);
+            InflictDamage(AllDam, applyEffect, fact);
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
         public double Encumbrance => 0.0;
@@ -772,7 +772,7 @@ namespace SpaceMercs {
                     double TotalDam = CalculateDamage(AllDam);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (TotalDam > 0.0) playSound("Grunt");
-                    InflictDamage(AllDam, applyEffect);
+                    InflictDamage(AllDam, applyEffect, fact);
                     if (Health <= 0.0) break; // If this effect killed this creature, stop here
                 }
                 if (bZoom) Thread.Sleep(750);

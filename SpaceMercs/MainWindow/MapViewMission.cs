@@ -649,7 +649,7 @@ namespace SpaceMercs.MainWindow {
             if (!string.IsNullOrEmpty(ie.SoundEffect)) {
                 PlaySoundThreaded(ie.SoundEffect);
                 //SoundEffects.PlaySound(ie.SoundEffect);
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
             }
 
             // Apply effect to the targets
@@ -666,7 +666,7 @@ namespace SpaceMercs.MainWindow {
 
             // Generate Damage
             Dictionary<WeaponType.DamageType, double> AllDam = tr.GenerateDamage();
-            double TotalDam = s.InflictDamage(AllDam, ApplyItemEffect);
+            double TotalDam = s.InflictDamage(AllDam, ApplyItemEffect, null);
             Thread.Sleep(100);
             SoundEffects.PlaySound("Click");
             Thread.Sleep(100);

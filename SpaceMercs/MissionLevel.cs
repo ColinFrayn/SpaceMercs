@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
+using static SpaceMercs.VisualEffect;
 
 namespace SpaceMercs {
     public class MissionLevel {
@@ -1785,7 +1787,7 @@ namespace SpaceMercs {
                 cr.EndOfTurn(fact, centreView, playSound, showMessage, applyEffect);
             }
         }
-        public void KillCreature(Creature cr, ItemEffect.ApplyItemEffect applyEffect) {
+        public void KillCreature(Creature cr, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
             Entities.Remove(cr);
             for (int y = cr.Y; y < cr.Y + cr.Size; y++) {
                 for (int x = cr.X; x < cr.X + cr.Size; x++) {
@@ -1800,9 +1802,13 @@ namespace SpaceMercs {
             AddToStashAtPosition(cr.X, cr.Y, st);
 
             // Effect on death?
-            if (cr.Type.OnDeathEffect != null) {
-                Thread.Sleep(100);
-                applyEffect(null, cr.Type.OnDeathEffect, cr.X, cr.Y);
+            if (cr.Type.OnDeathEffect is ItemEffect ie) {
+                //Thread.Sleep(100);
+                applyEffect(null, ie, cr.X, cr.Y);
+                if (ie.Radius > 0d && fact is not null) {
+                    Color col = Color.FromArgb(150, 50, 150, 30); // TODO: Set via config
+                    fact(EffectType.Explosion, cr.X + 0.5f, cr.Y + 0.5f, new Dictionary<string, object>() { { "Duration", 250f }, { "Size", (float)ie.Radius }, { "Colour", col } });
+                }
             }
 
             // Experience

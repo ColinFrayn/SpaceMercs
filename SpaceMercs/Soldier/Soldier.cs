@@ -192,13 +192,13 @@ namespace SpaceMercs {
             if (red < 0.0) red = 0.0; // Clamp this for Soldiers (i.e. no reducing the damage so much it flips to healing)
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect) {
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
             return InflictDamage_Internal(AllDam, applyEffect, true);
         }
         public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
             return InflictDamage_Internal(AllDam, null, false);
         }
-        public double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, bool applyDamage) {
+        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Shields?
@@ -233,7 +233,7 @@ namespace SpaceMercs {
             Health -= TotalDam;
 
             // Is the soldier dead?
-            if (Health <= 0.0) KillEntity(applyEffect!);
+            if (Health <= 0.0) KillEntity(applyEffect!, null);
             return TotalDam;
         }
         public Stash GenerateStash() {
@@ -251,7 +251,7 @@ namespace SpaceMercs {
 
             return st;
         }
-        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect) {
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
             Health = 0.0;
             IsActive = false;
             CurrentLevel.KillSoldier(this);
@@ -296,7 +296,7 @@ namespace SpaceMercs {
                     _Effects.Add(new Effect(eff));
                 }
             }
-            float TotalDam = (float)InflictDamage(AllDam, applyEffect);
+            float TotalDam = (float)InflictDamage(AllDam, applyEffect, null);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
             if (ie.CurePoison) {
@@ -1163,7 +1163,7 @@ namespace SpaceMercs {
                 if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                 if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
-                    double TotalDam = InflictDamage(AllDam, applyEffect);
+                    double TotalDam = InflictDamage(AllDam, applyEffect, fact);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (Health <= 0.0) return; // Dead. Abandon update.
                 }

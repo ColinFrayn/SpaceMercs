@@ -2,13 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Weapon Shots
-- Visual explosion effect
--- Creature dies with a splat
--- Make it different colours specified by the item (e.g. grenade)
-- Grenade explosion effect doesn't display, but I checked and it's there when I pause
-- Sometimes there is a delay for the sounds on impact. Why?? Because previous sound is playing? Also blocks the numerical effect.
-- What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
+Ship Engineering menu should have "DismantleAll" and should also remember its place
+
+Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
+
+What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
 
 Show dmg at different xPos when doing multiple so they don't overlap
 
