@@ -41,6 +41,8 @@
             colAvail = new DataGridViewTextBoxColumn();
             cbItemType = new ComboBox();
             tpUpgrade = new TabPage();
+            btDismantleAll = new Button();
+            lbNoEngineering = new Label();
             btModify = new Button();
             btDismantle = new Button();
             btImprove = new Button();
@@ -59,7 +61,6 @@
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
-            lbNoEngineering = new Label();
             tcMain.SuspendLayout();
             tpConstruct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgConstruct).BeginInit();
@@ -216,6 +217,7 @@
             // 
             // tpUpgrade
             // 
+            tpUpgrade.Controls.Add(btDismantleAll);
             tpUpgrade.Controls.Add(lbNoEngineering);
             tpUpgrade.Controls.Add(btModify);
             tpUpgrade.Controls.Add(btDismantle);
@@ -231,6 +233,34 @@
             tpUpgrade.TabIndex = 4;
             tpUpgrade.Text = "Engineering";
             tpUpgrade.UseVisualStyleBackColor = true;
+            // 
+            // btDismantleAll
+            // 
+            btDismantleAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btDismantleAll.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btDismantleAll.Location = new Point(518, 474);
+            btDismantleAll.Margin = new Padding(4, 3, 4, 3);
+            btDismantleAll.Name = "btDismantleAll";
+            btDismantleAll.Size = new Size(100, 28);
+            btDismantleAll.TabIndex = 14;
+            btDismantleAll.Text = "Dismantle All";
+            btDismantleAll.UseVisualStyleBackColor = true;
+            btDismantleAll.Click += btDismantleAll_Click;
+            // 
+            // lbNoEngineering
+            // 
+            lbNoEngineering.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbNoEngineering.AutoSize = true;
+            lbNoEngineering.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbNoEngineering.ForeColor = Color.Red;
+            lbNoEngineering.ImageAlign = ContentAlignment.MiddleRight;
+            lbNoEngineering.Location = new Point(13, 480);
+            lbNoEngineering.Margin = new Padding(4, 0, 4, 0);
+            lbNoEngineering.Name = "lbNoEngineering";
+            lbNoEngineering.Size = new Size(404, 16);
+            lbNoEngineering.TabIndex = 13;
+            lbNoEngineering.Text = "Build an Engineering Bay to enable enhancement and modification!";
+            lbNoEngineering.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btModify
             // 
@@ -249,10 +279,10 @@
             // 
             btDismantle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btDismantle.Location = new Point(464, 474);
+            btDismantle.Location = new Point(425, 474);
             btDismantle.Margin = new Padding(4, 3, 4, 3);
             btDismantle.Name = "btDismantle";
-            btDismantle.Size = new Size(118, 28);
+            btDismantle.Size = new Size(83, 28);
             btDismantle.TabIndex = 11;
             btDismantle.Text = "Dismantle";
             btDismantle.UseVisualStyleBackColor = true;
@@ -316,7 +346,6 @@
             dgInventory.Columns.AddRange(new DataGridViewColumn[] { dgcItem, dgcLocation, dgcValue, dgcAvail });
             dgInventory.Location = new Point(10, 53);
             dgInventory.Margin = new Padding(4, 3, 4, 3);
-            dgInventory.MultiSelect = false;
             dgInventory.Name = "dgInventory";
             dgInventory.ReadOnly = true;
             dgInventory.RowHeadersVisible = false;
@@ -414,21 +443,6 @@
             colPrice.Name = "colPrice";
             colPrice.ReadOnly = true;
             // 
-            // lbNoEngineering
-            // 
-            lbNoEngineering.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbNoEngineering.AutoSize = true;
-            lbNoEngineering.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbNoEngineering.ForeColor = Color.Red;
-            lbNoEngineering.ImageAlign = ContentAlignment.MiddleRight;
-            lbNoEngineering.Location = new Point(13, 480);
-            lbNoEngineering.Margin = new Padding(4, 0, 4, 0);
-            lbNoEngineering.Name = "lbNoEngineering";
-            lbNoEngineering.Size = new Size(404, 16);
-            lbNoEngineering.TabIndex = 13;
-            lbNoEngineering.Text = "Build an Engineering Bay to enable enhancement and modification!";
-            lbNoEngineering.TextAlign = ContentAlignment.MiddleRight;
-            // 
             // FabricateItems
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -483,5 +497,6 @@
         private CheckBox cbHideUnbuildable;
         private Button btModify;
         private Label lbNoEngineering;
+        private Button btDismantleAll;
     }
 }

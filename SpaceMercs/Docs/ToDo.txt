@@ -3,6 +3,9 @@ ToDo List
 -------------------------------------------------
 
 Ship Engineering menu should have "DismantleAll" and should also remember its place
+- Make cherching sound on dismantle
+- DismantleAll should dismantle multiple if there are lots of items in a given row
+- Dismantle one -> Highlights the first row too??
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 

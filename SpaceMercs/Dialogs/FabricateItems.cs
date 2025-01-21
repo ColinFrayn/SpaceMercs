@@ -1,5 +1,7 @@
 ﻿// 
 
+using System.Reflection.Metadata.Ecma335;
+
 namespace SpaceMercs.Dialogs {
     partial class FabricateItems : Form {
         private readonly Team PlayerTeam;
@@ -98,14 +100,16 @@ namespace SpaceMercs.Dialogs {
                 dgConstruct.Rows[dgConstruct.Rows.Count - 1].Tag = thisItem;
             }
         }
-        private void SetupModifyTab() {
+        private void SetupModifyTab(Tuple<Soldier?, IItem, bool>? tp = null) {
             string strType = (string)cbUpgradeItemType.SelectedItem;
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
+            List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
+
             foreach (IItem eq in PlayerTeam.Inventory.Keys.Where(x => x is not Material)) {
                 if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
-                if (!String.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
+                if (!string.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
                    (strType.Equals("Medical") && eq is Equipment eqpm && eqpm.BaseType.Source == ItemType.ItemSource.Medlab) ||
                    (strType.Equals("Equipment") && eq is Equipment eqpe && eqpe.BaseType.Source == ItemType.ItemSource.Workshop)) {
@@ -115,12 +119,13 @@ namespace SpaceMercs.Dialogs {
                     arrRow[3] = PlayerTeam.Inventory[eq].ToString();
                     dgInventory.Rows.Add(arrRow);
                     dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(null, eq, false);
+                    if (tp?.Item1 == null && tp?.Item2 == eq && tp?.Item3 == false) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                 }
             }
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
                 foreach (IItem eq in s.InventoryGrouped.Keys.Where(x => x is not Material)) {
                     if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
-                    if (!String.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
+                    if (!string.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                     if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
                        (strType.Equals("Medical") && eq is Equipment eqpm && eqpm.BaseType.Source == ItemType.ItemSource.Medlab) ||
                        (strType.Equals("Equipment") && eq is Equipment eqpe && eqpe.BaseType.Source == ItemType.ItemSource.Workshop)) {
@@ -130,12 +135,13 @@ namespace SpaceMercs.Dialogs {
                         arrRow[3] = s.InventoryGrouped[eq].ToString();
                         dgInventory.Rows.Add(arrRow);
                         dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, eq, false);
+                        if (tp?.Item1 == s && tp?.Item2 == eq && tp?.Item3 == false) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                     }
                 }
                 if (PlayerTeam.PlayerShip.HasArmoury) {
                     if (PlayerTeam.HasSkill(Soldier.UtilitySkill.Armoursmith)) {
                         foreach (Armour ar in s.EquippedArmour) {
-                            if (!String.IsNullOrEmpty(strFilter) && !ar.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
+                            if (!string.IsNullOrEmpty(strFilter) && !ar.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                             if (strType.Equals("All") || strType.Equals("Armour")) {
                                 arrRow[0] = ar.Name;
                                 arrRow[1] = s.Name + " [Eq]";
@@ -143,11 +149,12 @@ namespace SpaceMercs.Dialogs {
                                 arrRow[3] = "1";
                                 dgInventory.Rows.Add(arrRow);
                                 dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, ar, true);
+                                if (tp?.Item1 == s && tp?.Item2 == ar && tp?.Item3 == false) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                             }
                         }
                     }
                     if (s.EquippedWeapon != null && PlayerTeam.PlayerShip.CanBuildItem(s.EquippedWeapon)) {
-                        if (!String.IsNullOrEmpty(strFilter) && !s.EquippedWeapon.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
+                        if (!string.IsNullOrEmpty(strFilter) && !s.EquippedWeapon.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                         if (strType.Equals("All") || strType.Equals("Weapon")) {
                             arrRow[0] = s.EquippedWeapon.Name;
                             arrRow[1] = s.Name + " [Eq]";
@@ -155,11 +162,17 @@ namespace SpaceMercs.Dialogs {
                             arrRow[3] = "1";
                             dgInventory.Rows.Add(arrRow);
                             dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = new Tuple<Soldier?, IItem, bool>(s, s.EquippedWeapon, true);
+                            if (tp?.Item1 == s && tp?.Item2 == s.EquippedWeapon && tp?.Item3 == false) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                         }
                     }
                 }
             }
-            if (dgInventory.Rows.Count > 0) dgInventory.Rows[0].Selected = true;
+            if (dgInventory.Rows.Count > 0) {
+                if (lSelected.Count == 0) dgInventory.Rows[0].Selected = true;
+                else {
+                    foreach (DataGridViewRow row in lSelected) row.Selected = true;
+                }
+            }
 
             if (PlayerTeam.PlayerShip.HasEngineering) {
                 btModify.Show();
@@ -270,6 +283,7 @@ namespace SpaceMercs.Dialogs {
             dgConstruct.FirstDisplayedScrollingRowIndex = iScroll;
         }
         private void btImprove_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
             Soldier? s = tp.Item1;
             if (tp.Item2 is not IEquippable eq || eq is Equipment) return;
@@ -297,10 +311,11 @@ namespace SpaceMercs.Dialogs {
                         if (bEquipped) s.Equip(ui.NewItem);
                     }
                 }
-                SetupModifyTab();
+                SetupModifyTab(tp);
             }
         }
         private void btDismantle_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) {
                 MessageBox.Show("Error picking item to dismantle");
                 return;
@@ -311,7 +326,7 @@ namespace SpaceMercs.Dialogs {
             bool bEquipped = tp.Item3;
             if (MessageBox.Show("Really dismantle your " + eq.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             int maxlev = PlayerTeam.GetMaxSkillByItem(it);
-            Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq as IEquippable, maxlev);
+            Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev);
             if (s is null) {
                 PlayerTeam.RemoveItemFromStores(eq);
             }
@@ -326,9 +341,49 @@ namespace SpaceMercs.Dialogs {
             }
             if (dRemains.Count == 0) strRemains += "\nNone";
             MessageBox.Show(strRemains);
+            SetupModifyTab(tp);
+        }
+        private void btDismantleAll_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count == 0) return;
+            List<Tuple<Soldier?, IItem, bool>> tpSelected = new();
+            foreach (DataGridViewRow row in dgInventory.SelectedRows) {
+                if (row.Tag is not Tuple<Soldier?, IItem, bool> tp) continue;
+                tpSelected.Add(tp);
+            }
+            if (tpSelected.Count == 0) return;
+            if (MessageBox.Show("Really dismantle all these items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            Dictionary<IItem, int> dTotalRemains = new();
+            foreach (Tuple<Soldier?, IItem, bool> tp in tpSelected) {
+                Soldier? s = tp.Item1;
+                IItem it = tp.Item2;
+                if (it is not IEquippable eq) return;
+                bool bEquipped = tp.Item3;
+                int maxlev = PlayerTeam.GetMaxSkillByItem(it);
+                Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev);
+                foreach (IItem rem in dRemains.Keys) {
+                    dTotalRemains.TryAdd(rem, 0);
+                    dTotalRemains[rem] += dRemains[rem];
+                }
+                if (s is null) {
+                    PlayerTeam.RemoveItemFromStores(eq);
+                }
+                else {
+                    if (bEquipped) s.Unequip(eq);
+                    s.DestroyItem(eq);
+                }
+            }
+            string strRemains = "Materials obtained:";
+            foreach (IItem r in dTotalRemains.Keys) {
+                PlayerTeam.AddItem(r, dTotalRemains[r]);
+                strRemains += "\n" + r.Name + " [" + dTotalRemains[r] + "]";
+            }
+            if (dTotalRemains.Count == 0) strRemains += "\nNone";
+            MessageBox.Show(strRemains);
             SetupModifyTab();
         }
         private void btModify_Click(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
             Soldier? s = tp.Item1;
             if (tp.Item2 is not Weapon wp || !wp.Type.Modifiable) return;
@@ -380,7 +435,8 @@ namespace SpaceMercs.Dialogs {
             btImprove.Enabled = false;
             btModify.Enabled = false;
             btDismantle.Enabled = false;
-            if (dgInventory.SelectedRows.Count == 0) return;
+            btDismantleAll.Enabled = dgInventory.SelectedRows.Count > 0;
+            if (dgInventory.SelectedRows.Count != 1) return;
             if (dgInventory.SelectedRows[0].Tag is not Tuple<Soldier?, IItem, bool> tp) return;
             IItem it = tp.Item2;
             if (it is not Material) btDismantle.Enabled = true;
