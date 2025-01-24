@@ -378,6 +378,10 @@ namespace SpaceMercs {
             }
             return count;
         }
+        public int CountItemsInStores(IItem itFind) {
+            if (Inventory.ContainsKey(itFind)) return Inventory[itFind];
+            return 0;
+        }
         public IEnumerable<IResearchable> UnresearchableItems {
             get {
                 List<IResearchable> items = new List<IResearchable>();

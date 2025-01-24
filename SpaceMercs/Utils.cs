@@ -336,7 +336,7 @@ namespace SpaceMercs {
         #endregion
 
         #region Item Functions
-        public static Dictionary<IItem, int> DismantleEquipment(IEquippable eq, int lvl) {
+        public static Dictionary<IItem, int> DismantleEquipment(IEquippable eq, int lvl, int count = 1) {
             Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
             Random rand = new Random();
             double diff = ((double)eq.BaseType.BaseRarity / 2.0) + (double)eq.Level;
@@ -349,7 +349,7 @@ namespace SpaceMercs {
                 }
             }
             foreach (MaterialType mat in dMats.Keys) {
-                int iQuantity = dMats[mat];
+                int iQuantity = dMats[mat] * count;
                 int iRecovered = (int)(rand.NextDouble() * fract * (double)(iQuantity + 1.0));
                 if (iRecovered > iQuantity) iRecovered = iQuantity;
                 if (iRecovered > 0) dRemains.Add(new Material(mat), iRecovered);

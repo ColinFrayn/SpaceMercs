@@ -1034,6 +1034,10 @@ namespace SpaceMercs {
         public bool HasItem(IItem it) {
             return Inventory.Contains(it);
         }
+        public int CountItem(IItem it) {
+            if (!Inventory.Contains(it)) return 0;
+            return InventoryGrouped[it];
+        }
         #endregion // Inventory
 
         // Is this soldier active in the team?

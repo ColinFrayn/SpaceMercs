@@ -170,6 +170,9 @@
     <None Update="Sounds\Crossbow.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Dismantle.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\Drain.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -106,6 +106,8 @@ namespace SpaceMercs.Dialogs {
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
+            int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
+
 
             foreach (IItem eq in PlayerTeam.Inventory.Keys.Where(x => x is not Material)) {
                 if (!PlayerTeam.PlayerShip.CanBuildItem(eq)) continue;
@@ -167,7 +169,9 @@ namespace SpaceMercs.Dialogs {
                     }
                 }
             }
+            dgInventory.ClearSelection();
             if (dgInventory.Rows.Count > 0) {
+                if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
                 if (lSelected.Count == 0) dgInventory.Rows[0].Selected = true;
                 else {
                     foreach (DataGridViewRow row in lSelected) row.Selected = true;
@@ -334,6 +338,7 @@ namespace SpaceMercs.Dialogs {
                 if (bEquipped) s.Unequip(eq);
                 s.DestroyItem(eq);
             }
+            SoundEffects.PlaySound("Dismantle");
             string strRemains = "Materials obtained:";
             foreach (IItem r in dRemains.Keys) {
                 PlayerTeam.AddItem(r, dRemains[r]);
@@ -357,22 +362,31 @@ namespace SpaceMercs.Dialogs {
             foreach (Tuple<Soldier?, IItem, bool> tp in tpSelected) {
                 Soldier? s = tp.Item1;
                 IItem it = tp.Item2;
-                if (it is not IEquippable eq) return;
+                if (it is not IEquippable eq) continue;
                 bool bEquipped = tp.Item3;
+                int count = 0;
+                if (s is null) {
+                    count = PlayerTeam.CountItemsInStores(eq);
+                }
+                else {
+                    if (bEquipped) count = 1;
+                    else count = s.CountItem(it);
+                }
                 int maxlev = PlayerTeam.GetMaxSkillByItem(it);
-                Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev);
+                Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev, count);
                 foreach (IItem rem in dRemains.Keys) {
                     dTotalRemains.TryAdd(rem, 0);
                     dTotalRemains[rem] += dRemains[rem];
                 }
                 if (s is null) {
-                    PlayerTeam.RemoveItemFromStores(eq);
+                    PlayerTeam.RemoveItemFromStores(eq, count);
                 }
                 else {
                     if (bEquipped) s.Unequip(eq);
-                    s.DestroyItem(eq);
+                    s.DestroyItem(eq, count);
                 }
             }
+            SoundEffects.PlaySound("Dismantle");
             string strRemains = "Materials obtained:";
             foreach (IItem r in dTotalRemains.Keys) {
                 PlayerTeam.AddItem(r, dTotalRemains[r]);
