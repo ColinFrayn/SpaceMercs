@@ -41,9 +41,26 @@
     <Avail>MRE</Avail>
     <Tex>4,4</Tex>
   </ShipEngine>
+  <ShipEngine Name="SuperLight Drive">
+    <Range>6</Range>
+    <Speed>5</Speed>
+    <Accel>500</Accel>
+    <Cost>1200</Cost>
+    <Power>20</Power>
+    <Desc>A warp drive that can exceed the speed of light. Suitable for reaching the nearest stars.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>4,7</Tex>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>50</CashCost>
+      <Facility>Engineering</Facility>
+    </Requirements>
+  </ShipEngine>
   <ShipEngine Name="Hyperspace Drive">
     <Range>8</Range>
-    <Speed>20</Speed>
+    <Speed>40</Speed>
     <Accel>999999</Accel>
     <Cost>2500</Cost>
     <Power>24</Power>
@@ -60,7 +77,7 @@
   </ShipEngine>
   <ShipEngine Name="Subspace Drive">
     <Range>12</Range>
-    <Speed>30</Speed>
+    <Speed>50</Speed>
     <Accel>999999</Accel>
     <Cost>6000</Cost>
     <Power>30</Power>
@@ -77,7 +94,7 @@
   </ShipEngine>
   <ShipEngine Name="Ethereal Drive">
     <Range>12</Range>
-    <Speed>35</Speed>
+    <Speed>60</Speed>
     <Accel>999999</Accel>
     <Cost>7000</Cost>
     <Power>35</Power>

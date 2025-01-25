@@ -43,7 +43,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>25</MinPop>
+      <MinPop>26</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Aluminium">1</Material>
       <Facility>Armoury</Facility>
@@ -67,7 +67,7 @@
     <Location>Head</Location>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinPop>16</MinPop>
+      <MinPop>18</MinPop>
       <CashCost>10</CashCost>
       <Material Name="Rare Earth Metals">1</Material>
       <Facility>Armoury</Facility>
@@ -117,7 +117,7 @@
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>30</MinPop>
+      <MinPop>34</MinPop>
       <CashCost>50</CashCost>
       <Material Name="Crystals">4</Material>
       <Facility>Armoury</Facility>
@@ -211,10 +211,10 @@
       <Material Name="Crystals" Amount="1"/>
     </Materials>
     <Requirements>
-      <MinLevel>5</MinLevel>
+      <MinLevel>6</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>30</MinPop>
-      <CashCost>50</CashCost>
+      <MinPop>36</MinPop>
+      <CashCost>70</CashCost>
       <Material Name="Crystals">4</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
@@ -243,8 +243,8 @@
     <Requirements>
       <MinLevel>4</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>25</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>28</MinPop>
+      <CashCost>40</CashCost>
       <Material Name="Aluminium">2</Material>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -270,10 +270,10 @@
       <Material Name="Industrial Chemicals" Amount="3"/>
     </Materials>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>32</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>34</MinPop>
+      <CashCost>50</CashCost>
       <Material Name="Rare Earth Metals">2</Material>
       <Material Name="Industrial Chemicals">1</Material>
       <Facility>Armoury</Facility>
@@ -383,16 +383,15 @@
     <Strength>6</Strength>
     <Speed>0.85</Speed>
     <Attack>2</Attack>
-    <BaseArmour>38</BaseArmour>
+    <BaseArmour>40</BaseArmour>
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>26</MinPop>
-      <CashCost>40</CashCost>
+      <MinPop>30</MinPop>
+      <CashCost>50</CashCost>
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -416,16 +415,16 @@
     <Strength>8</Strength>
     <Attack>2</Attack>
     <Speed>0.7</Speed>
-    <BaseArmour>50</BaseArmour>
+    <BaseArmour>55</BaseArmour>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>32</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>44</MinPop>
+      <CashCost>100</CashCost>
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="50"/>
@@ -449,16 +448,16 @@
     <Strength>6</Strength>
     <Speed>1.1</Speed>
     <Attack>2</Attack>
-    <BaseArmour>34</BaseArmour>
+    <BaseArmour>38</BaseArmour>
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>36</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>42</MinPop>
+      <CashCost>90</CashCost>
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="25"/>
@@ -483,7 +482,7 @@
     <Strength>6</Strength>
     <Attack>2</Attack>
     <Speed>0.85</Speed>
-    <BaseArmour>40</BaseArmour>
+    <BaseArmour>44</BaseArmour>
     <Shields>20</Shields>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -500,10 +499,10 @@
       <Material Name="Titanium" Amount="3"/>
     </Materials>
     <Requirements>
-      <MinLevel>10</MinLevel>
-      <MinSystems>4</MinSystems>
-      <MinPop>40</MinPop>
-      <CashCost>40</CashCost>
+      <MinLevel>11</MinLevel>
+      <MinSystems>5</MinSystems>
+      <MinPop>50</MinPop>
+      <CashCost>160</CashCost>
       <Material Name="Titanium">2</Material>
       <Material Name="Crystals">2</Material>
       <Facility>Armoury</Facility>

@@ -102,7 +102,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <MinPop>20</MinPop>
-      <CashCost>10</CashCost>
+      <CashCost>15</CashCost>
       <Material Name="Crystals">1</Material>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -130,8 +130,8 @@
     <Noise>8</Noise>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>23</MinPop>
-      <CashCost>20</CashCost>
+      <MinPop>28</MinPop>
+      <CashCost>40</CashCost>
       <Material Name="Crystals">2</Material>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -220,7 +220,7 @@
     </Materials>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>27</MinPop>
+      <MinPop>28</MinPop>
       <CashCost>20</CashCost>
       <Material Name="Rare Earth Metals">1</Material>
       <Facility>Armoury</Facility>
@@ -251,7 +251,7 @@
     </Materials>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>34</MinPop>
+      <MinPop>38</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Rare Earth Metals">2</Material>
       <Facility>Armoury</Facility>
@@ -311,8 +311,8 @@
     </Materials>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>37</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>42</MinPop>
+      <CashCost>120</CashCost>
       <Material Name="Industrial Chemicals">2</Material>
       <Material Name="Incendiary Bulb">1</Material>
       <Facility>Armoury</Facility>
@@ -336,6 +336,33 @@
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
     </Materials>
+  </WeaponType>
+  <WeaponType Name="Dark Grenadier" Class="Launcher">
+    <Mass>9.0</Mass>
+    <Cost>550</Cost>
+    <Rarity>22</Rarity>
+    <Speed>20</Speed>
+    <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
+    <Damage Area="2">6+5</Damage>
+    <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
+    <Sound>GrenadeLauncher</Sound>
+    <Noise>12</Noise>
+    <Unmodifiable/>
+    <Materials>
+      <Material Name="Steel" Amount="6"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Electronic Components" Amount="3"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>55</MinPop>
+      <CashCost>150</CashCost>
+      <Material Name="Crystals">1</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Grey">2</Relations>
+    </Requirements>
   </WeaponType>
   <WeaponType Name="Sniper Rifle" Class="Sniper">
     <Mass>2.0</Mass>
@@ -366,9 +393,9 @@
     <Stable/>
     <Noise>8</Noise>
     <Requirements>
-      <MinLevel>5</MinLevel>
-      <MinPop>21</MinPop>
-      <CashCost>15</CashCost>
+      <MinLevel>6</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>55</CashCost>
       <Material Name="Crystals">1</Material>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -398,9 +425,9 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
-      <MinLevel>7</MinLevel>
-      <MinPop>28</MinPop>
-      <CashCost>20</CashCost>
+      <MinLevel>9</MinLevel>
+      <MinPop>38</MinPop>
+      <CashCost>60</CashCost>
       <Material Name="Tungsten">1</Material>
       <Facility>Armoury</Facility>
       <Relations Name="Ursalon">2</Relations>
@@ -511,8 +538,8 @@
     <Cost>260</Cost>
     <Rarity>40</Rarity>
     <Speed>11</Speed>
-    <Range Accuracy="0">1</Range>
-    <Damage>2+2</Damage>
+    <Range Accuracy="1">1</Range>
+    <Damage>3+3</Damage>
     <Desc>Sharp, powered claws attached over your armour.</Desc>
     <Sound>SwordSlice</Sound>
     <Race>Ursalon</Race>

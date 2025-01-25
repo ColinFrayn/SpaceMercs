@@ -5,11 +5,6 @@ ToDo List
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names
-- Message when arriving at an alien colony
-
-Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
-
-What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
 
 Show dmg at different xPos when doing multiple so they don't overlap
 
@@ -20,9 +15,13 @@ Show dmg at different xPos when doing multiple so they don't overlap
 Backburner : Features
 ---------------------
 
+What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
+
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 -- Is it possible to disband a colony once created?
+
+Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 
 Cover
 - When partially hidden from the attacker, get a def bonus

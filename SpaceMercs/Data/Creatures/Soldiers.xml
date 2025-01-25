@@ -76,7 +76,7 @@
   <CreatureType Name="Heavy Support">
     <Scale>1.05</Scale>
     <LevelRange>5,22</LevelRange>
-    <Attack>13</Attack>
+    <Attack>12</Attack>
     <Defence>12</Defence>
     <Armour>28</Armour>
     <Health>18</Health>
