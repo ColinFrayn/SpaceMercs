@@ -34,7 +34,7 @@
     <BaseAttitude>0</BaseAttitude>
     <Names>
       <Personal>
-        <Male>Agkor,Began,Carg,Dokan,Erag,Farg,Grak,Horak,Koram,Logak,Merok,Nerak,Ogam,Pagrok,Rokam,Somak,Tarok</Male>
+        <Male>Agkor,Began,Carg,Dokan,Erag,Farg,Grak,Horak,Koram,Logak,Merok,Nerak,Ogam,Pagrok,Rokam,Somak,Tarok,Serak,Agrok</Male>
         <Female>Agkori,Begani,Cargi,Dokani,Eragi,Fargi,Graki,Horaki,Korami,Logaki,Meroki,Neraki,Ogami,Pagroki,Rokami,Somaki,Taroki</Female>
       </Personal>
       <Family>Almok,Bagem,Carok,Degam,Egor,Forak,Gokam,Hokar,Kemok,Lenog,Mogam,Nogram,Okem,Pekom,Ramok,Satok,Tembak</Family>
@@ -56,10 +56,11 @@
     <BaseAttitude>-500</BaseAttitude>
     <Names>
       <Personal>
-        <Male>MaleName</Male>
-        <Female>FemaleName</Female>
+        <Male>Elori,Ma'ari,Kinsari,Doroi,Elsi'm,Ka'na'tohi,Alothi,Pallithari,Ban'athi,Corinthi,Falathi,Ga'na'thi</Male>
+        <Female>Alaria,Anda,Briath,Cari'ath,Dillara,Ena'thra,Faria,Hathalla,Indara,Ja'nathra,Lariana,Mara,Minra</Female>
       </Personal>
-      <Family>FamilyName</Family>
+      <Family>An,Ba,Co,De,En,Fa,Ga,Ho,In,Ja,Ka,La,Mo,No,Or,Pa,Ra,Sa,To,Ul,Vo,Wo,Ya,Zo</Family>
+      <Family2>-Sar,-Dar,-Gor,-Lar,-Bar,-Nor,-For</Family2>
     </Names>
     <Description>Slender humanoids, peaceful but secretive. They rely on mystical technology in all aspects of their lives.</Description>
 </Race>
@@ -78,10 +79,10 @@
     <BaseAttitude>-4500</BaseAttitude>
     <Names>
       <Personal>
-        <Male>MaleName</Male>
-        <Female>FemaleName</Female>
+        <Male>Ag,Bog,Cag,Dag,Eog,Fod,Gog,Hik,Ig,Jad,Kab,Lug,Mog,Nod</Male>
+        <Female>Am,Bim,Coz,Dev,El,Fav,Gol,Hil,Im,Jel,Kal,Luz,Mov,Nam</Female>
       </Personal>
-      <Family>FamilyName</Family>
+      <Family>Bobo,Caca,Dede,Fofo,Gigi,Haha,Jojo,Koko,Lolo,Momo,Nono,Popo,Rara,Soso,Tete,Vovo,Wewe,Yaya,Zozo</Family>
     </Names>
     <Description>Large, imposing, brutish creatures with a love for combat.</Description>
   </Race>
@@ -100,9 +101,10 @@
     <BaseAttitude>-1600</BaseAttitude>
     <Names>
       <Personal>
-        <Neuter>NeuterName</Neuter>
+        <Neuter>First,Second,Third,Fourth,Fifth,Sixth,Seventh,Eighth,Ninth,Tenth,Eleventh,Twelfth,Thirteenth,Fourteenth,Fifteenth,Sixteenth,Seventeenth,Eighteenth,Nineteenth,Twentieth,Twentyfirst,Twentysecond,Twentythird,Twentyfourth</Neuter>
       </Personal>
-      <Family>FamilyName</Family>
+      <Family>Of Primary,Of Secondary,Of Tertiary,Of Quaternary,Of Upper,Of Lower,Of Great,Of High,Of Major,Of Minor</Family>
+      <Family2> Hive, Swarm, Guard, Fleet</Family2>
     </Names>
     <Description>Humanoid insects, slightly shorter than the average human, but with multiple limbs and compound eyes. Suspicious of other alien races.</Description>
   </Race>
@@ -121,9 +123,10 @@
     <Scale>1.0</Scale>
     <Names>
       <Personal>
-        <Neuter>NeuterName</Neuter>
+        <Neuter>Ba,Ca,Da,Fa,Ga,Ha,Ja,Ka,La,Ma,Na,Pa,Qa,Ra,Sa,Ta,Va,Wa,Xa,Ya,Za,Bo,Co,Do,Fo,Go,Ho,Jo,Ko,Lo,Mo,No,Po,Qo,Ro,So,To,Vo,Wo,Xo,Yo,Zo</Neuter>
       </Personal>
-      <Family>FamilyName</Family>
+      <Family>Bi,Ci,Di,Fi,Gi,Hi,Ji,Ki,Li,Mi,Ni,Pi,Qi,Ri,Si,Ti,Vi,Wi,Xi,Yi,Zi</Family>
+      <Family2>Bu,Cu,Du,Fu,Gu,Hu,Ju,Ku,Lu,Mu,Nu,Pu,Qu,Ru,Su,Tu,Vu,Wu,Xu,Yu,Zu</Family2>
     </Names>
     <Description>Short, enigmatic creatures with oversized heads and an alleged psychic ability.</Description>
   </Race>
@@ -141,10 +144,11 @@
     <Scale>1.1</Scale>
     <Names>
       <Personal>
-        <Male>MaleName</Male>
-        <Female>FemaleName</Female>
+        <Male>Botor,Bathor,Belior,Bagor,Brotor,Blator,Blagor,Bedor,Bamdor,Baldor,Balgor,Berror,Berior,Befior,Badror</Male>
+        <Female>Telia,Tania,Tadra,Thalia,Thamra,Tilda,Tonara,Tedra,Talla,Tolla,Tinla,Trona,Tedia,Tantha,Tunna</Female>
       </Personal>
-      <Family>FamilyName</Family>
+      <Family>Ank,Bak,Cak,Dok,Elk,Fak,Gok,Huk,Ilk,Jok,Kak,Lok,Mok,Nak,Ork,Pak,Rak,Sok,Tok,Vuk,Wok,Yok,Zak</Family>
+      <Family2>Ra,Ro,Ri,Re,Ru</Family2>
     </Names>
     <Description>Hairy, ursine humanoids with a fiercely noble, lawful tradition.</Description>
   </Race>

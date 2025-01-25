@@ -23,6 +23,7 @@ namespace SpaceMercs {
         private readonly List<Colony> Colonies = new List<Colony>();
         private readonly Dictionary<GenderType, List<string>> FirstNames = new Dictionary<GenderType, List<string>>();
         private readonly List<string> FamilyNames;
+        private readonly List<string> FamilyNames2;
         public Color Colour { get; private set; }
         public int ColonyCount { get { return Colonies.Count; } }
         public int SystemCount { get { return Systems.Count; } }
@@ -55,9 +56,14 @@ namespace SpaceMercs {
                 if (FirstNames.ContainsKey(gt)) throw new Exception("Duplicate gender key " + xn.Name + " for race names for " + Name + " race");
                 FirstNames.Add(gt, lNames);
             }
+            if (FirstNames.Keys.Count == 0) throw new Exception("No possible genders defined for race " + Name + ". Please add some names!");
             FamilyNames = xml.SelectNodeText("Names/Family").Split(',').ToList<string>();
             if (FamilyNames.Count == 0) throw new Exception("No family names defined for race " + Name);
-            if (FirstNames.Keys.Count == 0) throw new Exception("No possible genders defined for race " + Name + ". Please add some names!");
+            string family2 = xml.SelectNodeText("Names/Family2", "");
+            if (!string.IsNullOrEmpty(family2)) {
+                FamilyNames2 = family2.Split(',').ToList<string>();
+            }
+            else FamilyNames2 = new List<string>();
             Reset();
         }
 
@@ -245,6 +251,10 @@ namespace SpaceMercs {
             string strName = (FirstNames[gt])[r] + " ";
             r = rand.Next(FamilyNames.Count);
             strName += FamilyNames[r];
+            if (FamilyNames2.Count > 0) {
+                r = rand.Next(FamilyNames2.Count);
+                strName += FamilyNames2[r];
+            }
             return strName;
         }
 

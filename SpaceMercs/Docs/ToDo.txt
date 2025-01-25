@@ -3,9 +3,8 @@ ToDo List
 -------------------------------------------------
 
 Alien solar system:
-- Need to add alien names
--- Alien colonies need names
--- Systems need names too
+- Alien colonies need names
+- Alien systems need names
 - Message when arriving at an alien colony
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
