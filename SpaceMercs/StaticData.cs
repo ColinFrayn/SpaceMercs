@@ -9,6 +9,7 @@ namespace SpaceMercs {
         private static readonly string[] strRNmid = { "", "", "", "'", "-", "k", "ta", "ba", "th", "gr", "li", "mra", "gor", "sh", "ch", "sg", "n'", "to", "ti", "lo", "bu", "bo", "vi", "fi", "sa" };
         private static readonly string[] strRNend = { "on", "un", "en", "in", "an", "ri", "ak", "ahk", "eth", "lin", "lon", "dum", "il", "el", "oth", "ag", "ul", "ish", "uth", "ekh", "esk", "kah" };
         private static readonly string strGraphicsDir, strDataDir;
+        public static Race HumanRace { get; private set; }
 
         // All loaded data : Loads through reflection in this order!
 #pragma warning disable 0649
@@ -56,6 +57,14 @@ namespace SpaceMercs {
                 MessageBox.Show("Failed to load texture data : " + ex.Message, "Texture error", MessageBoxButtons.OK);
                 return false;
             }
+
+            Race? human = GetRaceByName("Human");
+            if (human is null) {
+                MessageBox.Show("Failed to ID HumanRace in static data", "Static Data Initialisation error", MessageBoxButtons.OK);
+                return false;
+            }
+            HumanRace = human;
+
             return true;
         }
         private static bool LoadDataFile(FieldInfo fi) {

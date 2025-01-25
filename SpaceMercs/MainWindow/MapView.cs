@@ -587,7 +587,7 @@ namespace SpaceMercs.MainWindow {
             RecentlyVisited.Clear();
             bLoaded = true;
             CloseAllDialogs();
-            PlayerTeam = new Team(ng, StaticData.Races[0]);
+            PlayerTeam = new Team(ng, StaticData.HumanRace);
             if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony == null) throw new Exception("Did not set up PlayerTeam correctly - not at home planet!");
         }
 
@@ -727,8 +727,7 @@ namespace SpaceMercs.MainWindow {
 
         private void CheckPopulationGrowth(TimeSpan tDiff) {
             // tDiff in fraction of a year
-            Race humanRace = StaticData.Races[0];
-            int oldHumanPop = humanRace.Population;
+            int oldHumanPop = StaticData.HumanRace.Population;
 
             // Get all currently unresearchable techs
             HashSet<IResearchable> oldUnresearchable = PlayerTeam.UnresearchableItems.ToHashSet();
@@ -744,7 +743,7 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Announce pop growth
-            int newHumanPop = humanRace.Population;
+            int newHumanPop = StaticData.HumanRace.Population;
             if (newHumanPop != oldHumanPop) {
                 msgBox.PopupMessage($"The Human population has increased to {newHumanPop}");
             }

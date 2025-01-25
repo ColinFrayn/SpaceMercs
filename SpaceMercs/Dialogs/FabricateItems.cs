@@ -80,7 +80,7 @@ namespace SpaceMercs.Dialogs {
                 arrRow[0] = thisItem.Name;
                 arrRow[1] = strType;
                 arrRow[2] = thisItem.Mass.ToString("N2") + "kg";
-                Race playerRace = StaticData.Races[0];
+                Race playerRace = StaticData.HumanRace;
                 if (thisItem.RequiredRace != null && thisItem.RequiredRace != playerRace) return;
                 if (!thisItem.CanBuild(playerRace)) return;
 

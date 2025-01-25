@@ -426,9 +426,9 @@ namespace SpaceMercs.MainWindow {
         }
         private void FoundColony_Continue() {
             if (!(PlayerTeam.CurrentPosition is HabitableAO hao)) return;
-            hao.SetupBase(StaticData.Races[0], 1);
+            hao.SetupBase(StaticData.HumanRace, 1);
             if (hao.GetSystem().Owner == null) {
-                StaticData.Races[0].AddSystem(hao.GetSystem());
+                StaticData.HumanRace.AddSystem(hao.GetSystem());
             }
             PlayerTeam.PlayerShip.RemoveColonyBuilder();
             msgBox.PopupMessage("Colony Founded");
@@ -452,6 +452,18 @@ namespace SpaceMercs.MainWindow {
         private void OpenHyperspaceDialog() {
             if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPosition is not HyperGate hg) throw new Exception("Opened hyperspace dialog when not at a gate");
+            // Alien gate, insufficient relations
+            Race? owner = PlayerTeam.CurrentPosition.GetSystem().Owner;
+            if (owner is null) {
+                throw new Exception("Hyperspace gate now owned by anyone. Weird.");
+            }
+            if (owner != StaticData.HumanRace) {
+                int relations = PlayerTeam.GetRelations(owner);
+                if (relations < 2) {
+                    MessageBox.Show($"You are not sufficiently friendly with the {owner.Name} race to have access to their hyperspace network");
+                    return;
+                }
+            }
             // Open the Hyperspace dialog
             HyperspaceTravel ht = new HyperspaceTravel(hg, PlayerTeam!, ArriveAt);
             ht.ShowDialog();

@@ -2,14 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Alien system:
-- Should not be able to use hyperspace gates without high level of approval
+Alien solar system:
 - Need to add alien names
-- Alien colonies need names
-- Why is one hyperspage gate target unnamed? Do systems need names too?
+-- Alien colonies need names
+-- Systems need names too
 - Message when arriving at an alien colony
-- If not high relationship then can't go to colony
-- If low relationship then arriving at alien colony leads to dogfight?? (Then how do we get higher relationships??)
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 

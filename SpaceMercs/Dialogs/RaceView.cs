@@ -8,7 +8,7 @@ namespace SpaceMercs.Dialogs {
         public RaceView(Team team) {
             InitializeComponent();
             _team = team;
-            rSelected = StaticData.Races[0];
+            rSelected = StaticData.HumanRace;
             cbRace.Items.Clear();
             foreach (Race rc in StaticData.Races) {
                 cbRace.Items.Add(rc.Name);

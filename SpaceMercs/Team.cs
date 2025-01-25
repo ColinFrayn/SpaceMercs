@@ -385,7 +385,7 @@ namespace SpaceMercs {
         public IEnumerable<IResearchable> UnresearchableItems {
             get {
                 List<IResearchable> items = new List<IResearchable>();
-                Race humanRace = StaticData.Races[0];
+                Race humanRace = StaticData.HumanRace;
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
@@ -406,7 +406,7 @@ namespace SpaceMercs {
         public IEnumerable<IResearchable> ResearchableItems {
             get {
                 List<IResearchable> items = new List<IResearchable>();
-                Race humanRace = StaticData.Races[0];
+                Race humanRace = StaticData.HumanRace;
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;

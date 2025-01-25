@@ -97,7 +97,7 @@ namespace SpaceMercs {
 
         // Get a random difficulty level for this location (e.g. for a mercenary or a mission)
         public int GetRandomMissionDifficulty(Random rand) {
-            double dDist = AstronomicalObject.CalculateDistance(StaticData.Races[0].HomePlanet, this);
+            double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
             double dLevel = 1d + rand.NextDouble() + rand.NextDouble() + rand.NextDouble();
 
@@ -111,7 +111,7 @@ namespace SpaceMercs {
             }
 
             // Home planet is a nursery zone
-            if (this == StaticData.Races[0].HomePlanet) dLevel -= 1.0 + rand.NextDouble();
+            if (this == StaticData.HumanRace.HomePlanet) dLevel -= 1.0 + rand.NextDouble();
 
             // Increase the difficulty based on where we are within this system
             if (this is HabitableAO hao) {

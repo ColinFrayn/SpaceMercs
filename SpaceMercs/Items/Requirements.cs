@@ -59,7 +59,7 @@ namespace SpaceMercs.Items {
             if (race.Population < MinPop) return false;
 
             // Race relations: Player race passes automatically, because we test this properly elsewhere
-            if (race == StaticData.Races[0]) return true;
+            if (race == StaticData.HumanRace) return true;
 
             // If this isn't the player race then only pass if the requirements don't include any race other than this one.
             return RequiredRaceRelations.Count == 0 ||
@@ -79,7 +79,7 @@ namespace SpaceMercs.Items {
             foreach (KeyValuePair<MaterialType, int> kvp in RequiredMaterials) {
                 if (team.CountMaterial(kvp.Key) < kvp.Value) return false;
             }
-            return MeetsRequirements(StaticData.Races[0]);
+            return MeetsRequirements(StaticData.HumanRace);
         }
 
         // The player team & player race : Meets requirements for viewing this tech, but not necessarily researching it
@@ -90,7 +90,7 @@ namespace SpaceMercs.Items {
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
             if (team.MaximumSoldierLevel < MinLevel) return false;
-            return MeetsRequirements(StaticData.Races[0]);
+            return MeetsRequirements(StaticData.HumanRace);
         }
 
         // How difficult is this (makes it harder for alien races to research it)

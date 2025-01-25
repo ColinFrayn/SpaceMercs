@@ -55,7 +55,7 @@ namespace SpaceMercs {
 
             // Setup Race starting locations by modifying existing map to create habitable systems
             foreach (Race rc in StaticData.Races) {
-                if (rc == StaticData.Races[0]) {
+                if (rc == StaticData.HumanRace) {
                     SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng);
                     rc.SetAsKnownBy(null);
                 }

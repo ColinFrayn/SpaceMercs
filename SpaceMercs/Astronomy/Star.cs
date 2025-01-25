@@ -352,7 +352,7 @@ namespace SpaceMercs {
         // Setters
         public void SetOwner(Race rc) {
             Owner = rc;
-            if (rc == StaticData.Races[0]) Visited = true;
+            if (rc == StaticData.HumanRace) Visited = true;
             if (!_planets.Any() && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
         }
         public void SetVisited(bool v) {

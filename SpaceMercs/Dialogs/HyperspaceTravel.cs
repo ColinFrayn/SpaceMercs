@@ -10,11 +10,12 @@ namespace SpaceMercs.Dialogs {
         private int iProgress = 0;
         private HyperGate? _hDest = null;
         private double durationSeconds = 0d;
-
+        private readonly Race? _owner;
 
         public HyperspaceTravel(HyperGate hGate, Team team, Action<AstronomicalObject> _arriveAt) {
             _hGate = hGate;
             _playerTeam = team;
+            _owner = hGate.GetSystem().Owner;
             ArriveAt = _arriveAt;
             InitializeComponent();
             clockTick = new Timer();
@@ -25,7 +26,9 @@ namespace SpaceMercs.Dialogs {
         }
 
         private double CalculateCost(double distLy) {
-            return Math.Pow(distLy, Const.HyperspaceCostDistanceExponent) * Math.Pow(_playerTeam.PlayerShip.Type.MaxHull, Const.HyperspaceCostHullExponent) / Const.HyperspaceCostScale;
+            double cost = Math.Pow(distLy, Const.HyperspaceCostDistanceExponent) * Math.Pow(_playerTeam.PlayerShip.Type.MaxHull, Const.HyperspaceCostHullExponent) / Const.HyperspaceCostScale;
+            if (_owner is not null && _owner != StaticData.HumanRace) cost *= Utils.RelationsToHyperspaceCost(_playerTeam.GetRelations(_owner));
+            return cost;
         }
         private void StartTravel(HyperGate targetGate) {
             double distLy = AstronomicalObject.CalculateDistance(_hGate, targetGate) / Const.LightYear;

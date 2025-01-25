@@ -54,7 +54,7 @@ namespace SpaceMercs.Dialogs {
             pbResearch.Visible = false;
             iProgress = 0;
             if (_typeToResearch is null) throw new Exception("Found a null item to research!");
-            StaticData.Races[0].CompleteResearch(_typeToResearch);
+            StaticData.HumanRace.CompleteResearch(_typeToResearch);
             DisplayAvailableResearch();
         }
         private void DisplayAvailableResearch() {

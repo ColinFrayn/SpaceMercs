@@ -401,7 +401,7 @@ namespace SpaceMercs.MainWindow {
             if (!bHoverHull && (irContextRoom < 0 || irContextRoom > PlayerTeam.PlayerShip.Type.Rooms.Count)) return null;
             ShipRoomDesign? rd = bHoverHull ? null : PlayerTeam.PlayerShip.Type.Rooms[irContextRoom];
             ShipEquipment.RoomSize roomSize = rd?.Size ?? ShipEquipment.RoomSize.Armour;
-            Race playerRace = StaticData.Races[0];
+            Race playerRace = StaticData.HumanRace;
             int count = 0;
             GUIPanel gp = new GUIPanel(this);
             List<int> lIDs = Enumerable.Range(0, StaticData.ShipEquipment.Count).ToList<int>();

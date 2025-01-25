@@ -211,6 +211,16 @@ namespace SpaceMercs {
             };
         }
 
+        public static double RelationsToHyperspaceCost(int r) {
+            return r switch {
+                2 => 6d,
+                3 => 4d,
+                4 => 2d,
+                5 => 1d,
+                _ => 0d
+            };
+        }
+
         public static double RelationsToCostMod(int r) {
             return r switch {
                 -5 => 10d,
