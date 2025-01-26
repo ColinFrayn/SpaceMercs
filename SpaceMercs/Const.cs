@@ -217,10 +217,10 @@ namespace SpaceMercs {
         public const int HomeSysColonyCount = 3;   // Extra colonies for home system
         public const int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
         public const int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
-        public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations
-        public const int StartingRelationsWithHomeRace = 6000; // Experience points. Equivalent to level 2.
-        public const int RelationsExpPenaltyScaleColony = 8; // Experience accrues this many times slower for gaining race relations when doing colony missions
-        public const int RelationsExpPenaltyScale = 16; // Experience accrues this many times slower for gaining race relations when doing non-colony missions in an alien system
+        public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations. Scales up after this by Lev*(Lev+1) (or abs(Lev) for negative)
+        public const int StartingRelationsWithHomeRace = 6000; // Initial HumanRace experience points. Equivalent to level 2.
+        public const int RelationsExpPenaltyScaleColony = 5; // Race relation experience accrual scale (reduction factor) for doing colony missions.
+        public const int RelationsExpPenaltyScale = 8; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
 
         // Time stuff / global clock
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);

@@ -190,11 +190,13 @@ namespace SpaceMercs {
 
             // Graphics for damage (if tgt is still alive)
             playSound("Smash");
+            Random rand = new Random();
             foreach (IEntity tgt in hsAttacked) {
                 if (tgt.Health > 0.0 && source is not null) {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
                     double TotalDam = tgt.CalculateDamage(hitDmg);
-                    effectFactory(EffectType.Damage, tgt.X + (tgt.Size / 2f), tgt.Y + (tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    float xshift = (float)(rand.NextDouble()-0.5d) / 3f;
+                    effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
                     if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
 

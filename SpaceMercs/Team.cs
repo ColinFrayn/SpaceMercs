@@ -190,6 +190,12 @@ namespace SpaceMercs {
             int exp = Relations.ContainsKey(rc) ? Relations[rc] : rc.BaseAttitude;
             return Utils.ExperienceToRelations(exp);
         }
+        public double GetRelationsProgress(Race rc) {
+            if (rc == null) return 0;
+            int exp = Relations.ContainsKey(rc) ? Relations[rc] : rc.BaseAttitude;
+            double fract = Utils.ExperienceToRelationsFraction(exp);
+            return fract;
+        }
         public int GetRelations(AstronomicalObject ao) {
             if (ao == null) return 0;
             Star sys = ao.GetSystem();

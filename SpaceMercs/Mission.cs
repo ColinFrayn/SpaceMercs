@@ -90,7 +90,6 @@ namespace SpaceMercs {
         public int Experience { get { return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
-        private string FullDescription;
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
         public readonly List<Soldier> Soldiers = new List<Soldier>();
         public int WavesRemaining { get; private set; }
@@ -447,7 +446,6 @@ namespace SpaceMercs {
             return largest;
         }
         public string GetDescription() {
-            if (!string.IsNullOrEmpty(FullDescription)) return FullDescription;
             Random rand = new Random(Seed);
             int r = rand.Next(100);
             string strSz = "";
@@ -551,8 +549,7 @@ namespace SpaceMercs {
             if (LevelCount > 1) {
                 sb.AppendLine("Levels : " + LevelCount);
             }
-            FullDescription = sb.ToString();
-            return FullDescription;
+            return sb.ToString();
         }
 
         // Set up this mission to be run on the tactical view

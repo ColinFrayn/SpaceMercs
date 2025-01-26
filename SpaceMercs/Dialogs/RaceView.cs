@@ -31,6 +31,7 @@ namespace SpaceMercs.Dialogs {
                 lbHomeLabel.Visible = false;
                 lbHome.Visible = false;
                 tbDescription.Visible = false;
+                lbExp.Visible = false;
             }
             else {
                 lbColoniesLabel.Visible = true;
@@ -47,9 +48,11 @@ namespace SpaceMercs.Dialogs {
                 lbPopulation.Text = rSelected.Population.ToString();
                 lbHome.Text = "(" + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.X, 2) + "," + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.Y, 2) + ")";
                 tbDescription.Text = rSelected.Description;
+                lbExp.Visible = true;
+                double rel = _team.GetRelationsProgress(rSelected);
+                lbExp.Text = $"{rel:N2}";
             }
         }
-
 
         private void cbRace_SelectedIndexChanged(object sender, EventArgs e) {
             int i = cbRace.SelectedIndex;

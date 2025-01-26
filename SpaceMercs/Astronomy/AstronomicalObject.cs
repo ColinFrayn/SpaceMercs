@@ -119,6 +119,8 @@ namespace SpaceMercs {
                 if (pl != null) {
                     // Planet/moon without local colony -> dangerous         
                     if (hao.Colony == null && pl.Colony == null) dLevel += rand.NextDouble();
+                    // Alien colonies are less dangerous than expected
+                    if (hao.Colony != null && hao.Colony.Owner != StaticData.HumanRace) dLevel--;
                     // More distant planets can be more hostile
                     double pDist = Math.Sqrt(pl.ID);
                     dLevel += pDist * (rand.NextDouble() + 1d) / 2d;
@@ -129,7 +131,10 @@ namespace SpaceMercs {
             Star sys = GetSystem();
             foreach (Race r in StaticData.Races) {
                 if (sys == r.HomePlanet.GetSystem()) dLevel -= rand.NextDouble() + rand.NextDouble();
-
+            }
+            // Make alien systems less dangerous considering their location
+            if (sys.Owner != null && sys.Owner != StaticData.HumanRace) {
+                dLevel -= 2d; // Any alien system should be much less dangerous than expected for the distance from home
             }
 
             int iLevel = Math.Max(1, (int)dLevel);

@@ -38,6 +38,7 @@
             lbRace = new Label();
             lbPopulation = new Label();
             lbPopulationLabel = new Label();
+            lbExp = new Label();
             ((System.ComponentModel.ISupportInitialize)pbColour).BeginInit();
             SuspendLayout();
             // 
@@ -90,7 +91,7 @@
             lbRelations.Location = new Point(93, 62);
             lbRelations.Margin = new Padding(6, 2, 6, 2);
             lbRelations.Name = "lbRelations";
-            lbRelations.Size = new Size(216, 25);
+            lbRelations.Size = new Size(148, 25);
             lbRelations.TabIndex = 4;
             lbRelations.Text = "Fairly Good";
             lbRelations.TextAlign = ContentAlignment.MiddleLeft;
@@ -208,11 +209,24 @@
             lbPopulationLabel.TabIndex = 13;
             lbPopulationLabel.Text = "Population";
             // 
+            // lbExp
+            // 
+            lbExp.BorderStyle = BorderStyle.Fixed3D;
+            lbExp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbExp.Location = new Point(260, 62);
+            lbExp.Margin = new Padding(6, 2, 6, 2);
+            lbExp.Name = "lbExp";
+            lbExp.Size = new Size(49, 25);
+            lbExp.TabIndex = 15;
+            lbExp.Text = "88.88%";
+            lbExp.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // RaceView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(694, 465);
+            Controls.Add(lbExp);
             Controls.Add(lbPopulation);
             Controls.Add(lbPopulationLabel);
             Controls.Add(lbRace);
@@ -254,5 +268,6 @@
         private Label lbRace;
         private Label lbPopulation;
         private Label lbPopulationLabel;
+        private Label lbExp;
     }
 }

@@ -6,8 +6,6 @@ Alien solar system:
 - Alien colonies need names
 - Alien systems need names
 
-Show dmg at different xPos when doing multiple so they don't overlap
-
 ==========================================================================================================
 
 

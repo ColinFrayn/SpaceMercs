@@ -239,11 +239,18 @@ namespace SpaceMercs {
         }
 
         public static int ExperienceToRelations(int xp) {
-            double d = xp / Const.RaceRelationsExperienceScale;
+            double d = (double)xp / (double)Const.RaceRelationsExperienceScale;
             // Exp = Lev * (Lev+1) * Scale if Lev >= 0
             // Exp = -Lev * (Lev+1) * Scale if Lev < 0
             if (d < 0) return Math.Max(-5, -(int)Math.Floor(Math.Sqrt(-d + 0.25) - 0.5) - 1);
             return Math.Min(5, (int)Math.Floor(Math.Sqrt(d + 0.25) - 0.5));
+        }
+        public static double ExperienceToRelationsFraction(int xp) {
+            double d = (double)xp / (double)Const.RaceRelationsExperienceScale;
+            // Exp = Lev * (Lev+1) * Scale if Lev >= 0
+            // Exp = -Lev * (Lev+1) * Scale if Lev < 0
+            if (d < 0) return Math.Max(-5d, -Math.Sqrt(-d + 0.25d) - 0.5d);
+            return Math.Min(5d, Math.Sqrt(d + 0.25d) - 0.5d);
         }
 
         public static int ExperienceToSkillLevel(int xp) {
