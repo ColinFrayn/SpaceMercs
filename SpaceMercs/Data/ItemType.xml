@@ -74,7 +74,7 @@
       <MinSystems>2</MinSystems>
       <MinPop>24</MinPop>
       <CashCost>10</CashCost>
-      <Relations Name="Grey">1</Relations>
+      <Relations Name="Grey">0</Relations>
       <Facility>Medlab</Facility>
     </Requirements>
     <Tex>2,1</Tex>
@@ -107,7 +107,7 @@
       <MinSystems>2</MinSystems>
       <MinPop>26</MinPop>
       <CashCost>10</CashCost>
-      <Relations Name="Grey">2</Relations>
+      <Relations Name="Grey">1</Relations>
       <Facility>Medlab</Facility>
     </Requirements>
     <Tex>2,1</Tex>

@@ -83,7 +83,7 @@ namespace SpaceMercs.Dialogs {
                 var row = dgResearchItems.Rows[dgResearchItems.Rows.Count - 1];
                 row.Tag = it;
                 // If this row can be researched then set it bold, otherwise not
-                if (it.Requirements.MeetsRequirements(_playerTeam)) {
+                if (it.Requirements.TeamMeetsRequirements(_playerTeam)) {
                     row.DefaultCellStyle.Font = new Font(dgResearchItems.DefaultCellStyle.Font, FontStyle.Bold);
                 }
                 else {
@@ -104,7 +104,7 @@ namespace SpaceMercs.Dialogs {
         private void dgResearchItems_SelectionChanged(object sender, EventArgs e) {
             if (!configuring && dgResearchItems.SelectedRows.Count == 1) {
                 if (dgResearchItems.SelectedRows[0].Tag is IResearchable item) {
-                    btResearch.Enabled = item.Requirements?.MeetsRequirements(_playerTeam) == true;
+                    btResearch.Enabled = item.Requirements?.TeamMeetsRequirements(_playerTeam) == true;
                 }
             }
             else btResearch.Enabled = false;

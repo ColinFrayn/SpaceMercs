@@ -167,7 +167,7 @@ namespace SpaceMercs {
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
         public const float  ShotDurationScale = 25.0f; // Time taken for shots to get from source to target
         public const float  ShotSizeScale = 250.0f; // Size of a shot line (larger = smaller)
-        public const float  ShotScatterScale = 0.2f; // Amount of visual scatter on shot lines
+        public const float  ShotScatterScale = 0.15f; // Amount of visual scatter on shot lines
 
         // Miscellaneous
         public const double InitialCash = 50.0;
@@ -217,10 +217,11 @@ namespace SpaceMercs {
         public const int HomeSysColonyCount = 3;   // Extra colonies for home system
         public const int RaceRelationsLevelToAllowSpecialisedEquipmentSale = 2; // Allied
         public const int RaceRelationsLevelToAllowShipRepair = 1; // Friendly
-        public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations. Scales up after this by Lev*(Lev+1) (or abs(Lev) for negative)
+        public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations is 2x this number. Scales up after this by Lev*(Lev+1) (or Lev*(1-Lev) for negative)
         public const int StartingRelationsWithHomeRace = 6000; // Initial HumanRace experience points. Equivalent to level 2.
-        public const int RelationsExpPenaltyScaleColony = 5; // Race relation experience accrual scale (reduction factor) for doing colony missions.
-        public const int RelationsExpPenaltyScale = 8; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
+        public const int RelationsExpPenaltyScaleColony = 4; // Race relation experience accrual scale (reduction factor) for doing colony missions.
+        public const int RelationsExpPenaltyScale = 6; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
+        public const int FoundColonyExperience = 500; // Race relation bonus for founding a colony
 
         // Time stuff / global clock
         public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);

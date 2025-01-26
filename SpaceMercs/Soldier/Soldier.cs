@@ -1148,7 +1148,7 @@ namespace SpaceMercs {
             }
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, tx, ty, results, EquippedWeapon?.Type?.Range ?? 0d, effectFactory);
+            Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory);
             return true;
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {

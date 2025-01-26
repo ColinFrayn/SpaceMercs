@@ -23,14 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             tcMain = new TabControl();
             tpMerchant = new TabPage();
             cbAffordable = new CheckBox();
@@ -75,6 +75,7 @@
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
             tpUpgrade = new TabPage();
+            btModify = new Button();
             cbEquipped = new CheckBox();
             lbTeamCashFoundry = new Label();
             label14 = new Label();
@@ -113,7 +114,8 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            btModify = new Button();
+            lbOwner = new Label();
+            label15 = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -282,8 +284,8 @@
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle9.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colItem.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colItem.DefaultCellStyle = dataGridViewCellStyle1;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
             colItem.ReadOnly = true;
@@ -299,8 +301,8 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle10.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            Mass.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            Mass.DefaultCellStyle = dataGridViewCellStyle2;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
@@ -418,8 +420,8 @@
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle11.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -511,8 +513,8 @@
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle12.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colMission.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colMission.DefaultCellStyle = dataGridViewCellStyle4;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
             colMission.ReadOnly = true;
@@ -520,8 +522,8 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colGoal.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colGoal.DefaultCellStyle = dataGridViewCellStyle5;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
             colGoal.ReadOnly = true;
@@ -530,8 +532,8 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle14.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colOpp.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            colOpp.DefaultCellStyle = dataGridViewCellStyle6;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
             colOpp.ReadOnly = true;
@@ -641,8 +643,8 @@
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle15.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -684,6 +686,19 @@
             tpUpgrade.TabIndex = 4;
             tpUpgrade.Text = "Foundry";
             tpUpgrade.UseVisualStyleBackColor = true;
+            // 
+            // btModify
+            // 
+            btModify.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btModify.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btModify.Location = new Point(181, 475);
+            btModify.Margin = new Padding(4, 3, 4, 3);
+            btModify.Name = "btModify";
+            btModify.Size = new Size(80, 28);
+            btModify.TabIndex = 16;
+            btModify.Text = "Modify";
+            btModify.UseVisualStyleBackColor = true;
+            btModify.Click += btModifyWeapon_Click;
             // 
             // cbEquipped
             // 
@@ -838,8 +853,8 @@
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle16.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dgcItem.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
             dgcItem.ReadOnly = true;
@@ -1049,6 +1064,8 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(lbOwner);
+            groupBox4.Controls.Add(label15);
             groupBox4.Controls.Add(lbSystemName);
             groupBox4.Controls.Add(label10);
             groupBox4.Controls.Add(lbStarType);
@@ -1179,18 +1196,33 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // btModify
+            // lbOwner
             // 
-            btModify.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btModify.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btModify.Location = new Point(181, 475);
-            btModify.Margin = new Padding(4, 3, 4, 3);
-            btModify.Name = "btModify";
-            btModify.Size = new Size(80, 28);
-            btModify.TabIndex = 16;
-            btModify.Text = "Modify";
-            btModify.UseVisualStyleBackColor = true;
-            btModify.Click += btModifyWeapon_Click;
+            lbOwner.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbOwner.BorderStyle = BorderStyle.FixedSingle;
+            lbOwner.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbOwner.ImageAlign = ContentAlignment.MiddleRight;
+            lbOwner.Location = new Point(152, 183);
+            lbOwner.Margin = new Padding(5);
+            lbOwner.Name = "lbOwner";
+            lbOwner.Padding = new Padding(2);
+            lbOwner.Size = new Size(186, 27);
+            lbOwner.TabIndex = 22;
+            lbOwner.Text = "Placeholder Text";
+            lbOwner.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            label15.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label15.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.ImageAlign = ContentAlignment.MiddleRight;
+            label15.Location = new Point(14, 187);
+            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(121, 18);
+            label15.TabIndex = 21;
+            label15.Text = "Owning Race";
+            label15.TextAlign = ContentAlignment.MiddleRight;
             // 
             // ColonyView
             // 
@@ -1308,5 +1340,7 @@
         private Label label14;
         private CheckBox cbEquipped;
         private Button btModify;
+        private Label lbOwner;
+        private Label label15;
     }
 }

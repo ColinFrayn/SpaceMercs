@@ -72,6 +72,7 @@ namespace SpaceMercs.Dialogs {
             else lbSystemName.Text = cl.Location.GetSystem().Name;
             lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
             lbPlanetType.Text = cl.Location.Type.ToString();
+            lbOwner.Text = cl.Owner.Name;
         }
 
         private void SetupTabs() {

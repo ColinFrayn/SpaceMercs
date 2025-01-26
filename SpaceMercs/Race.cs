@@ -203,7 +203,7 @@ namespace SpaceMercs {
             foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                 if (HasResearched(it)) continue;
                 if (maxLevel < (it.Requirements?.MinLevel ?? 0)) continue; // Gate it by player level too so we don't end up with enemy races way more advanced
-                if (it.Requirements?.MeetsRequirements(this) == true) {
+                if (it.Requirements?.RaceMeetsRequirements(this) == true) {
                     double diff = it.Requirements.Difficulty;
                     double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
                     if (rand.NextDouble() > prob) {
@@ -215,7 +215,7 @@ namespace SpaceMercs {
             foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
                 if (HasResearched(mat)) continue;
                 if (maxLevel < (mat.Requirements?.MinLevel ?? 0)) continue; // Gate it by player level too so we don't end up with enemy races way more advanced
-                if (mat.Requirements?.MeetsRequirements(this) == true) {
+                if (mat.Requirements?.RaceMeetsRequirements(this) == true) {
                     double diff = mat.Requirements.Difficulty;
                     double prob = Math.Pow(1.0 - Const.DailyResearchProb, nDays / diff); // Chance of *failure*
                     if (rand.NextDouble() > prob) {

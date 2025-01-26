@@ -54,7 +54,7 @@ namespace SpaceMercs.Items {
         }
 
         // Any race : Have they expanded enough to research this?
-        public bool MeetsRequirements(Race race) {
+        public bool RaceMeetsRequirements(Race race) {
             if (race.SystemCount < MinSystems) return false;
             if (race.Population < MinPop) return false;
 
@@ -67,9 +67,10 @@ namespace SpaceMercs.Items {
         }
 
         // The player team & player race : Can they actually initiate research?
-        public bool MeetsRequirements(Team team) {
+        public bool TeamMeetsRequirements(Team team) {
             if (team.Cash < CashCost) return false;
             foreach (Race rc in RequiredRaceRelations.Keys) {
+                if (!rc.Known) return false;
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
             if (team.MaximumSoldierLevel < MinLevel) return false;
@@ -79,18 +80,18 @@ namespace SpaceMercs.Items {
             foreach (KeyValuePair<MaterialType, int> kvp in RequiredMaterials) {
                 if (team.CountMaterial(kvp.Key) < kvp.Value) return false;
             }
-            return MeetsRequirements(StaticData.HumanRace);
+            return RaceMeetsRequirements(StaticData.HumanRace);
         }
 
         // The player team & player race : Meets requirements for viewing this tech, but not necessarily researching it
         // i.e. ignoring Cash and Material requirements
-        public bool MeetsBasicRequirements(Team team) {
+        public bool TeamMeetsBasicRequirements(Team team) {
             foreach (Race rc in RequiredRaceRelations.Keys) {
                 if (!rc.Known) return false;
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
             if (team.MaximumSoldierLevel < MinLevel) return false;
-            return MeetsRequirements(StaticData.HumanRace);
+            return RaceMeetsRequirements(StaticData.HumanRace);
         }
 
         // How difficult is this (makes it harder for alien races to research it)

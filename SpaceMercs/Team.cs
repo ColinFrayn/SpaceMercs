@@ -395,14 +395,14 @@ namespace SpaceMercs {
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
-                    if (it.Requirements?.MeetsBasicRequirements(this) == false) {
+                    if (it.Requirements?.TeamMeetsBasicRequirements(this) == false) {
                         items.Add(it);
                     }
                 }
                 foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
                     if (humanRace.HasResearched(mat)) continue;
                     if (mat.RequiredRace != null && mat.RequiredRace != humanRace) continue;
-                    if (mat.Requirements?.MeetsBasicRequirements(this) == false) {
+                    if (mat.Requirements?.TeamMeetsBasicRequirements(this) == false) {
                         items.Add(mat);
                     }
                 }
@@ -416,14 +416,14 @@ namespace SpaceMercs {
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
                     if (it.RequiredRace != null && it.RequiredRace != humanRace) continue;
-                    if (it.Requirements?.MeetsBasicRequirements(this) == true) {
+                    if (it.Requirements?.TeamMeetsBasicRequirements(this) == true) {
                         items.Add(it);
                     }
                 }
                 foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
                     if (humanRace.HasResearched(mat)) continue;
                     if (mat.RequiredRace != null && mat.RequiredRace != humanRace) continue;
-                    if (mat.Requirements?.MeetsBasicRequirements(this) == true) {
+                    if (mat.Requirements?.TeamMeetsBasicRequirements(this) == true) {
                         items.Add(mat);
                     }
                 }

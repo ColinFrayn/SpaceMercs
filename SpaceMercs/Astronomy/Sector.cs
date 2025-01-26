@@ -160,7 +160,7 @@ namespace SpaceMercs {
                     Matrix4 translateM3 = Matrix4.CreateTranslation(0.0f, 1.1f, 0f);
                     Matrix4 scaleM2 = Matrix4.CreateScale(0.6f, 0.4f, 0.01f);
                     prog.SetUniform("model", scaleM2 * translateM * translateM3);
-                    prog.SetUniform("flatColour", new Vector4(st.Owner.Colour.R, st.Owner.Colour.G, st.Owner.Colour.B, 1.0f));
+                    prog.SetUniform("flatColour", new Vector4((float)st.Owner.Colour.R/255f, (float)st.Owner.Colour.G / 255f, (float)st.Owner.Colour.B / 255f, 1.0f));
                     GL.UseProgram(prog.ShaderProgramHandle);
                     Square.Flat.BindAndDraw();
                 }

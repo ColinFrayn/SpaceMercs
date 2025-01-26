@@ -431,8 +431,9 @@ namespace SpaceMercs.MainWindow {
                 StaticData.HumanRace.AddSystem(hao.GetSystem());
             }
             PlayerTeam.PlayerShip.RemoveColonyBuilder();
-            msgBox.PopupMessage("Colony Founded");
+            msgBox.PopupMessage("Colony Founded.\nYour renown has increased!");
             SetAOButtonsOnGUI(hao);
+            PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.FoundColonyExperience, msgBox.PopupMessage);
         }
         private void OpenScanPlanetDialog() {
             if (!GalaxyMap.MapIsInitialised) return;

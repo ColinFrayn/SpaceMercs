@@ -141,13 +141,6 @@ namespace SpaceMercs {
             return Direction.East;
         }
 
-        public static string RunLengthEncode(string str) {
-            return str; // TODO
-        }
-        public static string RunLengthDecode(string str) {
-            return str; // TODO
-        }
-
         public static string MissionGoalToString(Mission.MissionGoal mg) {
             return mg switch {
                 Mission.MissionGoal.ExploreAll => "Explore",
@@ -167,7 +160,7 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, List<ShotResult> results, double range, VisualEffect.EffectFactory effectFactory) {
+        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory) {
             float sdelay = 0f;
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
                 foreach (ShotResult result in results) {
@@ -178,22 +171,22 @@ namespace SpaceMercs {
             }
             float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
             float shotSize = (float)avDam / Const.ShotSizeScale;
-            float duration = (float)range * Const.ShotDurationScale / (float)EquippedWeapon.Type.ShotSpeed;
+            float duration = (float)shotRange * Const.ShotDurationScale / (float)EquippedWeapon.Type.ShotSpeed;
             float sLength = (float)EquippedWeapon.Type.ShotLength; // Length of a shot, not the weapon itself
-            if (sLength == 0.0f) duration = avDam * Const.ShotDurationScale; // This is not a projectile e.g. arc rifle, so just leave it up for a while
-            float scatter = (float)EquippedWeapon.DropOff * (float)range * Const.ShotScatterScale;
+            if (sLength == 0.0f) duration = avDam * Const.ShotDurationScale; // This is not a projectile e.g. arc rifle, so just leave the whole distance highlighted for a while
+            float scatter = (float)EquippedWeapon.DropOff * (float)shotRange * Const.ShotScatterScale;
             Random rand = new Random();
             Color col = EquippedWeapon?.Type?.ShotColor ?? Color.FromArgb(255, 200, 200, 200);
             foreach (ShotResult result in results) {
-                float scatterMod = result.Hit ? 0.1f : scatter;
+                float scatterMod = result.Hit ? 0.05f : scatter;
                 float sx = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
-                effectFactory(EffectType.Shot, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", tx + 0.5f + sx }, { "FY", from.Y + 0.5f }, { "TY", ty + 0.5f + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
+                effectFactory(EffectType.Shot, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", tx + ((float)tSize / 2f) + sx }, { "FY", from.Y + 0.5f }, { "TY", ty + ((float)tSize / 2f) + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
                 sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
             }
         }
 
-        #region Soldier Functions
+        #region Experience Functions
         public static string RelationsToString(int r) {
             return r switch {
                 -5 => "Despised",
@@ -210,7 +203,6 @@ namespace SpaceMercs {
                 _ => throw new Exception($"Unexpected relation level : {r}")
             };
         }
-
         public static double RelationsToHyperspaceCost(int r) {
             return r switch {
                 2 => 6d,
@@ -220,7 +212,6 @@ namespace SpaceMercs {
                 _ => 0d
             };
         }
-
         public static double RelationsToCostMod(int r) {
             return r switch {
                 -5 => 10d,
@@ -237,7 +228,6 @@ namespace SpaceMercs {
                 _ => throw new Exception($"Unexpected relation level : {r}")
             };
         }
-
         public static int ExperienceToRelations(int xp) {
             double d = (double)xp / (double)Const.RaceRelationsExperienceScale;
             // Exp = Lev * (Lev+1) * Scale if Lev >= 0
@@ -246,11 +236,14 @@ namespace SpaceMercs {
             return Math.Min(5, (int)Math.Floor(Math.Sqrt(d + 0.25) - 0.5));
         }
         public static double ExperienceToRelationsFraction(int xp) {
-            double d = (double)xp / (double)Const.RaceRelationsExperienceScale;
-            // Exp = Lev * (Lev+1) * Scale if Lev >= 0
-            // Exp = -Lev * (Lev+1) * Scale if Lev < 0
-            if (d < 0) return Math.Max(-5d, -Math.Sqrt(-d + 0.25d) - 0.5d);
-            return Math.Min(5d, Math.Sqrt(d + 0.25d) - 0.5d);
+            int lev = ExperienceToRelations(xp);
+            int current = RelationsLevelToExperience(lev);
+            int next = RelationsLevelToExperience(lev + 1);
+            return (double)(xp - current) / (double)(next - current);
+        }
+        public static int RelationsLevelToExperience(int level) {
+            if (level < 0) return level * (1 - level) * Const.RaceRelationsExperienceScale;
+            return level * (level + 1) * Const.RaceRelationsExperienceScale;
         }
 
         public static int ExperienceToSkillLevel(int xp) {
@@ -258,11 +251,12 @@ namespace SpaceMercs {
             // Inverse triangular numbers ;)
             return (int)Math.Floor((Math.Sqrt(1 + d * 8) - 1) / 2);
         }
-
         public static int SkillLevelToExperience(int lvl) {
             return lvl * (lvl + 1) * Const.WeaponSkillBase / 2;
         }
+        #endregion
 
+        #region Soldier Functions
         public static double GenerateHitRoll(IEntity from, IEntity to) {
             double att = from.Attack + (from.EquippedWeapon?.AccuracyBonus ?? 0);
             double def = to.Defence;
@@ -554,7 +548,7 @@ namespace SpaceMercs {
         }
         #endregion
 
-        #region Xml Parsing Utility Functions
+        #region Load Save Utility Functions
         public static IEnumerable<XmlNode> SelectNodesToList(this XmlNode root, string path) {
             List<XmlNode> nodes = new List<XmlNode>();
             if (string.IsNullOrEmpty(path) || root is null) return nodes;
@@ -632,6 +626,13 @@ namespace SpaceMercs {
                 throw new Exception($"Could not parse int data for path {attributeName} : {strText}");
             }
             return iVal;
+        }
+
+        public static string RunLengthEncode(string str) {
+            return str; // TODO
+        }
+        public static string RunLengthDecode(string str) {
+            return str; // TODO
         }
         #endregion
     }

@@ -48,9 +48,13 @@ namespace SpaceMercs.Dialogs {
                 lbPopulation.Text = rSelected.Population.ToString();
                 lbHome.Text = "(" + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.X, 2) + "," + Math.Round(rSelected.HomePlanet.GetSystem().MapPos.Y, 2) + ")";
                 tbDescription.Text = rSelected.Description;
-                lbExp.Visible = true;
-                double rel = _team.GetRelationsProgress(rSelected);
-                lbExp.Text = $"{rel:N2}";
+                int rel = _team.GetRelations(rSelected);
+                if (rel < 5) {
+                    lbExp.Visible = true;
+                    double progress = _team.GetRelationsProgress(rSelected);
+                    lbExp.Text = $"{progress:N2}";
+                }
+                else lbExp.Visible = false;
             }
         }
 

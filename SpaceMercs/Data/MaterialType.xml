@@ -69,7 +69,7 @@
       <CashCost>30</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Metasteel">2</Material>
-      <Relations Name="Gokan">1</Relations>
+      <Relations Name="Gokan">2</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
     <Desc>Mithril is an advanced alloy with exceptionally high strength and relatively low density.</Desc>
