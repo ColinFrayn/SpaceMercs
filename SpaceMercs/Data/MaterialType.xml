@@ -32,10 +32,10 @@
     <MassMod>1.0</MassMod>
     <ItemCost>7.0</ItemCost>
     <ArmourMod>1.7</ArmourMod>
-    <Rarity>0.07</Rarity>
+    <Rarity>0.08</Rarity>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>20</MinPop>
+      <MinPop>22</MinPop>
       <CashCost>10</CashCost>
       <Material Name="Chitin">2</Material>
       <Material Name="Steel">2</Material>
@@ -50,7 +50,7 @@
     <Rarity>0.03</Rarity>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>36</MinPop>
       <CashCost>20</CashCost>
       <Material Name="Metasteel">2</Material>
       <Material Name="Carbon Fibre">2</Material>
@@ -65,7 +65,7 @@
     <Rarity>0.01</Rarity>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>36</MinPop>
+      <MinPop>40</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Metasteel">2</Material>
@@ -81,7 +81,7 @@
     <Rarity>0.006</Rarity>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>40</MinPop>
+      <MinPop>50</MinPop>
       <CashCost>50</CashCost>
       <Material Name="Metasteel">2</Material>
       <Material Name="Mithril">2</Material>
@@ -96,7 +96,7 @@
     <Rarity>0.005</Rarity>
     <Requirements>
       <MinLevel>12</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>60</MinPop>
       <CashCost>75</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Nanosilk">2</Material>
@@ -111,7 +111,7 @@
     <Rarity>0.004</Rarity>
     <Requirements>
       <MinLevel>14</MinLevel>
-      <MinPop>60</MinPop>
+      <MinPop>70</MinPop>
       <CashCost>100</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Adamantium">2</Material>
@@ -155,24 +155,24 @@
     <Desc>Carbon</Desc>
   </MaterialType>
   <MaterialType Name="Rare Earth Metals">
-    <ItemCost>6.0</ItemCost>
+    <ItemCost>8.0</ItemCost>
     <Desc>Rare Earth Metals</Desc>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Electronic Components">
-    <ItemCost>10.0</ItemCost>
+    <ItemCost>20.0</ItemCost>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Gold">
-    <ItemCost>20.0</ItemCost>
-    <Rarity>0.01</Rarity>
+    <ItemCost>40.0</ItemCost>
+    <Rarity>0.02</Rarity>
     <Desc>Gold</Desc>
     <UnitMass>0.01</UnitMass>
   </MaterialType>
   <MaterialType Name="Copper">
-    <ItemCost>2.0</ItemCost>
+    <ItemCost>3.0</ItemCost>
     <Rarity>0.7</Rarity>
     <Desc>Copper</Desc>
     <UnitMass>0.5</UnitMass>
@@ -188,25 +188,25 @@
     <Desc>Plastic</Desc>
   </MaterialType>
   <MaterialType Name="Rubber">
-    <ItemCost>0.5</ItemCost>
+    <ItemCost>0.75</ItemCost>
     <Rarity>0.9</Rarity>
     <Desc>Rubber</Desc>
   </MaterialType>
   <MaterialType Name="Crystals">
-    <ItemCost>4.0</ItemCost>
-    <Rarity>0.07</Rarity>
+    <ItemCost>20.0</ItemCost>
+    <Rarity>0.1</Rarity>
     <Desc>Energy Crystals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Titanium">
-    <ItemCost>6.0</ItemCost>
-    <Rarity>0.06</Rarity>
+    <ItemCost>15.0</ItemCost>
+    <Rarity>0.15</Rarity>
     <Desc>Titanium</Desc>
     <UnitMass>0.8</UnitMass>
   </MaterialType>
   <MaterialType Name="Industrial Chemicals">
-    <ItemCost>6.0</ItemCost>
-    <Rarity>0.06</Rarity>
+    <ItemCost>12.0</ItemCost>
+    <Rarity>0.2</Rarity>
     <Desc>Industrial chemicals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>

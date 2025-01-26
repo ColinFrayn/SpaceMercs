@@ -399,6 +399,7 @@ namespace SpaceMercs {
                     dRand += 0.01;
                     double frac = (rarity / dRand);
                     int dcount = (int)Math.Floor(frac);
+                    if (eq is Equipment eqp && eqp.Level > 3) dcount = 1; // Don't get multiples of very rare objects
                     double dRemainder = frac - Math.Floor(frac);
                     if (rand.NextDouble() < dRemainder) dcount++;
                     if (dcount < 1) dcount = 1;

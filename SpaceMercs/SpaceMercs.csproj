@@ -163,6 +163,9 @@
     <None Update="Sounds\CashRegister.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\ChainGun.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\Chainsaw.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -260,6 +263,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\Strike.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\SuperHeavyMachineGun.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\SwordSlice.wav">

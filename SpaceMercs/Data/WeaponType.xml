@@ -84,9 +84,65 @@
     <Sound>HeavyMachineGun</Sound>
     <Noise>10</Noise>
     <Materials>
-      <Material Name="Steel" Amount="10"/>
+      <Material Name="Steel" Amount="8"/>
       <Material Name="Aluminium" Amount="3"/>
       <Material Name="Copper" Amount="2"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Superheavy Rifle" Class="Heavy">
+    <Mass>55.0</Mass>
+    <Cost>900</Cost>
+    <Rarity>24</Rarity>
+    <Speed>20</Speed>
+    <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
+    <Shots>4</Shots>
+    <Recoil>1.5</Recoil>
+    <Delay>250</Delay>
+    <Damage>6+4</Damage>
+    <Desc>A very heavy high calibre automatic rifle for mounting on power armour</Desc>
+    <Sound>SuperHeavyMachineGun</Sound>
+    <Noise>12</Noise>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>60</MinPop>
+      <CashCost>150</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Tungsten">2</Material>
+      <Material Name="Titanium">2</Material>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="6"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Tungsten" Amount="2"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Gattling Gun" Class="Heavy">
+    <Mass>58.0</Mass>
+    <Cost>800</Cost>
+    <Rarity>22</Rarity>
+    <Speed>20</Speed>
+    <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
+    <Shots>6</Shots>
+    <Recoil>1.5</Recoil>
+    <Delay>250</Delay>
+    <Damage>4+4</Damage>
+    <Desc>A very heavy rapid-fire chain gun for mounting on power armour</Desc>
+    <Sound>ChainGun</Sound>
+    <Noise>12</Noise>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>60</MinPop>
+      <CashCost>140</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Steel">2</Material>
+      <Material Name="Titanium">2</Material>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="8"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Laser Rifle" Class="Rifle">
@@ -324,7 +380,7 @@
     <Rarity>12</Rarity>
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
-    <Damage Area="2">5+4</Damage>
+    <Damage Area="2">4+4</Damage>
     <Desc>A grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
@@ -343,7 +399,7 @@
     <Rarity>22</Rarity>
     <Speed>20</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
-    <Damage Area="2">6+5</Damage>
+    <Damage Area="2">5+5</Damage>
     <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
@@ -352,8 +408,7 @@
       <Material Name="Steel" Amount="6"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
-      <Material Name="Copper" Amount="1"/>
-      <Material Name="Electronic Components" Amount="3"/>
+      <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>10</MinLevel>
@@ -363,6 +418,33 @@
       <Facility>Armoury</Facility>
       <Relations Name="Grey">1</Relations>
       <Relations Name="Elithiri">1</Relations>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Heavy Grenade Launcher" Class="Launcher">
+    <Mass>30.0</Mass>
+    <Cost>1500</Cost>
+    <Rarity>25</Rarity>
+    <Speed>22</Speed>
+    <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
+    <Damage Area="2">6+6</Damage>
+    <Desc>A heavy grenade launcher that spits high-explosive heavy grenade rounds.</Desc>
+    <Sound>GrenadeLauncher</Sound>
+    <Noise>14</Noise>
+    <Unmodifiable/>
+    <Materials>
+      <Material Name="Steel" Amount="6"/>
+      <Material Name="Industrial Chemicals" Amount="3"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Electronic Components" Amount="3"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>65</MinPop>
+      <CashCost>165</CashCost>
+      <Material Name="Electronic Components">1</Material>
+      <Material Name="Steel">1</Material>
+      <Facility>Armoury</Facility>
+      <Relations Name="Ogrish">1</Relations>
     </Requirements>
   </WeaponType>
   <WeaponType Name="Sniper Rifle" Class="Sniper">
