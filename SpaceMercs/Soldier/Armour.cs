@@ -119,18 +119,18 @@ namespace SpaceMercs {
 
         // Misc
         private double ArmourAtLevel(int lev) {
-            return Type.BaseArmour * Material.ArmourMod * (1 + (lev / 5.0));
+            return (double)Type.BaseArmour * Material.ArmourMod * (1d + ((double)lev / 5d));
         }
         private double ShieldsAtLevel(int lev) {
-            return Type.Shields * (1 + (lev / 4));
+            return (double)Type.Shields * (1d + ((double)lev / 4d));
         }
         private double MassAtLevel(int lev) {
             return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
         }
         private double CalculateCost(int lev) {
             double cost = Type.Cost;
-            double armourFact = ArmourAtLevel(lev) / Type.BaseArmour;
-            double shieldFact = Type.Shields == 0 ? 1 : ShieldsAtLevel(lev) / Type.Shields;
+            double armourFact = ArmourAtLevel(lev) / (double)Type.BaseArmour;
+            double shieldFact = Type.Shields == 0 ? 1 : ShieldsAtLevel(lev) / (double)Type.Shields;
             double massFact = Type.Mass / MassAtLevel(lev);
             cost *= Math.Pow(armourFact, Const.ArmourCostExponent) * Math.Pow(shieldFact, Const.ShieldCostExponent) * Math.Pow(massFact, Const.MassCostExponent);
 

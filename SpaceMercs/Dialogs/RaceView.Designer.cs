@@ -39,12 +39,13 @@
             lbPopulation = new Label();
             lbPopulationLabel = new Label();
             lbExp = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbColour).BeginInit();
             SuspendLayout();
             // 
             // cbRace
             // 
-            cbRace.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            cbRace.Font = new Font("Microsoft Sans Serif", 12F);
             cbRace.FormattingEnabled = true;
             cbRace.Location = new Point(93, 14);
             cbRace.Margin = new Padding(4, 3, 4, 3);
@@ -56,7 +57,7 @@
             // lbColourLabel
             // 
             lbColourLabel.AutoSize = true;
-            lbColourLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbColourLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbColourLabel.Location = new Point(518, 21);
             lbColourLabel.Margin = new Padding(4, 0, 4, 0);
             lbColourLabel.Name = "lbColourLabel";
@@ -76,7 +77,7 @@
             // lbRelationsLabel
             // 
             lbRelationsLabel.AutoSize = true;
-            lbRelationsLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRelationsLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbRelationsLabel.Location = new Point(8, 66);
             lbRelationsLabel.Margin = new Padding(4, 0, 4, 0);
             lbRelationsLabel.Name = "lbRelationsLabel";
@@ -87,7 +88,7 @@
             // lbRelations
             // 
             lbRelations.BorderStyle = BorderStyle.FixedSingle;
-            lbRelations.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRelations.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbRelations.Location = new Point(93, 62);
             lbRelations.Margin = new Padding(6, 2, 6, 2);
             lbRelations.Name = "lbRelations";
@@ -99,7 +100,7 @@
             // lbSystemsLabel
             // 
             lbSystemsLabel.AutoSize = true;
-            lbSystemsLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbSystemsLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbSystemsLabel.Location = new Point(14, 105);
             lbSystemsLabel.Margin = new Padding(4, 0, 4, 0);
             lbSystemsLabel.Name = "lbSystemsLabel";
@@ -110,7 +111,7 @@
             // lbSystems
             // 
             lbSystems.BorderStyle = BorderStyle.FixedSingle;
-            lbSystems.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbSystems.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbSystems.Location = new Point(93, 102);
             lbSystems.Margin = new Padding(6, 2, 6, 2);
             lbSystems.Name = "lbSystems";
@@ -122,7 +123,7 @@
             // lbColoniesLabel
             // 
             lbColoniesLabel.AutoSize = true;
-            lbColoniesLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbColoniesLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbColoniesLabel.Location = new Point(181, 105);
             lbColoniesLabel.Margin = new Padding(4, 0, 4, 0);
             lbColoniesLabel.Name = "lbColoniesLabel";
@@ -133,7 +134,7 @@
             // lbColonies
             // 
             lbColonies.BorderStyle = BorderStyle.FixedSingle;
-            lbColonies.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbColonies.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbColonies.Location = new Point(260, 102);
             lbColonies.Margin = new Padding(6, 2, 6, 2);
             lbColonies.Name = "lbColonies";
@@ -145,7 +146,7 @@
             // lbHome
             // 
             lbHome.BorderStyle = BorderStyle.FixedSingle;
-            lbHome.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHome.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbHome.Location = new Point(462, 62);
             lbHome.Margin = new Padding(6, 2, 6, 2);
             lbHome.Name = "lbHome";
@@ -157,7 +158,7 @@
             // lbHomeLabel
             // 
             lbHomeLabel.AutoSize = true;
-            lbHomeLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbHomeLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbHomeLabel.Location = new Point(352, 66);
             lbHomeLabel.Margin = new Padding(4, 0, 4, 0);
             lbHomeLabel.Name = "lbHomeLabel";
@@ -167,7 +168,7 @@
             // 
             // tbDescription
             // 
-            tbDescription.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            tbDescription.Font = new Font("Microsoft Sans Serif", 9.75F);
             tbDescription.Location = new Point(14, 143);
             tbDescription.Margin = new Padding(4, 3, 4, 3);
             tbDescription.Multiline = true;
@@ -178,7 +179,7 @@
             // lbRace
             // 
             lbRace.AutoSize = true;
-            lbRace.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbRace.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbRace.Location = new Point(36, 21);
             lbRace.Margin = new Padding(4, 0, 4, 0);
             lbRace.Name = "lbRace";
@@ -189,7 +190,7 @@
             // lbPopulation
             // 
             lbPopulation.BorderStyle = BorderStyle.FixedSingle;
-            lbPopulation.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbPopulation.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbPopulation.Location = new Point(462, 102);
             lbPopulation.Margin = new Padding(6, 2, 6, 2);
             lbPopulation.Name = "lbPopulation";
@@ -201,7 +202,7 @@
             // lbPopulationLabel
             // 
             lbPopulationLabel.AutoSize = true;
-            lbPopulationLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbPopulationLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbPopulationLabel.Location = new Point(383, 105);
             lbPopulationLabel.Margin = new Padding(4, 0, 4, 0);
             lbPopulationLabel.Name = "lbPopulationLabel";
@@ -212,20 +213,33 @@
             // lbExp
             // 
             lbExp.BorderStyle = BorderStyle.Fixed3D;
-            lbExp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbExp.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbExp.Location = new Point(260, 62);
             lbExp.Margin = new Padding(6, 2, 6, 2);
             lbExp.Name = "lbExp";
             lbExp.Size = new Size(49, 25);
             lbExp.TabIndex = 15;
-            lbExp.Text = "88.88%";
+            lbExp.Text = "88.8%";
             lbExp.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label1.Location = new Point(244, 66);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.Size = new Size(14, 16);
+            label1.TabIndex = 16;
+            label1.Text = "+";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // RaceView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(694, 465);
+            Controls.Add(label1);
             Controls.Add(lbExp);
             Controls.Add(lbPopulation);
             Controls.Add(lbPopulationLabel);
@@ -269,5 +283,6 @@
         private Label lbPopulation;
         private Label lbPopulationLabel;
         private Label lbExp;
+        private Label label1;
     }
 }

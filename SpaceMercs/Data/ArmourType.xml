@@ -256,7 +256,7 @@
     <Agility>-1</Agility>
     <Defence>2</Defence>
     <Utility>
-      <Stealth>4</Stealth>
+      <Stealth>6</Stealth>
       <Perception>2</Perception>
     </Utility>
     <BaseArmour>20</BaseArmour>
@@ -377,13 +377,13 @@
   </ArmourType>
   <ArmourType Name="Power Armour">
     <Mass>30.0</Mass>
-    <Cost>350</Cost>
+    <Cost>450</Cost>
     <Rarity>50</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
     <Speed>0.85</Speed>
     <Attack>2</Attack>
-    <BaseArmour>40</BaseArmour>
+    <BaseArmour>44</BaseArmour>
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>3</MinSystems>
@@ -394,9 +394,9 @@
       <Facility>Workshop</Facility>
     </Requirements>
     <BonusArmour>
-      <Bonus Type="Fire" Amount="30"/>
-      <Bonus Type="Cold" Amount="30"/>
-      <Bonus Type="Poison" Amount="30"/>
+      <Bonus Type="Fire" Amount="20"/>
+      <Bonus Type="Cold" Amount="20"/>
+      <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A powered full-body armour</Desc>
@@ -409,27 +409,28 @@
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
     <Mass>60.0</Mass>
-    <Cost>1200</Cost>
+    <Cost>1500</Cost>
     <Rarity>60</Rarity>
     <Agility>-8</Agility>
     <Strength>8</Strength>
     <Attack>2</Attack>
-    <Speed>0.7</Speed>
-    <BaseArmour>55</BaseArmour>
+    <Speed>0.75</Speed>
+    <BaseArmour>58</BaseArmour>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>
       <CashCost>100</CashCost>
-      <Material Name="Titanium">2</Material>
+      <Material Name="Titanium">4</Material>
+      <Material Name="Mithril">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
-      <Bonus Type="Fire" Amount="50"/>
-      <Bonus Type="Cold" Amount="50"/>
-      <Bonus Type="Poison" Amount="50"/>
+      <Bonus Type="Fire" Amount="30"/>
+      <Bonus Type="Cold" Amount="30"/>
+      <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A heavy powered full-body Terminator armour set</Desc>
@@ -442,13 +443,13 @@
   </ArmourType>
   <ArmourType Name="Assault Power Armour">
     <Mass>25.0</Mass>
-    <Cost>1050</Cost>
+    <Cost>1100</Cost>
     <Rarity>65</Rarity>
     <Agility>-4</Agility>
     <Strength>6</Strength>
-    <Speed>1.1</Speed>
+    <Speed>1.0</Speed>
     <Attack>2</Attack>
-    <BaseArmour>38</BaseArmour>
+    <BaseArmour>44</BaseArmour>
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
@@ -460,9 +461,9 @@
       <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
-      <Bonus Type="Fire" Amount="25"/>
-      <Bonus Type="Cold" Amount="25"/>
-      <Bonus Type="Poison" Amount="25"/>
+      <Bonus Type="Fire" Amount="20"/>
+      <Bonus Type="Cold" Amount="20"/>
+      <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A powered full-body armour with articulated joints to enable movement and agility.</Desc>
@@ -476,18 +477,18 @@
   </ArmourType>
   <ArmourType Name="Shielded Power Armour">
     <Mass>35.0</Mass>
-    <Cost>1300</Cost>
+    <Cost>1600</Cost>
     <Rarity>70</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
     <Attack>2</Attack>
     <Speed>0.85</Speed>
-    <BaseArmour>44</BaseArmour>
+    <BaseArmour>48</BaseArmour>
     <Shields>20</Shields>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
       <Bonus Type="Cold" Amount="30"/>
-      <Bonus Type="Poison" Amount="30"/>
+      <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A powered full-body armour with energy shields incorporated</Desc>
@@ -504,7 +505,7 @@
       <MinPop>50</MinPop>
       <CashCost>160</CashCost>
       <Material Name="Titanium">2</Material>
-      <Material Name="Crystals">2</Material>
+      <Material Name="Crystals">4</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Gokan">2</Relations>

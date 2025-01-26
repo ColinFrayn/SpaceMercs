@@ -201,17 +201,20 @@ namespace SpaceMercs {
         private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
+            // Take a copy as we're modifying it
+            Dictionary<WeaponType.DamageType, double> damInternal = new Dictionary<WeaponType.DamageType, double>(AllDam);
+
             // Shields?
             if (Shields > 0.0) {
                 double PhysDam = 0.0;
-                if (AllDam.ContainsKey(WeaponType.DamageType.Physical)) PhysDam = AllDam[WeaponType.DamageType.Physical];
+                if (damInternal.ContainsKey(WeaponType.DamageType.Physical)) PhysDam = damInternal[WeaponType.DamageType.Physical];
                 if (PhysDam > 0.0) {
                     if (Shields > PhysDam) {
                         if (applyDamage) Shields -= PhysDam;
-                        AllDam.Remove(WeaponType.DamageType.Physical);
+                        damInternal.Remove(WeaponType.DamageType.Physical);
                     }
                     else {
-                        AllDam[WeaponType.DamageType.Physical] -= Shields;
+                        damInternal[WeaponType.DamageType.Physical] -= Shields;
                         if (applyDamage) Shields = 0.0;
                     }
                 }
@@ -219,8 +222,8 @@ namespace SpaceMercs {
 
             // Loop through all damage types and calculate all their combined effects
             double TotalDam = 0.0;
-            foreach (WeaponType.DamageType type in AllDam.Keys) {
-                double dam = AllDam[type];
+            foreach (WeaponType.DamageType type in damInternal.Keys) {
+                double dam = damInternal[type];
 
                 // Armour reduces damage but doesn't reduce healing
                 if (dam > 0.0) TotalDam += dam * GetDamageReductionByDamageType(type); // Actual damage

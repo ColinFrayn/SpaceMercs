@@ -134,7 +134,7 @@ namespace SpaceMercs {
             }
             // Make alien systems less dangerous considering their location
             if (sys.Owner != null && sys.Owner != StaticData.HumanRace) {
-                dLevel -= 2d; // Any alien system should be much less dangerous than expected for the distance from home
+                dLevel -= rand.NextDouble() + rand.NextDouble(); // Any alien system should be much less dangerous than expected for the distance from home
             }
 
             int iLevel = Math.Max(1, (int)dLevel);

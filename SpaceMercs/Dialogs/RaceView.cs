@@ -51,8 +51,8 @@ namespace SpaceMercs.Dialogs {
                 int rel = _team.GetRelations(rSelected);
                 if (rel < 5) {
                     lbExp.Visible = true;
-                    double progress = _team.GetRelationsProgress(rSelected);
-                    lbExp.Text = $"{progress:N2}";
+                    double progress = _team.GetRelationsProgress(rSelected) * 100;
+                    lbExp.Text = $"{progress:0}%";
                 }
                 else lbExp.Visible = false;
             }

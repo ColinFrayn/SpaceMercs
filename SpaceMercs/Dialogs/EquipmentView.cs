@@ -351,8 +351,10 @@ namespace SpaceMercs.Dialogs {
                 if (dgFloor.SelectedRows[i].Tag is IItem it) hsIt.Add(it);
             }
             foreach (IItem it in hsIt) {
-                ThisStash.Remove(it);
-                ThisSoldier.AddItem(it, 1);
+                if (it is not Corpse) {
+                    ThisStash.Remove(it);
+                    ThisSoldier.AddItem(it, 1);
+                }
             }
             UpdateAllDetails();
             // Re-select the same items
@@ -364,9 +366,11 @@ namespace SpaceMercs.Dialogs {
 
         private void btPickUpAll_Click(object sender, EventArgs e) {
             foreach (IItem it in ThisStash.Items()) {
-                ThisSoldier.AddItem(it, ThisStash.GetCount(it));
+                if (it is not Corpse) {
+                    ThisSoldier.AddItem(it, ThisStash.GetCount(it));
+                    ThisStash.Remove(it);
+                }
             }
-            ThisStash.Clear();
             UpdateAllDetails();
         }
 

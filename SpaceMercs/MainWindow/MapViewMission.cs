@@ -1583,6 +1583,10 @@ namespace SpaceMercs.MainWindow {
                 msgBox.PopupMessage("You cannot leave this mission\nThere are enemies alerted to your presence");
                 return;
             }
+            if (ThisMission!.Goal == Mission.MissionGoal.Defend && !CurrentLevel.AllEnemiesKilled) {
+                msgBox.PopupMessage("You cannot leave this mission\nThere are enemies attacking the objective!");
+                return;
+            }
             if (ThisMission!.Type == Mission.MissionType.RepelBoarders) {
                 msgBox.PopupConfirmation("Deactivate ship defence systems and return to your posts?", EndMission_Victory);
             }
