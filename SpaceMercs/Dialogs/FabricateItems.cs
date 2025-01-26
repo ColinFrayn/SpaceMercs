@@ -39,7 +39,7 @@ namespace SpaceMercs.Dialogs {
 
         // Setup data grid based on drop down setting
         private void SetupConstructionDataGrid() {
-            string strType = (string)cbItemType.SelectedItem;
+            if (cbItemType.SelectedItem is not string strType) return;
             dgConstruct.Rows.Clear();
             string strFilter = tbFilter.Text;
             // Add items to list based on construction capacity
@@ -101,7 +101,8 @@ namespace SpaceMercs.Dialogs {
             }
         }
         private void SetupModifyTab(Tuple<Soldier?, IItem, bool>? tp = null) {
-            string strType = (string)cbUpgradeItemType.SelectedItem;
+            string? strType = cbUpgradeItemType.SelectedItem as string;
+            if (string.IsNullOrEmpty(strType)) return;
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
@@ -155,7 +156,7 @@ namespace SpaceMercs.Dialogs {
                             }
                         }
                     }
-                    if (s.EquippedWeapon != null && PlayerTeam.PlayerShip.CanBuildItem(s.EquippedWeapon)) {
+                    if (s.EquippedWeapon != null && PlayerTeam.PlayerShip.CanBuildItem(s.EquippedWeapon) && !string.IsNullOrEmpty(strType)) {
                         if (!string.IsNullOrEmpty(strFilter) && !s.EquippedWeapon.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                         if (strType.Equals("All") || strType.Equals("Weapon")) {
                             arrRow[0] = s.EquippedWeapon.Name;
@@ -474,25 +475,25 @@ namespace SpaceMercs.Dialogs {
         // DataGridView sort handlers
         private void dgConstruct_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Type
-                e.SortResult = (e.CellValue1.ToString() ?? string.Empty).CompareTo(e.CellValue2.ToString() ?? string.Empty);
+                e.SortResult = (e.CellValue1?.ToString() ?? string.Empty).CompareTo(e.CellValue2?.ToString() ?? string.Empty);
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 2) { // Mass
-                e.SortResult = double.Parse(e.CellValue1.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString()?.Replace("kg", "") ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString()?.Replace("kg", "") ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = int.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
         private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Value
-                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = int.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }

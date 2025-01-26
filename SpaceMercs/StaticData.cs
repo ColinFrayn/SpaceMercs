@@ -225,7 +225,8 @@ namespace SpaceMercs {
             }
             return null;
         }
-        public static MaterialType? GetMaterialTypeByName(string strName) {
+        public static MaterialType? GetMaterialTypeByName(string? strName) {
+            if (string.IsNullOrEmpty(strName)) return null;
             foreach (MaterialType m in Materials) {
                 if (m.Name.Equals(strName)) return m;
             }

@@ -131,7 +131,7 @@ namespace SpaceMercs.Dialogs {
             }
             lbTeamCashMerch.Text = PlayerTeam.Cash.ToString("N2") + "cr";
             btBuyMerchant.Enabled = dgMerchant.Rows.Count > 0;
-            if (dgMerchant.SortOrder != SortOrder.None) {
+            if (dgMerchant.SortOrder != SortOrder.None && dgMerchant.SortedColumn is not null) {
                 dgMerchant.Sort(dgMerchant.SortedColumn, dgMerchant.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
             }
         }
@@ -186,7 +186,7 @@ namespace SpaceMercs.Dialogs {
             HashSet<SaleItem> hsLast;
             if (tpLast == null) hsLast = new HashSet<SaleItem>(new SaleItemEqualityComparer());
             else hsLast = new HashSet<SaleItem>(tpLast, new SaleItemEqualityComparer());
-            string strType = cbUpgradeItemType.SelectedItem.ToString() ?? throw new Exception("Could not identify selected item string");
+            string strType = cbUpgradeItemType.SelectedItem?.ToString() ?? throw new Exception("Could not identify selected item string");
             List<DataGridViewRow> lSelected = new List<DataGridViewRow>();
             int scroll = dgInventory.FirstDisplayedScrollingRowIndex;
             bool bIncludeEquipped = cbEquipped.Checked;
@@ -254,7 +254,7 @@ namespace SpaceMercs.Dialogs {
             foreach (DataGridViewRow row in lSelected) row.Selected = true;
             if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
             lbTeamCashFoundry.Text = PlayerTeam.Cash.ToString("N2") + "cr";
-            if (dgInventory.SortOrder != SortOrder.None) {
+            if (dgInventory.SortOrder != SortOrder.None && dgInventory.SortedColumn is not null) {
                 dgInventory.Sort(dgInventory.SortedColumn, dgInventory.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
             }
         }
@@ -515,7 +515,7 @@ namespace SpaceMercs.Dialogs {
 
         // Double click to get further details on specific entries
         private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
-            if (dgMercenaries.CurrentRow.Tag is not Soldier merc) return;
+            if (dgMercenaries.CurrentRow?.Tag is not Soldier merc) return;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(merc.Name);
             sb.AppendLine($"Level {merc.Level} {merc.Gender} {merc.Race.Name}");
@@ -540,7 +540,7 @@ namespace SpaceMercs.Dialogs {
             MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
         }
         private void dgMissions_DoubleClick(object sender, EventArgs e) {
-            if (dgMissions.CurrentRow.Tag is not Mission miss) return;
+            if (dgMissions?.CurrentRow?.Tag is not Mission miss) return;
             MessageBox.Show(this, miss.GetDescription(), "Mission Details");
         }
         private void dgMerchant_DoubleClick(object sender, EventArgs e) {
@@ -614,26 +614,26 @@ namespace SpaceMercs.Dialogs {
         // DataGridView sort handlers
         private void dgMerchant_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Cost
-                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 2) { // Mass
-                e.SortResult = double.Parse(e.CellValue1.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString()?.Replace("kg", "") ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString()?.Replace("kg", "") ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString()?.Replace("kg", "") ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = int.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
 
         }
         private void dgMercenaries_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 1) { // Level
-                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = int.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Fee
-                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
@@ -656,17 +656,17 @@ namespace SpaceMercs.Dialogs {
         }
         private void dgShips_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Cost
-                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }
         private void dgInventory_SortCompare(object sender, DataGridViewSortCompareEventArgs e) {
             if (e.Column.Index == 2) { // Value
-                e.SortResult = double.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = double.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(double.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
             if (e.Column.Index == 3) { // Avail
-                e.SortResult = int.Parse(e.CellValue1.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2.ToString() ?? string.Empty));
+                e.SortResult = int.Parse(e.CellValue1?.ToString() ?? string.Empty).CompareTo(int.Parse(e.CellValue2?.ToString() ?? string.Empty));
                 e.Handled = true;//pass by the default sorting
             }
         }

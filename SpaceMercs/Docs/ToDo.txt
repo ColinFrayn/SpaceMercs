@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Much less likely to colonise systems if not owned
-
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names

@@ -31,7 +31,7 @@ namespace SpaceMercs.Dialogs {
 
         private void SetValues() {
             // Get selected material
-            SelectedMat = StaticData.GetMaterialTypeByName((string)cbMaterialType.SelectedItem);
+            SelectedMat = StaticData.GetMaterialTypeByName(cbMaterialType.SelectedItem as string);
             if (SelectedMat == null) {
                 lbArmour.Visible = false;
                 lbMass.Visible = false;
