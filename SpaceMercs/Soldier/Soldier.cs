@@ -11,7 +11,7 @@ using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
-        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception, Sharpshooter }
+        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception }
 
         // Generic stuff
         public Team? PlayerTeam; // Could be null (if an unhired mercenary)
@@ -674,12 +674,14 @@ namespace SpaceMercs {
             if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
                     string skillName = xu.GetAttributeText("Skill");
-                    if (skillName == "Sniper") skillName = nameof(UtilitySkill.Sharpshooter); // Backwards compatibility
-                    if (skillName == "Eyesight") skillName = nameof(UtilitySkill.Sharpshooter); // Backwards compatibility
-                    UtilitySkill sk = (UtilitySkill)Enum.Parse(typeof(UtilitySkill), skillName);
-                    int lvl = int.Parse(xu.InnerText);
-                    totsk += lvl;
-                    UtilitySkills.Add(sk, lvl);
+                    if (Enum.TryParse(typeof(UtilitySkill), skillName, out object? osk) && osk is UtilitySkill sk) {
+                        int lvl = int.Parse(xu.InnerText);
+                        totsk += lvl;
+                        UtilitySkills.Add(sk, lvl);
+                    }
+                    else {
+                        throw new Exception($"Could not ID UtilitySkill : {skillName}");
+                    }
                 }
             }
             if (totsk < Level + 1) {

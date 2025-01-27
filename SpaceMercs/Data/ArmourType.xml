@@ -392,6 +392,7 @@
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -425,7 +426,7 @@
       <Material Name="Mithril">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">1</Relations>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -458,7 +459,7 @@
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">1</Relations>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -512,4 +513,47 @@
       <Relations Name="Elithiri">2</Relations>
     </Requirements>
   </ArmourType>
+  <ArmourType Name="Valkyrie Assault Armour">
+    <Mass>22.0</Mass>
+    <Cost>2200</Cost>
+    <Rarity>85</Rarity>
+    <Agility>-2</Agility>
+    <Strength>4</Strength>
+    <Speed>1.2</Speed>
+    <Attack>3</Attack>
+    <Shields>30</Shields>
+    <BaseArmour>40</BaseArmour>
+    <Utility>
+      <Stealth>1</Stealth>
+      <Perception>2</Perception>
+    </Utility>
+    <Requirements>
+      <MinLevel>11</MinLevel>
+      <MinSystems>4</MinSystems>
+      <MinPop>70</MinPop>
+      <CashCost>250</CashCost>
+      <Material Name="Titanium">2</Material>
+      <Material Name="Crystals">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Ursalon">1</Relations>
+      <Relations Name="Elithiri">2</Relations>
+      <Relations Name="Insectoid">1</Relations>
+    </Requirements>
+    <BonusArmour>
+      <Bonus Type="Fire" Amount="20"/>
+      <Bonus Type="Cold" Amount="20"/>
+      <Bonus Type="Electrical" Amount="50"/>
+      <Bonus Type="Poison" Amount="100"/>
+    </BonusArmour>
+    <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
+    <Desc>A remarkable, light power armour designed for high-speed assault with deadly results.</Desc>
+    <Materials>
+      <Material Name="Crystals" Amount="4"/>
+      <Material Name="Rare Earth Metals" Amount="4"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
+    </Materials>
+  </ArmourType>
+
 </Data>

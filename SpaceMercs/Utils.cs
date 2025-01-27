@@ -274,8 +274,6 @@ namespace SpaceMercs {
             double dropoffmod = (dist * dropoff);
             if (from is Soldier s) {
                 hit += Const.SoldierHitBias;
-                int sharpshooter = s.GetUtilityLevel(Soldier.UtilitySkill.Sharpshooter);
-                dropoffmod *= Math.Pow(Const.SharpshooterRangeMod, sharpshooter);
             }
             if (dropoff > 0.0) hit -= dropoffmod; // Harder to hit at long range. 0.0 = melee weapon.
             if (to is Creature cre && !cre.IsAlert) {
@@ -537,7 +535,6 @@ namespace SpaceMercs {
                 UtilitySkill.Avoidance => "The ability to dodge incoming attacks, increasing your defence.",
                 UtilitySkill.Bladesmith => "The ability to make and modify bladed weapons such as swords and axes.",
                 UtilitySkill.Engineer => "The ability to make and modify items of equipment.",
-                UtilitySkill.Sharpshooter => "The ability to aim accurately over long distances, reducing the penalty for range.",
                 UtilitySkill.Gunsmith => "The ability to make and modify guns.",
                 UtilitySkill.Medic => "The ability to heal injuries using a medikit.",
                 UtilitySkill.Perception => "The ability to spot hidden traps, treasure stashes and secret doors.",

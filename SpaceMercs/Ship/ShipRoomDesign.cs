@@ -57,7 +57,6 @@ namespace SpaceMercs {
             }
             if (sz == ShipEquipment.RoomSize.Core) return 3;
             if (sz == ShipEquipment.RoomSize.Engine) return 3;
-            if (sz == ShipEquipment.RoomSize.Armour) return 3;
             return 0;
         }
         public static int RoomHeight(ShipEquipment.RoomSize sz, bool bRotated) {

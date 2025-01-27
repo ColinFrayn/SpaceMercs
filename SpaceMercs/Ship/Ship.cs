@@ -681,10 +681,10 @@ namespace SpaceMercs {
             sh.Name = "Enemy Ship";
 
             // Set up equipment (we only care about weapons, equipment, armour, engine)
-            double dCash = (dDiff * (40.0 + sh.Equipment.Count * 6.0)) + 20.0;
+            double dCash = (Math.Pow(1.5,dDiff) * 40.0) + (sh.Type.MaxHull * dDiff * 4.0) + 20.0;
             ShipEngine? seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, rc, dCash / 5.0, rand) as ShipEngine;
             if (minDrive != null && (seng == null || seng.Range < minDrive.Range)) seng = minDrive;
-            if (seng != null) sh.SetEngine(seng); // Engine doesn't come out of the cash reserves
+            if (seng != null) sh.SetEngine(seng);
 
             bool bIsArmed = false;
             for (int iRoomID = 0; iRoomID < sh.Type.Rooms.Count; iRoomID++) {
@@ -695,28 +695,25 @@ namespace SpaceMercs {
                     do {
                         ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCashToSpend, rand);
                         if (se is null) {
-                            if (iTries++ > 5) dCashToSpend *= 1.1; // If we didn't get a weapon after a few tries then allow us to spend more until we get one.
+                            if (iTries++ > 5) dCashToSpend *= 1.5; // If we didn't get a weapon after a few tries then allow us to spend more until we get one.
                         }
                         else {
                             sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                            dCash -= se.Cost;
                             bIsArmed = true;
                         }
                     } while (!bIsArmed); // Ensure that the ship has at least one weapon
-                }
-                else if (rd.Size == ShipEquipment.RoomSize.Armour) {
-                    ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), rd.Size, rc, dCash / 5.0, rand);
-                    if (se is not null) {
-                        sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                        dCash -= se.Cost;
-                    }
                 }
                 else if (rd.Size == ShipEquipment.RoomSize.Small || rd.Size == ShipEquipment.RoomSize.Medium || rd.Size == ShipEquipment.RoomSize.Large) {
                     ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEquipment, rd.Size, rc, dCash / 5.0, rand);
                     if (se is not null) {
                         sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                        dCash -= se.Cost;
                     }
+                }
+            }
+            if (dDiff > 2) {
+                ShipEquipment? arm = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Armour, rc, dCash / 5.0, rand);
+                if (arm is ShipArmour sArm) {
+                    sh.ArmourType = sArm;
                 }
             }
 

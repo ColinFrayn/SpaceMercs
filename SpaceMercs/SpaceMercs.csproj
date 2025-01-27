@@ -88,6 +88,9 @@
     <None Update="Data\Creatures\Ogres.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Creatures\Gremlins.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Creatures\Pirates.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -100,7 +103,13 @@
     <None Update="Data\Creatures\Slimes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Creatures\Mechanoids.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Creatures\Soldiers.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Creatures\Fungoids.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\Creatures\Triffids.xml">

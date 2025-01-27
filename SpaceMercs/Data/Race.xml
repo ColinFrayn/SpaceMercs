@@ -52,7 +52,7 @@
     <PlanetType>Oceanic</PlanetType>
     <Colour>30,90,255</Colour>
     <Scale>0.9</Scale>
-    <Aggression>-2</Aggression>
+    <Aggression>-1</Aggression>
     <BaseAttitude>-500</BaseAttitude>
     <Names>
       <Personal>
@@ -74,7 +74,7 @@
     <BaseTemp>293</BaseTemp>
     <PlanetType>Rocky</PlanetType>
     <Colour>255,255,0</Colour>
-    <Aggression>2</Aggression>
+    <Aggression>3</Aggression>
     <Scale>1.2</Scale>
     <BaseAttitude>-4500</BaseAttitude>
     <Names>
@@ -97,7 +97,7 @@
     <PlanetType>Desert</PlanetType>
     <Colour>0,255,0</Colour>
     <Scale>1.0</Scale>
-    <Aggression>1</Aggression>
+    <Aggression>2</Aggression>
     <BaseAttitude>-1600</BaseAttitude>
     <Names>
       <Personal>

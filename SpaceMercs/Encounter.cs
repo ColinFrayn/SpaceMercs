@@ -37,7 +37,7 @@ namespace SpaceMercs {
 
             // Did we get intercepted?
             Random rand = new Random();
-            double dIntercept = rand.NextDouble() * Const.BaseEncounterScarcity / Const.DEBUG_ENCOUNTER_FREQ_MOD;
+            double dIntercept = rand.NextDouble() * Const.BaseEncounterScarcity / Math.Max(0.0001, Const.DEBUG_ENCOUNTER_FREQ_MOD);
 
             // If not intercepted then return
             // If it's close then work out what the race would be first and modify by that.
@@ -66,7 +66,7 @@ namespace SpaceMercs {
             }
 
             // Increase chance of aggressive/passive encounter based on race, and potentially cancel the interception here based on the modified result.
-            dIntercept += rc.Aggression;
+            dIntercept -= rc.Aggression;
             if (dIntercept > dDanger) return null;
 
             // Calculate the difficulty of this mission, based on the distance from home
@@ -125,7 +125,8 @@ namespace SpaceMercs {
             // If this ship is clearly underclassed then try again with a higher diff
             // Aggressive races are more likely to want a fight
             double pVal = PlayerTeam.PlayerShip.EstimatedStrength;
-            double aggressionMod = (rc.Aggression + 10.0) / 10.0; // Higher for more aggressive races -> estimate of own strength is higher
+            int rel = PlayerTeam.GetRelations(rc);
+            double aggressionMod = (10.0 + rc.Aggression - rel) / 10.0; // Higher for more aggressive races -> estimate of own strength is higher. If good relations then lower.
             if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale * aggressionMod < pVal) {
                 miss = Mission.CreateShipCombatMission(rc, iDiff + 1, minDrive);
                 // If the ship is still underclassed then give up - the player ship is tough enough to be safe in this system

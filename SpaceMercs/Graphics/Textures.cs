@@ -470,7 +470,10 @@ namespace SpaceMercs {
                 }
             }
             switch (tp.Body) {
-                case CreatureType.BodyType.Humanoid: DrawHumanoid(image, tp.Col1, tp.Col2, tp.Col3); break;
+                case CreatureType.BodyType.Humanoid:
+                case CreatureType.BodyType.Mechanoid:
+                case CreatureType.BodyType.Gremlin:
+                    DrawHumanoid(image, tp.Col1, tp.Col2, tp.Col3); break;
                 case CreatureType.BodyType.Bug: DrawBug(image, tp.Col1, tp.Col2, tp.Col3); break;
                 case CreatureType.BodyType.Beetle: DrawBeetle(image, tp.Col1, tp.Col2, tp.Col3); break;
                 case CreatureType.BodyType.Arachnid: DrawArachnid(image, tp.Col1, tp.Col2, tp.Col3); break;

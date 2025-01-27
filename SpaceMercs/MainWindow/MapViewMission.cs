@@ -311,6 +311,7 @@ namespace SpaceMercs.MainWindow {
                     if (IsKeyPressed(Keys.V) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) ScavengeAll(s);
                     if (IsKeyPressed(Keys.S) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) SelectedSoldierSearch(null);
                     if (IsKeyPressed(Keys.P) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) PickUpAll(s);
+                    if (IsKeyPressed(Keys.X)) SelectedSoldierAttack(null);
                 }
                 if (IsKeyPressed(Keys.Space)) EndTurn();
             }
@@ -1425,7 +1426,7 @@ namespace SpaceMercs.MainWindow {
                 CheckForTraps(s);
             }
         }
-        private void SelectedSoldierAttack(GUIIconButton sender) {
+        private void SelectedSoldierAttack(GUIIconButton? sender) {
             if (bAIRunning) return;
             if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
             GenerateTargetMap(s, s.AttackRange);

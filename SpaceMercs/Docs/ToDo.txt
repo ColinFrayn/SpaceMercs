@@ -2,6 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Not getting any space combat any more
+- Because ships being created are too weak and are fleeing
+- Test at lower levels
+
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names
@@ -14,6 +18,10 @@ Backburner : Features
 ---------------------
 
 What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
+
+AoE weapons (i.e. cone starting at source)
+- Test flamethrowers
+- Can enemies use these?
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?

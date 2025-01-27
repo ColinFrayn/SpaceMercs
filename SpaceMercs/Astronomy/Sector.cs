@@ -14,6 +14,7 @@ namespace SpaceMercs {
         public Map ParentMap { get; private set; }
         VertexBuffer? tradeRoutesBuffer = null;
         VertexArray? tradeRoutesArray = null;
+        public int MinSectorDist => Math.Max(Math.Abs(SectorX), Math.Abs(SectorY));
 
         public Sector() {
             ParentMap = Map.Empty;

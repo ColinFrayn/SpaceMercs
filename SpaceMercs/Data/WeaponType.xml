@@ -91,7 +91,7 @@
   </WeaponType>
   <WeaponType Name="Superheavy Rifle" Class="Heavy">
     <Mass>55.0</Mass>
-    <Cost>900</Cost>
+    <Cost>1300</Cost>
     <Rarity>24</Rarity>
     <Speed>20</Speed>
     <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
@@ -102,6 +102,7 @@
     <Desc>A very heavy high calibre automatic rifle for mounting on power armour</Desc>
     <Sound>SuperHeavyMachineGun</Sound>
     <Noise>12</Noise>
+    <Stable/>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinPop>60</MinPop>
@@ -119,7 +120,7 @@
   </WeaponType>
   <WeaponType Name="Gattling Gun" Class="Heavy">
     <Mass>58.0</Mass>
-    <Cost>800</Cost>
+    <Cost>1200</Cost>
     <Rarity>22</Rarity>
     <Speed>20</Speed>
     <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
@@ -130,6 +131,7 @@
     <Desc>A very heavy rapid-fire chain gun for mounting on power armour</Desc>
     <Sound>ChainGun</Sound>
     <Noise>12</Noise>
+    <Stable/>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinPop>60</MinPop>
@@ -431,6 +433,7 @@
     <Sound>GrenadeLauncher</Sound>
     <Noise>14</Noise>
     <Unmodifiable/>
+    <Stable/>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Industrial Chemicals" Amount="3"/>
@@ -677,6 +680,15 @@
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Throwing Knife">
+    <Speed>11</Speed>
+    <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.2">8</Range>
+    <Damage>3+4</Damage>
+    <Sound>SwordSlice</Sound>
+    <Recoil>0.5</Recoil>
+    <Delay>220</Delay>
+    <Hidden/>
+  </WeaponType>
   <WeaponType Name="Poisonous Bite">
     <Speed>10</Speed>
     <Range>1</Range>
@@ -703,7 +715,27 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Triffid Spores">
+  <WeaponType Name="Triffid Thorns">
+    <Speed>12</Speed>
+    <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.2">8</Range>
+    <Damage>3+3</Damage>
+    <Sound>Spore</Sound>
+    <Shots>2</Shots>
+    <Recoil>0.5</Recoil>
+    <Delay>220</Delay>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Triffid Heavy Thorns">
+    <Speed>14</Speed>
+    <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.5,1.0,0.2">12</Range>
+    <Damage>5+5</Damage>
+    <Sound>Spore</Sound>
+    <Shots>3</Shots>
+    <Recoil>0.6</Recoil>
+    <Delay>220</Delay>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Fungoid Spores">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.3,1.0,0.2">8</Range>
     <Damage>3+2</Damage>
@@ -720,7 +752,7 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Triffid Heavy Spores">
+  <WeaponType Name="Fungoid Heavy Spores">
     <Speed>14</Speed>
     <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.3,1.0,0.2">12</Range>
     <Damage>5+4</Damage>
@@ -789,6 +821,13 @@
     <Speed>10</Speed>
     <Range>1</Range>
     <Damage>5+4</Damage>
+    <Sound>Claws</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Barbed Claws">
+    <Speed>9</Speed>
+    <Range>1</Range>
+    <Damage>4+5</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>

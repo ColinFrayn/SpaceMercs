@@ -163,7 +163,6 @@ namespace SpaceMercs {
         public const double CreatureAttackDamageBaseMod = 0.7; // Scale factor for zeroth level creatures damage.
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
-        public const double SharpshooterRangeMod = 0.85; // Snipers multiply drop-off penalty by this factor per sniper level.
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
         public const float  ShotDurationScale = 25.0f; // Time taken for shots to get from source to target
         public const float  ShotSizeScale = 250.0f; // Size of a shot line (larger = smaller)
@@ -271,7 +270,7 @@ namespace SpaceMercs {
         public const double SalvageRate = 0.25; // Purchase price from vendors as a fraction of the sale price
         public const double ShipRepairCostScale = 0.6;  // Fraction of calculated value required to repair 100%
         public const double HullUpgradeCost = 15.0;  // Divide MaxHull by this for scale factor
-        public const double ShipRelativeStrengthScale = 1.8; // If attacking ship is this many times weaker than defending ship then don't even bother...
+        public const double ShipRelativeStrengthScale = 2.0; // If attacking ship is this many times weaker than defending ship then don't even bother...
 
         // MissionView Settings
         public const float InitialMissionViewZ = 40.0f;

@@ -1,0 +1,134 @@
+﻿<Data>
+  <CreatureType Name="Mechanoid Grunt">
+    <LevelRange>1,15</LevelRange>
+    <Attack>11</Attack>
+    <Defence>9</Defence>
+    <Armour>26</Armour>
+    <Health>13</Health>
+    <Stamina>14</Stamina>
+    <Frequency>4</Frequency>
+    <BodyType>Mechanoid</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A rank-and-file mechanoid</Desc>
+    <Weapons>
+      <Weapon Weight="1">Laser Pistol</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Trooper">
+    <LevelRange>3,18</LevelRange>
+    <Attack>12</Attack>
+    <Defence>10</Defence>
+    <Armour>30</Armour>
+    <Health>17</Health>
+    <Stamina>16</Stamina>
+    <Frequency>2</Frequency>
+    <BodyType>Mechanoid</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A heavily armed mechanoid trooper</Desc>
+    <Weapons>
+      <Weapon Weight="1">Laser Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Slasher">
+    <LevelRange>3,18</LevelRange>
+    <Attack>13</Attack>
+    <Defence>10</Defence>
+    <Armour>22</Armour>
+    <Health>17</Health>
+    <Stamina>16</Stamina>
+    <Frequency>2</Frequency>
+    <BodyType>Mechanoid</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A close-combat mechanoid with sharp blades</Desc>
+    <Weapons>
+      <Weapon Weight="1">Power Axe</Weapon>
+      <Weapon Weight="1">Powerblade</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Elite">
+    <Scale>1.05</Scale>
+    <LevelRange>5,22</LevelRange>
+    <Attack>13</Attack>
+    <Defence>11</Defence>
+    <Armour>34</Armour>
+    <Health>21</Health>
+    <Stamina>18</Stamina>
+    <Shields>10</Shields>
+    <BodyType>Mechanoid</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>An advanced mechanoid soldier</Desc>
+    <Weapons>
+      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="1">Power Axe</Weapon>
+      <Weapon Weight="2">Laser Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Heavy Tank">
+    <Size>2</Size>
+    <LevelRange>5,22</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Armour>34</Armour>
+    <Health>18</Health>
+    <Stamina>18</Stamina>
+    <MovementCost>3.0</MovementCost>
+    <BodyType>Tank</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A large tank with a heavy weapon</Desc>
+    <Weapons>
+      <Weapon Weight="1">Heavy Laser Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Ranger">
+    <LevelRange>5,22</LevelRange>
+    <Attack>14</Attack>
+    <Defence>10</Defence>
+    <Armour>25</Armour>
+    <Health>16</Health>
+    <Stamina>16</Stamina>
+    <BodyType>Mechanoid</BodyType>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A long-range mechanoid soldier</Desc>
+    <Weapons>
+      <Weapon Weight="1">Laser Sniper Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+  <CreatureType Name="Mechanoid Heavy Tank">
+    <Size>3</Size>
+    <LevelRange>7,24</LevelRange>
+    <Attack>16</Attack>
+    <Defence>11</Defence>
+    <BodyType>Tank</BodyType>
+    <Armour>38</Armour>
+    <Health>45</Health>
+    <Stamina>20</Stamina>
+    <Interact/>
+    <Col1>90, 90, 90</Col1>
+    <Col2>140, 140, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A mechanoid tank that commands the battlefield</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Laser Rifle</Weapon>
+    </Weapons>
+  </CreatureType>
+</Data>
+

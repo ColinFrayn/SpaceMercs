@@ -334,8 +334,8 @@ namespace SpaceMercs {
             Random rand = new Random(seed);
             ShipType tp = new ShipType(seed, dDiff);
             int size = 1;
-            while (rand.NextDouble() > (1.0 + ((double)size / 20.0) - (Math.Sqrt(dDiff) / 6.0))) size++;
-            size = 2 + (int)((rand.NextDouble() + 1.0) * (double)size * 4.0);
+            while (rand.NextDouble() > (1d + ((double)size / 20d) - (Math.Pow(dDiff,0.6) / 5d))) size++;
+            size = 2 + (int)((rand.NextDouble() + 1d) * (double)size * 4d);
 
             while (size > 0) {
                 int r = rand.Next(3);
@@ -344,9 +344,9 @@ namespace SpaceMercs {
                 if (r == 2) { tp.Large++; size -= 10; }
             }
             tp.Weapon = 1;
-            if (dDiff > 4.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
-            if (dDiff > 10.0 + (rand.NextDouble() * 5.0)) tp.Weapon++;
-            if (dDiff > 15.0 + (rand.NextDouble() * 7.0)) tp.Weapon++;
+            if (dDiff > 3.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
+            if (dDiff > 6.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
+            if (dDiff > 9.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
             tp.SetupLayout();
 
             return tp;

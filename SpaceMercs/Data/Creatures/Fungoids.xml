@@ -1,5 +1,5 @@
 ﻿<Data>
-  <CreatureType Name="Triffid Sapling">
+  <CreatureType Name="Fungoid Sporeling">
     <Scale>0.7</Scale>
     <LevelRange>1,4</LevelRange>
     <Attack>8</Attack>
@@ -7,86 +7,84 @@
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>12</Armour>
-    <BodyType>Plant</BodyType>
-    <Frequency>2</Frequency>
-    <MovementCost>6.0</MovementCost>
+    <BodyType>Fungoid</BodyType>
+    <Frequency>3</Frequency>
+    <MovementCost>3.0</MovementCost>
     <Col1>0, 225, 0</Col1>
     <Col2>80, 255, 100</Col2>
     <Col3>0, 120, 0</Col3>
-    <Desc>A small, mobile plant with a lashing tentacle.</Desc>
+    <Desc>A small, mobile mushroom with a biting mouth.</Desc>
     <Resistances>
-      <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Triffid Tentacle</Weapon>
+      <Weapon Weight="1">Bite</Weapon>
     </Weapons>
   </CreatureType>  
-  <CreatureType Name="Triffid Lasher">
-    <Scale>0.8</Scale>
+  <CreatureType Name="Fungoid Shieldshroom">
+    <Scale>1.0</Scale>
     <LevelRange>1,5</LevelRange>
     <Attack>11</Attack>
     <Defence>6</Defence>
     <Health>14</Health>
     <Stamina>16</Stamina>
-    <Armour>20</Armour>
-    <BodyType>Plant</BodyType>
-    <MovementCost>10.0</MovementCost>
+    <Armour>32</Armour>
+    <BodyType>Fungoid</BodyType>
+    <MovementCost>3.0</MovementCost>
     <Col1>0, 215, 0</Col1>
     <Col2>60, 255, 80</Col2>
     <Col3>0, 110, 0</Col3>
-    <Desc>A vicious plant with a lashing tentacle.</Desc>
+    <Desc>A larger, mobile mushroom with hardened carapace.</Desc>
     <Resistances>
-      <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Triffid Tentacle</Weapon>
+      <Weapon Weight="1">Bite</Weapon>
     </Weapons>
   </CreatureType>
-  <CreatureType Name="Triffid Spore Thrower">
-    <Scale>0.8</Scale>
+  <CreatureType Name="Fungoid Spore Thrower">
+    <Scale>1.0</Scale>
     <LevelRange>2,5</LevelRange>
     <Attack>11</Attack>
     <Defence>6</Defence>
     <Health>16</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
-    <BodyType>Plant</BodyType>
-    <MovementCost>10.0</MovementCost>
+    <BodyType>Fungoid</BodyType>
+    <MovementCost>4.0</MovementCost>
     <Col1>20, 215, 0</Col1>
     <Col2>80, 255, 80</Col2>
     <Col3>20, 110, 0</Col3>
-    <Desc>A vicious plant which can hurl vicious thorns.</Desc>
+    <Desc>A vicious mushroom which can hurl poisonous spores.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Triffid Thorns</Weapon>
+      <Weapon Weight="1">Fungoid Spores</Weapon>
     </Weapons>
   </CreatureType>
-  <CreatureType Name="Triffid Mother Plant">
+  <CreatureType Name="Fungoid KingShroom">
     <Size>2</Size>
     <LevelRange>3,7</LevelRange>
     <Attack>16</Attack>
     <Defence>6</Defence>
-    <Health>50</Health>
+    <Health>60</Health>
     <Stamina>18</Stamina>
-    <Armour>30</Armour>
-    <BodyType>Plant</BodyType>
-    <MovementCost>10.0</MovementCost>
+    <Armour>34</Armour>
+    <BodyType>Fungoid</BodyType>
+    <MovementCost>6.0</MovementCost>
     <Boss/>
     <Col1>0, 205, 0</Col1>
     <Col2>40, 255, 60</Col2>
     <Col3>0, 100, 0</Col3>
-    <Desc>A huge plant which can hurl large, spiny thorns.</Desc>
+    <Desc>A huge mushroom which can hurl large, poisonous spores.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Weapons>
-      <Weapon Weight="1">Triffid Heavy Thorns</Weapon>
+      <Weapon Weight="1">Fungoid Heavy Spores</Weapon>
     </Weapons>
     <Boss/>
   </CreatureType>
