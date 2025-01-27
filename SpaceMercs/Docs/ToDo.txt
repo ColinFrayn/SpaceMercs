@@ -2,9 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Not getting any space combat any more
-- Because ships being created are too weak and are fleeing
-- Test at lower levels
+Test space combat at lower levels
+
+Show damage type for arc rifle
+- Better sound
 
 Alien solar system:
 - Alien colonies need names

@@ -199,6 +199,9 @@
     <None Update="Sounds\Electricity.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Electroshock.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\Fizz.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -218,6 +221,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\HeavyCrossbow.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\HeavyElectroshock.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\HeavyLaserRifle.wav">

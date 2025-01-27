@@ -208,6 +208,9 @@ namespace SpaceMercs {
                 TotalDam += dam * GetDamageReductionByDamageType(type);
             }
 
+            // Sometimes we heal enemies if they have >100% resistance. Make sure we handle that properly.
+            if (Health - TotalDam > MaxHealth) TotalDam = -(MaxHealth - Health);
+
             if (!applyDamage) return TotalDam;
 
             // Do the damage

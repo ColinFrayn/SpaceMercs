@@ -266,7 +266,7 @@
     <Damage>3+3</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
-    <Sound>Electricity</Sound>
+    <Sound>Electroshock</Sound>
     <Noise>8</Noise>
     <Unmodifiable/>
     <Materials>
@@ -297,7 +297,7 @@
     <Damage>4+2</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
-    <Sound>Electricity</Sound>
+    <Sound>HeavyElectroshock</Sound>
     <Noise>10</Noise>
     <Unmodifiable/>
     <Materials>

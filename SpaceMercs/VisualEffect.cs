@@ -196,7 +196,12 @@ namespace SpaceMercs {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     float xshift = (float)(rand.NextDouble()-0.5d) / 3f;
-                    effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    if (TotalDam > 0) {
+                        effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    }
+                    else {
+                        effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+                    }
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
                     if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
 

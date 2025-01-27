@@ -230,6 +230,9 @@ namespace SpaceMercs {
                 else TotalDam += dam; // Negative damage = healing
             }
 
+            // Sometimes resistance can turn damage into healing. Make sure we handle that properly.
+            if (Health - TotalDam > MaxHealth) TotalDam = -(MaxHealth - Health);
+
             if (!applyDamage) return TotalDam;
 
             // Do the damage / healing
