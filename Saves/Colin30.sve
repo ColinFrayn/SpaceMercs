@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>26/04/2316 13:02:32</Clock>
+<Clock>26/04/2316 13:05:04</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -7047,7 +7047,7 @@
  <Location X="26" Y="7"/>
  <Health>29.515027433153147</Health>
  <Stamina>39</Stamina>
- <Shields>0</Shields>
+ <Shields>12.5</Shields>
  <Facing>180</Facing>
  <Level>9</Level>
  <XP>223377</XP>
@@ -7082,7 +7082,7 @@
  <Location X="13" Y="3"/>
  <Health>27.46563417539866</Health>
  <Stamina>32</Stamina>
- <Shields>0</Shields>
+ <Shields>10</Shields>
  <Facing>90</Facing>
  <Level>9</Level>
  <XP>218978</XP>

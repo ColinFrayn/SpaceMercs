@@ -17,8 +17,9 @@ namespace SpaceMercs {
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 if (Range > 1) sb.AppendLine("Range : " + Range.ToString("0.##") + "m");
                 sb.AppendLine("Damage : " + DBase.ToString("0.#") + " + R" + DMod.ToString("0.#"));
+                sb.AppendLine($"DamageType : {Type.DType}");
                 sb.AppendLine("Stamina : " + StaminaCost.ToString("0.#"));
-                sb.AppendLine($"Accuracy : {AccuracyBonus.ToString()} - {Type.DropOff}/m");
+                sb.AppendLine($"Accuracy : {AccuracyBonus} - {Type.DropOff}/m");
                 if (Type.Area > 0) sb.AppendLine($"Area : {Type.Area}m rad");
                 if (Type.Shots > 1) sb.AppendLine($"MultiShot : {Type.Shots}");
                 foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {

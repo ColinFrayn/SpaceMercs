@@ -4,9 +4,6 @@ ToDo List
 
 Test space combat at lower levels
 
-Show damage type for arc rifle
-- Better sound
-
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names
