@@ -188,36 +188,9 @@ namespace SpaceMercs {
                 hsAttacked.Add(en);
             }
 
-            // Graphics for damage (if tgt is still alive)
+            // Sort out graphics for damage (if tgt is still alive)
             playSound("Smash");
-            Random rand = new Random();
-            foreach (IEntity tgt in hsAttacked) {
-                if (tgt.Health > 0.0 && source is not null) {
-                    Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
-                    double TotalDam = tgt.CalculateDamage(hitDmg);
-                    float xshift = (float)(rand.NextDouble()-0.5d) / 3f;
-                    if (TotalDam > 0) {
-                        effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                    }
-                    else {
-                        effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
-                    }
-                    tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
-                    if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
-
-                    // Apply effect?
-                    if (wp != null) {
-                        if (wp.Type.ItemEffect != null) {
-                            tgt.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
-                        }
-                    }
-                    // Add weapon experience if shot was with a weapon and from a soldier
-                    if (source is Soldier s && wp != null && tgt is not null) {
-                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count;
-                        s.AddWeaponExperience(wp, exp, showMessage);
-                    }
-                }
-            }
+            Utils.ResolveHits(hsAttacked, wp, source, effectFactory, applyEffect, showMessage);
         }
     }
 }

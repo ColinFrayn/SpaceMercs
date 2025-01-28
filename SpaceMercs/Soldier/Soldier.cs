@@ -4,6 +4,7 @@ using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -1137,7 +1138,7 @@ namespace SpaceMercs {
             // Resolve the attack(s)
             List<ShotResult> results = new List<ShotResult>();
             int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
-            for (int n = 0; n < nshots; n++) {                
+            for (int n = 0; n < nshots; n++) {
                 if (r > 0d) {
                     results.Add(new ShotResult(this, true));
                 }
@@ -1157,6 +1158,36 @@ namespace SpaceMercs {
 
             // Set up the projectile shots or auto-resolve melee effect
             Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory);
+            return true;
+        }
+        public bool AttackArea(MissionLevel level, int tx, int ty, IReadOnlyCollection<Vector2> aoeTiles, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
+            if (level is null) throw new Exception("Null level in AttackLocation");
+            if (EquippedWeapon is null) return false; // Should never happen
+            if (Stamina < AttackCost) return false;
+
+            HashSet<IEntity> targets = new HashSet<IEntity>();
+            foreach (Vector2 vec in aoeTiles) {
+                // TODO
+                IEntity? en = level.GetEntityAt((int)vec.X, (int)vec.Y);
+                if (en != null) targets.Add(en);           
+            }
+
+            Stamina -= AttackCost;
+            HasMoved = true;
+
+            // Rotate soldier
+            float dx = X - tx;
+            float dy = Y - ty;
+            SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
+
+            // Play weapon sound
+            playSound(EquippedWeapon.Type.SoundEffect);
+
+            HasMoved = true;
+
+            Utils.ResolveHits(targets, EquippedWeapon, this, effectFactory, applyEffect, showMessage);
+
+            // Set up the projectile shots or auto-resolve melee effect
             return true;
         }
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {

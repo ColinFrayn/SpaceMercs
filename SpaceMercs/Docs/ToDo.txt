@@ -5,7 +5,10 @@ ToDo List
 Test space combat freq. and diff
 - Test at lower levels
 
-Different shot types: SingleTarget, Cone, Grenade, ConeMultiShot?
+Different shot types:
+- Draw the actual triangle for the cone on top
+- Cone: [TEST]
+- ConeMulti: Carry out the required number of shots, hitting creatures in the cone, biased to nearer ones
 
 Some weapons need a turn to recharge (SuperHeavies?)
 

@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using System.Xml;
+using static SpaceMercs.Delegates;
 using static SpaceMercs.Soldier;
 using static SpaceMercs.VisualEffect;
 
@@ -183,6 +184,38 @@ namespace SpaceMercs {
                 float sy = (float)Utils.NextGaussian(rand, 0, scatterMod);
                 effectFactory(EffectType.Shot, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "FX", from.X + 0.5f }, { "TX", tx + ((float)tSize / 2f) + sx }, { "FY", from.Y + 0.5f }, { "TY", ty + ((float)tSize / 2f) + sy }, { "Delay", sdelay }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
                 sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
+            }
+        }
+
+        // Resolve multiple weapon impacts / AoE
+        public static void ResolveHits(HashSet<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+            Random rand = new Random();
+            foreach (IEntity tgt in hsAttacked) {
+                if (tgt.Health > 0.0 && source is not null) {
+                    Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
+                    double TotalDam = tgt.CalculateDamage(hitDmg);
+                    float xshift = (float)(rand.NextDouble() - 0.5d) / 3f;
+                    if (TotalDam > 0) {
+                        effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    }
+                    else {
+                        effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+                    }
+                    tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
+                    if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+
+                    // Apply effect?
+                    if (wp != null) {
+                        if (wp.Type.ItemEffect != null) {
+                            tgt.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                        }
+                    }
+                    // Add weapon experience if shot was with a weapon and from a soldier
+                    if (source is Soldier s && wp != null && tgt is not null) {
+                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count;
+                        s.AddWeaponExperience(wp, exp, showMessage);
+                    }
+                }
             }
         }
 
@@ -590,6 +623,12 @@ namespace SpaceMercs {
             if (string.IsNullOrEmpty(path) || root is null) throw new Exception($"Path not found : {path}");
             string? strText = root.SelectSingleNode(path)?.InnerText;
             if (string.IsNullOrEmpty(strText)) throw new Exception($"Path was empty : {path}");
+            return InterpretEnum<EnumType>(strText);
+        }
+        public static EnumType GetAttributeEnum<EnumType>(this XmlNode root, string attributeName, EnumType defaultValue) {
+            if (string.IsNullOrEmpty(attributeName) || root is null) throw new Exception($"Attribute not found : {attributeName}");
+            string? strText = root.Attributes?[attributeName]?.Value;
+            if (string.IsNullOrEmpty(strText)) return defaultValue;
             return InterpretEnum<EnumType>(strText);
         }
         private static EnumType InterpretEnum<EnumType>(string strText) {

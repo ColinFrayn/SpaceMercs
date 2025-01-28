@@ -8,6 +8,7 @@ using SpaceMercs.Graphics.Shapes;
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Automation;
 using System.Windows.Threading;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.VisualEffect;
@@ -35,9 +36,8 @@ namespace SpaceMercs.MainWindow {
         private float dragX, dragY;
         private int[,] DistMap;
         private bool[,] TargetMap;
-        private bool[,] AoEMap;
         private bool[,] DetectionMap;
-        private int AoERadius = -1;
+        private HashSet<Vector2> AoETiles;
         private List<Point>? lCurrentPath;
         private SoldierAction CurrentAction = SoldierAction.None;
         private readonly List<VisualEffect> Effects = new List<VisualEffect>();
@@ -103,8 +103,8 @@ namespace SpaceMercs.MainWindow {
             // Set up maps
             TargetMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
             DistMap = new int[CurrentLevel.Width, CurrentLevel.Height];
-            AoEMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
             DetectionMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+            AoETiles = new HashSet<Vector2>();
 
             // First contact?
             Race? ra = m.RacialOpponent;
@@ -414,10 +414,15 @@ namespace SpaceMercs.MainWindow {
             if (hoverx != oldhoverx || hovery != oldhovery) {
                 if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
                     if (ActionItem?.BaseType?.ItemEffect is not null) {
-                        GenerateAoEMap(hoverx, hovery, ActionItem.BaseType.ItemEffect.Radius, oldhoverx, oldhovery);
+                        GenerateAoEMap(hoverx, hovery, ActionItem.BaseType.ItemEffect.Radius);
                     }
-                    else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
-                        GenerateAoEMap(hoverx, hovery, s.EquippedWeapon.Type.Area, oldhoverx, oldhovery);
+                    else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null) {
+                        if (s.EquippedWeapon.Type.ShotShape == WeaponType.ShotType.Grenade) {
+                            GenerateAoEMap(hoverx, hovery, s.EquippedWeapon.Type.Area);
+                        }
+                        else if (s.EquippedWeapon.Type.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                            GenerateConeMap(hoverx, hovery, s, s.EquippedWeapon.Type.Width);
+                        }
                     }
                 }
             }
@@ -487,7 +492,13 @@ namespace SpaceMercs.MainWindow {
             if (e.Button == MouseButton.Left) {
                 if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
-                    bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded));
+                    bool bAttacked = false;
+                    if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Grenade or WeaponType.ShotType.Single) {
+                        bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded));
+                    }
+                    else if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                        s.AttackArea(CurrentLevel, hoverx, hovery, AoETiles, ApplyItemEffect, AnnounceMessage, AddNewEffect, PlaySoundThreaded);
+                    }
                     if (bAttacked) {
                         if (UpdateDetectionForSoldierAfterAttack(s) ||
                             UpdateDetectionForLocation(hoverx, hovery, Const.BaseDetectionRange)) {
@@ -863,15 +874,18 @@ namespace SpaceMercs.MainWindow {
                 DrawOverlayIcons(texProg, BuildTargetOverlay(), Textures.MiscTexture.FrameRed);
                 if (TargetMap[pt.X, pt.Y] == true) { 
                     DrawHoverFrame(texProg, pt.X, pt.Y);
-                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null && soldier.EquippedWeapon.Type.Area > 0)
-                        DrawOverlayIcons(texProg, BuildAoEOverlay(), Textures.MiscTexture.FrameRedThick);
+                    if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null) {
+                        if (soldier.EquippedWeapon.Type.ShotShape != WeaponType.ShotType.Single && AoETiles.Any()) {
+                            DrawOverlayIcons(texProg, AoETiles, Textures.MiscTexture.FrameRedThick);
+                        }
+                    }
                 }
             }
             else if (CurrentAction == SoldierAction.Item) {
                 DrawOverlayIcons(texProg, BuildTargetOverlay(), Textures.MiscTexture.FrameRed);
                 if (TargetMap[pt.X, pt.Y] == true) {
                     DrawHoverFrame(texProg, pt.X, pt.Y);
-                    DrawOverlayIcons(texProg, BuildAoEOverlay(), Textures.MiscTexture.FrameRedThick);
+                    DrawOverlayIcons(texProg, AoETiles, Textures.MiscTexture.FrameRedThick);
                 }
             }
             else {
@@ -890,7 +904,7 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
         }
 
-        private static void DrawOverlayIcons(ShaderProgram prog, List<Vector2> vertices, Textures.MiscTexture frameTex) {
+        private static void DrawOverlayIcons(ShaderProgram prog, IReadOnlyCollection<Vector2> vertices, Textures.MiscTexture frameTex) {
             TexSpecs ts = Textures.GetTexCoords(frameTex, true);
             GL.BindTexture(TextureTarget.Texture2D, ts.ID);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
@@ -1188,16 +1202,6 @@ namespace SpaceMercs.MainWindow {
             }
             return vertices;
         }
-        private List<Vector2> BuildAoEOverlay() {
-            List<Vector2> vertices = new List<Vector2>();
-            for (int y = (int)Math.Max(hovery - AoERadius, 0); y < (int)Math.Min(hovery + AoERadius + 1, CurrentLevel.Height); y++) {
-                for (int x = (int)Math.Max(hoverx - AoERadius, 0); x < (int)Math.Min(hoverx + AoERadius + 1, CurrentLevel.Width); x++) {
-                    if (!AoEMap[x, y]) continue;
-                    vertices.Add(new Vector2(x, y));
-                }
-            }
-            return vertices;
-        }
         private List<Vector2> DrawTravelGrid() {
             List<Vector2> vertices = new List<Vector2>();
             for (int y = 0; y < CurrentLevel.Height; y++) {
@@ -1359,10 +1363,12 @@ namespace SpaceMercs.MainWindow {
                     TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
                     bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
-                    if (s.EquippedWeapon is not null && s.EquippedWeapon.Type.Stable && s.HasMoved) {
+                    if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Single && s.EquippedWeapon?.Type?.Stable == true && s.HasMoved) {
                         gpSelect.InsertIconItem(I_Attack, tsm, false, null);
                     }
-                    else gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
+                    else if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Single) {
+                        gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
+                    }
                 }
             }
 
@@ -1431,8 +1437,11 @@ namespace SpaceMercs.MainWindow {
             if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
             GenerateTargetMap(s, s.AttackRange);
             CurrentAction = SoldierAction.Attack;
-            if (s.EquippedWeapon != null && s.EquippedWeapon.Type.Area > 0) {
+            if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Grenade) {
                 GenerateAoEMap(s.X, s.Y, s.EquippedWeapon.Type.Area);
+            }
+            if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                GenerateConeMap(s.X, s.Y, s, s.EquippedWeapon.Type.Width);
             }
         }
         private void SelectedSoldierUseItems(GUIIconButton sender) {
@@ -1567,8 +1576,8 @@ namespace SpaceMercs.MainWindow {
             // Redim the various maps
             TargetMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
             DistMap = new int[CurrentLevel.Width, CurrentLevel.Height];
-            AoEMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
             DetectionMap = new bool[CurrentLevel.Width, CurrentLevel.Height];
+            AoETiles.Clear();
 
             // Update all soldiers
             foreach (Soldier s in ThisMission.Soldiers) {
@@ -1627,27 +1636,69 @@ namespace SpaceMercs.MainWindow {
                 }
             }
         }
-        private void GenerateAoEMap(int px, int py, double range, int ox = -1, int oy = -1) {
-            int startx = 0, starty = 0, endx = CurrentLevel.Width - 1, endy = CurrentLevel.Height - 1;
-            // Check every square
-            if (ox >= 0 && oy >= 0) {
-                startx = (int)Math.Max(Math.Min(ox, px) - range, 0);
-                starty = (int)Math.Max(Math.Min(oy, py) - range, 0);
-                endx = (int)Math.Min(Math.Max(ox, px) + range, CurrentLevel.Width - 1);
-                endy = (int)Math.Min(Math.Max(oy, py) + range, CurrentLevel.Height - 1);
-            }
+        private void GenerateAoEMap(int px, int py, double range) {
+            // Range of squares to check
+            int startx = (int)Math.Max(px - range, 0);
+            int starty = (int)Math.Max(py - range, 0);
+            int endx = (int)Math.Min(px + range, CurrentLevel.Width - 1);
+            int endy = (int)Math.Min(py + range, CurrentLevel.Height - 1);
+
+            AoETiles.Clear();
+
             for (int y = starty; y <= endy; y++) {
                 for (int x = startx; x <= endx; x++) {
-                    if (!Utils.IsPassable(CurrentLevel.Map[x, y])) {
-                        AoEMap[x, y] = false;
-                    }
-                    else {
+                    if (Utils.IsPassable(CurrentLevel.Map[x, y])) {
                         double r2 = (x - px) * (x - px) + (y - py) * (y - py);
-                        AoEMap[x, y] = (r2 <= (range * range));
+                        if (r2 <= (range * range)) AoETiles.Add(new Vector2(x, y));;
                     }
                 }
             }
-            AoERadius = (int)Math.Ceiling(range);
+        }
+        private void GenerateConeMap(int px, int py, Soldier s, double width) {
+            // Range of squares to check
+            int startx = (int)Math.Max(Math.Min(s.X, px - width), 0);
+            int starty = (int)Math.Max(Math.Min(s.Y, py - width), 0);
+            int endx = (int)Math.Min(Math.Max(s.X, px + width), CurrentLevel.Width - 1);
+            int endy = (int)Math.Min(Math.Max(s.Y, py + width), CurrentLevel.Height - 1);
+
+            AoETiles.Clear();
+
+            // Get cone angle
+            double range = Math.Max(0.01, Math.Sqrt((s.X - px) * (s.X - px) + (s.Y - py) * (s.Y - py)));
+            double baseAng = Math.Atan2(py - s.Y, px - s.X);
+            double maxAng = Math.Abs(Math.Atan2(width + 0.5, range));
+
+            for (int y = starty; y <= endy; y++) {
+                for (int x = startx; x <= endx; x++) {
+                    if ((x != s.X || y != s.Y) && Utils.IsPassable(CurrentLevel.Map[x, y])) {
+                        double r2 = (x - s.X) * (x - s.X) + (y - s.Y) * (y - s.Y);
+                        if (r2 <= (range * range)) {
+                            double ang = Math.Atan2(y - s.Y, x - s.X);
+                            if (Math.Abs(ang - baseAng) <= maxAng) {
+                                AoETiles.Add(new Vector2(x, y));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Make sure that at least one square next to the soldier is included
+            double bestAng = 999d;
+            int bestX = -1, bestY = -1;
+            for (int y = Math.Max(0, s.Y - 1); y <= Math.Min(s.Y + 1, CurrentLevel.Height - 1); y++) {
+                for (int x = Math.Max(0, s.X - 1); x <= Math.Min(s.X + 1, CurrentLevel.Width - 1); x++) {
+                    if ((x != s.X || y != s.Y) && Utils.IsPassable(CurrentLevel.Map[x, y])) {
+                        double ang = Math.Atan2(y - s.Y, x - s.X);
+                        double dAng = Math.Abs(ang - baseAng);
+                        if (dAng < bestAng) {
+                            bestX = x;
+                            bestY = y;
+                            bestAng = dAng;
+                        }
+                    }
+                }
+            }
+            AoETiles.Add(new Vector2(bestX, bestY));
         }
         private void GenerateDistMap(Soldier? s) {
             if (s == null) return;

@@ -3,6 +3,7 @@
 namespace SpaceMercs {
     public class WeaponType : ItemType {
         public enum DamageType { Physical, Electrical, Fire, Cold, Acid, Poison };
+        public enum ShotType { Single, Cone, ConeMulti, Grenade };
         public enum WeaponClass { Rifle, Shotgun, Pistol, Melee, Launcher, Sniper, Heavy, Other };
         public WeaponClass WClass { get; private set; }
         public DamageType DType { get; private set; } // Damage type
@@ -13,6 +14,7 @@ namespace SpaceMercs {
         public double DMod { get; private set; } // Random damage per hit
         public double Speed { get; private set; }  // Stamina cost to fire
         public double Area { get; private set; } // Is area-of-effect?
+        public double Width { get; private set; } // Cone width if cone-type shot
         public bool IsMeleeWeapon { get { return Range <= 1; } }
         public string SoundEffect { get; private set; }
         public bool IsUsable { get; private set; }
@@ -25,6 +27,7 @@ namespace SpaceMercs {
         public double ShotLength { get; private set; }
         public double ShotSpeed { get; private set; }
         public Color ShotColor { get; private set; }
+        public ShotType ShotShape { get; private set; }
 
         public WeaponType(XmlNode xml) : base(xml) {
             string wclass = xml.GetAttributeText("Class", "Other");
@@ -60,6 +63,9 @@ namespace SpaceMercs {
             DBase = double.Parse(bits[0]);
             DMod = double.Parse(bits[1]);
             Area = nDam.GetAttributeDouble("Area", 0.0);
+            Width = nDam.GetAttributeDouble("Width", 0.0);
+            ShotShape = nDam.GetAttributeEnum<ShotType>("Type", ShotType.Single);
+
             DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
