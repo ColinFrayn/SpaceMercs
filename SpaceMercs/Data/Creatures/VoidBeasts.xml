@@ -109,7 +109,7 @@
   <CreatureType Name="Void Psychic">
     <LevelRange>11,18</LevelRange>
     <Boss/>
-    <Attack>17</Attack>
+    <Attack>20</Attack>
     <Defence>14</Defence>
     <Armour>25</Armour>
     <Health>20</Health>

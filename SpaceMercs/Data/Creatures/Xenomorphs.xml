@@ -80,10 +80,10 @@
   <CreatureType Name="Xenomorph Queen">
     <Size>2</Size>
     <LevelRange>9,17</LevelRange>
-    <Attack>21</Attack>
+    <Attack>22</Attack>
     <Defence>13</Defence>
     <Armour>33</Armour>
-    <Health>40</Health>
+    <Health>50</Health>
     <Stamina>24</Stamina>
     <Interact/>
     <BodyType>Xenomorph</BodyType>

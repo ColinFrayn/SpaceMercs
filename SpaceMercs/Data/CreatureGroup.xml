@@ -16,14 +16,29 @@
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
     <QuantityScale>1.5</QuantityScale>
   </CreatureGroup>
+  <CreatureGroup Name="Crystallines">
+    <Filename>Crystallines.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+    <MinSectorRange>2</MinSectorRange>
+  </CreatureGroup>
+  <CreatureGroup Name="Desert Creatures">
+    <Filename>DesertCreatures.xml</Filename>
+    <Locations>Desert</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Fungoids">
+    <Filename>Fungoids.xml</Filename>
+    <Locations>Oceanic,Rocky,Cave,Ship</Locations>
+    <QuantityScale>1.4</QuantityScale>
+  </CreatureGroup>
   <CreatureGroup Name="Gremlins">
     <Filename>Gremlins.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
     <QuantityScale>1.3</QuantityScale>
   </CreatureGroup>
-  <CreatureGroup Name="Desert Creatures">
-    <Filename>DesertCreatures.xml</Filename>
-    <Locations>Desert</Locations>
+  <CreatureGroup Name="Mechanoids">
+    <Filename>Mechanoids.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
+    <MinSectorRange>1</MinSectorRange>
   </CreatureGroup>
   <CreatureGroup Name="Ogres">
     <Filename>Ogres.xml</Filename>
@@ -44,11 +59,6 @@
     <Locations>Cave,Ship</Locations>
     <MinSectorRange>1</MinSectorRange>
   </CreatureGroup>
-  <CreatureGroup Name="Mechanoids">
-    <Filename>Mechanoids.xml</Filename>
-    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
-    <MinSectorRange>1</MinSectorRange>
-  </CreatureGroup>
   <CreatureGroup Name="Slime Creatures">
     <Filename>Slimes.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
@@ -63,11 +73,6 @@
     <Filename>Triffids.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
     <QuantityScale>1.6</QuantityScale>
-  </CreatureGroup>
-  <CreatureGroup Name="Fungoids">
-    <Filename>Fungoids.xml</Filename>
-    <Locations>Oceanic,Rocky,Cave,Ship</Locations>
-    <QuantityScale>1.4</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Void Beasts">
     <Filename>VoidBeasts.xml</Filename>

@@ -262,7 +262,7 @@
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
     <Shots>3</Shots>
     <Recoil>0.3</Recoil>
-    <Delay>300</Delay>
+    <Delay>150</Delay>
     <Damage>3+3</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
@@ -293,7 +293,7 @@
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
     <Shots>5</Shots>
     <Recoil>0.9</Recoil>
-    <Delay>260</Delay>
+    <Delay>130</Delay>
     <Damage>4+2</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
@@ -640,17 +640,17 @@
   </WeaponType>
   <WeaponType Name="Slugger" Class="Shotgun">
     <Mass>8.0</Mass>
-    <Cost>180</Cost>
-    <Rarity>20</Rarity>
+    <Cost>220</Cost>
+    <Rarity>18</Rarity>
     <Speed>18</Speed>
     <Shots>3</Shots>
     <Recoil>0.5</Recoil>
     <Race>Ogrish</Race>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>
-    <Damage>3+3</Damage>
+    <Damage>3+4</Damage>
     <Desc>A powerful Ogrish blast gun that fires heavy slugs. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
-    <Noise>11</Noise>
+    <Noise>12</Noise>
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Tungsten" Amount="2"/>
@@ -687,6 +687,15 @@
     <Sound>SwordSlice</Sound>
     <Recoil>0.5</Recoil>
     <Delay>220</Delay>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Crystal Shards">
+    <Speed>11</Speed>
+    <Range DropOff="0.5" Speed="0.65" Length="0.3" Colour="0.5,1.0,0.2">9</Range>
+    <Damage>3+4</Damage>
+    <Sound>SwordSlice</Sound>
+    <Recoil>0.4</Recoil>
+    <Delay>230</Delay>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Poisonous Bite">
@@ -852,6 +861,14 @@
     <Damage>4+3</Damage>
     <Type>Physical</Type>
     <Sound>Drain</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Electroshock">
+    <Speed>18</Speed>
+    <Range DropOff="0.0" Colour="0.8,0.9,1.0">10</Range>
+    <Damage>8+6</Damage>
+    <Type>Electrical</Type>
+    <Sound>Electroshock</Sound>
     <Hidden/>
   </WeaponType>
 </Data>

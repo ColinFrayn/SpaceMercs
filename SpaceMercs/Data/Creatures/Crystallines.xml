@@ -1,0 +1,132 @@
+﻿<Data>
+  <CreatureType Name="Crystal Beast">
+    <LevelRange>8,16</LevelRange>
+    <Attack>12</Attack>
+    <Defence>12</Defence>
+    <Armour>22</Armour>
+    <Health>15</Health>
+    <Stamina>18</Stamina>
+    <Frequency>3</Frequency>
+    <Interact/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>80, 160, 255</Col1>
+    <Col2>90, 180, 255</Col2>
+    <Col3>100, 190, 255</Col3>
+    <Desc>A crystalline beast with sharp claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>    
+  </CreatureType>
+  <CreatureType Name="Crystal Soldier">
+    <LevelRange>8,16</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Armour>26</Armour>
+    <Health>16</Health>
+    <Stamina>18</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>60, 150, 255</Col1>
+    <Col2>70, 170, 255</Col2>
+    <Col3>80, 180, 255</Col3>
+    <Desc>A crystalline humanoid with sharp crystal claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Crystal Assassin">
+    <LevelRange>9,17</LevelRange>
+    <Attack>16</Attack>
+    <Defence>12</Defence>
+    <Armour>26</Armour>
+    <Health>16</Health>
+    <Stamina>20</Stamina>
+    <Frequency>1</Frequency>
+    <Interact/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>60, 150, 255</Col1>
+    <Col2>70, 170, 255</Col2>
+    <Col3>80, 180, 255</Col3>
+    <Desc>A crystalline humanoid with razor sharp crystal knives for hands.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Crystal Spitter">
+    <LevelRange>9,17</LevelRange>
+    <Attack>15</Attack>
+    <Defence>12</Defence>
+    <Armour>24</Armour>
+    <Health>15</Health>
+    <Stamina>18</Stamina>
+    <Frequency>1</Frequency>
+    <Interact/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>60, 150, 255</Col1>
+    <Col2>70, 170, 255</Col2>
+    <Col3>80, 180, 255</Col3>
+    <Desc>A crystalline humanoid which spits crystal shards a long distance.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Crystal Shards</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Crystal Elemental">
+    <LevelRange>10,17</LevelRange>
+    <Size>2</Size>
+    <Attack>20</Attack>
+    <Defence>11</Defence>
+    <Armour>30</Armour>
+    <Health>26</Health>
+    <Stamina>20</Stamina>
+    <Frequency>1</Frequency>
+    <Interact/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>60, 150, 255</Col1>
+    <Col2>70, 170, 255</Col2>
+    <Col3>80, 180, 255</Col3>
+    <Desc>A giant crystalline humanoid with powerful fists.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Club</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Crystal Alpha">
+    <LevelRange>9,18</LevelRange>
+    <Attack>22</Attack>
+    <Defence>12</Defence>
+    <Armour>32</Armour>
+    <Health>30</Health>
+    <Stamina>18</Stamina>
+    <Frequency>1</Frequency>
+    <Interact/>
+    <Boss/>
+    <BodyType>Crystalline</BodyType>
+    <Col1>100, 180, 255</Col1>
+    <Col2>110, 200, 255</Col2>
+    <Col3>120, 210, 255</Col3>
+    <Desc>A fierce crystalline humanoid which conjures electrical power from its surroundings.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Electroshock</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+      <Resistance Type="Electrical" Value="100"/>
+    </Resistances>
+  </CreatureType>
+</Data>
+

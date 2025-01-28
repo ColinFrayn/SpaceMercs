@@ -2,7 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-Test space combat at lower levels
+Test space combat freq. and diff
+- Test at lower levels
+
+Different shot types: SingleTarget, Cone, Grenade, ConeMultiShot?
+
+Some weapons need a turn to recharge (SuperHeavies?)
 
 Alien solar system:
 - Alien colonies need names
