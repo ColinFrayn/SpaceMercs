@@ -103,7 +103,7 @@ namespace SpaceMercs {
             prog2D.SetUniform("flatColour", vCol);
             GL.UseProgram(prog2D.ShaderProgramHandle);
 
-            ThickLine2D line = ThickLine2D.Make_Vertex3D(fx, fy, 0f, tx, ty, 0f, size);
+            ThickLine line = ThickLine.Make_Vertex3D(fx, fy, 0f, tx, ty, 0f, size);
 
             line.BindAndDraw();
 
@@ -166,8 +166,8 @@ namespace SpaceMercs {
             HashSet<IEntity> hsAttacked = new HashSet<IEntity>();
 
             // Is this an AoE Weapon then resolve the AoE
-            int r = (int)Math.Ceiling(wp?.Type?.Area ?? 0d);
-            if (r > 0) {
+            if (wp?.Type?.WeaponShotType == WeaponType.ShotType.Grenade) {
+                int r = (int)Math.Ceiling(wp?.Type?.Area ?? 0d);
                 Color col = Color.FromArgb(150, 150, 50, 50);
                 effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 250f }, { "Size", (float)r }, { "Colour", col } });
                 for (int y = Math.Max(0, ty - r); y <= Math.Min(level.Height - 1, ty + r); y++) {
@@ -181,7 +181,7 @@ namespace SpaceMercs {
                     }
                 }
             }
-            // Single target
+            // Single target shot
             else {
                 IEntity? en = level.GetEntityAt(tx, ty);
                 if (en is null) return; // Weird!

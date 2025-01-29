@@ -411,21 +411,22 @@ namespace SpaceMercs.MainWindow {
             int oldhoverx = hoverx, oldhovery = hovery;
             CheckHoverMission();
             // Mouse has moved to a different square
-            if (hoverx != oldhoverx || hovery != oldhovery) {
-                if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
+            if (hoverx > 0 && hoverx < CurrentLevel.Width - 1 && hovery > 0 && hovery < CurrentLevel.Height - 1 && TargetMap[hoverx, hovery]) {
+                if (hoverx != oldhoverx || hovery != oldhovery) {
                     if (ActionItem?.BaseType?.ItemEffect is not null) {
                         GenerateAoEMap(hoverx, hovery, ActionItem.BaseType.ItemEffect.Radius);
                     }
                     else if (SelectedEntity != null && SelectedEntity is Soldier s && s.EquippedWeapon != null) {
-                        if (s.EquippedWeapon.Type.ShotShape == WeaponType.ShotType.Grenade) {
+                        if (s.EquippedWeapon.Type.WeaponShotType == WeaponType.ShotType.Grenade) {
                             GenerateAoEMap(hoverx, hovery, s.EquippedWeapon.Type.Area);
-                        }
-                        else if (s.EquippedWeapon.Type.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
-                            GenerateConeMap(hoverx, hovery, s, s.EquippedWeapon.Type.Width);
                         }
                     }
                 }
+                if (SelectedEntity is Soldier sc && sc.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                    GenerateConeMap(hoverx, hovery, sc, sc.EquippedWeapon.Type.Width);
+                }
             }
+
         }
         private async void MouseUp_Mission(MouseButtonEventArgs e) {
             // Check R-button released
@@ -493,10 +494,10 @@ namespace SpaceMercs.MainWindow {
                 if (s != null && CurrentAction == SoldierAction.Attack) {
                     CurrentAction = SoldierAction.None;
                     bool bAttacked = false;
-                    if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Grenade or WeaponType.ShotType.Single) {
+                    if (s.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Grenade or WeaponType.ShotType.Single) {
                         bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, hoverx, hovery, AddNewEffect, PlaySoundThreaded));
                     }
-                    else if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                    else if (s.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
                         s.AttackArea(CurrentLevel, hoverx, hovery, AoETiles, ApplyItemEffect, AnnounceMessage, AddNewEffect, PlaySoundThreaded);
                     }
                     if (bAttacked) {
@@ -870,13 +871,19 @@ namespace SpaceMercs.MainWindow {
                 }
             }
 
+            // Target overlay
             if (CurrentAction == SoldierAction.Attack) {
                 DrawOverlayIcons(texProg, BuildTargetOverlay(), Textures.MiscTexture.FrameRed);
                 if (TargetMap[pt.X, pt.Y] == true) { 
                     DrawHoverFrame(texProg, pt.X, pt.Y);
                     if (SelectedEntity != null && SelectedEntity is Soldier soldier && soldier.EquippedWeapon != null) {
-                        if (soldier.EquippedWeapon.Type.ShotShape != WeaponType.ShotType.Single && AoETiles.Any()) {
+                        if (soldier.EquippedWeapon.Type.WeaponShotType != WeaponType.ShotType.Single && AoETiles.Any()) {
                             DrawOverlayIcons(texProg, AoETiles, Textures.MiscTexture.FrameRedThick);
+                        }
+                        if (soldier.EquippedWeapon.Type.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                            if (hoverx >= 0 && hoverx < CurrentLevel.Width && hovery >= 0 && hovery < CurrentLevel.Height && TargetMap[hoverx, hovery]) {
+                                DrawAoECone(texProg);
+                            }
                         }
                     }
                 }
@@ -1035,7 +1042,7 @@ namespace SpaceMercs.MainWindow {
                     gbSearch!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
                     if (bAIRunning) gbInventory.Deactivate();
                     else gbInventory.Activate();
-                    if (s.Stamina < s.AttackCost || s.GoTo != Point.Empty || bAIRunning || (s.HasMoved && s.EquippedWeapon?.Type?.Stable == true)) gbAttack.Deactivate();
+                    if (bAIRunning || !s.CanAttack) gbAttack.Deactivate();
                     else gbAttack.Activate();
                     if (s.Stamina < s.SearchCost || s.GoTo != Point.Empty || bAIRunning) gbSearch.Deactivate();
                     else gbSearch.Activate();
@@ -1243,6 +1250,33 @@ namespace SpaceMercs.MainWindow {
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Flat.BindAndDraw();
         }
+        private void DrawAoECone(ShaderProgram prog) {
+            if (SelectedEntity == null || SelectedEntity is not Soldier s) return;
+            if (s.EquippedWeapon == null) return;
+
+            // Add two end points of the cone
+            double mxpos = MXPos;
+            double mypos = MYPos;
+            double dx = mxpos - (s.X + 0.5d);
+            double dy = mypos - (s.Y + 0.5d);
+            double range = Math.Sqrt((dx * dx) + (dy * dy));
+            if (range < 1d) return;
+            double d2x = dy * s.EquippedWeapon.Type.Width / range;
+            double d2y = -dx * s.EquippedWeapon.Type.Width / range;
+
+            Vector4 vCol = new Vector4(1f, 0f, 0f, 1f);
+            prog.SetUniform("flatColour", vCol);
+            prog.SetUniform("model", Matrix4.Identity);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            float lineWidth = 0.07f;
+
+            ThickLine line = ThickLine.Make_Vertex3D((float)(s.X + 0.5d), (float)(s.Y + 0.5d), 0f, (float)(mxpos + d2x), (float)(mypos + d2y), 0f, lineWidth);
+            line.BindAndDraw();
+            line = ThickLine.Make_Vertex3D((float)(mxpos - d2x), (float)(mypos - d2y), 0f, (float)(mxpos + d2x), (float)(mypos + d2y), 0f, lineWidth);
+            line.BindAndDraw();
+            line = ThickLine.Make_Vertex3D((float)(s.X + 0.5d), (float)(s.Y + 0.5d), 0f, (float)(mxpos - d2x), (float)(mypos - d2y), 0f, lineWidth);
+            line.BindAndDraw();
+        }
         private void DrawHoverFrame(ShaderProgram prog, int xpos, int ypos) {
             float px = xpos + 0.5f, py = ypos + 0.5f;
             float xSize = 1f, ySize = 1f;
@@ -1360,13 +1394,17 @@ namespace SpaceMercs.MainWindow {
                 }
                 // Attack a creature
                 else if (en is Creature) {
-                    TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
-                    bool bEnabled = bIsInRange && (s.Stamina >= s.AttackCost);
-                    if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Single && s.EquippedWeapon?.Type?.Stable == true && s.HasMoved) {
+                    bool bEnabled = bIsInRange && s.CanAttack;
+                    if (s.EquippedWeapon?.Recharge > 0) {
+                        TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                         gpSelect.InsertIconItem(I_Attack, tsm, false, null);
                     }
-                    else if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Single) {
+                    else if (s.EquippedWeapon?.Type?.WeaponShotType == WeaponType.ShotType.Single && s.EquippedWeapon?.Type?.Stable == true && s.HasMoved) {
+                        TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Timer);
+                        gpSelect.InsertIconItem(I_Attack, tsr, false, null);
+                    }
+                    else if (s.EquippedWeapon?.Type?.WeaponShotType == WeaponType.ShotType.Single) {
                         gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
                     }
                 }
@@ -1435,12 +1473,13 @@ namespace SpaceMercs.MainWindow {
         private void SelectedSoldierAttack(GUIIconButton? sender) {
             if (bAIRunning) return;
             if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
+            if (!s.CanAttack) return;
             GenerateTargetMap(s, s.AttackRange);
             CurrentAction = SoldierAction.Attack;
-            if (s.EquippedWeapon?.Type?.ShotShape == WeaponType.ShotType.Grenade) {
+            if (s.EquippedWeapon?.Type?.WeaponShotType == WeaponType.ShotType.Grenade) {
                 GenerateAoEMap(s.X, s.Y, s.EquippedWeapon.Type.Area);
             }
-            if (s.EquippedWeapon?.Type?.ShotShape is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+            if (s.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
                 GenerateConeMap(s.X, s.Y, s, s.EquippedWeapon.Type.Width);
             }
         }
@@ -1656,16 +1695,18 @@ namespace SpaceMercs.MainWindow {
         }
         private void GenerateConeMap(int px, int py, Soldier s, double width) {
             // Range of squares to check
-            int startx = (int)Math.Max(Math.Min(s.X, px - width), 0);
-            int starty = (int)Math.Max(Math.Min(s.Y, py - width), 0);
-            int endx = (int)Math.Min(Math.Max(s.X, px + width), CurrentLevel.Width - 1);
-            int endy = (int)Math.Min(Math.Max(s.Y, py + width), CurrentLevel.Height - 1);
+            int startx = (int)Math.Max(Math.Min(s.X, px - width) - 1, 0);
+            int starty = (int)Math.Max(Math.Min(s.Y, py - width) - 1, 0);
+            int endx = (int)Math.Min(Math.Max(s.X, px + width) + 1, CurrentLevel.Width - 1);
+            int endy = (int)Math.Min(Math.Max(s.Y, py + width) + 1, CurrentLevel.Height - 1);
 
             AoETiles.Clear();
 
             // Get cone angle
-            double range = Math.Max(0.01, Math.Sqrt((s.X - px) * (s.X - px) + (s.Y - py) * (s.Y - py)));
-            double baseAng = Math.Atan2(py - s.Y, px - s.X);
+            double mxpos = MXPos;
+            double mypos = MYPos;
+            double range = Math.Max(0.01, Math.Sqrt((s.X + 0.5d - mxpos) * (s.X + 0.5d - mxpos) + (s.Y + 0.5d - mypos) * (s.Y + 0.5d - mypos)));
+            double baseAng = Math.Atan2(mypos - (s.Y + 0.5d), mxpos - (s.X + 0.5d));
             double maxAng = Math.Abs(Math.Atan2(width + 0.5, range));
 
             for (int y = starty; y <= endy; y++) {
@@ -1674,7 +1715,8 @@ namespace SpaceMercs.MainWindow {
                         double r2 = (x - s.X) * (x - s.X) + (y - s.Y) * (y - s.Y);
                         if (r2 <= (range * range)) {
                             double ang = Math.Atan2(y - s.Y, x - s.X);
-                            if (Math.Abs(ang - baseAng) <= maxAng) {
+                            double dAng = Math.Min(Math.Min(Math.Abs(ang - baseAng), Math.Abs(ang - baseAng + Math.PI * 2f)), Math.Abs(ang - baseAng - Math.PI * 2f));
+                            if (dAng <= maxAng && TargetMap[x,y]) {
                                 AoETiles.Add(new Vector2(x, y));
                             }
                         }
@@ -1689,7 +1731,7 @@ namespace SpaceMercs.MainWindow {
                 for (int x = Math.Max(0, s.X - 1); x <= Math.Min(s.X + 1, CurrentLevel.Width - 1); x++) {
                     if ((x != s.X || y != s.Y) && Utils.IsPassable(CurrentLevel.Map[x, y])) {
                         double ang = Math.Atan2(y - s.Y, x - s.X);
-                        double dAng = Math.Abs(ang - baseAng);
+                        double dAng = Math.Min(Math.Min(Math.Abs(ang - baseAng), Math.Abs(ang - baseAng + Math.PI * 2f)), Math.Abs(ang - baseAng - Math.PI * 2f));
                         if (dAng < bestAng) {
                             bestX = x;
                             bestY = y;

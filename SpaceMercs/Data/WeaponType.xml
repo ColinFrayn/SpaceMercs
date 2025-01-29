@@ -94,6 +94,7 @@
     <Cost>1300</Cost>
     <Rarity>24</Rarity>
     <Speed>20</Speed>
+    <Recharge>2</Recharge>
     <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
     <Shots>4</Shots>
     <Recoil>1.5</Recoil>
@@ -101,8 +102,7 @@
     <Damage>6+4</Damage>
     <Desc>A very heavy high calibre automatic rifle for mounting on power armour</Desc>
     <Sound>SuperHeavyMachineGun</Sound>
-    <Noise>12</Noise>
-    <Stable/>
+    <Noise>13</Noise>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinPop>60</MinPop>
@@ -126,19 +126,19 @@
     <Range Accuracy="0" DropOff="0.8" Length="0.2" Speed="0.8">10</Range>
     <Shots>6</Shots>
     <Recoil>1.5</Recoil>
-    <Delay>250</Delay>
-    <Damage Type="ConeMulti" Width="2">4+4</Damage>
-    <Desc>A very heavy rapid-fire chain gun for mounting on power armour</Desc>
+    <Delay>300</Delay>
+    <Recharge>2</Recharge>
+    <Damage Type="ConeMulti" Width="2.2">4+4</Damage>
+    <Desc>A superheavy rapid-fire chain gun for mounting on power armour</Desc>
     <Sound>ChainGun</Sound>
-    <Noise>12</Noise>
-    <Stable/>
+    <Noise>13</Noise>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinPop>60</MinPop>
-      <CashCost>140</CashCost>
+      <CashCost>160</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel">2</Material>
-      <Material Name="Titanium">2</Material>
+      <Material Name="Titanium">4</Material>
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="8"/>
@@ -258,12 +258,12 @@
     <Mass>5.0</Mass>
     <Cost>220</Cost>
     <Rarity>9</Rarity>
-    <Speed>14</Speed>
+    <Speed>16</Speed>
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
     <Shots>3</Shots>
     <Recoil>0.3</Recoil>
     <Delay>150</Delay>
-    <Damage>3+3</Damage>
+    <Damage>3+4</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electroshock</Sound>
@@ -289,12 +289,12 @@
     <Mass>18.0</Mass>
     <Cost>950</Cost>
     <Rarity>14</Rarity>
-    <Speed>14</Speed>
+    <Speed>18</Speed>
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
     <Shots>5</Shots>
     <Recoil>0.9</Recoil>
     <Delay>130</Delay>
-    <Damage>4+2</Damage>
+    <Damage>4+4</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>HeavyElectroshock</Sound>
@@ -386,6 +386,7 @@
     <Desc>A grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
+    <Recharge>1</Recharge>
     <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="8"/>
@@ -405,6 +406,7 @@
     <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
+    <Recharge>1</Recharge>
     <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="6"/>
@@ -433,7 +435,7 @@
     <Sound>GrenadeLauncher</Sound>
     <Noise>14</Noise>
     <Unmodifiable/>
-    <Stable/>
+    <Recharge>1</Recharge>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Industrial Chemicals" Amount="3"/>

@@ -200,8 +200,8 @@ namespace SpaceMercs {
             }
 
             // Move forward if we're not currently on a mission
-            if (fTravelTime < Const.SecondsPerDay) fElapsed += 60f * 5f;
-            else fElapsed += fTravelTime / 600f;
+            if (aoTravelFrom.GetSystem() == aoTravelTo.GetSystem()) fElapsed += 60f * 5f;
+            else fElapsed += (float)Const.SecondsPerDay * 2;
 
             ParentView.UpdateCurrentTime(dtStart.AddSeconds(Math.Min(fElapsed,fTravelTime)));
 

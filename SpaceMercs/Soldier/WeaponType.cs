@@ -27,7 +27,8 @@ namespace SpaceMercs {
         public double ShotLength { get; private set; }
         public double ShotSpeed { get; private set; }
         public Color ShotColor { get; private set; }
-        public ShotType ShotShape { get; private set; }
+        public ShotType WeaponShotType { get; private set; }
+        public int Recharge { get; private set; }
 
         public WeaponType(XmlNode xml) : base(xml) {
             string wclass = xml.GetAttributeText("Class", "Other");
@@ -64,13 +65,14 @@ namespace SpaceMercs {
             DMod = double.Parse(bits[1]);
             Area = nDam.GetAttributeDouble("Area", 0.0);
             Width = nDam.GetAttributeDouble("Width", 0.0);
-            ShotShape = nDam.GetAttributeEnum<ShotType>("Type", ShotType.Single);
+            WeaponShotType = nDam.GetAttributeEnum<ShotType>("Type", ShotType.Single);
 
             DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
             IsUsable = (xml.SelectSingleNode("Hidden") == null);
             Stable = (xml.SelectSingleNode("Stable") != null);
             Shots = xml.SelectNodeInt("Shots", 1);
             Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
+            Recharge = xml.SelectNodeInt("Recharge", 0);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);
         }

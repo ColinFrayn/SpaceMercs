@@ -54,6 +54,15 @@ namespace SpaceMercs {
         public Color PrimaryColor { get; private set; }
         public bool IsInjured { get { return Health < MaxHealth; } }
         public bool HasMoved { get; private set; } = false;
+        public bool CanAttack { 
+            get {
+                if (Stamina < AttackCost) return false;
+                if (GoTo != Point.Empty) return false;
+                if (HasMoved && EquippedWeapon?.Type?.Stable == true) return false;
+                if (EquippedWeapon != null && EquippedWeapon.Recharge > 0) return false;
+                return true;
+            }
+        }
 
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
         public bool CanSee(IEntity? en) {
@@ -166,6 +175,7 @@ namespace SpaceMercs {
             }
             Facing = 0.0;
             HasMoved = false;
+            EquippedWeapon?.Reset();
         }
         public bool CanOpenDoors { get { return true; } }
         public double RangeTo(IEntity en) {
@@ -1120,6 +1130,7 @@ namespace SpaceMercs {
 
             Stamina -= AttackCost;
             HasMoved = true;
+            EquippedWeapon?.SetHasFired();
 
             // Rotate soldier
             float dx = X - tx;
@@ -1133,7 +1144,7 @@ namespace SpaceMercs {
             HasMoved = true;
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
-            double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
+            double recoil = EquippedWeapon?.Recoil ?? 0d;
 
             // Resolve the attack(s)
             List<ShotResult> results = new List<ShotResult>();
@@ -1167,13 +1178,13 @@ namespace SpaceMercs {
 
             HashSet<IEntity> targets = new HashSet<IEntity>();
             foreach (Vector2 vec in aoeTiles) {
-                // TODO
                 IEntity? en = level.GetEntityAt((int)vec.X, (int)vec.Y);
                 if (en != null) targets.Add(en);           
             }
 
             Stamina -= AttackCost;
             HasMoved = true;
+            EquippedWeapon?.SetHasFired();
 
             // Rotate soldier
             float dx = X - tx;
@@ -1181,11 +1192,52 @@ namespace SpaceMercs {
             SetFacing(180.0 + Math.Atan2(dy, dx) * (180.0 / Math.PI));
 
             // Play weapon sound
-            playSound(EquippedWeapon.Type.SoundEffect);
+            playSound(EquippedWeapon!.Type.SoundEffect);
 
             HasMoved = true;
 
-            Utils.ResolveHits(targets, EquippedWeapon, this, effectFactory, applyEffect, showMessage);
+            if (targets.Count == 0) return true;
+
+            // Hits everyone in the area:
+            if (EquippedWeapon.Type.WeaponShotType == WeaponType.ShotType.Cone) {
+                Utils.ResolveHits(targets, EquippedWeapon, this, effectFactory, applyEffect, showMessage);
+            }
+            else if (EquippedWeapon.Type.WeaponShotType == WeaponType.ShotType.ConeMulti) {
+                // Bias towards hitting nearer entities
+                Dictionary<IEntity, double> targetBias = targets.ToDictionary(x => x, x => 1d/(x.RangeTo(this)+0.5));
+                double totalWeight = targetBias.Values.Sum();
+                Random rand = new Random();
+                Dictionary<IEntity, int> hitTargets = new();
+                for (int n=0; n<EquippedWeapon.Type.Shots; n++) {
+                    double r = rand.NextDouble() * totalWeight;
+                    foreach (KeyValuePair<IEntity, double> kvp in targetBias) {
+                        r -= kvp.Value;
+                        if (r <= 0d) {
+                            hitTargets.TryAdd(kvp.Key, 0);
+                            hitTargets[kvp.Key]++;
+                            break;
+                        }
+                    }
+                }
+                float sDelay = 0f;
+                foreach (IEntity en in hitTargets.Keys) {
+                    List<ShotResult> results = new List<ShotResult>();
+                    for (int i = 0; i < hitTargets[en]; i++) {
+                        double hit = Utils.GenerateHitRoll(this, en) - (i * EquippedWeapon!.Recoil);  // Subsequent shots are harder to hit
+                        if (hit > 0.0) {
+                            results.Add(new ShotResult(this, true));
+                        }
+                        else {
+                            results.Add(new ShotResult(this, false));
+                        }
+                    }
+                    Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en?.Size ?? 1, results, this.RangeTo(en!), effectFactory, sDelay);
+                    sDelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d) * hitTargets[en!];
+                }
+            }
+            else {
+                throw new Exception($"Unexpected shot shape {EquippedWeapon.Type.WeaponShotType} in {nameof(AttackArea)}");
+            }
 
             // Set up the projectile shots or auto-resolve melee effect
             return true;
@@ -1218,6 +1270,10 @@ namespace SpaceMercs {
             // Handle any items in inventory that reset/recharge etc.
             foreach (IEquippable eq in Inventory.OfType<IEquippable>()) {
                 eq.EndOfTurn();
+            }
+            EquippedWeapon?.EndOfTurn();
+            foreach (Armour ar in EquippedArmour) {
+                ar.EndOfTurn();
             }
 
             CalculateMaxStats(); // Just in case

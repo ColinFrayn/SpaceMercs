@@ -347,7 +347,8 @@ namespace SpaceMercs {
                 int count = 0;
                 foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {
                     count++;
-                    if (ct.LevelMin <= m.Diff && ct.LevelMax >= m.Diff) {
+                    // Only count this creature type if it's in the correct range and isn't a boss
+                    if (!ct.IsBoss && ct.LevelMin <= m.Diff && ct.LevelMax >= m.Diff) {
                         score += 20.0 - Math.Abs(((ct.LevelMin + ct.LevelMax) / 2) - m.Diff); // How far from average for this range?
                     }
                 }

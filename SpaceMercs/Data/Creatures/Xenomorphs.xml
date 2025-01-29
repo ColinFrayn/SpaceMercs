@@ -51,6 +51,41 @@
       <Item Amount="0.1">Xenolite</Item>
     </Scavenge>
   </CreatureType>
+  <CreatureType Name="Xenomorph Burster">
+    <LevelRange>5,14</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Armour>21</Armour>
+    <Health>13</Health>
+    <Stamina>19</Stamina>
+    <Frequency>2</Frequency>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>An Alien which explodes with acid when killed</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+    </Scavenge>
+    <OnDeathEffect Name="AcidSplash">
+      <Radius>1.5</Radius>
+      <Effect>
+        <Damage Type="Acid">6</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>2</Duration>
+        <Damage Type="Acid">3</Damage>
+        <ArmourMod>-2</ArmourMod>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
+  </CreatureType>
   <CreatureType Name="Xenomorph Scythebeast">
     <Size>2</Size>
     <LevelRange>7,16</LevelRange>

@@ -534,7 +534,7 @@ namespace SpaceMercs {
             // Do the attack
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
-            double recoil = EquippedWeapon?.Type?.Recoil ?? 0d;
+            double recoil = EquippedWeapon?.Recoil ?? 0d;
             List<ShotResult> results = new List<ShotResult>();
             int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
             for (int n = 0; n < nshots; n++) {

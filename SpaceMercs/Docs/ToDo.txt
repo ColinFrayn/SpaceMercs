@@ -5,12 +5,7 @@ ToDo List
 Test space combat freq. and diff
 - Test at lower levels
 
-Different shot types:
-- Draw the actual triangle for the cone on top
-- Cone: [TEST]
-- ConeMulti: Carry out the required number of shots, hitting creatures in the cone, biased to nearer ones
-
-Some weapons need a turn to recharge (SuperHeavies?)
+Test WeaponMods
 
 Alien solar system:
 - Alien colonies need names
@@ -22,6 +17,8 @@ Alien solar system:
 ---------------------
 Backburner : Features
 ---------------------
+
+Add in ricochet ShotType (e.g. Disc Thrower)?
 
 What should attack roll for a AoE weapon like grenade launcher of flame thrower do? Maybe add in perturbation to target??
 

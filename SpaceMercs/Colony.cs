@@ -305,8 +305,8 @@ namespace SpaceMercs {
         }
         private void PopulateMercenaries() {
             Random rand = new Random();
-            int total = BaseSize + rand.Next(4) + rand.Next(4) - rand.Next(4);
-            if (HasBaseType(BaseType.Military)) total += 3;
+            int total = BaseSize + rand.Next(2) + rand.Next(2) - 1;
+            if (HasBaseType(BaseType.Military)) total += 4 + rand.Next(2) + rand.Next(2);
             if (HasBaseType(BaseType.Metropolis)) total += 2;
             if (total > Const.MaxColonyMercenaries) total = Const.MaxColonyMercenaries;
             if (total < 0) total = 0;

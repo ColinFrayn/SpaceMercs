@@ -20,8 +20,9 @@ namespace SpaceMercs {
                 sb.AppendLine($"DamageType : {Type.DType}");
                 sb.AppendLine("Stamina : " + StaminaCost.ToString("0.#"));
                 sb.AppendLine($"Accuracy : {AccuracyBonus} - {Type.DropOff}/m");
-                if (Type.Area > 0) sb.AppendLine($"Area : {Type.Area}m rad");
+                if (Type.Area > 0d) sb.AppendLine($"Area : {Type.Area}m rad");
                 if (Type.Shots > 1) sb.AppendLine($"MultiShot : {Type.Shots}");
+                if (Recoil > 0d) sb.AppendLine($"Recoil : -{Recoil.ToString("0.##")}/shot");
                 foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {
                     sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
                 }
@@ -43,18 +44,21 @@ namespace SpaceMercs {
         public void SaveToFile(StreamWriter file) {
             file.Write($"<Weapon Type=\"{BaseType.Name}\" Level=\"{Level}\"");
             if (Mod != null) file.Write($" Mod=\"{Mod.Name}\"");
+            if (Recharge > 0) file.Write($" Recharge =\"{Recharge}\"");
             file.WriteLine(" />");
         }
 
         // Weapon-specific properties
         public WeaponType Type { get; private set; }
         public WeaponMod? Mod { get; private set; }
-        public double DBase { get { return Type.DBase * (1.0 + (Level / 10.0)) + (Mod is not null ? Mod.Damage : 0); } }
+        public double DBase { get { return Type.DBase * (1.0 + (Level / 10.0)) + (Mod?.Damage ?? 0); } }
         public double DMod { get { return Type.DMod * (1.0 + (Level / 10.0)); } }
         public double StaminaCost { get { return Type.Speed * (1.0 - (Level / 20.0)); } }
-        public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod is not null ? Mod.Accuracy : 0); } }
-        public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod is not null ? Mod.DropoffMod : 1.0); } }
-        public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod is not null ? Mod.Silencer : 0.0)); } }
+        public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod?.Accuracy ?? 0); } }
+        public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod?.DropoffMod ?? 1.0); } }
+        public double Recoil { get { return Type.Recoil * Math.Pow(0.92, Level) * (Mod?.RecoilMod ?? 1.0); } }
+        public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod?.Silencer ?? 0.0)); } }
+        public int Recharge { get; private set; }
         public Dictionary<WeaponType.DamageType, double> GetBonusDamage() {
             Dictionary<WeaponType.DamageType, double> bdam = new Dictionary<WeaponType.DamageType, double>();
             // TODO Implement bonus damage
@@ -76,12 +80,14 @@ namespace SpaceMercs {
         public Weapon(WeaponType tp, int lvl) {
             Type = tp;
             Level = lvl;
+            Recharge = 0;
         }
         public Weapon(IEquippable eq, int iNewLevel) {
             Weapon? wp = eq as Weapon;
             if (wp == null) throw new Exception("Attempting to clone Weapon with object of type " + eq.GetType());
             Type = wp.Type;
             Level = iNewLevel;
+            Recharge = 0;
         }
         public Weapon(XmlNode xml) {
             Level = xml.GetAttributeInt("Level");
@@ -93,14 +99,22 @@ namespace SpaceMercs {
                 Mod = StaticData.GetWeaponModByName(strMod);
                 if (Mod is null) throw new Exception($"Could not find weapon mod {strMod}");
             }
+            Recharge = xml.GetAttributeInt("Recharge", 0);
         }
         public Weapon(Weapon wp) {
             Type = wp.Type;
             Level = wp.Level;
+            Recharge = 0;
         }
 
         public void SetModifier(WeaponMod mod) {
             Mod = mod;
+        }
+        public void Reset() {
+            Recharge = 0;
+        }
+        public void SetHasFired() {
+            Recharge = Type.Recharge;
         }
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
@@ -123,7 +137,7 @@ namespace SpaceMercs {
             return Name;
         }
         public void EndOfTurn() {
-            // Nothing to do yet
+            if (Recharge > 0) Recharge--;
         }
         public int GetUtilitySkill(Soldier.UtilitySkill sk) {
             // TODO: Add any material properties

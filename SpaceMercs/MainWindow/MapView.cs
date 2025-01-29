@@ -31,6 +31,20 @@ namespace SpaceMercs.MainWindow {
         private readonly Stopwatch swLastTick = new Stopwatch();
         private readonly Stopwatch swLastClick = new Stopwatch();
         private GUIButton? gbLoadGame, gbNewGame, gbExitGame;
+        private double MXPos {
+            get {
+                double mxfract = MousePosition.X / (double)Size.X;
+                double mxpos = ((mxfract - 0.5) * (fMissionViewZ / 1.86) * Aspect) + fMissionViewX;
+                return mxpos;
+            }
+        }
+        private double MYPos {
+            get {
+                double myfract = MousePosition.Y / (double)Size.Y;
+                double mypos = ((0.5 - myfract) * (fMissionViewZ / 1.86)) + fMissionViewY;
+                return mypos;
+            }
+        }
 
         public GUIMessageBox msgBox { get; private set; }
         public Travel? TravelDetails { get; private set; }

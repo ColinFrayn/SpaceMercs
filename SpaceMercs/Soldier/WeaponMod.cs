@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public int Silencer { get; private set; }
         public double Accuracy { get; private set; }
         public double Damage { get; private set; }
+        public double RecoilMod { get; private set; }
         public string Char { get; private set; }
         public Dictionary<MaterialType, int> Materials { get; private set; }
 
@@ -27,8 +28,9 @@ namespace SpaceMercs {
             DropoffMod = xml.SelectNodeDouble("DropoffMod", 1.0);
             Range = xml.SelectNodeInt("Range", 0);
             Silencer = xml.SelectNodeInt("Silencer", 0);
-            Accuracy = xml.SelectNodeDouble("Accuracy", 0);
-            Damage = xml.SelectNodeDouble("Damage", 0);
+            Accuracy = xml.SelectNodeDouble("Accuracy", 0d);
+            Damage = xml.SelectNodeDouble("Damage", 0d);
+            RecoilMod = xml.SelectNodeDouble("RecoilMod", 1d);
         }
     }
 }

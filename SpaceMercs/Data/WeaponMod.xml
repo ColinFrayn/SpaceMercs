@@ -12,6 +12,12 @@
     <Desc>A rifled barrel extension which increases the range of your weapon slightly.</Desc>
     <Range>1</Range>
   </WeaponMod>
+  <WeaponMod Name="Recoil Dampener" Char="E">
+    <Mass>1.0</Mass>
+    <CostMod>0.15</CostMod>
+    <Desc>A gyroscopic device which reduces the recoil of large weapons.</Desc>
+    <RecoilMod>0.8</RecoilMod>
+  </WeaponMod>
   <WeaponMod Name="Silencer" Char="~">
     <Mass>0.2</Mass>
     <CostMod>0.05</CostMod>

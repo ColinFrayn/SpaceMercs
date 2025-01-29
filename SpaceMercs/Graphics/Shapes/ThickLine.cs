@@ -1,16 +1,16 @@
 ﻿using OpenTK.Mathematics;
 
 namespace SpaceMercs.Graphics.Shapes {
-    internal class ThickLine2D {
+    internal class ThickLine {
         private const int splits = 4;
 
         private readonly GLShape? _line = null;
 
-        private ThickLine2D(GLShape? line) {
+        private ThickLine(GLShape? line) {
             _line = line;
         }
 
-        public static ThickLine2D Make_VertexPos2DCol(float fx, float fy, float tx, float ty, float thickness, Color4 col) {
+        public static ThickLine Make_VertexPos2DCol(float fx, float fy, float tx, float ty, float thickness, Color4 col) {
             List<VertexPos2DCol> vertices = new List<VertexPos2DCol>();
             Vector2 perp = new Vector2(ty-fy, fx-tx); // Perpendicular vector
 
@@ -28,7 +28,7 @@ namespace SpaceMercs.Graphics.Shapes {
             return new(line);
         }
 
-        public static ThickLine2D Make_Vertex3D(float fx, float fy, float fz, float tx, float ty, float tz, float thickness) {
+        public static ThickLine Make_Vertex3D(float fx, float fy, float fz, float tx, float ty, float tz, float thickness) {
             List<VertexPos3D> vertices = new List<VertexPos3D>();
             Vector3 perp = new Vector3(ty - fy, fx - tx, 0f); // Perpendicular vector
 

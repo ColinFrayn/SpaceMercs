@@ -161,8 +161,8 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory) {
-            float sdelay = 0f;
+        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory, float baseDelay = 0f) {
+            float sdelay = baseDelay;
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
                 foreach (ShotResult result in results) {
                     effectFactory(EffectType.Melee, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay } });
@@ -187,19 +187,22 @@ namespace SpaceMercs {
             }
         }
 
-        // Resolve multiple weapon impacts / AoE
-        public static void ResolveHits(HashSet<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+        // Resolve multiple weapon impacts / AoE. Note this is only used for primary weapon hits, not e.g. thrown grenades.
+        public static void ResolveHits(IEnumerable<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+            if (source is null) return;
             Random rand = new Random();
             foreach (IEntity tgt in hsAttacked) {
-                if (tgt.Health > 0.0 && source is not null) {
+                if (tgt.Health > 0.0) {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     float xshift = (float)(rand.NextDouble() - 0.5d) / 3f;
-                    if (TotalDam > 0) {
-                        effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                    }
-                    else {
-                        effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+                    if (Math.Abs(TotalDam) > 0.1d) {
+                        if (TotalDam > 0d) {
+                            effectFactory(EffectType.Damage, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                        }
+                        else {
+                            effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+                        }
                     }
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
                     if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
@@ -212,7 +215,7 @@ namespace SpaceMercs {
                     }
                     // Add weapon experience if shot was with a weapon and from a soldier
                     if (source is Soldier s && wp != null && tgt is not null) {
-                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count;
+                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count();
                         s.AddWeaponExperience(wp, exp, showMessage);
                     }
                 }
