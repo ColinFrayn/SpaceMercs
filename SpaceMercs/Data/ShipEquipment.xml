@@ -154,7 +154,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Chameleon Device">
     <Cost>1800</Cost>
-    <Defence>3</Defence>
+    <Defence>2</Defence>
     <Power>15</Power>
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
@@ -170,7 +170,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Cloaking Device">
     <Cost>3500</Cost>
-    <Defence>5</Defence>
+    <Defence>4</Defence>
     <Power>20</Power>
     <Size>M</Size>
     <Race>Elithiri</Race>
@@ -183,7 +183,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Targetting AI">
     <Cost>75</Cost>
-    <Attack>3</Attack>
+    <Attack>2</Attack>
     <Power>3</Power>
     <Size>S</Size>
     <Desc>An AI subsystem that increases Ship attack power.</Desc>
@@ -194,7 +194,7 @@
   <ShipEquipment Name="Fission Core">
     <Size>C</Size>
     <Cost>20</Cost>
-    <Generate>25</Generate>
+    <Generate>30</Generate>
     <Desc>A fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>1,1</Tex>
@@ -202,7 +202,7 @@
   <ShipEquipment Name="Advanced Fission Core">
     <Size>C</Size>
     <Cost>115</Cost>
-    <Generate>35</Generate>
+    <Generate>40</Generate>
     <Desc>An advanced fission-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
@@ -217,8 +217,8 @@
   <ShipEquipment Name="Fusion Core">
     <Size>C</Size>
     <Cost>330</Cost>
-    <Generate>50</Generate>
-    <Desc>A fusion-based power cor.e</Desc>
+    <Generate>55</Generate>
+    <Desc>A fusion-based power core.</Desc>
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
     <Requirements>
@@ -253,8 +253,8 @@
     <Tex>5,1</Tex>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>40</MinPop>
-      <CashCost>40</CashCost>
+      <MinPop>50</MinPop>
+      <CashCost>80</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -268,8 +268,8 @@
     <Tex>6,1</Tex>
     <Requirements>
       <MinLevel>12</MinLevel>
-      <MinPop>50</MinPop>
-      <CashCost>50</CashCost>
+      <MinPop>60</MinPop>
+      <CashCost>150</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>

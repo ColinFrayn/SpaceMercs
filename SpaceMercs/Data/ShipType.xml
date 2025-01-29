@@ -12,7 +12,7 @@
   </ShipType>
   <ShipType Name="Transport">
     <AKA>Lynx</AKA>
-    <Small>4</Small>
+    <Small>5</Small>
     <Medium>1</Medium>
     <Large>0</Large>
     <Weapon>1</Weapon>
@@ -26,8 +26,9 @@
     <Large>1</Large>
     <Weapon>1</Weapon>
     <Capacity>500</Capacity>
+    <Armour>5</Armour>
     <Cost>2500</Cost>
-    <Desc>A small-medium transport ship</Desc>
+    <Desc>A modest-sized transport ship for the aspiring trader.</Desc>
   </ShipType>
   <ShipType Name="Medium Freighter">
     <AKA>Cougar</AKA>
@@ -36,8 +37,9 @@
     <Large>2</Large>
     <Weapon>2</Weapon>
     <Capacity>1000</Capacity>
+    <Armour>10</Armour>
     <Cost>10500</Cost>
-    <Desc>A mid-sized transport ship ship</Desc>
+    <Desc>A mid-sized transport ship, adequate for most needs.</Desc>
   </ShipType>
   <ShipType Name="Heavy Freighter">
     <AKA>Panther</AKA>
@@ -45,9 +47,10 @@
     <Medium>5</Medium>
     <Large>3</Large>
     <Weapon>2</Weapon>
+    <Armour>15</Armour>
     <Capacity>2000</Capacity>
     <Cost>35000</Cost>
-    <Desc>The largest transport ship</Desc>
+    <Desc>The largest transport ship with a vast hold for all the cargo you could ever need.</Desc>
   </ShipType>
   <ShipType Name="Corvette">
     <Small>4</Small>
@@ -55,60 +58,66 @@
     <Large>0</Large>
     <Weapon>2</Weapon>
     <Cost>700</Cost>
+    <Armour>10</Armour>
     <Capacity>100</Capacity>
     <Desc>A small, lightly-armed military support ship</Desc>
   </ShipType>
   <ShipType Name="Light Cruiser">
     <AKA>Leopard</AKA>
-    <Small>6</Small>
+    <Small>5</Small>
     <Medium>3</Medium>
     <Large>1</Large>
     <Weapon>2</Weapon>
     <Cost>3200</Cost>
-    <Capacity>300</Capacity>
-    <Armour>1</Armour>
-    <Desc>A small military ship</Desc>
+    <Capacity>250</Capacity>
+    <Armour>15</Armour>
+    <Attack>1</Attack>
+    <Desc>A modest-sized military ship</Desc>
   </ShipType>
   <ShipType Name="Medium Cruiser">
     <AKA>Tiger</AKA>
     <Small>6</Small>
-    <Medium>4</Medium>
-    <Large>2</Large>
+    <Medium>3</Medium>
+    <Large>1</Large>
     <Weapon>3</Weapon>
     <Cost>12500</Cost>
-    <Capacity>500</Capacity>
-    <Armour>2</Armour>
+    <Capacity>400</Capacity>
+    <Armour>20</Armour>
+    <Attack>2</Attack>
     <Desc>A medium-sized military ship</Desc>
   </ShipType>
   <ShipType Name="Heavy Cruiser">
     <AKA>Lion</AKA>
-    <Small>7</Small>
+    <Small>6</Small>
     <Medium>4</Medium>
-    <Large>2</Large>
+    <Large>1</Large>
     <Weapon>4</Weapon>
     <Cost>40000</Cost>
-    <Capacity>1000</Capacity>
-    <Armour>3</Armour>
+    <Capacity>600</Capacity>
+    <Armour>25</Armour>
+    <Attack>3</Attack>
     <Desc>A large military ship</Desc>
   </ShipType>
   <ShipType Name="Flying Saucer">
-    <Small>5</Small>
+    <Small>4</Small>
     <Medium>2</Medium>
-    <Large>1</Large>
+    <Large>0</Large>
     <Weapon>1</Weapon>
-    <Cost>2200</Cost>
+    <Cost>2100</Cost>
     <Capacity>150</Capacity>
     <Race>Grey</Race>
+    <Attack>1</Attack>
     <Desc>A small exploration ship, built by the Grey Race</Desc>
   </ShipType>
   <ShipType Name="Bruiser">
     <Small>5</Small>
     <Medium>2</Medium>
-    <Large>1</Large>
+    <Large>0</Large>
     <Weapon>2</Weapon>
     <Cost>3000</Cost>
     <Capacity>150</Capacity>
-    <Armour>2</Armour>
+    <Armour>15</Armour>
+    <Attack>2</Attack>
     <Race>Ogrish</Race>
     <Desc>A small military ship with heavy armour</Desc>
   </ShipType>
@@ -120,7 +129,7 @@
     <Cost>24000</Cost>
     <Capacity>950</Capacity>
     <Race>Gokan</Race>
-    <Armour>2</Armour>
+    <Armour>15</Armour>
     <Desc>A medium-sized, heavily armoured transport ship</Desc>
   </ShipType>
 </Data>

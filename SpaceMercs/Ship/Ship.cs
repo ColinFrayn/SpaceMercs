@@ -200,9 +200,9 @@ namespace SpaceMercs {
                 strength *= (RepairRate + 10.0) / 10.0;  // +10% for each repair tick
                 strength *= (Armour + 20.0) / 20.0; // +5% for each armour point
                 strength += (Shield * MaxShield * 1.5); // Shields are more valuable than hull as they regen automatically
-                strength += Defence * 25.0;
+                strength *= (Defence + 20d) / 20d;
                 foreach (ShipWeapon sw in AllWeapons) {
-                    strength += (sw.Attack + Attack) * sw.Range / (250.0 * sw.Rate);
+                    strength += (sw.Attack + Attack) * sw.Range / (150.0 * sw.Rate);
                 }
                 return strength;
             }
@@ -681,7 +681,7 @@ namespace SpaceMercs {
             sh.Name = "Enemy Ship";
 
             // Set up equipment (we only care about weapons, equipment, armour, engine)
-            double dCash = (Math.Pow(1.5,dDiff) * 40.0) + (sh.Type.MaxHull * dDiff * 4.0) + 20.0;
+            double dCash = ((Math.Pow(1.5d,dDiff) * 40d) + (sh.Type.MaxHull * dDiff * 4d) + 20d) / 5d;
             ShipEngine? seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, rc, dCash / 5.0, rand) as ShipEngine;
             if (minDrive != null && (seng == null || seng.Range < minDrive.Range)) seng = minDrive;
             if (seng != null) sh.SetEngine(seng);
@@ -690,28 +690,32 @@ namespace SpaceMercs {
             for (int iRoomID = 0; iRoomID < sh.Type.Rooms.Count; iRoomID++) {
                 ShipRoomDesign rd = sh.Type.Rooms[iRoomID];
                 if (rd.Size == ShipEquipment.RoomSize.Weapon) {
-                    double dCashToSpend = dCash / 5.0;
                     int iTries = 0;
                     do {
-                        ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCashToSpend, rand);
-                        if (se is null) {
-                            if (iTries++ > 5) dCashToSpend *= 1.5; // If we didn't get a weapon after a few tries then allow us to spend more until we get one.
-                        }
+                        ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCash * ((double)iTries + 10d) / 10d, rand);
+                        if (se is null) iTries++;
                         else {
                             sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
                             bIsArmed = true;
                         }
                     } while (!bIsArmed); // Ensure that the ship has at least one weapon
                 }
-                else if (rd.Size == ShipEquipment.RoomSize.Small || rd.Size == ShipEquipment.RoomSize.Medium || rd.Size == ShipEquipment.RoomSize.Large) {
-                    ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEquipment, rd.Size, rc, dCash / 5.0, rand);
-                    if (se is not null) {
-                        sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
-                    }
+                // Fill in some of the other rooms to make the ship look better
+                else if (rd.Size == ShipEquipment.RoomSize.Small && rand.NextDouble() > 0.2) {
+                    ShipEquipment? se = StaticData.GetShipEquipmentByName("Cabin");
+                    sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
+                }
+                else if (rd.Size == ShipEquipment.RoomSize.Medium && rand.NextDouble() > 0.3) {
+                    ShipEquipment? se = StaticData.GetShipEquipmentByName("Bunk Room");
+                    sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
+                }
+                else if (rd.Size == ShipEquipment.RoomSize.Large && rand.NextDouble() > 0.4) {
+                    ShipEquipment? se = StaticData.GetShipEquipmentByName("Large Bunk Room");
+                    sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
                 }
             }
-            if (dDiff > 2) {
-                ShipEquipment? arm = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Armour, rc, dCash / 5.0, rand);
+            if (dDiff + (rand.NextDouble() * 3d) > 5d) {
+                ShipEquipment? arm = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Armour, rc, dCash, rand);
                 if (arm is ShipArmour sArm) {
                     sh.ArmourType = sArm;
                 }
@@ -725,7 +729,7 @@ namespace SpaceMercs {
         // Handle combat
         public void InitialiseForBattle() {
             MaxShield = 0;
-            Attack = 0;
+            Attack = Type.Attack;
             Defence = ArmourType?.Defence ?? 0; // Armour that offers defensive benefits e.g. chameleon plating
             WeaponRange = 0d;
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
@@ -743,16 +747,17 @@ namespace SpaceMercs {
             if (CanRepair) RepairHull(); // Hull repair is quick enough that it can fully repair ships between battles
         }
         public double DamageShip(double dmg) {
-            if (dmg <= 0.0) return 0.0;
-            if (Shield > 0.0) {
+            if (dmg <= 0d) return 0d;
+            if (Shield > 0d) {
                 if (Shield >= dmg) {
                     Shield -= dmg;
-                    return 0.0;
+                    return 0d;
                 }
+                Shield = 0d;
                 dmg -= Shield;
             }
-            dmg *= (double)(100 - Armour) / 100.0; // Ship armour is a %age reduction
-            if (dmg <= 0.0) return 0.0;
+            dmg *= (double)(100 - Armour) / 100d; // Ship armour is a %age reduction
+            if (dmg <= 0d) return 0d;
             Hull -= dmg;
             return dmg;
         }
@@ -798,6 +803,18 @@ namespace SpaceMercs {
             Value *= HullFract * Const.ShipRepairCostScale;
 
             return Value;
+        }
+
+        // Can we build more than one of these?
+        public bool CanBuildAnother(ShipEquipment se) {
+            foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                if (tp.Item2 && tp.Item1.Size != ShipEquipment.RoomSize.Weapon) {
+                    if (tp.Item1.Shield > 0 && se.Shield > 0) return false; // Shield generators
+                    if (tp.Item1.Attack > 0 && se.Attack > 0) return false; // Targetting AI systems
+                    if (tp.Item1.Defence > 0 && se.Defence > 0) return false; // Cloaking system
+                }
+            }
+            return true;
         }
 
         // Fabrication stuff

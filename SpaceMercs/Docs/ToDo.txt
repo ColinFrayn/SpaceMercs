@@ -2,8 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Test space combat freq. and diff
-- Test at lower levels
+Test space combat enemy ship randomisation
 
 Test WeaponMods
 

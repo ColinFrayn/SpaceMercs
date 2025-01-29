@@ -5509,23 +5509,22 @@
  </Soldiers>
 <Ship Type="Light Cruiser">
  <Name>Unnamed Ship</Name>
- <Hull>38</Hull>
+ <Hull>36</Hull>
  <Shield>0</Shield>
  <Armour>Reinforced Plating</Armour>
- <Seed>407556</Seed>
+ <Seed>47523</Seed>
  <Eqp ID="0" Active="True">Advanced Fusion Core</Eqp>
- <Eqp ID="13" Active="True">SuperLight Drive</Eqp>
- <Eqp ID="8" Active="True">Bunk Room</Eqp>
- <Eqp ID="3" Active="False">Surface Scanner</Eqp>
- <Eqp ID="4" Active="True">Targetting AI</Eqp>
- <Eqp ID="5" Active="True">Armoury</Eqp>
- <Eqp ID="6" Active="True">Workshop</Eqp>
- <Eqp ID="1" Active="True">Medbay</Eqp>
- <Eqp ID="9" Active="True">Engineering Bay</Eqp>
  <Eqp ID="11" Active="True">Proton Gun</Eqp>
- <Eqp ID="12" Active="True">Rail Gun</Eqp>
- <Eqp ID="7" Active="True">Auto Repair</Eqp>
- <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="12" Active="True">SuperLight Drive</Eqp>
+ <Eqp ID="8" Active="True">Auto Repair</Eqp>
+ <Eqp ID="5" Active="True">Workshop</Eqp>
+ <Eqp ID="6" Active="True">Armoury</Eqp>
+ <Eqp ID="3" Active="True">Targetting AI</Eqp>
+ <Eqp ID="4" Active="True">Bunk Room</Eqp>
+ <Eqp ID="7" Active="True">Engineering Bay</Eqp>
+ <Eqp ID="10" Active="True">Proton Gun</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Surface Scanner</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>

@@ -80,7 +80,7 @@
   <ShipArmour Name="Chameleon Plating">
     <Cost>2750</Cost>
     <BaseArmour>15</BaseArmour>
-    <Defence>3</Defence>
+    <Defence>2</Defence>
     <Desc>Chameleon plating that helps camouflage the ship</Desc>
     <Avail>MRE</Avail>
     <Tex>7,3</Tex>

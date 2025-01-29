@@ -77,7 +77,7 @@
   <ShipWeapon Name="Plasma Cannon">
     <Cost>600</Cost>
     <Power>4</Power>
-    <Attack>5</Attack>
+    <Attack>6</Attack>
     <Range>8000</Range>
     <Rate>1.5</Rate>
     <Desc>A plasma cannon</Desc>
@@ -95,7 +95,7 @@
   <ShipWeapon Name="Antimatter Cannon">
     <Cost>1400</Cost>
     <Power>6</Power>
-    <Attack>6</Attack>
+    <Attack>8</Attack>
     <Range>9000</Range>
     <Rate>1.4</Rate>
     <Desc>An antimatter cannon</Desc>

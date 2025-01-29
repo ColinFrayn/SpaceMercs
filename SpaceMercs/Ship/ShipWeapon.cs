@@ -12,12 +12,14 @@ namespace SpaceMercs {
         }
 
         public double FireWeapon(Ship source, Ship? target, Random rand) {
-            if (target is null) return 0.0;
+            if (target is null) return 0d;
             int attackScore = source.Attack + Attack;
             int defenceScore = target.Defence;
-            double damage = (rand.NextDouble() * attackScore) - (rand.NextDouble() * defenceScore);
-            Cooldown = Rate + (rand.NextDouble() * 0.1); // Reset cooldown, plus some randomness
-            if (damage < 0.0) damage = 0.0;
+            double hit = (rand.NextDouble() * attackScore) - (rand.NextDouble() * defenceScore);
+            Cooldown = Rate + (rand.NextDouble() * 0.1d); // Reset cooldown, plus some randomness
+            if (hit <= 0d) return 0d;
+            double damage = (1d + rand.NextDouble()) * Attack / 2d;
+            if (damage <= 0.0) return 0d;
             return target.DamageShip(damage);
         }
     }

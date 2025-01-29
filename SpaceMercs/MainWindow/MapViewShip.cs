@@ -418,6 +418,9 @@ namespace SpaceMercs.MainWindow {
                 // Is it the right size?
                 if (se.Size != roomSize) continue;
 
+                // Already got one / unique
+                if (!PlayerTeam.PlayerShip.CanBuildAnother(se)) continue;
+                
                 // Can we afford it?
                 bool bAfford = true;
                 if (PlayerTeam.PlayerShip.CostToBuildEquipment(se) > PlayerTeam.Cash) bAfford = false;

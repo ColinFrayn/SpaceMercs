@@ -23,6 +23,7 @@ namespace SpaceMercs {
         public int EngineRoomID { get; private set; } = -1;
         public int PowerCoreRoomID { get; private set; } = -1;
         public Race? RequiredRace { get; private set; }
+        public int Attack { get; private set; }
 
         // Autogen stuff
         public int Seed { get; private set; }
@@ -90,6 +91,7 @@ namespace SpaceMercs {
             Large = xml.SelectNodeInt("Large");
             Weapon = xml.SelectNodeInt("Weapon");
             Capacity = xml.SelectNodeInt("Capacity");
+            Attack = xml.SelectNodeInt("Attack", 0);
             Description = xml.SelectNodeText("Desc");
             Fillers = new List<Point>();
             Armour = xml.SelectNodeInt("Armour",0);
@@ -177,13 +179,22 @@ namespace SpaceMercs {
 
                     // Now shuffle in X towards the centre
                     do {
-                        int x2 = x;
                         if (x == 100) break;
+                        int x2 = x;
                         if (x > 100) x2--;
                         else x2++;
                         if (!CanPlaceRoom(sz, x2, y, bRotate)) break;
                         x = x2;
                     } while (x != 100);
+                    // Now shuffle in Y towards the centre
+                    do {
+                        if (y >= 99 && y <= 101) break;
+                        int y2 = y;
+                        if (y > 101) y2--;
+                        else y2++;
+                        if (!CanPlaceRoom(sz, x, y2, bRotate)) break;
+                        y = y2;
+                    } while (y < 99 || y > 101);
 
                     // Now place the rooms
                     PlaceRoom(sz, x, y, bRotate, true);
@@ -333,6 +344,9 @@ namespace SpaceMercs {
         public static ShipType SetupRandomShipType(double dDiff, int seed) {
             Random rand = new Random(seed);
             ShipType tp = new ShipType(seed, dDiff);
+
+            tp.Attack = (int)(((1d + rand.NextDouble()) * dDiff ) / 6d);
+            tp.Armour = (int)dDiff;
             int size = 1;
             while (rand.NextDouble() > (1d + ((double)size / 20d) - (Math.Pow(dDiff,0.6) / 5d))) size++;
             size = 2 + (int)((rand.NextDouble() + 1d) * (double)size * 4d);
@@ -344,9 +358,9 @@ namespace SpaceMercs {
                 if (r == 2) { tp.Large++; size -= 10; }
             }
             tp.Weapon = 1;
-            if (dDiff > 3.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
-            if (dDiff > 6.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
-            if (dDiff > 9.0 + (rand.NextDouble() * 2.0)) tp.Weapon++;
+            if (dDiff > 3.0 && rand.NextDouble() * dDiff > 3) tp.Weapon++;
+            if (dDiff > 6.0 && rand.NextDouble() * dDiff > 6) tp.Weapon++;
+            if (dDiff > 9.0 && rand.NextDouble() * dDiff > 9) tp.Weapon++;
             tp.SetupLayout();
 
             return tp;
