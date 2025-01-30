@@ -698,7 +698,14 @@
   <WeaponType Name="Club">
     <Speed>12</Speed>
     <Range>1</Range>
-    <Damage>4+4</Damage>
+    <Damage>4+3</Damage>
+    <Sound>Strike</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Spiky Club">
+    <Speed>14</Speed>
+    <Range>1</Range>
+    <Damage>4+5</Damage>
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>

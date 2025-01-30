@@ -1,10 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SharpFont.Cache;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Diagnostics;
-using System.Windows.Forms;
 using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {

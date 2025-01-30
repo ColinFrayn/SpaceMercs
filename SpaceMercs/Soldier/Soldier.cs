@@ -274,14 +274,13 @@ namespace SpaceMercs {
             CurrentLevel.KillSoldier(this);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
-            // Utils.HitToMod(hit); // Damage modifier for quality of hit
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
+            double hmod = Attack * Const.SoldierAttackDamageScale; // Increasing damage bonus per attack point (includes weapon skill etc.)
             if (EquippedWeapon == null) {
-                double dam = (rnd.NextDouble() + 0.5) * Const.SoldierAttackDamageScale * Attack;  // Unarmed melee does rubbish damage, in general
+                double dam = (rnd.NextDouble() + 0.5) * hmod;  // Unarmed melee does rubbish damage, in general
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double hmod = Attack * Const.SoldierAttackDamageScale; // Increasing damage bonus per attack point (includes weapon skill etc.)
                 double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {

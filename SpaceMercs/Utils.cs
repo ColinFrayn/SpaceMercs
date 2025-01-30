@@ -191,6 +191,8 @@ namespace SpaceMercs {
         public static void ResolveHits(IEnumerable<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
             if (source is null) return;
             Random rand = new Random();
+
+            // Note that this enumerable can contain duplicates
             foreach (IEntity tgt in hsAttacked) {
                 if (tgt.Health > 0.0) {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();

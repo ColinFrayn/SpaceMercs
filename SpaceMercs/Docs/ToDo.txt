@@ -22,6 +22,8 @@ Alien solar system:
 Backburner : Features
 ---------------------
 
+Free movement (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button)
+
 ShipDisplay - needs an option to "replace" a room equipment so you can see options before salvaging the existing equipment.
 
 Add in ricochet ShotType (e.g. Disc Thrower)?

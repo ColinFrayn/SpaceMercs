@@ -35,6 +35,7 @@ namespace SpaceMercs {
         }
         public double Rarity { get { return Type.Rarity * Math.Pow(Const.EquipmentLevelRarityScale, Level); } }
         public double Range { get { if (Type.IsMeleeWeapon) return 1.0; return Type.Range * (1.0 + (Level * 0.05)) + (Mod is not null ? Mod.Range : 0); } }
+        public double Width { get { return Type.Width * (Range/Type.Range); } } // BEcause I want a constant opening angle
         public double UpgradeCost {
             get {
                 // Do not include the Mod cost in here

@@ -423,7 +423,7 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 if (SelectedEntity is Soldier sc && sc.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
-                    GenerateConeMap(hoverx, hovery, sc, sc.EquippedWeapon.Type.Width);
+                    GenerateConeMap(hoverx, hovery, sc);
                 }
             }
 
@@ -1261,8 +1261,8 @@ namespace SpaceMercs.MainWindow {
             double dy = mypos - (s.Y + 0.5d);
             double range = Math.Sqrt((dx * dx) + (dy * dy));
             if (range < 1d) return;
-            double d2x = dy * s.EquippedWeapon.Type.Width / range;
-            double d2y = -dx * s.EquippedWeapon.Type.Width / range;
+            double d2x = dy * s.EquippedWeapon.Width / s.EquippedWeapon.Range;
+            double d2y = -dx * s.EquippedWeapon.Width / s.EquippedWeapon.Range;
 
             Vector4 vCol = new Vector4(1f, 0f, 0f, 1f);
             prog.SetUniform("flatColour", vCol);
@@ -1480,7 +1480,7 @@ namespace SpaceMercs.MainWindow {
                 GenerateAoEMap(s.X, s.Y, s.EquippedWeapon.Type.Area);
             }
             if (s.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
-                GenerateConeMap(s.X, s.Y, s, s.EquippedWeapon.Type.Width);
+                GenerateConeMap(s.X, s.Y, s);
             }
         }
         private void SelectedSoldierUseItems(GUIIconButton sender) {
@@ -1693,21 +1693,24 @@ namespace SpaceMercs.MainWindow {
                 }
             }
         }
-        private void GenerateConeMap(int px, int py, Soldier s, double width) {
+        private void GenerateConeMap(int px, int py, Soldier s) {
+            AoETiles.Clear();
+
+            if (s.EquippedWeapon is null) return;
+
             // Range of squares to check
+            double width = s.EquippedWeapon.Width;
             int startx = (int)Math.Max(Math.Min(s.X, px - width) - 1, 0);
             int starty = (int)Math.Max(Math.Min(s.Y, py - width) - 1, 0);
             int endx = (int)Math.Min(Math.Max(s.X, px + width) + 1, CurrentLevel.Width - 1);
             int endy = (int)Math.Min(Math.Max(s.Y, py + width) + 1, CurrentLevel.Height - 1);
-
-            AoETiles.Clear();
 
             // Get cone angle
             double mxpos = MXPos;
             double mypos = MYPos;
             double range = Math.Max(0.01, Math.Sqrt((s.X + 0.5d - mxpos) * (s.X + 0.5d - mxpos) + (s.Y + 0.5d - mypos) * (s.Y + 0.5d - mypos)));
             double baseAng = Math.Atan2(mypos - (s.Y + 0.5d), mxpos - (s.X + 0.5d));
-            double maxAng = Math.Abs(Math.Atan2(width + 0.5, range));
+            double maxAng = Math.Abs(Math.Atan2(width + 0.5, s.EquippedWeapon.Range));
 
             for (int y = starty; y <= endy; y++) {
                 for (int x = startx; x <= endx; x++) {

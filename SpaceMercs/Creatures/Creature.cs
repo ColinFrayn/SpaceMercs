@@ -252,14 +252,14 @@ namespace SpaceMercs {
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
+            double hmod = Const.CreatureAttackDamageBaseMod + Attack * Const.CreatureAttackDamageScale;
             if (EquippedWeapon == null) {
                 double dam = rnd.NextDouble() * (Level + 5) + Level + 5;
-                dam *= Const.CreatureMeleeDamageScale * Const.CreatureAttackDamageScale;
+                dam *= Const.CreatureMeleeDamageScale * hmod;
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double hmod = Const.CreatureAttackDamageBaseMod + Attack * Const.CreatureAttackDamageScale;
-                double dam = rnd.NextDouble() * EquippedWeapon.DMod + EquippedWeapon.DBase;
+                double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
                 AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
                 foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
                     if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;

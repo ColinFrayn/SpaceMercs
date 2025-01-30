@@ -2,7 +2,7 @@
   <CreatureType Name="Ogre Scout">
     <Size>2</Size>
     <LevelRange>5,13</LevelRange>
-    <Attack>16</Attack>
+    <Attack>18</Attack>
     <Defence>10</Defence>
     <Health>22</Health>
     <Stamina>17</Stamina>
@@ -21,7 +21,7 @@
   <CreatureType Name="Ogre Warrior">
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
-    <Attack>17</Attack>
+    <Attack>19</Attack>
     <Defence>11</Defence>
     <Health>24</Health>
     <Stamina>17</Stamina>
@@ -40,7 +40,7 @@
   <CreatureType Name="Ogre Brute">
     <Size>2</Size>
     <LevelRange>6,14</LevelRange>
-    <Attack>18</Attack>
+    <Attack>20</Attack>
     <Defence>11</Defence>
     <Health>26</Health>
     <Stamina>17</Stamina>
@@ -53,13 +53,13 @@
     <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
-      <Weapon Weight="1">Club</Weapon>
+      <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Ogre Elite">
     <Size>2</Size>
     <LevelRange>7,15</LevelRange>
-    <Attack>19</Attack>
+    <Attack>21</Attack>
     <Defence>11</Defence>
     <Health>28</Health>
     <Stamina>18</Stamina>
@@ -71,15 +71,15 @@
     <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
-      <Weapon Weight="1">Club</Weapon>
+      <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Ogre Chief">
     <Size>2</Size>
     <LevelRange>8,16</LevelRange>
-    <Attack>20</Attack>
+    <Attack>25</Attack>
     <Defence>12</Defence>
-    <Health>55</Health>
+    <Health>60</Health>
     <Stamina>19</Stamina>
     <Interact/>
     <MovementCost>3.0</MovementCost>
