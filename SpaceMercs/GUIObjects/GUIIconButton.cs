@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public bool bState;
         public bool bBlend;
         private int iTexID;
-        private readonly float TX, TY, TH, TW;
+        private float TX, TY, TH, TW;
         public object? InternalData;
         public delegate void GUIIconButton_Trigger(GUIIconButton self);
         public GUIIconButton_Trigger? Trigger = null;
@@ -31,24 +31,13 @@ namespace SpaceMercs {
             bBlend = true;
             iTexID = ts.ID;
         }
-        public GUIIconButton(GameWindow parentWindow, int TextureID, float tx, float ty, float tw, float th, float x, float y, float w, float h, GUIIconButton_Trigger? trigger = null, object? dat = null) : base(parentWindow, true, 0.4f) {
-            TX = tx;
-            TY = ty;
-            TW = tw;
-            TH = th;
-            InternalData = dat;
-            ButtonWidth = w;
-            ButtonHeight = h;
-            ButtonX = x;
-            ButtonY = y;
-            Trigger = trigger;
-            bState = false;
-            bBlend = true;
-            iTexID = TextureID;
-        }
 
-        public void Updateicon(int id) {
-            iTexID = id;
+        public void UpdateIcon(TexSpecs ts) {
+            TX = ts.X;
+            TY = ts.Y;
+            TW = ts.W;
+            TH = ts.H;
+            iTexID = ts.ID;
         }
 
         // Display the button

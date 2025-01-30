@@ -7,8 +7,8 @@
     <Speed>14</Speed>
     <Shots>2</Shots>
     <Recoil>0.1</Recoil>
-    <Range Accuracy="-1" DropOff="0.8" Length="0.2" Speed="0.9">6</Range>
-    <Damage>3+2</Damage>
+    <Range Accuracy="-1" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
+    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
     <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>9</Noise>
@@ -19,16 +19,16 @@
       <Material Name="Carbon" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Quad Shotgun" Class="Shotgun">
-    <Mass>4.0</Mass>
-    <Cost>150</Cost>
+  <WeaponType Name="Triple Shotgun" Class="Shotgun">
+    <Mass>3.0</Mass>
+    <Cost>120</Cost>
     <Rarity>10</Rarity>
     <Speed>16</Speed>
-    <Shots>4</Shots>
+    <Shots>3</Shots>
     <Recoil>0.1</Recoil>
-    <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">6</Range>
-    <Damage>3+2</Damage>
-    <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
+    <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
+    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
+    <Desc>A powerful shotgun with 3 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>10</Noise>
     <Materials>
@@ -36,6 +36,33 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Carbon" Amount="1"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Quad Shotgun" Class="Shotgun">
+    <Mass>3.5</Mass>
+    <Cost>450</Cost>
+    <Rarity>14</Rarity>
+    <Speed>18</Speed>
+    <Shots>4</Shots>
+    <Recoil>0.1</Recoil>
+    <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
+    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
+    <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
+    <Sound>ShotgunAndReload</Sound>
+    <Noise>11</Noise>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>50</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Steel">2</Material>
+      <Material Name="Titanium">1</Material>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Titanium" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Pistol" Class="Pistol">
@@ -259,11 +286,11 @@
     <Cost>220</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
-    <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
+    <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">4</Range>
     <Shots>3</Shots>
     <Recoil>0.3</Recoil>
     <Delay>150</Delay>
-    <Damage>3+4</Damage>
+    <Damage Type="ConeMulti" Width="3.2">3+4</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electroshock</Sound>
@@ -290,11 +317,11 @@
     <Cost>950</Cost>
     <Rarity>14</Rarity>
     <Speed>18</Speed>
-    <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">6</Range>
+    <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">5</Range>
     <Shots>5</Shots>
     <Recoil>0.9</Recoil>
     <Delay>130</Delay>
-    <Damage>4+4</Damage>
+    <Damage Type="ConeMulti" Width="3.2">4+4</Damage>
     <Type>Electrical</Type>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>HeavyElectroshock</Sound>
@@ -649,8 +676,8 @@
     <Recoil>0.5</Recoil>
     <Race>Ogrish</Race>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>
-    <Damage>3+4</Damage>
-    <Desc>A powerful Ogrish blast gun that fires heavy slugs. Great damage up close but terrible range.</Desc>
+    <Damage Type="ConeMulti" Width="3.2">3+4</Damage>
+    <Desc>A powerful Ogrish blast gun that fires superheated slugs of metal. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>12</Noise>
     <Materials>

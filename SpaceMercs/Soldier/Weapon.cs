@@ -28,6 +28,8 @@ namespace SpaceMercs {
                 }
                 if (Type.Stable) sb.AppendLine("Stable Weapon");
                 if (Mod is not null) sb.AppendLine($"Mod: {Mod.Name}");
+                if (Type.Recharge == 1) sb.AppendLine("One shot per turn");
+                else if (Type.Recharge > 1) sb.AppendLine($"One shot per {Type.Recharge} turns");
                 return sb.ToString();
             }
         }

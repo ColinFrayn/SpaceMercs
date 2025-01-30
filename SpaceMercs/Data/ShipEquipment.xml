@@ -161,10 +161,11 @@
     <Avail>MRE</Avail>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>37</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>50</MinPop>
+      <CashCost>230</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
+      <Relations Name="Elithiri">2</Relations>
     </Requirements>
     <Tex>1,7</Tex>
   </ShipEquipment>
@@ -177,9 +178,25 @@
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Requirements>
-      <MinPop>40</MinPop>
+      <MinPop>50</MinPop>
     </Requirements>
     <Tex>2,7</Tex>
+  </ShipEquipment>
+  <ShipEquipment Name="Silent Drive">
+    <Cost>500</Cost>
+    <Power>8</Power>
+    <Conceal/>
+    <Size>M</Size>
+    <Desc>A device that helps hide the emissions of your ship's engine while travelling, reducing the risk of hostile interception.</Desc>
+    <Avail>MRE</Avail>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>80</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
+    <Tex>5,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Targetting AI">
     <Cost>75</Cost>
@@ -207,8 +224,8 @@
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
     <Requirements>
-      <MinLevel>4</MinLevel>
-      <MinPop>25</MinPop>
+      <MinLevel>2</MinLevel>
+      <MinPop>20</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -222,8 +239,8 @@
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
     <Requirements>
-      <MinLevel>6</MinLevel>
-      <MinPop>30</MinPop>
+      <MinLevel>4</MinLevel>
+      <MinPop>25</MinPop>
       <CashCost>20</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -237,23 +254,38 @@
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
     <Requirements>
-      <MinLevel>8</MinLevel>
-      <MinPop>35</MinPop>
+      <MinLevel>6</MinLevel>
+      <MinPop>40</MinPop>
       <CashCost>30</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
+  </ShipEquipment>
+  <ShipEquipment Name="Antimatter Core">
+    <Size>C</Size>
+    <Cost>1050</Cost>
+    <Generate>75</Generate>
+    <Desc>A power core based on anti-matter annihilation.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>5,1</Tex>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>50</MinPop>
+      <CashCost>80</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
-    <Cost>1150</Cost>
-    <Generate>80</Generate>
+    <Cost>1750</Cost>
+    <Generate>90</Generate>
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
-    <Tex>5,1</Tex>
+    <Tex>6,1</Tex>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>60</MinPop>
       <CashCost>80</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -261,11 +293,11 @@
   </ShipEquipment>
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
-    <Cost>1500</Cost>
-    <Generate>90</Generate>
+    <Cost>2500</Cost>
+    <Generate>100</Generate>
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
-    <Tex>6,1</Tex>
+    <Tex>7,1</Tex>
     <Requirements>
       <MinLevel>12</MinLevel>
       <MinPop>60</MinPop>

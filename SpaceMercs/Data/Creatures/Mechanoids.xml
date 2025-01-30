@@ -16,6 +16,10 @@
     <Weapons>
       <Weapon Weight="1">Laser Pistol</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Trooper">
     <LevelRange>3,18</LevelRange>
@@ -34,6 +38,10 @@
     <Weapons>
       <Weapon Weight="1">Laser Rifle</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Slasher">
     <LevelRange>3,18</LevelRange>
@@ -53,6 +61,10 @@
       <Weapon Weight="1">Power Axe</Weapon>
       <Weapon Weight="1">Powerblade</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Elite">
     <Scale>1.05</Scale>
@@ -74,6 +86,10 @@
       <Weapon Weight="1">Power Axe</Weapon>
       <Weapon Weight="2">Laser Rifle</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Heavy Tank">
     <Size>2</Size>
@@ -93,6 +109,10 @@
     <Weapons>
       <Weapon Weight="1">Heavy Laser Rifle</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Ranger">
     <LevelRange>5,22</LevelRange>
@@ -110,6 +130,10 @@
     <Weapons>
       <Weapon Weight="1">Laser Sniper Rifle</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
   <CreatureType Name="Mechanoid Heavy Tank">
     <Size>3</Size>
@@ -129,6 +153,10 @@
     <Weapons>
       <Weapon Weight="1">Laser Rifle</Weapon>
     </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
   </CreatureType>
 </Data>
 

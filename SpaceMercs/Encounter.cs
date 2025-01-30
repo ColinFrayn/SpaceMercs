@@ -40,8 +40,7 @@ namespace SpaceMercs {
             double dIntercept = rand.NextDouble() * Const.BaseEncounterScarcity / Math.Max(0.0001, Const.DEBUG_ENCOUNTER_FREQ_MOD);
 
             // If not intercepted then return
-            // If it's close then work out what the race would be first and modify by that.
-            if (dIntercept > dDanger + 4.0) return null;
+            if (dIntercept > dDanger) return null;
 
             // Work out which species we're dealing with
             Race? rc = null; // Unknown alien race
@@ -65,16 +64,18 @@ namespace SpaceMercs {
                 return null;
             }
 
-            // Increase chance of aggressive/passive encounter based on race, and potentially cancel the interception here based on the modified result.
+            // Increase chance of aggressive/passive encounter based on race
             dIntercept -= rc.Aggression;
-            if (dIntercept > dDanger) return null;
+
+            // Drive concealment makes it significantly less likely that your ship will be attacked
+            if (PlayerTeam.PlayerShip.IsConcealed) dIntercept += 3d;
 
             // Calculate the difficulty of this mission, based on the distance from home
             int iDiff = (int)((aoFrom.GetRandomMissionDifficulty(rand) * (1.0 - dFract)) + (aoTo.GetRandomMissionDifficulty(rand) * dFract));
             ShipEngine minDrive = StaticData.GetMinimumDriveByDistance(AstronomicalObject.CalculateDistance(aoFrom, aoTo)) ?? throw new Exception("Mission not reachable!");
 
-            // Check for the various intercept types:
-            if (dDanger - dIntercept < 15.0 + (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000.0 : 0.0)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive, showMessage);
+            // Was this a hostile interception or a passive one?
+            if (dIntercept > dDanger - (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000d : 15d)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive, showMessage);
             return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, showMessage);
         }
 

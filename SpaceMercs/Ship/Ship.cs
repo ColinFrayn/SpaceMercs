@@ -187,6 +187,14 @@ namespace SpaceMercs {
                 return false;
             }
         }
+        public bool IsConcealed {
+            get {
+                foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                    if (tp.Item2 && tp.Item1.Conceal) return true;
+                }
+                return false;
+            }
+        }
         public double EstimatedBountyValue {
             get {
                 double value = Type.MaxHull * Type.MaxHull;
