@@ -489,7 +489,13 @@ namespace SpaceMercs {
             CalculateMaxStats();
         }
         public static int ExperienceRequiredToReachLevel(int lev) {
-            return (int)(Const.SoldierLevelExperience * ((Math.Pow(Const.SoldierLevelExponent, lev - 2) * Const.SoldierLevelScale) - (Const.SoldierLevelScale - 1.0)));
+            if (lev < 2) return 0;
+            int crude = (int)(Const.SoldierLevelExperience * ((Math.Pow(Const.SoldierLevelExponent, lev - 2) * Const.SoldierLevelScale) - (Const.SoldierLevelScale - 1.0)));
+            int len = (int)Math.Ceiling(Math.Log10(crude));
+            int squashValue = (int)Math.Pow(10, len - 2);
+            int squashed = crude / squashValue;
+            int rounded = squashed * squashValue;
+            return rounded;
         }
         public int ExperienceRequiredToReachNextLevel() {
             return ExperienceRequiredToReachLevel(Level + 1);

@@ -2,18 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Test space combat enemy ship randomisation
+Display when weapon is recharging somehow
 
-Display icon when weapon is recharging somehow
-
-Test WeaponMods
-
-What should attack roll do for a grenade weapon?
-What should attack roll do for a Cone AoE weapon?
-
-Alien solar system:
-- Alien colonies need names
-- Alien systems need names
+Expansion of systems: Don't get large colonies in distant systems hence no more trade routes
 
 ==========================================================================================================
 
@@ -22,15 +13,18 @@ Alien solar system:
 Backburner : Features
 ---------------------
 
+What should attack skill do for a grenade weapon?
+What should attack skill do for a Cone AoE weapon?
+
 Free movement (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button)
 
 ShipDisplay - needs an option to "replace" a room equipment so you can see options before salvaging the existing equipment.
 
-Add in ricochet ShotType (e.g. Disc Thrower)?
+Alien solar system:
+- Alien colonies need names
+- Alien systems need names
 
-AoE weapons (i.e. cone starting at source)
-- Test flamethrowers
-- Can enemies use these?
+Add in ricochet ShotType (e.g. Disc Thrower)?
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
