@@ -181,7 +181,7 @@
     </Materials>
   </ArmourType>
   <ArmourType Name="Full Armour">
-    <Mass>10.0</Mass>
+    <Mass>12.0</Mass>
     <Cost>55</Cost>
     <Rarity>25</Rarity>
     <Agility>-4</Agility>
@@ -195,7 +195,7 @@
     </Materials>
   </ArmourType>
   <ArmourType Name="Shock Armour">
-    <Mass>8.0</Mass>
+    <Mass>10.0</Mass>
     <Cost>90</Cost>
     <Rarity>40</Rarity>
     <Agility>-3</Agility>
@@ -385,7 +385,7 @@
     <Attack>2</Attack>
     <BaseArmour>44</BaseArmour>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>30</MinPop>
       <CashCost>50</CashCost>
@@ -501,7 +501,7 @@
       <Material Name="Titanium" Amount="3"/>
     </Materials>
     <Requirements>
-      <MinLevel>11</MinLevel>
+      <MinLevel>12</MinLevel>
       <MinSystems>5</MinSystems>
       <MinPop>50</MinPop>
       <CashCost>160</CashCost>
@@ -528,10 +528,10 @@
       <Perception>2</Perception>
     </Utility>
     <Requirements>
-      <MinLevel>11</MinLevel>
+      <MinLevel>14</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>70</MinPop>
-      <CashCost>250</CashCost>
+      <CashCost>450</CashCost>
       <Material Name="Titanium">2</Material>
       <Material Name="Crystals">2</Material>
       <Facility>Armoury</Facility>

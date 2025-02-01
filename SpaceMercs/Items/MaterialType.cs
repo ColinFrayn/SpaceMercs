@@ -5,12 +5,12 @@ namespace SpaceMercs {
     public class MaterialType : IResearchable {
         public string Name { get; private set; }
         public double MassMod { get; private set; } // Modifier (default = 1.0)
-        public double ItemCost { get; private set; } // Modifier (default = 1.0)
         public double ArmourMod { get; private set; } // Modifier (default = 0.0)
         public double Rarity { get; private set; } // Modifier (default = 1.0)
         public bool IsScavenged { get; private set; } // Can this material only be obtained from dead creatures?
         public string Description { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
+        public double UnitCost { get; private set; } // Cost of buying one unit of this item, base, credits
         public Race? RequiredRace { get; private set; }
         public Requirements? Requirements { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
@@ -24,7 +24,7 @@ namespace SpaceMercs {
 
         public MaterialType(XmlNode xml) {
             Name = xml.GetAttributeText("Name");
-            ItemCost = xml.SelectNodeDouble("ItemCost", 1.0);
+            UnitCost = xml.SelectNodeDouble("UnitCost", 1.0);
             MassMod = xml.SelectNodeDouble("MassMod", 1.0);
             Rarity = xml.SelectNodeDouble("Rarity", 1.0);
             ArmourMod = xml.SelectNodeDouble("ArmourMod", 0.0);

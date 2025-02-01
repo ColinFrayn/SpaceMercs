@@ -65,10 +65,10 @@
   <CreatureType Name="Arachnid Queen">
     <Size>3</Size>
     <LevelRange>6,12</LevelRange>
-    <Attack>22</Attack>
+    <Attack>24</Attack>
     <Defence>14</Defence>
-    <Armour>22</Armour>
-    <Health>35</Health>
+    <Armour>24</Armour>
+    <Health>55</Health>
     <Stamina>18</Stamina>
     <BodyType>Arachnid</BodyType>
     <Col1>60, 50, 40</Col1>

@@ -161,7 +161,7 @@ namespace SpaceMercs {
                 foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc) && m.ArmourMod > 0)) {
                     if (mat2.IsScavenged || !mat2.IsArmourMaterial) continue;
                     // Is this material better (more valuable) and the cheapest such upgrade possible?
-                    if (mat2.ItemCost > Material.ItemCost && (matNew is null || mat2.ItemCost <= matNew.ItemCost)) {
+                    if (mat2.UnitCost > Material.UnitCost && (matNew is null || mat2.UnitCost <= matNew.UnitCost)) {
                         matNew = mat2;
                     }
                 }

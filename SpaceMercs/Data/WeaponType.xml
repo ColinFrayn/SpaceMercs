@@ -760,9 +760,9 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Poisonous Bite">
-    <Speed>10</Speed>
+    <Speed>11</Speed>
     <Range>1</Range>
-    <Damage>3+3</Damage>
+    <Damage>5+4</Damage>
     <Sound>Bite</Sound>
     <ItemEffect Name="Bite Poison">
       <Effect Name="Bite Poison">

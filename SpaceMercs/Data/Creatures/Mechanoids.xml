@@ -1,6 +1,6 @@
 ﻿<Data>
   <CreatureType Name="Mechanoid Grunt">
-    <LevelRange>1,15</LevelRange>
+    <LevelRange>6,15</LevelRange>
     <Attack>11</Attack>
     <Defence>9</Defence>
     <Armour>26</Armour>
@@ -20,9 +20,12 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Electronic Components</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Mechanoid Trooper">
-    <LevelRange>3,18</LevelRange>
+    <LevelRange>7,18</LevelRange>
     <Attack>12</Attack>
     <Defence>10</Defence>
     <Armour>30</Armour>
@@ -43,9 +46,13 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Titanium</Item>
+      <Item Amount="0.5">Electronic Components</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Mechanoid Slasher">
-    <LevelRange>3,18</LevelRange>
+    <LevelRange>7,18</LevelRange>
     <Attack>13</Attack>
     <Defence>10</Defence>
     <Armour>22</Armour>
@@ -66,10 +73,14 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Titanium</Item>
+      <Item Amount="0.5">Electronic Components</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Mechanoid Elite">
     <Scale>1.05</Scale>
-    <LevelRange>5,22</LevelRange>
+    <LevelRange>8,22</LevelRange>
     <Attack>13</Attack>
     <Defence>11</Defence>
     <Armour>34</Armour>
@@ -92,15 +103,19 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Titanium</Item>
+      <Item Amount="0.5">Electronic Components</Item>
+    </Scavenge>
   </CreatureType>
-  <CreatureType Name="Mechanoid Heavy Tank">
+  <CreatureType Name="Mechanoid Tank">
     <Size>2</Size>
-    <LevelRange>5,22</LevelRange>
+    <LevelRange>9,22</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
     <Armour>34</Armour>
-    <Health>18</Health>
-    <Stamina>18</Stamina>
+    <Health>20</Health>
+    <Stamina>15</Stamina>
     <MovementCost>3.0</MovementCost>
     <BodyType>Tank</BodyType>
     <Interact/>
@@ -116,9 +131,13 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="1.5">Titanium</Item>
+      <Item Amount="1.0">Electronic Components</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Mechanoid Ranger">
-    <LevelRange>5,22</LevelRange>
+    <LevelRange>9,22</LevelRange>
     <Attack>14</Attack>
     <Defence>10</Defence>
     <Armour>25</Armour>
@@ -138,16 +157,21 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Titanium</Item>
+      <Item Amount="1.0">Electronic Components</Item>
+      <Item Amount="0.5">Crystals</Item>
+    </Scavenge>
   </CreatureType>
   <CreatureType Name="Mechanoid Heavy Tank">
     <Size>3</Size>
-    <LevelRange>7,24</LevelRange>
-    <Attack>16</Attack>
+    <LevelRange>10,24</LevelRange>
+    <Attack>18</Attack>
     <Defence>11</Defence>
     <BodyType>Tank</BodyType>
     <Armour>38</Armour>
-    <Health>45</Health>
-    <Stamina>20</Stamina>
+    <Health>60</Health>
+    <Stamina>18</Stamina>
     <Interact/>
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
@@ -162,6 +186,11 @@
       <Resistance Type="Electrical" Value="-20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Scavenge>
+      <Item Amount="1.5">Titanium</Item>
+      <Item Amount="1.5">Electronic Components</Item>
+      <Item Amount="0.5">Adamantium</Item>
+    </Scavenge>
   </CreatureType>
 </Data>
 

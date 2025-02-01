@@ -6,7 +6,7 @@ namespace SpaceMercs {
         public string Name { get { return BaseType.Name; } }
         public string Description { get { return BaseType.Description; } }
         public double Mass { get { return BaseType.UnitMass; } }
-        public double Cost { get { return BaseType.ItemCost; } }
+        public double Cost { get { return BaseType.UnitCost; } }
         public MaterialType BaseType { get; private set; }
 
         public void SaveToFile(StreamWriter file) {

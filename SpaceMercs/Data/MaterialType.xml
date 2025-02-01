@@ -2,35 +2,35 @@
   <!-- Armour materials -->
   <MaterialType Name="Carbon Fibre">
     <MassMod>0.7</MassMod>
-    <ItemCost>0.75</ItemCost>
+    <UnitCost>0.75</UnitCost>
     <ArmourMod>0.65</ArmourMod>
     <Rarity>0.9</Rarity>
     <Desc>Carbon fibre is cheap, light and plentiful, but doesn't offer much protection.</Desc>
   </MaterialType>
   <MaterialType Name="Steel">
     <MassMod>1.0</MassMod>
-    <ItemCost>1</ItemCost>
+    <UnitCost>1</UnitCost>
     <ArmourMod>1</ArmourMod>
     <Rarity>1.0</Rarity>
     <Desc>Steel is a cheap and fairly heavy metal.</Desc>
   </MaterialType>
   <MaterialType Name="Kevlar">
     <MassMod>0.9</MassMod>
-    <ItemCost>2.0</ItemCost>
+    <UnitCost>2.0</UnitCost>
     <ArmourMod>1.1</ArmourMod>
     <Rarity>0.5</Rarity>
     <Desc>Kevlar is a light and highly-protective material often used for armour.</Desc>
   </MaterialType>
   <MaterialType Name="Composite">
     <MassMod>0.9</MassMod>
-    <ItemCost>3.5</ItemCost>
+    <UnitCost>4.5</UnitCost>
     <ArmourMod>1.4</ArmourMod>
     <Rarity>0.25</Rarity>
     <Desc>Composite materials made from metals, fabrics and precision alloys.</Desc>
   </MaterialType>
   <MaterialType Name="Metasteel">
     <MassMod>1.0</MassMod>
-    <ItemCost>7.0</ItemCost>
+    <UnitCost>15.0</UnitCost>
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.08</Rarity>
     <Requirements>
@@ -45,7 +45,7 @@
   </MaterialType>
   <MaterialType Name="Nanomesh">
     <MassMod>0.7</MassMod>
-    <ItemCost>8.0</ItemCost>
+    <UnitCost>25.0</UnitCost>
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.03</Rarity>
     <Requirements>
@@ -60,7 +60,7 @@
   </MaterialType>
   <MaterialType Name="Mithril">
     <MassMod>0.85</MassMod>
-    <ItemCost>12.0</ItemCost>
+    <UnitCost>35.0</UnitCost>
     <ArmourMod>1.9</ArmourMod>
     <Rarity>0.01</Rarity>
     <Requirements>
@@ -76,7 +76,7 @@
   </MaterialType>
   <MaterialType Name="Adamantium">
     <MassMod>1.2</MassMod>
-    <ItemCost>20.0</ItemCost>
+    <UnitCost>75.0</UnitCost>
     <ArmourMod>2.4</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
@@ -91,7 +91,7 @@
   </MaterialType>
   <MaterialType Name="Etherealite">
     <MassMod>0.35</MassMod>
-    <ItemCost>18.0</ItemCost>
+    <UnitCost>80.0</UnitCost>
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.005</Rarity>
     <Requirements>
@@ -106,7 +106,7 @@
   </MaterialType>
   <MaterialType Name="Ultramesh">
     <MassMod>0.6</MassMod>
-    <ItemCost>18.0</ItemCost>
+    <UnitCost>85.0</UnitCost>
     <ArmourMod>2.1</ArmourMod>
     <Rarity>0.004</Rarity>
     <Requirements>
@@ -121,91 +121,91 @@
   </MaterialType>
   <!-- Non-armour materials -->
   <MaterialType Name="Silicates">
-    <ItemCost>1.5</ItemCost>
+    <UnitCost>1.5</UnitCost>
     <Rarity>0.1</Rarity>
     <Desc>Silicates</Desc>
     <UnitMass>0.5</UnitMass>
-  </MaterialType>
+</MaterialType>
   <MaterialType Name="Aluminium">
-    <ItemCost>1.5</ItemCost>
+    <UnitCost>1.5</UnitCost>
     <Rarity>0.4</Rarity>
     <UnitMass>0.5</UnitMass>
     <Desc>Aluminium</Desc>
-  </MaterialType>
+</MaterialType>
   <MaterialType Name="Tungsten">
-    <ItemCost>5.0</ItemCost>
+    <UnitCost>5.0</UnitCost>
     <Rarity>0.2</Rarity>
     <UnitMass>0.1</UnitMass>
     <Desc>Tungsten</Desc>
   </MaterialType>
   <MaterialType Name="Uranium">
-    <ItemCost>10.0</ItemCost>
+    <UnitCost>10.0</UnitCost>
     <Rarity>0.1</Rarity>
     <UnitMass>0.001</UnitMass>
     <Desc>Uranium</Desc>
   </MaterialType>
   <MaterialType Name="Water">
-    <ItemCost>0.1</ItemCost>
+    <UnitCost>0.1</UnitCost>
     <Rarity>0.5</Rarity>
     <Desc>Water</Desc>
   </MaterialType>
   <MaterialType Name="Carbon">
-    <ItemCost>0.5</ItemCost>
+    <UnitCost>0.5</UnitCost>
     <Rarity>0.5</Rarity>
     <Desc>Carbon</Desc>
   </MaterialType>
   <MaterialType Name="Rare Earth Metals">
-    <ItemCost>8.0</ItemCost>
+    <UnitCost>8.0</UnitCost>
     <Desc>Rare Earth Metals</Desc>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Electronic Components">
-    <ItemCost>20.0</ItemCost>
+    <UnitCost>20.0</UnitCost>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Gold">
-    <ItemCost>40.0</ItemCost>
+    <UnitCost>40.0</UnitCost>
     <Rarity>0.02</Rarity>
     <Desc>Gold</Desc>
     <UnitMass>0.01</UnitMass>
   </MaterialType>
   <MaterialType Name="Copper">
-    <ItemCost>3.0</ItemCost>
+    <UnitCost>3.0</UnitCost>
     <Rarity>0.7</Rarity>
     <Desc>Copper</Desc>
     <UnitMass>0.5</UnitMass>
   </MaterialType>
   <MaterialType Name="Fabric">
-    <ItemCost>0.2</ItemCost>
+    <UnitCost>0.2</UnitCost>
     <Rarity>1.0</Rarity>
     <Desc>Fabric</Desc>
   </MaterialType>
   <MaterialType Name="Plastic">
-    <ItemCost>0.4</ItemCost>
+    <UnitCost>0.4</UnitCost>
     <Rarity>0.7</Rarity>
     <Desc>Plastic</Desc>
   </MaterialType>
   <MaterialType Name="Rubber">
-    <ItemCost>0.75</ItemCost>
+    <UnitCost>0.75</UnitCost>
     <Rarity>0.9</Rarity>
     <Desc>Rubber</Desc>
   </MaterialType>
   <MaterialType Name="Crystals">
-    <ItemCost>20.0</ItemCost>
+    <UnitCost>20.0</UnitCost>
     <Rarity>0.1</Rarity>
     <Desc>Energy Crystals</Desc>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Titanium">
-    <ItemCost>15.0</ItemCost>
+    <UnitCost>15.0</UnitCost>
     <Rarity>0.15</Rarity>
     <Desc>Titanium</Desc>
     <UnitMass>0.8</UnitMass>
   </MaterialType>
   <MaterialType Name="Industrial Chemicals">
-    <ItemCost>12.0</ItemCost>
+    <UnitCost>12.0</UnitCost>
     <Rarity>0.2</Rarity>
     <Desc>Industrial chemicals</Desc>
     <UnitMass>0.1</UnitMass>
@@ -213,7 +213,7 @@
   <!-- Scavenged materials -->
   <MaterialType Name="Chitin">
     <MassMod>1.3</MassMod>
-    <ItemCost>1.5</ItemCost>
+    <UnitCost>7.5</UnitCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.05</Rarity>
     <Scavenged/>
@@ -224,7 +224,7 @@
   </MaterialType>
   <MaterialType Name="Heavy Chitin">
     <MassMod>1.6</MassMod>
-    <ItemCost>1.9</ItemCost>
+    <UnitCost>16.5</UnitCost>
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.02</Rarity>
     <Scavenged/>
@@ -235,7 +235,7 @@
   </MaterialType>
   <MaterialType Name="Vulcanin">
     <MassMod>1.1</MassMod>
-    <ItemCost>11</ItemCost>
+    <UnitCost>55.0</UnitCost>
     <ArmourMod>1.8</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -246,7 +246,7 @@
   </MaterialType>
   <MaterialType Name="Xenolite">
     <MassMod>1.1</MassMod>
-    <ItemCost>11</ItemCost>
+    <UnitCost>58.0</UnitCost>
     <ArmourMod>1.8</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -257,7 +257,7 @@
   </MaterialType>
   <MaterialType Name="Voidskin">
     <MassMod>0.8</MassMod>
-    <ItemCost>10</ItemCost>
+    <UnitCost>50.0</UnitCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -270,7 +270,7 @@
   </MaterialType>
   <MaterialType Name="Shadowskin">
     <MassMod>0.75</MassMod>
-    <ItemCost>10</ItemCost>
+    <UnitCost>50.0</UnitCost>
     <ArmourMod>1.2</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -284,7 +284,7 @@
   </MaterialType>
   <MaterialType Name="Nanosilk">
     <MassMod>0.6</MassMod>
-    <ItemCost>1.5</ItemCost>
+    <UnitCost>30.0</UnitCost>
     <ArmourMod>1.0</ArmourMod>
     <Rarity>0.003</Rarity>
     <Scavenged/>
@@ -292,28 +292,28 @@
   </MaterialType>
   <!-- Other scavenged materials which are components for constructing items -->
   <MaterialType Name="Acid Blood">
-    <ItemCost>5.0</ItemCost>
+    <UnitCost>5.0</UnitCost>
     <Rarity>0.002</Rarity>
     <UnitMass>0.4</UnitMass>
     <Scavenged/>
     <Desc>Acidic blood taken from the corpse of an alien beast.</Desc>
   </MaterialType>
   <MaterialType Name="Poison Gland">
-    <ItemCost>3.0</ItemCost>
+    <UnitCost>3.0</UnitCost>
     <Rarity>0.01</Rarity>
     <UnitMass>0.5</UnitMass>
     <Scavenged/>
     <Desc>The poison gland from an alien creature.</Desc>
   </MaterialType>
   <MaterialType Name="Slime Egg">
-    <ItemCost>2.0</ItemCost>
+    <UnitCost>2.0</UnitCost>
     <Rarity>0.02</Rarity>
     <UnitMass>0.5</UnitMass>
     <Scavenged/>
     <Desc>The slime-covered egg from a slime creature.</Desc>
   </MaterialType>
   <MaterialType Name="Incendiary Bulb">
-    <ItemCost>2.5</ItemCost>
+    <UnitCost>2.5</UnitCost>
     <Rarity>0.01</Rarity>
     <UnitMass>1.0</UnitMass>
     <Scavenged/>
