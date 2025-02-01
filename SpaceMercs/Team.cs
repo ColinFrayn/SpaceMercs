@@ -218,7 +218,7 @@ namespace SpaceMercs {
                 if (newResearchable.Any()) {
                     string msg = $"Collaboration with {rc.Name} scientists have made available new technological advances.\n";
                     if (newResearchable.OfType<BaseItemType>().Any()) {
-                        msg += $"The following new item research is now available:\n{String.Join("\n", newResearchable.OfType<BaseItemType>().Select(it => it.Name))}";
+                        msg += $"The following new item research is now available:\n{String.Join("\n", newResearchable.OfType<BaseItemType>().Select(it => it.Name))}\n";
                     }
                     if (newResearchable.OfType<MaterialType>().Any()) {
                         msg += $"The following new material research is now available:\n{String.Join("\n", newResearchable.OfType<MaterialType>().Select(it => it.Name))}";

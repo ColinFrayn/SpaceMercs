@@ -2,11 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Creature weapon gated by level
-
 Display when weapon is recharging somehow
 
-Expansion of systems: Don't get large colonies in distant systems hence no more trade routes
+Expansion of systems: Work out how to get large colonies in distant systems -> more trade routes
+- Maybe have fewer moon colonies?
 
 ==========================================================================================================
 

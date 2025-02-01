@@ -189,10 +189,12 @@ namespace SpaceMercs {
         private static readonly Dictionary<WallType, TexDetails> dFloorTextures = new Dictionary<WallType, TexDetails>();
         public static TexDetails GenerateFloorTexture(MissionLevel lev) {
             WallType wt = WallTypeFromMission(lev.ParentMission);
-            if (!dFloorTextures.ContainsKey(wt)) {
-                dFloorTextures.TryAdd(wt,BindTexture(GenerateFloorTextureMap(wt)));
+            if (dFloorTextures.TryGetValue(wt, out TexDetails texDetails)) {
+                return texDetails;
             }
-            return dFloorTextures[wt];
+            TexDetails newTexDet = BindTexture(GenerateFloorTextureMap(wt));
+            dFloorTextures.Add(wt, newTexDet);
+            return newTexDet;
         }
         private static byte[,,] GenerateFloorTextureMap(WallType wt) {
             switch (wt) {

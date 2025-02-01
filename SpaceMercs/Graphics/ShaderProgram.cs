@@ -197,6 +197,16 @@ namespace SpaceMercs.Graphics {
             }
         }
 
+        // Unsafe fast setting of uniforms without any checks, and assuming that the program is set.
+        public void SetUniformFast(string name, float v1, float v2) {
+            ShaderUniform uniform = Uniforms[name];
+            GL.Uniform2(uniform.Location, v1, v2);
+        }
+        public void SetUniformFast(string name, Matrix4 m4) {
+            ShaderUniform uniform = Uniforms[name];
+            GL.UniformMatrix4(uniform.Location, false, ref m4);
+        }
+
         // IDisposable
         ~ShaderProgram() {
             Dispose();

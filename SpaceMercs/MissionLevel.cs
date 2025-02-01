@@ -3,6 +3,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Data;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -309,41 +310,54 @@ namespace SpaceMercs {
             if (TextureCoords is null) throw new Exception("Could not generate textures");
             GL.Disable(EnableCap.Blend);
 
+            // We're using the same shader program and vertex details throughout, so bind them here once.
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.Bind();
+
             // Draw the visible terrain
             int iLastID = -1;
+            int lastItc = -1;
+            int tw = -1, th = -1;
+            TileType? lastTile = null;
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
-                    TexDetails det;
-                    if (Map[x, y] == TileType.Floor || Map[x, y] == TileType.DoorVertical || Map[x, y] == TileType.DoorHorizontal || Map[x, y] == TileType.OpenDoorVertical || Map[x, y] == TileType.OpenDoorHorizontal) {
-                        det = Textures.GenerateFloorTexture(this);
+                    if (Map[x, y] != lastTile) {
+                        TexDetails det = Map[x, y] switch {
+                            TileType.Floor => Textures.GenerateFloorTexture(this),
+                            TileType.DoorVertical => Textures.GenerateFloorTexture(this),
+                            TileType.DoorHorizontal => Textures.GenerateFloorTexture(this),
+                            TileType.OpenDoorVertical => Textures.GenerateFloorTexture(this),
+                            TileType.OpenDoorHorizontal => Textures.GenerateFloorTexture(this),
+                            TileType.Wall => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
+                            TileType.SecretDoorHorizontal => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
+                            TileType.SecretDoorVertical => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
+                            _ => throw new Exception("Unhandled texture requested : " + Map[x, y]),
+                        };
+                        int iTexID = det.ID;
+                        if (iTexID != iLastID) {
+                            GL.BindTexture(TextureTarget.Texture2D, iTexID);
+                            iLastID = iTexID;
+                            tw = det.W / Textures.TileSize;
+                            th = det.H / Textures.TileSize;
+                            prog.SetUniformFast("texScale", (1f / tw) - (TexEpsilon * 2f), (1f / th) - (TexEpsilon * 2f));
+                        }
                     }
-                    else if (Map[x, y] == TileType.Wall || Map[x, y] == TileType.SecretDoorHorizontal || Map[x, y] == TileType.SecretDoorVertical) {
-                        Textures.WallSide ws = GetWallSides(x, y);
-                        det = Textures.GenerateWallTexture(this, ws);
-                    }
-                    else {
-                        throw new Exception("Unhandled texture requested : " + Map[x, y]);
-                    }
-                    int iTexID = det.ID;
-                    int tw = det.W / Textures.TileSize;
-                    int th = det.H / Textures.TileSize;
-                    if (iTexID != iLastID) {
-                        GL.BindTexture(TextureTarget.Texture2D, iTexID);
-                        iLastID = iTexID;
-                    }
-                    // Draw the square using the correct texture
+                    // Setup the correct texture
                     int itc = TextureCoords[x, y];
-                    float tx = (float)((itc & 3) % tw) / (float)tw;
-                    float ty = (float)((itc / 4) % th) / (float)th;
-                    prog.SetUniform("texPos", tx + TexEpsilon, ty + TexEpsilon);
-                    prog.SetUniform("texScale", (1f / tw) - (TexEpsilon*2f), (1f / th) - (TexEpsilon * 2f));
+                    if (itc != lastItc) {
+                        float tx = (float)((itc & 3) % tw) / (float)tw;
+                        float ty = (float)((itc / 4) % th) / (float)th;
+                        prog.SetUniformFast("texPos", tx + TexEpsilon, ty + TexEpsilon);
+                    }
+                    // Draw the tile at the correct place
                     Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y, Const.TileLayer);
-                    prog.SetUniform("model", pTranslateM);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    Square.Textured.BindAndDraw();
+                    prog.SetUniformFast("model", pTranslateM);
+                    Square.Textured.Draw();
                 }
             }
+            // Finally unbind the square vertex details
+            Square.Textured.Unbind();
         }
         private void GenerateTextures() {
             TextureCoords = new int[Width, Height];
@@ -412,17 +426,19 @@ namespace SpaceMercs {
             prog.SetUniform("texPos", 0f, 0f);
             prog.SetUniform("texScale", 1f, 1f);
             GL.DepthMask(false);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.Bind();
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (Map[x, y] == TileType.Void) continue;
                     if (!Const.DEBUG_VISIBLE_ALL && Explored[x, y] && !Visible[x, y]) {
                         Matrix4 pTranslateM = Matrix4.CreateTranslation(x, y, Const.EntityLayer);
-                        prog.SetUniform("model", pTranslateM);
-                        GL.UseProgram(prog.ShaderProgramHandle);
-                        Square.Textured.BindAndDraw();
+                        prog.SetUniformFast("model", pTranslateM);
+                        Square.Textured.Draw();
                     }
                 }
             }
+            Square.Textured.Unbind();
             GL.DepthMask(true);
             GL.Disable(EnableCap.Blend);
         }

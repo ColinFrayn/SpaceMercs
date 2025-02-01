@@ -137,8 +137,8 @@ namespace SpaceMercs {
         public const double CreatureMeleeDamageScale = 0.40;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
         public const double CreatureLevelAttackScale = 0.09;  // %age growth in creature attack each level (over base)
         public const double CreatureLevelAttackStep = 1.0;  // Absolute growth in creature attack each level
-        public const double CreatureLevelDefenceScale = 0.09;  // %age growth in creature defence each level (over base)
-        public const double CreatureLevelDefenceStep = 1.0;  // Absolute growth in creature defence each level
+        public const double CreatureLevelDefenceScale = 0.08;  // %age growth in creature defence each level (over base)
+        public const double CreatureLevelDefenceStep = 0.9;  // Absolute growth in creature defence each level
         public const double CreatureLevelHealthScale = 0.15;  // %age growth in creature health each level (over base)
         public const double CreatureLevelHealthStep = 1.5;  // Absolute growth in creature health each level
         public const double CreatureLevelShieldsScale = 0.1;  // %age growth in creature shields each level (over base)
@@ -159,7 +159,7 @@ namespace SpaceMercs {
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
-        public const double CreatureAttackDamageScale = 0.06;  // Modifier applied to damage done by Creatures
+        public const double CreatureAttackDamageScale = 0.07;  // Modifier applied to damage done by Creatures
         public const double CreatureAttackDamageBaseMod = 0.7; // Scale factor for zeroth level creatures damage.
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
