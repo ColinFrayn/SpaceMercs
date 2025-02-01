@@ -833,7 +833,7 @@ namespace SpaceMercs {
             if (BaseToughness - Race.Toughness > 3) dStats += Math.Pow(BaseToughness - Race.Toughness - 2, 2) / 25.0;
             if (BaseEndurance - Race.Endurance > 3) dStats += Math.Pow(BaseEndurance - Race.Endurance - 2, 2) / 25.0;
 
-            // Additional cost for teh mercenary's equipment
+            // Additional cost for the mercenary's equipment
             double dKit = EquipmentCost();
 
             // Final cost

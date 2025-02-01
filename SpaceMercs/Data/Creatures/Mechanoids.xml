@@ -37,6 +37,7 @@
     <Desc>A heavily armed mechanoid trooper</Desc>
     <Weapons>
       <Weapon Weight="1">Laser Rifle</Weapon>
+      <Weapon Weight="1" MinLev="11">Plasma Rifle</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -85,6 +86,7 @@
       <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="1">Power Axe</Weapon>
       <Weapon Weight="2">Laser Rifle</Weapon>
+      <Weapon Weight="2" MinLev="11">Plasma Rifle</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -106,8 +108,9 @@
     <Col2>140, 140, 140</Col2>
     <Col3>170, 170, 170</Col3>
     <Desc>A large tank with a heavy weapon</Desc>
-    <Weapons>
-      <Weapon Weight="1">Heavy Laser Rifle</Weapon>
+    <Weapons>      
+      <Weapon Weight="2">Heavy Laser Rifle</Weapon>
+      <Weapon Weight="1" MinLev="12">Gauss Cannon</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -129,6 +132,7 @@
     <Desc>A long-range mechanoid soldier</Desc>
     <Weapons>
       <Weapon Weight="1">Laser Sniper Rifle</Weapon>
+      <Weapon Weight="1" MinLev="12">Gauss Sniper Rifle</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -151,7 +155,8 @@
     <Desc>A mechanoid tank that commands the battlefield</Desc>
     <Boss/>
     <Weapons>
-      <Weapon Weight="1">Laser Rifle</Weapon>
+      <Weapon Weight="2">Heavy Laser Rifle</Weapon>
+      <Weapon Weight="1" MinLev="12">Gauss Cannon</Weapon>      
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>

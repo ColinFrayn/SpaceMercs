@@ -347,7 +347,7 @@ namespace SpaceMercs {
             Stamina = MaxStamina;
             Shields = MaxShields;
             OverrideRace = Override;
-            EquippedWeapon = Type.GenerateRandomWeapon();
+            EquippedWeapon = Type.GenerateRandomWeapon(lvl);
             CurrentTarget = null;
             Investigate = Point.Empty;
             HidingPlace = Point.Empty;
@@ -391,7 +391,7 @@ namespace SpaceMercs {
                 EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
             }
             if (EquippedWeapon is null) {
-                if (Type.Weapons.Count == 1)  EquippedWeapon = Type.GenerateRandomWeapon();
+                if (Type.Weapons.Count == 1)  EquippedWeapon = Type.GenerateRandomWeapon(Level);
                 else if (Type.Weapons.Count > 1) throw new Exception("Missing ambiguous weapon in creature : " + Name);
             }
 

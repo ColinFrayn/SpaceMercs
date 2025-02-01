@@ -35,8 +35,9 @@
     <Weapons>
       <Weapon Weight="2">Shortblade</Weapon>
       <Weapon Weight="2">Shotgun</Weapon>
-      <Weapon Weight="3">Pistol</Weapon>
+      <Weapon Weight="3" MaxLev="8">Pistol</Weapon>
       <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Mercenary">
@@ -55,7 +56,8 @@
     <Weapons>
       <Weapon Weight="3">Shotgun</Weapon>
       <Weapon Weight="1">Powerblade</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Elite Skirmisher">
@@ -75,7 +77,8 @@
       <Weapon Weight="1">Shotgun</Weapon>
       <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="1">Chainsword</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Deadeye">
@@ -92,7 +95,8 @@
     <Col3>200, 160, 120</Col3>
     <Desc>A pirate sniper</Desc>
     <Weapons>
-      <Weapon Weight="1">Sniper Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="10">Sniper Rifle</Weapon>
+      <Weapon Weight="1" MinLev="8">Laser Sniper Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Pirate Boss">
@@ -110,10 +114,13 @@
     <Desc>A pirate leader</Desc>
     <Boss/>
     <Weapons>
-      <Weapon Weight="1">Shotgun</Weapon>
+      <Weapon Weight="1" MaxLev="7">Shotgun</Weapon>
+      <Weapon Weight="1" MinLev="7">Triple Shotgun</Weapon>
+      <Weapon Weight="1" MinLev="10">Quad Shotgun</Weapon>
       <Weapon Weight="1">Chainsword</Weapon>
       <Weapon Weight="1">Powerblade</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
 </Data>

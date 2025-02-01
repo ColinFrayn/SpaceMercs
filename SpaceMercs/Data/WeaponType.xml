@@ -200,6 +200,31 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="Plasma Rifle" Class="Rifle">
+    <Mass>4.0</Mass>
+    <Cost>600</Cost>
+    <Rarity>15</Rarity>
+    <Speed>14</Speed>
+    <Range Accuracy="0" DropOff="0.5" Length="0.6" Speed="2.0" Colour="1.0,0.4,0.2">9</Range>
+    <Damage>5+5</Damage>
+    <Desc>A plasma rifle, firing scorching hot plasma rounds</Desc>
+    <Sound>LaserRifleSingle</Sound>
+    <Noise>7</Noise>
+    <Requirements>
+      <MinLevel>7</MinLevel>
+      <MinPop>50</MinPop>
+      <CashCost>85</CashCost>
+      <Material Name="Titanium">1</Material>
+      <Material Name="Industrial Chemicals">2</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Electronic Components" Amount="1"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Heavy Laser Rifle" Class="Heavy">
     <Mass>22.0</Mass>
     <Cost>650</Cost>

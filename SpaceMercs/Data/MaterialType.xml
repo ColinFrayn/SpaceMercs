@@ -82,7 +82,7 @@
     <Requirements>
       <MinLevel>10</MinLevel>
       <MinPop>50</MinPop>
-      <CashCost>50</CashCost>
+      <CashCost>250</CashCost>
       <Material Name="Metasteel">2</Material>
       <Material Name="Mithril">2</Material>
       <Facility>Workshop</Facility>
@@ -97,7 +97,7 @@
     <Requirements>
       <MinLevel>12</MinLevel>
       <MinPop>60</MinPop>
-      <CashCost>75</CashCost>
+      <CashCost>375</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Nanosilk">2</Material>
       <Facility>Workshop</Facility>
@@ -112,7 +112,7 @@
     <Requirements>
       <MinLevel>14</MinLevel>
       <MinPop>70</MinPop>
-      <CashCost>100</CashCost>
+      <CashCost>600</CashCost>
       <Material Name="Nanomesh">2</Material>
       <Material Name="Adamantium">2</Material>
       <Facility>Workshop</Facility>

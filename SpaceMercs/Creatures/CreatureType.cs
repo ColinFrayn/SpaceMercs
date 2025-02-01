@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using OpenTK.Graphics.ES11;
+using System.Xml;
 
 namespace SpaceMercs {
     public class CreatureType {
@@ -28,10 +29,9 @@ namespace SpaceMercs {
         public Color Col1 { get; private set; }
         public Color Col2 { get; private set; }
         public Color Col3 { get; private set; }
-        public readonly Dictionary<WeaponType, int> Weapons = new Dictionary<WeaponType, int>();
+        public readonly Dictionary<WeaponType, (int Weight, int MinLev, int MaxLev)> Weapons = new Dictionary<WeaponType, (int Weight, int MinLev, int MaxLev)>();
         public readonly Dictionary<WeaponType.DamageType, double> Resistances = new Dictionary<WeaponType.DamageType, double>();
         public readonly Dictionary<MaterialType, double> Scavenge = new Dictionary<MaterialType, double>();
-        private readonly int WeaponTotalWeight = 0;
         public ItemEffect? OnDeathEffect { get; private set; }
 
         public CreatureType(XmlNode xml, CreatureGroup gp) {
@@ -106,16 +106,26 @@ namespace SpaceMercs {
                 foreach (XmlNode xn in xml.SelectNodesToList("Weapons/Weapon")) {
                     WeaponType? wpt = StaticData.GetWeaponTypeByName(xn.InnerText);
                     if (wpt == null) throw new Exception("Creature " + Name + " has unknown weapon : " + xn.InnerText);
-                    int wgt = xn.GetAttributeInt("Weight");
+                    int wgt = xn.GetAttributeInt("Weight", 1);
+                    int minlev = xn.GetAttributeInt("MinLev", 1);
+                    int maxlev = xn.GetAttributeInt("MaxLev", 100);
                     if (Weapons.ContainsKey(wpt)) throw new Exception("Creature " + Name + " has repeated weapons : " + wpt.Name);
-                    Weapons.Add(wpt, wgt);
-                    WeaponTotalWeight += wgt;
+                    Weapons.Add(wpt, new(wgt,minlev,maxlev));
                 }
             }
             else {
-                WeaponTotalWeight = 1;
                 WeaponType? wtyp = StaticData.GetWeaponTypeByName("Bite");
-                if (wtyp != null) Weapons.Add(wtyp, 1);
+                if (wtyp != null) Weapons.Add(wtyp, (1,1,100));
+            }
+            // Check that we have valid weapons at all levels. Yeah this algorithm is inefficient. :)
+            for (int n = LevelMin; n <= LevelMax; n++) {
+                bool bOK = false;
+                foreach ((WeaponType _, (int _, int mn, int mx)) in Weapons) {
+                    if (mn <= n && mx >= n) {
+                        bOK = true; break;
+                    }
+                }
+                if (!bOK) throw new Exception($"Creature {Name} does not have a valid weapon at level {n}");
             }
 
             // Special effect on death?
@@ -145,13 +155,14 @@ namespace SpaceMercs {
             }
         }
 
-        public Weapon? GenerateRandomWeapon() {
-            if (WeaponTotalWeight == 0) return null;
+        public Weapon? GenerateRandomWeapon(int lev) {
+            var validWeapons = Weapons.Where(x => x.Value.MinLev <= lev && x.Value.MaxLev >= lev).ToDictionary();
+            int total = validWeapons.Sum(x => x.Value.Weight);
             Random rnd = new Random();
-            int r = rnd.Next(WeaponTotalWeight);
-            foreach (WeaponType tp in Weapons.Keys) {
-                if (r < Weapons[tp]) return new Weapon(tp, 0);
-                r -= Weapons[tp];
+            int r = rnd.Next(total);
+            foreach (WeaponType tp in validWeapons.Keys) {
+                if (r < Weapons[tp].Weight) return new Weapon(tp, 0);
+                r -= Weapons[tp].Weight;
             }
             return null;
         }

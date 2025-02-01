@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>15/11/2323 00:46:50</Clock>
+<Clock>15/11/2323 00:48:02</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -2885,32 +2885,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1612415448</Seed>
  <Size>3</Size>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="2009555153" Diff="9">
- <Name>Enemy Ship</Name>
- <Hull>28</Hull>
- <Shield>0</Shield>
- <Armour>Metasteel Plating</Armour>
- <Seed>577002</Seed>
- <Eqp ID="7" Active="True">Impulse Drive</Eqp>
- <Eqp ID="2" Active="True">Large Bunk Room</Eqp>
- <Eqp ID="3" Active="True">Large Bunk Room</Eqp>
- <Eqp ID="4" Active="True">Cabin</Eqp>
- <Eqp ID="5" Active="True">Rail Gun</Eqp>
- <Eqp ID="6" Active="True">Laser Cannon</Eqp>
-</Ship>
- <Opponent>Ursalon</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>122.28</Reward>
- <Diff>9</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1829266184</Seed>
- <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Surface</Type>
@@ -7852,16 +7826,16 @@
 </Map>
 <Team>
  <Pos>(0,-1)10.1</Pos>
- <Cash>2473.930391724111</Cash>
+ <Cash>2936.815058748404</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="21" Y="23"/>
- <Health>29.242707999947726</Health>
- <Stamina>21.899999999999995</Stamina>
+ <Location X="40" Y="38"/>
+ <Health>24.797059778412734</Health>
+ <Stamina>39</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>0</Facing>
  <Level>9</Level>
- <XP>259126</XP>
+ <XP>262284</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,13,11,12,20</Stats>
@@ -7891,16 +7865,15 @@
   <Exp Skill="Perception">6</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="27" Y="34"/>
- <Health>31.753009058335625</Health>
- <Stamina>32</Stamina>
+ <Location X="38" Y="40"/>
+ <Health>30.330143048327418</Health>
+ <Stamina>15.689810983555311</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>180</Facing>
  <Level>9</Level>
- <XP>254727</XP>
+ <XP>257885</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,12,9,20,13</Stats>
@@ -7931,15 +7904,16 @@
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="26" Y="34"/>
- <Health>25.46442382474835</Health>
- <Stamina>27.67080969371532</Stamina>
+ <Location X="45" Y="37"/>
+ <Health>26.302644335379057</Health>
+ <Stamina>18.77847366893371</Stamina>
  <Shields>0</Shields>
- <Facing>225</Facing>
+ <Facing>-90</Facing>
  <Level>9</Level>
- <XP>253799</XP>
+ <XP>256957</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,13,12,9</Stats>
@@ -7968,15 +7942,16 @@
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Scavenging">7</Exp>
  </UtilityExperience>
+ <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="22" Y="22"/>
- <Health>31</Health>
- <Stamina>25.611572763461727</Stamina>
+ <Location X="34" Y="35"/>
+ <Health>30.671568844167243</Health>
+ <Stamina>34</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>36.86989764584402</Facing>
  <Level>9</Level>
- <XP>251279</XP>
+ <XP>254437</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,21,12,15</Stats>
@@ -7994,7 +7969,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">1067</Exp>
+  <Exp Type="Sniper">1081</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">5</Exp>
@@ -8031,7 +8006,7 @@
  <Mission_FastAI/>
  <Relations>
   <Relation Race="Human" Value="11773"/>
-  <Relation Race="Ursalon" Value="3643"/>
+  <Relation Race="Ursalon" Value="3943"/>
   <Relation Race="Grey" Value="2417"/>
   <Relation Race="Ogrish" Value="-4500"/>
   <Relation Race="Gokan" Value="2053"/>
@@ -8048,7 +8023,7 @@
   <Inv Count="21">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="16">
 <Material Type="Carbon Fibre"/>
   </Inv>
   <Inv Count="16">
@@ -8108,7 +8083,7 @@
   <Inv Count="4">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="5">
 <Equipment Type="Stimulant"/>
   </Inv>
   <Inv Count="4">
@@ -8166,11 +8141,11 @@
  <Item>Quad Shotgun</Item>
  <Item>Silent Drive</Item>
  <Item>Antimatter Core</Item>
- <Material>Metasteel</Material>
- <Material>Nanomesh</Material>
  <Item>Gauss Cannon</Item>
  <Item>Heavy Arc Rifle</Item>
  <Item>Antimatter Cannon</Item>
+ <Material>Metasteel</Material>
+ <Material>Nanomesh</Material>
 </Research>
 </Race>
 <Race Name="Gokan">
@@ -8281,11 +8256,11 @@
  <Item>SuperLight Drive</Item>
  <Item>Silent Drive</Item>
  <Item>Quad Shotgun</Item>
+ <Item>Antimatter Core</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
- <Item>Antimatter Core</Item>
 </Research>
 </Race>
 <Race Name="Ogrish">
@@ -8335,10 +8310,10 @@
  <Item>SuperLight Drive</Item>
  <Item>Quad Shotgun</Item>
  <Item>Silent Drive</Item>
+ <Item>Antimatter Core</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
- <Item>Antimatter Core</Item>
 </Research>
 </Race>
 <Race Name="Insectoid">
@@ -8503,11 +8478,11 @@
  <Item>Power Armour</Item>
  <Item>SuperLight Drive</Item>
  <Item>Antimatter Core</Item>
+ <Item>Quad Shotgun</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
- <Item>Quad Shotgun</Item>
 </Research>
 </Race>
 </Races>

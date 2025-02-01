@@ -15,7 +15,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A rank-and-file trooper</Desc>
     <Weapons>
-      <Weapon Weight="1">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="7">Automatic Rifle</Weapon>
+      <Weapon Weight="1" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Elite Trooper">
@@ -32,7 +33,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>An elite trooper</Desc>
     <Weapons>
-      <Weapon Weight="1">Automatic Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="7">Automatic Rifle</Weapon>
+      <Weapon Weight="1" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Specialist">
@@ -49,8 +51,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>An elite trooper with close combat weapons</Desc>
     <Weapons>
-      <Weapon Weight="1">Shortblade</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="1" MaxLev="6">Shortblade</Weapon>
+      <Weapon Weight="1" MinLev="4">Powerblade</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Hero Trooper">
@@ -68,9 +70,10 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A heroic soldier</Desc>
     <Weapons>
-      <Weapon Weight="1">Powerblade</Weapon>
-      <Weapon Weight="1">Shortblade</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="6">Shortblade</Weapon>
+      <Weapon Weight="1" MinLev="4">Powerblade</Weapon>
+      <Weapon Weight="2" MaxLev="7">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Heavy Support">
@@ -88,7 +91,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A heroic soldier with a heavy weapon</Desc>
     <Weapons>
-      <Weapon Weight="1">Heavy Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="9">Heavy Rifle</Weapon>
+      <Weapon Weight="1" MinLev="7">Heavy Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Sniper">
@@ -105,7 +109,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A sniper soldier</Desc>
     <Weapons>
-      <Weapon Weight="1">Sniper Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="9">Sniper Rifle</Weapon>
+      <Weapon Weight="1" MinLev="6">Laser Sniper Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Commander">
@@ -125,7 +130,8 @@
     <Boss/>
     <Weapons>
       <Weapon Weight="1">Chainsword</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="7">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="5">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
 </Data>

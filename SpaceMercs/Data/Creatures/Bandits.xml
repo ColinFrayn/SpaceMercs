@@ -17,7 +17,7 @@
     <Weapons>
       <Weapon Weight="2">Shortblade</Weapon>
       <Weapon Weight="2">Axe</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="1" MinLev="5">Powerblade</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Bandit">
@@ -37,8 +37,9 @@
       <Weapon Weight="2">Shortblade</Weapon>
       <Weapon Weight="1">Axe</Weapon>
       <Weapon Weight="1">Shotgun</Weapon>
-      <Weapon Weight="3">Pistol</Weapon>
-      <Weapon Weight="1">Automatic Rifle</Weapon>
+      <Weapon Weight="3" MaxLev="8">Pistol</Weapon>
+      <Weapon Weight="1" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="1" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Mercenary">
@@ -55,10 +56,13 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A mercenary</Desc>
     <Weapons>
-      <Weapon Weight="2">Shotgun</Weapon>
-      <Weapon Weight="2">Shortblade</Weapon>
-      <Weapon Weight="1">Axe</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
+      <Weapon Weight="2" MinLev="6">Triple Shotgun</Weapon>
+      <Weapon Weight="2" MaxLev="7">Shortblade</Weapon>
+      <Weapon Weight="2" MinLev="6">Powerblade</Weapon>
+      <Weapon Weight="1" MaxLev="7">Axe</Weapon>
+      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Enforcer">
@@ -75,10 +79,13 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A bandit enforcer</Desc>
     <Weapons>
-      <Weapon Weight="2">Shotgun</Weapon>
+      <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
+      <Weapon Weight="2" MinLev="6">Triple Shotgun</Weapon>
+      <Weapon Weight="2" MinLev="9">Quad Shotgun</Weapon>
       <Weapon Weight="3">Chainsword</Weapon>
       <Weapon Weight="2">Powerblade</Weapon>
-      <Weapon Weight="1">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Heavy Gunner">
@@ -95,7 +102,8 @@
     <Col3>170, 170, 170</Col3>
     <Desc>A bandit gunner with heavy weapons</Desc>
     <Weapons>
-      <Weapon Weight="1">Heavy Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="9">Heavy Rifle</Weapon>
+      <Weapon Weight="1" MinLev="8">Heavy Laser Rifle</Weapon>
     </Weapons>
     <MovementCost>3.0</MovementCost>
   </CreatureType>
@@ -113,9 +121,12 @@
     <Col3>200, 160, 120</Col3>
     <Desc>A bandit leader</Desc>
     <Weapons>
-      <Weapon Weight="2">Shotgun</Weapon>
+      <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
+      <Weapon Weight="2" MinLev="6">Triple Shotgun</Weapon>
+      <Weapon Weight="2" MinLev="9">Quad Shotgun</Weapon>
       <Weapon Weight="3">Chainsword</Weapon>
-      <Weapon Weight="2">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MaxLev="7">Automatic Rifle</Weapon>
+      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
     <Boss/>
   </CreatureType>
