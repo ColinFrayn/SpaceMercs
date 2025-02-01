@@ -503,17 +503,19 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", true);
             prog.SetUniform("texPos", ts.X, ts.Y);
             prog.SetUniform("texScale", ts.W, ts.H);
+            GL.UseProgram(prog.ShaderProgramHandle);
             Matrix4 pScaleM = Matrix4.CreateScale(0.8f, -0.8f, 1f);
+            Square.Textured.Bind();
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
                     if (!DetectionMap[x, y]) continue;
                     Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.1f, y + 0.9f, Const.GUILayer);
-                    prog.SetUniform("model", pScaleM * pTranslateM);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    Square.Textured.BindAndDraw();
+                    prog.SetUniformFast("model", pScaleM * pTranslateM);
+                    Square.Textured.Draw();
                 }
             }
+            Square.Textured.Unbind();
         }
         public void DrawSelectedEntityVis(ShaderProgram prog, IEntity en) {
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 0.5f));
@@ -521,15 +523,17 @@ namespace SpaceMercs {
             Matrix4 pScaleM = Matrix4.CreateScale(0.4f);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Textured.Bind();
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!en.CanSee(x, y)) continue;
                     Matrix4 pTranslateM = Matrix4.CreateTranslation(x + 0.3f, y + 0.3f, Const.GUILayer);
-                    prog.SetUniform("model", pScaleM * pTranslateM);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    Square.Textured.BindAndDraw();
+                    prog.SetUniformFast("model", pScaleM * pTranslateM);
+                    Square.Textured.Draw();
                 }
             }
+            Square.Textured.Unbind();
         }
         #endregion // Display
 
