@@ -7,6 +7,8 @@ Display when weapon is recharging somehow
 Expansion of systems: Work out how to get large colonies in distant systems -> more trade routes
 - Maybe have fewer moon colonies?
 
+Can enemies use shotguns?
+
 ==========================================================================================================
 
 

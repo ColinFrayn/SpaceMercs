@@ -25,6 +25,14 @@
     <MassMod>0.9</MassMod>
     <UnitCost>4.5</UnitCost>
     <ArmourMod>1.4</ArmourMod>
+    <Requirements>
+      <MinLevel>2</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>10</CashCost>
+      <Material Name="Steel">1</Material>
+      <Material Name="Aluminium">1</Material>
+      <Facility>Workshop</Facility>
+    </Requirements>
     <Rarity>0.25</Rarity>
     <Desc>Composite materials made from metals, fabrics and precision alloys.</Desc>
   </MaterialType>
@@ -36,7 +44,7 @@
     <Requirements>
       <MinLevel>4</MinLevel>
       <MinPop>22</MinPop>
-      <CashCost>10</CashCost>
+      <CashCost>20</CashCost>
       <Material Name="Chitin">2</Material>
       <Material Name="Steel">2</Material>
       <Facility>Workshop</Facility>
