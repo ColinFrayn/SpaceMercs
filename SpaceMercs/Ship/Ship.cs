@@ -551,14 +551,28 @@ namespace SpaceMercs {
         public void BuildEquipment(int iRoomID, ShipEquipment se) {
             if (iRoomID == -1 || iRoomID >= Type.Rooms.Count || se == null) return;
             if (se.Size != Type.Rooms[iRoomID].Size) return;
-            if (Equipment.ContainsKey(iRoomID)) return;
+            string strMessage = string.Empty;
             if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = CostToBuildEquipment(se);
+            double salvage = 0d;
+            ShipEquipment? seOld = null;
+            bool bReplace = Equipment.TryGetValue(iRoomID, out Tuple<ShipEquipment, bool>? oldRoom);
+            if (bReplace) {
+                seOld = oldRoom?.Item1 as ShipEquipment;
+                salvage = SalvageValue(seOld);
+                cost -= salvage;
+                strMessage = string.Format($"Really replace {seOld.Name} with {se.Name} for {cost:F2} credits?\n(Includes rebate of {salvage:F2} credits)");
+            }
+            else {
+                strMessage = string.Format($"Really build {se.Name} for {cost:F2} credits?");
+            }
             if (cost > Owner.Cash) return;
-            string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
             if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Build Room", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
                 Owner.Cash -= cost;
-                Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
+                if (bReplace) {
+                    Equipment[iRoomID] = new Tuple<ShipEquipment, bool>(se, true);
+                }
+                else Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
             }
         }
         public void UpgradeHull(ShipEquipment se) {

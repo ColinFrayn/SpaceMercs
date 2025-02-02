@@ -19,12 +19,13 @@ namespace SpaceMercs.MainWindow {
 
         // Possible icon IDs (must be larger than the number of ShipEquipment)
         public const uint I_Build = 10000;
-        public const uint I_Cancel = 10001;
-        public const uint I_Salvage = 10002;
-        public const uint I_Timer = 10003;
-        public const uint I_Disconnect = 10004;
-        public const uint I_Connect = 10005;
-        public const uint I_None = 10006;
+        public const uint I_Replace = 10001;
+        public const uint I_Cancel = 10002;
+        public const uint I_Salvage = 10003;
+        public const uint I_Timer = 10004;
+        public const uint I_Disconnect = 10005;
+        public const uint I_Connect = 10006;
+        public const uint I_None = 10007;
 
         private void SetupShipView() {
             if (view == ViewMode.ViewShip) return;
@@ -277,6 +278,7 @@ namespace SpaceMercs.MainWindow {
                     }
                     else {
                         if (ID == (int)I_Build) return new List<string>() { "Build" };
+                        if (ID == (int)I_Replace) return new List<string>() { "Replace" };
                         if (ID == (int)I_Cancel) return new List<string>() { "Cancel" };
                         if (ID == (int)I_Salvage) return new List<string>() { "Salvage" };
                         if (ID == (int)I_Timer) return new List<string>() { "Sleep" };
@@ -380,8 +382,11 @@ namespace SpaceMercs.MainWindow {
                 }
                 else {
                     if (PlayerTeam.CurrentPositionHAO?.BaseSize > 0) {
-                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
-                        gpSelect.InsertIconItem(I_Salvage, ts, true, null);
+                        GUIPanel? buildingPanel = GenerateBuildingList(seHover);
+                        TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Replace);
+                        gpSelect.InsertIconItem(I_Replace, ts, true, buildingPanel);
+                        TexSpecs ts2 = Textures.GetTexCoords(Textures.MiscTexture.Salvage);
+                        gpSelect.InsertIconItem(I_Salvage, ts2, true, null);
                     }
                     if (!bHoverHull && PlayerTeam.PlayerShip.GetCanDeactivateRoom(irContextRoom)) {
                         TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Disconnect);
@@ -397,7 +402,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Generate a building icon list for the sub-panel when building a new room
-        private GUIPanel? GenerateBuildingList() {
+        private GUIPanel? GenerateBuildingList(ShipEquipment? excludeEquipment = null) {
             if (!bHoverHull && (irContextRoom < 0 || irContextRoom > PlayerTeam.PlayerShip.Type.Rooms.Count)) return null;
             ShipRoomDesign? rd = bHoverHull ? null : PlayerTeam.PlayerShip.Type.Rooms[irContextRoom];
             ShipEquipment.RoomSize roomSize = rd?.Size ?? ShipEquipment.RoomSize.Armour;
@@ -408,6 +413,7 @@ namespace SpaceMercs.MainWindow {
             lIDs.Sort((a, b) => StaticData.ShipEquipment[a].Cost.CompareTo(StaticData.ShipEquipment[b].Cost));
             foreach (int eno in lIDs) {
                 ShipEquipment se = StaticData.ShipEquipment[eno];
+                if (se == excludeEquipment) continue;
                 // Can we build this at the current location?
                 if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
                 if (PlayerTeam.CurrentPositionHAO!.Colony is null || !PlayerTeam.CurrentPositionHAO!.Colony.HasBaseType(se.Available)) continue; // Not the correct facilities

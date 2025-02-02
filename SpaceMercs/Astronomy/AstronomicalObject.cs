@@ -97,7 +97,7 @@ namespace SpaceMercs {
 
         // Get a random difficulty level for this location (e.g. for a mercenary or a mission)
         public int GetRandomMissionDifficulty(Random rand) {
-            // Home planet is a nursery zone
+            // Home planet is a nursery zone. Mostly 1s with a sprinkling of 2s.
             if (this == StaticData.HumanRace.HomePlanet) {
                 return (int)(rand.NextDouble() * 1.7d) + 1;
             }
@@ -112,7 +112,7 @@ namespace SpaceMercs {
             dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
             // Scale more shallowly outside home sector
             if (dDistLY > Const.EncounterLevelScalingInnerRadius) {
-                dLevel += Math.Pow((dDistLY-Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
+                dLevel += Math.Pow((dDistLY - Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
             }
 
             // Increase the difficulty based on where we are within this system
