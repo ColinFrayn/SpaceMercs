@@ -148,9 +148,9 @@ namespace SpaceMercs.Dialogs {
             lbUtilitySkills.Items.Clear();
             foreach (Soldier.UtilitySkill sk in Enum.GetValues(typeof(Soldier.UtilitySkill))) {
                 int lvl = s.GetUtilityLevel(sk);
-                if (lvl > 0 && sk != Soldier.UtilitySkill.Unspent) {
+                if (lvl != 0 && sk != Soldier.UtilitySkill.Unspent) {
                     int bonus = lvl - s.GetRawUtilityLevel(sk);
-                    lbUtilitySkills.Items.Add(sk + " [" + (lvl - bonus) + "]" + (bonus > 0 ? "+" + bonus : ""));
+                    lbUtilitySkills.Items.Add($"{sk} [{lvl - bonus}] {(bonus > 0 ? "+" : string.Empty)}{(bonus != 0 ? bonus : string.Empty)}");
                 }
             }
             lbUnspent.Text = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent).ToString();

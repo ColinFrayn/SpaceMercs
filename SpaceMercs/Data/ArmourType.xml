@@ -106,7 +106,7 @@
       <Bonus Type="Fire" Amount="15"/>
       <Bonus Type="Cold" Amount="15"/>
     </BonusArmour>
-    <Desc>A chestplate</Desc>
+    <Desc>A chestplate with a shield generator</Desc>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -115,7 +115,7 @@
       <Material Name="Titanium" Amount="1"/>
     </Materials>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>34</MinPop>
       <CashCost>50</CashCost>
@@ -127,7 +127,7 @@
   </ArmourType>
   <ArmourType Name="Arm Plating">
     <Mass>2.0</Mass>
-    <Cost>14</Cost>
+    <Cost>15</Cost>
     <Rarity>11</Rarity>
     <Agility>-1</Agility>
     <BaseArmour>4</BaseArmour>
@@ -187,7 +187,7 @@
     <Agility>-4</Agility>
     <BaseArmour>18</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
-    <Desc>A chestplate, arm plating and leg plating combined</Desc>
+    <Desc>A standard chestplate, arm plating and leg plating combined</Desc>
     <Materials>
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="2"/>
@@ -196,12 +196,12 @@
   </ArmourType>
   <ArmourType Name="Shock Armour">
     <Mass>10.0</Mass>
-    <Cost>90</Cost>
+    <Cost>250</Cost>
     <Rarity>40</Rarity>
     <Agility>-3</Agility>
-    <BaseArmour>15</BaseArmour>
+    <BaseArmour>18</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
-    <Desc>A lightweight, shielded chestplate, arm plating and leg plating combined</Desc>
+    <Desc>A lightweight version of the shielded chestplate, arm plating and leg plating combined</Desc>
     <Shields>10</Shields>
     <Materials>
       <Material Name="Fabric" Amount="4"/>
@@ -211,7 +211,7 @@
       <Material Name="Crystals" Amount="1"/>
     </Materials>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinSystems>2</MinSystems>
       <MinPop>36</MinPop>
       <CashCost>70</CashCost>
@@ -407,6 +407,9 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Titanium" Amount="2"/>
     </Materials>
+    <Utility>
+      <Stealth>-2</Stealth>
+    </Utility>
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
     <Mass>60.0</Mass>
@@ -441,6 +444,9 @@
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Titanium" Amount="3"/>
     </Materials>
+    <Utility>
+      <Stealth>-4</Stealth>
+    </Utility>
   </ArmourType>
   <ArmourType Name="Assault Power Armour">
     <Mass>25.0</Mass>
@@ -475,6 +481,9 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Titanium" Amount="1"/>
     </Materials>
+    <Utility>
+      <Stealth>-1</Stealth>
+    </Utility>
   </ArmourType>
   <ArmourType Name="Shielded Power Armour">
     <Mass>35.0</Mass>
@@ -512,6 +521,9 @@
       <Relations Name="Gokan">2</Relations>
       <Relations Name="Elithiri">2</Relations>
     </Requirements>
+    <Utility>
+      <Stealth>-2</Stealth>
+    </Utility>
   </ArmourType>
   <ArmourType Name="Valkyrie Assault Armour">
     <Mass>22.0</Mass>
@@ -554,6 +566,8 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Titanium" Amount="2"/>
     </Materials>
+    <Utility>
+      <Stealth>-1</Stealth>
+    </Utility>
   </ArmourType>
-
 </Data>

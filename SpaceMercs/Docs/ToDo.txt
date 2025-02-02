@@ -20,13 +20,13 @@ Backburner : Features
 What should attack skill do for a grenade weapon?
 What should attack skill do for a Cone AoE weapon?
 
-Free movement (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button)
+Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack)
 
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names
 
-Add in ricochet ShotType (e.g. Disc Thrower)?
+Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
@@ -36,11 +36,17 @@ Make explosion different colours specified by the item (e.g. grenade) in Mission
 
 Cover
 - When partially hidden from the attacker, get a def bonus
-- Large creatures should be easier to hit (they are currently), but reduce that when they are partially covered.
+- Including large creatures
 
-Display visual effect on creatures if they have shields
-- Textures.GenerateCreatureTexture()  (all types)
+Improve Creature textures:
+- Display visual effect on creatures if they have shields
+-- Textures.GenerateCreatureTexture()  (all types)
 -- Need to make textures specifically for each individual creature?
+- Add graphics for more creature types
+-- Or replace them with textures?
+- Better soldier textures
+-- Change texture based on race
+-- Change texture based on equipment / weapons
 
 Add overwatch?
 
@@ -50,13 +56,9 @@ Add more alien-only items
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
 
-Better soldier textures
-- Change texture based on race
-- Change texture based on equipment / weapons
-
 Add light sources for max. vision range on missions??
 
-More things that need Sound Effects (Sounds from http://soundbible.com/)
+More things that need Sound Effects
 - Pick up all
 - Scavenge (All or single)
 - Hover on buttons in GUI?
@@ -69,9 +71,6 @@ Add locked doors in dungeon maps?
 Allow creatures to have multiple weapons (ranged and melee)?
 
 Investigate Blockly for scripting soldiers?
-
-Add graphics for more creature types
-- Or replace them with textures?
 
 Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
 

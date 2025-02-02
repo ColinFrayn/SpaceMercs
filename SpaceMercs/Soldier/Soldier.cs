@@ -4,7 +4,6 @@ using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
-using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
