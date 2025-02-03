@@ -17,8 +17,7 @@ Can enemies use shotguns? Do they work like single target weapons? (If not then 
 Backburner : Features
 ---------------------
 
-What should attack skill do for a grenade weapon?
-What should attack skill do for a Cone AoE weapon?
+What should attack skill do for an AoE weapon (grenade or cone)?
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack)
 

@@ -736,6 +736,8 @@ namespace SpaceMercs {
             int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
 
             Soldier s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next());
+            int thisExp = ExperienceRequiredToReachLevel(s.Level);
+            s.Experience = thisExp + rand.Next(s.ExperienceRequiredToReachNextLevel() - thisExp);
             s.GenerateRandomItems();
             s.GenerateRandomUtilitySkills();
             s.GenerateSuitableWeaponSkills();
