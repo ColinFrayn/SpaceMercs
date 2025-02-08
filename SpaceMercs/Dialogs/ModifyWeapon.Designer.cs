@@ -38,12 +38,13 @@
             lbSoldier1 = new Label();
             label4 = new Label();
             cbModType = new ComboBox();
+            lbDescription = new Label();
             SuspendLayout();
             // 
             // lbName
             // 
             lbName.BorderStyle = BorderStyle.FixedSingle;
-            lbName.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbName.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbName.Location = new Point(27, 14);
             lbName.Margin = new Padding(4, 0, 4, 0);
             lbName.Name = "lbName";
@@ -55,7 +56,7 @@
             // lbQuality
             // 
             lbQuality.BorderStyle = BorderStyle.FixedSingle;
-            lbQuality.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbQuality.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbQuality.Location = new Point(55, 73);
             lbQuality.Margin = new Padding(4, 0, 4, 0);
             lbQuality.Name = "lbQuality";
@@ -87,7 +88,7 @@
             // lbCurrentMod
             // 
             lbCurrentMod.BorderStyle = BorderStyle.FixedSingle;
-            lbCurrentMod.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbCurrentMod.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbCurrentMod.Location = new Point(55, 130);
             lbCurrentMod.Margin = new Padding(4, 0, 4, 0);
             lbCurrentMod.Name = "lbCurrentMod";
@@ -99,7 +100,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(68, 274);
+            label3.Location = new Point(70, 370);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(31, 15);
@@ -109,8 +110,8 @@
             // lbCost
             // 
             lbCost.BorderStyle = BorderStyle.FixedSingle;
-            lbCost.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCost.Location = new Point(43, 293);
+            lbCost.Font = new Font("Microsoft Sans Serif", 12F);
+            lbCost.Location = new Point(45, 389);
             lbCost.Margin = new Padding(4, 0, 4, 0);
             lbCost.Name = "lbCost";
             lbCost.Size = new Size(85, 34);
@@ -121,7 +122,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(185, 274);
+            label5.Location = new Point(180, 370);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(91, 15);
@@ -131,8 +132,8 @@
             // lbChance
             // 
             lbChance.BorderStyle = BorderStyle.FixedSingle;
-            lbChance.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lbChance.Location = new Point(186, 293);
+            lbChance.Font = new Font("Microsoft Sans Serif", 12F);
+            lbChance.Location = new Point(181, 389);
             lbChance.Margin = new Padding(4, 0, 4, 0);
             lbChance.Name = "lbChance";
             lbChance.Size = new Size(85, 34);
@@ -142,7 +143,7 @@
             // 
             // btModify
             // 
-            btModify.Location = new Point(35, 339);
+            btModify.Location = new Point(37, 435);
             btModify.Margin = new Padding(4, 3, 4, 3);
             btModify.Name = "btModify";
             btModify.Size = new Size(94, 31);
@@ -153,7 +154,7 @@
             // 
             // btCancel
             // 
-            btCancel.Location = new Point(185, 338);
+            btCancel.Location = new Point(180, 434);
             btCancel.Margin = new Padding(4, 3, 4, 3);
             btCancel.Name = "btCancel";
             btCancel.Size = new Size(94, 31);
@@ -164,7 +165,7 @@
             // 
             // lbSoldier2
             // 
-            lbSoldier2.Location = new Point(16, 244);
+            lbSoldier2.Location = new Point(18, 340);
             lbSoldier2.Margin = new Padding(4, 0, 4, 0);
             lbSoldier2.Name = "lbSoldier2";
             lbSoldier2.Size = new Size(274, 23);
@@ -174,7 +175,7 @@
             // 
             // lbSoldier1
             // 
-            lbSoldier1.Location = new Point(16, 221);
+            lbSoldier1.Location = new Point(18, 317);
             lbSoldier1.Margin = new Padding(4, 0, 4, 0);
             lbSoldier1.Name = "lbSoldier1";
             lbSoldier1.Size = new Size(274, 23);
@@ -202,11 +203,24 @@
             cbModType.TabIndex = 15;
             cbModType.SelectedIndexChanged += cbModType_SelectedIndexChanged;
             // 
+            // lbDescription
+            // 
+            lbDescription.BorderStyle = BorderStyle.FixedSingle;
+            lbDescription.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbDescription.Location = new Point(27, 221);
+            lbDescription.Margin = new Padding(4, 0, 4, 0);
+            lbDescription.Name = "lbDescription";
+            lbDescription.Size = new Size(252, 85);
+            lbDescription.TabIndex = 16;
+            lbDescription.Text = "Description Here";
+            lbDescription.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // ModifyWeapon
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(307, 381);
+            ClientSize = new Size(307, 478);
+            Controls.Add(lbDescription);
             Controls.Add(cbModType);
             Controls.Add(label4);
             Controls.Add(lbSoldier1);
@@ -250,5 +264,6 @@
         private Label lbSoldier1;
         private Label label4;
         private ComboBox cbModType;
+        private Label lbDescription;
     }
 }

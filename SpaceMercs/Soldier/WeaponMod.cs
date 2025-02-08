@@ -25,12 +25,25 @@ namespace SpaceMercs {
 
             IsMelee = xml.SelectSingleNode("Melee") != null;
 
-            DropoffMod = xml.SelectNodeDouble("DropoffMod", 1.0);
+            DropoffMod = xml.SelectNodeDouble("DropoffMod", 1d);
             Range = xml.SelectNodeInt("Range", 0);
             Silencer = xml.SelectNodeInt("Silencer", 0);
             Accuracy = xml.SelectNodeDouble("Accuracy", 0d);
             Damage = xml.SelectNodeDouble("Damage", 0d);
             RecoilMod = xml.SelectNodeDouble("RecoilMod", 1d);
+        }
+
+        public bool CanBeFittedTo(Weapon wp) {
+            if (IsMelee != wp.Type.IsMeleeWeapon) return false;
+            if (Name.Equals(wp.Mod?.Name)) return false;
+            if (wp.Type.WeaponShotType == WeaponType.ShotType.Cone) {
+                if (DropoffMod != 1.0) return false;
+                if (Accuracy != 0.0) return false;
+            }
+            if (wp.Type.Shots == 1) {
+                if (RecoilMod != 1.0) return false;
+            }
+            return true;
         }
     }
 }

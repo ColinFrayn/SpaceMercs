@@ -106,6 +106,8 @@
             lbColonyName = new Label();
             groupBox1 = new GroupBox();
             groupBox4 = new GroupBox();
+            lbOwner = new Label();
+            label15 = new Label();
             lbSystemName = new Label();
             label10 = new Label();
             lbStarType = new Label();
@@ -114,8 +116,6 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            lbOwner = new Label();
-            label15 = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -140,7 +140,7 @@
             tcMain.Controls.Add(tpUpgrade);
             tcMain.Controls.Add(tpDetails);
             tcMain.Dock = DockStyle.Fill;
-            tcMain.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tcMain.Font = new Font("Microsoft Sans Serif", 12F);
             tcMain.Location = new Point(0, 0);
             tcMain.Margin = new Padding(4, 3, 4, 3);
             tcMain.Name = "tcMain";
@@ -172,7 +172,7 @@
             // 
             cbAffordable.AutoSize = true;
             cbAffordable.CheckAlign = ContentAlignment.MiddleRight;
-            cbAffordable.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbAffordable.Font = new Font("Microsoft Sans Serif", 9.75F);
             cbAffordable.Location = new Point(207, 17);
             cbAffordable.Name = "cbAffordable";
             cbAffordable.Size = new Size(124, 20);
@@ -183,7 +183,8 @@
             // 
             // btRandomiseMerchant
             // 
-            btRandomiseMerchant.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btRandomiseMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btRandomiseMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
             btRandomiseMerchant.Location = new Point(518, 480);
             btRandomiseMerchant.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMerchant.Name = "btRandomiseMerchant";
@@ -195,9 +196,9 @@
             // 
             // lbTeamCashMerch
             // 
-            lbTeamCashMerch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashMerch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbTeamCashMerch.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCashMerch.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashMerch.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbTeamCashMerch.ImageAlign = ContentAlignment.MiddleRight;
             lbTeamCashMerch.Location = new Point(61, 479);
             lbTeamCashMerch.Margin = new Padding(5);
@@ -210,9 +211,9 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Microsoft Sans Serif", 9.75F);
             label3.ImageAlign = ContentAlignment.MiddleRight;
             label3.Location = new Point(13, 483);
             label3.Margin = new Padding(4, 0, 4, 0);
@@ -226,7 +227,7 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Microsoft Sans Serif", 9.75F);
             label1.ImageAlign = ContentAlignment.MiddleRight;
             label1.Location = new Point(356, 16);
             label1.Margin = new Padding(4, 0, 4, 0);
@@ -249,7 +250,7 @@
             // btBuyMerchant
             // 
             btBuyMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btBuyMerchant.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btBuyMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
             btBuyMerchant.Location = new Point(263, 479);
             btBuyMerchant.Margin = new Padding(4, 3, 4, 3);
             btBuyMerchant.Name = "btBuyMerchant";
@@ -284,7 +285,7 @@
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
             colItem.DefaultCellStyle = dataGridViewCellStyle1;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
@@ -301,7 +302,7 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
             Mass.DefaultCellStyle = dataGridViewCellStyle2;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
@@ -343,9 +344,9 @@
             // 
             // lbTeamCashMercs
             // 
-            lbTeamCashMercs.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashMercs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbTeamCashMercs.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCashMercs.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashMercs.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbTeamCashMercs.ImageAlign = ContentAlignment.MiddleRight;
             lbTeamCashMercs.Location = new Point(61, 479);
             lbTeamCashMercs.Margin = new Padding(5);
@@ -358,9 +359,9 @@
             // 
             // label12
             // 
-            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label12.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label12.AutoSize = true;
-            label12.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Font = new Font("Microsoft Sans Serif", 9.75F);
             label12.ImageAlign = ContentAlignment.MiddleRight;
             label12.Location = new Point(13, 483);
             label12.Margin = new Padding(4, 0, 4, 0);
@@ -372,7 +373,8 @@
             // 
             // btRandomiseMercs
             // 
-            btRandomiseMercs.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btRandomiseMercs.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btRandomiseMercs.Font = new Font("Microsoft Sans Serif", 9.75F);
             btRandomiseMercs.Location = new Point(518, 479);
             btRandomiseMercs.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMercs.Name = "btRandomiseMercs";
@@ -385,7 +387,7 @@
             // btHire
             // 
             btHire.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btHire.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btHire.Font = new Font("Microsoft Sans Serif", 9.75F);
             btHire.Location = new Point(223, 479);
             btHire.Margin = new Padding(4, 3, 4, 3);
             btHire.Name = "btHire";
@@ -420,7 +422,7 @@
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
             dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -465,7 +467,8 @@
             // 
             // btRandomiseMissions
             // 
-            btRandomiseMissions.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btRandomiseMissions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btRandomiseMissions.Font = new Font("Microsoft Sans Serif", 9.75F);
             btRandomiseMissions.Location = new Point(516, 475);
             btRandomiseMissions.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMissions.Name = "btRandomiseMissions";
@@ -478,7 +481,7 @@
             // btAccept
             // 
             btAccept.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btAccept.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btAccept.Font = new Font("Microsoft Sans Serif", 9.75F);
             btAccept.Location = new Point(226, 475);
             btAccept.Margin = new Padding(4, 3, 4, 3);
             btAccept.Name = "btAccept";
@@ -513,7 +516,7 @@
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
             colMission.DefaultCellStyle = dataGridViewCellStyle4;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
@@ -522,7 +525,7 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F);
             colGoal.DefaultCellStyle = dataGridViewCellStyle5;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
@@ -532,7 +535,7 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F);
             colOpp.DefaultCellStyle = dataGridViewCellStyle6;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
@@ -579,9 +582,9 @@
             // 
             // lbTeamCashShips
             // 
-            lbTeamCashShips.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashShips.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbTeamCashShips.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCashShips.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashShips.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbTeamCashShips.ImageAlign = ContentAlignment.MiddleRight;
             lbTeamCashShips.Location = new Point(60, 478);
             lbTeamCashShips.Margin = new Padding(5);
@@ -594,9 +597,9 @@
             // 
             // label13
             // 
-            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label13.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label13.AutoSize = true;
-            label13.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Font = new Font("Microsoft Sans Serif", 9.75F);
             label13.ImageAlign = ContentAlignment.MiddleRight;
             label13.Location = new Point(12, 482);
             label13.Margin = new Padding(4, 0, 4, 0);
@@ -609,7 +612,7 @@
             // btUpgrade
             // 
             btUpgrade.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btUpgrade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btUpgrade.Font = new Font("Microsoft Sans Serif", 9.75F);
             btUpgrade.Location = new Point(223, 477);
             btUpgrade.Margin = new Padding(4, 3, 4, 3);
             btUpgrade.Name = "btUpgrade";
@@ -643,7 +646,7 @@
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F);
             dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
@@ -690,7 +693,7 @@
             // btModify
             // 
             btModify.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btModify.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btModify.Font = new Font("Microsoft Sans Serif", 9.75F);
             btModify.Location = new Point(181, 475);
             btModify.Margin = new Padding(4, 3, 4, 3);
             btModify.Name = "btModify";
@@ -704,7 +707,7 @@
             // 
             cbEquipped.AutoSize = true;
             cbEquipped.CheckAlign = ContentAlignment.MiddleRight;
-            cbEquipped.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            cbEquipped.Font = new Font("Microsoft Sans Serif", 9.75F);
             cbEquipped.Location = new Point(222, 15);
             cbEquipped.Name = "cbEquipped";
             cbEquipped.Size = new Size(121, 20);
@@ -715,9 +718,9 @@
             // 
             // lbTeamCashFoundry
             // 
-            lbTeamCashFoundry.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbTeamCashFoundry.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbTeamCashFoundry.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCashFoundry.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbTeamCashFoundry.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbTeamCashFoundry.ImageAlign = ContentAlignment.MiddleRight;
             lbTeamCashFoundry.Location = new Point(63, 476);
             lbTeamCashFoundry.Margin = new Padding(5);
@@ -730,9 +733,9 @@
             // 
             // label14
             // 
-            label14.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label14.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label14.AutoSize = true;
-            label14.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Font = new Font("Microsoft Sans Serif", 9.75F);
             label14.ImageAlign = ContentAlignment.MiddleRight;
             label14.Location = new Point(15, 480);
             label14.Margin = new Padding(4, 0, 4, 0);
@@ -745,7 +748,7 @@
             // btSellAll
             // 
             btSellAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btSellAll.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btSellAll.Font = new Font("Microsoft Sans Serif", 9.75F);
             btSellAll.Location = new Point(542, 475);
             btSellAll.Margin = new Padding(4, 3, 4, 3);
             btSellAll.Name = "btSellAll";
@@ -758,7 +761,7 @@
             // btDismantle
             // 
             btDismantle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F);
             btDismantle.Location = new Point(362, 475);
             btDismantle.Margin = new Padding(4, 3, 4, 3);
             btDismantle.Name = "btDismantle";
@@ -771,7 +774,7 @@
             // btSell
             // 
             btSell.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btSell.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btSell.Font = new Font("Microsoft Sans Serif", 9.75F);
             btSell.Location = new Point(452, 475);
             btSell.Margin = new Padding(4, 3, 4, 3);
             btSell.Name = "btSell";
@@ -784,7 +787,7 @@
             // btImprove
             // 
             btImprove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btImprove.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btImprove.Font = new Font("Microsoft Sans Serif", 9.75F);
             btImprove.Location = new Point(272, 475);
             btImprove.Margin = new Padding(4, 3, 4, 3);
             btImprove.Name = "btImprove";
@@ -798,7 +801,7 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Microsoft Sans Serif", 9.75F);
             label2.ImageAlign = ContentAlignment.MiddleRight;
             label2.Location = new Point(364, 16);
             label2.Margin = new Padding(4, 0, 4, 0);
@@ -853,7 +856,7 @@
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F);
             dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
@@ -911,7 +914,7 @@
             // 
             lbNextGrowth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbNextGrowth.BorderStyle = BorderStyle.FixedSingle;
-            lbNextGrowth.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbNextGrowth.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbNextGrowth.ImageAlign = ContentAlignment.MiddleRight;
             lbNextGrowth.Location = new Point(120, 426);
             lbNextGrowth.Margin = new Padding(5);
@@ -926,7 +929,7 @@
             // 
             label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label8.AutoSize = true;
-            label8.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Microsoft Sans Serif", 9.75F);
             label8.ImageAlign = ContentAlignment.MiddleRight;
             label8.Location = new Point(22, 432);
             label8.Margin = new Padding(4, 0, 4, 0);
@@ -940,7 +943,7 @@
             // 
             lbLastGrowth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbLastGrowth.BorderStyle = BorderStyle.FixedSingle;
-            lbLastGrowth.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbLastGrowth.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbLastGrowth.ImageAlign = ContentAlignment.MiddleRight;
             lbLastGrowth.Location = new Point(120, 377);
             lbLastGrowth.Margin = new Padding(5);
@@ -955,7 +958,7 @@
             // 
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Microsoft Sans Serif", 9.75F);
             label6.ImageAlign = ContentAlignment.MiddleRight;
             label6.Location = new Point(22, 383);
             label6.Margin = new Padding(4, 0, 4, 0);
@@ -1018,7 +1021,7 @@
             // lbColonySize
             // 
             lbColonySize.BorderStyle = BorderStyle.FixedSingle;
-            lbColonySize.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbColonySize.Font = new Font("Microsoft Sans Serif", 15.75F);
             lbColonySize.Location = new Point(161, 106);
             lbColonySize.Margin = new Padding(0);
             lbColonySize.Name = "lbColonySize";
@@ -1052,7 +1055,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox1.Font = new Font("Microsoft Sans Serif", 9.75F);
             groupBox1.Location = new Point(23, 73);
             groupBox1.Margin = new Padding(4, 3, 4, 3);
             groupBox1.Name = "groupBox1";
@@ -1074,7 +1077,7 @@
             groupBox4.Controls.Add(label9);
             groupBox4.Controls.Add(lbLocation);
             groupBox4.Controls.Add(label7);
-            groupBox4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox4.Font = new Font("Microsoft Sans Serif", 9.75F);
             groupBox4.Location = new Point(257, 73);
             groupBox4.Margin = new Padding(4, 3, 4, 3);
             groupBox4.Name = "groupBox4";
@@ -1084,123 +1087,11 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Location Details";
             // 
-            // lbSystemName
-            // 
-            lbSystemName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbSystemName.BorderStyle = BorderStyle.FixedSingle;
-            lbSystemName.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSystemName.ImageAlign = ContentAlignment.MiddleRight;
-            lbSystemName.Location = new Point(152, 72);
-            lbSystemName.Margin = new Padding(5);
-            lbSystemName.Name = "lbSystemName";
-            lbSystemName.Padding = new Padding(2);
-            lbSystemName.Size = new Size(186, 27);
-            lbSystemName.TabIndex = 20;
-            lbSystemName.Text = "Current Location";
-            lbSystemName.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label10.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.ImageAlign = ContentAlignment.MiddleRight;
-            label10.Location = new Point(14, 74);
-            label10.Margin = new Padding(4, 0, 4, 0);
-            label10.Name = "label10";
-            label10.Size = new Size(120, 24);
-            label10.TabIndex = 19;
-            label10.Text = "System Name";
-            label10.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lbStarType
-            // 
-            lbStarType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbStarType.BorderStyle = BorderStyle.FixedSingle;
-            lbStarType.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbStarType.ImageAlign = ContentAlignment.MiddleRight;
-            lbStarType.Location = new Point(152, 110);
-            lbStarType.Margin = new Padding(5);
-            lbStarType.Name = "lbStarType";
-            lbStarType.Padding = new Padding(2);
-            lbStarType.Size = new Size(186, 27);
-            lbStarType.TabIndex = 18;
-            lbStarType.Text = "Current Location";
-            lbStarType.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label11.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label11.ImageAlign = ContentAlignment.MiddleRight;
-            label11.Location = new Point(15, 112);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(120, 24);
-            label11.TabIndex = 17;
-            label11.Text = "Star Type";
-            label11.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lbPlanetType
-            // 
-            lbPlanetType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbPlanetType.BorderStyle = BorderStyle.FixedSingle;
-            lbPlanetType.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbPlanetType.ImageAlign = ContentAlignment.MiddleRight;
-            lbPlanetType.Location = new Point(152, 147);
-            lbPlanetType.Margin = new Padding(5);
-            lbPlanetType.Name = "lbPlanetType";
-            lbPlanetType.Padding = new Padding(2);
-            lbPlanetType.Size = new Size(186, 27);
-            lbPlanetType.TabIndex = 16;
-            lbPlanetType.Text = "Current Location";
-            lbPlanetType.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label9.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.ImageAlign = ContentAlignment.MiddleRight;
-            label9.Location = new Point(14, 151);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(121, 18);
-            label9.TabIndex = 15;
-            label9.Text = "Planet Type";
-            label9.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lbLocation
-            // 
-            lbLocation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbLocation.BorderStyle = BorderStyle.FixedSingle;
-            lbLocation.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lbLocation.ImageAlign = ContentAlignment.MiddleRight;
-            lbLocation.Location = new Point(152, 35);
-            lbLocation.Margin = new Padding(5);
-            lbLocation.Name = "lbLocation";
-            lbLocation.Padding = new Padding(2);
-            lbLocation.Size = new Size(186, 27);
-            lbLocation.TabIndex = 14;
-            lbLocation.Text = "Current Location";
-            lbLocation.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ImageAlign = ContentAlignment.MiddleRight;
-            label7.Location = new Point(14, 39);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(120, 20);
-            label7.TabIndex = 13;
-            label7.Text = "Location";
-            label7.TextAlign = ContentAlignment.MiddleRight;
-            // 
             // lbOwner
             // 
             lbOwner.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbOwner.BorderStyle = BorderStyle.FixedSingle;
-            lbOwner.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lbOwner.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbOwner.ImageAlign = ContentAlignment.MiddleRight;
             lbOwner.Location = new Point(152, 183);
             lbOwner.Margin = new Padding(5);
@@ -1214,7 +1105,7 @@
             // label15
             // 
             label15.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label15.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Font = new Font("Microsoft Sans Serif", 9.75F);
             label15.ImageAlign = ContentAlignment.MiddleRight;
             label15.Location = new Point(14, 187);
             label15.Margin = new Padding(4, 0, 4, 0);
@@ -1223,6 +1114,118 @@
             label15.TabIndex = 21;
             label15.Text = "Owning Race";
             label15.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbSystemName
+            // 
+            lbSystemName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbSystemName.BorderStyle = BorderStyle.FixedSingle;
+            lbSystemName.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbSystemName.ImageAlign = ContentAlignment.MiddleRight;
+            lbSystemName.Location = new Point(152, 72);
+            lbSystemName.Margin = new Padding(5);
+            lbSystemName.Name = "lbSystemName";
+            lbSystemName.Padding = new Padding(2);
+            lbSystemName.Size = new Size(186, 27);
+            lbSystemName.TabIndex = 20;
+            lbSystemName.Text = "Current Location";
+            lbSystemName.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label10.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label10.ImageAlign = ContentAlignment.MiddleRight;
+            label10.Location = new Point(14, 74);
+            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(120, 24);
+            label10.TabIndex = 19;
+            label10.Text = "System Name";
+            label10.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbStarType
+            // 
+            lbStarType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbStarType.BorderStyle = BorderStyle.FixedSingle;
+            lbStarType.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbStarType.ImageAlign = ContentAlignment.MiddleRight;
+            lbStarType.Location = new Point(152, 110);
+            lbStarType.Margin = new Padding(5);
+            lbStarType.Name = "lbStarType";
+            lbStarType.Padding = new Padding(2);
+            lbStarType.Size = new Size(186, 27);
+            lbStarType.TabIndex = 18;
+            lbStarType.Text = "Current Location";
+            lbStarType.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label11.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label11.ImageAlign = ContentAlignment.MiddleRight;
+            label11.Location = new Point(15, 112);
+            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(120, 24);
+            label11.TabIndex = 17;
+            label11.Text = "Star Type";
+            label11.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbPlanetType
+            // 
+            lbPlanetType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbPlanetType.BorderStyle = BorderStyle.FixedSingle;
+            lbPlanetType.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbPlanetType.ImageAlign = ContentAlignment.MiddleRight;
+            lbPlanetType.Location = new Point(152, 147);
+            lbPlanetType.Margin = new Padding(5);
+            lbPlanetType.Name = "lbPlanetType";
+            lbPlanetType.Padding = new Padding(2);
+            lbPlanetType.Size = new Size(186, 27);
+            lbPlanetType.TabIndex = 16;
+            lbPlanetType.Text = "Current Location";
+            lbPlanetType.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label9.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label9.ImageAlign = ContentAlignment.MiddleRight;
+            label9.Location = new Point(14, 151);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(121, 18);
+            label9.TabIndex = 15;
+            label9.Text = "Planet Type";
+            label9.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbLocation
+            // 
+            lbLocation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbLocation.BorderStyle = BorderStyle.FixedSingle;
+            lbLocation.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbLocation.ImageAlign = ContentAlignment.MiddleRight;
+            lbLocation.Location = new Point(152, 35);
+            lbLocation.Margin = new Padding(5);
+            lbLocation.Name = "lbLocation";
+            lbLocation.Padding = new Padding(2);
+            lbLocation.Size = new Size(186, 27);
+            lbLocation.TabIndex = 14;
+            lbLocation.Text = "Current Location";
+            lbLocation.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label7.ImageAlign = ContentAlignment.MiddleRight;
+            label7.Location = new Point(14, 39);
+            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(120, 20);
+            label7.TabIndex = 13;
+            label7.Text = "Location";
+            label7.TextAlign = ContentAlignment.MiddleRight;
             // 
             // ColonyView
             // 

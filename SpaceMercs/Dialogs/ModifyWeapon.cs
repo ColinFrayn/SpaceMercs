@@ -43,8 +43,7 @@ namespace SpaceMercs.Dialogs {
 
             cbModType.Items.Clear();
             foreach (WeaponMod mod in StaticData.WeaponMods) {
-                if (mod.IsMelee == WeaponToModify.Type.IsMeleeWeapon &&
-                    mod.Name != WeaponToModify.Mod?.Name) {
+                if (mod.CanBeFittedTo(WeaponToModify)) {
                     cbModType.Items.Add(mod.Name);
                 }
             }
@@ -56,7 +55,8 @@ namespace SpaceMercs.Dialogs {
         private void UpdatedSelection() {
             string newMod = cbModType?.SelectedItem?.ToString() ?? string.Empty;
             WeaponMod? mod = StaticData.GetWeaponModByName(newMod);
-            if (mod == null) { return; } 
+            if (mod == null) { return; }
+            lbDescription.Text = mod.Desc;
 
             // Chance of this modification working and not damaging the weapon
             SuccessChance = (0.7 - 0.05 * (WeaponToModify.Level * 4 - (Skill1 + Skill2)) - 0.01 * (WeaponToModify.BaseType.BaseRarity));
@@ -65,7 +65,7 @@ namespace SpaceMercs.Dialogs {
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";
 
             // Cost of this modification
-            ModifyCost = (WeaponToModify.UnmodifiedCost * mod.CostMod + Const.ModificationCost) * PriceMod;
+            ModifyCost = (WeaponToModify.UnmodifiedCost * mod.CostMod * Math.Sqrt(WeaponToModify.Type.Shots) + Const.ModificationCost) * PriceMod;
             lbCost.Text = ModifyCost.ToString("N2") + "cr";
             btModify.Enabled = (ModifyCost <= PlayerTeam.Cash);
         }

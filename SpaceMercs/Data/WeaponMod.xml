@@ -4,7 +4,7 @@
     <Mass>0.2</Mass>
     <CostMod>0.1</CostMod>
     <Desc>A precision laser sight which reduces the penalty for firing at long distance.</Desc>
-    <DropoffMod>0.8</DropoffMod>
+    <DropoffMod>0.7</DropoffMod>
   </WeaponMod>
   <WeaponMod Name="Range Enhancer" Char="R">
     <Mass>0.2</Mass>
@@ -15,8 +15,8 @@
   <WeaponMod Name="Recoil Dampener" Char="E">
     <Mass>1.0</Mass>
     <CostMod>0.15</CostMod>
-    <Desc>A gyroscopic device which reduces the recoil of large weapons.</Desc>
-    <RecoilMod>0.8</RecoilMod>
+    <Desc>A gyroscopic device which reduces the recoil of large weapons so that multi-shot attacks are more effective.</Desc>
+    <RecoilMod>0.7</RecoilMod>
   </WeaponMod>
   <WeaponMod Name="Silencer" Char="~">
     <Mass>0.2</Mass>
@@ -30,7 +30,7 @@
     <Desc>A balancing device which makes the weapon more accurate.</Desc>
     <Accuracy>1</Accuracy>
   </WeaponMod>
-  <WeaponMod Name="Enhanced Core" Char="D">
+  <WeaponMod Name="Explosive Rounds" Char="D">
     <Mass>0.2</Mass>
     <CostMod>0.2</CostMod>
     <Desc>A powerful enhancement to this weapon's damage.</Desc>
