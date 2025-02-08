@@ -20,15 +20,15 @@ namespace SpaceMercs {
                 foreach (KeyValuePair<WeaponType.DamageType, double> tp in GetAllResistances()) {
                     sb.AppendLine("Resist (" + tp.Key + ") : " + tp.Value.ToString("0.#") + "%");
                 }
-                if (Type.Strength != 0) sb.AppendLine("Strength : " + Type.Strength.ToString("0.#"));
-                if (Type.Agility != 0) sb.AppendLine("Agility : " + Type.Agility.ToString("0.#"));
-                if (Type.Insight != 0) sb.AppendLine("Insight : " + Type.Insight.ToString("0.#"));
-                if (Type.Toughness != 0) sb.AppendLine("Toughness : " + Type.Toughness.ToString("0.#"));
-                if (Type.Endurance != 0) sb.AppendLine("Endurance : " + Type.Endurance.ToString("0.#"));
-                if (Type.Health != 0) sb.AppendLine("Health : " + Type.Health.ToString("0.#"));
-                if (Type.Stamina != 0) sb.AppendLine("Stamina : " + Type.Stamina.ToString("0.#"));
-                if (Type.Attack != 0) sb.AppendLine("Attack : " + Type.Attack.ToString("0.#"));
-                if (Type.Defence != 0) sb.AppendLine("Defence : " + Type.Defence.ToString("0.#"));
+                if (Type.Strength != 0) sb.AppendLine($"Strength : {FormatDoubleWithOptionalSign(Type.Strength)}");
+                if (Type.Agility != 0) sb.AppendLine($"Agility : {FormatDoubleWithOptionalSign(Type.Agility)}");
+                if (Type.Insight != 0) sb.AppendLine($"Insight : {FormatDoubleWithOptionalSign(Type.Insight)}");
+                if (Type.Toughness != 0) sb.AppendLine($"Toughness : {FormatDoubleWithOptionalSign(Type.Toughness)}");
+                if (Type.Endurance != 0) sb.AppendLine($"Endurance : {FormatDoubleWithOptionalSign(Type.Endurance)}");
+                if (Type.Health != 0) sb.AppendLine($"Health : {FormatDoubleWithOptionalSign(Type.Health)}");
+                if (Type.Stamina != 0) sb.AppendLine($"Stamina : {FormatDoubleWithOptionalSign(Type.Stamina)}");
+                if (Type.Attack != 0) sb.AppendLine($"Attack : {FormatDoubleWithOptionalSign(Type.Attack)}");
+                if (Type.Defence != 0) sb.AppendLine($"Defence : {FormatDoubleWithOptionalSign(Type.Defence)}");
                 if (Type.Speed != 1.0) {
                     if (Type.Speed > 1.0) sb.AppendLine($"Speed : +{((Type.Speed - 1.0) * 100).ToString("0")}%");
                     else sb.AppendLine($"Speed : -{((1.0 - Type.Speed) * 100).ToString("0")}%");
@@ -36,10 +36,15 @@ namespace SpaceMercs {
                 ICollection<Soldier.UtilitySkill> allSkillBoosts = Type.SkillBoosts.Keys.Union(Material.SkillBoosts.Keys).ToList();
                 foreach (Soldier.UtilitySkill sk in allSkillBoosts) {
                     int val = GetUtilitySkill(sk);
-                    sb.AppendLine(sk.ToString() + " : +" + val);
+                    if (val > 0) sb.AppendLine(sk.ToString() + " : +" + val);
+                    else if (val < 0) sb.AppendLine(sk.ToString() + " : " + val);
                 }
                 return sb.ToString();
             }
+        }
+        private string FormatDoubleWithOptionalSign(double d) {
+            if (d < 0) return d.ToString("0.#");
+            return $"+{d:0.#}";
         }
         public double Rarity { get { return Type.Rarity * Material.Rarity * Math.Pow(Const.EquipmentLevelRarityScale, Level); } }
         public int Level { get; private set; }

@@ -17,6 +17,8 @@ Can enemies use shotguns? Do they work like single target weapons? (If not then 
 Backburner : Features
 ---------------------
 
+Timed missions (must complete within x rounds)
+
 What should attack skill do for an AoE weapon (grenade or cone)?
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack)

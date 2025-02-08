@@ -231,9 +231,10 @@ namespace SpaceMercs.Dialogs {
             int maxlev = PlayerTeam.GetMaxSkillByItemType(newType);
             Soldier s = PlayerTeam.GetSoldierWithMaxSkillByItemType(newType);
             double chance = newType.ConstructionChance + (maxlev * Const.SkillConstructChanceModifier);
-            if (armourMat is not null) chance += armourMat.ConstructionChanceModifier;
+            chance += armourMat?.ConstructionChanceModifier ?? 0d;           
             double basechance = chance;
             if (chance > 99.0) chance = 99.0;
+            if (chance < 1.0) chance = 1.0;
 
             // Are you sure?
             string strReally = "Really construct " + newType.Name + "?\nSoldier = " + s.Name + " (" + maxlev + ")\nChance of success = " + chance.ToString("N2") + "%";

@@ -555,10 +555,8 @@ namespace SpaceMercs {
             if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = CostToBuildEquipment(se);
             double salvage = 0d;
-            ShipEquipment? seOld = null;
             bool bReplace = Equipment.TryGetValue(iRoomID, out Tuple<ShipEquipment, bool>? oldRoom);
-            if (bReplace) {
-                seOld = oldRoom?.Item1 as ShipEquipment;
+            if (bReplace && oldRoom?.Item1 is ShipEquipment seOld) {
                 salvage = SalvageValue(seOld);
                 cost -= salvage;
                 strMessage = string.Format($"Really replace {seOld.Name} with {se.Name} for {cost:F2} credits?\n(Includes rebate of {salvage:F2} credits)");

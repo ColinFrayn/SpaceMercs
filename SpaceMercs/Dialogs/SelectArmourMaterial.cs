@@ -48,7 +48,7 @@ namespace SpaceMercs.Dialogs {
             lbMass.Text = SelectedMat.MassMod.ToString();
             lbDiff.Visible = true;
             double ccm = SelectedMat.ConstructionChanceModifier;
-            lbDiff.Text = ccm < 0.0001 ? "0" : (-ccm).ToString("N1") + "%";
+            lbDiff.Text = ccm.ToString("N1") + "%";
             lbArmourLabel.Visible = true;
             lbMassLabel.Visible = true;
             lbDiffLabel.Visible = true;
@@ -56,6 +56,9 @@ namespace SpaceMercs.Dialogs {
             lbProtection.Items.Clear();
             foreach (WeaponType.DamageType dt in SelectedMat.BonusArmour.Keys) {
                 lbProtection.Items.Add(dt.ToString() + " : " + SelectedMat.BonusArmour[dt]);
+            }
+            if (lbProtection.Items.Count == 0) {
+                lbProtection.Items.Add("<No extra protection>");
             }
         }
 

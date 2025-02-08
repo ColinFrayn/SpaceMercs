@@ -19,7 +19,7 @@ namespace SpaceMercs {
         private Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; set; } = new Dictionary<Soldier.UtilitySkill, int>();
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get { return _SkillBoosts; } }
         private static uint NextID = Const.ItemIDBase;
-        public double ConstructionChance { get { return 120.0 - (BaseRarity * 5.0); } }
+        public double ConstructionChance { get { return 90d - ((Requirements?.MinLevel ?? 1) * 10d) - Math.Sqrt(Cost); } }
 
         public ItemType(XmlNode xml) : base(xml) {
             BaseRarity = xml.SelectNodeInt("Rarity", 0);

@@ -5,7 +5,7 @@ namespace SpaceMercs {
     public class MaterialType : IResearchable {
         public string Name { get; private set; }
         public double MassMod { get; private set; } // Modifier (default = 1.0)
-        public double ArmourMod { get; private set; } // Modifier (default = 0.0)
+        public double ArmourMod { get; private set; } // Modifier (default = 1.0)
         public double Rarity { get; private set; } // Modifier (default = 1.0)
         public bool IsScavenged { get; private set; } // Can this material only be obtained from dead creatures?
         public string Description { get; private set; }
@@ -16,7 +16,7 @@ namespace SpaceMercs {
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
-        public double ConstructionChanceModifier { get { return Math.Log(Rarity > 0 ? Rarity : 0.0001) * 10.0; } }
+        public double ConstructionChanceModifier { get { return -((Requirements?.MinLevel ?? 0d) * 2d) - (10d * (ArmourMod - 1d)) - (15d * (1d - MassMod)) - (Math.Sqrt(UnitCost) * 2d) + (IsScavenged ? -2d : 3d); } }
         public int GetUtilitySkill(Soldier.UtilitySkill sk) {
             if (SkillBoosts.ContainsKey(sk)) return SkillBoosts[sk];
             return 0;
