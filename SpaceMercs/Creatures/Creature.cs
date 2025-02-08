@@ -566,6 +566,10 @@ namespace SpaceMercs {
             int nsteps = 0;
             bool bFleeing = false;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            if (isDefendLevel) {
+                // Make sure this is always set
+                Investigate = CurrentLevel.LocationToDefend;
+            }
             HasMoved = false;
             if (!IsAlert) return;
             // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
@@ -628,7 +632,7 @@ namespace SpaceMercs {
                         else {
                             // Do the attack
                             centreView(this);
-                            Thread.Sleep(200);
+                            Thread.Sleep(fastAI ? 150 : 200);
                             AttackEntity(CurrentTarget, fact, playSound);
                             Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
@@ -641,8 +645,7 @@ namespace SpaceMercs {
                         if (path is null || path.Count == 0) {
                             // No way of getting close enough to hit target so give up and don't investigate.
                             CurrentTarget = null;
-                            path = null;
-                            if (CurrentLevel.ParentMission.Goal != Mission.MissionGoal.Defend) Investigate = Point.Empty;
+                            if (!isDefendLevel) Investigate = Point.Empty;
                         }
                         else {
                             if (!atObjective) MoveTo(path[0], playSound);

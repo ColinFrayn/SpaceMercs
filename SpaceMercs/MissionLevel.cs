@@ -26,6 +26,11 @@ namespace SpaceMercs {
         private int HoverX = -1, HoverY = -1;
         private Random rand = new Random();
         private const float TexEpsilon = 0.01f;
+        public Point LocationToDefend {
+            get {
+                return EntryLocations.FirstOrDefault();
+            }
+        }
 
         public TileType[,] Map { get; private set; }
         public bool[,] Explored { get; private set; }
