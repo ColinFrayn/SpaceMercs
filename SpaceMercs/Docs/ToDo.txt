@@ -8,9 +8,7 @@ Expansion of systems: Work out how to get large colonies in distant systems
 -> more trade routes (and announce them)
 - Maybe have fewer moon colonies?
 
-Can enemies use shotguns? Do they work like single target weapons? (If not then add in one that does)
-
-==========================================================================================================
+==================================================================================================================
 
 
 ---------------------
@@ -32,7 +30,7 @@ Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 -- Is it possible to disband a colony once created?
-
+, 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 
 Cover

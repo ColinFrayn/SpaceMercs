@@ -589,7 +589,7 @@ namespace SpaceMercs {
                     CurrentTarget = null;
                 }
             }
-            List<Point>? path = null;
+
             do {
                 // Make sure we're on the best target
                 IEntity? lastTarg = CurrentTarget;
@@ -602,31 +602,24 @@ namespace SpaceMercs {
                     // Can we attack? If not then maybe move a bit closer for a better shot?
                     if (r <= atr) {
                         if (!CanSee(CurrentTarget)) {
-                            if (path is null) {
-                                path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
-                            }
+                            List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
                             if (path is null || path.Count == 0) {
                                 CurrentTarget = null; // No way of getting close enough to see target
                                 path = null;
                                 continue;
                             }
                             if (!atObjective) MoveTo(path[0], playSound);
-                            path.RemoveAt(0);
                             postMoveCheck(this);
                             if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                         else if (Stamina < AttackCost) {
                             // Optionally move closer?
                             if (r > 5.0 && Stamina >= MovementCost && r > 1.0 && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
-                                if (path is null) {
-                                    path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
-                                }
+                                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
                                 if (path is null || path.Count == 0) {
-                                    path = null;
                                     return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 }
                                 if (!atObjective) MoveTo(path[0], playSound);
-                                path.RemoveAt(0);
                                 postMoveCheck(this);
                                 if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                             }
@@ -637,7 +630,6 @@ namespace SpaceMercs {
                             centreView(this);
                             Thread.Sleep(200);
                             AttackEntity(CurrentTarget, fact, playSound);
-                            path = null;
                             Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
@@ -645,9 +637,7 @@ namespace SpaceMercs {
                         if (bFleeing) return;
                         // Close the distance
                         if (Stamina < MovementCost) return;
-                        if (path is null) {
-                            path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
-                        }
+                        List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
                         if (path is null || path.Count == 0) {
                             // No way of getting close enough to hit target so give up and don't investigate.
                             CurrentTarget = null;
@@ -656,7 +646,6 @@ namespace SpaceMercs {
                         }
                         else {
                             if (!atObjective) MoveTo(path[0], playSound);
-                            path.RemoveAt(0);
                             postMoveCheck(this);
                             if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
@@ -670,9 +659,7 @@ namespace SpaceMercs {
                         return;
                     }
                     if (Stamina < MovementCost) return;
-                    if (path is null) {
-                        path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1, ignoreEntities: isDefendLevel); // Go to this square or nearby
-                    }
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1, ignoreEntities: isDefendLevel); // Go to this square or nearby
                     if (path is null || path.Count == 0) {
                         if (!isDefendLevel) Investigate = Point.Empty;
                         path = null;
@@ -680,7 +667,6 @@ namespace SpaceMercs {
                     }
                     else {
                         MoveTo(path[0], playSound);
-                        path.RemoveAt(0);
                         postMoveCheck(this);
                         if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
@@ -688,9 +674,7 @@ namespace SpaceMercs {
                 // Running to hide somewhere
                 else if (HidingPlace != Point.Empty) {
                     if (Stamina < MovementCost) return;
-                    if (path is null) {
-                        path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
-                    }
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
                     if (path is null || path.Count == 0) {
                         HidingPlace = Point.Empty;
                         path = null;
@@ -698,7 +682,6 @@ namespace SpaceMercs {
                     }
                     else {
                         MoveTo(path[0], playSound);
-                        path.RemoveAt(0);
                         postMoveCheck(this);
                         if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
@@ -708,14 +691,12 @@ namespace SpaceMercs {
                     Point? hidingPlace = null;
                     if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
                         hidingPlace = FindHidingPlace();
-                        path = null;
                     }
                     if (hidingPlace is null) {
                         IsAlert = false;
                         return; // no target, no hope of finding one, just give up
                     }
                     else {
-                        path = null;
                         HidingPlace = hidingPlace!.Value; // Go here
                     }
                 }
