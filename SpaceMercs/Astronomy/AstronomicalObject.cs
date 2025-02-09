@@ -97,9 +97,8 @@ namespace SpaceMercs {
 
         // Get a random difficulty level for this location (e.g. for a mercenary or a mission)
         public int GetRandomMissionDifficulty(Random rand) {
-            // Home planet is a nursery zone. Mostly 1s with a sprinkling of 2s.
-            if (this == StaticData.HumanRace.HomePlanet) {
-                return (int)(rand.NextDouble() * 1.7d) + 1;
+            if (this.GetSystem() == StaticData.HumanRace.HomePlanet.GetSystem()) {
+                return GetHumanHomeSystemMissionDifficulty(rand);
             }
 
             double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
@@ -110,6 +109,7 @@ namespace SpaceMercs {
             // Scale more steeply in home sector (Yes I know sectors are not circular.)
             double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
             dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
+
             // Scale more shallowly outside home sector
             if (dDistLY > Const.EncounterLevelScalingInnerRadius) {
                 dLevel += Math.Pow((dDistLY - Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
@@ -131,15 +131,41 @@ namespace SpaceMercs {
             // This is a home system so reduce danger level
             Star sys = GetSystem();
             foreach (Race r in StaticData.Races) {
-                if (sys == r.HomePlanet.GetSystem()) dLevel -= rand.NextDouble() + rand.NextDouble();
-            }
-            // Make alien systems less dangerous considering their location
-            if (sys.Owner != null && sys.Owner != StaticData.HumanRace) {
-                dLevel -= rand.NextDouble() + rand.NextDouble(); // Any alien system should be less dangerous than expected for the distance from home
+                if (sys == r.HomePlanet.GetSystem()) {
+                    dLevel -= rand.NextDouble() + rand.NextDouble();
+                    break;
+                }
             }
 
-            int iLevel = Math.Max(1, (int)dLevel);
-            return iLevel;
+            // Any alien system should be slightly less dangerous than expected for the distance from (0,0)
+            if (sys.Owner != null && sys.Owner != StaticData.HumanRace) {
+                dLevel -= rand.NextDouble() + rand.NextDouble();
+            }
+
+            return (int)dLevel;
+        }
+
+        // Get the mission difficulty for the home system of the Human race
+        private int GetHumanHomeSystemMissionDifficulty(Random rand) {
+            // Home planet is a nursery zone. Mostly 1s with a sprinkling of 2s.
+            if (this == StaticData.HumanRace.HomePlanet) {
+                return (int)(rand.NextDouble() * 1.7d) + 1;
+            }
+            // Planets increase in diff as they get further from home
+            if (this is Planet pl) {
+                double pdist = Math.Abs(pl.ID - StaticData.HumanRace.HomePlanet.ID);
+                double diff = (rand.NextDouble() * 1.7d) + 1d + (rand.NextDouble() * pdist * 0.5d);
+                return (int)diff;
+            }
+            // Moons increase in diff as they get further from their parent planet, and as the parent gets further from home
+            if (this is Moon mn) {
+                double pdist = Math.Abs((mn.Parent).ID - StaticData.HumanRace.HomePlanet.ID);
+                double diff = (rand.NextDouble() * 1.7d) + 1d + (rand.NextDouble() * pdist * 0.5d);
+                diff += rand.NextDouble() * mn.ID * 0.2d;
+                return (int)diff;
+            }
+            // Shouldn't get here
+            throw new Exception($"Strange AO type in {nameof(GetHumanHomeSystemMissionDifficulty)}");
         }
 
         // Get a random race suitable for this location

@@ -566,12 +566,9 @@ namespace SpaceMercs {
             int nsteps = 0;
             bool bFleeing = false;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
-            if (isDefendLevel) {
-                // Make sure this is always set
-                Investigate = CurrentLevel.LocationToDefend;
-            }
             HasMoved = false;
             if (!IsAlert) return;
+
             // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
             if (Health * 4.0 < MaxHealth &&
                 CurrentTarget != null &&
@@ -599,27 +596,35 @@ namespace SpaceMercs {
                 IEntity? lastTarg = CurrentTarget;
                 SetBestTarget();
                 bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
-                if (CurrentTarget == null && lastTarg != null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe that we lost sight of them because we're pathing a complex route. Stay on track.
+                if (CurrentTarget == null && lastTarg != null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe we lost sight of them because we're pathing a complex route. Stay on track.
+                if (isDefendLevel) {
+                    // Make sure this is always set and never gets overridden on defend levels
+                    Investigate = CurrentLevel.LocationToDefend;
+                }
+
+                // We have a target, so attempt to get near enough to attack them, and do so.
                 if (CurrentTarget != null) {
                     double atr = AttackRange;
                     double r = RangeTo(CurrentTarget);
-                    // Can we attack? If not then maybe move a bit closer for a better shot?
+                    // -- Can we attack? If not then maybe move a bit closer for a better shot?
+                    // We are within range:
                     if (r <= atr) {
+                        // We can't see the target, so maybe attempt to find them
                         if (!CanSee(CurrentTarget)) {
                             List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
                             if (path is null || path.Count == 0) {
-                                CurrentTarget = null; // No way of getting close enough to see target
-                                path = null;
+                                CurrentTarget = null; // No way of getting close enough to see target so remove the target
                                 continue;
                             }
                             if (!atObjective) MoveTo(path[0], playSound);
                             postMoveCheck(this);
                             if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
+                        // We can see the target, but can't attack them because we don't have enough stamina
                         else if (Stamina < AttackCost) {
                             // Optionally move closer?
-                            if (r > 5.0 && Stamina >= MovementCost && r > 1.0 && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
-                                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 10, false, (int)Math.Floor(atr));
+                            if (r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
+                                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 5, false, (int)Math.Floor(atr));
                                 if (path is null || path.Count == 0) {
                                     return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
                                 }
@@ -629,14 +634,15 @@ namespace SpaceMercs {
                             }
                             return;
                         }
+                        // We can see the target, and have enough stamina to attack, so attack.
                         else {
-                            // Do the attack
                             centreView(this);
                             Thread.Sleep(fastAI ? 150 : 200);
                             AttackEntity(CurrentTarget, fact, playSound);
                             Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                         }
                     }
+                    // We are not within range of the target
                     else {
                         if (bFleeing) return;
                         // Close the distance
@@ -654,33 +660,36 @@ namespace SpaceMercs {
                         }
                     }
                 }
+
                 // No target and couldn't find one. Maybe investigate nearby if we heard something.
                 // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
                 else if (Investigate != Point.Empty) {
-                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got there
+                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got to the objective
                         if (!isDefendLevel) Investigate = Point.Empty;
                         return;
                     }
                     if (Stamina < MovementCost) return;
-                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 30, false, 1, ignoreEntities: isDefendLevel); // Go to this square or nearby
+                    // Find a route to the target square or nearby, if possible
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 40, false, 1, ignoreEntities: isDefendLevel);
+                    // No route available, quit
                     if (path is null || path.Count == 0) {
                         if (!isDefendLevel) Investigate = Point.Empty;
-                        path = null;
                         return;
                     }
+                    // There is a route, so take it
                     else {
                         MoveTo(path[0], playSound);
                         postMoveCheck(this);
                         if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
                 }
-                // Running to hide somewhere
+
+                // Running to hide somewhere i.e. if you are being attacked but can't get within range of the attacker because the way is blocked.
                 else if (HidingPlace != Point.Empty) {
                     if (Stamina < MovementCost) return;
                     List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
                     if (path is null || path.Count == 0) {
                         HidingPlace = Point.Empty;
-                        path = null;
                         return;
                     }
                     else {
@@ -689,20 +698,22 @@ namespace SpaceMercs {
                         if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
                 }
+
+                // Should creature attempt to hide from Soldiers?
                 else {
-                    // Attempt to hide from Soldiers
                     Point? hidingPlace = null;
                     if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
                         hidingPlace = FindHidingPlace();
                     }
                     if (hidingPlace is null) {
                         IsAlert = false;
-                        return; // no target, no hope of finding one, just give up
+                        return; // No target, no hope of finding one, just give up and go back to idling
                     }
                     else {
                         HidingPlace = hidingPlace!.Value; // Go here
                     }
                 }
+
             } while (++nsteps < 20 && Stamina >= MovementCost);
         }
         private Point? FindHidingPlace() {

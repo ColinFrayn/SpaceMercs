@@ -2240,7 +2240,9 @@ namespace SpaceMercs {
                                 if (h < mintaxicab) mintaxicab = h;
                             }
                         }
-                        if (dist + mintaxicab < guess + CREATURE_ASTAR_PRUNING_DIST + PruningModifier) { // We're not way off-track
+
+                        // If we're not way off-track then check this one
+                        if (dist + mintaxicab < guess + CREATURE_ASTAR_PRUNING_DIST + PruningModifier) {
                             Point pt2 = new Point(dx, dy);
                             // Arrived?
                             if (mintaxicab <= mindist) {
