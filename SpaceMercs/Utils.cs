@@ -150,6 +150,8 @@ namespace SpaceMercs {
                 Mission.MissionGoal.Gather => "Gathering",
                 Mission.MissionGoal.FindItem => "Treasure Hunt",
                 Mission.MissionGoal.Defend => "Defend Objective",
+                Mission.MissionGoal.Artifact => "Artifact Hunt",
+                Mission.MissionGoal.Countdown => "Speed Run",
                 _ => "Unknown",
             };
         }
@@ -531,6 +533,34 @@ namespace SpaceMercs {
                     }
                     return new Weapon(tp, lvl);
                 }
+            }
+            return null;
+        }
+
+        public static Weapon? GenerateRandomLegendaryWeapon(Random rnd, int Level, Race? race) {
+            List<WeaponType> wts = new List<WeaponType>();
+            double trar = 0.0;
+            foreach (WeaponType tp in StaticData.WeaponTypes) {
+                if (!tp.CanBuild(race)) continue;
+                if (tp.IsUsable && (tp.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff <= Level) {
+                    wts.Add(tp);
+                    trar += tp.Rarity;
+                }
+            }
+            if (wts.Count == 0) return null;
+            double rar = rnd.NextDouble() * trar;
+            int pos = 0;
+            while (pos < wts.Count && rar > wts[pos].Rarity) {
+                if (pos == wts.Count - 1) break;
+                rar -= wts[pos].Rarity;
+                pos++;
+            }
+            WeaponType wt = wts[pos];
+            if (wt != null) {
+                if (Level - (wt.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4) {
+                    return new Weapon(wt, 5); // Legendary
+                }
+                return new Weapon(wt, 4); // Epic
             }
             return null;
         }

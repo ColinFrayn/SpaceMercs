@@ -2,6 +2,16 @@
 ToDo List
 -------------------------------------------------
 
+Artifact Mission: Test it
+
+Countdown Mission: 
+- Set LevelCount based on mission size
+- Display countdown on screen
+- If lowest level the display exit with a different icon
+- If lowest level and on exit then mission is complete (test)
+- If ran out of time, show mission failed and maybe open up "Exit Mission" button.
+-- Success depends on LevelCoutn remaining
+
 Display when weapon is recharging somehow
 
 Expansion of systems: Work out how to get large colonies in distant systems
@@ -15,7 +25,9 @@ Expansion of systems: Work out how to get large colonies in distant systems
 Backburner : Features
 ---------------------
 
-Timed missions (must complete within x rounds)
+New mission types:
+- Timed missions (entire team must reach an objective within x rounds)
+- Artifact missions: At the end is a guaranteed Legendary-level item (based on mission diff)
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 
@@ -30,7 +42,7 @@ Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 How do we lose favour with races? Why would we want to? Maybe over time??
 - Colonising one of "their" systems?
 -- Is it possible to disband a colony once created?
-, 
+
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 
 Cover
@@ -47,7 +59,7 @@ Improve Creature textures:
 -- Change texture based on race
 -- Change texture based on equipment / weapons
 
-Add overwatch?
+Add overwatch ability?
 
 Add more alien-only items
 - Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]

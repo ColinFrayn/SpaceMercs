@@ -624,8 +624,10 @@ namespace SpaceMercs.MainWindow {
                 else gbTransition.UpdateText("Ascend to Level " + CurrentLevel.LevelID);  // LevelID starts at zero
             }
             else if (CurrentLevel.CheckAllSoldiersAtExit()) {
-                gbTransition!.Activate();
-                gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 2));  // LevelID starts at zero
+                if (CurrentLevel.LevelID < CurrentLevel.ParentMission.LevelCount - 1) { // Can't be the bottom level (so we don't try to descend on teh last level of a Countdown mission)
+                    gbTransition!.Activate();
+                    gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 2));  // LevelID starts at zero
+                }
             }
             else gbTransition!.Deactivate();
         }

@@ -554,15 +554,15 @@ namespace SpaceMercs {
             Visible = new bool[Width, Height];
             EntityMap = new IEntity[Width, Height];
             GenerateCreatures();
-            // Add goal if required
-            if (ParentMission.Goal == Mission.MissionGoal.FindItem) {
-                if (ParentMission.MItem is null) throw new Exception("No goal item type set up for FindItem mission");
+            // Add goal item, if required
+            if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact) {
+                if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
                 if (LevelID == ParentMission.LevelCount - 1) {
                     InsertGoalItem(ParentMission.MItem);
                 }
             }
             if (ParentMission.Goal == Mission.MissionGoal.Gather) {
-                if (ParentMission.MItem is null) throw new Exception("No goal item type set up for Gather mission");
+                if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
                 int nitems = ParentMission.Size + 2 + LevelID;
                 for (int n = 0; n < nitems; n++) {
                     InsertGoalItem(ParentMission.MItem);
@@ -760,7 +760,7 @@ namespace SpaceMercs {
             } while (!bOK);
             SetupEntryLocations();
 
-            if (LevelID < ParentMission.LevelCount - 1) {
+            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount-1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
                 int furthest = 0;
                 int sx2, sy2;
                 EndX = EndY = -1;
@@ -1029,7 +1029,9 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (ParentMission.Soldiers.Count + 1) * Const.CreatureCountScale * cg.QuantityScale / 10000.0);
+            int soldierCount = ParentMission.Soldiers.Count;
+            if (ParentMission.Goal == Mission.MissionGoal.Countdown) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (soldierCount + 1) * Const.CreatureCountScale * cg.QuantityScale / 10000.0);
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
