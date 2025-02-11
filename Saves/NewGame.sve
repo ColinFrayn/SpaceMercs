@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>22/03/2150 16:00:19</Clock>
+<Clock>30/03/2150 14:51:49</Clock>
 <Map Seed="224758" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Ogrish">
 <Star ID="0">
@@ -171,7 +171,7 @@
  <BaseType>31</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>718454016000000000</NextGrowth>
- <SeedProgress>3.8510</SeedProgress>
+ <SeedProgress>4.3506</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6582612</Radius>
@@ -189,7 +189,7 @@
  <BaseType>27</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>680266944000000000</NextGrowth>
- <SeedProgress>3.0809</SeedProgress>
+ <SeedProgress>3.4804</SeedProgress>
 </Colony>
 <Radius>5473718</Radius>
 <ARot>68690</ARot>
@@ -745,7 +745,7 @@
  <BaseType>63</BaseType>
  <Owner>Insectoid</Owner>
  <NextGrowth>711129888000000000</NextGrowth>
- <SeedProgress>4.8218</SeedProgress>
+ <SeedProgress>5.4473</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7384747</Radius>
@@ -1047,7 +1047,7 @@
  <BaseType>11</BaseType>
  <Owner>Grey</Owner>
  <NextGrowth>681736608000000000</NextGrowth>
- <SeedProgress>2.7722</SeedProgress>
+ <SeedProgress>3.1319</SeedProgress>
 </Colony>
 <Radius>7314616</Radius>
 <ARot>104430</ARot>
@@ -1090,7 +1090,7 @@
  <BaseType>63</BaseType>
  <Owner>Grey</Owner>
  <NextGrowth>718689888000000000</NextGrowth>
- <SeedProgress>5.5444</SeedProgress>
+ <SeedProgress>6.2636</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5382268</Radius>
@@ -1290,7 +1290,7 @@
  <Owner>Human</Owner>
  <LastUpdate>678183179540824765</LastUpdate>
  <NextGrowth>729260928000000000</NextGrowth>
- <SeedProgress>7.3921</SeedProgress>
+ <SeedProgress>8.3512</SeedProgress>
  <Mercenaries>
 <Soldier Name="Victoria Vickers">
  <Level>1</Level>
@@ -2776,138 +2776,150 @@
 <PRot>31090945</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastUpdate>678228477371230000</LastUpdate>
+ <LastUpdate>678235347383217500</LastUpdate>
  <NextGrowth>681543936000000000</NextGrowth>
  <Mercenaries>
-<Soldier Name="Hannah Eastwood">
+<Soldier Name="Kathy Nicholson">
  <Level>2</Level>
- <XP>3641</XP>
+ <XP>2853</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
- <Stats>16,9,11,9,16</Stats>
+ <Stats>13,11,15,10,11</Stats>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Incendiary Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
+<Equipment Type="Stimulant"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
+<Armour Type="Cap" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
-<Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Gloves" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Pistol" Level="0" />
+<Weapon Type="Shortblade" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Pistol">77</Exp>
+  <Exp Type="Melee">82</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Gunsmith">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Louise Quimby">
+ <Level>3</Level>
+ <XP>6816</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>14,11,11,8,16</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="2">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
+<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">117</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
-  <Exp Skill="Bladesmith">2</Exp>
+  <Exp Skill="Engineer">2</Exp>
+  <Exp Skill="Bladesmith">1</Exp>
  </UtilityExperience>
 </Soldier>
  </Mercenaries>
  <Missions>
 <Mission>
- <Type>AbandonedCity</Type>
- <Goal>ExploreAll</Goal>
- <Enemy>Bugs</Enemy>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Slime Creatures</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>12.040000000000001</Reward>
+ <Reward>17.53</Reward>
  <Diff>2</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>241647981</Seed>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="0.80" Cost="6.42">Luminous Egg</MissionItem>
- <Enemy>Triffids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>590469968</Seed>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>29.94</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>333775644</Seed>
+ <Seed>529790416</Seed>
  <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>16.17</Reward>
- <Diff>2</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1149550006</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>20.82</Reward>
- <Diff>3</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1384588482</Seed>
 </Mission>
 <Mission>
  <Type>BoardingParty</Type>
  <Goal>KillAll</Goal>
-<Ship Seed="871191364" Diff="2">
+<Ship Seed="1934766261" Diff="3">
  <Name>Enemy Ship</Name>
- <Hull>13</Hull>
+ <Hull>15</Hull>
  <Shield>0</Shield>
- <Seed>285629</Seed>
+ <Seed>809328</Seed>
  <Eqp ID="4" Active="True">Thrusters</Eqp>
- <Eqp ID="2" Active="True">Bunk Room</Eqp>
  <Eqp ID="3" Active="True">Chain Gun</Eqp>
 </Ship>
  <Opponent>Human</Opponent>
  <Enemy>Pirates</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>12.99</Reward>
+ <Reward>23.06</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>2076323178</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>15.52</Reward>
  <Diff>2</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>679167680</Seed>
+ <Seed>177703323</Seed>
 </Mission>
 <Mission>
  <Type>Mines</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>10.376000000000001</Reward>
+ <Reward>15.82</Reward>
  <Diff>2</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>1558857922</Seed>
+ <Seed>382117197</Seed>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1735482537" Diff="3">
+ <Name>Enemy Ship</Name>
+ <Hull>23</Hull>
+ <Shield>0</Shield>
+ <Seed>222556</Seed>
+ <Eqp ID="7" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Bunk Room</Eqp>
+ <Eqp ID="5" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="6" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>25.6</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>651848590</Seed>
+ <Size>2</Size>
 </Mission>
  </Missions>
  <Inventory>
@@ -2915,7 +2927,7 @@
 <Equipment Type="Medikit"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Medsystem"/>
+<Weapon Type="Automatic Rifle" Level="0" />
   </Inv>
   <Inv Count="1">
 <Equipment Type="Adrenaline"/>
@@ -2929,7 +2941,7 @@
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="4">
 <Weapon Type="Shotgun" Level="0" />
   </Inv>
   <Inv Count="1">
@@ -2944,10 +2956,10 @@
   <Inv Count="1">
 <Material Type="Tungsten"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="1">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -2974,10 +2986,10 @@
   <Inv Count="1">
 <Weapon Type="Chainsword" Level="0" />
   </Inv>
-  <Inv Count="1">
+  <Inv Count="6">
 <Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="9">
+  <Inv Count="5">
 <Armour Type="Cap" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -2986,10 +2998,10 @@
   <Inv Count="1">
 <Armour Type="Cap" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -3025,7 +3037,7 @@
   <Inv Count="1">
 <Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -3040,16 +3052,16 @@
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="9">
+  <Inv Count="10">
 <Material Type="Carbon Fibre"/>
   </Inv>
-  <Inv Count="40">
+  <Inv Count="77">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Material Type="Kevlar"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="2">
 <Material Type="Aluminium"/>
   </Inv>
   <Inv Count="3">
@@ -3064,16 +3076,16 @@
   <Inv Count="1">
 <Material Type="Silicates"/>
   </Inv>
-  <Inv Count="19">
+  <Inv Count="11">
 <Material Type="Copper"/>
   </Inv>
-  <Inv Count="8">
+  <Inv Count="6">
 <Material Type="Fabric"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="11">
+  <Inv Count="8">
 <Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
@@ -3094,8 +3106,26 @@
   <Inv Count="1">
 <Armour Type="Cap" Material="Steel" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Material Type="Gold"/>
+  </Inv>
+  <Inv Count="5">
+<Material Type="Electronic Components"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Cap" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Crystals"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gloves" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="8">
+<Material Type="Uranium"/>
   </Inv>
  </Inventory>
 </Colony>
@@ -3152,6 +3182,38 @@
 </Mission>
  </Missions>
 </Moon>
+<Moon ID="2">
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>170349502</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Cost="0.00">key alien artefact</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>806507608</Seed>
+ <Waves>5</Waves>
+</Mission>
+ </Missions>
+</Moon>
 </Moons>
 </Planet>
 <Planet ID="5">
@@ -3177,6 +3239,25 @@
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
  <Seed>1778910619</Seed>
+ <Size>2</Size>
+</Mission>
+ </Missions>
+</Moon>
+<Moon ID="4">
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.70" Cost="6.16">Golden Emerald</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>3</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1243096726</Seed>
  <Size>2</Size>
 </Mission>
  </Missions>
@@ -3232,7 +3313,7 @@
  <BaseType>63</BaseType>
  <Owner>Elithiri</Owner>
  <NextGrowth>722463840000000000</NextGrowth>
- <SeedProgress>6.9300</SeedProgress>
+ <SeedProgress>7.8291</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7312766</Radius>
@@ -3470,7 +3551,7 @@
  <BaseType>63</BaseType>
  <Owner>Ursalon</Owner>
  <NextGrowth>714136608000000000</NextGrowth>
- <SeedProgress>6.1602</SeedProgress>
+ <SeedProgress>6.9594</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5169539</Radius>
@@ -3944,7 +4025,7 @@
  <BaseType>63</BaseType>
  <Owner>Gokan</Owner>
  <NextGrowth>721293984000000000</NextGrowth>
- <SeedProgress>4.2663</SeedProgress>
+ <SeedProgress>4.8196</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5040391</Radius>
@@ -4145,24 +4226,21 @@
 </Map>
 <Team>
  <Pos>(0,0)13.4</Pos>
- <Cash>16.83922922421442</Cash>
+ <Cash>213.4842156370297</Cash>
  <Soldiers>
 <Soldier Name="Shooty McShootface">
- <Location X="22" Y="15"/>
- <Health>25</Health>
- <Stamina>26</Stamina>
+ <Location X="6" Y="19"/>
+ <Health>6.65037616324854</Health>
+ <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
- <Level>3</Level>
- <XP>7238</XP>
+ <Facing>180</Facing>
+ <Level>4</Level>
+ <XP>9980</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>12,12,13,12,13</Stats>
+ <Stats>12,12,13,12,14</Stats>
  <Colour>Blue</Colour>
  <Inventory>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
-  </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
@@ -4177,22 +4255,23 @@
 <Weapon Type="Automatic Rifle" Level="1" Mod="Range Enhancer" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">150</Exp>
+  <Exp Type="Rifle">157</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Stealth">1</Exp>
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">1</Exp>
+  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Hannah Trafford">
- <Location X="23" Y="14"/>
- <Health>27</Health>
- <Stamina>14.700000000000001</Stamina>
+ <Location X="6" Y="20"/>
+ <Health>11.452517997323632</Health>
+ <Stamina>0.5784624731346248</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
+ <Facing>360</Facing>
  <Level>3</Level>
- <XP>5566</XP>
+ <XP>8308</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>10,14,13,14,15</Stats>
@@ -4200,9 +4279,6 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -4217,7 +4293,7 @@
 <Weapon Type="Shotgun" Level="1" Mod="Explosive Rounds" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">101</Exp>
+  <Exp Type="Shotgun">145</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -4244,10 +4320,10 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="6442"/>
+  <Relation Race="Human" Value="6596"/>
  </Relations>
  <Inventory>
-  <Inv Count="2">
+  <Inv Count="4">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="1">

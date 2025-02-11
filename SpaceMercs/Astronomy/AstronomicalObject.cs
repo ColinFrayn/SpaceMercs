@@ -97,15 +97,25 @@ namespace SpaceMercs {
 
         // Get a random difficulty level for this location (e.g. for a mercenary or a mission)
         public int GetRandomMissionDifficulty(Random rand) {
-            if (this.GetSystem() == StaticData.HumanRace.HomePlanet.GetSystem()) {
-                return GetHumanHomeSystemMissionDifficulty(rand);
+            Star sys = GetSystem();
+
+            // Human home system so carefully configure the difficulty to be appropriate for low level players
+            if (sys == StaticData.HumanRace.HomePlanet.GetSystem()) {
+                return GetHomeSystemMissionDifficulty(rand);
             }
 
+            // This is a home system for one of the alien races so set the danger level appropriately
+            foreach (Race r in StaticData.Races) {
+                if (sys == r.HomePlanet.GetSystem()) {
+                    return GetHomeSystemMissionDifficulty(rand, 5);
+                }
+            }
+
+            // Mission difficulty scales up as we go further from home
             double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
             double dLevel = 1d + rand.NextDouble() + rand.NextDouble() + rand.NextDouble();
 
-            // Base difficulty scales up as we go further from home
             // Scale more steeply in home sector (Yes I know sectors are not circular.)
             double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
             dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
@@ -128,44 +138,32 @@ namespace SpaceMercs {
                 }
             }
 
-            // This is a home system so reduce danger level
-            Star sys = GetSystem();
-            foreach (Race r in StaticData.Races) {
-                if (sys == r.HomePlanet.GetSystem()) {
-                    dLevel -= rand.NextDouble() + rand.NextDouble();
-                    break;
-                }
-            }
-
-            // Any alien system should be slightly less dangerous than expected for the distance from (0,0)
-            if (sys.Owner != null && sys.Owner != StaticData.HumanRace) {
-                dLevel -= rand.NextDouble() + rand.NextDouble();
-            }
-
             return (int)dLevel;
         }
 
         // Get the mission difficulty for the home system of the Human race
-        private int GetHumanHomeSystemMissionDifficulty(Random rand) {
+        private int GetHomeSystemMissionDifficulty(Random rand, int offset = 0) {
             // Home planet is a nursery zone. Mostly 1s with a sprinkling of 2s.
             if (this == StaticData.HumanRace.HomePlanet) {
-                return (int)(rand.NextDouble() * 1.7d) + 1;
+                return (int)(rand.NextDouble() * 1.7d) + 1 + offset;
             }
             // Planets increase in diff as they get further from home
             if (this is Planet pl) {
                 double pdist = Math.Abs(pl.ID - StaticData.HumanRace.HomePlanet.ID);
-                double diff = (rand.NextDouble() * 1.7d) + 1d + (rand.NextDouble() * pdist * 0.5d);
-                return (int)diff;
+                double diff = (rand.NextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (rand.NextDouble() * 0.25d)));
+                if (diff < 2d) diff = 2d;
+                return (int)diff + offset;
             }
             // Moons increase in diff as they get further from their parent planet, and as the parent gets further from home
             if (this is Moon mn) {
                 double pdist = Math.Abs((mn.Parent).ID - StaticData.HumanRace.HomePlanet.ID);
-                double diff = (rand.NextDouble() * 1.7d) + 1d + (rand.NextDouble() * pdist * 0.5d);
-                diff += rand.NextDouble() * mn.ID * 0.2d;
-                return (int)diff;
+                double diff = (rand.NextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (rand.NextDouble() * 0.25d)));
+                diff += mn.ID * ((rand.NextDouble() * 0.1d) + 0.1d);
+                if (diff < 2d) diff = 2d;
+                return (int)diff + offset;
             }
             // Shouldn't get here
-            throw new Exception($"Strange AO type in {nameof(GetHumanHomeSystemMissionDifficulty)}");
+            throw new Exception($"Strange AO type in {nameof(GetHomeSystemMissionDifficulty)}");
         }
 
         // Get a random race suitable for this location

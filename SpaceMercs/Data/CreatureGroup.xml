@@ -14,7 +14,7 @@
   <CreatureGroup Name="Bugs">
     <Filename>Bugs.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,Ship</Locations>
-    <QuantityScale>1.5</QuantityScale>
+    <QuantityScale>1.7</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Crystallines">
     <Filename>Crystallines.xml</Filename>
@@ -28,7 +28,7 @@
   <CreatureGroup Name="Fungoids">
     <Filename>Fungoids.xml</Filename>
     <Locations>Oceanic,Rocky,Cave,Ship</Locations>
-    <QuantityScale>1.4</QuantityScale>
+    <QuantityScale>1.6</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Gremlins">
     <Filename>Gremlins.xml</Filename>
@@ -62,7 +62,7 @@
   <CreatureGroup Name="Slime Creatures">
     <Filename>Slimes.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
-    <QuantityScale>1.5</QuantityScale>
+    <QuantityScale>1.9</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Soldiers">
     <Filename>Soldiers.xml</Filename>
@@ -72,7 +72,7 @@
   <CreatureGroup Name="Triffids">
     <Filename>Triffids.xml</Filename>
     <Locations>Oceanic,Cave,Ship</Locations>
-    <QuantityScale>1.6</QuantityScale>
+    <QuantityScale>1.8</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Void Beasts">
     <Filename>VoidBeasts.xml</Filename>

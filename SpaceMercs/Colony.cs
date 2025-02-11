@@ -305,14 +305,15 @@ namespace SpaceMercs {
         }
         private void PopulateMercenaries() {
             Random rand = new Random();
-            int total = BaseSize + rand.Next(2) + rand.Next(2) - 1;
+            int total = BaseSize + rand.Next(2) + rand.Next(2) + 1;
             if (HasBaseType(BaseType.Military)) total += 4 + rand.Next(2) + rand.Next(2);
-            if (HasBaseType(BaseType.Metropolis)) total += 2;
+            if (HasBaseType(BaseType.Metropolis)) total += 2 + rand.Next(2) + rand.Next(2);
             if (total > Const.MaxColonyMercenaries) total = Const.MaxColonyMercenaries;
             if (total < 0) total = 0;
             if (Mercenaries.Count >= total) return;
             HashSet<string> hsNames = new HashSet<string>();
-            for (int n = 0; n < (total - Mercenaries.Count); n++) {
+            int newCount = total - Mercenaries.Count;
+            for (int n = 0; n < newCount; n++) {
                 int ntries = 0;
                 do {
                     Soldier s = Soldier.GenerateRandomMercenary(this, rand);
