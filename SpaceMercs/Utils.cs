@@ -151,7 +151,7 @@ namespace SpaceMercs {
                 Mission.MissionGoal.FindItem => "Treasure Hunt",
                 Mission.MissionGoal.Defend => "Defend Objective",
                 Mission.MissionGoal.Artifact => "Artifact Hunt",
-                Mission.MissionGoal.Countdown => "Speed Run",
+                Mission.MissionGoal.Countdown => "Time Critical",
                 _ => "Unknown",
             };
         }
@@ -537,30 +537,34 @@ namespace SpaceMercs {
             return null;
         }
 
-        public static Weapon? GenerateRandomLegendaryWeapon(Random rnd, int Level, Race? race) {
-            List<WeaponType> wts = new List<WeaponType>();
-            double trar = 0.0;
+        public static Weapon? GenerateRandomLegendaryWeapon(Random rnd, int missionLevel, Race? race) {
+            Dictionary<WeaponType, double> wts = new();
+            double totalWeight = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
                 if (!tp.CanBuild(race)) continue;
-                if (tp.IsUsable && (tp.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff <= Level) {
-                    wts.Add(tp);
-                    trar += tp.Rarity;
+                int minLevel = (tp.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
+                if (tp.IsUsable && minLevel <= missionLevel) {
+                    double weight = 1.0;
+                    if (minLevel + 4 < missionLevel) weight /= (missionLevel - (minLevel + 4)); // Weaker weapons are deprioritised
+                    wts.Add(tp, weight);
+                    totalWeight += weight;
                 }
             }
             if (wts.Count == 0) return null;
-            double rar = rnd.NextDouble() * trar;
-            int pos = 0;
-            while (pos < wts.Count && rar > wts[pos].Rarity) {
-                if (pos == wts.Count - 1) break;
-                rar -= wts[pos].Rarity;
-                pos++;
-            }
-            WeaponType wt = wts[pos];
-            if (wt != null) {
-                if (Level - (wt.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4) {
-                    return new Weapon(wt, 5); // Legendary
+            double rar = rnd.NextDouble() * totalWeight;
+            WeaponType? wtChosen = null;
+            foreach (WeaponType wt in wts.Keys) { 
+                rar -= wts[wt];
+                if (rar <= 0d) {
+                    wtChosen = wt;
+                    break;
                 }
-                return new Weapon(wt, 4); // Epic
+            }
+            if (wtChosen != null) {
+                if (missionLevel - (wtChosen.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4 && rnd.NextDouble() > 0.5) {
+                    return new Weapon(wtChosen, 5); // Legendary
+                }
+                return new Weapon(wtChosen, 4); // Epic
             }
             return null;
         }

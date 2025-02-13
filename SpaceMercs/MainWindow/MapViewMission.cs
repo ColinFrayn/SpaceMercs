@@ -128,7 +128,7 @@ namespace SpaceMercs.MainWindow {
             Random rnd = new Random();
 
             // Didn't complete the mission so put it back on the pile
-            if ((MissionOutcome == MissionResult.Evacuated || MissionOutcome == MissionResult.Aborted) && TravelDetails == null) {
+            if ((MissionOutcome == MissionResult.Evacuated || MissionOutcome == MissionResult.Aborted) && TravelDetails == null && ThisMission.Goal != Mission.MissionGoal.Countdown) {
                 ThisMission.ResetMission();
                 if (PlayerTeam.CurrentPositionHAO?.Colony != null) PlayerTeam.CurrentPositionHAO.Colony.AddMission(ThisMission);
                 else PlayerTeam.CurrentPositionHAO?.AddMission(ThisMission);
@@ -156,8 +156,14 @@ namespace SpaceMercs.MainWindow {
                         msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
-                            msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
-                            if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
+                        msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
+                        if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
+                    }
+                    else if (ThisMission.Goal == Mission.MissionGoal.Artifact) {
+                        msgBox.PopupMessage($"You analyse the {ThisMission.MItem} and marvel at the extraordinary workmanship!\nYour new artifact is stored securely in the ship's hold\nBonus Experience = {ThisMission.Experience}xp each");
+                        IItem? artifact = ThisMission.MItem?.LegendaryItem;
+                        if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
+                        PlayerTeam.AddItem(artifact);
                     }
                     else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
                     PlayerTeam.Cash += ThisMission.Reward;                        
@@ -422,7 +428,7 @@ namespace SpaceMercs.MainWindow {
                         }
                     }
                 }
-                if (SelectedEntity is Soldier sc && sc.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
+                if (ActionItem is null && SelectedEntity is Soldier sc && sc.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
                     GenerateConeMap(hoverx, hovery, sc);
                 }
             }
@@ -620,14 +626,18 @@ namespace SpaceMercs.MainWindow {
             // Test if all soldiers are now on an entrance/exit square and set up the button if so.
             if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
                 gbTransition!.Activate();
-                if (CurrentLevel.LevelID == 0) gbTransition.UpdateText("Exit Mission");
+                if (CurrentLevel.LevelID == 0) gbTransition.UpdateText("Evacuate");
                 else gbTransition.UpdateText("Ascend to Level " + CurrentLevel.LevelID);  // LevelID starts at zero
             }
             else if (CurrentLevel.CheckAllSoldiersAtExit()) {
-                if (CurrentLevel.LevelID < CurrentLevel.ParentMission.LevelCount - 1) { // Can't be the bottom level (so we don't try to descend on teh last level of a Countdown mission)
+                if (CurrentLevel.LevelID < CurrentLevel.ParentMission.LevelCount - 1) { // Can't be the bottom level (so we don't try to descend on the last level of a Countdown mission)
                     gbTransition!.Activate();
                     gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 2));  // LevelID starts at zero
                 }
+            }
+            else if (ThisMission!.Goal == Mission.MissionGoal.Countdown && ThisMission!.TurnCount >= ThisMission!.MaxTurns) {
+                gbTransition!.Activate();
+                gbTransition.UpdateText("Evacuate");
             }
             else gbTransition!.Deactivate();
         }
@@ -932,6 +942,7 @@ namespace SpaceMercs.MainWindow {
 
         // Show GUI elements in the overlay layer
         private void ShowOverlayGUI() {
+            if (ThisMission is null) return;
             InitialiseGUIButtons();
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             fullShaderProgram.SetUniform("projection", projectionM);
@@ -955,12 +966,21 @@ namespace SpaceMercs.MainWindow {
             foreach (GUIIconButton bt in lButtons) bt.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbEndTurn?.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             gbTransition?.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
-            if (ThisMission?.IsComplete ?? false) {
+            if (ThisMission!.IsComplete) {
                 gbEndMission!.Activate();
                 gbEndMission.Display((int)MousePosition.X, (int)MousePosition.Y, fullShaderProgram);
             }
             else gbEndMission!.Deactivate();
             DrawMissionToggles();
+            if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Countdown) {
+                int turnsLeft = CurrentLevel.ParentMission.MaxTurns - CurrentLevel.ParentMission.TurnCount;
+                if (turnsLeft <= 0) {
+                    TextRenderer.DrawAt($"Time Limit Exceeded", Alignment.BottomRight, toggleScale, Aspect, 0.99f, 0.99f, Color.Red);
+                }
+                else {
+                    TextRenderer.DrawAt($"Turns Remaining : {turnsLeft}", Alignment.BottomRight, toggleScale, Aspect, 0.99f, 0.99f, Color.White);
+                }
+            }
 
             // Warn that AI is running?
             if (bAIRunning) {
@@ -969,13 +989,13 @@ namespace SpaceMercs.MainWindow {
             GL.Enable(EnableCap.DepthTest);
         }
         private void DrawMissionToggles() {
-            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 11f, PlayerTeam.Mission_ShowLabels ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 12f, PlayerTeam.Mission_ShowStatBars ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 13f, PlayerTeam.Mission_ShowTravel ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 14f, PlayerTeam.Mission_ShowPath ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, PlayerTeam.Mission_ShowEffects ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 16f, PlayerTeam.Mission_ViewDetection ? Color.White : Color.DimGray);
-            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 17f, PlayerTeam.Mission_FastAI ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("L", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 15f, PlayerTeam.Mission_ShowLabels ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("S", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 16f, PlayerTeam.Mission_ShowStatBars ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("T", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 17f, PlayerTeam.Mission_ShowTravel ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("P", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 18f, PlayerTeam.Mission_ShowPath ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("E", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 19f, PlayerTeam.Mission_ShowEffects ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("D", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 20f, PlayerTeam.Mission_ViewDetection ? Color.White : Color.DimGray);
+            TextRenderer.DrawAt("F", Alignment.TopRight, toggleScale, Aspect, toggleX, toggleY + toggleStep * 21f, PlayerTeam.Mission_FastAI ? Color.White : Color.DimGray);
         }
         private void DisplayAILabel(ShaderProgram prog) {
             prog.SetUniform("textureEnabled", false);
@@ -1561,6 +1581,7 @@ namespace SpaceMercs.MainWindow {
             }
             Const.dtTime.AddSeconds(Const.TurnLength);
             CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
+            CheckForTransition();
         }
         private bool CheckForMissionFailure(ShowMessageDelegate showMessage) {
             if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
@@ -1592,23 +1613,38 @@ namespace SpaceMercs.MainWindow {
         }
         private void Transition() {
             if (bAIRunning) return;
+
             int oldlev = ThisMission!.CurrentLevel;
             int newlev = oldlev;
             // Check if we're going up or down, or exiting
             if (CurrentLevel.CheckAllSoldiersAtEntrance()) {
+                if (CurrentLevel.AlertedEnemies) {
+                    msgBox.PopupMessage("You cannot exit this level\nThere are enemies alerted to your presence");
+                    return;
+                }
+                if (newlev == 0) {
+                    msgBox.PopupConfirmation("Evacuate from this mission without completing the mission goals?", EndMission_Evacuated);
+                    return;
+                }
                 newlev--;
             }
+            else if (ThisMission.Goal == Mission.MissionGoal.Countdown && ThisMission.TurnCount >= ThisMission.MaxTurns) {
+                if (CurrentLevel.AlertedEnemies) {
+                    msgBox.PopupMessage("You cannot evacuate at the moment\nThere are enemies alerted to your presence");
+                    return;
+                }
+                msgBox.PopupConfirmation("Evacuate from this mission?", EndMission_Evacuated);
+                return;
+            }
             else if (CurrentLevel.CheckAllSoldiersAtExit()) {
+                if (CurrentLevel.AlertedEnemies) {
+                    msgBox.PopupMessage("You cannot move to a deeper level\nThere are enemies alerted to your presence");
+                    return;
+                }
                 newlev++;
             }
             else return;
 
-            // Leave the dungeon?
-            if (newlev == -1) {
-                MissionOutcome = MissionResult.Evacuated;
-                CeaseMission();
-                return;
-            }
             if (newlev >= ThisMission.LevelCount) throw new Exception("Attempting to transition to illegal level");
             CurrentLevel.RemoveAllSoldiers();
             ThisMission.SetCurrentLevel(newlev);
@@ -1647,6 +1683,10 @@ namespace SpaceMercs.MainWindow {
         }
         private void EndMission_Victory() {
             MissionOutcome = MissionResult.Victory;
+            CeaseMission();
+        }
+        private void EndMission_Evacuated() {
+            MissionOutcome = MissionResult.Evacuated;
             CeaseMission();
         }
         #endregion //  ButtonHandlers
@@ -1754,8 +1794,15 @@ namespace SpaceMercs.MainWindow {
                     DistMap[x, y] = -1;
                 }
             }
+
+            // Check for illegal squares. Sometimes happens. No idea why. Race condition of some sort on Transition.
+            if (s.X < 1 || s.X + 1 >= CurrentLevel.Width) return;
+            if (s.Y < 1 || s.Y + 1 >= CurrentLevel.Height) return;
+
             int maxdist = s.TravelRange;
+
             DistMap[s.X, s.Y] = 0;
+
             if (s.X > 0) FloodFillDist(s.X - 1, s.Y, 1, maxdist);
             if (s.X < CurrentLevel.Width - 1) FloodFillDist(s.X + 1, s.Y, 1, maxdist);
             if (s.Y > 0) FloodFillDist(s.X, s.Y - 1, 1, maxdist);

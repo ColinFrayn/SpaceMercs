@@ -4,19 +4,13 @@ ToDo List
 
 Artifact Mission: Test it
 
-Countdown Mission: 
-- Set LevelCount based on mission size
-- Display countdown on screen
-- If lowest level the display exit with a different icon
-- If lowest level and on exit then mission is complete (test)
-- If ran out of time, show mission failed and maybe open up "Exit Mission" button.
--- Success depends on LevelCoutn remaining
+Countdown Mission: Test it
 
-Display when weapon is recharging somehow
+Don't allow equipment change during mission
 
-Expansion of systems: Work out how to get large colonies in distant systems
--> more trade routes (and announce them)
-- Maybe have fewer moon colonies?
+Heavy weapons mercs are too tough. Why do they do so much more dmg than Soldiers?
+
+Display when a weapon is recharging somehow
 
 ==================================================================================================================
 
@@ -25,9 +19,10 @@ Expansion of systems: Work out how to get large colonies in distant systems
 Backburner : Features
 ---------------------
 
-New mission types:
-- Timed missions (entire team must reach an objective within x rounds)
-- Artifact missions: At the end is a guaranteed Legendary-level item (based on mission diff)
+Expansion of systems: Work out how to get large colonies in distant systems
+-> More trade routes (and announce them)
+- Maybe have fewer moon colonies?
+- Maybe be more careful about gating tech on civ size. Perhaps scale that down a bit?? (What if settings have number of sys and pl turned down?)
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 

@@ -3,19 +3,16 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class MissionItem : IItem {
-        public string Name { get; private set; }
+        public string Name {  
+            get {
+                return LegendaryItem?.Name ?? _name;
+            }
+        }
+        private readonly string _name;
         public string Description { get { return Name; } }
         public double Mass { get; private set; }
         public double Cost { get; private set; }
         public IItem? LegendaryItem { get; private set; }
-        public void SaveToFile(StreamWriter file) {
-            file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");
-            if (LegendaryItem is not null) {
-                file.WriteLine();
-                LegendaryItem.SaveToFile(file);
-            }
-            file.WriteLine("</MissionItem>");
-        }
 
         private static readonly string[] ItemTypes = new string[] { "Egg", "Diamond", "Emerald", "Geode", "Bone", "Skull", "Crystal", "Ruby", "Statue", "Medal", "Device" };
         private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine" };
@@ -24,9 +21,8 @@ namespace SpaceMercs {
         private static readonly string[] ObjectiveAdjectives = new string[] { "historically significant", "potentially valuable", "fascinating", "strategically important", "mysterious", "delicate", "scientifically interesting", "large", "key" };
         private static readonly string[] ObjectiveTypes = new string[] { "structure", "crystal formation", "geologic area", "relic", "mineral deposit", "fossil deposit", "alien artefact" };
 
-
         public MissionItem(string strName, double mass, double cost) {
-            Name = strName;
+            _name = strName;
             Mass = mass;
             Cost = cost;
         }
@@ -38,15 +34,24 @@ namespace SpaceMercs {
             Mass = xml.GetAttributeDouble("Mass");
             Cost = xml.GetAttributeDouble("Cost");
             if (xml.Attributes?["Name"] is null) {
-                Name = xml.InnerText;
+                _name = xml.InnerText;
             }
             else {
-                Name = xml.GetAttributeText("Name", string.Empty);
-                XmlNode? xmlni = xml.SelectSingleNode("Item");
+                _name = xml.GetAttributeText("Name", string.Empty);
+                XmlNode? xmlni = xml.FirstChild;
                 if (xmlni is not null) {
-                    LegendaryItem = Utils.LoadItem(xmlni.FirstChild);
+                    LegendaryItem = Utils.LoadItem(xmlni);
                 }
             }
+        }
+
+        public void SaveToFile(StreamWriter file) {
+            file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");
+            if (LegendaryItem is not null) {
+                file.WriteLine();
+                LegendaryItem.SaveToFile(file);
+            }
+            file.WriteLine("</MissionItem>");
         }
 
         public static MissionItem GenerateRandomGoalItem(int diff, Random rand) {
@@ -77,7 +82,7 @@ namespace SpaceMercs {
                 int hash = 17;
                 hash = hash * 37 + Cost.GetHashCode();
                 hash = hash * 41 + Mass.GetHashCode();
-                if (!String.IsNullOrEmpty(Name)) hash = hash * 23 + Name.GetHashCode();
+                if (!string.IsNullOrEmpty(Name)) hash = hash * 23 + Name.GetHashCode();
                 if (LegendaryItem is not null) hash = hash * 47 + LegendaryItem.GetHashCode();
                 return hash;
             }
@@ -92,7 +97,7 @@ namespace SpaceMercs {
             return true;
         }
         public override string ToString() {
-            return LegendaryItem?.Name ?? Name;
+            return Name;
         }
     }
 }

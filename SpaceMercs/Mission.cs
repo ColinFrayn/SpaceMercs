@@ -86,7 +86,7 @@ namespace SpaceMercs {
                 }
                 if (Goal == MissionGoal.Countdown) { // You must all be on the exit square
                     if (CurrentLevel == LevelCount - 1 && Levels[LevelCount - 1] is MissionLevel lev) {
-                        if (lev.ParentMission.TurnCount >= 0) { // Timer not expired
+                        if (lev.ParentMission.TurnCount < lev.ParentMission.MaxTurns) { // Timer not expired
                             return lev.CheckAllSoldiersAtExit();
                         }
                     }
@@ -102,6 +102,12 @@ namespace SpaceMercs {
         public readonly List<Soldier> Soldiers = new List<Soldier>();
         public int WavesRemaining { get; private set; }
         public int TurnCount { get; private set; }
+        public int MaxTurns =>
+            Type switch {
+                MissionType.Surface => Size * (Size + 1) * LevelCount + 2,
+                MissionType.Caves => (Size + 1) * (Size + 1) * LevelCount + 2,
+                _ => Size * (Size + 1) * 2 * LevelCount + 2    
+            };
 
         public Mission(MissionType t, int dif, int sd = 0) {
             Goal = MissionGoal.KillAll;
@@ -322,9 +328,6 @@ namespace SpaceMercs {
                 LevelCount = Math.Max(wp.Level - 1, LevelCount);
                 Size = Math.Max(wp.Level - 1, Size);
             }
-            if (Goal == MissionGoal.Countdown) {
-                TurnCount = (Size * Size * 2 * LevelCount) + 1;
-            }
         }
 
         public static MissionType GenerateRandomColonyMissionType(AstronomicalObject loc, Random rand) {
@@ -505,7 +508,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the ruins and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.");
-                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the ruins and reach the target area within {TurnCount} rounds.");
+                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the ruins and reach the target area within {MaxTurns} rounds.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.BoardingParty) {
@@ -536,7 +539,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the cave system and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the cave system and find a {MItem} hidden inside.");
-                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the cave system and reach the target area within {TurnCount} rounds.");
+                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the cave system and reach the target area within {MaxTurns} rounds.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Mines) {
@@ -557,7 +560,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the mines and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the mines and find a {MItem} hidden inside.");
-                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the mines and reach the target area within {TurnCount} rounds.");
+                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the mines and reach the target area within {MaxTurns} rounds.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Surface) {
@@ -578,7 +581,7 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate this area and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate this area and find a {MItem} hidden inside.");
-                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate this area and reach the target area within {TurnCount} rounds.");
+                if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate this area and reach the target area within {MaxTurns} rounds.");
                 strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)
@@ -620,6 +623,9 @@ namespace SpaceMercs {
                 WavesRemaining--;
                 Levels[CurrentLevel].AddWaveOfCreatures();
                 showMessage("A wave of enemies has appeared near your location", null);
+            }
+            if (Goal == MissionGoal.Countdown && TurnCount == MaxTurns) {
+                showMessage("The timer has expired. Please return to the mission entrance and return to safety.", null);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace SpaceMercs.Graphics.Shapes {
                 new VertexPos3D(new Vector3(0.6f, 1f, 0f)),
                 new VertexPos3D(new Vector3(0.4f, 1f, 0f)),
               };
-            int[] indices = new int[12] { 0, 1, 2, 1, 2, 3, 4, 5, 6, 4, 6, 7 };
+            int[] indices = new int[12] { 0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4 };
             return new GLShape(vertices, indices);
         }
     }

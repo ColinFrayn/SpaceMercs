@@ -274,7 +274,16 @@ namespace SpaceMercs {
 
             // Entry/exit locations
             foreach (Point p in EntryLocations) DrawEntryLocation(prog, p);
-            foreach (Point p in ExitLocations) DrawExitLocation(prog, p);
+            foreach (Point p in ExitLocations) {
+                if (LevelID == ParentMission.LevelCount - 1) {
+                    // This must be a Countdown mission. So this is not stairs down, but a target location.
+                    DrawTargetLocation(prog, p);
+                }
+                else {
+                    // Normal level, so this must be stairs down
+                    DrawExitLocation(prog, p);
+                }
+            }
 
             DrawFogOfWar(prog);
         }
@@ -420,6 +429,23 @@ namespace SpaceMercs {
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
             Triangle.Flat.BindAndDraw();
+        }
+        private void DrawTargetLocation(ShaderProgram prog, Point p) {
+            if (!Const.DEBUG_VISIBLE_ALL && !Explored[p.X, p.Y]) return;
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("flatColour", new Vector4(1f, 0.6f, 0f, 1f));
+            Matrix4 pTranslateM = Matrix4.CreateTranslation(p.X + 0.1f, p.Y + 0.1f, Const.DoodadLayer);
+            Matrix4 pScaleM = Matrix4.CreateScale(0.8f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Square.Flat.BindAndDraw();
+
+            prog.SetUniform("flatColour", new Vector4(0.3f, 0.3f, 0.3f, 1f));
+            pTranslateM = Matrix4.CreateTranslation(p.X + 0.2f, p.Y + 0.2f, Const.DoodadLayer);
+            pScaleM = Matrix4.CreateScale(0.6f, 0.6f, 1f);
+            prog.SetUniform("model", pScaleM * pTranslateM);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            Cross.Flat.BindAndDraw();
         }
         private void DrawFogOfWar(ShaderProgram prog) {
             GL.Enable(EnableCap.Blend);
@@ -760,7 +786,7 @@ namespace SpaceMercs {
             } while (!bOK);
             SetupEntryLocations();
 
-            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount-1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
+            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount - 1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
                 int furthest = 0;
                 int sx2, sy2;
                 EndX = EndY = -1;
