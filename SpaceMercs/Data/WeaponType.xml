@@ -549,11 +549,12 @@
   </WeaponType>
   <WeaponType Name="Gauss Sniper Rifle" Class="Sniper">
     <Mass>4.0</Mass>
-    <Cost>900</Cost>
+    <Cost>950</Cost>
     <Rarity>26</Rarity>
     <Speed>26</Speed>
+    <Delay>200</Delay>
     <Range Accuracy="2" DropOff="0.18" Length="0.4" Speed="1.7">24</Range>
-    <Damage>8+7</Damage>
+    <Damage>7+7</Damage>
     <Desc>A light railgun converted to a sniper rifle. Recoil leads to slightly lower accuracy but with high damage.</Desc>
     <Sound>GaussSniper</Sound>
     <Stable/>

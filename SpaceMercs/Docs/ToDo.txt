@@ -2,11 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Artifact Mission: Test it
+Artifact Mission: Can't be surface
 
-Countdown Mission: Test it
-
-Don't allow equipment change during mission
+Don't allow equipment change during mission. Or maybe only if quiescent.
 
 Heavy weapons mercs are too tough. Why do they do so much more dmg than Soldiers?
 

@@ -104,9 +104,9 @@ namespace SpaceMercs {
         public int TurnCount { get; private set; }
         public int MaxTurns =>
             Type switch {
-                MissionType.Surface => Size * (Size + 1) * LevelCount + 2,
-                MissionType.Caves => (Size + 1) * (Size + 1) * LevelCount + 2,
-                _ => Size * (Size + 1) * 2 * LevelCount + 2    
+                MissionType.Surface => Size * (Size + 1) * LevelCount + 4,
+                MissionType.Caves => (Size + 1) * (Size + 1) * LevelCount + 4,
+                _ => Size * (Size + 1) * 2 * LevelCount + 4
             };
 
         public Mission(MissionType t, int dif, int sd = 0) {
@@ -407,7 +407,7 @@ namespace SpaceMercs {
             if (m.IsShipMission) return new Tuple<MissionGoal, MissionItem?>(MissionGoal.KillAll, null); // Shouldn't ever happen...
 
             int r = rand.Next(100);
-            if (r < 4 && m.Diff > Const.LegendaryItemLevelDiff) {
+            if (r < 4 && m.Diff > Const.LegendaryItemLevelDiff && m.Type != MissionType.Surface) {
                 mg = MissionGoal.Artifact;
                 it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff, m.RacialOpponent);
                 if (it is null) mg = MissionGoal.KillAll;
@@ -499,6 +499,7 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " some abandoned ruins that show unusual energy fluctuations.");
                 else if (r < 60) sb.AppendLine(strSource + " some abandoned ruins that have only recently been discovered.");
                 else sb.AppendLine(strSource + " some abandoned ruins that show signs of hostile life within.");
+                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the ruins and clear out any opposition you find.");
@@ -530,6 +531,7 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " a large cave system that might contain important mineral resources.");
                 else if (r < 60) sb.AppendLine(strSource + " a large cave system that has only recently been discovered.");
                 else sb.AppendLine(strSource + " a large cave system that shows signs of hostile life within.");
+                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the cave system and clear out any opposition you find.");
@@ -551,6 +553,7 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " an abandoned mine system that might contain important mineral resources.");
                 else if (r < 60) sb.AppendLine(strSource + " an abandoned mine system that has only recently been discovered.");
                 else sb.AppendLine(strSource + " an abandoned mine system that shows signs of hostile life within.");
+                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the mines and clear out any opposition you find.");
@@ -572,6 +575,7 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " a region of the planet's surface that shows unusual energy fluctuations.");
                 else if (r < 60) sb.AppendLine(strSource + " a region of the planet's surface with interesting geographical reports suggesting mineral wealth.");
                 else sb.AppendLine(strSource + " a region of the surface with an accumulation of potentially aggressive life forms.");
+                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate this area and clear out any opposition you find.");

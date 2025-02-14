@@ -1412,7 +1412,7 @@ namespace SpaceMercs {
             StartY = rand.Next(Height - 8) + 4;
             SetupEntryLocations();
 
-            if (LevelID < ParentMission.LevelCount - 1) { // Add stairs down!
+            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount - 1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) { // Add stairs down!
                 int furthest = 0;
                 EndX = EndY = -1;
                 for (int i = 0; i < 30; i++) {
