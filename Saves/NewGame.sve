@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>30/03/2150 14:51:49</Clock>
+<Clock>30/03/2150 14:53:31</Clock>
 <Map Seed="224758" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Ogrish">
 <Star ID="0">
@@ -1627,7 +1627,7 @@
 <Mission>
  <Type>Surface</Type>
  <Goal>FindItem</Goal>
-<MissionItem Mass="4.87" Cost="40.73">Superb Transparent Skull</MissionItem>
+<MissionItem Mass="4.87" Cost="40.73" Name="Superb Transparent Skull"></MissionItem>
  <Enemy>Slime Creatures</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>8.81</Reward>
@@ -1664,7 +1664,7 @@
 <Mission>
  <Type>Surface</Type>
  <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00">key mineral deposit</MissionItem>
+<MissionItem Mass="0.00" Cost="0.00" Name="key mineral deposit"></MissionItem>
  <Enemy>Fungoids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>7.95</Reward>
@@ -1677,7 +1677,7 @@
 <Mission>
  <Type>AbandonedCity</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="1.70" Cost="3.81">Transparent Ruby</MissionItem>
+<MissionItem Mass="1.70" Cost="3.81" Name="Transparent Ruby"></MissionItem>
  <Enemy>Fungoids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
@@ -1713,7 +1713,7 @@
 <Mission>
  <Type>AbandonedCity</Type>
  <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00">potentially valuable alien artefact</MissionItem>
+<MissionItem Mass="0.00" Cost="0.00" Name="potentially valuable alien artefact"></MissionItem>
  <Enemy>Triffids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>8.98</Reward>
@@ -1726,7 +1726,7 @@
 <Mission>
  <Type>Surface</Type>
  <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00">strategically important fossil deposit</MissionItem>
+<MissionItem Mass="0.00" Cost="0.00" Name="strategically important fossil deposit"></MissionItem>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -1795,7 +1795,7 @@
 <Mission>
  <Type>AbandonedCity</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="0.80" Cost="4.52">Pulsating Device</MissionItem>
+<MissionItem Mass="0.80" Cost="4.52" Name="Pulsating Device"></MissionItem>
  <Enemy>Fungoids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
@@ -1820,7 +1820,7 @@
 <Mission>
  <Type>Caves</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="1.00" Cost="3.50">Transparent Geode</MissionItem>
+<MissionItem Mass="1.00" Cost="3.50" Name="Transparent Geode"></MissionItem>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -2581,7 +2581,7 @@
 <Mission>
  <Type>Surface</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="1.10" Cost="3.99">Luminous Statue</MissionItem>
+<MissionItem Mass="1.10" Cost="3.99" Name="Luminous Statue"></MissionItem>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -2886,17 +2886,6 @@
  <Seed>177703323</Seed>
 </Mission>
 <Mission>
- <Type>Mines</Type>
- <Goal>KillAll</Goal>
- <Enemy>Triffids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>15.82</Reward>
- <Diff>2</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>382117197</Seed>
-</Mission>
-<Mission>
  <Type>BoardingParty</Type>
  <Goal>KillAll</Goal>
 <Ship Seed="1735482537" Diff="3">
@@ -3146,7 +3135,7 @@
 <Mission>
  <Type>Caves</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="0.90" Cost="4.84">Transparent Medal</MissionItem>
+<MissionItem Mass="0.90" Cost="4.84" Name="Transparent Medal"></MissionItem>
  <Enemy>Fungoids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
@@ -3201,7 +3190,7 @@
 <Mission>
  <Type>Mines</Type>
  <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00">key alien artefact</MissionItem>
+<MissionItem Mass="0.00" Cost="0.00" Name="key alien artefact"></MissionItem>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -3249,7 +3238,7 @@
 <Mission>
  <Type>Caves</Type>
  <Goal>Gather</Goal>
-<MissionItem Mass="1.70" Cost="6.16">Golden Emerald</MissionItem>
+<MissionItem Mass="1.70" Cost="6.16" Name="Golden Emerald"></MissionItem>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -4226,16 +4215,16 @@
 </Map>
 <Team>
  <Pos>(0,0)13.4</Pos>
- <Cash>213.4842156370297</Cash>
+ <Cash>229.3042156370297</Cash>
  <Soldiers>
 <Soldier Name="Shooty McShootface">
- <Location X="6" Y="19"/>
- <Health>6.65037616324854</Health>
- <Stamina>28</Stamina>
+ <Location X="8" Y="14"/>
+ <Health>36</Health>
+ <Stamina>27.3</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>97.1250163489018</Facing>
  <Level>4</Level>
- <XP>9980</XP>
+ <XP>10244</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,13,12,14</Stats>
@@ -4255,27 +4244,27 @@
 <Weapon Type="Automatic Rifle" Level="1" Mod="Range Enhancer" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">157</Exp>
+  <Exp Type="Rifle">165</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Stealth">1</Exp>
-  <Exp Skill="Perception">2</Exp>
+  <Exp Skill="Perception">3</Exp>
   <Exp Skill="Scavenging">1</Exp>
-  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
 </Soldier>
 <Soldier Name="Hannah Trafford">
- <Location X="6" Y="20"/>
- <Health>11.452517997323632</Health>
- <Stamina>0.5784624731346248</Stamina>
+ <Location X="6" Y="23"/>
+ <Health>37.36456457210983</Health>
+ <Stamina>15.433661333198334</Stamina>
  <Shields>0</Shields>
- <Facing>360</Facing>
- <Level>3</Level>
- <XP>8308</XP>
+ <Facing>90</Facing>
+ <Level>4</Level>
+ <XP>8572</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>10,14,13,14,15</Stats>
- <Colour>Blue</Colour>
+ <Colour>Yellow</Colour>
+ <PointsToSpend>1</PointsToSpend>
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
@@ -4293,10 +4282,10 @@
 <Weapon Type="Shotgun" Level="1" Mod="Explosive Rounds" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">145</Exp>
+  <Exp Type="Shotgun">149</Exp>
  </WeaponExperience>
  <UtilityExperience>
-  <Exp Skill="Gunsmith">3</Exp>
+  <Exp Skill="Gunsmith">4</Exp>
   <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
  <Moved/>
@@ -4320,7 +4309,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="6596"/>
+  <Relation Race="Human" Value="6618"/>
  </Relations>
  <Inventory>
   <Inv Count="4">

@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>21/04/2335 19:13:54</Clock>
+<Clock>21/04/2335 19:13:51</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -9558,16 +9558,17 @@
 </Map>
 <Team>
  <Pos>(-1,1)4.0</Pos>
- <Cash>1828.9181690173677</Cash>
+ <Cash>1627.4381690173677</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="33" Y="10"/>
- <Health>46.068235993856405</Health>
- <Stamina>0.2692835522844117</Stamina>
- <Shields>0</Shields>
- <Facing>-90</Facing>
+ <OnMission/>
+ <Location X="26" Y="23"/>
+ <Health>48</Health>
+ <Stamina>31.201962664213315</Stamina>
+ <Shields>12.5</Shields>
+ <Facing>0</Facing>
  <Level>10</Level>
- <XP>340367</XP>
+ <XP>337068</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,11,12,20</Stats>
@@ -9598,23 +9599,23 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="37" Y="4"/>
- <Health>51.757514594124984</Health>
- <Stamina>1</Stamina>
- <Shields>0</Shields>
- <Facing>-90</Facing>
+ <OnMission/>
+ <Location X="26" Y="24"/>
+ <Health>63</Health>
+ <Stamina>35</Stamina>
+ <Shields>10</Shields>
+ <Facing>90</Facing>
  <Level>10</Level>
- <XP>333320</XP>
+ <XP>330021</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,10,17,15</Stats>
  <Colour>#FFE600</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem" Recharge="2"/>
+<Equipment Type="Nannite Medsystem"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
@@ -9630,7 +9631,7 @@
 <Weapon Type="Arc Rifle" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">1329</Exp>
+  <Exp Type="Shotgun">1321</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
@@ -9638,16 +9639,16 @@
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="32" Y="10"/>
- <Health>41.95269949370442</Health>
- <Stamina>1.9814857215049515</Stamina>
+ <OnMission/>
+ <Location X="25" Y="24"/>
+ <Health>46.9611681365304</Health>
+ <Stamina>24.200000000000003</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>90</Facing>
  <Level>10</Level>
- <XP>335040</XP>
+ <XP>331741</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,13,13,9</Stats>
@@ -9658,18 +9659,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
-  </Inv>
-  <Inv Count="3">
-<Material Type="Nanosilk"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Shortblade" Level="0" />
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -9688,23 +9677,23 @@
   <Exp Skill="Armoursmith">2</Exp>
   <Exp Skill="Scavenging">8</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="32" Y="15"/>
+ <OnMission/>
+ <Location X="25" Y="23"/>
  <Health>48</Health>
- <Stamina>12.900000000000002</Stamina>
+ <Stamina>25.014834012458557</Stamina>
  <Shields>0</Shields>
- <Facing>293.9624889745782</Facing>
+ <Facing>0</Facing>
  <Level>10</Level>
- <XP>332520</XP>
+ <XP>329221</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,22,12,15</Stats>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem" Recharge="1"/>
+<Equipment Type="Nannite Medsystem"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -9715,7 +9704,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">1276</Exp>
+  <Exp Type="Sniper">1271</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">6</Exp>
@@ -9723,7 +9712,6 @@
   <Exp Skill="Engineer">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
  <Location X="16" Y="26"/>
@@ -9789,7 +9777,7 @@
   <Relation Race="Ogrish" Value="-4500"/>
   <Relation Race="Gokan" Value="3464"/>
   <Relation Race="Insectoid" Value="2104"/>
-  <Relation Race="Elithiri" Value="5880"/>
+  <Relation Race="Elithiri" Value="5457"/>
  </Relations>
  <Inventory>
   <Inv Count="13">
@@ -9874,6 +9862,152 @@
 <Material Type="Xenolite"/>
   </Inv>
  </Inventory>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>201.48</Reward>
+ <Diff>10</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1174743247</Seed>
+ <Size>3</Size>
+ <Turn>10</Turn>
+ <Level ID="0">
+<MissionLevel Width="46" Height="43">
+ <Diff>10</Diff>
+ <Level>0</Level>
+ <Start X="5" Y="18"/>
+ <End X="-1" Y="-1"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBAAAAAABBBBBBBBBBBBBBBBBBBBBAAAAAAAABBAAABBBBBBAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAABBAAABBBBBBAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAABBAAABBBBBBAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAABBAAABBBBBBAAAAAABBBBAAAAAAAAAABBBBBBBAAAAAAAABBAAABBBBBBAAAAAABBBBAAAAAAAAAABBBBBBBBBBBBBBBBBAAABBBBBBBBAAABBBBBAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAABBBBBAAABBBBBAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAABBBBBAAABBBBBAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAABBBBBAAABBBBBBBAAABBBBBBBBBBBBBBBAAAAAABAAABAABBBBBAAABBBBBBBAAAAAAAABBBBBBBBBBAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAAABBBAAABAABBBBBBBBAAAAAAAAAAAAAAABBBBBBBBBBAAABBBBAAABIIBBBBBBBBBBBBBBBAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABBBBBBBBBBBBBBBAAABBBAAAAAAAAAAAAAAAAAAAAABAAAAAAAAABBBBBBAAAAAABBBAAAAAAAAAABBAAAAAAAAAAAAAAAAAAABBBBBBAAAAAABBBAAAAAAAAAABBAAAAAAAAAAAAAAAAAAABBBBBBBBBAAABBBAAAAAAAAAABBAAAAAAAAAAAAAAAAAAABBBBBBBBBAAABBBAAAAAAAAAABBAAAAAAAAABAAAAAAAAABBBBBBBBBAAABBBBAAABBBBBBBBAAAAAAAAABAAAAAAAAABBBBBBBBBAAABBAAAAABBBBBBBBAAAAAAAAABAAAAAAAAABBBBBBBBBAAABBAAAAABBBBBBBBBBAAABBBBBAAAAAAAAABBBBBBBBBAAABBAAAAABBBBBBBBBBAAABBBBBAAAAAAAAABBBBBBBBBAAAAAAAAAAAAAABBBBBAAAAAAABBAAAABBBBBBBBBBBBBBAAAAAAAAAAAAAABBBBBAAAAAAABAAAAAAABBBBBBBBBBBBAAAAAAAAAAAAAABBBBBAAAAAAABAAAAAAABBBBBBBBBBBBBBBBBAAAAABAAABBBBBAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBAAABBBBBAAAAAAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAABBBAAAAAAABAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAABBBBBBBBBBBAAAAAAABBBBBBBBBBAAABBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>1111111111111110000000000000000000000000000000111111111111111000000000000000000000000000000011111111111111100001111111100000000000000000001111111111111110000111111111111111111111100000111111111111111000011111111011111111111110000011111111111111100001111111100111111111111000001111111111111110000111111110011111111111100000111111111111111000011111111001111111111110000011111111111111100000011111100111111111111000001111111111111111110001111110011111111111100000000111111111111111000111110000011111110000000000011111111111111100011111000001111110000000000001111111111111110001111100001111111111100000000111111111111111111111111111111111111110000000011111111111111111111111111111111111111000000001111111111111111111111111111111111111100000000111111111111111111111111111111111111110000000011111111111111111111111111111111111111000000001111111111111111111111111111111111111100000000111111111111111111111111111111111111111000011111111111111111111111111111111111111111100001111111101111111111111111111111111111111110000111111110111111111111111111111111111111111000011111111011111111111111111111111111111111100000001111101111111111111111111111111111111110000000111111111111111111111111111111111111111000000011111111111100000011111111111111111111100000001111111111110000001111111111111111111110000000111111111111111100011111111111111111111000000011111111111111110001111110011111111111100000001111111111111111000111111001111111110000000000111111111111111100011111111111111111000000000011111111111111110001111111111111111100000000111111111111111111110111111111111111110000000011111111111111111111011111111111111111000000001111111111111111111101111111111111111100000000111111111111111111110111111111111111110000000011111111111111111111000000000111111111000000001111100000011111111100000000000000000000000000111110000001111111110000000000000000000000000011111000000111111111000000000000000000000000001111100000000000000000000000000000000000000000111110000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Arachnid Queen">
+ <Location X="28" Y="32"/>
+ <Health>136.71</Health>
+ <Level>10</Level>
+ <Facing>0</Facing>
+ <Alert/>
+ <Moved/>
+</Creature>
+<Creature Type="Arachnid Drone">
+ <Location X="39" Y="10"/>
+ <Level>10</Level>
+ <Facing>127</Facing>
+</Creature>
+<Creature Type="Giant Arachnid">
+ <Location X="38" Y="10"/>
+ <Level>10</Level>
+ <Facing>299</Facing>
+</Creature>
+<Creature Type="Arachnid Soldier">
+ <Location X="35" Y="6"/>
+ <Level>11</Level>
+ <Facing>202</Facing>
+</Creature>
+<Creature Type="Giant Arachnid">
+ <Location X="30" Y="7"/>
+ <Level>10</Level>
+ <Facing>135</Facing>
+</Creature>
+<Creature Type="Giant Arachnid">
+ <Location X="37" Y="9"/>
+ <Level>9</Level>
+ <Facing>318</Facing>
+</Creature>
+<Creature Type="Arachnid Drone">
+ <Location X="37" Y="8"/>
+ <Level>10</Level>
+ <Facing>165</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="24" Y="5">
+<StashItem N="1">
+<Weapon Type="Shortblade" Level="2" />
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="27" Y="26">
+<StashItem N="1">
+<Armour Type="Cap" Material="Kevlar" Level="0"/>
+</StashItem>
+<StashItem N="1">
+<Armour Type="Cap" Material="Kevlar" Level="1"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Shortblade" Level="0" />
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="27" Y="14">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="28" Y="16">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="32" Y="25">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="38" Y="27">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="24" Y="31">
+<StashItem N="1">
+<Corpse Type="Arachnid Soldier" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="23" Y="32">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="26" Y="24">
+<StashItem N="1">
+<Corpse Type="Arachnid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="24" Y="24">
+<StashItem N="1">
+<Corpse Type="Arachnid Soldier" Level="10"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="2" Y="7" L="10">
+<Hidden/>
+</Trap>
+<Trap X="16" Y="34" L="10">
+<Type>Electrical</Type>
+</Trap>
+<Trap X="34" Y="12" L="10">
+<Hidden/>
+<Type>Poison</Type>
+</Trap>
+<Trap X="24" Y="28" L="10">
+<Hidden/>
+</Trap>
+<Trap X="12" Y="22" L="10">
+</Trap>
+<Trap X="30" Y="34" L="10">
+<Hidden/>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">

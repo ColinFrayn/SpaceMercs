@@ -2189,7 +2189,8 @@ namespace SpaceMercs {
                             if (en.CanOpenDoors && Map[pt.X - 1, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
-                        if (Traps.ContainsKey(new Point(pt.X - 1, pt.Y + i)) && (!Traps[new Point(pt.X - 1, pt.Y + i)].Hidden || en is Creature)) { bOK = false; break; }
+                        // Traps should be avoided as much as possible, but if there's no other way then step through them
+                        if (Traps.ContainsKey(new Point(pt.X - 1, pt.Y + i)) && (!Traps[new Point(pt.X - 1, pt.Y + i)].Hidden || en is Creature)) { extra += 5; }
                     }
                     if (bOnlyExploredCells && !Explored[pt.X - 1, pt.Y]) bOK = false;
 
@@ -2206,7 +2207,7 @@ namespace SpaceMercs {
                             if (en.CanOpenDoors && Map[pt.X + en.Size, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
-                        if (Traps.ContainsKey(new Point(pt.X + 1, pt.Y + i)) && (!Traps[new Point(pt.X + 1, pt.Y + i)].Hidden || en is Creature)) { bOK = false; break; }
+                        if (Traps.ContainsKey(new Point(pt.X + 1, pt.Y + i)) && (!Traps[new Point(pt.X + 1, pt.Y + i)].Hidden || en is Creature)) { extra += 5; }
                     }
                     if (bOnlyExploredCells && !Explored[pt.X + 1, pt.Y]) bOK = false;
 
@@ -2223,7 +2224,7 @@ namespace SpaceMercs {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y - 1] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }
-                        if (Traps.ContainsKey(new Point(pt.X + i, pt.Y - 1)) && (!Traps[new Point(pt.X + i, pt.Y - 1)].Hidden || en is Creature)) { bOK = false; break; }
+                        if (Traps.ContainsKey(new Point(pt.X + i, pt.Y - 1)) && (!Traps[new Point(pt.X + i, pt.Y - 1)].Hidden || en is Creature)) { extra += 5; }
                     }
                     if (bOnlyExploredCells && !Explored[pt.X, pt.Y - 1]) bOK = false;
 
@@ -2240,7 +2241,7 @@ namespace SpaceMercs {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y + en.Size] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }
-                        if (Traps.ContainsKey(new Point(pt.X + i, pt.Y + 1)) && (!Traps[new Point(pt.X + i, pt.Y + 1)].Hidden || en is Creature)) { bOK = false; break; }
+                        if (Traps.ContainsKey(new Point(pt.X + i, pt.Y + 1)) && (!Traps[new Point(pt.X + i, pt.Y + 1)].Hidden || en is Creature)) { extra += 5; }
                     }
                     if (bOnlyExploredCells && !Explored[pt.X, pt.Y + 1]) bOK = false;
 

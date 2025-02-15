@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Enemy searching is terrible; Doesn't reliably charge towards a single foe and can oscillate [TEST FIX]
+Enemy AI chasing a target [TEST FIX]
 
 Display when a weapon is recharging somehow
 
@@ -13,7 +13,7 @@ Display when a weapon is recharging somehow
 Backburner : Features
 ---------------------
 
-Can we move Clock to the MissionView class?
+Can we move global Clock to the MissionView class?
 
 Expansion of systems: Work out how to get large colonies in distant systems
 -> More trade routes (and announce them)
