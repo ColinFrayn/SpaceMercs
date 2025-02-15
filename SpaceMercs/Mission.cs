@@ -104,9 +104,9 @@ namespace SpaceMercs {
         public int TurnCount { get; private set; }
         public int MaxTurns =>
             Type switch {
-                MissionType.Surface => Size * (Size + 1) * LevelCount + 4,
+                MissionType.Surface => ((Size + 1) * (Size + 1) * 3) * LevelCount / 4 + 4,
                 MissionType.Caves => (Size + 1) * (Size + 1) * LevelCount + 4,
-                _ => Size * (Size + 1) * 2 * LevelCount + 4
+                _ => ((Size + 1) * (Size + 1) * 3 * LevelCount) / 2 + 4
             };
 
         public Mission(MissionType t, int dif, int sd = 0) {

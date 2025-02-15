@@ -18,7 +18,7 @@ Expansion of systems: Work out how to get large colonies in distant systems
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 
-Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack)
+Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 
 Alien solar system:
 - Alien colonies need names

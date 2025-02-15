@@ -31,6 +31,13 @@
     <Desc>A powerful shotgun with 3 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>10</Noise>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>22</MinPop>
+      <CashCost>20</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Steel">2</Material>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -51,8 +58,8 @@
     <Sound>ShotgunAndReload</Sound>
     <Noise>11</Noise>
     <Requirements>
-      <MinLevel>4</MinLevel>
-      <MinPop>30</MinPop>
+      <MinLevel>5</MinLevel>
+      <MinPop>28</MinPop>
       <CashCost>50</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel">2</Material>
@@ -202,7 +209,7 @@
   </WeaponType>
   <WeaponType Name="Plasma Rifle" Class="Rifle">
     <Mass>4.0</Mass>
-    <Cost>600</Cost>
+    <Cost>700</Cost>
     <Rarity>15</Rarity>
     <Speed>14</Speed>
     <Range Accuracy="0" DropOff="0.5" Length="0.6" Speed="2.0" Colour="1.0,0.4,0.2">9</Range>
@@ -308,14 +315,14 @@
   </WeaponType>
   <WeaponType Name="Arc Rifle" Class="Shotgun">
     <Mass>5.0</Mass>
-    <Cost>220</Cost>
+    <Cost>330</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">4</Range>
     <Shots>3</Shots>
     <Recoil>0.3</Recoil>
     <Delay>150</Delay>
-    <Damage Type="ConeMulti" Width="3.2">3+4</Damage>
+    <Damage Type="ConeMulti" Width="3.2">5+4</Damage>
     <Type>Electrical</Type>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electroshock</Sound>
@@ -695,7 +702,7 @@
   </WeaponType>
   <WeaponType Name="Slugger" Class="Shotgun">
     <Mass>8.0</Mass>
-    <Cost>220</Cost>
+    <Cost>380</Cost>
     <Rarity>18</Rarity>
     <Speed>18</Speed>
     <Shots>3</Shots>
