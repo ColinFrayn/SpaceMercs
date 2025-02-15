@@ -14,7 +14,7 @@ namespace SpaceMercs {
         public Map() {
             // We're good
         }
-        public Map(XmlNode xml) {
+        public Map(XmlNode xml, GlobalClock clock) {
             if (xml.Attributes?["Seed"] is null) throw new Exception("Map seed is missing from save file");
             if (xml.Attributes?["SPS"] is null) throw new Exception("Map StarsPerSector is missing from save file");
             if (xml.Attributes?["PD"] is null) throw new Exception("Map PlanetDensity is missing from save file");
@@ -24,7 +24,7 @@ namespace SpaceMercs {
 
             dSectors.Clear();
             foreach (XmlNode xmls in xml.SelectNodesToList("Sector")) {
-                Sector sect = new Sector(xmls, this);
+                Sector sect = new Sector(xmls, this, clock);
                 dSectors.Add(new Tuple<int, int>(sect.SectorX, sect.SectorY), sect);
             }
             if (!dSectors.Any()) throw new Exception("Could not locate sector nodes in save file");
@@ -34,7 +34,7 @@ namespace SpaceMercs {
         public static Map Empty { get { return new Map(); } }
 
         // Generate a map with the given races
-        public void Generate(NewGame ng) {
+        public void Generate(NewGame ng, GlobalClock clock) {
             // Get the new values and reset our map
             Random rand = new Random(ng.Seed);
             MapIsInitialised = false;
@@ -56,7 +56,7 @@ namespace SpaceMercs {
             // Setup Race starting locations by modifying existing map to create habitable systems
             foreach (Race rc in StaticData.Races) {
                 if (rc == StaticData.HumanRace) {
-                    SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng);
+                    SetupHomeSector(rc, dSectors[new Tuple<int, int>(0, 0)], ng, clock);
                     rc.SetAsKnownBy(null);
                 }
                 else {
@@ -66,7 +66,7 @@ namespace SpaceMercs {
                         int sy = rand.Next(3) - 1;
                         sc = dSectors[new Tuple<int, int>(sx, sy)];
                     } while (sc.Inhabitant != null);
-                    SetupHomeSector(rc, sc, ng);
+                    SetupHomeSector(rc, sc, ng, clock);
                 }
             }
 
@@ -75,7 +75,7 @@ namespace SpaceMercs {
         }
 
         // Setup the given sector as the home for this race
-        private static void SetupHomeSector(Race rc, Sector sc, NewGame ng) {
+        private static void SetupHomeSector(Race rc, Sector sc, NewGame ng, GlobalClock clock) {
             // Get the most central star to be the home system
             sc.Inhabitant = rc;
             Star? stHome = sc.GetMostCentralStar();
@@ -85,7 +85,7 @@ namespace SpaceMercs {
             bool isPlayer = (sc.SectorX==0 && sc.SectorY==0);
             int maxSize = isPlayer ? ng.CivSize : ng.AlienCivSize;
 
-            stHome.GenerateHomeSystem(rc);
+            stHome.GenerateHomeSystem(rc, clock);
 
             // Setup other stars in this sector, allied to this race, based on the maximum civ size
             Random rand = new Random(ng.Seed);
@@ -98,7 +98,7 @@ namespace SpaceMercs {
                 if (SystemsInOrderOfDistance.Count == 0) break;
                 Star st = SystemsInOrderOfDistance.First(); // Get nearest uncolonised system
                 for (int ntry = 0; ntry < 50; ntry++) { // Attempt lots of times to colonise it with a single size 1 colony.
-                    if (st.AddPopulationInSystem(rc, rand)) {
+                    if (st.AddPopulationInSystem(rc, rand, clock)) {
                         rc.Colonise(st);
                         stHome.AddTradeRoute(st);
                         if (isPlayer) st.SetVisited(true);
@@ -115,7 +115,7 @@ namespace SpaceMercs {
                 if (r < 10) st = sc.GetClosestNonColonisedSystemTo(stHome) ?? stHome;
                 else if (r < 80) st = sc.GetRandomColonisedSystem(rand) ?? stHome;
                 if (st is null) continue;
-                if (st.AddPopulationInSystem(rc, rand)) {
+                if (st.AddPopulationInSystem(rc, rand, clock)) {
                     rc.Colonise(st);
                     if (st != stHome) stHome.AddTradeRoute(st); // Doesn't add duplicates so no worries
                     if (isPlayer) st.SetVisited(true);
@@ -131,11 +131,11 @@ namespace SpaceMercs {
         }
 
         // Save this map to an Xml file
-        public void SaveToFile(StreamWriter file) {
+        public void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Map Seed=\"" + MapSeed + "\" SPS=\"" + StarsPerSector + "\" PD=\"" + PlanetDensity + "\">");
             // Save the sectors
             foreach (Sector sec in dSectors.Values) {
-                if (sec.ShouldBeSaved()) sec.SaveToFile(file);
+                if (sec.ShouldBeSaved()) sec.SaveToFile(file, clock);
             }
             file.WriteLine("</Map>");
         }

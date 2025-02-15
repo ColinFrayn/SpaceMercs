@@ -87,7 +87,7 @@ namespace SpaceMercs.MainWindow {
                 CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Create here as the number of creatures depends on the number of soldiers deployed in the mission
                 CurrentLevel.AddSoldiers(cs.Soldiers); // Add them at the correct starting location, or in a room if ship defence
                 Random rnd = new Random();
-                Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
+                Clock.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
             }
             else CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Should definitely exist, so should return from cache
 
@@ -181,7 +181,7 @@ namespace SpaceMercs.MainWindow {
                 if (ThisMission.MItem != null) PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem, 10000);
             }
 
-            Const.dtTime.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to return home from the mission
+            Clock.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to return home from the mission
 
             if (TravelDetails != null) {
                 // What to do if defeated??
@@ -1577,7 +1577,7 @@ namespace SpaceMercs.MainWindow {
             if (CheckForMissionFailure(AnnounceMessage)) {
                 return;
             }
-            Const.dtTime.AddSeconds(Const.TurnLength);
+            Clock.AddSeconds(Const.TurnLength);
             CurrentLevel.ParentMission.NextTurn(AnnounceMessage); // periodic update of the level itself e.g. waves of enemies
             CheckForTransition();
         }

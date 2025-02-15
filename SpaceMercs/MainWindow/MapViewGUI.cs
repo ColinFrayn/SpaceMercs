@@ -62,7 +62,7 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             // Display the current date and time
-            TextRenderer.DrawAt(Const.dtTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
+            TextRenderer.DrawAt(Clock.CurrentTime.ToString("F"), Alignment.TopLeft, 0.03f, Aspect, 0.01f, 0.01f);
 
             // Draw stuff that's only visible when there's a game underway
             if (!bLoaded || !GalaxyMap.MapIsInitialised) return;
@@ -96,7 +96,7 @@ namespace SpaceMercs.MainWindow {
             // If we're travelling then display that
             if (TravelDetails != null) {
                 if (TravelDetails.GameOver) TravelDetails = null;
-                else TravelDetails.Display(fullShaderProgram, pos2DCol4ShaderProgram);
+                else TravelDetails.Display(fullShaderProgram, pos2DCol4ShaderProgram, Clock.ElapsedSeconds());
             }
             // Display the various GUI Buttons
             else {
@@ -395,7 +395,7 @@ namespace SpaceMercs.MainWindow {
         private void FlyTo_Continue(double jt) {
             // Set up that we're travelling somewhere
             if (aoSelected is null) throw new Exception("Attempting to set up travel to a null target");
-            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, (float)jt, PlayerTeam, this);
+            TravelDetails = new Travel(PlayerTeam.CurrentPosition, aoSelected, (float)jt, PlayerTeam, this, Clock);
         }
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.MapIsInitialised) return;
@@ -421,12 +421,12 @@ namespace SpaceMercs.MainWindow {
                 }
                 return;
             }
-            ColonyView cv = new ColonyView(PlayerTeam, RunMission);
+            ColonyView cv = new ColonyView(PlayerTeam, RunMission, Clock);
             cv.Show();
         }
         private void FoundColony_Continue() {
             if (!(PlayerTeam.CurrentPosition is HabitableAO hao)) return;
-            hao.SetupBase(StaticData.HumanRace, 1);
+            hao.SetupBase(StaticData.HumanRace, 1, Clock);
             if (hao.GetSystem().Owner == null) {
                 StaticData.HumanRace.AddSystem(hao.GetSystem());
             }
@@ -446,7 +446,7 @@ namespace SpaceMercs.MainWindow {
                 return;
             }
             // Open the ScanPlanet dialog
-            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPositionHAO!, PlayerTeam!, RunMission);
+            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPositionHAO!, PlayerTeam!, RunMission, Clock);
             sp.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
         }
@@ -466,7 +466,7 @@ namespace SpaceMercs.MainWindow {
                 }
             }
             // Open the Hyperspace dialog
-            HyperspaceTravel ht = new HyperspaceTravel(hg, PlayerTeam!, ArriveAt);
+            HyperspaceTravel ht = new HyperspaceTravel(hg, PlayerTeam!, ArriveAt, Clock);
             ht.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
         }

@@ -17,8 +17,8 @@ namespace SpaceMercs {
         }
 
         // Save this object to an Xml file
-        public override void SaveToFile(StreamWriter file) {
-            base.SaveToFile(file);
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
+            base.SaveToFile(file, clock);
             if (OrbitalDistance != 0.0) {
                 file.WriteLine("<Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
             }

@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Enemy AI chasing a target [TEST FIX]
-
 Display when a weapon is recharging somehow
 
 ==================================================================================================================
@@ -12,8 +10,6 @@ Display when a weapon is recharging somehow
 ---------------------
 Backburner : Features
 ---------------------
-
-Can we move global Clock to the MissionView class?
 
 Expansion of systems: Work out how to get large colonies in distant systems
 -> More trade routes (and announce them)

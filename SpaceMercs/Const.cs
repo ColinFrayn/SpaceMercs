@@ -223,9 +223,7 @@ namespace SpaceMercs {
         public const int FoundColonyExperience = 500; // Race relation bonus for founding a colony
 
         // Time stuff / global clock
-        public static readonly DateTime dtStart = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
-        public static DateTime dtTime = Const.dtStart;      // ****##  The global clock  ##****
-        public static double ElapsedSeconds { get { return (dtTime - dtStart).TotalSeconds; } }
+        public static readonly DateTime StartingDate = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
 
         // Mission level generation settings
         public const int AutomataIterations = 6;

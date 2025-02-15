@@ -14,7 +14,7 @@ namespace UnitTests {
         [Test]
         public void Test_SetupNewOutpost() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
-            Colony cl = new Colony(humanRace, 1, 0, planet);
+            Colony cl = new Colony(humanRace, 1, 0, planet, new GlobalClock(DateTime.Now));
             Assert.NotNull(cl);
             Assert.AreEqual(humanRace, cl.Owner);
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));
@@ -32,7 +32,7 @@ namespace UnitTests {
         [Test]
         public void Test_SetupNewMetropolis() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
-            Colony cl = new Colony(humanRace, 6, 0, planet);
+            Colony cl = new Colony(humanRace, 6, 0, planet, new GlobalClock(DateTime.Now));
             Assert.NotNull(cl);
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));
             Assert.True(cl.HasBaseType(Colony.BaseType.Colony));
@@ -49,7 +49,7 @@ namespace UnitTests {
         [Test]
         public void Test_SetupNewSize5() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
-            Colony cl = new Colony(humanRace, 5, 0, planet);
+            Colony cl = new Colony(humanRace, 5, 0, planet, new GlobalClock(DateTime.Now));
             Assert.NotNull(cl);
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));
             Assert.True(cl.HasBaseType(Colony.BaseType.Colony));
@@ -66,7 +66,7 @@ namespace UnitTests {
         [Test]
         public void Test_ExpandBase_FixedType() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
-            Colony cl = new Colony(humanRace, 1, 0, planet);
+            Colony cl = new Colony(humanRace, 1, 0, planet, new GlobalClock(DateTime.Now));
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));
             Assert.False(cl.HasBaseType(Colony.BaseType.Colony));
             cl.ExpandBase(Colony.BaseType.Colony);
@@ -76,7 +76,7 @@ namespace UnitTests {
         [Test]
         public void Test_ExpandBase_Random() {
             Race humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
-            Colony cl = new Colony(humanRace, 1, 0, planet);
+            Colony cl = new Colony(humanRace, 1, 0, planet, new GlobalClock(DateTime.Now));
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(It.IsAny<int>())).Returns(1);
             Assert.True(cl.HasBaseType(Colony.BaseType.Outpost));

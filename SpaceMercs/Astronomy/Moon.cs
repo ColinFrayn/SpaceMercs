@@ -19,7 +19,7 @@ namespace SpaceMercs {
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
         }
-        public Moon(XmlNode xml, Planet parent) : base(xml, parent) {
+        public Moon(XmlNode xml, Planet parent, GlobalClock clock) : base(xml, parent, clock) {
             // Bugfix - handle some dodgy data saved down because moon orbital period was wrapping as it was miscalculated too large
             if (OrbitalPeriod < 0 || AxialRotationPeriod < 0) {
                 Random rnd = new Random();
@@ -32,17 +32,17 @@ namespace SpaceMercs {
         }
 
         // Save this moon to an Xml file
-        public override void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Moon ID=\"" + ID.ToString() + "\">");
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
             SaveMissions(file);
-            Colony?.SaveToFile(file);
+            Colony?.SaveToFile(file, clock);
             file.WriteLine("</Moon>");
         }
 
-        public void ExpandFromXml(XmlNode xml) {
+        public void ExpandFromXml(XmlNode xml, GlobalClock clock) {
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this));
+            if (xmlc != null) SetColony(new Colony(xmlc, this, clock));
             LoadMissions(xml);
             XmlNode? xmln = xml.SelectSingleNode("Name");
             if (xmln != null) Name = xml.SelectNodeText("Name", string.Empty);
@@ -62,10 +62,10 @@ namespace SpaceMercs {
             float scale = Const.PlanetScale * Const.MoonScale * 1.5f;
             Colony.DrawBaseIcon(prog, scale);
         }
-        public override void DrawSelected(ShaderProgram prog, int Level = 6) {
+        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
             float scale = DrawScale * Const.PlanetScale * Const.MoonScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);

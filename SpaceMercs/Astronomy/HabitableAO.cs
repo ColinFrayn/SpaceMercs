@@ -19,20 +19,20 @@ namespace SpaceMercs {
         public double OrbitalPeriod; // Period of orbit (seconds)
 
         public HabitableAO() {}
-        public HabitableAO(XmlNode xml, AstronomicalObject parent) : base(xml, parent) { 
+        public HabitableAO(XmlNode xml, AstronomicalObject parent, GlobalClock clock) : base(xml, parent) { 
             OrbitalPeriod = xml.SelectNodeDouble("PRot");
             Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this));
+            if (xmlc != null) SetColony(new Colony(xmlc, this, clock));
             LoadMissions(xml);
         }
 
-        public override void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Type>" + Type.ToString() + "</Type>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
             SaveMissions(file);
-            Colony?.SaveToFile(file);
-            base.SaveToFile(file);
+            Colony?.SaveToFile(file, clock);
+            base.SaveToFile(file, clock);
         }
 
         protected void LoadMissions(XmlNode xml) {
@@ -82,16 +82,16 @@ namespace SpaceMercs {
             Colony = cl;
             cl.Owner.AddColony(cl);
         }
-        public void SetupBase(Race rc, int iSize) {
+        public void SetupBase(Race rc, int iSize, GlobalClock clock) {
             if (iSize < 1) return;
-            Colony = new Colony(rc, iSize, Seed, this);
+            Colony = new Colony(rc, iSize, Seed, this, clock);
         }
         public void ExpandBase(Colony.BaseType bt) {
             if (Colony is not null) Colony.ExpandBase(bt);
         }
-        public int ExpandBase(Race rc, Random rand) {
+        public int ExpandBase(Race rc, Random rand, GlobalClock clock) {
             if (Colony == null) {
-                Colony = new Colony(rc, 1, rand.Next(1000000), this);
+                Colony = new Colony(rc, 1, rand.Next(1000000), this, clock);
                 return 1;
             }
             return Colony.ExpandBase(rand);

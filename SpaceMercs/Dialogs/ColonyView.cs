@@ -36,12 +36,12 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
-        public ColonyView(Team t, Func<Mission, bool> _StartMission) {
+        public ColonyView(Team t, Func<Mission, bool> _StartMission, GlobalClock clock) {
             PlayerTeam = t;
             StartMission = _StartMission;
             if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
             cl = hao.Colony;
-            cl.UpdateStock(PlayerTeam); // Make sure we have updated everything since the last time we visited
+            cl.UpdateStock(PlayerTeam, clock); // Make sure we have updated everything since the last time we visited
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner, cl.Location.GetSystem());
             InitializeComponent();
             SetupTabs();

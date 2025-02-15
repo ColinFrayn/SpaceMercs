@@ -11,11 +11,13 @@ namespace SpaceMercs.Dialogs {
         private HyperGate? _hDest = null;
         private double durationSeconds = 0d;
         private readonly Race? _owner;
+        private readonly GlobalClock _clock;
 
-        public HyperspaceTravel(HyperGate hGate, Team team, Action<AstronomicalObject> _arriveAt) {
+        public HyperspaceTravel(HyperGate hGate, Team team, Action<AstronomicalObject> _arriveAt, GlobalClock clock) {
             _hGate = hGate;
             _playerTeam = team;
             _owner = hGate.GetSystem().Owner;
+            _clock = clock;
             ArriveAt = _arriveAt;
             InitializeComponent();
             clockTick = new Timer();
@@ -46,7 +48,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void UpdateTravel(object? myObject, EventArgs myEventArgs) {
             iProgress++;
-            if (iProgress <= 24) Const.dtTime = Const.dtTime.AddSeconds(durationSeconds/24.0);
+            if (iProgress <= 24) _clock.AddSeconds(durationSeconds/24d);
             pbTravel.Value = Math.Min(iProgress, 24);
             if (iProgress > 25) {
                 clockTick.Stop();

@@ -90,7 +90,7 @@ namespace SpaceMercs {
 
             string strLastExpand = xml.SelectNodeText("LastExpand");
             if (!string.IsNullOrEmpty(strLastExpand)) LastExpandCheck = DateTime.FromBinary(long.Parse(strLastExpand));
-            else LastExpandCheck = Const.dtStart;
+            else LastExpandCheck = Const.StartingDate;
 
             XmlNodeList? xns = xml.SelectNodes("Research/Item");
             if (xns is not null) {
@@ -114,10 +114,10 @@ namespace SpaceMercs {
             }
         }
 
-        public void SetHomePlanet(Planet pl) {
+        public void SetHomePlanet(Planet pl, GlobalClock clock) {
             HomePlanet = pl;
             pl.GetSystem().SetName(Name + " Home");
-            pl.SetupBase(this, 5);
+            pl.SetupBase(this, 5, clock);
             pl.SetAsHomeworld();
         }
 
@@ -135,23 +135,23 @@ namespace SpaceMercs {
             if (!Colonies.Contains(cl)) Colonies.Add(cl);
             AddSystem(cl.Location.GetSystem());
         }
-        internal void CheckGrowthForAllColonies() {
+        internal void CheckGrowthForAllColonies(GlobalClock clock) {
             // Take a copy as we may modify the original
             List<Colony> backup = new List<Colony>(Colonies);
             foreach (Colony cl in backup) {
-                cl.CheckGrowth();
+                cl.CheckGrowth(clock);
             }
         }
-        internal void CheckColonySeeds(GUIMessageBox msgBox, TimeSpan tDiff) {
+        internal void CheckColonySeeds(GUIMessageBox msgBox, TimeSpan tDiff, GlobalClock clock) {
             // Take a copy as we may modify the original
             List<Colony> backup = new List<Colony>(Colonies);
             foreach (Colony cl in backup) {
-                cl.UpdateSeedProgress(msgBox, tDiff);
+                cl.UpdateSeedProgress(msgBox, tDiff, clock);
             }
         }
-        internal void CheckForNewColonySystems(GUIMessageBox msgBox) {
+        internal void CheckForNewColonySystems(GUIMessageBox msgBox, GlobalClock clock) {
             HashSet<Star> nearestUncolonisedStars = new HashSet<Star>();
-            double daysSinceLast = (Const.dtTime - LastExpandCheck).TotalDays;
+            double daysSinceLast = (clock.CurrentTime - LastExpandCheck).TotalDays;
             Star stHome = HomePlanet.GetSystem();
             Sector scHome = stHome.Sector;
 
@@ -183,7 +183,7 @@ namespace SpaceMercs {
                 if (daysSinceLast < span) return;
                 daysSinceLast -= span;
                 LastExpandCheck = LastExpandCheck.AddDays(span);
-                if (rand.NextDouble() > 0.9 && candidate.AddPopulationInSystem(this, rand)) {
+                if (rand.NextDouble() > 0.9 && candidate.AddPopulationInSystem(this, rand, clock)) {
                     Colonise(candidate);
                     if (isPlayer) {
                         candidate.SetVisited(true);

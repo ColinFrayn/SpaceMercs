@@ -68,7 +68,7 @@ namespace SpaceMercs {
             return (Base & type) != 0;
         }
 
-        public Colony(Race rc, int iSize, int seed, HabitableAO loc) {
+        public Colony(Race rc, int iSize, int seed, HabitableAO loc, GlobalClock clock) {
             Owner = rc;
             Random rand = new Random(seed + 1);
             Base = BaseType.None;
@@ -85,13 +85,13 @@ namespace SpaceMercs {
                 }
             }
             Location = loc;
-            dtLastGrowth = Const.dtTime;
+            dtLastGrowth = clock.CurrentTime;
             rc.AddColony(this);
-            if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
+            if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
             else dtNextGrowth = DateTime.MaxValue;
             dtLastVisit = DateTime.MinValue;
         }
-        public Colony(XmlNode xml, HabitableAO loc) {
+        public Colony(XmlNode xml, HabitableAO loc, GlobalClock clock) {
             Location = loc;
             string raceName = xml.SelectNodeText("Owner");
             Owner = StaticData.GetRaceByName(raceName) ?? throw new Exception("Could not ID colony owning race : " + raceName);
@@ -112,11 +112,11 @@ namespace SpaceMercs {
 
             string strLastGrowth = xml.SelectNodeText("LastGrowth");
             if (!string.IsNullOrEmpty(strLastGrowth)) dtLastGrowth = DateTime.FromBinary(long.Parse(strLastGrowth));
-            else dtLastGrowth = Const.dtStart;
+            else dtLastGrowth = Const.StartingDate;
 
             string strNextGrowth = xml.SelectNodeText("NextGrowth");
             if (!string.IsNullOrEmpty(strNextGrowth)) dtNextGrowth = DateTime.FromBinary(long.Parse(strNextGrowth));
-            else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
+            else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
             else dtNextGrowth = DateTime.MaxValue;
 
             Mercenaries.Clear();
@@ -152,16 +152,16 @@ namespace SpaceMercs {
             }
         }
 
-        public void SaveToFile(StreamWriter file) {
+        public void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Colony>");
             if (Base != BaseType.Outpost) file.WriteLine(" <BaseType>" + (int)Base + "</BaseType>");
             file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
             if (dtLastVisit > DateTime.MinValue) file.WriteLine(" <LastUpdate>" + dtLastVisit.ToBinary() + "</LastUpdate>");
-            if (dtLastGrowth > Const.dtStart) file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
+            if (dtLastGrowth > Const.StartingDate) file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
             file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
             if (SeedProgress > 0d) file.WriteLine(" <SeedProgress>" + SeedProgress.ToString("F4") + "</SeedProgress>");
 
-            TimeSpan ts = Const.dtTime - dtLastVisit;
+            TimeSpan ts = clock.CurrentTime - dtLastVisit;
             // Only bother writing the inventory if it's likely to be relevant
             if (ts.TotalDays < Const.LongEnoughGapToResetColonyInventory) {
                 if (Mercenaries.Count > 0) {
@@ -208,22 +208,22 @@ namespace SpaceMercs {
             }
             return 0;
         }
-        internal void CheckGrowth() {
+        internal void CheckGrowth(GlobalClock clock) {
             if (!CanGrow) return;
-            while (Const.dtTime > dtNextGrowth) {
+            while (clock.CurrentTime > dtNextGrowth) {
                 ForceExpandBase();
                 Location.GetSystem().CheckBuildTradeRoutes(Owner);
                 dtLastGrowth = dtNextGrowth;
-                dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
+                dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
             }
         }
-        internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff) {
+        internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff, GlobalClock clock) {
             if (!CanSeed) return;
             Random rand = new Random();
             // Colony growth rate and seeding should slow down as pop gets larger, or else it will get exponential
             SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds * 50d / (Const.SecondsPerYear * Math.Max(10, Owner.Population));
             if (SeedProgress >= Const.ColonySeedTarget) {
-                if (Location.GetSystem().MaybeAddNewColony(Owner, rand)) {
+                if (Location.GetSystem().MaybeAddNewColony(Owner, rand, clock)) {
                     // Built a new colony in this system
                     if (Owner.IsPlayer) {
                         string sysName = Location.GetSystem().Name;
@@ -252,9 +252,9 @@ namespace SpaceMercs {
         }
 
         // Periodic stock update
-        public void UpdateStock(Team t) {
+        public void UpdateStock(Team t, GlobalClock clock) {
             // Check how much time has elapsed
-            TimeSpan ts = Const.dtTime - dtLastVisit;
+            TimeSpan ts = clock.CurrentTime - dtLastVisit;
             double dDays = ts.TotalDays;
 
             // Larger colonies have a more rapid turnover; small colonies don't            
@@ -281,7 +281,7 @@ namespace SpaceMercs {
             // Now fill the gaps
             PopulateMercenaries();
             PopulateMissions();
-            dtLastVisit = Const.dtTime;
+            dtLastVisit = clock.CurrentTime;
 
             // Remove any mercenaries with names identical to soldiers in the team
             HashSet<string> hsTeamNames = new HashSet<string>();
@@ -542,9 +542,9 @@ namespace SpaceMercs {
             if (tp.RequiredRace != null && tp.RequiredRace != Owner) return false;
             return true;
         }
-        private int GetNextGrowthPeriod() { // In days
+        private int GetNextGrowthPeriod(GlobalClock clock) { // In days
             if (!CanGrow) return (int)Const.Million; // i.e. never
-            Random rand = new Random(Location.GetHashCode() + Const.dtTime.DayOfYear); // Repeatable random seed
+            Random rand = new Random(Location.GetHashCode() + clock.CurrentTime.DayOfYear); // Repeatable random seed
             double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 350.0 * rand.NextDouble());
             double tdiff = Location.TDiff(Owner);
             for (int i = 0; i < Math.Abs(tdiff / 10); i++) {

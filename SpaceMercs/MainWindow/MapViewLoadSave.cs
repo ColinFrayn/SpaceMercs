@@ -40,14 +40,14 @@ namespace SpaceMercs.MainWindow {
 
             // Load in the clock
             DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));
-            Const.dtTime = newTime;
+            Clock.SetTime(newTime);
 
             // Load in Map data
             XmlNode? xMap = xml.SelectSingleNode("Map");
             if (xMap is null) {
                 throw new Exception("Could not find Map details in save file");
             }
-            Map newMap = new Map(xMap);
+            Map newMap = new Map(xMap, Clock);
 
             // Load in player team
             XmlNode? xTeam = xml.SelectSingleNode("Team");
@@ -67,7 +67,7 @@ namespace SpaceMercs.MainWindow {
             Travel? newTravel = null;
             XmlNode? xTravel = xml.SelectSingleNode("Travel");
             if (xTravel is not null) {
-                newTravel = new Travel(xTravel, newTeam, this);
+                newTravel = new Travel(xTravel, newTeam, this, Clock);
             }
 
             return new Tuple<Map, Team, Travel?>(newMap, newTeam, newTravel);
@@ -92,10 +92,10 @@ namespace SpaceMercs.MainWindow {
                 file.WriteLine("</GUI>");
 
                 // Game clock
-                file.WriteLine("<Clock>" + Const.dtTime.ToString() + "</Clock>");
+                file.WriteLine("<Clock>" + Clock.CurrentTime.ToString() + "</Clock>");
 
                 // Save Map data
-                GalaxyMap.SaveToFile(file);
+                GalaxyMap.SaveToFile(file, Clock);
 
                 // Save player team to file
                 PlayerTeam.SaveToFile(file);

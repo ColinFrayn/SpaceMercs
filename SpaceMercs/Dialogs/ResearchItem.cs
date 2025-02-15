@@ -9,8 +9,10 @@ namespace SpaceMercs.Dialogs {
         private int iProgress = 0;
         private double durationSeconds = 0d;
         private bool configuring = false;
+        private readonly GlobalClock _clock;
 
-        public ResearchItem(Team team) {
+        public ResearchItem(Team team, GlobalClock clock) {
+            _clock = clock;
             _playerTeam = team;
             configuring = true;
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void UpdateResearchProgress(object? myObject, EventArgs myEventArgs) {
             iProgress++;
-            if (iProgress <= 24) Const.dtTime = Const.dtTime.AddSeconds(durationSeconds / 24.0);
+            if (iProgress <= 24) _clock.AddSeconds(durationSeconds / 24d);
             pbResearch.Value = Math.Min(iProgress, 24);
             if (iProgress > 25) {
                 clockTick.Stop();

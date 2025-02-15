@@ -39,7 +39,7 @@ namespace SpaceMercs {
         }
 
         public abstract string PrintCoordinates();
-        public abstract void DrawSelected(ShaderProgram prog, int Level);
+        public abstract void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds);
         public abstract void SetupTextureMap(int width, int height);
         public abstract void ClearData();
         public abstract void SetName(string str);
@@ -87,7 +87,7 @@ namespace SpaceMercs {
         }
 
         // Save this object to an Xml file
-        public virtual void SaveToFile(StreamWriter file) {
+        public virtual void SaveToFile(StreamWriter file, GlobalClock clock) {
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
             file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
             file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");

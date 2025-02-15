@@ -25,7 +25,7 @@ namespace SpaceMercs {
             ParentMap = map;
             Generate();
         }
-        public Sector(XmlNode xml, Map map) {
+        public Sector(XmlNode xml, Map map, GlobalClock clock) {
             SectorX = xml.GetAttributeInt("X");
             SectorY = xml.GetAttributeInt("Y");
             ParentMap = map;
@@ -34,7 +34,7 @@ namespace SpaceMercs {
             IEnumerable<XmlNode> xStars = xml.SelectNodesToList("Star");
             if (xStars.Any()) {
                 foreach (XmlNode xmls in xStars) {
-                    Star st = new Star(xmls, this);
+                    Star st = new Star(xmls, this, clock);
                     Stars.Add(st);
                 }
             }
@@ -64,10 +64,10 @@ namespace SpaceMercs {
         }
 
         // Save this sector to an Xml file
-        public void SaveToFile(StreamWriter file) {
+        public void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine($" <Sector X=\"{SectorX}\" Y=\"{SectorY}\" Inhabitant=\"{((Inhabitant == null) ? "" : Inhabitant.Name)}\">");
             foreach (Star st in Stars) {
-                st.SaveToFile(file);
+                st.SaveToFile(file, clock);
             }
             file.WriteLine(" </Sector>");
         }
@@ -90,7 +90,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect, float elapsedSeconds) {
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = 1.0f,
@@ -116,7 +116,7 @@ namespace SpaceMercs {
                     Matrix4 viewM = scaleM * translateM;
                     prog.SetUniform("view", viewM);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-                    st.DrawSelected(prog, iLevel);
+                    st.DrawSelected(prog, iLevel, elapsedSeconds);
                 }
                 else {
                     // Fade out unvisited stars (if set to do so)

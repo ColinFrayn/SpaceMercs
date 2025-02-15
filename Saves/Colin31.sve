@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>21/04/2335 19:13:54</Clock>
+<Clock>06/05/2335 23:54:39</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -346,7 +346,7 @@
  <LastUpdate>730678982432393837</LastUpdate>
  <LastGrowth>686225952000000000</LastGrowth>
  <NextGrowth>1550225952000000000</NextGrowth>
- <SeedProgress>194.8477</SeedProgress>
+ <SeedProgress>194.8926</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6742146</Radius>
@@ -641,7 +641,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>735391008000000000</LastGrowth>
  <NextGrowth>737726400000000000</NextGrowth>
- <SeedProgress>147.9201</SeedProgress>
+ <SeedProgress>147.9425</SeedProgress>
 </Colony>
 <Radius>80535240</Radius>
 <ARot>1071644</ARot>
@@ -854,7 +854,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>734246208000000000</LastGrowth>
  <NextGrowth>737670240000000000</NextGrowth>
- <SeedProgress>83.6757</SeedProgress>
+ <SeedProgress>83.6998</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -1130,7 +1130,7 @@
  <Owner>Ursalon</Owner>
  <LastUpdate>733026840859972500</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>198.9144</SeedProgress>
+ <SeedProgress>198.9625</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6516259</Radius>
@@ -1700,7 +1700,7 @@
  <Owner>Gokan</Owner>
  <LastUpdate>733896053346994687</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>192.6180</SeedProgress>
+ <SeedProgress>192.6755</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5420964</Radius>
@@ -1737,7 +1737,7 @@
  <LastUpdate>733896191977461562</LastUpdate>
  <LastGrowth>733561920000000000</LastGrowth>
  <NextGrowth>739051776000000000</NextGrowth>
- <SeedProgress>196.9995</SeedProgress>
+ <SeedProgress>197.0283</SeedProgress>
 </Colony>
 <Radius>5381628</Radius>
 <ARot>97560</ARot>
@@ -2091,7 +2091,7 @@
  <Owner>Grey</Owner>
  <LastUpdate>726750322223162706</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>189.1677</SeedProgress>
+ <SeedProgress>189.2078</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7076271</Radius>
@@ -2316,7 +2316,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>735570720000000000</LastGrowth>
  <NextGrowth>738259488000000000</NextGrowth>
- <SeedProgress>126.1999</SeedProgress>
+ <SeedProgress>126.2199</SeedProgress>
 </Colony>
 <Radius>47963365</Radius>
 <ARot>689592</ARot>
@@ -2478,7 +2478,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>735072192000000000</LastGrowth>
  <NextGrowth>737226144000000000</NextGrowth>
- <SeedProgress>176.4736</SeedProgress>
+ <SeedProgress>176.4936</SeedProgress>
 </Colony>
 <Radius>5267214</Radius>
 <ARot>85347</ARot>
@@ -2749,7 +2749,7 @@
  <Owner>Human</Owner>
  <LastGrowth>735473088000000000</LastGrowth>
  <NextGrowth>741299904000000000</NextGrowth>
- <SeedProgress>154.4805</SeedProgress>
+ <SeedProgress>154.5015</SeedProgress>
 </Colony>
 <Radius>48376722</Radius>
 <ARot>713242</ARot>
@@ -2936,7 +2936,7 @@
  <LastUpdate>684730542109803125</LastUpdate>
  <LastGrowth>736436448000000000</LastGrowth>
  <NextGrowth>738469440000000000</NextGrowth>
- <SeedProgress>173.7058</SeedProgress>
+ <SeedProgress>173.7216</SeedProgress>
 </Colony>
 <Radius>62599700</Radius>
 <ARot>820912</ARot>
@@ -3037,7 +3037,7 @@
  <Owner>Human</Owner>
  <LastUpdate>735177588211517033</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>192.3844</SeedProgress>
+ <SeedProgress>192.4159</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6259600</Radius>
@@ -3176,7 +3176,7 @@
  <LastUpdate>678169465447230000</LastUpdate>
  <LastGrowth>732127680000000000</LastGrowth>
  <NextGrowth>739368000000000000</NextGrowth>
- <SeedProgress>82.8487</SeedProgress>
+ <SeedProgress>82.8645</SeedProgress>
 </Colony>
 <Name>Home Ice</Name>
 <Radius>7110942</Radius>
@@ -3322,7 +3322,7 @@
  <LastUpdate>732285683729510000</LastUpdate>
  <LastGrowth>735659712000000000</LastGrowth>
  <NextGrowth>737743680000000000</NextGrowth>
- <SeedProgress>183.7483</SeedProgress>
+ <SeedProgress>183.7641</SeedProgress>
 </Colony>
 <Radius>72436431</Radius>
 <ARot>1140902</ARot>
@@ -6679,7 +6679,7 @@
  <LastUpdate>719478082538899140</LastUpdate>
  <LastGrowth>735235488000000000</LastGrowth>
  <NextGrowth>737286624000000000</NextGrowth>
- <SeedProgress>194.0071</SeedProgress>
+ <SeedProgress>194.0303</SeedProgress>
 </Colony>
 <Radius>58225392</Radius>
 <ARot>845621</ARot>
@@ -6721,7 +6721,7 @@
  <LastUpdate>736494733971500000</LastUpdate>
  <LastGrowth>686217312000000000</LastGrowth>
  <NextGrowth>1550217312000000000</NextGrowth>
- <SeedProgress>188.4538</SeedProgress>
+ <SeedProgress>188.5002</SeedProgress>
  <Mercenaries>
 <Soldier Name="Corinthi Ra-Lar">
  <Level>7</Level>
@@ -8959,7 +8959,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>735156000000000000</LastGrowth>
  <NextGrowth>741060576000000000</NextGrowth>
- <SeedProgress>180.0099</SeedProgress>
+ <SeedProgress>180.0320</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -9332,7 +9332,7 @@
  <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>188.2037</SeedProgress>
+ <SeedProgress>188.2478</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6501738</Radius>
@@ -9557,14 +9557,14 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(-1,1)4.0</Pos>
- <Cash>1828.9181690173677</Cash>
+ <Pos>(-1,1)4.2</Pos>
+ <Cash>1788.9181690173677</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="33" Y="10"/>
  <Health>46.068235993856405</Health>
  <Stamina>0.2692835522844117</Stamina>
- <Shields>0</Shields>
+ <Shields>12.5</Shields>
  <Facing>-90</Facing>
  <Level>10</Level>
  <XP>340367</XP>
@@ -9604,7 +9604,7 @@
  <Location X="37" Y="4"/>
  <Health>51.757514594124984</Health>
  <Stamina>1</Stamina>
- <Shields>0</Shields>
+ <Shields>10</Shields>
  <Facing>-90</Facing>
  <Level>10</Level>
  <XP>333320</XP>
@@ -9924,6 +9924,7 @@
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Composite</Material>
+ <Item>Subspace Drive</Item>
 </Research>
 </Race>
 <Race Name="Gokan">

@@ -81,7 +81,7 @@ namespace SpaceMercs {
             Oz = rnd.Next(Const.SeedBuffer);
             Generate();
         }
-        public Star(XmlNode xml, Sector sect) {
+        public Star(XmlNode xml, Sector sect, GlobalClock clock) {
             Sector = sect;
 
             Seed = xml.SelectNodeInt("Seed");
@@ -129,7 +129,7 @@ namespace SpaceMercs {
                     _planets.Add(pl);
                 }
                 else {
-                    Planet pl = new Planet(xmlp, this);
+                    Planet pl = new Planet(xmlp, this, clock);
                     _planets.Add(pl);
                 }
                 bGenerated = true;
@@ -142,7 +142,7 @@ namespace SpaceMercs {
         public static Star Empty { get { return new Star(); } }
 
         // Save this star to an Xml file
-        public override void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Star ID=\"" + ID.ToString() + "\">");
             file.WriteLine("<Seed>" + Seed + "</Seed>");
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
@@ -158,7 +158,7 @@ namespace SpaceMercs {
             if (_planets.Any() && HasBeenEdited()) {
                 file.WriteLine(" <Planets>");
                 foreach (Planet pl in _planets) {
-                    pl.SaveToFile(file);
+                    pl.SaveToFile(file, clock);
                 }
                 file.WriteLine(" </Planets>");
             }
@@ -297,7 +297,7 @@ namespace SpaceMercs {
         }
 
         // Generate this system as a home system
-        public void GenerateHomeSystem(Race rc) {
+        public void GenerateHomeSystem(Race rc, GlobalClock clock) {
             Random rand = new Random(Seed);
             Planet? plHome = null;
             double dTempBest = Const.TempTolerance;
@@ -314,7 +314,7 @@ namespace SpaceMercs {
             } while (plHome == null);
             plHome.GenerateMoons(Const.HomeworldPDensity, Const.HomeworldMinMoons); // Make sure that this planet has at least two moons
             rc.Colonise(this);
-            rc.SetHomePlanet(plHome);
+            rc.SetHomePlanet(plHome, clock);
             plHome.SetName("Homeworld");
         }
 
@@ -360,7 +360,7 @@ namespace SpaceMercs {
         }
 
         // Either expand an existing base or add a new one in this system
-        public bool AddPopulationInSystem(Race rc, Random rand) {
+        public bool AddPopulationInSystem(Race rc, Random rand, GlobalClock clock) {
             int tries = 0;
             if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
 
@@ -369,9 +369,9 @@ namespace SpaceMercs {
             foreach (Planet pl in Planets) {
                 if (pl.Colony is not null) plcols++;
                 if (pl.Type == Planet.PlanetType.Oceanic) {
-                    if (pl.ExpandBase(rc, rand) > 0) return true;
+                    if (pl.ExpandBase(rc, rand, clock) > 0) return true;
                     if (rand.NextDouble() > 0.5) {
-                        if (pl.ExpandMoonBase(rand, rc) > 0) return true;
+                        if (pl.ExpandMoonBase(rand, rc, clock) > 0) return true;
                     }
                 }
             }
@@ -390,16 +390,16 @@ namespace SpaceMercs {
                 if (rand.NextDouble() * 150.0 > tdiff) {
                     if (rand.NextDouble() > 0.5) {
                         if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) {
-                            if (pl.ExpandBase(rc, rand) > 0) return true;
+                            if (pl.ExpandBase(rc, rand, clock) > 0) return true;
                         }
                     }
-                    else if (pl.ExpandMoonBase(rand, rc) > 0) return true;
+                    else if (pl.ExpandMoonBase(rand, rc, clock) > 0) return true;
                 }
             } while (tries < 50);
             return false;
         }
 
-        public bool MaybeAddNewColony(Race rc, Random rand) {
+        public bool MaybeAddNewColony(Race rc, Random rand, GlobalClock clock) {
             int plcols = 0;
             foreach (Planet pl in Planets) {
                 if (pl.Colony is not null) plcols++;
@@ -418,7 +418,7 @@ namespace SpaceMercs {
                 if (rand.NextDouble() * rand.NextDouble() * 200.0 > tdiff) {
                     if (rand.NextDouble() > 0.3) {
                         if (pl.Colony is null) {
-                            if (pl.ExpandBase(rc, rand) > 0) return true;
+                            if (pl.ExpandBase(rc, rand, clock) > 0) return true;
                         }
                     }
                     else {
@@ -426,7 +426,7 @@ namespace SpaceMercs {
                             int mno = rand.Next(pl.Moons.Count);
                             Moon mn = pl.Moons[mno];
                             if (mn.Colony is null) {
-                                if (mn.ExpandBase(rc, rand) > 0) return true;
+                                if (mn.ExpandBase(rc, rand, clock) > 0) return true;
                             }
                         }
                     }
@@ -498,11 +498,11 @@ namespace SpaceMercs {
         }
 
         // Overrides
-        public override void DrawSelected(ShaderProgram prog, int Level = 8) {
+        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
             // Sort out scaling and rotation
             float scale = Const.StarScale * DrawScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);

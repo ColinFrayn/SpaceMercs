@@ -24,6 +24,7 @@ namespace SpaceMercs {
         private readonly Random rand = new Random();
         private VertexBuffer? vbShot = null;
         private VertexArray? vaShot = null;
+        private readonly GlobalClock _clock;
 
         private readonly Color4 ShotColPlayer = new Color4(0.1f, 0.3f, 1.0f, 1.0f);
         private readonly Color4 ShotColEnemy = new Color4(1.0f, 0.3f, 0.1f, 1.0f);
@@ -101,18 +102,20 @@ namespace SpaceMercs {
             }
         }
 
-        public Travel(AstronomicalObject aoFrom, AstronomicalObject aoTo, float fTime, Team team, MapView parent) {
+        public Travel(AstronomicalObject aoFrom, AstronomicalObject aoTo, float fTime, Team team, MapView parent, GlobalClock clock) {
             aoTravelFrom = aoFrom;
             aoTravelTo = aoTo;
             fTravelTime = fTime;
             PlayerTeam = team;
             ParentView = parent;
+            _clock = clock;
             bPause = false;
             SetUp();
         }
-        public Travel(XmlNode xml, Team team, MapView parent) {
+        public Travel(XmlNode xml, Team team, MapView parent, GlobalClock clock) {
             PlayerTeam = team;
             ParentView = parent;
+            _clock = clock;
 
             aoTravelFrom = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOFrom")) ?? throw new Exception("Could not parse From location for travel node");
             aoTravelTo = team.CurrentPosition.GetSystem().Sector.ParentMap.GetAOFromLocationString(xml.SelectNodeText("AOTo")) ?? throw new Exception("Could not parse To location for travel node");
@@ -138,7 +141,7 @@ namespace SpaceMercs {
         }
 
         private void SetUp() {
-            dtStart = Const.dtTime;
+            dtStart = _clock.CurrentTime;
             lFrag.Clear();
             GameOver = false;
         }
@@ -217,7 +220,7 @@ namespace SpaceMercs {
             if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Salvage) {
                 fMissionElapsed += 60f * 10f; 
                 if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
-                Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
+                _clock.SetTime(dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed));
                 if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
                     bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
@@ -235,7 +238,7 @@ namespace SpaceMercs {
             else if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Repair) {
                 fMissionElapsed += 60f * 10f;
                 if (fMissionElapsed > PlayerTeam.CurrentMission.TimeCost) fMissionElapsed = PlayerTeam.CurrentMission.TimeCost;
-                Const.dtTime = dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed);
+                _clock.SetTime(dtStart.AddSeconds(fElapsed).AddSeconds(fMissionElapsed));
                 if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
                     bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
@@ -481,7 +484,7 @@ namespace SpaceMercs {
         }
 
         // Draw the progress with whatever is happening
-        public void Display(ShaderProgram prog, ShaderProgram colprog) {
+        public void Display(ShaderProgram prog, ShaderProgram colprog, float elapsedSeconds) {
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             prog.SetUniform("projection", projectionM);
             prog.SetUniform("view", Matrix4.Identity);
@@ -504,12 +507,12 @@ namespace SpaceMercs {
             Square.Lines.BindAndDraw();
 
             //  Task specific stuff
-            if (PlayerTeam.CurrentMission == null) DrawTravelProgress(prog);
+            if (PlayerTeam.CurrentMission == null) DrawTravelProgress(prog, elapsedSeconds);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Repair) DrawRepair(prog);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage(prog);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle(prog, colprog);
         }
-        private void DrawTravelProgress(ShaderProgram prog) {
+        private void DrawTravelProgress(ShaderProgram prog, float elapsedSeconds) {
             // Set up the text
             string strDist = Utils.PrintDistance(AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo));
             string strTime = string.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(fTravelTime));
@@ -535,10 +538,10 @@ namespace SpaceMercs {
             Matrix4 scaleM = Matrix4.CreateScale(1f / ParentView.Aspect, 1f, 1f);
             Matrix4 starScaleM = Matrix4.CreateScale(0.1f, 0.1f, 0.1f);
             prog.SetUniform("view", (aoTravelFrom is Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
-            aoTravelFrom.DrawSelected(prog, 8);
+            aoTravelFrom.DrawSelected(prog, 8, elapsedSeconds);
             translateM = Matrix4.CreateTranslation(0.75f, 0.42f, 0f);
             prog.SetUniform("view", (aoTravelTo is Star ? starScaleM : Matrix4.Identity) * scaleM * translateM);
-            aoTravelTo.DrawSelected(prog, 8);
+            aoTravelTo.DrawSelected(prog, 8, elapsedSeconds);
         }
         private void DrawSalvage(ShaderProgram prog) {
             if (PlayerTeam.CurrentMission is null) return;

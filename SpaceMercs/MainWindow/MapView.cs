@@ -45,6 +45,8 @@ namespace SpaceMercs.MainWindow {
                 return mypos;
             }
         }
+        public static GlobalClock Clock = new(Const.StartingDate);
+
 
         public GUIMessageBox msgBox { get; private set; }
         public Travel? TravelDetails { get; private set; }
@@ -159,7 +161,7 @@ namespace SpaceMercs.MainWindow {
 
             // Not on mission screen, so tick the clock & check if we died
             if (GalaxyMap.MapIsInitialised) {
-                Const.dtTime = Const.dtTime.AddMilliseconds(swLastTick.ElapsedMilliseconds);
+                Clock.AddMilliseconds(swLastTick.ElapsedMilliseconds);
                 swLastTick.Restart();
                 // Is our ship destroyed?
                 if (PlayerTeam.PlayerShip.Hull <= 0.0) GameOver();
@@ -564,7 +566,7 @@ namespace SpaceMercs.MainWindow {
                 case I_ViewColony:
                     if (!GalaxyMap.MapIsInitialised) return;
                     if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.BaseSize == 0) return;
-                    ColonyView cv = new ColonyView(PlayerTeam, RunMission);
+                    ColonyView cv = new ColonyView(PlayerTeam, RunMission, Clock);
                     cv.Show();
                     return;
                 case I_ViewRaces:
@@ -613,7 +615,7 @@ namespace SpaceMercs.MainWindow {
             if (res == DialogResult.OK) {
                 try {
                     MakeCurrent();
-                    GalaxyMap.Generate(ng);
+                    GalaxyMap.Generate(ng, Clock);
                     SetupNewGame(ng);
                     view = ViewMode.ViewMap;
                     SetAOButtonsOnGUI(aoSelected);
@@ -706,8 +708,8 @@ namespace SpaceMercs.MainWindow {
         #region Clock Tick
         // Update the global clock
         public void UpdateCurrentTime(DateTime newTime) {
-            DateTime oldTime = Const.dtTime;
-            Const.dtTime = newTime;
+            DateTime oldTime = Clock.CurrentTime;
+            Clock.SetTime(newTime);
             TimeSpan tDiff = (newTime - oldTime);
             RunClockTickUpdate(tDiff);
         }
@@ -750,9 +752,9 @@ namespace SpaceMercs.MainWindow {
 
             // Go through all races and check colonies for growth. etc.
             foreach (Race rc in StaticData.Races) {
-                if (!rc.IsPlayer) rc.CheckForNewColonySystems(msgBox);
-                rc.CheckGrowthForAllColonies();
-                rc.CheckColonySeeds(msgBox, tDiff);
+                if (!rc.IsPlayer) rc.CheckForNewColonySystems(msgBox, Clock);
+                rc.CheckGrowthForAllColonies(Clock);
+                rc.CheckColonySeeds(msgBox, tDiff, Clock);
                 rc.CheckResearch(tDiff, maxLevel);
             }
 

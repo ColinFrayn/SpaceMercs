@@ -7,10 +7,12 @@ namespace SpaceMercs.Dialogs {
         private readonly Timer clockTick;
         private readonly Func<Mission, bool> StartMission;
         private int iProgress = 0;
+        private readonly GlobalClock _clock;
 
-        public ScanPlanet(HabitableAO aoScan, Team team, Func<Mission, bool> _startMission) {
+        public ScanPlanet(HabitableAO aoScan, Team team, Func<Mission, bool> _startMission, GlobalClock clock) {
             _aoScan = aoScan;
             _playerTeam = team;
+            _clock = clock;
             StartMission = _startMission;
             InitializeComponent();
             clockTick = new Timer();
@@ -36,7 +38,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void UpdateScan(object? myObject, EventArgs myEventArgs) {
             iProgress++;
-            if (iProgress <= 24) Const.dtTime = Const.dtTime.AddHours(1);
+            if (iProgress <= 24) _clock.AddHours(1);
             pbScan.Value = Math.Min(iProgress, 24);
             if (iProgress > 25) {
                 clockTick.Stop();

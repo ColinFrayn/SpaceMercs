@@ -34,14 +34,14 @@ namespace SpaceMercs.MainWindow {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Display the scene
-            DrawAstronomicalObjects(Aspect, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies);
+            DrawAstronomicalObjects(Aspect, PlayerTeam.CurrentPosition, bShowLabels, bShowColonies, Clock.ElapsedSeconds());
             DrawSystemText();
             SetupGUIHoverInfo();
             DrawGUI();
         }
 
         // Draw all objects in this system
-        private void DrawAstronomicalObjects(float aspect, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies) {
+        private void DrawAstronomicalObjects(float aspect, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies, float elapsedSeconds) {
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
@@ -50,7 +50,7 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("lightPos", -100000f, 0f, 10000f);
 
             // Draw the star
-            SystemStar.DrawSelected(fullShaderProgram, 12);
+            SystemStar.DrawSelected(fullShaderProgram, 12, elapsedSeconds);
 
             // Draw system
             aoHover = null;
@@ -67,7 +67,7 @@ namespace SpaceMercs.MainWindow {
 
                 // Draw the Planet
                 int Level = pl.Radius > 7 * Const.Million ? 10 : 9;
-                pl.DrawSelected(fullShaderProgram, Level);
+                pl.DrawSelected(fullShaderProgram, Level, elapsedSeconds);
 
                 // Draw all other Planet icons
                 pl.DrawHalo(fullShaderProgram);
@@ -134,7 +134,7 @@ namespace SpaceMercs.MainWindow {
                     fullShaderProgram.SetUniform("view", squashM * mTranslateM);
                     flatColourShaderProgram.SetUniform("view", squashM * mTranslateM);
 
-                    mn.DrawSelected(fullShaderProgram, 7);
+                    mn.DrawSelected(fullShaderProgram, 7, elapsedSeconds);
 
                     dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (moony - my) * (moony - my);
                     if (dist2 <= (pl.DrawScale * Const.PlanetScale * Const.MoonScale) * (pl.DrawScale * Const.PlanetScale * Const.MoonScale)) {

@@ -27,7 +27,7 @@ namespace SpaceMercs {
             Seed = _seed;
             GeneratePlanetDetails(npl);
         }
-        public Planet(XmlNode xml, Star parent) : base(xml, parent) {
+        public Planet(XmlNode xml, Star parent, GlobalClock clock) : base(xml, parent, clock) {
             BaseTemp = xml.SelectNodeDouble("TempBase");
             IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
             Moons = new List<Moon>();
@@ -50,7 +50,7 @@ namespace SpaceMercs {
                         break;
                     }
                     Moon mn = Moons[mno];
-                    mn.ExpandFromXml(xmlm);
+                    mn.ExpandFromXml(xmlm, clock);
                 }
             }
             BaseColour = Const.PlanetTypeToCol2(Type);
@@ -70,13 +70,13 @@ namespace SpaceMercs {
         }
 
         // Save this planet to an Xml file
-        public override void SaveToFile(StreamWriter file) {
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             if (!PlanetOrMoonsHaveBeenEdited()) {
                 file.WriteLine($"<Planet Seed=\"{Seed}\" />");
                 return;
             }
             file.WriteLine($"<Planet ID=\"{ID}\">");
-            base.SaveToFile(file);
+            base.SaveToFile(file, clock);
             // Write planet details to file
             if (IsHomeworld) file.WriteLine("<Homeworld/>");
             file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
@@ -85,7 +85,7 @@ namespace SpaceMercs {
             foreach (Moon mn in Moons) {
                 if (mn.HasBeenEdited()) {
                     if (!writeMoons) file.WriteLine("<Moons>");
-                    mn.SaveToFile(file);
+                    mn.SaveToFile(file, clock);
                     writeMoons = true;
                 }
             }
@@ -304,7 +304,7 @@ namespace SpaceMercs {
         }
 
         // Randomly expand a moon base (as part of system generation)
-        public int ExpandMoonBase(Random rand, Race rc) {
+        public int ExpandMoonBase(Random rand, Race rc, GlobalClock clock) {
             if (Moons.Count == 0) return 0;
             int mno = rand.Next(Moons.Count);
             Moon mn = Moons[mno];
@@ -312,7 +312,7 @@ namespace SpaceMercs {
             double tdiff = mn.TDiff(rc);
             if (mn.Colony is not null) tdiff -= 5; // More likely to expand an existing colony
             if (rand.NextDouble() * 100.0 > tdiff) {
-                return mn.ExpandBase(rc, rand);
+                return mn.ExpandBase(rc, rand, clock);
             }
             return 0;
         }
@@ -343,10 +343,10 @@ namespace SpaceMercs {
             float scale = Const.PlanetScale * 1.8f;
             Colony.DrawBaseIcon(prog, scale);
         }
-        public override void DrawSelected(ShaderProgram prog, int Level = 8) {
+        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
             float scale = DrawScale * Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY((float)Const.ElapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
