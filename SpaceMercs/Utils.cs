@@ -163,7 +163,7 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory, float baseDelay = 0f) {
+        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory, float baseDelay) {
             float sdelay = baseDelay;
             if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
                 foreach (ShotResult result in results) {

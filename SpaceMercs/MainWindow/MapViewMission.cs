@@ -1532,7 +1532,7 @@ namespace SpaceMercs.MainWindow {
             int sx = ss.X;
             Stash? st = CurrentLevel.GetStashAtPoint(sx, sy);
             if (st is null) st = new Stash(new Point(sx, sy));
-            EquipmentView eqv = new EquipmentView(ss, st);
+            EquipmentView eqv = new EquipmentView(ss, st, !CurrentLevel.AlertedEnemies);
             eqv.ShowDialog();
             CurrentLevel.ReplaceStashAtPosition(sx, sy, st);
         }

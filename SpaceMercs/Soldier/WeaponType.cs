@@ -24,6 +24,7 @@ namespace SpaceMercs {
         public bool Modifiable { get; private set; }
         public double Recoil { get; private set; } // Hit penalty for subsequent shots after first.
         public double Delay { get; private set; } // Delay between shots
+        public double BaseDelay { get; private set; } // Delay before the first shot
         public double ShotLength { get; private set; }
         public double ShotSpeed { get; private set; }
         public Color ShotColor { get; private set; }
@@ -75,6 +76,7 @@ namespace SpaceMercs {
             Recharge = xml.SelectNodeInt("Recharge", 0);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);
+            BaseDelay = xml.SelectNodeDouble("BaseDelay", 0.0);
         }
 
         public override string ToString() {

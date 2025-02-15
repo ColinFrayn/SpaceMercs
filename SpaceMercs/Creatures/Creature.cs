@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SharpFont;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
@@ -560,161 +561,180 @@ namespace SpaceMercs {
             else playSound(EquippedWeapon.Type.SoundEffect);
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en.Size, results, range, effectFactory);
+            Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en.Size, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
         }
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;
-            bool bFleeing = false;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
             HasMoved = false;
             if (!IsAlert) return;
 
             // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
-            if (Health * 4.0 < MaxHealth &&
-                CurrentTarget != null &&
-                Health <= CurrentTarget.Health &&
-                Level <= CurrentTarget.Level &&
-                !Type.IsBoss &&
-                !isDefendLevel) {
-                if (rnd.NextDouble() * Health / MaxHealth < 0.1) {
-                    // Flee
-                    bFleeing = true;
-                    while (Stamina >= MovementCost && ++nsteps < 20 && rnd.NextDouble() * Health / MaxHealth < 0.2) {
-                        int oldx = X, oldy = Y;
-                        MoveAwayFrom(CurrentTarget, playSound);
-                        if (X != oldx || Y != oldy) {
-                            postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                        }
+            if (CurrentTarget != null && AIStep_ShouldFlee() && !isDefendLevel) {
+                // Flee
+                while (Stamina >= MovementCost && ++nsteps < 20 && rnd.NextDouble() * Health / MaxHealth < 0.2) {
+                    int oldx = X, oldy = Y;
+                    MoveAwayFrom(CurrentTarget, playSound);
+                    if (X != oldx || Y != oldy) {
+                        postMoveCheck(this);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
                     }
-                    CurrentTarget = null;
                 }
+                CurrentTarget = null;
+                return;
             }
 
+            // --- MAIN AI LOOP ---
             do {
                 // Make sure we're on the best target
                 IEntity? lastTarg = CurrentTarget;
                 SetBestTarget();
-                bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
                 if (CurrentTarget == null && lastTarg != null && lastTarg.Health > 0.0) CurrentTarget = lastTarg; // Maybe we lost sight of them because we're pathing a complex route. Stay on track.
                 if (isDefendLevel) {
-                    // Make sure this is always set and never gets overridden on defend levels
+                    // Make sure the objective target is always set and never gets overridden on defend levels
                     Investigate = CurrentLevel.LocationToDefend;
                 }
 
                 // We have a target, so attempt to get near enough to attack them, and do so.
                 if (CurrentTarget != null) {
-                    double atr = AttackRange;
-                    double r = RangeTo(CurrentTarget);
-                    // -- Can we attack? If not then maybe move a bit closer for a better shot?
-                    // We are within range:
-                    if (r <= atr) {
-                        // We can't see the target, so maybe attempt to find them
-                        if (!CanSee(CurrentTarget)) {
-                            List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
-                            if (path is null || path.Count == 0) {
-                                CurrentTarget = null; // No way of getting close enough to see target so remove the target
-                                continue;
-                            }
-                            if (!atObjective) MoveTo(path[0], playSound);
-                            postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                        }
-                        // We can see the target, but can't attack them because we don't have enough stamina
-                        else if (Stamina < AttackCost) {
-                            // Optionally move closer?
-                            if (r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3 && !bFleeing) {
-                                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 5, false, (int)Math.Floor(atr));
-                                if (path is null || path.Count == 0) {
-                                    return; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
-                                }
-                                if (!atObjective) MoveTo(path[0], playSound);
-                                postMoveCheck(this);
-                                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                            }
-                            return;
-                        }
-                        // We can see the target, and have enough stamina to attack, so attack.
-                        else {
-                            centreView(this);
-                            Thread.Sleep(fastAI ? 150 : 200);
-                            AttackEntity(CurrentTarget, fact, playSound);
-                            Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                        }
-                    }
-                    // We are not within range of the target
-                    else {
-                        if (bFleeing) return;
-                        // Close the distance
-                        if (Stamina < MovementCost) return;
-                        List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
-                        if (path is null || path.Count == 0) {
-                            // No way of getting close enough to hit target so give up and don't investigate.
-                            CurrentTarget = null;
-                            if (!isDefendLevel) Investigate = Point.Empty;
-                        }
-                        else {
-                            if (!atObjective) MoveTo(path[0], playSound);
-                            postMoveCheck(this);
-                            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                        }
-                    }
+                    if (AIStep_HasTarget(fact, postMoveCheck, playSound, centreView, fastAI)) return;
                 }
 
                 // No target and couldn't find one. Maybe investigate nearby if we heard something.
                 // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
                 else if (Investigate != Point.Empty) {
-                    if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got to the objective
-                        if (!isDefendLevel) Investigate = Point.Empty;
-                        return;
-                    }
-                    if (Stamina < MovementCost) return;
-                    // Find a route to the target square or nearby, if possible
-                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 40, false, 1, ignoreEntities: isDefendLevel);
-                    // No route available, quit
-                    if (path is null || path.Count == 0) {
-                        if (!isDefendLevel) Investigate = Point.Empty;
-                        return;
-                    }
-                    // There is a route, so take it
-                    else {
-                        MoveTo(path[0], playSound);
-                        postMoveCheck(this);
-                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                    }
+                    if (AIStep_Investigate(postMoveCheck, playSound, fastAI)) return;
                 }
 
                 // Running to hide somewhere i.e. if you are being attacked but can't get within range of the attacker because the way is blocked.
                 else if (HidingPlace != Point.Empty) {
-                    if (Stamina < MovementCost) return;
-                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
-                    if (path is null || path.Count == 0) {
-                        HidingPlace = Point.Empty;
-                        return;
-                    }
-                    else {
-                        MoveTo(path[0], playSound);
-                        postMoveCheck(this);
-                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                    }
+                    if (AIStep_Hide(postMoveCheck, playSound, fastAI)) return;
                 }
 
                 // Should creature attempt to hide from Soldiers?
                 else {
-                    Point? hidingPlace = null;
-                    if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
-                        hidingPlace = FindHidingPlace();
-                    }
-                    if (hidingPlace is null) {
-                        IsAlert = false;
-                        return; // No target, no hope of finding one, just give up and go back to idling
-                    }
-                    else {
-                        HidingPlace = hidingPlace!.Value; // Go here
-                    }
+                    if (AIStep_SetHidingPlace()) return;
                 }
 
             } while (++nsteps < 20 && Stamina >= MovementCost);
+        }
+        private bool AIStep_ShouldFlee() {
+            if (Health * 4.0 > MaxHealth) return false;
+            if (CurrentTarget == null) return false;
+            if (Health >= CurrentTarget.Health) return false;
+            if (Level != CurrentTarget.Level) return false;
+            if (Type.IsBoss) return false;
+            return rnd.NextDouble() * Health / MaxHealth < 0.1;
+        }
+        private bool AIStep_HasTarget(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
+            if (CurrentTarget is null) return false;
+            bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
+            double atr = AttackRange;
+            double r = RangeTo(CurrentTarget);
+            // -- Can we attack? If not then maybe move a bit closer for a better shot?
+            // We are within range:
+            if (r <= atr) {
+                // We can't see the target, so maybe attempt to find them
+                if (!CanSee(CurrentTarget)) {
+                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
+                    if (path is null || path.Count == 0) {
+                        CurrentTarget = null; // No way of getting close enough to see target so remove the target
+                        return false;
+                    }
+                    if (!atObjective) MoveTo(path[0], playSound);
+                    postMoveCheck(this);
+                    if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+                }
+                // We can see the target, but can't attack them because we don't have enough stamina
+                else if (Stamina < AttackCost) {
+                    // Optionally move closer?
+                    if (r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3) {
+                        List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 5, false, (int)Math.Floor(atr));
+                        if (path is null || path.Count == 0) {
+                            return true; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
+                        }
+                        if (!atObjective) MoveTo(path[0], playSound);
+                        postMoveCheck(this);
+                        if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+                    }
+                    return true;
+                }
+                // We can see the target, and have enough stamina to attack, so attack.
+                else {
+                    centreView(this);
+                    Thread.Sleep(fastAI ? 150 : 200);
+                    AttackEntity(CurrentTarget, fact, playSound);
+                    Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+                }
+            }
+            // We are not within range of the target
+            else {
+                // Close the distance
+                if (Stamina < MovementCost) return true;
+                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 50, false, (int)Math.Floor(atr));
+                if (path is null || path.Count == 0) {
+                    // No way of getting close enough to hit target so give up and don't investigate.
+                    CurrentTarget = null;
+                    if (!isDefendLevel) Investigate = Point.Empty;
+                }
+                else {
+                    if (!atObjective) MoveTo(path[0], playSound);
+                    postMoveCheck(this);
+                    if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+                }
+            }
+            return false;
+        }
+        private bool AIStep_Investigate(Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, bool fastAI) {
+            bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got to the objective
+                if (!isDefendLevel) Investigate = Point.Empty;
+                return true;
+            }
+            if (Stamina < MovementCost) return true;
+            // Find a route to the target square or nearby, if possible
+            List<Point>? path = CurrentLevel.ShortestPath(this, Location, Investigate, 40, false, 1, ignoreEntities: isDefendLevel);
+            // No route available, quit
+            if (path is null || path.Count == 0) {
+                if (!isDefendLevel) Investigate = Point.Empty;
+                return true;
+            }
+            // There is a route, so take it
+            else {
+                MoveTo(path[0], playSound);
+                postMoveCheck(this);
+                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+            }
+            return false;
+        }
+        private bool AIStep_Hide(Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, bool fastAI) {
+            if (Stamina < MovementCost) return true;
+            List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
+            if (path is null || path.Count == 0) {
+                HidingPlace = Point.Empty;
+                return true;
+            }
+            else {
+                MoveTo(path[0], playSound);
+                postMoveCheck(this);
+                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+            }
+            return false;
+        }
+        private bool AIStep_SetHidingPlace() {
+            Point? hidingPlace = null;
+            if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
+                hidingPlace = FindHidingPlace();
+            }
+            if (hidingPlace is null) {
+                IsAlert = false;
+                return true; // No target, no hope of finding one, just give up and go back to idling
+            }
+            else {
+                HidingPlace = hidingPlace!.Value; // Go here
+            }
+            return false;
         }
         private Point? FindHidingPlace() {
             Point? best = null;
@@ -755,7 +775,7 @@ namespace SpaceMercs {
             foreach (Soldier s in CurrentLevel.Soldiers) {
                 if (CanSee(s)) {
                     double score = 100.0 / RangeTo(s);
-                    if (s == CurrentTarget) score += 5.0;
+                    if (s == CurrentTarget) score += 15.0;
                     if (AttackRange < this.RangeTo(s)) {
                         List<Point>? path = CurrentLevel.ShortestPath(this, Location, s.Location, 50, false, (int)Math.Floor(AttackRange));
                         if (path is null) continue;
@@ -856,6 +876,5 @@ namespace SpaceMercs {
         public double SoldierVisibilityRange(Soldier s) {
             return s.DetectionRange + ((Level - s.Level) / 3.0);
         }
-
     }
 }

@@ -7,10 +7,13 @@ namespace SpaceMercs.Dialogs {
         private readonly ToolTip ttSoldier = new ToolTip();
         private readonly Soldier ThisSoldier;
         private readonly Stash ThisStash;
+        private readonly bool Quiescent; // Is it quite atm. i.e. no alerted enemies, so Soldier can change equipment
+        private const string DangerText = "Unsafe";
 
-        public EquipmentView(Soldier s, Stash st) {
+        public EquipmentView(Soldier s, Stash st, bool bQuiescent) {
             ThisSoldier = s;
             ThisStash = st;
+            Quiescent = bQuiescent;
             InitializeComponent();
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
             columnHeaderStyle.BackColor = Color.Beige;
@@ -18,6 +21,8 @@ namespace SpaceMercs.Dialogs {
             UpdateAllDetails();
             btScavenge.Enabled = false;
             ttSoldier.SetToolTip(this.pbExperience, "Experience gained this level");
+            btEquip.Text = Quiescent ? "Equip" : DangerText;
+            btDrop.Text = "Drop";
         }
 
         public IItem? SelectedItem() {
@@ -117,6 +122,7 @@ namespace SpaceMercs.Dialogs {
             else if (ThisSoldier.Encumbrance > 0.0) lbEncumber.BackColor = Color.FromArgb(255, (int)(ThisSoldier.Encumbrance * 511.0), 255, 0);
             else lbEncumber.BackColor = Color.FromArgb(255, 0, 255, 0);
             btDrop.Enabled = false;
+            btDrop.Text = "Drop";
             btEquip.Enabled = false;
 
             // Update inventory if it's open, so that it's up-to-date (just to make sure!)
@@ -127,10 +133,7 @@ namespace SpaceMercs.Dialogs {
             string[] arrRow = new string[2];
             foreach (IItem eq in ThisStash.Items()) {
                 arrRow[0] = eq.Name;
-                //arrRow[1] = eq is Armour ? "Armour" : (eq is Weapon ? "Weapon" : "Item");
-                //arrRow[2] = Math.Round(eq.Mass, 2) + "kg";
                 arrRow[1] = ThisStash.GetCount(eq).ToString();
-                //arrRow[4] = Math.Round(eq.Mass * Stack[eq], 2) + "kg";
                 dgFloor.Rows.Add(arrRow);
                 dgFloor.Rows[dgFloor.Rows.Count - 1].Tag = eq;
             }
@@ -144,6 +147,8 @@ namespace SpaceMercs.Dialogs {
 
         private void btEquip_Click(object sender, EventArgs e) {
             if (SelectedItem() is not IEquippable eq) return;
+            if (!Quiescent) return;
+
             int iPrevIndex = -1;
             if (lbInventory.SelectedIndex >= 0) {
                 iPrevIndex = lbInventory.SelectedIndex;
@@ -177,9 +182,10 @@ namespace SpaceMercs.Dialogs {
             int i = lbInventory.SelectedIndex;
             if (i < 0) return;
             IItem? it = SelectedItem();
-            if (it is Weapon || it is Armour) btEquip.Enabled = true;
+            if (it is Weapon || it is Armour) btEquip.Enabled = Quiescent;
             else btEquip.Enabled = false;
-            btEquip.Text = "Equip";
+            if (Quiescent) btEquip.Text = "Equip";
+            btDrop.Text = "Drop";
             btDrop.Enabled = true;
             lbEquipped.SelectedIndex = -1;
         }
@@ -187,9 +193,10 @@ namespace SpaceMercs.Dialogs {
             // Update buttons based on selection
             int i = lbEquipped.SelectedIndex;
             if (i < 0) return;
-            btEquip.Enabled = true;
-            btEquip.Text = "Unequip";
-            btDrop.Enabled = true;
+            btEquip.Enabled = Quiescent;
+            btEquip.Text = Quiescent ? "Unequip" : DangerText;
+            btDrop.Text = Quiescent ? "Drop" : DangerText;
+            btDrop.Enabled = Quiescent;
             lbInventory.SelectedIndex = -1;
         }
 

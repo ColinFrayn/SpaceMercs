@@ -1174,7 +1174,7 @@ namespace SpaceMercs {
             }
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory);
+            Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
             return true;
         }
         public bool AttackArea(MissionLevel level, int tx, int ty, IReadOnlyCollection<Vector2> aoeTiles, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
@@ -1225,7 +1225,7 @@ namespace SpaceMercs {
                         }
                     }
                 }
-                float sDelay = 0f;
+                float sDelay = (float)EquippedWeapon.Type.BaseDelay;
                 foreach (IEntity en in hitTargets.Keys) {
                     List<ShotResult> results = new List<ShotResult>();
                     for (int i = 0; i < hitTargets[en]; i++) {
