@@ -2,9 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Enemy searching is terrible; Doesn't reliably charge towarsd a single foe and can oscillate [TEST FIX]
-
-Heavy weapons mercs are too tough. Why do they do so much more dmg than Soldiers?
+Enemy searching is terrible; Doesn't reliably charge towards a single foe and can oscillate [TEST FIX]
 
 Display when a weapon is recharging somehow
 
@@ -14,6 +12,8 @@ Display when a weapon is recharging somehow
 ---------------------
 Backburner : Features
 ---------------------
+
+Can we move Clock to the MissionView class?
 
 Expansion of systems: Work out how to get large colonies in distant systems
 -> More trade routes (and announce them)

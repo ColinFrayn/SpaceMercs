@@ -891,7 +891,7 @@
   <WeaponType Name="Xenoblades">
     <Speed>10</Speed>
     <Range>1</Range>
-    <Damage>5+4</Damage>
+    <Damage>5+5</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>
@@ -912,7 +912,7 @@
   <WeaponType Name="Void Lance">
     <Speed>12</Speed>
     <Range DropOff="0.2" Length="1.0" Colour="0.8,0.7,0.7">8</Range>
-    <Damage>5+3</Damage>
+    <Damage>5+5</Damage>
     <Type>Electrical</Type>
     <Sound>HeavyCrossbow</Sound>
     <Hidden/>

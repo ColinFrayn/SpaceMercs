@@ -348,7 +348,7 @@ namespace SpaceMercs {
         public int Endurance { get { return Math.Max(0, BaseEndurance + StatBonuses(StatType.Endurance)); } }
         public int BaseAttack { get { return (MeleeAttacker ? Strength : Insight) + Level + 2; } }
         public int BaseDefence { get { return Agility + Level + 2; } }
-        public int BaseHealth { get { return Toughness + Level + 10; } }
+        public int BaseHealth { get { return (Toughness * 3) + (Level * 2) - 8; } }
         public int BaseStamina { get { return Endurance + Level + 10; } }
         public double StaminaRegen {  get { return MaxStamina - Level; } }
         public double MaximumCarry { get { return (Math.Pow(Strength, 1.55) * Const.MaxCarryScale) + 4.0; } }

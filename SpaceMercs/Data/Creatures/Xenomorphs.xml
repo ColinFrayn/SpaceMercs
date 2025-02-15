@@ -14,7 +14,7 @@
     <Col3>80, 80, 80</Col3>
     <Desc>An Alien</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Acid" Value="50"/>
@@ -115,10 +115,10 @@
   <CreatureType Name="Xenomorph Queen">
     <Size>2</Size>
     <LevelRange>9,17</LevelRange>
-    <Attack>22</Attack>
+    <Attack>24</Attack>
     <Defence>13</Defence>
     <Armour>33</Armour>
-    <Health>50</Health>
+    <Health>55</Health>
     <Stamina>24</Stamina>
     <Interact/>
     <BodyType>Xenomorph</BodyType>

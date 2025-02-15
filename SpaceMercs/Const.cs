@@ -159,9 +159,9 @@ namespace SpaceMercs {
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 1.5;  // Increase damage done by traps
-        public const double CreatureAttackDamageScale = 0.07;  // Modifier applied to damage done by Creatures
-        public const double CreatureAttackDamageBaseMod = 0.7; // Scale factor for zeroth level creatures damage.
-        public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers
+        public const double CreatureAttackDamageScale = 0.08;  // Modifier applied to damage done by Creatures per point of Attack.
+        public const double CreatureAttackDamageBaseMod = 0.8; // Base scale factor for creature attack damage.
+        public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers per point of Attack.
         public const double TurnLength = 10.0; // Length of one combat turn in seconds
         public const double SurpriseHitMod = 5.0; // Hit bonus if the target is not alert to your presence
         public const float  ShotDurationScale = 25.0f; // Time taken for shots to get from source to target
