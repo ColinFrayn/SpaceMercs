@@ -87,11 +87,11 @@ namespace SpaceMercs {
             Location = loc;
             dtLastGrowth = clock.CurrentTime;
             rc.AddColony(this);
-            if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
+            if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
             dtLastVisit = DateTime.MinValue;
         }
-        public Colony(XmlNode xml, HabitableAO loc, GlobalClock clock) {
+        public Colony(XmlNode xml, HabitableAO loc) {
             Location = loc;
             string raceName = xml.SelectNodeText("Owner");
             Owner = StaticData.GetRaceByName(raceName) ?? throw new Exception("Could not ID colony owning race : " + raceName);
@@ -116,7 +116,7 @@ namespace SpaceMercs {
 
             string strNextGrowth = xml.SelectNodeText("NextGrowth");
             if (!string.IsNullOrEmpty(strNextGrowth)) dtNextGrowth = DateTime.FromBinary(long.Parse(strNextGrowth));
-            else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
+            else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
 
             Mercenaries.Clear();
@@ -214,7 +214,7 @@ namespace SpaceMercs {
                 ForceExpandBase();
                 Location.GetSystem().CheckBuildTradeRoutes(Owner);
                 dtLastGrowth = dtNextGrowth;
-                dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod(clock));
+                dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             }
         }
         internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff, GlobalClock clock) {
@@ -542,19 +542,31 @@ namespace SpaceMercs {
             if (tp.RequiredRace != null && tp.RequiredRace != Owner) return false;
             return true;
         }
-        private int GetNextGrowthPeriod(GlobalClock clock) { // In days
+        private int GetNextGrowthPeriod() { // In days
             if (!CanGrow) return (int)Const.Million; // i.e. never
-            Random rand = new Random(Location.GetHashCode() + clock.CurrentTime.DayOfYear); // Repeatable random seed
-            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * 3.0 + 350.0 * rand.NextDouble());
-            double tdiff = Location.TDiff(Owner);
-            for (int i = 0; i < Math.Abs(tdiff / 10); i++) {
-                dt *= rand.NextDouble() * 0.15 + 1.1; // The worse the temperature, the harder to grow
+
+            // Repeatable random seed
+            Random rand = new Random(Location.GetHashCode() + BaseSize);
+
+            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * (2.5 + rand.NextDouble()));
+            double tdiff = Location.TDiff(Owner); // Abs value, doubled for +ve
+            
+            // Tougher to grow if far from ideal temp
+            if (tdiff > 20d) {
+                dt *= Math.Pow(1.1, (tdiff - 20d) / 10d);
             }
-            if (Location is Moon) dt *= 1.5; // Moons suck
+
+            // Moons suck
+            if (Location is Moon) dt *= 1.5;
+
+            // Much easier to grow with trade routes set up
             if (Location.GetSystem().TradeRoutes.Any()) {
-                dt *= Const.TradeRouteColonyGrowthRate; // Much easier to grow with trade routes set up
+                dt *= Const.TradeRouteColonyGrowthRate;
             }
-            dt *= 20d / Math.Max(10, Owner.Population); // Slow down as the civ gets larger, or it will get exponential
+
+            // Slow down as the civ gets larger, or it will get exponential
+            dt *= 20d / Math.Max(10, Owner.Population);
+
             return (int)dt;
         }
 

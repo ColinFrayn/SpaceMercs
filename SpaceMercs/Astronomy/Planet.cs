@@ -27,7 +27,7 @@ namespace SpaceMercs {
             Seed = _seed;
             GeneratePlanetDetails(npl);
         }
-        public Planet(XmlNode xml, Star parent, GlobalClock clock) : base(xml, parent, clock) {
+        public Planet(XmlNode xml, Star parent) : base(xml, parent) {
             BaseTemp = xml.SelectNodeDouble("TempBase");
             IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
             Moons = new List<Moon>();
@@ -50,7 +50,7 @@ namespace SpaceMercs {
                         break;
                     }
                     Moon mn = Moons[mno];
-                    mn.ExpandFromXml(xmlm, clock);
+                    mn.ExpandFromXml(xmlm);
                 }
             }
             BaseColour = Const.PlanetTypeToCol2(Type);

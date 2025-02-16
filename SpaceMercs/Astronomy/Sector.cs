@@ -25,7 +25,7 @@ namespace SpaceMercs {
             ParentMap = map;
             Generate();
         }
-        public Sector(XmlNode xml, Map map, GlobalClock clock) {
+        public Sector(XmlNode xml, Map map) {
             SectorX = xml.GetAttributeInt("X");
             SectorY = xml.GetAttributeInt("Y");
             ParentMap = map;
@@ -34,7 +34,7 @@ namespace SpaceMercs {
             IEnumerable<XmlNode> xStars = xml.SelectNodesToList("Star");
             if (xStars.Any()) {
                 foreach (XmlNode xmls in xStars) {
-                    Star st = new Star(xmls, this, clock);
+                    Star st = new Star(xmls, this);
                     Stars.Add(st);
                 }
             }

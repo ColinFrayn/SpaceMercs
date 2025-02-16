@@ -19,7 +19,7 @@ namespace SpaceMercs {
             Oy = rnd.Next(Const.SeedBuffer);
             Oz = rnd.Next(Const.SeedBuffer);
         }
-        public Moon(XmlNode xml, Planet parent, GlobalClock clock) : base(xml, parent, clock) {
+        public Moon(XmlNode xml, Planet parent) : base(xml, parent) {
             // Bugfix - handle some dodgy data saved down because moon orbital period was wrapping as it was miscalculated too large
             if (OrbitalPeriod < 0 || AxialRotationPeriod < 0) {
                 Random rnd = new Random();
@@ -40,9 +40,9 @@ namespace SpaceMercs {
             file.WriteLine("</Moon>");
         }
 
-        public void ExpandFromXml(XmlNode xml, GlobalClock clock) {
+        public void ExpandFromXml(XmlNode xml) {
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this, clock));
+            if (xmlc != null) SetColony(new Colony(xmlc, this));
             LoadMissions(xml);
             XmlNode? xmln = xml.SelectSingleNode("Name");
             if (xmln != null) Name = xml.SelectNodeText("Name", string.Empty);

@@ -81,7 +81,7 @@ namespace SpaceMercs {
             Oz = rnd.Next(Const.SeedBuffer);
             Generate();
         }
-        public Star(XmlNode xml, Sector sect, GlobalClock clock) {
+        public Star(XmlNode xml, Sector sect) {
             Sector = sect;
 
             Seed = xml.SelectNodeInt("Seed");
@@ -129,7 +129,7 @@ namespace SpaceMercs {
                     _planets.Add(pl);
                 }
                 else {
-                    Planet pl = new Planet(xmlp, this, clock);
+                    Planet pl = new Planet(xmlp, this);
                     _planets.Add(pl);
                 }
                 bGenerated = true;

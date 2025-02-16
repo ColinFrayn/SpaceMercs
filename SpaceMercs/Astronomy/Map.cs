@@ -14,7 +14,7 @@ namespace SpaceMercs {
         public Map() {
             // We're good
         }
-        public Map(XmlNode xml, GlobalClock clock) {
+        public Map(XmlNode xml) {
             if (xml.Attributes?["Seed"] is null) throw new Exception("Map seed is missing from save file");
             if (xml.Attributes?["SPS"] is null) throw new Exception("Map StarsPerSector is missing from save file");
             if (xml.Attributes?["PD"] is null) throw new Exception("Map PlanetDensity is missing from save file");
@@ -24,7 +24,7 @@ namespace SpaceMercs {
 
             dSectors.Clear();
             foreach (XmlNode xmls in xml.SelectNodesToList("Sector")) {
-                Sector sect = new Sector(xmls, this, clock);
+                Sector sect = new Sector(xmls, this);
                 dSectors.Add(new Tuple<int, int>(sect.SectorX, sect.SectorY), sect);
             }
             if (!dSectors.Any()) throw new Exception("Could not locate sector nodes in save file");

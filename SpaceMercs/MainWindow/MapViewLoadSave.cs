@@ -47,7 +47,7 @@ namespace SpaceMercs.MainWindow {
             if (xMap is null) {
                 throw new Exception("Could not find Map details in save file");
             }
-            Map newMap = new Map(xMap, Clock);
+            Map newMap = new Map(xMap);
 
             // Load in player team
             XmlNode? xTeam = xml.SelectSingleNode("Team");

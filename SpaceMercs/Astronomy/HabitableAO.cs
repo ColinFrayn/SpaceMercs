@@ -19,11 +19,11 @@ namespace SpaceMercs {
         public double OrbitalPeriod; // Period of orbit (seconds)
 
         public HabitableAO() {}
-        public HabitableAO(XmlNode xml, AstronomicalObject parent, GlobalClock clock) : base(xml, parent) { 
+        public HabitableAO(XmlNode xml, AstronomicalObject parent) : base(xml, parent) { 
             OrbitalPeriod = xml.SelectNodeDouble("PRot");
             Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
-            if (xmlc != null) SetColony(new Colony(xmlc, this, clock));
+            if (xmlc != null) SetColony(new Colony(xmlc, this));
             LoadMissions(xml);
         }
 
