@@ -4,6 +4,8 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
+Fewer moon cols. Maybe gate it more on moon type?
+
 ==================================================================================================================
 
 

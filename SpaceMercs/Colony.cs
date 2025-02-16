@@ -43,7 +43,7 @@ namespace SpaceMercs {
         public bool CanGrow {
             get {
                 if (BaseSize == 6) return false;
-                if (Location is Moon && BaseSize >= 5) return false;
+                if (Location is Moon) return false; // Maximum moon colony size is now clamped at 1
                 return true;
             }
         }
@@ -97,7 +97,7 @@ namespace SpaceMercs {
             Owner = StaticData.GetRaceByName(raceName) ?? throw new Exception("Could not ID colony owning race : " + raceName);
             Owner.AddColony(this);
             string baseType = xml.SelectNodeText("BaseType");
-            if (!string.IsNullOrEmpty(baseType)) {
+            if (loc is Planet && !string.IsNullOrEmpty(baseType)) {
                 if (Int32.TryParse(baseType, out int baseInt)) {
                     Base = (BaseType)baseInt;
                 }
@@ -110,11 +110,11 @@ namespace SpaceMercs {
 
             SeedProgress = xml.SelectNodeDouble("SeedProgress", 0d);
 
-            string strLastGrowth = xml.SelectNodeText("LastGrowth");
+            string strLastGrowth = xml.SelectNodeText("LastGrowth", string.Empty);
             if (!string.IsNullOrEmpty(strLastGrowth)) dtLastGrowth = DateTime.FromBinary(long.Parse(strLastGrowth));
             else dtLastGrowth = Const.StartingDate;
 
-            string strNextGrowth = xml.SelectNodeText("NextGrowth");
+            string strNextGrowth = xml.SelectNodeText("NextGrowth", string.Empty);
             if (!string.IsNullOrEmpty(strNextGrowth)) dtNextGrowth = DateTime.FromBinary(long.Parse(strNextGrowth));
             else if (CanGrow) dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             else dtNextGrowth = DateTime.MaxValue;
@@ -158,7 +158,7 @@ namespace SpaceMercs {
             file.WriteLine(" <Owner>" + Owner.Name + "</Owner>");
             if (dtLastVisit > DateTime.MinValue) file.WriteLine(" <LastUpdate>" + dtLastVisit.ToBinary() + "</LastUpdate>");
             if (dtLastGrowth > Const.StartingDate) file.WriteLine(" <LastGrowth>" + dtLastGrowth.ToBinary() + "</LastGrowth>");
-            file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
+            if (Location is not Moon) file.WriteLine(" <NextGrowth>" + dtNextGrowth.ToBinary() + "</NextGrowth>");
             if (SeedProgress > 0d) file.WriteLine(" <SeedProgress>" + SeedProgress.ToString("F4") + "</SeedProgress>");
 
             TimeSpan ts = clock.CurrentTime - dtLastVisit;
@@ -244,7 +244,7 @@ namespace SpaceMercs {
             Random rand = new Random(Location.GetHashCode());
             do {
                 BaseType bt = (BaseType)(1 << (rand.Next(5)));
-                if (HasBaseType(bt)) {
+                if (!HasBaseType(bt)) {
                     ExpandBase(bt);
                     return;
                 }

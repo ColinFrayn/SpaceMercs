@@ -404,31 +404,34 @@ namespace SpaceMercs {
             foreach (Planet pl in Planets) {
                 if (pl.Colony is not null) plcols++;
             }
-            int maxTries = Planets.Count * 4 + 8;
+            int maxTries = Planets.Count * 4 + 6;
             int tries = 0;
             do {
                 int pno = rand.Next(_planets.Count);
                 Planet pl = _planets[pno];
                 double tdiff = pl.TDiff(rc);
                 if (pl.Type == Planet.PlanetType.Gas) {
-                    tdiff += 15.0; // Make it less likely to colonise Gas giants.
-                    if (plcols == 0) tdiff += 30; // Much less likely if this is the first planet colony in this system
-                    if (plcols == 1) tdiff += 15; // Quite a bit less likely if this is the second planet colony in this system
+                    tdiff += 20d; // Make it less likely to colonise Gas giants.
+                    if (plcols == 0) tdiff += 40d; // Much less likely if this is the first planet colony in this system
+                    if (plcols == 1) tdiff += 20d; // Quite a bit less likely if this is the second planet colony in this system
                 }
                 if (rand.NextDouble() * rand.NextDouble() * 200.0 > tdiff) {
-                    if (rand.NextDouble() > 0.3) {
-                        if (pl.Colony is null) {
-                            if (pl.ExpandBase(rc, rand, clock) > 0) return true;
-                        }
+                    if (pl.Colony is null) {
+                        if (pl.ExpandBase(rc, rand, clock) > 0) return true;
                     }
-                    else {
-                        if (pl.Moons.Count > 0) {
-                            int mno = rand.Next(pl.Moons.Count);
-                            Moon mn = pl.Moons[mno];
-                            if (mn.Colony is null) {
+                    else if (pl.Moons.Count > 0) {
+                        int mno = rand.Next(pl.Moons.Count);
+                        Moon mn = pl.Moons[mno];
+                        int moonPop = pl.GetPopulation() - pl.Colony.BaseSize;
+                        if (mn.Colony is null) {
+                            double chance = 65d + (plcols * 2d) - (moonPop * 10d);
+                            if (mn.Type == Planet.PlanetType.Oceanic) chance += 20d;
+                            if (mn.Type == Planet.PlanetType.Volcanic || mn.Type == Planet.PlanetType.Ice) chance -= 15d;
+                            if (rand.NextDouble() * 100d < chance) {
                                 if (mn.ExpandBase(rc, rand, clock) > 0) return true;
                             }
                         }
+
                     }
                 }
             } while (++tries < maxTries);
