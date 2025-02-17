@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace SpaceMercs {
     public static class Const {
@@ -210,6 +211,11 @@ namespace SpaceMercs {
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item
         public const double ColonySeedRate = 5.0; // Affects the speed at which new colonies are created in populated systems.
         public const double ColonySeedTarget = 200.0; // Target seeding point at which level the colony may seed
+        public const double GrowthExponent = 1.8; // Affects how time taken for a colony to grow scales with size
+        public const double GrowthScale = 2.5; // Affects how time taken for a colony to grow scales with size
+        public const double GrowthTempBase = 1.12; // Affects how time taken for a colony to grow scales with temperature diff
+        public const double GrowthTempScale = 6; // Affects how time taken for a colony to grow scales with temperature diff
+        public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
 
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system

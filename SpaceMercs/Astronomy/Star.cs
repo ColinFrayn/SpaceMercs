@@ -442,24 +442,27 @@ namespace SpaceMercs {
         public void CheckBuildTradeRoutes(Race rc) {
             int colonyCount = 0;
             int maxColonySize = 0;
+            int totalPop = 0;
             foreach (Planet planet in Planets) {
                 if (planet.Colony?.Owner == rc) {
                     colonyCount++;
                     if (planet.BaseSize > maxColonySize) maxColonySize = planet.BaseSize;
+                    totalPop += planet.BaseSize;
                 }
                 foreach (Moon mn in planet.Moons) {
                     if (mn.Colony?.Owner == rc) {
                         colonyCount++;
                         if (mn.BaseSize > maxColonySize) maxColonySize = mn.BaseSize;
+                        totalPop += mn.BaseSize;
                     }
                 }
             }
 
             // Threshold for at least one trade route
             int expectedTradeRoutes = 0;
-            if (maxColonySize >= 3) expectedTradeRoutes = 1;
-            if (maxColonySize >= 4 && colonyCount > 1) expectedTradeRoutes = 2;
-            if (maxColonySize == 6 && colonyCount > 2) expectedTradeRoutes = 3;
+            if (maxColonySize >= 4) expectedTradeRoutes = 1;
+            if (maxColonySize >= 5 && colonyCount > 1 && totalPop > 6) expectedTradeRoutes = 2;
+            if (maxColonySize == 6 && colonyCount > 3 && totalPop > 12) expectedTradeRoutes = 3;
             if (TradeRoutes.Count < expectedTradeRoutes) {
                 MaybeAddTradeRoute(rc, true);
             }

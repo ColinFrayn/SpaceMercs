@@ -548,24 +548,24 @@ namespace SpaceMercs {
             // Repeatable random seed
             Random rand = new Random(Location.GetHashCode() + BaseSize);
 
-            double dt = Math.Pow(BaseSize, 1.7) * (Const.DaysPerYear * (2.5 + rand.NextDouble()));
-            double tdiff = Location.TDiff(Owner); // Abs value, doubled for +ve
+            // Base amount of time, in days, before the next growth
+            double dt = Math.Pow(BaseSize, Const.GrowthExponent) * (Const.DaysPerYear * (Const.GrowthScale + rand.NextDouble()));
+
+            // Calculate temperature diff from ideal, abs value, doubled for +ve because hotter temperatures get difficult more quickly
+            double tdiff = Location.TDiff(Owner);
             
             // Tougher to grow if far from ideal temp
-            if (tdiff > 20d) {
-                dt *= Math.Pow(1.1, (tdiff - 20d) / 10d);
+            if (tdiff > Const.GrowthTempOffset) {
+                dt *= Math.Pow(Const.GrowthTempBase, (tdiff - Const.GrowthTempOffset) / Const.GrowthTempScale);
             }
-
-            // Moons suck
-            if (Location is Moon) dt *= 1.5;
 
             // Much easier to grow with trade routes set up
             if (Location.GetSystem().TradeRoutes.Any()) {
                 dt *= Const.TradeRouteColonyGrowthRate;
             }
 
-            // Slow down as the civ gets larger, or it will get exponential
-            dt *= 20d / Math.Max(10, Owner.Population);
+            // Slow down as the civ gets larger, or growth will get exponential
+            dt *= 20d / Math.Max(20, Owner.Population);
 
             return (int)dt;
         }
