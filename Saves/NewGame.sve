@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>30/03/2150 14:53:31</Clock>
+<Clock>01/04/2150 12:19:32</Clock>
 <Map Seed="224758" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Ogrish">
 <Star ID="0">
@@ -34,7 +34,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158802704960000</LastGrowth>
- <NextGrowth>684444402704960000</NextGrowth>
+ <NextGrowth>681642450704960000</NextGrowth>
 </Colony>
 <Radius>3563766</Radius>
 <ARot>56603</ARot>
@@ -57,7 +57,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158817704960000</LastGrowth>
- <NextGrowth>679447041704960000</NextGrowth>
+ <NextGrowth>679180065704960000</NextGrowth>
 </Colony>
 <Radius>70837838</Radius>
 <ARot>1115636</ARot>
@@ -80,7 +80,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>679783113704960000</NextGrowth>
+ <NextGrowth>679179177704960000</NextGrowth>
 </Colony>
 <Radius>5524529</Radius>
 <ARot>82104</ARot>
@@ -118,7 +118,6 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158814704960000</LastGrowth>
- <NextGrowth>681899934704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -139,7 +138,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158799704960000</LastGrowth>
- <NextGrowth>680270415704960000</NextGrowth>
+ <NextGrowth>679644015704960000</NextGrowth>
 </Colony>
 <Radius>4436309</Radius>
 <ARot>67582</ARot>
@@ -170,8 +169,8 @@
 <Colony>
  <BaseType>31</BaseType>
  <Owner>Ogrish</Owner>
- <NextGrowth>718454016000000000</NextGrowth>
- <SeedProgress>4.3506</SeedProgress>
+ <NextGrowth>694756224000000000</NextGrowth>
+ <SeedProgress>4.6205</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6582612</Radius>
@@ -188,8 +187,8 @@
 <Colony>
  <BaseType>27</BaseType>
  <Owner>Ogrish</Owner>
- <NextGrowth>680266944000000000</NextGrowth>
- <SeedProgress>3.4804</SeedProgress>
+ <NextGrowth>690926976000000000</NextGrowth>
+ <SeedProgress>3.6963</SeedProgress>
 </Colony>
 <Radius>5473718</Radius>
 <ARot>68690</ARot>
@@ -204,7 +203,7 @@
 <PRot>16516262</PRot>
 <Colony>
  <Owner>Ogrish</Owner>
- <NextGrowth>685552032000000000</NextGrowth>
+ <NextGrowth>682143552000000000</NextGrowth>
 </Colony>
 <Radius>4965365</Radius>
 <ARot>73158</ARot>
@@ -228,7 +227,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158805704960000</LastGrowth>
- <NextGrowth>682504725704960000</NextGrowth>
+ <NextGrowth>681410901704960000</NextGrowth>
 </Colony>
 <Radius>5801019</Radius>
 <ARot>79288</ARot>
@@ -265,7 +264,6 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158811704960000</LastGrowth>
- <NextGrowth>680529627704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -287,7 +285,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158796704960000</LastGrowth>
- <NextGrowth>681533580704960000</NextGrowth>
+ <NextGrowth>680490732704960000</NextGrowth>
 </Colony>
 <Radius>54066102</Radius>
 <ARot>910920</ARot>
@@ -315,7 +313,7 @@
 <Colony>
  <BaseType>23</BaseType>
  <Owner>Ogrish</Owner>
- <NextGrowth>683868960000000000</NextGrowth>
+ <NextGrowth>700339392000000000</NextGrowth>
 </Colony>
 <Radius>5559210</Radius>
 <ARot>82192</ARot>
@@ -342,7 +340,7 @@
 <Colony>
  <Owner>Ogrish</Owner>
  <LastGrowth>678158808704960000</LastGrowth>
- <NextGrowth>679911000704960000</NextGrowth>
+ <NextGrowth>679994808704960000</NextGrowth>
 </Colony>
 <Radius>5961554</Radius>
 <ARot>91225</ARot>
@@ -367,7 +365,7 @@
 <PRot>106542376</PRot>
 <Colony>
  <Owner>Ogrish</Owner>
- <NextGrowth>681642432000000000</NextGrowth>
+ <NextGrowth>679186080000000000</NextGrowth>
 </Colony>
 <Radius>5717643</Radius>
 <ARot>76631</ARot>
@@ -398,7 +396,7 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Insectoid</Owner>
- <NextGrowth>683057664000000000</NextGrowth>
+ <NextGrowth>684944640000000000</NextGrowth>
 </Colony>
 <Radius>56416778</Radius>
 <ARot>862201</ARot>
@@ -410,7 +408,6 @@
 <Moon ID="2">
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>682689600000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -434,7 +431,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158814704960000</LastGrowth>
- <NextGrowth>681872286704960000</NextGrowth>
+ <NextGrowth>681314142704960000</NextGrowth>
 </Colony>
 <Radius>55941629</Radius>
 <ARot>829150</ARot>
@@ -470,7 +467,6 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158799704960000</LastGrowth>
- <NextGrowth>680634159704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -492,7 +488,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158805704960000</LastGrowth>
- <NextGrowth>679863477704960000</NextGrowth>
+ <NextGrowth>679315701704960000</NextGrowth>
 </Colony>
 <Radius>4738755</Radius>
 <ARot>76375</ARot>
@@ -519,7 +515,7 @@
 <PRot>88695545</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>684376992000000000</NextGrowth>
+ <NextGrowth>680059584000000000</NextGrowth>
 </Colony>
 <Radius>6040867</Radius>
 <ARot>86853</ARot>
@@ -544,7 +540,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>680011209704960000</NextGrowth>
+ <NextGrowth>679061673704960000</NextGrowth>
 </Colony>
 <Radius>5871972</Radius>
 <ARot>80346</ARot>
@@ -576,7 +572,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158796704960000</LastGrowth>
- <NextGrowth>685666092704960000</NextGrowth>
+ <NextGrowth>681646764704960000</NextGrowth>
 </Colony>
 <Radius>5855884</Radius>
 <ARot>81888</ARot>
@@ -602,7 +598,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158808704960000</LastGrowth>
- <NextGrowth>679730424704960000</NextGrowth>
+ <NextGrowth>679224120704960000</NextGrowth>
 </Colony>
 <Radius>5961932</Radius>
 <ARot>98655</ARot>
@@ -629,7 +625,7 @@
 <PRot>14718828</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>680491584000000000</NextGrowth>
+ <NextGrowth>679206816000000000</NextGrowth>
 </Colony>
 <Radius>61582015</Radius>
 <ARot>969126</ARot>
@@ -652,7 +648,7 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158811704960000</LastGrowth>
- <NextGrowth>679675995704960000</NextGrowth>
+ <NextGrowth>679129083704960000</NextGrowth>
 </Colony>
 <Radius>7366447</Radius>
 <ARot>104090</ARot>
@@ -682,7 +678,7 @@
 <PRot>91132894</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>679953312000000000</NextGrowth>
+ <NextGrowth>678897504000000000</NextGrowth>
 </Colony>
 <Radius>7338139</Radius>
 <ARot>108228</ARot>
@@ -720,7 +716,6 @@
 <Colony>
  <Owner>Insectoid</Owner>
  <LastGrowth>678158802704960000</LastGrowth>
- <NextGrowth>683080146704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -744,8 +739,8 @@
 <Colony>
  <BaseType>63</BaseType>
  <Owner>Insectoid</Owner>
- <NextGrowth>711129888000000000</NextGrowth>
- <SeedProgress>5.4473</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>5.7853</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7384747</Radius>
@@ -759,7 +754,6 @@
 <Moon ID="3">
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>680865696000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -770,7 +764,7 @@
 <PRot>76224557</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>681902496000000000</NextGrowth>
+ <NextGrowth>679802112000000000</NextGrowth>
 </Colony>
 <Radius>6305576</Radius>
 <ARot>94589</ARot>
@@ -795,7 +789,7 @@
 <PRot>160245638</PRot>
 <Colony>
  <Owner>Insectoid</Owner>
- <NextGrowth>680882112000000000</NextGrowth>
+ <NextGrowth>678928608000000000</NextGrowth>
 </Colony>
 <Radius>5258859</Radius>
 <ARot>79131</ARot>
@@ -831,7 +825,7 @@
 <Colony>
  <Owner>Grey</Owner>
  <LastGrowth>678158799704960000</LastGrowth>
- <NextGrowth>683436111704960000</NextGrowth>
+ <NextGrowth>682074447704960000</NextGrowth>
 </Colony>
 <Radius>71040529</Radius>
 <ARot>1169261</ARot>
@@ -858,7 +852,7 @@
 <PRot>21954711</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>681764256000000000</NextGrowth>
+ <NextGrowth>679894560000000000</NextGrowth>
 </Colony>
 <Radius>38841703</Radius>
 <ARot>497063</ARot>
@@ -873,7 +867,7 @@
 <PRot>18399082</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>684745056000000000</NextGrowth>
+ <NextGrowth>682561728000000000</NextGrowth>
 </Colony>
 <Radius>5926930</Radius>
 <ARot>84172</ARot>
@@ -900,7 +894,7 @@
 <Colony>
  <Owner>Grey</Owner>
  <LastGrowth>678158796704960000</LastGrowth>
- <NextGrowth>681625164704960000</NextGrowth>
+ <NextGrowth>680221164704960000</NextGrowth>
 </Colony>
 <Radius>53030238</Radius>
 <ARot>756850</ARot>
@@ -933,7 +927,7 @@
 <PRot>12493443</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>680254848000000000</NextGrowth>
+ <NextGrowth>678963168000000000</NextGrowth>
 </Colony>
 <Radius>56955903</Radius>
 <ARot>854594</ARot>
@@ -957,7 +951,7 @@
 <Colony>
  <Owner>Grey</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>681543945704960000</NextGrowth>
+ <NextGrowth>680579721704960000</NextGrowth>
 </Colony>
 <Radius>62927741</Radius>
 <ARot>926425</ARot>
@@ -982,7 +976,7 @@
 <Colony>
  <Owner>Grey</Owner>
  <LastGrowth>678158802704960000</LastGrowth>
- <NextGrowth>680500242704960000</NextGrowth>
+ <NextGrowth>679618098704960000</NextGrowth>
 </Colony>
 <Radius>7355573</Radius>
 <ARot>118664</ARot>
@@ -1017,7 +1011,7 @@
 <Colony>
  <Owner>Grey</Owner>
  <LastGrowth>678158805704960000</LastGrowth>
- <NextGrowth>679506645704960000</NextGrowth>
+ <NextGrowth>679214613704960000</NextGrowth>
 </Colony>
 <Radius>6314006</Radius>
 <ARot>91089</ARot>
@@ -1046,8 +1040,8 @@
 <Colony>
  <BaseType>11</BaseType>
  <Owner>Grey</Owner>
- <NextGrowth>681736608000000000</NextGrowth>
- <SeedProgress>3.1319</SeedProgress>
+ <NextGrowth>684499680000000000</NextGrowth>
+ <SeedProgress>3.3262</SeedProgress>
 </Colony>
 <Radius>7314616</Radius>
 <ARot>104430</ARot>
@@ -1074,7 +1068,7 @@
 <PRot>32960378</PRot>
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>681151680000000000</NextGrowth>
+ <NextGrowth>679148064000000000</NextGrowth>
 </Colony>
 <Radius>7776015</Radius>
 <ARot>113152</ARot>
@@ -1089,8 +1083,8 @@
 <Colony>
  <BaseType>63</BaseType>
  <Owner>Grey</Owner>
- <NextGrowth>718689888000000000</NextGrowth>
- <SeedProgress>6.2636</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>6.6522</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5382268</Radius>
@@ -1104,13 +1098,11 @@
 <Moon ID="0">
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>682499520000000000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
 <Colony>
  <Owner>Grey</Owner>
- <NextGrowth>679948992000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1183,7 +1175,7 @@
 <Colony>
  <BaseType>9</BaseType>
  <Owner>Human</Owner>
- <NextGrowth>680806080000000000</NextGrowth>
+ <NextGrowth>681391008000000000</NextGrowth>
 </Colony>
 <Radius>7063577</Radius>
 <ARot>104204</ARot>
@@ -1198,7 +1190,7 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Human</Owner>
- <NextGrowth>681877440000000000</NextGrowth>
+ <NextGrowth>685016352000000000</NextGrowth>
 </Colony>
 <Radius>4426078</Radius>
 <ARot>55891</ARot>
@@ -1234,7 +1226,6 @@
 <Moon ID="0">
 <Colony>
  <Owner>Human</Owner>
- <NextGrowth>680771520000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -1244,7 +1235,7 @@
 <PRot>11974236</PRot>
 <Colony>
  <Owner>Human</Owner>
- <NextGrowth>684319104000000000</NextGrowth>
+ <NextGrowth>679570560000000000</NextGrowth>
 </Colony>
 <Radius>69003277</Radius>
 <ARot>935724</ARot>
@@ -1258,7 +1249,7 @@
 <PRot>26875495</PRot>
 <Colony>
  <Owner>Human</Owner>
- <NextGrowth>680535648000000000</NextGrowth>
+ <NextGrowth>679353696000000000</NextGrowth>
 </Colony>
 <Radius>6688574</Radius>
 <ARot>87037</ARot>
@@ -1289,8 +1280,8 @@
  <BaseType>63</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>678183179540824765</LastUpdate>
- <NextGrowth>729260928000000000</NextGrowth>
- <SeedProgress>8.3512</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>8.8694</SeedProgress>
  <Mercenaries>
 <Soldier Name="Victoria Vickers">
  <Level>1</Level>
@@ -2455,7 +2446,6 @@
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>678160259906652187</LastUpdate>
- <NextGrowth>681721920000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Sophie Underhill">
  <Level>1</Level>
@@ -2777,7 +2767,7 @@
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>678235347383217500</LastUpdate>
- <NextGrowth>681543936000000000</NextGrowth>
+ <NextGrowth>680085504000000000</NextGrowth>
  <Mercenaries>
 <Soldier Name="Kathy Nicholson">
  <Level>2</Level>
@@ -3284,13 +3274,11 @@
 <Moon ID="1">
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>680669568000000000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>681521472000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3301,8 +3289,8 @@
 <Colony>
  <BaseType>63</BaseType>
  <Owner>Elithiri</Owner>
- <NextGrowth>722463840000000000</NextGrowth>
- <SeedProgress>7.8291</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>8.3473</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7312766</Radius>
@@ -3315,9 +3303,7 @@
 <Moons>
 <Moon ID="2">
 <Colony>
- <BaseType>5</BaseType>
  <Owner>Elithiri</Owner>
- <NextGrowth>681206976000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3346,7 +3332,7 @@
 <PRot>9186146</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>679910976000000000</NextGrowth>
+ <NextGrowth>678884544000000000</NextGrowth>
 </Colony>
 <Radius>74750016</Radius>
 <ARot>1332825</ARot>
@@ -3360,7 +3346,7 @@
 <PRot>23468585</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>681224256000000000</NextGrowth>
+ <NextGrowth>679288032000000000</NextGrowth>
 </Colony>
 <Radius>5026503</Radius>
 <ARot>62353</ARot>
@@ -3374,7 +3360,7 @@
 <PRot>17422060</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>682839936000000000</NextGrowth>
+ <NextGrowth>679526496000000000</NextGrowth>
 </Colony>
 <Radius>6015771</Radius>
 <ARot>71976</ARot>
@@ -3399,7 +3385,7 @@
 <PRot>12981220</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>680724000000000000</NextGrowth>
+ <NextGrowth>679559328000000000</NextGrowth>
 </Colony>
 <Radius>57972535</Radius>
 <ARot>848067</ARot>
@@ -3416,7 +3402,7 @@
 <PRot>10265537</PRot>
 <Colony>
  <Owner>Elithiri</Owner>
- <NextGrowth>696580992000000000</NextGrowth>
+ <NextGrowth>683774784000000000</NextGrowth>
 </Colony>
 <Radius>5489866</Radius>
 <ARot>86672</ARot>
@@ -3457,7 +3443,7 @@
 <Colony>
  <Owner>Elithiri</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>681069609704960000</NextGrowth>
+ <NextGrowth>680184009704960000</NextGrowth>
 </Colony>
 <Radius>71075854</Radius>
 <ARot>1004708</ARot>
@@ -3509,7 +3495,7 @@
 <Colony>
  <Owner>Ursalon</Owner>
  <LastGrowth>678158799704960000</LastGrowth>
- <NextGrowth>679519599704960000</NextGrowth>
+ <NextGrowth>678964911704960000</NextGrowth>
 </Colony>
 <Radius>61336764</Radius>
 <ARot>822237</ARot>
@@ -3539,8 +3525,8 @@
 <Colony>
  <BaseType>63</BaseType>
  <Owner>Ursalon</Owner>
- <NextGrowth>714136608000000000</NextGrowth>
- <SeedProgress>6.9594</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>7.3912</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5169539</Radius>
@@ -3580,7 +3566,6 @@
 <Moon ID="0">
 <Colony>
  <Owner>Ursalon</Owner>
- <NextGrowth>682560000000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3591,7 +3576,7 @@
 <Colony>
  <BaseType>9</BaseType>
  <Owner>Ursalon</Owner>
- <NextGrowth>680204736000000000</NextGrowth>
+ <NextGrowth>681007392000000000</NextGrowth>
 </Colony>
 <Radius>7258405</Radius>
 <ARot>104680</ARot>
@@ -3603,7 +3588,6 @@
 <Moon ID="0">
 <Colony>
  <Owner>Ursalon</Owner>
- <NextGrowth>681817824000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3614,7 +3598,7 @@
 <Colony>
  <BaseType>17</BaseType>
  <Owner>Ursalon</Owner>
- <NextGrowth>680739552000000000</NextGrowth>
+ <NextGrowth>681364224000000000</NextGrowth>
 </Colony>
 <Radius>5130102</Radius>
 <ARot>74004</ARot>
@@ -3655,7 +3639,6 @@
 <Colony>
  <Owner>Ursalon</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>680784489704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3693,7 +3676,6 @@
 <Colony>
  <Owner>Ursalon</Owner>
  <LastGrowth>678158796704960000</LastGrowth>
- <NextGrowth>681442860704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3722,7 +3704,7 @@
 <PRot>64800403</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <NextGrowth>680948640000000000</NextGrowth>
+ <NextGrowth>679307040000000000</NextGrowth>
 </Colony>
 <Radius>6477190</Radius>
 <ARot>94477</ARot>
@@ -3734,7 +3716,6 @@
 <Moon ID="0">
 <Colony>
  <Owner>Ursalon</Owner>
- <NextGrowth>686899872000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3744,7 +3725,7 @@
 <PRot>33237653</PRot>
 <Colony>
  <Owner>Ursalon</Owner>
- <NextGrowth>683402400000000000</NextGrowth>
+ <NextGrowth>680553792000000000</NextGrowth>
 </Colony>
 <Radius>6916437</Radius>
 <ARot>107468</ARot>
@@ -3779,7 +3760,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158820704960000</LastGrowth>
- <NextGrowth>679642308704960000</NextGrowth>
+ <NextGrowth>679364100704960000</NextGrowth>
 </Colony>
 <Radius>6702054</Radius>
 <ARot>84277</ARot>
@@ -3803,7 +3784,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158796704960000</LastGrowth>
- <NextGrowth>679441836704960000</NextGrowth>
+ <NextGrowth>679054764704960000</NextGrowth>
 </Colony>
 <Radius>6179226</Radius>
 <ARot>74830</ARot>
@@ -3831,7 +3812,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158793704960000</LastGrowth>
- <NextGrowth>679959369704960000</NextGrowth>
+ <NextGrowth>679000329704960000</NextGrowth>
 </Colony>
 <Radius>6773505</Radius>
 <ARot>96339</ARot>
@@ -3861,7 +3842,7 @@
 <PRot>11066557</PRot>
 <Colony>
  <Owner>Gokan</Owner>
- <NextGrowth>680785344000000000</NextGrowth>
+ <NextGrowth>678995136000000000</NextGrowth>
 </Colony>
 <Radius>79179741</Radius>
 <ARot>1020209</ARot>
@@ -3883,13 +3864,11 @@
 <Moon ID="1">
 <Colony>
  <Owner>Gokan</Owner>
- <NextGrowth>680582304000000000</NextGrowth>
 </Colony>
 </Moon>
 <Moon ID="2">
 <Colony>
  <Owner>Gokan</Owner>
- <NextGrowth>682851168000000000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3918,7 +3897,6 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158802704960000</LastGrowth>
- <NextGrowth>680662674704960000</NextGrowth>
 </Colony>
 </Moon>
 </Moons>
@@ -3940,7 +3918,7 @@
 <PRot>35028344</PRot>
 <Colony>
  <Owner>Gokan</Owner>
- <NextGrowth>689303520000000000</NextGrowth>
+ <NextGrowth>684343296000000000</NextGrowth>
 </Colony>
 <Radius>5399827</Radius>
 <ARot>81453</ARot>
@@ -3955,7 +3933,7 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Gokan</Owner>
- <NextGrowth>681394464000000000</NextGrowth>
+ <NextGrowth>682458048000000000</NextGrowth>
 </Colony>
 <Radius>73537479</Radius>
 <ARot>1075777</ARot>
@@ -3970,7 +3948,7 @@
 <PRot>12473427</PRot>
 <Colony>
  <Owner>Gokan</Owner>
- <NextGrowth>683010144000000000</NextGrowth>
+ <NextGrowth>680300640000000000</NextGrowth>
 </Colony>
 <Radius>6403965</Radius>
 <ARot>83843</ARot>
@@ -3998,7 +3976,7 @@
 <Colony>
  <BaseType>5</BaseType>
  <Owner>Gokan</Owner>
- <NextGrowth>680335200000000000</NextGrowth>
+ <NextGrowth>680481216000000000</NextGrowth>
 </Colony>
 <Radius>56635079</Radius>
 <ARot>920647</ARot>
@@ -4013,8 +3991,8 @@
 <Colony>
  <BaseType>63</BaseType>
  <Owner>Gokan</Owner>
- <NextGrowth>721293984000000000</NextGrowth>
- <SeedProgress>4.8196</SeedProgress>
+ <NextGrowth>3155378975999999999</NextGrowth>
+ <SeedProgress>5.1186</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5040391</Radius>
@@ -4046,7 +4024,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158808704960000</LastGrowth>
- <NextGrowth>689585208704960000</NextGrowth>
+ <NextGrowth>689021016704960000</NextGrowth>
 </Colony>
 <Radius>6465698</Radius>
 <ARot>78300</ARot>
@@ -4071,7 +4049,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158805704960000</LastGrowth>
- <NextGrowth>679565397704960000</NextGrowth>
+ <NextGrowth>679113525704960000</NextGrowth>
 </Colony>
 <Radius>5801978</Radius>
 <ARot>83371</ARot>
@@ -4097,7 +4075,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158823704960000</LastGrowth>
- <NextGrowth>680030247704960000</NextGrowth>
+ <NextGrowth>680258343704960000</NextGrowth>
 </Colony>
 <Radius>5727021</Radius>
 <ARot>76564</ARot>
@@ -4123,7 +4101,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158817704960000</LastGrowth>
- <NextGrowth>680358561704960000</NextGrowth>
+ <NextGrowth>680824257704960000</NextGrowth>
 </Colony>
 <Radius>7280208</Radius>
 <ARot>115152</ARot>
@@ -4147,7 +4125,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158814704960000</LastGrowth>
- <NextGrowth>681530142704960000</NextGrowth>
+ <NextGrowth>681584574704960000</NextGrowth>
 </Colony>
 <Radius>5663495</Radius>
 <ARot>84878</ARot>
@@ -4171,7 +4149,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158811704960000</LastGrowth>
- <NextGrowth>679460859704960000</NextGrowth>
+ <NextGrowth>679289787704960000</NextGrowth>
 </Colony>
 <Radius>50112798</Radius>
 <ARot>670523</ARot>
@@ -4197,7 +4175,7 @@
 <Colony>
  <Owner>Gokan</Owner>
  <LastGrowth>678158799704960000</LastGrowth>
- <NextGrowth>680177103704960000</NextGrowth>
+ <NextGrowth>680538255704960000</NextGrowth>
 </Colony>
 <Radius>6008009</Radius>
 <ARot>92805</ARot>
@@ -4333,6 +4311,7 @@
 <LastExpand>30142690955226622</LastExpand>
 <Research>
  <Item>Stealth Gauntlets</Item>
+ <Item>Rail Gun</Item>
 </Research>
 </Race>
 <Race Name="Elithiri">
@@ -4358,6 +4337,7 @@
 <LastExpand>678106891013442460</LastExpand>
 <Research>
  <Item>Laser Rifle</Item>
+ <Item>Poison Grenade</Item>
 </Research>
 </Race>
 <Race Name="Ursalon">

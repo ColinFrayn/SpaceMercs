@@ -565,7 +565,7 @@ namespace SpaceMercs {
             }
 
             // Slow down as the civ gets larger, or growth will get exponential
-            dt *= 20d / Math.Max(20, Owner.Population);
+            dt *= Math.Max(20, Owner.Population) / 20d;
 
             return (int)dt;
         }
