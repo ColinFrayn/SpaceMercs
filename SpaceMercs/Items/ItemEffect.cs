@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public string SoundEffect { get; private set; }
         public int Recharge { get; private set; } // Number of turns to recharge (2 = usable every other round, 1 = one use per round, 0 = unlimited uses)
         public bool CurePoison { get; private set; }
+        public int NoiseLevel { get; private set; } // Noise level is the number of squares away this effect can be heard
 
         // Delegate
         public delegate void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py);
@@ -22,9 +23,8 @@ namespace SpaceMercs {
             Radius = xml.SelectNodeDouble("Radius", 0.0);
             Range = xml.SelectNodeDouble("Range", 1.0);
             Recharge = xml.SelectNodeInt("Recharge", 0);
-
             SingleUse = xml.SelectSingleNode("SingleUse") != null;
-
+            NoiseLevel = xml.GetAttributeInt("Noise", 0);
             CurePoison = xml.SelectSingleNode("CurePoison") != null;
 
             XmlNode? xsk = xml.SelectSingleNode("Skill");

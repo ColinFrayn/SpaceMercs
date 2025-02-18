@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Maybe make alerted enemies alert those around them in a radius (2 for grunts, 3 for boss?)
+
 Display when a weapon is recharging somehow
 
 ==================================================================================================================

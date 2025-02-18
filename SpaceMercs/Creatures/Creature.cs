@@ -849,7 +849,7 @@ namespace SpaceMercs {
             else Investigate = tg.Location;
         }
         public void SetTargetInvestigation(int x, int y) {
-            if (x < 0 || y < 0) Investigate = Point.Empty;
+            if (x <= 0 || y <= 0) Investigate = Point.Empty;
             else Investigate = new Point(x, y);
         }
         public void SetHasQuestItem() {

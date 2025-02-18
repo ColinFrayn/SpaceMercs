@@ -5,6 +5,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Threading;
@@ -535,8 +536,10 @@ namespace SpaceMercs.MainWindow {
                     ActionItem = null;
                     // Now apply the effect
                     ApplyItemEffectToMap(s, temp, hoverx, hovery);
-                    double visibilityRange = Const.BaseDetectionRange - (s.GetUtilityLevel(Soldier.UtilitySkill.Stealth)/2.0);
-                    if (visibilityRange >= 1.0 && UpdateDetectionForLocation(hoverx, hovery, visibilityRange)) {
+
+                    // Apply a noise at the target location and make creatures notice if they're close enough
+                    ItemEffect? ie = temp.BaseType.ItemEffect;
+                    if (UpdateDetectionForLocation(hoverx, hovery, ie?.NoiseLevel ?? 0)) {
                         // No alert required
                     }
                 }
@@ -605,16 +608,22 @@ namespace SpaceMercs.MainWindow {
             CheckForTransition();
             if (SelectedEntity is Soldier se) GenerateDistMap(se);
             GenerateDetectionMap();
-            // Check if this soldier was detected
+
+            // Check if this soldier was detected by a currently unalert creature
             if (DetectionMap[s.X, s.Y]) {
                 if (UpdateDetectionForSoldierAfterAction(s)) {
                     msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
                 }
             }
+
+            // See if we walked into a trap
             CheckForTraps(s);
+
+            // Make sure creature is following us by setting the target (NOP) and updating the Investigation square with Soldier's current position
             foreach (Creature cr in CurrentLevel.Creatures) {
-                if (cr.CurrentTarget == s && cr.CanSee(s)) cr.SetTarget(s);   // Make sure creature is following us by setting the target (NOP) and updating the Investigation square with Soldier's current position
+                if (cr.CurrentTarget == s && cr.CanSee(s)) cr.SetTarget(s);
             }
+
             // Passive search
             List<string> lFound = s.SearchTheArea(CurrentLevel, true);
             if (lFound.Count > 0) msgBox.PopupMessage(lFound);
@@ -705,26 +714,30 @@ namespace SpaceMercs.MainWindow {
         }
         private bool UpdateDetectionForSoldierAfterAction(Soldier s) {
             if (!DetectionMap[s.X, s.Y]) return false;
-            return UpdateDetectionForLocation(s.X, s.Y, s.DetectionRange);
+            return UpdateDetectionForLocation(s.X, s.Y, s.DetectionRange, s);
         }
         private bool UpdateDetectionForSoldierAfterAttack(Soldier s) {
             if (s.EquippedWeapon is null) return false;
             return UpdateDetectionForLocation(s.X, s.Y, s.EquippedWeapon.NoiseLevel);
         }
-        private bool UpdateDetectionForLocation(int x, int y, double baseRange) {
+        private bool UpdateDetectionForLocation(int x, int y, double baseRange, Soldier? s = null) {
             // Calculate the effects of a noise at location x,y.
-            // baseRange is the range in which this noise can be heard
+            // baseRange is the range within which this noise can be heard.
             if (x < 0 || y < 0 || x >= CurrentLevel.Width || y >= CurrentLevel.Height) return false;
-            // Check every nearby creature to see if it can detect this soldier
+            // Check every nearby creature to see if it can detect this soldier.
             HashSet<Creature> hsDetected = new HashSet<Creature>();
             foreach (Creature cr in CurrentLevel.Creatures) {
+                // Creature is not alert and has not yet detected this soldier.
+                // See if it does.
                 if (!cr.IsAlert && !hsDetected.Contains(cr)) {
                     double range = baseRange;
                     double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
+                    // Creature is within detection range of this soldier, and can see it
                     if (r2 <= (range * range) && cr.CanSee(x, y)) {
                         hsDetected.Add(cr);
                         cr.SetAlert();
                         cr.SetTargetInvestigation(x, y);
+                        if (s != null) cr.SetTarget(s);
                     }
                 }
             }
@@ -1827,8 +1840,7 @@ namespace SpaceMercs.MainWindow {
                     DetectionMap[x, y] = false;
                 }
             }
-            Soldier? s = SelectedEntity as Soldier;
-            if (s == null) return;
+            if (SelectedEntity is not Soldier s) return;
 
             // Check every nearby entity
             foreach (Creature cr in CurrentLevel.Creatures) {

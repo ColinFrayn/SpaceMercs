@@ -13,6 +13,7 @@
         <Damage Type="Physical">-10</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -36,6 +37,7 @@
         <Damage Type="Physical">-8</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -60,6 +62,7 @@
         <Damage Type="Physical">-20</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -92,6 +95,7 @@
         <Damage Type="Physical">-16</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -126,6 +130,7 @@
           <Mod Stat="Agility">2</Mod>
         </StatMods>
       </Effect>
+      <Noise>1</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -149,6 +154,7 @@
           <Mod Stat="Stamina">5</Mod>
         </StatMods>
       </Effect>
+      <Noise>1</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -171,6 +177,7 @@
       <Effect>
         <Damage Type="Physical">12</Damage>
       </Effect>
+      <Noise>10</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -197,6 +204,7 @@
         <Duration>3</Duration>        
         <Damage Type="Fire">6</Damage>
       </Effect>
+      <Noise>10</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -230,6 +238,7 @@
         <Duration>4</Duration>
         <Damage Type="Poison">5</Damage>
       </Effect>
+      <Noise>8</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -266,6 +275,7 @@
         </StatMods>
         <SpeedMod>0.5</SpeedMod>
       </Effect>
+      <Noise>8</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -300,6 +310,7 @@
         <Damage Type="Acid">3</Damage>
         <ArmourMod>-5</ArmourMod>
       </Effect>
+      <Noise>8</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -325,6 +336,7 @@
       <Effect>
         <Damage Type="Fire">14</Damage>
       </Effect>
+      <Noise>11</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -357,6 +369,7 @@
       <Effect>
         <Damage Type="Fire">20</Damage>
       </Effect>
+      <Noise>12</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -401,6 +414,7 @@
         </StatMods>
         <SpeedMod>0.5</SpeedMod>
       </Effect>
+      <Noise>12</Noise>
       <Sound>Blast</Sound>
     </ItemEffect>
     <Materials>
@@ -428,6 +442,7 @@
         <Damage Type="Physical">-30</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>
@@ -456,6 +471,7 @@
         <Damage Type="Physical">-24</Damage>
         <!-- Negative damage = healing -->
       </Effect>
+      <Noise>2</Noise>
       <Sound>Inject</Sound>
     </ItemEffect>
     <Materials>

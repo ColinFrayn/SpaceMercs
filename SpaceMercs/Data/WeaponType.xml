@@ -109,6 +109,7 @@
     <Cost>180</Cost>
     <Rarity>12</Rarity>
     <Speed>16</Speed>
+    <Recharge>1</Recharge>
     <Range Accuracy="0" DropOff="0.7" Length="0.2" Speed="0.8">10</Range>
     <Shots>3</Shots>
     <Recoil>1.5</Recoil>
@@ -237,6 +238,7 @@
     <Cost>650</Cost>
     <Rarity>22</Rarity>
     <Speed>16</Speed>
+    <Recharge>1</Recharge>
     <Range Accuracy="0" DropOff="0.6" Length="0.8" Speed="1.8" Colour="1.0,0.2,0.2">12</Range>
     <Shots>3</Shots>
     <Delay>200</Delay>
@@ -291,6 +293,7 @@
     <Cost>100</Cost>
     <Rarity>14</Rarity>
     <Speed>20</Speed>
+    <Recharge>1</Recharge>
     <Range Accuracy="0" DropOff="0.7" Length="0.3" Speed="1.6">14</Range>
     <Damage>12+8</Damage>
     <Desc>A heavy railgun</Desc>
@@ -349,6 +352,7 @@
     <Cost>950</Cost>
     <Rarity>14</Rarity>
     <Speed>18</Speed>
+    <Recharge>1</Recharge>
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">5</Range>
     <Shots>5</Shots>
     <Recoil>0.9</Recoil>
