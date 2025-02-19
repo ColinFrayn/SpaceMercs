@@ -2,7 +2,7 @@
   <!--Enemy creatures -->
   <CreatureType Name="Rogue">
     <Scale>0.9</Scale>
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>1,12</LevelRange>
     <Attack>9</Attack>
     <Defence>8</Defence>
     <Armour>18</Armour>
@@ -21,7 +21,7 @@
     </Weapons>
   </CreatureType>
   <CreatureType Name="Bandit">
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>1,12</LevelRange>
     <Attack>11</Attack>
     <Defence>10</Defence>
     <Armour>22</Armour>
@@ -43,7 +43,7 @@
     </Weapons>
   </CreatureType>
   <CreatureType Name="Mercenary">
-    <LevelRange>1,20</LevelRange>
+    <LevelRange>1,15</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
     <Armour>25</Armour>

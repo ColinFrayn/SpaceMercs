@@ -3,7 +3,7 @@
     <LevelRange>6,15</LevelRange>
     <Attack>11</Attack>
     <Defence>9</Defence>
-    <Armour>26</Armour>
+    <Armour>22</Armour>
     <Health>13</Health>
     <Stamina>14</Stamina>
     <Frequency>4</Frequency>
@@ -28,7 +28,7 @@
     <LevelRange>7,18</LevelRange>
     <Attack>12</Attack>
     <Defence>10</Defence>
-    <Armour>30</Armour>
+    <Armour>24</Armour>
     <Health>17</Health>
     <Stamina>16</Stamina>
     <Frequency>2</Frequency>
@@ -83,7 +83,7 @@
     <LevelRange>8,22</LevelRange>
     <Attack>13</Attack>
     <Defence>11</Defence>
-    <Armour>34</Armour>
+    <Armour>26</Armour>
     <Health>21</Health>
     <Stamina>18</Stamina>
     <Shields>10</Shields>
@@ -113,7 +113,7 @@
     <LevelRange>9,22</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
-    <Armour>34</Armour>
+    <Armour>32</Armour>
     <Health>20</Health>
     <Stamina>15</Stamina>
     <MovementCost>3.0</MovementCost>
@@ -140,7 +140,7 @@
     <LevelRange>9,22</LevelRange>
     <Attack>14</Attack>
     <Defence>10</Defence>
-    <Armour>25</Armour>
+    <Armour>21</Armour>
     <Health>16</Health>
     <Stamina>16</Stamina>
     <BodyType>Mechanoid</BodyType>
@@ -169,7 +169,7 @@
     <Attack>18</Attack>
     <Defence>11</Defence>
     <BodyType>Tank</BodyType>
-    <Armour>38</Armour>
+    <Armour>36</Armour>
     <Health>60</Health>
     <Stamina>18</Stamina>
     <Interact/>

@@ -548,7 +548,7 @@
       <Material Name="Crystals">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Ursalon">1</Relations>
+      <Relations Name="Gokan">3</Relations>
       <Relations Name="Elithiri">2</Relations>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>

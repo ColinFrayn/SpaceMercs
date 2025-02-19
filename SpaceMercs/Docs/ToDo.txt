@@ -2,9 +2,15 @@
 ToDo List
 -------------------------------------------------
 
-Maybe make alerted enemies alert those around them in a radius (2 for grunts, 3 for boss?)
+Make alerted enemies alert those around them in a radius (2 for grunts, 3 for boss?) [TEST]
+
+More creatures valid around level 10
 
 Display when a weapon is recharging somehow
+
+Add more alien-only items?
+- Maybe convert existing ones to researchable based on alien relations
+- Add  in more amazing items for high relations. At least one vl 2,3 for each civ
 
 ==================================================================================================================
 
@@ -12,11 +18,6 @@ Display when a weapon is recharging somehow
 ---------------------
 Backburner : Features
 ---------------------
-
-Expansion of systems: Work out how to get large colonies in distant systems
--> More trade routes (and announce them)
-- Maybe have fewer moon colonies?
-- Maybe be more careful about gating tech on civ size. Perhaps scale that down a bit?? (What if settings have number of sys and pl turned down?)
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 
@@ -50,8 +51,7 @@ Improve Creature textures:
 
 Add overwatch ability?
 
-Add more alien-only items
-- Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
+Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)

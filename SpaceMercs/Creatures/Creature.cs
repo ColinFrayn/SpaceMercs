@@ -852,6 +852,9 @@ namespace SpaceMercs {
             if (x <= 0 || y <= 0) Investigate = Point.Empty;
             else Investigate = new Point(x, y);
         }
+        public void SetTargetInvestigation(Point pt) {
+            Investigate = new Point(pt.X, pt.Y);
+        }
         public void SetHasQuestItem() {
             QuestItem = true;
         }

@@ -8,6 +8,7 @@ using SpaceMercs.Graphics.Shapes;
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.VisualEffect;
@@ -743,8 +744,29 @@ namespace SpaceMercs.MainWindow {
             }
             if (hsDetected.Count == 0) return false;
 
+            // Alert creatures nearby to those who are already alerted
+            AlertNeighbours(hsDetected);
+
             GenerateDetectionMap();
             return true;
+        }
+        private void AlertNeighbours(HashSet<Creature> hsDetected) {
+            // Loop through all creatures in the hashset.
+            // For each one, alert any other currently unalerted creatures that are within a certain radius of the first creature.
+            foreach (Creature cr in hsDetected) {
+                int range = 1;
+                if (cr.Type.IsBoss) range++;
+                for (int y = Math.Max(1, cr.Y - range); y <= Math.Min(CurrentLevel.Height - 2, cr.Y + range); y++) {
+                    for (int x = Math.Max(1, cr.X - range); x <= Math.Min(CurrentLevel.Width - 2, cr.X + range); x++) {
+                        if (CurrentLevel.GetEntityAt(x,y) is Creature cr2 && !cr2.IsAlert) {
+                            cr2.SetAlert();
+                            cr2.SetTargetInvestigation(cr.Investigate);
+                            // If second creature can see the first creature's target then make it also attack the same target.
+                            if (cr.CurrentTarget != null && cr2.CanSee(cr.CurrentTarget)) cr2.SetTarget(cr.CurrentTarget);
+                        }
+                    }
+                }
+            }
         }
         private void ScavengeAll(Soldier s) {
             int sk = s.GetUtilityLevel(Soldier.UtilitySkill.Scavenging);
