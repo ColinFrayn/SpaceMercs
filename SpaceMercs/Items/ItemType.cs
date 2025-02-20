@@ -14,6 +14,7 @@ namespace SpaceMercs {
             return 0;
         }
         public ItemEffect? ItemEffect { get; private set; }
+        public double StaminaCost { get; private set; }
         public uint ItemID { get; private set; }
         public ItemSource Source { get; private set; }
         private Dictionary<Soldier.UtilitySkill, int> _SkillBoosts { get; set; } = new Dictionary<Soldier.UtilitySkill, int>();
@@ -24,7 +25,8 @@ namespace SpaceMercs {
         public ItemType(XmlNode xml) : base(xml) {
             BaseRarity = xml.SelectNodeInt("Rarity", 0);
             Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
-            Mass = xml.SelectNodeDouble ("Mass", 0.0);
+            Mass = xml.SelectNodeDouble("Mass", 0.0);
+            StaminaCost = xml.SelectNodeDouble("StaminaCost", Const.UseItemCost);
 
             Materials = new Dictionary<MaterialType, int>();
             if (xml.SelectSingleNode("Materials") is not null) {

@@ -363,7 +363,6 @@ namespace SpaceMercs {
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
         public double SearchCost { get { return Const.SearchCost; } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
-        public double UseItemCost { get { return Const.UseItemCost; } }
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public double SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
         public double PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
@@ -1362,7 +1361,7 @@ namespace SpaceMercs {
                 int recharge = actionItem?.BaseType?.ItemEffect?.Recharge ?? 0;
                 if (recharge > 0) eq.SetRecharge(recharge);
             }
-            Stamina -= UseItemCost;
+            Stamina -= actionItem?.BaseType?.StaminaCost ?? Const.UseItemCost;
             HasMoved = true;
         }
         public void StopMission() {

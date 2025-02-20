@@ -11,7 +11,6 @@ namespace SpaceMercs {
         public string Description { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
         public double UnitCost { get; private set; } // Cost of buying one unit of this item, base, credits
-        public Race? RequiredRace { get; private set; }
         public Requirements? Requirements { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
@@ -39,12 +38,9 @@ namespace SpaceMercs {
                 BonusArmour.Add(type, val);
             }
 
-            // Load the race that this equipment is restricted to (default null), or otherwise fail
+            // TODO DELETE ME TEMP
             if (xml.SelectSingleNode("Race") != null) {
-                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
-                if (RequiredRace == null) {
-                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
-                }
+                throw new Exception("Race tag is no longer valid");
             }
 
             // Load in skill boosts
@@ -76,8 +72,7 @@ namespace SpaceMercs {
         }
 
         public bool CanBuild(Race? race) {
-            if (race is null) return RequiredRace is null && Requirements is null;
-            if (RequiredRace != null && RequiredRace != race) return false;
+            if (race is null) return Requirements is null;
             if (Requirements is null) return true;
             return race.HasResearched(this);
         }

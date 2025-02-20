@@ -417,9 +417,7 @@ namespace SpaceMercs.MainWindow {
                 // Can we build this at the current location?
                 if (PlayerTeam.CurrentPositionHAO is null) continue; // No base
                 if (PlayerTeam.CurrentPositionHAO!.Colony is null || !PlayerTeam.CurrentPositionHAO!.Colony.HasBaseType(se.Available)) continue; // Not the correct facilities
-                if (se.RequiredRace != null && PlayerTeam.CurrentPosition.GetSystem().Owner != se.RequiredRace) continue; // Not the correct race
                 if (!se.CanBuild(playerRace)) continue;
-                if (se.RequiredRace != null && PlayerTeam.GetRelations(se.RequiredRace) < Const.RaceRelationsLevelToAllowSpecialisedEquipmentSale) continue; // Correct race, but player team is not >= friendly
 
                 // Is it the right size?
                 if (se.Size != roomSize) continue;

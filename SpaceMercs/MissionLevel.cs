@@ -1056,8 +1056,8 @@ namespace SpaceMercs {
                 }
             }
             int soldierCount = ParentMission.Soldiers.Count;
-            if (ParentMission.Goal == Mission.MissionGoal.Countdown) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * (soldierCount + 1) * Const.CreatureCountScale * cg.QuantityScale / 10000.0);
+            if (ParentMission.Goal == Mission.MissionGoal.Countdown || ParentMission.Goal == Mission.MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * cg.QuantityScale * Const.CreatureFrequencyScale);
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
@@ -1190,11 +1190,11 @@ namespace SpaceMercs {
             if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
-            double dCreatures = ParentMission.Soldiers.Count * (0.6 + rand.NextDouble() * 0.2);
+            double dCreatures = (double)(ParentMission.Soldiers.Count + 1d) * (0.5 + rand.NextDouble() * 0.3);
             if (ParentMission.WavesRemaining <= 2) dCreatures += rand.NextDouble() * 0.3 + 0.3;
-            if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.3;
-            if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.3 + 0.3;
-            int nCreatures = (int)(dCreatures * Const.CreatureCountScale * cg.QuantityScale * cg.QuantityScale / 100.0);
+            if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.4;
+            if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.4 + 0.5;
+            int nCreatures = (int)(dCreatures * (Const.CreatureFrequencyScale * 100d) * cg.QuantityScale * cg.QuantityScale);
             if (nCreatures < 2) nCreatures = 2;
             int nTries = 0;
             bool hasBoss = false;

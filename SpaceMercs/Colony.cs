@@ -386,7 +386,6 @@ namespace SpaceMercs {
             if (HasBaseType(BaseType.Trading)) matScale += 2d;
             matScale += (BaseSize * BaseSize / 10d);
             foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
-                if (mat.RequiredRace is not null && mat.RequiredRace != Owner) continue;
                 if (mat.IsScavenged) continue;
                 AddItem(new Material(mat), mat.Rarity * matScale, days, rand);
             }

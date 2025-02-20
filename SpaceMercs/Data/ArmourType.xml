@@ -392,7 +392,7 @@
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">1</Relations>
+      <Relations Name="Ursalon">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -405,7 +405,7 @@
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
     </Materials>
     <Utility>
       <Stealth>-2</Stealth>
@@ -426,10 +426,10 @@
       <MinPop>44</MinPop>
       <CashCost>100</CashCost>
       <Material Name="Titanium">4</Material>
-      <Material Name="Mithril">2</Material>
+      <Material Name="Rare Earth Metals">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Ursalon">2</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -442,7 +442,7 @@
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Titanium" Amount="3"/>
+      <Material Name="Titanium" Amount="6"/>
     </Materials>
     <Utility>
       <Stealth>-4</Stealth>
@@ -465,7 +465,7 @@
       <Material Name="Titanium">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Ursalon">2</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -479,7 +479,7 @@
       <Material Name="Copper" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Titanium" Amount="4"/>
     </Materials>
     <Utility>
       <Stealth>-1</Stealth>
@@ -507,7 +507,7 @@
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>
-      <Material Name="Titanium" Amount="3"/>
+      <Material Name="Titanium" Amount="5"/>
     </Materials>
     <Requirements>
       <MinLevel>12</MinLevel>
@@ -518,7 +518,7 @@
       <Material Name="Crystals">4</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">2</Relations>
+      <Relations Name="Ursalon">2</Relations>
       <Relations Name="Elithiri">2</Relations>
     </Requirements>
     <Utility>
@@ -546,11 +546,12 @@
       <CashCost>450</CashCost>
       <Material Name="Titanium">2</Material>
       <Material Name="Crystals">2</Material>
+      <Material Name="Mithril">2</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
-      <Relations Name="Gokan">3</Relations>
+      <Relations Name="Ursalon">3</Relations>
       <Relations Name="Elithiri">2</Relations>
-      <Relations Name="Insectoid">1</Relations>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -563,8 +564,8 @@
     <Materials>
       <Material Name="Crystals" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="4"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Mithril" Amount="3"/>
+      <Material Name="Titanium" Amount="3"/>
     </Materials>
     <Utility>
       <Stealth>-1</Stealth>

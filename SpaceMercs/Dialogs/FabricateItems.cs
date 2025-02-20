@@ -81,7 +81,6 @@ namespace SpaceMercs.Dialogs {
                 arrRow[1] = strType;
                 arrRow[2] = thisItem.Mass.ToString("N2") + "kg";
                 Race playerRace = StaticData.HumanRace;
-                if (thisItem.RequiredRace != null && thisItem.RequiredRace != playerRace) return;
                 if (!thisItem.CanBuild(playerRace)) return;
 
                 // How many can we build?

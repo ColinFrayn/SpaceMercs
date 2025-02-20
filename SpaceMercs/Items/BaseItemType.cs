@@ -9,7 +9,6 @@ namespace SpaceMercs {
         public string Description { get; private set; }
         public int TextureX { get; private set; }
         public int TextureY { get; private set; }
-        public Race? RequiredRace { get; private set; }
         public Requirements? Requirements { get; private set; }
 
         public BaseItemType(XmlNode xml) {
@@ -20,19 +19,16 @@ namespace SpaceMercs {
             // Texture coords (optional)
             TextureX = TextureY = -1;
             string strTex = xml.SelectNodeText("Tex");
-            if (!string.IsNullOrEmpty(strTex)) {                
+            if (!string.IsNullOrEmpty(strTex)) {
                 string[] texBits = strTex.Split(',');
                 if (texBits.Length != 2) throw new Exception($"Illegal Tex string : {strTex}");
                 TextureX = int.Parse(texBits[0]) - 1;
                 TextureY = int.Parse(texBits[1]) - 1;
             }
 
-            // Load the race that this equipment is restricted to (default null), or otherwise fail
+            // TODO DELETE ME TEMP
             if (xml.SelectSingleNode("Race") != null) {
-                RequiredRace = StaticData.GetRaceByName(xml.SelectNodeText("Race"));
-                if (RequiredRace == null) {
-                    throw new Exception("Could not find restricted race \"" + xml.SelectNodeText("Race") + "\" for equipment " + Name);
-                }
+                throw new Exception("Race tag is no longer valid");
             }
 
             // Do we have any requirements to be able to research this item. (If not then we get it by default and no research required)
@@ -52,8 +48,7 @@ namespace SpaceMercs {
         }
 
         public bool CanBuild(Race? race) {
-            if (race is null) return RequiredRace is null && Requirements is null;
-            if (RequiredRace != null && RequiredRace != race) return false;
+            if (race is null) return Requirements is null;
             if (Requirements is null) return true;
             return race.HasResearched(this);
         }

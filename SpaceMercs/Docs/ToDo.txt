@@ -2,15 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Make alerted enemies alert those around them in a radius (2 for grunts, 3 for boss?) [TEST]
+Make alerted enemies alert those around them in a radius (1 for grunts, 2 for boss?) when spotting a moving Soldier [TEST]
 
-More creatures valid around level 10
+Defend objective mission was too easy
 
 Display when a weapon is recharging somehow
-
-Add more alien-only items?
-- Maybe convert existing ones to researchable based on alien relations
-- Add  in more amazing items for high relations. At least one vl 2,3 for each civ
 
 ==================================================================================================================
 
@@ -18,6 +14,8 @@ Add more alien-only items?
 ---------------------
 Backburner : Features
 ---------------------
+
+Any boss creature must be able to get to the entrance??
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 

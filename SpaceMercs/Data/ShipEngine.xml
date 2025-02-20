@@ -73,6 +73,7 @@
       <MinPop>31</MinPop>
       <CashCost>40</CashCost>
       <Facility>Engineering</Facility>
+      <Relations Name="Grey">1</Relations>
     </Requirements>
   </ShipEngine>
   <ShipEngine Name="Subspace Drive">
@@ -90,6 +91,7 @@
       <MinPop>43</MinPop>
       <CashCost>40</CashCost>
       <Facility>Engineering</Facility>
+      <Relations Name="Grey">2</Relations>
     </Requirements>
   </ShipEngine>
   <ShipEngine Name="Ethereal Drive">
@@ -100,7 +102,15 @@
     <Power>35</Power>
     <Desc>An Ethereal Drive, using an improvement on subspace technology to travel even faster.</Desc>
     <Avail>RE</Avail>
+    <Requirements>
+      <MinLevel>14</MinLevel>
+      <MinPop>55</MinPop>
+      <CashCost>200</CashCost>
+      <Material Name="Rare Earth Metals">4</Material>
+      <Material Name="Crystals">4</Material>
+      <Facility>Engineering</Facility>
+      <Relations Name="Grey">3</Relations>
+    </Requirements>
     <Tex>7,4</Tex>
-    <Race>Elithiri</Race>
   </ShipEngine>
 </Data>

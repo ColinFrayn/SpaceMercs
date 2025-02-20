@@ -36,7 +36,15 @@
     <Desc>A slug gun</Desc>
     <Avail>MTE</Avail>
     <Tex>3,5</Tex>
-    <Race>Ogrish</Race>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <MinPop>22</MinPop>
+      <CashCost>15</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Steel">2</Material>
+      <Relations Name="Ogrish">1</Relations>
+    </Requirements>
   </ShipWeapon>
   <ShipWeapon Name="Laser Cannon">
     <Cost>225</Cost>

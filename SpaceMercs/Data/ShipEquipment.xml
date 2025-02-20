@@ -55,7 +55,14 @@
     <Workshop/>
     <Desc>A versatile foundry, where armour, weapons and equipment can all be fabricated.</Desc>
     <Tex>3,7</Tex>
-    <Race>Ursalon</Race>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>15</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Gokan">1</Relations>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Auto Repair">
     <Size>M</Size>
@@ -82,7 +89,14 @@
     <Desc>An engineering and medical chamber based on Grey tech.</Desc>
     <Tex>5,6</Tex>
     <Avail>ER</Avail>
-    <Race>Grey</Race>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>29</MinPop>
+      <CashCost>35</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Grey">1</Relations>
+    </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Engineering Bay">
     <Size>M</Size>
@@ -174,11 +188,15 @@
     <Defence>4</Defence>
     <Power>20</Power>
     <Size>M</Size>
-    <Race>Elithiri</Race>
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Requirements>
+      <MinLevel>9</MinLevel>
       <MinPop>50</MinPop>
+      <CashCost>35</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Insectoid">1</Relations>
     </Requirements>
     <Tex>2,7</Tex>
   </ShipEquipment>
@@ -206,7 +224,6 @@
     <Desc>An AI subsystem that increases Ship attack power.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,6</Tex>
-    <Race>Human</Race>
   </ShipEquipment>
   <ShipEquipment Name="Fission Core">
     <Size>C</Size>

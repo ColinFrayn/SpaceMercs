@@ -313,7 +313,7 @@
       <CashCost>10</CashCost>
       <Material Name="Tungsten">1</Material>
       <Facility>Armoury</Facility>
-      <Relations Name="Ursalon">1</Relations>
+      <Relations Name="Ursalon">3</Relations>
     </Requirements>
   </WeaponType>
   <WeaponType Name="Arc Rifle" Class="Shotgun">
@@ -446,11 +446,19 @@
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
     <Damage Area="2" Type="Grenade">4+4</Damage>
-    <Desc>A grenade launcher.</Desc>
+    <Desc>An automatically reloading grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
     <Recharge>1</Recharge>
     <Unmodifiable/>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinPop>35</MinPop>
+      <CashCost>65</CashCost>
+      <Material Name="Electronic Components">1</Material>
+      <Material Name="Steel">1</Material>
+      <Facility>Armoury</Facility>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="8"/>
       <Material Name="Plastic" Amount="2"/>
@@ -483,8 +491,7 @@
       <CashCost>150</CashCost>
       <Material Name="Crystals">1</Material>
       <Facility>Armoury</Facility>
-      <Relations Name="Grey">1</Relations>
-      <Relations Name="Elithiri">1</Relations>
+      <Relations Name="Ogrish">3</Relations>
     </Requirements>
   </WeaponType>
   <WeaponType Name="Heavy Grenade Launcher" Class="Launcher">
@@ -512,7 +519,7 @@
       <Material Name="Electronic Components">1</Material>
       <Material Name="Steel">1</Material>
       <Facility>Armoury</Facility>
-      <Relations Name="Ogrish">1</Relations>
+      <Relations Name="Ogrish">2</Relations>
     </Requirements>
   </WeaponType>
   <WeaponType Name="Sniper Rifle" Class="Sniper">
@@ -590,7 +597,15 @@
     <Cost>75</Cost>
     <Rarity>25</Rarity>
     <Speed>13</Speed>
-    <Race>Insectoid</Race>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Chitin">2</Material>
+      <Relations Name="Insectoid">1</Relations>
+    </Requirements>
     <Range Accuracy="-1" DropOff="0.5" Length="0.3" Speed="0.8">10</Range>
     <Damage>5+2</Damage>
     <Desc>A rifle-like device that throws bladed discs with high speed</Desc>
@@ -628,6 +643,15 @@
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
     <Noise>3</Noise>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Titanium">1</Material>
+      <Material Name="Crystals">1</Material>
+      <Relations Name="Elithiri">1</Relations>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="3"/>
@@ -660,6 +684,15 @@
     <Damage>4+3</Damage>
     <Desc>A sturdy axe powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinPop>25</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Titanium">1</Material>
+      <Material Name="Crystals">1</Material>
+      <Relations Name="Elithiri">1</Relations>
+    </Requirements>
     <Noise>3</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
@@ -685,23 +718,55 @@
       <Material Name="Rubber" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Power Claws" Class="Melee">
+  <WeaponType Name="Exo Claws" Class="Melee">
     <Mass>2.5</Mass>
     <Cost>260</Cost>
     <Rarity>40</Rarity>
     <Speed>11</Speed>
     <Range Accuracy="1">1</Range>
-    <Damage>3+3</Damage>
-    <Desc>Sharp, powered claws attached over your armour.</Desc>
+    <Damage>3+4</Damage>
+    <Desc>Sharp, chitinous claws attached over your armour.</Desc>
     <Sound>SwordSlice</Sound>
-    <Race>Ursalon</Race>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>20</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Chitin">2</Material>
+      <Relations Name="Insectoid">1</Relations>
+    </Requirements>
     <Noise>4</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="2"/>
       <Material Name="Tungsten" Amount="1"/>
-      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Chitin" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>      
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Exo Spear" Class="Melee">
+    <Mass>4.5</Mass>
+    <Cost>460</Cost>
+    <Rarity>50</Rarity>
+    <Speed>13</Speed>
+    <Range Accuracy="1">1.5</Range>
+    <Damage>4+4</Damage>
+    <Desc>Sharp, chitinous spear attached over your armour that allows you to attack diagonally.</Desc>
+    <Sound>SwordSlice</Sound>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>30</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Chitin">2</Material>
+      <Relations Name="Insectoid">2</Relations>
+    </Requirements>
+    <Noise>4</Noise>
+    <Materials>
+      <Material Name="Steel" Amount="1"/>
+      <Material Name="Tungsten" Amount="1"/>
+      <Material Name="Chitin" Amount="4"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Slugger" Class="Shotgun">
@@ -711,7 +776,15 @@
     <Speed>18</Speed>
     <Shots>3</Shots>
     <Recoil>0.5</Recoil>
-    <Race>Ogrish</Race>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>24</MinPop>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Steel">2</Material>
+      <Relations Name="Ogrish">1</Relations>
+    </Requirements>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>
     <Damage Type="ConeMulti" Width="3.2">3+4</Damage>
     <Desc>A powerful Ogrish blast gun that fires superheated slugs of metal. Great damage up close but terrible range.</Desc>

@@ -19,6 +19,7 @@
       <CashCost>10</CashCost>
       <Material Name="Metasteel">3</Material>
       <Facility>Engineering</Facility>
+      <Relations Name="Gokan">0</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Mithril Plating">
@@ -33,8 +34,8 @@
       <CashCost>20</CashCost>
       <Material Name="Mithril">3</Material>
       <Facility>Engineering</Facility>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
-    <Race>Gokan</Race>
   </ShipArmour>
   <ShipArmour Name="Adamantium Plating">
     <Cost>900</Cost>
@@ -48,6 +49,7 @@
       <CashCost>30</CashCost>
       <Material Name="Adamantium">3</Material>
       <Facility>Engineering</Facility>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Adaptive Plating">
@@ -63,6 +65,7 @@
       <CashCost>30</CashCost>
       <Material Name="Etherealite">3</Material>
       <Facility>Engineering</Facility>
+      <Relations Name="Insectoid">1</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Regenerative Plating">
@@ -72,16 +75,21 @@
     <Desc>Regenerative plating</Desc>
     <Avail>MRE</Avail>
     <Tex>6,3</Tex>
-    <Race>Insectoid</Race>
     <Requirements>
+      <MinLevel>8</MinLevel>
       <MinPop>38</MinPop>
+      <CashCost>30</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Chitin">2</Material>
+      <Relations Name="Insectoid">2</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Chameleon Plating">
     <Cost>2750</Cost>
     <BaseArmour>15</BaseArmour>
     <Defence>2</Defence>
-    <Desc>Chameleon plating that helps camouflage the ship</Desc>
+    <Desc>Chameleon plating that helps camouflage the ship and hide it from attackers</Desc>
     <Avail>MRE</Avail>
     <Tex>7,3</Tex>
     <Requirements>
@@ -91,6 +99,7 @@
       <Material Name="Shadowskin">2</Material>
       <Material Name="Voidskin">2</Material>
       <Facility>Engineering</Facility>
+      <Relations Name="Insectoid">3</Relations>
     </Requirements>
   </ShipArmour>
 </Data>

@@ -43,7 +43,7 @@
   <CreatureGroup Name="Ogres">
     <Filename>Ogres.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
-    <QuantityScale>0.7</QuantityScale>
+    <QuantityScale>0.75</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Pirates">
     <Filename>Pirates.xml</Filename>
@@ -86,6 +86,5 @@
   <CreatureGroup Name="Xenomorphs">
     <Filename>Xenomorphs.xml</Filename>
     <Locations>Cave,Ship</Locations>
-    <QuantityScale>0.8</QuantityScale>
   </CreatureGroup>
 </Data>

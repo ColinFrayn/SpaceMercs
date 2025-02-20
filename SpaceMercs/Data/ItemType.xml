@@ -4,6 +4,7 @@
     <Mass>0.3</Mass>
     <Cost>8</Cost>
     <Rarity>4</Rarity>
+    <StaminaCost>14</StaminaCost>
     <Desc>A medikit, combining bandages and medication required to patch up serious wounds.</Desc>
     <ItemEffect Name="Heal">
       <SingleUse/>
@@ -28,6 +29,7 @@
     <Mass>2.5</Mass>
     <Cost>90</Cost>
     <Rarity>8</Rarity>
+    <StaminaCost>15</StaminaCost>
     <Desc>A medical device that heals wounds almost as well as a medikit, but continually generates fresh wound sealant allowing it to be reused.</Desc>
     <ItemEffect Name="Heal">
       <Recharge>3</Recharge>
@@ -53,6 +55,7 @@
     <Mass>0.4</Mass>
     <Cost>25</Cost>
     <Rarity>8</Rarity>
+    <StaminaCost>16</StaminaCost>
     <Desc>A medikit, combining bandages and medication required to patch up serious wounds. Based on nannite technology.</Desc>
     <ItemEffect Name="Heal">
       <SingleUse/>
@@ -87,6 +90,7 @@
     <Cost>450</Cost>
     <Rarity>12</Rarity>
     <Desc>A medical device that heals wounds almost as well as a nannite medikit, but continually generates fresh nannites allowing it to be reused.</Desc>
+    <StaminaCost>17</StaminaCost>
     <ItemEffect Name="Heal">
       <Recharge>3</Recharge>
       <Skill Required="false">Medic</Skill>
@@ -429,10 +433,15 @@
     <Mass>0.4</Mass>
     <Cost>75</Cost>
     <Rarity>16</Rarity>
+    <StaminaCost>18</StaminaCost>
     <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
-    <Race>Grey</Race>
     <Requirements>
-      <MinPop>34</MinPop>
+      <MinLevel>10</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>38</MinPop>
+      <CashCost>50</CashCost>
+      <Relations Name="Grey">2</Relations>
+      <Facility>Medlab</Facility>
     </Requirements>
     <ItemEffect Name="Heal">
       <SingleUse/>
@@ -458,13 +467,18 @@
     <Mass>3.0</Mass>
     <Cost>1500</Cost>
     <Rarity>24</Rarity>
+    <StaminaCost>19</StaminaCost>
     <Desc>A medical device that heals wounds almost as well as a quantum medikit, but can be reused after a short charging period.</Desc>
-    <Race>Grey</Race>
     <Requirements>
-      <MinPop>40</MinPop>
+      <MinLevel>12</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>44</MinPop>
+      <CashCost>150</CashCost>
+      <Relations Name="Grey">3</Relations>
+      <Facility>Medlab</Facility>
     </Requirements>
     <ItemEffect Name="Heal">
-      <Recharge>2</Recharge>
+      <Recharge>3</Recharge>
       <Skill Required="false">Medic</Skill>
       <CurePoison/>
       <Effect>

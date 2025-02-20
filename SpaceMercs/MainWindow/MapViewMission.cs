@@ -484,12 +484,12 @@ namespace SpaceMercs.MainWindow {
                             // Clicked on a usable item
                             ActionItem = eqp;
                             CurrentAction = SoldierAction.Item;
-                            if (ActionItem?.BaseType?.ItemEffect is not null) {
-                                GenerateTargetMap(s, ActionItem.BaseType.ItemEffect.Range);
+                            if (eqp.BaseType.ItemEffect is not null) {
+                                GenerateTargetMap(s, eqp.BaseType.ItemEffect.Range);
                                 if (SelectedEntity is not null) {
                                     int sy = SelectedEntity.Y;
                                     int sx = SelectedEntity.X;
-                                    GenerateAoEMap(sx, sy, ActionItem.BaseType.ItemEffect.Radius);
+                                    GenerateAoEMap(sx, sy, eqp.BaseType.ItemEffect.Radius);
                                 }
                             }
                         }
@@ -514,11 +514,11 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 else if (s != null && CurrentAction == SoldierAction.Item) {
-                    if (s.Stamina < s.UseItemCost) {
+                    if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
+                    if (s.Stamina < ActionItem.BaseType.StaminaCost) {
                         msgBox.PopupMessage("You have insufficient Stamina to use Item!");
                         return;
                     }
-                    if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
                     if (ActionItem.BaseType.ItemEffect is null) {
                         throw new Exception("ActionItem without effect!");
                     }
@@ -531,7 +531,7 @@ namespace SpaceMercs.MainWindow {
                         return;
                     }
                     // Firstly, remove the item from the Soldier in question if it's a single use item
-                    IEquippable temp = ActionItem!;
+                    ItemType temp = ActionItem!.BaseType;
                     s.UseItem(ActionItem!);
                     CurrentAction = SoldierAction.None;
                     ActionItem = null;
@@ -539,7 +539,7 @@ namespace SpaceMercs.MainWindow {
                     ApplyItemEffectToMap(s, temp, hoverx, hovery);
 
                     // Apply a noise at the target location and make creatures notice if they're close enough
-                    ItemEffect? ie = temp.BaseType.ItemEffect;
+                    ItemEffect? ie = temp.ItemEffect;
                     if (UpdateDetectionForLocation(hoverx, hovery, ie?.NoiseLevel ?? 0)) {
                         // No alert required
                     }
@@ -649,8 +649,8 @@ namespace SpaceMercs.MainWindow {
             }
             else gbTransition!.Deactivate();
         }
-        private void ApplyItemEffectToMap(Soldier s, IEquippable it, int px, int py) {
-            ItemEffect? ie = it.BaseType.ItemEffect;
+        private void ApplyItemEffectToMap(Soldier s, ItemType it, int px, int py) {
+            ItemEffect? ie = it.ItemEffect;
             if (ie is null) return;
             double range = Math.Sqrt((px - s.X) * (px - s.X) + (py - s.Y) * (py - s.Y));
             if (range > 1d) {
@@ -1101,7 +1101,7 @@ namespace SpaceMercs.MainWindow {
                     else gbAttack.Activate();
                     if (s.Stamina < s.SearchCost || s.GoTo != Point.Empty || bAIRunning) gbSearch.Deactivate();
                     else gbSearch.Activate();
-                    if (s.Stamina < s.UseItemCost || s.GoTo != Point.Empty || !s.HasUtilityItems() || bAIRunning) gbUseItem.Deactivate();
+                    if (s.GoTo != Point.Empty || !s.HasUtilityItems() || bAIRunning) gbUseItem.Deactivate();
                     else gbUseItem.Activate();
                     if (s.Stamina < s.MovementCost || s.GoTo != Point.Empty || bAIRunning) {
                         gbWest.Deactivate();
@@ -1472,11 +1472,11 @@ namespace SpaceMercs.MainWindow {
                 if (bHasUtilityItems) {
                     TexSpecs tsr = Textures.GetTexCoords(Textures.MiscTexture.Reuse);
                     TexSpecs tss = Textures.GetTexCoords(Textures.MiscTexture.Stopwatch);
-                    bool bEnabled = s.Stamina >= s.UseItemCost;
                     gpItems = new GUIPanel(this);
                     // Set up list of items
                     foreach (Equipment eq in s.GetUtilityItems()) {
                         TexSpecs ts = Textures.GetTexCoords(eq.BaseType);
+                        bool bEnabled = s.Stamina >= eq.BaseType.StaminaCost;
                         PanelItem ip = gpItems.InsertIconItem(eq, ts, bEnabled && (eq.Recharge == 0), null);
                         if (eq.BaseType.ItemEffect != null && !eq.BaseType.ItemEffect.SingleUse) {
                             if (eq.Recharge == 0) ip.SetOverlay(tsr, new Vector4(0.7f, 0.0f, 0.3f, 0.3f));

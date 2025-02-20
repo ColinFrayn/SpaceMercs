@@ -346,10 +346,8 @@ namespace SpaceMercs {
 
             foreach (ShipEquipment item in lItems) {
                 if (item.Size == size) {
-                    if (item.RequiredRace == null || item.RequiredRace == rc) {
-                        if ((rand.NextDouble() + 0.2) * dCash / 1.2 > item.Cost) { // Choose it with a reducing probability as the cost increases
-                            ChosenItem = item;
-                        }
+                    if ((rand.NextDouble() + 0.2) * dCash / 1.2 > item.Cost) { // Choose it with a reducing probability as the cost increases
+                        ChosenItem = item;
                     }
                 }
             }
