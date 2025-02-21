@@ -121,7 +121,7 @@
       <CashCost>20</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
-      <Relations Name="Elithiri">1</Relations>
+      <Relations Name="Elithiri">2</Relations>
     </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Advanced Shield System">
@@ -138,7 +138,7 @@
       <CashCost>25</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
-      <Relations Name="Elithiri">2</Relations>
+      <Relations Name="Elithiri">3</Relations>
     </Requirements>
   </ShipEquipment>
   <ShipEquipment Name="Surface Scanner">
@@ -179,7 +179,7 @@
       <CashCost>230</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
-      <Relations Name="Elithiri">2</Relations>
+      <Relations Name="Insectoid">3</Relations>
     </Requirements>
     <Tex>1,7</Tex>
   </ShipEquipment>

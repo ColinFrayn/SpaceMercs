@@ -461,7 +461,7 @@ namespace SpaceMercs.MainWindow {
             if (owner != StaticData.HumanRace) {
                 int relations = PlayerTeam.GetRelations(owner);
                 if (relations < 2) {
-                    MessageBox.Show($"You are not sufficiently friendly with the {owner.Name} race to have access to their hyperspace network");
+                    msgBox.PopupMessage($"You are not sufficiently friendly with the {owner.Name} race to have access to their hyperspace network");
                     return;
                 }
             }

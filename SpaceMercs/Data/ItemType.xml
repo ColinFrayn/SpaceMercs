@@ -354,6 +354,7 @@
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Incendiary Bulb">1</Material>
+      <Relations Name="Ogrish">2</Relations>
     </Requirements>
     <Source>Workshop</Source>
     <Tex>2,3</Tex>
@@ -388,6 +389,7 @@
       <MinPop>36</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
+      <Relations Name="Ogrish">3</Relations>
       <Material Name="Uranium">1</Material>
     </Requirements>
     <Tex>3,3</Tex>

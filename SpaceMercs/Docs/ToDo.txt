@@ -2,10 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Make alerted enemies alert those around them in a radius (1 for grunts, 2 for boss?) when spotting a moving Soldier [TEST]
-
-Defend objective mission was too easy
-
 Display when a weapon is recharging somehow
 
 ==================================================================================================================
@@ -15,7 +11,7 @@ Display when a weapon is recharging somehow
 Backburner : Features
 ---------------------
 
-Any boss creature must be able to get to the entrance??
+Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 
 What should attack skill do for an AoE weapon (grenade or cone)?
 
