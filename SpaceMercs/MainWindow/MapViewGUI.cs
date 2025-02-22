@@ -401,10 +401,6 @@ namespace SpaceMercs.MainWindow {
             if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
                 if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas && PlayerTeam.PlayerShip.CanFoundColony) {
-                    if (PlayerTeam.CurrentPosition.GetSystem().Owner is Race ra && ra != StaticData.GetRaceByName("Human")) {
-                        msgBox.PopupMessage($"This system is owned by the {ra.Name} race.\nYou may not found a new colony here!");
-                        return;
-                    }
                     if (!hao.Scanned) {
                         msgBox.PopupMessage("Before you found a colony you need to scan the planet\nand clear all discovered missions");
                         return;
@@ -426,14 +422,38 @@ namespace SpaceMercs.MainWindow {
         }
         private void FoundColony_Continue() {
             if (!(PlayerTeam.CurrentPosition is HabitableAO hao)) return;
+            Race? systemOwner = hao.GetSystem().Owner;
+            Race? sectorOwner = hao.GetSystem().Sector.Inhabitant;
+            if (systemOwner is not null && systemOwner != StaticData.HumanRace) {
+                // Building a colony in another race's system
+                msgBox.PopupConfirmation($"You are attempting to build a colony in a system claimed by the {systemOwner} race\nThis will seriously damage relations with that race\nAre you sure?", FoundColony_DefinitelyBuild);
+            }
+            else if (sectorOwner != null && sectorOwner != StaticData.HumanRace) {
+                // Check if this sector is an enemy race's home sector
+                msgBox.PopupConfirmation($"You are attempting to build a colony in the home sector of the {sectorOwner} race\nThis will damage relations with that race\nAre you sure?", FoundColony_DefinitelyBuild);
+            }
+            else FoundColony_DefinitelyBuild();
+        }
+        private void FoundColony_DefinitelyBuild() {
+            if (PlayerTeam.CurrentPosition is not HabitableAO hao) return;
+            Race? systemOwner = hao.GetSystem().Owner;
+            Race? sectorOwner = hao.GetSystem().Sector.Inhabitant;
             hao.SetupBase(StaticData.HumanRace, 1, Clock);
-            if (hao.GetSystem().Owner == null) {
+            if (systemOwner == null) {
                 StaticData.HumanRace.AddSystem(hao.GetSystem());
             }
             PlayerTeam.PlayerShip.RemoveColonyBuilder();
-            msgBox.PopupMessage("Colony Founded.\nYour renown has increased!");
+            msgBox.PopupMessage("Colony Founded.\nYour renown has increased with the human race!");
+            if (systemOwner != null && systemOwner != StaticData.HumanRace) {
+                // This system is owned by another race
+                PlayerTeam.ImproveRelations(systemOwner, Const.FoundColonyInContestedSystemRelationsPenalty, msgBox.PopupMessage);
+            }
+            else if (sectorOwner != null && sectorOwner != StaticData.HumanRace) {
+                // This sector is another race's home sector
+                PlayerTeam.ImproveRelations(sectorOwner, Const.FoundColonyInHomeSectorRelationsPenalty, msgBox.PopupMessage);
+            }
             SetAOButtonsOnGUI(hao);
-            PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.FoundColonyExperience, msgBox.PopupMessage);
+            PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.FoundColonyRelationsBonus, msgBox.PopupMessage);
         }
         private void OpenScanPlanetDialog() {
             if (!GalaxyMap.MapIsInitialised) return;

@@ -298,5 +298,9 @@ namespace SpaceMercs {
             if (HasResearched(item)) throw new Exception($"Researching already researched item {item.Name}!");
             ResearchedItems.Add(item);
         }
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using OpenTK.Mathematics;
 using System.Globalization;
-using System.Windows.Forms;
 
 namespace SpaceMercs {
     public static class Const {
@@ -226,7 +225,9 @@ namespace SpaceMercs {
         public const int StartingRelationsWithHomeRace = 6000; // Initial HumanRace experience points. Equivalent to level 2.
         public const int RelationsExpPenaltyScaleColony = 4; // Race relation experience accrual scale (reduction factor) for doing colony missions.
         public const int RelationsExpPenaltyScale = 6; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
-        public const int FoundColonyExperience = 500; // Race relation bonus for founding a colony
+        public const int FoundColonyRelationsBonus = 500; // Race relation bonus for founding a colony
+        public const int FoundColonyInContestedSystemRelationsPenalty = -4000; // Race relation penalty for founding a colony in a system they own
+        public const int FoundColonyInHomeSectorRelationsPenalty = -1500; // Race relation penalty for founding a colony in a sector they own
 
         // Time stuff / global clock
         public static readonly DateTime StartingDate = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);

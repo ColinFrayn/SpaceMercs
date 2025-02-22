@@ -4,6 +4,7 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
+
 ==================================================================================================================
 
 
@@ -17,17 +18,19 @@ What should attack skill do for an AoE weapon (grenade or cone)?
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 
+Race relations degrade over time? Or tend towards their base level?
+
 Alien solar system:
 - Alien colonies need names
 - Alien systems need names
 
 Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 
-How do we lose favour with races? Why would we want to? Maybe over time??
-- Colonising one of "their" systems?
--- Is it possible to disband a colony once created?
-
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
+
+New Item Ideas:
+- Elithiri: Personal teleporter? Can move within sight line up to X squares. Use like grenade weapon.
+- Grey? Life scanner (shows blips for any unseen creatures within a range. Passive or active? Maybe an active scan area like a grenade)
 
 Cover
 - When partially hidden from the attacker, get a def bonus
@@ -44,8 +47,6 @@ Improve Creature textures:
 -- Change texture based on equipment / weapons
 
 Add overwatch ability?
-
-Life scanner (shows blips for any unseen creatures within a range. Passive or active?) [Greys]
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
@@ -83,7 +84,5 @@ Displaying colonies of other races: Are they visually distinct?
 Profile everything, especially AI
 
 Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
-
-Name planets/systems based on what the owning race's language sounds like??
 
 Write/update documentation

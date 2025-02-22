@@ -72,6 +72,9 @@ namespace SpaceMercs {
             _MissionList.Add(miss);
             Scanned = true;
         }
+        public void SetScanned() {
+            Scanned = true; 
+        }
 
         public double TDiff(Race rc) {
             double tdiff = Temperature - rc.BaseTemp;

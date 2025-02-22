@@ -57,6 +57,7 @@ namespace SpaceMercs.Dialogs {
                 Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
                 _aoScan.AddMission(m);
             }
+            _aoScan.SetScanned();
             pbScan.Visible = false;
             DisplayMissionList();
         }
