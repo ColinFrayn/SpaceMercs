@@ -815,7 +815,7 @@
   <WeaponType Name="Spiky Club">
     <Speed>14</Speed>
     <Range>1</Range>
-    <Damage>4+5</Damage>
+    <Damage>5+5</Damage>
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
@@ -989,7 +989,7 @@
   <WeaponType Name="Greatsword">
     <Speed>14</Speed>
     <Range>1</Range>
-    <Damage>5+5</Damage>
+    <Damage>6+6</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>

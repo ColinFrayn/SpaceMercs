@@ -827,6 +827,7 @@ namespace SpaceMercs {
 
         // Can we build more than one of these?
         public bool CanBuildAnother(ShipEquipment se) {
+            if (se is ShipWeapon) return true;
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                 if (tp.Item2 && tp.Item1.Size != ShipEquipment.RoomSize.Weapon) {
                     if (tp.Item1.Shield > 0 && se.Shield > 0) return false; // Shield generators

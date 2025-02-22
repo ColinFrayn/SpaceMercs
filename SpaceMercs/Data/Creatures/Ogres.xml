@@ -8,7 +8,7 @@
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <MovementCost>3.0</MovementCost>
+    <MovementCost>1.5</MovementCost>
     <Armour>22</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -27,14 +27,14 @@
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <MovementCost>3.0</MovementCost>
+    <MovementCost>2.0</MovementCost>
     <Armour>24</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
   </CreatureType>
   <CreatureType Name="Ogre Brute">
@@ -46,7 +46,7 @@
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <MovementCost>3.0</MovementCost>
+    <MovementCost>2.0</MovementCost>
     <Armour>24</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -64,7 +64,7 @@
     <Health>28</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <MovementCost>3.0</MovementCost>
+    <MovementCost>2.0</MovementCost>
     <Armour>26</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
@@ -82,7 +82,7 @@
     <Health>60</Health>
     <Stamina>19</Stamina>
     <Interact/>
-    <MovementCost>3.0</MovementCost>
+    <MovementCost>2.0</MovementCost>
     <Armour>28</Armour>
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>

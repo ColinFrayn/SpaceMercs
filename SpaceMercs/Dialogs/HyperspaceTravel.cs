@@ -22,7 +22,7 @@ namespace SpaceMercs.Dialogs {
             InitializeComponent();
             clockTick = new Timer();
             clockTick.Tick += new EventHandler(UpdateTravel);
-            clockTick.Interval = 250;
+            clockTick.Interval = 200;
             btHyperspaceTravel.Enabled = false;
             DisplayHyperspaceDestinations();
         }

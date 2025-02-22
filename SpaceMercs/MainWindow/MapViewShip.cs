@@ -594,6 +594,11 @@ namespace SpaceMercs.MainWindow {
                     tl3 = "Speed : " + Math.Round(eng.Speed / Const.SpeedOfLight, 1) + "c";
                     tl4 = "Accel : " + Math.Round(eng.Accel / 10.0, 1) + "g"; // Yeah I know g =~9.8, but whatever
                 }
+                else if (se is ShipWeapon sw) {
+                    tl2 = "Power : " + sw.Power;
+                    tl3 = "Attack : " + sw.Attack;
+                    tl4 = "Range : " + sw.Range;
+                }
                 else if (se is ShipEquipment) {
                     if (se.Generate > 0) tl2 = "Generate : " + se.Generate;
                     else tl2 = "Power : " + se.Power;
@@ -603,10 +608,6 @@ namespace SpaceMercs.MainWindow {
                     else if (se.Medlab) tl4 = "Medbay";
                     else if (se.Armoury) tl4 = "Armoury";
                     else if (se.Workshop) tl4 = "Workshop";
-                }
-                else if (se is ShipWeapon) {
-                    tl2 = "Power : " + se.Power;
-                    tl3 = "Attack Bonus : " + se.Attack;
                 }
                 else {
                     tl2 = "Unknown Room Type : " + se.GetType();

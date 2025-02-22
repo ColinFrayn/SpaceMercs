@@ -22,5 +22,12 @@ namespace SpaceMercs {
             if (damage <= 0.0) return 0d;
             return target.DamageShip(damage);
         }
+
+        public override IEnumerable<string> GetHoverText(Ship? sh = null) {
+            List<string> strList = new List<string>(base.GetHoverText(sh));
+            strList.Add($"Range: {Range}m");
+            strList.Add($"Delay: {Rate}s");
+            return strList;
+        }
     }
 }

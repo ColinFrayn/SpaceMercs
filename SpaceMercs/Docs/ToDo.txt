@@ -4,6 +4,7 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
+Add a right-click button for "fire all" (i.e. keep firing until stamina runs out or the target dies)
 
 ==================================================================================================================
 

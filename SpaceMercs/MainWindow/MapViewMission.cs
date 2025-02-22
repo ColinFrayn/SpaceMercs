@@ -58,6 +58,7 @@ namespace SpaceMercs.MainWindow {
         public const uint I_Attack = 10005;
         public const uint I_GoTo = 10006;
         public const uint I_UseItem = 10007;
+        public const uint I_FullAttack = 10008;
 
         // Display parameters
         const float FrameBorder = 0.002f;
@@ -467,6 +468,24 @@ namespace SpaceMercs.MainWindow {
                         if (iSelectHover == I_Attack) {
                             bool bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded));
                             if (bAttacked) {
+                                if (UpdateDetectionForSoldierAfterAttack(s) ||
+                                    UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
+                                    // Something has been alerted
+                                    // No message required
+                                }
+                            }
+                        }
+                        if (iSelectHover == I_FullAttack) {
+                            bool bAttacked = false;
+                            int attackCount = 0;
+                            do {
+                                bAttacked = await Task.Run(() => s.AttackLocation(CurrentLevel, gpSelect.ClickX, gpSelect.ClickY, AddNewEffect, PlaySoundThreaded));
+                                if (bAttacked) {
+                                    attackCount++;
+                                    Thread.Sleep(500);
+                                }
+                            } while (bAttacked);
+                            if (attackCount > 0) {
                                 if (UpdateDetectionForSoldierAfterAttack(s) ||
                                     UpdateDetectionForLocation(gpSelect.ClickX, gpSelect.ClickY, Const.BaseDetectionRange)) {
                                     // Something has been alerted
@@ -1450,7 +1469,6 @@ namespace SpaceMercs.MainWindow {
                 // Attack a creature
                 else if (en is Creature) {
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
-                    bool bEnabled = bIsInRange && s.CanAttack;
                     if (s.EquippedWeapon?.Recharge > 0) {
                         TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);
                         gpSelect.InsertIconItem(I_Attack, tsm, false, null);
@@ -1460,7 +1478,14 @@ namespace SpaceMercs.MainWindow {
                         gpSelect.InsertIconItem(I_Attack, tsr, false, null);
                     }
                     else if (s.EquippedWeapon?.Type?.WeaponShotType == WeaponType.ShotType.Single) {
+                        bool bEnabled = bIsInRange && s.CanAttack;
                         gpSelect.InsertIconItem(I_Attack, tsa, bEnabled, null);
+                        // If weapon can attack many times per round, and soldier has enough stamins, then add a button for it.
+                        if (s.EquippedWeapon.Type.Recharge == 0 && !s.EquippedWeapon.Type.Stable) {
+                            TexSpecs tsfa = Textures.GetTexCoords(Textures.MiscTexture.FullAttack);
+                            bEnabled = bEnabled && s.Stamina >= s.AttackCost * 2d;
+                            gpSelect.InsertIconItem(I_FullAttack, tsfa, bEnabled, null);
+                        }
                     }
                 }
             }

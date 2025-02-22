@@ -31,7 +31,7 @@ namespace SpaceMercs {
         // Texture coordinates
         public enum MiscTexture { Build = 0, Salvage = 1, Up = 2, Right = 3, Cancel = 4, None = 5, Down = 6, Left = 7, Timer = 8, Connect = 9, Attack = 10, Search = 11, Disconnect = 12, Eye = 13, Inventory = 14, Skills = 15, Walk = 16,
                                   Unlock = 17, Lock = 18, Treasure = 19, Coins = 20, OpenDoor = 21, CloseDoor = 22, Bones = 23, Trap = 24, Alert = 25, Reuse = 26, Menu = 27, File = 28, Mission = 29, Stopwatch = 30, Moved = 31,
-                                  FrameRed = 32, FrameRedThick = 33, FrameGreen = 34, FrameGreenThick = 35, Replace = 36 };
+                                  FrameRed = 32, FrameRedThick = 33, FrameGreen = 34, FrameGreenThick = 35, Replace = 36, FullAttack = 37 };
         private const int TexSize = 64;
         public static TexSpecs GetTexCoords(MiscTexture tex, bool bTransparent = true) {
             if (bTransparent) {
