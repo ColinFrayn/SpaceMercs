@@ -140,14 +140,14 @@ namespace SpaceMercs {
                     try {
                         eq = Utils.LoadItem(xi.FirstChild);
                     }
-                    catch (Exception) {
+                    catch (Exception ex) {
                         // Try re-loading as if it's a material
                         if (xi.FirstChild!.Name.Equals("Equipment")) {
                             eq = new Material(xi.FirstChild);
                         }
-                        else throw;
+                        else throw new Exception($"Error loading inventory for Colony {Location.Name} : {ex.Message}");
                     }
-                    if (eq is not null) Inventory.Add(eq, count);
+                    if (eq is not null) Inventory.TryAdd(eq, count);
                 }
             }
         }

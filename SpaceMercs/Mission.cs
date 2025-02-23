@@ -286,7 +286,7 @@ namespace SpaceMercs {
                 m.Goal = mgtp.Item1;
                 m.MItem = mgtp.Item2;
             }
-            m.InitialiseMissionBasedOnGoal();
+            m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
                 m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
             }
@@ -307,10 +307,10 @@ namespace SpaceMercs {
             Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
             m.Goal = mgtp.Item1;
             m.MItem = mgtp.Item2;
-            m.InitialiseMissionBasedOnGoal();
+            m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        private void InitialiseMissionBasedOnGoal() {
+        private void InitialiseMissionBasedOnGoal(Random rand) {
             if (Goal == MissionGoal.KillBoss) Reward *= 1.1;
             if (Goal == MissionGoal.ExploreAll) Reward *= 0.8;
             if (Goal == MissionGoal.Gather) Reward = 0.0;
@@ -325,8 +325,12 @@ namespace SpaceMercs {
                     MItem = null;
                     return;
                 }
-                LevelCount = Math.Max(wp.Level - 1, LevelCount);
+                LevelCount = Math.Max((Diff/4) + wp.Level - 3, LevelCount);
+                if (rand.Next(Diff) > 10) LevelCount++;
+                if (rand.NextDouble() > 0.8) LevelCount++;
                 Size = Math.Max(wp.Level - 1, Size);
+                if (rand.Next(Diff) > 10) Size++;
+                if (rand.NextDouble() > 0.8) Size++;
             }
         }
 

@@ -4,8 +4,6 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
-Add a right-click button for "fire all" (i.e. keep firing until stamina runs out or the target dies)
-
 ==================================================================================================================
 
 
@@ -20,6 +18,12 @@ What should attack skill do for an AoE weapon (grenade or cone)?
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 
 Race relations degrade over time? Or tend towards their base level?
+
+Ship Inventory selection / transfer is very annoying
+
+Add Individual OldOne solar systems out in the second or third ring
+
+Large hulk missions (many levels)
 
 Alien solar system:
 - Alien colonies need names

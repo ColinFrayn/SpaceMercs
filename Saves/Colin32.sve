@@ -2641,9 +2641,9 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
  </EquippedArmour>
@@ -2673,7 +2673,7 @@
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Shortblade" Level="0" />
@@ -2705,7 +2705,7 @@
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Composite" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -2737,9 +2737,9 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Shielded Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -2770,10 +2770,10 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Shielded Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Pistol" Level="0" />
@@ -2829,7 +2829,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Shielded Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
  </EquippedArmour>
@@ -2885,10 +2885,10 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -2916,7 +2916,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
  </EquippedArmour>
@@ -2949,7 +2949,7 @@
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -2978,7 +2978,7 @@
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Axe" Level="0" />
@@ -3006,7 +3006,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
@@ -3065,10 +3065,10 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Pistol" Level="0" />
@@ -3095,8 +3095,8 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Cap" Material="Steel" Level="0"/>
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -3590,7 +3590,7 @@
 <Weapon Type="Arc Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="2"/>
+<Armour Type="Gauntlets" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Arc Rifle" Level="3" />
@@ -3677,7 +3677,7 @@
 <Armour Type="Power Armour" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Composite" Level="3"/>
+<Armour Type="Gauntlets" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Power Axe" Level="0" />
@@ -3692,31 +3692,31 @@
 <Armour Type="Helmet" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="34">
-<Armour Type="Cap" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="10">
-<Armour Type="Cap" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="226">
-<Armour Type="Cap" Material="Steel" Level="0"/>
+<Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="21">
-<Armour Type="Cap" Material="Steel" Level="1"/>
+<Armour Type="Helmet" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="23">
-<Armour Type="Cap" Material="Steel" Level="2"/>
+<Armour Type="Helmet" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="11">
-<Armour Type="Cap" Material="Kevlar" Level="0"/>
+<Armour Type="Helmet" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="1"/>
+<Armour Type="Helmet" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Gauntlets" Material="Metasteel" Level="0"/>
@@ -3725,16 +3725,16 @@
 <Armour Type="Powered Arm Plating" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="11">
-<Armour Type="Cap" Material="Composite" Level="0"/>
+<Armour Type="Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="1"/>
+<Armour Type="Gauntlets" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="2"/>
+<Armour Type="Helmet" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="6">
-<Armour Type="Cap" Material="Metasteel" Level="0"/>
+<Armour Type="Helmet" Material="Metasteel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Composite" Level="1"/>
@@ -3743,7 +3743,7 @@
 <Armour Type="Stealth Armour" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="3">
-<Armour Type="Cap" Material="Nanomesh" Level="0"/>
+<Armour Type="Helmet" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="2"/>
@@ -3881,7 +3881,7 @@
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="3"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="3"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
@@ -3893,7 +3893,7 @@
 <Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="1"/>
+<Armour Type="Helmet" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="4">
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
@@ -3926,7 +3926,7 @@
 <Armour Type="Shielded Chestplate" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="1"/>
+<Armour Type="Gauntlets" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Power Armour" Material="Nanomesh" Level="0"/>
@@ -3956,7 +3956,7 @@
 <Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Nanomesh" Level="2"/>
+<Armour Type="Helmet" Material="Nanomesh" Level="2"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Arm Plating" Material="Composite" Level="0"/>
@@ -3980,7 +3980,7 @@
 <Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="25">
 <Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
@@ -4004,7 +4004,7 @@
 <Armour Type="Powered Arm Plating" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Gloves" Material="Composite" Level="2"/>
+<Armour Type="Gauntlets" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="4">
 <Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
@@ -4013,7 +4013,7 @@
 <Armour Type="Full Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Mithril" Level="1"/>
+<Armour Type="Helmet" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
@@ -4034,7 +4034,7 @@
 <Armour Type="Stealth Helmet" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Metasteel" Level="1"/>
+<Armour Type="Helmet" Material="Metasteel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Heavy Laser Rifle" Level="1" />
@@ -4046,7 +4046,7 @@
 <Armour Type="Leg Plating" Material="Metasteel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Nanomesh" Level="2"/>
+<Armour Type="Gauntlets" Material="Nanomesh" Level="2"/>
   </Inv>
   <Inv Count="4">
 <Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="0"/>
@@ -4079,7 +4079,7 @@
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Composite" Level="1"/>
+<Armour Type="Gauntlets" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Metasteel" Level="3"/>
@@ -4106,7 +4106,7 @@
 <Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Metasteel" Level="2"/>
+<Armour Type="Gauntlets" Material="Metasteel" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shock Armour" Material="Nanomesh" Level="1"/>
@@ -4142,7 +4142,7 @@
 <Armour Type="Powered Arm Plating" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Infiltration Suit" Material="Carbon Fibre" Level="1"/>
@@ -4172,7 +4172,7 @@
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Mithril" Level="1"/>
+<Armour Type="Gauntlets" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Steel" Level="2"/>
@@ -4202,13 +4202,13 @@
 <Armour Type="Plate Boots" Material="Mithril" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="3"/>
+<Armour Type="Gauntlets" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="2"/>
+<Armour Type="Gauntlets" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Steel" Level="0"/>
@@ -4229,16 +4229,16 @@
 <Armour Type="Stealth Boots" Material="Nanomesh" Level="2"/>
   </Inv>
   <Inv Count="52">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="4">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="5">
-<Armour Type="Plate Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Quad Shotgun" Level="1" />
@@ -4247,22 +4247,22 @@
 <Armour Type="Power Armour" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="3">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Kevlar" Level="1"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="43">
 <Armour Type="Stealth Gauntlets" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="3">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="0"/>
+<Armour Type="Gauntlets" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Metasteel" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Composite" Level="3"/>
+<Armour Type="Gauntlets" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Metasteel" Level="2"/>
@@ -4271,43 +4271,43 @@
 <Armour Type="Stealth Armour" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Metasteel" Level="2"/>
+<Armour Type="Helmet" Material="Metasteel" Level="2"/>
   </Inv>
   <Inv Count="57">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="11">
-<Armour Type="Gloves" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Chainsword" Level="1" />
   </Inv>
   <Inv Count="13">
-<Armour Type="Gloves" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Steel" Level="2"/>
+<Armour Type="Gauntlets" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Helmet" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Gloves" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="5">
-<Armour Type="Gloves" Material="Kevlar" Level="1"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Kevlar" Level="2"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shock Armour" Material="Nanomesh" Level="0"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Gloves" Material="Composite" Level="0"/>
+<Armour Type="Gauntlets" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="4">
 <Weapon Type="Heavy Laser Rifle" Level="2" />
@@ -4343,7 +4343,7 @@
 <Weapon Type="Laser Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Metasteel" Level="1"/>
+<Armour Type="Gauntlets" Material="Metasteel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Kevlar" Level="2"/>
@@ -4358,7 +4358,7 @@
 <Weapon Type="Powerblade" Level="1" />
   </Inv>
   <Inv Count="64">
-<Armour Type="Gloves" Material="Metasteel" Level="0"/>
+<Armour Type="Gauntlets" Material="Metasteel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Assault Power Armour" Material="Metasteel" Level="1"/>
@@ -4388,7 +4388,7 @@
 <Armour Type="Power Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="3"/>
+<Armour Type="Helmet" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Power Armour" Material="Kevlar" Level="0"/>
@@ -4406,7 +4406,7 @@
 <Armour Type="Assault Power Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Mithril" Level="0"/>
+<Armour Type="Helmet" Material="Mithril" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Assault Power Armour" Material="Kevlar" Level="0"/>
@@ -4553,13 +4553,13 @@
 <Armour Type="Full Armour" Material="Metasteel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Kevlar" Level="3"/>
+<Armour Type="Helmet" Material="Kevlar" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Rifle" Level="2" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Mithril" Level="0"/>
+<Armour Type="Gauntlets" Material="Mithril" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Shielded Chestplate" Material="Kevlar" Level="2"/>
@@ -4583,7 +4583,7 @@
 <Armour Type="Stealth Boots" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Plate Gauntlets" Material="Mithril" Level="1"/>
+<Armour Type="Gauntlets" Material="Mithril" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Plasma Rifle" Level="1" />
@@ -4604,7 +4604,7 @@
 <Armour Type="Shock Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Nanomesh" Level="3"/>
+<Armour Type="Gauntlets" Material="Nanomesh" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Pistol" Level="1" />
@@ -4616,19 +4616,19 @@
 <Armour Type="Stealth Gauntlets" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="10">
-<Armour Type="Gloves" Material="Steel" Level="1"/>
+<Armour Type="Gauntlets" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Exo Claws" Level="0" />
   </Inv>
   <Inv Count="2">
-<Armour Type="Cap" Material="Steel" Level="3"/>
+<Armour Type="Helmet" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="3">
 <Weapon Type="Laser Sniper Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Gloves" Material="Nanomesh" Level="0"/>
+<Armour Type="Gauntlets" Material="Nanomesh" Level="0"/>
   </Inv>
  </Inventory>
 </Colony>
@@ -6492,7 +6492,7 @@
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Gloves" Material="Adamantium" Level="1"/>
+<Armour Type="Gauntlets" Material="Adamantium" Level="1"/>
 <Armour Type="Shock Armour" Material="Metasteel" Level="1"/>
 <Armour Type="Plate Boots" Material="Metasteel" Level="1"/>
 <Armour Type="Infiltrator Helmet" Material="Composite" Level="0"/>
@@ -6590,7 +6590,7 @@
 <Weapon Type="Powerblade" Level="0" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Cap" Material="Composite" Level="3"/>
+<Armour Type="Helmet" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Axe" Level="0" />

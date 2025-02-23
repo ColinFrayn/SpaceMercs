@@ -1,16 +1,5 @@
 ﻿<Data>
   <!-- Armour types for Soldiers -->
-  <ArmourType Name="Cap">
-    <Mass>0.5</Mass>
-    <Cost>4</Cost>
-    <Rarity>3</Rarity>
-    <BaseArmour>2</BaseArmour>
-    <Location>Head</Location>
-    <Desc>A simple cap offering minimal protection</Desc>
-    <Materials>
-      <Material Name="Fabric" Amount="1"/>
-    </Materials>
-  </ArmourType>
   <ArmourType Name="Helmet">
     <Mass>1.5</Mass>
     <Cost>10</Cost>
@@ -194,6 +183,56 @@
       <Material Name="Aluminium" Amount="2"/>
     </Materials>
   </ArmourType>
+  <ArmourType Name="Combat Suit">
+    <Mass>13.0</Mass>
+    <Cost>150</Cost>
+    <Rarity>25</Rarity>
+    <Agility>-3</Agility>
+    <Attack>1</Attack>
+    <BaseArmour>32</BaseArmour>
+    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
+    <Desc>A reinforced combat armour suit with full body protection</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <MinSystems>2</MinSystems>
+      <MinPop>34</MinPop>
+      <CashCost>60</CashCost>
+      <Material Name="Steel">4</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+    </Requirements>
+  </ArmourType>
+  <ArmourType Name="Light Combat Suit">
+    <Mass>9.5</Mass>
+    <Cost>160</Cost>
+    <Rarity>30</Rarity>
+    <Agility>-2</Agility>
+    <Attack>1</Attack>
+    <BaseArmour>25</BaseArmour>
+    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
+    <Desc>A lightweight combat armour suit with full body protection</Desc>
+    <Materials>
+      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Steel" Amount="1"/>
+      <Material Name="Aluminium" Amount="3"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>2</MinSystems>
+      <MinPop>36</MinPop>
+      <CashCost>60</CashCost>
+      <Material Name="Aluminium">4</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+    </Requirements>
+  </ArmourType>
   <ArmourType Name="Shock Armour">
     <Mass>10.0</Mass>
     <Cost>250</Cost>
@@ -212,13 +251,69 @@
     </Materials>
     <Requirements>
       <MinLevel>7</MinLevel>
-      <MinSystems>2</MinSystems>
-      <MinPop>36</MinPop>
+      <MinSystems>3</MinSystems>
+      <MinPop>44</MinPop>
       <CashCost>70</CashCost>
       <Material Name="Crystals">4</Material>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">1</Relations>
+    </Requirements>
+  </ArmourType>
+  <ArmourType Name="Advanced Shock Armour">
+    <Mass>11.0</Mass>
+    <Cost>775</Cost>
+    <Rarity>55</Rarity>
+    <Agility>-3</Agility>
+    <BaseArmour>22</BaseArmour>
+    <Location>Chest,Arms,Legs</Location>
+    <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with a more advanced shield generator.</Desc>
+    <Shields>20</Shields>
+    <Materials>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="3"/>
+      <Material Name="Crystals" Amount="2"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinSystems>4</MinSystems>
+      <MinPop>54</MinPop>
+      <CashCost>140</CashCost>
+      <Material Name="Crystals">2</Material>
+      <Material Name="Rare Earth Metals">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Elithiri">2</Relations>
+    </Requirements>
+  </ArmourType>
+  <ArmourType Name="Archon Armour">
+    <Mass>13.0</Mass>
+    <Cost>1250</Cost>
+    <Rarity>60</Rarity>
+    <Agility>-3</Agility>
+    <Defence>2</Defence>
+    <BaseArmour>28</BaseArmour>
+    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
+    <Desc>An advanced and highly powerful combat armour suit, with a superb shield generator and deflection technology.</Desc>
+    <Shields>30</Shields>
+    <Materials>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="3"/>
+      <Material Name="Crystals" Amount="3"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>11</MinLevel>
+      <MinSystems>5</MinSystems>
+      <MinPop>70</MinPop>
+      <CashCost>380</CashCost>
+      <Material Name="Crystals">4</Material>
+      <Material Name="Rare Earth Metals">2</Material>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Elithiri">3</Relations>
     </Requirements>
   </ArmourType>
   <ArmourType Name="Stealth Armour">
@@ -315,24 +410,13 @@
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
-  <ArmourType Name="Plate Gauntlets">
+  <ArmourType Name="Gauntlets">
     <Mass>0.8</Mass>
     <Cost>14</Cost>
     <Rarity>8</Rarity>
     <BaseArmour>3</BaseArmour>
     <Location>Hands</Location>
     <Desc>Plate metal gauntlets</Desc>
-    <Materials>
-      <Material Name="Fabric" Amount="1"/>
-    </Materials>
-  </ArmourType>
-  <ArmourType Name="Gloves">
-    <Mass>0.5</Mass>
-    <Cost>6</Cost>
-    <Rarity>5</Rarity>
-    <BaseArmour>1</BaseArmour>
-    <Location>Hands</Location>
-    <Desc>Thin, flexible gloves</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
     </Materials>
