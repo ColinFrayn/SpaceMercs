@@ -162,6 +162,11 @@ namespace SpaceMercs {
                 if (diff < 2d) diff = 2d;
                 return (int)diff + offset;
             }
+            if (this is HyperGate gate) {
+                double diff = (rand.NextDouble() * 1.5d) + 3d + (rand.NextDouble() * 1.25d);
+                if (diff < 3d) diff = 3d;
+                return (int)diff + offset;
+            }
             // Shouldn't get here
             throw new Exception($"Strange AO type in {nameof(GetHomeSystemMissionDifficulty)}");
         }

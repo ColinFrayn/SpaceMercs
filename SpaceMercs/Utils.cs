@@ -356,13 +356,6 @@ namespace SpaceMercs {
 
         }
 
-        public static int StaminaCostOfUtilitySkill(Soldier.UtilitySkill sk) {
-            return sk switch {
-                Soldier.UtilitySkill.Medic => 10,
-                _ => 0,
-            };
-        }
-
         public static Dictionary<WeaponType.DamageType, double> CombineDamage(Dictionary<WeaponType.DamageType, double> d1, Dictionary<WeaponType.DamageType, double> d2) {
             if (d1 == null) return d2;
             if (d2 == null) return d1;

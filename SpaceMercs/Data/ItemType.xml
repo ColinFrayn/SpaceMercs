@@ -3,7 +3,7 @@
   <ItemType Name="Medikit">
     <Mass>0.3</Mass>
     <Cost>8</Cost>
-    <Rarity>4</Rarity>
+    <Rarity>3</Rarity>
     <StaminaCost>14</StaminaCost>
     <Desc>A medikit, combining bandages and medication required to patch up serious wounds.</Desc>
     <ItemEffect Name="Heal">

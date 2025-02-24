@@ -4,6 +4,10 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
+Add Individual OldOne systems out in the second ring.
+- Collect artifacts.
+- Return to Homeworld or other race Homeworld for additional +relations & cash.
+
 ==================================================================================================================
 
 
@@ -19,9 +23,7 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 
 Race relations degrade over time? Or tend towards their base level?
 
-Ship Inventory selection / transfer is very annoying
-
-Add Individual OldOne solar systems out in the second or third ring
+Ship Inventory selection / transfer is very annoying - scroll down, select, skip
 
 Large hulk missions (many levels)
 
@@ -51,7 +53,7 @@ Improve Creature textures:
 -- Change texture based on race
 -- Change texture based on equipment / weapons
 
-Add overwatch ability?
+Add overwatch ability to soldiers
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
@@ -72,7 +74,7 @@ Allow creatures to have multiple weapons (ranged and melee)?
 
 Investigate Blockly for scripting soldiers?
 
-Soldier.DisplaySoldierDetails() : Encumbrance icon : Make it better
+Soldier.DisplaySoldierDetails() : Improve the Encumbrance icon
 
 
 -------------------------

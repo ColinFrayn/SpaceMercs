@@ -300,8 +300,7 @@ namespace SpaceMercs {
                     if (ie.AssociatedSkill != UtilitySkill.Unspent && src is Soldier soldier) {
                         int sk = soldier.GetUtilityLevel(ie.AssociatedSkill);
                         if (sk == 0 && ie.SkillRequired) throw new Exception("Attempting to perform unskilled application of effect");
-                        if (sk == 0) dmod /= 2.0; // Unskilled use
-                        else dmod += Math.Pow(sk - 1, 1.5) / 10.0;
+                        else dmod += sk * 0.2; // 20% per level boost
                     }
                     if (AllDam.ContainsKey(eff.DamageType)) AllDam[eff.DamageType] += eff.Damage * dmod;
                     else AllDam.Add(eff.DamageType, eff.Damage * dmod);
@@ -366,8 +365,8 @@ namespace SpaceMercs {
         private MissionLevel CurrentLevel { get { return PlayerTeam?.CurrentMission?.GetOrCreateCurrentLevel() ?? throw new Exception("CurrentLevel doesn't exist"); } }
         public double SearchRadius { get { return Const.BaseSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
         public double PassiveSearchRadius { get { return Const.PassiveSearchRadius + GetUtilityLevel(UtilitySkill.Perception) * Const.PerceptionSearchRadiusBoost; } }
-        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
-        public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.SearchBoostPerSkill + Insight; } }
+        public double BaseSearchChance { get { return Const.BaseSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.ActiveSearchBoostPerSkill + Insight; } }
+        public double PassiveSearchChance { get { return Const.PassiveSearchChance + GetUtilityLevel(UtilitySkill.Perception) * Const.PassiveSearchBoostPerSkill + Insight; } }
         private void CalculateMaxStats() {
             MaxHealth = BaseHealth + StatBonuses(StatType.Health);
             if (Health > MaxHealth) Health = MaxHealth;
@@ -1315,7 +1314,7 @@ namespace SpaceMercs {
 
                         // If so then check if we spot it
                         double chance = baseChance;
-                        chance -= Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * Const.SearchReduction;
+                        chance -= Math.Sqrt((x - X) * (x - X) + (y - Y) * (y - Y)) * (bPassive ? Const.PassiveSearchReduction : Const.BaseSearchReduction);
                         chance -= level.ParentMission.Diff * Const.MissionDifficultySearchScale;
                         if (rand.NextDouble() * 100.0 <= chance) {
                             // Spotted

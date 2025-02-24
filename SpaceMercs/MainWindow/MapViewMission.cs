@@ -475,6 +475,7 @@ namespace SpaceMercs.MainWindow {
                                 }
                             }
                         }
+                        // Attack repeatedly with all your remaining stamina
                         if (iSelectHover == I_FullAttack) {
                             bool bAttacked = false;
                             int attackCount = 0;
@@ -700,8 +701,6 @@ namespace SpaceMercs.MainWindow {
             // Play a sound, if there is one
             if (!string.IsNullOrEmpty(ie.SoundEffect)) {
                 PlaySoundThreaded(ie.SoundEffect);
-                //SoundEffects.PlaySound(ie.SoundEffect);
-                //Thread.Sleep(500);
             }
 
             // Apply effect to the targets

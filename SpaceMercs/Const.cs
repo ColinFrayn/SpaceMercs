@@ -28,10 +28,12 @@ namespace SpaceMercs {
         public const double UseItemCost = 10.0; // Cost, in stamina points, for using an item
         public const int    BaseSearchRadius = 5; // Maximum radius of any search for unskilled searcher (increase by 1 per point in perception)
         public const int    PassiveSearchRadius = 2; // Maximum radius of any search for unskilled passive searcher (increase by 1 per point in perception)
-        public const double BaseSearchChance = 70.0; // Chance of spotting a hidden object at distance zero (plus Insight)
-        public const double PassiveSearchChance = 30.0; // Chance of spotting a hidden object at distance zero (plus Insight)
-        public const double SearchReduction = 8.0; // Reduction in chance to spot an object for each metre distant from the searcher
-        public const double SearchBoostPerSkill = 2.0; // Increase in chance to spot a hidden object for each point in Perception.
+        public const double BaseSearchChance = 70.0; // Base chance of spotting a hidden object at distance zero (plus Insight) when actively searching.
+        public const double PassiveSearchChance = 30.0; // Base chance of spotting a hidden object at distance zero (plus Insight) when not actively searching.
+        public const double BaseSearchReduction = 7.0; // Reduction in chance to spot an object for each metre distant from the searcher
+        public const double PassiveSearchReduction = 10.0; // Reduction in chance to spot an object for each metre distant from the searcher
+        public const double ActiveSearchBoostPerSkill = 3.0; // Increase in chance to spot a hidden object for each point in Perception.
+        public const double PassiveSearchBoostPerSkill = 1.7; // Increase in chance to spot a hidden object for each point in Perception.
         public const double EncumbranceSearchPenalty = 20.0; // Penalty (proportionately applied) for searching when 100% encumbered.
         public const double PerceptionSearchRadiusBoost = 0.5; // Increase in search radius for every point of perception
         public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
