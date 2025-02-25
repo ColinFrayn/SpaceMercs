@@ -24,7 +24,7 @@
     <LevelRange>1,12</LevelRange>
     <Attack>11</Attack>
     <Defence>10</Defence>
-    <Armour>22</Armour>
+    <Armour>20</Armour>
     <Health>12</Health>
     <Stamina>15</Stamina>
     <Frequency>3</Frequency>
@@ -46,7 +46,7 @@
     <LevelRange>1,15</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
-    <Armour>25</Armour>
+    <Armour>22</Armour>
     <Health>14</Health>
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
@@ -70,7 +70,7 @@
     <LevelRange>1,15</LevelRange>
     <Attack>14</Attack>
     <Defence>12</Defence>
-    <Armour>26</Armour>
+    <Armour>24</Armour>
     <Health>16</Health>
     <Stamina>17</Stamina>
     <Interact/>
@@ -93,8 +93,8 @@
     <LevelRange>5,15</LevelRange>
     <Attack>13</Attack>
     <Defence>12</Defence>
-    <Armour>30</Armour>
-    <Health>16</Health>
+    <Armour>26</Armour>
+    <Health>15</Health>
     <Stamina>17</Stamina>
     <Interact/>
     <Col1>120, 90, 60</Col1>
@@ -112,7 +112,7 @@
     <LevelRange>4,18</LevelRange>
     <Attack>15</Attack>
     <Defence>13</Defence>
-    <Armour>30</Armour>
+    <Armour>28</Armour>
     <Health>25</Health>
     <Stamina>18</Stamina>
     <Interact/>

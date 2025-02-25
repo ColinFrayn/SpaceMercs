@@ -67,11 +67,11 @@
   <CreatureType Name="Fungoid KingShroom">
     <Size>2</Size>
     <LevelRange>3,7</LevelRange>
-    <Attack>16</Attack>
+    <Attack>15</Attack>
     <Defence>6</Defence>
     <Health>60</Health>
     <Stamina>18</Stamina>
-    <Armour>34</Armour>
+    <Armour>30</Armour>
     <BodyType>Fungoid</BodyType>
     <MovementCost>6.0</MovementCost>
     <Boss/>

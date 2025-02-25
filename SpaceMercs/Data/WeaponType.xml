@@ -883,7 +883,7 @@
   <WeaponType Name="Triffid Heavy Thorns">
     <Speed>14</Speed>
     <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.5,1.0,0.2">12</Range>
-    <Damage>5+5</Damage>
+    <Damage>5+4</Damage>
     <Sound>Spore</Sound>
     <Shots>3</Shots>
     <Recoil>0.6</Recoil>
@@ -896,30 +896,28 @@
     <Damage>3+2</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
-    <Shots>2</Shots>
     <Recoil>0.5</Recoil>
     <Delay>220</Delay>
     <ItemEffect Name="Spore Toxin">
       <Effect Name="Spore Toxin">
         <Duration>2</Duration>
-        <Damage Type="Poison">3</Damage>
+        <Damage Type="Poison">2</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Fungoid Heavy Spores">
-    <Speed>14</Speed>
-    <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.3,1.0,0.2">12</Range>
+    <Speed>15</Speed>
+    <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.3,1.0,0.2">10</Range>
     <Damage>5+4</Damage>
     <Type>Poison</Type>
     <Sound>Spore</Sound>
-    <Shots>3</Shots>
     <Recoil>0.7</Recoil>
     <Delay>220</Delay>
     <ItemEffect Name="Spore Toxin">
       <Effect Name="Spore Toxin">
         <Duration>3</Duration>
-        <Damage Type="Poison">6</Damage>
+        <Damage Type="Poison">4</Damage>
       </Effect>
     </ItemEffect>
     <Hidden/>
