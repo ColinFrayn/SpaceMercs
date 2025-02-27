@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
+using static SpaceMercs.Mission;
 using static SpaceMercs.VisualEffect;
 
 namespace SpaceMercs {
@@ -29,6 +30,17 @@ namespace SpaceMercs {
         public Point LocationToDefend {
             get {
                 return EntryLocations.FirstOrDefault();
+            }
+        }
+        public MissionType Type {
+            get {
+                if (ParentMission.Type == MissionType.PregenitorCity) {
+                    if (LevelID == 0) return MissionType.Surface;
+                    else if (LevelID == 1) return MissionType.Caves;
+                    else if (LevelID == 2) return MissionType.Mines;
+                    else return MissionType.AbandonedCity;
+                }
+                else return ParentMission.Type;
             }
         }
 
@@ -571,17 +583,17 @@ namespace SpaceMercs {
             rand = new Random(ParentMission.Seed + LevelID); // Make it repeatable :)
             SetupMapDimensions();
             if (ParentMission.IsShipMission) GenerateShipMap();
-            else if (ParentMission.Type == Mission.MissionType.AbandonedCity) GenerateDungeonMap();
-            else if (ParentMission.Type == Mission.MissionType.Mines) GenerateDungeonMap(true);
-            else if (ParentMission.Type == Mission.MissionType.Caves) GenerateCaveMap();
-            else if (ParentMission.Type == Mission.MissionType.Surface) GenerateSurfaceMap();
+            else if (Type == Mission.MissionType.AbandonedCity) GenerateDungeonMap();
+            else if (Type == Mission.MissionType.Mines) GenerateDungeonMap(true);
+            else if (Type == Mission.MissionType.Caves) GenerateCaveMap();
+            else if (Type == Mission.MissionType.Surface) GenerateSurfaceMap();
             else throw new NotImplementedException();
             Explored = new bool[Width, Height];
             Visible = new bool[Width, Height];
             EntityMap = new IEntity[Width, Height];
             GenerateCreatures();
             // Add goal item, if required
-            if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact) {
+            if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact or Mission.MissionGoal.Pregenitor) {
                 if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
                 if (LevelID == ParentMission.LevelCount - 1) {
                     InsertGoalItem(ParentMission.MItem);
@@ -601,15 +613,15 @@ namespace SpaceMercs {
                 Width = (ParentMission.ShipTarget.Type.Length * 4) + 9;
                 Height = (ParentMission.ShipTarget.Type.Width * 4) + 9;
             }
-            else if (ParentMission.Type == Mission.MissionType.AbandonedCity || ParentMission.Type == Mission.MissionType.Mines) {
+            else if (Type is Mission.MissionType.AbandonedCity or Mission.MissionType.Mines) {
                 Width = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 12) + rand.Next((ParentMission.Size * 3) + 3);
                 Height = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 12) + rand.Next((ParentMission.Size * 3) + 3);
             }
-            else if (ParentMission.Type == Mission.MissionType.Caves) {
+            else if (Type == Mission.MissionType.Caves) {
                 Width = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 12) + rand.Next((ParentMission.Size * 3) + 3);
                 Height = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 12) + rand.Next((ParentMission.Size * 3) + 3);
             }
-            else if (ParentMission.Type == Mission.MissionType.Surface) {
+            else if (Type == Mission.MissionType.Surface) {
                 Width = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 16) + rand.Next((ParentMission.Size * 3) + 3);
                 Height = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 16) + rand.Next((ParentMission.Size * 3) + 3);
             }
@@ -1358,13 +1370,19 @@ namespace SpaceMercs {
                 if (b1.HasValue && b2.HasValue) JoinCells(b1.Value, b2.Value, FloodFill, dRegions);
             }
         }
-        private void FloodFillRegion(int x, int y, int[,] FloodFill, int region) {
+        private void FloodFillRegion(int startX, int startY, int[,] FloodFill, int region) {
+            HashSet<(int px, int py)> queue = new();
             // Flood fill a connected region
-            FloodFill[x, y] = region;
-            if (x > 0 && Map[x - 1, y] == TileType.Floor && FloodFill[x - 1, y] == 0) FloodFillRegion(x - 1, y, FloodFill, region);
-            if (x < Width - 1 && Map[x + 1, y] == TileType.Floor && FloodFill[x + 1, y] == 0) FloodFillRegion(x + 1, y, FloodFill, region);
-            if (y > 0 && Map[x, y - 1] == TileType.Floor && FloodFill[x, y - 1] == 0) FloodFillRegion(x, y - 1, FloodFill, region);
-            if (y < Height - 1 && Map[x, y + 1] == TileType.Floor && FloodFill[x, y + 1] == 0) FloodFillRegion(x, y + 1, FloodFill, region);
+            queue.Add((startX, startY));
+            while (queue.Count > 0) {
+                (int x, int y) = queue.First();
+                queue.Remove((x, y));
+                FloodFill[x, y] = region;
+                if (x > 0 && Map[x - 1, y] == TileType.Floor && FloodFill[x - 1, y] == 0) queue.Add((x - 1, y));
+                if (x < Width - 1 && Map[x + 1, y] == TileType.Floor && FloodFill[x + 1, y] == 0) queue.Add((x + 1, y));
+                if (y > 0 && Map[x, y - 1] == TileType.Floor && FloodFill[x, y - 1] == 0) queue.Add((x, y - 1));
+                if (y < Height - 1 && Map[x, y + 1] == TileType.Floor && FloodFill[x, y + 1] == 0) queue.Add((x, y + 1));
+            } 
         }
         private void JoinCells(Vector2i b1, Vector2i b2, int[,] FloodFill, Dictionary<int, List<Vector2i>> dRegions) {
             // Join two cells and therefore join the relevant regions containing them

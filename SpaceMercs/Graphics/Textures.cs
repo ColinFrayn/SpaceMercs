@@ -188,7 +188,7 @@ namespace SpaceMercs {
         private static readonly Dictionary<(WallType, WallSide), TexDetails> dWallTextures = new Dictionary<(WallType, WallSide), TexDetails>();
         private static readonly Dictionary<WallType, TexDetails> dFloorTextures = new Dictionary<WallType, TexDetails>();
         public static TexDetails GenerateFloorTexture(MissionLevel lev) {
-            WallType wt = WallTypeFromMission(lev.ParentMission);
+            WallType wt = WallTypeFromMissionLevel(lev);
             if (dFloorTextures.TryGetValue(wt, out TexDetails texDetails)) {
                 return texDetails;
             }
@@ -210,7 +210,7 @@ namespace SpaceMercs {
             throw new NotImplementedException();
         }
         public static TexDetails GenerateWallTexture(MissionLevel lev, WallSide ws) {
-            WallType wt = WallTypeFromMission(lev.ParentMission);
+            WallType wt = WallTypeFromMissionLevel(lev);
             if (dWallTextures.ContainsKey((wt, ws))) return dWallTextures[(wt, ws)];
             byte[,,] baseImage = wt switch {
                 WallType.Caves => FadeWallImage(GenerateRockWallTexture(Color.FromArgb(255, 150, 150, 150), Color.FromArgb(255, 160, 160, 160), 3, Textures.TileSize * 2, Textures.TileSize * 2, wt), ws),
@@ -228,10 +228,10 @@ namespace SpaceMercs {
             dWallTextures.TryAdd((wt, ws), TexID);
             return TexID;
         }
-        private static WallType WallTypeFromMission(Mission m) {
-            if (m.Type == Mission.MissionType.Caves || m.Type == Mission.MissionType.Mines) return WallType.Caves;
-            if (m.Type == Mission.MissionType.Surface) {
-                switch (m.Location.Type) {
+        private static WallType WallTypeFromMissionLevel(MissionLevel lev) {
+            if (lev.Type is Mission.MissionType.Caves or Mission.MissionType.Mines) return WallType.Caves;
+            if (lev.Type is Mission.MissionType.Surface) {
+                switch (lev.ParentMission.Location.Type) {
                     case Planet.PlanetType.Desert: return WallType.Desert;
                     case Planet.PlanetType.Ice: return WallType.Ice;
                     case Planet.PlanetType.Oceanic: return WallType.Oceanic;
@@ -240,8 +240,8 @@ namespace SpaceMercs {
                     default: throw new NotImplementedException();
                 }
             }
-            if (m.IsShipMission) return WallType.Ship;
-            if (m.Type == Mission.MissionType.AbandonedCity) return WallType.City;
+            if (lev.ParentMission.IsShipMission) return WallType.Ship;
+            if (lev.Type is Mission.MissionType.AbandonedCity) return WallType.City;
             throw new NotImplementedException();
         }
 

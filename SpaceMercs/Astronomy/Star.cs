@@ -7,10 +7,9 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class Star : AstronomicalObject {
-        private double Age;
-
         public IReadOnlyList<Planet> Planets => _planets;
         private readonly List<Planet> _planets = new List<Planet>();
+        private double Age;
         public double Mass { get; private set; }  // In solar masses (2 * 10^30 kg)
         public string StarType { get; private set; }
         public Race? Owner { get; private set; }
@@ -23,6 +22,9 @@ namespace SpaceMercs {
             get {
                 foreach (Planet pl in _planets) {
                     if (pl.Scanned) return true;
+                    foreach (Moon mn in pl.Moons) {
+                        if (mn.Scanned) return true;
+                    }
                 }
                 return false;
             }
@@ -31,11 +33,14 @@ namespace SpaceMercs {
             get {
                 foreach (Planet pl in _planets) {
                     if (!string.IsNullOrEmpty(pl.Name)) return true;
+                    foreach (Moon mn in pl.Moons) {
+                        if (!string.IsNullOrEmpty(mn.Name)) return true;
+                    }
                 }
                 return false;
             }
         }
-        public bool HasHyperGate { get { return TradeRoutes.Any(); } }
+        public bool HasHyperGate { get { return TradeRoutes.Count > 0; } }
         public double HyperGateOrbit { 
             get {
                 if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
@@ -266,6 +271,12 @@ namespace SpaceMercs {
             // Finally, clear out the planets
             _planets?.Clear();
             bGenerated = false;
+        }
+
+        // This star is stable and on the main sequence i.e. not a giant/dwarf or young star
+        public bool IsStableMainSequence() {
+            double lifestage = Age / Lifetime(Mass);
+            return (Age > 2.0) && (lifestage < 0.8);
         }
 
         // Set up the stellar type

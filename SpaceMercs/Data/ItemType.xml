@@ -124,14 +124,14 @@
     <Mass>0.2</Mass>
     <Cost>5</Cost>
     <Rarity>5</Rarity>
-    <Desc>A single-use hyposyringe full of adrenaline</Desc>
+    <Desc>A single-use hyposyringe full of adrenaline, increasing your strength and agility for a short duration.</Desc>
     <ItemEffect Name="Adrenaline">
       <SingleUse/>
       <Effect Name="Adrenaline">
         <Duration>5</Duration>
         <StatMods>
-          <Mod Stat="Strength">2</Mod>
-          <Mod Stat="Agility">2</Mod>
+          <Mod Stat="Strength">4</Mod>
+          <Mod Stat="Agility">4</Mod>
         </StatMods>
       </Effect>
       <Noise>1</Noise>
@@ -149,13 +149,13 @@
     <Mass>0.2</Mass>
     <Cost>5</Cost>
     <Rarity>5</Rarity>
-    <Desc>A single-use stimulant hyposyringe to increase physical capability</Desc>
+    <Desc>A single-use stimulant hyposyringe to increase physical capability by boosting stamina for a short duration.</Desc>
     <ItemEffect Name="Stim">
       <SingleUse/>
       <Effect Name="Stimulated">
         <Duration>5</Duration>
         <StatMods>
-          <Mod Stat="Stamina">5</Mod>
+          <Mod Stat="Stamina">6</Mod>
         </StatMods>
       </Effect>
       <Noise>1</Noise>
@@ -179,7 +179,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">12</Damage>
+        <Damage Type="Physical">16</Damage>
       </Effect>
       <Noise>10</Noise>
       <Sound>Blast</Sound>
@@ -202,11 +202,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">8</Damage>
+        <Damage Type="Physical">16</Damage>
       </Effect>
       <Effect Name="Burning">
         <Duration>3</Duration>        
-        <Damage Type="Fire">6</Damage>
+        <Damage Type="Fire">8</Damage>
       </Effect>
       <Noise>10</Noise>
       <Sound>Blast</Sound>
@@ -221,7 +221,7 @@
   </ItemType>
   <ItemType Name="Poison Grenade">
     <Mass>0.4</Mass>
-    <Cost>12</Cost>
+    <Cost>11</Cost>
     <Rarity>10</Rarity>
     <Requirements>
       <MinLevel>4</MinLevel>
@@ -236,11 +236,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">8</Damage>
+        <Damage Type="Physical">12</Damage>
       </Effect>
       <Effect Name="Poisoned">
         <Duration>4</Duration>
-        <Damage Type="Poison">5</Damage>
+        <Damage Type="Poison">8</Damage>
       </Effect>
       <Noise>8</Noise>
       <Sound>Blast</Sound>
@@ -270,7 +270,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">6</Damage>
+        <Damage Type="Physical">10</Damage>
       </Effect>
       <Effect Name="Tarred">
         <Duration>4</Duration>
@@ -307,11 +307,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">8</Damage>
+        <Damage Type="Physical">16</Damage>
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
-        <Damage Type="Acid">3</Damage>
+        <Damage Type="Acid">5</Damage>
         <ArmourMod>-5</ArmourMod>
       </Effect>
       <Noise>8</Noise>
@@ -335,10 +335,10 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">12</Damage>
+        <Damage Type="Physical">16</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">14</Damage>
+        <Damage Type="Fire">16</Damage>
       </Effect>
       <Noise>11</Noise>
       <Sound>Blast</Sound>
@@ -369,10 +369,10 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">20</Damage>
+        <Damage Type="Physical">26</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">20</Damage>
+        <Damage Type="Fire">26</Damage>
       </Effect>
       <Noise>12</Noise>
       <Sound>Blast</Sound>
@@ -411,7 +411,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">6</Damage>
+        <Damage Type="Physical">12</Damage>
       </Effect>
       <Effect Name="Stunned">
         <Duration>4</Duration>

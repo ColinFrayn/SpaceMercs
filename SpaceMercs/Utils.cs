@@ -152,6 +152,7 @@ namespace SpaceMercs {
                 Mission.MissionGoal.Defend => "Defend Objective",
                 Mission.MissionGoal.Artifact => "Artifact Hunt",
                 Mission.MissionGoal.Countdown => "Time Critical",
+                Mission.MissionGoal.Pregenitor => "Ancient Ruins",
                 _ => "Unknown",
             };
         }

@@ -48,11 +48,14 @@ namespace SpaceMercs.Dialogs {
         private void ScanComplete() {
             Random rnd = new Random();
             int nm = rnd.Next(3) + 1;
-            if (_aoScan is Planet) nm++;
             if (_aoScan.Type == Planet.PlanetType.Oceanic) nm += rnd.Next(2) + 1;
             if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
             while (rnd.NextDouble() < 0.5) nm++;
-            if (nm < 2) nm = 2;
+            if (_aoScan is Planet pl) {
+                if (pl.IsPregenitor) nm = 1;
+                else nm++;
+            }
+            else if (nm < 2) nm = 2;
             for (int n = 0; n < nm; n++) {
                 Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
                 _aoScan.AddMission(m);

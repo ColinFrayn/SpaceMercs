@@ -135,16 +135,16 @@ namespace SpaceMercs {
         public const double MinStarDistance = 1.1; // Light years
 
         // Combat settings
-        public const double ArmourScale = 30.0; // The higher this is, the less effective armour is at mitigating damage.
-        public const double CreatureMeleeDamageScale = 0.40;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
+        public const double ArmourScale = 30.0; // Log scale for armour power reduction. The higher this is, the less effective armour is at mitigating damage.
+        public const double CreatureMeleeDamageScale = 0.45;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
         public const double CreatureLevelAttackScale = 0.09;  // %age growth in creature attack each level (over base)
         public const double CreatureLevelAttackStep = 1.0;  // Absolute growth in creature attack each level
-        public const double CreatureLevelDefenceScale = 0.08;  // %age growth in creature defence each level (over base)
+        public const double CreatureLevelDefenceScale = 0.09;  // %age growth in creature defence each level (over base)
         public const double CreatureLevelDefenceStep = 0.9;  // Absolute growth in creature defence each level
         public const double CreatureLevelHealthScale = 0.15;  // %age growth in creature health each level (over base)
         public const double CreatureLevelHealthStep = 1.5;  // Absolute growth in creature health each level
         public const double CreatureLevelShieldsScale = 0.1;  // %age growth in creature shields each level (over base)
-        public const double CreatureLevelArmourScale = 0.09;  // %age growth in creature armour each level (over base)
+        public const double CreatureLevelArmourScale = 0.1;  // %age growth in creature armour each level (over base)
         public const double CreatureLevelArmourStep = 1.0;  // Absolute growth in creature armour each level
         public const double CreatureLevelStaminaStep = 1.0;  // Absolute growth in creature stamina each level
         public const double HitBias = 4.0; // Bias towards hitting when attacking
@@ -160,8 +160,8 @@ namespace SpaceMercs {
         public const int    CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
         public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
-        public const double TrapDamageScale = 1.5;  // Increase damage done by traps
-        public const double CreatureAttackDamageScale = 0.08;  // Modifier applied to damage done by Creatures per point of Attack.
+        public const double TrapDamageScale = 2.0;  // Increase damage done by traps
+        public const double CreatureAttackDamageScale = 0.085;  // Modifier applied to damage done by Creatures per point of Attack.
         public const double CreatureAttackDamageBaseMod = 0.8; // Base scale factor for creature attack damage.
         public const double SoldierAttackDamageScale = 0.1;  // Modifier applied to damage done by player-controlled Soldiers per point of Attack.
         public const double TurnLength = 10.0; // Length of one combat turn in seconds

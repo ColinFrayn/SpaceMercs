@@ -6,8 +6,8 @@ using static SpaceMercs.Delegates;
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
     public class Mission {
-        public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, Repair, Salvage, Ignore }
-        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather, Defend, Artifact, Countdown }
+        public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, PregenitorCity, Repair, Salvage, Ignore }
+        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather, Defend, Artifact, Countdown, Pregenitor }
         public MissionType Type { get; private set; }
         public MissionGoal Goal { get; private set; }
         public Ship? ShipTarget { get; private set; }
@@ -20,7 +20,7 @@ namespace SpaceMercs {
         public int Size { get; private set; } // Relevant for caves, mines, dungeon & surface maps
         public int LevelCount { get; private set; }
         public int CurrentLevel { get; private set; }
-        public bool IsShipMission { get { if (Type == MissionType.Surface || Type == MissionType.Caves || Type == MissionType.Mines || Type == MissionType.AbandonedCity) return false; else return true; } }
+        public bool IsShipMission { get { if (Type is MissionType.Surface or MissionType.Caves or MissionType.Mines or MissionType.AbandonedCity or MissionType.PregenitorCity) return false; else return true; } }
         public bool IsTacticalMission { get { if (Type == MissionType.Repair || Type == MissionType.Salvage || Type == MissionType.Ignore || Type == MissionType.ShipCombat) return false; else return true; } }
         public int MaximumSoldiers { get { if (Levels.ContainsKey(CurrentLevel) && Levels[CurrentLevel] != null) return Levels[CurrentLevel].MaximumSoldiers; return 4; } }
         public string Summary =>
@@ -32,6 +32,7 @@ namespace SpaceMercs {
                     MissionType.Mines => "Abandoned Mines",
                     MissionType.ShipCombat => "Ship Combat",
                     MissionType.AbandonedCity => "Ruined Structure",
+                    MissionType.PregenitorCity => "Ancient City",
                     MissionType.Repair => "Repair Ship",
                     MissionType.Salvage => "Salvage Empty Ship",
                     MissionType.Ignore => "Ignore",
@@ -62,7 +63,7 @@ namespace SpaceMercs {
                     }
                     return true;
                 }
-                if (Goal == MissionGoal.FindItem || Goal == MissionGoal.Artifact) { // You can quit whenever you pick up the one single item
+                if (Goal == MissionGoal.FindItem || Goal == MissionGoal.Artifact || Goal == MissionGoal.Pregenitor) { // You can quit whenever you pick up the one single item
                     if (MItem is null) throw new Exception($"No mission item in {Goal} mission");
                     foreach (Soldier s in Soldiers) {
                         if (s.HasItem(MItem)) return true;
@@ -266,7 +267,7 @@ namespace SpaceMercs {
         }
         public static Mission CreateRandomColonyMission(Colony cl, Random rand) {
             int iDiff = cl.GetRandomMissionDifficulty(rand);
-            MissionType tp = GenerateRandomColonyMissionType(cl.Location, rand);
+            MissionType tp = GenerateRandomColonyMissionType(cl.Location, rand, iDiff);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = cl.Location;
             if (m.Type == MissionType.BoardingParty) {
@@ -293,6 +294,7 @@ namespace SpaceMercs {
             return m;
         }
         public static Mission CreateRandomScannerMission(HabitableAO loc, Random rand) {
+            if (loc is Planet pl && pl.IsPregenitor) return CreatePregenitorMission(loc, rand);
             int iDiff = loc.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomScannerMissionType(rand);
             Mission m = new Mission(tp, iDiff, rand.Next());
@@ -307,6 +309,24 @@ namespace SpaceMercs {
             Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
             m.Goal = mgtp.Item1;
             m.MItem = mgtp.Item2;
+            m.InitialiseMissionBasedOnGoal(rand);
+            return m;
+        }
+        private static Mission CreatePregenitorMission(HabitableAO loc, Random rand) {
+            int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
+            if (iDiff < 14) iDiff = 14;
+            MissionType tp = MissionType.PregenitorCity;
+            Mission m = new Mission(tp, iDiff, rand.Next());
+            m.Location = loc;
+            m.RacialOpponent = null;
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Pregenitor mission");
+            m.Reward = 0d;
+            Sector sect = loc.GetSystem().Sector;
+            int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
+            m.Size = 3 + (maxDist > 2 ? 1 : 0);
+            m.LevelCount = 3 + maxDist + rand.Next(2);
+            m.Goal = MissionGoal.Pregenitor;
+            m.MItem = new MissionItem("Pregenitor Core", (double)iDiff, (double)iDiff * 80d);
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
@@ -334,7 +354,7 @@ namespace SpaceMercs {
             }
         }
 
-        public static MissionType GenerateRandomColonyMissionType(AstronomicalObject loc, Random rand) {
+        public static MissionType GenerateRandomColonyMissionType(AstronomicalObject loc, Random rand, int iDiff) {
             int r = rand.Next(100);
             if (loc is not HabitableAO hao) {
                 throw new Exception("Trying to run a mission near an AO that is not a HabitableAO");
@@ -345,7 +365,10 @@ namespace SpaceMercs {
             if (r < 20) return MissionType.AbandonedCity;
             else if (r < 40) return MissionType.Caves;
             else if (r < 60) return MissionType.Mines;
-            else if (r < 80) return MissionType.Surface;
+            else if (r < 80) {
+                if (rand.Next(20) > iDiff) return MissionType.Surface;
+                else return GenerateRandomColonyMissionType(loc, rand, 0);
+            }
             else return MissionType.BoardingParty;
         }
         public static MissionType GenerateRandomScannerMissionType(Random rand) {
@@ -491,9 +514,14 @@ namespace SpaceMercs {
         public string GetDescription() {
             Random rand = new Random(Seed);
             int r = rand.Next(100);
-            string strSz = "";
             StringBuilder sb = new StringBuilder(Summary);
             sb.AppendLine();
+            if (Type == MissionType.PregenitorCity) {
+                sb.AppendLine("Our scans of the planet surface indicate a massive abandoned structure deep below the surface.");
+                sb.AppendLine("These ruins appear to be extremely old and may be remnants of an unknown pregenitor race.");
+                sb.AppendLine($"Your task is to investigate the ruins and search out a {MItem} hidden inside.");
+                sb.AppendLine("Be warned - the ruins are likely very deep and highly dangerous. Make sure you are fully prepared!");
+            }
             if (Type == MissionType.AbandonedCity) {
                 string strSource = "Our scans of the planet surface indicate";
                 if (Location.Colony != null) {
@@ -503,9 +531,10 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " some abandoned ruins that show unusual energy fluctuations.");
                 else if (r < 60) sb.AppendLine(strSource + " some abandoned ruins that have only recently been discovered.");
                 else sb.AppendLine(strSource + " some abandoned ruins that show signs of hostile life within.");
-                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
+                if (Goal == MissionGoal.Pregenitor) sb.AppendLine("These ruins appear to be extremely old and may be remnants of an unknown pregenitor race.");
+                else sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
-                else sb.Append("We would like you to ");
+                else sb.Append("Your task is to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the ruins and clear out any opposition you find.");
                 if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the ruins, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the ruins and map every part of it for the official records.");
@@ -513,8 +542,8 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the ruins and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.");
+                if (Goal == MissionGoal.Pregenitor) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.\nBe warned - the ruins are likely very deep and highly dangerous.");
                 if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the ruins and reach the target area within {MaxTurns} rounds.");
-                strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.BoardingParty) {
                 string strSource = "Our long range scanners have detected";
@@ -524,7 +553,6 @@ namespace SpaceMercs {
                 else if (r < 60) sb.AppendLine(strSource + $" an apparently lifeless {ShipTarget!.ClassName} ship with potentially valuable cargo onboard.");
                 else sb.AppendLine(strSource + $" an apparently lifeless {ShipTarget!.ClassName} ship in dangerous proximity to a nearby military zone.");
                 sb.AppendLine("We would like you to investigate the ship, clear out any opposition and report back to us.");
-                strSz = $"Size : {ShipTarget!.ClassName}";
             }
             else if (Type == MissionType.Caves) {
                 string strSource = "Our scans of the planet surface indicate";
@@ -546,7 +574,6 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the cave system and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the cave system and reach the target area within {MaxTurns} rounds.");
-                strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Mines) {
                 string strSource = "Our scans of the planet surface indicate";
@@ -568,7 +595,6 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the mines and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the mines and reach the target area within {MaxTurns} rounds.");
-                strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else if (Type == MissionType.Surface) {
                 string strSource = "Our scans of the planet surface indicate";
@@ -590,9 +616,9 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate this area and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate this area and reach the target area within {MaxTurns} rounds.");
-                strSz = "Size : " + Utils.MapSizeToDescription(Size);
             }
             else return sb.ToString(); // Travel mission (i.e. description is irrelevant)
+            string strSz = "Size : " + Utils.MapSizeToDescription(Size);
             if (Goal == MissionGoal.Defend) sb.AppendLine($"You will face {MaxWaves} waves of enemy attacks");
             if (Goal == MissionGoal.Gather) sb.AppendLine("We will give you a share of the profits from the items you gather.");
             if (Goal == MissionGoal.Artifact) sb.AppendLine("This powerful artifact weapon will be yours to keep, should you succeed.");
