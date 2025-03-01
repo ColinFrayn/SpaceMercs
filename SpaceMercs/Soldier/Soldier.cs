@@ -63,6 +63,11 @@ namespace SpaceMercs {
             }
         }
 
+        // Statistics
+        public int KillCount { get; private set; }
+        public Creature? ToughestKill { get; private set; }
+
+        // Utilities
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
         public bool CanSee(IEntity? en) {
             if (en == null) return false;
@@ -547,6 +552,13 @@ namespace SpaceMercs {
             PointsToSpend--;
             CalculateMaxStats();
         }
+        public void RegisterKill(Creature cr, ShowMessageDelegate showMessage) {
+            KillCount++;
+            if (ToughestKill is null || cr.Experience > ToughestKill.Experience) {
+                ToughestKill = cr;
+                showMessage($"{Name} has registered a new toughest kill : {cr.Name}", null);
+            }
+        }
 
         // Display stuff
         private bool bShieldsInTexture = false;
@@ -613,6 +625,10 @@ namespace SpaceMercs {
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Health", MaxHealth);
+            KillCount = xml.SelectNodeInt("KillCount", 0);
+            XmlNode? xc = xml.SelectSingleNode("ToughestKill");
+            ToughestKill = xc is null ? null : new Creature(xc.FirstChild, null);
+
             // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {
                 if (double.TryParse(xml.SelectNodeText("Facing"), out double fac)) {
@@ -753,11 +769,17 @@ namespace SpaceMercs {
             if (PlayerTeam != null) file.WriteLine(" <Stamina>" + Stamina + "</Stamina>");
             if (PlayerTeam != null) file.WriteLine(" <Shields>" + Shields + "</Shields>");
             if (PlayerTeam != null) file.WriteLine(" <Facing>" + Facing + "</Facing>");
-            file.WriteLine(" <Level>" + Level + "</Level>");
-            file.WriteLine(" <XP>" + Experience + "</XP>");
-            file.WriteLine(" <Gender>" + Gender + "</Gender>");
-            file.WriteLine(" <Race>" + Race.Name + "</Race>");
-            file.WriteLine(" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
+            file.WriteLine($" <Level>{Level}</Level>");
+            file.WriteLine($" <XP>{Experience}</XP>");
+            file.WriteLine($" <Gender>{Gender}</Gender>");
+            file.WriteLine($" <Race>{Race.Name}</Race>");
+            file.WriteLine($" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
+            if (KillCount > 0) file.WriteLine($" <KillCount>{KillCount}</KillCount>");
+            if (ToughestKill is not null) {
+                file.WriteLine(" <ToughestKill>");
+                ToughestKill.SaveToFile(file, true);
+                file.WriteLine(" </ToughestKill>");
+            }
             if (GoTo != Point.Empty && GoTo != Location) file.WriteLine(" <GoTo X=\"" + GoTo.X + "\" Y=\"" + GoTo.Y + "\"/>");
             file.WriteLine(" <Colour>" + ColorTranslator.ToHtml(PrimaryColor) + "</Colour>");
             if (PointsToSpend > 0) {

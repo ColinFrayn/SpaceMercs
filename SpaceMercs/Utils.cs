@@ -210,7 +210,14 @@ namespace SpaceMercs {
                         }
                     }
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
-                    if (tgt is Creature cr && cr.Health > 0.0) cr.CheckChangeTarget(TotalDam, source);
+                    if (tgt is Creature cr) {
+                        if (cr.Health <= 0d) {
+                            if (source is Soldier sKiller) sKiller.RegisterKill(cr, showMessage);
+                        }
+                        else {
+                            cr.CheckChangeTarget(TotalDam, source);
+                        }
+                    }
 
                     // Apply effect?
                     if (wp != null) {

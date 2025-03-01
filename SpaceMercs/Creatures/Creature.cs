@@ -248,7 +248,7 @@ namespace SpaceMercs {
         }
         public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
             Health = 0.0;
-            CurrentLevel.KillCreature(this, applyEffect, fact);
+            CurrentLevel?.KillCreature(this, applyEffect, fact);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double>();
@@ -307,7 +307,7 @@ namespace SpaceMercs {
         public IEntity? CurrentTarget { get; private set; }
         private double MovementCost { get { return Type.MovementCost / SpeedModifier(); } }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
-        private readonly MissionLevel CurrentLevel;
+        private readonly MissionLevel? CurrentLevel;
         private readonly Random rnd = new Random();
         public int Experience {
             get {
@@ -356,15 +356,20 @@ namespace SpaceMercs {
             QuestItem = false;
             Visible = new bool[0, 0];
         }
-        public Creature(XmlNode xml, MissionLevel lev) {
+        public Creature(XmlNode xml, MissionLevel? lev) {
             CurrentLevel = lev;
-            string strName = xml.Attributes!["Type"]?.Value ?? string.Empty;
+            string strName = xml.GetAttributeText("Type", string.Empty);
             Type = StaticData.GetCreatureTypeByName(strName) ?? throw new Exception("Could not ID Type for Creature : " + strName);
+            Level = xml.SelectNodeInt("Level");
+            string strOverride = xml.SelectNodeText("OverrideRace");
+            if (!string.IsNullOrEmpty(strOverride)) OverrideRace = StaticData.GetRaceByName(strOverride);
+
+            // We're just saving this creature by description, e.g. reduced mode
+            if (lev is null) return;
 
             XmlNode? xmll = xml.SelectSingleNode("Location") ?? throw new Exception("Could not ID Location for Creature : " + strName);
             X = xmll.GetAttributeInt("X");
             Y = xmll.GetAttributeInt("Y");
-            Level = xml.SelectNodeInt("Level");
             string strFacing = xml.SelectNodeText("Facing");
             if (double.TryParse(strFacing, out double fac)) {
                 Facing = fac;
@@ -375,9 +380,6 @@ namespace SpaceMercs {
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Shields", MaxShields);
-
-            string strOverride = xml.SelectNodeText("OverrideRace");
-            if (!string.IsNullOrEmpty(strOverride)) OverrideRace = StaticData.GetRaceByName(strOverride);
 
             IsAlert = (xml.SelectSingleNode("Alert") is not null);
             QuestItem = (xml.SelectSingleNode("QuestItem") is not null);
@@ -432,31 +434,34 @@ namespace SpaceMercs {
             Visible = new bool[0, 0];
         }
 
-        public void SaveToFile(StreamWriter file) {
+        public void SaveToFile(StreamWriter file, bool reducedMode = false) {
             file.WriteLine("<Creature Type=\"" + Type.Name + "\">");
-            file.WriteLine(" <Location X=\"" + X + "\" Y=\"" + Y + "\"/>");
-            if (Health != MaxHealth) file.WriteLine(" <Health>" + Health.ToString("N2") + "</Health>");
-            if (Stamina != MaxStamina) file.WriteLine(" <Stamina>" + Stamina.ToString("N2") + "</Stamina>");
-            if (Shields != MaxShields) file.WriteLine(" <Shields>" + Shields.ToString("N2") + "</Shields>");
             file.WriteLine(" <Level>" + Level + "</Level>");
-            file.WriteLine(" <Facing>" + Facing + "</Facing>");
             if (OverrideRace != null) file.WriteLine(" <OverrideRace>" + OverrideRace.Name + "</OverrideRace>");
-            if (EquippedWeapon != null && Type.Weapons.Count > 1) file.WriteLine(" <Weapon>" + EquippedWeapon.Type.Name + "</Weapon>"); // Save only if ambiguous
-            if (CurrentTarget != null) {
-                file.WriteLine(" <Target X=\"" + CurrentTarget.X + "\" Y=\"" + CurrentTarget.Y + "\"/>");
-            }
-            if (Investigate != Point.Empty) file.WriteLine(" <Investigate X=\"" + Investigate.X + "\" Y=\"" + Investigate.Y + "\"/>");
-            if (HidingPlace != Point.Empty) file.WriteLine(" <HidingPlace X=\"" + HidingPlace.X + "\" Y=\"" + HidingPlace.Y + "\"/>");
-            if (_Effects.Count > 0) {
-                file.WriteLine(" <Effects>");
-                foreach (Effect e in Effects) {
-                    e.SaveToFile(file);
+            // We use reduced mode for storing a creature for e.g. the toughest kill stats, but not one that is actually alive in a mission
+            if (!reducedMode) {
+                file.WriteLine(" <Location X=\"" + X + "\" Y=\"" + Y + "\"/>");
+                if (Health != MaxHealth) file.WriteLine(" <Health>" + Health.ToString("N2") + "</Health>");
+                if (Stamina != MaxStamina) file.WriteLine(" <Stamina>" + Stamina.ToString("N2") + "</Stamina>");
+                if (Shields != MaxShields) file.WriteLine(" <Shields>" + Shields.ToString("N2") + "</Shields>");
+                file.WriteLine(" <Facing>" + Facing + "</Facing>");
+                if (EquippedWeapon != null && Type.Weapons.Count > 1) file.WriteLine(" <Weapon>" + EquippedWeapon.Type.Name + "</Weapon>"); // Save only if ambiguous
+                if (CurrentTarget != null) {
+                    file.WriteLine(" <Target X=\"" + CurrentTarget.X + "\" Y=\"" + CurrentTarget.Y + "\"/>");
                 }
-                file.WriteLine(" </Effects>");
+                if (Investigate != Point.Empty) file.WriteLine(" <Investigate X=\"" + Investigate.X + "\" Y=\"" + Investigate.Y + "\"/>");
+                if (HidingPlace != Point.Empty) file.WriteLine(" <HidingPlace X=\"" + HidingPlace.X + "\" Y=\"" + HidingPlace.Y + "\"/>");
+                if (_Effects.Count > 0) {
+                    file.WriteLine(" <Effects>");
+                    foreach (Effect e in Effects) {
+                        e.SaveToFile(file);
+                    }
+                    file.WriteLine(" </Effects>");
+                }
+                if (IsAlert) file.WriteLine(" <Alert/>");
+                if (QuestItem) file.WriteLine(" <QuestItem/>");
+                if (HasMoved) file.WriteLine(" <Moved/>");
             }
-            if (IsAlert) file.WriteLine(" <Alert/>");
-            if (QuestItem) file.WriteLine(" <QuestItem/>");
-            if (HasMoved) file.WriteLine(" <Moved/>");
             file.WriteLine("</Creature>");
         }
 

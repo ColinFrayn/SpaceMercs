@@ -4,9 +4,21 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
+Stats:
+- Kill count per soldier
+- Strongest enemy killed
+
 Add Individual OldOne systems out in the second ring.
-- Collect artifacts & keep track of the number & level gathered. Maybe show stats?
+- Keep track of the number & level gathered. Maybe show stats?
 - Return to Homeworld or other race Homeworld for additional +relations or cash. (Hand in where for relations???)
+
+Abandoned space hulks
+- As AOs
+- In some systems (range >= 2)
+- Single mission, get object = Space Hulk Core. Same as for Precursor Core.
+- Maybe move precursor cities to range 3 & higher?
+- Experiment moving humans out into second ring
+- Reduce the amount by which population reduces colony growth rate (but maybe not new colony expansion?)
 
 ==================================================================================================================
 
