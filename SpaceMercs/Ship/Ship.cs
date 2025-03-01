@@ -699,6 +699,7 @@ namespace SpaceMercs {
             sh.Owner = null;
             sh.Hull = sh.Type.MaxHull;
             sh.Name = "Enemy Ship";
+            sh.Seed = rand.Next(1000000);
 
             // Set up equipment (we only care about weapons, equipment, armour, engine)
             double dCash = ((Math.Pow(1.5d,dDiff) * 40d) + (sh.Type.MaxHull * dDiff * 4d) + 20d) / 5d;
@@ -741,8 +742,16 @@ namespace SpaceMercs {
                 }
             }
 
-            sh.Seed = rand.Next(1000000);
             sh.InitialiseForBattle();
+            return sh;
+        }
+        public static Ship GenerateSpaceHulkShip(int iDiff) {
+            Random rand = new Random();
+            Ship sh = new Ship(ShipType.SetupRandomShipType(iDiff, rand.Next(), true));
+            sh.Owner = null;
+            sh.Hull = sh.Type.MaxHull;
+            sh.Name = "Abandoned Hulk";
+            sh.Seed = rand.Next(1000000);
             return sh;
         }
 

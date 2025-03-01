@@ -40,6 +40,10 @@ namespace SpaceMercs {
                     else if (LevelID == 2) return MissionType.Mines;
                     else return MissionType.AbandonedCity;
                 }
+                else if (ParentMission.Type == MissionType.SpaceHulk) {
+                    if (LevelID == 0) return MissionType.SpaceHulk;
+                    else return MissionType.AbandonedCity;
+                }
                 else return ParentMission.Type;
             }
         }
@@ -582,18 +586,19 @@ namespace SpaceMercs {
         public void GenerateMap() {
             rand = new Random(ParentMission.Seed + LevelID); // Make it repeatable :)
             SetupMapDimensions();
-            if (ParentMission.IsShipMission) GenerateShipMap();
-            else if (Type == Mission.MissionType.AbandonedCity) GenerateDungeonMap();
-            else if (Type == Mission.MissionType.Mines) GenerateDungeonMap(true);
-            else if (Type == Mission.MissionType.Caves) GenerateCaveMap();
-            else if (Type == Mission.MissionType.Surface) GenerateSurfaceMap();
+            if (Type == MissionType.SpaceHulk) GenerateShipMap();
+            else if (ParentMission.IsShipMission) GenerateShipMap();
+            else if (Type == MissionType.AbandonedCity) GenerateDungeonMap();
+            else if (Type == MissionType.Mines) GenerateDungeonMap(true);
+            else if (Type == MissionType.Caves) GenerateCaveMap();
+            else if (Type == MissionType.Surface) GenerateSurfaceMap();
             else throw new NotImplementedException();
             Explored = new bool[Width, Height];
             Visible = new bool[Width, Height];
             EntityMap = new IEntity[Width, Height];
             GenerateCreatures();
             // Add goal item, if required
-            if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact or Mission.MissionGoal.Pregenitor) {
+            if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact) {
                 if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
                 if (LevelID == ParentMission.LevelCount - 1) {
                     InsertGoalItem(ParentMission.MItem);

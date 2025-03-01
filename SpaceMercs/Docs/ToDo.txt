@@ -2,21 +2,22 @@
 ToDo List
 -------------------------------------------------
 
+** MapViewGUI.OpenScanPlanetDialog() : Is it's a SpaceHulk then HAO == null
+
 Display when a weapon is recharging somehow
 
-Stats: Display Kill count per soldier and Strongest enemy killed
+Stats:
+- Display Kill count per soldier and Strongest enemy killed
+- Highest difficulty mission completed [TRACK]
+- Number of Precursor Cores gathered, and most valuable [TRACK]
+- Number of SpaceHulk Cores, and most valuable [TRACK]
 
-Add Individual OldOne systems out in the second ring.
-- Keep track of the number & level gathered. Maybe show stats?
-- Return to Homeworld or other race Homeworld for additional +relations or cash. (Hand in where for relations???)
+PregenitorCore, SpaceHulkCore
+- Keep track of the number & level gathered
+- Return to Homeworld or other race Homeworld for additional +relations. (HOW?)
+-- Or sell for cash
 
-Abandoned space hulks
-- As AOs
-- In some systems (range >= 2)
-- Single mission, get object = Space Hulk Core. Same as for Precursor Core.
-- Maybe move precursor cities to range 3 & higher?
-- Experiment moving humans out into second ring
-- Reduce the amount by which population reduces colony growth rate (but maybe not new colony expansion?)
+Experiment moving human colonies & trade routes out into second ring
 
 ==================================================================================================================
 
@@ -24,6 +25,8 @@ Abandoned space hulks
 ---------------------
 Backburner : Features
 ---------------------
+
+Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 

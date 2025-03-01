@@ -98,6 +98,7 @@ namespace SpaceMercs {
                 if (aoTravelTo is Star st) return st.GetOutermostPlanet() ?? throw new Exception("Could not find suitable planet target for travel");
                 else if (aoTravelTo is HabitableAO hao) return hao;
                 else if (aoTravelTo is HyperGate hg) return hg;
+                else if (aoTravelTo is SpaceHulk sh) return sh;
                 throw new Exception("Travel Destination is not a valid target");
             }
         }

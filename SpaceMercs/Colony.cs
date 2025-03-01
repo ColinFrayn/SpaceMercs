@@ -563,8 +563,8 @@ namespace SpaceMercs {
                 dt *= Const.TradeRouteColonyGrowthRate;
             }
 
-            // Slow down as the civ gets larger, or growth will get exponential
-            dt *= Math.Max(20, Owner.Population) / 20d;
+            // Slow down as the civ gets larger, or growth will get far too rapid
+            dt *= Math.Max(40, Owner.Population) / 40d;
 
             return (int)dt;
         }

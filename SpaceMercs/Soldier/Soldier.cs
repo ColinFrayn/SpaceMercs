@@ -66,6 +66,11 @@ namespace SpaceMercs {
         // Statistics
         public int KillCount { get; private set; }
         public Creature? ToughestKill { get; private set; }
+        public int MostDifficultMission { get; private set; }
+        public int PrecursorCoreCount { get; private set; }
+        public int SpaceHulkCoreCount { get; private set; }
+        public int PrecursorCoreMaximumValue { get; private set; }
+        public int SpaceHulkCoreMaximumValue { get; private set; }
 
         // Utilities
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }

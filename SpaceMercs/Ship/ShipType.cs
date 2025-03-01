@@ -341,7 +341,7 @@ namespace SpaceMercs {
         }
 
         // Setup a random ship type
-        public static ShipType SetupRandomShipType(double dDiff, int seed) {
+        public static ShipType SetupRandomShipType(double dDiff, int seed, bool isHulk = false) {
             Random rand = new Random(seed);
             ShipType tp = new ShipType(seed, dDiff);
 
@@ -350,6 +350,7 @@ namespace SpaceMercs {
             int size = 1;
             while (rand.NextDouble() > (1d + ((double)size / 20d) - (Math.Pow(dDiff,0.6) / 5d))) size++;
             size = 2 + (int)((rand.NextDouble() + 1d) * (double)size * 4d);
+            if (isHulk) size *= 2;
 
             while (size > 0) {
                 int r = rand.Next(3);

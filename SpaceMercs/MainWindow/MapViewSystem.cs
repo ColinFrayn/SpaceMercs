@@ -214,6 +214,39 @@ namespace SpaceMercs.MainWindow {
                     TriangleFocus.Flat.BindAndDraw();
                 }
             }
+
+            // Draw the SpaceHulk, if there is one
+            if (SystemStar.HasSpaceHulk) {
+                SpaceHulk sh = SystemStar.GetSpaceHulk()!;
+                float scale = Const.PlanetScale;
+                Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
+                fullShaderProgram.SetUniform("view", squashM * pTranslateM);
+                flatColourShaderProgram.SetUniform("view", squashM * pTranslateM);
+                sh.DrawSelected(fullShaderProgram, 0, elapsedSeconds);
+                float dist2 = ((px - mx) * (px - mx) * (aspect * aspect)) + (py - my) * (py - my);
+                if (dist2 <= scale * scale) {
+                    aoHover = sh;
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.2f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", SelectionAnnulusColour);
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    Annulus.Annulus32.BindAndDraw();
+                }
+                if (aoSelected == sh) {
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.1f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(0.2f, 1f, 0.4f, 1f));
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    Annulus.Annulus32.BindAndDraw();
+                }
+                if (aoCurrentPosition == sh) {
+                    Matrix4 pScaleM = Matrix4.CreateScale(scale * 1.4f);
+                    flatColourShaderProgram.SetUniform("model", pScaleM);
+                    flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                    GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
+                    TriangleFocus.Flat.BindAndDraw();
+                }
+            }
         }
 
         // Draw the system name and affiliation on the system view

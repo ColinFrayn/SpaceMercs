@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class MissionItem : IItem {
-        public string Name {  
+        public string Name {
             get {
                 return LegendaryItem?.Name ?? _name;
             }
@@ -13,6 +13,8 @@ namespace SpaceMercs {
         public double Mass { get; private set; }
         public double Cost { get; private set; }
         public IItem? LegendaryItem { get; private set; }
+        public bool IsPregenitorCore { get; private set; }
+        public bool IsSpaceHulkCore { get; private set; }
 
         private static readonly string[] ItemTypes = new string[] { "Egg", "Diamond", "Emerald", "Geode", "Bone", "Skull", "Crystal", "Ruby", "Statue", "Medal", "Device" };
         private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine" };
@@ -33,16 +35,30 @@ namespace SpaceMercs {
             if (xml is null) throw new Exception("Null Mission");
             Mass = xml.GetAttributeDouble("Mass");
             Cost = xml.GetAttributeDouble("Cost");
+            IsPregenitorCore = xml.SelectSingleNode("Pregenitor") != null;
+            IsSpaceHulkCore = xml.SelectSingleNode("Hulk") != null;
             if (xml.Attributes?["Name"] is null) {
                 _name = xml.InnerText;
             }
             else {
                 _name = xml.GetAttributeText("Name", string.Empty);
                 XmlNode? xmlni = xml.FirstChild;
-                if (xmlni is not null) {
+                if (!IsPregenitorCore && !IsSpaceHulkCore && xmlni is not null) {
                     LegendaryItem = Utils.LoadItem(xmlni);
                 }
             }
+        }
+
+        public static MissionItem GeneratePregenitorCore(int iDiff) {
+            MissionItem it = new MissionItem("Pregenitor Core", (double)iDiff, (double)iDiff * 150d);
+            it.IsPregenitorCore = true;
+            return it;
+        }
+
+        public static MissionItem GenerateSpaceHulkCore(int iDiff) {
+            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff, (double)iDiff * 80d);
+            it.IsSpaceHulkCore = true;
+            return it;
         }
 
         public void SaveToFile(StreamWriter file) {
@@ -51,6 +67,9 @@ namespace SpaceMercs {
                 file.WriteLine();
                 LegendaryItem.SaveToFile(file);
             }
+            else if (IsSpaceHulkCore) file.Write("<Hulk/>");
+            else if (IsPregenitorCore) file.Write("<Pregenitor/>");
+
             file.WriteLine("</MissionItem>");
         }
 
@@ -84,6 +103,8 @@ namespace SpaceMercs {
                 hash = hash * 41 + Mass.GetHashCode();
                 if (!string.IsNullOrEmpty(Name)) hash = hash * 23 + Name.GetHashCode();
                 if (LegendaryItem is not null) hash = hash * 47 + LegendaryItem.GetHashCode();
+                if (IsPregenitorCore) hash = hash ^ 131;
+                if (IsSpaceHulkCore) hash = hash ^ 997;
                 return hash;
             }
         }
@@ -94,6 +115,8 @@ namespace SpaceMercs {
             if (mi.Mass != Mass) return false;
             if ((mi.LegendaryItem is null) != (LegendaryItem is null)) return false;
             if (mi.LegendaryItem is not null && mi.LegendaryItem.GetHashCode() != LegendaryItem!.GetHashCode()) return false;
+            if (IsPregenitorCore != mi.IsPregenitorCore) return false;
+            if (IsSpaceHulkCore != mi.IsSpaceHulkCore) return false;
             return true;
         }
         public override string ToString() {

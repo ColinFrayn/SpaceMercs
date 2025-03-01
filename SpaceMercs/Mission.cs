@@ -6,8 +6,8 @@ using static SpaceMercs.Delegates;
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
     public class Mission {
-        public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, PregenitorCity, Repair, Salvage, Ignore }
-        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather, Defend, Artifact, Countdown, Pregenitor }
+        public enum MissionType { ShipCombat, RepelBoarders, BoardingParty, Surface, Caves, Mines, AbandonedCity, PregenitorCity, SpaceHulk, Repair, Salvage, Ignore }
+        public enum MissionGoal { KillAll, ExploreAll, KillBoss, FindItem, Gather, Defend, Artifact, Countdown }
         public MissionType Type { get; private set; }
         public MissionGoal Goal { get; private set; }
         public Ship? ShipTarget { get; private set; }
@@ -20,7 +20,7 @@ namespace SpaceMercs {
         public int Size { get; private set; } // Relevant for caves, mines, dungeon & surface maps
         public int LevelCount { get; private set; }
         public int CurrentLevel { get; private set; }
-        public bool IsShipMission { get { if (Type is MissionType.Surface or MissionType.Caves or MissionType.Mines or MissionType.AbandonedCity or MissionType.PregenitorCity) return false; else return true; } }
+        public bool IsShipMission { get { if (Type is MissionType.Surface or MissionType.Caves or MissionType.Mines or MissionType.AbandonedCity or MissionType.PregenitorCity or MissionType.SpaceHulk) return false; else return true; } }
         public bool IsTacticalMission { get { if (Type == MissionType.Repair || Type == MissionType.Salvage || Type == MissionType.Ignore || Type == MissionType.ShipCombat) return false; else return true; } }
         public int MaximumSoldiers { get { if (Levels.ContainsKey(CurrentLevel) && Levels[CurrentLevel] != null) return Levels[CurrentLevel].MaximumSoldiers; return 4; } }
         public string Summary =>
@@ -32,7 +32,8 @@ namespace SpaceMercs {
                     MissionType.Mines => "Abandoned Mines",
                     MissionType.ShipCombat => "Ship Combat",
                     MissionType.AbandonedCity => "Ruined Structure",
-                    MissionType.PregenitorCity => "Ancient City",
+                    MissionType.PregenitorCity => "Ancient Ruins",
+                    MissionType.SpaceHulk => "Abandoned Hulk",
                     MissionType.Repair => "Repair Ship",
                     MissionType.Salvage => "Salvage Empty Ship",
                     MissionType.Ignore => "Ignore",
@@ -63,7 +64,7 @@ namespace SpaceMercs {
                     }
                     return true;
                 }
-                if (Goal == MissionGoal.FindItem || Goal == MissionGoal.Artifact || Goal == MissionGoal.Pregenitor) { // You can quit whenever you pick up the one single item
+                if (Goal == MissionGoal.FindItem || Goal == MissionGoal.Artifact) { // You can quit whenever you pick up the one single item
                     if (MItem is null) throw new Exception($"No mission item in {Goal} mission");
                     foreach (Soldier s in Soldiers) {
                         if (s.HasItem(MItem)) return true;
@@ -156,7 +157,9 @@ namespace SpaceMercs {
 
             XmlNode? xg = xml.SelectSingleNode("Goal");
             if (xg is not null) {
-                Goal = (MissionGoal)Enum.Parse(typeof(MissionGoal), xg.InnerText);
+                string goalText = xg.InnerText;
+                if (string.Equals(goalText, "Pregenitor")) goalText = "FindItem"; // Backwards compatibility
+                Goal = (MissionGoal)Enum.Parse(typeof(MissionGoal), goalText);
             }
             else Goal = MissionGoal.KillAll;
 
@@ -293,12 +296,14 @@ namespace SpaceMercs {
             }
             return m;
         }
-        public static Mission CreateRandomScannerMission(HabitableAO loc, Random rand) {
-            if (loc is Planet pl && pl.IsPregenitor) return CreatePregenitorMission(loc, rand);
+        public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand) {
+            if (loc is SpaceHulk sh) return CreateSpaceHulkMission(loc, rand);
+            if (loc is Planet pl && pl.IsPregenitor) return CreatePregenitorMission(pl, rand);
+            if (loc is not HabitableAO hao) throw new Exception("Attempting to create a mission in a non-habitable AO");
             int iDiff = loc.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomScannerMissionType(rand);
             Mission m = new Mission(tp, iDiff, rand.Next());
-            m.Location = loc;
+            m.Location = hao;
             if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
             else m.RacialOpponent = loc.GetRandomRace(rand);
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
@@ -314,19 +319,39 @@ namespace SpaceMercs {
         }
         private static Mission CreatePregenitorMission(HabitableAO loc, Random rand) {
             int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
-            if (iDiff < 14) iDiff = 14;
+            if (iDiff < 15) iDiff = 15;
             MissionType tp = MissionType.PregenitorCity;
             Mission m = new Mission(tp, iDiff, rand.Next());
-            m.Location = loc;
             m.RacialOpponent = null;
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Pregenitor mission");
             m.Reward = 0d;
+            m.Location = loc;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
             m.Size = 3 + (maxDist > 2 ? 1 : 0);
             m.LevelCount = 3 + maxDist + rand.Next(2);
-            m.Goal = MissionGoal.Pregenitor;
-            m.MItem = new MissionItem("Pregenitor Core", (double)iDiff, (double)iDiff * 80d);
+            m.Goal = MissionGoal.FindItem;
+            m.MItem = MissionItem.GeneratePregenitorCore(iDiff);
+            m.InitialiseMissionBasedOnGoal(rand);
+            return m;
+        }
+        private static Mission CreateSpaceHulkMission(AstronomicalObject loc, Random rand) {
+            int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
+            if (iDiff < 12) iDiff = 12;
+            MissionType tp = MissionType.SpaceHulk;
+            Mission m = new Mission(tp, iDiff, rand.Next());
+            //m.Location = loc;
+            m.RacialOpponent = null;
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
+            m.Reward = 0d;
+            Sector sect = loc.GetSystem().Sector;
+            int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
+            m.Size = 3 + (maxDist > 2 ? 1 : 0);
+            m.LevelCount = 2 + maxDist + rand.Next(2);
+            m.Goal = MissionGoal.FindItem;
+            m.MItem = MissionItem.GenerateSpaceHulkCore(iDiff);
+            // Ship map for top level
+            m.ShipTarget = Ship.GenerateSpaceHulkShip(iDiff);
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
@@ -522,6 +547,12 @@ namespace SpaceMercs {
                 sb.AppendLine($"Your task is to investigate the ruins and search out a {MItem} hidden inside.");
                 sb.AppendLine("Be warned - the ruins are likely very deep and highly dangerous. Make sure you are fully prepared!");
             }
+            if (Type == MissionType.SpaceHulk) {
+                sb.AppendLine("Our scans of this enormous abandoned space vessel indicate exotic energy readings in its core.");
+                sb.AppendLine("This vessel is clearly extremely old and may have been built by an unknown pregenitor race.");
+                sb.AppendLine($"Your task is to investigate the vessel and search out a {MItem} hidden inside.");
+                sb.AppendLine("Be warned - life signs have been detected within and the task will be very dangerous. Make sure you are fully prepared!");
+            }
             if (Type == MissionType.AbandonedCity) {
                 string strSource = "Our scans of the planet surface indicate";
                 if (Location.Colony != null) {
@@ -531,8 +562,7 @@ namespace SpaceMercs {
                 if (r < 30) sb.AppendLine(strSource + " some abandoned ruins that show unusual energy fluctuations.");
                 else if (r < 60) sb.AppendLine(strSource + " some abandoned ruins that have only recently been discovered.");
                 else sb.AppendLine(strSource + " some abandoned ruins that show signs of hostile life within.");
-                if (Goal == MissionGoal.Pregenitor) sb.AppendLine("These ruins appear to be extremely old and may be remnants of an unknown pregenitor race.");
-                else sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
+                sb.AppendLine("One specific area is showing unusual readings that are changing very rapidly");
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("Your task is to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the ruins and clear out any opposition you find.");
@@ -542,7 +572,6 @@ namespace SpaceMercs {
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the ruins and gather as many {MItem}s as you can.");
                 if (Goal == MissionGoal.Defend) sb.AppendLine($"defend a {MItem} against a determined enemy assault");
                 if (Goal == MissionGoal.Artifact) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.");
-                if (Goal == MissionGoal.Pregenitor) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.\nBe warned - the ruins are likely very deep and highly dangerous.");
                 if (Goal == MissionGoal.Countdown) sb.AppendLine($"investigate the ruins and reach the target area within {MaxTurns} rounds.");
             }
             else if (Type == MissionType.BoardingParty) {

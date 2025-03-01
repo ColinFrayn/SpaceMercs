@@ -162,8 +162,13 @@ namespace SpaceMercs {
                 if (diff < 2d) diff = 2d;
                 return (int)diff + offset;
             }
-            if (this is HyperGate gate) {
+            if (this is HyperGate) {
                 double diff = (rand.NextDouble() * 1.5d) + 3d + (rand.NextDouble() * 1.25d);
+                if (diff < 3d) diff = 3d;
+                return (int)diff + offset;
+            }
+            if (this is SpaceHulk) {
+                double diff = (rand.NextDouble() * 1.5d) + 3.5d + (rand.NextDouble() * 1.25d);
                 if (diff < 3d) diff = 3d;
                 return (int)diff + offset;
             }

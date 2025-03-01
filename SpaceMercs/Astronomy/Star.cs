@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Windows;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -41,20 +42,36 @@ namespace SpaceMercs {
             }
         }
         public bool HasHyperGate { get { return TradeRoutes.Count > 0; } }
-        public double HyperGateOrbit { 
+        public bool HasSpaceHulk { get; private set; }
+        public double HyperGateOrbit {
             get {
                 if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
                 Planet pl = _planets.Last();
                 return pl.OrbitalDistance * 1.5;
-            } 
+            }
+        }
+        public double SpaceHulkOrbit {
+            get {
+                if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+                Planet pl = _planets.Last();
+                return pl.OrbitalDistance * 2.0;
+            }
         }
         private HyperGate _hypergate;
-        private readonly object _hglock = new object();
+        private SpaceHulk _spaceHulk;
+        private readonly object _hglock = new object(), _shLock = new object();
         public HyperGate? GetHyperGate() {
             if (!HasHyperGate) return null;
             lock (_hglock) {
                 _hypergate ??= new HyperGate(this, HyperGateOrbit);
                 return _hypergate;
+            }
+        }
+        public SpaceHulk? GetSpaceHulk() {
+            if (!HasSpaceHulk) return null;
+            lock (_shLock) {
+                _spaceHulk ??= new SpaceHulk(this, SpaceHulkOrbit);
+                return _spaceHulk;
             }
         }
 
@@ -270,6 +287,16 @@ namespace SpaceMercs {
 
             // Finally, clear out the planets
             _planets?.Clear();
+
+            // Does it have a space hulk?
+            HasSpaceHulk = false;
+            if (Sector is not null) {
+                int maxDist = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
+                if (maxDist >= 2) {
+                    HasSpaceHulk = (rnd.Next(8 + maxDist) == 1);
+                }
+            }
+
             bGenerated = false;
         }
 

@@ -523,22 +523,25 @@ namespace SpaceMercs.MainWindow {
             }
 
             bool bCanScanHere = false;
-            if (view == ViewMode.ViewSystem && PlayerTeam.CurrentPositionHAO != null && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
-                if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
-                    if (PlayerTeam.CurrentPosition is Planet pl) {
-                        if (pl.Type != Planet.PlanetType.Gas) {
+            if (view == ViewMode.ViewSystem && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
+                if (PlayerTeam.CurrentPositionHAO != null) {
+                    if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
+                        if (PlayerTeam.CurrentPosition is Planet pl) {
+                            if (pl.Type != Planet.PlanetType.Gas) {
+                                bCanScanHere = true;
+                            }
+                        }
+                        if (PlayerTeam.CurrentPosition is Moon) {
                             bCanScanHere = true;
                         }
                     }
-                    if (PlayerTeam.CurrentPosition is Moon) {
-                        bCanScanHere = true;
-                    }
                 }
-            }
-            if (bCanScanHere) {
-                gbScan!.Activate();
-                if (!(PlayerTeam.CurrentPositionHAO?.Scanned ?? false)) gbScan!.UpdateText("Scan");
-                else gbScan.UpdateText("Missions");
+                else if (ao is SpaceHulk) bCanScanHere = true;
+                if (bCanScanHere) {
+                    gbScan!.Activate();
+                    if (!(PlayerTeam.CurrentPositionHAO?.Scanned ?? false)) gbScan!.UpdateText("Scan");
+                    else gbScan.UpdateText("Missions");
+                }
             }
 
             // Set up hyperspace
