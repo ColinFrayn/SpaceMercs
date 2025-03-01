@@ -4,9 +4,7 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
-Stats:
-- Kill count per soldier
-- Strongest enemy killed
+Stats: Display Kill count per soldier and Strongest enemy killed
 
 Add Individual OldOne systems out in the second ring.
 - Keep track of the number & level gathered. Maybe show stats?

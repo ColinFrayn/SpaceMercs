@@ -25,6 +25,11 @@
     <Filename>DesertCreatures.xml</Filename>
     <Locations>Desert</Locations>
   </CreatureGroup>
+  <CreatureGroup Name="Elementals">
+    <Filename>Elementals.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave</Locations>
+    <MinSectorRange>2</MinSectorRange>
+  </CreatureGroup>
   <CreatureGroup Name="Fungoids">
     <Filename>Fungoids.xml</Filename>
     <Locations>Oceanic,Rocky,Cave,Ship</Locations>

@@ -467,7 +467,7 @@ namespace SpaceMercs {
 
         // Actions
         public void Move(Utils.Direction d, PlaySoundDelegate playSound) {
-            if (Stamina < MovementCost) return;
+            if (Stamina < MovementCost || CurrentLevel is null) return;
             SetFacing(d);
             int oldx = X, oldy = Y;
             if (d == Utils.Direction.West && X > 0) {
@@ -569,6 +569,7 @@ namespace SpaceMercs {
         }
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;
+            if (CurrentLevel is null) return;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
             HasMoved = false;
             if (!IsAlert) return;
@@ -632,7 +633,7 @@ namespace SpaceMercs {
         }
         private bool AIStep_HasTarget(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             if (CurrentTarget is null) return false;
-            bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            bool isDefendLevel = CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend;
             bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
             double atr = AttackRange;
             double r = RangeTo(CurrentTarget);
@@ -691,7 +692,7 @@ namespace SpaceMercs {
             return false;
         }
         private bool AIStep_Investigate(Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, bool fastAI) {
-            bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
+            bool isDefendLevel = CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend;
             if (Math.Abs(Investigate.X - X) < Size && Math.Abs(Investigate.Y - Y) < Size) { // We got to the objective
                 if (!isDefendLevel) Investigate = Point.Empty;
                 return true;
@@ -714,7 +715,7 @@ namespace SpaceMercs {
         }
         private bool AIStep_Hide(Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, bool fastAI) {
             if (Stamina < MovementCost) return true;
-            List<Point>? path = CurrentLevel.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
+            List<Point>? path = CurrentLevel!.ShortestPath(this, Location, HidingPlace, 30, false, mindist: 0, preciseTarget: true);
             if (path is null || path.Count == 0) {
                 HidingPlace = Point.Empty;
                 return true;
@@ -728,7 +729,7 @@ namespace SpaceMercs {
         }
         private bool AIStep_SetHidingPlace() {
             Point? hidingPlace = null;
-            if (IsInjured && CurrentLevel.EntityIsVisible(this)) {
+            if (IsInjured && CurrentLevel!.EntityIsVisible(this)) {
                 hidingPlace = FindHidingPlace();
             }
             if (hidingPlace is null) {
@@ -750,7 +751,7 @@ namespace SpaceMercs {
                 int attempts = 0;
                 List<Point>? path = null;
                 do {
-                    hidingSpot = CurrentLevel.GetPointNearby(this, range);
+                    hidingSpot = CurrentLevel!.GetPointNearby(this, range);
                     if (hidingSpot.HasValue) {
                         path = CurrentLevel.ShortestPath(this, Location, hidingSpot.Value, 30, false, mindist: 0, preciseTarget: true);
                         if (path is null || path.Count == 0 || path.Count * MovementCost > Stamina) hidingSpot = null;
@@ -776,7 +777,7 @@ namespace SpaceMercs {
         }
         private void SetBestTarget() {
             double bestscore = -10000.0;
-            foreach (Soldier s in CurrentLevel.Soldiers) {
+            foreach (Soldier s in CurrentLevel!.Soldiers) {
                 if (CanSee(s)) {
                     double score = 100.0 / RangeTo(s);
                     if (s == CurrentTarget) score += 15.0;
@@ -833,14 +834,14 @@ namespace SpaceMercs {
             if (Health < 0.0) _Effects.Clear();
 
             // If this creature has arrived at the target location we're trying to defend, announce it.
-            if (CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend) {
+            if (CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend) {
                 CheckDefensiveGoal(showMessage);
             }
         }
         private void CheckDefensiveGoal(ShowMessageDelegate showMessage) {
             // Check if this creature has moved on to the entrance squares
             if (!HasMoved) return;
-            if (!CurrentLevel.CheckIfLocationIsEntranceTile(Location)) return;
+            if (!CurrentLevel!.CheckIfLocationIsEntranceTile(Location)) return;
 
             // Check if this creature is the first one to reach the target
             if (CurrentLevel.CountCreaturesAtEntrance() > 1) return;

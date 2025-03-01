@@ -627,7 +627,7 @@ namespace SpaceMercs {
             Shields = xml.SelectNodeDouble("Health", MaxHealth);
             KillCount = xml.SelectNodeInt("KillCount", 0);
             XmlNode? xc = xml.SelectSingleNode("ToughestKill");
-            ToughestKill = xc is null ? null : new Creature(xc.FirstChild, null);
+            ToughestKill = (xc?.FirstChild is null) ? null : new Creature(xc.FirstChild, null);
 
             // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {

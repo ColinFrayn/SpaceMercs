@@ -1,0 +1,167 @@
+﻿<Data>
+  <CreatureType Name="Fire Mephit">
+    <LevelRange>9,16</LevelRange>
+    <Attack>13</Attack>
+    <Defence>14</Defence>
+    <Health>14</Health>
+    <Stamina>15</Stamina>
+    <Armour>12</Armour>
+    <Frequency>3</Frequency>
+    <BodyType>Mephit</BodyType>
+    <Col1>200, 30, 0</Col1>
+    <Col2>220, 40, 0</Col2>
+    <Col3>240, 50, 0</Col3>
+    <Desc>A metre-high imp creature with blazing eyes, radiating heat.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Water Mephit">
+    <LevelRange>9,16</LevelRange>
+    <Attack>13</Attack>
+    <Defence>13</Defence>
+    <Health>14</Health>
+    <Stamina>15</Stamina>
+    <Armour>13</Armour>
+    <Frequency>3</Frequency>
+    <BodyType>Mephit</BodyType>
+    <Col1>0, 30, 200</Col1>
+    <Col2>0, 40, 220</Col2>
+    <Col3>0, 50, 240</Col3>
+    <Desc>A metre-high imp creature with deep blue eyes, radiating cold.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="100"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Air Mephit">
+    <LevelRange>9,16</LevelRange>
+    <Attack>13</Attack>
+    <Defence>14</Defence>
+    <Health>14</Health>
+    <Stamina>15</Stamina>
+    <Armour>12</Armour>
+    <Frequency>3</Frequency>
+    <BodyType>Mephit</BodyType>
+    <MovementCost>0.8</MovementCost>
+    <Col1>180, 180, 180</Col1>
+    <Col2>210, 210, 210</Col2>
+    <Col3>240, 240, 240</Col3>
+    <Desc>A metre-high imp creature radiating crackling energy.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Lightning Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="100"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Earth Mephit">
+    <LevelRange>9,16</LevelRange>
+    <Attack>13</Attack>
+    <Defence>14</Defence>
+    <Health>16</Health>
+    <Stamina>15</Stamina>
+    <Armour>16</Armour>
+    <Frequency>3</Frequency>
+    <BodyType>Mephit</BodyType>
+    <Col1>70, 30, 0</Col1>
+    <Col2>90, 40, 0</Col2>
+    <Col3>110, 50, 0</Col3>
+    <Desc>A metre-high muscular imp creature with a thick hide.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Rock Strike</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Fire Elemental">
+    <Size>2</Size>
+    <LevelRange>11,18</LevelRange>
+    <Attack>16</Attack>
+    <Defence>13</Defence>
+    <Health>24</Health>
+    <Stamina>17</Stamina>
+    <Armour>20</Armour>
+    <Col1>200, 30, 0</Col1>
+    <Col2>220, 40, 0</Col2>
+    <Col3>240, 50, 0</Col3>
+    <BodyType>Elemental</BodyType>
+    <Desc>A large humanoid formed of blazing fire.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Water Elemental">
+    <Size>2</Size>
+    <LevelRange>11,18</LevelRange>
+    <Attack>16</Attack>
+    <Defence>12</Defence>
+    <Health>25</Health>
+    <Stamina>17</Stamina>
+    <Armour>20</Armour>
+    <Col1>0, 30, 200</Col1>
+    <Col2>0, 40, 220</Col2>
+    <Col3>0, 50, 240</Col3>
+    <BodyType>Elemental</BodyType>
+    <Desc>A large humanoid formed of water and ice.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="100"/>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Air Elemental">
+    <Size>2</Size>
+    <LevelRange>11,18</LevelRange>
+    <Attack>17</Attack>
+    <Defence>14</Defence>
+    <Health>22</Health>
+    <Stamina>18</Stamina>
+    <Armour>19</Armour>
+    <MovementCost>0.8</MovementCost>
+    <Col1>180, 180, 180</Col1>
+    <Col2>210, 210, 210</Col2>
+    <Col3>240, 240, 240</Col3>
+    <BodyType>Elemental</BodyType>
+    <Desc>A large humanoid formed of raging wind and static electricity.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Lightning Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Electrical" Value="100"/>
+      <Resistance Type="Physical" Value="20"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Earth Elemental">
+    <Size>2</Size>
+    <LevelRange>11,18</LevelRange>
+    <Attack>17</Attack>
+    <Defence>13</Defence>
+    <Health>25</Health>
+    <Stamina>18</Stamina>
+    <Armour>24</Armour>
+    <Col1>70, 30, 0</Col1>
+    <Col2>90, 40, 0</Col2>
+    <Col3>110, 50, 0</Col3>
+    <BodyType>Elemental</BodyType>
+    <Desc>A large humanoid formed of rock and stone.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Rock Fists</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+  </CreatureType>
+</Data>
