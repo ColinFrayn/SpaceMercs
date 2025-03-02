@@ -23,7 +23,7 @@ namespace SpaceMercs {
 
         // Overrides
         public override float DrawScale { get { return 1.0f; } }
-        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
+        public override void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds) {
             DrawHyperGate(prog);
         }
         public override void SetupTextureMap(int width, int height) {

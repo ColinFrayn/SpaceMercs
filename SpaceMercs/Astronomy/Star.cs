@@ -542,11 +542,11 @@ namespace SpaceMercs {
         }
 
         // Overrides
-        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
+        public override void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds) {
             // Sort out scaling and rotation
             float scale = Const.StarScale * DrawScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(RotationAngle(elapsedSeconds));
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);

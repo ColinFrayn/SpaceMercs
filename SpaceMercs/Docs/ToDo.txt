@@ -6,16 +6,23 @@ ToDo List
 
 Display when a weapon is recharging somehow
 
-Stats:
+Stats: (Use MessageWindow??)
 - Display Kill count per soldier and Strongest enemy killed
 - Highest difficulty mission completed [TRACK]
-- Number of Precursor Cores gathered, and most valuable [TRACK]
-- Number of SpaceHulk Cores, and most valuable [TRACK]
+- Race relations (if known)
+- Number of Precursor Cores gathered, and most valuable [TRACK] (display only if >0)
+- Number of SpaceHulk Cores, and most valuable [TRACK] (display only if >0)
 
-PregenitorCore, SpaceHulkCore
+PrecursorCore, SpaceHulkCore
+-- First city levels more sparse; Upper levels smaller? (Bottom-most level huge)
 - Keep track of the number & level gathered
 - Return to Homeworld or other race Homeworld for additional +relations. (HOW?)
 -- Or sell for cash
+- Maybe add extra missions e.g. Artifact, Assassination (core mission is the hardest)
+- What is the primary enemy of the Precursors?
+
+Start race relations off lower
+- Colony screens should be disabled if race relations too low. Missions are always there.
 
 Experiment moving human colonies & trade routes out into second ring
 

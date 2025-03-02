@@ -485,7 +485,7 @@ namespace SpaceMercs {
         }
 
         // Draw the progress with whatever is happening
-        public void Display(ShaderProgram prog, ShaderProgram colprog, float elapsedSeconds) {
+        public void Display(ShaderProgram prog, ShaderProgram colprog, double elapsedSeconds) {
             Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
             prog.SetUniform("projection", projectionM);
             prog.SetUniform("view", Matrix4.Identity);
@@ -513,7 +513,7 @@ namespace SpaceMercs {
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.Salvage) DrawSalvage(prog);
             else if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) DrawBattle(prog, colprog);
         }
-        private void DrawTravelProgress(ShaderProgram prog, float elapsedSeconds) {
+        private void DrawTravelProgress(ShaderProgram prog, double elapsedSeconds) {
             // Set up the text
             string strDist = Utils.PrintDistance(AstronomicalObject.CalculateDistance(aoTravelFrom, aoTravelTo));
             string strTime = string.Format("({0:%d}d {0:%h}h {0:%m}m {0:%s}s)", TimeSpan.FromSeconds(fTravelTime));

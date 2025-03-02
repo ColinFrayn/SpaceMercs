@@ -52,7 +52,7 @@ namespace SpaceMercs.Dialogs {
             if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
             while (rnd.NextDouble() < 0.5) nm++;
             if (_aoScan is Planet pl) {
-                if (pl.IsPregenitor) nm = 1;
+                if (pl.IsPrecursor) nm = 1;
                 else nm++;
             }
             else if (nm < 2) nm = 2;

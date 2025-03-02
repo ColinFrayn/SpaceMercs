@@ -41,7 +41,7 @@ namespace SpaceMercs.MainWindow {
         }
 
         // Draw all objects in this system
-        private void DrawAstronomicalObjects(float aspect, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies, float elapsedSeconds) {
+        private void DrawAstronomicalObjects(float aspect, AstronomicalObject aoCurrentPosition, bool bShowLabels, bool bShowColonies, double elapsedSeconds) {
             fullShaderProgram.SetUniform("textureEnabled", false);
             fullShaderProgram.SetUniform("lightEnabled", true);
             Matrix4 squashM = Matrix4.CreateScale(1f / aspect, 1f, 1f);
@@ -218,7 +218,7 @@ namespace SpaceMercs.MainWindow {
             // Draw the SpaceHulk, if there is one
             if (SystemStar.HasSpaceHulk) {
                 SpaceHulk sh = SystemStar.GetSpaceHulk()!;
-                float scale = Const.PlanetScale;
+                float scale = Const.PlanetScale * sh.DrawScale;
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
                 fullShaderProgram.SetUniform("view", squashM * pTranslateM);
                 flatColourShaderProgram.SetUniform("view", squashM * pTranslateM);

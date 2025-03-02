@@ -6,24 +6,25 @@ using SpaceMercs.Graphics.Shapes;
 namespace SpaceMercs {
     public class SpaceHulk : OrbitalAO {
         public SpaceHulk(Star parent, double orbit) : base(orbit, parent) {
-            AxialRotationPeriod = (int)Const.DayLength * 2.5;
+            AxialRotationPeriod = Const.DayLength * 2.5d;
         }
 
         // Overrides
-        public override float DrawScale { get { return 1.0f; } }
-        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
-            float scale = Const.PlanetScale;
+        public override float DrawScale { get { return 1.8f; } }
+        public override void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds) {
+            float scale = Const.PlanetScale * DrawScale;
 
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
-            Matrix4 pCounterRotateM = Matrix4.CreateRotationX(elapsedSeconds * 0.73f * (float)Math.PI / (float)AxialRotationPeriod);
+            float rot = RotationAngle(elapsedSeconds);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(rot);
+            Matrix4 pCounterRotateM = Matrix4.CreateRotationX(rot * 0.23f);
             Matrix4 modelM = pCounterRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);
 
             prog.SetUniform("lightEnabled", true);
             prog.SetUniform("textureEnabled", false);
             GL.UseProgram(prog.ShaderProgramHandle);
-            Cube.Flat.BindAndDraw();
+            Cube.Norm.BindAndDraw();
         }
         public override void SetupTextureMap(int width, int height) {
             // Nothing to do

@@ -90,7 +90,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect, float elapsedSeconds) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect, double elapsedSeconds) {
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = 1.0f,

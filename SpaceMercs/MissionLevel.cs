@@ -34,7 +34,7 @@ namespace SpaceMercs {
         }
         public MissionType Type {
             get {
-                if (ParentMission.Type == MissionType.PregenitorCity) {
+                if (ParentMission.Type == MissionType.PrecursorRuins) {
                     if (LevelID == 0) return MissionType.Surface;
                     else if (LevelID == 1) return MissionType.Caves;
                     else if (LevelID == 2) return MissionType.Mines;

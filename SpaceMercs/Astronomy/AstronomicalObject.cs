@@ -39,7 +39,7 @@ namespace SpaceMercs {
         }
 
         public abstract string PrintCoordinates();
-        public abstract void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds);
+        public abstract void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds);
         public abstract void SetupTextureMap(int width, int height);
         public abstract void ClearData();
         public abstract void SetName(string str);
@@ -48,6 +48,7 @@ namespace SpaceMercs {
         public Vector3 GetMapLocation() {
             return this.GetSystem().MapPos;
         }
+        protected float RotationAngle(double elapsedSeconds) => (float)((elapsedSeconds * 2d * Math.PI / AxialRotationPeriod) % (2d * Math.PI));
 
         // Calculate the distance between two AOs
         public static double CalculateDistance(AstronomicalObject ao1, AstronomicalObject ao2) {

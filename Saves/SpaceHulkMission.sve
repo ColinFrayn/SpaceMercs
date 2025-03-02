@@ -5595,9 +5595,9 @@
  <Scanned/>
  <Missions>
 <Mission>
- <Type>PregenitorCity</Type>
+ <Type>PrecursorRuins</Type>
  <Goal>FindItem</Goal>
-<MissionItem Mass="14.00" Cost="1,120.00" Name="Pregenitor Core"><Pregenitor/></MissionItem>
+<MissionItem Mass="14.00" Cost="1,120.00" Name="Precursor Core"><Precursor/></MissionItem>
  <Enemy>Mechanoids</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
@@ -5613,7 +5613,7 @@
 <Temp>292</Temp>
 <Seed>5242812</Seed>
 <Orbit>249740087290</Orbit>
-<Pregenitor/>
+<Precursor/>
 <TempBase>292.2937869069747</TempBase>
 </Planet>
  </Planets>

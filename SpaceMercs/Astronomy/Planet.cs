@@ -13,7 +13,7 @@ namespace SpaceMercs {
         public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
         public bool IsHomeworld { get; private set; }
-        public bool IsPregenitor { get; private set; }
+        public bool IsPrecursor { get; private set; }
 
         public Planet() {
             Parent = Star.Empty;
@@ -31,7 +31,7 @@ namespace SpaceMercs {
         public Planet(XmlNode xml, Star parent) : base(xml, parent) {
             BaseTemp = xml.SelectNodeDouble("TempBase");
             IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
-            IsPregenitor = (xml.SelectSingleNode("Pregenitor") is not null);
+            IsPrecursor = (xml.SelectSingleNode("Precursor") is not null);
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
             if (IsHomeworld) {
@@ -81,7 +81,7 @@ namespace SpaceMercs {
             base.SaveToFile(file, clock);
             // Write planet details to file
             if (IsHomeworld) file.WriteLine("<Homeworld/>");
-            if (IsPregenitor) file.WriteLine("<Pregenitor/>");
+            if (IsPrecursor) file.WriteLine("<Precursor/>");
             file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
             // Now write out any moons necessary
             bool writeMoons = false;
@@ -164,14 +164,14 @@ namespace SpaceMercs {
             double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
             AxialRotationPeriod = (int)(arot * (Radius / Const.PlanetSize));
 
-            // Is this a pregenitor location?
+            // Is this a precursor location?
             Star star = GetSystem();
             Sector sector = star.Sector;
             if (Math.Abs(sector.SectorX) >= 2 || Math.Abs(sector.SectorY) >= 2) {
                 if (Type is not PlanetType.Gas && BaseTemp >= 180 && BaseTemp <= 400) {
                     if (star.IsStableMainSequence()) {
                         if (rnd.NextDouble() > 0.8) {
-                            IsPregenitor = true;
+                            IsPrecursor = true;
                         }
                     }
                 }
@@ -359,10 +359,10 @@ namespace SpaceMercs {
             float scale = Const.PlanetScale * 1.8f;
             Colony.DrawBaseIcon(prog, scale);
         }
-        public override void DrawSelected(ShaderProgram prog, int Level, float elapsedSeconds) {
+        public override void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds) {
             float scale = DrawScale * Const.PlanetScale;
             Matrix4 pScaleM = Matrix4.CreateScale(scale);
-            Matrix4 pTurnM = Matrix4.CreateRotationY(elapsedSeconds * 2f * (float)Math.PI / (float)AxialRotationPeriod);
+            Matrix4 pTurnM = Matrix4.CreateRotationY(RotationAngle(elapsedSeconds));
             Matrix4 pRotateM = Matrix4.CreateRotationX((float)Math.PI / 2f);
             Matrix4 modelM = pRotateM * pTurnM * pScaleM;
             prog.SetUniform("model", modelM);

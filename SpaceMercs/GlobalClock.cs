@@ -6,8 +6,8 @@
             CurrentTime = dt;
         }
 
-        public float ElapsedSeconds() {
-            return (float)(CurrentTime - Const.StartingDate).TotalSeconds;
+        public double ElapsedSeconds() {
+            return (CurrentTime - Const.StartingDate).TotalSeconds;
         }
 
         public void SetTime(DateTime dt) {
