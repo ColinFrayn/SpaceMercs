@@ -4,76 +4,30 @@ using System.Xml;
 
 namespace SpaceMercs {
     public abstract class HabitableAO : OrbitalAO {
-        public Colony? Colony { get; private set; }
+        public new Colony? Colony { get; private set; }
         public int BaseSize {
             get {
                 if (Colony == null) return 0;
                 return Colony.BaseSize;
             }
         }
-        public Planet.PlanetType Type;
-        protected List<Mission>? _MissionList = null;
-        public IEnumerable<Mission> MissionList { get { return _MissionList?.AsReadOnly() ?? new List<Mission>().AsReadOnly(); } }
-        public bool Scanned { get; private set; }
-        public int CountMissions { get { return _MissionList?.Count ?? 0; } }
+        protected Planet.PlanetType _type;
+        public override Planet.PlanetType Type => _type;
         public double OrbitalPeriod; // Period of orbit (seconds)
 
         public HabitableAO() {}
         public HabitableAO(XmlNode xml, AstronomicalObject parent) : base(xml, parent) { 
             OrbitalPeriod = xml.SelectNodeDouble("PRot");
-            Type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
+            _type = (Planet.PlanetType)Enum.Parse(typeof(Planet.PlanetType), xml.SelectNodeText("Type"));
             XmlNode? xmlc = xml.SelectSingleNode("Colony");
             if (xmlc != null) SetColony(new Colony(xmlc, this));
-            LoadMissions(xml);
         }
 
         public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine("<Type>" + Type.ToString() + "</Type>");
             file.WriteLine("<PRot>" + Math.Round(OrbitalPeriod, 0).ToString() + "</PRot>");
-            SaveMissions(file);
             Colony?.SaveToFile(file, clock);
             base.SaveToFile(file, clock);
-        }
-
-        protected void LoadMissions(XmlNode xml) {
-            Scanned = (xml.SelectSingleNode("Scanned") is not null);
-            IEnumerable<XmlNode> nodes = xml.SelectNodesToList("Missions/Mission");
-            if (!nodes.Any()) return;
-            _MissionList = new List<Mission>();
-            foreach (XmlNode xm in nodes) {
-                _MissionList.Add(new Mission(xm, this));
-            }
-        }
-        protected void SaveMissions(StreamWriter file) {
-            if (Scanned || CountMissions > 0) file.WriteLine(" <Scanned/>");
-            if (_MissionList == null) return;
-            file.WriteLine(" <Missions>");
-            foreach (Mission m in _MissionList) m.SaveToFile(file);
-            file.WriteLine(" </Missions>");
-        }
-        public void RemoveMission(Mission miss) {
-            if (_MissionList == null || miss == null) return;
-            if (_MissionList.Contains(miss)) {
-                _MissionList.Remove(miss);
-                return;
-            }
-            // In case the mission pointers got messed up, check for an identical mission and delete it
-            foreach (Mission m in _MissionList) {
-                if (m.IsSameMissionAs(miss)) {
-                    _MissionList.Remove(m);
-                    return;
-                }
-            }
-        }
-        public void AddMission(Mission miss) {
-            if (miss == null) return;
-            _MissionList ??= new List<Mission>();
-            if (_MissionList.Contains(miss)) return;
-            _MissionList.Add(miss);
-            Scanned = true;
-        }
-        public void SetScanned() {
-            Scanned = true; 
         }
 
         public double TDiff(Race rc) {

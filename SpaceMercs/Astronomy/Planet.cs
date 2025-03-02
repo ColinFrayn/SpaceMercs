@@ -8,7 +8,7 @@ using System.Xml;
 namespace SpaceMercs {
     public class Planet : HabitableAO {
         [Flags]
-        public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40 };
+        public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40, HyperGate = 0x80, SpaceHulk = 0x100 };
         public readonly List<Moon> Moons;
         public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
@@ -123,14 +123,14 @@ namespace SpaceMercs {
                 double tempmod = 0.0;
                 double albedo = 0.3;
                 bOK = true;
-                if (BaseTemp > 180 && BaseTemp < 350 && rnd.Next(3) == 0) { Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
+                if (BaseTemp > 180 && BaseTemp < 350 && rnd.Next(3) == 0) { _type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
                 else {
                     int r = rnd.Next(30);
-                    if (r < 2) { Type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
-                    else if (r < 5) { Type = Planet.PlanetType.Desert; albedo = 0.4; }
-                    else if (r < 9) { Type = Planet.PlanetType.Volcanic; albedo = 0.18; tempmod = Utils.NextGaussian(rnd, 10, 2); }
-                    else if (r < 15) { Type = Planet.PlanetType.Rocky; albedo = 0.25; }
-                    else { Type = Planet.PlanetType.Gas; albedo = 0.5; }
+                    if (r < 2) { _type = Planet.PlanetType.Oceanic; albedo = 0.3; tempmod = Utils.NextGaussian(rnd, 30, 5); }
+                    else if (r < 5) { _type = Planet.PlanetType.Desert; albedo = 0.4; }
+                    else if (r < 9) { _type = Planet.PlanetType.Volcanic; albedo = 0.18; tempmod = Utils.NextGaussian(rnd, 10, 2); }
+                    else if (r < 15) { _type = Planet.PlanetType.Rocky; albedo = 0.25; }
+                    else { _type = Planet.PlanetType.Gas; albedo = 0.5; }
                 }
                 BaseTemp *= Math.Pow(1.0 - albedo, 0.25);
                 BaseTemp += tempmod;
@@ -140,7 +140,7 @@ namespace SpaceMercs {
                 if (BaseTemp > 400 && Type == Planet.PlanetType.Gas) bOK = false;
                 if (BaseTemp > 320 && Type == Planet.PlanetType.Oceanic) bOK = false;
                 if (BaseTemp < 160 && Type == Planet.PlanetType.Oceanic) bOK = false;
-                if (BaseTemp < 270 && Type == Planet.PlanetType.Oceanic) Type = Planet.PlanetType.Ice;
+                if (BaseTemp < 270 && Type == Planet.PlanetType.Oceanic) _type = Planet.PlanetType.Ice;
                 if (BaseTemp < 180 && Type == Planet.PlanetType.Volcanic) bOK = false;
             } while (bOK == false);
 
@@ -275,46 +275,7 @@ namespace SpaceMercs {
             // Generate moons
             for (int n = 0; n < nmn; n++) {
                 Moon mn = new Moon(rnd.Next(10000000), this, n);
-
-                do {
-                    mn.Radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
-                } while (mn.Radius < Const.MoonRadiusMin);
-
-                mn.OrbitalDistance = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(n + 1), Const.MoonOrbitSigma);
-                mn.OrbitalDistance += Radius;
-                bool bOK = true;
-                do {
-                    mn.Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees
-                    double tempmod = 0.0;
-                    bOK = true;
-                    if (mn.Temperature > 180 && mn.Temperature < 320 && rnd.Next(4) == 0) { mn.Type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
-                    else {
-                        int r = rnd.Next(25);
-                        if (r < 2) { mn.Type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
-                        else if (r < 5) { mn.Type = PlanetType.Desert; }
-                        else if (r < 9) { mn.Type = PlanetType.Volcanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
-                        else { mn.Type = PlanetType.Rocky; tempmod = Utils.NextGaussian(rnd, 5, 5); }
-                    }
-                    mn.Temperature += (int)tempmod;
-
-                    // Check that this is ok
-                    if (mn.Temperature > 320 && mn.Type == PlanetType.Oceanic) bOK = false;
-                    if (mn.Temperature < 210 && mn.Type == PlanetType.Oceanic) bOK = false;
-                    if (mn.Temperature < 270 && mn.Type == PlanetType.Oceanic) mn.Type = PlanetType.Ice;
-                    if (mn.Temperature < 160 && mn.Type == PlanetType.Volcanic) bOK = false;
-                } while (bOK != true);
-
-                mn.BaseColour = Const.PlanetTypeToCol2(mn.Type);
-
-                // Orbital period
-                double prot = Utils.NextGaussian(rnd, Const.MoonOrbitalPeriod, Const.MoonOrbitalPeriodSigma);
-                prot /= (mn.OrbitalDistance / Const.MoonOrbit) * Math.Pow(mn.Radius / Const.MoonRadius, 0.5);
-                mn.OrbitalPeriod = (int)prot;
-
-                // Axial rotation
-                double arot = Utils.NextGaussian(rnd, prot, prot / 15f);
-                mn.AxialRotationPeriod = (int)arot;
-
+                mn.SetupRandom(rnd);
                 Moons.Add(mn);
             }
         }
@@ -351,6 +312,11 @@ namespace SpaceMercs {
 
         public void SetAsHomeworld() {
             IsHomeworld = true;
+        }
+
+        public void SetupPrecursorMissions(Random rnd) {
+            Mission m = Mission.CreatePrecursorMission(this, rnd);
+            AddMission(m);
         }
 
         // Overrides

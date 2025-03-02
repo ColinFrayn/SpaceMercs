@@ -466,7 +466,10 @@ namespace SpaceMercs.MainWindow {
                 return;
             }
             // Open the ScanPlanet dialog
-            ScanPlanet sp = new ScanPlanet(PlayerTeam!.CurrentPositionHAO!, PlayerTeam!, RunMission, Clock);
+            if (PlayerTeam!.CurrentPosition is not OrbitalAO oao) {
+                throw new Exception("Strange - attemptign to scan non-OAO");
+            }
+            ScanPlanet sp = new ScanPlanet(oao, PlayerTeam!, RunMission, Clock);
             sp.ShowDialog();
             SetAOButtonsOnGUI(aoSelected);
         }

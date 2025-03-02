@@ -2,14 +2,14 @@
 
 namespace SpaceMercs.Dialogs {
     internal partial class ScanPlanet : Form {
-        private readonly HabitableAO _aoScan;
+        private readonly OrbitalAO _aoScan;
         private readonly Team _playerTeam;
         private readonly Timer clockTick;
         private readonly Func<Mission, bool> StartMission;
         private int iProgress = 0;
         private readonly GlobalClock _clock;
 
-        public ScanPlanet(HabitableAO aoScan, Team team, Func<Mission, bool> _startMission, GlobalClock clock) {
+        public ScanPlanet(OrbitalAO aoScan, Team team, Func<Mission, bool> _startMission, GlobalClock clock) {
             _aoScan = aoScan;
             _playerTeam = team;
             _clock = clock;
@@ -23,7 +23,12 @@ namespace SpaceMercs.Dialogs {
                 lbNone.Visible = false;
                 dgMissions.Visible = false;
                 pbScan.Visible = false;
-                btRunMission.Text = "Scan Planet";
+                btRunMission.Text = _aoScan switch {
+                    Planet _ => "Scan Planet",
+                    Moon _ => "Scan Moon",
+                    SpaceHulk _ => "Scan Hulk",
+                    _ => throw new NotImplementedException($"Cannot scan type : {_aoScan?.GetType()}")
+                };
             }
             else DisplayMissionList();
         }
@@ -52,8 +57,15 @@ namespace SpaceMercs.Dialogs {
             if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
             while (rnd.NextDouble() < 0.5) nm++;
             if (_aoScan is Planet pl) {
-                if (pl.IsPrecursor) nm = 1;
+                if (pl.IsPrecursor) {
+                    nm = 0;
+                    pl.SetupPrecursorMissions(rnd);
+                }
                 else nm++;
+            }
+            else if (_aoScan is SpaceHulk sh) {
+                nm = 0;
+                sh.SetupSpaceHulkMissions(rnd);
             }
             else if (nm < 2) nm = 2;
             for (int n = 0; n < nm; n++) {

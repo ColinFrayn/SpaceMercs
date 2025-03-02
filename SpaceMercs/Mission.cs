@@ -13,7 +13,7 @@ namespace SpaceMercs {
         public Ship? ShipTarget { get; private set; }
         public Race? RacialOpponent { get; private set; }
         public CreatureGroup PrimaryEnemy { get; private set; }
-        public HabitableAO Location { get; private set; }
+        public OrbitalAO Location { get; private set; }
         public float TimeCost { get; private set; }
         public double Reward { get; private set; }
         public int Diff { get; private set; }
@@ -146,7 +146,7 @@ namespace SpaceMercs {
             TimeCost = 0.0f;
             ShipTarget = null;
         }
-        public Mission(XmlNode xml, HabitableAO loc) {
+        public Mission(XmlNode xml, OrbitalAO loc) {
             Location = loc;
             Type = (MissionType)Enum.Parse(typeof(MissionType), xml.SelectNodeText("Type"));
 
@@ -316,12 +316,13 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        private static Mission CreatePrecursorMission(HabitableAO loc, Random rand) {
+        public static Mission CreatePrecursorMission(HabitableAO loc, Random rand) {
             int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
             if (iDiff < 15) iDiff = 15;
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.RacialOpponent = null;
+            // TODO: Improve this
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
             m.Location = loc;
@@ -334,13 +335,14 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        private static Mission CreateSpaceHulkMission(AstronomicalObject loc, Random rand) {
+        public static Mission CreateSpaceHulkMission(OrbitalAO loc, Random rand) {
             int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
             if (iDiff < 12) iDiff = 12;
             MissionType tp = MissionType.SpaceHulk;
             Mission m = new Mission(tp, iDiff, rand.Next());
-            //m.Location = loc;
+            m.Location = loc;
             m.RacialOpponent = null;
+            // TODO: Fix this. It doesn't work because the PaceHulk type is not recognised for any CreatureGroup.
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
@@ -349,7 +351,7 @@ namespace SpaceMercs {
             m.LevelCount = 2 + maxDist + rand.Next(2);
             m.Goal = MissionGoal.FindItem;
             m.MItem = MissionItem.GenerateSpaceHulkCore(iDiff);
-            // Ship map for top level
+            // Ship map used for top level
             m.ShipTarget = Ship.GenerateSpaceHulkShip(iDiff);
             m.InitialiseMissionBasedOnGoal(rand);
             return m;

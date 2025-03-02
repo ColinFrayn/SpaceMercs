@@ -43,5 +43,6 @@ namespace SpaceMercs {
             return Parent.PrintCoordinates() + ".HG";
         }
         public override int GetPopulation() => 0;
+        public override Planet.PlanetType Type => Planet.PlanetType.HyperGate;
     }
 }

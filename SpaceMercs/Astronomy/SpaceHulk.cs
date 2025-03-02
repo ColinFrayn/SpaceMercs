@@ -9,6 +9,11 @@ namespace SpaceMercs {
             AxialRotationPeriod = Const.DayLength * 2.5d;
         }
 
+        public void SetupSpaceHulkMissions(Random rnd) {
+            Mission m = Mission.CreateSpaceHulkMission(this, rnd);
+            AddMission(m);
+        }
+
         // Overrides
         public override float DrawScale { get { return 1.8f; } }
         public override void DrawSelected(ShaderProgram prog, int Level, double elapsedSeconds) {
@@ -43,5 +48,6 @@ namespace SpaceMercs {
             return Parent.PrintCoordinates() + ".SH";
         }
         public override int GetPopulation() => 0;
+        public override Planet.PlanetType Type => Planet.PlanetType.SpaceHulk;
     }
 }

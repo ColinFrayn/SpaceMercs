@@ -4,6 +4,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
+using static SpaceMercs.Planet;
 
 namespace SpaceMercs {
     public class Moon : HabitableAO {
@@ -29,6 +30,47 @@ namespace SpaceMercs {
             }
 
             BaseColour = Const.PlanetTypeToCol2(Type);
+        }
+
+        public void SetupRandom(Random rnd) { 
+            do {
+                Radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
+            } while (Radius < Const.MoonRadiusMin);
+
+            OrbitalDistance = Utils.NextGaussian(rnd, Const.MoonOrbit * (double)(ID + 1), Const.MoonOrbitSigma);
+            OrbitalDistance += Radius;
+            bool bOK = true;
+            do {
+                Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees
+                double tempmod = 0.0;
+                bOK = true;
+                if (Temperature > 180 && Temperature < 320 && rnd.Next(4) == 0) { _type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
+                else {
+                    int r = rnd.Next(25);
+                    if (r < 2) { _type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
+                    else if (r < 5) { _type = PlanetType.Desert; }
+                    else if (r < 9) { _type = PlanetType.Volcanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
+                    else { _type = PlanetType.Rocky; tempmod = Utils.NextGaussian(rnd, 5, 5); }
+                }
+                Temperature += (int)tempmod;
+
+                // Check that this is ok
+                if (Temperature > 320 && Type == PlanetType.Oceanic) bOK = false;
+                if (Temperature < 210 && Type == PlanetType.Oceanic) bOK = false;
+                if (Temperature < 270 && Type == PlanetType.Oceanic) _type = PlanetType.Ice;
+                if (Temperature < 160 && Type == PlanetType.Volcanic) bOK = false;
+            } while (bOK != true);
+
+            BaseColour = Const.PlanetTypeToCol2(Type);
+
+            // Orbital period
+            double prot = Utils.NextGaussian(rnd, Const.MoonOrbitalPeriod, Const.MoonOrbitalPeriodSigma);
+            prot /= (OrbitalDistance / Const.MoonOrbit) * Math.Pow(Radius / Const.MoonRadius, 0.5);
+            OrbitalPeriod = (int)prot;
+
+            // Axial rotation
+            double arot = Utils.NextGaussian(rnd, prot, prot / 15f);
+            AxialRotationPeriod = (int)arot;
         }
 
         // Save this moon to an Xml file

@@ -2,7 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-** MapViewGUI.OpenScanPlanetDialog() : Is it's a SpaceHulk then HAO == null
+!! SpaceHulk : Can't get primary creature because Type is not recognised. Probably ought to do that differently.
 
 Display when a weapon is recharging somehow
 
