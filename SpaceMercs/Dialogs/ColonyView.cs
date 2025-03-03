@@ -5,6 +5,7 @@ namespace SpaceMercs.Dialogs {
         private readonly Team PlayerTeam;
         private readonly Colony cl;
         private readonly double PriceMod = 1.0; // Price modifier based on the colony owner relations with the team
+        private readonly int Relations;
         private readonly Color clExists = Color.Black;
         private readonly Color clDoesntExist = Color.LightGray;
         private readonly Func<Mission, bool> StartMission;
@@ -43,36 +44,10 @@ namespace SpaceMercs.Dialogs {
             cl = hao.Colony;
             cl.UpdateStock(PlayerTeam, clock); // Make sure we have updated everything since the last time we visited
             PriceMod = PlayerTeam.GetPriceModifier(cl.Owner, cl.Location.GetSystem());
+            Relations = PlayerTeam.GetRelations(cl.Owner);
             InitializeComponent();
             SetupTabs();
-            btRandomiseMissions.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
-            btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-            btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
-            btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-            btRandomiseMerchant.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
-            btRandomiseMerchant.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-            if (string.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
-            else lbColonyName.Text = cl.Location.Name;
-            lbColonySize.Text = cl.BaseSize.ToString();
-            if (cl.HasBaseType(Colony.BaseType.Colony)) lbResidential.ForeColor = clExists;
-            else lbResidential.ForeColor = clDoesntExist;
-            if (cl.HasBaseType(Colony.BaseType.Research)) lbResearch.ForeColor = clExists;
-            else lbResearch.ForeColor = clDoesntExist;
-            if (cl.HasBaseType(Colony.BaseType.Trading)) lbTrade.ForeColor = clExists;
-            else lbTrade.ForeColor = clDoesntExist;
-            if (cl.HasBaseType(Colony.BaseType.Military)) lbMilitary.ForeColor = clExists;
-            else lbMilitary.ForeColor = clDoesntExist;
-            if (cl.HasBaseType(Colony.BaseType.Metropolis)) lbMetropolis.ForeColor = clExists;
-            else lbMetropolis.ForeColor = clDoesntExist;
-            lbLastGrowth.Text = cl.dtLastGrowth.ToString("D");
-            if (!cl.CanGrow) lbNextGrowth.Text = "n/a";
-            else lbNextGrowth.Text = cl.dtNextGrowth.ToString("D");
-            lbLocation.Text = cl.Location.PrintCoordinates();
-            if (string.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
-            else lbSystemName.Text = cl.Location.GetSystem().Name;
-            lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
-            lbPlanetType.Text = cl.Location.Type.ToString();
-            lbOwner.Text = cl.Owner.Name;
+            lbImproveRelations.Text = $"You must improve relations with the {cl.Owner.Name} race first!";
         }
 
         private void SetupTabs() {
@@ -107,6 +82,13 @@ namespace SpaceMercs.Dialogs {
 
         // Setup data grid based on drop down setting
         private void SetupMerchantDataGrid() {
+            if (Relations < -2) {
+                tpMerchant.Hide();
+                lbImproveRelations.Show();
+                return;
+            }
+            tpMerchant.Show();
+            lbImproveRelations.Hide();
             string? strType = cbItemType?.SelectedItem?.ToString() ?? string.Empty;
             bool bAffordable = cbAffordable.Checked;
             dgMerchant.Rows.Clear();
@@ -137,6 +119,14 @@ namespace SpaceMercs.Dialogs {
         }
         private void SetupMercenariesTab() {
             dgMercenaries.Rows.Clear();
+            if (Relations < 0) {
+                tpMercenaries.Hide();
+                lbImproveRelations.Show();
+                lbImproveRelations.Text = $"You must improve relations with the {cl.Owner.Name} race first!";
+                return;
+            }
+            tpMercenaries.Show();
+            lbImproveRelations.Hide();
             string[] arrRowMerc = new string[4];
             foreach (Soldier merc in cl.MercenariesList()) {
                 arrRowMerc[0] = merc.Name;
@@ -167,6 +157,15 @@ namespace SpaceMercs.Dialogs {
         }
         private void SetupShipsTab() {
             dgShips.Rows.Clear();
+            if (Relations < 1) {
+                tpShips.Hide();
+                lbImproveRelations.Show();
+                lbImproveRelations.Text = $"You must improve relations with the {cl.Owner.Name} race first!";
+                return;
+            }
+            tpShips.Show();
+            lbImproveRelations.Hide();
+
             double SalvageValue = PlayerTeam.PlayerShip.CalculateSalvageValue();
             string[] arrRowShip = new string[3];
             foreach (ShipType st in StaticData.ShipTypes) {
@@ -183,6 +182,14 @@ namespace SpaceMercs.Dialogs {
 
         }
         private void SetupFoundryTab(List<SaleItem>? tpLast = null) {
+            if (Relations < -1) {
+                tpUpgrade.Hide();
+                lbImproveRelations.Show();
+                lbImproveRelations.Text = $"You must improve relations with the {cl.Owner.Name} race first!";
+                return;
+            }
+            tpUpgrade.Show();
+            lbImproveRelations.Hide();
             HashSet<SaleItem> hsLast;
             if (tpLast == null) hsLast = new HashSet<SaleItem>(new SaleItemEqualityComparer());
             else hsLast = new HashSet<SaleItem>(tpLast, new SaleItemEqualityComparer());
@@ -600,6 +607,7 @@ namespace SpaceMercs.Dialogs {
         // Changed tab so update lists
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
             int iTabNo = tcMain.SelectedIndex;
+            lbImproveRelations.Hide();
             switch (iTabNo) {
                 case 0: SetupMerchantDataGrid(); break;
                 case 1: SetupMercenariesTab(); break;
@@ -671,5 +679,46 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
+        private void ColonyView_Load(object sender, EventArgs e) {
+            btRandomiseMissions.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMissions.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMercs.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMerchant.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRandomiseMerchant.Visible = Const.DEBUG_RANDOMISE_VENDORS;
+            if (string.IsNullOrEmpty(cl.Location.Name)) lbColonyName.Text = "Unnamed Colony";
+            else lbColonyName.Text = cl.Location.Name;
+            lbColonySize.Text = cl.BaseSize.ToString();
+            if (cl.HasBaseType(Colony.BaseType.Colony)) lbResidential.ForeColor = clExists;
+            else lbResidential.ForeColor = clDoesntExist;
+            if (cl.HasBaseType(Colony.BaseType.Research)) lbResearch.ForeColor = clExists;
+            else lbResearch.ForeColor = clDoesntExist;
+            if (cl.HasBaseType(Colony.BaseType.Trading)) lbTrade.ForeColor = clExists;
+            else lbTrade.ForeColor = clDoesntExist;
+            if (cl.HasBaseType(Colony.BaseType.Military)) lbMilitary.ForeColor = clExists;
+            else lbMilitary.ForeColor = clDoesntExist;
+            if (cl.HasBaseType(Colony.BaseType.Metropolis)) lbMetropolis.ForeColor = clExists;
+            else lbMetropolis.ForeColor = clDoesntExist;
+            lbLastGrowth.Text = cl.dtLastGrowth.ToString("D");
+            if (!cl.CanGrow) lbNextGrowth.Text = "n/a";
+            else lbNextGrowth.Text = cl.dtNextGrowth.ToString("D");
+            lbLocation.Text = cl.Location.PrintCoordinates();
+            if (string.IsNullOrEmpty(cl.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
+            else lbSystemName.Text = cl.Location.GetSystem().Name;
+            lbStarType.Text = cl.Location.GetSystem().StarType.ToString();
+            lbPlanetType.Text = cl.Location.Type.ToString();
+            lbOwner.Text = cl.Owner.Name;
+        }
+
+        private void ColonyView_Shown(object sender, EventArgs e) {
+            // We've just opened the window. Setup teh Merchants datagrid as hidden if required.
+            if (Relations < -2) {
+                tpMerchant.Hide();
+                lbImproveRelations.Show();
+                return;
+            }
+            tpMerchant.Show();
+            lbImproveRelations.Hide();
+        }
     }
 }

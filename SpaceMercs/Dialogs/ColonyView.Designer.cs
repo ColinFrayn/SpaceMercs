@@ -48,7 +48,7 @@
             cbItemType = new ComboBox();
             tpMercenaries = new TabPage();
             lbTeamCashMercs = new Label();
-            label12 = new Label();
+            lbTeamCashMercsLabel = new Label();
             btRandomiseMercs = new Button();
             btHire = new Button();
             dgMercenaries = new DataGridView();
@@ -68,7 +68,7 @@
             colReward = new DataGridViewTextBoxColumn();
             tpShips = new TabPage();
             lbTeamCashShips = new Label();
-            label13 = new Label();
+            lbTeamCashShipsLabel = new Label();
             btUpgrade = new Button();
             dgShips = new DataGridView();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
@@ -78,7 +78,7 @@
             btModify = new Button();
             cbEquipped = new CheckBox();
             lbTeamCashFoundry = new Label();
-            label14 = new Label();
+            lbTeamCashFoundryLabel = new Label();
             btSellAll = new Button();
             btDismantle = new Button();
             btSell = new Button();
@@ -116,6 +116,7 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
+            lbImproveRelations = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -330,7 +331,7 @@
             // tpMercenaries
             // 
             tpMercenaries.Controls.Add(lbTeamCashMercs);
-            tpMercenaries.Controls.Add(label12);
+            tpMercenaries.Controls.Add(lbTeamCashMercsLabel);
             tpMercenaries.Controls.Add(btRandomiseMercs);
             tpMercenaries.Controls.Add(btHire);
             tpMercenaries.Controls.Add(dgMercenaries);
@@ -357,19 +358,19 @@
             lbTeamCashMercs.Text = "888888.88cr";
             lbTeamCashMercs.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label12
+            // lbTeamCashMercsLabel
             // 
-            label12.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label12.AutoSize = true;
-            label12.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label12.ImageAlign = ContentAlignment.MiddleRight;
-            label12.Location = new Point(13, 483);
-            label12.Margin = new Padding(4, 0, 4, 0);
-            label12.Name = "label12";
-            label12.Size = new Size(38, 16);
-            label12.TabIndex = 7;
-            label12.Text = "Cash";
-            label12.TextAlign = ContentAlignment.MiddleRight;
+            lbTeamCashMercsLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbTeamCashMercsLabel.AutoSize = true;
+            lbTeamCashMercsLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbTeamCashMercsLabel.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashMercsLabel.Location = new Point(13, 483);
+            lbTeamCashMercsLabel.Margin = new Padding(4, 0, 4, 0);
+            lbTeamCashMercsLabel.Name = "lbTeamCashMercsLabel";
+            lbTeamCashMercsLabel.Size = new Size(38, 16);
+            lbTeamCashMercsLabel.TabIndex = 7;
+            lbTeamCashMercsLabel.Text = "Cash";
+            lbTeamCashMercsLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btRandomiseMercs
             // 
@@ -569,7 +570,7 @@
             // tpShips
             // 
             tpShips.Controls.Add(lbTeamCashShips);
-            tpShips.Controls.Add(label13);
+            tpShips.Controls.Add(lbTeamCashShipsLabel);
             tpShips.Controls.Add(btUpgrade);
             tpShips.Controls.Add(dgShips);
             tpShips.Location = new Point(4, 29);
@@ -595,19 +596,19 @@
             lbTeamCashShips.Text = "888888.88cr";
             lbTeamCashShips.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label13
+            // lbTeamCashShipsLabel
             // 
-            label13.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label13.AutoSize = true;
-            label13.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label13.ImageAlign = ContentAlignment.MiddleRight;
-            label13.Location = new Point(12, 482);
-            label13.Margin = new Padding(4, 0, 4, 0);
-            label13.Name = "label13";
-            label13.Size = new Size(38, 16);
-            label13.TabIndex = 9;
-            label13.Text = "Cash";
-            label13.TextAlign = ContentAlignment.MiddleRight;
+            lbTeamCashShipsLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbTeamCashShipsLabel.AutoSize = true;
+            lbTeamCashShipsLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbTeamCashShipsLabel.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashShipsLabel.Location = new Point(12, 482);
+            lbTeamCashShipsLabel.Margin = new Padding(4, 0, 4, 0);
+            lbTeamCashShipsLabel.Name = "lbTeamCashShipsLabel";
+            lbTeamCashShipsLabel.Size = new Size(38, 16);
+            lbTeamCashShipsLabel.TabIndex = 9;
+            lbTeamCashShipsLabel.Text = "Cash";
+            lbTeamCashShipsLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btUpgrade
             // 
@@ -673,7 +674,7 @@
             tpUpgrade.Controls.Add(btModify);
             tpUpgrade.Controls.Add(cbEquipped);
             tpUpgrade.Controls.Add(lbTeamCashFoundry);
-            tpUpgrade.Controls.Add(label14);
+            tpUpgrade.Controls.Add(lbTeamCashFoundryLabel);
             tpUpgrade.Controls.Add(btSellAll);
             tpUpgrade.Controls.Add(btDismantle);
             tpUpgrade.Controls.Add(btSell);
@@ -731,19 +732,19 @@
             lbTeamCashFoundry.Text = "888888.88cr";
             lbTeamCashFoundry.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // lbTeamCashFoundryLabel
             // 
-            label14.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label14.AutoSize = true;
-            label14.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label14.ImageAlign = ContentAlignment.MiddleRight;
-            label14.Location = new Point(15, 480);
-            label14.Margin = new Padding(4, 0, 4, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(38, 16);
-            label14.TabIndex = 13;
-            label14.Text = "Cash";
-            label14.TextAlign = ContentAlignment.MiddleRight;
+            lbTeamCashFoundryLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbTeamCashFoundryLabel.AutoSize = true;
+            lbTeamCashFoundryLabel.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbTeamCashFoundryLabel.ImageAlign = ContentAlignment.MiddleRight;
+            lbTeamCashFoundryLabel.Location = new Point(15, 480);
+            lbTeamCashFoundryLabel.Margin = new Padding(4, 0, 4, 0);
+            lbTeamCashFoundryLabel.Name = "lbTeamCashFoundryLabel";
+            lbTeamCashFoundryLabel.Size = new Size(38, 16);
+            lbTeamCashFoundryLabel.TabIndex = 13;
+            lbTeamCashFoundryLabel.Text = "Cash";
+            lbTeamCashFoundryLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btSellAll
             // 
@@ -1227,16 +1228,34 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // lbImproveRelations
+            // 
+            lbImproveRelations.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbImproveRelations.BorderStyle = BorderStyle.FixedSingle;
+            lbImproveRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbImproveRelations.ImageAlign = ContentAlignment.MiddleRight;
+            lbImproveRelations.Location = new Point(91, 261);
+            lbImproveRelations.Margin = new Padding(5);
+            lbImproveRelations.Name = "lbImproveRelations";
+            lbImproveRelations.Padding = new Padding(2);
+            lbImproveRelations.Size = new Size(462, 27);
+            lbImproveRelations.TabIndex = 18;
+            lbImproveRelations.Text = "You must increase relations with this race first!";
+            lbImproveRelations.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(644, 548);
+            Controls.Add(lbImproveRelations);
             Controls.Add(tcMain);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Margin = new Padding(4, 3, 4, 3);
             Name = "ColonyView";
             Text = "Colony Services";
+            Load += ColonyView_Load;
+            Shown += ColonyView_Shown;
             tcMain.ResumeLayout(false);
             tpMerchant.ResumeLayout(false);
             tpMerchant.PerformLayout();
@@ -1336,14 +1355,15 @@
         private Label label10;
         private CheckBox cbAffordable;
         private Label lbTeamCashMercs;
-        private Label label12;
+        private Label lbTeamCashMercsLabel;
         private Label lbTeamCashShips;
-        private Label label13;
+        private Label lbTeamCashShipsLabel;
         private Label lbTeamCashFoundry;
-        private Label label14;
+        private Label lbTeamCashFoundryLabel;
         private CheckBox cbEquipped;
         private Button btModify;
         private Label lbOwner;
         private Label label15;
+        private Label lbImproveRelations;
     }
 }

@@ -2,29 +2,27 @@
 ToDo List
 -------------------------------------------------
 
-!! SpaceHulk : Can't get primary creature because Type is not recognised. Probably ought to do that differently.
+Display when a weapon is recharging
 
-Display when a weapon is recharging somehow
-
-Stats: (Use MessageWindow??)
+Player Stats: (Use MessageWindow??)
 - Display Kill count per soldier and Strongest enemy killed
+
+Team Stats:
 - Highest difficulty mission completed [TRACK]
-- Race relations (if known)
 - Number of Precursor Cores gathered, and most valuable [TRACK] (display only if >0)
 - Number of SpaceHulk Cores, and most valuable [TRACK] (display only if >0)
 
-PrecursorCore, SpaceHulkCore
--- First city levels more sparse; Upper levels smaller? (Bottom-most level huge)
-- Keep track of the number & level gathered
-- Return to Homeworld or other race Homeworld for additional +relations. (HOW?)
--- Or sell for cash
+Precursor/SpaceHulk missions
+- Should vary CreatureGroups at lower levels
 - Maybe add extra missions e.g. Artifact, Assassination (core mission is the hardest)
 - What is the primary enemy of the Precursors?
 
-Start race relations off lower
-- Colony screens should be disabled if race relations too low. Missions are always there.
+PrecursorCore, SpaceHulkCore
+- Keep track of the number & level gathered
+- Return to Homeworld or other race Homeworld for additional +relations.
+-- How?
 
-Experiment moving human colonies & trade routes out into second ring
+Experiment building & growing human colonies & trade routes out into second ring
 
 ==================================================================================================================
 
@@ -33,7 +31,7 @@ Experiment moving human colonies & trade routes out into second ring
 Backburner : Features
 ---------------------
 
-Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?
+Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?? Maybe?
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 

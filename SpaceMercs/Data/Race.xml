@@ -31,7 +31,7 @@
     <PlanetType>Rocky</PlanetType>
     <Colour>255,0,0</Colour>
     <Scale>0.9</Scale>
-    <BaseAttitude>0</BaseAttitude>
+    <BaseAttitude>-500</BaseAttitude>
     <Names>
       <Personal>
         <Male>Agkor,Began,Carg,Dokan,Erag,Farg,Grak,Horak,Koram,Logak,Merok,Nerak,Ogam,Pagrok,Rokam,Somak,Tarok,Serak,Agrok</Male>
@@ -53,7 +53,7 @@
     <Colour>30,90,255</Colour>
     <Scale>0.9</Scale>
     <Aggression>-1</Aggression>
-    <BaseAttitude>-500</BaseAttitude>
+    <BaseAttitude>-1500</BaseAttitude>
     <Names>
       <Personal>
         <Male>Elori,Ma'ari,Kinsari,Doroi,Elsi'm,Ka'na'tohi,Alothi,Pallithari,Ban'athi,Corinthi,Falathi,Ga'na'thi</Male>
@@ -76,7 +76,7 @@
     <Colour>255,255,0</Colour>
     <Aggression>3</Aggression>
     <Scale>1.2</Scale>
-    <BaseAttitude>-4500</BaseAttitude>
+    <BaseAttitude>-6000</BaseAttitude>
     <Names>
       <Personal>
         <Male>Ag,Bog,Cag,Dag,Eog,Fod,Gog,Hik,Ig,Jad,Kab,Lug,Mog,Nod</Male>
@@ -98,7 +98,7 @@
     <Colour>0,255,0</Colour>
     <Scale>1.0</Scale>
     <Aggression>2</Aggression>
-    <BaseAttitude>-1600</BaseAttitude>
+    <BaseAttitude>-4500</BaseAttitude>
     <Names>
       <Personal>
         <Neuter>First,Second,Third,Fourth,Fifth,Sixth,Seventh,Eighth,Ninth,Tenth,Eleventh,Twelfth,Thirteenth,Fourteenth,Fifteenth,Sixteenth,Seventeenth,Eighteenth,Nineteenth,Twentieth,Twentyfirst,Twentysecond,Twentythird,Twentyfourth</Neuter>
@@ -119,7 +119,7 @@
     <PlanetType>Oceanic</PlanetType>
     <Colour>140,140,140</Colour>
     <Aggression>-1</Aggression>
-    <BaseAttitude>1500</BaseAttitude>
+    <BaseAttitude>0</BaseAttitude>
     <Scale>1.0</Scale>
     <Names>
       <Personal>
@@ -140,7 +140,7 @@
     <BaseTemp>289</BaseTemp>
     <PlanetType>Oceanic</PlanetType>
     <Colour>140,85,50</Colour>
-    <BaseAttitude>1000</BaseAttitude>
+    <BaseAttitude>-500</BaseAttitude>
     <Scale>1.1</Scale>
     <Names>
       <Personal>

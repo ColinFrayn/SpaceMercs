@@ -5,9 +5,6 @@ using System.Xml;
 
 namespace SpaceMercs {
     public static class StaticData {
-        private static readonly string[] strRNbeg = { "Tar", "Mim", "Cen", "Dar", "Dy", "Ka", "Tha", "Mol", "He", "Ri", "Der", "Har", "Tai", "Ke", "An", "Ak", "Uth", "Tal", "Al", "Ul", "Gel" };
-        private static readonly string[] strRNmid = { "", "", "", "'", "-", "k", "ta", "ba", "th", "gr", "li", "mra", "gor", "sh", "ch", "sg", "n'", "to", "ti", "lo", "bu", "bo", "vi", "fi", "sa" };
-        private static readonly string[] strRNend = { "on", "un", "en", "in", "an", "ri", "ak", "ahk", "eth", "lin", "lon", "dum", "il", "el", "oth", "ag", "ul", "ish", "uth", "ekh", "esk", "kah" };
         private static readonly string strGraphicsDir, strDataDir;
         public static Race HumanRace { get; private set; }
 

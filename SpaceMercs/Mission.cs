@@ -322,7 +322,6 @@ namespace SpaceMercs {
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.RacialOpponent = null;
-            // TODO: Improve this
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
             m.Location = loc;
@@ -342,7 +341,6 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            // TODO: Fix this. It doesn't work because the PaceHulk type is not recognised for any CreatureGroup.
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;

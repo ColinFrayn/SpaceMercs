@@ -631,6 +631,19 @@ namespace SpaceMercs {
                 Height = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 16) + rand.Next((ParentMission.Size * 3) + 3);
             }
             else throw new NotImplementedException();
+            if (ParentMission.Type == MissionType.PrecursorRuins) {
+                if (LevelID == ParentMission.LevelCount - 1) {
+                    Width += 10;
+                    Height += 10;
+                }
+                Width += LevelID * 2 - 10;
+                Height += LevelID * 2 - 10;
+            }
+            else if (ParentMission.Type == MissionType.SpaceHulk) {
+                Width -= LevelID * 2;
+                Height -= LevelID * 2;
+            }
+
             Map = new TileType[Width, Height];
         }
         private void GenerateShipMap() {
