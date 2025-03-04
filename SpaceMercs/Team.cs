@@ -1,6 +1,7 @@
 ﻿using SpaceMercs.Dialogs;
 using SpaceMercs.Items;
 using System.IO;
+using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
 
@@ -279,6 +280,54 @@ namespace SpaceMercs {
             return Count - NumToTake;
         }
 
+        public int GetSpareBerths() {
+            int total = PlayerShip.TotalBerths;
+            foreach (Soldier s in _Soldiers) {
+                if (s.IsActive) total--;
+            }
+            return total;
+        }
+        public void AddSoldier(Soldier merc) {
+            _Soldiers.Add(merc);
+            merc.PlayerTeam = this;
+        }
+        public void RemoveSoldier(Soldier s) {
+            _Soldiers.Remove(s);
+            s.PlayerTeam = null;
+        }
+        public void SetTeamShip(ShipType st) {
+            PlayerShip = new Ship(st);
+            PlayerShip.SetOwner(this);
+            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEquipmentByName("Fission Core"));
+            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipWeaponByName("Chain Gun"));
+            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEngineByName("Thrusters"));
+            PlayerShip.InitialiseForBattle();
+        }
+
+        public void SetCurrentMission(Mission? miss) {
+            CurrentMission = miss;
+        }
+        public void CeaseMission() {
+            foreach (Soldier s in _Soldiers) {
+                s.StopMission();
+            }
+            CurrentMission = null;
+        }
+        public void RegisterMissionCompletion(Mission miss) {
+            CompletedMissions++;
+            if (miss.Diff > ToughestMission) ToughestMission = miss.Diff;
+        }
+        public void RegisterMissionItem(MissionItem mitem) {
+            if (mitem.IsPrecursorCore) {
+                PrecursorCoreCount++;
+                if (mitem.Level > PrecursorCoreRecord) PrecursorCoreRecord = mitem.Level;
+            }
+            else if (mitem.IsSpaceHulkCore) {
+                SpaceHulkCoreCount++;
+                if (mitem.Level > SpaceHulkCoreRecord) SpaceHulkCoreRecord = mitem.Level;
+            }
+        }
+
         public void RemoveItemFromStores(IItem? equip, int Count = 1) {
             if (equip is null) return;
             if (!Inventory.ContainsKey(equip)) return;
@@ -315,57 +364,6 @@ namespace SpaceMercs {
             }
             return false;
         }
-
-        public int GetSpareBerths() {
-            int total = PlayerShip.TotalBerths;
-            foreach (Soldier s in _Soldiers) {
-                if (s.IsActive) total--;
-            }
-            return total;
-        }
-
-        public void AddSoldier(Soldier merc) {
-            _Soldiers.Add(merc);
-            merc.PlayerTeam = this;
-        }
-        public void RemoveSoldier(Soldier s) {
-            _Soldiers.Remove(s);
-            s.PlayerTeam = null;
-        }
-
-        public void SetTeamShip(ShipType st) {
-            PlayerShip = new Ship(st);
-            PlayerShip.SetOwner(this);
-            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEquipmentByName("Fission Core"));
-            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipWeaponByName("Chain Gun"));
-            PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEngineByName("Thrusters"));
-            PlayerShip.InitialiseForBattle();
-        }
-
-        public void SetCurrentMission(Mission? miss) {
-            CurrentMission = miss;
-        }
-        public void CeaseMission() {
-            foreach (Soldier s in _Soldiers) {
-                s.StopMission();
-            }
-            CurrentMission = null;
-        }
-        public void RegisterMissionCompletion(Mission miss) {
-            CompletedMissions++;
-            if (miss.Diff > ToughestMission) ToughestMission = miss.Diff;
-        }
-        public void RegisterMissionItem(MissionItem mitem) {
-            if (mitem.IsPrecursorCore) {
-                PrecursorCoreCount++;
-                if (mitem.Level > PrecursorCoreRecord) PrecursorCoreRecord = mitem.Level;
-            }
-            else if (mitem.IsSpaceHulkCore) {
-                SpaceHulkCoreCount++;
-                if (mitem.Level > SpaceHulkCoreRecord) SpaceHulkCoreRecord = mitem.Level;
-            }
-        }
-
         public int CountMaterial(MaterialType mat) {
             int count = 0;
             foreach (IItem it in Inventory.Keys) {
@@ -518,5 +516,18 @@ namespace SpaceMercs {
             throw new Exception("Unknown skill required in item construction: " + it.ToString());
         }
         public int MaximumSoldierLevel => _Soldiers.Where(s => s.aoLocation == CurrentPosition)?.MaxBy(s => s.Level)?.Level ?? 0;
+
+        // Utility
+        public void ShowStatistics(ShowMessageDelegate showMessage) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Team Statistics");
+            sb.AppendLine($"Completed Missions : {CompletedMissions}");
+            if (ToughestMission > 0) sb.AppendLine($"Toughest Mission : Level {ToughestMission}");
+            if (SpaceHulkCoreCount > 0) sb.AppendLine($"SpaceHulk Cores Found : {SpaceHulkCoreCount}");
+            if (SpaceHulkCoreRecord > 0) sb.AppendLine($"Highest Difficulty SpaceHulk Core : {SpaceHulkCoreRecord}");
+            if (PrecursorCoreCount > 0) sb.AppendLine($"Precursor Cores Found : {PrecursorCoreCount}");
+            if (PrecursorCoreRecord > 0) sb.AppendLine($"Highest Difficulty Precursor Core : {PrecursorCoreRecord}");
+            showMessage(sb.ToString(), null);
+        }
     }
 }

@@ -6,6 +6,7 @@ using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
 
@@ -66,11 +67,6 @@ namespace SpaceMercs {
         // Statistics
         public int KillCount { get; private set; }
         public Creature? ToughestKill { get; private set; }
-        public int MostDifficultMission { get; private set; }
-        public int PrecursorCoreCount { get; private set; }
-        public int SpaceHulkCoreCount { get; private set; }
-        public int PrecursorCoreMaximumValue { get; private set; }
-        public int SpaceHulkCoreMaximumValue { get; private set; }
 
         // Utilities
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
@@ -630,9 +626,6 @@ namespace SpaceMercs {
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Health", MaxHealth);
-            KillCount = xml.SelectNodeInt("KillCount", 0);
-            XmlNode? xc = xml.SelectSingleNode("ToughestKill");
-            ToughestKill = (xc?.FirstChild is null) ? null : new Creature(xc.FirstChild, null);
 
             // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {
@@ -734,6 +727,11 @@ namespace SpaceMercs {
                 }
             }
 
+            // Statistics
+            KillCount = xml.SelectNodeInt("KillCount", 0);
+            XmlNode? xc = xml.SelectSingleNode("ToughestKill");
+            ToughestKill = (xc?.FirstChild is null) ? null : new Creature(xc.FirstChild, null);
+
             CalculateMaxStats();
         }
         public static Soldier GenerateRandomMercenary(Colony cl, Random rand) {
@@ -779,12 +777,6 @@ namespace SpaceMercs {
             file.WriteLine($" <Gender>{Gender}</Gender>");
             file.WriteLine($" <Race>{Race.Name}</Race>");
             file.WriteLine($" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
-            if (KillCount > 0) file.WriteLine($" <KillCount>{KillCount}</KillCount>");
-            if (ToughestKill is not null) {
-                file.WriteLine(" <ToughestKill>");
-                ToughestKill.SaveToFile(file, true);
-                file.WriteLine(" </ToughestKill>");
-            }
             if (GoTo != Point.Empty && GoTo != Location) file.WriteLine(" <GoTo X=\"" + GoTo.X + "\" Y=\"" + GoTo.Y + "\"/>");
             file.WriteLine(" <Colour>" + ColorTranslator.ToHtml(PrimaryColor) + "</Colour>");
             if (PointsToSpend > 0) {
@@ -838,6 +830,14 @@ namespace SpaceMercs {
             }
 
             if (HasMoved) file.WriteLine(" <Moved/>");
+
+            // Statistics
+            if (KillCount > 0) file.WriteLine($" <KillCount>{KillCount}</KillCount>");
+            if (ToughestKill is not null) {
+                file.WriteLine(" <ToughestKill>");
+                ToughestKill.SaveToFile(file, true);
+                file.WriteLine(" </ToughestKill>");
+            }
 
             file.WriteLine("</Soldier>");
         }
@@ -1576,6 +1576,13 @@ namespace SpaceMercs {
         }
         public void SetPrimaryColour(Color col) {
             PrimaryColor = col;
+        }
+        public void ShowStatistics(ShowMessageDelegate showMessage) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Statistics for {Name}");
+            sb.AppendLine($"Enemies Killed : {KillCount}");
+            if (ToughestKill is not null) sb.AppendLine($"Toughest Kill : {ToughestKill.Name}");
+            showMessage(sb.ToString(), null);
         }
     }
 }

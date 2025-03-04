@@ -157,7 +157,7 @@ namespace SpaceMercs.MainWindow {
                     if (ThisMission.Goal == Mission.MissionGoal.Gather) {
                         msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
                     }
-                    else if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
+                    else if (ThisMission.Goal == Mission.MissionGoal.FindItem && ThisMission.MItem is not null) {
                         if (ThisMission.MItem.IsPrecursorCore) {
                             msgBox.PopupMessage($"You marvel at the extraordinary {ThisMission.MItem} pulsating with alien power.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.Experience}xp each");
                             PlayerTeam.RegisterMissionItem(ThisMission.MItem);
@@ -330,6 +330,7 @@ namespace SpaceMercs.MainWindow {
                     if (IsKeyPressed(Keys.S) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) SelectedSoldierSearch(null);
                     if (IsKeyPressed(Keys.P) && (IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl))) PickUpAll(s);
                     if (IsKeyPressed(Keys.X)) SelectedSoldierAttack(null);
+                    if (IsKeyPressed(Keys.F1)) s.ShowStatistics(AnnounceMessage);
                 }
                 if (IsKeyPressed(Keys.Space)) EndTurn();
             }
@@ -354,6 +355,9 @@ namespace SpaceMercs.MainWindow {
             }
             if (IsKeyPressed(Keys.F)) {
                 PlayerTeam.Mission_FastAI = !PlayerTeam.Mission_FastAI;
+            }
+            if (IsKeyPressed(Keys.F1) && SelectedEntity is null && CurrentAction == SoldierAction.None) {
+                PlayerTeam.ShowStatistics(AnnounceMessage);
             }
         }
         private void CheckHoverMission() {
