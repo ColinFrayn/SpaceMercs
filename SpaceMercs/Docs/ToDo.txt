@@ -4,26 +4,25 @@ ToDo List
 
 Display when a weapon is recharging
 
-Keep track of kills with direct effects (e.g. grenade)
-Keep track of kills with ticking effects (e.g. burning/poison)
+Test run SpaceHulk mission (& keeping the core)
+Test run Precursor mission (& keeping the core)
 
 Player Stats: (Use MessageWindow??)
 - Display Kill count per soldier and Strongest enemy killed
 
 Team Stats:
-- Highest difficulty mission completed [TRACK]
-- Number of Precursor Cores gathered, and most valuable [TRACK] (display only if >0)
-- Number of SpaceHulk Cores, and most valuable [TRACK] (display only if >0)
+- Highest difficulty mission completed & number of missions completed
+- Number of Precursor Cores gathered, and most valuable (display only if >0)
+- Number of SpaceHulk Cores, and most valuable (display only if >0)
 
 Precursor/SpaceHulk missions
-- Should vary CreatureGroups at lower levels
-- Maybe add extra missions e.g. Artifact, Assassination (core mission is the hardest)
-- What is the primary enemy of the Precursors?
+* SpaceHulk level 0 is far too small? Test again?
+- Vary CreatureGroups at lower levels
+- What is the primary enemy of the Precursors? Add them in, especially at lower levels
 
 PrecursorCore, SpaceHulkCore
 - Keep track of the number & level gathered
 - Return to Homeworld or other race Homeworld for additional +relations.
--- How?
 
 Experiment building & growing human colonies & trade routes out into second ring
 

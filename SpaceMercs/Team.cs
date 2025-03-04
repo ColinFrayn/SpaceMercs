@@ -28,6 +28,14 @@ namespace SpaceMercs {
         public double CargoMass { get { double c = 0.0; foreach (KeyValuePair<IItem, int> kvp in Inventory) c += kvp.Key.Mass * kvp.Value; return c; } }
         public int ActiveSoldiers { get { return _Soldiers.Where(x => x.IsActive).Count(); } }
 
+        // Stats
+        public int PrecursorCoreCount { get; private set; }
+        public int PrecursorCoreRecord { get; private set; }
+        public int SpaceHulkCoreCount { get; private set; }
+        public int SpaceHulkCoreRecord { get; private set; }
+        public int CompletedMissions { get; private set; }
+        public int ToughestMission { get; private set; }
+
         public Team() {
             CurrentPosition = Planet.Empty;
             PlayerShip = Ship.Empty;
@@ -114,6 +122,14 @@ namespace SpaceMercs {
                     CurrentMission.SetCreatureTargets();
                 }
             }
+
+            // Stats
+            PrecursorCoreCount = xml.SelectNodeInt("PrecursorCoreCount", 0);
+            SpaceHulkCoreCount = xml.SelectNodeInt("SpaceHulkCoreCount", 0);
+            PrecursorCoreRecord = xml.SelectNodeInt("PrecursorCoreRecord", 0);
+            SpaceHulkCoreRecord = xml.SelectNodeInt("SpaceHulkCoreRecord", 0);
+            CompletedMissions = xml.SelectNodeInt("CompletedMissions", 0);
+            ToughestMission = xml.SelectNodeInt("ToughestMission", 0);
         }
 
         public static Team Empty() => new Team();
@@ -155,6 +171,12 @@ namespace SpaceMercs {
             file.WriteLine(" </Inventory>");
 
             if (CurrentMission != null) CurrentMission.SaveToFile(file);
+
+            // Statistics
+            if (SpaceHulkCoreCount > 0) file.WriteLine($" <SpaceHulkCoreCount>{SpaceHulkCoreCount}</SpaceHulkCoreCount>");
+            if (PrecursorCoreCount > 0) file.WriteLine($" <PrecursorCoreCount>{PrecursorCoreCount}</PrecursorCoreCount>");
+            if (SpaceHulkCoreRecord > 0) file.WriteLine($" <SpaceHulkCoreRecord>{SpaceHulkCoreRecord}</SpaceHulkCoreRecord>");
+            if (PrecursorCoreRecord > 0) file.WriteLine($" <PrecursorCoreRecord>{PrecursorCoreRecord}</PrecursorCoreRecord>");
 
             file.WriteLine("</Team>");
         }
@@ -328,6 +350,20 @@ namespace SpaceMercs {
                 s.StopMission();
             }
             CurrentMission = null;
+        }
+        public void RegisterMissionCompletion(Mission miss) {
+            CompletedMissions++;
+            if (miss.Diff > ToughestMission) ToughestMission = miss.Diff;
+        }
+        public void RegisterMissionItem(MissionItem mitem) {
+            if (mitem.IsPrecursorCore) {
+                PrecursorCoreCount++;
+                if (mitem.Level > PrecursorCoreRecord) PrecursorCoreRecord = mitem.Level;
+            }
+            else if (mitem.IsSpaceHulkCore) {
+                SpaceHulkCoreCount++;
+                if (mitem.Level > SpaceHulkCoreRecord) SpaceHulkCoreRecord = mitem.Level;
+            }
         }
 
         public int CountMaterial(MaterialType mat) {

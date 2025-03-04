@@ -588,8 +588,11 @@ namespace SpaceMercs {
             SetupMapDimensions();
             if (Type == MissionType.SpaceHulk) GenerateShipMap();
             else if (ParentMission.IsShipMission) GenerateShipMap();
-            else if (Type == MissionType.AbandonedCity) GenerateDungeonMap();
-            else if (Type == MissionType.Mines) GenerateDungeonMap(true);
+            else if (Type == MissionType.AbandonedCity) {
+                if (ParentMission.Type == MissionType.PrecursorRuins) GenerateDungeonMap(bSparse:(LevelID == 3 && ParentMission.LevelCount > 4));
+                else GenerateDungeonMap();
+            }
+            else if (Type == MissionType.Mines) GenerateDungeonMap(bMines: true);
             else if (Type == MissionType.Caves) GenerateCaveMap();
             else if (Type == MissionType.Surface) GenerateSurfaceMap();
             else throw new NotImplementedException();
@@ -746,10 +749,10 @@ namespace SpaceMercs {
             //GenerateHiddenTreasure(1);
             //GenerateTraps(1);
         }
-        private void GenerateDungeonMap(bool bMines = false) {
+        private void GenerateDungeonMap(bool bMines = false, bool bSparse = false) {
             int niter = 0;
             RoomMap = new int[Width, Height];
-            int nRooms, MinRooms;
+            int nRooms, minRooms;
 
             do { // We may have to try this multiple times because the algo is tricky and stochastic.
                  // Clear the dungeon
@@ -761,13 +764,13 @@ namespace SpaceMercs {
                 }
 
                 PlaceRandomDungeonEntranceAndExit();
-                GenerateRandomTunnels();
-                nRooms = BuildRooms(bMines);
-
+                GenerateRandomTunnels(bSparse);
+                minRooms = ((Width * Height) / (180 + niter++));
                 // Check that this map has enough rooms and redo if so (maximum number of tries)
-                MinRooms = ((Width * Height) / (180 + niter++));
-                if (bMines) MinRooms /= 2;
-            } while (nRooms < MinRooms);
+                if (bMines) minRooms /= 2;
+                if (bSparse) minRooms /= 2;
+                nRooms = BuildRooms(bMines, bSparse, minRooms);
+            } while (nRooms < minRooms);
 
             CheckConnectivity(); // Make sure that all bits of the map are connected
             if (!bMines) GenerateDoors();
@@ -1466,14 +1469,15 @@ namespace SpaceMercs {
                 SetupExitLocations();
             }
         }
-        private void GenerateRandomTunnels() {
+        private void GenerateRandomTunnels(bool bSparse) {
             int nTunnels = 0;
 
             // Start a tunnel from the start location
             InitialiseTunnel(StartX, StartY, ref nTunnels);
 
             // Add loads more tunnels at random
-            while (nTunnels < (Width * Height / 5)) {
+            int expectedTunnels = (Width * Height) / (bSparse ? 7 : 5);
+            while (nTunnels < expectedTunnels) {
                 bool bOK = true;
                 int x, y;
                 do {
@@ -1647,13 +1651,16 @@ namespace SpaceMercs {
             if (r < 92) return 3;
             return 1;
         }
-        private int BuildRooms(bool bMines) {
-            // Attempt to create lots of rooms. As many as possible. Fewer if mines.
+        private int BuildRooms(bool bMines, bool bSparse, int minRooms) {
+            // Attempt to create lots of rooms. As many as possible. Fewer if mines or sparse.
             bool bOK = false;
             int nRooms = 0;
             do {
                 int h = 0, w = 0, x = 0, y = 0;
-                int MaxTries = (bMines ? 50 - (nRooms * 5) : 150);
+                int MaxTries = 50 + minRooms * 5;
+                if (bMines || bSparse) MaxTries /= 2;
+                if (bMines) MaxTries -= nRooms * 5;
+                if (bSparse) MaxTries -= nRooms * 5;
                 for (int i = 0; i < MaxTries; i++) { // Attempt to place a new room a number of times
                     bOK = false;
                     // Generate a random room size

@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public string Description { get { return Name; } }
         public double Mass { get; private set; }
         public double Cost { get; private set; }
+        public int Level { get; private set; }
         public IItem? LegendaryItem { get; private set; }
         public bool IsPrecursorCore { get; private set; }
         public bool IsSpaceHulkCore { get; private set; }
@@ -35,6 +36,7 @@ namespace SpaceMercs {
             if (xml is null) throw new Exception("Null Mission");
             Mass = xml.GetAttributeDouble("Mass");
             Cost = xml.GetAttributeDouble("Cost");
+            Level = xml.GetAttributeInt("Level", 0);
             IsPrecursorCore = xml.SelectSingleNode("Precursor") != null;
             IsSpaceHulkCore = xml.SelectSingleNode("Hulk") != null;
             if (xml.Attributes?["Name"] is null) {
@@ -52,17 +54,24 @@ namespace SpaceMercs {
         public static MissionItem GeneratePrecursorCore(int iDiff) {
             MissionItem it = new MissionItem("Precursor Core", (double)iDiff, (double)iDiff * 150d);
             it.IsPrecursorCore = true;
+            it.Level = iDiff;
             return it;
         }
 
         public static MissionItem GenerateSpaceHulkCore(int iDiff) {
             MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff, (double)iDiff * 80d);
             it.IsSpaceHulkCore = true;
+            it.Level = iDiff;
             return it;
         }
 
         public void SaveToFile(StreamWriter file) {
-            file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");
+            if (Level > 0) {
+                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\" Level\"{Level}\">");
+            }
+            else {
+                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");
+            }
             if (LegendaryItem is not null) {
                 file.WriteLine();
                 LegendaryItem.SaveToFile(file);

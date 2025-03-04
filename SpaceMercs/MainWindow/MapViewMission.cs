@@ -139,6 +139,7 @@ namespace SpaceMercs.MainWindow {
 
             // Resolve the mission (either victory or destruction)
             if (MissionOutcome == MissionResult.Victory) {
+                PlayerTeam.RegisterMissionCompletion(ThisMission);
                 if (TravelDetails != null) {
                     if (ThisMission.ShipTarget is null) throw new Exception("ThisMission.ShipTarget is null in CeaseMission()");
                     double dBounty = ThisMission.ShipTarget.EstimatedBountyValue * (0.5 + rnd.NextDouble());
@@ -157,8 +158,18 @@ namespace SpaceMercs.MainWindow {
                         msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.FindItem) {
-                        msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
-                        if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
+                        if (ThisMission.MItem.IsPrecursorCore) {
+                            msgBox.PopupMessage($"You marvel at the extraordinary {ThisMission.MItem} pulsating with alien power.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.Experience}xp each");
+                            PlayerTeam.RegisterMissionItem(ThisMission.MItem);
+                        }
+                        else if (ThisMission.MItem.IsSpaceHulkCore) {
+                            msgBox.PopupMessage($"You examine the mysterious {ThisMission.MItem}, full of encrypted alien knowledge.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.Experience}xp each");
+                            PlayerTeam.RegisterMissionItem(ThisMission.MItem);
+                        }
+                        else {
+                            msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
+                        }
+                        //if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.Artifact) {
                         msgBox.PopupMessage($"You analyse the {ThisMission.MItem} and marvel at the extraordinary workmanship!\nYour new artifact is stored securely in the ship's hold\nBonus Experience = {ThisMission.Experience}xp each");
