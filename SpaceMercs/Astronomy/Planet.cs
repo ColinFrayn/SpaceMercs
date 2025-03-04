@@ -315,8 +315,10 @@ namespace SpaceMercs {
         }
 
         public void SetupPrecursorMissions(Random rnd) {
-            Mission m = Mission.CreatePrecursorMission(this, rnd);
-            AddMission(m);
+            Mission mp = Mission.CreatePrecursorMission(this, rnd);
+            AddMission(mp);
+            Mission? ma = Mission.TryCreateSpaceHulkArtifactMission(this, rnd);
+            if (ma is not null) AddMission(ma);
         }
 
         // Overrides

@@ -10,8 +10,10 @@ namespace SpaceMercs {
         }
 
         public void SetupSpaceHulkMissions(Random rnd) {
-            Mission m = Mission.CreateSpaceHulkMission(this, rnd);
-            AddMission(m);
+            Mission mh = Mission.CreateSpaceHulkMission(this, rnd);
+            AddMission(mh);
+            Mission? ma = Mission.TryCreateSpaceHulkArtifactMission(this, rnd);
+            if (ma is not null) AddMission(ma);
         }
 
         // Overrides

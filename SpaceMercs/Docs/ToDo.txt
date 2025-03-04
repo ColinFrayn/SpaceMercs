@@ -4,6 +4,9 @@ ToDo List
 
 Display when a weapon is recharging
 
+Keep track of kills with direct effects (e.g. grenade)
+Keep track of kills with ticking effects (e.g. burning/poison)
+
 Player Stats: (Use MessageWindow??)
 - Display Kill count per soldier and Strongest enemy killed
 

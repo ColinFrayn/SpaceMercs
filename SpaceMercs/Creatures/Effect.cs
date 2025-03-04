@@ -11,6 +11,7 @@ namespace SpaceMercs {
         private readonly Dictionary<StatType, int> StatMods;
         public double SpeedMod { get; private set; }
         public double ArmourMod { get; private set; }
+        public string? CausedBy { get; private set; }
 
         public Effect(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.Value ?? "";
@@ -39,8 +40,12 @@ namespace SpaceMercs {
                     StatMods.Add(st, val);
                 }
             }
+            string? cb = xml.SelectSingleNode("CausedBy")?.InnerText;
+            if (!string.IsNullOrEmpty(cb)) {
+                CausedBy = cb;
+            }
         }
-        public Effect(Effect e) {
+        public Effect(Effect e, Soldier? causedBy = null) {
             Name = e.Name;
             Damage = e.Damage;
             DamageType = e.DamageType;
@@ -49,6 +54,7 @@ namespace SpaceMercs {
             SpeedMod = e.SpeedMod;
             ArmourMod = e.ArmourMod;
             StatMods = new Dictionary<StatType, int>(e.StatMods);
+            CausedBy = causedBy?.Name;
         }
 
         public void SaveToFile(StreamWriter file) {
@@ -64,6 +70,7 @@ namespace SpaceMercs {
                 }
                 file.WriteLine(" </StatMods>");
             }
+            if (!string.IsNullOrEmpty(CausedBy)) file.WriteLine($" <CausedBy>{CausedBy}</CausedBy>");
             file.WriteLine("</Effect>");
         }
 

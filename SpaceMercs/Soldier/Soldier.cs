@@ -317,7 +317,7 @@ namespace SpaceMercs {
                 }
                 else {
                     // Make a copy of the effect and apply it
-                    _Effects.Add(new Effect(eff));
+                    _Effects.Add(new Effect(eff, src is Soldier s ? s : null));
                 }
             }
             float TotalDam = (float)InflictDamage(AllDam, applyEffect, null);

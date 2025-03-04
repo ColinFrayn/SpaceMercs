@@ -240,7 +240,7 @@ namespace SpaceMercs {
                     default: throw new NotImplementedException();
                 }
             }
-            if (lev.ParentMission.IsShipMission) return WallType.Ship;
+            if (lev.ParentMission.IsShipMission || lev.Type == Mission.MissionType.SpaceHulk) return WallType.Ship;
             if (lev.Type is Mission.MissionType.AbandonedCity) return WallType.City;
             throw new NotImplementedException();
         }

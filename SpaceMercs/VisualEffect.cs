@@ -149,7 +149,10 @@ namespace SpaceMercs {
                 if (iEffect.Radius > 0d) {
                     effectFactory(EffectType.Explosion, tx + 0.5f, ty + 0.5f, new Dictionary<string, object>() { { "Duration", 250f }, { "Size", (float)iEffect.Radius }, { "Colour", col } });
                 }
-                applyEffect(null, iEffect, tx, ty);
+                if (data.TryGetValue("Source", out object? oSrc) && oSrc is IEntity eSrc) {
+                    applyEffect(eSrc, iEffect, tx, ty);
+                }
+                else applyEffect(null, iEffect, tx, ty);
                 return;
             }
             if (!data.TryGetValue("Result", out object? oResult) || oResult is not ShotResult result) return;

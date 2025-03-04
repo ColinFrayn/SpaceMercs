@@ -679,7 +679,7 @@ namespace SpaceMercs.MainWindow {
                 float duration = (float)range * Const.ShotDurationScale / 0.25f;
                 float sLength = 0.2f;
                 Color col = Color.FromArgb(255, 200, 200, 200);
-                AddNewEffect(EffectType.Shot, px, py, new Dictionary<string, object>() { { "Effect", ie }, { "FX", s.X + 0.5f }, { "TX", px + 0.5f }, { "FY", s.Y + 0.5f }, { "TY", py + 0.5f }, { "Delay", 0f }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
+                AddNewEffect(EffectType.Shot, px, py, new Dictionary<string, object>() { { "Source", s }, { "Effect", ie }, { "FX", s.X + 0.5f }, { "TX", px + 0.5f }, { "FY", s.Y + 0.5f }, { "TY", py + 0.5f }, { "Delay", 0f }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
             }
             else {
                 ApplyItemEffect(s, ie, px, py);
@@ -705,7 +705,11 @@ namespace SpaceMercs.MainWindow {
 
             // Apply effect to the targets
             foreach (IEntity en in hsEntities) {
+                if (en.Health <= 0.0) continue;
                 en.ApplyEffectToEntity(source, ie, AddNewEffect, ApplyItemEffect);
+                if (en.Health <= 0.0 && source is Soldier s && en is Creature cr) {
+                    s.RegisterKill(cr, AnnounceMessage);
+                }
             }
         }
         private bool CheckForTraps(Soldier s) {

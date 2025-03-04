@@ -613,7 +613,7 @@ namespace SpaceMercs {
             }
         }
         private void SetupMapDimensions() {
-            if (ParentMission.IsShipMission) {
+            if (ParentMission.IsShipMission || Type is MissionType.SpaceHulk) {
                 if (ParentMission.ShipTarget is null) throw new Exception("No ship item set up for Ship mission");
                 Width = (ParentMission.ShipTarget.Type.Length * 4) + 9;
                 Height = (ParentMission.ShipTarget.Type.Width * 4) + 9;
@@ -631,6 +631,8 @@ namespace SpaceMercs {
                 Height = 12 + (int)(Math.Pow(1.5, ParentMission.Size - 1) * 16) + rand.Next((ParentMission.Size * 3) + 3);
             }
             else throw new NotImplementedException();
+
+            // Modify size for special missions based on depth
             if (ParentMission.Type == MissionType.PrecursorRuins) {
                 if (LevelID == ParentMission.LevelCount - 1) {
                     Width += 10;
@@ -1918,6 +1920,12 @@ namespace SpaceMercs {
             foreach (Creature ct in Entities.OfType<Creature>()) {
                 if (ct.CurrentTarget == s) ct.SetTarget(null);
             }
+        }
+        public Soldier? GetSoldierByName(string name) {
+            foreach (Soldier s in Soldiers) {
+                if (string.Equals(s.Name, name)) return s;
+            }
+            return null;
         }
 
         // Utility functions

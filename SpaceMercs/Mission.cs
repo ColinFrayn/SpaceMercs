@@ -296,8 +296,6 @@ namespace SpaceMercs {
             return m;
         }
         public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand) {
-            if (loc is SpaceHulk sh) return CreateSpaceHulkMission(loc, rand);
-            if (loc is Planet pl && pl.IsPrecursor) return CreatePrecursorMission(pl, rand);
             if (loc is not HabitableAO hao) throw new Exception("Attempting to create a mission in a non-habitable AO");
             int iDiff = loc.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomScannerMissionType(rand);
@@ -321,10 +319,10 @@ namespace SpaceMercs {
             if (iDiff < 15) iDiff = 15;
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
+            m.Location = loc;
             m.RacialOpponent = null;
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
-            m.Location = loc;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
             m.Size = 3 + (maxDist > 2 ? 1 : 0);
@@ -349,6 +347,54 @@ namespace SpaceMercs {
             m.LevelCount = 2 + maxDist + rand.Next(2);
             m.Goal = MissionGoal.FindItem;
             m.MItem = MissionItem.GenerateSpaceHulkCore(iDiff);
+            // Ship map used for top level
+            m.ShipTarget = Ship.GenerateSpaceHulkShip(iDiff);
+            m.InitialiseMissionBasedOnGoal(rand);
+            return m;
+        }
+        public static Mission? TryCreatePrecursorArtifactMission(OrbitalAO loc, Random rand) {
+            int iDiff = loc.GetRandomMissionDifficulty(rand);
+            if (iDiff < 14) iDiff = 14;
+            MissionType tp = MissionType.PrecursorRuins;
+            Mission m = new Mission(tp, iDiff, rand.Next());
+            m.Location = loc;
+            m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            m.Reward = 0d;
+            Sector sect = loc.GetSystem().Sector;
+            int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
+            m.Size = 3 + (maxDist > 2 ? 1 : 0);
+            m.LevelCount = 2 + maxDist + rand.Next(2);
+
+            // Set mission goal
+            m.Goal = MissionGoal.Artifact;
+            m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            if (m.MItem is null) return null;
+
+            // Ship map used for top level
+            m.ShipTarget = Ship.GenerateSpaceHulkShip(iDiff);
+            m.InitialiseMissionBasedOnGoal(rand);
+            return m;
+        }
+        public static Mission? TryCreateSpaceHulkArtifactMission(OrbitalAO loc, Random rand) {
+            int iDiff = loc.GetRandomMissionDifficulty(rand);
+            if (iDiff < 11) iDiff = 11;
+            MissionType tp = MissionType.SpaceHulk;
+            Mission m = new Mission(tp, iDiff, rand.Next());
+            m.Location = loc;
+            m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            m.Reward = 0d;
+            Sector sect = loc.GetSystem().Sector;
+            int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
+            m.Size = 3 + (maxDist > 2 ? 1 : 0);
+            m.LevelCount = 1 + maxDist + rand.Next(2);
+
+            // Set mission goal
+            m.Goal = MissionGoal.Artifact;
+            m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            if (m.MItem is null) return null;
+
             // Ship map used for top level
             m.ShipTarget = Ship.GenerateSpaceHulkShip(iDiff);
             m.InitialiseMissionBasedOnGoal(rand);
@@ -547,7 +593,7 @@ namespace SpaceMercs {
                 sb.AppendLine("Be warned - the ruins are likely very deep and highly dangerous. Make sure you are fully prepared!");
             }
             if (Type == MissionType.SpaceHulk) {
-                sb.AppendLine("Our scans of this enormous abandoned space vessel indicate exotic energy readings in its core.");
+                sb.AppendLine("Our scans of this enormous abandoned space vessel indicate exotic energy readings deep within.");
                 sb.AppendLine("This vessel is clearly extremely old and may have been built by an unknown precursor race.");
                 sb.AppendLine($"Your task is to investigate the vessel and search out a {MItem} hidden inside.");
                 sb.AppendLine("Be warned - life signs have been detected within and the task will be very dangerous. Make sure you are fully prepared!");

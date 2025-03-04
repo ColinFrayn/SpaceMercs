@@ -209,6 +209,15 @@ namespace SpaceMercs {
                         }
                     }
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
+
+                    // Apply effect?
+                    if (wp != null) {
+                        if (wp.Type.ItemEffect != null) {
+                            tgt.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
+                        }
+                    }
+
+                    // Soldier hits creature -> check change target, and maybe register kill
                     if (tgt is Creature cr) {
                         if (cr.Health <= 0d) {
                             if (source is Soldier sKiller) sKiller.RegisterKill(cr, showMessage);
@@ -218,12 +227,6 @@ namespace SpaceMercs {
                         }
                     }
 
-                    // Apply effect?
-                    if (wp != null) {
-                        if (wp.Type.ItemEffect != null) {
-                            tgt.ApplyEffectToEntity(source, wp.Type.ItemEffect, effectFactory, applyEffect);
-                        }
-                    }
                     // Add weapon experience if shot was with a weapon and from a soldier
                     if (source is Soldier s && wp != null && tgt is not null) {
                         int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count();

@@ -287,7 +287,7 @@ namespace SpaceMercs {
 
                 }
                 else {
-                    _Effects.Add(new Effect(eff));
+                    _Effects.Add(new Effect(eff, src is Soldier s ? s : null));
                 }
             }
             double TotalDam = CalculateDamage(AllDam); 
@@ -825,7 +825,16 @@ namespace SpaceMercs {
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
                     if (TotalDam > 0.0) playSound("Grunt");
                     InflictDamage(AllDam, applyEffect, fact);
-                    if (Health <= 0.0) break; // If this effect killed this creature, stop here
+                    if (Health <= 0.0) {
+                        // If this effect killed this creature, maybe register the kill and then stop here
+                        if (!string.IsNullOrEmpty(e.CausedBy)) {
+                            Soldier? s = CurrentLevel?.GetSoldierByName(e.CausedBy);
+                            if (s is not null) {
+                                s.RegisterKill(this, showMessage);
+                            }
+                        }
+                        break; 
+                    }
                 }
                 if (bZoom) Thread.Sleep(750);
                 e.ReduceDuration(1);
