@@ -2,13 +2,15 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.IO;
+using System.Xml;
 
 namespace SpaceMercs {
     public class SpaceHulk : OrbitalAO {
         public SpaceHulk(Star parent, double orbit) : base(orbit, parent) {
             AxialRotationPeriod = Const.DayLength * 2.5d;
         }
-
+        
         public void SetupSpaceHulkMissions(Random rnd) {
             Mission mh = Mission.CreateSpaceHulkMission(this, rnd);
             AddMission(mh);
@@ -51,5 +53,16 @@ namespace SpaceMercs {
         }
         public override int GetPopulation() => 0;
         public override Planet.PlanetType Type => Planet.PlanetType.SpaceHulk;
+        public override void SaveToFile(StreamWriter file, GlobalClock clock) {
+            file.WriteLine(" <SpaceHulk>");
+            file.WriteLine("  <Orbit>" + Math.Round(OrbitalDistance, 0).ToString() + "</Orbit>");
+            SaveMissions(file);
+            file.WriteLine(" </SpaceHulk>");
+        }
+        public void LoadFromFile(Star parent, XmlNode xml) {
+            Parent = parent;
+            OrbitalDistance = xml.SelectNodeDouble("Orbit", 0.0);
+            LoadMissions(xml);
+        }
     }
 }

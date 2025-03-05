@@ -67,7 +67,7 @@ namespace SpaceMercs {
 
         public void SaveToFile(StreamWriter file) {
             if (Level > 0) {
-                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\" Level\"{Level}\">");
+                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\" Level=\"{Level}\">");
             }
             else {
                 file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");

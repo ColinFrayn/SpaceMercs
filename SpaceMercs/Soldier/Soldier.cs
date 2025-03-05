@@ -557,7 +557,7 @@ namespace SpaceMercs {
             KillCount++;
             if (ToughestKill is null || cr.Experience > ToughestKill.Experience) {
                 ToughestKill = cr;
-                showMessage($"{Name} has registered a new toughest kill : {cr.Name}", null);
+                showMessage($"{Name} has registered a new toughest kill : {cr.Name} [{cr.Level}]", null);
             }
         }
 

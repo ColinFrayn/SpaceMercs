@@ -216,8 +216,8 @@ namespace SpaceMercs.MainWindow {
             }
 
             // Draw the SpaceHulk, if there is one
-            if (SystemStar.HasSpaceHulk) {
-                SpaceHulk sh = SystemStar.GetSpaceHulk()!;
+            if (SystemStar.SpaceHulk is not null) {
+                SpaceHulk sh = SystemStar.SpaceHulk;
                 float scale = Const.PlanetScale * sh.DrawScale;
                 Matrix4 pTranslateM = Matrix4.CreateTranslation(px, py, 0f);
                 fullShaderProgram.SetUniform("view", squashM * pTranslateM);

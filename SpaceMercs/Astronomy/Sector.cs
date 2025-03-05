@@ -297,7 +297,7 @@ namespace SpaceMercs {
             Star? st = GetStarByID(sno);
             if (st == null || bits.Length == 1) return st;
             if (string.Equals(bits[1], "HG")) return st.GetHyperGate() ?? throw new Exception($"Could not find saved HyperGate location {strAOID}");
-            if (string.Equals(bits[1], "SH")) return st.GetSpaceHulk() ?? throw new Exception($"Could not find saved SpaceHulk location {strAOID}");
+            if (string.Equals(bits[1], "SH")) return st.SpaceHulk ?? throw new Exception($"Could not find saved SpaceHulk location {strAOID}");
             if (!int.TryParse(bits[1], out int pno)) {
                 throw new Exception($"Could not parse planet in location string {strAOID}");
             }

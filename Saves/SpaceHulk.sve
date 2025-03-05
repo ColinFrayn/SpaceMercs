@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>01/07/2372 05:50:08</Clock>
+<Clock>02/07/2372 05:51:43</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -5690,8 +5690,55 @@
 </Star>
 <Star ID="7">
 <Seed>4507872</Seed>
+<Name>Hulk Star</Name>
  <MapPos X="-14.61" Y="17.5"/>
- <Visited/></Star>
+ <Visited/> <SpaceHulk>
+  <Orbit>254173258997</Orbit>
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>SpaceHulk</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="12.00" Cost="960.00" Name="SpaceHulk Core" Level="12"><Hulk/></MissionItem>
+<Ship Seed="873260696" Diff="12">
+ <Name>Abandoned Hulk</Name>
+ <Hull>23</Hull>
+ <Shield>0</Shield>
+ <Seed>248437</Seed>
+</Ship>
+ <Enemy>Xenomorphs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>12</Diff>
+ <LevelCount>4</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1135829000</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>SpaceHulk</Type>
+ <Goal>Artifact</Goal>
+<MissionItem Mass="0.00" Cost="0.00" Name="Automatic Rifle [Legendary]">
+<Weapon Type="Automatic Rifle" Level="5" />
+</MissionItem>
+<Ship Seed="790940956" Diff="11">
+ <Name>Abandoned Hulk</Name>
+ <Hull>25</Hull>
+ <Shield>0</Shield>
+ <Seed>101888</Seed>
+</Ship>
+ <Enemy>Xenomorphs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>11</Diff>
+ <LevelCount>4</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1630076542</Seed>
+ <Size>4</Size>
+</Mission>
+ </Missions>
+ </SpaceHulk>
+</Star>
 <Star ID="8">
 <Seed>736471</Seed>
  <MapPos X="-14.7" Y="16.16"/>

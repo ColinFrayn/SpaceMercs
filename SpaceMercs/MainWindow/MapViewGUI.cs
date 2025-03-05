@@ -540,9 +540,9 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 else if (ao is SpaceHulk) bCanScanHere = true;
-                if (bCanScanHere) {
+                if (bCanScanHere && PlayerTeam.CurrentPosition is OrbitalAO oao) {
                     gbScan!.Activate();
-                    if (!(PlayerTeam.CurrentPositionHAO?.Scanned ?? false)) gbScan!.UpdateText("Scan");
+                    if (!oao.Scanned) gbScan!.UpdateText("Scan");
                     else gbScan.UpdateText("Missions");
                 }
             }

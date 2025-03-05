@@ -5,8 +5,12 @@ ToDo List
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
+Is shock armour shield strength supposed to recharge over time during missions??
+
 Precursor/SpaceHulk missions
-* SpaceHulk level 0 was once far too small? Test again?
+- SH doesn't seem to store missions (have to rescan every time)
+* SpaceHulk level 0 was once far too small? Test again? Was ok second time. Test a few different missions.
+- Test level type/size/sparseness changes at lower levels
 - Vary CreatureGroups at lower levels
 - What is the primary enemy of the Precursors? Add them in, especially at lower levels
 - Return Cores to Homeworlds for additional +relations. How?

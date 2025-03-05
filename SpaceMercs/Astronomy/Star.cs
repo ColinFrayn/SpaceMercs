@@ -42,7 +42,7 @@ namespace SpaceMercs {
             }
         }
         public bool HasHyperGate { get { return TradeRoutes.Count > 0; } }
-        public bool HasSpaceHulk { get; private set; }
+        public SpaceHulk? SpaceHulk { get; private set; }
         public double HyperGateOrbit {
             get {
                 if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
@@ -58,20 +58,12 @@ namespace SpaceMercs {
             }
         }
         private HyperGate _hypergate;
-        private SpaceHulk _spaceHulk;
         private readonly object _hglock = new object(), _shLock = new object();
         public HyperGate? GetHyperGate() {
             if (!HasHyperGate) return null;
             lock (_hglock) {
                 _hypergate ??= new HyperGate(this, HyperGateOrbit);
                 return _hypergate;
-            }
-        }
-        public SpaceHulk? GetSpaceHulk() {
-            if (!HasSpaceHulk) return null;
-            lock (_shLock) {
-                _spaceHulk ??= new SpaceHulk(this, SpaceHulkOrbit);
-                return _spaceHulk;
             }
         }
 
@@ -159,6 +151,14 @@ namespace SpaceMercs {
 
             SetupColour();
             StarType = SetupType();
+
+            XmlNode? xsh = xml.SelectSingleNode("SpaceHulk");
+            if (xsh is not null) {
+                if (SpaceHulk is null) {
+                    throw new Exception("Weird - system has SpaceHulk data but no actual space hulk");
+                }
+                SpaceHulk.LoadFromFile(this, xsh);
+            }
         }
 
         public static Star Empty { get { return new Star(); } }
@@ -186,6 +186,10 @@ namespace SpaceMercs {
             }
 
             if (Visited) file.Write(" <Visited/>");
+
+            if (SpaceHulk is not null && SpaceHulk.Scanned) {
+                SpaceHulk.SaveToFile(file, clock);
+            }
 
             file.WriteLine("</Star>");
         }
@@ -289,11 +293,13 @@ namespace SpaceMercs {
             _planets?.Clear();
 
             // Does it have a space hulk?
-            HasSpaceHulk = false;
+            SpaceHulk = null;
             if (Sector is not null) {
                 int maxDist = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
                 if (maxDist >= 2) {
-                    HasSpaceHulk = (rnd.Next(8 + maxDist) == 1);
+                    if (rnd.Next(8 + maxDist) == 1) {
+                        SpaceHulk = new SpaceHulk(this, SpaceHulkOrbit);
+                    }
                 }
             }
 
