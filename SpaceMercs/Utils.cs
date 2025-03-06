@@ -310,6 +310,18 @@ namespace SpaceMercs {
         public static double GenerateHitRoll(IEntity from, IEntity to) {
             double att = from.Attack + (from.EquippedWeapon?.AccuracyBonus ?? 0);
             double def = to.Defence;
+            // Melee defending against melee
+            if (from.EquippedWeapon is null || from.EquippedWeapon.Type.IsMeleeWeapon) {
+                if (to.EquippedWeapon is not null && to.EquippedWeapon.Type.IsMeleeWeapon) {
+                    // Target is wielding a melee weapon and being attacked in melee. Add a defence bonus.
+                    if (to is Creature cr) {
+                        def += cr.Level / 2;
+                    }
+                    else if (to is Soldier sd) {
+                        def += sd.GetSoldierSkillWithWeaponClass(WeaponType.WeaponClass.Melee);
+                    }
+                }
+            }
             double dist = from.RangeTo(to);
             double size = to.Size;
             double dropoff = (from.EquippedWeapon == null) ? 0.0 : from.EquippedWeapon.DropOff;

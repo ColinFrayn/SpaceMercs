@@ -202,7 +202,10 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">16</Damage>
+        <Damage Type="Physical">12</Damage>
+      </Effect>
+      <Effect>
+        <Damage Type="Fire">12</Damage>
       </Effect>
       <Effect Name="Burning">
         <Duration>3</Duration>        
@@ -311,8 +314,8 @@
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
-        <Damage Type="Acid">5</Damage>
-        <ArmourMod>-5</ArmourMod>
+        <Damage Type="Acid">6</Damage>
+        <ArmourMod>-8</ArmourMod>
       </Effect>
       <Noise>8</Noise>
       <Sound>Blast</Sound>
@@ -338,7 +341,11 @@
         <Damage Type="Physical">16</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">16</Damage>
+        <Damage Type="Fire">24</Damage>
+      </Effect>
+      <Effect Name="Burning">
+        <Duration>2</Duration>
+        <Damage Type="Fire">12</Damage>
       </Effect>
       <Noise>11</Noise>
       <Sound>Blast</Sound>
@@ -369,10 +376,10 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">26</Damage>
+        <Damage Type="Physical">32</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">26</Damage>
+        <Damage Type="Fire">32</Damage>
       </Effect>
       <Noise>12</Noise>
       <Sound>Blast</Sound>
@@ -411,7 +418,7 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">12</Damage>
+        <Damage Type="Physical">14</Damage>
       </Effect>
       <Effect Name="Stunned">
         <Duration>4</Duration>

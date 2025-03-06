@@ -2,6 +2,7 @@
 using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -20,7 +21,7 @@ namespace SpaceMercs {
         private int[,] TextureCoords;
         private readonly HashSet<Point> EntryLocations = new HashSet<Point>(); //  = "To/From above" if multi-level
         private readonly HashSet<Point> ExitLocations = new HashSet<Point>(); //  = "To/From below" if multi-level
-        private readonly List<IEntity> Entities = new List<IEntity>();
+        private readonly ConcurrentDictionary<IEntity,byte> Entities = new ConcurrentDictionary<IEntity, byte>(); // Using a Dict to mimic a concurrent set (which desn't exist)
         private readonly Dictionary<Point, Stash> Items = new Dictionary<Point, Stash>();
         private readonly Dictionary<Point, Trap> Traps = new Dictionary<Point, Trap>();
         private IEntity?[,] EntityMap;
@@ -115,8 +116,8 @@ namespace SpaceMercs {
         }
 
         // Public access to entities sorted by type
-        public IReadOnlyCollection<Creature> Creatures { get { return Entities.OfType<Creature>().ToList().AsReadOnly(); } }
-        public IReadOnlyCollection<Soldier> Soldiers { get { return Entities.OfType<Soldier>().ToList().AsReadOnly(); } }
+        public IReadOnlyCollection<Creature> Creatures { get { return Entities.Keys.OfType<Creature>().ToList().AsReadOnly(); } }
+        public IReadOnlyCollection<Soldier> Soldiers { get { return Entities.Keys.OfType<Soldier>().ToList().AsReadOnly(); } }
 
         // These are used for map generation only (can be ignored after this point)
         private int[,] RoomMap; // Only used for dungeon map generation
@@ -211,7 +212,7 @@ namespace SpaceMercs {
 
         // After loading a level, set all creature targets properly (from the X,Y loaded to an IEntity)
         public void SetCreatureTargets() {
-            foreach (IEntity ent in Entities) {
+            foreach (IEntity ent in Entities.Keys) {
                 if (ent is Creature cr) {
                     if (cr.TX < 0 || cr.TX >= Width || cr.TY < 0 || cr.TY >= Height) continue;
                     cr.SetTarget(EntityMap[cr.TX, cr.TY]);
@@ -250,7 +251,7 @@ namespace SpaceMercs {
 
             // Save creatures
             file.WriteLine("<Creatures>");
-            foreach (IEntity en in Entities) {
+            foreach (IEntity en in Entities.Keys) {
                 if (en is Creature cr) {
                     cr.SaveToFile(file);
                 }
@@ -501,7 +502,7 @@ namespace SpaceMercs {
             foreach (Point pt in lTraps) {
                 if (Visible[pt.X, pt.Y] || Const.DEBUG_VISIBLE_ALL) DisplayTrap(prog, pt);
             }
-            IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
+            IEnumerable<IEntity> lEntities = Entities.Keys.ToList().AsReadOnly();
             foreach (IEntity e in lEntities) {
                 if (Visible[e.X, e.Y] ||
                     Visible[e.X + e.Size - 1, e.Y] ||
@@ -976,7 +977,7 @@ namespace SpaceMercs {
                     s.SetFacing(Utils.Direction.North);
                     if (!s.OnMission) s.ResetForBattle();
                     s.UpdateVisibility(this);
-                    Entities.Add(s);
+                    Entities.TryAdd(s,1);
                     EntityMap[pt.X, pt.Y] = s;
                     if (!ParentMission.Soldiers.Contains(s)) ParentMission.Soldiers.Add(s);
                     CalculatePlayerVisibility();
@@ -993,7 +994,7 @@ namespace SpaceMercs {
                     s.SetFacing(Utils.Direction.North);
                     if (!s.OnMission) s.ResetForBattle();
                     s.UpdateVisibility(this);
-                    Entities.Add(s);
+                    Entities.TryAdd(s,1);
                     EntityMap[pt.X, pt.Y] = s;
                     if (!ParentMission.Soldiers.Contains(s)) ParentMission.Soldiers.Add(s);
                     CalculatePlayerVisibility();
@@ -1006,7 +1007,7 @@ namespace SpaceMercs {
         public void AddSoldierAtCurrentLocation(Soldier s) {
             s.OnMission = true;
             s.UpdateVisibility(this);
-            Entities.Add(s);
+            Entities.TryAdd(s,1);
             EntityMap[s.X, s.Y] = s;
             ParentMission.Soldiers.Add(s);
             CalculatePlayerVisibility();
@@ -1015,7 +1016,7 @@ namespace SpaceMercs {
             List<Soldier> lSoldiers = new List<Soldier>(Soldiers);
             foreach (Soldier s in lSoldiers) {
                 EntityMap[s.X, s.Y] = null;
-                Entities.Remove(s);
+                Entities.TryRemove(new KeyValuePair<IEntity,byte>(s, 1));
             }
         }
         private void AddSoldierInRandomRoom(Soldier s) {
@@ -1048,7 +1049,7 @@ namespace SpaceMercs {
             s.SetFacing(Utils.Direction.North);
             s.ResetForBattle();
             s.UpdateVisibility(this);
-            Entities.Add(s);
+            Entities.TryAdd(s, 1);
             EntityMap[pt.X, pt.Y] = s;
             CalculatePlayerVisibility();
         }
@@ -1058,8 +1059,8 @@ namespace SpaceMercs {
         }
         private void AddCreatureWithoutReset(Creature cr) {
             cr.UpdateVisibility(this);
-            if (Entities.Contains(cr)) throw new Exception("Attempting to add duplicate creature");
-            Entities.Add(cr);
+            if (Entities.ContainsKey(cr)) throw new Exception("Attempting to add duplicate creature");
+            Entities.TryAdd(cr, 1);
             for (int y = cr.Y; y < cr.Y + cr.Size; y++) {
                 for (int x = cr.X; x < cr.X + cr.Size; x++) {
                     if (EntityMap[x, y] != null) throw new Exception("Attempting to add creature on top of another");
@@ -1171,7 +1172,7 @@ namespace SpaceMercs {
 
                     // Avoid other groups of creatures
                     bOK = true;
-                    foreach (IEntity e in Entities) {
+                    foreach (IEntity e in Entities.Keys) {
                         int d = Math.Abs(e.X - x) + Math.Abs(e.Y - y);
                         if (d < 6) { bOK = false; niter++; break; }
                         score += (d / 4);
@@ -1804,7 +1805,7 @@ namespace SpaceMercs {
 
         // Actions
         public void MoveEntityTo(IEntity en, Point pt) {
-            if (!Entities.Contains(en)) throw new Exception("Attempting to place an entity that isn't in this level!");
+            if (!Entities.ContainsKey(en)) throw new Exception("Attempting to place an entity that isn't in this level!");
             for (int y = en.Y; y < en.Y + en.Size; y++) {
                 for (int x = en.X; x < en.X + en.Size; x++) {
                     if (EntityMap[x, y] == null) throw new Exception("Attempting to move an entity with a corrupt location map");
@@ -1846,7 +1847,7 @@ namespace SpaceMercs {
             }
             else throw new Exception("Attempting to open a thing that isn't a closed door!");
             // Update all visibility
-            foreach (IEntity en in Entities) {
+            foreach (IEntity en in Entities.Keys) {
                 en.UpdateVisibility(this);
             }
         }
@@ -1876,7 +1877,7 @@ namespace SpaceMercs {
                 while (dy + 1 < Height - 1 && Map[xpos, dy + 1] == TileType.OpenDoorVertical) { dy++; Map[xpos, dy] = TileType.DoorVertical; }
             }
             else throw new Exception("Attempting to close a thing that isn't an open door!");
-            foreach (IEntity en in Entities) en.UpdateVisibility(this);
+            foreach (IEntity en in Entities.Keys) en.UpdateVisibility(this);
             return true;
         }
         public void RunCreatureTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, bool fastAI, ItemEffect.ApplyItemEffect applyEffect) {
@@ -1888,7 +1889,7 @@ namespace SpaceMercs {
             }
         }
         public void KillCreature(Creature cr, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
-            Entities.Remove(cr);
+            Entities.TryRemove(new KeyValuePair<IEntity, byte>(cr, 1));
             for (int y = cr.Y; y < cr.Y + cr.Size; y++) {
                 for (int x = cr.X; x < cr.X + cr.Size; x++) {
                     if (EntityMap[x, y] == null) throw new Exception("Attempting to remove creature from empty cell");
@@ -1919,7 +1920,7 @@ namespace SpaceMercs {
         }
         public void KillSoldier(Soldier s) {
             // Remove soldier from Team & Mission
-            Entities.Remove(s);
+            Entities.TryRemove(new KeyValuePair<IEntity, byte>(s, 1));
             ParentMission.Soldiers.Remove(s);
             s.PlayerTeam?.RemoveSoldier(s);
             EntityMap[s.X, s.Y] = null;
@@ -1928,7 +1929,7 @@ namespace SpaceMercs {
             AddToStashAtPosition(s.X, s.Y, s.GenerateStash());
 
             // Make sure nothing is targeting the dead soldier
-            foreach (Creature ct in Entities.OfType<Creature>()) {
+            foreach (Creature ct in Entities.Keys.OfType<Creature>()) {
                 if (ct.CurrentTarget == s) ct.SetTarget(null);
             }
         }
@@ -1993,7 +1994,7 @@ namespace SpaceMercs {
                         CastVisibilityLine(VisibleMap, en.X + ex, en.Y + ey, Width - 1, y);
                     }
                     // Cast to all other entities
-                    foreach (IEntity en2 in Entities) {
+                    foreach (IEntity en2 in Entities.Keys) {
                         for (int ey2 = 0; ey2 < en2.Size; ey2++) {
                             for (int ex2 = 0; ex2 < en2.Size; ex2++) {
                                 CastVisibilityLine(VisibleMap, en.X + ex, en.Y + ey, en2.X + ex2, en2.Y + ey2);
