@@ -2,20 +2,19 @@
 ToDo List
 -------------------------------------------------
 
+Melee Defence bonus for melee weapons?
+
+Map drawing when zoomed out : MapView.DrawStars is the worst bit.
+- Sector.Draw() : Presumably we can just avoid the whole setup stage as before?
+
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
-Is shock armour shield strength supposed to recharge over time during missions??
-
 Precursor/SpaceHulk missions
-- SH doesn't seem to store missions (have to rescan every time)
-* SpaceHulk level 0 was once far too small? Test again? Was ok second time. Test a few different missions.
-- Test level type/size/sparseness changes at lower levels
+- Precursor: Test level type/size/sparseness changes at lower levels
 - Vary CreatureGroups at lower levels
 - What is the primary enemy of the Precursors? Add them in, especially at lower levels
-- Return Cores to Homeworlds for additional +relations. How?
-
-Experiment building & growing human colonies & trade routes out into second ring
+- Return Cores to Homeworlds for additional +relations. Where?
 
 Display when a weapon is recharging
 
@@ -31,6 +30,8 @@ Making Epic weapons takes a space hulk core. Legendary weapons requires a Precur
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 
 What should attack skill do for an AoE weapon (grenade or cone)?
+
+Soldier shields do not recharge. Should they? Would it lead to wasting loads of time outside battles??
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 

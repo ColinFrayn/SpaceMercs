@@ -103,43 +103,67 @@ namespace SpaceMercs {
                 Projection = Matrix4.CreatePerspectiveFieldOfView(Const.MapViewportAngle, aspect, 0.05f, 5000.0f),
             };
 
+            // Faded stars
+            // Draw these separately for speed
+            prog.SetUniform("textureEnabled", false);
+            prog.SetUniform("lightEnabled", false);
+            prog.SetUniform("model", Matrix4.Identity);
+            GL.UseProgram(prog.ShaderProgramHandle);
+            if (fMapViewZ > 20) Disc.Disc16.Bind();
+            else Disc.Disc32.Bind();
+            foreach (Star st in Stars) {
+                // Work out the degree of detail to show in this star
+                int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
+
+                if ((bFadeUnvisited && !st.Visited) || iLevel <= 2) {
+                    // Fade out unvisited stars (if set to do so)
+                    float fade = 1f;
+                    if (bFadeUnvisited && !st.Visited) fade = 4f;
+                    Vector4 col = new Vector4(st.BaseColour.X / fade, st.BaseColour.Y / fade, st.BaseColour.Z / fade, 1.0f);
+
+                    // Translate into the star frame
+                    Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos.X - fMapViewX, st.MapPos.Y - fMapViewY, -fMapViewZ);
+                    Matrix4 scaleM = Matrix4.CreateScale(st.DrawScale / 8f);
+                    Matrix4 viewM = scaleM * translateM;
+
+                    prog.SetUniform("view", viewM);
+                    prog.SetUniform("flatColour", col);
+                    GL.UseProgram(prog.ShaderProgramHandle);
+
+                    if (fMapViewZ > 20) Disc.Disc16.Draw();
+                    else Disc.Disc32.Draw();
+                }
+            }
+            if (fMapViewZ > 20) Disc.Disc16.Unbind();
+            else Disc.Disc32.Unbind();
+
+            // Precalc matrices
+            Matrix4 translateM3 = Matrix4.CreateTranslation(0.0f, 1.1f, 0f);
+            Matrix4 scaleText = Matrix4.CreateScale(0.5f);
+            Matrix4 scaleFlag = Matrix4.CreateScale(0.6f, 0.4f, 0.01f);
+            Matrix4 scaleFlagPole = Matrix4.CreateScale(0.05f, 1.0f, 0.01f);
+            Matrix4 translateFlag = Matrix4.CreateTranslation(0.0f, 0.5f, 0f);
+
+            // Display remaining stars, text, flags etc.
             foreach (Star st in Stars) {
                 // Translate into the star frame
-                Matrix4 translateM = Matrix4.CreateTranslation(st.MapPos.X - fMapViewX, st.MapPos.Y - fMapViewY, -fMapViewZ);
+                Matrix4 translateStar = Matrix4.CreateTranslation(st.MapPos.X - fMapViewX, st.MapPos.Y - fMapViewY, -fMapViewZ);
 
                 // Work out the degree of detail to show in this star
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
                 // If the star is close to the viewer and not faded then show the textured sphere
                 if ((!bFadeUnvisited || st.Visited) && iLevel >= 3) {
-                    Matrix4 scaleM = Matrix4.CreateScale(0.5f);
-                    Matrix4 viewM = scaleM * translateM;
+                    Matrix4 viewM = scaleText * translateStar;
                     prog.SetUniform("view", viewM);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
                     st.DrawSelected(prog, iLevel, elapsedSeconds);
-                }
-                else {
-                    // Fade out unvisited stars (if set to do so)
-                    float fade = 1f;
-                    if (bFadeUnvisited && !st.Visited) fade = 4f;
-                    Vector4 col = new Vector4(st.BaseColour.X / fade, st.BaseColour.Y / fade, st.BaseColour.Z / fade, 1.0f);
-
-                    Matrix4 scaleM = Matrix4.CreateScale(st.DrawScale / 8f);
-                    Matrix4 viewM = scaleM * translateM;
-                    prog.SetUniform("view", viewM);
-                    prog.SetUniform("model", Matrix4.Identity);
-                    prog.SetUniform("textureEnabled", false);
-                    prog.SetUniform("lightEnabled", false);
-                    prog.SetUniform("flatColour", col);
-                    GL.UseProgram(prog.ShaderProgramHandle);
-                    if (iLevel > 6) Disc.Disc32.BindAndDraw();
-                    else Disc.Disc16.BindAndDraw();
                 }
 
                 // Draw the name label for this star
                 bool hasLabel = false;
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
-                    tro.View = Matrix4.CreateScale(0.5f) * translateM;
+                    tro.View = Matrix4.CreateScale(0.5f) * translateStar;
                     tro.YPos = -0.5f;
                     tro.TextColour = Color.White;
                     TextRenderer.DrawWithOptions(st.Name, tro);
@@ -148,22 +172,20 @@ namespace SpaceMercs {
 
                 // Display whether this system has been colonised with a flag
                 if (bShowFlags && st.Visited && st.Owner != null) {
-                    Matrix4 translateM2 = Matrix4.CreateTranslation(0.0f, 0.5f, 0f);
-                    Matrix4 scaleM = Matrix4.CreateScale(0.05f, 1.0f, 0.01f);
-                    Matrix4 viewM = Matrix4.CreateScale(0.5f) * translateM;
-                    prog.SetUniform("view", viewM);
-                    prog.SetUniform("model", scaleM * translateM * translateM2);
+                    Matrix4 viewFlag = Matrix4.CreateScale(0.5f) * translateStar;
+                    prog.SetUniform("view", viewFlag);
+                    prog.SetUniform("model", scaleFlagPole * translateStar * translateFlag);
                     prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("lightEnabled", false);
                     prog.SetUniform("flatColour", new Vector4(0.6f, 0.4f, 0.2f, 1.0f));
                     GL.UseProgram(prog.ShaderProgramHandle);
-                    Square.Flat.BindAndDraw();
-                    Matrix4 translateM3 = Matrix4.CreateTranslation(0.0f, 1.1f, 0f);
-                    Matrix4 scaleM2 = Matrix4.CreateScale(0.6f, 0.4f, 0.01f);
-                    prog.SetUniform("model", scaleM2 * translateM * translateM3);
-                    prog.SetUniform("flatColour", new Vector4((float)st.Owner.Colour.R/255f, (float)st.Owner.Colour.G / 255f, (float)st.Owner.Colour.B / 255f, 1.0f));
+                    Square.Flat.Bind();
+                    Square.Flat.Draw();
+                    prog.SetUniform("model", scaleFlag * translateStar * translateM3);
+                    prog.SetUniform("flatColour", new Vector4((float)st.Owner.Colour.R / 255f, (float)st.Owner.Colour.G / 255f, (float)st.Owner.Colour.B / 255f, 1.0f));
                     GL.UseProgram(prog.ShaderProgramHandle);
-                    Square.Flat.BindAndDraw();
+                    Square.Flat.Draw();
+                    Square.Flat.Unbind();
                 }
 
                 // Draw the system population
@@ -172,7 +194,7 @@ namespace SpaceMercs {
                     if (pop == 0) continue;
                     if (hasLabel) tro.YPos = -1.0f; // Offset under system name
                     else tro.YPos = -0.5f;
-                    tro.View = Matrix4.CreateScale(0.5f) * translateM;
+                    tro.View = Matrix4.CreateScale(0.5f) * translateStar;
                     tro.TextColour = Color.LightGreen;
                     tro.Scale = 0.5f;
                     TextRenderer.DrawWithOptions(pop.ToString(), tro);
