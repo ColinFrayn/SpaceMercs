@@ -1,7 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Mechanoid Grunt">
     <LevelRange>6,15</LevelRange>
-    <Attack>11</Attack>
+    <Attack>10</Attack>
     <Defence>9</Defence>
     <Armour>22</Armour>
     <Health>13</Health>
@@ -26,7 +26,7 @@
   </CreatureType>
   <CreatureType Name="Mechanoid Trooper">
     <LevelRange>7,18</LevelRange>
-    <Attack>12</Attack>
+    <Attack>11</Attack>
     <Defence>10</Defence>
     <Armour>24</Armour>
     <Health>17</Health>
@@ -53,7 +53,7 @@
   </CreatureType>
   <CreatureType Name="Mechanoid Slasher">
     <LevelRange>7,18</LevelRange>
-    <Attack>13</Attack>
+    <Attack>12</Attack>
     <Defence>10</Defence>
     <Armour>22</Armour>
     <Health>17</Health>
@@ -81,7 +81,7 @@
   <CreatureType Name="Mechanoid Elite">
     <Scale>1.05</Scale>
     <LevelRange>8,22</LevelRange>
-    <Attack>13</Attack>
+    <Attack>12</Attack>
     <Defence>11</Defence>
     <Armour>26</Armour>
     <Health>21</Health>
@@ -123,9 +123,10 @@
     <Col2>140, 140, 140</Col2>
     <Col3>170, 170, 170</Col3>
     <Desc>A large tank with a heavy weapon</Desc>
-    <Weapons>      
-      <Weapon Weight="2">Heavy Laser Rifle</Weapon>
-      <Weapon Weight="1" MinLev="12">Gauss Cannon</Weapon>
+    <Weapons>
+      <Weapon Weight="1" MaxLev="12">Laser Rifle</Weapon>
+      <Weapon Weight="2" MinLev="11">Heavy Laser Rifle</Weapon>
+      <Weapon Weight="1" MinLev="13">Gauss Cannon</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -138,7 +139,7 @@
   </CreatureType>
   <CreatureType Name="Mechanoid Ranger">
     <LevelRange>9,22</LevelRange>
-    <Attack>14</Attack>
+    <Attack>13</Attack>
     <Defence>10</Defence>
     <Armour>21</Armour>
     <Health>16</Health>
@@ -166,8 +167,8 @@
   <CreatureType Name="Mechanoid Heavy Tank">
     <Size>3</Size>
     <LevelRange>10,24</LevelRange>
-    <Attack>18</Attack>
-    <Defence>11</Defence>
+    <Attack>15</Attack>
+    <Defence>10</Defence>
     <BodyType>Tank</BodyType>
     <Armour>36</Armour>
     <Health>60</Health>

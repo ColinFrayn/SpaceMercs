@@ -47,7 +47,6 @@ namespace SpaceMercs.MainWindow {
         }
         public static GlobalClock Clock = new(Const.StartingDate);
 
-
         public GUIMessageBox msgBox { get; private set; }
         public Travel? TravelDetails { get; private set; }
 

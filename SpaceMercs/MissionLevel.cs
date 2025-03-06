@@ -503,7 +503,11 @@ namespace SpaceMercs {
             }
             IEnumerable<IEntity> lEntities = Entities.ToList().AsReadOnly();
             foreach (IEntity e in lEntities) {
-                if (Visible[e.X, e.Y] || Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight, aspect, viewM);
+                if (Visible[e.X, e.Y] ||
+                    Visible[e.X + e.Size - 1, e.Y] ||
+                    Visible[e.X, e.Y + e.Size - 1] ||
+                    Visible[e.X + e.Size - 1, e.Y + e.Size - 1] ||
+                    Const.DEBUG_VISIBLE_ALL) e.Display(prog, bShowLabels, bShowStatBars, bShowEffects, fViewHeight, aspect, viewM);
             }
         }
         private void DisplayItemStack(ShaderProgram prog, Point pt) {

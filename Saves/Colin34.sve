@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>01/07/2365 14:42:28</Clock>
+<Clock>02/07/2365 10:34:24</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -4823,8 +4823,6 @@
 <Temp>271</Temp>
 <Seed>314307</Seed>
  <Scanned/>
- <Missions>
- </Missions>
 <Orbit>75201906354</Orbit>
 <TempBase>271.01776283307294</TempBase>
 </Planet>
@@ -4911,19 +4909,6 @@
  <Size>3</Size>
 </Mission>
 <Mission>
- <Type>Caves</Type>
- <Goal>Gather</Goal>
-<MissionItem Mass="1.20" Cost="31.19" Name="Transparent Medal"></MissionItem>
- <Enemy>Mechanoids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>10</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1883346726</Seed>
- <Size>3</Size>
-</Mission>
-<Mission>
  <Type>AbandonedCity</Type>
  <Goal>ExploreAll</Goal>
  <Opponent>Ogrish</Opponent>
@@ -4935,20 +4920,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1767809766</Seed>
  <Size>3</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>Defend</Goal>
-<MissionItem Mass="0.00" Cost="0.00" Name="large structure"></MissionItem>
- <Enemy>Mechanoids</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>11</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>438939977</Seed>
- <Size>2</Size>
- <Waves>5</Waves>
 </Mission>
  </Missions>
 <Orbit>91650300065</Orbit>
@@ -4969,20 +4940,20 @@
  <Cash>16309.494778535965</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="28" Y="24"/>
- <Health>37.81570128805919</Health>
- <Stamina>3.000000000000007</Stamina>
+ <Location X="21" Y="3"/>
+ <Health>43.79520526947611</Health>
+ <Stamina>3.5145464211532005</Stamina>
  <Shields>0</Shields>
  <Facing>-90</Facing>
  <Level>11</Level>
- <XP>499108</XP>
+ <XP>510497</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,12,12,20</Stats>
  <Colour>#0032FF</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem"/>
+<Equipment Type="Nannite Medsystem" Recharge="1"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
@@ -5006,21 +4977,21 @@
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>92</KillCount>
+ <KillCount>103</KillCount>
  <ToughestKill>
-<Creature Type="Xenomorph Queen">
+<Creature Type="Mechanoid Heavy Tank">
  <Level>10</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="23" Y="26"/>
- <Health>59.021673024010546</Health>
- <Stamina>34.530708409206724</Stamina>
+ <Location X="32" Y="2"/>
+ <Health>44.7591475981783</Health>
+ <Stamina>1.4000000000000057</Stamina>
  <Shields>0</Shields>
  <Facing>0</Facing>
  <Level>11</Level>
- <XP>442738</XP>
+ <XP>454127</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,10,17,15</Stats>
@@ -5053,7 +5024,8 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <KillCount>72</KillCount>
+ <Moved/>
+ <KillCount>77</KillCount>
  <ToughestKill>
 <Creature Type="Arachnid Queen">
  <Level>8</Level>
@@ -5061,13 +5033,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="17" Y="26"/>
- <Health>21.91586494026361</Health>
- <Stamina>30</Stamina>
+ <Location X="16" Y="7"/>
+ <Health>37.28326863245239</Health>
+ <Stamina>19.200000000000003</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>11.3099324740202</Facing>
  <Level>11</Level>
- <XP>444576</XP>
+ <XP>455965</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,14,13,9</Stats>
@@ -5100,21 +5072,21 @@
   <Exp Skill="Scavenging">8</Exp>
   <Exp Skill="Engineer">1</Exp>
  </UtilityExperience>
- <KillCount>54</KillCount>
+ <KillCount>64</KillCount>
  <ToughestKill>
-<Creature Type="Xenomorph Soldier">
+<Creature Type="Mechanoid Heavy Tank">
  <Level>10</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="19" Y="28"/>
- <Health>23.691278797814856</Health>
+ <Location X="9" Y="5"/>
+ <Health>41.22824028311964</Health>
  <Stamina>36</Stamina>
  <Shields>0</Shields>
- <Facing>336.03751102542185</Facing>
+ <Facing>12.994616791916513</Facing>
  <Level>11</Level>
- <XP>491261</XP>
+ <XP>502650</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,23,12,15</Stats>
@@ -5122,9 +5094,6 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Medikit"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -5135,7 +5104,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">1621</Exp>
+  <Exp Type="Sniper">1646</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">7</Exp>
@@ -5143,11 +5112,10 @@
   <Exp Skill="Engineer">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>36</KillCount>
+ <KillCount>42</KillCount>
  <ToughestKill>
-<Creature Type="Bandit Leader">
- <Level>10</Level>
- <OverrideRace>Gokan</OverrideRace>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
@@ -5249,7 +5217,7 @@
   <Inv Count="15">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="18">
+  <Inv Count="19">
 <Material Type="Rubber"/>
   </Inv>
   <Inv Count="10">
@@ -5282,7 +5250,7 @@
   <Inv Count="12">
 <Material Type="Kevlar"/>
   </Inv>
-  <Inv Count="16">
+  <Inv Count="27">
 <Material Type="Electronic Components"/>
   </Inv>
   <Inv Count="2">
@@ -5300,7 +5268,7 @@
   <Inv Count="1">
 <Material Type="Metasteel"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="11">
 <Material Type="Titanium"/>
   </Inv>
   <Inv Count="2">
@@ -5317,6 +5285,33 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Acid Grenade"/>
+  </Inv>
+  <Inv Count="2">
+<MissionItem Mass="1.20" Cost="31.19" Name="Transparent Medal"></MissionItem>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Power Axe" Level="0" />
+  </Inv>
+  <Inv Count="6">
+<Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Powerblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Plasma Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Sniper Rifle" Level="0" />
+  </Inv>
+  <Inv Count="5">
+<Weapon Type="Laser Pistol" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
   </Inv>
  </Inventory>
 </Team>
@@ -5516,12 +5511,12 @@
  <Item>Advanced Shock Armour</Item>
  <Item>Light Combat Suit</Item>
  <Item>Combat Suit</Item>
+ <Item>Archon Armour</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
  <Material>Composite</Material>
- <Item>Archon Armour</Item>
 </Research>
 </Race>
 <Race Name="Ogrish">

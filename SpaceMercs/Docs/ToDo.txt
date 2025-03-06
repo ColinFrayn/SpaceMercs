@@ -4,9 +4,6 @@ ToDo List
 
 Melee Defence bonus for melee weapons?
 
-Map drawing when zoomed out : MapView.DrawStars is the worst bit.
-- Sector.Draw() : Presumably we can just avoid the whole setup stage as before?
-
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
