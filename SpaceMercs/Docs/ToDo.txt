@@ -2,7 +2,16 @@
 ToDo List
 -------------------------------------------------
 
-Melee Defence bonus for melee weapons?
+Each sector: Make a single GLShape of all stars as Disc16. Show this when >2 away from centre
+
+<Material> tag is different in Materials and Requirements. Standardise on the shorter one.
+
+Colony builder: [TEST] (Basic, Adv., Cloud)
+
+Maybe some ship rooms give a skill boost e.g. to engineering, armoury etc.
+
+More melee weapons??
+- Check melee weapons with range > 1 [TEST]
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
@@ -21,6 +30,8 @@ Display when a weapon is recharging
 ---------------------
 Backburner : Features
 ---------------------
+
+Why shouldn't everyone get power armour & heavy weapons?
 
 Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?? Maybe?
 
@@ -64,7 +75,7 @@ Improve Creature textures:
 -- Change texture based on race
 -- Change texture based on equipment / weapons
 
-Add overwatch ability to soldiers
+Add overwatch ability to soldiers (not heavies or snipers)
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)

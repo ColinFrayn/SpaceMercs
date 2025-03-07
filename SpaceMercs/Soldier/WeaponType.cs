@@ -15,7 +15,7 @@ namespace SpaceMercs {
         public double Speed { get; private set; }  // Stamina cost to fire
         public double Area { get; private set; } // Is area-of-effect?
         public double Width { get; private set; } // Cone width if cone-type shot
-        public bool IsMeleeWeapon { get { return Range <= 1; } }
+        public bool IsMeleeWeapon { get { return WClass == WeaponClass.Melee; } }
         public string SoundEffect { get; private set; }
         public bool IsUsable { get; private set; }
         public bool Stable { get; private set; }  // This weapon requires stability i.e. you can't move in the same turn before firing

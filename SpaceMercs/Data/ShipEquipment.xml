@@ -154,7 +154,7 @@
     <Cost>500</Cost>
     <Size>L</Size>
     <Power>15</Power>
-    <BuildColony/>
+    <BuildColony>Basic</BuildColony>
     <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
     <Requirements>
@@ -164,7 +164,40 @@
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
-    <Tex>7,6</Tex>
+    <Tex>6,7</Tex>
+  </ShipEquipment>
+  <ShipEquipment Name="Terraform Device">
+    <Cost>1500</Cost>
+    <Size>L</Size>
+    <Power>18</Power>
+    <BuildColony>Advanced</BuildColony>
+    <Desc>A highly advanced colonising device which uses self-replicating nono-robots to prepare an area for colonisation while locally terraforming the target planet, allowing less hospitable planet types to be colonised.</Desc>
+    <Avail>CEMRT</Avail>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>34</MinPop>
+      <CashCost>60</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
+    <Tex>7,7</Tex>
+  </ShipEquipment>
+  <ShipEquipment Name="Cloud Colony Device">
+    <Cost>2500</Cost>
+    <Size>L</Size>
+    <Power>21</Power>
+    <BuildColony>Cloud</BuildColony>
+    <Desc>An alien advanced colonising device which extracts elements from the atmosphere, together with local asteroids, to build a self-perpetuating cloud colony in the atmosphere of a gas giant planet.</Desc>
+    <Avail>CEMRT</Avail>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinPop>46</MinPop>
+      <CashCost>120</CashCost>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+      <Relations Name="Grey">2</Relations>
+    </Requirements>
+    <Tex>1,8</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Chameleon Device">
     <Cost>1800</Cost>

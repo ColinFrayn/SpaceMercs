@@ -297,7 +297,7 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
             Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItemType(eq.BaseType);
-            UpgradeItem ui = new UpgradeItem(eq, 1.0, maxlev, PlayerTeam, ssk);
+            UpgradeItem ui = new UpgradeItem(eq, Const.UpgradeSelfCostMod, maxlev, PlayerTeam, ssk);
             ui.ShowDialog(this);
             if (ui.Upgraded) {
                 if (s == null) {

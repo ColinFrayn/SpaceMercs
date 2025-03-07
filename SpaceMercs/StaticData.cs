@@ -338,7 +338,7 @@ namespace SpaceMercs {
         }
 
         // Given the budget and constraints, see if we can (randomly) pick something
-        public static ShipEquipment? GetRandomShipItemOfMaximumCost(List<ShipEquipment> lItems, ShipEquipment.RoomSize size, Race rc, double dCash, Random rand) {
+        public static ShipEquipment? GetRandomShipItemOfMaximumCost(List<ShipEquipment> lItems, ShipEquipment.RoomSize size, double dCash, Random rand) {
             ShipEquipment? ChosenItem = null;
 
             foreach (ShipEquipment item in lItems) {

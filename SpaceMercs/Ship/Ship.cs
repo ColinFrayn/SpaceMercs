@@ -179,14 +179,6 @@ namespace SpaceMercs {
                 ShipEquipment.RoomAbilities.Engineering => HasEngineering,
                 _ => false
             };
-        public bool CanFoundColony {
-            get {
-                foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
-                    if (tp.Item2 && tp.Item1.BuildColony) return true;
-                }
-                return false;
-            }
-        }
         public bool IsConcealed {
             get {
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
@@ -610,15 +602,28 @@ namespace SpaceMercs {
         public ShipRoomDesign PickRandomRoom(Random rand) {
             return Type.Rooms[rand.Next(Type.Rooms.Count)];
         }
-        public void RemoveColonyBuilder() {
-            foreach (int r in Equipment.Keys) {
-                Tuple<ShipEquipment, bool> tp = Equipment[r];
-                if (tp.Item2 && tp.Item1.BuildColony) {
-                    Equipment.Remove(r);
-                    return;
+        public bool CanFoundColony(HabitableAO hao) {
+            foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                if (tp.Item2 && tp.Item1.BuildColony != ShipEquipment.ColoniseAbility.None) {
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && hao.Type == Planet.PlanetType.Oceanic) return true;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Advanced && hao.Type != Planet.PlanetType.Gas) return true;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Cloud && hao.Type == Planet.PlanetType.Gas) return true;
                 }
             }
-            throw new Exception("Couldn't find colony builder to remove!");
+            return false;
+        }
+        public void RemoveColonyBuilder(HabitableAO hao) {
+            int bestID = -1;
+            foreach (int r in Equipment.Keys) {
+                Tuple<ShipEquipment, bool> tp = Equipment[r];
+                if (tp.Item2 && tp.Item1.BuildColony != ShipEquipment.ColoniseAbility.None) {
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && hao.Type == Planet.PlanetType.Oceanic) bestID = r;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Advanced && hao.Type != Planet.PlanetType.Gas && bestID == -1) bestID = r; // Don't override a basic colony builder, if there are several
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Cloud && hao.Type == Planet.PlanetType.Gas) bestID = r;
+                }
+            }
+            if (bestID >= 0) Equipment.Remove(bestID);
+            else throw new Exception("Couldn't find colony builder to remove!");
         }
 
         // User wants to salvage this room
@@ -691,7 +696,7 @@ namespace SpaceMercs {
         }
 
         // Generate a ship for the given race, of the given difficulty
-        public static Ship GenerateRandomShipOfRace(Race rc, double dDiff, ShipEngine? minDrive) {
+        public static Ship GenerateRandomShipOfDifficulty(double dDiff, ShipEngine? minDrive) {
             Random rand = new Random();
             Ship sh = new Ship(ShipType.SetupRandomShipType(dDiff, rand.Next()));
 
@@ -703,7 +708,7 @@ namespace SpaceMercs {
 
             // Set up equipment (we only care about weapons, equipment, armour, engine)
             double dCash = ((Math.Pow(1.5d,dDiff) * 40d) + (sh.Type.MaxHull * dDiff * 4d) + 20d) / 5d;
-            ShipEngine? seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, rc, dCash / 5.0, rand) as ShipEngine;
+            ShipEngine? seng = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipEngines.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Engine, dCash / 5.0, rand) as ShipEngine;
             if (minDrive != null && (seng == null || seng.Range < minDrive.Range)) seng = minDrive;
             if (seng != null) sh.SetEngine(seng);
 
@@ -713,7 +718,7 @@ namespace SpaceMercs {
                 if (rd.Size == ShipEquipment.RoomSize.Weapon) {
                     int iTries = 0;
                     do {
-                        ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, rc, dCash * ((double)iTries + 10d) / 10d, rand);
+                        ShipEquipment? se = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipWeapons.ToList<ShipEquipment>(), rd.Size, dCash * ((double)iTries + 10d) / 10d, rand);
                         if (se is null) iTries++;
                         else {
                             sh.AddBuiltEquipmentAutoSlot(se, iRoomID);
@@ -736,7 +741,7 @@ namespace SpaceMercs {
                 }
             }
             if (dDiff + (rand.NextDouble() * 3d) > 5d) {
-                ShipEquipment? arm = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Armour, rc, dCash, rand);
+                ShipEquipment? arm = StaticData.GetRandomShipItemOfMaximumCost(StaticData.ShipArmours.ToList<ShipEquipment>(), ShipEquipment.RoomSize.Armour, dCash, rand);
                 if (arm is ShipArmour sArm) {
                     sh.ArmourType = sArm;
                 }

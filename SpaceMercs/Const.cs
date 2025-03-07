@@ -196,6 +196,7 @@ namespace SpaceMercs {
         public const double BasicTradeRouteLength = 4.0; // Maximum length of a trade route in light years for a basic colony
         public const double MaxTradeRouteLength = 7.0; // Maximum length of a trade route in light years for a large colony
         public const double DailyResearchProb = 0.0015; // Chance of successfully researching a technology, per day, for a nonHuman race.
+        public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony

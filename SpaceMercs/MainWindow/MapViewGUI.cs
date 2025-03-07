@@ -400,7 +400,7 @@ namespace SpaceMercs.MainWindow {
         private void OpenColonyViewDialog() {
             if (!GalaxyMap.MapIsInitialised) return;
             if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
-                if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas && PlayerTeam.PlayerShip.CanFoundColony) {
+                if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && PlayerTeam.PlayerShip.CanFoundColony(hao)) {
                     if (!hao.Scanned) {
                         msgBox.PopupMessage("Before you found a colony you need to scan the planet\nand clear all discovered missions");
                         return;
@@ -442,7 +442,7 @@ namespace SpaceMercs.MainWindow {
             if (systemOwner == null) {
                 StaticData.HumanRace.AddSystem(hao.GetSystem());
             }
-            PlayerTeam.PlayerShip.RemoveColonyBuilder();
+            PlayerTeam.PlayerShip.RemoveColonyBuilder(hao);
             msgBox.PopupMessage("Colony Founded.\nYour renown has increased with the human race!");
             if (systemOwner != null && systemOwner != StaticData.HumanRace) {
                 // This system is owned by another race
@@ -467,7 +467,7 @@ namespace SpaceMercs.MainWindow {
             }
             // Open the ScanPlanet dialog
             if (PlayerTeam!.CurrentPosition is not OrbitalAO oao) {
-                throw new Exception("Strange - attemptign to scan non-OAO");
+                throw new Exception("Strange - attempting to scan non-OAO");
             }
             ScanPlanet sp = new ScanPlanet(oao, PlayerTeam!, RunMission, Clock);
             sp.ShowDialog();
@@ -517,8 +517,8 @@ namespace SpaceMercs.MainWindow {
                     gbViewColony!.UpdateText("Colony");
                     gbViewColony!.Activate();
                 }
-                else if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao && hao.Type != Planet.PlanetType.Gas) {
-                    if (PlayerTeam.PlayerShip.CanFoundColony) {
+                else if (PlayerTeam.CurrentPosition != null && PlayerTeam.CurrentPosition is HabitableAO hao) {
+                    if (PlayerTeam.PlayerShip.CanFoundColony(hao)) {
                         gbViewColony!.UpdateText("Colonise");
                         gbViewColony!.Activate();
                     }
@@ -530,9 +530,9 @@ namespace SpaceMercs.MainWindow {
                 if (PlayerTeam.CurrentPositionHAO != null) {
                     if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
                         if (PlayerTeam.CurrentPosition is Planet pl) {
-                            if (pl.Type != Planet.PlanetType.Gas) {
-                                bCanScanHere = true;
-                            }
+                            // I used to prohibit scanning gas giants, but now I think it's ok
+                            // Especially as we now have Cloud Colony Builders.
+                            bCanScanHere = true; 
                         }
                         if (PlayerTeam.CurrentPosition is Moon) {
                             bCanScanHere = true;

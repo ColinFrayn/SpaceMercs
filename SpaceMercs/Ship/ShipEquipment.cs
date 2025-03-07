@@ -16,10 +16,11 @@ namespace SpaceMercs {
         public bool Workshop { get; private set; }
         public int Repair { get; private set; }
         public bool Engineering { get; private set; }
-        public bool BuildColony { get; private set; }
+        public ColoniseAbility BuildColony { get; private set; }
         public bool Conceal { get; private set; } // Reduces risk of inteception
         public enum RoomSize { Weapon, Small, Medium, Large, Core, Engine, Armour };
         public enum RoomAbilities { Medlab, Armoury, Workshop, Engineering };
+        public enum ColoniseAbility { None, Basic, Advanced, Cloud };
 
         public ShipEquipment(XmlNode xml) : this(xml, ShipEquipment.RoomSize.Small) {
             // Nothing to see
@@ -44,7 +45,7 @@ namespace SpaceMercs {
             Repair = xml.SelectNodeInt("Repair", 0);
             Engineering = (xml.SelectSingleNode("Engineering") != null);
             Conceal = (xml.SelectSingleNode("Conceal") != null);
-            BuildColony = (xml.SelectSingleNode("BuildColony") != null);
+            BuildColony = xml.SelectNodeEnum<ColoniseAbility>("BuildColony", ColoniseAbility.None);
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.
             if (xml.SelectSingleNode("Avail") != null) {
@@ -90,7 +91,7 @@ namespace SpaceMercs {
             if (Engineering) strList.Add("Ability: Engineering");
             if (Scanner) strList.Add("Ability: Scanner");
             if (Workshop) strList.Add("Ability: Workshop");
-            if (BuildColony) strList.Add("Ability: Colonise");
+            if (BuildColony != ColoniseAbility.None) strList.Add($"Ability: Colonise ({BuildColony})");
             return strList;
         }
     }

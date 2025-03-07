@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Windowing.Common.Input;
+using System.IO;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
@@ -245,13 +247,13 @@ namespace SpaceMercs {
             Mission m = new Mission(MissionType.Salvage, dDiff);
             m.RacialOpponent = rc;
             m.TimeCost = fTime;
-            m.ShipTarget = Ship.GenerateRandomShipOfRace(rc, dDiff, null);
+            m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(dDiff, null);
             return m;
         }
         public static Mission CreateBoardingPartyMission(Race rc, int dDiff) {
             Mission m = new Mission(MissionType.BoardingParty, dDiff);
             m.RacialOpponent = rc;
-            m.ShipTarget = Ship.GenerateRandomShipOfRace(rc, dDiff, null);
+            m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(dDiff, null);
             return m;
         }
         public static Mission CreateRepelBoardersMission(Race? rc, int dDiff, Ship sh) {
@@ -263,7 +265,7 @@ namespace SpaceMercs {
         public static Mission CreateShipCombatMission(Race rc, int dDiff, ShipEngine minDrive) {
             Mission m = new Mission(MissionType.ShipCombat, dDiff);
             m.RacialOpponent = rc;
-            m.ShipTarget = Ship.GenerateRandomShipOfRace(rc, dDiff, minDrive);
+            m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(dDiff, minDrive);
             if (m.ShipTarget is null) throw new Exception("ShipCombat Mission could not generate a target ship");
             return m;
         }
@@ -275,7 +277,7 @@ namespace SpaceMercs {
             if (m.Type == MissionType.BoardingParty) {
                 m.RacialOpponent = cl.Location.GetRandomRace(rand);
                 m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
-                m.ShipTarget = Ship.GenerateRandomShipOfRace(m.RacialOpponent, m.Diff, null);
+                m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
                 if (m.Size < 1) m.Size = 1;
@@ -298,11 +300,19 @@ namespace SpaceMercs {
         public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand) {
             if (loc is not HabitableAO hao) throw new Exception("Attempting to create a mission in a non-habitable AO");
             int iDiff = loc.GetRandomMissionDifficulty(rand);
-            MissionType tp = GenerateRandomScannerMissionType(rand);
+            MissionType tp = GenerateRandomScannerMissionType(loc, rand);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = hao;
-            if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            else m.RacialOpponent = loc.GetRandomRace(rand);
+            if (m.Type == MissionType.BoardingParty) {
+                m.RacialOpponent = loc.GetRandomRace(rand);
+                m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
+                int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
+                m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
+            }
+            else {
+                if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+                else m.RacialOpponent = loc.GetRandomRace(rand);
+            }
             m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             if (m.Size < 1) m.Size = 1;
@@ -441,7 +451,10 @@ namespace SpaceMercs {
             }
             else return MissionType.BoardingParty;
         }
-        public static MissionType GenerateRandomScannerMissionType(Random rand) {
+        public static MissionType GenerateRandomScannerMissionType(AstronomicalObject loc, Random rand) {
+            if (loc is Planet pl && pl.Type == Planet.PlanetType.Gas) {
+                return MissionType.BoardingParty;
+            }
             int r = rand.Next(100);
             if (r < 25) return MissionType.AbandonedCity;
             else if (r < 40) return MissionType.Mines;

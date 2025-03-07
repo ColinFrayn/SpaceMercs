@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace SpaceMercs.Dialogs {
+﻿namespace SpaceMercs.Dialogs {
     partial class UpgradeItem : Form {
         private readonly IEquippable item;
         private readonly double UpgradeCost;
@@ -33,9 +30,9 @@ namespace SpaceMercs.Dialogs {
             lbName.Text = item.Name;
             lbQuality.Text = Utils.LevelToDescription(item.Level);
             lbNewQuality.Text = Utils.LevelToDescription(item.Level + 1);
-            SuccessChance = (0.7 - 0.05 * (item.Level * 6 - skill) - 0.01 * (item.BaseType.BaseRarity));
+            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - skill) - 0.005 * item.BaseType.BaseRarity;
             if (SuccessChance > 0.99) SuccessChance = 0.99;
-            if (SuccessChance < 0.0) SuccessChance = 0.0;
+            if (SuccessChance < 0.01) SuccessChance = 0.01;
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";
             UpgradeCost = item.UpgradeCost * PriceMod;
             lbCost.Text = UpgradeCost.ToString("N2") + "cr";
