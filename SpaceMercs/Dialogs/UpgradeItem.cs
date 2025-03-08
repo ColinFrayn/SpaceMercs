@@ -9,7 +9,7 @@
         public bool Upgraded = false; // Did we attempt the upgrade? (i.e. should we remove the old item?) We need this in case the upgrade destroys the object, in which case NewItem will be null.
         public bool Destroyed = false; // Destroyed in attempting to upgrade?
 
-        public UpgradeItem(IEquippable eq, double PriceMod, int skill, Team t, Soldier? s) {
+        public UpgradeItem(IEquippable eq, double PriceMod, int skill, int aiboost, Team t, Soldier? s) {
             InitializeComponent();
             item = eq;
             PlayerTeam = t;
@@ -24,13 +24,13 @@
                     if (wp.Type.IsMeleeWeapon) skType = Soldier.UtilitySkill.Bladesmith;
                     else skType = Soldier.UtilitySkill.Gunsmith;
                 }
-                lbSoldier.Text = $"{ThisSoldier.Name} ({skType} : {skill})";
+                lbSoldier.Text = $"{ThisSoldier.Name} ({skType} : {skill}{(aiboost > 0 ? "+" + aiboost : string.Empty)})";
 
             }
             lbName.Text = item.Name;
             lbQuality.Text = Utils.LevelToDescription(item.Level);
             lbNewQuality.Text = Utils.LevelToDescription(item.Level + 1);
-            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - skill) - 0.005 * item.BaseType.BaseRarity;
+            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - (skill + aiboost)) - 0.005 * item.BaseType.BaseRarity;
             if (SuccessChance > 0.99) SuccessChance = 0.99;
             if (SuccessChance < 0.01) SuccessChance = 0.01;
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";

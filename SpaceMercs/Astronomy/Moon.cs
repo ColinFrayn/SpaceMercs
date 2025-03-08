@@ -41,7 +41,7 @@ namespace SpaceMercs {
             OrbitalDistance += Radius;
             bool bOK = true;
             do {
-                Temperature = Temperature - 40; // Base = planet's temperature minus 40 degrees
+                Temperature = Parent.Temperature - 40; // Base level
                 double tempmod = 0.0;
                 bOK = true;
                 if (Temperature > 180 && Temperature < 320 && rnd.Next(4) == 0) { _type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }

@@ -374,7 +374,9 @@ namespace SpaceMercs.Dialogs {
             Soldier? s = tp.Soldier;
             if (tp.Item is not IEquippable eq) return;
             bool bEquipped = tp.Equipped;
-            UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, PlayerTeam, null);
+            int relations = PlayerTeam.GetRelations(cl.Owner);
+            int lvl = (cl.BaseSize * 2) + relations - 2;
+            UpgradeItem ui = new UpgradeItem(eq, PriceMod * cl.CostModifier, lvl, 0, PlayerTeam, null);
             ui.ShowDialog(this.Owner);
             if (ui.Upgraded) {
                 if (s is null) {
@@ -414,13 +416,15 @@ namespace SpaceMercs.Dialogs {
             Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
             List<SaleItem> lSI = new List<SaleItem>();
             int count = 0;
+            int relations = PlayerTeam.GetRelations(cl.Owner);
+            int lvl = (cl.BaseSize * 2) + relations - 2;
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
                 if (row.Tag is not SaleItem tp || tp.Item is not IEquippable eqp) return;
                 lSI.Add(tp);
                 Soldier? s = tp.Soldier;
                 IItem? eq = tp.Item;
                 bool bEquipped = tp.Equipped;
-                Dictionary<IItem, int> dr = Utils.DismantleEquipment(eqp, 10);
+                Dictionary<IItem, int> dr = Utils.DismantleEquipment(eqp, lvl);
                 foreach (IItem it in dr.Keys) {
                     if (dRemains.ContainsKey(it)) dRemains[it] += dr[it];
                     else dRemains.Add(it, dr[it]);
@@ -500,7 +504,8 @@ namespace SpaceMercs.Dialogs {
             if (!wp.Type.Modifiable) return;
             Soldier? s = tp.Soldier;
             bool bEquipped = tp.Equipped;
-            ModifyWeapon mw = new ModifyWeapon(wp, PriceMod * cl.CostModifier, (cl.BaseSize * 2) - 1, (cl.BaseSize * 2) - 1, PlayerTeam, null, null);
+            int relations = PlayerTeam.GetRelations(cl.Owner);
+            ModifyWeapon mw = new ModifyWeapon(wp, PriceMod * cl.CostModifier, (cl.BaseSize * 2) + relations - 2, (cl.BaseSize * 2) + relations - 2, 0, PlayerTeam, null, null);
             mw.ShowDialog(this.Owner);
             if (mw.Modified) {
                 if (s is null) {

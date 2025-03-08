@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>19/09/2376 04:50:04</Clock>
+<Clock>16/10/2376 02:36:05</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -6429,8 +6429,6 @@
 <Temp>232</Temp>
 <Seed>661415</Seed>
  <Scanned/>
- <Missions>
- </Missions>
 <Orbit>55940276268</Orbit>
 <TempBase>232.87336471258925</TempBase>
 </Planet>
@@ -6577,13 +6575,13 @@
 </Map>
 <Team>
  <Pos>(0,0)1.2</Pos>
- <Cash>23865.84641573642</Cash>
+ <Cash>1087.5756507411188</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="11" Y="13"/>
  <Health>41.92065176773627</Health>
  <Stamina>31.786618749078293</Stamina>
- <Shields>0</Shields>
+ <Shields>12.5</Shields>
  <Facing>0</Facing>
  <Level>11</Level>
  <XP>541691</XP>
@@ -6627,7 +6625,7 @@
  <Location X="66" Y="48"/>
  <Health>55.43082331555436</Health>
  <Stamina>36</Stamina>
- <Shields>0</Shields>
+ <Shields>10</Shields>
  <Facing>-90</Facing>
  <Level>11</Level>
  <XP>474415</XP>
@@ -6693,7 +6691,7 @@
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Assault Power Armour" Material="Composite" Level="0"/>
+<Armour Type="Assault Power Armour" Material="Composite" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Heavy Laser Rifle" Level="2" />
@@ -6738,7 +6736,7 @@
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Infiltration Suit" Material="Composite" Level="0"/>
+<Armour Type="Infiltration Suit" Material="Composite" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Gauss Sniper Rifle" Level="3" />
@@ -6782,7 +6780,7 @@
   </Inv>
  </Inventory>
  <EquippedArmour>
-<Armour Type="Infiltration Suit" Material="Composite" Level="0"/>
+<Armour Type="Infiltration Suit" Material="Composite" Level="2"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Exo Spear" Level="2" />
@@ -6812,17 +6810,18 @@
  <Name>Unnamed Ship</Name>
  <Hull>39</Hull>
  <Shield>5</Shield>
+ <Armour>Regenerative Plating</Armour>
  <Seed>669421</Seed>
  <Eqp ID="0" Active="True">Dark Core</Eqp>
  <Eqp ID="14" Active="True">SuperLight Drive</Eqp>
  <Eqp ID="7" Active="True">Bunk Room</Eqp>
  <Eqp ID="5" Active="True">Cabin</Eqp>
- <Eqp ID="9" Active="False">Tinkering Chamber</Eqp>
- <Eqp ID="8" Active="False">Auto Repair</Eqp>
- <Eqp ID="1" Active="True">Workshop</Eqp>
- <Eqp ID="2" Active="True">Armoury</Eqp>
+ <Eqp ID="9" Active="True">Tinkering Chamber</Eqp>
+ <Eqp ID="8" Active="True">Foundry</Eqp>
+ <Eqp ID="1" Active="True">AI Module</Eqp>
+ <Eqp ID="2" Active="True">AI Module</Eqp>
  <Eqp ID="6" Active="True">Surface Scanner</Eqp>
- <Eqp ID="3" Active="True">Targetting AI</Eqp>
+ <Eqp ID="3" Active="True">Military Computer</Eqp>
  <Eqp ID="4" Active="True">Shield Generator</Eqp>
  <Eqp ID="11" Active="True">Antimatter Cannon</Eqp>
  <Eqp ID="13" Active="True">Antimatter Cannon</Eqp>
@@ -7002,6 +7001,8 @@
  <Item>Disc Thrower</Item>
  <Item>Terraform Device</Item>
  <Item>Cloud Colony Device</Item>
+ <Item>AI Module</Item>
+ <Item>Cloaking Device</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Composite</Material>
@@ -7208,11 +7209,11 @@
  <Item>Light Combat Suit</Item>
  <Item>Combat Suit</Item>
  <Item>Heavy Grenade Launcher</Item>
+ <Item>Terraform Device</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Composite</Material>
- <Item>Terraform Device</Item>
 </Research>
 </Race>
 <Race Name="Insectoid">

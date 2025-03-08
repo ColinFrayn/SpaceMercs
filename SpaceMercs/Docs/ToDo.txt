@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Some ship rooms should give a skill boost e.g. to engineering, armoury etc. (also if multiple)
-
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 

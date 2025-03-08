@@ -1,6 +1,4 @@
-﻿// 
-
-namespace SpaceMercs.Dialogs {
+﻿namespace SpaceMercs.Dialogs {
     partial class FabricateItems : Form {
         private readonly Team PlayerTeam;
 
@@ -226,15 +224,20 @@ namespace SpaceMercs.Dialogs {
 
             // Get construction chance
             int maxlev = PlayerTeam.GetMaxSkillByItemType(newType);
+            if (maxlev == 0) {
+                MessageBox.Show("Nobody has the required skill to perform that action!");
+                return;
+            }
+            int aiboost = PlayerTeam.PlayerShip.AIBoost;
             Soldier s = PlayerTeam.GetSoldierWithMaxSkillByItemType(newType);
-            double chance = newType.ConstructionChance + (maxlev * Const.SkillConstructChanceModifier);
+            double chance = newType.ConstructionChance + ((maxlev + aiboost) * Const.SkillConstructChanceModifier);
             chance += armourMat?.ConstructionChanceModifier ?? 0d;           
             double basechance = chance;
             if (chance > 99.0) chance = 99.0;
             if (chance < 1.0) chance = 1.0;
 
             // Are you sure?
-            string strReally = "Really construct " + newType.Name + "?\nSoldier = " + s.Name + " (" + maxlev + ")\nChance of success = " + chance.ToString("N2") + "%";
+            string strReally = $"Really construct {newType.Name}?\nSoldier = {s.Name} ({maxlev}{(aiboost > 0 ? "+" + aiboost : string.Empty)})\nChance of success = {chance.ToString("N2")}%";
             strReally += "\n\nMaterials:";
             foreach (MaterialType mt in mats.Keys) {
                 strReally += mt.Name + " [" + mats[mt] + "]\n";
@@ -292,12 +295,13 @@ namespace SpaceMercs.Dialogs {
             if (tp.Item2 is not IEquippable eq || eq is Equipment) return;
             bool bEquipped = tp.Item3;
             int maxlev = PlayerTeam.GetMaxSkillByItemType(eq.BaseType);
+            int aiboost = PlayerTeam.PlayerShip.AIBoost;
             if (maxlev == 0) {
                 MessageBox.Show("Nobody has the required skill to perform that action!");
                 return;
             }
             Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItemType(eq.BaseType);
-            UpgradeItem ui = new UpgradeItem(eq, Const.UpgradeSelfCostMod, maxlev, PlayerTeam, ssk);
+            UpgradeItem ui = new UpgradeItem(eq, Const.UpgradeSelfCostMod, maxlev, aiboost, PlayerTeam, ssk);
             ui.ShowDialog(this);
             if (ui.Upgraded) {
                 if (s == null) {
@@ -327,9 +331,16 @@ namespace SpaceMercs.Dialogs {
             IItem it = tp.Item2;
             if (it is not IEquippable eq) return;
             bool bEquipped = tp.Item3;
-            if (MessageBox.Show("Really dismantle your " + eq.Name + "? This will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             int maxlev = PlayerTeam.GetMaxSkillByItem(it);
-            Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev);
+            if (maxlev == 0) {
+                MessageBox.Show("Nobody has the required skill to perform that action!");
+                return;
+            }
+
+            Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItem(it);
+            int aiboost = PlayerTeam.PlayerShip.AIBoost;
+            if (MessageBox.Show($"Really dismantle your {eq.Name}?\nSoldier = {ssk.Name} ({maxlev}{(aiboost > 0 ? "+" + aiboost : string.Empty)})\nThis will destroy it irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev + aiboost);
             if (s is null) {
                 PlayerTeam.RemoveItemFromStores(eq);
             }
@@ -356,6 +367,7 @@ namespace SpaceMercs.Dialogs {
             }
             if (tpSelected.Count == 0) return;
             if (MessageBox.Show("Really dismantle all these items? This will destroy them irreversibly!", "Really Dismantle?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            int noskill = 0;
 
             Dictionary<IItem, int> dTotalRemains = new();
             foreach (Tuple<Soldier?, IItem, bool> tp in tpSelected) {
@@ -372,7 +384,9 @@ namespace SpaceMercs.Dialogs {
                     else count = s.CountItem(it);
                 }
                 int maxlev = PlayerTeam.GetMaxSkillByItem(it);
-                Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev, count);
+                if (maxlev == 0) { noskill++; continue; } // Can't dismantle this one
+                int aiboost = PlayerTeam.PlayerShip.AIBoost;
+                Dictionary<IItem, int> dRemains = Utils.DismantleEquipment(eq, maxlev + aiboost, count);
                 foreach (IItem rem in dRemains.Keys) {
                     dTotalRemains.TryAdd(rem, 0);
                     dTotalRemains[rem] += dRemains[rem];
@@ -385,6 +399,7 @@ namespace SpaceMercs.Dialogs {
                     s.DestroyItem(eq, count);
                 }
             }
+            if (noskill > 0) MessageBox.Show($"Found {noskill} items for which your team does not possess the necessary skill to dismantle");
             SoundEffects.PlaySound("Dismantle");
             string strRemains = "Materials obtained:";
             foreach (IItem r in dTotalRemains.Keys) {
@@ -408,9 +423,10 @@ namespace SpaceMercs.Dialogs {
                 MessageBox.Show($"You do not have the required skills on board to perform that action!\nRequires Engineering and {skillReq}");
                 return;
             }
+            int aiboost = PlayerTeam.PlayerShip.AIBoost;
             Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItemType(wp.BaseType);
             Soldier sskEng = PlayerTeam.MaxSkillSoldier(Soldier.UtilitySkill.Engineer);
-            ModifyWeapon mw = new ModifyWeapon(wp, 1.0, maxLev, maxEngLev, PlayerTeam, ssk, sskEng);
+            ModifyWeapon mw = new ModifyWeapon(wp, 1.0, maxLev, maxEngLev, aiboost, PlayerTeam, ssk, sskEng);
             mw.ShowDialog(this);
             if (mw.Modified) {
                 if (s == null) {

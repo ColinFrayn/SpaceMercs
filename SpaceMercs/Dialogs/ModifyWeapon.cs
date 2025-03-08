@@ -6,12 +6,12 @@
         private double SuccessChance;
         private readonly Team PlayerTeam;
         private readonly Soldier? ThisSoldier1, ThisSoldier2;
-        private readonly int Skill1, Skill2;
+        private readonly int Skill1, Skill2, AIBoost;
         public IEquippable? NewItem = null; // If this is set to non-null then it represents the new item after modification
         public bool Modified = false; // Did we attempt the upgrade? (i.e. should we remove the old item?) We need this in case the upgrade destroys the object, in which case NewItem will be null.
         public bool Destroyed = false; // Destroyed in attempting to upgrade?
 
-        public ModifyWeapon(Weapon wp, double priceMod, int skill1, int skill2, Team t, Soldier? s1, Soldier? s2) {
+        public ModifyWeapon(Weapon wp, double priceMod, int skill1, int skill2, int aiboost, Team t, Soldier? s1, Soldier? s2) {
             InitializeComponent();
             WeaponToModify = wp;
             PlayerTeam = t;
@@ -19,6 +19,7 @@
             ThisSoldier2 = s2;
             Skill1 = skill1;
             Skill2 = skill2;
+            AIBoost = aiboost;
             Modified = false;
             Destroyed = false;
             PriceMod = priceMod;
@@ -26,12 +27,12 @@
             if (ThisSoldier1 == null) lbSoldier1.Visible = false;
             else {
                 lbSoldier1.Visible = true;
-                lbSoldier1.Text = $"{ThisSoldier1.Name} ({(wp.Type.IsMeleeWeapon ? Soldier.UtilitySkill.Bladesmith : Soldier.UtilitySkill.Gunsmith)} : {skill1})";
+                lbSoldier1.Text = $"{ThisSoldier1.Name} ({(wp.Type.IsMeleeWeapon ? Soldier.UtilitySkill.Bladesmith : Soldier.UtilitySkill.Gunsmith)} : {skill1}{(AIBoost > 0 ? "+" + AIBoost : string.Empty)})";
             }
             if (ThisSoldier2 == null) lbSoldier2.Visible = false;
             else {
                 lbSoldier2.Visible = true;
-                lbSoldier2.Text = ThisSoldier2.Name + " (Engineering : " + skill2 + ")";
+                lbSoldier2.Text = ThisSoldier2.Name + $" (Engineering : {skill2}{(AIBoost > 0 ? "+" + AIBoost : string.Empty)})";
             }
 
             lbName.Text = WeaponToModify.Type.Name;
@@ -56,7 +57,7 @@
             lbDescription.Text = mod.Desc;
 
             // Chance of this modification working and not damaging the weapon
-            SuccessChance = 0.75 - 0.05 * (WeaponToModify.Level * 4 - (Skill1 + Skill2)) - 0.01 * WeaponToModify.BaseType.BaseRarity;
+            SuccessChance = 0.75 - 0.05 * (WeaponToModify.Level * 4 - (Skill1 + Skill2 + AIBoost * 2)) - 0.01 * WeaponToModify.BaseType.BaseRarity;
             if (SuccessChance > 0.99) SuccessChance = 0.99;
             if (SuccessChance < 0.0) SuccessChance = 0.0;
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";

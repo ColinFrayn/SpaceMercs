@@ -15,6 +15,7 @@ namespace SpaceMercs {
         public bool Armoury { get; private set; }
         public bool Workshop { get; private set; }
         public int Repair { get; private set; }
+        public bool AIModule {  get; private set; }
         public bool Engineering { get; private set; }
         public ColoniseAbility BuildColony { get; private set; }
         public bool Conceal { get; private set; } // Reduces risk of inteception
@@ -45,6 +46,7 @@ namespace SpaceMercs {
             Repair = xml.SelectNodeInt("Repair", 0);
             Engineering = (xml.SelectSingleNode("Engineering") != null);
             Conceal = (xml.SelectSingleNode("Conceal") != null);
+            AIModule = (xml.SelectSingleNode("AIModule") != null);
             BuildColony = xml.SelectNodeEnum<ColoniseAbility>("BuildColony", ColoniseAbility.None);
 
             // If Avail tag doesn't exist then this is avaialble everywhere. Otherwise, parse it.

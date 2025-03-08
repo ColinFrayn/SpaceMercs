@@ -158,9 +158,18 @@ namespace SpaceMercs {
             get {
                 int rep = ArmourType?.Repair ?? 0;
                 foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
-                    rep += tp.Item1.Repair;
+                    if (tp.Item2) rep += tp.Item1.Repair;
                 }
                 return rep;
+            }
+        }
+        public int AIBoost {
+            get {
+                int boost = 0;
+                foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                    if (tp.Item2 && tp.Item1.AIModule) boost++;
+                }
+                return boost * Const.SkillBoostPerAIModule;
             }
         }
         public bool HasEngineering {
@@ -270,7 +279,9 @@ namespace SpaceMercs {
             // New-style Equipment loading
             foreach (XmlNode xr in xml.SelectNodesToList("Eqp")) {
                 int id = xr.GetAttributeInt("ID");
-                ShipEquipment? se = StaticData.GetShipEquipmentByName(xr.InnerText) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
+                string eqpName = xr.InnerText;
+                if (eqpName == "Targetting AI") eqpName = "Military Computer"; // Backwards compatibility
+                ShipEquipment ? se = StaticData.GetShipEquipmentByName(eqpName) ?? throw new Exception($"Found unknown ShipEquipment {xr.InnerText} in savegame");
                 bool bActive = bool.Parse(xr.GetAttributeText("Active"));
                 Equipment.Add(id, new Tuple<ShipEquipment, bool>(se, bActive));
             }

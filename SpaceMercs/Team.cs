@@ -506,12 +506,24 @@ namespace SpaceMercs {
         public int GetMaxSkillByItem(IItem it) {
             if (it is Armour) return MaxSkillLevel(Soldier.UtilitySkill.Armoursmith);
             else if (it is Weapon wp) {
-                if (wp.Range == 0) return MaxSkillLevel(Soldier.UtilitySkill.Bladesmith);
+                if (wp.Type.IsMeleeWeapon) return MaxSkillLevel(Soldier.UtilitySkill.Bladesmith);
                 else return MaxSkillLevel(Soldier.UtilitySkill.Gunsmith);
             }
             if (it is Equipment eq) {
                 if (eq.BaseType.Source == ItemType.ItemSource.Medlab) return MaxSkillLevel(Soldier.UtilitySkill.Medic);
                 else if (eq.BaseType.Source == ItemType.ItemSource.Workshop) return MaxSkillLevel(Soldier.UtilitySkill.Engineer);
+            }
+            throw new Exception("Unknown skill required in item construction: " + it.ToString());
+        }
+        public Soldier GetSoldierWithMaxSkillByItem(IItem it) {
+            if (it is Armour) return MaxSkillSoldier(Soldier.UtilitySkill.Armoursmith);
+            else if (it is Weapon wp) {
+                if (wp.Type.IsMeleeWeapon) return MaxSkillSoldier(Soldier.UtilitySkill.Bladesmith);
+                else return MaxSkillSoldier(Soldier.UtilitySkill.Gunsmith);
+            }
+            if (it is Equipment eq) {
+                if (eq.BaseType.Source == ItemType.ItemSource.Medlab) return MaxSkillSoldier(Soldier.UtilitySkill.Medic);
+                else if (eq.BaseType.Source == ItemType.ItemSource.Workshop) return MaxSkillSoldier(Soldier.UtilitySkill.Engineer);
             }
             throw new Exception("Unknown skill required in item construction: " + it.ToString());
         }

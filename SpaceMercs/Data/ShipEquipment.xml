@@ -49,7 +49,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Foundry">
     <Size>M</Size>
-    <Cost>150</Cost>
+    <Cost>210</Cost>
     <Power>8</Power>
     <Armoury/>
     <Workshop/>
@@ -82,7 +82,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Tinkering Chamber">
     <Size>M</Size>
-    <Cost>300</Cost>
+    <Cost>375</Cost>
     <Power>10</Power>
     <Medlab/>
     <Engineering/>
@@ -249,14 +249,29 @@
     </Requirements>
     <Tex>5,7</Tex>
   </ShipEquipment>
-  <ShipEquipment Name="Targetting AI">
+  <ShipEquipment Name="Military Computer">
     <Cost>75</Cost>
     <Attack>2</Attack>
     <Power>3</Power>
     <Size>S</Size>
-    <Desc>An AI subsystem that increases Ship attack power.</Desc>
+    <Desc>An advanced targetting subsystem that increases Ship attack power.</Desc>
     <Avail>MRE</Avail>
     <Tex>2,6</Tex>
+  </ShipEquipment>
+  <ShipEquipment Name="AI Module">
+    <Cost>215</Cost>
+    <Power>5</Power>
+    <Size>S</Size>
+    <Desc>An AI subsystem that increases utility skills for all soldiers onboard.</Desc>
+    <Avail>MRE</Avail>
+    <AIModule/>
+    <Requirements>
+      <MinLevel>7</MinLevel>
+      <MinPop>40</MinPop>
+      <CashCost>120</CashCost>
+      <Facility>Engineering</Facility>
+    </Requirements>
+    <Tex>2,8</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Fission Core">
     <Size>C</Size>
