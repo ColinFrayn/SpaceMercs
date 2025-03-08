@@ -81,6 +81,7 @@ namespace SpaceMercs.Dialogs {
                 strArmour += Environment.NewLine + tp.ToString() + " : " + (int)Math.Round(AllRes[tp]) + "%";
             }
             ttSoldier.SetToolTip(this.lbArmour, strArmour);
+            lbStamina.Text = $"{ThisSoldier.MaxStamina:N0}";
             pbExperience.Refresh(); // Display the experience progress bar
 
             // Weapon skills

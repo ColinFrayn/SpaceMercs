@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>05/05/2150 18:51:29</Clock>
+<Clock>06/05/2150 04:46:12</Clock>
 <Map Seed="224758" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Ogrish">
 <Star ID="0">
@@ -1924,29 +1924,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1313547984</Seed>
  <Size>2</Size>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="1419433392" Diff="5">
- <Name>Enemy Ship</Name>
- <Hull>11</Hull>
- <Shield>0</Shield>
- <Armour>Reinforced Plating</Armour>
- <Seed>212560</Seed>
- <Eqp ID="4" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="2" Active="True">Bunk Room</Eqp>
- <Eqp ID="3" Active="True">Slug Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>44.33</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1183586444</Seed>
 </Mission>
 <Mission>
  <Type>BoardingParty</Type>
@@ -5249,20 +5226,28 @@
 </Map>
 <Team>
  <Pos>(0,0)11.1</Pos>
- <Cash>208.6969825754776</Cash>
+ <Cash>253.02698257547758</Cash>
  <Soldiers>
 <Soldier Name="Shooty McShootface">
- <Location X="20" Y="27"/>
- <Health>31.73656842190912</Health>
- <Stamina>8.233423446581941</Stamina>
+ <Location X="48" Y="15"/>
+ <Health>20.273282620844828</Health>
+ <Stamina>29</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>5</Level>
- <XP>20236</XP>
+ <XP>21021</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,12,14,12,14</Stats>
  <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Weapon Type="Chainsword" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Material Type="Rubber"/>
+  </Inv>
+ </Inventory>
  <EquippedArmour>
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
@@ -5273,23 +5258,29 @@
 <Weapon Type="Automatic Rifle" Level="1" Mod="Range Enhancer" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">309</Exp>
+  <Exp Type="Rifle">320</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Stealth">1</Exp>
   <Exp Skill="Perception">4</Exp>
   <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
- <Moved/>
+ <KillCount>1</KillCount>
+ <ToughestKill>
+<Creature Type="Mercenary">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+</Creature>
+ </ToughestKill>
 </Soldier>
 <Soldier Name="Hannah Trafford">
- <Location X="19" Y="25"/>
- <Health>44</Health>
- <Stamina>3.400000000000004</Stamina>
+ <Location X="51" Y="15"/>
+ <Health>40.43869386780565</Health>
+ <Stamina>23.67968075459936</Stamina>
  <Shields>0</Shields>
- <Facing>90</Facing>
+ <Facing>180</Facing>
  <Level>5</Level>
- <XP>18564</XP>
+ <XP>19349</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>11,15,13,14,15</Stats>
@@ -5300,6 +5291,18 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="0" />
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -5314,26 +5317,38 @@
 <Weapon Type="Shotgun" Level="1" Mod="Explosive Rounds" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">308</Exp>
+  <Exp Type="Shotgun">324</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">5</Exp>
   <Exp Skill="Medic">1</Exp>
  </UtilityExperience>
  <Moved/>
+ <KillCount>6</KillCount>
+ <ToughestKill>
+<Creature Type="Elite Skirmisher">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+</Creature>
+ </ToughestKill>
 </Soldier>
 <Soldier Name="Ian Lewis">
- <Location X="18" Y="24"/>
- <Health>47</Health>
- <Stamina>1.1999999999999993</Stamina>
+ <Location X="46" Y="19"/>
+ <Health>42.87887369347768</Health>
+ <Stamina>21</Stamina>
  <Shields>0</Shields>
- <Facing>56.309932474020215</Facing>
- <Level>5</Level>
- <XP>25067</XP>
+ <Facing>90</Facing>
+ <Level>6</Level>
+ <XP>25852</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
- <Stats>10,16,17,15,6</Stats>
+ <Stats>10,16,17,15,7</Stats>
  <Colour>#FF8000</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
 <Armour Type="Helmet" Material="Kevlar" Level="0"/>
@@ -5347,14 +5362,14 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">375</Exp>
-  <Exp Type="Sniper">8</Exp>
+  <Exp Type="Sniper">9</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">1</Exp>
   <Exp Skill="Engineer">4</Exp>
   <Exp Skill="Scavenging">1</Exp>
+  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <Moved/>
 </Soldier>
  </Soldiers>
 <Ship Type="Shuttle">
@@ -5372,12 +5387,11 @@
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
  <Mission_ShowTravel/>
- <Mission_ShowPath/>
  <Mission_ShowEffects/>
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="7246"/>
+  <Relation Race="Human" Value="7336"/>
  </Relations>
  <Inventory>
   <Inv Count="4">

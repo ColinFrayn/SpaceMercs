@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Display stamina & regen rate on soldier screen (EquipmentView & TeamView)
+
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 

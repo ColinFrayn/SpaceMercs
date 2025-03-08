@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -103,6 +103,9 @@
             label9 = new Label();
             lbInsufficientBerths = new Label();
             cdPickColour = new ColorDialog();
+            label19 = new Label();
+            lbStamina = new Label();
+            label22 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
             gbSoldier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
@@ -121,14 +124,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle2;
             dgSoldiers.Location = new Point(14, 128);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -186,6 +189,7 @@
             // 
             // gbSoldier
             // 
+            gbSoldier.Controls.Add(label19);
             gbSoldier.Controls.Add(btUpgradeStat);
             gbSoldier.Controls.Add(btColour);
             gbSoldier.Controls.Add(btIncreaseSkill);
@@ -217,7 +221,7 @@
             gbSoldier.Controls.Add(lbStrength);
             gbSoldier.Controls.Add(label6);
             gbSoldier.Controls.Add(groupBox1);
-            gbSoldier.Location = new Point(654, 13);
+            gbSoldier.Location = new Point(650, 13);
             gbSoldier.Margin = new Padding(4, 3, 4, 3);
             gbSoldier.Name = "gbSoldier";
             gbSoldier.Padding = new Padding(4, 3, 4, 3);
@@ -305,6 +309,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(lbStamina);
+            groupBox2.Controls.Add(label22);
             groupBox2.Controls.Add(lbLevel);
             groupBox2.Controls.Add(label15);
             groupBox2.Controls.Add(label20);
@@ -315,11 +321,11 @@
             groupBox2.Controls.Add(lbArmour);
             groupBox2.Controls.Add(label11);
             groupBox2.Controls.Add(label18);
-            groupBox2.Location = new Point(9, 208);
+            groupBox2.Location = new Point(9, 189);
             groupBox2.Margin = new Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(173, 209);
+            groupBox2.Size = new Size(173, 238);
             groupBox2.TabIndex = 86;
             groupBox2.TabStop = false;
             groupBox2.Text = "Primary Stats";
@@ -329,10 +335,10 @@
             lbLevel.BackColor = SystemColors.Window;
             lbLevel.BorderStyle = BorderStyle.FixedSingle;
             lbLevel.Font = new Font("Microsoft Sans Serif", 12F);
-            lbLevel.Location = new Point(98, 24);
+            lbLevel.Location = new Point(88, 24);
             lbLevel.Margin = new Padding(6, 2, 6, 2);
             lbLevel.Name = "lbLevel";
-            lbLevel.Size = new Size(58, 27);
+            lbLevel.Size = new Size(66, 27);
             lbLevel.TabIndex = 90;
             lbLevel.Text = "888";
             lbLevel.TextAlign = ContentAlignment.MiddleCenter;
@@ -341,7 +347,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label15.Location = new Point(38, 30);
+            label15.Location = new Point(33, 30);
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
             label15.Size = new Size(40, 16);
@@ -353,7 +359,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label20.Location = new Point(18, 138);
+            label20.Location = new Point(15, 135);
             label20.Margin = new Padding(4, 0, 4, 0);
             label20.Name = "label20";
             label20.Size = new Size(58, 16);
@@ -366,10 +372,10 @@
             lbAttackTotal.BackColor = Color.Tomato;
             lbAttackTotal.BorderStyle = BorderStyle.FixedSingle;
             lbAttackTotal.Font = new Font("Microsoft Sans Serif", 12F);
-            lbAttackTotal.Location = new Point(98, 97);
+            lbAttackTotal.Location = new Point(88, 95);
             lbAttackTotal.Margin = new Padding(6, 2, 6, 2);
             lbAttackTotal.Name = "lbAttackTotal";
-            lbAttackTotal.Size = new Size(58, 27);
+            lbAttackTotal.Size = new Size(66, 27);
             lbAttackTotal.TabIndex = 80;
             lbAttackTotal.Text = "888";
             lbAttackTotal.TextAlign = ContentAlignment.MiddleCenter;
@@ -378,7 +384,7 @@
             // 
             label38.AutoSize = true;
             label38.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label38.Location = new Point(34, 103);
+            label38.Location = new Point(29, 101);
             label38.Margin = new Padding(4, 0, 4, 0);
             label38.Name = "label38";
             label38.Size = new Size(44, 16);
@@ -391,10 +397,10 @@
             lbDefenceTotal.BackColor = SystemColors.Highlight;
             lbDefenceTotal.BorderStyle = BorderStyle.FixedSingle;
             lbDefenceTotal.Font = new Font("Microsoft Sans Serif", 12F);
-            lbDefenceTotal.Location = new Point(98, 133);
+            lbDefenceTotal.Location = new Point(88, 130);
             lbDefenceTotal.Margin = new Padding(6, 2, 6, 2);
             lbDefenceTotal.Name = "lbDefenceTotal";
-            lbDefenceTotal.Size = new Size(58, 27);
+            lbDefenceTotal.Size = new Size(66, 27);
             lbDefenceTotal.TabIndex = 61;
             lbDefenceTotal.Text = "888";
             lbDefenceTotal.TextAlign = ContentAlignment.MiddleCenter;
@@ -404,10 +410,10 @@
             lbHealthTotal.BackColor = Color.LimeGreen;
             lbHealthTotal.BorderStyle = BorderStyle.FixedSingle;
             lbHealthTotal.Font = new Font("Microsoft Sans Serif", 12F);
-            lbHealthTotal.Location = new Point(98, 61);
+            lbHealthTotal.Location = new Point(88, 60);
             lbHealthTotal.Margin = new Padding(6, 2, 6, 2);
             lbHealthTotal.Name = "lbHealthTotal";
-            lbHealthTotal.Size = new Size(58, 27);
+            lbHealthTotal.Size = new Size(66, 27);
             lbHealthTotal.TabIndex = 60;
             lbHealthTotal.Text = "888";
             lbHealthTotal.TextAlign = ContentAlignment.MiddleCenter;
@@ -417,10 +423,10 @@
             lbArmour.BackColor = SystemColors.ControlLight;
             lbArmour.BorderStyle = BorderStyle.FixedSingle;
             lbArmour.Font = new Font("Microsoft Sans Serif", 12F);
-            lbArmour.Location = new Point(98, 168);
+            lbArmour.Location = new Point(88, 164);
             lbArmour.Margin = new Padding(6, 2, 6, 2);
             lbArmour.Name = "lbArmour";
-            lbArmour.Size = new Size(58, 27);
+            lbArmour.Size = new Size(66, 27);
             lbArmour.TabIndex = 88;
             lbArmour.Text = "888";
             lbArmour.TextAlign = ContentAlignment.MiddleCenter;
@@ -429,7 +435,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label11.Location = new Point(31, 66);
+            label11.Location = new Point(27, 65);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
             label11.Size = new Size(46, 16);
@@ -441,7 +447,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label18.Location = new Point(27, 174);
+            label18.Location = new Point(23, 170);
             label18.Margin = new Padding(4, 0, 4, 0);
             label18.Name = "label18";
             label18.Size = new Size(50, 16);
@@ -1081,6 +1087,43 @@
             cdPickColour.Color = Color.Blue;
             cdPickColour.SolidColorOnly = true;
             // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label19.Location = new Point(186, 171);
+            label19.Margin = new Padding(4, 0, 4, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(72, 16);
+            label19.TabIndex = 94;
+            label19.Text = "Endurance";
+            label19.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbStamina
+            // 
+            lbStamina.BackColor = Color.Gold;
+            lbStamina.BorderStyle = BorderStyle.FixedSingle;
+            lbStamina.Font = new Font("Microsoft Sans Serif", 12F);
+            lbStamina.Location = new Point(88, 199);
+            lbStamina.Margin = new Padding(6, 2, 6, 2);
+            lbStamina.Name = "lbStamina";
+            lbStamina.Size = new Size(66, 27);
+            lbStamina.TabIndex = 92;
+            lbStamina.Text = "888/88";
+            lbStamina.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label22.Location = new Point(17, 205);
+            label22.Margin = new Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(56, 16);
+            label22.TabIndex = 91;
+            label22.Text = "Stamina";
+            label22.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // TeamView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1207,5 +1250,8 @@
         private ColorDialog cdPickColour;
         private Button btColour;
         private Button btUpgradeStat;
+        private Label label19;
+        private Label lbStamina;
+        private Label label22;
     }
 }

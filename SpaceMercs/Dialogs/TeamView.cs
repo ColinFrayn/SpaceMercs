@@ -132,6 +132,7 @@ namespace SpaceMercs.Dialogs {
                 strArmour += Environment.NewLine + tp.ToString() + " : " + (int)Math.Round(AllRes[tp]) + "%";
             }
             ttSoldier.SetToolTip(this.lbArmour, strArmour);
+            lbStamina.Text = $"{s.MaxStamina:N0}";
             pbExperience.Refresh(); // Display the experience progress bar
             btUpgradeStat.Enabled = s.PointsToSpend > 0;
             btUpgradeStat.Visible = s.PointsToSpend > 0;

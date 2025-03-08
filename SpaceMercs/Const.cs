@@ -174,7 +174,7 @@ namespace SpaceMercs {
         public const double InitialCash = 50.0;
         public const int    MaxItemLevel = 5;
         public const int    SoldierLevelExperience = 1000; // Experience for level 1->2
-        public const double SoldierLevelExponent = 1.65;  // Each level gets this many times further apart
+        public const double SoldierLevelExponent = 1.62;  // Each level gets this many times further apart
         public const double SoldierLevelScale = 4.0; // Experience scale
         public const int    ItemIDBase = 2000000; // ID of first ItemType
         public const int    NextThingIDBase = 3000000; // ID of first NextThing (whatever that might be). Give sufficient space between them
