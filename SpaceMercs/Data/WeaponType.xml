@@ -36,7 +36,7 @@
       <MinPop>22</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Steel">2</Material>
+      <Material Name="Steel" Amount="2"/>
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="4"/>
@@ -62,8 +62,8 @@
       <MinPop>28</MinPop>
       <CashCost>50</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Steel">2</Material>
-      <Material Name="Titanium">1</Material>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Titanium" Amount="1"/>
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="4"/>
@@ -143,8 +143,8 @@
       <MinPop>60</MinPop>
       <CashCost>150</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Tungsten">2</Material>
-      <Material Name="Titanium">2</Material>
+      <Material Name="Tungsten" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="6"/>
@@ -172,8 +172,8 @@
       <MinPop>60</MinPop>
       <CashCost>160</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Steel">2</Material>
-      <Material Name="Titanium">4</Material>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="8"/>
@@ -196,7 +196,7 @@
       <MinLevel>3</MinLevel>
       <MinPop>20</MinPop>
       <CashCost>15</CashCost>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -222,8 +222,8 @@
       <MinLevel>7</MinLevel>
       <MinPop>50</MinPop>
       <CashCost>85</CashCost>
-      <Material Name="Titanium">1</Material>
-      <Material Name="Industrial Chemicals">2</Material>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -251,7 +251,7 @@
       <MinLevel>6</MinLevel>
       <MinPop>28</MinPop>
       <CashCost>40</CashCost>
-      <Material Name="Crystals">2</Material>
+      <Material Name="Crystals" Amount="2"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -277,7 +277,7 @@
       <MinLevel>3</MinLevel>
       <MinPop>20</MinPop>
       <CashCost>10</CashCost>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -311,7 +311,7 @@
       <MinLevel>5</MinLevel>
       <MinPop>25</MinPop>
       <CashCost>10</CashCost>
-      <Material Name="Tungsten">1</Material>
+      <Material Name="Tungsten" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ursalon">3</Relations>
     </Requirements>
@@ -342,7 +342,7 @@
       <MinLevel>6</MinLevel>
       <MinPop>28</MinPop>
       <CashCost>20</CashCost>
-      <Material Name="Rare Earth Metals">1</Material>
+      <Material Name="Rare Earth Metals" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Insectoid">0</Relations>
     </Requirements>
@@ -374,7 +374,7 @@
       <MinLevel>9</MinLevel>
       <MinPop>38</MinPop>
       <CashCost>30</CashCost>
-      <Material Name="Rare Earth Metals">2</Material>
+      <Material Name="Rare Earth Metals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
@@ -434,8 +434,8 @@
       <MinLevel>9</MinLevel>
       <MinPop>42</MinPop>
       <CashCost>120</CashCost>
-      <Material Name="Industrial Chemicals">2</Material>
-      <Material Name="Incendiary Bulb">1</Material>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Incendiary Bulb" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </WeaponType>
@@ -455,8 +455,8 @@
       <MinLevel>5</MinLevel>
       <MinPop>35</MinPop>
       <CashCost>65</CashCost>
-      <Material Name="Electronic Components">1</Material>
-      <Material Name="Steel">1</Material>
+      <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Steel" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -489,7 +489,7 @@
       <MinLevel>10</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ogrish">3</Relations>
     </Requirements>
@@ -516,8 +516,8 @@
       <MinLevel>10</MinLevel>
       <MinPop>65</MinPop>
       <CashCost>165</CashCost>
-      <Material Name="Electronic Components">1</Material>
-      <Material Name="Steel">1</Material>
+      <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Steel" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ogrish">2</Relations>
     </Requirements>
@@ -554,7 +554,7 @@
       <MinLevel>6</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>55</CashCost>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
@@ -587,7 +587,7 @@
       <MinLevel>9</MinLevel>
       <MinPop>38</MinPop>
       <CashCost>60</CashCost>
-      <Material Name="Tungsten">1</Material>
+      <Material Name="Tungsten" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ursalon">2</Relations>
     </Requirements>
@@ -603,7 +603,7 @@
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Chitin">2</Material>
+      <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
     <Range Accuracy="-1" DropOff="0.5" Length="0.3" Speed="0.8">10</Range>
@@ -648,8 +648,8 @@
       <MinPop>25</MinPop>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Titanium">1</Material>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
       <Relations Name="Elithiri">1</Relations>
     </Requirements>
     <Materials>
@@ -689,8 +689,8 @@
       <MinPop>25</MinPop>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Titanium">1</Material>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
       <Relations Name="Elithiri">1</Relations>
     </Requirements>
     <Noise>3</Noise>
@@ -733,7 +733,7 @@
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Chitin">2</Material>
+      <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
     <Noise>4</Noise>
@@ -758,7 +758,7 @@
       <MinPop>30</MinPop>
       <CashCost>30</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Chitin">2</Material>
+      <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">2</Relations>
     </Requirements>
     <Noise>5</Noise>
@@ -785,8 +785,8 @@
       <MinPop>26</MinPop>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
-      <Material Name="Titanium">2</Material>
-      <Material Name="Steel">2</Material>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Steel" Amount="2"/>
     </Requirements>
     <Noise>6</Noise>
     <Materials>
@@ -808,7 +808,7 @@
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Steel">2</Material>
+      <Material Name="Steel" Amount="2"/>
       <Relations Name="Ogrish">1</Relations>
     </Requirements>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>

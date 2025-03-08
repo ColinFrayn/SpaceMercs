@@ -29,8 +29,8 @@
       <MinLevel>2</MinLevel>
       <MinPop>20</MinPop>
       <CashCost>10</CashCost>
-      <Material Name="Steel">1</Material>
-      <Material Name="Aluminium">1</Material>
+      <Material Name="Steel" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>
       <Facility>Workshop</Facility>
     </Requirements>
     <Rarity>0.25</Rarity>
@@ -45,8 +45,8 @@
       <MinLevel>4</MinLevel>
       <MinPop>22</MinPop>
       <CashCost>20</CashCost>
-      <Material Name="Titanium">1</Material>
-      <Material Name="Steel">2</Material>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Steel" Amount="2"/>
       <Relations Name="Gokan">0</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -61,8 +61,8 @@
       <MinLevel>6</MinLevel>
       <MinPop>36</MinPop>
       <CashCost>20</CashCost>
-      <Material Name="Metasteel">2</Material>
-      <Material Name="Carbon Fibre">2</Material>
+      <Material Name="Metasteel" Amount="2"/>
+      <Material Name="Carbon Fibre" Amount="2"/>
       <Facility>Workshop</Facility>
     </Requirements>
     <Desc>Nanomesh is made from fine woven carbon nanotubes. It is light and very strong.</Desc>
@@ -76,8 +76,8 @@
       <MinLevel>8</MinLevel>
       <MinPop>40</MinPop>
       <CashCost>30</CashCost>
-      <Material Name="Nanomesh">2</Material>
-      <Material Name="Metasteel">2</Material>
+      <Material Name="Nanomesh" Amount="2"/>
+      <Material Name="Metasteel" Amount="2"/>
       <Relations Name="Gokan">1</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -92,8 +92,8 @@
       <MinLevel>10</MinLevel>
       <MinPop>50</MinPop>
       <CashCost>250</CashCost>
-      <Material Name="Metasteel">2</Material>
-      <Material Name="Mithril">2</Material>
+      <Material Name="Metasteel" Amount="2"/>
+      <Material Name="Mithril" Amount="2"/>
       <Relations Name="Gokan">2</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -108,9 +108,9 @@
       <MinLevel>12</MinLevel>
       <MinPop>60</MinPop>
       <CashCost>375</CashCost>
-      <Material Name="Nanomesh">2</Material>
-      <Material Name="Nanosilk">2</Material>
-      <Material Name="Adamantium">2</Material>
+      <Material Name="Nanomesh" Amount="2"/>
+      <Material Name="Nanosilk" Amount="2"/>
+      <Material Name="Adamantium" Amount="2"/>
       <Relations Name="Gokan">3</Relations>
       <Relations Name="Insectoid">1</Relations>
       <Facility>Workshop</Facility>
@@ -126,8 +126,8 @@
       <MinLevel>14</MinLevel>
       <MinPop>70</MinPop>
       <CashCost>600</CashCost>
-      <Material Name="Nanomesh">2</Material>
-      <Material Name="Adamantium">2</Material>
+      <Material Name="Nanomesh" Amount="2"/>
+      <Material Name="Adamantium" Amount="2"/>
       <Facility>Workshop</Facility>
     </Requirements>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>

@@ -106,8 +106,8 @@
       <MinLevel>14</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>200</CashCost>
-      <Material Name="Rare Earth Metals">4</Material>
-      <Material Name="Crystals">4</Material>
+      <Material Name="Rare Earth Metals" Amount="4"/>
+      <Material Name="Crystals" Amount="4"/>
       <Facility>Engineering</Facility>
       <Relations Name="Grey">3</Relations>
     </Requirements>

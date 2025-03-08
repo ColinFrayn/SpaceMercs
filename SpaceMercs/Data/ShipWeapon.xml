@@ -42,7 +42,7 @@
       <CashCost>15</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Steel">2</Material>
+      <Material Name="Steel" Amount="2"/>
       <Relations Name="Ogrish">1</Relations>
     </Requirements>
   </ShipWeapon>
@@ -60,7 +60,7 @@
       <CashCost>10</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Crystals">1</Material>
+      <Material Name="Crystals" Amount="1"/>
     </Requirements>
     <Tex>4,5</Tex>
   </ShipWeapon>
@@ -79,7 +79,7 @@
       <CashCost>15</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Electronic Components">1</Material>
+      <Material Name="Electronic Components" Amount="1"/>
     </Requirements>
   </ShipWeapon>
   <ShipWeapon Name="Plasma Cannon">
@@ -97,7 +97,7 @@
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Incendiary Bulb">1</Material>
+      <Material Name="Incendiary Bulb" Amount="1"/>
     </Requirements>
   </ShipWeapon>
   <ShipWeapon Name="Antimatter Cannon">

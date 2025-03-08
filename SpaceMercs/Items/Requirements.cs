@@ -33,12 +33,13 @@ namespace SpaceMercs.Items {
             // This item is restricted unless the player owns the following materials
             Dictionary<MaterialType, int> tempMatDict = new Dictionary<MaterialType, int>();
             foreach (XmlNode xn in xml.SelectNodesToList("Material")) {
-                string strName = xn.Attributes!["Name"]?.InnerText ?? "Missing";
+                string strName = xn.GetAttributeText("Name", "Missing");
                 MaterialType? requiredMaterial = StaticData.GetMaterialTypeByName(strName);
                 if (requiredMaterial == null) {
                     throw new Exception($"Could not find required material \"{strName}\"");
                 }
-                int iVal = int.Parse(xn.InnerText);
+                int iVal = xn.GetAttributeInt("Amount", 0);
+                if (iVal == 0) iVal = int.Parse(xn.InnerText);
                 tempMatDict.Add(requiredMaterial, iVal);
             }
             RequiredMaterials = new Dictionary<MaterialType, int>(tempMatDict);

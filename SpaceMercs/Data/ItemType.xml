@@ -231,7 +231,7 @@
       <MinPop>20</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
-      <Material Name="Poison Gland">1</Material>
+      <Material Name="Poison Gland" Amount="1"/>
     </Requirements>
     <Desc>A grenade which distributes a highly poisonous gas</Desc>
     <ItemEffect Name="Grenade">
@@ -265,7 +265,7 @@
       <MinPop>18</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
-      <Material Name="Slime Egg">1</Material>
+      <Material Name="Slime Egg" Amount="1"/>
     </Requirements>
     <Desc>A grenade which distributes a sticky substance, slowing down all creatures in its area of effect.</Desc>
     <ItemEffect Name="TarGrenade">
@@ -302,7 +302,7 @@
       <MinPop>20</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
-      <Material Name="Acid Blood">1</Material>
+      <Material Name="Acid Blood" Amount="1"/>
     </Requirements>
     <Desc>A grenade which distributes a highly corrosive substance, damaging targets and reducing their armour.</Desc>
     <ItemEffect Name="Grenade">
@@ -360,7 +360,7 @@
       <MinPop>30</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
-      <Material Name="Incendiary Bulb">1</Material>
+      <Material Name="Incendiary Bulb" Amount="1"/>
       <Relations Name="Ogrish">2</Relations>
     </Requirements>
     <Source>Workshop</Source>
@@ -397,7 +397,7 @@
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Relations Name="Ogrish">3</Relations>
-      <Material Name="Uranium">1</Material>
+      <Material Name="Uranium" Amount="1"/>
     </Requirements>
     <Tex>3,3</Tex>
   </ItemType>
@@ -410,7 +410,7 @@
       <MinPop>27</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
-      <Material Name="Electronic Components">1</Material>
+      <Material Name="Electronic Components" Amount="1"/>
     </Requirements>
     <Desc>A grenade which sends out a crippling sonic pulse to all nearby targets, reducing their stamina for some time.</Desc>
     <ItemEffect Name="SonicPulse">

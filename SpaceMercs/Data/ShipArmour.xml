@@ -17,7 +17,7 @@
       <MinLevel>2</MinLevel>
       <MinPop>18</MinPop>
       <CashCost>10</CashCost>
-      <Material Name="Metasteel">3</Material>
+      <Material Name="Metasteel" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">0</Relations>
     </Requirements>
@@ -32,7 +32,7 @@
       <MinLevel>5</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>20</CashCost>
-      <Material Name="Mithril">3</Material>
+      <Material Name="Mithril" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">1</Relations>
     </Requirements>
@@ -47,7 +47,7 @@
       <MinLevel>8</MinLevel>
       <MinPop>40</MinPop>
       <CashCost>30</CashCost>
-      <Material Name="Adamantium">3</Material>
+      <Material Name="Adamantium" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">2</Relations>
     </Requirements>
@@ -63,7 +63,7 @@
       <MinLevel>10</MinLevel>
       <MinPop>45</MinPop>
       <CashCost>30</CashCost>
-      <Material Name="Etherealite">3</Material>
+      <Material Name="Etherealite" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
@@ -81,7 +81,7 @@
       <CashCost>30</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
-      <Material Name="Chitin">2</Material>
+      <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">2</Relations>
     </Requirements>
   </ShipArmour>
@@ -96,8 +96,8 @@
       <MinLevel>11</MinLevel>
       <MinPop>39</MinPop>
       <CashCost>30</CashCost>
-      <Material Name="Shadowskin">2</Material>
-      <Material Name="Voidskin">2</Material>
+      <Material Name="Shadowskin" Amount="2"/>
+      <Material Name="Voidskin" Amount="2"/>
       <Facility>Engineering</Facility>
       <Relations Name="Insectoid">3</Relations>
     </Requirements>

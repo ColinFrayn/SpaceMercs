@@ -34,7 +34,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>26</MinPop>
       <CashCost>15</CashCost>
-      <Material Name="Aluminium">1</Material>
+      <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Utility>
@@ -58,7 +58,7 @@
       <MinLevel>2</MinLevel>
       <MinPop>18</MinPop>
       <CashCost>10</CashCost>
-      <Material Name="Rare Earth Metals">1</Material>
+      <Material Name="Rare Earth Metals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
     <Desc>A military spec helmet with HUD and advanced detection technology.</Desc>
@@ -108,7 +108,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>34</MinPop>
       <CashCost>50</CashCost>
-      <Material Name="Crystals">4</Material>
+      <Material Name="Crystals" Amount="4"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">1</Relations>
@@ -203,7 +203,7 @@
       <MinSystems>2</MinSystems>
       <MinPop>34</MinPop>
       <CashCost>60</CashCost>
-      <Material Name="Steel">4</Material>
+      <Material Name="Steel" Amount="4"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -228,7 +228,7 @@
       <MinSystems>2</MinSystems>
       <MinPop>36</MinPop>
       <CashCost>60</CashCost>
-      <Material Name="Aluminium">4</Material>
+      <Material Name="Aluminium" Amount="4"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -254,7 +254,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>
       <CashCost>70</CashCost>
-      <Material Name="Crystals">4</Material>
+      <Material Name="Crystals" Amount="4"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">1</Relations>
@@ -281,8 +281,8 @@
       <MinSystems>4</MinSystems>
       <MinPop>54</MinPop>
       <CashCost>140</CashCost>
-      <Material Name="Crystals">2</Material>
-      <Material Name="Rare Earth Metals">2</Material>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">2</Relations>
@@ -309,8 +309,8 @@
       <MinSystems>5</MinSystems>
       <MinPop>70</MinPop>
       <CashCost>380</CashCost>
-      <Material Name="Crystals">4</Material>
-      <Material Name="Rare Earth Metals">2</Material>
+      <Material Name="Crystals" Amount="4"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">3</Relations>
@@ -340,7 +340,7 @@
       <MinSystems>2</MinSystems>
       <MinPop>28</MinPop>
       <CashCost>40</CashCost>
-      <Material Name="Aluminium">2</Material>
+      <Material Name="Aluminium" Amount="2"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
@@ -369,8 +369,8 @@
       <MinSystems>3</MinSystems>
       <MinPop>34</MinPop>
       <CashCost>50</CashCost>
-      <Material Name="Rare Earth Metals">2</Material>
-      <Material Name="Industrial Chemicals">1</Material>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
@@ -406,7 +406,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>25</MinPop>
       <CashCost>15</CashCost>
-      <Material Name="Aluminium">1</Material>
+      <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
@@ -455,7 +455,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>25</MinPop>
       <CashCost>15</CashCost>
-      <Material Name="Aluminium">1</Material>
+      <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
@@ -473,7 +473,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>30</MinPop>
       <CashCost>50</CashCost>
-      <Material Name="Titanium">2</Material>
+      <Material Name="Titanium" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">1</Relations>
@@ -509,8 +509,8 @@
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>
       <CashCost>100</CashCost>
-      <Material Name="Titanium">4</Material>
-      <Material Name="Rare Earth Metals">2</Material>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">2</Relations>
@@ -546,7 +546,7 @@
       <MinSystems>3</MinSystems>
       <MinPop>42</MinPop>
       <CashCost>90</CashCost>
-      <Material Name="Titanium">2</Material>
+      <Material Name="Titanium" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">2</Relations>
@@ -598,8 +598,8 @@
       <MinSystems>5</MinSystems>
       <MinPop>50</MinPop>
       <CashCost>160</CashCost>
-      <Material Name="Titanium">2</Material>
-      <Material Name="Crystals">4</Material>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Crystals" Amount="4"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">2</Relations>
@@ -628,9 +628,9 @@
       <MinSystems>4</MinSystems>
       <MinPop>70</MinPop>
       <CashCost>450</CashCost>
-      <Material Name="Titanium">2</Material>
-      <Material Name="Crystals">2</Material>
-      <Material Name="Mithril">2</Material>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Mithril" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">3</Relations>
