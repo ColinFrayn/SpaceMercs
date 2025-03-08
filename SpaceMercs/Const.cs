@@ -129,10 +129,10 @@ namespace SpaceMercs {
 
         // Galaxy settings
         public const int SectorSize = 10; // Light years on a side
-        public const int MinStarsPerSector = 8;
+        public const int MinStarsPerSector = 12;
         public const int MaxStarsPerSector = 22;
         public const int DefaultStarsPerSector = 14;
-        public const double MinStarDistance = 1.1; // Light years
+        public const double MinStarDistance = 1.0; // Light years
 
         // Combat settings
         public const double ArmourScale = 30.0; // Log scale for armour power reduction. The higher this is, the less effective armour is at mitigating damage.

@@ -2,16 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Each sector: Make a single GLShape of all stars as Disc16. Show this when >2 away from centre
-
-<Material> tag is different in Materials and Requirements. Standardise on the shorter one.
-
-Colony builder: [TEST] (Basic, Adv., Cloud)
-
-Maybe some ship rooms give a skill boost e.g. to engineering, armoury etc.
-
-More melee weapons??
-- Check melee weapons with range > 1 [TEST]
+Some ship rooms should give a skill boost e.g. to engineering, armoury etc. (also if multiple)
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
@@ -30,6 +21,8 @@ Display when a weapon is recharging
 ---------------------
 Backburner : Features
 ---------------------
+
+MapView: Make a single GLShape as Disc16 offset from sector root. Problem - what about colours (if visited or not, and flagged to fade)?
 
 Why shouldn't everyone get power armour & heavy weapons?
 

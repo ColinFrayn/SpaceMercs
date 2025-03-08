@@ -5,10 +5,8 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
-using System;
 using System.Diagnostics;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.VisualEffect;
@@ -1093,7 +1091,7 @@ namespace SpaceMercs.MainWindow {
                 Alignment = Alignment.TopRight,
                 Aspect = Aspect,
                 TextColour = Color.White,
-                XPos = 0.998f,
+                XPos = 0.95f,
                 YPos = 0.81f - (SelectedEntity.MaxShields > 0f ? 0.0368f : 0f),
                 ZPos = Const.GUILayer,
                 Scale = 0.04f
