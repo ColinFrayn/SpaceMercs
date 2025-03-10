@@ -644,10 +644,8 @@ namespace SpaceMercs.MainWindow {
             GenerateDetectionMap();
 
             // Check if this soldier was detected by a currently unalert creature
-            if (DetectionMap[s.X, s.Y]) {
-                if (UpdateDetectionForSoldierAfterAction(s)) {
-                    msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
-                }
+            if (UpdateDetectionForSoldierAfterAction(s)) {
+                msgBox.PopupMessage(s.Name + " has been detected by the enemy!");
             }
 
             // See if we walked into a trap
@@ -767,6 +765,7 @@ namespace SpaceMercs.MainWindow {
                 // See if it does.
                 if (!cr.IsAlert && !hsDetected.Contains(cr)) {
                     double range = baseRange;
+                    if (s is not null) range = cr.SoldierVisibilityRange(s); // Scaled by level diff
                     double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
                     // Creature is within detection range of this soldier, and can see it
                     if (r2 <= (range * range) && cr.CanSee(x, y)) {
@@ -1908,13 +1907,14 @@ namespace SpaceMercs.MainWindow {
             // Check every nearby entity
             foreach (Creature cr in CurrentLevel.Creatures) {
                 if (!cr.IsAlert && (CurrentLevel.Visible[cr.X, cr.Y] || Const.DEBUG_VISIBLE_ALL)) {
-                    double range = cr.SoldierVisibilityRange(s);
+                    double range = cr.SoldierVisibilityRange(s); // Scaled by level diff
+                    double range2 = range * range;
                     for (int y = Math.Max(0, (int)Math.Floor(cr.Y - range)); y <= Math.Min(CurrentLevel.Height - 1, (int)Math.Ceiling(cr.Y + range)); y++) {
                         for (int x = Math.Max(0, (int)Math.Floor(cr.X - range)); x <= Math.Min(CurrentLevel.Width - 1, (int)Math.Ceiling(cr.X + range)); x++) {
                             if (Utils.IsPassable(CurrentLevel.Map[x, y]) && !DetectionMap[x, y]) {
                                 // Check range
                                 double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
-                                if (r2 <= (range * range)) { // Check range properly
+                                if (r2 <= range2) { // Check range properly
                                     DetectionMap[x, y] |= cr.CanSee(x, y);
                                 }
                             }

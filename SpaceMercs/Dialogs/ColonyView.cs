@@ -146,7 +146,7 @@ namespace SpaceMercs.Dialogs {
                 arrRowMiss[0] = miss.Summary;
                 arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
                 if (miss.RacialOpponent != null) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
-                else arrRowMiss[2] = miss.PrimaryEnemy.Name;  //miss.IsShipMission ? "Unknown" : "Wildlife";
+                else arrRowMiss[2] = miss.PrimaryEnemy.Name + miss.SwarmLevelText;
                 arrRowMiss[3] = miss.Diff.ToString();
                 arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
                 arrRowMiss[5] = miss.Goal == Mission.MissionGoal.Gather ? "Variable" : miss.Reward.ToString("N2") + "cr";

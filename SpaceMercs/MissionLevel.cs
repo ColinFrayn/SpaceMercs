@@ -1095,9 +1095,11 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
+            int cDiff = Diff - ParentMission.SwarmLevel * 2;
             int soldierCount = ParentMission.Soldiers.Count;
             if (ParentMission.Goal == Mission.MissionGoal.Countdown || ParentMission.Goal == Mission.MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * cg.QuantityScale * Const.CreatureFrequencyScale);
+            double quantityScale = cg.QuantityScale * (1d + ParentMission.SwarmLevel * 0.75d);
+            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * quantityScale * Const.CreatureFrequencyScale);
             if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
@@ -1106,12 +1108,12 @@ namespace SpaceMercs {
             int niter = 0;
             while (nLeft > 0 && niter < 1000) {
                 List<Creature> cGroup = new List<Creature>();
-                int iGroupSize = 1 + rand.Next(2) + rand.Next(ParentMission.Soldiers.Count);
+                int iGroupSize = 1 + rand.Next(2) + rand.Next(ParentMission.Soldiers.Count) + ParentMission.SwarmLevel;
                 if (rand.Next(nCreatures) > 15) iGroupSize++;
                 if (rand.Next(nCreatures) > 25) iGroupSize++;
                 if (ParentMission.Soldiers.Count > 2) iGroupSize++;
                 if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
-                    Creature? cr = cg.GenerateRandomBoss(ra, Diff, this);
+                    Creature? cr = cg.GenerateRandomBoss(ra, cDiff, this);
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
@@ -1121,7 +1123,7 @@ namespace SpaceMercs {
                 }
                 if (iGroupSize > nLeft) iGroupSize = nLeft;
                 for (int i = cGroup.Count; i < iGroupSize; i++) {
-                    Creature? cr = cg.GenerateRandomCreature(ra, Diff, this);
+                    Creature? cr = cg.GenerateRandomCreature(ra, cDiff, this);
                     if (cGroup.Count == 0) {
                         if (PlaceFirstCreatureInGroup(cr, ParentMission.Type == Mission.MissionType.Surface)) cGroup.Add(cr);
                         else break;

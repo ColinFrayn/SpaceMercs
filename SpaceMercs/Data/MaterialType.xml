@@ -70,7 +70,7 @@
   <MaterialType Name="Mithril">
     <MassMod>0.85</MassMod>
     <UnitCost>35.0</UnitCost>
-    <ArmourMod>1.9</ArmourMod>
+    <ArmourMod>1.8</ArmourMod>
     <Rarity>0.01</Rarity>
     <Requirements>
       <MinLevel>8</MinLevel>
@@ -86,7 +86,7 @@
   <MaterialType Name="Adamantium">
     <MassMod>1.2</MassMod>
     <UnitCost>75.0</UnitCost>
-    <ArmourMod>2.4</ArmourMod>
+    <ArmourMod>2.1</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
       <MinLevel>10</MinLevel>
@@ -102,7 +102,7 @@
   <MaterialType Name="Etherealite">
     <MassMod>0.35</MassMod>
     <UnitCost>80.0</UnitCost>
-    <ArmourMod>1.7</ArmourMod>
+    <ArmourMod>1.75</ArmourMod>
     <Rarity>0.005</Rarity>
     <Requirements>
       <MinLevel>12</MinLevel>
@@ -120,7 +120,7 @@
   <MaterialType Name="Ultramesh">
     <MassMod>0.6</MassMod>
     <UnitCost>85.0</UnitCost>
-    <ArmourMod>2.1</ArmourMod>
+    <ArmourMod>2.0</ArmourMod>
     <Rarity>0.004</Rarity>
     <Requirements>
       <MinLevel>14</MinLevel>

@@ -1,6 +1,5 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Windowing.Common.Input;
-using System.IO;
+﻿using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
@@ -15,6 +14,7 @@ namespace SpaceMercs {
         public Ship? ShipTarget { get; private set; }
         public Race? RacialOpponent { get; private set; }
         public CreatureGroup PrimaryEnemy { get; private set; }
+        public int SwarmLevel { get; private set; }
         public OrbitalAO Location { get; private set; }
         public float TimeCost { get; private set; }
         public double Reward { get; private set; }
@@ -112,7 +112,14 @@ namespace SpaceMercs {
                 MissionType.Caves => (Size + 1) * (Size + 1) * LevelCount + 4,
                 _ => ((Size + 1) * (Size + 1) * 3 * LevelCount) / 2 + 4
             };
+        public string SwarmLevelText => SwarmLevel switch {
+            0 => string.Empty,
+            1 => " Swarm",
+            2 => " Hive",
+            _ => throw new NotImplementedException()
+        };
 
+        
         public Mission(MissionType t, int dif, int sd = 0) {
             Goal = MissionGoal.KillAll;
             CurrentLevel = 0;
@@ -185,6 +192,7 @@ namespace SpaceMercs {
             Diff = xml.SelectNodeInt("Diff");
             LevelCount = xml.SelectNodeInt("LevelCount");
             CurrentLevel = xml.SelectNodeInt("CurrentLevel");
+            SwarmLevel = xml.SelectNodeInt("Swarm", 0);
 
             Seed = xml.SelectNodeInt("Seed", 0);
             Size = xml.SelectNodeInt("Size", 1);
@@ -217,6 +225,7 @@ namespace SpaceMercs {
             file.WriteLine(" <CurrentLevel>" + CurrentLevel + "</CurrentLevel>");
             if (Seed != 0) file.WriteLine(" <Seed>" + Seed + "</Seed>");
             if (Size != 1) file.WriteLine(" <Size>" + Size + "</Size>");
+            if (SwarmLevel > 0) file.WriteLine($" <Swarm>{SwarmLevel}</Swarm>");
             if (WavesRemaining > 0) {
                 file.WriteLine($" <Waves>{WavesRemaining}</Waves>");
             }
@@ -276,7 +285,7 @@ namespace SpaceMercs {
             m.Location = cl.Location;
             if (m.Type == MissionType.BoardingParty) {
                 m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
@@ -285,7 +294,7 @@ namespace SpaceMercs {
             else {
                 if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 // Set mission goal
                 Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
                 m.Goal = mgtp.Item1;
@@ -313,7 +322,7 @@ namespace SpaceMercs {
                 if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = loc.GetRandomRace(rand);
             }
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             if (m.Size < 1) m.Size = 1;
 
@@ -331,7 +340,7 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
+            (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -349,7 +358,7 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
+            (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -369,7 +378,7 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -393,7 +402,7 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            m.PrimaryEnemy = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            (m.PrimaryEnemy, m.SwarmLevel) = GetPrimaryEnemy(m, rand) ?? throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -463,11 +472,11 @@ namespace SpaceMercs {
         }
 
         // Utility
-        private static CreatureGroup? GetPrimaryEnemy(Mission m, Random rand) {
+        private static (CreatureGroup cg, int swarm)? GetPrimaryEnemy(Mission m, Random rand) {
             double dTotalScore = 0.0;
 
             // If opponent race is null (i.e. a creature group of some type) then get a non-racial enemy
-            Dictionary<CreatureGroup, double> dScores = new Dictionary<CreatureGroup, double>();
+            Dictionary<(CreatureGroup, int), double> dScores = new Dictionary<(CreatureGroup, int), double>();
             foreach (CreatureGroup cg in StaticData.CreatureGroups) {
                 if (m.RacialOpponent is null && cg.RaceSpecific) continue;
                 if (m.RacialOpponent is not null && !cg.RaceSpecific) continue;
@@ -480,22 +489,32 @@ namespace SpaceMercs {
                 int minSectorDist = m.Location.GetSystem().Sector.MinSectorDist;
                 if (minSectorDist < cg.MinSectorRange) continue; // Cannot have some creatures in inner sectors
 
-                // Get a score for this CG to assess how well it fits this role
-                double score = 0.0;
-                // Get the fraction of members of this group that are in the correct level range, and how close to the middle of the range they are
-                int count = 0;
-                foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {
-                    count++;
-                    // Only count this creature type if it's in the correct range and isn't a boss
-                    if (!ct.IsBoss && ct.LevelMin <= m.Diff && ct.LevelMax >= m.Diff) {
-                        score += 20.0 - Math.Abs(((ct.LevelMin + ct.LevelMax) / 2) - m.Diff); // How far from average for this range?
+                // Consider swarm levels
+                for (int swarm = 0; swarm <= 2; swarm++) {
+                    if (swarm > 0 && 40 + swarm * 25 > rand.Next(100)) continue; // Swarms are fairly rare
+                    if (swarm > 0 && cg.QuantityScale < 1.0) continue; // Swarms only happen with creatures that are fairly populous
+                    if (swarm > 0 && m.Diff < 2 + swarm * 2) continue;
+
+                    // Swarm missions have lower level creatures in them
+                    int cDiff = m.Diff - (swarm * 2);
+
+                    // Get a score for this CG to assess how well it fits this role
+                    double score = 0.0;
+                    // Get the fraction of members of this creature group that are in the correct level range, and how close to the middle of the range they are
+                    int count = 0;
+                    foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {
+                        count++;
+                        // Only count this creature type if it's in the correct range and isn't a boss
+                        if (!ct.IsBoss && ct.LevelMin <= cDiff && ct.LevelMax >= cDiff) {
+                            score += 20.0 - Math.Abs(((ct.LevelMin + ct.LevelMax) / 2) - cDiff); // How far from average for this range?
+                        }
                     }
+                    if (score <= 10.0) continue;
+                    score /= count;
+                    score -= (cg.FoundIn.Count * (swarm + 1)); // The more location-specific this creature group, the more we want to use it for the locations for which it is suitable
+                    dScores.Add((cg, swarm), score);
+                    dTotalScore += score;
                 }
-                if (score <= 10.0) continue;
-                score /= count;
-                score -= cg.FoundIn.Count; // The more location-specific this creature group, the more we want to use it for the locations for which it is suitable
-                dScores.Add(cg, score);
-                dTotalScore += score;
             }
 
             // If we don't have any possible creatures then we're in trouble!
@@ -503,9 +522,9 @@ namespace SpaceMercs {
 
             // Now pick a creature group biased by the scores
             double r = rand.NextDouble() * dTotalScore;
-            foreach (CreatureGroup cg in dScores.Keys) {
-                if (r < dScores[cg]) return cg;
-                r -= dScores[cg];
+            foreach ((CreatureGroup cg, int swarm) in dScores.Keys) {
+                if (r < dScores[(cg,swarm)]) return (cg, swarm);
+                r -= dScores[(cg, swarm)];
             }
 
             return null;

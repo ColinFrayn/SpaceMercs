@@ -308,10 +308,10 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
-      <MinLevel>5</MinLevel>
-      <MinPop>25</MinPop>
-      <CashCost>10</CashCost>
-      <Material Name="Tungsten" Amount="1"/>
+      <MinLevel>9</MinLevel>
+      <MinPop>55</MinPop>
+      <CashCost>150</CashCost>
+      <Material Name="Tungsten" Amount="3"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ursalon">3</Relations>
     </Requirements>

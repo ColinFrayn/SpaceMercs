@@ -2,7 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Display stamina & regen rate on soldier screen (EquipmentView & TeamView)
+Swarm enemy: Enemy diff 3 levels lower, but 1.5x the number or 5 levels lower but 2x the number
+- Only if enemy frequency modifier is >= 1.
+
+Display stamina tooltip on TeamView and EquipmentView (Recharge, contributions)
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
@@ -22,9 +25,7 @@ Display when a weapon is recharging
 Backburner : Features
 ---------------------
 
-MapView: Make a single GLShape as Disc16 offset from sector root. Problem - what about colours (if visited or not, and flagged to fade)?
-
-Why shouldn't everyone get power armour & heavy weapons?
+Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
 
 Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?? Maybe?
 

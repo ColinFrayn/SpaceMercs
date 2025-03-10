@@ -615,12 +615,11 @@
     <Rarity>85</Rarity>
     <Agility>-2</Agility>
     <Strength>4</Strength>
-    <Speed>1.2</Speed>
+    <Speed>1.1</Speed>
     <Attack>3</Attack>
-    <Shields>30</Shields>
-    <BaseArmour>40</BaseArmour>
+    <Shields>16</Shields>
+    <BaseArmour>46</BaseArmour>
     <Utility>
-      <Stealth>1</Stealth>
       <Perception>2</Perception>
     </Utility>
     <Requirements>
@@ -648,11 +647,8 @@
     <Materials>
       <Material Name="Crystals" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="4"/>
-      <Material Name="Mithril" Amount="3"/>
-      <Material Name="Titanium" Amount="3"/>
+      <Material Name="Mithril" Amount="5"/>
+      <Material Name="Titanium" Amount="5"/>
     </Materials>
-    <Utility>
-      <Stealth>-1</Stealth>
-    </Utility>
   </ArmourType>
 </Data>
