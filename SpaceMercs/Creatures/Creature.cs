@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Security.Cryptography;
 using System.Xml;
 using static SpaceMercs.Delegates;
 
@@ -231,8 +232,8 @@ namespace SpaceMercs {
 
             if (EquippedWeapon != null && EquippedWeapon.Type.IsUsable && rnd.NextDouble() > 0.4) {
                 int lvl = EquippedWeapon.Level;
-                // Degrade weapon a bit when dropped
-                while (rnd.NextDouble() > 0.5) {
+                // Degrade weapon a bit when dropped. use a different rng here because we were getting loads of really bad not-very-random behaviour otherwise
+                while (RandomNumberGenerator.GetInt32(10) < 5) {
                     lvl--;
                 }
                 if (lvl >= 0) st.Add(new Weapon(EquippedWeapon.Type, lvl));
@@ -818,19 +819,23 @@ namespace SpaceMercs {
             Stamina = MaxStamina;
 
             // Handle periodic effects
+            bool bPlayedGrunt = false;
             foreach (Effect e in Effects) {
                 bool bZoom = (!string.IsNullOrEmpty(e.SoundEffect) || e.Damage != 0.0);
                 if (bZoom) {
                     // Zoom to this creature & redraw
                     centreView(this);
-                    Thread.Sleep(250);
+                    Thread.Sleep(200);
                 }
                 if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                 if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = CalculateDamage(AllDam);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                    if (TotalDam > 0.0) playSound("Grunt");
+                    if (TotalDam > 0.0 && !bPlayedGrunt) {
+                        playSound("Grunt");
+                        bPlayedGrunt = true;
+                    }
                     InflictDamage(AllDam, applyEffect, fact);
                     if (Health <= 0.0) {
                         // If this effect killed this creature, maybe register the kill and then stop here
@@ -843,7 +848,7 @@ namespace SpaceMercs {
                         break; 
                     }
                 }
-                if (bZoom) Thread.Sleep(750);
+                if (bZoom) Thread.Sleep(250);
                 e.ReduceDuration(1);
             }
             _Effects.RemoveAll(e => e.Duration <= 0);

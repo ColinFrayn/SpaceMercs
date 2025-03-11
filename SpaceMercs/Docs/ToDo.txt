@@ -2,7 +2,11 @@
 ToDo List
 -------------------------------------------------
 
-Reduce dropped items from humanoids. Maybe 50% chance of reducing quality by one, if zero then gone.
+Melee defence/att - subtract encumbrance * 2 at least
+
+Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly
+
+heavy weapon def penalty in melee
 
 Display stamina tooltip on TeamView and EquipmentView (Recharge, contributions)
 

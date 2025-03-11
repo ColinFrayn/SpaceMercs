@@ -1113,7 +1113,7 @@ namespace SpaceMercs {
                 if (rand.Next(nCreatures) > 25) iGroupSize++;
                 if (ParentMission.Soldiers.Count > 2) iGroupSize++;
                 if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
-                    Creature? cr = cg.GenerateRandomBoss(ra, cDiff, this);
+                    Creature? cr = cg.GenerateRandomBoss(ra, Diff, this); // Boss creatures are not reduced in strength because of swarm conditions
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
@@ -1236,10 +1236,11 @@ namespace SpaceMercs {
             if (ParentMission.WavesRemaining <= 2) dCreatures += rand.NextDouble() * 0.3 + 0.3;
             if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.4;
             if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.4 + 0.5;
-            int nCreatures = (int)(dCreatures * (Const.CreatureFrequencyScale * 100d) * cg.QuantityScale * cg.QuantityScale);
+            int nCreatures = (int)(dCreatures * (Const.CreatureFrequencyScale * 100d) * cg.QuantityScale * cg.QuantityScale * (1d + (double)ParentMission.SwarmLevel * 0.5));
             if (nCreatures < 2) nCreatures = 2;
             int nTries = 0;
             bool hasBoss = false;
+            int cDiff = Diff - ParentMission.SwarmLevel;
 
             // Add all creatures
             while (nCreatures > 0 && nTries < 100) {
@@ -1248,7 +1249,7 @@ namespace SpaceMercs {
                     cr = cg.GenerateRandomBoss(ra, Diff, this);
                 }
                 if (cr is null) {
-                    cr = cg.GenerateRandomCreature(ra, Diff, this);
+                    cr = cg.GenerateRandomCreature(ra, cDiff, this);
                 }
                 if (cr is null) throw new Exception("Could not generate an attacking creature!");
                 if (PlaceAttackingCreatureInWave(cr)) {
