@@ -164,10 +164,10 @@ namespace SpaceMercs {
             double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
             AxialRotationPeriod = (int)(arot * (Radius / Const.PlanetSize));
 
-            // Is this a precursor location?
+            // Is this a precursor location? Needs to be in third ring or further.
             Star star = GetSystem();
             Sector sector = star.Sector;
-            if (Math.Abs(sector.SectorX) >= 2 || Math.Abs(sector.SectorY) >= 2) {
+            if (Math.Abs(sector.SectorX) > 2 || Math.Abs(sector.SectorY) > 2) {
                 if (Type is not PlanetType.Gas && BaseTemp >= 180 && BaseTemp <= 400) {
                     if (star.IsStableMainSequence()) {
                         if (rnd.NextDouble() > 0.8) {
@@ -317,7 +317,7 @@ namespace SpaceMercs {
         public void SetupPrecursorMissions(Random rnd) {
             Mission mp = Mission.CreatePrecursorMission(this, rnd);
             AddMission(mp);
-            Mission? ma = Mission.TryCreateSpaceHulkArtifactMission(this, rnd);
+            Mission? ma = Mission.TryCreatePrecursorArtifactMission(this, rnd);
             if (ma is not null) AddMission(ma);
         }
 

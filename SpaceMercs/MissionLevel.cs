@@ -1081,7 +1081,7 @@ namespace SpaceMercs {
 
         // Adding the (enemy) creatures to the map
         private void GenerateCreatures() {
-            if (ParentMission.Goal == Mission.MissionGoal.Defend) return; // Start with an empty map
+            if (ParentMission.Goal == MissionGoal.Defend) return; // Start with an empty map
             // Who are we fighting against?
             CreatureGroup cg = ParentMission.PrimaryEnemy;
             Race? ra = ParentMission.RacialOpponent;
@@ -1095,12 +1095,12 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            int cDiff = Diff - ParentMission.SwarmLevel * 2;
+            int cDiff = Diff - ParentMission.SwarmLevel;
             int soldierCount = ParentMission.Soldiers.Count;
-            if (ParentMission.Goal == Mission.MissionGoal.Countdown || ParentMission.Goal == Mission.MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            double quantityScale = cg.QuantityScale * (1d + ParentMission.SwarmLevel * 0.75d);
+            if (ParentMission.Goal == MissionGoal.Countdown || ParentMission.Goal == MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
+            double quantityScale = cg.QuantityScale * (1d + ParentMission.SwarmLevel * 0.6d);
             int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * quantityScale * Const.CreatureFrequencyScale);
-            if (ParentMission.Type == Mission.MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
+            if (ParentMission.Type == MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
             if (nCreatures < 3) nCreatures = 3;
             int nLeft = nCreatures;
 
@@ -1112,20 +1112,20 @@ namespace SpaceMercs {
                 if (rand.Next(nCreatures) > 15) iGroupSize++;
                 if (rand.Next(nCreatures) > 25) iGroupSize++;
                 if (ParentMission.Soldiers.Count > 2) iGroupSize++;
-                if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == Mission.MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
+                if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
                     Creature? cr = cg.GenerateRandomBoss(ra, cDiff, this);
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
                         cGroup.Add(cr);
                     }
-                    else if (ParentMission.Goal == Mission.MissionGoal.KillBoss) throw new Exception("Couldn't generate required boss for assassination quest");
+                    else if (ParentMission.Goal == MissionGoal.KillBoss) throw new Exception("Couldn't generate required boss for assassination quest");
                 }
                 if (iGroupSize > nLeft) iGroupSize = nLeft;
                 for (int i = cGroup.Count; i < iGroupSize; i++) {
                     Creature? cr = cg.GenerateRandomCreature(ra, cDiff, this);
                     if (cGroup.Count == 0) {
-                        if (PlaceFirstCreatureInGroup(cr, ParentMission.Type == Mission.MissionType.Surface)) cGroup.Add(cr);
+                        if (PlaceFirstCreatureInGroup(cr, ParentMission.Type == MissionType.Surface)) cGroup.Add(cr);
                         else break;
                     }
                     else {
@@ -1668,8 +1668,8 @@ namespace SpaceMercs {
                 if (bMines || bSparse) MaxTries /= 2;
                 if (bMines) MaxTries -= nRooms * 5;
                 if (bSparse) MaxTries -= nRooms * 5;
+                bOK = false;
                 for (int i = 0; i < MaxTries; i++) { // Attempt to place a new room a number of times
-                    bOK = false;
                     // Generate a random room size
                     h = (int)(4.0 + (rand.NextDouble() * 3.0) + (rand.NextDouble() * 3.0) + (rand.NextDouble() * 2.0));
                     w = h + (int)((rand.NextDouble() * 3.0) + (rand.NextDouble() * 2.0) - (rand.NextDouble() * 3.0) - (rand.NextDouble() * 2.0));

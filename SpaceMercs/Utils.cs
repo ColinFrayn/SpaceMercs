@@ -482,10 +482,11 @@ namespace SpaceMercs {
             return Math.Pow(lev + 1, Const.EquipmentLevelCostExponent) * Math.Pow(Const.EquipmentLevelCostBaseExponent, lev);
         }
 
-        public static IItem? GenerateRandomItem(Random rnd, int lvl, Race? race, bool bAddEquipment = true) {
+        public static IItem? GenerateRandomItem(Random rnd, int lvl, Race? race, bool bAddEquipment = true, bool bIncludeWeapons = true) {
             // Armour
             double rnum = rnd.NextDouble();
             if (!bAddEquipment) rnum = 1.0;
+            if (!bIncludeWeapons) rnum = rnd.NextDouble() * 0.8d + 0.2d;
             if (rnum < 0.2) { // Random weapon
                 return GenerateRandomWeapon(rnd, lvl, race);
             }

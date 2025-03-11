@@ -99,7 +99,7 @@ namespace SpaceMercs {
                 throw new Exception("Unknown mission goal");
             }
         }
-        public int Experience { get { return (Diff + 1) * (Diff + 1) * LevelCount * (Size * 2 + 8); } }
+        public int Experience { get { return (int)(((double)Diff + 1d) * ((double)Diff + 1d) * (double)LevelCount * ((double)Size * 2d + 8d) * (1d + SwarmLevel * 0.3d)); } }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
@@ -302,7 +302,7 @@ namespace SpaceMercs {
             }
             m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
-                m.Reward = Math.Round((rand.NextDouble() + (m.Size + 3.0)) * (m.Diff + 2.0) * (m.Diff + 2.0) * m.LevelCount / 5.0, 2);
+                m.Reward = Math.Round((rand.NextDouble() + ((double)m.Size + 3d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale, 2);
             }
             return m;
         }
@@ -420,7 +420,7 @@ namespace SpaceMercs {
             return m;
         }
         private void InitialiseMissionBasedOnGoal(Random rand) {
-            if (Goal == MissionGoal.KillBoss) Reward *= 1.1;
+            if (Goal == MissionGoal.KillBoss) Reward *= 1.2;
             if (Goal == MissionGoal.ExploreAll) Reward *= 0.8;
             if (Goal == MissionGoal.Gather) Reward = 0.0;
             if (Goal == MissionGoal.Defend) {
@@ -491,12 +491,12 @@ namespace SpaceMercs {
 
                 // Consider swarm levels
                 for (int swarm = 0; swarm <= 2; swarm++) {
-                    if (swarm > 0 && 40 + swarm * 25 > rand.Next(100)) continue; // Swarms are fairly rare
+                    if (swarm > 0 && 40 + swarm * 20 > rand.Next(100)) continue; // Swarms are fairly rare
                     if (swarm > 0 && cg.QuantityScale < 1.0) continue; // Swarms only happen with creatures that are fairly populous
-                    if (swarm > 0 && m.Diff < 2 + swarm * 2) continue;
+                    if (swarm > 0 && m.Diff < 4 + swarm * 2) continue; // Swarms are mid-high level events
 
                     // Swarm missions have lower level creatures in them
-                    int cDiff = m.Diff - (swarm * 2);
+                    int cDiff = m.Diff - swarm;
 
                     // Get a score for this CG to assess how well it fits this role
                     double score = 0.0;

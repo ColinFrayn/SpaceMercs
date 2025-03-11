@@ -229,7 +229,14 @@ namespace SpaceMercs {
                 st.Add(cp);
             }
 
-            if (EquippedWeapon != null && EquippedWeapon.Type.IsUsable && rnd.NextDouble() < 0.5) st.Add(EquippedWeapon); // Weapon has 50% chance of surviving intact
+            if (EquippedWeapon != null && EquippedWeapon.Type.IsUsable && rnd.NextDouble() > 0.4) {
+                int lvl = EquippedWeapon.Level;
+                // Degrade weapon a bit when dropped
+                while (rnd.NextDouble() > 0.5) {
+                    lvl--;
+                }
+                if (lvl >= 0) st.Add(new Weapon(EquippedWeapon.Type, lvl));
+            }
 
             // Generate other dropped items
             if (OverrideRace != null) {
@@ -239,7 +246,7 @@ namespace SpaceMercs {
                 int num = (int)Math.Round(dnum);
                 for (int n = 0; n < num; n++) {
                     // Generate a random item suitable for this creature
-                    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level, OverrideRace);
+                    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level, OverrideRace, bIncludeWeapons:false);
                     if (eq is not null) st.Add(eq);
                 }
             }

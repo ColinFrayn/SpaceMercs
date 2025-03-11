@@ -2,8 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Swarm enemy: Enemy diff 3 levels lower, but 1.5x the number or 5 levels lower but 2x the number
-- Only if enemy frequency modifier is >= 1.
+Reduce dropped items from humanoids. Maybe 50% chance of reducing quality by one, if zero then gone.
 
 Display stamina tooltip on TeamView and EquipmentView (Recharge, contributions)
 
