@@ -133,6 +133,7 @@ namespace SpaceMercs.Dialogs {
             }
             ttSoldier.SetToolTip(this.lbArmour, strArmour);
             lbStamina.Text = $"{s.MaxStamina:N0}";
+            ttSoldier.SetToolTip(this.lbStamina, $"{s.BaseStamina} (base) + {s.StatBonuses(StatType.Stamina)} (items) / {s.StaminaRegen} (recharge)");
             pbExperience.Refresh(); // Display the experience progress bar
             btUpgradeStat.Enabled = s.PointsToSpend > 0;
             btUpgradeStat.Visible = s.PointsToSpend > 0;

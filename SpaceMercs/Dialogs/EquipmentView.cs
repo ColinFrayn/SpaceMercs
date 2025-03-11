@@ -69,7 +69,6 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.lbHealthTotal, ThisSoldier.BaseHealth + " (base) + " + ThisSoldier.StatBonuses(StatType.Health) + " (items)");
             lbAttackTotal.Text = ThisSoldier.Attack.ToString();
             double bfi = ThisSoldier.StatBonuses(StatType.Attack);
-            //if (ThisSoldier.EquippedWeapon != null) bfi += ThisSoldier.EquippedWeapon.AccuracyBonus;
             ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.BaseAttack + " (base) + " + bfi + " (items)" + ((ThisSoldier.EquippedWeapon != null) ? (" + " + ThisSoldier.GetSoldierSkillWithWeapon(ThisSoldier.EquippedWeapon.Type) + " (weapon skills)") : ""));
             lbDefenceTotal.Text = ThisSoldier.Defence.ToString();
             ttSoldier.SetToolTip(this.lbDefenceTotal, ThisSoldier.BaseDefence + " (base) + " + ThisSoldier.StatBonuses(StatType.Defence) + " (items) + " + ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance) + " (skills)");
@@ -82,6 +81,7 @@ namespace SpaceMercs.Dialogs {
             }
             ttSoldier.SetToolTip(this.lbArmour, strArmour);
             lbStamina.Text = $"{ThisSoldier.MaxStamina:N0}";
+            ttSoldier.SetToolTip(this.lbStamina, $"{ThisSoldier.BaseStamina} (base) + {ThisSoldier.StatBonuses(StatType.Stamina)} (items) / {ThisSoldier.StaminaRegen} (recharge)");
             pbExperience.Refresh(); // Display the experience progress bar
 
             // Weapon skills

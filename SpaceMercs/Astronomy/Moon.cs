@@ -41,7 +41,7 @@ namespace SpaceMercs {
             OrbitalDistance += Radius;
             bool bOK = true;
             do {
-                Temperature = Parent.Temperature - 40; // Base level
+                Temperature = Parent.Temperature - 30; // Base level
                 double tempmod = 0.0;
                 bOK = true;
                 if (Temperature > 180 && Temperature < 320 && rnd.Next(4) == 0) { _type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }
@@ -53,6 +53,7 @@ namespace SpaceMercs {
                     else { _type = PlanetType.Rocky; tempmod = Utils.NextGaussian(rnd, 5, 5); }
                 }
                 Temperature += (int)tempmod;
+                if (Temperature < 10) Temperature = 10;
 
                 // Check that this is ok
                 if (Temperature > 320 && Type == PlanetType.Oceanic) bOK = false;

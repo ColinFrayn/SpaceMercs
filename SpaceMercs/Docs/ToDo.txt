@@ -2,11 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Melee defence/att - subtract encumbrance * 2 at least
-
-Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly
-
-heavy weapon def penalty in melee
+Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly [TEST]
 
 Display stamina tooltip on TeamView and EquipmentView (Recharge, contributions)
 
