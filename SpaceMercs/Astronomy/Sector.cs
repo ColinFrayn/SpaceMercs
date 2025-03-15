@@ -138,11 +138,9 @@ namespace SpaceMercs {
             else Disc.Disc32.Unbind();
 
             // Precalc matrices
-            Matrix4 translateM3 = Matrix4.CreateTranslation(0.0f, 1.1f, 0f);
             Matrix4 scaleText = Matrix4.CreateScale(0.5f);
             Matrix4 scaleFlag = Matrix4.CreateScale(0.6f, 0.4f, 0.01f);
             Matrix4 scaleFlagPole = Matrix4.CreateScale(0.05f, 1.0f, 0.01f);
-            Matrix4 translateFlag = Matrix4.CreateTranslation(0.0f, 0.5f, 0f);
 
             // Display remaining stars, text, flags etc.
             foreach (Star st in Stars) {
@@ -164,7 +162,7 @@ namespace SpaceMercs {
                 bool hasLabel = false;
                 if (bShowLabels && st.Visited && !string.IsNullOrEmpty(st.Name)) {
                     tro.View = Matrix4.CreateScale(0.5f) * translateStar;
-                    tro.YPos = -0.5f;
+                    tro.YPos = -(0.15f + (Const.StarScale * st.DrawScale));
                     tro.TextColour = Color.White;
                     TextRenderer.DrawWithOptions(st.Name, tro);
                     hasLabel = true;
@@ -173,15 +171,17 @@ namespace SpaceMercs {
                 // Display whether this system has been colonised with a flag
                 if (bShowFlags && st.Visited && st.Owner != null) {
                     Matrix4 viewFlag = Matrix4.CreateScale(0.5f) * translateStar;
+                    Matrix4 translateFlagPole = Matrix4.CreateTranslation(0.0f, 0.2f + (Const.StarScale * st.DrawScale), 0f);
                     prog.SetUniform("view", viewFlag);
-                    prog.SetUniform("model", scaleFlagPole * translateStar * translateFlag);
+                    prog.SetUniform("model", scaleFlagPole * translateStar * translateFlagPole);
                     prog.SetUniform("textureEnabled", false);
                     prog.SetUniform("lightEnabled", false);
                     prog.SetUniform("flatColour", new Vector4(0.6f, 0.4f, 0.2f, 1.0f));
                     GL.UseProgram(prog.ShaderProgramHandle);
                     Square.Flat.Bind();
                     Square.Flat.Draw();
-                    prog.SetUniform("model", scaleFlag * translateStar * translateM3);
+                    Matrix4 translateFlag = Matrix4.CreateTranslation(0.0f, 0.8f + (Const.StarScale * st.DrawScale), 0f);
+                    prog.SetUniform("model", scaleFlag * translateStar * translateFlag);
                     prog.SetUniform("flatColour", new Vector4((float)st.Owner.Colour.R / 255f, (float)st.Owner.Colour.G / 255f, (float)st.Owner.Colour.B / 255f, 1.0f));
                     GL.UseProgram(prog.ShaderProgramHandle);
                     Square.Flat.Draw();
@@ -192,8 +192,9 @@ namespace SpaceMercs {
                 if (bShowPop && st.Visited) {
                     int pop = st.GetPopulation();
                     if (pop == 0) continue;
-                    if (hasLabel) tro.YPos = -1.0f; // Offset under system name
-                    else tro.YPos = -0.5f;
+                    if (hasLabel) tro.YPos = -0.55f; // Offset under system name
+                    else tro.YPos = -0.05f;
+                    tro.YPos -= Const.StarScale * st.DrawScale;
                     tro.View = Matrix4.CreateScale(0.5f) * translateStar;
                     tro.TextColour = Color.LightGreen;
                     tro.Scale = 0.5f;

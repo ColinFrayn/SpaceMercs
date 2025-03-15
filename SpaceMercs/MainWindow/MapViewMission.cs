@@ -330,32 +330,34 @@ namespace SpaceMercs.MainWindow {
                     if (IsKeyPressed(Keys.X)) SelectedSoldierAttack(null);
                     if (IsKeyPressed(Keys.F1)) s.ShowStatistics(AnnounceMessage);
                 }
-                if (IsKeyPressed(Keys.Space)) EndTurn();
             }
+            if (IsKeyPressed(Keys.Space)) EndTurn();
             if (IsKeyPressed(Keys.Tab)) TabToNextSoldier();
-            if (IsKeyPressed(Keys.L)) {
-                PlayerTeam.Mission_ShowLabels = !PlayerTeam.Mission_ShowLabels;
-            }
-            if (IsKeyPressed(Keys.S)) {
-                PlayerTeam.Mission_ShowStatBars = !PlayerTeam.Mission_ShowStatBars;
-            }
-            if (IsKeyPressed(Keys.T)) {
-                PlayerTeam.Mission_ShowTravel = !PlayerTeam.Mission_ShowTravel;
-            }
-            if (IsKeyPressed(Keys.P)) {
-                PlayerTeam.Mission_ShowPath = !PlayerTeam.Mission_ShowPath;
-            }
-            if (IsKeyPressed(Keys.E)) {
-                PlayerTeam.Mission_ShowEffects = !PlayerTeam.Mission_ShowEffects;
-            }
-            if (IsKeyPressed(Keys.D)) {
-                PlayerTeam.Mission_ViewDetection = !PlayerTeam.Mission_ViewDetection;
-            }
-            if (IsKeyPressed(Keys.F)) {
-                PlayerTeam.Mission_FastAI = !PlayerTeam.Mission_FastAI;
-            }
-            if (IsKeyPressed(Keys.F1) && SelectedEntity is null && CurrentAction == SoldierAction.None) {
-                PlayerTeam.ShowStatistics(AnnounceMessage);
+            if (!IsKeyDown(Keys.LeftControl)) {
+                if (IsKeyPressed(Keys.L)) {
+                    PlayerTeam.Mission_ShowLabels = !PlayerTeam.Mission_ShowLabels;
+                }
+                if (IsKeyPressed(Keys.S)) {
+                    PlayerTeam.Mission_ShowStatBars = !PlayerTeam.Mission_ShowStatBars;
+                }
+                if (IsKeyPressed(Keys.T)) {
+                    PlayerTeam.Mission_ShowTravel = !PlayerTeam.Mission_ShowTravel;
+                }
+                if (IsKeyPressed(Keys.P)) {
+                    PlayerTeam.Mission_ShowPath = !PlayerTeam.Mission_ShowPath;
+                }
+                if (IsKeyPressed(Keys.E)) {
+                    PlayerTeam.Mission_ShowEffects = !PlayerTeam.Mission_ShowEffects;
+                }
+                if (IsKeyPressed(Keys.D)) {
+                    PlayerTeam.Mission_ViewDetection = !PlayerTeam.Mission_ViewDetection;
+                }
+                if (IsKeyPressed(Keys.F)) {
+                    PlayerTeam.Mission_FastAI = !PlayerTeam.Mission_FastAI;
+                }
+                if (IsKeyPressed(Keys.F1) && SelectedEntity is null && CurrentAction == SoldierAction.None) {
+                    PlayerTeam.ShowStatistics(AnnounceMessage);
+                }
             }
         }
         private void CheckHoverMission() {
@@ -1514,7 +1516,7 @@ namespace SpaceMercs.MainWindow {
                     TexSpecs tss = Textures.GetTexCoords(Textures.MiscTexture.Stopwatch);
                     gpItems = new GUIPanel(this);
                     // Set up list of items
-                    foreach (Equipment eq in s.GetUtilityItems()) {
+                    foreach (Equipment eq in s.GetUtilityItems().Take(16)) {
                         TexSpecs ts = Textures.GetTexCoords(eq.BaseType);
                         bool bEnabled = s.Stamina >= eq.BaseType.StaminaCost;
                         PanelItem ip = gpItems.InsertIconItem(eq, ts, bEnabled && (eq.Recharge == 0), null);

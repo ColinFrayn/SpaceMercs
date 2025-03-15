@@ -4,15 +4,14 @@ ToDo List
 
 Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly [TEST]
 
-Display stamina tooltip on TeamView and EquipmentView (Recharge, contributions)
-
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
 Precursor/SpaceHulk missions
 - Precursor: Test level type/size/sparseness changes at lower levels
 - Vary CreatureGroups at lower levels
-- What is the primary enemy of the Precursors? Add them in, especially at lower levels
+- Primary enemy of the Precursors = Demons
+-- Add them at lower levels
 - Return Cores to Homeworlds for additional +relations. Where?
 
 Display when a weapon is recharging
