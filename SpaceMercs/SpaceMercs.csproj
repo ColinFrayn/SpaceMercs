@@ -127,6 +127,9 @@
     <None Update="Data\Creatures\VolcanicCreatures.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Creatures\Demons.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Creatures\Xenomorphs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

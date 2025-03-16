@@ -1174,4 +1174,17 @@
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Demon Sword">
+    <Speed>13</Speed>
+    <Range>1</Range>
+    <Damage>6+6</Damage>
+    <Sound>SwordSlice</Sound>
+    <ItemEffect Name="Sword Burn">
+      <Effect Name="Burning">
+        <Duration>2</Duration>
+        <Damage Type="Fire">4</Damage>
+      </Effect>
+    </ItemEffect>
+    <Hidden/>
+  </WeaponType>
 </Data>

@@ -1,0 +1,134 @@
+﻿<Data>
+  <CreatureType Name="Imp">
+    <LevelRange>8,18</LevelRange>
+    <Scale>0.9</Scale>
+    <Attack>11</Attack>
+    <Defence>13</Defence>
+    <Armour>15</Armour>
+    <Health>13</Health>
+    <Stamina>19</Stamina>
+    <Frequency>4</Frequency>
+    <Interact/>
+    <BodyType>Demon</BodyType>
+    <Col1>180, 50, 00</Col1>
+    <Col2>190, 70, 00</Col2>
+    <Col3>200, 80, 00</Col3>
+    <Desc>A vicious demonic imp</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Demon Spawn">
+    <Size>1</Size>
+    <LevelRange>9,19</LevelRange>
+    <Attack>14</Attack>
+    <Defence>14</Defence>
+    <Armour>22</Armour>
+    <Health>18</Health>
+    <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>Demon</BodyType>
+    <Col1>160, 50, 00</Col1>
+    <Col2>170, 70, 00</Col2>
+    <Col3>180, 80, 00</Col3>
+    <Desc>A demonic servant with sharp claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Barbed Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Demon Blood</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Lava Beast">
+    <LevelRange>9,19</LevelRange>
+    <Attack>16</Attack>
+    <Defence>11</Defence>
+    <Armour>17</Armour>
+    <Health>13</Health>
+    <Stamina>22</Stamina>
+    <Frequency>2</Frequency>
+    <BodyType>Demon</BodyType>
+    <Col1>180, 50, 00</Col1>
+    <Col2>190, 70, 00</Col2>
+    <Col3>200, 80, 00</Col3>
+    <Desc>A quadripedal demon that explodes in a burst of fire when killed.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="80"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Demon Blood</Item>
+    </Scavenge>
+    <OnDeathEffect Name="BloodBurst">
+      <Radius>1.5</Radius>
+      <Effect>
+        <Damage Type="Fire">7</Damage>
+      </Effect>
+      <Effect Name="Fire Damage">
+        <Duration>2</Duration>
+        <Damage Type="Fire">4</Damage>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
+  </CreatureType>
+  <CreatureType Name="Demon Swordmaster">
+    <Size>2</Size>
+    <LevelRange>9,19</LevelRange>
+    <Attack>22</Attack>
+    <Defence>16</Defence>
+    <Armour>22</Armour>
+    <Health>20</Health>
+    <Stamina>21</Stamina>
+    <Interact/>
+    <BodyType>Demon</BodyType>
+    <Col1>160, 50, 00</Col1>
+    <Col2>170, 70, 00</Col2>
+    <Col3>180, 80, 00</Col3>
+    <Desc>A large bipedal, horned demon with a huge fiery blade</Desc>
+    <Weapons>
+      <Weapon Weight="1">Demon Sword</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="1">Demon Blood</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Demon Lord">
+    <Size>2</Size>
+    <LevelRange>10,20</LevelRange>
+    <Attack>26</Attack>
+    <Defence>17</Defence>
+    <Armour>28</Armour>
+    <Health>58</Health>
+    <Stamina>24</Stamina>
+    <Interact/>
+    <BodyType>Demon</BodyType>
+    <Col1>160, 50, 00</Col1>
+    <Col2>170, 70, 00</Col2>
+    <Col3>180, 80, 00</Col3>
+    <Desc>A huge fiery demon lord with a giant sword and wings of fire.</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Demon Sword</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="2">Demon Blood</Item>
+    </Scavenge>
+    <Boss/>
+  </CreatureType>
+</Data>
+

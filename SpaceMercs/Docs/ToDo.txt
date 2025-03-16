@@ -2,12 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly [TEST]
-
-Test flamethrowers & scale damage
-
-Test grenade launchers & scale damage
-
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 

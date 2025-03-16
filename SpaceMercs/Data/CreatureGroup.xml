@@ -21,6 +21,11 @@
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,SpaceHulk</Locations>
     <MinSectorRange>2</MinSectorRange>
   </CreatureGroup>
+  <CreatureGroup Name="Demons">
+    <Filename>Demons.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Cave,SpaceHulk</Locations>
+    <MinSectorRange>3</MinSectorRange>
+  </CreatureGroup>
   <CreatureGroup Name="Desert Creatures">
     <Filename>DesertCreatures.xml</Filename>
     <Locations>Desert</Locations>

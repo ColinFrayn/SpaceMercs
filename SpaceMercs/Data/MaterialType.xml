@@ -332,4 +332,11 @@
     <Scavenged/>
     <Desc>The highly volatile organ from a fire-breathing creature.</Desc>
   </MaterialType>
+  <MaterialType Name="Demon Blood">
+    <UnitCost>15.0</UnitCost>
+    <Rarity>0.005</Rarity>
+    <UnitMass>0.5</UnitMass>
+    <Scavenged/>
+    <Desc>The hot, deep red blood of a vicious demon.</Desc>
+  </MaterialType>
 </Data>

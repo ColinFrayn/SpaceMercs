@@ -2,7 +2,7 @@
 
 namespace SpaceMercs {
     public class CreatureType {
-        public enum BodyType { Humanoid, Bug, Snake, Lizard, Beetle, Arachnid, Xenomorph, Centipede, Scorpion, Dragon, Plant, Slime, ShadowBeast, VoidBeast, Fungoid, Mechanoid, Gremlin, Tank, Crystalline, Mephit, Elemental }
+        public enum BodyType { Humanoid, Bug, Snake, Lizard, Beetle, Arachnid, Xenomorph, Centipede, Scorpion, Dragon, Plant, Slime, ShadowBeast, VoidBeast, Fungoid, Mechanoid, Gremlin, Tank, Crystalline, Mephit, Elemental, Demon }
         public enum LootType { Soldier, Trader, Exotic }
         public string Name { get; private set; }
         public int Size { get; private set; } // Default = 1
