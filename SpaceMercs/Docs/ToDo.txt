@@ -4,13 +4,17 @@ ToDo List
 
 Periodic dmg : Only make sound for first hit then push through and subsequent ticks more rapidly [TEST]
 
+Test flamethrowers & scale damage
+
+Test grenade launchers & scale damage
+
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
 Precursor/SpaceHulk missions
 - Precursor: Test level type/size/sparseness changes at lower levels
 - Vary CreatureGroups at lower levels
-- Primary enemy of the Precursors = Demons
+- Primary enemy of the Precursors = Demons : Add them
 -- Add them at lower levels
 - Return Cores to Homeworlds for additional +relations. Where?
 

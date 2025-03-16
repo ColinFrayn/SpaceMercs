@@ -7,7 +7,8 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class SpaceHulk : OrbitalAO {
-        public SpaceHulk(Star parent, double orbit) : base(orbit, parent) {
+        public SpaceHulk(Star parent) : base(0d, parent) {
+            // Set it up with a placeholder orbit
             AxialRotationPeriod = Const.DayLength * 2.5d;
         }
         

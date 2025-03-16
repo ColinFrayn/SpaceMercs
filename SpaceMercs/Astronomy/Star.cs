@@ -136,6 +136,7 @@ namespace SpaceMercs {
 
             // Load any planets that might have been saved specially
             var planets = xml.SelectNodesToList("Planets/Planet");
+            if (planets.Any()) _planets.Clear();
             foreach (XmlNode xmlp in planets) {
                 if (xmlp.Attributes!["Seed"]?.Value is string strSeed) {
                     int seed = Int32.Parse(strSeed);
@@ -147,6 +148,7 @@ namespace SpaceMercs {
                     _planets.Add(pl);
                 }
                 bGenerated = true;
+                if (SpaceHulk != null) SpaceHulk.OrbitalDistance = SpaceHulkOrbit;
             }
 
             SetupColour();
@@ -298,7 +300,7 @@ namespace SpaceMercs {
                 int maxDist = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
                 if (maxDist >= 2) {
                     if (rnd.Next(8 + maxDist) == 1) {
-                        SpaceHulk = new SpaceHulk(this, SpaceHulkOrbit);
+                        SpaceHulk = new SpaceHulk(this);
                     }
                 }
             }
@@ -378,6 +380,7 @@ namespace SpaceMercs {
                 _planets.Add(pl);
             }
             bGenerated = true;
+            if (SpaceHulk != null) SpaceHulk.OrbitalDistance = SpaceHulkOrbit;
         }
 
         // Max lifetime = 10^10 yrs / mass^3 (valid for stars < 10Ms and roughly valid above that. Ish.)

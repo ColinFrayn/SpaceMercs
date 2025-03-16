@@ -169,9 +169,9 @@ namespace SpaceMercs {
         public const float  ShotDurationScale = 25.0f; // Time taken for shots to get from source to target
         public const float  ShotSizeScale = 250.0f; // Size of a shot line (larger = smaller)
         public const float  ShotScatterScale = 0.15f; // Amount of visual scatter on shot lines
-        public const double HeavyWeaponMeleeDefencePenalty = 5d; // Defence penalty when wielding a heavy weapon and being attacked in melee
-        public const double MeleeEncumbranceAttackPenalty = 5d; // Penalty to melee attack when fully encumbered.
-        public const double MeleeEncumbranceDefencePenalty = 5d; // Penalty to defence when fully encumbered and attacked in melee.
+        public const double HeavyWeaponMeleeDefencePenalty = 8d; // Defence penalty when wielding a heavy weapon and being attacked in melee
+        public const double MeleeEncumbranceAttackPenalty = 8d; // Penalty to melee attack when fully encumbered.
+        public const double MeleeEncumbranceDefencePenalty = 8d; // Penalty to defence when fully encumbered and attacked in melee.
 
         // Miscellaneous
         public const double InitialCash = 50.0;

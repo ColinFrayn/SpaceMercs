@@ -4,7 +4,7 @@ namespace SpaceMercs {
     public class WeaponType : ItemType {
         public enum DamageType { Physical, Electrical, Fire, Cold, Acid, Poison };
         public enum ShotType { Single, Cone, ConeMulti, Grenade };
-        public enum WeaponClass { Rifle, Shotgun, Pistol, Melee, Launcher, Sniper, Heavy, Other };
+        public enum WeaponClass { Rifle, Shotgun, Pistol, Melee, Launcher, Sniper, Emitter, Heavy, Other };
         public WeaponClass WClass { get; private set; }
         public DamageType DType { get; private set; } // Damage type
         public double Range { get; private set; } // Maximum range for this weapon
