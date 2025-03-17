@@ -13,6 +13,8 @@ namespace SpaceMercs {
         public int Recharge { get; private set; } // Number of turns to recharge (2 = usable every other round, 1 = one use per round, 0 = unlimited uses)
         public bool CurePoison { get; private set; }
         public int NoiseLevel { get; private set; } // Noise level is the number of squares away this effect can be heard
+        public bool Scan { get; private set; }
+        public bool Instant { get; private set; }
 
         // Delegate
         public delegate void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py);
@@ -44,7 +46,11 @@ namespace SpaceMercs {
                 Effect eff = new Effect(xn);
                 Effects.Add(eff);
             }
-            if (!Effects.Any()) throw new Exception("No Effect(s) in ItemEffect");
+
+            Scan = xml.SelectSingleNode("Scan") != null;
+            Instant = xml.SelectSingleNode("Instant") != null;
+
+            if (!Scan && !Effects.Any()) throw new Exception("No Effect(s) in ItemEffect");
         }
     }
 }

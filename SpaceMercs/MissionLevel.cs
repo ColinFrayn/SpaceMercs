@@ -2212,6 +2212,12 @@ namespace SpaceMercs {
             }
             return false;
         }
+        public void RevealSquare(int x, int y) {
+            if (x >= 0 && x < Width && y >= 0 && y < Height) {
+                Visible[x, y] = true;
+                Explored[x, y] = true;
+            }
+        }
 
         // ---- Pathfinding
         public List<Point>? ShortestPath(IEntity en, Point start, Point end, int PruningModifier, bool bOnlyExploredCells, int mindist = 1, bool preciseTarget = false, bool ignoreEntities = false) {

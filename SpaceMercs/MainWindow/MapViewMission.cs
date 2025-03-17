@@ -689,7 +689,7 @@ namespace SpaceMercs.MainWindow {
             if (range > 1d) {
                 // This is a ranged i.e. thrown item
                 float shotSize = 5f / Const.ShotSizeScale;
-                float duration = (float)range * Const.ShotDurationScale / 0.25f;
+                float duration = ie?.Instant == true ? 0f : (float)range * Const.ShotDurationScale / 0.25f;
                 float sLength = 0.2f;
                 Color col = Color.FromArgb(255, 200, 200, 200);
                 AddNewEffect(EffectType.Shot, px, py, new Dictionary<string, object>() { { "Source", s }, { "Effect", ie }, { "FX", s.X + 0.5f }, { "TX", px + 0.5f }, { "FY", s.Y + 0.5f }, { "TY", py + 0.5f }, { "Delay", 0f }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });
@@ -704,9 +704,14 @@ namespace SpaceMercs.MainWindow {
             for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {
                 for (int x = (int)Math.Max(px - ie.Radius, 0); x <= (int)Math.Min(px + ie.Radius, CurrentLevel.Width - 1); x++) {
                     if ((x - px) * (x - px) + (y - py) * (y - py) > ie.Radius * ie.Radius) continue;
-                    IEntity? en = CurrentLevel.GetEntityAt(x, y);
-                    if (en != null && !hsEntities.Contains(en)) {
-                        hsEntities.Add(en); // Make sure we don't double count e.g. large entities
+                    if (ie.Scan) {
+                        CurrentLevel.RevealSquare(x, y);
+                    }
+                    else {
+                        IEntity? en = CurrentLevel.GetEntityAt(x, y);
+                        if (en != null && !hsEntities.Contains(en)) {
+                            hsEntities.Add(en); // Make sure we don't double count e.g. large entities
+                        }
                     }
                 }
             }

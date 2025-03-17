@@ -507,4 +507,37 @@
     <Source>Medlab</Source>
     <Tex>1,4</Tex>
   </ItemType>
+  <ItemType Name="Life Scanner">
+    <Mass>3.0</Mass>
+    <Cost>600</Cost>
+    <Rarity>16</Rarity>
+    <StaminaCost>18</StaminaCost>
+    <Desc>A portable scanner that can sense the emissions of nearby life-signs.</Desc>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinSystems>3</MinSystems>
+      <MinPop>40</MinPop>
+      <CashCost>60</CashCost>
+      <Relations Name="Grey">1</Relations>
+      <Facility>Medlab</Facility>
+      <Facility>Workshop</Facility>
+    </Requirements>
+    <ItemEffect Name="Scan">
+      <Instant/>
+      <Radius>3.0</Radius>
+      <Range>12</Range>
+      <Scan/>
+      <Recharge>3</Recharge>
+      <Noise>2</Noise>
+      <Sound>Radar</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Plastic" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+      <Material Name="Electronic Components" Amount="2"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>2,4</Tex>
+  </ItemType>
 </Data>

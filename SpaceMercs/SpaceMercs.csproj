@@ -271,6 +271,9 @@
     <None Update="Sounds\Punches.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Radar.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\ShotgunAndReload.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
