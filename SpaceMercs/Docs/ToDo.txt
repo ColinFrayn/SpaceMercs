@@ -2,7 +2,14 @@
 ToDo List
 -------------------------------------------------
 
+Mission.SecondaryEnemy (when level count > 1) [TEST]
+- Missionlevel.GenerateCreatures
+- Blend in secondary enemy in lower levels
+
 Don't show dmg/heal for 0 & batch tickes [TEST]
+
+Elithiri: Personal teleporter: Can move within sight line up to X squares. Use like grenade weapon.
+- Range related to mass of soldier.
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
@@ -39,8 +46,6 @@ Race relations degrade over time? Or tend towards their base level?
 
 Ship Inventory selection / transfer is very annoying - scroll down, select, skip
 
-Large hulk missions (many levels) in second ring and outer
-
 Alien solar systems:
 - Alien colonies need names
 - Alien systems need names
@@ -48,10 +53,6 @@ Alien solar systems:
 Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
-
-New Item Ideas:
-- Elithiri: Personal teleporter? Can move within sight line up to X squares. Use like grenade weapon.
-- Grey? Life scanner (shows blips for any unseen creatures within a range. Passive or active? Maybe an active scan area like a grenade)
 
 Cover
 - When partially hidden from the attacker, get a def bonus

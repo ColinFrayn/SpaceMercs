@@ -689,7 +689,7 @@ namespace SpaceMercs.MainWindow {
             if (range > 1d) {
                 // This is a ranged i.e. thrown item
                 float shotSize = 5f / Const.ShotSizeScale;
-                float duration = ie?.Instant == true ? 0f : (float)range * Const.ShotDurationScale / 0.25f;
+                float duration = ie!.Instant ? 0f : (float)range * Const.ShotDurationScale / 0.25f;
                 float sLength = 0.2f;
                 Color col = Color.FromArgb(255, 200, 200, 200);
                 AddNewEffect(EffectType.Shot, px, py, new Dictionary<string, object>() { { "Source", s }, { "Effect", ie }, { "FX", s.X + 0.5f }, { "TX", px + 0.5f }, { "FY", s.Y + 0.5f }, { "TY", py + 0.5f }, { "Delay", 0f }, { "Length", sLength }, { "Duration", duration }, { "Size", shotSize }, { "Colour", col } });

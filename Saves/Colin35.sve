@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>07/10/2426 03:40:06</Clock>
+<Clock>21/10/2426 22:54:27</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -6762,8 +6762,9 @@
  <Scanned/>
  <Missions>
 <Mission>
- <Type>AbandonedCity</Type>
- <Goal>KillAll</Goal>
+ <Type>Caves</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Cost="0.00" Name="strategically important crystal formation"></MissionItem>
  <Opponent>Gokan</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
@@ -6771,34 +6772,22 @@
  <Diff>12</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>1182729864</Seed>
+ <Seed>502886592</Seed>
  <Size>3</Size>
- <Swarm>1</Swarm>
+ <Waves>5</Waves>
 </Mission>
 <Mission>
  <Type>Caves</Type>
- <Goal>KillAll</Goal>
- <Enemy>Shadow Beasts</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>12</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>378698927</Seed>
- <Size>4</Size>
- <Swarm>1</Swarm>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>KillAll</Goal>
- <Enemy>Elementals</Enemy>
+ <Goal>ExploreAll</Goal>
+ <Opponent>Gokan</Opponent>
+ <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
  <Diff>12</Diff>
  <LevelCount>2</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>1864520341</Seed>
- <Size>3</Size>
+ <Seed>544884983</Seed>
+ <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Caves</Type>
@@ -6806,12 +6795,23 @@
  <Enemy>Elementals</Enemy>
  <TimeCost>0</TimeCost>
  <Reward>0</Reward>
- <Diff>12</Diff>
+ <Diff>13</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>782301807</Seed>
+ <Seed>1573584572</Seed>
  <Size>3</Size>
- <Swarm>1</Swarm>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillBoss</Goal>
+ <Enemy>Crystallines</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>13</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>790581712</Seed>
+ <Size>5</Size>
 </Mission>
  </Missions>
 <Orbit>85776873649</Orbit>
@@ -6971,16 +6971,16 @@
 </Map>
 <Team>
  <Pos>(2,0)11.1</Pos>
- <Cash>21782.262278647533</Cash>
+ <Cash>21722.262278647533</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="23" Y="29"/>
- <Health>20.972815977165247</Health>
- <Stamina>42</Stamina>
+ <Location X="45" Y="12"/>
+ <Health>52</Health>
+ <Stamina>35.76205931533548</Stamina>
  <Shields>12.5</Shields>
- <Facing>180</Facing>
+ <Facing>0</Facing>
  <Level>12</Level>
- <XP>703361</XP>
+ <XP>712327</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,13,12,20</Stats>
@@ -6991,6 +6991,9 @@
   </Inv>
   <Inv Count="2">
 <Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Life Scanner"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -7011,21 +7014,21 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <KillCount>418</KillCount>
+ <KillCount>426</KillCount>
  <ToughestKill>
 <Creature Type="Arachnid Soldier">
- <Level>12</Level>
+ <Level>11</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="24" Y="31"/>
- <Health>60.38942787621319</Health>
- <Stamina>38</Stamina>
- <Shields>10</Shields>
- <Facing>180</Facing>
+ <Location X="36" Y="4"/>
+ <Health>16.408144508508013</Health>
+ <Stamina>9.200000000000001</Stamina>
+ <Shields>0</Shields>
+ <Facing>90</Facing>
  <Level>12</Level>
- <XP>633340</XP>
+ <XP>642306</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,11,17,16</Stats>
@@ -7057,21 +7060,22 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <KillCount>243</KillCount>
+ <Moved/>
+ <KillCount>251</KillCount>
  <ToughestKill>
 <Creature Type="Arachnid Queen">
- <Level>10</Level>
+ <Level>11</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="15" Y="34"/>
- <Health>49.21260505858997</Health>
- <Stamina>21.111290157654395</Stamina>
+ <Location X="45" Y="6"/>
+ <Health>47.37038466136963</Health>
+ <Stamina>0.8000000000000025</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>206.56505117707798</Facing>
  <Level>12</Level>
- <XP>673963</XP>
+ <XP>682929</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,15,13,9</Stats>
@@ -7088,7 +7092,7 @@
 <Armour Type="Assault Power Armour" Material="Composite" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
-<Weapon Type="Heavy Laser Rifle" Level="2" Mod="Precision Sight" />
+<Weapon Type="Heavy Laser Rifle" Level="2" Mod="Precision Sight" Recharge ="1" />
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Rifle">138</Exp>
@@ -7102,7 +7106,8 @@
   <Exp Skill="Engineer">1</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <KillCount>258</KillCount>
+ <Moved/>
+ <KillCount>264</KillCount>
  <ToughestKill>
 <Creature Type="Shadow Alpha">
  <Level>11</Level>
@@ -7110,13 +7115,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="24" Y="30"/>
+ <Location X="35" Y="10"/>
  <Health>52</Health>
- <Stamina>38</Stamina>
+ <Stamina>7.489151749273262</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>284.0362434679265</Facing>
  <Level>12</Level>
- <XP>705199</XP>
+ <XP>714165</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,23,12,16</Stats>
@@ -7146,7 +7151,8 @@
   <Exp Skill="Stealth">2</Exp>
   <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
- <KillCount>168</KillCount>
+ <Moved/>
+ <KillCount>175</KillCount>
  <ToughestKill>
 <Creature Type="Shadow Beast">
  <Level>12</Level>
@@ -7250,7 +7256,7 @@
   <Inv Count="25">
 <Material Type="Carbon Fibre"/>
   </Inv>
-  <Inv Count="21">
+  <Inv Count="19">
 <Material Type="Plastic"/>
   </Inv>
   <Inv Count="26">
@@ -7274,7 +7280,7 @@
   <Inv Count="16">
 <Material Type="Carbon"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="13">
 <Material Type="Rare Earth Metals"/>
   </Inv>
   <Inv Count="8">
@@ -7286,16 +7292,16 @@
   <Inv Count="14">
 <Material Type="Kevlar"/>
   </Inv>
-  <Inv Count="30">
+  <Inv Count="26">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="27">
+  <Inv Count="29">
 <Material Type="Nanosilk"/>
   </Inv>
   <Inv Count="20">
 <Material Type="Shadowskin"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="1">
 <Material Type="Crystals"/>
   </Inv>
   <Inv Count="1">
@@ -7322,7 +7328,7 @@
   <Inv Count="7">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="1">
@@ -7420,6 +7426,7 @@
  <Item>Plasma Cannon</Item>
  <Item>Heavy Flamer</Item>
  <Item>Double Blade</Item>
+ <Item>Life Scanner</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Composite</Material>

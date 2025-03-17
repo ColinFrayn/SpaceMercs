@@ -201,6 +201,7 @@ namespace SpaceMercs {
         public const double DailyResearchProb = 0.0015; // Chance of successfully researching a technology, per day, for a nonHuman race.
         public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
+        public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony
@@ -223,6 +224,7 @@ namespace SpaceMercs {
         public const double GrowthTempScale = 10; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
         public const double MissionCashScale = 0.25d; // Scale cash reward for colony missions by this amount.
+
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system
         public const int HomeSysColonyCount = 3;   // Extra colonies for home system
