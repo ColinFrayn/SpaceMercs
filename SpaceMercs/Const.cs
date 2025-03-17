@@ -219,8 +219,8 @@ namespace SpaceMercs {
         public const double ColonySeedTarget = 200.0; // Target seeding point at which level the colony may seed
         public const double GrowthExponent = 1.8; // Affects how time taken for a colony to grow scales with size
         public const double GrowthScale = 2.5; // Affects how time taken for a colony to grow scales with size
-        public const double GrowthTempBase = 1.12; // Affects how time taken for a colony to grow scales with temperature diff
-        public const double GrowthTempScale = 6; // Affects how time taken for a colony to grow scales with temperature diff
+        public const double GrowthTempBase = 1.1; // Affects how time taken for a colony to grow scales with temperature diff.
+        public const double GrowthTempScale = 10; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
         public const double MissionCashScale = 0.25d; // Scale cash reward for colony missions by this amount.
         // Race relations

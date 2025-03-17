@@ -82,6 +82,9 @@ namespace SpaceMercs {
             _MissionList.Add(miss);
             Scanned = true;
         }
+        public void ClearMissions() {
+            if (_MissionList is not null) _MissionList.Clear();
+        }
         public void SetScanned() {
             Scanned = true;
         }

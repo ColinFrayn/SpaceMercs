@@ -1276,24 +1276,27 @@ namespace SpaceMercs {
         public void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect) {
             // Increase Stamina by Endurance + 10 + Bonuses. (i.e. MaxStamina - Level)
             // *OR* Just set to max, instead of recovering a subset of stamina each turn based on Endurance & equipment??
-            Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina); 
+            Stamina = Math.Min(Stamina + StaminaRegen, MaxStamina);
+            bool bAnnouncedDmg = false;
 
             // Handle periodic effects
             foreach (Effect e in Effects) {
-                bool bZoom = (!String.IsNullOrEmpty(e.SoundEffect) || e.Damage != 0.0);
-                if (bZoom) {
-                    // Zoom to this soldier & redraw
-                    centreView(this);
-                    Thread.Sleep(250);
-                }
-                if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                 if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = InflictDamage(AllDam, applyEffect, fact);
-                    fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    if (Math.Abs(TotalDam) > 0.01) {
+                        // Zoom to this soldier & redraw
+                        if (!bAnnouncedDmg) {
+                            centreView(this);
+                            Thread.Sleep(150);
+                            if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
+                            bAnnouncedDmg = true;
+                        }
+                        fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                        Thread.Sleep(150);
+                    }
                     if (Health <= 0.0) return; // Dead. Abandon update.
                 }
-                if (bZoom) Thread.Sleep(750);
                 e.ReduceDuration(1);
             }
             _Effects.RemoveAll(e => e.Duration <= 0);

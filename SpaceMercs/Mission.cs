@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
@@ -481,10 +480,8 @@ namespace SpaceMercs {
                 if (m.RacialOpponent is null && cg.RaceSpecific) continue;
                 if (m.RacialOpponent is not null && !cg.RaceSpecific) continue;
                 if (m.IsShipMission && !cg.FoundInShips) continue;
-                if ((m.Type == MissionType.Caves || m.Type == MissionType.Mines) && !cg.FoundInCaves) continue;
-                // If a surface mission then check planet type is ok
+                if (!m.IsShipMission && !cg.FoundIn.Contains(m.Location.Type)) continue;
                 // Race relations are between each race and the player team. Why would we ever get a mission with the soldiers of a given race? Only ever in space (e.g. ambush if PT is hated), never from colonies
-                if (!m.IsShipMission && m.Type != MissionType.Caves && m.Type != MissionType.Mines && !cg.FoundIn.Contains(m.Location.Type)) continue;
                 if (cg.RaceSpecific && cg.MaxRelations < 5) continue; // A colony would never set up a mission agaisnt its own soldiers.
                 int minSectorDist = m.Location.GetSystem().Sector.MinSectorDist;
                 if (minSectorDist < cg.MinSectorRange) continue; // Cannot have some creatures in inner sectors

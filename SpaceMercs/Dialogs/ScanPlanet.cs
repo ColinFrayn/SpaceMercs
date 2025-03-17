@@ -18,6 +18,8 @@ namespace SpaceMercs.Dialogs {
             clockTick = new Timer();
             clockTick.Tick += new EventHandler(UpdateScan);
             clockTick.Interval = 250;
+            btRegenerate.Enabled = Const.DEBUG_RANDOMISE_VENDORS && _aoScan.Scanned;
+            btRegenerate.Visible = Const.DEBUG_RANDOMISE_VENDORS && _aoScan.Scanned;
 
             if (!_aoScan.Scanned) {
                 lbNone.Visible = false;
@@ -53,6 +55,7 @@ namespace SpaceMercs.Dialogs {
         private void ScanComplete() {
             Random rnd = new Random();
             int nm = rnd.Next(3) + 1;
+            _aoScan.ClearMissions();
             if (_aoScan.Type == Planet.PlanetType.Oceanic) nm += rnd.Next(2) + 1;
             if (_aoScan.Type == Planet.PlanetType.Gas) nm -= rnd.Next(2) + 1;
             while (rnd.NextDouble() < 0.5) nm++;
@@ -73,6 +76,8 @@ namespace SpaceMercs.Dialogs {
                 _aoScan.AddMission(m);
             }
             _aoScan.SetScanned();
+            btRegenerate.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
+            btRegenerate.Visible = Const.DEBUG_RANDOMISE_VENDORS;
             pbScan.Visible = false;
             DisplayMissionList();
         }
@@ -133,6 +138,10 @@ namespace SpaceMercs.Dialogs {
             if (dgMissions.SelectedRows.Count != 1) return;
             Mission miss = dgMissions.SelectedRows[0].Tag as Mission ?? throw new Exception("Could not convert to Mission");
             MessageBox.Show(this, miss.GetDescription(), "Mission Details");
+        }
+
+        private void btRegenerate_Click(object sender, EventArgs e) {
+            ScanComplete();
         }
     }
 }

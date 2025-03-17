@@ -471,8 +471,8 @@ namespace SpaceMercs {
                         Moon mn = pl.Moons[mno];
                         int moonPop = pl.GetPopulation() - pl.Colony.BaseSize;
                         if (mn.Colony is null) {
-                            double chance = 65d + (plcols * 2d) - (moonPop * 10d);
-                            if (mn.Type == Planet.PlanetType.Oceanic) chance += 20d;
+                            double chance = 40d + (plcols * 2d) - (moonPop * 15d);
+                            if (mn.Type == Planet.PlanetType.Oceanic) chance += 25d;
                             if (mn.Type == Planet.PlanetType.Volcanic || mn.Type == Planet.PlanetType.Ice) chance -= 15d;
                             if (rand.NextDouble() * 100d < chance) {
                                 if (mn.ExpandBase(rc, rand, clock) > 0) return true;

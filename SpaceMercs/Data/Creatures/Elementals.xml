@@ -1,7 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Fire Mephit">
     <LevelRange>9,16</LevelRange>
-    <Attack>13</Attack>
+    <Attack>12</Attack>
     <Defence>14</Defence>
     <Health>14</Health>
     <Stamina>15</Stamina>
@@ -21,7 +21,7 @@
   </CreatureType>
   <CreatureType Name="Water Mephit">
     <LevelRange>9,16</LevelRange>
-    <Attack>13</Attack>
+    <Attack>11</Attack>
     <Defence>13</Defence>
     <Health>14</Health>
     <Stamina>15</Stamina>
@@ -41,9 +41,9 @@
   </CreatureType>
   <CreatureType Name="Air Mephit">
     <LevelRange>9,16</LevelRange>
-    <Attack>13</Attack>
-    <Defence>14</Defence>
-    <Health>14</Health>
+    <Attack>11</Attack>
+    <Defence>15</Defence>
+    <Health>12</Health>
     <Stamina>15</Stamina>
     <Armour>12</Armour>
     <Frequency>3</Frequency>
@@ -62,7 +62,7 @@
   </CreatureType>
   <CreatureType Name="Earth Mephit">
     <LevelRange>9,16</LevelRange>
-    <Attack>13</Attack>
+    <Attack>11</Attack>
     <Defence>14</Defence>
     <Health>16</Health>
     <Stamina>15</Stamina>

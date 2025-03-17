@@ -2,6 +2,9 @@
 ToDo List
 -------------------------------------------------
 
+Don't show dmg/heal for 0 (ticking)
+- Bulk together all soldier dmg/heal ticks
+
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 

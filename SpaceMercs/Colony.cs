@@ -232,7 +232,7 @@ namespace SpaceMercs {
                     }
                     SeedProgress = 0d;
                 }
-                else SeedProgress = Const.ColonySeedTarget * 0.9; // No seeding this time, so step back a bit
+                else SeedProgress = Const.ColonySeedTarget * 0.8; // No seeding this time, so step back a bit
             }
         }
         private void ForceExpandBase() {
@@ -564,7 +564,7 @@ namespace SpaceMercs {
             }
 
             // Slow down as the civ gets larger, or growth will get far too rapid
-            dt *= Math.Max(40, Owner.Population) / 40d;
+            dt *= Math.Sqrt(Math.Max(40, Owner.Population) / 40d);
 
             return (int)dt;
         }

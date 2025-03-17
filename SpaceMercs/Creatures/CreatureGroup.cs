@@ -4,7 +4,6 @@ namespace SpaceMercs {
     public class CreatureGroup {
         public string Name { get; private set; }
         public string Filename { get; private set; }
-        public bool FoundInCaves { get; private set; }
         public bool FoundInShips { get; private set; }
         public bool RaceSpecific { get; private set; } // True = this is a group of creatures that must be assigned to a specific alien race. False = This is just random creatures/unknown aliens
         public double QuantityScale { get; private set; } // Multiple of the standard number of creatures found in a level
@@ -30,7 +29,6 @@ namespace SpaceMercs {
             HashSet<string> Locs = new HashSet<string>(strLocation.Split(',').ToList());
             FoundIn = new HashSet<Planet.PlanetType>();
             FoundInShips = Locs.Contains("Ship");
-            FoundInCaves = Locs.Contains("Cave");
             RaceSpecific = (xml.SelectSingleNode("Racial") is not null);
             QuantityScale = xml.SelectNodeDouble("QuantityScale", 1.0);
             MinSectorRange = xml.SelectNodeInt("MinSectorRange", 0);

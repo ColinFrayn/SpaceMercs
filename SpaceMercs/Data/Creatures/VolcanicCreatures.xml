@@ -43,7 +43,7 @@
     </Resistances>
   </CreatureType>
   <CreatureType Name="Lava Beetle">
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>2,11</LevelRange>
     <Attack>10</Attack>
     <Defence>11</Defence>
     <Health>11</Health>
@@ -70,7 +70,7 @@
   </CreatureType>
   <CreatureType Name="Lava Spider">
     <Size>2</Size>
-    <LevelRange>2,12</LevelRange>
+    <LevelRange>3,13</LevelRange>
     <Attack>12</Attack>
     <Defence>10</Defence>
     <Health>12</Health>
@@ -92,32 +92,59 @@
     </Resistances>
     <Scavenge>
       <Item Amount="0.15">Vulcanin</Item>
-      <Item Amount="0.1">Incendiary Bulb</Item>
+      <Item Amount="0.15">Incendiary Bulb</Item>
     </Scavenge>
   </CreatureType>
-  <CreatureType Name="Fire Dragon">
+  <CreatureType Name="Fire Dragonling">
     <Size>2</Size>
-    <LevelRange>6,15</LevelRange>
-    <Attack>15</Attack>
-    <Defence>12</Defence>
-    <Health>33</Health>
-    <Stamina>22</Stamina>
-    <Armour>32</Armour>
+    <LevelRange>4,14</LevelRange>
+    <Attack>14</Attack>
+    <Defence>11</Defence>
+    <Health>22</Health>
+    <Stamina>18</Stamina>
+    <Armour>20</Armour>
+    <MovementCost>0.8</MovementCost>
     <BodyType>Dragon</BodyType>
     <Col1>70, 50, 40</Col1>
     <Col2>130, 90, 90</Col2>
     <Col3>150, 100, 100</Col3>
-    <Desc>A horse-sized dragon that breathes fire.</Desc>
+    <Desc>A human-sized dragonling that breathes fire.</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Fire Bolt</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="50"/>
+      <Resistance Type="Fire" Value="60"/>
+      <Resistance Type="Cold" Value="-25"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="1.0">Vulcanin</Item>
+      <Item Amount="0.8">Incendiary Bulb</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Fire Dragon">
+    <Size>3</Size>
+    <LevelRange>5,15</LevelRange>
+    <Attack>18</Attack>
+    <Defence>12</Defence>
+    <Health>33</Health>
+    <Stamina>22</Stamina>
+    <Armour>32</Armour>
+    <MovementCost>0.7</MovementCost>
+    <BodyType>Dragon</BodyType>
+    <Col1>70, 50, 40</Col1>
+    <Col2>130, 90, 90</Col2>
+    <Col3>150, 100, 100</Col3>
+    <Desc>A large, menacing dragon that breathes fire.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="75"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
     <Scavenge>
       <Item Amount="2.5">Vulcanin</Item>
-      <Item Amount="1.0">Incendiary Bulb</Item>      
+      <Item Amount="1.5">Incendiary Bulb</Item>      
     </Scavenge>
     <Boss/>
   </CreatureType>
