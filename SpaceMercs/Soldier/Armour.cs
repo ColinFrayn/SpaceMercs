@@ -60,7 +60,7 @@ namespace SpaceMercs {
         }
 
         // Armour-specific properties
-        private MaterialType Material;
+        public MaterialType Material { get; private set; }
         public ArmourType Type { get; private set; }
         public double BaseArmour { get { return ArmourAtLevel(Level); } }
         public double Shields { get { return ShieldsAtLevel(Level); } }

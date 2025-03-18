@@ -12,6 +12,7 @@ namespace SpaceMercs.Dialogs {
         private double durationSeconds = 0d;
         private readonly Race? _owner;
         private readonly GlobalClock _clock;
+        private readonly Dictionary<Star, (double Distance, int Hops)> Targets = new();
 
         public HyperspaceTravel(HyperGate hGate, Team team, Action<AstronomicalObject> _arriveAt, GlobalClock clock) {
             _hGate = hGate;
@@ -67,10 +68,11 @@ namespace SpaceMercs.Dialogs {
             btHyperspaceTravel.Enabled = false;
             dgDestinations.Visible = true;
             dgDestinations.Rows.Clear();
-            string[] arrRowDest = new string[5];
-            foreach (Star st in _hGate.GetSystem().TradeRoutes) {
+            CalculateRoutes();
+            string[] arrRowDest = new string[6];
+            foreach (Star st in Targets.Keys) {
+                (double distLy, int hops) = Targets[st];
                 HyperGate targ = st?.GetHyperGate() ?? throw new Exception("TradeRoute system doesn't have a gate");
-                double distLy = AstronomicalObject.CalculateDistance(_hGate, targ) / Const.LightYear;
                 double cost = CalculateCost(distLy);
                 double durationYears = distLy / Const.HyperspaceGateTimeFactor;
                 double durationDays = (int)(durationYears * 365.2422);
@@ -79,11 +81,42 @@ namespace SpaceMercs.Dialogs {
                 arrRowDest[1] = $"({loc.X},{loc.Y})";
                 arrRowDest[2] = $"{Math.Round(distLy, 2)}ly";
                 arrRowDest[3] = $"{durationDays}d";
-                arrRowDest[4] = $"{Math.Round(cost,2)}cr";
+                arrRowDest[4] = hops.ToString();
+                arrRowDest[5] = $"{Math.Round(cost,2)}cr";
                 dgDestinations.Rows.Add(arrRowDest);
                 dgDestinations.Rows[dgDestinations.Rows.Count - 1].Tag = targ;
             }
             dgDestinations.ClearSelection();
+        }
+        private void CalculateRoutes() {
+            Targets.Clear();
+            Star gateStar = _hGate.GetSystem();
+            HashSet<Star> queue = [gateStar];
+            while (queue.Count > 0) {
+                Star current = queue.First();
+                queue.Remove(current);
+                double dist = 0d;
+                int hops = 0;
+                if (Targets.ContainsKey(current)) {
+                    dist = Targets[current].Distance;
+                    hops = Targets[current].Hops;
+                }
+                foreach (Star st in current.TradeRoutes) {
+                    if (st == gateStar) continue;
+                    double sdist = dist + AstronomicalObject.CalculateDistance(current, st) / Const.LightYear;
+                    if (!Targets.ContainsKey(st)) {
+                        Targets.Add(st, (sdist, hops + 1));
+                        queue.Add(st);
+                    }
+                    else {
+                        if (sdist < Targets[st].Distance || (sdist == Targets[st].Distance && hops + 1 < Targets[st].Hops)) {
+                            Targets[st] = (sdist, hops + 1);
+                            queue.Add(st);
+                        }
+                    }
+                }
+            }
+            Targets.Remove(gateStar);
         }
 
         // Travel, if possible

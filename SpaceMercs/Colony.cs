@@ -350,7 +350,7 @@ namespace SpaceMercs {
             // Now add all weapons
             foreach (WeaponType wt in StaticData.WeaponTypes.Where(it => it.CanBuild(Owner))) {
                 if (!wt.IsUsable) continue;
-                for (int Level = 0; Level < 4; Level++) {
+                for (int Level = 0; Level <=3 ; Level++) {
                     Weapon wp = new Weapon(wt, Level);
                     double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                     // Modify rarity by colony details & add this weapon if required
@@ -367,7 +367,7 @@ namespace SpaceMercs {
                 foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
                     if (!mat.IsArmourMaterial) continue;
                     if (mat.IsScavenged) continue;
-                    for (int Level = 0; Level < 4; Level++) {
+                    for (int Level = 0; Level <= Math.Min(3, mat.MaxLevel); Level++) {
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                         // Modify rarity by colony details & add this armour if required

@@ -30,19 +30,20 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             btHyperspaceTravel = new Button();
             dgDestinations = new DataGridView();
+            pbTravel = new ProgressBar();
             colSystem = new DataGridViewTextBoxColumn();
             colCoords = new DataGridViewTextBoxColumn();
             colDistance = new DataGridViewTextBoxColumn();
             colTime = new DataGridViewTextBoxColumn();
+            colHops = new DataGridViewTextBoxColumn();
             colCost = new DataGridViewTextBoxColumn();
-            pbTravel = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)dgDestinations).BeginInit();
             SuspendLayout();
             // 
-            // btRunMission
+            // btHyperspaceTravel
             // 
             btHyperspaceTravel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btHyperspaceTravel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btHyperspaceTravel.Font = new Font("Microsoft Sans Serif", 9.75F);
             btHyperspaceTravel.Location = new Point(202, 448);
             btHyperspaceTravel.Margin = new Padding(4, 3, 4, 3);
             btHyperspaceTravel.Name = "btHyperspaceTravel";
@@ -59,7 +60,7 @@
             dgDestinations.AllowUserToResizeRows = false;
             dgDestinations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgDestinations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgDestinations.Columns.AddRange(new DataGridViewColumn[] { colSystem, colCoords, colDistance, colTime, colCost });
+            dgDestinations.Columns.AddRange(new DataGridViewColumn[] { colSystem, colCoords, colDistance, colTime, colHops, colCost });
             dgDestinations.Dock = DockStyle.Top;
             dgDestinations.Location = new Point(0, 0);
             dgDestinations.Margin = new Padding(4, 3, 4, 3);
@@ -73,55 +74,6 @@
             dgDestinations.TabIndex = 5;
             dgDestinations.SelectionChanged += dgDestinations_SelectionChanged;
             // 
-            // colSystem
-            // 
-            colSystem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            colSystem.DefaultCellStyle = dataGridViewCellStyle1;
-            colSystem.HeaderText = "System";
-            colSystem.Name = "colSystem";
-            colSystem.ReadOnly = true;
-            // 
-            // colCoords
-            // 
-            colCoords.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            colCoords.DefaultCellStyle = dataGridViewCellStyle2;
-            colCoords.HeaderText = "Coords";
-            colCoords.Name = "colCoords";
-            colCoords.ReadOnly = true;
-            colCoords.Width = 70;
-            // 
-            // colDistance
-            // 
-            colDistance.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            colDistance.DefaultCellStyle = dataGridViewCellStyle3;
-            colDistance.HeaderText = "Distance";
-            colDistance.Name = "colDistance";
-            colDistance.ReadOnly = true;
-            colDistance.Width = 77;
-            // 
-            // colCost
-            // 
-            colCost.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            colCost.DefaultCellStyle = dataGridViewCellStyle4;
-            colCost.HeaderText = "Cost";
-            colCost.Name = "colCost";
-            colCost.ReadOnly = true;
-            colCost.Width = 56;
-            // 
-            // colTime
-            // 
-            colTime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            colTime.DefaultCellStyle = dataGridViewCellStyle5;
-            colTime.HeaderText = "Time";
-            colTime.Name = "colTime";
-            colTime.ReadOnly = true;
-            colTime.Width = 58;
-            // 
             // pbTravel
             // 
             pbTravel.Location = new Point(36, 310);
@@ -131,6 +83,63 @@
             pbTravel.Size = new Size(513, 59);
             pbTravel.Step = 1;
             pbTravel.TabIndex = 9;
+            // 
+            // colSystem
+            // 
+            colSystem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
+            colSystem.DefaultCellStyle = dataGridViewCellStyle1;
+            colSystem.HeaderText = "System";
+            colSystem.Name = "colSystem";
+            colSystem.ReadOnly = true;
+            // 
+            // colCoords
+            // 
+            colCoords.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colCoords.DefaultCellStyle = dataGridViewCellStyle2;
+            colCoords.HeaderText = "Coords";
+            colCoords.Name = "colCoords";
+            colCoords.ReadOnly = true;
+            colCoords.Width = 70;
+            // 
+            // colDistance
+            // 
+            colDistance.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9.75F);
+            colDistance.DefaultCellStyle = dataGridViewCellStyle3;
+            colDistance.HeaderText = "Distance";
+            colDistance.Name = "colDistance";
+            colDistance.ReadOnly = true;
+            colDistance.Width = 77;
+            // 
+            // colTime
+            // 
+            colTime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 9.75F);
+            colTime.DefaultCellStyle = dataGridViewCellStyle4;
+            colTime.HeaderText = "Time";
+            colTime.Name = "colTime";
+            colTime.ReadOnly = true;
+            colTime.Width = 58;
+            // 
+            // colHops
+            // 
+            colHops.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            colHops.HeaderText = "Hops";
+            colHops.Name = "colHops";
+            colHops.ReadOnly = true;
+            colHops.Width = 60;
+            // 
+            // colCost
+            // 
+            colCost.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 9.75F);
+            colCost.DefaultCellStyle = dataGridViewCellStyle5;
+            colCost.HeaderText = "Cost";
+            colCost.Name = "colCost";
+            colCost.ReadOnly = true;
+            colCost.Width = 56;
             // 
             // HyperspaceTravel
             // 
@@ -154,11 +163,12 @@
 
         private Button btHyperspaceTravel;
         private DataGridView dgDestinations;
+        private ProgressBar pbTravel;
         private DataGridViewTextBoxColumn colSystem;
         private DataGridViewTextBoxColumn colCoords;
         private DataGridViewTextBoxColumn colDistance;
         private DataGridViewTextBoxColumn colTime;
+        private DataGridViewTextBoxColumn colHops;
         private DataGridViewTextBoxColumn colCost;
-        private ProgressBar pbTravel;
     }
 }

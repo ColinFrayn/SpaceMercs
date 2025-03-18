@@ -271,6 +271,7 @@
                     r = rnd.NextDouble() * 100.0;
                     if (r < chance) lvl++;
                 } while (r <= chance);
+                if (newType is ArmourType && armourMat != null && lvl > armourMat.MaxLevel) lvl = armourMat.MaxLevel;
             }
 
             if (lvl > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(lvl));
@@ -298,6 +299,10 @@
             int aiboost = PlayerTeam.PlayerShip.AIBoost;
             if (maxlev == 0) {
                 MessageBox.Show("Nobody has the required skill to perform that action!");
+                return;
+            }
+            if (eq is Armour ar && ar.Level >= ar.Material.MaxLevel) {
+                MessageBox.Show("This armour piece cannot be improved any further due to limitations of its base material");
                 return;
             }
             Soldier ssk = PlayerTeam.GetSoldierWithMaxSkillByItemType(eq.BaseType);

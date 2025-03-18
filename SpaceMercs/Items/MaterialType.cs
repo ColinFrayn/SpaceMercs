@@ -11,6 +11,7 @@ namespace SpaceMercs {
         public string Description { get; private set; }
         public double UnitMass { get; private set; } // Mass of one unit, in kg. This is the amount that is sold (default = 1.0)
         public double UnitCost { get; private set; } // Cost of buying one unit of this item, base, credits
+        public int MaxLevel { get; private set; } // maximum level of armour possible with this material
         public Requirements? Requirements { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
@@ -30,17 +31,13 @@ namespace SpaceMercs {
             UnitMass = xml.SelectNodeDouble("UnitMass", 1.0);
             Description = xml.SelectNodeText("Desc").Trim();
             IsScavenged = xml.SelectSingleNode("Scavenged") != null;
+            MaxLevel = xml.SelectNodeInt("MaxLevel", 5);
 
             // Special resistances if this is made into armour
             foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
                 WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));
                 double val = xn.GetAttributeDouble("Amount");
                 BonusArmour.Add(type, val);
-            }
-
-            // TODO DELETE ME TEMP
-            if (xml.SelectSingleNode("Race") != null) {
-                throw new Exception("Race tag is no longer valid");
             }
 
             // Load in skill boosts

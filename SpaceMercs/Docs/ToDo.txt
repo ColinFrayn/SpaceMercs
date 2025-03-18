@@ -3,10 +3,7 @@ ToDo List
 -------------------------------------------------
 
 Armour.CalculateCost : [TEST CHANGES]
-
-Maybe appraise armour cost from first principles without a given base cost?
-
-Some materials can only be used for a maximum level of armour
+- Appraise armour cost from first principles without a given base cost?
 
 New calculation of enemy creature groups [TEST]
 

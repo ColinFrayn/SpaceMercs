@@ -5,6 +5,7 @@
     <UnitCost>0.75</UnitCost>
     <ArmourMod>0.65</ArmourMod>
     <Rarity>0.9</Rarity>
+    <MaxLevel>1</MaxLevel>
     <Desc>Carbon fibre is cheap, light and plentiful, but doesn't offer much protection.</Desc>
   </MaterialType>
   <MaterialType Name="Steel">
@@ -12,6 +13,7 @@
     <UnitCost>1</UnitCost>
     <ArmourMod>1</ArmourMod>
     <Rarity>1.0</Rarity>
+    <MaxLevel>2</MaxLevel>
     <Desc>Steel is a cheap and fairly heavy metal.</Desc>
   </MaterialType>
   <MaterialType Name="Kevlar">
@@ -19,12 +21,14 @@
     <UnitCost>2.0</UnitCost>
     <ArmourMod>1.1</ArmourMod>
     <Rarity>0.5</Rarity>
+    <MaxLevel>2</MaxLevel>
     <Desc>Kevlar is a light and highly-protective material often used for armour.</Desc>
   </MaterialType>
   <MaterialType Name="Composite">
     <MassMod>0.9</MassMod>
     <UnitCost>4.5</UnitCost>
     <ArmourMod>1.4</ArmourMod>
+    <MaxLevel>3</MaxLevel>
     <Requirements>
       <MinLevel>2</MinLevel>
       <MinPop>20</MinPop>
@@ -41,6 +45,7 @@
     <UnitCost>15.0</UnitCost>
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.08</Rarity>
+    <MaxLevel>4</MaxLevel>
     <Requirements>
       <MinLevel>4</MinLevel>
       <MinPop>22</MinPop>

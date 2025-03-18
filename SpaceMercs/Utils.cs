@@ -616,6 +616,7 @@ namespace SpaceMercs {
 
             // Scale to level
             for (int n = 0; n < Level / 2; n++) {
+                if (ar.Level >= ar.Material.MaxLevel) break;
                 if (rnd.NextDouble() < 0.6) ar.UpgradeArmour(race, Level);
             }
             if (Level % 1 == 1 && rnd.NextDouble() < 0.3) ar.UpgradeArmour(race, Level);
