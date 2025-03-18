@@ -1083,10 +1083,10 @@ namespace SpaceMercs {
         private void GenerateCreatures() {
             if (ParentMission.Goal == MissionGoal.Defend) return; // Start with an empty map
             // Who are we fighting against?
-            CreatureGroup cg = ParentMission.PrimaryEnemy;
             Race? ra = ParentMission.RacialOpponent;
-            if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Happens in boarding missions
-            if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
+            CreatureGroup primaryCG = ParentMission.PrimaryEnemy;
+            if (ra is not null && primaryCG is null) primaryCG = GenerateCreatureGroupForRacialOpponent(ra); // Happens in boarding missions
+            if (primaryCG is null) throw new Exception("Could not generate creature group for this Mission!");
 
             // How big is this map, and how many creatures should it contain?
             int nFloorTiles = 0;
@@ -1098,21 +1098,27 @@ namespace SpaceMercs {
             int cDiff = Diff - ParentMission.SwarmLevel;
             int soldierCount = ParentMission.Soldiers.Count;
             if (ParentMission.Goal == MissionGoal.Countdown || ParentMission.Goal == MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            double quantityScale = cg.QuantityScale * (1d + ParentMission.SwarmLevel * 0.6d);
-            int nCreatures = (int)(Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * quantityScale * Const.CreatureFrequencyScale);
-            if (ParentMission.Type == MissionType.Surface) nCreatures = (nCreatures * 4) / 5;
-            if (nCreatures < 3) nCreatures = 3;
-            int nLeft = nCreatures;
+            double dGroups = (Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * Const.CreatureFrequencyScale) / 4d;
+            if (ParentMission.Type == MissionType.Surface) dGroups *= 0.8d;
+            int nGroups = (int)dGroups;
+            if (nGroups < 3) nGroups = 3;
+            int nLeft = nGroups;
 
             // Add all creatures
             int niter = 0;
-            while (nLeft > 0 && niter < 1000) {
+            while (nLeft > 0 && niter < 500) {
+                CreatureGroup cg = primaryCG;
+                if (ParentMission.SecondaryEnemy is not null && LevelID > 0 && Entities.IsEmpty) {
+                    if (rand.Next(ParentMission.LevelCount + 2) < LevelID) cg = ParentMission.SecondaryEnemy;
+                }
+                double swarmFactor = 1d + (double)(cg == primaryCG ? ParentMission.SwarmLevel : 1) * 0.6d;
+                double quantityScale = cg.QuantityScale * swarmFactor;
                 List<Creature> cGroup = new List<Creature>();
-                int iGroupSize = 1 + rand.Next(2) + rand.Next(ParentMission.Soldiers.Count) + ParentMission.SwarmLevel;
-                if (rand.Next(nCreatures) > 15) iGroupSize++;
-                if (rand.Next(nCreatures) > 25) iGroupSize++;
-                if (ParentMission.Soldiers.Count > 2) iGroupSize++;
-                if (Entities.Count == 0 && cg.HasBoss && (nCreatures >= 10 || ParentMission.Goal == MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
+                double dGroupSize = 1d + rand.NextDouble() * 2d + ((0.4d + rand.NextDouble() * 0.6d) * ParentMission.Soldiers.Count) + ParentMission.SwarmLevel;
+                dGroupSize *= quantityScale;
+                dGroupSize += rand.NextDouble() * Math.Min(3d, dGroups / 4d);
+                int iGroupSize = (int)dGroupSize;
+                if (Entities.Count == 0 && cg.HasBoss && (ParentMission.Diff > 3 || ParentMission.Goal == MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
                     Creature? cr = cg.GenerateRandomBoss(ra, Diff, this); // Boss creatures are not reduced in strength because of swarm conditions
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
@@ -1132,13 +1138,15 @@ namespace SpaceMercs {
                         if (PlaceCreatureNearGroup(cr, cGroup, iGroupSize)) cGroup.Add(cr);
                     }
                 }
-                if (cGroup.Count == iGroupSize || (niter > 10 && cGroup.Count > 0)) { // We managed to place the entire group, or we've tried a few times and failed but at least we placed something!
-                    nLeft -= cGroup.Count;
+                // Check if we managed to place the entire group, or we've tried a few times and failed but at least we placed something. In which case, move on...
+                if (cGroup.Count == iGroupSize || (niter > 20 && cGroup.Count > 0)) { 
+                    nLeft--;
                     foreach (Creature cr in cGroup) AddCreature(cr);
+                    niter = 0; // Reset the count
                 }
                 else niter++;
             }
-            if (Entities.Count == 0) {
+            if (Entities.IsEmpty) {
                 throw new Exception("Couldn't place creatures!");
             }
         }

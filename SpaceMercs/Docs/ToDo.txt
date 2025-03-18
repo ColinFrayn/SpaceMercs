@@ -2,13 +2,17 @@
 ToDo List
 -------------------------------------------------
 
+Armour.CalculateCost : [TEST CHANGES]
+
+Maybe appraise armour cost from first principles without a given base cost?
+
+Some materials can only be used for a maximum level of armour
+
+New calculation of enemy creature groups [TEST]
+
 Mission.SecondaryEnemy (when level count > 1) [TEST]
-- Missionlevel.GenerateCreatures
-- Blend in secondary enemy in lower levels
 
-Don't show dmg/heal for 0 & batch tickes [TEST]
-
-Elithiri: Personal teleporter: Can move within sight line up to X squares. Use like grenade weapon.
+Elithiri: Personal teleporter: Can move within sight line up to X squares.
 - Range related to mass of soldier.
 
 Test run SpaceHulk mission (& keeping the core)

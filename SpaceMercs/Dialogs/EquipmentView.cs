@@ -65,13 +65,15 @@ namespace SpaceMercs.Dialogs {
 
             // Prime skills
             lbLevel.Text = ThisSoldier.Level.ToString();
-            lbHealthTotal.Text = ThisSoldier.MaxHealth.ToString();
+            lbHealthTotal.Text = Math.Round(ThisSoldier.MaxHealth,0).ToString();
             ttSoldier.SetToolTip(this.lbHealthTotal, ThisSoldier.BaseHealth + " (base) + " + ThisSoldier.StatBonuses(StatType.Health) + " (items)");
-            lbAttackTotal.Text = ThisSoldier.Attack.ToString();
+            lbAttackTotal.Text = Math.Round(ThisSoldier.Attack,0).ToString();
             double bfi = ThisSoldier.StatBonuses(StatType.Attack);
             ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.BaseAttack + " (base) + " + bfi + " (items)" + ((ThisSoldier.EquippedWeapon != null) ? (" + " + ThisSoldier.GetSoldierSkillWithWeapon(ThisSoldier.EquippedWeapon.Type) + " (weapon skills)") : ""));
-            lbDefenceTotal.Text = ThisSoldier.Defence.ToString();
-            ttSoldier.SetToolTip(this.lbDefenceTotal, ThisSoldier.BaseDefence + " (base) + " + ThisSoldier.StatBonuses(StatType.Defence) + " (items) + " + ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance) + " (skills)");
+            lbDefenceTotal.Text = Math.Round(ThisSoldier.Defence,0).ToString();
+            double enc = Math.Round(ThisSoldier.Encumbrance * Const.EncumbranceDefencePenalty,0);
+            string encStr = enc > 0d ? $" - {enc} (weight)" : string.Empty;
+            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{ThisSoldier.BaseDefence} (base) + {ThisSoldier.StatBonuses(StatType.Defence)} (items) + {ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills){encStr}");
             lbArmour.Text = ThisSoldier.BaseArmour.ToString("N1");
             string strArmour = (100.0 - (Utils.ArmourReduction(ThisSoldier.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
             Dictionary<WeaponType.DamageType, double> AllRes = ThisSoldier.GetAllResistances();

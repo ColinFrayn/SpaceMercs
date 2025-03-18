@@ -133,11 +133,11 @@ namespace SpaceMercs {
             return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
         }
         private double CalculateCost(int lev) {
-            double cost = Type.Cost;
+            double shieldBoost = (ShieldsAtLevel(lev) - (double)Type.Shields) * Const.ShieldCostMultiplier;
+            double massBoost = (Type.Mass - MassAtLevel(lev)) * Const.MassCostMultiplier;
+            double cost = Type.Cost + shieldBoost + massBoost;
             double armourFact = ArmourAtLevel(lev) / (double)Type.BaseArmour;
-            double shieldFact = Type.Shields == 0 ? 1 : ShieldsAtLevel(lev) / (double)Type.Shields;
-            double massFact = Type.Mass / MassAtLevel(lev);
-            cost *= Math.Pow(armourFact, Const.ArmourCostExponent) * Math.Pow(shieldFact, Const.ShieldCostExponent) * Math.Pow(massFact, Const.MassCostExponent);
+            cost *= Math.Pow(armourFact, Const.ArmourCostExponent);
 
             // Modifier for extra damage resistance from the material
             double bonusProt = 0.0;
@@ -148,6 +148,9 @@ namespace SpaceMercs {
                 }
             }
             cost *= 1.0 + bonusProt;
+
+            // Valuation for reducing penalties or increasing bonuses
+            // TODO
 
             return cost;
 

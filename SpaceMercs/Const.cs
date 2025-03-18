@@ -43,12 +43,13 @@ namespace SpaceMercs {
         public const double EquipmentLevelCostBaseExponent = 1.0;  // For each level the weapon quality improves, additionally multiply cost by this factor 
         public const double EquipmentLevelRarityScale = 0.2;  // Each level of equipment quality makes it this much rarer
         public const double MaxCarryScale = 0.6; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
-        public const double ArmourCostExponent = 4.0; // Affects cost scaling for armour based on how much better it is than the base
-        public const double ShieldCostExponent = 4.0; // Affects cost scaling for armour based on how much better the shields are than the base
-        public const double MassCostExponent = 1.5; // Affects cost scaling for armour based on how much lighter it is than the base
+        public const double ArmourCostExponent = 3d; // Affects cost scaling for armour based on how much better it is than the base
+        public const double ShieldCostMultiplier = 10d; // Affects cost for armour based on how much better the shields are than the base
+        public const double MassCostMultiplier = 15d; // Affects cost for armour based on how much lighter it is than the base
         public const double BonusPhysicalArmourValue = 0.03; // Percent bonus to the cost for each single point of bonus armour for physical damage
         public const double BonusOtherArmourValue = 0.01; // Percent bonus to the cost for each single point of bonus armour for any other damage type
-        public const double ModificationCost = 20.0; // Cost for a modification for disposable materials
+        public const double ModificationCost = 20d; // Cost for a modification for disposable materials
+        public const double EncumbranceDefencePenalty = 5d; // Defence penalty for being fully encumbered
 
         // Solar system parameters
         public const double MoonRadius = 1400000.0;

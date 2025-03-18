@@ -190,7 +190,7 @@ namespace SpaceMercs {
             }
 
             string? strEn2 = xml.SelectNodeText("Enemy2");
-            if (!string.IsNullOrEmpty(strEn)) {
+            if (!string.IsNullOrEmpty(strEn2)) {
                 SecondaryEnemy = StaticData.GetCreatureGroupByName(strEn2) ?? throw new Exception("Could not ID SecondaryEnemy : " + strEn2);
             }
 

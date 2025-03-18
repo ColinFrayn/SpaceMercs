@@ -28,6 +28,7 @@
     <Cost>40</Cost>
     <Rarity>38</Rarity>
     <Attack>1</Attack>
+    <Defence>1</Defence>
     <BaseArmour>3</BaseArmour>
     <Requirements>
       <MinLevel>3</MinLevel>
@@ -235,9 +236,9 @@
   </ArmourType>
   <ArmourType Name="Shock Armour">
     <Mass>10.0</Mass>
-    <Cost>250</Cost>
+    <Cost>450</Cost>
     <Rarity>40</Rarity>
-    <Agility>-3</Agility>
+    <Agility>-2</Agility>
     <BaseArmour>18</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight version of the shielded chestplate, arm plating and leg plating combined</Desc>
@@ -262,12 +263,13 @@
   </ArmourType>
   <ArmourType Name="Advanced Shock Armour">
     <Mass>11.0</Mass>
-    <Cost>775</Cost>
+    <Cost>1275</Cost>
     <Rarity>55</Rarity>
-    <Agility>-3</Agility>
-    <BaseArmour>22</BaseArmour>
+    <Agility>-2</Agility>
+    <Defence>2</Defence>
+    <BaseArmour>24</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
-    <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with a more advanced shield generator.</Desc>
+    <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with better materials, minor deflection technology and a more advanced shield generator.</Desc>
     <Shields>20</Shields>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
@@ -290,11 +292,11 @@
   </ArmourType>
   <ArmourType Name="Archon Armour">
     <Mass>13.0</Mass>
-    <Cost>1250</Cost>
+    <Cost>4250</Cost>
     <Rarity>60</Rarity>
     <Agility>-3</Agility>
-    <Defence>2</Defence>
-    <BaseArmour>28</BaseArmour>
+    <Defence>4</Defence>
+    <BaseArmour>44</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>An advanced and highly powerful combat armour suit, with a superb shield generator and deflection technology.</Desc>
     <Shields>30</Shields>
@@ -321,7 +323,7 @@
     <Cost>75</Cost>
     <Rarity>40</Rarity>
     <Agility>-1</Agility>
-    <Defence>1</Defence>
+    <Defence>3</Defence>
     <Utility>
       <Stealth>3</Stealth>
     </Utility>
@@ -349,7 +351,7 @@
     <Cost>325</Cost>
     <Rarity>50</Rarity>
     <Agility>-1</Agility>
-    <Defence>2</Defence>
+    <Defence>6</Defence>
     <Utility>
       <Stealth>6</Stealth>
       <Perception>2</Perception>
@@ -390,6 +392,7 @@
     <Mass>0.5</Mass>
     <Cost>24</Cost>
     <Rarity>36</Rarity>
+    <Defence>1</Defence>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
@@ -439,6 +442,7 @@
     <Mass>0.7</Mass>
     <Cost>26</Cost>
     <Rarity>36</Rarity>
+    <Defence>1</Defence>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
@@ -461,7 +465,7 @@
   </ArmourType>
   <ArmourType Name="Power Armour">
     <Mass>30.0</Mass>
-    <Cost>450</Cost>
+    <Cost>650</Cost>
     <Rarity>50</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
@@ -497,7 +501,7 @@
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
     <Mass>60.0</Mass>
-    <Cost>1500</Cost>
+    <Cost>2500</Cost>
     <Rarity>60</Rarity>
     <Agility>-8</Agility>
     <Strength>8</Strength>
@@ -534,7 +538,7 @@
   </ArmourType>
   <ArmourType Name="Assault Power Armour">
     <Mass>25.0</Mass>
-    <Cost>1100</Cost>
+    <Cost>1800</Cost>
     <Rarity>65</Rarity>
     <Agility>-4</Agility>
     <Strength>6</Strength>
@@ -571,7 +575,7 @@
   </ArmourType>
   <ArmourType Name="Shielded Power Armour">
     <Mass>35.0</Mass>
-    <Cost>1600</Cost>
+    <Cost>2600</Cost>
     <Rarity>70</Rarity>
     <Agility>-6</Agility>
     <Strength>6</Strength>
@@ -611,7 +615,7 @@
   </ArmourType>
   <ArmourType Name="Valkyrie Assault Armour">
     <Mass>22.0</Mass>
-    <Cost>2200</Cost>
+    <Cost>6400</Cost>
     <Rarity>85</Rarity>
     <Agility>-2</Agility>
     <Strength>4</Strength>

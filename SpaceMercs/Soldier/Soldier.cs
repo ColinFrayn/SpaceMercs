@@ -381,7 +381,7 @@ namespace SpaceMercs {
             MaxShields = ShieldsFromItems();
             if (Shields > MaxShields) Shields = MaxShields;
             Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
-            Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
+            Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence) - (Encumbrance * Const.EncumbranceDefencePenalty);
         }
 
         // Skills & experience

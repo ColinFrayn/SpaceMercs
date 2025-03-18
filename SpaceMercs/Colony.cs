@@ -381,13 +381,16 @@ namespace SpaceMercs {
             }
 
             // Add some raw materials
-            double matScale = 2d;
+            double matScale = 1d;
             if (HasBaseType(BaseType.Metropolis)) matScale += 1d;
-            if (HasBaseType(BaseType.Trading)) matScale += 2d;
-            matScale += (BaseSize * BaseSize / 10d);
+            bool trading = HasBaseType(BaseType.Trading);
+            if (trading) matScale += 3d;
+            matScale += (double)(BaseSize * BaseSize) / 8d;
+            double rarityExponent = 1d - (trading ? 0.2d : 0d) - ((double)BaseSize / 40d);
             foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
                 if (mat.IsScavenged) continue;
-                AddItem(new Material(mat), mat.Rarity * matScale, days, rand);
+                double rarity = Math.Pow(mat.Rarity, rarityExponent);
+                AddItem(new Material(mat), rarity * matScale, days, rand);
             }
         }
         private void AddItem(IItem eq, double rarity, int days, Random rand) {
