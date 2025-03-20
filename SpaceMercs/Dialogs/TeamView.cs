@@ -92,15 +92,15 @@ namespace SpaceMercs.Dialogs {
 
             // Stats
             lbStrength.Text = s.Strength.ToString();
-            ttSoldier.SetToolTip(this.lbStrength, $"{s.BaseStrength} (base) {(s.StatBonuses(StatType.Strength) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Strength)) + " (items)");
+            ttSoldier.SetToolTip(this.lbStrength, s.StrengthExplanation);
             lbAgility.Text = s.Agility.ToString();
-            ttSoldier.SetToolTip(this.lbAgility, $"{s.BaseAgility} (base) {(s.StatBonuses(StatType.Agility) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Agility)) + " (items)");
+            ttSoldier.SetToolTip(this.lbAgility, s.AgilityExplanation);
             lbInsight.Text = s.Insight.ToString();
-            ttSoldier.SetToolTip(this.lbInsight, $"{s.BaseInsight} (base) {(s.StatBonuses(StatType.Insight) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Insight)) + " (items)");
+            ttSoldier.SetToolTip(this.lbInsight, s.InsightExplanation);
             lbToughness.Text = s.Toughness.ToString();
-            ttSoldier.SetToolTip(this.lbToughness, $"{s.BaseToughness} (base) {(s.StatBonuses(StatType.Toughness) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Toughness)) + " (items)");
+            ttSoldier.SetToolTip(this.lbToughness, s.ToughnessExplanation);
             lbEndurance.Text = s.Endurance.ToString();
-            ttSoldier.SetToolTip(this.lbEndurance, $"{s.BaseEndurance} (base) {(s.StatBonuses(StatType.Endurance) >= 0 ? "+" : "-")} " + Math.Abs(s.StatBonuses(StatType.Endurance)) + " (items)");
+            ttSoldier.SetToolTip(this.lbEndurance, s.EnduranceExplanation);
 
             // Display armour presence by colours
             lbHead.BackColor = ArmourToColour(s.GetArmourAtLocation(BodyPart.Head));
@@ -120,12 +120,9 @@ namespace SpaceMercs.Dialogs {
             lbHealthTotal.Text = Math.Round(s.MaxHealth,0).ToString();
             ttSoldier.SetToolTip(this.lbHealthTotal, s.BaseHealth + " (base) + " + s.StatBonuses(StatType.Health) + " (items)");
             lbAttackTotal.Text = Math.Round(s.Attack,0).ToString();
-            double bfi = s.StatBonuses(StatType.Attack);
-            ttSoldier.SetToolTip(this.lbAttackTotal, s.BaseAttack + " (base) + " + bfi + " (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : ""));
+            ttSoldier.SetToolTip(this.lbAttackTotal, $"{s.BaseAttack} (base) + {s.StatBonuses(StatType.Attack)} (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : string.Empty));
             lbDefenceTotal.Text = Math.Round(s.Defence,0).ToString();
-            double enc = Math.Round(s.Encumbrance * Const.EncumbranceDefencePenalty, 0);
-            string encStr = enc > 0d ? $" - {enc} (weight)" : string.Empty;
-            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{s.BaseDefence} (base) + {s.StatBonuses(StatType.Defence)} (items) + {s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills){encStr}");
+            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{s.BaseDefence} (base) + {s.StatBonuses(StatType.Defence)} (items) + {s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)");
             lbArmour.Text = s.BaseArmour.ToString("N1");
             string strArmour = (100.0 - (Utils.ArmourReduction(s.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
             Dictionary<WeaponType.DamageType, double> AllRes = s.GetAllResistances();

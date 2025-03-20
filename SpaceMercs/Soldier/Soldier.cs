@@ -54,7 +54,7 @@ namespace SpaceMercs {
         public Color PrimaryColor { get; private set; }
         public bool IsInjured { get { return Health < MaxHealth; } }
         public bool HasMoved { get; private set; } = false;
-        public bool CanAttack { 
+        public bool CanAttack {
             get {
                 if (Stamina < AttackCost) return false;
                 if (GoTo != Point.Empty) return false;
@@ -327,11 +327,10 @@ namespace SpaceMercs {
 
         // Inventory
         private readonly List<IItem> Inventory = new List<IItem>();
-        public ReadOnlyDictionary<IItem, int> InventoryGrouped { 
-            get 
-            {
-                return new ReadOnlyDictionary<IItem, int>(Inventory.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count())); 
-            } 
+        public ReadOnlyDictionary<IItem, int> InventoryGrouped {
+            get {
+                return new ReadOnlyDictionary<IItem, int>(Inventory.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count()));
+            }
         }
         public List<Armour> EquippedArmour = new List<Armour>();
 
@@ -347,7 +346,7 @@ namespace SpaceMercs {
 
         // Calculated stats
         public int Strength { get { return Math.Max(0, BaseStrength + StatBonuses(StatType.Strength)); } }
-        public int Agility { get { return Math.Max(0, BaseAgility + StatBonuses(StatType.Agility)); } }
+        public int Agility { get { return Math.Max(0, BaseAgility + StatBonuses(StatType.Agility) - EncumbranceAgilityPenalty); } }
         public int Insight { get { return Math.Max(0, BaseInsight + StatBonuses(StatType.Insight)); } }
         public int Toughness { get { return Math.Max(0, BaseToughness + StatBonuses(StatType.Toughness)); } }
         public int Endurance { get { return Math.Max(0, BaseEndurance + StatBonuses(StatType.Endurance)); } }
@@ -355,13 +354,19 @@ namespace SpaceMercs {
         public int BaseDefence { get { return Agility + Level + 2; } }
         public int BaseHealth { get { return (Toughness * 3) + (Level * 2) - 8; } }
         public int BaseStamina { get { return Endurance + Level + 10; } }
-        public double StaminaRegen {  get { return MaxStamina - Level; } }
-        public double MaximumCarry { get { return (Math.Pow(Strength, 1.55) * Const.MaxCarryScale) + 4.0; } }
+        public double StaminaRegen { get { return MaxStamina - Level; } }
+        public double MaximumCarry { get { return (Math.Pow(Strength, Const.MaxCarryExponent) * Const.MaxCarryScale) + Const.MaxCarryBase; } }
         public double Encumbrance {
             get {
                 double m = CalculateInventoryMass();
                 if (m * 2.0 <= MaximumCarry) return 0.0;
                 return Math.Min(1.0, (m - (MaximumCarry / 2.0)) * 2.0 / MaximumCarry);
+            }
+        }
+        public int EncumbranceAgilityPenalty {
+            get {
+                double m = CalculateInventoryMass();
+                return (int)Math.Floor((6d * m / MaximumCarry));
             }
         }
         public bool MeleeAttacker { get { return (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon); } }
@@ -381,7 +386,7 @@ namespace SpaceMercs {
             MaxShields = ShieldsFromItems();
             if (Shields > MaxShields) Shields = MaxShields;
             Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
-            Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence) - (Encumbrance * Const.EncumbranceDefencePenalty);
+            Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
         }
 
         // Skills & experience
@@ -747,7 +752,7 @@ namespace SpaceMercs {
             for (int n = 0; n < 5; n++) {
                 if (Stats[n] < 5) Stats[n] = 5;
             }
-            Race r = cl.Location.GetRandomRace(rand); 
+            Race r = cl.Location.GetRandomRace(rand);
             GenderType gt = r.GenerateRandomGender(rand);
             string strName = r.GenerateRandomName(rand, gt);
             int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
@@ -845,7 +850,7 @@ namespace SpaceMercs {
         // How much to hire this soldier as a mercenary? (ignoring race relations)
         public double HireCost() {
             double dBase = Level * Math.Pow(Const.MercenaryCostBase, Const.MercenaryCostExponent * Level) * Const.MercenaryCostScale;
-            
+
             // Bonus cost if they are better than average
             int Bonus = (BaseStrength + BaseAgility + BaseInsight + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Insight + Race.Toughness + Race.Endurance);
             if (Bonus < 1) Bonus = 0;
@@ -975,7 +980,7 @@ namespace SpaceMercs {
         }
         public void AddItem(IItem it, int Count = 1) {
             if (it == null || Count < 1) return;
-            Inventory.AddRange(Enumerable.Repeat(it,Count));
+            Inventory.AddRange(Enumerable.Repeat(it, Count));
             CalculateMaxStats();
         }
         public double BaseArmour {
@@ -1050,6 +1055,7 @@ namespace SpaceMercs {
             // Get base armour for this location
             ArmourType? choice = null;
             foreach (ArmourType at in StaticData.ArmourTypes) {
+                if (at.MinMatLvl > mat.MaxLevel) continue;
                 if (at.Locations.Contains(bp) && (choice is null || at.Rarity > choice.Rarity)) {
                     bool bOK = true;
                     foreach (BodyPart abp in at.Locations) {
@@ -1101,7 +1107,7 @@ namespace SpaceMercs {
             aoLocation = PlayerTeam?.CurrentPosition;
             // TODO: Anything else we want to do?
         }
-        
+
         // Actions
         public bool Move(Utils.Direction d) {
             if (Stamina < MovementCost) return false;
@@ -1210,7 +1216,7 @@ namespace SpaceMercs {
             HashSet<IEntity> targets = new HashSet<IEntity>();
             foreach (Vector2 vec in aoeTiles) {
                 IEntity? en = level.GetEntityAt((int)vec.X, (int)vec.Y);
-                if (en != null) targets.Add(en);           
+                if (en != null) targets.Add(en);
             }
 
             Stamina -= AttackCost;
@@ -1235,11 +1241,11 @@ namespace SpaceMercs {
             }
             else if (EquippedWeapon.Type.WeaponShotType == WeaponType.ShotType.ConeMulti) {
                 // Bias towards hitting nearer entities
-                Dictionary<IEntity, double> targetBias = targets.ToDictionary(x => x, x => 1d/(x.RangeTo(this)+0.5));
+                Dictionary<IEntity, double> targetBias = targets.ToDictionary(x => x, x => 1d / (x.RangeTo(this) + 0.5));
                 double totalWeight = targetBias.Values.Sum();
                 Random rand = new Random();
                 Dictionary<IEntity, int> hitTargets = new();
-                for (int n=0; n<EquippedWeapon.Type.Shots; n++) {
+                for (int n = 0; n < EquippedWeapon.Type.Shots; n++) {
                     double r = rand.NextDouble() * totalWeight;
                     foreach (KeyValuePair<IEntity, double> kvp in targetBias) {
                         r -= kvp.Value;
@@ -1318,7 +1324,7 @@ namespace SpaceMercs {
             Stamina -= SearchCost;
             return SearchTheArea(level, false);
         }
-        public List<string> SearchTheArea(MissionLevel level, bool bPassive) { 
+        public List<string> SearchTheArea(MissionLevel level, bool bPassive) {
             List<string> lFound = new List<string>();
             double rad = bPassive ? PassiveSearchRadius : SearchRadius;
             double dPenalty = Const.EncumbranceSearchPenalty * Encumbrance;
@@ -1464,10 +1470,10 @@ namespace SpaceMercs {
         public double DetectionRange {
             get {
                 double range = Const.BaseDetectionRange;
-                range += (10.0 - Agility) / 5.0; // Agility has a very minor effect
-                range -= (GetUtilityLevel(UtilitySkill.Stealth) / 2.0); // Stealth makes you harder to spot
-                range += Encumbrance * 2.0;  // Encumbrance = [0,1]. Easily spotted if heavily encumbered.
-                if (range < 1.0) range = 1.0;
+                range += (10d - Agility) / 10d; // Agility has a very minor effect
+                range -= GetUtilityLevel(UtilitySkill.Stealth) / 2d; // Stealth makes you harder to spot
+                range += Encumbrance * 2d;  // Encumbrance = [0,1]. Easily spotted if heavily encumbered.
+                if (range < 1d) range = 1d;
                 return range;
             }
         }
@@ -1550,11 +1556,11 @@ namespace SpaceMercs {
             prog.SetUniform("textureEnabled", false);
             prog.SetUniform("flatColour", new Vector4(0.1f, 1f, 0.2f, Const.GUIAlpha));
             Matrix4 pTranslateM = Matrix4.CreateTranslation(encX, encY, Const.DoodadLayer);
-            pScaleM = Matrix4.CreateScale(0.021f, -0.021f * (float)Math.Min(0.5,fract) * 2f, 1f);
+            pScaleM = Matrix4.CreateScale(0.021f, -0.021f * (float)Math.Min(0.5, fract) * 2f, 1f);
             prog.SetUniform("model", pScaleM * pTranslateM);
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.Flat.BindAndDraw();
-            
+
             if (fract > 0.5) {
                 prog.SetUniform("flatColour", new Vector4(1f, 0.1f, 0.1f, Const.GUIAlpha));
                 pScaleM = Matrix4.CreateScale(0.021f, -0.021f * (fract - 0.5f) * 2f, 1f);
@@ -1587,5 +1593,18 @@ namespace SpaceMercs {
             if (ToughestKill is not null) sb.AppendLine($"Toughest Kill : {ToughestKill.Name}");
             showMessage(sb.ToString(), null);
         }
+
+        // Utility strings
+        public string StrengthExplanation => $"{BaseStrength} (base) {(StatBonuses(StatType.Strength) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Strength))} (items)";
+        public string AgilityExplanation {
+            get {
+                int agiPen = EncumbranceAgilityPenalty;
+                string encumbranceStr = agiPen > 0 ? $" -{agiPen} (encumbrance)" : string.Empty;
+                return $"{BaseAgility} (base) {(StatBonuses(StatType.Agility) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Agility))} (items){encumbranceStr}";
+            }
+        }
+        public string InsightExplanation => $"{BaseInsight} (base) {(StatBonuses(StatType.Insight) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Insight))} (items)";
+        public string ToughnessExplanation => $"{BaseToughness} (base) {(StatBonuses(StatType.Toughness) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Toughness))} (items)";
+        public string EnduranceExplanation => $"{BaseEndurance} (base) {(StatBonuses(StatType.Endurance) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Endurance))} (items)";
     }
 }

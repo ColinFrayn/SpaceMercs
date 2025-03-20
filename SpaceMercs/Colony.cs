@@ -367,6 +367,7 @@ namespace SpaceMercs {
                 foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
                     if (!mat.IsArmourMaterial) continue;
                     if (mat.IsScavenged) continue;
+                    if (mat.MaxLevel < atp.MinMatLvl) continue;
                     for (int Level = 0; Level <= Math.Min(3, mat.MaxLevel); Level++) {
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;

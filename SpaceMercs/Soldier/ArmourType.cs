@@ -14,6 +14,7 @@ namespace SpaceMercs {
         public int Defence { get; private set; } // Bonus
         public double Speed { get; private set; } // Divides movment cost -> higher number = faster
         public int BaseArmour { get; private set; }
+        public int MinMatLvl { get; private set; } // Material types with lower max levels than this cannot be used
         public int Size {
             get {
                 double sz = 0.0;
@@ -37,6 +38,7 @@ namespace SpaceMercs {
             Defence = xml.SelectNodeInt("Defence", 0);
             BaseArmour = xml.SelectNodeInt("BaseArmour", 0);
             Speed = xml.SelectNodeDouble("Speed", 1.0);
+            MinMatLvl = xml.SelectNodeInt("MinMatLvl", 0);
             if (xml.SelectSingleNode("BonusArmour") != null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
                     WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));

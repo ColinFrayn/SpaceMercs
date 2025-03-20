@@ -41,15 +41,15 @@ namespace SpaceMercs.Dialogs {
 
             // Stats
             lbStrength.Text = ThisSoldier.Strength.ToString();
-            ttSoldier.SetToolTip(this.lbStrength, ThisSoldier.BaseStrength + " (base) + " + ThisSoldier.StatBonuses(StatType.Strength) + " (items)");
+            ttSoldier.SetToolTip(this.lbStrength, ThisSoldier.StrengthExplanation);
             lbAgility.Text = ThisSoldier.Agility.ToString();
-            ttSoldier.SetToolTip(this.lbAgility, ThisSoldier.BaseAgility + " (base) + " + ThisSoldier.StatBonuses(StatType.Agility) + " (items)");
+            ttSoldier.SetToolTip(this.lbAgility, ThisSoldier.AgilityExplanation);
             lbInsight.Text = ThisSoldier.Insight.ToString();
-            ttSoldier.SetToolTip(this.lbInsight, ThisSoldier.BaseInsight + " (base) + " + ThisSoldier.StatBonuses(StatType.Insight) + " (items)");
+            ttSoldier.SetToolTip(this.lbInsight, ThisSoldier.InsightExplanation);
             lbToughness.Text = ThisSoldier.Toughness.ToString();
-            ttSoldier.SetToolTip(this.lbToughness, ThisSoldier.BaseToughness + " (base) + " + ThisSoldier.StatBonuses(StatType.Toughness) + " (items)");
+            ttSoldier.SetToolTip(this.lbToughness, ThisSoldier.ToughnessExplanation);
             lbEndurance.Text = ThisSoldier.Endurance.ToString();
-            ttSoldier.SetToolTip(this.lbEndurance, ThisSoldier.BaseEndurance + " (base) + " + ThisSoldier.StatBonuses(StatType.Endurance) + " (items)");
+            ttSoldier.SetToolTip(this.lbEndurance, ThisSoldier.EnduranceExplanation);
 
             // Display armour presence by colours
             lbHead.BackColor = ArmourToColour(ThisSoldier.GetArmourAtLocation(BodyPart.Head));
@@ -71,9 +71,7 @@ namespace SpaceMercs.Dialogs {
             double bfi = ThisSoldier.StatBonuses(StatType.Attack);
             ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.BaseAttack + " (base) + " + bfi + " (items)" + ((ThisSoldier.EquippedWeapon != null) ? (" + " + ThisSoldier.GetSoldierSkillWithWeapon(ThisSoldier.EquippedWeapon.Type) + " (weapon skills)") : ""));
             lbDefenceTotal.Text = Math.Round(ThisSoldier.Defence,0).ToString();
-            double enc = Math.Round(ThisSoldier.Encumbrance * Const.EncumbranceDefencePenalty,0);
-            string encStr = enc > 0d ? $" - {enc} (weight)" : string.Empty;
-            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{ThisSoldier.BaseDefence} (base) + {ThisSoldier.StatBonuses(StatType.Defence)} (items) + {ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills){encStr}");
+            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{ThisSoldier.BaseDefence} (base) + {ThisSoldier.StatBonuses(StatType.Defence)} (items) + {ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)");
             lbArmour.Text = ThisSoldier.BaseArmour.ToString("N1");
             string strArmour = (100.0 - (Utils.ArmourReduction(ThisSoldier.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
             Dictionary<WeaponType.DamageType, double> AllRes = ThisSoldier.GetAllResistances();

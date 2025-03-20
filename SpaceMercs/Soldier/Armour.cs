@@ -132,7 +132,7 @@ namespace SpaceMercs {
         private double MassAtLevel(int lev) {
             return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
         }
-        private double CalculateCost(int lev) {
+        private double CalculateCost_Legacy(int lev) {
             double shieldBoost = (ShieldsAtLevel(lev) - (double)Type.Shields) * Const.ShieldCostMultiplier;
             double massBoost = (Type.Mass - MassAtLevel(lev)) * Const.MassCostMultiplier;
             double cost = Type.Cost + shieldBoost + massBoost;
@@ -149,11 +149,54 @@ namespace SpaceMercs {
             }
             cost *= 1.0 + bonusProt;
 
-            // Valuation for reducing penalties or increasing bonuses
-            // TODO
+            return cost;
+        }
+        private double CalculateCost(int lev) {
+            double size = Type.Size;
+            double shieldValue = Math.Pow(ShieldsAtLevel(lev), Const.ShieldValueExponent) * Const.ShieldCostMultiplier;
+
+            double baseMass = 1.5d * size;
+            double massFactor = Math.Pow(baseMass / MassAtLevel(lev), Const.MassCostExponent);
+
+            double baseArmour = 3d * size;
+            double armour = ArmourAtLevel(lev);
+            // Modifier for extra damage resistance from the material
+            foreach (WeaponType.DamageType tp in Material.BonusArmour.Keys) {
+                double bonusPerPoint = tp == WeaponType.DamageType.Physical ? 1d : 0.2d;
+                armour += Material.BonusArmour[tp] * bonusPerPoint * size;
+            }
+            double armourFactor = Math.Pow(armour / baseArmour, Const.ArmourCostExponent);
+
+            double abilityValue = 0d;
+            double abilityBoost = Type.Strength + Type.Agility + Type.Insight + Type.Toughness + Type.Endurance;
+            abilityValue += abilityBoost >= 0
+                ? Math.Pow(abilityBoost, Const.AbilityBonusExponent) * Const.AbilityBonusValue
+                : -Math.Pow(-abilityBoost, Const.AbilityBonusExponent) * Const.AbilityBonusValue;
+
+            double propertyBoost = Type.Health + Type.Stamina + Type.Attack + Type.Defence;
+            abilityValue += propertyBoost >= 0
+                ? Math.Pow(propertyBoost, Const.PropertyBonusExponent) * Const.PropertyBonusValue
+                : -Math.Pow(-propertyBoost, Const.PropertyBonusExponent) * Const.PropertyBonusValue;
+
+            abilityValue += (Math.Pow(Type.Speed, Const.ArmourSpeedBonusExponent) - 1d) * Const.ArmourSpeedBonusValue;
+
+            foreach ((Soldier.UtilitySkill sk, int val) in Type.SkillBoosts) {
+                abilityValue += val * Const.AbilityBonusValue * 3d;
+            }
+
+            double baseCost = size * Const.BaseArmourCost;
+            double cost = baseCost + shieldValue;
+            cost *= massFactor * armourFactor;
+            cost += abilityValue;
+            if (cost < baseCost / 3d) cost = baseCost / 3d;
+
+            double costLegacy = CalculateCost_Legacy(lev);
+            double factor = (costLegacy > cost) ? costLegacy / cost : cost / costLegacy;
+            if (factor > 1.4) {
+                factor = 1.4;
+            }
 
             return cost;
-
         }
         public void UpgradeArmour(Race? rc, int entityLevel) {
             // Upgrade Level, Material or Type

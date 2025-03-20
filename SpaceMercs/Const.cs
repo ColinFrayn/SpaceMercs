@@ -42,14 +42,26 @@ namespace SpaceMercs {
         public const double EquipmentLevelCostExponent = 1.35;  // For each level the weapon quality improves, this is the power law relationship to cost
         public const double EquipmentLevelCostBaseExponent = 1.0;  // For each level the weapon quality improves, additionally multiply cost by this factor 
         public const double EquipmentLevelRarityScale = 0.2;  // Each level of equipment quality makes it this much rarer
-        public const double MaxCarryScale = 0.6; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
-        public const double ArmourCostExponent = 3d; // Affects cost scaling for armour based on how much better it is than the base
-        public const double ShieldCostMultiplier = 10d; // Affects cost for armour based on how much better the shields are than the base
+        public const double MaxCarryExponent = 1.5; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
+        public const double MaxCarryScale = 0.9; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
+        public const double MaxCarryBase = 6.0; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
+        public const double ArmourCostExponent = 3.5d; // Affects cost scaling for armour based on how much better it is than the base
+        public const double ArmourCostMultiplier = 2d; // Affects cost for armour based on how much better the shields are than the base
+        public const double ShieldCostMultiplier = 6d; // Affects cost for armour based on how much better the shields are than the base
         public const double MassCostMultiplier = 15d; // Affects cost for armour based on how much lighter it is than the base
+        public const double MassCostExponent = 0.8d; // Affects cost for armour based on how much lighter it is than the base
+        public const double ShieldValueExponent = 1.1d; // Shield value increases nonlinearly
         public const double BonusPhysicalArmourValue = 0.03; // Percent bonus to the cost for each single point of bonus armour for physical damage
         public const double BonusOtherArmourValue = 0.01; // Percent bonus to the cost for each single point of bonus armour for any other damage type
         public const double ModificationCost = 20d; // Cost for a modification for disposable materials
         public const double EncumbranceDefencePenalty = 5d; // Defence penalty for being fully encumbered
+        public const double AbilityBonusValue = 10d; // Value bonus for boosting an ability e.g. Strength, Insight
+        public const double AbilityBonusExponent = 1.6d; // Value bonus for boosting an ability e.g. Strength, Insight, exponent to make it superlinear
+        public const double ArmourSpeedBonusValue = 25d; // Value bonus for boosting an ability e.g. Strength, Insight
+        public const double ArmourSpeedBonusExponent = 4d; // Value bonus for boosting an ability e.g. Strength, Insight, exponent to make it superlinear
+        public const double PropertyBonusValue = 6d; // Value bonus for boosting a property e.g. Stamina, Health
+        public const double PropertyBonusExponent = 1.5d; // Value bonus for boosting a property e.g. Stamina, Health, exponent to make it superlinear
+        public const double BaseArmourCost = 6d; // Cost per armour point, base
 
         // Solar system parameters
         public const double MoonRadius = 1400000.0;

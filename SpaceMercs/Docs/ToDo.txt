@@ -2,15 +2,14 @@
 ToDo List
 -------------------------------------------------
 
-Armour.CalculateCost : [TEST CHANGES]
-- Appraise armour cost from first principles without a given base cost?
-
 New calculation of enemy creature groups [TEST]
 
 Mission.SecondaryEnemy (when level count > 1) [TEST]
 
+Delete cost from armour XML
+
 Elithiri: Personal teleporter: Can move within sight line up to X squares.
-- Range related to mass of soldier.
+- Range related to mass of soldier (minus 1 square per 10kg, if <1 then cannot be used.).
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)

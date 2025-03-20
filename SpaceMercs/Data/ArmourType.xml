@@ -4,7 +4,7 @@
     <Mass>1.5</Mass>
     <Cost>10</Cost>
     <Rarity>5</Rarity>
-    <BaseArmour>4</BaseArmour>
+    <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
     <Desc>A simple protective helmet</Desc>
     <Materials>
@@ -16,7 +16,7 @@
     <Cost>30</Cost>
     <Rarity>9</Rarity>
     <Attack>1</Attack>
-    <BaseArmour>5</BaseArmour>
+    <BaseArmour>4</BaseArmour>
     <Location>Head</Location>
     <Desc>A military spec helmet with HUD and slightly higher protection</Desc>
     <Materials>
@@ -75,7 +75,6 @@
     <Mass>5.0</Mass>
     <Cost>20</Cost>
     <Rarity>15</Rarity>
-    <Agility>-2</Agility>
     <BaseArmour>10</BaseArmour>
     <Location>Chest</Location>
     <Desc>A chestplate</Desc>
@@ -88,7 +87,6 @@
     <Mass>7.0</Mass>
     <Cost>150</Cost>
     <Rarity>45</Rarity>
-    <Agility>-2</Agility>
     <BaseArmour>10</BaseArmour>
     <Location>Chest</Location>
     <Shields>10</Shields>
@@ -119,8 +117,7 @@
     <Mass>2.0</Mass>
     <Cost>15</Cost>
     <Rarity>11</Rarity>
-    <Agility>-1</Agility>
-    <BaseArmour>4</BaseArmour>
+    <BaseArmour>6</BaseArmour>
     <Location>Arms</Location>
     <Desc>Plating for arms</Desc>
     <Materials>
@@ -132,9 +129,8 @@
     <Mass>4.0</Mass>
     <Cost>50</Cost>
     <Rarity>17</Rarity>
-    <Agility>-1</Agility>
     <Strength>1</Strength>
-    <BaseArmour>4</BaseArmour>
+    <BaseArmour>6</BaseArmour>
     <Location>Arms</Location>
     <Desc>Powered plating for arms</Desc>
     <Materials>
@@ -147,8 +143,7 @@
     <Mass>3.0</Mass>
     <Cost>15</Cost>
     <Rarity>13</Rarity>
-    <Agility>-1</Agility>
-    <BaseArmour>5</BaseArmour>
+    <BaseArmour>6</BaseArmour>
     <Location>Legs</Location>
     <Desc>Plating for legs</Desc>
     <Materials>
@@ -160,7 +155,8 @@
     <Mass>5.0</Mass>
     <Cost>75</Cost>
     <Rarity>25</Rarity>
-    <BaseArmour>5</BaseArmour>
+    <BaseArmour>6</BaseArmour>
+    <Agility>1</Agility>
     <Speed>1.1</Speed>
     <Location>Legs</Location>
     <Desc>Powered plating for legs</Desc>
@@ -174,8 +170,7 @@
     <Mass>12.0</Mass>
     <Cost>55</Cost>
     <Rarity>25</Rarity>
-    <Agility>-4</Agility>
-    <BaseArmour>18</BaseArmour>
+    <BaseArmour>21</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A standard chestplate, arm plating and leg plating combined</Desc>
     <Materials>
@@ -188,7 +183,6 @@
     <Mass>13.0</Mass>
     <Cost>150</Cost>
     <Rarity>25</Rarity>
-    <Agility>-3</Agility>
     <Attack>1</Attack>
     <BaseArmour>32</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
@@ -213,9 +207,8 @@
     <Mass>9.5</Mass>
     <Cost>160</Cost>
     <Rarity>30</Rarity>
-    <Agility>-2</Agility>
     <Attack>1</Attack>
-    <BaseArmour>25</BaseArmour>
+    <BaseArmour>28</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>A lightweight combat armour suit with full body protection</Desc>
     <Materials>
@@ -238,8 +231,8 @@
     <Mass>10.0</Mass>
     <Cost>450</Cost>
     <Rarity>40</Rarity>
-    <Agility>-2</Agility>
-    <BaseArmour>18</BaseArmour>
+    <BaseArmour>21</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight version of the shielded chestplate, arm plating and leg plating combined</Desc>
     <Shields>10</Shields>
@@ -265,12 +258,12 @@
     <Mass>11.0</Mass>
     <Cost>1275</Cost>
     <Rarity>55</Rarity>
-    <Agility>-2</Agility>
     <Defence>2</Defence>
-    <BaseArmour>24</BaseArmour>
+    <BaseArmour>26</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with better materials, minor deflection technology and a more advanced shield generator.</Desc>
     <Shields>20</Shields>
+    <MinMatLvl>3</MinMatLvl>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
@@ -294,12 +287,12 @@
     <Mass>13.0</Mass>
     <Cost>4250</Cost>
     <Rarity>60</Rarity>
-    <Agility>-3</Agility>
     <Defence>4</Defence>
     <BaseArmour>44</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>An advanced and highly powerful combat armour suit, with a superb shield generator and deflection technology.</Desc>
     <Shields>30</Shields>
+    <MinMatLvl>4</MinMatLvl>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
@@ -322,12 +315,11 @@
     <Mass>6.0</Mass>
     <Cost>75</Cost>
     <Rarity>40</Rarity>
-    <Agility>-1</Agility>
     <Defence>3</Defence>
     <Utility>
       <Stealth>3</Stealth>
     </Utility>
-    <BaseArmour>12</BaseArmour>
+    <BaseArmour>13</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight chestplate, arm plating and leg plating combined, with stealth coating</Desc>
     <Materials>
@@ -350,13 +342,12 @@
     <Mass>8.0</Mass>
     <Cost>325</Cost>
     <Rarity>50</Rarity>
-    <Agility>-1</Agility>
     <Defence>6</Defence>
     <Utility>
       <Stealth>6</Stealth>
       <Perception>2</Perception>
     </Utility>
-    <BaseArmour>20</BaseArmour>
+    <BaseArmour>22</BaseArmour>
     <Location>Chest,Arms,Legs,Feet,Hands,Head</Location>
     <Desc>A full body covering armour suit with stealth coating</Desc>
     <Materials>
@@ -380,7 +371,6 @@
     <Mass>1.0</Mass>
     <Cost>10</Cost>
     <Rarity>8</Rarity>
-    <Agility>-1</Agility>
     <BaseArmour>3</BaseArmour>
     <Location>Feet</Location>
     <Desc>Plate metal boots</Desc>
@@ -467,11 +457,11 @@
     <Mass>30.0</Mass>
     <Cost>650</Cost>
     <Rarity>50</Rarity>
-    <Agility>-6</Agility>
     <Strength>6</Strength>
     <Speed>0.85</Speed>
     <Attack>2</Attack>
     <BaseArmour>44</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Requirements>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
@@ -503,11 +493,11 @@
     <Mass>60.0</Mass>
     <Cost>2500</Cost>
     <Rarity>60</Rarity>
-    <Agility>-8</Agility>
     <Strength>8</Strength>
     <Attack>2</Attack>
     <Speed>0.75</Speed>
     <BaseArmour>58</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
@@ -540,11 +530,11 @@
     <Mass>25.0</Mass>
     <Cost>1800</Cost>
     <Rarity>65</Rarity>
-    <Agility>-4</Agility>
     <Strength>6</Strength>
     <Speed>1.0</Speed>
     <Attack>2</Attack>
     <BaseArmour>44</BaseArmour>
+    <MinMatLvl>3</MinMatLvl>
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
@@ -577,12 +567,12 @@
     <Mass>35.0</Mass>
     <Cost>2600</Cost>
     <Rarity>70</Rarity>
-    <Agility>-6</Agility>
     <Strength>6</Strength>
     <Attack>2</Attack>
     <Speed>0.85</Speed>
     <BaseArmour>48</BaseArmour>
     <Shields>20</Shields>
+    <MinMatLvl>3</MinMatLvl>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
       <Bonus Type="Cold" Amount="30"/>
@@ -617,7 +607,6 @@
     <Mass>22.0</Mass>
     <Cost>6400</Cost>
     <Rarity>85</Rarity>
-    <Agility>-2</Agility>
     <Strength>4</Strength>
     <Speed>1.1</Speed>
     <Attack>3</Attack>
@@ -626,6 +615,7 @@
     <Utility>
       <Perception>2</Perception>
     </Utility>
+    <MinMatLvl>4</MinMatLvl>
     <Requirements>
       <MinLevel>14</MinLevel>
       <MinSystems>4</MinSystems>

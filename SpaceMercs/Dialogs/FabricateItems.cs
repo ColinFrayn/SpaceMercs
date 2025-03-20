@@ -220,6 +220,7 @@
                 armourMat = sam.SelectedMat;
                 if (mats.ContainsKey(armourMat)) mats[armourMat] += at.Size;
                 else mats.Add(armourMat, at.Size);
+                if (armourMat.MaxLevel < at.MinMatLvl) return;
             }
 
             // Get construction chance
@@ -228,6 +229,7 @@
                 MessageBox.Show("Nobody has the required skill to perform that action!");
                 return;
             }
+
             int aiboost = PlayerTeam.PlayerShip.AIBoost;
             Soldier s = PlayerTeam.GetSoldierWithMaxSkillByItemType(newType);
             double chance = newType.ConstructionChance + ((maxlev + aiboost) * Const.SkillConstructChanceModifier);

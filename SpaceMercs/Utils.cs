@@ -602,6 +602,7 @@ namespace SpaceMercs {
                 if (at.Locations.Count == 1) {
                     foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(race))) {
                         if (!mat.IsArmourMaterial) continue;
+                        if (mat.MaxLevel < at.MinMatLvl) continue;
                         double r = rnd.NextDouble() * at.Rarity * mat.Rarity;
                         if (r > best) {
                             best = r;
