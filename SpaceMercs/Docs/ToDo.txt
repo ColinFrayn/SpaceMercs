@@ -7,6 +7,8 @@ New calculation of enemy creature groups [TEST]
 Mission.SecondaryEnemy (when LevelCount > 1) [TEST]
 - Display on the mission board / scanner dialog?
 
+Review refilling of the Colony supplies, especially in smaller colonies
+
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
