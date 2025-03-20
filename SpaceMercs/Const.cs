@@ -45,12 +45,12 @@ namespace SpaceMercs {
         public const double MaxCarryExponent = 1.5; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
         public const double MaxCarryScale = 0.9; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
         public const double MaxCarryBase = 6.0; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
-        public const double ArmourCostExponent = 3.5d; // Affects cost scaling for armour based on how much better it is than the base
+        public const double ArmourCostExponent = 4d; // Affects cost scaling for armour based on how much better it is than the base
         public const double ArmourCostMultiplier = 2d; // Affects cost for armour based on how much better the shields are than the base
         public const double ShieldCostMultiplier = 6d; // Affects cost for armour based on how much better the shields are than the base
         public const double MassCostMultiplier = 15d; // Affects cost for armour based on how much lighter it is than the base
         public const double MassCostExponent = 0.8d; // Affects cost for armour based on how much lighter it is than the base
-        public const double ShieldValueExponent = 1.1d; // Shield value increases nonlinearly
+        public const double ShieldValueExponent = 1.4d; // Shield value increases nonlinearly
         public const double BonusPhysicalArmourValue = 0.03; // Percent bonus to the cost for each single point of bonus armour for physical damage
         public const double BonusOtherArmourValue = 0.01; // Percent bonus to the cost for each single point of bonus armour for any other damage type
         public const double ModificationCost = 20d; // Cost for a modification for disposable materials

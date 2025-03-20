@@ -132,25 +132,6 @@ namespace SpaceMercs {
         private double MassAtLevel(int lev) {
             return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
         }
-        private double CalculateCost_Legacy(int lev) {
-            double shieldBoost = (ShieldsAtLevel(lev) - (double)Type.Shields) * Const.ShieldCostMultiplier;
-            double massBoost = (Type.Mass - MassAtLevel(lev)) * Const.MassCostMultiplier;
-            double cost = Type.Cost + shieldBoost + massBoost;
-            double armourFact = ArmourAtLevel(lev) / (double)Type.BaseArmour;
-            cost *= Math.Pow(armourFact, Const.ArmourCostExponent);
-
-            // Modifier for extra damage resistance from the material
-            double bonusProt = 0.0;
-            foreach (WeaponType.DamageType tp in Material.BonusArmour.Keys) {
-                double bonusPerPoint = tp == WeaponType.DamageType.Physical ? Const.BonusPhysicalArmourValue : Const.BonusOtherArmourValue;
-                foreach (BodyPart bp in Type.Locations) {
-                    bonusProt += Material.BonusArmour[tp] * bonusPerPoint;
-                }
-            }
-            cost *= 1.0 + bonusProt;
-
-            return cost;
-        }
         private double CalculateCost(int lev) {
             double size = Type.Size;
             double shieldValue = Math.Pow(ShieldsAtLevel(lev), Const.ShieldValueExponent) * Const.ShieldCostMultiplier;
@@ -189,12 +170,6 @@ namespace SpaceMercs {
             cost *= massFactor * armourFactor;
             cost += abilityValue;
             if (cost < baseCost / 3d) cost = baseCost / 3d;
-
-            double costLegacy = CalculateCost_Legacy(lev);
-            double factor = (costLegacy > cost) ? costLegacy / cost : cost / costLegacy;
-            if (factor > 1.4) {
-                factor = 1.4;
-            }
 
             return cost;
         }

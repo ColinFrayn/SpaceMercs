@@ -14,6 +14,7 @@ namespace SpaceMercs {
         public bool CurePoison { get; private set; }
         public int NoiseLevel { get; private set; } // Noise level is the number of squares away this effect can be heard
         public bool Scan { get; private set; }
+        public bool Teleport { get; private set; }
         public bool Instant { get; private set; }
 
         // Delegate
@@ -48,9 +49,10 @@ namespace SpaceMercs {
             }
 
             Scan = xml.SelectSingleNode("Scan") != null;
+            Teleport = xml.SelectSingleNode("Teleport") != null;
             Instant = xml.SelectSingleNode("Instant") != null;
 
-            if (!Scan && !Effects.Any()) throw new Exception("No Effect(s) in ItemEffect");
+            if (!Scan && !Teleport && !Effects.Any()) throw new Exception("No Effect(s) in ItemEffect");
         }
     }
 }

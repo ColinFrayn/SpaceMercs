@@ -4,12 +4,8 @@ ToDo List
 
 New calculation of enemy creature groups [TEST]
 
-Mission.SecondaryEnemy (when level count > 1) [TEST]
-
-Delete cost from armour XML
-
-Elithiri: Personal teleporter: Can move within sight line up to X squares.
-- Range related to mass of soldier (minus 1 square per 10kg, if <1 then cannot be used.).
+Mission.SecondaryEnemy (when LevelCount > 1) [TEST]
+- Display on the mission board / scanner dialog?
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
@@ -26,9 +22,9 @@ Display when a weapon is recharging
 ==================================================================================================================
 
 
----------------------
+-------------------------------------------------
 Backburner : Features
----------------------
+-------------------------------------------------
 
 Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
 
@@ -92,9 +88,9 @@ Investigate Blockly for scripting soldiers?
 Soldier.DisplaySoldierDetails() : Improve the Encumbrance icon
 
 
--------------------------
+-------------------------------------------------
 Backburner : Improvements
--------------------------
+-------------------------------------------------
 
 Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
 - All but one are blocking Yes/No decision boxes

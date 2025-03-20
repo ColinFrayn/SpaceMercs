@@ -298,6 +298,9 @@
     <None Update="Sounds\SwordSlice.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Teleport.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\WetSplat.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

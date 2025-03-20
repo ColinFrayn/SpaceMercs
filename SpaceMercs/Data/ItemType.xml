@@ -540,4 +540,37 @@
     <Source>Workshop</Source>
     <Tex>2,4</Tex>
   </ItemType>
+  <ItemType Name="Personal Teleporter">
+    <Mass>3.0</Mass>
+    <Cost>1200</Cost>
+    <Rarity>26</Rarity>
+    <StaminaCost>19</StaminaCost>
+    <Desc>A portable teleporter unit that can displace a sufficiently-lightly-encumbered Soldier a small distanct.</Desc>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinSystems>4</MinSystems>
+      <MinPop>60</MinPop>
+      <CashCost>180</CashCost>
+      <Relations Name="Elithiri">2</Relations>
+      <Relations Name="Grey">1</Relations>
+      <Facility>Workshop</Facility>
+    </Requirements>
+    <ItemEffect Name="Teleport">
+      <Instant/>
+      <Radius>0</Radius>
+      <Range>14</Range>
+      <Teleport/>
+      <Recharge>5</Recharge>
+      <Noise>3</Noise>
+      <Sound>Teleport</Sound>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="3"/>
+      <Material Name="Electronic Components" Amount="2"/>
+    </Materials>
+    <Source>Workshop</Source>
+    <Tex>3,4</Tex>
+  </ItemType>
+
 </Data>

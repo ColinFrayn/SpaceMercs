@@ -369,6 +369,12 @@ namespace SpaceMercs {
                 return (int)Math.Floor((6d * m / MaximumCarry));
             }
         }
+        public int MassTeleportRangePenalty {
+            get {
+                double m = CalculateInventoryMass();
+                return (int)Math.Floor(m / 10d);
+            }
+        }
         public bool MeleeAttacker { get { return (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
         public double SearchCost { get { return Const.SearchCost; } }

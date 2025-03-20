@@ -520,12 +520,10 @@ namespace SpaceMercs.MainWindow {
                             ActionItem = eqp;
                             CurrentAction = SoldierAction.Item;
                             if (eqp.BaseType.ItemEffect is not null) {
-                                GenerateTargetMap(s, eqp.BaseType.ItemEffect.Range);
-                                if (SelectedEntity is not null) {
-                                    int sy = SelectedEntity.Y;
-                                    int sx = SelectedEntity.X;
-                                    GenerateAoEMap(sx, sy, eqp.BaseType.ItemEffect.Radius);
-                                }
+                                GenerateTargetMap(s, eqp.GetRange(s));
+                                int sy = s.Y;
+                                int sx = s.X;
+                                GenerateAoEMap(sx, sy, eqp.BaseType.ItemEffect.Radius);
                             }
                         }
                     }
@@ -549,6 +547,10 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 else if (s != null && CurrentAction == SoldierAction.Item) {
+                    if (hoverx < 0 || hovery < 0 || hoverx >= CurrentLevel.Width || hovery >= CurrentLevel.Height || TargetMap[hoverx, hovery] == false) {
+                        // Clicked on an illegal target square
+                        return;
+                    }
                     if (ActionItem is null) throw new Exception("Null ActionItem in soldier action");
                     if (s.Stamina < ActionItem.BaseType.StaminaCost) {
                         msgBox.PopupMessage("You have insufficient Stamina to use Item!");
@@ -557,11 +559,15 @@ namespace SpaceMercs.MainWindow {
                     if (ActionItem.BaseType.ItemEffect is null) {
                         throw new Exception("ActionItem without effect!");
                     }
-                    if (s.RangeTo(hoverx, hovery) > ActionItem.BaseType.ItemEffect.Range) {
+                    if (ActionItem.BaseType.ItemEffect.Teleport && ActionItem.GetRange(s) < 2) {
+                        msgBox.PopupMessage("This soldier is too heavy for the teleporter!");
+                        return;
+                    }
+                    if (s.RangeTo(hoverx, hovery) > ActionItem.GetRange(s)) {
                         msgBox.PopupMessage("Target out of range!");
                         return;
                     }
-                    if (ActionItem.BaseType.ItemEffect.Radius == 0 && CurrentLevel.GetEntityAt(hoverx, hovery) is null) {
+                    if (ActionItem.BaseType.ItemEffect.Radius == 0 && !ActionItem.BaseType.ItemEffect.Teleport && CurrentLevel.GetEntityAt(hoverx, hovery) is null) {
                         // Single target effect, and no target was selected
                         return;
                     }
@@ -701,6 +707,23 @@ namespace SpaceMercs.MainWindow {
         private void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py) {
             HashSet<IEntity> hsEntities = new HashSet<IEntity>();
 
+            // Play a sound, if there is one
+            if (!string.IsNullOrEmpty(ie.SoundEffect)) {
+                PlaySoundThreaded(ie.SoundEffect);
+            }
+
+            if (ie.Teleport) {
+                if (source is Soldier s) {
+                    CurrentLevel.MoveEntityTo(s, new Point(px, py));
+                    UpdateLevelAfterSoldierMove(s);
+                    GenerateDistMap(s);
+                    GenerateDetectionMap();
+                    CheckForTraps(s);
+                }
+                else throw new Exception("Teleport lost its source Soldier!");
+                return;
+            }
+
             for (int y = (int)Math.Max(py - ie.Radius, 0); y <= (int)Math.Min(py + ie.Radius, CurrentLevel.Height - 1); y++) {
                 for (int x = (int)Math.Max(px - ie.Radius, 0); x <= (int)Math.Min(px + ie.Radius, CurrentLevel.Width - 1); x++) {
                     if ((x - px) * (x - px) + (y - py) * (y - py) > ie.Radius * ie.Radius) continue;
@@ -714,11 +737,6 @@ namespace SpaceMercs.MainWindow {
                         }
                     }
                 }
-            }
-
-            // Play a sound, if there is one
-            if (!string.IsNullOrEmpty(ie.SoundEffect)) {
-                PlaySoundThreaded(ie.SoundEffect);
             }
 
             // Apply effect to the targets
@@ -1594,7 +1612,7 @@ namespace SpaceMercs.MainWindow {
                     ActionItem = ui.ChosenItem;
                     CurrentAction = SoldierAction.Item;
                     if (ActionItem.BaseType.ItemEffect is not null) {
-                        GenerateTargetMap(s, ActionItem.BaseType.ItemEffect.Range);
+                        GenerateTargetMap(s, ActionItem.GetRange(s));
                         int sy = SelectedEntity.Y;
                         int sx = SelectedEntity.X;
                         GenerateAoEMap(sx, sy, ActionItem.BaseType.ItemEffect.Radius);
