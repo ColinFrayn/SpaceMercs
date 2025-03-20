@@ -356,15 +356,17 @@ namespace SpaceMercs {
                     // Modify rarity by colony details & add this weapon if required
                     if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
                     if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
-                    if (!HasBaseType(BaseType.Military)) rarity *= 2.0;
+                    if (HasBaseType(BaseType.Military)) rarity *= 2.0;
                     if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
                     AddItem(wp, rarity, days, rand);
                 }
             }
 
             // Now add all armour types
+            int maxLev = BaseSize + 1;
+            if (HasBaseType(BaseType.Trading)) maxLev++;
             foreach (ArmourType atp in StaticData.ArmourTypes.Where(it => it.CanBuild(Owner))) {
-                foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
+                foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner) && mat.MaxLevel <= maxLev)) {
                     if (!mat.IsArmourMaterial) continue;
                     if (mat.IsScavenged) continue;
                     if (mat.MaxLevel < atp.MinMatLvl) continue;
@@ -374,7 +376,7 @@ namespace SpaceMercs {
                         // Modify rarity by colony details & add this armour if required
                         if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
                         if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
-                        if (!HasBaseType(BaseType.Military)) rarity *= 2.0;
+                        if (HasBaseType(BaseType.Military)) rarity *= 2.0;
                         if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
                         AddItem(ar, rarity, days, rand);
                     }

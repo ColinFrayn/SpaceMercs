@@ -8,6 +8,7 @@ Mission.SecondaryEnemy (when LevelCount > 1) [TEST]
 - Display on the mission board / scanner dialog?
 
 Review refilling of the Colony supplies, especially in smaller colonies
+- No expensive stuff, no exotic materials etc.
 
 Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
