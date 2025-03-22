@@ -820,7 +820,7 @@ namespace SpaceMercs {
             }
             else sb.AppendLine("Primary threat will be " + PrimaryEnemy.Name);
             if (SecondaryEnemy != null) {
-                sb.AppendLine("Secondary threat will be " + SecondaryEnemy.Name);
+                sb.AppendLine("[+] Secondary threat will be " + SecondaryEnemy.Name);
             }
             if (!String.IsNullOrEmpty(strSz)) sb.AppendLine(strSz);
             if (LevelCount > 1) {

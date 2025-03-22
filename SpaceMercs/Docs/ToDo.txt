@@ -2,16 +2,22 @@
 ToDo List
 -------------------------------------------------
 
-Mission.SecondaryEnemy (when LevelCount > 1) [TEST]
-- Display on the mission board / scanner dialog?
+Mission.SecondaryEnemy (when LevelID > 1) [TEST]
 
 Improve equipment for higher level mercs?
 
+Check freq of SpaceHulks
+
 Test run Precursor mission (& keeping the core)
+- Test freq of precursor planets
 
 Precursor/SpaceHulk missions
 - Precursor: Test level type/size/sparseness changes at lower levels
-- Return Cores to Homeworlds for additional +relations. Where?
+- Return Cores to Homeworlds for additional +relations
+-- Extra tab on homeworld for Diplomacy
+--- See current relations and amount of exp required for next level
+--- Sell cores
+--- Purchase favour?
 
 Display when a weapon is recharging
 

@@ -97,11 +97,12 @@ namespace SpaceMercs.Dialogs {
             foreach (Mission miss in _aoScan.MissionList) {
                 arrRowMiss[0] = miss.Summary;
                 arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
+                string secondary = miss.SecondaryEnemy is null ? string.Empty : " [+]";
                 if (miss.RacialOpponent != null) {
-                    if (miss.RacialOpponent.Known) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name;
-                    else arrRowMiss[2] = "Alien " + miss.PrimaryEnemy.Name;
+                    if (miss.RacialOpponent.Known) arrRowMiss[2] = miss.RacialOpponent.Name + " " + miss.PrimaryEnemy.Name + secondary;
+                    else arrRowMiss[2] = "Alien " + miss.PrimaryEnemy.Name + secondary;
                 }
-                else arrRowMiss[2] = miss.PrimaryEnemy.Name + miss.SwarmLevelText;
+                else arrRowMiss[2] = miss.PrimaryEnemy.Name + miss.SwarmLevelText + secondary;
                 arrRowMiss[3] = miss.Diff.ToString();
                 arrRowMiss[4] = Utils.MapSizeToDescription(miss.Size) + (miss.LevelCount > 1 ? " * " + miss.LevelCount.ToString() : "");
 
