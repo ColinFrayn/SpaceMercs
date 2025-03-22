@@ -1,5 +1,7 @@
-﻿using System.Configuration;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
@@ -14,6 +16,19 @@ namespace SpaceMercs {
         public Ship? ShipTarget { get; private set; }
         public Race? RacialOpponent { get; private set; }
         public CreatureGroup PrimaryEnemy { get; private set; }
+        public CreatureGroup GetPrimaryEnemyForLevel(int levelID) {
+            if (levelID == LevelCount - 1) {
+                if (Type is MissionType.PrecursorRuins) {                   
+                    CreatureGroup? demons = StaticData.GetCreatureGroupByName("Demons");
+                    if (demons is not null) return demons;
+                }
+                if (Type is MissionType.SpaceHulk) {
+                    CreatureGroup? xenos = StaticData.GetCreatureGroupByName("Xenomorphs");
+                    if (xenos is not null) return xenos;
+                }
+            }
+            return PrimaryEnemy;
+        }
         public CreatureGroup SecondaryEnemy { get; private set; }
         public int SwarmLevel { get; private set; }
         public OrbitalAO Location { get; private set; }
@@ -395,7 +410,12 @@ namespace SpaceMercs {
 
             // Set mission goal
             m.Goal = MissionGoal.Artifact;
-            m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            }
+            else {
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1, m.RacialOpponent);
+            }
             if (m.MItem is null) return null;
 
             // Ship map used for top level
@@ -419,7 +439,13 @@ namespace SpaceMercs {
 
             // Set mission goal
             m.Goal = MissionGoal.Artifact;
-            m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            if (RandomNumberGenerator.GetInt32(9) > 3 ) { // 5/9 chance
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            }
+            else {
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1, m.RacialOpponent);
+            }
+
             if (m.MItem is null) return null;
 
             // Ship map used for top level
@@ -437,15 +463,18 @@ namespace SpaceMercs {
                 Size = Math.Min(3, Size);
             }
             if (Goal == MissionGoal.Artifact) {
-                if (MItem?.LegendaryItem is not Weapon wp) {
+                int lev = 0;
+                if (MItem?.LegendaryItem is Weapon wp) lev = wp.Level;
+                else if (MItem?.LegendaryItem is Armour ar) lev = ar.Level;
+                else {
                     Goal = MissionGoal.KillAll;
                     MItem = null;
                     return;
                 }
-                LevelCount = Math.Max((Diff/4) + wp.Level - 3, LevelCount);
+                LevelCount = Math.Max((Diff/4) + lev - 3, LevelCount);
                 if (rand.Next(Diff) > 10) LevelCount++;
                 if (rand.NextDouble() > 0.8) LevelCount++;
-                Size = Math.Max(wp.Level - 1, Size);
+                Size = Math.Max(lev - 1, Size);
                 if (rand.Next(Diff) > 10) Size++;
                 if (rand.NextDouble() > 0.8) Size++;
             }
@@ -586,7 +615,10 @@ namespace SpaceMercs {
             int r = rand.Next(100);
             if (r < 4 && m.Diff > Const.LegendaryItemLevelDiff && m.Type != MissionType.Surface) {
                 mg = MissionGoal.Artifact;
-                it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff, m.RacialOpponent);
+                if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
+                    it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff, m.RacialOpponent);
+                }
+                else it = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff, m.RacialOpponent);
                 if (it is null) mg = MissionGoal.KillAll;
             }
             else if (r < 30) {

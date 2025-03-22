@@ -167,10 +167,11 @@ namespace SpaceMercs {
             // Is this a precursor location? Needs to be in third ring or further.
             Star star = GetSystem();
             Sector sector = star.Sector;
-            if (Math.Abs(sector.SectorX) > 2 || Math.Abs(sector.SectorY) > 2) {
+            int ring = Math.Max(Math.Abs(sector.SectorX), Math.Abs(sector.SectorY));
+            if (ring > 2) {
                 if (Type is not PlanetType.Gas && BaseTemp >= 180 && BaseTemp <= 400) {
                     if (star.IsStableMainSequence()) {
-                        if (rnd.NextDouble() > 0.8) {
+                        if (rnd.Next(10) + ring >= 8) {
                             IsPrecursor = true;
                         }
                     }

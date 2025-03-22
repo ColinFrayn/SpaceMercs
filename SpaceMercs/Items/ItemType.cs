@@ -7,7 +7,6 @@ namespace SpaceMercs {
 
         public double Mass { get; private set; }
         public Dictionary<MaterialType, int> Materials { get; private set; }
-        public int BaseRarity { get; private set; }
         public double Rarity { get; private set; }
         public int GetUtilitySkill(Soldier.UtilitySkill sk) {
             if (_SkillBoosts.ContainsKey(sk)) return _SkillBoosts[sk];
@@ -23,10 +22,17 @@ namespace SpaceMercs {
         public double ConstructionChance { get { return 90d - ((Requirements?.MinLevel ?? 0d) * 7d) - Math.Sqrt(Cost); } }
 
         public ItemType(XmlNode xml) : base(xml) {
-            BaseRarity = xml.SelectNodeInt("Rarity", 0);
-            Rarity = (100.0 / ((Math.Pow(BaseRarity, 1.5)) + 1.0));
             Mass = xml.SelectNodeDouble("Mass", 0.0);
             StaminaCost = xml.SelectNodeDouble("StaminaCost", Const.UseItemCost);
+
+            // Rarity calculations
+            Rarity = 10d;
+            if (Requirements is not null) {
+                Rarity /= Requirements.MinLevel;
+                int totalRel = Requirements.RequiredRaceRelations.Sum(x => x.Value + 1);
+                Rarity *= Math.Pow(0.75, totalRel);
+            }
+            Rarity *= Math.Pow(0.8, Mass/10d);
 
             Materials = new Dictionary<MaterialType, int>();
             if (xml.SelectSingleNode("Materials") is not null) {

@@ -103,6 +103,11 @@ namespace SpaceMercs {
             if (it is null) return null;
             return new MissionItem(it);
         }
+        public static MissionItem? TryGenerateRandomLegendaryArmour(Random rand, int diff, Race? rc) {
+            IItem? it = Utils.GenerateRandomLegendaryArmour(rand, diff, rc);
+            if (it is null) return null;
+            return new MissionItem(it);
+        }
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
         public override int GetHashCode() {

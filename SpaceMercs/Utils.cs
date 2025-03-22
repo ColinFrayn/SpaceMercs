@@ -410,7 +410,7 @@ namespace SpaceMercs {
         public static Dictionary<IItem, int> DismantleEquipment(IEquippable eq, int lvl, int count = 1) {
             Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
             Random rand = new Random();
-            double diff = ((double)eq.BaseType.BaseRarity / 2.0) + (double)eq.Level;
+            double diff = (5d + (double)(eq.BaseType.Requirements?.MinLevel ?? 1) / 2d) + (double)eq.Level;
             double fract = (double)lvl / diff;
             Dictionary<MaterialType, int> dMats = new (eq.BaseType.Materials);
             if (eq is Weapon wp && wp.Mod is not null) {
@@ -517,7 +517,7 @@ namespace SpaceMercs {
                 double best = 0.0;
                 ItemType? ibest = null;
                 foreach (ItemType it in StaticData.ItemTypes) {
-                    if (it.BaseRarity > lvl + 5) continue;
+                    if ((it.Requirements?.MinLevel ?? 0) + rnd.Next(3) > lvl) continue;
                     if (!it.CanBuild(race)) continue;
                     double r = rnd.NextDouble() * Math.Pow(it.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
@@ -530,12 +530,12 @@ namespace SpaceMercs {
             }
         }
 
-        public static Weapon? GenerateRandomWeapon(Random rnd, int Level, Race? race) {
+        public static Weapon? GenerateRandomWeapon(Random rnd, int SoldierLevel, Race? race) {
             List<WeaponType> wts = new List<WeaponType>();
             double trar = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
                 if (!tp.CanBuild(race)) continue;
-                if (tp.BaseRarity <= Level + 5 && tp.IsUsable) {
+                if ((tp.Requirements?.MinLevel ?? 1) <= SoldierLevel && tp.IsUsable) {
                     wts.Add(tp);
                     trar += tp.Rarity;
                 }
@@ -550,11 +550,11 @@ namespace SpaceMercs {
                 }
                 WeaponType tp = wts[pos];
                 if (tp != null) {
-                    int lvl = 0;
-                    if (Level > 1) {
-                        while (lvl < 4 && rnd.NextDouble() < 0.5 && tp.BaseRarity + (lvl * 4) <= (Level + 1)) lvl++;
+                    int wpLevel = 0;
+                    if (SoldierLevel > 2) {
+                        while (wpLevel < 3 && rnd.NextDouble() < 0.5 && (tp.Requirements?.MinLevel ?? 1) + (wpLevel * 3) <= SoldierLevel) wpLevel++;
                     }
-                    return new Weapon(tp, lvl);
+                    return new Weapon(tp, wpLevel);
                 }
             }
             return null;
@@ -584,7 +584,7 @@ namespace SpaceMercs {
                 }
             }
             if (wtChosen != null) {
-                if (missionLevel - (wtChosen.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4 && rnd.NextDouble() > 0.5) {
+                if (missionLevel - (wtChosen.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4) {
                     return new Weapon(wtChosen, 5); // Legendary
                 }
                 return new Weapon(wtChosen, 4); // Epic
@@ -623,6 +623,67 @@ namespace SpaceMercs {
             if (Level % 1 == 1 && rnd.NextDouble() < 0.3) ar.UpgradeArmour(race, Level);
 
             return ar;
+        }
+
+        public static Armour? GenerateRandomLegendaryArmour(Random rnd, int missionLevel, Race? race) {
+            // Choose between all armour pieces that are sufficiently strong
+            Dictionary<ArmourType, double> ats = new();
+            double totalWeight = 0.0;
+            foreach (ArmourType at in StaticData.ArmourTypes) {
+                if (!at.CanBuild(race)) continue;
+                int minLevel = (at.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
+                if (minLevel <= missionLevel) {
+                    double weight = 1.0;
+                    if (minLevel + 4 < missionLevel) weight /= (missionLevel - (minLevel + 4)); // Weaker armour is deprioritised
+                    weight *= (30 - at.Size); // Larger armour is rarer
+                    ats.Add(at, weight);
+                    totalWeight += weight;
+                }
+            }
+            if (ats.Count == 0) return null;
+            double rar = rnd.NextDouble() * totalWeight;
+            ArmourType? atChosen = null;
+            foreach (ArmourType at in ats.Keys) {
+                rar -= ats[at];
+                if (rar <= 0d) {
+                    atChosen = at;
+                    break;
+                }
+            }
+            if (atChosen is null) return null;
+
+            // Pick a material
+            Dictionary<MaterialType, double> mts = new();
+            totalWeight = 0.0;
+            foreach (MaterialType mat in StaticData.Materials) {
+                if (!mat.IsArmourMaterial) continue;
+                if (mat.MaxLevel < 4) continue;
+                if (mat.MaxLevel < atChosen.MinMatLvl) continue;
+                int minLevel = (mat.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
+                if (minLevel <= missionLevel) {
+                    double weight = 1.0;
+                    if (minLevel + 4 < missionLevel) weight /= (missionLevel - (minLevel + 4)); // Weaker matrials are deprioritised
+                    mts.Add(mat, weight);
+                    totalWeight += weight;
+                }
+            }
+            if (mts.Count == 0) return null;
+            rar = rnd.NextDouble() * totalWeight;
+            MaterialType? mtChosen = null;
+            foreach (MaterialType mt in mts.Keys) {
+                rar -= mts[mt];
+                if (rar <= 0d) {
+                    mtChosen = mt;
+                    break;
+                }
+            }
+            if (mtChosen is null) return null;
+
+            // Scale to level
+            if (missionLevel - (atChosen.Requirements?.MinLevel ?? 1) - Const.LegendaryItemLevelDiff >= 4 && mtChosen.MaxLevel >= 5) {
+                return new Armour(atChosen, mtChosen, 5); // Legendary
+            }
+            return new Armour(atChosen, mtChosen, 4); // Epic
         }
 
         public static string UtilitySkillToDesc(UtilitySkill sk) {

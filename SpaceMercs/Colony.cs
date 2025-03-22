@@ -293,7 +293,7 @@ namespace SpaceMercs {
         }
         private void PopulateMissions() {
             Random rand = new Random();
-            int total = BaseSize + rand.Next(4) + rand.Next(4) + 1;
+            int total = BaseSize + rand.Next(3) + rand.Next(3) + 2;
             if (HasBaseType(BaseType.Military)) total += 2;
             if (HasBaseType(BaseType.Research)) total++;
             if (total > Const.MaxColonyMissions) total = Const.MaxColonyMissions;
@@ -305,7 +305,7 @@ namespace SpaceMercs {
         }
         private void PopulateMercenaries() {
             Random rand = new Random();
-            int total = BaseSize + rand.Next(2) + rand.Next(2) + 1;
+            int total = BaseSize + BaseSize + rand.Next(2) + rand.Next(2) - 1;
             if (HasBaseType(BaseType.Military)) total += 4 + rand.Next(2) + rand.Next(2);
             if (HasBaseType(BaseType.Metropolis)) total += 2 + rand.Next(2) + rand.Next(2);
             if (total > Const.MaxColonyMercenaries) total = Const.MaxColonyMercenaries;
@@ -338,47 +338,48 @@ namespace SpaceMercs {
 
             // Add specific utility items
             foreach (ItemType eq in StaticData.ItemTypes.Where(it => it.CanBuild(Owner))) {
-                double rarity = eq.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
+                double rarity = eq.Rarity * BaseSize * (BaseSize + 1.0) / 100.0;
                 // Modify rarity by colony details & add this item if required
-                if (!HasBaseType(BaseType.Military)) rarity /= 2.0;
-                if (!HasBaseType(BaseType.Colony)) rarity /= 2.0;
-                if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
-                if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
-                AddItem(new Equipment(eq), rarity, days, rand);
+                if (!HasBaseType(BaseType.Military)) rarity /= 2d;
+                if (HasBaseType(BaseType.Metropolis)) rarity *= 2d;
+                if (HasBaseType(BaseType.Trading)) rarity = Math.Pow(rarity, 0.7d);
+                if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7d);
+                AddSuitableNumberOfItems(new Equipment(eq), rarity, days, rand);
             }
 
             // Now add all weapons
-            foreach (WeaponType wt in StaticData.WeaponTypes.Where(it => it.CanBuild(Owner))) {
+            foreach (WeaponType wt in StaticData.WeaponTypes.Where(it => it.CanBuild(Owner) && (it.Requirements?.MinLevel??1) < BaseSize*4)) {
                 if (!wt.IsUsable) continue;
-                for (int Level = 0; Level <= Math.Min(BaseSize, 3) ; Level++) {
+                for (int Level = 0; Level < Math.Min(BaseSize, 3) ; Level++) {
                     Weapon wp = new Weapon(wt, Level);
-                    double rarity = wp.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
+                    double rarity = wp.Rarity * BaseSize * (BaseSize + 1.0) / 100.0;
                     // Modify rarity by colony details & add this weapon if required
-                    if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
-                    if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
-                    if (HasBaseType(BaseType.Military)) rarity *= 2.0;
-                    if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
-                    AddItem(wp, rarity, days, rand);
+                    if (!HasBaseType(BaseType.Colony)) rarity /= 1.5d;
+                    if (HasBaseType(BaseType.Metropolis)) rarity *= 2d;
+                    if (!HasBaseType(BaseType.Military)) rarity /= 4d;
+                    if (HasBaseType(BaseType.Trading)) rarity = Math.Pow(rarity, 0.7d);
+                    if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7d);
+                    AddSuitableNumberOfItems(wp, rarity, days, rand);
                 }
             }
 
             // Now add all armour types
             int maxLev = BaseSize + 1;
             if (HasBaseType(BaseType.Trading)) maxLev++;
-            foreach (ArmourType atp in StaticData.ArmourTypes.Where(it => it.CanBuild(Owner))) {
-                foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner) && mat.MaxLevel <= maxLev)) {
+            foreach (ArmourType atp in StaticData.ArmourTypes.Where(it => it.CanBuild(Owner) && (it.Requirements?.MinLevel ?? 1) < BaseSize * 4)) {
+                foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner) && mat.MaxLevel <= maxLev && mat.MaxLevel <= BaseSize + 1)) {
                     if (!mat.IsArmourMaterial) continue;
                     if (mat.IsScavenged) continue;
                     if (mat.MaxLevel < atp.MinMatLvl) continue;
-                    for (int Level = 0; Level <= Math.Min(BaseSize, Math.Min(3, mat.MaxLevel)); Level++) {
+                    for (int Level = 0; Level < Math.Min(BaseSize, Math.Min(3, mat.MaxLevel)); Level++) {
                         Armour ar = new Armour(atp, mat, Level);
                         double rarity = ar.Rarity * (BaseSize + 1.0) * (BaseSize + 1.0) / 100.0;
                         // Modify rarity by colony details & add this armour if required
-                        if (!HasBaseType(BaseType.Colony)) rarity /= 1.5;
+                        if (!HasBaseType(BaseType.Military)) rarity /= 4d;
                         if (HasBaseType(BaseType.Metropolis)) rarity *= 2.0;
-                        if (HasBaseType(BaseType.Military)) rarity *= 2.0;
                         if (HasBaseType(BaseType.Research)) rarity = Math.Pow(rarity, 0.7);
-                        AddItem(ar, rarity, days, rand);
+                        if (HasBaseType(BaseType.Trading)) rarity = Math.Pow(rarity, 0.7d);
+                        AddSuitableNumberOfItems(ar, rarity, days, rand);
                     }
                 }
             }
@@ -393,10 +394,10 @@ namespace SpaceMercs {
             foreach (MaterialType mat in StaticData.Materials.Where(mat => mat.CanBuild(Owner))) {
                 if (mat.IsScavenged) continue;
                 double rarity = Math.Pow(mat.Rarity, rarityExponent);
-                AddItem(new Material(mat), rarity * matScale, days, rand);
+                AddSuitableNumberOfItems(new Material(mat), rarity * matScale, days, rand);
             }
         }
-        private void AddItem(IItem eq, double rarity, int days, Random rand) {
+        private void AddSuitableNumberOfItems(IItem eq, double rarity, int days, Random rand) {
             // Calculate how many we get
             int count = 0;
             for (int n = 0; n < days; n++) {

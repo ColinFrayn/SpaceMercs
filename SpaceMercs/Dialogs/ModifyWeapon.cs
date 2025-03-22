@@ -57,7 +57,7 @@
             lbDescription.Text = mod.Desc;
 
             // Chance of this modification working and not damaging the weapon
-            SuccessChance = 0.75 - 0.05 * (WeaponToModify.Level * 4 - (Skill1 + Skill2 + AIBoost * 2)) - 0.01 * WeaponToModify.BaseType.BaseRarity;
+            SuccessChance = 0.75 - 0.05 * (WeaponToModify.Level * 4 - (Skill1 + Skill2 + AIBoost * 2)) - 0.03 * (WeaponToModify.BaseType.Requirements?.MinLevel ?? 1);
             if (SuccessChance > 0.99) SuccessChance = 0.99;
             if (SuccessChance < 0.0) SuccessChance = 0.0;
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";

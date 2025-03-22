@@ -30,7 +30,7 @@
             lbName.Text = item.Name;
             lbQuality.Text = Utils.LevelToDescription(item.Level);
             lbNewQuality.Text = Utils.LevelToDescription(item.Level + 1);
-            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - (skill + aiboost)) - 0.005 * item.BaseType.BaseRarity;
+            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - (skill + aiboost)) - 0.015 * item.BaseType.Requirements?.MinLevel ?? 1;
             if (SuccessChance > 0.99) SuccessChance = 0.99;
             if (SuccessChance < 0.01) SuccessChance = 0.01;
             lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";

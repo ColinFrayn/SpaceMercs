@@ -297,9 +297,9 @@ namespace SpaceMercs {
             // Does it have a space hulk?
             SpaceHulk = null;
             if (Sector is not null) {
-                int maxDist = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
-                if (maxDist >= 2) {
-                    if (rnd.Next(8 + maxDist) == 1) {
+                int ring = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
+                if (ring >= 2) {
+                    if (rnd.Next(8 + ring) < 2) {
                         SpaceHulk = new SpaceHulk(this);
                     }
                 }

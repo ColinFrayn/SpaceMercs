@@ -114,6 +114,7 @@ namespace SpaceMercs {
                 return new Tuple<int, int>(count, total);
             }
         }
+        public bool IsLowestLevel => LevelID == ParentMission.LevelCount - 1;
 
         // Public access to entities sorted by type
         public IReadOnlyCollection<Creature> Creatures { get { return Entities.Keys.OfType<Creature>().ToList().AsReadOnly(); } }
@@ -1084,9 +1085,9 @@ namespace SpaceMercs {
             if (ParentMission.Goal == MissionGoal.Defend) return; // Start with an empty map
             // Who are we fighting against?
             Race? ra = ParentMission.RacialOpponent;
-            CreatureGroup primaryCG = ParentMission.PrimaryEnemy;
+            CreatureGroup primaryCG = ParentMission.GetPrimaryEnemyForLevel(LevelID);
             if (ra is not null && primaryCG is null) primaryCG = GenerateCreatureGroupForRacialOpponent(ra); // Happens in boarding missions
-            if (primaryCG is null) throw new Exception("Could not generate creature group for this Mission!");
+            if (primaryCG is null) throw new Exception("Could not generate primary creature group for this Mission!");
 
             // How big is this map, and how many creatures should it contain?
             int nFloorTiles = 0;
@@ -1108,8 +1109,11 @@ namespace SpaceMercs {
             int niter = 0;
             while (nLeft > 0 && niter < 500) {
                 CreatureGroup cg = primaryCG;
-                if (ParentMission.SecondaryEnemy is not null && LevelID > 0 && Entities.IsEmpty) {
-                    if (rand.Next(ParentMission.LevelCount + 2) < LevelID) cg = ParentMission.SecondaryEnemy;
+                // Randomly pick the secondary enemy increasingly as we go down below 1st level, unless it's the final level of a special mission
+                if (ParentMission.SecondaryEnemy is not null && LevelID > 0 && !Entities.IsEmpty) {
+                    if (!IsLowestLevel || (ParentMission.Type != MissionType.PrecursorRuins && ParentMission.Type != MissionType.SpaceHulk)) {
+                        if (rand.Next(ParentMission.LevelCount + 2) < LevelID) cg = ParentMission.SecondaryEnemy;
+                    }
                 }
                 double swarmFactor = 1d + (double)(cg == primaryCG ? ParentMission.SwarmLevel : 1) * 0.6d;
                 double quantityScale = cg.QuantityScale * swarmFactor;
@@ -1118,7 +1122,7 @@ namespace SpaceMercs {
                 dGroupSize *= quantityScale;
                 dGroupSize += rand.NextDouble() * Math.Min(3d, dGroups / 4d);
                 int iGroupSize = (int)dGroupSize;
-                if (Entities.Count == 0 && cg.HasBoss && (ParentMission.Diff > 3 || ParentMission.Goal == MissionGoal.KillBoss) && LevelID == ParentMission.LevelCount - 1) {
+                if (Entities.IsEmpty && cg.HasBoss && (ParentMission.Diff > 3 || ParentMission.Goal == MissionGoal.KillBoss) && IsLowestLevel) {
                     Creature? cr = cg.GenerateRandomBoss(ra, Diff, this); // Boss creatures are not reduced in strength because of swarm conditions
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
