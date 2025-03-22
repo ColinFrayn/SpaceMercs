@@ -2,28 +2,20 @@
 ToDo List
 -------------------------------------------------
 
-New calculation of enemy creature groups [TEST]
-
 Mission.SecondaryEnemy (when LevelCount > 1) [TEST]
 - Display on the mission board / scanner dialog?
 
-Review refilling of the Colony supplies, especially in smaller colonies
-- No expensive stuff, no exotic materials etc.
-
 Improve equipment for higher level mercs?
 
-Test run SpaceHulk mission (& keeping the core)
 Test run Precursor mission (& keeping the core)
 
 Precursor/SpaceHulk missions
 - Precursor: Test level type/size/sparseness changes at lower levels
-- Vary CreatureGroups at lower levels
-- Add demons at lower levels
 - Return Cores to Homeworlds for additional +relations. Where?
 
 Display when a weapon is recharging
 
-Need a way to generate more legendary missions and keep playing them. Maybe Space Hulks regenerate??
+Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
 ==================================================================================================================
 
@@ -33,16 +25,14 @@ Backburner : Features
 -------------------------------------------------
 
 Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
-
-Making Epic weapons takes a space hulk core. Legendary weapons requires a Precursor core?? Maybe?
+- Encumbrance now has quiet a few drawbacks; cost; bad in melee; Only one shot; 
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 
-What should attack skill do for an AoE weapon (grenade or cone)?
-
-Soldier shields do not recharge. Should they? Would it lead to wasting loads of time outside battles??
+What should attack skill do for an AoE weapon (grenade or cone), if anything?
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
+- Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 
 Race relations degrade over time? Or tend towards their base level?
 

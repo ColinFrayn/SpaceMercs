@@ -52,14 +52,13 @@ namespace SpaceMercs {
         }
 
         public static MissionItem GeneratePrecursorCore(int iDiff) {
-            MissionItem it = new MissionItem("Precursor Core", (double)iDiff, (double)iDiff * 150d);
+            MissionItem it = new MissionItem("Precursor Core", (double)iDiff, Math.Round(Math.Pow(1.31d, (double)iDiff) * 25d) * 10d);
             it.IsPrecursorCore = true;
             it.Level = iDiff;
             return it;
         }
-
         public static MissionItem GenerateSpaceHulkCore(int iDiff) {
-            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff, (double)iDiff * 80d);
+            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff, Math.Round(Math.Pow(1.3d, (double)iDiff) * 16d) * 10d);
             it.IsSpaceHulkCore = true;
             it.Level = iDiff;
             return it;

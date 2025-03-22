@@ -293,7 +293,7 @@ namespace SpaceMercs {
             // Entry/exit locations
             foreach (Point p in EntryLocations) DrawEntryLocation(prog, p);
             foreach (Point p in ExitLocations) {
-                if (LevelID == ParentMission.LevelCount - 1) {
+                if (IsLowestLevel) {
                     // This must be a Countdown mission. So this is not stairs down, but a target location.
                     DrawTargetLocation(prog, p);
                 }
@@ -609,7 +609,7 @@ namespace SpaceMercs {
             // Add goal item, if required
             if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact) {
                 if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
-                if (LevelID == ParentMission.LevelCount - 1) {
+                if (IsLowestLevel) {
                     InsertGoalItem(ParentMission.MItem);
                 }
             }
@@ -643,7 +643,7 @@ namespace SpaceMercs {
 
             // Modify size for special missions based on depth
             if (ParentMission.Type == MissionType.PrecursorRuins) {
-                if (LevelID == ParentMission.LevelCount - 1) {
+                if (IsLowestLevel) {
                     Width += 10;
                     Height += 10;
                 }
@@ -827,7 +827,7 @@ namespace SpaceMercs {
             } while (!bOK);
             SetupEntryLocations();
 
-            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount - 1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
+            if (!IsLowestLevel || (IsLowestLevel && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
                 int furthest = 0;
                 int sx2, sy2;
                 EndX = EndY = -1;
@@ -1473,7 +1473,7 @@ namespace SpaceMercs {
             StartY = rand.Next(Height - 8) + 4;
             SetupEntryLocations();
 
-            if (LevelID < ParentMission.LevelCount - 1 || (LevelID == ParentMission.LevelCount - 1 && ParentMission.Goal == Mission.MissionGoal.Countdown)) { // Add stairs down!
+            if (!IsLowestLevel || (IsLowestLevel && ParentMission.Goal == Mission.MissionGoal.Countdown)) { // Add stairs down!
                 int furthest = 0;
                 EndX = EndY = -1;
                 for (int i = 0; i < 30; i++) {
@@ -1510,7 +1510,7 @@ namespace SpaceMercs {
             }
 
             // Also start a tunnel from the stairs down, if there are any and they aren't already connected
-            if (LevelID == ParentMission.LevelCount - 1) return;
+            if (IsLowestLevel) return;
             if (Map[EndX - 1, EndY] == TileType.Floor || Map[EndX - 1, EndY + 1] == TileType.Floor) return; // Left passage
             if (Map[EndX, EndY - 1] == TileType.Floor || Map[EndX + 1, EndY - 1] == TileType.Floor) return; // Up passage
             if (Map[EndX + 2, EndY] == TileType.Floor || Map[EndX + 2, EndY + 1] == TileType.Floor) return; // Right passage

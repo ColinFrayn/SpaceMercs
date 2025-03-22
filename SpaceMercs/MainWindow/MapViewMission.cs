@@ -677,7 +677,7 @@ namespace SpaceMercs.MainWindow {
                 else gbTransition.UpdateText("Ascend to Level " + CurrentLevel.LevelID);  // LevelID starts at zero
             }
             else if (CurrentLevel.CheckAllSoldiersAtExit()) {
-                if (CurrentLevel.LevelID < CurrentLevel.ParentMission.LevelCount - 1) { // Can't be the bottom level (so we don't try to descend on the last level of a Countdown mission)
+                if (!CurrentLevel.IsLowestLevel) { // ...so we don't try to descend on the last level of a Countdown mission
                     gbTransition!.Activate();
                     gbTransition.UpdateText("Descend to Level " + (CurrentLevel.LevelID + 2));  // LevelID starts at zero
                 }
@@ -1638,6 +1638,7 @@ namespace SpaceMercs.MainWindow {
             if (bAIRunning) return;
             if (SelectedEntity is not Soldier ss) return;
             if (ss.Stamina < ss.SearchCost) return;
+            if (CurrentLevel.AlertedEnemies) msgBox.PopupMessage("You can't perform a thorough search while there are enemies aware of your presence!");
             List<string> lFound = ss.PerformActiveSearch(CurrentLevel);
             if (lFound.Count == 0) msgBox.PopupMessage("Despite a thorough search, you found nothing");
             else msgBox.PopupMessage(lFound);
@@ -1746,6 +1747,7 @@ namespace SpaceMercs.MainWindow {
             if (newlev >= ThisMission.LevelCount) throw new Exception("Attempting to transition to illegal level");
             CurrentLevel.RemoveAllSoldiers();
             ThisMission.SetCurrentLevel(newlev);
+            bool isFirstTime = ThisMission.GetLevel(newlev) == null;
             CurrentLevel = ThisMission.GetOrCreateCurrentLevel();
 
             // Redim the various maps
@@ -1761,6 +1763,15 @@ namespace SpaceMercs.MainWindow {
                 UpdateLevelAfterSoldierMove(s);
             }
             CentreView(ThisMission.Soldiers[0]);
+
+            if (ThisMission.LevelCount > 1 && CurrentLevel.IsLowestLevel && isFirstTime) {
+                if (ThisMission.Type == Mission.MissionType.PrecursorRuins) {
+                    msgBox.PopupMessage("You have reached the heart of the Precursor ruins.\nYou are sure that the precursor core must be nearby.\nThe feeling of pure evil fills the air. There are powerful creatures here!");
+                }
+                else if (ThisMission.Type == Mission.MissionType.SpaceHulk) {
+                    msgBox.PopupMessage("You have reached the central control system of this Space Hulk.\nThe memory core must be nearby.\nThe walls here appear covered witha slimy substance and dark shadows prowl around you.");
+                }
+            }
         }
         private void EndMission() {
             if (bAIRunning) return;
