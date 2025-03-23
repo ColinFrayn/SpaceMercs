@@ -207,7 +207,6 @@ namespace SpaceMercs {
         public double GetLocalPriceModifier() {
             return GetPriceModifier(CurrentPosition.GetSystem().Owner, CurrentPosition.GetSystem());
         }
-
         public int GetRelations(Race rc) {
             if (rc == null) return 0;
             int exp = Relations.ContainsKey(rc) ? Relations[rc] : rc.BaseAttitude;
@@ -458,6 +457,32 @@ namespace SpaceMercs {
                     }
                 }
                 return items;
+            }
+        }
+        public bool HasSpaceHulkCore {
+            get {
+                foreach (IItem it in Inventory.Keys) {
+                    if (it is MissionItem m && m.IsSpaceHulkCore) return true;
+                }
+                foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+                    foreach (IItem it in s.InventoryGrouped.Keys) {
+                        if (it is MissionItem m && m.IsSpaceHulkCore) return true;
+                    }
+                }
+                return false;
+            }
+        }
+        public bool HasPrecursorCore {
+            get {
+                foreach (IItem it in Inventory.Keys) {
+                    if (it is MissionItem m && m.IsPrecursorCore) return true;
+                }
+                foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+                    foreach (IItem it in s.InventoryGrouped.Keys) {
+                        if (it is MissionItem m && m.IsPrecursorCore) return true;
+                    }
+                }
+                return false;
             }
         }
 

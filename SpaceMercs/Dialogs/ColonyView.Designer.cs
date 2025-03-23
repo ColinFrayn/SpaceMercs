@@ -91,6 +91,21 @@
             dgcLocation = new DataGridViewTextBoxColumn();
             dgcValue = new DataGridViewTextBoxColumn();
             dgcAvail = new DataGridViewTextBoxColumn();
+            tpDiplomacy = new TabPage();
+            pbExperience = new PictureBox();
+            lbImproveRelations = new Label();
+            btPrecursorCore = new Button();
+            btSpaceHulkCore = new Button();
+            bt10k = new Button();
+            bt1000 = new Button();
+            label5 = new Label();
+            bt100 = new Button();
+            lbRelations = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            lbRaceName = new Label();
+            label16 = new Label();
+            lbDiplomacy = new Label();
             tpDetails = new TabPage();
             lbNextGrowth = new Label();
             label8 = new Label();
@@ -116,7 +131,6 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            lbImproveRelations = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -128,6 +142,8 @@
             ((System.ComponentModel.ISupportInitialize)dgShips).BeginInit();
             tpUpgrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgInventory).BeginInit();
+            tpDiplomacy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
             tpDetails.SuspendLayout();
             groupBox4.SuspendLayout();
             SuspendLayout();
@@ -139,6 +155,7 @@
             tcMain.Controls.Add(tpMissions);
             tcMain.Controls.Add(tpShips);
             tcMain.Controls.Add(tpUpgrade);
+            tcMain.Controls.Add(tpDiplomacy);
             tcMain.Controls.Add(tpDetails);
             tcMain.Dock = DockStyle.Fill;
             tcMain.Font = new Font("Microsoft Sans Serif", 12F);
@@ -887,6 +904,211 @@
             dgcAvail.ReadOnly = true;
             dgcAvail.Width = 67;
             // 
+            // tpDiplomacy
+            // 
+            tpDiplomacy.Controls.Add(pbExperience);
+            tpDiplomacy.Controls.Add(lbImproveRelations);
+            tpDiplomacy.Controls.Add(btPrecursorCore);
+            tpDiplomacy.Controls.Add(btSpaceHulkCore);
+            tpDiplomacy.Controls.Add(bt10k);
+            tpDiplomacy.Controls.Add(bt1000);
+            tpDiplomacy.Controls.Add(label5);
+            tpDiplomacy.Controls.Add(bt100);
+            tpDiplomacy.Controls.Add(lbRelations);
+            tpDiplomacy.Controls.Add(label12);
+            tpDiplomacy.Controls.Add(label13);
+            tpDiplomacy.Controls.Add(lbRaceName);
+            tpDiplomacy.Controls.Add(label16);
+            tpDiplomacy.Controls.Add(lbDiplomacy);
+            tpDiplomacy.Location = new Point(4, 29);
+            tpDiplomacy.Name = "tpDiplomacy";
+            tpDiplomacy.Size = new Size(636, 515);
+            tpDiplomacy.TabIndex = 6;
+            tpDiplomacy.Text = "Diplomacy";
+            tpDiplomacy.UseVisualStyleBackColor = true;
+            // 
+            // pbExperience
+            // 
+            pbExperience.BorderStyle = BorderStyle.FixedSingle;
+            pbExperience.Location = new Point(118, 209);
+            pbExperience.Margin = new Padding(4, 3, 4, 3);
+            pbExperience.Name = "pbExperience";
+            pbExperience.Size = new Size(400, 48);
+            pbExperience.TabIndex = 88;
+            pbExperience.TabStop = false;
+            pbExperience.Paint += pbExperience_Paint;
+            // 
+            // lbImproveRelations
+            // 
+            lbImproveRelations.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbImproveRelations.BorderStyle = BorderStyle.FixedSingle;
+            lbImproveRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbImproveRelations.ImageAlign = ContentAlignment.MiddleRight;
+            lbImproveRelations.Location = new Point(91, 249);
+            lbImproveRelations.Margin = new Padding(5);
+            lbImproveRelations.Name = "lbImproveRelations";
+            lbImproveRelations.Padding = new Padding(2);
+            lbImproveRelations.Size = new Size(462, 27);
+            lbImproveRelations.TabIndex = 18;
+            lbImproveRelations.Text = "You must increase relations with this race first!";
+            lbImproveRelations.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btPrecursorCore
+            // 
+            btPrecursorCore.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btPrecursorCore.Font = new Font("Microsoft Sans Serif", 12F);
+            btPrecursorCore.Location = new Point(339, 415);
+            btPrecursorCore.Margin = new Padding(4, 3, 4, 3);
+            btPrecursorCore.Name = "btPrecursorCore";
+            btPrecursorCore.Size = new Size(160, 36);
+            btPrecursorCore.TabIndex = 31;
+            btPrecursorCore.Text = "Precursor Core";
+            btPrecursorCore.UseVisualStyleBackColor = true;
+            btPrecursorCore.Click += btPrecursor_Click;
+            // 
+            // btSpaceHulkCore
+            // 
+            btSpaceHulkCore.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btSpaceHulkCore.Font = new Font("Microsoft Sans Serif", 12F);
+            btSpaceHulkCore.Location = new Point(138, 415);
+            btSpaceHulkCore.Margin = new Padding(4, 3, 4, 3);
+            btSpaceHulkCore.Name = "btSpaceHulkCore";
+            btSpaceHulkCore.Size = new Size(160, 36);
+            btSpaceHulkCore.TabIndex = 30;
+            btSpaceHulkCore.Text = "SpaceHulk Core";
+            btSpaceHulkCore.UseVisualStyleBackColor = true;
+            btSpaceHulkCore.Click += btSpaceHulk_Click;
+            // 
+            // bt10k
+            // 
+            bt10k.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            bt10k.Font = new Font("Microsoft Sans Serif", 12F);
+            bt10k.Location = new Point(415, 352);
+            bt10k.Margin = new Padding(4, 3, 4, 3);
+            bt10k.Name = "bt10k";
+            bt10k.Size = new Size(120, 36);
+            bt10k.TabIndex = 29;
+            bt10k.Text = "10,000 cr";
+            bt10k.UseVisualStyleBackColor = true;
+            bt10k.Click += bt10k_Click;
+            // 
+            // bt1000
+            // 
+            bt1000.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            bt1000.Font = new Font("Microsoft Sans Serif", 12F);
+            bt1000.Location = new Point(258, 352);
+            bt1000.Margin = new Padding(4, 3, 4, 3);
+            bt1000.Name = "bt1000";
+            bt1000.Size = new Size(120, 36);
+            bt1000.TabIndex = 28;
+            bt1000.Text = "1,000 cr";
+            bt1000.UseVisualStyleBackColor = true;
+            bt1000.Click += bt1000_Click;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label5.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label5.Location = new Point(258, 315);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(120, 24);
+            label5.TabIndex = 27;
+            label5.Text = "Make a Donation";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // bt100
+            // 
+            bt100.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            bt100.Font = new Font("Microsoft Sans Serif", 12F);
+            bt100.Location = new Point(101, 352);
+            bt100.Margin = new Padding(4, 3, 4, 3);
+            bt100.Name = "bt100";
+            bt100.Size = new Size(120, 36);
+            bt100.TabIndex = 26;
+            bt100.Text = "100 cr";
+            bt100.UseVisualStyleBackColor = true;
+            bt100.Click += bt100_Click;
+            // 
+            // lbRelations
+            // 
+            lbRelations.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbRelations.BorderStyle = BorderStyle.FixedSingle;
+            lbRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbRelations.ImageAlign = ContentAlignment.MiddleRight;
+            lbRelations.Location = new Point(294, 115);
+            lbRelations.Margin = new Padding(5);
+            lbRelations.Name = "lbRelations";
+            lbRelations.Padding = new Padding(2);
+            lbRelations.Size = new Size(186, 27);
+            lbRelations.TabIndex = 25;
+            lbRelations.Text = "Current Location";
+            lbRelations.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label12.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label12.ImageAlign = ContentAlignment.MiddleRight;
+            label12.Location = new Point(156, 117);
+            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(120, 24);
+            label12.TabIndex = 24;
+            label12.Text = "Current Status";
+            label12.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label13.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label13.Location = new Point(258, 170);
+            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(120, 24);
+            label13.TabIndex = 23;
+            label13.Text = "Progress";
+            label13.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbRaceName
+            // 
+            lbRaceName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbRaceName.BorderStyle = BorderStyle.FixedSingle;
+            lbRaceName.Font = new Font("Microsoft Sans Serif", 11.25F);
+            lbRaceName.ImageAlign = ContentAlignment.MiddleRight;
+            lbRaceName.Location = new Point(294, 78);
+            lbRaceName.Margin = new Padding(5);
+            lbRaceName.Name = "lbRaceName";
+            lbRaceName.Padding = new Padding(2);
+            lbRaceName.Size = new Size(186, 27);
+            lbRaceName.TabIndex = 22;
+            lbRaceName.Text = "Current Location";
+            lbRaceName.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            label16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label16.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label16.ImageAlign = ContentAlignment.MiddleRight;
+            label16.Location = new Point(156, 82);
+            label16.Margin = new Padding(4, 0, 4, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(120, 20);
+            label16.TabIndex = 21;
+            label16.Text = "Race";
+            label16.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lbDiplomacy
+            // 
+            lbDiplomacy.BorderStyle = BorderStyle.FixedSingle;
+            lbDiplomacy.Location = new Point(128, 12);
+            lbDiplomacy.Margin = new Padding(4, 0, 4, 0);
+            lbDiplomacy.Name = "lbDiplomacy";
+            lbDiplomacy.Size = new Size(379, 39);
+            lbDiplomacy.TabIndex = 1;
+            lbDiplomacy.Text = "Diplomatic Centre";
+            lbDiplomacy.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // tpDetails
             // 
             tpDetails.Controls.Add(lbNextGrowth);
@@ -1228,27 +1450,11 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // lbImproveRelations
-            // 
-            lbImproveRelations.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lbImproveRelations.BorderStyle = BorderStyle.FixedSingle;
-            lbImproveRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
-            lbImproveRelations.ImageAlign = ContentAlignment.MiddleRight;
-            lbImproveRelations.Location = new Point(91, 261);
-            lbImproveRelations.Margin = new Padding(5);
-            lbImproveRelations.Name = "lbImproveRelations";
-            lbImproveRelations.Padding = new Padding(2);
-            lbImproveRelations.Size = new Size(462, 27);
-            lbImproveRelations.TabIndex = 18;
-            lbImproveRelations.Text = "You must increase relations with this race first!";
-            lbImproveRelations.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(644, 548);
-            Controls.Add(lbImproveRelations);
             Controls.Add(tcMain);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Margin = new Padding(4, 3, 4, 3);
@@ -1271,6 +1477,8 @@
             tpUpgrade.ResumeLayout(false);
             tpUpgrade.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgInventory).EndInit();
+            tpDiplomacy.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbExperience).EndInit();
             tpDetails.ResumeLayout(false);
             tpDetails.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -1365,5 +1573,19 @@
         private Label lbOwner;
         private Label label15;
         private Label lbImproveRelations;
+        private TabPage tpDiplomacy;
+        private Label label5;
+        private Button bt100;
+        private Label lbRelations;
+        private Label label12;
+        private Label label13;
+        private Label lbRaceName;
+        private Label label16;
+        private Label lbDiplomacy;
+        private Button btPrecursorCore;
+        private Button btSpaceHulkCore;
+        private Button bt10k;
+        private Button bt1000;
+        private PictureBox pbExperience;
     }
 }

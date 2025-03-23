@@ -64,6 +64,9 @@
      <Compile Update="Dialogs\ModifyWeapon.cs">
        <SubType>Form</SubType>
      </Compile>
+     <Compile Update="Dialogs\ChooseCore.cs">
+       <SubType>Form</SubType>
+     </Compile>
    </ItemGroup>
 
   <ItemGroup>

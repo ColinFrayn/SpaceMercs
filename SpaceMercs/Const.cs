@@ -215,6 +215,8 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
+        public const int    PrecursorCoreExpScale = 150; // Exp per level for a precursor core
+        public const int    SpaceHulkCoreExpScale = 100; // Exp per level for a space hulk core
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony
