@@ -1,0 +1,170 @@
+﻿<Data>
+  <CreatureType Name="Hive Drone">
+    <LevelRange>5,20</LevelRange>
+    <Scale>0.9</Scale>
+    <Attack>13</Attack>
+    <Defence>12</Defence>
+    <Armour>22</Armour>
+    <Health>12</Health>
+    <Stamina>18</Stamina>
+    <Frequency>4</Frequency>
+    <Interact/>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A vicious hive drone</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.05">Chitin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Hive Soldier">
+    <Size>1</Size>
+    <Scale>1.1</Scale>
+    <LevelRange>6,21</LevelRange>
+    <Attack>17</Attack>
+    <Defence>14</Defence>
+    <Armour>28</Armour>
+    <Health>17</Health>
+    <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large and more vicious hive creature with sharp claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Barbed Claws</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Chitin</Item>
+      <Item Amount="0.05">Heavy Chitin</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Hive Spinebeast">
+    <Size>1</Size>
+    <Scale>1.1</Scale>
+    <LevelRange>6,21</LevelRange>
+    <Attack>17</Attack>
+    <Defence>13</Defence>
+    <Armour>18</Armour>
+    <Health>17</Health>
+    <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large hive creature covered with sharp spines that it can hurl at nearby enemies</Desc>
+    <Weapons>
+      <Weapon Weight="1">Throwing Spines</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Chitin</Item>
+      <Item Amount="0.05">Heavy Chitin</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Hive Poisoner">
+    <LevelRange>5,21</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Armour>21</Armour>
+    <Health>13</Health>
+    <Stamina>19</Stamina>
+    <Frequency>2</Frequency>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A vicious alien hive beast that emits a toxic cloud on death</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.1">Chitin</Item>
+    </Scavenge>
+    <OnDeathEffect Name="ToxicCloud">
+      <Radius>1.5</Radius>
+      <Effect>
+        <Damage Type="Poison">8</Damage>
+      </Effect>
+      <Effect Name="Poisoned">
+        <Duration>2</Duration>
+        <Damage Type="Poison">3</Damage>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+  </CreatureType>
+  <CreatureType Name="Hive Predator">
+    <Size>1</Size>
+    <Scale>1.2</Scale>
+    <LevelRange>7,22</LevelRange>
+    <Attack>19</Attack>
+    <Defence>14</Defence>
+    <Armour>26</Armour>
+    <Health>18</Health>
+    <Stamina>22</Stamina>
+    <Interact/>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large and vicious hive elite soldier</Desc>
+    <Weapons>
+      <Weapon Weight="1">Barbed Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.15">Chitin</Item>
+      <Item Amount="0.05">Heavy Chitin</Item>
+    </Scavenge>
+  </CreatureType>
+  <CreatureType Name="Hive Mother">
+    <Size>3</Size>
+    <LevelRange>9,23</LevelRange>
+    <Attack>25</Attack>
+    <Defence>13</Defence>
+    <Armour>33</Armour>
+    <Health>55</Health>
+    <Stamina>24</Stamina>
+    <Interact/>
+    <BodyType>HiveSpawn</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A huge bulbous, nightmarish mutant creature covered in spiny scales.</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Toxic Spit</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="2.0">Heavy Chitin</Item>
+      <Item Amount="1">Poison Gland</Item>      
+    </Scavenge>
+    <Boss/>
+  </CreatureType>
+</Data>
+

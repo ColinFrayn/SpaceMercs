@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public int SectorX { get; private set; }
         public int SectorY { get; private set; }
         public Map ParentMap { get; private set; }
+        public int Seed => ParentMap.MapSeed ^ ((SectorX* 85091) + (SectorY* 29527)) ^ ((SectorX* 34501) + (SectorY* 61819));
         VertexBuffer? tradeRoutesBuffer = null;
         VertexArray? tradeRoutesArray = null;
         public int MinSectorDist => Math.Max(Math.Abs(SectorX), Math.Abs(SectorY));
@@ -45,7 +46,7 @@ namespace SpaceMercs {
         public static Sector Empty { get { return new Sector(); } }
 
         private void Generate() {
-            int seed = ParentMap.MapSeed ^ ((SectorX * 85091) + (SectorY * 29527)) ^ ((SectorX * 34501) + (SectorY * 61819)); // Non-random seed; repeatable
+            int seed = Seed; // Non-random seed; repeatable
             Random rand = new Random(seed);
             // Setup the stars in this sector
             float yoffset = (float)(((SectorY * 2) - 1) * Const.SectorSize) / 2.0f;

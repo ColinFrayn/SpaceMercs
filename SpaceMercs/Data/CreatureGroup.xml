@@ -23,8 +23,9 @@
   </CreatureGroup>
   <CreatureGroup Name="Demons">
     <Filename>Demons.xml</Filename>
-    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,SpaceHulk</Locations>
-    <MinSectorRange>3</MinSectorRange>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice</Locations>
+    <MinSectorRange>999</MinSectorRange>
+    <QuantityScale>1.5</QuantityScale>
   </CreatureGroup>
   <CreatureGroup Name="Desert Creatures">
     <Filename>DesertCreatures.xml</Filename>
@@ -42,6 +43,11 @@
   </CreatureGroup>
   <CreatureGroup Name="Gremlins">
     <Filename>Gremlins.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Ship,SpaceHulk</Locations>
+    <QuantityScale>1.3</QuantityScale>
+  </CreatureGroup>
+  <CreatureGroup Name="Hive Spawn">
+    <Filename>HiveSpawn.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Ship,SpaceHulk</Locations>
     <QuantityScale>1.3</QuantityScale>
   </CreatureGroup>
@@ -95,6 +101,8 @@
   </CreatureGroup>
   <CreatureGroup Name="Xenomorphs">
     <Filename>Xenomorphs.xml</Filename>
-    <Locations>Ship,SpaceHulk</Locations>
+    <Locations>SpaceHulk</Locations>
+    <MinSectorRange>999</MinSectorRange>
+    <QuantityScale>1.5</QuantityScale>
   </CreatureGroup>
 </Data>

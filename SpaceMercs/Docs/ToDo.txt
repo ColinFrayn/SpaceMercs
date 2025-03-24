@@ -4,24 +4,12 @@ ToDo List
 
 Mission.SecondaryEnemy (when LevelID > 1) [TEST]
 
-Improve equipment for higher level mercs?
-
-Check freq of SpaceHulks
-
 Test run Precursor mission (& keeping the core)
-- Test freq of precursor planets
-
-Precursor/SpaceHulk missions
 - Precursor: Test level type/size/sparseness changes at lower levels
-- Return Cores to Homeworlds for additional +relations
--- Extra tab on homeworld for Diplomacy
---- See current relations and amount of exp required for next level
---- Sell cores
---- Purchase favour?
+
+Improve equipment for higher level mercs? (Not just single pieces)
 
 Display when a weapon is recharging
-
-Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
 ==================================================================================================================
 
@@ -29,6 +17,8 @@ Generate more legendary missions continuously somehow. Maybe Space Hulks regener
 -------------------------------------------------
 Backburner : Features
 -------------------------------------------------
+
+Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
 Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
 - Encumbrance now has quiet a few drawbacks; cost; bad in melee; Only one shot; 

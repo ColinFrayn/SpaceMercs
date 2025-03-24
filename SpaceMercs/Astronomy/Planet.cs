@@ -13,7 +13,25 @@ namespace SpaceMercs {
         public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
         public bool IsHomeworld { get; private set; }
-        public bool IsPrecursor { get; private set; }
+        public bool IsPrecursor {
+            get {
+                // Is this a precursor location?
+                if (Parent is not Star star) return false; // ??
+                Sector sector = star.Sector;
+                int ring = Math.Max(Math.Abs(sector.SectorX), Math.Abs(sector.SectorY));
+                // Needs to be in third ring or further.
+                if (ring >= 3) {
+                    // Suitable planet type
+                    if (Type is not PlanetType.Gas && BaseTemp >= 180 && BaseTemp <= 400) {
+                        if (star.IsStableMainSequence()) {
+                            // Use Star Seed & planet ID to get a more predictable but repeatable fraction of precursor locations
+                            return (star.Seed + this.ID) % 5 == 0;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
 
         public Planet() {
             Parent = Star.Empty;
@@ -31,7 +49,6 @@ namespace SpaceMercs {
         public Planet(XmlNode xml, Star parent) : base(xml, parent) {
             BaseTemp = xml.SelectNodeDouble("TempBase");
             IsHomeworld = (xml.SelectSingleNode("Homeworld") is not null);
-            IsPrecursor = (xml.SelectSingleNode("Precursor") is not null);
             Moons = new List<Moon>();
             XmlNode? xmlMoons = xml.SelectSingleNode("Moons");
             if (IsHomeworld) {
@@ -81,7 +98,6 @@ namespace SpaceMercs {
             base.SaveToFile(file, clock);
             // Write planet details to file
             if (IsHomeworld) file.WriteLine("<Homeworld/>");
-            if (IsPrecursor) file.WriteLine("<Precursor/>");
             file.WriteLine($"<TempBase>{BaseTemp}</TempBase>");
             // Now write out any moons necessary
             bool writeMoons = false;
@@ -163,20 +179,6 @@ namespace SpaceMercs {
             // Axial rotation period (i.e. a day length)
             double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
             AxialRotationPeriod = (int)(arot * (Radius / Const.PlanetSize));
-
-            // Is this a precursor location? Needs to be in third ring or further.
-            Star star = GetSystem();
-            Sector sector = star.Sector;
-            int ring = Math.Max(Math.Abs(sector.SectorX), Math.Abs(sector.SectorY));
-            if (ring > 2) {
-                if (Type is not PlanetType.Gas && BaseTemp >= 180 && BaseTemp <= 400) {
-                    if (star.IsStableMainSequence()) {
-                        if (rnd.Next(10) + ring >= 8) {
-                            IsPrecursor = true;
-                        }
-                    }
-                }
-            }
 
             GenerateMoons(GetSystem().Sector.ParentMap.PlanetDensity);
         }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public class MissionItem : IItem {
@@ -11,11 +12,17 @@ namespace SpaceMercs {
         private readonly string _name;
         public string Description { get { return Name; } }
         public double Mass { get; private set; }
-        public double Cost { get; private set; }
         public int Level { get; private set; }
         public IItem? LegendaryItem { get; private set; }
         public bool IsPrecursorCore { get; private set; }
         public bool IsSpaceHulkCore { get; private set; }
+        public double Cost {
+            get {
+                if (IsPrecursorCore) return Math.Round(Math.Pow(1.31d, (double)Level) * 25d) * 10d;
+                if (IsSpaceHulkCore) return Math.Round(Math.Pow(1.31d, (double)Level) * 16d) * 10d;
+                return Math.Pow(1.25, Level - 1) * 3.75d;
+            }
+        }
 
         private static readonly string[] ItemTypes = new string[] { "Egg", "Diamond", "Emerald", "Geode", "Bone", "Skull", "Crystal", "Ruby", "Statue", "Medal", "Device" };
         private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine" };
@@ -24,10 +31,9 @@ namespace SpaceMercs {
         private static readonly string[] ObjectiveAdjectives = new string[] { "historically significant", "potentially valuable", "fascinating", "strategically important", "mysterious", "delicate", "scientifically interesting", "large", "key" };
         private static readonly string[] ObjectiveTypes = new string[] { "structure", "crystal formation", "geologic area", "relic", "mineral deposit", "fossil deposit", "alien artefact" };
 
-        public MissionItem(string strName, double mass, double cost) {
+        public MissionItem(string strName, double mass) {
             _name = strName;
             Mass = mass;
-            Cost = cost;
         }
         public MissionItem(IItem item) {
             LegendaryItem = item;
@@ -35,7 +41,6 @@ namespace SpaceMercs {
         public MissionItem(XmlNode xml) {
             if (xml is null) throw new Exception("Null Mission");
             Mass = xml.GetAttributeDouble("Mass");
-            Cost = xml.GetAttributeDouble("Cost");
             Level = xml.GetAttributeInt("Level", 0);
             IsPrecursorCore = xml.SelectSingleNode("Precursor") != null;
             IsSpaceHulkCore = xml.SelectSingleNode("Hulk") != null;
@@ -52,13 +57,13 @@ namespace SpaceMercs {
         }
 
         public static MissionItem GeneratePrecursorCore(int iDiff) {
-            MissionItem it = new MissionItem("Precursor Core", (double)iDiff, Math.Round(Math.Pow(1.31d, (double)iDiff) * 25d) * 10d);
+            MissionItem it = new MissionItem("Precursor Core", (double)iDiff);
             it.IsPrecursorCore = true;
             it.Level = iDiff;
             return it;
         }
         public static MissionItem GenerateSpaceHulkCore(int iDiff) {
-            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff, Math.Round(Math.Pow(1.3d, (double)iDiff) * 16d) * 10d);
+            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff);
             it.IsSpaceHulkCore = true;
             it.Level = iDiff;
             return it;
@@ -66,10 +71,10 @@ namespace SpaceMercs {
 
         public void SaveToFile(StreamWriter file) {
             if (Level > 0) {
-                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\" Level=\"{Level}\">");
+                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Name=\"{Name}\" Level=\"{Level}\">");
             }
             else {
-                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Cost=\"{Cost:N2}\" Name=\"{Name}\">");
+                file.Write($"<MissionItem Mass=\"{Mass:N2}\" Name=\"{Name}\">");
             }
             if (LegendaryItem is not null) {
                 file.WriteLine();
@@ -84,18 +89,16 @@ namespace SpaceMercs {
         public static MissionItem GenerateRandomGoalItem(int diff, Random rand) {
             string strName = GoalAdjectives[rand.Next(GoalAdjectives.Length)] + " " + GatherAdjectives[rand.Next(GatherAdjectives.Length)] + " " + ItemTypes[rand.Next(ItemTypes.Length)];
             double m = 3d + (rand.NextDouble() * 2d);
-            double c = 2d + (5d + rand.NextDouble()) * Math.Pow(1.25d, diff - 1d) * 10d;
-            return new MissionItem(strName, m, c);
+            return new MissionItem(strName, m);
         }
         public static MissionItem GenerateRandomGatherItem(int diff, Random rand) {
             string strName = GatherAdjectives[rand.Next(GatherAdjectives.Length)] + " " + ItemTypes[rand.Next(ItemTypes.Length)];
             double m = 0.8 + (rand.Next(10) / 10.0);
-            double c = (2.0 + rand.NextDouble()) * Math.Pow(1.25, diff - 1) * 1.5;
-            return new MissionItem(strName, m, c);
+            return new MissionItem(strName, m);
         }
         public static MissionItem GenerateRandomDefendItem(Random rand) {
             string strName = $"{ObjectiveAdjectives[rand.Next(ObjectiveAdjectives.Length)]} {ObjectiveTypes[rand.Next(ObjectiveTypes.Length)]}";
-            return new MissionItem(strName, 0.0, 0.0);
+            return new MissionItem(strName, 0.0);
         }
         public static MissionItem? TryGenerateRandomLegendaryWeapon(Random rand, int diff, Race? rc) {
             IItem? it = Utils.GenerateRandomLegendaryWeapon(rand, diff, rc);

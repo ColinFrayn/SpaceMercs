@@ -1065,10 +1065,38 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Toxic Spit">
+    <Speed>14</Speed>
+    <Range DropOff="0.5" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.0">10</Range>
+    <Damage>6+6</Damage>
+    <Type>Poison</Type>
+    <Sound>Spore</Sound>
+    <ItemEffect Name="Poisoned">
+      <Effect Name="Poisoned">
+        <Duration>3</Duration>
+        <StatMods>
+          <Mod Stat="Strength">-1</Mod>
+        </StatMods>
+        <SpeedMod>0.9</SpeedMod>
+        <Damage Type="Poison">4</Damage>
+      </Effect>
+    </ItemEffect>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Throwing Spines">
+    <Speed>12</Speed>
+    <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.2">10</Range>
+    <Damage>4+3</Damage>
+    <Sound>Crossbow</Sound>
+    <Shots>2</Shots>
+    <Recoil>0.5</Recoil>
+    <Delay>220</Delay>
+    <Hidden/>
+  </WeaponType>
   <WeaponType Name="Xenoblades">
     <Speed>10</Speed>
     <Range>1</Range>
-    <Damage>5+5</Damage>
+    <Damage>6+5</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>

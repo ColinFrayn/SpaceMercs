@@ -32,7 +32,7 @@
     <Requirements>
       <MinLevel>2</MinLevel>
       <MinPop>20</MinPop>
-      <CashCost>10</CashCost>
+      <CashCost>60</CashCost>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Workshop</Facility>
@@ -49,7 +49,7 @@
     <Requirements>
       <MinLevel>4</MinLevel>
       <MinPop>22</MinPop>
-      <CashCost>20</CashCost>
+      <CashCost>120</CashCost>
       <Material Name="Titanium" Amount="1"/>
       <Material Name="Steel" Amount="2"/>
       <Relations Name="Gokan">0</Relations>
@@ -58,14 +58,14 @@
     <Desc>Metasteel is a meta-material made by quantum-engineering steel to significantly increase its strength and durability.</Desc>
   </MaterialType>
   <MaterialType Name="Nanomesh">
-    <MassMod>0.7</MassMod>
+    <MassMod>0.65</MassMod>
     <UnitCost>25.0</UnitCost>
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.03</Rarity>
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinPop>36</MinPop>
-      <CashCost>20</CashCost>
+      <CashCost>200</CashCost>
       <Material Name="Metasteel" Amount="2"/>
       <Material Name="Carbon Fibre" Amount="2"/>
       <Facility>Workshop</Facility>
@@ -75,12 +75,12 @@
   <MaterialType Name="Mithril">
     <MassMod>0.85</MassMod>
     <UnitCost>35.0</UnitCost>
-    <ArmourMod>1.8</ArmourMod>
+    <ArmourMod>1.7</ArmourMod>
     <Rarity>0.01</Rarity>
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinPop>40</MinPop>
-      <CashCost>30</CashCost>
+      <CashCost>300</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Metasteel" Amount="2"/>
       <Relations Name="Gokan">1</Relations>
@@ -89,14 +89,14 @@
     <Desc>Mithril is an advanced alloy with exceptionally high strength and relatively low density.</Desc>
   </MaterialType>
   <MaterialType Name="Adamantium">
-    <MassMod>1.2</MassMod>
+    <MassMod>1.25</MassMod>
     <UnitCost>75.0</UnitCost>
     <ArmourMod>2.1</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
       <MinLevel>10</MinLevel>
       <MinPop>50</MinPop>
-      <CashCost>250</CashCost>
+      <CashCost>850</CashCost>
       <Material Name="Metasteel" Amount="2"/>
       <Material Name="Mithril" Amount="2"/>
       <Relations Name="Gokan">2</Relations>
@@ -105,19 +105,19 @@
     <Desc>Adamantium is a weighty but highly resistant nano-engineered metallic substance.</Desc>
   </MaterialType>
   <MaterialType Name="Etherealite">
-    <MassMod>0.35</MassMod>
+    <MassMod>0.5</MassMod>
     <UnitCost>80.0</UnitCost>
     <ArmourMod>1.75</ArmourMod>
     <Rarity>0.005</Rarity>
     <Requirements>
       <MinLevel>12</MinLevel>
       <MinPop>60</MinPop>
-      <CashCost>375</CashCost>
+      <CashCost>1675</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Nanosilk" Amount="2"/>
       <Material Name="Adamantium" Amount="2"/>
       <Relations Name="Gokan">3</Relations>
-      <Relations Name="Insectoid">1</Relations>
+      <Relations Name="Insectoid">2</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
     <Desc>Etherealite is made from graphene-reinforced carbon nanotubes, merged with ultra-strong quantum-engineered aerogel to give high strength and superbly low density.</Desc>
@@ -130,9 +130,11 @@
     <Requirements>
       <MinLevel>14</MinLevel>
       <MinPop>70</MinPop>
-      <CashCost>600</CashCost>
+      <CashCost>2800</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Adamantium" Amount="2"/>
+      <Relations Name="Gokan">3</Relations>
+      <Relations Name="Ursalon">3</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>

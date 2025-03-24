@@ -473,7 +473,7 @@ namespace SpaceMercs {
         }
 
         public static double ArmourReduction(double ar) {
-            return Math.Pow(0.5, ar / Const.ArmourScale);
+            return Math.Pow(Const.ArmourReductionBase, Math.Pow(ar / Const.ArmourReductionExponentialScale, Const.ArmourReductionSecondExponent));
         }
 
         public static int GenerateDroppedItemLevel(int lev, bool boss) {

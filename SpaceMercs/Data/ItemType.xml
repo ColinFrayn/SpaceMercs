@@ -545,14 +545,14 @@
     <Cost>1200</Cost>
     <Rarity>26</Rarity>
     <StaminaCost>19</StaminaCost>
-    <Desc>A portable teleporter unit that can displace a sufficiently-lightly-encumbered Soldier a small distanct.</Desc>
+    <Desc>A portable teleporter unit that can displace a lightly-encumbered Soldier a small distance.</Desc>
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>60</MinPop>
       <CashCost>180</CashCost>
-      <Relations Name="Elithiri">2</Relations>
-      <Relations Name="Grey">1</Relations>
+      <Relations Name="Elithiri">3</Relations>
+      <Relations Name="Grey">2</Relations>
       <Facility>Workshop</Facility>
     </Requirements>
     <ItemEffect Name="Teleport">
@@ -572,5 +572,4 @@
     <Source>Workshop</Source>
     <Tex>3,4</Tex>
   </ItemType>
-
 </Data>

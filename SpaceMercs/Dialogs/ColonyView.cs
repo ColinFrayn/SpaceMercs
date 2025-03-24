@@ -646,8 +646,7 @@ namespace SpaceMercs.Dialogs {
                 case 2: SetupMissionsTab(); break;
                 case 3: SetupShipsTab(); break;
                 case 4: SetupFoundryTab(); break;
-                case 5: break;
-                default: throw new NotImplementedException();
+                default: break; // Diplomacy or colony view
             }
         }
 
@@ -755,7 +754,7 @@ namespace SpaceMercs.Dialogs {
 
         // Diplomacy screen if Homeworld:
         private void DonateCash(int amount) {
-            int exp = amount / 2;
+            int exp = (int)((double)amount * Const.CashRelationsFactor);
             PlayerTeam.ImproveRelations(colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
             PlayerTeam.Cash -= amount;
             SetupDiplomacyTab();

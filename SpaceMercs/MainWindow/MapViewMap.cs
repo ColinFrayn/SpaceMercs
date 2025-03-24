@@ -15,10 +15,10 @@ namespace SpaceMercs.MainWindow {
         // Display the galaxy map on the screen
         private void DrawMap() {
             // What are the extents of the map that we can show here?
-            int cx = (int)Math.Floor(fMapViewX / (double)(Const.SectorSize));
-            int cy = (int)Math.Floor(fMapViewY / (double)(Const.SectorSize));
-            int cwx = (int)Math.Floor(fMapViewZ / (double)(Const.SectorSize) * 2.5);
-            int cwy = (int)Math.Floor(fMapViewZ / (double)(Const.SectorSize) * 3.5);
+            int cx = (int)Math.Floor(fMapViewX / (double)Const.SectorSize);
+            int cy = (int)Math.Floor(fMapViewY / (double)Const.SectorSize);
+            int cwx = (int)Math.Floor(fMapViewZ / (double)Const.SectorSize * 2.5);
+            int cwy = (int)Math.Floor(fMapViewZ / (double)Const.SectorSize * 1.5);
             MinSectorX = cx - cwx;
             MaxSectorX = cx + cwx;
             MinSectorY = cy - cwy;

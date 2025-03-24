@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
@@ -308,7 +309,7 @@ namespace SpaceMercs {
             m.Location = cl.Location;
             if (m.Type == MissionType.BoardingParty) {
                 m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
@@ -317,7 +318,7 @@ namespace SpaceMercs {
             else {
                 if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 // Set mission goal
                 Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
                 m.Goal = mgtp.Item1;
@@ -345,7 +346,7 @@ namespace SpaceMercs {
                 if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = loc.GetRandomRace(rand);
             }
-            if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             if (m.Size < 1) m.Size = 1;
 
@@ -363,12 +364,12 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
+            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
-            m.Size = 3 + (maxDist > 2 ? 1 : 0);
-            m.LevelCount = 3 + maxDist + rand.Next(2);
+            m.Size = 3 + (maxDist >= 4 ? 1 : 0);
+            m.LevelCount = 3 + maxDist;
             m.Goal = MissionGoal.FindItem;
             m.MItem = MissionItem.GeneratePrecursorCore(iDiff);
             m.InitialiseMissionBasedOnGoal(rand);
@@ -381,12 +382,12 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
+            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
-            m.Size = 3 + (maxDist > 2 ? 1 : 0);
-            m.LevelCount = 2 + maxDist + rand.Next(2);
+            m.Size = 3 + (maxDist >= 3 ? 1 : 0);
+            m.LevelCount = 2 + maxDist;
             m.Goal = MissionGoal.FindItem;
             m.MItem = MissionItem.GenerateSpaceHulkCore(iDiff);
             // Ship map used for top level
@@ -401,20 +402,20 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
-            m.Size = 3 + (maxDist > 2 ? 1 : 0);
-            m.LevelCount = 2 + maxDist + rand.Next(2);
+            m.Size = 3 + (maxDist >= 4 ? 1 : 0);
+            m.LevelCount = 3 + maxDist;
 
-            // Set mission goal
+            // Set mission goal - a better artifact than would otherwise be available for this diff.
             m.Goal = MissionGoal.Artifact;
             if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
-                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 2, m.RacialOpponent);
             }
             else {
-                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1, m.RacialOpponent);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 2, m.RacialOpponent);
             }
             if (m.MItem is null) return null;
 
@@ -430,12 +431,12 @@ namespace SpaceMercs {
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            if (!m.SetPrimaryEnemy(rand)) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
-            m.Size = 3 + (maxDist > 2 ? 1 : 0);
-            m.LevelCount = 1 + maxDist + rand.Next(2);
+            m.Size = 3 + (maxDist >= 3 ? 1 : 0);
+            m.LevelCount = 2 + maxDist;
 
             // Set mission goal
             m.Goal = MissionGoal.Artifact;
@@ -520,7 +521,7 @@ namespace SpaceMercs {
             if (minSectorDist < cg.MinSectorRange) return false; // Cannot have some creatures in inner sectors
             return true;
         }
-        private bool SetPrimaryEnemy(Random rand) {
+        private bool SetPrimaryEnemy() {
             double dTotalScore = 0.0;
 
             // If opponent race is null (i.e. a creature group of some type) then get a non-racial enemy
@@ -529,7 +530,7 @@ namespace SpaceMercs {
                 if (!CanChooseCreatureGroup(cg)) continue;
                 // Consider swarm levels
                 for (int swarm = 0; swarm <= 2; swarm++) {
-                    if (swarm > 0 && 40 + swarm * 20 > rand.Next(100)) continue; // Swarms are fairly rare
+                    if (swarm > 0 && 40 + swarm * 20 > RandomNumberGenerator.GetInt32(100)) continue; // Swarms are fairly rare
                     if (swarm > 0 && cg.QuantityScale < 1.0) continue; // Swarms only happen with creatures that are fairly populous
                     if (swarm > 0 && Diff < 4 + swarm * 2) continue; // Swarms are mid-high level events
 
@@ -559,11 +560,14 @@ namespace SpaceMercs {
             if (dScores.Count == 0) throw new Exception("Could not find any suitable creatures!");
 
             // Now pick a creature group biased by the scores
-            double r = rand.NextDouble() * dTotalScore;
+            // mess around here a bit to use a better rng
+            int iTotalScore = (int)(dTotalScore * 1000d);
+            double r = (double)RandomNumberGenerator.GetInt32(iTotalScore) / 1000d;
             foreach ((CreatureGroup cg, int swarm) in dScores.Keys) {
                 if (r < dScores[(cg, swarm)]) {
                     PrimaryEnemy = cg;
                     SwarmLevel = swarm;
+                    break;
                 }
                 r -= dScores[(cg, swarm)];
             }
@@ -571,7 +575,7 @@ namespace SpaceMercs {
 
             // Optional secondary creature group
             if (LevelCount > 1 && Diff > 5) {
-                if (LevelCount > rand.Next(5) || Type == MissionType.PrecursorRuins || Type == MissionType.SpaceHulk) {
+                if (LevelCount > RandomNumberGenerator.GetInt32(5) || Type == MissionType.PrecursorRuins || Type == MissionType.SpaceHulk) {
                     Dictionary<CreatureGroup, double> dScores2 = new();
                     dTotalScore = 0d;
                     foreach (CreatureGroup cg in StaticData.CreatureGroups) {
@@ -593,7 +597,8 @@ namespace SpaceMercs {
 
                     // Now pick a secondary creature group biased by the scores
                     if (dScores.Any()) {
-                        double r2 = rand.NextDouble() * dTotalScore;
+                        iTotalScore = (int)(dTotalScore * 1000d);
+                        double r2 = (double)RandomNumberGenerator.GetInt32(iTotalScore) / 1000d;
                         foreach (CreatureGroup cg in dScores2.Keys) {
                             if (r < dScores2[cg]) {
                                 if (cg != PrimaryEnemy) SecondaryEnemy = cg;

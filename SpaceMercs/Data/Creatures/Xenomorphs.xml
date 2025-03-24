@@ -1,6 +1,6 @@
 ﻿<Data>
-  <CreatureType Name="Xenomorph">
-    <LevelRange>5,14</LevelRange>
+  <CreatureType Name="Xenomorph Spawn">
+    <LevelRange>5,20</LevelRange>
     <Attack>14</Attack>
     <Defence>12</Defence>
     <Armour>22</Armour>
@@ -26,7 +26,7 @@
   <CreatureType Name="Xenomorph Soldier">
     <Size>1</Size>
     <Scale>1.2</Scale>
-    <LevelRange>6,15</LevelRange>
+    <LevelRange>6,21</LevelRange>
     <Attack>17</Attack>
     <Defence>14</Defence>
     <Armour>28</Armour>
@@ -40,7 +40,7 @@
     <Col3>80, 80, 80</Col3>
     <Desc>A large and more vicious Alien</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Barbed Claws</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Acid" Value="50"/>
@@ -52,7 +52,7 @@
     </Scavenge>
   </CreatureType>
   <CreatureType Name="Xenomorph Burster">
-    <LevelRange>5,14</LevelRange>
+    <LevelRange>5,21</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
     <Armour>21</Armour>
@@ -76,7 +76,7 @@
     <OnDeathEffect Name="AcidSplash">
       <Radius>1.5</Radius>
       <Effect>
-        <Damage Type="Acid">6</Damage>
+        <Damage Type="Acid">10</Damage>
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>2</Duration>
@@ -88,7 +88,7 @@
   </CreatureType>
   <CreatureType Name="Xenomorph Scythebeast">
     <Size>2</Size>
-    <LevelRange>7,16</LevelRange>
+    <LevelRange>7,22</LevelRange>
     <Attack>19</Attack>
     <Defence>14</Defence>
     <Armour>30</Armour>
@@ -114,8 +114,8 @@
   </CreatureType>
   <CreatureType Name="Xenomorph Queen">
     <Size>2</Size>
-    <LevelRange>9,17</LevelRange>
-    <Attack>24</Attack>
+    <LevelRange>9,23</LevelRange>
+    <Attack>25</Attack>
     <Defence>13</Defence>
     <Armour>33</Armour>
     <Health>55</Health>

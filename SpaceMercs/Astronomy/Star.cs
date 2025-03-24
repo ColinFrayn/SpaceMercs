@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
-using System.Windows;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -299,7 +298,8 @@ namespace SpaceMercs {
             if (Sector is not null) {
                 int ring = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
                 if (ring >= 2) {
-                    if (rnd.Next(8 + ring) < 2) {
+                    // Use Star ID & sector Seed to get a more predictable but repeatable fraction of hulks
+                    if ((ID + Sector.Seed) % (2 + ring) == 0) { 
                         SpaceHulk = new SpaceHulk(this);
                     }
                 }

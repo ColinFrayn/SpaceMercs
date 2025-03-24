@@ -148,7 +148,9 @@ namespace SpaceMercs {
         public const double MinStarDistance = 1.0; // Light years
 
         // Combat settings
-        public const double ArmourScale = 30.0; // Log scale for armour power reduction. The higher this is, the less effective armour is at mitigating damage.
+        public const double ArmourReductionBase = 0.4; // Base of the armour reduction exponent calculation
+        public const double ArmourReductionExponentialScale = 45.0; // Log scale for armour power reduction. The higher this is, the less effective armour is at mitigating damage.
+        public const double ArmourReductionSecondExponent = 0.9; // Second exponent to make the armour reduction improve less quickly at larger values.
         public const double CreatureMeleeDamageScale = 0.45;  // The higher this is, the more damage creatures do when attacking in melee without a weapon
         public const double CreatureLevelAttackScale = 0.09;  // %age growth in creature attack each level (over base)
         public const double CreatureLevelAttackStep = 1.0;  // Absolute growth in creature attack each level
@@ -215,8 +217,9 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
-        public const int    PrecursorCoreExpScale = 150; // Exp per level for a precursor core
-        public const int    SpaceHulkCoreExpScale = 100; // Exp per level for a space hulk core
+        public const double CashRelationsFactor = 0.25; // Exp per credit donated
+        public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
+        public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony
