@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 
@@ -179,37 +180,42 @@ namespace SpaceMercs {
 
             return cost;
         }
-        public void UpgradeArmour(Race? rc, int entityLevel) {
+        public bool UpgradeArmour(Race? rc, int entityLevel) {
             // Upgrade Level, Material or Type
-            Random rnd = new Random();
-            double r = rnd.NextDouble();
-            if (r < 0.2) {
-                if (Level < 3 && entityLevel > 2 && Level * 2 < entityLevel) Level++;
-                return;
+            int r = RandomNumberGenerator.GetInt32(100);
+            if (r < 18) {
+                if (Level < 3 && entityLevel > 2 && Level * 2 < entityLevel) {
+                    Level++;
+                    return true;
+                }
+                else return false;
             }
-            else if (r < 0.85) { // Upgrade mats, if possible
+            else if (r < 75) { // Upgrade mats, if possible
                 MaterialType? matNew = null;
                 // Pick the next best material
                 foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc) && m.ArmourMod > 0)) {
-                    if (mat2.IsScavenged || !mat2.IsArmourMaterial) continue;
+                    if (mat2.IsScavenged || !mat2.IsArmourMaterial || mat2 == Material) continue; // Not usable
+                    if (mat2.UnitCost < Material.UnitCost) continue; // not better
                     // Is this material better (more valuable) and the cheapest such upgrade possible?
-                    if (mat2.UnitCost > Material.UnitCost && (matNew is null || mat2.UnitCost <= matNew.UnitCost)) {
+                    if (matNew is null || mat2.UnitCost <= matNew.UnitCost) {
                         matNew = mat2;
                     }
                 }
-                Material = matNew ?? Material;
-                return;
+                if (matNew is null) return false;
+                Material = matNew;
+                return true;
             }
             else { // Upgrade type, if possible
                 ArmourType atnew = Type;
                 foreach (ArmourType at2 in StaticData.ArmourTypes) {
                     if (!at2.CanBuild(rc)) continue;
-                    if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && (atnew == Type || at2.Cost < atnew.Cost)) {
+                    if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && at2.Cost < atnew.Cost) {
                         atnew = at2;
                     }
                 }
+                if (atnew == Type) return false;
                 Type = atnew;
-                return;
+                return true;
             }
         }
         public int ModifiedAgility {

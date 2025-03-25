@@ -1,11 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Eventing.Reader;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     // Used for storing details of a mission to be undertaken
@@ -681,7 +678,11 @@ namespace SpaceMercs {
 
         public MissionLevel GetOrCreateCurrentLevel() {
             if (Levels.ContainsKey(CurrentLevel)) return Levels[CurrentLevel];
-            int diff = Diff + CurrentLevel - (LevelCount / 2);
+            int diff = Diff;
+            if (LevelCount > 1) {
+                if (CurrentLevel == 0) diff--;
+                if (LevelCount > 2 && CurrentLevel == LevelCount - 1) diff++;
+            }
             MissionLevel lvl = new MissionLevel(this, diff, CurrentLevel);
             Levels.Add(CurrentLevel, lvl);
             return lvl;

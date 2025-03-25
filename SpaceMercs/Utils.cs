@@ -363,7 +363,7 @@ namespace SpaceMercs {
             };
         }
 
-        public static BodyPart GetRandomBodyPart() {
+        public static BodyPart GetRandomBodyPartScaledByArmourCoverage() {
             double tot = 0.0;
             foreach (BodyPart bp in Enum.GetValues(typeof(BodyPart))) {
                 tot += BodyPartToArmourScale(bp);

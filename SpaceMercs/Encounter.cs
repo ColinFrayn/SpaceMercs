@@ -118,7 +118,7 @@ namespace SpaceMercs {
             // Create a mission for the landing party scenario
             return Mission.CreateBoardingPartyMission(rc, iDiff);
         }
-
+        
         // Do an active encounter
         private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, ShowMessageDelegate showMessage) {
             // Generate a mission, including the random ship

@@ -517,6 +517,10 @@ namespace SpaceMercs.MainWindow {
                 DoubleClick_Ship();
                 return;
             }
+            if (view == ViewMode.ViewSystem) {
+                DoubleClick_System();
+                return;
+            }
             if (e.Button == MouseButton.Left) {
                 if (aoHover != null) aoSelected = aoHover;
                 // Zoom in to system

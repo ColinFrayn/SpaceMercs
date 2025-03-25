@@ -286,5 +286,13 @@ namespace SpaceMercs.MainWindow {
             }
         }
 
+        // Double clcik on colony to view
+        private void DoubleClick_System() {
+            if (aoHover != null) aoSelected = aoHover;
+            if (aoSelected != PlayerTeam.CurrentPosition) return;
+            if (aoSelected is HabitableAO hao && hao.Colony is not null) {
+                OpenColonyViewDialog();
+            }
+        }
     }
 }

@@ -7,9 +7,12 @@ Mission.SecondaryEnemy (when LevelID > 1) [TEST]
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
-Improve equipment for higher level mercs? (Not just single pieces)
+Events when travelling - use proper message box
+- InactiveEncounter and ActiveEncounter
+- Don't return mission to Travel.ClockTickProcessor()
+-- Move the Mission handler to a separate method
 
-Display when a weapon is recharging
+Pay to reset UtilitySkill choices??
 
 ==================================================================================================================
 
@@ -19,6 +22,8 @@ Backburner : Features
 -------------------------------------------------
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
+
+Display somewhere when a weapon is recharging
 
 Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
 - Encumbrance now has quiet a few drawbacks; cost; bad in melee; Only one shot; 

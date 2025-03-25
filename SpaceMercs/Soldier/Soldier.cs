@@ -5,7 +5,10 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
 using System.Collections.ObjectModel;
+using System.DirectoryServices;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
@@ -1023,10 +1026,12 @@ namespace SpaceMercs {
             // Start with a base set of kit, then incrementally improve it
             EquippedArmour.Clear();
             SetupBasicArmour();
-            for (int i = 0; i < Level; i++) {
-                if (rnd.NextDouble() < 0.8) UpgradeArmourAtRandom();
-                if (rnd.NextDouble() < 0.3) UpgradeArmourAtRandom();
-            }
+            int count = Level + rnd.Next(Level / 2) + rnd.Next(Level / 2);
+            int ntries = 0;
+            do {
+                count -= UpgradeArmourAtRandom();
+                ntries++;
+            } while (count > 0 && ntries < 100);
 
             // Now generate other random stuff
             int num = rnd.Next(2);
@@ -1042,16 +1047,16 @@ namespace SpaceMercs {
             }
         }
         private void SetupBasicArmour() {
-            Armour? chest = PickRandomBaseArmourForLocation(BodyPart.Chest);
+            Armour? chest = PickLevelAppropriateChestArmour();
             if (chest is not null) EquippedArmour.Add(chest);
             foreach (BodyPart bp in Enum.GetValues(typeof(BodyPart))) {
                 if (rnd.NextDouble() * Level > 0.8 && GetArmourAtLocation(bp) == null) {
-                    Armour? arm = PickRandomBaseArmourForLocation(bp);
+                    Armour? arm = PickMostBasicArmourForLocation(bp);
                     if (arm is not null) EquippedArmour.Add(arm);
                 }
             }
         }
-        private Armour? PickRandomBaseArmourForLocation(BodyPart bp) {
+        private Armour? PickMostBasicArmourForLocation(BodyPart bp) {
             MaterialType? mat = null;
             // Get base material
             foreach (MaterialType m in StaticData.Materials.Where(mat => mat.CanBuild(Race))) {
@@ -1073,25 +1078,106 @@ namespace SpaceMercs {
             if (choice is null) return null;
             return new Armour(choice, mat, 0);
         }
-        private void UpgradeArmourAtRandom() {
-            // Pick a random location
-            BodyPart bp = Utils.GetRandomBodyPart();
-            Armour? ar = GetArmourAtLocation(bp);
-            // Try to fill in empty armour slots if at all possible by having another go at finding an empty slot.
-            if (ar is not null) {
-                bp = Utils.GetRandomBodyPart();
-                ar = GetArmourAtLocation(bp);
+        private Armour? PickLevelAppropriateChestArmour() {
+            // Pick appropriate armour based on the weapon
+            if (EquippedWeapon is null || Level < 4) {
+                return PickMostBasicArmourForLocation(BodyPart.Chest);
             }
-            // If armour doesn't exist at this location, then generate something
+
+            // Not a low level soldier, so pick more suitable armour choices for the specialisation that they have
+            int r = RandomNumberGenerator.GetInt32(100);
+            Func<ArmourType, double>? selector = null;
+            switch (EquippedWeapon.Type.WClass) {
+                case WeaponType.WeaponClass.Heavy:
+                    selector = AssessChestArmour_Heavy;
+                    break;
+                case WeaponType.WeaponClass.Melee:
+                    if (r > 40) selector = AssessChestArmour_Assassin; // Light, stealthy melee
+                    else selector = AssessChestArmour_Brute; // Heavy melee
+                    break;
+                case WeaponType.WeaponClass.Sniper:
+                    selector = AssessChestArmour_Sniper;
+                    break;
+                default:
+                    if (r > 40) selector = AssessChestArmour_Skirmisher; // Light, agile assault
+                    selector = AssessChestArmour_Assault; // Heavy assault
+                    break;
+
+            }
+
+            // Get base armour for this location, suitable for the level of this Soldier
+            ArmourType? choice = null;
+            double best = 0d;
+            foreach (ArmourType at in StaticData.ArmourTypes) {
+                if (!at.CanBuild(Race)) continue;
+                if (!at.Locations.Contains(BodyPart.Chest)) continue;
+                int lDiff = (at.Requirements?.MinLevel ?? 0) - Level;
+                if (lDiff > 0) continue; // not high enough level
+                if (at.Cost > (Level * 60)) continue;
+                if (lDiff == 0 && RandomNumberGenerator.GetInt32(10) > 4) continue; // Barely high enough level, unlikely to have one yet (50%)
+                if (lDiff == -1 && Level > 1 && RandomNumberGenerator.GetInt32(10) > 7) continue; // Not massively over-levelled, slightly unlikely to have one yet (20%)
+                double score = selector(at);
+                if (score > best) {
+                    best = score;
+                    choice = at;
+                }
+            }
+            if (choice is null) return null;
+
+            // Pick a suitable material
+            MaterialType? mat = null;
+            foreach (MaterialType m in StaticData.Materials.Where(mat => mat.CanBuild(Race))) {
+                // Pick a decent material
+                if (!m.IsArmourMaterial || m.MaxLevel <= 1) continue;
+                // Should be allowed by this soldier
+                if (choice.MinMatLvl > m.MaxLevel) continue;
+                // Pick the most common matching material
+                if (mat is null || m.Rarity > mat.Rarity) mat = m;
+            }
+            if (mat is null) return null;
+            return new Armour(choice, mat, 0);
+        }
+        private double AssessChestArmour_Heavy(ArmourType at) {
+            return at.BaseArmour + at.Shields + at.Strength + at.Attack;
+        }
+        private double AssessChestArmour_Assault(ArmourType at) {
+            return at.BaseArmour + at.Shields - at.Mass + at.Attack;
+        }
+        private double AssessChestArmour_Skirmisher(ArmourType at) {
+            return at.BaseArmour + at.Shields + ((at.Speed - 1d) * 50d) - (at.Mass * 2d) + at.Attack + at.GetUtilitySkill(UtilitySkill.Stealth);
+        }
+        private double AssessChestArmour_Sniper(ArmourType at) {
+            return (at.BaseArmour * 0.2d) + (at.Shields * 0.3d) + ((at.Speed - 1d) * 70d) - (at.Mass * 2d) + at.Attack + (at.GetUtilitySkill(UtilitySkill.Stealth) * 3d);
+        }
+        private double AssessChestArmour_Assassin(ArmourType at) {
+            return (at.BaseArmour * 0.3d) + at.Shields + ((at.Speed - 1d) * 70d) - (at.Mass * 2d) + (at.GetUtilitySkill(UtilitySkill.Stealth) * 8d) + (at.Attack * 2d);
+        }
+        private double AssessChestArmour_Brute(ArmourType at) {
+            return at.BaseArmour + at.Shields + at.Strength - at.Mass + ((at.Speed - 1d) * 50d) + (at.Attack * 2d);
+        }
+        private int UpgradeArmourAtRandom() {
+            Armour? ar = null;
+            BodyPart bp = BodyPart.Head;
+            // Try to fill in empty armour slots if at all possible by trying to find an empty slot.
+            // Otherwise bias towards improving all pieces evenly by cancelling out the size advantage.
+            do {
+                bp = Utils.GetRandomBodyPartScaledByArmourCoverage();
+                ar = GetArmourAtLocation(bp);
+            } while (ar != null && RandomNumberGenerator.GetInt32(ar.Type.Size) > 0);
+            // If we found an empty slot then generate something
             if (ar is null) {
-                ar = PickRandomBaseArmourForLocation(bp);
+                ar = PickMostBasicArmourForLocation(bp);
                 if (ar is not null) EquippedArmour.Add(ar);
             }
-            // Otherwise upgrade what's there
+            // Otherwise upgrade what's in the last slot we found
             else {
-                ar.UpgradeArmour(Race, Level);
+                // Is this armour already good enough?
+                if (ar.Cost > 100d * Math.Pow(1.4, Level)) return 1; //If we have great armour, there's less need to improve stuff
+                // Otherwise, attempt to upgrade it
+                if (!ar.UpgradeArmour(Race, Level)) return 0;
             }
             CalculateMaxStats();
+            return ar?.Type?.Size ?? 0; // Upgrade points spent
         }
         public bool HasItem(IItem it) {
             return Inventory.Contains(it);

@@ -1099,8 +1099,9 @@ namespace SpaceMercs {
             int cDiff = Diff - ParentMission.SwarmLevel;
             int soldierCount = ParentMission.Soldiers.Count;
             if (ParentMission.Goal == MissionGoal.Countdown || ParentMission.Goal == MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            double dGroups = (Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) * Const.CreatureFrequencyScale) / 4d;
+            double dGroups = Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) / Const.CreatureFrequencyScale;
             if (ParentMission.Type == MissionType.Surface) dGroups *= 0.8d;
+            if (ParentMission.IsShipMission && LevelID == 0) dGroups *= 0.8d;
             int nGroups = (int)dGroups;
             if (nGroups < 3) nGroups = 3;
             int nLeft = nGroups;

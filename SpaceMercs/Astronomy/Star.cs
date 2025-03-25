@@ -505,11 +505,13 @@ namespace SpaceMercs {
                 }
             }
 
-            // Threshold for at least one trade route
+            // The more populous the system, the more trade routes it can support
             int expectedTradeRoutes = 0;
-            if (maxColonySize >= 4) expectedTradeRoutes = 1;
+            if (maxColonySize >= 4 || (maxColonySize == 3 && totalPop >= 6)) expectedTradeRoutes = 1;
             if (maxColonySize >= 5 && colonyCount >= 2 && totalPop >= 7) expectedTradeRoutes = 2;
+            if (maxColonySize == 4 && colonyCount >= 4 && totalPop >= 10) expectedTradeRoutes = 2;
             if (maxColonySize == 6 && colonyCount >= 4 && totalPop >= 13) expectedTradeRoutes = 3;
+            if (maxColonySize == 5 && colonyCount >= 6 && totalPop >= 15) expectedTradeRoutes = 3;
             if (TradeRoutes.Count < expectedTradeRoutes) {
                 MaybeAddTradeRoute(rc, true);
             }
