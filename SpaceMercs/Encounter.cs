@@ -1,12 +1,16 @@
-﻿using static SpaceMercs.Delegates;
-
-namespace SpaceMercs {
+﻿namespace SpaceMercs {
     static class Encounter {
 
         // Check if we get intercepted when journeying
-        public static Mission? CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract, ShowMessageDelegate showMessage) {
-            if (dJourneyTime < Const.SecondsPerDay / 2.0) return null; // Very fast drive in system, or very short hop
-            if (Const.DEBUG_ENCOUNTER_FREQ_MOD <= 0.0) return null; // Turn off encounters if debugging
+        public static void CheckForInterception(AstronomicalObject aoFrom, AstronomicalObject aoTo, double dJourneyTime, Team PlayerTeam, double dFract, GUIMessageBox msgBox, Action<Mission?> runMission) {
+            if (dJourneyTime < Const.SecondsPerDay / 2.0) {
+                runMission(null); // Very fast drive in system, or very short hop
+                return;
+            }
+            if (Const.DEBUG_ENCOUNTER_FREQ_MOD <= 0.0) {
+                runMission(null);
+                return;
+            }
 
             // Calculate interception chance
             double dDanger = Const.BaseInterceptionChance;
@@ -15,7 +19,10 @@ namespace SpaceMercs {
 
             // Travelling between two locations in the same system
             if (aoFrom.GetSystem() == aoTo.GetSystem()) {
-                if (iFromSize + iToSize > 6) return null; // No chance of pirates when travelling between bases in a system if they're both big or one is very big, as these routes are well policed.
+                if (iFromSize + iToSize > 6) {
+                    runMission(null); // No chance of pirates when travelling between bases in a system if they're both big or one is very big, as these routes are well policed.
+                    return;
+                }
                 // One or the other is a colony, so it's safer
                 dDanger -= (double)(iFromSize + iToSize);
                 // Check if we're travelling from a planet to one of its satellites, or vice versa, and double the safety bonus
@@ -40,7 +47,10 @@ namespace SpaceMercs {
             double dIntercept = rand.NextDouble() * Const.BaseEncounterScarcity / Math.Max(0.0001, Const.DEBUG_ENCOUNTER_FREQ_MOD);
 
             // If not intercepted then return
-            if (dIntercept > dDanger) return null;
+            if (dIntercept > dDanger) {
+                runMission(null);
+                return;
+            }
 
             // Work out which species we're dealing with
             Race? rc = null; // Unknown alien race
@@ -61,7 +71,8 @@ namespace SpaceMercs {
 
             // Still not found a suitable owning race?
             if (rc is null) {
-                return null;
+                runMission(null);
+                return;
             }
 
             // Increase chance of aggressive/passive encounter based on race
@@ -75,54 +86,64 @@ namespace SpaceMercs {
             ShipEngine minDrive = StaticData.GetMinimumDriveByDistance(AstronomicalObject.CalculateDistance(aoFrom, aoTo)) ?? throw new Exception("Mission not reachable!");
 
             // Was this a hostile interception or a passive one?
-            if (dIntercept > dDanger - (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000d : 15d)) return InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive, showMessage);
-            return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, showMessage);
+            if (dIntercept > dDanger - (Const.DEBUG_ALL_ENCOUNTERS_INACTIVE ? 100000d : 15d)) {
+                InactiveEncounter(rc, dDanger - dIntercept, rand, iDiff, PlayerTeam, minDrive, msgBox, runMission);
+            }
+            else {
+                ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, msgBox, runMission, false);
+            }
         }
 
         // Do an inactive encounter
-        private static Mission InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, ShowMessageDelegate showMessage) {
+        private static void InactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, GUIMessageBox msgBox, Action<Mission?> runMission) {
             string strDesc = rc.Known ? rc.Name : "unidentified alien";
-            if (MessageBox.Show(new Form { TopMost = true }, $"You have detected a distress signal from a nearby {strDesc} vessel. Do you want to investigate?", "Distress Signal", MessageBoxButtons.YesNo) != DialogResult.Yes) { // REPLACE WITH msgBox
-                return Mission.CreateIgnoreMission();
-            }
-
+            string strMessage = $"You have detected a distress signal from a nearby {strDesc} vessel.\nDo you want to investigate?";
+            msgBox.PopupConfirmation(strMessage, () => ResolveInactiveEncounter(rc, dDanger, rand, iDiff, PlayerTeam, minDrive, msgBox, runMission), () => runMission(null));
+        }
+        private static void ResolveInactiveEncounter(Race rc, double dDanger, Random rand, int iDiff, Team PlayerTeam, ShipEngine minDrive, GUIMessageBox msgBox, Action<Mission?> runMission) {
             // If race != null then it could turn out to be trap (->Active)
-            if (rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) return ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, showMessage);
+            if (rand.NextDouble() * 50.0 < dDanger && !Const.DEBUG_ALL_ENCOUNTERS_INACTIVE) {
+                ActiveEncounter(rc, iDiff, PlayerTeam, minDrive, msgBox, runMission, true);
+                return;
+            }
 
             // Scan for life forms. If none then can just collect resources.
+            string strDesc = rc.Known ? rc.Name : "unidentified alien";
             bool bLifeForms = (rand.NextDouble() > 0.3);
-            if (bLifeForms) {
-                // Ship might be friendly - they could offer cash to help them with repairs (which takes time)
-                bool bFriendly = (rand.NextDouble() * 20.0 > dDanger);
-                if (bFriendly) {
-                    double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
-                    double dReward = Math.Round((dTime * 5.0) + (rand.NextDouble() * (iDiff + 2.0) / 2.0), 2);
-                    string strMessage = $"You have discovered a stranded {strDesc} freighter. They request your help for repairs. Time = {dTime} days; Reward = {dReward} credits. Will you help?";
-                    if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
-                    return Mission.CreateRepairMission(rc, (float)(dTime * Const.SecondsPerDay), dReward);
-                }
-            }
-        
+
             // No life forms - let's just get salvage
             if (!bLifeForms) {
                 double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
-                string strMessage = $"You have discovered a stranded {strDesc} freighter. No life forms have been detected. Do you want to salvage usable items (" + dTime + " days)?";
-                if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Abandoned Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
-                return Mission.CreateSalvageMission(rc, iDiff, (float)(dTime * Const.SecondsPerDay));
+                string strMessageSalvage = $"You have discovered a stranded {strDesc} freighter.\nNo life forms have been detected.\nDo you want to salvage usable items (" + dTime + " days)?";
+                Mission missSalvage = Mission.CreateSalvageMission(rc, iDiff, (float)(dTime * Const.SecondsPerDay));
+                msgBox.PopupConfirmation(strMessageSalvage, () => runMission(missSalvage), () => runMission(null));
+                return;
             }
 
+            // OK, so there are life forms...
+            // Ship might be friendly - they could offer cash to help them with repairs (which takes time)
+            bool bFriendly = (rand.NextDouble() * 20.0 > dDanger);
+            if (bFriendly) {
+                double dTime = Math.Round(2.0 + rand.NextDouble() * iDiff, 2);
+                double dReward = Math.Round((dTime * 5.0) + (rand.NextDouble() * (iDiff + 2.0) / 2.0), 2);
+                string strMessageRepairs = $"You have discovered a stranded {strDesc} freighter.\nThey request your help for repairs.\nTime = {dTime} days; Reward = {dReward} credits.\nWill you help?";
+                Mission missRepair = Mission.CreateRepairMission(rc, (float)(dTime * Const.SecondsPerDay), dReward); ;
+                msgBox.PopupConfirmation(strMessageRepairs, () => runMission(missRepair), () => runMission(null));
+                return;
+            }
+        
             // Otherwise you will need a hostile boarding party
-            string strMessage2 = $"You have discovered a stranded {strDesc} vessel. Scans have detected hostile life forms. Do you wish to board?";
-            if (MessageBox.Show(strMessage2, "Stranded Freighter", MessageBoxButtons.YesNo) == DialogResult.No) return Mission.CreateIgnoreMission(); // REPLACE WITH msgBox
-
-            // Create a mission for the landing party scenario
-            return Mission.CreateBoardingPartyMission(rc, iDiff);
+            string strMessageBoarding = $"You have discovered a stranded {strDesc} vessel.\nScans have detected hostile life forms.\nDo you wish to board?";
+            Mission missBoard = Mission.CreateBoardingPartyMission(rc, iDiff);
+            msgBox.PopupConfirmation(strMessageBoarding, () => runMission(missBoard), () => runMission(null));
         }
         
         // Do an active encounter
-        private static Mission ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, ShowMessageDelegate showMessage) {
+        private static void ActiveEncounter(Race rc, int iDiff, Team PlayerTeam, ShipEngine minDrive, GUIMessageBox msgBox, Action<Mission?> runMission, bool ambush) {
             // Generate a mission, including the random ship
             Mission miss = Mission.CreateShipCombatMission(rc, iDiff, minDrive);
+            string strRace = rc.Known ? rc.Name : "unidentified alien";
+
             // If this ship is clearly underclassed then try again with a higher diff
             // Aggressive races are more likely to want a fight
             double pVal = PlayerTeam.PlayerShip.EstimatedStrength;
@@ -131,23 +152,24 @@ namespace SpaceMercs {
             if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale * aggressionMod < pVal) {
                 miss = Mission.CreateShipCombatMission(rc, iDiff + 1, minDrive);
                 // If the ship is still underclassed then give up - the player ship is tough enough to be safe in this system
-                if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale * aggressionMod < pVal) return Mission.CreateIgnoreMission();
+                if (miss.ShipTarget!.EstimatedStrength * Const.ShipRelativeStrengthScale * aggressionMod < pVal) {
+                    string strPassive = $"You find a harmless {strRace} vessel which flies off as soon as you arrive.";
+                    if (ambush) msgBox.PopupMessage(strPassive, () => runMission(null));
+                    else runMission(null);
+                    return;
+                }
             }
 
             // Can attempt to flee (if faster accel) or fight. If slower/equal speed then must fight.
-            string strRace = rc.Known ? rc.Name : "unidentified alien";
             string strMessage = $"You have been ambushed by a hostile {strRace} vessel.";
             if (PlayerTeam.PlayerShip.CanOutrun(miss.ShipTarget)) {
-                if (MessageBox.Show(new Form { TopMost = true }, strMessage + " You can outrun the ambushers. Do you want to flee?", "Ambush", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                    return Mission.CreateIgnoreMission();
-                }
+                string strFlee = strMessage + "\nYou can outrun the ambushers. Do you want to flee?";
+                msgBox.PopupConfirmation(strFlee, () => runMission(null), () => runMission(miss));
             }
             else {
-                MessageBox.Show(new Form { TopMost = true }, strMessage + " Prepare to fight!"); // REPLACE WITH msgBox
-                // showMessage(strMessage + " Prepare to fight!", null); // Will this work, or does it need to be blocking?
+                string strFight = strMessage + "\nPrepare to fight!";
+                msgBox.PopupMessage(strFight, () => runMission(miss));
             }
-
-            return miss;
         }
     }
 }

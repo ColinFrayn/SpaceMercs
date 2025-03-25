@@ -20,11 +20,13 @@ namespace SpaceMercs {
         private List<string> Lines;
 
         private Action? OnClick = null;
+        private Action? OnCancel = null;
         private bool Decision = false;
 
         private class MsgConfig {
             public List<string> Lines = new List<string>();
             public Action? OnClick = null;
+            public Action? OnCancel = null;
             public Action<object>? OnClickObj = null;
             public object? Obj = null;
             public bool Decision = false;
@@ -51,17 +53,18 @@ namespace SpaceMercs {
             }
             Active = true;
         }
-        public void PopupConfirmation(string strText, Action _onClick) {
+        public void PopupConfirmation(string strText, Action onClick, Action? onCancel = null) {
             List<string> lines = new List<string>(strText.Split('\n'));
-            PopupConfirmation(lines, _onClick);
+            PopupConfirmation(lines, onClick, onCancel);
         }
-        public void PopupConfirmation(IEnumerable<string> lines, Action _onClick) {
+        public void PopupConfirmation(IEnumerable<string> lines, Action onClick, Action? onCancel = null) {
             if (Active) {
-                queue.Enqueue(new MsgConfig() { Decision = true, Lines = new List<string>(lines), OnClick = _onClick });
+                queue.Enqueue(new MsgConfig() { Decision = true, Lines = new List<string>(lines), OnClick = onClick, OnCancel = onCancel });
             }
             else {
                 SetupBoxes(lines);
-                OnClick = _onClick;
+                OnClick = onClick;
+                OnCancel = onCancel;
                 Decision = true;
             }
             Active = true;
@@ -193,6 +196,7 @@ namespace SpaceMercs {
                 }
                 ButtonX = 0.5 + ButtonSplit;
                 if (xpos >= ButtonX && xpos <= (ButtonX + ButtonWidth) && ypos >= ButtonY && ypos <= (ButtonY + ButtonHeight)) {
+                    OnCancel?.Invoke();
                     CheckNext();
                     return true;
                 }
@@ -210,6 +214,7 @@ namespace SpaceMercs {
         }
         public void DefaultAction() {
             if (Decision) {
+                OnCancel?.Invoke();
                 CheckNext();
             }
             else {
@@ -229,6 +234,7 @@ namespace SpaceMercs {
             }
             SetupBoxes(msgc.Lines);
             OnClick = msgc.OnClick;
+            OnCancel = msgc.OnCancel;
             Decision = msgc.Decision;
         }
 

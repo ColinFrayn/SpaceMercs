@@ -176,31 +176,7 @@ namespace SpaceMercs {
 
             // Travelling somewhere - check for an Encounter
             if ((rand.NextDouble() * (1 + EncounterCount)) < Const.EncounterFreqScale) {  // Reduce the chance of multiple encounters
-                Mission? foundMission = Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime, ParentView.msgBox.PopupMessage);
-                if (foundMission != null) {
-                    EncounterCount++;
-                    if (foundMission.Type == Mission.MissionType.Ignore) return;
-                    bPause = true;
-                    PlayerTeam.SetCurrentMission(foundMission);
-                    if (PlayerTeam.CurrentMission!.Type == Mission.MissionType.BoardingParty) {
-                        RunBoardingPartyMission(PlayerTeam.CurrentMission);
-                        return;
-                    }
-                    fMissionElapsed = 0.0f;
-                    if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
-                        lShots.Clear();
-                        lFrag.Clear();
-                        PlayerTeam.PlayerShip.InitialiseForBattle();
-                        bSurrendered = false;
-                        fSep = 18000.0f;
-                    }
-                    else {
-                        // Could be e.g. Salvage/Repair
-                    }
-                    bPause = false;
-                    return;
-                }
-                bPause = false;
+                Encounter.CheckForInterception(aoTravelFrom, aoTravelTo, fTravelTime, PlayerTeam, fElapsed / fTravelTime, ParentView.msgBox, TriggerMission);
             }
 
             // Move forward if we're not currently on a mission
@@ -216,6 +192,32 @@ namespace SpaceMercs {
                 if (PlayerTeam.PlayerShip.CanRepair) PlayerTeam.PlayerShip.RepairHull();
                 return;
             }
+        }
+        private void TriggerMission(Mission? miss) {
+            if (miss is null) {
+                bPause = false;
+                return;
+            }
+            EncounterCount++;
+            if (miss.Type == Mission.MissionType.Ignore) return;
+            bPause = true;
+            PlayerTeam.SetCurrentMission(miss);
+            if (PlayerTeam.CurrentMission!.Type == Mission.MissionType.BoardingParty) {
+                RunBoardingPartyMission(PlayerTeam.CurrentMission);
+                return;
+            }
+            fMissionElapsed = 0.0f;
+            if (PlayerTeam.CurrentMission.Type == Mission.MissionType.ShipCombat) {
+                lShots.Clear();
+                lFrag.Clear();
+                PlayerTeam.PlayerShip.InitialiseForBattle();
+                bSurrendered = false;
+                fSep = 18000.0f;
+            }
+            else {
+                // Could be e.g. Salvage/Repair
+            }
+            bPause = false;
         }
         private void ResolveEncounter() {
             if (PlayerTeam.CurrentMission?.Type == Mission.MissionType.Salvage) {
