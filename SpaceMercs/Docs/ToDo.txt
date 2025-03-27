@@ -4,15 +4,12 @@ ToDo List
 
 Mission.SecondaryEnemy (when LevelID > 1) [TEST]
 
+Surface missions are boring. Especially KillAll ones.
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
-Events when travelling - use proper message box
-- InactiveEncounter and ActiveEncounter
-- Don't return mission to Travel.ClockTickProcessor()
--- Move the Mission handler to a separate method
-
-Pay to reset UtilitySkill choices??
+Remove MessageBox from Travel.cs, Ship.cs, MapView.cs, 
 
 ==================================================================================================================
 
@@ -23,10 +20,14 @@ Backburner : Features
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
+Pay to reset UtilitySkill choices somehow. Maybe per point?
+
 Display somewhere when a weapon is recharging
 
 Why shouldn't everyone get power armour & heavy weapons? What is the disadvantage?
-- Encumbrance now has quiet a few drawbacks; cost; bad in melee; Only one shot; 
+- Both: Encumbrance now has quite a few drawbacks (movement, defence); cost; 
+- PowerArmour: Movement
+- HeavyWeapon: Bad in melee; Only one shot; 
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 

@@ -463,7 +463,7 @@
       <Material Name="Titanium" Amount="4"/>
     </Materials>
     <Utility>
-      <Stealth>-2</Stealth>
+      <Stealth>-3</Stealth>
     </Utility>
   </ArmourType>
   <ArmourType Name="Heavy Power Armour">
@@ -471,7 +471,7 @@
     <Rarity>60</Rarity>
     <Strength>8</Strength>
     <Attack>2</Attack>
-    <Speed>0.75</Speed>
+    <Speed>0.7</Speed>
     <BaseArmour>58</BaseArmour>
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
@@ -506,7 +506,7 @@
     <Mass>25.0</Mass>
     <Rarity>65</Rarity>
     <Strength>6</Strength>
-    <Speed>1.0</Speed>
+    <Speed>0.9</Speed>
     <Attack>2</Attack>
     <BaseArmour>44</BaseArmour>
     <MinMatLvl>3</MinMatLvl>
@@ -526,7 +526,7 @@
       <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
-    <Desc>A powered full-body armour with articulated joints to enable movement and agility.</Desc>
+    <Desc>A powered full-body armour with articulated joints to enable greater movement and agility.</Desc>
     <Materials>
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="3"/>
@@ -535,7 +535,7 @@
       <Material Name="Titanium" Amount="4"/>
     </Materials>
     <Utility>
-      <Stealth>-1</Stealth>
+      <Stealth>-2</Stealth>
     </Utility>
   </ArmourType>
   <ArmourType Name="Shielded Power Armour">
@@ -574,14 +574,14 @@
       <Relations Name="Elithiri">2</Relations>
     </Requirements>
     <Utility>
-      <Stealth>-2</Stealth>
+      <Stealth>-3</Stealth>
     </Utility>
   </ArmourType>
   <ArmourType Name="Valkyrie Assault Armour">
     <Mass>22.0</Mass>
     <Rarity>85</Rarity>
     <Strength>4</Strength>
-    <Speed>1.1</Speed>
+    <Speed>0.9</Speed>
     <Attack>3</Attack>
     <Shields>16</Shields>
     <BaseArmour>46</BaseArmour>
@@ -603,6 +603,9 @@
       <Relations Name="Elithiri">2</Relations>
       <Relations Name="Gokan">1</Relations>
     </Requirements>
+    <Utility>
+      <Stealth>-2</Stealth>
+    </Utility>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
       <Bonus Type="Cold" Amount="20"/>
@@ -610,7 +613,7 @@
       <Bonus Type="Poison" Amount="100"/>
     </BonusArmour>
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
-    <Desc>A remarkable, light power armour designed for high-speed assault with deadly results.</Desc>
+    <Desc>A remarkable, lightweight articulated power armour designed for mobility and assault with deadly results.</Desc>
     <Materials>
       <Material Name="Crystals" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="4"/>

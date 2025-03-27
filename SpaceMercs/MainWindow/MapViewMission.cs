@@ -1805,7 +1805,7 @@ namespace SpaceMercs.MainWindow {
             SelectedEntity = en;
             GenerateDetectionMap();
             if (en != null && en is Soldier s) {
-                GenerateDistMap(s);
+                for (int n=0; n<10; n++) GenerateDistMap(s);
             }
         }
         private void GenerateTargetMap(Soldier s, double range) {
@@ -1898,6 +1898,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void GenerateDistMap(Soldier? s) {
             if (s == null) return;
+
             for (int y = 0; y < CurrentLevel.Height; y++) {
                 for (int x = 0; x < CurrentLevel.Width; x++) {
                     DistMap[x, y] = -1;
@@ -1912,24 +1913,24 @@ namespace SpaceMercs.MainWindow {
 
             DistMap[s.X, s.Y] = 0;
 
-            if (s.X > 0) FloodFillDist(s.X - 1, s.Y, 1, maxdist);
-            if (s.X < CurrentLevel.Width - 1) FloodFillDist(s.X + 1, s.Y, 1, maxdist);
-            if (s.Y > 0) FloodFillDist(s.X, s.Y - 1, 1, maxdist);
-            if (s.Y < CurrentLevel.Height - 1) FloodFillDist(s.X, s.Y + 1, 1, maxdist);
+            if (s.X > 1) FloodFillDist(s.X - 1, s.Y, 1, maxdist);
+            if (s.X < CurrentLevel.Width - 2) FloodFillDist(s.X + 1, s.Y, 1, maxdist);
+            if (s.Y > 1) FloodFillDist(s.X, s.Y - 1, 1, maxdist);
+            if (s.Y < CurrentLevel.Height - 2) FloodFillDist(s.X, s.Y + 1, 1, maxdist);
         }
         private void FloodFillDist(int x, int y, int dist, int maxdist) {
+            if (dist > maxdist) return;
             if (!CurrentLevel.Explored[x, y]) return;
             if (!Utils.IsPassable(CurrentLevel.Map[x, y])) return;
             if (CurrentLevel.GetEntityAt(x, y) != null) return;
             Trap? tr = CurrentLevel.GetTrapAtPoint(x, y);
             if (tr != null && !tr.Hidden) return;
-            if (dist > maxdist) return;
             DistMap[x, y] = dist;
             if (dist == maxdist) return;
-            if (x > 0 && (DistMap[x - 1, y] == -1 || DistMap[x - 1, y] > dist)) FloodFillDist(x - 1, y, dist + 1, maxdist);
-            if (x < CurrentLevel.Width - 1 && (DistMap[x + 1, y] == -1 || DistMap[x + 1, y] > dist)) FloodFillDist(x + 1, y, dist + 1, maxdist);
-            if (y > 0 && (DistMap[x, y - 1] == -1 || DistMap[x, y - 1] > dist)) FloodFillDist(x, y - 1, dist + 1, maxdist);
-            if (y < CurrentLevel.Height - 1 && (DistMap[x, y + 1] == -1 || DistMap[x, y + 1] > dist)) FloodFillDist(x, y + 1, dist + 1, maxdist);
+            if (x > 0 && (DistMap[x - 1, y] == -1 || DistMap[x - 1, y] > dist + 1)) FloodFillDist(x - 1, y, dist + 1, maxdist);
+            if (x < CurrentLevel.Width - 1 && (DistMap[x + 1, y] == -1 || DistMap[x + 1, y] > dist + 1)) FloodFillDist(x + 1, y, dist + 1, maxdist);
+            if (y > 0 && (DistMap[x, y - 1] == -1 || DistMap[x, y - 1] > dist + 1)) FloodFillDist(x, y - 1, dist + 1, maxdist);
+            if (y < CurrentLevel.Height - 1 && (DistMap[x, y + 1] == -1 || DistMap[x, y + 1] > dist + 1)) FloodFillDist(x, y + 1, dist + 1, maxdist);
         }
         private void GenerateDetectionMap() {
             // Clear the grid

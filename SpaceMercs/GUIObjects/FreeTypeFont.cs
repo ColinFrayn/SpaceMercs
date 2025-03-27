@@ -118,9 +118,10 @@ namespace SpaceMercs {
 
             // Iterate through all characters
             float char_x = 0.0f;
+            TexChar unprintable = _characters['?'];  // Unprintable character => ?
             foreach (char c in text) {
-                TexChar ch = _characters['?']; // Unprintable character => ?
-                if (_characters.ContainsKey(c)) { ch = _characters[c]; }  // Try to get the correct character
+                TexChar ch = unprintable;
+                _characters.TryGetValue(c, out ch);  // Try to get the correct character
 
                 float w = ch.Size.X;
                 float h = ch.Size.Y;
@@ -131,7 +132,7 @@ namespace SpaceMercs {
                 Matrix4 scaleM = Matrix4.CreateScale(new Vector3(w, h, 1.0f));
                 Matrix4 transRelM = Matrix4.CreateTranslation(new Vector3(xrel, yrel, 0.0f));
                 Matrix4 modelM = scaleM * transRelM;
-                prog.SetUniform("model", modelM);
+                prog.SetUniform("model", modelM); // Profiling: This takes a lot of time in dense levels
 
                 // Render glyph texture over quad
                 GL.BindTexture(TextureTarget.Texture2D, ch.TextureID);
@@ -139,7 +140,7 @@ namespace SpaceMercs {
                 // Render quad
                 GL.UseProgram(prog.ShaderProgramHandle);
                 Square.Textured.Bind();
-                Square.Textured.Draw();
+                Square.Textured.Draw(); // Profiling: This takes a lot of time in dense levels
 
                 // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
                 if (char_x > 0) char_x += kerningShift;

@@ -1564,7 +1564,7 @@ namespace SpaceMercs {
                 double range = Const.BaseDetectionRange;
                 range += (10d - Agility) / 10d; // Agility has a very minor effect
                 range -= GetUtilityLevel(UtilitySkill.Stealth) / 2d; // Stealth makes you harder to spot
-                range += Encumbrance * 2d;  // Encumbrance = [0,1]. Easily spotted if heavily encumbered.
+                range += Encumbrance * 2d;  // Encumbrance = [0,1]. More easily spotted if heavily encumbered.
                 if (range < 1d) range = 1d;
                 return range;
             }

@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>09/07/2461 18:03:48</Clock>
+<Clock>10/07/2461 13:31:54</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -7230,32 +7230,6 @@
  <Scanned/>
  <Missions>
 <Mission>
- <Type>Surface</Type>
- <Goal>KillBoss</Goal>
- <Opponent>Ogrish</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>11</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>249363033</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Gokan</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>0</Reward>
- <Diff>12</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>164375455</Seed>
- <Size>3</Size>
-</Mission>
-<Mission>
  <Type>Mines</Type>
  <Goal>KillAll</Goal>
  <Enemy>Ogres</Enemy>
@@ -7291,6 +7265,19 @@
  <Seed>233925354</Seed>
  <Size>2</Size>
  <Swarm>1</Swarm>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Opponent>Gokan</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>12</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>164375455</Seed>
+ <Size>3</Size>
 </Mission>
  </Missions>
 <Orbit>187697348860</Orbit>
@@ -8797,13 +8784,13 @@
  <Cash>8895.174990017003</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="19" Y="7"/>
- <Health>52</Health>
- <Stamina>39.6</Stamina>
+ <Location X="39" Y="39"/>
+ <Health>54</Health>
+ <Stamina>43</Stamina>
  <Shields>12.5</Shields>
- <Facing>243.43494882292202</Facing>
+ <Facing>0</Facing>
  <Level>13</Level>
- <XP>836341</XP>
+ <XP>841424</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,13,12,20</Stats>
@@ -8830,14 +8817,14 @@
 <Weapon Type="Laser Rifle" Level="4" Mod="Explosive Rounds" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Rifle">1950</Exp>
+  <Exp Type="Rifle">1977</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Medic">2</Exp>
   <Exp Skill="Perception">10</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>513</KillCount>
+ <KillCount>520</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Scythebeast">
  <Level>14</Level>
@@ -8845,13 +8832,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="17" Y="6"/>
- <Health>58.24006698921682</Health>
- <Stamina>26.600251572327046</Stamina>
- <Shields>0</Shields>
- <Facing>90</Facing>
+ <Location X="40" Y="39"/>
+ <Health>67</Health>
+ <Stamina>38</Stamina>
+ <Shields>12.5</Shields>
+ <Facing>0</Facing>
  <Level>12</Level>
- <XP>768566</XP>
+ <XP>773649</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,11,17,16</Stats>
@@ -8860,7 +8847,7 @@
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="4">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
  </Inventory>
@@ -8882,7 +8869,7 @@
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>330</KillCount>
+ <KillCount>338</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Queen">
  <Level>13</Level>
@@ -8935,13 +8922,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="18" Y="8"/>
- <Health>50.08530216019134</Health>
- <Stamina>38</Stamina>
+ <Location X="39" Y="40"/>
+ <Health>54</Health>
+ <Stamina>39</Stamina>
  <Shields>0</Shields>
- <Facing>258.69006752597977</Facing>
+ <Facing>0</Facing>
  <Level>13</Level>
- <XP>838179</XP>
+ <XP>843262</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,23,12,16</Stats>
@@ -8963,7 +8950,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">1950</Exp>
+  <Exp Type="Sniper">1961</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">9</Exp>
@@ -8971,7 +8958,7 @@
   <Exp Skill="Engineer">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>213</KillCount>
+ <KillCount>215</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Queen">
  <Level>13</Level>
@@ -8979,13 +8966,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
- <Location X="33" Y="23"/>
+ <Location X="40" Y="40"/>
  <Health>55</Health>
- <Stamina>6</Stamina>
+ <Stamina>37</Stamina>
  <Shields>0</Shields>
- <Facing>90</Facing>
+ <Facing>0</Facing>
  <Level>12</Level>
- <XP>516558</XP>
+ <XP>521641</XP>
  <Gender>Male</Gender>
  <Race>Elithiri</Race>
  <Stats>18,11,5,13,15</Stats>
@@ -9005,7 +8992,7 @@
 <Weapon Type="Exo Spear" Level="2" Mod="Nanofine Blade" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">1498</Exp>
+  <Exp Type="Melee">1515</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -9015,8 +9002,7 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>73</KillCount>
+ <KillCount>77</KillCount>
  <ToughestKill>
 <Creature Type="Water Mephit">
  <Level>13</Level>
@@ -9078,7 +9064,7 @@
   <Inv Count="10">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="16">
 <Material Type="Rubber"/>
   </Inv>
   <Inv Count="10">
@@ -9150,7 +9136,7 @@
   <Inv Count="1">
 <Weapon Type="Quad Shotgun" Level="4" />
   </Inv>
-  <Inv Count="14">
+  <Inv Count="16">
 <Equipment Type="Adrenaline"/>
   </Inv>
   <Inv Count="7">
@@ -9164,6 +9150,45 @@
   </Inv>
   <Inv Count="7">
 <Material Type="Adamantium"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Triple Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Shortblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="0"/>
   </Inv>
  </Inventory>
  <SpaceHulkCoreCount>3</SpaceHulkCoreCount>

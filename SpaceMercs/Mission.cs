@@ -330,7 +330,7 @@ namespace SpaceMercs {
         public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand) {
             if (loc is not HabitableAO hao) throw new Exception("Attempting to create a mission in a non-habitable AO");
             int iDiff = loc.GetRandomMissionDifficulty(rand);
-            MissionType tp = GenerateRandomScannerMissionType(loc, rand);
+            MissionType tp = GenerateRandomScannerMissionType(loc, rand, iDiff);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = hao;
             if (m.Type == MissionType.BoardingParty) {
@@ -490,20 +490,24 @@ namespace SpaceMercs {
             else if (r < 40) return MissionType.Caves;
             else if (r < 60) return MissionType.Mines;
             else if (r < 80) {
-                if (rand.Next(20) > iDiff) return MissionType.Surface;
+                if (rand.Next(20) > iDiff) return MissionType.Surface; // Only low-level missions, else they're boring
                 else return GenerateRandomColonyMissionType(loc, rand, 0);
             }
             else return MissionType.BoardingParty;
         }
-        public static MissionType GenerateRandomScannerMissionType(AstronomicalObject loc, Random rand) {
+        public static MissionType GenerateRandomScannerMissionType(AstronomicalObject loc, Random rand, int iDiff) {
             if (loc is Planet pl && pl.Type == Planet.PlanetType.Gas) {
                 return MissionType.BoardingParty;
             }
             int r = rand.Next(100);
             if (r < 25) return MissionType.AbandonedCity;
-            else if (r < 40) return MissionType.Mines;
+            else if (r < 45) return MissionType.Mines;
             else if (r < 85) return MissionType.Caves;
-            else return MissionType.Surface;
+            else {
+                if (rand.Next(20) > iDiff) return MissionType.Surface; // Only low-level missions, else they're boring
+                else return GenerateRandomScannerMissionType(loc, rand, 0);
+
+            }
         }
 
         // Utility
