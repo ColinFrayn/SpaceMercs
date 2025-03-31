@@ -4,6 +4,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Ship {
@@ -551,7 +552,7 @@ namespace SpaceMercs {
         }
 
         // User wants to build some equipment in this room
-        public void BuildEquipment(int iRoomID, ShipEquipment se) {
+        public void BuildEquipment(int iRoomID, ShipEquipment se, ShowMessageDecisionDelegate showMessage) {
             if (iRoomID == -1 || iRoomID >= Type.Rooms.Count || se == null) return;
             if (se.Size != Type.Rooms[iRoomID].Size) return;
             string strMessage = string.Empty;
@@ -568,25 +569,29 @@ namespace SpaceMercs {
                 strMessage = string.Format($"Really build {se.Name} for {cost:F2} credits?");
             }
             if (cost > Owner.Cash) return;
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Build Room", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                Owner.Cash -= cost;
-                if (bReplace) {
-                    Equipment[iRoomID] = new Tuple<ShipEquipment, bool>(se, true);
-                }
-                else Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
-            }
+            showMessage(strMessage, () => ContinueBuildRoom(cost, bReplace, iRoomID, se), null);
         }
-        public void UpgradeHull(ShipEquipment se) {
+        private void ContinueBuildRoom(double cost, bool bReplace, int iRoomID, ShipEquipment se) {
+            if (Owner is null) return;
+            Owner.Cash -= cost;
+            if (bReplace) {
+                Equipment[iRoomID] = new Tuple<ShipEquipment, bool>(se, true);
+            }
+            else Equipment.Add(iRoomID, new Tuple<ShipEquipment, bool>(se, true));
+        }
+        public void UpgradeHull(ShipEquipment se, ShowMessageDecisionDelegate showMessage) {
             if (se.Size != ShipEquipment.RoomSize.Armour) return;
             if (se is not ShipArmour sa) return;
             if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = CostToBuildEquipment(se);
             if (cost > Owner.Cash) return;
             string strMessage = string.Format("Really build {0} for {1:F2} credits?", se.Name, cost);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Upgrade Hull", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                Owner.Cash -= cost;
-                ArmourType = sa;
-            }
+            showMessage(strMessage, () => ContinueUpgradeHull(cost, sa), null);
+        }
+        private void ContinueUpgradeHull(double cost, ShipArmour sa) {
+            if (Owner is null) return;
+            Owner.Cash -= cost;
+            ArmourType = sa;
         }
         public void ActivateRoom(int iRoomID) {
             if (!Equipment.ContainsKey(iRoomID)) return;
@@ -638,27 +643,30 @@ namespace SpaceMercs {
         }
 
         // User wants to salvage this room
-        public void SalvageRoom(int iRoomID) {
+        public void SalvageRoom(int iRoomID, ShowMessageDecisionDelegate showMessage) {
             if (!Equipment.ContainsKey(iRoomID)) return;
             if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(Equipment[iRoomID].Item1);
             string strMessage = string.Format("Really salvage this room ({0})? You will recover {1:F2} credits", Equipment[iRoomID].Item1.Name, rebate);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Room", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                Owner.Cash += rebate;
-                Equipment.Remove(iRoomID);
-            }
+            showMessage(strMessage, () => ContinueSalvageRoom(rebate, iRoomID), null);
         }
-        public void SalvageHull() {
+        private void ContinueSalvageRoom(double rebate, int iRoomID) {
+            if (Owner is null) return;
+            Owner.Cash += rebate;
+            Equipment.Remove(iRoomID);
+        }
+        public void SalvageHull(ShowMessageDecisionDelegate showMessage) {
             if (ArmourType == null) return;
             if (Owner is null) throw new Exception("Ship owner is null!");
             double rebate = SalvageValue(ArmourType);
             string strMessage = string.Format("Really salvage your ship armour ({0})? You will recover {1:F2} credits", ArmourType.Name, rebate);
-            if (MessageBox.Show(new Form { TopMost = true }, strMessage, "Salvage Armour", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                Owner.Cash += rebate;
-                ArmourType = null;
-            }
+            showMessage(strMessage, () => ContinueSalvageArmour(rebate), null);
         }
-
+        private void ContinueSalvageArmour(double rebate) {
+            if (Owner is null) return;
+            Owner.Cash += rebate;
+            ArmourType = null;
+        }
         public double CalculateTravelTime(AstronomicalObject aoFrom, AstronomicalObject aoTo) {
             if (Engine == null) return Double.MaxValue;
             if (!EngineEnabled) return Double.MaxValue;

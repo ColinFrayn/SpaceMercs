@@ -4,7 +4,7 @@
     <Attack>12</Attack>
     <Defence>12</Defence>
     <Armour>22</Armour>
-    <Health>15</Health>
+    <Health>13</Health>
     <Stamina>18</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
@@ -26,7 +26,7 @@
     <Attack>14</Attack>
     <Defence>12</Defence>
     <Armour>26</Armour>
-    <Health>16</Health>
+    <Health>14</Health>
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
@@ -48,7 +48,7 @@
     <Attack>16</Attack>
     <Defence>12</Defence>
     <Armour>26</Armour>
-    <Health>16</Health>
+    <Health>14</Health>
     <Stamina>20</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
@@ -70,7 +70,7 @@
     <Attack>15</Attack>
     <Defence>12</Defence>
     <Armour>24</Armour>
-    <Health>15</Health>
+    <Health>13</Health>
     <Stamina>18</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
@@ -93,8 +93,8 @@
     <Attack>20</Attack>
     <Defence>11</Defence>
     <Armour>30</Armour>
-    <Health>26</Health>
-    <Stamina>20</Stamina>
+    <Health>22</Health>
+    <Stamina>18</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
     <BodyType>Crystalline</BodyType>
@@ -115,7 +115,7 @@
     <Attack>22</Attack>
     <Defence>12</Defence>
     <Armour>32</Armour>
-    <Health>30</Health>
+    <Health>26</Health>
     <Stamina>18</Stamina>
     <Frequency>1</Frequency>
     <Interact/>

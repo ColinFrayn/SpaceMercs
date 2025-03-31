@@ -165,12 +165,12 @@ namespace SpaceMercs.MainWindow {
                     // Process GUIPanel selection
                     if (iSelectHover >= 0) {
                         if (iSelectHover < StaticData.ShipEquipment.Count) {
-                            if (bContextHull) PlayerTeam.PlayerShip.UpgradeHull(StaticData.ShipEquipment[iSelectHover]);
-                            else PlayerTeam.PlayerShip.BuildEquipment(irContextRoom, StaticData.ShipEquipment[iSelectHover]);
+                            if (bContextHull) PlayerTeam.PlayerShip.UpgradeHull(StaticData.ShipEquipment[iSelectHover], msgBox.PopupConfirmation);
+                            else PlayerTeam.PlayerShip.BuildEquipment(irContextRoom, StaticData.ShipEquipment[iSelectHover], msgBox.PopupConfirmation);
                         }
                         if (iSelectHover == I_Salvage) {
-                            if (bContextHull) PlayerTeam.PlayerShip.SalvageHull();
-                            else PlayerTeam.PlayerShip.SalvageRoom(irContextRoom);
+                            if (bContextHull) PlayerTeam.PlayerShip.SalvageHull(msgBox.PopupConfirmation);
+                            else PlayerTeam.PlayerShip.SalvageRoom(irContextRoom, msgBox.PopupConfirmation);
                         }
                         if (iSelectHover == I_Disconnect) {
                             PlayerTeam.PlayerShip.DeactivateRoom(irContextRoom);

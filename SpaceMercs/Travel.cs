@@ -5,6 +5,7 @@ using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.MainWindow;
 using System.IO;
 using System.Xml;
+using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     // Deal with travelling between AstronomicalObjects
@@ -343,26 +344,15 @@ namespace SpaceMercs {
                     double dReward = Utils.RoundSF(PlayerTeam.CurrentMission.ShipTarget.EstimatedBountyValue * (rand.NextDouble() + 3.5) / 5.0, 3);
                     Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
                     if (ra is not null && !ra.Known) {
-                        string strMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
+                        string strSurrenderMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
+                        strSurrenderMessage += $"\nThey offer to turn over a bounty of {dReward} credits.\nAccept their surrender?";
                         ra.SetAsKnownBy(PlayerTeam);
-                        if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                            PlayerTeam.CeaseMission();
-                            ParentView.msgBox.PopupMessage("The enemy ship flees the battle scene");
-                            bPause = false;
-                            return;
-                        }
+                        ParentView.msgBox.PopupConfirmation(strSurrenderMessage, () => AcceptSurrender(dReward), Unpause);
+                        return;
                     }
-                    else {
-                        string strMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
-                        if (MessageBox.Show(strMessage, "Accept Surrender", MessageBoxButtons.YesNo) == DialogResult.Yes) { // REPLACE WITH msgBox
-                            PlayerTeam.Cash += dReward;
-                            PlayerTeam.CeaseMission();
-                            ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
-                            bPause = false;
-                            return;
-                        }
-                    }
-                    bPause = false;
+                    string strBountyMessage = string.Format("The enemy ship captain offers to surrender and turn over a bounty of {0} credits.\nAccept his surrender?", dReward);
+                    ParentView.msgBox.PopupConfirmation(strBountyMessage, () => AcceptSurrender(dReward), Unpause);
+                    return;
                 }
             }
 
@@ -387,6 +377,12 @@ namespace SpaceMercs {
                     }
                 }
             }
+        }
+        private void AcceptSurrender(double dReward) {
+            PlayerTeam.Cash += dReward;
+            PlayerTeam.CeaseMission();
+            ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
+            bPause = false;
         }
         private void RunEnemyShipTurn(float fDist, float fSpace) {
             // -- Enemy fires weapons
