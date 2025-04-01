@@ -2,15 +2,17 @@
 ToDo List
 -------------------------------------------------
 
-Mission.SecondaryEnemy (when LevelID > 1) [TEST]
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
-Remove MessageBox from MapView.cs, NewGame.cs?
-- Travel.cs : test
+Pay to reset UtilitySkill choices somehow. Maybe per point?
 
 Add creature textures using bitmaps
+
+Ship Inventory selection / transfer is very annoying - scroll down, select, skip
+- Can we drag-drop? https://www.youtube.com/watch?v=_M0Xrkuux6k  https://www.youtube.com/watch?v=ln59zYyJvB4  
+- Add to EquipmentView / TeamView
+- Fix InventoryView weird change of selection
 
 ==================================================================================================================
 
@@ -21,8 +23,6 @@ Backburner : Features
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
-Pay to reset UtilitySkill choices somehow. Maybe per point?
-
 Display somewhere when a weapon is recharging
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
@@ -32,9 +32,9 @@ What should attack skill do for an AoE weapon (grenade or cone), if anything?
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 
-Race relations degrade over time? Or tend towards their base level?
+Redo NewGame dialog in-window?
 
-Ship Inventory selection / transfer is very annoying - scroll down, select, skip
+Add overwatch ability to soldiers (not heavies or snipers)
 
 Alien solar systems:
 - Alien colonies need names
@@ -48,14 +48,12 @@ Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
 
-Improve Creature textures:
+Improve Entity textures:
 - Display visual effect on creatures if they have shields
 -- Textures.GenerateCreatureTexture()  (all types)
 - Better soldier textures
 -- Change texture based on race
 -- Change texture based on equipment / weapons
-
-Add overwatch ability to soldiers (not heavies or snipers)
 
 Allow creatures to enter stealth
 - Allow searching for them (modifying chance by the creature level or stealth score)
@@ -74,8 +72,6 @@ Add locked doors in dungeon maps?
 
 Allow creatures to have multiple weapons (ranged and melee)?
 
-Investigate Blockly for scripting soldiers?
-
 Soldier.DisplaySoldierDetails() : Improve the Encumbrance icon
 
 
@@ -84,14 +80,13 @@ Backburner : Improvements
 -------------------------------------------------
 
 Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
-- All but one are blocking Yes/No decision boxes
 
-Improve TextRenderer: Add Bold, Shadow, Border
-
-Displaying colonies of other races: Are they visually distinct?
+Improve TextRenderer: Add Bold, Shadow, Border. Optimise?
 
 Profile everything, especially AI
 
 Could potentially get stuck with no doable missions, no money, unable to travel, unable to buy kit to travel. How to resolve it?
+
+Investigate Blockly for scripting soldiers?
 
 Write/update documentation

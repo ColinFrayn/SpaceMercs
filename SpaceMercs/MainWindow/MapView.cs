@@ -212,15 +212,18 @@ namespace SpaceMercs.MainWindow {
 
         // Closing the window - shut down stuff
         protected override void OnClosing(CancelEventArgs e) {
-            if (bLoaded && PlayerTeam.SoldierCount > 0 && MessageBox.Show("Really close the game? You will lose unsaved progress!", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+            if (bLoaded && PlayerTeam.SoldierCount > 0) { 
+                msgBox.PopupConfirmation("Really close the game? You will lose unsaved progress!", ReallyClose, null);
                 // Cancel closing - keep the window open
                 e.Cancel = true;
+                return;
             }
-            else {
-                // Actually closing
-                bLoaded = false;
-            }
+            bLoaded = false;
             base.OnClosing(e);
+        }
+        private void ReallyClose() {
+            bLoaded = false;
+            this.Close();
         }
         #endregion // GameWindow Triggers
 
@@ -624,7 +627,7 @@ namespace SpaceMercs.MainWindow {
                     SetAOButtonsOnGUI(aoSelected);
                 }
                 catch (Exception ex) {
-                    MessageBox.Show(ex.ToString(), "New Game Failed", MessageBoxButtons.OK);
+                    msgBox.PopupMessage(ex.ToString());
                 }
             }
         }
@@ -642,7 +645,7 @@ namespace SpaceMercs.MainWindow {
                     SaveGame(sfd.FileName);
                 }
                 catch (Exception ex) {
-                    MessageBox.Show(ex.ToString(), "Save Game Failed", MessageBoxButtons.OK);
+                    msgBox.PopupMessage(ex.ToString());
                 }
             }
             TravelDetails?.Unpause();
@@ -693,8 +696,7 @@ namespace SpaceMercs.MainWindow {
                     return;
                 }
                 catch (Exception ex) {
-                    MessageBox.Show(ex.ToString(), "Load Game Failed", MessageBoxButtons.OK);
-                    return;
+                    msgBox.PopupMessage(ex.ToString());
                 }
             }
         }
