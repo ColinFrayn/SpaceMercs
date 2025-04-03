@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -31,6 +31,7 @@
             SoldierStatus = new DataGridViewTextBoxColumn();
             btInventory = new Button();
             gbSoldier = new GroupBox();
+            label19 = new Label();
             btUpgradeStat = new Button();
             btColour = new Button();
             btIncreaseSkill = new Button();
@@ -39,6 +40,8 @@
             label17 = new Label();
             pbExperience = new PictureBox();
             groupBox2 = new GroupBox();
+            lbStamina = new Label();
+            label22 = new Label();
             lbLevel = new Label();
             label15 = new Label();
             label20 = new Label();
@@ -103,9 +106,6 @@
             label9 = new Label();
             lbInsufficientBerths = new Label();
             cdPickColour = new ColorDialog();
-            label19 = new Label();
-            lbStamina = new Label();
-            label22 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
             gbSoldier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
@@ -124,14 +124,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
             dgSoldiers.Location = new Point(14, 128);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -177,6 +177,7 @@
             // 
             // btInventory
             // 
+            btInventory.AllowDrop = true;
             btInventory.Font = new Font("Microsoft Sans Serif", 15.75F);
             btInventory.Location = new Point(377, 720);
             btInventory.Margin = new Padding(4, 3, 4, 3);
@@ -186,6 +187,8 @@
             btInventory.Text = "View Ship Storage";
             btInventory.UseVisualStyleBackColor = true;
             btInventory.Click += btInventory_Click;
+            btInventory.DragDrop += btInventory_DragDrop;
+            btInventory.DragEnter += btInventory_DragEnter;
             // 
             // gbSoldier
             // 
@@ -229,6 +232,18 @@
             gbSoldier.TabIndex = 8;
             gbSoldier.TabStop = false;
             gbSoldier.Text = "Soldier Details";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label19.Location = new Point(186, 171);
+            label19.Margin = new Padding(4, 0, 4, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(72, 16);
+            label19.TabIndex = 94;
+            label19.Text = "Endurance";
+            label19.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btUpgradeStat
             // 
@@ -329,6 +344,31 @@
             groupBox2.TabIndex = 86;
             groupBox2.TabStop = false;
             groupBox2.Text = "Primary Stats";
+            // 
+            // lbStamina
+            // 
+            lbStamina.BackColor = Color.Gold;
+            lbStamina.BorderStyle = BorderStyle.FixedSingle;
+            lbStamina.Font = new Font("Microsoft Sans Serif", 12F);
+            lbStamina.Location = new Point(88, 199);
+            lbStamina.Margin = new Padding(6, 2, 6, 2);
+            lbStamina.Name = "lbStamina";
+            lbStamina.Size = new Size(66, 27);
+            lbStamina.TabIndex = 92;
+            lbStamina.Text = "888/88";
+            lbStamina.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label22.Location = new Point(17, 205);
+            label22.Margin = new Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(56, 16);
+            label22.TabIndex = 91;
+            label22.Text = "Stamina";
+            label22.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lbLevel
             // 
@@ -779,6 +819,7 @@
             // 
             // lbEquipped
             // 
+            lbEquipped.AllowDrop = true;
             lbEquipped.FormattingEnabled = true;
             lbEquipped.HorizontalScrollbar = true;
             lbEquipped.Location = new Point(15, 315);
@@ -787,7 +828,12 @@
             lbEquipped.Size = new Size(213, 139);
             lbEquipped.TabIndex = 45;
             lbEquipped.SelectedIndexChanged += lbEquipped_SelectedIndexChanged;
+            lbEquipped.DragDrop += lbEquipped_DragDrop;
+            lbEquipped.DragEnter += lbEquipped_DragEnter;
             lbEquipped.DoubleClick += lbEquipped_DoubleClick;
+            lbEquipped.MouseDown += lbEquipped_MouseDown;
+            lbEquipped.MouseMove += lbEquipped_MouseMove;
+            lbEquipped.MouseUp += lbEquipped_MouseUp;
             // 
             // lbEncumber
             // 
@@ -837,6 +883,7 @@
             // 
             // lbInventory
             // 
+            lbInventory.AllowDrop = true;
             lbInventory.FormattingEnabled = true;
             lbInventory.HorizontalScrollbar = true;
             lbInventory.Location = new Point(15, 23);
@@ -845,7 +892,12 @@
             lbInventory.Size = new Size(213, 244);
             lbInventory.TabIndex = 0;
             lbInventory.SelectedIndexChanged += lbInventory_SelectedIndexChanged;
+            lbInventory.DragDrop += lbInventory_DragDrop;
+            lbInventory.DragEnter += lbInventory_DragEnter;
             lbInventory.DoubleClick += lbInventory_DoubleClick;
+            lbInventory.MouseDown += lbInventory_MouseDown;
+            lbInventory.MouseMove += lbInventory_MouseMove;
+            lbInventory.MouseUp += lbInventory_MouseUp;
             // 
             // lbCapacity
             // 
@@ -1086,43 +1138,6 @@
             cdPickColour.AnyColor = true;
             cdPickColour.Color = Color.Blue;
             cdPickColour.SolidColorOnly = true;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label19.Location = new Point(186, 171);
-            label19.Margin = new Padding(4, 0, 4, 0);
-            label19.Name = "label19";
-            label19.Size = new Size(72, 16);
-            label19.TabIndex = 94;
-            label19.Text = "Endurance";
-            label19.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lbStamina
-            // 
-            lbStamina.BackColor = Color.Gold;
-            lbStamina.BorderStyle = BorderStyle.FixedSingle;
-            lbStamina.Font = new Font("Microsoft Sans Serif", 12F);
-            lbStamina.Location = new Point(88, 199);
-            lbStamina.Margin = new Padding(6, 2, 6, 2);
-            lbStamina.Name = "lbStamina";
-            lbStamina.Size = new Size(66, 27);
-            lbStamina.TabIndex = 92;
-            lbStamina.Text = "888/88";
-            lbStamina.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label22.Location = new Point(17, 205);
-            label22.Margin = new Padding(4, 0, 4, 0);
-            label22.Name = "label22";
-            label22.Size = new Size(56, 16);
-            label22.TabIndex = 91;
-            label22.Text = "Stamina";
-            label22.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TeamView
             // 

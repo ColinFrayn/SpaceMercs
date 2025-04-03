@@ -905,10 +905,10 @@ namespace SpaceMercs {
             if (EquippedWeapon != null) w += EquippedWeapon.Mass;
             return w;
         }
-        public bool Equip(IEquippable eq) {
-            if (!Inventory.Contains(eq)) return false;
+        public bool Equip(IEquippable eq) {            
             if (!(eq is Armour || eq is Weapon)) return false;
-            Inventory.Remove(eq);
+            // Remove it if it's being carried (otherwise we might be dragging directly onto an equipment slot from outside the character's inventory)
+            if (Inventory.Contains(eq)) Inventory.Remove(eq);
             if (eq is Armour ar) {
                 HashSet<Armour> hsToUnequip = new HashSet<Armour>();
                 foreach (BodyPart bp in ar.Type.Locations) {

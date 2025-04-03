@@ -7,12 +7,11 @@ Test run Precursor mission (& keeping the core)
 
 Pay to reset UtilitySkill choices somehow. Maybe per point?
 
+Shredding ammo
+
 Add creature textures using bitmaps
 
-Ship Inventory selection / transfer is very annoying - scroll down, select, skip
-- Can we drag-drop? https://www.youtube.com/watch?v=_M0Xrkuux6k  https://www.youtube.com/watch?v=ln59zYyJvB4  
-- Add to EquipmentView / TeamView
-- Fix InventoryView weird change of selection
+DragDrop: Should be able to select single (SHIFT+drag) or multiple (CTRL+drag) in EquipmentView / TeamView
 
 ==================================================================================================================
 

@@ -30,6 +30,8 @@
             label17 = new Label();
             pbExperience = new PictureBox();
             groupBox2 = new GroupBox();
+            lbStamina = new Label();
+            label3 = new Label();
             lbLevel = new Label();
             label15 = new Label();
             label20 = new Label();
@@ -83,8 +85,6 @@
             Item = new DataGridViewTextBoxColumn();
             Count = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
-            lbStamina = new Label();
-            label3 = new Label();
             gbSoldier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
             groupBox2.SuspendLayout();
@@ -212,6 +212,31 @@
             groupBox2.TabIndex = 86;
             groupBox2.TabStop = false;
             groupBox2.Text = "Primary Stats";
+            // 
+            // lbStamina
+            // 
+            lbStamina.BackColor = Color.Gold;
+            lbStamina.BorderStyle = BorderStyle.FixedSingle;
+            lbStamina.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbStamina.Location = new Point(88, 196);
+            lbStamina.Margin = new Padding(6, 2, 6, 2);
+            lbStamina.Name = "lbStamina";
+            lbStamina.Size = new Size(66, 27);
+            lbStamina.TabIndex = 92;
+            lbStamina.Text = "888/88";
+            lbStamina.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(15, 202);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 16);
+            label3.TabIndex = 91;
+            label3.Text = "Stamina";
+            label3.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lbLevel
             // 
@@ -648,6 +673,7 @@
             // 
             // lbEquipped
             // 
+            lbEquipped.AllowDrop = true;
             lbEquipped.FormattingEnabled = true;
             lbEquipped.HorizontalScrollbar = true;
             lbEquipped.Location = new Point(15, 315);
@@ -656,7 +682,12 @@
             lbEquipped.Size = new Size(213, 139);
             lbEquipped.TabIndex = 45;
             lbEquipped.SelectedIndexChanged += lbEquipped_SelectedIndexChanged;
+            lbEquipped.DragDrop += lbEquipped_DragDrop;
+            lbEquipped.DragEnter += lbEquipped_DragEnter;
             lbEquipped.DoubleClick += lbEquipped_DoubleClick;
+            lbEquipped.MouseDown += lbEquipped_MouseDown;
+            lbEquipped.MouseMove += lbEquipped_MouseMove;
+            lbEquipped.MouseUp += lbEquipped_MouseUp;
             // 
             // lbEncumber
             // 
@@ -706,6 +737,7 @@
             // 
             // lbInventory
             // 
+            lbInventory.AllowDrop = true;
             lbInventory.FormattingEnabled = true;
             lbInventory.HorizontalScrollbar = true;
             lbInventory.Location = new Point(15, 23);
@@ -714,7 +746,12 @@
             lbInventory.Size = new Size(213, 244);
             lbInventory.TabIndex = 0;
             lbInventory.SelectedIndexChanged += lbInventory_SelectedIndexChanged;
+            lbInventory.DragDrop += lbInventory_DragDrop;
+            lbInventory.DragEnter += lbInventory_DragEnter;
             lbInventory.DoubleClick += lbInventory_DoubleClick;
+            lbInventory.MouseDown += lbInventory_MouseDown;
+            lbInventory.MouseMove += lbInventory_MouseMove;
+            lbInventory.MouseUp += lbInventory_MouseUp;
             // 
             // lbCapacity
             // 
@@ -799,6 +836,7 @@
             // 
             // dgFloor
             // 
+            dgFloor.AllowDrop = true;
             dgFloor.AllowUserToAddRows = false;
             dgFloor.AllowUserToDeleteRows = false;
             dgFloor.AllowUserToResizeColumns = false;
@@ -816,7 +854,12 @@
             dgFloor.TabIndex = 1;
             dgFloor.CellContentClick += dgFloor_CellContentClick;
             dgFloor.SelectionChanged += dgFloor_SelectionChanged;
+            dgFloor.DragDrop += dgFloor_DragDrop;
+            dgFloor.DragEnter += dgFloor_DragEnter;
             dgFloor.DoubleClick += dgFloor_DoubleClick;
+            dgFloor.MouseDown += dgFloor_MouseDown;
+            dgFloor.MouseMove += dgFloor_MouseMove;
+            dgFloor.MouseUp += dgFloor_MouseUp;
             // 
             // Item
             // 
@@ -844,31 +887,6 @@
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "On the Floor";
-            // 
-            // lbStamina
-            // 
-            lbStamina.BackColor = Color.Gold;
-            lbStamina.BorderStyle = BorderStyle.FixedSingle;
-            lbStamina.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbStamina.Location = new Point(88, 196);
-            lbStamina.Margin = new Padding(6, 2, 6, 2);
-            lbStamina.Name = "lbStamina";
-            lbStamina.Size = new Size(66, 27);
-            lbStamina.TabIndex = 92;
-            lbStamina.Text = "888/88";
-            lbStamina.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(15, 202);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(56, 16);
-            label3.TabIndex = 91;
-            label3.Text = "Stamina";
-            label3.TextAlign = ContentAlignment.MiddleRight;
             // 
             // EquipmentView
             // 

@@ -117,11 +117,11 @@ namespace SpaceMercs.Dialogs {
 
             // Prime skills
             lbLevel.Text = s.Level.ToString();
-            lbHealthTotal.Text = Math.Round(s.MaxHealth,0).ToString();
+            lbHealthTotal.Text = Math.Round(s.MaxHealth, 0).ToString();
             ttSoldier.SetToolTip(this.lbHealthTotal, s.BaseHealth + " (base) + " + s.StatBonuses(StatType.Health) + " (items)");
-            lbAttackTotal.Text = Math.Round(s.Attack,0).ToString();
+            lbAttackTotal.Text = Math.Round(s.Attack, 0).ToString();
             ttSoldier.SetToolTip(this.lbAttackTotal, $"{s.BaseAttack} (base) + {s.StatBonuses(StatType.Attack)} (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : string.Empty));
-            lbDefenceTotal.Text = Math.Round(s.Defence,0).ToString();
+            lbDefenceTotal.Text = Math.Round(s.Defence, 0).ToString();
             ttSoldier.SetToolTip(this.lbDefenceTotal, $"{s.BaseDefence} (base) + {s.StatBonuses(StatType.Defence)} (items) + {s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)");
             lbArmour.Text = s.BaseArmour.ToString("N1");
             string strArmour = (100.0 - (Utils.ArmourReduction(s.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
@@ -453,6 +453,140 @@ namespace SpaceMercs.Dialogs {
             if (s is null) return;
             if (s.PointsToSpend == 0) return;
             s.UpgradeStat();
+            ShowSelectedSoldierDetails();
+        }
+
+        // Drag-Drop functionality
+
+        private enum WindowSource { Equipment, Inventory };
+        private class DataAndSource {
+            public IItem dob { get; init; }
+            public WindowSource source { get; init; }
+        }
+        private Rectangle dragBoxFromMouseDown;
+        private int indexOfItemUnderMouseToDrag;
+        private Size dragSize = SystemInformation.DragSize;
+
+        private void lbEquipped_MouseDown(object sender, MouseEventArgs e) {
+            indexOfItemUnderMouseToDrag = lbEquipped.IndexFromPoint(e.X, e.Y);
+            if (indexOfItemUnderMouseToDrag != ListBox.NoMatches) {
+                dragBoxFromMouseDown = new Rectangle(
+                    new Point(e.X - (dragSize.Width / 2),
+                              e.Y - (dragSize.Height / 2)),
+                    dragSize);
+            }
+            else {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
+        }
+
+        private void lbEquipped_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    IItem? it = null;
+                    Soldier? thisSoldier = SelectedSoldier();
+                    if (thisSoldier is null) return;
+                    if (thisSoldier.EquippedWeapon != null && indexOfItemUnderMouseToDrag == lbEquipped.Items.Count - 1) it = thisSoldier.EquippedWeapon;
+                    else it = thisSoldier.EquippedArmour[indexOfItemUnderMouseToDrag];
+                    if (it is not null) {
+                        DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Equipment };
+                        lbEquipped.DoDragDrop(das, DragDropEffects.All);
+                    }
+                }
+            }
+        }
+
+        private void lbEquipped_MouseUp(object sender, MouseEventArgs e) {
+            dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void lbEquipped_DragEnter(object sender, DragEventArgs e) {
+            DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
+            if (das?.dob is Weapon or Armour) {
+                e.Effect = DragDropEffects.Move;
+            }
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void lbEquipped_DragDrop(object sender, DragEventArgs e) {
+            if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
+            if (das.dob is not IItem it) return;
+            if (das.source == WindowSource.Equipment) return;
+            Soldier? thisSoldier = SelectedSoldier();
+            if (thisSoldier is null) return;
+            if (it is IEquippable eq) {
+                thisSoldier.Equip(eq);
+            }
+            ShowSelectedSoldierDetails();
+            if (ivForm != null) ivForm.UpdateInventory();
+        }
+
+        private void lbInventory_MouseDown(object sender, MouseEventArgs e) {
+            indexOfItemUnderMouseToDrag = lbInventory.IndexFromPoint(e.X, e.Y);
+            if (indexOfItemUnderMouseToDrag != ListBox.NoMatches) {
+                dragBoxFromMouseDown = new Rectangle(
+                    new Point(e.X - (dragSize.Width / 2),
+                              e.Y - (dragSize.Height / 2)),
+                    dragSize);
+            }
+            else {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
+        }
+
+        private void lbInventory_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    Soldier? thisSoldier = SelectedSoldier();
+                    if (thisSoldier is null) return;
+                    IItem? it = thisSoldier.InventoryGrouped.Keys.ElementAt(indexOfItemUnderMouseToDrag);
+                    if (it is not null) {
+                        DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory };
+                        lbInventory.DoDragDrop(das, DragDropEffects.All);
+                    }
+                }
+            }
+        }
+
+        private void lbInventory_MouseUp(object sender, MouseEventArgs e) {
+            dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void lbInventory_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data?.GetData(typeof(DataAndSource)) is DataAndSource das) {
+                if (das.dob is Corpse) {
+                    e.Effect = DragDropEffects.None;
+                }
+                else {
+                    e.Effect = DragDropEffects.Move;
+                }
+            }
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void lbInventory_DragDrop(object sender, DragEventArgs e) {
+            if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
+            if (das.dob is not IItem it) return;
+            if (das.source == WindowSource.Inventory) return;
+            Soldier? thisSoldier = SelectedSoldier();
+            if (thisSoldier is null) return;
+            if (it is IEquippable eq && das.source == WindowSource.Equipment) thisSoldier.Unequip(eq);
+            ShowSelectedSoldierDetails();
+            if (ivForm != null) ivForm.UpdateInventory();
+        }
+
+        private void btInventory_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void btInventory_DragDrop(object sender, DragEventArgs e) {
+            if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
+            if (das.dob is not IItem it) return;
+            Soldier? thisSoldier = SelectedSoldier();
+            if (thisSoldier is null) return;
+            if (it is IEquippable eq && das.source == WindowSource.Equipment) thisSoldier.Unequip(eq);
+            thisSoldier.DropItem(it);
             ShowSelectedSoldierDetails();
         }
     }

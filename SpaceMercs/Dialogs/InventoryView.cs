@@ -67,7 +67,8 @@ namespace SpaceMercs.Dialogs {
             if (!PlayerTeam.Inventory.ContainsKey(eq)) { UpdateInventory(); return; }
             if (MessageBox.Show("Really destroy " + eq.Name + "?", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
             PlayerTeam.RemoveItemFromStores(eq, 1);
-            UpdateInventory();
+            if (PlayerTeam.Inventory.ContainsKey(eq)) UpdateInventory(eq);
+            else UpdateInventory();
         }
 
         private void dgInventory_SelectionChanged(object sender, EventArgs e) {
@@ -81,10 +82,6 @@ namespace SpaceMercs.Dialogs {
         // Update buttons etc. based on selections in the TeamView panel
         public void UpdateAll() {
             SetButtons();
-        }
-
-        private void InventoryView_Activated(object sender, EventArgs e) {
-            UpdateInventory();
         }
 
         private void dgInventory_DoubleClick(object sender, EventArgs e) {

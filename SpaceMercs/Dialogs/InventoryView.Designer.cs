@@ -162,7 +162,6 @@
             Name = "InventoryView";
             Text = "InventoryView";
             TopMost = true;
-            Activated += InventoryView_Activated;
             FormClosing += InventoryView_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dgInventory).EndInit();
             ResumeLayout(false);
