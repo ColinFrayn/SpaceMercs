@@ -209,6 +209,7 @@ namespace SpaceMercs {
                         }
                     }
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
+                    if (wp != null && wp.Shred > 0d) tgt.ShredArmour(wp.Shred);
 
                     // Apply effect?
                     if (wp != null) {

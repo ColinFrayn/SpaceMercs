@@ -27,6 +27,7 @@ namespace SpaceMercs {
         public string Name { get { if (OverrideRace != null) return OverrideRace.Name + " " + Type.Name; else return Type.Name; } }
         public int Size { get { return Type.Size; } }
         public double Facing { get; set; }
+        public double Shred { get; private set; }
         public Point Location { get { return new Point(X, Y); } }
         public Point Investigate { get; set; } = Point.Empty;
         public Point HidingPlace { get; set; } = Point.Empty;
@@ -138,6 +139,7 @@ namespace SpaceMercs {
             Random rand = new Random(X + Y * 1000);
             Facing = rand.Next(360);
             CurrentTarget = null;
+            Shred = 0d;
         }
         public bool CanOpenDoors { get { return Type.Interact; } }
         public double RangeTo(IEntity en) {
@@ -163,6 +165,7 @@ namespace SpaceMercs {
                 foreach (Effect eff in Effects) {
                     arm += eff.ArmourMod;
                 }
+                arm -= Shred;
                 if (arm < 0.0) arm = 0.0;
                 return arm;
             } 
@@ -220,6 +223,9 @@ namespace SpaceMercs {
             // Is the creature dead?
             if (Health <= 0.0) KillEntity(applyEffect!, fact!);
             return TotalDam;
+        }
+        public void ShredArmour(double shred) {
+            Shred += shred;
         }
         public Stash GenerateStash() {
             Stash st = new Stash(Location);
@@ -304,6 +310,7 @@ namespace SpaceMercs {
             if (ie.CurePoison) {
                 _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
             }
+            if (ie.Shred > 0d) ShredArmour(ie.Shred);
             InflictDamage(AllDam, applyEffect, fact);
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
@@ -363,6 +370,7 @@ namespace SpaceMercs {
             TY = -1;
             QuestItem = false;
             Visible = new bool[0, 0];
+            Shred = 0d;
         }
         public Creature(XmlNode xml, MissionLevel? lev) {
             CurrentLevel = lev;
@@ -388,6 +396,7 @@ namespace SpaceMercs {
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Shields", MaxShields);
+            Shred = xml.SelectNodeDouble("Shred", 0d);
 
             IsAlert = (xml.SelectSingleNode("Alert") is not null);
             QuestItem = (xml.SelectSingleNode("QuestItem") is not null);
@@ -452,6 +461,7 @@ namespace SpaceMercs {
                 if (Health != MaxHealth) file.WriteLine(" <Health>" + Health.ToString("N2") + "</Health>");
                 if (Stamina != MaxStamina) file.WriteLine(" <Stamina>" + Stamina.ToString("N2") + "</Stamina>");
                 if (Shields != MaxShields) file.WriteLine(" <Shields>" + Shields.ToString("N2") + "</Shields>");
+                if (Math.Abs(Shred) > 0.01) file.WriteLine($" <Shred>{Shred:N2}</Shred>");
                 file.WriteLine(" <Facing>" + Facing + "</Facing>");
                 if (EquippedWeapon != null && Type.Weapons.Count > 1) file.WriteLine(" <Weapon>" + EquippedWeapon.Type.Name + "</Weapon>"); // Save only if ambiguous
                 if (CurrentTarget != null) {

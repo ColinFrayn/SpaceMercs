@@ -32,6 +32,7 @@ namespace SpaceMercs {
         bool IsInjured { get; }
         double Encumbrance { get; }
         bool HasMoved { get; }
+        double Shred { get; }
 
         // Methods
         bool CanSee(int x, int y);
@@ -47,6 +48,7 @@ namespace SpaceMercs {
         double RangeTo(int tx, int ty);
         void EndOfTurn(VisualEffect.EffectFactory fact, Action<IEntity> centreView, PlaySoundDelegate playSound, ShowMessageDelegate showMessage, ItemEffect.ApplyItemEffect applyEffect);
         double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact);
+        void ShredArmour(double shred);
         double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam);
         Stash GenerateStash();
         double GetDamageReductionByDamageType(WeaponType.DamageType type);

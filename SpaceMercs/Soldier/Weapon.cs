@@ -23,6 +23,7 @@ namespace SpaceMercs {
                 if (Type.Area > 0d) sb.AppendLine($"Area : {Type.Area}m rad");
                 if (Type.Shots > 1) sb.AppendLine($"MultiShot : {Type.Shots}");
                 if (Recoil > 0d) sb.AppendLine($"Recoil : -{Recoil.ToString("0.##")}/shot");
+                if (Shred > 0d) sb.AppendLine($"Shred : -{Shred.ToString("0.##")}/shot");
                 foreach (KeyValuePair<Soldier.UtilitySkill, int> kvp in Type.SkillBoosts) {
                     sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
                 }
@@ -54,14 +55,15 @@ namespace SpaceMercs {
         // Weapon-specific properties
         public WeaponType Type { get; private set; }
         public WeaponMod? Mod { get; private set; }
-        public double DBase { get { return Type.DBase * (1.0 + (Level / 10.0)) + (Mod?.Damage ?? 0); } }
-        public double DMod { get { return Type.DMod * (1.0 + (Level / 10.0)); } }
-        public double StaminaCost { get { return Type.Speed * (1.0 - (Level / 20.0)); } }
-        public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod?.Accuracy ?? 0); } }
-        public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod?.DropoffMod ?? 1.0); } }
-        public double Recoil { get { return Type.Recoil * Math.Pow(0.92, Level) * (Mod?.RecoilMod ?? 1.0); } }
-        public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod?.Silencer ?? 0.0)); } }
         public int Recharge { get; private set; }
+        public double DBase { get { return Type.DBase * (1d + (Level / 10d)) + (Mod?.Damage ?? 0d); } }
+        public double DMod { get { return Type.DMod * (1d + (Level / 10d)); } }
+        public double StaminaCost { get { return Type.Speed * (1d - (Level / 20d)); } }
+        public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod?.Accuracy ?? 0d); } }
+        public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod?.DropoffMod ?? 1d); } }
+        public double Recoil { get { return Type.Recoil * Math.Pow(0.92, Level) * (Mod?.RecoilMod ?? 1d); } }
+        public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod?.Silencer ?? 0d)); } }
+        public double Shred { get { return Type.Shred * (1d + (Level / 5d)) + (Mod?.Shred ?? 0d); } }
         public Dictionary<WeaponType.DamageType, double> GetBonusDamage() {
             Dictionary<WeaponType.DamageType, double> bdam = new Dictionary<WeaponType.DamageType, double>();
             // TODO Implement bonus damage
@@ -126,6 +128,8 @@ namespace SpaceMercs {
                 int hash = 17;
                 hash = hash * 23 + Level.GetHashCode();
                 hash = hash * 37 + Type.GetHashCode();
+                hash = hash * 29 + (Mod?.GetHashCode() ?? 0);
+                hash = hash * 19 + Recharge;
                 return hash;
             }
         }
@@ -134,6 +138,7 @@ namespace SpaceMercs {
             if (obj is not Weapon wp) return false;
             if (wp.Level != Level || wp.Type != Type) return false;
             if (wp.Mod != Mod) return false;
+            if (wp.Recharge != Recharge) return false;
             return true;
         }
         public override string ToString() {

@@ -67,22 +67,15 @@ namespace SpaceMercs.Dialogs {
             // Prime skills
             lbLevel.Text = ThisSoldier.Level.ToString();
             lbHealthTotal.Text = Math.Round(ThisSoldier.MaxHealth, 0).ToString();
-            ttSoldier.SetToolTip(this.lbHealthTotal, ThisSoldier.BaseHealth + " (base) + " + ThisSoldier.StatBonuses(StatType.Health) + " (items)");
+            ttSoldier.SetToolTip(this.lbHealthTotal, ThisSoldier.HealthExplanation);
             lbAttackTotal.Text = Math.Round(ThisSoldier.Attack, 0).ToString();
-            double bfi = ThisSoldier.StatBonuses(StatType.Attack);
-            ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.BaseAttack + " (base) + " + bfi + " (items)" + ((ThisSoldier.EquippedWeapon != null) ? (" + " + ThisSoldier.GetSoldierSkillWithWeapon(ThisSoldier.EquippedWeapon.Type) + " (weapon skills)") : ""));
+            ttSoldier.SetToolTip(this.lbAttackTotal, ThisSoldier.AttackExplanation);
             lbDefenceTotal.Text = Math.Round(ThisSoldier.Defence, 0).ToString();
-            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{ThisSoldier.BaseDefence} (base) + {ThisSoldier.StatBonuses(StatType.Defence)} (items) + {ThisSoldier.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)");
+            ttSoldier.SetToolTip(this.lbDefenceTotal, ThisSoldier.DefenceExplanation);
             lbArmour.Text = ThisSoldier.BaseArmour.ToString("N1");
-            string strArmour = (100.0 - (Utils.ArmourReduction(ThisSoldier.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
-            Dictionary<WeaponType.DamageType, double> AllRes = ThisSoldier.GetAllResistances();
-            if (AllRes.Any()) strArmour += Environment.NewLine + "Bonus Resistances:";
-            foreach (WeaponType.DamageType tp in AllRes.Keys) {
-                strArmour += Environment.NewLine + tp.ToString() + " : " + (int)Math.Round(AllRes[tp]) + "%";
-            }
-            ttSoldier.SetToolTip(this.lbArmour, strArmour);
+            ttSoldier.SetToolTip(this.lbArmour, ThisSoldier.ArmourExplanation);
             lbStamina.Text = $"{ThisSoldier.MaxStamina:N0}";
-            ttSoldier.SetToolTip(this.lbStamina, $"{ThisSoldier.BaseStamina} (base) + {ThisSoldier.StatBonuses(StatType.Stamina)} (items) / {ThisSoldier.StaminaRegen} (recharge)");
+            ttSoldier.SetToolTip(this.lbStamina, ThisSoldier.StaminaExplanation);
             pbExperience.Refresh(); // Display the experience progress bar
 
             // Weapon skills

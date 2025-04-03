@@ -515,6 +515,7 @@
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
     <Damage Area="2" Type="Grenade">4+4</Damage>
+    <Shred>2</Shred>
     <Desc>An automatically reloading grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
@@ -541,6 +542,7 @@
     <Cost>550</Cost>
     <Rarity>22</Rarity>
     <Speed>20</Speed>
+    <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
     <Damage Area="2" Type="Grenade">5+5</Damage>
     <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
@@ -568,6 +570,7 @@
     <Cost>1500</Cost>
     <Rarity>25</Rarity>
     <Speed>22</Speed>
+    <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
     <Damage Area="2" Type="Grenade">6+6</Damage>
     <Desc>A heavy grenade launcher that spits high-explosive heavy grenade rounds.</Desc>
@@ -666,6 +669,7 @@
     <Cost>75</Cost>
     <Rarity>25</Rarity>
     <Speed>13</Speed>
+    <Shred>3</Shred>
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinPop>25</MinPop>
@@ -677,7 +681,7 @@
     </Requirements>
     <Range Accuracy="-1" DropOff="0.5" Length="0.3" Speed="0.8">10</Range>
     <Damage>5+2</Damage>
-    <Desc>A rifle-like device that throws bladed discs with high speed</Desc>
+    <Desc>A rifle-like device that throws bladed discs with high speed, shredding enemy armour.</Desc>
     <Sound>MachineGun</Sound>
     <Noise>8</Noise>
     <Materials>
@@ -776,6 +780,7 @@
     <Rarity>9</Rarity>
     <Speed>16</Speed>
     <Range>1</Range>
+    <Shred>4</Shred>
     <Damage>5+6</Damage>
     <Desc>A whirring chainsaw in a sword shape</Desc>
     <Sound>Chainsaw</Sound>
@@ -871,6 +876,7 @@
     <Speed>18</Speed>
     <Shots>3</Shots>
     <Recoil>0.5</Recoil>
+    <Shred>2</Shred>
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinPop>24</MinPop>
@@ -937,6 +943,7 @@
     <Sound>SwordSlice</Sound>
     <Recoil>0.4</Recoil>
     <Delay>230</Delay>
+    <Shred>1</Shred>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Poisonous Bite">

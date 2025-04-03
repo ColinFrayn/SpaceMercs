@@ -17,6 +17,11 @@ namespace SpaceMercs.Dialogs {
             lbArmour.Text = ent.BaseArmour.ToString();
             lbHealth.Text = ent.Health.ToString();
             lbStamina.Text = ent.Stamina.ToString();
+            if (Math.Abs(ent.Shred) > 0.01) {
+                lbShred.Visible = true;
+                lbShred.Text = $"-{ent.Shred:N2} shred";
+            }
+            else lbShred.Visible = false;
             if (ent.MaxShields > 0) {
                 lbShields.Visible = true;
                 label4.Visible = true;

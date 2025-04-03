@@ -45,6 +45,7 @@ namespace SpaceMercs {
         public double Attack { get; private set; }
         public double Defence { get; private set; }
         public string Name { get; private set; }
+        public double Shred { get; private set; }
         public Weapon? EquippedWeapon { get; private set; }
         public int Size { get { return 1; } }
         public int TravelRange { get { /* if (Encumbrance >= 1.0) return 0; */ return (int)Math.Floor(Stamina / MovementCost); } }
@@ -184,6 +185,7 @@ namespace SpaceMercs {
             Facing = 0.0;
             HasMoved = false;
             EquippedWeapon?.Reset();
+            Shred = 0d;
         }
         public bool CanOpenDoors { get { return true; } }
         public double RangeTo(IEntity en) {
@@ -325,7 +327,11 @@ namespace SpaceMercs {
             if (ie.CurePoison) {
                 _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
             }
+            if (ie.Shred > 0d) ShredArmour(ie.Shred);
             CalculateMaxStats();
+        }
+        public void ShredArmour(double shred) {
+            Shred += shred;
         }
 
         // Inventory
@@ -598,6 +604,7 @@ namespace SpaceMercs {
             CalculateMaxStats();
             rnd = new Random(randseed);
             PrimaryColor = Color.Blue;
+            Shred = 0d;
         }
         public Soldier(XmlNode xml, Team? pt) {
             PlayerTeam = pt;
@@ -640,6 +647,7 @@ namespace SpaceMercs {
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Health", MaxHealth);
+            Shred = xml.SelectNodeDouble("Shred", 0d);
 
             // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {
@@ -786,6 +794,8 @@ namespace SpaceMercs {
             if (PlayerTeam != null) file.WriteLine(" <Stamina>" + Stamina + "</Stamina>");
             if (PlayerTeam != null) file.WriteLine(" <Shields>" + Shields + "</Shields>");
             if (PlayerTeam != null) file.WriteLine(" <Facing>" + Facing + "</Facing>");
+            if (PlayerTeam != null && Math.Abs(Shred) > 0.01) file.WriteLine($" <Shred>{Shred:N2}</Shred>");
+
             file.WriteLine($" <Level>{Level}</Level>");
             file.WriteLine($" <XP>{Experience}</XP>");
             file.WriteLine($" <Gender>{Gender}</Gender>");
@@ -1001,6 +1011,7 @@ namespace SpaceMercs {
                 foreach (Effect eff in Effects) {
                     arm += eff.ArmourMod;
                 }
+                arm -= Shred;
                 if (arm < 0.0) arm = 0.0;
                 return arm;
             }
@@ -1698,5 +1709,39 @@ namespace SpaceMercs {
         public string InsightExplanation => $"{BaseInsight} (base) {(StatBonuses(StatType.Insight) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Insight))} (items)";
         public string ToughnessExplanation => $"{BaseToughness} (base) {(StatBonuses(StatType.Toughness) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Toughness))} (items)";
         public string EnduranceExplanation => $"{BaseEndurance} (base) {(StatBonuses(StatType.Endurance) >= 0 ? "+" : "-")} {Math.Abs(StatBonuses(StatType.Endurance))} (items)";
+        public string HealthExplanation => $"{BaseHealth} (base) + {StatBonuses(StatType.Health)} (items)";
+        public string AttackExplanation {
+            get {
+                double bfi = StatBonuses(StatType.Attack);
+                if (EquippedWeapon != null) {
+                    return $"{BaseAttack} (base) + {bfi} (items) {GetSoldierSkillWithWeapon(EquippedWeapon.Type)} (weapon skills)";
+                }
+                return $"{BaseAttack} (base) + {bfi} (items)";
+            }
+        }
+        public string DefenceExplanation => $"{BaseDefence} (base) + {StatBonuses(StatType.Defence)} (items) + {GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)";
+        public string ArmourExplanation {
+            get {
+                double baseArmour = 0d;
+                foreach (Armour ar in EquippedArmour) {
+                    baseArmour += ar.BaseArmour;
+                }
+                double effects = 0d;
+                foreach (Effect eff in Effects) {
+                    effects += eff.ArmourMod;
+                }
+                string strArmour = $"{baseArmour:N2} (base)";
+                if (effects != 0d) strArmour += $" + {effects:N2} (effects)";
+                if (Shred != 0d) strArmour += $" - {Shred:N2} (shred)";
+                strArmour += Environment.NewLine + $"{100.0 - (Utils.ArmourReduction(BaseArmour) * 100.0):N2}% reduction";
+                Dictionary<WeaponType.DamageType, double> AllRes = GetAllResistances();
+                if (AllRes.Any()) strArmour += Environment.NewLine + "Bonus Res.:";
+                foreach (WeaponType.DamageType tp in AllRes.Keys) {
+                    strArmour += Environment.NewLine + tp.ToString() + " : " + (int)Math.Round(AllRes[tp]) + "%";
+                }
+                return strArmour;
+            }
+        }
+        public string StaminaExplanation => $"{BaseStamina} (base) + {StatBonuses(StatType.Stamina)} (items) / {StaminaRegen} (recharge)";
     }
 }

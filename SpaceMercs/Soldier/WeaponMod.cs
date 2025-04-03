@@ -12,6 +12,7 @@ namespace SpaceMercs {
         public int Silencer { get; private set; }
         public double Accuracy { get; private set; }
         public double Damage { get; private set; }
+        public double Shred { get; private set; }
         public double RecoilMod { get; private set; }
         public string Char { get; private set; }
         public Dictionary<MaterialType, int> Materials { get; private set; }
@@ -31,6 +32,7 @@ namespace SpaceMercs {
             Accuracy = xml.SelectNodeDouble("Accuracy", 0d);
             Damage = xml.SelectNodeDouble("Damage", 0d);
             RecoilMod = xml.SelectNodeDouble("RecoilMod", 1d);
+            Shred = xml.SelectNodeDouble("Shred", 0d);
         }
 
         public bool CanBeFittedTo(Weapon wp) {

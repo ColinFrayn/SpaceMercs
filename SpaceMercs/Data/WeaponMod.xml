@@ -36,6 +36,12 @@
     <Desc>A powerful enhancement to this weapon's damage.</Desc>
     <Damage>1</Damage>
   </WeaponMod>
+  <WeaponMod Name="Shredding Rounds" Char="S">
+    <Mass>0.2</Mass>
+    <CostMod>0.2</CostMod>
+    <Desc>Specially designed ammunition that shreds enemy armour.</Desc>
+    <Shred>1</Shred>
+  </WeaponMod>
   <WeaponMod Name="Nanofine Blade" Char="D">
     <Mass>0.0</Mass>
     <CostMod>0.25</CostMod>

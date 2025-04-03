@@ -16,6 +16,7 @@ namespace SpaceMercs {
         public bool Scan { get; private set; }
         public bool Teleport { get; private set; }
         public bool Instant { get; private set; }
+        public double Shred { get; private set; }
 
         // Delegate
         public delegate void ApplyItemEffect(IEntity? source, ItemEffect ie, int px, int py);
@@ -29,6 +30,7 @@ namespace SpaceMercs {
             SingleUse = xml.SelectSingleNode("SingleUse") != null;
             NoiseLevel = xml.GetAttributeInt("Noise", 0);
             CurePoison = xml.SelectSingleNode("CurePoison") != null;
+            Shred = xml.SelectNodeDouble("Shred", 0.0);
 
             XmlNode? xsk = xml.SelectSingleNode("Skill");
             if (xsk is not null) {

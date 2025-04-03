@@ -27,6 +27,7 @@ namespace SpaceMercs {
         public double BaseDelay { get; private set; } // Delay before the first shot
         public double ShotLength { get; private set; }
         public double ShotSpeed { get; private set; }
+        public double Shred { get; private set; }
         public Color ShotColor { get; private set; }
         public ShotType WeaponShotType { get; private set; }
         public int Recharge { get; private set; }
@@ -76,6 +77,7 @@ namespace SpaceMercs {
             Recharge = xml.SelectNodeInt("Recharge", 0);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);
+            Shred = xml.SelectNodeDouble("Shred", 0.0);
             BaseDelay = xml.SelectNodeDouble("BaseDelay", 0.0);
         }
 

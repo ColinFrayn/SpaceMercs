@@ -118,21 +118,15 @@ namespace SpaceMercs.Dialogs {
             // Prime skills
             lbLevel.Text = s.Level.ToString();
             lbHealthTotal.Text = Math.Round(s.MaxHealth, 0).ToString();
-            ttSoldier.SetToolTip(this.lbHealthTotal, s.BaseHealth + " (base) + " + s.StatBonuses(StatType.Health) + " (items)");
+            ttSoldier.SetToolTip(this.lbHealthTotal, s.HealthExplanation);
             lbAttackTotal.Text = Math.Round(s.Attack, 0).ToString();
-            ttSoldier.SetToolTip(this.lbAttackTotal, $"{s.BaseAttack} (base) + {s.StatBonuses(StatType.Attack)} (items)" + ((s.EquippedWeapon != null) ? (" + " + s.GetSoldierSkillWithWeapon(s.EquippedWeapon.Type) + " (weapon skills)") : string.Empty));
+            ttSoldier.SetToolTip(this.lbAttackTotal, s.AttackExplanation);
             lbDefenceTotal.Text = Math.Round(s.Defence, 0).ToString();
-            ttSoldier.SetToolTip(this.lbDefenceTotal, $"{s.BaseDefence} (base) + {s.StatBonuses(StatType.Defence)} (items) + {s.GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)");
+            ttSoldier.SetToolTip(this.lbDefenceTotal, s.DefenceExplanation);
             lbArmour.Text = s.BaseArmour.ToString("N1");
-            string strArmour = (100.0 - (Utils.ArmourReduction(s.BaseArmour) * 100.0)).ToString("N2") + "% base damage reduction";
-            Dictionary<WeaponType.DamageType, double> AllRes = s.GetAllResistances();
-            if (AllRes.Any()) strArmour += Environment.NewLine + "Bonus Resistances:";
-            foreach (WeaponType.DamageType tp in AllRes.Keys) {
-                strArmour += Environment.NewLine + tp.ToString() + " : " + (int)Math.Round(AllRes[tp]) + "%";
-            }
-            ttSoldier.SetToolTip(this.lbArmour, strArmour);
+            ttSoldier.SetToolTip(this.lbArmour, s.ArmourExplanation);
             lbStamina.Text = $"{s.MaxStamina:N0}";
-            ttSoldier.SetToolTip(this.lbStamina, $"{s.BaseStamina} (base) + {s.StatBonuses(StatType.Stamina)} (items) / {s.StaminaRegen} (recharge)");
+            ttSoldier.SetToolTip(this.lbStamina, s.StaminaExplanation);
             pbExperience.Refresh(); // Display the experience progress bar
             btUpgradeStat.Enabled = s.PointsToSpend > 0;
             btUpgradeStat.Visible = s.PointsToSpend > 0;

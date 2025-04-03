@@ -7,7 +7,7 @@ Test run Precursor mission (& keeping the core)
 
 Pay to reset UtilitySkill choices somehow. Maybe per point?
 
-Shredding ammo
+Disc thrower needs a sound effect
 
 Add creature textures using bitmaps
 

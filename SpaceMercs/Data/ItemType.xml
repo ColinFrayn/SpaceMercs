@@ -178,6 +178,7 @@
       <SingleUse/>
       <Radius>2.0</Radius>
       <Range>8</Range>
+      <Shred>2</Shred>
       <Effect>
         <Damage Type="Physical">16</Damage>
       </Effect>
@@ -309,13 +310,13 @@
       <SingleUse/>
       <Radius>2.0</Radius>
       <Range>8</Range>
+      <Shred>6</Shred>
       <Effect>
         <Damage Type="Physical">16</Damage>
       </Effect>
       <Effect Name="Acid Damage">
         <Duration>4</Duration>
         <Damage Type="Acid">6</Damage>
-        <ArmourMod>-8</ArmourMod>
       </Effect>
       <Noise>8</Noise>
       <Sound>Blast</Sound>
@@ -337,6 +338,7 @@
       <SingleUse/>
       <Radius>2.0</Radius>
       <Range>8</Range>
+      <Shred>2</Shred>
       <Effect>
         <Damage Type="Physical">16</Damage>
       </Effect>
@@ -375,6 +377,7 @@
       <SingleUse/>
       <Radius>2.0</Radius>
       <Range>8</Range>
+      <Shred>5</Shred>
       <Effect>
         <Damage Type="Physical">32</Damage>
       </Effect>
