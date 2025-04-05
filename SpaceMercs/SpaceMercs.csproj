@@ -187,6 +187,9 @@
     <None Update="Sounds\CashRegister.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sounds\Catapult.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sounds\ChainGun.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

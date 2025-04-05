@@ -2,16 +2,14 @@
 ToDo List
 -------------------------------------------------
 
-Test run Precursor mission (& keeping the core)
-- Precursor: Test level type/size/sparseness changes at lower levels
-
 Pay to reset UtilitySkill choices somehow. Maybe per point?
 
-Disc thrower needs a sound effect
+DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an entire stack Floor<->Inventory or ShipStores<-<>Inventory.
 
 Add creature textures using bitmaps
 
-DragDrop: Should be able to select single (SHIFT+drag) or multiple (CTRL+drag) in EquipmentView / TeamView
+Test run Precursor mission (& keeping the core)
+- Precursor: Test level type/size/sparseness changes at lower levels
 
 ==================================================================================================================
 

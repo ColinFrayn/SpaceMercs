@@ -679,10 +679,10 @@
       <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
-    <Range Accuracy="-1" DropOff="0.5" Length="0.3" Speed="0.8">10</Range>
+    <Range Accuracy="-1" DropOff="0.5" Length="0.3" Speed="0.8">9</Range>
     <Damage>5+2</Damage>
     <Desc>A rifle-like device that throws bladed discs with high speed, shredding enemy armour.</Desc>
-    <Sound>MachineGun</Sound>
+    <Sound>Catapult</Sound>
     <Noise>8</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>

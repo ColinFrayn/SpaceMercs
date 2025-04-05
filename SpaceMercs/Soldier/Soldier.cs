@@ -5,9 +5,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
 using System.Collections.ObjectModel;
-using System.DirectoryServices;
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
@@ -1714,7 +1712,7 @@ namespace SpaceMercs {
             get {
                 double bfi = StatBonuses(StatType.Attack);
                 if (EquippedWeapon != null) {
-                    return $"{BaseAttack} (base) + {bfi} (items) {GetSoldierSkillWithWeapon(EquippedWeapon.Type)} (weapon skills)";
+                    return $"{BaseAttack} (base) + {bfi} (items) + {GetSoldierSkillWithWeapon(EquippedWeapon.Type)} (weapon skills)";
                 }
                 return $"{BaseAttack} (base) + {bfi} (items)";
             }
