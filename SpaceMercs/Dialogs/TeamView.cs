@@ -583,5 +583,9 @@ namespace SpaceMercs.Dialogs {
             thisSoldier.DropItem(it);
             ShowSelectedSoldierDetails();
         }
+
+        private void label17_Click(object sender, EventArgs e) {
+
+        }
     }
 }

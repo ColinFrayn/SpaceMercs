@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Pay to reset UtilitySkill choices somehow. Maybe per point?
-
 DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an entire stack Floor<->Inventory or ShipStores<-<>Inventory.
 
 Add creature textures using bitmaps

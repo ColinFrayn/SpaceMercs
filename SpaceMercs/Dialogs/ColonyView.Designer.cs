@@ -91,6 +91,17 @@
             dgcLocation = new DataGridViewTextBoxColumn();
             dgcValue = new DataGridViewTextBoxColumn();
             dgcAvail = new DataGridViewTextBoxColumn();
+            tpTraining = new TabPage();
+            lbTrainCost = new Label();
+            btForgetSkill = new Button();
+            btIncreaseSkill = new Button();
+            btAddNewSkill = new Button();
+            lbUnspent = new Label();
+            label18 = new Label();
+            lbUtilitySkills = new ListBox();
+            label17 = new Label();
+            cbSoldierToTrain = new ComboBox();
+            label14 = new Label();
             tpDiplomacy = new TabPage();
             pbExperience = new PictureBox();
             lbImproveRelations = new Label();
@@ -131,6 +142,8 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
+            lbTeamCash = new Label();
+            label20 = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -142,6 +155,7 @@
             ((System.ComponentModel.ISupportInitialize)dgShips).BeginInit();
             tpUpgrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgInventory).BeginInit();
+            tpTraining.SuspendLayout();
             tpDiplomacy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
             tpDetails.SuspendLayout();
@@ -155,6 +169,7 @@
             tcMain.Controls.Add(tpMissions);
             tcMain.Controls.Add(tpShips);
             tcMain.Controls.Add(tpUpgrade);
+            tcMain.Controls.Add(tpTraining);
             tcMain.Controls.Add(tpDiplomacy);
             tcMain.Controls.Add(tpDetails);
             tcMain.Dock = DockStyle.Fill;
@@ -163,7 +178,7 @@
             tcMain.Margin = new Padding(4, 3, 4, 3);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new Size(644, 548);
+            tcMain.Size = new Size(662, 548);
             tcMain.TabIndex = 0;
             tcMain.SelectedIndexChanged += tcMain_SelectedIndexChanged;
             // 
@@ -181,7 +196,7 @@
             tpMerchant.Location = new Point(4, 29);
             tpMerchant.Margin = new Padding(4, 3, 4, 3);
             tpMerchant.Name = "tpMerchant";
-            tpMerchant.Size = new Size(636, 515);
+            tpMerchant.Size = new Size(654, 515);
             tpMerchant.TabIndex = 0;
             tpMerchant.Text = "Merchants";
             tpMerchant.UseVisualStyleBackColor = true;
@@ -203,7 +218,7 @@
             // 
             btRandomiseMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btRandomiseMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btRandomiseMerchant.Location = new Point(518, 480);
+            btRandomiseMerchant.Location = new Point(536, 480);
             btRandomiseMerchant.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMerchant.Name = "btRandomiseMerchant";
             btRandomiseMerchant.Size = new Size(105, 27);
@@ -247,7 +262,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 9.75F);
             label1.ImageAlign = ContentAlignment.MiddleRight;
-            label1.Location = new Point(356, 16);
+            label1.Location = new Point(374, 16);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(36, 16);
@@ -258,7 +273,7 @@
             // tbFilter
             // 
             tbFilter.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            tbFilter.Location = new Point(400, 13);
+            tbFilter.Location = new Point(418, 13);
             tbFilter.Margin = new Padding(4, 3, 4, 3);
             tbFilter.Name = "tbFilter";
             tbFilter.Size = new Size(218, 26);
@@ -269,7 +284,7 @@
             // 
             btBuyMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btBuyMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btBuyMerchant.Location = new Point(263, 479);
+            btBuyMerchant.Location = new Point(281, 479);
             btBuyMerchant.Margin = new Padding(4, 3, 4, 3);
             btBuyMerchant.Name = "btBuyMerchant";
             btBuyMerchant.Size = new Size(102, 28);
@@ -295,7 +310,7 @@
             dgMerchant.RowHeadersVisible = false;
             dgMerchant.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgMerchant.ShowEditingIcon = false;
-            dgMerchant.Size = new Size(612, 415);
+            dgMerchant.Size = new Size(630, 415);
             dgMerchant.TabIndex = 1;
             dgMerchant.SortCompare += dgMerchant_SortCompare;
             dgMerchant.DoubleClick += dgMerchant_DoubleClick;
@@ -355,7 +370,7 @@
             tpMercenaries.Location = new Point(4, 29);
             tpMercenaries.Margin = new Padding(4, 3, 4, 3);
             tpMercenaries.Name = "tpMercenaries";
-            tpMercenaries.Size = new Size(636, 515);
+            tpMercenaries.Size = new Size(654, 515);
             tpMercenaries.TabIndex = 1;
             tpMercenaries.Text = "Mercenaries";
             tpMercenaries.UseVisualStyleBackColor = true;
@@ -393,7 +408,7 @@
             // 
             btRandomiseMercs.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btRandomiseMercs.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btRandomiseMercs.Location = new Point(518, 479);
+            btRandomiseMercs.Location = new Point(536, 479);
             btRandomiseMercs.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMercs.Name = "btRandomiseMercs";
             btRandomiseMercs.Size = new Size(105, 27);
@@ -409,7 +424,7 @@
             btHire.Location = new Point(223, 479);
             btHire.Margin = new Padding(4, 3, 4, 3);
             btHire.Name = "btHire";
-            btHire.Size = new Size(189, 28);
+            btHire.Size = new Size(207, 28);
             btHire.TabIndex = 3;
             btHire.Text = "Hire";
             btHire.UseVisualStyleBackColor = true;
@@ -432,7 +447,7 @@
             dgMercenaries.RowHeadersVisible = false;
             dgMercenaries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgMercenaries.ShowEditingIcon = false;
-            dgMercenaries.Size = new Size(612, 455);
+            dgMercenaries.Size = new Size(630, 455);
             dgMercenaries.TabIndex = 2;
             dgMercenaries.SortCompare += dgMercenaries_SortCompare;
             dgMercenaries.DoubleClick += dgMercenaries_DoubleClick;
@@ -478,16 +493,16 @@
             tpMissions.Location = new Point(4, 29);
             tpMissions.Margin = new Padding(4, 3, 4, 3);
             tpMissions.Name = "tpMissions";
-            tpMissions.Size = new Size(636, 515);
+            tpMissions.Size = new Size(654, 515);
             tpMissions.TabIndex = 2;
-            tpMissions.Text = "Mission Board";
+            tpMissions.Text = "Missions";
             tpMissions.UseVisualStyleBackColor = true;
             // 
             // btRandomiseMissions
             // 
             btRandomiseMissions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btRandomiseMissions.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btRandomiseMissions.Location = new Point(516, 475);
+            btRandomiseMissions.Location = new Point(534, 475);
             btRandomiseMissions.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMissions.Name = "btRandomiseMissions";
             btRandomiseMissions.Size = new Size(105, 27);
@@ -503,7 +518,7 @@
             btAccept.Location = new Point(226, 475);
             btAccept.Margin = new Padding(4, 3, 4, 3);
             btAccept.Name = "btAccept";
-            btAccept.Size = new Size(182, 28);
+            btAccept.Size = new Size(200, 28);
             btAccept.TabIndex = 4;
             btAccept.Text = "Accept";
             btAccept.UseVisualStyleBackColor = true;
@@ -526,7 +541,7 @@
             dgMissions.RowHeadersVisible = false;
             dgMissions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgMissions.ShowEditingIcon = false;
-            dgMissions.Size = new Size(606, 448);
+            dgMissions.Size = new Size(624, 448);
             dgMissions.TabIndex = 2;
             dgMissions.SortCompare += dgMissions_SortCompare;
             dgMissions.DoubleClick += dgMissions_DoubleClick;
@@ -593,7 +608,7 @@
             tpShips.Location = new Point(4, 29);
             tpShips.Margin = new Padding(4, 3, 4, 3);
             tpShips.Name = "tpShips";
-            tpShips.Size = new Size(636, 515);
+            tpShips.Size = new Size(654, 515);
             tpShips.TabIndex = 3;
             tpShips.Text = "Ship Vendor";
             tpShips.UseVisualStyleBackColor = true;
@@ -634,7 +649,7 @@
             btUpgrade.Location = new Point(223, 477);
             btUpgrade.Margin = new Padding(4, 3, 4, 3);
             btUpgrade.Name = "btUpgrade";
-            btUpgrade.Size = new Size(189, 28);
+            btUpgrade.Size = new Size(207, 28);
             btUpgrade.TabIndex = 6;
             btUpgrade.Text = "Upgrade";
             btUpgrade.UseVisualStyleBackColor = true;
@@ -657,7 +672,7 @@
             dgShips.RowHeadersVisible = false;
             dgShips.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgShips.ShowEditingIcon = false;
-            dgShips.Size = new Size(612, 462);
+            dgShips.Size = new Size(630, 462);
             dgShips.TabIndex = 5;
             dgShips.SortCompare += dgShips_SortCompare;
             // 
@@ -703,7 +718,7 @@
             tpUpgrade.Location = new Point(4, 29);
             tpUpgrade.Margin = new Padding(4, 3, 4, 3);
             tpUpgrade.Name = "tpUpgrade";
-            tpUpgrade.Size = new Size(636, 515);
+            tpUpgrade.Size = new Size(654, 515);
             tpUpgrade.TabIndex = 4;
             tpUpgrade.Text = "Foundry";
             tpUpgrade.UseVisualStyleBackColor = true;
@@ -712,7 +727,7 @@
             // 
             btModify.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btModify.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btModify.Location = new Point(181, 475);
+            btModify.Location = new Point(199, 475);
             btModify.Margin = new Padding(4, 3, 4, 3);
             btModify.Name = "btModify";
             btModify.Size = new Size(80, 28);
@@ -767,7 +782,7 @@
             // 
             btSellAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSellAll.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSellAll.Location = new Point(542, 475);
+            btSellAll.Location = new Point(560, 475);
             btSellAll.Margin = new Padding(4, 3, 4, 3);
             btSellAll.Name = "btSellAll";
             btSellAll.Size = new Size(80, 28);
@@ -780,7 +795,7 @@
             // 
             btDismantle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btDismantle.Location = new Point(362, 475);
+            btDismantle.Location = new Point(380, 475);
             btDismantle.Margin = new Padding(4, 3, 4, 3);
             btDismantle.Name = "btDismantle";
             btDismantle.Size = new Size(80, 28);
@@ -793,7 +808,7 @@
             // 
             btSell.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSell.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSell.Location = new Point(452, 475);
+            btSell.Location = new Point(470, 475);
             btSell.Margin = new Padding(4, 3, 4, 3);
             btSell.Name = "btSell";
             btSell.Size = new Size(80, 28);
@@ -806,7 +821,7 @@
             // 
             btImprove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btImprove.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btImprove.Location = new Point(272, 475);
+            btImprove.Location = new Point(290, 475);
             btImprove.Margin = new Padding(4, 3, 4, 3);
             btImprove.Name = "btImprove";
             btImprove.Size = new Size(80, 28);
@@ -821,7 +836,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 9.75F);
             label2.ImageAlign = ContentAlignment.MiddleRight;
-            label2.Location = new Point(364, 16);
+            label2.Location = new Point(382, 16);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(36, 16);
@@ -832,7 +847,7 @@
             // tbUpgradeFilter
             // 
             tbUpgradeFilter.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            tbUpgradeFilter.Location = new Point(404, 13);
+            tbUpgradeFilter.Location = new Point(422, 13);
             tbUpgradeFilter.Margin = new Padding(4, 3, 4, 3);
             tbUpgradeFilter.Name = "tbUpgradeFilter";
             tbUpgradeFilter.Size = new Size(214, 26);
@@ -865,7 +880,7 @@
             dgInventory.RowHeadersVisible = false;
             dgInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgInventory.ShowEditingIcon = false;
-            dgInventory.Size = new Size(612, 415);
+            dgInventory.Size = new Size(630, 415);
             dgInventory.TabIndex = 2;
             dgInventory.SelectionChanged += dgInventory_SelectionChanged;
             dgInventory.SortCompare += dgInventory_SortCompare;
@@ -904,6 +919,139 @@
             dgcAvail.ReadOnly = true;
             dgcAvail.Width = 67;
             // 
+            // tpTraining
+            // 
+            tpTraining.Controls.Add(lbTeamCash);
+            tpTraining.Controls.Add(label20);
+            tpTraining.Controls.Add(lbTrainCost);
+            tpTraining.Controls.Add(btForgetSkill);
+            tpTraining.Controls.Add(btIncreaseSkill);
+            tpTraining.Controls.Add(btAddNewSkill);
+            tpTraining.Controls.Add(lbUnspent);
+            tpTraining.Controls.Add(label18);
+            tpTraining.Controls.Add(lbUtilitySkills);
+            tpTraining.Controls.Add(label17);
+            tpTraining.Controls.Add(cbSoldierToTrain);
+            tpTraining.Controls.Add(label14);
+            tpTraining.Location = new Point(4, 29);
+            tpTraining.Name = "tpTraining";
+            tpTraining.Padding = new Padding(3);
+            tpTraining.Size = new Size(654, 515);
+            tpTraining.TabIndex = 7;
+            tpTraining.Text = "Training";
+            tpTraining.UseVisualStyleBackColor = true;
+            // 
+            // lbTrainCost
+            // 
+            lbTrainCost.AutoSize = true;
+            lbTrainCost.Location = new Point(395, 484);
+            lbTrainCost.Margin = new Padding(4, 0, 4, 0);
+            lbTrainCost.Name = "lbTrainCost";
+            lbTrainCost.Size = new Size(66, 20);
+            lbTrainCost.TabIndex = 97;
+            lbTrainCost.Text = "8,888 cr";
+            // 
+            // btForgetSkill
+            // 
+            btForgetSkill.Location = new Point(388, 420);
+            btForgetSkill.Margin = new Padding(0);
+            btForgetSkill.Name = "btForgetSkill";
+            btForgetSkill.Size = new Size(80, 60);
+            btForgetSkill.TabIndex = 96;
+            btForgetSkill.Text = "Forget Skill";
+            btForgetSkill.UseVisualStyleBackColor = true;
+            btForgetSkill.Click += btForgetSkill_Click;
+            // 
+            // btIncreaseSkill
+            // 
+            btIncreaseSkill.Location = new Point(294, 420);
+            btIncreaseSkill.Margin = new Padding(0);
+            btIncreaseSkill.Name = "btIncreaseSkill";
+            btIncreaseSkill.Size = new Size(80, 60);
+            btIncreaseSkill.TabIndex = 95;
+            btIncreaseSkill.Text = "Boost Skill";
+            btIncreaseSkill.UseVisualStyleBackColor = true;
+            btIncreaseSkill.Click += btIncreaseSkill_Click;
+            // 
+            // btAddNewSkill
+            // 
+            btAddNewSkill.Location = new Point(199, 420);
+            btAddNewSkill.Margin = new Padding(4, 3, 4, 3);
+            btAddNewSkill.Name = "btAddNewSkill";
+            btAddNewSkill.Size = new Size(80, 60);
+            btAddNewSkill.TabIndex = 94;
+            btAddNewSkill.Text = "Add New";
+            btAddNewSkill.UseVisualStyleBackColor = true;
+            btAddNewSkill.Click += btAddNewSkill_Click;
+            // 
+            // lbUnspent
+            // 
+            lbUnspent.BorderStyle = BorderStyle.FixedSingle;
+            lbUnspent.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbUnspent.Location = new Point(112, 447);
+            lbUnspent.Margin = new Padding(6, 2, 6, 2);
+            lbUnspent.Name = "lbUnspent";
+            lbUnspent.Size = new Size(42, 25);
+            lbUnspent.TabIndex = 93;
+            lbUnspent.Text = "88";
+            lbUnspent.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(96, 425);
+            label18.Margin = new Padding(4, 0, 4, 0);
+            label18.Name = "label18";
+            label18.Size = new Size(70, 20);
+            label18.TabIndex = 92;
+            label18.Text = "Unspent";
+            // 
+            // lbUtilitySkills
+            // 
+            lbUtilitySkills.AllowDrop = true;
+            lbUtilitySkills.FormattingEnabled = true;
+            lbUtilitySkills.HorizontalScrollbar = true;
+            lbUtilitySkills.Location = new Point(221, 123);
+            lbUtilitySkills.Margin = new Padding(4, 3, 4, 3);
+            lbUtilitySkills.Name = "lbUtilitySkills";
+            lbUtilitySkills.Size = new Size(225, 284);
+            lbUtilitySkills.TabIndex = 46;
+            lbUtilitySkills.SelectedIndexChanged += lbUtilitySkills_SelectedIndexChanged;
+            // 
+            // label17
+            // 
+            label17.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label17.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label17.ImageAlign = ContentAlignment.MiddleRight;
+            label17.Location = new Point(142, 80);
+            label17.Margin = new Padding(4, 0, 4, 0);
+            label17.Name = "label17";
+            label17.Size = new Size(71, 24);
+            label17.TabIndex = 25;
+            label17.Text = "Soldier";
+            label17.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // cbSoldierToTrain
+            // 
+            cbSoldierToTrain.FormattingEnabled = true;
+            cbSoldierToTrain.Location = new Point(221, 80);
+            cbSoldierToTrain.Margin = new Padding(4, 3, 4, 3);
+            cbSoldierToTrain.Name = "cbSoldierToTrain";
+            cbSoldierToTrain.Size = new Size(225, 28);
+            cbSoldierToTrain.TabIndex = 6;
+            cbSoldierToTrain.SelectedIndexChanged += cbSoldierToTrain_SelectedIndexChanged;
+            // 
+            // label14
+            // 
+            label14.BorderStyle = BorderStyle.FixedSingle;
+            label14.Location = new Point(138, 12);
+            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(379, 39);
+            label14.TabIndex = 2;
+            label14.Text = "Training Centre";
+            label14.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // tpDiplomacy
             // 
             tpDiplomacy.Controls.Add(pbExperience);
@@ -922,7 +1070,7 @@
             tpDiplomacy.Controls.Add(lbDiplomacy);
             tpDiplomacy.Location = new Point(4, 29);
             tpDiplomacy.Name = "tpDiplomacy";
-            tpDiplomacy.Size = new Size(636, 515);
+            tpDiplomacy.Size = new Size(654, 515);
             tpDiplomacy.TabIndex = 6;
             tpDiplomacy.Text = "Diplomacy";
             tpDiplomacy.UseVisualStyleBackColor = true;
@@ -930,7 +1078,7 @@
             // pbExperience
             // 
             pbExperience.BorderStyle = BorderStyle.FixedSingle;
-            pbExperience.Location = new Point(118, 209);
+            pbExperience.Location = new Point(127, 209);
             pbExperience.Margin = new Padding(4, 3, 4, 3);
             pbExperience.Name = "pbExperience";
             pbExperience.Size = new Size(400, 48);
@@ -944,7 +1092,7 @@
             lbImproveRelations.BorderStyle = BorderStyle.FixedSingle;
             lbImproveRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbImproveRelations.ImageAlign = ContentAlignment.MiddleRight;
-            lbImproveRelations.Location = new Point(91, 249);
+            lbImproveRelations.Location = new Point(96, 249);
             lbImproveRelations.Margin = new Padding(5);
             lbImproveRelations.Name = "lbImproveRelations";
             lbImproveRelations.Padding = new Padding(2);
@@ -957,7 +1105,7 @@
             // 
             btPrecursorCore.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btPrecursorCore.Font = new Font("Microsoft Sans Serif", 12F);
-            btPrecursorCore.Location = new Point(339, 415);
+            btPrecursorCore.Location = new Point(345, 415);
             btPrecursorCore.Margin = new Padding(4, 3, 4, 3);
             btPrecursorCore.Name = "btPrecursorCore";
             btPrecursorCore.Size = new Size(160, 36);
@@ -970,7 +1118,7 @@
             // 
             btSpaceHulkCore.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSpaceHulkCore.Font = new Font("Microsoft Sans Serif", 12F);
-            btSpaceHulkCore.Location = new Point(138, 415);
+            btSpaceHulkCore.Location = new Point(144, 415);
             btSpaceHulkCore.Margin = new Padding(4, 3, 4, 3);
             btSpaceHulkCore.Name = "btSpaceHulkCore";
             btSpaceHulkCore.Size = new Size(160, 36);
@@ -983,7 +1131,7 @@
             // 
             bt10k.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             bt10k.Font = new Font("Microsoft Sans Serif", 12F);
-            bt10k.Location = new Point(415, 352);
+            bt10k.Location = new Point(423, 352);
             bt10k.Margin = new Padding(4, 3, 4, 3);
             bt10k.Name = "bt10k";
             bt10k.Size = new Size(120, 36);
@@ -996,7 +1144,7 @@
             // 
             bt1000.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             bt1000.Font = new Font("Microsoft Sans Serif", 12F);
-            bt1000.Location = new Point(258, 352);
+            bt1000.Location = new Point(267, 352);
             bt1000.Margin = new Padding(4, 3, 4, 3);
             bt1000.Name = "bt1000";
             bt1000.Size = new Size(120, 36);
@@ -1009,7 +1157,7 @@
             // 
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label5.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label5.Location = new Point(258, 315);
+            label5.Location = new Point(267, 315);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(120, 24);
@@ -1021,7 +1169,7 @@
             // 
             bt100.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             bt100.Font = new Font("Microsoft Sans Serif", 12F);
-            bt100.Location = new Point(101, 352);
+            bt100.Location = new Point(109, 352);
             bt100.Margin = new Padding(4, 3, 4, 3);
             bt100.Name = "bt100";
             bt100.Size = new Size(120, 36);
@@ -1036,7 +1184,7 @@
             lbRelations.BorderStyle = BorderStyle.FixedSingle;
             lbRelations.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbRelations.ImageAlign = ContentAlignment.MiddleRight;
-            lbRelations.Location = new Point(294, 115);
+            lbRelations.Location = new Point(312, 115);
             lbRelations.Margin = new Padding(5);
             lbRelations.Name = "lbRelations";
             lbRelations.Padding = new Padding(2);
@@ -1050,7 +1198,7 @@
             label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.Font = new Font("Microsoft Sans Serif", 9.75F);
             label12.ImageAlign = ContentAlignment.MiddleRight;
-            label12.Location = new Point(156, 117);
+            label12.Location = new Point(174, 117);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
             label12.Size = new Size(120, 24);
@@ -1062,7 +1210,7 @@
             // 
             label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label13.Location = new Point(258, 170);
+            label13.Location = new Point(267, 170);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
             label13.Size = new Size(120, 24);
@@ -1076,7 +1224,7 @@
             lbRaceName.BorderStyle = BorderStyle.FixedSingle;
             lbRaceName.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbRaceName.ImageAlign = ContentAlignment.MiddleRight;
-            lbRaceName.Location = new Point(294, 78);
+            lbRaceName.Location = new Point(312, 78);
             lbRaceName.Margin = new Padding(5);
             lbRaceName.Name = "lbRaceName";
             lbRaceName.Padding = new Padding(2);
@@ -1090,7 +1238,7 @@
             label16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label16.Font = new Font("Microsoft Sans Serif", 9.75F);
             label16.ImageAlign = ContentAlignment.MiddleRight;
-            label16.Location = new Point(156, 82);
+            label16.Location = new Point(174, 82);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
             label16.Size = new Size(120, 20);
@@ -1101,7 +1249,7 @@
             // lbDiplomacy
             // 
             lbDiplomacy.BorderStyle = BorderStyle.FixedSingle;
-            lbDiplomacy.Location = new Point(128, 12);
+            lbDiplomacy.Location = new Point(138, 12);
             lbDiplomacy.Margin = new Padding(4, 0, 4, 0);
             lbDiplomacy.Name = "lbDiplomacy";
             lbDiplomacy.Size = new Size(379, 39);
@@ -1128,7 +1276,7 @@
             tpDetails.Location = new Point(4, 29);
             tpDetails.Margin = new Padding(4, 3, 4, 3);
             tpDetails.Name = "tpDetails";
-            tpDetails.Size = new Size(636, 515);
+            tpDetails.Size = new Size(654, 515);
             tpDetails.TabIndex = 5;
             tpDetails.Text = "Details";
             tpDetails.UseVisualStyleBackColor = true;
@@ -1139,7 +1287,7 @@
             lbNextGrowth.BorderStyle = BorderStyle.FixedSingle;
             lbNextGrowth.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbNextGrowth.ImageAlign = ContentAlignment.MiddleRight;
-            lbNextGrowth.Location = new Point(120, 426);
+            lbNextGrowth.Location = new Point(138, 426);
             lbNextGrowth.Margin = new Padding(5);
             lbNextGrowth.Name = "lbNextGrowth";
             lbNextGrowth.Padding = new Padding(2);
@@ -1154,7 +1302,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 9.75F);
             label8.ImageAlign = ContentAlignment.MiddleRight;
-            label8.Location = new Point(22, 432);
+            label8.Location = new Point(40, 432);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(78, 16);
@@ -1168,7 +1316,7 @@
             lbLastGrowth.BorderStyle = BorderStyle.FixedSingle;
             lbLastGrowth.Font = new Font("Microsoft Sans Serif", 11.25F);
             lbLastGrowth.ImageAlign = ContentAlignment.MiddleRight;
-            lbLastGrowth.Location = new Point(120, 377);
+            lbLastGrowth.Location = new Point(138, 377);
             lbLastGrowth.Margin = new Padding(5);
             lbLastGrowth.Name = "lbLastGrowth";
             lbLastGrowth.Padding = new Padding(2);
@@ -1183,7 +1331,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 9.75F);
             label6.ImageAlign = ContentAlignment.MiddleRight;
-            label6.Location = new Point(22, 383);
+            label6.Location = new Point(40, 383);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(76, 16);
@@ -1194,7 +1342,7 @@
             // lbMetropolis
             // 
             lbMetropolis.AutoSize = true;
-            lbMetropolis.Location = new Point(72, 297);
+            lbMetropolis.Location = new Point(81, 297);
             lbMetropolis.Margin = new Padding(4, 0, 4, 0);
             lbMetropolis.Name = "lbMetropolis";
             lbMetropolis.Size = new Size(82, 20);
@@ -1204,7 +1352,7 @@
             // lbResidential
             // 
             lbResidential.AutoSize = true;
-            lbResidential.Location = new Point(46, 263);
+            lbResidential.Location = new Point(55, 263);
             lbResidential.Margin = new Padding(4, 0, 4, 0);
             lbResidential.Name = "lbResidential";
             lbResidential.Size = new Size(129, 20);
@@ -1214,7 +1362,7 @@
             // lbMilitary
             // 
             lbMilitary.AutoSize = true;
-            lbMilitary.Location = new Point(63, 230);
+            lbMilitary.Location = new Point(72, 230);
             lbMilitary.Margin = new Padding(4, 0, 4, 0);
             lbMilitary.Name = "lbMilitary";
             lbMilitary.Size = new Size(98, 20);
@@ -1224,7 +1372,7 @@
             // lbTrade
             // 
             lbTrade.AutoSize = true;
-            lbTrade.Location = new Point(61, 196);
+            lbTrade.Location = new Point(70, 196);
             lbTrade.Margin = new Padding(4, 0, 4, 0);
             lbTrade.Name = "lbTrade";
             lbTrade.Size = new Size(102, 20);
@@ -1234,7 +1382,7 @@
             // lbResearch
             // 
             lbResearch.AutoSize = true;
-            lbResearch.Location = new Point(51, 163);
+            lbResearch.Location = new Point(60, 163);
             lbResearch.Margin = new Padding(4, 0, 4, 0);
             lbResearch.Name = "lbResearch";
             lbResearch.Size = new Size(119, 20);
@@ -1245,7 +1393,7 @@
             // 
             lbColonySize.BorderStyle = BorderStyle.FixedSingle;
             lbColonySize.Font = new Font("Microsoft Sans Serif", 15.75F);
-            lbColonySize.Location = new Point(161, 106);
+            lbColonySize.Location = new Point(170, 106);
             lbColonySize.Margin = new Padding(0);
             lbColonySize.Name = "lbColonySize";
             lbColonySize.RightToLeft = RightToLeft.Yes;
@@ -1257,7 +1405,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(47, 112);
+            label4.Location = new Point(56, 112);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.RightToLeft = RightToLeft.Yes;
@@ -1283,13 +1431,14 @@
             groupBox1.Margin = new Padding(4, 3, 4, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 3, 4, 3);
-            groupBox1.Size = new Size(201, 276);
+            groupBox1.Size = new Size(209, 276);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Colony Details";
             // 
             // groupBox4
             // 
+            groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox4.Controls.Add(lbOwner);
             groupBox4.Controls.Add(label15);
             groupBox4.Controls.Add(lbSystemName);
@@ -1301,7 +1450,7 @@
             groupBox4.Controls.Add(lbLocation);
             groupBox4.Controls.Add(label7);
             groupBox4.Font = new Font("Microsoft Sans Serif", 9.75F);
-            groupBox4.Location = new Point(257, 73);
+            groupBox4.Location = new Point(271, 73);
             groupBox4.Margin = new Padding(4, 3, 4, 3);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(4, 3, 4, 3);
@@ -1450,11 +1599,33 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // lbTeamCash
+            // 
+            lbTeamCash.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCash.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbTeamCash.Location = new Point(511, 447);
+            lbTeamCash.Margin = new Padding(6, 2, 6, 2);
+            lbTeamCash.Name = "lbTeamCash";
+            lbTeamCash.Size = new Size(103, 25);
+            lbTeamCash.TabIndex = 99;
+            lbTeamCash.Text = "888,888.88cr";
+            lbTeamCash.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(517, 425);
+            label20.Margin = new Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(90, 20);
+            label20.TabIndex = 98;
+            label20.Text = "Team Cash";
+            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(644, 548);
+            ClientSize = new Size(662, 548);
             Controls.Add(tcMain);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Margin = new Padding(4, 3, 4, 3);
@@ -1477,6 +1648,8 @@
             tpUpgrade.ResumeLayout(false);
             tpUpgrade.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgInventory).EndInit();
+            tpTraining.ResumeLayout(false);
+            tpTraining.PerformLayout();
             tpDiplomacy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbExperience).EndInit();
             tpDetails.ResumeLayout(false);
@@ -1587,5 +1760,18 @@
         private Button bt10k;
         private Button bt1000;
         private PictureBox pbExperience;
+        private TabPage tpTraining;
+        private Label label14;
+        private Label label17;
+        private ComboBox cbSoldierToTrain;
+        private ListBox lbUtilitySkills;
+        private Label lbTrainCost;
+        private Button btForgetSkill;
+        private Button btIncreaseSkill;
+        private Button btAddNewSkill;
+        private Label lbUnspent;
+        private Label label18;
+        private Label lbTeamCash;
+        private Label label20;
     }
 }

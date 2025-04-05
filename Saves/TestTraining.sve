@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>07/09/2466 10:27:04</Clock>
+<Clock>07/09/2466 10:26:16</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -9884,7 +9884,7 @@
 </Map>
 <Team>
  <Pos>(1,0)13.3</Pos>
- <Cash>10239.654221151093</Cash>
+ <Cash>10539.654221151093</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="9" Y="9"/>
@@ -10034,7 +10034,7 @@
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,24,12,16</Stats>
- <TrainingCost>400</TrainingCost>
+ <TrainingCost>300</TrainingCost>
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
@@ -10056,8 +10056,9 @@
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">10</Exp>
-  <Exp Skill="Perception">2</Exp>
+  <Exp Skill="Armoursmith">1</Exp>
   <Exp Skill="Stealth">2</Exp>
+  <Exp Skill="Unspent">1</Exp>
  </UtilityExperience>
  <KillCount>226</KillCount>
  <ToughestKill>

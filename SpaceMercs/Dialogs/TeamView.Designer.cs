@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -124,14 +124,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle2;
             dgSoldiers.Location = new Point(14, 128);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -310,6 +310,7 @@
             label17.Size = new Size(51, 15);
             label17.TabIndex = 88;
             label17.Text = "Unspent";
+            label17.Click += label17_Click;
             // 
             // pbExperience
             // 

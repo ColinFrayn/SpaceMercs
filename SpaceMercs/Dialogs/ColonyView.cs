@@ -80,10 +80,15 @@ namespace SpaceMercs.Dialogs {
             SetupShipsTab();
             SetupFoundryTab();
             SetupDiplomacyTab();
+            SetupTrainingTab();
 
             tcMain.TabPages.Remove(tpDiplomacy);
             if (colony.Location == colony.Owner.HomePlanet) {
                 tcMain.TabPages.Insert(5, tpDiplomacy);
+            }
+            tcMain.TabPages.Remove(tpTraining);
+            if (colony.HasBaseType(Colony.BaseType.Research)) {
+                tcMain.TabPages.Insert(5, tpTraining);
             }
         }
 
@@ -291,6 +296,51 @@ namespace SpaceMercs.Dialogs {
 
             // Show the experience as a bar
             pbExperience.Refresh();
+        }
+        private void SetupTrainingTab(Soldier? selected = null) {
+            if (!colony.HasBaseType(Colony.BaseType.Research)) {
+                return;
+            }
+            if (Relations < 1) {
+                tpTraining.Hide();
+                lbImproveRelations.Show();
+                lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+                return;
+            }
+            tpTraining.Show();
+
+            cbSoldierToTrain.Items.Clear();
+            foreach (Soldier s in PlayerTeam.SoldiersRO.Where(s => s.IsActive)) {
+                if (selected is null) selected = s;
+                cbSoldierToTrain.Items.Add(s);
+            }
+            cbSoldierToTrain.SelectedItem = selected;
+            if (selected is null) {
+                lbUnspent.Text = "0";
+                return;
+            }
+
+            SetupTrainingDetails(selected);
+        }
+        private void SetupTrainingDetails(Soldier selected) {
+            int unspent = selected.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
+            lbUnspent.Text = unspent.ToString();
+            btAddNewSkill.Enabled = unspent > 0 && !selected.HasAllUtilitySkills();
+            btIncreaseSkill.Enabled = unspent > 0;
+            lbTrainCost.Text = $"{selected.TrainingCost}cr";
+            lbTeamCash.Text = PlayerTeam.Cash.ToString("N2");
+
+            lbUtilitySkills.Items.Clear();
+            btForgetSkill.Enabled = false;
+            foreach (Soldier.UtilitySkill sk in Enum.GetValues(typeof(Soldier.UtilitySkill))) {
+                int lvl = selected.GetUtilityLevel(sk);
+                if (lvl != 0 && sk != Soldier.UtilitySkill.Unspent) {
+                    int raw = selected.GetRawUtilityLevel(sk);
+                    int bonus = lvl - raw;
+                    if (raw > 0) btForgetSkill.Enabled = true;
+                    lbUtilitySkills.Items.Add($"{sk} [{lvl - bonus}] {(bonus > 0 ? "+" : string.Empty)}{(bonus != 0 ? bonus : string.Empty)}");
+                }
+            }
         }
 
         private static bool ShouldDisplayInFoundry(string strType, IItem eq) {
@@ -639,14 +689,18 @@ namespace SpaceMercs.Dialogs {
         // Changed tab so update lists
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e) {
             int iTabNo = tcMain.SelectedIndex;
+            string tabName = tcMain.SelectedTab?.Text ?? string.Empty;
             lbImproveRelations.Hide();
-            switch (iTabNo) {
-                case 0: SetupMerchantDataGrid(); break;
-                case 1: SetupMercenariesTab(); break;
-                case 2: SetupMissionsTab(); break;
-                case 3: SetupShipsTab(); break;
-                case 4: SetupFoundryTab(); break;
-                default: break; // Diplomacy or colony view
+            switch (tabName) {
+                case "Merchants": SetupMerchantDataGrid(); break;
+                case "Mercenaries": SetupMercenariesTab(); break;
+                case "Missions": SetupMissionsTab(); break;
+                case "Ship Vendor": SetupShipsTab(); break;
+                case "Foundry": SetupFoundryTab(); break;
+                case "Training": SetupTrainingTab(); break;
+                case "Diplomacy": break;
+                case "Details": break;
+                default: break; // Unknown
             }
         }
 
@@ -816,7 +870,86 @@ namespace SpaceMercs.Dialogs {
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
                 Font f = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-                e.Graphics.DrawString($"{(fraction*100d):N0}%", f, Brushes.Black, pbExperience.ClientRectangle, sf);
+                e.Graphics.DrawString($"{(fraction * 100d):N0}%", f, Brushes.Black, pbExperience.ClientRectangle, sf);
+            }
+        }
+
+        // Training screen
+        private void cbSoldierToTrain_SelectedIndexChanged(object sender, EventArgs e) {
+            Soldier? selected = cbSoldierToTrain.SelectedItem as Soldier;
+            if (selected is null) return;
+            SetupTrainingDetails(selected);
+        }
+
+        private void btAddNewSkill_Click(object sender, EventArgs e) {
+            Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
+            if (s is null) return;
+            int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
+            if (nut == 0) return;
+            if (s.HasAllUtilitySkills()) return;
+            ChooseNewUtilitySkill cnus = new ChooseNewUtilitySkill(s);
+            cnus.ShowDialog(this);
+            if (cnus.ChosenSkill == Soldier.UtilitySkill.Unspent) return;
+            s.AddUtilitySkill(cnus.ChosenSkill);
+            s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, -1);
+            SetupTrainingDetails(s);
+        }
+
+        private void btIncreaseSkill_Click(object sender, EventArgs e) {
+            Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
+            if (s is null) return;
+            if (lbUtilitySkills.SelectedIndex < 0) return;
+            int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
+            if (nut == 0) return;
+            string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
+            if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+            Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
+            if (s.GetRawUtilityLevel(sk) >= s.Level) return;
+            if (s.GetRawUtilityLevel(sk) >= 10) return;
+            if (MessageBox.Show("Really increase this skill?", "Increase skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            s.AddUtilitySkill(sk);
+            s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, -1);
+            SetupTrainingDetails(s);
+
+        }
+
+        private void btForgetSkill_Click(object sender, EventArgs e) {
+            Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
+            if (s is null) return;
+            if (lbUtilitySkills.SelectedIndex < 0) return;
+            string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
+            if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+            Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
+            if (s.GetRawUtilityLevel(sk) == 0) return;
+            int cost = s.TrainingCost;
+            if (cost > PlayerTeam.Cash) {
+                MessageBox.Show("You cannot afford to train this soldier");
+                return;
+            }
+            if (MessageBox.Show($"Really forget one point in this skill?\nCost = {cost}cr", "Forget skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            s.AddUtilitySkill(sk, -1);
+            s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, 1);
+            PlayerTeam.Cash -= s.TrainingCost;
+            s.IncreaseTrainingCost();
+            SetupTrainingDetails(s);
+        }
+
+        private void lbUtilitySkills_SelectedIndexChanged(object sender, EventArgs e) {
+            btIncreaseSkill.Enabled = false;
+            btForgetSkill.Enabled = false;
+            Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
+            if (s is null) return;
+            if (lbUtilitySkills.SelectedIndex < 0) return;
+            string stsk = lbUtilitySkills?.SelectedItem?.ToString() ?? string.Empty;
+            if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
+            Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
+            int raw = s.GetRawUtilityLevel(sk);
+            int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
+            if (raw < s.Level && raw < 10 && nut > 0) {
+                btIncreaseSkill.Enabled = true;
+            }
+            if (raw > 0) {
+                btForgetSkill.Enabled = true;
             }
         }
     }

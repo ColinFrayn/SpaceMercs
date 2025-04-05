@@ -401,6 +401,7 @@ namespace SpaceMercs {
             Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
             Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
         }
+        public int TrainingCost { get; private set; }
 
         // Skills & experience
         private readonly Dictionary<WeaponType.WeaponClass, int> WeaponExperience = new Dictionary<WeaponType.WeaponClass, int>();
@@ -603,6 +604,7 @@ namespace SpaceMercs {
             rnd = new Random(randseed);
             PrimaryColor = Color.Blue;
             Shred = 0d;
+            TrainingCost = 100;
         }
         public Soldier(XmlNode xml, Team? pt) {
             PlayerTeam = pt;
@@ -630,6 +632,7 @@ namespace SpaceMercs {
             else X = Y = 0;
             Level = xml.SelectNodeInt("Level");
             PointsToSpend = xml.SelectNodeInt("PointsToSpend", 0);
+            TrainingCost = xml.SelectNodeInt("TrainingCost", 100);
             Gender = xml.SelectNodeEnum<GenderType>("Gender");
             string raceName = xml.SelectSingleNode("Race")?.InnerText ?? "";
             Race = StaticData.GetRaceByName(raceName) ?? throw new Exception($"Unrecognised Race in Soldier data : {raceName}");
@@ -799,6 +802,7 @@ namespace SpaceMercs {
             file.WriteLine($" <Gender>{Gender}</Gender>");
             file.WriteLine($" <Race>{Race.Name}</Race>");
             file.WriteLine($" <Stats>" + BaseStrength + "," + BaseAgility + "," + BaseInsight + "," + BaseToughness + "," + BaseEndurance + "</Stats>");
+            if (TrainingCost != 100) file.WriteLine($" <TrainingCost>{TrainingCost}</TrainingCost>");
             if (GoTo != Point.Empty && GoTo != Location) file.WriteLine(" <GoTo X=\"" + GoTo.X + "\" Y=\"" + GoTo.Y + "\"/>");
             file.WriteLine(" <Colour>" + ColorTranslator.ToHtml(PrimaryColor) + "</Colour>");
             if (PointsToSpend > 0) {
@@ -897,6 +901,10 @@ namespace SpaceMercs {
             }
             if (EquippedWeapon != null) dCost += EquippedWeapon.Cost;
             return dCost;
+        }
+        public void IncreaseTrainingCost() {
+            TrainingCost += 100;
+            if (TrainingCost > 1000) TrainingCost = 1000;
         }
 
         #region Inventory
