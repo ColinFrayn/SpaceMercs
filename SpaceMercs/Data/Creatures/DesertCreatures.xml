@@ -1,6 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Giant Lizard">
     <LevelRange>1,10</LevelRange>
+    <Scale>1.2</Scale>
     <Attack>8</Attack>
     <Defence>8</Defence>
     <Health>10</Health>
@@ -15,6 +16,7 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Sand Snake">
     <Scale>0.9</Scale>
@@ -36,9 +38,11 @@
     <Resistances>
       <Resistance Type="Poison" Value="50"/>
     </Resistances>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Giant Centipede">
     <LevelRange>1,10</LevelRange>
+    <Scale>1.2</Scale>
     <Attack>11</Attack>
     <Defence>12</Defence>
     <Health>10</Health>
@@ -54,6 +58,7 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Giant Scorpion">
     <Size>2</Size>
@@ -78,9 +83,10 @@
       <Item Amount="0.3">Poison Gland</Item>
       <Item Amount="0.4">Chitin</Item>
     </Scavenge>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Giant Sand Beetle">
-    <Size>2</Size>
+    <Size>1</Size>
     <LevelRange>2,12</LevelRange>
     <Attack>10</Attack>
     <Defence>11</Defence>
@@ -95,9 +101,11 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Sand Shark">
     <Size>2</Size>
+    <Scale>2.2</Scale>
     <LevelRange>6,15</LevelRange>
     <Attack>19</Attack>
     <Defence>13</Defence>
@@ -116,5 +124,6 @@
       <Item Amount="2.0">Heavy Chitin</Item>
     </Scavenge>
     <Boss/>
+    <Tex Size="4">1,7</Tex>
   </CreatureType>
 </Data>

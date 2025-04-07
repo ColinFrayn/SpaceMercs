@@ -181,6 +181,9 @@
     <None Update="Graphics\Bitmaps\Building.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphics\Bitmaps\DesertCreatures.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphics\Bitmaps\Elementals.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
