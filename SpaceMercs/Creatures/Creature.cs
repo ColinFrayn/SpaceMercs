@@ -74,7 +74,7 @@ namespace SpaceMercs {
             prog.SetUniform("texScale", ts.W, ts.H);
             Matrix4 pTranslateM = Matrix4.CreateTranslation(X + ((float)Type.Size / 2.0f), Y + ((float)Type.Size / 2.0f), Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale((float)Type.Scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing + 90d) * Math.PI / 180d));
+            Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing - 90d) * Math.PI / 180d));
             prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);

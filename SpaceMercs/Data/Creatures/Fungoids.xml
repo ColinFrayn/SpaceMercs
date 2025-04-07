@@ -20,6 +20,7 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">3,7</Tex>
   </CreatureType>  
   <CreatureType Name="Fungoid Shieldshroom">
     <Scale>1.0</Scale>
@@ -41,6 +42,7 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">1,7</Tex>
   </CreatureType>
   <CreatureType Name="Fungoid Spore Thrower">
     <Scale>1.0</Scale>
@@ -51,11 +53,11 @@
     <Stamina>16</Stamina>
     <Armour>20</Armour>
     <BodyType>Fungoid</BodyType>
-    <MovementCost>4.0</MovementCost>
+    <MovementCost>5.0</MovementCost>
     <Col1>20, 215, 0</Col1>
     <Col2>80, 255, 80</Col2>
     <Col3>20, 110, 0</Col3>
-    <Desc>A vicious mushroom which can hurl poisonous spores.</Desc>
+    <Desc>A vicious fungal growth which can hurl poisonous spores.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
@@ -63,6 +65,42 @@
     <Weapons>
       <Weapon Weight="1">Fungoid Spores</Weapon>
     </Weapons>
+    <Tex Size="2">3,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Fungoid Sporeball">
+    <Scale>0.8</Scale>
+    <LevelRange>1,6</LevelRange>
+    <Attack>7</Attack>
+    <Defence>7</Defence>
+    <Health>8</Health>
+    <Stamina>18</Stamina>
+    <Armour>6</Armour>
+    <Frequency>2</Frequency>
+    <BodyType>Fungoid</BodyType>
+    <MovementCost>1.5</MovementCost>
+    <Col1>100, 230, 10</Col1>
+    <Col2>100, 170, 0</Col2>
+    <Col3>80, 255, 110</Col3>
+    <Desc>A large, sentient hovering gasball.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="-30"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <OnDeathEffect Name="PoisonCloud">
+      <Radius>2</Radius>
+      <Effect>
+        <Damage Type="Poison">4</Damage>
+      </Effect>
+      <Effect Name="Poisoned">
+        <Duration>2</Duration>
+        <Damage Type="Poison">2</Damage>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
+    <Tex Size="2">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Fungoid KingShroom">
     <Size>2</Size>
@@ -87,5 +125,6 @@
       <Weapon Weight="1">Fungoid Heavy Spores</Weapon>
     </Weapons>
     <Boss/>
+    <Tex Size="4">1,1</Tex>
   </CreatureType>
 </Data>

@@ -155,7 +155,7 @@ namespace SpaceMercs {
             }
 
             // Attempt to load texture file, if it exists
-            string strCreatureTextureFile = Path.Combine(strBitmapsDir, $"{gp.Name}.bmp");
+            string strCreatureTextureFile = Path.Combine(strBitmapsDir, $"{gp.Filename.Replace(".xml",".bmp")}");
             if (File.Exists(strCreatureTextureFile)) {
                 Bitmap TextureBitmap = new Bitmap(strCreatureTextureFile);
                 gp.SetTextureBitmap(TextureBitmap);                

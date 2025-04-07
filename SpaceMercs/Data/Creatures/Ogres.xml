@@ -18,7 +18,7 @@
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
-    <Tex Size="4">1,5</Tex>
+    <Tex Size="4">5,5</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Warrior">
     <Size>2</Size>
@@ -39,7 +39,7 @@
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
-    <Tex Size="4">1,1</Tex>
+    <Tex Size="4">1,9</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Brute">
     <Size>2</Size>
@@ -60,7 +60,7 @@
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
-    <Tex Size="4">5,1</Tex>
+    <Tex Size="4">5,9</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Elite">
     <Size>2</Size>
@@ -80,7 +80,7 @@
     <Weapons>
       <Weapon Weight="1">Greataxe</Weapon>
     </Weapons>
-    <Tex Size="4">5,5</Tex>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Chief">
     <Size>2</Size>
@@ -101,6 +101,6 @@
       <Weapon Weight="1">Greataxe</Weapon>
     </Weapons>
     <Boss/>
-    <Tex Size="4">1,9</Tex>
+    <Tex Size="4">5,1</Tex>
   </CreatureType>
 </Data>

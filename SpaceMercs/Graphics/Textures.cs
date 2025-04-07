@@ -485,7 +485,7 @@ namespace SpaceMercs {
             for (int y = 0; y < Textures.TileSize; y++) {
                 for (int x = 0; x < Textures.TileSize; x++) {
                     for (int n = 0; n <= 3; n++) { 
-                        imageRot[x, y, 3] = image[y, Textures.TileSize - x - 1, n]; // Rotate 90 degrees CCW
+                        imageRot[x, y, 3] = image[Textures.TileSize - y - 1, x, n]; // Rotate 90 degrees CW
                     }
                 }
             }

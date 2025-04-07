@@ -181,6 +181,12 @@
     <None Update="Graphics\Bitmaps\Building.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphics\Bitmaps\Elementals.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\Fungoids.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphics\Bitmaps\ItemTextures.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -188,6 +194,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Graphics\Bitmaps\Ogres.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\Slimes.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Graphics\Bitmaps\Triffids.bmp">

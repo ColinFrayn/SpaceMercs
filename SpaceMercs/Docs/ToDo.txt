@@ -5,14 +5,11 @@ ToDo List
 Add creature textures using bitmaps
 -- Crystallines
 -- Desert Creatures
--- Elementals
--- Fungoids
 -- Gremlins
 -- HiveSpawn
 -- Mechanoids
 -- RockCreatures
 -- Shadow Beasts
--- Slimes
 -- VoidBeasts
 -- VolcanicCreatures
 -- Xenomorphs
