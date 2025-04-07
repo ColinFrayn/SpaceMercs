@@ -905,7 +905,7 @@ namespace SpaceMercs.Dialogs {
             if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (s.GetRawUtilityLevel(sk) >= s.Level) return;
-            if (s.GetRawUtilityLevel(sk) >= 10) return;
+            if (s.GetRawUtilityLevel(sk) >= Const.MaxUtilitySkill) return;
             if (MessageBox.Show("Really increase this skill?", "Increase skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             s.AddUtilitySkill(sk);
             s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, -1);
@@ -945,7 +945,7 @@ namespace SpaceMercs.Dialogs {
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             int raw = s.GetRawUtilityLevel(sk);
             int nut = s.GetUtilityLevel(Soldier.UtilitySkill.Unspent);
-            if (raw < s.Level && raw < 10 && nut > 0) {
+            if (raw < s.Level && raw < Const.MaxUtilitySkill && nut > 0) {
                 btIncreaseSkill.Enabled = true;
             }
             if (raw > 0) {

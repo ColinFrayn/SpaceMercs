@@ -2,9 +2,20 @@
 ToDo List
 -------------------------------------------------
 
-DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an entire stack Floor<->Inventory or ShipStores<-<>Inventory.
-
 Add creature textures using bitmaps
+-- Crystallines
+-- Desert Creatures
+-- Elementals
+-- Fungoids
+-- Gremlins
+-- HiveSpawn
+-- Mechanoids
+-- RockCreatures
+-- Shadow Beasts
+-- Slimes
+-- VoidBeasts
+-- VolcanicCreatures
+-- Xenomorphs
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
@@ -16,18 +27,18 @@ Test run Precursor mission (& keeping the core)
 Backburner : Features
 -------------------------------------------------
 
-Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
+Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
+- Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 
-Display somewhere when a weapon is recharging
+Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 
 What should attack skill do for an AoE weapon (grenade or cone), if anything?
 
-Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
-- Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
-
 Redo NewGame dialog in-window?
+
+DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an entire stack Floor<->Inventory or ShipStores<->Inventory.
 
 Add overwatch ability to soldiers (not heavies or snipers)
 

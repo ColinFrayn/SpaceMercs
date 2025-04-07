@@ -134,7 +134,7 @@ namespace SpaceMercs {
             GL.BindTexture(TextureTarget.Texture2D, iTexture);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, texture);
-            Textures.SetParameters();
+            Textures.SetTextureParameters();
         }
         public override void ClearData() {
             GL.DeleteTexture(iTexture);

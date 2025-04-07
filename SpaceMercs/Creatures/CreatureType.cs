@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using SpaceMercs.Graphics;
+using System.Xml;
 
 namespace SpaceMercs {
     public class CreatureType {
@@ -32,6 +33,10 @@ namespace SpaceMercs {
         public readonly Dictionary<WeaponType.DamageType, double> Resistances = new Dictionary<WeaponType.DamageType, double>();
         public readonly Dictionary<MaterialType, double> Scavenge = new Dictionary<MaterialType, double>();
         public ItemEffect? OnDeathEffect { get; private set; }
+        // Texture stuff
+        public int TexX { get; private set; }
+        public int TexY { get; private set; }
+        public int TexSz { get; private set; }
 
         public CreatureType(XmlNode xml, CreatureGroup gp) {
             Name = xml.Attributes?["Name"]?.InnerText ?? throw new Exception("CreatureType missing Name");
@@ -133,6 +138,20 @@ namespace SpaceMercs {
                 OnDeathEffect = new ItemEffect(xie);
             }
 
+            // Texture details
+            XmlNode? xtex = xml.SelectSingleNode("Tex");
+            TexSz = TexX = TexY = -1;
+            if (xtex is not null) {
+                string strTex = xtex.InnerText;
+                TexSz = xtex.GetAttributeInt("Size", 1);
+                if (!string.IsNullOrEmpty(strTex)) {
+                    string[] texBits = strTex.Split(',');
+                    if (texBits.Length != 2) throw new Exception($"Illegal Tex string : {strTex}");
+                    TexX = int.Parse(texBits[0]) - 1;
+                    TexY = int.Parse(texBits[1]) - 1;
+                }
+            }
+
             // Misc
             Description = xml.SelectNodeText("Desc");
             IsBoss = (xml.SelectSingleNode("Boss") is not null);
@@ -143,6 +162,20 @@ namespace SpaceMercs {
             TextureShieldsID = -1;
         }
 
+        public TexSpecs GetTexture(bool bShields) {
+            TexSpecs? ts = Group.GetTexDetails(TexX, TexY, TexSz);
+            if (ts is not null) return ts.Value;
+            int itexid = -1;
+            if (bShields) {
+                if (TextureShieldsID == -1) GenerateTexture(true);
+                itexid = TextureShieldsID;
+            }
+            else {
+                if (TextureID == -1) GenerateTexture(false);
+                itexid = TextureID;
+            }
+            return new TexSpecs(itexid, 0f, 0f, 1f, 1f);
+        }
         public void GenerateTexture(bool bShields) {
             if (bShields) {
                 if (TextureShieldsID != -1) return;

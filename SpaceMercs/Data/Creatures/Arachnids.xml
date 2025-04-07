@@ -15,6 +15,7 @@
     <Resistances>
       <Resistance Type="Poison" Value="40"/>
     </Resistances>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Arachnid Scout">
     <LevelRange>1,12</LevelRange>
@@ -38,6 +39,7 @@
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
     </Scavenge>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Arachnid Hunter">
     <LevelRange>1,12</LevelRange>
@@ -62,6 +64,7 @@
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
     </Scavenge>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Arachnid Soldier">
     <Size>2</Size>
@@ -85,6 +88,7 @@
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
     </Scavenge>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Arachnid Queen">
     <Size>3</Size>
@@ -109,6 +113,7 @@
     <Scavenge>
       <Item Amount="1.5">Nanosilk</Item>
     </Scavenge>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>
 

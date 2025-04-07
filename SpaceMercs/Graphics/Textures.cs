@@ -37,13 +37,13 @@ namespace SpaceMercs {
             if (bTransparent) {
                 if (MiscTextureTransparentID == -1) {
                     SetupMiscTextureTransparent();
-                    SetParameters();
+                    SetTextureParameters();
                 }
             }
             else {
                 if (MiscTextureID == -1) {
                     SetupMiscTexture();
-                    SetParameters();
+                    SetTextureParameters();
                 }
             }
             int xpos = (int)tex & 3, ypos = (int)tex / 4;
@@ -55,7 +55,7 @@ namespace SpaceMercs {
         public static TexSpecs GetTexCoords(ShipEquipment se) {
             if (BuildingTextureID == -1) {
                 SetupBuildingTexture();
-                SetParameters();
+                SetTextureParameters();
             }
             if (Textures.BuildingTextureData is null) throw new Exception("Building texture data is null");
             float tx = (float)((se.TextureX * Textures.TexSize) + 0.5) / Textures.BuildingTextureData.Width;
@@ -65,7 +65,7 @@ namespace SpaceMercs {
         public static TexSpecs GetTexCoords(ItemType it) {
             if (ItemTextureID == -1) {
                 SetupItemTexture();
-                SetParameters();
+                SetTextureParameters();
             }
             if (it.TextureX == -1 || it.TextureY == -1) throw new Exception("Attempting to generate texture coordinates for item with no configured texture");
             if (Textures.ItemTextureData is null) throw new Exception("Item texture data is null");
@@ -111,7 +111,7 @@ namespace SpaceMercs {
             Bitmap TextureBitmap3 = new Bitmap(strItemTextureFile);
             ItemTextureData = TextureBitmap3.LockBits(new Rectangle(0, 0, TextureBitmap3.Width, TextureBitmap3.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
-        public static void SetParameters() {
+        public static void SetTextureParameters() {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
@@ -476,15 +476,20 @@ namespace SpaceMercs {
                 case CreatureType.BodyType.Mechanoid:
                 case CreatureType.BodyType.Gremlin:
                     DrawHumanoid(image, tp.Col1, tp.Col2, tp.Col3); break;
-                case CreatureType.BodyType.Bug: DrawBug(image, tp.Col1, tp.Col2, tp.Col3); break;
-                case CreatureType.BodyType.Beetle: DrawBeetle(image, tp.Col1, tp.Col2, tp.Col3); break;
-                case CreatureType.BodyType.Arachnid: DrawArachnid(image, tp.Col1, tp.Col2, tp.Col3); break;
-                case CreatureType.BodyType.Plant: DrawPlant(image, tp.Col1, tp.Col2, tp.Col3); break;
-                case CreatureType.BodyType.Slime: DrawSlime(image, tp.Col1, tp.Col2, tp.Col3); break;
                 // Snake, Lizard, Xenomorph, Centipede, Scorpion, Dragon
                 default: DrawCircleOnTexture(image, Color.Purple, 15.5, 15.5, 10, 10); break;
             }
-            return BindEntityTexture(image);
+            // Rotate it so that up is forward (currently Right = forward)
+            // We'll get rid of most of this soon anyway
+            byte[,,] imageRot = new byte[Textures.TileSize, Textures.TileSize, 4];
+            for (int y = 0; y < Textures.TileSize; y++) {
+                for (int x = 0; x < Textures.TileSize; x++) {
+                    for (int n = 0; n <= 3; n++) { 
+                        imageRot[x, y, 3] = image[y, Textures.TileSize - x - 1, n]; // Rotate 90 degrees CCW
+                    }
+                }
+            }
+            return BindEntityTexture(imageRot);
         }
         private static void DrawHumanoid(byte[,,] image, Color cFeet, Color cBody, Color cHead) {
             // Feet
@@ -495,80 +500,6 @@ namespace SpaceMercs {
             // Head
             DrawCircleOnTexture(image, cHead, 15.5, 16, 7, 7);
         }
-        private static void DrawBug(byte[,,] image, Color cFeet, Color cBody, Color cHead) {
-            // Feet
-            DrawCircleOnTexture(image, cFeet, 12, 10, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 10, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 12, 15.5, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 15.5, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 12, 21, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 21, 3, 1);
-            // Head
-            DrawCircleOnTexture(image, cHead, 15.5, 10, 5, 5);
-            // Body
-            DrawCircleOnTexture(image, cBody, 15.5, 21, 5, 5);
-            DrawCircleOnTexture(image, cBody, 15.5, 15.5, 5, 5);
-        }
-        private static void DrawBeetle(byte[,,] image, Color cFeet, Color cBody, Color cHead) {
-            // Feet
-            DrawCircleOnTexture(image, cFeet, 12, 10, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 10, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 12, 15.5, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 15.5, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 12, 21, 3, 1);
-            DrawCircleOnTexture(image, cFeet, 19, 21, 3, 1);
-            // Head
-            DrawCircleOnTexture(image, cHead, 15.5, 9, 5, 5);
-            // Body
-            DrawCircleOnTexture(image, cBody, 15.5, 15.5, 6, 8);
-            DrawCircleOnTexture(image, cBody, 15.5, 18, 6, 6);
-        }
-        private static void DrawArachnid(byte[,,] image, Color cFeet, Color cBody, Color cHead) {
-            // Front
-            DrawLineOnTexture(image, cFeet, 14, 10, 10, 7);
-            DrawLineOnTexture(image, cFeet, 10, 7, 11, 4);
-            DrawLineOnTexture(image, cFeet, 17, 10, 21, 7);
-            DrawLineOnTexture(image, cFeet, 21, 7, 20, 4);
-            // Second
-            DrawLineOnTexture(image, cFeet, 14, 12, 9, 13);
-            DrawLineOnTexture(image, cFeet, 9, 13, 6, 10);
-            DrawLineOnTexture(image, cFeet, 17, 12, 22, 13);
-            DrawLineOnTexture(image, cFeet, 22, 13, 25, 10);
-            // Mid
-            DrawLineOnTexture(image, cFeet, 14, 14, 8, 16);
-            DrawLineOnTexture(image, cFeet, 8, 16, 5, 16);
-            DrawLineOnTexture(image, cFeet, 17, 14, 23, 16);
-            DrawLineOnTexture(image, cFeet, 23, 16, 26, 16);
-            // Rear
-            DrawLineOnTexture(image, cFeet, 14, 16, 8, 22);
-            DrawLineOnTexture(image, cFeet, 8, 22, 6, 28);
-            DrawLineOnTexture(image, cFeet, 17, 16, 23, 22);
-            DrawLineOnTexture(image, cFeet, 23, 22, 25, 28);
-            // Body
-            DrawCircleOnTexture(image, cBody, 15.5, 19, 5, 9);
-            // Head
-            DrawCircleOnTexture(image, cHead, 15.5, 9, 4, 5);
-        }
-        private static void DrawPlant(byte[,,] image, Color cMain, Color cLight, Color cDark) {
-            // Canopy
-            DrawCircleOnTexture(image, cMain, 15.5, 15.5, 10, 10);
-            DrawCircleOnTexture(image, cLight, 11.0, 15.5, 4, 4);
-            DrawCircleOnTexture(image, cLight, 20, 15.5, 4, 4);
-            DrawCircleOnTexture(image, cLight, 15.5, 11, 4, 4);
-            DrawCircleOnTexture(image, cLight, 15.5, 20, 4, 4);
-            // Trunk
-            DrawCircleOnTexture(image, cDark, 15.5, 15.5, 2.5, 2.5);
-        }
-        private static void DrawSlime(byte[,,] image, Color col1, Color col2, Color col3) {
-            Random rnd = new Random(0);
-            DrawCircleOnTexture(image, col1, 15.5, 15.5, 7, 7);
-            for (int n = 0; n <= 14; n++) {
-                Color col = col1;
-                if (n > 10) col = col2;
-                else if (n > 6) col = col3;
-                DrawCircleOnTexture(image, col, 7.5 + rnd.NextDouble() * 8.0 + rnd.NextDouble() * 8.0, 7.5 + rnd.NextDouble() * 8.0 + rnd.NextDouble() * 8.0, 2.5 + rnd.NextDouble(), 2.5 + rnd.NextDouble());
-            }
-        }
 
         #region Utility Methods
         private static TexDetails BindTexture(byte[,,] image) {
@@ -577,7 +508,7 @@ namespace SpaceMercs {
             texID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, texID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            SetParameters();
+            SetTextureParameters();
             // Flip the image. For reasons I don't understand.
             int Width = image.GetLength(0), Height = image.GetLength(1);
             byte[,,] newImage = new byte[Height, Width, 3];
@@ -597,7 +528,7 @@ namespace SpaceMercs {
             texID = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, texID);
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
-            SetParameters();
+            SetTextureParameters();
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.GetLength(0), image.GetLength(1), 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba, PixelType.UnsignedByte, image);
             return texID;
         }
@@ -677,7 +608,7 @@ namespace SpaceMercs {
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             if (MiscTextureData is null) throw new Exception("Misc Texture Data was null");
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, MiscTextureData.Width, MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, MiscTextureData.Scan0);
-            SetParameters();
+            SetTextureParameters();
         }
         private static void SetupMiscTextureTransparent() {
             MiscTextureTransparentID = GL.GenTexture();
@@ -691,7 +622,7 @@ namespace SpaceMercs {
                 if (bytes[i * 4 + 0] > 242 && bytes[i * 4 + 1] > 242 && bytes[i * 4 + 2] > 242) bytes[i * 4 + 3] = 0; // Make white-ish colours all transparent
             }
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, MiscTextureData.Width, MiscTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bytes);
-            SetParameters();
+            SetTextureParameters();
         }
         private static void SetupBuildingTexture() {
             BuildingTextureID = GL.GenTexture();
@@ -699,7 +630,7 @@ namespace SpaceMercs {
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             if (BuildingTextureData is null) throw new Exception("Building Texture Data was null");
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, BuildingTextureData.Width, BuildingTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, BuildingTextureData.Scan0);
-            SetParameters();
+            SetTextureParameters();
         }
         private static void SetupItemTexture() {
             ItemTextureID = GL.GenTexture();

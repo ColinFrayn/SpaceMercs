@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Compute.OpenCL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -9,6 +10,8 @@ using SpaceMercs.Graphics.Shapes;
 using SpaceMercs.Items;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Threading;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -59,6 +62,8 @@ namespace SpaceMercs.MainWindow {
         private ShaderProgram pos2DCol4ShaderProgram;
         private ShaderProgram fullShaderProgram;
         private ShaderProgram flatColourLitShaderProgram;
+        private BitmapData? BackgroundTextureData;
+        private int iBackgroundTextureId = -1;
 
         // Initialise the game
         public MapView(GameWindowSettings gws, NativeWindowSettings nws) : base(gws, nws) {
@@ -66,6 +71,13 @@ namespace SpaceMercs.MainWindow {
 
             // Load static data and close if this fails
             if (!StaticData.LoadAll()) this.Close();
+
+            // Load background data
+            string strBackgroundBitmapFile = Path.Combine(StaticData.GraphicsLocation, @"Backgrounds\Background1.bmp");
+            if (File.Exists(strBackgroundBitmapFile)) {
+                Bitmap TextureBitmap = new Bitmap(strBackgroundBitmapFile);
+                BackgroundTextureData = TextureBitmap.LockBits(new Rectangle(0, 0, TextureBitmap.Width, TextureBitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            }
 
             swLastTick.Start();
             swLastClick.Start();
@@ -228,15 +240,44 @@ namespace SpaceMercs.MainWindow {
         #endregion // GameWindow Triggers
 
         #region Rendering
+
+        private static Matrix4 flatProjectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
+        private static Matrix4 zOffsetTranslateM = Matrix4.CreateTranslation(0f, 0f, 0.01f);
+
         // Display a welcome screen on startup
         private void DisplayWelcomeScreen() {
-            Matrix4 projectionM = Matrix4.CreateOrthographicOffCenter(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f);
-            flatColourShaderProgram.SetUniform("projection", projectionM);
+            flatColourShaderProgram.SetUniform("projection", flatProjectionM);
             flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
             flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
 
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            if (iBackgroundTextureId == -1 && BackgroundTextureData is not null) {
+                GL.Enable(EnableCap.Texture2D);
+                iBackgroundTextureId = GL.GenTexture();
+                GL.BindTexture(TextureTarget.Texture2D, iBackgroundTextureId);
+                GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, BackgroundTextureData.Width, BackgroundTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, BackgroundTextureData.Scan0);
+                Textures.SetTextureParameters();
+            }
+
+            if (iBackgroundTextureId != -1) {
+                fullShaderProgram.SetUniform("projection", flatProjectionM);
+                fullShaderProgram.SetUniform("view", Matrix4.Identity);
+                fullShaderProgram.SetUniform("model", zOffsetTranslateM);
+                GL.Enable(EnableCap.Texture2D);
+                GL.Disable(EnableCap.DepthTest);
+                fullShaderProgram.SetUniform("textureEnabled", true);
+                fullShaderProgram.SetUniform("lightEnabled", false);
+                fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+                fullShaderProgram.SetUniform("texPos", 0f, 0f);
+                fullShaderProgram.SetUniform("texScale", 1f, 1f);
+                GL.ActiveTexture(TextureUnit.Texture0);
+                GL.BindTexture(TextureTarget.Texture2D, iBackgroundTextureId);              
+                GL.UseProgram(fullShaderProgram.ShaderProgramHandle);
+                Square.Textured.BindAndDraw();
+            }
 
             TextRenderOptions tro = new() { Alignment = Alignment.TopMiddle, XPos = 0.5f, YPos = 0.2f, Scale = 0.07f, Aspect = Aspect };
             TextRenderer.DrawWithOptions($"Welcome to SpaceMercs v{Const.strVersion}", tro);

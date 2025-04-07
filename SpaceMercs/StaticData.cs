@@ -5,8 +5,9 @@ using System.Xml;
 
 namespace SpaceMercs {
     public static class StaticData {
-        private static readonly string strGraphicsDir, strDataDir;
+        private static readonly string strBitmapsDir, strDataDir, strRootDir;
         public static Race HumanRace { get; private set; }
+        public static string GraphicsLocation => strRootDir + @"\Graphics\";
 
         // All loaded data : Loads through reflection in this order!
 #pragma warning disable 0649
@@ -27,9 +28,9 @@ namespace SpaceMercs {
 
         // Static constructor sets up the root directory where all data are to be found
         static StaticData() {
-            string strRootDir = Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty;
+            strRootDir = Path.GetDirectoryName(Application.ExecutablePath) ?? string.Empty;
             strDataDir = strRootDir + @"\Data\";
-            strGraphicsDir = strRootDir + @"\Graphics\Bitmaps\";
+            strBitmapsDir = strRootDir + @"\Graphics\Bitmaps\";
         }
 
         // Load up all static data types via reflection
@@ -48,7 +49,7 @@ namespace SpaceMercs {
             if (!LoadMaterialRequirements()) return false; // Have to reload the file after the first pass because requirements might refer to other materials.
 
             try {
-                Textures.LoadTextureFiles(strGraphicsDir);
+                Textures.LoadTextureFiles(strBitmapsDir);
             }
             catch (Exception ex) {
                 MessageBox.Show("Failed to load texture data : " + ex.Message, "Texture error", MessageBoxButtons.OK);
@@ -151,6 +152,13 @@ namespace SpaceMercs {
                     return false;
                 }
                 Count++;
+            }
+
+            // Attempt to load texture file, if it exists
+            string strCreatureTextureFile = Path.Combine(strBitmapsDir, $"{gp.Name}.bmp");
+            if (File.Exists(strCreatureTextureFile)) {
+                Bitmap TextureBitmap = new Bitmap(strCreatureTextureFile);
+                gp.SetTextureBitmap(TextureBitmap);                
             }
 
             return true;

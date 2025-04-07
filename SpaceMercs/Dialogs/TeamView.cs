@@ -357,7 +357,7 @@ namespace SpaceMercs.Dialogs {
             if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (s.GetRawUtilityLevel(sk) >= s.Level) throw new Exception("Attempting to increase Utility skill when skill is already at or above Soldier level");
-            if (s.GetRawUtilityLevel(sk) >= 10) throw new Exception("Attempting to increase Utility skill when skill is already at or above maximum level");
+            if (s.GetRawUtilityLevel(sk) >= Const.MaxUtilitySkill) throw new Exception("Attempting to increase Utility skill when skill is already at or above maximum level");
             if (MessageBox.Show("Really increase this skill?", "Increase skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             s.AddUtilitySkill(sk);
             s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, -1);
@@ -389,7 +389,7 @@ namespace SpaceMercs.Dialogs {
                     if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf("[") - 1);
                     Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                     if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;
-                    if (s.GetRawUtilityLevel(sk) >= 10) btIncreaseSkill.Enabled = false;
+                    if (s.GetRawUtilityLevel(sk) >= Const.MaxUtilitySkill) btIncreaseSkill.Enabled = false;
                     else btIncreaseSkill.Enabled = true;
                 }
             }
@@ -406,7 +406,7 @@ namespace SpaceMercs.Dialogs {
                 if (stsk.Contains('[')) stsk = stsk.Substring(0, stsk.IndexOf('[') - 1);
                 Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
                 if (s.GetRawUtilityLevel(sk) >= s.Level) btIncreaseSkill.Enabled = false;
-                if (s.GetRawUtilityLevel(sk) >= 10) btIncreaseSkill.Enabled = false;
+                if (s.GetRawUtilityLevel(sk) >= Const.MaxUtilitySkill) btIncreaseSkill.Enabled = false;
                 else btIncreaseSkill.Enabled = true;
             }
         }

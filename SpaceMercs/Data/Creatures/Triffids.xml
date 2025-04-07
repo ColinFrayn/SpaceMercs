@@ -21,6 +21,7 @@
     <Weapons>
       <Weapon Weight="1">Triffid Tentacle</Weapon>
     </Weapons>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>  
   <CreatureType Name="Triffid Lasher">
     <Scale>0.8</Scale>
@@ -43,6 +44,7 @@
     <Weapons>
       <Weapon Weight="1">Triffid Tentacle</Weapon>
     </Weapons>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Triffid Spore Thrower">
     <Scale>0.8</Scale>
@@ -65,6 +67,7 @@
     <Weapons>
       <Weapon Weight="1">Triffid Thorns</Weapon>
     </Weapons>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Triffid Mother Plant">
     <Size>2</Size>
@@ -89,5 +92,6 @@
       <Weapon Weight="1">Triffid Heavy Thorns</Weapon>
     </Weapons>
     <Boss/>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>

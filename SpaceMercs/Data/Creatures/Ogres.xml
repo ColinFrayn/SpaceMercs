@@ -1,6 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Ogre Scout">
     <Size>2</Size>
+    <Scale>1.7</Scale>
     <LevelRange>5,13</LevelRange>
     <Attack>18</Attack>
     <Defence>10</Defence>
@@ -17,9 +18,11 @@
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Warrior">
     <Size>2</Size>
+    <Scale>1.9</Scale>
     <LevelRange>6,14</LevelRange>
     <Attack>19</Attack>
     <Defence>11</Defence>
@@ -36,9 +39,11 @@
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
+    <Tex Size="4">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Brute">
     <Size>2</Size>
+    <Scale>1.9</Scale>
     <LevelRange>6,14</LevelRange>
     <Attack>20</Attack>
     <Defence>11</Defence>
@@ -55,9 +60,11 @@
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
     </Weapons>
+    <Tex Size="4">5,1</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Elite">
     <Size>2</Size>
+    <Scale>2.0</Scale>
     <LevelRange>7,15</LevelRange>
     <Attack>21</Attack>
     <Defence>11</Defence>
@@ -69,13 +76,15 @@
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
-    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms and a huge axe</Desc>
     <Weapons>
-      <Weapon Weight="1">Spiky Club</Weapon>
+      <Weapon Weight="1">Greataxe</Weapon>
     </Weapons>
+    <Tex Size="4">5,5</Tex>
   </CreatureType>
   <CreatureType Name="Ogre Chief">
     <Size>2</Size>
+    <Scale>2.4</Scale>
     <LevelRange>8,16</LevelRange>
     <Attack>25</Attack>
     <Defence>12</Defence>
@@ -87,10 +96,11 @@
     <Col1>60, 60, 50</Col1>
     <Col2>120, 120, 120</Col2>
     <Col3>100, 100, 100</Col3>
-    <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
+    <Desc>A large, ferocious bipedal humanoid with muscular arms and a giant axe</Desc>
     <Weapons>
-      <Weapon Weight="1">Greatsword</Weapon>
+      <Weapon Weight="1">Greataxe</Weapon>
     </Weapons>
     <Boss/>
+    <Tex Size="4">1,9</Tex>
   </CreatureType>
 </Data>

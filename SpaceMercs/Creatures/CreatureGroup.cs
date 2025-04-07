@@ -1,4 +1,7 @@
-﻿using System.Xml;
+﻿using OpenTK.Graphics.OpenGL;
+using SpaceMercs.Graphics;
+using System.Drawing.Imaging;
+using System.Xml;
 
 namespace SpaceMercs {
     public class CreatureGroup {
@@ -21,6 +24,9 @@ namespace SpaceMercs {
             }
         }
         private readonly Random rand; // Let's set this here because it's easier than passing one through (and just setting it each time risks getting the exact same seed if insufficient time has passed)
+        private BitmapData? TextureData;
+        private int iTextureId = -1;
+        public bool HasTexture => TextureData != null;
 
         public CreatureGroup(XmlNode xml) {
             Name = xml.Attributes!["Name"]?.InnerText ?? throw new Exception("Missing Name for creature group");
@@ -81,6 +87,34 @@ namespace SpaceMercs {
                 if (pick < 0) return tp;
             }
             throw new Exception("Could not find random creature fitting requirements");
+        }
+
+        public void SetTextureBitmap(Bitmap bmp) {
+            TextureData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        }
+        public TexSpecs? GetTexDetails(int x, int y, int sz) {
+            if (TextureData is null || x == -1 || y == -1 || sz == -1) return null;
+            if (iTextureId == -1) {
+                iTextureId = GL.GenTexture();
+                GL.BindTexture(TextureTarget.Texture2D, iTextureId);
+                GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
+
+                // Make white colours all transparent
+                int texture_size = TextureData.Width * TextureData.Height * 4;
+                byte[] bytes = new byte[texture_size];
+                System.Runtime.InteropServices.Marshal.Copy(TextureData.Scan0, bytes, 0, texture_size);
+                for (int i = 0; i < TextureData.Width * TextureData.Height; i++) {
+                    if (bytes[i * 4 + 0] == 255 && bytes[i * 4 + 1] == 255 && bytes[i * 4 + 2] == 255) bytes[i * 4 + 3] = 0; 
+                }
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, TextureData.Width, TextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bytes);
+
+                Textures.SetTextureParameters();
+            }
+            float tx = (float)x / ((float)TextureData.Width / 64f);
+            float ty = (float)y / ((float)TextureData.Height / 64f);
+            float tw = (float)sz / ((float)TextureData.Width / 64f);
+            float th = (float)sz / ((float)TextureData.Height / 64f);
+            return new TexSpecs(iTextureId, tx, ty, tw, th);
         }
     }
 }

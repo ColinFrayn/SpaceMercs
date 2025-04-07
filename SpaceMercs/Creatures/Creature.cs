@@ -57,27 +57,24 @@ namespace SpaceMercs {
         }
         public void SetFacing(Utils.Direction d) { Facing = Utils.DirectionToAngle(d); }
         public void SetFacing(double d) { Facing = d; }
+        private TexSpecs GetTexture() {
+            bool bShields = Shields > 0.001d;
+            return Type.GetTexture(bShields);
+        }
+
         public void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight, float aspect, Matrix4 viewM) {
-            int itexid = -1;
-            if (Shields > 0.0) {
-                if (Type.TextureShieldsID == -1) Type.GenerateTexture(true);
-                itexid = Type.TextureShieldsID;
-            }
-            else {
-                if (Type.TextureID == -1) Type.GenerateTexture(false);
-                itexid = Type.TextureID;
-            }
-            GL.BindTexture(TextureTarget.Texture2D, itexid);
+            TexSpecs ts = GetTexture();
+            GL.BindTexture(TextureTarget.Texture2D, ts.ID);
             GL.Enable(EnableCap.Blend);
             GL.Disable(EnableCap.DepthTest);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             prog.SetUniform("textureEnabled", true);
-            prog.SetUniform("texPos", 0f, 0f);
-            prog.SetUniform("texScale", 1f, 1f);
+            prog.SetUniform("texPos", ts.X, ts.Y);
+            prog.SetUniform("texScale", ts.W, ts.H);
             Matrix4 pTranslateM = Matrix4.CreateTranslation(X + ((float)Type.Size / 2.0f), Y + ((float)Type.Size / 2.0f), Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale((float)Type.Scale);
-            Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing+180)*Math.PI/180));
+            Matrix4 pRotateM = Matrix4.CreateRotationZ((float)((Facing + 90d) * Math.PI / 180d));
             prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
