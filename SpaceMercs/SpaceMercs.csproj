@@ -223,6 +223,9 @@
     <None Update="Graphics\Bitmaps\Triffids.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphics\Bitmaps\Xenomorphs.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphics\Icons\Icon1.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

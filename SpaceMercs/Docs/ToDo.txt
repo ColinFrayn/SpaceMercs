@@ -4,12 +4,11 @@ ToDo List
 
 Add creature textures using bitmaps
 -- Crystallines
--- HiveSpawn
 -- RockCreatures
 -- Shadow Beasts
+-- Soldiers
 -- VoidBeasts
 -- VolcanicCreatures
--- Xenomorphs
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

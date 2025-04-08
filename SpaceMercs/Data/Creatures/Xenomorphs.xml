@@ -1,10 +1,11 @@
 ﻿<Data>
   <CreatureType Name="Xenomorph Spawn">
     <LevelRange>5,20</LevelRange>
-    <Attack>14</Attack>
-    <Defence>12</Defence>
-    <Armour>22</Armour>
-    <Health>13</Health>
+    <Scale>0.75</Scale>
+    <Attack>13</Attack>
+    <Defence>14</Defence>
+    <Armour>12</Armour>
+    <Health>11</Health>
     <Stamina>18</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
@@ -12,7 +13,7 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>An Alien</Desc>
+    <Desc>An alien spawn which attempts to attach itself to a victim.</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
@@ -22,8 +23,9 @@
     <Scavenge>
       <Item Amount="0.2">Chitin</Item>
     </Scavenge>
+    <Tex Size="2">1,7</Tex>
   </CreatureType>
-  <CreatureType Name="Xenomorph Soldier">
+  <CreatureType Name="Xenomorph Slasher">
     <Size>1</Size>
     <Scale>1.2</Scale>
     <LevelRange>6,21</LevelRange>
@@ -38,7 +40,7 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A large and more vicious Alien</Desc>
+    <Desc>A large and vicious alien quadruped with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
     </Weapons>
@@ -50,8 +52,38 @@
       <Item Amount="0.1">Heavy Chitin</Item>
       <Item Amount="0.1">Xenolite</Item>
     </Scavenge>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
-  <CreatureType Name="Xenomorph Burster">
+  <CreatureType Name="Xenomorph Biter">
+    <Size>1</Size>
+    <Scale>1.2</Scale>
+    <LevelRange>6,21</LevelRange>
+    <Attack>17</Attack>
+    <Defence>14</Defence>
+    <Armour>28</Armour>
+    <Health>16</Health>
+    <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>Xenomorph</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A large and vicious alien quadruped with sharp teeth</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+      <Item Amount="0.1">Heavy Chitin</Item>
+      <Item Amount="0.1">Xenolite</Item>
+    </Scavenge>
+    <Tex Size="2">3,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Acid Beetle">
     <LevelRange>5,21</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
@@ -85,9 +117,11 @@
       </Effect>
       <Sound>WetSplat</Sound>
     </OnDeathEffect>
+    <Tex Size="2">3,7</Tex>
   </CreatureType>
   <CreatureType Name="Xenomorph Scythebeast">
     <Size>2</Size>
+    <Scale>1.8</Scale>
     <LevelRange>7,22</LevelRange>
     <Attack>19</Attack>
     <Defence>14</Defence>
@@ -104,34 +138,36 @@
       <Weapon Weight="1">Xenoblades</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Acid" Value="100"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.2">Chitin</Item>
       <Item Amount="0.1">Heavy Chitin</Item>
       <Item Amount="0.1">Xenolite</Item>
     </Scavenge>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
-  <CreatureType Name="Xenomorph Queen">
+  <CreatureType Name="Xenomorph Deathworm">
     <Size>2</Size>
+    <Scale>2.2</Scale>
     <LevelRange>9,23</LevelRange>
     <Attack>25</Attack>
-    <Defence>13</Defence>
+    <Defence>12</Defence>
     <Armour>33</Armour>
-    <Health>55</Health>
+    <Health>58</Health>
     <Stamina>24</Stamina>
     <Interact/>
     <BodyType>Xenomorph</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A huge xenomorph queen</Desc>
+    <Desc>A huge xenomorph queen with a long bulbous body</Desc>
     <Boss/>
     <Weapons>
       <Weapon Weight="1">Xenoblades</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
+      <Resistance Type="Acid" Value="100"/>
     </Resistances>
     <Scavenge>
       <Item Amount="1.5">Heavy Chitin</Item>
