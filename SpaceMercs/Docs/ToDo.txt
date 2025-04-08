@@ -4,9 +4,7 @@ ToDo List
 
 Add creature textures using bitmaps
 -- Crystallines
--- Gremlins
 -- HiveSpawn
--- Mechanoids
 -- RockCreatures
 -- Shadow Beasts
 -- VoidBeasts

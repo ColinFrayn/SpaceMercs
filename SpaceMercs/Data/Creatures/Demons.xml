@@ -20,6 +20,7 @@
     <Resistances>
       <Resistance Type="Fire" Value="50"/>
     </Resistances>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Demon Spawn">
     <Size>1</Size>
@@ -45,6 +46,33 @@
     <Scavenge>
       <Item Amount="0.3">Demon Blood</Item>
     </Scavenge>
+    <Tex Size="2">1,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Demon Clawbeast">
+    <Size>1</Size>
+    <LevelRange>10,20</LevelRange>
+    <Attack>17</Attack>
+    <Defence>15</Defence>
+    <Armour>24</Armour>
+    <Health>20</Health>
+    <Stamina>20</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <BodyType>Demon</BodyType>
+    <Col1>160, 50, 00</Col1>
+    <Col2>170, 70, 00</Col2>
+    <Col3>180, 80, 00</Col3>
+    <Desc>A demonic servant with sharp claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Barbed Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Demon Blood</Item>
+    </Scavenge>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Lava Beast">
     <LevelRange>9,19</LevelRange>
@@ -79,9 +107,11 @@
       </Effect>
       <Sound>WetSplat</Sound>
     </OnDeathEffect>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Demon Swordmaster">
     <Size>2</Size>
+    <Scale>1.7</Scale>
     <LevelRange>9,19</LevelRange>
     <Attack>22</Attack>
     <Defence>16</Defence>
@@ -103,9 +133,11 @@
     <Scavenge>
       <Item Amount="1">Demon Blood</Item>
     </Scavenge>
+    <Tex Size="4">5,1</Tex>
   </CreatureType>
   <CreatureType Name="Demon Lord">
     <Size>2</Size>
+    <Scale>2.2</Scale>
     <LevelRange>10,20</LevelRange>
     <Attack>26</Attack>
     <Defence>17</Defence>
@@ -129,6 +161,7 @@
       <Item Amount="2">Demon Blood</Item>
     </Scavenge>
     <Boss/>
+    <Tex Size="4">5,5</Tex>
   </CreatureType>
 </Data>
 

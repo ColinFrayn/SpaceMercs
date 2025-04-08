@@ -18,9 +18,9 @@
     </Weapons>
     <Resistances>
       <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="80"/>
-      <Resistance Type="Cold" Value="80"/>
-      <Resistance Type="Physical" Value="30"/>
+      <Resistance Type="Fire" Value="50"/>
+      <Resistance Type="Cold" Value="50"/>
+      <Resistance Type="Psychic" Value="60"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.6">Voidskin</Item>
@@ -47,7 +47,7 @@
       <Resistance Type="Acid" Value="50"/>
       <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
-      <Resistance Type="Physical" Value="30"/>
+      <Resistance Type="Psychic" Value="70"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.7">Voidskin</Item>
@@ -73,7 +73,7 @@
       <Resistance Type="Acid" Value="50"/>
       <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
-      <Resistance Type="Physical" Value="30"/>
+      <Resistance Type="Psychic" Value="70"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.7">Voidskin</Item>
@@ -100,7 +100,7 @@
       <Resistance Type="Acid" Value="50"/>
       <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
-      <Resistance Type="Physical" Value="40"/>
+      <Resistance Type="Psychic" Value="80"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.9">Voidskin</Item>
@@ -127,7 +127,7 @@
       <Resistance Type="Acid" Value="50"/>
       <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
-      <Resistance Type="Physical" Value="40"/>
+      <Resistance Type="Psychic" Value="100"/>
     </Resistances>
   </CreatureType>
 </Data>

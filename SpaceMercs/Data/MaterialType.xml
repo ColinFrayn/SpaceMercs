@@ -346,4 +346,11 @@
     <Scavenged/>
     <Desc>The hot, deep red blood of a vicious demon.</Desc>
   </MaterialType>
+  <MaterialType Name="Hive Brainstem">
+    <UnitCost>45.0</UnitCost>
+    <Rarity>0.005</Rarity>
+    <UnitMass>0.5</UnitMass>
+    <Scavenged/>
+    <Desc>The warm, pulsating mass of neurons from the heart of a hive brain.</Desc>
+  </MaterialType>
 </Data>

@@ -1,5 +1,5 @@
 ﻿<Data>
-  <CreatureType Name="Mechanoid Grunt">
+  <CreatureType Name="Mechanoid Drone">
     <LevelRange>6,15</LevelRange>
     <Attack>10</Attack>
     <Defence>9</Defence>
@@ -12,7 +12,7 @@
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
     <Col3>170, 170, 170</Col3>
-    <Desc>A rank-and-file mechanoid</Desc>
+    <Desc>A rank-and-file mechanoid drone</Desc>
     <Weapons>
       <Weapon Weight="1">Laser Pistol</Weapon>
     </Weapons>
@@ -23,6 +23,7 @@
     <Scavenge>
       <Item Amount="0.5">Electronic Components</Item>
     </Scavenge>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Mechanoid Trooper">
     <LevelRange>7,18</LevelRange>
@@ -50,6 +51,7 @@
       <Item Amount="0.5">Titanium</Item>
       <Item Amount="0.5">Electronic Components</Item>
     </Scavenge>
+    <Tex Size="2">1,9</Tex>
   </CreatureType>
   <CreatureType Name="Mechanoid Slasher">
     <LevelRange>7,18</LevelRange>
@@ -77,6 +79,7 @@
       <Item Amount="0.5">Titanium</Item>
       <Item Amount="0.5">Electronic Components</Item>
     </Scavenge>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Mechanoid Elite">
     <Scale>1.05</Scale>
@@ -107,9 +110,11 @@
       <Item Amount="0.5">Titanium</Item>
       <Item Amount="0.5">Electronic Components</Item>
     </Scavenge>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
-  <CreatureType Name="Mechanoid Tank">
+  <CreatureType Name="Mechanoid Heavy">
     <Size>2</Size>
+    <Scale>1.8</Scale>
     <LevelRange>9,22</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
@@ -122,7 +127,7 @@
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
     <Col3>170, 170, 170</Col3>
-    <Desc>A large tank with a heavy weapon</Desc>
+    <Desc>A large heavily-armoured mechanoid with a heavy weapon</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="12">Laser Rifle</Weapon>
       <Weapon Weight="2" MinLev="11">Heavy Laser Rifle</Weapon>
@@ -136,6 +141,7 @@
       <Item Amount="1.5">Titanium</Item>
       <Item Amount="1.0">Electronic Components</Item>
     </Scavenge>
+    <Tex Size="4">1,11</Tex>
   </CreatureType>
   <CreatureType Name="Mechanoid Ranger">
     <LevelRange>9,22</LevelRange>
@@ -163,6 +169,7 @@
       <Item Amount="1.0">Electronic Components</Item>
       <Item Amount="0.5">Crystals</Item>
     </Scavenge>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Mechanoid Heavy Tank">
     <Size>3</Size>
@@ -177,7 +184,7 @@
     <Col1>90, 90, 90</Col1>
     <Col2>140, 140, 140</Col2>
     <Col3>170, 170, 170</Col3>
-    <Desc>A mechanoid tank that commands the battlefield</Desc>
+    <Desc>A disc-shaped floating mechanoid tank that commands the battlefield</Desc>
     <Boss/>
     <Weapons>
       <Weapon Weight="2">Heavy Laser Rifle</Weapon>
@@ -192,6 +199,7 @@
       <Item Amount="1.5">Electronic Components</Item>
       <Item Amount="0.5">Adamantium</Item>
     </Scavenge>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>
 

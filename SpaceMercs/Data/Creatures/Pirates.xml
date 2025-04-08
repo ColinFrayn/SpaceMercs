@@ -1,7 +1,7 @@
 ﻿<Data>
   <!--Enemy creatures -->
   <CreatureType Name="Smuggler">
-    <Scale>0.9</Scale>
+    <Scale>0.85</Scale>
     <LevelRange>1,12</LevelRange>
     <Attack>8</Attack>
     <Defence>8</Defence>
@@ -15,9 +15,10 @@
     <Col3>200, 160, 120</Col3>
     <Desc>A smuggler</Desc>
     <Weapons>
-      <Weapon Weight="2">Shortblade</Weapon>
-      <Weapon Weight="3">Pistol</Weapon>
+      <Weapon Weight="2" MaxLev="8">Pistol</Weapon>
+      <Weapon Weight="1" MinLev="6">Laser Pistol</Weapon>
     </Weapons>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Pirate">
     <LevelRange>1,12</LevelRange>
@@ -39,6 +40,7 @@
       <Weapon Weight="2">Automatic Rifle</Weapon>
       <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Mercenary">
     <LevelRange>2,15</LevelRange>
@@ -55,10 +57,10 @@
     <Desc>A mercenary</Desc>
     <Weapons>
       <Weapon Weight="3">Shotgun</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
       <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
+    <Tex Size="2">3,5</Tex>
   </CreatureType>
   <CreatureType Name="Elite Skirmisher">
     <Scale>1.05</Scale>
@@ -72,14 +74,12 @@
     <Col1>120, 90, 60</Col1>
     <Col2>220, 150, 140</Col2>
     <Col3>200, 160, 120</Col3>
-    <Desc>A tougher pirate</Desc>
+    <Desc>A tougher pirate, heavily armed with slashing weapons</Desc>
     <Weapons>
-      <Weapon Weight="1">Shotgun</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
-      <Weapon Weight="1">Chainsword</Weapon>
-      <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
-      <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
+      <Weapon Weight="1" MaxLev="5">Shortblade</Weapon>
+      <Weapon Weight="1" MinLev="3">Powerblade</Weapon>
     </Weapons>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Deadeye">
     <Scale>1.00</Scale>
@@ -98,9 +98,10 @@
       <Weapon Weight="1" MaxLev="10">Sniper Rifle</Weapon>
       <Weapon Weight="1" MinLev="8">Laser Sniper Rifle</Weapon>
     </Weapons>
+    <Tex Size="2">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Pirate Boss">
-    <Scale>1.1</Scale>
+    <Scale>1.2</Scale>
     <LevelRange>5,18</LevelRange>
     <Attack>14</Attack>
     <Defence>12</Defence>
@@ -117,11 +118,10 @@
       <Weapon Weight="1" MaxLev="7">Shotgun</Weapon>
       <Weapon Weight="1" MinLev="7">Triple Shotgun</Weapon>
       <Weapon Weight="1" MinLev="10">Quad Shotgun</Weapon>
-      <Weapon Weight="1">Chainsword</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
       <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
       <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
 </Data>
 

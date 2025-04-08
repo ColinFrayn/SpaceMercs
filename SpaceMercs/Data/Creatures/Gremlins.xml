@@ -1,11 +1,11 @@
 ﻿<Data>
   <!--Enemy creatures -->
-  <CreatureType Name="Gremlin Drone">
-    <Scale>0.9</Scale>
+  <CreatureType Name="Gremlin Worker">
+    <Scale>0.8</Scale>
     <LevelRange>1,7</LevelRange>
     <Attack>8</Attack>
     <Defence>9</Defence>
-    <Armour>16</Armour>
+    <Armour>13</Armour>
     <Health>10</Health>
     <Stamina>15</Stamina>
     <Frequency>3</Frequency>
@@ -14,16 +14,17 @@
     <Col1>120, 90, 60</Col1>
     <Col2>180, 160, 140</Col2>
     <Col3>200, 160, 120</Col3>
-    <Desc>A tiny gremlin</Desc>
+    <Desc>A tiny gremlin worker</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">3,5</Tex>
   </CreatureType>
   <CreatureType Name="Gremlin Biter">
     <LevelRange>1,8</LevelRange>
     <Attack>9</Attack>
     <Defence>10</Defence>
-    <Armour>20</Armour>
+    <Armour>17</Armour>
     <Health>12</Health>
     <Stamina>17</Stamina>
     <Frequency>3</Frequency>
@@ -36,12 +37,13 @@
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
-  <CreatureType Name="Gremlin Slasher">
+  <CreatureType Name="Gremlin Ratbeast">
     <LevelRange>2,9</LevelRange>
-    <Attack>11</Attack>
+    <Attack>12</Attack>
     <Defence>11</Defence>
-    <Armour>22</Armour>
+    <Armour>16</Armour>
     <Health>14</Health>
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
@@ -50,17 +52,18 @@
     <Col1>120, 120, 120</Col1>
     <Col2>180, 160, 140</Col2>
     <Col3>170, 170, 170</Col3>    
-    <Desc>A vicious larger gremlin with sharp claws</Desc>
+    <Desc>A vicious rat-like beast with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
+    <Tex Size="2">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Gremlin Gunner">
     <Scale>1.05</Scale>
     <LevelRange>3,9</LevelRange>
     <Attack>13</Attack>
     <Defence>11</Defence>
-    <Armour>22</Armour>
+    <Armour>16</Armour>
     <Health>18</Health>
     <Stamina>19</Stamina>
     <BodyType>Gremlin</BodyType>
@@ -72,12 +75,13 @@
     <Weapons>
       <Weapon Weight="1">Pistol</Weapon>
     </Weapons>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Gremlin Knife Thrower">
     <LevelRange>5,10</LevelRange>
     <Attack>14</Attack>
     <Defence>11</Defence>
-    <Armour>16</Armour>
+    <Armour>14</Armour>
     <Health>12</Health>
     <Stamina>19</Stamina>
     <BodyType>Gremlin</BodyType>
@@ -89,14 +93,15 @@
     <Weapons>
       <Weapon Weight="1">Throwing Knife</Weapon>
     </Weapons>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Gremlin King">
-    <Scale>1.1</Scale>
+    <Scale>1.3</Scale>
     <LevelRange>5,11</LevelRange>
     <Attack>15</Attack>
     <Defence>14</Defence>
     <Armour>26</Armour>
-    <Health>32</Health>
+    <Health>36</Health>
     <Stamina>21</Stamina>
     <BodyType>Gremlin</BodyType>
     <Interact/>
@@ -108,6 +113,7 @@
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
     </Weapons>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
 </Data>
 
