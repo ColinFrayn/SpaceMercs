@@ -1,6 +1,6 @@
 ﻿<Data>
   <CreatureType Name="Giant Lizard">
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>1,12</LevelRange>
     <Scale>1.2</Scale>
     <Attack>8</Attack>
     <Defence>8</Defence>
@@ -20,7 +20,7 @@
   </CreatureType>
   <CreatureType Name="Sand Snake">
     <Scale>0.9</Scale>
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>1,12</LevelRange>
     <Attack>10</Attack>
     <Defence>10</Defence>
     <Health>8</Health>
@@ -41,7 +41,7 @@
     <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Giant Centipede">
-    <LevelRange>1,10</LevelRange>
+    <LevelRange>1,12</LevelRange>
     <Scale>1.2</Scale>
     <Attack>11</Attack>
     <Defence>12</Defence>
@@ -62,7 +62,7 @@
   </CreatureType>
   <CreatureType Name="Giant Scorpion">
     <Size>2</Size>
-    <LevelRange>2,12</LevelRange>
+    <LevelRange>4,13</LevelRange>
     <Attack>12</Attack>
     <Defence>13</Defence>
     <Health>11</Health>
@@ -87,7 +87,7 @@
   </CreatureType>
   <CreatureType Name="Giant Sand Beetle">
     <Size>1</Size>
-    <LevelRange>2,12</LevelRange>
+    <LevelRange>1,9</LevelRange>
     <Attack>10</Attack>
     <Defence>11</Defence>
     <Health>12</Health>
@@ -102,6 +102,29 @@
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Giant Antbeast">
+    <Size>2</Size>
+    <Scale>1.8</Scale>
+    <LevelRange>6,14</LevelRange>
+    <Attack>19</Attack>
+    <Defence>13</Defence>
+    <Health>24</Health>
+    <Stamina>20</Stamina>
+    <Armour>30</Armour>
+    <BodyType>Dragon</BodyType>
+    <Col1>70, 50, 40</Col1>
+    <Col2>130, 90, 90</Col2>
+    <Col3>150, 100, 100</Col3>
+    <Desc>A large, armoured bipedal killing machine.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="1.0">Heavy Chitin</Item>
+      <Item Amount="2.0">Chitin</Item>
+    </Scavenge>
+    <Tex Size="4">1,11</Tex>
   </CreatureType>
   <CreatureType Name="Sand Shark">
     <Size>2</Size>

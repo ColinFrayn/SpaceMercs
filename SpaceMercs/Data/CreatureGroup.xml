@@ -72,7 +72,7 @@
   </CreatureGroup>
   <CreatureGroup Name="Shadow Beasts">
     <Filename>ShadowBeasts.xml</Filename>
-    <Locations>Ship,SpaceHulk</Locations>
+    <Locations>Rocky,Ship,SpaceHulk</Locations>
     <MinSectorRange>1</MinSectorRange>
   </CreatureGroup>
   <CreatureGroup Name="Slime Creatures">
@@ -90,9 +90,13 @@
     <Locations>Oceanic,Ship</Locations>
     <QuantityScale>1.8</QuantityScale>
   </CreatureGroup>
-  <CreatureGroup Name="Void Beasts">
-    <Filename>VoidBeasts.xml</Filename>
-    <Locations>Ship</Locations>
+  <CreatureGroup Name="Undead">
+    <Filename>Undead.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,SpaceHulk</Locations>
+  </CreatureGroup>
+  <CreatureGroup Name="Void Dwellers">
+    <Filename>VoidDwellers.xml</Filename>
+    <Locations>Ship,SpaceHulk</Locations>
     <MinSectorRange>2</MinSectorRange>
   </CreatureGroup>
   <CreatureGroup Name="Volcanic Creatures">

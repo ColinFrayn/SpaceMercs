@@ -1,6 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Shadow Minion">
     <LevelRange>5,12</LevelRange>
+    <Scale>0.8</Scale>
     <Attack>11</Attack>
     <Defence>14</Defence>
     <Armour>12</Armour>
@@ -12,7 +13,7 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A shadowy beast with deep, fiery red eyes</Desc>
+    <Desc>A shadowy creature with dark soulless eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
@@ -20,7 +21,8 @@
       <Resistance Type="Acid" Value="20"/>
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Electrical" Value="120"/>
-    </Resistances>    
+    </Resistances>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Shadow Soulsucker">
     <LevelRange>6,13</LevelRange>
@@ -35,7 +37,7 @@
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
-    <Desc>A large shadowy beast with deep, fiery red eyes and wisps of smoke emanating from all around it.</Desc>
+    <Desc>A large shadowy creature with deep, fiery red eyes and wisps of smoke emanating from all around it.</Desc>
     <Weapons>
       <Weapon Weight="1">Soul Drain</Weapon>
     </Weapons>
@@ -47,6 +49,7 @@
     <Scavenge>
       <Item Amount="0.6">Shadowskin</Item>
     </Scavenge>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Shadow Beast">
     <LevelRange>6,13</LevelRange>
@@ -73,13 +76,16 @@
     <Scavenge>
       <Item Amount="0.6">Shadowskin</Item>
     </Scavenge>
+    <Tex Size="2">1,7</Tex>
   </CreatureType>
   <CreatureType Name="Shadow Alpha">
-    <LevelRange>7,14</LevelRange>
+    <Size>2</Size>
+    <Scale>1.7</Scale>
+    <LevelRange>8,13</LevelRange>
     <Attack>18</Attack>
-    <Defence>18</Defence>
-    <Armour>18</Armour>
-    <Health>22</Health>
+    <Defence>16</Defence>
+    <Armour>16</Armour>
+    <Health>24</Health>
     <Stamina>19</Stamina>
     <Interact/>
     <BodyType>ShadowBeast</BodyType>
@@ -96,9 +102,38 @@
       <Resistance Type="Electrical" Value="120"/>
     </Resistances>
     <Scavenge>
+      <Item Amount="1.0">Shadowskin</Item>
+    </Scavenge>
+    <Tex Size="4">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Shadow Dragon">
+    <Size>3</Size>
+    <Scale>3.3</Scale>
+    <LevelRange>9,15</LevelRange>
+    <Attack>26</Attack>
+    <Defence>16</Defence>
+    <Armour>34</Armour>
+    <Health>54</Health>
+    <Stamina>20</Stamina>
+    <Interact/>
+    <BodyType>ShadowBeast</BodyType>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A huge shadowy monster with leathery wings</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="20"/>
+      <Resistance Type="Physical" Value="20"/>
+      <Resistance Type="Electrical" Value="120"/>
+    </Resistances>
+    <Scavenge>
       <Item Amount="2.0">Shadowskin</Item>
     </Scavenge>
     <Boss/>
+    <Tex Size="4">1,9</Tex>
   </CreatureType>
 </Data>
 

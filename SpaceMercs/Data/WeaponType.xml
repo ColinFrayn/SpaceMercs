@@ -1136,10 +1136,25 @@
     <Sound>HeavyCrossbow</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Void Claws">
+    <Speed>10</Speed>
+    <Range>1</Range>
+    <Damage>6+6</Damage>
+    <Sound>SwordSlice</Sound>
+    <Hidden/>
+  </WeaponType>
   <WeaponType Name="Soul Drain">
     <Speed>12</Speed>
     <Range DropOff="0.0" Colour="0.6,0.6,0.6">6</Range>
     <Damage>4+3</Damage>
+    <Type>Psychic</Type>
+    <Sound>Drain</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Psychic Strike">
+    <Speed>12</Speed>
+    <Range DropOff="0.0" Colour="0.9,0.9,0.9">18</Range>
+    <Damage>5+4</Damage>
     <Type>Psychic</Type>
     <Sound>Drain</Sound>
     <Hidden/>
@@ -1250,6 +1265,14 @@
         <Damage Type="Fire">4</Damage>
       </Effect>
     </ItemEffect>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Wail">
+    <Speed>14</Speed>
+    <Range DropOff="0.0" Colour="0.9,0.9,0.9">8</Range>
+    <Damage>4+3</Damage>
+    <Type>Psychic</Type>
+    <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
 </Data>

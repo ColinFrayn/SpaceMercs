@@ -4,11 +4,10 @@ ToDo List
 
 Add creature textures using bitmaps
 -- Crystallines
--- RockCreatures
--- Shadow Beasts
--- Soldiers
--- VoidBeasts
--- VolcanicCreatures
+
+Generating Hulk missions (e.g. scanner from gas giant, or possibly from colony) -> Generates racial enemy and therefore doesn't ever add e.g. Shadow Creatures / Void Dwellers.
+
+Error on load doesn't show MsgBox correctly
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

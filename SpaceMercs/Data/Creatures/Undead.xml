@@ -1,0 +1,157 @@
+﻿<Data>
+  <CreatureType Name="Zombie">
+    <LevelRange>1,7</LevelRange>
+    <Attack>8</Attack>
+    <Defence>9</Defence>
+    <Health>12</Health>
+    <Stamina>17</Stamina>
+    <Armour>10</Armour>
+    <MovementCost>2.0</MovementCost>
+    <Frequency>3</Frequency>
+    <Col1>100, 80, 60</Col1>
+    <Col2>140, 115, 90</Col2>
+    <Col3>110, 80, 60</Col3>
+    <Desc>A slow-moving undead humanoid</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+    </Resistances>
+    <Tex Size="2">1,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Skeleton Warrior">
+    <LevelRange>1,8</LevelRange>
+    <Attack>10</Attack>
+    <Defence>12</Defence>
+    <Health>10</Health>
+    <Stamina>16</Stamina>
+    <Armour>12</Armour>
+    <Frequency>2</Frequency>
+    <Col1>70, 70, 70</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>110, 110, 110</Col3>
+    <Desc>A lightly armoured undead humanoid skeleton</Desc>
+    <Weapons>
+      <Weapon Weight="1">Shortblade</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="100"/>
+      <Resistance Type="Psychic" Value="100"/>
+    </Resistances>
+    <Tex Size="2">3,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Ghoul">
+    <LevelRange>2,10</LevelRange>
+    <Attack>12</Attack>
+    <Defence>12</Defence>
+    <Health>14</Health>
+    <Stamina>18</Stamina>
+    <Armour>14</Armour>
+    <Frequency>2</Frequency>
+    <Col1>80, 60, 40</Col1>
+    <Col2>120, 95, 70</Col2>
+    <Col3>130, 85, 60</Col3>
+    <Resistances>
+      <Resistance Type="Poison" Value="50"/>
+      <Resistance Type="Psychic" Value="100"/>
+    </Resistances>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Desc>A vicious stronger undead monster</Desc>
+    <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Banshee">
+    <Scale>1.1</Scale>
+    <LevelRange>4,12</LevelRange>
+    <Attack>15</Attack>
+    <Defence>10</Defence>
+    <Health>14</Health>
+    <Stamina>16</Stamina>
+    <Armour>10</Armour>
+    <Col1>40, 30, 30</Col1>
+    <Col2>60, 60, 60</Col2>
+    <Col3>70, 70, 70</Col3>
+    <Desc>A wraith-like unsubstantial humanoid.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Wail</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Poison" Value="100"/>
+      <Resistance Type="Psychic" Value="100"/>
+      <Resistance Type="Physical" Value="50"/>
+    </Resistances>
+    <Tex Size="2">3,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Bone Snake">
+    <Scale>1.1</Scale>
+    <LevelRange>2,12</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Health>15</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Armour>36</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large armoured bipedal creature with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Physical" Value="30"/>
+    </Resistances>
+    <Tex Size="2">3,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Mummy">
+    <Scale>1.2</Scale>
+    <LevelRange>6,13</LevelRange>
+    <Attack>15</Attack>
+    <Defence>12</Defence>
+    <Health>15</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <MovementCost>1.6</MovementCost>
+    <Armour>36</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A large armoured bipedal creature with muscular arms</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="1.5">Fabric</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Physical" Value="30"/>
+      <Resistance Type="Psychic" Value="100"/>
+    </Resistances>
+    <Tex Size="2">1,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Lich">
+    <Size>2</Size>
+    <Scale>1.8</Scale>
+    <LevelRange>5,13</LevelRange>
+    <Attack>26</Attack>
+    <Defence>12</Defence>
+    <Health>35</Health>
+    <Stamina>18</Stamina>
+    <Interact/>
+    <Armour>20</Armour>
+    <Col1>60, 60, 50</Col1>
+    <Col2>120, 120, 120</Col2>
+    <Col3>100, 100, 100</Col3>
+    <Desc>A vicious creature with psionic powers.</Desc>
+    <Boss/>
+    <Weapons>
+      <Weapon Weight="1">Psychic Strike</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="1.5">Fabric</Item>
+    </Scavenge>
+    <Tex Size="2">1,7</Tex>
+  </CreatureType>
+</Data>

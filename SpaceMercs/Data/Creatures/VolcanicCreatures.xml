@@ -1,26 +1,27 @@
 ﻿<Data>
-  <CreatureType Name="Fire Lizard">
-    <LevelRange>1,10</LevelRange>
+  <CreatureType Name="Fire Imp">
+    <LevelRange>1,8</LevelRange>
+    <Scale>0.8</Scale>
     <Attack>8</Attack>
     <Defence>8</Defence>
     <Health>11</Health>
     <Stamina>16</Stamina>
     <Armour>10</Armour>
     <Frequency>3</Frequency>
-    <BodyType>Lizard</BodyType>
     <Col1>100, 60, 40</Col1>
     <Col2>200, 115, 90</Col2>
     <Col3>190, 105, 80</Col3>
-    <Desc>A large red lizard with a think skin</Desc>
+    <Desc>A small humanoid with fiery eyes</Desc>
     <Weapons>
-      <Weapon Weight="1">Bite</Weapon>
+      <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="25"/>
-      <Resistance Type="Cold" Value="-25"/>
+      <Resistance Type="Fire" Value="75"/>
+      <Resistance Type="Cold" Value="-50"/>
     </Resistances>
+    <Tex Size="2">1,9</Tex>
   </CreatureType>
-  <CreatureType Name="Rock Viper">
+  <CreatureType Name="Rock Hopper">
     <LevelRange>1,10</LevelRange>
     <Attack>11</Attack>
     <Defence>9</Defence>
@@ -28,21 +29,20 @@
     <Stamina>16</Stamina>
     <Armour>10</Armour>
     <Frequency>3</Frequency>
-    <BodyType>Snake</BodyType>
     <Col1>200, 120, 0</Col1>
     <Col2>240, 170, 40</Col2>
     <Col3>220, 160, 20</Col3>
-    <Desc>A large snake with a vicious bite</Desc>
+    <Desc>A large bird-like predator with a vicious bite</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="25"/>
-      <Resistance Type="Poison" Value="50"/>
+      <Resistance Type="Fire" Value="75"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
-  <CreatureType Name="Lava Beetle">
+  <CreatureType Name="Hellhound">
     <LevelRange>2,11</LevelRange>
     <Attack>10</Attack>
     <Defence>11</Defence>
@@ -50,16 +50,15 @@
     <Stamina>16</Stamina>
     <Armour>20</Armour>
     <Frequency>3</Frequency>
-    <BodyType>Beetle</BodyType>
     <Col1>70, 50, 40</Col1>
     <Col2>80, 70, 70</Col2>
     <Col3>90, 80, 80</Col3>
-    <Desc>A large carnivorous beetle</Desc>
+    <Desc>A large carnivorous canine</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="25"/>
+      <Resistance Type="Fire" Value="75"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
     <Scavenge>
@@ -67,9 +66,10 @@
       <Item Amount="0.25">Vulcanin</Item>
       <Item Amount="0.1">Incendiary Bulb</Item>
     </Scavenge>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
-  <CreatureType Name="Lava Spider">
-    <Size>2</Size>
+  <CreatureType Name="Lava Lizard">
+    <Size>1</Size>
     <LevelRange>3,13</LevelRange>
     <Attack>12</Attack>
     <Defence>10</Defence>
@@ -81,22 +81,44 @@
     <Col1>70, 50, 40</Col1>
     <Col2>80, 70, 70</Col2>
     <Col3>90, 80, 80</Col3>
-    <Desc>A large spider with a vicious bite</Desc>
+    <Desc>A large red lizard with a think skin</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Poison" Value="25"/>
-      <Resistance Type="Fire" Value="25"/>
-      <Resistance Type="Cold" Value="-25"/>
+      <Resistance Type="Fire" Value="75"/>
+      <Resistance Type="Cold" Value="-50"/>
     </Resistances>
     <Scavenge>
       <Item Amount="0.15">Vulcanin</Item>
       <Item Amount="0.15">Incendiary Bulb</Item>
     </Scavenge>
+    <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Lava Thrower">
+    <LevelRange>4,14</LevelRange>
+    <Attack>14</Attack>
+    <Defence>14</Defence>
+    <Health>14</Health>
+    <Stamina>18</Stamina>
+    <Armour>16</Armour>
+    <Frequency>1</Frequency>
+    <Col1>100, 60, 40</Col1>
+    <Col2>200, 115, 90</Col2>
+    <Col3>190, 105, 80</Col3>
+    <Desc>A small humanoid with fiery eyes</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+      <Resistance Type="Cold" Value="-50"/>
+    </Resistances>
+    <Tex Size="2">1,9</Tex>
   </CreatureType>
   <CreatureType Name="Fire Dragonling">
-    <Size>2</Size>
+    <Size>1</Size>
+    <Scale>1.1</Scale>
     <LevelRange>4,14</LevelRange>
     <Attack>14</Attack>
     <Defence>11</Defence>
@@ -113,39 +135,66 @@
       <Weapon Weight="1">Fire Bolt</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="60"/>
+      <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
     <Scavenge>
       <Item Amount="1.0">Vulcanin</Item>
       <Item Amount="0.8">Incendiary Bulb</Item>
     </Scavenge>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Fire Dragon">
-    <Size>3</Size>
-    <LevelRange>5,15</LevelRange>
+    <Size>2</Size>
+    <LevelRange>6,10</LevelRange>
     <Attack>18</Attack>
     <Defence>12</Defence>
     <Health>33</Health>
     <Stamina>22</Stamina>
     <Armour>32</Armour>
-    <MovementCost>0.7</MovementCost>
-    <BodyType>Dragon</BodyType>
     <Col1>70, 50, 40</Col1>
     <Col2>130, 90, 90</Col2>
     <Col3>150, 100, 100</Col3>
     <Desc>A large, menacing dragon that breathes fire.</Desc>
     <Weapons>
-      <Weapon Weight="1">Fire Bolt</Weapon>
+      <Weapon Weight="1">Fire Blast</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Fire" Value="75"/>
+      <Resistance Type="Fire" Value="100"/>
       <Resistance Type="Cold" Value="-25"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="2.5">Vulcanin</Item>
-      <Item Amount="1.5">Incendiary Bulb</Item>      
+      <Item Amount="1.5">Vulcanin</Item>
+      <Item Amount="1.0">Incendiary Bulb</Item>      
     </Scavenge>
     <Boss/>
+    <Tex Size="4">1,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Greater Fire Dragon">
+    <Size>3</Size>
+    <Scale>2.6</Scale>
+    <LevelRange>10,15</LevelRange>
+    <Attack>22</Attack>
+    <Defence>14</Defence>
+    <Health>53</Health>
+    <Stamina>22</Stamina>
+    <Armour>34</Armour>
+    <Col1>70, 50, 40</Col1>
+    <Col2>130, 90, 90</Col2>
+    <Col3>150, 100, 100</Col3>
+    <Desc>A large, menacing dragon that breathes fire.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="100"/>
+      <Resistance Type="Cold" Value="-25"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="3.0">Vulcanin</Item>
+      <Item Amount="1.5">Incendiary Bulb</Item>
+    </Scavenge>
+    <Boss/>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>

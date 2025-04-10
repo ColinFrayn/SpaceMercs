@@ -2,7 +2,7 @@
   <!--Enemy creatures -->
   <CreatureType Name="Rogue">
     <Scale>0.9</Scale>
-    <LevelRange>1,12</LevelRange>
+    <LevelRange>1,11</LevelRange>
     <Attack>9</Attack>
     <Defence>8</Defence>
     <Armour>18</Armour>
@@ -83,12 +83,32 @@
       <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
       <Weapon Weight="2" MinLev="6">Triple Shotgun</Weapon>
       <Weapon Weight="2" MinLev="9">Quad Shotgun</Weapon>
-      <Weapon Weight="3">Chainsword</Weapon>
-      <Weapon Weight="2">Powerblade</Weapon>
       <Weapon Weight="2" MaxLev="9">Automatic Rifle</Weapon>
       <Weapon Weight="2" MinLev="6">Laser Rifle</Weapon>
     </Weapons>
     <Tex Size="2">3,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Thug">
+    <Scale>1.2</Scale>
+    <LevelRange>5,16</LevelRange>
+    <Attack>18</Attack>
+    <Defence>12</Defence>
+    <Armour>24</Armour>
+    <Health>23</Health>
+    <Stamina>17</Stamina>
+    <Interact/>
+    <Col1>120, 90, 60</Col1>
+    <Col2>180, 160, 140</Col2>
+    <Col3>170, 170, 170</Col3>
+    <Desc>A bandit thug</Desc>
+    <Weapons>
+      <Weapon Weight="2" MaxLev="6">Axe</Weapon>
+      <Weapon Weight="2" MinLev="5">Power Axe</Weapon>
+      <Weapon Weight="2" MaxLev="7">Shortblade</Weapon>
+      <Weapon Weight="2" MinLev="6">Powerblade</Weapon>
+      <Weapon Weight="3" MinLev="2">Chainsword</Weapon>
+    </Weapons>
+    <Tex Size="2">1,7</Tex>
   </CreatureType>
   <CreatureType Name="Heavy Gunner">
     <Scale>1.05</Scale>

@@ -738,6 +738,7 @@ namespace SpaceMercs.MainWindow {
                 }
                 catch (Exception ex) {
                     msgBox.PopupMessage(ex.ToString());
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }

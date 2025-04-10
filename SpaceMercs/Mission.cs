@@ -333,14 +333,18 @@ namespace SpaceMercs {
             MissionType tp = GenerateRandomScannerMissionType(loc, rand, iDiff);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = hao;
+            int ring = loc.GetSystem().Sector.SectorRing - 1;
+            if (ring < 0) ring = 0;
+            double pRacial = 0.8d * Math.Pow(0.7, ring);
             if (m.Type == MissionType.BoardingParty) {
-                m.RacialOpponent = loc.GetRandomRace(rand);
+                if (rand.NextDouble() < pRacial) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+                else m.RacialOpponent = loc.GetRandomRace(rand);
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
             }
             else {
-                if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+                if (rand.NextDouble() < (pRacial / 2d)) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = loc.GetRandomRace(rand);
             }
             if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
@@ -518,7 +522,7 @@ namespace SpaceMercs {
             if (!IsShipMission && !cg.FoundIn.Contains(Location.Type)) return false;
             // Race relations are between each race and the player team. Why would we ever get a mission with the soldiers of a given race? Only ever in space (e.g. ambush if PT is hated), never from colonies
             if (cg.RaceSpecific && cg.MaxRelations < 5) return false; // A colony would never set up a mission agaisnt its own soldiers.
-            int minSectorDist = Location.GetSystem().Sector.MinSectorDist;
+            int minSectorDist = Location.GetSystem().Sector.SectorRing;
             if (minSectorDist < cg.MinSectorRange) return false; // Cannot have some creatures in inner sectors
             return true;
         }

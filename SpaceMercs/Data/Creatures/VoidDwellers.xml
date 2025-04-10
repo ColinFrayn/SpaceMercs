@@ -8,7 +8,6 @@
     <Stamina>18</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <BodyType>VoidBeast</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
@@ -17,16 +16,15 @@
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="50"/>
       <Resistance Type="Cold" Value="50"/>
       <Resistance Type="Psychic" Value="60"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.6">Voidskin</Item>
+      <Item Amount="0.1">Voidskin</Item>
     </Scavenge>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
-  <CreatureType Name="Void Assassin">
+  <CreatureType Name="Void Spider">
     <LevelRange>9,17</LevelRange>
     <Attack>15</Attack>
     <Defence>11</Defence>
@@ -35,23 +33,49 @@
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>VoidBeast</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Void Lance</Weapon>
+      <Weapon Weight="1">Bite</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="80"/>
-      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Cold" Value="20"/>
+      <Resistance Type="Poison" Value="60"/>
       <Resistance Type="Psychic" Value="70"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.7">Voidskin</Item>
+      <Item Amount="0.3">Voidskin</Item>
     </Scavenge>
+    <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Void Hound">
+    <LevelRange>8,16</LevelRange>
+    <MovementCost>0.8</MovementCost>
+    <Attack>15</Attack>
+    <Defence>13</Defence>
+    <Armour>18</Armour>
+    <Health>14</Health>
+    <Stamina>19</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Col1>60, 50, 40</Col1>
+    <Col2>70, 70, 70</Col2>
+    <Col3>80, 80, 80</Col3>
+    <Desc>A mysterious quadrupedal creature from the void</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="20"/>
+      <Resistance Type="Poison" Value="50"/>
+      <Resistance Type="Psychic" Value="30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.3">Voidskin</Item>
+    </Scavenge>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Void Flayer">
     <LevelRange>9,17</LevelRange>
@@ -61,7 +85,6 @@
     <Health>14</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <BodyType>VoidBeast</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
@@ -70,14 +93,13 @@
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
       <Resistance Type="Psychic" Value="70"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.7">Voidskin</Item>
+      <Item Amount="0.3">Voidskin</Item>
     </Scavenge>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Void Devourer">
     <LevelRange>10,18</LevelRange>
@@ -88,26 +110,26 @@
     <Health>16</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <BodyType>VoidBeast</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Bite</Weapon>
+      <Weapon Weight="1">Void Claws</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
       <Resistance Type="Psychic" Value="80"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.9">Voidskin</Item>
+      <Item Amount="1">Voidskin</Item>
     </Scavenge>
+    <Tex Size="4">1,9</Tex>
   </CreatureType>
   <CreatureType Name="Void Psychic">
     <LevelRange>11,18</LevelRange>
+    <Size>2</Size>
+    <Scale>1.8</Scale>
     <Boss/>
     <Attack>20</Attack>
     <Defence>14</Defence>
@@ -115,7 +137,6 @@
     <Health>20</Health>
     <Stamina>21</Stamina>
     <Interact/>
-    <BodyType>VoidBeast</BodyType>
     <Col1>60, 50, 40</Col1>
     <Col2>70, 70, 70</Col2>
     <Col3>80, 80, 80</Col3>
@@ -124,11 +145,10 @@
       <Weapon Weight="1">Void Lance</Weapon>
     </Weapons>
     <Resistances>
-      <Resistance Type="Acid" Value="50"/>
-      <Resistance Type="Fire" Value="80"/>
       <Resistance Type="Cold" Value="80"/>
       <Resistance Type="Psychic" Value="100"/>
     </Resistances>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>
 

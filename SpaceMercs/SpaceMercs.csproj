@@ -103,6 +103,9 @@
     <None Update="Data\Creatures\RockCreatures.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Creatures\Undead.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Creatures\Crystallines.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -124,7 +127,7 @@
     <None Update="Data\Creatures\Triffids.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Creatures\VoidBeasts.xml">
+    <None Update="Data\Creatures\VoidDwellers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\Creatures\VolcanicCreatures.xml">
@@ -217,10 +220,28 @@
     <None Update="Graphics\Bitmaps\Pirates.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphics\Bitmaps\RockCreatures.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\ShadowBeasts.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphics\Bitmaps\Slimes.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphics\Bitmaps\Template.bmp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Graphics\Bitmaps\Triffids.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\Undead.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\VoidDwellers.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Graphics\Bitmaps\VolcanicCreatures.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Graphics\Bitmaps\Xenomorphs.bmp">
