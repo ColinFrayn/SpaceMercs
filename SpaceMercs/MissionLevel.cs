@@ -1983,10 +1983,11 @@ namespace SpaceMercs {
         }
         public void CalculatePlayerVisibility() {
             if (!bInitialised) return;
+            List<Soldier> AllSoldiers = new List<Soldier>(Soldiers);
             for (int x = 0; x < Width; x++) {
                 for (int y = 0; y < Height; y++) {
                     Visible[x, y] = false;
-                    foreach (Soldier s in Soldiers) {
+                    foreach (Soldier s in AllSoldiers) {
                         Visible[x, y] |= s.CanSee(x, y);
                         Explored[x, y] |= s.CanSee(x, y);
                     }

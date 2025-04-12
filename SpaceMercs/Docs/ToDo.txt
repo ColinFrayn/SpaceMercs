@@ -5,10 +5,6 @@ ToDo List
 Add creature textures using bitmaps
 -- Crystallines
 
-Generating Hulk missions (e.g. scanner from gas giant, or possibly from colony) -> Generates racial enemy and therefore doesn't ever add e.g. Shadow Creatures / Void Dwellers.
-
-Error on load doesn't show MsgBox correctly
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -21,6 +17,11 @@ Backburner : Features
 
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
+- Don't do this for timed missions
+
+Alien solar systems:
+- Alien colonies need names
+- Alien systems need names
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
@@ -34,10 +35,6 @@ DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an e
 
 Add overwatch ability to soldiers (not heavies or snipers)
 
-Alien solar systems:
-- Alien colonies need names
-- Alien systems need names
-
 Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
@@ -46,10 +43,9 @@ Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
 
-Improve Entity textures:
+Improve Soldier textures:
+- Textures.GenerateCreatureTexture()  (all types)
 - Display visual effect on creatures if they have shields
--- Textures.GenerateCreatureTexture()  (all types)
-- Better soldier textures
 -- Change texture based on race
 -- Change texture based on equipment / weapons
 
@@ -68,16 +64,14 @@ More things that need Sound Effects
 
 Add locked doors in dungeon maps?
 
-Allow creatures to have multiple weapons (ranged and melee)?
-
-Soldier.DisplaySoldierDetails() : Improve the Encumbrance icon
+Improve the Encumbrance icon : Soldier.DisplaySoldierDetails()
 
 
 -------------------------------------------------
 Backburner : Improvements
 -------------------------------------------------
 
-Remove all Windows MessageBoxes  (tagged with  "// REPLACE WITH msgBox")
+Remove as many Windows MessageBoxes as possible (tagged with  "// REPLACE WITH msgBox")
 
 Improve TextRenderer: Add Bold, Shadow, Border. Optimise?
 

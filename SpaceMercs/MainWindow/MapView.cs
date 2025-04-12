@@ -1,5 +1,4 @@
-﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -737,7 +736,6 @@ namespace SpaceMercs.MainWindow {
                     return;
                 }
                 catch (Exception ex) {
-                    msgBox.PopupMessage(ex.ToString());
                     MessageBox.Show(ex.ToString());
                 }
             }
