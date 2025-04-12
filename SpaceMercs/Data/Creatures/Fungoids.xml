@@ -7,12 +7,8 @@
     <Health>10</Health>
     <Stamina>16</Stamina>
     <Armour>12</Armour>
-    <BodyType>Fungoid</BodyType>
     <Frequency>3</Frequency>
     <MovementCost>3.0</MovementCost>
-    <Col1>0, 225, 0</Col1>
-    <Col2>80, 255, 100</Col2>
-    <Col3>0, 120, 0</Col3>
     <Desc>A small, mobile mushroom with a biting mouth.</Desc>
     <Resistances>
       <Resistance Type="Poison" Value="100"/>
@@ -30,11 +26,7 @@
     <Health>14</Health>
     <Stamina>16</Stamina>
     <Armour>32</Armour>
-    <BodyType>Fungoid</BodyType>
     <MovementCost>3.0</MovementCost>
-    <Col1>0, 215, 0</Col1>
-    <Col2>60, 255, 80</Col2>
-    <Col3>0, 110, 0</Col3>
     <Desc>A larger, mobile mushroom with hardened carapace.</Desc>
     <Resistances>
       <Resistance Type="Poison" Value="100"/>
@@ -52,11 +44,7 @@
     <Health>16</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
-    <BodyType>Fungoid</BodyType>
     <MovementCost>5.0</MovementCost>
-    <Col1>20, 215, 0</Col1>
-    <Col2>80, 255, 80</Col2>
-    <Col3>20, 110, 0</Col3>
     <Desc>A vicious fungal growth which can hurl poisonous spores.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
@@ -76,11 +64,7 @@
     <Stamina>18</Stamina>
     <Armour>6</Armour>
     <Frequency>2</Frequency>
-    <BodyType>Fungoid</BodyType>
     <MovementCost>1.5</MovementCost>
-    <Col1>100, 230, 10</Col1>
-    <Col2>100, 170, 0</Col2>
-    <Col3>80, 255, 110</Col3>
     <Desc>A large, sentient hovering gasball.</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -110,12 +94,8 @@
     <Health>60</Health>
     <Stamina>18</Stamina>
     <Armour>30</Armour>
-    <BodyType>Fungoid</BodyType>
     <MovementCost>6.0</MovementCost>
     <Boss/>
-    <Col1>0, 205, 0</Col1>
-    <Col2>40, 255, 60</Col2>
-    <Col3>0, 100, 0</Col3>
     <Desc>A huge mushroom which can hurl large, poisonous spores.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>

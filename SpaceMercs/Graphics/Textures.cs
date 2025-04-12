@@ -464,21 +464,14 @@ namespace SpaceMercs {
             if (s.Shields > 0.0) AddHaloToImage(image, Color.FromArgb(255, 60, 90, 255));
             return BindEntityTexture(image);
         }
-        public static int GenerateCreatureTexture(CreatureType tp, bool bShields) {
+        public static int GenerateDefaultCreatureTexture(CreatureType tp, bool bShields) {
             byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
             for (int y = 0; y < Textures.TileSize; y++) {
                 for (int x = 0; x < Textures.TileSize; x++) {
                     image[x, y, 3] = 0; // Transparent background
                 }
             }
-            switch (tp.Body) {
-                case CreatureType.BodyType.Humanoid:
-                case CreatureType.BodyType.Mechanoid:
-                case CreatureType.BodyType.Gremlin:
-                    DrawHumanoid(image, tp.Col1, tp.Col2, tp.Col3); break;
-                // Snake, Lizard, Xenomorph, Centipede, Scorpion, Dragon
-                default: DrawCircleOnTexture(image, Color.Purple, 15.5, 15.5, 10, 10); break;
-            }
+            DrawCircleOnTexture(image, Color.Purple, 15.5, 15.5, 10, 10);
             // Rotate it so that up is forward (currently Right = forward)
             // We'll get rid of most of this soon anyway
             byte[,,] imageRot = new byte[Textures.TileSize, Textures.TileSize, 4];
@@ -558,49 +551,6 @@ namespace SpaceMercs {
                     }
                 }
             }
-
-        }
-        private static void DrawAALineOnTexture(byte[,,] image, Color col, int fromx, int fromy, int tox, int toy) {
-            if (fromx > 0 && tox > 0) DrawLineOnTexture(image, Color.FromArgb(160, col.R, col.G, col.B), fromx - 1, fromy, tox - 1, toy);
-            if (fromy > 0 && toy > 0) DrawLineOnTexture(image, Color.FromArgb(160, col.R, col.G, col.B), fromx, fromy - 1, tox, toy - 1);
-            if (fromx < image.GetLength(0) - 1 && tox < image.GetLength(0) - 1) DrawLineOnTexture(image, Color.FromArgb(160, col.R, col.G, col.B), fromx + 1, fromy, tox + 1, toy);
-            if (fromy < image.GetLength(0) - 1 && toy < image.GetLength(0) - 1) DrawLineOnTexture(image, Color.FromArgb(160, col.R, col.G, col.B), fromx, fromy + 1, tox, toy + 1);
-            DrawLineOnTexture(image, col, fromx, fromy, tox, toy);
-        }
-        private static void DrawLineOnTexture(byte[,,] image, Color col, int fromx, int fromy, int tox, int toy) {
-            // https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-            if (tox < fromx) {
-                int temp = tox; tox = fromx; fromx = temp;
-                temp = toy; toy = fromy; fromy = temp;
-            }
-            double dx = tox - fromx;
-            double dy = toy - fromy;
-            if (fromx == tox) {
-                for (int yy = Math.Min(fromy, toy); yy <= Math.Max(fromy, toy); yy++) {
-                    image[fromx, yy, 0] = col.R;
-                    image[fromx, yy, 1] = col.G;
-                    image[fromx, yy, 2] = col.B;
-                    image[fromx, yy, 3] = col.A;
-                }
-                return;
-            }
-            double derr = Math.Abs(dy / dx);
-            double err = 0.0;
-            int y = fromy;
-            int x = fromx;
-            do {
-                image[x, y, 0] = col.R;
-                image[x, y, 1] = col.G;
-                image[x, y, 2] = col.B;
-                image[x, y, 3] = col.A;
-                if (err < 0.5) err += derr;
-                if (err >= 0.5) {
-                    if (toy > fromy) y++;
-                    else y--;
-                    err -= 1.0;
-                }
-                if (err < 0.5) x++;
-            } while (x <= tox);
         }
         private static void SetupMiscTexture() {
             MiscTextureID = GL.GenTexture();

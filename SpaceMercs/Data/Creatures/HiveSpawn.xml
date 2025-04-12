@@ -9,10 +9,6 @@
     <Stamina>18</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A vicious hive drone</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -34,10 +30,6 @@
     <Stamina>24</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A small flying hive scout.</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -61,10 +53,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large and more vicious hive creature with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -89,10 +77,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large hive creature covered with sharp spines that it can hurl at nearby enemies</Desc>
     <Weapons>
       <Weapon Weight="1">Throwing Spines</Weapon>
@@ -114,10 +98,6 @@
     <Health>13</Health>
     <Stamina>16</Stamina>
     <Frequency>2</Frequency>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A vicious alien hive beast that emits a toxic cloud on death</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -154,10 +134,6 @@
     <Health>18</Health>
     <Stamina>22</Stamina>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large and vicious hive beast</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -181,10 +157,6 @@
     <Health>30</Health>
     <Stamina>22</Stamina>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A giant, hulking killing machine.</Desc>
     <Boss/>
     <Weapons>
@@ -210,10 +182,6 @@
     <Health>90</Health>
     <Stamina>22</Stamina>
     <Interact/>
-    <BodyType>HiveSpawn</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A huge bulbous, nightmarish mutant brain.</Desc>
     <Boss/>
     <Weapons>

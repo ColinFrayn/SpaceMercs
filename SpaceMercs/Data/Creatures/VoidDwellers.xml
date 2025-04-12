@@ -8,9 +8,6 @@
     <Stamina>18</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -33,9 +30,6 @@
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -60,9 +54,6 @@
     <Stamina>19</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious quadrupedal creature from the void</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -85,9 +76,6 @@
     <Health>14</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -110,9 +98,6 @@
     <Health>16</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
       <Weapon Weight="1">Void Claws</Weapon>
@@ -137,9 +122,6 @@
     <Health>20</Health>
     <Stamina>21</Stamina>
     <Interact/>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A mysterious humanoid creature from the void that seems to command the other void beasts telepathically</Desc>
     <Weapons>
       <Weapon Weight="1">Void Lance</Weapon>

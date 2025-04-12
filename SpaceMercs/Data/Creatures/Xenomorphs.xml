@@ -9,10 +9,6 @@
     <Stamina>18</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>An alien spawn which attempts to attach itself to a victim.</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -36,10 +32,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large and vicious alien quadruped with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -65,10 +57,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large and vicious alien quadruped with sharp teeth</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -91,10 +79,6 @@
     <Health>13</Health>
     <Stamina>19</Stamina>
     <Frequency>2</Frequency>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>An Alien which explodes with acid when killed</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -129,10 +113,6 @@
     <Health>18</Health>
     <Stamina>22</Stamina>
     <Interact/>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large and more vicious Alien with twin blades for arms</Desc>
     <Weapons>
       <Weapon Weight="1">Xenoblades</Weapon>
@@ -157,10 +137,6 @@
     <Health>58</Health>
     <Stamina>24</Stamina>
     <Interact/>
-    <BodyType>Xenomorph</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A huge xenomorph queen with a long bulbous body</Desc>
     <Boss/>
     <Weapons>

@@ -11,9 +11,6 @@
     <Interact/>
     <MovementCost>1.5</MovementCost>
     <Armour>22</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -32,9 +29,6 @@
     <Interact/>
     <MovementCost>2.0</MovementCost>
     <Armour>24</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
@@ -53,9 +47,6 @@
     <Interact/>
     <MovementCost>2.0</MovementCost>
     <Armour>24</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms</Desc>
     <Weapons>
       <Weapon Weight="1">Spiky Club</Weapon>
@@ -73,9 +64,6 @@
     <Interact/>
     <MovementCost>2.0</MovementCost>
     <Armour>26</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms and a huge axe</Desc>
     <Weapons>
       <Weapon Weight="1">Greataxe</Weapon>
@@ -93,9 +81,6 @@
     <Interact/>
     <MovementCost>2.0</MovementCost>
     <Armour>28</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large, ferocious bipedal humanoid with muscular arms and a giant axe</Desc>
     <Weapons>
       <Weapon Weight="1">Greataxe</Weapon>

@@ -7,12 +7,8 @@
     <Health>7</Health>
     <Stamina>16</Stamina>
     <Armour>4</Armour>
-    <BodyType>Slime</BodyType>
     <Frequency>3</Frequency>
     <MovementCost>2.5</MovementCost>
-    <Col1>0, 240, 10</Col1>
-    <Col2>0, 190, 0</Col2>
-    <Col3>90, 255, 120</Col3>
     <Desc>A small, sentient ball of slime.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-30"/>
@@ -31,11 +27,7 @@
     <Stamina>16</Stamina>
     <Armour>5</Armour>
     <Frequency>2</Frequency>
-    <BodyType>Slime</BodyType>
     <MovementCost>3.0</MovementCost>
-    <Col1>0, 230, 10</Col1>
-    <Col2>0, 170, 0</Col2>
-    <Col3>80, 255, 110</Col3>
     <Desc>A large, sentient ball of slime.</Desc>
     <Weapons>
       <Weapon Weight="1">Slime Bite</Weapon>
@@ -72,11 +64,7 @@
     <Stamina>16</Stamina>
     <Armour>4</Armour>
     <Frequency>2</Frequency>
-    <BodyType>Slime</BodyType>
     <MovementCost>3.0</MovementCost>
-    <Col1>30, 230, 10</Col1>
-    <Col2>30, 180, 0</Col2>
-    <Col3>110, 255, 90</Col3>
     <Desc>A large, sentient ball of slime that can spit slime balls.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-30"/>
@@ -112,11 +100,7 @@
     <Health>12</Health>
     <Stamina>17</Stamina>
     <Armour>10</Armour>
-    <BodyType>Slime</BodyType>
     <MovementCost>2.0</MovementCost>
-    <Col1>30, 230, 10</Col1>
-    <Col2>30, 180, 0</Col2>
-    <Col3>110, 255, 90</Col3>
     <Desc>A large, voracious ball of glowing slime.</Desc>
     <Resistances>
       <Resistance Type="Fire" Value="-20"/>

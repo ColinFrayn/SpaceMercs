@@ -9,10 +9,6 @@
     <Stamina>19</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
-    <BodyType>Demon</BodyType>
-    <Col1>180, 50, 00</Col1>
-    <Col2>190, 70, 00</Col2>
-    <Col3>200, 80, 00</Col3>
     <Desc>A vicious demonic imp</Desc>
     <Weapons>
       <Weapon Weight="1">Fire Bolt</Weapon>
@@ -32,10 +28,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>Demon</BodyType>
-    <Col1>160, 50, 00</Col1>
-    <Col2>170, 70, 00</Col2>
-    <Col3>180, 80, 00</Col3>
     <Desc>A demonic servant with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -58,10 +50,6 @@
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>Demon</BodyType>
-    <Col1>160, 50, 00</Col1>
-    <Col2>170, 70, 00</Col2>
-    <Col3>180, 80, 00</Col3>
     <Desc>A demonic servant with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Barbed Claws</Weapon>
@@ -82,10 +70,6 @@
     <Health>13</Health>
     <Stamina>22</Stamina>
     <Frequency>2</Frequency>
-    <BodyType>Demon</BodyType>
-    <Col1>180, 50, 00</Col1>
-    <Col2>190, 70, 00</Col2>
-    <Col3>200, 80, 00</Col3>
     <Desc>A quadripedal demon that explodes in a burst of fire when killed.</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -119,10 +103,6 @@
     <Health>20</Health>
     <Stamina>21</Stamina>
     <Interact/>
-    <BodyType>Demon</BodyType>
-    <Col1>160, 50, 00</Col1>
-    <Col2>170, 70, 00</Col2>
-    <Col3>180, 80, 00</Col3>
     <Desc>A large bipedal, horned demon with a huge fiery blade</Desc>
     <Weapons>
       <Weapon Weight="1">Demon Sword</Weapon>
@@ -145,10 +125,6 @@
     <Health>58</Health>
     <Stamina>24</Stamina>
     <Interact/>
-    <BodyType>Demon</BodyType>
-    <Col1>160, 50, 00</Col1>
-    <Col2>170, 70, 00</Col2>
-    <Col3>180, 80, 00</Col3>
     <Desc>A huge fiery demon lord with a giant sword and wings of fire.</Desc>
     <Boss/>
     <Weapons>

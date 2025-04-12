@@ -9,10 +9,6 @@
     <Stamina>19</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <BodyType>ShadowBeast</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A shadowy creature with dark soulless eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -33,10 +29,6 @@
     <Stamina>19</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>ShadowBeast</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large shadowy creature with deep, fiery red eyes and wisps of smoke emanating from all around it.</Desc>
     <Weapons>
       <Weapon Weight="1">Soul Drain</Weapon>
@@ -60,10 +52,6 @@
     <Stamina>19</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>ShadowBeast</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A large shadowy beast with deep, fiery red eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -88,10 +76,6 @@
     <Health>24</Health>
     <Stamina>19</Stamina>
     <Interact/>
-    <BodyType>ShadowBeast</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A huge shadowy beast with deep, fiery red eyes</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -116,10 +100,6 @@
     <Health>54</Health>
     <Stamina>20</Stamina>
     <Interact/>
-    <BodyType>ShadowBeast</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>70, 70, 70</Col2>
-    <Col3>80, 80, 80</Col3>
     <Desc>A huge shadowy monster with leathery wings</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>

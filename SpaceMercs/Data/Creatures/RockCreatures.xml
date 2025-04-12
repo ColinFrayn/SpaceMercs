@@ -8,9 +8,6 @@
     <Armour>10</Armour>
     <MovementCost>0.7</MovementCost>
     <Frequency>3</Frequency>
-    <Col1>100, 80, 60</Col1>
-    <Col2>140, 115, 90</Col2>
-    <Col3>110, 80, 60</Col3>
     <Desc>A strange, hairy, ape-like beast</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -26,10 +23,6 @@
     <Stamina>16</Stamina>
     <Armour>10</Armour>
     <Frequency>2</Frequency>
-    <BodyType>Snake</BodyType>
-    <Col1>70, 70, 70</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>110, 110, 110</Col3>
     <Desc>A large snake with powerful constricting attacks</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -47,10 +40,6 @@
     <Stamina>16</Stamina>
     <Armour>20</Armour>
     <Frequency>2</Frequency>
-    <BodyType>Lizard</BodyType>
-    <Col1>80, 60, 40</Col1>
-    <Col2>120, 95, 70</Col2>
-    <Col3>130, 85, 60</Col3>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
@@ -65,10 +54,6 @@
     <Health>14</Health>
     <Stamina>16</Stamina>
     <Armour>20</Armour>
-    <BodyType>Scorpion</BodyType>
-    <Col1>40, 30, 30</Col1>
-    <Col2>60, 60, 60</Col2>
-    <Col3>70, 70, 70</Col3>
     <Desc>A large scorpion with a vicious stinger</Desc>
     <Weapons>
       <Weapon Weight="1">Sting</Weapon>
@@ -90,9 +75,6 @@
     <Health>15</Health>
     <Stamina>17</Stamina>
     <Armour>24</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A large armoured crocodilian.</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -109,9 +91,6 @@
     <Stamina>18</Stamina>
     <Interact/>
     <Armour>24</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A huge scaly lizard beast</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -132,9 +111,6 @@
     <Stamina>18</Stamina>
     <Interact/>
     <Armour>30</Armour>
-    <Col1>60, 60, 50</Col1>
-    <Col2>120, 120, 120</Col2>
-    <Col3>100, 100, 100</Col3>
     <Desc>A huge, aggressive giant humanoid</Desc>
     <Weapons>
       <Weapon Weight="1">Club</Weapon>

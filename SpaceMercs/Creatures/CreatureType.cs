@@ -3,7 +3,6 @@ using System.Xml;
 
 namespace SpaceMercs {
     public class CreatureType {
-        public enum BodyType { Humanoid, Bug, Snake, Lizard, Beetle, Arachnid, Xenomorph, Centipede, Scorpion, Dragon, Plant, Slime, ShadowBeast, VoidBeast, Fungoid, Mechanoid, Gremlin, Tank, Crystalline, Mephit, Elemental, Demon, HiveSpawn }
         public enum LootType { Soldier, Trader, Exotic }
         public string Name { get; private set; }
         public int Size { get; private set; } // Default = 1
@@ -21,14 +20,10 @@ namespace SpaceMercs {
         public bool IsBoss { get; private set; } // Default = false
         public int TextureID { get; private set; }
         public int TextureShieldsID { get; private set; }
-        public BodyType Body { get; private set; } // Default = humanoid
         public bool Corporeal { get; private set; }
         public bool Interact { get; private set; }  // Can interact with objects? (i.e. open doors) Default = false
         public double MovementCost { get; private set; }
         public int FrequencyModifier { get; private set; }
-        public Color Col1 { get; private set; }
-        public Color Col2 { get; private set; }
-        public Color Col3 { get; private set; }
         public readonly Dictionary<WeaponType, (int Weight, int MinLev, int MaxLev)> Weapons = new Dictionary<WeaponType, (int Weight, int MinLev, int MaxLev)>();
         public readonly Dictionary<WeaponType.DamageType, double> Resistances = new Dictionary<WeaponType.DamageType, double>();
         public readonly Dictionary<MaterialType, double> Scavenge = new Dictionary<MaterialType, double>();
@@ -60,29 +55,7 @@ namespace SpaceMercs {
             AttackBase = xml.SelectNodeInt("Attack");
             DefenceBase = xml.SelectNodeInt("Defence");
 
-            Body = xml.SelectNodeEnum<BodyType>("BodyType", BodyType.Humanoid);
-
             FrequencyModifier = xml.SelectNodeInt("Frequency", 1);
-
-            // Base colours
-            Col1 = Color.Black;
-            Col2 = Color.Gray;
-            Col3 = Color.SaddleBrown;
-            if (xml.SelectSingleNode("Col1") is not null) {
-                bits = xml.SelectNodeText("Col1").Split(',');
-                if (bits.Length != 3) throw new Exception("Could not parse Colour1 string : " + xml.SelectNodeText("Col1"));
-                Col1 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
-            }
-            if (xml.SelectSingleNode("Col2") is not null) {
-                bits = xml.SelectNodeText("Col2").Split(',');
-                if (bits.Length != 3) throw new Exception("Could not parse Colour2 string : " + xml.SelectNodeText("Col2"));
-                Col2 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
-            }
-            if (xml.SelectSingleNode("Col3") is not null) {
-                bits = xml.SelectNodeText("Col3").Split(',');
-                if (bits.Length != 3) throw new Exception("Could not parse Colour3 string : " + xml.SelectNodeText("Col3"));
-                Col3 = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
-            }
 
             // Special resistances
             if (xml.SelectSingleNode("Resistances") is not null) {
@@ -179,11 +152,11 @@ namespace SpaceMercs {
         public void GenerateTexture(bool bShields) {
             if (bShields) {
                 if (TextureShieldsID != -1) return;
-                TextureShieldsID = Textures.GenerateCreatureTexture(this, true);
+                TextureShieldsID = Textures.GenerateDefaultCreatureTexture(this, true);
             }
             else {
                 if (TextureID != -1) return;
-                TextureID = Textures.GenerateCreatureTexture(this, false);
+                TextureID = Textures.GenerateDefaultCreatureTexture(this, false);
             }
         }
 

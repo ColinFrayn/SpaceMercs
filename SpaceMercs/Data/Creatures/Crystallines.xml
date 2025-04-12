@@ -8,10 +8,6 @@
     <Stamina>18</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>80, 160, 255</Col1>
-    <Col2>90, 180, 255</Col2>
-    <Col3>100, 190, 255</Col3>
     <Desc>A crystalline beast with sharp claws</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -30,10 +26,6 @@
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>60, 150, 255</Col1>
-    <Col2>70, 170, 255</Col2>
-    <Col3>80, 180, 255</Col3>
     <Desc>A crystalline humanoid with sharp crystal claws</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -52,10 +44,6 @@
     <Stamina>20</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>60, 150, 255</Col1>
-    <Col2>70, 170, 255</Col2>
-    <Col3>80, 180, 255</Col3>
     <Desc>A crystalline humanoid with razor sharp crystal knives for hands.</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -74,10 +62,6 @@
     <Stamina>18</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>60, 150, 255</Col1>
-    <Col2>70, 170, 255</Col2>
-    <Col3>80, 180, 255</Col3>
     <Desc>A crystalline humanoid which spits crystal shards a long distance.</Desc>
     <Weapons>
       <Weapon Weight="1">Crystal Shards</Weapon>
@@ -97,10 +81,6 @@
     <Stamina>18</Stamina>
     <Frequency>1</Frequency>
     <Interact/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>60, 150, 255</Col1>
-    <Col2>70, 170, 255</Col2>
-    <Col3>80, 180, 255</Col3>
     <Desc>A giant crystalline humanoid with powerful fists.</Desc>
     <Weapons>
       <Weapon Weight="1">Club</Weapon>
@@ -120,10 +100,6 @@
     <Frequency>1</Frequency>
     <Interact/>
     <Boss/>
-    <BodyType>Crystalline</BodyType>
-    <Col1>100, 180, 255</Col1>
-    <Col2>110, 200, 255</Col2>
-    <Col3>120, 210, 255</Col3>
     <Desc>A fierce crystalline humanoid which conjures electrical power from its surroundings.</Desc>
     <Weapons>
       <Weapon Weight="1">Electroshock</Weapon>

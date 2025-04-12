@@ -8,10 +8,6 @@
     <Stamina>14</Stamina>
     <Armour>8</Armour>
     <Frequency>4</Frequency>
-    <BodyType>Bug</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>80, 80, 80</Col2>
-    <Col3>100, 100, 100</Col3>
     <Scavenge>
       <Item Amount="0.2">Chitin</Item>
     </Scavenge>
@@ -28,10 +24,6 @@
     <Armour>22</Armour>
     <Frequency>2</Frequency>
     <MovementCost>1.4</MovementCost>
-    <BodyType>Bug</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>90, 90, 90</Col2>
-    <Col3>100, 100, 100</Col3>
     <Scavenge>
       <Item Amount="0.4">Chitin</Item>
     </Scavenge>
@@ -46,10 +38,6 @@
     <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>16</Armour>
-    <BodyType>Bug</BodyType>
-    <Col1>60, 50, 40</Col1>
-    <Col2>90, 90, 90</Col2>
-    <Col3>110, 110, 110</Col3>
     <Desc>A large bug with big mandibles. Yuck.</Desc>
     <Resistances>
       <Resistance Type="Acid" Value="50"/>

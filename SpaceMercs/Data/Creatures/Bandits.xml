@@ -10,9 +10,6 @@
     <Stamina>14</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>120, 90, 60</Col1>
-    <Col2>170, 170, 170</Col2>
-    <Col3>120, 120, 120</Col3>
     <Desc>A rogue</Desc>
     <Weapons>
       <Weapon Weight="2">Shortblade</Weapon>
@@ -30,9 +27,6 @@
     <Stamina>15</Stamina>
     <Frequency>3</Frequency>
     <Interact/>
-    <Col1>120, 90, 60</Col1>
-    <Col2>180, 160, 140</Col2>
-    <Col3>200, 160, 120</Col3>
     <Desc>A bandit</Desc>
     <Weapons>
       <Weapon Weight="1">Shotgun</Weapon>
@@ -51,9 +45,6 @@
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>120, 120, 120</Col1>
-    <Col2>180, 160, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A mercenary</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
@@ -75,9 +66,6 @@
     <Health>16</Health>
     <Stamina>17</Stamina>
     <Interact/>
-    <Col1>120, 90, 60</Col1>
-    <Col2>180, 160, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A bandit enforcer</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>
@@ -97,9 +85,6 @@
     <Health>23</Health>
     <Stamina>17</Stamina>
     <Interact/>
-    <Col1>120, 90, 60</Col1>
-    <Col2>180, 160, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A bandit thug</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="6">Axe</Weapon>
@@ -119,9 +104,6 @@
     <Health>15</Health>
     <Stamina>17</Stamina>
     <Interact/>
-    <Col1>120, 90, 60</Col1>
-    <Col2>180, 160, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A bandit gunner with heavy weapons</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="9">Heavy Rifle</Weapon>
@@ -139,9 +121,6 @@
     <Health>25</Health>
     <Stamina>18</Stamina>
     <Interact/>
-    <Col1>180, 140, 100</Col1>
-    <Col2>130, 130, 130</Col2>
-    <Col3>200, 160, 120</Col3>
     <Desc>A bandit leader</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="8">Shotgun</Weapon>

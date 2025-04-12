@@ -9,9 +9,6 @@
     <Stamina>14</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A rank-and-file trooper</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="7">Automatic Rifle</Weapon>
@@ -29,9 +26,6 @@
     <Stamina>16</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>An elite trooper</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="7">Automatic Rifle</Weapon>
@@ -48,9 +42,6 @@
     <Stamina>16</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>An elite trooper with close combat weapons</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="6">Shortblade</Weapon>
@@ -68,9 +59,6 @@
     <Stamina>18</Stamina>
     <Shields>10</Shields>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A heroic soldier</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="6">Shortblade</Weapon>
@@ -90,9 +78,6 @@
     <Stamina>18</Stamina>
     <MovementCost>3.0</MovementCost>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A heroic soldier with a heavy weapon</Desc>
     <Weapons>
       <Weapon Weight="1" MaxLev="9">Heavy Rifle</Weapon>
@@ -109,9 +94,6 @@
     <Health>15</Health>
     <Stamina>16</Stamina>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A sniper soldier</Desc>
     <Weapons>
       <Weapon Weight="2" MaxLev="9">Sniper Rifle</Weapon>
@@ -129,9 +111,6 @@
     <Stamina>20</Stamina>
     <Shields>10</Shields>
     <Interact/>
-    <Col1>90, 90, 90</Col1>
-    <Col2>140, 140, 140</Col2>
-    <Col3>170, 170, 170</Col3>
     <Desc>A commanding officer</Desc>
     <Boss/>
     <Weapons>
