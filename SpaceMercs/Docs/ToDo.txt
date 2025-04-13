@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Who is still attacking in example save?
+
 Add creature textures using bitmaps
 -- Crystallines
 
@@ -35,7 +37,7 @@ DragDrop: Should be able to (CTRL+drag) in EquipmentView / TeamView to move an e
 
 Add overwatch ability to soldiers (not heavies or snipers)
 
-Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls
+Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls??
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 

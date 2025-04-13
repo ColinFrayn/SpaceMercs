@@ -1275,4 +1275,18 @@
     <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Laser Zapper">
+    <Speed>8</Speed>
+    <Range Accuracy="0" DropOff="0.4" Length="0.4" Speed="2.0" Colour="1.0,0.2,0.2">8</Range>
+    <Damage>2+2</Damage>
+    <Sound>LaserPistolShort</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Mechablades" Class="Melee">
+    <Speed>11</Speed>
+    <Range>1</Range>
+    <Damage>4+4</Damage>
+    <Sound>SwordSlice</Sound>
+    <Hidden/>
+  </WeaponType>
 </Data>

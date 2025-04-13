@@ -10,7 +10,7 @@
     <Interact/>
     <Desc>A rank-and-file mechanoid drone</Desc>
     <Weapons>
-      <Weapon Weight="1">Laser Pistol</Weapon>
+      <Weapon Weight="1">Laser Zapper</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -56,8 +56,7 @@
     <Interact/>
     <Desc>A close-combat mechanoid with sharp blades</Desc>
     <Weapons>
-      <Weapon Weight="1">Power Axe</Weapon>
-      <Weapon Weight="1">Powerblade</Weapon>
+      <Weapon Weight="1">Mechablades</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Electrical" Value="-20"/>
@@ -81,8 +80,6 @@
     <Interact/>
     <Desc>An advanced mechanoid soldier</Desc>
     <Weapons>
-      <Weapon Weight="1">Powerblade</Weapon>
-      <Weapon Weight="1">Power Axe</Weapon>
       <Weapon Weight="2">Laser Rifle</Weapon>
       <Weapon Weight="2" MinLev="11">Plasma Rifle</Weapon>
     </Weapons>
@@ -147,7 +144,7 @@
     </Scavenge>
     <Tex Size="2">1,3</Tex>
   </CreatureType>
-  <CreatureType Name="Mechanoid Heavy Tank">
+  <CreatureType Name="Mechanoid Hovertank">
     <Size>3</Size>
     <LevelRange>10,24</LevelRange>
     <Attack>15</Attack>

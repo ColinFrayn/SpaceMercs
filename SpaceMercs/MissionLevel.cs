@@ -352,6 +352,7 @@ namespace SpaceMercs {
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
+                    if (Map[x, y] == TileType.Void) continue;
                     if (Map[x, y] != lastTile) {
                         TexDetails det = Map[x, y] switch {
                             TileType.Floor => Textures.GenerateFloorTexture(this),
