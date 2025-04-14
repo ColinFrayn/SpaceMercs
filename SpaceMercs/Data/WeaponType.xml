@@ -1101,10 +1101,17 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Xenoblades">
-    <Speed>10</Speed>
+    <Speed>11</Speed>
     <Range>1</Range>
     <Damage>6+5</Damage>
     <Sound>Claws</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Xenobite">
+    <Speed>10</Speed>
+    <Range>1</Range>
+    <Damage>4+5</Damage>
+    <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Barbed Claws">

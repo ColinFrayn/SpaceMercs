@@ -2,10 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Who is still attacking in example save?
-
 Add creature textures using bitmaps
 -- Crystallines
+
+Pay to switch XP from one Soldier to another
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

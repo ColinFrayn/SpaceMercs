@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>29/08/2478 18:24:09</Clock>
+<Clock>08/04/2471 16:55:10</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -58,7 +58,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>778570644737134905</LastGrowth>
  <NextGrowth>797424852737134905</NextGrowth>
- <SeedProgress>81.5211</SeedProgress>
+ <SeedProgress>24.5316</SeedProgress>
 </Colony>
 <Radius>67186822</Radius>
 <ARot>1060992</ARot>
@@ -83,7 +83,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>760690765700184687</LastGrowth>
  <NextGrowth>789214861700184687</NextGrowth>
- <SeedProgress>173.2174</SeedProgress>
+ <SeedProgress>142.0158</SeedProgress>
 </Colony>
 <Radius>7208423</Radius>
 <ARot>104844</ARot>
@@ -104,11 +104,11 @@
 <Type>Desert</Type>
 <PRot>39888314</PRot>
 <Colony>
- <BaseType>27</BaseType>
+ <BaseType>25</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>781334322956210000</LastGrowth>
- <NextGrowth>815640306956210000</NextGrowth>
- <SeedProgress>107.5225</SeedProgress>
+ <LastGrowth>765943890956210000</LastGrowth>
+ <NextGrowth>781334322956210000</NextGrowth>
+ <SeedProgress>61.5564</SeedProgress>
 </Colony>
 <Radius>5122554</Radius>
 <ARot>85258</ARot>
@@ -149,11 +149,10 @@
 <Type>Volcanic</Type>
 <PRot>87770737</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>23</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>780547317120428386</LastGrowth>
- <NextGrowth>803799285120428386</NextGrowth>
- <SeedProgress>40.1009</SeedProgress>
+ <LastGrowth>764921877120428386</LastGrowth>
+ <NextGrowth>780547317120428386</NextGrowth>
 </Colony>
 <Radius>6097833</Radius>
 <ARot>78260</ARot>
@@ -246,11 +245,10 @@
 <Type>Gas</Type>
 <PRot>27364626</PRot>
 <Colony>
- <BaseType>27</BaseType>
+ <BaseType>19</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>779814372470165779</LastGrowth>
- <NextGrowth>805578852470165779</NextGrowth>
- <SeedProgress>50.1976</SeedProgress>
+ <LastGrowth>766544196470165779</LastGrowth>
+ <NextGrowth>779814372470165779</NextGrowth>
 </Colony>
 <Radius>49754645</Radius>
 <ARot>879353</ARot>
@@ -281,7 +279,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>767934432000000000</LastGrowth>
  <NextGrowth>792944640000000000</NextGrowth>
- <SeedProgress>151.1358</SeedProgress>
+ <SeedProgress>94.1463</SeedProgress>
 </Colony>
 <Radius>51443455</Radius>
 <ARot>890304</ARot>
@@ -306,7 +304,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>767867040000000000</LastGrowth>
  <NextGrowth>786228768000000000</NextGrowth>
- <SeedProgress>62.5104</SeedProgress>
+ <SeedProgress>5.5209</SeedProgress>
 </Colony>
 <Radius>5590944</Radius>
 <ARot>91050</ARot>
@@ -376,7 +374,6 @@
  <TradeRoute>(-1,-1)0</TradeRoute>
  <TradeRoute>(-1,-1)4</TradeRoute>
  <TradeRoute>(-1,-1)10</TradeRoute>
- <TradeRoute>(-1,-1)12</TradeRoute>
  <Planets>
 <Planet Seed="6703431" />
 <Planet Seed="6979687" />
@@ -414,7 +411,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>774795456000000000</LastGrowth>
  <NextGrowth>798758496000000000</NextGrowth>
- <SeedProgress>197.3659</SeedProgress>
+ <SeedProgress>166.1466</SeedProgress>
 </Colony>
 <Radius>4661595</Radius>
 <ARot>67446</ARot>
@@ -455,7 +452,7 @@
  <LastUpdate>739695005081803146</LastUpdate>
  <LastGrowth>763982524119391823</LastGrowth>
  <NextGrowth>796088764119391823</NextGrowth>
- <SeedProgress>65.0282</SeedProgress>
+ <SeedProgress>8.0387</SeedProgress>
 </Colony>
 <Radius>83892794</Radius>
 <ARot>1142686</ARot>
@@ -468,10 +465,9 @@
 <Type>Gas</Type>
 <PRot>16009534</PRot>
 <Colony>
- <BaseType>3</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>781044298757080000</LastGrowth>
- <NextGrowth>786434794757080000</NextGrowth>
+ <LastGrowth>779218666757080000</LastGrowth>
+ <NextGrowth>781044298757080000</NextGrowth>
 </Colony>
 <Radius>43448504</Radius>
 <ARot>659569</ARot>
@@ -489,7 +485,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>778726026966900000</LastGrowth>
  <NextGrowth>790691562966900000</NextGrowth>
- <SeedProgress>58.1631</SeedProgress>
+ <SeedProgress>15.4210</SeedProgress>
 </Colony>
 <Radius>7213975</Radius>
 <ARot>112955</ARot>
@@ -550,7 +546,7 @@
  <LastUpdate>730642624662393437</LastUpdate>
  <LastGrowth>758130062126890000</LastGrowth>
  <NextGrowth>842181710126890000</NextGrowth>
- <SeedProgress>172.8040</SeedProgress>
+ <SeedProgress>170.0656</SeedProgress>
 </Colony>
 <Radius>5026195</Radius>
 <ARot>74583</ARot>
@@ -568,7 +564,7 @@
  <LastUpdate>730678982432393837</LastUpdate>
  <LastGrowth>686225952000000000</LastGrowth>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>184.4075</SeedProgress>
+ <SeedProgress>178.9485</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6742146</Radius>
@@ -602,7 +598,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>755962848000000000</LastGrowth>
  <NextGrowth>803672064000000000</NextGrowth>
- <SeedProgress>194.1769</SeedProgress>
+ <SeedProgress>177.1882</SeedProgress>
 </Colony>
 <Radius>51076769</Radius>
 <ARot>708061</ARot>
@@ -652,7 +648,7 @@
  <LastUpdate>730642932289651405</LastUpdate>
  <LastGrowth>769291414805618386</LastGrowth>
  <NextGrowth>792938230805618386</NextGrowth>
- <SeedProgress>192.1235</SeedProgress>
+ <SeedProgress>175.1731</SeedProgress>
 </Colony>
 <Radius>5756027</Radius>
 <ARot>70039</ARot>
@@ -757,7 +753,6 @@
  <MapPos X="-11.01" Y="-11.04"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)5</TradeRoute>
- <TradeRoute>(-1,-1)7</TradeRoute>
  <TradeRoute>(-1,-1)10</TradeRoute>
  <Planets>
 <Planet Seed="33835" />
@@ -765,10 +760,10 @@
 <Type>Gas</Type>
 <PRot>20382871</PRot>
 <Colony>
- <BaseType>21</BaseType>
+ <BaseType>17</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>781332433490803146</LastGrowth>
- <NextGrowth>814726897490803146</NextGrowth>
+ <LastGrowth>767612113490803146</LastGrowth>
+ <NextGrowth>781332433490803146</NextGrowth>
 </Colony>
 <Radius>69341472</Radius>
 <ARot>868280</ARot>
@@ -841,7 +836,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>770327712000000000</LastGrowth>
  <NextGrowth>792136800000000000</NextGrowth>
- <SeedProgress>186.7317</SeedProgress>
+ <SeedProgress>195.5467</SeedProgress>
 </Colony>
 <Radius>80535240</Radius>
 <ARot>1071644</ARot>
@@ -867,7 +862,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>770610050080597136</LastGrowth>
  <NextGrowth>789401186080597136</NextGrowth>
- <SeedProgress>8.6143</SeedProgress>
+ <SeedProgress>165.8906</SeedProgress>
 </Colony>
 <Radius>55948178</Radius>
 <ARot>637272</ARot>
@@ -876,21 +871,7 @@
 <Orbit>128990462461</Orbit>
 <TempBase>335.4160366555628</TempBase>
 </Planet>
-<Planet ID="3">
-<Type>Gas</Type>
-<PRot>8864825</PRot>
-<Colony>
- <Owner>Insectoid</Owner>
- <LastGrowth>781391937670166256</LastGrowth>
- <NextGrowth>783216705670166256</NextGrowth>
-</Colony>
-<Radius>61223280</Radius>
-<ARot>871002</ARot>
-<Temp>283</Temp>
-<Seed>5215553</Seed>
-<Orbit>180105219921</Orbit>
-<TempBase>283.31519979380226</TempBase>
-</Planet>
+<Planet Seed="5215553" />
 <Planet Seed="1485608" />
  </Planets>
 </Star>
@@ -912,7 +893,7 @@
  <LastUpdate>712224964997188750</LastUpdate>
  <LastGrowth>779059607747084320</LastGrowth>
  <NextGrowth>799344599747084320</NextGrowth>
- <SeedProgress>182.0002</SeedProgress>
+ <SeedProgress>196.9249</SeedProgress>
 </Colony>
 <Radius>4538210</Radius>
 <ARot>74859</ARot>
@@ -939,11 +920,11 @@
 <Type>Ice</Type>
 <PRot>94507950</PRot>
 <Colony>
- <BaseType>27</BaseType>
+ <BaseType>25</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>779897892615684687</LastGrowth>
- <NextGrowth>799458852615684687</NextGrowth>
- <SeedProgress>171.9667</SeedProgress>
+ <LastGrowth>757391556615684687</LastGrowth>
+ <NextGrowth>779897892615684687</NextGrowth>
+ <SeedProgress>161.9642</SeedProgress>
 </Colony>
 <Radius>5679548</Radius>
 <ARot>76053</ARot>
@@ -1016,7 +997,6 @@
  <TradeRoute>(0,-1)0</TradeRoute>
  <TradeRoute>(0,-1)5</TradeRoute>
  <TradeRoute>(0,-1)10</TradeRoute>
- <TradeRoute>(0,-1)13</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Rocky</Type>
@@ -1027,7 +1007,7 @@
  <LastUpdate>732818944034830000</LastUpdate>
  <LastGrowth>777697632000000000</LastGrowth>
  <NextGrowth>807296544000000000</NextGrowth>
- <SeedProgress>118.7338</SeedProgress>
+ <SeedProgress>53.6174</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -1061,7 +1041,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>752545807727084320</LastGrowth>
  <NextGrowth>800166895727084320</NextGrowth>
- <SeedProgress>192.3315</SeedProgress>
+ <SeedProgress>193.2894</SeedProgress>
 </Colony>
 <Radius>68674923</Radius>
 <ARot>1181619</ARot>
@@ -1104,7 +1084,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>760033124199391823</LastGrowth>
  <NextGrowth>795600548199391823</NextGrowth>
- <SeedProgress>162.4281</SeedProgress>
+ <SeedProgress>177.3546</SeedProgress>
 </Colony>
 <Radius>7218842</Radius>
 <ARot>105283</ARot>
@@ -1121,7 +1101,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>753755328000000000</LastGrowth>
  <NextGrowth>790131456000000000</NextGrowth>
- <SeedProgress>184.9066</SeedProgress>
+ <SeedProgress>199.8337</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -1175,7 +1155,6 @@
  <MapPos X="3.17" Y="-12.24"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
- <TradeRoute>(0,-1)9</TradeRoute>
  <TradeRoute>(0,-1)10</TradeRoute>
  <TradeRoute>(0,-1)12</TradeRoute>
  <Planets>
@@ -1189,7 +1168,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>761771309977862260</LastGrowth>
  <NextGrowth>790996973977862260</NextGrowth>
- <SeedProgress>174.2216</SeedProgress>
+ <SeedProgress>135.1518</SeedProgress>
 </Colony>
 <Radius>58190284</Radius>
 <ARot>739920</ARot>
@@ -1214,7 +1193,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>763222176000000000</LastGrowth>
  <NextGrowth>802006272000000000</NextGrowth>
- <SeedProgress>196.3191</SeedProgress>
+ <SeedProgress>171.2140</SeedProgress>
 </Colony>
 <Radius>56377948</Radius>
 <ARot>911395</ARot>
@@ -1304,7 +1283,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>777302211159391823</LastGrowth>
  <NextGrowth>801554691159391823</NextGrowth>
- <SeedProgress>129.3844</SeedProgress>
+ <SeedProgress>64.2680</SeedProgress>
 </Colony>
 <Radius>4240829</Radius>
 <ARot>58203</ARot>
@@ -1322,21 +1301,7 @@
  <MapPos X="4.77" Y="-10.69"/>
  <Owner>Ursalon</Owner>
  <Planets>
-<Planet ID="0">
-<Type>Gas</Type>
-<PRot>19559602</PRot>
-<Colony>
- <Owner>Ursalon</Owner>
- <LastGrowth>781367745670166256</LastGrowth>
- <NextGrowth>787376001670166256</NextGrowth>
-</Colony>
-<Radius>65306450</Radius>
-<ARot>760545</ARot>
-<Temp>354</Temp>
-<Seed>3628964</Seed>
-<Orbit>62562307364</Orbit>
-<TempBase>354.3912566341916</TempBase>
-</Planet>
+<Planet Seed="3628964" />
 <Planet ID="1">
 <Type>Gas</Type>
 <PRot>9931887</PRot>
@@ -1345,7 +1310,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>757113682465589999</LastGrowth>
  <NextGrowth>807094354465589999</NextGrowth>
- <SeedProgress>8.2620</SeedProgress>
+ <SeedProgress>169.2049</SeedProgress>
 </Colony>
 <Radius>56414570</Radius>
 <ARot>637504</ARot>
@@ -1412,7 +1377,7 @@
  <LastUpdate>739206244312483146</LastUpdate>
  <LastGrowth>766647073853350000</LastGrowth>
  <NextGrowth>795328417853350000</NextGrowth>
- <SeedProgress>133.2299</SeedProgress>
+ <SeedProgress>85.0608</SeedProgress>
 </Colony>
 <Name>Foray Base</Name>
 <Radius>5786577</Radius>
@@ -1443,7 +1408,6 @@
  <MapPos X="4.38" Y="-8.02"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
- <TradeRoute>(0,-1)4</TradeRoute>
  <TradeRoute>(0,-1)11</TradeRoute>
  <Planets>
 <Planet Seed="7711067" />
@@ -1476,11 +1440,10 @@
 <Type>Gas</Type>
 <PRot>8146314</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>23</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>780619180282942260</LastGrowth>
- <NextGrowth>803429644282942260</NextGrowth>
- <SeedProgress>34.3992</SeedProgress>
+ <LastGrowth>766292332282942260</LastGrowth>
+ <NextGrowth>780619180282942260</NextGrowth>
 </Colony>
 <Radius>52519596</Radius>
 <ARot>801703</ARot>
@@ -1511,7 +1474,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>769448980629431823</LastGrowth>
  <NextGrowth>791726356629431823</NextGrowth>
- <SeedProgress>114.0689</SeedProgress>
+ <SeedProgress>48.9528</SeedProgress>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -1540,7 +1503,7 @@
  <LastUpdate>733026359353038203</LastUpdate>
  <LastGrowth>766228032000000000</LastGrowth>
  <NextGrowth>790719840000000000</NextGrowth>
- <SeedProgress>179.7658</SeedProgress>
+ <SeedProgress>194.7001</SeedProgress>
 </Colony>
 <Radius>5745459</Radius>
 <ARot>84567</ARot>
@@ -1565,7 +1528,7 @@
  <Owner>Ursalon</Owner>
  <LastUpdate>733026840859972500</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>180.9728</SeedProgress>
+ <SeedProgress>182.8790</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6516259</Radius>
@@ -1594,10 +1557,10 @@
 <Type>Rocky</Type>
 <PRot>76385139</PRot>
 <Colony>
- <BaseType>23</BaseType>
+ <BaseType>19</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>780879853700184687</LastGrowth>
- <NextGrowth>802366669700184687</NextGrowth>
+ <LastGrowth>752875885700184687</LastGrowth>
+ <NextGrowth>780879853700184687</NextGrowth>
 </Colony>
 <Radius>5328785</Radius>
 <ARot>64514</ARot>
@@ -1693,7 +1656,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>760541750438860000</LastGrowth>
  <NextGrowth>783693494438860000</NextGrowth>
- <SeedProgress>137.5305</SeedProgress>
+ <SeedProgress>85.4376</SeedProgress>
 </Colony>
 <Radius>79754297</Radius>
 <ARot>1079121</ARot>
@@ -1714,11 +1677,11 @@
 <Type>Volcanic</Type>
 <PRot>11660522</PRot>
 <Colony>
- <BaseType>29</BaseType>
+ <BaseType>25</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>780676333660860408</LastGrowth>
- <NextGrowth>799301581660860408</NextGrowth>
- <SeedProgress>164.1464</SeedProgress>
+ <LastGrowth>772464013660860408</LastGrowth>
+ <NextGrowth>780676333660860408</NextGrowth>
+ <SeedProgress>118.5151</SeedProgress>
 </Colony>
 <Radius>5315928</Radius>
 <ARot>75010</ARot>
@@ -1756,11 +1719,11 @@
 <Type>Oceanic</Type>
 <PRot>69021994</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>15</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>780509260224570000</LastGrowth>
- <NextGrowth>800774380224570000</NextGrowth>
- <SeedProgress>167.1879</SeedProgress>
+ <LastGrowth>765858412224570000</LastGrowth>
+ <NextGrowth>780509260224570000</NextGrowth>
+ <SeedProgress>107.6079</SeedProgress>
 </Colony>
 <Radius>5959497</Radius>
 <ARot>81242</ARot>
@@ -1781,11 +1744,10 @@
 <Type>Ice</Type>
 <PRot>41809161</PRot>
 <Colony>
- <BaseType>11</BaseType>
+ <BaseType>9</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>780489300659203862</LastGrowth>
- <NextGrowth>793770708659203862</NextGrowth>
- <SeedProgress>22.7839</SeedProgress>
+ <LastGrowth>775905780659203862</LastGrowth>
+ <NextGrowth>780489300659203862</NextGrowth>
 </Colony>
 <Radius>6983252</Radius>
 <ARot>114145</ARot>
@@ -1802,18 +1764,16 @@
 <Seed>16048</Seed>
  <MapPos X="-4.6" Y="-12.51"/>
  <Owner>Ursalon</Owner>
- <TradeRoute>(0,-1)2</TradeRoute>
  <TradeRoute>(0,-1)5</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Gas</Type>
 <PRot>48623065</PRot>
 <Colony>
- <BaseType>29</BaseType>
+ <BaseType>21</BaseType>
  <Owner>Ursalon</Owner>
- <LastGrowth>781556000842834905</LastGrowth>
- <NextGrowth>801133376842834905</NextGrowth>
- <SeedProgress>6.9320</SeedProgress>
+ <LastGrowth>771251936842834905</LastGrowth>
+ <NextGrowth>781556000842834905</NextGrowth>
 </Colony>
 <Radius>51408843</Radius>
 <ARot>736781</ARot>
@@ -1822,12 +1782,6 @@
 <Orbit>34984569638</Orbit>
 <TempBase>265.95901709832833</TempBase>
 <Moons>
-<Moon ID="2">
-<Colony>
- <Owner>Ursalon</Owner>
- <LastGrowth>779940344571677286</LastGrowth>
-</Colony>
-</Moon>
 <Moon ID="3">
 <Colony>
  <Owner>Ursalon</Owner>
@@ -1844,7 +1798,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>760475385669431823</LastGrowth>
  <NextGrowth>787798521669431823</NextGrowth>
- <SeedProgress>42.8703</SeedProgress>
+ <SeedProgress>190.8063</SeedProgress>
 </Colony>
 <Radius>5417287</Radius>
 <ARot>68020</ARot>
@@ -1881,7 +1835,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>757129669009391823</LastGrowth>
  <NextGrowth>785880997009391823</NextGrowth>
- <SeedProgress>195.1832</SeedProgress>
+ <SeedProgress>199.9720</SeedProgress>
 </Colony>
 <Radius>4092232</Radius>
 <ARot>56468</ARot>
@@ -1934,14 +1888,6 @@
 <Seed>3355843</Seed>
 <Orbit>36269680993</Orbit>
 <TempBase>223.30673482698265</TempBase>
-<Moons>
-<Moon ID="3">
-<Colony>
- <Owner>Gokan</Owner>
- <LastGrowth>779608701860217286</LastGrowth>
-</Colony>
-</Moon>
-</Moons>
 </Planet>
 <Planet ID="1">
 <Type>Ice</Type>
@@ -1951,7 +1897,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>769681431203638434</LastGrowth>
  <NextGrowth>794678679203638434</NextGrowth>
- <SeedProgress>45.5953</SeedProgress>
+ <SeedProgress>198.6449</SeedProgress>
 </Colony>
 <Radius>6628268</Radius>
 <ARot>96629</ARot>
@@ -2002,7 +1948,7 @@
  <LastUpdate>750747353310705779</LastUpdate>
  <LastGrowth>779030529914340625</LastGrowth>
  <NextGrowth>809358657914340625</NextGrowth>
- <SeedProgress>57.5017</SeedProgress>
+ <SeedProgress>10.5199</SeedProgress>
 </Colony>
 <Radius>6856232</Radius>
 <ARot>87295</ARot>
@@ -2030,7 +1976,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>775850674587286221</LastGrowth>
  <NextGrowth>784881202587286221</NextGrowth>
- <SeedProgress>89.2566</SeedProgress>
+ <SeedProgress>54.0203</SeedProgress>
 </Colony>
 <Radius>6809649</Radius>
 <ARot>88421</ARot>
@@ -2048,7 +1994,7 @@
  <LastUpdate>750547493317210467</LastUpdate>
  <LastGrowth>763225442080597136</LastGrowth>
  <NextGrowth>817933922080597136</NextGrowth>
- <SeedProgress>36.4525</SeedProgress>
+ <SeedProgress>189.4959</SeedProgress>
 </Colony>
 <Radius>7316518</Radius>
 <ARot>116050</ARot>
@@ -2057,21 +2003,7 @@
 <Orbit>90693220519</Orbit>
 <TempBase>316.5591105100749</TempBase>
 </Planet>
-<Planet ID="3">
-<Type>Gas</Type>
-<PRot>14368505</PRot>
-<Colony>
- <Owner>Gokan</Owner>
- <LastGrowth>780057848571677286</LastGrowth>
- <NextGrowth>782197112571677286</NextGrowth>
-</Colony>
-<Radius>50917275</Radius>
-<ARot>771527</ARot>
-<Temp>214</Temp>
-<Seed>1190177</Seed>
-<Orbit>128426060385</Orbit>
-<TempBase>214.35507411349658</TempBase>
-</Planet>
+<Planet Seed="1190177" />
 <Planet Seed="6673811" />
  </Planets>
  <Visited/></Star>
@@ -2148,7 +2080,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>777835492410611250</LastGrowth>
  <NextGrowth>805832548410611250</NextGrowth>
- <SeedProgress>162.9997</SeedProgress>
+ <SeedProgress>104.2728</SeedProgress>
 </Colony>
 <Radius>71513727</Radius>
 <ARot>1245274</ARot>
@@ -2165,7 +2097,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>761881697861931553</LastGrowth>
  <NextGrowth>788011649861931553</NextGrowth>
- <SeedProgress>158.2602</SeedProgress>
+ <SeedProgress>123.0241</SeedProgress>
 </Colony>
 <Radius>44669483</Radius>
 <ARot>686218</ARot>
@@ -2223,7 +2155,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>776801067709574454</LastGrowth>
  <NextGrowth>802356459709574454</NextGrowth>
- <SeedProgress>79.8847</SeedProgress>
+ <SeedProgress>21.1578</SeedProgress>
 </Colony>
 <Radius>52056025</Radius>
 <ARot>626680</ARot>
@@ -2260,7 +2192,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>763917707633962803</LastGrowth>
  <NextGrowth>800149547633962803</NextGrowth>
- <SeedProgress>191.8778</SeedProgress>
+ <SeedProgress>196.6615</SeedProgress>
 </Colony>
 <Radius>6873023</Radius>
 <ARot>117508</ARot>
@@ -2324,7 +2256,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>761909760000000000</LastGrowth>
  <NextGrowth>797304384000000000</NextGrowth>
- <SeedProgress>195.9484</SeedProgress>
+ <SeedProgress>137.2215</SeedProgress>
 </Colony>
 <Radius>77994475</Radius>
 <ARot>1134165</ARot>
@@ -2345,11 +2277,10 @@
 <Type>Oceanic</Type>
 <PRot>65594537</PRot>
 <Colony>
- <BaseType>11</BaseType>
+ <BaseType>3</BaseType>
  <Owner>Gokan</Owner>
- <LastGrowth>779755044427824687</LastGrowth>
- <NextGrowth>789428388427824687</NextGrowth>
- <SeedProgress>31.9568</SeedProgress>
+ <LastGrowth>775365060427824687</LastGrowth>
+ <NextGrowth>779755044427824687</NextGrowth>
 </Colony>
 <Radius>4321421</Radius>
 <ARot>70258</ARot>
@@ -2367,16 +2298,14 @@
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)1</TradeRoute>
  <TradeRoute>(1,-1)6</TradeRoute>
- <TradeRoute>(1,-1)11</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Gas</Type>
 <PRot>14130673</PRot>
 <Colony>
- <BaseType>17</BaseType>
  <Owner>Gokan</Owner>
- <LastGrowth>781006798934560000</LastGrowth>
- <NextGrowth>790006222934560000</NextGrowth>
+ <LastGrowth>777710638934560000</LastGrowth>
+ <NextGrowth>781006798934560000</NextGrowth>
 </Colony>
 <Radius>44307134</Radius>
 <ARot>711157</ARot>
@@ -2409,7 +2338,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>775656157998154454</LastGrowth>
  <NextGrowth>800701789998154454</NextGrowth>
- <SeedProgress>160.1209</SeedProgress>
+ <SeedProgress>141.4035</SeedProgress>
 </Colony>
 <Radius>5804717</Radius>
 <ARot>94616</ARot>
@@ -2434,7 +2363,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>777562788470165779</LastGrowth>
  <NextGrowth>795712836470165779</NextGrowth>
- <SeedProgress>85.1400</SeedProgress>
+ <SeedProgress>38.1585</SeedProgress>
 </Colony>
 <Radius>6079478</Radius>
 <ARot>74552</ARot>
@@ -2465,7 +2394,6 @@
  <MapPos X="8.04" Y="-6.89"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)6</TradeRoute>
- <TradeRoute>(1,-1)10</TradeRoute>
  <TradeRoute>(1,-1)12</TradeRoute>
  <Planets>
 <Planet ID="0">
@@ -2513,7 +2441,7 @@
  <LastUpdate>708632472330239062</LastUpdate>
  <LastGrowth>758007072000000000</LastGrowth>
  <NextGrowth>786598560000000000</NextGrowth>
- <SeedProgress>165.9387</SeedProgress>
+ <SeedProgress>118.9572</SeedProgress>
 </Colony>
 <Radius>6312586</Radius>
 <ARot>92520</ARot>
@@ -2544,7 +2472,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>770241787892665779</LastGrowth>
  <NextGrowth>786016699892665779</NextGrowth>
- <SeedProgress>76.8652</SeedProgress>
+ <SeedProgress>29.8837</SeedProgress>
 </Colony>
 <Radius>5280779</Radius>
 <ARot>75866</ARot>
@@ -2576,7 +2504,7 @@
  <LastUpdate>750221650229501406</LastUpdate>
  <LastGrowth>751991149700184687</LastGrowth>
  <NextGrowth>782105005700184687</NextGrowth>
- <SeedProgress>194.5691</SeedProgress>
+ <SeedProgress>187.5947</SeedProgress>
 </Colony>
 <Radius>6357345</Radius>
 <ARot>95386</ARot>
@@ -2602,7 +2530,7 @@
  <LastUpdate>708632714182627499</LastUpdate>
  <LastGrowth>776514223750210000</LastGrowth>
  <NextGrowth>803987695750210000</NextGrowth>
- <SeedProgress>78.3386</SeedProgress>
+ <SeedProgress>43.1025</SeedProgress>
 </Colony>
 <Radius>56007716</Radius>
 <ARot>765837</ARot>
@@ -2631,7 +2559,7 @@
  <Owner>Gokan</Owner>
  <LastUpdate>775033862471053862</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>188.1511</SeedProgress>
+ <SeedProgress>197.7541</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5420964</Radius>
@@ -2665,7 +2593,7 @@
  <LastUpdate>733896191977461562</LastUpdate>
  <LastGrowth>773976384000000000</LastGrowth>
  <NextGrowth>798672096000000000</NextGrowth>
- <SeedProgress>191.1506</SeedProgress>
+ <SeedProgress>172.4387</SeedProgress>
 </Colony>
 <Radius>5381628</Radius>
 <ARot>97560</ARot>
@@ -2682,7 +2610,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>771762092185618386</LastGrowth>
  <NextGrowth>799315916185618386</NextGrowth>
- <SeedProgress>191.9899</SeedProgress>
+ <SeedProgress>185.0244</SeedProgress>
 </Colony>
 <Radius>6551771</Radius>
 <ARot>105366</ARot>
@@ -2784,7 +2712,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>776526248062470467</LastGrowth>
  <NextGrowth>794201960062470467</NextGrowth>
- <SeedProgress>176.5008</SeedProgress>
+ <SeedProgress>169.5409</SeedProgress>
 </Colony>
 <Radius>5763022</Radius>
 <ARot>80467</ARot>
@@ -2816,7 +2744,7 @@
  <LastUpdate>733992722093540000</LastUpdate>
  <LastGrowth>778636045700184687</LastGrowth>
  <NextGrowth>803569357700184687</NextGrowth>
- <SeedProgress>163.2400</SeedProgress>
+ <SeedProgress>184.5559</SeedProgress>
 </Colony>
 <Radius>5392147</Radius>
 <ARot>72419</ARot>
@@ -2848,7 +2776,7 @@
  <LastUpdate>733798317426377656</LastUpdate>
  <LastGrowth>754460352000000000</LastGrowth>
  <NextGrowth>782305344000000000</NextGrowth>
- <SeedProgress>176.7434</SeedProgress>
+ <SeedProgress>169.7732</SeedProgress>
 </Colony>
 <Radius>6057050</Radius>
 <ARot>79376</ARot>
@@ -2883,7 +2811,6 @@
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)5</TradeRoute>
  <TradeRoute>(-1,0)6</TradeRoute>
- <TradeRoute>(-1,0)13</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Oceanic</Type>
@@ -2894,7 +2821,7 @@
  <LastUpdate>740670897635638234</LastUpdate>
  <LastGrowth>757861056000000000</LastGrowth>
  <NextGrowth>788576256000000000</NextGrowth>
- <SeedProgress>168.3683</SeedProgress>
+ <SeedProgress>178.6891</SeedProgress>
 </Colony>
 <Radius>6099597</Radius>
 <ARot>84524</ARot>
@@ -2953,7 +2880,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>760642720834352803</LastGrowth>
  <NextGrowth>797420608834352803</NextGrowth>
- <SeedProgress>176.3054</SeedProgress>
+ <SeedProgress>174.5003</SeedProgress>
 </Colony>
 <Radius>5751335</Radius>
 <ARot>98122</ARot>
@@ -3006,17 +2933,14 @@
 <Seed>7772687</Seed>
  <MapPos X="-10.3" Y="4.15"/>
  <Owner>Grey</Owner>
- <TradeRoute>(-1,0)5</TradeRoute>
- <TradeRoute>(-1,0)12</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Volcanic</Type>
 <PRot>103811536</PRot>
 <Colony>
- <BaseType>17</BaseType>
  <Owner>Grey</Owner>
- <LastGrowth>780343820752850000</LastGrowth>
- <NextGrowth>784297484752850000</NextGrowth>
+ <LastGrowth>778911308752850000</LastGrowth>
+ <NextGrowth>780343820752850000</NextGrowth>
 </Colony>
 <Radius>4187187</Radius>
 <ARot>57039</ARot>
@@ -3033,7 +2957,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>760762113914340625</LastGrowth>
  <NextGrowth>798899073914340625</NextGrowth>
- <SeedProgress>88.9959</SeedProgress>
+ <SeedProgress>19.2727</SeedProgress>
 </Colony>
 <Radius>7398645</Radius>
 <ARot>75680</ARot>
@@ -3078,7 +3002,6 @@
  <MapPos X="-9.19" Y="-0.75"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
- <TradeRoute>(-1,0)4</TradeRoute>
  <TradeRoute>(-1,0)10</TradeRoute>
  <TradeRoute>(-1,0)13</TradeRoute>
  <Planets>
@@ -3092,7 +3015,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>747910123279390000</LastGrowth>
  <NextGrowth>783344491279390000</NextGrowth>
- <SeedProgress>166.6760</SeedProgress>
+ <SeedProgress>164.8522</SeedProgress>
 </Colony>
 <Radius>6424830</Radius>
 <ARot>83256</ARot>
@@ -3123,7 +3046,7 @@
  <Owner>Grey</Owner>
  <LastUpdate>726750322223162706</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>165.8717</SeedProgress>
+ <SeedProgress>162.2900</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7076271</Radius>
@@ -3193,7 +3116,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>762270876307144454</LastGrowth>
  <NextGrowth>785912508307144454</NextGrowth>
- <SeedProgress>135.6177</SeedProgress>
+ <SeedProgress>79.8391</SeedProgress>
 </Colony>
 <Radius>6070153</Radius>
 <ARot>97231</ARot>
@@ -3269,7 +3192,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>778453572470165779</LastGrowth>
  <NextGrowth>791624388470165779</NextGrowth>
- <SeedProgress>198.6041</SeedProgress>
+ <SeedProgress>182.8569</SeedProgress>
 </Colony>
 <Radius>7575843</Radius>
 <ARot>109315</ARot>
@@ -3286,7 +3209,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>769498255161931823</LastGrowth>
  <NextGrowth>787154959161931823</NextGrowth>
- <SeedProgress>191.1558</SeedProgress>
+ <SeedProgress>175.4182</SeedProgress>
 </Colony>
 <Radius>6303012</Radius>
 <ARot>85875</ARot>
@@ -3346,7 +3269,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>751166581667144454</LastGrowth>
  <NextGrowth>798161269667144454</NextGrowth>
- <SeedProgress>88.2918</SeedProgress>
+ <SeedProgress>46.4579</SeedProgress>
 </Colony>
 <Radius>7518487</Radius>
 <ARot>111589</ARot>
@@ -3404,7 +3327,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>763466692204950000</LastGrowth>
  <NextGrowth>796125892204950000</NextGrowth>
- <SeedProgress>186.9683</SeedProgress>
+ <SeedProgress>197.3345</SeedProgress>
 </Colony>
 <Radius>72781818</Radius>
 <ARot>897789</ARot>
@@ -3459,7 +3382,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>772529184000000000</LastGrowth>
  <NextGrowth>797518656000000000</NextGrowth>
- <SeedProgress>71.8928</SeedProgress>
+ <SeedProgress>2.1696</SeedProgress>
 </Colony>
 <Radius>47963365</Radius>
 <ARot>689592</ARot>
@@ -3527,7 +3450,6 @@
 <Seed>4301369</Seed>
  <MapPos X="-12.61" Y="4.55"/>
  <Owner>Grey</Owner>
- <TradeRoute>(-1,0)4</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Oceanic</Type>
@@ -3537,7 +3459,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>770169871750210000</LastGrowth>
  <NextGrowth>798357871750210000</NextGrowth>
- <SeedProgress>85.6648</SeedProgress>
+ <SeedProgress>29.8862</SeedProgress>
 </Colony>
 <Radius>7428221</Radius>
 <ARot>110193</ARot>
@@ -3550,10 +3472,9 @@
 <Type>Gas</Type>
 <PRot>16847899</PRot>
 <Colony>
- <BaseType>9</BaseType>
  <Owner>Grey</Owner>
- <LastGrowth>781097848662640000</LastGrowth>
- <NextGrowth>789729208662640000</NextGrowth>
+ <LastGrowth>778327864662640000</LastGrowth>
+ <NextGrowth>781097848662640000</NextGrowth>
 </Colony>
 <Radius>62405794</Radius>
 <ARot>857357</ARot>
@@ -3570,7 +3491,6 @@
 <Seed>5768417</Seed>
  <MapPos X="-7.33" Y="-0.38"/>
  <Owner>Grey</Owner>
- <TradeRoute>(-1,0)0</TradeRoute>
  <TradeRoute>(-1,0)5</TradeRoute>
  <TradeRoute>(-1,0)10</TradeRoute>
  <Planets>
@@ -3619,7 +3539,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>764469792000000000</LastGrowth>
  <NextGrowth>782708832000000000</NextGrowth>
- <SeedProgress>198.6854</SeedProgress>
+ <SeedProgress>168.9887</SeedProgress>
 </Colony>
 <Radius>5267214</Radius>
 <ARot>85347</ARot>
@@ -3650,7 +3570,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>756281743727084320</LastGrowth>
  <NextGrowth>784259791727084320</NextGrowth>
- <SeedProgress>166.1856</SeedProgress>
+ <SeedProgress>164.3744</SeedProgress>
 </Colony>
 <Radius>78233008</Radius>
 <ARot>1298262</ARot>
@@ -3676,7 +3596,7 @@
  <LastUpdate>695945189011935625</LastUpdate>
  <LastGrowth>771042349700184687</LastGrowth>
  <NextGrowth>789234733700184687</NextGrowth>
- <SeedProgress>181.7821</SeedProgress>
+ <SeedProgress>166.0448</SeedProgress>
 </Colony>
 <Radius>7194809</Radius>
 <ARot>109270</ARot>
@@ -3693,7 +3613,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>774838378798118698</LastGrowth>
  <NextGrowth>792789706798118698</NextGrowth>
- <SeedProgress>121.6076</SeedProgress>
+ <SeedProgress>79.7737</SeedProgress>
 </Colony>
 <Radius>7531002</Radius>
 <ARot>111506</ARot>
@@ -3798,10 +3718,9 @@
 <Type>Rocky</Type>
 <PRot>11288645</PRot>
 <Colony>
- <BaseType>17</BaseType>
  <Owner>Grey</Owner>
- <LastGrowth>781221740877964454</LastGrowth>
- <NextGrowth>802184108877964454</NextGrowth>
+ <LastGrowth>734957996877964454</LastGrowth>
+ <NextGrowth>781221740877964454</NextGrowth>
 </Colony>
 <Radius>5538253</Radius>
 <ARot>72431</ARot>
@@ -3846,7 +3765,7 @@
  <Owner>Human</Owner>
  <LastGrowth>775084453600531118</LastGrowth>
  <NextGrowth>789466597600531118</NextGrowth>
- <SeedProgress>81.4420</SeedProgress>
+ <SeedProgress>52.5406</SeedProgress>
 </Colony>
 <Radius>8500069</Radius>
 <ARot>107499</ARot>
@@ -3864,7 +3783,7 @@
  <LastUpdate>767030197247948957</LastUpdate>
  <LastGrowth>762999439932770000</LastGrowth>
  <NextGrowth>806021455932770000</NextGrowth>
- <SeedProgress>199.9069</SeedProgress>
+ <SeedProgress>151.7378</SeedProgress>
 </Colony>
 <Name>New Home</Name>
 <Radius>4758574</Radius>
@@ -3887,10 +3806,10 @@
 <Type>Rocky</Type>
 <PRot>91223937</PRot>
 <Colony>
- <BaseType>21</BaseType>
+ <BaseType>5</BaseType>
  <Owner>Human</Owner>
- <LastGrowth>781506875374700000</LastGrowth>
- <NextGrowth>799441787374700000</NextGrowth>
+ <LastGrowth>774409979374700000</LastGrowth>
+ <NextGrowth>781506875374700000</NextGrowth>
 </Colony>
 <Radius>5621400</Radius>
 <ARot>79807</ARot>
@@ -3953,12 +3872,6 @@
  <LastGrowth>774150276427824687</LastGrowth>
 </Colony>
 </Moon>
-<Moon ID="4">
-<Colony>
- <Owner>Human</Owner>
- <LastGrowth>781846715590026256</LastGrowth>
-</Colony>
-</Moon>
 </Moons>
 </Planet>
 <Planet ID="1">
@@ -3970,7 +3883,7 @@
  <LastUpdate>767063446560330408</LastUpdate>
  <LastGrowth>764131980301417189</LastGrowth>
  <NextGrowth>798313548301417189</NextGrowth>
- <SeedProgress>0.4389</SeedProgress>
+ <SeedProgress>161.9187</SeedProgress>
 </Colony>
 <Radius>4055612</Radius>
 <ARot>58949</ARot>
@@ -3997,7 +3910,7 @@
  <LastUpdate>769675111745227812</LastUpdate>
  <LastGrowth>759931010080597136</LastGrowth>
  <NextGrowth>797445890080597136</NextGrowth>
- <SeedProgress>157.4006</SeedProgress>
+ <SeedProgress>109.2317</SeedProgress>
 </Colony>
 <Radius>7304973</Radius>
 <ARot>85537</ARot>
@@ -4039,7 +3952,7 @@
  <Owner>Human</Owner>
  <LastGrowth>769346208000000000</LastGrowth>
  <NextGrowth>806885280000000000</NextGrowth>
- <SeedProgress>168.9037</SeedProgress>
+ <SeedProgress>160.7512</SeedProgress>
 </Colony>
 <Radius>48376722</Radius>
 <ARot>713242</ARot>
@@ -4187,7 +4100,7 @@
  <Owner>Human</Owner>
  <LastGrowth>752479279727084320</LastGrowth>
  <NextGrowth>806018767727084320</NextGrowth>
- <SeedProgress>191.3544</SeedProgress>
+ <SeedProgress>192.8417</SeedProgress>
 </Colony>
 <Radius>60444711</Radius>
 <ARot>918919</ARot>
@@ -4231,7 +4144,7 @@
  <LastUpdate>684730542109803125</LastUpdate>
  <LastGrowth>766760256000000000</LastGrowth>
  <NextGrowth>793529568000000000</NextGrowth>
- <SeedProgress>189.9229</SeedProgress>
+ <SeedProgress>181.7601</SeedProgress>
 </Colony>
 <Radius>62599700</Radius>
 <ARot>820912</ARot>
@@ -4269,7 +4182,7 @@
  <Owner>Human</Owner>
  <LastGrowth>770686638857198386</LastGrowth>
  <NextGrowth>798597294857198386</NextGrowth>
- <SeedProgress>160.6882</SeedProgress>
+ <SeedProgress>192.5708</SeedProgress>
 </Colony>
 <Name>Earth 2</Name>
 <Radius>5412137</Radius>
@@ -4302,7 +4215,7 @@
  <Owner>Human</Owner>
  <LastGrowth>761741689066300000</LastGrowth>
  <NextGrowth>839075737066300000</NextGrowth>
- <SeedProgress>160.9996</SeedProgress>
+ <SeedProgress>172.1029</SeedProgress>
 </Colony>
 <Radius>63781295</Radius>
 <ARot>887778</ARot>
@@ -4346,7 +4259,7 @@
  <Owner>Human</Owner>
  <LastUpdate>777198100587732340</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>182.6233</SeedProgress>
+ <SeedProgress>164.8397</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6259600</Radius>
@@ -4473,7 +4386,7 @@
  <LastUpdate>766974024418518515</LastUpdate>
  <LastGrowth>732127680000000000</LastGrowth>
  <NextGrowth>801229536000000000</NextGrowth>
- <SeedProgress>178.2595</SeedProgress>
+ <SeedProgress>189.3760</SeedProgress>
 </Colony>
 <Name>Home Ice</Name>
 <Radius>7110942</Radius>
@@ -4563,7 +4476,7 @@
  <LastUpdate>732466560913960000</LastUpdate>
  <LastGrowth>776333459503891823</LastGrowth>
  <NextGrowth>799384115503891823</NextGrowth>
- <SeedProgress>66.9200</SeedProgress>
+ <SeedProgress>38.0187</SeedProgress>
 </Colony>
 <Radius>5725259</Radius>
 <ARot>97071</ARot>
@@ -4596,7 +4509,7 @@
  <LastUpdate>732285683729510000</LastUpdate>
  <LastGrowth>737743680000000000</LastGrowth>
  <NextGrowth>783283392000000000</NextGrowth>
- <SeedProgress>174.6544</SeedProgress>
+ <SeedProgress>176.1372</SeedProgress>
 </Colony>
 <Radius>72436431</Radius>
 <ARot>1140902</ARot>
@@ -4650,7 +4563,7 @@
  <LastUpdate>686446673839149999</LastUpdate>
  <LastGrowth>779317632000000000</LastGrowth>
  <NextGrowth>802360512000000000</NextGrowth>
- <SeedProgress>31.7627</SeedProgress>
+ <SeedProgress>2.8614</SeedProgress>
 </Colony>
 <Name>Giant Rock</Name>
 <Radius>4603435</Radius>
@@ -4955,10 +4868,9 @@
 <Type>Gas</Type>
 <PRot>41494891</PRot>
 <Colony>
- <BaseType>17</BaseType>
  <Owner>Human</Owner>
- <LastGrowth>779803744636557939</LastGrowth>
- <NextGrowth>790368736636557939</NextGrowth>
+ <LastGrowth>776801344636557939</LastGrowth>
+ <NextGrowth>779803744636557939</NextGrowth>
 </Colony>
 <Radius>47460763</Radius>
 <ARot>697527</ARot>
@@ -4976,7 +4888,7 @@
  <LastUpdate>742897682946789375</LastUpdate>
  <LastGrowth>768654395967141823</LastGrowth>
  <NextGrowth>790663931967141823</NextGrowth>
- <SeedProgress>81.3841</SeedProgress>
+ <SeedProgress>42.8489</SeedProgress>
 </Colony>
 <Name>Lonely</Name>
 <Radius>6073595</Radius>
@@ -5002,7 +4914,7 @@
  <Owner>Human</Owner>
  <LastGrowth>778672872992790000</LastGrowth>
  <NextGrowth>801303624992790000</NextGrowth>
- <SeedProgress>40.1016</SeedProgress>
+ <SeedProgress>11.2003</SeedProgress>
 </Colony>
 <Radius>6480510</Radius>
 <ARot>84832</ARot>
@@ -5060,7 +4972,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>771777249914340625</LastGrowth>
  <NextGrowth>793111137914340625</NextGrowth>
- <SeedProgress>2.9931</SeedProgress>
+ <SeedProgress>187.9678</SeedProgress>
 </Colony>
 <Radius>5332231</Radius>
 <ARot>69461</ARot>
@@ -5068,14 +4980,6 @@
 <Seed>8195689</Seed>
 <Orbit>469840905487</Orbit>
 <TempBase>319.2512234868113</TempBase>
-<Moons>
-<Moon ID="0">
-<Colony>
- <Owner>Elithiri</Owner>
- <LastGrowth>781746491590026256</LastGrowth>
-</Colony>
-</Moon>
-</Moons>
 </Planet>
  </Planets>
 </Star>
@@ -5171,7 +5075,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>778244718992334006</LastGrowth>
  <NextGrowth>799079214992334006</NextGrowth>
- <SeedProgress>107.9246</SeedProgress>
+ <SeedProgress>39.0751</SeedProgress>
 </Colony>
 <Radius>6076251</Radius>
 <ARot>94544</ARot>
@@ -5197,7 +5101,7 @@
  <LastUpdate>736347869820617109</LastUpdate>
  <LastGrowth>759227040000000000</LastGrowth>
  <NextGrowth>796327200000000000</NextGrowth>
- <SeedProgress>189.4275</SeedProgress>
+ <SeedProgress>174.3864</SeedProgress>
 </Colony>
 <Radius>5888835</Radius>
 <ARot>74147</ARot>
@@ -5273,7 +5177,7 @@
  <LastUpdate>736634131909607500</LastUpdate>
  <LastGrowth>763210944000000000</LastGrowth>
  <NextGrowth>809917056000000000</NextGrowth>
- <SeedProgress>176.9289</SeedProgress>
+ <SeedProgress>148.0984</SeedProgress>
 </Colony>
 <Radius>6373304</Radius>
 <ARot>100439</ARot>
@@ -5315,7 +5219,7 @@
  <LastUpdate>736647261016660000</LastUpdate>
  <LastGrowth>769271904000000000</LastGrowth>
  <NextGrowth>790362144000000000</NextGrowth>
- <SeedProgress>111.9771</SeedProgress>
+ <SeedProgress>56.8975</SeedProgress>
 </Colony>
 <Radius>5503968</Radius>
 <ARot>69114</ARot>
@@ -5368,7 +5272,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>762740199355589999</LastGrowth>
  <NextGrowth>786069927355589999</NextGrowth>
- <SeedProgress>109.0219</SeedProgress>
+ <SeedProgress>53.9423</SeedProgress>
 </Colony>
 <Radius>5366832</Radius>
 <ARot>84138</ARot>
@@ -5406,7 +5310,7 @@
  <LastUpdate>719478082538899140</LastUpdate>
  <LastGrowth>770231808000000000</LastGrowth>
  <NextGrowth>1634231808000000000</NextGrowth>
- <SeedProgress>183.8788</SeedProgress>
+ <SeedProgress>181.3288</SeedProgress>
 </Colony>
 <Radius>58225392</Radius>
 <ARot>845621</ARot>
@@ -5444,7 +5348,7 @@
  <LastUpdate>736494733971500000</LastUpdate>
  <LastGrowth>686217312000000000</LastGrowth>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>189.9472</SeedProgress>
+ <SeedProgress>187.4107</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>4662321</Radius>
@@ -5489,7 +5393,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>759420878126890000</LastGrowth>
  <NextGrowth>800878190126890000</NextGrowth>
- <SeedProgress>186.0409</SeedProgress>
+ <SeedProgress>184.7503</SeedProgress>
 </Colony>
 <Radius>78192026</Radius>
 <ARot>1121221</ARot>
@@ -5563,7 +5467,7 @@
  <LastUpdate>736869830567178125</LastUpdate>
  <LastGrowth>771551955365618386</LastGrowth>
  <NextGrowth>790030323365618386</NextGrowth>
- <SeedProgress>187.0279</SeedProgress>
+ <SeedProgress>145.7182</SeedProgress>
 </Colony>
 <Radius>7169424</Radius>
 <ARot>86183</ARot>
@@ -5600,10 +5504,10 @@
 <Type>Desert</Type>
 <PRot>38530730</PRot>
 <Colony>
- <BaseType>7</BaseType>
+ <BaseType>3</BaseType>
  <Owner>Elithiri</Owner>
- <LastGrowth>779813453814950000</LastGrowth>
- <NextGrowth>808398893814950000</NextGrowth>
+ <LastGrowth>737232077814950000</LastGrowth>
+ <NextGrowth>779813453814950000</NextGrowth>
 </Colony>
 <Radius>5753596</Radius>
 <ARot>91113</ARot>
@@ -5630,7 +5534,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>777416849602054454</LastGrowth>
  <NextGrowth>802598993602054454</NextGrowth>
- <SeedProgress>80.3770</SeedProgress>
+ <SeedProgress>11.5275</SeedProgress>
 </Colony>
 <Radius>6665375</Radius>
 <ARot>89798</ARot>
@@ -5671,7 +5575,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>774761931843440000</LastGrowth>
  <NextGrowth>794696139843440000</NextGrowth>
- <SeedProgress>122.1555</SeedProgress>
+ <SeedProgress>80.8458</SeedProgress>
 </Colony>
 <Radius>55778079</Radius>
 <ARot>808894</ARot>
@@ -5728,7 +5632,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>766704096000000000</LastGrowth>
  <NextGrowth>788514048000000000</NextGrowth>
- <SeedProgress>183.9946</SeedProgress>
+ <SeedProgress>128.9150</SeedProgress>
 </Colony>
 <Radius>6420584</Radius>
 <ARot>87044</ARot>
@@ -5754,7 +5658,7 @@
  <LastUpdate>736743621714668125</LastUpdate>
  <LastGrowth>772441056000000000</LastGrowth>
  <NextGrowth>792027072000000000</NextGrowth>
- <SeedProgress>82.5544</SeedProgress>
+ <SeedProgress>13.7049</SeedProgress>
 </Colony>
 <Radius>6022151</Radius>
 <ARot>78919</ARot>
@@ -5839,7 +5743,7 @@
  <LastUpdate>736189299707607240</LastUpdate>
  <LastGrowth>767639591125241152</LastGrowth>
  <NextGrowth>784212839125241152</NextGrowth>
- <SeedProgress>161.0331</SeedProgress>
+ <SeedProgress>105.9535</SeedProgress>
 </Colony>
 <Radius>7767651</Radius>
 <ARot>117461</ARot>
@@ -5882,7 +5786,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>758657565927084320</LastGrowth>
  <NextGrowth>783124317927084320</NextGrowth>
- <SeedProgress>85.0660</SeedProgress>
+ <SeedProgress>43.7563</SeedProgress>
 </Colony>
 <Radius>6761733</Radius>
 <ARot>90135</ARot>
@@ -5984,11 +5888,11 @@
 <Type>Rocky</Type>
 <PRot>81899319</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>29</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>780544512000000000</LastGrowth>
- <NextGrowth>810973728000000000</NextGrowth>
- <SeedProgress>197.7566</SeedProgress>
+ <LastGrowth>747899136000000000</LastGrowth>
+ <NextGrowth>780544512000000000</NextGrowth>
+ <SeedProgress>176.2569</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -6013,7 +5917,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>748731369345618386</LastGrowth>
  <NextGrowth>786184041345618386</NextGrowth>
- <SeedProgress>165.5302</SeedProgress>
+ <SeedProgress>165.0964</SeedProgress>
 </Colony>
 <Radius>5413175</Radius>
 <ARot>75766</ARot>
@@ -6110,7 +6014,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>759035232000000000</LastGrowth>
  <NextGrowth>789624288000000000</NextGrowth>
- <SeedProgress>167.1833</SeedProgress>
+ <SeedProgress>139.8210</SeedProgress>
 </Colony>
 <Radius>7218842</Radius>
 <ARot>105283</ARot>
@@ -6128,7 +6032,7 @@
  <LastUpdate>741989527745721953</LastUpdate>
  <LastGrowth>755523936000000000</LastGrowth>
  <NextGrowth>792834912000000000</NextGrowth>
- <SeedProgress>181.1261</SeedProgress>
+ <SeedProgress>113.7295</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -6195,7 +6099,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>777366738892417812</LastGrowth>
  <NextGrowth>788181426892417812</NextGrowth>
- <SeedProgress>79.6063</SeedProgress>
+ <SeedProgress>39.1684</SeedProgress>
 </Colony>
 <Radius>58190284</Radius>
 <ARot>739920</ARot>
@@ -6220,7 +6124,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>762433344000000000</LastGrowth>
  <NextGrowth>788652288000000000</NextGrowth>
- <SeedProgress>96.3989</SeedProgress>
+ <SeedProgress>42.4816</SeedProgress>
 </Colony>
 <Radius>56377948</Radius>
 <ARot>911395</ARot>
@@ -6321,7 +6225,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>756487468224570000</LastGrowth>
  <NextGrowth>784836172224570000</NextGrowth>
- <SeedProgress>76.3270</SeedProgress>
+ <SeedProgress>35.8891</SeedProgress>
 </Colony>
 <Radius>53251877</Radius>
 <ARot>765520</ARot>
@@ -6357,11 +6261,11 @@
 <Type>Oceanic</Type>
 <PRot>152292322</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>27</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>779840472518638434</LastGrowth>
- <NextGrowth>805227384518638434</NextGrowth>
- <SeedProgress>169.4153</SeedProgress>
+ <LastGrowth>766184088518638434</LastGrowth>
+ <NextGrowth>779840472518638434</NextGrowth>
+ <SeedProgress>143.8313</SeedProgress>
 </Colony>
 <Radius>5786577</Radius>
 <ARot>86464</ARot>
@@ -6392,7 +6296,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>778111852282942260</LastGrowth>
  <NextGrowth>798372652282942260</NextGrowth>
- <SeedProgress>138.9504</SeedProgress>
+ <SeedProgress>85.0331</SeedProgress>
 </Colony>
 <Radius>7276770</Radius>
 <ARot>112540</ARot>
@@ -6413,10 +6317,9 @@
 <Type>Gas</Type>
 <PRot>30740638</PRot>
 <Colony>
- <BaseType>5</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>780318795869356248</LastGrowth>
- <NextGrowth>792388011869356248</NextGrowth>
+ <LastGrowth>763787883869356248</LastGrowth>
+ <NextGrowth>780318795869356248</NextGrowth>
 </Colony>
 <Radius>46016711</Radius>
 <ARot>723982</ARot>
@@ -6444,10 +6347,10 @@
 <Type>Gas</Type>
 <PRot>8146314</PRot>
 <Colony>
- <BaseType>19</BaseType>
+ <BaseType>3</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>779554972584502423</LastGrowth>
- <NextGrowth>789272380584502423</NextGrowth>
+ <LastGrowth>775256572584502423</LastGrowth>
+ <NextGrowth>779554972584502423</NextGrowth>
 </Colony>
 <Radius>52519596</Radius>
 <ARot>801703</ARot>
@@ -6465,7 +6368,7 @@
  <LastUpdate>742253305020145786</LastUpdate>
  <LastGrowth>766235195967141823</LastGrowth>
  <NextGrowth>782044667967141823</NextGrowth>
- <SeedProgress>184.3245</SeedProgress>
+ <SeedProgress>130.4072</SeedProgress>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -6493,7 +6396,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>757958688000000000</LastGrowth>
  <NextGrowth>791241696000000000</NextGrowth>
- <SeedProgress>185.6998</SeedProgress>
+ <SeedProgress>171.8104</SeedProgress>
 </Colony>
 <Radius>63990796</Radius>
 <ARot>871488</ARot>
@@ -6553,7 +6456,7 @@
  <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>167.1895</SeedProgress>
+ <SeedProgress>166.3639</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6501738</Radius>
@@ -6586,7 +6489,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>763141211967141823</LastGrowth>
  <NextGrowth>804967451967141823</NextGrowth>
- <SeedProgress>183.0644</SeedProgress>
+ <SeedProgress>169.1808</SeedProgress>
 </Colony>
 <Radius>4746859</Radius>
 <ARot>52813</ARot>
@@ -6710,7 +6613,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>762191217198154454</LastGrowth>
  <NextGrowth>788242545198154454</NextGrowth>
- <SeedProgress>109.2621</SeedProgress>
+ <SeedProgress>55.3448</SeedProgress>
 </Colony>
 <Radius>79754297</Radius>
 <ARot>1079121</ARot>
@@ -6767,10 +6670,9 @@
 <Type>Desert</Type>
 <PRot>72228070</PRot>
 <Colony>
- <BaseType>17</BaseType>
  <Owner>Ogrish</Owner>
- <LastGrowth>780149176662640000</LastGrowth>
- <NextGrowth>786342328662640000</NextGrowth>
+ <LastGrowth>778355512662640000</LastGrowth>
+ <NextGrowth>780149176662640000</NextGrowth>
 </Colony>
 <Radius>7360782</Radius>
 <ARot>107429</ARot>
@@ -6788,7 +6690,7 @@
  <LastUpdate>741779905284447053</LastUpdate>
  <LastGrowth>770128471665589999</LastGrowth>
  <NextGrowth>787823191665589999</NextGrowth>
- <SeedProgress>82.1403</SeedProgress>
+ <SeedProgress>28.2230</SeedProgress>
 </Colony>
 <Radius>7054311</Radius>
 <ARot>121107</ARot>
@@ -6815,7 +6717,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>767945723671494454</LastGrowth>
  <NextGrowth>792451355671494454</NextGrowth>
- <SeedProgress>140.6074</SeedProgress>
+ <SeedProgress>86.6901</SeedProgress>
 </Colony>
 <Radius>51408843</Radius>
 <ARot>736781</ARot>
@@ -6845,32 +6747,7 @@
  <Visited/></Star>
 <Star ID="1">
 <Seed>4179671</Seed>
-<Name>Stepping Stone</Name>
  <MapPos X="12.59" Y="2.4"/>
- <Owner>Human</Owner>
- <Planets>
-<Planet ID="0">
-<Type>Rocky</Type>
-<PRot>92344906</PRot>
-<Colony>
- <Owner>Human</Owner>
- <LastGrowth>781414653026656256</LastGrowth>
- <NextGrowth>786156285026656256</NextGrowth>
-</Colony>
-<Radius>4605995</Radius>
-<ARot>75297</ARot>
-<Temp>349</Temp>
-<Seed>7852841</Seed>
- <Scanned/>
- <Missions>
- </Missions>
-<Orbit>52982646427</Orbit>
-<TempBase>349.65125171884677</TempBase>
-</Planet>
-<Planet Seed="594443" />
-<Planet Seed="8784395" />
-<Planet Seed="4912932" />
- </Planets>
  <Visited/></Star>
 <Star ID="2">
 <Seed>1237786</Seed>
@@ -6981,19 +6858,17 @@
 <Name>Stepping Stone</Name>
  <MapPos X="10.81" Y="-0.75"/>
  <Owner>Human</Owner>
- <TradeRoute>(1,0)13</TradeRoute>
  <Planets>
 <Planet Seed="5746494" />
 <Planet ID="1">
 <Type>Oceanic</Type>
 <PRot>75483220</PRot>
 <Colony>
- <BaseType>29</BaseType>
+ <BaseType>21</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>764206057838171118</LastUpdate>
- <LastGrowth>780729828366042803</LastGrowth>
- <NextGrowth>798032292366042803</NextGrowth>
- <SeedProgress>18.6591</SeedProgress>
+ <LastGrowth>756242340366042803</LastGrowth>
+ <NextGrowth>780729828366042803</NextGrowth>
 </Colony>
 <Radius>4809226</Radius>
 <ARot>71734</ARot>
@@ -7115,19 +6990,17 @@
 <Name>Chillin</Name>
  <MapPos X="7.75" Y="-3.3"/>
  <Owner>Human</Owner>
- <TradeRoute>(1,0)8</TradeRoute>
  <Planets>
 <Planet Seed="9995696" />
 <Planet ID="1">
 <Type>Oceanic</Type>
 <PRot>67861735</PRot>
 <Colony>
- <BaseType>29</BaseType>
+ <BaseType>21</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>755348902891801048</LastUpdate>
- <LastGrowth>779903782800481048</LastGrowth>
- <NextGrowth>798970534800481048</NextGrowth>
- <SeedProgress>32.4264</SeedProgress>
+ <LastGrowth>766813318800481048</LastGrowth>
+ <NextGrowth>779903782800481048</NextGrowth>
 </Colony>
 <Radius>6070153</Radius>
 <ARot>97231</ARot>
@@ -7152,7 +7025,6 @@
  <MapPos X="8.05" Y="-2.18"/>
  <Owner>Human</Owner>
  <TradeRoute>(0,0)1</TradeRoute>
- <TradeRoute>(1,0)6</TradeRoute>
  <TradeRoute>(1,0)13</TradeRoute>
  <Planets>
 <Planet ID="0">
@@ -7177,11 +7049,10 @@
 <Type>Gas</Type>
 <PRot>26800251</PRot>
 <Colony>
- <BaseType>5</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>769414482558487812</LastUpdate>
- <LastGrowth>781059101642516347</LastGrowth>
- <NextGrowth>797445725642516347</NextGrowth>
+ <LastGrowth>755444093642516347</LastGrowth>
+ <NextGrowth>781059101642516347</NextGrowth>
 </Colony>
 <Radius>46018098</Radius>
 <ARot>675203</ARot>
@@ -7332,7 +7203,7 @@
  <LastUpdate>764016255880660133</LastUpdate>
  <LastGrowth>779395714031062878</LastGrowth>
  <NextGrowth>803919490031062878</NextGrowth>
- <SeedProgress>30.7576</SeedProgress>
+ <SeedProgress>1.8563</SeedProgress>
 </Colony>
 <Radius>7518487</Radius>
 <ARot>111589</ARot>
@@ -7361,7 +7232,6 @@
 <Name>BlueGrey</Name>
  <MapPos X="12.67" Y="-0.38"/>
  <Owner>Human</Owner>
- <TradeRoute>(1,0)5</TradeRoute>
  <TradeRoute>(1,0)8</TradeRoute>
  <Planets>
 <Planet Seed="3874800" />
@@ -7370,12 +7240,12 @@
 <Type>Rocky</Type>
 <PRot>52767153</PRot>
 <Colony>
- <BaseType>27</BaseType>
+ <BaseType>25</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>781219136639576256</LastUpdate>
- <LastGrowth>781038121812218379</LastGrowth>
- <NextGrowth>798245545812218379</NextGrowth>
- <SeedProgress>150.0495</SeedProgress>
+ <LastUpdate>770373764106666221</LastUpdate>
+ <LastGrowth>758104969812218379</LastGrowth>
+ <NextGrowth>781038121812218379</NextGrowth>
+ <SeedProgress>117.7494</SeedProgress>
 </Colony>
 <Radius>6439064</Radius>
 <ARot>107264</ARot>
@@ -7743,21 +7613,7 @@
  <MapPos X="19.32" Y="-0.85"/>
  <Owner>Human</Owner>
  <Planets>
-<Planet ID="0">
-<Type>Gas</Type>
-<PRot>33485312</PRot>
-<Colony>
- <Owner>Human</Owner>
- <LastGrowth>780367936850447286</LastGrowth>
- <NextGrowth>782473504850447286</NextGrowth>
-</Colony>
-<Radius>62985989</Radius>
-<ARot>969814</ARot>
-<Temp>273</Temp>
-<Seed>8976297</Seed>
-<Orbit>46905987232</Orbit>
-<TempBase>273.373736522338</TempBase>
-</Planet>
+<Planet Seed="8976297" />
 <Planet ID="1">
 <Type>Oceanic</Type>
 <PRot>61714391</PRot>
@@ -7767,7 +7623,7 @@
  <LastUpdate>776572310270536254</LastUpdate>
  <LastGrowth>779010077968083562</LastGrowth>
  <NextGrowth>800432093968083562</NextGrowth>
- <SeedProgress>24.6342</SeedProgress>
+ <SeedProgress>186.1110</SeedProgress>
 </Colony>
 <Radius>6698660</Radius>
 <ARot>100522</ARot>
@@ -7825,10 +7681,10 @@
 <Colony>
  <BaseType>11</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>780607688994811908</LastUpdate>
+ <LastUpdate>777876132479810000</LastUpdate>
  <LastGrowth>775930454605124006</LastGrowth>
  <NextGrowth>800026550605124006</NextGrowth>
- <SeedProgress>72.3542</SeedProgress>
+ <SeedProgress>43.4530</SeedProgress>
 </Colony>
 <Radius>5638418</Radius>
 <ARot>68994</ARot>
@@ -7838,22 +7694,7 @@
 <Orbit>55940276268</Orbit>
 <TempBase>232.87336471258925</TempBase>
 </Planet>
-<Planet ID="2">
-<Type>Rocky</Type>
-<PRot>53735853</PRot>
-<Colony>
- <Owner>Human</Owner>
- <LastGrowth>780607799128679173</LastGrowth>
- <NextGrowth>786411287128679173</NextGrowth>
-</Colony>
-<Radius>7648880</Radius>
-<ARot>129530</ARot>
-<Temp>169</Temp>
-<Seed>145486</Seed>
- <Scanned/>
-<Orbit>78543680839</Orbit>
-<TempBase>169.83314912722696</TempBase>
-</Planet>
+<Planet Seed="145486" />
 <Planet ID="3">
 <Type>Gas</Type>
 <PRot>7229843</PRot>
@@ -7996,7 +7837,7 @@
  <LastUpdate>765511462335727484</LastUpdate>
  <LastGrowth>776168034505007484</LastGrowth>
  <NextGrowth>792059586505007484</NextGrowth>
- <SeedProgress>69.1222</SeedProgress>
+ <SeedProgress>40.2210</SeedProgress>
 </Colony>
 <Radius>6330711</Radius>
 <ARot>89765</ARot>
@@ -8186,143 +8027,27 @@
  </Planets>
  <Visited/></Star>
  </Sector>
- <Sector X="1" Y="1" Inhabitant="">
-<Star ID="0">
-<Seed>6719015</Seed>
- <MapPos X="10.6" Y="14.1"/>
-</Star>
-<Star ID="1">
-<Seed>7801799</Seed>
- <MapPos X="6.13" Y="13.16"/>
-</Star>
-<Star ID="2">
-<Seed>1296756</Seed>
- <MapPos X="13.71" Y="12.05"/>
-</Star>
-<Star ID="3">
-<Seed>4946896</Seed>
-<Name>Round The Top</Name>
- <MapPos X="13.7" Y="5.24"/>
- <Visited/></Star>
-<Star ID="4">
-<Seed>6966467</Seed>
- <MapPos X="6.99" Y="13.71"/>
-</Star>
-<Star ID="5">
-<Seed>9802654</Seed>
- <MapPos X="12.65" Y="13.42"/>
-</Star>
-<Star ID="6">
-<Seed>4484779</Seed>
- <MapPos X="11.45" Y="10.65"/>
-</Star>
-<Star ID="7">
-<Seed>5806898</Seed>
- <MapPos X="9.28" Y="7.06"/>
-</Star>
-<Star ID="8">
-<Seed>2264125</Seed>
- <MapPos X="7.97" Y="9.4"/>
-</Star>
-<Star ID="9">
-<Seed>1335870</Seed>
- <MapPos X="8.92" Y="13.49"/>
-</Star>
-<Star ID="10">
-<Seed>9557286</Seed>
- <MapPos X="14.65" Y="9.77"/>
-</Star>
-<Star ID="11">
-<Seed>1845513</Seed>
- <MapPos X="8.06" Y="5.86"/>
-</Star>
-<Star ID="12">
-<Seed>7600244</Seed>
- <MapPos X="5.53" Y="8.35"/>
-</Star>
-<Star ID="13">
-<Seed>5399998</Seed>
- <MapPos X="11.42" Y="13.11"/>
-</Star>
- </Sector>
- <Sector X="2" Y="1" Inhabitant="">
-<Star ID="0">
-<Seed>670093</Seed>
- <MapPos X="23.69" Y="14.22"/>
-</Star>
-<Star ID="1">
-<Seed>7086537</Seed>
- <MapPos X="22.23" Y="5.78"/>
-</Star>
-<Star ID="2">
-<Seed>8238539</Seed>
- <MapPos X="20.6" Y="5.46"/>
-</Star>
-<Star ID="3">
-<Seed>6890378</Seed>
- <MapPos X="19.05" Y="9.31"/>
-</Star>
-<Star ID="4">
-<Seed>7556769</Seed>
- <MapPos X="15.66" Y="12.47"/>
-</Star>
-<Star ID="5">
-<Seed>5463601</Seed>
- <MapPos X="23.17" Y="9.68"/>
-</Star>
-<Star ID="6">
-<Seed>8007317</Seed>
- <MapPos X="16.57" Y="14.49"/>
-</Star>
-<Star ID="7">
-<Seed>6304485</Seed>
- <MapPos X="21.4" Y="10.5"/>
-</Star>
-<Star ID="8">
-<Seed>3019552</Seed>
- <MapPos X="17.6" Y="11.23"/>
-</Star>
-<Star ID="9">
-<Seed>6908884</Seed>
- <MapPos X="21.08" Y="13.54"/>
-</Star>
-<Star ID="10">
-<Seed>5048528</Seed>
- <MapPos X="17.2" Y="6.03"/>
- <Visited/></Star>
-<Star ID="11">
-<Seed>9056765</Seed>
- <MapPos X="24.52" Y="8.16"/>
-</Star>
-<Star ID="12">
-<Seed>1383571</Seed>
- <MapPos X="23.16" Y="12.52"/>
-</Star>
-<Star ID="13">
-<Seed>8021805</Seed>
- <MapPos X="18.25" Y="6.84"/>
-</Star>
- </Sector>
 </Map>
 <Team>
- <Pos>(2,1)10.5</Pos>
- <Cash>16467.461975020327</Cash>
+ <Pos>(2,0)12.SH</Pos>
+ <Cash>10239.654221151093</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="7" Y="37"/>
+ <OnMission/>
+ <Location X="17" Y="19"/>
  <Health>54</Health>
- <Stamina>43</Stamina>
+ <Stamina>33</Stamina>
  <Shields>0</Shields>
- <Facing>234.46232220802563</Facing>
+ <Facing>-90</Facing>
  <Level>13</Level>
- <XP>1000869</XP>
+ <XP>919027</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,14,12,20</Stats>
  <Colour>#0032FF</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem"/>
+<Equipment Type="Nannite Medsystem" Recharge="1"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
@@ -8348,21 +8073,23 @@
   <Exp Skill="Perception">10</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>678</KillCount>
+ <Moved/>
+ <KillCount>612</KillCount>
  <ToughestKill>
-<Creature Type="Shadow Alpha">
- <Level>11</Level>
+<Creature Type="Crystal Assassin">
+ <Level>13</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="24" Y="14"/>
+ <OnMission/>
+ <Location X="17" Y="20"/>
  <Health>69</Health>
- <Stamina>40</Stamina>
- <Shields>12.5</Shields>
- <Facing>0</Facing>
+ <Stamina>20.10230607966457</Stamina>
+ <Shields>0</Shields>
+ <Facing>-90</Facing>
  <Level>13</Level>
- <XP>891670</XP>
+ <XP>851252</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,11,17,17</Stats>
@@ -8370,10 +8097,28 @@
  <Colour>#FFE600</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem" Recharge="1"/>
+<Equipment Type="Nannite Medsystem" Recharge="2"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="3">
-<Equipment Type="Incendiary Grenade"/>
+<Weapon Type="Laser Pistol" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Plasma Rifle" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Powerblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Sniper Rifle" Level="0" />
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -8386,28 +8131,30 @@
 <Weapon Type="Arc Rifle" Level="2" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">2275</Exp>
+  <Exp Type="Shotgun">2191</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Armoursmith">9</Exp>
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>445</KillCount>
+ <Moved/>
+ <KillCount>418</KillCount>
  <ToughestKill>
-<Creature Type="Water Elemental">
+<Creature Type="Xenomorph Scythebeast">
  <Level>13</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="17" Y="39"/>
- <Health>48.14277113576743</Health>
- <Stamina>32</Stamina>
+ <OnMission/>
+ <Location X="17" Y="23"/>
+ <Health>57</Health>
+ <Stamina>23.111111111111114</Stamina>
  <Shields>0</Shields>
  <Facing>-90</Facing>
  <Level>13</Level>
- <XP>953771</XP>
+ <XP>884546</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,16,13,9</Stats>
@@ -8417,8 +8164,29 @@
   <Inv Count="1">
 <Equipment Type="Nannite Medsystem"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="3">
 <Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="6">
+<Weapon Type="Laser Pistol" Level="0" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Power Axe" Level="0" />
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Heavy Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Plasma Rifle" Level="0" />
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Powerblade" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Laser Sniper Rifle" Level="0" />
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -8437,21 +8205,23 @@
   <Exp Skill="Scavenging">10</Exp>
   <Exp Skill="Engineer">2</Exp>
  </UtilityExperience>
- <KillCount>378</KillCount>
+ <Moved/>
+ <KillCount>345</KillCount>
  <ToughestKill>
-<Creature Type="Shadow Dragon">
+<Creature Type="Shadow Alpha">
  <Level>11</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="8" Y="39"/>
+ <OnMission/>
+ <Location X="18" Y="18"/>
  <Health>54</Health>
- <Stamina>39</Stamina>
+ <Stamina>1</Stamina>
  <Shields>0</Shields>
- <Facing>236.30993247402023</Facing>
+ <Facing>90</Facing>
  <Level>13</Level>
- <XP>994445</XP>
+ <XP>912603</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,24,12,16</Stats>
@@ -8459,7 +8229,7 @@
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Nannite Medsystem"/>
+<Equipment Type="Nannite Medsystem" Recharge="1"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Acid Grenade"/>
@@ -8473,28 +8243,29 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">2174</Exp>
+  <Exp Type="Sniper">2097</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">10</Exp>
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>279</KillCount>
+ <Moved/>
+ <KillCount>253</KillCount>
  <ToughestKill>
-<Creature Type="Air Elemental">
+<Creature Type="Crystal Soldier">
  <Level>13</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
- <Location X="46" Y="38"/>
- <Health>15.035355638692621</Health>
- <Stamina>14.399999999999986</Stamina>
+ <Location X="25" Y="33"/>
+ <Health>22.68304590179774</Health>
+ <Stamina>37</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
+ <Facing>360</Facing>
  <Level>12</Level>
- <XP>583944</XP>
+ <XP>529903</XP>
  <Gender>Male</Gender>
  <Race>Elithiri</Race>
  <Stats>18,11,5,13,15</Stats>
@@ -8515,7 +8286,7 @@
 <Weapon Type="Exo Spear" Level="2" Mod="Nanofine Blade" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">1622</Exp>
+  <Exp Type="Melee">1521</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -8524,11 +8295,10 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">1</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>110</KillCount>
+ <KillCount>80</KillCount>
  <ToughestKill>
-<Creature Type="Shadow Beast">
- <Level>11</Level>
+<Creature Type="Water Mephit">
+ <Level>13</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
@@ -8561,7 +8331,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="32218"/>
+  <Relation Race="Human" Value="29984"/>
   <Relation Race="Ursalon" Value="6395"/>
   <Relation Race="Grey" Value="6194"/>
   <Relation Race="Ogrish" Value="2628"/>
@@ -8570,22 +8340,22 @@
   <Relation Race="Elithiri" Value="6727"/>
  </Relations>
  <Inventory>
-  <Inv Count="10">
+  <Inv Count="16">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="2">
 <Material Type="Silicates"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="14">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="17">
 <Material Type="Carbon Fibre"/>
   </Inv>
   <Inv Count="11">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="17">
 <Material Type="Rubber"/>
   </Inv>
   <Inv Count="6">
@@ -8594,7 +8364,7 @@
   <Inv Count="15">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="15">
 <Material Type="Chitin"/>
   </Inv>
   <Inv Count="10">
@@ -8603,7 +8373,7 @@
   <Inv Count="15">
 <Material Type="Heavy Chitin"/>
   </Inv>
-  <Inv Count="16">
+  <Inv Count="15">
 <Material Type="Carbon"/>
   </Inv>
   <Inv Count="7">
@@ -8624,7 +8394,7 @@
   <Inv Count="18">
 <Material Type="Nanosilk"/>
   </Inv>
-  <Inv Count="42">
+  <Inv Count="20">
 <Material Type="Shadowskin"/>
   </Inv>
   <Inv Count="12">
@@ -8645,10 +8415,10 @@
   <Inv Count="10">
 <Material Type="Mithril"/>
   </Inv>
-  <Inv Count="20">
+  <Inv Count="15">
 <Material Type="Xenolite"/>
   </Inv>
-  <Inv Count="14">
+  <Inv Count="11">
 <Equipment Type="Stimulant"/>
   </Inv>
   <Inv Count="2">
@@ -8657,7 +8427,7 @@
   <Inv Count="1">
 <Weapon Type="Quad Shotgun" Level="4" />
   </Inv>
-  <Inv Count="15">
+  <Inv Count="18">
 <Equipment Type="Adrenaline"/>
   </Inv>
   <Inv Count="7">
@@ -8675,17 +8445,1507 @@
   <Inv Count="1">
 <Armour Type="Shock Armour" Material="Metasteel" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<MissionItem Mass="12.00" Name="SpaceHulk Core" Level="12"><Hulk/></MissionItem>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Plate Boots" Material="Nanomesh" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Acid Grenade"/>
-  </Inv>
  </Inventory>
- <SpaceHulkCoreCount>4</SpaceHulkCoreCount>
+<Mission>
+ <Type>SpaceHulk</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="12.00" Name="SpaceHulk Core" Level="12"><Hulk/></MissionItem>
+<Ship Seed="260967833" Diff="12">
+ <Name>Abandoned Hulk</Name>
+ <Hull>84</Hull>
+ <Shield>0</Shield>
+ <Seed>829367</Seed>
+</Ship>
+ <Enemy>Mechanoids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>12</Diff>
+ <LevelCount>4</LevelCount>
+ <CurrentLevel>3</CurrentLevel>
+ <Seed>1751175774</Seed>
+ <Size>3</Size>
+ <Turn>217</Turn>
+ <Level ID="0">
+<MissionLevel Width="205" Height="93">
+ <Diff>11</Diff>
+ <Level>0</Level>
+ <Start X="143" Y="28"/>
+ <End X="43" Y="52"/>
+ <Map>DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBABBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBBBBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBBBGGBBAAABBBBBBBBBBBBBBBBBBBBBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABBBGGBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABBBGGBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAAFAAAAAABAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAFAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAAFAAAAAABAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAHAAAAAAAAAAAAAAAAAAAAAABAAAFAAAAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAFAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAHAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAFAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAAAAAFAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABBBBBBBBBBBGGBBBBBBBBBBBAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAABBBBBBAABDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAFAAAAAAAAAAAAAABBBBBBBBBBBBBBAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBGGBBAAABAAAAAAAAAAAAABAAAAAAAAAAAAAABBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBAAABAAAAAAAAAAAAAFAAABBBBBBGGBAABDDDDDDDDDDDDBAABAAAAAAABAABBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAHAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAHAAABAAAAAAAAAAAAABAAABBBBBBBBBAAABGGBBBAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBAAABBBBBBBBBBBBGGBAAABAAAAAAABAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABBBBBBBBBBBBBBBAAABAAAAAAABAABDDDDDDDDDDDDBAABBBBBIIBBAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAHAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDBAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAHAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDBAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAABAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDBAAAAAAAAAAAAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBAAABBBBBBBBBBGGBBBAAABAAAAAAABAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABBBBBBBBBBBBBBBAAABAAAAAAABAABDDDDDDDDDDDDBAABIIBBBBBBAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAAABAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAABBBBBBBBBAAABGGBBBAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAABAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDBAABAAAAAAABAAABEEEEEEEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBIIBBBBAAABAAAAAAAAAAAAABAAAAAAAAAAAAAABBBBBBBBAABBBBBBBBBBBBBGGBBBBBBBBBAAABAAAAAAAAAAAAABAAABBBBGGBBBAABDDDDDDDDDDDDBAABAAAAAAABAABBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAABGGBBBAABDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAAAAAAAAAABBBBBBBBBBBBBBAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBAABAAAAAAAAAAAAABAAAAAAFAAAABAABDDDDDDBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAFAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABBBBBBBBBBBBBBBBGGBBBBBBAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAHAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAHAAAHAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAHAAABAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAABBBGGBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAABBBIIBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAAHAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAAHAAABAAAAAAAAAAAAAAAAAAAAAABAABBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAFAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAABAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBGGBBBBBBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAABBBBBBBBBBBBBBBAAABBBBBBBBBBBBBBIIBBBBBBBBAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBABBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBEBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBBBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</Map>
+ <Explored>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001110000000000000111000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111000000000000011110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111100000000000001111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111100000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111100000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111000011110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111100001111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111110000111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111000011110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111100001111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111110000111100000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111000011110000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000000000011111111111111110000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000001111111111111111000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000000000011111111111111110000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111000011111111111111111111111111111111111111111111111111111111111110000000000001111011111111111000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111100001111111111111111111111111111111111111111111111111111111111111000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111110000111111111111111111111111111111111111111111111111111111111111100000000000011111111111111110000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111000011111111111111111111111111111111111111111111111111111111111110000000000001111111111111111000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111100001111111111111111111111111111111111111111111111111111111111111000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111110000111111111111111111111111111111111111111111111111111111111111100000000000011111111111111110000000000000000000000000000000000000000000000000000000000000000001111111111111111000000001111111111111111111111000011111111111111111111111111111111111111111111111111111111111110000000000001111111111111111000000000000000000000000000000000000000000000000000000000000000000111111111111111100000001111101111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000011111111111111110000001111110111111111111111111111111111111111111111111111111111111111111111111111111111111111100000000000011111111111111110000000000000000000000000000000000000000000000000000000000000000001111111111111111000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000001111111111111111000000000000000000000000000000000000000000000000000000000000000000111111111111111100001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000111111111111111100000000000000000000000000000000000000000000000000000000000000000011111111111111110001111111111111111111111111100000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000001111111111111111001111111111111111111000011110000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000111111111111111101111111111111111111100001111000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111110000111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111000011110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111100001111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111110000111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111000011110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111100001111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111110000111100000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111000011110000000000000000000000000000000001111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111100001111000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111100000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111100000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011110000000000000111100000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111000000000000011110000000000000000000000000000000000000000000001111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111100000000000001111000000000000000000000000000000000000000000000111111111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Mechanoid Trooper">
+ <Level>12</Level>
+ <Location X="50" Y="66"/>
+ <Facing>330</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>10</Level>
+ <Location X="51" Y="60"/>
+ <Facing>319</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="76" Y="45"/>
+ <Facing>205</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="51" Y="34"/>
+ <Facing>299</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="55" Y="67"/>
+ <Facing>344</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="48" Y="68"/>
+ <Facing>260</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>10</Level>
+ <Location X="110" Y="27"/>
+ <Facing>243</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="51" Y="41"/>
+ <Facing>290</Facing>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="165" Y="37"/>
+ <Facing>238</Facing>
+ <Weapon>Heavy Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="134" Y="44"/>
+ <Facing>160</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>12</Level>
+ <Location X="58" Y="66"/>
+ <Facing>35</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>10</Level>
+ <Location X="113" Y="27"/>
+ <Facing>87</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>11</Level>
+ <Location X="70" Y="58"/>
+ <Facing>347</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="48" Y="42"/>
+ <Facing>239</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="104" Y="48"/>
+ <Facing>170</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>10</Level>
+ <Location X="54" Y="34"/>
+ <Facing>143</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="139" Y="20"/>
+ <Facing>305</Facing>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="109" Y="28"/>
+ <Facing>208</Facing>
+ <Weapon>Heavy Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="49" Y="38"/>
+ <Facing>175</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="165" Y="31"/>
+ <Facing>40</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="44" Y="72"/>
+ <Facing>120</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="136" Y="47"/>
+ <Facing>275</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="46" Y="66"/>
+ <Facing>298</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="115" Y="33"/>
+ <Facing>302</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="112" Y="32"/>
+ <Facing>305</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>10</Level>
+ <Location X="139" Y="57"/>
+ <Facing>211</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="124" Y="26"/>
+ <Facing>203</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="54" Y="57"/>
+ <Facing>64</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="121" Y="24"/>
+ <Facing>53</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="152" Y="20"/>
+ <Facing>230</Facing>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>11</Level>
+ <Location X="48" Y="67"/>
+ <Facing>107</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="53" Y="28"/>
+ <Facing>116</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="49" Y="37"/>
+ <Facing>22</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="132" Y="48"/>
+ <Facing>36</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="54" Y="30"/>
+ <Facing>250</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="57" Y="36"/>
+ <Facing>293</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="130" Y="66"/>
+ <Facing>256</Facing>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>11</Level>
+ <Location X="44" Y="27"/>
+ <Facing>70</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>10</Level>
+ <Location X="115" Y="25"/>
+ <Facing>157</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>11</Level>
+ <Location X="67" Y="56"/>
+ <Facing>196</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>12</Level>
+ <Location X="55" Y="63"/>
+ <Facing>91</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="102" Y="42"/>
+ <Facing>315</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="91" Y="51"/>
+ <Facing>344</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="58" Y="68"/>
+ <Facing>341</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="131" Y="43"/>
+ <Facing>162</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="110" Y="21"/>
+ <Facing>44</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="91" Y="56"/>
+ <Facing>30</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="56" Y="26"/>
+ <Facing>14</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="47" Y="32"/>
+ <Facing>320</Facing>
+ <Weapon>Heavy Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>10</Level>
+ <Location X="61" Y="30"/>
+ <Facing>127</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>10</Level>
+ <Location X="46" Y="39"/>
+ <Facing>124</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="88" Y="52"/>
+ <Facing>293</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="121" Y="21"/>
+ <Facing>313</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="60" Y="71"/>
+ <Facing>96</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="112" Y="28"/>
+ <Facing>52</Facing>
+ <Weapon>Powerblade</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="60" Y="72"/>
+ <Facing>249</Facing>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="56" Y="50"/>
+ <Facing>180</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>10</Level>
+ <Location X="57" Y="27"/>
+ <Facing>355</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="49" Y="67"/>
+ <Facing>295</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>11</Level>
+ <Location X="134" Y="60"/>
+ <Facing>90</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="60" Y="74"/>
+ <Facing>196</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="103" Y="56"/>
+ <Facing>127</Facing>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="54" Y="50"/>
+ <Facing>73</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Ranger">
+ <Level>10</Level>
+ <Location X="102" Y="56"/>
+ <Facing>299</Facing>
+ <Weapon>Laser Sniper Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="49" Y="44"/>
+ <Facing>14</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="147" Y="26">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="147" Y="25">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="149" Y="24">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="150" Y="27">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="150" Y="31">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="151" Y="30">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="138" Y="23">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="136" Y="29">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="131" Y="24">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="130" Y="26">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="134" Y="27">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="128" Y="33">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="37">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="26">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="41">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="136" Y="37">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="125" Y="39">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="120" Y="40">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="60">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="127" Y="58">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="125" Y="66">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="119" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="131" Y="74">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="120" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="119" Y="66">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="120" Y="61">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="114" Y="63">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="118" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="119" Y="64">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="145" Y="74">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="152" Y="73">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="153" Y="74">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="143" Y="72">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="142" Y="64">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="144" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="139" Y="68">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="144" Y="72">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="145" Y="71">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="143" Y="70">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="143" Y="71">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="144" Y="64">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="153" Y="61">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="153" Y="57">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="154" Y="65">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="154" Y="62">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="156" Y="60">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="158" Y="60">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="157" Y="60">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="157" Y="53">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="159" Y="58">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="157" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="159" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="155" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="161" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="163" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="165" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="166" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="161" Y="45">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="162" Y="38">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Laser Pistol" Level="0" />
+</StashItem>
+</Stash>
+<Stash X="165" Y="51">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="161" Y="44">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="162" Y="45">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="154" Y="41">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="155" Y="44">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="125" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="155" Y="36">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="155" Y="33">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="157" Y="30">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="128" Y="40">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="113" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="86" Y="39">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="82" Y="45">
+<StashItem N="2">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="81" Y="41">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="80" Y="42">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="80" Y="52">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="85" Y="41">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="86" Y="43">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="87" Y="42">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="93" Y="42">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="72" Y="43">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="72" Y="44">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="64" Y="39">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="66" Y="41">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="72" Y="46">
+<StashItem N="3">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="66" Y="40">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="68" Y="40">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="65" Y="42">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="71" Y="47">
+<StashItem N="2">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="73" Y="51">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="72" Y="50">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="62" Y="43">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="70" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="64" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="55" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="72" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Plasma Rifle" Level="0" />
+</StashItem>
+</Stash>
+<Stash X="62" Y="58">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="10"/>
+</StashItem>
+</Stash>
+<Stash X="58" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="48" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="46" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="38" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="37" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="41" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="37" Y="48">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="35" Y="47">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="36" Y="46">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="31" Y="49">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="42" Y="55">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="42" Y="56">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="37" Y="53">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="44" Y="38">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="43" Y="38">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="40" Y="42">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="10"/>
+</StashItem>
+</Stash>
+</Stashes>
+</MissionLevel>
+ </Level>
+ <Level ID="1">
+<MissionLevel Width="39" Height="47">
+ <Diff>12</Diff>
+ <Level>1</Level>
+ <Start X="25" Y="40"/>
+ <End X="8" Y="5"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBAAAABBBAAAAABBBBBBBBBBBBBBBAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAABBAAABBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAABBAAABBBBAABBBAAAABBBAAAAABBAAABBBBBAAABBAAABBBBAABBBAAAABBBAAAAABBAAABBBBBAAABBAAABBBBAABBBBAAABBBBBBBBBBAAABBBBBAAABBAAABAAAAAAAAAAAAAAAAAAAABBAAAAAAABAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAABBAAABAAABAAABAAAAAAAAAAAABBAAAAAAABBBBBBAAABAAABAAABAAAAAAAAAAAABBAAAAAAABBBBBBAAABAAABAAABAAAAAAAAAAAABBAAAAAAABBBBBBAAABAAABAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBAAABAAABAAAAAAAAAAAAAAAABBBBAAAAAAABBBBAAABAAABAAAAAAAAAAAAAAAABBBBAAAAAAABBBBAAABAAABAAABBBBBAAABBBBBBBBBAAAAAAABBBBAAABAAABAAABBBBBAAABBBBBBBBBAAAAAAABBBBAAAAAAABAAAAAABBAAAAAAAABBBBAAAAAAABBBBAAAAAAABAAAAAABBAAAAAAAABBBBAAAAAAABBBBAAAAAAABAAAAAABBAAAAAAAABBBBAAAAAAABBBBAAAAAAAAAAAAAABBAAAAAAAABBBBAAAAAAABBBBAAAAAAAAAAAAAABBAAAAAAAABBBBBBAAABBBBBBAAAAAAAAAAAAAABBAAAAAAAABBBBBBAAABBBBBBAAAAAAABAAABBBBBAAAAAAAABBBBBBAAABBBBBBAAAAAAABAAABBBBBAAAAAAAABBBBBBAAAAAAABBAAAAAAABAAABBBBBAAAAAAAABBBBBBAAAAAAABBAAABBBBBAAABBBBBAAAAAAAABBBBBBAAAAAAABBAAABBBBBAAABBBBBBBAAABBBBBBBBBBBBBAAABBAAABBBBBAAABBBBBBBAAABBBBAAAAAAAABAAABBAAABBBBBAAAAAAAAAAAAAAAAAAAAAAAAABAAABBAAABBBBBAAAAAAAAAAAAAAAAAAAAAAAAABAAABBAAABBBBBBBBAAAAAAAAAAAAAAAAAAAAAABAAABBAAAAAAAABBBBAAABBAAABBBBBAAAAAAAABAAABBAAAAAAAABBBBAAAAAAAAABBBBAAAAAAAABAAABBAAAAAAAABBBBAAAAAAAAABBBBAAAAAAAABAAABBAAAAAAAAAAAAAAAAAAAAABBBBAAAAAAAABAAABBAAAAAAAAAAAAAAAAAAAAABBBBBBAAAAABBAAABBAAAAAAAAAAAAAAAAAAAAAHAAAABBBAAABBAAABBAAAAAAAABBBBAAAAAAAAAHAAAABBBAAABBAAABBAAAAAAAABBBBAAAAAAAAABBBBBBBBAAABBAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>000000000000111111000000000000000000000000000000000111111110000000000000000000000000000000111111110000000000000000000000000000000111111100000000000000000000000000011110111111000000000000000000000000000011110111111000000000001100000000000000011110111111000000000011100000000000011111111111111111111111111111110000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111011111111111111111111111000011110000110011111111111111111111111000000000000100011111111111111111111111000000000000000011111111111111111111110000000000000000011111111111111111111110000000000000000011111111111111111111110000000000000000011111111111111111111110000000000000000011111111100111111111110000000000000000011111111110111111111110000000000000000011111111111111111111110000000000000000111111111111111111111110000000000000000111101111111111111111110000000000000000111111111111111111111110000000000000001111111111111111111111110000000000000001111111111100011111111110000000000000001111111111100011111111110000000000000011111111111100011111111110000000000000011110001111100011111111111111111110000111110001111111111111111111111111110000111110001111111111111111111111111110000111110001111111111111111111111111110000111111111111111111111111111111111110000111111111101111111111111111111111110000111111111100111111111110011111111110000111111111111111111111110011111111110000111111111111111111111110011111111110000111111111111111111111111111111111110000111111111111111111111111111111111110000111111111111111111111111111101111110000111111111100111111111111111100011110000111111111100111111111110000000001100000000000000000000000000000000000001110000000000000000000000000000000000000111000000000000000000000000000000000000111000</Explored>
+<Creatures>
+<Creature Type="Mechanoid Heavy">
+ <Level>12</Level>
+ <Location X="4" Y="22"/>
+ <Facing>62</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>12</Level>
+ <Location X="31" Y="11"/>
+ <Facing>215</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>12</Level>
+ <Location X="32" Y="9"/>
+ <Facing>97</Facing>
+ <Weapon>Heavy Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="34" Y="22"/>
+ <Facing>304</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>12</Level>
+ <Location X="1" Y="27"/>
+ <Facing>263</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="32" Y="26"/>
+ <Facing>180</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>13</Level>
+ <Location X="33" Y="29"/>
+ <Facing>108</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>13</Level>
+ <Location X="33" Y="44"/>
+ <Facing>244</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>11</Level>
+ <Location X="32" Y="3"/>
+ <Facing>259</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>13</Level>
+ <Location X="35" Y="32"/>
+ <Facing>223</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>12</Level>
+ <Location X="30" Y="44"/>
+ <Facing>40</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="31" Y="20"/>
+ <Facing>153</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="35" Y="3"/>
+ <Facing>103</Facing>
+</Creature>
+<Creature Type="Mechanoid Elite">
+ <Level>12</Level>
+ <Location X="2" Y="25"/>
+ <Facing>145</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="30" Y="11"/>
+ <Facing>27</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="7" Y="27"/>
+ <Facing>312</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="33" Y="27"/>
+ <Facing>161</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="32" Y="16"/>
+ <Facing>89</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>13</Level>
+ <Location X="35" Y="43"/>
+ <Facing>107</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>12</Level>
+ <Location X="3" Y="25"/>
+ <Facing>333</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>11</Level>
+ <Location X="36" Y="2"/>
+ <Facing>138</Facing>
+</Creature>
+<Creature Type="Mechanoid Heavy">
+ <Level>11</Level>
+ <Location X="27" Y="11"/>
+ <Facing>183</Facing>
+ <Weapon>Heavy Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="30" Y="16"/>
+ <Facing>73</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>12</Level>
+ <Location X="34" Y="43"/>
+ <Facing>279</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="32" Y="24"/>
+ <Facing>234</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="32" Y="24">
+<StashItem N="1">
+<Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="18" Y="34">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="20" Y="34">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="17" Y="32">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="20" Y="33">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="13" Y="35">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="11" Y="32">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="8" Y="38">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="9" Y="39">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="15" Y="40">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="26" Y="34">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="27" Y="35">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="12" Y="15">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="11" Y="15">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="11" Y="16">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="5" Y="8">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="12" Y="8">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="15" Y="5">
+<StashItem N="2">
+<Corpse Type="Mechanoid Heavy" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="13" Y="8">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="2" Y="13" L="12">
+<Hidden/>
+</Trap>
+<Trap X="15" Y="38" L="11">
+</Trap>
+<Trap X="15" Y="32" L="11">
+<Type>Electrical</Type>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+ <Level ID="2">
+<MissionLevel Width="43" Height="37">
+ <Diff>12</Diff>
+ <Level>2</Level>
+ <Start X="37" Y="20"/>
+ <End X="4" Y="26"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBAAABBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBAAAAAAAAABBBBBBBBBBBBAAAAAAAAABAAAAAAAAABBBAAAAAAAAABBBBAAAAAABBAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABBBBAAAAAABBAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABBBBAAAAAABBAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABBBBAAAAAAAAAAAAAAAAABAAAAAAAAAAABAAAAAAAAABBBBAAAAAAAAAAAAAAAAABAAAAAAABAAABBBBBBIIBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBAAABBBBBBAABBBBBBBBIIBBBBAAABBBBBBBBBBBBBBBAAABBBBBBAABBBBBBBBAABBBBAAABBBBBBBBBBBBBBBAAAAAAAAAAABBBBBBBBAABBBBAAABBBBBBBBBBBBBBBAAAAAAAAAAABBBBBBBBAABBBBAAABBBBBBBBBBBBBBBIIBBBBBIIBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAABBBBAAAAAAAAABBBBAAAAAAAAAAAAAABBBBBBBBBBAABBBBAAAAAAAAABBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBAAAAAAAAABBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBAAAAAAAAABBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>0000000000000000000000111111111111111111100000000000000000000000011111111111111111110000000000000000000000001111111111111111111000000000000000000000000111111111111111111100000000000000000000000000000000111111111110000000000000000000000000000000011111111111000000000000000000000000000000001111111111100000000000000000000000000000000111111111110000000000000000000000000000000011111111111100000000000000000000000000000000111111111110000000000000000000011111111111011111111111000000000011111111111111111111101111111111100111111111111111111111111111111111111111110011111111111111111111111111111111111111111001111111111111111111111111111111111111111100111111111111111111111111111111111111111110011111111111111111111111111111111111111111001111111111111111111111111111111111111111100111111111111111111111111111111100001111000011111111111111111110000000111111111111100000011110011111000000000000011111111111110000001111001111100000000000001111111111111000000111111111111111111111111111111111111100000011111111111111111111111111111111111000000001111111111111111111111111111111111100000000111111111111111111111111111111111110000000011111111111111111111111111111111111000000001111001111111111100111111111111111100000000111100111111111110001111111111111110000000000000011111111111000111111111111111000000000000001111111111100011111111111111100000000000000000000000000001111111111111110000000000000000000000000000000011111111111000000000000000000000000000000000011111110000000000000000000000000000000000001111111000000000000000000000000000000000000111110000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Mechanoid Heavy">
+ <Level>12</Level>
+ <Location X="26" Y="3"/>
+ <Facing>210</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="23" Y="4"/>
+ <Facing>159</Facing>
+</Creature>
+<Creature Type="Mechanoid Drone">
+ <Level>12</Level>
+ <Location X="25" Y="3"/>
+ <Facing>22</Facing>
+</Creature>
+<Creature Type="Mechanoid Slasher">
+ <Level>12</Level>
+ <Location X="26" Y="8"/>
+ <Facing>256</Facing>
+</Creature>
+<Creature Type="Mechanoid Trooper">
+ <Level>11</Level>
+ <Location X="28" Y="3"/>
+ <Facing>226</Facing>
+ <Weapon>Plasma Rifle</Weapon>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="24" Y="3">
+<StashItem N="1">
+<Armour Type="Military Helmet" Material="Steel" Level="2"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="38" Y="12">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="35" Y="22">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="30" Y="26">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="32" Y="23">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="31" Y="28">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+<StashItem N="1">
+<Weapon Type="Plasma Rifle" Level="0" />
+</StashItem>
+</Stash>
+<Stash X="16" Y="26">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="12" Y="27">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="21" Y="23">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="13"/>
+</StashItem>
+</Stash>
+<Stash X="22" Y="24">
+<StashItem N="1">
+<Corpse Type="Mechanoid Slasher" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="15" Y="23">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="5" Y="25">
+<StashItem N="1">
+<Corpse Type="Mechanoid Trooper" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="4" Y="22">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="8" Y="16">
+<StashItem N="1">
+<Corpse Type="Mechanoid Ranger" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="12" Y="18">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="10" Y="18">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="12" Y="17">
+<StashItem N="1">
+<Corpse Type="Mechanoid Drone" Level="12"/>
+</StashItem>
+</Stash>
+<Stash X="9" Y="17">
+<StashItem N="1">
+<Corpse Type="Mechanoid Elite" Level="11"/>
+</StashItem>
+</Stash>
+<Stash X="2" Y="13">
+<StashItem N="1">
+<Corpse Type="Mechanoid Heavy" Level="13"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="33" Y="31" L="12">
+<Hidden/>
+</Trap>
+<Trap X="28" Y="7" L="11">
+<Hidden/>
+<Type>Fire</Type>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+ <Level ID="3">
+<MissionLevel Width="35" Height="38">
+ <Diff>13</Diff>
+ <Level>3</Level>
+ <Start X="17" Y="24"/>
+ <End X="-1" Y="-1"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBAAAABAAABBBBBBBBBBBBBBBBBBBBBBBBBBBAAAABAAABBBBBBBBBBBBAAAAAAAAAABBBBBAAAABAAABBBBBBBBBBBBAAAAAAAAAABBBBBBBBBBAAABBBBBBBBBBBBAAAAAAAAAABBBBBBAAAAAAABBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBAAAFAAAAAAAAAABBBBBBBBAAAAABBBBBBBBAAAFAAAAAAAAAABBBBBBBBBBAAABBBBBBBBAAABAAAAAAAAAABBBBBBBBBBAAABBBBAAAAAAABAAAAAAAAAABBBBBAAAAAAAABBBBAAAAAAABBBBBBBBAAABBBBBAAAAAAAABBBBAAAAAAABBBBBBBBAAABBBBBAAAAAAAABBBBAAAAAAABBBBBBBBAAAAAAAAAAAAAAAABBBBAAAAAAABBBBBBBBAAAAAAAAAAAAAAAABBBBBBBBAAABBBBBBBBAAAAAAAAAAAAAAAABBBBBBBAAAABBBBBBBBAAAAABBBAAAAAAAABBBBBBBAAAABBBBBBBBAABAABBBAAAAAAAABBBBBBBAAAABBBBBBBBAABAABBBBBBBBBBBBBBBBBBAAAABBBBBBBBAABAABBBBBBBBBBBBBBBBBBAAAABBBBBBBBAABGGBBBBBBBBBBBBBBBBBBBAAABBBBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBAAAAABBBBBBBBBBBBBBBAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111000000000000000000000001111111111110000000000000000000000011111111111100000000000000000000000111111111111100000000000000000000001111111111111000000000000000000000011111111111110000000000000000000000111111111111000000000000000000000001111111111110000000000000000000000011111111111100000000001110000000000111111111111000000011111100000000001111111111110000000111111000000000001111111111100000111111110000000000000000011111111111111111100000000000000000111111111111111111000000000000000001111111111111111110000000000000000011111111111111111100000000000000000111111111111111111000000000000000001111111000011111110000000000000000011111110000011111100000000000000000111111100000000000000000000000000001111111000000000000000000000000000011110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Xenomorph Spawn">
+ <Level>13</Level>
+ <Location X="32" Y="20"/>
+ <Facing>342</Facing>
+</Creature>
+<Creature Type="Acid Beetle">
+ <Level>13</Level>
+ <Location X="23" Y="27"/>
+ <Facing>81</Facing>
+</Creature>
+<Creature Type="Xenomorph Slasher">
+ <Level>13</Level>
+ <Location X="6" Y="31"/>
+ <Facing>16</Facing>
+</Creature>
+<Creature Type="Xenomorph Spawn">
+ <Level>13</Level>
+ <Location X="5" Y="28"/>
+ <Facing>88</Facing>
+</Creature>
+<Creature Type="Acid Beetle">
+ <Level>13</Level>
+ <Location X="32" Y="19"/>
+ <Facing>188</Facing>
+</Creature>
+<Creature Type="Xenomorph Spawn">
+ <Level>13</Level>
+ <Location X="10" Y="11"/>
+ <Facing>226</Facing>
+</Creature>
+<Creature Type="Xenomorph Spawn">
+ <Level>13</Level>
+ <Location X="25" Y="4"/>
+ <Facing>175</Facing>
+</Creature>
+<Creature Type="Xenomorph Deathworm">
+ <Level>13</Level>
+ <Location X="30" Y="17"/>
+ <Facing>226</Facing>
+ <QuestItem/>
+</Creature>
+<Creature Type="Xenomorph Biter">
+ <Level>13</Level>
+ <Location X="12" Y="7"/>
+ <Facing>350</Facing>
+</Creature>
+<Creature Type="Xenomorph Scythebeast">
+ <Level>13</Level>
+ <Location X="26" Y="18"/>
+ <Facing>347</Facing>
+</Creature>
+<Creature Type="Xenomorph Scythebeast">
+ <Level>13</Level>
+ <Location X="6" Y="29"/>
+ <Facing>70</Facing>
+</Creature>
+<Creature Type="Xenomorph Spawn">
+ <Level>13</Level>
+ <Location X="25" Y="17"/>
+ <Facing>6</Facing>
+</Creature>
+<Creature Type="Xenomorph Biter">
+ <Level>13</Level>
+ <Location X="14" Y="7"/>
+ <Facing>6</Facing>
+</Creature>
+<Creature Type="Xenomorph Scythebeast">
+ <Level>13</Level>
+ <Location X="10" Y="13"/>
+ <Facing>172</Facing>
+</Creature>
+<Creature Type="Xenomorph Spawn">
+ <Level>12</Level>
+ <Location X="25" Y="6"/>
+ <Facing>121</Facing>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="10" Y="11">
+<StashItem N="1">
+<Equipment Type="Stimulant"/>
+</StashItem>
+<Hidden/>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="13" Y="15" L="12">
+<Hidden/>
+<Type>Electrical</Type>
+</Trap>
+<Trap X="27" Y="17" L="12">
+<Hidden/>
+<Type>Electrical</Type>
+</Trap>
+<Trap X="14" Y="13" L="13">
+<Hidden/>
+</Trap>
+<Trap X="20" Y="2" L="12">
+<Hidden/>
+</Trap>
+<Trap X="15" Y="8" L="11">
+<Hidden/>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
+ <SpaceHulkCoreCount>3</SpaceHulkCoreCount>
  <SpaceHulkCoreRecord>12</SpaceHulkCoreRecord>
 </Team>
 <Races>
@@ -8775,7 +10035,7 @@
 </Race>
 <Race Name="Gokan">
 <HomePlanet>(1,-1)12.0</HomePlanet>
-<LastExpand>781866145864753764</LastExpand>
+<LastExpand>779515158916749666</LastExpand>
 <Known/>
 <Research>
  <Item>Metasteel Plating</Item>
@@ -8848,7 +10108,7 @@
 </Race>
 <Race Name="Elithiri">
 <HomePlanet>(-1,1)6.1</HomePlanet>
-<LastExpand>781821924042889992</LastExpand>
+<LastExpand>779419213329682321</LastExpand>
 <Known/>
 <Research>
  <Item>Laser Sniper Rifle</Item>
@@ -8998,7 +10258,7 @@
 </Race>
 <Race Name="Insectoid">
 <HomePlanet>(-1,-1)10.2</HomePlanet>
-<LastExpand>781803286466444463</LastExpand>
+<LastExpand>779462828163862889</LastExpand>
 <Known/>
 <Research>
  <Item>Regenerative Plating</Item>
@@ -9071,7 +10331,7 @@
 </Race>
 <Race Name="Grey">
 <HomePlanet>(-1,0)5.3</HomePlanet>
-<LastExpand>781784392365449230</LastExpand>
+<LastExpand>779447548570744513</LastExpand>
 <Known/>
 <Research>
  <Item>Hyperspace Drive</Item>

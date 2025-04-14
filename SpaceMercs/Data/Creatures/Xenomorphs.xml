@@ -7,7 +7,7 @@
     <Armour>12</Armour>
     <Health>11</Health>
     <Stamina>18</Stamina>
-    <Frequency>4</Frequency>
+    <Frequency>3</Frequency>
     <Interact/>
     <Desc>An alien spawn which attempts to attach itself to a victim.</Desc>
     <Weapons>
@@ -108,7 +108,7 @@
     <Scale>1.8</Scale>
     <LevelRange>7,22</LevelRange>
     <Attack>19</Attack>
-    <Defence>14</Defence>
+    <Defence>13</Defence>
     <Armour>30</Armour>
     <Health>18</Health>
     <Stamina>22</Stamina>
@@ -125,11 +125,10 @@
       <Item Amount="0.1">Heavy Chitin</Item>
       <Item Amount="0.1">Xenolite</Item>
     </Scavenge>
-    <Tex Size="2">1,3</Tex>
+    <Tex Size="4">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Xenomorph Deathworm">
-    <Size>2</Size>
-    <Scale>2.2</Scale>
+    <Size>3</Size>
     <LevelRange>9,23</LevelRange>
     <Attack>25</Attack>
     <Defence>12</Defence>
@@ -150,6 +149,31 @@
       <Item Amount="2.0">Xenolite</Item>
     </Scavenge>
     <Boss/>
+    <Tex Size="4">1,9</Tex>
+  </CreatureType>
+  <CreatureType Name="Xenomorph Runner">
+    <Size>1</Size>
+    <Scale>1.1</Scale>
+    <LevelRange>5,20</LevelRange>
+    <Attack>16</Attack>
+    <Defence>15</Defence>
+    <Armour>20</Armour>
+    <Health>14</Health>
+    <Stamina>22</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Desc>A smaller alien with thick carapace and a vicious bite</Desc>
+    <Weapons>
+      <Weapon Weight="1">Xenobite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="100"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.2">Chitin</Item>
+      <Item Amount="0.1">Xenolite</Item>
+    </Scavenge>
+    <Tex Size="2">1,13</Tex>
   </CreatureType>
 </Data>
 

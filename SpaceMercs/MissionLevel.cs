@@ -352,9 +352,8 @@ namespace SpaceMercs {
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (!Const.DEBUG_VISIBLE_ALL && !Explored[x, y]) continue;
-                    if (Map[x, y] == TileType.Void) continue;
                     if (Map[x, y] != lastTile) {
-                        TexDetails det = Map[x, y] switch {
+                        TexDetails? det = Map[x, y] switch {
                             TileType.Floor => Textures.GenerateFloorTexture(this),
                             TileType.DoorVertical => Textures.GenerateFloorTexture(this),
                             TileType.DoorHorizontal => Textures.GenerateFloorTexture(this),
@@ -363,14 +362,15 @@ namespace SpaceMercs {
                             TileType.Wall => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
                             TileType.SecretDoorHorizontal => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
                             TileType.SecretDoorVertical => Textures.GenerateWallTexture(this, GetWallSides(x, y)),
-                            _ => throw new Exception("Unhandled texture requested : " + Map[x, y]),
+                            _ => null //throw new Exception("Unhandled texture requested : " + Map[x, y]),
                         };
-                        int iTexID = det.ID;
+                        if (det is null) continue;
+                        int iTexID = det.Value.ID;
                         if (iTexID != iLastID) {
                             GL.BindTexture(TextureTarget.Texture2D, iTexID);
                             iLastID = iTexID;
-                            tw = det.W / Textures.TileSize;
-                            th = det.H / Textures.TileSize;
+                            tw = det.Value.W / Textures.TileSize;
+                            th = det.Value.H / Textures.TileSize;
                             prog.SetUniformFast("texScale", (1f / tw) - (TexEpsilon * 2f), (1f / th) - (TexEpsilon * 2f));
                         }
                     }
@@ -2112,6 +2112,7 @@ namespace SpaceMercs {
             return null;
         }
         public bool EntityIsVisible(IEntity e) {
+            if (Const.DEBUG_VISIBLE_ALL) return true;
             if (e is Soldier) return true;
             if (e is Creature c) {
                 if (c.Size == 1) return Visible[c.X, c.Y];

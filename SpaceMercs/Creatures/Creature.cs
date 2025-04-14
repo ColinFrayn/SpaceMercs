@@ -28,6 +28,7 @@ namespace SpaceMercs {
         public int Size { get { return Type.Size; } }
         public double Facing { get; set; }
         public double Shred { get; private set; }
+        public int Searching { get; private set; } // Number of turns spent searching
         public Point Location { get { return new Point(X, Y); } }
         public Point Investigate { get; set; } = Point.Empty;
         public Point HidingPlace { get; set; } = Point.Empty;
@@ -394,6 +395,7 @@ namespace SpaceMercs {
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Shields", MaxShields);
             Shred = xml.SelectNodeDouble("Shred", 0d);
+            Searching = xml.SelectNodeInt("Searching", 0);
 
             IsAlert = (xml.SelectSingleNode("Alert") is not null);
             QuestItem = (xml.SelectSingleNode("QuestItem") is not null);
@@ -476,6 +478,7 @@ namespace SpaceMercs {
                 if (IsAlert) file.WriteLine(" <Alert/>");
                 if (QuestItem) file.WriteLine(" <QuestItem/>");
                 if (HasMoved) file.WriteLine(" <Moved/>");
+                if (Searching != 0) file.WriteLine($" <Searching>{Searching}</Searching>");
             }
             file.WriteLine("</Creature>");
         }
@@ -587,6 +590,7 @@ namespace SpaceMercs {
             if (CurrentLevel is null) return;
             bool isDefendLevel = CurrentLevel.ParentMission.Goal == Mission.MissionGoal.Defend;
             HasMoved = false;
+            if (Investigate == Point.Empty) Searching = 0;
             if (!IsAlert) return;
 
             // Flee if really damaged (unless this is a "Defend the objective" mission, or this creature is a boss)
@@ -621,9 +625,8 @@ namespace SpaceMercs {
                 }
 
                 // No target and couldn't find one. Maybe investigate nearby if we heard something.
-                // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
                 else if (Investigate != Point.Empty) {
-                    if (AIStep_Investigate(postMoveCheck, playSound, fastAI)) return;
+                    if (AIStep_Investigate(postMoveCheck, playSound, fastAI)) break;                   
                 }
 
                 // Running to hide somewhere i.e. if you are being attacked but can't get within range of the attacker because the way is blocked.
@@ -635,8 +638,17 @@ namespace SpaceMercs {
                 else {
                     if (AIStep_SetHidingPlace()) return;
                 }
-
             } while (++nsteps < 20 && Stamina >= MovementCost);
+
+            // If we're doing a "Defend the objective" mission then never forget the Investigate objective.
+            // Otherwise get bored searching after a few rounds.
+            if (Investigate != Point.Empty) {
+                Searching++;
+                if (Searching > 2 && rnd.NextDouble() > 0.5 && !isDefendLevel) {
+                    Investigate = Point.Empty;
+                    Searching = 0;
+                }
+            }
         }
         private bool AIStep_ShouldFlee() {
             if (Health * 4.0 > MaxHealth) return false;
@@ -718,14 +730,13 @@ namespace SpaceMercs {
             // No route available, quit
             if (path is null || path.Count == 0) {
                 if (!isDefendLevel) Investigate = Point.Empty;
+                Searching = 0;
                 return true;
             }
             // There is a route, so take it
-            else {
-                MoveTo(path[0], playSound);
-                postMoveCheck(this);
-                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-            }
+            MoveTo(path[0], playSound);
+            postMoveCheck(this);
+            if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
             return false;
         }
         private bool AIStep_Hide(Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, bool fastAI) {
