@@ -73,7 +73,7 @@
     <Endurance>12</Endurance>
     <BaseTemp>293</BaseTemp>
     <PlanetType>Rocky</PlanetType>
-    <Colour>255,255,0</Colour>
+    <Colour>255,220,0</Colour>
     <Aggression>3</Aggression>
     <Scale>1.2</Scale>
     <BaseAttitude>-6000</BaseAttitude>
@@ -117,7 +117,7 @@
     <Endurance>12</Endurance>
     <BaseTemp>293</BaseTemp>
     <PlanetType>Oceanic</PlanetType>
-    <Colour>140,140,140</Colour>
+    <Colour>120,120,120</Colour>
     <Aggression>-1</Aggression>
     <BaseAttitude>0</BaseAttitude>
     <Scale>1.0</Scale>

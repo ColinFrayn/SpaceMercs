@@ -271,9 +271,8 @@ namespace SpaceMercs {
                 foreach (Star targ in st.TradeRoutes) {
                     // Only draw them from left to right, in order not to draw each one twice
                     if (st.MapPos.X < targ.MapPos.X && (st.Visited || targ.Visited)) {
-                        // Add this line
-                        Color4 colFrom = (st.Owner is null) ? Color4.LightGray : new Color4(st.Owner.Colour.R, st.Owner.Colour.G, st.Owner.Colour.B, 1f);
-                        Color4 colTo = (targ.Owner is null) ? Color4.LightGray : new Color4(targ.Owner.Colour.R, targ.Owner.Colour.G, targ.Owner.Colour.B, 1f);
+                        Color4 colFrom = st.Owner is null ? Color4.LightGray : st.Owner.Colour4;
+                        Color4 colTo = targ.Owner is null ? Color4.LightGray : targ.Owner.Colour4;
                         VertexPos2DCol v1 = new VertexPos2DCol(new Vector2(st.MapPos.X, st.MapPos.Y), colFrom);
                         VertexPos2DCol v2 = new VertexPos2DCol(new Vector2(targ.MapPos.X, targ.MapPos.Y), colTo);
                         vertices.Add(v1);

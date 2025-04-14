@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using System.IO;
 using SpaceMercs.Items;
+using OpenTK.Mathematics;
 
 namespace SpaceMercs {
     public class Race {
@@ -25,6 +26,7 @@ namespace SpaceMercs {
         private readonly List<string> FamilyNames;
         private readonly List<string> FamilyNames2;
         public Color Colour { get; private set; }
+        public Color4 Colour4 { get; private set; }
         public int ColonyCount { get { return Colonies.Count; } }
         public int SystemCount { get { return Systems.Count; } }
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
@@ -47,6 +49,7 @@ namespace SpaceMercs {
             string strCol = xml.SelectNodeText("Colour");
             string[] bits = strCol.Split(',');
             Colour = Color.FromArgb(255, int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
+            Colour4 = new Color4((float)Colour.R / 255f, (float)Colour.G / 255f, (float)Colour.B / 255f, 1f);
 
             XmlNode nPersonal = xml.SelectSingleNode("Names/Personal") ?? throw new Exception($"Could not find personal names list for Race {Name}");
             foreach (XmlNode xn in nPersonal.ChildNodes) {
