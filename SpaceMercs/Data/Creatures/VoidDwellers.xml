@@ -17,7 +17,7 @@
       <Resistance Type="Psychic" Value="60"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.1">Voidskin</Item>
+      <Item Amount="0.05">Voidskin</Item>
     </Scavenge>
     <Tex Size="2">1,1</Tex>
   </CreatureType>
@@ -40,7 +40,7 @@
       <Resistance Type="Psychic" Value="70"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.3">Voidskin</Item>
+      <Item Amount="0.2">Voidskin</Item>
     </Scavenge>
     <Tex Size="2">1,3</Tex>
   </CreatureType>
@@ -64,7 +64,7 @@
       <Resistance Type="Psychic" Value="30"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.3">Voidskin</Item>
+      <Item Amount="0.2">Voidskin</Item>
     </Scavenge>
     <Tex Size="2">3,3</Tex>
   </CreatureType>
@@ -95,7 +95,7 @@
     <Attack>16</Attack>
     <Defence>11</Defence>
     <Armour>22</Armour>
-    <Health>16</Health>
+    <Health>24</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <Desc>A mysterious creature from the void</Desc>
@@ -107,19 +107,18 @@
       <Resistance Type="Psychic" Value="80"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="1">Voidskin</Item>
+      <Item Amount="2">Voidskin</Item>
     </Scavenge>
     <Tex Size="4">1,9</Tex>
   </CreatureType>
   <CreatureType Name="Void Psychic">
-    <LevelRange>11,18</LevelRange>
+    <LevelRange>11,19</LevelRange>
     <Size>2</Size>
     <Scale>1.8</Scale>
-    <Boss/>
     <Attack>20</Attack>
-    <Defence>14</Defence>
-    <Armour>25</Armour>
-    <Health>20</Health>
+    <Defence>20</Defence>
+    <Armour>24</Armour>
+    <Health>40</Health>
     <Stamina>21</Stamina>
     <Interact/>
     <Desc>A mysterious humanoid creature from the void that seems to command the other void beasts telepathically</Desc>
@@ -130,6 +129,7 @@
       <Resistance Type="Cold" Value="80"/>
       <Resistance Type="Psychic" Value="100"/>
     </Resistances>
+    <Boss/>
     <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>

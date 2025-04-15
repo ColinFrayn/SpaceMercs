@@ -15,7 +15,8 @@
     <Resistances>
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Poison" Value="100"/>
-    </Resistances>    
+    </Resistances>
+    <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Crystal Soldier">
     <LevelRange>8,16</LevelRange>
@@ -26,7 +27,7 @@
     <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
-    <Desc>A crystalline humanoid with sharp crystal claws</Desc>
+    <Desc>A crystalline humanoid with hard crystal fists</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
@@ -34,6 +35,7 @@
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Crystal Assassin">
     <LevelRange>9,17</LevelRange>
@@ -52,6 +54,7 @@
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Crystal Spitter">
     <LevelRange>9,17</LevelRange>
@@ -70,6 +73,7 @@
       <Resistance Type="Physical" Value="20"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Tex Size="2">1,3</Tex>
   </CreatureType>
   <CreatureType Name="Crystal Elemental">
     <LevelRange>10,17</LevelRange>
@@ -89,9 +93,12 @@
       <Resistance Type="Physical" Value="30"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
   <CreatureType Name="Crystal Alpha">
     <LevelRange>9,18</LevelRange>
+    <Size>2</Size>
+    <Scale>2.2</Scale>
     <Attack>22</Attack>
     <Defence>12</Defence>
     <Armour>32</Armour>
@@ -109,6 +116,7 @@
       <Resistance Type="Electrical" Value="100"/>
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
+    <Tex Size="4">1,9</Tex>
   </CreatureType>
 </Data>
 
