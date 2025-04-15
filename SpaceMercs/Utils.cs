@@ -163,15 +163,8 @@ namespace SpaceMercs {
         }
 
         // When shooting a weapon, create shot particles
-        public static void CreateShots(Weapon? EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, VisualEffect.EffectFactory effectFactory, float baseDelay) {
+        public static void CreateShots(Weapon EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, EffectFactory effectFactory, float baseDelay) {
             float sdelay = baseDelay;
-            if (EquippedWeapon == null || EquippedWeapon.Type.IsMeleeWeapon) {
-                foreach (ShotResult result in results) {
-                    effectFactory(EffectType.Melee, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay } });
-                    sdelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d);
-                }
-                return;
-            }
             float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
             float shotSize = (float)avDam / Const.ShotSizeScale;
             float duration = (float)shotRange * Const.ShotDurationScale / (float)EquippedWeapon.Type.ShotSpeed;
@@ -189,8 +182,17 @@ namespace SpaceMercs {
             }
         }
 
+        // Resolve Melee weapon hits
+        public static void CreateMeleeHits(Weapon? equippedWeapon, int tx, int ty, List<ShotResult> results, double sneakMod, EffectFactory effectFactory) {
+            float sdelay = 0f;
+            foreach (ShotResult result in results) {
+                effectFactory(EffectType.Melee, tx, ty, new Dictionary<string, object>() { { "Result", result }, { "Delay", sdelay }, { "SneakMod", sneakMod } });
+                sdelay += (float)(equippedWeapon?.Type?.Delay ?? 0d);
+            }
+        }
+
         // Resolve multiple weapon impacts / AoE. Note this is only used for primary weapon hits, not e.g. thrown grenades.
-        public static void ResolveHits(IEnumerable<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage) {
+        public static void ResolveHits(IEnumerable<IEntity> hsAttacked, Weapon? wp, IEntity? source, EffectFactory effectFactory, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, double sneakDmgMod = 1d) {
             if (source is null) return;
             Random rand = new Random();
 
@@ -198,6 +200,12 @@ namespace SpaceMercs {
             foreach (IEntity tgt in hsAttacked) {
                 if (tgt.Health > 0.0) {
                     Dictionary<WeaponType.DamageType, double> hitDmg = source.GenerateDamage();
+                    // Melee sneak attack
+                    if (sneakDmgMod != 1d && hitDmg.TryGetValue(WeaponType.DamageType.Physical, out double physDmg)) {
+                        physDmg *= sneakDmgMod;
+                        hitDmg[WeaponType.DamageType.Physical] = physDmg;
+                    }
+
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     float xshift = (float)(rand.NextDouble() - 0.5d) / 3f;
                     if (Math.Abs(TotalDam) > 0.1d) {
@@ -219,19 +227,19 @@ namespace SpaceMercs {
                     }
 
                     // Soldier hits creature -> check change target, and maybe register kill
-                    if (tgt is Creature cr) {
-                        if (cr.Health <= 0d) {
-                            if (source is Soldier sKiller) sKiller.RegisterKill(cr, showMessage);
+                    if (tgt is Creature cre) {
+                        if (cre.Health <= 0d) {
+                            if (source is Soldier sKiller) sKiller.RegisterKill(cre, showMessage);
                         }
                         else {
-                            cr.CheckChangeTarget(TotalDam, source);
+                            cre.CheckChangeTarget(TotalDam, source);
                         }
                     }
 
                     // Add weapon experience if shot was with a weapon and from a soldier
-                    if (source is Soldier s && wp != null && tgt is not null) {
-                        int exp = Math.Max(1, tgt.Level - s.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count();
-                        s.AddWeaponExperience(wp, exp, showMessage);
+                    if (source is Soldier sd && wp != null && tgt is not null) {
+                        int exp = Math.Max(1, tgt.Level - sd.Level) * Const.DEBUG_WEAPON_SKILL_MOD / hsAttacked.Count();
+                        sd.AddWeaponExperience(wp, exp, showMessage);
                     }
                 }
             }

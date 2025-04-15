@@ -791,8 +791,17 @@ namespace SpaceMercs.MainWindow {
                 if (!cr.IsAlert && !hsDetected.Contains(cr)) {
                     double range = baseRange;
                     if (s is not null) range = cr.SoldierVisibilityRange(s); // Scaled by level diff
-                    double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
-                    // Creature is within detection range of this soldier, and can see it
+                    double dx = (x - cr.X);
+                    double dy = (y - cr.Y);
+                    double r2 = dx * dx + dy * dy;
+
+                    // If soldier is behind the creature, reduce range
+                    double ang = Math.Atan2(dy, dx) * (180.0 / Math.PI);
+                    if (ang < 0d) ang += 360d;
+                    bool isBehind = (ang < 90d || ang > 270d);
+                    if (isBehind) range--;
+
+                    // Creature is within detection range of this soldier, and can see the Soldier
                     if (r2 <= (range * range) && cr.CanSee(x, y)) {
                         hsDetected.Add(cr);
                         cr.SetAlert();
@@ -1945,13 +1954,20 @@ namespace SpaceMercs.MainWindow {
             foreach (Creature cr in CurrentLevel.Creatures) {
                 if (!cr.IsAlert && (CurrentLevel.Visible[cr.X, cr.Y] || Const.DEBUG_VISIBLE_ALL)) {
                     double range = cr.SoldierVisibilityRange(s); // Scaled by level diff
-                    double range2 = range * range;
                     for (int y = Math.Max(0, (int)Math.Floor(cr.Y - range)); y <= Math.Min(CurrentLevel.Height - 1, (int)Math.Ceiling(cr.Y + range)); y++) {
                         for (int x = Math.Max(0, (int)Math.Floor(cr.X - range)); x <= Math.Min(CurrentLevel.Width - 1, (int)Math.Ceiling(cr.X + range)); x++) {
                             if (Utils.IsPassable(CurrentLevel.Map[x, y]) && !DetectionMap[x, y]) {
                                 // Check range
-                                double r2 = (x - cr.X) * (x - cr.X) + (y - cr.Y) * (y - cr.Y);
-                                if (r2 <= range2) { // Check range properly
+                                double dx = (x - cr.X);
+                                double dy = (y - cr.Y);
+                                double ang = Math.Atan2(dy, dx) * (180.0 / Math.PI);
+                                if (ang < 0d) ang += 360d;
+                                bool isBehind = (ang < 90d || ang > 270d);
+                                double effectiveRange = isBehind ? range-1 : range;
+                                double rSquared = effectiveRange * effectiveRange;
+
+                                double r2 = dx * dx + dy * dy;
+                                if (r2 <= rSquared) { // Check range properly
                                     DetectionMap[x, y] |= cr.CanSee(x, y);
                                 }
                             }

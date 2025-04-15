@@ -382,6 +382,7 @@ namespace SpaceMercs {
                 return (int)Math.Floor(m / 10d);
             }
         }
+        public double SneakAttackMultiplier => 1.1d + ((double)GetSoldierSkillWithWeaponClass(WeaponType.WeaponClass.Melee) / 10d);
         public bool MeleeAttacker { get { return (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon); } }
         public double MovementCost { get { return Const.MovementCost * (1.0 + Encumbrance) / SpeedModifier(); } }
         public double SearchCost { get { return Const.SearchCost; } }
@@ -1314,7 +1315,16 @@ namespace SpaceMercs {
             }
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
+            if (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon) {
+                double sneakMod = 1d;
+                if (en is not null && en is Creature cr && !cr.IsAlert) {
+                    sneakMod = SneakAttackMultiplier;
+                }
+                Utils.CreateMeleeHits(EquippedWeapon, tx, ty, results, sneakMod, effectFactory);
+            }
+            else {
+                Utils.CreateShots(EquippedWeapon, this, tx, ty, en?.Size ?? 1, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
+            }
             return true;
         }
         public bool AttackArea(MissionLevel level, int tx, int ty, IReadOnlyCollection<Vector2> aoeTiles, ItemEffect.ApplyItemEffect applyEffect, ShowMessageDelegate showMessage, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {

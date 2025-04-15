@@ -1,12 +1,12 @@
 ﻿<Data>
   <CreatureType Name="Zombie">
-    <LevelRange>1,7</LevelRange>
+    <LevelRange>1,9</LevelRange>
     <Attack>8</Attack>
     <Defence>9</Defence>
     <Health>12</Health>
     <Stamina>17</Stamina>
     <Armour>10</Armour>
-    <MovementCost>2.0</MovementCost>
+    <MovementCost>2.5</MovementCost>
     <Frequency>3</Frequency>
     <Desc>A slow-moving undead humanoid</Desc>
     <Weapons>
@@ -18,7 +18,7 @@
     <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Skeleton Warrior">
-    <LevelRange>1,8</LevelRange>
+    <LevelRange>1,10</LevelRange>
     <Attack>10</Attack>
     <Defence>12</Defence>
     <Health>10</Health>
@@ -36,13 +36,12 @@
     <Tex Size="2">3,1</Tex>
   </CreatureType>
   <CreatureType Name="Ghoul">
-    <LevelRange>2,10</LevelRange>
+    <LevelRange>2,11</LevelRange>
     <Attack>12</Attack>
     <Defence>12</Defence>
     <Health>14</Health>
-    <Stamina>18</Stamina>
     <Armour>14</Armour>
-    <Frequency>2</Frequency>
+    <Stamina>18</Stamina>
     <Resistances>
       <Resistance Type="Poison" Value="50"/>
       <Resistance Type="Psychic" Value="100"/>
@@ -59,8 +58,8 @@
     <Attack>15</Attack>
     <Defence>10</Defence>
     <Health>14</Health>
-    <Stamina>16</Stamina>
     <Armour>10</Armour>
+    <Stamina>16</Stamina>
     <Desc>A wraith-like unsubstantial humanoid.</Desc>
     <Weapons>
       <Weapon Weight="1">Wail</Weapon>
@@ -75,12 +74,12 @@
   <CreatureType Name="Bone Snake">
     <Scale>1.1</Scale>
     <LevelRange>2,12</LevelRange>
-    <Attack>14</Attack>
+    <Attack>15</Attack>
     <Defence>12</Defence>
-    <Health>15</Health>
+    <Health>12</Health>
+    <Armour>12</Armour>
     <Stamina>17</Stamina>
     <Interact/>
-    <Armour>36</Armour>
     <Desc>A large armoured bipedal creature with muscular arms</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
@@ -96,10 +95,10 @@
     <Attack>15</Attack>
     <Defence>12</Defence>
     <Health>15</Health>
+    <Armour>18</Armour>
     <Stamina>17</Stamina>
     <Interact/>
-    <MovementCost>1.6</MovementCost>
-    <Armour>36</Armour>
+    <MovementCost>2.0</MovementCost>
     <Desc>A large armoured bipedal creature with muscular arms</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
@@ -118,11 +117,11 @@
     <Scale>1.8</Scale>
     <LevelRange>5,13</LevelRange>
     <Attack>26</Attack>
-    <Defence>12</Defence>
-    <Health>35</Health>
-    <Stamina>18</Stamina>
-    <Interact/>
+    <Defence>14</Defence>
+    <Health>40</Health>
     <Armour>20</Armour>
+    <Stamina>20</Stamina>
+    <Interact/>
     <Desc>A vicious creature with psionic powers.</Desc>
     <Boss/>
     <Weapons>

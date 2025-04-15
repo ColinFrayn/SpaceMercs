@@ -5,8 +5,6 @@ ToDo List
 Add creature textures using bitmaps
 -- Crystallines
 
-Pay to switch XP from one Soldier to another
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -21,9 +19,13 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
+Once got a save game where it didn't save the current sector when on a mission. Odd.
+
 Alien solar systems:
 - Alien colonies need names
 - Alien systems need names
+
+Pay to switch XP from one Soldier to another??
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 

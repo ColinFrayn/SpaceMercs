@@ -23,15 +23,31 @@ namespace SpaceMercs.Dialogs {
             lbItems.DisplayMember = "Desc";
             lbItems.ValueMember = "Eq";
             bHasItems = false;
+            Dictionary<MissionItem, int> cores = new();
             foreach (KeyValuePair<IItem, int> kvp in playerTeam.Inventory) {
                 if (kvp.Key is not MissionItem mi) continue;
-                if ((mi.IsSpaceHulkCore && bShowHulkCores) || (mi.IsPrecursorCore && bShowPrecursorCores)) { 
-                    string strQuantity = kvp.Value == 1 ? "" : $" [{kvp.Value}]";
-                    lbItems.Items.Add(new ItemPair($"{mi.Name} L{mi.Level}{strQuantity}", mi));
+                if ((mi.IsSpaceHulkCore && bShowHulkCores) || (mi.IsPrecursorCore && bShowPrecursorCores)) {
+                    if (cores.ContainsKey(mi)) cores[mi] += kvp.Value;
+                    else cores.Add(mi, kvp.Value);
                     bHasItems = true;
                 }
             }
-            if (lbItems.Items.Count == 0) lbItems.Items.Add(new ItemPair("<None>", null));
+            foreach (Soldier s in playerTeam.SoldiersRO.Where(s => s.aoLocation == playerTeam.CurrentPosition)) {
+                foreach (KeyValuePair<IItem, int> kvp in s.InventoryGrouped) {
+                    if (kvp.Key is not MissionItem mi) continue;
+                    if ((mi.IsSpaceHulkCore && bShowHulkCores) || (mi.IsPrecursorCore && bShowPrecursorCores)) {
+                        if (cores.ContainsKey(mi)) cores[mi] += kvp.Value;
+                        else cores.Add(mi, kvp.Value);
+                        bHasItems = true;
+                    }
+                }
+            }
+
+            foreach ((MissionItem mi, int count) in cores) {
+                string strQuantity = count == 1 ? "" : $" [{count}]";
+                lbItems.Items.Add(new ItemPair($"{mi.Name} L{mi.Level}{strQuantity}", mi));
+            }
+            if (cores.Count == 0) lbItems.Items.Add(new ItemPair("<None>", null));
         }
 
         private void btChooseCore_Click(object sender, EventArgs e) {

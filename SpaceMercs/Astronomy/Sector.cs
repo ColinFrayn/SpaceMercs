@@ -12,7 +12,7 @@ namespace SpaceMercs {
         public int SectorX { get; private set; }
         public int SectorY { get; private set; }
         public Map ParentMap { get; private set; }
-        public int Seed => ParentMap.MapSeed ^ ((SectorX* 85091) + (SectorY* 29527)) ^ ((SectorX* 34501) + (SectorY* 61819));
+        public int Seed => ParentMap.MapSeed ^ ((SectorX * 85091) + (SectorY * 29527)) ^ ((SectorX * 34501) + (SectorY * 61819));
         VertexBuffer? tradeRoutesBuffer = null;
         VertexArray? tradeRoutesArray = null;
         public int SectorRing => Math.Max(Math.Abs(SectorX), Math.Abs(SectorY));

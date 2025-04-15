@@ -191,7 +191,10 @@ namespace SpaceMercs {
 
             // Sort out graphics for damage (if tgt is still alive)
             playSound("Smash");
-            Utils.ResolveHits(hsAttacked, wp, source, effectFactory, applyEffect, showMessage);
+            if (!data.TryGetValue("SneakMod", out object? oSneak) || oSneak is not double sneakMod) {
+                sneakMod = 1d;
+            }
+            Utils.ResolveHits(hsAttacked, wp, source, effectFactory, applyEffect, showMessage, sneakMod);
         }
     }
 }
