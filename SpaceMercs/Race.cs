@@ -127,7 +127,7 @@ namespace SpaceMercs {
         public void Colonise(Star st) {
             st.SetOwner(this);
             AddSystem(st);
-            if (Const.DEBUG_VIEW_ALL_CIVS) st.SetVisited(true);
+            if (Const.DEBUG_VIEW_ALL_CIVS) st.SetVisited();
         }
 
         public void AddSystem(Star st) {
@@ -189,7 +189,7 @@ namespace SpaceMercs {
                 if (rand.NextDouble() > 0.9 && candidate.AddPopulationInSystem(this, rand, clock)) {
                     Colonise(candidate);
                     if (isPlayer) {
-                        candidate.SetVisited(true);
+                        candidate.SetVisited();
                         msgBox.PopupMessage($"The {Name} Race has colonised a new system at {candidate.PrintCoordinates()}");
                     }
                     return;

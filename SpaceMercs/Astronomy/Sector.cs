@@ -74,7 +74,7 @@ namespace SpaceMercs {
         }
         public bool ShouldBeSaved() {
             foreach (Star st in Stars) {
-                if (st.bGenerated && (st.Owner != null || st.Visited || st.Scanned || st.Renamed)) return true;
+                if (st.Owner != null || st.Visited || st.Scanned || st.Renamed) return true;
             }
             return false;
         }

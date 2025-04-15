@@ -19,8 +19,6 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
-Once got a save game where it didn't save the current sector when on a mission. Odd.
-
 Alien solar systems:
 - Alien colonies need names
 - Alien systems need names

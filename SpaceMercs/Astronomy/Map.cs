@@ -101,7 +101,7 @@ namespace SpaceMercs {
                     if (st.AddPopulationInSystem(rc, rand, clock)) {
                         rc.Colonise(st);
                         stHome.AddTradeRoute(st);
-                        if (isPlayer) st.SetVisited(true);
+                        if (isPlayer) st.SetVisited();
                         break;
                     }
                 }
@@ -118,7 +118,7 @@ namespace SpaceMercs {
                 if (st.AddPopulationInSystem(rc, rand, clock)) {
                     rc.Colonise(st);
                     if (st != stHome) stHome.AddTradeRoute(st); // Doesn't add duplicates so no worries
-                    if (isPlayer) st.SetVisited(true);
+                    if (isPlayer) st.SetVisited();
                 }
             }
 
@@ -127,7 +127,6 @@ namespace SpaceMercs {
                 if (st1 == stHome) continue;
                 st1.MaybeAddTradeRoute(rc, false);
             }
-
         }
 
         // Save this map to an Xml file

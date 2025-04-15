@@ -770,7 +770,7 @@ namespace SpaceMercs.MainWindow {
             foreach (Form f in Application.OpenForms) {
                 if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }
             }
-            aoTo.GetSystem().SetVisited(true);
+            aoTo.GetSystem().SetVisited();
             msgBox.PopupMessage("You have arrived at your destination");
             PlayerTeam.SetPosition(aoTo);
             if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {

@@ -20,6 +20,8 @@ namespace SpaceMercs {
         public Sector Sector { get; private set; }
         public bool Scanned {
             get {
+                if (HasHyperGate) return true;
+                if (SpaceHulk is not null && SpaceHulk.Scanned) return true;
                 foreach (Planet pl in _planets) {
                     if (pl.Scanned) return true;
                     foreach (Moon mn in pl.Moons) {
@@ -116,7 +118,7 @@ namespace SpaceMercs {
             if (xmlown is not null) {
                 Owner = StaticData.GetRaceByName(xmlown.InnerText) ?? throw new Exception($"Could not identify system owner race {xmlown.InnerText}");
                 Owner.AddSystem(this);
-                if (Const.DEBUG_VIEW_ALL_CIVS) SetVisited(true);
+                if (Const.DEBUG_VIEW_ALL_CIVS) SetVisited();
             }
 
             TradeRoutes.Clear();
@@ -402,8 +404,8 @@ namespace SpaceMercs {
             if (rc == StaticData.HumanRace) Visited = true;
             if (!_planets.Any() && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
         }
-        public void SetVisited(bool v) {
-            Visited = v;
+        public void SetVisited() {
+            Visited = true;
         }
 
         // Either expand an existing base or add a new one in this system

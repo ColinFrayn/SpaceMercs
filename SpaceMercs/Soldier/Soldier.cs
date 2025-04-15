@@ -1387,8 +1387,8 @@ namespace SpaceMercs {
                             results.Add(new ShotResult(this, false));
                         }
                     }
-                    Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en?.Size ?? 1, results, this.RangeTo(en!), effectFactory, sDelay);
-                    sDelay += (float)(EquippedWeapon?.Type?.Delay ?? 0d) * hitTargets[en!];
+                    Utils.CreateShots(EquippedWeapon!, this, en.X, en.Y, en?.Size ?? 1, results, this.RangeTo(en!), effectFactory, sDelay);
+                    sDelay += (float)EquippedWeapon.Type.Delay * hitTargets[en!];
                 }
             }
             else {
