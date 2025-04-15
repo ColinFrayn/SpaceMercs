@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace SpaceMercs {
@@ -59,7 +60,7 @@ namespace SpaceMercs {
             }
         }
         private HyperGate _hypergate;
-        private readonly object _hglock = new object(), _shLock = new object();
+        private readonly Lock _hglock = new();
         public HyperGate? GetHyperGate() {
             if (!HasHyperGate) return null;
             lock (_hglock) {
@@ -119,6 +120,9 @@ namespace SpaceMercs {
                 Owner = StaticData.GetRaceByName(xmlown.InnerText) ?? throw new Exception($"Could not identify system owner race {xmlown.InnerText}");
                 Owner.AddSystem(this);
                 if (Const.DEBUG_VIEW_ALL_CIVS) SetVisited();
+                if (string.IsNullOrEmpty(Name)) {
+                    Name = GenerateAlienSystemName(Seed);
+                }
             }
 
             TradeRoutes.Clear();
@@ -301,7 +305,7 @@ namespace SpaceMercs {
                 int ring = Math.Max(Math.Abs(Sector.SectorX), Math.Abs(Sector.SectorY));
                 if (ring >= 2) {
                     // Use Star ID & sector Seed to get a more predictable but repeatable fraction of hulks
-                    if ((ID + Sector.Seed) % (2 + ring) == 0) { 
+                    if ((ID + Sector.Seed) % (2 + ring) == 0) {
                         SpaceHulk = new SpaceHulk(this);
                     }
                 }
@@ -403,6 +407,7 @@ namespace SpaceMercs {
             Owner = rc;
             if (rc == StaticData.HumanRace) Visited = true;
             if (!_planets.Any() && rc != null) GeneratePlanets(Sector.ParentMap.PlanetDensity);
+            if (string.IsNullOrEmpty(Name) && rc != StaticData.HumanRace) Name = GenerateAlienSystemName(Seed);
         }
         public void SetVisited() {
             Visited = true;
@@ -513,7 +518,8 @@ namespace SpaceMercs {
             if (maxColonySize >= 5 && colonyCount >= 2 && totalPop >= 7) expectedTradeRoutes = 2;
             if (maxColonySize == 4 && colonyCount >= 4 && totalPop >= 10) expectedTradeRoutes = 2;
             if (maxColonySize == 6 && colonyCount >= 4 && totalPop >= 13) expectedTradeRoutes = 3;
-            if (maxColonySize == 5 && colonyCount >= 6 && totalPop >= 15) expectedTradeRoutes = 3;
+            if (maxColonySize == 5 && colonyCount >= 5 && totalPop >= 15) expectedTradeRoutes = 3;
+            if (maxColonySize == 6 && colonyCount >= 6 && totalPop >= 20) expectedTradeRoutes = 4;
             if (TradeRoutes.Count < expectedTradeRoutes) {
                 MaybeAddTradeRoute(rc, true);
             }
@@ -640,6 +646,41 @@ namespace SpaceMercs {
                 if (pl.PlanetOrMoonsHaveBeenEdited()) return true;
             }
             return false;
+        }
+
+        // Generate a random system name for this system
+        private static string GenerateAlienSystemName(int seed) {
+            Random rnd = new Random(seed);
+            string[] Vowels = ["A", "E", "I", "O", "U"];
+            string[] HardConsonants = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "Y", "Z"];
+            string[] SecondaryConsonants = ["l", "r", "h"];
+            string[] Terminals = ["a", "b", "ck", "d", "g", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "v", "z"];
+            string[] Final = ["a", "h", "x", "i", "k"];
+            string[] SystemNameX = ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Prime", "Major", "Minor", "Core"];
+
+            StringBuilder sbName = new StringBuilder();
+
+            if (rnd.NextDouble() < 0.3) sbName.Append(Vowels[rnd.Next(Vowels.Length)]);
+            else {
+                sbName.Append(HardConsonants[rnd.Next(HardConsonants.Length)]);
+                if (rnd.NextDouble() < 0.4) {
+                    sbName.Append(SecondaryConsonants[rnd.Next(SecondaryConsonants.Length)]);
+                }
+                sbName.Append(Vowels[rnd.Next(Vowels.Length)].ToLower());
+            }
+            if (rnd.NextDouble() < 0.6) sbName.Append(HardConsonants[rnd.Next(HardConsonants.Length)].ToLower());
+            else sbName.Append(HardConsonants[rnd.Next(HardConsonants.Length)]);
+            sbName.Append(SecondaryConsonants[rnd.Next(SecondaryConsonants.Length)]);
+            sbName.Append(Vowels[rnd.Next(Vowels.Length)].ToLower());
+            sbName.Append(Terminals[rnd.Next(Terminals.Length)]);
+            if (rnd.NextDouble() < 0.3) sbName.Append(Vowels[rnd.Next(Vowels.Length)].ToLower());
+
+            if (rnd.NextDouble() < 0.7) {
+                sbName.Append(" ");
+                sbName.Append(SystemNameX[rnd.Next(SystemNameX.Length)]);
+            }
+
+            return sbName.ToString();
         }
     }
 }

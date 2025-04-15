@@ -3,8 +3,17 @@ ToDo List
 -------------------------------------------------
 
 
+Mind Transfer
+- New ship room
+- Can spend some kind of resource (crystals?) to transfer XP from one soldier to another
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
+
+Check can use alien hypergates at high enough relations
+
+At relations >= 3 maybe join human hypergates up to alien ones??
+- Add a trade route between their two nearest colonies
 
 ==================================================================================================================
 
@@ -17,11 +26,7 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
-Alien solar systems:
-- Alien colonies need names
-- Alien systems need names
-
-Pay to switch XP from one Soldier to another??
+Alien colonies need names
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
