@@ -869,6 +869,61 @@
       <Material Name="Titanium" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="Heavy Powerfist" Class="Melee">
+    <Mass>22</Mass>
+    <Cost>1100</Cost>
+    <Rarity>40</Rarity>
+    <Speed>15</Speed>
+    <Range Accuracy="1">1</Range>
+    <Damage>8+7</Damage>
+    <Desc>A huge powered fist capable of striking with devastating force.</Desc>
+    <Sound>Punches</Sound>
+    <Requirements>
+      <MinLevel>6</MinLevel>
+      <MinPop>30</MinPop>
+      <CashCost>60</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Electronic Components" Amount="2"/>
+      <Relations Name="Ogrish">1</Relations>
+    </Requirements>
+    <Noise>6</Noise>
+    <Materials>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Titanium" Amount="6"/>
+      <Material Name="Electronic Components" Amount="2"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Heavy Chainsword" Class="Melee">
+    <Mass>28</Mass>
+    <Cost>1800</Cost>
+    <Rarity>50</Rarity>
+    <Speed>17</Speed>
+    <Range Accuracy="1">1</Range>
+    <Damage>8+7</Damage>
+    <Shred>8</Shred>
+    <Desc>A huge powered chainsaw.</Desc>
+    <Sound>Chainsaw</Sound>
+    <Requirements>
+      <MinLevel>8</MinLevel>
+      <MinPop>40</MinPop>
+      <CashCost>110</CashCost>
+      <Facility>Armoury</Facility>
+      <Facility>Engineering</Facility>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Copper" Amount="2"/>
+      <Material Name="Electronic Components" Amount="2"/>
+      <Relations Name="Ogrish">2</Relations>
+    </Requirements>
+    <Noise>10</Noise>
+    <Materials>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Copper" Amount="6"/>
+      <Material Name="Electronic Components" Amount="2"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Slugger" Class="Shotgun">
     <Mass>8.0</Mass>
     <Cost>380</Cost>

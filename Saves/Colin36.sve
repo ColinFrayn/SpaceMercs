@@ -9,11 +9,12 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>07/06/2512 23:07:56</Clock>
+<Clock>16/10/2513 21:48:09</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
 <Seed>4678534</Seed>
+<Name>Vifrus Epsilon</Name>
  <MapPos X="-8.53" Y="-13.83"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)5</TradeRoute>
@@ -28,7 +29,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>782212836470165779</LastGrowth>
  <NextGrowth>801088644470165779</NextGrowth>
- <SeedProgress>170.6825</SeedProgress>
+ <SeedProgress>177.1300</SeedProgress>
 </Colony>
 <Radius>5694955</Radius>
 <ARot>73504</ARot>
@@ -59,7 +60,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>778570644737134905</LastGrowth>
  <NextGrowth>797424852737134905</NextGrowth>
- <SeedProgress>117.0994</SeedProgress>
+ <SeedProgress>125.6960</SeedProgress>
 </Colony>
 <Radius>67186822</Radius>
 <ARot>1060992</ARot>
@@ -90,7 +91,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>789214861700184687</LastGrowth>
  <NextGrowth>1653214861700184687</NextGrowth>
- <SeedProgress>164.8885</SeedProgress>
+ <SeedProgress>177.7834</SeedProgress>
 </Colony>
 <Radius>7208423</Radius>
 <ARot>104844</ARot>
@@ -115,7 +116,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>781334322956210000</LastGrowth>
  <NextGrowth>815640306956210000</NextGrowth>
- <SeedProgress>143.0970</SeedProgress>
+ <SeedProgress>151.6936</SeedProgress>
 </Colony>
 <Radius>5122554</Radius>
 <ARot>85258</ARot>
@@ -132,7 +133,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>790119770260140000</LastGrowth>
  <NextGrowth>808384730260140000</NextGrowth>
- <SeedProgress>37.3740</SeedProgress>
+ <SeedProgress>43.8215</SeedProgress>
 </Colony>
 <Radius>4247623</Radius>
 <ARot>55590</ARot>
@@ -170,6 +171,7 @@
 </Star>
 <Star ID="1">
 <Seed>2757711</Seed>
+<Name>Nidhava Core</Name>
  <MapPos X="-5.68" Y="-8.7"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)4</TradeRoute>
@@ -184,7 +186,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>780547317120428386</LastGrowth>
  <NextGrowth>803799285120428386</NextGrowth>
- <SeedProgress>134.5886</SeedProgress>
+ <SeedProgress>145.3344</SeedProgress>
 </Colony>
 <Radius>6097833</Radius>
 <ARot>78260</ARot>
@@ -214,6 +216,7 @@
 </Star>
 <Star ID="3">
 <Seed>6175474</Seed>
+<Name>WuTrigi Major</Name>
  <MapPos X="-11.34" Y="-5.67"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -245,6 +248,7 @@
 </Star>
 <Star ID="4">
 <Seed>3780830</Seed>
+<Name>Ozlob</Name>
  <MapPos X="-5.33" Y="-11.1"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)1</TradeRoute>
@@ -263,7 +267,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>785941850165618386</LastGrowth>
  <NextGrowth>814231802165618386</NextGrowth>
- <SeedProgress>176.0705</SeedProgress>
+ <SeedProgress>186.8163</SeedProgress>
 </Colony>
 <Radius>60268409</Radius>
 <ARot>834585</ARot>
@@ -276,6 +280,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>5488110</Seed>
+<Name>LuWrot Beta</Name>
  <MapPos X="-9.72" Y="-13.05"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)0</TradeRoute>
@@ -291,7 +296,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>779814372470165779</LastGrowth>
  <NextGrowth>805578852470165779</NextGrowth>
- <SeedProgress>165.7673</SeedProgress>
+ <SeedProgress>174.3639</SeedProgress>
 </Colony>
 <Radius>49754645</Radius>
 <ARot>879353</ARot>
@@ -318,11 +323,11 @@
 <Type>Gas</Type>
 <PRot>15222857</PRot>
 <Colony>
- <BaseType>15</BaseType>
+ <BaseType>31</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>767934432000000000</LastGrowth>
- <NextGrowth>792944640000000000</NextGrowth>
- <SeedProgress>186.7366</SeedProgress>
+ <LastGrowth>792944640000000000</LastGrowth>
+ <NextGrowth>830929536000000000</NextGrowth>
+ <SeedProgress>195.4114</SeedProgress>
 </Colony>
 <Radius>51443455</Radius>
 <ARot>890304</ARot>
@@ -353,7 +358,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>786228768000000000</LastGrowth>
  <NextGrowth>812928096000000000</NextGrowth>
- <SeedProgress>171.6219</SeedProgress>
+ <SeedProgress>182.3677</SeedProgress>
 </Colony>
 <Radius>5590944</Radius>
 <ARot>91050</ARot>
@@ -390,6 +395,7 @@
 </Star>
 <Star ID="6">
 <Seed>5862802</Seed>
+<Name>CaJrom Major</Name>
  <MapPos X="-13.6" Y="-6.91"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -418,6 +424,7 @@
  <Visited/></Star>
 <Star ID="7">
 <Seed>5084971</Seed>
+<Name>Urlidu</Name>
  <MapPos X="-7.48" Y="-11.2"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)0</TradeRoute>
@@ -461,7 +468,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>774795456000000000</LastGrowth>
  <NextGrowth>798758496000000000</NextGrowth>
- <SeedProgress>171.6663</SeedProgress>
+ <SeedProgress>182.4121</SeedProgress>
 </Colony>
 <Radius>4661595</Radius>
 <ARot>67446</ARot>
@@ -488,6 +495,7 @@
  <Visited/></Star>
 <Star ID="8">
 <Seed>3126314</Seed>
+<Name>IFrit Core</Name>
  <MapPos X="-6.23" Y="-6.88"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)1</TradeRoute>
@@ -503,7 +511,7 @@
  <LastUpdate>739695005081803146</LastUpdate>
  <LastGrowth>763982524119391823</LastGrowth>
  <NextGrowth>796088764119391823</NextGrowth>
- <SeedProgress>100.6162</SeedProgress>
+ <SeedProgress>109.2128</SeedProgress>
 </Colony>
 <Radius>83892794</Radius>
 <ARot>1142686</ARot>
@@ -520,7 +528,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>786434794757080000</LastGrowth>
  <NextGrowth>800118826757080000</NextGrowth>
- <SeedProgress>97.3037</SeedProgress>
+ <SeedProgress>103.7512</SeedProgress>
 </Colony>
 <Radius>43448504</Radius>
 <ARot>659569</ARot>
@@ -541,9 +549,10 @@
 <Type>Gas</Type>
 <PRot>10092116</PRot>
 <Colony>
+ <BaseType>9</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>790280137538340000</LastGrowth>
- <NextGrowth>792588745538340000</NextGrowth>
+ <LastGrowth>792588745538340000</LastGrowth>
+ <NextGrowth>802370953538340000</NextGrowth>
 </Colony>
 <Radius>58131508</Radius>
 <ARot>816080</ARot>
@@ -560,7 +569,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>790691562966900000</LastGrowth>
  <NextGrowth>813506346966900000</NextGrowth>
- <SeedProgress>44.3242</SeedProgress>
+ <SeedProgress>52.9208</SeedProgress>
 </Colony>
 <Radius>7213975</Radius>
 <ARot>112955</ARot>
@@ -573,6 +582,7 @@
  <Visited/></Star>
 <Star ID="9">
 <Seed>1134855</Seed>
+<Name>Kewlim Beta</Name>
  <MapPos X="-9.5" Y="-7.77"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -621,7 +631,7 @@
  <LastUpdate>730642624662393437</LastUpdate>
  <LastGrowth>758130062126890000</LastGrowth>
  <NextGrowth>842181710126890000</NextGrowth>
- <SeedProgress>189.4382</SeedProgress>
+ <SeedProgress>195.8857</SeedProgress>
 </Colony>
 <Radius>5026195</Radius>
 <ARot>74583</ARot>
@@ -639,7 +649,7 @@
  <LastUpdate>730678982432393837</LastUpdate>
  <LastGrowth>686225952000000000</LastGrowth>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>177.5731</SeedProgress>
+ <SeedProgress>190.4680</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6742146</Radius>
@@ -673,7 +683,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>755962848000000000</LastGrowth>
  <NextGrowth>803672064000000000</NextGrowth>
- <SeedProgress>189.6262</SeedProgress>
+ <SeedProgress>198.2228</SeedProgress>
 </Colony>
 <Radius>51076769</Radius>
 <ARot>708061</ARot>
@@ -718,12 +728,12 @@
 <Type>Volcanic</Type>
 <PRot>27217191</PRot>
 <Colony>
- <BaseType>29</BaseType>
+ <BaseType>31</BaseType>
  <Owner>Insectoid</Owner>
  <LastUpdate>730642932289651405</LastUpdate>
- <LastGrowth>769291414805618386</LastGrowth>
- <NextGrowth>792938230805618386</NextGrowth>
- <SeedProgress>187.6219</SeedProgress>
+ <LastGrowth>792938230805618386</LastGrowth>
+ <NextGrowth>826229014805618386</NextGrowth>
+ <SeedProgress>196.3311</SeedProgress>
 </Colony>
 <Radius>5756027</Radius>
 <ARot>70039</ARot>
@@ -800,6 +810,7 @@
  <Visited/></Star>
 <Star ID="11">
 <Seed>7071111</Seed>
+<Name>Ighun Beta</Name>
  <MapPos X="-7.6" Y="-13.09"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -808,10 +819,11 @@
 <Type>Desert</Type>
 <PRot>40090066</PRot>
 <Colony>
- <BaseType>17</BaseType>
+ <BaseType>25</BaseType>
  <Owner>Insectoid</Owner>
- <LastGrowth>749510421349431823</LastGrowth>
- <NextGrowth>792668949349431823</NextGrowth>
+ <LastGrowth>792668949349431823</LastGrowth>
+ <NextGrowth>823304661349431823</NextGrowth>
+ <SeedProgress>4.3754</SeedProgress>
 </Colony>
 <Radius>6752588</Radius>
 <ARot>88444</ARot>
@@ -825,6 +837,7 @@
 </Star>
 <Star ID="12">
 <Seed>1507993</Seed>
+<Name>Bajlav</Name>
  <MapPos X="-11.01" Y="-11.04"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)5</TradeRoute>
@@ -871,7 +884,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>783917647727084320</LastGrowth>
  <NextGrowth>808787023727084320</NextGrowth>
- <SeedProgress>187.3801</SeedProgress>
+ <SeedProgress>195.9767</SeedProgress>
 </Colony>
 <Radius>40789455</Radius>
 <ARot>534712</ARot>
@@ -914,7 +927,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>792136800000000000</LastGrowth>
  <NextGrowth>1656136800000000000</NextGrowth>
- <SeedProgress>163.0338</SeedProgress>
+ <SeedProgress>175.9287</SeedProgress>
 </Colony>
 <Radius>80535240</Radius>
 <ARot>1071644</ARot>
@@ -927,6 +940,7 @@
 </Star>
 <Star ID="13">
 <Seed>3428016</Seed>
+<Name>IJrel</Name>
  <MapPos X="-13.11" Y="-12.03"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(-1,-1)12</TradeRoute>
@@ -941,7 +955,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>789401186080597136</LastGrowth>
  <NextGrowth>818324450080597136</NextGrowth>
- <SeedProgress>1.5632</SeedProgress>
+ <SeedProgress>10.1598</SeedProgress>
 </Colony>
 <Radius>55948178</Radius>
 <ARot>637272</ARot>
@@ -958,7 +972,7 @@
  <Owner>Insectoid</Owner>
  <LastGrowth>789735585670166256</LastGrowth>
  <NextGrowth>800980545670166256</NextGrowth>
- <SeedProgress>43.4671</SeedProgress>
+ <SeedProgress>49.9146</SeedProgress>
 </Colony>
 <Radius>61223280</Radius>
 <ARot>871002</ARot>
@@ -988,6 +1002,7 @@
  <Sector X="0" Y="-1" Inhabitant="Ursalon">
 <Star ID="0">
 <Seed>1034006</Seed>
+<Name>Ludlasa</Name>
  <MapPos X="-3.06" Y="-7.28"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)2</TradeRoute>
@@ -1003,7 +1018,7 @@
  <LastUpdate>712224964997188750</LastUpdate>
  <LastGrowth>779059607747084320</LastGrowth>
  <NextGrowth>799344599747084320</NextGrowth>
- <SeedProgress>166.7472</SeedProgress>
+ <SeedProgress>176.4756</SeedProgress>
 </Colony>
 <Radius>4538210</Radius>
 <ARot>74859</ARot>
@@ -1034,7 +1049,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>779897892615684687</LastGrowth>
  <NextGrowth>799458852615684687</NextGrowth>
- <SeedProgress>183.8164</SeedProgress>
+ <SeedProgress>191.5991</SeedProgress>
 </Colony>
 <Radius>5679548</Radius>
 <ARot>76053</ARot>
@@ -1073,6 +1088,7 @@
  <Visited/></Star>
 <Star ID="1">
 <Seed>5546579</Seed>
+<Name>ERros Delta</Name>
  <MapPos X="-2.33" Y="-13.07"/>
  <Owner>Ursalon</Owner>
  <Planets>
@@ -1102,6 +1118,7 @@
 </Star>
 <Star ID="2">
 <Seed>4959616</Seed>
+<Name>Micliiu Core</Name>
  <MapPos X="-0.34" Y="-9.24"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)0</TradeRoute>
@@ -1119,7 +1136,7 @@
  <LastUpdate>732818944034830000</LastUpdate>
  <LastGrowth>777697632000000000</LastGrowth>
  <NextGrowth>807296544000000000</NextGrowth>
- <SeedProgress>183.6179</SeedProgress>
+ <SeedProgress>193.3463</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -1146,6 +1163,7 @@
  <Visited/></Star>
 <Star ID="3">
 <Seed>5371856</Seed>
+<Name>Egroz Alpha</Name>
  <MapPos X="3.05" Y="-10.76"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)4</TradeRoute>
@@ -1162,7 +1180,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>752545807727084320</LastGrowth>
  <NextGrowth>800166895727084320</NextGrowth>
- <SeedProgress>191.1911</SeedProgress>
+ <SeedProgress>197.0281</SeedProgress>
 </Colony>
 <Radius>68674923</Radius>
 <ARot>1181619</ARot>
@@ -1205,7 +1223,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>760033124199391823</LastGrowth>
  <NextGrowth>795600548199391823</NextGrowth>
- <SeedProgress>187.1379</SeedProgress>
+ <SeedProgress>196.8663</SeedProgress>
 </Colony>
 <Radius>7218842</Radius>
 <ARot>105283</ARot>
@@ -1222,7 +1240,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>790131456000000000</LastGrowth>
  <NextGrowth>1654131456000000000</NextGrowth>
- <SeedProgress>180.9047</SeedProgress>
+ <SeedProgress>192.5788</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -1273,6 +1291,7 @@
 </Star>
 <Star ID="4">
 <Seed>7267395</Seed>
+<Name>Vodhaba</Name>
  <MapPos X="3.17" Y="-12.24"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
@@ -1290,7 +1309,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>790996973977862260</LastGrowth>
  <NextGrowth>813656237977862260</NextGrowth>
- <SeedProgress>100.2354</SeedProgress>
+ <SeedProgress>108.0181</SeedProgress>
 </Colony>
 <Radius>58190284</Radius>
 <ARot>739920</ARot>
@@ -1315,7 +1334,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>763222176000000000</LastGrowth>
  <NextGrowth>802006272000000000</NextGrowth>
- <SeedProgress>181.1425</SeedProgress>
+ <SeedProgress>190.8709</SeedProgress>
 </Colony>
 <Radius>56377948</Radius>
 <ARot>911395</ARot>
@@ -1353,7 +1372,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>784183275954720000</LastGrowth>
  <NextGrowth>803238795954720000</NextGrowth>
- <SeedProgress>121.8032</SeedProgress>
+ <SeedProgress>127.6402</SeedProgress>
 </Colony>
 <Radius>71769555</Radius>
 <ARot>793134</ARot>
@@ -1413,6 +1432,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>968339</Seed>
+<Name>MhiRloio Core</Name>
  <MapPos X="-2.75" Y="-11.61"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)0</TradeRoute>
@@ -1427,7 +1447,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>777302211159391823</LastGrowth>
  <NextGrowth>801554691159391823</NextGrowth>
- <SeedProgress>194.2409</SeedProgress>
+ <SeedProgress>3.9512</SeedProgress>
 </Colony>
 <Radius>4240829</Radius>
 <ARot>58203</ARot>
@@ -1435,6 +1455,14 @@
 <Seed>6721213</Seed>
 <Orbit>30088204379</Orbit>
 <TempBase>298.90560074663256</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>792784686135650000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
 </Planet>
 <Planet Seed="2175987" />
 <Planet ID="2">
@@ -1457,6 +1485,7 @@
  <Visited/></Star>
 <Star ID="6">
 <Seed>3980070</Seed>
+<Name>IJlav Epsilon</Name>
  <MapPos X="4.77" Y="-10.69"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
@@ -1485,7 +1514,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>757113682465589999</LastGrowth>
  <NextGrowth>807094354465589999</NextGrowth>
- <SeedProgress>167.1933</SeedProgress>
+ <SeedProgress>173.0302</SeedProgress>
 </Colony>
 <Radius>56414570</Radius>
 <ARot>637504</ARot>
@@ -1510,6 +1539,7 @@
 </Star>
 <Star ID="7">
 <Seed>9563311</Seed>
+<Name>Hholrep Core</Name>
  <MapPos X="4.54" Y="-6.73"/>
  <Owner>Ursalon</Owner>
  <Planets>
@@ -1553,7 +1583,7 @@
  <LastUpdate>739206244312483146</LastUpdate>
  <LastGrowth>766647073853350000</LastGrowth>
  <NextGrowth>795328417853350000</NextGrowth>
- <SeedProgress>132.3322</SeedProgress>
+ <SeedProgress>139.7987</SeedProgress>
 </Colony>
 <Name>Foray Base</Name>
 <Radius>5786577</Radius>
@@ -1596,6 +1626,7 @@
  <Visited/></Star>
 <Star ID="9">
 <Seed>8472350</Seed>
+<Name>Borleck Epsilon</Name>
  <MapPos X="4.38" Y="-8.02"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
@@ -1642,7 +1673,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>780619180282942260</LastGrowth>
  <NextGrowth>803429644282942260</NextGrowth>
- <SeedProgress>99.2526</SeedProgress>
+ <SeedProgress>108.9808</SeedProgress>
 </Colony>
 <Radius>52519596</Radius>
 <ARot>801703</ARot>
@@ -1679,7 +1710,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>791726356629431823</LastGrowth>
  <NextGrowth>1655726356629431823</NextGrowth>
- <SeedProgress>22.5143</SeedProgress>
+ <SeedProgress>34.1881</SeedProgress>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -1708,7 +1739,7 @@
  <LastUpdate>733026359353038203</LastUpdate>
  <LastGrowth>790719840000000000</LastGrowth>
  <NextGrowth>1654719840000000000</NextGrowth>
- <SeedProgress>172.8778</SeedProgress>
+ <SeedProgress>184.5516</SeedProgress>
 </Colony>
 <Radius>5745459</Radius>
 <ARot>84567</ARot>
@@ -1733,7 +1764,7 @@
  <Owner>Ursalon</Owner>
  <LastUpdate>733026840859972500</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>178.6603</SeedProgress>
+ <SeedProgress>190.3341</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6516259</Radius>
@@ -1862,7 +1893,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>783693494438860000</LastGrowth>
  <NextGrowth>812177846438860000</NextGrowth>
- <SeedProgress>192.5784</SeedProgress>
+ <SeedProgress>162.2738</SeedProgress>
 </Colony>
 <Radius>79754297</Radius>
 <ARot>1079121</ARot>
@@ -1899,7 +1930,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>780676333660860408</LastGrowth>
  <NextGrowth>799301581660860408</NextGrowth>
- <SeedProgress>176.0411</SeedProgress>
+ <SeedProgress>183.8236</SeedProgress>
 </Colony>
 <Radius>5315928</Radius>
 <ARot>75010</ARot>
@@ -1912,6 +1943,7 @@
  <Visited/></Star>
 <Star ID="12">
 <Seed>3178001</Seed>
+<Name>MreNhoo</Name>
  <MapPos X="2.72" Y="-13.27"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)3</TradeRoute>
@@ -1925,7 +1957,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>786893594260140000</LastGrowth>
  <NextGrowth>811243706260140000</NextGrowth>
- <SeedProgress>107.7085</SeedProgress>
+ <SeedProgress>115.4910</SeedProgress>
 </Colony>
 <Radius>7360782</Radius>
 <ARot>107429</ARot>
@@ -1950,7 +1982,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>780509260224570000</LastGrowth>
  <NextGrowth>800774380224570000</NextGrowth>
- <SeedProgress>32.0359</SeedProgress>
+ <SeedProgress>41.7641</SeedProgress>
 </Colony>
 <Radius>5959497</Radius>
 <ARot>81242</ARot>
@@ -1975,7 +2007,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>780489300659203862</LastGrowth>
  <NextGrowth>793770708659203862</NextGrowth>
- <SeedProgress>181.7143</SeedProgress>
+ <SeedProgress>187.5512</SeedProgress>
 </Colony>
 <Radius>6983252</Radius>
 <ARot>114145</ARot>
@@ -2005,6 +2037,7 @@
 </Star>
 <Star ID="13">
 <Seed>16048</Seed>
+<Name>PhoJrez Minor</Name>
  <MapPos X="-4.6" Y="-12.51"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(0,-1)0</TradeRoute>
@@ -2019,7 +2052,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>781556000842834905</LastGrowth>
  <NextGrowth>801133376842834905</NextGrowth>
- <SeedProgress>18.8222</SeedProgress>
+ <SeedProgress>26.6047</SeedProgress>
 </Colony>
 <Radius>51408843</Radius>
 <ARot>736781</ARot>
@@ -2050,7 +2083,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>787798521669431823</LastGrowth>
  <NextGrowth>820398969669431823</NextGrowth>
- <SeedProgress>197.2197</SeedProgress>
+ <SeedProgress>6.9191</SeedProgress>
 </Colony>
 <Radius>5417287</Radius>
 <ARot>68020</ARot>
@@ -2081,6 +2114,14 @@
 <Seed>1637524</Seed>
 <Orbit>67761118571</Orbit>
 <TempBase>190.13364519883513</TempBase>
+<Moons>
+<Moon ID="6">
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>792654305728640000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
 </Planet>
 <Planet Seed="8456019" />
  </Planets>
@@ -2089,6 +2130,7 @@
  <Sector X="1" Y="-1" Inhabitant="Gokan">
 <Star ID="0">
 <Seed>8967901</Seed>
+<Name>UPria Prime</Name>
  <MapPos X="11.84" Y="-5.65"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)11</TradeRoute>
@@ -2102,7 +2144,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>785880997009391823</LastGrowth>
  <NextGrowth>808653445009391823</NextGrowth>
- <SeedProgress>168.0372</SeedProgress>
+ <SeedProgress>175.0300</SeedProgress>
 </Colony>
 <Radius>4092232</Radius>
 <ARot>56468</ARot>
@@ -2119,7 +2161,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>786320598937132934</LastGrowth>
  <NextGrowth>814938870937132934</NextGrowth>
- <SeedProgress>80.4141</SeedProgress>
+ <SeedProgress>85.6587</SeedProgress>
 </Colony>
 <Radius>68284311</Radius>
 <ARot>1017574</ARot>
@@ -2152,6 +2194,7 @@
  <Visited/></Star>
 <Star ID="1">
 <Seed>1539127</Seed>
+<Name>Jracroaa Delta</Name>
  <MapPos X="5.31" Y="-8.87"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)3</TradeRoute>
@@ -2165,7 +2208,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>790271957300340000</LastGrowth>
  <NextGrowth>823460789300340000</NextGrowth>
- <SeedProgress>37.3912</SeedProgress>
+ <SeedProgress>44.3840</SeedProgress>
 </Colony>
 <Radius>58139487</Radius>
 <ARot>884621</ARot>
@@ -2190,7 +2233,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>769681431203638434</LastGrowth>
  <NextGrowth>794678679203638434</NextGrowth>
- <SeedProgress>197.6267</SeedProgress>
+ <SeedProgress>164.6141</SeedProgress>
 </Colony>
 <Radius>6628268</Radius>
 <ARot>96629</ARot>
@@ -2215,7 +2258,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>789815492230986221</LastGrowth>
  <NextGrowth>823985828230986221</NextGrowth>
- <SeedProgress>33.9192</SeedProgress>
+ <SeedProgress>39.1638</SeedProgress>
 </Colony>
 <Radius>52695779</Radius>
 <ARot>782462</ARot>
@@ -2228,6 +2271,7 @@
 </Star>
 <Star ID="2">
 <Seed>154212</Seed>
+<Name>Mloplick Minor</Name>
  <MapPos X="6.85" Y="-14.32"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)5</TradeRoute>
@@ -2242,7 +2286,7 @@
  <LastUpdate>750747353310705779</LastUpdate>
  <LastGrowth>779030529914340625</LastGrowth>
  <NextGrowth>809358657914340625</NextGrowth>
- <SeedProgress>49.5295</SeedProgress>
+ <SeedProgress>56.5223</SeedProgress>
 </Colony>
 <Radius>6856232</Radius>
 <ARot>87295</ARot>
@@ -2272,6 +2316,7 @@
  <Visited/></Star>
 <Star ID="3">
 <Seed>8801687</Seed>
+<Name>Rresroa Major</Name>
  <MapPos X="5.81" Y="-11.67"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)1</TradeRoute>
@@ -2281,9 +2326,10 @@
 <Type>Gas</Type>
 <PRot>18652459</PRot>
 <Colony>
+ <BaseType>9</BaseType>
  <Owner>Gokan</Owner>
- <LastGrowth>790800434428680000</LastGrowth>
- <NextGrowth>792623474428680000</NextGrowth>
+ <LastGrowth>792623474428680000</LastGrowth>
+ <NextGrowth>798654194428680000</NextGrowth>
 </Colony>
 <Radius>84786621</Radius>
 <ARot>1180018</ARot>
@@ -2300,7 +2346,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>784881202587286221</LastGrowth>
  <NextGrowth>799964914587286221</NextGrowth>
- <SeedProgress>66.7989</SeedProgress>
+ <SeedProgress>73.7917</SeedProgress>
 </Colony>
 <Radius>6809649</Radius>
 <ARot>88421</ARot>
@@ -2318,7 +2364,7 @@
  <LastUpdate>750547493317210467</LastUpdate>
  <LastGrowth>763225442080597136</LastGrowth>
  <NextGrowth>817933922080597136</NextGrowth>
- <SeedProgress>28.4840</SeedProgress>
+ <SeedProgress>35.4768</SeedProgress>
 </Colony>
 <Radius>7316518</Radius>
 <ARot>116050</ARot>
@@ -2343,7 +2389,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>790557176571677286</LastGrowth>
  <NextGrowth>808529240571677286</NextGrowth>
- <SeedProgress>24.4202</SeedProgress>
+ <SeedProgress>29.6648</SeedProgress>
 </Colony>
 <Radius>50917275</Radius>
 <ARot>771527</ARot>
@@ -2357,6 +2403,7 @@
  <Visited/></Star>
 <Star ID="4">
 <Seed>3316576</Seed>
+<Name>ZeBhus Gamma</Name>
  <MapPos X="13.02" Y="-6.26"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -2388,6 +2435,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>9982253</Seed>
+<Name>Sunlaku Alpha</Name>
  <MapPos X="8.11" Y="-14.56"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)2</TradeRoute>
@@ -2404,7 +2452,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>781953306314320000</LastGrowth>
  <NextGrowth>798907578314320000</NextGrowth>
- <SeedProgress>142.8710</SeedProgress>
+ <SeedProgress>148.1156</SeedProgress>
 </Colony>
 <Radius>55961202</Radius>
 <ARot>710242</ARot>
@@ -2435,7 +2483,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>777835492410611250</LastGrowth>
  <NextGrowth>805832548410611250</NextGrowth>
- <SeedProgress>163.0335</SeedProgress>
+ <SeedProgress>171.7746</SeedProgress>
 </Colony>
 <Radius>71513727</Radius>
 <ARot>1245274</ARot>
@@ -2452,7 +2500,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>788011649861931553</LastGrowth>
  <NextGrowth>815966369861931553</NextGrowth>
- <SeedProgress>121.5039</SeedProgress>
+ <SeedProgress>128.4967</SeedProgress>
 </Colony>
 <Radius>44669483</Radius>
 <ARot>686218</ARot>
@@ -2483,7 +2531,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>786481242033745779</LastGrowth>
  <NextGrowth>811665978033745779</NextGrowth>
- <SeedProgress>78.2142</SeedProgress>
+ <SeedProgress>83.4588</SeedProgress>
 </Colony>
 <Radius>51077782</Radius>
 <ARot>801987</ARot>
@@ -2506,6 +2554,7 @@
 </Star>
 <Star ID="6">
 <Seed>6674616</Seed>
+<Name>Idluii Prime</Name>
  <MapPos X="6.19" Y="-6.07"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)10</TradeRoute>
@@ -2519,7 +2568,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>776801067709574454</LastGrowth>
  <NextGrowth>802356459709574454</NextGrowth>
- <SeedProgress>199.9034</SeedProgress>
+ <SeedProgress>168.6347</SeedProgress>
 </Colony>
 <Radius>52056025</Radius>
 <ARot>626680</ARot>
@@ -2556,7 +2605,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>763917707633962803</LastGrowth>
  <NextGrowth>800149547633962803</NextGrowth>
- <SeedProgress>175.8739</SeedProgress>
+ <SeedProgress>181.1185</SeedProgress>
 </Colony>
 <Radius>6873023</Radius>
 <ARot>117508</ARot>
@@ -2581,6 +2630,7 @@
  <Visited/></Star>
 <Star ID="8">
 <Seed>8038325</Seed>
+<Name>Aflag Delta</Name>
  <MapPos X="13.88" Y="-14.73"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -2620,7 +2670,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>761909760000000000</LastGrowth>
  <NextGrowth>797304384000000000</NextGrowth>
- <SeedProgress>35.9990</SeedProgress>
+ <SeedProgress>44.7401</SeedProgress>
 </Colony>
 <Radius>77994475</Radius>
 <ARot>1134165</ARot>
@@ -2651,7 +2701,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>789428388427824687</LastGrowth>
  <NextGrowth>810084900427824687</NextGrowth>
- <SeedProgress>188.9808</SeedProgress>
+ <SeedProgress>195.9736</SeedProgress>
 </Colony>
 <Radius>4321421</Radius>
 <ARot>70258</ARot>
@@ -2673,6 +2723,7 @@
  <Visited/></Star>
 <Star ID="10">
 <Seed>9461076</Seed>
+<Name>Rrakhal Delta</Name>
  <MapPos X="5.86" Y="-7.48"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)1</TradeRoute>
@@ -2711,7 +2762,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>784001950396860000</LastGrowth>
  <NextGrowth>806645662396860000</NextGrowth>
- <SeedProgress>113.1374</SeedProgress>
+ <SeedProgress>118.3820</SeedProgress>
 </Colony>
 <Radius>5832035</Radius>
 <ARot>79123</ARot>
@@ -2728,7 +2779,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>775656157998154454</LastGrowth>
  <NextGrowth>800701789998154454</NextGrowth>
- <SeedProgress>160.1489</SeedProgress>
+ <SeedProgress>168.8900</SeedProgress>
 </Colony>
 <Radius>5804717</Radius>
 <ARot>94616</ARot>
@@ -2753,7 +2804,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>777562788470165779</LastGrowth>
  <NextGrowth>795712836470165779</NextGrowth>
- <SeedProgress>197.1567</SeedProgress>
+ <SeedProgress>164.1343</SeedProgress>
 </Colony>
 <Radius>6079478</Radius>
 <ARot>74552</ARot>
@@ -2796,7 +2847,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>786380064833627484</LastGrowth>
  <NextGrowth>814508448833627484</NextGrowth>
- <SeedProgress>106.1420</SeedProgress>
+ <SeedProgress>113.1348</SeedProgress>
 </Colony>
 <Radius>73106629</Radius>
 <ARot>1014622</ARot>
@@ -2840,7 +2891,7 @@
  <LastUpdate>708632472330239062</LastUpdate>
  <LastGrowth>786598560000000000</LastGrowth>
  <NextGrowth>826388352000000000</NextGrowth>
- <SeedProgress>183.4261</SeedProgress>
+ <SeedProgress>192.1672</SeedProgress>
 </Colony>
 <Radius>6312586</Radius>
 <ARot>92520</ARot>
@@ -2871,7 +2922,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>786016699892665779</LastGrowth>
  <NextGrowth>811082203892665779</NextGrowth>
- <SeedProgress>177.0743</SeedProgress>
+ <SeedProgress>185.8154</SeedProgress>
 </Colony>
 <Radius>5280779</Radius>
 <ARot>75866</ARot>
@@ -2903,7 +2954,7 @@
  <LastUpdate>750221650229501406</LastUpdate>
  <LastGrowth>782105005700184687</LastGrowth>
  <NextGrowth>816627853700184687</NextGrowth>
- <SeedProgress>153.4439</SeedProgress>
+ <SeedProgress>162.1850</SeedProgress>
 </Colony>
 <Radius>6357345</Radius>
 <ARot>95386</ARot>
@@ -2929,7 +2980,7 @@
  <LastUpdate>708632714182627499</LastUpdate>
  <LastGrowth>776514223750210000</LastGrowth>
  <NextGrowth>803987695750210000</NextGrowth>
- <SeedProgress>22.3775</SeedProgress>
+ <SeedProgress>27.6221</SeedProgress>
 </Colony>
 <Radius>56007716</Radius>
 <ARot>765837</ARot>
@@ -2973,7 +3024,7 @@
  <Owner>Gokan</Owner>
  <LastUpdate>775033862471053862</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>196.0659</SeedProgress>
+ <SeedProgress>166.5401</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5420964</Radius>
@@ -3007,7 +3058,7 @@
  <LastUpdate>733896191977461562</LastUpdate>
  <LastGrowth>773976384000000000</LastGrowth>
  <NextGrowth>798672096000000000</NextGrowth>
- <SeedProgress>191.0887</SeedProgress>
+ <SeedProgress>199.8298</SeedProgress>
 </Colony>
 <Radius>5381628</Radius>
 <ARot>97560</ARot>
@@ -3024,7 +3075,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>771762092185618386</LastGrowth>
  <NextGrowth>799315916185618386</NextGrowth>
- <SeedProgress>183.9869</SeedProgress>
+ <SeedProgress>190.9797</SeedProgress>
 </Colony>
 <Radius>6551771</Radius>
 <ARot>105366</ARot>
@@ -3095,6 +3146,7 @@
  <Visited/></Star>
 <Star ID="13">
 <Seed>952100</Seed>
+<Name>RroSlod Minor</Name>
  <MapPos X="10.55" Y="-10.45"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,-1)5</TradeRoute>
@@ -3126,7 +3178,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>776526248062470467</LastGrowth>
  <NextGrowth>794201960062470467</NextGrowth>
- <SeedProgress>168.4638</SeedProgress>
+ <SeedProgress>175.4566</SeedProgress>
 </Colony>
 <Radius>5763022</Radius>
 <ARot>80467</ARot>
@@ -3158,7 +3210,7 @@
  <LastUpdate>733992722093540000</LastUpdate>
  <LastGrowth>778636045700184687</LastGrowth>
  <NextGrowth>803569357700184687</NextGrowth>
- <SeedProgress>163.1754</SeedProgress>
+ <SeedProgress>171.9165</SeedProgress>
 </Colony>
 <Radius>5392147</Radius>
 <ARot>72419</ARot>
@@ -3190,7 +3242,7 @@
  <LastUpdate>733798317426377656</LastUpdate>
  <LastGrowth>782305344000000000</LastGrowth>
  <NextGrowth>815916672000000000</NextGrowth>
- <SeedProgress>174.5431</SeedProgress>
+ <SeedProgress>183.2842</SeedProgress>
 </Colony>
 <Radius>6057050</Radius>
 <ARot>79376</ARot>
@@ -3207,7 +3259,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>790118119695087471</LastGrowth>
  <NextGrowth>824340295695087471</NextGrowth>
- <SeedProgress>30.0082</SeedProgress>
+ <SeedProgress>35.2528</SeedProgress>
 </Colony>
 <Radius>28600017</Radius>
 <ARot>358709</ARot>
@@ -3222,6 +3274,7 @@
  <Sector X="-1" Y="0" Inhabitant="Grey">
 <Star ID="0">
 <Seed>77853</Seed>
+<Name>Eshalo Core</Name>
  <MapPos X="-11.62" Y="-0.99"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)5</TradeRoute>
@@ -3239,7 +3292,7 @@
  <LastUpdate>740670897635638234</LastUpdate>
  <LastGrowth>788576256000000000</LastGrowth>
  <NextGrowth>1652576256000000000</NextGrowth>
- <SeedProgress>162.6420</SeedProgress>
+ <SeedProgress>175.8070</SeedProgress>
 </Colony>
 <Radius>6099597</Radius>
 <ARot>84524</ARot>
@@ -3260,6 +3313,7 @@
  <Visited/></Star>
 <Star ID="1">
 <Seed>4179671</Seed>
+<Name>Cowrab Core</Name>
  <MapPos X="-7.41" Y="2.4"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -3286,6 +3340,7 @@
  <Visited/></Star>
 <Star ID="2">
 <Seed>1237786</Seed>
+<Name>Hlugrodu</Name>
  <MapPos X="-11.46" Y="-4.73"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -3298,7 +3353,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>760642720834352803</LastGrowth>
  <NextGrowth>797420608834352803</NextGrowth>
- <SeedProgress>32.5345</SeedProgress>
+ <SeedProgress>39.1170</SeedProgress>
 </Colony>
 <Radius>5751335</Radius>
 <ARot>98122</ARot>
@@ -3326,9 +3381,11 @@
  <Visited/></Star>
 <Star ID="3">
 <Seed>1877991</Seed>
+<Name>Jitret Beta</Name>
  <MapPos X="-8.75" Y="3.68"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)4</TradeRoute>
+ <TradeRoute>(-1,0)13</TradeRoute>
  <Planets>
 <Planet ID="0">
 <Type>Rocky</Type>
@@ -3356,6 +3413,7 @@
 </Star>
 <Star ID="4">
 <Seed>7772687</Seed>
+<Name>URroka Alpha</Name>
  <MapPos X="-10.3" Y="4.15"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)3</TradeRoute>
@@ -3394,7 +3452,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>760762113914340625</LastGrowth>
  <NextGrowth>798899073914340625</NextGrowth>
- <SeedProgress>182.7515</SeedProgress>
+ <SeedProgress>193.7224</SeedProgress>
 </Colony>
 <Radius>7398645</Radius>
 <ARot>75680</ARot>
@@ -3454,7 +3512,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>783344491279390000</LastGrowth>
  <NextGrowth>818379691279390000</NextGrowth>
- <SeedProgress>193.0021</SeedProgress>
+ <SeedProgress>161.7711</SeedProgress>
 </Colony>
 <Radius>6424830</Radius>
 <ARot>83256</ARot>
@@ -3485,7 +3543,7 @@
  <Owner>Grey</Owner>
  <LastUpdate>726750322223162706</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>198.1790</SeedProgress>
+ <SeedProgress>171.2983</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7076271</Radius>
@@ -3526,6 +3584,7 @@
  <Visited/></Star>
 <Star ID="6">
 <Seed>1635212</Seed>
+<Name>LhaPham Minor</Name>
  <MapPos X="-12.25" Y="-3.3"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
@@ -3556,7 +3615,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>785912508307144454</LastGrowth>
  <NextGrowth>812967804307144454</NextGrowth>
- <SeedProgress>45.9359</SeedProgress>
+ <SeedProgress>56.9068</SeedProgress>
 </Colony>
 <Radius>6070153</Radius>
 <ARot>97231</ARot>
@@ -3604,7 +3663,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>789780986605771545</LastGrowth>
  <NextGrowth>811510586605771545</NextGrowth>
- <SeedProgress>42.7769</SeedProgress>
+ <SeedProgress>49.3594</SeedProgress>
 </Colony>
 <Radius>5661708</Radius>
 <ARot>78232</ARot>
@@ -3629,6 +3688,7 @@
  <Visited/></Star>
 <Star ID="8">
 <Seed>5123514</Seed>
+<Name>Ekhep Major</Name>
  <MapPos X="-11.95" Y="-2.18"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
@@ -3642,7 +3702,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>791624388470165779</LastGrowth>
  <NextGrowth>815375748470165779</NextGrowth>
- <SeedProgress>198.2099</SeedProgress>
+ <SeedProgress>169.1486</SeedProgress>
 </Colony>
 <Radius>7575843</Radius>
 <ARot>109315</ARot>
@@ -3659,7 +3719,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>787154959161931823</LastGrowth>
  <NextGrowth>816295951161931823</NextGrowth>
- <SeedProgress>174.4556</SeedProgress>
+ <SeedProgress>185.4265</SeedProgress>
 </Colony>
 <Radius>6303012</Radius>
 <ARot>85875</ARot>
@@ -3680,6 +3740,7 @@
  <Visited/></Star>
 <Star ID="9">
 <Seed>5656298</Seed>
+<Name>ZraDhik Major</Name>
  <MapPos X="-10.9" Y="1.32"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -3719,7 +3780,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>751166581667144454</LastGrowth>
  <NextGrowth>798161269667144454</NextGrowth>
- <SeedProgress>184.5369</SeedProgress>
+ <SeedProgress>191.1194</SeedProgress>
 </Colony>
 <Radius>7518487</Radius>
 <ARot>111589</ARot>
@@ -3732,6 +3793,7 @@
 </Star>
 <Star ID="10">
 <Seed>9908567</Seed>
+<Name>Wlushadu Prime</Name>
  <MapPos X="-8.54" Y="-1.83"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
@@ -3748,7 +3810,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>787551008638574905</LastGrowth>
  <NextGrowth>816914048638574905</NextGrowth>
- <SeedProgress>78.8139</SeedProgress>
+ <SeedProgress>85.3964</SeedProgress>
 </Colony>
 <Radius>55328875</Radius>
 <ARot>912227</ARot>
@@ -3779,7 +3841,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>763466692204950000</LastGrowth>
  <NextGrowth>796125892204950000</NextGrowth>
- <SeedProgress>160.6016</SeedProgress>
+ <SeedProgress>171.5725</SeedProgress>
 </Colony>
 <Radius>72781818</Radius>
 <ARot>897789</ARot>
@@ -3834,7 +3896,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>772529184000000000</LastGrowth>
  <NextGrowth>797518656000000000</NextGrowth>
- <SeedProgress>165.5796</SeedProgress>
+ <SeedProgress>176.5505</SeedProgress>
 </Colony>
 <Radius>47963365</Radius>
 <ARot>689592</ARot>
@@ -3873,6 +3935,7 @@
  <Visited/></Star>
 <Star ID="11">
 <Seed>5203063</Seed>
+<Name>KruDhol</Name>
  <MapPos X="-12.04" Y="0.42"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -3900,6 +3963,7 @@
  <Visited/></Star>
 <Star ID="12">
 <Seed>4301369</Seed>
+<Name>Nruclase Delta</Name>
  <MapPos X="-12.61" Y="4.55"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)4</TradeRoute>
@@ -3912,7 +3976,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>770169871750210000</LastGrowth>
  <NextGrowth>798357871750210000</NextGrowth>
- <SeedProgress>120.6738</SeedProgress>
+ <SeedProgress>129.4505</SeedProgress>
 </Colony>
 <Radius>7428221</Radius>
 <ARot>110193</ARot>
@@ -3929,7 +3993,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>789729208662640000</LastGrowth>
  <NextGrowth>804946840662640000</NextGrowth>
- <SeedProgress>43.5982</SeedProgress>
+ <SeedProgress>50.1807</SeedProgress>
 </Colony>
 <Radius>62405794</Radius>
 <ARot>857357</ARot>
@@ -3959,9 +4023,11 @@
 </Star>
 <Star ID="13">
 <Seed>5768417</Seed>
+<Name>Temhem Core</Name>
  <MapPos X="-7.33" Y="-0.38"/>
  <Owner>Grey</Owner>
  <TradeRoute>(-1,0)0</TradeRoute>
+ <TradeRoute>(-1,0)3</TradeRoute>
  <TradeRoute>(-1,0)5</TradeRoute>
  <TradeRoute>(-1,0)10</TradeRoute>
  <Planets>
@@ -4010,7 +4076,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>782708832000000000</LastGrowth>
  <NextGrowth>1646708832000000000</NextGrowth>
- <SeedProgress>185.9965</SeedProgress>
+ <SeedProgress>199.1615</SeedProgress>
 </Colony>
 <Radius>5267214</Radius>
 <ARot>85347</ARot>
@@ -4041,7 +4107,7 @@
  <Owner>Grey</Owner>
  <LastGrowth>784259791727084320</LastGrowth>
  <NextGrowth>808007695727084320</NextGrowth>
- <SeedProgress>187.2063</SeedProgress>
+ <SeedProgress>195.9830</SeedProgress>
 </Colony>
 <Radius>78233008</Radius>
 <ARot>1298262</ARot>
@@ -4067,7 +4133,7 @@
  <LastUpdate>695945189011935625</LastUpdate>
  <LastGrowth>789234733700184687</LastGrowth>
  <NextGrowth>826397965700184687</NextGrowth>
- <SeedProgress>193.8737</SeedProgress>
+ <SeedProgress>164.8172</SeedProgress>
 </Colony>
 <Radius>7194809</Radius>
 <ARot>109270</ARot>
@@ -4080,11 +4146,11 @@
 <Type>Volcanic</Type>
 <PRot>16823764</PRot>
 <Colony>
- <BaseType>25</BaseType>
+ <BaseType>27</BaseType>
  <Owner>Grey</Owner>
- <LastGrowth>774838378798118698</LastGrowth>
- <NextGrowth>792789706798118698</NextGrowth>
- <SeedProgress>177.8547</SeedProgress>
+ <LastGrowth>792789706798118698</LastGrowth>
+ <NextGrowth>826211818798118698</NextGrowth>
+ <SeedProgress>185.3118</SeedProgress>
 </Colony>
 <Radius>7531002</Radius>
 <ARot>111506</ARot>
@@ -4237,7 +4303,7 @@
  <Owner>Human</Owner>
  <LastGrowth>789466597600531118</LastGrowth>
  <NextGrowth>818241253600531118</NextGrowth>
- <SeedProgress>11.7840</SeedProgress>
+ <SeedProgress>17.7572</SeedProgress>
 </Colony>
 <Radius>8500069</Radius>
 <ARot>107499</ARot>
@@ -4255,7 +4321,7 @@
  <LastUpdate>767030197247948957</LastUpdate>
  <LastGrowth>762999439932770000</LastGrowth>
  <NextGrowth>806021455932770000</NextGrowth>
- <SeedProgress>199.0308</SeedProgress>
+ <SeedProgress>6.4670</SeedProgress>
 </Colony>
 <Name>New Home</Name>
 <Radius>4758574</Radius>
@@ -4298,7 +4364,21 @@
 </Moon>
 </Moons>
 </Planet>
-<Planet Seed="427687" />
+<Planet ID="3">
+<Type>Rocky</Type>
+<PRot>45002348</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>792588641728640000</LastGrowth>
+ <NextGrowth>796332353728640000</NextGrowth>
+</Colony>
+<Radius>9147278</Radius>
+<ARot>121655</ARot>
+<Temp>196</Temp>
+<Seed>427687</Seed>
+<Orbit>79822797925</Orbit>
+<TempBase>196.04615768981708</TempBase>
+</Planet>
 <Planet ID="4">
 <Type>Rocky</Type>
 <PRot>45259168</PRot>
@@ -4384,7 +4464,7 @@
  <LastUpdate>767063446560330408</LastUpdate>
  <LastGrowth>764131980301417189</LastGrowth>
  <NextGrowth>798313548301417189</NextGrowth>
- <SeedProgress>159.7468</SeedProgress>
+ <SeedProgress>165.7199</SeedProgress>
 </Colony>
 <Radius>4055612</Radius>
 <ARot>58949</ARot>
@@ -4417,7 +4497,7 @@
  <LastUpdate>769675111745227812</LastUpdate>
  <LastGrowth>759931010080597136</LastGrowth>
  <NextGrowth>797445890080597136</NextGrowth>
- <SeedProgress>156.5061</SeedProgress>
+ <SeedProgress>163.9724</SeedProgress>
 </Colony>
 <Radius>7304973</Radius>
 <ARot>85537</ARot>
@@ -4459,7 +4539,7 @@
  <Owner>Human</Owner>
  <LastGrowth>769346208000000000</LastGrowth>
  <NextGrowth>806885280000000000</NextGrowth>
- <SeedProgress>167.9422</SeedProgress>
+ <SeedProgress>175.4085</SeedProgress>
 </Colony>
 <Radius>48376722</Radius>
 <ARot>713242</ARot>
@@ -4518,7 +4598,7 @@
  <Owner>Human</Owner>
  <LastGrowth>788434871327084320</LastGrowth>
  <NextGrowth>819683159327084320</NextGrowth>
- <SeedProgress>43.8548</SeedProgress>
+ <SeedProgress>48.3346</SeedProgress>
 </Colony>
 <Radius>6081636</Radius>
 <ARot>93170</ARot>
@@ -4608,7 +4688,7 @@
  <Owner>Human</Owner>
  <LastGrowth>752479279727084320</LastGrowth>
  <NextGrowth>806018767727084320</NextGrowth>
- <SeedProgress>190.6177</SeedProgress>
+ <SeedProgress>196.5908</SeedProgress>
 </Colony>
 <Radius>60444711</Radius>
 <ARot>918919</ARot>
@@ -4652,7 +4732,7 @@
  <LastUpdate>684730542109803125</LastUpdate>
  <LastGrowth>766760256000000000</LastGrowth>
  <NextGrowth>793529568000000000</NextGrowth>
- <SeedProgress>188.9554</SeedProgress>
+ <SeedProgress>196.4217</SeedProgress>
 </Colony>
 <Radius>62599700</Radius>
 <ARot>820912</ARot>
@@ -4690,7 +4770,7 @@
  <Owner>Human</Owner>
  <LastGrowth>770686638857198386</LastGrowth>
  <NextGrowth>798597294857198386</NextGrowth>
- <SeedProgress>199.7292</SeedProgress>
+ <SeedProgress>167.1937</SeedProgress>
 </Colony>
 <Name>Earth 2</Name>
 <Radius>5412137</Radius>
@@ -4723,7 +4803,7 @@
  <Owner>Human</Owner>
  <LastGrowth>761741689066300000</LastGrowth>
  <NextGrowth>839075737066300000</NextGrowth>
- <SeedProgress>160.4640</SeedProgress>
+ <SeedProgress>164.9438</SeedProgress>
 </Colony>
 <Radius>63781295</Radius>
 <ARot>887778</ARot>
@@ -4768,7 +4848,7 @@
  <Owner>Human</Owner>
  <LastUpdate>777198100587732340</LastUpdate>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>181.5277</SeedProgress>
+ <SeedProgress>190.4873</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6259600</Radius>
@@ -4895,7 +4975,7 @@
  <LastUpdate>766974024418518515</LastUpdate>
  <LastGrowth>732127680000000000</LastGrowth>
  <NextGrowth>801229536000000000</NextGrowth>
- <SeedProgress>177.7048</SeedProgress>
+ <SeedProgress>182.1846</SeedProgress>
 </Colony>
 <Name>Home Ice</Name>
 <Radius>7110942</Radius>
@@ -4986,7 +5066,7 @@
  <LastUpdate>732466560913960000</LastUpdate>
  <LastGrowth>776333459503891823</LastGrowth>
  <NextGrowth>799384115503891823</NextGrowth>
- <SeedProgress>186.4009</SeedProgress>
+ <SeedProgress>190.8807</SeedProgress>
 </Colony>
 <Radius>5725259</Radius>
 <ARot>97071</ARot>
@@ -5020,7 +5100,7 @@
  <LastUpdate>732285683729510000</LastUpdate>
  <LastGrowth>783283392000000000</LastGrowth>
  <NextGrowth>814015872000000000</NextGrowth>
- <SeedProgress>48.1089</SeedProgress>
+ <SeedProgress>55.5752</SeedProgress>
 </Colony>
 <Radius>72436431</Radius>
 <ARot>1140902</ARot>
@@ -5037,7 +5117,7 @@
  <Owner>Human</Owner>
  <LastGrowth>786778531839391823</LastGrowth>
  <NextGrowth>823133059839391823</NextGrowth>
- <SeedProgress>82.8273</SeedProgress>
+ <SeedProgress>88.8004</SeedProgress>
 </Colony>
 <Radius>65368747</Radius>
 <ARot>968771</ARot>
@@ -5075,7 +5155,7 @@
  <LastUpdate>686446673839149999</LastUpdate>
  <LastGrowth>779317632000000000</LastGrowth>
  <NextGrowth>802360512000000000</NextGrowth>
- <SeedProgress>151.2435</SeedProgress>
+ <SeedProgress>155.7233</SeedProgress>
 </Colony>
 <Name>Giant Rock</Name>
 <Radius>4603435</Radius>
@@ -5415,7 +5495,7 @@
  <LastUpdate>742897682946789375</LastUpdate>
  <LastGrowth>790663931967141823</LastGrowth>
  <NextGrowth>831446459967141823</NextGrowth>
- <SeedProgress>167.2456</SeedProgress>
+ <SeedProgress>174.7119</SeedProgress>
 </Colony>
 <Name>Lonely</Name>
 <Radius>6073595</Radius>
@@ -5441,7 +5521,7 @@
  <Owner>Human</Owner>
  <LastGrowth>778672872992790000</LastGrowth>
  <NextGrowth>801303624992790000</NextGrowth>
- <SeedProgress>159.5824</SeedProgress>
+ <SeedProgress>164.0622</SeedProgress>
 </Colony>
 <Radius>6480510</Radius>
 <ARot>84832</ARot>
@@ -5481,6 +5561,7 @@
  <Sector X="-1" Y="1" Inhabitant="Elithiri">
 <Star ID="0">
 <Seed>1008382</Seed>
+<Name>UNled Gamma</Name>
  <MapPos X="-9.02" Y="12.68"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)4</TradeRoute>
@@ -5500,7 +5581,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>771777249914340625</LastGrowth>
  <NextGrowth>793111137914340625</NextGrowth>
- <SeedProgress>184.2357</SeedProgress>
+ <SeedProgress>192.4485</SeedProgress>
 </Colony>
 <Radius>5332231</Radius>
 <ARot>69461</ARot>
@@ -5521,6 +5602,7 @@
  <Visited/></Star>
 <Star ID="1">
 <Seed>6583215</Seed>
+<Name>ReSrooo Major</Name>
  <MapPos X="-13.29" Y="12.99"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)9</TradeRoute>
@@ -5537,7 +5619,7 @@
  <LastUpdate>791205732099204245</LastUpdate>
  <LastGrowth>785088643327084320</LastGrowth>
  <NextGrowth>806743939327084320</NextGrowth>
- <SeedProgress>187.5762</SeedProgress>
+ <SeedProgress>197.8422</SeedProgress>
 </Colony>
 <Radius>5567903</Radius>
 <ARot>75214</ARot>
@@ -5555,6 +5637,7 @@
  <Visited/></Star>
 <Star ID="2">
 <Seed>5205544</Seed>
+<Name>Jabhop Minor</Name>
  <MapPos X="-11.16" Y="5.61"/>
  <Owner>Elithiri</Owner>
  <Planets>
@@ -5582,6 +5665,7 @@
  <Visited/></Star>
 <Star ID="3">
 <Seed>7573109</Seed>
+<Name>ZluDlan Delta</Name>
  <MapPos X="-9.15" Y="8.84"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)5</TradeRoute>
@@ -5598,7 +5682,7 @@
  <LastUpdate>737016876641913437</LastUpdate>
  <LastGrowth>785426221700184687</LastGrowth>
  <NextGrowth>824442733700184687</NextGrowth>
- <SeedProgress>178.6020</SeedProgress>
+ <SeedProgress>188.8680</SeedProgress>
 </Colony>
 <Radius>4960954</Radius>
 <ARot>79005</ARot>
@@ -5615,7 +5699,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>778244718992334006</LastGrowth>
  <NextGrowth>799079214992334006</NextGrowth>
- <SeedProgress>184.3610</SeedProgress>
+ <SeedProgress>194.6270</SeedProgress>
 </Colony>
 <Radius>6076251</Radius>
 <ARot>94544</ARot>
@@ -5641,7 +5725,7 @@
  <LastUpdate>736347869820617109</LastUpdate>
  <LastGrowth>759227040000000000</LastGrowth>
  <NextGrowth>796327200000000000</NextGrowth>
- <SeedProgress>170.6333</SeedProgress>
+ <SeedProgress>178.8461</SeedProgress>
 </Colony>
 <Radius>5888835</Radius>
 <ARot>74147</ARot>
@@ -5672,7 +5756,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>782744365700184687</LastGrowth>
  <NextGrowth>808977997700184687</NextGrowth>
- <SeedProgress>150.7922</SeedProgress>
+ <SeedProgress>156.9518</SeedProgress>
 </Colony>
 <Radius>50100667</Radius>
 <ARot>543165</ARot>
@@ -5690,7 +5774,7 @@
  <LastUpdate>737017130631239843</LastUpdate>
  <LastGrowth>787341322798118698</LastGrowth>
  <NextGrowth>818594794798118698</NextGrowth>
- <SeedProgress>77.4745</SeedProgress>
+ <SeedProgress>83.6341</SeedProgress>
 </Colony>
 <Radius>4989069</Radius>
 <ARot>67309</ARot>
@@ -5711,6 +5795,7 @@
  <Visited/></Star>
 <Star ID="4">
 <Seed>4121223</Seed>
+<Name>Krolhaso</Name>
  <MapPos X="-9.7" Y="11.72"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)0</TradeRoute>
@@ -5727,7 +5812,7 @@
  <LastUpdate>736634131909607500</LastUpdate>
  <LastGrowth>763210944000000000</LastGrowth>
  <NextGrowth>809917056000000000</NextGrowth>
- <SeedProgress>173.4168</SeedProgress>
+ <SeedProgress>183.6828</SeedProgress>
 </Colony>
 <Radius>6373304</Radius>
 <ARot>100439</ARot>
@@ -5752,7 +5837,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>783287315705873862</LastGrowth>
  <NextGrowth>801148787705873862</NextGrowth>
- <SeedProgress>141.7289</SeedProgress>
+ <SeedProgress>147.8885</SeedProgress>
 </Colony>
 <Radius>4522643</Radius>
 <ARot>56025</ARot>
@@ -5778,7 +5863,7 @@
  <LastUpdate>736647261016660000</LastUpdate>
  <LastGrowth>790362144000000000</LastGrowth>
  <NextGrowth>838755648000000000</NextGrowth>
- <SeedProgress>183.7349</SeedProgress>
+ <SeedProgress>194.0009</SeedProgress>
 </Colony>
 <Radius>5503968</Radius>
 <ARot>69114</ARot>
@@ -5800,6 +5885,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>168786</Seed>
+<Name>Thophoia</Name>
  <MapPos X="-7.56" Y="9.94"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)3</TradeRoute>
@@ -5815,7 +5901,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>784124665118667812</LastGrowth>
  <NextGrowth>802424185118667812</NextGrowth>
- <SeedProgress>170.6926</SeedProgress>
+ <SeedProgress>178.9054</SeedProgress>
 </Colony>
 <Radius>77263570</Radius>
 <ARot>941384</ARot>
@@ -5840,7 +5926,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>786069927355589999</LastGrowth>
  <NextGrowth>814152519355589999</NextGrowth>
- <SeedProgress>162.6131</SeedProgress>
+ <SeedProgress>172.8791</SeedProgress>
 </Colony>
 <Radius>5366832</Radius>
 <ARot>84138</ARot>
@@ -5878,7 +5964,7 @@
  <LastUpdate>719478082538899140</LastUpdate>
  <LastGrowth>770231808000000000</LastGrowth>
  <NextGrowth>1634231808000000000</NextGrowth>
- <SeedProgress>195.5321</SeedProgress>
+ <SeedProgress>167.8390</SeedProgress>
 </Colony>
 <Radius>58225392</Radius>
 <ARot>845621</ARot>
@@ -5916,7 +6002,7 @@
  <LastUpdate>789034059389820692</LastUpdate>
  <LastGrowth>686217312000000000</LastGrowth>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>161.6196</SeedProgress>
+ <SeedProgress>173.9388</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>4662321</Radius>
@@ -5961,7 +6047,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>759420878126890000</LastGrowth>
  <NextGrowth>800878190126890000</NextGrowth>
- <SeedProgress>191.9016</SeedProgress>
+ <SeedProgress>198.0612</SeedProgress>
 </Colony>
 <Radius>78192026</Radius>
 <ARot>1121221</ARot>
@@ -5992,7 +6078,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>782453447975241152</LastGrowth>
  <NextGrowth>805606055975241152</NextGrowth>
- <SeedProgress>155.7852</SeedProgress>
+ <SeedProgress>161.9448</SeedProgress>
 </Colony>
 <Radius>74568278</Radius>
 <ARot>1178341</ARot>
@@ -6036,7 +6122,7 @@
  <LastUpdate>736869830567178125</LastUpdate>
  <LastGrowth>790030323365618386</LastGrowth>
  <NextGrowth>827377587365618386</NextGrowth>
- <SeedProgress>165.1285</SeedProgress>
+ <SeedProgress>173.3413</SeedProgress>
 </Colony>
 <Radius>7169424</Radius>
 <ARot>86183</ARot>
@@ -6064,6 +6150,7 @@
  <Visited/></Star>
 <Star ID="7">
 <Seed>5217510</Seed>
+<Name>Efrad Minor</Name>
  <MapPos X="-10.93" Y="7.96"/>
  <Owner>Elithiri</Owner>
  <Planets>
@@ -6090,6 +6177,7 @@
  <Visited/></Star>
 <Star ID="8">
 <Seed>3271216</Seed>
+<Name>Miblia</Name>
  <MapPos X="-7.13" Y="12.75"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)0</TradeRoute>
@@ -6103,7 +6191,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>777416849602054454</LastGrowth>
  <NextGrowth>802598993602054454</NextGrowth>
- <SeedProgress>196.8802</SeedProgress>
+ <SeedProgress>167.1132</SeedProgress>
 </Colony>
 <Radius>6665375</Radius>
 <ARot>89798</ARot>
@@ -6144,7 +6232,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>774761931843440000</LastGrowth>
  <NextGrowth>794696139843440000</NextGrowth>
- <SeedProgress>88.0842</SeedProgress>
+ <SeedProgress>94.2438</SeedProgress>
 </Colony>
 <Radius>55778079</Radius>
 <ARot>808894</ARot>
@@ -6190,6 +6278,7 @@
  <Visited/></Star>
 <Star ID="9">
 <Seed>4552898</Seed>
+<Name>WiDrem Major</Name>
  <MapPos X="-10.8" Y="11.8"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)1</TradeRoute>
@@ -6222,7 +6311,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>788514048000000000</LastGrowth>
  <NextGrowth>822940128000000000</NextGrowth>
- <SeedProgress>25.0769</SeedProgress>
+ <SeedProgress>35.3429</SeedProgress>
 </Colony>
 <Radius>6420584</Radius>
 <ARot>87044</ARot>
@@ -6248,7 +6337,7 @@
  <LastUpdate>736743621714668125</LastUpdate>
  <LastGrowth>792027072000000000</LastGrowth>
  <NextGrowth>1656027072000000000</NextGrowth>
- <SeedProgress>161.5039</SeedProgress>
+ <SeedProgress>173.8231</SeedProgress>
 </Colony>
 <Radius>6022151</Radius>
 <ARot>78919</ARot>
@@ -6310,6 +6399,7 @@
  <Visited/></Star>
 <Star ID="10">
 <Seed>2611000</Seed>
+<Name>Ubroz Delta</Name>
  <MapPos X="-7.55" Y="5.55"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)3</TradeRoute>
@@ -6323,7 +6413,7 @@
  <LastUpdate>717324029485157812</LastUpdate>
  <LastGrowth>783652427248671250</LastGrowth>
  <NextGrowth>811178603248671250</NextGrowth>
- <SeedProgress>26.1875</SeedProgress>
+ <SeedProgress>36.4535</SeedProgress>
 </Colony>
 <Radius>56591060</Radius>
 <ARot>811327</ARot>
@@ -6352,6 +6442,7 @@
  <Visited/></Star>
 <Star ID="12">
 <Seed>1010668</Seed>
+<Name>Omram Beta</Name>
  <MapPos X="-7.12" Y="8.01"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)3</TradeRoute>
@@ -6366,7 +6457,7 @@
  <LastUpdate>736189299707607240</LastUpdate>
  <LastGrowth>784212839125241152</LastGrowth>
  <NextGrowth>811292327125241152</NextGrowth>
- <SeedProgress>24.4444</SeedProgress>
+ <SeedProgress>34.7104</SeedProgress>
 </Colony>
 <Radius>7767651</Radius>
 <ARot>117461</ARot>
@@ -6391,7 +6482,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>782707084468043862</LastGrowth>
  <NextGrowth>794358988468043862</NextGrowth>
- <SeedProgress>151.4317</SeedProgress>
+ <SeedProgress>157.5913</SeedProgress>
 </Colony>
 <Radius>6534946</Radius>
 <ARot>98232</ARot>
@@ -6421,6 +6512,7 @@
  <Visited/></Star>
 <Star ID="13">
 <Seed>904110</Seed>
+<Name>MiHrem</Name>
  <MapPos X="-10.26" Y="13.77"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(-1,1)0</TradeRoute>
@@ -6433,7 +6525,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>783124317927084320</LastGrowth>
  <NextGrowth>801478269927084320</NextGrowth>
- <SeedProgress>59.1101</SeedProgress>
+ <SeedProgress>67.3229</SeedProgress>
 </Colony>
 <Radius>6761733</Radius>
 <ARot>90135</ARot>
@@ -6483,6 +6575,7 @@
  <Sector X="0" Y="1" Inhabitant="Ogrish">
 <Star ID="0">
 <Seed>1034006</Seed>
+<Name>Ludlasa</Name>
  <MapPos X="-3.06" Y="12.72"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -6512,6 +6605,7 @@
 </Star>
 <Star ID="1">
 <Seed>5546579</Seed>
+<Name>ERros Delta</Name>
  <MapPos X="-2.33" Y="6.93"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -6541,6 +6635,7 @@
  <Visited/></Star>
 <Star ID="2">
 <Seed>4959616</Seed>
+<Name>Micliiu Core</Name>
  <MapPos X="-0.34" Y="10.76"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)3</TradeRoute>
@@ -6555,7 +6650,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>780544512000000000</LastGrowth>
  <NextGrowth>810973728000000000</NextGrowth>
- <SeedProgress>199.0710</SeedProgress>
+ <SeedProgress>169.2939</SeedProgress>
 </Colony>
 <Radius>5600919</Radius>
 <ARot>75749</ARot>
@@ -6580,7 +6675,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>786184041345618386</LastGrowth>
  <NextGrowth>820221321345618386</NextGrowth>
- <SeedProgress>166.5447</SeedProgress>
+ <SeedProgress>174.7431</SeedProgress>
 </Colony>
 <Radius>5413175</Radius>
 <ARot>75766</ARot>
@@ -6627,6 +6722,7 @@
 </Star>
 <Star ID="3">
 <Seed>5371856</Seed>
+<Name>Egroz Alpha</Name>
  <MapPos X="3.05" Y="9.24"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)2</TradeRoute>
@@ -6679,7 +6775,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>789624288000000000</LastGrowth>
  <NextGrowth>1653624288000000000</NextGrowth>
- <SeedProgress>182.6385</SeedProgress>
+ <SeedProgress>194.9361</SeedProgress>
 </Colony>
 <Radius>7218842</Radius>
 <ARot>105283</ARot>
@@ -6692,12 +6788,12 @@
 <Type>Ice</Type>
 <PRot>49688150</PRot>
 <Colony>
- <BaseType>31</BaseType>
+ <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <LastUpdate>741989527745721953</LastUpdate>
- <LastGrowth>755523936000000000</LastGrowth>
- <NextGrowth>792834912000000000</NextGrowth>
- <SeedProgress>182.4164</SeedProgress>
+ <LastGrowth>792834912000000000</LastGrowth>
+ <NextGrowth>1656834912000000000</NextGrowth>
+ <SeedProgress>193.2583</SeedProgress>
 </Colony>
 <Radius>5871823</Radius>
 <ARot>76364</ARot>
@@ -6728,7 +6824,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>789684520013292260</LastGrowth>
  <NextGrowth>823741672013292260</NextGrowth>
- <SeedProgress>55.8605</SeedProgress>
+ <SeedProgress>64.0589</SeedProgress>
 </Colony>
 <Radius>5556146</Radius>
 <ARot>100381</ARot>
@@ -6749,6 +6845,7 @@
  <Visited/></Star>
 <Star ID="4">
 <Seed>7267395</Seed>
+<Name>Vodhaba</Name>
  <MapPos X="3.17" Y="7.76"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)3</TradeRoute>
@@ -6765,7 +6862,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>788181426892417812</LastGrowth>
  <NextGrowth>814581810892417812</NextGrowth>
- <SeedProgress>70.1248</SeedProgress>
+ <SeedProgress>78.3232</SeedProgress>
 </Colony>
 <Radius>58190284</Radius>
 <ARot>739920</ARot>
@@ -6790,7 +6887,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>788652288000000000</LastGrowth>
  <NextGrowth>813498336000000000</NextGrowth>
- <SeedProgress>140.7588</SeedProgress>
+ <SeedProgress>151.0068</SeedProgress>
 </Colony>
 <Radius>56377948</Radius>
 <ARot>911395</ARot>
@@ -6832,7 +6929,7 @@
  <LastUpdate>741875684096630361</LastUpdate>
  <LastGrowth>786160512000000000</LastGrowth>
  <NextGrowth>823983840000000000</NextGrowth>
- <SeedProgress>129.5527</SeedProgress>
+ <SeedProgress>137.7511</SeedProgress>
 </Colony>
 <Radius>6845010</Radius>
 <ARot>96126</ARot>
@@ -6847,6 +6944,7 @@
  <Visited/></Star>
 <Star ID="5">
 <Seed>968339</Seed>
+<Name>MhiRloio Core</Name>
  <MapPos X="-2.75" Y="8.39"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -6874,6 +6972,7 @@
 </Star>
 <Star ID="6">
 <Seed>3980070</Seed>
+<Name>IJlav Epsilon</Name>
  <MapPos X="4.77" Y="9.31"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -6902,6 +7001,7 @@
  <Visited/></Star>
 <Star ID="7">
 <Seed>9563311</Seed>
+<Name>Hholrep Core</Name>
  <MapPos X="4.54" Y="13.27"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)9</TradeRoute>
@@ -6917,7 +7017,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>784836172224570000</LastGrowth>
  <NextGrowth>809826508224570000</NextGrowth>
- <SeedProgress>164.7871</SeedProgress>
+ <SeedProgress>172.9855</SeedProgress>
 </Colony>
 <Radius>53251877</Radius>
 <ARot>765520</ARot>
@@ -6944,6 +7044,7 @@
  <Visited/></Star>
 <Star ID="8">
 <Seed>769372</Seed>
+<Name>Unhad Alpha</Name>
  <MapPos X="0.76" Y="13.58"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)2</TradeRoute>
@@ -6958,7 +7059,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>779840472518638434</LastGrowth>
  <NextGrowth>805227384518638434</NextGrowth>
- <SeedProgress>170.8301</SeedProgress>
+ <SeedProgress>181.0781</SeedProgress>
 </Colony>
 <Radius>5786577</Radius>
 <ARot>86464</ARot>
@@ -6989,7 +7090,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>778111852282942260</LastGrowth>
  <NextGrowth>798372652282942260</NextGrowth>
- <SeedProgress>124.0739</SeedProgress>
+ <SeedProgress>132.2723</SeedProgress>
 </Colony>
 <Radius>7276770</Radius>
 <ARot>112540</ARot>
@@ -7020,7 +7121,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>792388011869356248</LastGrowth>
  <NextGrowth>816152331869356248</NextGrowth>
- <SeedProgress>2.0946</SeedProgress>
+ <SeedProgress>8.2434</SeedProgress>
 </Colony>
 <Radius>46016711</Radius>
 <ARot>723982</ARot>
@@ -7051,6 +7152,7 @@
 </Star>
 <Star ID="9">
 <Seed>8472350</Seed>
+<Name>Borleck Epsilon</Name>
  <MapPos X="4.38" Y="11.98"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)3</TradeRoute>
@@ -7108,7 +7210,7 @@
  <LastUpdate>742253305020145786</LastUpdate>
  <LastGrowth>782044667967141823</LastGrowth>
  <NextGrowth>805754555967141823</NextGrowth>
- <SeedProgress>64.7336</SeedProgress>
+ <SeedProgress>74.9816</SeedProgress>
 </Colony>
 <Radius>5927535</Radius>
 <ARot>81433</ARot>
@@ -7136,7 +7238,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>791241696000000000</LastGrowth>
  <NextGrowth>825314400000000000</NextGrowth>
- <SeedProgress>177.0063</SeedProgress>
+ <SeedProgress>187.2543</SeedProgress>
 </Colony>
 <Radius>63990796</Radius>
 <ARot>871488</ARot>
@@ -7196,7 +7298,7 @@
  <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>3155378975999999999</NextGrowth>
- <SeedProgress>184.7172</SeedProgress>
+ <SeedProgress>197.0148</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6501738</Radius>
@@ -7229,7 +7331,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>763141211967141823</LastGrowth>
  <NextGrowth>804967451967141823</NextGrowth>
- <SeedProgress>168.0895</SeedProgress>
+ <SeedProgress>176.2879</SeedProgress>
 </Colony>
 <Radius>4746859</Radius>
 <ARot>52813</ARot>
@@ -7340,6 +7442,7 @@
 </Star>
 <Star ID="11">
 <Seed>3531830</Seed>
+<Name>Islaz Epsilon</Name>
  <MapPos X="3.07" Y="14.56"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)7</TradeRoute>
@@ -7355,7 +7458,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>788242545198154454</LastGrowth>
  <NextGrowth>812244465198154454</NextGrowth>
- <SeedProgress>195.6698</SeedProgress>
+ <SeedProgress>165.8922</SeedProgress>
 </Colony>
 <Radius>79754297</Radius>
 <ARot>1079121</ARot>
@@ -7404,6 +7507,7 @@
  <Visited/></Star>
 <Star ID="12">
 <Seed>3178001</Seed>
+<Name>MreNhoo</Name>
  <MapPos X="2.72" Y="6.73"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(0,1)3</TradeRoute>
@@ -7434,7 +7538,7 @@
  <LastUpdate>741779905284447053</LastUpdate>
  <LastGrowth>787823191665589999</LastGrowth>
  <NextGrowth>815432311665589999</NextGrowth>
- <SeedProgress>130.8068</SeedProgress>
+ <SeedProgress>141.0548</SeedProgress>
 </Colony>
 <Radius>7054311</Radius>
 <ARot>121107</ARot>
@@ -7458,6 +7562,7 @@
  <Visited/></Star>
 <Star ID="13">
 <Seed>16048</Seed>
+<Name>PhoJrez Minor</Name>
  <MapPos X="-4.6" Y="7.49"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -7469,7 +7574,7 @@
  <Owner>Ogrish</Owner>
  <LastGrowth>792451355671494454</LastGrowth>
  <NextGrowth>830517467671494454</NextGrowth>
- <SeedProgress>166.1403</SeedProgress>
+ <SeedProgress>176.3883</SeedProgress>
 </Colony>
 <Radius>51408843</Radius>
 <ARot>736781</ARot>
@@ -7652,7 +7757,7 @@
  <LastUpdate>764206057838171118</LastUpdate>
  <LastGrowth>780729828366042803</LastGrowth>
  <NextGrowth>798032292366042803</NextGrowth>
- <SeedProgress>177.9668</SeedProgress>
+ <SeedProgress>183.9399</SeedProgress>
 </Colony>
 <Radius>4809226</Radius>
 <ARot>71734</ARot>
@@ -7786,7 +7891,7 @@
  <LastUpdate>755348902891801048</LastUpdate>
  <LastGrowth>779903782800481048</LastGrowth>
  <NextGrowth>798970534800481048</NextGrowth>
- <SeedProgress>191.7341</SeedProgress>
+ <SeedProgress>197.7072</SeedProgress>
 </Colony>
 <Radius>6070153</Radius>
 <ARot>97231</ARot>
@@ -7823,7 +7928,7 @@
  <LastUpdate>770040188515547471</LastUpdate>
  <LastGrowth>786593695889288001</LastGrowth>
  <NextGrowth>820874623889288001</NextGrowth>
- <SeedProgress>106.9888</SeedProgress>
+ <SeedProgress>114.4551</SeedProgress>
 </Colony>
 <Radius>7575843</Radius>
 <ARot>109315</ARot>
@@ -7992,7 +8097,7 @@
  <LastUpdate>764016255880660133</LastUpdate>
  <LastGrowth>779395714031062878</LastGrowth>
  <NextGrowth>803919490031062878</NextGrowth>
- <SeedProgress>150.2384</SeedProgress>
+ <SeedProgress>154.7182</SeedProgress>
 </Colony>
 <Radius>7518487</Radius>
 <ARot>111589</ARot>
@@ -8035,7 +8140,7 @@
  <LastUpdate>781219136639576256</LastUpdate>
  <LastGrowth>781038121812218379</LastGrowth>
  <NextGrowth>798245545812218379</NextGrowth>
- <SeedProgress>109.3419</SeedProgress>
+ <SeedProgress>115.3150</SeedProgress>
 </Colony>
 <Radius>6439064</Radius>
 <ARot>107264</ARot>
@@ -8054,7 +8159,7 @@
  <LastUpdate>778094582488200000</LastUpdate>
  <LastGrowth>787272132221900155</LastGrowth>
  <NextGrowth>814428516221900155</NextGrowth>
- <SeedProgress>75.5109</SeedProgress>
+ <SeedProgress>81.4840</SeedProgress>
 </Colony>
 <Radius>4067988</Radius>
 <ARot>49150</ARot>
@@ -8072,7 +8177,7 @@
  <Owner>Human</Owner>
  <LastGrowth>784771460230986221</LastGrowth>
  <NextGrowth>804807620230986221</NextGrowth>
- <SeedProgress>85.0533</SeedProgress>
+ <SeedProgress>89.5331</SeedProgress>
 </Colony>
 <Radius>7064982</Radius>
 <ARot>89007</ARot>
@@ -8428,7 +8533,7 @@
  <Owner>Human</Owner>
  <LastGrowth>791052160850447286</LastGrowth>
  <NextGrowth>806770048850447286</NextGrowth>
- <SeedProgress>15.6237</SeedProgress>
+ <SeedProgress>20.1035</SeedProgress>
 </Colony>
 <Radius>62985989</Radius>
 <ARot>969814</ARot>
@@ -8446,7 +8551,7 @@
  <LastUpdate>776572310270536254</LastUpdate>
  <LastGrowth>779010077968083562</LastGrowth>
  <NextGrowth>800432093968083562</NextGrowth>
- <SeedProgress>183.9418</SeedProgress>
+ <SeedProgress>189.9149</SeedProgress>
 </Colony>
 <Radius>6698660</Radius>
 <ARot>100522</ARot>
@@ -8507,7 +8612,7 @@
  <LastUpdate>780607688994811908</LastUpdate>
  <LastGrowth>775930454605124006</LastGrowth>
  <NextGrowth>800026550605124006</NextGrowth>
- <SeedProgress>191.8349</SeedProgress>
+ <SeedProgress>196.3147</SeedProgress>
 </Colony>
 <Radius>5638418</Radius>
 <ARot>68994</ARot>
@@ -8676,7 +8781,7 @@
  <LastUpdate>765511462335727484</LastUpdate>
  <LastGrowth>792059586505007484</LastGrowth>
  <NextGrowth>828993858505007484</NextGrowth>
- <SeedProgress>190.2579</SeedProgress>
+ <SeedProgress>196.2310</SeedProgress>
 </Colony>
 <Radius>6330711</Radius>
 <ARot>89765</ARot>
@@ -8951,6 +9056,7 @@
 </Star>
 <Star ID="6">
 <Seed>6694110</Seed>
+<Name>Spare Hulk</Name>
  <MapPos X="-6.83" Y="16.28"/>
  <Visited/> <SpaceHulk>
   <Orbit>114541299475</Orbit>
@@ -9028,9 +9134,114 @@
  <MapPos X="-11.16" Y="21.35"/>
 </Star>
  </Sector>
+ <Sector X="0" Y="2" Inhabitant="">
+<Star ID="0">
+<Seed>4138781</Seed>
+ <MapPos X="-0.06" Y="19.78"/>
+</Star>
+<Star ID="1">
+<Seed>3527357</Seed>
+ <MapPos X="-4.35" Y="20.59"/>
+</Star>
+<Star ID="2">
+<Seed>3026187</Seed>
+ <MapPos X="0.11" Y="17.98"/>
+</Star>
+<Star ID="3">
+<Seed>8720946</Seed>
+ <MapPos X="-4.44" Y="23.12"/>
+</Star>
+<Star ID="4">
+<Seed>8714707</Seed>
+ <MapPos X="-0.35" Y="15.98"/>
+</Star>
+<Star ID="5">
+<Seed>1208316</Seed>
+ <MapPos X="-2.68" Y="21.32"/>
+</Star>
+<Star ID="6">
+<Seed>9100574</Seed>
+ <MapPos X="4.19" Y="18.33"/>
+</Star>
+<Star ID="7">
+<Seed>2469607</Seed>
+ <MapPos X="-3.74" Y="16.39"/>
+ <Visited/></Star>
+<Star ID="8">
+<Seed>1514028</Seed>
+ <MapPos X="-2.21" Y="19.75"/>
+</Star>
+<Star ID="9">
+<Seed>2852992</Seed>
+ <MapPos X="4.17" Y="15.42"/>
+</Star>
+<Star ID="10">
+<Seed>7161099</Seed>
+ <MapPos X="3.28" Y="22.85"/>
+</Star>
+<Star ID="11">
+<Seed>2928630</Seed>
+ <MapPos X="-1.97" Y="22.47"/>
+</Star>
+<Star ID="12">
+<Seed>4646251</Seed>
+<Name>Spare Hulk</Name>
+ <MapPos X="-1.64" Y="15.61"/>
+ <Visited/> <SpaceHulk>
+  <Orbit>538518673040</Orbit>
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>SpaceHulk</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="12.00" Name="SpaceHulk Core" Level="12"><Hulk/></MissionItem>
+<Ship Seed="1062759198" Diff="12">
+ <Name>Abandoned Hulk</Name>
+ <Hull>76</Hull>
+ <Shield>0</Shield>
+ <Seed>678357</Seed>
+</Ship>
+ <Enemy>Void Dwellers</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>12</Diff>
+ <LevelCount>4</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>759276237</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>SpaceHulk</Type>
+ <Goal>Artifact</Goal>
+<MissionItem Mass="0.00" Name="Heavy Rifle [Legendary]">
+<Weapon Type="Heavy Rifle" Level="5" />
+</MissionItem>
+<Ship Seed="1749582408" Diff="11">
+ <Name>Abandoned Hulk</Name>
+ <Hull>45</Hull>
+ <Shield>0</Shield>
+ <Seed>792601</Seed>
+</Ship>
+ <Enemy>Crystallines</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>11</Diff>
+ <LevelCount>4</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>607150224</Seed>
+ <Size>4</Size>
+</Mission>
+ </Missions>
+ </SpaceHulk>
+</Star>
+<Star ID="13">
+<Seed>2216899</Seed>
+ <MapPos X="-3.25" Y="15.41"/>
+ <Visited/></Star>
+ </Sector>
 </Map>
 <Team>
- <Pos>(-1,2)6.SH</Pos>
+ <Pos>(0,2)12.SH</Pos>
  <Cash>21655.17229910391</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
@@ -9521,7 +9732,7 @@
 </Race>
 <Race Name="Gokan">
 <HomePlanet>(1,-1)12.0</HomePlanet>
-<LastExpand>792358438773617040</LastExpand>
+<LastExpand>792906958566487574</LastExpand>
 <Known/>
 <Research>
  <Item>Metasteel Plating</Item>
@@ -9594,7 +9805,7 @@
 </Race>
 <Race Name="Elithiri">
 <HomePlanet>(-1,1)6.1</HomePlanet>
-<LastExpand>792388653202928207</LastExpand>
+<LastExpand>792935284538667211</LastExpand>
 <Known/>
 <Research>
  <Item>Laser Sniper Rifle</Item>
@@ -9744,7 +9955,7 @@
 </Race>
 <Race Name="Insectoid">
 <HomePlanet>(-1,-1)10.2</HomePlanet>
-<LastExpand>792530117109468997</LastExpand>
+<LastExpand>792893314750688496</LastExpand>
 <Known/>
 <Research>
  <Item>Regenerative Plating</Item>
@@ -9817,7 +10028,7 @@
 </Race>
 <Race Name="Grey">
 <HomePlanet>(-1,0)5.3</HomePlanet>
-<LastExpand>792455040970650612</LastExpand>
+<LastExpand>792817101167431227</LastExpand>
 <Known/>
 <Research>
  <Item>Hyperspace Drive</Item>
