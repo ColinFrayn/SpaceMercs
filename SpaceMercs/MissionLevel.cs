@@ -3,9 +3,11 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.XPath;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.Mission;
 using static SpaceMercs.VisualEffect;
@@ -820,12 +822,43 @@ namespace SpaceMercs {
 
         // Set up the items and locations in this map
         private void GenerateTransitionLocations() {
-            bool bOK = true;
-            do {
-                StartX = rand.Next(Width - 8) + 4;
-                StartY = rand.Next(Height - 8) + 4;
-                bOK = (Map[StartX, StartY] == TileType.Floor && Map[StartX + 1, StartY] == TileType.Floor && Map[StartX + 1, StartY + 1] == TileType.Floor && Map[StartX, StartY + 1] == TileType.Floor);
-            } while (!bOK);
+            if (ParentMission.IsShipMission) {
+                int bestscore = -1;
+                int niter = 0;
+                do {
+                    int x = rand.Next(Width - 8) + 4;
+                    int y = rand.Next(Height - 8) + 4;
+                    if (Map[x, y] == TileType.Floor && Map[x + 1, y] == TileType.Floor && Map[x + 1, y + 1] == TileType.Floor && Map[x, y + 1] == TileType.Floor) {
+                        Ship sh = ParentMission.ShipTarget ?? throw new Exception("Found null ship target in transition generation");
+                        int score = -1;
+                        int rx = x / 3;
+                        int ry = y / 3;
+                        for (int n = 0; n < sh.Type.Rooms.Count; n++) {
+                            ShipRoomDesign r = sh.Type.Rooms[n];
+                            if (rx >= r.XPos * 3 && rx <= (r.XPos + r.Width) * 3 &&
+                                ry >= r.YPos * 3 && ry <= (r.YPos + r.Height) * 3) {
+                                if (r.Size == ShipEquipment.RoomSize.Small) score = 1;
+                                else if (r.Size == ShipEquipment.RoomSize.Medium) score = 0;
+                                if (score > bestscore) {
+                                    bestscore = score;
+                                    StartX = x;
+                                    StartY = y;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                } while (bestscore == -1 || ++niter < 100);
+            }
+            else {
+                bool bOK = true;
+                do {
+                    StartX = rand.Next(Width - 8) + 4;
+                    StartY = rand.Next(Height - 8) + 4;
+                    bOK = (Map[StartX, StartY] == TileType.Floor && Map[StartX + 1, StartY] == TileType.Floor && Map[StartX + 1, StartY + 1] == TileType.Floor && Map[StartX, StartY + 1] == TileType.Floor);
+                } while (!bOK);
+            }
+            
             SetupEntryLocations();
 
             if (!IsLowestLevel || (IsLowestLevel && ParentMission.Goal == Mission.MissionGoal.Countdown)) {
@@ -833,7 +866,7 @@ namespace SpaceMercs {
                 int sx2, sy2;
                 EndX = EndY = -1;
                 for (int i = 0; i < 30; i++) {
-                    bOK = true;
+                    bool bOK = true;
                     do {
                         sx2 = rand.Next(Width - 8) + 4;
                         sy2 = rand.Next(Height - 8) + 4;
@@ -1111,7 +1144,7 @@ namespace SpaceMercs {
             int niter = 0;
             while (nLeft > 0 && niter < 500) {
                 CreatureGroup cg = primaryCG;
-                // Randomly pick the secondary enemy increasingly as we go down below 1st level, unless it's the final level of a special mission
+                // Randomly pick the secondary enemy group more often as we go down below 1st level, unless it's the final level of a special mission (where we have special opponents).
                 if (ParentMission.SecondaryEnemy is not null && LevelID > 0 && !Entities.IsEmpty) {
                     if (!IsLowestLevel || (ParentMission.Type != MissionType.PrecursorRuins && ParentMission.Type != MissionType.SpaceHulk)) {
                         if (rand.Next(ParentMission.LevelCount + 2) < LevelID) cg = ParentMission.SecondaryEnemy;
@@ -1159,13 +1192,15 @@ namespace SpaceMercs {
         private bool PlaceFirstCreatureInGroup(Creature cr, bool bFarFromEntryPoint) {
             if (cr == null) return false;
             int nTries = 2 + (bFarFromEntryPoint ? 2 : 0);
-            int MinDist = Const.MinimumCreatureDistanceFromStartLocation + (bFarFromEntryPoint ? (Width + Height) / 4 : 0);
-            double BestScore = -1;
+            int minDist = Const.MinimumCreatureDistanceFromStartLocation + (bFarFromEntryPoint ? (Width + Height) / 4 : 0);
+            double bestScore = -1;
             Point best = Point.Empty;
+
             for (int n = 0; n < nTries; n++) {
-                bool bOK = true;
-                double score = 0.0;
+                bool bOK;
+                double score;
                 int x, y, niter = 0;
+
                 do {
                     score = 0.0;
                     int dist = 0;
@@ -1174,9 +1209,10 @@ namespace SpaceMercs {
                     do {
                         x = rand.Next(Width - 5) + 2;
                         y = rand.Next(Height - 5) + 2;
-                        if (ptStart == Point.Empty) dist = MinDist + 1;
+                        if (ptStart == Point.Empty) dist = minDist + 1;
                         else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
-                    } while (!CreatureCanGo(cr, x, y) || (dist < MinDist && CanSee(ptStart, new Point(x, y))));
+                    } while (!CreatureCanGo(cr, x, y) || (dist < minDist && CanSee(ptStart, new Point(x, y))));
+
                     // Attempt to put all creatures far from the EntryLocations
                     score += dist;
 
@@ -1194,8 +1230,9 @@ namespace SpaceMercs {
                         score += (d / 4);
                     }
                 } while (!bOK && niter < 100);
-                if (bOK && (score > BestScore || best == Point.Empty)) {
-                    BestScore = score;
+
+                if (bOK && (score > bestScore || best == Point.Empty)) {
+                    bestScore = score;
                     best = new Point(x, y);
                 }
             }
@@ -1224,6 +1261,11 @@ namespace SpaceMercs {
                         if (y >= c2.Y && y - c2.Y < c2.Type.Size) yClash = true;
                         if (xClash && yClash) { bOK = false; break; }
                     }
+                }
+                // Check not to close to start pos
+                if (bOK && EntryLocations.FirstOrDefault() is Point ptStart) {
+                    double dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                    bOK = (dist > 8);
                 }
             } while (!bOK);
             cr.SetLocation(new Point(x, y));

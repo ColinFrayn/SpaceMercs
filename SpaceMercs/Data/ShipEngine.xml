@@ -44,10 +44,10 @@
   <ShipEngine Name="SuperLight Drive">
     <Range>6</Range>
     <Speed>5</Speed>
-    <Accel>750</Accel>
+    <Accel>2500</Accel>
     <Cost>1200</Cost>
     <Power>20</Power>
-    <Desc>A warp drive that can exceed the speed of light. Suitable for reaching the nearest stars.</Desc>
+    <Desc>A warp drive that can exceed the speed of light. Suitable for reaching the nearest stars. Rapid acceleration.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,7</Tex>
     <Requirements>
@@ -61,7 +61,7 @@
   <ShipEngine Name="Hyperspace Drive">
     <Range>8</Range>
     <Speed>40</Speed>
-    <Accel>999999</Accel>
+    <Accel>9999999</Accel>
     <Cost>4500</Cost>
     <Power>24</Power>
     <Desc>A Hyperspace Drive, able to traverse the distance between the stars extremely quickly and small enoguh to be fitted to a space ship.</Desc>
@@ -79,7 +79,7 @@
   <ShipEngine Name="Subspace Drive">
     <Range>12</Range>
     <Speed>50</Speed>
-    <Accel>999999</Accel>
+    <Accel>9999999</Accel>
     <Cost>8000</Cost>
     <Power>30</Power>
     <Desc>A Subspace Drive, slicing through the space between dimensions to travel between systems at extraordinary speed and small enoguh to be fitted to a space ship</Desc>

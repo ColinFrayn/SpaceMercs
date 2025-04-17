@@ -546,13 +546,22 @@ namespace SpaceMercs {
                     double score = 0.0;
                     // Get the fraction of members of this creature group that are in the correct level range, and how close to the middle of the range they are
                     int count = 0;
+                    int maxsize = 1;
                     foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {
                         count++;
                         // Only count this creature type if it's in the correct range and isn't a boss
                         if (!ct.IsBoss && ct.LevelMin <= cDiff && ct.LevelMax >= cDiff) {
                             score += 20.0 - Math.Abs(((ct.LevelMin + ct.LevelMax) / 2) - cDiff); // How far from average for this range?
                         }
+                        if (ct.Size > maxsize) maxsize = ct.Size;
                     }
+
+                    // If creatures are large then maybe don't choose this group for AbandonedCity
+                    if (Type == MissionType.AbandonedCity) {
+                        if (maxsize == 3) score *= 0.9;
+                        if (maxsize == 2) score *= 0.95;
+                    }
+
                     if (score <= 10.0) continue;
                     score /= count;
                     score -= (cg.FoundIn.Count * (swarm + 1)); // The more location-specific this creature group, the more we want to use it for the locations for which it is suitable

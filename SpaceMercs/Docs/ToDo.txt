@@ -2,15 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-
-Mind Transfer
+Mind Transfer?
 - New ship room
-- Can spend some kind of resource (crystals?) to transfer XP from one soldier to another
+- Can spend some kind of resource (Mind Crystals?) to transfer XP from one soldier to another. Or it just happens over time. <100% recovery rate.
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
-
-Check can use alien hypergates at high enough relations
 
 At relations >= 3 maybe join human hypergates up to alien ones??
 - Add a trade route between their two nearest colonies
@@ -25,6 +22,9 @@ Backburner : Features
 Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
+
+Enemies use grenades
+- Some enemies should have area attack weapons ()
 
 Alien colonies need names
 
