@@ -208,6 +208,7 @@
             Name = "ChooseSoldiersPsylink";
             Text = "ChooseSoldiers";
             TopMost = true;
+            FormClosing += ChooseSoldiersPsylink_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).EndInit();
             ResumeLayout(false);
             PerformLayout();

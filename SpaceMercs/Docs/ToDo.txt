@@ -2,10 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Quit out of soldier choice -> should abort
-
-Psylink Suite [Test]
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 

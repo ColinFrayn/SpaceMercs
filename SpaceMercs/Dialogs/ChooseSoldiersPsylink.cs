@@ -7,6 +7,7 @@ namespace SpaceMercs.Dialogs {
         public List<Soldier> Soldiers = new List<Soldier>();
         public List<Soldier> Psylinked = new List<Soldier>();
         private readonly int psylinkSlots = 0;
+        private bool bAccept = false;
 
         public ChooseSoldiersPsylink(Team t, int sz, bool bCanAbort) {
             PlayerTeam = t;
@@ -48,6 +49,7 @@ namespace SpaceMercs.Dialogs {
                 if (bSelected && row.Tag is Soldier s) Soldiers.Add(s);
             }
             if (Soldiers.Count == 0 || Soldiers.Count > MaxSize) return;
+            bAccept = true;
             this.Close();
         }
 
@@ -135,6 +137,13 @@ namespace SpaceMercs.Dialogs {
         private void dgSoldiers_Click(object sender, EventArgs e) {
             btPsylink.Text = "Psylink";
             lbPsylink.ClearSelected();
+        }
+
+        private void ChooseSoldiersPsylink_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!bAccept) {
+                Soldiers.Clear();
+                Psylinked.Clear();
+            }
         }
     }
 }
