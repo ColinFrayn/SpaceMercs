@@ -32,7 +32,8 @@ namespace SpaceMercs {
             BaseColour = Const.PlanetTypeToCol2(Type);
         }
 
-        public void SetupRandom(Random rnd) { 
+        public void SetupRandom(Random rnd) {
+            Planet pl = Parent as Planet ?? throw new Exception("Moon'sparent is not a planet!");
             do {
                 Radius = Utils.NextGaussian(rnd, Const.MoonRadius, Const.MoonRadiusSigma);
             } while (Radius < Const.MoonRadiusMin);
@@ -41,7 +42,7 @@ namespace SpaceMercs {
             OrbitalDistance += Radius;
             bool bOK = true;
             do {
-                Temperature = Parent.Temperature - 30; // Base level
+                Temperature = pl.BaseTemp - 5d * (OrbitalDistance / Const.MoonOrbit); // Base level
                 double tempmod = 0.0;
                 bOK = true;
                 if (Temperature > 180 && Temperature < 320 && rnd.Next(4) == 0) { _type = PlanetType.Oceanic; tempmod = Utils.NextGaussian(rnd, 40, 5); }

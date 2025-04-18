@@ -237,7 +237,7 @@
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
-  <ArmourType Name="Full Armour">
+  <ArmourType Name="Core Armour">
     <Mass>12.0</Mass>
     <Rarity>25</Rarity>
     <BaseArmour>21</BaseArmour>

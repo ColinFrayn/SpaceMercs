@@ -77,16 +77,27 @@ namespace SpaceMercs.MainWindow {
 
             // Choose the soldiers to deploy
             if (!bInProgress) {
-                ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, ThisMission.MaximumSoldiers, bCanAbort);
-                cs.ShowDialog();
-                if (cs.Soldiers.Count == 0) {
+                IEnumerable<Soldier> selected;
+                if (PlayerTeam.PlayerShip.PsylinkSpaces == 0) {
+                    ChooseSoldiers cs = new ChooseSoldiers(PlayerTeam, ThisMission.MaximumSoldiers, bCanAbort);
+                    cs.ShowDialog();
+                    selected = cs.Soldiers;
+                }
+                else {
+                    ChooseSoldiersPsylink cs = new ChooseSoldiersPsylink(PlayerTeam, ThisMission.MaximumSoldiers, bCanAbort);
+                    cs.ShowDialog();
+                    selected = cs.Soldiers;
+                    ThisMission.AddPsylinked(cs.Psylinked);
+                }
+                if (selected.Count() == 0) {
                     MissionOutcome = MissionResult.Aborted;
+                    ThisMission.ClearSoldiers();
                     ThisMission = null;
                     return false;
                 }
-                ThisMission.AddSoldiers(cs.Soldiers);
+                ThisMission.AddSoldiers(selected);
                 CurrentLevel = ThisMission.GetOrCreateCurrentLevel(); // Create here as the number of creatures depends on the number of soldiers deployed in the mission
-                CurrentLevel.AddSoldiers(cs.Soldiers); // Add them at the correct starting location, or in a room if ship defence
+                CurrentLevel.AddSoldiers(selected); // Add them at the correct starting location, or in a room if ship defence
                 Random rnd = new Random();
                 Clock.AddHours(4.0 + rnd.NextDouble() * 2.0); // Time taken to get to the mission location & set up
             }
@@ -176,8 +187,11 @@ namespace SpaceMercs.MainWindow {
                         PlayerTeam.AddItem(artifact);
                     }
                     else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
-                    PlayerTeam.Cash += ThisMission.Reward;                        
+                    PlayerTeam.Cash += ThisMission.Reward;
                     foreach (Soldier s in ThisMission.Soldiers) {
+                        s.AddExperience(ThisMission.Experience);
+                    }
+                    foreach (Soldier s in ThisMission.Psylinked) {
                         s.AddExperience(ThisMission.Experience);
                     }
                     if (PlayerTeam.CurrentPositionHAO?.Colony is not null) {

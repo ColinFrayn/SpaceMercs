@@ -117,7 +117,8 @@ namespace SpaceMercs {
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
-        public readonly List<Soldier> Soldiers = new List<Soldier>();
+        public readonly List<Soldier> Soldiers = new List<Soldier>(); // Soldiers that are actively participating in this mission in person.
+        public readonly List<Soldier> Psylinked = new List<Soldier>(); // Soldiers that are viewing this mission through a psylink.
         public int WavesRemaining { get; private set; }
         public int TurnCount { get; private set; }
         public int MaxTurns =>
@@ -691,6 +692,11 @@ namespace SpaceMercs {
                 if (!Soldiers.Contains(s)) Soldiers.Add(s);
             }
         }
+        public void AddPsylinked(IEnumerable<Soldier> soldiers) {
+            foreach (Soldier s in soldiers) {
+                if (!Psylinked.Contains(s)) Psylinked.Add(s);
+            }
+        }
         #endregion // Create Mission
 
         public MissionLevel GetOrCreateCurrentLevel() {
@@ -856,6 +862,7 @@ namespace SpaceMercs {
         public void Initialise() {
             CurrentLevel = 0;
             Levels = new Dictionary<int, MissionLevel>();
+            ClearSoldiers();
         }
         public void SetCurrentLevel(int lvl) {
             CurrentLevel = lvl;
@@ -866,7 +873,11 @@ namespace SpaceMercs {
             TurnCount = 0;
             WavesRemaining = MaxWaves;
             Levels.Clear();
+            ClearSoldiers();
+        }
+        public void ClearSoldiers() {
             Soldiers.Clear();
+            Psylinked.Clear();
         }
         public void NextTurn(ShowMessageDelegate showMessage) {
             TurnCount++;

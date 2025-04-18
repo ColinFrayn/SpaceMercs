@@ -55,6 +55,9 @@
    </ItemGroup>
   
    <ItemGroup>
+     <Compile Update="Dialogs\ChooseSoldiers.cs">
+       <SubType>Form</SubType>
+     </Compile>
      <Compile Update="Dialogs\ResearchItem.cs">
        <SubType>Form</SubType>
      </Compile>

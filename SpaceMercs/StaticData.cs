@@ -250,6 +250,7 @@ namespace SpaceMercs {
             return null;
         }
         public static ArmourType? GetArmourTypeByName(string strName) {
+            if (strName == "Full Armour") strName = "Core Armour"; // Backwards compatibility
             foreach (ArmourType at in ArmourTypes) {
                 if (at.Name.Equals(strName)) return at;
             }

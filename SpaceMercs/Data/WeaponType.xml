@@ -739,7 +739,7 @@
     <Damage>2+3</Damage>
     <Desc>A sharp bladed weapon</Desc>
     <Sound>SwordSlice</Sound>
-    <Noise>3</Noise>
+    <Noise>1</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -754,7 +754,7 @@
     <Damage>3+4</Damage>
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
-    <Noise>3</Noise>
+    <Noise>1</Noise>
     <Requirements>
       <MinLevel>5</MinLevel>
       <MinPop>25</MinPop>
@@ -781,7 +781,7 @@
     <Damage>3+3</Damage>
     <Desc>A sturdy axe</Desc>
     <Sound>SwordSlice</Sound>
-    <Noise>3</Noise>
+    <Noise>2</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -805,7 +805,7 @@
       <Material Name="Crystals" Amount="1"/>
       <Relations Name="Elithiri">1</Relations>
     </Requirements>
-    <Noise>3</Noise>
+    <Noise>2</Noise>
     <Materials>
       <Material Name="Steel" Amount="2"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -849,7 +849,7 @@
       <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
-    <Noise>4</Noise>
+    <Noise>2</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -874,7 +874,7 @@
       <Material Name="Chitin" Amount="2"/>
       <Relations Name="Insectoid">2</Relations>
     </Requirements>
-    <Noise>5</Noise>
+    <Noise>2</Noise>
     <Materials>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Tungsten" Amount="1"/>
@@ -901,7 +901,7 @@
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Steel" Amount="2"/>
     </Requirements>
-    <Noise>6</Noise>
+    <Noise>4</Noise>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Tungsten" Amount="1"/>

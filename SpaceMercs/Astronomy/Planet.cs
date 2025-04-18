@@ -148,16 +148,15 @@ namespace SpaceMercs {
                     else if (r < 15) { _type = Planet.PlanetType.Rocky; albedo = 0.25; }
                     else { _type = Planet.PlanetType.Gas; albedo = 0.5; }
                 }
-                BaseTemp *= Math.Pow(1.0 - albedo, 0.25);
-                BaseTemp += tempmod;
-                Temperature = (int)BaseTemp;
+                Temperature = BaseTemp * Math.Pow(1.0 - albedo, 0.2);
+                Temperature += tempmod;
 
                 // Check that this is ok
-                if (BaseTemp > 400 && Type == Planet.PlanetType.Gas) bOK = false;
-                if (BaseTemp > 320 && Type == Planet.PlanetType.Oceanic) bOK = false;
-                if (BaseTemp < 160 && Type == Planet.PlanetType.Oceanic) bOK = false;
-                if (BaseTemp < 270 && Type == Planet.PlanetType.Oceanic) _type = Planet.PlanetType.Ice;
-                if (BaseTemp < 180 && Type == Planet.PlanetType.Volcanic) bOK = false;
+                if (Temperature > 400 && Type == Planet.PlanetType.Gas) bOK = false;
+                if (Temperature > 320 && Type == Planet.PlanetType.Oceanic) bOK = false;
+                if (Temperature < 160 && Type == Planet.PlanetType.Oceanic) bOK = false;
+                if (Temperature < 270 && Type == Planet.PlanetType.Oceanic) _type = Planet.PlanetType.Ice;
+                if (Temperature < 180 && Type == Planet.PlanetType.Volcanic) bOK = false;
             } while (bOK == false);
 
             // Get radius based on type

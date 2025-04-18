@@ -273,6 +273,24 @@
     </Requirements>
     <Tex>2,8</Tex>
   </ShipEquipment>
+  <ShipEquipment Name="Psylink Suite">
+    <Cost>750</Cost>
+    <Power>5</Power>
+    <Size>S</Size>
+    <Desc>A brain-link system that allows Soldiers left on the ship to monitor missions in progress and gain experience.</Desc>
+    <Avail>MRE</Avail>
+    <Psylink/>
+    <Requirements>
+      <MinLevel>9</MinLevel>
+      <MinPop>60</MinPop>
+      <CashCost>300</CashCost>
+      <Facility>Engineering</Facility>
+      <Facility>Medlab</Facility>
+      <Relations Name="Grey">2</Relations>
+      <Relations Name="Insectoid">2</Relations>
+    </Requirements>
+    <Tex>3,8</Tex>
+  </ShipEquipment>
   <ShipEquipment Name="Fission Core">
     <Size>C</Size>
     <Cost>20</Cost>

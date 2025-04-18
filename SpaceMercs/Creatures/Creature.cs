@@ -583,7 +583,12 @@ namespace SpaceMercs {
             else playSound(EquippedWeapon.Type.SoundEffect);
 
             // Set up the projectile shots or auto-resolve melee effect
-            Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en.Size, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
+            if (EquippedWeapon is null || EquippedWeapon.Type.IsMeleeWeapon) {
+                Utils.CreateMeleeHits(EquippedWeapon, en.X, en.Y, results, 1d, effectFactory);
+            }
+            else {
+                Utils.CreateShots(EquippedWeapon, this, en.X, en.Y, en.Size, results, range, effectFactory, (float)(EquippedWeapon?.Type.BaseDelay ?? 0d));
+            }
         }
         public void AIStep(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             int nsteps = 0;

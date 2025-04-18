@@ -9,7 +9,7 @@ namespace SpaceMercs {
         public string Name { get; protected set; }
         public double Radius; // In metres
         public double AxialRotationPeriod; // Period of axial rotation (seconds)
-        public int Temperature { get; set; } // Kelvin
+        public double Temperature { get; set; } // Kelvin
         public Vector3 BaseColour;
         public int Seed;
         public int Ox, Oy, Oz; // Perlin seed offsets
@@ -30,7 +30,7 @@ namespace SpaceMercs {
 
             // Default here is an approximation, for backwards compatibility with versions where I didn't save this
             AxialRotationPeriod = xml.SelectNodeDouble("ARot", Const.DayLength * (Radius / Const.PlanetSize));
-            Temperature = xml.SelectNodeInt("Temp");
+            Temperature = xml.SelectNodeDouble("Temp");
             Seed = xml.SelectNodeInt("Seed");
             Random rnd = new Random(Seed);
             Ox = rnd.Next(Const.SeedBuffer);
@@ -90,9 +90,9 @@ namespace SpaceMercs {
         // Save this object to an Xml file
         public virtual void SaveToFile(StreamWriter file, GlobalClock clock) {
             if (!string.IsNullOrEmpty(Name) && !string.Equals(Name, "Unnamed")) file.WriteLine("<Name>" + Name + "</Name>");
-            file.WriteLine("<Radius>" + Math.Round(Radius, 0).ToString() + "</Radius>");
-            file.WriteLine("<ARot>" + Math.Round(AxialRotationPeriod, 0).ToString() + "</ARot>");
-            file.WriteLine("<Temp>" + Temperature.ToString() + "</Temp>");
+            file.WriteLine("<Radius>" + Radius.ToString("N0") + "</Radius>");
+            file.WriteLine("<ARot>" + AxialRotationPeriod.ToString("N0") + "</ARot>");
+            file.WriteLine("<Temp>" + Temperature.ToString("N2") + "</Temp>");
             file.WriteLine("<Seed>" + Seed + "</Seed>");
         }
 

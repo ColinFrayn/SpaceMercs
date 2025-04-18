@@ -106,6 +106,15 @@ namespace SpaceMercs {
                 return g;
             }
         }
+        public int PsylinkSpaces {
+            get {
+                int count = 0;
+                foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
+                    if (tp.Item2 && tp.Item1.Psylink) count++;
+                }
+                return count;
+            }
+        }
         public bool CanFly {
             get {
                 if (PowerConsumption > PowerGeneration) return false;

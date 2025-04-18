@@ -2,9 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Mind Transfer?
-- New ship room
-- Can spend some kind of resource (Mind Crystals?) to transfer XP from one soldier to another. Or it just happens over time. <100% recovery rate.
+Quit out of soldier choice -> should abort
+
+Psylink Suite [Test]
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
@@ -24,7 +24,7 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 - Don't do this for timed missions
 
 Enemies use grenades
-- Some enemies should have area attack weapons ()
+- Some enemies should have area attack weapons (Eg grenades)
 
 Alien colonies need names
 

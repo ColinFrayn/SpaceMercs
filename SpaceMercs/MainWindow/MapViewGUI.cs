@@ -134,7 +134,7 @@ namespace SpaceMercs.MainWindow {
                 else tl1 = "Unnamed Planet";
                 tl2 = pl.Type.ToString();
                 tl3 = "R = " + Math.Round(pl.Radius / 1000.0, 0).ToString() + "km";
-                tl4 = $"Temp = {pl.Temperature}K";
+                tl4 = $"Temp = {pl.Temperature:N0}K";
                 tl5 = "Orbit = " + Math.Round(pl.OrbitalDistance / Const.AU, 2).ToString() + " AU";
                 //tl4 = "Dist = " + Math.Round(GraphicsFunctions.ViewDistance(pl), 3).ToString() + "Gm";
             }
@@ -142,7 +142,7 @@ namespace SpaceMercs.MainWindow {
                 tl1 = "Moon " + (mn.ID + 1).ToString();
                 tl2 = mn.Type.ToString();
                 tl3 = "R = " + Math.Round(mn.Radius / 1000.0, 0).ToString() + "km";
-                tl4 = $"Temp = {mn.Temperature}K";
+                tl4 = $"Temp = {mn.Temperature:N0}K";
                 tl5 = "Orbit = " + Math.Round(mn.OrbitalDistance / Const.Million, 0).ToString() + " Mm";
             }
 
