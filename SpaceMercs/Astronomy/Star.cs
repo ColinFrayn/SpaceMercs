@@ -324,13 +324,13 @@ namespace SpaceMercs {
         private string SetupType() {
             // Set up the stellar type 
             if (Temperature > 40000) return "O0";
-            else if (Temperature >= 33000) return "O" + (9 - ((Temperature - 33000) / 700)).ToString();
-            else if (Temperature >= 10000) return "B" + (9 - ((Temperature - 10000) / 2300)).ToString();
-            else if (Temperature >= 7500) return "A" + (9 - ((Temperature - 7500) / 250)).ToString();
-            else if (Temperature >= 6000) return "F" + (9 - ((Temperature - 6000) / 150)).ToString();
-            else if (Temperature >= 5200) return "G" + (9 - ((Temperature - 5200) / 80)).ToString();
-            else if (Temperature >= 3700) return "K" + (9 - ((Temperature - 3700) / 150)).ToString();
-            else if (Temperature >= 2800) return "M" + (9 - ((Temperature - 2800) / 90)).ToString();
+            else if (Temperature >= 33000) return "O" + (9 - ((Temperature - 33000) / 700)).ToString("N0");
+            else if (Temperature >= 10000) return "B" + (9 - ((Temperature - 10000) / 2300)).ToString("N0");
+            else if (Temperature >= 7500) return "A" + (9 - ((Temperature - 7500) / 250)).ToString("N0");
+            else if (Temperature >= 6000) return "F" + (9 - ((Temperature - 6000) / 150)).ToString("N0");
+            else if (Temperature >= 5200) return "G" + (9 - ((Temperature - 5200) / 80)).ToString("N0");
+            else if (Temperature >= 3700) return "K" + (9 - ((Temperature - 3700) / 150)).ToString("N0");
+            else if (Temperature >= 2800) return "M" + (9 - ((Temperature - 2800) / 90)).ToString("N0");
             else return "R";
         }
 

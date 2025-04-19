@@ -19,10 +19,7 @@ Free movement/actions (don't consider Stamina) if there are no (alerted) enemies
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
-Enemies use grenades
-- Some enemies should have area attack weapons (Eg grenades)
-
-Alien colonies need names
+Enemies should use grenades / grenade weapons / emitter weapons properly
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
 
@@ -39,6 +36,8 @@ Add overwatch ability to soldiers (not heavies or snipers)
 Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls??
 
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
+
+Do alien colonies need names?
 
 Cover
 - When partially hidden from the attacker, get a def bonus
