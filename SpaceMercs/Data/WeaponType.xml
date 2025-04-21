@@ -347,7 +347,7 @@
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
   </WeaponType>
-  <WeaponType Name="Heavy Arc Rifle" Class="Shotgun">
+  <WeaponType Name="Heavy Arc Rifle" Class="Heavy">
     <Mass>28.0</Mass>
     <Cost>950</Cost>
     <Rarity>14</Rarity>
@@ -981,7 +981,7 @@
       <Relations Name="Ogrish">1</Relations>
     </Requirements>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>
-    <Damage Type="ConeMulti" Width="3.2">3+4</Damage>
+    <Damage Type="ConeMulti" Width="3.2">4+4</Damage>
     <Desc>A powerful Ogrish blast gun that fires superheated slugs of metal. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>12</Noise>

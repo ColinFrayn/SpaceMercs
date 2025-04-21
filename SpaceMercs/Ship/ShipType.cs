@@ -349,14 +349,13 @@ namespace SpaceMercs {
             tp.Armour = (int)dDiff;
             int size = 1;
             while (rand.NextDouble() > (1d + ((double)size / 20d) - (Math.Pow(dDiff,0.6) / 5d))) size++;
-            size = 2 + (int)((rand.NextDouble() + 1d) * (double)size * 4d);
-            if (isHulk) size *= 2;
+            size = 2 + (int)((rand.NextDouble() + 2d) * (double)size * (isHulk ? 5d : 2.5d));
 
             while (size > 0) {
-                int r = rand.Next(3);
-                if (r == 0) { tp.Small++; size -= 2; }
-                if (r == 1) { tp.Medium++; size -= 5; }
-                if (r == 2) { tp.Large++; size -= 10; }
+                int r = rand.Next(90 + size);
+                if (r < 50) { tp.Small++; size -= 2; }
+                else if (r < 80) { tp.Medium++; size -= 5; }
+                else { tp.Large++; size -= 10; }
             }
             tp.Weapon = 1;
             if (dDiff > 3.0 && rand.NextDouble() * dDiff > 3) tp.Weapon++;

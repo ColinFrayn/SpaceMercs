@@ -310,7 +310,7 @@ namespace SpaceMercs {
                 if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
-                m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
+                m.Size = (int)Math.Floor((Math.Log((double)sz / 80.0) / Math.Log(2))) + 1;
                 if (m.Size < 1) m.Size = 1;
             }
             else {
@@ -342,7 +342,7 @@ namespace SpaceMercs {
                 else m.RacialOpponent = loc.GetRandomRace(rand);
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
-                m.Size = (int)Math.Floor((Math.Log((double)sz / 100.0) / Math.Log(2))) + 1;
+                m.Size = (int)Math.Floor((Math.Log((double)sz / 80.0) / Math.Log(2))) + 1;
             }
             else {
                 if (rand.NextDouble() < (pRacial / 2d)) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife

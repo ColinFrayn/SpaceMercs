@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Xml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public class MissionItem : IItem {
@@ -24,15 +23,16 @@ namespace SpaceMercs {
             }
         }
 
-        private static readonly string[] ItemTypes = new string[] { "Egg", "Diamond", "Emerald", "Geode", "Bone", "Skull", "Crystal", "Ruby", "Statue", "Medal", "Device" };
-        private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine" };
-        private static readonly string[] GatherAdjectives = new string[] { "Alien", "Golden", "Luminous", "Shiny", "Transparent", "Glowing", "Pulsating", "Ornate" };
+        private static readonly string[] ItemTypes = new string[] { "Egg", "Diamond", "Emerald", "Geode", "Bone", "Skull", "Crystal", "Ruby", "Statue", "Medal", "Device", "Sphere", "Talisman" };
+        private static readonly string[] GoalAdjectives = new string[] { "Giant", "Monstrous", "Superb", "Ethereal", "Mysterious", "Ancient", "Fine", "Exquisite", "Rare", "Stunning" };
+        private static readonly string[] GatherAdjectives = new string[] { "Alien", "Golden", "Luminous", "Shiny", "Transparent", "Glowing", "Pulsating", "Ornate", "Valuable", "Rare" };
 
         private static readonly string[] ObjectiveAdjectives = new string[] { "historically significant", "potentially valuable", "fascinating", "strategically important", "mysterious", "delicate", "scientifically interesting", "large", "key" };
         private static readonly string[] ObjectiveTypes = new string[] { "structure", "crystal formation", "geologic area", "relic", "mineral deposit", "fossil deposit", "alien artefact" };
 
-        public MissionItem(string strName, double mass) {
+        public MissionItem(string strName, int level, double mass) {
             _name = strName;
+            Level = level;
             Mass = mass;
         }
         public MissionItem(IItem item) {
@@ -57,15 +57,13 @@ namespace SpaceMercs {
         }
 
         public static MissionItem GeneratePrecursorCore(int iDiff) {
-            MissionItem it = new MissionItem("Precursor Core", (double)iDiff);
+            MissionItem it = new MissionItem("Precursor Core", iDiff, (double)iDiff);
             it.IsPrecursorCore = true;
-            it.Level = iDiff;
             return it;
         }
         public static MissionItem GenerateSpaceHulkCore(int iDiff) {
-            MissionItem it = new MissionItem("SpaceHulk Core", (double)iDiff);
+            MissionItem it = new MissionItem("SpaceHulk Core", iDiff, (double)iDiff);
             it.IsSpaceHulkCore = true;
-            it.Level = iDiff;
             return it;
         }
 
@@ -89,16 +87,16 @@ namespace SpaceMercs {
         public static MissionItem GenerateRandomGoalItem(int diff, Random rand) {
             string strName = GoalAdjectives[rand.Next(GoalAdjectives.Length)] + " " + GatherAdjectives[rand.Next(GatherAdjectives.Length)] + " " + ItemTypes[rand.Next(ItemTypes.Length)];
             double m = 3d + (rand.NextDouble() * 2d);
-            return new MissionItem(strName, m);
+            return new MissionItem(strName, diff, m);
         }
         public static MissionItem GenerateRandomGatherItem(int diff, Random rand) {
             string strName = GatherAdjectives[rand.Next(GatherAdjectives.Length)] + " " + ItemTypes[rand.Next(ItemTypes.Length)];
-            double m = 0.8 + (rand.Next(10) / 10.0);
-            return new MissionItem(strName, m);
+            double m = 0.8 + (rand.Next(10) / 10d);
+            return new MissionItem(strName, diff, m);
         }
         public static MissionItem GenerateRandomDefendItem(Random rand) {
             string strName = $"{ObjectiveAdjectives[rand.Next(ObjectiveAdjectives.Length)]} {ObjectiveTypes[rand.Next(ObjectiveTypes.Length)]}";
-            return new MissionItem(strName, 0.0);
+            return new MissionItem(strName, 0, 0d);
         }
         public static MissionItem? TryGenerateRandomLegendaryWeapon(Random rand, int diff, Race? rc) {
             IItem? it = Utils.GenerateRandomLegendaryWeapon(rand, diff, rc);

@@ -2,11 +2,15 @@
 ToDo List
 -------------------------------------------------
 
+MissionItem - doesn't set level so cost is wrong
+
+Add a shotgun for lvl 11+
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
-At relations >= 3 maybe join human hypergates up to alien ones??
-- Add a trade route between their two nearest colonies
+At relations >= 3 join human hypergates up to alien ones??
+- Add a trade route between their two nearest colonies, if close enough. Done through alien diplomacy screen.
 
 ==================================================================================================================
 
@@ -15,17 +19,18 @@ At relations >= 3 maybe join human hypergates up to alien ones??
 Backburner : Features
 -------------------------------------------------
 
-Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
+Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
+
+What should attack skill do for an AoE weapon (grenade or cone), if anything?
+- Make sure it increases damage.
+
+?? Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
 Enemies should use grenades / grenade weapons / emitter weapons properly
 
 Generate more legendary missions continuously somehow. Maybe Space Hulks regenerate??
-
-Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
-
-What should attack skill do for an AoE weapon (grenade or cone), if anything?
 
 Redo NewGame dialog in-window?
 
