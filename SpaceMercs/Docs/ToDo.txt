@@ -2,15 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-MissionItem - doesn't set level so cost is wrong
-
-Add a shotgun for lvl 11+
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
 At relations >= 3 join human hypergates up to alien ones??
-- Add a trade route between their two nearest colonies, if close enough. Done through alien diplomacy screen.
+- Add a trade route between their two nearest colonies, if close enough.
+- Done through alien capital colony diplomacy screen.
+- Options for which colonies??
 
 ==================================================================================================================
 
@@ -20,6 +18,7 @@ Backburner : Features
 -------------------------------------------------
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
+- Maybe pick 20 squares and see what fraction can be reached??
 
 What should attack skill do for an AoE weapon (grenade or cone), if anything?
 - Make sure it increases damage.

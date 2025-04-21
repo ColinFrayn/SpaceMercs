@@ -1292,7 +1292,7 @@ namespace SpaceMercs {
             if (ParentMission.WavesRemaining <= 2) dCreatures += rand.NextDouble() * 0.3 + 0.3;
             if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.4;
             if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.4 + 0.5;
-            int nCreatures = (int)(dCreatures * (Const.CreatureFrequencyScale * 100d) * cg.QuantityScale * cg.QuantityScale * (1d + (double)ParentMission.SwarmLevel * 0.5));
+            int nCreatures = (int)(dCreatures * Const.CreatureFrequencyScale * cg.QuantityScale * cg.QuantityScale * (1d + (double)ParentMission.SwarmLevel * 0.5) / 150d);
             if (nCreatures < 2) nCreatures = 2;
             int nTries = 0;
             bool hasBoss = false;

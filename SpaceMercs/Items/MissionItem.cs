@@ -19,7 +19,7 @@ namespace SpaceMercs {
             get {
                 if (IsPrecursorCore) return Math.Round(Math.Pow(1.31d, (double)Level) * 25d) * 10d;
                 if (IsSpaceHulkCore) return Math.Round(Math.Pow(1.31d, (double)Level) * 16d) * 10d;
-                return Math.Pow(1.25, Level - 1) * 3.75d;
+                return Math.Pow(1.34, Level) * 3.5d;
             }
         }
 

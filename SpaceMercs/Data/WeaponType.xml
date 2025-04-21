@@ -72,6 +72,37 @@
       <Material Name="Titanium" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="MagFrag" Class="Shotgun">
+    <Mass>4.5</Mass>
+    <Cost>1650</Cost>
+    <Rarity>24</Rarity>
+    <Speed>19</Speed>
+    <Shots>4</Shots>
+    <Recoil>0.15</Recoil>
+    <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
+    <Damage Type="ConeMulti" Width="3.2">4+4</Damage>
+    <Desc>The Magnetic Fragment Accelerator, or MagFrag, is a highly devastating close-range projectile weapon.</Desc>
+    <Sound>ShotgunAndReload</Sound>
+    <Shred>1</Shred>
+    <Noise>11</Noise>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>62</MinPop>
+      <CashCost>350</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Tungsten" Amount="2"/>
+      <Material Name="Electronic Components" Amount="1"/>
+      <Relations Name="Ogrish">3</Relations>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="2"/>
+      <Material Name="Copper" Amount="1"/>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Tungsten" Amount="3"/>
+      <Material Name="Electronic Components" Amount="2"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Pistol" Class="Pistol">
     <Mass>0.7</Mass>
     <Cost>6</Cost>
@@ -108,7 +139,7 @@
     <Mass>20.0</Mass>
     <Cost>180</Cost>
     <Rarity>12</Rarity>
-    <Speed>16</Speed>
+    <Speed>19</Speed>
     <Recharge>1</Recharge>
     <Range Accuracy="0" DropOff="0.7" Length="0.2" Speed="0.8">10</Range>
     <Shots>3</Shots>
@@ -134,7 +165,7 @@
     <Shots>4</Shots>
     <Recoil>1.5</Recoil>
     <Delay>230</Delay>
-    <Damage>6+4</Damage>
+    <Damage>8+4</Damage>
     <Desc>A very heavy high calibre automatic rifle for mounting on power armour</Desc>
     <Sound>SuperHeavyMachineGun</Sound>
     <Noise>13</Noise>
@@ -237,7 +268,7 @@
     <Mass>24.0</Mass>
     <Cost>650</Cost>
     <Rarity>22</Rarity>
-    <Speed>16</Speed>
+    <Speed>20</Speed>
     <Recharge>1</Recharge>
     <Range Accuracy="0" DropOff="0.6" Length="0.8" Speed="1.8" Colour="1.0,0.2,0.2">12</Range>
     <Shots>3</Shots>
@@ -295,9 +326,9 @@
     <Speed>25</Speed>
     <Recharge>1</Recharge>
     <BaseDelay>500</BaseDelay>
-    <Range Accuracy="0" DropOff="0.6" Length="0.3" Speed="1.6">16</Range>
+    <Range Accuracy="0" DropOff="0.6" Length="0.3" Speed="1.6">18</Range>
     <Damage>14+8</Damage>
-    <Desc>A heavy railgun</Desc>
+    <Desc>A heavy railgun that delivers devastating damage over a long range.</Desc>
     <Sound>GaussCannon</Sound>
     <Stable/>
     <Noise>10</Noise>
@@ -351,7 +382,7 @@
     <Mass>28.0</Mass>
     <Cost>950</Cost>
     <Rarity>14</Rarity>
-    <Speed>18</Speed>
+    <Speed>21</Speed>
     <Recharge>1</Recharge>
     <Range Accuracy="-1" DropOff="0.8" Colour="0.6,0.6,1.0">5</Range>
     <Shots>5</Shots>
