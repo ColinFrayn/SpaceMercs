@@ -173,8 +173,14 @@ namespace SpaceMercs {
                 if (diff < 3d) diff = 3d;
                 return (int)diff + offset;
             }
+            // This *could* happen when flying from one system to another
+            if (this is Star) {
+                double diff = (rand.NextDouble() * 1.5d) + 3d + rand.NextDouble();
+                if (diff < 3d) diff = 3d;
+                return (int)diff + offset;
+            }
             // Shouldn't get here
-            throw new Exception($"Strange AO type in {nameof(GetHomeSystemMissionDifficulty)}");
+            throw new Exception($"Strange AO type {this.GetType().FullName} in {nameof(GetHomeSystemMissionDifficulty)}");
         }
 
         // Get a random race suitable for this location
