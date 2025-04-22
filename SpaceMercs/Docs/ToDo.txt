@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Hulk and Gate clash visually when in the same system
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -75,7 +77,7 @@ Improve the Encumbrance icon : Soldier.DisplaySoldierDetails()
 Backburner : Improvements
 -------------------------------------------------
 
-Remove as many Windows MessageBoxes as possible (tagged with  "// REPLACE WITH msgBox")
+Remove as many Windows MessageBoxes as possible
 
 Improve TextRenderer: Add Bold, Shadow, Border. Optimise?
 

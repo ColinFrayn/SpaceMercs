@@ -213,6 +213,7 @@ namespace SpaceMercs.MainWindow {
                     GL.UseProgram(flatColourShaderProgram.ShaderProgramHandle);
                     TriangleFocus.Flat.BindAndDraw();
                 }
+                px -= (Const.PlanetScale + 0.05f) * 0.8f;
             }
 
             // Draw the SpaceHulk, if there is one
