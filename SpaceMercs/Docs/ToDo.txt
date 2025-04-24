@@ -18,7 +18,7 @@ Backburner : Features
 -------------------------------------------------
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
-- Maybe pick 20 squares and see what fraction can be reached??
+- Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
 
 What should attack skill do for an AoE weapon (grenade or cone), if anything?
 - Make sure it increases damage.

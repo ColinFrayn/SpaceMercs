@@ -124,10 +124,11 @@ namespace SpaceMercs.MainWindow {
             fullShaderProgram.SetUniform("texScale", 1f, 1f);
 
             // Display all stars by sector
+            bool bViewSimple = TravelDetails != null;
             for (int sy = MinSectorY; sy <= MaxSectorY; sy++) {
                 for (int sx = MinSectorX; sx <= MaxSectorX; sx++) {
                     Sector sc = GalaxyMap.GetSector(sx, sy);
-                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, bShowPop, fMapViewX, fMapViewY, fMapViewZ, Aspect, Clock.ElapsedSeconds());
+                    sc.Draw(fullShaderProgram, bFadeUnvisited, bShowLabels, bShowFlags, bShowPop, fMapViewX, fMapViewY, fMapViewZ, Aspect, Clock.ElapsedSeconds(), bViewSimple);
                 }
             }
         }

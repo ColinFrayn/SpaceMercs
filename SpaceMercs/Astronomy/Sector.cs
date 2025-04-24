@@ -91,7 +91,7 @@ namespace SpaceMercs {
             return false;
         }
 
-        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect, double elapsedSeconds) {
+        public void Draw(ShaderProgram prog, bool bFadeUnvisited, bool bShowLabels, bool bShowFlags, bool bShowPop, float fMapViewX, float fMapViewY, float fMapViewZ, float aspect, double elapsedSeconds, bool bViewSimple) {
             TextRenderOptions tro = new TextRenderOptions() {
                 Alignment = Alignment.TopMiddle,
                 Aspect = 1.0f,
@@ -110,16 +110,16 @@ namespace SpaceMercs {
             prog.SetUniform("lightEnabled", false);
             prog.SetUniform("model", Matrix4.Identity);
             GL.UseProgram(prog.ShaderProgramHandle);
-            if (fMapViewZ > 20) Disc.Disc16.Bind();
+            if (fMapViewZ > 20 || bViewSimple) Disc.Disc16.Bind();
             else Disc.Disc32.Bind();
             foreach (Star st in Stars) {
                 // Work out the degree of detail to show in this star
-                int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
+                int iLevel = bViewSimple ? 2 : st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
-                if ((bFadeUnvisited && !st.Visited) || iLevel <= 2) {
+                if (iLevel <= 2 || (bFadeUnvisited && !st.Visited)) {
                     // Fade out unvisited stars (if set to do so)
                     float fade = 1f;
-                    if (bFadeUnvisited && !st.Visited) fade = 4f;
+                    if (bViewSimple || (bFadeUnvisited && !st.Visited)) fade = 4f;
                     Vector4 col = new Vector4(st.BaseColour.X / fade, st.BaseColour.Y / fade, st.BaseColour.Z / fade, 1.0f);
 
                     // Translate into the star frame
@@ -131,12 +131,14 @@ namespace SpaceMercs {
                     prog.SetUniform("flatColour", col);
                     GL.UseProgram(prog.ShaderProgramHandle);
 
-                    if (fMapViewZ > 20) Disc.Disc16.Draw();
+                    if (fMapViewZ > 20 || bViewSimple) Disc.Disc16.Draw();
                     else Disc.Disc32.Draw();
                 }
             }
-            if (fMapViewZ > 20) Disc.Disc16.Unbind();
+            if (fMapViewZ > 20 || bViewSimple) Disc.Disc16.Unbind();
             else Disc.Disc32.Unbind();
+
+            if (bViewSimple) return;
 
             // Precalc matrices
             Matrix4 scaleText = Matrix4.CreateScale(0.5f);
@@ -152,7 +154,7 @@ namespace SpaceMercs {
                 int iLevel = st.GetDetailLevel(fMapViewX, fMapViewY, fMapViewZ);
 
                 // If the star is close to the viewer and not faded then show the textured sphere
-                if ((!bFadeUnvisited || st.Visited) && iLevel >= 3) {
+                if (iLevel >= 3 && (!bFadeUnvisited || st.Visited)) {
                     Matrix4 viewM = scaleText * translateStar;
                     prog.SetUniform("view", viewM);
                     prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
