@@ -341,8 +341,7 @@ namespace SpaceMercs {
                 if (rand.NextDouble() < pRacial) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = loc.GetRandomRace(rand);
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
-                int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
-                m.Size = (int)Math.Floor((Math.Log((double)sz / 80.0) / Math.Log(2))) + 1;
+                m.Size = (int)Math.Ceiling(Math.Sqrt(m.ShipTarget.Type.MaxHull) - 3d);
             }
             else {
                 if (rand.NextDouble() < (pRacial / 2d)) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
@@ -649,7 +648,7 @@ namespace SpaceMercs {
                 else mg = MissionGoal.ExploreAll;
             }
             else if (r < 65) {
-                if (m.Diff < 4 || !m.PrimaryEnemy.HasBoss || m.PrimaryEnemy.Boss!.LevelMin > m.Diff) mg = MissionGoal.KillAll;
+                if (m.Diff < 4 || !m.PrimaryEnemy.HasBossAtLevel(m.Diff)) mg = MissionGoal.KillAll;
                 else mg = MissionGoal.KillBoss;
             }
             else if (r < 75 && m.Location.Colony != null) {
@@ -757,7 +756,7 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("Your task is to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the ruins and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the ruins, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the ruins, assassinate the leadership and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the ruins and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine($"investigate the ruins and search out a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the ruins and gather as many {MItem}s as you can.");
@@ -787,7 +786,7 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the cave system and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the cave system, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the cave system, assassinate the leadership and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the cave system and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine($"investigate the cave system and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the cave system and gather as many {MItem}s as you can.");
@@ -808,7 +807,7 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate the mines and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the mines, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate the mines, assassinate the leadership and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate the mines and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine($"investigate the mines and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate the mines and gather as many {MItem}s as you can.");
@@ -829,7 +828,7 @@ namespace SpaceMercs {
                 if (Location.Colony == null) sb.Append("You need to ");
                 else sb.Append("We would like you to ");
                 if (Goal == MissionGoal.KillAll) sb.AppendLine("investigate this area and clear out any opposition you find.");
-                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate this area, take care of the " + PrimaryEnemy!.Boss!.Name + " and get out alive.");
+                if (Goal == MissionGoal.KillBoss) sb.AppendLine("investigate this area, assassinate the leadership and get out alive.");
                 if (Goal == MissionGoal.ExploreAll) sb.AppendLine("investigate this area and map every part of it for the official records.");
                 if (Goal == MissionGoal.FindItem) sb.AppendLine($"investigate this area and find a {MItem} hidden inside.");
                 if (Goal == MissionGoal.Gather) sb.AppendLine($"investigate this area and gather as many {MItem}s as you can.");

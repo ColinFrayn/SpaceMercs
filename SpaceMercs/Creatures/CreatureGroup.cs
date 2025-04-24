@@ -14,15 +14,8 @@ namespace SpaceMercs {
         public HashSet<Planet.PlanetType> FoundIn { get; private set; }
         public int MaxRelations { get; private set; }  // Won't show up against any race with which racial relations are better than this value.
         public readonly List<CreatureType> CreatureTypes = new List<CreatureType>();
-        public bool HasBoss { get { return (Boss != null); } }
-        public CreatureType? Boss {
-            get {
-                foreach (CreatureType tp in CreatureTypes) {
-                    if (tp.IsBoss) return tp;
-                }
-                return null;
-            }
-        }
+        public readonly List<CreatureType> Bosses = new List<CreatureType>();
+        public bool HasBoss => Bosses.Count > 0;
         private readonly Random rand; // Let's set this here because it's easier than passing one through (and just setting it each time risks getting the exact same seed if insufficient time has passed)
         private BitmapData? TextureData;
         private int iTextureId = -1;
@@ -49,16 +42,17 @@ namespace SpaceMercs {
             rand = new Random();
         }
 
-        public Creature? GenerateRandomBoss(Race? ra, int diff, MissionLevel lev) {
-            CreatureType? tp = Boss;
+        public Creature? GenerateRandomBoss(Race? ra, int diff, MissionLevel lev, Random rand) {
+            if (!HasBoss) return null;
+            List<CreatureType> types = new List<CreatureType>();
+            foreach (CreatureType tp in Bosses) {
+                if (tp.LevelMin <= diff && tp.LevelMin >= diff) types.Add(tp);
+            }
+            if (types.Count == 0) return null;
 
-            // Generate a suitable level
-            if (tp is null || tp.LevelMin > diff) return null; // Can't make one
-            int lvl = diff;
-            if (rand.NextDouble() < 0.2 && lvl > tp.LevelMin) lvl--;
-            if (rand.NextDouble() < 0.2 && lvl < tp.LevelMax) lvl++;
-
-            return new Creature(tp, lvl, lev, ra);
+            int cno = rand.Next(types.Count);
+            CreatureType tpBoss = types[cno];
+            return new Creature(tpBoss, diff, lev, ra);
         }
         public Creature GenerateRandomCreature(Race? ra, int diff, MissionLevel lev) {
             // Get a creature type at random that's suitable for the difficulty and not the boss
@@ -89,6 +83,13 @@ namespace SpaceMercs {
             throw new Exception("Could not find random creature fitting requirements");
         }
 
+        public void AddBoss(CreatureType tp) {
+            if (!tp.IsBoss) return;
+            Bosses.Add(tp);
+        }
+        public bool HasBossAtLevel(int lvl) {
+            return Bosses.Any(b => b.LevelMin <= lvl && b.LevelMax >= lvl);
+        }
         public void SetTextureBitmap(Bitmap bmp) {
             TextureData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }

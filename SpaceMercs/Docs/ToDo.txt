@@ -2,8 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Hulk and Gate clash visually when in the same system
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 

@@ -170,7 +170,7 @@
       <Item Amount="2">Chitin</Item>
       <Item Amount="1">Heavy Chitin</Item>
     </Scavenge>
-    <Tex Size="4">1,11</Tex>
+    <Tex Size="4">1,7</Tex>
   </CreatureType>
   <CreatureType Name="Hive Brain">
     <Size>3</Size>

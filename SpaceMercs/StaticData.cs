@@ -146,6 +146,7 @@ namespace SpaceMercs {
                     CreatureType ct = new CreatureType(node, gp);
                     CreatureTypes.Add(ct);
                     gp.CreatureTypes.Add(ct);
+                    if (ct.IsBoss) gp.AddBoss(ct);
                 }
                 catch (Exception ex) {
                     MessageBox.Show("Error loading " + tp.Name + " data element " + Count.ToString() + ". Error:" + ex.Message, "Error in Static Data Load", MessageBoxButtons.OK);

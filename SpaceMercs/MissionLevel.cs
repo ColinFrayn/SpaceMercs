@@ -1158,7 +1158,7 @@ namespace SpaceMercs {
                 dGroupSize += rand.NextDouble() * Math.Min(3d, dGroups / 4d);
                 int iGroupSize = (int)dGroupSize;
                 if (Entities.IsEmpty && cg.HasBoss && (ParentMission.Diff > 3 || ParentMission.Goal == MissionGoal.KillBoss) && IsLowestLevel) {
-                    Creature? cr = cg.GenerateRandomBoss(ra, Diff, this); // Boss creatures are not reduced in strength because of swarm conditions
+                    Creature? cr = cg.GenerateRandomBoss(ra, Diff, this, rand); // Boss creatures are not reduced in strength because of swarm conditions
                     if (cr is not null) {
                         if (!PlaceFirstCreatureInGroup(cr, true)) { niter++; continue; }
                         iGroupSize++;
@@ -1302,7 +1302,7 @@ namespace SpaceMercs {
             while (nCreatures > 0 && nTries < 100) {
                 Creature? cr = null;
                 if (!hasBoss && ParentMission.WavesRemaining == 0) { // Last wave. Add a boss.
-                    cr = cg.GenerateRandomBoss(ra, Diff, this);
+                    cr = cg.GenerateRandomBoss(ra, Diff, this, rand);
                 }
                 if (cr is null) {
                     cr = cg.GenerateRandomCreature(ra, cDiff, this);
