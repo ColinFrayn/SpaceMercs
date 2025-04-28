@@ -21,6 +21,7 @@ namespace SpaceMercs.Dialogs {
             lbPsylinkCapacity.Text = psylinkSlots.ToString();
             btAbort.Enabled = bCanAbort;
             btPsylink.Enabled = false;
+            btPsylink.Text = "Unlink";
             if (!bCanAbort) this.ControlBox = false;
             ShowTeamSoldiers();
             UpdateSelection();
@@ -29,14 +30,15 @@ namespace SpaceMercs.Dialogs {
 
         private void ShowTeamSoldiers() {
             dgSoldiers.Rows.Clear();
-            object[] arrRow = new object[4];
+            object[] arrRow = new object[5];
             foreach (Soldier s in PlayerTeam.SoldiersRO) {
                 if (!s.IsActive) continue;
                 if (Psylinked.Contains(s)) continue;
                 arrRow[0] = Soldiers.Contains(s);
-                arrRow[1] = s.Name;
-                arrRow[2] = s.Race.Name;
-                arrRow[3] = s.Level.ToString();
+                arrRow[1] = "Psylink";
+                arrRow[2] = s.Name;
+                arrRow[3] = s.Race.Name;
+                arrRow[4] = s.Level.ToString();
                 dgSoldiers.Rows.Add(arrRow);
                 dgSoldiers.Rows[dgSoldiers.Rows.Count - 1].Tag = s;
             }
@@ -75,7 +77,7 @@ namespace SpaceMercs.Dialogs {
             }
             if (count == 0 || count > MaxSize) btLaunch.Enabled = false;
             else btLaunch.Enabled = true;
-            //dgSoldiers.ClearSelection();
+            dgSoldiers.ClearSelection();
         }
 
         private void dgSoldiers_SelectionChanged(object sender, EventArgs e) {
@@ -88,25 +90,11 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
             btPsylink.Enabled = true;
+            dgSoldiers.ClearSelection();
         }
 
         private void btPsylink_Click(object sender, EventArgs e) {
-            if (dgSoldiers.SelectedRows.Count > 0) {
-                // Psylink a soldier
-                if (dgSoldiers.SelectedRows.Count > 1) {
-                    // Weird
-                    return;
-                }
-                if (dgSoldiers.SelectedRows[0].Tag is Soldier s) {
-                    if (Psylinked.Count < psylinkSlots) {
-                        Psylinked.Add(s);
-                        lbPsylink.Items.Add(s);
-                        ShowTeamSoldiers();
-                        return;
-                    }
-                }
-            }
-            else if (lbPsylink.SelectedItems.Count > 0) {
+            if (lbPsylink.SelectedItems.Count > 0) {
                 // Unlink a soldier
                 if (lbPsylink.SelectedItems.Count > 1) {
                     // Weird
@@ -135,7 +123,7 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void dgSoldiers_Click(object sender, EventArgs e) {
-            btPsylink.Text = "Psylink";
+            btPsylink.Enabled = false;
             lbPsylink.ClearSelected();
         }
 
@@ -143,6 +131,18 @@ namespace SpaceMercs.Dialogs {
             if (!bAccept) {
                 Soldiers.Clear();
                 Psylinked.Clear();
+            }
+        }
+
+        private void dgSoldiers_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0) {
+                if (dgSoldiers.Rows[e.RowIndex].Tag is Soldier s) {
+                    if (Psylinked.Count < psylinkSlots) {
+                        Psylinked.Add(s);
+                        lbPsylink.Items.Add(s);
+                        ShowTeamSoldiers();
+                    }
+                }
             }
         }
     }

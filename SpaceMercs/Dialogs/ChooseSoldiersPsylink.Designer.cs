@@ -24,10 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             dgSoldiers = new DataGridView();
-            Selected = new DataGridViewCheckBoxColumn();
-            dgcName = new DataGridViewTextBoxColumn();
-            dgcRace = new DataGridViewTextBoxColumn();
-            dgcLevel = new DataGridViewTextBoxColumn();
             btLaunch = new Button();
             btAbort = new Button();
             label1 = new Label();
@@ -36,6 +32,11 @@
             btPsylink = new Button();
             label2 = new Label();
             lbPsylinkCapacity = new Label();
+            Selected = new DataGridViewCheckBoxColumn();
+            btPsylinked = new DataGridViewButtonColumn();
+            dgcName = new DataGridViewTextBoxColumn();
+            dgcRace = new DataGridViewTextBoxColumn();
+            dgcLevel = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
             SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             dgSoldiers.AllowUserToResizeColumns = false;
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { Selected, dgcName, dgcRace, dgcLevel });
+            dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { Selected, btPsylinked, dgcName, dgcRace, dgcLevel });
             dgSoldiers.Location = new Point(0, 33);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.Name = "dgSoldiers";
@@ -56,41 +57,10 @@
             dgSoldiers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgSoldiers.Size = new Size(492, 402);
             dgSoldiers.TabIndex = 0;
+            dgSoldiers.CellClick += dgSoldiers_CellClick;
             dgSoldiers.CellContentClick += dgSoldiers_CellContentClick;
             dgSoldiers.SelectionChanged += dgSoldiers_SelectionChanged;
             dgSoldiers.Click += dgSoldiers_Click;
-            // 
-            // Selected
-            // 
-            Selected.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Selected.HeaderText = "Selected";
-            Selected.Name = "Selected";
-            Selected.ReadOnly = true;
-            Selected.Width = 57;
-            // 
-            // dgcName
-            // 
-            dgcName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgcName.HeaderText = "Name";
-            dgcName.MinimumWidth = 20;
-            dgcName.Name = "dgcName";
-            dgcName.ReadOnly = true;
-            // 
-            // dgcRace
-            // 
-            dgcRace.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dgcRace.HeaderText = "Race";
-            dgcRace.Name = "dgcRace";
-            dgcRace.ReadOnly = true;
-            dgcRace.Width = 57;
-            // 
-            // dgcLevel
-            // 
-            dgcLevel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dgcLevel.HeaderText = "Level";
-            dgcLevel.Name = "dgcLevel";
-            dgcLevel.ReadOnly = true;
-            dgcLevel.Width = 59;
             // 
             // btLaunch
             // 
@@ -187,6 +157,46 @@
             lbPsylinkCapacity.Text = "88";
             lbPsylinkCapacity.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // Selected
+            // 
+            Selected.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Selected.HeaderText = "Selected";
+            Selected.Name = "Selected";
+            Selected.ReadOnly = true;
+            Selected.Width = 57;
+            // 
+            // btPsylinked
+            // 
+            btPsylinked.HeaderText = "Psylinked";
+            btPsylinked.Name = "btPsylinked";
+            btPsylinked.ReadOnly = true;
+            btPsylinked.Text = "Psylink";
+            btPsylinked.Width = 65;
+            // 
+            // dgcName
+            // 
+            dgcName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgcName.HeaderText = "Name";
+            dgcName.MinimumWidth = 20;
+            dgcName.Name = "dgcName";
+            dgcName.ReadOnly = true;
+            // 
+            // dgcRace
+            // 
+            dgcRace.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgcRace.HeaderText = "Race";
+            dgcRace.Name = "dgcRace";
+            dgcRace.ReadOnly = true;
+            dgcRace.Width = 57;
+            // 
+            // dgcLevel
+            // 
+            dgcLevel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgcLevel.HeaderText = "Level";
+            dgcLevel.Name = "dgcLevel";
+            dgcLevel.ReadOnly = true;
+            dgcLevel.Width = 59;
+            // 
             // ChooseSoldiersPsylink
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -221,13 +231,14 @@
     private System.Windows.Forms.Button btAbort;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label lbSquadSize;
-    private System.Windows.Forms.DataGridViewCheckBoxColumn Selected;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dgcName;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dgcRace;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dgcLevel;
         private ListBox lbPsylink;
         private Button btPsylink;
         private Label label2;
         private Label lbPsylinkCapacity;
+        private DataGridViewCheckBoxColumn Selected;
+        private DataGridViewButtonColumn btPsylinked;
+        private DataGridViewTextBoxColumn dgcName;
+        private DataGridViewTextBoxColumn dgcRace;
+        private DataGridViewTextBoxColumn dgcLevel;
     }
 }
