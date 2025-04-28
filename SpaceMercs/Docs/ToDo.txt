@@ -2,6 +2,9 @@
 ToDo List
 -------------------------------------------------
 
+Maybe make more melee weapons range 1.5 so they can attack diagonally??
+- Or otherwise make stealth mode better somehow
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 

@@ -46,7 +46,7 @@ namespace SpaceMercs {
             if (!HasBoss) return null;
             List<CreatureType> types = new List<CreatureType>();
             foreach (CreatureType tp in Bosses) {
-                if (tp.LevelMin <= diff && tp.LevelMin >= diff) types.Add(tp);
+                if (tp.LevelMin <= diff && tp.LevelMax >= diff) types.Add(tp);
             }
             if (types.Count == 0) return null;
 

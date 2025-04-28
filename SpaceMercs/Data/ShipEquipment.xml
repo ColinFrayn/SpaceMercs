@@ -214,7 +214,7 @@
       <Facility>Engineering</Facility>
       <Relations Name="Insectoid">3</Relations>
     </Requirements>
-    <Tex>1,7</Tex>
+    <Tex>2,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Cloaking Device">
     <Cost>3500</Cost>
@@ -231,7 +231,7 @@
       <Facility>Engineering</Facility>
       <Relations Name="Insectoid">1</Relations>
     </Requirements>
-    <Tex>2,7</Tex>
+    <Tex>1,7</Tex>
   </ShipEquipment>
   <ShipEquipment Name="Silent Drive">
     <Cost>500</Cost>

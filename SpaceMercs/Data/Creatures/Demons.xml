@@ -79,6 +79,7 @@
     </Resistances>
     <Scavenge>
       <Item Amount="0.2">Demon Blood</Item>
+      <Item Amount="0.15">Incendiary Bulb</Item>
     </Scavenge>
     <OnDeathEffect Name="BloodBurst">
       <Radius>1.5</Radius>

@@ -177,8 +177,8 @@ namespace SpaceMercs.MainWindow {
                         }
                         else {
                             msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
+                            if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                         }
-                        //if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.Artifact) {
                         msgBox.PopupMessage($"You analyse the {ThisMission.MItem} and marvel at the extraordinary workmanship!\nYour new artifact is stored securely in the ship's hold\nBonus Experience = {ThisMission.Experience}xp each");
@@ -216,6 +216,9 @@ namespace SpaceMercs.MainWindow {
 
             // Check for level up
             foreach (Soldier s in ThisMission.Soldiers) {
+                s.CheckForLevelUp(AnnounceMessage);
+            }
+            foreach (Soldier s in ThisMission.Psylinked) {
                 s.CheckForLevelUp(AnnounceMessage);
             }
         }

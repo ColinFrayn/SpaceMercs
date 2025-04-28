@@ -1,13 +1,28 @@
 ﻿<Data>
-  <CreatureType Name="Giant Bug">
+  <CreatureType Name="Beetle">
     <Scale>0.8</Scale>
+    <LevelRange>1,4</LevelRange>
+    <Attack>5</Attack>
+    <Defence>5</Defence>
+    <Health>7</Health>
+    <Stamina>12</Stamina>
+    <Armour>8</Armour>
+    <Frequency>4</Frequency>
+    <Scavenge>
+      <Item Amount="0.1">Chitin</Item>
+    </Scavenge>
+    <Tex Size="2">1,1</Tex>
+    <Desc>A big bug. Yuck.</Desc>
+  </CreatureType>
+  <CreatureType Name="Giant Bug">
+    <Scale>0.9</Scale>
     <LevelRange>1,5</LevelRange>
     <Attack>7</Attack>
     <Defence>6</Defence>
     <Health>8</Health>
     <Stamina>14</Stamina>
     <Armour>8</Armour>
-    <Frequency>4</Frequency>
+    <Frequency>3</Frequency>
     <Scavenge>
       <Item Amount="0.2">Chitin</Item>
     </Scavenge>
@@ -16,7 +31,7 @@
   </CreatureType>
   <CreatureType Name="Armoured Bug">
     <Scale>0.95</Scale>
-    <LevelRange>1,5</LevelRange>
+    <LevelRange>2,5</LevelRange>
     <Attack>8</Attack>
     <Defence>9</Defence>
     <Health>10</Health>
@@ -32,9 +47,9 @@
   </CreatureType>
   <CreatureType Name="Soldier Bug">
     <Scale>1.1</Scale>
-    <LevelRange>2,5</LevelRange>
-    <Attack>11</Attack>
-    <Defence>8</Defence>
+    <LevelRange>3,5</LevelRange>
+    <Attack>13</Attack>
+    <Defence>9</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>16</Armour>
@@ -45,6 +60,6 @@
     <Scavenge>
       <Item Amount="0.7">Chitin</Item>
     </Scavenge>
-    <Tex Size="2">1,1</Tex>
+    <Tex Size="2">3,1</Tex>
   </CreatureType>
 </Data>
