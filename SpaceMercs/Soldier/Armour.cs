@@ -162,8 +162,9 @@ namespace SpaceMercs {
 
             abilityValue += (Math.Pow(Type.Speed, Const.ArmourSpeedBonusExponent) - 1d) * Const.ArmourSpeedBonusValue;
 
-            foreach ((Soldier.UtilitySkill sk, int val) in Type.SkillBoosts) {
-                abilityValue += val * Const.AbilityBonusValue * 3d;
+            foreach ((Soldier.UtilitySkill sk, int val) in Type.SkillBoosts) {                
+                if (sk == Soldier.UtilitySkill.Stealth) abilityValue += val * Const.AbilityBonusValue * Math.Pow(1.1, val) * 5d;
+                else abilityValue += val * Const.AbilityBonusValue * Math.Pow(1.1, val) * 3d;
             }
 
             // Modifier for the complexity of this armour (and therefore rarity)

@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+Auto attack seems to be doing all shots and only resolving them all together at the end??
+
 Maybe make more melee weapons range 1.5 so they can attack diagonally??
 - Or otherwise make stealth mode better somehow
 

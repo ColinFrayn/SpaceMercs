@@ -530,8 +530,7 @@
       <Radius>3.0</Radius>
       <Range>12</Range>
       <Scan/>
-      <Recharge>3</Recharge>
-      <Noise>2</Noise>
+      <Recharge>1</Recharge>
       <Sound>Radar</Sound>
     </ItemEffect>
     <Materials>

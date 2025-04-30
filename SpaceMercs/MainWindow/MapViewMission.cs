@@ -797,6 +797,8 @@ namespace SpaceMercs.MainWindow {
             return UpdateDetectionForLocation(s.X, s.Y, s.EquippedWeapon.NoiseLevel);
         }
         private bool UpdateDetectionForLocation(int x, int y, double baseRange, Soldier? s = null) {
+            // No noise so no change
+            if (baseRange == 0) return false;
             // Calculate the effects of a noise at location x,y.
             // baseRange is the range within which this noise can be heard.
             if (x < 0 || y < 0 || x >= CurrentLevel.Width || y >= CurrentLevel.Height) return false;
