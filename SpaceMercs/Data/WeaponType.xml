@@ -1286,7 +1286,7 @@
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Greataxe" Class="Melee"
+  <WeaponType Name="Greataxe" Class="Melee">
     <Speed>15</Speed>
     <Range>1.5</Range>
     <Damage>6+8</Damage>

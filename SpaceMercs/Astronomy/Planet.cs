@@ -316,10 +316,10 @@ namespace SpaceMercs {
             IsHomeworld = true;
         }
 
-        public void SetupPrecursorMissions(Random rnd) {
-            Mission mp = Mission.CreatePrecursorMission(this, rnd);
+        public void SetupPrecursorMissions(Random rnd, Team playerTeam) {
+            Mission mp = Mission.CreatePrecursorMission(this, rnd, playerTeam);
             AddMission(mp);
-            Mission? ma = Mission.TryCreatePrecursorArtifactMission(this, rnd);
+            Mission? ma = Mission.TryCreatePrecursorArtifactMission(this, rnd, playerTeam);
             if (ma is not null) AddMission(ma);
         }
 

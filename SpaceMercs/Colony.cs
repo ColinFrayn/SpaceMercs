@@ -280,7 +280,7 @@ namespace SpaceMercs {
 
             // Now fill the gaps
             PopulateMercenaries();
-            PopulateMissions();
+            PopulateMissions(t);
             dtLastVisit = clock.CurrentTime;
 
             // Remove any mercenaries with names identical to soldiers in the team
@@ -291,7 +291,7 @@ namespace SpaceMercs {
                 if (hsTeamNames.Contains(m.Name)) Mercenaries.Remove(m);
             }
         }
-        private void PopulateMissions() {
+        private void PopulateMissions(Team playerTeam) {
             Random rand = new Random();
             int total = BaseSize + rand.Next(3) + rand.Next(3) + 2;
             if (HasBaseType(BaseType.Military)) total += 2;
@@ -300,7 +300,7 @@ namespace SpaceMercs {
             if (total < 0) total = 0;
             if (Missions.Count >= total) return;
             for (int n = 0; n < total; n++) {
-                Missions.Add(Mission.CreateRandomColonyMission(this, rand));
+                Missions.Add(Mission.CreateRandomColonyMission(this, rand, playerTeam));
             }
         }
         private void PopulateMercenaries() {
@@ -529,9 +529,9 @@ namespace SpaceMercs {
             if (!Mercenaries.Contains(merc)) throw new Exception("Attemptign to delete non-existent Mercenary");
             Mercenaries.Remove(merc);
         }
-        public void ResetMissions() {
+        public void ResetMissions(Team playerTeam) {
             Missions.Clear();
-            PopulateMissions();
+            PopulateMissions(playerTeam);
         }
         public void ResetMercenaries() {
             Mercenaries.Clear();

@@ -12,10 +12,10 @@ namespace SpaceMercs {
             AxialRotationPeriod = Const.DayLength * 2.5d;
         }
         
-        public void SetupSpaceHulkMissions(Random rnd) {
-            Mission mh = Mission.CreateSpaceHulkMission(this, rnd);
+        public void SetupSpaceHulkMissions(Random rnd, Team playerTeam) {
+            Mission mh = Mission.CreateSpaceHulkMission(this, rnd, playerTeam);
             AddMission(mh);
-            Mission? ma = Mission.TryCreateSpaceHulkArtifactMission(this, rnd);
+            Mission? ma = Mission.TryCreateSpaceHulkArtifactMission(this, rnd, playerTeam);
             if (ma is not null) AddMission(ma);
         }
 

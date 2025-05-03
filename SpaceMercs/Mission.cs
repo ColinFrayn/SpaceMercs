@@ -300,14 +300,20 @@ namespace SpaceMercs {
             if (m.ShipTarget is null) throw new Exception("ShipCombat Mission could not generate a target ship");
             return m;
         }
-        public static Mission CreateRandomColonyMission(Colony cl, Random rand) {
+        public static Mission CreateRandomColonyMission(Colony cl, Random rand, Team playerTeam) {
             int iDiff = cl.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomColonyMissionType(cl.Location, rand, iDiff);
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = cl.Location;
             if (m.Type == MissionType.BoardingParty) {
-                m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                if (rand.NextDouble() > 0.6) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
+                else m.RacialOpponent = cl.Location.GetRandomRace(rand);
+                bool gotOpponent = m.SetPrimaryEnemy(playerTeam);
+                if (!gotOpponent && m.RacialOpponent is not null) {
+                    m.RacialOpponent = null;
+                    gotOpponent = m.SetPrimaryEnemy(playerTeam);
+                }
+                if (!gotOpponent) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 m.ShipTarget = Ship.GenerateRandomShipOfDifficulty(m.Diff, null);
                 int sz = m.ShipTarget.Type.Width * m.ShipTarget.Type.Length;
                 m.Size = (int)Math.Floor((Math.Log((double)sz / 80.0) / Math.Log(2))) + 1;
@@ -316,7 +322,12 @@ namespace SpaceMercs {
             else {
                 if (rand.NextDouble() > 0.4) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = cl.Location.GetRandomRace(rand);
-                if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
+                bool gotOpponent = m.SetPrimaryEnemy(playerTeam);
+                if (!gotOpponent && m.RacialOpponent is not null) {
+                    m.RacialOpponent = null;
+                    gotOpponent = m.SetPrimaryEnemy(playerTeam);
+                }
+                if (!gotOpponent) throw new Exception("Unable to get PrimaryEnemy for random Colony mission");
                 // Set mission goal
                 Tuple<MissionGoal, MissionItem?> mgtp = GetRandomMissionGoal(m, rand);
                 m.Goal = mgtp.Item1;
@@ -328,7 +339,7 @@ namespace SpaceMercs {
             }
             return m;
         }
-        public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand) {
+        public static Mission CreateRandomScannerMission(OrbitalAO loc, Random rand, Team playerTeam) {
             if (loc is not HabitableAO hao) throw new Exception("Attempting to create a mission in a non-habitable AO");
             int iDiff = loc.GetRandomMissionDifficulty(rand);
             MissionType tp = GenerateRandomScannerMissionType(loc, rand, iDiff);
@@ -347,7 +358,14 @@ namespace SpaceMercs {
                 if (rand.NextDouble() < (pRacial / 2d)) m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
                 else m.RacialOpponent = loc.GetRandomRace(rand);
             }
-            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            bool gotOpponent = m.SetPrimaryEnemy(playerTeam);
+            // If we can't get a race-specific enemy then try again without
+            if (!gotOpponent && m.RacialOpponent is not null) {
+                m.RacialOpponent = null;
+                gotOpponent = m.SetPrimaryEnemy(playerTeam);
+            }
+            if (!gotOpponent) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            
             m.Reward = 0d;
             if (m.Size < 1) m.Size = 1;
 
@@ -358,14 +376,14 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        public static Mission CreatePrecursorMission(HabitableAO loc, Random rand) {
+        public static Mission CreatePrecursorMission(HabitableAO loc, Random rand, Team playerTeam) {
             int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
             if (iDiff < 15) iDiff = 15;
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
+            if (!m.SetPrimaryEnemy(playerTeam)) throw new Exception("Unable to get PrimaryEnemy for Precursor mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -376,14 +394,14 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        public static Mission CreateSpaceHulkMission(OrbitalAO loc, Random rand) {
+        public static Mission CreateSpaceHulkMission(OrbitalAO loc, Random rand, Team playerTeam) {
             int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
             if (iDiff < 12) iDiff = 12;
             MissionType tp = MissionType.SpaceHulk;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null;
-            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
+            if (!m.SetPrimaryEnemy(playerTeam)) throw new Exception("Unable to get PrimaryEnemy for SpaceHulk mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -396,14 +414,14 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        public static Mission? TryCreatePrecursorArtifactMission(OrbitalAO loc, Random rand) {
+        public static Mission? TryCreatePrecursorArtifactMission(OrbitalAO loc, Random rand, Team playerTeam) {
             int iDiff = loc.GetRandomMissionDifficulty(rand);
             if (iDiff < 14) iDiff = 14;
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            if (!m.SetPrimaryEnemy(playerTeam)) throw new Exception("Unable to get PrimaryEnemy for random Precursor Artifact mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -425,14 +443,14 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             return m;
         }
-        public static Mission? TryCreateSpaceHulkArtifactMission(OrbitalAO loc, Random rand) {
-            int iDiff = loc.GetRandomMissionDifficulty(rand);
+        public static Mission? TryCreateSpaceHulkArtifactMission(OrbitalAO loc, Random rand, Team playerTeam) {
+            int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
             if (iDiff < 11) iDiff = 11;
             MissionType tp = MissionType.SpaceHulk;
             Mission m = new Mission(tp, iDiff, rand.Next());
             m.Location = loc;
             m.RacialOpponent = null; // Enemy is not a major race e.g. wildlife
-            if (!m.SetPrimaryEnemy()) throw new Exception("Unable to get PrimaryEnemy for random Scanner mission");
+            if (!m.SetPrimaryEnemy(playerTeam)) throw new Exception("Unable to get PrimaryEnemy for random SpaceHulk Artifact mission");
             m.Reward = 0d;
             Sector sect = loc.GetSystem().Sector;
             int maxDist = Math.Max(Math.Abs(sect.SectorX), Math.Abs(sect.SectorY));
@@ -515,24 +533,28 @@ namespace SpaceMercs {
         }
 
         // Utility
-        private bool CanChooseCreatureGroup(CreatureGroup cg) {
-            if (RacialOpponent is null && cg.RaceSpecific) return false;
-            if (RacialOpponent is not null && !cg.RaceSpecific) return false;
+        private bool CanChooseCreatureGroup(CreatureGroup cg, Team playerTeam) {
             if (IsShipMission && !cg.FoundInShips) return false;
             if (!IsShipMission && !cg.FoundIn.Contains(Location.Type)) return false;
-            // Race relations are between each race and the player team. Why would we ever get a mission with the soldiers of a given race? Only ever in space (e.g. ambush if PT is hated), never from colonies
-            if (cg.RaceSpecific && cg.MaxRelations < 5) return false; // A colony would never set up a mission agaisnt its own soldiers.
+            // Only set up a race-specific encounter if we're sufficiently antagonistic with that race
+            if (cg.RaceSpecific && cg.MaxRelations < 5) {
+                if (RacialOpponent is null) return false;
+                if (Location.Colony is not null) return false; // A colony would never set up a mission against its own soldiers.
+                if (playerTeam.GetRelations(RacialOpponent) > cg.MaxRelations) return false; // Soldiers of a race would never attack someone from a race with sufficiently high relations.
+            }
+            if (!cg.RaceSpecific && RacialOpponent is not null) return false;
+
             int minSectorDist = Location.GetSystem().Sector.SectorRing;
             if (minSectorDist < cg.MinSectorRange) return false; // Cannot have some creatures in inner sectors
             return true;
         }
-        private bool SetPrimaryEnemy() {
+        private bool SetPrimaryEnemy(Team playerTeam) {
             double dTotalScore = 0.0;
 
             // If opponent race is null (i.e. a creature group of some type) then get a non-racial enemy
             Dictionary<(CreatureGroup, int), double> dScores = new();
             foreach (CreatureGroup cg in StaticData.CreatureGroups) {
-                if (!CanChooseCreatureGroup(cg)) continue;
+                if (!CanChooseCreatureGroup(cg, playerTeam)) continue;
                 // Consider swarm levels
                 for (int swarm = 0; swarm <= 2; swarm++) {
                     if (swarm > 0 && 40 + swarm * 20 > RandomNumberGenerator.GetInt32(100)) continue; // Swarms are fairly rare
@@ -545,33 +567,37 @@ namespace SpaceMercs {
                     // Get a score for this CG to assess how well it fits this role
                     double score = 0.0;
                     // Get the fraction of members of this creature group that are in the correct level range, and how close to the middle of the range they are
-                    int count = 0;
+                    int count = 0, countOk = 0;
                     int maxsize = 1;
                     foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {
                         count++;
                         // Only count this creature type if it's in the correct range and isn't a boss
                         if (!ct.IsBoss && ct.LevelMin <= cDiff && ct.LevelMax >= cDiff) {
                             score += 20.0 - Math.Abs(((ct.LevelMin + ct.LevelMax) / 2) - cDiff); // How far from average for this range?
+                            countOk++;
                         }
                         if (ct.Size > maxsize) maxsize = ct.Size;
                     }
 
-                    // If creatures are large then maybe don't choose this group for AbandonedCity
+                    // Couldn't find enough variation of creatures
+                    if (countOk < 3) break;
+
+                    // If creatures are large then maybe don't choose this group for AbandonedCity missions because they can be cramped
                     if (Type == MissionType.AbandonedCity) {
-                        if (maxsize == 3) score *= 0.9;
-                        if (maxsize == 2) score *= 0.95;
+                        score *= 1.05d - (0.05d * (double)maxsize);  // 1.00, 0.95, 0.90
                     }
 
-                    if (score <= 10.0) continue;
                     score /= count;
                     score -= (cg.FoundIn.Count * (swarm + 1)); // The more location-specific this creature group, the more we want to use it for the locations for which it is suitable
+                    if (score <= 1.0) break;
                     dScores.Add((cg, swarm), score);
                     dTotalScore += score;
+                    if (cg.RaceSpecific) break; // Can't get swarms of people, partly because it would be a great cash cow
                 }
             }
 
             // If we don't have any possible creatures then we're in trouble!
-            if (dScores.Count == 0) throw new Exception("Could not find any suitable creatures!");
+            if (dScores.Count == 0) return false;
 
             // Now pick a creature group biased by the scores
             // mess around here a bit to use a better rng
@@ -593,7 +619,7 @@ namespace SpaceMercs {
                     Dictionary<CreatureGroup, double> dScores2 = new();
                     dTotalScore = 0d;
                     foreach (CreatureGroup cg in StaticData.CreatureGroups) {
-                        if (!CanChooseCreatureGroup(cg)) continue;
+                        if (!CanChooseCreatureGroup(cg, playerTeam)) continue;
                         double score = 0.0;
                         int count = 0;
                         foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == cg)) {

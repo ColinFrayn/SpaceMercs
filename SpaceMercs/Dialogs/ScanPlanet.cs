@@ -61,17 +61,17 @@ namespace SpaceMercs.Dialogs {
             if (_aoScan is Planet pl) {
                 if (pl.IsPrecursor) {
                     nm = 0;
-                    pl.SetupPrecursorMissions(rnd);
+                    pl.SetupPrecursorMissions(rnd, _playerTeam);
                 }
                 else nm++;
             }
             else if (_aoScan is SpaceHulk sh) {
                 nm = 0;
-                sh.SetupSpaceHulkMissions(rnd);
+                sh.SetupSpaceHulkMissions(rnd, _playerTeam);
             }
             else if (nm < 2) nm = 2;
             for (int n = 0; n < nm; n++) {
-                Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd);
+                Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd, _playerTeam);
                 _aoScan.AddMission(m);
             }
             _aoScan.SetScanned();

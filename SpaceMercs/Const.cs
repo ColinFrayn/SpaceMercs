@@ -204,11 +204,11 @@ namespace SpaceMercs {
         public const double EncounterLevelScalingInnerRadius = 5.0; // Size of the inner scaling region, in ly.
         public const double EncounterLevelScalingDistanceInner = 1.0; // Within the inner scaling region, this is the base difficulty increase scale length.
         public const double EncounterLevelScalingExponentInner = 1.0; // 1 means encounter difficulty scales linearly. 0 means no scaling. 0.5 = sqrt, etc.
-        public const double EncounterLevelScalingDistanceOuter = 2.8; // Outside of the inner scaling region, this is the base difficulty increase scale length.
-        public const double EncounterLevelScalingExponentOuter = 0.75; // 1 means encounter difficulty scales linearly. 0 means no scaling. 0.5 = sqrt, etc.
+        public const double EncounterLevelScalingDistanceOuter = 3.3; // Outside of the inner scaling region, this is the base difficulty increase scale length.
+        public const double EncounterLevelScalingExponentOuter = 0.85; // 1 means encounter difficulty scales linearly. 0 means no scaling. 0.5 = sqrt, etc.
         public const double EncounterFreqScale = 0.15; // The lower this is (>0.0) the less frequently we encounter anything when travelling (active or passive).
         public const double ShipBountyScale = 0.15;  // Scale for calculating bounty of enemy ships defeated
-        public const double HyperspaceGateTimeFactor = 30.0; // It takes this factor less time to travel by hyperspace gate than travel at light speed.
+        public const double HyperspaceGateTimeFactor = 40.0; // Travelling by Hyperspace gate is effectively this many times faster than light speed.
         public const double HyperspaceCostScale = 15.0; // Divide the cost of the hyperspace travel by this factor
         public const double HyperspaceCostDistanceExponent = 1.1; // Exponent for distance in Ly when calculating cost. 1 = linear.
         public const double HyperspaceCostHullExponent = 1.2; // Exponent for hull size when calculating cost. 1 = linear.

@@ -658,7 +658,7 @@ namespace SpaceMercs.Dialogs {
             SetupFoundryTab();
         }
         private void btRandomiseMissions_Click(object sender, EventArgs e) {
-            colony.ResetMissions();
+            colony.ResetMissions(PlayerTeam);
             SetupMissionsTab();
         }
         private void btRandomiseMercs_Click(object sender, EventArgs e) {
