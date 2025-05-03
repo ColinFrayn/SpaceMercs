@@ -319,7 +319,9 @@ namespace SpaceMercs {
         public static double GenerateHitRoll(IEntity from, IEntity to) {
             double att = from.Attack + (from.EquippedWeapon?.AccuracyBonus ?? 0);
             double def = to.Defence;
-            // Melee attack:
+            double dist = from.RangeTo(to);
+
+            // Melee attack mods:
             if (from.EquippedWeapon is null || from.EquippedWeapon.Type.IsMeleeWeapon) {
                 att -= from.Encumbrance * Const.MeleeEncumbranceAttackPenalty;
                 def -= to.Encumbrance * Const.MeleeEncumbranceDefencePenalty;
@@ -337,8 +339,12 @@ namespace SpaceMercs {
                 if (to.EquippedWeapon is not null && to.EquippedWeapon.Type.WClass == WeaponType.WeaponClass.Heavy) {
                     def -= Const.HeavyWeaponMeleeDefencePenalty;
                 }
+                // Short melee weapon attacking diagonally
+                if (from.EquippedWeapon is not null && !from.EquippedWeapon.Type.LongWeapon && dist > 1.1) {
+                    att -= Const.DiagonalMeleePenalty;
+                }
             }
-            double dist = from.RangeTo(to);
+
             double size = to.Size;
             double dropoff = (from.EquippedWeapon == null) ? 0.0 : from.EquippedWeapon.DropOff;
             double encumbrancePenalty = from.Encumbrance * Const.EncumbranceHitPenalty;

@@ -797,7 +797,7 @@
     <Cost>4</Cost>
     <Rarity>3</Rarity>
     <Speed>9</Speed>
-    <Range Accuracy="1">1</Range>
+    <Range Accuracy="1">1.5</Range>
     <Damage>2+3</Damage>
     <Desc>A sharp bladed weapon</Desc>
     <Sound>SwordSlice</Sound>
@@ -812,7 +812,7 @@
     <Cost>80</Cost>
     <Rarity>18</Rarity>
     <Speed>10</Speed>
-    <Range Accuracy="1">1</Range>
+    <Range Accuracy="1">1.5</Range>
     <Damage>3+4</Damage>
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
@@ -839,7 +839,7 @@
     <Cost>6</Cost>
     <Rarity>4</Rarity>
     <Speed>11</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>3+3</Damage>
     <Desc>A sturdy axe</Desc>
     <Sound>SwordSlice</Sound>
@@ -854,7 +854,7 @@
     <Cost>85</Cost>
     <Rarity>17</Rarity>
     <Speed>11</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>4+4</Damage>
     <Desc>A sturdy axe powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
@@ -880,7 +880,7 @@
     <Cost>60</Cost>
     <Rarity>9</Rarity>
     <Speed>16</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Shred>4</Shred>
     <Damage>5+6</Damage>
     <Desc>A whirring chainsaw in a sword shape</Desc>
@@ -898,7 +898,7 @@
     <Cost>260</Cost>
     <Rarity>40</Rarity>
     <Speed>10</Speed>
-    <Range Accuracy="1">1</Range>
+    <Range Accuracy="1">1.5</Range>
     <Damage>4+5</Damage>
     <Desc>Sharp, chitinous claws attached over your armour, humming with alien power.</Desc>
     <Sound>SwordSlice</Sound>
@@ -924,9 +924,10 @@
     <Cost>460</Cost>
     <Rarity>50</Rarity>
     <Speed>12</Speed>
+    <Long/>
     <Range Accuracy="1">1.5</Range>
     <Damage>5+5</Damage>
-    <Desc>Sharp, extensible chitinous spear humming with mystical power that allows you to attack diagonally.</Desc>
+    <Desc>Sharp, extensible chitinous spear humming with mystical power that allows you to attack diagonally without penalty.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
       <MinLevel>7</MinLevel>
@@ -950,9 +951,10 @@
     <Cost>420</Cost>
     <Rarity>30</Rarity>
     <Speed>15</Speed>
-    <Range Accuracy="-1">1</Range>
+    <Long/>
+    <Range Accuracy="-1">1.5</Range>
     <Damage>4+4</Damage>
-    <Desc>A powerful double-bladed weapon with a grip at the centre, allowing you to strike twice in quick succession.</Desc>
+    <Desc>A powerful double-bladed weapon with a grip at the centre, allowing you to strike twice in quick succession, and diagonally without penalty.</Desc>
     <Sound>SwordSlice</Sound>
     <Shots>2</Shots>
     <Requirements>
@@ -975,7 +977,7 @@
     <Cost>1100</Cost>
     <Rarity>40</Rarity>
     <Speed>15</Speed>
-    <Range Accuracy="1">1</Range>
+    <Range Accuracy="1">1.5</Range>
     <Damage>8+7</Damage>
     <Desc>A huge powered fist capable of striking with devastating force.</Desc>
     <Sound>Punches</Sound>
@@ -1001,7 +1003,7 @@
     <Cost>1800</Cost>
     <Rarity>50</Rarity>
     <Speed>17</Speed>
-    <Range Accuracy="1">1</Range>
+    <Range Accuracy="1">1.5</Range>
     <Damage>7+7</Damage>
     <Shred>6</Shred>
     <Desc>A huge, powered chainsaw with razor sharp blades.</Desc>
@@ -1055,28 +1057,28 @@
     </Materials>
   </WeaponType>
   <!-- Natural weapons - all hidden -->
-  <WeaponType Name="Claws">
+  <WeaponType Name="Claws" Class="Melee">
     <Speed>10</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>4+3</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Club">
+  <WeaponType Name="Club" Class="Melee">
     <Speed>12</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>4+3</Damage>
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Spiky Club">
+  <WeaponType Name="Spiky Club" Class="Melee">
     <Speed>14</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>5+5</Damage>
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Bite">
+  <WeaponType Name="Bite" Class="Melee">
     <Speed>10</Speed>
     <Range>1</Range>
     <Damage>4+3</Damage>
@@ -1102,7 +1104,7 @@
     <Shred>1</Shred>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Poisonous Bite">
+  <WeaponType Name="Poisonous Bite" Class="Melee">
     <Speed>11</Speed>
     <Range>1</Range>
     <Damage>5+4</Damage>
@@ -1117,7 +1119,7 @@
   </WeaponType>
   <WeaponType Name="Triffid Tentacle">
     <Speed>10</Speed>
-    <Range Colour="0.3,1.0,0.2">2</Range>
+    <Range Colour="0.3,1.0,0.2">3</Range>
     <Damage>2+3</Damage>
     <Sound>Whip</Sound>
     <ItemEffect Name="Tentacle Sting">
@@ -1180,9 +1182,9 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Sting">
+  <WeaponType Name="Sting" Class="Melee">
     <Speed>10</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>3+3</Damage>
     <Type>Poison</Type>
     <Sound>Claws</Sound>
@@ -1256,37 +1258,37 @@
     <Delay>220</Delay>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Xenoblades">
+  <WeaponType Name="Xenoblades" Class="Melee">
     <Speed>11</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>6+5</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Xenobite">
+  <WeaponType Name="Xenobite" Class="Melee">
     <Speed>10</Speed>
     <Range>1</Range>
     <Damage>4+5</Damage>
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Barbed Claws">
+  <WeaponType Name="Barbed Claws" Class="Melee">
     <Speed>9</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>4+5</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Greatsword">
+  <WeaponType Name="Greatsword" Class="Melee">
     <Speed>14</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>6+6</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Greataxe">
+  <WeaponType Name="Greataxe" Class="Melee"
     <Speed>15</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>6+8</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
@@ -1299,9 +1301,9 @@
     <Sound>HeavyCrossbow</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Void Claws">
+  <WeaponType Name="Void Claws" Class="Melee">
     <Speed>10</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>6+6</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
@@ -1417,9 +1419,9 @@
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Demon Sword">
+  <WeaponType Name="Demon Sword" Class="Melee">
     <Speed>13</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>6+6</Damage>
     <Sound>SwordSlice</Sound>
     <ItemEffect Name="Sword Burn">
@@ -1447,7 +1449,7 @@
   </WeaponType>
   <WeaponType Name="Mechablades" Class="Melee">
     <Speed>11</Speed>
-    <Range>1</Range>
+    <Range>1.5</Range>
     <Damage>4+4</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>

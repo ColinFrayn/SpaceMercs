@@ -28,6 +28,7 @@ namespace SpaceMercs {
                     sb.AppendLine(kvp.Key.ToString() + " : +" + kvp.Value);
                 }
                 if (Type.Stable) sb.AppendLine("Stable Weapon");
+                if (Type.LongWeapon) sb.AppendLine("Long Reach");
                 if (Mod is not null) sb.AppendLine($"Mod: {Mod.Name}");
                 if (Type.Recharge == 1) sb.AppendLine("One shot per turn");
                 else if (Type.Recharge > 1) sb.AppendLine($"One shot per {Type.Recharge} turns");

@@ -31,6 +31,7 @@ namespace SpaceMercs {
         public Color ShotColor { get; private set; }
         public ShotType WeaponShotType { get; private set; }
         public int Recharge { get; private set; }
+        public bool LongWeapon { get; private set; }
 
         public WeaponType(XmlNode xml) : base(xml) {
             string wclass = xml.GetAttributeText("Class", "Other");
@@ -70,10 +71,11 @@ namespace SpaceMercs {
             WeaponShotType = nDam.GetAttributeEnum<ShotType>("Type", ShotType.Single);
 
             DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
-            IsUsable = (xml.SelectSingleNode("Hidden") == null);
-            Stable = (xml.SelectSingleNode("Stable") != null);
+            IsUsable = xml.SelectSingleNode("Hidden") == null;
+            Stable = xml.SelectSingleNode("Stable") != null;
             Shots = xml.SelectNodeInt("Shots", 1);
-            Modifiable = (xml.SelectSingleNode("Unmodifiable") == null);
+            Modifiable = xml.SelectSingleNode("Unmodifiable") == null;
+            LongWeapon = xml.SelectSingleNode("Long") != null;
             Recharge = xml.SelectNodeInt("Recharge", 0);
             Recoil = xml.SelectNodeDouble("Recoil", 0.0);
             Delay = xml.SelectNodeDouble("Delay", 0.0);

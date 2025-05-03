@@ -188,6 +188,7 @@ namespace SpaceMercs {
         public const double HeavyWeaponMeleeDefencePenalty = 8d; // Defence penalty when wielding a heavy weapon and being attacked in melee
         public const double MeleeEncumbranceAttackPenalty = 8d; // Penalty to melee attack when fully encumbered.
         public const double MeleeEncumbranceDefencePenalty = 8d; // Penalty to defence when fully encumbered and attacked in melee.
+        public const double DiagonalMeleePenalty = -5d; // Penalty for attacking diagonally with a short melee weapon
 
         // Miscellaneous
         public const double InitialCash = 50.0;
