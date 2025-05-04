@@ -98,24 +98,27 @@ namespace SpaceMercs {
 
         // Get a random difficulty level for this location (e.g. for a mercenary or a mission)
         public int GetRandomMissionDifficulty(Random rand) {
+            return GetRandomMissionDifficulty(rand.NextDouble);
+        }
+        public int GetRandomMissionDifficulty(Func<double> nextDouble) {
             Star sys = GetSystem();
 
             // Human home system so carefully configure the difficulty to be appropriate for low level players
             if (sys == StaticData.HumanRace.HomePlanet.GetSystem()) {
-                return GetHomeSystemMissionDifficulty(rand);
+                return GetHomeSystemMissionDifficulty(nextDouble);
             }
 
             // This is a home system for one of the alien races so set the danger level appropriately
             foreach (Race r in StaticData.Races) {
                 if (sys == r.HomePlanet.GetSystem()) {
-                    return GetHomeSystemMissionDifficulty(rand, 5);
+                    return GetHomeSystemMissionDifficulty(nextDouble, 5);
                 }
             }
 
             // Mission difficulty scales up as we go further from home
             double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
-            double dLevel = 1d + rand.NextDouble() + rand.NextDouble() + rand.NextDouble();
+            double dLevel = 1d + nextDouble() + nextDouble() + nextDouble();
 
             // Scale more steeply in home sector (Yes I know sectors are not circular.)
             double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
@@ -132,10 +135,10 @@ namespace SpaceMercs {
                 Planet? pl = hao.ParentPlanet();
                 if (pl != null) {
                     // Planet/moon without local colony -> dangerous         
-                    if (hao.Colony == null && pl.Colony == null) dLevel += rand.NextDouble();
+                    if (hao.Colony == null && pl.Colony == null) dLevel += nextDouble();
                     // More distant planets can be more hostile
                     double pDist = Math.Sqrt(pl.ID);
-                    dLevel += pDist * (rand.NextDouble() + 1d) / 2d;
+                    dLevel += pDist * (nextDouble() + 1d) / 2d;
                 }
             }
 
@@ -143,39 +146,39 @@ namespace SpaceMercs {
         }
 
         // Get the mission difficulty for the home system of the Human race
-        private int GetHomeSystemMissionDifficulty(Random rand, int offset = 0) {
+        private int GetHomeSystemMissionDifficulty(Func<double> nextDouble, int offset = 0) {
             // Home planet is a nursery zone. Mostly 1s with a sprinkling of 2s.
             if (this == StaticData.HumanRace.HomePlanet) {
-                return (int)(rand.NextDouble() * 1.7d) + 1 + offset;
+                return (int)(nextDouble() * 1.7d) + 1 + offset;
             }
             // Planets increase in diff as they get further from home
             if (this is Planet pl) {
                 double pdist = Math.Abs(pl.ID - StaticData.HumanRace.HomePlanet.ID);
-                double diff = (rand.NextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (rand.NextDouble() * 0.25d)));
+                double diff = (nextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (nextDouble() * 0.25d)));
                 if (diff < 2d) diff = 2d;
                 return (int)diff + offset;
             }
             // Moons increase in diff as they get further from their parent planet, and as the parent gets further from home
             if (this is Moon mn) {
                 double pdist = Math.Abs((mn.Parent).ID - StaticData.HumanRace.HomePlanet.ID);
-                double diff = (rand.NextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (rand.NextDouble() * 0.25d)));
-                diff += mn.ID * ((rand.NextDouble() * 0.1d) + 0.1d);
+                double diff = (nextDouble() * 1.5d) + 1.5d + (pdist * (0.3d + (nextDouble() * 0.25d)));
+                diff += mn.ID * ((nextDouble() * 0.1d) + 0.1d);
                 if (diff < 2d) diff = 2d;
                 return (int)diff + offset;
             }
             if (this is HyperGate) {
-                double diff = (rand.NextDouble() * 1.5d) + 3d + (rand.NextDouble() * 1.25d);
+                double diff = (nextDouble() * 1.5d) + 3d + (nextDouble() * 1.25d);
                 if (diff < 3d) diff = 3d;
                 return (int)diff + offset;
             }
             if (this is SpaceHulk) {
-                double diff = (rand.NextDouble() * 1.5d) + 3.5d + (rand.NextDouble() * 1.25d);
+                double diff = (nextDouble() * 1.5d) + 3.5d + (nextDouble() * 1.25d);
                 if (diff < 3d) diff = 3d;
                 return (int)diff + offset;
             }
             // This *could* happen when flying from one system to another
             if (this is Star) {
-                double diff = (rand.NextDouble() * 1.5d) + 3d + rand.NextDouble();
+                double diff = (nextDouble() * 1.5d) + 3d + nextDouble();
                 if (diff < 3d) diff = 3d;
                 return (int)diff + offset;
             }

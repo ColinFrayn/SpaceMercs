@@ -217,6 +217,10 @@ namespace SpaceMercs {
                 dtNextGrowth = dtLastGrowth + TimeSpan.FromDays(GetNextGrowthPeriod());
             }
         }
+        public void UpdateGrowthProgress(TimeSpan tDiff, GlobalClock clock) {
+            dtNextGrowth -= tDiff;
+            CheckGrowth(clock);
+        }
         internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff, GlobalClock clock) {
             if (!CanSeed) return;
             Random rand = new Random();
@@ -329,6 +333,11 @@ namespace SpaceMercs {
         public int GetRandomMissionDifficulty(Random rand) {
             int diff = Location.GetRandomMissionDifficulty(rand);
             return diff;
+        }
+        public int GetAverageMissionExperience() {
+            // Get the average mission difficulty by faking a random variable
+            int diff = Location.GetRandomMissionDifficulty(() => 0.5);
+            return Mission.GetAverageMissionExperience(diff);
         }
 
         // Fill the inventory with deliveries for the given number of days

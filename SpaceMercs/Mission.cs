@@ -113,7 +113,7 @@ namespace SpaceMercs {
                 throw new Exception("Unknown mission goal");
             }
         }
-        public int Experience { get { return (int)(((double)Diff + 1d) * ((double)Diff + 1d) * (double)LevelCount * ((double)Size * 2d + 8d) * (1d + SwarmLevel * 0.3d) * (SecondaryEnemy == null ? 1d : Const.SecondaryEnemyXPBoost)); } }
+        public int Experience => MissionExperience(Diff, LevelCount, Size, SwarmLevel, SecondaryEnemy == null);
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
@@ -133,7 +133,6 @@ namespace SpaceMercs {
             2 => " Hive",
             _ => throw new NotImplementedException()
         };
-
         
         public Mission(MissionType t, int dif, int sd = 0) {
             Goal = MissionGoal.KillAll;
@@ -530,6 +529,12 @@ namespace SpaceMercs {
                 else return GenerateRandomScannerMissionType(loc, rand, 0);
 
             }
+        }
+        public static int GetAverageMissionExperience(int diff) {
+            return MissionExperience(diff, 1, 3, 0, false);
+        }
+        private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy) {
+            return (int)(((double)diff + 1d) * ((double)diff + 1d) * (double)levelCount * ((double)size * 2d + 8d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost));
         }
 
         // Utility

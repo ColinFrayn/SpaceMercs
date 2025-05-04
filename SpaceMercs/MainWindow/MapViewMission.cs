@@ -133,6 +133,7 @@ namespace SpaceMercs.MainWindow {
             if (PlayerTeam is null) throw new Exception("PlayerTeam is null in CeaseMission()");
             if (PlayerTeam.CurrentPosition is null) throw new Exception("PlayerTeam.CurrentPosition is null in CeaseMission()");
             if (ThisMission is null) throw new Exception("ThisMission is null in CeaseMission()");
+            Colony? thisColony = PlayerTeam.CurrentPositionHAO?.Colony;
 
             PlayerTeam.CeaseMission();
             Random rnd = new Random();
@@ -194,8 +195,17 @@ namespace SpaceMercs.MainWindow {
                     foreach (Soldier s in ThisMission.Psylinked) {
                         s.AddExperience(ThisMission.Experience);
                     }
-                    if (PlayerTeam.CurrentPositionHAO?.Colony is not null) {
-                        PlayerTeam.ImproveRelations(PlayerTeam.CurrentPositionHAO?.Colony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
+                    if (thisColony is not null) {
+                        PlayerTeam.ImproveRelations(thisColony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
+                        // Speed up colony growth if possible
+                        if (thisColony.CanGrow) {
+                            // Work out how much this mission does to speed up growth
+                            double expFract = (double)ThisMission.Experience / (double)thisColony.GetAverageMissionExperience();
+                            double nDays = expFract * Const.ColonyMissionGrowthBonus;
+                            TimeSpan tDiff = TimeSpan.FromDays(nDays);
+                            // Check for increase in size
+                            thisColony.UpdateGrowthProgress(tDiff, Clock);
+                        }
                     }    
                     else if (PlayerTeam.CurrentPosition.GetSystem().Owner is Race ra) {
                         PlayerTeam.ImproveRelations(ra, ThisMission.Experience / Const.RelationsExpPenaltyScale, AnnounceMessage);

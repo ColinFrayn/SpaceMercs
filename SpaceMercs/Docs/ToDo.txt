@@ -2,12 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Mission.SetPrimaryEnemy() cannot find a sufficiently high level RacialOpponent enemy [TEST]
-
-Make all melee weapons range 1.5 so they can attack diagonally at a penalty [TEST]
-
-Bug: Auto attack seems to be doing all shots and only resolving them all together at the end??
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
