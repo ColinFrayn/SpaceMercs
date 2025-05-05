@@ -1131,10 +1131,10 @@ namespace SpaceMercs {
                 if (!at.CanBuild(Race)) continue;
                 if (!at.Locations.Contains(BodyPart.Chest)) continue;
                 int lDiff = (at.Requirements?.MinLevel ?? 0) - Level;
-                if (lDiff > 0) continue; // not high enough level
+                if (lDiff >= 0) continue; // not high enough level, or barely high enough. Mercs don't get cutting-edge armour.
                 if (at.Cost > (Level * 60)) continue;
-                if (lDiff == 0 && RandomNumberGenerator.GetInt32(10) > 4) continue; // Barely high enough level, unlikely to have one yet (50%)
-                if (lDiff == -1 && Level > 1 && RandomNumberGenerator.GetInt32(10) > 7) continue; // Not massively over-levelled, slightly unlikely to have one yet (20%)
+                if (lDiff == -1 && RandomNumberGenerator.GetInt32(10) > 4) continue; // Barely high enough level, unlikely to have one yet (50%)
+                if (lDiff == -2 && Level > 1 && RandomNumberGenerator.GetInt32(10) > 7) continue; // Not massively over-levelled, slightly unlikely to have one yet (20%)
                 double score = selector(at);
                 if (score > best) {
                     best = score;
@@ -1149,9 +1149,11 @@ namespace SpaceMercs {
                 // Pick a decent material
                 if (!m.IsArmourMaterial || m.MaxLevel <= 1) continue;
                 // Should be allowed by this soldier
-                if (choice.MinMatLvl > m.MaxLevel) continue;
+                if (choice.MinMatLvl >= m.MaxLevel) continue;
                 // Pick the most common matching material
                 if (mat is null || m.Rarity > mat.Rarity) mat = m;
+                Armour tempArmour = new Armour(choice, mat, 0);
+                if (tempArmour.Cost > (Level * 150)) continue;
             }
             if (mat is null) return null;
             return new Armour(choice, mat, 0);

@@ -242,10 +242,10 @@
   <WeaponType Name="Plasma Rifle" Class="Rifle">
     <Mass>4.0</Mass>
     <Cost>700</Cost>
-    <Rarity>15</Rarity>
+    <Rarity>17</Rarity>
     <Speed>14</Speed>
     <Range Accuracy="0" DropOff="0.5" Length="0.4" Speed="1.6" Colour="1.0,0.4,0.2">9</Range>
-    <Damage>5+4</Damage>
+    <Damage>5+5</Damage>
     <Desc>A plasma rifle, firing scorching hot plasma rounds</Desc>
     <Sound>LaserRifleSingle</Sound>
     <Noise>7</Noise>

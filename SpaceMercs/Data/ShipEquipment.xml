@@ -353,8 +353,25 @@
     <Tex>5,1</Tex>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>70</MinPop>
       <CashCost>80</CashCost>
+      <Relations Name="Human">4</Relations>
+      <Facility>Workshop</Facility>
+      <Facility>Engineering</Facility>
+    </Requirements>
+  </ShipEquipment>
+  <ShipEquipment Name="Advanced Antimatter Core">
+    <Size>C</Size>
+    <Cost>1550</Cost>
+    <Generate>85</Generate>
+    <Desc>An advanced power core based on anti-matter annihilation.</Desc>
+    <Avail>MRE</Avail>
+    <Tex>4,8</Tex>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <MinPop>80</MinPop>
+      <CashCost>150</CashCost>
+      <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -362,14 +379,17 @@
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
     <Cost>1750</Cost>
-    <Generate>90</Generate>
+    <Generate>100</Generate>
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
     <Requirements>
-      <MinLevel>10</MinLevel>
-      <MinPop>60</MinPop>
-      <CashCost>80</CashCost>
+      <MinLevel>12</MinLevel>
+      <MinPop>90</MinPop>
+      <CashCost>250</CashCost>
+      <Relations Name="Grey">3</Relations>
+      <Relations Name="Insectoid">3</Relations>
+      <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -377,14 +397,17 @@
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
     <Cost>2500</Cost>
-    <Generate>100</Generate>
+    <Generate>110</Generate>
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>7,1</Tex>
     <Requirements>
-      <MinLevel>12</MinLevel>
-      <MinPop>60</MinPop>
-      <CashCost>150</CashCost>
+      <MinLevel>14</MinLevel>
+      <MinPop>100</MinPop>
+      <CashCost>500</CashCost>
+      <Relations Name="Grey">3</Relations>
+      <Relations Name="Insectoid">3</Relations>
+      <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>

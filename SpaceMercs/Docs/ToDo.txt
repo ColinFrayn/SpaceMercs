@@ -2,6 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Option to sell all unequipped armour, weapons (up to a maximum quality?) from Team View if at a colony
+- Stow all from all soldiers?
+- Default loadout, e.g. Medsystem, 3xPlasma grenade - specify somehow, auto re-supply?
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
