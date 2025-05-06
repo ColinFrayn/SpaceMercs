@@ -575,11 +575,10 @@ namespace SpaceMercs {
             return null;
         }
 
-        public static Weapon? GenerateRandomLegendaryWeapon(Random rnd, int missionLevel, Race? race) {
+        public static Weapon? GenerateRandomLegendaryWeapon(Random rnd, int missionLevel) {
             Dictionary<WeaponType, double> wts = new();
             double totalWeight = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
-                if (!tp.CanBuild(race)) continue;
                 int minLevel = (tp.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
                 if (tp.IsUsable && minLevel <= missionLevel) {
                     double weight = 1.0;
@@ -640,12 +639,11 @@ namespace SpaceMercs {
             return ar;
         }
 
-        public static Armour? GenerateRandomLegendaryArmour(Random rnd, int missionLevel, Race? race) {
+        public static Armour? GenerateRandomLegendaryArmour(Random rnd, int missionLevel) {
             // Choose between all armour pieces that are sufficiently strong
             Dictionary<ArmourType, double> ats = new();
             double totalWeight = 0.0;
             foreach (ArmourType at in StaticData.ArmourTypes) {
-                if (!at.CanBuild(race)) continue;
                 int minLevel = (at.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
                 if (minLevel <= missionLevel) {
                     double weight = 1.0;

@@ -526,21 +526,24 @@ namespace SpaceMercs.MainWindow {
             }
 
             bool bCanScanHere = false;
-            if (view == ViewMode.ViewSystem && PlayerTeam.PlayerShip.CanScan && ao == PlayerTeam.CurrentPosition) {
-                if (PlayerTeam.CurrentPositionHAO != null) {
-                    if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
-                        if (PlayerTeam.CurrentPosition is Planet pl) {
-                            // I used to prohibit scanning gas giants, but now I think it's ok
-                            // Especially as we now have Cloud Colony Builders.
-                            bCanScanHere = true; 
-                        }
-                        if (PlayerTeam.CurrentPosition is Moon) {
-                            bCanScanHere = true;
+            if (view == ViewMode.ViewSystem && ao == PlayerTeam.CurrentPosition && PlayerTeam.CurrentPosition is OrbitalAO oao) {
+                if (PlayerTeam.PlayerShip.CanScan) {
+                    if (PlayerTeam.CurrentPositionHAO != null) {
+                        if (PlayerTeam.CurrentPositionHAO?.BaseSize == 0) {
+                            if (PlayerTeam.CurrentPosition is Planet pl) {
+                                // I used to prohibit scanning gas giants, but now I think it's ok
+                                // Especially as we now have Cloud Colony Builders.
+                                bCanScanHere = true;
+                            }
+                            if (PlayerTeam.CurrentPosition is Moon) {
+                                bCanScanHere = true;
+                            }
                         }
                     }
+                    else if (ao is SpaceHulk) bCanScanHere = true;
                 }
-                else if (ao is SpaceHulk) bCanScanHere = true;
-                if (bCanScanHere && PlayerTeam.CurrentPosition is OrbitalAO oao) {
+            
+                if (oao.Colony is null && (bCanScanHere || oao.Scanned)) {
                     gbScan!.Activate();
                     if (!oao.Scanned) gbScan!.UpdateText("Scan");
                     else gbScan.UpdateText("Missions");

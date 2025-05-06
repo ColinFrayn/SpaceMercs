@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>08/02/2595 05:44:23</Clock>
+<Clock>08/02/2595 11:27:16</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -13777,7 +13777,7 @@
  <Owner>Human</Owner>
  <LastUpdate>818620126123830000</LastUpdate>
  <LastGrowth>818521360262253564</LastGrowth>
- <NextGrowth>821351824262253564</NextGrowth>
+ <NextGrowth>821344912262253564</NextGrowth>
  <Mercenaries>
 <Soldier Name="Quentin Evans">
  <Level>13</Level>
@@ -14436,17 +14436,16 @@
 </Map>
 <Team>
  <Pos>(3,0)6.2</Pos>
- <Cash>4593.902526441919</Cash>
+ <Cash>5294.592526441918</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <OnMission/>
- <Location X="40" Y="22"/>
- <Health>56</Health>
- <Stamina>32.86321421813385</Stamina>
+ <Location X="19" Y="14"/>
+ <Health>29.9461030410172</Health>
+ <Stamina>13.989148772971966</Stamina>
  <Shields>0</Shields>
  <Facing>0</Facing>
  <Level>14</Level>
- <XP>1626490</XP>
+ <XP>1636971</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,14,15,12,20</Stats>
@@ -14473,6 +14472,12 @@
   <Inv Count="1">
 <Material Type="Carbon"/>
   </Inv>
+  <Inv Count="1">
+<Weapon Type="Triple Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Nanomesh" Level="1"/>
+  </Inv>
  </Inventory>
  <EquippedArmour>
 <Armour Type="Gauntlets" Material="Adamantium" Level="1"/>
@@ -14491,7 +14496,8 @@
   <Exp Skill="Perception">11</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>1390</KillCount>
+ <Moved/>
+ <KillCount>1397</KillCount>
  <ToughestKill>
 <Creature Type="Crystal Alpha">
  <Level>12</Level>
@@ -14499,14 +14505,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <OnMission/>
- <Location X="40" Y="21"/>
- <Health>71</Health>
- <Stamina>30.263647798742078</Stamina>
+ <Location X="14" Y="9"/>
+ <Health>32.08592285824185</Health>
+ <Stamina>8.70553459119498</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>14</Level>
- <XP>1443819</XP>
+ <XP>1454300</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,12,17,17</Stats>
@@ -14537,8 +14542,8 @@
   <Inv Count="1">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="1">
-<Equipment Type="Medsystem" Recharge="2"/>
+  <Inv Count="3">
+<Equipment Type="Medsystem"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Adrenaline"/>
@@ -14548,6 +14553,33 @@
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Steel" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Triple Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Metasteel" Level="0"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -14567,7 +14599,8 @@
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>968</KillCount>
+ <Moved/>
+ <KillCount>974</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Deathworm">
  <Level>14</Level>
@@ -14575,25 +14608,24 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Mel Webster">
- <OnMission/>
- <Location X="41" Y="21"/>
- <Health>59</Health>
- <Stamina>34</Stamina>
+ <Location X="22" Y="9"/>
+ <Health>58.905159944477965</Health>
+ <Stamina>31.900000000000002</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>120.96375653207352</Facing>
  <Level>14</Level>
- <XP>1451246</XP>
+ <XP>1461727</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,16,13,10</Stats>
  <TrainingCost>400</TrainingCost>
  <Colour>Red</Colour>
  <Inventory>
-  <Inv Count="5">
+  <Inv Count="6">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="1">
-<Equipment Type="Quantum Medsystem" Recharge="2"/>
+<Equipment Type="Quantum Medsystem"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
@@ -14622,8 +14654,32 @@
   <Inv Count="1">
 <Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Metasteel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Powerblade" Level="0" />
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -14641,7 +14697,7 @@
   <Exp Skill="Scavenging">10</Exp>
   <Exp Skill="Engineer">5</Exp>
  </UtilityExperience>
- <KillCount>629</KillCount>
+ <KillCount>634</KillCount>
  <ToughestKill>
 <Creature Type="Banshee">
  <Level>12</Level>
@@ -14649,14 +14705,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <OnMission/>
- <Location X="41" Y="22"/>
- <Health>56</Health>
+ <Location X="24" Y="8"/>
+ <Health>48.288166152440546</Health>
  <Stamina>40</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>161.56505117707798</Facing>
  <Level>14</Level>
- <XP>1608177</XP>
+ <XP>1618658</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,25,12,16</Stats>
@@ -14664,10 +14719,25 @@
  <Colour>Blue</Colour>
  <Inventory>
   <Inv Count="1">
-<Equipment Type="Quantum Medsystem" Recharge="2"/>
+<Equipment Type="Quantum Medsystem"/>
   </Inv>
   <Inv Count="3">
 <Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Carbon"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Helmet" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Plastic"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -14685,7 +14755,7 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>523</KillCount>
+ <KillCount>526</KillCount>
  <ToughestKill>
 <Creature Type="Banshee">
  <Level>12</Level>
@@ -14765,11 +14835,12 @@
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>
  <Mission_ShowTravel/>
+ <Mission_ShowPath/>
  <Mission_ShowEffects/>
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="59391"/>
+  <Relation Race="Human" Value="60763"/>
   <Relation Race="Ursalon" Value="6395"/>
   <Relation Race="Grey" Value="6194"/>
   <Relation Race="Ogrish" Value="6189"/>
@@ -14887,166 +14958,6 @@
 <Material Type="Etherealite"/>
   </Inv>
  </Inventory>
-<Mission>
- <Type>Mines</Type>
- <Goal>KillBoss</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>700.69</Reward>
- <Diff>13</Diff>
- <LevelCount>2</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>639595025</Seed>
- <Size>3</Size>
- <Turn>24</Turn>
- <Level ID="0">
-<MissionLevel Width="46" Height="49">
- <Diff>12</Diff>
- <Level>0</Level>
- <Start X="4" Y="7"/>
- <End X="40" Y="21"/>
- <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBAAABBBBAAAAAABBBBBBBAAAAAABBAABBBBAABBBBBBBBBBAABBBBBAABBAABBBBBBBAAAAAABBAABBBBAABBBBBBBBBBAABBBBBBBBBBBBBBBBBBAAAAAABBBBBAAAAABBBBBBBBBBAABBBBBBBAABBBBBBBBBAAAAAABBBBBAAAAABBBBBBBBBBAABBBBBBBAABBBBBBBBBBAABAABBBBAABBAABBBBBBBBBBAABBBBBBBAABBBBBBBBBBAABAABBBBAABBAABBBBBBBBBBBBBBBBBBBAABBBBBBBBBBAABAABBBBAABBAABBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAABAABBBBAABBAABBBBAAAAAAABBBBBBBBAAAAAAAAAAAAAABAABBBBAABBAABBBBAAAAAAABBBBBBBBAAAAAAAAAAAAAABAABBBBAABBBBBBBBAAAAAAABBBBBBBBAABBBBBBBBBBBBBAABBBBAABBBBBBBBAAAAAAABBBBBBBBAABBBBBBBBBBBBAAAAAAAAABBBBBBBBAAAAAAABBBBBAAAAAAABBBBBBBBBBAAAAAAAAABBBBBBBBAAAAAAABBBBBAAAAAAABAAAAAAAAAABBBBBBAABBBBBBBBAAAAAAABBBBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBAABBBBBBBBBBAAAAAAABAAAAAAABBBBBBBBBAABBBBBBAAAAABBBBBBBBBAAAAAAABAAAAAAABBBBBBBBBAABBBBBBAAAAAAAAABBBBBAAAAAAABAAAAAAABBBBBBBBBAAAAAAAAAAAAAAAAABBBBBBBBBBBBBAAAAAAABBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBAABBAABBBBBBBBBBBBBBBBBAAAAABBBBBBBBBBBBBBBBBBAABBAAAAAAAAABBBBBBBBBBAAAAABBBBBBBBBBBBBBBBBBAABBAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAABBAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAABAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAABAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
- <Explored>0000000000000011111111111111111111111111111111000001111111111111111111111111111111111111111101111111111111111111111111111111111111111111110111111111111111111111111111111111111111111111011111111111111111111111111111110000000011111001111111100000111111111111111111000000001111000111111110000011111111111111111100000000111100000111100000001111111100111111110000000011110000011110000000111111110011111111000000001111000001111000000001111111001111111100000000111100000111111111111111111100111111110011111111100000011111111111111111110011111111001111111110000001111111111111111111001111111100111111111000000111111111111111111100111111110011111111100000011111111111111111111111110000001111111110001111111110000000011111111111000000111111111000111111111111111111111111111100000011111111100011111111111111111111111111110000001111111110001111111111111111111111111111000000111111111000111111111111111111111111111100001111111000000011111111111111111111111111110000111111111110001111111111111111100000001111111111111111111000111111111111111110000000111111111111111111100011111111111111111000000011111111111111111110000000000011111111111111111111111111111110000000000000000111111111111111000000001111111000000000000000011111111111111100000000111111100000000000000001111111111111110000000000000000000000000000000111111111111111000000000000000000000000000000011111111111111100000000000000000000000000000001111111111111111111100000000000000000000000000000011111111111111110000000000000000000000000000001111111111111111000000000000000000000000000000000000011111111100000000000000000000000000000000000001111111110000000000000000000000000000000000000111111111000000000000000000000000000000000000011111111100000000000000000000000000000000000001111111110000000000000000000000000000000000000111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
-<Creatures>
-</Creatures>
-<Stashes>
-<Stash X="24" Y="37">
-<StashItem N="1">
-<Equipment Type="Frag Grenade"/>
-</StashItem>
-<StashItem N="1">
-<Armour Type="Gauntlets" Material="Steel" Level="0"/>
-</StashItem>
-<StashItem N="1">
-<Material Type="Plastic"/>
-</StashItem>
-<Hidden/>
-</Stash>
-<Stash X="13" Y="19">
-<StashItem N="1">
-<Corpse Type="Enforcer" Level="13"/>
-</StashItem>
-</Stash>
-<Stash X="12" Y="19">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="11"/>
-</StashItem>
-</Stash>
-<Stash X="15" Y="19">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="11"/>
-</StashItem>
-</Stash>
-<Stash X="15" Y="28">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="14" Y="27">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="24" Y="19">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="25" Y="18">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="17" Y="25">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="21" Y="30">
-<StashItem N="2">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="22" Y="31">
-<StashItem N="1">
-<Corpse Type="Enforcer" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="26" Y="20">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="11"/>
-</StashItem>
-</Stash>
-<Stash X="25" Y="19">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="23" Y="33">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="13"/>
-</StashItem>
-</Stash>
-<Stash X="38" Y="16">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="11"/>
-</StashItem>
-</Stash>
-<Stash X="35" Y="19">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="11"/>
-</StashItem>
-</Stash>
-<Stash X="19" Y="10">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="26" Y="9">
-<StashItem N="1">
-<Corpse Type="Enforcer" Level="13"/>
-</StashItem>
-</Stash>
-<Stash X="36" Y="18">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="20" Y="15">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="38" Y="14">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="17" Y="6">
-<StashItem N="1">
-<Corpse Type="Mercenary" Level="12"/>
-</StashItem>
-</Stash>
-<Stash X="36" Y="19">
-<StashItem N="1">
-<Corpse Type="Bandit" Level="12"/>
-</StashItem>
-</Stash>
-</Stashes>
-<Traps>
-<Trap X="32" Y="23" L="13">
-</Trap>
-<Trap X="6" Y="3" L="12">
-</Trap>
-<Trap X="18" Y="5" L="12">
-</Trap>
-<Trap X="14" Y="17" L="14">
-</Trap>
-</Traps>
-</MissionLevel>
- </Level>
-</Mission>
  <SpaceHulkCoreCount>8</SpaceHulkCoreCount>
  <SpaceHulkCoreRecord>12</SpaceHulkCoreRecord>
 </Team>

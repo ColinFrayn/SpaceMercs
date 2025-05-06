@@ -244,7 +244,7 @@ namespace SpaceMercs {
         public const double GrowthTempScale = 10; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
         public const double MissionCashScale = 0.25d; // Scale cash reward for colony missions by this amount.
-        public const double ColonyMissionGrowthBonus = 5d; // When completing an average colony mission, reduce the time to next growth of teh current colony by this many days. Scale this by difficulty/length.
+        public const double ColonyMissionGrowthBonus = 10d; // When completing an average colony mission, reduce the time to next growth of the current colony by this many days. Scale this by difficulty/length.
 
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system
@@ -269,7 +269,7 @@ namespace SpaceMercs {
         public const int MinimumCreatureDistanceFromStartLocation = 10;
         public const double CreatureCountExponent = 0.86;  // Scale creature count as NumFloorTiles ^ ThisValue
         public const double CreatureFrequencyScale = 180;   // The larger this is, the fewer creatures we put in each level.
-        public const int LegendaryItemLevelDiff = 6; // Minimum level diff to have a legendary item of level 0;
+        public const int LegendaryItemLevelDiff = 5; // Minimum level diff to have a legendary item of research level 0;
 
         // Map viewer settings
         public const double MinAngSize = 0.004; // View settings

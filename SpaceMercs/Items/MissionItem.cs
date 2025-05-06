@@ -98,13 +98,13 @@ namespace SpaceMercs {
             string strName = $"{ObjectiveAdjectives[rand.Next(ObjectiveAdjectives.Length)]} {ObjectiveTypes[rand.Next(ObjectiveTypes.Length)]}";
             return new MissionItem(strName, 0, 0d);
         }
-        public static MissionItem? TryGenerateRandomLegendaryWeapon(Random rand, int diff, Race? rc) {
-            IItem? it = Utils.GenerateRandomLegendaryWeapon(rand, diff, rc);
+        public static MissionItem? TryGenerateRandomLegendaryWeapon(Random rand, int diff) {
+            IItem? it = Utils.GenerateRandomLegendaryWeapon(rand, diff);
             if (it is null) return null;
             return new MissionItem(it);
         }
-        public static MissionItem? TryGenerateRandomLegendaryArmour(Random rand, int diff, Race? rc) {
-            IItem? it = Utils.GenerateRandomLegendaryArmour(rand, diff, rc);
+        public static MissionItem? TryGenerateRandomLegendaryArmour(Random rand, int diff) {
+            IItem? it = Utils.GenerateRandomLegendaryArmour(rand, diff);
             if (it is null) return null;
             return new MissionItem(it);
         }

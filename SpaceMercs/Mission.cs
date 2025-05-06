@@ -429,11 +429,11 @@ namespace SpaceMercs {
 
             // Set mission goal - a better artifact than would otherwise be available for this diff.
             m.Goal = MissionGoal.Artifact;
-            if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
-                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 2, m.RacialOpponent);
+            if (RandomNumberGenerator.GetInt32(10) > 3) { // 60% chance
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 2);
             }
             else {
-                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 2, m.RacialOpponent);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 2);
             }
             if (m.MItem is null) return null;
 
@@ -458,11 +458,11 @@ namespace SpaceMercs {
 
             // Set mission goal
             m.Goal = MissionGoal.Artifact;
-            if (RandomNumberGenerator.GetInt32(9) > 3 ) { // 5/9 chance
-                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1, m.RacialOpponent);
+            if (RandomNumberGenerator.GetInt32(10) > 3 ) { // 60% chance
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1);
             }
             else {
-                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1, m.RacialOpponent);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1);
             }
 
             if (m.MItem is null) return null;
@@ -666,9 +666,9 @@ namespace SpaceMercs {
             if (r < 4 && m.Diff > Const.LegendaryItemLevelDiff && m.Type != MissionType.Surface) {
                 mg = MissionGoal.Artifact;
                 if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
-                    it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff, m.RacialOpponent);
+                    it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff);
                 }
-                else it = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff, m.RacialOpponent);
+                else it = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff);
                 if (it is null) mg = MissionGoal.KillAll;
             }
             else if (r < 30) {
