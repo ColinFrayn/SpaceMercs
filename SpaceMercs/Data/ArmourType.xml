@@ -1,22 +1,11 @@
 ﻿<Data>
   <!-- Armour types for Soldiers -->
-  <ArmourType Name="Helmet">
-    <Mass>1.5</Mass>
-    <Rarity>5</Rarity>
-    <BaseArmour>3</BaseArmour>
-    <Location>Head</Location>
-    <Desc>A simple protective helmet</Desc>
-    <Materials>
-      <Material Name="Fabric" Amount="1"/>
-    </Materials>
-  </ArmourType>
   <ArmourType Name="Military Helmet">
     <Mass>2.0</Mass>
     <Rarity>9</Rarity>
-    <Attack>1</Attack>
     <BaseArmour>4</BaseArmour>
     <Location>Head</Location>
-    <Desc>A military spec helmet with HUD and slightly higher protection</Desc>
+    <Desc>A military spec helmet with strong protection</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
     </Materials>
@@ -147,9 +136,9 @@
     <Rarity>25</Rarity>
     <BaseArmour>6</BaseArmour>
     <Agility>1</Agility>
-    <Speed>1.1</Speed>
+    <Speed>1.2</Speed>
     <Location>Legs</Location>
-    <Desc>Powered plating for legs</Desc>
+    <Desc>Powered plating for legs, enabling faster movement</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
@@ -204,7 +193,6 @@
     <Mass>1.6</Mass>
     <Rarity>18</Rarity>
     <Strength>2</Strength>
-    <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
     <Location>Hands</Location>
     <Desc>Powered plate metal gauntlets</Desc>
@@ -222,7 +210,7 @@
     </Utility>
     <BaseArmour>2</BaseArmour>
     <Location>Hands</Location>
-    <Desc>Lightweight plate gauntlets with a stealth coating</Desc>
+    <Desc>Lightweight armoured gauntlets with a stealth coating</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
@@ -352,15 +340,15 @@
   <ArmourType Name="Archon Armour">
     <Mass>13.0</Mass>
     <Rarity>60</Rarity>
-    <Defence>4</Defence>
-    <BaseArmour>44</BaseArmour>
-    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
-    <Desc>An advanced and highly powerful combat armour suit, with a superb shield generator and deflection technology.</Desc>
+    <Defence>3</Defence>
+    <BaseArmour>31</BaseArmour>
+    <Location>Chest,Arms,Legs</Location>
+    <Desc>An advanced and highly powerful combat armour, with a superb shield generator and deflection technology.</Desc>
     <Shields>30</Shields>
     <MinMatLvl>4</MinMatLvl>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
-      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="3"/>
       <Material Name="Crystals" Amount="3"/>
     </Materials>
@@ -374,7 +362,40 @@
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Elithiri">3</Relations>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
+  </ArmourType>
+  <ArmourType Name="Archon Helmet">
+    <Mass>1.7</Mass>
+    <Rarity>35</Rarity>
+    <Attack>1</Attack>
+    <BaseArmour>4</BaseArmour>
+    <Location>Head</Location>
+    <Shields>5</Shields>
+    <MinMatLvl>4</MinMatLvl>
+    <Insight>1</Insight>
+    <Requirements>
+      <MinLevel>11</MinLevel>
+      <MinSystems>5</MinSystems>
+      <MinPop>70</MinPop>
+      <CashCost>140</CashCost>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Titanium" Amount="1"/>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+      <Relations Name="Elithiri">3</Relations>
+      <Relations Name="Gokan">2</Relations>
+    </Requirements>
+    <Desc>A highly advanced alien helmet with advanced detection technology.</Desc>
+    <Utility>
+      <Perception>2</Perception>
+    </Utility>
+    <Materials>
+      <Material Name="Fabric" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Crystals" Amount="1"/>
+    </Materials>
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
@@ -437,7 +458,7 @@
     <Strength>6</Strength>
     <Speed>0.85</Speed>
     <Attack>2</Attack>
-    <BaseArmour>44</BaseArmour>
+    <BaseArmour>46</BaseArmour>
     <MinMatLvl>2</MinMatLvl>
     <Requirements>
       <MinLevel>7</MinLevel>
@@ -484,6 +505,7 @@
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">2</Relations>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -519,6 +541,7 @@
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">2</Relations>
+      <Relations Name="Gokan">1</Relations>
     </Requirements>
     <BonusArmour>
       <Bonus Type="Fire" Amount="20"/>
@@ -583,8 +606,8 @@
     <Strength>4</Strength>
     <Speed>0.9</Speed>
     <Attack>3</Attack>
-    <Shields>16</Shields>
-    <BaseArmour>46</BaseArmour>
+    <Shields>15</Shields>
+    <BaseArmour>48</BaseArmour>
     <Utility>
       <Perception>2</Perception>
     </Utility>
@@ -600,8 +623,8 @@
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
       <Relations Name="Ursalon">3</Relations>
-      <Relations Name="Elithiri">2</Relations>
-      <Relations Name="Gokan">1</Relations>
+      <Relations Name="Elithiri">3</Relations>
+      <Relations Name="Gokan">2</Relations>
     </Requirements>
     <Utility>
       <Stealth>-2</Stealth>

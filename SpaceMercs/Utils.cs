@@ -580,9 +580,9 @@ namespace SpaceMercs {
             double totalWeight = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
                 int minLevel = (tp.Requirements?.MinLevel ?? 1) + Const.LegendaryItemLevelDiff;
-                if (tp.IsUsable && minLevel <= missionLevel) {
+                if (tp.IsUsable && minLevel <= missionLevel && minLevel + 8 > missionLevel) {
                     double weight = 1.0;
-                    if (minLevel + 4 < missionLevel) weight /= (missionLevel - (minLevel + 4)); // Weaker weapons are deprioritised
+                    if (minLevel + 3 < missionLevel) weight /= (missionLevel - (minLevel + 3)); // Weaker weapons are deprioritised
                     wts.Add(tp, weight);
                     totalWeight += weight;
                 }

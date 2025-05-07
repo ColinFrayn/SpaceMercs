@@ -335,6 +335,7 @@ namespace SpaceMercs {
             m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
                 m.Reward = Math.Round((rand.NextDouble() + ((double)m.Size + 3d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale, 2);
+                if (m.Goal == MissionGoal.FindItem) m.Reward *= (2d + rand.NextDouble());
             }
             return m;
         }
@@ -665,7 +666,7 @@ namespace SpaceMercs {
             int r = rand.Next(100);
             if (r < 4 && m.Diff > Const.LegendaryItemLevelDiff && m.Type != MissionType.Surface) {
                 mg = MissionGoal.Artifact;
-                if (RandomNumberGenerator.GetInt32(9) > 3) { // 5/9 chance
+                if (RandomNumberGenerator.GetInt32(10) > 3) { // 60% chance
                     it = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff);
                 }
                 else it = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff);

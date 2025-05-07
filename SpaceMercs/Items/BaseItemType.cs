@@ -13,6 +13,7 @@ namespace SpaceMercs {
 
         public BaseItemType(XmlNode xml) {
             Name = xml.GetAttributeText("Name");
+            if (Name == "Helmet") Name = "Military Helmet"; // Backwards compatibility
             Cost = xml.SelectNodeDouble("Cost", 0.0);
             Description = xml.SelectNodeText("Desc").Trim();
 
