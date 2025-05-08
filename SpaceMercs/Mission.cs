@@ -334,7 +334,7 @@ namespace SpaceMercs {
             }
             m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
-                m.Reward = Math.Round((rand.NextDouble() + ((double)m.Size + 3d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale, 2);
+                m.Reward = Math.Round((rand.NextDouble() + (double)m.Size + 3d) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * Math.Pow(1.1, m.LevelCount - 1) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale, 2);
                 if (m.Goal == MissionGoal.FindItem) m.Reward *= (2d + rand.NextDouble());
             }
             return m;
@@ -431,10 +431,10 @@ namespace SpaceMercs {
             // Set mission goal - a better artifact than would otherwise be available for this diff.
             m.Goal = MissionGoal.Artifact;
             if (RandomNumberGenerator.GetInt32(10) > 3) { // 60% chance
-                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 2);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 3);
             }
             else {
-                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 2);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 3);
             }
             if (m.MItem is null) return null;
 
@@ -460,10 +460,10 @@ namespace SpaceMercs {
             // Set mission goal
             m.Goal = MissionGoal.Artifact;
             if (RandomNumberGenerator.GetInt32(10) > 3 ) { // 60% chance
-                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 1);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryWeapon(rand, m.Diff + 2);
             }
             else {
-                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 1);
+                m.MItem = MissionItem.TryGenerateRandomLegendaryArmour(rand, m.Diff + 2);
             }
 
             if (m.MItem is null) return null;
@@ -535,7 +535,7 @@ namespace SpaceMercs {
             return MissionExperience(diff, 1, 3, 0, false);
         }
         private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy) {
-            return (int)(((double)diff + 1d) * ((double)diff + 1d) * (double)levelCount * ((double)size * 2d + 8d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost));
+            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * ((double)size * 2d + 8d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost));
         }
 
         // Utility

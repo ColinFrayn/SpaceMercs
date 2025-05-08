@@ -3,11 +3,9 @@ using OpenTK.Mathematics;
 using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Xml.XPath;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.Mission;
 using static SpaceMercs.VisualEffect;
@@ -685,7 +683,9 @@ namespace SpaceMercs {
                 ShipRoomDesign r = sh.Type.Rooms[n];
                 for (int x = 0; x < r.Width * 3; x++) {
                     for (int y = 0; y < r.Height * 3; y++) {
-                        if (x == 0 || y == 0 || x == r.Width * 3 - 1 || y == r.Height * 3 - 1) Map[r.XPos * 3 + tx + x, r.YPos * 3 + ty + y] = TileType.Wall;
+                        if (x == 0 || y == 0 || x == r.Width * 3 - 1 || y == r.Height * 3 - 1) {
+                            Map[r.XPos * 3 + tx + x, r.YPos * 3 + ty + y] = TileType.Wall;
+                        }
                         else if (r.Size == ShipEquipment.RoomSize.Weapon || r.Size == ShipEquipment.RoomSize.Engine) {
                             Map[r.XPos * 3 + tx + x, r.YPos * 3 + ty + y] = TileType.Machinery;
                         }
@@ -755,7 +755,7 @@ namespace SpaceMercs {
                 }
             }
             GenerateTransitionLocations();
-            //GenerateHiddenTreasure(1);
+            GenerateHiddenTreasure(1);
             //GenerateTraps(1);
         }
         private void GenerateDungeonMap(bool bMines = false, bool bSparse = false) {
@@ -823,20 +823,23 @@ namespace SpaceMercs {
         // Set up the items and locations in this map
         private void GenerateTransitionLocations() {
             if (ParentMission.IsShipMission) {
+                Ship sh = ParentMission.ShipTarget ?? throw new Exception("Found null ship target in transition generation");
+                int tx = (sh.Type.Length * 2) + 4;
+                int ty = (sh.Type.Width * 2) + 4;
+
                 int bestscore = -1;
                 int niter = 0;
                 do {
                     int x = rand.Next(Width - 8) + 4;
                     int y = rand.Next(Height - 8) + 4;
                     if (Map[x, y] == TileType.Floor && Map[x + 1, y] == TileType.Floor && Map[x + 1, y + 1] == TileType.Floor && Map[x, y + 1] == TileType.Floor) {
-                        Ship sh = ParentMission.ShipTarget ?? throw new Exception("Found null ship target in transition generation");
                         int score = -1;
-                        int rx = x / 3;
-                        int ry = y / 3;
+                        int rx = (x - tx) / 3;
+                        int ry = (y - ty) / 3;
                         for (int n = 0; n < sh.Type.Rooms.Count; n++) {
                             ShipRoomDesign r = sh.Type.Rooms[n];
-                            if (rx >= r.XPos * 3 && rx <= (r.XPos + r.Width) * 3 &&
-                                ry >= r.YPos * 3 && ry <= (r.YPos + r.Height) * 3) {
+                            if (rx >= r.XPos && rx < r.XPos + r.Width &&
+                                ry >= r.YPos && ry < r.YPos + r.Height) {
                                 if (r.Size == ShipEquipment.RoomSize.Small) score = 1;
                                 else if (r.Size == ShipEquipment.RoomSize.Medium) score = 0;
                                 if (score > bestscore) {
@@ -848,7 +851,8 @@ namespace SpaceMercs {
                             }
                         }
                     }
-                } while (bestscore == -1 || ++niter < 100);
+                    niter++;
+                } while (bestscore == -1 || niter < 100);
             }
             else {
                 bool bOK = true;

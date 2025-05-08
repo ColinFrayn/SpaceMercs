@@ -23,14 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle36 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle37 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle38 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle33 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle34 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle35 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle39 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle40 = new DataGridViewCellStyle();
             tcMain = new TabControl();
             tpMerchant = new TabPage();
             cbAffordable = new CheckBox();
@@ -92,6 +92,8 @@
             dgcValue = new DataGridViewTextBoxColumn();
             dgcAvail = new DataGridViewTextBoxColumn();
             tpTraining = new TabPage();
+            lbTeamCash = new Label();
+            label20 = new Label();
             lbTrainCost = new Label();
             btForgetSkill = new Button();
             btIncreaseSkill = new Button();
@@ -142,8 +144,6 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            lbTeamCash = new Label();
-            label20 = new Label();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -312,14 +312,14 @@
             dgMerchant.ShowEditingIcon = false;
             dgMerchant.Size = new Size(630, 415);
             dgMerchant.TabIndex = 1;
+            dgMerchant.CellMouseDoubleClick += dgMerchant_CellMouseDoubleClick;
             dgMerchant.SortCompare += dgMerchant_SortCompare;
-            dgMerchant.DoubleClick += dgMerchant_DoubleClick;
             // 
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colItem.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle36.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colItem.DefaultCellStyle = dataGridViewCellStyle36;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
             colItem.ReadOnly = true;
@@ -335,8 +335,8 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
-            Mass.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle37.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Mass.DefaultCellStyle = dataGridViewCellStyle37;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
@@ -449,14 +449,14 @@
             dgMercenaries.ShowEditingIcon = false;
             dgMercenaries.Size = new Size(630, 455);
             dgMercenaries.TabIndex = 2;
+            dgMercenaries.CellMouseDoubleClick += dgMercenaries_CellMouseDoubleClick;
             dgMercenaries.SortCompare += dgMercenaries_SortCompare;
-            dgMercenaries.DoubleClick += dgMercenaries_DoubleClick;
             // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle38.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle38;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -543,14 +543,14 @@
             dgMissions.ShowEditingIcon = false;
             dgMissions.Size = new Size(624, 448);
             dgMissions.TabIndex = 2;
+            dgMissions.CellMouseDoubleClick += dgMissions_CellMouseDoubleClick;
             dgMissions.SortCompare += dgMissions_SortCompare;
-            dgMissions.DoubleClick += dgMissions_DoubleClick;
             // 
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colMission.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle33.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colMission.DefaultCellStyle = dataGridViewCellStyle33;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
             colMission.ReadOnly = true;
@@ -558,8 +558,8 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colGoal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle34.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colGoal.DefaultCellStyle = dataGridViewCellStyle34;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
             colGoal.ReadOnly = true;
@@ -568,8 +568,8 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colOpp.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle35.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colOpp.DefaultCellStyle = dataGridViewCellStyle35;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
             colOpp.ReadOnly = true;
@@ -679,8 +679,8 @@
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle39.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle39;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -882,15 +882,15 @@
             dgInventory.ShowEditingIcon = false;
             dgInventory.Size = new Size(630, 415);
             dgInventory.TabIndex = 2;
+            dgInventory.CellMouseDoubleClick += dgInventory_CellMouseDoubleClick;
             dgInventory.SelectionChanged += dgInventory_SelectionChanged;
             dgInventory.SortCompare += dgInventory_SortCompare;
-            dgInventory.DoubleClick += dgInventory_DoubleClick;
             // 
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle40.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dgcItem.DefaultCellStyle = dataGridViewCellStyle40;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
             dgcItem.ReadOnly = true;
@@ -940,6 +940,28 @@
             tpTraining.TabIndex = 7;
             tpTraining.Text = "Training";
             tpTraining.UseVisualStyleBackColor = true;
+            // 
+            // lbTeamCash
+            // 
+            lbTeamCash.BorderStyle = BorderStyle.FixedSingle;
+            lbTeamCash.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbTeamCash.Location = new Point(511, 447);
+            lbTeamCash.Margin = new Padding(6, 2, 6, 2);
+            lbTeamCash.Name = "lbTeamCash";
+            lbTeamCash.Size = new Size(103, 25);
+            lbTeamCash.TabIndex = 99;
+            lbTeamCash.Text = "888,888.88cr";
+            lbTeamCash.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(517, 425);
+            label20.Margin = new Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(90, 20);
+            label20.TabIndex = 98;
+            label20.Text = "Team Cash";
             // 
             // lbTrainCost
             // 
@@ -1598,28 +1620,6 @@
             label7.TabIndex = 13;
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lbTeamCash
-            // 
-            lbTeamCash.BorderStyle = BorderStyle.FixedSingle;
-            lbTeamCash.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbTeamCash.Location = new Point(511, 447);
-            lbTeamCash.Margin = new Padding(6, 2, 6, 2);
-            lbTeamCash.Name = "lbTeamCash";
-            lbTeamCash.Size = new Size(103, 25);
-            lbTeamCash.TabIndex = 99;
-            lbTeamCash.Text = "888,888.88cr";
-            lbTeamCash.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(517, 425);
-            label20.Margin = new Padding(4, 0, 4, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(90, 20);
-            label20.TabIndex = 98;
-            label20.Text = "Team Cash";
             // 
             // ColonyView
             // 

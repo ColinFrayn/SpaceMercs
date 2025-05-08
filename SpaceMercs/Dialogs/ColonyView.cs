@@ -603,45 +603,49 @@ namespace SpaceMercs.Dialogs {
         }
 
         // Double click to get further details on specific entries
-        private void dgMercenaries_DoubleClick(object sender, EventArgs e) {
-            if (dgMercenaries.CurrentRow?.Tag is not Soldier merc) return;
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(merc.Name);
-            sb.AppendLine($"Level {merc.Level} {merc.Gender} {merc.Race.Name}");
-            sb.AppendLine("Strength = " + merc.BaseStrength);
-            sb.AppendLine("Agility = " + merc.BaseAgility);
-            sb.AppendLine("Insight = " + merc.BaseInsight);
-            sb.AppendLine("Toughness = " + merc.BaseToughness);
-            sb.AppendLine("Endurance = " + merc.BaseEndurance);
-            sb.AppendLine("");
-            sb.AppendLine("Equipment:");
-            foreach (Armour ar in merc.EquippedArmour) {
-                sb.AppendLine(ar.Name);
-            }
-            if (merc.EquippedWeapon != null) sb.AppendLine(merc.EquippedWeapon.Name);
-            sb.AppendLine("");
-            sb.AppendLine("Inventory:");
-            foreach (IItem eq in merc.InventoryGrouped.Keys) {
-                if (merc.InventoryGrouped[eq] == 1) sb.AppendLine(eq.Name);
-                else sb.AppendLine(eq.Name + " [" + merc.InventoryGrouped[eq] + "]");
-            }
-
-            MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
-        }
-        private void dgMissions_DoubleClick(object sender, EventArgs e) {
-            if (dgMissions?.CurrentRow?.Tag is not Mission miss) return;
-            MessageBox.Show(this, miss.GetDescription(), "Mission Details");
-        }
-        private void dgMerchant_DoubleClick(object sender, EventArgs e) {
-            if (dgMerchant.SelectedRows.Count == 0) return;
-            if (dgMerchant.SelectedRows[0].Tag is IItem eq) {
+        private void dgMerchant_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= dgMerchant.RowCount) return;
+            if (dgMerchant.Rows[e.RowIndex].Tag is IItem eq) {
                 MessageBox.Show(eq.Description, eq.Name);
             }
         }
-        private void dgInventory_DoubleClick(object sender, EventArgs e) {
-            if (dgInventory.SelectedRows.Count != 1) return;
-            if (dgInventory.SelectedRows[0].Tag is not SaleItem tp || tp.Item is null) return;
-            MessageBox.Show(tp.Item.Description, tp.Item.Name);
+        private void dgMercenaries_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= dgMercenaries.RowCount) return;
+            if (dgMercenaries.Rows[e.RowIndex].Tag is Soldier merc) {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(merc.Name);
+                sb.AppendLine($"Level {merc.Level} {merc.Gender} {merc.Race.Name}");
+                sb.AppendLine("Strength = " + merc.BaseStrength);
+                sb.AppendLine("Agility = " + merc.BaseAgility);
+                sb.AppendLine("Insight = " + merc.BaseInsight);
+                sb.AppendLine("Toughness = " + merc.BaseToughness);
+                sb.AppendLine("Endurance = " + merc.BaseEndurance);
+                sb.AppendLine("");
+                sb.AppendLine("Equipment:");
+                foreach (Armour ar in merc.EquippedArmour) {
+                    sb.AppendLine(ar.Name);
+                }
+                if (merc.EquippedWeapon != null) sb.AppendLine(merc.EquippedWeapon.Name);
+                sb.AppendLine("");
+                sb.AppendLine("Inventory:");
+                foreach (IItem eq in merc.InventoryGrouped.Keys) {
+                    if (merc.InventoryGrouped[eq] == 1) sb.AppendLine(eq.Name);
+                    else sb.AppendLine(eq.Name + " [" + merc.InventoryGrouped[eq] + "]");
+                }
+                MessageBox.Show(this, sb.ToString(), "Mercenary " + merc.Name);
+            }
+        }
+        private void dgInventory_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= dgInventory.RowCount) return;
+            if (dgInventory.Rows[e.RowIndex].Tag is SaleItem tp && tp.Item is not null) {
+                MessageBox.Show(tp.Item.Description, tp.Item.Name);
+            }
+        }
+        private void dgMissions_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0 || e.RowIndex >= dgMissions.RowCount) return;
+            if (dgMissions.Rows[e.RowIndex].Tag is Mission miss) {
+                MessageBox.Show(this, miss.GetDescription(), "Mission Details");
+            }
         }
 
         // Other handlers
