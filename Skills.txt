@@ -10,4 +10,3 @@ Gunsmith: Manufacture guns
 Bladesmith: Manufacture melee weapons
 Armoursmith: Manufacture armour
 
-Maximum of any skill = lvl 10
