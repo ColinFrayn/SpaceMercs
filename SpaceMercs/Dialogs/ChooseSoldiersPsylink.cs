@@ -4,8 +4,8 @@ namespace SpaceMercs.Dialogs {
     partial class ChooseSoldiersPsylink : Form {
         private readonly Team PlayerTeam;
         private readonly int MaxSize;
-        public List<Soldier> Soldiers = new List<Soldier>();
-        public List<Soldier> Psylinked = new List<Soldier>();
+        public HashSet<Soldier> Soldiers = new HashSet<Soldier>();
+        public HashSet<Soldier> Psylinked = new HashSet<Soldier>();
         private readonly int psylinkSlots = 0;
         private bool bAccept = false;
 
@@ -16,7 +16,7 @@ namespace SpaceMercs.Dialogs {
             lbSquadSize.Text = MaxSize.ToString();
             Soldiers.Clear();
             Psylinked.Clear();
-            Soldiers.AddRange(PlayerTeam.SoldiersRO.Take(MaxSize));
+            Soldiers = PlayerTeam.SoldiersRO.Take(MaxSize).ToHashSet();
             psylinkSlots = t.PlayerShip.PsylinkSpaces;
             lbPsylinkCapacity.Text = psylinkSlots.ToString();
             btAbort.Enabled = bCanAbort;
@@ -61,7 +61,14 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void dgSoldiers_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0) dgSoldiers.Rows[e.RowIndex].Cells[0].Value = !Convert.ToBoolean(dgSoldiers.Rows[e.RowIndex].Cells[0].Value);
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0) {
+                bool enabled = !Convert.ToBoolean(dgSoldiers.Rows[e.RowIndex].Cells[0].Value);
+                dgSoldiers.Rows[e.RowIndex].Cells[0].Value = enabled;
+                if (dgSoldiers.Rows[e.RowIndex].Tag is Soldier s) {
+                    if (enabled) Soldiers.Add(s);
+                    else Soldiers.Remove(s);
+                }
+            }
             UpdateSelection();
             dgSoldiers.RefreshEdit();
         }
@@ -139,6 +146,7 @@ namespace SpaceMercs.Dialogs {
                 if (dgSoldiers.Rows[e.RowIndex].Tag is Soldier s) {
                     if (Psylinked.Count < psylinkSlots) {
                         Psylinked.Add(s);
+                        Soldiers.Remove(s);
                         lbPsylink.Items.Add(s);
                         ShowTeamSoldiers();
                     }
