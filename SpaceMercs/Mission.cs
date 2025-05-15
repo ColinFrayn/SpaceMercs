@@ -873,7 +873,7 @@ namespace SpaceMercs {
             string strSz = "Size : " + Utils.MapSizeToDescription(Size);
             if (Goal == MissionGoal.Defend) sb.AppendLine($"You will face {MaxWaves} waves of enemy attacks");
             if (Goal == MissionGoal.Gather) sb.AppendLine("We will give you a share of the profits from the items you gather.");
-            if (Goal == MissionGoal.Artifact) sb.AppendLine("This powerful artifact weapon will be yours to keep, should you succeed.");
+            if (Goal == MissionGoal.Artifact) sb.AppendLine("This powerful artifact will be yours to keep, should you succeed.");
             if (Goal == MissionGoal.Countdown) sb.AppendLine("Once all the team has reached the target point, call for evacuation.");
             if (RacialOpponent != null) {
                 if (RacialOpponent.Known) sb.AppendLine("Primary threat will be " + RacialOpponent.Name + " " + PrimaryEnemy.Name);
