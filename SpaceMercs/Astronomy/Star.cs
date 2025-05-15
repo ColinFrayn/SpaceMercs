@@ -441,6 +441,7 @@ namespace SpaceMercs {
                     if (plcols == 0) tdiff += 30; // Much less likely if this is the first colony in this system
                     if (plcols == 1) tdiff += 15; // Quite a bit less likely if this is the second colony in this system
                 }
+                if (pl.Type == Planet.PlanetType.Precursor) tdiff += 9999d; // Won't colonise Precursor planets.
                 if (rand.NextDouble() * 150.0 > tdiff) {
                     if (rand.NextDouble() > 0.5) {
                         if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) {

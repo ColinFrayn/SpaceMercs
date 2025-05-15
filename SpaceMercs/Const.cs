@@ -100,6 +100,7 @@ namespace SpaceMercs {
                 Planet.PlanetType.Ice => new Vector3(0.0f, 0.0f, 0.5f),
                 Planet.PlanetType.Rocky => new Vector3(0.3f, 0.3f, 0.3f),
                 Planet.PlanetType.Volcanic => new Vector3(0.3f, 0.0f, 0.0f),
+                Planet.PlanetType.Precursor => new Vector3(0.9f, 0.0f, 0.0f),
                 _ => new Vector3(0.0f, 0.0f, 0.0f),
             };
         public static Vector3 PlanetTypeToCol2(Planet.PlanetType pt) =>
@@ -110,6 +111,7 @@ namespace SpaceMercs {
                 Planet.PlanetType.Ice => new Vector3(0.0f, 0.1f, 1.0f),
                 Planet.PlanetType.Rocky => new Vector3(0.5f, 0.5f, 0.5f),
                 Planet.PlanetType.Volcanic => new Vector3(0.7f, 0.0f, 0.0f),
+                Planet.PlanetType.Precursor => new Vector3(0.5f, 0.5f, 0.5f),
                 _ => new Vector3(0.0f, 0.0f, 0.0f),
         };
         public static Vector3 PlanetTypeToCol3(Planet.PlanetType pt) =>
@@ -120,6 +122,7 @@ namespace SpaceMercs {
                 Planet.PlanetType.Ice => new Vector3(0.0f, 0.2f, 1.0f),
                 Planet.PlanetType.Rocky => new Vector3(0.5f, 0.5f, 0.5f),
                 Planet.PlanetType.Volcanic => new Vector3(1.0f, 0.0f, 0.0f),
+                Planet.PlanetType.Precursor => new Vector3(0.2f, 0.3f, 1.0f),
                 _ => new Vector3(0.0f, 0.0f, 0.0f),
         };
         public static Vector3 PlanetTypeToCol4(Planet.PlanetType pt) =>
@@ -130,6 +133,7 @@ namespace SpaceMercs {
                 Planet.PlanetType.Ice => new Vector3(0.8f, 1.0f, 1.0f),
                 Planet.PlanetType.Rocky => new Vector3(0.75f, 0.75f, 0.75f),
                 Planet.PlanetType.Volcanic => new Vector3(1.0f, 0.8f, 0.0f),
+                Planet.PlanetType.Precursor => new Vector3(1.0f, 1.0f, 0.7f),
                 _ => new Vector3(0.0f, 0.0f, 0.0f),
         };
         public const double TerrainScale = 40.0;

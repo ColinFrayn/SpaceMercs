@@ -189,8 +189,6 @@ namespace SpaceMercs {
                 }
                 else {
                     col.X = col.Y = 0.0f;
-                    //col.X = (fract - 0.9f) * 1.0f;
-                    //col.Y = (fract - 0.9f) * 1.5f;
                     col.Z = (fract - 0.9f) * 6.0f + 0.4f;
                 }
             }
@@ -200,11 +198,6 @@ namespace SpaceMercs {
                     col.X = col.Z = 0.0f;
                     col.Y = 0.6f + (fract * 1.0f);
                 }
-                //else if (fract < 0.4f) {
-                //  col.X = (fract - 0.3f) * 1.0f;
-                //  col.Y = 1.0f;
-                //  col.Z = (fract - 0.3f) * 2.0f;
-                //}
                 else if (fract < 0.5f) {
                     col.X = (fract - 0.4f) * 7.0f;
                     col.Y = 1.0f - (fract - 0.4f) * 4.5f;

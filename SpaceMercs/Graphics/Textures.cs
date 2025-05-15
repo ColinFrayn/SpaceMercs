@@ -237,6 +237,7 @@ namespace SpaceMercs {
                     case Planet.PlanetType.Oceanic: return WallType.Oceanic;
                     case Planet.PlanetType.Rocky: return WallType.Rocky;
                     case Planet.PlanetType.Volcanic: return WallType.Volcanic;
+                    case Planet.PlanetType.Precursor: return WallType.Oceanic;
                     default: throw new NotImplementedException();
                 }
             }

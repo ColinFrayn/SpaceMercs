@@ -8,7 +8,7 @@ using System.Xml;
 namespace SpaceMercs {
     public class Planet : HabitableAO {
         [Flags]
-        public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40, HyperGate = 0x80, SpaceHulk = 0x100 };
+        public enum PlanetType { Rocky = 0x1, Desert = 0x2, Volcanic = 0x4, Gas = 0x8, Oceanic = 0x10, Ice = 0x20, Star = 0x40, HyperGate = 0x80, SpaceHulk = 0x100, Precursor = 0x200 };
         public readonly List<Moon> Moons;
         public double BaseTemp { get; private set; }
         public override float DrawScale { get { return (float)Math.Pow(Radius / 1000.0, 0.4) / 25f; } }
@@ -16,7 +16,7 @@ namespace SpaceMercs {
         public bool IsPrecursor {
             get {
                 // Is this a precursor location?
-                if (Parent is not Star star) return false; // ??
+                if (Parent is not Star star) return false; // This should definitely be true
                 Sector sector = star.Sector;
                 int ring = Math.Max(Math.Abs(sector.SectorX), Math.Abs(sector.SectorY));
                 // Needs to be in third ring or further.
@@ -73,6 +73,8 @@ namespace SpaceMercs {
                 }
             }
             BaseColour = Const.PlanetTypeToCol2(Type);
+
+            if (IsPrecursor) _type = PlanetType.Precursor; // Just to retrofit this
         }
 
         public static Planet Empty { get { return new Planet(); } }
@@ -95,6 +97,7 @@ namespace SpaceMercs {
                 return;
             }
             file.WriteLine($"<Planet ID=\"{ID}\">");
+            if (IsPrecursor) _type = PlanetType.Precursor; // Just to retrofit this
             base.SaveToFile(file, clock);
             // Write planet details to file
             if (IsHomeworld) file.WriteLine("<Homeworld/>");
@@ -178,6 +181,9 @@ namespace SpaceMercs {
             // Axial rotation period (i.e. a day length)
             double arot = Utils.NextGaussian(rnd, Const.DayLength, Const.DayLengthSigma);
             AxialRotationPeriod = (int)(arot * (Radius / Const.PlanetSize));
+
+            // If it's a Precursor planet then set the type accordingly
+            if (IsPrecursor) _type = PlanetType.Precursor;
 
             GenerateMoons(GetSystem().Sector.ParentMap.PlanetDensity);
         }

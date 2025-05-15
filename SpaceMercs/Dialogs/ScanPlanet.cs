@@ -59,7 +59,7 @@ namespace SpaceMercs.Dialogs {
             if (_aoScan.Type == Planet.PlanetType.Oceanic) nm++;
             if (_aoScan.Type == Planet.PlanetType.Gas) nm--;
             if (_aoScan is Planet pl) {
-                if (pl.IsPrecursor) {
+                if (pl.IsPrecursor || pl.Type == Planet.PlanetType.Precursor) {
                     nm = 0;
                     pl.SetupPrecursorMissions(rnd, _playerTeam);
                 }

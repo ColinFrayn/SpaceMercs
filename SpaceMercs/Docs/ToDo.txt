@@ -2,13 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Show precursor planet differently
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
-
-At relations >= 3 join human hypergates up to alien ones??
-- Add a trade route between their two nearest colonies, if close enough.
-- Done through alien capital colony diplomacy screen.
-- Options for which colonies??
 
 ==================================================================================================================
 
@@ -19,6 +16,12 @@ Backburner : Features
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
+
+At relations >= 3 join human hypergates up to alien ones??
+- Add a trade route between their two nearest colonies, if close enough.
+- Done through alien capital colony diplomacy screen.
+- Options for which colonies??
+- Pathing through an alien civ costs differently based on the alien civ relations (and also make sure that cost for home civ changes based on relations)
 
 Option to sell all unequipped armour, weapons (up to a maximum quality?) from Team View if at a colony
 - Stow all from all soldiers?

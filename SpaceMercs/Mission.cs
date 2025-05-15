@@ -541,7 +541,8 @@ namespace SpaceMercs {
         // Utility
         private bool CanChooseCreatureGroup(CreatureGroup cg, Team playerTeam) {
             if (IsShipMission && !cg.FoundInShips) return false;
-            if (!IsShipMission && !cg.FoundIn.Contains(Location.Type)) return false;
+            // See if this creature type can be found here. Precursor ruins can support any enemy type.
+            if (!IsShipMission && Location.Type != Planet.PlanetType.Precursor && !cg.FoundIn.Contains(Location.Type)) return false;
             // Only set up a race-specific encounter if we're sufficiently antagonistic with that race
             if (cg.RaceSpecific && cg.MaxRelations < 5) {
                 if (RacialOpponent is null) return false;
