@@ -1,6 +1,6 @@
 ﻿<Data>
   <CreatureType Name="Arachnid Drone">
-    <LevelRange>1,11</LevelRange>
+    <LevelRange>1,8</LevelRange>
     <Attack>8</Attack>
     <Defence>8</Defence>
     <Armour>10</Armour>
@@ -34,7 +34,7 @@
     <Tex Size="2">3,5</Tex>
   </CreatureType>
   <CreatureType Name="Arachnid Hunter">
-    <LevelRange>1,12</LevelRange>
+    <LevelRange>2,12</LevelRange>
     <Attack>14</Attack>
     <Defence>12</Defence>
     <Armour>14</Armour>

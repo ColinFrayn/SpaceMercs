@@ -1,0 +1,2700 @@
+<SpaceMercsSaveFile Version="1.0">
+<GUI>
+<ShowLabels/>
+<ShowMapGrid/>
+<ShowRangeCircles/>
+<ShowTradeRoutes/>
+<FadeStars/>
+<ShowFlags/>
+<ShowColonies/>
+</GUI>
+<Clock>03/01/2150 16:29:20</Clock>
+<Map Seed="533589" SPS="16" PD="6">
+ <Sector X="-1" Y="-1" Inhabitant="Grey">
+<Star ID="0">
+<Seed>8601428</Seed>
+<Name>Yiplogu Delta</Name>
+ <MapPos X="-10.37" Y="-7.78"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)3</TradeRoute>
+ <TradeRoute>(-1,-1)14</TradeRoute>
+ <Planets>
+<Planet Seed="5577008" />
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>104613509</PRot>
+<Radius>4,730,648</Radius>
+<ARot>79,740</ARot>
+<Temp>254.59</Temp>
+<Seed>2896524</Seed>
+<Orbit>50298827086</Orbit>
+<TempBase>269.6666510557066</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="6224228" />
+<Planet Seed="3302518" />
+<Planet Seed="7117133" />
+<Planet Seed="2685588" />
+<Planet Seed="2899951" />
+<Planet Seed="8833968" />
+<Planet Seed="5560875" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>339339</Seed>
+ <MapPos X="-7.53" Y="-7.46"/>
+</Star>
+<Star ID="2">
+<Seed>6880946</Seed>
+ <MapPos X="-8.4" Y="-11.98"/>
+</Star>
+<Star ID="3">
+<Seed>2909352</Seed>
+<Name>Wawruko Major</Name>
+ <MapPos X="-7.89" Y="-9.03"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)0</TradeRoute>
+ <TradeRoute>(-1,-1)14</TradeRoute>
+ <Planets>
+<Planet Seed="1751458" />
+<Planet Seed="1459912" />
+<Planet Seed="8905523" />
+<Planet Seed="5552693" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>29392322</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <NextGrowth>679119552000000000</NextGrowth>
+</Colony>
+<Radius>6,584,421</Radius>
+<ARot>95,726</ARot>
+<Temp>304.14</Temp>
+<Seed>9628762</Seed>
+<Orbit>178597821089</Orbit>
+<TempBase>302.4381465326927</TempBase>
+</Planet>
+<Planet Seed="4073328" />
+<Planet Seed="171320" />
+<Planet Seed="7268338" />
+<Planet Seed="5998270" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>2908119</Seed>
+ <MapPos X="-13.06" Y="-6.04"/>
+</Star>
+<Star ID="5">
+<Seed>1383337</Seed>
+ <MapPos X="-10.74" Y="-13.05"/>
+</Star>
+<Star ID="6">
+<Seed>1699905</Seed>
+ <MapPos X="-8.52" Y="-8.02"/>
+</Star>
+<Star ID="7">
+<Seed>231936</Seed>
+ <MapPos X="-7.27" Y="-6.1"/>
+</Star>
+<Star ID="8">
+<Seed>2003569</Seed>
+ <MapPos X="-12.14" Y="-10.6"/>
+</Star>
+<Star ID="9">
+<Seed>4095754</Seed>
+ <MapPos X="-13.21" Y="-13.42"/>
+</Star>
+<Star ID="10">
+<Seed>4480102</Seed>
+ <MapPos X="-5.68" Y="-5.51"/>
+</Star>
+<Star ID="11">
+<Seed>2768787</Seed>
+ <MapPos X="-13.95" Y="-9.14"/>
+</Star>
+<Star ID="12">
+<Seed>791951</Seed>
+ <MapPos X="-8.97" Y="-5.78"/>
+</Star>
+<Star ID="13">
+<Seed>3086663</Seed>
+ <MapPos X="-6.5" Y="-11.08"/>
+</Star>
+<Star ID="14">
+<Seed>4126966</Seed>
+<Name>Grey Home</Name>
+ <MapPos X="-9.27" Y="-9.51"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)0</TradeRoute>
+ <TradeRoute>(-1,-1)3</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>123256782</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Grey</Owner>
+ <NextGrowth>694217088000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,408,937</Radius>
+<ARot>87,321</ARot>
+<Temp>298.20</Temp>
+<Seed>2756276</Seed>
+<Orbit>40233081398</Orbit>
+<Homeworld/>
+<TempBase>288.43350859589975</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="5035300" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>72424308</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Grey</Owner>
+ <NextGrowth>679609440000000000</NextGrowth>
+</Colony>
+<Radius>4,537,412</Radius>
+<ARot>65,527</ARot>
+<Temp>214.76</Temp>
+<Seed>945383</Seed>
+<Orbit>79411872876</Orbit>
+<TempBase>204.52136467715624</TempBase>
+</Planet>
+<Planet Seed="6630468" />
+<Planet Seed="9153253" />
+<Planet Seed="5937907" />
+ </Planets>
+</Star>
+<Star ID="15">
+<Seed>7542195</Seed>
+ <MapPos X="-14.53" Y="-12.89"/>
+</Star>
+ </Sector>
+ <Sector X="0" Y="-1" Inhabitant="Insectoid">
+<Star ID="0">
+<Seed>5547643</Seed>
+<Name>NoPrib Epsilon</Name>
+ <MapPos X="-2.41" Y="-11.93"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <TradeRoute>(0,-1)15</TradeRoute>
+ <Planets>
+<Planet Seed="7379230" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>19713858</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>679179168000000000</NextGrowth>
+</Colony>
+<Radius>51,994,389</Radius>
+<ARot>829,201</ARot>
+<Temp>282.71</Temp>
+<Seed>9098427</Seed>
+<Orbit>72278696094</Orbit>
+<TempBase>324.75378176262825</TempBase>
+</Planet>
+<Planet Seed="6088427" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>26222859</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>679421088000000000</NextGrowth>
+</Colony>
+<Radius>5,377,601</Radius>
+<ARot>77,576</ARot>
+<Temp>209.92</Temp>
+<Seed>5080066</Seed>
+<Orbit>202628934001</Orbit>
+<TempBase>192.99179338233662</TempBase>
+</Planet>
+<Planet Seed="4076632" />
+<Planet Seed="645849" />
+<Planet Seed="7192817" />
+<Planet Seed="2481271" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5949821</Seed>
+ <MapPos X="-0.74" Y="-7.8"/>
+</Star>
+<Star ID="2">
+<Seed>5935979</Seed>
+ <MapPos X="-0.11" Y="-6.75"/>
+</Star>
+<Star ID="3">
+<Seed>3898592</Seed>
+ <MapPos X="-3.7" Y="-9.89"/>
+</Star>
+<Star ID="4">
+<Seed>5326888</Seed>
+ <MapPos X="-4.08" Y="-7.28"/>
+</Star>
+<Star ID="5">
+<Seed>6984507</Seed>
+ <MapPos X="2.05" Y="-14.66"/>
+</Star>
+<Star ID="6">
+<Seed>7772978</Seed>
+ <MapPos X="2.78" Y="-10.49"/>
+</Star>
+<Star ID="7">
+<Seed>1908313</Seed>
+ <MapPos X="4.4" Y="-8.76"/>
+</Star>
+<Star ID="8">
+<Seed>3843674</Seed>
+ <MapPos X="3.79" Y="-13.86"/>
+</Star>
+<Star ID="9">
+<Seed>3012795</Seed>
+ <MapPos X="1.44" Y="-7.6"/>
+</Star>
+<Star ID="10">
+<Seed>2845132</Seed>
+<Name>Insectoid Home</Name>
+ <MapPos X="-1.02" Y="-10.3"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)0</TradeRoute>
+ <TradeRoute>(0,-1)15</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>118713029</PRot>
+<Colony>
+ <BaseType>31</BaseType>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>697347360000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6,312,329</Radius>
+<ARot>105,628</ARot>
+<Temp>289.55</Temp>
+<Seed>8701436</Seed>
+<Orbit>40429484630</Orbit>
+<Homeworld/>
+<TempBase>320.6923481447038</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>84533191</PRot>
+<Radius>5,672,795</Radius>
+<ARot>63,315</ARot>
+<Temp>243.56</Temp>
+<Seed>7317835</Seed>
+<Orbit>56787700045</Orbit>
+<TempBase>269.76414577583785</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>54200949</PRot>
+<Colony>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>679449600000000000</NextGrowth>
+</Colony>
+<Radius>6,928,985</Radius>
+<ARot>93,341</ARot>
+<Temp>215.28</Temp>
+<Seed>1734072</Seed>
+<Orbit>79140362477</Orbit>
+<TempBase>228.02962131649915</TempBase>
+</Planet>
+<Planet Seed="3541502" />
+<Planet Seed="7905274" />
+<Planet Seed="3208322" />
+<Planet Seed="8216415" />
+<Planet Seed="8923294" />
+<Planet Seed="1181575" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>4386290</Seed>
+ <MapPos X="-1.33" Y="-13.12"/>
+</Star>
+<Star ID="12">
+<Seed>6189776</Seed>
+ <MapPos X="4.25" Y="-9.89"/>
+</Star>
+<Star ID="13">
+<Seed>6986193</Seed>
+ <MapPos X="0.3" Y="-12.89"/>
+</Star>
+<Star ID="14">
+<Seed>965805</Seed>
+ <MapPos X="-4.09" Y="-14.23"/>
+</Star>
+<Star ID="15">
+<Seed>9501612</Seed>
+<Name>Rilhubu Minor</Name>
+ <MapPos X="0.37" Y="-9"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)0</TradeRoute>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>53464526</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>679309632000000000</NextGrowth>
+</Colony>
+<Radius>61,130,119</Radius>
+<ARot>981,436</ARot>
+<Temp>246.89</Temp>
+<Seed>4687270</Seed>
+<Orbit>29466818826</Orbit>
+<TempBase>283.60424886783323</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>29138410</PRot>
+<Radius>81,282,467</Radius>
+<ARot>1,545,100</ARot>
+<Temp>208.17</Temp>
+<Seed>5288174</Seed>
+<Orbit>41204470695</Orbit>
+<TempBase>239.122257689797</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>74802546</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>679264704000000000</NextGrowth>
+</Colony>
+<Radius>6,939,860</Radius>
+<ARot>92,908</ARot>
+<Temp>221.51</Temp>
+<Seed>4456336</Seed>
+<Orbit>57588580627</Orbit>
+<TempBase>201.84095159588844</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8005137" />
+<Planet Seed="9841769" />
+<Planet Seed="628044" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="-1" Y="0" Inhabitant="Elithiri">
+<Star ID="0">
+<Seed>4548836</Seed>
+ <MapPos X="-5.26" Y="3.55"/>
+</Star>
+<Star ID="1">
+<Seed>6615461</Seed>
+ <MapPos X="-6.75" Y="-3.21"/>
+</Star>
+<Star ID="2">
+<Seed>2115502</Seed>
+<Name>Elithiri Home</Name>
+ <MapPos X="-9.27" Y="-0.19"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>152471648</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>695630592000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,863,873</Radius>
+<ARot>85,261</ARot>
+<Temp>285.62</Temp>
+<Seed>5047005</Seed>
+<Orbit>29857009431</Orbit>
+<Homeworld/>
+<TempBase>285.106871287504</TempBase>
+<Moons>
+<Moon ID="1">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1914784" />
+<Planet Seed="1167173" />
+<Planet Seed="7458888" />
+<Planet Seed="7997016" />
+<Planet Seed="9047091" />
+<Planet Seed="9582688" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>6675544</Seed>
+ <MapPos X="-11.01" Y="-3.05"/>
+</Star>
+<Star ID="4">
+<Seed>1668775</Seed>
+ <MapPos X="-6.79" Y="-4.33"/>
+</Star>
+<Star ID="5">
+<Seed>4572627</Seed>
+ <MapPos X="-14.69" Y="0.15"/>
+</Star>
+<Star ID="6">
+<Seed>8729377</Seed>
+ <MapPos X="-11.31" Y="2.47"/>
+</Star>
+<Star ID="7">
+<Seed>4533372</Seed>
+<Name>Itlio</Name>
+ <MapPos X="-7.01" Y="-0.88"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet Seed="7632751" />
+<Planet Seed="170851" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>40217058</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>680415552000000000</NextGrowth>
+</Colony>
+<Radius>5,157,544</Radius>
+<ARot>73,269</ARot>
+<Temp>356.33</Temp>
+<Seed>4065609</Seed>
+<Orbit>113021428020</Orbit>
+<TempBase>365.04479899277686</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Volcanic</Type>
+<PRot>28836106</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>679119552000000000</NextGrowth>
+</Colony>
+<Radius>5,934,138</Radius>
+<ARot>74,017</ARot>
+<Temp>307.81</Temp>
+<Seed>5932869</Seed>
+<Orbit>156917343932</Orbit>
+<TempBase>309.2343600869783</TempBase>
+<Moons>
+<Moon ID="1">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="8">
+<Seed>6266203</Seed>
+ <MapPos X="-5.88" Y="-0.48"/>
+</Star>
+<Star ID="9">
+<Seed>9774898</Seed>
+ <MapPos X="-13.38" Y="-4.31"/>
+</Star>
+<Star ID="10">
+<Seed>2869632</Seed>
+ <MapPos X="-13.06" Y="0.91"/>
+</Star>
+<Star ID="11">
+<Seed>9226054</Seed>
+<Name>Viyluv</Name>
+ <MapPos X="-8.04" Y="-0.2"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet Seed="5616607" />
+<Planet Seed="213391" />
+<Planet Seed="9138198" />
+<Planet Seed="1930396" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>22938816</PRot>
+<Colony>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>679190400000000000</NextGrowth>
+</Colony>
+<Radius>7,232,113</Radius>
+<ARot>115,263</ARot>
+<Temp>294.83</Temp>
+<Seed>8335060</Seed>
+<Orbit>200298615185</Orbit>
+<TempBase>295.46034534751647</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="9362717" />
+<Planet Seed="8131109" />
+<Planet Seed="9261428" />
+<Planet Seed="971222" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>7590344</Seed>
+<Name>Chekrez Prime</Name>
+ <MapPos X="-7.82" Y="1.39"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>66064355</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>678989088000000000</NextGrowth>
+</Colony>
+<Radius>7,328,891</Radius>
+<ARot>97,053</ARot>
+<Temp>284.60</Temp>
+<Seed>8256728</Seed>
+<Orbit>64893939292</Orbit>
+<TempBase>269.1589445752175</TempBase>
+</Planet>
+<Planet Seed="2819473" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>9900670</Seed>
+ <MapPos X="-10.27" Y="3.77"/>
+</Star>
+<Star ID="14">
+<Seed>2630694</Seed>
+ <MapPos X="-7.84" Y="3.61"/>
+</Star>
+<Star ID="15">
+<Seed>4608814</Seed>
+ <MapPos X="-6.92" Y="0.93"/>
+</Star>
+ </Sector>
+ <Sector X="0" Y="0" Inhabitant="Human">
+<Star ID="0">
+<Seed>708736</Seed>
+ <MapPos X="-3.58" Y="2.54"/>
+</Star>
+<Star ID="1">
+<Seed>8156547</Seed>
+ <MapPos X="-1.36" Y="-4.51"/>
+</Star>
+<Star ID="2">
+<Seed>8480069</Seed>
+ <MapPos X="-4.5" Y="2.12"/>
+</Star>
+<Star ID="3">
+<Seed>1074036</Seed>
+ <MapPos X="2.91" Y="0.94"/>
+</Star>
+<Star ID="4">
+<Seed>2700104</Seed>
+ <MapPos X="4.37" Y="4.4"/>
+</Star>
+<Star ID="5">
+<Seed>8162706</Seed>
+ <MapPos X="0.1" Y="3.25"/>
+</Star>
+<Star ID="6">
+<Seed>745272</Seed>
+ <MapPos X="-3.48" Y="0.77"/>
+</Star>
+<Star ID="7">
+<Seed>1510290</Seed>
+ <MapPos X="2.99" Y="-2.82"/>
+</Star>
+<Star ID="8">
+<Seed>3691064</Seed>
+ <MapPos X="2.53" Y="-3.84"/>
+</Star>
+<Star ID="9">
+<Seed>3974699</Seed>
+ <MapPos X="-0.61" Y="-2.67"/>
+</Star>
+<Star ID="10">
+<Seed>5441829</Seed>
+<Name>Human Home</Name>
+ <MapPos X="0.15" Y="-0.46"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)11</TradeRoute>
+ <TradeRoute>(0,0)14</TradeRoute>
+ <Planets>
+<Planet Seed="4876660" />
+<Planet Seed="3977752" />
+<Planet Seed="9863264" />
+<Planet Seed="8366080" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>17478862</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678161105205362163</LastUpdate>
+ <NextGrowth>692681760000000000</NextGrowth>
+ <Mercenaries>
+<Soldier Name="Kallum Brook">
+ <Level>2</Level>
+ <XP>2779</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>12,13,12,14,14</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Axe" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">82</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Scavenging">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Olivia Webster">
+ <Level>2</Level>
+ <XP>3144</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>11,6,15,15,13</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Sniper Rifle" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Sniper">68</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Avoidance">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Michelle Xanthos">
+ <Level>1</Level>
+ <XP>245</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>10,12,13,14,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">19</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Engineer">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Ivan Cooper">
+ <Level>1</Level>
+ <XP>2</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>8,9,10,17,17</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shortblade" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">17</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Rachel Quick">
+ <Level>1</Level>
+ <XP>683</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>9,12,9,12,18</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Pistol" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Pistol">17</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Medic">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Thomas Hooper">
+ <Level>2</Level>
+ <XP>2123</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>10,11,12,14,13</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">61</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Perception">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Quenna Kane">
+ <Level>1</Level>
+ <XP>803</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>11,12,14,11,12</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Chainsword" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">16</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Lily Nolan">
+ <Level>2</Level>
+ <XP>1022</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>14,10,10,13,13</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Axe" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">78</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Perception">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Mark Atwood">
+ <Level>1</Level>
+ <XP>438</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>12,12,8,15,14</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Axe" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">22</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Glen Brook">
+ <Level>2</Level>
+ <XP>2131</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>9,12,13,13,14</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Chainsword" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">82</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Engineer">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Grace Taylor">
+ <Level>2</Level>
+ <XP>2406</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>10,11,14,14,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Chainsword" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">65</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Gunsmith">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Oliver Eastwood">
+ <Level>1</Level>
+ <XP>51</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>12,15,14,10,12</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shortblade" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">27</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="William Jones">
+ <Level>1</Level>
+ <XP>539</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>15,18,11,14,6</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Chainsword" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">21</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Eva Quimby">
+ <Level>2</Level>
+ <XP>3295</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>10,14,13,12,16</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Automatic Rifle" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Rifle">86</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Armoursmith">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Richard Quimby">
+ <Level>1</Level>
+ <XP>681</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>17,14,10,10,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">27</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Brian Vickers">
+ <Level>1</Level>
+ <XP>474</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>9,13,15,15,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">21</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Engineer">1</Exp>
+ </UtilityExperience>
+</Soldier>
+ </Mercenaries>
+ <Missions>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.54</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>324873322</Seed>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Slime Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>8.36</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1765768541</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>10.68</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>219604602</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Slime Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>19.32</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1974391751</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.59</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>2080159382</Seed>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Name="scientifically interesting crystal formation"></MissionItem>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>10.88</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1566786504</Seed>
+ <Size>2</Size>
+ <Waves>5</Waves>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.51</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1223115257</Seed>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>Countdown</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.27</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1664367059</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>4.83</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>112163129</Seed>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Slime Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>10.45</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>721643783</Seed>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>Countdown</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.58</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>692976502</Seed>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>Countdown</Goal>
+ <Enemy>Slime Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.86</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>2119147462</Seed>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bugs</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.08</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>568573434</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>11.08</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>481879582</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1585153575" Diff="2">
+ <Name>Enemy Ship</Name>
+ <Hull>13</Hull>
+ <Shield>0</Shield>
+ <Seed>479940</Seed>
+ <Eqp ID="5" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Bunk Room</Eqp>
+ <Eqp ID="4" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.63</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>704355333</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>9.85</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1363603547</Seed>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1073374232" Diff="2">
+ <Name>Enemy Ship</Name>
+ <Hull>13</Hull>
+ <Shield>0</Shield>
+ <Seed>218562</Seed>
+ <Eqp ID="6" Active="True">Thrusters</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Cabin</Eqp>
+ <Eqp ID="5" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>10.38</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>466967119</Seed>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.48</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>505589328</Seed>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Slime Creatures</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>4.92</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1982365043</Seed>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>Countdown</Goal>
+ <Enemy>Fungoids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>8.12</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1597693348</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>10.05</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>322231561</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>4.87</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1293205375</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>8.36</Reward>
+ <Diff>2</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>455918808</Seed>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="3.03" Name="Stunning Alien Device" Level="1"></MissionItem>
+ <Enemy>Triffids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>12.406581827852982</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>745674656</Seed>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Arachnids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.18</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1856272612</Seed>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="1.60" Name="Rare Emerald" Level="1"></MissionItem>
+ <Enemy>Fungoids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>5.13</Reward>
+ <Diff>1</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>454547</Seed>
+</Mission>
+ </Missions>
+ <Inventory>
+  <Inv Count="53">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="69">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="97">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+  <Inv Count="36">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="12">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="66">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="26">
+<Weapon Type="Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="6">
+<Weapon Type="Shotgun" Level="1" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Shotgun" Level="2" />
+  </Inv>
+  <Inv Count="15">
+<Weapon Type="Pistol" Level="0" />
+  </Inv>
+  <Inv Count="10">
+<Weapon Type="Pistol" Level="1" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Pistol" Level="2" />
+  </Inv>
+  <Inv Count="44">
+<Weapon Type="Automatic Rifle" Level="0" />
+  </Inv>
+  <Inv Count="9">
+<Weapon Type="Automatic Rifle" Level="1" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Automatic Rifle" Level="2" />
+  </Inv>
+  <Inv Count="17">
+<Weapon Type="Heavy Rifle" Level="0" />
+  </Inv>
+  <Inv Count="58">
+<Weapon Type="Heavy Rifle" Level="1" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Heavy Rifle" Level="2" />
+  </Inv>
+  <Inv Count="51">
+<Weapon Type="Flame Thrower" Level="0" />
+  </Inv>
+  <Inv Count="9">
+<Weapon Type="Flame Thrower" Level="1" />
+  </Inv>
+  <Inv Count="9">
+<Weapon Type="Flame Thrower" Level="2" />
+  </Inv>
+  <Inv Count="6">
+<Weapon Type="Sniper Rifle" Level="0" />
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Sniper Rifle" Level="1" />
+  </Inv>
+  <Inv Count="9">
+<Weapon Type="Sniper Rifle" Level="2" />
+  </Inv>
+  <Inv Count="45">
+<Weapon Type="Shortblade" Level="0" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Shortblade" Level="1" />
+  </Inv>
+  <Inv Count="27">
+<Weapon Type="Shortblade" Level="2" />
+  </Inv>
+  <Inv Count="28">
+<Weapon Type="Axe" Level="0" />
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Axe" Level="1" />
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Axe" Level="2" />
+  </Inv>
+  <Inv Count="11">
+<Weapon Type="Chainsword" Level="0" />
+  </Inv>
+  <Inv Count="55">
+<Weapon Type="Chainsword" Level="1" />
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Chainsword" Level="2" />
+  </Inv>
+  <Inv Count="59">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="25">
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="36">
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="113">
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="60">
+<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="92">
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="46">
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="38">
+<Armour Type="Chestplate" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="24">
+<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Chestplate" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="9">
+<Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="25">
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="44">
+<Armour Type="Arm Plating" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="52">
+<Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="13">
+<Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="24">
+<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="63">
+<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="5">
+<Armour Type="Powered Arm Plating" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="24">
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="59">
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="31">
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="47">
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="12">
+<Armour Type="Leg Plating" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="11">
+<Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Leg Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="75">
+<Armour Type="Powered Leg Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="68">
+<Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="15">
+<Armour Type="Powered Leg Plating" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="38">
+<Armour Type="Powered Leg Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="6">
+<Armour Type="Powered Leg Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="130">
+<Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="216">
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="49">
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="9">
+<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="17">
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="12">
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="22">
+<Armour Type="Gauntlets" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="15">
+<Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="27">
+<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="22">
+<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="14">
+<Armour Type="Powered Gauntlets" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="9">
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="6">
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="32">
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="155">
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="5">
+<Armour Type="Core Armour" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="23">
+<Armour Type="Core Armour" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Core Armour" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="151">
+<Material Type="Carbon Fibre"/>
+  </Inv>
+  <Inv Count="641">
+<Material Type="Steel"/>
+  </Inv>
+  <Inv Count="326">
+<Material Type="Kevlar"/>
+  </Inv>
+  <Inv Count="9">
+<Material Type="Silicates"/>
+  </Inv>
+  <Inv Count="132">
+<Material Type="Aluminium"/>
+  </Inv>
+  <Inv Count="22">
+<Material Type="Tungsten"/>
+  </Inv>
+  <Inv Count="89">
+<Material Type="Uranium"/>
+  </Inv>
+  <Inv Count="93">
+<Material Type="Water"/>
+  </Inv>
+  <Inv Count="84">
+<Material Type="Carbon"/>
+  </Inv>
+  <Inv Count="85">
+<Material Type="Rare Earth Metals"/>
+  </Inv>
+  <Inv Count="105">
+<Material Type="Electronic Components"/>
+  </Inv>
+  <Inv Count="12">
+<Material Type="Gold"/>
+  </Inv>
+  <Inv Count="538">
+<Material Type="Copper"/>
+  </Inv>
+  <Inv Count="410">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="157">
+<Material Type="Plastic"/>
+  </Inv>
+  <Inv Count="121">
+<Material Type="Rubber"/>
+  </Inv>
+  <Inv Count="14">
+<Material Type="Crystals"/>
+  </Inv>
+  <Inv Count="24">
+<Material Type="Titanium"/>
+  </Inv>
+  <Inv Count="58">
+<Material Type="Industrial Chemicals"/>
+  </Inv>
+ </Inventory>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6,910,895</Radius>
+<ARot>90,905</ARot>
+<Temp>290.95</Temp>
+<Seed>1742637</Seed>
+<Orbit>276124589153</Orbit>
+<Homeworld/>
+<TempBase>271.36835413934733</TempBase>
+</Planet>
+<Planet Seed="1056473" />
+<Planet Seed="6906358" />
+<Planet Seed="8440435" />
+<Planet Seed="9758122" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="11">
+<Seed>4343598</Seed>
+<Name>EWheb Minor</Name>
+ <MapPos X="1.48" Y="-0.21"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)10</TradeRoute>
+ <TradeRoute>(0,0)14</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>23965238</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Human</Owner>
+ <NextGrowth>679281120000000000</NextGrowth>
+</Colony>
+<Radius>5,658,801</Radius>
+<ARot>82,319</ARot>
+<Temp>246.57</Temp>
+<Seed>8445662</Seed>
+<Orbit>190264498954</Orbit>
+<TempBase>261.16908837560135</TempBase>
+</Planet>
+<Planet Seed="7623068" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>9921982</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <NextGrowth>679724352000000000</NextGrowth>
+</Colony>
+<Radius>8,112,972</Radius>
+<ARot>112,929</ARot>
+<Temp>207.67</Temp>
+<Seed>3241956</Seed>
+<Orbit>371061081770</Orbit>
+<TempBase>186.35359929182846</TempBase>
+</Planet>
+<Planet Seed="815588" />
+<Planet Seed="8108759" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="12">
+<Seed>2251480</Seed>
+ <MapPos X="-1.88" Y="-1.54"/>
+</Star>
+<Star ID="13">
+<Seed>6063744</Seed>
+ <MapPos X="0.75" Y="1.91"/>
+</Star>
+<Star ID="14">
+<Seed>4421447</Seed>
+<Name>Rliwrura Prime</Name>
+ <MapPos X="-0.62" Y="-1.5"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)10</TradeRoute>
+ <TradeRoute>(0,0)11</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>46027616</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <NextGrowth>678950208000000000</NextGrowth>
+</Colony>
+<Radius>62,229,007</Radius>
+<ARot>879,976</ARot>
+<Temp>276.62</Temp>
+<Seed>1632694</Seed>
+<Orbit>32770451479</Orbit>
+<TempBase>317.75798485462377</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Human</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="4756618" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>87854739</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <NextGrowth>679405536000000000</NextGrowth>
+</Colony>
+<Radius>5,472,180</Radius>
+<ARot>77,178</ARot>
+<Temp>225.32</Temp>
+<Seed>3945480</Seed>
+<Orbit>65976230921</Orbit>
+<TempBase>222.77361432978904</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Human</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>41942328</PRot>
+<Colony>
+ <Owner>Human</Owner>
+ <NextGrowth>680020704000000000</NextGrowth>
+</Colony>
+<Radius>7,338,477</Radius>
+<ARot>75,538</ARot>
+<Temp>200.89</Temp>
+<Seed>8474093</Seed>
+<Orbit>92789428794</Orbit>
+<TempBase>187.56955694855645</TempBase>
+</Planet>
+<Planet Seed="4399506" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="15">
+<Seed>3160547</Seed>
+ <MapPos X="4.1" Y="0.39"/>
+</Star>
+ </Sector>
+ <Sector X="-1" Y="1" Inhabitant="Gokan">
+<Star ID="0">
+<Seed>594258</Seed>
+<Name>Gokan Home</Name>
+ <MapPos X="-8.58" Y="9.37"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)1</TradeRoute>
+ <TradeRoute>(-1,1)5</TradeRoute>
+ <Planets>
+<Planet Seed="7272050" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>31538944</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679675104000000000</NextGrowth>
+</Colony>
+<Radius>4,875,004</Radius>
+<ARot>66,384</ARot>
+<Temp>329.45</Temp>
+<Seed>2187746</Seed>
+<Orbit>154795780662</Orbit>
+<TempBase>364.8899894376107</TempBase>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>20232271</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Gokan</Owner>
+ <NextGrowth>698107680000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>7,076,486</Radius>
+<ARot>85,958</ARot>
+<Temp>291.04</Temp>
+<Seed>3216883</Seed>
+<Orbit>216275715159</Orbit>
+<Homeworld/>
+<TempBase>308.2727642467531</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Gokan</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>5589710</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679172256000000000</NextGrowth>
+</Colony>
+<Radius>45,295,160</Radius>
+<ARot>643,304</ARot>
+<Temp>229.86</Temp>
+<Seed>1830225</Seed>
+<Orbit>294271670520</Orbit>
+<TempBase>264.03632492252757</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>12092909</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679042656000000000</NextGrowth>
+</Colony>
+<Radius>6,290,360</Radius>
+<ARot>80,226</ARot>
+<Temp>233.76</Temp>
+<Seed>4120258</Seed>
+<Orbit>408731917563</Orbit>
+<TempBase>223.87606084774453</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>6900883</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679360608000000000</NextGrowth>
+</Colony>
+<Radius>7,501,079</Radius>
+<ARot>128,296</ARot>
+<Temp>205.33</Temp>
+<Seed>6165044</Seed>
+<Orbit>564944432211</Orbit>
+<TempBase>190.32825622110752</TempBase>
+</Planet>
+<Planet Seed="5634871" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>7039588</Seed>
+<Name>Zhulhib Minor</Name>
+ <MapPos X="-8.01" Y="10.87"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)0</TradeRoute>
+ <TradeRoute>(-1,1)5</TradeRoute>
+ <Planets>
+<Planet Seed="8509953" />
+<Planet Seed="8018571" />
+<Planet Seed="720337" />
+<Planet Seed="4576902" />
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>30282137</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679161888000000000</NextGrowth>
+</Colony>
+<Radius>5,993,113</Radius>
+<ARot>79,483</ARot>
+<Temp>249.15</Temp>
+<Seed>9440209</Seed>
+<Orbit>150833800327</Orbit>
+<TempBase>241.53668687609516</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>21977933</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679688928000000000</NextGrowth>
+</Colony>
+<Radius>6,477,978</Radius>
+<ARot>105,331</ARot>
+<Temp>217.10</Temp>
+<Seed>5771841</Seed>
+<Orbit>214118634691</Orbit>
+<TempBase>202.5312734811246</TempBase>
+</Planet>
+<Planet Seed="756535" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>3777388</Seed>
+ <MapPos X="-13.53" Y="10.57"/>
+</Star>
+<Star ID="3">
+<Seed>8864076</Seed>
+ <MapPos X="-10.86" Y="14.61"/>
+</Star>
+<Star ID="4">
+<Seed>375734</Seed>
+ <MapPos X="-12.33" Y="7.8"/>
+</Star>
+<Star ID="5">
+<Seed>3563595</Seed>
+<Name>Yokrid Prime</Name>
+ <MapPos X="-6.78" Y="9.26"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)0</TradeRoute>
+ <TradeRoute>(-1,1)1</TradeRoute>
+ <Planets>
+<Planet Seed="7183808" />
+<Planet Seed="5308326" />
+<Planet Seed="4132897" />
+<Planet Seed="5132697" />
+<Planet Seed="4716271" />
+<Planet ID="5">
+<Type>Gas</Type>
+<PRot>3427355</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <NextGrowth>679327776000000000</NextGrowth>
+</Colony>
+<Radius>66,985,534</Radius>
+<ARot>839,266</ARot>
+<Temp>251.68</Temp>
+<Seed>1925618</Seed>
+<Orbit>426789864795</Orbit>
+<TempBase>289.1099730934494</TempBase>
+</Planet>
+<Planet Seed="8415068" />
+<Planet Seed="5176258" />
+<Planet Seed="5605847" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>4480122</Seed>
+ <MapPos X="-13.88" Y="7.11"/>
+</Star>
+<Star ID="7">
+<Seed>5969065</Seed>
+ <MapPos X="-6.8" Y="12.18"/>
+</Star>
+<Star ID="8">
+<Seed>7870303</Seed>
+ <MapPos X="-12.27" Y="9.08"/>
+</Star>
+<Star ID="9">
+<Seed>7371535</Seed>
+ <MapPos X="-13" Y="5.32"/>
+</Star>
+<Star ID="10">
+<Seed>4794718</Seed>
+ <MapPos X="-11.85" Y="13.27"/>
+</Star>
+<Star ID="11">
+<Seed>7113624</Seed>
+ <MapPos X="-9.12" Y="7.16"/>
+</Star>
+<Star ID="12">
+<Seed>832531</Seed>
+ <MapPos X="-5.39" Y="11.3"/>
+</Star>
+<Star ID="13">
+<Seed>1288711</Seed>
+ <MapPos X="-5.66" Y="6.81"/>
+</Star>
+<Star ID="14">
+<Seed>9572452</Seed>
+ <MapPos X="-5.23" Y="14.52"/>
+</Star>
+<Star ID="15">
+<Seed>8140438</Seed>
+ <MapPos X="-7.13" Y="14.18"/>
+</Star>
+ </Sector>
+ <Sector X="0" Y="1" Inhabitant="Ursalon">
+<Star ID="0">
+<Seed>5547643</Seed>
+<Name>NoPrib Epsilon</Name>
+ <MapPos X="-2.41" Y="8.07"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <TradeRoute>(0,1)15</TradeRoute>
+ <Planets>
+<Planet Seed="7379230" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>19713858</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>678989088000000000</NextGrowth>
+</Colony>
+<Radius>51,994,389</Radius>
+<ARot>829,201</ARot>
+<Temp>282.71</Temp>
+<Seed>9098427</Seed>
+<Orbit>72278696094</Orbit>
+<TempBase>324.75378176262825</TempBase>
+</Planet>
+<Planet Seed="6088427" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>26222859</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>679354560000000000</NextGrowth>
+</Colony>
+<Radius>5,377,601</Radius>
+<ARot>77,576</ARot>
+<Temp>209.92</Temp>
+<Seed>5080066</Seed>
+<Orbit>202628934001</Orbit>
+<TempBase>192.99179338233662</TempBase>
+</Planet>
+<Planet Seed="4076632" />
+<Planet Seed="645849" />
+<Planet Seed="7192817" />
+<Planet Seed="2481271" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5949821</Seed>
+ <MapPos X="-0.74" Y="12.2"/>
+</Star>
+<Star ID="2">
+<Seed>5935979</Seed>
+ <MapPos X="-0.11" Y="13.25"/>
+</Star>
+<Star ID="3">
+<Seed>3898592</Seed>
+ <MapPos X="-3.7" Y="10.11"/>
+</Star>
+<Star ID="4">
+<Seed>5326888</Seed>
+ <MapPos X="-4.08" Y="12.72"/>
+</Star>
+<Star ID="5">
+<Seed>6984507</Seed>
+ <MapPos X="2.05" Y="5.34"/>
+</Star>
+<Star ID="6">
+<Seed>7772978</Seed>
+ <MapPos X="2.78" Y="9.51"/>
+</Star>
+<Star ID="7">
+<Seed>1908313</Seed>
+ <MapPos X="4.4" Y="11.24"/>
+</Star>
+<Star ID="8">
+<Seed>3843674</Seed>
+ <MapPos X="3.79" Y="6.14"/>
+</Star>
+<Star ID="9">
+<Seed>3012795</Seed>
+ <MapPos X="1.44" Y="12.4"/>
+</Star>
+<Star ID="10">
+<Seed>4074688</Seed>
+<Name>Ursalon Home</Name>
+ <MapPos X="-1.02" Y="9.7"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)0</TradeRoute>
+ <TradeRoute>(0,1)15</TradeRoute>
+ <Planets>
+<Planet Seed="9061025" />
+<Planet Seed="7320265" />
+<Planet Seed="4650006" />
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>4998423</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>678855168000000000</NextGrowth>
+</Colony>
+<Radius>70,095,463</Radius>
+<ARot>885,589</ARot>
+<Temp>282.44</Temp>
+<Seed>1550103</Seed>
+<Orbit>257929389168</Orbit>
+<TempBase>324.43423945003514</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>14446556</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>698041152000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>4,638,065</Radius>
+<ARot>60,236</ARot>
+<Temp>293.61</Temp>
+<Seed>8581149</Seed>
+<Orbit>354107577761</Orbit>
+<Homeworld/>
+<TempBase>276.67453820576003</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="9321265" />
+<Planet Seed="9462541" />
+<Planet Seed="3333430" />
+<Planet Seed="2485149" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>4386290</Seed>
+ <MapPos X="-1.33" Y="6.88"/>
+</Star>
+<Star ID="12">
+<Seed>6189776</Seed>
+ <MapPos X="4.25" Y="10.11"/>
+</Star>
+<Star ID="13">
+<Seed>6986193</Seed>
+ <MapPos X="0.3" Y="7.11"/>
+</Star>
+<Star ID="14">
+<Seed>965805</Seed>
+ <MapPos X="-4.09" Y="5.77"/>
+</Star>
+<Star ID="15">
+<Seed>9501612</Seed>
+<Name>Rilhubu Minor</Name>
+ <MapPos X="0.37" Y="11"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)0</TradeRoute>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>53464526</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>679411584000000000</NextGrowth>
+</Colony>
+<Radius>61,130,119</Radius>
+<ARot>981,436</ARot>
+<Temp>246.89</Temp>
+<Seed>4687270</Seed>
+<Orbit>29466818826</Orbit>
+<TempBase>283.60424886783323</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>29138410</PRot>
+<Radius>81,282,467</Radius>
+<ARot>1,545,100</ARot>
+<Temp>208.17</Temp>
+<Seed>5288174</Seed>
+<Orbit>41204470695</Orbit>
+<TempBase>239.122257689797</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>74802546</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>679205088000000000</NextGrowth>
+</Colony>
+<Radius>6,939,860</Radius>
+<ARot>92,908</ARot>
+<Temp>221.51</Temp>
+<Seed>4456336</Seed>
+<Orbit>57588580627</Orbit>
+<TempBase>201.84095159588844</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8005137" />
+<Planet Seed="9841769" />
+<Planet Seed="628044" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="1" Y="1" Inhabitant="Ogrish">
+<Star ID="0">
+<Seed>6965751</Seed>
+ <MapPos X="11.48" Y="6.82"/>
+</Star>
+<Star ID="1">
+<Seed>5736128</Seed>
+ <MapPos X="5.91" Y="10.1"/>
+</Star>
+<Star ID="2">
+<Seed>2342934</Seed>
+<Name>Hellua Minor</Name>
+ <MapPos X="10.35" Y="7.44"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)4</TradeRoute>
+ <TradeRoute>(1,1)11</TradeRoute>
+ <Planets>
+<Planet Seed="2572894" />
+<Planet Seed="4962447" />
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>51251458</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>679010688000000000</NextGrowth>
+</Colony>
+<Radius>4,830,179</Radius>
+<ARot>65,571</ARot>
+<Temp>303.51</Temp>
+<Seed>4426868</Seed>
+<Orbit>117854411805</Orbit>
+<TempBase>336.15776968149476</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>9088082</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>679063392000000000</NextGrowth>
+</Colony>
+<Radius>62,803,599</Radius>
+<ARot>1,052,427</ARot>
+<Temp>244.87</Temp>
+<Seed>1767347</Seed>
+<Orbit>167848289049</Orbit>
+<TempBase>281.27930535929704</TempBase>
+</Planet>
+<Planet Seed="8868026" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>1852152</Seed>
+ <MapPos X="9.47" Y="5.96"/>
+</Star>
+<Star ID="4">
+<Seed>918247</Seed>
+<Name>Iwrio Minor</Name>
+ <MapPos X="9.36" Y="6.96"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)2</TradeRoute>
+ <TradeRoute>(1,1)11</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>124265382</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>678964896000000000</NextGrowth>
+</Colony>
+<Radius>6,845,022</Radius>
+<ARot>85,795</ARot>
+<Temp>293.04</Temp>
+<Seed>8888424</Seed>
+<Orbit>35956905248</Orbit>
+<TempBase>324.55987354596454</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>78567503</PRot>
+<Colony>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>679234464000000000</NextGrowth>
+</Colony>
+<Radius>4,714,270</Radius>
+<ARot>63,078</ARot>
+<Temp>246.23</Temp>
+<Seed>6321155</Seed>
+<Orbit>70061319756</Orbit>
+<TempBase>231.30551398576847</TempBase>
+</Planet>
+<Planet Seed="5981776" />
+<Planet Seed="6244175" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>1033057</Seed>
+ <MapPos X="8" Y="10.46"/>
+</Star>
+<Star ID="6">
+<Seed>8707126</Seed>
+ <MapPos X="7.19" Y="7.11"/>
+</Star>
+<Star ID="7">
+<Seed>2082737</Seed>
+ <MapPos X="13.6" Y="6.02"/>
+</Star>
+<Star ID="8">
+<Seed>5077979</Seed>
+ <MapPos X="8.83" Y="13.54"/>
+</Star>
+<Star ID="9">
+<Seed>4446666</Seed>
+ <MapPos X="12.83" Y="8.4"/>
+</Star>
+<Star ID="10">
+<Seed>6669215</Seed>
+ <MapPos X="13.94" Y="11.75"/>
+</Star>
+<Star ID="11">
+<Seed>2872443</Seed>
+<Name>Ogrish Home</Name>
+ <MapPos X="10.07" Y="8.84"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)2</TradeRoute>
+ <TradeRoute>(1,1)4</TradeRoute>
+ <Planets>
+<Planet Seed="2100208" />
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>62643961</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>695198592000000000</NextGrowth>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,623,804</Radius>
+<ARot>82,659</ARot>
+<Temp>295.56</Temp>
+<Seed>2588222</Seed>
+<Orbit>75938422571</Orbit>
+<Homeworld/>
+<TempBase>313.0593572842724</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Ogrish</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1964055" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>31922538</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>679130784000000000</NextGrowth>
+</Colony>
+<Radius>5,995,396</Radius>
+<ARot>90,017</ARot>
+<Temp>238.56</Temp>
+<Seed>2306180</Seed>
+<Orbit>147115051361</Orbit>
+<TempBase>224.27485476671205</TempBase>
+<Moons>
+<Moon ID="1">
+<Colony>
+ <Owner>Ogrish</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="2932527" />
+<Planet Seed="1476372" />
+<Planet Seed="7828692" />
+<Planet Seed="7397780" />
+<Planet Seed="2103699" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>4240017</Seed>
+ <MapPos X="11.22" Y="10.53"/>
+</Star>
+<Star ID="13">
+<Seed>9381642</Seed>
+ <MapPos X="13.23" Y="14.52"/>
+</Star>
+<Star ID="14">
+<Seed>4067466</Seed>
+ <MapPos X="9.83" Y="12.8"/>
+</Star>
+<Star ID="15">
+<Seed>158993</Seed>
+ <MapPos X="11.01" Y="12.7"/>
+</Star>
+ </Sector>
+</Map>
+<Team>
+ <Pos>(0,0)10.4</Pos>
+ <Cash>58.34618607090921</Cash>
+ <Soldiers>
+<Soldier Name="Rocky">
+ <Location X="19" Y="14"/>
+ <Health>16.854189165356694</Health>
+ <Stamina>3</Stamina>
+ <Shields>0</Shields>
+ <Facing>180</Facing>
+ <Level>2</Level>
+ <XP>2091</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>14,12,8,14,13</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Axe" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">71</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Scavenging">1</Exp>
+  <Exp Skill="Medic">1</Exp>
+  <Exp Skill="Bladesmith">1</Exp>
+ </UtilityExperience>
+ <Moved/>
+ <KillCount>35</KillCount>
+ <ToughestKill>
+<Creature Type="Slime Creature">
+ <Level>2</Level>
+</Creature>
+ </ToughestKill>
+</Soldier>
+ </Soldiers>
+<Ship Type="Shuttle">
+ <Name>Player Ship</Name>
+ <Hull>13</Hull>
+ <Shield>0</Shield>
+ <Seed>724483</Seed>
+ <Eqp ID="6" Active="True">Thrusters</Eqp>
+ <Eqp ID="0" Active="True">Fission Core</Eqp>
+ <Eqp ID="5" Active="True">Chain Gun</Eqp>
+</Ship>
+ <Mission_ShowLabels/>
+ <Mission_ShowStatBars/>
+ <Mission_ShowTravel/>
+ <Mission_ShowPath/>
+ <Mission_ShowEffects/>
+ <Mission_ViewDetection/>
+ <Mission_FastAI/>
+ <Relations>
+  <Relation Race="Human" Value="6066"/>
+ </Relations>
+ <Inventory>
+ </Inventory>
+</Team>
+<Races>
+<Race Name="Human">
+<HomePlanet>(0,0)10.4</HomePlanet>
+<LastExpand>0</LastExpand>
+<Known/>
+<Research>
+</Research>
+</Race>
+<Race Name="Gokan">
+<HomePlanet>(-1,1)0.2</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+<Race Name="Elithiri">
+<HomePlanet>(-1,0)2.0</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+<Race Name="Ogrish">
+<HomePlanet>(1,1)11.1</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+<Race Name="Insectoid">
+<HomePlanet>(0,-1)10.0</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+<Race Name="Grey">
+<HomePlanet>(-1,-1)14.0</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+<Race Name="Ursalon">
+<HomePlanet>(0,1)10.4</HomePlanet>
+<LastExpand>0</LastExpand>
+<Research>
+</Research>
+</Race>
+</Races>
+</SpaceMercsSaveFile>

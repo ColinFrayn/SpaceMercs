@@ -223,6 +223,7 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
+        public const double MissionExperienceScale = 0.4d; // Scale for experience gained for finishing a mission
         public const double CashRelationsFactor = 0.25; // Exp per credit donated
         public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
         public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
@@ -247,7 +248,7 @@ namespace SpaceMercs {
         public const double GrowthTempBase = 1.1; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempScale = 10; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
-        public const double MissionCashScale = 0.25d; // Scale cash reward for colony missions by this amount.
+        public const double MissionCashScale = 0.1d; // Scale cash reward for colony missions by this amount.
         public const double ColonyMissionGrowthBonus = 10d; // When completing an average colony mission, reduce the time to next growth of the current colony by this many days. Scale this by difficulty/length.
 
         // Race relations

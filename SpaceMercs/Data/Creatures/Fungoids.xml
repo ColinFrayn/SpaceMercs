@@ -57,7 +57,7 @@
   </CreatureType>
   <CreatureType Name="Fungoid Sporeball">
     <Scale>0.8</Scale>
-    <LevelRange>1,6</LevelRange>
+    <LevelRange>2,6</LevelRange>
     <Attack>7</Attack>
     <Defence>7</Defence>
     <Health>8</Health>

@@ -2,7 +2,7 @@
   <!--Enemy creatures -->
   <CreatureType Name="Smuggler">
     <Scale>0.85</Scale>
-    <LevelRange>1,12</LevelRange>
+    <LevelRange>1,9</LevelRange>
     <Attack>8</Attack>
     <Defence>8</Defence>
     <Armour>18</Armour>

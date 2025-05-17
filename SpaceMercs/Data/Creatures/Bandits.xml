@@ -4,8 +4,8 @@
     <Scale>0.9</Scale>
     <LevelRange>1,11</LevelRange>
     <Attack>9</Attack>
-    <Defence>8</Defence>
-    <Armour>18</Armour>
+    <Defence>10</Defence>
+    <Armour>16</Armour>
     <Health>11</Health>
     <Stamina>14</Stamina>
     <Frequency>2</Frequency>
@@ -22,7 +22,7 @@
     <LevelRange>1,12</LevelRange>
     <Attack>11</Attack>
     <Defence>10</Defence>
-    <Armour>20</Armour>
+    <Armour>18</Armour>
     <Health>12</Health>
     <Stamina>15</Stamina>
     <Frequency>3</Frequency>
@@ -37,10 +37,10 @@
     <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Mercenary">
-    <LevelRange>1,15</LevelRange>
+    <LevelRange>2,15</LevelRange>
     <Attack>12</Attack>
     <Defence>11</Defence>
-    <Armour>22</Armour>
+    <Armour>21</Armour>
     <Health>14</Health>
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
@@ -59,10 +59,10 @@
   </CreatureType>
   <CreatureType Name="Enforcer">
     <Scale>1.05</Scale>
-    <LevelRange>1,15</LevelRange>
+    <LevelRange>3,15</LevelRange>
     <Attack>14</Attack>
-    <Defence>12</Defence>
-    <Armour>24</Armour>
+    <Defence>11</Defence>
+    <Armour>20</Armour>
     <Health>16</Health>
     <Stamina>17</Stamina>
     <Interact/>
@@ -81,7 +81,7 @@
     <LevelRange>5,16</LevelRange>
     <Attack>18</Attack>
     <Defence>12</Defence>
-    <Armour>24</Armour>
+    <Armour>20</Armour>
     <Health>23</Health>
     <Stamina>17</Stamina>
     <Interact/>

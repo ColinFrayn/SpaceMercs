@@ -345,17 +345,15 @@ namespace SpaceMercs {
             Random rand = new Random(seed);
             ShipType tp = new ShipType(seed, dDiff);
 
-            tp.Attack = (int)(((1d + rand.NextDouble()) * dDiff ) / 6d);
+            tp.Attack = (int)((1d + rand.NextDouble()) * dDiff / 6d);
             tp.Armour = (int)dDiff;
-            int size = 1;
-            while (rand.NextDouble() > (1d + ((double)size / 20d) - (Math.Pow(dDiff,0.6) / 5d))) size++;
-            size = 2 + (int)((rand.NextDouble() + 2d) * (double)size * (isHulk ? 5d : 2.5d));
+            int size = (int)((rand.NextDouble() + 2d) * (double)(dDiff + 2) * (isHulk ? 4d : 1d));
 
             while (size > 0) {
                 int r = rand.Next(90 + size);
                 if (r < 50) { tp.Small++; size -= 2; }
-                else if (r < 80) { tp.Medium++; size -= 5; }
-                else { tp.Large++; size -= 10; }
+                else if (r < 80 && size >= 5) { tp.Medium++; size -= 5; }
+                else if (size >= 12) { tp.Large++; size -= 12; }
             }
             tp.Weapon = 1;
             if (dDiff > 3.0 && rand.NextDouble() * dDiff > 3) tp.Weapon++;
@@ -503,9 +501,9 @@ namespace SpaceMercs {
         // Get a string that describes the size of this ship
         public string SizeString() {
             double hull = MaxHull;
-            if (hull < 13.0) return "Tiny";
-            if (hull < 25.0) return "Small";
-            if (hull < 40.0) return "Medium";
+            if (hull < 11.0) return "Tiny";
+            if (hull < 21.0) return "Small";
+            if (hull < 34.0) return "Medium";
             if (hull < 70.0) return "Large";
             if (hull < 100.0) return "Huge";
             return "Enormous";

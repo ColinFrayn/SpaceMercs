@@ -1,6 +1,6 @@
 ﻿<Data>
   <CreatureType Name="Zombie">
-    <LevelRange>1,9</LevelRange>
+    <LevelRange>1,8</LevelRange>
     <Attack>8</Attack>
     <Defence>9</Defence>
     <Health>12</Health>

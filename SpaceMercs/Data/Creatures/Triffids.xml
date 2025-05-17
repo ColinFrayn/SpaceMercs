@@ -4,7 +4,7 @@
     <LevelRange>1,4</LevelRange>
     <Attack>8</Attack>
     <Defence>5</Defence>
-    <Health>10</Health>
+    <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>12</Armour>
     <Frequency>2</Frequency>

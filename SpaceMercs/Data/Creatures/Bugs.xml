@@ -6,7 +6,7 @@
     <Defence>5</Defence>
     <Health>7</Health>
     <Stamina>12</Stamina>
-    <Armour>8</Armour>
+    <Armour>10</Armour>
     <Frequency>4</Frequency>
     <Scavenge>
       <Item Amount="0.1">Chitin</Item>
@@ -19,9 +19,9 @@
     <LevelRange>1,5</LevelRange>
     <Attack>7</Attack>
     <Defence>6</Defence>
-    <Health>8</Health>
+    <Health>10</Health>
     <Stamina>14</Stamina>
-    <Armour>8</Armour>
+    <Armour>12</Armour>
     <Frequency>3</Frequency>
     <Scavenge>
       <Item Amount="0.2">Chitin</Item>
@@ -36,7 +36,7 @@
     <Defence>9</Defence>
     <Health>10</Health>
     <Stamina>14</Stamina>
-    <Armour>22</Armour>
+    <Armour>20</Armour>
     <Frequency>2</Frequency>
     <MovementCost>1.4</MovementCost>
     <Scavenge>

@@ -334,7 +334,8 @@ namespace SpaceMercs {
             }
             m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
-                m.Reward = Math.Round((rand.NextDouble() + (double)m.Size + 3d) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * Math.Pow(1.1, m.LevelCount - 1) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale, 2);
+                double reward = (1d + (double)(m.Size + 1d + rand.NextDouble()) * (double)(m.Size + 1d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * Math.Pow(1.1, m.LevelCount - 1) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale;
+                m.Reward = Math.Round(reward, 2);
                 if (m.Goal == MissionGoal.FindItem) m.Reward *= (2d + rand.NextDouble());
             }
             return m;
@@ -535,7 +536,7 @@ namespace SpaceMercs {
             return MissionExperience(diff, 1, 3, 0, false);
         }
         private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy) {
-            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * ((double)size * 2d + 8d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost));
+            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost) * Const.MissionExperienceScale);
         }
 
         // Utility
@@ -587,7 +588,7 @@ namespace SpaceMercs {
                     }
 
                     // Couldn't find enough variation of creatures
-                    if (countOk < 3) break;
+                    if (countOk < 2) break;
 
                     // If creatures are large then maybe don't choose this group for AbandonedCity missions because they can be cramped
                     if (Type == MissionType.AbandonedCity) {

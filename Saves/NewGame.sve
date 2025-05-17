@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>07/05/2150 01:59:35</Clock>
+<Clock>07/05/2150 02:00:35</Clock>
 <Map Seed="224758" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Ogrish">
 <Star ID="0">
@@ -21,6 +21,7 @@
 </Star>
 <Star ID="2">
 <Seed>4339389</Seed>
+<Name>Jiclet Beta</Name>
  <MapPos X="-8.29" Y="-14.44"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -36,9 +37,9 @@
  <LastGrowth>678158802704960000</LastGrowth>
  <NextGrowth>681642450704960000</NextGrowth>
 </Colony>
-<Radius>3563766</Radius>
-<ARot>56603</ARot>
-<Temp>206</Temp>
+<Radius>3,563,766</Radius>
+<ARot>56,603</ARot>
+<Temp>206.00</Temp>
 <Seed>2212245</Seed>
 <Orbit>2390933979488</Orbit>
 <TempBase>206.87484977985548</TempBase>
@@ -47,6 +48,7 @@
 </Star>
 <Star ID="3">
 <Seed>5953987</Seed>
+<Name>Izrop Epsilon</Name>
  <MapPos X="-11.87" Y="-6.4"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -59,9 +61,9 @@
  <LastGrowth>678158817704960000</LastGrowth>
  <NextGrowth>679180065704960000</NextGrowth>
 </Colony>
-<Radius>70837838</Radius>
-<ARot>1115636</ARot>
-<Temp>284</Temp>
+<Radius>70,837,838</Radius>
+<ARot>1,115,636</ARot>
+<Temp>284.00</Temp>
 <Seed>4312820</Seed>
 <Orbit>51982351202</Orbit>
 <TempBase>284.62091201821534</TempBase>
@@ -71,6 +73,7 @@
 </Star>
 <Star ID="4">
 <Seed>667973</Seed>
+<Name>Noshake Delta</Name>
  <MapPos X="-5.92" Y="-8.72"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -82,9 +85,9 @@
  <LastGrowth>678158793704960000</LastGrowth>
  <NextGrowth>679179177704960000</NextGrowth>
 </Colony>
-<Radius>5524529</Radius>
-<ARot>82104</ARot>
-<Temp>296</Temp>
+<Radius>5,524,529</Radius>
+<ARot>82,104</ARot>
+<Temp>296.00</Temp>
 <Seed>6728331</Seed>
 <Orbit>40857632628</Orbit>
 <TempBase>296.44848953618646</TempBase>
@@ -99,6 +102,7 @@
 </Star>
 <Star ID="5">
 <Seed>5362714</Seed>
+<Name>Uzlit Core</Name>
  <MapPos X="-10.81" Y="-8.7"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -107,9 +111,9 @@
 <Planet ID="2">
 <Type>Ice</Type>
 <PRot>11903769</PRot>
-<Radius>6108465</Radius>
-<ARot>83988</ARot>
-<Temp>263</Temp>
+<Radius>6,108,465</Radius>
+<ARot>83,988</ARot>
+<Temp>263.00</Temp>
 <Seed>5613507</Seed>
 <Orbit>396267540795</Orbit>
 <TempBase>263.8111352430337</TempBase>
@@ -129,6 +133,7 @@
 </Star>
 <Star ID="6">
 <Seed>5925472</Seed>
+<Name>Orlii</Name>
  <MapPos X="-7.55" Y="-6.29"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -140,9 +145,9 @@
  <LastGrowth>678158799704960000</LastGrowth>
  <NextGrowth>679644015704960000</NextGrowth>
 </Colony>
-<Radius>4436309</Radius>
-<ARot>67582</ARot>
-<Temp>310</Temp>
+<Radius>4,436,309</Radius>
+<ARot>67,582</ARot>
+<Temp>310.00</Temp>
 <Seed>6669431</Seed>
 <Orbit>31033047536</Orbit>
 <TempBase>310.49851255879537</TempBase>
@@ -173,9 +178,9 @@
  <SeedProgress>5.6425</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>6582612</Radius>
-<ARot>97761</ARot>
-<Temp>296</Temp>
+<Radius>6,582,612</Radius>
+<ARot>97,761</ARot>
+<Temp>296.00</Temp>
 <Seed>5778027</Seed>
 <Orbit>102349876605</Orbit>
 <Homeworld/>
@@ -190,9 +195,9 @@
  <NextGrowth>690926976000000000</NextGrowth>
  <SeedProgress>4.5140</SeedProgress>
 </Colony>
-<Radius>5473718</Radius>
-<ARot>68690</ARot>
-<Temp>277</Temp>
+<Radius>5,473,718</Radius>
+<ARot>68,690</ARot>
+<Temp>277.00</Temp>
 <Seed>527318</Seed>
 <Orbit>141670684708</Orbit>
 <TempBase>277.5216515865295</TempBase>
@@ -205,9 +210,9 @@
  <Owner>Ogrish</Owner>
  <NextGrowth>682143552000000000</NextGrowth>
 </Colony>
-<Radius>4965365</Radius>
-<ARot>73158</ARot>
-<Temp>194</Temp>
+<Radius>4,965,365</Radius>
+<ARot>73,158</ARot>
+<Temp>194.00</Temp>
 <Seed>4138017</Seed>
 <Orbit>273277772159</Orbit>
 <TempBase>194.5071156009846</TempBase>
@@ -216,6 +221,7 @@
 </Star>
 <Star ID="8">
 <Seed>3152240</Seed>
+<Name>SuFlaro</Name>
  <MapPos X="-9.43" Y="-5.63"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -229,9 +235,9 @@
  <LastGrowth>678158805704960000</LastGrowth>
  <NextGrowth>681410901704960000</NextGrowth>
 </Colony>
-<Radius>5801019</Radius>
-<ARot>79288</ARot>
-<Temp>204</Temp>
+<Radius>5,801,019</Radius>
+<ARot>79,288</ARot>
+<Temp>204.00</Temp>
 <Seed>1810218</Seed>
 <Orbit>143311669923</Orbit>
 <TempBase>204.44211832867344</TempBase>
@@ -245,6 +251,7 @@
 </Star>
 <Star ID="9">
 <Seed>1147183</Seed>
+<Name>ORhevo Alpha</Name>
  <MapPos X="-5.5" Y="-7.32"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -253,9 +260,9 @@
 <Planet ID="2">
 <Type>Desert</Type>
 <PRot>47004728</PRot>
-<Radius>6376381</Radius>
-<ARot>103151</ARot>
-<Temp>304</Temp>
+<Radius>6,376,381</Radius>
+<ARot>103,151</ARot>
+<Temp>304.00</Temp>
 <Seed>2664483</Seed>
 <Orbit>103514183059</Orbit>
 <TempBase>304.2108774050514</TempBase>
@@ -276,6 +283,7 @@
 </Star>
 <Star ID="10">
 <Seed>783558</Seed>
+<Name>Emraia Delta</Name>
  <MapPos X="-8.64" Y="-7.19"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -287,9 +295,9 @@
  <LastGrowth>678158796704960000</LastGrowth>
  <NextGrowth>680490732704960000</NextGrowth>
 </Colony>
-<Radius>54066102</Radius>
-<ARot>910920</ARot>
-<Temp>228</Temp>
+<Radius>54,066,102</Radius>
+<ARot>910,920</ARot>
+<Temp>228.00</Temp>
 <Seed>4739648</Seed>
 <Orbit>30529386425</Orbit>
 <TempBase>228.77004159012026</TempBase>
@@ -300,6 +308,7 @@
 </Star>
 <Star ID="11">
 <Seed>9958337</Seed>
+<Name>EFrim Core</Name>
  <MapPos X="-9.13" Y="-11.53"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(-1,-1)7</TradeRoute>
@@ -315,9 +324,9 @@
  <Owner>Ogrish</Owner>
  <NextGrowth>700339392000000000</NextGrowth>
 </Colony>
-<Radius>5559210</Radius>
-<ARot>82192</ARot>
-<Temp>327</Temp>
+<Radius>5,559,210</Radius>
+<ARot>82,192</ARot>
+<Temp>327.00</Temp>
 <Seed>4213907</Seed>
 <Orbit>83534434213</Orbit>
 <TempBase>327.2066098482601</TempBase>
@@ -327,6 +336,7 @@
 </Star>
 <Star ID="12">
 <Seed>5896267</Seed>
+<Name>JaJhopa Prime</Name>
  <MapPos X="-13.4" Y="-14.72"/>
  <Owner>Ogrish</Owner>
  <Planets>
@@ -342,9 +352,9 @@
  <LastGrowth>678158808704960000</LastGrowth>
  <NextGrowth>679994808704960000</NextGrowth>
 </Colony>
-<Radius>5961554</Radius>
-<ARot>91225</ARot>
-<Temp>312</Temp>
+<Radius>5,961,554</Radius>
+<ARot>91,225</ARot>
+<Temp>312.00</Temp>
 <Seed>6309101</Seed>
 <Orbit>263856308358</Orbit>
 <TempBase>312.20860504251755</TempBase>
@@ -354,6 +364,7 @@
 </Star>
 <Star ID="13">
 <Seed>9350944</Seed>
+<Name>Wrazlucki</Name>
  <MapPos X="-5.97" Y="-12.11"/>
  <Owner>Ogrish</Owner>
  <TradeRoute>(-1,-1)7</TradeRoute>
@@ -367,9 +378,9 @@
  <Owner>Ogrish</Owner>
  <NextGrowth>679186080000000000</NextGrowth>
 </Colony>
-<Radius>5717643</Radius>
-<ARot>76631</ARot>
-<Temp>271</Temp>
+<Radius>5,717,643</Radius>
+<ARot>76,631</ARot>
+<Temp>271.00</Temp>
 <Seed>753784</Seed>
 <Orbit>45379569725</Orbit>
 <TempBase>271.6930953912502</TempBase>
@@ -384,6 +395,7 @@
  <Sector X="0" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
 <Seed>6594458</Seed>
+<Name>NuYhan</Name>
  <MapPos X="1.74" Y="-7.55"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(0,-1)4</TradeRoute>
@@ -398,9 +410,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>684944640000000000</NextGrowth>
 </Colony>
-<Radius>56416778</Radius>
-<ARot>862201</ARot>
-<Temp>246</Temp>
+<Radius>56,416,778</Radius>
+<ARot>862,201</ARot>
+<Temp>246.00</Temp>
 <Seed>9993038</Seed>
 <Orbit>29819227835</Orbit>
 <TempBase>246.33387849573026</TempBase>
@@ -422,6 +434,7 @@
 </Star>
 <Star ID="1">
 <Seed>9319869</Seed>
+<Name>Usloo Beta</Name>
  <MapPos X="4.5" Y="-14.4"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -433,9 +446,9 @@
  <LastGrowth>678158814704960000</LastGrowth>
  <NextGrowth>681314142704960000</NextGrowth>
 </Colony>
-<Radius>55941629</Radius>
-<ARot>829150</ARot>
-<Temp>227</Temp>
+<Radius>55,941,629</Radius>
+<ARot>829,150</ARot>
+<Temp>227.00</Temp>
 <Seed>7101936</Seed>
 <Orbit>36223468320</Orbit>
 <TempBase>227.23933152784545</TempBase>
@@ -448,6 +461,7 @@
 </Star>
 <Star ID="2">
 <Seed>1234235</Seed>
+<Name>JloFhis Minor</Name>
  <MapPos X="-4.66" Y="-14.46"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -456,9 +470,9 @@
 <Planet ID="2">
 <Type>Gas</Type>
 <PRot>3697519</PRot>
-<Radius>76803225</Radius>
-<ARot>1069493</ARot>
-<Temp>336</Temp>
+<Radius>76,803,225</Radius>
+<ARot>1,069,493</ARot>
+<Temp>336.00</Temp>
 <Seed>8183156</Seed>
 <Orbit>341262291570</Orbit>
 <TempBase>336.5865723151443</TempBase>
@@ -475,6 +489,7 @@
 </Star>
 <Star ID="3">
 <Seed>6013155</Seed>
+<Name>IZhig Minor</Name>
  <MapPos X="2.35" Y="-13.5"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -490,9 +505,9 @@
  <LastGrowth>678158805704960000</LastGrowth>
  <NextGrowth>679315701704960000</NextGrowth>
 </Colony>
-<Radius>4738755</Radius>
-<ARot>76375</ARot>
-<Temp>280</Temp>
+<Radius>4,738,755</Radius>
+<ARot>76,375</ARot>
+<Temp>280.00</Temp>
 <Seed>5173864</Seed>
 <Orbit>279436585401</Orbit>
 <TempBase>280.463765317436</TempBase>
@@ -502,6 +517,7 @@
 </Star>
 <Star ID="4">
 <Seed>7232264</Seed>
+<Name>Saflis</Name>
  <MapPos X="3.65" Y="-9.7"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(0,-1)0</TradeRoute>
@@ -517,9 +533,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>680059584000000000</NextGrowth>
 </Colony>
-<Radius>6040867</Radius>
-<ARot>86853</ARot>
-<Temp>222</Temp>
+<Radius>6,040,867</Radius>
+<ARot>86,853</ARot>
+<Temp>222.00</Temp>
 <Seed>2058341</Seed>
 <Orbit>58321274415</Orbit>
 <TempBase>222.95432473259794</TempBase>
@@ -531,6 +547,7 @@
 </Star>
 <Star ID="5">
 <Seed>1693869</Seed>
+<Name>MuZlat Epsilon</Name>
  <MapPos X="-4.36" Y="-7.65"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -542,9 +559,9 @@
  <LastGrowth>678158793704960000</LastGrowth>
  <NextGrowth>679061673704960000</NextGrowth>
 </Colony>
-<Radius>5871972</Radius>
-<ARot>80346</ARot>
-<Temp>284</Temp>
+<Radius>5,871,972</Radius>
+<ARot>80,346</ARot>
+<Temp>284.00</Temp>
 <Seed>9215490</Seed>
 <Orbit>61345184722</Orbit>
 <TempBase>284.6044227654581</TempBase>
@@ -559,6 +576,7 @@
 </Star>
 <Star ID="6">
 <Seed>1540756</Seed>
+<Name>Hawhod Core</Name>
  <MapPos X="4.56" Y="-7.48"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -574,9 +592,9 @@
  <LastGrowth>678158796704960000</LastGrowth>
  <NextGrowth>681646764704960000</NextGrowth>
 </Colony>
-<Radius>5855884</Radius>
-<ARot>81888</ARot>
-<Temp>207</Temp>
+<Radius>5,855,884</Radius>
+<ARot>81,888</ARot>
+<Temp>207.00</Temp>
 <Seed>6959213</Seed>
 <Orbit>202686693652</Orbit>
 <TempBase>207.02339037107873</TempBase>
@@ -585,6 +603,7 @@
 </Star>
 <Star ID="7">
 <Seed>7373016</Seed>
+<Name>ZoClide Gamma</Name>
  <MapPos X="-3.12" Y="-6.23"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -600,9 +619,9 @@
  <LastGrowth>678158808704960000</LastGrowth>
  <NextGrowth>679224120704960000</NextGrowth>
 </Colony>
-<Radius>5961932</Radius>
-<ARot>98655</ARot>
-<Temp>283</Temp>
+<Radius>5,961,932</Radius>
+<ARot>98,655</ARot>
+<Temp>283.00</Temp>
 <Seed>5710827</Seed>
 <Orbit>305368604684</Orbit>
 <TempBase>283.3836940036647</TempBase>
@@ -614,6 +633,7 @@
 </Star>
 <Star ID="8">
 <Seed>2193649</Seed>
+<Name>HriBhur</Name>
  <MapPos X="-1.9" Y="-10.38"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(0,-1)12</TradeRoute>
@@ -627,9 +647,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>679206816000000000</NextGrowth>
 </Colony>
-<Radius>61582015</Radius>
-<ARot>969126</ARot>
-<Temp>289</Temp>
+<Radius>61,582,015</Radius>
+<ARot>969,126</ARot>
+<Temp>289.00</Temp>
 <Seed>4475838</Seed>
 <Orbit>98154577579</Orbit>
 <TempBase>289.4076744299908</TempBase>
@@ -638,6 +658,7 @@
 </Star>
 <Star ID="9">
 <Seed>443125</Seed>
+<Name>YiMleva Delta</Name>
  <MapPos X="3.17" Y="-7.73"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -650,9 +671,9 @@
  <LastGrowth>678158811704960000</LastGrowth>
  <NextGrowth>679129083704960000</NextGrowth>
 </Colony>
-<Radius>7366447</Radius>
-<ARot>104090</ARot>
-<Temp>279</Temp>
+<Radius>7,366,447</Radius>
+<ARot>104,090</ARot>
+<Temp>279.00</Temp>
 <Seed>8244667</Seed>
 <Orbit>65421057918</Orbit>
 <TempBase>279.88758674947275</TempBase>
@@ -667,6 +688,7 @@
 </Star>
 <Star ID="10">
 <Seed>1007451</Seed>
+<Name>SuTlum Alpha</Name>
  <MapPos X="3.3" Y="-10.82"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(0,-1)4</TradeRoute>
@@ -680,9 +702,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>678897504000000000</NextGrowth>
 </Colony>
-<Radius>7338139</Radius>
-<ARot>108228</ARot>
-<Temp>298</Temp>
+<Radius>7,338,139</Radius>
+<ARot>108,228</ARot>
+<Temp>298.00</Temp>
 <Seed>9660455</Seed>
 <Orbit>48437282849</Orbit>
 <TempBase>298.0646464050481</TempBase>
@@ -697,6 +719,7 @@
 </Star>
 <Star ID="11">
 <Seed>685363</Seed>
+<Name>CruKruoe Beta</Name>
  <MapPos X="4.25" Y="-11.63"/>
  <Owner>Insectoid</Owner>
  <Planets>
@@ -705,9 +728,9 @@
 <Planet ID="2">
 <Type>Rocky</Type>
 <PRot>54792380</PRot>
-<Radius>6062546</Radius>
-<ARot>84344</ARot>
-<Temp>330</Temp>
+<Radius>6,062,546</Radius>
+<ARot>84,344</ARot>
+<Temp>330.00</Temp>
 <Seed>7813661</Seed>
 <Orbit>75093451834</Orbit>
 <TempBase>330.9873674844092</TempBase>
@@ -743,9 +766,9 @@
  <SeedProgress>7.0652</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>7384747</Radius>
-<ARot>131608</ARot>
-<Temp>294</Temp>
+<Radius>7,384,747</Radius>
+<ARot>131,608</ARot>
+<Temp>294.00</Temp>
 <Seed>9048700</Seed>
 <Orbit>30312328988</Orbit>
 <Homeworld/>
@@ -766,9 +789,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>679802112000000000</NextGrowth>
 </Colony>
-<Radius>6305576</Radius>
-<ARot>94589</ARot>
-<Temp>251</Temp>
+<Radius>6,305,576</Radius>
+<ARot>94,589</ARot>
+<Temp>251.00</Temp>
 <Seed>9602698</Seed>
 <Orbit>59351980482</Orbit>
 <TempBase>251.87416213933304</TempBase>
@@ -778,6 +801,7 @@
 </Star>
 <Star ID="13">
 <Seed>2143150</Seed>
+<Name>YoRrele Delta</Name>
  <MapPos X="-2.14" Y="-7.38"/>
  <Owner>Insectoid</Owner>
  <TradeRoute>(0,-1)0</TradeRoute>
@@ -791,9 +815,9 @@
  <Owner>Insectoid</Owner>
  <NextGrowth>678928608000000000</NextGrowth>
 </Colony>
-<Radius>5258859</Radius>
-<ARot>79131</ARot>
-<Temp>300</Temp>
+<Radius>5,258,859</Radius>
+<ARot>79,131</ARot>
+<Temp>300.00</Temp>
 <Seed>7748453</Seed>
 <Orbit>31789260491</Orbit>
 <TempBase>300.3242667671225</TempBase>
@@ -816,6 +840,7 @@
 </Star>
 <Star ID="1">
 <Seed>1308349</Seed>
+<Name>TraLhik Epsilon</Name>
  <MapPos X="11.06" Y="-6.44"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -827,9 +852,9 @@
  <LastGrowth>678158799704960000</LastGrowth>
  <NextGrowth>682074447704960000</NextGrowth>
 </Colony>
-<Radius>71040529</Radius>
-<ARot>1169261</ARot>
-<Temp>196</Temp>
+<Radius>71,040,529</Radius>
+<ARot>1,169,261</ARot>
+<Temp>196.00</Temp>
 <Seed>4029497</Seed>
 <Orbit>113312734787</Orbit>
 <TempBase>196.90330936431488</TempBase>
@@ -841,6 +866,7 @@
 </Star>
 <Star ID="2">
 <Seed>6354387</Seed>
+<Name>Hikres Beta</Name>
  <MapPos X="7.5" Y="-10.27"/>
  <Owner>Grey</Owner>
  <TradeRoute>(1,-1)5</TradeRoute>
@@ -854,9 +880,9 @@
  <Owner>Grey</Owner>
  <NextGrowth>679894560000000000</NextGrowth>
 </Colony>
-<Radius>38841703</Radius>
-<ARot>497063</ARot>
-<Temp>314</Temp>
+<Radius>38,841,703</Radius>
+<ARot>497,063</ARot>
+<Temp>314.00</Temp>
 <Seed>5415152</Seed>
 <Orbit>75117457359</Orbit>
 <TempBase>314.2619759522377</TempBase>
@@ -869,9 +895,9 @@
  <Owner>Grey</Owner>
  <NextGrowth>682561728000000000</NextGrowth>
 </Colony>
-<Radius>5926930</Radius>
-<ARot>84172</ARot>
-<Temp>203</Temp>
+<Radius>5,926,930</Radius>
+<ARot>84,172</ARot>
+<Temp>203.00</Temp>
 <Seed>4209970</Seed>
 <Orbit>277766095948</Orbit>
 <TempBase>203.47179499620515</TempBase>
@@ -883,6 +909,7 @@
 </Star>
 <Star ID="3">
 <Seed>1934566</Seed>
+<Name>Mhaflaoa Prime</Name>
  <MapPos X="5.7" Y="-12.73"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -896,9 +923,9 @@
  <LastGrowth>678158796704960000</LastGrowth>
  <NextGrowth>680221164704960000</NextGrowth>
 </Colony>
-<Radius>53030238</Radius>
-<ARot>756850</ARot>
-<Temp>240</Temp>
+<Radius>53,030,238</Radius>
+<ARot>756,850</ARot>
+<Temp>240.00</Temp>
 <Seed>5431674</Seed>
 <Orbit>110181359077</Orbit>
 <TempBase>240.22654532059997</TempBase>
@@ -913,6 +940,7 @@
 </Star>
 <Star ID="5">
 <Seed>6076149</Seed>
+<Name>CoWlob</Name>
  <MapPos X="9.97" Y="-13.3"/>
  <Owner>Grey</Owner>
  <TradeRoute>(1,-1)2</TradeRoute>
@@ -929,9 +957,9 @@
  <Owner>Grey</Owner>
  <NextGrowth>678963168000000000</NextGrowth>
 </Colony>
-<Radius>56955903</Radius>
-<ARot>854594</ARot>
-<Temp>286</Temp>
+<Radius>56,955,903</Radius>
+<ARot>854,594</ARot>
+<Temp>286.00</Temp>
 <Seed>1610223</Seed>
 <Orbit>120159373469</Orbit>
 <TempBase>286.6714332448769</TempBase>
@@ -942,6 +970,7 @@
 </Star>
 <Star ID="6">
 <Seed>655614</Seed>
+<Name>Asrack Prime</Name>
  <MapPos X="10.46" Y="-8.1"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -953,9 +982,9 @@
  <LastGrowth>678158793704960000</LastGrowth>
  <NextGrowth>680579721704960000</NextGrowth>
 </Colony>
-<Radius>62927741</Radius>
-<ARot>926425</ARot>
-<Temp>327</Temp>
+<Radius>62,927,741</Radius>
+<ARot>926,425</ARot>
+<Temp>327.00</Temp>
 <Seed>7316540</Seed>
 <Orbit>32443539133</Orbit>
 <TempBase>327.780894556469</TempBase>
@@ -964,6 +993,7 @@
 </Star>
 <Star ID="7">
 <Seed>3508697</Seed>
+<Name>VaFlaki</Name>
  <MapPos X="13.31" Y="-13.57"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -978,9 +1008,9 @@
  <LastGrowth>678158802704960000</LastGrowth>
  <NextGrowth>679618098704960000</NextGrowth>
 </Colony>
-<Radius>7355573</Radius>
-<ARot>118664</ARot>
-<Temp>255</Temp>
+<Radius>7,355,573</Radius>
+<ARot>118,664</ARot>
+<Temp>255.00</Temp>
 <Seed>966855</Seed>
 <Orbit>262610103134</Orbit>
 <TempBase>255.5012887766072</TempBase>
@@ -1002,6 +1032,7 @@
 </Star>
 <Star ID="10">
 <Seed>4559906</Seed>
+<Name>Aghiii Gamma</Name>
  <MapPos X="7.6" Y="-14.08"/>
  <Owner>Grey</Owner>
  <Planets>
@@ -1013,9 +1044,9 @@
  <LastGrowth>678158805704960000</LastGrowth>
  <NextGrowth>679214613704960000</NextGrowth>
 </Colony>
-<Radius>6314006</Radius>
-<ARot>91089</ARot>
-<Temp>299</Temp>
+<Radius>6,314,006</Radius>
+<ARot>91,089</ARot>
+<Temp>299.00</Temp>
 <Seed>2579953</Seed>
 <Orbit>43157773859</Orbit>
 <TempBase>299.7725791785908</TempBase>
@@ -1024,6 +1055,7 @@
 </Star>
 <Star ID="11">
 <Seed>3347013</Seed>
+<Name>OVhum Core</Name>
  <MapPos X="8.06" Y="-12.99"/>
  <Owner>Grey</Owner>
  <TradeRoute>(1,-1)2</TradeRoute>
@@ -1043,9 +1075,9 @@
  <NextGrowth>684499680000000000</NextGrowth>
  <SeedProgress>4.0622</SeedProgress>
 </Colony>
-<Radius>7314616</Radius>
-<ARot>104430</ARot>
-<Temp>310</Temp>
+<Radius>7,314,616</Radius>
+<ARot>104,430</ARot>
+<Temp>310.00</Temp>
 <Seed>6602966</Seed>
 <Orbit>486038313501</Orbit>
 <TempBase>310.721877083372</TempBase>
@@ -1070,9 +1102,9 @@
  <Owner>Grey</Owner>
  <NextGrowth>679148064000000000</NextGrowth>
 </Colony>
-<Radius>7776015</Radius>
-<ARot>113152</ARot>
-<Temp>311</Temp>
+<Radius>7,776,015</Radius>
+<ARot>113,152</ARot>
+<Temp>311.00</Temp>
 <Seed>604601</Seed>
 <Orbit>114953222888</Orbit>
 <TempBase>311.027033446873</TempBase>
@@ -1087,9 +1119,9 @@
  <SeedProgress>8.1240</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>5382268</Radius>
-<ARot>60832</ARot>
-<Temp>286</Temp>
+<Radius>5,382,268</Radius>
+<ARot>60,832</ARot>
+<Temp>286.00</Temp>
 <Seed>193166</Seed>
 <Orbit>158864662422</Orbit>
 <Homeworld/>
@@ -1195,7 +1227,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="1"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
@@ -1229,7 +1261,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
 <Armour Type="Gauntlets" Material="Kevlar" Level="1"/>
@@ -1296,7 +1328,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
@@ -1493,31 +1525,22 @@
 <Weapon Type="Chainsword" Level="0" />
   </Inv>
   <Inv Count="48">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="15">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="2"/>
-  </Inv>
-  <Inv Count="24">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="10">
 <Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="15">
 <Armour Type="Military Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Steel" Level="2"/>
+  </Inv>
+  <Inv Count="24">
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="12">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
@@ -1565,10 +1588,10 @@
 <Armour Type="Powered Leg Plating" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Full Armour" Material="Steel" Level="0"/>
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Kevlar" Level="0"/>
+<Armour Type="Core Armour" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
@@ -1662,9 +1685,9 @@
   </Inv>
  </Inventory>
 </Colony>
-<Radius>7063577</Radius>
-<ARot>104204</ARot>
-<Temp>289</Temp>
+<Radius>7,063,577</Radius>
+<ARot>104,204</ARot>
+<Temp>289.00</Temp>
 <Seed>9711838</Seed>
 <Orbit>32189985483</Orbit>
 <TempBase>289.1685383934778</TempBase>
@@ -1695,7 +1718,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="1"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="1"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
@@ -1772,7 +1795,7 @@
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
 <Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Automatic Rifle" Level="1" />
@@ -1803,7 +1826,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
@@ -1841,7 +1864,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
@@ -1861,165 +1884,81 @@
  </Mercenaries>
  <Missions>
 <Mission>
- <Type>Surface</Type>
+ <Type>Caves</Type>
  <Goal>KillAll</Goal>
- <Enemy>Gremlins</Enemy>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>55.76</Reward>
+ <Reward>51.93</Reward>
  <Diff>5</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>436635309</Seed>
+ <Seed>622029929</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
  <Type>AbandonedCity</Type>
- <Goal>FindItem</Goal>
-<MissionItem Mass="3.54" Name="Monstrous Glowing Egg"></MissionItem>
+ <Goal>KillBoss</Goal>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>56.12</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1117077020</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="2093182615" Diff="4">
- <Name>Enemy Ship</Name>
- <Hull>20</Hull>
- <Shield>0</Shield>
- <Armour>Reinforced Plating</Armour>
- <Seed>98621</Seed>
- <Eqp ID="6" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="2" Active="True">Bunk Room</Eqp>
- <Eqp ID="4" Active="True">Slug Gun</Eqp>
- <Eqp ID="5" Active="True">Slug Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>40.06</Reward>
+ <Reward>37.01</Reward>
  <Diff>4</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>469282402</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Enemy>Ogres</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>67.77</Reward>
- <Diff>6</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1553742381</Seed>
+ <Seed>1672970608</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Mines</Type>
- <Goal>KillBoss</Goal>
- <Enemy>Fungoids</Enemy>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Name="delicate relic"></MissionItem>
+ <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>36.9</Reward>
- <Diff>4</Diff>
+ <Reward>59.55</Reward>
+ <Diff>5</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>2115375451</Seed>
+ <Seed>1839563656</Seed>
+ <Size>2</Size>
+ <Waves>5</Waves>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>53.36</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1686412526</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
- <Type>AbandonedCity</Type>
- <Goal>KillAll</Goal>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
  <Opponent>Human</Opponent>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>52.12</Reward>
+ <Reward>52.39</Reward>
  <Diff>5</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>325923542</Seed>
+ <Seed>13461536</Seed>
  <Size>2</Size>
 </Mission>
 <Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="823848935" Diff="5">
- <Name>Enemy Ship</Name>
- <Hull>12</Hull>
- <Shield>0</Shield>
- <Armour>Reinforced Plating</Armour>
- <Seed>121453</Seed>
- <Eqp ID="5" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="3" Active="True">Slug Gun</Eqp>
- <Eqp ID="4" Active="True">Chain Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>44.42</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>267618337</Seed>
-</Mission>
-<Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="2129233142" Diff="5">
- <Name>Enemy Ship</Name>
- <Hull>24</Hull>
- <Shield>0</Shield>
- <Armour>Metasteel Plating</Armour>
- <Seed>803867</Seed>
- <Eqp ID="6" Active="True">Thrusters</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="4" Active="True">Chain Gun</Eqp>
- <Eqp ID="5" Active="True">Slug Gun</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>55.69</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1590368079</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
- <Type>Surface</Type>
- <Goal>KillAll</Goal>
- <Opponent>Human</Opponent>
+ <Type>Caves</Type>
+ <Goal>Gather</Goal>
+<MissionItem Mass="0.80" Name="Rare Statue" Level="5"></MissionItem>
  <Enemy>Bandits</Enemy>
  <TimeCost>0</TimeCost>
- <Reward>61.09</Reward>
+ <Reward>32.55</Reward>
  <Diff>5</Diff>
  <LevelCount>1</LevelCount>
  <CurrentLevel>0</CurrentLevel>
- <Seed>206052798</Seed>
- <Size>3</Size>
-</Mission>
-<Mission>
- <Type>AbandonedCity</Type>
- <Goal>KillBoss</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>51.26</Reward>
- <Diff>5</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>49909690</Seed>
- <Size>2</Size>
+ <Seed>1379581687</Seed>
 </Mission>
  </Missions>
  <Inventory>
@@ -2081,25 +2020,16 @@
 <Weapon Type="Chainsword" Level="3" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="2"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="3">
 <Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="2"/>
+  </Inv>
+  <Inv Count="5">
 <Armour Type="Military Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
@@ -2132,7 +2062,7 @@
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Steel" Level="0"/>
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
@@ -2241,9 +2171,9 @@
   </Inv>
  </Inventory>
 </Colony>
-<Radius>4426078</Radius>
-<ARot>55891</ARot>
-<Temp>242</Temp>
+<Radius>4,426,078</Radius>
+<ARot>55,891</ARot>
+<Temp>242.00</Temp>
 <Seed>871273</Seed>
 <Orbit>62127511068</Orbit>
 <TempBase>242.45002305487094</TempBase>
@@ -2265,9 +2195,9 @@
 <Planet ID="1">
 <Type>Desert</Type>
 <PRot>51734000</PRot>
-<Radius>6563876</Radius>
-<ARot>82629</ARot>
-<Temp>296</Temp>
+<Radius>6,563,876</Radius>
+<ARot>82,629</ARot>
+<Temp>296.00</Temp>
 <Seed>139994</Seed>
 <Orbit>92681747841</Orbit>
 <TempBase>296.44796432700196</TempBase>
@@ -2286,9 +2216,9 @@
  <Owner>Human</Owner>
  <NextGrowth>679570560000000000</NextGrowth>
 </Colony>
-<Radius>69003277</Radius>
-<ARot>935724</ARot>
-<Temp>241</Temp>
+<Radius>69,003,277</Radius>
+<ARot>935,724</ARot>
+<Temp>241.00</Temp>
 <Seed>7127314</Seed>
 <Orbit>127050281215</Orbit>
 <TempBase>241.5147550237713</TempBase>
@@ -2300,9 +2230,9 @@
  <Owner>Human</Owner>
  <NextGrowth>679353696000000000</NextGrowth>
 </Colony>
-<Radius>6688574</Radius>
-<ARot>87037</ARot>
-<Temp>255</Temp>
+<Radius>6,688,574</Radius>
+<ARot>87,037</ARot>
+<Temp>255.00</Temp>
 <Seed>411636</Seed>
 <Orbit>177193244485</Orbit>
 <TempBase>255.44584160972192</TempBase>
@@ -2373,7 +2303,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Automatic Rifle" Level="0" />
@@ -2961,7 +2891,7 @@
 <Weapon Type="Automatic Rifle" Level="1" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="4">
 <Weapon Type="Heavy Rifle" Level="0" />
@@ -3006,7 +2936,7 @@
 <Weapon Type="Shortblade" Level="1" />
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="3"/>
+<Armour Type="Military Helmet" Material="Steel" Level="3"/>
   </Inv>
   <Inv Count="3">
 <Weapon Type="Heavy Rifle" Level="2" />
@@ -3036,16 +2966,16 @@
 <Weapon Type="Chainsword" Level="2" />
   </Inv>
   <Inv Count="11">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Kevlar" Level="3"/>
   </Inv>
   <Inv Count="2">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Uranium"/>
@@ -3054,34 +2984,25 @@
 <Weapon Type="Sniper Rifle" Level="2" />
   </Inv>
   <Inv Count="30">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Kevlar" Level="2"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="0"/>
+<Armour Type="Military Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="1"/>
+<Armour Type="Military Helmet" Material="Composite" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="2"/>
+<Armour Type="Military Helmet" Material="Composite" Level="2"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Composite" Level="3"/>
-  </Inv>
-  <Inv Count="4">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="7">
-<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="5">
-<Armour Type="Military Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="1"/>
@@ -3089,14 +3010,8 @@
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Steel" Level="2"/>
   </Inv>
-  <Inv Count="31">
-<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
   <Inv Count="17">
 <Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Kevlar" Level="2"/>
@@ -3104,14 +3019,8 @@
   <Inv Count="1">
 <Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Composite" Level="3"/>
-  </Inv>
   <Inv Count="2">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="2"/>
@@ -3142,9 +3051,6 @@
   </Inv>
   <Inv Count="13">
 <Armour Type="Arm Plating" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="37">
-<Armour Type="Helmet" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="60">
 <Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
@@ -3222,19 +3128,19 @@
 <Armour Type="Powered Leg Plating" Material="Composite" Level="3"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Steel" Level="0"/>
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Steel" Level="2"/>
+<Armour Type="Core Armour" Material="Steel" Level="2"/>
   </Inv>
   <Inv Count="4">
-<Armour Type="Full Armour" Material="Kevlar" Level="0"/>
+<Armour Type="Core Armour" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Kevlar" Level="2"/>
@@ -3279,7 +3185,7 @@
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="2"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="2"/>
   </Inv>
   <Inv Count="6">
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
@@ -3307,12 +3213,6 @@
   </Inv>
   <Inv Count="2">
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Military Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="3">
 <Armour Type="Gauntlets" Material="Steel" Level="3"/>
@@ -3402,7 +3302,7 @@
 <Material Type="Industrial Chemicals"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Carbon Fibre" Level="3"/>
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="3"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Carbon Fibre" Level="1"/>
@@ -3410,9 +3310,9 @@
  </Inventory>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>5268555</Radius>
-<ARot>77888</ARot>
-<Temp>301</Temp>
+<Radius>5,268,555</Radius>
+<ARot>77,888</ARot>
+<Temp>301.00</Temp>
 <Seed>5505582</Seed>
 <Orbit>89516244806</Orbit>
 <Homeworld/>
@@ -3437,7 +3337,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
  </EquippedArmour>
@@ -3609,22 +3509,16 @@
 <Weapon Type="Chainsword" Level="0" />
   </Inv>
   <Inv Count="8">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
-  </Inv>
-  <Inv Count="3">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="2">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
 <Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
+  </Inv>
+  <Inv Count="3">
 <Armour Type="Military Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Steel" Level="1"/>
@@ -3633,7 +3527,7 @@
 <Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Full Armour" Material="Steel" Level="0"/>
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
@@ -3735,7 +3629,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
@@ -3766,7 +3660,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
  </EquippedArmour>
@@ -3796,7 +3690,7 @@
  </Inventory>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Kevlar" Level="0"/>
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
 <Armour Type="Powered Arm Plating" Material="Kevlar" Level="0"/>
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
@@ -3994,7 +3888,7 @@
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="1"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Weapon Type="Flame Thrower" Level="0" />
@@ -4021,22 +3915,19 @@
 <Weapon Type="Chainsword" Level="0" />
   </Inv>
   <Inv Count="6">
-<Armour Type="Helmet" Material="Carbon Fibre" Level="0"/>
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="5">
-<Armour Type="Helmet" Material="Steel" Level="0"/>
+<Armour Type="Military Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Helmet" Material="Steel" Level="1"/>
-  </Inv>
-  <Inv Count="1">
 <Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
@@ -4126,7 +4017,7 @@
 <Material Type="Electronic Components"/>
   </Inv>
   <Inv Count="1">
-<Armour Type="Helmet" Material="Kevlar" Level="2"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="2"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Crystals"/>
@@ -4143,9 +4034,9 @@
  </Inventory>
 </Colony>
 <Name>IceWorld</Name>
-<Radius>5443924</Radius>
-<ARot>79141</ARot>
-<Temp>232</Temp>
+<Radius>5,443,924</Radius>
+<ARot>79,141</ARot>
+<Temp>232.00</Temp>
 <Seed>7725924</Seed>
 <Orbit>173089645476</Orbit>
 <TempBase>232.1204329910854</TempBase>
@@ -4232,9 +4123,9 @@
 <Planet ID="5">
 <Type>Gas</Type>
 <PRot>6344735</PRot>
-<Radius>54155312</Radius>
-<ARot>878511</ARot>
-<Temp>155</Temp>
+<Radius>54,155,312</Radius>
+<ARot>878,511</ARot>
+<Temp>155.00</Temp>
 <Seed>2954635</Seed>
 <Orbit>237949210535</Orbit>
 <TempBase>155.76487139511158</TempBase>
@@ -4298,9 +4189,9 @@
 <Planet ID="4">
 <Type>Gas</Type>
 <PRot>6527208</PRot>
-<Radius>63297755</Radius>
-<ARot>1065619</ARot>
-<Temp>280</Temp>
+<Radius>63,297,755</Radius>
+<ARot>1,065,619</ARot>
+<Temp>280.00</Temp>
 <Seed>5429427</Seed>
 <Orbit>209241714311</Orbit>
 <TempBase>280.02714923925805</TempBase>
@@ -4327,9 +4218,9 @@
  <SeedProgress>10.3097</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>7312766</Radius>
-<ARot>107940</ARot>
-<Temp>284</Temp>
+<Radius>7,312,766</Radius>
+<ARot>107,940</ARot>
+<Temp>284.00</Temp>
 <Seed>6446194</Seed>
 <Orbit>285878302633</Orbit>
 <Homeworld/>
@@ -4353,6 +4244,7 @@
 </Star>
 <Star ID="2">
 <Seed>8066185</Seed>
+<Name>RhoDroto Major</Name>
  <MapPos X="12.48" Y="-1.28"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(1,0)0</TradeRoute>
@@ -4368,9 +4260,9 @@
  <Owner>Elithiri</Owner>
  <NextGrowth>678884544000000000</NextGrowth>
 </Colony>
-<Radius>74750016</Radius>
-<ARot>1332825</ARot>
-<Temp>277</Temp>
+<Radius>74,750,016</Radius>
+<ARot>1,332,825</ARot>
+<Temp>277.00</Temp>
 <Seed>1192644</Seed>
 <Orbit>146665851242</Orbit>
 <TempBase>277.5068925283489</TempBase>
@@ -4382,9 +4274,9 @@
  <Owner>Elithiri</Owner>
  <NextGrowth>679288032000000000</NextGrowth>
 </Colony>
-<Radius>5026503</Radius>
-<ARot>62353</ARot>
-<Temp>257</Temp>
+<Radius>5,026,503</Radius>
+<ARot>62,353</ARot>
+<Temp>257.00</Temp>
 <Seed>6468975</Seed>
 <Orbit>207591617840</Orbit>
 <TempBase>257.775509641918</TempBase>
@@ -4396,9 +4288,9 @@
  <Owner>Elithiri</Owner>
  <NextGrowth>679526496000000000</NextGrowth>
 </Colony>
-<Radius>6015771</Radius>
-<ARot>71976</ARot>
-<Temp>235</Temp>
+<Radius>6,015,771</Radius>
+<ARot>71,976</ARot>
+<Temp>235.00</Temp>
 <Seed>7706791</Seed>
 <Orbit>291520088125</Orbit>
 <TempBase>235.70657968479787</TempBase>
@@ -4407,6 +4299,7 @@
 </Star>
 <Star ID="3">
 <Seed>8321892</Seed>
+<Name>WroJhubo Prime</Name>
  <MapPos X="10.62" Y="1.71"/>
  <Owner>Elithiri</Owner>
  <TradeRoute>(1,0)0</TradeRoute>
@@ -4421,9 +4314,9 @@
  <Owner>Elithiri</Owner>
  <NextGrowth>679559328000000000</NextGrowth>
 </Colony>
-<Radius>57972535</Radius>
-<ARot>848067</ARot>
-<Temp>248</Temp>
+<Radius>57,972,535</Radius>
+<ARot>848,067</ARot>
+<Temp>248.00</Temp>
 <Seed>7251340</Seed>
 <Orbit>118037299721</Orbit>
 <TempBase>248.57664852583636</TempBase>
@@ -4438,9 +4331,9 @@
  <Owner>Elithiri</Owner>
  <NextGrowth>683774784000000000</NextGrowth>
 </Colony>
-<Radius>5489866</Radius>
-<ARot>86672</ARot>
-<Temp>168</Temp>
+<Radius>5,489,866</Radius>
+<ARot>86,672</ARot>
+<Temp>168.00</Temp>
 <Seed>831645</Seed>
 <Orbit>463085348967</Orbit>
 <TempBase>168.95171958028973</TempBase>
@@ -4465,6 +4358,7 @@
 </Star>
 <Star ID="8">
 <Seed>5002813</Seed>
+<Name>HoWhome</Name>
  <MapPos X="7.94" Y="1.2"/>
  <Owner>Elithiri</Owner>
  <Planets>
@@ -4479,9 +4373,9 @@
  <LastGrowth>678158793704960000</LastGrowth>
  <NextGrowth>680184009704960000</NextGrowth>
 </Colony>
-<Radius>71075854</Radius>
-<ARot>1004708</ARot>
-<Temp>244</Temp>
+<Radius>71,075,854</Radius>
+<ARot>1,004,708</ARot>
+<Temp>244.00</Temp>
 <Seed>7774595</Seed>
 <Orbit>197444344396</Orbit>
 <TempBase>244.15200969103844</TempBase>
@@ -4519,6 +4413,7 @@
 </Star>
 <Star ID="1">
 <Seed>6352437</Seed>
+<Name>CeJham Minor</Name>
  <MapPos X="-7.54" Y="5.82"/>
  <Owner>Ursalon</Owner>
  <Planets>
@@ -4531,9 +4426,9 @@
  <LastGrowth>678158799704960000</LastGrowth>
  <NextGrowth>678964911704960000</NextGrowth>
 </Colony>
-<Radius>61336764</Radius>
-<ARot>822237</ARot>
-<Temp>292</Temp>
+<Radius>61,336,764</Radius>
+<ARot>822,237</ARot>
+<Temp>292.00</Temp>
 <Seed>9242915</Seed>
 <Orbit>49883519158</Orbit>
 <TempBase>292.6964692869846</TempBase>
@@ -4563,9 +4458,9 @@
  <SeedProgress>9.0266</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>5169539</Radius>
-<ARot>53695</ARot>
-<Temp>289</Temp>
+<Radius>5,169,539</Radius>
+<ARot>53,695</ARot>
+<Temp>289.00</Temp>
 <Seed>7468627</Seed>
 <Orbit>96577666050</Orbit>
 <Homeworld/>
@@ -4581,6 +4476,7 @@
 </Star>
 <Star ID="3">
 <Seed>705988</Seed>
+<Name>VoYrome Minor</Name>
  <MapPos X="-9.26" Y="7.78"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(-1,1)2</TradeRoute>
@@ -4590,9 +4486,9 @@
 <Planet ID="1">
 <Type>Gas</Type>
 <PRot>21197385</PRot>
-<Radius>86556151</Radius>
-<ARot>1268253</ARot>
-<Temp>311</Temp>
+<Radius>86,556,151</Radius>
+<ARot>1,268,253</ARot>
+<Temp>311.00</Temp>
 <Seed>7204786</Seed>
 <Orbit>59317280105</Orbit>
 <TempBase>311.91365873438747</TempBase>
@@ -4612,9 +4508,9 @@
  <Owner>Ursalon</Owner>
  <NextGrowth>681007392000000000</NextGrowth>
 </Colony>
-<Radius>7258405</Radius>
-<ARot>104680</ARot>
-<Temp>274</Temp>
+<Radius>7,258,405</Radius>
+<ARot>104,680</ARot>
+<Temp>274.00</Temp>
 <Seed>9236290</Seed>
 <Orbit>83364126088</Orbit>
 <TempBase>274.71291847489204</TempBase>
@@ -4634,9 +4530,9 @@
  <Owner>Ursalon</Owner>
  <NextGrowth>681364224000000000</NextGrowth>
 </Colony>
-<Radius>5130102</Radius>
-<ARot>74004</ARot>
-<Temp>263</Temp>
+<Radius>5,130,102</Radius>
+<ARot>74,004</ARot>
+<Temp>263.00</Temp>
 <Seed>5578441</Seed>
 <Orbit>113954899782</Orbit>
 <TempBase>263.33674839487315</TempBase>
@@ -4654,6 +4550,7 @@
 </Star>
 <Star ID="5">
 <Seed>9475591</Seed>
+<Name>PriYrut Major</Name>
  <MapPos X="-7.65" Y="9.55"/>
  <Owner>Ursalon</Owner>
  <Planets>
@@ -4662,9 +4559,9 @@
 <Planet ID="2">
 <Type>Gas</Type>
 <PRot>14811170</PRot>
-<Radius>34971663</Radius>
-<ARot>549727</ARot>
-<Temp>293</Temp>
+<Radius>34,971,663</Radius>
+<ARot>549,727</ARot>
+<Temp>293.00</Temp>
 <Seed>7508059</Seed>
 <Orbit>135746013327</Orbit>
 <TempBase>293.7216770485468</TempBase>
@@ -4693,15 +4590,16 @@
 </Star>
 <Star ID="9">
 <Seed>7927326</Seed>
+<Name>WeJreo Delta</Name>
  <MapPos X="-11.95" Y="6.7"/>
  <Owner>Ursalon</Owner>
  <Planets>
 <Planet ID="0">
 <Type>Gas</Type>
 <PRot>48518167</PRot>
-<Radius>66428642</Radius>
-<ARot>934741</ARot>
-<Temp>274</Temp>
+<Radius>66,428,642</Radius>
+<ARot>934,741</ARot>
+<Temp>274.00</Temp>
 <Seed>2513073</Seed>
 <Orbit>28127184756</Orbit>
 <TempBase>274.51043790503684</TempBase>
@@ -4727,6 +4625,7 @@
 </Star>
 <Star ID="11">
 <Seed>1227283</Seed>
+<Name>MiMlaka Prime</Name>
  <MapPos X="-12.54" Y="9.44"/>
  <Owner>Ursalon</Owner>
  <TradeRoute>(-1,1)2</TradeRoute>
@@ -4740,9 +4639,9 @@
  <Owner>Ursalon</Owner>
  <NextGrowth>679307040000000000</NextGrowth>
 </Colony>
-<Radius>6477190</Radius>
-<ARot>94477</ARot>
-<Temp>250</Temp>
+<Radius>6,477,190</Radius>
+<ARot>94,477</ARot>
+<Temp>250.00</Temp>
 <Seed>9791897</Seed>
 <Orbit>68131475965</Orbit>
 <TempBase>250.7853582823046</TempBase>
@@ -4761,9 +4660,9 @@
  <Owner>Ursalon</Owner>
  <NextGrowth>680553792000000000</NextGrowth>
 </Colony>
-<Radius>6916437</Radius>
-<ARot>107468</ARot>
-<Temp>208</Temp>
+<Radius>6,916,437</Radius>
+<ARot>107,468</ARot>
+<Temp>208.00</Temp>
 <Seed>4807636</Seed>
 <Orbit>135704609682</Orbit>
 <TempBase>208.9818959461225</TempBase>
@@ -4785,6 +4684,7 @@
  <Sector X="1" Y="1" Inhabitant="Gokan">
 <Star ID="0">
 <Seed>7440559</Seed>
+<Name>Ehrod Prime</Name>
  <MapPos X="14.24" Y="8.7"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -4796,9 +4696,9 @@
  <LastGrowth>678158820704960000</LastGrowth>
  <NextGrowth>679364100704960000</NextGrowth>
 </Colony>
-<Radius>6702054</Radius>
-<ARot>84277</ARot>
-<Temp>260</Temp>
+<Radius>6,702,054</Radius>
+<ARot>84,277</ARot>
+<Temp>260.00</Temp>
 <Seed>2763151</Seed>
 <Orbit>104365155043</Orbit>
 <TempBase>260.7627821912371</TempBase>
@@ -4808,6 +4708,7 @@
 </Star>
 <Star ID="1">
 <Seed>3781815</Seed>
+<Name>Tlollor Delta</Name>
  <MapPos X="12.34" Y="14.72"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -4820,9 +4721,9 @@
  <LastGrowth>678158796704960000</LastGrowth>
  <NextGrowth>679054764704960000</NextGrowth>
 </Colony>
-<Radius>6179226</Radius>
-<ARot>74830</ARot>
-<Temp>286</Temp>
+<Radius>6,179,226</Radius>
+<ARot>74,830</ARot>
+<Temp>286.00</Temp>
 <Seed>7489642</Seed>
 <Orbit>48929505177</Orbit>
 <TempBase>286.790894721078</TempBase>
@@ -4833,6 +4734,7 @@
 </Star>
 <Star ID="2">
 <Seed>3059871</Seed>
+<Name>Yedrucko</Name>
  <MapPos X="7.52" Y="14.17"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -4848,9 +4750,9 @@
  <LastGrowth>678158793704960000</LastGrowth>
  <NextGrowth>679000329704960000</NextGrowth>
 </Colony>
-<Radius>6773505</Radius>
-<ARot>96339</ARot>
-<Temp>278</Temp>
+<Radius>6,773,505</Radius>
+<ARot>96,339</ARot>
+<Temp>278.00</Temp>
 <Seed>9975035</Seed>
 <Orbit>184991727115</Orbit>
 <TempBase>278.4009627407102</TempBase>
@@ -4863,6 +4765,7 @@
 </Star>
 <Star ID="3">
 <Seed>2341801</Seed>
+<Name>ViJrit Delta</Name>
  <MapPos X="6.76" Y="12.5"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,1)5</TradeRoute>
@@ -4878,9 +4781,9 @@
  <Owner>Gokan</Owner>
  <NextGrowth>678995136000000000</NextGrowth>
 </Colony>
-<Radius>79179741</Radius>
-<ARot>1020209</ARot>
-<Temp>275</Temp>
+<Radius>79,179,741</Radius>
+<ARot>1,020,209</ARot>
+<Temp>275.00</Temp>
 <Seed>5284963</Seed>
 <Orbit>135570603809</Orbit>
 <TempBase>275.48760590005816</TempBase>
@@ -4888,9 +4791,9 @@
 <Planet ID="4">
 <Type>Volcanic</Type>
 <PRot>27777592</PRot>
-<Radius>5251401</Radius>
-<ARot>71927</ARot>
-<Temp>274</Temp>
+<Radius>5,251,401</Radius>
+<ARot>71,927</ARot>
+<Temp>274.00</Temp>
 <Seed>4783742</Seed>
 <Orbit>189262655951</Orbit>
 <TempBase>274.4869775622148</TempBase>
@@ -4914,15 +4817,16 @@
 </Star>
 <Star ID="4">
 <Seed>2259859</Seed>
+<Name>Imlet Major</Name>
  <MapPos X="6.45" Y="10.67"/>
  <Owner>Gokan</Owner>
  <Planets>
 <Planet ID="0">
 <Type>Gas</Type>
 <PRot>11661101</PRot>
-<Radius>62601390</Radius>
-<ARot>941206</ARot>
-<Temp>305</Temp>
+<Radius>62,601,390</Radius>
+<ARot>941,206</ARot>
+<Temp>305.00</Temp>
 <Seed>4858310</Seed>
 <Orbit>125707466001</Orbit>
 <TempBase>305.22490511616553</TempBase>
@@ -4940,6 +4844,7 @@
 </Star>
 <Star ID="5">
 <Seed>6337458</Seed>
+<Name>UFleke</Name>
  <MapPos X="9.79" Y="13.74"/>
  <Owner>Gokan</Owner>
  <TradeRoute>(1,1)3</TradeRoute>
@@ -4954,9 +4859,9 @@
  <Owner>Gokan</Owner>
  <NextGrowth>684343296000000000</NextGrowth>
 </Colony>
-<Radius>5399827</Radius>
-<ARot>81453</ARot>
-<Temp>352</Temp>
+<Radius>5,399,827</Radius>
+<ARot>81,453</ARot>
+<Temp>352.00</Temp>
 <Seed>2050277</Seed>
 <Orbit>128513564366</Orbit>
 <TempBase>352.13860997171645</TempBase>
@@ -4969,9 +4874,9 @@
  <Owner>Gokan</Owner>
  <NextGrowth>682458048000000000</NextGrowth>
 </Colony>
-<Radius>73537479</Radius>
-<ARot>1075777</ARot>
-<Temp>252</Temp>
+<Radius>73,537,479</Radius>
+<ARot>1,075,777</ARot>
+<Temp>252.00</Temp>
 <Seed>4086125</Seed>
 <Orbit>183808632679</Orbit>
 <TempBase>252.23372607766328</TempBase>
@@ -4984,9 +4889,9 @@
  <Owner>Gokan</Owner>
  <NextGrowth>680300640000000000</NextGrowth>
 </Colony>
-<Radius>6403965</Radius>
-<ARot>83843</ARot>
-<Temp>218</Temp>
+<Radius>6,403,965</Radius>
+<ARot>83,843</ARot>
+<Temp>218.00</Temp>
 <Seed>3703224</Seed>
 <Orbit>361606390632</Orbit>
 <TempBase>218.2805080767641</TempBase>
@@ -5012,9 +4917,9 @@
  <Owner>Gokan</Owner>
  <NextGrowth>680481216000000000</NextGrowth>
 </Colony>
-<Radius>56635079</Radius>
-<ARot>920647</ARot>
-<Temp>298</Temp>
+<Radius>56,635,079</Radius>
+<ARot>920,647</ARot>
+<Temp>298.00</Temp>
 <Seed>4868656</Seed>
 <Orbit>58644735813</Orbit>
 <TempBase>298.9981042142981</TempBase>
@@ -5029,9 +4934,9 @@
  <SeedProgress>6.2508</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
-<Radius>5040391</Radius>
-<ARot>63513</ARot>
-<Temp>280</Temp>
+<Radius>5,040,391</Radius>
+<ARot>63,513</ARot>
+<Temp>280.00</Temp>
 <Seed>3435018</Seed>
 <Orbit>81216895205</Orbit>
 <Homeworld/>
@@ -5047,6 +4952,7 @@
 </Star>
 <Star ID="7">
 <Seed>9520866</Seed>
+<Name>ACrip Alpha</Name>
  <MapPos X="5.22" Y="13.41"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5060,9 +4966,9 @@
  <LastGrowth>678158808704960000</LastGrowth>
  <NextGrowth>689021016704960000</NextGrowth>
 </Colony>
-<Radius>6465698</Radius>
-<ARot>78300</ARot>
-<Temp>361</Temp>
+<Radius>6,465,698</Radius>
+<ARot>78,300</ARot>
+<Temp>361.00</Temp>
 <Seed>4740035</Seed>
 <Orbit>85785883295</Orbit>
 <TempBase>361.85500140594905</TempBase>
@@ -5071,6 +4977,7 @@
 </Star>
 <Star ID="8">
 <Seed>8924229</Seed>
+<Name>Tasruck Core</Name>
  <MapPos X="12.8" Y="9.95"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5085,9 +4992,9 @@
  <LastGrowth>678158805704960000</LastGrowth>
  <NextGrowth>679113525704960000</NextGrowth>
 </Colony>
-<Radius>5801978</Radius>
-<ARot>83371</ARot>
-<Temp>292</Temp>
+<Radius>5,801,978</Radius>
+<ARot>83,371</ARot>
+<Temp>292.00</Temp>
 <Seed>4802900</Seed>
 <Orbit>132713622976</Orbit>
 <TempBase>292.8848470612199</TempBase>
@@ -5100,6 +5007,7 @@
 </Star>
 <Star ID="9">
 <Seed>1332225</Seed>
+<Name>Lroghipo Epsilon</Name>
  <MapPos X="8.49" Y="8.42"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5111,9 +5019,9 @@
  <LastGrowth>678158823704960000</LastGrowth>
  <NextGrowth>680258343704960000</NextGrowth>
 </Colony>
-<Radius>5727021</Radius>
-<ARot>76564</ARot>
-<Temp>314</Temp>
+<Radius>5,727,021</Radius>
+<ARot>76,564</ARot>
+<Temp>314.00</Temp>
 <Seed>5663603</Seed>
 <Orbit>45818348774</Orbit>
 <TempBase>314.67200748080137</TempBase>
@@ -5124,6 +5032,7 @@
 </Star>
 <Star ID="10">
 <Seed>95006</Seed>
+<Name>EYlaz</Name>
  <MapPos X="12.65" Y="7.01"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5137,9 +5046,9 @@
  <LastGrowth>678158817704960000</LastGrowth>
  <NextGrowth>680824257704960000</NextGrowth>
 </Colony>
-<Radius>7280208</Radius>
-<ARot>115152</ARot>
-<Temp>234</Temp>
+<Radius>7,280,208</Radius>
+<ARot>115,152</ARot>
+<Temp>234.00</Temp>
 <Seed>939064</Seed>
 <Orbit>350459411054</Orbit>
 <TempBase>234.27748229309645</TempBase>
@@ -5150,6 +5059,7 @@
 </Star>
 <Star ID="11">
 <Seed>6690575</Seed>
+<Name>Criwrucka Delta</Name>
  <MapPos X="9.78" Y="8.61"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5161,9 +5071,9 @@
  <LastGrowth>678158814704960000</LastGrowth>
  <NextGrowth>681584574704960000</NextGrowth>
 </Colony>
-<Radius>5663495</Radius>
-<ARot>84878</ARot>
-<Temp>328</Temp>
+<Radius>5,663,495</Radius>
+<ARot>84,878</ARot>
+<Temp>328.00</Temp>
 <Seed>4934629</Seed>
 <Orbit>65029156077</Orbit>
 <TempBase>328.9599567251425</TempBase>
@@ -5173,6 +5083,7 @@
 </Star>
 <Star ID="12">
 <Seed>4857586</Seed>
+<Name>Zhawrila Beta</Name>
  <MapPos X="14.33" Y="9.97"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5185,9 +5096,9 @@
  <LastGrowth>678158811704960000</LastGrowth>
  <NextGrowth>679289787704960000</NextGrowth>
 </Colony>
-<Radius>50112798</Radius>
-<ARot>670523</ARot>
-<Temp>284</Temp>
+<Radius>50,112,798</Radius>
+<ARot>670,523</ARot>
+<Temp>284.00</Temp>
 <Seed>147174</Seed>
 <Orbit>49955350174</Orbit>
 <TempBase>284.8621880338755</TempBase>
@@ -5199,6 +5110,7 @@
 </Star>
 <Star ID="13">
 <Seed>1727646</Seed>
+<Name>JePlio</Name>
  <MapPos X="13.82" Y="10.95"/>
  <Owner>Gokan</Owner>
  <Planets>
@@ -5211,9 +5123,9 @@
  <LastGrowth>678158799704960000</LastGrowth>
  <NextGrowth>680538255704960000</NextGrowth>
 </Colony>
-<Radius>6008009</Radius>
-<ARot>92805</ARot>
-<Temp>313</Temp>
+<Radius>6,008,009</Radius>
+<ARot>92,805</ARot>
+<Temp>313.00</Temp>
 <Seed>7383959</Seed>
 <Orbit>117661332681</Orbit>
 <TempBase>313.33555765030707</TempBase>
@@ -5249,7 +5161,7 @@
  <EquippedArmour>
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
 <Armour Type="Plate Boots" Material="Carbon Fibre" Level="0"/>
-<Armour Type="Full Armour" Material="Kevlar" Level="0"/>
+<Armour Type="Core Armour" Material="Kevlar" Level="0"/>
 <Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
  </EquippedArmour>
  <EquippedWeapon>
@@ -5333,7 +5245,7 @@
  <Colour>#FF8000</Colour>
  <EquippedArmour>
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
-<Armour Type="Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
