@@ -58,8 +58,8 @@
     <LevelRange>3,15</LevelRange>
     <Attack>13</Attack>
     <Defence>13</Defence>
-    <Armour>24</Armour>
-    <Health>18</Health>
+    <Armour>20</Armour>
+    <Health>15</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <Desc>A tougher pirate, heavily armed with slashing weapons</Desc>
@@ -75,7 +75,7 @@
     <Attack>14</Attack>
     <Defence>11</Defence>
     <Armour>16</Armour>
-    <Health>12</Health>
+    <Health>11</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <Desc>A pirate sniper</Desc>

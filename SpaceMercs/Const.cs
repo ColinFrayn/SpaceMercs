@@ -237,7 +237,7 @@ namespace SpaceMercs {
         public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
         public const double MercenaryCostBase = 1.16;  // Base for exponential price calculation for a mercenary
         public const double MercenaryCostExponent = 2.0;  // Exponent scale for exponential price calculation for a mercenary
-        public const double MercenaryKitValueScale = 0.8; // Mercenary kit is discounted by this amount
+        public const double MercenaryKitValueScale = 1.0; // Mercenary kit is discounted by this amount
         public const int    MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double UpgradeCostModifier = 1.2; // To upgrade an item by one level
         public const double SellDiscount = 0.5; // Get this fraction back when selling an item

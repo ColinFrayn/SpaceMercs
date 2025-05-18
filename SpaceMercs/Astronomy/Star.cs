@@ -4,7 +4,9 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
+using System.Windows.Ink;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public class Star : AstronomicalObject {

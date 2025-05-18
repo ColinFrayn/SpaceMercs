@@ -224,6 +224,7 @@ namespace SpaceMercs {
         internal void UpdateSeedProgress(GUIMessageBox msgBox, TimeSpan tDiff, GlobalClock clock) {
             if (!CanSeed) return;
             Random rand = new Random();
+
             // Colony growth rate and seeding should slow down as pop gets larger, or else it will get exponential
             SeedProgress += BaseSize * Const.ColonySeedRate * tDiff.TotalSeconds * 50d / (Const.SecondsPerYear * Math.Max(10, Owner.Population));
             if (SeedProgress >= Const.ColonySeedTarget) {
