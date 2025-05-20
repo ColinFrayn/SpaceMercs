@@ -38,7 +38,7 @@ namespace SpaceMercs {
         public int CurrentLevel { get; private set; }
         public bool IsShipMission { get { if (Type is MissionType.Surface or MissionType.Caves or MissionType.Mines or MissionType.AbandonedCity or MissionType.PrecursorRuins or MissionType.SpaceHulk) return false; else return true; } }
         public bool IsTacticalMission { get { if (Type == MissionType.Repair || Type == MissionType.Salvage || Type == MissionType.Ignore || Type == MissionType.ShipCombat) return false; else return true; } }
-        public int MaximumSoldiers { get { if (Levels.ContainsKey(CurrentLevel) && Levels[CurrentLevel] != null) return Levels[CurrentLevel].MaximumSoldiers; return 4; } }
+        public int MaximumSoldiers { get { if (Levels.TryGetValue(CurrentLevel, out MissionLevel? lev) && lev != null) return lev.MaximumSoldiers; return 4; } }
         public string Summary =>
                 Type switch {
                     MissionType.RepelBoarders => "Repel Boarders",
@@ -113,7 +113,14 @@ namespace SpaceMercs {
                 throw new Exception("Unknown mission goal");
             }
         }
-        public int Experience => MissionExperience(Diff, LevelCount, Size, SwarmLevel, SecondaryEnemy == null);
+        public int Experience {
+            get {
+                bool hasSecondaryEnemy = SecondaryEnemy == null;
+                // Size is irrelevant for DefendObjective missions
+                int modifiedSize = Goal == MissionGoal.Defend ? 2 : Size;
+                return MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy);
+            }
+        }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
         public MissionItem? MItem { get; private set; }
         private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
@@ -334,7 +341,9 @@ namespace SpaceMercs {
             }
             m.InitialiseMissionBasedOnGoal(rand);
             if (m.Goal != MissionGoal.Artifact) {
-                double reward = (1d + (double)(m.Size + 1d + rand.NextDouble()) * (double)(m.Size + 1d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * Math.Pow(1.1, m.LevelCount - 1) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale;
+                // Size is irrelevant for DefendObjective missions
+                int modifiedSize = m.Goal == MissionGoal.Defend ? 2 : m.Size;
+                double reward = (1d + (double)(modifiedSize + 1d + rand.NextDouble()) * (double)(modifiedSize + 1d)) * ((double)m.Diff + 2d) * ((double)m.Diff + 2d) * Math.Pow(1.1, m.LevelCount - 1) * (double)m.LevelCount * (1d + m.SwarmLevel * 0.25d) * Const.MissionCashScale;
                 m.Reward = Math.Round(reward, 2);
                 if (m.Goal == MissionGoal.FindItem) m.Reward *= (2d + rand.NextDouble());
             }
@@ -536,7 +545,8 @@ namespace SpaceMercs {
             return MissionExperience(diff, 1, 3, 0, false);
         }
         private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy) {
-            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * (hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost) * Const.MissionExperienceScale);
+            double secondaryEnemyMod = hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost;
+            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * secondaryEnemyMod * Const.MissionExperienceScale);
         }
 
         // Utility
