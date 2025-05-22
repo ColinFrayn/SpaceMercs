@@ -78,7 +78,7 @@
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>24</MinPop>
+      <MinPop>23</MinPop>
       <CashCost>10</CashCost>
       <Relations Name="Grey">0</Relations>
       <Facility>Medlab</Facility>
@@ -229,7 +229,7 @@
     <Rarity>10</Rarity>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>20</MinPop>
+      <MinPop>16</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Poison Gland" Amount="1"/>
@@ -263,7 +263,7 @@
     <Rarity>10</Rarity>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>18</MinPop>
+      <MinPop>15</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Slime Egg" Amount="1"/>
@@ -410,7 +410,7 @@
     <Rarity>25</Rarity>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>27</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Electronic Components" Amount="1"/>
@@ -551,7 +551,7 @@
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>4</MinSystems>
-      <MinPop>60</MinPop>
+      <MinPop>72</MinPop>
       <CashCost>180</CashCost>
       <Relations Name="Elithiri">3</Relations>
       <Relations Name="Grey">2</Relations>

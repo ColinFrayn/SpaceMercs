@@ -20,7 +20,7 @@
     <Avail>MTE</Avail>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinPop>15</MinPop>
+      <MinPop>14</MinPop>
       <CashCost>10</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -75,7 +75,7 @@
     <Tex>5,5</Tex>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>27</MinPop>
+      <MinPop>30</MinPop>
       <CashCost>15</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -93,7 +93,7 @@
     <Tex>6,5</Tex>
     <Requirements>
       <MinLevel>7</MinLevel>
-      <MinPop>31</MinPop>
+      <MinPop>53</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -111,7 +111,7 @@
     <Tex>7,5</Tex>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>39</MinPop>
+      <MinPop>65</MinPop>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>

@@ -61,5 +61,6 @@ namespace SpaceMercs {
 
         // Draw icons showing whether or not this body has a base on it and, if so, then what type.
         public abstract void DrawBaseIcon(ShaderProgram prog);
+        public abstract double HabitableScore(Race rc);
     }
 }

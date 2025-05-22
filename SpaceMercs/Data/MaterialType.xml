@@ -48,7 +48,7 @@
     <MaxLevel>4</MaxLevel>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>22</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>120</CashCost>
       <Material Name="Titanium" Amount="1"/>
       <Material Name="Steel" Amount="2"/>
@@ -79,7 +79,7 @@
     <Rarity>0.01</Rarity>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>40</MinPop>
+      <MinPop>44</MinPop>
       <CashCost>300</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Metasteel" Amount="2"/>
@@ -95,7 +95,7 @@
     <Rarity>0.006</Rarity>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>60</MinPop>
       <CashCost>850</CashCost>
       <Material Name="Metasteel" Amount="2"/>
       <Material Name="Mithril" Amount="2"/>
@@ -111,7 +111,7 @@
     <Rarity>0.005</Rarity>
     <Requirements>
       <MinLevel>12</MinLevel>
-      <MinPop>60</MinPop>
+      <MinPop>80</MinPop>
       <CashCost>1675</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Nanosilk" Amount="2"/>
@@ -129,7 +129,7 @@
     <Rarity>0.004</Rarity>
     <Requirements>
       <MinLevel>14</MinLevel>
-      <MinPop>70</MinPop>
+      <MinPop>100</MinPop>
       <CashCost>2800</CashCost>
       <Material Name="Nanomesh" Amount="2"/>
       <Material Name="Adamantium" Amount="2"/>

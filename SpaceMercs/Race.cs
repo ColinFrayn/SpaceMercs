@@ -32,6 +32,7 @@ namespace SpaceMercs {
         public int Population { get { return Colonies.Select(x => x.BaseSize).Sum(); } }
         public bool IsPlayer { get { return HomePlanet.GetSystem().Sector.SectorX == 0 && HomePlanet.GetSystem().Sector.SectorY == 0; } }
         private readonly HashSet<IResearchable> ResearchedItems = new HashSet<IResearchable>();
+        public int ResearchCount => ResearchedItems.Count;
 
         public Race(XmlNode xml) {
             Name = xml.SelectNodeText("Name");
@@ -120,7 +121,7 @@ namespace SpaceMercs {
         public void SetHomePlanet(Planet pl, GlobalClock clock) {
             HomePlanet = pl;
             pl.GetSystem().SetName(Name + " Home");
-            pl.SetupBase(this, 5, clock);
+            pl.SetupBase(this, 6, clock);
             pl.SetAsHomeworld();
         }
 

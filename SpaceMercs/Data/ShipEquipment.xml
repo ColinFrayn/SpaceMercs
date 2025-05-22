@@ -74,7 +74,7 @@
     <Tex>6,2</Tex>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>25</MinPop>
+      <MinPop>27</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -117,7 +117,7 @@
     <Tex>1,6</Tex>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>35</MinPop>
       <CashCost>20</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -134,7 +134,7 @@
     <Tex>1,6</Tex>
     <Requirements>
       <MinLevel>7</MinLevel>
-      <MinPop>35</MinPop>
+      <MinPop>42</MinPop>
       <CashCost>25</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -191,7 +191,7 @@
     <Avail>CEMRT</Avail>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>46</MinPop>
+      <MinPop>52</MinPop>
       <CashCost>120</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -225,7 +225,7 @@
     <Avail>MRE</Avail>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>57</MinPop>
       <CashCost>35</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -323,7 +323,7 @@
     <Tex>3,1</Tex>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>25</MinPop>
+      <MinPop>30</MinPop>
       <CashCost>20</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>

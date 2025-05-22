@@ -110,10 +110,10 @@ namespace SpaceMercs {
 
             // Add more colonies in the home system
             int ntries = 0;
-            int minHomeSysPop = maxSize / 2;
+            int minHomeSysPop = Math.Max(10, (maxSize + 2) + 2);
             do {
                 stHome.AddPopulationInSystem(rc, rand, clock);
-            } while (ntries++ < 100 && stHome.CountPopulation() < maxSize / minHomeSysPop);
+            } while (ntries++ < 100 && stHome.CountPopulation() < minHomeSysPop);
 
             // Add extra colonies up to required population size
             while (rc.Population < maxSize) {

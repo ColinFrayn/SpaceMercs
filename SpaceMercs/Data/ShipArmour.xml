@@ -15,7 +15,7 @@
     <Tex>2,3</Tex>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinPop>18</MinPop>
+      <MinPop>26</MinPop>
       <CashCost>10</CashCost>
       <Material Name="Metasteel" Amount="3"/>
       <Facility>Engineering</Facility>
@@ -30,7 +30,7 @@
     <Tex>3,3</Tex>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>46</MinPop>
       <CashCost>20</CashCost>
       <Material Name="Mithril" Amount="3"/>
       <Facility>Engineering</Facility>
@@ -45,7 +45,7 @@
     <Tex>4,3</Tex>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>40</MinPop>
+      <MinPop>64</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Adamantium" Amount="3"/>
       <Facility>Engineering</Facility>
@@ -61,7 +61,7 @@
     <Tex>5,3</Tex>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>45</MinPop>
+      <MinPop>85</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Etherealite" Amount="3"/>
       <Facility>Engineering</Facility>
@@ -77,7 +77,7 @@
     <Tex>6,3</Tex>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>38</MinPop>
+      <MinPop>84</MinPop>
       <CashCost>30</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -94,7 +94,7 @@
     <Tex>7,3</Tex>
     <Requirements>
       <MinLevel>11</MinLevel>
-      <MinPop>39</MinPop>
+      <MinPop>88</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Shadowskin" Amount="2"/>
       <Material Name="Voidskin" Amount="2"/>

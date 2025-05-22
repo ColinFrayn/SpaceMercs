@@ -161,5 +161,13 @@ namespace SpaceMercs {
             }
             throw new Exception($"Unexpected Parent setup for Moon in {nameof(DistanceFromStar)}");
         }
+        public override double HabitableScore(Race rc) {
+            double raceTechCount = rc.ResearchCount * 2d;
+            double score = raceTechCount + 100d - TDiff(rc);
+            if (Parent is not Planet pl || pl.Colony is null) score -= 20d;
+            if (Type == PlanetType.Oceanic) score += 25d;
+            if (Type == PlanetType.Volcanic) score -= 10d;
+            return score * 0.7d; // Moons are worse than planets
+        }
     }
 }

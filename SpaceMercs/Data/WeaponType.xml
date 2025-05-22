@@ -33,7 +33,7 @@
     <Noise>10</Noise>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>22</MinPop>
+      <MinPop>18</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel" Amount="2"/>
@@ -59,7 +59,7 @@
     <Noise>11</Noise>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>28</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>50</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel" Amount="2"/>
@@ -171,7 +171,7 @@
     <Noise>13</Noise>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>60</MinPop>
+      <MinPop>62</MinPop>
       <CashCost>150</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Tungsten" Amount="2"/>
@@ -225,7 +225,7 @@
     <Noise>6</Noise>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>20</MinPop>
+      <MinPop>22</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -310,7 +310,7 @@
     <Noise>9</Noise>
     <Requirements>
       <MinLevel>9</MinLevel>
-      <MinPop>48</MinPop>
+      <MinPop>56</MinPop>
       <CashCost>240</CashCost>
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Incendiary Bulb" Amount="1"/>
@@ -565,7 +565,7 @@
     </Materials>
     <Requirements>
       <MinLevel>7</MinLevel>
-      <MinPop>32</MinPop>
+      <MinPop>35</MinPop>
       <CashCost>90</CashCost>
       <Material Name="Industrial Chemicals" Amount="4"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
@@ -599,7 +599,7 @@
     </Materials>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>52</MinPop>
+      <MinPop>56</MinPop>
       <CashCost>250</CashCost>
       <Material Name="Industrial Chemicals" Amount="6"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
@@ -904,7 +904,7 @@
     <Sound>SwordSlice</Sound>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>20</MinPop>
+      <MinPop>30</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -931,7 +931,7 @@
     <Sound>SwordSlice</Sound>
     <Requirements>
       <MinLevel>7</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>40</MinPop>
       <CashCost>30</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Chitin" Amount="2"/>
@@ -983,7 +983,7 @@
     <Sound>Punches</Sound>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>34</MinPop>
       <CashCost>60</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -1010,7 +1010,7 @@
     <Sound>Chainsaw</Sound>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>40</MinPop>
+      <MinPop>42</MinPop>
       <CashCost>110</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>

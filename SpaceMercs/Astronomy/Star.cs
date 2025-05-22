@@ -4,9 +4,7 @@ using SpaceMercs.Graphics;
 using SpaceMercs.Graphics.Shapes;
 using System.IO;
 using System.Text;
-using System.Windows.Ink;
 using System.Xml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SpaceMercs {
     public class Star : AstronomicalObject {
@@ -417,81 +415,74 @@ namespace SpaceMercs {
 
         // Either expand an existing base or add a new one in this system
         public bool AddPopulationInSystem(Race rc, Random rand, GlobalClock clock) {
-            int tries = 0;
             if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
 
-            // Firstly colonise any Oceanic planets and maybe some moons
-            int plcols = 0;
+            Dictionary<HabitableAO, double> scores = new();
+            double totalScore = 0d;
+
+            // Add all planets and moons to the dictionary, and estimate their suitability for colonisation
             foreach (Planet pl in Planets) {
-                if (pl.Colony is not null) plcols++;
-                if (pl.Type == Planet.PlanetType.Oceanic) {
-                    if (pl.ExpandBase(rc, rand, clock) > 0) return true;
-                    if (rand.NextDouble() > 0.5) {
-                        if (pl.ExpandMoonBase(rand, rc, clock) > 0) return true;
+                double pscore = pl.HabitableScore(rc);
+                if (pscore > 0d) scores.Add(pl, pscore);
+                foreach (Moon mn in pl.Moons) {
+                    // Can't expand moon colonies, so only consider this moon if it's empty
+                    if (mn.Colony is null) { 
+                        double mscore = mn.HabitableScore(rc);
+                        if (mscore > 0d) scores.Add(mn, mscore);
                     }
                 }
             }
+            if (scores.Count == 0) return false;
 
-            // Now add any remaining colonies
+            int nTries = 0;
+
             do {
-                tries++;
-                int pno = rand.Next(_planets.Count);
-                Planet pl = _planets[pno];
-                double tdiff = pl.TDiff(rc);
-                if (pl.Type == Planet.PlanetType.Gas) {
-                    tdiff += 15.0; // Make it less likely to colonise Gas giants.
-                    if (plcols == 0) tdiff += 30; // Much less likely if this is the first colony in this system
-                    if (plcols == 1) tdiff += 15; // Quite a bit less likely if this is the second colony in this system
-                }
-                if (pl.Type == Planet.PlanetType.Precursor) tdiff += 9999d; // Won't colonise Precursor planets.
-                if (rand.NextDouble() * 150.0 > tdiff) {
-                    if (rand.NextDouble() > 0.5) {
-                        if (pl.Type != Planet.PlanetType.Gas || pl.BaseSize < 4) {
-                            if (pl.ExpandBase(rc, rand, clock) > 0) return true;
-                        }
+                double pick = rand.NextDouble() * totalScore;
+                foreach ((HabitableAO hao, double score) in scores) {
+                    pick -= score;
+                    if (pick <= 0d) {
+                        if (hao.ExpandBase(rc, rand, clock) > 0) return true;
                     }
-                    else if (pl.ExpandMoonBase(rand, rc, clock) > 0) return true;
                 }
-            } while (tries < 50);
+            } while (++nTries < 20);
+
             return false;
         }
 
+        // Attempt to add a new base in this system (if possible)
         public bool MaybeAddNewColony(Race rc, Random rand, GlobalClock clock) {
-            int plcols = 0;
-            foreach (Planet pl in Planets) {
-                if (pl.Colony is not null) plcols++;
-            }
-            int maxTries = Planets.Count * 4 + 6;
-            int tries = 0;
-            do {
-                int pno = rand.Next(_planets.Count);
-                Planet pl = _planets[pno];
-                double tdiff = pl.TDiff(rc);
-                if (pl.Type == Planet.PlanetType.Gas) {
-                    tdiff += 20d; // Make it less likely to colonise Gas giants.
-                    if (plcols == 0) tdiff += 40d; // Much less likely if this is the first planet colony in this system
-                    if (plcols == 1) tdiff += 20d; // Quite a bit less likely if this is the second planet colony in this system
-                }
-                if (rand.NextDouble() * rand.NextDouble() * 200.0 > tdiff) {
-                    if (pl.Colony is null) {
-                        if (pl.ExpandBase(rc, rand, clock) > 0) return true;
-                    }
-                    else if (pl.Moons.Count > 0) {
-                        int mno = rand.Next(pl.Moons.Count);
-                        Moon mn = pl.Moons[mno];
-                        int moonPop = pl.GetPopulation() - pl.Colony.BaseSize;
-                        if (mn.Colony is null) {
-                            double chance = 40d + (plcols * 2d) - (moonPop * 15d);
-                            if (mn.Type == Planet.PlanetType.Oceanic) chance += 25d;
-                            if (mn.Type == Planet.PlanetType.Volcanic || mn.Type == Planet.PlanetType.Ice) chance -= 15d;
-                            if (rand.NextDouble() * 100d < chance) {
-                                if (mn.ExpandBase(rc, rand, clock) > 0) return true;
-                            }
-                        }
+            if (!bGenerated) GeneratePlanets(Sector.ParentMap.PlanetDensity);
 
+            Dictionary<HabitableAO, double> scores = new();
+            double totalScore = 0d;
+
+            // Add all planets and moons to the dictionary, and estimate their suitability for colonisation
+            foreach (Planet pl in Planets) {
+                if (pl.Colony is null) {
+                    double score = pl.HabitableScore(rc);
+                    if (score > 0d) scores.Add(pl, score);
+                }
+                foreach (Moon mn in pl.Moons) {
+                    if (mn.Colony is null) {
+                        double score = mn.HabitableScore(rc);
+                        if (score > 0d) scores.Add(mn, score);
                     }
                 }
-            } while (++tries < maxTries);
+            }
+
+            if (scores.Count == 0) return false;
+
+            int nTries = 0;
+
+            do {
+                double pick = rand.NextDouble() * totalScore;
+                foreach ((HabitableAO hao, double score) in scores) {
+                    pick -= score;
+                    if (pick <= 0d) {
+                        if (hao.ExpandBase(rc, rand, clock) > 0) return true;
+                    }
+                }
+            } while (++nTries < 20);
             return false;
         }
 

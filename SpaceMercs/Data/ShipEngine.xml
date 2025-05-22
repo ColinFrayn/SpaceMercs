@@ -70,7 +70,7 @@
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinSystems>4</MinSystems>
-      <MinPop>31</MinPop>
+      <MinPop>56</MinPop>
       <CashCost>40</CashCost>
       <Facility>Engineering</Facility>
       <Relations Name="Grey">1</Relations>
@@ -88,7 +88,7 @@
     <Requirements>
       <MinLevel>11</MinLevel>
       <MinSystems>6</MinSystems>
-      <MinPop>43</MinPop>
+      <MinPop>70</MinPop>
       <CashCost>40</CashCost>
       <Facility>Engineering</Facility>
       <Relations Name="Grey">2</Relations>
@@ -104,7 +104,7 @@
     <Avail>RE</Avail>
     <Requirements>
       <MinLevel>14</MinLevel>
-      <MinPop>55</MinPop>
+      <MinPop>85</MinPop>
       <CashCost>200</CashCost>
       <Material Name="Rare Earth Metals" Amount="4"/>
       <Material Name="Crystals" Amount="4"/>

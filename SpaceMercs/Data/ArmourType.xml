@@ -12,15 +12,15 @@
   </ArmourType>
   <ArmourType Name="Stealth Helmet">
     <Mass>1.0</Mass>
-    <Rarity>38</Rarity>
+    <Rarity>15</Rarity>
     <Attack>1</Attack>
     <Defence>1</Defence>
     <BaseArmour>3</BaseArmour>
     <Requirements>
-      <MinLevel>3</MinLevel>
+      <MinLevel>2</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>26</MinPop>
-      <CashCost>15</CashCost>
+      <MinPop>16</MinPop>
+      <CashCost>10</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -36,14 +36,14 @@
   </ArmourType>
   <ArmourType Name="Infiltrator Helmet">
     <Mass>1.5</Mass>
-    <Rarity>15</Rarity>
+    <Rarity>25</Rarity>
     <Attack>1</Attack>
     <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
     <Requirements>
-      <MinLevel>2</MinLevel>
-      <MinPop>18</MinPop>
-      <CashCost>10</CashCost>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>15</CashCost>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
@@ -173,7 +173,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>25</MinPop>
+      <MinPop>16</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -219,7 +219,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>25</MinPop>
+      <MinPop>16</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -253,7 +253,7 @@
     <Requirements>
       <MinLevel>5</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>34</MinPop>
+      <MinPop>24</MinPop>
       <CashCost>60</CashCost>
       <Material Name="Steel" Amount="4"/>
       <Facility>Armoury</Facility>
@@ -276,7 +276,7 @@
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>36</MinPop>
+      <MinPop>26</MinPop>
       <CashCost>60</CashCost>
       <Material Name="Aluminium" Amount="4"/>
       <Facility>Armoury</Facility>
@@ -417,7 +417,7 @@
     <Requirements>
       <MinLevel>4</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>28</MinPop>
+      <MinPop>24</MinPop>
       <CashCost>40</CashCost>
       <Material Name="Aluminium" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -463,7 +463,7 @@
     <Requirements>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>30</MinPop>
+      <MinPop>35</MinPop>
       <CashCost>75</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -498,7 +498,7 @@
     <Requirements>
       <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>44</MinPop>
+      <MinPop>45</MinPop>
       <CashCost>250</CashCost>
       <Material Name="Titanium" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
@@ -535,7 +535,7 @@
     <Requirements>
       <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>42</MinPop>
+      <MinPop>44</MinPop>
       <CashCost>90</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -587,7 +587,7 @@
     <Requirements>
       <MinLevel>11</MinLevel>
       <MinSystems>5</MinSystems>
-      <MinPop>50</MinPop>
+      <MinPop>70</MinPop>
       <CashCost>160</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Crystals" Amount="4"/>
@@ -615,7 +615,7 @@
     <Requirements>
       <MinLevel>13</MinLevel>
       <MinSystems>5</MinSystems>
-      <MinPop>70</MinPop>
+      <MinPop>90</MinPop>
       <CashCost>450</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>

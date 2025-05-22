@@ -193,6 +193,9 @@ namespace SpaceMercs {
         }
         public int ExpandBase(Random rand) {
             double tdiff = Location.TDiff(Owner);
+
+            if (Location is Moon) return 0; // Can't expand a moon base
+
             if (BaseSize == 5) {
                 if (rand.NextDouble() * 50.0 > tdiff) {
                     ExpandBase(BaseType.Metropolis);

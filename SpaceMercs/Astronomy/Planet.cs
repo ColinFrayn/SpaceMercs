@@ -390,5 +390,14 @@ namespace SpaceMercs {
             }
             return pop;
         }
+        public override double HabitableScore(Race rc) {
+            if (IsPrecursor) return 0d;
+            double raceTechCount = rc.ResearchCount * 2d;
+            double score = raceTechCount + 100d - TDiff(rc);
+            if (Type == PlanetType.Oceanic) score += 25d;
+            if (Type == PlanetType.Volcanic) score -= 10d;
+            if (Type == PlanetType.Gas) score -= 20d;
+            return score;
+        }
     }
 }
