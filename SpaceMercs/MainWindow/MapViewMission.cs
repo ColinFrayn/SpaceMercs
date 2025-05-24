@@ -195,8 +195,11 @@ namespace SpaceMercs.MainWindow {
                     foreach (Soldier s in ThisMission.Psylinked) {
                         s.AddExperience(ThisMission.Experience);
                     }
+
+                    // Mission was from a colony so improve relations with the owner raec
                     if (thisColony is not null) {
                         PlayerTeam.ImproveRelations(thisColony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
+
                         // Speed up colony growth if possible
                         if (thisColony.CanGrow) {
                             // Work out how much this mission does to speed up growth

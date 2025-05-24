@@ -298,9 +298,16 @@ namespace SpaceMercs {
         }
 
         public bool HasResearched(IResearchable tp) => ResearchedItems.Contains(tp);
+        public bool HasResearched(string name) => ResearchedItems.Where(x => string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase)).Any();
         public void CompleteResearch(IResearchable item) {
             if (HasResearched(item)) throw new Exception($"Researching already researched item {item.Name}!");
             ResearchedItems.Add(item);
+        }
+        public bool HasColonyOnPlanetType(Planet.PlanetType type) {
+            foreach (Colony cl in Colonies) {
+                if (cl.Location.Type == type) return true;
+            }
+            return false;
         }
 
         public override string ToString() {

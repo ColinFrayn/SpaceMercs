@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Windows.Ink;
+using System.Xml;
 using static SpaceMercs.ShipEquipment;
 
 namespace SpaceMercs.Items {
@@ -9,13 +10,31 @@ namespace SpaceMercs.Items {
         public int CashCost { get; private set; }
         public readonly IReadOnlyDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
         public readonly IReadOnlyDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
-        public readonly IReadOnlyCollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
+        private readonly IReadOnlyCollection<RoomAbilities> RequiredFacilities = new HashSet<RoomAbilities>();
+        private readonly Planet.PlanetType? RequiredColonyPlanetType = null;
+        private readonly ICollection<IResearchable> Prerequisites = new HashSet<IResearchable>();
+        private readonly IReadOnlyCollection<string> PrerequisiteStrings = new HashSet<string>();
 
         public Requirements(XmlNode xml) {
             MinLevel = xml.SelectNodeInt("MinLevel", 1);
             MinSystems = xml.SelectNodeInt("MinSystems", 1);
             MinPop = xml.SelectNodeInt("MinPop", 1);
             CashCost = xml.SelectNodeInt("CashCost", 0);
+            string planetType = xml.SelectNodeText("PlanetType");
+            if (!string.IsNullOrEmpty(planetType)) {
+                RequiredColonyPlanetType = Enum.Parse<Planet.PlanetType>(planetType);
+                if (RequiredColonyPlanetType == null) {
+                    throw new Exception($"Could not identify required planet type \"{planetType}\"");
+                }
+            }
+
+            // Load prerequisites as strings.  We parse them later once all static data are loaded.
+            HashSet<string> hsPrereq = new();
+            foreach (XmlNode xn in xml.SelectNodesToList("Prerequisite")) {
+                string strPre = xn.InnerText;
+                hsPrereq.Add(strPre);
+            }
+            PrerequisiteStrings = new HashSet<string>(hsPrereq);
 
             // This item is restricted unless the player race has relations this good or better with the specified race(s)
             Dictionary<Race, int> tempRelDict = new Dictionary<Race, int>();
@@ -47,11 +66,22 @@ namespace SpaceMercs.Items {
             // Room facilities required to research this
             HashSet<RoomAbilities> hsTemp = new HashSet<RoomAbilities>();
             foreach (XmlNode xn in xml.SelectNodesToList("Facility")) {
-                RoomAbilities ab = (RoomAbilities)Enum.Parse(typeof(RoomAbilities), xn.InnerText);
+                RoomAbilities ab = Enum.Parse<RoomAbilities>(xn.InnerText);
                 if (RequiredFacilities.Contains(ab)) throw new Exception("Duplicate room facility requirement");
                 hsTemp.Add(ab);
             }
             RequiredFacilities = new HashSet<RoomAbilities>(hsTemp);
+        }
+
+        public void ParsePrerequisites() {
+            foreach (string str in PrerequisiteStrings) {
+                // Parse the prerequisite and check that it exists
+                IResearchable? pre = StaticData.GetResearchableByName(str);
+                if (pre is null) {
+                    throw new Exception($"Could not identify required prerequisite \"{str}\"");
+                }
+                Prerequisites.Add(pre);
+            }
         }
 
         // Any race : Have they expanded enough to research this?
@@ -59,8 +89,18 @@ namespace SpaceMercs.Items {
             if (race.SystemCount < MinSystems) return false;
             if (race.Population < MinPop) return false;
 
+            // Already researched the pre-requisite tech
+            foreach (IResearchable prereq in Prerequisites) {
+                if (!race.HasResearched(prereq)) return false;
+            }
+
             // Race relations: Player race passes automatically, because we test this properly elsewhere
             if (race == StaticData.HumanRace) return true;
+
+            // This race has a colony on a planet of the correct type
+            if (RequiredColonyPlanetType != null) {
+                if (!race.HasColonyOnPlanetType(RequiredColonyPlanetType.Value)) return false;
+            }
 
             // If this isn't the player race then only pass if the requirements don't include any race other than this one.
             return RequiredRaceRelations.Count == 0 ||

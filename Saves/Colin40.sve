@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>08/07/2597 18:52:10</Clock>
+<Clock>17/08/2597 02:05:27</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -10209,7 +10209,7 @@
  <Goal>KillAll</Goal>
 <Ship Seed="428263386" Diff="13">
  <Name>Enemy Ship</Name>
- <Hull>35</Hull>
+ <Hull>37</Hull>
  <Shield>0</Shield>
  <Armour>Adaptive Plating</Armour>
  <Seed>842600</Seed>
@@ -11245,7 +11245,7 @@
  <Goal>KillAll</Goal>
 <Ship Seed="451206575" Diff="13">
  <Name>Enemy Ship</Name>
- <Hull>61</Hull>
+ <Hull>32</Hull>
  <Shield>0</Shield>
  <Armour>Adaptive Plating</Armour>
  <Seed>879260</Seed>
@@ -11301,7 +11301,7 @@
  <Goal>KillAll</Goal>
 <Ship Seed="124580235" Diff="13">
  <Name>Enemy Ship</Name>
- <Hull>25</Hull>
+ <Hull>31</Hull>
  <Shield>0</Shield>
  <Armour>Adaptive Plating</Armour>
  <Seed>616021</Seed>
@@ -12995,7 +12995,7 @@
 </Map>
 <Team>
  <Pos>(3,0)6.1</Pos>
- <Cash>20443.152534500936</Cash>
+ <Cash>20268.152534500936</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="14" Y="1"/>
@@ -13282,7 +13282,7 @@
   <Inv Count="2">
 <Material Type="Silicates"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="14">
 <Material Type="Steel"/>
   </Inv>
   <Inv Count="13">
@@ -13324,7 +13324,7 @@
   <Inv Count="10">
 <Material Type="Kevlar"/>
   </Inv>
-  <Inv Count="20">
+  <Inv Count="19">
 <Material Type="Electronic Components"/>
   </Inv>
   <Inv Count="15">
@@ -13339,7 +13339,7 @@
   <Inv Count="8">
 <Material Type="Metasteel"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="5">
 <Material Type="Titanium"/>
   </Inv>
   <Inv Count="17">
@@ -13363,7 +13363,7 @@
   <Inv Count="15">
 <Material Type="Vulcanin"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="2">
 <Material Type="Adamantium"/>
   </Inv>
   <Inv Count="7">
@@ -13490,6 +13490,11 @@
  <Material>Mithril</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
+ <Item>Fusion Drive</Item>
+ <Item>Chainsword</Item>
+ <Item>Katana</Item>
+ <Item>NearLight Drive</Item>
+ <Item>Adamantium Plating</Item>
 </Research>
 </Race>
 <Race Name="Gokan">

@@ -249,7 +249,7 @@ namespace SpaceMercs {
         public const double GrowthTempScale = 10; // Affects how time taken for a colony to grow scales with temperature diff.
         public const double GrowthTempOffset = 15; // The range of temperatures away from ideal within which colony growth is not affected
         public const double MissionCashScale = 0.1d; // Scale cash reward for colony missions by this amount.
-        public const double ColonyMissionGrowthBonus = 10d; // When completing an average colony mission, reduce the time to next growth of the current colony by this many days. Scale this by difficulty/length.
+        public const double ColonyMissionGrowthBonus = 20d; // When completing an average colony mission, reduce the time to next growth of the current colony by this many days. Scale this by difficulty/length.
 
         // Race relations
         public const int InitialColonyCount = 3;   // When starting up, how many colonies to add to a system

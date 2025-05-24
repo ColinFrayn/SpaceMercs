@@ -57,7 +57,7 @@
     <Tex>3,7</Tex>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>25</MinPop>
+      <MinPop>22</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -74,7 +74,7 @@
     <Tex>6,2</Tex>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>27</MinPop>
+      <MinPop>28</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -133,6 +133,7 @@
     <Avail>MRE</Avail>
     <Tex>1,6</Tex>
     <Requirements>
+      <Prerequisite>Shield Generator</Prerequisite>
       <MinLevel>7</MinLevel>
       <MinPop>42</MinPop>
       <CashCost>25</CashCost>
@@ -174,6 +175,7 @@
     <Desc>A highly advanced colonising device which uses self-replicating nono-robots to prepare an area for colonisation while locally terraforming the target planet, allowing less hospitable planet types to be colonised.</Desc>
     <Avail>CEMRT</Avail>
     <Requirements>
+      <Prerequisite>Colony Builder</Prerequisite>
       <MinLevel>6</MinLevel>
       <MinPop>34</MinPop>
       <CashCost>60</CashCost>
@@ -190,6 +192,7 @@
     <Desc>An alien advanced colonising device which extracts elements from the atmosphere, together with local asteroids, to build a self-perpetuating cloud colony in the atmosphere of a gas giant planet.</Desc>
     <Avail>CEMRT</Avail>
     <Requirements>
+      <Prerequisite>Terraform Device</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>52</MinPop>
       <CashCost>120</CashCost>
@@ -307,8 +310,7 @@
     <Avail>MRE</Avail>
     <Tex>2,1</Tex>
     <Requirements>
-      <MinLevel>2</MinLevel>
-      <MinPop>20</MinPop>
+      <MinLevel>3</MinLevel>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -322,8 +324,8 @@
     <Avail>MRE</Avail>
     <Tex>3,1</Tex>
     <Requirements>
-      <MinLevel>4</MinLevel>
-      <MinPop>30</MinPop>
+      <Prerequisite>Advanced Fission Core</Prerequisite>      
+      <MinLevel>5</MinLevel>
       <CashCost>20</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -337,8 +339,9 @@
     <Avail>MRE</Avail>
     <Tex>4,1</Tex>
     <Requirements>
+      <Prerequisite>Fusion Core</Prerequisite>    
       <MinLevel>6</MinLevel>
-      <MinPop>40</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>30</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -352,8 +355,9 @@
     <Avail>MRE</Avail>
     <Tex>5,1</Tex>
     <Requirements>
+      <Prerequisite>Advanced Fusion Core</Prerequisite>
       <MinLevel>8</MinLevel>
-      <MinPop>70</MinPop>
+      <MinPop>50</MinPop>
       <CashCost>80</CashCost>
       <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
@@ -368,8 +372,9 @@
     <Avail>MRE</Avail>
     <Tex>4,8</Tex>
     <Requirements>
+      <Prerequisite>Antimatter Core</Prerequisite>
       <MinLevel>10</MinLevel>
-      <MinPop>80</MinPop>
+      <MinPop>75</MinPop>
       <CashCost>150</CashCost>
       <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
@@ -384,6 +389,7 @@
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
     <Requirements>
+      <Prerequisite>Advanced Antimatter Core</Prerequisite>
       <MinLevel>12</MinLevel>
       <MinPop>90</MinPop>
       <CashCost>250</CashCost>
@@ -402,6 +408,7 @@
     <Avail>RE</Avail>
     <Tex>7,1</Tex>
     <Requirements>
+      <Prerequisite>Dark Core</Prerequisite>
       <MinLevel>14</MinLevel>
       <MinPop>100</MinPop>
       <CashCost>500</CashCost>

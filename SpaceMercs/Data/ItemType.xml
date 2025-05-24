@@ -78,7 +78,7 @@
     <Requirements>
       <MinLevel>6</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>23</MinPop>
+      <MinPop>20</MinPop>
       <CashCost>10</CashCost>
       <Relations Name="Grey">0</Relations>
       <Facility>Medlab</Facility>
@@ -111,9 +111,10 @@
     </Materials>
     <Source>Medlab</Source>
     <Requirements>
+      <Prerequisite>Nannite Medikit</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>26</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>10</CashCost>
       <Relations Name="Grey">1</Relations>
       <Facility>Medlab</Facility>
@@ -229,7 +230,6 @@
     <Rarity>10</Rarity>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>16</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Poison Gland" Amount="1"/>
@@ -263,7 +263,6 @@
     <Rarity>10</Rarity>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>15</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Slime Egg" Amount="1"/>
@@ -300,7 +299,6 @@
     <Rarity>13</Rarity>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinPop>20</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Acid Blood" Amount="1"/>
@@ -361,6 +359,7 @@
       <MinLevel>6</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>15</CashCost>
+      <PlanetType>Volcanic</PlanetType>
       <Facility>Workshop</Facility>
       <Material Name="Incendiary Bulb" Amount="1"/>
       <Relations Name="Ogrish">2</Relations>
@@ -410,7 +409,7 @@
     <Rarity>25</Rarity>
     <Requirements>
       <MinLevel>6</MinLevel>
-      <MinPop>25</MinPop>
+      <MinPop>20</MinPop>
       <CashCost>10</CashCost>
       <Facility>Workshop</Facility>
       <Material Name="Electronic Components" Amount="1"/>
@@ -448,6 +447,7 @@
     <StaminaCost>18</StaminaCost>
     <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
     <Requirements>
+      <Prerequisite>Nannite Medikit</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>38</MinPop>
@@ -482,6 +482,7 @@
     <StaminaCost>19</StaminaCost>
     <Desc>A medical device that heals wounds almost as well as a quantum medikit, but can be reused after a short charging period.</Desc>
     <Requirements>
+      <Prerequisite>Quantum Medikit</Prerequisite>
       <MinLevel>12</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>

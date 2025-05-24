@@ -20,7 +20,6 @@
     <Avail>MTE</Avail>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinPop>14</MinPop>
       <CashCost>10</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -38,7 +37,6 @@
     <Tex>3,5</Tex>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>22</MinPop>
       <CashCost>15</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -55,8 +53,8 @@
     <Desc>A laser rifle</Desc>
     <Avail>MTE</Avail>
     <Requirements>
-      <MinLevel>3</MinLevel>
-      <MinPop>20</MinPop>
+      <Prerequisite>Laser Rifle</Prerequisite>
+      <MinLevel>4</MinLevel>
       <CashCost>10</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -74,7 +72,7 @@
     <Avail>MTE</Avail>
     <Tex>5,5</Tex>
     <Requirements>
-      <MinLevel>5</MinLevel>
+      <MinLevel>6</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>15</CashCost>
       <Facility>Armoury</Facility>
@@ -92,8 +90,9 @@
     <Avail>ME</Avail>
     <Tex>6,5</Tex>
     <Requirements>
-      <MinLevel>7</MinLevel>
-      <MinPop>53</MinPop>
+      <Prerequisite>Plasma Rifle</Prerequisite>
+      <MinLevel>8</MinLevel>
+      <MinPop>50</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
@@ -110,6 +109,7 @@
     <Avail>ME</Avail>
     <Tex>7,5</Tex>
     <Requirements>
+      <Prerequisite>Antimatter Core</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>65</MinPop>
       <CashCost>25</CashCost>

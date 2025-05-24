@@ -14,6 +14,7 @@
     <Avail>MRE</Avail>
     <Tex>2,3</Tex>
     <Requirements>
+      <Prerequisite>Metasteel</Prerequisite>
       <MinLevel>2</MinLevel>
       <MinPop>26</MinPop>
       <CashCost>10</CashCost>
@@ -29,6 +30,7 @@
     <Avail>MRE</Avail>
     <Tex>3,3</Tex>
     <Requirements>
+      <Prerequisite>Mithril</Prerequisite>
       <MinLevel>5</MinLevel>
       <MinPop>46</MinPop>
       <CashCost>20</CashCost>
@@ -44,6 +46,7 @@
     <Avail>MRE</Avail>
     <Tex>4,3</Tex>
     <Requirements>
+      <Prerequisite>Adamantium</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinPop>64</MinPop>
       <CashCost>30</CashCost>
@@ -60,6 +63,7 @@
     <Avail>MRE</Avail>
     <Tex>5,3</Tex>
     <Requirements>
+      <Prerequisite>Etherealite</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>85</MinPop>
       <CashCost>30</CashCost>

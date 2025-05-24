@@ -18,8 +18,6 @@
     <BaseArmour>3</BaseArmour>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinSystems>3</MinSystems>
-      <MinPop>16</MinPop>
       <CashCost>10</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -41,6 +39,7 @@
     <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
     <Requirements>
+      <Prerequisite>Stealth Helmet</Prerequisite>
       <MinLevel>3</MinLevel>
       <MinPop>20</MinPop>
       <CashCost>15</CashCost>
@@ -88,7 +87,7 @@
     <Requirements>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>34</MinPop>
+      <MinPop>30</MinPop>
       <CashCost>50</CashCost>
       <Material Name="Crystals" Amount="4"/>
       <Facility>Armoury</Facility>
@@ -172,8 +171,6 @@
     </Materials>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinSystems>3</MinSystems>
-      <MinPop>16</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -218,8 +215,6 @@
     </Materials>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinSystems>3</MinSystems>
-      <MinPop>16</MinPop>
       <CashCost>15</CashCost>
       <Material Name="Aluminium" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -253,7 +248,8 @@
     <Requirements>
       <MinLevel>5</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>24</MinPop>
+      <MinPop>20</MinPop>
+      <PlanetType>Volcanic</PlanetType>
       <CashCost>60</CashCost>
       <Material Name="Steel" Amount="4"/>
       <Facility>Armoury</Facility>
@@ -274,9 +270,10 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Combat Suit</Prerequisite>
       <MinLevel>6</MinLevel>
       <MinSystems>2</MinSystems>
-      <MinPop>26</MinPop>
+      <MinPop>20</MinPop>
       <CashCost>60</CashCost>
       <Material Name="Aluminium" Amount="4"/>
       <Facility>Armoury</Facility>
@@ -299,6 +296,7 @@
       <Material Name="Crystals" Amount="1"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Combat Suit</Prerequisite>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>
@@ -326,6 +324,7 @@
       <Material Name="Crystals" Amount="2"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Shock Armour</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>54</MinPop>
@@ -353,6 +352,7 @@
       <Material Name="Crystals" Amount="3"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Advanced Shock Armour</Prerequisite>
       <MinLevel>11</MinLevel>
       <MinSystems>5</MinSystems>
       <MinPop>70</MinPop>
@@ -375,6 +375,7 @@
     <MinMatLvl>4</MinMatLvl>
     <Insight>1</Insight>
     <Requirements>
+      <Prerequisite>Advanced Shock Armour</Prerequisite>
       <MinLevel>11</MinLevel>
       <MinSystems>5</MinSystems>
       <MinPop>70</MinPop>
@@ -416,8 +417,6 @@
     </Materials>
     <Requirements>
       <MinLevel>4</MinLevel>
-      <MinSystems>2</MinSystems>
-      <MinPop>24</MinPop>
       <CashCost>40</CashCost>
       <Material Name="Aluminium" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -442,6 +441,7 @@
       <Material Name="Industrial Chemicals" Amount="3"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Stealth Armour</Prerequisite>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>34</MinPop>
@@ -464,6 +464,7 @@
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>35</MinPop>
+      <PlanetType>Volcanic</PlanetType>
       <CashCost>75</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -496,6 +497,7 @@
     <BaseArmour>58</BaseArmour>
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
+      <Prerequisite>Power Armour</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>45</MinPop>
@@ -533,6 +535,7 @@
     <BaseArmour>44</BaseArmour>
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
+      <Prerequisite>Power Armour</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>44</MinPop>
@@ -585,6 +588,7 @@
       <Material Name="Titanium" Amount="5"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Power Armour</Prerequisite>
       <MinLevel>11</MinLevel>
       <MinSystems>5</MinSystems>
       <MinPop>70</MinPop>
@@ -613,6 +617,7 @@
     </Utility>
     <MinMatLvl>4</MinMatLvl>
     <Requirements>
+      <Prerequisite>Assault Power Armour</Prerequisite>
       <MinLevel>13</MinLevel>
       <MinSystems>5</MinSystems>
       <MinPop>90</MinPop>

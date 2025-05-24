@@ -31,7 +31,7 @@
     <MaxLevel>3</MaxLevel>
     <Requirements>
       <MinLevel>2</MinLevel>
-      <MinPop>20</MinPop>
+      <MinPop>18</MinPop>
       <CashCost>60</CashCost>
       <Material Name="Steel" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -63,6 +63,7 @@
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.03</Rarity>
     <Requirements>
+      <Prerequisite>Metasteel</Prerequisite>
       <MinLevel>6</MinLevel>
       <MinPop>36</MinPop>
       <CashCost>200</CashCost>
@@ -78,6 +79,7 @@
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.01</Rarity>
     <Requirements>
+      <Prerequisite>Metasteel</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinPop>44</MinPop>
       <CashCost>300</CashCost>
@@ -94,6 +96,7 @@
     <ArmourMod>2.1</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
+      <Prerequisite>Mithril</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>60</MinPop>
       <CashCost>850</CashCost>
@@ -110,6 +113,7 @@
     <ArmourMod>1.75</ArmourMod>
     <Rarity>0.005</Rarity>
     <Requirements>
+      <Prerequisite>Nanomesh</Prerequisite>
       <MinLevel>12</MinLevel>
       <MinPop>80</MinPop>
       <CashCost>1675</CashCost>
@@ -128,6 +132,7 @@
     <ArmourMod>2.0</ArmourMod>
     <Rarity>0.004</Rarity>
     <Requirements>
+      <Prerequisite>Etherealite</Prerequisite>
       <MinLevel>14</MinLevel>
       <MinPop>100</MinPop>
       <CashCost>2800</CashCost>

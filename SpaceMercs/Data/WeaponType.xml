@@ -33,7 +33,6 @@
     <Noise>10</Noise>
     <Requirements>
       <MinLevel>3</MinLevel>
-      <MinPop>18</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel" Amount="2"/>
@@ -58,8 +57,8 @@
     <Sound>ShotgunAndReload</Sound>
     <Noise>11</Noise>
     <Requirements>
+      <Prerequisite>Triple Shotgun</Prerequisite>
       <MinLevel>5</MinLevel>
-      <MinPop>25</MinPop>
       <CashCost>50</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Steel" Amount="2"/>
@@ -86,6 +85,7 @@
     <Shred>1</Shred>
     <Noise>11</Noise>
     <Requirements>
+      <Prerequisite>Quad Shotgun</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>62</MinPop>
       <CashCost>350</CashCost>
@@ -224,8 +224,7 @@
     <Sound>LaserRifleSingle</Sound>
     <Noise>6</Noise>
     <Requirements>
-      <MinLevel>3</MinLevel>
-      <MinPop>22</MinPop>
+      <MinLevel>4</MinLevel>
       <CashCost>15</CashCost>
       <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -250,8 +249,9 @@
     <Sound>LaserRifleSingle</Sound>
     <Noise>7</Noise>
     <Requirements>
+      <Prerequisite>Laser Rifle</Prerequisite>
       <MinLevel>7</MinLevel>
-      <MinPop>50</MinPop>
+      <MinPop>45</MinPop>
       <CashCost>85</CashCost>
       <Material Name="Titanium" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
@@ -279,8 +279,9 @@
     <Sound>HeavyLaserRifle</Sound>
     <Noise>8</Noise>
     <Requirements>
+      <Prerequisite>Laser Rifle</Prerequisite>
       <MinLevel>6</MinLevel>
-      <MinPop>28</MinPop>
+      <MinPop>25</MinPop>
       <CashCost>40</CashCost>
       <Material Name="Crystals" Amount="2"/>
       <Facility>Armoury</Facility>
@@ -309,6 +310,7 @@
     <Sound>HeavyLaserRifle</Sound>
     <Noise>9</Noise>
     <Requirements>
+      <Prerequisite>Plasma Rifle</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>56</MinPop>
       <CashCost>240</CashCost>
@@ -336,8 +338,8 @@
     <Sound>LaserPistolShort</Sound>
     <Noise>4</Noise>
     <Requirements>
-      <MinLevel>3</MinLevel>
-      <MinPop>20</MinPop>
+      <MinLevel>4</MinLevel>
+      <MinPop>18</MinPop>
       <CashCost>10</CashCost>
       <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -433,6 +435,7 @@
       <Material Name="Electronic Components" Amount="5"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Arc Rifle</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>38</MinPop>
       <CashCost>30</CashCost>
@@ -496,8 +499,8 @@
     </Materials>
     <Requirements>
       <MinLevel>5</MinLevel>
-      <MinPop>26</MinPop>
       <CashCost>50</CashCost>
+      <PlanetType>Ice</PlanetType>
       <Material Name="Industrial Chemicals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">2</Relations>
@@ -598,6 +601,7 @@
       <Material Name="Incendiary Bulb" Amount="2"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Plasma Thrower</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>56</MinPop>
       <CashCost>250</CashCost>
@@ -657,6 +661,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Grenade launcher</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
@@ -685,6 +690,7 @@
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Grenade launcher</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>65</MinPop>
       <CashCost>190</CashCost>
@@ -724,8 +730,9 @@
     <Stable/>
     <Noise>8</Noise>
     <Requirements>
+      <Prerequisite>Laser Rifle</Prerequisite>
       <MinLevel>6</MinLevel>
-      <MinPop>30</MinPop>
+      <MinPop>26</MinPop>
       <CashCost>55</CashCost>
       <Material Name="Crystals" Amount="1"/>
       <Facility>Armoury</Facility>
@@ -757,6 +764,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
+      <Prerequisite>Laser Sniper Rifle</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>38</MinPop>
       <CashCost>60</CashCost>
@@ -807,19 +815,40 @@
       <Material Name="Tungsten" Amount="1"/>
     </Materials>
   </WeaponType>
+  <WeaponType Name="Katana" Class="Melee">
+    <Mass>1.0</Mass>
+    <Cost>35</Cost>
+    <Rarity>7</Rarity>
+    <Speed>9</Speed>
+    <Range Accuracy="1">1.5</Range>
+    <Damage>3+4</Damage>
+    <Desc>A sharp bladed weapon</Desc>
+    <Sound>SwordSlice</Sound>
+    <Noise>1</Noise>
+    <Requirements>
+      <MinLevel>3</MinLevel>
+      <CashCost>25</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Titanium" Amount="1"/>
+    </Requirements>
+    <Materials>
+      <Material Name="Steel" Amount="1"/>
+      <Material Name="Titanium" Amount="1"/>
+    </Materials>
+  </WeaponType>
   <WeaponType Name="Powerblade" Class="Melee">
     <Mass>1.5</Mass>
-    <Cost>80</Cost>
+    <Cost>120</Cost>
     <Rarity>18</Rarity>
     <Speed>10</Speed>
     <Range Accuracy="1">1.5</Range>
-    <Damage>3+4</Damage>
+    <Damage>4+5</Damage>
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
     <Noise>1</Noise>
     <Requirements>
-      <MinLevel>5</MinLevel>
-      <MinPop>25</MinPop>
+      <Prerequisite>Katana</Prerequisite>
+      <MinLevel>7</MinLevel>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Titanium" Amount="1"/>
@@ -851,16 +880,15 @@
   </WeaponType>
   <WeaponType Name="Power Axe" Class="Melee">
     <Mass>2.5</Mass>
-    <Cost>85</Cost>
+    <Cost>125</Cost>
     <Rarity>17</Rarity>
     <Speed>11</Speed>
     <Range>1.5</Range>
-    <Damage>4+4</Damage>
+    <Damage>5+5</Damage>
     <Desc>A sturdy axe powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
-      <MinLevel>4</MinLevel>
-      <MinPop>25</MinPop>
+      <MinLevel>7</MinLevel>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Titanium" Amount="1"/>
@@ -886,6 +914,13 @@
     <Desc>A whirring chainsaw in a sword shape</Desc>
     <Sound>Chainsaw</Sound>
     <Noise>6</Noise>
+    <Requirements>
+      <MinLevel>5</MinLevel>
+      <CashCost>40</CashCost>
+      <Facility>Armoury</Facility>
+      <Material Name="Steel" Amount="1"/>
+      <Material Name="Electronic Components" Amount="1"/>
+    </Requirements>
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="1"/>
@@ -903,7 +938,7 @@
     <Desc>Sharp, chitinous claws attached over your armour, humming with alien power.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
-      <MinLevel>4</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>20</CashCost>
       <Facility>Armoury</Facility>
@@ -930,7 +965,8 @@
     <Desc>Sharp, extensible chitinous spear humming with mystical power that allows you to attack diagonally without penalty.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
-      <MinLevel>7</MinLevel>
+      <Prerequisite>Exo Claws</Prerequisite>
+      <MinLevel>8</MinLevel>
       <MinPop>40</MinPop>
       <CashCost>30</CashCost>
       <Facility>Armoury</Facility>
@@ -958,8 +994,8 @@
     <Sound>SwordSlice</Sound>
     <Shots>2</Shots>
     <Requirements>
+      <Prerequisite>Katana</Prerequisite>
       <MinLevel>6</MinLevel>
-      <MinPop>26</MinPop>
       <CashCost>25</CashCost>
       <Facility>Armoury</Facility>
       <Material Name="Titanium" Amount="2"/>
@@ -1009,6 +1045,7 @@
     <Desc>A huge, powered chainsaw with razor sharp blades.</Desc>
     <Sound>Chainsaw</Sound>
     <Requirements>
+      <Prerequisite>Chainsword</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinPop>42</MinPop>
       <CashCost>110</CashCost>

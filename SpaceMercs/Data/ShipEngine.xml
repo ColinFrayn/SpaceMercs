@@ -27,6 +27,11 @@
     <Accel>50</Accel>
     <Cost>200</Cost>
     <Power>10</Power>
+    <Requirements>
+      <MinLevel>4</MinLevel>
+      <CashCost>30</CashCost>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Desc>A Fusion Drive, able to accelerate your craft to enormous speeds, making an entire solar system reachable with ease.</Desc>
     <Avail>MRTE</Avail>
     <Tex>3,4</Tex>
@@ -38,6 +43,12 @@
     <Cost>500</Cost>
     <Power>16</Power>
     <Desc>A NearLight Drive, suitable for reaching the nearest stars.</Desc>
+    <Requirements>
+      <Prerequisite>Fusion Drive</Prerequisite>
+      <MinLevel>6</MinLevel>
+      <CashCost>50</CashCost>
+      <Facility>Engineering</Facility>
+    </Requirements>
     <Avail>MRE</Avail>
     <Tex>4,4</Tex>
   </ShipEngine>
@@ -51,7 +62,8 @@
     <Avail>MRE</Avail>
     <Tex>4,7</Tex>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <Prerequisite>NearLight Drive</Prerequisite>
+      <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>25</MinPop>
       <CashCost>50</CashCost>
@@ -68,6 +80,7 @@
     <Avail>MRE</Avail>
     <Tex>5,4</Tex>
     <Requirements>
+      <Prerequisite>SuperLight Drive</Prerequisite>
       <MinLevel>8</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>56</MinPop>
@@ -86,6 +99,7 @@
     <Avail>RE</Avail>
     <Tex>6,4</Tex>
     <Requirements>
+      <Prerequisite>Hyperspace Drive</Prerequisite>
       <MinLevel>11</MinLevel>
       <MinSystems>6</MinSystems>
       <MinPop>70</MinPop>
@@ -103,6 +117,7 @@
     <Desc>An Ethereal Drive, using an improvement on subspace technology to travel even faster.</Desc>
     <Avail>RE</Avail>
     <Requirements>
+      <Prerequisite>Subspace Drive</Prerequisite>
       <MinLevel>14</MinLevel>
       <MinPop>85</MinPop>
       <CashCost>200</CashCost>

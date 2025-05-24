@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SpaceMercs.Items;
+using System.Collections;
 using System.IO;
 using System.Reflection;
 using System.Xml;
@@ -46,8 +47,19 @@ namespace SpaceMercs {
             }
             CombineAllShipEquipment();
             if (!LoadCreatureTypes()) return false;
-            if (!LoadMaterialRequirements()) return false; // Have to reload the file after the first pass because requirements might refer to other materials.
 
+            // Have to reload the file after the first pass because requirements might refer to other materials.
+            if (!LoadMaterialRequirements()) return false;
+
+            // Parse all prerequisites from the researchable items
+            foreach (IResearchable res in ResearchableBaseItems) {
+                res.Requirements?.ParsePrerequisites();
+            }
+            foreach (IResearchable res in ResearchableMaterialTypes) {
+                res.Requirements?.ParsePrerequisites();
+            }
+
+            // Load all texture bitmaps
             try {
                 Textures.LoadTextureFiles(strBitmapsDir);
             }
@@ -56,6 +68,7 @@ namespace SpaceMercs {
                 return false;
             }
 
+            // Setup a shortcut to Race[0] = Human race
             Race? human = GetRaceByName("Human");
             if (human is null) {
                 MessageBox.Show("Failed to ID HumanRace in static data", "Static Data Initialisation error", MessageBoxButtons.OK);
@@ -280,6 +293,15 @@ namespace SpaceMercs {
             if (GetWeaponTypeByName(strName) is BaseItemType wp) return wp;
             if (GetArmourTypeByName(strName) is BaseItemType ar) return ar;
             if (GetShipEquipmentByName(strName) is BaseItemType se) return se;
+            return null;
+        }
+        public static IResearchable? GetResearchableByName(string strName) {
+            foreach (IResearchable res in ResearchableBaseItems) {
+                if (string.Equals(res.Name, strName, StringComparison.InvariantCultureIgnoreCase)) return res;
+            }
+            foreach (IResearchable res in ResearchableMaterialTypes) {
+                if (string.Equals(res.Name, strName, StringComparison.InvariantCultureIgnoreCase)) return res;
+            }
             return null;
         }
 
