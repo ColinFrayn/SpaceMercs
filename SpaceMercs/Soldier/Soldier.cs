@@ -441,8 +441,8 @@ namespace SpaceMercs {
         public void AddWeaponExperience(Weapon wp, int exp, ShowMessageDelegate showMessage) {
             int maxExp = Utils.SkillLevelToExperience(Level);
             int oldlvl = 0;
-            if (WeaponExperience.ContainsKey(wp.Type.WClass)) {
-                oldlvl = Utils.ExperienceToSkillLevel(WeaponExperience[wp.Type.WClass]);
+            if (WeaponExperience.TryGetValue(wp.Type.WClass, out int wpexp)) {
+                oldlvl = Utils.ExperienceToSkillLevel(wpexp);
                 WeaponExperience[wp.Type.WClass] += exp;
             }
             else WeaponExperience.Add(wp.Type.WClass, exp);

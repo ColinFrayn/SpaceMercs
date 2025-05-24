@@ -1976,7 +1976,7 @@ namespace SpaceMercs {
             }
 
             // Experience
-            int exp = (cr.Experience * 5) / (ParentMission.Soldiers.Count + 4);
+            int exp = cr.Experience / (ParentMission.Soldiers.Count + 3);
             foreach (Soldier s in ParentMission.Soldiers) {
                 s.AddExperience(exp);
             }

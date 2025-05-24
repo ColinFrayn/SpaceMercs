@@ -17,8 +17,8 @@ Any boss creature must be able to get to the entrance?? Or at least cover a size
 
 At relations >= 3 join human hypergates up to alien ones??
 - Add a trade route between their two nearest colonies, if close enough.
-- Done through alien capital colony diplomacy screen.
-- Options for which colonies??
+- Maybe buy an item to link routes; choose nearby system; apply to alien gate if permissioned??
+- Links are impassable if relations drop with alien. Check this when travelling.
 - Pathing through an alien civ costs differently based on the alien civ relations (and also make sure that cost for home civ changes based on relations)
 
 Option to sell all unequipped armour, weapons (up to a maximum quality?) from Team View if at a colony

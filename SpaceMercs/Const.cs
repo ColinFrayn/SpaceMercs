@@ -179,7 +179,7 @@ namespace SpaceMercs {
         public const double BaseDetectionRange = 7.0; // Range in squares at which a creature of same level can spot you, if you're unencumbered and with default agility
         public const int    CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
-        public const double CreatureExperienceScale = 0.7;  // Scale creature experience value by this amount
+        public const double CreatureExperienceScale = 1.5;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 2.0;  // Increase damage done by traps
         public const double CreatureAttackDamageScale = 0.085;  // Modifier applied to damage done by Creatures per point of Attack.
         public const double CreatureAttackDamageBaseMod = 0.8; // Base scale factor for creature attack damage.
@@ -223,7 +223,7 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.7; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
-        public const double MissionExperienceScale = 0.3d; // Scale for experience gained for finishing a mission
+        public const double MissionExperienceScale = 0.4d; // Scale for experience gained for finishing a mission
         public const double CashRelationsFactor = 0.25; // Exp per credit donated
         public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
         public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
