@@ -21,7 +21,7 @@
   <CreatureType Name="Slime Creature">
     <Scale>1.0</Scale>
     <LevelRange>1,6</LevelRange>
-    <Attack>8</Attack>
+    <Attack>9</Attack>
     <Defence>8</Defence>
     <Health>9</Health>
     <Stamina>16</Stamina>
@@ -58,7 +58,7 @@
   <CreatureType Name="Slime Spitter">
     <Scale>1.0</Scale>
     <LevelRange>2,6</LevelRange>
-    <Attack>9</Attack>
+    <Attack>10</Attack>
     <Defence>7</Defence>
     <Health>9</Health>
     <Stamina>16</Stamina>
@@ -95,7 +95,7 @@
   <CreatureType Name="Slime Hunter">
     <Scale>1.2</Scale>
     <LevelRange>3,6</LevelRange>
-    <Attack>11</Attack>
+    <Attack>12</Attack>
     <Defence>8</Defence>
     <Health>12</Health>
     <Stamina>17</Stamina>

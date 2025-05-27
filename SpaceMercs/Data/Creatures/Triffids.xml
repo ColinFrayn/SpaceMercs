@@ -1,7 +1,7 @@
 ﻿<Data>
   <CreatureType Name="Triffid Sapling">
     <Scale>0.7</Scale>
-    <LevelRange>1,4</LevelRange>
+    <LevelRange>1,3</LevelRange>
     <Attack>8</Attack>
     <Defence>5</Defence>
     <Health>12</Health>
@@ -21,7 +21,7 @@
   </CreatureType>  
   <CreatureType Name="Triffid Lasher">
     <Scale>0.8</Scale>
-    <LevelRange>1,5</LevelRange>
+    <LevelRange>1,6</LevelRange>
     <Attack>11</Attack>
     <Defence>6</Defence>
     <Health>14</Health>
@@ -40,8 +40,8 @@
   </CreatureType>
   <CreatureType Name="Triffid Spore Thrower">
     <Scale>0.8</Scale>
-    <LevelRange>2,5</LevelRange>
-    <Attack>11</Attack>
+    <LevelRange>2,6</LevelRange>
+    <Attack>10</Attack>
     <Defence>6</Defence>
     <Health>16</Health>
     <Stamina>16</Stamina>

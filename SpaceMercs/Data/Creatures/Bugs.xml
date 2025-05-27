@@ -1,9 +1,9 @@
 ﻿<Data>
   <CreatureType Name="Beetle">
     <Scale>0.8</Scale>
-    <LevelRange>1,4</LevelRange>
-    <Attack>5</Attack>
-    <Defence>5</Defence>
+    <LevelRange>1,3</LevelRange>
+    <Attack>6</Attack>
+    <Defence>6</Defence>
     <Health>7</Health>
     <Stamina>12</Stamina>
     <Armour>10</Armour>
@@ -17,8 +17,8 @@
   <CreatureType Name="Giant Bug">
     <Scale>0.9</Scale>
     <LevelRange>1,5</LevelRange>
-    <Attack>7</Attack>
-    <Defence>6</Defence>
+    <Attack>8</Attack>
+    <Defence>8</Defence>
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>12</Armour>
@@ -32,8 +32,8 @@
   <CreatureType Name="Armoured Bug">
     <Scale>0.95</Scale>
     <LevelRange>2,5</LevelRange>
-    <Attack>8</Attack>
-    <Defence>9</Defence>
+    <Attack>10</Attack>
+    <Defence>10</Defence>
     <Health>10</Health>
     <Stamina>14</Stamina>
     <Armour>20</Armour>
@@ -49,7 +49,7 @@
     <Scale>1.1</Scale>
     <LevelRange>3,5</LevelRange>
     <Attack>13</Attack>
-    <Defence>9</Defence>
+    <Defence>10</Defence>
     <Health>12</Health>
     <Stamina>16</Stamina>
     <Armour>16</Armour>
