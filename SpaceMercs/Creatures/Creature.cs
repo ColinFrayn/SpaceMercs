@@ -325,9 +325,12 @@ namespace SpaceMercs {
         public int Experience {
             get {
                 double exp = Math.Pow(1.1, Level - 1) * Const.CreatureExperienceScale;
-                exp *= (Stamina + Attack + Defence + Health + Shields + BaseArmour);
-                foreach (double res in Type.Resistances.Values) exp *= (100.0 + res) / 100.0;
-                if (Type.IsBoss) exp *= 1.5;
+                exp *= (MaxStamina + Attack + Defence + MaxHealth + MaxShields + BaseArmour);
+                foreach (double res in Type.Resistances.Values) exp *= 1d + (res / 1000d);
+                if (Type.Resistances.TryGetValue(WeaponType.DamageType.Physical, out var pRes)) {
+                    exp *= 1 + pRes / 400d; // Physical resistance is way more important
+                }
+                if (Type.IsBoss) exp *= 1.5d;
                 return (int)exp;
             }
         }

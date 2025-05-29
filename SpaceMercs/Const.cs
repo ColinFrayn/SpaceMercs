@@ -179,7 +179,7 @@ namespace SpaceMercs {
         public const double BaseDetectionRange = 7.0; // Range in squares at which a creature of same level can spot you, if you're unencumbered and with default agility
         public const int    CreatureAlertWarningDistance = 4;  // Range to which any alerted creature can trigger other creatures that they can see to also be alert
         public const double FireWeaponExtraDetectionRange = 4.0; // If a soldier fires his weapon then alert all entities no more than this distance outside his detection range
-        public const double CreatureExperienceScale = 1.5;  // Scale creature experience value by this amount
+        public const double CreatureExperienceScale = 1d;  // Scale creature experience value by this amount
         public const double TrapDamageScale = 2.0;  // Increase damage done by traps
         public const double CreatureAttackDamageScale = 0.085;  // Modifier applied to damage done by Creatures per point of Attack.
         public const double CreatureAttackDamageBaseMod = 0.8; // Base scale factor for creature attack damage.
