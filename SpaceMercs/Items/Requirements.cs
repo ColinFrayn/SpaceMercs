@@ -110,11 +110,12 @@ namespace SpaceMercs.Items {
         // The player team & player race : Can they actually initiate research?
         public bool TeamMeetsRequirements(Team team) {
             if (team.Cash < CashCost) return false;
+            if (team.MaximumSoldierLevel < MinLevel) return false;
+            if (team.PlayerShip.PowerConsumption > team.PlayerShip.PowerGeneration) return false;
             foreach (Race rc in RequiredRaceRelations.Keys) {
                 if (!rc.Known) return false;
                 if (team.GetRelations(rc) < RequiredRaceRelations[rc]) return false;
             }
-            if (team.MaximumSoldierLevel < MinLevel) return false;
             foreach (RoomAbilities ra in RequiredFacilities) {
                 if (!team.PlayerShip.HasFacility(ra)) return false;
             }

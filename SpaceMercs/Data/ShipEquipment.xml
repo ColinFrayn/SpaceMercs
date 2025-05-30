@@ -156,12 +156,11 @@
     <Size>L</Size>
     <Power>15</Power>
     <BuildColony>Basic</BuildColony>
-    <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
+    <Desc>A self-replicating robotic device which founds a new colony on a suitable planet or moon either of Oceanic or Rocky type. The location must first be cleared of surface anomalies, detected using the Surface Scanner.</Desc>
     <Avail>CEMRT</Avail>
     <Requirements>
-      <MinLevel>3</MinLevel>
-      <MinPop>20</MinPop>
-      <CashCost>10</CashCost>
+      <MinLevel>5</MinLevel>
+      <CashCost>50</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -176,8 +175,8 @@
     <Avail>CEMRT</Avail>
     <Requirements>
       <Prerequisite>Colony Builder</Prerequisite>
-      <MinLevel>6</MinLevel>
-      <MinPop>34</MinPop>
+      <MinLevel>7</MinLevel>
+      <MinPop>30</MinPop>
       <CashCost>60</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -194,7 +193,7 @@
     <Requirements>
       <Prerequisite>Terraform Device</Prerequisite>
       <MinLevel>9</MinLevel>
-      <MinPop>52</MinPop>
+      <MinPop>45</MinPop>
       <CashCost>120</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>

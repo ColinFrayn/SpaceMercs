@@ -1,0 +1,3110 @@
+<SpaceMercsSaveFile Version="1.0">
+<GUI>
+<ShowLabels/>
+<ShowMapGrid/>
+<ShowRangeCircles/>
+<ShowTradeRoutes/>
+<FadeStars/>
+<ShowFlags/>
+<ShowColonies/>
+</GUI>
+<Clock>13/09/2158 17:53:53</Clock>
+<Map Seed="533589" SPS="16" PD="6">
+ <Sector X="-1" Y="-1" Inhabitant="Grey">
+<Star ID="0">
+<Seed>8601428</Seed>
+<Name>Yiplogu Delta</Name>
+ <MapPos X="-10.37" Y="-7.78"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)3</TradeRoute>
+ <TradeRoute>(-1,-1)14</TradeRoute>
+ <Planets>
+<Planet Seed="5577008" />
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>104613509</PRot>
+<Radius>4,730,648</Radius>
+<ARot>79,740</ARot>
+<Temp>254.59</Temp>
+<Seed>2896524</Seed>
+<Orbit>50298827086</Orbit>
+<TempBase>269.6666510557066</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="6224228" />
+<Planet Seed="3302518" />
+<Planet Seed="7117133" />
+<Planet Seed="2685588" />
+<Planet Seed="2899951" />
+<Planet Seed="8833968" />
+<Planet Seed="5560875" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>339339</Seed>
+ <MapPos X="-7.53" Y="-7.46"/>
+</Star>
+<Star ID="2">
+<Seed>6880946</Seed>
+<Name>Ivlat</Name>
+ <MapPos X="-8.4" Y="-11.98"/>
+ <Owner>Grey</Owner>
+ <Planets>
+<Planet Seed="8376013" />
+<Planet Seed="2011292" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>8855387</PRot>
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>680231364166710000</LastGrowth>
+ <NextGrowth>681263844166710000</NextGrowth>
+</Colony>
+<Radius>48,903,613</Radius>
+<ARot>725,836</ARot>
+<Temp>298.81</Temp>
+<Seed>1761860</Seed>
+<Orbit>194857557013</Orbit>
+<TempBase>343.2401353353646</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>2909352</Seed>
+<Name>Wawruko Major</Name>
+ <MapPos X="-7.89" Y="-9.03"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)0</TradeRoute>
+ <TradeRoute>(-1,-1)14</TradeRoute>
+ <Planets>
+<Planet Seed="1751458" />
+<Planet Seed="1459912" />
+<Planet Seed="8905523" />
+<Planet Seed="5552693" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>29392322</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>679119552000000000</LastGrowth>
+ <NextGrowth>682100352000000000</NextGrowth>
+</Colony>
+<Radius>6,584,421</Radius>
+<ARot>95,726</ARot>
+<Temp>304.14</Temp>
+<Seed>9628762</Seed>
+<Orbit>178597821089</Orbit>
+<TempBase>302.4381465326927</TempBase>
+</Planet>
+<Planet Seed="4073328" />
+<Planet Seed="171320" />
+<Planet Seed="7268338" />
+<Planet Seed="5998270" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>2908119</Seed>
+ <MapPos X="-13.06" Y="-6.04"/>
+</Star>
+<Star ID="5">
+<Seed>1383337</Seed>
+ <MapPos X="-10.74" Y="-13.05"/>
+</Star>
+<Star ID="6">
+<Seed>1699905</Seed>
+ <MapPos X="-8.52" Y="-8.02"/>
+</Star>
+<Star ID="7">
+<Seed>231936</Seed>
+ <MapPos X="-7.27" Y="-6.1"/>
+</Star>
+<Star ID="8">
+<Seed>2003569</Seed>
+ <MapPos X="-12.14" Y="-10.6"/>
+</Star>
+<Star ID="9">
+<Seed>4095754</Seed>
+ <MapPos X="-13.21" Y="-13.42"/>
+</Star>
+<Star ID="10">
+<Seed>4480102</Seed>
+ <MapPos X="-5.68" Y="-5.51"/>
+</Star>
+<Star ID="11">
+<Seed>2768787</Seed>
+ <MapPos X="-13.95" Y="-9.14"/>
+</Star>
+<Star ID="12">
+<Seed>791951</Seed>
+ <MapPos X="-8.97" Y="-5.78"/>
+</Star>
+<Star ID="13">
+<Seed>3086663</Seed>
+ <MapPos X="-6.5" Y="-11.08"/>
+</Star>
+<Star ID="14">
+<Seed>4126966</Seed>
+<Name>Grey Home</Name>
+ <MapPos X="-9.27" Y="-9.51"/>
+ <Owner>Grey</Owner>
+ <TradeRoute>(-1,-1)0</TradeRoute>
+ <TradeRoute>(-1,-1)3</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>123256782</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Grey</Owner>
+ <NextGrowth>694217088000000000</NextGrowth>
+ <SeedProgress>190.4036</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,408,937</Radius>
+<ARot>87,321</ARot>
+<Temp>298.20</Temp>
+<Seed>2756276</Seed>
+<Orbit>40233081398</Orbit>
+<Homeworld/>
+<TempBase>288.43350859589975</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Grey</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>28691498</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>680111321719090000</LastGrowth>
+ <NextGrowth>685168313719090000</NextGrowth>
+</Colony>
+<Radius>49,046,202</Radius>
+<ARot>768,851</ARot>
+<Temp>211.29</Temp>
+<Seed>5035300</Seed>
+<Orbit>56567243016</Orbit>
+<TempBase>242.70801417380483</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>679465049719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Grey</Owner>
+ <LastGrowth>680139780166710000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>72424308</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Grey</Owner>
+ <LastGrowth>679609440000000000</LastGrowth>
+ <NextGrowth>690366240000000000</NextGrowth>
+</Colony>
+<Radius>4,537,412</Radius>
+<ARot>65,527</ARot>
+<Temp>214.76</Temp>
+<Seed>945383</Seed>
+<Orbit>79411872876</Orbit>
+<TempBase>204.52136467715624</TempBase>
+</Planet>
+<Planet Seed="6630468" />
+<Planet Seed="9153253" />
+<Planet Seed="5937907" />
+ </Planets>
+</Star>
+<Star ID="15">
+<Seed>7542195</Seed>
+ <MapPos X="-14.53" Y="-12.89"/>
+</Star>
+ </Sector>
+ <Sector X="0" Y="-1" Inhabitant="Insectoid">
+<Star ID="0">
+<Seed>5547643</Seed>
+<Name>NoPrib Epsilon</Name>
+ <MapPos X="-2.41" Y="-11.93"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <TradeRoute>(0,-1)15</TradeRoute>
+ <Planets>
+<Planet Seed="7379230" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>19713858</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679179168000000000</LastGrowth>
+ <NextGrowth>681998400000000000</NextGrowth>
+</Colony>
+<Radius>51,994,389</Radius>
+<ARot>829,201</ARot>
+<Temp>282.71</Temp>
+<Seed>9098427</Seed>
+<Orbit>72278696094</Orbit>
+<TempBase>324.75378176262825</TempBase>
+</Planet>
+<Planet Seed="6088427" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>26222859</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679421088000000000</LastGrowth>
+ <NextGrowth>684196416000000000</NextGrowth>
+</Colony>
+<Radius>5,377,601</Radius>
+<ARot>77,576</ARot>
+<Temp>209.92</Temp>
+<Seed>5080066</Seed>
+<Orbit>202628934001</Orbit>
+<TempBase>192.99179338233662</TempBase>
+</Planet>
+<Planet Seed="4076632" />
+<Planet Seed="645849" />
+<Planet Seed="7192817" />
+<Planet Seed="2481271" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5949821</Seed>
+<Name>Chichaio Beta</Name>
+ <MapPos X="-0.74" Y="-7.8"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="7888600" />
+<Planet Seed="5416901" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>13061776</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>680106178085880000</LastGrowth>
+ <NextGrowth>687265282085880000</NextGrowth>
+</Colony>
+<Radius>57,732,574</Radius>
+<ARot>971,586</ARot>
+<Temp>338.00</Temp>
+<Seed>809387</Seed>
+<Orbit>128303737736</Orbit>
+<TempBase>388.2552938486831</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>5935979</Seed>
+<Name>Neplire Major</Name>
+ <MapPos X="-0.11" Y="-6.75"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="3118148" />
+<Planet Seed="760803" />
+<Planet Seed="5874986" />
+<Planet Seed="537213" />
+<Planet ID="4">
+<Type>Desert</Type>
+<PRot>25971440</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679220590085880000</LastGrowth>
+ <NextGrowth>682391470085880000</NextGrowth>
+</Colony>
+<Radius>6,249,406</Radius>
+<ARot>96,233</ARot>
+<Temp>290.06</Temp>
+<Seed>5219147</Seed>
+<Orbit>168640672500</Orbit>
+<TempBase>321.26552971053553</TempBase>
+</Planet>
+<Planet Seed="7131569" />
+<Planet Seed="455357" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>3898592</Seed>
+<Name>HiNlev Prime</Name>
+ <MapPos X="-3.7" Y="-9.89"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="4597981" />
+<Planet Seed="8991968" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>8061391</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679380421085880000</LastGrowth>
+ <NextGrowth>684506533085880000</NextGrowth>
+</Colony>
+<Radius>56,785,487</Radius>
+<ARot>789,479</ARot>
+<Temp>252.08</Temp>
+<Seed>5568350</Seed>
+<Orbit>184795932180</Orbit>
+<TempBase>289.56931488431513</TempBase>
+</Planet>
+<Planet Seed="1627917" />
+<Planet Seed="2415168" />
+<Planet Seed="9160504" />
+<Planet Seed="3529636" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>5326888</Seed>
+<Name>Yahhaze</Name>
+ <MapPos X="-4.08" Y="-7.28"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="1437816" />
+<Planet Seed="1753608" />
+<Planet Seed="2985285" />
+<Planet Seed="7517305" />
+<Planet ID="4">
+<Type>Rocky</Type>
+<PRot>25832917</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>678994237085880000</LastGrowth>
+ <NextGrowth>681935293085880000</NextGrowth>
+</Colony>
+<Radius>5,364,231</Radius>
+<ARot>88,897</ARot>
+<Temp>305.10</Temp>
+<Seed>673198</Seed>
+<Orbit>187564130742</Orbit>
+<TempBase>323.1714304895989</TempBase>
+</Planet>
+<Planet Seed="9843850" />
+<Planet Seed="707217" />
+<Planet Seed="3004314" />
+<Planet Seed="8767688" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>6984507</Seed>
+ <MapPos X="2.05" Y="-14.66"/>
+</Star>
+<Star ID="6">
+<Seed>7772978</Seed>
+ <MapPos X="2.78" Y="-10.49"/>
+</Star>
+<Star ID="7">
+<Seed>1908313</Seed>
+<Name>Kicleck</Name>
+ <MapPos X="4.4" Y="-8.76"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>114456393</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679195543085880000</LastGrowth>
+ <NextGrowth>682519351085880000</NextGrowth>
+</Colony>
+<Radius>6,311,381</Radius>
+<ARot>101,867</ARot>
+<Temp>291.22</Temp>
+<Seed>4773554</Seed>
+<Orbit>42308978781</Orbit>
+<TempBase>283.05747313719354</TempBase>
+</Planet>
+<Planet Seed="3125421" />
+<Planet Seed="1040486" />
+<Planet Seed="3267721" />
+<Planet Seed="3099668" />
+<Planet Seed="1652670" />
+<Planet Seed="7870994" />
+ </Planets>
+</Star>
+<Star ID="8">
+<Seed>3843674</Seed>
+ <MapPos X="3.79" Y="-13.86"/>
+</Star>
+<Star ID="9">
+<Seed>3012795</Seed>
+<Name>Ujliv Major</Name>
+ <MapPos X="1.44" Y="-7.6"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="3522143" />
+<Planet Seed="1853698" />
+<Planet Seed="5013690" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>7149909</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679446964085880000</LastGrowth>
+ <NextGrowth>683287444085880000</NextGrowth>
+</Colony>
+<Radius>6,039,067</Radius>
+<ARot>72,095</ARot>
+<Temp>257.50</Temp>
+<Seed>8842380</Seed>
+<Orbit>696717105155</Orbit>
+<TempBase>235.7786332760701</TempBase>
+</Planet>
+<Planet Seed="7025566" />
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>2845132</Seed>
+<Name>Insectoid Home</Name>
+ <MapPos X="-1.02" Y="-10.3"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)0</TradeRoute>
+ <TradeRoute>(0,-1)15</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>118713029</PRot>
+<Colony>
+ <BaseType>31</BaseType>
+ <Owner>Insectoid</Owner>
+ <NextGrowth>697347360000000000</NextGrowth>
+ <SeedProgress>95.8941</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6,312,329</Radius>
+<ARot>105,628</ARot>
+<Temp>289.55</Temp>
+<Seed>8701436</Seed>
+<Orbit>40429484630</Orbit>
+<Homeworld/>
+<TempBase>320.6923481447038</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679908228166710000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>84533191</PRot>
+<Radius>5,672,795</Radius>
+<ARot>63,315</ARot>
+<Temp>243.56</Temp>
+<Seed>7317835</Seed>
+<Orbit>56787700045</Orbit>
+<TempBase>269.76414577583785</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>54200949</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679449600000000000</LastGrowth>
+ <NextGrowth>684205056000000000</NextGrowth>
+</Colony>
+<Radius>6,928,985</Radius>
+<ARot>93,341</ARot>
+<Temp>215.28</Temp>
+<Seed>1734072</Seed>
+<Orbit>79140362477</Orbit>
+<TempBase>228.02962131649915</TempBase>
+</Planet>
+<Planet Seed="3541502" />
+<Planet Seed="7905274" />
+<Planet Seed="3208322" />
+<Planet Seed="8216415" />
+<Planet Seed="8923294" />
+<Planet Seed="1181575" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>4386290</Seed>
+<Name>Zatroi Delta</Name>
+ <MapPos X="-1.33" Y="-13.12"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="1501588" />
+<Planet Seed="5915089" />
+<Planet Seed="7693585" />
+<Planet ID="3">
+<Type>Volcanic</Type>
+<PRot>33033562</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679661227085880000</LastGrowth>
+ <NextGrowth>685728235085880000</NextGrowth>
+</Colony>
+<Radius>6,555,295</Radius>
+<ARot>98,910</ARot>
+<Temp>222.14</Temp>
+<Seed>5180922</Seed>
+<Orbit>138112206896</Orbit>
+<TempBase>221.45618451940072</TempBase>
+</Planet>
+<Planet Seed="7214009" />
+<Planet Seed="3034089" />
+<Planet Seed="5257816" />
+<Planet Seed="393107" />
+<Planet Seed="4310617" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>6189776</Seed>
+<Name>JiGrio Alpha</Name>
+ <MapPos X="4.25" Y="-9.89"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="4872686" />
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>13500815</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>678961402085880000</LastGrowth>
+ <NextGrowth>682261882085880000</NextGrowth>
+</Colony>
+<Radius>5,762,740</Radius>
+<ARot>69,908</ARot>
+<Temp>304.84</Temp>
+<Seed>8023755</Seed>
+<Orbit>357286517569</Orbit>
+<TempBase>293.3536508755338</TempBase>
+</Planet>
+<Planet Seed="2291412" />
+<Planet Seed="4993992" />
+<Planet Seed="5182959" />
+<Planet Seed="6405719" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>6986193</Seed>
+<Name>YaHrir</Name>
+ <MapPos X="0.3" Y="-12.89"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="657167" />
+<Planet Seed="7207823" />
+<Planet Seed="2986459" />
+<Planet ID="3">
+<Type>Desert</Type>
+<PRot>45501171</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679096177085880000</LastGrowth>
+ <NextGrowth>682376785085880000</NextGrowth>
+</Colony>
+<Radius>4,963,673</Radius>
+<ARot>73,899</ARot>
+<Temp>300.09</Temp>
+<Seed>4703225</Seed>
+<Orbit>119489152300</Orbit>
+<TempBase>332.37339696067113</TempBase>
+</Planet>
+<Planet Seed="5053326" />
+<Planet Seed="7239655" />
+<Planet Seed="6107949" />
+<Planet Seed="9490973" />
+<Planet Seed="2592277" />
+ </Planets>
+</Star>
+<Star ID="14">
+<Seed>965805</Seed>
+<Name>Zullod Delta</Name>
+ <MapPos X="-4.09" Y="-14.23"/>
+ <Owner>Insectoid</Owner>
+ <Planets>
+<Planet Seed="8077352" />
+<Planet Seed="3909273" />
+<Planet Seed="4300678" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>45681527</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>678990760085880000</LastGrowth>
+ <NextGrowth>682804456085880000</NextGrowth>
+</Colony>
+<Radius>5,484,901</Radius>
+<ARot>79,340</ARot>
+<Temp>285.52</Temp>
+<Seed>3048414</Seed>
+<Orbit>112667759156</Orbit>
+<TempBase>283.57145269015433</TempBase>
+</Planet>
+<Planet Seed="7468385" />
+<Planet Seed="1853931" />
+<Planet Seed="9275628" />
+<Planet Seed="3194448" />
+<Planet Seed="3820414" />
+ </Planets>
+</Star>
+<Star ID="15">
+<Seed>9501612</Seed>
+<Name>Rilhubu Minor</Name>
+ <MapPos X="0.37" Y="-9"/>
+ <Owner>Insectoid</Owner>
+ <TradeRoute>(0,-1)0</TradeRoute>
+ <TradeRoute>(0,-1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>53464526</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679309632000000000</LastGrowth>
+ <NextGrowth>686915424000000000</NextGrowth>
+</Colony>
+<Radius>61,130,119</Radius>
+<ARot>981,436</ARot>
+<Temp>246.89</Temp>
+<Seed>4687270</Seed>
+<Orbit>29466818826</Orbit>
+<TempBase>283.60424886783323</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>29138410</PRot>
+<Radius>81,282,467</Radius>
+<ARot>1,545,100</ARot>
+<Temp>208.17</Temp>
+<Seed>5288174</Seed>
+<Orbit>41204470695</Orbit>
+<TempBase>239.122257689797</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>74802546</PRot>
+<Colony>
+ <BaseType>21</BaseType>
+ <Owner>Insectoid</Owner>
+ <LastGrowth>679264704000000000</LastGrowth>
+ <NextGrowth>687050208000000000</NextGrowth>
+</Colony>
+<Radius>6,939,860</Radius>
+<ARot>92,908</ARot>
+<Temp>221.51</Temp>
+<Seed>4456336</Seed>
+<Orbit>57588580627</Orbit>
+<TempBase>201.84095159588844</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Insectoid</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8005137" />
+<Planet Seed="9841769" />
+<Planet Seed="628044" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="-1" Y="0" Inhabitant="Elithiri">
+<Star ID="0">
+<Seed>4548836</Seed>
+ <MapPos X="-5.26" Y="3.55"/>
+</Star>
+<Star ID="1">
+<Seed>6615461</Seed>
+ <MapPos X="-6.75" Y="-3.21"/>
+</Star>
+<Star ID="2">
+<Seed>2115502</Seed>
+<Name>Elithiri Home</Name>
+ <MapPos X="-9.27" Y="-0.19"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>152471648</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Elithiri</Owner>
+ <NextGrowth>695630592000000000</NextGrowth>
+ <SeedProgress>122.3390</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,863,873</Radius>
+<ARot>85,261</ARot>
+<Temp>285.62</Temp>
+<Seed>5047005</Seed>
+<Orbit>29857009431</Orbit>
+<Homeworld/>
+<TempBase>285.106871287504</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679159193719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+<Moon ID="2">
+<Colony>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>680208900166710000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1914784" />
+<Planet Seed="1167173" />
+<Planet Seed="7458888" />
+<Planet Seed="7997016" />
+<Planet Seed="9047091" />
+<Planet Seed="9582688" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>6675544</Seed>
+ <MapPos X="-11.01" Y="-3.05"/>
+</Star>
+<Star ID="4">
+<Seed>1668775</Seed>
+ <MapPos X="-6.79" Y="-4.33"/>
+</Star>
+<Star ID="5">
+<Seed>4572627</Seed>
+ <MapPos X="-14.69" Y="0.15"/>
+</Star>
+<Star ID="6">
+<Seed>8729377</Seed>
+<Name>Ijrur Prime</Name>
+ <MapPos X="-11.31" Y="2.47"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet Seed="3672263" />
+<Planet Seed="4385696" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>43513543</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679121221085880000</LastGrowth>
+ <NextGrowth>682729285085880000</NextGrowth>
+</Colony>
+<Radius>4,464,834</Radius>
+<ARot>62,666</ARot>
+<Temp>257.60</Temp>
+<Seed>9728901</Seed>
+<Orbit>115071813300</Orbit>
+<TempBase>244.8271868684738</TempBase>
+</Planet>
+<Planet Seed="7366515" />
+<Planet Seed="7293691" />
+ </Planets>
+</Star>
+<Star ID="7">
+<Seed>4533372</Seed>
+<Name>Itlio</Name>
+ <MapPos X="-7.01" Y="-0.88"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet Seed="7632751" />
+<Planet Seed="170851" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>40217058</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>680415552000000000</LastGrowth>
+ <NextGrowth>686791008000000000</NextGrowth>
+</Colony>
+<Radius>5,157,544</Radius>
+<ARot>73,269</ARot>
+<Temp>356.33</Temp>
+<Seed>4065609</Seed>
+<Orbit>113021428020</Orbit>
+<TempBase>365.04479899277686</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Volcanic</Type>
+<PRot>28836106</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679119552000000000</LastGrowth>
+ <NextGrowth>685121760000000000</NextGrowth>
+</Colony>
+<Radius>5,934,138</Radius>
+<ARot>74,017</ARot>
+<Temp>307.81</Temp>
+<Seed>5932869</Seed>
+<Orbit>156917343932</Orbit>
+<TempBase>309.2343600869783</TempBase>
+<Moons>
+<Moon ID="1">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="8">
+<Seed>6266203</Seed>
+<Name>Leplov Prime</Name>
+ <MapPos X="-5.88" Y="-0.48"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>112370683</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679319944085880000</LastGrowth>
+ <NextGrowth>683936296085880000</NextGrowth>
+</Colony>
+<Radius>5,039,576</Radius>
+<ARot>72,566</ARot>
+<Temp>317.42</Temp>
+<Seed>2901245</Seed>
+<Orbit>45459385358</Orbit>
+<TempBase>312.4305403574418</TempBase>
+</Planet>
+<Planet Seed="5030086" />
+<Planet Seed="6168125" />
+<Planet Seed="1286258" />
+<Planet Seed="7521499" />
+<Planet Seed="9368344" />
+ </Planets>
+</Star>
+<Star ID="9">
+<Seed>9774898</Seed>
+ <MapPos X="-13.38" Y="-4.31"/>
+</Star>
+<Star ID="10">
+<Seed>2869632</Seed>
+ <MapPos X="-13.06" Y="0.91"/>
+</Star>
+<Star ID="11">
+<Seed>9226054</Seed>
+<Name>Viyluv</Name>
+ <MapPos X="-8.04" Y="-0.2"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)12</TradeRoute>
+ <Planets>
+<Planet Seed="5616607" />
+<Planet Seed="213391" />
+<Planet Seed="9138198" />
+<Planet Seed="1930396" />
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>22938816</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679190400000000000</LastGrowth>
+ <NextGrowth>681753024000000000</NextGrowth>
+</Colony>
+<Radius>7,232,113</Radius>
+<ARot>115,263</ARot>
+<Temp>294.83</Temp>
+<Seed>8335060</Seed>
+<Orbit>200298615185</Orbit>
+<TempBase>295.46034534751647</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Elithiri</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="9362717" />
+<Planet Seed="8131109" />
+<Planet Seed="9261428" />
+<Planet Seed="971222" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>7590344</Seed>
+<Name>Chekrez Prime</Name>
+ <MapPos X="-7.82" Y="1.39"/>
+ <Owner>Elithiri</Owner>
+ <TradeRoute>(-1,0)2</TradeRoute>
+ <TradeRoute>(-1,0)7</TradeRoute>
+ <TradeRoute>(-1,0)11</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>66064355</PRot>
+<Colony>
+ <BaseType>25</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>678989088000000000</LastGrowth>
+ <NextGrowth>683781696000000000</NextGrowth>
+ <SeedProgress>182.1613</SeedProgress>
+</Colony>
+<Radius>7,328,891</Radius>
+<ARot>97,053</ARot>
+<Temp>284.60</Temp>
+<Seed>8256728</Seed>
+<Orbit>64893939292</Orbit>
+<TempBase>269.1589445752175</TempBase>
+</Planet>
+<Planet Seed="2819473" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>9900670</Seed>
+ <MapPos X="-10.27" Y="3.77"/>
+</Star>
+<Star ID="14">
+<Seed>2630694</Seed>
+ <MapPos X="-7.84" Y="3.61"/>
+</Star>
+<Star ID="15">
+<Seed>4608814</Seed>
+<Name>Rebhig Beta</Name>
+ <MapPos X="-6.92" Y="0.93"/>
+ <Owner>Elithiri</Owner>
+ <Planets>
+<Planet Seed="3248444" />
+<Planet Seed="42645" />
+<Planet Seed="48927" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>38149383</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Elithiri</Owner>
+ <LastGrowth>679229218085880000</LastGrowth>
+ <NextGrowth>682641154085880000</NextGrowth>
+</Colony>
+<Radius>7,204,963</Radius>
+<ARot>122,210</ARot>
+<Temp>275.35</Temp>
+<Seed>8866664</Seed>
+<Orbit>127178476272</Orbit>
+<TempBase>259.35781000214257</TempBase>
+</Planet>
+<Planet Seed="5414529" />
+<Planet Seed="2384518" />
+<Planet Seed="4950333" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="0" Y="0" Inhabitant="Human">
+<Star ID="0">
+<Seed>708736</Seed>
+ <MapPos X="-3.58" Y="2.54"/>
+</Star>
+<Star ID="1">
+<Seed>8156547</Seed>
+ <MapPos X="-1.36" Y="-4.51"/>
+</Star>
+<Star ID="2">
+<Seed>8480069</Seed>
+ <MapPos X="-4.5" Y="2.12"/>
+</Star>
+<Star ID="3">
+<Seed>1074036</Seed>
+ <MapPos X="2.91" Y="0.94"/>
+</Star>
+<Star ID="4">
+<Seed>2700104</Seed>
+ <MapPos X="4.37" Y="4.4"/>
+</Star>
+<Star ID="5">
+<Seed>8162706</Seed>
+ <MapPos X="0.1" Y="3.25"/>
+</Star>
+<Star ID="6">
+<Seed>745272</Seed>
+ <MapPos X="-3.48" Y="0.77"/>
+</Star>
+<Star ID="7">
+<Seed>1510290</Seed>
+ <MapPos X="2.99" Y="-2.82"/>
+</Star>
+<Star ID="8">
+<Seed>3691064</Seed>
+ <MapPos X="2.53" Y="-3.84"/>
+</Star>
+<Star ID="9">
+<Seed>3974699</Seed>
+<Name>Slightly Warm</Name>
+ <MapPos X="-0.61" Y="-2.67"/>
+ <Visited/></Star>
+<Star ID="10">
+<Seed>5441829</Seed>
+<Name>Human Home</Name>
+ <MapPos X="0.15" Y="-0.46"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)11</TradeRoute>
+ <TradeRoute>(0,0)14</TradeRoute>
+ <Planets>
+<Planet Seed="4876660" />
+<Planet Seed="3977752" />
+<Planet Seed="9863264" />
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>7655318</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678185057770049375</LastUpdate>
+ <LastGrowth>678756168187462799</LastGrowth>
+ <NextGrowth>681276456187462799</NextGrowth>
+</Colony>
+<Radius>58,675,618</Radius>
+<ARot>823,841</ARot>
+<Temp>278.50</Temp>
+<Seed>8366080</Seed>
+<Orbit>199097039059</Orbit>
+<TempBase>319.910942267813</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>678982937719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>679757425606710000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="2">
+<Colony>
+ <Owner>Human</Owner>
+ <LastGrowth>680728072533800000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>17478862</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>679594992376370000</LastUpdate>
+ <NextGrowth>692681760000000000</NextGrowth>
+ <SeedProgress>34.9138</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>6,910,895</Radius>
+<ARot>90,905</ARot>
+<Temp>290.95</Temp>
+<Seed>1742637</Seed>
+<Orbit>276124589153</Orbit>
+<Homeworld/>
+<TempBase>271.36835413934733</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Human</Owner>
+ <LastUpdate>678188815271058228</LastUpdate>
+ <LastGrowth>678166258227708750</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1056473" />
+<Planet Seed="6906358" />
+<Planet Seed="8440435" />
+<Planet Seed="9758122" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="11">
+<Seed>4343598</Seed>
+<Name>EWheb Minor</Name>
+ <MapPos X="1.48" Y="-0.21"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)10</TradeRoute>
+ <TradeRoute>(0,0)14</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>23965238</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678229565361329429</LastUpdate>
+ <LastGrowth>679241941463414638</LastGrowth>
+ <NextGrowth>686121973463414638</NextGrowth>
+</Colony>
+<Radius>5,658,801</Radius>
+<ARot>82,319</ARot>
+<Temp>246.57</Temp>
+<Seed>8445662</Seed>
+<Orbit>190264498954</Orbit>
+<TempBase>261.16908837560135</TempBase>
+</Planet>
+<Planet Seed="7623068" />
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>9921982</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678230783388873179</LastUpdate>
+ <LastGrowth>679685067000000000</LastGrowth>
+ <NextGrowth>683724267000000000</NextGrowth>
+</Colony>
+<Radius>8,112,972</Radius>
+<ARot>112,929</ARot>
+<Temp>207.67</Temp>
+<Seed>3241956</Seed>
+<Orbit>371061081770</Orbit>
+<TempBase>186.35359929182846</TempBase>
+</Planet>
+<Planet Seed="815588" />
+<Planet Seed="8108759" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="12">
+<Seed>2251480</Seed>
+<Name>New Frontier</Name>
+ <MapPos X="-1.88" Y="-1.54"/>
+ <Owner>Human</Owner>
+ <Planets>
+<Planet Seed="475157" />
+<Planet Seed="3194002" />
+<Planet Seed="9926744" />
+<Planet Seed="5995134" />
+<Planet ID="4">
+<Type>Rocky</Type>
+<PRot>23690687</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678849879588140000</LastUpdate>
+ <LastGrowth>679799414922830000</LastGrowth>
+ <NextGrowth>682582358922830000</NextGrowth>
+</Colony>
+<Radius>4,749,831</Radius>
+<ARot>64,028</ARot>
+<Temp>283.50</Temp>
+<Seed>8414276</Seed>
+ <Scanned/>
+<Orbit>247298408307</Orbit>
+<TempBase>300.29391988674223</TempBase>
+</Planet>
+<Planet Seed="6541980" />
+<Planet Seed="9950239" />
+<Planet Seed="3409559" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="13">
+<Seed>6063744</Seed>
+ <MapPos X="0.75" Y="1.91"/>
+</Star>
+<Star ID="14">
+<Seed>4421447</Seed>
+<Name>Rliwrura Prime</Name>
+ <MapPos X="-0.62" Y="-1.5"/>
+ <Owner>Human</Owner>
+ <TradeRoute>(0,0)10</TradeRoute>
+ <TradeRoute>(0,0)11</TradeRoute>
+ <Planets>
+<Planet Seed="1632694" />
+<Planet Seed="4756618" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>87854739</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678271378068898029</LastUpdate>
+ <LastGrowth>679347216000000000</LastGrowth>
+ <NextGrowth>683600688000000000</NextGrowth>
+</Colony>
+<Radius>5,472,180</Radius>
+<ARot>77,178</ARot>
+<Temp>225.32</Temp>
+<Seed>3945480</Seed>
+<Orbit>65976230921</Orbit>
+<TempBase>222.77361432978904</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Human</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>41942328</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Human</Owner>
+ <LastUpdate>678407688586014156</LastUpdate>
+ <LastGrowth>679894803512195127</LastGrowth>
+ <NextGrowth>685275795512195127</NextGrowth>
+</Colony>
+<Radius>7,338,477</Radius>
+<ARot>75,538</ARot>
+<Temp>200.89</Temp>
+<Seed>8474093</Seed>
+<Orbit>92789428794</Orbit>
+<TempBase>187.56955694855645</TempBase>
+</Planet>
+<Planet Seed="4399506" />
+ </Planets>
+ <Visited/></Star>
+<Star ID="15">
+<Seed>3160547</Seed>
+ <MapPos X="4.1" Y="0.39"/>
+</Star>
+ </Sector>
+ <Sector X="-1" Y="1" Inhabitant="Gokan">
+<Star ID="0">
+<Seed>594258</Seed>
+<Name>Gokan Home</Name>
+ <MapPos X="-8.58" Y="9.37"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)1</TradeRoute>
+ <TradeRoute>(-1,1)5</TradeRoute>
+ <Planets>
+<Planet Seed="7272050" />
+<Planet ID="1">
+<Type>Desert</Type>
+<PRot>31538944</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679675104000000000</LastGrowth>
+ <NextGrowth>684649152000000000</NextGrowth>
+</Colony>
+<Radius>4,875,004</Radius>
+<ARot>66,384</ARot>
+<Temp>329.45</Temp>
+<Seed>2187746</Seed>
+<Orbit>154795780662</Orbit>
+<TempBase>364.8899894376107</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680634501333800000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Rocky</Type>
+<PRot>20232271</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Gokan</Owner>
+ <NextGrowth>698107680000000000</NextGrowth>
+ <SeedProgress>33.4402</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>7,076,486</Radius>
+<ARot>85,958</ARot>
+<Temp>291.04</Temp>
+<Seed>3216883</Seed>
+<Orbit>216275715159</Orbit>
+<Homeworld/>
+<TempBase>308.2727642467531</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679245593719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="2">
+<Colony>
+ <Owner>Gokan</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>5589710</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679172256000000000</LastGrowth>
+ <NextGrowth>682732800000000000</NextGrowth>
+</Colony>
+<Radius>45,295,160</Radius>
+<ARot>643,304</ARot>
+<Temp>229.86</Temp>
+<Seed>1830225</Seed>
+<Orbit>294271670520</Orbit>
+<TempBase>264.03632492252757</TempBase>
+</Planet>
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>12092909</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679042656000000000</LastGrowth>
+ <NextGrowth>682580736000000000</NextGrowth>
+</Colony>
+<Radius>6,290,360</Radius>
+<ARot>80,226</ARot>
+<Temp>233.76</Temp>
+<Seed>4120258</Seed>
+<Orbit>408731917563</Orbit>
+<TempBase>223.87606084774453</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>6900883</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679360608000000000</LastGrowth>
+ <NextGrowth>684530784000000000</NextGrowth>
+</Colony>
+<Radius>7,501,079</Radius>
+<ARot>128,296</ARot>
+<Temp>205.33</Temp>
+<Seed>6165044</Seed>
+<Orbit>564944432211</Orbit>
+<TempBase>190.32825622110752</TempBase>
+</Planet>
+<Planet Seed="5634871" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>7039588</Seed>
+<Name>Zhulhib Minor</Name>
+ <MapPos X="-8.01" Y="10.87"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)0</TradeRoute>
+ <TradeRoute>(-1,1)5</TradeRoute>
+ <Planets>
+<Planet Seed="8509953" />
+<Planet Seed="8018571" />
+<Planet Seed="720337" />
+<Planet Seed="4576902" />
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>30282137</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679161888000000000</LastGrowth>
+ <NextGrowth>682370784000000000</NextGrowth>
+</Colony>
+<Radius>5,993,113</Radius>
+<ARot>79,483</ARot>
+<Temp>249.15</Temp>
+<Seed>9440209</Seed>
+<Orbit>150833800327</Orbit>
+<TempBase>241.53668687609516</TempBase>
+</Planet>
+<Planet ID="5">
+<Type>Ice</Type>
+<PRot>21977933</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679688928000000000</LastGrowth>
+ <NextGrowth>683662464000000000</NextGrowth>
+</Colony>
+<Radius>6,477,978</Radius>
+<ARot>105,331</ARot>
+<Temp>217.10</Temp>
+<Seed>5771841</Seed>
+<Orbit>214118634691</Orbit>
+<TempBase>202.5312734811246</TempBase>
+</Planet>
+<Planet Seed="756535" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>3777388</Seed>
+ <MapPos X="-13.53" Y="10.57"/>
+</Star>
+<Star ID="3">
+<Seed>8864076</Seed>
+ <MapPos X="-10.86" Y="14.61"/>
+</Star>
+<Star ID="4">
+<Seed>375734</Seed>
+<Name>FloBlioi Alpha</Name>
+ <MapPos X="-12.33" Y="7.8"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="3242417" />
+<Planet Seed="7489781" />
+<Planet ID="2">
+<Type>Volcanic</Type>
+<PRot>48557736</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680176168085880000</LastGrowth>
+ <NextGrowth>687094216085880000</NextGrowth>
+</Colony>
+<Radius>7,268,447</Radius>
+<ARot>74,926</ARot>
+<Temp>329.38</Temp>
+<Seed>6773808</Seed>
+<Orbit>76376041227</Orbit>
+<TempBase>330.1267653084933</TempBase>
+</Planet>
+<Planet Seed="412387" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>3563595</Seed>
+<Name>Yokrid Prime</Name>
+ <MapPos X="-6.78" Y="9.26"/>
+ <Owner>Gokan</Owner>
+ <TradeRoute>(-1,1)0</TradeRoute>
+ <TradeRoute>(-1,1)1</TradeRoute>
+ <Planets>
+<Planet Seed="7183808" />
+<Planet Seed="5308326" />
+<Planet Seed="4132897" />
+<Planet Seed="5132697" />
+<Planet Seed="4716271" />
+<Planet ID="5">
+<Type>Gas</Type>
+<PRot>3427355</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679327776000000000</LastGrowth>
+ <NextGrowth>686507616000000000</NextGrowth>
+ <SeedProgress>109.6256</SeedProgress>
+</Colony>
+<Radius>66,985,534</Radius>
+<ARot>839,266</ARot>
+<Temp>251.68</Temp>
+<Seed>1925618</Seed>
+<Orbit>426789864795</Orbit>
+<TempBase>289.1099730934494</TempBase>
+</Planet>
+<Planet Seed="8415068" />
+<Planet Seed="5176258" />
+<Planet Seed="5605847" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>4480122</Seed>
+<Name>Bhinhud Gamma</Name>
+ <MapPos X="-13.88" Y="7.11"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="9272215" />
+<Planet Seed="4014426" />
+<Planet Seed="3483551" />
+<Planet ID="3">
+<Type>Desert</Type>
+<PRot>16911541</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680105273719090000</LastGrowth>
+ <NextGrowth>683946617719090000</NextGrowth>
+</Colony>
+<Radius>6,769,138</Radius>
+<ARot>80,686</ARot>
+<Temp>273.74</Temp>
+<Seed>5741403</Seed>
+<Orbit>257964645020</Orbit>
+<TempBase>303.1862255651592</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="7">
+<Seed>5969065</Seed>
+<Name>PeKrea</Name>
+ <MapPos X="-6.8" Y="12.18"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>53208523</PRot>
+<Colony>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680231364166710000</LastGrowth>
+ <NextGrowth>681396036166710000</NextGrowth>
+</Colony>
+<Radius>44,079,070</Radius>
+<ARot>734,024</ARot>
+<Temp>309.00</Temp>
+<Seed>2846162</Seed>
+<Orbit>29276402262</Orbit>
+<TempBase>354.9448285526784</TempBase>
+</Planet>
+<Planet Seed="9332662" />
+<Planet Seed="3703305" />
+<Planet Seed="4576178" />
+<Planet Seed="2520663" />
+<Planet Seed="39068" />
+ </Planets>
+</Star>
+<Star ID="8">
+<Seed>7870303</Seed>
+ <MapPos X="-12.27" Y="9.08"/>
+</Star>
+<Star ID="9">
+<Seed>7371535</Seed>
+ <MapPos X="-13" Y="5.32"/>
+</Star>
+<Star ID="10">
+<Seed>4794718</Seed>
+ <MapPos X="-11.85" Y="13.27"/>
+</Star>
+<Star ID="11">
+<Seed>7113624</Seed>
+<Name>Nezhob Epsilon</Name>
+ <MapPos X="-9.12" Y="7.16"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="3118041" />
+<Planet Seed="864" />
+<Planet Seed="9700493" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>29019232</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679102213085880000</LastGrowth>
+ <NextGrowth>682396645085880000</NextGrowth>
+</Colony>
+<Radius>6,859,922</Radius>
+<ARot>87,761</ARot>
+<Temp>276.91</Temp>
+<Seed>7833529</Seed>
+<Orbit>155603230456</Orbit>
+<TempBase>261.7843608353488</TempBase>
+</Planet>
+<Planet Seed="6504677" />
+<Planet Seed="668160" />
+<Planet Seed="9319186" />
+<Planet Seed="2570034" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>832531</Seed>
+<Name>Yinhez Epsilon</Name>
+ <MapPos X="-5.39" Y="11.3"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="4146044" />
+<Planet Seed="804458" />
+<Planet Seed="5737800" />
+<Planet Seed="9965270" />
+<Planet Seed="2597377" />
+<Planet Seed="9658621" />
+<Planet Seed="9937756" />
+<Planet ID="7">
+<Type>Oceanic</Type>
+<PRot>8196936</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679130722085880000</LastGrowth>
+ <NextGrowth>682793218085880000</NextGrowth>
+</Colony>
+<Radius>5,452,094</Radius>
+<ARot>65,781</ARot>
+<Temp>302.44</Temp>
+<Seed>2950639</Seed>
+<Orbit>593378468440</Orbit>
+<TempBase>299.1415073276684</TempBase>
+</Planet>
+<Planet Seed="4450745" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>1288711</Seed>
+<Name>Phumrato Beta</Name>
+ <MapPos X="-5.66" Y="6.81"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet Seed="8106788" />
+<Planet Seed="8452120" />
+<Planet Seed="2752325" />
+<Planet ID="3">
+<Type>Oceanic</Type>
+<PRot>24294158</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>679708747085880000</LastGrowth>
+ <NextGrowth>685142443085880000</NextGrowth>
+</Colony>
+<Radius>7,855,047</Radius>
+<ARot>135,017</ARot>
+<Temp>314.94</Temp>
+<Seed>5008329</Seed>
+<Orbit>152333521893</Orbit>
+<TempBase>306.4704299209976</TempBase>
+</Planet>
+<Planet Seed="6506138" />
+<Planet Seed="502570" />
+<Planet Seed="8694980" />
+ </Planets>
+</Star>
+<Star ID="14">
+<Seed>9572452</Seed>
+<Name>LoJleck</Name>
+ <MapPos X="-5.23" Y="14.52"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>25425080</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680884945606710000</LastGrowth>
+ <NextGrowth>685731985606710000</NextGrowth>
+</Colony>
+<Radius>55,095,050</Radius>
+<ARot>714,798</ARot>
+<Temp>309.70</Temp>
+<Seed>7659296</Seed>
+<Orbit>56614470395</Orbit>
+<TempBase>355.7563199357735</TempBase>
+</Planet>
+<Planet Seed="7786224" />
+<Planet Seed="3662590" />
+<Planet Seed="1369709" />
+<Planet Seed="3072723" />
+<Planet Seed="1538617" />
+<Planet Seed="4558320" />
+<Planet Seed="9075607" />
+ </Planets>
+</Star>
+<Star ID="15">
+<Seed>8140438</Seed>
+<Name>Wrurlar Delta</Name>
+ <MapPos X="-7.13" Y="14.18"/>
+ <Owner>Gokan</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>47220491</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Gokan</Owner>
+ <LastGrowth>680035891266050000</LastGrowth>
+ <NextGrowth>685962931266050000</NextGrowth>
+</Colony>
+<Radius>63,378,997</Radius>
+<ARot>994,978</ARot>
+<Temp>324.65</Temp>
+<Seed>5011303</Seed>
+<Orbit>34809885658</Orbit>
+<TempBase>372.9196118951956</TempBase>
+</Planet>
+<Planet Seed="8784779" />
+<Planet Seed="4725202" />
+<Planet Seed="6732305" />
+<Planet Seed="2188597" />
+<Planet Seed="1068350" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="0" Y="1" Inhabitant="Ursalon">
+<Star ID="0">
+<Seed>5547643</Seed>
+<Name>NoPrib Epsilon</Name>
+ <MapPos X="-2.41" Y="8.07"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <TradeRoute>(0,1)15</TradeRoute>
+ <Planets>
+<Planet Seed="7379230" />
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>19713858</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>678989088000000000</LastGrowth>
+ <NextGrowth>681533568000000000</NextGrowth>
+</Colony>
+<Radius>51,994,389</Radius>
+<ARot>829,201</ARot>
+<Temp>282.71</Temp>
+<Seed>9098427</Seed>
+<Orbit>72278696094</Orbit>
+<TempBase>324.75378176262825</TempBase>
+</Planet>
+<Planet Seed="6088427" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>26222859</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>679354560000000000</LastGrowth>
+ <NextGrowth>684402912000000000</NextGrowth>
+</Colony>
+<Radius>5,377,601</Radius>
+<ARot>77,576</ARot>
+<Temp>209.92</Temp>
+<Seed>5080066</Seed>
+<Orbit>202628934001</Orbit>
+<TempBase>192.99179338233662</TempBase>
+</Planet>
+<Planet Seed="4076632" />
+<Planet Seed="645849" />
+<Planet Seed="7192817" />
+<Planet Seed="2481271" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5949821</Seed>
+<Name>Chichaio Beta</Name>
+ <MapPos X="-0.74" Y="12.2"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="7888600" />
+<Planet Seed="5416901" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>13061776</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>680524354085880000</LastGrowth>
+ <NextGrowth>688869730085880000</NextGrowth>
+</Colony>
+<Radius>57,732,574</Radius>
+<ARot>971,586</ARot>
+<Temp>338.00</Temp>
+<Seed>809387</Seed>
+<Orbit>128303737736</Orbit>
+<TempBase>388.2552938486831</TempBase>
+</Planet>
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>5935979</Seed>
+<Name>Neplire Major</Name>
+ <MapPos X="-0.11" Y="13.25"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet Seed="3118148" />
+<Planet Seed="760803" />
+<Planet Seed="5874986" />
+<Planet Seed="537213" />
+<Planet ID="4">
+<Type>Desert</Type>
+<PRot>25971440</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>679069381085880000</LastGrowth>
+ <NextGrowth>682606597085880000</NextGrowth>
+</Colony>
+<Radius>6,249,406</Radius>
+<ARot>96,233</ARot>
+<Temp>290.06</Temp>
+<Seed>5219147</Seed>
+<Orbit>168640672500</Orbit>
+<TempBase>321.26552971053553</TempBase>
+</Planet>
+<Planet Seed="7131569" />
+<Planet Seed="455357" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>3898592</Seed>
+<Name>HiNlev Prime</Name>
+ <MapPos X="-3.7" Y="10.11"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>12893586</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>680792008533800000</LastGrowth>
+ <NextGrowth>682999528533800000</NextGrowth>
+</Colony>
+<Radius>65,288,553</Radius>
+<ARot>990,371</ARot>
+<Temp>349.75</Temp>
+<Seed>4597981</Seed>
+<Orbit>96709696773</Orbit>
+<TempBase>401.76203054285156</TempBase>
+</Planet>
+<Planet Seed="8991968" />
+<Planet Seed="5568350" />
+<Planet Seed="1627917" />
+<Planet Seed="2415168" />
+<Planet Seed="9160504" />
+<Planet Seed="3529636" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>5326888</Seed>
+ <MapPos X="-4.08" Y="12.72"/>
+</Star>
+<Star ID="5">
+<Seed>6984507</Seed>
+ <MapPos X="2.05" Y="5.34"/>
+</Star>
+<Star ID="6">
+<Seed>7772978</Seed>
+ <MapPos X="2.78" Y="9.51"/>
+</Star>
+<Star ID="7">
+<Seed>1908313</Seed>
+ <MapPos X="4.4" Y="11.24"/>
+</Star>
+<Star ID="8">
+<Seed>3843674</Seed>
+ <MapPos X="3.79" Y="6.14"/>
+</Star>
+<Star ID="9">
+<Seed>3012795</Seed>
+ <MapPos X="1.44" Y="12.4"/>
+</Star>
+<Star ID="10">
+<Seed>4074688</Seed>
+<Name>Ursalon Home</Name>
+ <MapPos X="-1.02" Y="9.7"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)0</TradeRoute>
+ <TradeRoute>(0,1)15</TradeRoute>
+ <Planets>
+<Planet Seed="9061025" />
+<Planet Seed="7320265" />
+<Planet Seed="4650006" />
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>4998423</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>678855168000000000</LastGrowth>
+ <NextGrowth>681121440000000000</NextGrowth>
+</Colony>
+<Radius>70,095,463</Radius>
+<ARot>885,589</ARot>
+<Temp>282.44</Temp>
+<Seed>1550103</Seed>
+<Orbit>257929389168</Orbit>
+<TempBase>324.43423945003514</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>679128089719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="1">
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>680120772166710000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="4">
+<Type>Oceanic</Type>
+<PRot>14446556</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ursalon</Owner>
+ <NextGrowth>698041152000000000</NextGrowth>
+ <SeedProgress>139.5193</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>4,638,065</Radius>
+<ARot>60,236</ARot>
+<Temp>293.61</Temp>
+<Seed>8581149</Seed>
+<Orbit>354107577761</Orbit>
+<Homeworld/>
+<TempBase>276.67453820576003</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="9321265" />
+<Planet Seed="9462541" />
+<Planet Seed="3333430" />
+<Planet Seed="2485149" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>4386290</Seed>
+<Name>Zatroi Delta</Name>
+ <MapPos X="-1.33" Y="6.88"/>
+ <Owner>Ursalon</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>107057885</PRot>
+<Colony>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>680265924166710000</LastGrowth>
+ <NextGrowth>682961604166710000</NextGrowth>
+</Colony>
+<Radius>4,398,857</Radius>
+<ARot>69,485</ARot>
+<Temp>345.22</Temp>
+<Seed>1501588</Seed>
+<Orbit>51209857134</Orbit>
+<TempBase>365.66560151353156</TempBase>
+</Planet>
+<Planet Seed="5915089" />
+<Planet Seed="7693585" />
+<Planet Seed="5180922" />
+<Planet Seed="7214009" />
+<Planet Seed="3034089" />
+<Planet Seed="5257816" />
+<Planet Seed="393107" />
+<Planet Seed="4310617" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>6189776</Seed>
+ <MapPos X="4.25" Y="10.11"/>
+</Star>
+<Star ID="13">
+<Seed>6986193</Seed>
+ <MapPos X="0.3" Y="7.11"/>
+</Star>
+<Star ID="14">
+<Seed>965805</Seed>
+ <MapPos X="-4.09" Y="5.77"/>
+</Star>
+<Star ID="15">
+<Seed>9501612</Seed>
+<Name>Rilhubu Minor</Name>
+ <MapPos X="0.37" Y="11"/>
+ <Owner>Ursalon</Owner>
+ <TradeRoute>(0,1)0</TradeRoute>
+ <TradeRoute>(0,1)10</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Gas</Type>
+<PRot>53464526</PRot>
+<Colony>
+ <BaseType>11</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>679411584000000000</LastGrowth>
+ <NextGrowth>685490688000000000</NextGrowth>
+ <SeedProgress>139.1584</SeedProgress>
+</Colony>
+<Radius>61,130,119</Radius>
+<ARot>981,436</ARot>
+<Temp>246.89</Temp>
+<Seed>4687270</Seed>
+<Orbit>29466818826</Orbit>
+<TempBase>283.60424886783323</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Gas</Type>
+<PRot>29138410</PRot>
+<Radius>81,282,467</Radius>
+<ARot>1,545,100</ARot>
+<Temp>208.17</Temp>
+<Seed>5288174</Seed>
+<Orbit>41204470695</Orbit>
+<TempBase>239.122257689797</TempBase>
+<Moons>
+<Moon ID="3">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet ID="2">
+<Type>Ice</Type>
+<PRot>74802546</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ursalon</Owner>
+ <LastGrowth>679205088000000000</LastGrowth>
+ <NextGrowth>682891776000000000</NextGrowth>
+</Colony>
+<Radius>6,939,860</Radius>
+<ARot>92,908</ARot>
+<Temp>221.51</Temp>
+<Seed>4456336</Seed>
+<Orbit>57588580627</Orbit>
+<TempBase>201.84095159588844</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ursalon</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="8005137" />
+<Planet Seed="9841769" />
+<Planet Seed="628044" />
+ </Planets>
+</Star>
+ </Sector>
+ <Sector X="1" Y="1" Inhabitant="Ogrish">
+<Star ID="0">
+<Seed>6965751</Seed>
+<Name>Whihloo</Name>
+ <MapPos X="11.48" Y="6.82"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="8653296" />
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>55236420</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679167874085880000</LastGrowth>
+ <NextGrowth>683531074085880000</NextGrowth>
+</Colony>
+<Radius>6,870,782</Radius>
+<ARot>95,415</ARot>
+<Temp>262.79</Temp>
+<Seed>4492900</Seed>
+<Orbit>78820350849</Orbit>
+<TempBase>248.388051975051</TempBase>
+</Planet>
+<Planet Seed="796817" />
+<Planet Seed="2953104" />
+<Planet Seed="727703" />
+ </Planets>
+</Star>
+<Star ID="1">
+<Seed>5736128</Seed>
+<Name>Inlem</Name>
+ <MapPos X="5.91" Y="10.1"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="5286944" />
+<Planet Seed="1995024" />
+<Planet ID="2">
+<Type>Gas</Type>
+<PRot>17350894</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679723385719090000</LastGrowth>
+ <NextGrowth>683285657719090000</NextGrowth>
+</Colony>
+<Radius>48,373,402</Radius>
+<ARot>702,572</ARot>
+<Temp>289.93</Temp>
+<Seed>2369353</Seed>
+<Orbit>93219772156</Orbit>
+<TempBase>333.04508134752444</TempBase>
+</Planet>
+<Planet Seed="4746516" />
+ </Planets>
+</Star>
+<Star ID="2">
+<Seed>2342934</Seed>
+<Name>Hellua Minor</Name>
+ <MapPos X="10.35" Y="7.44"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)4</TradeRoute>
+ <TradeRoute>(1,1)11</TradeRoute>
+ <Planets>
+<Planet Seed="2572894" />
+<Planet Seed="4962447" />
+<Planet ID="2">
+<Type>Desert</Type>
+<PRot>51251458</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679010688000000000</LastGrowth>
+ <NextGrowth>681777216000000000</NextGrowth>
+</Colony>
+<Radius>4,830,179</Radius>
+<ARot>65,571</ARot>
+<Temp>303.51</Temp>
+<Seed>4426868</Seed>
+<Orbit>117854411805</Orbit>
+<TempBase>336.15776968149476</TempBase>
+</Planet>
+<Planet ID="3">
+<Type>Gas</Type>
+<PRot>9088082</PRot>
+<Colony>
+ <BaseType>19</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679063392000000000</LastGrowth>
+ <NextGrowth>685952928000000000</NextGrowth>
+</Colony>
+<Radius>62,803,599</Radius>
+<ARot>1,052,427</ARot>
+<Temp>244.87</Temp>
+<Seed>1767347</Seed>
+<Orbit>167848289049</Orbit>
+<TempBase>281.27930535929704</TempBase>
+</Planet>
+<Planet Seed="8868026" />
+ </Planets>
+</Star>
+<Star ID="3">
+<Seed>1852152</Seed>
+<Name>Sedleb Gamma</Name>
+ <MapPos X="9.47" Y="5.96"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="3089308" />
+<Planet ID="1">
+<Type>Oceanic</Type>
+<PRot>49042367</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679426219085880000</LastGrowth>
+ <NextGrowth>683938891085880000</NextGrowth>
+</Colony>
+<Radius>5,282,117</Radius>
+<ARot>70,465</ARot>
+<Temp>317.82</Temp>
+<Seed>4219112</Seed>
+<Orbit>92308190622</Orbit>
+<TempBase>315.1154094732105</TempBase>
+</Planet>
+<Planet Seed="1293275" />
+<Planet Seed="145788" />
+<Planet Seed="2122203" />
+<Planet Seed="1116550" />
+<Planet Seed="3567047" />
+<Planet Seed="2126941" />
+<Planet Seed="2883830" />
+ </Planets>
+</Star>
+<Star ID="4">
+<Seed>918247</Seed>
+<Name>Iwrio Minor</Name>
+ <MapPos X="9.36" Y="6.96"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)2</TradeRoute>
+ <TradeRoute>(1,1)11</TradeRoute>
+ <Planets>
+<Planet ID="0">
+<Type>Desert</Type>
+<PRot>124265382</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>678964896000000000</LastGrowth>
+ <NextGrowth>681659712000000000</NextGrowth>
+</Colony>
+<Radius>6,845,022</Radius>
+<ARot>85,795</ARot>
+<Temp>293.04</Temp>
+<Seed>8888424</Seed>
+<Orbit>35956905248</Orbit>
+<TempBase>324.55987354596454</TempBase>
+</Planet>
+<Planet ID="1">
+<Type>Ice</Type>
+<PRot>78567503</PRot>
+<Colony>
+ <BaseType>17</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679234464000000000</LastGrowth>
+ <NextGrowth>683013600000000000</NextGrowth>
+</Colony>
+<Radius>4,714,270</Radius>
+<ARot>63,078</ARot>
+<Temp>246.23</Temp>
+<Seed>6321155</Seed>
+<Orbit>70061319756</Orbit>
+<TempBase>231.30551398576847</TempBase>
+</Planet>
+<Planet Seed="5981776" />
+<Planet Seed="6244175" />
+ </Planets>
+</Star>
+<Star ID="5">
+<Seed>1033057</Seed>
+<Name>ZloBleck</Name>
+ <MapPos X="8" Y="10.46"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="2717029" />
+<Planet Seed="7098980" />
+<Planet Seed="8053628" />
+<Planet Seed="138676" />
+<Planet ID="4">
+<Type>Rocky</Type>
+<PRot>20409863</PRot>
+<Radius>7,613,607</Radius>
+<ARot>106,961</ARot>
+<Temp>310.50</Temp>
+<Seed>262966</Seed>
+<Orbit>188403433102</Orbit>
+<TempBase>328.88531741097495</TempBase>
+<Moons>
+<Moon ID="2">
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>678162193085880000</LastGrowth>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="3809294" />
+<Planet Seed="1763814" />
+<Planet Seed="9209099" />
+ </Planets>
+</Star>
+<Star ID="6">
+<Seed>8707126</Seed>
+ <MapPos X="7.19" Y="7.11"/>
+</Star>
+<Star ID="7">
+<Seed>2082737</Seed>
+ <MapPos X="13.6" Y="6.02"/>
+</Star>
+<Star ID="8">
+<Seed>5077979</Seed>
+<Name>Klekloo Major</Name>
+ <MapPos X="8.83" Y="13.54"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>188890619</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>680050841719090000</LastGrowth>
+ <NextGrowth>683467097719090000</NextGrowth>
+</Colony>
+<Radius>4,549,487</Radius>
+<ARot>73,842</ARot>
+<Temp>289.46</Temp>
+<Seed>2773725</Seed>
+<Orbit>28636841952</Orbit>
+<TempBase>272.3491587061395</TempBase>
+</Planet>
+<Planet Seed="3113615" />
+<Planet Seed="2693649" />
+ </Planets>
+</Star>
+<Star ID="9">
+<Seed>4446666</Seed>
+<Name>Kugrisu</Name>
+ <MapPos X="12.83" Y="8.4"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Oceanic</Type>
+<PRot>156838030</PRot>
+<Colony>
+ <BaseType>5</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679069390085880000</LastGrowth>
+ <NextGrowth>682514158085880000</NextGrowth>
+</Colony>
+<Radius>5,505,619</Radius>
+<ARot>71,914</ARot>
+<Temp>290.41</Temp>
+<Seed>9805358</Seed>
+<Orbit>34740640944</Orbit>
+<TempBase>280.18856376272566</TempBase>
+</Planet>
+<Planet Seed="4945330" />
+<Planet Seed="2233347" />
+<Planet Seed="3892658" />
+<Planet Seed="4189052" />
+<Planet Seed="8229131" />
+<Planet Seed="2420528" />
+<Planet Seed="8816657" />
+ </Planets>
+</Star>
+<Star ID="10">
+<Seed>6669215</Seed>
+<Name>ReYrig Core</Name>
+ <MapPos X="13.94" Y="11.75"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet ID="0">
+<Type>Rocky</Type>
+<PRot>85300315</PRot>
+<Colony>
+ <BaseType>9</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679083220085880000</LastGrowth>
+ <NextGrowth>683310772085880000</NextGrowth>
+</Colony>
+<Radius>6,182,235</Radius>
+<ARot>104,945</ARot>
+<Temp>262.85</Temp>
+<Seed>3524656</Seed>
+<Orbit>55476199231</Orbit>
+<TempBase>278.4218988047569</TempBase>
+</Planet>
+<Planet Seed="6739629" />
+<Planet Seed="9196793" />
+<Planet Seed="3544343" />
+<Planet Seed="5866971" />
+<Planet Seed="2517017" />
+<Planet Seed="6253665" />
+<Planet Seed="5798115" />
+<Planet Seed="9558235" />
+ </Planets>
+</Star>
+<Star ID="11">
+<Seed>2872443</Seed>
+<Name>Ogrish Home</Name>
+ <MapPos X="10.07" Y="8.84"/>
+ <Owner>Ogrish</Owner>
+ <TradeRoute>(1,1)2</TradeRoute>
+ <TradeRoute>(1,1)4</TradeRoute>
+ <Planets>
+<Planet Seed="2100208" />
+<Planet ID="1">
+<Type>Rocky</Type>
+<PRot>62643961</PRot>
+<Colony>
+ <BaseType>63</BaseType>
+ <Owner>Ogrish</Owner>
+ <NextGrowth>695198592000000000</NextGrowth>
+ <SeedProgress>190.9072</SeedProgress>
+</Colony>
+<Name>Homeworld</Name>
+<Radius>5,623,804</Radius>
+<ARot>82,659</ARot>
+<Temp>295.56</Temp>
+<Seed>2588222</Seed>
+<Orbit>75938422571</Orbit>
+<Homeworld/>
+<TempBase>313.0593572842724</TempBase>
+<Moons>
+<Moon ID="0">
+<Colony>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679430489719090000</LastGrowth>
+</Colony>
+</Moon>
+<Moon ID="3">
+<Colony>
+ <Owner>Ogrish</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="1964055" />
+<Planet ID="3">
+<Type>Ice</Type>
+<PRot>31922538</PRot>
+<Colony>
+ <BaseType>7</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679130784000000000</LastGrowth>
+ <NextGrowth>687406176000000000</NextGrowth>
+</Colony>
+<Radius>5,995,396</Radius>
+<ARot>90,017</ARot>
+<Temp>238.56</Temp>
+<Seed>2306180</Seed>
+<Orbit>147115051361</Orbit>
+<TempBase>224.27485476671205</TempBase>
+<Moons>
+<Moon ID="1">
+<Colony>
+ <Owner>Ogrish</Owner>
+</Colony>
+</Moon>
+</Moons>
+</Planet>
+<Planet Seed="2932527" />
+<Planet Seed="1476372" />
+<Planet Seed="7828692" />
+<Planet Seed="7397780" />
+<Planet Seed="2103699" />
+ </Planets>
+</Star>
+<Star ID="12">
+<Seed>4240017</Seed>
+<Name>Tedhuve</Name>
+ <MapPos X="11.22" Y="10.53"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="2123732" />
+<Planet Seed="4178962" />
+<Planet Seed="1154816" />
+<Planet Seed="9207659" />
+<Planet Seed="8387479" />
+<Planet Seed="8904892" />
+<Planet ID="6">
+<Type>Ice</Type>
+<PRot>10971225</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>680539909085880000</LastGrowth>
+ <NextGrowth>687137413085880000</NextGrowth>
+</Colony>
+<Radius>3,661,299</Radius>
+<ARot>55,060</ARot>
+<Temp>196.30</Temp>
+<Seed>1964761</Seed>
+<Orbit>528781752016</Orbit>
+<TempBase>185.86844532903768</TempBase>
+</Planet>
+<Planet Seed="2547971" />
+<Planet Seed="9870220" />
+ </Planets>
+</Star>
+<Star ID="13">
+<Seed>9381642</Seed>
+ <MapPos X="13.23" Y="14.52"/>
+</Star>
+<Star ID="14">
+<Seed>4067466</Seed>
+ <MapPos X="9.83" Y="12.8"/>
+</Star>
+<Star ID="15">
+<Seed>158993</Seed>
+<Name>Jifhobe Epsilon</Name>
+ <MapPos X="11.01" Y="12.7"/>
+ <Owner>Ogrish</Owner>
+ <Planets>
+<Planet Seed="4900237" />
+<Planet Seed="2782556" />
+<Planet Seed="1928626" />
+<Planet Seed="7845467" />
+<Planet ID="4">
+<Type>Ice</Type>
+<PRot>20628679</PRot>
+<Colony>
+ <BaseType>3</BaseType>
+ <Owner>Ogrish</Owner>
+ <LastGrowth>679867720085880000</LastGrowth>
+ <NextGrowth>685020616085880000</NextGrowth>
+</Colony>
+<Radius>6,195,469</Radius>
+<ARot>90,612</ARot>
+<Temp>216.30</Temp>
+<Seed>7504346</Seed>
+<Orbit>208164128305</Orbit>
+<TempBase>211.6783753828259</TempBase>
+</Planet>
+<Planet Seed="668986" />
+<Planet Seed="1169718" />
+<Planet Seed="2887352" />
+ </Planets>
+</Star>
+ </Sector>
+</Map>
+<Team>
+ <Pos>(0,0)12.4</Pos>
+ <Cash>358.457152520007</Cash>
+ <Soldiers>
+<Soldier Name="Rocky">
+ <Location X="23" Y="8"/>
+ <Health>37.82878951375218</Health>
+ <Stamina>1</Stamina>
+ <Shields>0</Shields>
+ <Facing>180</Facing>
+ <Level>7</Level>
+ <XP>42812</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>15,12,8,15,16</Stats>
+ <Colour>Red</Colour>
+ <Inventory>
+  <Inv Count="3">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Core Armour" Material="Kevlar" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Gauntlets" Material="Vulcanin" Level="4"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Chainsword" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">538</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Scavenging">6</Exp>
+  <Exp Skill="Medic">1</Exp>
+  <Exp Skill="Bladesmith">1</Exp>
+ </UtilityExperience>
+ <Moved/>
+ <KillCount>279</KillCount>
+ <ToughestKill>
+<Creature Type="Bandit Leader">
+ <Level>7</Level>
+ <OverrideRace>Human</OverrideRace>
+</Creature>
+ </ToughestKill>
+</Soldier>
+<Soldier Name="Kayla Fox">
+ <Location X="25" Y="21"/>
+ <Health>49</Health>
+ <Stamina>35</Stamina>
+ <Shields>0</Shields>
+ <Facing>255.96375653207355</Facing>
+ <Level>7</Level>
+ <XP>38934</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>9,10,16,15,19</Stats>
+ <Colour>Lime</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Laser Rifle" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Emitter">82</Exp>
+  <Exp Type="Rifle">525</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">2</Exp>
+  <Exp Skill="Perception">6</Exp>
+ </UtilityExperience>
+ <KillCount>263</KillCount>
+ <ToughestKill>
+<Creature Type="Bandit Leader">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+</Creature>
+ </ToughestKill>
+</Soldier>
+<Soldier Name="Stacy Vale">
+ <Location X="24" Y="22"/>
+ <Health>45</Health>
+ <Stamina>15</Stamina>
+ <Shields>0</Shields>
+ <Facing>263.6598082540901</Facing>
+ <Level>7</Level>
+ <XP>45480</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>11,8,16,13,16</Stats>
+ <Colour>#FFFF80</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Core Armour" Material="Steel" Level="1"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="1"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Sniper Rifle" Level="2" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Melee">400</Exp>
+  <Exp Type="Sniper">394</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Bladesmith">1</Exp>
+  <Exp Skill="Avoidance">3</Exp>
+  <Exp Skill="Scavenging">2</Exp>
+  <Exp Skill="Stealth">2</Exp>
+ </UtilityExperience>
+ <Moved/>
+ <KillCount>122</KillCount>
+ <ToughestKill>
+<Creature Type="Bandit Leader">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+</Creature>
+ </ToughestKill>
+</Soldier>
+<Soldier Name="Patrick Upton">
+ <Location X="23" Y="18"/>
+ <Health>22.507562205239957</Health>
+ <Stamina>26</Stamina>
+ <Shields>0</Shields>
+ <Facing>270</Facing>
+ <Level>6</Level>
+ <XP>35191</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>11,14,12,14,10</Stats>
+ <Colour>#505050</Colour>
+ <Inventory>
+  <Inv Count="2">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
+<Armour Type="Military Helmet" Material="Kevlar" Level="1"/>
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Quad Shotgun" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">525</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">2</Exp>
+  <Exp Skill="Stealth">1</Exp>
+  <Exp Skill="Perception">2</Exp>
+  <Exp Skill="Scavenging">2</Exp>
+ </UtilityExperience>
+ <KillCount>72</KillCount>
+ <ToughestKill>
+<Creature Type="Bandit Leader">
+ <Level>5</Level>
+</Creature>
+ </ToughestKill>
+</Soldier>
+ </Soldiers>
+<Ship Type="Light Freighter">
+ <Name>Unnamed Ship</Name>
+ <Hull>33</Hull>
+ <Shield>0</Shield>
+ <Seed>367603</Seed>
+ <Eqp ID="0" Active="True">Fusion Core</Eqp>
+ <Eqp ID="10" Active="True">Laser Cannon</Eqp>
+ <Eqp ID="11" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="9" Active="True">Bunk Room</Eqp>
+ <Eqp ID="8" Active="True">Engineering Bay</Eqp>
+ <Eqp ID="5" Active="True">Armoury</Eqp>
+ <Eqp ID="6" Active="True">Workshop</Eqp>
+ <Eqp ID="4" Active="True">Military Computer</Eqp>
+ <Eqp ID="3" Active="True">Surface Scanner</Eqp>
+ <Eqp ID="1" Active="True">Medbay</Eqp>
+ <Eqp ID="7" Active="False">Colony Builder</Eqp>
+</Ship>
+ <Mission_ShowLabels/>
+ <Mission_ShowStatBars/>
+ <Mission_ShowTravel/>
+ <Mission_ShowPath/>
+ <Mission_ShowEffects/>
+ <Mission_ViewDetection/>
+ <Mission_FastAI/>
+ <Relations>
+  <Relation Race="Human" Value="9463"/>
+ </Relations>
+ <Inventory>
+  <Inv Count="11">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="3">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+  <Inv Count="13">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="18">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="21">
+<Material Type="Rubber"/>
+  </Inv>
+  <Inv Count="23">
+<Material Type="Carbon Fibre"/>
+  </Inv>
+  <Inv Count="28">
+<Material Type="Steel"/>
+  </Inv>
+  <Inv Count="6">
+<Material Type="Water"/>
+  </Inv>
+  <Inv Count="8">
+<Material Type="Carbon"/>
+  </Inv>
+  <Inv Count="8">
+<Material Type="Rare Earth Metals"/>
+  </Inv>
+  <Inv Count="9">
+<Material Type="Electronic Components"/>
+  </Inv>
+  <Inv Count="10">
+<Material Type="Copper"/>
+  </Inv>
+  <Inv Count="14">
+<Material Type="Plastic"/>
+  </Inv>
+  <Inv Count="17">
+<Material Type="Chitin"/>
+  </Inv>
+  <Inv Count="5">
+<Material Type="Kevlar"/>
+  </Inv>
+  <Inv Count="4">
+<Material Type="Vulcanin"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Incendiary Bulb"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Nanosilk"/>
+  </Inv>
+  <Inv Count="2">
+<Material Type="Crystals"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Composite"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+</Team>
+<Races>
+<Race Name="Human">
+<HomePlanet>(0,0)10.4</HomePlanet>
+<LastExpand>0</LastExpand>
+<Known/>
+<Research>
+ <Item>Triple Shotgun</Item>
+ <Item>Chainsword</Item>
+ <Item>Quad Shotgun</Item>
+ <Item>Katana</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Fusion Drive</Item>
+ <Item>NearLight Drive</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Fusion Core</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Rail Gun</Item>
+ <Item>Colony Builder</Item>
+ <Material>Composite</Material>
+</Research>
+</Race>
+<Race Name="Gokan">
+<HomePlanet>(-1,1)0.2</HomePlanet>
+<LastExpand>680760750509948150</LastExpand>
+<Research>
+ <Item>Poison Grenade</Item>
+ <Item>Triple Shotgun</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Katana</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Double Blade</Item>
+ <Item>Quad Shotgun</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Foundry</Item>
+ <Item>Auto Repair</Item>
+ <Material>Composite</Material>
+ <Item>Colony Builder</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Rail Gun</Item>
+ <Item>Chainsword</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Combat Suit</Item>
+ <Item>NearLight Drive</Item>
+ <Item>SuperLight Drive</Item>
+ <Item>Fusion Core</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Proton Gun</Item>
+ <Material>Metasteel</Material>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Light Combat Suit</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Silent Drive</Item>
+ <Item>Terraform Device</Item>
+ <Item>Metasteel Plating</Item>
+</Research>
+</Race>
+<Race Name="Elithiri">
+<HomePlanet>(-1,0)2.0</HomePlanet>
+<LastExpand>680779093995222764</LastExpand>
+<Research>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Triple Shotgun</Item>
+ <Item>Katana</Item>
+ <Item>Colony Builder</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Tar Grenade</Item>
+ <Material>Composite</Material>
+ <Item>Stealth Armour</Item>
+ <Item>Double Blade</Item>
+ <Item>Powerblade</Item>
+ <Item>Rail Gun</Item>
+ <Item>Combat Suit</Item>
+ <Item>Quad Shotgun</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>NearLight Drive</Item>
+ <Item>Power Axe</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Chainsword</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Light Combat Suit</Item>
+ <Item>Laser Sniper Rifle</Item>
+</Research>
+</Race>
+<Race Name="Ogrish">
+<HomePlanet>(1,1)11.1</HomePlanet>
+<LastExpand>680876743771648522</LastExpand>
+<Research>
+ <Item>Poison Grenade</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Colony Builder</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Rail Gun</Item>
+ <Item>Katana</Item>
+ <Item>Fusion Core</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Laser Pistol</Item>
+ <Material>Composite</Material>
+ <Item>Infiltrator Helmet</Item>
+ <Item>Terraform Device</Item>
+ <Item>Slugger</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Chainsword</Item>
+ <Item>Triple Shotgun</Item>
+ <Item>Silent Drive</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Slug Gun</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Double Blade</Item>
+ <Item>Proton Gun</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Heavy Powerfist</Item>
+ <Item>Auto Repair</Item>
+</Research>
+</Race>
+<Race Name="Insectoid">
+<HomePlanet>(0,-1)10.0</HomePlanet>
+<LastExpand>680810788771634401</LastExpand>
+<Research>
+ <Item>Triple Shotgun</Item>
+ <Item>Rail Gun</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Quad Shotgun</Item>
+ <Item>Chainsword</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Katana</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Combat Suit</Item>
+ <Item>Colony Builder</Item>
+ <Item>Disc Thrower</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Double Blade</Item>
+ <Item>Fusion Core</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Light Combat Suit</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Auto Repair</Item>
+ <Material>Composite</Material>
+ <Item>Arc Rifle</Item>
+ <Item>Infiltration Suit</Item>
+ <Item>Silent Drive</Item>
+ <Item>Laser Pistol</Item>
+ <Item>Advanced Fusion Core</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Terraform Device</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Exo Claws</Item>
+ <Item>Proton Gun</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>NearLight Drive</Item>
+ <Item>AI Module</Item>
+</Research>
+</Race>
+<Race Name="Grey">
+<HomePlanet>(-1,-1)14.0</HomePlanet>
+<LastExpand>680739730925373998</LastExpand>
+<Research>
+ <Item>Stealth Helmet</Item>
+ <Item>Chainsword</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Katana</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Stealth Boots</Item>
+ <Item>Fusion Core</Item>
+ <Item>Rail Gun</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Triple Shotgun</Item>
+ <Item>Laser Cannon</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Colony Builder</Item>
+ <Item>Double Blade</Item>
+ <Material>Composite</Material>
+ <Item>Quad Shotgun</Item>
+</Research>
+</Race>
+<Race Name="Ursalon">
+<HomePlanet>(0,1)10.4</HomePlanet>
+<LastExpand>680789610766483915</LastExpand>
+<Research>
+ <Item>Stealth Boots</Item>
+ <Item>Rail Gun</Item>
+ <Item>Advanced Fission Core</Item>
+ <Item>Fusion Core</Item>
+ <Item>Poison Grenade</Item>
+ <Item>Acid Grenade</Item>
+ <Item>Tar Grenade</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Stealth Gauntlets</Item>
+ <Item>Stealth Armour</Item>
+ <Item>Sonic Grenade</Item>
+ <Item>Stealth Helmet</Item>
+ <Item>Chainsword</Item>
+ <Item>Colony Builder</Item>
+ <Item>Laser Pistol</Item>
+ <Material>Composite</Material>
+ <Item>Katana</Item>
+ <Item>Infiltrator Helmet</Item>
+ <Item>NearLight Drive</Item>
+ <Item>Laser Rifle</Item>
+ <Item>Triple Shotgun</Item>
+ <Item>Heavy Laser Rifle</Item>
+ <Item>Quad Shotgun</Item>
+ <Item>Laser Cannon</Item>
+ <Item>SuperLight Drive</Item>
+ <Item>Laser Sniper Rifle</Item>
+ <Item>Double Blade</Item>
+</Research>
+</Race>
+</Races>
+</SpaceMercsSaveFile>

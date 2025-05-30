@@ -630,7 +630,7 @@ namespace SpaceMercs {
         public bool CanFoundColony(HabitableAO hao) {
             foreach (Tuple<ShipEquipment, bool> tp in Equipment.Values) {
                 if (tp.Item2 && tp.Item1.BuildColony != ShipEquipment.ColoniseAbility.None) {
-                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && hao.Type == Planet.PlanetType.Oceanic) return true;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && (hao.Type == Planet.PlanetType.Oceanic || hao.Type == Planet.PlanetType.Rocky)) return true;
                     if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Advanced && hao.Type != Planet.PlanetType.Gas) return true;
                     if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Cloud && hao.Type == Planet.PlanetType.Gas) return true;
                 }
@@ -642,7 +642,7 @@ namespace SpaceMercs {
             foreach (int r in Equipment.Keys) {
                 Tuple<ShipEquipment, bool> tp = Equipment[r];
                 if (tp.Item2 && tp.Item1.BuildColony != ShipEquipment.ColoniseAbility.None) {
-                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && hao.Type == Planet.PlanetType.Oceanic) bestID = r;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && (hao.Type == Planet.PlanetType.Oceanic || hao.Type == Planet.PlanetType.Rocky)) bestID = r;
                     if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Advanced && hao.Type != Planet.PlanetType.Gas && bestID == -1) bestID = r; // Don't override a basic colony builder, if there are several
                     if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Cloud && hao.Type == Planet.PlanetType.Gas) bestID = r;
                 }

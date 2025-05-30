@@ -30,6 +30,7 @@
     </Weapons>
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
+      <Item Amount="0.05">Poison Gland</Item>
     </Scavenge>
     <Tex Size="2">3,5</Tex>
   </CreatureType>
@@ -51,6 +52,7 @@
     </Weapons>
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
+      <Item Amount="0.2">Poison Gland</Item>
     </Scavenge>
     <Tex Size="2">1,5</Tex>
   </CreatureType>
@@ -71,6 +73,7 @@
     </Weapons>
     <Scavenge>
       <Item Amount="0.1">Nanosilk</Item>
+      <Item Amount="0.2">Poison Gland</Item>
     </Scavenge>
     <Tex Size="2">3,7</Tex>
   </CreatureType>
@@ -92,6 +95,7 @@
     </Weapons>
     <Scavenge>
       <Item Amount="1.5">Nanosilk</Item>
+      <Item Amount="2">Poison Gland</Item>
     </Scavenge>
     <Tex Size="4">1,1</Tex>
   </CreatureType>
