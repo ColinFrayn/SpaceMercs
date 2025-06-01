@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>13/09/2158 17:53:53</Clock>
+<Clock>15/09/2158 17:06:44</Clock>
 <Map Seed="533589" SPS="16" PD="6">
  <Sector X="-1" Y="-1" Inhabitant="Grey">
 <Star ID="0">
@@ -164,7 +164,7 @@
  <BaseType>63</BaseType>
  <Owner>Grey</Owner>
  <NextGrowth>694217088000000000</NextGrowth>
- <SeedProgress>190.4036</SeedProgress>
+ <SeedProgress>190.4735</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5,408,937</Radius>
@@ -495,7 +495,7 @@
  <BaseType>31</BaseType>
  <Owner>Insectoid</Owner>
  <NextGrowth>697347360000000000</NextGrowth>
- <SeedProgress>95.8941</SeedProgress>
+ <SeedProgress>95.9211</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6,312,329</Radius>
@@ -775,7 +775,7 @@
  <BaseType>63</BaseType>
  <Owner>Elithiri</Owner>
  <NextGrowth>695630592000000000</NextGrowth>
- <SeedProgress>122.3390</SeedProgress>
+ <SeedProgress>122.3882</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5,863,873</Radius>
@@ -1001,7 +1001,7 @@
  <Owner>Elithiri</Owner>
  <LastGrowth>678989088000000000</LastGrowth>
  <NextGrowth>683781696000000000</NextGrowth>
- <SeedProgress>182.1613</SeedProgress>
+ <SeedProgress>182.1859</SeedProgress>
 </Colony>
 <Radius>7,328,891</Radius>
 <ARot>97,053</ARot>
@@ -1150,7 +1150,7 @@
  <Owner>Human</Owner>
  <LastUpdate>679594992376370000</LastUpdate>
  <NextGrowth>692681760000000000</NextGrowth>
- <SeedProgress>34.9138</SeedProgress>
+ <SeedProgress>34.9691</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>6,910,895</Radius>
@@ -1251,7 +1251,36 @@
 <Orbit>247298408307</Orbit>
 <TempBase>300.29391988674223</TempBase>
 </Planet>
-<Planet Seed="6541980" />
+<Planet ID="5">
+<Type>Gas</Type>
+<PRot>5005834</PRot>
+<Radius>46,256,681</Radius>
+<ARot>691,774</ARot>
+<Temp>221.30</Temp>
+<Seed>6541980</Seed>
+<Orbit>344531881913</Orbit>
+<TempBase>254.21051492281697</TempBase>
+<Moons>
+<Moon ID="0">
+ <Scanned/>
+ <Missions>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Bandits</Enemy>
+ <Enemy2>Arachnids</Enemy2>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>735994197</Seed>
+ <Size>2</Size>
+</Mission>
+ </Missions>
+</Moon>
+</Moons>
+</Planet>
 <Planet Seed="9950239" />
 <Planet Seed="3409559" />
  </Planets>
@@ -1360,7 +1389,7 @@
  <BaseType>63</BaseType>
  <Owner>Gokan</Owner>
  <NextGrowth>698107680000000000</NextGrowth>
- <SeedProgress>33.4402</SeedProgress>
+ <SeedProgress>33.4743</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>7,076,486</Radius>
@@ -1538,7 +1567,7 @@
  <Owner>Gokan</Owner>
  <LastGrowth>679327776000000000</LastGrowth>
  <NextGrowth>686507616000000000</NextGrowth>
- <SeedProgress>109.6256</SeedProgress>
+ <SeedProgress>109.6426</SeedProgress>
 </Colony>
 <Radius>66,985,534</Radius>
 <ARot>839,266</ARot>
@@ -1979,7 +2008,7 @@
  <BaseType>63</BaseType>
  <Owner>Ursalon</Owner>
  <NextGrowth>698041152000000000</NextGrowth>
- <SeedProgress>139.5193</SeedProgress>
+ <SeedProgress>139.5667</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>4,638,065</Radius>
@@ -2062,7 +2091,7 @@
  <Owner>Ursalon</Owner>
  <LastGrowth>679411584000000000</LastGrowth>
  <NextGrowth>685490688000000000</NextGrowth>
- <SeedProgress>139.1584</SeedProgress>
+ <SeedProgress>139.1821</SeedProgress>
 </Colony>
 <Radius>61,130,119</Radius>
 <ARot>981,436</ARot>
@@ -2440,7 +2469,7 @@
  <BaseType>63</BaseType>
  <Owner>Ogrish</Owner>
  <NextGrowth>695198592000000000</NextGrowth>
- <SeedProgress>190.9072</SeedProgress>
+ <SeedProgress>190.9422</SeedProgress>
 </Colony>
 <Name>Homeworld</Name>
 <Radius>5,623,804</Radius>
@@ -2569,17 +2598,18 @@
  </Sector>
 </Map>
 <Team>
- <Pos>(0,0)12.4</Pos>
+ <Pos>(0,0)12.5.0</Pos>
  <Cash>358.457152520007</Cash>
  <Soldiers>
 <Soldier Name="Rocky">
- <Location X="23" Y="8"/>
- <Health>37.82878951375218</Health>
- <Stamina>1</Stamina>
+ <OnMission/>
+ <Location X="14" Y="9"/>
+ <Health>32.804154174357166</Health>
+ <Stamina>13.382518736918183</Stamina>
  <Shields>0</Shields>
  <Facing>180</Facing>
  <Level>7</Level>
- <XP>42812</XP>
+ <XP>44134</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>15,12,8,15,16</Stats>
@@ -2594,6 +2624,33 @@
   <Inv Count="2">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
+  <Inv Count="1">
+<Weapon Type="Axe" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Automatic Rifle" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Kevlar" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Shortblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Steel" Level="2"/>
+  </Inv>
  </Inventory>
  <EquippedArmour>
 <Armour Type="Core Armour" Material="Kevlar" Level="0"/>
@@ -2605,7 +2662,7 @@
 <Weapon Type="Chainsword" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">538</Exp>
+  <Exp Type="Melee">544</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Scavenging">6</Exp>
@@ -2613,7 +2670,7 @@
   <Exp Skill="Bladesmith">1</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>279</KillCount>
+ <KillCount>280</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>7</Level>
@@ -2622,13 +2679,14 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Kayla Fox">
- <Location X="25" Y="21"/>
- <Health>49</Health>
- <Stamina>35</Stamina>
+ <OnMission/>
+ <Location X="17" Y="10"/>
+ <Health>41.36503012917392</Health>
+ <Stamina>15.111273782858401</Stamina>
  <Shields>0</Shields>
- <Facing>255.96375653207355</Facing>
+ <Facing>180</Facing>
  <Level>7</Level>
- <XP>38934</XP>
+ <XP>40256</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>9,10,16,15,19</Stats>
@@ -2642,6 +2700,12 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
   </Inv>
  </Inventory>
  <EquippedArmour>
@@ -2657,13 +2721,14 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Emitter">82</Exp>
-  <Exp Type="Rifle">525</Exp>
+  <Exp Type="Rifle">548</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Perception">6</Exp>
  </UtilityExperience>
- <KillCount>263</KillCount>
+ <Moved/>
+ <KillCount>267</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>6</Level>
@@ -2672,13 +2737,14 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Stacy Vale">
- <Location X="24" Y="22"/>
+ <OnMission/>
+ <Location X="15" Y="9"/>
  <Health>45</Health>
  <Stamina>15</Stamina>
  <Shields>0</Shields>
- <Facing>263.6598082540901</Facing>
+ <Facing>180</Facing>
  <Level>7</Level>
- <XP>45480</XP>
+ <XP>46802</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>11,8,16,13,16</Stats>
@@ -2705,7 +2771,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Melee">400</Exp>
-  <Exp Type="Sniper">394</Exp>
+  <Exp Type="Sniper">411</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -2714,7 +2780,7 @@
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>122</KillCount>
+ <KillCount>126</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>6</Level>
@@ -2723,13 +2789,14 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Patrick Upton">
- <Location X="23" Y="18"/>
- <Health>22.507562205239957</Health>
- <Stamina>26</Stamina>
+ <OnMission/>
+ <Location X="16" Y="10"/>
+ <Health>42.58175198430392</Health>
+ <Stamina>2</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
+ <Facing>90</Facing>
  <Level>6</Level>
- <XP>35191</XP>
+ <XP>36513</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>11,14,12,14,10</Stats>
@@ -2741,7 +2808,7 @@
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
  </Inventory>
@@ -2763,10 +2830,12 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">2</Exp>
  </UtilityExperience>
- <KillCount>72</KillCount>
+ <Moved/>
+ <KillCount>81</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
- <Level>5</Level>
+ <Level>7</Level>
+ <OverrideRace>Human</OverrideRace>
 </Creature>
  </ToughestKill>
 </Soldier>
@@ -2796,13 +2865,13 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="9463"/>
+  <Relation Race="Human" Value="9591"/>
  </Relations>
  <Inventory>
-  <Inv Count="11">
+  <Inv Count="12">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="4">
 <Equipment Type="Adrenaline"/>
   </Inv>
   <Inv Count="13">
@@ -2859,13 +2928,381 @@
   <Inv Count="1">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="2">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<MissionItem Mass="1.20" Name="Valuable Geode" Level="7"></MissionItem>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
  </Inventory>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillBoss</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>6</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1298911464</Seed>
+ <Size>3</Size>
+ <Turn>14</Turn>
+ <Level ID="0">
+<MissionLevel Width="43" Height="50">
+ <Diff>5</Diff>
+ <Level>0</Level>
+ <Start X="35" Y="13"/>
+ <End X="8" Y="34"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAABBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBAABAAAAAAAAAABBBBBBBBBBBBBAABBBBBBBBBBBBBBBAABAAAAAAAAAABBBBBBBBBBBBBAABBBBBBBBBBBBBBBAABAAAAAAAAAABBBBBBBBBBBBBAABBBAAAAAAAABBBBAABAAAAAAAAAABBAAAABBBBBBBAABBBAAAAAAAABBBBAAHAAAAAAAAAAHHAAAABBBBBBBAABBBAAAAAAAABBBBAAHAAAAAAAAAAHHAAAABBBBBBBAABBBAAAAAAAAAAAAAABAAAAAAAAAABBAAAABBBBBBBAAAAFAAAAAAAAAAAAAABAAAAAAAAAABBAAAABBBBBBBAAAAFAAAAAAAABBBBBBBAAAAAAAAAABBAAAABBBBBBBAAABBAAAAAAAABBBBBBBAAAAAAAAAABBBBIIBBBBBBBBAABBAAAAAAAABBBBBBBAAAAAAABBBBBBBAABBBBBBBBAABBBBAABBBBBBBBBBBAAAAAAABBBBBBBAABBBBBBBBAABBBBAABBBBBBBBBBBAABBBAABBBBBBBBBBBBBBBBBGGBBBBAABBBBBBBBBBBAABBBAABBBBBKKBBBBBBBBBAAAAAABAABBBBBBBBBBBAABBBAABBBBAAAAAAAABBBBAAAAAAFAABBBBBBBBBBBAABBBIIBBBBAAAAAAAABBBBAAAAAAFAABBBBBBBBBBBAABAAAAAHAHAAAAAAAABBBBAAAAAABBBBBBBBBBBBBBAABAAAAAHAHAAAAAAAABBBBAAAAAABBBBBBBBBBBBBBGGBAAAAABBBAAAAAAAABBBBAAAAAABBBBBBBBBAAAAAAABAAAAABBBAAAAAAAABBBBAAAAAABBBBBBBBBAAAAAAAFAAAAAHAHAAAAAAAABBBBBAABAABBBBBBBBBAAAAAAAFAAAAAHAHAAAAAAAABBBBAAAAAAABBBBBBBBAAAAAAABBBBBBBBBGGBBBBBBBBBBAAAAAAABBBBBBBBAAAAAAABBBBBBBBBAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAFAABBBBBBAABBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAABAABBBBBBAABBBBBBBBBBAAAAAAABBBBBBBBBBBBBGGBAABBBBBBAABBBBBBBBBBAAAAAAABBBBBBBBBBBBBAABAABBBBBBAABBBBBBBBBBAAAAAAABBBBBBBBBBBBBAABAABBBBBBAABBBBBBBBBBBAABBBBBBBBBBBBBBBBBAABGGBBBBBAAAAABBBBBBBBBAABBBBBBBBBBBBBBBBBAAAAAAAAABAAAAABBBBBBBBBAAAABBAAAFAAAAAAAABAAAAAAAAABAAAAAFAAAAABBBBBAABBAAAFAAAAAAAAFAAAAAAAAABAAAAAFAAAAABBBBBAABBBBBBAAAAAAAAFAAAAAAAAABAAAAABBBBAABBBBBAABBBBBBAAAAAAAABAAAAAAAAABBBBBBBBBBAABBBBBAAAAAABBAAAAAAAABAAAAAAAAABBBBBBBBBBAABBBBBAAAAAABBAAAAAAAABAAAAAAAAABBBBBBBBBBAABBBBBBBBBAABBAAAAAAAABAAAAAAAAABBBBBBBBBBAABBBBBBBBBAABBAAAAAAAABAAAAAAAAABBBBBBBBBBAABBBBBBBBBAABBGGBBBBBBBBBBGGBKKBBBBBBBBBBBAABBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBAABBBBAABBBBBBBBBBBAABBBBBBBBBBABBBBBBBBBBBAABBBBAAAAAAAAAAAAAAABBBBBBBBBBABBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBABBBBBBBBBBBAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>00000000000000000111000000000000000000000000000000000000000011110000000000000000000000000000000000000001111111111111110000000000000000000000000000111111111111111000000000000000000000000000011111111111111100000000000000001111111000001111111111111111111110000000000111111100000111111111111111111111000000000011111111000011111111111111111111100000000001111111111111111111111111111111110000000000111111111111111111111111111111111000000000011111111111111111111111111111111100000000001111111111111111111111111111111110000000000111111111100000111111111111111111000000000011111111110000011111111111100111100000000001111111111000001111111110000011110000000000001100000000000111111111000001111000000000000000000000000011110111100001111111100000000000000000000001111011110000111111110000000000000000000000111111111111111111111000000000000000000000011111111111111111111100000000000000000000001111111111111111111110000000000000000000000111111111111111111111000000000000000000000000011111111111111111100000000000000000000000001111111111111111110000000000000000000000000111111111111111111000000000000000000000000011111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Enforcer">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="19" Y="37"/>
+ <Facing>140</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="8" Y="28"/>
+ <Facing>293</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="6" Y="12"/>
+ <Facing>347</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="38" Y="24"/>
+ <Facing>282</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="2" Y="8"/>
+ <Facing>62</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+<Creature Type="Heavy Gunner">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="40" Y="34"/>
+ <Facing>30</Facing>
+ <Weapon>Heavy Rifle</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="32" Y="43"/>
+ <Facing>263</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="8" Y="38"/>
+ <Facing>24</Facing>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="37" Y="35"/>
+ <Facing>339</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="8" Y="16"/>
+ <Facing>255</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="11" Y="28"/>
+ <Facing>137</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="8" Y="9"/>
+ <Facing>264</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="34" Y="48"/>
+ <Facing>325</Facing>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="3" Y="14"/>
+ <Facing>89</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="19" Y="36"/>
+ <Facing>346</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="38" Y="19"/>
+ <Facing>237</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="12" Y="43"/>
+ <Facing>102</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="5" Y="35"/>
+ <Facing>80</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="17" Y="34"/>
+ <Facing>24</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="10" Y="35"/>
+ <Facing>301</Facing>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="15" Y="34"/>
+ <Facing>8</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="31" Y="43"/>
+ <Facing>75</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="18" Y="37"/>
+ <Facing>311</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+<Creature Type="Heavy Gunner">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="9" Y="14"/>
+ <Facing>137</Facing>
+ <Weapon>Heavy Rifle</Weapon>
+</Creature>
+<Creature Type="Thug">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="41" Y="37"/>
+ <Facing>317</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Thug">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="2" Y="12"/>
+ <Facing>314</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="30" Y="43"/>
+ <Facing>247</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Enforcer">
+ <Level>6</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="15" Y="40"/>
+ <Facing>207</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="5" Y="38"/>
+ <Facing>180</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>4</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="13" Y="37"/>
+ <Facing>91</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Thug">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="13" Y="35"/>
+ <Facing>145</Facing>
+ <Weapon>Chainsword</Weapon>
+</Creature>
+<Creature Type="Enforcer">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="33" Y="18"/>
+ <Facing>0</Facing>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+<Creature Type="Heavy Gunner">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="33" Y="19"/>
+ <Facing>0</Facing>
+ <Weapon>Heavy Rifle</Weapon>
+</Creature>
+<Creature Type="Rogue">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="3" Y="10"/>
+ <Facing>196</Facing>
+ <Weapon>Axe</Weapon>
+</Creature>
+<Creature Type="Thug">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="32" Y="33"/>
+ <Facing>172</Facing>
+ <Weapon>Shortblade</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>5</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="39" Y="19"/>
+ <Facing>65</Facing>
+ <Weapon>Shotgun</Weapon>
+</Creature>
+</Creatures>
+<Stashes>
+<Stash X="32" Y="21">
+<StashItem N="1">
+<Material Type="Plastic"/>
+</StashItem>
+<Hidden/>
+</Stash>
+<Stash X="33" Y="9">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="32" Y="8">
+<StashItem N="1">
+<Corpse Type="Bandit" Level="6"/>
+</StashItem>
+<StashItem N="1">
+<Corpse Type="Rogue" Level="6"/>
+</StashItem>
+</Stash>
+<Stash X="31" Y="8">
+<StashItem N="1">
+<Corpse Type="Mercenary" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="30" Y="8">
+<StashItem N="1">
+<Corpse Type="Bandit" Level="6"/>
+</StashItem>
+</Stash>
+<Stash X="24" Y="6">
+<StashItem N="1">
+<Corpse Type="Heavy Gunner" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="30" Y="6">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="4"/>
+</StashItem>
+</Stash>
+<Stash X="29" Y="7">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="5"/>
+</StashItem>
+</Stash>
+<Stash X="33" Y="7">
+<StashItem N="1">
+<Corpse Type="Rogue" Level="5"/>
+</StashItem>
+</Stash>
+</Stashes>
+<Traps>
+<Trap X="30" Y="11" L="5">
+</Trap>
+<Trap X="6" Y="25" L="6">
+<Hidden/>
+<Type>Poison</Type>
+</Trap>
+<Trap X="24" Y="39" L="6">
+<Hidden/>
+<Type>Poison</Type>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
 </Team>
 <Races>
 <Race Name="Human">
@@ -2910,7 +3347,6 @@
  <Item>Laser Rifle</Item>
  <Item>Foundry</Item>
  <Item>Auto Repair</Item>
- <Material>Composite</Material>
  <Item>Colony Builder</Item>
  <Item>Acid Grenade</Item>
  <Item>Rail Gun</Item>
@@ -2922,13 +3358,14 @@
  <Item>Fusion Core</Item>
  <Item>Infiltration Suit</Item>
  <Item>Proton Gun</Item>
- <Material>Metasteel</Material>
  <Item>Laser Sniper Rifle</Item>
  <Item>Light Combat Suit</Item>
  <Item>Laser Cannon</Item>
  <Item>Silent Drive</Item>
  <Item>Terraform Device</Item>
  <Item>Metasteel Plating</Item>
+ <Material>Composite</Material>
+ <Material>Metasteel</Material>
 </Research>
 </Race>
 <Race Name="Elithiri">
@@ -2947,7 +3384,6 @@
  <Item>Poison Grenade</Item>
  <Item>Laser Rifle</Item>
  <Item>Tar Grenade</Item>
- <Material>Composite</Material>
  <Item>Stealth Armour</Item>
  <Item>Double Blade</Item>
  <Item>Powerblade</Item>
@@ -2963,6 +3399,7 @@
  <Item>Stealth Boots</Item>
  <Item>Light Combat Suit</Item>
  <Item>Laser Sniper Rifle</Item>
+ <Material>Composite</Material>
 </Research>
 </Race>
 <Race Name="Ogrish">
@@ -2983,7 +3420,6 @@
  <Item>Stealth Armour</Item>
  <Item>Advanced Fusion Core</Item>
  <Item>Laser Pistol</Item>
- <Material>Composite</Material>
  <Item>Infiltrator Helmet</Item>
  <Item>Terraform Device</Item>
  <Item>Slugger</Item>
@@ -3002,6 +3438,7 @@
  <Item>Fusion Drive</Item>
  <Item>Heavy Powerfist</Item>
  <Item>Auto Repair</Item>
+ <Material>Composite</Material>
 </Research>
 </Race>
 <Race Name="Insectoid">
@@ -3031,7 +3468,6 @@
  <Item>Light Combat Suit</Item>
  <Item>Laser Sniper Rifle</Item>
  <Item>Auto Repair</Item>
- <Material>Composite</Material>
  <Item>Arc Rifle</Item>
  <Item>Infiltration Suit</Item>
  <Item>Silent Drive</Item>
@@ -3045,6 +3481,7 @@
  <Item>Stealth Gauntlets</Item>
  <Item>NearLight Drive</Item>
  <Item>AI Module</Item>
+ <Material>Composite</Material>
 </Research>
 </Race>
 <Race Name="Grey">
@@ -3069,8 +3506,8 @@
  <Item>Stealth Armour</Item>
  <Item>Colony Builder</Item>
  <Item>Double Blade</Item>
- <Material>Composite</Material>
  <Item>Quad Shotgun</Item>
+ <Material>Composite</Material>
 </Research>
 </Race>
 <Race Name="Ursalon">
@@ -3092,7 +3529,6 @@
  <Item>Chainsword</Item>
  <Item>Colony Builder</Item>
  <Item>Laser Pistol</Item>
- <Material>Composite</Material>
  <Item>Katana</Item>
  <Item>Infiltrator Helmet</Item>
  <Item>NearLight Drive</Item>
@@ -3104,6 +3540,7 @@
  <Item>SuperLight Drive</Item>
  <Item>Laser Sniper Rifle</Item>
  <Item>Double Blade</Item>
+ <Material>Composite</Material>
 </Research>
 </Race>
 </Races>
