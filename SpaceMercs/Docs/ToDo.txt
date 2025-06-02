@@ -2,9 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Default loadout, e.g. Medsystem, 3xPlasma grenade - specify somehow, auto re-supply?
-- Extra column next to inventory with desired quantity.
-- Use + and - keys to change
+Default loadout
+- Buttons to drop all surplus, sell all surplus
+-- Maybe limit "sell all surplus" to a certain maximum quality?
+- Turn drag-drop back on for Team view (test)
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
@@ -24,10 +25,6 @@ At relations >= 3 join human hypergates up to alien ones??
 - Maybe buy an item to link routes; choose nearby system; apply to alien gate if permissioned??
 - Links are impassable if relations drop with alien. Check this when travelling.
 - Pathing through an alien civ costs differently based on the alien civ relations (and also make sure that cost for home civ changes based on relations)
-
-Option to sell all unequipped armour, weapons (up to a maximum quality?) from Team View if at a colony
-- Stow all from all soldiers?
-- Sell all except default loadout??
 
 What should attack skill do for an AoE weapon (grenade or cone), other than increase dmg?
 

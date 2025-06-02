@@ -1,4 +1,5 @@
-﻿using System.Drawing.Text;
+﻿using System.Collections.ObjectModel;
+using System.Drawing.Text;
 
 namespace SpaceMercs.Dialogs {
     partial class TeamView : Form {
@@ -60,7 +61,9 @@ namespace SpaceMercs.Dialogs {
         public IItem? SelectedItem() {
             Soldier? s = SelectedSoldier();
             if (s is null) return null;
-            if (lbInventory.SelectedIndex >= 0) return s.InventoryGrouped.Keys.ElementAt(lbInventory.SelectedIndex);
+            if (dgInventory.SelectedRows.Count > 0 && dgInventory.SelectedRows[0].Tag is IItem it) {
+                return it;
+            }
             if (lbEquipped.SelectedIndex >= 0) {
                 int iIndex = lbEquipped.SelectedIndex;
                 if (s.EquippedWeapon != null && iIndex == lbEquipped.Items.Count - 1) return s.EquippedWeapon;
@@ -77,7 +80,7 @@ namespace SpaceMercs.Dialogs {
             if (s.IsActive) {
                 btDeactivate.Text = "Deactivate";
                 btDeactivate.Enabled = true;
-                lbInventory.Enabled = true;
+                dgInventory.Enabled = true;
                 lbEquipped.Enabled = true;
                 lbDeactivated.Visible = false;
             }
@@ -85,7 +88,7 @@ namespace SpaceMercs.Dialogs {
                 btDeactivate.Text = "Activate";
                 if (s.aoLocation == PlayerTeam.CurrentPosition) btDeactivate.Enabled = true;
                 else btDeactivate.Enabled = false;
-                lbInventory.Enabled = false;
+                dgInventory.Enabled = false;
                 lbEquipped.Enabled = false;
                 lbDeactivated.Visible = true;
             }
@@ -152,10 +155,34 @@ namespace SpaceMercs.Dialogs {
             tbSkills_SelectedIndexChanged(new object(), EventArgs.Empty); // We might as well use the existing function. Params are ignored anyway...
 
             // Inventory
-            lbInventory.Items.Clear();
-            foreach (IItem eq in s.InventoryGrouped.Keys) {
-                lbInventory.Items.Add(eq.Name + (s.InventoryGrouped[eq] > 1 ? " [" + s.InventoryGrouped[eq] + "]" : ""));
+            dgInventory.Rows.Clear();
+            ReadOnlyDictionary<IItem, int> loadout = s.Loadout;
+            Dictionary<IItem, int> allItems = new(s.InventoryGrouped);
+            // Add in placeholders for desired items that we don't have
+            foreach (IItem it in loadout.Keys) {
+                if (!allItems.ContainsKey(it)) allItems.TryAdd(it, 0);
             }
+            string[] arrRow = new string[3];
+            foreach (IItem eq in allItems.Keys) {
+                arrRow[0] = eq.Name;
+                arrRow[1] = allItems[eq].ToString();
+                if (loadout.TryGetValue(eq, out int quantity)) {
+                    arrRow[2] = quantity.ToString();
+                }
+                else {
+                    arrRow[2] = string.Empty;
+                }
+                dgInventory.Rows.Add(arrRow);
+                dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = eq;
+                if (s.CountItem(eq) < quantity) {
+                    dgInventory.Rows[dgInventory.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                }
+                else {
+                    dgInventory.Rows[dgInventory.Rows.Count - 1].DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+            dgInventory.ClearSelection();
+
             lbEquipped.Items.Clear();
             foreach (Armour ar in s.EquippedArmour) {
                 lbEquipped.Items.Add(ar.Name);
@@ -175,6 +202,16 @@ namespace SpaceMercs.Dialogs {
 
             // Update inventory if it's open, so that it's up-to-date (just to make sure!)
             ivForm?.UpdateAll();
+        }
+        private void SelectInventoryItem(IItem item) {
+            dgInventory.ClearSelection();
+            foreach (DataGridViewRow row in dgInventory.Rows) {
+                if (row.Tag is IItem it) {
+                    if (it == item) {
+                        row.Selected = true;
+                    }
+                }
+            }
         }
 
         private static Color ArmourToColour(Armour? ar) {
@@ -228,13 +265,13 @@ namespace SpaceMercs.Dialogs {
                 s.DropItem(it);
             }
             else {
-                iPrevIndex = lbInventory.SelectedIndex;
+                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
                 s.DropAll(it);
             }
             ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
-                else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
+            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
+                if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
+                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
             }
             ivForm?.UpdateInventory();
         }
@@ -242,15 +279,15 @@ namespace SpaceMercs.Dialogs {
             Soldier s = SelectedSoldier() ?? throw new Exception("Selected soldier was null");
             if (SelectedItem() is not IEquippable eq) return;
             int iPrevIndex = -1;
-            if (lbInventory.SelectedIndex >= 0) {
-                iPrevIndex = lbInventory.SelectedIndex;
+            if (dgInventory.SelectedRows.Count > 0) {
+                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
                 s.Equip(eq);
             }
             else s.Unequip(eq);
             ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryGrouped.ContainsKey(eq)) lbInventory.SelectedIndex = iPrevIndex;
-                else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
+            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
+                if (s.InventoryGrouped.ContainsKey(eq)) SelectInventoryItem(eq);
+                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
             }
             ivForm?.UpdateInventory();
         }
@@ -261,18 +298,18 @@ namespace SpaceMercs.Dialogs {
             if (it is null) return;
             int iPrevIndex = -1;
             if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) s.Unequip(eq);
-            else iPrevIndex = lbInventory.SelectedIndex;
+            else iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
             s.DropItem(it);
             ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && lbInventory.Items.Count > 0) {
-                if (s.InventoryGrouped.ContainsKey(it)) lbInventory.SelectedIndex = iPrevIndex;
-                else lbInventory.SelectedIndex = Math.Max(0, iPrevIndex - 1);
+            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
+                if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
+                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
             }
             ivForm?.UpdateInventory();
         }
-        private void lbInventory_SelectedIndexChanged(object sender, EventArgs e) {
+        private void dgInventory_SelectedIndexChanged(object sender, EventArgs e) {
             // Update buttons based on selection
-            int i = lbInventory.SelectedIndex;
+            int i = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
             if (i < 0) return;
             if (SelectedItem() is Weapon || SelectedItem() is Armour) btEquip.Enabled = true;
             else btEquip.Enabled = false;
@@ -287,7 +324,7 @@ namespace SpaceMercs.Dialogs {
             btEquip.Enabled = true;
             btEquip.Text = "Unequip";
             btDrop.Enabled = true;
-            lbInventory.SelectedIndex = -1;
+            dgInventory.ClearSelection();
         }
 
         // ----- Miscellaneous form handlers -----
@@ -462,6 +499,7 @@ namespace SpaceMercs.Dialogs {
         private Size dragSize = SystemInformation.DragSize;
 
         private void lbEquipped_MouseDown(object sender, MouseEventArgs e) {
+            return; // TODO
             indexOfItemUnderMouseToDrag = lbEquipped.IndexFromPoint(e.X, e.Y);
             if (indexOfItemUnderMouseToDrag != ListBox.NoMatches) {
                 dragBoxFromMouseDown = new Rectangle(
@@ -475,6 +513,7 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbEquipped_MouseMove(object sender, MouseEventArgs e) {
+            return; // TODO
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     IItem? it = null;
@@ -495,6 +534,7 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbEquipped_DragEnter(object sender, DragEventArgs e) {
+            return; // TODO
             DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
             if (das?.dob is Weapon or Armour) {
                 e.Effect = DragDropEffects.Move;
@@ -503,6 +543,7 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void lbEquipped_DragDrop(object sender, DragEventArgs e) {
+            return; // TODO
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;
             if (das.source == WindowSource.Equipment) return;
@@ -515,9 +556,9 @@ namespace SpaceMercs.Dialogs {
             if (ivForm != null) ivForm.UpdateInventory();
         }
 
-        private void lbInventory_MouseDown(object sender, MouseEventArgs e) {
-            indexOfItemUnderMouseToDrag = lbInventory.IndexFromPoint(e.X, e.Y);
-            if (indexOfItemUnderMouseToDrag != ListBox.NoMatches) {
+        private void dgInventory_MouseDown(object sender, MouseEventArgs e) {
+            return; // TODO
+            if (dgInventory.SelectedRows.Count == 1 && dgInventory.SelectedRows[0].Tag is IItem) {
                 dragBoxFromMouseDown = new Rectangle(
                     new Point(e.X - (dragSize.Width / 2),
                               e.Y - (dragSize.Height / 2)),
@@ -528,7 +569,8 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
-        private void lbInventory_MouseMove(object sender, MouseEventArgs e) {
+        private void dgInventory_MouseMove(object sender, MouseEventArgs e) {
+            return; // TODO
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     Soldier? thisSoldier = SelectedSoldier();
@@ -536,17 +578,18 @@ namespace SpaceMercs.Dialogs {
                     IItem? it = thisSoldier.InventoryGrouped.Keys.ElementAt(indexOfItemUnderMouseToDrag);
                     if (it is not null) {
                         DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory };
-                        lbInventory.DoDragDrop(das, DragDropEffects.All);
+                        dgInventory.DoDragDrop(das, DragDropEffects.All);
                     }
                 }
             }
         }
 
-        private void lbInventory_MouseUp(object sender, MouseEventArgs e) {
+        private void dgInventory_MouseUp(object sender, MouseEventArgs e) {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private void lbInventory_DragEnter(object sender, DragEventArgs e) {
+        private void dgInventory_DragEnter(object sender, DragEventArgs e) {
+            return; // TODO
             if (e.Data?.GetData(typeof(DataAndSource)) is DataAndSource das) {
                 if (das.dob is Corpse) {
                     e.Effect = DragDropEffects.None;
@@ -558,7 +601,8 @@ namespace SpaceMercs.Dialogs {
             else e.Effect = DragDropEffects.None;
         }
 
-        private void lbInventory_DragDrop(object sender, DragEventArgs e) {
+        private void dgInventory_DragDrop(object sender, DragEventArgs e) {
+            return; // TODO
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;
             if (das.source == WindowSource.Inventory) return;
@@ -584,8 +628,33 @@ namespace SpaceMercs.Dialogs {
             ShowSelectedSoldierDetails();
         }
 
-        private void label17_Click(object sender, EventArgs e) {
+        private void dgInventory_KeyUp(object sender, KeyEventArgs e) {
+            Soldier? s = SelectedSoldier();
+            if (s is null) return;
+            IItem? it = SelectedItem();
+            if (it is null) return;
+            if (dgInventory.SelectedRows.Count == 0) return;
 
+            if (e.KeyCode is Keys.Add or Keys.Subtract) {
+                int quantity = 0;
+                if (e.KeyCode == Keys.Add) {
+                    quantity = s.AddLoadout(it);
+                }
+                if (e.KeyCode == Keys.Subtract) {
+                    quantity = s.RemoveLoadout(it);
+                }
+                var row = dgInventory.SelectedRows[0];
+                if (quantity > 0) row.Cells[2].Value = quantity.ToString();
+                else row.Cells[2].Value = string.Empty;
+                if (s.CountItem(it) < quantity) {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
+                else {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
+                ShowSelectedSoldierDetails();
+                SelectInventoryItem(it);
+            }
         }
     }
 }

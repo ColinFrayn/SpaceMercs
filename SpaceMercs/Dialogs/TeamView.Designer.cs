@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -78,12 +78,15 @@
             lbStrength = new Label();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            dgInventory = new DataGridView();
+            Item = new DataGridViewTextBoxColumn();
+            Count = new DataGridViewTextBoxColumn();
+            LO = new DataGridViewTextBoxColumn();
             lbEquipped = new ListBox();
             lbEncumber = new Label();
             btDrop = new Button();
             btEquip = new Button();
             label1 = new Label();
-            lbInventory = new ListBox();
             lbCapacity = new Label();
             btDropAll = new Button();
             label13 = new Label();
@@ -113,6 +116,7 @@
             tpMilitary.SuspendLayout();
             tpUtility.SuspendLayout();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgInventory).BeginInit();
             SuspendLayout();
             // 
             // dgSoldiers
@@ -123,14 +127,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
             dgSoldiers.Location = new Point(14, 116);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -181,7 +185,7 @@
             btInventory.Location = new Point(282, 723);
             btInventory.Margin = new Padding(4, 3, 4, 3);
             btInventory.Name = "btInventory";
-            btInventory.Size = new Size(264, 96);
+            btInventory.Size = new Size(264, 93);
             btInventory.TabIndex = 7;
             btInventory.Text = "View Ship Storage";
             btInventory.UseVisualStyleBackColor = true;
@@ -234,7 +238,7 @@
             // btUpgradeStat
             // 
             btUpgradeStat.Font = new Font("Segoe UI", 9.75F);
-            btUpgradeStat.Location = new Point(121, 14);
+            btUpgradeStat.Location = new Point(121, 12);
             btUpgradeStat.Margin = new Padding(0);
             btUpgradeStat.Name = "btUpgradeStat";
             btUpgradeStat.Size = new Size(34, 24);
@@ -296,7 +300,6 @@
             label17.Size = new Size(51, 15);
             label17.TabIndex = 88;
             label17.Text = "Unspent";
-            label17.Click += label17_Click;
             // 
             // pbExperience
             // 
@@ -784,12 +787,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(dgInventory);
             groupBox1.Controls.Add(lbEquipped);
             groupBox1.Controls.Add(lbEncumber);
             groupBox1.Controls.Add(btDrop);
             groupBox1.Controls.Add(btEquip);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(lbInventory);
             groupBox1.Controls.Add(lbCapacity);
             groupBox1.Controls.Add(btDropAll);
             groupBox1.Controls.Add(label13);
@@ -804,12 +807,64 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Inventory";
             // 
+            // dgInventory
+            // 
+            dgInventory.AllowDrop = true;
+            dgInventory.AllowUserToAddRows = false;
+            dgInventory.AllowUserToDeleteRows = false;
+            dgInventory.AllowUserToResizeColumns = false;
+            dgInventory.AllowUserToResizeRows = false;
+            dgInventory.Anchor = AnchorStyles.None;
+            dgInventory.BackgroundColor = SystemColors.ControlLightLight;
+            dgInventory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgInventory.ColumnHeadersVisible = false;
+            dgInventory.Columns.AddRange(new DataGridViewColumn[] { Item, Count, LO });
+            dgInventory.Location = new Point(9, 22);
+            dgInventory.Margin = new Padding(4, 3, 4, 3);
+            dgInventory.Name = "dgInventory";
+            dgInventory.ReadOnly = true;
+            dgInventory.RowHeadersVisible = false;
+            dgInventory.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgInventory.Size = new Size(262, 269);
+            dgInventory.TabIndex = 46;
+            dgInventory.SelectionChanged += dgInventory_SelectedIndexChanged;
+            dgInventory.DragDrop += dgInventory_DragDrop;
+            dgInventory.DragEnter += dgInventory_DragEnter;
+            dgInventory.KeyUp += dgInventory_KeyUp;
+            dgInventory.MouseDown += dgInventory_MouseDown;
+            dgInventory.MouseMove += dgInventory_MouseMove;
+            dgInventory.MouseUp += dgInventory_MouseUp;
+            // 
+            // Item
+            // 
+            Item.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Item.HeaderText = "Item";
+            Item.Name = "Item";
+            Item.ReadOnly = true;
+            // 
+            // Count
+            // 
+            Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Count.HeaderText = "Count";
+            Count.Name = "Count";
+            Count.ReadOnly = true;
+            Count.Width = 5;
+            // 
+            // LO
+            // 
+            LO.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            LO.HeaderText = "LO";
+            LO.Name = "LO";
+            LO.ReadOnly = true;
+            LO.Width = 5;
+            // 
             // lbEquipped
             // 
             lbEquipped.AllowDrop = true;
             lbEquipped.FormattingEnabled = true;
             lbEquipped.HorizontalScrollbar = true;
-            lbEquipped.Location = new Point(9, 315);
+            lbEquipped.Location = new Point(9, 330);
             lbEquipped.Margin = new Padding(4, 3, 4, 3);
             lbEquipped.Name = "lbEquipped";
             lbEquipped.Size = new Size(262, 139);
@@ -826,7 +881,7 @@
             // 
             lbEncumber.BorderStyle = BorderStyle.FixedSingle;
             lbEncumber.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lbEncumber.Location = new Point(199, 490);
+            lbEncumber.Location = new Point(199, 498);
             lbEncumber.Margin = new Padding(6, 2, 6, 2);
             lbEncumber.Name = "lbEncumber";
             lbEncumber.Size = new Size(58, 30);
@@ -836,7 +891,7 @@
             // 
             // btDrop
             // 
-            btDrop.Location = new Point(123, 277);
+            btDrop.Location = new Point(123, 297);
             btDrop.Margin = new Padding(4, 3, 4, 3);
             btDrop.Name = "btDrop";
             btDrop.Size = new Size(72, 27);
@@ -847,7 +902,7 @@
             // 
             // btEquip
             // 
-            btEquip.Location = new Point(9, 277);
+            btEquip.Location = new Point(9, 297);
             btEquip.Margin = new Padding(4, 3, 4, 3);
             btEquip.Name = "btEquip";
             btEquip.Size = new Size(80, 27);
@@ -860,7 +915,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 9F);
-            label1.Location = new Point(187, 466);
+            label1.Location = new Point(187, 474);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(84, 15);
@@ -868,29 +923,11 @@
             label1.Text = "Encumbrance";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // lbInventory
-            // 
-            lbInventory.AllowDrop = true;
-            lbInventory.FormattingEnabled = true;
-            lbInventory.HorizontalScrollbar = true;
-            lbInventory.Location = new Point(9, 23);
-            lbInventory.Margin = new Padding(4, 3, 4, 3);
-            lbInventory.Name = "lbInventory";
-            lbInventory.Size = new Size(262, 244);
-            lbInventory.TabIndex = 0;
-            lbInventory.SelectedIndexChanged += lbInventory_SelectedIndexChanged;
-            lbInventory.DragDrop += lbInventory_DragDrop;
-            lbInventory.DragEnter += lbInventory_DragEnter;
-            lbInventory.DoubleClick += lbInventory_DoubleClick;
-            lbInventory.MouseDown += lbInventory_MouseDown;
-            lbInventory.MouseMove += lbInventory_MouseMove;
-            lbInventory.MouseUp += lbInventory_MouseUp;
-            // 
             // lbCapacity
             // 
             lbCapacity.BorderStyle = BorderStyle.FixedSingle;
             lbCapacity.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lbCapacity.Location = new Point(71, 497);
+            lbCapacity.Location = new Point(71, 505);
             lbCapacity.Margin = new Padding(6, 2, 6, 2);
             lbCapacity.Name = "lbCapacity";
             lbCapacity.Size = new Size(79, 25);
@@ -901,7 +938,7 @@
             // btDropAll
             // 
             btDropAll.Font = new Font("Microsoft Sans Serif", 8.25F);
-            btDropAll.Location = new Point(200, 277);
+            btDropAll.Location = new Point(200, 297);
             btDropAll.Margin = new Padding(4, 3, 4, 3);
             btDropAll.Name = "btDropAll";
             btDropAll.Size = new Size(72, 27);
@@ -914,7 +951,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Microsoft Sans Serif", 9F);
-            label13.Location = new Point(9, 501);
+            label13.Location = new Point(9, 509);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
             label13.Size = new Size(53, 15);
@@ -926,7 +963,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 9F);
-            label8.Location = new Point(19, 470);
+            label8.Location = new Point(19, 478);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(45, 15);
@@ -938,7 +975,7 @@
             // 
             lbWeight.BorderStyle = BorderStyle.FixedSingle;
             lbWeight.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lbWeight.Location = new Point(71, 466);
+            lbWeight.Location = new Point(71, 474);
             lbWeight.Margin = new Padding(6, 2, 6, 2);
             lbWeight.Name = "lbWeight";
             lbWeight.Size = new Size(79, 25);
@@ -1089,7 +1126,7 @@
             // 
             lbBerths.BorderStyle = BorderStyle.FixedSingle;
             lbBerths.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lbBerths.Location = new Point(78, 768);
+            lbBerths.Location = new Point(78, 761);
             lbBerths.Margin = new Padding(6, 2, 6, 2);
             lbBerths.Name = "lbBerths";
             lbBerths.Size = new Size(48, 25);
@@ -1101,7 +1138,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label9.Location = new Point(18, 772);
+            label9.Location = new Point(18, 765);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
             label9.Size = new Size(45, 16);
@@ -1113,7 +1150,7 @@
             lbInsufficientBerths.AutoSize = true;
             lbInsufficientBerths.Font = new Font("Microsoft Sans Serif", 9.75F);
             lbInsufficientBerths.ForeColor = Color.Red;
-            lbInsufficientBerths.Location = new Point(149, 772);
+            lbInsufficientBerths.Location = new Point(149, 765);
             lbInsufficientBerths.Margin = new Padding(4, 0, 4, 0);
             lbInsufficientBerths.Name = "lbInsufficientBerths";
             lbInsufficientBerths.Size = new Size(112, 16);
@@ -1167,6 +1204,7 @@
             tpUtility.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgInventory).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1211,7 +1249,6 @@
         private GroupBox groupBox1;
         private Button btDrop;
         private Button btEquip;
-        private ListBox lbInventory;
         private Label lbEncumber;
         private Label label1;
         private Label lbCapacity;
@@ -1254,5 +1291,9 @@
         private Button btUpgradeStat;
         private Label lbStamina;
         private Label label22;
+        private DataGridView dgInventory;
+        private DataGridViewTextBoxColumn Item;
+        private DataGridViewTextBoxColumn Count;
+        private DataGridViewTextBoxColumn LO;
     }
 }

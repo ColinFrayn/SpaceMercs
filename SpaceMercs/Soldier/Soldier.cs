@@ -339,6 +339,12 @@ namespace SpaceMercs {
                 return new ReadOnlyDictionary<IItem, int>(Inventory.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count()));
             }
         }
+        private readonly Dictionary<IItem, int> _loadout = new();
+        public ReadOnlyDictionary<IItem, int> Loadout {
+            get {
+                return _loadout.AsReadOnly();
+            }
+        }
         public List<Armour> EquippedArmour = new List<Armour>();
 
         // Base stats
@@ -690,6 +696,18 @@ namespace SpaceMercs {
                 }
             }
 
+            XmlNode? xmlld = xml.SelectSingleNode("Loadout");
+            _loadout.Clear();
+            if (xmlld is not null) {
+                foreach (XmlNode xi in xmlld.ChildNodes) {
+                    int count = xi.GetAttributeInt("Count");
+                    IItem? eq = Utils.LoadItem(xi.FirstChild);
+                    if (eq is not null) {
+                        _loadout.Add(eq, count);
+                    }
+                }
+            }
+
             XmlNode? xmlar = xml.SelectSingleNode("EquippedArmour");
             EquippedArmour.Clear();
             if (xmlar is not null) {
@@ -819,6 +837,16 @@ namespace SpaceMercs {
                     file.WriteLine("  </Inv>");
                 }
                 file.WriteLine(" </Inventory>");
+            }
+
+            if (_loadout.Count > 0) {
+                file.WriteLine(" <Loadout>");
+                foreach (KeyValuePair<IItem, int> kvp in _loadout) {
+                    file.WriteLine($"  <Inv Count=\"{kvp.Value}\">");
+                    kvp.Key.SaveToFile(file);
+                    file.WriteLine("  </Inv>");
+                }
+                file.WriteLine(" </Loadout>");
             }
 
             if (EquippedArmour.Count > 0) {
@@ -1206,6 +1234,43 @@ namespace SpaceMercs {
         public int CountItem(IItem it) {
             if (!Inventory.Contains(it)) return 0;
             return InventoryGrouped[it];
+        }
+        public int AddLoadout(IItem it) {
+            if (_loadout.TryGetValue(it, out int q)) {
+                _loadout[it] = q + 1;
+                return q + 1;
+            }
+            _loadout.Add(it, 1);
+            return 1;
+        }
+        public int RemoveLoadout(IItem it) {
+            if (!_loadout.TryGetValue(it, out int q)) return 0;
+            if (q == 1) {
+                _loadout.Remove(it);
+                return 0;
+            }
+            _loadout[it] = q - 1;
+            return q - 1;
+        }
+        public bool LoadoutComplete {
+            get {
+                foreach ((IItem it, int quantity) in _loadout) {
+                    if (quantity > CountItem(it)) return false;
+                }
+                return true;
+            }
+        }
+        public void Refill() {
+            if (PlayerTeam is null) return;
+            foreach ((IItem it, int quantity) in _loadout) {
+                int required = quantity - CountItem(it);
+                // Ugh, a bit inefficient, but it's only called very rarely
+                while (required > 0 && PlayerTeam.Inventory.ContainsKey(it)) { 
+                    PlayerTeam.Inventory.Remove(it);
+                    AddItem(it);
+                    required--;
+                }
+            }
         }
         #endregion // Inventory
 

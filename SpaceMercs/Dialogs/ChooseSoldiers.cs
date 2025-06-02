@@ -34,6 +34,7 @@ namespace SpaceMercs.Dialogs {
                 dgSoldiers.Rows.Add(arrRow);
                 dgSoldiers.Rows[dgSoldiers.Rows.Count - 1].Tag = s;
             }
+            CheckLoadouts();
         }
 
         private void btLaunch_Click(object sender, EventArgs e) {
@@ -69,10 +70,47 @@ namespace SpaceMercs.Dialogs {
             if (count == 0 || count > MaxSize) btLaunch.Enabled = false;
             else btLaunch.Enabled = true;
             dgSoldiers.ClearSelection();
+            CheckLoadouts();
+        }
+
+        private void CheckLoadouts() {
+            // Check if our loadouts are complete
+            bool bComplete = true;
+            foreach (DataGridViewRow row in dgSoldiers.Rows) {
+                bool bSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
+                if (bSelected && row.Tag is Soldier s) {
+                    if (!s.LoadoutComplete) {
+                        bComplete = false;
+                        break;
+                    }
+                }
+            }
+            if (bComplete) {
+                btRefill.Enabled = false;
+                btRefill.Visible = false;
+                lbLoadout.Visible = false;
+            }
+            else {
+                btRefill.Enabled = true;
+                btRefill.Visible = true;
+                lbLoadout.Visible = true;
+            }
         }
 
         private void dgSoldiers_SelectionChanged(object sender, EventArgs e) {
             dgSoldiers.ClearSelection();
+        }
+
+        private void btRefill_Click(object sender, EventArgs e) {
+            foreach (DataGridViewRow row in dgSoldiers.Rows) {
+                bool bSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
+                if (bSelected && row.Tag is Soldier s) {
+                    if (!s.LoadoutComplete) {
+                        s.Refill();
+                    }
+                }
+            }
+            CheckLoadouts();
         }
     }
 }

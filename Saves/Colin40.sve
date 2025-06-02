@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>01/11/2597 23:18:05</Clock>
+<Clock>01/11/2597 23:29:21</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -14449,7 +14449,7 @@
  <Location X="8" Y="26"/>
  <Health>30.14338092234388</Health>
  <Stamina>45</Stamina>
- <Shields>0</Shields>
+ <Shields>20</Shields>
  <Facing>180</Facing>
  <Level>15</Level>
  <XP>1809367</XP>
@@ -14468,6 +14468,17 @@
 <Equipment Type="Quantum Medsystem"/>
   </Inv>
  </Inventory>
+ <Loadout>
+  <Inv Count="3">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Life Scanner"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Quantum Medsystem"/>
+  </Inv>
+ </Loadout>
  <EquippedArmour>
 <Armour Type="Gauntlets" Material="Adamantium" Level="1"/>
 <Armour Type="Infiltrator Helmet" Material="Composite" Level="1"/>
@@ -14497,7 +14508,7 @@
  <Location X="10" Y="26"/>
  <Health>47.180557888644685</Health>
  <Stamina>41</Stamina>
- <Shields>0</Shields>
+ <Shields>12.5</Shields>
  <Facing>225</Facing>
  <Level>14</Level>
  <XP>1624668</XP>
@@ -14517,6 +14528,14 @@
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
+ <Loadout>
+  <Inv Count="3">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Quantum Medsystem"/>
+  </Inv>
+ </Loadout>
  <EquippedArmour>
 <Armour Type="Plate Boots" Material="Metasteel" Level="1"/>
 <Armour Type="Powered Gauntlets" Material="Composite" Level="3"/>
@@ -14566,6 +14585,14 @@
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
+ <Loadout>
+  <Inv Count="3">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Quantum Medsystem"/>
+  </Inv>
+ </Loadout>
  <EquippedArmour>
 <Armour Type="Assault Power Armour" Material="Adamantium" Level="2"/>
  </EquippedArmour>
@@ -14610,7 +14637,18 @@
   <Inv Count="3">
 <Equipment Type="Frag Grenade"/>
   </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
  </Inventory>
+ <Loadout>
+  <Inv Count="1">
+<Equipment Type="Quantum Medsystem"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+ </Loadout>
  <EquippedArmour>
 <Armour Type="Infiltration Suit" Material="Composite" Level="2"/>
  </EquippedArmour>
@@ -14657,6 +14695,14 @@
 <Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
+ <Loadout>
+  <Inv Count="3">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Quantum Medsystem"/>
+  </Inv>
+ </Loadout>
  <EquippedArmour>
 <Armour Type="Infiltration Suit" Material="Shadowskin" Level="3"/>
  </EquippedArmour>
@@ -14796,7 +14842,7 @@
   <Inv Count="12">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="20">
+  <Inv Count="19">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="15">
@@ -14937,13 +14983,13 @@
  <Item>Katana</Item>
  <Item>NearLight Drive</Item>
  <Item>Adamantium Plating</Item>
+ <Item>Heavy Plasma Rifle</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Composite</Material>
  <Material>Mithril</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
- <Item>Heavy Plasma Rifle</Item>
 </Research>
 </Race>
 <Race Name="Gokan">
@@ -15013,12 +15059,12 @@
  <Item>Freeze Blaster</Item>
  <Item>Heavy Flamer</Item>
  <Item>Heavy Plasma Rifle</Item>
+ <Item>Katana</Item>
  <Material>Adamantium</Material>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Mithril</Material>
  <Material>Composite</Material>
- <Item>Katana</Item>
 </Research>
 </Race>
 <Race Name="Elithiri">
@@ -15093,12 +15139,12 @@
  <Item>Heavy Flamer</Item>
  <Item>Freeze Blaster</Item>
  <Item>Heavy Plasma Rifle</Item>
+ <Item>Fusion Drive</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
  <Material>Composite</Material>
- <Item>Fusion Drive</Item>
 </Research>
 </Race>
 <Race Name="Ogrish">
