@@ -1093,6 +1093,73 @@
       <Material Name="Carbon" Amount="1"/>
     </Materials>
   </WeaponType>
+  <!-- Precursor weapons -->
+  <WeaponType Name="Void Rifle" Class="Rifle">
+    <Mass>4.5</Mass>
+    <Cost>4000</Cost>
+    <Rarity>999</Rarity>
+    <Speed>14</Speed>
+    <Range Accuracy="0" DropOff="0.5" Length="0.4" Speed="1.6" Colour="8.0,0.4,0.2">9</Range>
+    <Damage>6+7</Damage>
+    <Desc>A void rifle based on advanced precursor tech</Desc>
+    <Sound>LaserRifleSingle</Sound>
+    <Noise>6</Noise>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <Unresearchable/>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Void Spear" Class="Melee">
+    <Mass>5.5</Mass>
+    <Cost>4000</Cost>
+    <Rarity>999</Rarity>
+    <Speed>12</Speed>
+    <Long/>
+    <Range Accuracy="1">1.5</Range>
+    <Damage>6+7</Damage>
+    <Desc>A vicious spear, humming with dark energy and based on precursor tech.</Desc>
+    <Sound>SwordSlice</Sound>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <Unresearchable/>
+    </Requirements>
+    <Noise>1</Noise>
+  </WeaponType>
+  <WeaponType Name="Void Sniper" Class="Sniper">
+    <Mass>4.0</Mass>
+    <Cost>5000</Cost>
+    <Rarity>999</Rarity>
+    <Speed>25</Speed>
+    <BaseDelay>500</BaseDelay>
+    <Range Accuracy="2" DropOff="0.18" Length="0.4" Speed="1.7">24</Range>
+    <Damage>8+9</Damage>
+    <Desc>A mysterious weapon based on precursor tech that creates high damage at long range.</Desc>
+    <Sound>GaussSniper</Sound>
+    <Stable/>
+    <Noise>7</Noise>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <Unresearchable/>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Void Fragger" Class="Shotgun">
+    <Mass>4.5</Mass>
+    <Cost>5000</Cost>
+    <Rarity>999</Rarity>
+    <Speed>19</Speed>
+    <Shots>5</Shots>
+    <Recoil>0.15</Recoil>
+    <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
+    <Damage Type="ConeMulti" Width="3.2">4+5</Damage>
+    <Desc>A highly deadly void weapon that scatters void fragments over a wide area.</Desc>
+    <Sound>ShotgunAndReload</Sound>
+    <Shred>1</Shred>
+    <Noise>11</Noise>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <Unresearchable/>
+    </Requirements>
+  </WeaponType>
   <!-- Natural weapons - all hidden -->
   <WeaponType Name="Claws" Class="Melee">
     <Speed>10</Speed>

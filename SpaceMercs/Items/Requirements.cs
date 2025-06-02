@@ -7,6 +7,7 @@ namespace SpaceMercs.Items {
         public readonly int MinLevel;
         private readonly int MinSystems;
         private readonly int MinPop;
+        private readonly bool Researchable;
         public int CashCost { get; private set; }
         public readonly IReadOnlyDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
         public readonly IReadOnlyDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();
@@ -20,6 +21,8 @@ namespace SpaceMercs.Items {
             MinSystems = xml.SelectNodeInt("MinSystems", 1);
             MinPop = xml.SelectNodeInt("MinPop", 1);
             CashCost = xml.SelectNodeInt("CashCost", 0);
+            Researchable = xml.SelectSingleNode("Unresearchable") is null;
+
             string planetType = xml.SelectNodeText("PlanetType");
             if (!string.IsNullOrEmpty(planetType)) {
                 RequiredColonyPlanetType = Enum.Parse<Planet.PlanetType>(planetType);
@@ -86,6 +89,7 @@ namespace SpaceMercs.Items {
 
         // Any race : Have they expanded enough to research this?
         public bool RaceMeetsRequirements(Race race) {
+            if (!Researchable) return false;
             if (race.SystemCount < MinSystems) return false;
             if (race.Population < MinPop) return false;
 

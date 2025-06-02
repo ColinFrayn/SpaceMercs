@@ -803,7 +803,7 @@
             // 
             // btScavenge
             // 
-            btScavenge.Location = new Point(653, 768);
+            btScavenge.Location = new Point(658, 768);
             btScavenge.Margin = new Padding(4, 3, 4, 3);
             btScavenge.Name = "btScavenge";
             btScavenge.Size = new Size(115, 37);
@@ -814,7 +814,7 @@
             // 
             // btPickUpAll
             // 
-            btPickUpAll.Location = new Point(7, 753);
+            btPickUpAll.Location = new Point(16, 753);
             btPickUpAll.Margin = new Padding(4, 3, 4, 3);
             btPickUpAll.Name = "btPickUpAll";
             btPickUpAll.Size = new Size(115, 37);
@@ -825,7 +825,7 @@
             // 
             // btPickUpSelected
             // 
-            btPickUpSelected.Location = new Point(800, 768);
+            btPickUpSelected.Location = new Point(799, 768);
             btPickUpSelected.Margin = new Padding(4, 3, 4, 3);
             btPickUpSelected.Name = "btPickUpSelected";
             btPickUpSelected.Size = new Size(115, 37);

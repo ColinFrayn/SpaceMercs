@@ -2,6 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Default loadout, e.g. Medsystem, 3xPlasma grenade - specify somehow, auto re-supply?
+- Extra column next to inventory with desired quantity.
+- Use + and - keys to change
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -23,10 +27,9 @@ At relations >= 3 join human hypergates up to alien ones??
 
 Option to sell all unequipped armour, weapons (up to a maximum quality?) from Team View if at a colony
 - Stow all from all soldiers?
-- Default loadout, e.g. Medsystem, 3xPlasma grenade - specify somehow, auto re-supply?
+- Sell all except default loadout??
 
-What should attack skill do for an AoE weapon (grenade or cone), if anything?
-- Make sure it increases damage.
+What should attack skill do for an AoE weapon (grenade or cone), other than increase dmg?
 
 ?? Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
