@@ -831,6 +831,7 @@
             dgInventory.SelectionChanged += dgInventory_SelectedIndexChanged;
             dgInventory.DragDrop += dgInventory_DragDrop;
             dgInventory.DragEnter += dgInventory_DragEnter;
+            dgInventory.DoubleClick += dgInventory_DoubleClick;
             dgInventory.KeyUp += dgInventory_KeyUp;
             dgInventory.MouseDown += dgInventory_MouseDown;
             dgInventory.MouseMove += dgInventory_MouseMove;

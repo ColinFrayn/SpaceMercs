@@ -1589,6 +1589,12 @@ namespace SpaceMercs {
         public void StopMission() {
             OnMission = false;
             _Effects.Clear();
+            // ALl inventory items that are recharging, cancel it.
+            foreach (IItem it in Inventory) {
+                if (it is Equipment eq) {
+                    eq.Recharge = 0;
+                }
+            }
         }
 
         // Bonuses from equipped items, effects etc.
