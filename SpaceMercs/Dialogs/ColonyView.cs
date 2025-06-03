@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Text;
 using System.Text;
+using System.Windows.Forms;
 
 namespace SpaceMercs.Dialogs {
     partial class ColonyView : Form {
@@ -286,13 +287,13 @@ namespace SpaceMercs.Dialogs {
             lbRaceName.Text = colony.Owner.Name;
             lbRelations.Text = Utils.RelationsToString(PlayerTeam.GetRelations(colony.Owner));
 
-            bt100.Enabled = (PlayerTeam.Cash >= 100);
-            bt1000.Enabled = (PlayerTeam.Cash >= 1000);
-            bt10k.Enabled = (PlayerTeam.Cash >= 10000);
+            bt100.Enabled = (PlayerTeam.Cash >= 100 && PlayerTeam.GetRelations(colony.Owner) < 5);
+            bt1000.Enabled = (PlayerTeam.Cash >= 1000 && PlayerTeam.GetRelations(colony.Owner) < 5);
+            bt10k.Enabled = (PlayerTeam.Cash >= 10000 && PlayerTeam.GetRelations(colony.Owner) < 5);
             btSpaceHulkCore.Visible = PlayerTeam.SpaceHulkCoreCount > 0;
-            btSpaceHulkCore.Enabled = PlayerTeam.HasSpaceHulkCore;
+            btSpaceHulkCore.Enabled = PlayerTeam.HasSpaceHulkCore && PlayerTeam.GetRelations(colony.Owner) < 5;
             btPrecursorCore.Visible = PlayerTeam.PrecursorCoreCount > 0;
-            btPrecursorCore.Enabled = PlayerTeam.HasPrecursorCore;
+            btPrecursorCore.Enabled = PlayerTeam.HasPrecursorCore && PlayerTeam.GetRelations(colony.Owner) < 5;
 
             // Show the experience as a bar
             pbExperience.Refresh();
@@ -601,6 +602,11 @@ namespace SpaceMercs.Dialogs {
                 else if (mw.NewItem is not null) SetupFoundryTab(new List<SaleItem>() { new SaleItem(mw.NewItem, s, bEquipped, 1) });
             }
         }
+        private void btSellPlus_Click(object sender, EventArgs e) {
+            SellSpecial ss = new SellSpecial(PlayerTeam, colony);
+            ss.ShowDialog(this);
+            SetupFoundryTab();
+        }
 
         // Double click to get further details on specific entries
         private void dgMerchant_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
@@ -884,7 +890,6 @@ namespace SpaceMercs.Dialogs {
             if (selected is null) return;
             SetupTrainingDetails(selected);
         }
-
         private void btAddNewSkill_Click(object sender, EventArgs e) {
             Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
             if (s is null) return;
@@ -898,7 +903,6 @@ namespace SpaceMercs.Dialogs {
             s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, -1);
             SetupTrainingDetails(s);
         }
-
         private void btIncreaseSkill_Click(object sender, EventArgs e) {
             Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
             if (s is null) return;
@@ -916,7 +920,6 @@ namespace SpaceMercs.Dialogs {
             SetupTrainingDetails(s);
 
         }
-
         private void btForgetSkill_Click(object sender, EventArgs e) {
             Soldier? s = cbSoldierToTrain.SelectedItem as Soldier;
             if (s is null) return;
@@ -937,7 +940,6 @@ namespace SpaceMercs.Dialogs {
             s.IncreaseTrainingCost();
             SetupTrainingDetails(s);
         }
-
         private void lbUtilitySkills_SelectedIndexChanged(object sender, EventArgs e) {
             btIncreaseSkill.Enabled = false;
             btForgetSkill.Enabled = false;

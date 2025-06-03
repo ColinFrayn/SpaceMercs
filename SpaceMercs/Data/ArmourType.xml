@@ -15,7 +15,7 @@
     <Rarity>15</Rarity>
     <Attack>1</Attack>
     <Defence>1</Defence>
-    <BaseArmour>3</BaseArmour>
+    <BaseArmour>2</BaseArmour>
     <Requirements>
       <MinLevel>2</MinLevel>
       <CashCost>10</CashCost>
@@ -36,7 +36,7 @@
     <Mass>1.5</Mass>
     <Rarity>25</Rarity>
     <Attack>1</Attack>
-    <BaseArmour>3</BaseArmour>
+    <BaseArmour>2</BaseArmour>
     <Location>Head</Location>
     <Requirements>
       <Prerequisite>Stealth Helmet</Prerequisite>
@@ -161,7 +161,7 @@
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
-    <BaseArmour>2</BaseArmour>
+    <BaseArmour>1</BaseArmour>
     <Location>Feet</Location>
     <Desc>Lightweight plate boots with a stealth coating</Desc>
     <Materials>
@@ -205,7 +205,7 @@
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
-    <BaseArmour>2</BaseArmour>
+    <BaseArmour>1</BaseArmour>
     <Location>Hands</Location>
     <Desc>Lightweight armoured gauntlets with a stealth coating</Desc>
     <Materials>
@@ -283,7 +283,7 @@
   <ArmourType Name="Shock Armour">
     <Mass>10.0</Mass>
     <Rarity>40</Rarity>
-    <BaseArmour>21</BaseArmour>
+    <BaseArmour>22</BaseArmour>
     <MinMatLvl>2</MinMatLvl>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight version of the shielded chestplate, arm plating and leg plating combined</Desc>
@@ -311,7 +311,7 @@
     <Mass>11.0</Mass>
     <Rarity>55</Rarity>
     <Defence>2</Defence>
-    <BaseArmour>26</BaseArmour>
+    <BaseArmour>27</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with better materials, minor deflection technology and a more advanced shield generator.</Desc>
     <Shields>20</Shields>
@@ -340,7 +340,7 @@
     <Mass>13.0</Mass>
     <Rarity>60</Rarity>
     <Defence>3</Defence>
-    <BaseArmour>31</BaseArmour>
+    <BaseArmour>32</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>An advanced and highly powerful combat armour, with a superb shield generator and deflection technology.</Desc>
     <Shields>30</Shields>
@@ -405,7 +405,7 @@
     <Utility>
       <Stealth>3</Stealth>
     </Utility>
-    <BaseArmour>13</BaseArmour>
+    <BaseArmour>12</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight chestplate, arm plating and leg plating combined, with stealth coating</Desc>
     <Materials>
@@ -430,7 +430,7 @@
       <Stealth>6</Stealth>
       <Perception>2</Perception>
     </Utility>
-    <BaseArmour>22</BaseArmour>
+    <BaseArmour>20</BaseArmour>
     <Location>Chest,Arms,Legs,Feet,Hands,Head</Location>
     <Desc>A full body covering armour suit with stealth coating</Desc>
     <Materials>

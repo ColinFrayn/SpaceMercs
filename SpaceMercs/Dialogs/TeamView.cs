@@ -266,12 +266,16 @@ namespace SpaceMercs.Dialogs {
             }
             else {
                 iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
-                s.DropAll(it);
+                foreach (DataGridViewRow row in dgInventory.Rows) {
+                    if (row.Selected == true && row.Tag is IItem itd) {
+                        s.DropAll(itd);
+                    }
+                }
             }
             ShowSelectedSoldierDetails();
             if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
                 if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
-                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
+                else dgInventory.Rows[Math.Min(dgInventory.Rows.Count - 1, Math.Max(0, iPrevIndex))].Selected = true;
             }
             ivForm?.UpdateInventory();
         }
@@ -297,13 +301,22 @@ namespace SpaceMercs.Dialogs {
             IItem? it = SelectedItem();
             if (it is null) return;
             int iPrevIndex = -1;
-            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) s.Unequip(eq);
-            else iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
-            s.DropItem(it);
+            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) {
+                s.Unequip(eq);
+                s.DropItem(eq);
+            }
+            else {
+                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
+                foreach (DataGridViewRow row in dgInventory.Rows) {
+                    if (row.Selected == true && row.Tag is IItem itd) {
+                        s.DropItem(itd);
+                    }
+                }
+            }
             ShowSelectedSoldierDetails();
             if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
                 if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
-                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
+                else dgInventory.Rows[Math.Min(dgInventory.Rows.Count-1, Math.Max(0, iPrevIndex))].Selected = true;
             }
             ivForm?.UpdateInventory();
         }
@@ -311,7 +324,7 @@ namespace SpaceMercs.Dialogs {
             // Update buttons based on selection
             int i = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
             if (i < 0) return;
-            if (SelectedItem() is Weapon || SelectedItem() is Armour) btEquip.Enabled = true;
+            if (dgInventory.SelectedRows.Count == 1 && (SelectedItem() is Weapon || SelectedItem() is Armour)) btEquip.Enabled = true;
             else btEquip.Enabled = false;
             btEquip.Text = "Equip";
             btDrop.Enabled = true;

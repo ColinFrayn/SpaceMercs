@@ -2,9 +2,8 @@
 ToDo List
 -------------------------------------------------
 
-Default loadout
-- Buttons to drop all surplus, sell all surplus
--- Maybe limit "sell all surplus" to a certain maximum quality?
+SellSpecial
+- Implement & test
 - Turn drag-drop back on for Team view (test)
 
 Test run Precursor mission (& keeping the core)

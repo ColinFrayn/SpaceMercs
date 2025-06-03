@@ -70,6 +70,9 @@
      <Compile Update="Dialogs\ChooseCore.cs">
        <SubType>Form</SubType>
      </Compile>
+     <Compile Update="Dialogs\SellSpecial.cs">
+       <SubType>Form</SubType>
+     </Compile>
    </ItemGroup>
 
   <ItemGroup>

@@ -23,14 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle36 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle37 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle38 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle33 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle34 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle35 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle39 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle40 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             tcMain = new TabControl();
             tpMerchant = new TabPage();
             cbAffordable = new CheckBox();
@@ -144,6 +144,7 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
+            btSellPlus = new Button();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -218,7 +219,7 @@
             // 
             btRandomiseMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btRandomiseMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btRandomiseMerchant.Location = new Point(536, 480);
+            btRandomiseMerchant.Location = new Point(536, 479);
             btRandomiseMerchant.Margin = new Padding(4, 3, 4, 3);
             btRandomiseMerchant.Name = "btRandomiseMerchant";
             btRandomiseMerchant.Size = new Size(105, 27);
@@ -283,7 +284,7 @@
             // btBuyMerchant
             // 
             btBuyMerchant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btBuyMerchant.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btBuyMerchant.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btBuyMerchant.Location = new Point(281, 479);
             btBuyMerchant.Margin = new Padding(4, 3, 4, 3);
             btBuyMerchant.Name = "btBuyMerchant";
@@ -318,8 +319,8 @@
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle36.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colItem.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colItem.DefaultCellStyle = dataGridViewCellStyle1;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
             colItem.ReadOnly = true;
@@ -335,8 +336,8 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle37.Font = new Font("Microsoft Sans Serif", 8.25F);
-            Mass.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Mass.DefaultCellStyle = dataGridViewCellStyle2;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
@@ -455,8 +456,8 @@
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle38.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -549,8 +550,8 @@
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle33.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colMission.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colMission.DefaultCellStyle = dataGridViewCellStyle4;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
             colMission.ReadOnly = true;
@@ -558,8 +559,8 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle34.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colGoal.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colGoal.DefaultCellStyle = dataGridViewCellStyle5;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
             colGoal.ReadOnly = true;
@@ -568,8 +569,8 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle35.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colOpp.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colOpp.DefaultCellStyle = dataGridViewCellStyle6;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
             colOpp.ReadOnly = true;
@@ -679,8 +680,8 @@
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle39.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -703,6 +704,7 @@
             // 
             // tpUpgrade
             // 
+            tpUpgrade.Controls.Add(btSellPlus);
             tpUpgrade.Controls.Add(btModify);
             tpUpgrade.Controls.Add(cbEquipped);
             tpUpgrade.Controls.Add(lbTeamCashFoundry);
@@ -727,10 +729,10 @@
             // 
             btModify.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btModify.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btModify.Location = new Point(199, 475);
+            btModify.Location = new Point(177, 476);
             btModify.Margin = new Padding(4, 3, 4, 3);
             btModify.Name = "btModify";
-            btModify.Size = new Size(80, 28);
+            btModify.Size = new Size(68, 28);
             btModify.TabIndex = 16;
             btModify.Text = "Modify";
             btModify.UseVisualStyleBackColor = true;
@@ -782,10 +784,10 @@
             // 
             btSellAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSellAll.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSellAll.Location = new Point(560, 475);
-            btSellAll.Margin = new Padding(4, 3, 4, 3);
+            btSellAll.Location = new Point(510, 476);
+            btSellAll.Margin = new Padding(0);
             btSellAll.Name = "btSellAll";
-            btSellAll.Size = new Size(80, 28);
+            btSellAll.Size = new Size(62, 28);
             btSellAll.TabIndex = 12;
             btSellAll.Text = "Sell All";
             btSellAll.UseVisualStyleBackColor = true;
@@ -795,10 +797,10 @@
             // 
             btDismantle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btDismantle.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btDismantle.Location = new Point(380, 475);
+            btDismantle.Location = new Point(321, 476);
             btDismantle.Margin = new Padding(4, 3, 4, 3);
             btDismantle.Name = "btDismantle";
-            btDismantle.Size = new Size(80, 28);
+            btDismantle.Size = new Size(76, 28);
             btDismantle.TabIndex = 11;
             btDismantle.Text = "Dismantle";
             btDismantle.UseVisualStyleBackColor = true;
@@ -808,10 +810,10 @@
             // 
             btSell.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSell.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSell.Location = new Point(470, 475);
-            btSell.Margin = new Padding(4, 3, 4, 3);
+            btSell.Location = new Point(431, 476);
+            btSell.Margin = new Padding(0);
             btSell.Name = "btSell";
-            btSell.Size = new Size(80, 28);
+            btSell.Size = new Size(71, 28);
             btSell.TabIndex = 10;
             btSell.Text = "Sell One";
             btSell.UseVisualStyleBackColor = true;
@@ -821,10 +823,10 @@
             // 
             btImprove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btImprove.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btImprove.Location = new Point(290, 475);
+            btImprove.Location = new Point(247, 476);
             btImprove.Margin = new Padding(4, 3, 4, 3);
             btImprove.Name = "btImprove";
-            btImprove.Size = new Size(80, 28);
+            btImprove.Size = new Size(68, 28);
             btImprove.TabIndex = 9;
             btImprove.Text = "Improve";
             btImprove.UseVisualStyleBackColor = true;
@@ -889,8 +891,8 @@
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle40.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dgcItem.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
             dgcItem.ReadOnly = true;
@@ -1621,6 +1623,19 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // btSellPlus
+            // 
+            btSellPlus.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btSellPlus.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btSellPlus.Location = new Point(578, 476);
+            btSellPlus.Margin = new Padding(0);
+            btSellPlus.Name = "btSellPlus";
+            btSellPlus.Size = new Size(62, 28);
+            btSellPlus.TabIndex = 17;
+            btSellPlus.Text = "Sell ++";
+            btSellPlus.UseVisualStyleBackColor = true;
+            btSellPlus.Click += btSellPlus_Click;
+            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1773,5 +1788,6 @@
         private Label label18;
         private Label lbTeamCash;
         private Label label20;
+        private Button btSellPlus;
     }
 }
