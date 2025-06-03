@@ -43,7 +43,7 @@ namespace SpaceMercs {
                 return sb.ToString();
             }
         }
-        private string FormatDoubleWithOptionalSign(double d) {
+        private static string FormatDoubleWithOptionalSign(double d) {
             if (d < 0) return d.ToString("0.#");
             return $"+{d:0.#}";
         }

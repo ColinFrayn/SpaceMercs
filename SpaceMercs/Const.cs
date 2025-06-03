@@ -45,7 +45,7 @@ namespace SpaceMercs {
         public const double MaxCarryExponent = 1.5; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
         public const double MaxCarryScale = 0.9; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
         public const double MaxCarryBase = 6.0; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
-        public const double ArmourCostExponent = 4d; // Affects cost scaling for armour based on how much better it is than the base
+        public const double ArmourCostExponent = 3.8d; // Affects cost scaling for armour based on how much better it is than the base
         public const double ArmourCostMultiplier = 2d; // Affects cost for armour based on how much better the shields are than the base
         public const double ShieldCostMultiplier = 6d; // Affects cost for armour based on how much better the shields are than the base
         public const double MassCostMultiplier = 15d; // Affects cost for armour based on how much lighter it is than the base
