@@ -2,6 +2,15 @@
 ToDo List
 -------------------------------------------------
 
+Add more interesting scavenged materials
+- Crystal alpha - crystal heart???
+- Mechanoids -> AI unit??
+- Shadowskin as a requirement
+- Triffid mother plant: ??
+- Void Psychic: ??
+
+Maybe more higher level creatures in some groups??
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 - Precursor-only artifact weapons

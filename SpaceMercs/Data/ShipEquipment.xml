@@ -271,6 +271,7 @@
       <MinLevel>7</MinLevel>
       <MinPop>40</MinPop>
       <CashCost>120</CashCost>
+      <Material Name="Electronic Components" Amount="4"/>
       <Facility>Engineering</Facility>
     </Requirements>
     <Tex>2,8</Tex>
@@ -288,6 +289,8 @@
       <CashCost>300</CashCost>
       <Facility>Engineering</Facility>
       <Facility>Medlab</Facility>
+      <Material Name="Hive Brainstem" Amount="1"/>
+      <Material Name="Electronic Components" Amount="4"/>
       <Relations Name="Grey">2</Relations>
       <Relations Name="Insectoid">2</Relations>
     </Requirements>
@@ -311,6 +314,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <CashCost>10</CashCost>
+      <Material Name="Uranium" Amount="1"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -326,6 +330,7 @@
       <Prerequisite>Advanced Fission Core</Prerequisite>      
       <MinLevel>5</MinLevel>
       <CashCost>20</CashCost>
+      <Material Name="Water" Amount="20"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -342,6 +347,7 @@
       <MinLevel>6</MinLevel>
       <MinPop>25</MinPop>
       <CashCost>30</CashCost>
+      <Material Name="Water" Amount="30"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -358,6 +364,7 @@
       <MinLevel>8</MinLevel>
       <MinPop>50</MinPop>
       <CashCost>80</CashCost>
+      <Material Name="Gold" Amount="2"/>
       <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -375,6 +382,7 @@
       <MinLevel>10</MinLevel>
       <MinPop>75</MinPop>
       <CashCost>150</CashCost>
+      <Material Name="Gold" Amount="4"/>
       <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
@@ -392,6 +400,8 @@
       <MinLevel>12</MinLevel>
       <MinPop>90</MinPop>
       <CashCost>250</CashCost>
+      <Material Name="Gold" Amount="5"/>
+      <Material Name="Crystals" Amount="5"/>
       <Relations Name="Grey">3</Relations>
       <Relations Name="Insectoid">3</Relations>
       <Relations Name="Human">4</Relations>
@@ -411,6 +421,8 @@
       <MinLevel>14</MinLevel>
       <MinPop>100</MinPop>
       <CashCost>500</CashCost>
+      <Material Name="Gold" Amount="10"/>
+      <Material Name="Crystals" Amount="10"/>
       <Relations Name="Grey">3</Relations>
       <Relations Name="Insectoid">3</Relations>
       <Relations Name="Human">4</Relations>

@@ -329,7 +329,7 @@
   </ItemType>
   <ItemType Name="Plasma Grenade">
     <Mass>0.4</Mass>
-    <Cost>22</Cost>
+    <Cost>35</Cost>
     <Rarity>20</Rarity>
     <Desc>A highly deadly grenade which fires charged plasma in a small radius</Desc>
     <ItemEffect Name="Grenade">
@@ -338,10 +338,10 @@
       <Range>8</Range>
       <Shred>2</Shred>
       <Effect>
-        <Damage Type="Physical">16</Damage>
+        <Damage Type="Physical">18</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">24</Damage>
+        <Damage Type="Fire">18</Damage>
       </Effect>
       <Effect Name="Burning">
         <Duration>2</Duration>
@@ -369,7 +369,7 @@
   </ItemType>
   <ItemType Name="Antimatter Grenade">
     <Mass>0.4</Mass>
-    <Cost>25</Cost>
+    <Cost>85</Cost>
     <Rarity>30</Rarity>
     <Desc>A technologically advanced killing tool which uses energy release from antimatter reactions to devastate enemies.</Desc>
     <ItemEffect Name="Grenade">
@@ -378,10 +378,10 @@
       <Range>8</Range>
       <Shred>5</Shred>
       <Effect>
-        <Damage Type="Physical">32</Damage>
+        <Damage Type="Physical">24</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">32</Damage>
+        <Damage Type="Fire">24</Damage>
       </Effect>
       <Noise>12</Noise>
       <Sound>Blast</Sound>
@@ -400,6 +400,7 @@
       <Facility>Workshop</Facility>
       <Relations Name="Ogrish">3</Relations>
       <Material Name="Uranium" Amount="1"/>
+      <Material Name="Gold" Amount="1"/>
     </Requirements>
     <Tex>3,3</Tex>
   </ItemType>

@@ -27,7 +27,7 @@
   <MaterialType Name="Composite">
     <MassMod>0.9</MassMod>
     <UnitCost>4.5</UnitCost>
-    <ArmourMod>1.4</ArmourMod>
+    <ArmourMod>1.35</ArmourMod>
     <MaxLevel>3</MaxLevel>
     <Requirements>
       <MinLevel>2</MinLevel>
@@ -43,7 +43,7 @@
   <MaterialType Name="Metasteel">
     <MassMod>1.0</MassMod>
     <UnitCost>15.0</UnitCost>
-    <ArmourMod>1.7</ArmourMod>
+    <ArmourMod>1.6</ArmourMod>
     <Rarity>0.08</Rarity>
     <MaxLevel>4</MaxLevel>
     <Requirements>
@@ -60,7 +60,7 @@
   <MaterialType Name="Nanomesh">
     <MassMod>0.65</MassMod>
     <UnitCost>25.0</UnitCost>
-    <ArmourMod>1.5</ArmourMod>
+    <ArmourMod>1.4</ArmourMod>
     <Rarity>0.03</Rarity>
     <Requirements>
       <Prerequisite>Metasteel</Prerequisite>
@@ -93,7 +93,7 @@
   <MaterialType Name="Adamantium">
     <MassMod>1.25</MassMod>
     <UnitCost>75.0</UnitCost>
-    <ArmourMod>2.1</ArmourMod>
+    <ArmourMod>2.0</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
       <Prerequisite>Mithril</Prerequisite>
@@ -108,7 +108,7 @@
     <Desc>Adamantium is a weighty but highly resistant nano-engineered metallic substance.</Desc>
   </MaterialType>
   <MaterialType Name="Etherealite">
-    <MassMod>0.5</MassMod>
+    <MassMod>0.55</MassMod>
     <UnitCost>80.0</UnitCost>
     <ArmourMod>1.75</ArmourMod>
     <Rarity>0.005</Rarity>
@@ -127,9 +127,9 @@
     <Desc>Etherealite is made from graphene-reinforced carbon nanotubes, merged with ultra-strong quantum-engineered aerogel to give high strength and superbly low density.</Desc>
   </MaterialType>
   <MaterialType Name="Ultramesh">
-    <MassMod>0.6</MassMod>
+    <MassMod>0.7</MassMod>
     <UnitCost>85.0</UnitCost>
-    <ArmourMod>2.0</ArmourMod>
+    <ArmourMod>1.9</ArmourMod>
     <Rarity>0.004</Rarity>
     <Requirements>
       <Prerequisite>Etherealite</Prerequisite>
@@ -261,7 +261,7 @@
   <MaterialType Name="Vulcanin">
     <MassMod>1.1</MassMod>
     <UnitCost>55.0</UnitCost>
-    <ArmourMod>1.8</ArmourMod>
+    <ArmourMod>1.6</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
     <BonusArmour>
@@ -272,7 +272,7 @@
   <MaterialType Name="Xenolite">
     <MassMod>1.1</MassMod>
     <UnitCost>58.0</UnitCost>
-    <ArmourMod>1.8</ArmourMod>
+    <ArmourMod>1.6</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
     <BonusArmour>
@@ -281,7 +281,7 @@
     <Desc>Xenolite is fashioned from the skin of extremely rare acid-resistant creatures, and makes a tough armour.</Desc>
   </MaterialType>
   <MaterialType Name="Voidskin">
-    <MassMod>0.8</MassMod>
+    <MassMod>0.85</MassMod>
     <UnitCost>50.0</UnitCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.001</Rarity>

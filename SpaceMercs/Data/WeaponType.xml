@@ -502,6 +502,7 @@
       <CashCost>50</CashCost>
       <PlanetType>Ice</PlanetType>
       <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Water" Amount="4"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">2</Relations>
     </Requirements>
@@ -540,6 +541,40 @@
       <Material Name="Incendiary Bulb" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">2</Relations>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Hellfire Jet" Class="Emitter">
+    <Mass>13.0</Mass>
+    <Cost>2150</Cost>
+    <Rarity>42</Rarity>
+    <Speed>20</Speed>
+    <Range Colour="0.9,0.6,0.0">6</Range>
+    <Damage Type="Cone" Width="1.2">6+6</Damage>
+    <Type>Fire</Type>
+    <Desc>A cone-attack weapon that shoots a jet of unnaturally hot chemicals derived from the literal flames of hell.</Desc>
+    <Sound>Flamethrower</Sound>
+    <Noise>8</Noise>
+    <Unmodifiable/>
+    <ItemEffect Name="Hellfire Jet">
+      <Effect Name="Burning">
+        <Duration>4</Duration>
+        <Damage Type="Fire">6</Damage>
+      </Effect>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Industrial Chemicals" Amount="8"/>
+      <Material Name="Electronic Components" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <MinLevel>13</MinLevel>
+      <MinPop>70</MinPop>
+      <CashCost>1250</CashCost>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="4"/>
+      <Material Name="Demon Blood" Amount="1"/>
+      <Facility>Armoury</Facility>
+      <Relations Name="Human">3</Relations>
     </Requirements>
   </WeaponType>
   <WeaponType Name="Heavy Flamer" Class="Emitter">
@@ -607,6 +642,43 @@
       <CashCost>250</CashCost>
       <Material Name="Industrial Chemicals" Amount="6"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
+      <Facility>Armoury</Facility>
+      <Relations Name="Human">4</Relations>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Heavy Helljet" Class="Emitter">
+    <Mass>50.0</Mass>
+    <Cost>6250</Cost>
+    <Rarity>62</Rarity>
+    <Speed>25</Speed>
+    <Range Colour="0.8,0.2,0.0">7</Range>
+    <Damage Type="Cone" Width="1.8">10+10</Damage>
+    <Type>Fire</Type>
+    <Desc>A heavy weapon that shoots a jet of unnaturally hot chemicals straight from the flames of hell.</Desc>
+    <Sound>Flamethrower</Sound>
+    <Noise>11</Noise>
+    <Unmodifiable/>
+    <ItemEffect Name="Heavy Helljet">
+      <Effect Name="Burning">
+        <Duration>4</Duration>
+        <Damage Type="Fire">10</Damage>
+      </Effect>
+    </ItemEffect>
+    <Materials>
+      <Material Name="Vulcanin" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="15"/>
+      <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Incendiary Bulb" Amount="2"/>
+      <Material Name="Demon Blood" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <Prerequisite>Hellfire Jet</Prerequisite>
+      <MinLevel>14</MinLevel>
+      <MinPop>80</MinPop>
+      <CashCost>1250</CashCost>
+      <Material Name="Industrial Chemicals" Amount="6"/>
+      <Material Name="Incendiary Bulb" Amount="2"/>
+      <Material Name="Demon Blood" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">4</Relations>
     </Requirements>
