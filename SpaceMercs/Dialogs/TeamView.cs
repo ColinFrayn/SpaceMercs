@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace SpaceMercs.Dialogs {
     partial class TeamView : Form {
@@ -65,9 +66,8 @@ namespace SpaceMercs.Dialogs {
                 return it;
             }
             if (lbEquipped.SelectedIndex >= 0) {
-                int iIndex = lbEquipped.SelectedIndex;
-                if (s.EquippedWeapon != null && iIndex == lbEquipped.Items.Count - 1) return s.EquippedWeapon;
-                return s.EquippedArmour[iIndex];
+                string strItem = lbEquipped.SelectedItem?.ToString() ?? string.Empty;
+                return s.GetEquippedItemByName(strItem);
             }
             return null;
         }
@@ -203,8 +203,9 @@ namespace SpaceMercs.Dialogs {
             // Update inventory if it's open, so that it's up-to-date (just to make sure!)
             ivForm?.UpdateAll();
         }
-        private void SelectInventoryItem(IItem item) {
+        private void SelectInventoryItem(IItem? item) {
             dgInventory.ClearSelection();
+            if (item is null) return;
             foreach (DataGridViewRow row in dgInventory.Rows) {
                 if (row.Tag is IItem it) {
                     if (it == item) {
@@ -254,44 +255,23 @@ namespace SpaceMercs.Dialogs {
                 ivForm.Show(this);
             }
         }
-        private void btDropAllClick(object sender, EventArgs e) {
-            Soldier? s = SelectedSoldier();
-            if (s is null) return;
-            IItem? it = SelectedItem();
-            if (it is null) return;
-            int iPrevIndex = -1;
-            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) {
-                s.Unequip(eq);
-                s.DropItem(it);
-            }
-            else {
-                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
-                foreach (DataGridViewRow row in dgInventory.Rows) {
-                    if (row.Selected == true && row.Tag is IItem itd) {
-                        s.DropAll(itd);
-                    }
-                }
-            }
-            ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
-                if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
-                else dgInventory.Rows[Math.Min(dgInventory.Rows.Count - 1, Math.Max(0, iPrevIndex))].Selected = true;
-            }
-            ivForm?.UpdateInventory();
-        }
         private void btEquip_Click(object sender, EventArgs e) {
             Soldier s = SelectedSoldier() ?? throw new Exception("Selected soldier was null");
             if (SelectedItem() is not IEquippable eq) return;
-            int iPrevIndex = -1;
+            IItem? prevItem = null;
+            bool fromInv = false;
             if (dgInventory.SelectedRows.Count > 0) {
-                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
                 s.Equip(eq);
+                fromInv = true;
+                int idx = dgInventory.SelectedRows[0].Index - 1;
+                if (idx >= 0) prevItem = dgInventory.Rows[idx].Tag as IItem;
             }
             else s.Unequip(eq);
             ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
+            if (fromInv && dgInventory.Rows.Count > 0) {
                 if (s.InventoryGrouped.ContainsKey(eq)) SelectInventoryItem(eq);
-                else dgInventory.Rows[Math.Max(0, iPrevIndex)].Selected = true;
+                else SelectInventoryItem(prevItem);
+                dgInventory_SelectedIndexChanged(sender, e);
             }
             ivForm?.UpdateInventory();
         }
@@ -300,30 +280,64 @@ namespace SpaceMercs.Dialogs {
             if (s is null) return;
             IItem? it = SelectedItem();
             if (it is null) return;
-            int iPrevIndex = -1;
+            IItem? prevItem = null;
+            bool fromInv = false;
             if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) {
                 s.Unequip(eq);
                 s.DropItem(eq);
             }
             else {
-                iPrevIndex = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
+                DataGridViewRow? prevRow = null;
                 foreach (DataGridViewRow row in dgInventory.Rows) {
                     if (row.Selected == true && row.Tag is IItem itd) {
                         s.DropItem(itd);
+                        prevItem ??= prevRow?.Tag as IItem;
+                        fromInv = true;
                     }
+                    prevRow = row;
                 }
             }
             ShowSelectedSoldierDetails();
-            if (iPrevIndex >= 0 && dgInventory.Rows.Count > 0) {
+            if (fromInv && dgInventory.Rows.Count > 0) {
                 if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
-                else dgInventory.Rows[Math.Min(dgInventory.Rows.Count-1, Math.Max(0, iPrevIndex))].Selected = true;
+                else SelectInventoryItem(prevItem);
+                dgInventory_SelectedIndexChanged(sender, e);
+            }
+            ivForm?.UpdateInventory();
+        }
+        private void btDropAllClick(object sender, EventArgs e) {
+            Soldier? s = SelectedSoldier();
+            if (s is null) return;
+            IItem? it = SelectedItem();
+            if (it is null) return;
+            IItem? prevItem = null;
+            bool fromInv = false;
+            if (lbEquipped.SelectedIndex >= 0 && it is IEquippable eq) {
+                s.Unequip(eq);
+                s.DropItem(it);
+            }
+            else {
+                DataGridViewRow? prevRow = null;
+                foreach (DataGridViewRow row in dgInventory.Rows) {
+                    if (row.Selected == true && row.Tag is IItem itd) {
+                        s.DropAll(itd);
+                        prevItem ??= prevRow?.Tag as IItem;
+                        fromInv = true;
+                    }
+                    prevRow = row;
+                }
+            }
+            ShowSelectedSoldierDetails();
+            if (fromInv && dgInventory.Rows.Count > 0) {
+                if (s.InventoryGrouped.ContainsKey(it)) SelectInventoryItem(it);
+                else SelectInventoryItem(prevItem);
+                dgInventory_SelectedIndexChanged(sender, e);
             }
             ivForm?.UpdateInventory();
         }
         private void dgInventory_SelectedIndexChanged(object sender, EventArgs e) {
+            if (dgInventory.SelectedRows.Count == 0) return;
             // Update buttons based on selection
-            int i = dgInventory.CurrentCell?.RowIndex - 1 ?? -1;
-            if (i < 0) return;
             if (dgInventory.SelectedRows.Count == 1 && (SelectedItem() is Weapon || SelectedItem() is Armour)) btEquip.Enabled = true;
             else btEquip.Enabled = false;
             btEquip.Text = "Equip";
@@ -332,8 +346,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void lbEquipped_SelectedIndexChanged(object sender, EventArgs e) {
             // Update buttons based on selection
-            int i = lbEquipped.SelectedIndex;
-            if (i < 0) return;
+            if (lbEquipped.SelectedIndex < 0) return;
             btEquip.Enabled = true;
             btEquip.Text = "Unequip";
             btDrop.Enabled = true;

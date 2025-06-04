@@ -2,10 +2,6 @@
 ToDo List
 -------------------------------------------------
 
-Problems storing stuff from TeamView inventory, one at a time
-
-Two QuantumMedsystems (Loadout and Inv) not the same. Implement Equality operators?
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 - Precursor-only artifact weapons

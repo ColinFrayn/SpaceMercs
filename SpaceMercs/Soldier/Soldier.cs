@@ -1272,6 +1272,13 @@ namespace SpaceMercs {
                 }
             }
         }
+        public IEquippable? GetEquippedItemByName(string strName) {
+            foreach (Armour ar in EquippedArmour) {
+                if (ar.Name == strName) return ar;
+            }
+            if (EquippedWeapon?.Name == strName) return EquippedWeapon;
+            return null;
+        }
         #endregion // Inventory
 
         // Is this soldier active in the team?
@@ -1592,7 +1599,7 @@ namespace SpaceMercs {
             // ALl inventory items that are recharging, cancel it.
             foreach (IItem it in Inventory) {
                 if (it is Equipment eq) {
-                    eq.Recharge = 0;
+                    eq.SetRecharge(0);
                 }
             }
         }
