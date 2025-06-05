@@ -884,13 +884,13 @@ namespace SpaceMercs {
         public double CostToBuildEquipment(ShipEquipment se) {
             if (Owner is null) throw new Exception("Ship owner is null!");
             double cost = se.Cost * Owner.GetLocalPriceModifier();
-            if (se.Size == ShipEquipment.RoomSize.Armour) cost *= Type.MaxHull / Const.HullUpgradeCost;
+            if (se.Size == ShipEquipment.RoomSize.Armour) cost *= Type.MaxHull * Const.HullUpgradeCost;
             return Math.Round(cost, 2);
         }
         public double SalvageValue(ShipEquipment se) {
             double priceMod = Owner?.GetLocalPriceModifier() ?? 1.0;
             double rebate = se.Cost * Const.SalvageRate / priceMod;
-            if (se.Size == ShipEquipment.RoomSize.Armour) rebate *= Type.MaxHull / Const.HullUpgradeCost;
+            if (se.Size == ShipEquipment.RoomSize.Armour) rebate *= Type.MaxHull * Const.HullUpgradeCost;
             return rebate;
         }
         public bool CanBuildItem(IItem it) {

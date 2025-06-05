@@ -226,12 +226,15 @@
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
     <Requirements>
+      <Prerequisite>Chameleon Device</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>57</MinPop>
       <CashCost>35</CashCost>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
-      <Relations Name="Insectoid">1</Relations>
+      <Material Name="Shadowscale" Amount="1"/>
+      <Relations Name="Insectoid">3</Relations>
+      <Relations Name="Elithiri">3</Relations>
     </Requirements>
     <Tex>1,7</Tex>
   </ShipEquipment>
@@ -272,6 +275,7 @@
       <MinPop>40</MinPop>
       <CashCost>120</CashCost>
       <Material Name="Electronic Components" Amount="4"/>
+      <Material Name="AI Processor" Amount="1"/>      
       <Facility>Engineering</Facility>
     </Requirements>
     <Tex>2,8</Tex>

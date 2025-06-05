@@ -29,6 +29,9 @@
     <Armour>20</Armour>
     <MovementCost>10.0</MovementCost>
     <Desc>A vicious plant with a lashing tentacle.</Desc>
+    <Scavenge>
+      <Item Amount="0.1">Barkskin</Item>
+    </Scavenge>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
@@ -48,6 +51,9 @@
     <Armour>20</Armour>
     <MovementCost>10.0</MovementCost>
     <Desc>A vicious plant which can hurl vicious thorns.</Desc>
+    <Scavenge>
+      <Item Amount="0.1">Barkskin</Item>
+    </Scavenge>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>
@@ -68,6 +74,10 @@
     <MovementCost>10.0</MovementCost>
     <Boss/>
     <Desc>A huge plant which can hurl large, spiny thorns.</Desc>
+    <Scavenge>
+      <Item Amount="1.0">Triffid Root</Item>
+      <Item Amount="2.0">Barkskin</Item>
+    </Scavenge>
     <Resistances>
       <Resistance Type="Fire" Value="-50"/>
       <Resistance Type="Poison" Value="100"/>

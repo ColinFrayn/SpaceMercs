@@ -65,10 +65,12 @@ namespace SpaceMercs {
         public double Recoil { get { return Type.Recoil * Math.Pow(0.92, Level) * (Mod?.RecoilMod ?? 1d); } }
         public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod?.Silencer ?? 0d)); } }
         public double Shred { get { return Type.Shred * (1d + (Level / 5d)) + (Mod?.Shred ?? 0d); } }
-        public Dictionary<WeaponType.DamageType, double> GetBonusDamage() {
-            Dictionary<WeaponType.DamageType, double> bdam = new Dictionary<WeaponType.DamageType, double>();
+        public IReadOnlyDictionary<WeaponType.DamageType, double> GenerateDamage(Random rnd) {
+            Dictionary<WeaponType.DamageType, double> allDam = new();
+            double dam = DBase + (rnd.NextDouble() * DMod);
+            allDam.Add(Type.DType, dam);
             // TODO Implement bonus damage
-            return bdam;
+            return allDam;
         }
         public double UnmodifiedCost {
             get {

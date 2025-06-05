@@ -15,7 +15,11 @@ namespace SpaceMercs {
         public int Length { get; private set; }
         public int Width { get; private set; }
         public int Armour { get; private set; }
-        public double MaxHull { get { return (Small * 2.0) + (Medium * 4.0) + (Large * 8.0) + (Weapon * 1.0) + 4.0; } }
+        public double MaxHull { 
+            get { 
+                return (Small * 2d) + (Medium * 5d) + (Large * 12d) + (Weapon * Weapon) + (Capacity / 100d) + 3d; 
+            } 
+        }
         public string RoomConfigString { get { return Small + "/" + Medium + "/" + Large + "/" + Weapon; } }
         public List<Vector2> Perimeter { get; private set; }
         public List<Point> Fillers { get; private set; }

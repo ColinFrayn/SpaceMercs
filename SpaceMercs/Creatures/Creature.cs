@@ -271,9 +271,7 @@ namespace SpaceMercs {
                 AllDam.Add(WeaponType.DamageType.Physical, dam);
             }
             else {
-                double dam = EquippedWeapon.DBase + (rnd.NextDouble() * EquippedWeapon.DMod);
-                AllDam.Add(EquippedWeapon.Type.DType, dam * hmod);
-                foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GetBonusDamage()) {
+                foreach (KeyValuePair<WeaponType.DamageType, double> bdam in EquippedWeapon.GenerateDamage(rnd)) {
                     if (AllDam.ContainsKey(bdam.Key)) AllDam[bdam.Key] += bdam.Value * hmod;
                     else AllDam.Add(bdam.Key, bdam.Value * hmod);
                 }                

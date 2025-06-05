@@ -16,7 +16,7 @@
   </CreatureType>
   <CreatureType Name="Sand Snake">
     <Scale>0.9</Scale>
-    <LevelRange>1,12</LevelRange>
+    <LevelRange>2,12</LevelRange>
     <Attack>10</Attack>
     <Defence>10</Defence>
     <Health>8</Health>
@@ -33,7 +33,7 @@
     <Tex Size="2">1,1</Tex>
   </CreatureType>
   <CreatureType Name="Giant Centipede">
-    <LevelRange>1,12</LevelRange>
+    <LevelRange>3,12</LevelRange>
     <Scale>1.2</Scale>
     <Attack>11</Attack>
     <Defence>12</Defence>

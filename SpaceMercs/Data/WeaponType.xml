@@ -1254,6 +1254,13 @@
     <Sound>Strike</Sound>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Giant Club" Class="Melee">
+    <Speed>18</Speed>
+    <Range>1.5</Range>
+    <Damage>9+9</Damage>
+    <Sound>Strike</Sound>
+    <Hidden/>
+  </WeaponType>
   <WeaponType Name="Bite" Class="Melee">
     <Speed>10</Speed>
     <Range>1</Range>
@@ -1394,7 +1401,7 @@
     <Damage>3+3</Damage>
     <Range>1</Range>
     <Type>Acid</Type>
-    <Sound>Spore</Sound>
+    <Sound>Bite</Sound>
     <ItemEffect Name="Slimed">
       <Effect Name="Slimed">
         <Duration>3</Duration>
@@ -1473,15 +1480,24 @@
     <Speed>12</Speed>
     <Range DropOff="0.2" Length="1.0" Colour="0.8,0.7,0.7">10</Range>
     <Damage>5+5</Damage>
-    <Type>Psychic</Type>
+    <Type>Void</Type>
     <Sound>HeavyCrossbow</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Void Claws" Class="Melee">
     <Speed>10</Speed>
     <Range>1.5</Range>
-    <Damage>6+6</Damage>
+    <Damage>5+5</Damage>
+    <Type>Void</Type>
     <Sound>SwordSlice</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Void Bite" Class="Melee">
+    <Speed>12</Speed>
+    <Range>1.0</Range>
+    <Damage>4+4</Damage>
+    <Type>Void</Type>
+    <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Soul Drain">
@@ -1572,6 +1588,23 @@
         <Duration>3</Duration>
         <StatMods>
           <Mod Stat="Agility">-4</Mod>
+        </StatMods>
+        <SpeedMod>0.6</SpeedMod>
+      </Effect>
+    </ItemEffect>
+    <Sound>Flamethrower</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Shadow Breath">
+    <Speed>18</Speed>
+    <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="0.0,0.2,1.0">6</Range>
+    <Damage>9+9</Damage>
+    <Type>Cold</Type>
+    <ItemEffect Name="Shadow Blast">
+      <Effect Name="Frozen">
+        <Duration>3</Duration>
+        <StatMods>
+          <Mod Stat="Agility">-5</Mod>
         </StatMods>
         <SpeedMod>0.6</SpeedMod>
       </Effect>

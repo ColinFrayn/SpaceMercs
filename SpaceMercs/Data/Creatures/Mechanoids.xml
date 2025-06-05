@@ -164,9 +164,9 @@
       <Resistance Type="Poison" Value="100"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="1.5">Titanium</Item>
+      <Item Amount="1.0">Adamantium</Item>
       <Item Amount="1.5">Electronic Components</Item>
-      <Item Amount="0.5">Adamantium</Item>
+      <Item Amount="1.0">AI Processor</Item>
     </Scavenge>
     <Tex Size="4">1,5</Tex>
   </CreatureType>

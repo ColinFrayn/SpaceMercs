@@ -128,6 +128,7 @@
     </Weapons>
     <Scavenge>
       <Item Amount="2.0">Crystals</Item>
+      <Item Amount="1.0">Crystal Heart</Item>
     </Scavenge>
     <Resistances>
       <Resistance Type="Physical" Value="20"/>

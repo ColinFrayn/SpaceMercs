@@ -114,17 +114,17 @@
   </CreatureType>
   <CreatureType Name="Shadow Dragon">
     <Size>3</Size>
-    <Scale>3.3</Scale>
-    <LevelRange>9,15</LevelRange>
+    <Scale>2.8</Scale>
+    <LevelRange>9,13</LevelRange>
     <Attack>26</Attack>
     <Defence>16</Defence>
     <Armour>34</Armour>
     <Health>54</Health>
     <Stamina>20</Stamina>
     <Interact/>
-    <Desc>A huge shadowy monster with leathery wings</Desc>
+    <Desc>A large shadowy monster with leathery wings</Desc>
     <Weapons>
-      <Weapon Weight="1">Bite</Weapon>
+      <Weapon Weight="1">Shadow Breath</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Acid" Value="20"/>
@@ -133,6 +133,33 @@
     </Resistances>
     <Scavenge>
       <Item Amount="2">Shadowskin</Item>
+      <Item Amount="1">Shadowscale</Item>
+    </Scavenge>
+    <Boss/>
+    <Tex Size="4">1,9</Tex>
+  </CreatureType>
+  <CreatureType Name="Greater Shadow Dragon">
+    <Size>3</Size>
+    <Scale>3.6</Scale>
+    <LevelRange>14,17</LevelRange>
+    <Attack>28</Attack>
+    <Defence>18</Defence>
+    <Armour>36</Armour>
+    <Health>65</Health>
+    <Stamina>21</Stamina>
+    <Interact/>
+    <Desc>A huge shadowy monster with leathery wings</Desc>
+    <Weapons>
+      <Weapon Weight="1">Shadow Breath</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Acid" Value="30"/>
+      <Resistance Type="Physical" Value="20"/>
+      <Resistance Type="Electrical" Value="130"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="3">Shadowskin</Item>
+      <Item Amount="1.4">Shadowscale</Item>
     </Scavenge>
     <Boss/>
     <Tex Size="4">1,9</Tex>

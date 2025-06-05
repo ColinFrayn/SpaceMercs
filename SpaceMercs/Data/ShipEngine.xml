@@ -84,7 +84,8 @@
       <MinLevel>8</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>56</MinPop>
-      <CashCost>40</CashCost>
+      <CashCost>500</CashCost>
+      <Material Name="Crystal Heart" Amount="1"/>
       <Facility>Engineering</Facility>
       <Relations Name="Grey">1</Relations>
     </Requirements>
@@ -103,8 +104,9 @@
       <MinLevel>11</MinLevel>
       <MinSystems>6</MinSystems>
       <MinPop>70</MinPop>
-      <CashCost>40</CashCost>
+      <CashCost>800</CashCost>
       <Facility>Engineering</Facility>
+      <Material Name="Subspace Shard" Amount="1"/>
       <Relations Name="Grey">2</Relations>
     </Requirements>
   </ShipEngine>
@@ -120,7 +122,7 @@
       <Prerequisite>Subspace Drive</Prerequisite>
       <MinLevel>14</MinLevel>
       <MinPop>85</MinPop>
-      <CashCost>200</CashCost>
+      <CashCost>2000</CashCost>
       <Material Name="Rare Earth Metals" Amount="4"/>
       <Material Name="Crystals" Amount="4"/>
       <Facility>Engineering</Facility>

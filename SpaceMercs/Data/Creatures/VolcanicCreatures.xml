@@ -102,7 +102,7 @@
   <CreatureType Name="Fire Dragonling">
     <Size>1</Size>
     <Scale>1.1</Scale>
-    <LevelRange>4,14</LevelRange>
+    <LevelRange>5,14</LevelRange>
     <Attack>14</Attack>
     <Defence>11</Defence>
     <Health>22</Health>

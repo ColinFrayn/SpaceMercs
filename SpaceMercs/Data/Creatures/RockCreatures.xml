@@ -84,7 +84,7 @@
   <CreatureType Name="Behir">
     <Size>2</Size>
     <Scale>1.8</Scale>
-    <LevelRange>6,14</LevelRange>
+    <LevelRange>6,10</LevelRange>
     <Attack>19</Attack>
     <Defence>11</Defence>
     <Health>28</Health>
@@ -104,7 +104,7 @@
   </CreatureType>
   <CreatureType Name="Rock Giant">
     <Size>2</Size>
-    <LevelRange>5,15</LevelRange>
+    <LevelRange>8,15</LevelRange>
     <Attack>20</Attack>
     <Defence>10</Defence>
     <Health>50</Health>
@@ -113,7 +113,7 @@
     <Armour>30</Armour>
     <Desc>A huge, aggressive giant humanoid</Desc>
     <Weapons>
-      <Weapon Weight="1">Club</Weapon>
+      <Weapon Weight="1">Giant Club</Weapon>
     </Weapons>
     <Scavenge>
       <Item Amount="0.5">Mithril</Item>

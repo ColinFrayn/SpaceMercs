@@ -2,14 +2,18 @@
 ToDo List
 -------------------------------------------------
 
-Add more interesting scavenged materials
-- Crystal alpha - crystal heart???
-- Mechanoids -> AI unit??
-- Shadowskin as a requirement
-- Triffid mother plant: ??
-- Void Psychic: ??
+Usage of Xenomorph Egg?
 
-Maybe more higher level creatures in some groups??
+Mixed damage from weapons in Weapon.GetDamage / Definition / Weapon.Description
+
+Add new higher level creatures in some groups
+- Triffids
+- Bugs
+- Slimes (Boss?)
+
+Celestials
+- Ethereal Drive needs the Boss drop
+- Drop Etherealite
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

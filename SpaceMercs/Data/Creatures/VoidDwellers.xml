@@ -32,7 +32,7 @@
     <Interact/>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Bite</Weapon>
+      <Weapon Weight="1">Void Bite</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Cold" Value="20"/>
@@ -56,7 +56,7 @@
     <Interact/>
     <Desc>A mysterious quadrupedal creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Bite</Weapon>
+      <Weapon Weight="1">Void Bite</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Cold" Value="20"/>
@@ -70,7 +70,7 @@
   </CreatureType>
   <CreatureType Name="Void Flayer">
     <LevelRange>9,17</LevelRange>
-    <Attack>16</Attack>
+    <Attack>15</Attack>
     <Defence>11</Defence>
     <Armour>22</Armour>
     <Health>14</Health>
@@ -78,7 +78,7 @@
     <Interact/>
     <Desc>A mysterious creature from the void</Desc>
     <Weapons>
-      <Weapon Weight="1">Claws</Weapon>
+      <Weapon Weight="1">Void Claws</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Cold" Value="80"/>
@@ -92,7 +92,7 @@
   <CreatureType Name="Void Devourer">
     <LevelRange>10,18</LevelRange>
     <Size>2</Size>
-    <Attack>16</Attack>
+    <Attack>17</Attack>
     <Defence>11</Defence>
     <Armour>22</Armour>
     <Health>24</Health>
