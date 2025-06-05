@@ -38,9 +38,6 @@
       <Resistance Type="Acid" Value="100"/>
       <Resistance Type="Physical" Value="50"/>
     </Resistances>
-    <Scavenge>
-      <Item Amount="0.3">Slime Egg</Item>
-    </Scavenge>
     <OnDeathEffect Name="AcidSplash">
       <Radius>1.5</Radius>
       <Effect>
@@ -75,9 +72,6 @@
     <Weapons>
       <Weapon Weight="1">Slime Spitter</Weapon>
     </Weapons>
-    <Scavenge>
-      <Item Amount="0.3">Slime Egg</Item>
-    </Scavenge>
     <OnDeathEffect Name="AcidSplash">
       <Radius>1.5</Radius>
       <Effect>
@@ -111,9 +105,6 @@
     <Weapons>
       <Weapon Weight="1">Slime Bite</Weapon>
     </Weapons>
-    <Scavenge>
-      <Item Amount="0.5">Slime Egg</Item>
-    </Scavenge>
     <OnDeathEffect Name="AcidSplash">
       <Radius>1.2</Radius>
       <Effect>
@@ -127,5 +118,43 @@
       <Sound>WetSplat</Sound>
     </OnDeathEffect>
     <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Gelatinous Cube">
+    <LevelRange>5,7</LevelRange>
+    <Size>2</Size>
+    <Attack>16</Attack>
+    <Defence>10</Defence>
+    <Health>30</Health>
+    <Stamina>18</Stamina>
+    <Armour>14</Armour>
+    <Frequency>1</Frequency>
+    <MovementCost>2.0</MovementCost>
+    <Desc>A large, sentient cube of slime.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Slime Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="-20"/>
+      <Resistance Type="Poison" Value="100"/>
+      <Resistance Type="Acid" Value="100"/>
+      <Resistance Type="Physical" Value="50"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="1.0">Slime Egg</Item>
+    </Scavenge>
+    <OnDeathEffect Name="AcidSplash">
+      <Radius>2.5</Radius>
+      <Effect>
+        <Damage Type="Acid">6</Damage>
+      </Effect>
+      <Effect Name="Acid Damage">
+        <Duration>2</Duration>
+        <Damage Type="Acid">2</Damage>
+        <ArmourMod>-2</ArmourMod>
+      </Effect>
+      <Sound>WetSplat</Sound>
+    </OnDeathEffect>
+    <Boss/>
+    <Tex Size="4">1,5</Tex>
   </CreatureType>
 </Data>
