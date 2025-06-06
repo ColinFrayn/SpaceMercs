@@ -412,4 +412,11 @@
     <Scavenged/>
     <Desc>The revolting, putrid, acidic egg of a Xenomorph.</Desc>
   </MaterialType>
+  <MaterialType Name="Celestial Essence">
+    <UnitCost>60.0</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>2.0</UnitMass>
+    <Scavenged/>
+    <Desc>The rich, glowing dust shed by a celestial creature.</Desc>
+  </MaterialType>
 </Data>

@@ -4,16 +4,7 @@ ToDo List
 
 Mixed damage from weapons in Weapon.GetDamage / Definition / Weapon.Description
 
-Add new higher level creatures in some groups
-- Triffids
-- Bugs
-- Slimes (Boss?)
-
 Loading time is very slow. Why?
-
-Celestials
-- Ethereal Drive needs the Boss drop
-- All drop Etherealite
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

@@ -91,7 +91,7 @@
     </Requirements>
   </ShipEngine>
   <ShipEngine Name="Subspace Drive">
-    <Range>12</Range>
+    <Range>10</Range>
     <Speed>50</Speed>
     <Accel>9999999</Accel>
     <Cost>8000</Cost>
@@ -123,8 +123,9 @@
       <MinLevel>14</MinLevel>
       <MinPop>85</MinPop>
       <CashCost>2000</CashCost>
-      <Material Name="Rare Earth Metals" Amount="4"/>
+      <Material Name="Celestial Essence" Amount="1"/>
       <Material Name="Crystals" Amount="4"/>
+      <Material Name="Etherealite" Amount="4"/>
       <Facility>Engineering</Facility>
       <Relations Name="Grey">3</Relations>
     </Requirements>

@@ -1,6 +1,6 @@
 ﻿<Data>
   <!-- Creature Groups Bootstrap File -->
-  <!-- Possible locations: Rocky, Desert, Volcanic, Oceanic, Ice, Caves, Ships -->
+  <!-- Possible locations: Rocky, Desert, Volcanic, Oceanic, Ice, Caves, Ship, SpaceHulk -->
   <CreatureGroup Name="Arachnids">
     <Filename>Arachnids.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic</Locations>
@@ -20,6 +20,11 @@
     <Filename>Crystallines.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,SpaceHulk</Locations>
     <MinSectorRange>2</MinSectorRange>
+  </CreatureGroup>
+  <CreatureGroup Name="Celestials">
+    <Filename>Celestials.xml</Filename>
+    <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Caves,Ship,SpaceHulk</Locations>
+    <MinSectorRange>3</MinSectorRange>
   </CreatureGroup>
   <CreatureGroup Name="Demons">
     <Filename>Demons.xml</Filename>

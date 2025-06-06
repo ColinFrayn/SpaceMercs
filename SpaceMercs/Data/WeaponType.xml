@@ -8,7 +8,8 @@
     <Shots>2</Shots>
     <Recoil>0.1</Recoil>
     <Range Accuracy="-1" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
+    <Damage>3+2</Damage>
+    <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>A double-barrelled shotgun. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>9</Noise>
@@ -27,7 +28,8 @@
     <Shots>3</Shots>
     <Recoil>0.1</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
+    <Damage>3+2</Damage>
+    <Area Shape="ConeMulti" Width="3.3"/>
     <Desc>A powerful shotgun with 3 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>10</Noise>
@@ -52,7 +54,8 @@
     <Shots>4</Shots>
     <Recoil>0.1</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage Type="ConeMulti" Width="3.2">3+2</Damage>
+    <Damage>3+2</Damage>
+    <Area Shape="ConeMulti" Width="3.4"/>
     <Desc>A powerful shotgun with 4 barrels instead of 2. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>11</Noise>
@@ -79,7 +82,8 @@
     <Shots>4</Shots>
     <Recoil>0.15</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage Type="ConeMulti" Width="3.2">4+4</Damage>
+    <Damage>4+4</Damage>
+    <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>The Magnetic Fragment Accelerator, or MagFrag, is a highly devastating close-range projectile weapon.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Shred>1</Shred>
@@ -194,7 +198,8 @@
     <Recoil>1.5</Recoil>
     <Delay>250</Delay>
     <Recharge>1</Recharge>
-    <Damage Type="ConeMulti" Width="2.2">4+4</Damage>
+    <Damage>4+4</Damage>
+    <Area Shape="ConeMulti" Width="2.2"/>
     <Desc>A superheavy rapid-fire chain gun for mounting on power armour</Desc>
     <Sound>ChainGun</Sound>
     <Noise>13</Noise>
@@ -389,8 +394,8 @@
     <Shots>3</Shots>
     <Recoil>0.3</Recoil>
     <Delay>150</Delay>
-    <Damage Type="ConeMulti" Width="3.2">5+4</Damage>
-    <Type>Electrical</Type>
+    <Damage Type="Electrical">5+4</Damage>
+    <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>An arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>Electroshock</Sound>
     <Noise>8</Noise>
@@ -421,8 +426,8 @@
     <Shots>5</Shots>
     <Recoil>0.9</Recoil>
     <Delay>130</Delay>
-    <Damage Type="ConeMulti" Width="3.2">5+5</Damage>
-    <Type>Electrical</Type>
+    <Damage Type="Electrical">5+5</Damage>
+    <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>A heavy arc thrower that sends out electrical discharges towards the target over a very short range.</Desc>
     <Sound>HeavyElectroshock</Sound>
     <Noise>10</Noise>
@@ -450,8 +455,8 @@
     <Rarity>12</Rarity>
     <Speed>18</Speed>
     <Range Colour="1.0,0.0,0.0">6</Range>
-    <Damage Type="Cone" Width="1.1">3+4</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">3+4</Damage>
+    <Area Shape="Cone" Width="1.1"/>
     <Desc>A flame thrower</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -475,8 +480,8 @@
     <Rarity>22</Rarity>
     <Speed>18</Speed>
     <Range Colour="0.0,0.1,1.0">6</Range>
-    <Damage Type="Cone" Width="1.1">3+3</Damage>
-    <Type>Cold</Type>
+    <Damage Type="Cold">3+3</Damage>
+    <Area Shape="Cone" Width="1.1"/>
     <Desc>A jet thrower that emits a stream of supercooled liquid</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -513,8 +518,8 @@
     <Rarity>22</Rarity>
     <Speed>20</Speed>
     <Range Colour="1.0,0.7,0.0">6</Range>
-    <Damage Type="Cone" Width="1.2">4+5</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">4+5</Damage>
+    <Area Shape="Cone" Width="1.2"/>
     <Desc>A cone-attack weapon that shoots a jet of superheated plasma</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -549,8 +554,8 @@
     <Rarity>42</Rarity>
     <Speed>20</Speed>
     <Range Colour="0.9,0.6,0.0">6</Range>
-    <Damage Type="Cone" Width="1.2">6+6</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">6+6</Damage>
+    <Area Shape="Cone" Width="1.2"/>
     <Desc>A cone-attack weapon that shoots a jet of unnaturally hot chemicals derived from the literal flames of hell.</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -583,8 +588,8 @@
     <Rarity>32</Rarity>
     <Speed>22</Speed>
     <Range Colour="0.8,0.2,0.0">7</Range>
-    <Damage Type="Cone" Width="1.8">6+6</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">6+6</Damage>
+    <Area Shape="Cone" Width="1.8"/>
     <Desc>A heavy weapon that shoots a jet of superheated napalm</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>10</Noise>
@@ -616,9 +621,9 @@
     <Cost>3250</Cost>
     <Rarity>42</Rarity>
     <Speed>25</Speed>
-    <Range Colour="0.8,0.2,0.0">7</Range>
-    <Damage Type="Cone" Width="1.8">8+8</Damage>
-    <Type>Fire</Type>
+    <Range Colour="0.8,0.2,0.0">7.1</Range>
+    <Damage Type="Fire">8+8</Damage>
+    <Area Shape="Cone" Width="1.8"/>
     <Desc>A heavy weapon that shoots a jet of superheated plasma</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>11</Noise>
@@ -651,9 +656,9 @@
     <Cost>6250</Cost>
     <Rarity>62</Rarity>
     <Speed>25</Speed>
-    <Range Colour="0.8,0.2,0.0">7</Range>
-    <Damage Type="Cone" Width="1.8">10+10</Damage>
-    <Type>Fire</Type>
+    <Range Colour="0.8,0.2,0.0">7.2</Range>
+    <Damage Type="Fire">10+10</Damage>
+    <Area Shape="Cone" Width="1.8"/>
     <Desc>A heavy weapon that shoots a jet of unnaturally hot chemicals straight from the flames of hell.</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>11</Noise>
@@ -689,7 +694,8 @@
     <Rarity>12</Rarity>
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
-    <Damage Area="2" Type="Grenade">4+4</Damage>
+    <Damage>4+4</Damage>
+    <Area Shape="Grenade" Size="2"/>
     <Shred>2</Shred>
     <Desc>An automatically reloading grenade launcher.</Desc>
     <Sound>GrenadeLauncher</Sound>
@@ -720,7 +726,8 @@
     <Speed>20</Speed>
     <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
-    <Damage Area="2" Type="Grenade">5+5</Damage>
+    <Damage>5+5</Damage>
+    <Area Shape="Grenade" Size="2"/>
     <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
@@ -749,7 +756,8 @@
     <Speed>22</Speed>
     <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
-    <Damage Area="2" Type="Grenade">6+7</Damage>
+    <Damage>6+7</Damage>
+    <Area Shape="Grenade" Size="2"/>
     <Desc>A heavy grenade launcher that spits high-explosive heavy grenade rounds.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>14</Noise>
@@ -1154,7 +1162,8 @@
       <Relations Name="Ogrish">1</Relations>
     </Requirements>
     <Range Accuracy="-2" DropOff="0.6" Length="0.3" Speed="0.8">6</Range>
-    <Damage Type="ConeMulti" Width="3.2">4+4</Damage>
+    <Damage>4+4</Damage>
+    <Area Shape="ConeMulti" Width="3.0"/>
     <Desc>A powerful Ogrish blast gun that fires superheated slugs of metal. Great damage up close but terrible range.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Noise>12</Noise>
@@ -1222,7 +1231,8 @@
     <Shots>5</Shots>
     <Recoil>0.15</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage Type="ConeMulti" Width="3.2">4+5</Damage>
+    <Damage>4+5</Damage>
+    <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>A highly deadly void weapon that scatters void fragments over a wide area.</Desc>
     <Sound>ShotgunAndReload</Sound>
     <Shred>1</Shred>
@@ -1300,7 +1310,7 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Triffid Tentacle">
+  <WeaponType Name="Triffid Tentacle" Class="Melee">
     <Speed>10</Speed>
     <Range Colour="0.3,1.0,0.2">3</Range>
     <Damage>2+3</Damage>
@@ -1311,6 +1321,13 @@
         <Damage Type="Poison">3</Damage>
       </Effect>
     </ItemEffect>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Triffid Bite" Class="Melee">
+    <Speed>12</Speed>
+    <Range>1</Range>
+    <Damage>3+4</Damage>
+    <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Triffid Thorns">
@@ -1336,8 +1353,7 @@
   <WeaponType Name="Fungoid Spores">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.3,1.0,0.2">8</Range>
-    <Damage>3+2</Damage>
-    <Type>Poison</Type>
+    <Damage Type="Poison">3+2</Damage>
     <Sound>Spore</Sound>
     <Recoil>0.5</Recoil>
     <Delay>220</Delay>
@@ -1352,8 +1368,7 @@
   <WeaponType Name="Fungoid Heavy Spores">
     <Speed>15</Speed>
     <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.3,1.0,0.2">10</Range>
-    <Damage>5+4</Damage>
-    <Type>Poison</Type>
+    <Damage Type="Poison">5+4</Damage>
     <Sound>Spore</Sound>
     <Recoil>0.7</Recoil>
     <Delay>220</Delay>
@@ -1368,8 +1383,7 @@
   <WeaponType Name="Sting" Class="Melee">
     <Speed>10</Speed>
     <Range>1.5</Range>
-    <Damage>3+3</Damage>
-    <Type>Poison</Type>
+    <Damage Type="Poison">3+3</Damage>
     <Sound>Claws</Sound>
     <ItemEffect Name="Sting">
       <Effect Name="Sting">
@@ -1382,8 +1396,7 @@
   <WeaponType Name="Slime Spitter">
     <Speed>12</Speed>
     <Range DropOff="0.5" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.0">7</Range>
-    <Damage>3+3</Damage>
-    <Type>Acid</Type>
+    <Damage Type="Acid">3+3</Damage>
     <Sound>Spore</Sound>
     <ItemEffect Name="Slimed">
       <Effect Name="Slimed">
@@ -1396,11 +1409,10 @@
     </ItemEffect>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Slime Bite">
+  <WeaponType Name="Slime Bite" Class="Melee">
     <Speed>12</Speed>
-    <Damage>3+3</Damage>
+    <Damage Type="Acid">3+3</Damage>
     <Range>1</Range>
-    <Type>Acid</Type>
     <Sound>Bite</Sound>
     <ItemEffect Name="Slimed">
       <Effect Name="Slimed">
@@ -1416,8 +1428,7 @@
   <WeaponType Name="Toxic Spit">
     <Speed>14</Speed>
     <Range DropOff="0.5" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.0">10</Range>
-    <Damage>6+6</Damage>
-    <Type>Poison</Type>
+    <Damage Type="Poison">6+6</Damage>
     <Sound>Spore</Sound>
     <ItemEffect Name="Poisoned">
       <Effect Name="Poisoned">
@@ -1479,80 +1490,70 @@
   <WeaponType Name="Void Lance">
     <Speed>12</Speed>
     <Range DropOff="0.2" Length="1.0" Colour="0.8,0.7,0.7">10</Range>
-    <Damage>5+5</Damage>
-    <Type>Void</Type>
+    <Damage Type="Void">5+5</Damage>
     <Sound>HeavyCrossbow</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Void Claws" Class="Melee">
     <Speed>10</Speed>
     <Range>1.5</Range>
-    <Damage>5+5</Damage>
-    <Type>Void</Type>
+    <Damage Type="Void">5+5</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Void Bite" Class="Melee">
     <Speed>12</Speed>
     <Range>1.0</Range>
-    <Damage>4+4</Damage>
-    <Type>Void</Type>
+    <Damage Type="Void">4+4</Damage>
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Soul Drain">
     <Speed>12</Speed>
     <Range DropOff="0.0" Colour="0.6,0.6,0.6">6</Range>
-    <Damage>4+3</Damage>
-    <Type>Psychic</Type>
+    <Damage Type="Psychic">4+3</Damage>
     <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Psychic Strike">
     <Speed>12</Speed>
     <Range DropOff="0.0" Colour="0.9,0.9,0.9">18</Range>
-    <Damage>5+4</Damage>
-    <Type>Psychic</Type>
+    <Damage Type="Psychic">5+4</Damage>
     <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Psychic Assault">
     <Speed>12</Speed>
     <Range DropOff="0.0" Colour="0.9,0.9,0.9">50</Range>
-    <Damage>6+6</Damage>
-    <Type>Psychic</Type>
+    <Damage Type="Psychic">6+6</Damage>
     <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Electroshock">
     <Speed>18</Speed>
     <Range DropOff="0.0" Colour="0.8,0.9,1.0">10</Range>
-    <Damage>8+6</Damage>
-    <Type>Electrical</Type>
+    <Damage Type="Electrical">8+6</Damage>
     <Sound>Electroshock</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Fire Bolt">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.8" Length="0.3" Colour="1.0,0.2,0.0">9</Range>
-    <Damage>4+3</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">4+3</Damage>
     <Sound>Spore</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Ice Bolt">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.0,0.2,1.0">9</Range>
-    <Damage>4+3</Damage>
-    <Type>Cold</Type>
+    <Damage Type="Cold">4+3</Damage>
     <Sound>Spore</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Lightning Bolt">
     <Speed>12</Speed>
     <Range DropOff="0.6" Colour="1.0,1.0,1.0">9</Range>
-    <Damage>4+3</Damage>
-    <Type>Electrical</Type>
+    <Damage Type="Electrical">4+3</Damage>
     <Sound>Electroshock</Sound>
     <Hidden/>
   </WeaponType>
@@ -1560,14 +1561,13 @@
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.5" Length="0.3" Colour="0.6,0.4,0.2">9</Range>
     <Damage>4+3</Damage>
-    <Sound>Strike</Sound>
+    <Sound>Throw</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Fire Blast">
     <Speed>15</Speed>
     <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="1.0,0.2,0.0">6</Range>
-    <Damage>8+8</Damage>
-    <Type>Fire</Type>
+    <Damage Type="Fire">8+8</Damage>
     <ItemEffect Name="Fire Blast">
       <Effect Name="Burning">
         <Duration>2</Duration>
@@ -1581,8 +1581,7 @@
     <Speed>15</Speed>
     <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="0.0,0.2,1.0">6</Range>
     <Shots>2</Shots>
-    <Damage>6+6</Damage>
-    <Type>Cold</Type>
+    <Damage Type="Cold">6+6</Damage>
     <ItemEffect Name="Ice Blast">
       <Effect Name="Frozen">
         <Duration>3</Duration>
@@ -1598,8 +1597,7 @@
   <WeaponType Name="Shadow Breath">
     <Speed>18</Speed>
     <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="0.0,0.2,1.0">6</Range>
-    <Damage>9+9</Damage>
-    <Type>Cold</Type>
+    <Damage Type="Cold">9+9</Damage>
     <ItemEffect Name="Shadow Blast">
       <Effect Name="Frozen">
         <Duration>3</Duration>
@@ -1616,12 +1614,11 @@
     <Speed>15</Speed>
     <Range DropOff="0.5" Colour="1.0,1.0,1.0">10</Range>
     <Shots>2</Shots>
-    <Damage>8+8</Damage>
-    <Type>Electrical</Type>
+    <Damage Type="Electrical">8+8</Damage>
     <Sound>Electroshock</Sound>
     <Hidden/>
   </WeaponType>
-  <WeaponType Name="Rock Fists">
+  <WeaponType Name="Rock Fists" Class="Melee">
     <Speed>12</Speed>
     <Range>1</Range>
     <Damage>9+9</Damage>
@@ -1629,9 +1626,9 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Demon Sword" Class="Melee">
-    <Speed>13</Speed>
+    <Speed>15</Speed>
     <Range>1.5</Range>
-    <Damage>6+6</Damage>
+    <Damage>6+7</Damage>
     <Sound>SwordSlice</Sound>
     <ItemEffect Name="Sword Burn">
       <Effect Name="Burning">
@@ -1644,8 +1641,7 @@
   <WeaponType Name="Wail">
     <Speed>14</Speed>
     <Range DropOff="0.0" Colour="0.9,0.9,0.9">8</Range>
-    <Damage>4+3</Damage>
-    <Type>Psychic</Type>
+    <Damage Type="Psychic">4+3</Damage>
     <Sound>Drain</Sound>
     <Hidden/>
   </WeaponType>
@@ -1661,6 +1657,47 @@
     <Range>1.5</Range>
     <Damage>4+4</Damage>
     <Sound>SwordSlice</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Tail Lash" Class="Melee">
+    <Speed>11</Speed>
+    <Range Colour="0.3,1.0,0.2">1.5</Range>
+    <Damage>4+4</Damage>
+    <Sound>Whip</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Golden Mace" Class="Melee">
+    <Speed>15</Speed>
+    <Range>1.5</Range>
+    <Damage>5+5</Damage>
+    <Sound>Strike</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Fire Sword" Class="Melee">
+    <Speed>13</Speed>
+    <Range>1.5</Range>
+    <Damage>8+6</Damage>
+    <Sound>SwordSlice</Sound>
+    <ItemEffect Name="Sword Burn">
+      <Effect Name="Burning">
+        <Duration>2</Duration>
+        <Damage Type="Fire">4</Damage>
+      </Effect>
+    </ItemEffect>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Titan Hammer">
+    <Speed>20</Speed>
+    <Range DropOff="0.6" Speed="0.5" Length="0.3" Colour="1.0,1.0,0.3">10</Range>
+    <Damage>10+10</Damage>
+    <Sound>Throw</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Solar Beam">
+    <Speed>16</Speed>
+    <Range DropOff="0.0" Colour="0.9,0.9,0.9">20</Range>
+    <Damage Type="Fire">8+8</Damage>
+    <Sound>Flamethrower</Sound>
     <Hidden/>
   </WeaponType>
 </Data>

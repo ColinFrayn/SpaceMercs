@@ -54,7 +54,7 @@
   </CreatureType>
   <CreatureType Name="Slime Spitter">
     <Scale>1.0</Scale>
-    <LevelRange>2,6</LevelRange>
+    <LevelRange>2,7</LevelRange>
     <Attack>10</Attack>
     <Defence>7</Defence>
     <Health>9</Health>
@@ -88,7 +88,7 @@
   </CreatureType>
   <CreatureType Name="Slime Hunter">
     <Scale>1.2</Scale>
-    <LevelRange>3,6</LevelRange>
+    <LevelRange>3,7</LevelRange>
     <Attack>12</Attack>
     <Defence>8</Defence>
     <Health>12</Health>

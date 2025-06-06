@@ -66,11 +66,20 @@ namespace SpaceMercs {
             if (bits.Length != 2) throw new Exception($"Could not parse damage string \"{strDam}\" in weapon {Name}");
             DBase = double.Parse(bits[0]);
             DMod = double.Parse(bits[1]);
-            Area = nDam.GetAttributeDouble("Area", 0.0);
-            Width = nDam.GetAttributeDouble("Width", 0.0);
-            WeaponShotType = nDam.GetAttributeEnum<ShotType>("Type", ShotType.Single);
+            DType = nDam.GetAttributeEnum<DamageType>("Type", DamageType.Physical);
 
-            DType = xml.SelectNodeEnum<DamageType>("Type", DamageType.Physical);
+            XmlNode? nArea = xml.SelectSingleNode("Area");
+            if (nArea is null) {
+                Area = 0d;
+                Width = 0d;
+                WeaponShotType = ShotType.Single;
+            }
+            else {
+                Area = nArea.GetAttributeDouble("Size", 0d);
+                Width = nArea.GetAttributeDouble("Width", 0d);
+                WeaponShotType = nArea.GetAttributeEnum<ShotType>("Shape", ShotType.Single);
+            }
+
             IsUsable = xml.SelectSingleNode("Hidden") == null;
             Stable = xml.SelectSingleNode("Stable") != null;
             Shots = xml.SelectNodeInt("Shots", 1);

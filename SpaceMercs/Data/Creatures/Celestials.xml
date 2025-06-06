@@ -1,0 +1,150 @@
+﻿<Data>
+  <CreatureType Name="Couatl">
+    <LevelRange>14,23</LevelRange>
+    <Scale>1.7</Scale>
+    <Attack>16</Attack>
+    <Defence>14</Defence>
+    <Armour>18</Armour>
+    <Health>14</Health>
+    <Stamina>17</Stamina>
+    <Frequency>3</Frequency>
+    <Interact/>
+    <Desc>A magical serpent beast.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Lightning Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Fire" Value="50"/>
+      <Resistance Type="Cold" Value="50"/>
+      <Resistance Type="Poison" Value="100"/>
+      <Resistance Type="Electrical" Value="100"/>
+    </Resistances>
+    <Tex Size="4">1,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Deva">
+    <LevelRange>14,23</LevelRange>
+    <Size>2</Size>
+    <Attack>18</Attack>
+    <Defence>15</Defence>
+    <Armour>18</Armour>
+    <Health>23</Health>
+    <Stamina>17</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Desc>A celestial being from the upper planes.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Golden Mace</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Etherealite</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Fire" Value="60"/>
+      <Resistance Type="Cold" Value="60"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Tex Size="4">5,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Planetar">
+    <LevelRange>15,24</LevelRange>
+    <Size>2</Size>
+    <Scale>2.1</Scale>
+    <Attack>20</Attack>
+    <Defence>15</Defence>
+    <Armour>18</Armour>
+    <Health>26</Health>
+    <Stamina>17</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Desc>A powerful celestial being from the upper planes.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Fire Sword</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.15">Etherealite</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Fire" Value="70"/>
+      <Resistance Type="Cold" Value="70"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Tex Size="4">1,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Solar">
+    <LevelRange>15,24</LevelRange>
+    <Size>3</Size>
+    <Scale>3.2</Scale>
+    <Attack>29</Attack>
+    <Defence>16</Defence>
+    <Armour>24</Armour>
+    <Health>70</Health>
+    <Stamina>19</Stamina>
+    <Frequency>1</Frequency>
+    <Interact/>
+    <Desc>A supremely powerful celestial being from the upper planes.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Solar Beam</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="2.0">Etherealite</Item>
+      <Item Amount="1.0">Celestial Essence</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Fire" Value="80"/>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Boss/>
+    <Tex Size="4">5,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Titanborn">
+    <LevelRange>14,23</LevelRange>
+    <Size>2</Size>
+    <Attack>25</Attack>
+    <Defence>13</Defence>
+    <Armour>18</Armour>
+    <Health>23</Health>
+    <Stamina>17</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Desc>A celestial being from the upper planes.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Titan Hammer</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.2">Etherealite</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Fire" Value="60"/>
+      <Resistance Type="Cold" Value="60"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Tex Size="4">1,9</Tex>
+  </CreatureType>
+  <CreatureType Name="Valkyrie">
+    <LevelRange>14,23</LevelRange>
+    <Size>2</Size>
+    <Scale>2.1</Scale>
+    <Attack>24</Attack>
+    <Defence>19</Defence>
+    <Armour>22</Armour>
+    <Health>25</Health>
+    <Stamina>18</Stamina>
+    <Frequency>2</Frequency>
+    <Interact/>
+    <Desc>An armoured celestial warrior from the upper planes.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Greatsword</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.1">Etherealite</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Fire" Value="70"/>
+      <Resistance Type="Cold" Value="70"/>
+      <Resistance Type="Poison" Value="100"/>
+    </Resistances>
+    <Tex Size="4">5,9</Tex>
+  </CreatureType>
+</Data>
+
