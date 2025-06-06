@@ -278,6 +278,8 @@ namespace SpaceMercs.Dialogs {
             if (dgInventory.SortOrder != SortOrder.None && dgInventory.SortedColumn is not null) {
                 dgInventory.Sort(dgInventory.SortedColumn, dgInventory.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
             }
+            if (dgInventory.SelectedRows.Count == 0) btSellAll.Text = "Sell...";
+            else btSellAll.Text = "Sell All";
         }
         private void SetupDiplomacyTab() {
             if (colony.Location != colony.Owner.HomePlanet) {
@@ -477,7 +479,14 @@ namespace SpaceMercs.Dialogs {
             SellSelectedItems(false);
         }
         private void btSellAll_Click(object sender, EventArgs e) {
-            SellSelectedItems(true);
+            if (dgInventory.SelectedRows.Count == 0) {
+                SellSpecial ss = new SellSpecial(PlayerTeam, colony);
+                ss.ShowDialog(this);
+                SetupFoundryTab();
+            }
+            else {
+                SellSelectedItems(true);
+            }
         }
         private void btDismantleEquippable_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) return;
@@ -602,11 +611,6 @@ namespace SpaceMercs.Dialogs {
                 else if (mw.NewItem is not null) SetupFoundryTab(new List<SaleItem>() { new SaleItem(mw.NewItem, s, bEquipped, 1) });
             }
         }
-        private void btSellPlus_Click(object sender, EventArgs e) {
-            SellSpecial ss = new SellSpecial(PlayerTeam, colony);
-            ss.ShowDialog(this);
-            SetupFoundryTab();
-        }
 
         // Double click to get further details on specific entries
         private void dgMerchant_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
@@ -683,6 +687,8 @@ namespace SpaceMercs.Dialogs {
             btSell.Enabled = btDismantle.Enabled = (dgInventory.SelectedRows.Count > 0);
             btImprove.Enabled = false;
             btModify.Enabled = false;
+            if (dgInventory.SelectedRows.Count == 0) btSellAll.Text = "Sell...";
+            else btSellAll.Text = "Sell All";
             if (dgInventory.SelectedRows.Count == 1) { // Can improve only one weapon/armour
                 if (dgInventory.SelectedRows[0].Tag is not SaleItem tp || tp.Item is not IEquippable eq) return;
                 if ((eq is Weapon || eq is Armour) && eq.Level < Const.MaxItemLevel) btImprove.Enabled = true;
@@ -694,6 +700,12 @@ namespace SpaceMercs.Dialogs {
         }
         private void cbEquipped_CheckedChanged(object sender, EventArgs e) {
             SetupFoundryTab();
+        }
+        private void tcMain_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Escape) {
+                dgInventory.ClearSelection();
+                btSellAll.Text = "Sell...";
+            }
         }
 
         // Changed tab so update lists

@@ -1263,8 +1263,8 @@ namespace SpaceMercs {
             foreach ((IItem it, int quantity) in _loadout) {
                 int required = quantity - CountItem(it);
                 // Ugh, a bit inefficient, but it's only called very rarely
-                while (required > 0 && PlayerTeam.Inventory.ContainsKey(it)) { 
-                    PlayerTeam.Inventory.Remove(it);
+                while (required > 0 && PlayerTeam.Inventory.ContainsKey(it)) {
+                    PlayerTeam.Inventory[it]--;
                     AddItem(it);
                     required--;
                 }

@@ -144,7 +144,6 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            btSellPlus = new Button();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -182,6 +181,7 @@
             tcMain.Size = new Size(662, 548);
             tcMain.TabIndex = 0;
             tcMain.SelectedIndexChanged += tcMain_SelectedIndexChanged;
+            tcMain.KeyUp += tcMain_KeyUp;
             // 
             // tpMerchant
             // 
@@ -704,7 +704,6 @@
             // 
             // tpUpgrade
             // 
-            tpUpgrade.Controls.Add(btSellPlus);
             tpUpgrade.Controls.Add(btModify);
             tpUpgrade.Controls.Add(cbEquipped);
             tpUpgrade.Controls.Add(lbTeamCashFoundry);
@@ -784,10 +783,10 @@
             // 
             btSellAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSellAll.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSellAll.Location = new Point(510, 476);
+            btSellAll.Location = new Point(567, 476);
             btSellAll.Margin = new Padding(0);
             btSellAll.Name = "btSellAll";
-            btSellAll.Size = new Size(62, 28);
+            btSellAll.Size = new Size(74, 28);
             btSellAll.TabIndex = 12;
             btSellAll.Text = "Sell All";
             btSellAll.UseVisualStyleBackColor = true;
@@ -810,10 +809,10 @@
             // 
             btSell.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btSell.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSell.Location = new Point(431, 476);
+            btSell.Location = new Point(482, 476);
             btSell.Margin = new Padding(0);
             btSell.Name = "btSell";
-            btSell.Size = new Size(71, 28);
+            btSell.Size = new Size(74, 28);
             btSell.TabIndex = 10;
             btSell.Text = "Sell One";
             btSell.UseVisualStyleBackColor = true;
@@ -1623,19 +1622,6 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // btSellPlus
-            // 
-            btSellPlus.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btSellPlus.Font = new Font("Microsoft Sans Serif", 9.75F);
-            btSellPlus.Location = new Point(578, 476);
-            btSellPlus.Margin = new Padding(0);
-            btSellPlus.Name = "btSellPlus";
-            btSellPlus.Size = new Size(62, 28);
-            btSellPlus.TabIndex = 17;
-            btSellPlus.Text = "Sell ++";
-            btSellPlus.UseVisualStyleBackColor = true;
-            btSellPlus.Click += btSellPlus_Click;
-            // 
             // ColonyView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1788,6 +1774,5 @@
         private Label label18;
         private Label lbTeamCash;
         private Label label20;
-        private Button btSellPlus;
     }
 }
