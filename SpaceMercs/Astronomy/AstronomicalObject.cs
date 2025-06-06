@@ -130,7 +130,8 @@ namespace SpaceMercs {
             }
 
             // Increase the difficulty based on where we are within this system
-            if (this is HabitableAO hao) {
+            // Only in inner sector rings. Otherwise entire systems are univorm
+            if (this is HabitableAO hao && GetSystem().Sector.SectorRing <= 1) {
                 // Local colony helps make it safer
                 Planet? pl = hao.ParentPlanet();
                 if (pl != null) {
@@ -141,6 +142,7 @@ namespace SpaceMercs {
                     dLevel += pDist * (nextDouble() + 1d) / 2d;
                 }
             }
+            else dLevel += 2d;
 
             return (int)dLevel;
         }

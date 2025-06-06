@@ -21,7 +21,7 @@ At relations >= 3 join human hypergates up to alien ones??
 - Links are impassable if relations drop with alien. Check this when travelling.
 - Pathing through an alien civ costs differently based on the alien civ relations (and also make sure that cost for home civ changes based on relations)
 
-What should attack skill do for an AoE weapon (grenade or cone), other than increase dmg?
+What should attack skill do for an AoE weapon (grenade or cone), other than increase dmg? Nothing?
 
 ?? Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
