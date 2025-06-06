@@ -169,15 +169,14 @@ namespace SpaceMercs {
             }
 
             // Modifier for the complexity of this armour (and therefore rarity)
-            double rarityFactor = Math.Pow(1.04, (Type.Requirements?.MinLevel ?? 0));
+            double rarityFactor = Math.Pow(1.025, (Type.Requirements?.MinLevel ?? 0));
 
             // Level factor. A high level item with the same properties as a different low level item is worth less because there is less scope to improve it.
             double levelFactor = Math.Pow(0.97, lev);
 
-            double baseCost = size * Const.BaseArmourCost;
-            double cost = baseCost + shieldValue;
-            cost *= massFactor * armourFactor * rarityFactor * levelFactor;
-            cost += abilityValue;
+            double baseCost = size * Const.BaseArmourCost + 0.5d; // Constant shift to make feet/hand armour more expensive
+            double cost = (baseCost * armourFactor) + shieldValue + abilityValue;
+            cost *= massFactor * rarityFactor * levelFactor;
             if (cost < baseCost / 3d) cost = baseCost / 3d;
 
             return cost;

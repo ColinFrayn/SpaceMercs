@@ -2,6 +2,17 @@
 ToDo List
 -------------------------------------------------
 
+High level hand/feet armour is too cheap??
+
+Mercenaries without kit??
+- Still have skills, which should be visible
+
+Fabrication/improving etc.:
+- Calculate skill level of an item. Base level of the research +2 per level plus mods for materials
+- Formula based on skill vs target skill
+
+Start new game should recentre on (0,0)
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 

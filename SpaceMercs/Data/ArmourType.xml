@@ -3,7 +3,7 @@
   <ArmourType Name="Military Helmet">
     <Mass>2.0</Mass>
     <Rarity>9</Rarity>
-    <BaseArmour>4</BaseArmour>
+    <BaseArmour>3</BaseArmour>
     <Location>Head</Location>
     <Desc>A military spec helmet with strong protection</Desc>
     <Materials>
@@ -58,7 +58,7 @@
   <ArmourType Name="Chestplate">
     <Mass>5.0</Mass>
     <Rarity>15</Rarity>
-    <BaseArmour>10</BaseArmour>
+    <BaseArmour>9</BaseArmour>
     <Location>Chest</Location>
     <Desc>A chestplate</Desc>
     <Materials>
@@ -256,10 +256,40 @@
       <Facility>Workshop</Facility>
     </Requirements>
   </ArmourType>
+  <ArmourType Name="Elite Combat Suit">
+    <Mass>14.0</Mass>
+    <Rarity>36</Rarity>
+    <Attack>2</Attack>
+    <BaseArmour>35</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
+    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
+    <Desc>An advanced reinforced combat armour suit with full body protection</Desc>
+    <Utility>
+      <Perception>1</Perception>
+    </Utility>
+    <Materials>
+      <Material Name="Fabric" Amount="3"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <Prerequisite>Combat Suit</Prerequisite>
+      <MinLevel>7</MinLevel>
+      <MinSystems>2</MinSystems>
+      <MinPop>25</MinPop>
+      <CashCost>120</CashCost>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+    </Requirements>
+  </ArmourType>
   <ArmourType Name="Light Combat Suit">
     <Mass>9.5</Mass>
     <Rarity>30</Rarity>
     <Attack>1</Attack>
+    <MinMatLvl>2</MinMatLvl>
     <BaseArmour>28</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>A lightweight combat armour suit with full body protection</Desc>
@@ -276,6 +306,35 @@
       <MinPop>20</MinPop>
       <CashCost>60</CashCost>
       <Material Name="Aluminium" Amount="4"/>
+      <Facility>Armoury</Facility>
+      <Facility>Workshop</Facility>
+    </Requirements>
+  </ArmourType>
+  <ArmourType Name="Predator Suit">
+    <Mass>15.0</Mass>
+    <Rarity>45</Rarity>
+    <Attack>3</Attack>
+    <BaseArmour>40</BaseArmour>
+    <MinMatLvl>3</MinMatLvl>
+    <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
+    <Desc>An advanced reinforced combat armour suit with full body protection</Desc>
+    <Utility>
+      <Perception>2</Perception>
+    </Utility>
+    <Materials>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Aluminium" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Heavy Chitin" Amount="2"/>
+    </Materials>
+    <Requirements>
+      <Prerequisite>Elite Combat Suit</Prerequisite>
+      <MinLevel>9</MinLevel>
+      <MinSystems>4</MinSystems>
+      <MinPop>45</MinPop>
+      <CashCost>360</CashCost>
+      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Heavy Chitin" Amount="1"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -337,7 +396,7 @@
     </Requirements>
   </ArmourType>
   <ArmourType Name="Archon Armour">
-    <Mass>13.0</Mass>
+    <Mass>11.5</Mass>
     <Rarity>60</Rarity>
     <Defence>3</Defence>
     <BaseArmour>32</BaseArmour>

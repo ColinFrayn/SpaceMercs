@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>20/03/2601 12:20:14</Clock>
+<Clock>20/03/2601 12:29:12</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -15257,13 +15257,13 @@
 </Map>
 <Team>
  <Pos>(3,0)3.0</Pos>
- <Cash>14370.987360852252</Cash>
+ <Cash>9893.48746114597</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="85" Y="18"/>
  <Health>55.1898584903299</Health>
  <Stamina>1.1620489267561336</Stamina>
- <Shields>0</Shields>
+ <Shields>36.25</Shields>
  <Facing>180</Facing>
  <Level>15</Level>
  <XP>1915588</XP>
@@ -15295,9 +15295,9 @@
  </Loadout>
  <EquippedArmour>
 <Armour Type="Plate Boots" Material="Adamantium" Level="3"/>
-<Armour Type="Powered Gauntlets" Material="Adamantium" Level="3"/>
 <Armour Type="Archon Helmet" Material="Mithril" Level="1"/>
 <Armour Type="Archon Armour" Material="Mithril" Level="0"/>
+<Armour Type="Powered Gauntlets" Material="Adamantium" Level="4"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="Plasma Rifle" Level="3" Mod="Range Enhancer" />
@@ -15323,7 +15323,7 @@
  <Location X="79" Y="15"/>
  <Health>68.25836127235146</Health>
  <Stamina>41</Stamina>
- <Shields>0</Shields>
+ <Shields>20</Shields>
  <Facing>180</Facing>
  <Level>14</Level>
  <XP>1730889</XP>
@@ -15350,9 +15350,9 @@
  </Loadout>
  <EquippedArmour>
 <Armour Type="Powered Gauntlets" Material="Composite" Level="3"/>
-<Armour Type="Archon Helmet" Material="Adamantium" Level="0"/>
 <Armour Type="Advanced Shock Armour" Material="Mithril" Level="0"/>
 <Armour Type="Plate Boots" Material="Adamantium" Level="3"/>
+<Armour Type="Archon Helmet" Material="Adamantium" Level="1"/>
  </EquippedArmour>
  <EquippedWeapon>
 <Weapon Type="MagFrag" Level="3" Mod="Superheated Rounds" />
