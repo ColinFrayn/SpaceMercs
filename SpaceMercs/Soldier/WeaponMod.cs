@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using static SpaceMercs.WeaponType;
 
 namespace SpaceMercs {
     public class WeaponMod {
@@ -12,6 +13,7 @@ namespace SpaceMercs {
         public int Silencer { get; private set; }
         public double Accuracy { get; private set; }
         public double Damage { get; private set; }
+        public DamageType DamageType { get; private set; }
         public double Shred { get; private set; }
         public double RecoilMod { get; private set; }
         public string Char { get; private set; }
@@ -31,6 +33,8 @@ namespace SpaceMercs {
             Silencer = xml.SelectNodeInt("Silencer", 0);
             Accuracy = xml.SelectNodeDouble("Accuracy", 0d);
             Damage = xml.SelectNodeDouble("Damage", 0d);
+            DamageType = xml.SelectNodeEnum<DamageType>("DamageType", DamageType.Physical);
+
             RecoilMod = xml.SelectNodeDouble("RecoilMod", 1d);
             Shred = xml.SelectNodeDouble("Shred", 0d);
         }

@@ -2,13 +2,8 @@
 ToDo List
 -------------------------------------------------
 
-Mixed damage from weapons in Weapon.GetDamage / Definition / Weapon.Description
-
-Loading time is very slow. Why?
-
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
-- Precursor-only artifact weapons
 
 ==================================================================================================================
 

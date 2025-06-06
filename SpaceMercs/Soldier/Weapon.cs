@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using System.Xml;
+using static SpaceMercs.WeaponType;
 
 namespace SpaceMercs {
     public class Weapon : IEquippable {
@@ -16,8 +17,9 @@ namespace SpaceMercs {
                 sb.AppendLine("Quality : " + Utils.LevelToDescription(Level));
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 if (Range > 1) sb.AppendLine("Range : " + Range.ToString("0.##") + "m");
-                sb.AppendLine("Damage : " + DBase.ToString("0.#") + " + R" + DMod.ToString("0.#"));
-                sb.AppendLine($"DamageType : {Type.DType}");
+                foreach ((DamageType dt, (double bdam, double dmod)) in Type.Damage) {
+                    sb.AppendLine($"Damage ({dt}) : {bdam.ToString("0.#")} + R{dmod.ToString("0.#")}");
+                }
                 sb.AppendLine("Stamina : " + StaminaCost.ToString("0.#"));
                 sb.AppendLine($"Accuracy : {AccuracyBonus} - {Type.DropOff}/m");
                 if (Type.Area > 0d) sb.AppendLine($"Area : {Type.Area}m rad");
@@ -57,8 +59,6 @@ namespace SpaceMercs {
         public WeaponType Type { get; private set; }
         public WeaponMod? Mod { get; private set; }
         public int Recharge { get; private set; }
-        public double DBase { get { return Type.DBase * (1d + (Level / 10d)) + (Mod?.Damage ?? 0d); } }
-        public double DMod { get { return Type.DMod * (1d + (Level / 10d)); } }
         public double StaminaCost { get { return Type.Speed * (1d - (Level / 20d)); } }
         public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod?.Accuracy ?? 0d); } }
         public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod?.DropoffMod ?? 1d); } }
@@ -67,10 +67,28 @@ namespace SpaceMercs {
         public double Shred { get { return Type.Shred * (1d + (Level / 5d)) + (Mod?.Shred ?? 0d); } }
         public IReadOnlyDictionary<WeaponType.DamageType, double> GenerateDamage(Random rnd) {
             Dictionary<WeaponType.DamageType, double> allDam = new();
-            double dam = DBase + (rnd.NextDouble() * DMod);
-            allDam.Add(Type.DType, dam);
-            // TODO Implement bonus damage
+            foreach ((DamageType dt, (double bdam, double dmod)) in Type.Damage) {
+                double dam = bdam + (rnd.NextDouble() * dmod) * (1d + (Level / 10d));
+                allDam.Add(dt, dam);
+            }
+            if (Mod is not null) {
+                if (allDam.ContainsKey(Mod.DamageType)) {
+                    allDam[Mod.DamageType] += Mod.Damage;
+                }
+                else {
+                    allDam.Add(Mod.DamageType, Mod.Damage);
+                }
+            }
             return allDam;
+        }
+        public double AverageDamage {
+            get {
+                double tdam = 0d;
+                foreach ((DamageType dt, (double bdam, double dmod)) in Type.Damage) {
+                    tdam += bdam + dmod / 2d;
+                }
+                return tdam;
+            }
         }
         public double UnmodifiedCost {
             get {

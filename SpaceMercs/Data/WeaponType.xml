@@ -82,7 +82,7 @@
     <Shots>4</Shots>
     <Recoil>0.15</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage>4+4</Damage>
+    <Damage>3+4</Damage>
     <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>The Magnetic Fragment Accelerator, or MagFrag, is a highly devastating close-range projectile weapon.</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -224,7 +224,8 @@
     <Rarity>9</Rarity>
     <Speed>13</Speed>
     <Range Accuracy="0" DropOff="0.4" Length="0.6" Speed="2.0" Colour="1.0,0.2,0.2">10</Range>
-    <Damage>4+4</Damage>
+    <Damage>3+4</Damage>
+    <Damage Type="Fire">1+0</Damage>
     <Desc>A laser rifle</Desc>
     <Sound>LaserRifleSingle</Sound>
     <Noise>6</Noise>
@@ -249,7 +250,8 @@
     <Rarity>17</Rarity>
     <Speed>14</Speed>
     <Range Accuracy="0" DropOff="0.5" Length="0.4" Speed="1.6" Colour="1.0,0.4,0.2">9</Range>
-    <Damage>5+5</Damage>
+    <Damage>4+4</Damage>
+    <Damage Type="Fire">2+0</Damage>
     <Desc>A plasma rifle, firing scorching hot plasma rounds</Desc>
     <Sound>LaserRifleSingle</Sound>
     <Noise>7</Noise>
@@ -279,7 +281,8 @@
     <Shots>3</Shots>
     <Delay>200</Delay>
     <Recoil>1.3</Recoil>
-    <Damage>7+4</Damage>
+    <Damage>5+4</Damage>
+    <Damage Type="Fire">2+1</Damage>
     <Desc>A heavy laser rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
     <Noise>8</Noise>
@@ -310,7 +313,8 @@
     <Shots>3</Shots>
     <Delay>200</Delay>
     <Recoil>1.3</Recoil>
-    <Damage>8+5</Damage>
+    <Damage>5+3</Damage>
+    <Damage Type="Fire">3+2</Damage>
     <Desc>A heavy plasma rifle</Desc>
     <Sound>HeavyLaserRifle</Sound>
     <Noise>9</Noise>
@@ -339,6 +343,7 @@
     <Speed>8</Speed>
     <Range Accuracy="0" DropOff="0.4" Length="0.4" Speed="2.0" Colour="1.0,0.2,0.2">8</Range>
     <Damage>2+2</Damage>
+    <Damage Type="Fire">1+0</Damage>
     <Desc>A laser pistol</Desc>
     <Sound>LaserPistolShort</Sound>
     <Noise>4</Noise>
@@ -804,7 +809,8 @@
     <Rarity>15</Rarity>
     <Speed>22</Speed>
     <Range Accuracy="3" DropOff="0.13" Length="0.5" Speed="2.0" Colour="1.0,0.2,0.2">22</Range>
-    <Damage>6+6</Damage>
+    <Damage>5+6</Damage>
+    <Damage Type="Fire">1+0</Damage>
     <Desc>A highly precise laser sniper rifle.</Desc>
     <Sound>LaserSniper</Sound>
     <Stable/>
@@ -922,7 +928,8 @@
     <Rarity>18</Rarity>
     <Speed>10</Speed>
     <Range Accuracy="1">1.5</Range>
-    <Damage>4+5</Damage>
+    <Damage>4+4</Damage>
+    <Damage Type="Electrical">1+0</Damage>
     <Desc>A sharp bladed weapon powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
     <Noise>1</Noise>
@@ -964,7 +971,8 @@
     <Rarity>17</Rarity>
     <Speed>11</Speed>
     <Range>1.5</Range>
-    <Damage>5+5</Damage>
+    <Damage>4+5</Damage>
+    <Damage Type="Electrical">1+0</Damage>
     <Desc>A sturdy axe powered by complex electrical forces</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
@@ -1094,7 +1102,8 @@
     <Rarity>40</Rarity>
     <Speed>15</Speed>
     <Range Accuracy="1">1.5</Range>
-    <Damage>8+7</Damage>
+    <Damage>6+6</Damage>
+    <Damage Type="Electrical">2+1</Damage>
     <Desc>A huge powered fist capable of striking with devastating force.</Desc>
     <Sound>Punches</Sound>
     <Requirements>
@@ -1181,7 +1190,8 @@
     <Rarity>999</Rarity>
     <Speed>14</Speed>
     <Range Accuracy="0" DropOff="0.5" Length="0.4" Speed="1.6" Colour="0.8,0.4,0.2">9</Range>
-    <Damage>6+7</Damage>
+    <Damage>4+4</Damage>
+    <Damage Type="Void">2+0</Damage>
     <Desc>A void rifle based on advanced precursor tech</Desc>
     <Sound>LaserRifleSingle</Sound>
     <Noise>6</Noise>
@@ -1197,7 +1207,8 @@
     <Speed>12</Speed>
     <Long/>
     <Range Accuracy="1">1.5</Range>
-    <Damage>6+7</Damage>
+    <Damage>4+5</Damage>
+    <Damage Type="Void">2+0</Damage>
     <Desc>A vicious spear, humming with dark energy and based on precursor tech.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
@@ -1213,7 +1224,8 @@
     <Speed>25</Speed>
     <BaseDelay>500</BaseDelay>
     <Range Accuracy="2" DropOff="0.18" Length="0.4" Speed="1.7">24</Range>
-    <Damage>8+9</Damage>
+    <Damage>6+7</Damage>
+    <Damage Type="Void">2+0</Damage>
     <Desc>A mysterious weapon based on precursor tech that creates high damage at long range.</Desc>
     <Sound>GaussSniper</Sound>
     <Stable/>
@@ -1231,7 +1243,8 @@
     <Shots>5</Shots>
     <Recoil>0.15</Recoil>
     <Range Accuracy="-2" DropOff="0.8" Length="0.2" Speed="0.9">5</Range>
-    <Damage>4+5</Damage>
+    <Damage>2+4</Damage>
+    <Damage Type="Void">1+0</Damage>
     <Area Shape="ConeMulti" Width="3.2"/>
     <Desc>A highly deadly void weapon that scatters void fragments over a wide area.</Desc>
     <Sound>ShotgunAndReload</Sound>
@@ -1300,7 +1313,8 @@
   <WeaponType Name="Poisonous Bite" Class="Melee">
     <Speed>11</Speed>
     <Range>1</Range>
-    <Damage>5+4</Damage>
+    <Damage>3+3</Damage>
+    <Damage Type="Poison">2+0</Damage>
     <Sound>Bite</Sound>
     <ItemEffect Name="Bite Poison">
       <Effect Name="Bite Poison">
@@ -1313,7 +1327,8 @@
   <WeaponType Name="Triffid Tentacle" Class="Melee">
     <Speed>10</Speed>
     <Range Colour="0.3,1.0,0.2">3</Range>
-    <Damage>2+3</Damage>
+    <Damage>2+2</Damage>
+    <Damage Type="Poison">1+0</Damage>
     <Sound>Whip</Sound>
     <ItemEffect Name="Tentacle Sting">
       <Effect Name="Triffid Sting">
@@ -1326,7 +1341,8 @@
   <WeaponType Name="Triffid Bite" Class="Melee">
     <Speed>12</Speed>
     <Range>1</Range>
-    <Damage>3+4</Damage>
+    <Damage>3+3</Damage>
+    <Damage Type="Poison">1+0</Damage>
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
@@ -1353,7 +1369,8 @@
   <WeaponType Name="Fungoid Spores">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.3,1.0,0.2">8</Range>
-    <Damage Type="Poison">3+2</Damage>
+    <Damage>1+1</Damage>
+    <Damage Type="Poison">1+1</Damage>
     <Sound>Spore</Sound>
     <Recoil>0.5</Recoil>
     <Delay>220</Delay>
@@ -1368,7 +1385,8 @@
   <WeaponType Name="Fungoid Heavy Spores">
     <Speed>15</Speed>
     <Range DropOff="0.6" Speed="0.5" Length="0.4" Colour="0.3,1.0,0.2">10</Range>
-    <Damage Type="Poison">5+4</Damage>
+    <Damage>2+1</Damage>
+    <Damage Type="Poison">3+3</Damage>
     <Sound>Spore</Sound>
     <Recoil>0.7</Recoil>
     <Delay>220</Delay>
@@ -1383,7 +1401,8 @@
   <WeaponType Name="Sting" Class="Melee">
     <Speed>10</Speed>
     <Range>1.5</Range>
-    <Damage Type="Poison">3+3</Damage>
+    <Damage>2+1</Damage>
+    <Damage Type="Poison">2+1</Damage>
     <Sound>Claws</Sound>
     <ItemEffect Name="Sting">
       <Effect Name="Sting">
@@ -1411,7 +1430,8 @@
   </WeaponType>
   <WeaponType Name="Slime Bite" Class="Melee">
     <Speed>12</Speed>
-    <Damage Type="Acid">3+3</Damage>
+    <Damage>2+1</Damage>
+    <Damage Type="Acid">2+1</Damage>
     <Range>1</Range>
     <Sound>Bite</Sound>
     <ItemEffect Name="Slimed">
@@ -1428,7 +1448,8 @@
   <WeaponType Name="Toxic Spit">
     <Speed>14</Speed>
     <Range DropOff="0.5" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.0">10</Range>
-    <Damage Type="Poison">6+6</Damage>
+    <Damage>2+2</Damage>
+    <Damage Type="Poison">4+4</Damage>
     <Sound>Spore</Sound>
     <ItemEffect Name="Poisoned">
       <Effect Name="Poisoned">
@@ -1455,14 +1476,16 @@
   <WeaponType Name="Xenoblades" Class="Melee">
     <Speed>11</Speed>
     <Range>1.5</Range>
-    <Damage>6+5</Damage>
+    <Damage>4+3</Damage>
+    <Damage Type="Acid">2+2</Damage>
     <Sound>Claws</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Xenobite" Class="Melee">
     <Speed>10</Speed>
     <Range>1</Range>
-    <Damage>4+5</Damage>
+    <Damage>2+2</Damage>
+    <Damage Type="Acid">2+2</Damage>
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
@@ -1497,14 +1520,16 @@
   <WeaponType Name="Void Claws" Class="Melee">
     <Speed>10</Speed>
     <Range>1.5</Range>
-    <Damage Type="Void">5+5</Damage>
+    <Damage>3+2</Damage>
+    <Damage Type="Void">3+2</Damage>
     <Sound>SwordSlice</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Void Bite" Class="Melee">
     <Speed>12</Speed>
     <Range>1.0</Range>
-    <Damage Type="Void">4+4</Damage>
+    <Damage>3+2</Damage>
+    <Damage Type="Void">3+2</Damage>
     <Sound>Bite</Sound>
     <Hidden/>
   </WeaponType>
@@ -1539,14 +1564,16 @@
   <WeaponType Name="Fire Bolt">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.8" Length="0.3" Colour="1.0,0.2,0.0">9</Range>
-    <Damage Type="Fire">4+3</Damage>
+    <Damage>1+1</Damage>
+    <Damage Type="Fire">3+3</Damage>
     <Sound>Spore</Sound>
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Ice Bolt">
     <Speed>12</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.0,0.2,1.0">9</Range>
-    <Damage Type="Cold">4+3</Damage>
+    <Damage>1+1</Damage>
+    <Damage Type="Cold">3+3</Damage>
     <Sound>Spore</Sound>
     <Hidden/>
   </WeaponType>
@@ -1567,7 +1594,8 @@
   <WeaponType Name="Fire Blast">
     <Speed>15</Speed>
     <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="1.0,0.2,0.0">6</Range>
-    <Damage Type="Fire">8+8</Damage>
+    <Damage>2+2</Damage>
+    <Damage Type="Fire">6+6</Damage>
     <ItemEffect Name="Fire Blast">
       <Effect Name="Burning">
         <Duration>2</Duration>
@@ -1581,7 +1609,8 @@
     <Speed>15</Speed>
     <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="0.0,0.2,1.0">6</Range>
     <Shots>2</Shots>
-    <Damage Type="Cold">6+6</Damage>
+    <Damage>2+1</Damage>
+    <Damage Type="Cold">5+5</Damage>
     <ItemEffect Name="Ice Blast">
       <Effect Name="Frozen">
         <Duration>3</Duration>
@@ -1628,7 +1657,8 @@
   <WeaponType Name="Demon Sword" Class="Melee">
     <Speed>15</Speed>
     <Range>1.5</Range>
-    <Damage>6+7</Damage>
+    <Damage>3+3</Damage>
+    <Damage Type="Fire">3+3</Damage>
     <Sound>SwordSlice</Sound>
     <ItemEffect Name="Sword Burn">
       <Effect Name="Burning">
@@ -1648,7 +1678,8 @@
   <WeaponType Name="Laser Zapper">
     <Speed>8</Speed>
     <Range Accuracy="0" DropOff="0.4" Length="0.4" Speed="2.0" Colour="1.0,0.2,0.2">8</Range>
-    <Damage>2+2</Damage>
+    <Damage>1+2</Damage>
+    <Damage Type="Fire">1+0</Damage>
     <Sound>LaserPistolShort</Sound>
     <Hidden/>
   </WeaponType>
@@ -1676,7 +1707,8 @@
   <WeaponType Name="Fire Sword" Class="Melee">
     <Speed>13</Speed>
     <Range>1.5</Range>
-    <Damage>8+6</Damage>
+    <Damage>4+3</Damage>
+    <Damage Type="Fire">3+3</Damage>
     <Sound>SwordSlice</Sound>
     <ItemEffect Name="Sword Burn">
       <Effect Name="Burning">

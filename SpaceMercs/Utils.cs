@@ -165,7 +165,7 @@ namespace SpaceMercs {
         // When shooting a weapon, create shot particles
         public static void CreateShots(Weapon EquippedWeapon, IEntity from, int tx, int ty, int tSize, List<ShotResult> results, double shotRange, EffectFactory effectFactory, float baseDelay) {
             float sdelay = baseDelay;
-            float avDam = (float)(EquippedWeapon.DBase + (EquippedWeapon.DMod / 2.0));
+            float avDam = (float)(EquippedWeapon.AverageDamage);
             float shotSize = (float)avDam / Const.ShotSizeScale;
             float duration = (float)shotRange * Const.ShotDurationScale / (float)EquippedWeapon.Type.ShotSpeed;
             float sLength = (float)EquippedWeapon.Type.ShotLength; // Length of a shot, not the weapon itself

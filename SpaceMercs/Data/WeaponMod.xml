@@ -8,7 +8,7 @@
   </WeaponMod>
   <WeaponMod Name="Range Enhancer" Char="R">
     <Mass>0.2</Mass>
-    <CostMod>0.15</CostMod>
+    <CostMod>0.2</CostMod>
     <Desc>A rifled barrel extension which increases the range of your weapon slightly.</Desc>
     <Range>1</Range>
   </WeaponMod>
@@ -36,6 +36,20 @@
     <Desc>A powerful enhancement to this weapon's damage.</Desc>
     <Damage>1</Damage>
   </WeaponMod>
+  <WeaponMod Name="Superheated Rounds" Char="D">
+    <Mass>0.4</Mass>
+    <CostMod>0.3</CostMod>
+    <Desc>Adds fire damage to this weapon.</Desc>
+    <Damage>1</Damage>
+    <DamageType>Fire</DamageType>
+  </WeaponMod>
+  <WeaponMod Name="Cryo Rounds" Char="D">
+    <Mass>0.4</Mass>
+    <CostMod>0.3</CostMod>
+    <Desc>Adds cold damage to this weapon.</Desc>
+    <Damage>1</Damage>
+    <DamageType>Cold</DamageType>
+  </WeaponMod>
   <WeaponMod Name="Shredding Rounds" Char="S">
     <Mass>0.2</Mass>
     <CostMod>0.2</CostMod>
@@ -44,9 +58,25 @@
   </WeaponMod>
   <WeaponMod Name="Nanofine Blade" Char="D">
     <Mass>0.0</Mass>
-    <CostMod>0.25</CostMod>
+    <CostMod>0.2</CostMod>
     <Desc>A highly sharpened blade modification which enhances the damage of this weapon.</Desc>
     <Damage>1</Damage>
+    <Melee/>
+  </WeaponMod>
+  <WeaponMod Name="Electrocharge Unit" Char="D">
+    <Mass>0.25</Mass>
+    <CostMod>0.3</CostMod>
+    <Desc>Adds electrical damage to this weapon.</Desc>
+    <Damage>1</Damage>
+    <DamageType>Electrical</DamageType>
+    <Melee/>
+  </WeaponMod>
+  <WeaponMod Name="Poisoned Blade" Char="D">
+    <Mass>0.25</Mass>
+    <CostMod>0.3</CostMod>
+    <Desc>Adds poisoned damage to this weapon.</Desc>
+    <Damage>1</Damage>
+    <DamageType>Poison</DamageType>
     <Melee/>
   </WeaponMod>
   <WeaponMod Name="Gyro Stabiliser" Char="+">

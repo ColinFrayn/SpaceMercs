@@ -6,12 +6,10 @@ namespace SpaceMercs {
         public enum ShotType { Single, Cone, ConeMulti, Grenade };
         public enum WeaponClass { Rifle, Shotgun, Pistol, Melee, Launcher, Sniper, Emitter, Heavy, Other };
         public WeaponClass WClass { get; private set; }
-        public DamageType DType { get; private set; } // Damage type
+        public readonly IReadOnlyDictionary<DamageType, (double DBase, double DMod)> Damage;
         public double Range { get; private set; } // Maximum range for this weapon
         public double Accuracy { get; private set; } // Accuracy bonus for this weapon (default = 0)
         public double DropOff { get; private set; } // For every metres distance to target, suffer a -X penalty to hit.
-        public double DBase { get; private set; } // Base damage per hit
-        public double DMod { get; private set; } // Random damage per hit
         public double Speed { get; private set; }  // Stamina cost to fire
         public double Area { get; private set; } // Is area-of-effect?
         public double Width { get; private set; } // Cone width if cone-type shot
@@ -60,13 +58,19 @@ namespace SpaceMercs {
             Speed = xml.SelectNodeDouble("Speed");
             SoundEffect = xml.SelectNodeText("Sound");
             NoiseLevel = xml.GetAttributeInt("Noise", 0);
-            XmlNode nDam = xml.SelectSingleNode("Damage") ?? throw new Exception($"Could not find damage setting for weapon {Name}"); ;
-            string strDam = nDam.InnerText;
-            string[] bits = strDam.Split('+');
-            if (bits.Length != 2) throw new Exception($"Could not parse damage string \"{strDam}\" in weapon {Name}");
-            DBase = double.Parse(bits[0]);
-            DMod = double.Parse(bits[1]);
-            DType = nDam.GetAttributeEnum<DamageType>("Type", DamageType.Physical);
+
+            Dictionary<DamageType, (double DBase, double DMod)> allDam = new();
+            foreach (XmlNode nDam in xml.SelectNodes("Damage")!) {
+                string strDam = nDam.InnerText;
+                string[] bits = strDam.Split('+');
+                if (bits.Length != 2) throw new Exception($"Could not parse damage string \"{strDam}\" in weapon {Name}");
+                double dBase = double.Parse(bits[0]);
+                double dMod = double.Parse(bits[1]);
+                DamageType dType = nDam.GetAttributeEnum<DamageType>("Type", DamageType.Physical);
+                allDam.Add(dType, (dBase, dMod));
+            }
+            if (allDam.Count == 0) throw new Exception($"Could not find any damage for weapon {Name}");
+            Damage = new Dictionary<DamageType, (double DBase, double DMod)>(allDam);
 
             XmlNode? nArea = xml.SelectSingleNode("Area");
             if (nArea is null) {
