@@ -16,7 +16,7 @@ namespace SpaceMercs {
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
-        public double ConstructionChanceModifier { get { return -((Requirements?.MinLevel ?? 0d) * 2d) - (10d * (ArmourMod - 1d)) - (15d * (1d - MassMod)) - (Math.Sqrt(UnitCost) * 2d) + (IsScavenged ? -2d : 3d); } }
+        public double ConstructionDiffModifier { get { return (MaxLevel - 1) + (IsScavenged ? 0.5d : ((Requirements?.MinLevel ?? 0d) * 0.15d)); } }
         public int GetUtilitySkill(Soldier.UtilitySkill sk) {
             if (SkillBoosts.ContainsKey(sk)) return SkillBoosts[sk];
             return 0;

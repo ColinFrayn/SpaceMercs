@@ -241,6 +241,7 @@
     <UnitCost>6.5</UnitCost>
     <ArmourMod>1.0</ArmourMod>
     <Rarity>0.05</Rarity>
+    <MaxLevel>2</MaxLevel>
     <Scavenged/>
     <BonusArmour>
       <Bonus Type="Poison" Amount="1.0"/>
@@ -252,6 +253,7 @@
     <UnitCost>7.5</UnitCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.05</Rarity>
+    <MaxLevel>3</MaxLevel>
     <Scavenged/>
     <BonusArmour>
       <Bonus Type="Physical" Amount="0.4"/>
@@ -263,6 +265,7 @@
     <UnitCost>16.5</UnitCost>
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.02</Rarity>
+    <MaxLevel>4</MaxLevel>
     <Scavenged/>
     <BonusArmour>
       <Bonus Type="Physical" Amount="0.6"/>

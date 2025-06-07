@@ -1,4 +1,5 @@
 ﻿using OpenTK.Mathematics;
+using System.Windows.Media.Media3D;
 using System.Xml;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.Soldier;
@@ -712,6 +713,15 @@ namespace SpaceMercs {
                 UtilitySkill.Stealth => "The ability to move silently and avoid being spotted by enemy creatures.",
                 _ => "Unknown"
             };
+        }
+
+        public static double ConstructionChance(double ItemLevel, double SkillLevel) {
+            double diff = SkillLevel - ItemLevel;
+            // Standard sigmoid (in percent)
+            double chance = 100d / (1d + Math.Exp(-diff * Const.ConstructionChanceScale));
+            if (chance > 99.0) return 99.0;
+            if (chance < 1.0) return 1.0;
+            return chance;
         }
         #endregion
 

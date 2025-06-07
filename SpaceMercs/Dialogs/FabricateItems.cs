@@ -223,20 +223,26 @@
                 if (armourMat.MaxLevel < at.MinMatLvl) return;
             }
 
-            // Get construction chance
+            // Get construction skill
             int maxlev = PlayerTeam.GetMaxSkillByItemType(newType);
             if (maxlev == 0) {
                 MessageBox.Show("Nobody has the required skill to perform that action!");
                 return;
             }
-
             int aiboost = PlayerTeam.PlayerShip.AIBoost;
             Soldier s = PlayerTeam.GetSoldierWithMaxSkillByItemType(newType);
-            double chance = newType.ConstructionChance + ((maxlev + aiboost) * Const.SkillConstructChanceModifier);
-            chance += armourMat?.ConstructionChanceModifier ?? 0d;           
-            double basechance = chance;
-            if (chance > 99.0) chance = 99.0;
-            if (chance < 1.0) chance = 1.0;
+            int TotalSkill = maxlev + aiboost;
+
+            // Generate the item
+            IEquippable? newItem = newType switch {
+                ArmourType at2 => new Armour(at2, armourMat!, 0),
+                WeaponType wt => new Weapon(wt, 0),
+                _ => new Equipment(newType)
+            };
+
+            // Get chance to build
+            double ItemLevel = newItem.BuildDiff;
+            double chance = Utils.ConstructionChance(ItemLevel, TotalSkill);
 
             // Are you sure?
             string strReally = $"Really construct {newType.Name}?\nSoldier = {s.Name} ({maxlev}{(aiboost > 0 ? "+" + aiboost : string.Empty)})\nChance of success = {chance.ToString("N2")}%";
@@ -262,28 +268,26 @@
                 return;
             }
 
-            // Boost item level randomly based on skill of fabricator
-            int lvl = 0;
+            // Boost item level based on skill of fabricator
             if (newType is ArmourType || newType is WeaponType) {
-                chance = basechance;
+                int lvl = 1;
                 do {
-                    if ((lvl + 1) * 5 > maxlev) break;
-                    chance -= 50.0 - (lvl * 20.0);
-                    chance += (maxlev * 5.0);
-                    r = rnd.NextDouble() * 100.0;
-                    if (r < chance) lvl++;
-                } while (r <= chance);
-                if (newType is ArmourType && armourMat != null && lvl > armourMat.MaxLevel) lvl = armourMat.MaxLevel;
+                    if (newType is ArmourType && armourMat != null && lvl > armourMat.MaxLevel) break;
+                    IEquippable upgradedItem = newType switch {
+                        ArmourType at2 => new Armour(at2, armourMat!, lvl),
+                        WeaponType wt => new Weapon(wt, lvl),
+                        _ => newItem
+                    };
+                    double ugChance = Utils.ConstructionChance(upgradedItem.BuildDiff, TotalSkill);
+                    if (chance < ugChance) break;
+                    newItem = upgradedItem;
+                    lvl++;
+                } while (lvl < 6);
             }
 
-            if (lvl > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(lvl));
+            // Announce
+            if (newItem.Level > 0) MessageBox.Show("Construction succeeded! Quality is " + Utils.LevelToDescription(newItem.Level));
             else MessageBox.Show("Construction succeeded!");
-
-            IEquippable? newItem = newType switch {
-                ArmourType at2 => new Armour(at2, armourMat!, lvl),
-                WeaponType wt => new Weapon(wt, lvl),
-                _ => new Equipment(newType)
-            };
 
             // Add the new item
             PlayerTeam.AddItem(newItem, 1);

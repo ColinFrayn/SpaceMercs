@@ -1,4 +1,6 @@
-﻿namespace SpaceMercs.Dialogs {
+﻿using System.Drawing.Drawing2D;
+
+namespace SpaceMercs.Dialogs {
     partial class UpgradeItem : Form {
         private readonly IEquippable item;
         private readonly double UpgradeCost;
@@ -30,10 +32,16 @@
             lbName.Text = item.Name;
             lbQuality.Text = Utils.LevelToDescription(item.Level);
             lbNewQuality.Text = Utils.LevelToDescription(item.Level + 1);
-            SuccessChance = 0.75 - 0.08 * (item.Level * 5 - (skill + aiboost)) - 0.015 * item.BaseType.Requirements?.MinLevel ?? 1;
-            if (SuccessChance > 0.99) SuccessChance = 0.99;
-            if (SuccessChance < 0.01) SuccessChance = 0.01;
-            lbChance.Text = (SuccessChance * 100.0).ToString("N1") + "%";
+            // Generate the item
+            IEquippable? newItem = eq switch {
+                Armour ar => new Armour(ar.Type, ar.Material, ar.Level + 1),
+                Weapon wp => new Weapon(wp.Type, wp.Level + 1),
+                _ => throw new Exception("Cannot upgrade this type!")
+            };
+            double ItemLevel = newItem.BuildDiff - 1; // Easier to upgrade to this level than it is to build it anew, hence -1
+            double TotalSkill = skill + aiboost;
+            SuccessChance = Utils.ConstructionChance(ItemLevel, TotalSkill);
+            lbChance.Text = SuccessChance.ToString("N1") + "%";
             UpgradeCost = item.UpgradeCost * PriceMod;
             lbCost.Text = UpgradeCost.ToString("N2") + "cr";
             if (UpgradeCost > PlayerTeam.Cash || item.Level == Const.MaxItemLevel) btUpgrade.Enabled = false;
@@ -41,17 +49,17 @@
 
         private void btUpgrade_Click(object sender, EventArgs e) {
             // Are you sure?
-            if (MessageBox.Show("This will cost " + UpgradeCost.ToString("N2") + " and has a " + (100 - (SuccessChance * 100.0)).ToString("N0") + "% chance of failure. A failed upgrade attempt will result in your item being downgraded or destroyed. Continue anyway?", "Really Upgrade?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (MessageBox.Show("This will cost " + UpgradeCost.ToString("N2") + " and has a " + (100 - SuccessChance).ToString("N0") + "% chance of failure. A failed upgrade attempt will result in your item being downgraded or destroyed. Continue anyway?", "Really Upgrade?", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
             // Attempt to upgrade the item
             Upgraded = true;
             PlayerTeam.Cash -= UpgradeCost;
             SoundEffects.PlaySound("CashRegister");
             Random rand = new Random();
-            double r = rand.NextDouble();
+            double r = rand.NextDouble() * 100d;
             int iNewLevel = item.Level;
             if (r <= SuccessChance) iNewLevel++;
-            else iNewLevel -= (int)Math.Floor((r - SuccessChance) / 0.15);
+            else iNewLevel -= (int)Math.Floor((r - SuccessChance) / 15d);
             if (iNewLevel >= 0) {
                 if (item is Armour) NewItem = new Armour(item, iNewLevel);
                 else NewItem = new Weapon(item, iNewLevel);

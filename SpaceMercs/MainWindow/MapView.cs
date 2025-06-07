@@ -665,6 +665,8 @@ namespace SpaceMercs.MainWindow {
                     SetupNewGame(ng);
                     view = ViewMode.ViewMap;
                     SetAOButtonsOnGUI(aoSelected);
+                    fMapViewZ = Const.InitialMapViewZ;
+                    fMapViewX = fMapViewY = 0;
                 }
                 catch (Exception ex) {
                     msgBox.PopupMessage(ex.ToString());

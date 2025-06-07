@@ -11,7 +11,7 @@ namespace SpaceMercs {
         public string Description { get { return BaseType.Description; } }
         public double Rarity { get { return BaseType.Rarity; } }
         public int Level { get { return 0; } } // Ignored here
-        public double UpgradeCost { get { return 0.0; } } // Ignored here
+        public double UpgradeCost { get { return 0d; } } // Ignored here
         public ItemType BaseType { get; private set; }
         public static bool IsMedical { get { return false; } }
         public int Recharge { get; private set; }
@@ -37,6 +37,14 @@ namespace SpaceMercs {
         }
         public void EndOfTurn() {
             if (Recharge > 0) Recharge--;
+        }
+        public double BuildDiff {
+            get {
+                double diff = BaseType.Requirements?.MinLevel ?? 0;
+                diff += Level * 3d;
+                diff += Mass / 10d; // Heavier items have more parts and are more difficult to build
+                return diff;
+            }
         }
 
         public override int GetHashCode() {

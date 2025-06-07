@@ -37,7 +37,6 @@ namespace SpaceMercs {
         public const double EncumbranceSearchPenalty = 20.0; // Penalty (proportionately applied) for searching when 100% encumbered.
         public const double PerceptionSearchRadiusBoost = 0.5; // Increase in search radius for every point of perception
         public const double MissionDifficultySearchScale = 2.0; // Every extra diff in mission reduces search chance by this.
-        public const double SkillConstructChanceModifier = 5.0; // Bonus chance to construct an item per level of skill
         public const int    WeaponSkillBase = 25; // Skill required to increase a weapon skill from zero to one. 1-2 requires another twice this, 2-3 requires another 3x etc.
         public const double EquipmentLevelCostExponent = 1.35;  // For each level the weapon quality improves, this is the power law relationship to cost
         public const double EquipmentLevelCostBaseExponent = 1.0;  // For each level the weapon quality improves, additionally multiply cost by this factor 
@@ -63,6 +62,7 @@ namespace SpaceMercs {
         public const double PropertyBonusExponent = 1.5d; // Value bonus for boosting a property e.g. Stamina, Health, exponent to make it superlinear
         public const double BaseArmourCost = 6d; // Cost per armour point, base
         public const int    MaxUtilitySkill = 16; // Highest value you can have in any utility skill
+        public const double ConstructionChanceScale = 0.9d; // Lower value means that utility skill is less impactful on build success.
 
         // Solar system parameters
         public const double MoonRadius = 1400000.0;

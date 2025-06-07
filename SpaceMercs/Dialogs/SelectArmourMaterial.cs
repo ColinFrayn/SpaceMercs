@@ -47,8 +47,8 @@ namespace SpaceMercs.Dialogs {
             lbMass.Visible = true;
             lbMass.Text = SelectedMat.MassMod.ToString();
             lbDiff.Visible = true;
-            double ccm = SelectedMat.ConstructionChanceModifier;
-            lbDiff.Text = ccm.ToString("N1") + "%";
+            double ccm = SelectedMat.ConstructionDiffModifier;
+            lbDiff.Text = $"+{ccm.ToString("N1")}";
             lbArmourLabel.Visible = true;
             lbMassLabel.Visible = true;
             lbDiffLabel.Visible = true;

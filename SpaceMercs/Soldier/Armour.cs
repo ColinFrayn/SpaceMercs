@@ -240,5 +240,14 @@ namespace SpaceMercs {
             val += (int)(scale * matval / 3.0); // Material contribution, scaled down.
             return val;
         }
+        public double BuildDiff {
+            get {
+                double diff = Type.Requirements?.MinLevel ?? 0;
+                diff += Level * 3d;
+                if (Shields > 0) diff += Shields / 20d;
+                diff += Material.MaxLevel - 1d;
+                return diff;
+            }
+        }
     }
 }

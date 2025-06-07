@@ -39,7 +39,7 @@ namespace SpaceMercs {
         }
         public double Rarity { get { return Type.Rarity * Math.Pow(Const.EquipmentLevelRarityScale, Level); } }
         public double Range { get { if (Type.IsMeleeWeapon) return Type.Range; return Type.Range * (1.0 + (Level * 0.05)) + (Mod is not null ? Mod.Range : 0); } }
-        public double Width { get { return Type.Width * (Range/Type.Range); } } // BEcause I want a constant opening angle
+        public double Width { get { return Type.Width * (Range/Type.Range); } } // Because I want a constant opening angle
         public double UpgradeCost {
             get {
                 // Do not include the Mod cost in here
@@ -141,6 +141,15 @@ namespace SpaceMercs {
         }
         public void SetHasFired() {
             Recharge = Type.Recharge;
+        }
+        public double BuildDiff {
+            get {
+                double diff = Type.Requirements?.MinLevel ?? 0;
+                diff += Level * 3d;
+                diff += Mass / 20d; // Heavier guns have more parts and are more difficult to build
+                if (Mod is not null) diff += Mod.CostMod * 2d; // Difficult to build/upgrade a modified weapon
+                return diff;
+            }
         }
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly

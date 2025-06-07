@@ -15,5 +15,6 @@ namespace SpaceMercs {
             }
             return Math.Max(0d,r);
         }
+        double BuildDiff { get; }
     }
 }
