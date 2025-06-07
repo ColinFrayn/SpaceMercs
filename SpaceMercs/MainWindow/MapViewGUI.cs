@@ -417,6 +417,10 @@ namespace SpaceMercs.MainWindow {
                 }
                 return;
             }
+            // Close existing colonyview if open
+            foreach (Form f in Application.OpenForms) {
+                if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }
+            }
             ColonyView cv = new ColonyView(PlayerTeam, RunMission, Clock);
             cv.Show();
         }

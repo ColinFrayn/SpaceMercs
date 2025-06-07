@@ -1,6 +1,4 @@
-﻿using System.Drawing.Drawing2D;
-
-namespace SpaceMercs.Dialogs {
+﻿namespace SpaceMercs.Dialogs {
     partial class UpgradeItem : Form {
         private readonly IEquippable item;
         private readonly double UpgradeCost;

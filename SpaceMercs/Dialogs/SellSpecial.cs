@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SpaceMercs.Dialogs {
+﻿namespace SpaceMercs.Dialogs {
     partial class SellSpecial : Form {
         private readonly Team _playerTeam;
         private readonly Colony _colony;
@@ -19,7 +17,8 @@ namespace SpaceMercs.Dialogs {
             cbMaxQuality.SelectedIndex = 0;
             cbWeapons.Checked = true;
             cbArmour.Checked = true;
-            cbItems.Checked = true;
+            cbItems.Checked = false;
+            cbMaterials.Checked = false;
             cbIncludeInventory.Checked = true;
             SetValues();
         }

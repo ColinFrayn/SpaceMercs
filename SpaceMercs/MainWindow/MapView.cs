@@ -612,6 +612,10 @@ namespace SpaceMercs.MainWindow {
                 case I_ViewColony:
                     if (!GalaxyMap.MapIsInitialised) return;
                     if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.BaseSize == 0) return;
+                    // Close existing colonyview if open
+                    foreach (Form f in Application.OpenForms) {
+                        if (f.GetType() == typeof(ColonyView)) { f.Close(); break; }
+                    }
                     ColonyView cv = new ColonyView(PlayerTeam, RunMission, Clock);
                     cv.Show();
                     return;

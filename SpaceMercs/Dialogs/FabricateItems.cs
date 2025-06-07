@@ -279,7 +279,8 @@
                         _ => newItem
                     };
                     double ugChance = Utils.ConstructionChance(upgradedItem.BuildDiff, TotalSkill);
-                    if (chance < ugChance) break;
+                    double ugRand = rnd.NextDouble() * 100.0;
+                    if (ugRand > ugChance) break;
                     newItem = upgradedItem;
                     lvl++;
                 } while (lvl < 6);
