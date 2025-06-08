@@ -269,11 +269,19 @@ namespace SpaceMercs {
             st.Add(cp);
 
             // Generate dropped items
-            foreach (IGrouping<IItem, IItem> g in Inventory.GroupBy(x => x)) {
-                st.Add(g.Key, g.Count());
+            Dictionary<IItem, int> inv = new Dictionary<IItem, int>(InventoryGrouped);
+            foreach ((IItem it, int count) in inv) {
+                st.Add(it, count);
             }
+            if (EquippedWeapon is not null) {
+                st.Add(EquippedWeapon);
+                EquippedWeapon = null;
+            }
+            foreach (Armour ar in EquippedArmour) {
+                st.Add(ar);
+            }
+            EquippedArmour.Clear();
             Inventory.Clear();
-
             return st;
         }
         public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
@@ -1262,13 +1270,27 @@ namespace SpaceMercs {
             if (PlayerTeam is null) return;
             foreach ((IItem it, int quantity) in _loadout) {
                 int required = quantity - CountItem(it);
-                // Ugh, a bit inefficient, but it's only called very rarely
-                while (required > 0 && PlayerTeam.Inventory.ContainsKey(it)) {
-                    PlayerTeam.Inventory[it]--;
-                    AddItem(it);
-                    required--;
+                if (PlayerTeam.Inventory.TryGetValue(it, out int avail)) {
+                    if (avail < required) required = avail;
+                    if (required == avail) PlayerTeam.Inventory.Remove(it);
+                    else PlayerTeam.Inventory[it] -= required;
+                    AddItem(it, required);
                 }
             }
+        }
+        public void SetLoadout() {
+            if (PlayerTeam is null) return;
+            // Drop excess that isn't required.
+            Dictionary<IItem, int> inv = new Dictionary<IItem, int>(InventoryGrouped);
+            foreach ((IItem it, int quantity) in inv) {
+                if (!_loadout.ContainsKey(it)) DropAll(it);
+                else {
+                    int drop = quantity - _loadout[it];
+                    if (drop > 0) DropItem(it, drop);                    
+                }
+            }
+            // In case there are any items that we don't have enough of, set the loadout
+            Refill();
         }
         public IEquippable? GetEquippedItemByName(string strName) {
             foreach (Armour ar in EquippedArmour) {

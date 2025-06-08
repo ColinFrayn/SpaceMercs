@@ -2,6 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Button to drop excess (not LO) kit on running a mission?? [TEST]
+
+Dead soldier should drop all equipment too [TEST]
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 

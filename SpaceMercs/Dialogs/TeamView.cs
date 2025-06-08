@@ -542,6 +542,14 @@ namespace SpaceMercs.Dialogs {
             }
         }
 
+        private void btLoadout_Click(object sender, EventArgs e) {
+            Soldier? s = SelectedSoldier();
+            if (s is null) return;
+            s.SetLoadout();
+            ShowSelectedSoldierDetails();
+            ivForm?.UpdateInventory();
+        }
+
         // Drag-Drop functionality
 
         private enum WindowSource { Equipment, Inventory };
@@ -565,7 +573,6 @@ namespace SpaceMercs.Dialogs {
                 dragBoxFromMouseDown = Rectangle.Empty;
             }
         }
-
         private void lbEquipped_MouseMove(object sender, MouseEventArgs e) {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
@@ -581,11 +588,9 @@ namespace SpaceMercs.Dialogs {
                 }
             }
         }
-
         private void lbEquipped_MouseUp(object sender, MouseEventArgs e) {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
-
         private void lbEquipped_DragEnter(object sender, DragEventArgs e) {
             DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
             if (das?.dob is Weapon or Armour) {
@@ -593,7 +598,6 @@ namespace SpaceMercs.Dialogs {
             }
             else e.Effect = DragDropEffects.None;
         }
-
         private void lbEquipped_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;
@@ -618,7 +622,6 @@ namespace SpaceMercs.Dialogs {
                 dragBoxFromMouseDown = Rectangle.Empty;
             }
         }
-
         private void dgInventory_MouseMove(object sender, MouseEventArgs e) {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
@@ -629,16 +632,13 @@ namespace SpaceMercs.Dialogs {
                 }
             }
         }
-
         private void dgInventory_MouseUp(object sender, MouseEventArgs e) {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
-
         private void dgInventory_DragEnter(object sender, DragEventArgs e) {
             if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
             else e.Effect = DragDropEffects.None;
         }
-
         private void dgInventory_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;
@@ -654,7 +654,6 @@ namespace SpaceMercs.Dialogs {
             if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
             else e.Effect = DragDropEffects.None;
         }
-
         private void btInventory_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;

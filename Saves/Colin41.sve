@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>21/05/2604 00:17:01</Clock>
+<Clock>21/05/2604 19:32:09</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -30275,9 +30275,453 @@
 <PRot>33211348</PRot>
 <Colony>
  <Owner>Human</Owner>
- <LastUpdate>821106949898964307</LastUpdate>
+ <LastUpdate>821548920392079995</LastUpdate>
  <LastGrowth>820455117050459718</LastGrowth>
- <NextGrowth>825543968394778886</NextGrowth>
+ <NextGrowth>825512608117242027</NextGrowth>
+ <Mercenaries>
+<Soldier Name="Boris Trafford">
+ <Level>14</Level>
+ <XP>1633786</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>14,10,8,12,16</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Infiltration Suit" Material="Composite" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Sniper Rifle" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Sniper">2567</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">3</Exp>
+  <Exp Skill="Engineer">3</Exp>
+  <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Armoursmith">4</Exp>
+  <Exp Skill="Stealth">2</Exp>
+  <Exp Skill="Bladesmith">1</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Xantha Irwin">
+ <Level>15</Level>
+ <XP>2512259</XP>
+ <Gender>Female</Gender>
+ <Race>Human</Race>
+ <Stats>13,13,14,11,9</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Archon Armour" Material="Etherealite" Level="0"/>
+<Armour Type="Military Helmet" Material="Composite" Level="0"/>
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Shotgun" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Shotgun">2478</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">6</Exp>
+  <Exp Skill="Avoidance">5</Exp>
+  <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Perception">1</Exp>
+  <Exp Skill="Stealth">2</Exp>
+ </UtilityExperience>
+</Soldier>
+<Soldier Name="Victor Ferguson">
+ <Level>14</Level>
+ <XP>1274275</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>14,12,13,10,11</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="2">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Adrenaline"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Archon Armour" Material="Adamantium" Level="0"/>
+<Armour Type="Military Helmet" Material="Metasteel" Level="2"/>
+<Armour Type="Plate Boots" Material="Composite" Level="1"/>
+<Armour Type="Gauntlets" Material="Metasteel" Level="1"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Automatic Rifle" Level="1" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Rifle">2441</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Engineer">3</Exp>
+  <Exp Skill="Bladesmith">4</Exp>
+  <Exp Skill="Perception">3</Exp>
+  <Exp Skill="Avoidance">1</Exp>
+  <Exp Skill="Armoursmith">1</Exp>
+  <Exp Skill="Stealth">2</Exp>
+ </UtilityExperience>
+</Soldier>
+ </Mercenaries>
+ <Missions>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>Artifact</Goal>
+<MissionItem Mass="0.00" Name="Grenade Launcher [Legendary]">
+<Weapon Type="Grenade Launcher" Level="5" />
+</MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>0</Reward>
+ <Diff>14</Diff>
+ <LevelCount>6</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1068402299</Seed>
+ <Size>4</Size>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="2040644340" Diff="14">
+ <Name>Enemy Ship</Name>
+ <Hull>45</Hull>
+ <Shield>0</Shield>
+ <Armour>Chameleon Plating</Armour>
+ <Seed>564082</Seed>
+ <Eqp ID="11" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="6" Active="True">Bunk Room</Eqp>
+ <Eqp ID="7" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="8" Active="True">Plasma Cannon</Eqp>
+ <Eqp ID="9" Active="True">Antimatter Cannon</Eqp>
+ <Eqp ID="10" Active="True">Antimatter Cannon</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>518.69</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1694883064</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Elementals</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>286</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1355617340</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Name="strategically important relic"></MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>263.82</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1959190332</Seed>
+ <Size>2</Size>
+ <Waves>5</Waves>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>392.24</Reward>
+ <Diff>14</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>25409721</Seed>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="501699926" Diff="15">
+ <Name>Enemy Ship</Name>
+ <Hull>56</Hull>
+ <Shield>0</Shield>
+ <Armour>Chameleon Plating</Armour>
+ <Seed>229964</Seed>
+ <Eqp ID="13" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="3" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Bunk Room</Eqp>
+ <Eqp ID="5" Active="True">Bunk Room</Eqp>
+ <Eqp ID="6" Active="True">Cabin</Eqp>
+ <Eqp ID="8" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="9" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="10" Active="True">Plasma Cannon</Eqp>
+ <Eqp ID="11" Active="True">Antimatter Cannon</Eqp>
+ <Eqp ID="12" Active="True">Antimatter Cannon</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>519.45</Reward>
+ <Diff>15</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1054951910</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="3.79" Name="Ancient Alien Emerald" Level="14"></MissionItem>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>1273.793694467443</Reward>
+ <Diff>14</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1572933580</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1826237767" Diff="14">
+ <Name>Enemy Ship</Name>
+ <Hull>56</Hull>
+ <Shield>0</Shield>
+ <Armour>Chameleon Plating</Armour>
+ <Seed>947019</Seed>
+ <Eqp ID="10" Active="True">Fusion Drive</Eqp>
+ <Eqp ID="1" Active="True">Bunk Room</Eqp>
+ <Eqp ID="2" Active="True">Bunk Room</Eqp>
+ <Eqp ID="6" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="7" Active="True">Plasma Cannon</Eqp>
+ <Eqp ID="8" Active="True">Antimatter Cannon</Eqp>
+ <Eqp ID="9" Active="True">Plasma Cannon</Eqp>
+</Ship>
+ <Enemy>Hive Spawn</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>456.23</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>966617542</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>BoardingParty</Type>
+ <Goal>KillAll</Goal>
+<Ship Seed="1719112781" Diff="14">
+ <Name>Enemy Ship</Name>
+ <Hull>46</Hull>
+ <Shield>0</Shield>
+ <Armour>Chameleon Plating</Armour>
+ <Seed>277768</Seed>
+ <Eqp ID="11" Active="True">NearLight Drive</Eqp>
+ <Eqp ID="1" Active="True">Cabin</Eqp>
+ <Eqp ID="2" Active="True">Cabin</Eqp>
+ <Eqp ID="4" Active="True">Bunk Room</Eqp>
+ <Eqp ID="6" Active="True">Cabin</Eqp>
+ <Eqp ID="7" Active="True">Large Bunk Room</Eqp>
+ <Eqp ID="9" Active="True">Plasma Cannon</Eqp>
+ <Eqp ID="10" Active="True">Antimatter Cannon</Eqp>
+</Ship>
+ <Opponent>Human</Opponent>
+ <Enemy>Pirates</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>478.53</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1167432131</Seed>
+ <Size>3</Size>
+</Mission>
+<Mission>
+ <Type>Surface</Type>
+ <Goal>KillBoss</Goal>
+ <Enemy>Mechanoids</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>365.24</Reward>
+ <Diff>14</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1770053348</Seed>
+ <Size>2</Size>
+ <Swarm>1</Swarm>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>KillAll</Goal>
+ <Enemy>Elementals</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>960.09</Reward>
+ <Diff>14</Diff>
+ <LevelCount>2</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1199471655</Seed>
+ <Size>3</Size>
+</Mission>
+ </Missions>
+ <Inventory>
+  <Inv Count="1">
+<Material Type="Uranium"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Stealth Boots" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Material Type="Composite"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Electronic Components"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Water"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Steel"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Rifle" Level="0" />
+  </Inv>
+  <Inv Count="4">
+<Material Type="Rubber"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Core Armour" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Stimulant"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Infiltrator Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Stealth Helmet" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Titanium"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Tungsten"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Carbon Fibre"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Copper"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Fabric"/>
+  </Inv>
+  <Inv Count="2">
+<Armour Type="Powered Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Carbon"/>
+  </Inv>
+  <Inv Count="3">
+<Material Type="Plastic"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Steel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Sonic Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Carbon Fibre" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Pistol" Level="0" />
+  </Inv>
+  <Inv Count="2">
+<Material Type="Kevlar"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Axe" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Material Type="Metasteel"/>
+  </Inv>
+  <Inv Count="8">
+<Material Type="Aluminium"/>
+  </Inv>
+ </Inventory>
 </Colony>
 <Radius>7,568,067</Radius>
 <ARot>112,867</ARot>
@@ -31010,16 +31454,16 @@
 </Map>
 <Team>
  <Pos>(3,0)10.1</Pos>
- <Cash>4620.697194795364</Cash>
+ <Cash>7353.102988860428</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="3" Y="29"/>
- <Health>58</Health>
- <Stamina>45</Stamina>
- <Shields>0</Shields>
- <Facing>180</Facing>
+ <Location X="16" Y="4"/>
+ <Health>56.86012429823384</Health>
+ <Stamina>31.500000000000007</Stamina>
+ <Shields>36.25</Shields>
+ <Facing>-90</Facing>
  <Level>15</Level>
- <XP>1930678</XP>
+ <XP>1933317</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,15,15,12,20</Stats>
@@ -31064,7 +31508,7 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Stealth">1</Exp>
  </UtilityExperience>
- <KillCount>1755</KillCount>
+ <KillCount>1757</KillCount>
  <ToughestKill>
 <Creature Type="Crystal Alpha">
  <Level>12</Level>
@@ -31072,13 +31516,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Tracy Nolan">
- <Location X="11" Y="19"/>
- <Health>66.01861075182683</Health>
- <Stamina>41</Stamina>
- <Shields>0</Shields>
+ <Location X="42" Y="35"/>
+ <Health>47.8757911593284</Health>
+ <Stamina>4.862830188679238</Stamina>
+ <Shields>36.25</Shields>
  <Facing>90</Facing>
  <Level>14</Level>
- <XP>1751976</XP>
+ <XP>1760364</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,12,17,17</Stats>
@@ -31088,11 +31532,8 @@
   <Inv Count="1">
 <Equipment Type="Quantum Medsystem"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="3">
 <Equipment Type="Incendiary Grenade"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <Loadout>
@@ -31120,7 +31561,8 @@
   <Exp Skill="Medic">3</Exp>
   <Exp Skill="Avoidance">2</Exp>
  </UtilityExperience>
- <KillCount>1331</KillCount>
+ <Moved/>
+ <KillCount>1342</KillCount>
  <ToughestKill>
 <Creature Type="Void Psychic">
  <Level>13</Level>
@@ -31128,13 +31570,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Mel Webster">
- <Location X="15" Y="24"/>
- <Health>56.257772736576065</Health>
- <Stamina>34</Stamina>
+ <Location X="37" Y="29"/>
+ <Health>42.361321532651765</Health>
+ <Stamina>20.834177215189882</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>14</Level>
- <XP>1754684</XP>
+ <XP>1763072</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,16,13,10</Stats>
@@ -31146,9 +31588,6 @@
   </Inv>
   <Inv Count="3">
 <Equipment Type="Incendiary Grenade"/>
-  </Inv>
-  <Inv Count="2">
-<Equipment Type="Frag Grenade"/>
   </Inv>
  </Inventory>
  <Loadout>
@@ -31174,7 +31613,7 @@
   <Exp Skill="Scavenging">10</Exp>
   <Exp Skill="Engineer">5</Exp>
  </UtilityExperience>
- <KillCount>800</KillCount>
+ <KillCount>803</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Deathworm">
  <Level>15</Level>
@@ -31182,13 +31621,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="20" Y="5"/>
- <Health>51.381694298892114</Health>
- <Stamina>34.6</Stamina>
+ <Location X="27" Y="32"/>
+ <Health>58</Health>
+ <Stamina>41</Stamina>
  <Shields>0</Shields>
- <Facing>354.28940686250036</Facing>
+ <Facing>0</Facing>
  <Level>15</Level>
- <XP>1897890</XP>
+ <XP>1903639</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,9,26,12,16</Stats>
@@ -31218,14 +31657,14 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Pistol">157</Exp>
-  <Exp Type="Sniper">2881</Exp>
+  <Exp Type="Sniper">2891</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">12</Exp>
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>660</KillCount>
+ <KillCount>666</KillCount>
  <ToughestKill>
 <Creature Type="Greater Fire Dragon">
  <Level>13</Level>
@@ -31239,7 +31678,7 @@
  <Shields>0</Shields>
  <Facing>0</Facing>
  <Level>13</Level>
- <XP>925742</XP>
+ <XP>927632</XP>
  <Gender>Male</Gender>
  <Race>Elithiri</Race>
  <Stats>18,11,5,13,16</Stats>
@@ -31285,14 +31724,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Xander Green">
- <Location X="28" Y="6"/>
- <Health>50.25617813443963</Health>
- <Stamina>22.285714285714278</Stamina>
- <Shields>0</Shields>
- <Facing>-90</Facing>
- <Shred>4.00</Shred>
+ <Location X="38" Y="32"/>
+ <Health>39.981707364776646</Health>
+ <Stamina>32.160654827968905</Stamina>
+ <Shields>20</Shields>
+ <Facing>0</Facing>
  <Level>13</Level>
- <XP>929371</XP>
+ <XP>937759</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>10,12,10,15,15</Stats>
@@ -31329,12 +31767,10 @@
   <Exp Skill="Perception">1</Exp>
   <Exp Skill="Medic">2</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>6</KillCount>
+ <KillCount>9</KillCount>
  <ToughestKill>
-<Creature Type="Mercenary">
- <Level>15</Level>
- <OverrideRace>Human</OverrideRace>
+<Creature Type="Water Elemental">
+ <Level>14</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
@@ -31370,7 +31806,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="79853"/>
+  <Relation Race="Human" Value="81247"/>
   <Relation Race="Ursalon" Value="6395"/>
   <Relation Race="Grey" Value="6494"/>
   <Relation Race="Ogrish" Value="6189"/>
@@ -31469,7 +31905,7 @@
   <Inv Count="7">
 <Material Type="Voidskin"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="17">
 <Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
@@ -31484,7 +31920,7 @@
   <Inv Count="18">
 <Material Type="Incendiary Bulb"/>
   </Inv>
-  <Inv Count="17">
+  <Inv Count="22">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
  </Inventory>
@@ -31590,14 +32026,14 @@
  <Item>NearLight Drive</Item>
  <Item>Adamantium Plating</Item>
  <Item>Heavy Plasma Rifle</Item>
+ <Item>Elite Combat Suit</Item>
+ <Item>Predator Suit</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Composite</Material>
  <Material>Mithril</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
- <Item>Elite Combat Suit</Item>
- <Item>Predator Suit</Item>
 </Research>
 </Race>
 <Race Name="Gokan">
@@ -31668,14 +32104,14 @@
  <Item>Heavy Flamer</Item>
  <Item>Heavy Plasma Rifle</Item>
  <Item>Katana</Item>
+ <Item>Chainsword</Item>
+ <Item>Fusion Drive</Item>
+ <Item>Elite Combat Suit</Item>
  <Material>Adamantium</Material>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Mithril</Material>
  <Material>Composite</Material>
- <Item>Chainsword</Item>
- <Item>Fusion Drive</Item>
- <Item>Elite Combat Suit</Item>
 </Research>
 </Race>
 <Race Name="Elithiri">
@@ -31753,13 +32189,13 @@
  <Item>Fusion Drive</Item>
  <Item>Katana</Item>
  <Item>Chainsword</Item>
+ <Item>NearLight Drive</Item>
+ <Item>Elite Combat Suit</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
  <Material>Composite</Material>
- <Item>NearLight Drive</Item>
- <Item>Elite Combat Suit</Item>
 </Research>
 </Race>
 <Race Name="Ogrish">
@@ -31834,14 +32270,14 @@
  <Item>Heavy Plasma Rifle</Item>
  <Item>Chainsword</Item>
  <Item>Fusion Drive</Item>
- <Material>Nanomesh</Material>
- <Material>Metasteel</Material>
- <Material>Adamantium</Material>
- <Material>Composite</Material>
  <Item>Elite Combat Suit</Item>
  <Item>Predator Suit</Item>
  <Item>Katana</Item>
  <Item>NearLight Drive</Item>
+ <Material>Nanomesh</Material>
+ <Material>Metasteel</Material>
+ <Material>Adamantium</Material>
+ <Material>Composite</Material>
 </Research>
 </Race>
 <Race Name="Insectoid">
@@ -31913,11 +32349,11 @@
  <Item>Freeze Blaster</Item>
  <Item>Heavy Plasma Rifle</Item>
  <Item>Fusion Drive</Item>
+ <Item>Elite Combat Suit</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Composite</Material>
- <Item>Elite Combat Suit</Item>
 </Research>
 </Race>
 <Race Name="Grey">
@@ -31992,11 +32428,11 @@
  <Item>Heavy Plasma Rifle</Item>
  <Item>Chainsword</Item>
  <Item>Fusion Drive</Item>
+ <Item>Katana</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Composite</Material>
- <Item>Katana</Item>
 </Research>
 </Race>
 <Race Name="Ursalon">
@@ -32070,12 +32506,12 @@
  <Item>Katana</Item>
  <Item>Chainsword</Item>
  <Item>Fusion Drive</Item>
+ <Item>Elite Combat Suit</Item>
  <Material>Metasteel</Material>
  <Material>Nanomesh</Material>
  <Material>Adamantium</Material>
  <Material>Etherealite</Material>
  <Material>Composite</Material>
- <Item>Elite Combat Suit</Item>
 </Research>
 </Race>
 </Races>

@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgSoldiers = new DataGridView();
             SoldierName = new DataGridViewTextBoxColumn();
             SoldierRace = new DataGridViewTextBoxColumn();
@@ -86,7 +86,6 @@
             lbEncumber = new Label();
             btDrop = new Button();
             btEquip = new Button();
-            label1 = new Label();
             lbCapacity = new Label();
             btDropAll = new Button();
             label13 = new Label();
@@ -108,6 +107,8 @@
             label9 = new Label();
             lbInsufficientBerths = new Label();
             cdPickColour = new ColorDialog();
+            label1 = new Label();
+            btLoadout = new Button();
             ((System.ComponentModel.ISupportInitialize)dgSoldiers).BeginInit();
             gbSoldier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbExperience).BeginInit();
@@ -127,14 +128,14 @@
             dgSoldiers.AllowUserToResizeRows = false;
             dgSoldiers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSoldiers.Columns.AddRange(new DataGridViewColumn[] { SoldierName, SoldierRace, SoldierLevel, SoldierStatus });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgSoldiers.DefaultCellStyle = dataGridViewCellStyle2;
             dgSoldiers.Location = new Point(14, 116);
             dgSoldiers.Margin = new Padding(4, 3, 4, 3);
             dgSoldiers.MultiSelect = false;
@@ -787,12 +788,13 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btLoadout);
+            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(dgInventory);
             groupBox1.Controls.Add(lbEquipped);
             groupBox1.Controls.Add(lbEncumber);
             groupBox1.Controls.Add(btDrop);
             groupBox1.Controls.Add(btEquip);
-            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(lbCapacity);
             groupBox1.Controls.Add(btDropAll);
             groupBox1.Controls.Add(label13);
@@ -882,10 +884,10 @@
             // 
             lbEncumber.BorderStyle = BorderStyle.FixedSingle;
             lbEncumber.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lbEncumber.Location = new Point(199, 498);
+            lbEncumber.Location = new Point(213, 474);
             lbEncumber.Margin = new Padding(6, 2, 6, 2);
             lbEncumber.Name = "lbEncumber";
-            lbEncumber.Size = new Size(58, 30);
+            lbEncumber.Size = new Size(58, 25);
             lbEncumber.TabIndex = 44;
             lbEncumber.Text = "100%";
             lbEncumber.TextAlign = ContentAlignment.MiddleCenter;
@@ -911,18 +913,6 @@
             btEquip.Text = "Equip";
             btEquip.UseVisualStyleBackColor = true;
             btEquip.Click += btEquip_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 9F);
-            label1.Location = new Point(187, 474);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(84, 15);
-            label1.TabIndex = 43;
-            label1.Text = "Encumbrance";
-            label1.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lbCapacity
             // 
@@ -1164,6 +1154,29 @@
             cdPickColour.Color = Color.Blue;
             cdPickColour.SolidColorOnly = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 9F);
+            label1.Location = new Point(170, 477);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 15);
+            label1.TabIndex = 47;
+            label1.Text = "Enc%";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // btLoadout
+            // 
+            btLoadout.Location = new Point(170, 504);
+            btLoadout.Margin = new Padding(4, 3, 4, 3);
+            btLoadout.Name = "btLoadout";
+            btLoadout.Size = new Size(101, 25);
+            btLoadout.TabIndex = 48;
+            btLoadout.Text = "Set Loadout";
+            btLoadout.UseVisualStyleBackColor = true;
+            btLoadout.Click += btLoadout_Click;
+            // 
             // TeamView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1251,7 +1264,6 @@
         private Button btDrop;
         private Button btEquip;
         private Label lbEncumber;
-        private Label label1;
         private Label lbCapacity;
         private Label label13;
         private Label lbWeight;
@@ -1296,5 +1308,7 @@
         private DataGridViewTextBoxColumn Item;
         private DataGridViewTextBoxColumn Count;
         private DataGridViewTextBoxColumn LO;
+        private Label label1;
+        private Button btLoadout;
     }
 }
