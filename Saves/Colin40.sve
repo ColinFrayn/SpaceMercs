@@ -11172,7 +11172,7 @@
 <Weapon Type="Grenade Launcher" Level="0" />
   </Inv>
   <Inv Count="2">
-<Weapon Type="Dark Grenadier" Level="1" />
+<Weapon Type="Plasma Grenadier" Level="1" />
   </Inv>
   <Inv Count="5">
 <Weapon Type="Heavy Grenade Launcher" Level="0" />
@@ -14013,8 +14013,8 @@
 <Mission>
  <Type>Mines</Type>
  <Goal>Artifact</Goal>
-<MissionItem Mass="0.00" Name="Dark Grenadier [Epic]">
-<Weapon Type="Dark Grenadier" Level="4" />
+<MissionItem Mass="0.00" Name="Plasma Grenadier [Epic]">
+<Weapon Type="Plasma Grenadier" Level="4" />
 </MissionItem>
  <Opponent>Ogrish</Opponent>
  <Enemy>Bandits</Enemy>
@@ -15896,7 +15896,7 @@
  <Item>Sonic Grenade</Item>
  <Item>Poison Grenade</Item>
  <Item>Plasma Grenade</Item>
- <Item>Dark Grenadier</Item>
+ <Item>Plasma Grenadier</Item>
  <Item>Heavy Chainsword</Item>
  <Item>Heavy Grenade Launcher</Item>
  <Item>Advanced Antimatter Core</Item>
@@ -16126,7 +16126,7 @@
  <Item>Adaptive Plating</Item>
  <Item>Gattling Gun</Item>
  <Item>Triple Shotgun</Item>
- <Item>Dark Grenadier</Item>
+ <Item>Plasma Grenadier</Item>
  <Item>Slugger</Item>
  <Item>Grenade Launcher</Item>
  <Item>Slug Gun</Item>

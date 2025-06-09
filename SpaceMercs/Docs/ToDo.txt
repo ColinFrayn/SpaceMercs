@@ -2,9 +2,9 @@
 ToDo List
 -------------------------------------------------
 
-Button to drop excess (not LO) kit on running a mission?? [TEST]
+Test grenade throwers (get a new Merc?)
 
-Dead soldier should drop all equipment too [TEST]
+Ice creatures (material for building ice weapons)
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

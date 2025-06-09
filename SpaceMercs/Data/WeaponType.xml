@@ -460,8 +460,8 @@
     <Rarity>12</Rarity>
     <Speed>18</Speed>
     <Range Colour="1.0,0.0,0.0">6</Range>
-    <Damage Type="Fire">3+4</Damage>
-    <Area Shape="Cone" Width="1.1"/>
+    <Damage Type="Fire">4+4</Damage>
+    <Area Shape="Cone" Width="1.3"/>
     <Desc>A flame thrower</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -485,8 +485,8 @@
     <Rarity>22</Rarity>
     <Speed>18</Speed>
     <Range Colour="0.0,0.1,1.0">6</Range>
-    <Damage Type="Cold">3+3</Damage>
-    <Area Shape="Cone" Width="1.1"/>
+    <Damage Type="Cold">4+4</Damage>
+    <Area Shape="Cone" Width="1.3"/>
     <Desc>A jet thrower that emits a stream of supercooled liquid</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -523,8 +523,8 @@
     <Rarity>22</Rarity>
     <Speed>20</Speed>
     <Range Colour="1.0,0.7,0.0">6</Range>
-    <Damage Type="Fire">4+5</Damage>
-    <Area Shape="Cone" Width="1.2"/>
+    <Damage Type="Fire">5+5</Damage>
+    <Area Shape="Cone" Width="1.3"/>
     <Desc>A cone-attack weapon that shoots a jet of superheated plasma</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -560,7 +560,7 @@
     <Speed>20</Speed>
     <Range Colour="0.9,0.6,0.0">6</Range>
     <Damage Type="Fire">6+6</Damage>
-    <Area Shape="Cone" Width="1.2"/>
+    <Area Shape="Cone" Width="1.4"/>
     <Desc>A cone-attack weapon that shoots a jet of unnaturally hot chemicals derived from the literal flames of hell.</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>8</Noise>
@@ -593,15 +593,15 @@
     <Rarity>32</Rarity>
     <Speed>22</Speed>
     <Range Colour="0.8,0.2,0.0">7</Range>
-    <Damage Type="Fire">6+6</Damage>
-    <Area Shape="Cone" Width="1.8"/>
+    <Damage Type="Fire">7+7</Damage>
+    <Area Shape="Cone" Width="1.9"/>
     <Desc>A heavy weapon that shoots a jet of superheated napalm</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>10</Noise>
     <Unmodifiable/>
     <ItemEffect Name="Heavy Flamer">
       <Effect Name="Burning">
-        <Duration>2</Duration>
+        <Duration>3</Duration>
         <Damage Type="Fire">8</Damage>
       </Effect>
     </ItemEffect>
@@ -628,14 +628,14 @@
     <Speed>25</Speed>
     <Range Colour="0.8,0.2,0.0">7.1</Range>
     <Damage Type="Fire">8+8</Damage>
-    <Area Shape="Cone" Width="1.8"/>
+    <Area Shape="Cone" Width="2.0"/>
     <Desc>A heavy weapon that shoots a jet of superheated plasma</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>11</Noise>
     <Unmodifiable/>
     <ItemEffect Name="Heavy Plasmajet">
       <Effect Name="Burning">
-        <Duration>2</Duration>
+        <Duration>3</Duration>
         <Damage Type="Fire">10</Damage>
       </Effect>
     </ItemEffect>
@@ -663,7 +663,7 @@
     <Speed>25</Speed>
     <Range Colour="0.8,0.2,0.0">7.2</Range>
     <Damage Type="Fire">10+10</Damage>
-    <Area Shape="Cone" Width="1.8"/>
+    <Area Shape="Cone" Width="2.0"/>
     <Desc>A heavy weapon that shoots a jet of unnaturally hot chemicals straight from the flames of hell.</Desc>
     <Sound>Flamethrower</Sound>
     <Noise>11</Noise>
@@ -700,6 +700,7 @@
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
     <Damage>4+4</Damage>
+    <Damage Type="Fire">1+0</Damage>
     <Area Shape="Grenade" Size="2"/>
     <Shred>2</Shred>
     <Desc>An automatically reloading grenade launcher.</Desc>
@@ -724,16 +725,23 @@
       <Material Name="Copper" Amount="1"/>
     </Materials>
   </WeaponType>
-  <WeaponType Name="Dark Grenadier" Class="Launcher">
+  <WeaponType Name="Plasma Grenadier" Class="Launcher">
     <Mass>9.0</Mass>
     <Cost>550</Cost>
     <Rarity>22</Rarity>
     <Speed>20</Speed>
     <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
-    <Damage>5+5</Damage>
+    <Damage>4+4</Damage>
+    <Damage Type="Fire">2+2</Damage>
     <Area Shape="Grenade" Size="2"/>
-    <Desc>A grenade launcher that spits mysterious dark matter explosives.</Desc>
+    <ItemEffect Name="Plasma Grenade">
+      <Effect Name="Burning">
+        <Duration>2</Duration>
+        <Damage Type="Fire">2</Damage>
+      </Effect>
+    </ItemEffect>
+    <Desc>A grenade launcher that spits highly flammable explosives.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
     <Recharge>1</Recharge>
@@ -749,7 +757,50 @@
       <MinLevel>9</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
+      <Material Name="Incendiary Bulb" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Facility>Armoury</Facility>
+      <Relations Name="Ogrish">2</Relations>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Cryo Grenadier" Class="Launcher">
+    <Mass>9.0</Mass>
+    <Cost>550</Cost>
+    <Rarity>22</Rarity>
+    <Speed>20</Speed>
+    <Shred>2</Shred>
+    <Range Accuracy="0" Length="0.2" Speed="0.3">14</Range>
+    <Damage>3+3</Damage>
+    <Damage Type="Cold">2+2</Damage>
+    <Area Shape="Grenade" Size="2"/>
+    <ItemEffect Name="Cryo Grenade">
+      <Effect Name="Frozen">
+        <Duration>2</Duration>
+        <Damage Type="Cold">2</Damage>
+        <StatMods>
+          <Mod Stat="Agility">-2</Mod>
+        </StatMods>
+        <SpeedMod>0.8</SpeedMod>
+      </Effect>
+    </ItemEffect>
+    <Desc>A grenade launcher that spits cryo-laden explosives that freeze enemies.</Desc>
+    <Sound>GrenadeLauncher</Sound>
+    <Noise>12</Noise>
+    <Recharge>1</Recharge>
+    <Unmodifiable/>
+    <Materials>
+      <Material Name="Steel" Amount="6"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
+      <Material Name="Electronic Components" Amount="1"/>
+    </Materials>
+    <Requirements>
+      <Prerequisite>Grenade launcher</Prerequisite>
+      <MinLevel>9</MinLevel>
+      <MinPop>55</MinPop>
+      <CashCost>150</CashCost>
+      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ogrish">2</Relations>
     </Requirements>
@@ -762,6 +813,7 @@
     <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
     <Damage>6+7</Damage>
+    <Damage Type="Fire">2+1</Damage>
     <Area Shape="Grenade" Size="2"/>
     <Desc>A heavy grenade launcher that spits high-explosive heavy grenade rounds.</Desc>
     <Sound>GrenadeLauncher</Sound>
@@ -1250,6 +1302,27 @@
     <Sound>ShotgunAndReload</Sound>
     <Shred>1</Shred>
     <Noise>11</Noise>
+    <Requirements>
+      <MinLevel>10</MinLevel>
+      <Unresearchable/>
+    </Requirements>
+  </WeaponType>
+  <WeaponType Name="Void Grenadier" Class="Launcher">
+    <Mass>9.0</Mass>
+    <Cost>2500</Cost>
+    <Rarity>999</Rarity>
+    <Speed>20</Speed>
+    <Shred>5</Shred>
+    <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
+    <Damage>4+4</Damage>
+    <Damage Type="Void">3+3</Damage>
+    <Area Shape="Grenade" Size="2"/>
+    <Shred>2</Shred>
+    <Desc>An automatically reloading grenade launcher firing mysterious void projectiles.</Desc>
+    <Sound>GrenadeLauncher</Sound>
+    <Noise>12</Noise>
+    <Recharge>1</Recharge>
+    <Unmodifiable/>
     <Requirements>
       <MinLevel>10</MinLevel>
       <Unresearchable/>

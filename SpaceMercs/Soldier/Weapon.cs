@@ -118,6 +118,7 @@ namespace SpaceMercs {
         public Weapon(XmlNode xml) {
             Level = xml.GetAttributeInt("Level");
             string strType = xml.GetAttributeText("Type");
+            if (strType == "Dark Grenadier") strType = "PlasmaGrenadier"; // Backwards compatibility
             Type = StaticData.GetWeaponTypeByName(strType) ?? throw new Exception($"Could not identify weapon type {strType}");
             if (Type == null) throw new Exception("Could not ID weapon type : " + strType);
             string strMod = xml.GetAttributeText("Mod");
