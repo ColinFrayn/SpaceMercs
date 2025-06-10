@@ -1,0 +1,174 @@
+﻿<Data>
+  <CreatureType Name="Frost Wolf">
+    <LevelRange>1,8</LevelRange>
+    <Scale>0.9</Scale>
+    <Attack>8</Attack>
+    <Defence>8</Defence>
+    <Health>11</Health>
+    <Stamina>16</Stamina>
+    <Armour>9</Armour>
+    <Frequency>2</Frequency>
+    <Desc>A vicious canine with thick white fur</Desc>
+    <Weapons>
+      <Weapon Weight="1">Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="75"/>
+      <Resistance Type="Fire" Value="-50"/>
+    </Resistances>
+    <Tex Size="2">1,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Frost Spider">
+    <LevelRange>1,10</LevelRange>
+    <Attack>12</Attack>
+    <Defence>11</Defence>
+    <Health>10</Health>
+    <Stamina>16</Stamina>
+    <Armour>9</Armour>
+    <Frequency>2</Frequency>
+    <Desc>A ferocious, camouflaged arachnid predator.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Paralysing Bite</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="75"/>
+      <Resistance Type="Fire" Value="-25"/>
+    </Resistances>
+    <Tex Size="2">3,1</Tex>
+  </CreatureType>
+  <CreatureType Name="Yeti">
+    <LevelRange>2,11</LevelRange>
+    <Scale>1.2</Scale>
+    <Attack>13</Attack>
+    <Defence>10</Defence>
+    <Health>12</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <Frequency>3</Frequency>
+    <Desc>A large humanoid creature with strong, muscular claws</Desc>
+    <Weapons>
+      <Weapon Weight="1">Claws</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="75"/>
+      <Resistance Type="Fire" Value="-25"/>
+    </Resistances>
+    <Tex Size="2">1,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Frost Salamander">
+    <Size>1</Size>
+    <LevelRange>3,13</LevelRange>
+    <Attack>12</Attack>
+    <Defence>10</Defence>
+    <Health>12</Health>
+    <Stamina>16</Stamina>
+    <Armour>20</Armour>
+    <Frequency>2</Frequency>
+    <Desc>A large white lizard with a thick scaly skin</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Breath</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="75"/>
+      <Resistance Type="Fire" Value="-30"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.1">Chitin</Item>
+      <Item Amount="0.05">Cryoleather</Item>
+    </Scavenge>
+    <Tex Size="2">3,3</Tex>
+  </CreatureType>
+  <CreatureType Name="Ice Spineling">
+    <LevelRange>4,14</LevelRange>
+    <Attack>14</Attack>
+    <Defence>12</Defence>
+    <Health>14</Health>
+    <Stamina>18</Stamina>
+    <Armour>15</Armour>
+    <Frequency>1</Frequency>
+    <Desc>A small quadruped that shoots shards of ice</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Shards</Weapon>
+    </Weapons>
+    <Scavenge>
+      <Item Amount="0.05">Cryoleather</Item>
+    </Scavenge>
+    <Resistances>
+      <Resistance Type="Cold" Value="100"/>
+      <Resistance Type="Fire" Value="-50"/>
+    </Resistances>
+    <Tex Size="2">1,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Snow Dragonling">
+    <Size>1</Size>
+    <Scale>1.0</Scale>
+    <LevelRange>5,14</LevelRange>
+    <Attack>14</Attack>
+    <Defence>11</Defence>
+    <Health>22</Health>
+    <Stamina>18</Stamina>
+    <Armour>20</Armour>
+    <MovementCost>0.8</MovementCost>
+    <Desc>A human-sized dragonling that breathes shards of ice.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Bolt</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="80"/>
+      <Resistance Type="Fire" Value="-25"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="0.5">Cryoleather</Item>
+      <Item Amount="0.2">Frost Gland</Item>
+    </Scavenge>
+    <Tex Size="2">3,5</Tex>
+  </CreatureType>
+  <CreatureType Name="Snow Dragon">
+    <Size>2</Size>
+    <Scale>2.2</Scale>
+    <LevelRange>6,10</LevelRange>
+    <Attack>18</Attack>
+    <Defence>12</Defence>
+    <Health>33</Health>
+    <Stamina>22</Stamina>
+    <Armour>32</Armour>
+    <Desc>A large, menacing dragon that breathes a cone of cold.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="100"/>
+      <Resistance Type="Fire" Value="-15"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="1.4">Cryoleather</Item>
+      <Item Amount="1.0">Frost Gland</Item>      
+    </Scavenge>
+    <Boss/>
+    <Tex Size="4">1,11</Tex>
+  </CreatureType>
+  <CreatureType Name="Greater Snow Dragon">
+    <Size>3</Size>
+    <Scale>2.8</Scale>
+    <LevelRange>10,15</LevelRange>
+    <Attack>22</Attack>
+    <Defence>14</Defence>
+    <Health>53</Health>
+    <Stamina>22</Stamina>
+    <Armour>34</Armour>
+    <Desc>A large, menacing dragon that breathes a cone of cold.</Desc>
+    <Weapons>
+      <Weapon Weight="1">Ice Blast</Weapon>
+    </Weapons>
+    <Resistances>
+      <Resistance Type="Cold" Value="100"/>
+      <Resistance Type="Fire" Value="-10"/>
+    </Resistances>
+    <Scavenge>
+      <Item Amount="2.0">Cryoleather</Item>
+      <Item Amount="1.5">Frost Gland</Item>
+    </Scavenge>
+    <Boss/>
+    <Tex Size="4">1,7</Tex>
+  </CreatureType>
+</Data>

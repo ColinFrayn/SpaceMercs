@@ -140,12 +140,13 @@ namespace SpaceMercs.Dialogs {
             }
             tpMercenaries.Show();
             lbImproveRelations.Hide();
-            string[] arrRowMerc = new string[4];
+            string[] arrRowMerc = new string[5];
             foreach (Soldier merc in colony.MercenariesList()) {
                 arrRowMerc[0] = merc.Name;
-                arrRowMerc[1] = merc.Level.ToString();
-                arrRowMerc[2] = merc.Race.Name;
-                arrRowMerc[3] = (merc.HireCost() * PriceMod).ToString("N2");
+                arrRowMerc[1] = merc.SoldierClass.ToString();
+                arrRowMerc[2] = merc.Level.ToString();
+                arrRowMerc[3] = merc.Race.Name;
+                arrRowMerc[4] = (merc.HireCost() * PriceMod).ToString("N2");
                 dgMercenaries.Rows.Add(arrRowMerc);
                 dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
             }

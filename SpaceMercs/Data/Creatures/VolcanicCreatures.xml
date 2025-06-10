@@ -67,7 +67,7 @@
     <Stamina>16</Stamina>
     <Armour>20</Armour>
     <Frequency>2</Frequency>
-    <Desc>A large red lizard with a think skin</Desc>
+    <Desc>A large red lizard with a thick skin</Desc>
     <Weapons>
       <Weapon Weight="1">Bite</Weapon>
     </Weapons>
@@ -138,7 +138,7 @@
     </Weapons>
     <Resistances>
       <Resistance Type="Fire" Value="100"/>
-      <Resistance Type="Cold" Value="-25"/>
+      <Resistance Type="Cold" Value="-15"/>
     </Resistances>
     <Scavenge>
       <Item Amount="1.5">Vulcanin</Item>
@@ -162,7 +162,7 @@
     </Weapons>
     <Resistances>
       <Resistance Type="Fire" Value="100"/>
-      <Resistance Type="Cold" Value="-25"/>
+      <Resistance Type="Cold" Value="-10"/>
     </Resistances>
     <Scavenge>
       <Item Amount="3.0">Vulcanin</Item>

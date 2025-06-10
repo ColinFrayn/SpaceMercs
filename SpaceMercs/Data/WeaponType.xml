@@ -505,14 +505,14 @@
       <Material Name="Steel" Amount="8"/>
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="5"/>
-      <Material Name="Copper" Amount="1"/>
+      <Material Name="Frost Gland" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>5</MinLevel>
       <CashCost>50</CashCost>
       <PlanetType>Ice</PlanetType>
       <Material Name="Industrial Chemicals" Amount="2"/>
-      <Material Name="Water" Amount="4"/>
+      <Material Name="Frost Gland" Amount="1"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">2</Relations>
     </Requirements>
@@ -699,7 +699,7 @@
     <Rarity>12</Rarity>
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
-    <Damage>4+4</Damage>
+    <Damage>3+3</Damage>
     <Damage Type="Fire">1+0</Damage>
     <Area Shape="Grenade" Size="2"/>
     <Shred>2</Shred>
@@ -743,7 +743,7 @@
     </ItemEffect>
     <Desc>A grenade launcher that spits highly flammable explosives.</Desc>
     <Sound>GrenadeLauncher</Sound>
-    <Noise>12</Noise>
+    <Noise>11</Noise>
     <Recharge>1</Recharge>
     <Unmodifiable/>
     <Materials>
@@ -778,20 +778,20 @@
         <Duration>2</Duration>
         <Damage Type="Cold">2</Damage>
         <StatMods>
-          <Mod Stat="Agility">-2</Mod>
+          <Mod Stat="Agility">-3</Mod>
         </StatMods>
-        <SpeedMod>0.8</SpeedMod>
+        <SpeedMod>0.75</SpeedMod>
       </Effect>
     </ItemEffect>
     <Desc>A grenade launcher that spits cryo-laden explosives that freeze enemies.</Desc>
     <Sound>GrenadeLauncher</Sound>
-    <Noise>12</Noise>
+    <Noise>11</Noise>
     <Recharge>1</Recharge>
     <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
-      <Material Name="Crystals" Amount="1"/>
+      <Material Name="Frost Gland" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
@@ -799,7 +799,7 @@
       <MinLevel>9</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
-      <Material Name="Crystals" Amount="2"/>
+      <Material Name="Frost Gland" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Relations Name="Ogrish">2</Relations>
@@ -1383,6 +1383,16 @@
     <Shred>1</Shred>
     <Hidden/>
   </WeaponType>
+  <WeaponType Name="Ice Shards">
+    <Speed>12</Speed>
+    <Range DropOff="0.5" Speed="0.65" Length="0.3" Colour="0.5,1.0,0.2">9</Range>
+    <Damage>3+3</Damage>
+    <Damage Type="Cold">1+0</Damage>
+    <Sound>SwordSlice</Sound>
+    <Recoil>0.4</Recoil>
+    <Delay>230</Delay>
+    <Hidden/>
+  </WeaponType>
   <WeaponType Name="Poisonous Bite" Class="Melee">
     <Speed>11</Speed>
     <Range>1</Range>
@@ -1393,6 +1403,22 @@
       <Effect Name="Bite Poison">
         <Duration>2</Duration>
         <Damage Type="Poison">2</Damage>
+      </Effect>
+    </ItemEffect>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Paralysing Bite" Class="Melee">
+    <Speed>13</Speed>
+    <Range>1</Range>
+    <Damage>3+3</Damage>
+    <Damage Type="Poison">1+1</Damage>
+    <Sound>Bite</Sound>
+    <ItemEffect Name="Paralysing Poison">
+      <Effect Name="Paralysis">
+        <StatMods>
+          <Mod Stat="Agility">-3</Mod>
+        </StatMods>
+        <SpeedMod>0.7</SpeedMod>
       </Effect>
     </ItemEffect>
     <Hidden/>
@@ -1707,6 +1733,22 @@
           <Mod Stat="Agility">-5</Mod>
         </StatMods>
         <SpeedMod>0.6</SpeedMod>
+      </Effect>
+    </ItemEffect>
+    <Sound>Flamethrower</Sound>
+    <Hidden/>
+  </WeaponType>
+  <WeaponType Name="Ice Breath">
+    <Speed>18</Speed>
+    <Range DropOff="0.5" Speed="0.7" Length="0.3" Colour="0.0,0.2,1.0">6</Range>
+    <Damage Type="Cold">4+4</Damage>
+    <ItemEffect Name="Ice Breath">
+      <Effect Name="Frozen">
+        <Duration>3</Duration>
+        <StatMods>
+          <Mod Stat="Agility">-2</Mod>
+        </StatMods>
+        <SpeedMod>0.8</SpeedMod>
       </Effect>
     </ItemEffect>
     <Sound>Flamethrower</Sound>

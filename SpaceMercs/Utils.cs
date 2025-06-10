@@ -511,7 +511,7 @@ namespace SpaceMercs {
             if (!bAddEquipment) rnum = 1.0;
             if (!bIncludeWeapons) rnum = rnd.NextDouble() * 0.8d + 0.2d;
             if (rnum < 0.2) { // Random weapon
-                return GenerateRandomWeapon(rnd, lvl, race);
+                return GenerateRandomWeaponByLevel(rnd, lvl, race);
             }
             if (rnum < 0.7) { // Random armour
                 return GenerateRandomArmour(rnd, lvl, race);
@@ -546,12 +546,20 @@ namespace SpaceMercs {
             }
         }
 
-        public static Weapon? GenerateRandomWeapon(Random rnd, int SoldierLevel, Race? race) {
+        public static Weapon? GenerateRandomWeaponForSoldier(Random rnd, Soldier s) {
             List<WeaponType> wts = new List<WeaponType>();
             double trar = 0.0;
             foreach (WeaponType tp in StaticData.WeaponTypes) {
-                if (!tp.CanBuild(race)) continue;
-                if ((tp.Requirements?.MinLevel ?? 1) <= SoldierLevel && tp.IsUsable) {
+                if (!tp.CanBuild(s.Race)) continue;
+                if (s.SoldierClass is SoldierType.Skirmisher or SoldierType.Assault && tp.WClass != WeaponType.WeaponClass.Rifle) continue;
+                if (s.SoldierClass is SoldierType.Assassin or SoldierType.Brute && tp.WClass != WeaponType.WeaponClass.Melee) continue;
+                if (s.SoldierClass is SoldierType.Heavy && tp.WClass != WeaponType.WeaponClass.Heavy) continue;
+                if (s.SoldierClass is SoldierType.Grenadier && tp.WClass != WeaponType.WeaponClass.Launcher) continue;
+                if (s.SoldierClass is SoldierType.Pistoleer && tp.WClass != WeaponType.WeaponClass.Pistol) continue;
+                if (s.SoldierClass is SoldierType.Chemicals && tp.WClass != WeaponType.WeaponClass.Emitter) continue;
+                if (s.SoldierClass is SoldierType.Sniper && tp.WClass != WeaponType.WeaponClass.Sniper) continue;
+                if (s.SoldierClass is SoldierType.Enforcer && tp.WClass != WeaponType.WeaponClass.Shotgun) continue;
+                if ((tp.Requirements?.MinLevel ?? 1) <= s.Level && tp.IsUsable) {
                     wts.Add(tp);
                     trar += tp.Rarity;
                 }
@@ -567,8 +575,38 @@ namespace SpaceMercs {
                 WeaponType tp = wts[pos];
                 if (tp != null) {
                     int wpLevel = 0;
-                    if (SoldierLevel > 2) {
-                        while (wpLevel < 3 && rnd.NextDouble() < 0.5 && (tp.Requirements?.MinLevel ?? 1) + (wpLevel * 3) <= SoldierLevel) wpLevel++;
+                    if (s.Level > 2) {
+                        while (wpLevel < 3 && rnd.NextDouble() < 0.5 && (tp.Requirements?.MinLevel ?? 1) + (wpLevel * 3) <= s.Level) wpLevel++;
+                    }
+                    return new Weapon(tp, wpLevel);
+                }
+            }
+            return null;
+        }
+
+        public static Weapon? GenerateRandomWeaponByLevel(Random rnd, int level, Race? race) {
+            List<WeaponType> wts = new List<WeaponType>();
+            double trar = 0.0;
+            foreach (WeaponType tp in StaticData.WeaponTypes) {
+                if (!tp.CanBuild(race)) continue;
+                if ((tp.Requirements?.MinLevel ?? 1) <= level && tp.IsUsable) {
+                    wts.Add(tp);
+                    trar += tp.Rarity;
+                }
+            }
+            if (wts.Any()) {
+                double rar = rnd.NextDouble() * trar;
+                int pos = 0;
+                while (pos < wts.Count && rar > wts[pos].Rarity) {
+                    if (pos == wts.Count - 1) break;
+                    rar -= wts[pos].Rarity;
+                    pos++;
+                }
+                WeaponType tp = wts[pos];
+                if (tp != null) {
+                    int wpLevel = 0;
+                    if (level > 2) {
+                        while (wpLevel < 3 && rnd.NextDouble() < 0.5 && (tp.Requirements?.MinLevel ?? 1) + (wpLevel * 3) <= level) wpLevel++;
                     }
                     return new Weapon(tp, wpLevel);
                 }
@@ -698,6 +736,63 @@ namespace SpaceMercs {
                 return new Armour(atChosen, mtChosen, 5); // Legendary
             }
             return new Armour(atChosen, mtChosen, 4); // Epic
+        }
+
+        public static SoldierType GetClassFromStats(int[] Stats, Random rand) {
+            if (Stats.Length != 5) throw new Exception("Illegal stat array!");
+            int str = Stats[0];
+            int agi = Stats[1];
+            int ins = Stats[2];
+            int tou = Stats[3];
+            int end = Stats[4];
+            bool TopInsight = ins > str && ins > agi && ins > tou && ins > end;
+            bool TopStrength = str > agi && str > ins && str > tou && str > end;
+            int r = rand.Next(100);
+            if (TopInsight) {
+                if (str + 3 > ins) {
+                    if (r < 40) return SoldierType.Assault;
+                    if (r < 46) return SoldierType.Grenadier;
+                    if (r < 52) return SoldierType.Chemicals;
+                    return SoldierType.Heavy;
+                }
+                if (str + 3 < ins) {
+                    if (r < 60 && end > 10) return SoldierType.Sniper;
+                    return SoldierType.Skirmisher;
+                }
+                if (r < 60 && (end <= 12 || str > ins || tou > 12)) return SoldierType.Skirmisher;
+                return SoldierType.Sniper;
+            }
+            if (ins > str) {
+                if (str > 15) return SoldierType.Heavy;
+                if (tou > agi + 3) {
+                    if (r < 50) return SoldierType.Assault;
+                    else return SoldierType.Enforcer;
+                }
+                if (agi > tou + 3) {
+                    if (r < 50) return SoldierType.Skirmisher;
+                    if (r < 70 && end > 9) return SoldierType.Sniper;
+                    if (r < 85) return SoldierType.Grenadier;
+                    return SoldierType.Chemicals;
+                }
+            }
+            if (TopStrength) {
+                if (ins > 12) return SoldierType.Heavy;
+                if (agi > tou + 3) return SoldierType.Assassin;
+                if (tou > agi + 3) return SoldierType.Brute;
+                if (r < 30) return SoldierType.Assassin;
+                if (r < 60) return SoldierType.Brute;
+            }
+            if (str + 5 < ins && end > 9) {
+                if (r < 40 && end > 9) return SoldierType.Sniper;
+                if (r < 80) return SoldierType.Skirmisher;
+                return SoldierType.Pistoleer;
+            }
+            // Not great at anything. Random generic class
+            if (r < 35) return SoldierType.Skirmisher;
+            if (r < 70) return SoldierType.Assault;
+            if (r < 82) return SoldierType.Grenadier;
+            if (r < 94) return SoldierType.Chemicals;
+            return SoldierType.Pistoleer;
         }
 
         public static string UtilitySkillToDesc(UtilitySkill sk) {

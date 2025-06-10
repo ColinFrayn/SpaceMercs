@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
@@ -197,6 +198,7 @@ namespace SpaceMercs {
                 foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(rc) && m.ArmourMod > 0)) {
                     if (mat2.IsScavenged || !mat2.IsArmourMaterial || mat2 == Material) continue; // Not usable
                     if (mat2.UnitCost < Material.UnitCost) continue; // not better
+                    if ((mat2.Requirements?.MinLevel ?? 0d) * 2d > entityLevel) continue; // Too advanced
                     // Is this material better (more valuable) and the cheapest such upgrade possible?
                     if (matNew is null || mat2.UnitCost <= matNew.UnitCost) {
                         matNew = mat2;
@@ -210,6 +212,54 @@ namespace SpaceMercs {
                 ArmourType atnew = Type;
                 foreach (ArmourType at2 in StaticData.ArmourTypes) {
                     if (!at2.CanBuild(rc)) continue;
+                    if ((at2.Requirements?.MinLevel ?? 0d) * 2d > entityLevel) continue; // Too advanced
+                    if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && at2.Cost < atnew.Cost) {
+                        atnew = at2;
+                    }
+                }
+                if (atnew == Type) return false;
+                Type = atnew;
+                return true;
+            }
+        }
+        public bool UpgradeArmourForSoldier(Soldier s) {
+            // Upgrade Level, Material or Type
+            int r = RandomNumberGenerator.GetInt32(100);
+            if (r < 18) {
+                if (Level < 3 && s.Level > 2 && Level * 2 < s.Level) {
+                    Level++;
+                    return true;
+                }
+                else return false;
+            }
+            else if (r < 75) { // Upgrade mats, if possible
+                MaterialType? matNew = null;
+                // Pick the next best material
+                foreach (MaterialType mat2 in StaticData.Materials.Where(m => m.CanBuild(s.Race) && m.ArmourMod > 0)) {
+                    if (mat2.IsScavenged || !mat2.IsArmourMaterial || mat2 == Material) continue; // Not usable
+                    if (mat2.UnitCost < Material.UnitCost) continue; // Not better
+                    if ((mat2.Requirements?.MinLevel ?? 0d) * 2d > s.Level) continue; // Too advanced
+                    if (mat2.MaxLevel < Type.MinMatLvl) continue; // Material not sufficiently advanced
+                    if ((s.SoldierClass is Soldier.SoldierType.Sniper or Soldier.SoldierType.Assassin) && mat2.UnitMass > Material.UnitMass) continue; // Don't use heavy armour materials for nimble soldiers
+                    if ((s.SoldierClass is Soldier.SoldierType.Heavy or Soldier.SoldierType.Assault or Soldier.SoldierType.Brute) && mat2.ArmourMod < Material.ArmourMod) continue; // Don't use weak armour materials for tough soldiers
+                    // Is this material better (more valuable) and the cheapest such upgrade possible?
+                    if (matNew is null || mat2.UnitCost <= matNew.UnitCost) {
+                        matNew = mat2;
+                    }
+                }
+                if (matNew is null) return false;
+                Material = matNew;
+                return true;
+            }
+            else { // Upgrade type, if possible
+                ArmourType atnew = Type;
+                foreach (ArmourType at2 in StaticData.ArmourTypes) {
+                    if (!at2.CanBuild(s.Race)) continue;
+                    if ((at2.Requirements?.MinLevel ?? 0d) * 2d > s.Level) continue; // Too advanced
+                    if (Material.MaxLevel < at2.MinMatLvl) continue; // Material not sufficiently advanced
+                    if ((s.SoldierClass is Soldier.SoldierType.Sniper or Soldier.SoldierType.Assassin) && at2.GetUtilitySkill(Soldier.UtilitySkill.Stealth) < Type.GetUtilitySkill(Soldier.UtilitySkill.Stealth)) continue; // Light classes need stealth
+                    if ((s.SoldierClass is Soldier.SoldierType.Heavy or Soldier.SoldierType.Assault or Soldier.SoldierType.Brute) && at2.BaseArmour < Type.BaseArmour) continue; // Don't use weak armour for tough soldiers
+                    if (s.SoldierClass is Soldier.SoldierType.Skirmisher && at2.Attack < Type.Attack) continue; // Skirmishers should have high attack
                     if (at2.Locations.SetEquals(Type.Locations) && at2.Cost > Type.Cost && at2.Cost < atnew.Cost) {
                         atnew = at2;
                     }

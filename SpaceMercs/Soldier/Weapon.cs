@@ -18,7 +18,9 @@ namespace SpaceMercs {
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 if (Range > 1) sb.AppendLine("Range : " + Range.ToString("0.##") + "m");
                 foreach ((DamageType dt, (double bdam, double dmod)) in Type.Damage) {
-                    sb.AppendLine($"Damage ({dt}) : {bdam.ToString("0.#")} + R{dmod.ToString("0.#")}");
+                    if (bdam > 0 && dmod > 0) sb.AppendLine($"Damage ({dt}) : {bdam.ToString("0.#")} + R{dmod.ToString("0.#")}");
+                    else if (bdam > 0) sb.AppendLine($"Damage ({dt}) : {bdam.ToString("0.#")}");
+                    else if (dmod > 0) sb.AppendLine($"Damage ({dt}) : R{dmod.ToString("0.#")}");
                 }
                 sb.AppendLine("Stamina : " + StaminaCost.ToString("0.#"));
                 sb.AppendLine($"Accuracy : {AccuracyBonus} - {Type.DropOff}/m");

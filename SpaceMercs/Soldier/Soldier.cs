@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using Microsoft.Windows.Themes;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;
@@ -14,6 +15,7 @@ using static SpaceMercs.Delegates;
 namespace SpaceMercs {
     public class Soldier : IEntity {
         public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception }
+        public enum SoldierType { Skirmisher, Assault, Pistoleer, Enforcer, Assassin, Brute, Grenadier, Sniper, Heavy, Chemicals, None };
 
         // Generic stuff
         public Team? PlayerTeam; // Could be null (if an unhired mercenary)
@@ -65,6 +67,7 @@ namespace SpaceMercs {
                 return true;
             }
         }
+        public SoldierType SoldierClass { get; private set; } = SoldierType.None;
 
         // Statistics
         public int KillCount { get; private set; }
@@ -598,7 +601,7 @@ namespace SpaceMercs {
         private bool bShieldsInTexture = false;
 
         // CTORs
-        public Soldier(string strName, Race rc, int Str, int Agi, int Int, int Tou, int End, GenderType G, int ilvl, int randseed) {
+        public Soldier(string strName, Race rc, int Str, int Agi, int Int, int Tou, int End, GenderType G, int ilvl, int randseed, SoldierType soldierClass = SoldierType.None) {
             Name = strName;
             Race = rc;
             BaseStrength = Str;
@@ -619,6 +622,7 @@ namespace SpaceMercs {
             PrimaryColor = Color.Blue;
             Shred = 0d;
             TrainingCost = 100;
+            SoldierClass = soldierClass;
         }
         public Soldier(XmlNode xml, Team? pt) {
             PlayerTeam = pt;
@@ -663,6 +667,7 @@ namespace SpaceMercs {
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
             Shields = xml.SelectNodeDouble("Health", MaxHealth);
             Shred = xml.SelectNodeDouble("Shred", 0d);
+            SoldierClass = xml.SelectNodeEnum<SoldierType>("Class", SoldierType.None);
 
             // Facing - backwards compatibility in case it's an angle or an enum
             if (xml.SelectSingleNode("Facing") != null) {
@@ -784,8 +789,9 @@ namespace SpaceMercs {
             CalculateMaxStats();
         }
         public static Soldier GenerateRandomMercenary(Colony cl, Random rand) {
+            int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
             int[] Stats = new int[5];
-            int Bonus = Math.Max(rand.Next(8) - 2, 0); // Some mercs are just better than others
+            int Bonus = iLevel + Math.Max(rand.Next(9) - 3, 0); // Some mercs are just better than others
             Stats[0] = cl.Owner.Strength;
             Stats[1] = cl.Owner.Agility;
             Stats[2] = cl.Owner.Insight;
@@ -796,12 +802,12 @@ namespace SpaceMercs {
             for (int n = 0; n < 5; n++) {
                 if (Stats[n] < 5) Stats[n] = 5;
             }
+            SoldierType soldierClass = Utils.GetClassFromStats(Stats, rand);
             Race r = cl.Location.GetRandomRace(rand);
             GenderType gt = r.GenerateRandomGender(rand);
             string strName = r.GenerateRandomName(rand, gt);
-            int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
 
-            Soldier s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next());
+            Soldier s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next(), soldierClass);
             int thisExp = ExperienceRequiredToReachLevel(s.Level);
             s.Experience = thisExp + rand.Next(s.ExperienceRequiredToReachNextLevel() - thisExp);
             s.GenerateRandomItems();
@@ -893,6 +899,8 @@ namespace SpaceMercs {
 
             if (HasMoved) file.WriteLine(" <Moved/>");
 
+            if (SoldierClass != SoldierType.None) file.WriteLine($" <Class>{SoldierClass.ToString()}</Class>");
+
             // Statistics
             if (KillCount > 0) file.WriteLine($" <KillCount>{KillCount}</KillCount>");
             if (ToughestKill is not null) {
@@ -909,17 +917,10 @@ namespace SpaceMercs {
             double dBase = Level * Math.Pow(Const.MercenaryCostBase, Const.MercenaryCostExponent * Level) * Const.MercenaryCostScale;
 
             // Bonus cost if they are better than average
-            int Bonus = (BaseStrength + BaseAgility + BaseInsight + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Insight + Race.Toughness + Race.Endurance);
+            int Bonus = (BaseStrength + BaseAgility + BaseInsight + BaseToughness + BaseEndurance) - (Race.Strength + Race.Agility + Race.Insight + Race.Toughness + Race.Endurance + Level);
             if (Bonus < 1) Bonus = 0;
             else Bonus++;
             double dStats = 1.0 + ((Bonus * Bonus) / 30.0);
-
-            // Bonuses for large individual scores
-            if (BaseStrength - Race.Strength > 3) dStats += Math.Pow(BaseStrength - Race.Strength - 2, 2) / 25.0;
-            if (BaseAgility - Race.Agility > 3) dStats += Math.Pow(BaseAgility - Race.Agility - 2, 2) / 25.0;
-            if (BaseInsight - Race.Insight > 3) dStats += Math.Pow(BaseInsight - Race.Insight - 2, 2) / 25.0;
-            if (BaseToughness - Race.Toughness > 3) dStats += Math.Pow(BaseToughness - Race.Toughness - 2, 2) / 25.0;
-            if (BaseEndurance - Race.Endurance > 3) dStats += Math.Pow(BaseEndurance - Race.Endurance - 2, 2) / 25.0;
 
             // Additional cost for the mercenary's equipment
             double dKit = EquipmentCost();
@@ -1072,7 +1073,7 @@ namespace SpaceMercs {
         private void GenerateRandomItems() {
             // Firstly, generate a weapon
             do {
-                EquippedWeapon = Utils.GenerateRandomWeapon(rnd, Level, Race);
+                EquippedWeapon = Utils.GenerateRandomWeaponForSoldier(rnd, this);
             } while (EquippedWeapon is null || EquippedWeapon.StaminaCost > MaxStamina);
 
             // Next generate armour
@@ -1140,22 +1141,13 @@ namespace SpaceMercs {
             // Not a low level soldier, so pick more suitable armour choices for the specialisation that they have
             int r = RandomNumberGenerator.GetInt32(100);
             Func<ArmourType, double>? selector = null;
-            switch (EquippedWeapon.Type.WClass) {
-                case WeaponType.WeaponClass.Heavy:
-                    selector = AssessChestArmour_Heavy;
-                    break;
-                case WeaponType.WeaponClass.Melee:
-                    if (r > 40) selector = AssessChestArmour_Assassin; // Light, stealthy melee
-                    else selector = AssessChestArmour_Brute; // Heavy melee
-                    break;
-                case WeaponType.WeaponClass.Sniper:
-                    selector = AssessChestArmour_Sniper;
-                    break;
-                default:
-                    if (r > 40) selector = AssessChestArmour_Skirmisher; // Light, agile assault
-                    selector = AssessChestArmour_Assault; // Heavy assault
-                    break;
-
+            switch (SoldierClass) {
+                case SoldierType.Heavy: selector = AssessChestArmour_Heavy; break;
+                case SoldierType.Assassin: selector = AssessChestArmour_Assassin; break; // Light, stealthy melee
+                case SoldierType.Brute: selector = AssessChestArmour_Brute; break; // Heavy melee
+                case SoldierType.Sniper: selector = AssessChestArmour_Sniper; break;
+                case SoldierType.Assault: selector = AssessChestArmour_Assault; break;
+                default: selector = AssessChestArmour_Skirmisher; break;
             }
 
             // Get base armour for this location, suitable for the level of this Soldier
@@ -1164,11 +1156,7 @@ namespace SpaceMercs {
             foreach (ArmourType at in StaticData.ArmourTypes) {
                 if (!at.CanBuild(Race)) continue;
                 if (!at.Locations.Contains(BodyPart.Chest)) continue;
-                int lDiff = (at.Requirements?.MinLevel ?? 0) - Level;
-                if (lDiff >= 0) continue; // not high enough level, or barely high enough. Mercs don't get cutting-edge armour.
-                if (at.Cost > (Level * 60)) continue;
-                if (lDiff == -1 && RandomNumberGenerator.GetInt32(10) > 4) continue; // Barely high enough level, unlikely to have one yet (50%)
-                if (lDiff == -2 && Level > 1 && RandomNumberGenerator.GetInt32(10) > 7) continue; // Not massively over-levelled, slightly unlikely to have one yet (20%)
+                if (((at.Requirements?.MinLevel ?? 0) * 3) > Level * 2) continue;
                 double score = selector(at);
                 if (score > best) {
                     best = score;
@@ -1182,12 +1170,22 @@ namespace SpaceMercs {
             foreach (MaterialType m in StaticData.Materials.Where(mat => mat.CanBuild(Race))) {
                 // Pick a decent material
                 if (!m.IsArmourMaterial || m.MaxLevel <= 1) continue;
-                // Should be allowed by this soldier
-                if (choice.MinMatLvl >= m.MaxLevel) continue;
+                // Can be used in this armour?
+                if (choice.MinMatLvl > m.MaxLevel) continue;
+                // Too high level?
+                if ((m.MaxLevel-2) * 4 > Level) continue;
+                if ((m.Requirements?.MinLevel ?? 0) * 3 > Level * 2) continue;
+                // Class-appropriate
+                if (SoldierClass is SoldierType.Sniper or SoldierType.Assassin) {
+                    if (m.MassMod > 1.0) continue;
+                }
+                if (SoldierClass is SoldierType.Heavy or SoldierType.Assault or SoldierType.Brute) {
+                    if (m.ArmourMod < 1.0) continue;
+                }
                 // Pick the most common matching material
                 if (mat is null || m.Rarity > mat.Rarity) mat = m;
                 Armour tempArmour = new Armour(choice, mat, 0);
-                if (tempArmour.Cost > (Level * 150)) continue;
+                if (tempArmour.Cost > (Math.Pow(1.4, Level) * 60)) continue;
             }
             if (mat is null) return null;
             return new Armour(choice, mat, 0);
@@ -1227,9 +1225,9 @@ namespace SpaceMercs {
             // Otherwise upgrade what's in the last slot we found
             else {
                 // Is this armour already good enough?
-                if (ar.Cost > 100d * Math.Pow(1.4, Level)) return 1; //If we have great armour, there's less need to improve stuff
+                if (ar.Cost > 60d * Math.Pow(1.3, Level)) return 1;
                 // Otherwise, attempt to upgrade it
-                if (!ar.UpgradeArmour(Race, Level)) return 0;
+                if (!ar.UpgradeArmourForSoldier(this)) return 0;
             }
             CalculateMaxStats();
             return ar?.Type?.Size ?? 0; // Upgrade points spent

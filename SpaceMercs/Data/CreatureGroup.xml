@@ -56,6 +56,10 @@
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Ship,SpaceHulk</Locations>
     <QuantityScale>1.3</QuantityScale>
   </CreatureGroup>
+  <CreatureGroup Name="Ice Creatures">
+    <Filename>IceCreatures.xml</Filename>
+    <Locations>Ice</Locations>
+  </CreatureGroup>
   <CreatureGroup Name="Mechanoids">
     <Filename>Mechanoids.xml</Filename>
     <Locations>Rocky,Desert,Volcanic,Oceanic,Ice,Ship,SpaceHulk</Locations>

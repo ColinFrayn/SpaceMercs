@@ -2,10 +2,10 @@
   <CreatureType Name="Hive Drone">
     <LevelRange>5,20</LevelRange>
     <Scale>0.8</Scale>
-    <Attack>13</Attack>
-    <Defence>12</Defence>
-    <Armour>22</Armour>
-    <Health>12</Health>
+    <Attack>11</Attack>
+    <Defence>10</Defence>
+    <Armour>15</Armour>
+    <Health>11</Health>
     <Stamina>18</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
@@ -23,7 +23,7 @@
     <Scale>0.9</Scale>
     <MovementCost>0.8</MovementCost>
     <LevelRange>6,21</LevelRange>
-    <Attack>14</Attack>
+    <Attack>13</Attack>
     <Defence>13</Defence>
     <Armour>18</Armour>
     <Health>14</Health>
@@ -46,9 +46,9 @@
     <Size>1</Size>
     <Scale>1.1</Scale>
     <LevelRange>6,21</LevelRange>
-    <Attack>17</Attack>
+    <Attack>16</Attack>
     <Defence>14</Defence>
-    <Armour>28</Armour>
+    <Armour>24</Armour>
     <Health>17</Health>
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
@@ -73,7 +73,7 @@
     <Attack>17</Attack>
     <Defence>13</Defence>
     <Armour>18</Armour>
-    <Health>17</Health>
+    <Health>16</Health>
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
@@ -92,13 +92,13 @@
   </CreatureType>
   <CreatureType Name="Hive Poisoner">
     <LevelRange>5,21</LevelRange>
-    <Attack>12</Attack>
-    <Defence>11</Defence>
-    <Armour>21</Armour>
-    <Health>13</Health>
+    <Attack>11</Attack>
+    <Defence>9</Defence>
+    <Armour>17</Armour>
+    <Health>12</Health>
     <Stamina>16</Stamina>
     <Frequency>2</Frequency>
-    <Desc>A vicious alien hive beast that emits a toxic cloud on death</Desc>
+    <Desc>A bulbous alien hive beast that emits a toxic cloud on death</Desc>
     <Weapons>
       <Weapon Weight="1">Claws</Weapon>
     </Weapons>
@@ -126,12 +126,12 @@
   </CreatureType>
   <CreatureType Name="Hive Predator">
     <Size>1</Size>
-    <Scale>1.1</Scale>
+    <Scale>1.2</Scale>
     <LevelRange>8,22</LevelRange>
     <Attack>19</Attack>
     <Defence>14</Defence>
-    <Armour>25</Armour>
-    <Health>18</Health>
+    <Armour>23</Armour>
+    <Health>20</Health>
     <Stamina>22</Stamina>
     <Interact/>
     <Desc>A large and vicious hive beast</Desc>
@@ -151,8 +151,8 @@
     <Size>2</Size>
     <MovementCost>1.5</MovementCost>
     <LevelRange>11,23</LevelRange>
-    <Attack>22</Attack>
-    <Defence>14</Defence>
+    <Attack>21</Attack>
+    <Defence>13</Defence>
     <Armour>28</Armour>
     <Health>30</Health>
     <Stamina>22</Stamina>

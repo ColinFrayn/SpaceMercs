@@ -234,9 +234,9 @@ namespace SpaceMercs {
         public const double TradeRouteColonyGrowthRate = 0.75; // Colonies grow more quickly when system has trade route(s) (modify delay by this amount)
         public const double UnconnectedColonyCostMod = 1.5; // Everything is more expensive (and valuable) in distant systems without trade routes
         public const int    LongEnoughGapToResetColonyInventory = 365; // Number of days after which we just throw away the old inventory
-        public const double MercenaryCostScale = 4.0;  // Base price scale of a mercenary, not including kit
-        public const double MercenaryCostBase = 1.16;  // Base for exponential price calculation for a mercenary
-        public const double MercenaryCostExponent = 2.0;  // Exponent scale for exponential price calculation for a mercenary
+        public const double MercenaryCostScale = 6.0;  // Base price scale of a mercenary, not including kit
+        public const double MercenaryCostBase = 1.18;  // Base for exponential price calculation for a mercenary
+        public const double MercenaryCostExponent = 1.8;  // Exponent scale for exponential price calculation for a mercenary
         public const double MercenaryKitValueScale = 1.0; // Mercenary kit is discounted by this amount
         public const int    MerchantStockResetDuration = 50;  // When completely resettign a merchant's store, how many days worth of incoming stock do you generate?
         public const double UpgradeCostModifier = 1.2; // To upgrade an item by one level

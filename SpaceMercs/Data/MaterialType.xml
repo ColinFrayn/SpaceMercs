@@ -283,6 +283,17 @@
     </BonusArmour>
     <Desc>Vulcanin is fashioned from the skin of extremely rare fire-resistant creatures, and makes a tough armour.</Desc>
   </MaterialType>
+  <MaterialType Name="Cryoleather">
+    <MassMod>1.1</MassMod>
+    <UnitCost>55.0</UnitCost>
+    <ArmourMod>1.6</ArmourMod>
+    <Rarity>0.001</Rarity>
+    <Scavenged/>
+    <BonusArmour>
+      <Bonus Type="Cold" Amount="5"/>
+    </BonusArmour>
+    <Desc>Cryoleather is fashioned from the skin of extremely rare cold-resistant creatures, and makes a tough armour.</Desc>
+  </MaterialType>
   <MaterialType Name="Xenolite">
     <MassMod>1.1</MassMod>
     <UnitCost>58.0</UnitCost>
@@ -358,6 +369,13 @@
     <UnitMass>1.0</UnitMass>
     <Scavenged/>
     <Desc>The highly volatile organ from a fire-breathing creature.</Desc>
+  </MaterialType>
+  <MaterialType Name="Frost Gland">
+    <UnitCost>2.5</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Scavenged/>
+    <Desc>A cold, pulsating blue organ from a cold-dwelling creature.</Desc>
   </MaterialType>
   <MaterialType Name="Demon Blood">
     <UnitCost>15.0</UnitCost>
