@@ -14,7 +14,7 @@ using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
-        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Avoidance, Stealth, Scavenging, Perception }
+        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Miner, Avoidance, Stealth, Scavenging, Perception }
         public enum SoldierType { Skirmisher, Assault, Pistoleer, Enforcer, Assassin, Brute, Grenadier, Sniper, Heavy, Chemicals, None };
 
         // Generic stuff

@@ -1,5 +1,6 @@
 ﻿using SpaceMercs.Items;
 using System.Xml;
+using static SpaceMercs.Planet;
 
 namespace SpaceMercs {
     public class MaterialType : IResearchable {
@@ -15,12 +16,15 @@ namespace SpaceMercs {
         public Requirements? Requirements { get; private set; }
         public bool IsArmourMaterial { get { return (ArmourMod > 0.0); } }
         public IReadOnlyDictionary<Soldier.UtilitySkill, int> SkillBoosts { get; private set; }
-        public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
+        public readonly IDictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
         public double ConstructionDiffModifier { get { return (MaxLevel - 1) + (IsScavenged ? 0.5d : ((Requirements?.MinLevel ?? 0d) * 0.15d)); } }
         public int GetUtilitySkill(Soldier.UtilitySkill sk) {
             if (SkillBoosts.ContainsKey(sk)) return SkillBoosts[sk];
             return 0;
         }
+        public int NodeMin { get; private set; } // Minimum level of resource node
+        public int NodeMax { get; private set; } // Maximum level of resource node
+        public readonly ICollection<PlanetType> PlanetTypes = new HashSet<PlanetType>();
 
         public MaterialType(XmlNode xml) {
             Name = xml.GetAttributeText("Name");
@@ -53,6 +57,26 @@ namespace SpaceMercs {
                 }
             }
             SkillBoosts = new Dictionary<Soldier.UtilitySkill, int>(skillBoostsTemp);
+
+            // Check for possibility of this material being in a resource node
+            XmlNode? nRes = xml.SelectSingleNode("Node");
+            if (nRes is not null) {
+                NodeMin = nRes.GetAttributeInt("LevelMin", 0);
+                NodeMax = nRes.GetAttributeInt("LevelMax", 999);
+                string strTypes = nRes.GetAttributeText("Type", string.Empty);
+                string[] types = strTypes.Split(',');
+                foreach (string type in types) {
+                    PlanetType? ptp = Enum.Parse<Planet.PlanetType>(type);
+                    if (ptp == null) {
+                        throw new Exception($"Could not identify required planet type \"{type}\"");
+                    }
+                    PlanetTypes.Add(ptp.Value);
+                }
+            }
+            else {
+                NodeMin = NodeMax = 0;
+            }
+
             Requirements = null;
         }
 

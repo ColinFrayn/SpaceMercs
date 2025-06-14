@@ -179,6 +179,15 @@ namespace SpaceMercs {
                 AddCreatureWithoutReset(cr);
             }
 
+            // Resource Nodes
+            XmlNode? xmlr = xml.SelectSingleNode("Resources");
+            if (xmlr is not null) {
+                foreach (XmlNode xr in xmlr.SelectNodesToList("ResourceNode")) {
+                    ResourceNode rn = new ResourceNode(xr, this);
+                    AddResourceNode(rn);
+                }
+            }
+
             Items.Clear();
             // Item stashes
             XmlNode? xmli = xml.SelectSingleNode("Items"); // Old format
@@ -258,6 +267,15 @@ namespace SpaceMercs {
                 }
             }
             file.WriteLine("</Creatures>");
+
+            // Save resource nodes
+            file.WriteLine("<Resources>");
+            foreach (IEntity en in Entities.Keys) {
+                if (en is ResourceNode rn) {
+                    rn.SaveToFile(file);
+                }
+            }
+            file.WriteLine("</Resources>");
 
             // Save item stashes
             if (Items.Count > 0) {
@@ -1106,6 +1124,11 @@ namespace SpaceMercs {
                     EntityMap[x, y] = cr;
                 }
             }
+        }
+        private void AddResourceNode(ResourceNode rn) {
+            if (Entities.ContainsKey(rn)) throw new Exception("Attempting to add duplicate resource node");
+            Entities.TryAdd(rn, 1);
+            EntityMap[rn.X, rn.Y] = rn;
         }
         private bool CreatureCanGo(Creature cr, int x, int y) {
             for (int cy = y; cy < y + cr.Size; cy++) {
@@ -1980,6 +2003,15 @@ namespace SpaceMercs {
             foreach (Soldier s in ParentMission.Soldiers) {
                 s.AddExperience(exp);
             }
+        }
+        public void DestroyNode(ResourceNode rn) {
+            Entities.TryRemove(new KeyValuePair<IEntity, byte>(rn, 1));
+            if (EntityMap[rn.X, rn.Y] == null) throw new Exception("Attempting to remove resource node from empty cell");
+            EntityMap[rn.X, rn.Y] = null;
+
+            // Drop materials
+            Stash st = rn.GenerateStash();
+            AddToStashAtPosition(rn.X, rn.Y, st);
         }
         public void KillSoldier(Soldier s) {
             // Remove soldier from Team & Mission

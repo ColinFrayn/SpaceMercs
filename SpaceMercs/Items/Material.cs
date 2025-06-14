@@ -2,7 +2,7 @@
 using System.Xml;
 
 namespace SpaceMercs {
-    class Material : IItem {
+    internal class Material : IItem {
         public string Name { get { return BaseType.Name; } }
         public string Description { get { return BaseType.Description; } }
         public double Mass { get { return BaseType.UnitMass; } }

@@ -196,6 +196,11 @@ namespace SpaceMercs {
         public const bool   EnableCreatureMeleeDefenceBonus = false; // If true then melee creatures get a defence bonus agaisnt melee attackers
         public const bool   EnableSoldierMeleeDefenceBonus = false; // If true then melee soldiers get a defence bonus agaisnt melee attackers
 
+        // Resource nodes
+        public const double ResourceNodeHealth = 20d; // HP of a raw resource node at level 0
+        public const double ResourceNodeLevelArmourScale = 1.1d; // Increase in armour per level
+        public const double ResourceNodeArmour = 40d; // Base armour of a resource node at level 0
+
         // Miscellaneous
         public const double InitialCash = 50.0;
         public const int    MaxItemLevel = 5;

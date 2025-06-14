@@ -2,9 +2,13 @@
 ToDo List
 -------------------------------------------------
 
-Maybe make ship levels smaller? How?
+Do a full recon for all equipment costs vs. material costs and tweak so that there are no easy wins
 
-Resource nodes (maybe as IEntity?? Or Creatures?) in maps. Should have level ranges etc. Can harvest by attacking? Drops materials.
+Resource nodes:
+- Autogen the nodes in relevant levels when generating MissionLevel (Caves, Mines, Surface)
+- Harvest by attacking
+- Drops materials modified by Mining Utility skill (need to feed that through somehow)
+-- Miner skill should probably also increase damage.
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
