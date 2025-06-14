@@ -46,7 +46,7 @@ namespace SpaceMercs {
         public const double MaxCarryBase = 6.0; // Affects the maximum amount soldiers can carry before encumbrance affects their stamina regen rate
         public const double ArmourCostExponent = 4.5d; // Affects cost scaling for armour based on how much better it is than the base
         public const double ArmourCostMultiplier = 2d; // Affects cost for armour based on how much better the shields are than the base
-        public const double ShieldCostMultiplier = 6d; // Affects cost for armour based on how much better the shields are than the base
+        public const double ShieldCostMultiplier = 2d; // Affects cost for armour based on how many shields it has
         public const double MassCostMultiplier = 15d; // Affects cost for armour based on how much lighter it is than the base
         public const double MassCostExponent = 0.8d; // Affects cost for armour based on how much lighter it is than the base
         public const double ShieldValueExponent = 1.4d; // Shield value increases nonlinearly
@@ -193,6 +193,8 @@ namespace SpaceMercs {
         public const double MeleeEncumbranceAttackPenalty = 8d; // Penalty to melee attack when fully encumbered.
         public const double MeleeEncumbranceDefencePenalty = 8d; // Penalty to defence when fully encumbered and attacked in melee.
         public const double DiagonalMeleePenalty = -5d; // Penalty for attacking diagonally with a short melee weapon
+        public const bool   EnableCreatureMeleeDefenceBonus = false; // If true then melee creatures get a defence bonus agaisnt melee attackers
+        public const bool   EnableSoldierMeleeDefenceBonus = false; // If true then melee soldiers get a defence bonus agaisnt melee attackers
 
         // Miscellaneous
         public const double InitialCash = 50.0;

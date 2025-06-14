@@ -10,6 +10,7 @@ namespace SpaceMercs {
         public int Health { get; private set; } // Bonus
         public int Stamina { get; private set; } // Bonus
         public int Shields { get; private set; } // Bonus
+        public int ShieldRegen { get; private set; } // Bonus
         public int Attack { get; private set; } // Bonus
         public int Defence { get; private set; } // Bonus
         public double Speed { get; private set; } // Divides movment cost -> higher number = faster
@@ -33,7 +34,11 @@ namespace SpaceMercs {
             Endurance = xml.SelectNodeInt("Endurance", 0);
             Health = xml.SelectNodeInt("Health", 0);
             Stamina = xml.SelectNodeInt("Stamina", 0);
-            Shields = xml.SelectNodeInt("Shields", 0);
+            XmlNode? xs = xml.SelectSingleNode("Shields");
+            if (xs is not null) {
+                Shields = xml.SelectNodeInt("Shields", 0);
+                ShieldRegen = xs.GetAttributeInt("Regen", Shields/4);
+            }
             Attack = xml.SelectNodeInt("Attack", 0);
             Defence = xml.SelectNodeInt("Defence", 0);
             BaseArmour = xml.SelectNodeInt("BaseArmour", 0);

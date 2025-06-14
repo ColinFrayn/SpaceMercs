@@ -329,10 +329,10 @@ namespace SpaceMercs {
                 // Melee defending against melee
                 if (to.EquippedWeapon is not null && to.EquippedWeapon.Type.IsMeleeWeapon) {
                     // Target is wielding a melee weapon and being attacked in melee. Add a defence bonus.
-                    if (to is Creature cr && cr.IsAlert) {
+                    if (Const.EnableCreatureMeleeDefenceBonus && to is Creature cr && cr.IsAlert) {
                         def += cr.Level;
                     }
-                    else if (to is Soldier sd) {
+                    else if (Const.EnableSoldierMeleeDefenceBonus && to is Soldier sd) {
                         def += sd.GetSoldierSkillWithWeaponClass(WeaponType.WeaponClass.Melee);
                     }
                 }
@@ -340,7 +340,7 @@ namespace SpaceMercs {
                 if (to.EquippedWeapon is not null && to.EquippedWeapon.Type.WClass == WeaponType.WeaponClass.Heavy) {
                     def -= Const.HeavyWeaponMeleeDefencePenalty;
                 }
-                // Short melee weapon attacking diagonally
+                // Short melee weapon attacking diagonally (penalty)
                 if (from.EquippedWeapon is not null && !from.EquippedWeapon.Type.LongWeapon && dist > 1.1) {
                     att -= Const.DiagonalMeleePenalty;
                 }

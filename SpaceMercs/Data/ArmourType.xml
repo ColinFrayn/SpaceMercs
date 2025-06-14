@@ -71,7 +71,7 @@
     <Rarity>45</Rarity>
     <BaseArmour>10</BaseArmour>
     <Location>Chest</Location>
-    <Shields>10</Shields>
+    <Shields Regen="4">10</Shields>
     <BonusArmour>
       <Bonus Type="Fire" Amount="15"/>
       <Bonus Type="Cold" Amount="15"/>
@@ -346,7 +346,7 @@
     <MinMatLvl>2</MinMatLvl>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight version of the shielded chestplate, arm plating and leg plating combined</Desc>
-    <Shields>10</Shields>
+    <Shields Regen="4">10</Shields>
     <Materials>
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="2"/>
@@ -373,7 +373,7 @@
     <BaseArmour>27</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A more powerful version of the shielded chestplate, arm plating and leg plating combined with better materials, minor deflection technology and a more advanced shield generator.</Desc>
-    <Shields>20</Shields>
+    <Shields Regen="7">20</Shields>
     <MinMatLvl>3</MinMatLvl>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
@@ -402,7 +402,7 @@
     <BaseArmour>32</BaseArmour>
     <Location>Chest,Arms,Legs</Location>
     <Desc>An advanced and highly powerful combat armour, with a superb shield generator and deflection technology.</Desc>
-    <Shields>30</Shields>
+    <Shields Regen="10">30</Shields>
     <MinMatLvl>4</MinMatLvl>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
@@ -430,7 +430,7 @@
     <Attack>1</Attack>
     <BaseArmour>4</BaseArmour>
     <Location>Head</Location>
-    <Shields>5</Shields>
+    <Shields Regen="1">5</Shields>
     <MinMatLvl>4</MinMatLvl>
     <Insight>1</Insight>
     <Requirements>
@@ -630,7 +630,7 @@
     <Attack>2</Attack>
     <Speed>0.85</Speed>
     <BaseArmour>48</BaseArmour>
-    <Shields>20</Shields>
+    <Shields Regen="8">20</Shields>
     <MinMatLvl>3</MinMatLvl>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -669,7 +669,7 @@
     <Strength>4</Strength>
     <Speed>0.9</Speed>
     <Attack>3</Attack>
-    <Shields>15</Shields>
+    <Shields Regen="8">20</Shields>
     <BaseArmour>48</BaseArmour>
     <Utility>
       <Perception>2</Perception>

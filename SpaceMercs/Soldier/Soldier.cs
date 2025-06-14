@@ -42,6 +42,7 @@ namespace SpaceMercs {
         public double MaxStamina { get; private set; }
         public double Shields { get; private set; }
         public double MaxShields { get; private set; }
+        public double ShieldRegen { get; private set; }
         public double Attack { get; private set; }
         public double Defence { get; private set; }
         public string Name { get; private set; }
@@ -414,6 +415,7 @@ namespace SpaceMercs {
             if (Stamina > MaxStamina) Stamina = MaxStamina;
             MaxShields = ShieldsFromItems();
             if (Shields > MaxShields) Shields = MaxShields;
+            ShieldRegen = RegenFromItems();
             Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
             Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
         }
@@ -790,27 +792,30 @@ namespace SpaceMercs {
         }
         public static Soldier GenerateRandomMercenary(Colony cl, Random rand) {
             int iLevel = cl.Location.GetRandomMissionDifficulty(rand);
-            int[] Stats = new int[5];
-            int Bonus = iLevel + Math.Max(rand.Next(9) - 3, 0); // Some mercs are just better than others
-            Stats[0] = cl.Owner.Strength;
-            Stats[1] = cl.Owner.Agility;
-            Stats[2] = cl.Owner.Insight;
-            Stats[3] = cl.Owner.Toughness;
-            Stats[4] = cl.Owner.Endurance;
-            for (int n = 0; n < 20; n++) Stats[rand.Next(5)]--;
-            for (int n = 0; n < 20 + Bonus; n++) Stats[rand.Next(5)]++;
-            for (int n = 0; n < 5; n++) {
-                if (Stats[n] < 5) Stats[n] = 5;
-            }
-            SoldierType soldierClass = Utils.GetClassFromStats(Stats, rand);
-            Race r = cl.Location.GetRandomRace(rand);
-            GenderType gt = r.GenerateRandomGender(rand);
-            string strName = r.GenerateRandomName(rand, gt);
+            Soldier? s = null;
+            do {
+                int[] Stats = new int[5];
+                int Bonus = iLevel + Math.Max(rand.Next(9) - 3, 0); // Some mercs are just better than others
+                Stats[0] = cl.Owner.Strength;
+                Stats[1] = cl.Owner.Agility;
+                Stats[2] = cl.Owner.Insight;
+                Stats[3] = cl.Owner.Toughness;
+                Stats[4] = cl.Owner.Endurance;
+                for (int n = 0; n < 20; n++) Stats[rand.Next(5)]--;
+                for (int n = 0; n < 20 + Bonus; n++) Stats[rand.Next(5)]++;
+                for (int n = 0; n < 5; n++) {
+                    if (Stats[n] < 5) Stats[n] = 5;
+                }
+                SoldierType soldierClass = Utils.GetClassFromStats(Stats, rand);
+                Race r = cl.Location.GetRandomRace(rand);
+                GenderType gt = r.GenerateRandomGender(rand);
+                string strName = r.GenerateRandomName(rand, gt);
 
-            Soldier s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next(), soldierClass);
+                s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next(), soldierClass);
+            } while (!s.GenerateRandomItems()); // May fail if no suitable weapon exists. If so then restart.
+
             int thisExp = ExperienceRequiredToReachLevel(s.Level);
             s.Experience = thisExp + rand.Next(s.ExperienceRequiredToReachNextLevel() - thisExp);
-            s.GenerateRandomItems();
             s.GenerateRandomUtilitySkills();
             s.GenerateSuitableWeaponSkills();
             s.CalculateMaxStats();
@@ -1070,18 +1075,21 @@ namespace SpaceMercs {
             }
             return AllRes;
         }
-        private void GenerateRandomItems() {
+        private bool GenerateRandomItems() {
             // Firstly, generate a weapon
+            int ntries = 0;
             do {
                 EquippedWeapon = Utils.GenerateRandomWeaponForSoldier(rnd, this);
-            } while (EquippedWeapon is null || EquippedWeapon.StaminaCost > MaxStamina);
+                ntries++;
+            } while (EquippedWeapon is not null && ntries < 10 && EquippedWeapon.StaminaCost > MaxStamina);
+            if (EquippedWeapon is null) return false; // Abort!
 
             // Next generate armour
             // Start with a base set of kit, then incrementally improve it
             EquippedArmour.Clear();
             SetupBasicArmour();
             int count = Level + rnd.Next(Level / 2) + rnd.Next(Level / 2);
-            int ntries = 0;
+            ntries = 0;
             do {
                 count -= UpgradeArmourAtRandom();
                 ntries++;
@@ -1099,6 +1107,7 @@ namespace SpaceMercs {
                 IItem? eq = Utils.GenerateRandomItem(rnd, Level, Race, false);
                 if (eq is not null) AddItem(eq);
             }
+            return true;
         }
         private void SetupBasicArmour() {
             Armour? chest = PickLevelAppropriateChestArmour();
@@ -1529,6 +1538,13 @@ namespace SpaceMercs {
             }
 
             CalculateMaxStats(); // Just in case
+
+            // Shield Regen
+            if (ShieldRegen > 0) {
+                Shields += ShieldRegen;
+                if (Shields > MaxShields) Shields = MaxShields;
+            }
+
             HasMoved = false;
         }
         public List<string> PerformActiveSearch(MissionLevel level) {
@@ -1661,6 +1677,13 @@ namespace SpaceMercs {
             double bonus = 0;
             foreach (Armour ar in EquippedArmour) {
                 bonus += ar.Shields;
+            }
+            return bonus;
+        }
+        private double RegenFromItems() {
+            double bonus = 0;
+            foreach (Armour ar in EquippedArmour) {
+                bonus += ar.ShieldRegen;
             }
             return bonus;
         }

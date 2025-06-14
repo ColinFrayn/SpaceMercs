@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
@@ -18,7 +17,7 @@ namespace SpaceMercs {
                 sb.AppendLine("Mass : " + Mass.ToString("0.##") + "kg");
                 sb.AppendLine("Material : " + Material.Name);
                 sb.AppendLine("Armour : " + BaseArmour.ToString("0.#"));
-                if (Shields != 0.0) sb.AppendLine("Shields : " + Shields.ToString("0.#"));
+                if (Shields != 0.0) sb.AppendLine($"Shields : {Shields:0.#}+{ShieldRegen:0.#}");
                 foreach (KeyValuePair<WeaponType.DamageType, double> tp in GetAllResistances()) {
                     sb.AppendLine("Resist (" + tp.Key + ") : " + tp.Value.ToString("0.#") + "%");
                 }
@@ -66,6 +65,7 @@ namespace SpaceMercs {
         public ArmourType Type { get; private set; }
         public double BaseArmour { get { return ArmourAtLevel(Level); } }
         public double Shields { get { return ShieldsAtLevel(Level); } }
+        public double ShieldRegen { get { return RegenAtLevel(Level); } }
 
         public double GetDamageReductionByDamageType(WeaponType.DamageType type) {
             double red = 0.0;
@@ -132,12 +132,15 @@ namespace SpaceMercs {
         private double ShieldsAtLevel(int lev) {
             return (double)Type.Shields * (1d + ((double)lev / 4d));
         }
+        private double RegenAtLevel(int lev) {
+            return (double)Type.ShieldRegen * (1d + ((double)lev / 4d));
+        }
         private double MassAtLevel(int lev) {
             return Type.Mass * Material.MassMod * (1.0 - (lev / 10.0));
         }
         private double CalculateCost(int lev) {
             double size = Type.Size;
-            double shieldValue = Math.Pow(ShieldsAtLevel(lev), Const.ShieldValueExponent) * Const.ShieldCostMultiplier;
+            double shieldValue = Math.Pow(ShieldsAtLevel(lev) + RegenAtLevel(lev) * 3d, Const.ShieldValueExponent) * Const.ShieldCostMultiplier;
 
             double baseMass = 1.5d * size;
             double massFactor = Math.Pow(baseMass / MassAtLevel(lev), Const.MassCostExponent);

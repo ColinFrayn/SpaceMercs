@@ -2,6 +2,10 @@
 ToDo List
 -------------------------------------------------
 
+Maybe make ship levels smaller? How?
+
+Resource nodes (maybe as IEntity?? Or Creatures?) in maps. Should have level ranges etc. Can harvest by attacking? Drops materials.
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -15,11 +19,12 @@ Backburner : Features
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
 
-At relations >= 3 join human hypergates up to alien ones??
-- Add a trade route between their two nearest colonies, if close enough.
-- Maybe buy an item to link routes; choose nearby system; apply to alien gate if permissioned??
+At relations >= 3 allow player to join human hypergates up to alien ones??
+- Buy an item to link routes; choose nearby system; apply to alien gate if permissioned?? Hyperspace Bridge (costs a fortune)
 - Links are impassable if relations drop with alien. Check this when travelling.
-- Pathing through an alien civ costs differently based on the alien civ relations (and also make sure that cost for home civ changes based on relations)
+- Pathing through an alien civ costs differently based on the alien civ relations
+- Just to check, make sure that cost for home civ changes based on relations with Human Race.
+- Display bridges differently. Maybe double line?? Or bicolour line. needs to be thicker maybe?
 
 What should attack skill do for an AoE weapon (grenade or cone), other than increase dmg? Nothing?
 

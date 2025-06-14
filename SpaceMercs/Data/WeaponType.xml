@@ -458,7 +458,7 @@
     <Mass>10.0</Mass>
     <Cost>250</Cost>
     <Rarity>12</Rarity>
-    <Speed>18</Speed>
+    <Speed>17</Speed>
     <Range Colour="1.0,0.0,0.0">6</Range>
     <Damage Type="Fire">4+4</Damage>
     <Area Shape="Cone" Width="1.3"/>
@@ -694,16 +694,36 @@
     </Requirements>
   </WeaponType>
   <WeaponType Name="Grenade Launcher" Class="Launcher">
+    <Mass>6.0</Mass>
+    <Cost>95</Cost>
+    <Rarity>12</Rarity>
+    <Speed>17</Speed>
+    <Range Accuracy="0" Length="0.2" Speed="0.28">11</Range>
+    <Damage>3+2</Damage>
+    <Area Shape="Grenade" Size="2"/>
+    <Shred>1</Shred>
+    <Desc>An automatically reloading grenade launcher.</Desc>
+    <Sound>GrenadeLauncher</Sound>
+    <Noise>11</Noise>
+    <Recharge>1</Recharge>
+    <Unmodifiable/>
+    <Materials>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Plastic" Amount="2"/>
+      <Material Name="Industrial Chemicals" Amount="1"/>
+    </Materials>
+  </WeaponType>
+  <WeaponType Name="Incendiary Grenadier" Class="Launcher">
     <Mass>8.0</Mass>
     <Cost>225</Cost>
-    <Rarity>12</Rarity>
+    <Rarity>17</Rarity>
     <Speed>18</Speed>
     <Range Accuracy="0" Length="0.2" Speed="0.3">12</Range>
     <Damage>3+3</Damage>
     <Damage Type="Fire">1+0</Damage>
     <Area Shape="Grenade" Size="2"/>
     <Shred>2</Shred>
-    <Desc>An automatically reloading grenade launcher.</Desc>
+    <Desc>An automatically reloading grenade launcher which explodes with a burst of heat.</Desc>
     <Sound>GrenadeLauncher</Sound>
     <Noise>12</Noise>
     <Recharge>1</Recharge>
@@ -753,7 +773,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
-      <Prerequisite>Grenade launcher</Prerequisite>
+      <Prerequisite>Incendiary Grenadier</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
@@ -795,7 +815,7 @@
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Requirements>
-      <Prerequisite>Grenade launcher</Prerequisite>
+      <Prerequisite>Incendiary Grenadier</Prerequisite>
       <MinLevel>9</MinLevel>
       <MinPop>55</MinPop>
       <CashCost>150</CashCost>
@@ -827,7 +847,7 @@
       <Material Name="Electronic Components" Amount="3"/>
     </Materials>
     <Requirements>
-      <Prerequisite>Grenade launcher</Prerequisite>
+      <Prerequisite>Incendiary Grenadier</Prerequisite>
       <MinLevel>10</MinLevel>
       <MinPop>65</MinPop>
       <CashCost>190</CashCost>
