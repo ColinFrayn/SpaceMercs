@@ -1,0 +1,19 @@
+ItemType Medikit : Cost = 8cr : MatCost = 6.6cr : Ratio = 1.21
+ItemType Medsystem : Cost = 90cr : MatCost = 70.6cr : Ratio = 1.27
+ItemType Nannite Medikit : Cost = 25cr : MatCost = 14.6cr : Ratio = 1.71
+ItemType Nannite Medsystem : Cost = 450cr : MatCost = 140.6cr : Ratio = 3.20 ** EASY PROFIT **
+ItemType Adrenaline : Cost = 5cr : MatCost = 6.6cr : Ratio = 0.76
+ItemType Stimulant : Cost = 5cr : MatCost = 6.6cr : Ratio = 0.76
+ItemType Frag Grenade : Cost = 5cr : MatCost = 11.5cr : Ratio = 0.43 ** SOLD CHEAPLY **
+ItemType Incendiary Grenade : Cost = 12cr : MatCost = 11.25cr : Ratio = 1.07
+ItemType Poison Grenade : Cost = 11cr : MatCost = 11.25cr : Ratio = 0.98
+ItemType Tar Grenade : Cost = 10cr : MatCost = 11.25cr : Ratio = 0.89
+ItemType Acid Grenade : Cost = 12cr : MatCost = 11.25cr : Ratio = 1.07
+ItemType Plasma Grenade : Cost = 35cr : MatCost = 17.25cr : Ratio = 2.03 ** EASY PROFIT **
+ItemType Antimatter Grenade : Cost = 85cr : MatCost = 51.25cr : Ratio = 1.66
+ItemType Sonic Grenade : Cost = 16cr : MatCost = 25.25cr : Ratio = 0.63 ** SOLD CHEAPLY **
+ItemType Quantum Medikit : Cost = 75cr : MatCost = 34.4cr : Ratio = 2.18 ** EASY PROFIT **
+ItemType Quantum Medsystem : Cost = 1500cr : MatCost = 774.4cr : Ratio = 1.94
+ItemType Life Scanner : Cost = 600cr : MatCost = 568.4cr : Ratio = 1.06
+ItemType Personal Teleporter : Cost = 1200cr : MatCost = 628cr : Ratio = 1.91
+

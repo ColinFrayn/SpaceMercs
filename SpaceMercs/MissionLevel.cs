@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml;
 using static SpaceMercs.Delegates;
 using static SpaceMercs.Mission;
+using static SpaceMercs.Planet;
 using static SpaceMercs.VisualEffect;
 
 namespace SpaceMercs {
@@ -176,7 +177,7 @@ namespace SpaceMercs {
             XmlNode xmlc = xml.SelectSingleNode("Creatures") ?? throw new Exception("Could not identify Creatures node");
             foreach (XmlNode xc in xmlc.SelectNodesToList("Creature")) {
                 Creature cr = new Creature(xc, this);
-                AddCreatureWithoutReset(cr);
+                AddEntityWithoutReset(cr);
             }
 
             // Resource Nodes
@@ -625,6 +626,7 @@ namespace SpaceMercs {
             Visible = new bool[Width, Height];
             EntityMap = new IEntity[Width, Height];
             GenerateCreatures();
+            GenerateResourceNodes();
             // Add goal item, if required
             if (ParentMission.Goal is Mission.MissionGoal.FindItem or Mission.MissionGoal.Artifact) {
                 if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
@@ -1110,18 +1112,18 @@ namespace SpaceMercs {
             EntityMap[pt.X, pt.Y] = s;
             CalculatePlayerVisibility();
         }
-        private void AddCreature(Creature cr) {
-            cr.ResetForBattle();
-            AddCreatureWithoutReset(cr);
+        private void AddEntity(IEntity en) {
+            en.ResetForBattle();
+            AddEntityWithoutReset(en);
         }
-        private void AddCreatureWithoutReset(Creature cr) {
-            cr.UpdateVisibility(this);
-            if (Entities.ContainsKey(cr)) throw new Exception("Attempting to add duplicate creature");
-            Entities.TryAdd(cr, 1);
-            for (int y = cr.Y; y < cr.Y + cr.Size; y++) {
-                for (int x = cr.X; x < cr.X + cr.Size; x++) {
-                    if (EntityMap[x, y] != null) throw new Exception("Attempting to add creature on top of another");
-                    EntityMap[x, y] = cr;
+        private void AddEntityWithoutReset(IEntity en) {
+            en.UpdateVisibility(this);
+            if (Entities.ContainsKey(en)) throw new Exception("Attempting to add duplicate entity");
+            Entities.TryAdd(en, 1);
+            for (int y = en.Y; y < en.Y + en.Size; y++) {
+                for (int x = en.X; x < en.X + en.Size; x++) {
+                    if (EntityMap[x, y] != null) throw new Exception("Attempting to add entity on top of another");
+                    EntityMap[x, y] = en;
                 }
             }
         }
@@ -1130,12 +1132,12 @@ namespace SpaceMercs {
             Entities.TryAdd(rn, 1);
             EntityMap[rn.X, rn.Y] = rn;
         }
-        private bool CreatureCanGo(Creature cr, int x, int y) {
+        private bool EntityCanGo(IEntity cr, int x, int y) {
             for (int cy = y; cy < y + cr.Size; cy++) {
                 if (cy < 0 || cy >= Height) return false;
                 for (int cx = x; cx < x + cr.Size; cx++) {
                     if (cx < 0 || cx >= Width) return false;
-                    if (Map[cx, cy] != TileType.Floor || EntityMap[cx, cy] != null || EntryLocations.Contains(new Point(cx,cy))) return false;
+                    if (Map[cx, cy] != TileType.Floor || EntityMap[cx, cy] != null || EntryLocations.Contains(new Point(cx, cy)) || ExitLocations.Contains(new Point(cx, cy))) return false;
                 }
             }
             return true;
@@ -1207,7 +1209,7 @@ namespace SpaceMercs {
                 // Check if we managed to place the entire group, or we've tried a few times and failed but at least we placed something. In which case, move on...
                 if (cGroup.Count == iGroupSize || (niter > 20 && cGroup.Count > 0)) { 
                     nLeft--;
-                    foreach (Creature cr in cGroup) AddCreature(cr);
+                    foreach (Creature cr in cGroup) AddEntity(cr);
                     niter = 0; // Reset the count
                 }
                 else niter++;
@@ -1238,7 +1240,7 @@ namespace SpaceMercs {
                         y = rand.Next(Height - 5) + 2;
                         if (ptStart == Point.Empty) dist = minDist + 1;
                         else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
-                    } while (!CreatureCanGo(cr, x, y) || (dist < minDist && CanSee(ptStart, new Point(x, y))));
+                    } while (!EntityCanGo(cr, x, y) || (dist < minDist && CanSee(ptStart, new Point(x, y))));
 
                     // Attempt to put all creatures far from the EntryLocations
                     score += dist;
@@ -1277,7 +1279,7 @@ namespace SpaceMercs {
                 if (++tries > 150) return false; // Failed
                 x = centre.X + rand.Next(iGroupSize * 2 + 3) - iGroupSize;
                 y = centre.Y + rand.Next(iGroupSize * 2 + 3) - iGroupSize;
-                if (!CreatureCanGo(cr, x, y)) bOK = false;
+                if (!EntityCanGo(cr, x, y)) bOK = false;
                 else if (RoomMap != null && RoomMap[x, y] != RoomMap[centre.X, centre.Y]) bOK = false; // Same room as centre of group
                 else {
                     foreach (Creature c2 in cGroup) {
@@ -1357,7 +1359,7 @@ namespace SpaceMercs {
                     y = rand.Next(Height - 5) + 2;
                     if (ptStart == Point.Empty) dist = MinDist + 1;
                     else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
-                } while (!CreatureCanGo(cr, x, y) || (dist < MinDist && CanSee(ptStart, new Point(x, y))));
+                } while (!EntityCanGo(cr, x, y) || (dist < MinDist && CanSee(ptStart, new Point(x, y))));
                 // Attempt to put all creatures far from the EntryLocations
                 score += dist;
                 // Make sure creature can make it to the target
@@ -1373,8 +1375,69 @@ namespace SpaceMercs {
             cr.SetLocation(best);            
             cr.SetTargetInvestigation(ptStart.X, ptStart.Y); // Set the creature target as the entry point
             cr.SetAlert();
-            AddCreature(cr);
+            AddEntity(cr);
             return true;
+        }
+
+        // Add resource nodes
+        private void GenerateResourceNodes() {
+            // Should we have nodes here?
+            if (Type != MissionType.Surface && Type != MissionType.Caves && Type != MissionType.Mines) return;
+            PlanetType pt = ParentMission.Location.Type;
+
+            // Get suitable materials for this mission
+            Dictionary<MaterialType, double> dFreq = new();
+            double fTotal = 0d;
+            foreach (MaterialType mat in StaticData.Materials.Where(m => m.NodeMin > 0)) {
+                if (mat.NodeMin > Diff || mat.NodeMax < Diff) continue;
+                if (mat.PlanetTypes.Contains(pt)) {
+                    double freq = 3.0 + Diff - mat.NodeMin;
+                    dFreq.Add(mat, freq);
+                    fTotal += freq;
+                }
+            }
+            if (dFreq.Count == 0) return;
+
+            // How big is this map, and how many nodes should it contain?
+            int nFloorTiles = 0;
+            for (int x = 0; x < Width; x++) {
+                for (int y = 0; y < Height; y++) {
+                    if (Map[x, y] == TileType.Floor) nFloorTiles++;
+                }
+            }
+            double dNodes = (rand.NextDouble() + 2d) * (double)nFloorTiles / Const.ResourceNodeFrequency;
+            if (Type is MissionType.Surface) dNodes *= 0.7;
+            if (Type is MissionType.Mines) dNodes *= 1.4;
+            List<MaterialType> nodeTypes = new();
+            foreach ((MaterialType mat, double freq) in dFreq) {
+                int count = (int)(freq * dNodes / fTotal);
+                for (int n = 0; n < count; n++) nodeTypes.Add(mat);
+            }
+            if (nodeTypes.Count == 0) return;
+
+            // Add all nodes
+            int niter = 0;
+            foreach (MaterialType mat in nodeTypes) {
+                // Place this node somewhere suitable
+                ResourceNode rn = new ResourceNode(mat, 1 + Diff - mat.NodeMin, this);
+                int dist = 0;
+                Point ptStart = Point.Empty;
+                if (EntryLocations.Count == 0) ptStart = EntryLocations.First<Point>();
+
+                int x = -1, y = -1;
+                do {
+                    x = rand.Next(Width - 5) + 2;
+                    y = rand.Next(Height - 5) + 2;
+                    if (ptStart == Point.Empty) dist = 3;
+                    else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                    niter++;
+                    if (niter > 50) break;
+                } while (!EntityCanGo(rn, x, y) || dist < 5);
+                if (x > 0 && y > 0) {
+                    rn.SetLocation(new Point(x, y));
+                    AddEntity(rn);
+                }
+            }
         }
 
         #region Generate Caves
@@ -2004,13 +2067,13 @@ namespace SpaceMercs {
                 s.AddExperience(exp);
             }
         }
-        public void DestroyNode(ResourceNode rn) {
+        public void DestroyNode(ResourceNode rn, IEntity? miner) {
             Entities.TryRemove(new KeyValuePair<IEntity, byte>(rn, 1));
             if (EntityMap[rn.X, rn.Y] == null) throw new Exception("Attempting to remove resource node from empty cell");
             EntityMap[rn.X, rn.Y] = null;
 
             // Drop materials
-            Stash st = rn.GenerateStash();
+            Stash st = rn.GenerateStash(miner);
             AddToStashAtPosition(rn.X, rn.Y, st);
         }
         public void KillSoldier(Soldier s) {
@@ -2028,7 +2091,7 @@ namespace SpaceMercs {
                 if (ct.CurrentTarget == s) ct.SetTarget(null);
             }
         }
-        public Soldier? GetSoldierByName(string name) {
+        public Soldier? GetSoldierByName(string? name) {
             foreach (Soldier s in Soldiers) {
                 if (string.Equals(s.Name, name)) return s;
             }
@@ -2200,6 +2263,9 @@ namespace SpaceMercs {
                     }
                 }
                 return false;
+            }
+            if (e is ResourceNode r) {
+                return Visible[r.X, r.Y];
             }
             throw new NotImplementedException($"Unknown IEntity type : {e.GetType()}");
         }

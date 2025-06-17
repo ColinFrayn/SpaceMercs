@@ -1,5 +1,4 @@
-﻿using System.Windows.Ink;
-using System.Xml;
+﻿using System.Xml;
 using static SpaceMercs.ShipEquipment;
 
 namespace SpaceMercs.Items {
@@ -7,7 +6,7 @@ namespace SpaceMercs.Items {
         public readonly int MinLevel;
         private readonly int MinSystems;
         private readonly int MinPop;
-        private readonly bool Researchable;
+        public readonly bool Researchable;
         public int CashCost { get; private set; }
         public readonly IReadOnlyDictionary<Race, int> RequiredRaceRelations = new Dictionary<Race, int>();
         public readonly IReadOnlyDictionary<MaterialType, int> RequiredMaterials = new Dictionary<MaterialType, int>();

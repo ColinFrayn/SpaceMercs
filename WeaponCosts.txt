@@ -1,0 +1,46 @@
+WeaponType Shotgun : Cost = 10cr : MatCost = 11cr : Ratio = 0.91
+WeaponType Triple Shotgun : Cost = 120cr : MatCost = 97.5cr : Ratio = 1.23
+WeaponType Quad Shotgun : Cost = 450cr : MatCost = 224cr : Ratio = 2.01 ** EASY PROFIT **
+WeaponType MagFrag : Cost = 1650cr : MatCost = 814cr : Ratio = 2.03 ** EASY PROFIT **
+WeaponType Pistol : Cost = 6cr : MatCost = 6.5cr : Ratio = 0.92
+WeaponType Automatic Rifle : Cost = 12cr : MatCost = 12.5cr : Ratio = 0.96
+WeaponType Heavy Rifle : Cost = 180cr : MatCost = 186.5cr : Ratio = 0.97
+WeaponType Superheavy Rifle : Cost = 2800cr : MatCost = 1444cr : Ratio = 1.94
+WeaponType Gattling Gun : Cost = 1800cr : MatCost = 1300cr : Ratio = 1.38
+WeaponType Laser Rifle : Cost = 160cr : MatCost = 99.8cr : Ratio = 1.60
+WeaponType Plasma Rifle : Cost = 700cr : MatCost = 155cr : Ratio = 4.52 ** EASY PROFIT **
+WeaponType Heavy Laser Rifle : Cost = 650cr : MatCost = 480cr : Ratio = 1.35
+WeaponType Heavy Plasma Rifle : Cost = 1950cr : MatCost = 561cr : Ratio = 3.48 ** EASY PROFIT **
+WeaponType Laser Pistol : Cost = 35cr : MatCost = 44.9cr : Ratio = 0.78
+WeaponType Gauss Cannon : Cost = 1400cr : MatCost = 1184cr : Ratio = 1.18
+WeaponType Arc Rifle : Cost = 330cr : MatCost = 275cr : Ratio = 1.20
+WeaponType Heavy Arc Rifle : Cost = 950cr : MatCost = 665cr : Ratio = 1.43
+WeaponType Flame Thrower : Cost = 250cr : MatCost = 202cr : Ratio = 1.24
+WeaponType Freeze Blaster : Cost = 250cr : MatCost = 206.5cr : Ratio = 1.21
+WeaponType Plasma Thrower : Cost = 950cr : MatCost = 516cr : Ratio = 1.84
+WeaponType Hellfire Jet : Cost = 2150cr : MatCost = 483cr : Ratio = 4.45 ** EASY PROFIT **
+WeaponType Heavy Flamer : Cost = 2150cr : MatCost = 1021cr : Ratio = 2.11 ** EASY PROFIT **
+WeaponType Heavy Plasmajet : Cost = 3250cr : MatCost = 1670cr : Ratio = 1.95
+WeaponType Heavy Helljet : Cost = 6250cr : MatCost = 1495cr : Ratio = 4.18 ** EASY PROFIT **
+WeaponType Grenade Launcher : Cost = 95cr : MatCost = 95.8cr : Ratio = 0.99
+WeaponType Incendiary Grenadier : Cost = 225cr : MatCost = 268.8cr : Ratio = 0.84
+WeaponType Plasma Grenadier : Cost = 550cr : MatCost = 301cr : Ratio = 1.83
+WeaponType Cryo Grenadier : Cost = 550cr : MatCost = 270.5cr : Ratio = 2.03 ** EASY PROFIT **
+WeaponType Heavy Grenade Launcher : Cost = 1500cr : MatCost = 1003cr : Ratio = 1.50
+WeaponType Sniper Rifle : Cost = 25cr : MatCost = 12cr : Ratio = 2.08 ** EASY PROFIT **
+WeaponType Laser Sniper Rifle : Cost = 300cr : MatCost = 168cr : Ratio = 1.79
+WeaponType Gauss Sniper Rifle : Cost = 950cr : MatCost = 584.5cr : Ratio = 1.63
+WeaponType Disc Thrower : Cost = 75cr : MatCost = 15cr : Ratio = 5.00 ** EASY PROFIT **
+WeaponType Shortblade : Cost = 4cr : MatCost = 4cr : Ratio = 1.00
+WeaponType Katana : Cost = 35cr : MatCost = 29cr : Ratio = 1.21
+WeaponType Powerblade : Cost = 120cr : MatCost = 103cr : Ratio = 1.17
+WeaponType Axe : Cost = 6cr : MatCost = 9cr : Ratio = 0.67 ** SOLD CHEAPLY **
+WeaponType Power Axe : Cost = 125cr : MatCost = 87cr : Ratio = 1.44
+WeaponType Chainsword : Cost = 60cr : MatCost = 61.25cr : Ratio = 0.98
+WeaponType Exo Claws : Cost = 260cr : MatCost = 201cr : Ratio = 1.29
+WeaponType Exo Spear : Cost = 460cr : MatCost = 246cr : Ratio = 1.87
+WeaponType Double Blade : Cost = 420cr : MatCost = 108cr : Ratio = 3.89 ** EASY PROFIT **
+WeaponType Heavy Powerfist : Cost = 1100cr : MatCost = 758cr : Ratio = 1.45
+WeaponType Heavy Chainsword : Cost = 1800cr : MatCost = 726cr : Ratio = 2.48 ** EASY PROFIT **
+WeaponType Slugger : Cost = 380cr : MatCost = 261.5cr : Ratio = 1.45
+

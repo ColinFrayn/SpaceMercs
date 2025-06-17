@@ -318,7 +318,7 @@
     <Requirements>
       <MinLevel>3</MinLevel>
       <CashCost>10</CashCost>
-      <Material Name="Uranium" Amount="1"/>
+      <Material Name="Uranium" Amount="3"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -335,6 +335,7 @@
       <MinLevel>5</MinLevel>
       <CashCost>20</CashCost>
       <Material Name="Water" Amount="20"/>
+      <Material Name="Electronic Components" Amount="4"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -352,6 +353,7 @@
       <MinPop>25</MinPop>
       <CashCost>30</CashCost>
       <Material Name="Water" Amount="30"/>
+      <Material Name="Electronic Components" Amount="8"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -368,8 +370,9 @@
       <MinLevel>8</MinLevel>
       <MinPop>50</MinPop>
       <CashCost>80</CashCost>
-      <Material Name="Gold" Amount="2"/>
       <Relations Name="Human">4</Relations>
+      <Material Name="Gold" Amount="4"/>
+      <Material Name="Electronic Components" Amount="4"/>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -386,7 +389,8 @@
       <MinLevel>10</MinLevel>
       <MinPop>75</MinPop>
       <CashCost>150</CashCost>
-      <Material Name="Gold" Amount="4"/>
+      <Material Name="Gold" Amount="6"/>
+      <Material Name="Electronic Components" Amount="6"/>
       <Relations Name="Human">4</Relations>
       <Facility>Workshop</Facility>
       <Facility>Engineering</Facility>

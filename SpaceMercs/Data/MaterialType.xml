@@ -1,16 +1,16 @@
 ﻿<Data>
   <!-- Armour materials -->
   <MaterialType Name="Carbon Fibre">
-    <MassMod>0.7</MassMod>
-    <UnitCost>0.75</UnitCost>
-    <ArmourMod>0.65</ArmourMod>
+    <MassMod>0.65</MassMod>
+    <UnitCost>0.9</UnitCost>
+    <ArmourMod>0.6</ArmourMod>
     <Rarity>0.9</Rarity>
     <MaxLevel>1</MaxLevel>
     <Desc>Carbon fibre is cheap, light and plentiful, but doesn't offer much protection.</Desc>
   </MaterialType>
   <MaterialType Name="Steel">
     <MassMod>1.0</MassMod>
-    <UnitCost>1</UnitCost>
+    <UnitCost>2</UnitCost>
     <ArmourMod>1</ArmourMod>
     <Rarity>1.0</Rarity>
     <MaxLevel>2</MaxLevel>
@@ -18,7 +18,7 @@
   </MaterialType>
   <MaterialType Name="Kevlar">
     <MassMod>0.9</MassMod>
-    <UnitCost>2.0</UnitCost>
+    <UnitCost>2.5</UnitCost>
     <ArmourMod>1.1</ArmourMod>
     <Rarity>0.5</Rarity>
     <MaxLevel>2</MaxLevel>
@@ -26,7 +26,7 @@
   </MaterialType>
   <MaterialType Name="Composite">
     <MassMod>0.9</MassMod>
-    <UnitCost>4.5</UnitCost>
+    <UnitCost>12.5</UnitCost>
     <ArmourMod>1.35</ArmourMod>
     <MaxLevel>3</MaxLevel>
     <Requirements>
@@ -41,8 +41,8 @@
     <Desc>Composite materials made from metals, fabrics and precision alloys.</Desc>
   </MaterialType>
   <MaterialType Name="Metasteel">
-    <MassMod>1.0</MassMod>
-    <UnitCost>15.0</UnitCost>
+    <MassMod>1.05</MassMod>
+    <UnitCost>25.0</UnitCost>
     <ArmourMod>1.6</ArmourMod>
     <Rarity>0.08</Rarity>
     <MaxLevel>4</MaxLevel>
@@ -59,7 +59,7 @@
   </MaterialType>
   <MaterialType Name="Nanomesh">
     <MassMod>0.65</MassMod>
-    <UnitCost>25.0</UnitCost>
+    <UnitCost>27.5</UnitCost>
     <ArmourMod>1.4</ArmourMod>
     <Rarity>0.03</Rarity>
     <Requirements>
@@ -75,7 +75,7 @@
   </MaterialType>
   <MaterialType Name="Mithril">
     <MassMod>0.85</MassMod>
-    <UnitCost>35.0</UnitCost>
+    <UnitCost>60.0</UnitCost>
     <ArmourMod>1.7</ArmourMod>
     <Rarity>0.01</Rarity>
     <Requirements>
@@ -92,7 +92,7 @@
   </MaterialType>
   <MaterialType Name="Adamantium">
     <MassMod>1.25</MassMod>
-    <UnitCost>75.0</UnitCost>
+    <UnitCost>90.0</UnitCost>
     <ArmourMod>2.0</ArmourMod>
     <Rarity>0.006</Rarity>
     <Requirements>
@@ -109,7 +109,7 @@
   </MaterialType>
   <MaterialType Name="Etherealite">
     <MassMod>0.55</MassMod>
-    <UnitCost>80.0</UnitCost>
+    <UnitCost>120.0</UnitCost>
     <ArmourMod>1.75</ArmourMod>
     <Rarity>0.005</Rarity>
     <Requirements>
@@ -128,7 +128,7 @@
   </MaterialType>
   <MaterialType Name="Ultramesh">
     <MassMod>0.7</MassMod>
-    <UnitCost>85.0</UnitCost>
+    <UnitCost>150.0</UnitCost>
     <ArmourMod>1.9</ArmourMod>
     <Rarity>0.004</Rarity>
     <Requirements>
@@ -144,34 +144,34 @@
     </Requirements>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>
   </MaterialType>
-  <!-- Non-armour materials -->
+  <!-- Basic non-armour materials -->
   <MaterialType Name="Silicates">
     <UnitCost>1.5</UnitCost>
     <Rarity>0.1</Rarity>
     <Desc>Silicates</Desc>
     <UnitMass>0.5</UnitMass>
-    <Node LevelMin="1" LevelMax="6" Type="Desert,Oceanic"/>
+    <Node LevelMin="1" LevelMax="6" Type="Desert,Oceanic" TexX="1" TexY="1"/>
 </MaterialType>
   <MaterialType Name="Aluminium">
     <UnitCost>1.5</UnitCost>
     <Rarity>0.4</Rarity>
     <UnitMass>0.5</UnitMass>
     <Desc>Aluminium</Desc>
-    <Node LevelMin="2" LevelMax="7" Type="Rocky,Oceanic"/>
+    <Node LevelMin="2" LevelMax="7" Type="Rocky,Oceanic" TexX="3" TexY="1"/>
   </MaterialType>
   <MaterialType Name="Tungsten">
     <UnitCost>5.0</UnitCost>
     <Rarity>0.2</Rarity>
     <UnitMass>0.1</UnitMass>
     <Desc>Tungsten</Desc>
-    <Node LevelMin="3" LevelMax="8" Type="Rocky,Oceanic"/>
+    <Node LevelMin="3" LevelMax="8" Type="Rocky,Oceanic" TexX="1" TexY="5"/>
   </MaterialType>
   <MaterialType Name="Uranium">
-    <UnitCost>10.0</UnitCost>
+    <UnitCost>20.0</UnitCost>
     <Rarity>0.1</Rarity>
     <UnitMass>0.001</UnitMass>
     <Desc>Uranium</Desc>
-    <Node LevelMin="3" LevelMax="7" Type="Rocky,Oceanic"/>
+    <Node LevelMin="3" LevelMax="7" Type="Rocky,Oceanic" TexX="3" TexY="3"/>
   </MaterialType>
   <MaterialType Name="Water">
     <UnitCost>0.1</UnitCost>
@@ -182,14 +182,14 @@
     <UnitCost>0.5</UnitCost>
     <Rarity>0.5</Rarity>
     <Desc>Carbon</Desc>
-    <Node LevelMin="1" LevelMax="7" Type="Oceanic"/>
+    <Node LevelMin="1" LevelMax="7" Type="Oceanic" TexX="3" TexY="5"/>
   </MaterialType>
   <MaterialType Name="Rare Earth Metals">
     <UnitCost>8.0</UnitCost>
     <Desc>Rare Earth Metals</Desc>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
-    <Node LevelMin="4" LevelMax="10" Type="Oceanic"/>
+    <Node LevelMin="4" LevelMax="10" Type="Oceanic" TexX="1" TexY="3"/>
   </MaterialType>
   <MaterialType Name="Electronic Components">
     <UnitCost>20.0</UnitCost>
@@ -197,18 +197,18 @@
     <UnitMass>0.1</UnitMass>
   </MaterialType>
   <MaterialType Name="Gold">
-    <UnitCost>40.0</UnitCost>
+    <UnitCost>50.0</UnitCost>
     <Rarity>0.02</Rarity>
     <Desc>Gold</Desc>
     <UnitMass>0.01</UnitMass>
-    <Node LevelMin="5" LevelMax="11" Type="Volcanic,Oceanic"/>
+    <Node LevelMin="6" LevelMax="11" Type="Volcanic,Oceanic" TexX="1" TexY="9"/>
   </MaterialType>
   <MaterialType Name="Copper">
     <UnitCost>3.0</UnitCost>
     <Rarity>0.7</Rarity>
     <Desc>Copper</Desc>
     <UnitMass>0.5</UnitMass>
-    <Node LevelMin="2" LevelMax="7" Type="Volcanic,Oceanic"/>
+    <Node LevelMin="2" LevelMax="7" Type="Volcanic,Oceanic" TexX="3" TexY="9"/>
   </MaterialType>
   <MaterialType Name="Fabric">
     <UnitCost>0.2</UnitCost>
@@ -230,20 +230,105 @@
     <Rarity>0.1</Rarity>
     <Desc>Energy Crystals</Desc>
     <UnitMass>0.1</UnitMass>
-    <Node LevelMin="2" LevelMax="8" Type="Ice"/>
+    <Node LevelMin="1" LevelMax="8" Type="Ice" TexX="1" TexY="11"/>
   </MaterialType>
   <MaterialType Name="Titanium">
-    <UnitCost>15.0</UnitCost>
+    <UnitCost>25.0</UnitCost>
     <Rarity>0.15</Rarity>
     <Desc>Titanium</Desc>
     <UnitMass>0.8</UnitMass>
-    <Node LevelMin="2" LevelMax="8" Type="Rocky,Oceanic"/>
+    <Node LevelMin="2" LevelMax="8" Type="Rocky,Oceanic" TexX="1" TexY="7"/>
   </MaterialType>
   <MaterialType Name="Industrial Chemicals">
-    <UnitCost>12.0</UnitCost>
+    <UnitCost>6.0</UnitCost>
     <Rarity>0.2</Rarity>
     <Desc>Industrial chemicals</Desc>
     <UnitMass>0.1</UnitMass>
+  </MaterialType>
+  <!-- Specialty Fabrication items -->
+  <MaterialType Name="Biosynthesiser">
+    <UnitCost>60.0</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Desc>A device that can replicate small mounts of organic matter.</Desc>
+  </MaterialType>
+  <MaterialType Name="Quantum Processor">
+    <UnitCost>500.0</UnitCost>
+    <Rarity>0.004</Rarity>
+    <UnitMass>2.0</UnitMass>
+    <Desc>A device that can analyse and reprogram materials on a quantum level.</Desc>
+  </MaterialType>
+  <MaterialType Name="Nanotech Analyser">
+    <UnitCost>200.0</UnitCost>
+    <Rarity>0.006</Rarity>
+    <UnitMass>2.0</UnitMass>
+    <Desc>A device that can analyse and reprogram materials on a nanometre level.</Desc>
+  </MaterialType>
+  <MaterialType Name="Heavy Frame">
+    <UnitCost>160.0</UnitCost>
+    <Rarity>0.05</Rarity>
+    <UnitMass>5.0</UnitMass>
+    <Desc>A heavy framework for heavy weapons.</Desc>
+  </MaterialType>
+  <MaterialType Name="Powercell">
+    <UnitCost>50.0</UnitCost>
+    <Rarity>0.04</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Desc>A highly energy-dense battery.</Desc>
+  </MaterialType>
+  <MaterialType Name="Powercore">
+    <UnitCost>450.0</UnitCost>
+    <Rarity>0.004</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Desc>A rare energy core based on Elithiri tech.</Desc>
+  </MaterialType>
+  <MaterialType Name="Pressure Canister">
+    <UnitCost>150.0</UnitCost>
+    <Rarity>0.02</Rarity>
+    <UnitMass>1.0</UnitMass>
+    <Desc>A military-grade pressure canister for storing highly dangerous fluids at very high pressures.</Desc>
+  </MaterialType>
+  <MaterialType Name="Recoil Dampener">
+    <UnitCost>80.0</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>0.4</UnitMass>
+    <Desc>A military-grade electromagnetic system for dampening instantaneous force.</Desc>
+  </MaterialType>
+  <MaterialType Name="Superconductor">
+    <UnitCost>450.0</UnitCost>
+    <Rarity>0.004</Rarity>
+    <UnitMass>0.6</UnitMass>
+    <Desc>A highly advanced magnetic system capable of generating powerful instantaneous fields.</Desc>
+  </MaterialType>
+  <MaterialType Name="Supercapacitor">
+    <UnitCost>150.0</UnitCost>
+    <Rarity>0.008</Rarity>
+    <UnitMass>0.4</UnitMass>
+    <Desc>An extremely high-tech storage device that can chanrge and discharge at very high speed.</Desc>
+  </MaterialType>
+  <MaterialType Name="Nanophotonic Materials">
+    <UnitCost>115.0</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>0.1</UnitMass>
+    <Desc>Materials precisely engineered to interact with light on the scale of individual atoms.</Desc>
+  </MaterialType>
+  <MaterialType Name="Military AI">
+    <UnitCost>150.0</UnitCost>
+    <Rarity>0.008</Rarity>
+    <UnitMass>0.8</UnitMass>
+    <Desc>An advanced, hardened military AI and targetting computer.</Desc>
+  </MaterialType>
+  <MaterialType Name="Shield Processor">
+    <UnitCost>125.0</UnitCost>
+    <Rarity>0.01</Rarity>
+    <UnitMass>0.8</UnitMass>
+    <Desc>A personal shield generation device that can be linked up to armour systems.</Desc>
+  </MaterialType>
+  <MaterialType Name="Precision Catapult">
+    <UnitCost>75.0</UnitCost>
+    <Rarity>0.03</Rarity>
+    <UnitMass>0.8</UnitMass>
+    <Desc>A military device designed to hurl projectiles a long distance with extreme accuracy.</Desc>
   </MaterialType>
   <!-- Scavenged materials -->
   <MaterialType Name="Barkskin">
@@ -272,7 +357,7 @@
   </MaterialType>
   <MaterialType Name="Heavy Chitin">
     <MassMod>1.6</MassMod>
-    <UnitCost>16.5</UnitCost>
+    <UnitCost>45.0</UnitCost>
     <ArmourMod>1.5</ArmourMod>
     <Rarity>0.02</Rarity>
     <MaxLevel>4</MaxLevel>
@@ -317,7 +402,7 @@
   </MaterialType>
   <MaterialType Name="Voidskin">
     <MassMod>0.85</MassMod>
-    <UnitCost>50.0</UnitCost>
+    <UnitCost>60.0</UnitCost>
     <ArmourMod>1.3</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -331,7 +416,7 @@
   </MaterialType>
   <MaterialType Name="Shadowskin">
     <MassMod>0.75</MassMod>
-    <UnitCost>50.0</UnitCost>
+    <UnitCost>60.0</UnitCost>
     <ArmourMod>1.2</ArmourMod>
     <Rarity>0.001</Rarity>
     <Scavenged/>
@@ -374,14 +459,14 @@
     <Desc>The slime-covered egg from a slime creature.</Desc>
   </MaterialType>
   <MaterialType Name="Incendiary Bulb">
-    <UnitCost>2.5</UnitCost>
+    <UnitCost>7.5</UnitCost>
     <Rarity>0.01</Rarity>
     <UnitMass>1.0</UnitMass>
     <Scavenged/>
     <Desc>The highly volatile organ from a fire-breathing creature.</Desc>
   </MaterialType>
   <MaterialType Name="Frost Gland">
-    <UnitCost>2.5</UnitCost>
+    <UnitCost>7.5</UnitCost>
     <Rarity>0.01</Rarity>
     <UnitMass>1.0</UnitMass>
     <Scavenged/>

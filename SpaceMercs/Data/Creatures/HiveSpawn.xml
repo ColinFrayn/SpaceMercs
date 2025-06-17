@@ -151,7 +151,7 @@
     <Size>2</Size>
     <MovementCost>1.5</MovementCost>
     <LevelRange>11,23</LevelRange>
-    <Attack>21</Attack>
+    <Attack>22</Attack>
     <Defence>13</Defence>
     <Armour>28</Armour>
     <Health>30</Health>
@@ -177,7 +177,7 @@
     <MovementCost>999</MovementCost>
     <LevelRange>9,23</LevelRange>
     <Attack>28</Attack>
-    <Defence>10</Defence>
+    <Defence>8</Defence>
     <Armour>16</Armour>
     <Health>90</Health>
     <Stamina>22</Stamina>

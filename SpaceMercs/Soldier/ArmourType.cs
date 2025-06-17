@@ -16,6 +16,7 @@ namespace SpaceMercs {
         public double Speed { get; private set; } // Divides movment cost -> higher number = faster
         public int BaseArmour { get; private set; }
         public int MinMatLvl { get; private set; } // Material types with lower max levels than this cannot be used
+        public bool IsHeavy { get; private set; } // Is this heavy armour e.g. power armour?
         public int Size {
             get {
                 double sz = 0.0;
@@ -23,6 +24,7 @@ namespace SpaceMercs {
                 return (int)Math.Ceiling(sz);
             }
         }
+        public int BaseMaterialRequirements => IsHeavy ? Size * 2 : Size + 1;
         public readonly HashSet<BodyPart> Locations = new HashSet<BodyPart>();
         public readonly Dictionary<WeaponType.DamageType, double> BonusArmour = new Dictionary<WeaponType.DamageType, double>();
 
@@ -44,6 +46,7 @@ namespace SpaceMercs {
             BaseArmour = xml.SelectNodeInt("BaseArmour", 0);
             Speed = xml.SelectNodeDouble("Speed", 1.0);
             MinMatLvl = xml.SelectNodeInt("MinMatLvl", 0);
+            IsHeavy = xml.SelectSingleNode("Heavy") != null;
             if (xml.SelectSingleNode("BonusArmour") != null) {
                 foreach (XmlNode xn in xml.SelectNodesToList("BonusArmour/Bonus")) {
                     WeaponType.DamageType type = (WeaponType.DamageType)Enum.Parse(typeof(WeaponType.DamageType), xn.GetAttributeText("Type"));

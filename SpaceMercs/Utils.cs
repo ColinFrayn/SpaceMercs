@@ -207,6 +207,13 @@ namespace SpaceMercs {
                         hitDmg[WeaponType.DamageType.Physical] = physDmg;
                     }
 
+                    // Mining skill damage bonus
+                    if (tgt is ResourceNode nd && source is Soldier s && hitDmg.TryGetValue(WeaponType.DamageType.Physical, out double physDmgRn)) {
+                        int miningSkill = s.GetUtilityLevel(UtilitySkill.Miner);
+                        physDmgRn *= 1d + ((double)miningSkill / 5d);
+                        hitDmg[WeaponType.DamageType.Physical] = physDmgRn;
+                    }
+
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     float xshift = (float)(rand.NextDouble() - 0.5d) / 3f;
                     if (Math.Abs(TotalDam) > 0.1d) {
@@ -217,7 +224,7 @@ namespace SpaceMercs {
                             effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
                         }
                     }
-                    tgt.InflictDamage(hitDmg, applyEffect, effectFactory);
+                    tgt.InflictDamage(hitDmg, applyEffect, effectFactory, source);
                     if (wp != null && wp.Shred > 0d) tgt.ShredArmour(wp.Shred);
 
                     // Apply effect?

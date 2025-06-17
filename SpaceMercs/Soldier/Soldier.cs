@@ -215,7 +215,7 @@ namespace SpaceMercs {
             if (red < 0.0) red = 0.0; // Clamp this for Soldiers (i.e. no reducing the damage so much it flips to healing)
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact, IEntity? source) {
             return InflictDamage_Internal(AllDam, applyEffect, true);
         }
         public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
@@ -329,7 +329,7 @@ namespace SpaceMercs {
                     _Effects.Add(new Effect(eff, src is Soldier s ? s : null));
                 }
             }
-            float TotalDam = (float)InflictDamage(AllDam, applyEffect, null);
+            float TotalDam = (float)InflictDamage(AllDam, applyEffect, null, src);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
             if (ie.CurePoison) {
@@ -1510,7 +1510,7 @@ namespace SpaceMercs {
             foreach (Effect e in Effects) {
                 if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
-                    double TotalDam = InflictDamage(AllDam, applyEffect, fact);
+                    double TotalDam = InflictDamage(AllDam, applyEffect, fact, null);
                     if (Math.Abs(TotalDam) > 0.01) {
                         // Zoom to this soldier & redraw
                         if (!bAnnouncedDmg) {

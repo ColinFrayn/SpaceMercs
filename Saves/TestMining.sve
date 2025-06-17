@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>23/05/2607 13:22:22</Clock>
+<Clock>23/05/2607 18:19:46</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -6460,19 +6460,6 @@
  <Seed>1895124669</Seed>
  <Size>2</Size>
  <Swarm>1</Swarm>
-</Mission>
-<Mission>
- <Type>Mines</Type>
- <Goal>KillBoss</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>109.51</Reward>
- <Diff>8</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>2036973231</Seed>
- <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Caves</Type>
@@ -19391,11 +19378,12 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
- <Location X="2" Y="6"/>
- <Health>45.35614659101955</Health>
- <Stamina>41</Stamina>
+ <OnMission/>
+ <Location X="16" Y="7"/>
+ <Health>63</Health>
+ <Stamina>27</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
+ <Facing>0</Facing>
  <Level>13</Level>
  <XP>954840</XP>
  <Gender>Male</Gender>
@@ -19434,6 +19422,7 @@
   <Exp Skill="Stealth">4</Exp>
   <Exp Skill="Perception">2</Exp>
  </UtilityExperience>
+ <Moved/>
  <KillCount>362</KillCount>
  <ToughestKill>
 <Creature Type="Crystal Alpha">
@@ -19692,6 +19681,110 @@
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
  </Inventory>
+<Mission>
+ <Type>Mines</Type>
+ <Goal>KillBoss</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>109.51</Reward>
+ <Diff>8</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>2036973231</Seed>
+ <Size>2</Size>
+ <Turn>1</Turn>
+ <Level ID="0">
+<MissionLevel Width="38" Height="32">
+ <Diff>8</Diff>
+ <Level>0</Level>
+ <Start X="8" Y="16"/>
+ <End X="-1" Y="-1"/>
+ <Map>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBAAAAAAAAAABBBBBBAABAAAAAAAABBBBBBBBBBBAABBAABBAABBBBBBAABAAAAAAAABBBBBBBBBBBAABBAAAAAABBBBBBAABAAAAAAAABBBBBBBBBBBAABBAAAAAABBBBBBAABAAAAAAAABBBBBBBBBBBAABBBBBBAABBBBBBAABAAAAAAAABBBBBBBBBBBAABBBAAAAAAAABBBAABAAAAAAAABBBBBBBBBBBAABBBAAAAAAAAAAAAABAABBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBAAAAAAAAAAAAABBBAAAAABBBBBBBBBBBBBBBBBBBBAAAAAAAAAABBBAAAAABBBBBBBBBBBBBBBBBBBBAAAAAAAAAABBBAAAAABBBBBBBBBBBBBBBBBBBBAAAAAAAAAABBBBBBAABBBBBBBBBBBBBBBBBBBBAAAAAAAAAABBBBBBAAAAAAABBBBBBBBBBBBBBBBBBAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBAAAAAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBAAAAAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBAABBBBBBBBBBBAAAAAAABBBBBBBBBBBBBBBBBBAABAAAAAAAABBAABBBBBBBBBBBBBBBBBBBBBBBAABAAAAAAAABBAABBBBBBBBBBBBBBBBBBBBBBBAABAAAAAAAABBAABBBBBBBBBBBBBBBBBBBBBBBAABAAAAAAAABBAABBBBBBBBBBBBAAAAAAAAABBAAAAAAAAAAAABBBBBBBBBBBBBBBAAAAAAAAABBAAAAAAAAAAAABBBBBBBBBBBBBBBAABBBAABBBBBBBBBBBBBAABBBBBBBBBBBBBBBBAABBBAABBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</Map>
+ <Explored>0000000111000111100000000000000000000000000001110001111000000000000000000000000000001111011110000000000000000000000000000011111111100000000000000000000000000000000111111000000000000000000000000000000000111110000000000000000000000000011000111111111100001000000000000000000111101111111111111110000000000000000001111111111111111111101100000000000000011111111111111111111111000000000000000111111111111111111111110000000000000001111111111111110000111100000000000000000011111111111100000001000000000000000000111111111111000000000000000000000000001111111111110000000000000000000000000111111111111100000000000000000000000001111111100000000000000000000000000000011111111000000000000000000000000000000111111110000000000000000000000000000000000111100000000000000000000000000000000001111000000000000000000000000000000000011110000000000000000000000000000000000111100000000000000000000000000000000001111000000000000000000000000000000000011110000000000000000000000000000000000111000000000000000000000000000000000001111000000000000000000000000000000000011110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Explored>
+<Creatures>
+<Creature Type="Heavy Gunner">
+ <Level>8</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="31" Y="4"/>
+ <Facing>224</Facing>
+ <Weapon>Heavy Rifle</Weapon>
+</Creature>
+<Creature Type="Mercenary">
+ <Level>8</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="6" Y="9"/>
+ <Facing>247</Facing>
+ <Weapon>Laser Rifle</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>8</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="7" Y="8"/>
+ <Facing>282</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+<Creature Type="Bandit Leader">
+ <Level>8</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="27" Y="19"/>
+ <Facing>328</Facing>
+ <Weapon>Chainsword</Weapon>
+</Creature>
+<Creature Type="Enforcer">
+ <Level>9</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="30" Y="19"/>
+ <Facing>172</Facing>
+ <Weapon>Automatic Rifle</Weapon>
+</Creature>
+<Creature Type="Bandit">
+ <Level>8</Level>
+ <OverrideRace>Human</OverrideRace>
+ <Location X="30" Y="16"/>
+ <Facing>73</Facing>
+ <Weapon>Pistol</Weapon>
+</Creature>
+</Creatures>
+<Resources>
+<ResourceNode Type="Tungsten">
+ <Level>6</Level>
+ <Location X="23" Y="17"/>
+</ResourceNode>
+<ResourceNode Type="Tungsten">
+ <Level>6</Level>
+ <Location X="14" Y="14"/>
+</ResourceNode>
+<ResourceNode Type="Rare Earth Metals">
+ <Level>5</Level>
+ <Location X="15" Y="18"/>
+</ResourceNode>
+<ResourceNode Type="Gold">
+ <Level>3</Level>
+ <Location X="2" Y="22"/>
+</ResourceNode>
+<ResourceNode Type="Titanium">
+ <Level>7</Level>
+ <Location X="22" Y="5"/>
+</ResourceNode>
+<ResourceNode Type="Rare Earth Metals">
+ <Level>5</Level>
+ <Location X="4" Y="7"/>
+</ResourceNode>
+<ResourceNode Type="Titanium">
+ <Level>7</Level>
+ <Location X="22" Y="10"/>
+</ResourceNode>
+</Resources>
+<Traps>
+<Trap X="17" Y="14" L="8">
+<Hidden/>
+<Type>Fire</Type>
+</Trap>
+</Traps>
+</MissionLevel>
+ </Level>
+</Mission>
  <SpaceHulkCoreCount>8</SpaceHulkCoreCount>
  <SpaceHulkCoreRecord>12</SpaceHulkCoreRecord>
 </Team>
@@ -20205,11 +20298,11 @@
  <Item>Fusion Drive</Item>
  <Item>Katana</Item>
  <Item>Elite Combat Suit</Item>
+ <Item>NearLight Drive</Item>
  <Material>Nanomesh</Material>
  <Material>Metasteel</Material>
  <Material>Adamantium</Material>
  <Material>Composite</Material>
- <Item>NearLight Drive</Item>
 </Research>
 </Race>
 <Race Name="Ursalon">

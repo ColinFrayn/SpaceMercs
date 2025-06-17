@@ -44,6 +44,7 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Carbon" Amount="1"/>
+      <Material Name="Recoil Dampener" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Quad Shotgun" Class="Shotgun">
@@ -71,7 +72,8 @@
       <Material Name="Steel" Amount="4"/>
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Copper" Amount="1"/>
-      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Recoil Dampener" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="MagFrag" Class="Shotgun">
@@ -101,10 +103,11 @@
     </Requirements>
     <Materials>
       <Material Name="Steel" Amount="2"/>
-      <Material Name="Copper" Amount="1"/>
-      <Material Name="Titanium" Amount="1"/>
-      <Material Name="Tungsten" Amount="3"/>
-      <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Tungsten" Amount="4"/>
+      <Material Name="Electronic Components" Amount="4"/>
+      <Material Name="Recoil Dampener" Amount="2"/>
+      <Material Name="Superconductor" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Pistol" Class="Pistol">
@@ -157,6 +160,7 @@
       <Material Name="Steel" Amount="8"/>
       <Material Name="Aluminium" Amount="3"/>
       <Material Name="Copper" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Superheavy Rifle" Class="Heavy">
@@ -182,10 +186,12 @@
       <Material Name="Titanium" Amount="2"/>
     </Requirements>
     <Materials>
-      <Material Name="Steel" Amount="6"/>
-      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Titanium" Amount="8"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Tungsten" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="2"/>
+      <Material Name="Superconductor" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Gattling Gun" Class="Heavy">
@@ -216,6 +222,8 @@
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Heavy Frame" Amount="2"/>
+      <Material Name="Superconductor" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Laser Rifle" Class="Rifle">
@@ -238,10 +246,10 @@
     <Materials>
       <Material Name="Steel" Amount="3"/>
       <Material Name="Plastic" Amount="2"/>
-      <Material Name="Aluminium" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Plasma Rifle" Class="Rifle">
@@ -269,6 +277,7 @@
       <Material Name="Titanium" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Powercell" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Laser Rifle" Class="Heavy">
@@ -297,10 +306,11 @@
     <Materials>
       <Material Name="Steel" Amount="6"/>
       <Material Name="Plastic" Amount="5"/>
-      <Material Name="Aluminium" Amount="3"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Electronic Components" Amount="3"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Powercell" Amount="4"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Plasma Rifle" Class="Heavy">
@@ -334,11 +344,13 @@
       <Material Name="Copper" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="3"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Powercell" Amount="5"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Laser Pistol" Class="Pistol">
     <Mass>0.7</Mass>
-    <Cost>25</Cost>
+    <Cost>35</Cost>
     <Rarity>7</Rarity>
     <Speed>8</Speed>
     <Range Accuracy="0" DropOff="0.4" Length="0.4" Speed="2.0" Colour="1.0,0.2,0.2">8</Range>
@@ -380,6 +392,8 @@
       <Material Name="Copper" Amount="4"/>
       <Material Name="Tungsten" Amount="4"/>
       <Material Name="Electronic Components" Amount="4"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Superconductor" Amount="2"/>
     </Materials>
     <Requirements>
       <MinLevel>11</MinLevel>
@@ -411,6 +425,7 @@
       <Material Name="Copper" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="3"/>
       <Material Name="Electronic Components" Amount="4"/>
+      <Material Name="Supercapacitor" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>6</MinLevel>
@@ -443,6 +458,8 @@
       <Material Name="Copper" Amount="10"/>
       <Material Name="Rare Earth Metals" Amount="6"/>
       <Material Name="Electronic Components" Amount="5"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Supercapacitor" Amount="2"/>
     </Materials>
     <Requirements>
       <Prerequisite>Arc Rifle</Prerequisite>
@@ -477,11 +494,12 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="5"/>
       <Material Name="Copper" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Freeze Blaster" Class="Emitter">
     <Mass>12.0</Mass>
-    <Cost>450</Cost>
+    <Cost>250</Cost>
     <Rarity>22</Rarity>
     <Speed>18</Speed>
     <Range Colour="0.0,0.1,1.0">6</Range>
@@ -506,6 +524,7 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="5"/>
       <Material Name="Frost Gland" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>5</MinLevel>
@@ -536,12 +555,11 @@
       </Effect>
     </ItemEffect>
     <Materials>
-      <Material Name="Steel" Amount="6"/>
-      <Material Name="Tungsten" Amount="1"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="5"/>
-      <Material Name="Electronic Components" Amount="1"/>
-      <Material Name="Crystals" Amount="3"/>
+      <Material Name="Tungsten" Amount="4"/>
+      <Material Name="Industrial Chemicals" Amount="6"/>
+      <Material Name="Electronic Components" Amount="4"/>
+      <Material Name="Crystals" Amount="4"/>
+      <Material Name="Pressure Canister" Amount="2"/>
     </Materials>
     <Requirements>
       <MinLevel>9</MinLevel>
@@ -575,6 +593,8 @@
       <Material Name="Titanium" Amount="4"/>
       <Material Name="Industrial Chemicals" Amount="8"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="2"/>
+      <Material Name="Demon Blood" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>13</MinLevel>
@@ -610,6 +630,9 @@
       <Material Name="Tungsten" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="8"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Incendiary Bulb" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="2"/>
+      <Material Name="Pressure Canister" Amount="4"/>
     </Materials>
     <Requirements>
       <MinLevel>7</MinLevel>
@@ -642,8 +665,11 @@
     <Materials>
       <Material Name="Vulcanin" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="10"/>
-      <Material Name="Electronic Components" Amount="1"/>
-      <Material Name="Incendiary Bulb" Amount="2"/>
+      <Material Name="Electronic Components" Amount="5"/>
+      <Material Name="Incendiary Bulb" Amount="4"/>
+      <Material Name="Heavy Frame" Amount="2"/>
+      <Material Name="Pressure Canister" Amount="4"/>
+      <Material Name="Superconductor" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Plasma Thrower</Prerequisite>
@@ -679,7 +705,10 @@
       <Material Name="Industrial Chemicals" Amount="15"/>
       <Material Name="Electronic Components" Amount="2"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
-      <Material Name="Demon Blood" Amount="1"/>
+      <Material Name="Demon Blood" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="4"/>
+      <Material Name="Superconductor" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Hellfire Jet</Prerequisite>
@@ -688,7 +717,7 @@
       <CashCost>1250</CashCost>
       <Material Name="Industrial Chemicals" Amount="6"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
-      <Material Name="Demon Blood" Amount="1"/>
+      <Material Name="Demon Blood" Amount="2"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">4</Relations>
     </Requirements>
@@ -710,7 +739,8 @@
     <Materials>
       <Material Name="Steel" Amount="4"/>
       <Material Name="Plastic" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Precision Catapult" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Incendiary Grenadier" Class="Launcher">
@@ -741,8 +771,9 @@
       <Material Name="Steel" Amount="8"/>
       <Material Name="Plastic" Amount="2"/>
       <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
-      <Material Name="Copper" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="4"/>
+      <Material Name="Precision Catapult" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Plasma Grenadier" Class="Launcher">
@@ -768,9 +799,11 @@
     <Unmodifiable/>
     <Materials>
       <Material Name="Steel" Amount="6"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Industrial Chemicals" Amount="4"/>
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Precision Catapult" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Incendiary Grenadier</Prerequisite>
@@ -813,6 +846,8 @@
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Frost Gland" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Precision Catapult" Amount="1"/>
+      <Material Name="Pressure Canister" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Incendiary Grenadier</Prerequisite>
@@ -845,6 +880,9 @@
       <Material Name="Industrial Chemicals" Amount="3"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Electronic Components" Amount="3"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Precision Catapult" Amount="2"/>
+      <Material Name="Pressure Canister" Amount="4"/>
     </Materials>
     <Requirements>
       <Prerequisite>Incendiary Grenadier</Prerequisite>
@@ -896,11 +934,12 @@
       <Facility>Armoury</Facility>
     </Requirements>
     <Materials>
-      <Material Name="Steel" Amount="3"/>
+      <Material Name="Steel" Amount="1"/>
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Powercell" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Gauss Sniper Rifle" Class="Sniper">
@@ -920,6 +959,8 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Powercell" Amount="2"/>
+      <Material Name="Superconductor" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Laser Sniper Rifle</Prerequisite>
@@ -969,8 +1010,7 @@
     <Sound>SwordSlice</Sound>
     <Noise>1</Noise>
     <Materials>
-      <Material Name="Steel" Amount="1"/>
-      <Material Name="Tungsten" Amount="1"/>
+      <Material Name="Steel" Amount="2"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Katana" Class="Melee">
@@ -990,7 +1030,7 @@
       <Material Name="Titanium" Amount="1"/>
     </Requirements>
     <Materials>
-      <Material Name="Steel" Amount="1"/>
+      <Material Name="Steel" Amount="2"/>
       <Material Name="Titanium" Amount="1"/>
     </Materials>
   </WeaponType>
@@ -1020,6 +1060,7 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Axe" Class="Melee">
@@ -1061,6 +1102,7 @@
       <Material Name="Tungsten" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Chainsword" Class="Melee">
@@ -1086,6 +1128,7 @@
       <Material Name="Aluminium" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Rubber" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Exo Claws" Class="Melee">
@@ -1108,9 +1151,8 @@
     </Requirements>
     <Noise>2</Noise>
     <Materials>
-      <Material Name="Steel" Amount="1"/>
-      <Material Name="Tungsten" Amount="1"/>
-      <Material Name="Chitin" Amount="4"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Heavy Chitin" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
     </Materials>
   </WeaponType>
@@ -1135,10 +1177,8 @@
     </Requirements>
     <Noise>2</Noise>
     <Materials>
-      <Material Name="Steel" Amount="1"/>
-      <Material Name="Tungsten" Amount="1"/>
-      <Material Name="Chitin" Amount="5"/>
-      <Material Name="Heavy Chitin" Amount="1"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Heavy Chitin" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
     </Materials>
   </WeaponType>
@@ -1163,9 +1203,8 @@
     </Requirements>
     <Noise>4</Noise>
     <Materials>
-      <Material Name="Steel" Amount="3"/>
-      <Material Name="Tungsten" Amount="1"/>
-      <Material Name="Titanium" Amount="1"/>
+      <Material Name="Steel" Amount="4"/>
+      <Material Name="Titanium" Amount="4"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Powerfist" Class="Melee">
@@ -1193,6 +1232,8 @@
       <Material Name="Steel" Amount="4"/>
       <Material Name="Titanium" Amount="6"/>
       <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Powercell" Amount="8"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Heavy Chainsword" Class="Melee">
@@ -1223,13 +1264,15 @@
       <Material Name="Titanium" Amount="4"/>
       <Material Name="Copper" Amount="6"/>
       <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Heavy Frame" Amount="1"/>
+      <Material Name="Powercell" Amount="8"/>
     </Materials>
   </WeaponType>
   <WeaponType Name="Slugger" Class="Shotgun">
     <Mass>8.0</Mass>
     <Cost>380</Cost>
     <Rarity>18</Rarity>
-    <Speed>18</Speed>
+    <Speed>20</Speed>
     <Shots>3</Shots>
     <Recoil>0.5</Recoil>
     <Shred>2</Shred>
@@ -1253,6 +1296,7 @@
       <Material Name="Tungsten" Amount="2"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Carbon" Amount="1"/>
+      <Material Name="Recoil Dampener" Amount="3"/>
     </Materials>
   </WeaponType>
   <!-- Precursor weapons -->

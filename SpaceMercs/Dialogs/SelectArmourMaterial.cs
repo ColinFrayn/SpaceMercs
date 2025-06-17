@@ -16,7 +16,7 @@ namespace SpaceMercs.Dialogs {
             lbArmourType.Text = tp.Name;
             cbMaterialType.Items.Clear();
             foreach (MaterialType mt in StaticData.Materials.Where(m => m.IsArmourMaterial && m.MaxLevel >= tp.MinMatLvl)) {
-                int tot = ThisType.Size;
+                int tot = ThisType.BaseMaterialRequirements;
                 if (BaseMats.ContainsKey(mt)) tot += BaseMats[mt];
                 if (PlayerTeam.CountMaterial(mt) >= tot) {
                     cbMaterialType.Items.Add(mt.Name);

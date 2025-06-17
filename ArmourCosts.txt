@@ -1,0 +1,250 @@
+ArmourType Carbon Fibre Military Helmet : Cost = 2.17cr : MatCost = 2.00cr : Ratio = 1.08
+ArmourType Steel Military Helmet : Cost = 5.16cr : MatCost = 4.20cr : Ratio = 1.23
+ArmourType Kevlar Military Helmet : Cost = 8.63cr : MatCost = 5.20cr : Ratio = 1.66
+ArmourType Composite Military Helmet : Cost = 21.68cr : MatCost = 25.20cr : Ratio = 0.86
+ArmourType Metasteel Military Helmet : Cost = 41.17cr : MatCost = 50.20cr : Ratio = 0.82
+ArmourType Nanomesh Military Helmet : Cost = 33.13cr : MatCost = 55.20cr : Ratio = 0.60 ** SOLD CHEAPLY **
+ArmourType Mithril Military Helmet : Cost = 64.04cr : MatCost = 120.20cr : Ratio = 0.53 ** SOLD CHEAPLY **
+ArmourType Adamantium Military Helmet : Cost = 97.74cr : MatCost = 180.20cr : Ratio = 0.54 ** SOLD CHEAPLY **
+ArmourType Etherealite Military Helmet : Cost = 103.36cr : MatCost = 240.20cr : Ratio = 0.43 ** SOLD CHEAPLY **
+ArmourType Ultramesh Military Helmet : Cost = 123.39cr : MatCost = 300.20cr : Ratio = 0.41 ** SOLD CHEAPLY **
+ArmourType Steel Stealth Helmet : Cost = 264.50cr : MatCost = 120.70cr : Ratio = 2.19 ** EASY PROFIT **
+ArmourType Kevlar Stealth Helmet : Cost = 287.80cr : MatCost = 121.70cr : Ratio = 2.36 ** EASY PROFIT **
+ArmourType Composite Stealth Helmet : Cost = 287.97cr : MatCost = 141.70cr : Ratio = 2.03 ** EASY PROFIT **
+ArmourType Metasteel Stealth Helmet : Cost = 254.85cr : MatCost = 166.70cr : Ratio = 1.53
+ArmourType Nanomesh Stealth Helmet : Cost = 373.67cr : MatCost = 171.70cr : Ratio = 2.18 ** EASY PROFIT **
+ArmourType Mithril Stealth Helmet : Cost = 301.99cr : MatCost = 236.70cr : Ratio = 1.28
+ArmourType Adamantium Stealth Helmet : Cost = 222.48cr : MatCost = 296.70cr : Ratio = 0.75 ** SOLD CHEAPLY **
+ArmourType Etherealite Stealth Helmet : Cost = 427.96cr : MatCost = 356.70cr : Ratio = 1.20
+ArmourType Ultramesh Stealth Helmet : Cost = 353.37cr : MatCost = 416.70cr : Ratio = 0.85
+ArmourType Composite Infiltrator Helmet : Cost = 262.41cr : MatCost = 148.20cr : Ratio = 1.77
+ArmourType Metasteel Infiltrator Helmet : Cost = 232.18cr : MatCost = 173.20cr : Ratio = 1.34
+ArmourType Nanomesh Infiltrator Helmet : Cost = 340.49cr : MatCost = 178.20cr : Ratio = 1.91
+ArmourType Mithril Infiltrator Helmet : Cost = 275.09cr : MatCost = 243.20cr : Ratio = 1.13
+ArmourType Adamantium Infiltrator Helmet : Cost = 202.55cr : MatCost = 303.20cr : Ratio = 0.67 ** SOLD CHEAPLY **
+ArmourType Etherealite Infiltrator Helmet : Cost = 389.81cr : MatCost = 363.20cr : Ratio = 1.07
+ArmourType Ultramesh Infiltrator Helmet : Cost = 321.78cr : MatCost = 423.20cr : Ratio = 0.76
+ArmourType Carbon Fibre Chestplate : Cost = 6.17cr : MatCost = 5.50cr : Ratio = 1.12
+ArmourType Steel Chestplate : Cost = 17.00cr : MatCost = 9.90cr : Ratio = 1.72
+ArmourType Kevlar Chestplate : Cost = 28.41cr : MatCost = 11.90cr : Ratio = 2.39 ** EASY PROFIT **
+ArmourType Composite Chestplate : Cost = 71.40cr : MatCost = 51.90cr : Ratio = 1.38
+ArmourType Metasteel Chestplate : Cost = 135.57cr : MatCost = 101.90cr : Ratio = 1.33
+ArmourType Nanomesh Chestplate : Cost = 109.10cr : MatCost = 111.90cr : Ratio = 0.97
+ArmourType Mithril Chestplate : Cost = 210.89cr : MatCost = 241.90cr : Ratio = 0.87
+ArmourType Adamantium Chestplate : Cost = 321.86cr : MatCost = 361.90cr : Ratio = 0.89
+ArmourType Etherealite Chestplate : Cost = 340.37cr : MatCost = 481.90cr : Ratio = 0.71 ** SOLD CHEAPLY **
+ArmourType Ultramesh Chestplate : Cost = 406.33cr : MatCost = 601.90cr : Ratio = 0.68 ** SOLD CHEAPLY **
+ArmourType Carbon Fibre Shielded Chestplate : Cost = 182.02cr : MatCost = 233.50cr : Ratio = 0.78
+ArmourType Steel Shielded Chestplate : Cost = 151.28cr : MatCost = 237.90cr : Ratio = 0.64 ** SOLD CHEAPLY **
+ArmourType Kevlar Shielded Chestplate : Cost = 179.04cr : MatCost = 239.90cr : Ratio = 0.75 ** SOLD CHEAPLY **
+ArmourType Composite Shielded Chestplate : Cost = 241.76cr : MatCost = 279.90cr : Ratio = 0.86
+ArmourType Metasteel Shielded Chestplate : Cost = 319.43cr : MatCost = 329.90cr : Ratio = 0.97
+ArmourType Nanomesh Shielded Chestplate : Cost = 337.68cr : MatCost = 339.90cr : Ratio = 0.99
+ArmourType Mithril Shielded Chestplate : Cost = 451.73cr : MatCost = 469.90cr : Ratio = 0.96
+ArmourType Adamantium Shielded Chestplate : Cost = 575.41cr : MatCost = 589.90cr : Ratio = 0.98
+ArmourType Etherealite Shielded Chestplate : Cost = 700.64cr : MatCost = 709.90cr : Ratio = 0.99
+ArmourType Ultramesh Shielded Chestplate : Cost = 761.09cr : MatCost = 829.90cr : Ratio = 0.92
+ArmourType Carbon Fibre Arm Plating : Cost = 4.17cr : MatCost = 4.40cr : Ratio = 0.95
+ArmourType Steel Arm Plating : Cost = 17.29cr : MatCost = 7.70cr : Ratio = 2.25 ** EASY PROFIT **
+ArmourType Kevlar Arm Plating : Cost = 28.88cr : MatCost = 9.20cr : Ratio = 3.14 ** EASY PROFIT **
+ArmourType Composite Arm Plating : Cost = 72.59cr : MatCost = 39.20cr : Ratio = 1.85
+ArmourType Metasteel Arm Plating : Cost = 137.84cr : MatCost = 76.70cr : Ratio = 1.80
+ArmourType Nanomesh Arm Plating : Cost = 110.92cr : MatCost = 84.20cr : Ratio = 1.32
+ArmourType Mithril Arm Plating : Cost = 214.42cr : MatCost = 181.70cr : Ratio = 1.18
+ArmourType Adamantium Arm Plating : Cost = 327.26cr : MatCost = 271.70cr : Ratio = 1.20
+ArmourType Etherealite Arm Plating : Cost = 346.07cr : MatCost = 361.70cr : Ratio = 0.96
+ArmourType Ultramesh Arm Plating : Cost = 413.14cr : MatCost = 451.70cr : Ratio = 0.91
+ArmourType Steel Powered Arm Plating : Cost = 37.57cr : MatCost = 59.20cr : Ratio = 0.63 ** SOLD CHEAPLY **
+ArmourType Kevlar Powered Arm Plating : Cost = 47.31cr : MatCost = 60.70cr : Ratio = 0.78
+ArmourType Composite Powered Arm Plating : Cost = 75.25cr : MatCost = 90.70cr : Ratio = 0.83
+ArmourType Metasteel Powered Arm Plating : Cost = 113.60cr : MatCost = 128.20cr : Ratio = 0.89
+ArmourType Nanomesh Powered Arm Plating : Cost = 108.32cr : MatCost = 135.70cr : Ratio = 0.80
+ArmourType Mithril Powered Arm Plating : Cost = 167.24cr : MatCost = 233.20cr : Ratio = 0.72 ** SOLD CHEAPLY **
+ArmourType Adamantium Powered Arm Plating : Cost = 231.33cr : MatCost = 323.20cr : Ratio = 0.72 ** SOLD CHEAPLY **
+ArmourType Etherealite Powered Arm Plating : Cost = 263.96cr : MatCost = 413.20cr : Ratio = 0.64 ** SOLD CHEAPLY **
+ArmourType Ultramesh Powered Arm Plating : Cost = 299.31cr : MatCost = 503.20cr : Ratio = 0.59 ** SOLD CHEAPLY **
+ArmourType Carbon Fibre Leg Plating : Cost = 4.17cr : MatCost = 4.40cr : Ratio = 0.95
+ArmourType Steel Leg Plating : Cost = 12.50cr : MatCost = 7.70cr : Ratio = 1.62
+ArmourType Kevlar Leg Plating : Cost = 20.88cr : MatCost = 9.20cr : Ratio = 2.27 ** EASY PROFIT **
+ArmourType Composite Leg Plating : Cost = 52.48cr : MatCost = 39.20cr : Ratio = 1.34
+ArmourType Metasteel Leg Plating : Cost = 99.65cr : MatCost = 76.70cr : Ratio = 1.30
+ArmourType Nanomesh Leg Plating : Cost = 80.20cr : MatCost = 84.20cr : Ratio = 0.95
+ArmourType Mithril Leg Plating : Cost = 155.02cr : MatCost = 181.70cr : Ratio = 0.85
+ArmourType Adamantium Leg Plating : Cost = 236.60cr : MatCost = 271.70cr : Ratio = 0.87
+ArmourType Etherealite Leg Plating : Cost = 250.20cr : MatCost = 361.70cr : Ratio = 0.69 ** SOLD CHEAPLY **
+ArmourType Ultramesh Leg Plating : Cost = 298.69cr : MatCost = 451.70cr : Ratio = 0.66 ** SOLD CHEAPLY **
+ArmourType Steel Powered Leg Plating : Cost = 70.46cr : MatCost = 60.70cr : Ratio = 1.16
+ArmourType Kevlar Powered Leg Plating : Cost = 83.10cr : MatCost = 62.20cr : Ratio = 1.34
+ArmourType Composite Powered Leg Plating : Cost = 111.03cr : MatCost = 92.20cr : Ratio = 1.20
+ArmourType Metasteel Powered Leg Plating : Cost = 145.23cr : MatCost = 129.70cr : Ratio = 1.12
+ArmourType Nanomesh Powered Leg Plating : Cost = 154.75cr : MatCost = 137.20cr : Ratio = 1.13
+ArmourType Mithril Powered Leg Plating : Cost = 204.70cr : MatCost = 234.70cr : Ratio = 0.87
+ArmourType Adamantium Powered Leg Plating : Cost = 258.85cr : MatCost = 324.70cr : Ratio = 0.80
+ArmourType Etherealite Powered Leg Plating : Cost = 317.02cr : MatCost = 414.70cr : Ratio = 0.76
+ArmourType Ultramesh Powered Leg Plating : Cost = 343.07cr : MatCost = 504.70cr : Ratio = 0.68 ** SOLD CHEAPLY **
+ArmourType Carbon Fibre Plate Boots : Cost = 2.17cr : MatCost = 2.00cr : Ratio = 1.08
+ArmourType Steel Plate Boots : Cost = 8.99cr : MatCost = 4.20cr : Ratio = 2.14 ** EASY PROFIT **
+ArmourType Kevlar Plate Boots : Cost = 15.02cr : MatCost = 5.20cr : Ratio = 2.89 ** EASY PROFIT **
+ArmourType Composite Plate Boots : Cost = 37.75cr : MatCost = 25.20cr : Ratio = 1.50
+ArmourType Metasteel Plate Boots : Cost = 71.68cr : MatCost = 50.20cr : Ratio = 1.43
+ArmourType Nanomesh Plate Boots : Cost = 57.68cr : MatCost = 55.20cr : Ratio = 1.04
+ArmourType Mithril Plate Boots : Cost = 111.50cr : MatCost = 120.20cr : Ratio = 0.93
+ArmourType Adamantium Plate Boots : Cost = 170.17cr : MatCost = 180.20cr : Ratio = 0.94
+ArmourType Etherealite Plate Boots : Cost = 179.96cr : MatCost = 240.20cr : Ratio = 0.75 ** SOLD CHEAPLY **
+ArmourType Ultramesh Plate Boots : Cost = 214.83cr : MatCost = 300.20cr : Ratio = 0.72 ** SOLD CHEAPLY **
+ArmourType Steel Stealth Boots : Cost = 443.59cr : MatCost = 242.20cr : Ratio = 1.83
+ArmourType Kevlar Stealth Boots : Cost = 482.67cr : MatCost = 243.20cr : Ratio = 1.98
+ArmourType Composite Stealth Boots : Cost = 482.97cr : MatCost = 263.20cr : Ratio = 1.84
+ArmourType Metasteel Stealth Boots : Cost = 427.45cr : MatCost = 288.20cr : Ratio = 1.48
+ArmourType Nanomesh Stealth Boots : Cost = 626.71cr : MatCost = 293.20cr : Ratio = 2.14 ** EASY PROFIT **
+ArmourType Mithril Stealth Boots : Cost = 506.53cr : MatCost = 358.20cr : Ratio = 1.41
+ArmourType Adamantium Stealth Boots : Cost = 373.24cr : MatCost = 418.20cr : Ratio = 0.89
+ArmourType Etherealite Stealth Boots : Cost = 717.85cr : MatCost = 478.20cr : Ratio = 1.50
+ArmourType Ultramesh Stealth Boots : Cost = 592.78cr : MatCost = 538.20cr : Ratio = 1.10
+ArmourType Carbon Fibre Gauntlets : Cost = 2.17cr : MatCost = 2.00cr : Ratio = 1.08
+ArmourType Steel Gauntlets : Cost = 10.75cr : MatCost = 4.20cr : Ratio = 2.56 ** EASY PROFIT **
+ArmourType Kevlar Gauntlets : Cost = 17.96cr : MatCost = 5.20cr : Ratio = 3.45 ** EASY PROFIT **
+ArmourType Composite Gauntlets : Cost = 45.13cr : MatCost = 25.20cr : Ratio = 1.79
+ArmourType Metasteel Gauntlets : Cost = 85.68cr : MatCost = 50.20cr : Ratio = 1.71
+ArmourType Nanomesh Gauntlets : Cost = 68.95cr : MatCost = 55.20cr : Ratio = 1.25
+ArmourType Mithril Gauntlets : Cost = 133.29cr : MatCost = 120.20cr : Ratio = 1.11
+ArmourType Adamantium Gauntlets : Cost = 203.43cr : MatCost = 180.20cr : Ratio = 1.13
+ArmourType Etherealite Gauntlets : Cost = 215.13cr : MatCost = 240.20cr : Ratio = 0.90
+ArmourType Ultramesh Gauntlets : Cost = 256.82cr : MatCost = 300.20cr : Ratio = 0.86
+ArmourType Steel Powered Gauntlets : Cost = 124.29cr : MatCost = 57.20cr : Ratio = 2.17 ** EASY PROFIT **
+ArmourType Kevlar Powered Gauntlets : Cost = 139.75cr : MatCost = 58.20cr : Ratio = 2.40 ** EASY PROFIT **
+ArmourType Composite Powered Gauntlets : Cost = 159.39cr : MatCost = 78.20cr : Ratio = 2.04 ** EASY PROFIT **
+ArmourType Metasteel Powered Gauntlets : Cost = 174.01cr : MatCost = 103.20cr : Ratio = 1.69
+ArmourType Nanomesh Powered Gauntlets : Cost = 214.32cr : MatCost = 108.20cr : Ratio = 1.98
+ArmourType Mithril Powered Gauntlets : Cost = 229.06cr : MatCost = 173.20cr : Ratio = 1.32
+ArmourType Adamantium Powered Gauntlets : Cost = 244.55cr : MatCost = 233.20cr : Ratio = 1.05
+ArmourType Etherealite Powered Gauntlets : Cost = 343.51cr : MatCost = 293.20cr : Ratio = 1.17
+ArmourType Ultramesh Powered Gauntlets : Cost = 340.67cr : MatCost = 353.20cr : Ratio = 0.96
+ArmourType Steel Stealth Gauntlets : Cost = 443.59cr : MatCost = 127.20cr : Ratio = 3.49 ** EASY PROFIT **
+ArmourType Kevlar Stealth Gauntlets : Cost = 482.67cr : MatCost = 128.20cr : Ratio = 3.76 ** EASY PROFIT **
+ArmourType Composite Stealth Gauntlets : Cost = 482.97cr : MatCost = 148.20cr : Ratio = 3.26 ** EASY PROFIT **
+ArmourType Metasteel Stealth Gauntlets : Cost = 427.45cr : MatCost = 173.20cr : Ratio = 2.47 ** EASY PROFIT **
+ArmourType Nanomesh Stealth Gauntlets : Cost = 626.71cr : MatCost = 178.20cr : Ratio = 3.52 ** EASY PROFIT **
+ArmourType Mithril Stealth Gauntlets : Cost = 506.53cr : MatCost = 243.20cr : Ratio = 2.08 ** EASY PROFIT **
+ArmourType Adamantium Stealth Gauntlets : Cost = 373.24cr : MatCost = 303.20cr : Ratio = 1.23
+ArmourType Etherealite Stealth Gauntlets : Cost = 717.85cr : MatCost = 363.20cr : Ratio = 1.98
+ArmourType Ultramesh Stealth Gauntlets : Cost = 592.78cr : MatCost = 423.20cr : Ratio = 1.40
+ArmourType Carbon Fibre Core Armour : Cost = 14.17cr : MatCost = 17.00cr : Ratio = 0.83
+ArmourType Steel Core Armour : Cost = 38.19cr : MatCost = 25.80cr : Ratio = 1.48
+ArmourType Kevlar Core Armour : Cost = 63.81cr : MatCost = 29.80cr : Ratio = 2.14 ** EASY PROFIT **
+ArmourType Composite Core Armour : Cost = 160.36cr : MatCost = 109.80cr : Ratio = 1.46
+ArmourType Metasteel Core Armour : Cost = 304.50cr : MatCost = 209.80cr : Ratio = 1.45
+ArmourType Nanomesh Core Armour : Cost = 245.04cr : MatCost = 229.80cr : Ratio = 1.07
+ArmourType Mithril Core Armour : Cost = 473.67cr : MatCost = 489.80cr : Ratio = 0.97
+ArmourType Adamantium Core Armour : Cost = 722.94cr : MatCost = 729.80cr : Ratio = 0.99
+ArmourType Etherealite Core Armour : Cost = 764.50cr : MatCost = 969.80cr : Ratio = 0.79
+ArmourType Ultramesh Core Armour : Cost = 912.66cr : MatCost = 1,209.80cr : Ratio = 0.75
+ArmourType Steel Combat Suit : Cost = 110.23cr : MatCost = 242.40cr : Ratio = 0.45 ** SOLD CHEAPLY **
+ArmourType Kevlar Combat Suit : Cost = 179.71cr : MatCost = 247.90cr : Ratio = 0.72 ** SOLD CHEAPLY **
+ArmourType Composite Combat Suit : Cost = 439.14cr : MatCost = 357.90cr : Ratio = 1.23
+ArmourType Metasteel Combat Suit : Cost = 825.43cr : MatCost = 495.40cr : Ratio = 1.67
+ArmourType Nanomesh Combat Suit : Cost = 669.11cr : MatCost = 522.90cr : Ratio = 1.28
+ArmourType Mithril Combat Suit : Cost = 1,281.31cr : MatCost = 880.40cr : Ratio = 1.46
+ArmourType Adamantium Combat Suit : Cost = 1,948.73cr : MatCost = 1,210.40cr : Ratio = 1.61
+ArmourType Etherealite Combat Suit : Cost = 2,066.29cr : MatCost = 1,540.40cr : Ratio = 1.34
+ArmourType Ultramesh Combat Suit : Cost = 2,462.21cr : MatCost = 1,870.40cr : Ratio = 1.32
+ArmourType Composite Elite Combat Suit : Cost = 796.99cr : MatCost = 561.90cr : Ratio = 1.42
+ArmourType Metasteel Elite Combat Suit : Cost = 1,352.49cr : MatCost = 699.40cr : Ratio = 1.93
+ArmourType Nanomesh Elite Combat Suit : Cost = 1,181.28cr : MatCost = 726.90cr : Ratio = 1.63
+ArmourType Mithril Elite Combat Suit : Cost = 2,051.89cr : MatCost = 1,084.40cr : Ratio = 1.89
+ArmourType Adamantium Elite Combat Suit : Cost = 3,000.32cr : MatCost = 1,414.40cr : Ratio = 2.12 ** EASY PROFIT **
+ArmourType Etherealite Elite Combat Suit : Cost = 3,278.94cr : MatCost = 1,744.40cr : Ratio = 1.88
+ArmourType Ultramesh Elite Combat Suit : Cost = 3,827.62cr : MatCost = 2,074.40cr : Ratio = 1.85
+ArmourType Composite Light Combat Suit : Cost = 322.13cr : MatCost = 350.40cr : Ratio = 0.92
+ArmourType Metasteel Light Combat Suit : Cost = 600.59cr : MatCost = 487.90cr : Ratio = 1.23
+ArmourType Nanomesh Light Combat Suit : Cost = 489.71cr : MatCost = 515.40cr : Ratio = 0.95
+ArmourType Mithril Light Combat Suit : Cost = 930.69cr : MatCost = 872.90cr : Ratio = 1.07
+ArmourType Adamantium Light Combat Suit : Cost = 1,411.41cr : MatCost = 1,202.90cr : Ratio = 1.17
+ArmourType Etherealite Light Combat Suit : Cost = 1,499.85cr : MatCost = 1,532.90cr : Ratio = 0.98
+ArmourType Ultramesh Light Combat Suit : Cost = 1,784.55cr : MatCost = 1,862.90cr : Ratio = 0.96
+ArmourType Metasteel Predator Suit : Cost = 2,497.32cr : MatCost = 1,191.40cr : Ratio = 2.10 ** EASY PROFIT **
+ArmourType Nanomesh Predator Suit : Cost = 2,207.93cr : MatCost = 1,218.90cr : Ratio = 1.81
+ArmourType Mithril Predator Suit : Cost = 3,773.74cr : MatCost = 1,576.40cr : Ratio = 2.39 ** EASY PROFIT **
+ArmourType Adamantium Predator Suit : Cost = 5,479.27cr : MatCost = 1,906.40cr : Ratio = 2.87 ** EASY PROFIT **
+ArmourType Etherealite Predator Suit : Cost = 6,020.82cr : MatCost = 2,236.40cr : Ratio = 2.69 ** EASY PROFIT **
+ArmourType Ultramesh Predator Suit : Cost = 7,002.43cr : MatCost = 2,566.40cr : Ratio = 2.73 ** EASY PROFIT **
+ArmourType Steel Shock Armour : Cost = 252.02cr : MatCost = 286.80cr : Ratio = 0.88
+ArmourType Kevlar Shock Armour : Cost = 311.92cr : MatCost = 290.80cr : Ratio = 1.07
+ArmourType Composite Shock Armour : Cost = 475.64cr : MatCost = 370.80cr : Ratio = 1.28
+ArmourType Metasteel Shock Armour : Cost = 696.40cr : MatCost = 470.80cr : Ratio = 1.48
+ArmourType Nanomesh Shock Armour : Cost = 679.80cr : MatCost = 490.80cr : Ratio = 1.39
+ArmourType Mithril Shock Armour : Cost = 1,016.43cr : MatCost = 750.80cr : Ratio = 1.35
+ArmourType Adamantium Shock Armour : Cost = 1,382.47cr : MatCost = 990.80cr : Ratio = 1.40
+ArmourType Etherealite Shock Armour : Cost = 1,598.39cr : MatCost = 1,230.80cr : Ratio = 1.30
+ArmourType Ultramesh Shock Armour : Cost = 1,796.61cr : MatCost = 1,470.80cr : Ratio = 1.22
+ArmourType Composite Advanced Shock Armour : Cost = 1,161.60cr : MatCost = 873.40cr : Ratio = 1.33
+ArmourType Metasteel Advanced Shock Armour : Cost = 1,701.97cr : MatCost = 973.40cr : Ratio = 1.75
+ArmourType Nanomesh Advanced Shock Armour : Cost = 1,660.49cr : MatCost = 993.40cr : Ratio = 1.67
+ArmourType Mithril Advanced Shock Armour : Cost = 2,484.62cr : MatCost = 1,253.40cr : Ratio = 1.98
+ArmourType Adamantium Advanced Shock Armour : Cost = 3,380.78cr : MatCost = 1,493.40cr : Ratio = 2.26 ** EASY PROFIT **
+ArmourType Etherealite Advanced Shock Armour : Cost = 3,907.55cr : MatCost = 1,733.40cr : Ratio = 2.25 ** EASY PROFIT **
+ArmourType Ultramesh Advanced Shock Armour : Cost = 4,393.06cr : MatCost = 1,973.40cr : Ratio = 2.23 ** EASY PROFIT **
+ArmourType Metasteel Archon Armour : Cost = 3,511.95cr : MatCost = 2,059.40cr : Ratio = 1.71
+ArmourType Nanomesh Archon Armour : Cost = 3,330.53cr : MatCost = 2,079.40cr : Ratio = 1.60
+ArmourType Mithril Archon Armour : Cost = 5,180.62cr : MatCost = 2,339.40cr : Ratio = 2.21 ** EASY PROFIT **
+ArmourType Adamantium Archon Armour : Cost = 7,193.62cr : MatCost = 2,579.40cr : Ratio = 2.79 ** EASY PROFIT **
+ArmourType Etherealite Archon Armour : Cost = 8,183.56cr : MatCost = 2,819.40cr : Ratio = 2.90 ** EASY PROFIT **
+ArmourType Ultramesh Archon Armour : Cost = 9,298.29cr : MatCost = 3,059.40cr : Ratio = 3.04 ** EASY PROFIT **
+ArmourType Metasteel Archon Helmet : Cost = 556.20cr : MatCost = 653.20cr : Ratio = 0.85
+ArmourType Nanomesh Archon Helmet : Cost = 667.49cr : MatCost = 658.20cr : Ratio = 1.01
+ArmourType Mithril Archon Helmet : Cost = 742.02cr : MatCost = 723.20cr : Ratio = 1.03
+ArmourType Adamantium Archon Helmet : Cost = 821.52cr : MatCost = 783.20cr : Ratio = 1.05
+ArmourType Etherealite Archon Helmet : Cost = 1,120.07cr : MatCost = 843.20cr : Ratio = 1.33
+ArmourType Ultramesh Archon Helmet : Cost = 1,131.67cr : MatCost = 903.20cr : Ratio = 1.25
+ArmourType Steel Stealth Armour : Cost = 1,092.31cr : MatCost = 613.80cr : Ratio = 1.78
+ArmourType Kevlar Stealth Armour : Cost = 1,190.70cr : MatCost = 617.80cr : Ratio = 1.93
+ArmourType Composite Stealth Armour : Cost = 1,200.81cr : MatCost = 697.80cr : Ratio = 1.72
+ArmourType Metasteel Stealth Armour : Cost = 1,078.54cr : MatCost = 797.80cr : Ratio = 1.35
+ArmourType Nanomesh Stealth Armour : Cost = 1,561.77cr : MatCost = 817.80cr : Ratio = 1.91
+ArmourType Mithril Stealth Armour : Cost = 1,289.02cr : MatCost = 1,077.80cr : Ratio = 1.20
+ArmourType Adamantium Stealth Armour : Cost = 986.09cr : MatCost = 1,317.80cr : Ratio = 0.75 ** SOLD CHEAPLY **
+ArmourType Etherealite Stealth Armour : Cost = 1,835.81cr : MatCost = 1,557.80cr : Ratio = 1.18
+ArmourType Ultramesh Stealth Armour : Cost = 1,543.26cr : MatCost = 1,797.80cr : Ratio = 0.86
+ArmourType Composite Infiltration Suit : Cost = 4,102.40cr : MatCost = 1,382.00cr : Ratio = 2.97 ** EASY PROFIT **
+ArmourType Metasteel Infiltration Suit : Cost = 3,665.77cr : MatCost = 1,519.50cr : Ratio = 2.41 ** EASY PROFIT **
+ArmourType Nanomesh Infiltration Suit : Cost = 5,331.26cr : MatCost = 1,547.00cr : Ratio = 3.45 ** EASY PROFIT **
+ArmourType Mithril Infiltration Suit : Cost = 4,368.25cr : MatCost = 1,904.50cr : Ratio = 2.29 ** EASY PROFIT **
+ArmourType Adamantium Infiltration Suit : Cost = 3,299.22cr : MatCost = 2,234.50cr : Ratio = 1.48
+ArmourType Etherealite Infiltration Suit : Cost = 6,210.62cr : MatCost = 2,564.50cr : Ratio = 2.42 ** EASY PROFIT **
+ArmourType Ultramesh Infiltration Suit : Cost = 5,189.12cr : MatCost = 2,894.50cr : Ratio = 1.79
+ArmourType Steel Power Armour : Cost = 484.74cr : MatCost = 512.00cr : Ratio = 0.95
+ArmourType Kevlar Power Armour : Cost = 692.10cr : MatCost = 522.00cr : Ratio = 1.33
+ArmourType Composite Power Armour : Cost = 1,406.84cr : MatCost = 722.00cr : Ratio = 1.95
+ArmourType Metasteel Power Armour : Cost = 2,448.27cr : MatCost = 972.00cr : Ratio = 2.52 ** EASY PROFIT **
+ArmourType Nanomesh Power Armour : Cost = 2,099.02cr : MatCost = 1,022.00cr : Ratio = 2.05 ** EASY PROFIT **
+ArmourType Mithril Power Armour : Cost = 3,736.36cr : MatCost = 1,672.00cr : Ratio = 2.23 ** EASY PROFIT **
+ArmourType Adamantium Power Armour : Cost = 5,520.42cr : MatCost = 2,272.00cr : Ratio = 2.43 ** EASY PROFIT **
+ArmourType Etherealite Power Armour : Cost = 5,984.96cr : MatCost = 2,872.00cr : Ratio = 2.08 ** EASY PROFIT **
+ArmourType Ultramesh Power Armour : Cost = 7,024.51cr : MatCost = 3,472.00cr : Ratio = 2.02 ** EASY PROFIT **
+ArmourType Composite Heavy Power Armour : Cost = 2,252.33cr : MatCost = 1,032.40cr : Ratio = 2.18 ** EASY PROFIT **
+ArmourType Metasteel Heavy Power Armour : Cost = 4,003.71cr : MatCost = 1,282.40cr : Ratio = 3.12 ** EASY PROFIT **
+ArmourType Nanomesh Heavy Power Armour : Cost = 3,379.61cr : MatCost = 1,332.40cr : Ratio = 2.54 ** EASY PROFIT **
+ArmourType Mithril Heavy Power Armour : Cost = 6,139.82cr : MatCost = 1,982.40cr : Ratio = 3.10 ** EASY PROFIT **
+ArmourType Adamantium Heavy Power Armour : Cost = 9,147.85cr : MatCost = 2,582.40cr : Ratio = 3.54 ** EASY PROFIT **
+ArmourType Etherealite Heavy Power Armour : Cost = 9,853.91cr : MatCost = 3,182.40cr : Ratio = 3.10 ** EASY PROFIT **
+ArmourType Ultramesh Heavy Power Armour : Cost = 11,616.28cr : MatCost = 3,782.40cr : Ratio = 3.07 ** EASY PROFIT **
+ArmourType Composite Assault Power Armour : Cost = 1,533.27cr : MatCost = 725.80cr : Ratio = 2.11 ** EASY PROFIT **
+ArmourType Metasteel Assault Power Armour : Cost = 2,554.27cr : MatCost = 975.80cr : Ratio = 2.62 ** EASY PROFIT **
+ArmourType Nanomesh Assault Power Armour : Cost = 2,261.73cr : MatCost = 1,025.80cr : Ratio = 2.20 ** EASY PROFIT **
+ArmourType Mithril Assault Power Armour : Cost = 3,857.88cr : MatCost = 1,675.80cr : Ratio = 2.30 ** EASY PROFIT **
+ArmourType Adamantium Assault Power Armour : Cost = 5,596.42cr : MatCost = 2,275.80cr : Ratio = 2.46 ** EASY PROFIT **
+ArmourType Etherealite Assault Power Armour : Cost = 6,153.81cr : MatCost = 2,875.80cr : Ratio = 2.14 ** EASY PROFIT **
+ArmourType Ultramesh Assault Power Armour : Cost = 7,153.74cr : MatCost = 3,475.80cr : Ratio = 2.06 ** EASY PROFIT **
+ArmourType Composite Shielded Power Armour : Cost = 1,906.98cr : MatCost = 1,262.80cr : Ratio = 1.51
+ArmourType Metasteel Shielded Power Armour : Cost = 3,109.29cr : MatCost = 1,512.80cr : Ratio = 2.06 ** EASY PROFIT **
+ArmourType Nanomesh Shielded Power Armour : Cost = 2,797.65cr : MatCost = 1,562.80cr : Ratio = 1.79
+ArmourType Mithril Shielded Power Armour : Cost = 4,671.25cr : MatCost = 2,212.80cr : Ratio = 2.11 ** EASY PROFIT **
+ArmourType Adamantium Shielded Power Armour : Cost = 6,711.57cr : MatCost = 2,812.80cr : Ratio = 2.39 ** EASY PROFIT **
+ArmourType Etherealite Shielded Power Armour : Cost = 7,435.10cr : MatCost = 3,412.80cr : Ratio = 2.18 ** EASY PROFIT **
+ArmourType Ultramesh Shielded Power Armour : Cost = 8,599.93cr : MatCost = 4,012.80cr : Ratio = 2.14 ** EASY PROFIT **
+ArmourType Metasteel Valkyrie Assault Armour : Cost = 4,989.42cr : MatCost = 1,662.00cr : Ratio = 3.00 ** EASY PROFIT **
+ArmourType Nanomesh Valkyrie Assault Armour : Cost = 4,633.15cr : MatCost = 1,712.00cr : Ratio = 2.71 ** EASY PROFIT **
+ArmourType Mithril Valkyrie Assault Armour : Cost = 7,415.28cr : MatCost = 2,362.00cr : Ratio = 3.14 ** EASY PROFIT **
+ArmourType Adamantium Valkyrie Assault Armour : Cost = 10,443.52cr : MatCost = 2,962.00cr : Ratio = 3.53 ** EASY PROFIT **
+ArmourType Etherealite Valkyrie Assault Armour : Cost = 11,750.17cr : MatCost = 3,562.00cr : Ratio = 3.30 ** EASY PROFIT **
+ArmourType Ultramesh Valkyrie Assault Armour : Cost = 13,449.92cr : MatCost = 4,162.00cr : Ratio = 3.23 ** EASY PROFIT **

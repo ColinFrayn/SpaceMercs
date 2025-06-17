@@ -47,6 +47,7 @@
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Biosynthesiser" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
     <Tex>1,1</Tex>
@@ -106,8 +107,9 @@
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Plastic" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Biosynthesiser" Amount="2"/>
+      <Material Name="Nanotech Analyser" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
     <Requirements>
@@ -390,7 +392,7 @@
       <Material Name="Composite" Amount="1"/>
       <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
-      <Material Name="Uranium" Amount="1"/>
+      <Material Name="Uranium" Amount="2"/>
     </Materials>
     <Source>Workshop</Source>
     <Requirements>
@@ -443,7 +445,7 @@
   </ItemType>
   <ItemType Name="Quantum Medikit">
     <Mass>0.4</Mass>
-    <Cost>75</Cost>
+    <Cost>65</Cost>
     <Rarity>16</Rarity>
     <StaminaCost>18</StaminaCost>
     <Desc>A medikit that uses quantum interference techniques and advanced medicines to physically mend damage and speed recovery.</Desc>
@@ -508,6 +510,8 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="2"/>
       <Material Name="Electronic Components" Amount="1"/>
+      <Material Name="Biosynthesiser" Amount="4"/>
+      <Material Name="Quantum Processor" Amount="1"/>
     </Materials>
     <Source>Medlab</Source>
     <Tex>1,4</Tex>
@@ -540,6 +544,7 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Quantum Processor" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
     <Tex>2,4</Tex>
@@ -571,7 +576,8 @@
     <Materials>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="3"/>
-      <Material Name="Electronic Components" Amount="2"/>
+      <Material Name="Electronic Components" Amount="3"/>
+      <Material Name="Quantum Processor" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
     <Tex>3,4</Tex>

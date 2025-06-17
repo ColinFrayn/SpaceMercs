@@ -218,8 +218,9 @@
                 sam.ShowDialog(this);
                 if (sam.SelectedMat == null) return; // Cancelled
                 armourMat = sam.SelectedMat;
-                if (mats.ContainsKey(armourMat)) mats[armourMat] += at.Size;
-                else mats.Add(armourMat, at.Size);
+                int asz = at.BaseMaterialRequirements;
+                if (mats.ContainsKey(armourMat)) mats[armourMat] += asz;
+                else mats.Add(armourMat, asz);
                 if (armourMat.MaxLevel < at.MinMatLvl) return;
             }
 
@@ -269,21 +270,21 @@
             }
 
             // Boost item level based on skill of fabricator
-            if (newType is ArmourType || newType is WeaponType) {
+            if (Const.AllowFabricationOfHigherLevelItems && (newType is ArmourType || newType is WeaponType)) {
                 int lvl = 1;
                 do {
                     if (newType is ArmourType && armourMat != null && lvl > armourMat.MaxLevel) break;
                     IEquippable upgradedItem = newType switch {
                         ArmourType at2 => new Armour(at2, armourMat!, lvl),
                         WeaponType wt => new Weapon(wt, lvl),
-                        _ => newItem
+                        _ => throw new Exception($"Illegal item type in fabrication level enhancement: {newType}")
                     };
                     double ugChance = Utils.ConstructionChance(upgradedItem.BuildDiff, TotalSkill);
                     double ugRand = rnd.NextDouble() * 100.0;
                     if (ugRand > ugChance) break;
                     newItem = upgradedItem;
                     lvl++;
-                } while (lvl < 6);
+                } while (lvl < 4);
             }
 
             // Announce

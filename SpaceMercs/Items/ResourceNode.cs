@@ -28,10 +28,10 @@ namespace SpaceMercs {
         public double Facing => 0d;
         public double Shred => 0d;
         public Point Location { get { return new Point(X, Y); } }
-        private readonly List<Effect> _Effects = new List<Effect>();
+        private readonly List<Effect> _Effects = [];
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         public bool HasMoved => false;
-        private MaterialType ResourceType;
+        private readonly MaterialType ResourceType;
         private readonly MissionLevel? CurrentLevel;
 
         public bool CanSee(int x, int y) { return false; }
@@ -44,7 +44,7 @@ namespace SpaceMercs {
         public void SetFacing(Utils.Direction d) { } // NOP
         public void SetFacing(double d) { } // NOP
         private TexSpecs GetTexture() {
-            return new TexSpecs(); // TODO
+            return ResourceType.GetTexture();
         }
 
         public void Display(ShaderProgram prog, bool bLabel, bool bStatBars, bool bShowEffects, float fViewHeight, float aspect, Matrix4 viewM) {
@@ -114,12 +114,12 @@ namespace SpaceMercs {
             return Utils.ArmourReduction(BaseArmour) * red / 100d;
         }
         public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
-            return InflictDamage_Internal(AllDam, null, null, false);
+            return InflictDamage_Internal(AllDam, null, null, null, false);
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
-            return InflictDamage_Internal(AllDam, applyEffect, fact, true);
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact, IEntity? source) {
+            return InflictDamage_Internal(AllDam, applyEffect, fact, source, true);
         }
-        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, VisualEffect.EffectFactory? fact, bool applyDamage) {  // TODO
+        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, VisualEffect.EffectFactory? fact, IEntity? source, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Take a copy as we're modifying it
@@ -140,29 +140,33 @@ namespace SpaceMercs {
             Health -= TotalDam;
 
             // Is the node destroyed?
-            if (Health <= 0.0) KillEntity(applyEffect!, fact!);
+            if (Health <= 0.0) KillEntity(applyEffect!, fact!, source!);
             return TotalDam;
         }
         public void ShredArmour(double shred) { } // NOP
         public Stash GenerateStash() {
-            // TODO: Include miner (skill) or scale later?
+            return GenerateStash(null);
+        }
+        public Stash GenerateStash(IEntity? miner) { 
             Stash st = new Stash(Location);
             Random rnd = new Random();
             // How much ore?
-            double dnum = rnd.NextDouble();
-            //dnum += rnd.NextDouble() * lfrac;
+            double minerMod = 1d;
+            if (miner is Soldier s) {
+                minerMod = 1d + ((double)s.GetUtilityLevel(Soldier.UtilitySkill.Miner) / 5d);
+            }
+            double levelMod = 1d + ((Level - ResourceType.NodeMin) / 10d);
+            double dnum = (1d + rnd.NextDouble()) * minerMod * levelMod;
             int num = (int)Math.Round(dnum);
-            //for (int n = 0; n < num; n++) {
-            //    // Generate a random item suitable for this creature
-            //    IItem? eq = Utils.GenerateRandomItem(rnd, this.Level, OverrideRace, bIncludeWeapons:false);
-            //    if (eq is not null) st.Add(eq);
-            //}
-
+            st.Add(new Material(ResourceType), num);
             return st;
         }
-        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) { 
+            KillEntity(applyEffect, fact, null);
+        }
+        public void KillEntity(ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact, IEntity? src) {
             Health = 0.0;
-            CurrentLevel?.DestroyNode(this);
+            CurrentLevel?.DestroyNode(this, src);
         }
         public Dictionary<WeaponType.DamageType, double> GenerateDamage() {
             throw new NotImplementedException();
@@ -192,7 +196,7 @@ namespace SpaceMercs {
             CurrentLevel = lev;
         }
 
-        public void SaveToFile(StreamWriter file, bool reducedMode = false) {
+        public void SaveToFile(StreamWriter file) {
             file.WriteLine("<ResourceNode Type=\"" + ResourceType.Name + "\">");
             file.WriteLine(" <Level>" + Level + "</Level>");
             file.WriteLine(" <Location X=\"" + X + "\" Y=\"" + Y + "\"/>");

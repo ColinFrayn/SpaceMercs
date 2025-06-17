@@ -19,6 +19,7 @@ namespace SpaceMercs {
         private static int MiscTextureTransparentID = -1;
         private static int BuildingTextureID = -1;
         private static int ItemTextureID = -1;
+        private static int ResourceNodeTextureID = -1;
 
         // Texture dimensions
         private static float MiscTextureWidth { get { return Textures.MiscTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.MiscTextureData.Width; } }
@@ -27,6 +28,8 @@ namespace SpaceMercs {
         private static float BuildingTextureHeight { get { return Textures.BuildingTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.BuildingTextureData.Height; } }
         private static float ItemTextureWidth { get { return Textures.ItemTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Width; } }
         private static float ItemTextureHeight { get { return Textures.ItemTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ItemTextureData.Height; } }
+        private static float ResourceNodeTextureWidth { get { return Textures.ResourceNodeTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ResourceNodeTextureData.Width; } }
+        private static float ResourceNodeTextureHeight { get { return Textures.ResourceNodeTextureData is null ? 0 : (float)(Textures.TexSize - 1) / Textures.ResourceNodeTextureData.Height; } }
 
         // Texture coordinates
         public enum MiscTexture { Build = 0, Salvage = 1, Up = 2, Right = 3, Cancel = 4, None = 5, Down = 6, Left = 7, Timer = 8, Connect = 9, Attack = 10, Search = 11, Disconnect = 12, Eye = 13, Inventory = 14, Skills = 15, Walk = 16,
@@ -73,14 +76,31 @@ namespace SpaceMercs {
             float ty = (float)((it.TextureY * Textures.TexSize) + 0.5) / Textures.ItemTextureData.Height;
             return new(ItemTextureID, tx, ty, ItemTextureWidth, ItemTextureHeight);
         }
+        public static TexSpecs GetTexCoords(MaterialType mat) {
+            if (ResourceNodeTextureID == -1) {
+                SetupResourceNodeTexture();
+                SetTextureParameters();
+            }
+            if (mat.TexX == -1 || mat.TexY == -1) throw new Exception("Attempting to generate texture coordinates for material with no configured texture");
+            if (Textures.ResourceNodeTextureData is null) throw new Exception("ResourceNode texture data is null");
+            float tx = (float)((mat.TexX * Textures.TexSize) + 0.5) / Textures.ResourceNodeTextureData.Width;
+            float ty = (float)((mat.TexY * Textures.TexSize) + 0.5) / Textures.ResourceNodeTextureData.Height;
+
+            float tw = (float)2 / ((float)ResourceNodeTextureData.Width / 64f);
+            float th = (float)2 / ((float)ResourceNodeTextureData.Height / 64f);
+
+            return new(ResourceNodeTextureID, tx, ty, tw, th);
+        }
 
         // Details for built-in BMP textures
         private readonly static string BuildingTextureFile = "Building.bmp";
         private readonly static string MiscTextureFile = "MiscTextures.bmp";
         private readonly static string ItemTextureFile = "ItemTextures.bmp";
+        private readonly static string ResourceNodeTextureFile = "ResourceNodes.bmp";
         private static BitmapData? BuildingTextureData;
         private static BitmapData? MiscTextureData;
         private static BitmapData? ItemTextureData;
+        private static BitmapData? ResourceNodeTextureData;
 
         // Halo textures
         public const int StarTextureSize = 128;
@@ -110,6 +130,11 @@ namespace SpaceMercs {
             if (!File.Exists(strItemTextureFile)) throw new Exception("Could not find Item Texture File!");
             Bitmap TextureBitmap3 = new Bitmap(strItemTextureFile);
             ItemTextureData = TextureBitmap3.LockBits(new Rectangle(0, 0, TextureBitmap3.Width, TextureBitmap3.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            string strResourceNodeTextureFile = Path.Combine(strGraphicsDir, ResourceNodeTextureFile);
+            if (!File.Exists(strResourceNodeTextureFile)) throw new Exception("Could not find ResourceNode Texture File!");
+            Bitmap TextureBitmap4 = new Bitmap(strResourceNodeTextureFile);
+            ResourceNodeTextureData = TextureBitmap4.LockBits(new Rectangle(0, 0, TextureBitmap4.Width, TextureBitmap4.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
         public static void SetTextureParameters() {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
@@ -124,35 +149,6 @@ namespace SpaceMercs {
         private static int _selectionTexture = -1;
         public static int SelectionTexture { get { if (_selectionTexture == -1) _selectionTexture = GenerateSelectionTexture(); return _selectionTexture; } }
 
-        private static int GenerateHighlightTexture_UNUSED() {
-            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
-            Color col = Color.FromArgb(255, 255, 100, 100);
-            for (int y = 0; y < Textures.TileSize; y++) {
-                for (int x = 0; x < Textures.TileSize; x++) {
-                    image[x, y, 0] = col.R;
-                    image[x, y, 1] = col.G;
-                    image[x, y, 2] = col.B;
-                    int dist = Math.Min(Math.Min(x, Textures.TileSize - x), Math.Min(y, Textures.TileSize - y));
-                    image[x, y, 3] = (byte)Math.Max(0, (255 - dist * 40));
-                }
-            }
-            return BindEntityTexture(image);
-        }
-        private static int GenerateHoverTexture_UNUSED() {
-            byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
-            Color col = Color.FromArgb(255, 0, 255, 50);
-            for (int y = 0; y < Textures.TileSize; y++) {
-                for (int x = 0; x < Textures.TileSize; x++) {
-                    image[x, y, 0] = col.R;
-                    image[x, y, 1] = col.G;
-                    image[x, y, 2] = col.B;
-                    double dfract = Math.Max(0.0, Math.Sqrt((Textures.TileSize / 2 - x) * (Textures.TileSize / 2 - x) + (Textures.TileSize / 2 - y) * (Textures.TileSize / 2 - y)) * 4.0 / Textures.TileSize - 1.0);
-                    image[x, y, 3] = (byte)Math.Max(0, 255 - (180 * dfract));
-                    if (dfract > 1.0) image[x, y, 0] = image[x, y, 1] = image[x, y, 2] = image[x, y, 3] = 0;
-                }
-            }
-            return BindEntityTexture(image);
-        }
         private static int GenerateSelectionTexture() {
             byte[,,] image = new byte[Textures.TileSize, Textures.TileSize, 4];
             Color col = Color.FromArgb(255, 255, 50, 0);
@@ -589,6 +585,20 @@ namespace SpaceMercs {
             GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
             if (ItemTextureData is null) throw new Exception("Item Texture Data was null");
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, ItemTextureData.Width, ItemTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, ItemTextureData.Scan0);
+        }
+        private static void SetupResourceNodeTexture() {
+            ResourceNodeTextureID = GL.GenTexture();
+            GL.BindTexture(TextureTarget.Texture2D, ResourceNodeTextureID);
+            GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
+            if (ResourceNodeTextureData is null) throw new Exception("ResourceNode Texture Data was null");
+            // Make white colours all transparent
+            int texture_size = ResourceNodeTextureData.Width * ResourceNodeTextureData.Height * 4;
+            byte[] bytes = new byte[texture_size];
+            System.Runtime.InteropServices.Marshal.Copy(ResourceNodeTextureData.Scan0, bytes, 0, texture_size);
+            for (int i = 0; i < ResourceNodeTextureData.Width * ResourceNodeTextureData.Height; i++) {
+                if (bytes[i * 4 + 0] == 255 && bytes[i * 4 + 1] == 255 && bytes[i * 4 + 2] == 255) bytes[i * 4 + 3] = 0;
+            }
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, ResourceNodeTextureData.Width, ResourceNodeTextureData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bytes);
         }
         private static void AddHaloToImage(byte[,,] image, Color col) {
             int width = image.GetLength(0);

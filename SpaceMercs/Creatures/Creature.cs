@@ -174,12 +174,12 @@ namespace SpaceMercs {
             return Utils.ArmourReduction(BaseArmour) * red / 100.0;
         }
         public double CalculateDamage(Dictionary<WeaponType.DamageType, double> AllDam) {
-            return InflictDamage_Internal(AllDam, null, null, false);
+            return InflictDamage_Internal(AllDam, null, null, null, false);
         }
-        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact) {
-            return InflictDamage_Internal(AllDam, applyEffect, fact, true);
+        public double InflictDamage(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect applyEffect, VisualEffect.EffectFactory? fact, IEntity? source) {
+            return InflictDamage_Internal(AllDam, applyEffect, fact, source, true);
         }
-        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, VisualEffect.EffectFactory? fact, bool applyDamage) {
+        private double InflictDamage_Internal(Dictionary<WeaponType.DamageType, double> AllDam, ItemEffect.ApplyItemEffect? applyEffect, VisualEffect.EffectFactory? fact, IEntity? source, bool applyDamage) {
             if (!AllDam.Any() || Health <= 0.0) return 0.0;
 
             // Take a copy as we're modifying it
@@ -307,7 +307,7 @@ namespace SpaceMercs {
                 _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
             }
             if (ie.Shred > 0d) ShredArmour(ie.Shred);
-            InflictDamage(AllDam, applyEffect, fact);
+            InflictDamage(AllDam, applyEffect, fact, src);
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
         public double Encumbrance => 0.0;
@@ -860,14 +860,12 @@ namespace SpaceMercs {
                         playSound("Grunt");
                         bPlayedGrunt = true;
                     }
-                    InflictDamage(AllDam, applyEffect, fact);
+                    Soldier? s = CurrentLevel?.GetSoldierByName(e.CausedBy);
+                    InflictDamage(AllDam, applyEffect, fact, s);
                     if (Health <= 0.0) {
                         // If this effect killed this creature, maybe register the kill and then stop here
-                        if (!string.IsNullOrEmpty(e.CausedBy)) {
-                            Soldier? s = CurrentLevel?.GetSoldierByName(e.CausedBy);
-                            if (s is not null) {
-                                s.RegisterKill(this, showMessage);
-                            }
+                        if (s is not null) {
+                            s.RegisterKill(this, showMessage);
                         }
                         break; 
                     }

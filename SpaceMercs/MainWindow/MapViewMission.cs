@@ -787,7 +787,7 @@ namespace SpaceMercs.MainWindow {
 
             // Generate Damage
             Dictionary<WeaponType.DamageType, double> AllDam = tr.GenerateDamage();
-            double TotalDam = s.InflictDamage(AllDam, ApplyItemEffect, null);
+            double TotalDam = s.InflictDamage(AllDam, ApplyItemEffect, null, null);
             Thread.Sleep(100);
             SoundEffects.PlaySound("Click");
             Thread.Sleep(100);

@@ -14,12 +14,12 @@
     <Mass>1.0</Mass>
     <Rarity>15</Rarity>
     <Attack>1</Attack>
-    <Defence>1</Defence>
     <BaseArmour>1</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Requirements>
       <MinLevel>2</MinLevel>
       <CashCost>10</CashCost>
-      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Aluminium" Amount="1"/>      
       <Facility>Armoury</Facility>
     </Requirements>
     <Utility>
@@ -30,6 +30,7 @@
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Nanophotonic Materials" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Infiltrator Helmet">
@@ -38,6 +39,7 @@
     <Attack>1</Attack>
     <BaseArmour>1</BaseArmour>
     <Location>Head</Location>
+    <MinMatLvl>3</MinMatLvl>
     <Requirements>
       <Prerequisite>Stealth Helmet</Prerequisite>
       <MinLevel>3</MinLevel>
@@ -53,6 +55,7 @@
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Nanophotonic Materials" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Chestplate">
@@ -83,6 +86,8 @@
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
       <Material Name="Titanium" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
+      <Material Name="Shield Processor" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>7</MinLevel>
@@ -107,16 +112,17 @@
     </Materials>
   </ArmourType>
   <ArmourType Name="Powered Arm Plating">
-    <Mass>4.0</Mass>
+    <Mass>3.5</Mass>
     <Rarity>17</Rarity>
     <Strength>1</Strength>
     <BaseArmour>6</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Arms</Location>
     <Desc>Powered plating for arms</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
-      <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Powercell" Amount="1" />
     </Materials>
   </ArmourType>
   <ArmourType Name="Leg Plating">
@@ -131,17 +137,19 @@
     </Materials>
   </ArmourType>
   <ArmourType Name="Powered Leg Plating">
-    <Mass>5.0</Mass>
+    <Mass>3.5</Mass>
     <Rarity>25</Rarity>
     <BaseArmour>6</BaseArmour>
     <Agility>1</Agility>
     <Speed>1.2</Speed>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Legs</Location>
     <Desc>Powered plating for legs, enabling faster movement</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
       <Material Name="Aluminium" Amount="1"/>
+      <Material Name="Powercell" Amount="1" />
     </Materials>
   </ArmourType>
   <ArmourType Name="Plate Boots">
@@ -157,17 +165,17 @@
   <ArmourType Name="Stealth Boots">
     <Mass>0.5</Mass>
     <Rarity>36</Rarity>
-    <Defence>1</Defence>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
     <BaseArmour>1</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Feet</Location>
     <Desc>Lightweight plate boots with a stealth coating</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Nanophotonic Materials" Amount="2"/>
     </Materials>
     <Requirements>
       <MinLevel>3</MinLevel>
@@ -187,31 +195,33 @@
     </Materials>
   </ArmourType>
   <ArmourType Name="Powered Gauntlets">
-    <Mass>1.6</Mass>
+    <Mass>1.2</Mass>
     <Rarity>18</Rarity>
     <Strength>2</Strength>
     <BaseArmour>3</BaseArmour>
     <Location>Hands</Location>
+    <MinMatLvl>2</MinMatLvl>
     <Desc>Powered plate metal gauntlets</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
+      <Material Name="Powercell" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Stealth Gauntlets">
-    <Mass>0.7</Mass>
+    <Mass>0.5</Mass>
     <Rarity>36</Rarity>
-    <Defence>1</Defence>
     <Utility>
       <Stealth>1</Stealth>
     </Utility>
     <BaseArmour>1</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Hands</Location>
     <Desc>Lightweight armoured gauntlets with a stealth coating</Desc>
     <Materials>
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Nanophotonic Materials" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>3</MinLevel>
@@ -239,11 +249,13 @@
     <BaseArmour>32</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>A reinforced combat armour suit with full body protection</Desc>
+    <MinMatLvl>2</MinMatLvl>
     <Materials>
-      <Material Name="Fabric" Amount="4"/>
+      <Material Name="Fabric" Amount="2"/>
       <Material Name="Steel" Amount="2"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Titanium" Amount="2"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Military AI" Amount="1"/>
     </Materials>
     <Requirements>
       <MinLevel>5</MinLevel>
@@ -261,17 +273,17 @@
     <Rarity>36</Rarity>
     <Attack>2</Attack>
     <BaseArmour>35</BaseArmour>
-    <MinMatLvl>2</MinMatLvl>
+    <MinMatLvl>3</MinMatLvl>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>An advanced reinforced combat armour suit with full body protection</Desc>
     <Utility>
       <Perception>1</Perception>
     </Utility>
     <Materials>
-      <Material Name="Fabric" Amount="3"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Titanium" Amount="1"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Rare Earth Metals" Amount="3"/>
+      <Material Name="Military AI" Amount="2"/>
     </Materials>
     <Requirements>
       <Prerequisite>Combat Suit</Prerequisite>
@@ -279,8 +291,9 @@
       <MinSystems>2</MinSystems>
       <MinPop>25</MinPop>
       <CashCost>120</CashCost>
-      <Material Name="Titanium" Amount="1"/>
-      <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
       <Facility>Armoury</Facility>
       <Facility>Workshop</Facility>
     </Requirements>
@@ -289,15 +302,16 @@
     <Mass>9.5</Mass>
     <Rarity>30</Rarity>
     <Attack>1</Attack>
-    <MinMatLvl>2</MinMatLvl>
+    <MinMatLvl>3</MinMatLvl>
     <BaseArmour>28</BaseArmour>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>A lightweight combat armour suit with full body protection</Desc>
     <Materials>
-      <Material Name="Fabric" Amount="4"/>
-      <Material Name="Steel" Amount="1"/>
+      <Material Name="Fabric" Amount="2"/>
+      <Material Name="Titanium" Amount="2"/>
       <Material Name="Aluminium" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
+      <Material Name="Military AI" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Combat Suit</Prerequisite>
@@ -315,7 +329,7 @@
     <Rarity>45</Rarity>
     <Attack>3</Attack>
     <BaseArmour>40</BaseArmour>
-    <MinMatLvl>3</MinMatLvl>
+    <MinMatLvl>4</MinMatLvl>
     <Location>Chest,Arms,Legs,Head,Hands,Feet</Location>
     <Desc>An advanced reinforced combat armour suit with full body protection</Desc>
     <Utility>
@@ -323,9 +337,10 @@
     </Utility>
     <Materials>
       <Material Name="Fabric" Amount="2"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Titanium" Amount="2"/>
-      <Material Name="Heavy Chitin" Amount="2"/>
+      <Material Name="Titanium" Amount="3"/>
+      <Material Name="Heavy Chitin" Amount="5"/>
+      <Material Name="Rare Earth Metals" Amount="2"/>
+      <Material Name="Military AI" Amount="4"/>
     </Materials>
     <Requirements>
       <Prerequisite>Elite Combat Suit</Prerequisite>
@@ -353,6 +368,8 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="1"/>
+      <Material Name="Powercell" Amount="2"/>
+      <Material Name="Shield Processor" Amount="1"/>
     </Materials>
     <Requirements>
       <Prerequisite>Combat Suit</Prerequisite>
@@ -381,6 +398,8 @@
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="3"/>
       <Material Name="Crystals" Amount="2"/>
+      <Material Name="Powercore" Amount="1"/>
+      <Material Name="Shield Processor" Amount="2"/>
     </Materials>
     <Requirements>
       <Prerequisite>Shock Armour</Prerequisite>
@@ -409,6 +428,8 @@
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="3"/>
       <Material Name="Crystals" Amount="3"/>
+      <Material Name="Powercore" Amount="3"/>
+      <Material Name="Shield Processor" Amount="3"/>
     </Materials>
     <Requirements>
       <Prerequisite>Advanced Shock Armour</Prerequisite>
@@ -455,16 +476,18 @@
       <Material Name="Fabric" Amount="1"/>
       <Material Name="Rare Earth Metals" Amount="1"/>
       <Material Name="Crystals" Amount="1"/>
+      <Material Name="Powercore" Amount="1"/>
+      <Material Name="Shield Processor" Amount="1"/>
     </Materials>
   </ArmourType>
   <ArmourType Name="Stealth Armour">
     <Mass>6.0</Mass>
     <Rarity>40</Rarity>
-    <Defence>3</Defence>
     <Utility>
       <Stealth>3</Stealth>
     </Utility>
     <BaseArmour>11</BaseArmour>
+    <MinMatLvl>2</MinMatLvl>
     <Location>Chest,Arms,Legs</Location>
     <Desc>A lightweight chestplate, arm plating and leg plating combined, with stealth coating</Desc>
     <Materials>
@@ -472,13 +495,14 @@
       <Material Name="Copper" Amount="1"/>
       <Material Name="Aluminium" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="2"/>
+      <Material Name="Nanophotonic Materials" Amount="5"/>
     </Materials>
     <Requirements>
       <MinLevel>4</MinLevel>
       <CashCost>40</CashCost>
       <Material Name="Aluminium" Amount="2"/>
       <Facility>Armoury</Facility>
+      <Material Name="Nanophotonic Materials" Amount="1"/>
     </Requirements>
   </ArmourType>
   <ArmourType Name="Infiltration Suit">
@@ -489,6 +513,7 @@
       <Stealth>6</Stealth>
       <Perception>2</Perception>
     </Utility>
+    <MinMatLvl>3</MinMatLvl>
     <BaseArmour>17</BaseArmour>
     <Location>Chest,Arms,Legs,Feet,Hands,Head</Location>
     <Desc>A full body covering armour suit with stealth coating</Desc>
@@ -497,7 +522,8 @@
       <Material Name="Copper" Amount="1"/>
       <Material Name="Aluminium" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="3"/>
+      <Material Name="Military AI" Amount="2"/>
+      <Material Name="Nanophotonic Materials" Amount="8"/>
     </Materials>
     <Requirements>
       <Prerequisite>Stealth Armour</Prerequisite>
@@ -506,7 +532,7 @@
       <MinPop>34</MinPop>
       <CashCost>50</CashCost>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="1"/>
+      <Material Name="Nanophotonic Materials" Amount="1"/>
       <Facility>Armoury</Facility>
     </Requirements>
   </ArmourType>
@@ -518,6 +544,7 @@
     <Speed>0.85</Speed>
     <Attack>2</Attack>
     <BaseArmour>46</BaseArmour>
+    <Heavy/>
     <MinMatLvl>2</MinMatLvl>
     <Requirements>
       <MinLevel>7</MinLevel>
@@ -538,10 +565,10 @@
     <Location>Chest,Arms,Legs,Hands,Feet,Head</Location>
     <Desc>A powered full-body armour</Desc>
     <Materials>
-      <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Military AI" Amount="2"/>
+      <Material Name="Titanium" Amount="6"/>
     </Materials>
     <Utility>
       <Stealth>-3</Stealth>
@@ -554,6 +581,7 @@
     <Attack>2</Attack>
     <Speed>0.7</Speed>
     <BaseArmour>58</BaseArmour>
+    <Heavy/>
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
       <Prerequisite>Power Armour</Prerequisite>
@@ -579,7 +607,9 @@
       <Material Name="Fabric" Amount="2"/>
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Titanium" Amount="6"/>
+      <Material Name="Military AI" Amount="2"/>
+      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Adamantium" Amount="4"/>
     </Materials>
     <Utility>
       <Stealth>-4</Stealth>
@@ -592,6 +622,7 @@
     <Speed>0.9</Speed>
     <Attack>2</Attack>
     <BaseArmour>44</BaseArmour>
+    <Heavy/>
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
       <Prerequisite>Power Armour</Prerequisite>
@@ -616,8 +647,8 @@
       <Material Name="Fabric" Amount="4"/>
       <Material Name="Copper" Amount="3"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
-      <Material Name="Aluminium" Amount="2"/>
-      <Material Name="Titanium" Amount="4"/>
+      <Material Name="Military AI" Amount="2"/>
+      <Material Name="Titanium" Amount="6"/>
     </Materials>
     <Utility>
       <Stealth>-2</Stealth>
@@ -630,6 +661,7 @@
     <Attack>2</Attack>
     <Speed>0.85</Speed>
     <BaseArmour>48</BaseArmour>
+    <Heavy/>
     <Shields Regen="8">20</Shields>
     <MinMatLvl>3</MinMatLvl>
     <BonusArmour>
@@ -644,7 +676,9 @@
       <Material Name="Copper" Amount="2"/>
       <Material Name="Rare Earth Metals" Amount="2"/>
       <Material Name="Crystals" Amount="2"/>
-      <Material Name="Titanium" Amount="5"/>
+      <Material Name="Titanium" Amount="6"/>
+      <Material Name="Shield Processor" Amount="4"/>
+      <Material Name="Military AI" Amount="2"/>
     </Materials>
     <Requirements>
       <Prerequisite>Power Armour</Prerequisite>
@@ -671,6 +705,7 @@
     <Attack>3</Attack>
     <Shields Regen="8">20</Shields>
     <BaseArmour>48</BaseArmour>
+    <Heavy/>
     <Utility>
       <Perception>2</Perception>
     </Utility>
@@ -704,8 +739,8 @@
     <Materials>
       <Material Name="Crystals" Amount="4"/>
       <Material Name="Rare Earth Metals" Amount="4"/>
-      <Material Name="Mithril" Amount="5"/>
-      <Material Name="Titanium" Amount="5"/>
+      <Material Name="Mithril" Amount="10"/>
+      <Material Name="Military AI" Amount="3"/>
     </Materials>
   </ArmourType>
 </Data>

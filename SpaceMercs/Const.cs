@@ -54,12 +54,12 @@ namespace SpaceMercs {
         public const double BonusOtherArmourValue = 0.01; // Percent bonus to the cost for each single point of bonus armour for any other damage type
         public const double ModificationCost = 20d; // Cost for a modification for disposable materials
         public const double EncumbranceDefencePenalty = 5d; // Defence penalty for being fully encumbered
-        public const double AbilityBonusValue = 10d; // Value bonus for boosting an ability e.g. Strength, Insight
-        public const double AbilityBonusExponent = 1.6d; // Value bonus for boosting an ability e.g. Strength, Insight, exponent to make it superlinear
-        public const double ArmourSpeedBonusValue = 25d; // Value bonus for boosting an ability e.g. Strength, Insight
-        public const double ArmourSpeedBonusExponent = 4d; // Value bonus for boosting an ability e.g. Strength, Insight, exponent to make it superlinear
-        public const double PropertyBonusValue = 6d; // Value bonus for boosting a property e.g. Stamina, Health
-        public const double PropertyBonusExponent = 1.5d; // Value bonus for boosting a property e.g. Stamina, Health, exponent to make it superlinear
+        public const double AbilityBonusValue = 30d; // Value bonus for boosting an ability e.g. Strength, Insight
+        public const double AbilityBonusExponent = 1.7d; // Value bonus for boosting an ability e.g. Strength, Insight, exponent to make it superlinear
+        public const double ArmourSpeedBonusValue = 25d; // Value scale factor for boosting speed
+        public const double ArmourSpeedBonusExponent = 5d; // Value bonus for boosting speed, exponent to make it superlinear
+        public const double PropertyBonusValue = 6d; // Value bonus for boosting a derived property e.g. Stamina, Health
+        public const double PropertyBonusExponent = 1.5d; // Value bonus for boosting a derived property e.g. Stamina, Health, exponent to make it superlinear
         public const double BaseArmourCost = 6d; // Cost per armour point, base
         public const int    MaxUtilitySkill = 16; // Highest value you can have in any utility skill
         public const double ConstructionChanceScale = 0.9d; // Lower value means that utility skill is less impactful on build success.
@@ -200,6 +200,7 @@ namespace SpaceMercs {
         public const double ResourceNodeHealth = 20d; // HP of a raw resource node at level 0
         public const double ResourceNodeLevelArmourScale = 1.1d; // Increase in armour per level
         public const double ResourceNodeArmour = 40d; // Base armour of a resource node at level 0
+        public const double ResourceNodeFrequency = 200d; // Number of squares per resource node, on average
 
         // Miscellaneous
         public const double InitialCash = 50.0;
@@ -234,6 +235,7 @@ namespace SpaceMercs {
         public const double CashRelationsFactor = 0.25; // Exp per credit donated
         public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
         public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
+        public const bool   AllowFabricationOfHigherLevelItems = false; // When fabricating an item, can you end up with a better one??
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony

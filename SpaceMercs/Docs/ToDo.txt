@@ -2,13 +2,14 @@
 ToDo List
 -------------------------------------------------
 
-Do a full recon for all equipment costs vs. material costs and tweak so that there are no easy wins
-
 Resource nodes:
-- Autogen the nodes in relevant levels when generating MissionLevel (Caves, Mines, Surface)
-- Harvest by attacking
-- Drops materials modified by Mining Utility skill (need to feed that through somehow)
--- Miner skill should probably also increase damage.
+- Autogen resource nodes in relevant levels when generating MissionLevel (Caves, Mines, Surface) [TEST]
+-- Generate with a range of levels based on Diff - NodeMin, not all the same. Bias towards smaller.
+- Need to add higher level resource nodes??
+- Harvest by attacking [TEST]
+-- Tiny damage. Check.
+- Drops materials modified by Mining Utility skill (need to feed that through somehow) [TEST]
+- Right-click context menu should work on nodes.
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

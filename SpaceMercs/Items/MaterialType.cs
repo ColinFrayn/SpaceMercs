@@ -1,4 +1,5 @@
-﻿using SpaceMercs.Items;
+﻿using SpaceMercs.Graphics;
+using SpaceMercs.Items;
 using System.Xml;
 using static SpaceMercs.Planet;
 
@@ -25,6 +26,11 @@ namespace SpaceMercs {
         public int NodeMin { get; private set; } // Minimum level of resource node
         public int NodeMax { get; private set; } // Maximum level of resource node
         public readonly ICollection<PlanetType> PlanetTypes = new HashSet<PlanetType>();
+
+        // Texture stuff for resource nodes
+        public int TextureID { get; private set; }
+        public int TexX { get; private set; }
+        public int TexY { get; private set; }
 
         public MaterialType(XmlNode xml) {
             Name = xml.GetAttributeText("Name");
@@ -60,6 +66,7 @@ namespace SpaceMercs {
 
             // Check for possibility of this material being in a resource node
             XmlNode? nRes = xml.SelectSingleNode("Node");
+            TexX = TexY = -1;
             if (nRes is not null) {
                 NodeMin = nRes.GetAttributeInt("LevelMin", 0);
                 NodeMax = nRes.GetAttributeInt("LevelMax", 999);
@@ -72,6 +79,8 @@ namespace SpaceMercs {
                     }
                     PlanetTypes.Add(ptp.Value);
                 }
+                TexX = nRes.GetAttributeInt("TexX") - 1;
+                TexY = nRes.GetAttributeInt("TexY") - 1;
             }
             else {
                 NodeMin = NodeMax = 0;
@@ -98,5 +107,8 @@ namespace SpaceMercs {
             return race.HasResearched(this);
         }
 
+        public TexSpecs GetTexture() {
+            return Textures.GetTexCoords(this);
+        }
     }
 }
