@@ -59,7 +59,8 @@ namespace SpaceMercs {
             prog.SetUniform("texScale", ts.W, ts.H);
             Matrix4 pTranslateM = Matrix4.CreateTranslation(X + 0.5f, Y + 0.5f, Const.EntityLayer);
             Matrix4 pScaleM = Matrix4.CreateScale(1f);
-            prog.SetUniform("model", pScaleM * pTranslateM);
+            Matrix4 pRotateM = Matrix4.CreateRotationZ((float)Math.PI);
+            prog.SetUniform("model", pRotateM * pScaleM * pTranslateM);
             prog.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
             GL.UseProgram(prog.ShaderProgramHandle);
             Square.TexturedCentred.BindAndDraw();
@@ -153,7 +154,7 @@ namespace SpaceMercs {
             // How much ore?
             double minerMod = 1d;
             if (miner is Soldier s) {
-                minerMod = 1d + ((double)s.GetUtilityLevel(Soldier.UtilitySkill.Miner) / 5d);
+                minerMod = 1d + ((double)s.GetUtilityLevel(Soldier.UtilitySkill.Miner) / 10d);
             }
             double levelMod = 1d + ((Level - ResourceType.NodeMin) / 10d);
             double dnum = (1d + rnd.NextDouble()) * minerMod * levelMod;

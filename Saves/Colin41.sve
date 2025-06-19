@@ -7135,9 +7135,6 @@
   <Inv Count="239">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="266">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="40">
 <Material Type="Crystals"/>
   </Inv>
@@ -10107,9 +10104,6 @@
   </Inv>
   <Inv Count="211">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="344">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="8">
 <Material Type="Crystals"/>
@@ -16508,9 +16502,6 @@
   <Inv Count="43">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="18">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="2">
 <Material Type="Titanium"/>
   </Inv>
@@ -18072,9 +18063,6 @@
   </Inv>
   <Inv Count="10">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="16">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Aluminium"/>

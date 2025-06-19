@@ -1548,7 +1548,7 @@ namespace SpaceMercs.MainWindow {
                     }
                 }
                 // Attack a creature
-                else if (en is Creature) {
+                else if (en is Creature || en is ResourceNode) {
                     bool bIsInRange = SelectedEntity.CanSee(en) && SelectedEntity.RangeTo(en) <= SelectedEntity.AttackRange;
                     if (s.EquippedWeapon?.Recharge > 0) {
                         TexSpecs tsm = Textures.GetTexCoords(Textures.MiscTexture.Moved);

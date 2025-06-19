@@ -1387,13 +1387,13 @@ namespace SpaceMercs {
 
             // Get suitable materials for this mission
             Dictionary<MaterialType, double> dFreq = new();
-            double fTotal = 0d;
+            double dTotal = 0d;
             foreach (MaterialType mat in StaticData.Materials.Where(m => m.NodeMin > 0)) {
                 if (mat.NodeMin > Diff || mat.NodeMax < Diff) continue;
                 if (mat.PlanetTypes.Contains(pt)) {
                     double freq = 3.0 + Diff - mat.NodeMin;
                     dFreq.Add(mat, freq);
-                    fTotal += freq;
+                    dTotal += freq;
                 }
             }
             if (dFreq.Count == 0) return;
@@ -1405,38 +1405,53 @@ namespace SpaceMercs {
                     if (Map[x, y] == TileType.Floor) nFloorTiles++;
                 }
             }
-            double dNodes = (rand.NextDouble() + 2d) * (double)nFloorTiles / Const.ResourceNodeFrequency;
-            if (Type is MissionType.Surface) dNodes *= 0.7;
-            if (Type is MissionType.Mines) dNodes *= 1.4;
+            // Not quite linear with the map size, or else large maps woudl have loads
+            double dNodes = (rand.NextDouble() + 2d) * Math.Pow((double)nFloorTiles, 0.8) / Const.ResourceNodeFrequency;
+            if (Type is MissionType.Surface) dNodes *= 0.3;
+            if (Type is MissionType.Mines) dNodes *= 1.3;
             List<MaterialType> nodeTypes = new();
-            foreach ((MaterialType mat, double freq) in dFreq) {
-                int count = (int)(freq * dNodes / fTotal);
-                for (int n = 0; n < count; n++) nodeTypes.Add(mat);
+            for (int n = 0; n < dNodes; n++) {
+                double r = rand.NextDouble() * dTotal;
+                foreach ((MaterialType mat, double freq) in dFreq) {
+                    r -= freq;
+                    if (r <= 0) {
+                        nodeTypes.Add(mat);
+                        break;
+                    }
+                }
             }
             if (nodeTypes.Count == 0) return;
 
             // Add all nodes
             int niter = 0;
             foreach (MaterialType mat in nodeTypes) {
-                // Place this node somewhere suitable
-                ResourceNode rn = new ResourceNode(mat, 1 + Diff - mat.NodeMin, this);
-                int dist = 0;
-                Point ptStart = Point.Empty;
-                if (EntryLocations.Count == 0) ptStart = EntryLocations.First<Point>();
+                // Calculate the level, biased towards low-level nodes
+                int maxlevel = 1 + Diff - mat.NodeMin;
+                double smax = Math.Sqrt(maxlevel);
+                int level = (int)Math.Pow(rand.NextDouble() * smax, 2) + mat.NodeMin - 1;
+                if (level < mat.NodeMin) level = mat.NodeMin;
 
-                int x = -1, y = -1;
+                // Place this node somewhere suitable
+                ResourceNode rn = new ResourceNode(mat, level, this);
+                Point ptStart = Point.Empty;
+                if (EntryLocations.Count > 0) ptStart = EntryLocations.First<Point>();
+
+                bool bOK = false;
                 do {
-                    x = rand.Next(Width - 5) + 2;
-                    y = rand.Next(Height - 5) + 2;
-                    if (ptStart == Point.Empty) dist = 3;
-                    else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                    int x = rand.Next(Width - 5) + 2;
+                    int y = rand.Next(Height - 5) + 2;
+                    bOK = true;
+                    if (ptStart != Point.Empty) {
+                        int dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                        if (dist <= 5) bOK = false;
+                    }
+                    if (bOK) {
+                        rn.SetLocation(new Point(x, y));
+                        bOK = EntityCanGo(rn, x, y);
+                    }
                     niter++;
-                    if (niter > 50) break;
-                } while (!EntityCanGo(rn, x, y) || dist < 5);
-                if (x > 0 && y > 0) {
-                    rn.SetLocation(new Point(x, y));
-                    AddEntity(rn);
-                }
+                } while (!bOK && niter < 50);
+                if (bOK) AddEntity(rn);                
             }
         }
 

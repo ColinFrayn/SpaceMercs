@@ -11819,9 +11819,6 @@
   <Inv Count="121">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="516">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="11">
 <Material Type="Crystals"/>
   </Inv>
@@ -12720,9 +12717,6 @@
   <Inv Count="1">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="2">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="1">
 <Material Type="Crystals"/>
   </Inv>
@@ -13504,9 +13498,6 @@
   <Inv Count="2">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="44">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Rifle" Level="0" />
   </Inv>
@@ -13825,9 +13816,6 @@
   </Inv>
   <Inv Count="1">
 <Armour Type="Stealth Boots" Material="Steel" Level="0"/>
-  </Inv>
-  <Inv Count="52">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Steel" Level="0"/>
@@ -14479,9 +14467,6 @@
   </Inv>
   <Inv Count="4">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="8">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Crystals"/>
@@ -15504,9 +15489,6 @@
 <Armour Type="Plate Boots" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
-<Material Type="Rubber"/>
-  </Inv>
-  <Inv Count="1">
 <Armour Type="Gauntlets" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -15708,9 +15690,6 @@
   </Inv>
   <Inv Count="16">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="16">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Aluminium"/>

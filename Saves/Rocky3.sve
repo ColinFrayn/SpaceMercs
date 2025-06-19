@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>17/09/2158 01:26:56</Clock>
+<Clock>17/09/2158 22:14:11</Clock>
 <Map Seed="533589" SPS="16" PD="6">
  <Sector X="-1" Y="-1" Inhabitant="Grey">
 <Star ID="0">
@@ -1663,9 +1663,6 @@
   <Inv Count="46">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="75">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="3">
 <Material Type="Crystals"/>
   </Inv>
@@ -1699,7 +1696,7 @@
  <Scanned/>
 <Colony>
  <Owner>Human</Owner>
- <LastUpdate>680907219520744849</LastUpdate>
+ <LastUpdate>680907603377245307</LastUpdate>
  <LastGrowth>680907219319914849</LastGrowth>
  <Mercenaries>
 <Soldier Name="Xantha Green">
@@ -1777,19 +1774,6 @@
  <Size>2</Size>
 </Mission>
 <Mission>
- <Type>Mines</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>64.73</Reward>
- <Diff>6</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>1997657974</Seed>
- <Size>2</Size>
-</Mission>
-<Mission>
  <Type>BoardingParty</Type>
  <Goal>KillAll</Goal>
 <Ship Seed="751136746" Diff="6">
@@ -1814,6 +1798,58 @@
  <Seed>1642282267</Seed>
  <Size>2</Size>
 </Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>FindItem</Goal>
+<MissionItem Mass="4.30" Name="Stunning Alien Diamond" Level="5"></MissionItem>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>156.91617011297234</Reward>
+ <Diff>5</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>918647194</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>Caves</Type>
+ <Goal>ExploreAll</Goal>
+ <Enemy>Hive Spawn</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>68.68</Reward>
+ <Diff>6</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1026612396</Seed>
+ <Size>2</Size>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>Defend</Goal>
+<MissionItem Mass="0.00" Name="large geologic area"></MissionItem>
+ <Enemy>Undead</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>98.13</Reward>
+ <Diff>7</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>680331958</Seed>
+ <Size>2</Size>
+ <Waves>5</Waves>
+</Mission>
+<Mission>
+ <Type>AbandonedCity</Type>
+ <Goal>ExploreAll</Goal>
+ <Opponent>Human</Opponent>
+ <Enemy>Bandits</Enemy>
+ <TimeCost>0</TimeCost>
+ <Reward>37.04</Reward>
+ <Diff>6</Diff>
+ <LevelCount>1</LevelCount>
+ <CurrentLevel>0</CurrentLevel>
+ <Seed>1270805850</Seed>
+</Mission>
  </Missions>
  <Inventory>
   <Inv Count="6">
@@ -1831,7 +1867,7 @@
   <Inv Count="3">
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -1840,22 +1876,22 @@
   <Inv Count="2">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="77">
+  <Inv Count="74">
 <Material Type="Carbon Fibre"/>
   </Inv>
   <Inv Count="21">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Material Type="Kevlar"/>
   </Inv>
   <Inv Count="3">
@@ -1864,22 +1900,22 @@
   <Inv Count="4">
 <Material Type="Aluminium"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Material Type="Tungsten"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="3">
 <Material Type="Uranium"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Material Type="Water"/>
   </Inv>
-  <Inv Count="53">
+  <Inv Count="50">
 <Material Type="Carbon"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Material Type="Rare Earth Metals"/>
   </Inv>
-  <Inv Count="23">
+  <Inv Count="19">
 <Material Type="Electronic Components"/>
   </Inv>
   <Inv Count="37">
@@ -1888,19 +1924,16 @@
   <Inv Count="4">
 <Material Type="Fabric"/>
   </Inv>
-  <Inv Count="9">
+  <Inv Count="7">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="27">
-<Material Type="Rubber"/>
-  </Inv>
-  <Inv Count="7">
+  <Inv Count="6">
 <Material Type="Crystals"/>
   </Inv>
   <Inv Count="3">
 <Material Type="Titanium"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="14">
 <Material Type="Industrial Chemicals"/>
   </Inv>
  </Inventory>
@@ -3226,17 +3259,16 @@
 </Map>
 <Team>
  <Pos>(0,0)12.5.0</Pos>
- <Cash>1333.3142247235112</Cash>
+ <Cash>2114.352331689305</Cash>
  <Soldiers>
 <Soldier Name="Rocky">
- <Location X="6" Y="30"/>
- <Health>28.816986916424348</Health>
+ <Location X="15" Y="19"/>
+ <Health>39.42804207413658</Health>
  <Stamina>33</Stamina>
  <Shields>0</Shields>
- <Facing>90</Facing>
- <Shred>4.00</Shred>
+ <Facing>0</Facing>
  <Level>7</Level>
- <XP>51148</XP>
+ <XP>53367</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>15,12,8,15,16</Stats>
@@ -3273,14 +3305,14 @@
 <Weapon Type="Chainsword" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">595</Exp>
+  <Exp Type="Melee">603</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Scavenging">6</Exp>
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Bladesmith">1</Exp>
  </UtilityExperience>
- <KillCount>298</KillCount>
+ <KillCount>302</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>7</Level>
@@ -3289,13 +3321,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Kayla Fox">
- <Location X="6" Y="31"/>
- <Health>41.57367279756926</Health>
- <Stamina>36</Stamina>
+ <Location X="22" Y="18"/>
+ <Health>35.41869460376537</Health>
+ <Stamina>1.6308521509075975</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>-90</Facing>
  <Level>7</Level>
- <XP>47270</XP>
+ <XP>49489</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>9,10,16,15,19</Stats>
@@ -3333,22 +3365,22 @@
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Perception">6</Exp>
  </UtilityExperience>
- <KillCount>323</KillCount>
+ <Moved/>
+ <KillCount>355</KillCount>
  <ToughestKill>
-<Creature Type="Bandit Leader">
- <Level>6</Level>
- <OverrideRace>Human</OverrideRace>
+<Creature Type="Triffid Mother Plant">
+ <Level>5</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Stacy Vale">
- <Location X="3" Y="32"/>
+ <Location X="16" Y="20"/>
  <Health>45</Health>
- <Stamina>15</Stamina>
+ <Stamina>33</Stamina>
  <Shields>0</Shields>
- <Facing>255.96375653207355</Facing>
+ <Facing>90</Facing>
  <Level>7</Level>
- <XP>53816</XP>
+ <XP>56035</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>11,8,16,13,16</Stats>
@@ -3374,7 +3406,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Melee">400</Exp>
-  <Exp Type="Sniper">512</Exp>
+  <Exp Type="Sniper">533</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -3382,7 +3414,6 @@
   <Exp Skill="Scavenging">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <Moved/>
  <KillCount>155</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
@@ -3392,14 +3423,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Patrick Upton">
- <Location X="4" Y="30"/>
- <Health>41.67058556698607</Health>
- <Stamina>8.900000000000002</Stamina>
+ <Location X="13" Y="19"/>
+ <Health>17.60765665023481</Health>
+ <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>236.30993247402023</Facing>
- <Shred>4.00</Shred>
+ <Facing>0</Facing>
  <Level>7</Level>
- <XP>43527</XP>
+ <XP>45746</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>11,14,12,14,11</Stats>
@@ -3430,7 +3460,7 @@
 <Weapon Type="Quad Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">617</Exp>
+  <Exp Type="Shotgun">672</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -3438,8 +3468,7 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">2</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>111</KillCount>
+ <KillCount>117</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>7</Level>
@@ -3472,13 +3501,13 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="10654"/>
+  <Relation Race="Human" Value="10909"/>
  </Relations>
  <Inventory>
-  <Inv Count="15">
+  <Inv Count="17">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="11">
 <Equipment Type="Adrenaline"/>
   </Inv>
   <Inv Count="13">
@@ -3486,9 +3515,6 @@
   </Inv>
   <Inv Count="19">
 <Material Type="Fabric"/>
-  </Inv>
-  <Inv Count="22">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="20">
 <Material Type="Carbon Fibre"/>
@@ -3508,7 +3534,7 @@
   <Inv Count="9">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="11">
 <Material Type="Copper"/>
   </Inv>
   <Inv Count="15">
@@ -3535,11 +3561,14 @@
   <Inv Count="1">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="4">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="12">
 <Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medsystem"/>
   </Inv>
  </Inventory>
 </Team>

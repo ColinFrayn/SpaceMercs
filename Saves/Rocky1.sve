@@ -2071,9 +2071,6 @@
   <Inv Count="53">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="35">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="3">
 <Material Type="Crystals"/>
   </Inv>
@@ -2448,9 +2445,6 @@
   </Inv>
   <Inv Count="47">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="8">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Titanium"/>

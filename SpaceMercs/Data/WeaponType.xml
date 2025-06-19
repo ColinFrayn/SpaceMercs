@@ -1127,7 +1127,6 @@
       <Material Name="Steel" Amount="3"/>
       <Material Name="Aluminium" Amount="1"/>
       <Material Name="Copper" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Powercell" Amount="1"/>
     </Materials>
   </WeaponType>

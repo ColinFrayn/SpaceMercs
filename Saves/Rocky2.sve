@@ -1415,9 +1415,6 @@
   <Inv Count="4">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="8">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="5">
 <Material Type="Crystals"/>
   </Inv>
@@ -2431,9 +2428,6 @@
   <Inv Count="152">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="154">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="4">
 <Weapon Type="Katana" Level="0" />
   </Inv>
@@ -2793,9 +2787,6 @@
   </Inv>
   <Inv Count="16">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="2">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Titanium"/>
@@ -3661,9 +3652,6 @@
   <Inv Count="5">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="9">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="4">
 <Material Type="Titanium"/>
   </Inv>
@@ -3977,9 +3965,6 @@
   <Inv Count="26">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="5">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="1">
 <Material Type="Industrial Chemicals"/>
   </Inv>
@@ -4266,9 +4251,6 @@
   <Inv Count="9">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="30">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="1">
 <Material Type="Industrial Chemicals"/>
   </Inv>
@@ -4518,9 +4500,6 @@
   </Inv>
   <Inv Count="3">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="4">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Water"/>
@@ -5770,9 +5749,6 @@
   </Inv>
   <Inv Count="12">
 <Material Type="Fabric"/>
-  </Inv>
-  <Inv Count="8">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="15">
 <Material Type="Carbon Fibre"/>

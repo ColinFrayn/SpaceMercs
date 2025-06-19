@@ -210,10 +210,11 @@ namespace SpaceMercs {
                     // Mining skill damage bonus
                     if (tgt is ResourceNode nd && source is Soldier s && hitDmg.TryGetValue(WeaponType.DamageType.Physical, out double physDmgRn)) {
                         int miningSkill = s.GetUtilityLevel(UtilitySkill.Miner);
-                        physDmgRn *= 1d + ((double)miningSkill / 5d);
+                        physDmgRn *= 1d + ((double)miningSkill / 10d);
                         hitDmg[WeaponType.DamageType.Physical] = physDmgRn;
                     }
 
+                    // Apply total damage visual effect & inflict it on target
                     double TotalDam = tgt.CalculateDamage(hitDmg);
                     float xshift = (float)(rand.NextDouble() - 0.5d) / 3f;
                     if (Math.Abs(TotalDam) > 0.1d) {
@@ -527,6 +528,7 @@ namespace SpaceMercs {
                 double best = 0.0;
                 MaterialType? mbest = null;
                 foreach (MaterialType mat in StaticData.Materials.Where(m => m.CanBuild(race))) {
+                    if (mat.NodeMin > lvl) continue;
                     double r = rnd.NextDouble() * Math.Pow(mat.Rarity, 5.0 / (lvl + 4.0));
                     if (r > best) {
                         best = r;

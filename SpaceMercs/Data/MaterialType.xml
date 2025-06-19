@@ -144,39 +144,40 @@
     </Requirements>
     <Desc>Ultramesh is made from fine carbon nanotubes, precision nano-engineered for maximum strength and minimum density.</Desc>
   </MaterialType>
-  <!-- Basic non-armour materials -->
+  <!-- Mineable materials -->
   <MaterialType Name="Silicates">
     <UnitCost>1.5</UnitCost>
     <Rarity>0.1</Rarity>
     <Desc>Silicates</Desc>
     <UnitMass>0.5</UnitMass>
-    <Node LevelMin="1" LevelMax="6" Type="Desert,Oceanic" TexX="1" TexY="1"/>
+    <Node LevelMin="1" LevelMax="8" Type="Desert,Oceanic" TexX="1" TexY="1"/>
 </MaterialType>
   <MaterialType Name="Aluminium">
     <UnitCost>1.5</UnitCost>
     <Rarity>0.4</Rarity>
     <UnitMass>0.5</UnitMass>
     <Desc>Aluminium</Desc>
-    <Node LevelMin="2" LevelMax="7" Type="Rocky,Oceanic" TexX="3" TexY="1"/>
+    <Node LevelMin="3" LevelMax="14" Type="Rocky,Oceanic" TexX="3" TexY="1"/>
   </MaterialType>
   <MaterialType Name="Tungsten">
     <UnitCost>5.0</UnitCost>
     <Rarity>0.2</Rarity>
     <UnitMass>0.1</UnitMass>
     <Desc>Tungsten</Desc>
-    <Node LevelMin="3" LevelMax="8" Type="Rocky,Oceanic" TexX="1" TexY="5"/>
+    <Node LevelMin="5" LevelMax="21" Type="Rocky,Oceanic" TexX="1" TexY="5"/>
   </MaterialType>
   <MaterialType Name="Uranium">
     <UnitCost>20.0</UnitCost>
     <Rarity>0.1</Rarity>
     <UnitMass>0.001</UnitMass>
     <Desc>Uranium</Desc>
-    <Node LevelMin="3" LevelMax="7" Type="Rocky,Oceanic" TexX="3" TexY="3"/>
+    <Node LevelMin="6" LevelMax="25" Type="Rocky,Oceanic" TexX="3" TexY="3"/>
   </MaterialType>
   <MaterialType Name="Water">
     <UnitCost>0.1</UnitCost>
     <Rarity>0.5</Rarity>
     <Desc>Water</Desc>
+    <Node LevelMin="1" LevelMax="20" Type="Ice" TexX="1" TexY="11"/>
   </MaterialType>
   <MaterialType Name="Carbon">
     <UnitCost>0.5</UnitCost>
@@ -189,27 +190,44 @@
     <Desc>Rare Earth Metals</Desc>
     <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
-    <Node LevelMin="4" LevelMax="10" Type="Oceanic" TexX="1" TexY="3"/>
-  </MaterialType>
-  <MaterialType Name="Electronic Components">
-    <UnitCost>20.0</UnitCost>
-    <Rarity>0.5</Rarity>
-    <UnitMass>0.1</UnitMass>
+    <Node LevelMin="4" LevelMax="25" Type="Oceanic" TexX="1" TexY="3"/>
   </MaterialType>
   <MaterialType Name="Gold">
     <UnitCost>50.0</UnitCost>
     <Rarity>0.02</Rarity>
     <Desc>Gold</Desc>
     <UnitMass>0.01</UnitMass>
-    <Node LevelMin="6" LevelMax="11" Type="Volcanic,Oceanic" TexX="1" TexY="9"/>
+    <Node LevelMin="6" LevelMax="25" Type="Volcanic,Oceanic,Rocky" TexX="1" TexY="9"/>
   </MaterialType>
   <MaterialType Name="Copper">
     <UnitCost>3.0</UnitCost>
     <Rarity>0.7</Rarity>
     <Desc>Copper</Desc>
     <UnitMass>0.5</UnitMass>
-    <Node LevelMin="2" LevelMax="7" Type="Volcanic,Oceanic" TexX="3" TexY="9"/>
+    <Node LevelMin="2" LevelMax="13" Type="Volcanic,Oceanic" TexX="3" TexY="9"/>
   </MaterialType>
+  <MaterialType Name="Crystals">
+    <UnitCost>20.0</UnitCost>
+    <Rarity>0.1</Rarity>
+    <Desc>Energy Crystals</Desc>
+    <UnitMass>0.1</UnitMass>
+    <Node LevelMin="3" LevelMax="15" Type="Ice" TexX="3" TexY="7"/>
+  </MaterialType>
+  <MaterialType Name="Titanium">
+    <UnitCost>25.0</UnitCost>
+    <Rarity>0.15</Rarity>
+    <Desc>Titanium</Desc>
+    <UnitMass>0.8</UnitMass>
+    <Node LevelMin="5" LevelMax="25" Type="Rocky,Oceanic" TexX="1" TexY="7"/>
+  </MaterialType>
+  <MaterialType Name="Industrial Chemicals">
+    <UnitCost>6.0</UnitCost>
+    <Rarity>0.2</Rarity>
+    <Desc>Industrial chemicals</Desc>
+    <UnitMass>0.1</UnitMass>
+    <Node LevelMin="4" LevelMax="20" Type="Rocky,Oceanic,Volcanic" TexX="3" TexY="11"/>
+  </MaterialType>
+  <!-- Specialty Fabrication items -->
   <MaterialType Name="Fabric">
     <UnitCost>0.2</UnitCost>
     <Rarity>1.0</Rarity>
@@ -220,32 +238,11 @@
     <Rarity>0.7</Rarity>
     <Desc>Plastic</Desc>
   </MaterialType>
-  <MaterialType Name="Rubber">
-    <UnitCost>0.75</UnitCost>
-    <Rarity>0.9</Rarity>
-    <Desc>Rubber</Desc>
-  </MaterialType>
-  <MaterialType Name="Crystals">
+  <MaterialType Name="Electronic Components">
     <UnitCost>20.0</UnitCost>
-    <Rarity>0.1</Rarity>
-    <Desc>Energy Crystals</Desc>
-    <UnitMass>0.1</UnitMass>
-    <Node LevelMin="1" LevelMax="8" Type="Ice" TexX="1" TexY="11"/>
-  </MaterialType>
-  <MaterialType Name="Titanium">
-    <UnitCost>25.0</UnitCost>
-    <Rarity>0.15</Rarity>
-    <Desc>Titanium</Desc>
-    <UnitMass>0.8</UnitMass>
-    <Node LevelMin="2" LevelMax="8" Type="Rocky,Oceanic" TexX="1" TexY="7"/>
-  </MaterialType>
-  <MaterialType Name="Industrial Chemicals">
-    <UnitCost>6.0</UnitCost>
-    <Rarity>0.2</Rarity>
-    <Desc>Industrial chemicals</Desc>
+    <Rarity>0.5</Rarity>
     <UnitMass>0.1</UnitMass>
   </MaterialType>
-  <!-- Specialty Fabrication items -->
   <MaterialType Name="Biosynthesiser">
     <UnitCost>60.0</UnitCost>
     <Rarity>0.01</Rarity>

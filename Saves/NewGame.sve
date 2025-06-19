@@ -1674,9 +1674,6 @@
   <Inv Count="132">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="29">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="6">
 <Material Type="Industrial Chemicals"/>
   </Inv>
@@ -2141,9 +2138,6 @@
   </Inv>
   <Inv Count="76">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="97">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="2">
 <Material Type="Crystals"/>
@@ -3289,9 +3283,6 @@
   <Inv Count="50">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="44">
-<Material Type="Rubber"/>
-  </Inv>
   <Inv Count="5">
 <Material Type="Crystals"/>
   </Inv>
@@ -3594,9 +3585,6 @@
   </Inv>
   <Inv Count="9">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="43">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="28">
 <Material Type="Industrial Chemicals"/>
@@ -3994,9 +3982,6 @@
   </Inv>
   <Inv Count="1">
 <Material Type="Plastic"/>
-  </Inv>
-  <Inv Count="14">
-<Material Type="Rubber"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Titanium"/>
@@ -5311,9 +5296,6 @@
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
-  </Inv>
-  <Inv Count="1">
-<Material Type="Rubber"/>
   </Inv>
  </Inventory>
 </Team>

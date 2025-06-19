@@ -220,7 +220,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
@@ -253,7 +252,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
@@ -289,7 +287,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
@@ -323,7 +320,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>
@@ -354,7 +350,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
     <Requirements>
@@ -390,7 +385,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Industrial Chemicals" Amount="1"/>
       <Material Name="Uranium" Amount="2"/>
     </Materials>
@@ -437,7 +431,6 @@
     </ItemEffect>
     <Materials>
       <Material Name="Composite" Amount="1"/>
-      <Material Name="Rubber" Amount="1"/>
       <Material Name="Electronic Components" Amount="1"/>
     </Materials>
     <Source>Workshop</Source>

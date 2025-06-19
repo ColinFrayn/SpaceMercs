@@ -198,9 +198,9 @@ namespace SpaceMercs {
 
         // Resource nodes
         public const double ResourceNodeHealth = 20d; // HP of a raw resource node at level 0
-        public const double ResourceNodeLevelArmourScale = 1.1d; // Increase in armour per level
+        public const double ResourceNodeLevelArmourScale = 0.1d; // Increase in armour per level
         public const double ResourceNodeArmour = 40d; // Base armour of a resource node at level 0
-        public const double ResourceNodeFrequency = 200d; // Number of squares per resource node, on average
+        public const double ResourceNodeFrequency = 150d; // Number of squares per resource node, on average
 
         // Miscellaneous
         public const double InitialCash = 50.0;
