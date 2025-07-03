@@ -70,7 +70,7 @@ namespace UnitTests {
                 if (at.Requirements?.Researchable == false) continue; // Unresearchable = precursor tech
                 //if (!at.Name.Contains("Powered Arm Plating")) continue; // TODO
                 foreach (MaterialType mt in StaticData.Materials) {
-                    if (!mt.IsArmourMaterial || mt.IsScavenged) continue;
+                    if (!mt.IsArmourMaterial) continue;
                     if (mt.MaxLevel < at.MinMatLvl) continue;
                     Armour ar = new Armour(at, mt, 0);
                     double cost = ar.Cost;

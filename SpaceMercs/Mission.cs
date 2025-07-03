@@ -387,7 +387,7 @@ namespace SpaceMercs {
             return m;
         }
         public static Mission CreatePrecursorMission(HabitableAO loc, Random rand, Team playerTeam) {
-            int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
+            int iDiff = loc.GetPrecursorMissionDifficultyForSystem() + 1;
             if (iDiff < 15) iDiff = 15;
             MissionType tp = MissionType.PrecursorRuins;
             Mission m = new Mission(tp, iDiff, rand.Next());
@@ -405,7 +405,7 @@ namespace SpaceMercs {
             return m;
         }
         public static Mission CreateSpaceHulkMission(OrbitalAO loc, Random rand, Team playerTeam) {
-            int iDiff = loc.GetRandomMissionDifficulty(rand) + 1;
+            int iDiff = loc.GetPrecursorMissionDifficultyForSystem();
             if (iDiff < 12) iDiff = 12;
             MissionType tp = MissionType.SpaceHulk;
             Mission m = new Mission(tp, iDiff, rand.Next());
