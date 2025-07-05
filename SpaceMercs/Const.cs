@@ -62,7 +62,7 @@ namespace SpaceMercs {
         public const double PropertyBonusExponent = 1.5d; // Value bonus for boosting a derived property e.g. Stamina, Health, exponent to make it superlinear
         public const double BaseArmourCost = 6d; // Cost per armour point, base
         public const int    MaxUtilitySkill = 16; // Highest value you can have in any utility skill
-        public const double ConstructionChanceScale = 0.9d; // Lower value means that utility skill is less impactful on build success.
+        public const double ConstructionChanceScale = 0.8d; // Lower value means that utility skill is less impactful on build success.
 
         // Solar system parameters
         public const double MoonRadius = 1400000.0;

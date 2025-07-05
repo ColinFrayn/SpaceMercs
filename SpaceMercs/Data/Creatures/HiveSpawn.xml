@@ -6,7 +6,7 @@
     <Defence>10</Defence>
     <Armour>15</Armour>
     <Health>11</Health>
-    <Stamina>18</Stamina>
+    <Stamina>14</Stamina>
     <Frequency>4</Frequency>
     <Interact/>
     <Desc>A vicious hive drone</Desc>
@@ -27,7 +27,7 @@
     <Defence>13</Defence>
     <Armour>18</Armour>
     <Health>14</Health>
-    <Stamina>24</Stamina>
+    <Stamina>18</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
     <Desc>A small flying hive scout.</Desc>
@@ -50,7 +50,7 @@
     <Defence>14</Defence>
     <Armour>24</Armour>
     <Health>17</Health>
-    <Stamina>20</Stamina>
+    <Stamina>16</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
     <Desc>A large and more vicious hive creature with sharp claws</Desc>
@@ -74,7 +74,7 @@
     <Defence>13</Defence>
     <Armour>18</Armour>
     <Health>16</Health>
-    <Stamina>20</Stamina>
+    <Stamina>16</Stamina>
     <Frequency>2</Frequency>
     <Interact/>
     <Desc>A large hive creature covered with sharp spines that it can hurl at nearby enemies</Desc>
@@ -96,7 +96,7 @@
     <Defence>9</Defence>
     <Armour>17</Armour>
     <Health>12</Health>
-    <Stamina>16</Stamina>
+    <Stamina>14</Stamina>
     <Frequency>2</Frequency>
     <Desc>A bulbous alien hive beast that emits a toxic cloud on death</Desc>
     <Weapons>
@@ -132,7 +132,7 @@
     <Defence>14</Defence>
     <Armour>23</Armour>
     <Health>20</Health>
-    <Stamina>22</Stamina>
+    <Stamina>17</Stamina>
     <Interact/>
     <Desc>A large and vicious hive beast</Desc>
     <Weapons>
@@ -155,7 +155,7 @@
     <Defence>13</Defence>
     <Armour>28</Armour>
     <Health>30</Health>
-    <Stamina>22</Stamina>
+    <Stamina>20</Stamina>
     <Interact/>
     <Desc>A giant, hulking killing machine.</Desc>
     <Boss/>
@@ -180,7 +180,7 @@
     <Defence>8</Defence>
     <Armour>16</Armour>
     <Health>90</Health>
-    <Stamina>22</Stamina>
+    <Stamina>20</Stamina>
     <Interact/>
     <Desc>A huge bulbous, nightmarish mutant brain.</Desc>
     <Boss/>

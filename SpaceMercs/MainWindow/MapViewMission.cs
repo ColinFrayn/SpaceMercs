@@ -196,7 +196,7 @@ namespace SpaceMercs.MainWindow {
                         s.AddExperience(ThisMission.Experience);
                     }
 
-                    // Mission was from a colony so improve relations with the owner raec
+                    // Mission was from a colony so improve relations with the owner race & speed up colony growth
                     if (thisColony is not null) {
                         PlayerTeam.ImproveRelations(thisColony.Owner, ThisMission.Experience / Const.RelationsExpPenaltyScaleColony, AnnounceMessage);
 

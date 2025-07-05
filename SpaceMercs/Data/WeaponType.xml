@@ -1608,7 +1608,7 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Toxic Spit">
-    <Speed>14</Speed>
+    <Speed>15</Speed>
     <Range DropOff="0.5" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.0">10</Range>
     <Damage>2+2</Damage>
     <Damage Type="Poison">4+4</Damage>
@@ -1626,7 +1626,7 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Throwing Spines">
-    <Speed>12</Speed>
+    <Speed>15</Speed>
     <Range DropOff="0.6" Speed="0.6" Length="0.3" Colour="0.5,1.0,0.2">10</Range>
     <Damage>4+3</Damage>
     <Sound>Crossbow</Sound>
@@ -1636,7 +1636,7 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Xenoblades" Class="Melee">
-    <Speed>11</Speed>
+    <Speed>12</Speed>
     <Range>1.5</Range>
     <Damage>4+3</Damage>
     <Damage Type="Acid">2+2</Damage>
@@ -1644,7 +1644,7 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Xenobite" Class="Melee">
-    <Speed>10</Speed>
+    <Speed>11</Speed>
     <Range>1</Range>
     <Damage>2+2</Damage>
     <Damage Type="Acid">2+2</Damage>
@@ -1652,7 +1652,7 @@
     <Hidden/>
   </WeaponType>
   <WeaponType Name="Barbed Claws" Class="Melee">
-    <Speed>9</Speed>
+    <Speed>10</Speed>
     <Range>1.5</Range>
     <Damage>4+5</Damage>
     <Sound>Claws</Sound>
