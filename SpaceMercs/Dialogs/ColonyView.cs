@@ -1,16 +1,16 @@
 ﻿using System.Drawing.Text;
 using System.Text;
-using System.Windows.Forms;
 
 namespace SpaceMercs.Dialogs {
     partial class ColonyView : Form {
-        private readonly Team PlayerTeam;
-        private readonly Colony colony;
+        private readonly Team _playerTeam;
+        private readonly Colony _colony;
         private readonly double PriceMod = 1.0; // Price modifier based on the colony owner relations with the team
         private readonly int Relations;
         private readonly Color clExists = Color.Black;
         private readonly Color clDoesntExist = Color.LightGray;
         private readonly Func<Mission, bool> StartMission;
+        private readonly GlobalClock _clock;
 
         private record SaleItem {
             public IItem? Item { get; private set; }
@@ -40,16 +40,17 @@ namespace SpaceMercs.Dialogs {
         }
 
         public ColonyView(Team t, Func<Mission, bool> _StartMission, GlobalClock clock) {
-            PlayerTeam = t;
+            _playerTeam = t;
             StartMission = _StartMission;
-            if (PlayerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
-            colony = hao.Colony;
-            colony.UpdateStock(PlayerTeam, clock); // Make sure we have updated everything since the last time we visited
-            PriceMod = PlayerTeam.GetPriceModifier(colony.Owner, colony.Location.GetSystem());
-            Relations = PlayerTeam.GetRelations(colony.Owner);
+            if (_playerTeam.CurrentPosition is not HabitableAO hao || hao.Colony is null) throw new Exception("Null colony in ColonyView!");
+            _colony = hao.Colony;
+            _colony.UpdateStock(_playerTeam, clock); // Make sure we have updated everything since the last time we visited
+            _clock = clock;
+            PriceMod = _playerTeam.GetPriceModifier(_colony.Owner, _colony.Location.GetSystem());
+            Relations = _playerTeam.GetRelations(_colony.Owner);
             InitializeComponent();
             SetupTabs();
-            lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+            lbImproveRelations.Text = $"You must improve relations with the {_colony.Owner.Name} race first!";
         }
 
         private void SetupTabs() {
@@ -84,11 +85,11 @@ namespace SpaceMercs.Dialogs {
             SetupTrainingTab();
 
             tcMain.TabPages.Remove(tpDiplomacy);
-            if (colony.Location == colony.Owner.HomePlanet) {
+            if (_colony.Location == _colony.Owner.HomePlanet) {
                 tcMain.TabPages.Insert(5, tpDiplomacy);
             }
             tcMain.TabPages.Remove(tpTraining);
-            if (colony.HasBaseType(Colony.BaseType.Research)) {
+            if (_colony.HasBaseType(Colony.BaseType.Research)) {
                 tcMain.TabPages.Insert(5, tpTraining);
             }
         }
@@ -107,24 +108,24 @@ namespace SpaceMercs.Dialogs {
             dgMerchant.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbFilter.Text;
-            foreach (IItem eq in colony.InventoryList()) {
+            foreach (IItem eq in _colony.InventoryList()) {
                 if (!string.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                 if (strType.Equals("All") || (strType.Equals("Weapons") && eq is Weapon) || (strType.Equals("Armour") && eq is Armour) ||
                    (strType.Equals("Medical") && eq is Equipment eqp && eqp.BaseType.Source == ItemType.ItemSource.Medlab) ||
                    (strType.Equals("Materials") && eq is Material) ||
                    (strType.Equals("Equipment") && eq is Equipment eqp2 && eqp2.BaseType.Source == ItemType.ItemSource.Workshop)) {
-                    double cost = colony.CostModifier * eq.Cost * PriceMod;
-                    if (cost > PlayerTeam.Cash && bAffordable) continue;
+                    double cost = _colony.CostModifier * eq.Cost * PriceMod;
+                    if (cost > _playerTeam.Cash && bAffordable) continue;
                     arrRow[0] = eq.Name;
                     arrRow[1] = cost.ToString("N2");
                     arrRow[2] = eq.Mass.ToString("N2") + "kg";
-                    int count = colony.GetAvailability(eq);
+                    int count = _colony.GetAvailability(eq);
                     arrRow[3] = count > 999 ? "999" : count.ToString();
                     dgMerchant.Rows.Add(arrRow);
                     dgMerchant.Rows[dgMerchant.Rows.Count - 1].Tag = eq;
                 }
             }
-            lbTeamCashMerch.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            lbTeamCashMerch.Text = _playerTeam.Cash.ToString("N2") + "cr";
             btBuyMerchant.Enabled = dgMerchant.Rows.Count > 0;
             if (dgMerchant.SortOrder != SortOrder.None && dgMerchant.SortedColumn is not null) {
                 dgMerchant.Sort(dgMerchant.SortedColumn, dgMerchant.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
@@ -135,13 +136,13 @@ namespace SpaceMercs.Dialogs {
             if (Relations < 0) {
                 tpMercenaries.Hide();
                 lbImproveRelations.Show();
-                lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+                lbImproveRelations.Text = $"You must improve relations with the {_colony.Owner.Name} race first!";
                 return;
             }
             tpMercenaries.Show();
             lbImproveRelations.Hide();
             string[] arrRowMerc = new string[5];
-            foreach (Soldier merc in colony.MercenariesList()) {
+            foreach (Soldier merc in _colony.MercenariesList()) {
                 arrRowMerc[0] = merc.Name;
                 arrRowMerc[1] = merc.SoldierClass.ToString();
                 arrRowMerc[2] = merc.Level.ToString();
@@ -150,13 +151,13 @@ namespace SpaceMercs.Dialogs {
                 dgMercenaries.Rows.Add(arrRowMerc);
                 dgMercenaries.Rows[dgMercenaries.Rows.Count - 1].Tag = merc;
             }
-            lbTeamCashMercs.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            lbTeamCashMercs.Text = _playerTeam.Cash.ToString("N2") + "cr";
             btHire.Enabled = dgMercenaries.Rows.Count > 0;
         }
         private void SetupMissionsTab() {
             dgMissions.Rows.Clear();
             string[] arrRowMiss = new string[6];
-            foreach (Mission miss in colony.MissionsList()) {
+            foreach (Mission miss in _colony.MissionsList()) {
                 arrRowMiss[0] = miss.Summary;
                 arrRowMiss[1] = Utils.MissionGoalToString(miss.Goal);
                 string secondary = miss.SecondaryEnemy is null ? string.Empty : " [+]";
@@ -175,24 +176,24 @@ namespace SpaceMercs.Dialogs {
             if (Relations < 1) {
                 tpShips.Hide();
                 lbImproveRelations.Show();
-                lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+                lbImproveRelations.Text = $"You must improve relations with the {_colony.Owner.Name} race first!";
                 return;
             }
             tpShips.Show();
             lbImproveRelations.Hide();
 
-            double SalvageValue = PlayerTeam.PlayerShip.CalculateSalvageValue();
+            double SalvageValue = _playerTeam.PlayerShip.CalculateSalvageValue();
             string[] arrRowShip = new string[3];
             foreach (ShipType st in StaticData.ShipTypes) {
-                if (st == PlayerTeam.PlayerShip.Type) continue;
-                if (!colony.CanBuildShipType(st)) continue;
+                if (st == _playerTeam.PlayerShip.Type) continue;
+                if (!_colony.CanBuildShipType(st)) continue;
                 arrRowShip[0] = st.Name;
                 arrRowShip[1] = st.RoomConfigString;
                 arrRowShip[2] = ((st.Cost * PriceMod) - SalvageValue).ToString("N2");
                 dgShips.Rows.Add(arrRowShip);
                 dgShips.Rows[dgShips.Rows.Count - 1].Tag = st;
             }
-            lbTeamCashShips.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            lbTeamCashShips.Text = _playerTeam.Cash.ToString("N2") + "cr";
             btUpgrade.Enabled = dgShips.Rows.Count > 0;
 
         }
@@ -200,7 +201,7 @@ namespace SpaceMercs.Dialogs {
             if (Relations < -1) {
                 tpUpgrade.Hide();
                 lbImproveRelations.Show();
-                lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+                lbImproveRelations.Text = $"You must improve relations with the {_colony.Owner.Name} race first!";
                 return;
             }
             tpUpgrade.Show();
@@ -216,26 +217,26 @@ namespace SpaceMercs.Dialogs {
             dgInventory.Rows.Clear();
             string[] arrRow = new string[4];
             string strFilter = tbUpgradeFilter.Text;
-            foreach (IItem eq in PlayerTeam.Inventory.Keys) {
+            foreach (IItem eq in _playerTeam.Inventory.Keys) {
                 if (!string.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                 if (ShouldDisplayInFoundry(strType, eq)) {
                     arrRow[0] = eq.Name;
                     arrRow[1] = "Ship Stores";
-                    arrRow[2] = (eq.Cost * Const.SellDiscount * colony.CostModifier / PriceMod).ToString("N2");
-                    arrRow[3] = PlayerTeam.Inventory[eq].ToString();
+                    arrRow[2] = (eq.Cost * Const.SellDiscount * _colony.CostModifier / PriceMod).ToString("N2");
+                    arrRow[3] = _playerTeam.Inventory[eq].ToString();
                     dgInventory.Rows.Add(arrRow);
-                    SaleItem si = new SaleItem(eq, null, false, PlayerTeam.Inventory[eq]);
+                    SaleItem si = new SaleItem(eq, null, false, _playerTeam.Inventory[eq]);
                     dgInventory.Rows[dgInventory.Rows.Count - 1].Tag = si;
                     if (hsLast.Contains(si)) lSelected.Add(dgInventory.Rows[dgInventory.Rows.Count - 1]);
                 }
             }
-            foreach (Soldier s in PlayerTeam.SoldiersRO) {
+            foreach (Soldier s in _playerTeam.SoldiersRO) {
                 foreach (IItem eq in s.InventoryGrouped.Keys) {
                     if (!string.IsNullOrEmpty(strFilter) && !eq.Name.Contains(strFilter, StringComparison.InvariantCultureIgnoreCase)) continue;
                     if (ShouldDisplayInFoundry(strType, eq)) {
                         arrRow[0] = eq.Name;
                         arrRow[1] = s.Name;
-                        arrRow[2] = (eq.Cost * Const.SellDiscount * colony.CostModifier / PriceMod).ToString("N2");
+                        arrRow[2] = (eq.Cost * Const.SellDiscount * _colony.CostModifier / PriceMod).ToString("N2");
                         arrRow[3] = s.InventoryGrouped[eq].ToString();
                         dgInventory.Rows.Add(arrRow);
                         SaleItem si = new SaleItem(eq, s, false, s.InventoryGrouped[eq]);
@@ -249,7 +250,7 @@ namespace SpaceMercs.Dialogs {
                         if (strType.Equals("All") || strType.Equals("Armour")) {
                             arrRow[0] = ar.Name;
                             arrRow[1] = s.Name + " [Eq]";
-                            arrRow[2] = (ar.Cost * Const.SellDiscount * colony.CostModifier / PriceMod).ToString("N2");
+                            arrRow[2] = (ar.Cost * Const.SellDiscount * _colony.CostModifier / PriceMod).ToString("N2");
                             arrRow[3] = "1";
                             dgInventory.Rows.Add(arrRow);
                             SaleItem si = new SaleItem(ar, s, true, 1);
@@ -262,7 +263,7 @@ namespace SpaceMercs.Dialogs {
                         if (strType.Equals("All") || strType.Equals("Weapon")) {
                             arrRow[0] = s.EquippedWeapon.Name;
                             arrRow[1] = s.Name + " [Eq]";
-                            arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * colony.CostModifier / PriceMod).ToString("N2");
+                            arrRow[2] = (s.EquippedWeapon.Cost * Const.SellDiscount * _colony.CostModifier / PriceMod).ToString("N2");
                             arrRow[3] = "1";
                             dgInventory.Rows.Add(arrRow);
                             SaleItem si = new SaleItem(s.EquippedWeapon, s, true, 1);
@@ -275,7 +276,7 @@ namespace SpaceMercs.Dialogs {
             dgInventory.ClearSelection();
             foreach (DataGridViewRow row in lSelected) row.Selected = true;
             if (scroll >= 0 && scroll < dgInventory.Rows.Count) dgInventory.FirstDisplayedScrollingRowIndex = scroll;
-            lbTeamCashFoundry.Text = PlayerTeam.Cash.ToString("N2") + "cr";
+            lbTeamCashFoundry.Text = _playerTeam.Cash.ToString("N2") + "cr";
             if (dgInventory.SortOrder != SortOrder.None && dgInventory.SortedColumn is not null) {
                 dgInventory.Sort(dgInventory.SortedColumn, dgInventory.SortOrder == SortOrder.Ascending ? System.ComponentModel.ListSortDirection.Ascending : System.ComponentModel.ListSortDirection.Descending);
             }
@@ -283,38 +284,38 @@ namespace SpaceMercs.Dialogs {
             else btSellAll.Text = "Sell All";
         }
         private void SetupDiplomacyTab() {
-            if (colony.Location != colony.Owner.HomePlanet) {
+            if (_colony.Location != _colony.Owner.HomePlanet) {
                 return;
             }
 
-            lbRaceName.Text = colony.Owner.Name;
-            lbRelations.Text = Utils.RelationsToString(PlayerTeam.GetRelations(colony.Owner));
+            lbRaceName.Text = _colony.Owner.Name;
+            lbRelations.Text = Utils.RelationsToString(_playerTeam.GetRelations(_colony.Owner));
 
-            bt100.Enabled = (PlayerTeam.Cash >= 100 && PlayerTeam.GetRelations(colony.Owner) < 5);
-            bt1000.Enabled = (PlayerTeam.Cash >= 1000 && PlayerTeam.GetRelations(colony.Owner) < 5);
-            bt10k.Enabled = (PlayerTeam.Cash >= 10000 && PlayerTeam.GetRelations(colony.Owner) < 5);
-            btSpaceHulkCore.Visible = PlayerTeam.SpaceHulkCoreCount > 0;
-            btSpaceHulkCore.Enabled = PlayerTeam.HasSpaceHulkCore && PlayerTeam.GetRelations(colony.Owner) < 5;
-            btPrecursorCore.Visible = PlayerTeam.PrecursorCoreCount > 0;
-            btPrecursorCore.Enabled = PlayerTeam.HasPrecursorCore && PlayerTeam.GetRelations(colony.Owner) < 5;
+            bt100.Enabled = (_playerTeam.Cash >= 100 && _playerTeam.GetRelations(_colony.Owner) < 5);
+            bt1000.Enabled = (_playerTeam.Cash >= 1000 && _playerTeam.GetRelations(_colony.Owner) < 5);
+            bt10k.Enabled = (_playerTeam.Cash >= 10000 && _playerTeam.GetRelations(_colony.Owner) < 5);
+            btSpaceHulkCore.Visible = _playerTeam.SpaceHulkCoreCount > 0;
+            btSpaceHulkCore.Enabled = _playerTeam.HasSpaceHulkCore && _playerTeam.GetRelations(_colony.Owner) < 5;
+            btPrecursorCore.Visible = _playerTeam.PrecursorCoreCount > 0;
+            btPrecursorCore.Enabled = _playerTeam.HasPrecursorCore && _playerTeam.GetRelations(_colony.Owner) < 5;
 
             // Show the experience as a bar
             pbExperience.Refresh();
         }
         private void SetupTrainingTab(Soldier? selected = null) {
-            if (!colony.HasBaseType(Colony.BaseType.Research)) {
+            if (!_colony.HasBaseType(Colony.BaseType.Research)) {
                 return;
             }
             if (Relations < 1) {
                 tpTraining.Hide();
                 lbImproveRelations.Show();
-                lbImproveRelations.Text = $"You must improve relations with the {colony.Owner.Name} race first!";
+                lbImproveRelations.Text = $"You must improve relations with the {_colony.Owner.Name} race first!";
                 return;
             }
             tpTraining.Show();
 
             cbSoldierToTrain.Items.Clear();
-            foreach (Soldier s in PlayerTeam.SoldiersRO.Where(s => s.IsActive)) {
+            foreach (Soldier s in _playerTeam.SoldiersRO.Where(s => s.IsActive)) {
                 if (selected is null) selected = s;
                 cbSoldierToTrain.Items.Add(s);
             }
@@ -332,7 +333,7 @@ namespace SpaceMercs.Dialogs {
             btAddNewSkill.Enabled = unspent > 0 && !selected.HasAllUtilitySkills();
             btIncreaseSkill.Enabled = unspent > 0;
             lbTrainCost.Text = $"{selected.TrainingCost}cr";
-            lbTeamCash.Text = PlayerTeam.Cash.ToString("N2");
+            lbTeamCash.Text = _playerTeam.Cash.ToString("N2");
 
             lbUtilitySkills.Items.Clear();
             btForgetSkill.Enabled = false;
@@ -345,6 +346,34 @@ namespace SpaceMercs.Dialogs {
                     lbUtilitySkills.Items.Add($"{sk} [{lvl - bonus}] {(bonus > 0 ? "+" : string.Empty)}{(bonus != 0 ? bonus : string.Empty)}");
                 }
             }
+        }
+        private void SetupDetailsTab() {
+            if (string.IsNullOrEmpty(_colony.Location.Name)) lbColonyName.Text = "Unnamed Colony";
+            else lbColonyName.Text = _colony.Location.Name;
+            lbColonySize.Text = _colony.BaseSize.ToString();
+            if (_colony.HasBaseType(Colony.BaseType.Colony)) lbResidential.ForeColor = clExists;
+            else lbResidential.ForeColor = clDoesntExist;
+            if (_colony.HasBaseType(Colony.BaseType.Research)) lbResearch.ForeColor = clExists;
+            else lbResearch.ForeColor = clDoesntExist;
+            if (_colony.HasBaseType(Colony.BaseType.Trading)) lbTrade.ForeColor = clExists;
+            else lbTrade.ForeColor = clDoesntExist;
+            if (_colony.HasBaseType(Colony.BaseType.Military)) lbMilitary.ForeColor = clExists;
+            else lbMilitary.ForeColor = clDoesntExist;
+            if (_colony.HasBaseType(Colony.BaseType.Metropolis)) lbMetropolis.ForeColor = clExists;
+            else lbMetropolis.ForeColor = clDoesntExist;
+            lbLastGrowth.Text = _colony.dtLastGrowth.ToString("D");
+            if (!_colony.CanGrow) lbNextGrowth.Text = "n/a";
+            else lbNextGrowth.Text = _colony.dtNextGrowth.ToString("D");
+            lbLocation.Text = _colony.Location.PrintCoordinates();
+            if (string.IsNullOrEmpty(_colony.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
+            else lbSystemName.Text = _colony.Location.GetSystem().Name;
+            btExpandColony.Visible = _colony.CanGrow;
+            if (_colony.CanGrow) {
+                btExpandColony.Enabled = _playerTeam.PlayerShip.CanFoundColony(_colony.Location);
+            }
+            lbStarType.Text = _colony.Location.GetSystem().StarType.ToString();
+            lbPlanetType.Text = _colony.Location.Type.ToString();
+            lbOwner.Text = _colony.Owner.Name;
         }
 
         private static bool ShouldDisplayInFoundry(string strType, IItem eq) {
@@ -363,16 +392,16 @@ namespace SpaceMercs.Dialogs {
             if (dgMerchant.SelectedRows.Count == 0) return;
             int iScroll = dgMerchant.SelectedRows[0].Index - dgMerchant.FirstDisplayedScrollingRowIndex;
             if (dgMerchant.SelectedRows[0].Tag is not IItem eq) return;
-            double Cost = colony.CostModifier * eq.Cost * PriceMod;
-            if (Cost > PlayerTeam.Cash) {
+            double Cost = _colony.CostModifier * eq.Cost * PriceMod;
+            if (Cost > _playerTeam.Cash) {
                 MessageBox.Show("You cannot afford to buy that item!");
                 return;
             }
             // Buy it
-            PlayerTeam.Cash -= Cost;
-            PlayerTeam.AddItem(eq, 1);
+            _playerTeam.Cash -= Cost;
+            _playerTeam.AddItem(eq, 1);
             SoundEffects.PlaySound("CashRegister");
-            colony.RemoveItem(eq);
+            _colony.RemoveItem(eq);
             // Reinitialise the data grid after purchase to reflect the new state
             SetupMerchantDataGrid();
             // Re-highlight the correct row, if it still exists (might have bought the last one, or only showing affordable and can no longer afford)
@@ -390,22 +419,22 @@ namespace SpaceMercs.Dialogs {
             if (dgMercenaries.SelectedRows.Count == 0) return;
             if (dgMercenaries.SelectedRows[0].Tag is not Soldier merc) return;
             double Cost = merc.HireCost() * PriceMod;
-            if (Cost > PlayerTeam.Cash) {
+            if (Cost > _playerTeam.Cash) {
                 MessageBox.Show("You cannot afford to hire that soldier!");
                 return;
             }
 
             // Check if we have enough berths
-            int nSpace = PlayerTeam.GetSpareBerths();
+            int nSpace = _playerTeam.GetSpareBerths();
             if (nSpace < 1) {
                 if (MessageBox.Show("You don't have sufficient accommodation for this new soldier, so you won't be able to take off. Continue anyway?", "No More Space", MessageBoxButtons.YesNo) == DialogResult.No) return;
             }
 
             // Recruit the soldier
             MessageBox.Show("You have hired the soldier " + merc.Name);
-            colony.RemoveMercenary(merc);
-            PlayerTeam.AddSoldier(merc);
-            PlayerTeam.Cash -= Cost;
+            _colony.RemoveMercenary(merc);
+            _playerTeam.AddSoldier(merc);
+            _playerTeam.Cash -= Cost;
             SoundEffects.PlaySound("CashRegister");
             SetupMercenariesTab();
         }
@@ -413,39 +442,39 @@ namespace SpaceMercs.Dialogs {
             if (dgMissions.SelectedRows.Count == 0) return;
             if (dgMissions.SelectedRows[0].Tag is not Mission miss) return;
             if (StartMission(miss)) {
-                colony.RemoveMission(miss);
+                _colony.RemoveMission(miss);
                 this.Close();
             }
         }
         private void btUpgradeShip_Click(object sender, EventArgs e) {
             if (dgShips.SelectedRows.Count == 0) return;
-            double SalvageValue = Math.Round(PlayerTeam.PlayerShip.CalculateSalvageValue(), 2);
+            double SalvageValue = Math.Round(_playerTeam.PlayerShip.CalculateSalvageValue(), 2);
             if (dgShips.SelectedRows[0].Tag is not ShipType st) {
                 MessageBox.Show("Null ship type");
                 return;
             }
 
-            if (st == PlayerTeam.PlayerShip.Type) {
+            if (st == _playerTeam.PlayerShip.Type) {
                 MessageBox.Show("This is the same as the ship you already own!");
                 return;
             }
 
             double Cost = Math.Round((st.Cost * PriceMod) - SalvageValue, 2);
-            if (Cost > PlayerTeam.Cash) {
+            if (Cost > _playerTeam.Cash) {
                 MessageBox.Show("You cannot afford to upgrade to that model!");
                 return;
             }
 
             // Downgrading to a less valuable ship type. WTF?
-            if (PlayerTeam.PlayerShip.Type.Cost > st.Cost) {
+            if (_playerTeam.PlayerShip.Type.Cost > st.Cost) {
                 if (MessageBox.Show("This would be a downgrade. Your current ship is already better. Continue anyway?", "Really Downgrade?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             }
             if (MessageBox.Show("Really upgrade your ship to a " + st.Name + "? Total Cost = " + Cost + " credits (includes " + SalvageValue + " credits salvage value from existing ship)", "Really Buy Ship?", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
             // Do the upgrade
-            PlayerTeam.SetTeamShip(st);
+            _playerTeam.SetTeamShip(st);
 
-            PlayerTeam.Cash -= Cost;
+            _playerTeam.Cash -= Cost;
             SoundEffects.PlaySound("CashRegister");
             SetupShipsTab();
         }
@@ -455,14 +484,14 @@ namespace SpaceMercs.Dialogs {
             Soldier? s = tp.Soldier;
             if (tp.Item is not IEquippable eq) return;
             bool bEquipped = tp.Equipped;
-            int relations = PlayerTeam.GetRelations(colony.Owner);
-            int lvl = (colony.BaseSize * 2) + relations - 2;
-            UpgradeItem ui = new UpgradeItem(eq, PriceMod * colony.CostModifier, lvl, 0, PlayerTeam, null);
+            int relations = _playerTeam.GetRelations(_colony.Owner);
+            int lvl = (_colony.BaseSize * 2) + relations - 2;
+            UpgradeItem ui = new UpgradeItem(eq, PriceMod * _colony.CostModifier, lvl, 0, _playerTeam, null);
             ui.ShowDialog(this.Owner);
             if (ui.Upgraded) {
                 if (s is null) {
-                    PlayerTeam.RemoveItemFromStores(eq);
-                    if (!ui.Destroyed && ui.NewItem != null) PlayerTeam.AddItem(ui.NewItem);
+                    _playerTeam.RemoveItemFromStores(eq);
+                    if (!ui.Destroyed && ui.NewItem != null) _playerTeam.AddItem(ui.NewItem);
                 }
                 else {
                     if (bEquipped) s.Unequip(eq);
@@ -481,7 +510,7 @@ namespace SpaceMercs.Dialogs {
         }
         private void btSellAll_Click(object sender, EventArgs e) {
             if (dgInventory.SelectedRows.Count == 0) {
-                SellSpecial ss = new SellSpecial(PlayerTeam, colony);
+                SellSpecial ss = new SellSpecial(_playerTeam, _colony);
                 ss.ShowDialog(this);
                 SetupFoundryTab();
             }
@@ -504,8 +533,8 @@ namespace SpaceMercs.Dialogs {
             Dictionary<IItem, int> dRemains = new Dictionary<IItem, int>();
             List<SaleItem> lSI = new List<SaleItem>();
             int count = 0;
-            int relations = PlayerTeam.GetRelations(colony.Owner);
-            int lvl = (colony.BaseSize * 2) + relations - 2;
+            int relations = _playerTeam.GetRelations(_colony.Owner);
+            int lvl = (_colony.BaseSize * 2) + relations - 2;
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
                 if (row.Tag is not SaleItem tp || tp.Item is not IEquippable eqp) return;
                 lSI.Add(tp);
@@ -517,7 +546,7 @@ namespace SpaceMercs.Dialogs {
                     if (dRemains.ContainsKey(it)) dRemains[it] += dr[it];
                     else dRemains.Add(it, dr[it]);
                 }
-                if (s == null) PlayerTeam.RemoveItemFromStores(eq);
+                if (s == null) _playerTeam.RemoveItemFromStores(eq);
                 else {
                     if (bEquipped) s.Unequip(eqp);
                     s.DestroyItem(eq);
@@ -533,7 +562,7 @@ namespace SpaceMercs.Dialogs {
             sb.AppendLine("Dismantled " + count + " item" + (count == 1 ? "" : "s"));
             sb.AppendLine("Materials obtained:");
             foreach (IItem r in dRemains.Keys) {
-                PlayerTeam.AddItem(r, dRemains[r]);
+                _playerTeam.AddItem(r, dRemains[r]);
                 sb.AppendLine(r.Name + " [" + dRemains[r] + "]");
             }
             if (dRemains.Count == 0) sb.AppendLine("None");
@@ -550,7 +579,7 @@ namespace SpaceMercs.Dialogs {
             foreach (DataGridViewRow row in dgInventory.SelectedRows) {
                 if (row.Tag is not SaleItem tp || tp.Item is not IItem eq) continue;
                 tpSelected.Add(tp);
-                double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * colony.CostModifier / PriceMod;
+                double SalePrice = (bAll ? tp.Count : 1.0) * eq.Cost * Const.SellDiscount * _colony.CostModifier / PriceMod;
                 if ((eq is IEquippable ieq && ieq.Level > 0) || SalePrice > 10.0) bQuery = true;
                 TotalValue += SalePrice;
                 nitem += (bAll ? tp.Count : 1);
@@ -575,13 +604,13 @@ namespace SpaceMercs.Dialogs {
                 IItem eq = tp.Item ?? throw new Exception("Found incomprehensible equipment in DGViewRow");
                 Soldier? s = tp.Soldier;
                 bool bEquipped = tp.Equipped;
-                if (s is null) PlayerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
+                if (s is null) _playerTeam.RemoveItemFromStores(eq, bAll ? tp.Count : 1);
                 else {
                     if (bEquipped) s.Unequip(eq as IEquippable);
                     s.DestroyItem(eq, bAll ? tp.Count : 1);
                 }
             }
-            PlayerTeam.Cash += TotalValue;
+            _playerTeam.Cash += TotalValue;
             SoundEffects.PlaySound("CashRegister");
             if (bAll) SetupFoundryTab(null);
             else SetupFoundryTab(tpSelected);
@@ -592,13 +621,13 @@ namespace SpaceMercs.Dialogs {
             if (!wp.Type.Modifiable) return;
             Soldier? s = tp.Soldier;
             bool bEquipped = tp.Equipped;
-            int relations = PlayerTeam.GetRelations(colony.Owner);
-            ModifyWeapon mw = new ModifyWeapon(wp, PriceMod * colony.CostModifier, (colony.BaseSize * 2) + relations - 2, (colony.BaseSize * 2) + relations - 2, 0, PlayerTeam, null, null);
+            int relations = _playerTeam.GetRelations(_colony.Owner);
+            ModifyWeapon mw = new ModifyWeapon(wp, PriceMod * _colony.CostModifier, (_colony.BaseSize * 2) + relations - 2, (_colony.BaseSize * 2) + relations - 2, 0, _playerTeam, null, null);
             mw.ShowDialog(this.Owner);
             if (mw.Modified) {
                 if (s is null) {
-                    PlayerTeam.RemoveItemFromStores(wp);
-                    if (!mw.Destroyed && mw.NewItem != null) PlayerTeam.AddItem(mw.NewItem);
+                    _playerTeam.RemoveItemFromStores(wp);
+                    if (!mw.Destroyed && mw.NewItem != null) _playerTeam.AddItem(mw.NewItem);
                 }
                 else {
                     if (bEquipped) s.Unequip(wp);
@@ -611,6 +640,15 @@ namespace SpaceMercs.Dialogs {
                 if (mw.Destroyed) SetupFoundryTab();
                 else if (mw.NewItem is not null) SetupFoundryTab(new List<SaleItem>() { new SaleItem(mw.NewItem, s, bEquipped, 1) });
             }
+        }
+        private void btExpandColony_Click(object sender, EventArgs e) {
+            ShipEquipment? cb = _playerTeam.PlayerShip.GetSuitableColonyBuilder(_colony.Location);
+            if (cb is null) return;
+            int dExpandBase = (int)(Const.DaysPerYear * (Const.GrowthScale + 0.5d) * _colony.CalculateGrowthRateScale());
+            if (MessageBox.Show($"Really expand this colony?\nThis will consume your {cb.Name}\nand will reduce this growth period by {dExpandBase:N0} days", "Really Expand?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            _playerTeam.PlayerShip.RemoveColonyBuilder(_colony.Location);
+            _colony.UpdateGrowthProgress(new TimeSpan(dExpandBase, 0, 0, 0), _clock);
+            SetupDetailsTab();
         }
 
         // Double click to get further details on specific entries
@@ -673,15 +711,15 @@ namespace SpaceMercs.Dialogs {
             SetupFoundryTab();
         }
         private void btRandomiseMissions_Click(object sender, EventArgs e) {
-            colony.ResetMissions(PlayerTeam);
+            _colony.ResetMissions(_playerTeam);
             SetupMissionsTab();
         }
         private void btRandomiseMercs_Click(object sender, EventArgs e) {
-            colony.ResetMercenaries();
+            _colony.ResetMercenaries();
             SetupMercenariesTab();
         }
         private void btRandomiseMerchant_Click(object sender, EventArgs e) {
-            colony.ResetStock();
+            _colony.ResetStock();
             SetupMerchantDataGrid();
         }
         private void dgInventory_SelectionChanged(object sender, EventArgs e) {
@@ -794,28 +832,7 @@ namespace SpaceMercs.Dialogs {
             btRandomiseMercs.Visible = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMerchant.Enabled = Const.DEBUG_RANDOMISE_VENDORS;
             btRandomiseMerchant.Visible = Const.DEBUG_RANDOMISE_VENDORS;
-            if (string.IsNullOrEmpty(colony.Location.Name)) lbColonyName.Text = "Unnamed Colony";
-            else lbColonyName.Text = colony.Location.Name;
-            lbColonySize.Text = colony.BaseSize.ToString();
-            if (colony.HasBaseType(Colony.BaseType.Colony)) lbResidential.ForeColor = clExists;
-            else lbResidential.ForeColor = clDoesntExist;
-            if (colony.HasBaseType(Colony.BaseType.Research)) lbResearch.ForeColor = clExists;
-            else lbResearch.ForeColor = clDoesntExist;
-            if (colony.HasBaseType(Colony.BaseType.Trading)) lbTrade.ForeColor = clExists;
-            else lbTrade.ForeColor = clDoesntExist;
-            if (colony.HasBaseType(Colony.BaseType.Military)) lbMilitary.ForeColor = clExists;
-            else lbMilitary.ForeColor = clDoesntExist;
-            if (colony.HasBaseType(Colony.BaseType.Metropolis)) lbMetropolis.ForeColor = clExists;
-            else lbMetropolis.ForeColor = clDoesntExist;
-            lbLastGrowth.Text = colony.dtLastGrowth.ToString("D");
-            if (!colony.CanGrow) lbNextGrowth.Text = "n/a";
-            else lbNextGrowth.Text = colony.dtNextGrowth.ToString("D");
-            lbLocation.Text = colony.Location.PrintCoordinates();
-            if (string.IsNullOrEmpty(colony.Location.GetSystem().Name)) lbSystemName.Text = "Unnamed";
-            else lbSystemName.Text = colony.Location.GetSystem().Name;
-            lbStarType.Text = colony.Location.GetSystem().StarType.ToString();
-            lbPlanetType.Text = colony.Location.Type.ToString();
-            lbOwner.Text = colony.Owner.Name;
+            SetupDetailsTab();
         }
 
         private void ColonyView_Shown(object sender, EventArgs e) {
@@ -832,58 +849,58 @@ namespace SpaceMercs.Dialogs {
         // Diplomacy screen if Homeworld:
         private void DonateCash(int amount) {
             int exp = (int)((double)amount * Const.CashRelationsFactor);
-            PlayerTeam.ImproveRelations(colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
-            PlayerTeam.Cash -= amount;
+            _playerTeam.ImproveRelations(_colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
+            _playerTeam.Cash -= amount;
             SetupDiplomacyTab();
         }
         private void bt100_Click(object sender, EventArgs e) {
-            if (PlayerTeam.Cash < 100) return;
-            MessageBox.Show($"The {colony.Owner.Name} race gratefully accepts your donation");
+            if (_playerTeam.Cash < 100) return;
+            MessageBox.Show($"The {_colony.Owner.Name} race gratefully accepts your donation");
             DonateCash(100);
         }
         private void bt1000_Click(object sender, EventArgs e) {
-            if (PlayerTeam.Cash < 1000) return;
-            MessageBox.Show($"The {colony.Owner.Name} ambassador thanks you personally for your generous donation");
+            if (_playerTeam.Cash < 1000) return;
+            MessageBox.Show($"The {_colony.Owner.Name} ambassador thanks you personally for your generous donation");
             DonateCash(1000);
         }
         private void bt10k_Click(object sender, EventArgs e) {
-            if (PlayerTeam.Cash < 10000) return;
-            MessageBox.Show($"The {colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity");
+            if (_playerTeam.Cash < 10000) return;
+            MessageBox.Show($"The {_colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity");
             DonateCash(10000);
         }
         private void btSpaceHulk_Click(object sender, EventArgs e) {
             // Pick space hulk core
-            ChooseCore cc = new ChooseCore(PlayerTeam, true, false);
+            ChooseCore cc = new ChooseCore(_playerTeam, true, false);
             cc.ShowDialog();
             MissionItem? chosenCore = cc.ChosenItem;
             if (chosenCore == null) return;
 
             // Valuation -> xp
-            MessageBox.Show($"The {colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity\n{colony.Owner.Name} engineers immediately begin work analysing the mysterious device.");
+            MessageBox.Show($"The {_colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity\n{_colony.Owner.Name} engineers immediately begin work analysing the mysterious device.");
             int exp = chosenCore.Level * Const.SpaceHulkCoreExpScale;
-            PlayerTeam.ImproveRelations(colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
-            PlayerTeam.RemoveItemFromStoresOrSoldiers(chosenCore);
+            _playerTeam.ImproveRelations(_colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
+            _playerTeam.RemoveItemFromStoresOrSoldiers(chosenCore);
             SetupDiplomacyTab();
         }
         private void btPrecursor_Click(object sender, EventArgs e) {
             // Pick precursor core
-            ChooseCore cc = new ChooseCore(PlayerTeam, false, true);
+            ChooseCore cc = new ChooseCore(_playerTeam, false, true);
             cc.ShowDialog();
             MissionItem? chosenCore = cc.ChosenItem;
             if (chosenCore == null) return;
 
             // Valuation -> xp
-            MessageBox.Show($"The {colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity\n{colony.Owner.Name} scientists immediately begin work on decrypting the information stored in the mysterious device.");
+            MessageBox.Show($"The {_colony.Owner.Name} emperor sends you a personal note of thanks for your overwhelming generosity\n{_colony.Owner.Name} scientists immediately begin work on decrypting the information stored in the mysterious device.");
             int exp = chosenCore.Level * Const.PrecursorCoreExpScale;
-            PlayerTeam.ImproveRelations(colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
-            PlayerTeam.RemoveItemFromStoresOrSoldiers(chosenCore);
+            _playerTeam.ImproveRelations(_colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
+            _playerTeam.RemoveItemFromStoresOrSoldiers(chosenCore);
             SetupDiplomacyTab();
         }
         private void pbExperience_Paint(object sender, PaintEventArgs e) {
             // Clear the background.
             e.Graphics.Clear(Color.White);
 
-            double fraction = PlayerTeam.GetRelationsProgress(colony.Owner);
+            double fraction = _playerTeam.GetRelationsProgress(_colony.Owner);
             int wid = (int)(fraction * pbExperience.ClientSize.Width);
             e.Graphics.FillRectangle(Brushes.Red, 0, 0, wid, pbExperience.ClientSize.Height);
 
@@ -942,14 +959,14 @@ namespace SpaceMercs.Dialogs {
             Soldier.UtilitySkill sk = (Soldier.UtilitySkill)Enum.Parse(typeof(Soldier.UtilitySkill), stsk);
             if (s.GetRawUtilityLevel(sk) == 0) return;
             int cost = s.TrainingCost;
-            if (cost > PlayerTeam.Cash) {
+            if (cost > _playerTeam.Cash) {
                 MessageBox.Show("You cannot afford to train this soldier");
                 return;
             }
             if (MessageBox.Show($"Really forget one point in this skill?\nCost = {cost}cr", "Forget skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
             s.AddUtilitySkill(sk, -1);
             s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, 1);
-            PlayerTeam.Cash -= s.TrainingCost;
+            _playerTeam.Cash -= s.TrainingCost;
             s.IncreaseTrainingCost();
             SetupTrainingDetails(s);
         }

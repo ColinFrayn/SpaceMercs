@@ -204,7 +204,8 @@ namespace SpaceMercs.MainWindow {
                         if (thisColony.CanGrow) {
                             // Work out how much this mission does to speed up growth
                             double expFract = (double)ThisMission.Experience / (double)thisColony.GetAverageMissionExperience();
-                            double nDays = expFract * Const.ColonyMissionGrowthBonus;
+                            double nDaysThisGrowth = (thisColony.dtNextGrowth - thisColony.dtLastGrowth).TotalDays;
+                            double nDays = nDaysThisGrowth * expFract * Const.ColonyMissionGrowthRate;
                             TimeSpan tDiff = TimeSpan.FromDays(nDays);
                             // Check for increase in size
                             thisColony.UpdateGrowthProgress(tDiff, Clock);

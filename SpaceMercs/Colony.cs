@@ -570,9 +570,16 @@ namespace SpaceMercs {
             // Base amount of time, in days, before the next growth
             double dt = Math.Pow(BaseSize, Const.GrowthExponent) * (Const.DaysPerYear * (Const.GrowthScale + rand.NextDouble()));
 
+            double scale = CalculateGrowthRateScale();
+
+            return (int)(dt * scale);
+        }
+        public double CalculateGrowthRateScale() {
+            double dt = 1d;
+
             // Calculate temperature diff from ideal, abs value, doubled for +ve because hotter temperatures get difficult more quickly
             double tdiff = Location.TDiff(Owner);
-            
+
             // Tougher to grow if far from ideal temp
             if (tdiff > Const.GrowthTempOffset) {
                 dt *= Math.Pow(Const.GrowthTempBase, (tdiff - Const.GrowthTempOffset) / Const.GrowthTempScale);
@@ -586,7 +593,7 @@ namespace SpaceMercs {
             // Slow down as the civ gets larger, or growth will get far too rapid
             dt *= Math.Sqrt(Math.Max(40, Owner.Population) / 40d);
 
-            return (int)dt;
+            return dt;
         }
 
         // Iterators

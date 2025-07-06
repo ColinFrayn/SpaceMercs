@@ -650,6 +650,21 @@ namespace SpaceMercs {
             if (bestID >= 0) Equipment.Remove(bestID);
             else throw new Exception("Couldn't find colony builder to remove!");
         }
+        public ShipEquipment? GetSuitableColonyBuilder(HabitableAO hao) {
+            int bestID = -1;
+            foreach (int r in Equipment.Keys) {
+                Tuple<ShipEquipment, bool> tp = Equipment[r];
+                if (tp.Item2 && tp.Item1.BuildColony != ShipEquipment.ColoniseAbility.None) {
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Basic && (hao.Type == Planet.PlanetType.Oceanic || hao.Type == Planet.PlanetType.Rocky)) bestID = r;
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Advanced && hao.Type != Planet.PlanetType.Gas && bestID == -1) bestID = r; // Don't override a basic colony builder, if there are several
+                    if (tp.Item1.BuildColony == ShipEquipment.ColoniseAbility.Cloud && hao.Type == Planet.PlanetType.Gas) bestID = r;
+                }
+            }
+            if (bestID >= 0) {
+                return Equipment[bestID].Item1;
+            }
+            return null;
+        }
 
         // User wants to salvage this room
         public void SalvageRoom(int iRoomID, ShowMessageDecisionDelegate showMessage) {

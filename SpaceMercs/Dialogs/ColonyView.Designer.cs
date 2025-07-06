@@ -23,14 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
             tcMain = new TabControl();
             tpMerchant = new TabPage();
             cbAffordable = new CheckBox();
@@ -52,6 +52,11 @@
             btRandomiseMercs = new Button();
             btHire = new Button();
             dgMercenaries = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            Class = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            colFee = new DataGridViewTextBoxColumn();
             tpMissions = new TabPage();
             btRandomiseMissions = new Button();
             btAccept = new Button();
@@ -140,11 +145,7 @@
             label9 = new Label();
             lbLocation = new Label();
             label7 = new Label();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            Class = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            colFee = new DataGridViewTextBoxColumn();
+            btExpandColony = new Button();
             tcMain.SuspendLayout();
             tpMerchant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMerchant).BeginInit();
@@ -320,8 +321,8 @@
             // colItem
             // 
             colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colItem.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colItem.DefaultCellStyle = dataGridViewCellStyle17;
             colItem.HeaderText = "Item";
             colItem.Name = "colItem";
             colItem.ReadOnly = true;
@@ -337,8 +338,8 @@
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
-            Mass.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Mass.DefaultCellStyle = dataGridViewCellStyle18;
             Mass.HeaderText = "Mass";
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
@@ -454,6 +455,47 @@
             dgMercenaries.CellMouseDoubleClick += dgMercenaries_CellMouseDoubleClick;
             dgMercenaries.SortCompare += dgMercenaries_SortCompare;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle19.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // Class
+            // 
+            Class.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Class.HeaderText = "Class";
+            Class.Name = "Class";
+            Class.ReadOnly = true;
+            Class.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn2.HeaderText = "Level";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            dataGridViewTextBoxColumn2.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn3.HeaderText = "Race";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            dataGridViewTextBoxColumn3.Width = 72;
+            // 
+            // colFee
+            // 
+            colFee.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            colFee.HeaderText = "Fee";
+            colFee.Name = "colFee";
+            colFee.ReadOnly = true;
+            colFee.Width = 62;
+            // 
             // tpMissions
             // 
             tpMissions.Controls.Add(btRandomiseMissions);
@@ -518,8 +560,8 @@
             // colMission
             // 
             colMission.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colMission.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colMission.DefaultCellStyle = dataGridViewCellStyle20;
             colMission.HeaderText = "Mission";
             colMission.Name = "colMission";
             colMission.ReadOnly = true;
@@ -527,8 +569,8 @@
             // colGoal
             // 
             colGoal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colGoal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle21.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colGoal.DefaultCellStyle = dataGridViewCellStyle21;
             colGoal.HeaderText = "Goal";
             colGoal.Name = "colGoal";
             colGoal.ReadOnly = true;
@@ -537,8 +579,8 @@
             // colOpp
             // 
             colOpp.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F);
-            colOpp.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle22.Font = new Font("Microsoft Sans Serif", 8.25F);
+            colOpp.DefaultCellStyle = dataGridViewCellStyle22;
             colOpp.HeaderText = "Enemy";
             colOpp.Name = "colOpp";
             colOpp.ReadOnly = true;
@@ -648,8 +690,8 @@
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle23.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle23;
             dataGridViewTextBoxColumn6.HeaderText = "Ship";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -858,8 +900,8 @@
             // dgcItem
             // 
             dgcItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dgcItem.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle24.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dgcItem.DefaultCellStyle = dataGridViewCellStyle24;
             dgcItem.HeaderText = "Item";
             dgcItem.Name = "dgcItem";
             dgcItem.ReadOnly = true;
@@ -1250,6 +1292,7 @@
             // 
             // tpDetails
             // 
+            tpDetails.Controls.Add(btExpandColony);
             tpDetails.Controls.Add(lbNextGrowth);
             tpDetails.Controls.Add(label8);
             tpDetails.Controls.Add(lbLastGrowth);
@@ -1282,7 +1325,7 @@
             lbNextGrowth.Margin = new Padding(5);
             lbNextGrowth.Name = "lbNextGrowth";
             lbNextGrowth.Padding = new Padding(2);
-            lbNextGrowth.Size = new Size(193, 27);
+            lbNextGrowth.Size = new Size(193, 32);
             lbNextGrowth.TabIndex = 12;
             lbNextGrowth.Text = "88th December 2188";
             lbNextGrowth.TextAlign = ContentAlignment.MiddleCenter;
@@ -1293,7 +1336,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 9.75F);
             label8.ImageAlign = ContentAlignment.MiddleRight;
-            label8.Location = new Point(40, 432);
+            label8.Location = new Point(40, 435);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(78, 16);
@@ -1311,7 +1354,7 @@
             lbLastGrowth.Margin = new Padding(5);
             lbLastGrowth.Name = "lbLastGrowth";
             lbLastGrowth.Padding = new Padding(2);
-            lbLastGrowth.Size = new Size(193, 27);
+            lbLastGrowth.Size = new Size(193, 32);
             lbLastGrowth.TabIndex = 10;
             lbLastGrowth.Text = "88th December 2188";
             lbLastGrowth.TextAlign = ContentAlignment.MiddleCenter;
@@ -1322,7 +1365,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 9.75F);
             label6.ImageAlign = ContentAlignment.MiddleRight;
-            label6.Location = new Point(40, 383);
+            label6.Location = new Point(40, 386);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(76, 16);
@@ -1590,46 +1633,16 @@
             label7.Text = "Location";
             label7.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // dataGridViewTextBoxColumn1
+            // btExpandColony
             // 
-            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // Class
-            // 
-            Class.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Class.HeaderText = "Class";
-            Class.Name = "Class";
-            Class.ReadOnly = true;
-            Class.Width = 73;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn2.HeaderText = "Level";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            dataGridViewTextBoxColumn2.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn3.HeaderText = "Race";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            dataGridViewTextBoxColumn3.Width = 72;
-            // 
-            // colFee
-            // 
-            colFee.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            colFee.HeaderText = "Fee";
-            colFee.Name = "colFee";
-            colFee.ReadOnly = true;
-            colFee.Width = 62;
+            btExpandColony.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btExpandColony.Location = new Point(361, 426);
+            btExpandColony.Name = "btExpandColony";
+            btExpandColony.Size = new Size(146, 32);
+            btExpandColony.TabIndex = 13;
+            btExpandColony.Text = "Expand Colony";
+            btExpandColony.UseVisualStyleBackColor = true;
+            btExpandColony.Click += btExpandColony_Click;
             // 
             // ColonyView
             // 
@@ -1784,5 +1797,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn colFee;
+        private Button btExpandColony;
     }
 }
