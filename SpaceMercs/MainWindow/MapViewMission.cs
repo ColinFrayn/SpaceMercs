@@ -807,8 +807,7 @@ namespace SpaceMercs.MainWindow {
             return UpdateDetectionForLocation(s.X, s.Y, s.DetectionRange, s);
         }
         private bool UpdateDetectionForSoldierAfterAttack(Soldier s) {
-            if (s.EquippedWeapon is null) return false;
-            return UpdateDetectionForLocation(s.X, s.Y, s.EquippedWeapon.NoiseLevel);
+            return UpdateDetectionForLocation(s.X, s.Y, s.EquippedWeapon?.NoiseLevel ?? 5d);
         }
         private bool UpdateDetectionForLocation(int x, int y, double baseRange, Soldier? s = null) {
             // No noise so no change

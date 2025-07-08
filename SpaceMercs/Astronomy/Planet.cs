@@ -383,10 +383,10 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
-        public override int GetPopulation() {
-            int pop = Colony?.BaseSize ?? 0;
+        public override int GetPopulation(Race? rc = null) {
+            int pop = (Colony is not null && (Colony.Owner == rc || rc is null)) ? Colony!.BaseSize : 0;
             foreach (Moon mn in Moons) {
-                pop += mn.GetPopulation();
+                pop += mn.GetPopulation(rc);
             }
             return pop;
         }

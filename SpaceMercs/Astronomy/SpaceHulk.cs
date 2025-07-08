@@ -52,7 +52,7 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + ".SH";
         }
-        public override int GetPopulation() => 0;
+        public override int GetPopulation(Race? rc = null) => 0;
         public override Planet.PlanetType Type => Planet.PlanetType.SpaceHulk;
         public override void SaveToFile(StreamWriter file, GlobalClock clock) {
             file.WriteLine(" <SpaceHulk>");

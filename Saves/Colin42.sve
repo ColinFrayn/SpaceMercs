@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>19/12/2609 16:45:28</Clock>
+<Clock>19/12/2609 16:48:39</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -12628,6 +12628,7 @@
 <Name>Endor and Hoth</Name>
  <MapPos X="22.27" Y="-0.8"/>
  <Owner>Human</Owner>
+ <TradeRoute>(3,0)6</TradeRoute>
  <TradeRoute>(2,0)11</TradeRoute>
  <Planets>
 <Planet ID="0">
@@ -14177,6 +14178,7 @@
 <Name>Outways</Name>
  <MapPos X="26.01" Y="-0.38"/>
  <Owner>Human</Owner>
+ <TradeRoute>(2,0)13</TradeRoute>
  <Planets>
 <Planet Seed="9874683" />
 <Planet ID="1">
@@ -14201,11 +14203,11 @@
 <Type>Rocky</Type>
 <PRot>47782192</PRot>
 <Colony>
- <BaseType>3</BaseType>
+ <BaseType>7</BaseType>
  <Owner>Human</Owner>
  <LastUpdate>823309659108810000</LastUpdate>
- <LastGrowth>821172381237010020</LastGrowth>
- <NextGrowth>831902169809429798</NextGrowth>
+ <LastGrowth>821622297809429798</LastGrowth>
+ <NextGrowth>844323897809429798</NextGrowth>
  <Mercenaries>
 <Soldier Name="Vincent Nicholson">
  <Level>15</Level>
@@ -16663,7 +16665,7 @@
 </Map>
 <Team>
  <Pos>(3,0)6.2</Pos>
- <Cash>16730.683658635106</Cash>
+ <Cash>13355.683658635106</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
  <Location X="42" Y="27"/>
@@ -17094,7 +17096,6 @@
  <Eqp ID="1" Active="False">AI Module</Eqp>
  <Eqp ID="2" Active="True">AI Module</Eqp>
  <Eqp ID="8" Active="True">Bunk Room</Eqp>
- <Eqp ID="11" Active="True">Terraform Device</Eqp>
 </Ship>
  <Mission_ShowLabels/>
  <Mission_ShowStatBars/>

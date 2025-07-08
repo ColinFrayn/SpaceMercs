@@ -591,7 +591,30 @@ namespace SpaceMercs {
             }
 
             // Slow down as the civ gets larger, or growth will get far too rapid
-            dt *= Math.Sqrt(Math.Max(40, Owner.Population) / 40d);
+            //dt *= Math.Sqrt(Math.Max(50, Owner.Population) / 50d);
+
+            // Bonus based on how many colonies are near, and how many systems with trade routes
+            HashSet<Star> nearbyColonisedSystems = new();
+            Star thisSystem = Location.GetSystem();
+            foreach (Colony cl in Owner.AllColonies) {
+                if (cl == this) continue;
+                Star nearbySystem = cl.Location.GetSystem();
+                if (nearbySystem == thisSystem || nearbySystem.Owner != Owner) continue;
+                double distLy = (thisSystem.GetMapLocation() - nearbySystem.GetMapLocation()).Length;
+                if (distLy < 10d) {
+                    nearbyColonisedSystems.Add(nearbySystem);
+                }
+            }
+            // Start with the current system - all colonies minus the current one
+            double colonyBoost = thisSystem.GetPopulation(Owner) - BaseSize;
+            foreach (Star st in nearbyColonisedSystems) {
+                double distLy = (st.GetMapLocation() - Location.GetMapLocation()).Length;
+                double bonus = st.GetPopulation(Owner) / (distLy + 1d);
+                if (st.HasHyperGate) bonus *= 2;
+                colonyBoost += bonus;
+            }
+            colonyBoost = Math.Min(50d, Math.Max(1d, colonyBoost)); // Clamp to [1, 50]
+            dt /= (colonyBoost / 50d);
 
             return dt;
         }

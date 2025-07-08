@@ -152,8 +152,11 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + "." + ID;
         }
-        public override int GetPopulation() {
-            return Colony?.BaseSize ?? 0;
+        public override int GetPopulation(Race? rc = null) {
+            if (Colony is not null && (Colony.Owner == rc || rc is null)) {
+                return Colony.BaseSize;
+            }
+            return 0;
         }
         public override double DistanceFromStar() {
             if (Parent is Planet pl) {

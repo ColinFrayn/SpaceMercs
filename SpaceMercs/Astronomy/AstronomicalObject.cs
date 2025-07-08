@@ -44,7 +44,7 @@ namespace SpaceMercs {
         public abstract void ClearData();
         public abstract void SetName(string str);
         public abstract Star GetSystem();   // Parent Star (or self, if star)
-        public abstract int GetPopulation();
+        public abstract int GetPopulation(Race? rc = null);
         public Vector3 GetMapLocation() {
             return this.GetSystem().MapPos;
         }

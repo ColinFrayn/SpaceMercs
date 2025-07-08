@@ -130,6 +130,7 @@ namespace SpaceMercs {
             AddSystem(st);
             if (Const.DEBUG_VIEW_ALL_CIVS) st.SetVisited();
         }
+        public IReadOnlyCollection<Colony> AllColonies => new HashSet<Colony>(Colonies);
 
         public void AddSystem(Star st) {
             if (!Systems.Contains(st)) Systems.Add(st);

@@ -65,7 +65,7 @@ namespace SpaceMercs {
         public double AccuracyBonus { get { return Type.Accuracy + (Level * 0.5) + (Mod?.Accuracy ?? 0d); } }
         public double DropOff { get { return Type.DropOff * Math.Pow(0.95, Level) * (Mod?.DropoffMod ?? 1d); } }
         public double Recoil { get { return Type.Recoil * Math.Pow(0.92, Level) * (Mod?.RecoilMod ?? 1d); } }
-        public double NoiseLevel { get { return Math.Max(0, Type.NoiseLevel - (Mod?.Silencer ?? 0d)); } }
+        public double NoiseLevel { get { return Math.Max(0, (Type.NoiseLevel * Math.Pow(0.95, Level)) - (Mod?.Silencer ?? 0d)); } }
         public double Shred { get { return Type.Shred * (1d + (Level / 5d)) + (Mod?.Shred ?? 0d); } }
         public IReadOnlyDictionary<WeaponType.DamageType, double> GenerateDamage(Random rnd) {
             Dictionary<WeaponType.DamageType, double> allDam = new();

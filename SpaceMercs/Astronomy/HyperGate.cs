@@ -42,7 +42,7 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Parent.PrintCoordinates() + ".HG";
         }
-        public override int GetPopulation() => 0;
+        public override int GetPopulation(Race? rc = null) => 0;
         public override Planet.PlanetType Type => Planet.PlanetType.HyperGate;
     }
 }

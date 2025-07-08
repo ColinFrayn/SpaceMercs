@@ -2,8 +2,7 @@
 ToDo List
 -------------------------------------------------
 
-Shoot at a group and hide round the corner, only the one you shot will come.
-- Group needs to share the target?
+Shoot at a group and hide round the corner, only the one you shot will come. [CODE SEEMS CORRECT. WHY?]
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

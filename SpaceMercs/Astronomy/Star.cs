@@ -596,10 +596,10 @@ namespace SpaceMercs {
         public override string PrintCoordinates() {
             return Sector.PrintCoordinates() + ID;
         }
-        public override int GetPopulation() {
+        public override int GetPopulation(Race? rc = null) {
             int pop = 0;
             foreach (Planet pl in _planets) {
-                pop += pl.GetPopulation();
+                pop += pl.GetPopulation(rc);
             }
             return pop;
         }
