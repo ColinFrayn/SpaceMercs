@@ -1,5 +1,4 @@
-﻿using Microsoft.Windows.Themes;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SpaceMercs.Dialogs;
 using SpaceMercs.Graphics;

@@ -8,7 +8,7 @@
 <ShowFlags/>
 <ShowColonies/>
 </GUI>
-<Clock>17/09/2158 22:14:11</Clock>
+<Clock>18/09/2158 08:52:58</Clock>
 <Map Seed="533589" SPS="16" PD="6">
  <Sector X="-1" Y="-1" Inhabitant="Grey">
 <Star ID="0">
@@ -1696,7 +1696,7 @@
  <Scanned/>
 <Colony>
  <Owner>Human</Owner>
- <LastUpdate>680907603377245307</LastUpdate>
+ <LastUpdate>680908351487970572</LastUpdate>
  <LastGrowth>680907219319914849</LastGrowth>
  <Mercenaries>
 <Soldier Name="Xantha Green">
@@ -1734,20 +1734,79 @@
  </UtilityExperience>
  <Class>Skirmisher</Class>
 </Soldier>
+<Soldier Name="Thomas Taylor">
+ <Level>6</Level>
+ <XP>29074</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>18,11,10,11,16</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Stealth Armour" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Kevlar" Level="1"/>
+<Armour Type="Military Helmet" Material="Steel" Level="2"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Grenade Launcher" Level="2" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Launcher">361</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Perception">2</Exp>
+  <Exp Skill="Medic">2</Exp>
+  <Exp Skill="Avoidance">2</Exp>
+ </UtilityExperience>
+ <Class>Grenadier</Class>
+</Soldier>
+<Soldier Name="Yoshi Jones">
+ <Level>5</Level>
+ <XP>23034</XP>
+ <Gender>Male</Gender>
+ <Race>Human</Race>
+ <Stats>17,19,13,13,8</Stats>
+ <Colour>Blue</Colour>
+ <Inventory>
+  <Inv Count="1">
+<Equipment Type="Incendiary Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Medikit"/>
+  </Inv>
+ </Inventory>
+ <EquippedArmour>
+<Armour Type="Military Helmet" Material="Steel" Level="1"/>
+<Armour Type="Chestplate" Material="Steel" Level="0"/>
+<Armour Type="Arm Plating" Material="Composite" Level="0"/>
+<Armour Type="Leg Plating" Material="Steel" Level="0"/>
+<Armour Type="Plate Boots" Material="Steel" Level="0"/>
+<Armour Type="Gauntlets" Material="Steel" Level="0"/>
+ </EquippedArmour>
+ <EquippedWeapon>
+<Weapon Type="Automatic Rifle" Level="0" />
+ </EquippedWeapon>
+ <WeaponExperience>
+  <Exp Type="Rifle">300</Exp>
+ </WeaponExperience>
+ <UtilityExperience>
+  <Exp Skill="Gunsmith">1</Exp>
+  <Exp Skill="Armoursmith">2</Exp>
+  <Exp Skill="Stealth">3</Exp>
+ </UtilityExperience>
+ <Class>Skirmisher</Class>
+</Soldier>
  </Mercenaries>
  <Missions>
-<Mission>
- <Type>Mines</Type>
- <Goal>KillAll</Goal>
- <Enemy>Undead</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>167.25</Reward>
- <Diff>7</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>956236957</Seed>
- <Size>3</Size>
-</Mission>
 <Mission>
  <Type>AbandonedCity</Type>
  <Goal>ExploreAll</Goal>
@@ -1852,89 +1911,89 @@
 </Mission>
  </Missions>
  <Inventory>
-  <Inv Count="6">
+  <Inv Count="3">
 <Equipment Type="Medsystem"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Stimulant"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Military Helmet" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Chestplate" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Arm Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="1">
-<Armour Type="Arm Plating" Material="Steel" Level="0"/>
-  </Inv>
   <Inv Count="2">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Core Armour" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="74">
+  <Inv Count="66">
 <Material Type="Carbon Fibre"/>
   </Inv>
-  <Inv Count="21">
+  <Inv Count="13">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Material Type="Kevlar"/>
   </Inv>
   <Inv Count="3">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Material Type="Aluminium"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Material Type="Tungsten"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Material Type="Uranium"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="2">
 <Material Type="Water"/>
   </Inv>
-  <Inv Count="50">
+  <Inv Count="40">
 <Material Type="Carbon"/>
   </Inv>
   <Inv Count="3">
 <Material Type="Rare Earth Metals"/>
   </Inv>
-  <Inv Count="19">
+  <Inv Count="15">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="37">
+  <Inv Count="28">
 <Material Type="Copper"/>
   </Inv>
   <Inv Count="4">
 <Material Type="Fabric"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="5">
 <Material Type="Plastic"/>
   </Inv>
-  <Inv Count="6">
+  <Inv Count="5">
 <Material Type="Crystals"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Material Type="Titanium"/>
   </Inv>
-  <Inv Count="14">
+  <Inv Count="10">
 <Material Type="Industrial Chemicals"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Gold"/>
   </Inv>
  </Inventory>
 </Colony>
@@ -3259,16 +3318,16 @@
 </Map>
 <Team>
  <Pos>(0,0)12.5.0</Pos>
- <Cash>2114.352331689305</Cash>
+ <Cash>2309.750479837455</Cash>
  <Soldiers>
 <Soldier Name="Rocky">
- <Location X="15" Y="19"/>
- <Health>39.42804207413658</Health>
- <Stamina>33</Stamina>
+ <Location X="19" Y="15"/>
+ <Health>34.51383415832281</Health>
+ <Stamina>25</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>-90</Facing>
  <Level>7</Level>
- <XP>53367</XP>
+ <XP>55845</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>15,12,8,15,16</Stats>
@@ -3305,14 +3364,15 @@
 <Weapon Type="Chainsword" Level="0" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Melee">603</Exp>
+  <Exp Type="Melee">643</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Scavenging">6</Exp>
   <Exp Skill="Medic">1</Exp>
   <Exp Skill="Bladesmith">1</Exp>
  </UtilityExperience>
- <KillCount>302</KillCount>
+ <Moved/>
+ <KillCount>309</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>7</Level>
@@ -3321,13 +3381,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Kayla Fox">
- <Location X="22" Y="18"/>
- <Health>35.41869460376537</Health>
- <Stamina>1.6308521509075975</Stamina>
+ <Location X="18" Y="13"/>
+ <Health>43.485650540808166</Health>
+ <Stamina>32.46338758524671</Stamina>
  <Shields>0</Shields>
- <Facing>-90</Facing>
+ <Facing>63.43494882292201</Facing>
  <Level>7</Level>
- <XP>49489</XP>
+ <XP>51967</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>9,10,16,15,19</Stats>
@@ -3365,22 +3425,21 @@
   <Exp Skill="Gunsmith">2</Exp>
   <Exp Skill="Perception">6</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>355</KillCount>
+ <KillCount>368</KillCount>
  <ToughestKill>
-<Creature Type="Triffid Mother Plant">
- <Level>5</Level>
+<Creature Type="Lich">
+ <Level>7</Level>
 </Creature>
  </ToughestKill>
 </Soldier>
 <Soldier Name="Stacy Vale">
- <Location X="16" Y="20"/>
+ <Location X="18" Y="23"/>
  <Health>45</Health>
  <Stamina>33</Stamina>
  <Shields>0</Shields>
- <Facing>90</Facing>
+ <Facing>315</Facing>
  <Level>7</Level>
- <XP>56035</XP>
+ <XP>58513</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>11,8,16,13,16</Stats>
@@ -3406,7 +3465,7 @@
  </EquippedWeapon>
  <WeaponExperience>
   <Exp Type="Melee">400</Exp>
-  <Exp Type="Sniper">533</Exp>
+  <Exp Type="Sniper">561</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Bladesmith">1</Exp>
@@ -3414,7 +3473,7 @@
   <Exp Skill="Scavenging">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>155</KillCount>
+ <KillCount>166</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>6</Level>
@@ -3423,13 +3482,13 @@
  </ToughestKill>
 </Soldier>
 <Soldier Name="Patrick Upton">
- <Location X="13" Y="19"/>
- <Health>17.60765665023481</Health>
+ <Location X="14" Y="4"/>
+ <Health>28.454096705493086</Health>
  <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>0</Facing>
+ <Facing>90</Facing>
  <Level>7</Level>
- <XP>45746</XP>
+ <XP>48224</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>11,14,12,14,11</Stats>
@@ -3460,7 +3519,7 @@
 <Weapon Type="Quad Shotgun" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Shotgun">672</Exp>
+  <Exp Type="Shotgun">700</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">3</Exp>
@@ -3468,7 +3527,7 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Scavenging">2</Exp>
  </UtilityExperience>
- <KillCount>117</KillCount>
+ <KillCount>125</KillCount>
  <ToughestKill>
 <Creature Type="Bandit Leader">
  <Level>7</Level>
@@ -3501,7 +3560,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="10909"/>
+  <Relation Race="Human" Value="11171"/>
  </Relations>
  <Inventory>
   <Inv Count="17">
@@ -3525,16 +3584,16 @@
   <Inv Count="6">
 <Material Type="Water"/>
   </Inv>
-  <Inv Count="8">
+  <Inv Count="10">
 <Material Type="Carbon"/>
   </Inv>
-  <Inv Count="8">
+  <Inv Count="9">
 <Material Type="Rare Earth Metals"/>
   </Inv>
   <Inv Count="9">
 <Material Type="Electronic Components"/>
   </Inv>
-  <Inv Count="11">
+  <Inv Count="13">
 <Material Type="Copper"/>
   </Inv>
   <Inv Count="15">
@@ -3564,11 +3623,17 @@
   <Inv Count="4">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="6">
 <Equipment Type="Frag Grenade"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Medsystem"/>
+  </Inv>
+  <Inv Count="4">
+<Material Type="Aluminium"/>
+  </Inv>
+  <Inv Count="1">
+<Material Type="Gold"/>
   </Inv>
  </Inventory>
 </Team>
