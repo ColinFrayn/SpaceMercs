@@ -557,7 +557,7 @@ namespace SpaceMercs {
         public bool CanBuildShipType(ShipType tp) {
             if (tp.Weapon > 1 && !HasBaseType(BaseType.Military)) return false;
             if (tp.Small > 6 && !HasBaseType(BaseType.Trading)) return false;
-            if (tp.MaxHull > BaseSize * 15.0) return false;
+            if (tp.MaxHull > BaseSize * 30.0 + 20d) return false;
             if (tp.RequiredRace != null && tp.RequiredRace != Owner) return false;
             return true;
         }

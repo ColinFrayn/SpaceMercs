@@ -3,7 +3,7 @@
   <ShipWeapon Name="Chain Gun">
     <Cost>10</Cost>
     <Power>1</Power>
-    <Attack>1</Attack>
+    <Attack>2</Attack>
     <Range>5000</Range>
     <Rate>1.0</Rate>
     <Desc>A chain gun</Desc>
@@ -29,7 +29,7 @@
   <ShipWeapon Name="Slug Gun">
     <Cost>60</Cost>
     <Power>2</Power>
-    <Attack>2</Attack>
+    <Attack>4</Attack>
     <Range>6000</Range>
     <Rate>1.5</Rate>
     <Desc>A slug gun</Desc>
@@ -47,7 +47,7 @@
   <ShipWeapon Name="Laser Cannon">
     <Cost>225</Cost>
     <Power>3</Power>
-    <Attack>3</Attack>
+    <Attack>4</Attack>
     <Range>10000</Range>
     <Rate>1.3</Rate>
     <Desc>A laser rifle</Desc>
@@ -65,7 +65,7 @@
   <ShipWeapon Name="Proton Gun">
     <Cost>500</Cost>
     <Power>3</Power>
-    <Attack>4</Attack>
+    <Attack>6</Attack>
     <Range>10000</Range>
     <Rate>1.3</Rate>
     <Desc>A proton gun</Desc>
@@ -83,7 +83,7 @@
   <ShipWeapon Name="Plasma Cannon">
     <Cost>600</Cost>
     <Power>4</Power>
-    <Attack>6</Attack>
+    <Attack>8</Attack>
     <Range>8000</Range>
     <Rate>1.5</Rate>
     <Desc>A plasma cannon</Desc>
@@ -102,7 +102,7 @@
   <ShipWeapon Name="Antimatter Cannon">
     <Cost>1400</Cost>
     <Power>6</Power>
-    <Attack>8</Attack>
+    <Attack>10</Attack>
     <Range>9000</Range>
     <Rate>1.4</Rate>
     <Desc>An antimatter cannon</Desc>

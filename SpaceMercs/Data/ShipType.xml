@@ -129,7 +129,7 @@
     <Cost>24000</Cost>
     <Capacity>950</Capacity>
     <Race>Gokan</Race>
-    <Armour>15</Armour>
+    <Armour>20</Armour>
     <Desc>A medium-sized, heavily armoured transport ship</Desc>
   </ShipType>
 </Data>

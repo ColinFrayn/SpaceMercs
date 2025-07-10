@@ -877,7 +877,7 @@ namespace SpaceMercs {
             double Value = Type.Cost; // Value of the base ship
 
             // Take damage into account
-            Value *= HullFract * Const.ShipRepairCostScale;
+            Value *= (1d - HullFract) * Const.ShipRepairCostScale;
 
             return Value;
         }

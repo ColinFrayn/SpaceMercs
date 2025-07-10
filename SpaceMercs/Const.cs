@@ -318,7 +318,7 @@ namespace SpaceMercs {
         public const int StarfieldSize = 2000;
         public const double SalvageScale = 0.5; // Times area of the object
         public const double SalvageRate = 0.25; // Purchase price from vendors as a fraction of the sale price
-        public const double ShipRepairCostScale = 0.6;  // Fraction of calculated value required to repair 100%
+        public const double ShipRepairCostScale = 0.15;  // Fraction of calculated value required to repair 100%
         public const double HullUpgradeCost = 1.0;  // Scale factor for ship hull/armour upgrade cost.
         public const double ShipRelativeStrengthScale = 2.0; // If attacking ship is this many times weaker than defending ship then don't even bother...
 

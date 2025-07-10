@@ -17,7 +17,7 @@ namespace SpaceMercs {
         public int Armour { get; private set; }
         public double MaxHull { 
             get { 
-                return (Small * 2d) + (Medium * 5d) + (Large * 12d) + (Weapon * Weapon) + (Capacity / 100d) + 3d; 
+                return (Math.Pow(Small, 1.1) * 2d) + (Math.Pow(Medium, 1.2) * 5d) + (Math.Pow(Large,1.5) * 12d) + (Weapon * Weapon) + (Capacity / 80d) + 3d; 
             } 
         }
         public string RoomConfigString { get { return Small + "/" + Medium + "/" + Large + "/" + Weapon; } }

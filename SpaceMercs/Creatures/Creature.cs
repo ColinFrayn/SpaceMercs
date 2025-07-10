@@ -308,6 +308,7 @@ namespace SpaceMercs {
             }
             if (ie.Shred > 0d) ShredArmour(ie.Shred);
             InflictDamage(AllDam, applyEffect, fact, src);
+            if (TotalDam > 0d && src is Soldier sDam) sDam.RegisterDamage(TotalDam);
         }
         public bool IsInjured { get { return Health < MaxHealth; } }
         public double Encumbrance => 0.0;
@@ -856,13 +857,14 @@ namespace SpaceMercs {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = CalculateDamage(AllDam);
                     fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
-                    if (TotalDam > 0.0 && !bPlayedGrunt) {
+                    if (TotalDam > 0d && !bPlayedGrunt) {
                         playSound("Grunt");
                         bPlayedGrunt = true;
                     }
                     Soldier? s = CurrentLevel?.GetSoldierByName(e.CausedBy);
                     InflictDamage(AllDam, applyEffect, fact, s);
-                    if (Health <= 0.0) {
+                    if (TotalDam > 0d) s?.RegisterDamage(TotalDam);
+                    if (Health <= 0d) {
                         // If this effect killed this creature, maybe register the kill and then stop here
                         if (s is not null) {
                             s.RegisterKill(this, showMessage);

@@ -7,49 +7,64 @@
     <Avail>MRE</Avail>
     <Tex>1,3</Tex>
   </ShipArmour>
-  <ShipArmour Name="Metasteel Plating">
+  <ShipArmour Name="Composite Plating">
     <Cost>5</Cost>
     <BaseArmour>15</BaseArmour>
+    <Desc>Composite plating</Desc>
+    <Avail>MRE</Avail>
+    <Tex>5,8</Tex>
+    <Requirements>
+      <Prerequisite>Composite</Prerequisite>
+      <MinLevel>3</MinLevel>
+      <MinPop>20</MinPop>
+      <CashCost>40</CashCost>
+      <Material Name="Composite" Amount="3"/>
+      <Facility>Engineering</Facility>
+    </Requirements>
+  </ShipArmour>
+  <ShipArmour Name="Metasteel Plating">
+    <Cost>9</Cost>
+    <BaseArmour>20</BaseArmour>
     <Desc>Metasteel plating</Desc>
     <Avail>MRE</Avail>
     <Tex>2,3</Tex>
     <Requirements>
       <Prerequisite>Metasteel</Prerequisite>
-      <MinLevel>2</MinLevel>
-      <MinPop>26</MinPop>
-      <CashCost>10</CashCost>
+      <MinLevel>5</MinLevel>
+      <MinPop>28</MinPop>
+      <CashCost>75</CashCost>
       <Material Name="Metasteel" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">0</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Mithril Plating">
-    <Cost>11</Cost>
-    <BaseArmour>20</BaseArmour>
+    <Cost>16</Cost>
+    <BaseArmour>25</BaseArmour>
     <Desc>Mithril plating</Desc>
     <Avail>MRE</Avail>
     <Tex>3,3</Tex>
     <Requirements>
       <Prerequisite>Mithril</Prerequisite>
-      <MinLevel>5</MinLevel>
+      <MinLevel>7</MinLevel>
       <MinPop>46</MinPop>
-      <CashCost>20</CashCost>
+      <CashCost>200</CashCost>
       <Material Name="Mithril" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">1</Relations>
     </Requirements>
   </ShipArmour>
   <ShipArmour Name="Adamantium Plating">
-    <Cost>18</Cost>
-    <BaseArmour>25</BaseArmour>
+    <Cost>25</Cost>
+    <BaseArmour>35</BaseArmour>
     <Desc>Adamantium plating</Desc>
     <Avail>MRE</Avail>
     <Tex>4,3</Tex>
     <Requirements>
       <Prerequisite>Adamantium</Prerequisite>
-      <MinLevel>8</MinLevel>
+      <MinLevel>9</MinLevel>
       <MinPop>64</MinPop>
-      <CashCost>30</CashCost>
+      <CashCost>350</CashCost>
       <Material Name="Adamantium" Amount="3"/>
       <Facility>Engineering</Facility>
       <Relations Name="Gokan">2</Relations>
@@ -64,8 +79,8 @@
     <Tex>5,3</Tex>
     <Requirements>
       <MinLevel>10</MinLevel>
-      <MinPop>85</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>80</MinPop>
+      <CashCost>350</CashCost>
       <Material Name="Xenomorph Egg" Amount="1"/>
       <Facility>Engineering</Facility>
       <Relations Name="Insectoid">2</Relations>
@@ -73,15 +88,15 @@
   </ShipArmour>
   <ShipArmour Name="Regenerative Plating">
     <Cost>35</Cost>
-    <BaseArmour>20</BaseArmour>
+    <BaseArmour>25</BaseArmour>
     <Repair>2</Repair>
     <Desc>Regenerative plating</Desc>
     <Avail>MRE</Avail>
     <Tex>6,3</Tex>
     <Requirements>
       <MinLevel>8</MinLevel>
-      <MinPop>84</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>90</MinPop>
+      <CashCost>400</CashCost>
       <Facility>Armoury</Facility>
       <Facility>Engineering</Facility>
       <Material Name="Heavy Chitin" Amount="4"/>
@@ -90,7 +105,7 @@
   </ShipArmour>
   <ShipArmour Name="Chameleon Plating">
     <Cost>40</Cost>
-    <BaseArmour>15</BaseArmour>
+    <BaseArmour>20</BaseArmour>
     <Defence>3</Defence>
     <Repair>1</Repair>
     <Desc>Chameleon plating that helps camouflage the ship and hide it from attackers</Desc>
@@ -98,8 +113,8 @@
     <Tex>7,3</Tex>
     <Requirements>
       <MinLevel>11</MinLevel>
-      <MinPop>88</MinPop>
-      <CashCost>30</CashCost>
+      <MinPop>85</MinPop>
+      <CashCost>500</CashCost>
       <Material Name="Shadowskin" Amount="2"/>
       <Material Name="Voidskin" Amount="2"/>
       <Facility>Engineering</Facility>

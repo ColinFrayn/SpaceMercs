@@ -70,8 +70,10 @@ namespace SpaceMercs {
         public SoldierType SoldierClass { get; private set; } = SoldierType.None;
 
         // Statistics
-        public int KillCount { get; private set; }
-        public Creature? ToughestKill { get; private set; }
+        private int KillCount;
+        private Creature? ToughestKill;
+        private double DamageThisTurn;
+        private double MaxDamageOneTurn;
 
         // Utilities
         public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= SightMap.GetLength(0) || y >= SightMap.GetLength(1)) return false; return SightMap[x, y]; }
@@ -187,6 +189,7 @@ namespace SpaceMercs {
             HasMoved = false;
             EquippedWeapon?.Reset();
             Shred = 0d;
+            DamageThisTurn = 0d;
         }
         public bool CanOpenDoors { get { return true; } }
         public double RangeTo(IEntity en) {
@@ -331,6 +334,7 @@ namespace SpaceMercs {
             float TotalDam = (float)InflictDamage(AllDam, applyEffect, null, src);
             if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
             else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
+            if (TotalDam > 0d && src is Soldier sDam) sDam.RegisterDamage(TotalDam); // Yep, we count self-damage
             if (ie.CurePoison) {
                 _Effects.RemoveAll(e => e.DamageType == WeaponType.DamageType.Poison);
             }
@@ -597,6 +601,9 @@ namespace SpaceMercs {
                 showMessage($"{Name} has registered a new toughest kill : {cr.Name} [{cr.Level}]", null);
             }
         }
+        public void RegisterDamage(double dmg) {
+            DamageThisTurn += dmg;
+        }
 
         // Display stuff
         private bool bShieldsInTexture = false;
@@ -786,6 +793,8 @@ namespace SpaceMercs {
             KillCount = xml.SelectNodeInt("KillCount", 0);
             XmlNode? xc = xml.SelectSingleNode("ToughestKill");
             ToughestKill = (xc?.FirstChild is null) ? null : new Creature(xc.FirstChild, null);
+            DamageThisTurn = xml.SelectNodeDouble("DamageThisTurn", 0d);
+            MaxDamageOneTurn = xml.SelectNodeDouble("MaxDamageOneTurn", 0d);
 
             CalculateMaxStats();
         }
@@ -912,6 +921,8 @@ namespace SpaceMercs {
                 ToughestKill.SaveToFile(file, true);
                 file.WriteLine(" </ToughestKill>");
             }
+            if (DamageThisTurn != 0d) file.WriteLine($" <DamageThisTurn>{DamageThisTurn}</DamageThisTurn>");
+            if (MaxDamageOneTurn != 0d) file.WriteLine($" <MaxDamageOneTurn>{MaxDamageOneTurn}</MaxDamageOneTurn>");
 
             file.WriteLine("</Soldier>");
         }
@@ -1544,6 +1555,13 @@ namespace SpaceMercs {
                 if (Shields > MaxShields) Shields = MaxShields;
             }
 
+            // Announce records and reset
+            if (DamageThisTurn > MaxDamageOneTurn) {
+                showMessage($"Soldier {Name} has caused {DamageThisTurn:N2} points of damage this turn!\nThis beats the previous record of {MaxDamageOneTurn:N2} points", null);
+                MaxDamageOneTurn = DamageThisTurn;
+            }
+            DamageThisTurn = 0d;
+
             HasMoved = false;
         }
         public List<string> PerformActiveSearch(MissionLevel level) {
@@ -1831,6 +1849,7 @@ namespace SpaceMercs {
             sb.AppendLine($"Statistics for {Name}");
             sb.AppendLine($"Enemies Killed : {KillCount}");
             if (ToughestKill is not null) sb.AppendLine($"Toughest Kill : {ToughestKill.Name}");
+            sb.AppendLine($"Max Damage in one Turn: {MaxDamageOneTurn:N2}");
             showMessage(sb.ToString(), null);
         }
 

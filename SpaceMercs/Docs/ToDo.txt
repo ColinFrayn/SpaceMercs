@@ -2,6 +2,14 @@
 ToDo List
 -------------------------------------------------
 
+Getting stuck somewhere and not being able to travel because of the risk of interception
+- Maybe make interstellar travel not prone to interception?
+- Got stuck in a neighbouring alien civ.
+
+! Backup saves
+
+Don't finish EndOfTurn / run Creature AI until all messages are viewed.
+
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
 
@@ -14,6 +22,12 @@ Backburner : Features
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
+
+Add unique skills with weapon skill increments (every 5 levels?)
+
+Cover
+- When partially hidden from the attacker, get a def bonus
+- Including large creatures
 
 At relations >= 3 allow player to join human hypergates up to alien ones??
 - Buy an item to link routes; choose nearby system; apply to alien gate if permissioned?? Hyperspace Bridge (costs a fortune)
@@ -43,10 +57,6 @@ Add in ricochet ShotType (e.g. Disc Thrower) that bounces off walls??
 Make explosion different colours specified by the item (e.g. grenade) in MissionLevel.KillCreature and also VisualEffect.ResolveEffect
 
 Do alien colonies need names?
-
-Cover
-- When partially hidden from the attacker, get a def bonus
-- Including large creatures
 
 Improve Soldier textures:
 - Textures.GenerateCreatureTexture()  (all types)

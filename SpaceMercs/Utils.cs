@@ -225,6 +225,7 @@ namespace SpaceMercs {
                             effectFactory(EffectType.Healing, (float)tgt.X + ((float)tgt.Size / 2f) + xshift, (float)tgt.Y + ((float)tgt.Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
                         }
                     }
+                    if (TotalDam > 0d && source is Soldier sDam) sDam.RegisterDamage(TotalDam);
                     tgt.InflictDamage(hitDmg, applyEffect, effectFactory, source);
                     if (wp != null && wp.Shred > 0d) tgt.ShredArmour(wp.Shred);
 

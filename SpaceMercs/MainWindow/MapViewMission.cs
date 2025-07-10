@@ -1705,7 +1705,8 @@ namespace SpaceMercs.MainWindow {
                 if (s.PlayerTeam == null && SelectedEntity == s) SelectedEntity = null;
             }
 
-            // Creature AI
+            // Wait for any msg Boxes to be closed then do the Creature AI
+            await Task.Run(() => { while (msgBox.Active); });
             await Task.Run(() => CurrentLevel.RunCreatureTurn(AddNewEffect, CentreViewForceRedraw, PostMoveCheck, PlaySoundThreaded, AnnounceMessage, PlayerTeam.Mission_FastAI, ApplyItemEffect));
 
             // All done

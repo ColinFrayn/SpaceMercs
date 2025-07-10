@@ -109,7 +109,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Shield Generator">
     <Cost>850</Cost>
-    <Shield>5</Shield>
+    <Shield>6</Shield>
     <Power>12</Power>
     <Size>S</Size>
     <Desc>A small shield generator, protecting your ship against damaging weapons.</Desc>
@@ -126,7 +126,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Advanced Shield System">
     <Cost>1750</Cost>
-    <Shield>10</Shield>
+    <Shield>12</Shield>
     <Power>20</Power>
     <Size>M</Size>
     <Desc>A larger shield generator, protecting your ship against damaging weapons.</Desc>
