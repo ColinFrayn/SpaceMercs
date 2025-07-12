@@ -73,8 +73,55 @@ namespace SpaceMercs.MainWindow {
             return new Tuple<Map, Team, Travel?>(newMap, newTeam, newTravel);
         }
 
-        // Save the current game to an XML format (faking this with StreamWriter for simplicity)
+        private (int? Seed, DateTime? clock) GetSaveGameDetails(string strFile) {
+            try {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(strFile);
+                XmlNodeList xnl = xDoc.GetElementsByTagName("SpaceMercsSaveFile");
+                if (xnl.Count == 0) return (null, null);
+                XmlNode xml = xnl.Item(0)!;
+
+                // Load in the clock
+                DateTime newTime = DateTime.Parse(xml.SelectNodeText("Clock"));
+
+                // Load in Map data
+                XmlNode? xMap = xml.SelectSingleNode("Map");
+                int? seed = xMap?.GetAttributeInt("Seed", null);
+
+                return (seed, newTime);
+            }
+            catch {
+                return (null, null);
+            }
+        }
+
         private void SaveGame(string strFile) {
+            // Check the file we're saving over, and do a sanity check
+            try {
+                if (File.Exists(strFile)) {
+                    (int? seed, DateTime? clock) = GetSaveGameDetails(strFile);
+
+                    if (!seed.HasValue || !clock.HasValue) {
+                        msgBox.PopupConfirmation($"This file is not a valid {nameof(SpaceMercs)} save game\nYou may be overwriting a different file type\nAre you sure you want to continue?", () => SaveGame_Continue(strFile));
+                        return;
+                    }
+                    if (seed.Value != GalaxyMap.MapSeed) {
+                        msgBox.PopupConfirmation("Are you sure you want to overwrite this file?\nIt has a different map seed\nThis means it is a different game session\nReally overwrite?", () => SaveGame_Continue(strFile));
+                        return;
+                    }
+                    if (clock > Clock.CurrentTime) {
+                        msgBox.PopupConfirmation("The file you chose is more recent\nYou may be overwriting a later save\nAre you sure you want to continue?", () => SaveGame_Continue(strFile));
+                        return;
+                    }
+                }
+            }
+            catch { } // Ignore
+
+            SaveGame_Continue(strFile);
+        }
+
+        // Save the current game to an XML format (faking this with StreamWriter for simplicity)
+        private void SaveGame_Continue(string strFile) {
             // Write the string to a file.
             using (StreamWriter file = new StreamWriter(strFile)) {
                 file.WriteLine("<SpaceMercsSaveFile Version=\"" + FileVersion.ToString() + "\">");
