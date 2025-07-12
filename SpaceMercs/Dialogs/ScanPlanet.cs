@@ -56,8 +56,6 @@ namespace SpaceMercs.Dialogs {
             Random rnd = new Random();
             int nm = 2 + rnd.Next(2);
             _aoScan.ClearMissions();
-            if (_aoScan.Type == Planet.PlanetType.Oceanic) nm++;
-            if (_aoScan.Type == Planet.PlanetType.Gas) nm--;
             if (_aoScan is Planet pl) {
                 if (pl.IsPrecursor || pl.Type == Planet.PlanetType.Precursor) {
                     nm = 0;
@@ -69,7 +67,7 @@ namespace SpaceMercs.Dialogs {
                 nm = 0;
                 sh.SetupSpaceHulkMissions(rnd, _playerTeam);
             }
-            else if (nm < 2) nm = 2;
+
             for (int n = 0; n < nm; n++) {
                 Mission m = Mission.CreateRandomScannerMission(_aoScan, rnd, _playerTeam);
                 _aoScan.AddMission(m);

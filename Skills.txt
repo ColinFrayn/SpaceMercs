@@ -1,12 +1,13 @@
-Perception : Improves search range and search success chance
-Avoidance: Improves defence
-Medic: Improves healing
-Stealth: Reduces radius within which enemies will spot you
-Scavenging: Improves returns from scavenging corpses
-Sniper : Reduce range penalty of firing a gun, 10% per level
+Perception : Improves search range and search success chance.
+Avoidance: Improves defence by learning to dodge incoming attacks.
+Medic: Improves proficiency with healing devices.
+Stealth: Makes you better hidden from enemies so they can't spot you at such a long range.
+Scavenging: Improves returns from scavenging corpses.
+Miner: Improve the speed and productivity of mining resource nodes.
+ 
+Engineer: Manufacture items such as grenades.
+Gunsmith: Manufacture all types of guns.
+Bladesmith: Manufacture all types of melee weapons.
+Armoursmith: Manufacture all types of armour.
 
-Engineer: Manufacture items
-Gunsmith: Manufacture guns
-Bladesmith: Manufacture melee weapons
-Armoursmith: Manufacture armour
 
