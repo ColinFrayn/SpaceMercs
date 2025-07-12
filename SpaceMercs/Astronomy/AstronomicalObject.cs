@@ -116,18 +116,7 @@ namespace SpaceMercs {
             }
 
             // Mission difficulty scales up as we go further from home
-            double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
-            double dDistLY = dDist / Const.LightYear;
-            double dLevel = 1d + nextDouble() + nextDouble() + nextDouble();
-
-            // Scale more steeply in home sector (Yes I know sectors are not circular.)
-            double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
-            dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
-
-            // Scale more shallowly outside home sector
-            if (dDistLY > Const.EncounterLevelScalingInnerRadius) {
-                dLevel += Math.Pow((dDistLY - Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
-            }
+            double dLevel = GetBaseDifficultyForSystem() + nextDouble() + nextDouble() + nextDouble();
 
             // Increase the difficulty based on where we are within this system
             // Only in inner sector rings. Otherwise entire systems are univorm
@@ -148,22 +137,25 @@ namespace SpaceMercs {
         }
         public int GetPrecursorMissionDifficultyForSystem() {
             Star sys = GetSystem();
+            double dLevel = GetBaseDifficultyForSystem() + 3d;
 
+            return (int)dLevel;
+        }
+        private double GetBaseDifficultyForSystem() {
             // Mission difficulty scales up as we go further from home
             double dDist = AstronomicalObject.CalculateDistance(StaticData.HumanRace.HomePlanet, this);
             double dDistLY = dDist / Const.LightYear;
-            double dLevel = 4d;
+            double dLevel = 1d;
 
             // Scale more steeply in home sector (Yes I know sectors are not circular.)
             double innerDist = Math.Min(Const.EncounterLevelScalingInnerRadius, dDistLY);
-            dLevel += Math.Pow(innerDist / Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
+            dLevel += Math.Pow(innerDist * Const.EncounterLevelScalingDistanceInner, Const.EncounterLevelScalingExponentInner);
 
             // Scale more shallowly outside home sector
             if (dDistLY > Const.EncounterLevelScalingInnerRadius) {
                 dLevel += Math.Pow((dDistLY - Const.EncounterLevelScalingInnerRadius) / Const.EncounterLevelScalingDistanceOuter, Const.EncounterLevelScalingExponentOuter);
             }
-
-            return (int)dLevel;
+            return dLevel;
         }
 
         // Get the mission difficulty for the home system of the Human race

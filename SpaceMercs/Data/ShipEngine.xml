@@ -28,7 +28,7 @@
     <Cost>200</Cost>
     <Power>10</Power>
     <Requirements>
-      <MinLevel>4</MinLevel>
+      <MinLevel>3</MinLevel>
       <CashCost>30</CashCost>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -45,7 +45,7 @@
     <Desc>A NearLight Drive, suitable for reaching the nearest stars.</Desc>
     <Requirements>
       <Prerequisite>Fusion Drive</Prerequisite>
-      <MinLevel>6</MinLevel>
+      <MinLevel>5</MinLevel>
       <CashCost>50</CashCost>
       <Facility>Engineering</Facility>
     </Requirements>
@@ -65,8 +65,8 @@
       <Prerequisite>NearLight Drive</Prerequisite>
       <MinLevel>7</MinLevel>
       <MinSystems>3</MinSystems>
-      <MinPop>25</MinPop>
-      <CashCost>50</CashCost>
+      <MinPop>23</MinPop>
+      <CashCost>75</CashCost>
       <Facility>Engineering</Facility>
     </Requirements>
   </ShipEngine>
@@ -81,7 +81,7 @@
     <Tex>5,4</Tex>
     <Requirements>
       <Prerequisite>SuperLight Drive</Prerequisite>
-      <MinLevel>8</MinLevel>
+      <MinLevel>9</MinLevel>
       <MinSystems>4</MinSystems>
       <MinPop>56</MinPop>
       <CashCost>500</CashCost>

@@ -585,7 +585,7 @@
     <MinMatLvl>3</MinMatLvl>
     <Requirements>
       <Prerequisite>Power Armour</Prerequisite>
-      <MinLevel>8</MinLevel>
+      <MinLevel>9</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>45</MinPop>
       <CashCost>250</CashCost>

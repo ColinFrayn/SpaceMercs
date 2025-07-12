@@ -353,13 +353,13 @@
       <Material Name="Industrial Chemicals" Amount="2"/>
     </Materials>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>8</MinLevel>
       <MinPop>30</MinPop>
       <CashCost>15</CashCost>
       <PlanetType>Volcanic</PlanetType>
       <Facility>Workshop</Facility>
       <Material Name="Incendiary Bulb" Amount="1"/>
-      <Relations Name="Ogrish">2</Relations>
+      <Relations Name="Ogrish">1</Relations>
     </Requirements>
     <Source>Workshop</Source>
     <Tex>2,3</Tex>
@@ -390,7 +390,7 @@
     </Materials>
     <Source>Workshop</Source>
     <Requirements>
-      <MinLevel>8</MinLevel>
+      <MinLevel>10</MinLevel>
       <MinPop>36</MinPop>
       <CashCost>15</CashCost>
       <Facility>Workshop</Facility>
@@ -516,7 +516,7 @@
     <StaminaCost>18</StaminaCost>
     <Desc>A portable scanner that can sense the emissions of nearby life-signs.</Desc>
     <Requirements>
-      <MinLevel>6</MinLevel>
+      <MinLevel>8</MinLevel>
       <MinSystems>3</MinSystems>
       <MinPop>40</MinPop>
       <CashCost>60</CashCost>

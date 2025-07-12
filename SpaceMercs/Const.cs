@@ -214,7 +214,7 @@ namespace SpaceMercs {
         public const double InterstellarTravelSafetyBonus = 15.0; // Less likely to get intercepted in interstellar space
         public const double BaseInterceptionChance = 40.0; // Base scaling for encountering something during a journey. The higher the more often and the more dangerous.
         public const double EncounterLevelScalingInnerRadius = 5.0; // Size of the inner scaling region, in ly.
-        public const double EncounterLevelScalingDistanceInner = 1.0; // Within the inner scaling region, this is the base difficulty increase scale length.
+        public const double EncounterLevelScalingDistanceInner = 0.8; // Within the inner scaling region, this is the base difficulty increase scale length.
         public const double EncounterLevelScalingExponentInner = 1.0; // 1 means encounter difficulty scales linearly. 0 means no scaling. 0.5 = sqrt, etc.
         public const double EncounterLevelScalingDistanceOuter = 3.3; // Outside of the inner scaling region, this is the base difficulty increase scale length.
         public const double EncounterLevelScalingExponentOuter = 0.85; // 1 means encounter difficulty scales linearly. 0 means no scaling. 0.5 = sqrt, etc.
