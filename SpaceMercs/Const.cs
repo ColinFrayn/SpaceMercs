@@ -272,6 +272,9 @@ namespace SpaceMercs {
         public const int FoundColonyRelationsBonus = 500; // Race relation bonus for founding a colony
         public const int FoundColonyInContestedSystemRelationsPenalty = -4000; // Race relation penalty for founding a colony in a system they own
         public const int FoundColonyInHomeSectorRelationsPenalty = -1500; // Race relation penalty for founding a colony in a sector they own
+        public const int DiscoverAliensRelationsBonus = 1000; // Race relation bonus for discovering an alien race
+        public const int DiscoverAliensCashBonus = 1000; // Cash relation bonus for discovering an alien race
+
 
         // Time stuff / global clock
         public static readonly DateTime StartingDate = DateTime.ParseExact("2150-01-01 00:00:00", "yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);

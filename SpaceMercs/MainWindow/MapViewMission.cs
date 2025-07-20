@@ -119,8 +119,10 @@ namespace SpaceMercs.MainWindow {
             // First contact?
             Race? ra = m.RacialOpponent;
             if (ra is not null && !ra.Known) {
-                msgBox.PopupMessage($"Your opponents on this mission are from a previously unknown alien race!\nThey claim the name of their species is {ra.Name}");
+                msgBox.PopupMessage($"Your opponents on this mission are from a previously unknown alien race!\nThey claim the name of their species is {ra.Name}\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr!");
                 ra.SetAsKnownBy(PlayerTeam);
+                PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, msgBox.PopupMessage);
             }            
 
             return true;

@@ -2,15 +2,12 @@
 ToDo List
 -------------------------------------------------
 
-Getting stuck somewhere and not being able to travel because of the risk of interception
+Getting stuck somewhere and not being able to travel because of the risk of interception (especially with an underpowered ship)
 - Maybe make interstellar travel not prone to interception?
-- Got stuck in a neighbouring alien civ.
+- Allow indirect routes that take longer but reduce interception risk?
+- Pay for escort (if starting at a colony with a high enough rep)?
 
-Make it easier to explore earlier.
-- Need to check for low level technologies that are gated behind alien races (pointless).
-- Make it easier to travel interstellar distances maybe? Or at least add more incentives to do so?
--- Discovering alien races grants you a cash reward and also higher relations with human race
-- Maybe lower gradient for difficulty of levels in home sector?
+Discovering alien races grants you a cash reward and also higher relations with human race? [TEST]
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels

@@ -781,8 +781,11 @@ namespace SpaceMercs.MainWindow {
             PlayerTeam.SetPosition(aoTo);
             if (PlayerTeam.CurrentPosition is HabitableAO hao && hao.Colony != null) {
                 if (!hao.Colony.Owner.Known) {
-                    msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}");
+                    msgBox.PopupMessage($"You arrive at a planet colonised by a previously unknown alien race!\nThey announce themselves to be called {hao.Colony.Owner.Name}\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr!");
                     hao.Colony.Owner.SetAsKnownBy(PlayerTeam);
+                    PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                    PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, msgBox.PopupMessage);
+
                 }
             }
             TravelDetails = null;

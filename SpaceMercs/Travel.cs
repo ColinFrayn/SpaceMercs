@@ -299,8 +299,11 @@ namespace SpaceMercs {
                 }
                 Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
                 if (ra is not null && !ra.Known) {
-                    ParentView.msgBox.PopupMessage($"You pick apart the wreckage of the alien ship and identify individuals of a previously unknown alien race!\nBased on their appearance and technology, you name them {ra.Name}");
+                    ParentView.msgBox.PopupMessage($"You pick apart the wreckage of the alien ship and identify individuals of a previously unknown alien race!\nBased on their appearance and technology, you name them {ra.Name}\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr!");
                     ra.SetAsKnownBy(PlayerTeam);
+                    PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                    PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, ParentView.msgBox.PopupMessage);
+
                 }
                 PlayerTeam.CeaseMission();
                 bPause = false;
@@ -346,7 +349,6 @@ namespace SpaceMercs {
                     if (ra is not null && !ra.Known) {
                         string strSurrenderMessage = $"The ship appears to surrender, and the crew identify themselves as individuals of a previously unknown alien race!\nThey claim the name of their species is {ra.Name}";
                         strSurrenderMessage += $"\nThey offer to turn over a bounty of {dReward} credits.\nAccept their surrender?";
-                        ra.SetAsKnownBy(PlayerTeam);
                         ParentView.msgBox.PopupConfirmation(strSurrenderMessage, () => AcceptSurrender(dReward), Unpause);
                         return;
                     }
@@ -381,7 +383,16 @@ namespace SpaceMercs {
         private void AcceptSurrender(double dReward) {
             PlayerTeam.Cash += dReward;
             PlayerTeam.CeaseMission();
-            ParentView.msgBox.PopupMessage("The enemy captain hands over the bounty and flees the battle scene");
+            Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
+            string msg = "The enemy captain hands over the bounty and flees the battle scene";
+            if (ra is not null && !ra.Known) {
+                msg += $"\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr for this discovery!";
+                ParentView.msgBox.PopupMessage(msg);
+                ra.SetAsKnownBy(PlayerTeam);
+                PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, ParentView.msgBox.PopupMessage);
+            }
+            else ParentView.msgBox.PopupMessage(msg);
             bPause = false;
         }
         private void RunEnemyShipTurn(float fDist, float fSpace) {
