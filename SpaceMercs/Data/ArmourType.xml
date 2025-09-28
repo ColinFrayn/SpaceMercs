@@ -662,7 +662,7 @@
     <Speed>0.85</Speed>
     <BaseArmour>48</BaseArmour>
     <Heavy/>
-    <Shields Regen="8">20</Shields>
+    <Shields Regen="10">30</Shields>
     <MinMatLvl>3</MinMatLvl>
     <BonusArmour>
       <Bonus Type="Fire" Amount="30"/>
@@ -703,7 +703,7 @@
     <Strength>4</Strength>
     <Speed>0.9</Speed>
     <Attack>3</Attack>
-    <Shields Regen="8">20</Shields>
+    <Shields Regen="8">25</Shields>
     <BaseArmour>48</BaseArmour>
     <Heavy/>
     <Utility>

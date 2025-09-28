@@ -2,12 +2,10 @@
 ToDo List
 -------------------------------------------------
 
-Getting stuck somewhere and not being able to travel because of the risk of interception (especially with an underpowered ship)
+What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
 - Maybe make interstellar travel not prone to interception?
 - Allow indirect routes that take longer but reduce interception risk?
 - Pay for escort (if starting at a colony with a high enough rep)?
-
-Discovering alien races grants you a cash reward and also higher relations with human race? [TEST]
 
 Test run Precursor mission (& keeping the core)
 - Precursor: Test level type/size/sparseness changes at lower levels
@@ -22,7 +20,7 @@ Backburner : Features
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
 
-Add unique skills with weapon skill increments (every 5 levels?)
+Add unique skills with weapon skill increments (every 5 levels?) e.g. charge/whirlwind for melee, crippling shot for sniper, 
 
 Cover
 - When partially hidden from the attacker, get a def bonus
