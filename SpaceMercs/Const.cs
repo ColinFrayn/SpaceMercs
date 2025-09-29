@@ -7,12 +7,12 @@ namespace SpaceMercs {
         public const string strVersion = "1.0";
 
         // ---=== DEBUG MODE SETTINGS ===---
-        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1;  // Modification factor for encounter frequency. (multiplier, default = 1, <=0 turns off all encounters)
+        public const float DEBUG_ENCOUNTER_FREQ_MOD = 1f;  // Modification factor for encounter frequency. (multiplier, default = 1, <=0 turns off all encounters)
         public const bool  DEBUG_ALL_ENCOUNTERS_INACTIVE = false;  // All ship encounters when travelling are resolved as inactive (repair/salvage)
         public const bool  DEBUG_MORE_BOARDERS = false; // Make it much more likely hostile vessels will board
         public const bool  DEBUG_VIEW_ALL_CIVS = false;  // Set starting systems for all civs = visited
         public const bool  DEBUG_VISIBLE_ALL = false; // Can see the entire map when in a mission
-        public const bool  DEBUG_RANDOMISE_VENDORS = true;  // Provide a button to completely regenerate all items/mercs/missions at a colony
+        public const bool  DEBUG_RANDOMISE_VENDORS = false;  // Provide a button to completely regenerate all items/mercs/missions at a colony
         public const bool  DEBUG_SHOW_SELECTED_ENTITY_VIS = false;  // Show visibility of selected entity with dots
         public const bool  DEBUG_MAP_CREATION = false; // Write out to disk intermediate map creation stages
         public const int   DEBUG_WEAPON_SKILL_MOD = 1;  // Weapon skill experience multiplier

@@ -9,6 +9,7 @@ namespace UnitTests {
         public void Setup() {
             Assert.IsTrue(StaticData.LoadAll());
             planet = new Planet();
+            planet.Temperature = 290;
         }
 
         [Test]

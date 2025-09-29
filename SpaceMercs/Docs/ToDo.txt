@@ -20,7 +20,10 @@ Backburner : Features
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
 
-Add unique skills with weapon skill increments (every 5 levels?) e.g. charge/whirlwind for melee, crippling shot for sniper, 
+Add unique skills with weapon skill increments (every 5 levels?) e.g. charge/whirlwind for melee, crippling shot for sniper, shredding shot for assault, etc.
+- Maybe add a talent point every 3 levels, allow selection based on what weapon skills you possess.
+- Talents can be basic, elite, master for extra bonuses.
+- Possibly add a new tab next to weapon/utility skills
 
 Cover
 - When partially hidden from the attacker, get a def bonus
