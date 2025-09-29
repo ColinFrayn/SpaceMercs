@@ -362,7 +362,6 @@ namespace SpaceMercs.MainWindow {
             gpMenu.InsertIconItem(I_Menu, ts, true, gpSubMenu);
             gpMenu.Activate();
             gpSubMenu.Activate();
-
         }
 
         // Dialog action handlers

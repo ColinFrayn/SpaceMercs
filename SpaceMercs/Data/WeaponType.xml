@@ -1185,7 +1185,7 @@
     <Mass>5.5</Mass>
     <Cost>420</Cost>
     <Rarity>30</Rarity>
-    <Speed>15</Speed>
+    <Speed>16</Speed>
     <Long/>
     <Range Accuracy="-1">1.5</Range>
     <Damage>4+4</Damage>

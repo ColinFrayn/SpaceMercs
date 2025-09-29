@@ -95,41 +95,11 @@ namespace SpaceMercs.MainWindow {
             bFadeUnvisited = true;
             bShowRangeCircles = true;
             bShowTradeRoutes = true;
-            MakeCurrent();
-            //SetupMapTextures(); // Not implemented
-            Planet.BuildPlanetHalo();
-            SetupGUIElements();
-            bLoaded = true;
+
             ThisDispatcher = Dispatcher.CurrentDispatcher;
 
-            // Setup the default shader programs
-            pos2DCol4ShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
-            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
-            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
-            pos2DCol4ShaderProgram.SetUniform("projection", Matrix4.Identity);
-            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
-            flatColourShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3, ShaderCode.PixelShaderFlatColour);
-            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
-            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
-            flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
-            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderFull);
-            fullShaderProgram.SetUniform("model", Matrix4.Identity);
-            fullShaderProgram.SetUniform("view", Matrix4.Identity);
-            fullShaderProgram.SetUniform("projection", Matrix4.Identity);
-            fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
-            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-            fullShaderProgram.SetUniform("lightEnabled", true);
-            fullShaderProgram.SetUniform("textureEnabled", true);
-            fullShaderProgram.SetUniform("texPos", 0f, 0f);
-            fullShaderProgram.SetUniform("texScale", 1f, 1f);
-            flatColourLitShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3FlatNorm, ShaderCode.PixelShaderLitFlatColour);
-            flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
-            flatColourLitShaderProgram.SetUniform("view", Matrix4.Identity);
-            flatColourLitShaderProgram.SetUniform("projection", Matrix4.Identity);
-            flatColourLitShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
-
             base.OnLoad();
+            bLoaded = true;
         }
 
         // Free stuff when the window is being closed
@@ -191,6 +161,12 @@ namespace SpaceMercs.MainWindow {
         protected override void OnRenderFrame(FrameEventArgs e) {
             if (!bLoaded) return;
 
+            // Main window has loaded but GL components have not been set up yet, so configure them first. (Once only)
+            // Needs to be done on this thread or else OpenGL complains with some drivers.
+            if (pos2DCol4ShaderProgram is null) {
+                SetupGLComponents();
+            }
+
             // Set up default OpenGL rendering parameters
             PrepareScene();
 
@@ -219,6 +195,40 @@ namespace SpaceMercs.MainWindow {
 
             // Swap rendered surface to front
             SwapBuffers();
+        }
+
+        private void SetupGLComponents() {
+            MakeCurrent();
+            Planet.BuildPlanetHalo();
+            SetupGUIElements();
+            ThisDispatcher = Dispatcher.CurrentDispatcher;
+
+            // Setup the default shader programs
+            pos2DCol4ShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos2Col4, ShaderCode.PixelShaderColourFactor);
+            pos2DCol4ShaderProgram.SetUniform("model", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("view", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("projection", Matrix4.Identity);
+            pos2DCol4ShaderProgram.SetUniform("colourFactor", 1f);
+            flatColourShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3, ShaderCode.PixelShaderFlatColour);
+            flatColourShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3TexNorm, ShaderCode.PixelShaderFull);
+            fullShaderProgram.SetUniform("model", Matrix4.Identity);
+            fullShaderProgram.SetUniform("view", Matrix4.Identity);
+            fullShaderProgram.SetUniform("projection", Matrix4.Identity);
+            fullShaderProgram.SetUniform("lightCol", new Vector3(1f, 1f, 1f));
+            fullShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
+            fullShaderProgram.SetUniform("lightEnabled", true);
+            fullShaderProgram.SetUniform("textureEnabled", true);
+            fullShaderProgram.SetUniform("texPos", 0f, 0f);
+            fullShaderProgram.SetUniform("texScale", 1f, 1f);
+            flatColourLitShaderProgram = new ShaderProgram(ShaderCode.VertexShaderPos3FlatNorm, ShaderCode.PixelShaderLitFlatColour);
+            flatColourLitShaderProgram.SetUniform("model", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("view", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("projection", Matrix4.Identity);
+            flatColourLitShaderProgram.SetUniform("flatColour", new Vector4(1f, 1f, 1f, 1f));
         }
 
         // Closing the window - shut down stuff
@@ -325,7 +335,7 @@ namespace SpaceMercs.MainWindow {
 
         // Set up the scene ready for rendering
         private void PrepareScene() {
-            MakeCurrent();
+            //MakeCurrent();
             GL.Viewport(0, 0, Size.X, Size.Y);
             GL.ClearColor(Color.Black);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -664,7 +674,7 @@ namespace SpaceMercs.MainWindow {
             DialogResult res = ng.ShowDialog();
             if (res == DialogResult.OK) {
                 try {
-                    MakeCurrent();
+                    //MakeCurrent();
                     GalaxyMap.Generate(ng, Clock);
                     SetupNewGame(ng);
                     view = ViewMode.ViewMap;

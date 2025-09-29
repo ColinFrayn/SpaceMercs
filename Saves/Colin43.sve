@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>16/01/2612 18:57:36</Clock>
+<Clock>17/01/2612 04:39:55</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -13950,7 +13950,7 @@
  <Owner>Human</Owner>
  <LastUpdate>823964650067740094</LastUpdate>
  <LastGrowth>821481319570315827</LastGrowth>
- <NextGrowth>829499594349900116</NextGrowth>
+ <NextGrowth>829029624697164378</NextGrowth>
  <Mercenaries>
 <Soldier Name="Yanna Jones">
  <Level>14</Level>
@@ -14354,19 +14354,6 @@
  <CurrentLevel>0</CurrentLevel>
  <Seed>1847172818</Seed>
  <Size>3</Size>
-</Mission>
-<Mission>
- <Type>Caves</Type>
- <Goal>ExploreAll</Goal>
- <Opponent>Human</Opponent>
- <Enemy>Bandits</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>819.67</Reward>
- <Diff>15</Diff>
- <LevelCount>2</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>281472950</Seed>
- <Size>2</Size>
 </Mission>
 <Mission>
  <Type>Caves</Type>
@@ -14838,8 +14825,6 @@
 <Moons>
 <Moon ID="0">
  <Scanned/>
- <Missions>
- </Missions>
 <Colony>
  <Owner>Human</Owner>
  <LastUpdate>823673449252390094</LastUpdate>
@@ -16403,16 +16388,17 @@
 </Map>
 <Team>
  <Pos>(3,0)3.0</Pos>
- <Cash>27699.84523030186</Cash>
+ <Cash>28519.51523030186</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="35" Y="16"/>
- <Health>58</Health>
- <Stamina>45</Stamina>
- <Shields>36.25</Shields>
+ <Location X="3" Y="5"/>
+ <Health>44.05815067422565</Health>
+ <Stamina>18.969429987165046</Stamina>
+ <Shields>11.25</Shields>
  <Facing>-90</Facing>
+ <Shred>12.00</Shred>
  <Level>15</Level>
- <XP>2101788</XP>
+ <XP>2113229</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,15,15,12,20</Stats>
@@ -16457,13 +16443,14 @@
   <Exp Skill="Avoidance">2</Exp>
   <Exp Skill="Stealth">1</Exp>
  </UtilityExperience>
- <KillCount>1986</KillCount>
+ <Moved/>
+ <KillCount>2007</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Deathworm">
  <Level>15</Level>
 </Creature>
  </ToughestKill>
- <MaxDamageOneTurn>50.67732111348592</MaxDamageOneTurn>
+ <MaxDamageOneTurn>51.32363833116789</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Tracy Nolan">
  <Location X="7" Y="45"/>
@@ -16472,7 +16459,7 @@
  <Shields>0</Shields>
  <Facing>90</Facing>
  <Level>15</Level>
- <XP>1857158</XP>
+ <XP>1863916</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>14,13,12,17,18</Stats>
@@ -16570,13 +16557,13 @@
  <MaxDamageOneTurn>82.63085500172053</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="22" Y="22"/>
+ <Location X="13" Y="11"/>
  <Health>58</Health>
- <Stamina>41</Stamina>
+ <Stamina>34.2</Stamina>
  <Shields>0</Shields>
- <Facing>108.43494882292201</Facing>
+ <Facing>219.80557109226518</Facing>
  <Level>15</Level>
- <XP>2004422</XP>
+ <XP>2015863</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,10,26,12,16</Stats>
@@ -16613,22 +16600,22 @@
   <Exp Skill="Perception">2</Exp>
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
- <KillCount>725</KillCount>
+ <KillCount>733</KillCount>
  <ToughestKill>
 <Creature Type="Greater Fire Dragon">
  <Level>13</Level>
 </Creature>
  </ToughestKill>
- <MaxDamageOneTurn>27.368957558817115</MaxDamageOneTurn>
+ <MaxDamageOneTurn>36.65051255832691</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
- <Location X="35" Y="15"/>
- <Health>54.129830976752</Health>
- <Stamina>1</Stamina>
+ <Location X="14" Y="6"/>
+ <Health>54.15514387430264</Health>
+ <Stamina>41</Stamina>
  <Shields>0</Shields>
- <Facing>180</Facing>
+ <Facing>0</Facing>
  <Level>13</Level>
- <XP>1066660</XP>
+ <XP>1078101</XP>
  <Gender>Male</Gender>
  <Race>Elithiri</Race>
  <Stats>19,14,6,15,18</Stats>
@@ -16665,8 +16652,7 @@
   <Exp Skill="Stealth">4</Exp>
   <Exp Skill="Perception">2</Exp>
  </UtilityExperience>
- <Moved/>
- <KillCount>470</KillCount>
+ <KillCount>474</KillCount>
  <ToughestKill>
 <Creature Type="Crystal Alpha">
  <Level>14</Level>
@@ -16678,7 +16664,7 @@
  <Location X="17" Y="8"/>
  <Health>69</Health>
  <Stamina>40</Stamina>
- <Shields>20</Shields>
+ <Shields>30</Shields>
  <Facing>105.94539590092285</Facing>
  <Level>14</Level>
  <XP>1124097</XP>
@@ -16729,13 +16715,13 @@
  <MaxDamageOneTurn>91.19995698903726</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Julia King">
- <Location X="34" Y="16"/>
- <Health>59</Health>
+ <Location X="12" Y="8"/>
+ <Health>45.889422032101166</Health>
  <Stamina>39</Stamina>
  <Shields>36.25</Shields>
  <Facing>180</Facing>
  <Level>14</Level>
- <XP>1392256</XP>
+ <XP>1403697</XP>
  <Gender>Female</Gender>
  <Race>Human</Race>
  <Stats>16,17,15,13,15</Stats>
@@ -16776,7 +16762,7 @@
   <Exp Skill="Medic">4</Exp>
  </UtilityExperience>
  <Class>Grenadier</Class>
- <KillCount>96</KillCount>
+ <KillCount>100</KillCount>
  <ToughestKill>
 <Creature Type="Hive Brain">
  <Level>14</Level>
@@ -16816,7 +16802,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="100159"/>
+  <Relation Race="Human" Value="101848"/>
   <Relation Race="Ursalon" Value="6395"/>
   <Relation Race="Grey" Value="6494"/>
   <Relation Race="Ogrish" Value="6189"/>
@@ -16825,7 +16811,7 @@
   <Relation Race="Elithiri" Value="12594"/>
  </Relations>
  <Inventory>
-  <Inv Count="11">
+  <Inv Count="12">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="2">
@@ -16852,19 +16838,19 @@
   <Inv Count="6">
 <Material Type="Heavy Chitin"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="11">
 <Material Type="Carbon"/>
   </Inv>
-  <Inv Count="19">
+  <Inv Count="21">
 <Material Type="Rare Earth Metals"/>
   </Inv>
-  <Inv Count="27">
+  <Inv Count="29">
 <Material Type="Tungsten"/>
   </Inv>
-  <Inv Count="20">
+  <Inv Count="21">
 <Material Type="Copper"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="16">
 <Material Type="Kevlar"/>
   </Inv>
   <Inv Count="22">
@@ -16882,13 +16868,13 @@
   <Inv Count="9">
 <Material Type="Metasteel"/>
   </Inv>
-  <Inv Count="22">
+  <Inv Count="24">
 <Material Type="Titanium"/>
   </Inv>
   <Inv Count="19">
 <Material Type="Mithril"/>
   </Inv>
-  <Inv Count="15">
+  <Inv Count="19">
 <Material Type="Industrial Chemicals"/>
   </Inv>
   <Inv Count="15">
@@ -16912,7 +16898,7 @@
   <Inv Count="15">
 <Material Type="Incendiary Bulb"/>
   </Inv>
-  <Inv Count="19">
+  <Inv Count="20">
 <Equipment Type="Incendiary Grenade"/>
   </Inv>
   <Inv Count="15">
@@ -16945,7 +16931,7 @@
   <Inv Count="1">
 <Material Type="Biosynthesiser"/>
   </Inv>
-  <Inv Count="7">
+  <Inv Count="9">
 <Material Type="Gold"/>
   </Inv>
   <Inv Count="7">
@@ -16963,7 +16949,7 @@
   <Inv Count="4">
 <Material Type="Recoil Dampener"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="8">
 <Equipment Type="Medsystem"/>
   </Inv>
   <Inv Count="3">
@@ -16972,13 +16958,13 @@
   <Inv Count="9">
 <Equipment Type="Adrenaline"/>
   </Inv>
-  <Inv Count="10">
+  <Inv Count="11">
 <Equipment Type="Stimulant"/>
   </Inv>
   <Inv Count="1">
 <Equipment Type="Nannite Medikit"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="4">
 <Material Type="Water"/>
   </Inv>
   <Inv Count="4">
@@ -16986,6 +16972,75 @@
   </Inv>
   <Inv Count="1">
 <Material Type="Celestial Essence"/>
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Arm Plating" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Military Helmet" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="3">
+<Weapon Type="Powerblade" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Arm Plating" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Nanomesh" Level="1"/>
+  </Inv>
+  <Inv Count="3">
+<Equipment Type="Frag Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Steel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Weapon Type="Heavy Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="3">
+<Armour Type="Gauntlets" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Composite" Level="0"/>
+  </Inv>
+  <Inv Count="4">
+<Weapon Type="Triple Shotgun" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Nanomesh" Level="0"/>
+  </Inv>
+  <Inv Count="2">
+<Weapon Type="Laser Rifle" Level="0" />
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Arm Plating" Material="Kevlar" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Powered Gauntlets" Material="Kevlar" Level="2"/>
+  </Inv>
+  <Inv Count="1">
+<Equipment Type="Poison Grenade"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Gauntlets" Material="Metasteel" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Leg Plating" Material="Metasteel" Level="0"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Chestplate" Material="Composite" Level="1"/>
+  </Inv>
+  <Inv Count="1">
+<Armour Type="Plate Boots" Material="Kevlar" Level="2"/>
   </Inv>
  </Inventory>
  <SpaceHulkCoreCount>9</SpaceHulkCoreCount>
