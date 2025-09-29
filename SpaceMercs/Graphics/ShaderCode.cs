@@ -14,7 +14,7 @@ out vec4 vColour;
 
 void main()
 {
-  gl_Position = projection * view * model * vec4(aPosition.x, aPosition.y, 0f, 1f);
+  gl_Position = projection * view * model * vec4(aPosition.x, aPosition.y, 0.0, 1.0);
 
   vColour = aColour;
 }";
@@ -32,7 +32,7 @@ out vec4 vColour;
 
 void main()
 {
-  gl_Position = projection * model * vec4(aPosition, 1f);
+  gl_Position = projection * model * vec4(aPosition, 1.0);
 
   vColour = aColour;
 }";
@@ -56,7 +56,7 @@ out vec3 vFragPos;
 
 void main()
 {
-  gl_Position = projection * view * model * vec4(aPosition, 1f);
+  gl_Position = projection * view * model * vec4(aPosition, 1.0);
   vUV = vec2(aTexturePos.x * texScale.x + texPos.x, aTexturePos.y * texScale.y + texPos.y);
   //vNorm = aNormal;
   vNorm = mat3(transpose(inverse(model))) * aNormal;  
@@ -78,7 +78,7 @@ out vec3 vFragPos;
 
 void main()
 {
-  gl_Position = projection * view * model * vec4(aPosition, 1f);
+  gl_Position = projection * view * model * vec4(aPosition, 1.0);
   //vNorm = aNormal;
   vNorm = mat3(transpose(inverse(model))) * aNormal;  
   vFragPos = vec3(model * vec4(aPosition, 1.0));
@@ -95,7 +95,7 @@ layout (location = 0) in vec3 aPosition;
 
 void main()
 {
-  gl_Position = projection * view * model * vec4(aPosition, 1f);
+  gl_Position = projection * view * model * vec4(aPosition, 1.0);
 }";
 
         public static string PixelShaderFlatColour = @"
