@@ -7,8 +7,6 @@ What to do when we get stuck somewhere and can't travel because of the risk of i
 - Allow indirect routes that take longer but reduce interception risk?
 - Pay for escort (if starting at a colony with a high enough rep)?
 
-Test run Precursor mission (& keeping the core)
-- Precursor: Test level type/size/sparseness changes at lower levels
 
 ==================================================================================================================
 

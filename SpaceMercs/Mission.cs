@@ -118,7 +118,7 @@ namespace SpaceMercs {
                 bool hasSecondaryEnemy = SecondaryEnemy == null;
                 // Size is irrelevant for DefendObjective missions
                 int modifiedSize = Goal == MissionGoal.Defend ? 2 : Size;
-                return MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy);
+                return MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy, Type);
             }
         }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
@@ -542,11 +542,17 @@ namespace SpaceMercs {
             }
         }
         public static int GetAverageMissionExperience(int diff) {
-            return MissionExperience(diff, 1, 3, 0, false);
+            return MissionExperience(diff, 1, 3, 0, false, MissionType.Ignore);
         }
-        private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy) {
+        private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy, MissionType type) {
             double secondaryEnemyMod = hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost;
-            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * secondaryEnemyMod * Const.MissionExperienceScale);
+            double precursorMod = type switch {
+                MissionType.SpaceHulk => 1.6d,
+                MissionType.PrecursorRuins => 2.0d,
+                _ => 1d
+            };
+
+            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * secondaryEnemyMod * precursorMod * Const.MissionExperienceScale);
         }
 
         // Utility

@@ -594,7 +594,7 @@
       <Material Name="Industrial Chemicals" Amount="8"/>
       <Material Name="Electronic Components" Amount="1"/>
       <Material Name="Pressure Canister" Amount="2"/>
-      <Material Name="Demon Blood" Amount="1"/>
+      <Material Name="Demon Blood" Amount="4"/>
     </Materials>
     <Requirements>
       <MinLevel>13</MinLevel>
@@ -602,7 +602,7 @@
       <CashCost>1250</CashCost>
       <Material Name="Titanium" Amount="2"/>
       <Material Name="Industrial Chemicals" Amount="4"/>
-      <Material Name="Demon Blood" Amount="1"/>
+      <Material Name="Demon Blood" Amount="4"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">3</Relations>
     </Requirements>
@@ -705,7 +705,7 @@
       <Material Name="Industrial Chemicals" Amount="15"/>
       <Material Name="Electronic Components" Amount="2"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
-      <Material Name="Demon Blood" Amount="2"/>
+      <Material Name="Demon Blood" Amount="8"/>
       <Material Name="Heavy Frame" Amount="1"/>
       <Material Name="Pressure Canister" Amount="4"/>
       <Material Name="Superconductor" Amount="1"/>
@@ -717,7 +717,7 @@
       <CashCost>1250</CashCost>
       <Material Name="Industrial Chemicals" Amount="6"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
-      <Material Name="Demon Blood" Amount="2"/>
+      <Material Name="Demon Blood" Amount="8"/>
       <Facility>Armoury</Facility>
       <Relations Name="Human">4</Relations>
     </Requirements>
@@ -1836,7 +1836,7 @@
     <Speed>15</Speed>
     <Range>1.5</Range>
     <Damage>3+3</Damage>
-    <Damage Type="Fire">3+3</Damage>
+    <Damage Type="Fire">4+4</Damage>
     <Sound>SwordSlice</Sound>
     <ItemEffect Name="Sword Burn">
       <Effect Name="Burning">

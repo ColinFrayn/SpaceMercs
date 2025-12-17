@@ -18,7 +18,7 @@
   <ShipEquipment Name="Large Bunk Room">
     <Size>L</Size>
     <Cost>350</Cost>
-    <Power>5</Power>
+    <Power>4</Power>
     <Capacity>6</Capacity>
     <Desc>A large bunk room with six beds.</Desc>
     <Tex>4,2</Tex>
@@ -83,7 +83,7 @@
   <ShipEquipment Name="Tinkering Chamber">
     <Size>M</Size>
     <Cost>375</Cost>
-    <Power>10</Power>
+    <Power>8</Power>
     <Medlab/>
     <Engineering/>
     <Desc>An engineering and medical chamber based on Grey tech.</Desc>
@@ -101,7 +101,7 @@
   <ShipEquipment Name="Engineering Bay">
     <Size>M</Size>
     <Cost>250</Cost>
-    <Power>8</Power>
+    <Power>6</Power>
     <Engineering/>
     <Desc>An engineering bay for making modifications to existing equipment.</Desc>
     <Avail>EM</Avail>
@@ -145,7 +145,7 @@
   <ShipEquipment Name="Surface Scanner">
     <Cost>100</Cost>
     <Size>S</Size>
-    <Power>4</Power>
+    <Power>3</Power>
     <Scanner/>
     <Desc>A scanner to search for missions on a planet surface.</Desc>
     <Avail>CEMRT</Avail>
@@ -204,7 +204,7 @@
   <ShipEquipment Name="Chameleon Device">
     <Cost>1800</Cost>
     <Defence>2</Defence>
-    <Power>15</Power>
+    <Power>14</Power>
     <Size>S</Size>
     <Desc>A chameleon device, making your ship blend in with the background stars and hence much harder to hit.</Desc>
     <Avail>MRE</Avail>
@@ -221,7 +221,7 @@
   <ShipEquipment Name="Cloaking Device">
     <Cost>3500</Cost>
     <Defence>4</Defence>
-    <Power>20</Power>
+    <Power>18</Power>
     <Size>M</Size>
     <Desc>A cloaking device, largely hiding your ship from view by all but the most advanced technology.</Desc>
     <Avail>MRE</Avail>
@@ -240,7 +240,7 @@
   </ShipEquipment>
   <ShipEquipment Name="Silent Drive">
     <Cost>500</Cost>
-    <Power>8</Power>
+    <Power>5</Power>
     <Conceal/>
     <Size>M</Size>
     <Desc>A device that helps hide the emissions of your ship's engine while travelling, reducing the risk of hostile interception.</Desc>
@@ -361,7 +361,7 @@
   <ShipEquipment Name="Antimatter Core">
     <Size>C</Size>
     <Cost>1050</Cost>
-    <Generate>75</Generate>
+    <Generate>80</Generate>
     <Desc>A power core based on anti-matter annihilation.</Desc>
     <Avail>MRE</Avail>
     <Tex>5,1</Tex>
@@ -380,7 +380,7 @@
   <ShipEquipment Name="Advanced Antimatter Core">
     <Size>C</Size>
     <Cost>1550</Cost>
-    <Generate>85</Generate>
+    <Generate>90</Generate>
     <Desc>An advanced power core based on anti-matter annihilation.</Desc>
     <Avail>MRE</Avail>
     <Tex>4,8</Tex>
@@ -399,7 +399,7 @@
   <ShipEquipment Name="Dark Core">
     <Size>C</Size>
     <Cost>1750</Cost>
-    <Generate>100</Generate>
+    <Generate>110</Generate>
     <Desc>A dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>6,1</Tex>
@@ -420,7 +420,7 @@
   <ShipEquipment Name="Advanced Dark Core">
     <Size>C</Size>
     <Cost>2500</Cost>
-    <Generate>110</Generate>
+    <Generate>120</Generate>
     <Desc>An advanced dark-matter-based power core.</Desc>
     <Avail>RE</Avail>
     <Tex>7,1</Tex>

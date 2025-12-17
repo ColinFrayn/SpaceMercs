@@ -4,7 +4,7 @@
     <Scale>0.9</Scale>
     <Attack>11</Attack>
     <Defence>13</Defence>
-    <Armour>15</Armour>
+    <Armour>14</Armour>
     <Health>13</Health>
     <Stamina>19</Stamina>
     <Frequency>4</Frequency>
@@ -23,7 +23,7 @@
     <LevelRange>9,19</LevelRange>
     <Attack>14</Attack>
     <Defence>14</Defence>
-    <Armour>22</Armour>
+    <Armour>20</Armour>
     <Health>18</Health>
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
@@ -36,7 +36,7 @@
       <Resistance Type="Fire" Value="50"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.3">Demon Blood</Item>
+      <Item Amount="0.1">Demon Blood</Item>
     </Scavenge>
     <Tex Size="2">1,1</Tex>
   </CreatureType>
@@ -45,7 +45,7 @@
     <LevelRange>10,20</LevelRange>
     <Attack>17</Attack>
     <Defence>15</Defence>
-    <Armour>24</Armour>
+    <Armour>21</Armour>
     <Health>20</Health>
     <Stamina>20</Stamina>
     <Frequency>2</Frequency>
@@ -58,14 +58,14 @@
       <Resistance Type="Fire" Value="30"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.3">Demon Blood</Item>
+      <Item Amount="0.15">Demon Blood</Item>
     </Scavenge>
     <Tex Size="2">3,3</Tex>
   </CreatureType>
   <CreatureType Name="Lava Beast">
     <LevelRange>9,19</LevelRange>
     <Attack>16</Attack>
-    <Defence>11</Defence>
+    <Defence>12</Defence>
     <Armour>17</Armour>
     <Health>13</Health>
     <Stamina>22</Stamina>
@@ -78,7 +78,7 @@
       <Resistance Type="Fire" Value="80"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="0.2">Demon Blood</Item>
+      <Item Amount="0.1">Demon Blood</Item>
       <Item Amount="0.15">Incendiary Bulb</Item>
     </Scavenge>
     <OnDeathEffect Name="BloodBurst">
@@ -101,7 +101,7 @@
     <Attack>22</Attack>
     <Defence>16</Defence>
     <Armour>22</Armour>
-    <Health>20</Health>
+    <Health>26</Health>
     <Stamina>21</Stamina>
     <Interact/>
     <Desc>A large bipedal, horned demon with a huge fiery blade</Desc>
@@ -118,12 +118,12 @@
   </CreatureType>
   <CreatureType Name="Demon Lord">
     <Size>2</Size>
-    <Scale>2.2</Scale>
+    <Scale>2.3</Scale>
     <LevelRange>10,20</LevelRange>
-    <Attack>26</Attack>
+    <Attack>28</Attack>
     <Defence>17</Defence>
     <Armour>28</Armour>
-    <Health>58</Health>
+    <Health>62</Health>
     <Stamina>24</Stamina>
     <Interact/>
     <Desc>A huge fiery demon lord with a giant sword and wings of fire.</Desc>
@@ -135,7 +135,7 @@
       <Resistance Type="Fire" Value="100"/>
     </Resistances>
     <Scavenge>
-      <Item Amount="2">Demon Blood</Item>
+      <Item Amount="3">Demon Blood</Item>
     </Scavenge>
     <Boss/>
     <Tex Size="4">5,5</Tex>

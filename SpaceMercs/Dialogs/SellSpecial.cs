@@ -92,6 +92,7 @@
             this.Close();
         }
         private bool ItemIsIncluded(IItem it, int maxLevel) {
+            if (it is Corpse || it is MissionItem) return false;
             if (it is Weapon && !cbWeapons.Checked) return false;
             if (it is Armour && !cbArmour.Checked) return false;
             if (it is Equipment && !cbItems.Checked) return false;
