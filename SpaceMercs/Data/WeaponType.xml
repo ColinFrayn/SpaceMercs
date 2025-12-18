@@ -659,7 +659,7 @@
     <ItemEffect Name="Heavy Plasmajet">
       <Effect Name="Burning">
         <Duration>3</Duration>
-        <Damage Type="Fire">10</Damage>
+        <Damage Type="Fire">9</Damage>
       </Effect>
     </ItemEffect>
     <Materials>
@@ -688,7 +688,7 @@
     <Rarity>62</Rarity>
     <Speed>25</Speed>
     <Range Colour="0.8,0.2,0.0">7.2</Range>
-    <Damage Type="Fire">10+10</Damage>
+    <Damage Type="Fire">9+9</Damage>
     <Area Shape="Cone" Width="2.0"/>
     <Desc>A heavy weapon that shoots a jet of unnaturally hot chemicals straight from the flames of hell.</Desc>
     <Sound>Flamethrower</Sound>
@@ -702,7 +702,7 @@
     </ItemEffect>
     <Materials>
       <Material Name="Vulcanin" Amount="2"/>
-      <Material Name="Industrial Chemicals" Amount="15"/>
+      <Material Name="Industrial Chemicals" Amount="12"/>
       <Material Name="Electronic Components" Amount="2"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
       <Material Name="Demon Blood" Amount="8"/>
@@ -715,7 +715,7 @@
       <MinLevel>14</MinLevel>
       <MinPop>80</MinPop>
       <CashCost>1250</CashCost>
-      <Material Name="Industrial Chemicals" Amount="6"/>
+      <Material Name="Industrial Chemicals" Amount="8"/>
       <Material Name="Incendiary Bulb" Amount="2"/>
       <Material Name="Demon Blood" Amount="8"/>
       <Facility>Armoury</Facility>
@@ -867,7 +867,7 @@
     <Speed>22</Speed>
     <Shred>4</Shred>
     <Range Accuracy="0" Length="0.2" Speed="0.3">13</Range>
-    <Damage>6+7</Damage>
+    <Damage>6+6</Damage>
     <Damage Type="Fire">2+1</Damage>
     <Area Shape="Grenade" Size="2"/>
     <Desc>A heavy grenade launcher that spits high-explosive heavy grenade rounds.</Desc>

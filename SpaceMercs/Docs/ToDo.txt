@@ -7,7 +7,6 @@ What to do when we get stuck somewhere and can't travel because of the risk of i
 - Allow indirect routes that take longer but reduce interception risk?
 - Pay for escort (if starting at a colony with a high enough rep)?
 
-
 ==================================================================================================================
 
 
@@ -27,6 +26,8 @@ Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
 
+Add a "Set all loadout" button
+
 At relations >= 3 allow player to join human hypergates up to alien ones??
 - Buy an item to link routes; choose nearby system; apply to alien gate if permissioned?? Hyperspace Bridge (costs a fortune)
 - Links are impassable if relations drop with alien. Check this when travelling.
@@ -39,6 +40,8 @@ What should attack skill do for an AoE weapon (grenade or cone), other than incr
 ?? Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
+
+Maybe have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades?
 
 Enemies should use grenades / grenade weapons / emitter weapons properly
 

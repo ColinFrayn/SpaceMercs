@@ -36,7 +36,7 @@
       <Skill Required="false">Medic</Skill>
       <CurePoison/>
       <Effect>
-        <Damage Type="Physical">-8</Damage>
+        <Damage Type="Physical">-7</Damage>
         <!-- Negative damage = healing -->
       </Effect>
       <Noise>2</Noise>
@@ -97,7 +97,7 @@
       <Skill Required="false">Medic</Skill>
       <CurePoison/>
       <Effect>
-        <Damage Type="Physical">-16</Damage>
+        <Damage Type="Physical">-14</Damage>
         <!-- Negative damage = healing -->
       </Effect>
       <Noise>2</Noise>
@@ -491,7 +491,7 @@
       <Skill Required="false">Medic</Skill>
       <CurePoison/>
       <Effect>
-        <Damage Type="Physical">-24</Damage>
+        <Damage Type="Physical">-21</Damage>
         <!-- Negative damage = healing -->
       </Effect>
       <Noise>2</Noise>

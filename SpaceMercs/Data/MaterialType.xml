@@ -470,7 +470,7 @@
     <Desc>A cold, pulsating blue organ from a cold-dwelling creature.</Desc>
   </MaterialType>
   <MaterialType Name="Demon Blood">
-    <UnitCost>15.0</UnitCost>
+    <UnitCost>35.0</UnitCost>
     <Rarity>0.005</Rarity>
     <UnitMass>0.5</UnitMass>
     <Scavenged/>
