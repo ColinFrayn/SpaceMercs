@@ -2361,6 +2361,7 @@ namespace SpaceMercs {
                 Items.Add(pt, st);
                 return;
             }
+            Items[pt].Reveal(); // If we're dropping a corpse over the top of a hidden stash, then we should reveal the stash.
             Items[pt].Add(st);
         }
 

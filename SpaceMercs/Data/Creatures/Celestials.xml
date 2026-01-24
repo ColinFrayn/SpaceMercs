@@ -11,7 +11,7 @@
     <Interact/>
     <Desc>A magical serpent beast.</Desc>
     <Weapons>
-      <Weapon Weight="1">Lightning Blast</Weapon>
+      <Weapon Weight="1">Lightning Bolt</Weapon>
     </Weapons>
     <Resistances>
       <Resistance Type="Fire" Value="50"/>
@@ -100,10 +100,11 @@
   <CreatureType Name="Titanborn">
     <LevelRange>14,23</LevelRange>
     <Size>2</Size>
+    <Scale>2.2</Scale>
     <Attack>25</Attack>
     <Defence>13</Defence>
     <Armour>18</Armour>
-    <Health>23</Health>
+    <Health>26</Health>
     <Stamina>17</Stamina>
     <Frequency>2</Frequency>
     <Interact/>

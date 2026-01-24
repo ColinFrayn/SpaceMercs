@@ -13,7 +13,7 @@ using static SpaceMercs.Delegates;
 
 namespace SpaceMercs {
     public class Soldier : IEntity {
-        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Miner, Avoidance, Stealth, Scavenging, Perception }
+        public enum UtilitySkill { Unspent, Medic, Engineer, Gunsmith, Armoursmith, Bladesmith, Miner, Stealth, Scavenging, Perception }
         public enum SoldierType { Skirmisher, Assault, Pistoleer, Enforcer, Assassin, Brute, Grenadier, Sniper, Heavy, Chemicals, None };
 
         // Generic stuff
@@ -420,7 +420,7 @@ namespace SpaceMercs {
             if (Shields > MaxShields) Shields = MaxShields;
             ShieldRegen = RegenFromItems();
             Attack = BaseAttack + StatBonuses(StatType.Attack) + GetSoldierSkillWithWeapon(EquippedWeapon?.Type);
-            Defence = BaseDefence + GetUtilityLevel(UtilitySkill.Avoidance) + StatBonuses(StatType.Defence);
+            Defence = BaseDefence + StatBonuses(StatType.Defence);
         }
         public int TrainingCost { get; private set; }
 
@@ -550,8 +550,7 @@ namespace SpaceMercs {
             if (EquippedWeapon != null) {
                 if (EquippedWeapon.Type.IsMeleeWeapon) {
                     AddUtilitySkill(UtilitySkill.Bladesmith);
-                    AddUtilitySkill(UtilitySkill.Avoidance);
-                    nsk -= 2;
+                    nsk -= 1;
                 }
                 else {
                     AddUtilitySkill(UtilitySkill.Gunsmith);
@@ -683,7 +682,7 @@ namespace SpaceMercs {
                     Facing = fac;
                 }
                 else {
-                    SetFacing((Utils.Direction)Enum.Parse(typeof(Utils.Direction), xml.SelectNodeText("Facing")));
+                    SetFacing(Enum.Parse<Utils.Direction>(xml.SelectNodeText("Facing")));
                 }
             }
             else Facing = 90.0;
@@ -766,6 +765,7 @@ namespace SpaceMercs {
             if (wut is not null) {
                 foreach (XmlNode xu in wut.SelectNodesToList("Exp")) {
                     string skillName = xu.GetAttributeText("Skill");
+                    if (string.Equals(skillName, "Avoidance")) continue; // Backwards compatibility - this skill was removed
                     if (Enum.TryParse(typeof(UtilitySkill), skillName, out object? osk) && osk is UtilitySkill sk) {
                         int lvl = int.Parse(xu.InnerText);
                         totsk += lvl;
@@ -777,7 +777,7 @@ namespace SpaceMercs {
                 }
             }
             if (totsk < Level + 1) {
-                AddUtilitySkill(UtilitySkill.Unspent, Level + 1 - totsk); // Make sure we've got our unspent points
+                AddUtilitySkill(UtilitySkill.Unspent, Level + 1 - totsk); // Make sure we're tracking unspent points
             }
 
             XmlNode? xmlef = xml.SelectSingleNode("Effects");
@@ -1875,7 +1875,7 @@ namespace SpaceMercs {
                 return $"{BaseAttack} (base) + {bfi} (items)";
             }
         }
-        public string DefenceExplanation => $"{BaseDefence} (base) + {StatBonuses(StatType.Defence)} (items) + {GetUtilityLevel(Soldier.UtilitySkill.Avoidance)} (skills)";
+        public string DefenceExplanation => $"{BaseDefence} (base) + {StatBonuses(StatType.Defence)} (items)";
         public string ArmourExplanation {
             get {
                 double baseArmour = 0d;

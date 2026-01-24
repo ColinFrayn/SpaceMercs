@@ -808,7 +808,6 @@ namespace SpaceMercs {
         public static string UtilitySkillToDesc(UtilitySkill sk) {
             return sk switch {
                 UtilitySkill.Armoursmith => "The ability to make and modify pieces of armour.",
-                UtilitySkill.Avoidance => "The ability to dodge incoming attacks, increasing your defence.",
                 UtilitySkill.Bladesmith => "The ability to make and modify bladed weapons such as swords and axes.",
                 UtilitySkill.Engineer => "The ability to make and modify items of equipment.",
                 UtilitySkill.Gunsmith => "The ability to make and modify guns.",

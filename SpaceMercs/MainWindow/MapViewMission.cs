@@ -1681,7 +1681,10 @@ namespace SpaceMercs.MainWindow {
             if (bAIRunning) return;
             if (SelectedEntity is not Soldier ss) return;
             if (ss.Stamina < ss.SearchCost) return;
-            if (CurrentLevel.AlertedEnemies) msgBox.PopupMessage("You can't perform a thorough search while there are enemies aware of your presence!");
+            if (CurrentLevel.AlertedEnemies) {
+                msgBox.PopupMessage("You can't perform a thorough search while there are enemies aware of your presence!");
+                return;
+            }
             List<string> lFound = ss.PerformActiveSearch(CurrentLevel);
             if (lFound.Count == 0) msgBox.PopupMessage("Despite a thorough search, you found nothing");
             else msgBox.PopupMessage(lFound);
