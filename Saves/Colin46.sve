@@ -9,7 +9,7 @@
 <ShowColonies/>
 <ShowPopulation/>
 </GUI>
-<Clock>10/05/2614 12:28:50</Clock>
+<Clock>11/05/2614 00:01:51</Clock>
 <Map Seed="700100" SPS="14" PD="5">
  <Sector X="-1" Y="-1" Inhabitant="Insectoid">
 <Star ID="0">
@@ -13835,9 +13835,9 @@
 <Colony>
  <BaseType>3</BaseType>
  <Owner>Human</Owner>
- <LastUpdate>824694107961260000</LastUpdate>
+ <LastUpdate>824694908995986000</LastUpdate>
  <LastGrowth>821481319570315827</LastGrowth>
- <NextGrowth>828680243987863951</NextGrowth>
+ <NextGrowth>828418135707682971</NextGrowth>
  <Mercenaries>
 <Soldier Name="Emma Owen">
  <Level>14</Level>
@@ -14232,36 +14232,6 @@
  <Size>2</Size>
 </Mission>
 <Mission>
- <Type>BoardingParty</Type>
- <Goal>KillAll</Goal>
-<Ship Seed="971123452" Diff="15">
- <Name>Enemy Ship</Name>
- <Hull>69.17429847780483</Hull>
- <Shield>0</Shield>
- <Armour>Chameleon Plating</Armour>
- <Seed>460426</Seed>
- <Eqp ID="13" Active="True">NearLight Drive</Eqp>
- <Eqp ID="1" Active="True">Cabin</Eqp>
- <Eqp ID="2" Active="True">Cabin</Eqp>
- <Eqp ID="3" Active="True">Cabin</Eqp>
- <Eqp ID="5" Active="True">Bunk Room</Eqp>
- <Eqp ID="7" Active="True">Cabin</Eqp>
- <Eqp ID="8" Active="True">Large Bunk Room</Eqp>
- <Eqp ID="10" Active="True">Plasma Cannon</Eqp>
- <Eqp ID="11" Active="True">Plasma Cannon</Eqp>
- <Eqp ID="12" Active="True">Antimatter Cannon</Eqp>
-</Ship>
- <Opponent>Human</Opponent>
- <Enemy>Pirates</Enemy>
- <TimeCost>0</TimeCost>
- <Reward>539.33</Reward>
- <Diff>15</Diff>
- <LevelCount>1</LevelCount>
- <CurrentLevel>0</CurrentLevel>
- <Seed>2022647061</Seed>
- <Size>3</Size>
-</Mission>
-<Mission>
  <Type>Mines</Type>
  <Goal>Gather</Goal>
 <MissionItem Mass="1.50" Name="Alien Device" Level="13"></MissionItem>
@@ -14460,10 +14430,10 @@
   <Inv Count="1">
 <Armour Type="Plate Boots" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Frag Grenade"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Weapon Type="Axe" Level="0" />
   </Inv>
   <Inv Count="1">
@@ -14472,7 +14442,7 @@
   <Inv Count="1">
 <Material Type="Military AI"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Material Type="Aluminium"/>
   </Inv>
   <Inv Count="1">
@@ -14484,7 +14454,7 @@
   <Inv Count="7">
 <Material Type="Metasteel"/>
   </Inv>
-  <Inv Count="5">
+  <Inv Count="3">
 <Weapon Type="Heavy Rifle" Level="0" />
   </Inv>
   <Inv Count="1">
@@ -14502,7 +14472,7 @@
   <Inv Count="1">
 <Weapon Type="Laser Pistol" Level="0" />
   </Inv>
-  <Inv Count="5">
+  <Inv Count="4">
 <Weapon Type="Grenade Launcher" Level="0" />
   </Inv>
   <Inv Count="1">
@@ -14513,9 +14483,6 @@
   </Inv>
   <Inv Count="1">
 <Weapon Type="Shortblade" Level="0" />
-  </Inv>
-  <Inv Count="1">
-<Weapon Type="Katana" Level="0" />
   </Inv>
   <Inv Count="1">
 <Weapon Type="Laser Rifle" Level="0" />
@@ -14535,7 +14502,7 @@
   <Inv Count="1">
 <Armour Type="Military Helmet" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Equipment Type="Medsystem"/>
   </Inv>
   <Inv Count="1">
@@ -14546,9 +14513,6 @@
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Carbon Fibre" Level="0"/>
-  </Inv>
-  <Inv Count="1">
-<Armour Type="Chestplate" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
 <Armour Type="Chestplate" Material="Steel" Level="1"/>
@@ -14586,10 +14550,10 @@
   <Inv Count="1">
 <Armour Type="Powered Arm Plating" Material="Composite" Level="1"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="3">
 <Armour Type="Leg Plating" Material="Carbon Fibre" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Leg Plating" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14598,7 +14562,7 @@
   <Inv Count="1">
 <Material Type="Composite"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Powered Leg Plating" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14631,7 +14595,7 @@
   <Inv Count="1">
 <Armour Type="Shielded Chestplate" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="39">
+  <Inv Count="48">
 <Armour Type="Gauntlets" Material="Steel" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14640,7 +14604,7 @@
   <Inv Count="1">
 <Armour Type="Stealth Armour" Material="Kevlar" Level="1"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Gauntlets" Material="Composite" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14664,7 +14628,7 @@
   <Inv Count="1">
 <Armour Type="Leg Plating" Material="Kevlar" Level="0"/>
   </Inv>
-  <Inv Count="1">
+  <Inv Count="3">
 <Armour Type="Core Armour" Material="Kevlar" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14688,13 +14652,13 @@
   <Inv Count="13">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="3">
 <Material Type="Kevlar"/>
   </Inv>
   <Inv Count="1">
 <Material Type="Etherealite"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="7">
 <Material Type="Silicates"/>
   </Inv>
   <Inv Count="1">
@@ -14712,16 +14676,16 @@
   <Inv Count="1">
 <Equipment Type="Sonic Grenade"/>
   </Inv>
-  <Inv Count="11">
+  <Inv Count="8">
 <Material Type="Rare Earth Metals"/>
   </Inv>
   <Inv Count="2">
 <Armour Type="Stealth Helmet" Material="Steel" Level="0"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Material Type="Industrial Chemicals"/>
   </Inv>
-  <Inv Count="12">
+  <Inv Count="10">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="2">
@@ -14739,7 +14703,7 @@
   <Inv Count="1">
 <Armour Type="Stealth Gauntlets" Material="Composite" Level="0"/>
   </Inv>
-  <Inv Count="3">
+  <Inv Count="2">
 <Armour Type="Gauntlets" Material="Carbon Fibre" Level="0"/>
   </Inv>
   <Inv Count="1">
@@ -14754,7 +14718,7 @@
   <Inv Count="1">
 <Material Type="Powercell"/>
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Armour Type="Arm Plating" Material="Kevlar" Level="1"/>
   </Inv>
   <Inv Count="1">
@@ -14766,7 +14730,7 @@
   <Inv Count="1">
 <Weapon Type="Grenade Launcher" Level="1" />
   </Inv>
-  <Inv Count="2">
+  <Inv Count="1">
 <Material Type="Water"/>
   </Inv>
  </Inventory>
@@ -17343,16 +17307,16 @@
 </Map>
 <Team>
  <Pos>(3,0)3.0</Pos>
- <Cash>27222.87850752515</Cash>
+ <Cash>34560.92180833285</Cash>
  <Soldiers>
 <Soldier Name="Colin Awesome">
- <Location X="2" Y="7"/>
- <Health>36.896757496109835</Health>
- <Stamina>8.500000000000012</Stamina>
- <Shields>33.75</Shields>
- <Facing>180</Facing>
+ <Location X="55" Y="78"/>
+ <Health>55.455679149632196</Health>
+ <Stamina>6.005135758903156</Stamina>
+ <Shields>36.25</Shields>
+ <Facing>191.3099324740202</Facing>
  <Level>15</Level>
- <XP>2207681</XP>
+ <XP>2219950</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>12,15,15,12,20</Stats>
@@ -17398,13 +17362,13 @@
   <Exp Skill="Stealth">1</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>2081</KillCount>
+ <KillCount>2106</KillCount>
  <ToughestKill>
 <Creature Type="Xenomorph Deathworm">
  <Level>15</Level>
 </Creature>
  </ToughestKill>
- <DamageThisTurn>15.966122704171019</DamageThisTurn>
+ <DamageThisTurn>32.879632263029364</DamageThisTurn>
  <MaxDamageOneTurn>54.26245949654095</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Tracy Nolan">
@@ -17465,7 +17429,7 @@
  <Shields>0</Shields>
  <Facing>90</Facing>
  <Level>15</Level>
- <XP>1975955</XP>
+ <XP>1980153</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>19,13,16,13,11</Stats>
@@ -17512,13 +17476,13 @@
  <MaxDamageOneTurn>82.63085500172053</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Owen Gibbs">
- <Location X="4" Y="8"/>
- <Health>58</Health>
- <Stamina>33</Stamina>
+ <Location X="63" Y="78"/>
+ <Health>47.91285496598955</Health>
+ <Stamina>8.2990099009901</Stamina>
  <Shields>0</Shields>
  <Facing>90</Facing>
  <Level>15</Level>
- <XP>2113854</XP>
+ <XP>2126123</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>9,10,26,12,16</Stats>
@@ -17527,9 +17491,6 @@
  <Inventory>
   <Inv Count="1">
 <Equipment Type="Quantum Medsystem"/>
-  </Inv>
-  <Inv Count="1">
-<Equipment Type="Plasma Grenade"/>
   </Inv>
  </Inventory>
  <Loadout>
@@ -17556,22 +17517,23 @@
   <Exp Skill="Stealth">2</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>786</KillCount>
+ <KillCount>795</KillCount>
  <ToughestKill>
 <Creature Type="Demon Lord">
  <Level>17</Level>
 </Creature>
  </ToughestKill>
+ <DamageThisTurn>18.86286129272917</DamageThisTurn>
  <MaxDamageOneTurn>40.98314112121755</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Elori Ya-Dar">
- <Location X="16" Y="13"/>
- <Health>30.747289864063653</Health>
- <Stamina>6</Stamina>
+ <Location X="54" Y="76"/>
+ <Health>61.281705501225446</Health>
+ <Stamina>28</Stamina>
  <Shields>0</Shields>
- <Facing>270</Facing>
+ <Facing>90</Facing>
  <Level>13</Level>
- <XP>1084340</XP>
+ <XP>1096609</XP>
  <Gender>Male</Gender>
  <Race>Elithiri</Race>
  <Stats>19,14,6,15,18</Stats>
@@ -17609,23 +17571,22 @@
   <Exp Skill="Perception">2</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>482</KillCount>
+ <KillCount>502</KillCount>
  <ToughestKill>
 <Creature Type="Crystal Alpha">
  <Level>14</Level>
 </Creature>
  </ToughestKill>
- <DamageThisTurn>35.01655421030074</DamageThisTurn>
- <MaxDamageOneTurn>102.43869138492101</MaxDamageOneTurn>
+ <MaxDamageOneTurn>104.40284743344377</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Xander Green">
- <Location X="4" Y="9"/>
- <Health>14.891433622953738</Health>
- <Stamina>38.499789651435066</Stamina>
- <Shields>0</Shields>
- <Facing>0</Facing>
+ <Location X="50" Y="77"/>
+ <Health>41.98916727919356</Health>
+ <Stamina>3.205882352941165</Stamina>
+ <Shields>20</Shields>
+ <Facing>180</Facing>
  <Level>14</Level>
- <XP>1137273</XP>
+ <XP>1149542</XP>
  <Gender>Male</Gender>
  <Race>Human</Race>
  <Stats>15,12,10,17,18</Stats>
@@ -17654,7 +17615,7 @@
 <Weapon Type="Heavy Helljet" Level="1" />
  </EquippedWeapon>
  <WeaponExperience>
-  <Exp Type="Emitter">2289</Exp>
+  <Exp Type="Emitter">2311</Exp>
  </WeaponExperience>
  <UtilityExperience>
   <Exp Skill="Gunsmith">6</Exp>
@@ -17664,13 +17625,12 @@
   <Exp Skill="Stealth">1</Exp>
  </UtilityExperience>
  <Moved/>
- <KillCount>140</KillCount>
+ <KillCount>150</KillCount>
  <ToughestKill>
 <Creature Type="Solar">
  <Level>15</Level>
 </Creature>
  </ToughestKill>
- <DamageThisTurn>3.117087194351567</DamageThisTurn>
  <MaxDamageOneTurn>91.38755913456187</MaxDamageOneTurn>
 </Soldier>
 <Soldier Name="Julia King">
@@ -17763,7 +17723,7 @@
  <Mission_ViewDetection/>
  <Mission_FastAI/>
  <Relations>
-  <Relation Race="Human" Value="103198"/>
+  <Relation Race="Human" Value="104247"/>
   <Relation Race="Ursalon" Value="9445"/>
   <Relation Race="Grey" Value="6494"/>
   <Relation Race="Ogrish" Value="6189"/>
@@ -17772,7 +17732,7 @@
   <Relation Race="Elithiri" Value="12594"/>
  </Relations>
  <Inventory>
-  <Inv Count="12">
+  <Inv Count="13">
 <Material Type="Fabric"/>
   </Inv>
   <Inv Count="2">
@@ -17781,10 +17741,10 @@
   <Inv Count="6">
 <Material Type="Steel"/>
   </Inv>
-  <Inv Count="14">
+  <Inv Count="16">
 <Material Type="Carbon Fibre"/>
   </Inv>
-  <Inv Count="13">
+  <Inv Count="15">
 <Material Type="Plastic"/>
   </Inv>
   <Inv Count="16">
@@ -17811,7 +17771,7 @@
   <Inv Count="16">
 <Material Type="Kevlar"/>
   </Inv>
-  <Inv Count="24">
+  <Inv Count="25">
 <Material Type="Electronic Components"/>
   </Inv>
   <Inv Count="15">
@@ -17922,7 +17882,7 @@
   <Inv Count="1">
 <Equipment Type="Nannite Medikit"/>
   </Inv>
-  <Inv Count="4">
+  <Inv Count="5">
 <Material Type="Water"/>
   </Inv>
   <Inv Count="4">
