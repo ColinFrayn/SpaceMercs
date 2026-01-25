@@ -385,7 +385,6 @@
     <Damage>14+8</Damage>
     <Desc>A heavy railgun that delivers devastating damage over a long range.</Desc>
     <Sound>GaussCannon</Sound>
-    <Stable/>
     <Noise>10</Noise>
     <Materials>
       <Material Name="Steel" Amount="6"/>

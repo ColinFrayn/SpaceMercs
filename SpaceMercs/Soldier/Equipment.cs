@@ -41,7 +41,7 @@ namespace SpaceMercs {
         public double BuildDiff {
             get {
                 double diff = BaseType.Requirements?.MinLevel ?? 0;
-                diff += Level * 3d;
+                diff += Level * 2.5d;
                 diff += Mass / 10d; // Heavier items have more parts and are more difficult to build
                 return diff;
             }

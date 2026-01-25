@@ -3,9 +3,10 @@ ToDo List
 -------------------------------------------------
 
 What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
-- Maybe make interstellar travel not prone to interception?
-- Allow indirect routes that take longer but reduce interception risk?
+- Allow indirect routes that take longer but reduce interception risk ("Travel under stealth")?
 - Pay for escort (if starting at a colony with a high enough rep)?
+
+Add a "Set all loadout" button which applies to all soldiers
 
 ==================================================================================================================
 
@@ -14,19 +15,24 @@ What to do when we get stuck somewhere and can't travel because of the risk of i
 Backburner : Features
 -------------------------------------------------
 
+Abilities: (One point to spend every 5 levels, must have at least 5n levels in a relevant weapon skill)
+- Assassinate : [Melee, Sniper] One shot, +10 stamina, +2 to att per pt, +25% damage per pt, only against surprised targets
+- SideStep : One move allowed before shooting a stable weapon per point
+- Brace : 10 stamina, increases defence by 2 pts + 1 pt per level for the next round
+- Leaping strike : [Melee] Leap and attack, 5 stamina per square plus attack cost, range max = number of points, +2+n att, retains surprise bonuses if target is surprised
+- Overwatch : [Melee, Assault, Shotgun, Pistol] Choose area up to range of weapon with opening angle of 15+5n degrees
+- Siege : [Heavy] 20 stamina. Gain Rooted condition which gives +1 range and +2+n Att for Heavy ranged weapon (not melee) but cannot move. Requires 20 stamina to unroot.
+- Shredding Shot : [Assault, Shotgun] +5 stamina, +1 armour shred per hit.
+- Crippling Shot : [Assault, Shotgun] +5 stamina, SpeedMod * 0.9 per hit.
+- Barrage : [Assault, Shotgun, Heavy, Pistol] 2x stamina of one shot, 4x number of shots, cannot fire next turn.
+- Something for emitter/launcher??
+
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
-
-Add unique skills with weapon skill increments (every 5 levels?) e.g. charge/whirlwind for melee, crippling shot for sniper, shredding shot for assault, etc.
-- Maybe add a talent point every 3 levels, allow selection based on what weapon skills you possess.
-- Talents can be basic, elite, master for extra bonuses.
-- Possibly add a new tab next to weapon/utility skills
 
 Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
-
-Add a "Set all loadout" button
 
 At relations >= 3 allow player to join human hypergates up to alien ones??
 - Buy an item to link routes; choose nearby system; apply to alien gate if permissioned?? Hyperspace Bridge (costs a fortune)
@@ -41,7 +47,7 @@ What should attack skill do for an AoE weapon (grenade or cone), other than incr
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
 
-Maybe have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades?
+Maybe have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades? Increase it somehow (abilities?? )
 
 Enemies should use grenades / grenade weapons / emitter weapons properly
 

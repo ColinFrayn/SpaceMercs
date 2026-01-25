@@ -148,7 +148,7 @@ namespace SpaceMercs {
         public double BuildDiff {
             get {
                 double diff = Type.Requirements?.MinLevel ?? 0;
-                diff += Level * 3d;
+                diff += Level * 2.5d;
                 diff += Mass / 20d; // Heavier guns have more parts and are more difficult to build
                 if (Mod is not null) diff += Mod.CostMod * 2d; // Difficult to build/upgrade a modified weapon
                 return diff;

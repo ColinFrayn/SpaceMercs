@@ -823,8 +823,8 @@ namespace SpaceMercs {
             double diff = SkillLevel - ItemLevel;
             // Standard sigmoid (in percent)
             double chance = 1d / (1d + Math.Exp(-diff * Const.ConstructionChanceScale));
-            // Take SQRT to shift upwards
-            chance = 100d * Math.Sqrt(chance);
+            // Raise to a power to shift upwards / flatten
+            chance = 100d * Math.Pow(chance, Const.ConstructionChancePower);
             if (chance > 99.0) return 99.0;
             if (chance < 1.0) return 1.0;
             return chance;
