@@ -118,7 +118,8 @@ namespace SpaceMercs {
                 bool hasSecondaryEnemy = SecondaryEnemy == null;
                 // Size is irrelevant for DefendObjective missions
                 int modifiedSize = Goal == MissionGoal.Defend ? 2 : Size;
-                return MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy, Type);
+                double teamSizeBonus = Math.Pow(4.0 / Soldiers.Count, 0.5);
+                return (int)((double)MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy, Type) * teamSizeBonus);
             }
         }
         public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }

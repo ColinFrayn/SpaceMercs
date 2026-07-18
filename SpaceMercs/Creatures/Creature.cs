@@ -669,24 +669,31 @@ namespace SpaceMercs {
             if (CurrentTarget is null) return false;
             bool isDefendLevel = CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend;
             bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
-            double atr = AttackRange;
+            // Can we even see the target?
             double r = RangeTo(CurrentTarget);
+            if (!CanSee(CurrentTarget)) {
+                List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
+                // No way of getting close enough to see target so remove the target
+                if (path is null || path.Count == 0) {
+                    CurrentTarget = null;
+                    return false;
+                }
+                // Target is stealthy and out of range so go back to searching
+                if (CurrentTarget is Soldier s && path.Count > SoldierVisibilityRange(s)) {
+                    CurrentTarget = null;
+                    return false;
+                }
+                if (!atObjective) MoveTo(path[0], playSound);
+                postMoveCheck(this);
+                if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+            }
+            double atr = AttackRange;
             // -- Can we attack? If not then maybe move a bit closer for a better shot?
             // We are within range:
             if (r <= atr) {
                 // We can't see the target, so maybe attempt to find them
-                if (!CanSee(CurrentTarget)) {
-                    List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
-                    if (path is null || path.Count == 0) {
-                        CurrentTarget = null; // No way of getting close enough to see target so remove the target
-                        return false;
-                    }
-                    if (!atObjective) MoveTo(path[0], playSound);
-                    postMoveCheck(this);
-                    if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
-                }
                 // We can see the target, but can't attack them because we don't have enough stamina
-                else if (Stamina < AttackCost) {
+                if (Stamina < AttackCost) {
                     // Optionally move closer?
                     if (r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3) {
                         List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 5, false, (int)Math.Floor(atr));

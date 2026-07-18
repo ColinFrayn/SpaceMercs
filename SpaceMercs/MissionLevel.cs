@@ -1160,11 +1160,14 @@ namespace SpaceMercs {
                 }
             }
             int cDiff = Diff - ParentMission.SwarmLevel;
-            int soldierCount = ParentMission.Soldiers.Count;
-            if (ParentMission.Goal == MissionGoal.Countdown || ParentMission.Goal == MissionGoal.ExploreAll) soldierCount = 4; // Otherwise player could cheat by using one highly stealthy soldier
-            double dGroups = Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 1d) / Const.CreatureFrequencyScale;
+            int soldierCount = ParentMission.Goal switch {
+                MissionGoal.Countdown or MissionGoal.ExploreAll or MissionGoal.Artifact => 4, // Otherwise player could cheat by using one highly stealthy soldier
+                MissionGoal.KillBoss => Math.Max(2, ParentMission.Soldiers.Count),
+                _ => ParentMission.Soldiers.Count
+            };
+            double dGroups = Math.Pow(nFloorTiles, Const.CreatureCountExponent) * ((double)soldierCount + 2d) / Const.CreatureFrequencyScale;
             if (ParentMission.Type == MissionType.Surface) dGroups *= 0.7d;
-            if (ParentMission.IsShipMission && LevelID == 0) dGroups *= 0.8d;
+            if (ParentMission.IsShipMission && LevelID == 0) dGroups *= 0.6d;
             int nGroups = (int)dGroups;
             if (nGroups < 3) nGroups = 3;
             int nLeft = nGroups;
@@ -1182,7 +1185,7 @@ namespace SpaceMercs {
                 double swarmFactor = 1d + (double)(cg == primaryCG ? ParentMission.SwarmLevel : 1) * 0.6d;
                 double quantityScale = cg.QuantityScale * swarmFactor;
                 List<Creature> cGroup = new List<Creature>();
-                double dGroupSize = 1d + rand.NextDouble() * 2d + ((0.4d + rand.NextDouble() * 0.6d) * ParentMission.Soldiers.Count) + ParentMission.SwarmLevel;
+                double dGroupSize = 1d + rand.NextDouble() * 2d + ((0.4d + rand.NextDouble() * 0.6d) * soldierCount) + ParentMission.SwarmLevel;
                 dGroupSize *= quantityScale;
                 dGroupSize += rand.NextDouble() * Math.Min(3d, dGroups / 4d);
                 int iGroupSize = (int)dGroupSize;

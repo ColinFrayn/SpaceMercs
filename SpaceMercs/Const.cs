@@ -286,7 +286,7 @@ namespace SpaceMercs {
         public const double AutomataSurfaceFract = 0.35;
         public const int MinimumCreatureDistanceFromStartLocation = 10;
         public const double CreatureCountExponent = 0.86;  // Scale creature count as NumFloorTiles ^ ThisValue
-        public const double CreatureFrequencyScale = 180;   // The larger this is, the fewer creatures we put in each level.
+        public const double CreatureFrequencyScale = 210;   // The larger this is, the fewer creatures we put in each level.
         public const int LegendaryItemLevelDiff = 5; // Minimum level diff to have a legendary item of research level 0;
 
         // Map viewer settings
