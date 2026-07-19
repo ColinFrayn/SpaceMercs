@@ -1321,8 +1321,8 @@
     <Speed>14</Speed>
     <Long/>
     <Range Accuracy="1">1.5</Range>
-    <Damage>5+5</Damage>
-    <Damage Type="Void">2+0</Damage>
+    <Damage>6+5</Damage>
+    <Damage Type="Void">2+1</Damage>
     <Desc>A vicious spear, humming with dark energy and based on precursor tech.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>
@@ -1338,8 +1338,8 @@
     <Speed>10</Speed>
     <Long/>
     <Range Accuracy="1">1.5</Range>
-    <Damage>4+4</Damage>
-    <Damage Type="Void">2+0</Damage>
+    <Damage>5+4</Damage>
+    <Damage Type="Void">2+1</Damage>
     <Desc>A perfectly tuned blade, humming with dark energy and based on precursor tech.</Desc>
     <Sound>SwordSlice</Sound>
     <Requirements>

@@ -118,7 +118,7 @@ namespace SpaceMercs {
                 bool hasSecondaryEnemy = SecondaryEnemy == null;
                 // Size is irrelevant for DefendObjective missions
                 int modifiedSize = Goal == MissionGoal.Defend ? 2 : Size;
-                double teamSizeBonus = Math.Pow(4.0 / Soldiers.Count, 0.5);
+                double teamSizeBonus = 4.0 / Math.Max(1, Soldiers.Count);
                 return (int)((double)MissionExperience(Diff, LevelCount, modifiedSize, SwarmLevel, hasSecondaryEnemy, Type) * teamSizeBonus);
             }
         }
@@ -553,7 +553,7 @@ namespace SpaceMercs {
                 _ => 1d
             };
 
-            return (int)(((double)diff + 1d) * ((double)diff + 1d) * Math.Pow(1.1, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * secondaryEnemyMod * precursorMod * Const.MissionExperienceScale);
+            return (int)(Math.Pow(Const.MissionExperienceBase, diff + 1) * Math.Pow(Const.MissionLevelBase, levelCount - 1) * (double)levelCount * (double)((size + 3) * (size + 3) + 5d) * (1d + swarmLevel * 0.3d) * secondaryEnemyMod * precursorMod * Const.MissionExperienceScale);
         }
 
         // Utility

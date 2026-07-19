@@ -232,7 +232,9 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.75; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
-        public const double MissionExperienceScale = 0.4d; // Scale for experience gained for finishing a mission
+        public const double MissionExperienceScale = 0.8d; // Scale for experience gained for finishing a mission
+        public const double MissionExperienceBase = 1.55d; // Scale for experience gained for finishing a mission (base of exponent)
+        public const double MissionLevelBase = 1.1d; // Scale for experience gained for finishing a mission (base of exponent for level count)
         public const double CashRelationsFactor = 0.25; // Exp per credit donated
         public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
         public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
