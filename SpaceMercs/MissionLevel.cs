@@ -20,11 +20,11 @@ namespace SpaceMercs {
         private readonly int Diff;
         private readonly bool bInitialised;
         private int[,] TextureCoords;
-        private readonly HashSet<Point> EntryLocations = new HashSet<Point>(); //  = "To/From above" if multi-level
-        private readonly HashSet<Point> ExitLocations = new HashSet<Point>(); //  = "To/From below" if multi-level
+        private readonly HashSet<Point> EntryLocations = []; //  = "To/From above" if multi-level
+        private readonly HashSet<Point> ExitLocations = []; //  = "To/From below" if multi-level
         private readonly ConcurrentDictionary<IEntity,byte> Entities = new ConcurrentDictionary<IEntity, byte>(); // Using a Dict to mimic a concurrent set (which desn't exist)
-        private readonly Dictionary<Point, Stash> Items = new Dictionary<Point, Stash>();
-        private readonly Dictionary<Point, Trap> Traps = new Dictionary<Point, Trap>();
+        private readonly Dictionary<Point, Stash> Items = [];
+        private readonly Dictionary<Point, Trap> Traps = [];
         private IEntity?[,] EntityMap;
         private int HoverX = -1, HoverY = -1;
         private Random rand = new Random();
@@ -872,10 +872,10 @@ namespace SpaceMercs {
                         }
                     }
                     niter++;
-                } while (bestscore == -1 || niter < 100);
+                } while (bestscore == -1 || niter < 100); // In theory could run forever, but in practice all ships will have space
             }
             else {
-                bool bOK = true;
+                bool bOK;
                 do {
                     StartX = rand.Next(Width - 8) + 4;
                     StartY = rand.Next(Height - 8) + 4;
@@ -1229,7 +1229,7 @@ namespace SpaceMercs {
             Point best = Point.Empty;
 
             for (int n = 0; n < nTries; n++) {
-                bool bOK;
+                bool bOK = false;
                 double score;
                 int x, y, niter = 0;
 
@@ -1237,13 +1237,15 @@ namespace SpaceMercs {
                     score = 0.0;
                     int dist = 0;
                     Point ptStart = Point.Empty;
-                    if (EntryLocations.Any()) ptStart = EntryLocations.First<Point>();
+                    if (EntryLocations.Count > 0) ptStart = EntryLocations.First();
                     do {
                         x = rand.Next(Width - 5) + 2;
                         y = rand.Next(Height - 5) + 2;
                         if (ptStart == Point.Empty) dist = minDist + 1;
                         else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
+                        if (++niter > 200) break;
                     } while (!EntityCanGo(cr, x, y) || (dist < minDist && CanSee(ptStart, new Point(x, y))));
+                    if (niter > 200) break;
 
                     // Attempt to put all creatures far from the EntryLocations
                     score += dist;
@@ -1261,7 +1263,7 @@ namespace SpaceMercs {
                         if (d < 6) { bOK = false; niter++; break; }
                         score += (d / 4);
                     }
-                } while (!bOK && niter < 100);
+                } while (!bOK && niter < 200);
 
                 if (bOK && (score > bestScore || best == Point.Empty)) {
                     bestScore = score;
@@ -1389,7 +1391,7 @@ namespace SpaceMercs {
             PlanetType pt = ParentMission.Location.Type;
 
             // Get suitable materials for this mission
-            Dictionary<MaterialType, double> dFreq = new();
+            Dictionary<MaterialType, double> dFreq = [];
             double dTotal = 0d;
             foreach (MaterialType mat in StaticData.Materials.Where(m => m.NodeMin > 0)) {
                 if (mat.NodeMin > Diff || mat.NodeMax < Diff) continue;
@@ -1426,7 +1428,6 @@ namespace SpaceMercs {
             if (nodeTypes.Count == 0) return;
 
             // Add all nodes
-            int niter = 0;
             foreach (MaterialType mat in nodeTypes) {
                 // Calculate the level, biased towards low-level nodes
                 int maxlevel = 1 + Diff - mat.NodeMin;
@@ -1440,6 +1441,7 @@ namespace SpaceMercs {
                 if (EntryLocations.Count > 0) ptStart = EntryLocations.First<Point>();
 
                 bool bOK = false;
+                int niter = 0;
                 do {
                     int x = rand.Next(Width - 5) + 2;
                     int y = rand.Next(Height - 5) + 2;
@@ -1649,6 +1651,7 @@ namespace SpaceMercs {
 
             // Add loads more tunnels at random
             int expectedTunnels = (Width * Height) / (bSparse ? 7 : 5);
+            int ntry = 0;
             while (nTunnels < expectedTunnels) {
                 bool bOK = true;
                 int x, y;
@@ -1659,7 +1662,7 @@ namespace SpaceMercs {
                     if (Map[x, y] != TileType.Floor || Map[x + 1, y] != TileType.Floor || Map[x, y + 1] != TileType.Floor || Map[x + 1, y + 1] != TileType.Floor) bOK = false;
                 } while (!bOK);
                 InitialiseTunnel(x, y, ref nTunnels);
-            }
+            } while (++ntry < 10000);
 
             // Also start a tunnel from the stairs down, if there are any and they aren't already connected
             if (IsLowestLevel) return;
@@ -1694,7 +1697,7 @@ namespace SpaceMercs {
             // Check if we can tunnel here
             int nextx = sx + dx;
             int nexty = sy + dy;
-            if (Map[nextx, nexty] == TileType.Floor || nextx == 0 || nextx + (tx * (tw - 1)) >= Width - 1 || nexty == 0 || nexty + (ty * (tw - 1)) >= Height - 1) return;
+            if (nextx == 0 || nextx + (tx * (tw - 1)) >= Width - 1 || nexty == 0 || nexty + (ty * (tw - 1)) >= Height - 1 || Map[nextx, nexty] == TileType.Floor) return;
 
             // Check if we've been asked to start a tunnel (because of a junction, probably) in a direction that has since become impossible
             if (Map[nextx + dx, nexty + dy] == TileType.Wall && Map[nextx + dx + (tx * (tw - 1)), nexty + dy + (ty * (tw - 1))] == TileType.Wall) {

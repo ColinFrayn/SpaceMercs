@@ -115,7 +115,7 @@ namespace SpaceMercs {
         }
         public int Experience {
             get {
-                bool hasSecondaryEnemy = SecondaryEnemy == null;
+                bool hasSecondaryEnemy = SecondaryEnemy != null;
                 // Size is irrelevant for DefendObjective missions
                 int modifiedSize = Goal == MissionGoal.Defend ? 2 : Size;
                 double teamSizeBonus = 4.0 / Math.Max(1, Soldiers.Count);
@@ -546,7 +546,7 @@ namespace SpaceMercs {
             return MissionExperience(diff, 1, 3, 0, false, MissionType.Ignore);
         }
         private static int MissionExperience(int diff, int levelCount, int size, int swarmLevel, bool hasSecondaryEnemy, MissionType type) {
-            double secondaryEnemyMod = hasSecondaryEnemy ? 1d : Const.SecondaryEnemyXPBoost;
+            double secondaryEnemyMod = hasSecondaryEnemy ? Const.SecondaryEnemyXPBoost : 1d;
             double precursorMod = type switch {
                 MissionType.SpaceHulk => 1.6d,
                 MissionType.PrecursorRuins => 2.0d,
@@ -764,18 +764,20 @@ namespace SpaceMercs {
             if (Levels.ContainsKey(n)) return Levels[n];
             return null;
         }
+        private int _largestCreatureSize = -1;
         public int GetLargestCreatureSize() {
-            if (PrimaryEnemy == null) return 1;
-            int largest = 1;
+            if (_largestCreatureSize >= 1) return _largestCreatureSize;
+            _largestCreatureSize = 1;
+            if (PrimaryEnemy == null) return _largestCreatureSize;
             foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == PrimaryEnemy)) {
-                if (ct.Size > largest) largest = ct.Size;
+                if (ct.Size > _largestCreatureSize) _largestCreatureSize = ct.Size;
             }
             if (SecondaryEnemy is not null) {
                 foreach (CreatureType ct in StaticData.CreatureTypes.Where(x => x.Group == SecondaryEnemy)) {
-                    if (ct.Size > largest) largest = ct.Size;
+                    if (ct.Size > _largestCreatureSize) _largestCreatureSize = ct.Size;
                 }
             }
-            return largest;
+            return _largestCreatureSize;
         }
         public string GetDescription() {
             Random rand = new Random(Seed);

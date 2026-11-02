@@ -2,6 +2,8 @@
 ToDo List
 -------------------------------------------------
 
+AI tests in key files.
+
 What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
 - Allow indirect routes that take longer but reduce interception risk ("Travel under stealth")?
 - Pay for escort (if starting at a colony with a high enough rep)?
@@ -15,6 +17,13 @@ Add a "Set all loadout" button which applies to all soldiers
 Backburner : Features
 -------------------------------------------------
 
+Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
+- Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
+
+Cover
+- When partially hidden from the attacker, get a def bonus
+- Including large creatures
+
 Abilities: (One point to spend every 5 levels, must have at least 5n levels in a relevant weapon skill)
 - Assassinate : [Melee, Sniper] One shot, +10 stamina, +2 to att per pt, +25% damage per pt, only against surprised targets
 - SideStep : One move allowed before shooting a stable weapon per point
@@ -26,13 +35,6 @@ Abilities: (One point to spend every 5 levels, must have at least 5n levels in a
 - Crippling Shot : [Assault, Shotgun] +5 stamina, SpeedMod * 0.9 per hit.
 - Barrage : [Assault, Shotgun, Heavy, Pistol] 2x stamina of one shot, 4x number of shots, cannot fire next turn.
 - Something for emitter/launcher??
-
-Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
-- Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
-
-Cover
-- When partially hidden from the attacker, get a def bonus
-- Including large creatures
 
 At relations >= 3 allow player to join human hypergates up to alien ones??
 - Buy an item to link routes; choose nearby system; apply to alien gate if permissioned?? Hyperspace Bridge (costs a fortune)
