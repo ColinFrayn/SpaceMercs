@@ -71,7 +71,7 @@ namespace UnitTests {
         #region Adding and stacking
 
         [Test]
-        public void DistinctInstancesOfSameType_StackInGroupedInventory() {
+        public void AddItem_DistinctInstancesOfSameType_Stack() {
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medikit));
             s.AddItem(new Equipment(medikit));
@@ -81,13 +81,29 @@ namespace UnitTests {
         }
 
         [Test]
-        public void DistinctInstancesOfDifferentTypes_DoNotStack() {
+        public void AddItem_DistinctInstancesOfDifferentTypes_DoNotStack() {
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medikit));
             s.AddItem(new Equipment(grenade));
             Assert.AreEqual(2, s.InventoryGrouped.Count);
             Assert.AreEqual(1, s.CountItem(new Equipment(medikit)));
             Assert.AreEqual(1, s.CountItem(new Equipment(grenade)));
+        }
+
+        [Test]
+        public void AddItem_TwoTypes_StackSeparately() {
+            Soldier s = MakeSoldier();
+            Equipment kit = new Equipment(medikit);
+            Equipment nade = new Equipment(grenade);
+            s.AddItem(kit);
+            s.AddItem(nade);
+            s.AddItem(kit);
+            s.AddItem(nade);
+            s.AddItem(kit);
+            ReadOnlyDictionary<IItem, int> grouped = s.InventoryGrouped;
+            Assert.AreEqual(2, grouped.Count);
+            Assert.AreEqual(3, s.CountItem(kit));
+            Assert.AreEqual(2, s.CountItem(nade));
         }
 
         [Test]
@@ -101,7 +117,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void HasItemAndCountItem_MatchEqualInstanceNotInList() {
+        public void HasItem_EqualInstanceNotInList_Matches() {
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medikit), 3);
             Equipment lookup = new Equipment(medikit);
@@ -112,7 +128,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void AddItemWithCount_ThenCountItem() {
+        public void AddItem_WithCount_Stacks() {
             Soldier s = MakeSoldier();
             Equipment eq = new Equipment(medikit);
             s.AddItem(eq, 4);
@@ -125,7 +141,7 @@ namespace UnitTests {
         #region Use / recharge
 
         [Test]
-        public void UseSingleUseMedikit_TwoDistinctInstances_ConsumesOnlyOne() {
+        public void UseItem_SingleUseTwoDistinctInstances_ConsumesOnlyOne() {
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medikit));
             s.AddItem(new Equipment(medikit));
@@ -135,7 +151,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void UseSingleUseMedikit_AddedWithCount_ConsumesOnlyOne() {
+        public void UseItem_SingleUseAddedWithCount_ConsumesOnlyOne() {
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medikit), 2);
             UseReadyItem(s, medikit);
@@ -143,7 +159,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void UseRechargeable_TwoDistinctInstances_OnlyUsedInstanceRecharges() {
+        public void UseItem_RechargeableTwoDistinctInstances_OnlyUsedInstanceRecharges() {
             Soldier s = MakeSoldier();
             Equipment a = new Equipment(medsystem);
             Equipment b = new Equipment(medsystem);
@@ -159,7 +175,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void UseRechargeable_AddedWithCount_OnlyOneRecharges() {
+        public void UseItem_RechargeableAddedWithCount_OnlyOneRecharges() {
             Soldier s = MakeSoldier();
             Equipment eq = new Equipment(medsystem);
             s.AddItem(eq, 2);
@@ -173,7 +189,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void UseRechargeable_UIGroupedKey_WithTwoDistinctInstances_LeavesOneReady() {
+        public void UseItem_UIGroupedKeyWithTwoDistinctInstances_LeavesOneReady() {
             // Mirrors UseItem dialog: it binds the list row to InventoryGrouped.Keys, not a unique instance.
             Soldier s = MakeSoldier();
             s.AddItem(new Equipment(medsystem));
@@ -249,6 +265,16 @@ namespace UnitTests {
             s.DestroyItem(eq, 10);
             Assert.AreEqual(0, s.CountItem(eq));
             Assert.AreEqual(0, s.InventoryGrouped.Count);
+        }
+
+        [Test]
+        public void RemoveItemByType_WrongType_IsNoOp() {
+            Soldier s = MakeSoldier();
+            Equipment eq = new Equipment(medikit);
+            s.AddItem(eq);
+            s.RemoveItemByType(grenade);
+            Assert.AreEqual(1, s.InventoryGrouped.Count);
+            Assert.AreEqual(1, s.CountItem(eq));
         }
 
         [Test]
@@ -381,7 +407,7 @@ namespace UnitTests {
         }
 
         [Test]
-        public void EquippedItems_AreNotCountedInInventory() {
+        public void Equip_ItemsNotCountedInInventory() {
             Soldier s = MakeSoldier();
             Weapon wp = new Weapon(pistol, 0);
             Armour ar = new Armour(helmet, fabric, 0);
@@ -409,7 +435,7 @@ namespace UnitTests {
         #region Loadout
 
         [Test]
-        public void AddAndRemoveLoadout_TracksQuantity() {
+        public void AddLoadout_AndRemove_TracksQuantity() {
             Soldier s = MakeSoldier();
             Equipment eq = new Equipment(medikit);
             Assert.AreEqual(1, s.AddLoadout(eq));
@@ -505,21 +531,32 @@ namespace UnitTests {
         }
 
         [Test]
-        public void GenerateStash_DropsInventoryAndEquipment() {
+        public void GenerateStash_DropsInventoryEquipmentAndCorpse() {
             Soldier s = MakeSoldier();
             Equipment kit = new Equipment(medikit);
             Weapon wp = new Weapon(pistol, 0);
             Armour ar = new Armour(helmet, fabric, 0);
             s.AddItem(kit, 2);
+            s.AddItem(new Equipment(grenade), 2);
             s.Equip(wp);
             s.Equip(ar);
             Stash st = s.GenerateStash();
             Assert.AreEqual(0, s.InventoryGrouped.Count);
             Assert.IsNull(s.EquippedWeapon);
             Assert.AreEqual(0, s.EquippedArmour.Count);
+            Assert.AreEqual(s.Location, st.Location);
+            Assert.False(st.IsEmpty);
+            Assert.False(st.Hidden);
+            Assert.False(st.ContainsOnlyCorpses);
             Assert.AreEqual(2, st.GetCount(kit));
+            Assert.AreEqual(2, st.GetCount(new Equipment(grenade)));
             Assert.AreEqual(1, st.GetCount(wp));
             Assert.AreEqual(1, st.GetCount(ar));
+            Assert.AreEqual(7, st.Count); // 2 kits + 2 grenades + weapon + armour + corpse
+            Corpse? corpse = st.Items().OfType<Corpse>().SingleOrDefault();
+            Assert.IsNotNull(corpse);
+            Assert.True(corpse!.IsSoldier);
+            Assert.AreEqual($"Corpse of {s.Name}", corpse.Name);
         }
 
         [Test]
