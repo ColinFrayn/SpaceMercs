@@ -7,7 +7,9 @@ namespace UnitTests {
             NewGame ng = new NewGame();
             ng.PlayerName = "Test Name";
             Race rc = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not ID Human race");
-            return new Team(ng, rc);
+            Team team = new Team(ng, rc);
+            team.PlayerShip.AddBuiltEquipmentAutoSlot(StaticData.GetShipEquipmentByName("Cabin") ?? throw new Exception("Could not find Cabin equipment"));
+            return team;
         }
     }
 }

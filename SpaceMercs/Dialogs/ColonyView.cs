@@ -424,10 +424,9 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
 
-            // Check if we have enough berths
-            int nSpace = _playerTeam.GetSpareBerths();
-            if (nSpace < 1) {
-                if (MessageBox.Show("You don't have sufficient accommodation for this new soldier, so you won't be able to take off. Continue anyway?", "No More Space", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (_playerTeam.GetSpareBerths() < 1) {
+                MessageBox.Show("You don't have sufficient accommodation for this new soldier.");
+                return;
             }
 
             // Recruit the soldier

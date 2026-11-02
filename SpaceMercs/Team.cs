@@ -293,6 +293,7 @@ namespace SpaceMercs {
             return total;
         }
         public void AddSoldier(Soldier merc) {
+            if (GetSpareBerths() < 1) throw new Exception("Cannot add soldier: no spare berths");
             _Soldiers.Add(merc);
             merc.PlayerTeam = this;
         }
@@ -376,7 +377,7 @@ namespace SpaceMercs {
                     if (m.BaseType == mat) count += Inventory[it];
                 }
             }
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 foreach (IItem it in s.InventoryGrouped.Keys) {
                     if (it is Material m) {
                         if (m.BaseType == mat) count += s.InventoryGrouped[it];
@@ -399,7 +400,7 @@ namespace SpaceMercs {
             }
 
             // If there's any left, take it from soldiers
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 foreach (IItem it in s.InventoryGrouped.Keys) {
                     if (it is Material m) {
                         if (m.BaseType == mat) {
@@ -418,7 +419,7 @@ namespace SpaceMercs {
         public int CountItems(IItem itFind) {
             int count = 0;
             if (Inventory.ContainsKey(itFind)) count += Inventory[itFind];
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 if (s.InventoryGrouped.ContainsKey(itFind)) count += s.InventoryGrouped[itFind];
             }
             return count;
@@ -428,49 +429,34 @@ namespace SpaceMercs {
             return 0;
         }
         public IEnumerable<IResearchable> UnresearchableItems {
-            get {
-                List<IResearchable> items = [];
-                Race humanRace = StaticData.HumanRace;
-                foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
-                    if (humanRace.HasResearched(it)) continue;
-                    if (it.Requirements?.TeamMeetsBasicRequirements(this) == false) {
-                        items.Add(it);
-                    }
-                }
-                foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
-                    if (humanRace.HasResearched(mat)) continue;
-                    if (mat.Requirements?.TeamMeetsBasicRequirements(this) == false) {
-                        items.Add(mat);
-                    }
-                }
-                return items;
-            }
+            get => GetItemsByResearchable(false);
         }
         public IEnumerable<IResearchable> ResearchableItems {
-            get {
-                List<IResearchable> items = [];
-                Race humanRace = StaticData.HumanRace;
-                foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
-                    if (humanRace.HasResearched(it)) continue;
-                    if (it.Requirements?.TeamMeetsBasicRequirements(this) == true) {
-                        items.Add(it);
-                    }
+            get => GetItemsByResearchable(true);
+        }
+        private List<IResearchable> GetItemsByResearchable(bool bResearchable) {
+            List<IResearchable> items = [];
+            Race humanRace = StaticData.HumanRace;
+            foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
+                if (humanRace.HasResearched(it)) continue;
+                if (it.Requirements?.TeamMeetsBasicRequirements(this) == bResearchable) {
+                    items.Add(it);
                 }
-                foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
-                    if (humanRace.HasResearched(mat)) continue;
-                    if (mat.Requirements?.TeamMeetsBasicRequirements(this) == true) {
-                        items.Add(mat);
-                    }
-                }
-                return items;
             }
+            foreach (MaterialType mat in StaticData.ResearchableMaterialTypes) {
+                if (humanRace.HasResearched(mat)) continue;
+                if (mat.Requirements?.TeamMeetsBasicRequirements(this) == bResearchable) {
+                    items.Add(mat);
+                }
+            }
+            return items;
         }
         public bool HasSpaceHulkCore {
             get {
                 foreach (IItem it in Inventory.Keys) {
                     if (it is MissionItem m && m.IsSpaceHulkCore) return true;
                 }
-                foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+                foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                     foreach (IItem it in s.InventoryGrouped.Keys) {
                         if (it is MissionItem m && m.IsSpaceHulkCore) return true;
                     }
@@ -483,7 +469,7 @@ namespace SpaceMercs {
                 foreach (IItem it in Inventory.Keys) {
                     if (it is MissionItem m && m.IsPrecursorCore) return true;
                 }
-                foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+                foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                     foreach (IItem it in s.InventoryGrouped.Keys) {
                         if (it is MissionItem m && m.IsPrecursorCore) return true;
                     }
@@ -494,24 +480,24 @@ namespace SpaceMercs {
 
         // Skill stuff
         public bool HasSkill(Soldier.UtilitySkill sk) {
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 if (s.GetUtilityLevel(sk) > 0) return true;
             }
             return false;
         }
         public int MaxSkillLevel(Soldier.UtilitySkill sk) {
             int lvl = 0;
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 if (s.GetUtilityLevel(sk) > lvl) lvl = s.GetUtilityLevel(sk);
             }
             return lvl;
         }
         public Soldier MaxSkillSoldier(Soldier.UtilitySkill sk) {
             Soldier? sbest = null;
-            foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
+            foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
                 if (sbest is null || s.GetUtilityLevel(sk) > sbest.GetUtilityLevel(sk)) sbest = s;
             }
-            if (sbest is null) throw new Exception($"Couldn't find any soldier at the current location (needed for skill {sk})");
+            if (sbest is null) throw new Exception($"Couldn't find any active soldier (needed for skill {sk})");
             return sbest!;
         }
         public int GetMaxSkillByItemType(ItemType newType) {
@@ -558,7 +544,7 @@ namespace SpaceMercs {
             }
             throw new Exception("Unknown skill required in item construction: " + it.ToString());
         }
-        public int MaximumSoldierLevel => _Soldiers.Where(s => s.aoLocation == CurrentPosition)?.MaxBy(s => s.Level)?.Level ?? 0;
+        public int MaximumSoldierLevel => _Soldiers.Where(s => s.IsActive)?.MaxBy(s => s.Level)?.Level ?? 0;
 
         // Utility
         public void ShowStatistics(ShowMessageDelegate showMessage) {
