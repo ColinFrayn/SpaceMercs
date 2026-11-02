@@ -47,8 +47,14 @@ namespace SpaceMercs {
             }
         }
 
+        public IItem Clone() {
+            Equipment eq = new Equipment(BaseType);
+            eq.Recharge = Recharge;
+            return eq;
+        }
+
         public override int GetHashCode() {
-            return HashCode.Combine(BaseType);
+            return HashCode.Combine(BaseType, Recharge);
         }
 
         public override bool Equals(object? obj) {

@@ -709,7 +709,9 @@ namespace SpaceMercs {
                     int count = xi.GetAttributeInt("Count");
                     IItem? eq = Utils.LoadItem(xi.FirstChild);
                     if (eq is not null) {
-                        Inventory.AddRange(Enumerable.Repeat(eq, count));
+                        for (int i = 0; i < count; i++) {
+                            Inventory.Add(eq.Clone());
+                        }
                     }
                 }
             }
@@ -1058,7 +1060,9 @@ namespace SpaceMercs {
         }
         public void AddItem(IItem it, int Count = 1) {
             if (it == null || Count < 1) return;
-            Inventory.AddRange(Enumerable.Repeat(it, Count));
+            for (int i = 0; i < Count; i++) {
+                Inventory.Add(it.Clone());
+            }
             CalculateMaxStats();
         }
         public double BaseArmour {
@@ -1409,12 +1413,12 @@ namespace SpaceMercs {
             // Resolve the attack(s)
             List<ShotResult> results = [];
             int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
-            if (r == 0d && en is null) return false;
             for (int n = 0; n < nshots; n++) {
                 if (r > 0d) {
                     results.Add(new ShotResult(this, true));
                 }
                 else {
+                    if (en is null) return false;
                     // Single target so roll to hit
                     double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
                     if (hit > 0.0) {

@@ -7,5 +7,6 @@ namespace SpaceMercs {
         double Cost { get; } // In credits
         string Description { get; } // Textual description
         void SaveToFile(StreamWriter file);
+        IItem Clone();
     }
 }

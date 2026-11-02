@@ -114,6 +114,8 @@ namespace SpaceMercs {
             Material = StaticData.GetMaterialTypeByName(strMat) ?? throw new Exception("Could not ID armour material : " + strMat);
         }
 
+        public IItem Clone() => new Armour(Type, Material, Level);
+
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
         public override int GetHashCode() => HashCode.Combine(Level, Type, Material);
 

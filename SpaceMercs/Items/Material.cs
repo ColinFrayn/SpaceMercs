@@ -22,6 +22,8 @@ namespace SpaceMercs {
             BaseType = mt;
         }
 
+        public IItem Clone() => new Material(BaseType);
+
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
         public override int GetHashCode() {
             return HashCode.Combine(BaseType);

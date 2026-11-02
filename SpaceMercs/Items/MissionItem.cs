@@ -109,6 +109,14 @@ namespace SpaceMercs {
             return new MissionItem(it);
         }
 
+        public IItem Clone() {
+            if (LegendaryItem is not null) return new MissionItem(LegendaryItem.Clone());
+            MissionItem copy = new MissionItem(_name, Level, Mass);
+            copy.IsPrecursorCore = IsPrecursorCore;
+            copy.IsSpaceHulkCore = IsSpaceHulkCore;
+            return copy;
+        }
+
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
         public override int GetHashCode() {
             unchecked {

@@ -155,8 +155,7 @@ namespace UnitTests {
             Assert.AreEqual(1, ready, "one medsystem should still be ready");
             Assert.AreEqual(1, recharging, "only the used medsystem should be recharging");
             Assert.AreEqual(2, stacks, "ready and recharging copies should be separate stacks");
-            Assert.True(a.Recharge == 0 ^ b.Recharge == 0, "exactly one of the two original instances should be on cooldown");
-            Assert.AreEqual(medsystem.ItemEffect!.Recharge, a.Recharge == 0 ? b.Recharge : a.Recharge);
+            Assert.AreEqual(medsystem.ItemEffect!.Recharge, s.InventoryGrouped.Keys.OfType<Equipment>().Single(e => e.BaseType == medsystem && e.Recharge > 0).Recharge);
         }
 
         [Test]
@@ -190,25 +189,30 @@ namespace UnitTests {
         [Test]
         public void EndOfTurn_TwoRechargingDistinctInstances_EachLosesOneCharge() {
             Soldier s = MakeSoldier();
-            Equipment a = new Equipment(medsystem);
-            Equipment b = new Equipment(medsystem);
-            s.AddItem(a);
-            s.AddItem(b);
-            a.SetRecharge(3);
-            b.SetRecharge(3);
+            s.AddItem(new Equipment(medsystem));
+            s.AddItem(new Equipment(medsystem));
+            UseReadyItem(s, medsystem);
+            UseReadyItem(s, medsystem);
+            int cooldown = medsystem.ItemEffect!.Recharge;
             EndTurn(s);
-            Assert.AreEqual(2, a.Recharge);
-            Assert.AreEqual(2, b.Recharge);
+            foreach (Equipment eq in s.InventoryGrouped.Keys.OfType<Equipment>().Where(e => e.BaseType == medsystem)) {
+                Assert.AreEqual(cooldown - 1, eq.Recharge);
+            }
+            Assert.AreEqual(2, CountByRecharge(s, medsystem).Recharging);
         }
 
         [Test]
         public void EndOfTurn_RechargeableAddedWithCount_CooldownDropsByOneNotByStackSize() {
             Soldier s = MakeSoldier();
-            Equipment eq = new Equipment(medsystem);
-            s.AddItem(eq, 3);
-            eq.SetRecharge(3);
+            s.AddItem(new Equipment(medsystem), 3);
+            UseReadyItem(s, medsystem);
+            UseReadyItem(s, medsystem);
+            UseReadyItem(s, medsystem);
+            int cooldown = medsystem.ItemEffect!.Recharge;
             EndTurn(s);
-            Assert.AreEqual(2, eq.Recharge, "a stack of 3 should not tick recharge three times in one turn");
+            foreach (Equipment eq in s.InventoryGrouped.Keys.OfType<Equipment>().Where(e => e.BaseType == medsystem)) {
+                Assert.AreEqual(cooldown - 1, eq.Recharge, "a stack of 3 should not tick recharge three times in one turn");
+            }
             (_, _, int recharging) = CountByRecharge(s, medsystem);
             Assert.AreEqual(3, recharging);
         }
@@ -216,11 +220,12 @@ namespace UnitTests {
         [Test]
         public void StopMission_ClearsRechargeOnInventoryEquipment() {
             Soldier s = MakeSoldier();
-            Equipment eq = new Equipment(medsystem);
-            s.AddItem(eq);
-            eq.SetRecharge(3);
+            s.AddItem(new Equipment(medsystem));
+            UseReadyItem(s, medsystem);
+            Assert.Greater(CountByRecharge(s, medsystem).Recharging, 0);
             s.StopMission();
-            Assert.AreEqual(0, eq.Recharge);
+            Assert.AreEqual(0, CountByRecharge(s, medsystem).Recharging);
+            Assert.AreEqual(0, s.InventoryGrouped.Keys.OfType<Equipment>().Single(e => e.BaseType == medsystem).Recharge);
         }
 
         #endregion

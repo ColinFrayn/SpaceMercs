@@ -27,6 +27,12 @@ namespace SpaceMercs {
             Type = null;
             Level = s.Level;
         }
+        private Corpse(CreatureType? type, string? soldierName, int level) {
+            Type = type;
+            SoldierName = soldierName;
+            Level = level;
+        }
+
         public Corpse(XmlNode xml) {
             string strType = xml.Attributes?["Type"]?.Value ?? string.Empty;
             if (strType.StartsWith("Soldier:")) {
@@ -63,6 +69,8 @@ namespace SpaceMercs {
             }
             return stuff;
         }
+
+        public IItem Clone() => new Corpse(Type, SoldierName, Level);
 
         // Equality comparers so that this can be used in a Dictionary/HashSet properly
         public override int GetHashCode() {

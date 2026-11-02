@@ -136,6 +136,13 @@ namespace SpaceMercs {
             Recharge = 0;
         }
 
+        public IItem Clone() {
+            Weapon wp = new Weapon(Type, Level);
+            if (Mod is not null) wp.SetModifier(Mod);
+            wp.Recharge = Recharge;
+            return wp;
+        }
+
         public void SetModifier(WeaponMod mod) {
             Mod = mod;
         }
