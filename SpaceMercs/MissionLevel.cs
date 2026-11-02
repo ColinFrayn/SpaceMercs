@@ -1497,36 +1497,23 @@ namespace SpaceMercs {
         private void CheckConnectivity() {
             // Make sure everything is connected up
 
-            // Set up a flood fill map to count the regions
-            int[,] FloodFill = new int[Width, Height];
-            for (int y = 0; y < Height; y++) {
-                for (int x = 0; x < Width; x++) FloodFill[x, y] = 0;
-            }
-
             // FloodFill the map and count sub-regions
+            int[,] FloodFill = new int[Width, Height];
+            Dictionary<int, List<Vector2i>> dRegions = [];
+            Stack<(int x, int y)> stack = new Stack<(int x, int y)>();
             int MaxRegion = 0;
             for (int y = 0; y < Height; y++) {
                 for (int x = 0; x < Width; x++) {
                     if (Map[x, y] == TileType.Floor && FloodFill[x, y] == 0) {
-                        FloodFillRegion(x, y, FloodFill, MaxRegion + 1);
                         MaxRegion++;
+                        List<Vector2i> cells = [];
+                        FloodFillRegion(x, y, FloodFill, MaxRegion, cells, stack);
+                        dRegions[MaxRegion] = cells;
                     }
                 }
             }
-            // Only one region, so we're done
-            if (MaxRegion == 1) return;
-
-            // We had multiple regions, so we need to connect them up.
-            // Start by getting lists of cells in each region
-            Dictionary<int, List<Vector2i>> dRegions = new Dictionary<int, List<Vector2i>>();
-            for (int y = 0; y < Height; y++) {
-                for (int x = 0; x < Width; x++) {
-                    if (FloodFill[x, y] > 0) {
-                        if (!dRegions.ContainsKey(FloodFill[x, y])) dRegions.Add(FloodFill[x, y], new List<Vector2i>());
-                        dRegions[FloodFill[x, y]].Add(new Vector2i(x, y));
-                    }
-                }
-            }
+            // Zero or one region, so we're done
+            if (MaxRegion <= 1) return;
 
             // Loop through all regions > 1 and make sure they're connected to region 1
             for (int region = 2; region <= MaxRegion; region++) {
@@ -1567,19 +1554,25 @@ namespace SpaceMercs {
                 if (b1.HasValue && b2.HasValue) JoinCells(b1.Value, b2.Value, FloodFill, dRegions);
             }
         }
-        private void FloodFillRegion(int startX, int startY, int[,] FloodFill, int region) {
-            HashSet<(int px, int py)> queue = new();
-            // Flood fill a connected region
-            queue.Add((startX, startY));
-            while (queue.Count > 0) {
-                (int x, int y) = queue.First();
-                queue.Remove((x, y));
-                FloodFill[x, y] = region;
-                if (x > 0 && Map[x - 1, y] == TileType.Floor && FloodFill[x - 1, y] == 0) queue.Add((x - 1, y));
-                if (x < Width - 1 && Map[x + 1, y] == TileType.Floor && FloodFill[x + 1, y] == 0) queue.Add((x + 1, y));
-                if (y > 0 && Map[x, y - 1] == TileType.Floor && FloodFill[x, y - 1] == 0) queue.Add((x, y - 1));
-                if (y < Height - 1 && Map[x, y + 1] == TileType.Floor && FloodFill[x, y + 1] == 0) queue.Add((x, y + 1));
-            } 
+        private void FloodFillRegion(int startX, int startY, int[,] floodFill, int region, List<Vector2i> cells, Stack<(int x, int y)> stack) {
+            stack.Clear();
+            floodFill[startX, startY] = region;
+            cells.Add(new Vector2i(startX, startY));
+            stack.Push((startX, startY));
+            while (stack.Count > 0) {
+                (int x, int y) = stack.Pop();
+                TryPushFloodFillNeighbour(x - 1, y, floodFill, region, cells, stack);
+                TryPushFloodFillNeighbour(x + 1, y, floodFill, region, cells, stack);
+                TryPushFloodFillNeighbour(x, y - 1, floodFill, region, cells, stack);
+                TryPushFloodFillNeighbour(x, y + 1, floodFill, region, cells, stack);
+            }
+        }
+        private void TryPushFloodFillNeighbour(int x, int y, int[,] floodFill, int region, List<Vector2i> cells, Stack<(int x, int y)> stack) {
+            if (x < 0 || y < 0 || x >= Width || y >= Height) return;
+            if (Map[x, y] != TileType.Floor || floodFill[x, y] != 0) return;
+            floodFill[x, y] = region;
+            cells.Add(new Vector2i(x, y));
+            stack.Push((x, y));
         }
         private void JoinCells(Vector2i b1, Vector2i b2, int[,] FloodFill, Dictionary<int, List<Vector2i>> dRegions) {
             // Join two cells and therefore join the relevant regions containing them
@@ -2120,6 +2113,14 @@ namespace SpaceMercs {
         }
 
         // Utility functions
+        // ignoreEntities skips other creatures/soldiers (e.g. defend waves pushing to the objective)
+        // but resource nodes are static blockers and must still be pathed around.
+        private bool BlocksPath(IEntity mover, int x, int y, bool ignoreEntities) {
+            IEntity? occupant = EntityMap[x, y];
+            if (occupant is null || occupant == mover) return false;
+            if (occupant is ResourceNode) return true;
+            return !ignoreEntities;
+        }
         public static bool IsObstruction(TileType t) {
             if (t == TileType.DoorHorizontal || t == TileType.DoorVertical || t == TileType.Wall) return true;
             if (t == TileType.SecretDoorHorizontal || t == TileType.SecretDoorVertical) return true;
@@ -2432,7 +2433,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X - 1, pt.Y + i]) || (!ignoreEntities && EntityMap[pt.X - 1, pt.Y + i] != null && EntityMap[pt.X - 1, pt.Y + i] != en)) {
+                        if (IsObstruction(Map[pt.X - 1, pt.Y + i]) || BlocksPath(en, pt.X - 1, pt.Y + i, ignoreEntities)) {
                             if (en.CanOpenDoors && Map[pt.X - 1, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2450,7 +2451,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + en.Size, pt.Y + i]) || (!ignoreEntities && EntityMap[pt.X + en.Size, pt.Y + i] != null && EntityMap[pt.X + en.Size, pt.Y + i] != en)) {
+                        if (IsObstruction(Map[pt.X + en.Size, pt.Y + i]) || BlocksPath(en, pt.X + en.Size, pt.Y + i, ignoreEntities)) {
                             if (en.CanOpenDoors && Map[pt.X + en.Size, pt.Y + i] == TileType.DoorVertical) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2467,7 +2468,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + i, pt.Y - 1]) || (!ignoreEntities && EntityMap[pt.X + i, pt.Y - 1] != null && EntityMap[pt.X + 1, pt.Y - 1] != en)) {
+                        if (IsObstruction(Map[pt.X + i, pt.Y - 1]) || BlocksPath(en, pt.X + i, pt.Y - 1, ignoreEntities)) {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y - 1] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }
@@ -2484,7 +2485,7 @@ namespace SpaceMercs {
                     bool bOK = true;
                     int extra = 0;
                     for (int i = 0; i < en.Size; i++) {
-                        if (IsObstruction(Map[pt.X + i, pt.Y + en.Size]) || (!ignoreEntities && EntityMap[pt.X + i, pt.Y + en.Size] != null && EntityMap[pt.X + 1, pt.Y + en.Size] != en)) {
+                        if (IsObstruction(Map[pt.X + i, pt.Y + en.Size]) || BlocksPath(en, pt.X + i, pt.Y + en.Size, ignoreEntities)) {
                             if (en.CanOpenDoors && Map[pt.X + i, pt.Y + en.Size] == TileType.DoorHorizontal) extra = 1;
                             else { bOK = false; break; }
                         }
