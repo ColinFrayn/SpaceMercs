@@ -51,7 +51,7 @@
 
             // Attempt to upgrade the item
             Upgraded = true;
-            PlayerTeam.Cash -= UpgradeCost;
+            if (!PlayerTeam.TrySpend(UpgradeCost)) return;
             SoundEffects.PlaySound("CashRegister");
             Random rand = new Random();
             double r = rand.NextDouble() * 100d;

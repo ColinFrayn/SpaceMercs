@@ -393,12 +393,10 @@ namespace SpaceMercs.Dialogs {
             int iScroll = dgMerchant.SelectedRows[0].Index - dgMerchant.FirstDisplayedScrollingRowIndex;
             if (dgMerchant.SelectedRows[0].Tag is not IItem eq) return;
             double Cost = _colony.CostModifier * eq.Cost * PriceMod;
-            if (Cost > _playerTeam.Cash) {
+            if (!_playerTeam.TrySpend(Cost)) {
                 MessageBox.Show("You cannot afford to buy that item!");
                 return;
             }
-            // Buy it
-            _playerTeam.Cash -= Cost;
             _playerTeam.AddItem(eq, 1);
             SoundEffects.PlaySound("CashRegister");
             _colony.RemoveItem(eq);
@@ -429,11 +427,10 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
 
-            // Recruit the soldier
+            if (!_playerTeam.TrySpend(Cost)) return;
             MessageBox.Show("You have hired the soldier " + merc.Name);
             _colony.RemoveMercenary(merc);
             _playerTeam.AddSoldier(merc);
-            _playerTeam.Cash -= Cost;
             SoundEffects.PlaySound("CashRegister");
             SetupMercenariesTab();
         }
@@ -459,7 +456,7 @@ namespace SpaceMercs.Dialogs {
             }
 
             double Cost = Math.Round((st.Cost * PriceMod) - SalvageValue, 2);
-            if (Cost > _playerTeam.Cash) {
+            if (Cost > 0 && Cost > _playerTeam.Cash) {
                 MessageBox.Show("You cannot afford to upgrade to that model!");
                 return;
             }
@@ -471,9 +468,9 @@ namespace SpaceMercs.Dialogs {
             if (MessageBox.Show("Really upgrade your ship to a " + st.Name + "? Total Cost = " + Cost + " credits (includes " + SalvageValue + " credits salvage value from existing ship)", "Really Buy Ship?", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
             // Do the upgrade
+            if (Cost > 0 && !_playerTeam.TrySpend(Cost)) return;
             _playerTeam.SetTeamShip(st);
-
-            _playerTeam.Cash -= Cost;
+            if (Cost < 0) _playerTeam.AddCash(-Cost);
             SoundEffects.PlaySound("CashRegister");
             SetupShipsTab();
         }
@@ -609,7 +606,7 @@ namespace SpaceMercs.Dialogs {
                     s.DestroyItem(eq, bAll ? tp.Count : 1);
                 }
             }
-            _playerTeam.Cash += TotalValue;
+            _playerTeam.AddCash(TotalValue);
             SoundEffects.PlaySound("CashRegister");
             if (bAll) SetupFoundryTab(null);
             else SetupFoundryTab(tpSelected);
@@ -847,9 +844,9 @@ namespace SpaceMercs.Dialogs {
 
         // Diplomacy screen if Homeworld:
         private void DonateCash(int amount) {
+            if (!_playerTeam.TrySpend(amount)) return;
             int exp = (int)((double)amount * Const.CashRelationsFactor);
             _playerTeam.ImproveRelations(_colony.Owner, exp, (string s, Action? a) => MessageBox.Show(s));
-            _playerTeam.Cash -= amount;
             SetupDiplomacyTab();
         }
         private void bt100_Click(object sender, EventArgs e) {
@@ -963,9 +960,9 @@ namespace SpaceMercs.Dialogs {
                 return;
             }
             if (MessageBox.Show($"Really forget one point in this skill?\nCost = {cost}cr", "Forget skill?", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (!_playerTeam.TrySpend(s.TrainingCost)) return;
             s.AddUtilitySkill(sk, -1);
             s.AddUtilitySkill(Soldier.UtilitySkill.Unspent, 1);
-            _playerTeam.Cash -= s.TrainingCost;
             s.IncreaseTrainingCost();
             SetupTrainingDetails(s);
         }

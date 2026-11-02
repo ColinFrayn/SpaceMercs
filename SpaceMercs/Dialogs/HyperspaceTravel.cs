@@ -36,8 +36,7 @@ namespace SpaceMercs.Dialogs {
         private void StartTravel(HyperGate targetGate) {
             double distLy = AstronomicalObject.CalculateDistance(_hGate, targetGate) / Const.LightYear;
             double cost = CalculateCost(distLy);
-            if (cost > _playerTeam.Cash) return;
-            _playerTeam.Cash -= cost;
+            if (!_playerTeam.TrySpend(cost)) return;
             pbTravel.Value = 0;
             pbTravel.Visible = true;
             btHyperspaceTravel.Text = "In Hyperspace...";

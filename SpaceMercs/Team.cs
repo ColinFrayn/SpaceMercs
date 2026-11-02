@@ -10,10 +10,21 @@ namespace SpaceMercs {
         public AstronomicalObject CurrentPosition { get; private set; }
         public HabitableAO? CurrentPositionHAO {  get { if (CurrentPosition is HabitableAO hao) return hao; return null; } }
         private readonly List<Soldier> _Soldiers = [];
-        public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }
+        public IReadOnlyList<Soldier> SoldiersRO => _Soldiers;
         public int SoldierCount { get { return _Soldiers.Count; } }
         public Ship PlayerShip { get; private set; }
-        public double Cash { get; set; }
+        public double Cash { get; private set; }
+
+        public void AddCash(double amount) {
+            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount), "Cannot add a negative amount");
+            Cash += amount;
+        }
+        public bool TrySpend(double amount) {
+            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount), "Cannot spend a negative amount");
+            if (amount > Cash) return false;
+            Cash -= amount;
+            return true;
+        }
         private readonly Dictionary<Race, int> Relations = [];  // This is the experience level
         private readonly Dictionary<IItem, int> _inventory = [];
         public IReadOnlyDictionary<IItem, int> Inventory => _inventory;

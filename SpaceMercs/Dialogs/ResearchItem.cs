@@ -27,8 +27,7 @@ namespace SpaceMercs.Dialogs {
         private void StartResearch(IResearchable item) {
             if (item?.Requirements is null) return;
             double cost = item.Requirements.CashCost;
-            if (cost > _playerTeam.Cash) return;
-            _playerTeam.Cash -= cost;
+            if (!_playerTeam.TrySpend(cost)) return;
 
             foreach ((MaterialType mat, int count) in item.Requirements.RequiredMaterials) {
                 _playerTeam.RemoveMaterial(mat, count);

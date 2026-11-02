@@ -246,7 +246,7 @@ namespace SpaceMercs {
                 if (fMissionElapsed >= PlayerTeam.CurrentMission.TimeCost) {
                     bPause = true;
                     dtStart = dtStart.AddSeconds(PlayerTeam.CurrentMission.TimeCost);
-                    PlayerTeam.Cash += PlayerTeam.CurrentMission.Reward;
+                    PlayerTeam.AddCash(PlayerTeam.CurrentMission.Reward);
                     ParentView.msgBox.PopupMessage("Repairs completed. You receive a reward of " + PlayerTeam.CurrentMission.Reward + " credits.");
                     PlayerTeam.CeaseMission();
                     bPause = false;
@@ -301,7 +301,7 @@ namespace SpaceMercs {
                 if (ra is not null && !ra.Known) {
                     ParentView.msgBox.PopupMessage($"You pick apart the wreckage of the alien ship and identify individuals of a previously unknown alien race!\nBased on their appearance and technology, you name them {ra.Name}\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr!");
                     ra.SetAsKnownBy(PlayerTeam);
-                    PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                    PlayerTeam.AddCash(Const.DiscoverAliensCashBonus);
                     PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, ParentView.msgBox.PopupMessage);
 
                 }
@@ -381,7 +381,7 @@ namespace SpaceMercs {
             }
         }
         private void AcceptSurrender(double dReward) {
-            PlayerTeam.Cash += dReward;
+            PlayerTeam.AddCash(dReward);
             PlayerTeam.CeaseMission();
             Race? ra = PlayerTeam.CurrentMission?.RacialOpponent;
             string msg = "The enemy captain hands over the bounty and flees the battle scene";
@@ -389,7 +389,7 @@ namespace SpaceMercs {
                 msg += $"\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr for this discovery!";
                 ParentView.msgBox.PopupMessage(msg);
                 ra.SetAsKnownBy(PlayerTeam);
-                PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                PlayerTeam.AddCash(Const.DiscoverAliensCashBonus);
                 PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, ParentView.msgBox.PopupMessage);
             }
             else ParentView.msgBox.PopupMessage(msg);

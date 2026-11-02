@@ -83,7 +83,7 @@
 
             // Attempt to modify the item
             Modified = true;
-            PlayerTeam.Cash -= ModifyCost;
+            if (!PlayerTeam.TrySpend(ModifyCost)) return;
             SoundEffects.PlaySound("CashRegister");
             Random rand = new Random();
             double r = rand.NextDouble();

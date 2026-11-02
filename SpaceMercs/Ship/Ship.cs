@@ -582,7 +582,12 @@ namespace SpaceMercs {
         }
         private void ContinueBuildRoom(double cost, bool bReplace, int iRoomID, ShipEquipment se) {
             if (Owner is null) return;
-            Owner.Cash -= cost;
+            if (cost > 0) {
+                if (!Owner.TrySpend(cost)) return;
+            }
+            else if (cost < 0) {
+                Owner.AddCash(-cost);
+            }
             if (bReplace) {
                 Equipment[iRoomID] = new Tuple<ShipEquipment, bool>(se, true);
             }
@@ -599,7 +604,7 @@ namespace SpaceMercs {
         }
         private void ContinueUpgradeHull(double cost, ShipArmour sa) {
             if (Owner is null) return;
-            Owner.Cash -= cost;
+            if (!Owner.TrySpend(cost)) return;
             ArmourType = sa;
         }
         public void ActivateRoom(int iRoomID) {
@@ -676,7 +681,7 @@ namespace SpaceMercs {
         }
         private void ContinueSalvageRoom(double rebate, int iRoomID) {
             if (Owner is null) return;
-            Owner.Cash += rebate;
+            Owner.AddCash(rebate);
             Equipment.Remove(iRoomID);
         }
         public void SalvageHull(ShowMessageDecisionDelegate showMessage) {
@@ -688,7 +693,7 @@ namespace SpaceMercs {
         }
         private void ContinueSalvageArmour(double rebate) {
             if (Owner is null) return;
-            Owner.Cash += rebate;
+            Owner.AddCash(rebate);
             ArmourType = null;
         }
         public double CalculateTravelTime(AstronomicalObject aoFrom, AstronomicalObject aoTo) {

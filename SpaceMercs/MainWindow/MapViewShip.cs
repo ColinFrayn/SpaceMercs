@@ -629,7 +629,7 @@ namespace SpaceMercs.MainWindow {
         }
         private void RepairShip_Continue(double c) {
             double cost = (double)c;
-            PlayerTeam.Cash -= cost;
+            if (!PlayerTeam.TrySpend(cost)) return;
             PlayerTeam.PlayerShip.RepairHull();
             gbRepair.Deactivate();
         }

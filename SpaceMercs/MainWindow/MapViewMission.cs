@@ -121,7 +121,7 @@ namespace SpaceMercs.MainWindow {
             if (ra is not null && !ra.Known) {
                 msgBox.PopupMessage($"Your opponents on this mission are from a previously unknown alien race!\nThey claim the name of their species is {ra.Name}\nThe {StaticData.HumanRace.Name} race rewards you with {Const.DiscoverAliensCashBonus}cr!");
                 ra.SetAsKnownBy(PlayerTeam);
-                PlayerTeam.Cash += Const.DiscoverAliensCashBonus;
+                PlayerTeam.AddCash(Const.DiscoverAliensCashBonus);
                 PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.DiscoverAliensRelationsBonus, msgBox.PopupMessage);
             }            
 
@@ -157,11 +157,11 @@ namespace SpaceMercs.MainWindow {
                     double dBounty = ThisMission.ShipTarget.EstimatedBountyValue * (0.5 + rnd.NextDouble());
                     if (ThisMission.Type == Mission.MissionType.RepelBoarders) {
                         msgBox.PopupMessage("You have repelled the boarders.\nYou search the attacking vessel and retrieve " + dBounty.ToString("N2") + " credits in bounty");
-                        PlayerTeam.Cash += dBounty;
+                        PlayerTeam.AddCash(dBounty);
                     }
                     else if (ThisMission.Type == Mission.MissionType.BoardingParty) {
                         msgBox.PopupMessage("You successfully neutralise the enemy crew\nYou receive " + dBounty.ToString("N2") + " credits in bounty");
-                        PlayerTeam.Cash += dBounty;
+                        PlayerTeam.AddCash(dBounty);
                     }
                     else throw new NotImplementedException();
                 }
@@ -190,7 +190,7 @@ namespace SpaceMercs.MainWindow {
                         PlayerTeam.AddItem(artifact);
                     }
                     else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
-                    PlayerTeam.Cash += ThisMission.Reward;
+                    PlayerTeam.AddCash(ThisMission.Reward);
                     foreach (Soldier s in ThisMission.Soldiers) {
                         s.AddExperience(ThisMission.Experience);
                     }

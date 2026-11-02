@@ -48,6 +48,36 @@ namespace UnitTests {
             Assert.AreEqual(0, emptyTeam.ActiveSoldiers);
         }
 
+        [Test]
+        public void AddCash_IncreasesBalance() {
+            Team team = TestUtils.TestTeam();
+            double before = team.Cash;
+            team.AddCash(12.5);
+            Assert.AreEqual(before + 12.5, team.Cash, 0.0001);
+        }
+
+        [Test]
+        public void AddCash_Negative_Throws() {
+            Team team = TestUtils.TestTeam();
+            Assert.Throws<ArgumentOutOfRangeException>(() => team.AddCash(-1));
+        }
+
+        [Test]
+        public void TrySpend_Sufficient_DeductsAndReturnsTrue() {
+            Team team = TestUtils.TestTeam();
+            double before = team.Cash;
+            Assert.True(team.TrySpend(10));
+            Assert.AreEqual(before - 10, team.Cash, 0.0001);
+        }
+
+        [Test]
+        public void TrySpend_Insufficient_IsNoOp() {
+            Team team = TestUtils.TestTeam();
+            double before = team.Cash;
+            Assert.False(team.TrySpend(before + 1));
+            Assert.AreEqual(before, team.Cash);
+        }
+
         #endregion
 
         #region Inventory

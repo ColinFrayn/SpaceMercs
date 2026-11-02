@@ -85,7 +85,7 @@
                 if (!ItemIsIncluded(it, maxLevel)) continue;
                 _playerTeam.RemoveItemFromStores(it, quantity);
             }
-            _playerTeam.Cash += proceeds;
+            _playerTeam.AddCash(proceeds);
             SoundEffects.PlaySound("CashRegister");
             count = 0;
             proceeds = 0d;
