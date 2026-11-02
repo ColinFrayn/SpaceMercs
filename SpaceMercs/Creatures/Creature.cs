@@ -21,7 +21,7 @@ namespace SpaceMercs {
         public double MaxShields { get { return Type.ShieldsBase * (1.0 + Const.CreatureLevelShieldsScale * (Level - 1)); } }
         public double Attack { get { return Type.AttackBase * (1.0 + Const.CreatureLevelAttackScale * (Level - 1)) + (Const.CreatureLevelAttackStep * (Level - 1)) + StatBonuses(StatType.Attack); } }
         public double Defence { get { return Type.DefenceBase * (1.0 + Const.CreatureLevelDefenceScale * (Level - 1)) + (Const.CreatureLevelDefenceStep * (Level - 1)) + StatBonuses(StatType.Defence); } }
-        public int TravelRange { get { return (int)Stamina; } }
+        public int TravelRange { get { return (int)(Stamina / MovementCost); } }
         public Weapon? EquippedWeapon { get; private set; }
         public double AttackRange { get { return (EquippedWeapon == null) ? 1.0 : EquippedWeapon.Range; } }
         public string Name { get { if (OverrideRace != null) return OverrideRace.Name + " " + Type.Name; else return Type.Name; } }
@@ -36,13 +36,21 @@ namespace SpaceMercs {
         public IEnumerable<Effect> Effects { get { return _Effects.AsReadOnly(); } }
         private bool[,] Visible;
         public bool HasMoved { get; private set; } = false;
+        public bool CanAttack {
+            get {
+                if (Stamina < AttackCost) return false;
+                if (HasMoved && EquippedWeapon?.Type?.Stable == true) return false;
+                if (EquippedWeapon != null && EquippedWeapon.Recharge > 0) return false;
+                return true;
+            }
+        }
 
-        public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x > Visible.GetLength(0) || y > Visible.GetLength(1)) return false; return Visible[x, y]; }
+        public bool CanSee(int x, int y) { if (x < 0 || y < 0 || x >= Visible.GetLength(0) || y >= Visible.GetLength(1)) return false; return Visible[x, y]; }
         public bool CanSee(IEntity en) {
             if (en == null) return false;
             for (int yy = en.Y; yy < en.Y + en.Size; yy++) {
                 for (int xx = en.X; xx < en.X + en.Size; xx++) {
-                    if (Visible[xx, yy]) return true;
+                    if (CanSee(xx, yy)) return true;
                 }
             }
             return false;
@@ -138,6 +146,7 @@ namespace SpaceMercs {
             Facing = rand.Next(360);
             CurrentTarget = null;
             Shred = 0d;
+            EquippedWeapon?.Reset();
         }
         public bool CanOpenDoors { get { return Type.Interact; } }
         public double RangeTo(IEntity en) {
@@ -148,9 +157,9 @@ namespace SpaceMercs {
             return Math.Sqrt((dx * dx) + (dy * dy));
         }
         public double RangeTo(int tx, int ty) {
-            int dx = (tx > X) ? tx - X : X - tx;
+            int dx = (tx > X) ? tx - (X + Size - 1) : X - tx;
             if (dx < 0) dx = 0;
-            int dy = (ty > Y) ? ty - Y : Y - ty;
+            int dy = (ty > Y) ? ty - (Y + Size - 1) : Y - ty;
             if (dy < 0) dy = 0;
             return Math.Sqrt((dx * dx) + (dy * dy));
         }
@@ -206,8 +215,9 @@ namespace SpaceMercs {
             foreach (WeaponType.DamageType type in damInternal.Keys) {
                 double dam = damInternal[type];
 
-                // Armour reduces damage
-                TotalDam += dam * GetDamageReductionByDamageType(type);
+                // Armour reduces damage but doesn't reduce healing
+                if (dam > 0.0) TotalDam += dam * GetDamageReductionByDamageType(type);
+                else TotalDam += dam;
             }
 
             // Sometimes we heal enemies if they have >100% resistance. Make sure we handle that properly.
@@ -246,7 +256,7 @@ namespace SpaceMercs {
             // Generate other dropped items
             if (OverrideRace != null) {
                 double dnum = rnd.NextDouble();
-                double lfrac = (double)(Level - Type.LevelMin) / (double)(Type.LevelMax - Type.LevelMin);
+                double lfrac = Type.LevelMax == Type.LevelMin ? 0d : (double)(Level - Type.LevelMin) / (double)(Type.LevelMax - Type.LevelMin);
                 dnum += rnd.NextDouble() * lfrac;
                 int num = (int)Math.Round(dnum);
                 for (int n = 0; n < num; n++) {
@@ -317,8 +327,16 @@ namespace SpaceMercs {
         public CreatureType Type { get; private set; }
         public Race? OverrideRace { get; private set; }  // If this is a humanoid then create a race-specific version (if the Type can be overridden)
         public IEntity? CurrentTarget { get; private set; }
-        private double MovementCost { get { return Type.MovementCost / SpeedModifier(); } }
+        private double MovementCost { 
+            get {
+                double sm = SpeedModifier();
+                if (sm <= 0d) return 99999d;
+                return Type.MovementCost / sm;
+            } 
+        }
         public double AttackCost { get { if (EquippedWeapon == null) return Const.MeleeCost; return EquippedWeapon.StaminaCost; } }
+        private bool HasStableWeapon => EquippedWeapon?.Type?.Stable == true;
+        private bool CanShootNow(IEntity en) => CanAttack && CanSee(en) && RangeTo(en) <= AttackRange;
         private readonly MissionLevel? CurrentLevel;
         private readonly Random rnd = new Random();
         public int Experience {
@@ -408,7 +426,7 @@ namespace SpaceMercs {
             string strWeapon = xml.SelectNodeText("Weapon");
             if (!string.IsNullOrEmpty(strWeapon)) {
                 WeaponType tp = StaticData.GetWeaponTypeByName(strWeapon) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
-                EquippedWeapon = new Weapon(tp, 0) ?? throw new Exception("Failed to load creature " + Name + " : Unknown weapon type " + strWeapon);
+                EquippedWeapon = new Weapon(tp, 0);
             }
             if (EquippedWeapon is null) {
                 if (Type.Weapons.Count == 1)  EquippedWeapon = Type.GenerateRandomWeapon(Level);
@@ -491,9 +509,11 @@ namespace SpaceMercs {
             SetFacing(d);
             int oldx = X, oldy = Y;
             if (d == Utils.Direction.West && X > 0) {
-                if (CurrentLevel.Map[X - 1, Y] == MissionLevel.TileType.DoorVertical && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X - 1, Y);
-                    if (CurrentLevel.Visible[X - 1, Y]) playSound("OpenDoor");
+                for (int i = 0; i < Size; i++) {
+                    if (CanOpenDoors && CurrentLevel.Map[X - 1, Y + i] == MissionLevel.TileType.DoorVertical) {
+                        CurrentLevel.OpenDoor(X - 1, Y + i);
+                        if (CurrentLevel.Visible[X - 1, Y + i]) playSound("OpenDoor");
+                    }
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X - 1, Y + i]) || CurrentLevel.GetEntityAt(X - 1, Y + i) != null) return;
@@ -501,9 +521,11 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X - 1, Y));
             }
             if (d == Utils.Direction.East && X < CurrentLevel.Width - Size) {
-                if (CurrentLevel.Map[X + Size, Y] == MissionLevel.TileType.DoorVertical && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X + Size, Y);
-                    if (CurrentLevel.Visible[X + Size, Y]) playSound("OpenDoor");
+                for (int i = 0; i < Size; i++) {
+                    if (CanOpenDoors && CurrentLevel.Map[X + Size, Y + i] == MissionLevel.TileType.DoorVertical) {
+                        CurrentLevel.OpenDoor(X + Size, Y + i);
+                        if (CurrentLevel.Visible[X + Size, Y + i]) playSound("OpenDoor");
+                    }
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X + Size, Y + i]) || CurrentLevel.GetEntityAt(X + Size, Y + i) != null) return;
@@ -511,9 +533,11 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X + 1, Y));
             }
             if (d == Utils.Direction.North && Y < CurrentLevel.Height - Size) {
-                if (CurrentLevel.Map[X, Y + Size] == MissionLevel.TileType.DoorHorizontal && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X, Y + Size);
-                    if (CurrentLevel.Visible[X, Y + Size]) playSound("OpenDoor");
+                for (int i = 0; i < Size; i++) {
+                    if (CanOpenDoors && CurrentLevel.Map[X + i, Y + Size] == MissionLevel.TileType.DoorHorizontal) {
+                        CurrentLevel.OpenDoor(X + i, Y + Size);
+                        if (CurrentLevel.Visible[X + i, Y + Size]) playSound("OpenDoor");
+                    }
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X + i, Y + Size]) || CurrentLevel.GetEntityAt(X + i, Y + Size) != null) return;
@@ -521,9 +545,11 @@ namespace SpaceMercs {
                 CurrentLevel.MoveEntityTo(this, new Point(X, Y + 1));
             }
             if (d == Utils.Direction.South && Y > 0) {
-                if (CurrentLevel.Map[X, Y - 1] == MissionLevel.TileType.DoorHorizontal && CanOpenDoors) {
-                    CurrentLevel.OpenDoor(X, Y - 1);
-                    if (CurrentLevel.Visible[X, Y - 1]) playSound("OpenDoor");
+                for (int i = 0; i < Size; i++) {
+                    if (CanOpenDoors && CurrentLevel.Map[X + i, Y - 1] == MissionLevel.TileType.DoorHorizontal) {
+                        CurrentLevel.OpenDoor(X + i, Y - 1);
+                        if (CurrentLevel.Visible[X + i, Y - 1]) playSound("OpenDoor");
+                    }
                 }
                 for (int i = 0; i < Size; i++) {
                     if (MissionLevel.IsObstruction(CurrentLevel.Map[X + i, Y - 1]) || CurrentLevel.GetEntityAt(X + i, Y - 1) != null) return;
@@ -546,9 +572,13 @@ namespace SpaceMercs {
         }
         public void AttackEntity(IEntity en, VisualEffect.EffectFactory effectFactory, PlaySoundDelegate playSound) {
             if (en == null) return;
+            if (!CanSee(en)) return;
             double range = RangeTo(en);
             if (range > AttackRange) return;
+            if (!CanAttack) return;
             Stamina -= AttackCost;
+            HasMoved = true;
+            EquippedWeapon?.SetHasFired();
 
             // Rotate creature
             float dx = X - en.X;
@@ -560,7 +590,7 @@ namespace SpaceMercs {
             int nhits = 0;
             int nshots = EquippedWeapon?.Type?.Shots ?? 1;
             double recoil = EquippedWeapon?.Recoil ?? 0d;
-            List<ShotResult> results = new List<ShotResult>();
+            List<ShotResult> results = [];
             int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
             for (int n = 0; n < nshots; n++) {
                 if (r > 0d) {
@@ -661,16 +691,22 @@ namespace SpaceMercs {
             if (Health * 4.0 > MaxHealth) return false;
             if (CurrentTarget == null) return false;
             if (Health >= CurrentTarget.Health) return false;
-            if (Level != CurrentTarget.Level) return false;
+            if (Level > CurrentTarget.Level + 2) return false;
             if (Type.IsBoss) return false;
-            return rnd.NextDouble() * Health / MaxHealth < 0.1;
+            return (rnd.NextDouble() + (Level - CurrentTarget.Level) / 20d) * Health / MaxHealth < 0.1;
         }
         private bool AIStep_HasTarget(VisualEffect.EffectFactory fact, Action<IEntity> postMoveCheck, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
             if (CurrentTarget is null) return false;
             bool isDefendLevel = CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend;
             bool atObjective = isDefendLevel && CurrentLevel.CheckIfLocationIsEntranceTile(Location);
+
+            // Stable weapons cannot fire after moving, so take a legal standing shot and stop.
+            if (HasStableWeapon && CanShootNow(CurrentTarget)) {
+                AttackCurrentTarget(fact, playSound, centreView, fastAI);
+                return true;
+            }
+
             // Can we even see the target?
-            double r = RangeTo(CurrentTarget);
             if (!CanSee(CurrentTarget)) {
                 List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 20, false);
                 // No way of getting close enough to see target so remove the target
@@ -687,15 +723,15 @@ namespace SpaceMercs {
                 postMoveCheck(this);
                 if (CurrentLevel.EntityIsVisible(this)) Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
             }
+            double r = RangeTo(CurrentTarget);
             double atr = AttackRange;
             // -- Can we attack? If not then maybe move a bit closer for a better shot?
-            // We are within range:
-            if (r <= atr) {
-                // We can't see the target, so maybe attempt to find them
-                // We can see the target, but can't attack them because we don't have enough stamina
-                if (Stamina < AttackCost) {
-                    // Optionally move closer?
-                    if (r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3) {
+            // We are within range and can see them:
+            if (r <= atr && CanSee(CurrentTarget)) {
+                // Can't attack: no stamina, already moved with a stable weapon, or weapon is recharging
+                if (!CanAttack) {
+                    // Optionally move closer if the only problem is stamina
+                    if (Stamina < AttackCost && r > 5.0 && Stamina >= MovementCost && r > atr * 0.8 && rnd.NextDouble() < 0.3) {
                         List<Point>? path = CurrentLevel.ShortestPath(this, Location, CurrentTarget.Location, 5, false, (int)Math.Floor(atr));
                         if (path is null || path.Count == 0) {
                             return true; // Could be ok - path to target is blocked but can still attack from range. Or else target is adjacent.
@@ -706,12 +742,10 @@ namespace SpaceMercs {
                     }
                     return true;
                 }
-                // We can see the target, and have enough stamina to attack, so attack.
+                // We can see the target and are allowed to attack, so attack.
                 else {
-                    centreView(this);
-                    Thread.Sleep(fastAI ? 150 : 200);
-                    AttackEntity(CurrentTarget, fact, playSound);
-                    Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
+                    AttackCurrentTarget(fact, playSound, centreView, fastAI);
+                    if (HasStableWeapon) return true;
                 }
             }
             // We are not within range of the target
@@ -787,20 +821,13 @@ namespace SpaceMercs {
             for (int n=0; n<50; n++) {
                 int range = 3 + (n/15);
                 // Random point nearby
-                Point? hidingSpot;
-                int attempts = 0;
-                List<Point>? path = null;
-                do {
-                    hidingSpot = CurrentLevel!.GetPointNearby(this, range);
-                    if (hidingSpot.HasValue) {
-                        path = CurrentLevel.ShortestPath(this, Location, hidingSpot.Value, 30, false, mindist: 0, preciseTarget: true);
-                        if (path is null || path.Count == 0 || path.Count * MovementCost > Stamina) hidingSpot = null;
-                    }
-                } while (hidingSpot == null && ++attempts < 10);
-                if (!hidingSpot.HasValue) return null; // Too hard to get a nearby location
+                Point? hidingSpot = CurrentLevel!.GetPointNearby(this, range);
+                if (!hidingSpot.HasValue) continue; // Too hard to get a nearby location within this range
+                List<Point>? path = CurrentLevel.ShortestPath(this, Location, hidingSpot.Value, 30, false, mindist: 0, preciseTarget: true);
+                if (path is null || path.Count == 0 || path.Count * MovementCost > Stamina) continue;
 
                 // Work out how good a hiding spot this is
-                double score = -path!.Count;
+                double score = -path.Count;
                 // Can any soldiers see this place?
                 foreach (Soldier s in CurrentLevel.Soldiers) {
                     if (s.CouldSeeEntityAtLocation(this, hidingSpot.Value)) {
@@ -817,11 +844,14 @@ namespace SpaceMercs {
         }
         private void SetBestTarget() {
             double bestscore = -10000.0;
+            bool preferStandingShot = HasStableWeapon && CanAttack;
             foreach (Soldier s in CurrentLevel!.Soldiers) {
                 if (CanSee(s)) {
-                    double score = 100.0 / RangeTo(s);
+                    double range = RangeTo(s);
+                    double score = 100.0 / range;
                     if (s == CurrentTarget) score += 15.0;
-                    if (AttackRange < this.RangeTo(s)) {
+                    if (preferStandingShot && range <= AttackRange) score += 100.0;
+                    if (AttackRange < range) {
                         List<Point>? path = CurrentLevel.ShortestPath(this, Location, s.Location, 50, false, (int)Math.Floor(AttackRange));
                         if (path is null) continue;
                         else score -= path.Count;
@@ -832,6 +862,12 @@ namespace SpaceMercs {
                     }
                 }
             }
+        }
+        private void AttackCurrentTarget(VisualEffect.EffectFactory fact, PlaySoundDelegate playSound, Action<IEntity> centreView, bool fastAI) {
+            centreView(this);
+            Thread.Sleep(fastAI ? 150 : 200);
+            AttackEntity(CurrentTarget!, fact, playSound);
+            Thread.Sleep(fastAI ? Const.FastAITickSpeed : Const.AITickSpeed);
         }
         private void MoveAwayFrom(IEntity en, PlaySoundDelegate playSound) {
             if (en == null) return;
@@ -863,19 +899,18 @@ namespace SpaceMercs {
                 if (Math.Abs(e.Damage) > 0.01) {
                     Dictionary<WeaponType.DamageType, double> AllDam = new Dictionary<WeaponType.DamageType, double> { { e.DamageType, e.Damage } };
                     double TotalDam = CalculateDamage(AllDam);
-                    fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    if (TotalDam > 0d) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                    else if (TotalDam < 0d) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
                     if (TotalDam > 0d && !bPlayedGrunt) {
                         playSound("Grunt");
                         bPlayedGrunt = true;
                     }
-                    Soldier? s = CurrentLevel?.GetSoldierByName(e.CausedBy);
-                    InflictDamage(AllDam, applyEffect, fact, s);
-                    if (TotalDam > 0d) s?.RegisterDamage(TotalDam);
+                    Soldier? soldierResponsibleForEffect = CurrentLevel?.GetSoldierByName(e.CausedBy);
+                    InflictDamage(AllDam, applyEffect, fact, soldierResponsibleForEffect);
+                    if (TotalDam > 0d) soldierResponsibleForEffect?.RegisterDamage(TotalDam);
                     if (Health <= 0d) {
                         // If this effect killed this creature, maybe register the kill and then stop here
-                        if (s is not null) {
-                            s.RegisterKill(this, showMessage);
-                        }
+                        soldierResponsibleForEffect?.RegisterKill(this, showMessage);
                         break; 
                     }
                 }
@@ -883,7 +918,9 @@ namespace SpaceMercs {
                 e.ReduceDuration(1);
             }
             _Effects.RemoveAll(e => e.Duration <= 0);
-            if (Health < 0.0) _Effects.Clear();
+            if (Health <= 0.0) _Effects.Clear();
+
+            EquippedWeapon?.EndOfTurn();
 
             // If this creature has arrived at the target location we're trying to defend, announce it.
             if (CurrentLevel!.ParentMission.Goal == Mission.MissionGoal.Defend) {
