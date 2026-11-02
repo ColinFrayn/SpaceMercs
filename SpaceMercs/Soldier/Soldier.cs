@@ -590,7 +590,7 @@ namespace SpaceMercs {
                 case StatType.Endurance: BaseEndurance += val; break;
                 default: throw new NotImplementedException("Attempting to increase non-primary stat : " + tp.ToString());
             }
-            PointsToSpend--;
+            PointsToSpend -= val;
             CalculateMaxStats();
         }
         public void RegisterKill(Creature cr, ShowMessageDelegate showMessage) {
@@ -672,7 +672,7 @@ namespace SpaceMercs {
             Experience = xml.SelectNodeInt("XP");
             Health = xml.SelectNodeDouble("Health", MaxHealth);
             Stamina = xml.SelectNodeDouble("Stamina", MaxStamina);
-            Shields = xml.SelectNodeDouble("Health", MaxHealth);
+            Shields = xml.SelectNodeDouble("Shields", MaxShields);
             Shred = xml.SelectNodeDouble("Shred", 0d);
             SoldierClass = xml.SelectNodeEnum<SoldierType>("Class", SoldierType.None);
 
@@ -815,11 +815,11 @@ namespace SpaceMercs {
                     if (Stats[n] < 5) Stats[n] = 5;
                 }
                 SoldierType soldierClass = Utils.GetClassFromStats(Stats, rand);
-                Race r = cl.Location.GetRandomRace(rand);
-                GenderType gt = r.GenerateRandomGender(rand);
-                string strName = r.GenerateRandomName(rand, gt);
+                Race mercRace = cl.Location.GetRandomRace(rand);
+                GenderType gt = mercRace.GenerateRandomGender(rand);
+                string strName = mercRace.GenerateRandomName(rand, gt);
 
-                s = new Soldier(strName, cl.Owner, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next(), soldierClass);
+                s = new Soldier(strName, mercRace, Stats[0], Stats[1], Stats[2], Stats[3], Stats[4], gt, iLevel, rand.Next(), soldierClass);
             } while (!s.GenerateRandomItems()); // May fail if no suitable weapon exists. If so then restart.
 
             int thisExp = ExperienceRequiredToReachLevel(s.Level);
@@ -1047,7 +1047,8 @@ namespace SpaceMercs {
         }
         public void RemoveItemByType(ItemType it, int Count = 1) {
             int tally = 0;
-            foreach (IEquippable eq in Inventory.Where(e => e is IEquippable)) {
+            List<IEquippable> allEquippableItems = Inventory.OfType<IEquippable>().ToList();
+            foreach (IEquippable eq in allEquippableItems) {
                 if (eq.BaseType == it) {
                     DestroyItem(eq);
                     tally++;
@@ -1158,16 +1159,15 @@ namespace SpaceMercs {
             }
 
             // Not a low level soldier, so pick more suitable armour choices for the specialisation that they have
-            int r = RandomNumberGenerator.GetInt32(100);
             Func<ArmourType, double>? selector = null;
-            switch (SoldierClass) {
-                case SoldierType.Heavy: selector = AssessChestArmour_Heavy; break;
-                case SoldierType.Assassin: selector = AssessChestArmour_Assassin; break; // Light, stealthy melee
-                case SoldierType.Brute: selector = AssessChestArmour_Brute; break; // Heavy melee
-                case SoldierType.Sniper: selector = AssessChestArmour_Sniper; break;
-                case SoldierType.Assault: selector = AssessChestArmour_Assault; break;
-                default: selector = AssessChestArmour_Skirmisher; break;
-            }
+            selector = SoldierClass switch {
+                SoldierType.Heavy => AssessChestArmour_Heavy,
+                SoldierType.Assassin => AssessChestArmour_Assassin,
+                SoldierType.Brute => AssessChestArmour_Brute,
+                SoldierType.Sniper => AssessChestArmour_Sniper,
+                SoldierType.Assault => AssessChestArmour_Assault,
+                _ => AssessChestArmour_Skirmisher,
+            };
 
             // Get base armour for this location, suitable for the level of this Soldier
             ArmourType? choice = null;
@@ -1202,9 +1202,10 @@ namespace SpaceMercs {
                     if (m.ArmourMod < 1.0) continue;
                 }
                 // Pick the most common matching material
+                MaterialType? oldmat = mat;
                 if (mat is null || m.Rarity > mat.Rarity) mat = m;
                 Armour tempArmour = new Armour(choice, mat, 0);
-                if (tempArmour.Cost > (Math.Pow(1.4, Level) * 60)) continue;
+                if (tempArmour.Cost > (Math.Pow(1.4, Level) * 60)) { mat = oldmat; continue; } 
             }
             if (mat is null) return null;
             return new Armour(choice, mat, 0);
@@ -1406,15 +1407,15 @@ namespace SpaceMercs {
             double recoil = EquippedWeapon?.Recoil ?? 0d;
 
             // Resolve the attack(s)
-            List<ShotResult> results = new List<ShotResult>();
+            List<ShotResult> results = [];
             int r = (int)Math.Ceiling(EquippedWeapon?.Type?.Area ?? 0d);
+            if (r == 0d && en is null) return false;
             for (int n = 0; n < nshots; n++) {
                 if (r > 0d) {
                     results.Add(new ShotResult(this, true));
                 }
                 else {
                     // Single target so roll to hit
-                    if (en is null) return false;
                     double hit = Utils.GenerateHitRoll(this, en) - (n * recoil);  // Subsequent shots are harder to hit
                     if (hit > 0.0) {
                         nhits++;
@@ -1529,7 +1530,8 @@ namespace SpaceMercs {
                             if (!string.IsNullOrEmpty(e.SoundEffect)) playSound(e.SoundEffect);
                             bAnnouncedDmg = true;
                         }
-                        fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                        if (TotalDam > 0.0) fact(VisualEffect.EffectType.Damage, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", TotalDam } });
+                        else if (TotalDam < 0.0) fact(VisualEffect.EffectType.Healing, X + (Size / 2f), Y + (Size / 2f), new Dictionary<string, object>() { { "Value", -TotalDam } });
                         Thread.Sleep(150);
                     }
                     if (Health <= 0.0) return; // Dead. Abandon update.
