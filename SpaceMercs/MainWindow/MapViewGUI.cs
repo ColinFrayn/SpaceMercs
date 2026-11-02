@@ -449,11 +449,11 @@ namespace SpaceMercs.MainWindow {
             msgBox.PopupMessage("Colony Founded.\nYour renown has increased with the human race!");
             if (systemOwner != null && systemOwner != StaticData.HumanRace) {
                 // This system is owned by another race
-                PlayerTeam.ImproveRelations(systemOwner, Const.FoundColonyInContestedSystemRelationsPenalty, msgBox.PopupMessage);
+                PlayerTeam.ImproveRelations(systemOwner, Const.FoundColonyInContestedSystemRelationsPenalty, msgBox.PopupMessage, "your colony in their claimed system");
             }
             else if (sectorOwner != null && sectorOwner != StaticData.HumanRace) {
                 // This sector is another race's home sector
-                PlayerTeam.ImproveRelations(sectorOwner, Const.FoundColonyInHomeSectorRelationsPenalty, msgBox.PopupMessage);
+                PlayerTeam.ImproveRelations(sectorOwner, Const.FoundColonyInHomeSectorRelationsPenalty, msgBox.PopupMessage, "your colony in their home sector");
             }
             SetAOButtonsOnGUI(hao);
             PlayerTeam.ImproveRelations(StaticData.HumanRace, Const.FoundColonyRelationsBonus, msgBox.PopupMessage);

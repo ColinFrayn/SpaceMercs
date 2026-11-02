@@ -20,9 +20,14 @@ Backburner : Features
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
 
+Convert Windows MessageBoxes on dialogs into part of the message box GUI eg. warnings, grey out buttons etc.
+
 Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
+
+Have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades? Increase it somehow (abilities?? )
+- Add this into the "Sell all" options in Foundry, plus loadout
 
 Abilities: (One point to spend every 5 levels, must have at least 5n levels in a relevant weapon skill)
 - Assassinate : [Melee, Sniper] One shot, +10 stamina, +2 to att per pt, +25% damage per pt, only against surprised targets
@@ -48,8 +53,6 @@ What should attack skill do for an AoE weapon (grenade or cone), other than incr
 ?? Free movement/actions (don't consider Stamina) if there are no (alerted) enemies (& hide Next Turn button, attack) ??
 - Soldier shields could recharge, but really only makes sense if free movement is done. Slow recharge every turn, or fully after battles.
 - Don't do this for timed missions
-
-Maybe have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades? Increase it somehow (abilities?? )
 
 Enemies should use grenades / grenade weapons / emitter weapons properly
 
@@ -95,7 +98,7 @@ Improve the Encumbrance icon : Soldier.DisplaySoldierDetails()
 Backburner : Improvements
 -------------------------------------------------
 
-Remove as many Windows MessageBoxes as possible
+Look into https://github.com/ImGuiNET/ImGui.NET ?
 
 Improve TextRenderer: Add Bold, Shadow, Border. Optimise?
 

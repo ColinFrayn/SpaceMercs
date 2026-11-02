@@ -9,13 +9,13 @@ namespace SpaceMercs {
     public class Team {
         public AstronomicalObject CurrentPosition { get; private set; }
         public HabitableAO? CurrentPositionHAO {  get { if (CurrentPosition is HabitableAO hao) return hao; return null; } }
-        private readonly List<Soldier> _Soldiers = new List<Soldier>();
+        private readonly List<Soldier> _Soldiers = [];
         public IEnumerable<Soldier> SoldiersRO { get { return _Soldiers.AsReadOnly(); } }
         public int SoldierCount { get { return _Soldiers.Count; } }
         public Ship PlayerShip { get; private set; }
         public double Cash { get; set; }
-        private readonly Dictionary<Race, int> Relations = new Dictionary<Race, int>();  // This is the experience level
-        public readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
+        private readonly Dictionary<Race, int> Relations = [];  // This is the experience level
+        public readonly Dictionary<IItem, int> Inventory = [];
         public Mission? CurrentMission { get; private set; }
         public bool Mission_ShowLabels { get; set; }
         public bool Mission_ShowStatBars { get; set; }
@@ -114,7 +114,10 @@ namespace SpaceMercs {
 
             XmlNode? xMission = xml.SelectSingleNode("Mission");
             if (xMission is not null) {
-                CurrentMission = new Mission(xMission, CurrentPositionHAO!);
+                if (CurrentPosition is not OrbitalAO missionLocation) {
+                    throw new Exception($"Could not load mission: team position '{CurrentPosition.PrintCoordinates()}' is not an orbital body");
+                }
+                CurrentMission = new Mission(xMission, missionLocation);
                 // If it's a tactical mission then insert all participating soldiers
                 if (CurrentMission.IsTacticalMission) {
                     foreach (Soldier s in _Soldiers) {
@@ -178,6 +181,8 @@ namespace SpaceMercs {
             if (PrecursorCoreCount > 0) file.WriteLine($" <PrecursorCoreCount>{PrecursorCoreCount}</PrecursorCoreCount>");
             if (SpaceHulkCoreRecord > 0) file.WriteLine($" <SpaceHulkCoreRecord>{SpaceHulkCoreRecord}</SpaceHulkCoreRecord>");
             if (PrecursorCoreRecord > 0) file.WriteLine($" <PrecursorCoreRecord>{PrecursorCoreRecord}</PrecursorCoreRecord>");
+            if (CompletedMissions > 0) file.WriteLine($" <CompletedMissions>{CompletedMissions}</CompletedMissions>");
+            if (ToughestMission > 0) file.WriteLine($" <ToughestMission>{ToughestMission}</ToughestMission>");
 
             file.WriteLine("</Team>");
         }
@@ -224,7 +229,7 @@ namespace SpaceMercs {
             if (sys.Owner is null) return 0;
             return GetRelations(sys.Owner);
         }
-        public void ImproveRelations(Race? rc, int exp, ShowMessageDelegate showMessage) {
+        public void ImproveRelations(Race? rc, int exp, ShowMessageDelegate showMessage, string? worsenReason = null) {
             if (rc == null) return;
             int oldRelations = GetRelations(rc);
             // Get all currently unresearchable techs
@@ -249,7 +254,8 @@ namespace SpaceMercs {
                 }
             }
             if (newRelations < oldRelations) {
-                showMessage($"Because of your persistent attacks, relations with the {rc.Name} race have worsened\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
+                string why = worsenReason ?? "your actions";
+                showMessage($"Because of {why}, relations with the {rc.Name} race have worsened\nYou are now considered {Utils.RelationsToString(newRelations)}", null);
             }
         }
         public void SetBaselineRelations(Race rc) {
@@ -260,7 +266,7 @@ namespace SpaceMercs {
 
         // Add a list of items to the team's inventory if we have space
         public Dictionary<IItem, int> AddItems(Dictionary<IItem, int> dEquip) {
-            Dictionary<IItem, int> dRemainder = new Dictionary<IItem, int>();
+            Dictionary<IItem, int> dRemainder = [];
             foreach (IItem e in dEquip.Keys) {
                 int rem = AddItem(e, dEquip[e]);
                 if (rem > 0) dRemainder.Add(e, rem);
@@ -423,7 +429,7 @@ namespace SpaceMercs {
         }
         public IEnumerable<IResearchable> UnresearchableItems {
             get {
-                List<IResearchable> items = new List<IResearchable>();
+                List<IResearchable> items = [];
                 Race humanRace = StaticData.HumanRace;
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
@@ -442,7 +448,7 @@ namespace SpaceMercs {
         }
         public IEnumerable<IResearchable> ResearchableItems {
             get {
-                List<IResearchable> items = new List<IResearchable>();
+                List<IResearchable> items = [];
                 Race humanRace = StaticData.HumanRace;
                 foreach (BaseItemType it in StaticData.ResearchableBaseItems) {
                     if (humanRace.HasResearched(it)) continue;
@@ -505,7 +511,7 @@ namespace SpaceMercs {
             foreach (Soldier s in _Soldiers.Where(s => s.aoLocation == CurrentPosition)) {
                 if (sbest is null || s.GetUtilityLevel(sk) > sbest.GetUtilityLevel(sk)) sbest = s;
             }
-            if (sbest is null) throw new Exception($"Couldn't find any soldier with the skill : {sk}");
+            if (sbest is null) throw new Exception($"Couldn't find any soldier at the current location (needed for skill {sk})");
             return sbest!;
         }
         public int GetMaxSkillByItemType(ItemType newType) {
