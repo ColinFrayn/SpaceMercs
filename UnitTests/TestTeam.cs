@@ -7,6 +7,7 @@ namespace UnitTests {
         private Race humanRace = null!;
         private ItemType medikit = null!;
         private ItemType grenade = null!;
+        private ItemType medsystem = null!;
         private MaterialType fabric = null!;
         private WeaponType pistol = null!;
         private WeaponType shortblade = null!;
@@ -18,6 +19,7 @@ namespace UnitTests {
             humanRace = StaticData.GetRaceByName("Human") ?? throw new Exception("Could not find Human Race");
             medikit = StaticData.GetItemTypeByName("Medikit") ?? throw new Exception("Could not find Medikit");
             grenade = StaticData.GetItemTypeByName("Frag Grenade") ?? throw new Exception("Could not find Frag Grenade");
+            medsystem = StaticData.GetItemTypeByName("Medsystem") ?? throw new Exception("Could not find Medsystem");
             fabric = StaticData.GetMaterialTypeByName("Fabric") ?? throw new Exception("Could not find Fabric");
             pistol = StaticData.GetWeaponTypeByName("Pistol") ?? throw new Exception("Could not find Pistol");
             shortblade = StaticData.GetWeaponTypeByName("Shortblade") ?? throw new Exception("Could not find Shortblade");
@@ -57,7 +59,7 @@ namespace UnitTests {
             Equipment eq = new Equipment(medikit);
             Assert.AreEqual(0, team.AddItem(eq));
             Assert.AreEqual(1, team.Inventory.Count);
-            Assert.Contains(eq, team.Inventory.Keys);
+            Assert.True(team.Inventory.ContainsKey(eq));
             Assert.AreEqual(1, team.Inventory[eq]);
         }
 
@@ -67,7 +69,7 @@ namespace UnitTests {
             Equipment eq = new Equipment(medikit);
             Assert.AreEqual(0, team.AddItem(eq, 20));
             Assert.AreEqual(1, team.Inventory.Count);
-            Assert.Contains(eq, team.Inventory.Keys);
+            Assert.True(team.Inventory.ContainsKey(eq));
             Assert.AreEqual(20, team.Inventory[eq]);
         }
 
@@ -82,10 +84,31 @@ namespace UnitTests {
             team.AddItem(eq2);
             team.AddItem(eq1);
             Assert.AreEqual(2, team.Inventory.Count);
-            Assert.Contains(eq1, team.Inventory.Keys);
-            Assert.Contains(eq2, team.Inventory.Keys);
+            Assert.True(team.Inventory.ContainsKey(eq1));
+            Assert.True(team.Inventory.ContainsKey(eq2));
             Assert.AreEqual(3, team.Inventory[eq1]);
             Assert.AreEqual(2, team.Inventory[eq2]);
+        }
+
+        [Test]
+        public void AddItem_ClonesSoCallerHandleIsIndependent() {
+            Team team = TestUtils.TestTeam();
+            Equipment eq = new Equipment(medsystem);
+            Assert.AreEqual(0, team.AddItem(eq, 3));
+            eq.SetRecharge(99);
+            Equipment stored = team.Inventory.Keys.OfType<Equipment>().Single(e => e.BaseType == medsystem);
+            Assert.AreEqual(0, stored.Recharge);
+            Assert.AreEqual(3, team.CountItemsInStores(new Equipment(medsystem)));
+            Assert.AreEqual(0, team.CountItemsInStores(eq));
+        }
+
+        [Test]
+        public void AddItem_CountZeroOrNegative_IsNoOp() {
+            Team team = TestUtils.TestTeam();
+            Equipment eq = new Equipment(medikit);
+            Assert.AreEqual(0, team.AddItem(eq, 0));
+            Assert.AreEqual(-3, team.AddItem(eq, -3));
+            Assert.AreEqual(0, team.Inventory.Count);
         }
 
         [Test]
@@ -146,7 +169,7 @@ namespace UnitTests {
             team.AddItem(eq);
             team.RemoveItemFromStores(eq2);
             Assert.AreEqual(1, team.Inventory.Count);
-            Assert.Contains(eq, team.Inventory.Keys);
+            Assert.True(team.Inventory.ContainsKey(eq));
             Assert.AreEqual(1, team.Inventory[eq]);
         }
 
@@ -233,6 +256,17 @@ namespace UnitTests {
             team.RemoveMaterial(fabric, 2);
             Assert.AreEqual(2, team.CountMaterial(fabric));
             Assert.AreEqual(2, s.CountItem(FabricItem()));
+        }
+
+        [Test]
+        public void RemoveMaterial_SplitBetweenStoresAndSoldier_RemovesAll() {
+            Team team = TestUtils.TestTeam();
+            Soldier s = team.SoldiersRO.First();
+            team.AddItem(FabricItem(), 3);
+            s.AddItem(FabricItem(), 2);
+            Assert.DoesNotThrow(() => team.RemoveMaterial(fabric, 5));
+            Assert.AreEqual(0, team.CountMaterial(fabric));
+            Assert.AreEqual(0, s.CountItem(FabricItem()));
         }
 
         [Test]

@@ -15,7 +15,8 @@ namespace SpaceMercs {
         public Ship PlayerShip { get; private set; }
         public double Cash { get; set; }
         private readonly Dictionary<Race, int> Relations = [];  // This is the experience level
-        public readonly Dictionary<IItem, int> Inventory = [];
+        private readonly Dictionary<IItem, int> _inventory = [];
+        public IReadOnlyDictionary<IItem, int> Inventory => _inventory;
         public Mission? CurrentMission { get; private set; }
         public bool Mission_ShowLabels { get; set; }
         public bool Mission_ShowStatBars { get; set; }
@@ -104,12 +105,12 @@ namespace SpaceMercs {
             }
 
             XmlNode xmli = xml.SelectSingleNode("Inventory") ?? throw new Exception("Could not find team Inventory data");
-            Inventory.Clear();
+            _inventory.Clear();
             foreach (XmlNode xi in xmli.ChildNodes) {
                 int count = xi.GetAttributeInt("Count");
-                IItem eq = Utils.LoadItem(xi.FirstChild) ?? throw new Exception("Could not load inventory item!");
-                if (Inventory.ContainsKey(eq)) Inventory[eq] += count;
-                else Inventory.Add(eq, count);
+                IItem eq = (Utils.LoadItem(xi.FirstChild) ?? throw new Exception("Could not load inventory item!")).Clone();
+                if (_inventory.ContainsKey(eq)) _inventory[eq] += count;
+                else _inventory.Add(eq, count);
             }
 
             XmlNode? xMission = xml.SelectSingleNode("Mission");
@@ -276,12 +277,20 @@ namespace SpaceMercs {
 
         // Add a single item, if we can, and return how many were left over
         public int AddItem(IItem? equip, int Count = 1) {
-            if (equip is null) return Count;
+            if (equip is null || Count < 1) return Count;
             int CargoMax = PlayerShip.Type.Capacity;
-            if (CargoMax - CargoMass < equip.Mass) return Count;
-            if (!Inventory.ContainsKey(equip)) Inventory.Add(equip, 0);
-            int NumToTake = Math.Min((int)Math.Floor((CargoMax - CargoMass) / equip.Mass), Count);
-            Inventory[equip] += NumToTake;
+            int NumToTake;
+            if (equip.Mass <= 0) {
+                NumToTake = Count;
+            }
+            else {
+                if (CargoMax - CargoMass < equip.Mass) return Count;
+                NumToTake = Math.Min((int)Math.Floor((CargoMax - CargoMass) / equip.Mass), Count);
+            }
+            if (NumToTake < 1) return Count;
+            IItem stored = equip.Clone();
+            if (_inventory.TryGetValue(stored, out int have)) _inventory[stored] = have + NumToTake;
+            else _inventory.Add(stored, NumToTake);
             return Count - NumToTake;
         }
 
@@ -336,20 +345,20 @@ namespace SpaceMercs {
 
         public void RemoveItemFromStores(IItem? equip, int Count = 1) {
             if (equip is null) return;
-            if (!Inventory.ContainsKey(equip)) return;
-            if (Count >= Inventory[equip]) Inventory.Remove(equip);
-            else Inventory[equip] -= Count;
+            if (!_inventory.ContainsKey(equip)) return;
+            if (Count >= _inventory[equip]) _inventory.Remove(equip);
+            else _inventory[equip] -= Count;
         }
         public bool RemoveItemFromStoresOrSoldiers(IItem? equip, int Count = 1) {
             if (equip is null) return false;
-            if (Inventory.ContainsKey(equip)) {
-                if (Count >= Inventory[equip]) {
-                    Count -= Inventory[equip];
-                    Inventory.Remove(equip);
+            if (_inventory.ContainsKey(equip)) {
+                if (Count >= _inventory[equip]) {
+                    Count -= _inventory[equip];
+                    _inventory.Remove(equip);
                     if (Count == 0) return true;
                 }
                 else {
-                    Inventory[equip] -= Count;
+                    _inventory[equip] -= Count;
                     return true;
                 }
             }
@@ -388,10 +397,10 @@ namespace SpaceMercs {
         }
         public void RemoveMaterial(MaterialType mat, int num) {
             // Remove what we can from ship's inventory
-            foreach (IItem it in Inventory.Keys) {
+            foreach (IItem it in _inventory.Keys.ToList()) {
                 if (it is Material m) {
                     if (m.BaseType == mat) {
-                        int left = num - Inventory[it];
+                        int left = num - _inventory[it];
                         RemoveItemFromStores(it, num);
                         if (left <= 0) return;
                         num = left;
@@ -401,7 +410,7 @@ namespace SpaceMercs {
 
             // If there's any left, take it from soldiers
             foreach (Soldier s in _Soldiers.Where(s => s.IsActive)) {
-                foreach (IItem it in s.InventoryGrouped.Keys) {
+                foreach (IItem it in s.InventoryGrouped.Keys.ToList()) {
                     if (it is Material m) {
                         if (m.BaseType == mat) {
                             int left = num - s.InventoryGrouped[it];

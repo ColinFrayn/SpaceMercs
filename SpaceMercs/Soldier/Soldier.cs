@@ -1294,8 +1294,7 @@ namespace SpaceMercs {
                 int required = quantity - CountItem(it);
                 if (PlayerTeam.Inventory.TryGetValue(it, out int avail)) {
                     if (avail < required) required = avail;
-                    if (required == avail) PlayerTeam.Inventory.Remove(it);
-                    else PlayerTeam.Inventory[it] -= required;
+                    PlayerTeam.RemoveItemFromStores(it, required);
                     AddItem(it, required);
                 }
             }
