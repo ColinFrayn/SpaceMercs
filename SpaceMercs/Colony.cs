@@ -35,9 +35,9 @@ namespace SpaceMercs {
         public DateTime dtLastGrowth { get; private set; }
         public DateTime dtNextGrowth { get; private set; }
         public double SeedProgress { get; private set; }
-        private readonly List<Soldier> Mercenaries = new List<Soldier>();
-        private readonly List<Mission> Missions = new List<Mission>();
-        private readonly Dictionary<IItem, int> Inventory = new Dictionary<IItem, int>();
+        private readonly List<Soldier> Mercenaries = [];
+        private readonly List<Mission> Missions = [];
+        private readonly Dictionary<IItem, int> Inventory = [];
         private DateTime dtLastVisit = DateTime.MinValue;
 
         public bool CanGrow {
@@ -80,7 +80,7 @@ namespace SpaceMercs {
                     BaseType btOld = Base;
                     do {
                         BaseType bt = (BaseType)(2 << (rand.Next(4)));
-                        if (HasBaseType(bt)) Base |= bt;
+                        if (!HasBaseType(bt)) Base |= bt;
                     } while (Base == btOld);
                 }
             }
@@ -136,18 +136,9 @@ namespace SpaceMercs {
             if (xmli != null) {
                 foreach (XmlNode xi in xmli.ChildNodes) {
                     int count = xi.GetAttributeInt("Count");
-                    IItem? eq;
-                    try {
-                        eq = Utils.LoadItem(xi.FirstChild);
-                    }
-                    catch (Exception ex) {
-                        // Try re-loading as if it's a material
-                        if (xi.FirstChild!.Name.Equals("Equipment")) {
-                            eq = new Material(xi.FirstChild);
-                        }
-                        else throw new Exception($"Error loading inventory for Colony {Location.Name} : {ex.Message}");
-                    }
-                    if (eq is not null) Inventory.TryAdd(eq, count);
+                    IItem eq = (Utils.LoadItem(xi.FirstChild) ?? throw new Exception($"Could not load inventory item for Colony {Location.Name}")).Clone();
+                    if (Inventory.ContainsKey(eq)) Inventory[eq] += count;
+                    else Inventory.Add(eq, count);
                 }
             }
         }
@@ -268,7 +259,7 @@ namespace SpaceMercs {
             // Larger colonies have a more rapid turnover; small colonies don't            
             dDays = (dDays * BaseSize) / 2d;
 
-            if (dDays < 0.1) return; // Tiny gap - do nothing
+            if (dDays < 1) return; // Tiny gap - do nothing
             if (dDays > Const.LongEnoughGapToResetColonyInventory) {
                 // Very long gap - just refresh all
                 Mercenaries.Clear();
@@ -279,7 +270,7 @@ namespace SpaceMercs {
             else {
                 // Intermediate gap - expire some, randomly
                 Random rand = new Random();
-                for (int n = 0; n <= (int)dDays; n++) {
+                for (int n = 0; n < (int)dDays; n++) {
                     if (Mercenaries.Count > 0 && rand.NextDouble() > 0.95) Mercenaries.RemoveAt(rand.Next(Mercenaries.Count));
                     if (Missions.Count > 0 && rand.NextDouble() > 0.95) Missions.RemoveAt(rand.Next(Missions.Count));
                     UpdateInventory();
@@ -307,7 +298,7 @@ namespace SpaceMercs {
             if (total > Const.MaxColonyMissions) total = Const.MaxColonyMissions;
             if (total < 0) total = 0;
             if (Missions.Count >= total) return;
-            for (int n = 0; n < total; n++) {
+            for (int n = Missions.Count; n < total; n++) {
                 Missions.Add(Mission.CreateRandomColonyMission(this, rand, playerTeam));
             }
         }
@@ -429,7 +420,7 @@ namespace SpaceMercs {
             // Adjust the stock accordingly
             if (count == 0) return;
             if (Inventory.ContainsKey(eq)) Inventory[eq] += count;
-            else Inventory.Add(eq, count);
+            else Inventory.Add(eq.Clone(), count);
         }
         public void RemoveItem(IItem eq) {
             if (!Inventory.ContainsKey(eq)) return;
@@ -572,7 +563,7 @@ namespace SpaceMercs {
 
             double scale = CalculateGrowthRateScale();
 
-            return (int)(dt * scale);
+            return Math.Max(10,(int)(dt * scale));
         }
         public double CalculateGrowthRateScale() {
             double dt = 1d;
@@ -594,7 +585,7 @@ namespace SpaceMercs {
             //dt *= Math.Sqrt(Math.Max(50, Owner.Population) / 50d);
 
             // Bonus based on how many colonies are near, and how many systems with trade routes
-            HashSet<Star> nearbyColonisedSystems = new();
+            HashSet<Star> nearbyColonisedSystems = [];
             Star thisSystem = Location.GetSystem();
             foreach (Colony cl in Owner.AllColonies) {
                 if (cl == this) continue;
