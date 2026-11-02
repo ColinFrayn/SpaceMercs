@@ -17,8 +17,8 @@ namespace SpaceMercs {
         public enum SoldierType { Skirmisher, Assault, Pistoleer, Enforcer, Assassin, Brute, Grenadier, Sniper, Heavy, Chemicals, None };
 
         // Generic stuff
-        public Team? PlayerTeam; // Could be null (if an unhired mercenary)
-        public AstronomicalObject? aoLocation; // Usually ignored, unless soldier is deactivated
+        public Team? PlayerTeam { get; internal set; } // Could be null (if an unhired mercenary)
+        public AstronomicalObject? aoLocation { get; internal set; } // Usually ignored, unless soldier is deactivated
         private int iTextureID = -1;
         public bool IsActive { get; private set; }
         public string SoldierID {
@@ -286,7 +286,7 @@ namespace SpaceMercs {
             foreach (Armour ar in EquippedArmour) {
                 st.Add(ar);
             }
-            EquippedArmour.Clear();
+            _equippedArmour.Clear();
             Inventory.Clear();
             return st;
         }
@@ -358,7 +358,8 @@ namespace SpaceMercs {
                 return _loadout.AsReadOnly();
             }
         }
-        public List<Armour> EquippedArmour = new List<Armour>();
+        private readonly List<Armour> _equippedArmour = [];
+        public IReadOnlyList<Armour> EquippedArmour => _equippedArmour;
 
         // Base stats
         public GenderType Gender { get; private set; }
@@ -729,11 +730,11 @@ namespace SpaceMercs {
             }
 
             XmlNode? xmlar = xml.SelectSingleNode("EquippedArmour");
-            EquippedArmour.Clear();
+            _equippedArmour.Clear();
             if (xmlar is not null) {
                 foreach (XmlNode xar in xmlar.ChildNodes) {
                     Armour ar = new Armour(xar);
-                    EquippedArmour.Add(ar);
+                    _equippedArmour.Add(ar);
                 }
             }
 
@@ -989,7 +990,7 @@ namespace SpaceMercs {
                     }
                 }
                 foreach (Armour aeq in hsToUnequip) Unequip(aeq);
-                EquippedArmour.Add(ar);
+                _equippedArmour.Add(ar);
                 CalculateMaxStats();
                 return true;
             }
@@ -1012,7 +1013,7 @@ namespace SpaceMercs {
             else if (eq is Armour) {
                 foreach (Armour ar in EquippedArmour) {
                     if (ar == eq) {
-                        EquippedArmour.Remove(ar);
+                        _equippedArmour.Remove(ar);
                         AddItem(eq);
                         CalculateMaxStats();
                         return;
@@ -1101,7 +1102,7 @@ namespace SpaceMercs {
 
             // Next generate armour
             // Start with a base set of kit, then incrementally improve it
-            EquippedArmour.Clear();
+            _equippedArmour.Clear();
             SetupBasicArmour();
             int count = Level + rnd.Next(Level / 2) + rnd.Next(Level / 2);
             ntries = 0;
@@ -1126,11 +1127,11 @@ namespace SpaceMercs {
         }
         private void SetupBasicArmour() {
             Armour? chest = PickLevelAppropriateChestArmour();
-            if (chest is not null) EquippedArmour.Add(chest);
+            if (chest is not null) _equippedArmour.Add(chest);
             foreach (BodyPart bp in Enum.GetValues(typeof(BodyPart))) {
                 if (rnd.NextDouble() * Level > 0.8 && GetArmourAtLocation(bp) == null) {
                     Armour? arm = PickMostBasicArmourForLocation(bp);
-                    if (arm is not null) EquippedArmour.Add(arm);
+                    if (arm is not null) _equippedArmour.Add(arm);
                 }
             }
         }
@@ -1244,7 +1245,7 @@ namespace SpaceMercs {
             // If we found an empty slot then generate something
             if (ar is null) {
                 ar = PickMostBasicArmourForLocation(bp);
-                if (ar is not null) EquippedArmour.Add(ar);
+                if (ar is not null) _equippedArmour.Add(ar);
             }
             // Otherwise upgrade what's in the last slot we found
             else {
