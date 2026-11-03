@@ -161,9 +161,7 @@ namespace SpaceMercs.Dialogs {
             foreach (DataGridViewRow row in dgSoldiers.Rows) {
                 bool bSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
                 if (bSelected && row.Tag is Soldier s) {
-                    if (!s.LoadoutComplete) {
-                        s.Refill();
-                    }
+                    s.SetLoadout();
                 }
             }
             CheckLoadouts();
