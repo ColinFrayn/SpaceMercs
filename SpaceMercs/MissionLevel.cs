@@ -1223,10 +1223,40 @@ namespace SpaceMercs {
                 throw new Exception("Couldn't place creatures!");
             }
         }
+        private double CreatureSpawnRangeScale =>  Math.Max(1.0, Math.Sqrt(Math.Max(Width, Height) / Const.CreatureSpawnRangeScaleSize));  
+        private double EffectiveDistanceFromStart(int x, int y) {
+            // Euclidean range from (x,y) to the nearest entrance. Tiles that cannot see an
+            // entrance are treated as further away, so a packed dungeon room behind a wall
+            // is allowed even when it is close in a straight line.
+            if (EntryLocations.Count == 0) return double.MaxValue;
+            Point dest = new Point(x, y);
+            double thin = Const.CreatureThinSpawnRange * CreatureSpawnRangeScale;
+            double best = double.MaxValue;
+            foreach (Point pt in EntryLocations) {
+                double dx = x - pt.X;
+                double dy = y - pt.Y;
+                double dist = Math.Sqrt((dx * dx) + (dy * dy));
+                if (!CanSee(pt, dest)) dist += thin;
+                if (dist < best) best = dist;
+            }
+            return best;
+        }
+        private bool AcceptCreatureSpawnDistance(int x, int y) {
+            if (EntryLocations.Count == 0) return true;
+            double dist = EffectiveDistanceFromStart(x, y);
+            double scale = CreatureSpawnRangeScale;
+            double hard = Const.MinimumCreatureDistanceFromStartLocation * scale;
+            double thin = Const.CreatureThinSpawnRange * scale;
+            if (dist < hard) return false;
+            if (dist < thin) {
+                double p = (dist - hard) / (thin - hard);
+                if (rand.NextDouble() > p) return false;
+            }
+            return true;
+        }
         private bool PlaceFirstCreatureInGroup(Creature cr, bool bFarFromEntryPoint) {
             if (cr == null) return false;
             int nTries = 2 + (bFarFromEntryPoint ? 2 : 0);
-            int minDist = Const.MinimumCreatureDistanceFromStartLocation + (bFarFromEntryPoint ? (Width + Height) / 4 : 0);
             double bestScore = -1;
             Point best = Point.Empty;
 
@@ -1237,20 +1267,15 @@ namespace SpaceMercs {
 
                 do {
                     score = 0.0;
-                    int dist = 0;
-                    Point ptStart = Point.Empty;
-                    if (EntryLocations.Count > 0) ptStart = EntryLocations.First();
                     do {
                         x = rand.Next(Width - 5) + 2;
                         y = rand.Next(Height - 5) + 2;
-                        if (ptStart == Point.Empty) dist = minDist + 1;
-                        else dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
                         if (++niter > 200) break;
-                    } while (!EntityCanGo(cr, x, y) || (dist < minDist && CanSee(ptStart, new Point(x, y))));
+                    } while (!EntityCanGo(cr, x, y) || !AcceptCreatureSpawnDistance(x, y));
                     if (niter > 200) break;
 
-                    // Attempt to put all creatures far from the EntryLocations
-                    score += dist;
+                    // Prefer physically distant tiles when choosing among legal candidates
+                    score += EntryLocations.Count == 0 ? 0 : EntryLocations.Min(pt => Math.Sqrt(((x - pt.X) * (x - pt.X)) + ((y - pt.Y) * (y - pt.Y))));
 
                     // Large creatures in cave/mine levels should not be blocked (but this doesn't achieve that. Could still have places where they're blockable.)
                     //if (cr.Size > 1) {
@@ -1298,11 +1323,8 @@ namespace SpaceMercs {
                         if (xClash && yClash) { bOK = false; break; }
                     }
                 }
-                // Check not to close to start pos
-                if (bOK && EntryLocations.FirstOrDefault() is Point ptStart) {
-                    double dist = Math.Abs(x - ptStart.X) + Math.Abs(y - ptStart.Y);
-                    bOK = (dist > 8);
-                }
+                // Same entrance buffer as group leaders (hidden-behind-wall tiles count as further)
+                if (bOK) bOK = AcceptCreatureSpawnDistance(x, y);
             } while (!bOK);
             cr.SetLocation(new Point(x, y));
             return true;

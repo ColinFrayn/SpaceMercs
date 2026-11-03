@@ -287,7 +287,9 @@ namespace SpaceMercs {
         public const int AutomataIterations = 6;
         public const double AutomataCaveFract = 0.43;
         public const double AutomataSurfaceFract = 0.35;
-        public const int MinimumCreatureDistanceFromStartLocation = 10;
+        public const int MinimumCreatureDistanceFromStartLocation = 9;
+        public const int CreatureThinSpawnRange = 18; // Soft cap: fewer creatures this close to an entrance they can see
+        public const double CreatureSpawnRangeScaleSize = 32.0; // Map width/height at which spawn rings start growing
         public const double CreatureCountExponent = 0.86;  // Scale creature count as NumFloorTiles ^ ThisValue
         public const double CreatureFrequencyScale = 210;   // The larger this is, the fewer creatures we put in each level.
         public const int LegendaryItemLevelDiff = 5; // Minimum level diff to have a legendary item of research level 0;

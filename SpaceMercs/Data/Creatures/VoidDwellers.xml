@@ -95,7 +95,7 @@
     <Attack>17</Attack>
     <Defence>11</Defence>
     <Armour>22</Armour>
-    <Health>24</Health>
+    <Health>30</Health>
     <Stamina>18</Stamina>
     <Interact/>
     <Desc>A mysterious creature from the void</Desc>
@@ -118,7 +118,7 @@
     <Attack>20</Attack>
     <Defence>20</Defence>
     <Armour>24</Armour>
-    <Health>40</Health>
+    <Health>44</Health>
     <Stamina>21</Stamina>
     <Interact/>
     <Desc>A mysterious humanoid creature from the void that seems to command the other void beasts telepathically</Desc>
