@@ -113,18 +113,14 @@ namespace SpaceMercs {
                 throw new Exception("Unknown mission goal");
             }
         }
-        public int Experience {
-            get {
-                bool hasSecondaryEnemy = SecondaryEnemy != null;
-                double teamSizeBonus = 4.0 / Math.Max(1, Soldiers.Count);
-                return (int)((double)MissionExperience(Diff, LevelCount, Size, SwarmLevel, hasSecondaryEnemy, Type, Goal) * teamSizeBonus);
-            }
-        }
-        public int MaxWaves {  get { if (Goal != MissionGoal.Defend) return 0; return 3 + Math.Max(2, Diff / 5); } }
+        public int Experience => MissionExperience(Diff, LevelCount, Size, SwarmLevel, SecondaryEnemy != null, Type, Goal);
+        public int ExperienceEach => Experience / (Soldiers.Count + 1);
+
+        public int MaxWaves => Goal != MissionGoal.Defend ? 0 : 3 + Math.Max(2, Diff / 5);
         public MissionItem? MItem { get; private set; }
-        private Dictionary<int, MissionLevel> Levels = new Dictionary<int, MissionLevel>();
-        public readonly List<Soldier> Soldiers = new List<Soldier>(); // Soldiers that are actively participating in this mission in person.
-        public readonly List<Soldier> Psylinked = new List<Soldier>(); // Soldiers that are viewing this mission through a psylink.
+        private Dictionary<int, MissionLevel> Levels = [];
+        public readonly List<Soldier> Soldiers = []; // Soldiers that are actively participating in this mission in person.
+        public readonly List<Soldier> Psylinked = []; // Soldiers that are viewing this mission through a psylink.
         public int WavesRemaining { get; private set; }
         public int TurnCount { get; private set; }
         public int MaxTurns =>
@@ -766,10 +762,7 @@ namespace SpaceMercs {
             Levels.Add(CurrentLevel, lvl);
             return lvl;
         }
-        public MissionLevel? GetLevel(int n) {
-            if (Levels.ContainsKey(n)) return Levels[n];
-            return null;
-        }
+        public MissionLevel? GetLevel(int n) => Levels.TryGetValue(n, out MissionLevel? value) ? value : null;
         private int _largestCreatureSize = -1;
         public int GetLargestCreatureSize() {
             if (_largestCreatureSize >= 1) return _largestCreatureSize;
@@ -919,7 +912,7 @@ namespace SpaceMercs {
         // Set up this mission to be run on the tactical view
         public void Initialise() {
             CurrentLevel = 0;
-            Levels = new Dictionary<int, MissionLevel>();
+            Levels = [];
             ClearSoldiers();
         }
         public void SetCurrentLevel(int lvl) {

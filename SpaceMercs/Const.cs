@@ -232,13 +232,14 @@ namespace SpaceMercs {
         public const double UpgradeSelfCostMod = 0.75; // When upgrading stuff yourself, pay this fraction of the total price estimate.
         public const int    SkillBoostPerAIModule = 2; // Each AI Module boosts utility skills by this much.
         public const double SecondaryEnemyXPBoost = 1.25; // This much more XP if there is a secondary enemy
-        public const double MissionExperienceScale = 0.8d; // Scale for experience gained for finishing a mission
+        public const double MissionExperienceScale = 3.0d; // Scale for experience gained for finishing a mission
         public const double MissionExperienceBase = 1.55d; // Scale for experience gained for finishing a mission (base of exponent)
         public const double MissionLevelBase = 1.1d; // Scale for experience gained for finishing a mission (base of exponent for level count)
         public const double CashRelationsFactor = 0.25; // Exp per credit donated
         public const int    SpaceHulkCoreExpScale = 125; // Exp per level for a space hulk core
         public const int    PrecursorCoreExpScale = 175; // Exp per level for a precursor core
         public const bool   AllowFabricationOfHigherLevelItems = false; // When fabricating an item, can you end up with a better one??
+        public const double PsylinkExperienceFraction = 0.15d; // Fraction of full mission experience gained when psylinked
 
         // Colony stuff
         public const int    MaxColonyMercenaries = 16;  // In a colony
@@ -271,7 +272,7 @@ namespace SpaceMercs {
         public const int RaceRelationsExperienceScale = 1000; // Experience to get from 0 -> 1 race relations is 2x this number. Scales up after this by Lev*(Lev+1) (or Lev*(1-Lev) for negative)
         public const int StartingRelationsWithHomeRace = 6000; // Initial HumanRace experience points. Equivalent to level 2.
         public const int RelationsExpPenaltyScaleColony = 4; // Race relation experience accrual scale (reduction factor) for doing colony missions.
-        public const int RelationsExpPenaltyScale = 6; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
+        public const int RelationsExpPenaltyScale = 24; // Race relation experience accrual scale (reduction factor) for doing non-colony (scanner) missions but in an owned system.
         public const int FoundColonyRelationsBonus = 500; // Race relation bonus for founding a colony
         public const int FoundColonyInContestedSystemRelationsPenalty = -4000; // Race relation penalty for founding a colony in a system they own
         public const int FoundColonyInHomeSectorRelationsPenalty = -1500; // Race relation penalty for founding a colony in a sector they own

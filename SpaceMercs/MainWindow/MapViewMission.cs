@@ -167,35 +167,35 @@ namespace SpaceMercs.MainWindow {
                 }
                 else {
                     if (ThisMission.Goal == Mission.MissionGoal.Gather) {
-                        msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.Experience}xp each");
+                        msgBox.PopupMessage($"You returned safely to your ship\nYou can sell any gathered {ThisMission.MItem}s at the nearest Colony\nBonus Experience = {ThisMission.ExperienceEach}xp each");
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.FindItem && ThisMission.MItem is not null) {
                         if (ThisMission.MItem.IsPrecursorCore) {
-                            msgBox.PopupMessage($"You marvel at the extraordinary {ThisMission.MItem} pulsating with alien power.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.Experience}xp each");
+                            msgBox.PopupMessage($"You marvel at the extraordinary {ThisMission.MItem} pulsating with alien power.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.ExperienceEach}xp each");
                             PlayerTeam.RegisterMissionItem(ThisMission.MItem);
                         }
                         else if (ThisMission.MItem.IsSpaceHulkCore) {
-                            msgBox.PopupMessage($"You examine the mysterious {ThisMission.MItem}, full of encrypted alien knowledge.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.Experience}xp each");
+                            msgBox.PopupMessage($"You examine the mysterious {ThisMission.MItem}, full of encrypted alien knowledge.\nYou can sell it for a large reward\nor swap it for renown with any alien race at their Homeworld\nBonus Experience = {ThisMission.ExperienceEach}xp each");
                             PlayerTeam.RegisterMissionItem(ThisMission.MItem);
                         }
                         else {
-                            msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward.ToString("0.##")}cr\nBonus Experience = {ThisMission.Experience}xp each");
+                            msgBox.PopupMessage($"You return the {ThisMission.MItem} to the mission agent\nCash Reward = {ThisMission.Reward:0.##}cr\nBonus Experience = {ThisMission.ExperienceEach}xp each");
                             if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                         }
                     }
                     else if (ThisMission.Goal == Mission.MissionGoal.Artifact) {
-                        msgBox.PopupMessage($"You analyse the {ThisMission.MItem} and marvel at the extraordinary workmanship!\nYour new artifact is stored securely in the ship's hold\nBonus Experience = {ThisMission.Experience}xp each");
+                        msgBox.PopupMessage($"You analyse the {ThisMission.MItem} and marvel at the extraordinary workmanship!\nYour new artifact is stored securely in the ship's hold\nBonus Experience = {ThisMission.ExperienceEach}xp each");
                         IItem? artifact = ThisMission.MItem?.LegendaryItem;
                         if (!PlayerTeam.RemoveItemFromStoresOrSoldiers(ThisMission.MItem)) throw new Exception("Could not find quest item on Team");
                         PlayerTeam.AddItem(artifact);
                     }
-                    else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.Experience + "xp each");
+                    else msgBox.PopupMessage("You were victorious\nCash Reward = " + ThisMission.Reward.ToString("0.##") + "cr\nBonus Experience = " + ThisMission.ExperienceEach + "xp each");
                     PlayerTeam.AddCash(ThisMission.Reward);
                     foreach (Soldier s in ThisMission.Soldiers) {
-                        s.AddExperience(ThisMission.Experience);
+                        s.AddExperience(ThisMission.ExperienceEach);
                     }
                     foreach (Soldier s in ThisMission.Psylinked) {
-                        s.AddExperience(ThisMission.Experience);
+                        s.AddExperience((int)(ThisMission.Experience * Const.PsylinkExperienceFraction));
                     }
 
                     // Mission was from a colony so improve relations with the owner race & speed up colony growth
@@ -205,7 +205,7 @@ namespace SpaceMercs.MainWindow {
                         // Speed up colony growth if possible
                         if (thisColony.CanGrow) {
                             // Work out how much this mission does to speed up growth
-                            double expFract = (double)ThisMission.Experience / (double)thisColony.GetAverageMissionExperience();
+                            double expFract = ThisMission.Experience / thisColony.GetAverageMissionExperience();
                             double nDaysThisGrowth = (thisColony.dtNextGrowth - thisColony.dtLastGrowth).TotalDays;
                             double nDays = nDaysThisGrowth * expFract * Const.ColonyMissionGrowthRate;
                             TimeSpan tDiff = TimeSpan.FromDays(nDays);
