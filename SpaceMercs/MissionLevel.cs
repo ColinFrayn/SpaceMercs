@@ -636,9 +636,11 @@ namespace SpaceMercs {
             }
             if (ParentMission.Goal == Mission.MissionGoal.Gather) {
                 if (ParentMission.MItem is null) throw new Exception($"No goal item type set up for {ParentMission.Goal} mission");
-                int nitems = ParentMission.Size + 2 + LevelID;
-                for (int n = 0; n < nitems; n++) {
-                    InsertGoalItem(ParentMission.MItem);
+                if (IsLowestLevel) {
+                    int nitems = ParentMission.Size + 2 + LevelID;
+                    for (int n = 0; n < nitems; n++) {
+                        InsertGoalItem(ParentMission.MItem);
+                    }
                 }
             }
         }
@@ -1322,10 +1324,10 @@ namespace SpaceMercs {
             if (ra is not null && cg is null) cg = GenerateCreatureGroupForRacialOpponent(ra); // Does this ever happen?
             if (cg is null) throw new Exception("Could not generate creature group for this Mission!");
 
-            double dCreatures = (double)(ParentMission.Soldiers.Count + 1d) * (0.5 + rand.NextDouble() * 0.3);
+            double dCreatures = (double)(ParentMission.Soldiers.Count + 2d) * (0.45 + rand.NextDouble() * 0.25);
             if (ParentMission.WavesRemaining <= 2) dCreatures += rand.NextDouble() * 0.3 + 0.3;
-            if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.4;
-            if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.4 + 0.5;
+            if (ParentMission.WavesRemaining <= 1) dCreatures += rand.NextDouble() * 0.3 + 0.7;
+            if (ParentMission.WavesRemaining == 0) dCreatures += rand.NextDouble() * 0.4 + 0.9;
             int nCreatures = (int)(dCreatures * Const.CreatureFrequencyScale * cg.QuantityScale * cg.QuantityScale * (1d + (double)ParentMission.SwarmLevel * 0.5) / 150d);
             if (nCreatures < 2) nCreatures = 2;
             int nTries = 0;

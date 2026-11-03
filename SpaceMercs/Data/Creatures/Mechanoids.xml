@@ -1,6 +1,6 @@
 ﻿<Data>
   <CreatureType Name="Mechanoid Drone">
-    <LevelRange>6,15</LevelRange>
+    <LevelRange>6,16</LevelRange>
     <Attack>10</Attack>
     <Defence>9</Defence>
     <Armour>22</Armour>
