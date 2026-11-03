@@ -24,6 +24,9 @@ namespace SpaceMercs.Dialogs {
             ttSoldier.SetToolTip(this.pbExperience, "Experience gained this level");
             btEquip.Text = Quiescent ? "Equip" : DangerText;
             btDrop.Text = "Drop";
+            lbEquipped.DragOver += lbEquipped_DragEnter;
+            lbInventory.DragOver += lbInventory_DragEnter;
+            dgFloor.DragOver += dgFloor_DragEnter;
         }
 
         public IItem? SelectedItem() {
@@ -420,10 +423,34 @@ namespace SpaceMercs.Dialogs {
         private class DataAndSource {
             public IItem dob { get; init; }
             public WindowSource source { get; init; }
+            public bool EntireStack { get; init; }
         }
         private Rectangle dragBoxFromMouseDown;
         private int indexOfItemUnderMouseToDrag;
         private Size dragSize = SystemInformation.DragSize;
+        private static bool WantEntireStack(DataAndSource das, DragEventArgs e) => das.EntireStack || (e.KeyState & 8) != 0;
+        private static void SetDropEffect(DragEventArgs e, bool allowed) {
+            e.Effect = allowed ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
+        }
+        private bool PrepareGridDrag(DataGridView grid, MouseEventArgs e, out IItem? item) {
+            item = null;
+            int row = grid.HitTest(e.X, e.Y).RowIndex;
+            if (row < 0) {
+                dragBoxFromMouseDown = Rectangle.Empty;
+                return false;
+            }
+            grid.ClearSelection();
+            grid.Rows[row].Selected = true;
+            if (grid.Rows[row].Tag is not IItem it) {
+                dragBoxFromMouseDown = Rectangle.Empty;
+                return false;
+            }
+            item = it;
+            dragBoxFromMouseDown = new Rectangle(
+                new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)),
+                dragSize);
+            return true;
+        }
 
         private void lbEquipped_MouseDown(object sender, MouseEventArgs e) {
             indexOfItemUnderMouseToDrag = lbEquipped.IndexFromPoint(e.X, e.Y);
@@ -446,7 +473,7 @@ namespace SpaceMercs.Dialogs {
                     else it = ThisSoldier.EquippedArmour[indexOfItemUnderMouseToDrag];
                     if (it is not null) {
                         DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Equipment };
-                        lbEquipped.DoDragDrop(das, DragDropEffects.All);
+                        lbEquipped.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
                     }
                 }
             }
@@ -456,12 +483,9 @@ namespace SpaceMercs.Dialogs {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private void lbEquipped_DragEnter(object sender, DragEventArgs e) {
+        private void lbEquipped_DragEnter(object? sender, DragEventArgs e) {
             DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
-            if (das?.dob is Weapon or Armour) {
-                e.Effect = DragDropEffects.Move;
-            }
-            else e.Effect = DragDropEffects.None;
+            SetDropEffect(e, das?.dob is Weapon or Armour);
         }
 
         private void lbEquipped_DragDrop(object sender, DragEventArgs e) {
@@ -495,8 +519,8 @@ namespace SpaceMercs.Dialogs {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     IItem? it = ThisSoldier.InventoryGrouped.Keys.ElementAt(indexOfItemUnderMouseToDrag);
                     if (it is not null) {
-                        DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory };
-                        lbInventory.DoDragDrop(das, DragDropEffects.All);
+                        DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory, EntireStack = (ModifierKeys & Keys.Control) != 0 };
+                        lbInventory.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
                     }
                 }
             }
@@ -506,16 +530,9 @@ namespace SpaceMercs.Dialogs {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private void lbInventory_DragEnter(object sender, DragEventArgs e) {
-            if (e.Data?.GetData(typeof(DataAndSource)) is DataAndSource das) {
-                if (das.dob is Corpse) {
-                    e.Effect = DragDropEffects.None;
-                }
-                else {
-                    e.Effect = DragDropEffects.Move;
-                }
-            }
-            else e.Effect = DragDropEffects.None;
+        private void lbInventory_DragEnter(object? sender, DragEventArgs e) {
+            DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
+            SetDropEffect(e, das is not null && das.dob is not Corpse);
         }
 
         private void lbInventory_DragDrop(object sender, DragEventArgs e) {
@@ -525,23 +542,17 @@ namespace SpaceMercs.Dialogs {
             if (it is Corpse) return;
             if (it is IEquippable eq && das.source == WindowSource.Equipment) ThisSoldier.Unequip(eq);
             if (das.source == WindowSource.Floor) {
-                ThisStash.Remove(it);
-                ThisSoldier.AddItem(it, 1);
+                int count = WantEntireStack(das, e) ? ThisStash.GetCount(it) : 1;
+                if (count < 1) return;
+                ThisStash.Remove(it, count);
+                ThisSoldier.AddItem(it, count);
             }
             UpdateAllDetails();
             if (ivForm != null) ivForm.UpdateInventory();
         }
 
         private void dgFloor_MouseDown(object sender, MouseEventArgs e) {
-            if (dgFloor.SelectedRows.Count == 1 && dgFloor.SelectedRows[0].Tag is IItem) { 
-                dragBoxFromMouseDown = new Rectangle(
-                    new Point(e.X - (dragSize.Width / 2),
-                              e.Y - (dragSize.Height / 2)),
-                    dragSize);
-            }
-            else {
-                dragBoxFromMouseDown = Rectangle.Empty;
-            }
+            PrepareGridDrag(dgFloor, e, out _);
         }
 
         private void dgFloor_MouseMove(object sender, MouseEventArgs e) {
@@ -549,8 +560,8 @@ namespace SpaceMercs.Dialogs {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     if (dgFloor.SelectedRows.Count != 1) return;
                     if (dgFloor.SelectedRows[0].Tag is not IItem it) return;
-                    DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Floor };
-                    lbInventory.DoDragDrop(das, DragDropEffects.All);
+                    DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Floor, EntireStack = (ModifierKeys & Keys.Control) != 0 };
+                    dgFloor.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
                 }
             }
         }
@@ -559,9 +570,8 @@ namespace SpaceMercs.Dialogs {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private void dgFloor_DragEnter(object sender, DragEventArgs e) {
-            if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
-            else e.Effect = DragDropEffects.None;
+        private void dgFloor_DragEnter(object? sender, DragEventArgs e) {
+            SetDropEffect(e, e.Data?.GetData(typeof(DataAndSource)) is DataAndSource);
         }
 
         private void dgFloor_DragDrop(object sender, DragEventArgs e) {
@@ -569,8 +579,10 @@ namespace SpaceMercs.Dialogs {
             if (das.dob is not IItem it) return;
             if (das.source == WindowSource.Floor) return;
             if (it is IEquippable eq && das.source == WindowSource.Equipment) ThisSoldier.Unequip(eq);
-            ThisStash.Add(it);
-            ThisSoldier.DestroyItem(it, 1);
+            int count = WantEntireStack(das, e) && das.source == WindowSource.Inventory ? ThisSoldier.CountItem(it) : 1;
+            if (count < 1) return;
+            ThisStash.Add(it, count);
+            ThisSoldier.DestroyItem(it, count);
             UpdateAllDetails();
             if (ivForm != null) ivForm.UpdateInventory();
         }

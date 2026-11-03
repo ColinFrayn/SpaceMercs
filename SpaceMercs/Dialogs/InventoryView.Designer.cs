@@ -38,6 +38,7 @@
             // 
             // dgInventory
             // 
+            dgInventory.AllowDrop = true;
             dgInventory.AllowUserToAddRows = false;
             dgInventory.AllowUserToDeleteRows = false;
             dgInventory.AllowUserToResizeColumns = false;
@@ -55,7 +56,12 @@
             dgInventory.Size = new Size(570, 540);
             dgInventory.TabIndex = 0;
             dgInventory.SelectionChanged += dgInventory_SelectionChanged;
+            dgInventory.DragDrop += dgInventory_DragDrop;
+            dgInventory.DragEnter += dgInventory_DragEnter;
             dgInventory.DoubleClick += dgInventory_DoubleClick;
+            dgInventory.MouseDown += dgInventory_MouseDown;
+            dgInventory.MouseMove += dgInventory_MouseMove;
+            dgInventory.MouseUp += dgInventory_MouseUp;
             // 
             // Item
             // 

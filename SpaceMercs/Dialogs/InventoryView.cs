@@ -13,6 +13,11 @@ namespace SpaceMercs.Dialogs {
             InitializeComponent();
             UpdateInventory();
             SetButtons();
+            AllowDrop = true;
+            DragEnter += dgInventory_DragEnter;
+            DragOver += dgInventory_DragEnter;
+            DragDrop += dgInventory_DragDrop;
+            dgInventory.DragOver += dgInventory_DragEnter;
         }
 
         private void SetButtons() {
@@ -89,6 +94,57 @@ namespace SpaceMercs.Dialogs {
             if (dgInventory.SelectedRows[0].Tag is IItem eq) {
                 MessageBox.Show(eq.Description, eq.Name);
             }
+        }
+
+        private Rectangle dragBoxFromMouseDown;
+        private readonly Size dragSize = SystemInformation.DragSize;
+
+        private void dgInventory_MouseDown(object sender, MouseEventArgs e) {
+            int row = dgInventory.HitTest(e.X, e.Y).RowIndex;
+            if (row < 0 || dgInventory.Rows[row].Tag is not IItem) {
+                dragBoxFromMouseDown = Rectangle.Empty;
+                return;
+            }
+            dgInventory.ClearSelection();
+            dgInventory.Rows[row].Selected = true;
+            dragBoxFromMouseDown = new Rectangle(
+                new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)),
+                dragSize);
+        }
+
+        private void dgInventory_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) != MouseButtons.Left) return;
+            if (dragBoxFromMouseDown == Rectangle.Empty || dragBoxFromMouseDown.Contains(e.X, e.Y)) return;
+            if (dgInventory.SelectedRows.Count != 1) return;
+            if (dgInventory.SelectedRows[0].Tag is not IItem it) return;
+            TeamView.DataAndSource das = new TeamView.DataAndSource() {
+                dob = it,
+                source = TeamView.WindowSource.Stores,
+                EntireStack = (ModifierKeys & Keys.Control) != 0
+            };
+            dgInventory.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        private void dgInventory_MouseUp(object sender, MouseEventArgs e) {
+            dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void dgInventory_DragEnter(object? sender, DragEventArgs e) {
+            bool allowed = e.Data?.GetData(typeof(TeamView.DataAndSource)) is TeamView.DataAndSource;
+            e.Effect = allowed ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
+        }
+
+        private void dgInventory_DragDrop(object? sender, DragEventArgs e) {
+            if (e.Data?.GetData(typeof(TeamView.DataAndSource)) is not TeamView.DataAndSource das) return;
+            if (das.dob is not IItem it) return;
+            if (das.source == TeamView.WindowSource.Stores) return;
+            Soldier? s = tvParent.SelectedSoldier();
+            if (s is null || !s.IsActive) return;
+            if (it is IEquippable eq && das.source == TeamView.WindowSource.Equipment) s.Unequip(eq);
+            if (das.EntireStack || (e.KeyState & 8) != 0) s.DropAll(it);
+            else s.DropItem(it);
+            UpdateInventory(it);
+            tvParent.ShowSelectedSoldierDetails();
         }
     }
 }

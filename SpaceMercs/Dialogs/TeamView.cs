@@ -18,6 +18,9 @@ namespace SpaceMercs.Dialogs {
             ShowTeamSummary();
             ShowTeamSoldiers();
             ShowSelectedSoldierDetails();
+            lbEquipped.DragOver += lbEquipped_DragEnter;
+            dgInventory.DragOver += dgInventory_DragEnter;
+            btInventory.DragOver += btInventory_DragEnter;
         }
 
         private void ShowTeamSummary() {
@@ -552,14 +555,32 @@ namespace SpaceMercs.Dialogs {
 
         // Drag-Drop functionality
 
-        private enum WindowSource { Equipment, Inventory };
-        private class DataAndSource {
+        internal enum WindowSource { Equipment, Inventory, Stores };
+        internal class DataAndSource {
             public IItem dob { get; init; }
             public WindowSource source { get; init; }
+            public bool EntireStack { get; init; }
         }
         private Rectangle dragBoxFromMouseDown;
         private int indexOfItemUnderMouseToDrag;
         private Size dragSize = SystemInformation.DragSize;
+        private static bool WantEntireStack(DataAndSource das, DragEventArgs e) => das.EntireStack || (e.KeyState & 8) != 0;
+        private static void SetDropEffect(DragEventArgs e, bool allowed) {
+            e.Effect = allowed ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
+        }
+        private bool PrepareGridDrag(DataGridView grid, MouseEventArgs e) {
+            int row = grid.HitTest(e.X, e.Y).RowIndex;
+            if (row < 0 || grid.Rows[row].Tag is not IItem) {
+                dragBoxFromMouseDown = Rectangle.Empty;
+                return false;
+            }
+            grid.ClearSelection();
+            grid.Rows[row].Selected = true;
+            dragBoxFromMouseDown = new Rectangle(
+                new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)),
+                dragSize);
+            return true;
+        }
 
         private void lbEquipped_MouseDown(object sender, MouseEventArgs e) {
             indexOfItemUnderMouseToDrag = lbEquipped.IndexFromPoint(e.X, e.Y);
@@ -583,7 +604,7 @@ namespace SpaceMercs.Dialogs {
                     else it = thisSoldier.EquippedArmour[indexOfItemUnderMouseToDrag];
                     if (it is not null) {
                         DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Equipment };
-                        lbEquipped.DoDragDrop(das, DragDropEffects.All);
+                        lbEquipped.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
                     }
                 }
             }
@@ -591,12 +612,9 @@ namespace SpaceMercs.Dialogs {
         private void lbEquipped_MouseUp(object sender, MouseEventArgs e) {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
-        private void lbEquipped_DragEnter(object sender, DragEventArgs e) {
+        private void lbEquipped_DragEnter(object? sender, DragEventArgs e) {
             DataAndSource? das = e.Data?.GetData(typeof(DataAndSource)) as DataAndSource;
-            if (das?.dob is Weapon or Armour) {
-                e.Effect = DragDropEffects.Move;
-            }
-            else e.Effect = DragDropEffects.None;
+            SetDropEffect(e, das?.dob is Weapon or Armour);
         }
         private void lbEquipped_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
@@ -612,32 +630,23 @@ namespace SpaceMercs.Dialogs {
         }
 
         private void dgInventory_MouseDown(object sender, MouseEventArgs e) {
-            if (dgInventory.SelectedRows.Count == 1 && dgInventory.SelectedRows[0].Tag is IItem) {
-                dragBoxFromMouseDown = new Rectangle(
-                    new Point(e.X - (dragSize.Width / 2),
-                              e.Y - (dragSize.Height / 2)),
-                    dragSize);
-            }
-            else {
-                dragBoxFromMouseDown = Rectangle.Empty;
-            }
+            PrepareGridDrag(dgInventory, e);
         }
         private void dgInventory_MouseMove(object sender, MouseEventArgs e) {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     if (dgInventory.SelectedRows.Count != 1) return;
                     if (dgInventory.SelectedRows[0].Tag is not IItem it) return;
-                    DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory };
-                    dgInventory.DoDragDrop(das, DragDropEffects.All);
+                    DataAndSource das = new DataAndSource() { dob = it, source = WindowSource.Inventory, EntireStack = (ModifierKeys & Keys.Control) != 0 };
+                    dgInventory.DoDragDrop(das, DragDropEffects.Copy | DragDropEffects.Move);
                 }
             }
         }
         private void dgInventory_MouseUp(object sender, MouseEventArgs e) {
             dragBoxFromMouseDown = Rectangle.Empty;
         }
-        private void dgInventory_DragEnter(object sender, DragEventArgs e) {
-            if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
-            else e.Effect = DragDropEffects.None;
+        private void dgInventory_DragEnter(object? sender, DragEventArgs e) {
+            SetDropEffect(e, e.Data?.GetData(typeof(DataAndSource)) is DataAndSource);
         }
         private void dgInventory_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
@@ -646,22 +655,32 @@ namespace SpaceMercs.Dialogs {
             Soldier? thisSoldier = SelectedSoldier();
             if (thisSoldier is null) return;
             if (it is IEquippable eq && das.source == WindowSource.Equipment) thisSoldier.Unequip(eq);
+            if (das.source == WindowSource.Stores) {
+                if (!thisSoldier.IsActive) return;
+                int count = WantEntireStack(das, e) ? PlayerTeam.CountItemsInStores(it) : 1;
+                if (count > 0) {
+                    thisSoldier.AddItem(it, count);
+                    PlayerTeam.RemoveItemFromStores(it, count);
+                }
+            }
             ShowSelectedSoldierDetails();
             if (ivForm != null) ivForm.UpdateInventory();
         }
 
-        private void btInventory_DragEnter(object sender, DragEventArgs e) {
-            if (e.Data?.GetDataPresent(typeof(DataAndSource)) == true) e.Effect = DragDropEffects.Move;
-            else e.Effect = DragDropEffects.None;
+        private void btInventory_DragEnter(object? sender, DragEventArgs e) {
+            SetDropEffect(e, e.Data?.GetData(typeof(DataAndSource)) is DataAndSource);
         }
         private void btInventory_DragDrop(object sender, DragEventArgs e) {
             if (e.Data?.GetData(typeof(DataAndSource)) is not DataAndSource das) return;
             if (das.dob is not IItem it) return;
+            if (das.source == WindowSource.Stores) return;
             Soldier? thisSoldier = SelectedSoldier();
             if (thisSoldier is null) return;
             if (it is IEquippable eq && das.source == WindowSource.Equipment) thisSoldier.Unequip(eq);
-            thisSoldier.DropItem(it);
+            if (WantEntireStack(das, e)) thisSoldier.DropAll(it);
+            else thisSoldier.DropItem(it);
             ShowSelectedSoldierDetails();
+            ivForm?.UpdateInventory();
         }
     }
 }
