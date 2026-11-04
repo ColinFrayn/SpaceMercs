@@ -22,9 +22,8 @@ namespace SpaceMercs.MainWindow {
         private float fMissionViewX, fMissionViewY, fMissionViewZ;
         private GUIPanel gpSelect;
         private GUIIconButton? gbZoomTo1, gbZoomTo2, gbZoomTo3, gbZoomTo4;
-        private GUIIconButton? gbWest, gbEast, gbNorth, gbSouth, gbAttack, gbInventory, gbUseItem, gbSearch;
         private GUIButton? gbEndTurn, gbTransition, gbEndMission;
-        private readonly List<GUIIconButton> lButtons = new List<GUIIconButton>();
+        private readonly List<GUIIconButton> lButtons = [];
         private bool bGUIButtonsInitialised = false;
         private Mission? ThisMission;
         private MissionLevel CurrentLevel;
@@ -38,14 +37,14 @@ namespace SpaceMercs.MainWindow {
         private HashSet<Vector2> AoETiles;
         private List<Point>? lCurrentPath;
         private SoldierAction CurrentAction = SoldierAction.None;
-        private readonly List<VisualEffect> Effects = new List<VisualEffect>();
+        private readonly List<VisualEffect> Effects = [];
         private readonly Stopwatch sw = Stopwatch.StartNew();
         private IEquippable? ActionItem = null;
         private Dispatcher? ThisDispatcher = null;
         private bool bAIRunning = false;
         private VertexBuffer? vbPath = null;
         private VertexArray? vaPath = null;
-        private HashSet<Soldier> lastSoldiers = new HashSet<Soldier>();
+        private HashSet<Soldier> lastSoldiers = [];
         private object oInitialiseLock = new object();
 
         // GUIPanel actions
@@ -420,14 +419,6 @@ namespace SpaceMercs.MainWindow {
             if (gbZoomTo2 != null && gbZoomTo2.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbZoomTo3 != null && gbZoomTo3.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
             if (gbZoomTo4 != null && gbZoomTo4.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbWest != null && gbWest.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbEast != null && gbEast.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbNorth != null && gbNorth.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbSouth != null && gbSouth.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbAttack != null && gbAttack.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbUseItem != null && gbUseItem.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbInventory != null && gbInventory.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
-            if (gbSearch != null && gbSearch.IsHover((int)MousePosition.X, (int)MousePosition.Y)) return;
 
             // Calculate the position of the mouse pointer
             double mxpos = ((mxfract - 0.5) * (fMissionViewZ / 1.86) * Aspect) + fMissionViewX;
@@ -1188,36 +1179,6 @@ namespace SpaceMercs.MainWindow {
                 if (sno == 1 && gbZoomTo2 is not null) gbZoomTo2.ButtonY = sy + FrameBorder;
                 if (sno == 2 && gbZoomTo3 is not null) gbZoomTo3.ButtonY = sy + FrameBorder;
                 if (sno == 3 && gbZoomTo4 is not null) gbZoomTo4.ButtonY = sy + FrameBorder;
-                if (SelectedEntity == s) {
-                    gbWest!.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
-                    gbEast!.ButtonY = sy + PanelHeight - (ButtonSize * 2f + ButtonGap * 2f);
-                    gbNorth!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbSouth!.ButtonY = sy + PanelHeight - (ButtonSize + ButtonGap);
-                    gbAttack!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbUseItem!.ButtonY = sy + PanelHeight - (ButtonSize * 3f + ButtonGap * 3f);
-                    gbInventory!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
-                    gbSearch!.ButtonY = sy + PanelHeight - (ButtonSize * 1.5f + ButtonGap * 1f);
-                    if (bAIRunning) gbInventory.Deactivate();
-                    else gbInventory.Activate();
-                    if (bAIRunning || !s.CanAttack) gbAttack.Deactivate();
-                    else gbAttack.Activate();
-                    if (s.Stamina < s.SearchCost || s.GoTo != Point.Empty || bAIRunning) gbSearch.Deactivate();
-                    else gbSearch.Activate();
-                    if (s.GoTo != Point.Empty || !s.HasUtilityItems() || bAIRunning) gbUseItem.Deactivate();
-                    else gbUseItem.Activate();
-                    if (s.Stamina < s.MovementCost || s.GoTo != Point.Empty || bAIRunning) {
-                        gbWest.Deactivate();
-                        gbEast.Deactivate();
-                        gbNorth.Deactivate();
-                        gbSouth.Deactivate();
-                    }
-                    else {
-                        gbWest.Activate();
-                        gbEast.Activate();
-                        gbNorth.Activate();
-                        gbSouth.Activate();
-                    }
-                }
 
                 Matrix4 transM = Matrix4.CreateTranslation(sx, sy, Const.GUILayer);
                 prog.SetUniform("view", transM);
@@ -1239,33 +1200,8 @@ namespace SpaceMercs.MainWindow {
 
                     // Direction Control buttons
                     TexSpecs ts = Textures.GetTexCoords(Textures.MiscTexture.Left);
-                    gbWest = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + FrameBorder, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.West);
-                    lButtons.Add(gbWest);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Right);
-                    gbEast = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3) + (ButtonSize * 2), 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.East);
-                    lButtons.Add(gbEast);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Up);
-                    gbNorth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.North);
-                    lButtons.Add(gbNorth);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Down);
-                    gbSouth = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 2) + ButtonSize, 0f, ButtonSize, ButtonSize, SelectedSoldierMove, Utils.Direction.South);
-                    lButtons.Add(gbSouth);
 
-                    // Misc controls
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Attack);
-                    gbAttack = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierAttack, null);
-                    lButtons.Add(gbAttack);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Skills);
-                    gbUseItem = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierUseItems, null);
-                    lButtons.Add(gbUseItem);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Inventory);
-                    gbInventory = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 3f) + (ButtonGap * 2f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierInventory, null);
-                    lButtons.Add(gbInventory);
-                    ts = Textures.GetTexCoords(Textures.MiscTexture.Search);
-                    gbSearch = new GUIIconButton(this, ts, (0.99f - Const.GUIPanelWidth) + (FrameBorder * 3f) + (ButtonSize * 4.5f) + (ButtonGap * 4f), 0f, ButtonSize * 1.5f, ButtonSize * 1.5f, SelectedSoldierSearch, null);
-                    lButtons.Add(gbSearch);
-
-                    // Other buttons
+                    // Shared buttons
                     gbEndTurn = new GUIButton("End Turn", this, EndTurn);
                     gbEndTurn.Activate();
                     gbEndTurn.SetPosition(0.45f, 0.93f);
@@ -1288,28 +1224,6 @@ namespace SpaceMercs.MainWindow {
                     // Set button state as required
                     CheckForTransition();
                 }
-            }
-
-            // Switch control buttons on/off when required
-            if (SelectedEntity == null || SelectedEntity is not Soldier) {
-                gbWest?.Deactivate();
-                gbEast?.Deactivate();
-                gbNorth?.Deactivate();
-                gbSouth?.Deactivate();
-                gbAttack?.Deactivate();
-                gbSearch?.Deactivate();
-                gbUseItem?.Deactivate();
-                gbInventory?.Deactivate();
-            }
-            else {
-                gbWest!.Activate();
-                gbEast!.Activate();
-                gbNorth!.Activate();
-                gbSouth!.Activate();
-                gbAttack!.Activate();
-                gbSearch!.Activate();
-                gbUseItem!.Activate();
-                gbInventory!.Activate();
             }
         }
         private void SetupZoomToButtons() {
@@ -1619,20 +1533,6 @@ namespace SpaceMercs.MainWindow {
             SetSelectedEntity(s);
             CentreView(s);
         }
-        private void SelectedSoldierMove(GUIIconButton sender) {
-            if (bAIRunning) return;
-            if (sender?.InternalData is null) throw new Exception("MoveSelectedSoldier: GUIIconButton did not have Direction set as internal data");
-            Utils.Direction d = (Utils.Direction)sender.InternalData;
-            if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierMove: SelectedSoldier not set!");
-            MoveSoldier(s, d);
-            CurrentAction = SoldierAction.None;
-            ActionItem = null;
-            if (s.PlayerTeam != null) { // Not dead
-                GenerateDistMap(SelectedEntity as Soldier);
-                GenerateDetectionMap();
-                CheckForTraps(s);
-            }
-        }
         private void SelectedSoldierAttack(GUIIconButton? sender) {
             if (bAIRunning) return;
             if (SelectedEntity == null || SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierAttack: SelectedSoldier not set!");
@@ -1645,28 +1545,6 @@ namespace SpaceMercs.MainWindow {
             if (s.EquippedWeapon?.Type?.WeaponShotType is WeaponType.ShotType.Cone or WeaponType.ShotType.ConeMulti) {
                 GenerateConeMap(s.X, s.Y, s);
             }
-        }
-        private void SelectedSoldierUseItems(GUIIconButton sender) {
-            if (bAIRunning) return;
-            if (SelectedEntity is not Soldier s) throw new Exception("SelectedSoldierUseItems: SelectedSoldier not set!");
-            using (UseItem ui = new UseItem(s)) {
-                ui.ShowDialog();
-                if (ui.ChosenItem != null) {
-                    ActionItem = ui.ChosenItem;
-                    CurrentAction = SoldierAction.Item;
-                    if (ActionItem.BaseType.ItemEffect is not null) {
-                        GenerateTargetMap(s, ActionItem.GetRange(s));
-                        int sy = SelectedEntity.Y;
-                        int sx = SelectedEntity.X;
-                        GenerateAoEMap(sx, sy, ActionItem.BaseType.ItemEffect.Radius);
-                    }
-                }
-            }
-        }
-        private void SelectedSoldierInventory(GUIIconButton sender) {
-            if (bAIRunning) return;
-            if (SelectedEntity == null || SelectedEntity is not Soldier ss) throw new Exception("SelectedSoldierInventory: SelectedSoldier not set!");
-            OpenSoldierInventory(ss);
         }
         private void OpenSoldierInventory(Soldier ss) {
             int sy = ss.Y;

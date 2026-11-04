@@ -2,6 +2,9 @@
 ToDo List
 -------------------------------------------------
 
+Remove lower buttons off soldier profile on UI in favour of existing shortcuts
+- Also remove "Use Item" box which is ugly
+
 What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
 - Allow indirect routes that take longer but reduce interception risk ("Travel under stealth")?
 - Pay for escort (if starting at a colony with a high enough rep)?
@@ -15,6 +18,7 @@ Backburner : Features
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
+- Same with large creatures?
 
 Convert Windows MessageBoxes on dialogs into part of the message box GUI eg. warnings, grey out buttons etc.
 

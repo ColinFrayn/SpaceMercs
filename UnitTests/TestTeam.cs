@@ -317,7 +317,7 @@ namespace UnitTests {
             Soldier s = MakeSoldier();
             team.AddSoldier(s);
             Assert.AreEqual(before + 1, team.SoldierCount);
-            Assert.AreSame(team, s.PlayerTeam);
+            Assert.That(s.PlayerTeam, Is.SameAs(team));
             Assert.AreEqual(before + 1, team.ActiveSoldiers);
         }
 
@@ -359,8 +359,8 @@ namespace UnitTests {
             AstronomicalObject? oldLoc = extra.aoLocation;
             Planet dest = Planet.Empty;
             team.SetPosition(dest);
-            Assert.AreSame(dest, team.CurrentPosition);
-            Assert.AreSame(dest, team.SoldiersRO.First(s => s.IsActive).aoLocation);
+            Assert.That(team.CurrentPosition, Is.SameAs(dest));
+            Assert.That(team.SoldiersRO.First(s => s.IsActive).aoLocation, Is.SameAs(dest));
             Assert.AreEqual(oldLoc, extra.aoLocation);
         }
 
@@ -376,7 +376,7 @@ namespace UnitTests {
             s.AddUtilitySkill(Soldier.UtilitySkill.Engineer, 2);
             Assert.True(team.HasSkill(Soldier.UtilitySkill.Engineer));
             Assert.AreEqual(2, team.MaxSkillLevel(Soldier.UtilitySkill.Engineer));
-            Assert.AreSame(s, team.MaxSkillSoldier(Soldier.UtilitySkill.Engineer));
+            Assert.That(team.MaxSkillSoldier(Soldier.UtilitySkill.Engineer), Is.SameAs(s));
         }
 
         [Test]
@@ -409,7 +409,7 @@ namespace UnitTests {
             Assert.AreEqual(4, team.GetMaxSkillByItemType(shortblade));
             Assert.AreEqual(5, team.GetMaxSkillByItemType(helmet));
             Assert.AreEqual(2, team.GetMaxSkillByItem(new Equipment(medikit)));
-            Assert.AreSame(s, team.GetSoldierWithMaxSkillByItemType(medikit));
+            Assert.That(team.GetSoldierWithMaxSkillByItemType(medikit), Is.SameAs(s));
         }
 
         [Test]
@@ -509,7 +509,7 @@ namespace UnitTests {
             Team team = TestUtils.TestTeam();
             Mission miss = Mission.CreateIgnoreMission();
             team.SetCurrentMission(miss);
-            Assert.AreSame(miss, team.CurrentMission);
+            Assert.That(team.CurrentMission, Is.SameAs(miss));
             team.CeaseMission();
             Assert.IsNull(team.CurrentMission);
         }
