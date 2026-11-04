@@ -16,59 +16,61 @@
       base.Dispose(disposing);
     }
 
-    #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent() {
-      this.lbItems = new System.Windows.Forms.ListBox();
-      this.btChooseCore = new System.Windows.Forms.Button();
-      this.SuspendLayout();
-      // 
-      // lbItems
-      // 
-      this.lbItems.Dock = System.Windows.Forms.DockStyle.Top;
-      this.lbItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbItems.FormattingEnabled = true;
-      this.lbItems.ItemHeight = 25;
-      this.lbItems.Location = new System.Drawing.Point(0, 0);
-      this.lbItems.Name = "lbItems";
-      this.lbItems.Size = new System.Drawing.Size(282, 329);
-      this.lbItems.TabIndex = 0;
-      this.lbItems.SelectedValueChanged += new System.EventHandler(this.lbItems_SelectedValueChanged);
-      // 
-      // btUseItem
-      // 
-      this.btChooseCore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btChooseCore.Location = new System.Drawing.Point(91, 343);
-      this.btChooseCore.Name = "btUseItem";
-      this.btChooseCore.Size = new System.Drawing.Size(100, 32);
-      this.btChooseCore.TabIndex = 1;
-      this.btChooseCore.Text = "Use item";
-      this.btChooseCore.UseVisualStyleBackColor = true;
-      this.btChooseCore.Click += new System.EventHandler(this.btChooseCore_Click);
-      // 
-      // UseItem
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(282, 382);
-      this.Controls.Add(this.btChooseCore);
-      this.Controls.Add(this.lbItems);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
-      this.Name = "UseItem";
-      this.Text = "Use Item";
-      this.ResumeLayout(false);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            lbItems = new ListBox();
+            btChooseCore = new Button();
+            SuspendLayout();
+            // 
+            // lbItems
+            // 
+            lbItems.Dock = DockStyle.Top;
+            lbItems.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbItems.FormattingEnabled = true;
+            lbItems.Location = new Point(0, 0);
+            lbItems.Margin = new Padding(5, 6, 5, 6);
+            lbItems.Name = "lbItems";
+            lbItems.Size = new Size(470, 596);
+            lbItems.TabIndex = 0;
+            lbItems.SelectedValueChanged += lbItems_SelectedValueChanged;
+            // 
+            // btChooseCore
+            // 
+            btChooseCore.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btChooseCore.Location = new Point(152, 660);
+            btChooseCore.Margin = new Padding(5, 6, 5, 6);
+            btChooseCore.Name = "btChooseCore";
+            btChooseCore.Size = new Size(167, 62);
+            btChooseCore.TabIndex = 1;
+            btChooseCore.Text = "Use Item";
+            btChooseCore.UseVisualStyleBackColor = true;
+            btChooseCore.Click += btChooseCore_Click;
+            // 
+            // ChooseCore
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(470, 735);
+            Controls.Add(btChooseCore);
+            Controls.Add(lbItems);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(5, 6, 5, 6);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ChooseCore";
+            Text = "Use Item";
+            ResumeLayout(false);
 
-    }
+        }
 
-    #endregion
+        #endregion
 
-    private System.Windows.Forms.ListBox lbItems;
+        private System.Windows.Forms.ListBox lbItems;
     private System.Windows.Forms.Button btChooseCore;
   }
 }

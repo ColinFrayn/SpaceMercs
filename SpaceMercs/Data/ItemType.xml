@@ -183,7 +183,7 @@
       <Range>8</Range>
       <Shred>2</Shred>
       <Effect>
-        <Damage Type="Physical">16</Damage>
+        <Damage Type="Physical">18</Damage>
       </Effect>
       <Noise>10</Noise>
       <Sound>Blast</Sound>
@@ -206,14 +206,14 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">12</Damage>
+        <Damage Type="Physical">10</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">12</Damage>
+        <Damage Type="Fire">14</Damage>
       </Effect>
       <Effect Name="Burning">
         <Duration>3</Duration>        
-        <Damage Type="Fire">8</Damage>
+        <Damage Type="Fire">9</Damage>
       </Effect>
       <Noise>10</Noise>
       <Sound>Blast</Sound>
@@ -241,11 +241,11 @@
       <Radius>2.0</Radius>
       <Range>8</Range>
       <Effect>
-        <Damage Type="Physical">12</Damage>
+        <Damage Type="Physical">10</Damage>
       </Effect>
       <Effect Name="Poisoned">
         <Duration>4</Duration>
-        <Damage Type="Poison">8</Damage>
+        <Damage Type="Poison">12</Damage>
       </Effect>
       <Noise>8</Noise>
       <Sound>Blast</Sound>
@@ -276,7 +276,7 @@
         <Damage Type="Physical">10</Damage>
       </Effect>
       <Effect Name="Tarred">
-        <Duration>4</Duration>
+        <Duration>2</Duration>
         <StatMods>
           <Mod Stat="Agility">-4</Mod>
         </StatMods>
@@ -309,11 +309,14 @@
       <Range>8</Range>
       <Shred>6</Shred>
       <Effect>
-        <Damage Type="Physical">16</Damage>
+        <Damage Type="Physical">10</Damage>
+      </Effect>
+      <Effect>
+        <Damage Type="Acid">14</Damage>
       </Effect>
       <Effect Name="Acid Damage">
-        <Duration>4</Duration>
-        <Damage Type="Acid">6</Damage>
+        <Duration>3</Duration>
+        <Damage Type="Acid">10</Damage>
       </Effect>
       <Noise>8</Noise>
       <Sound>Blast</Sound>
@@ -336,14 +339,14 @@
       <Range>8</Range>
       <Shred>2</Shred>
       <Effect>
-        <Damage Type="Physical">18</Damage>
+        <Damage Type="Physical">14</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">18</Damage>
+        <Damage Type="Fire">22</Damage>
       </Effect>
       <Effect Name="Burning">
         <Duration>2</Duration>
-        <Damage Type="Fire">12</Damage>
+        <Damage Type="Fire">15</Damage>
       </Effect>
       <Noise>11</Noise>
       <Sound>Blast</Sound>
@@ -375,10 +378,10 @@
       <Range>8</Range>
       <Shred>5</Shred>
       <Effect>
-        <Damage Type="Physical">24</Damage>
+        <Damage Type="Physical">40</Damage>
       </Effect>
       <Effect>
-        <Damage Type="Fire">24</Damage>
+        <Damage Type="Fire">16</Damage>
       </Effect>
       <Noise>12</Noise>
       <Sound>Blast</Sound>

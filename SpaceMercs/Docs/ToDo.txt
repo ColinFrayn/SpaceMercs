@@ -2,12 +2,18 @@
 ToDo List
 -------------------------------------------------
 
-Remove lower buttons off soldier profile on UI in favour of existing shortcuts
-- Also remove "Use Item" box which is ugly
+Utility Items - Levels 1,5,9,13 get an extra slot (max 4)
+- Can only use an item that is in a utility item slot
+- Cannot switch in/out of a utility item slot in combat
+- Display on soldier panel and in TeamView / EquipmentView (how??? As equipped items?)
+- Handle them with load/save/equip/unequip
+- Loadout needs to also reload utility items (maybe refill e.g. grenades when leaving combat?)
+- Consider utility slot items as equipped for purposes of Foundry page
 
-What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
-- Allow indirect routes that take longer but reduce interception risk ("Travel under stealth")?
-- Pay for escort (if starting at a colony with a high enough rep)?
+Enhance lower soldier UI panel now that I removed buttons
+- Utility items
+- Status effects
+- Encumbrance effects??
 
 ==================================================================================================================
 
@@ -15,6 +21,10 @@ What to do when we get stuck somewhere and can't travel because of the risk of i
 -------------------------------------------------
 Backburner : Features
 -------------------------------------------------
+
+What to do when we get stuck somewhere and can't travel because of the risk of interception (especially with an underpowered ship)
+- Allow indirect routes that take longer but reduce interception risk ("Travel under stealth")?
+- Pay for escort (if starting at a colony with a high enough rep)?
 
 Any boss creature must be able to get to the entrance?? Or at least cover a sizeable number of squares
 - Maybe pick 20 squares and see what fraction can be reached (if size > 1)??
@@ -25,9 +35,6 @@ Convert Windows MessageBoxes on dialogs into part of the message box GUI eg. war
 Cover
 - When partially hidden from the attacker, get a def bonus
 - Including large creatures
-
-Have a fixed number of item slots per soldier for e.g. medikits, scanners, teleport device, grenades? Increase it somehow (abilities?? )
-- Add this into the "Sell all" options in Foundry, plus loadout
 
 Abilities: (One point to spend every 5 levels, must have at least 5n levels in a relevant weapon skill)
 - Assassinate : [Melee, Sniper] One shot, +10 stamina, +2 to att per pt, +25% damage per pt, only against surprised targets

@@ -47,13 +47,14 @@
             dgInventory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgInventory.Columns.AddRange(new DataGridViewColumn[] { Item, Type, Mass, Count, MassTotal });
             dgInventory.Location = new Point(0, 0);
-            dgInventory.Margin = new Padding(4, 3, 4, 3);
+            dgInventory.Margin = new Padding(6, 5, 6, 5);
             dgInventory.MultiSelect = false;
             dgInventory.Name = "dgInventory";
             dgInventory.ReadOnly = true;
+            dgInventory.RowHeadersWidth = 62;
             dgInventory.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgInventory.Size = new Size(570, 540);
+            dgInventory.Size = new Size(814, 900);
             dgInventory.TabIndex = 0;
             dgInventory.SelectionChanged += dgInventory_SelectionChanged;
             dgInventory.DragDrop += dgInventory_DragDrop;
@@ -67,6 +68,7 @@
             // 
             Item.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Item.HeaderText = "Item";
+            Item.MinimumWidth = 8;
             Item.Name = "Item";
             Item.ReadOnly = true;
             // 
@@ -74,42 +76,46 @@
             // 
             Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Type.HeaderText = "Type";
+            Type.MinimumWidth = 8;
             Type.Name = "Type";
             Type.ReadOnly = true;
-            Type.Width = 56;
+            Type.Width = 85;
             // 
             // Mass
             // 
             Mass.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Mass.HeaderText = "Mass (each)";
+            Mass.MinimumWidth = 8;
             Mass.Name = "Mass";
             Mass.ReadOnly = true;
-            Mass.Width = 95;
+            Mass.Width = 140;
             // 
             // Count
             // 
             Count.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Count.HeaderText = "Count";
+            Count.MinimumWidth = 8;
             Count.Name = "Count";
             Count.ReadOnly = true;
-            Count.Width = 65;
+            Count.Width = 96;
             // 
             // MassTotal
             // 
             MassTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             MassTotal.HeaderText = "Mass (total)";
+            MassTotal.MinimumWidth = 8;
             MassTotal.Name = "MassTotal";
             MassTotal.ReadOnly = true;
-            MassTotal.Width = 94;
+            MassTotal.Width = 140;
             // 
             // btTransfer
             // 
             btTransfer.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btTransfer.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btTransfer.Location = new Point(24, 552);
-            btTransfer.Margin = new Padding(4, 3, 4, 3);
+            btTransfer.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btTransfer.Location = new Point(34, 920);
+            btTransfer.Margin = new Padding(6, 5, 6, 5);
             btTransfer.Name = "btTransfer";
-            btTransfer.Size = new Size(164, 32);
+            btTransfer.Size = new Size(234, 53);
             btTransfer.TabIndex = 1;
             btTransfer.Text = "Transfer To Soldier";
             btTransfer.UseVisualStyleBackColor = true;
@@ -118,11 +124,11 @@
             // btDestroy
             // 
             btDestroy.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btDestroy.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            btDestroy.Location = new Point(378, 552);
-            btDestroy.Margin = new Padding(4, 3, 4, 3);
+            btDestroy.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btDestroy.Location = new Point(540, 920);
+            btDestroy.Margin = new Padding(6, 5, 6, 5);
             btDestroy.Name = "btDestroy";
-            btDestroy.Size = new Size(164, 32);
+            btDestroy.Size = new Size(234, 53);
             btDestroy.TabIndex = 2;
             btDestroy.Text = "Destroy";
             btDestroy.UseVisualStyleBackColor = true;
@@ -132,11 +138,11 @@
             // 
             lbTotalMass.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lbTotalMass.BorderStyle = BorderStyle.FixedSingle;
-            lbTotalMass.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbTotalMass.Location = new Point(221, 552);
-            lbTotalMass.Margin = new Padding(4, 3, 4, 3);
+            lbTotalMass.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbTotalMass.Location = new Point(309, 920);
+            lbTotalMass.Margin = new Padding(6, 5, 6, 5);
             lbTotalMass.Name = "lbTotalMass";
-            lbTotalMass.Size = new Size(66, 32);
+            lbTotalMass.Size = new Size(100, 52);
             lbTotalMass.TabIndex = 3;
             lbTotalMass.Text = "8888.8 kg";
             lbTotalMass.TextAlign = ContentAlignment.MiddleCenter;
@@ -144,26 +150,26 @@
             // lbCapacity
             // 
             lbCapacity.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lbCapacity.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCapacity.Location = new Point(288, 552);
-            lbCapacity.Margin = new Padding(0, 3, 0, 3);
+            lbCapacity.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lbCapacity.Location = new Point(411, 920);
+            lbCapacity.Margin = new Padding(0, 5, 0, 5);
             lbCapacity.Name = "lbCapacity";
-            lbCapacity.Size = new Size(74, 32);
+            lbCapacity.Size = new Size(106, 53);
             lbCapacity.TabIndex = 4;
             lbCapacity.Text = " / 8888 kg";
             lbCapacity.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // InventoryView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(570, 598);
+            ClientSize = new Size(814, 997);
             Controls.Add(lbTotalMass);
             Controls.Add(lbCapacity);
             Controls.Add(btDestroy);
             Controls.Add(btTransfer);
             Controls.Add(dgInventory);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(6, 5, 6, 5);
             MaximizeBox = false;
             Name = "InventoryView";
             Text = "InventoryView";

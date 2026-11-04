@@ -34,19 +34,19 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(34, 243);
+            label1.Font = new Font("Microsoft Sans Serif", 9F);
+            label1.Location = new Point(25, 241);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(202, 16);
+            label1.Size = new Size(214, 22);
             label1.TabIndex = 0;
-            label1.Text = "Please choose a stat to increase";
+            label1.Text = "Choose a stat to increase";
             // 
             // btStrength
             // 
-            btStrength.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btStrength.Font = new Font("Microsoft Sans Serif", 9.25F);
             btStrength.Location = new Point(10, 6);
-            btStrength.Margin = new Padding(4, 3, 4, 3);
+            btStrength.Margin = new Padding(0);
             btStrength.Name = "btStrength";
             btStrength.Size = new Size(108, 70);
             btStrength.TabIndex = 1;
@@ -56,9 +56,9 @@
             // 
             // btAgility
             // 
-            btAgility.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btAgility.Font = new Font("Microsoft Sans Serif", 9.25F);
             btAgility.Location = new Point(141, 6);
-            btAgility.Margin = new Padding(4, 3, 4, 3);
+            btAgility.Margin = new Padding(0);
             btAgility.Name = "btAgility";
             btAgility.Size = new Size(110, 70);
             btAgility.TabIndex = 2;
@@ -68,9 +68,9 @@
             // 
             // btInsight
             // 
-            btInsight.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btInsight.Font = new Font("Microsoft Sans Serif", 9.25F);
             btInsight.Location = new Point(10, 83);
-            btInsight.Margin = new Padding(4, 3, 4, 3);
+            btInsight.Margin = new Padding(0);
             btInsight.Name = "btInsight";
             btInsight.Size = new Size(108, 70);
             btInsight.TabIndex = 3;
@@ -80,9 +80,9 @@
             // 
             // btToughness
             // 
-            btToughness.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btToughness.Font = new Font("Microsoft Sans Serif", 9F);
             btToughness.Location = new Point(141, 83);
-            btToughness.Margin = new Padding(4, 3, 4, 3);
+            btToughness.Margin = new Padding(0);
             btToughness.Name = "btToughness";
             btToughness.Size = new Size(110, 70);
             btToughness.TabIndex = 4;
@@ -92,9 +92,9 @@
             // 
             // btEndurance
             // 
-            btEndurance.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btEndurance.Font = new Font("Microsoft Sans Serif", 9F);
             btEndurance.Location = new Point(77, 160);
-            btEndurance.Margin = new Padding(4, 3, 4, 3);
+            btEndurance.Margin = new Padding(0);
             btEndurance.Name = "btEndurance";
             btEndurance.Size = new Size(108, 70);
             btEndurance.TabIndex = 5;
